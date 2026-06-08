@@ -22,7 +22,7 @@ If you're building an integration that should work for any PostHog customer rega
 
 If you're building an application that needs to integrate with PostHog's OAuth, we recommend using the [**Client ID Metadata Document (CIMD)**](https://datatracker.ietf.org/doc/draft-parecki-oauth-client-id-metadata-document/) approach.
 
-With CIMD, you don't pre-register your OAuth client or manage a client secret. Instead:
+With CIMD, you don't pre-register your OAuth client with PostHog. Instead:
 
 1. **Your `client_id` is a URL** on a domain you control (for example, `https://myapp.example.com/oauth-client`).
 2. **You host a metadata document at that URL** – a JSON file describing your client. PostHog fetches this document during the OAuth flow to learn about your application.
@@ -78,7 +78,7 @@ The scopes available through OAuth are listed in the `scopes_supported` field of
 
 Start with [CIMD](#client-id-metadata-document-cimd). For most integrations, hosting a metadata document on a domain you control is all you need to go live, and your app's name and logo appear on the authorization screen. There's no registration step to wait on.
 
-Verification is optional and isn't required to go live. If you'd like your app marked as a verified integration, which removes the **unverified application** notice shown on the authorization screen, email [team-growth@posthog.com](mailto:team-growth@posthog.com). The <SmallTeam slug="growth" /> is building a self-serve flow for this.
+Verification is optional and isn't required to go live. If you'd like your app marked as a verified integration, which removes the **unverified application** notice shown on the authorization screen, email [team-growth@posthog.com](mailto:team-growth@posthog.com).
 
 Have a question while integrating? [Reach out to us](https://posthog.com/talk-to-a-human).
 
