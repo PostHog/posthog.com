@@ -312,8 +312,7 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/resources \
   "complete": {
     "access_configuration": {
       "api_key": "phc_abc123...",
-      "host": "https://us.posthog.com",
-      "personal_api_key": "phx_def456..."
+      "host": "https://us.posthog.com"
     }
   }
 }
@@ -325,7 +324,8 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/resources \
 |---|---|
 | `api_key` | The project token (starts with `phc_`) – use this to initialize PostHog SDKs |
 | `host` | The API host (`https://us.posthog.com` or `https://eu.posthog.com`) |
-| `personal_api_key` | A personal API key scoped to this project – use this for the PostHog API |
+
+For authenticated REST API calls, use the OAuth `access_token` from [Step 2](#step-2-exchange-the-code-for-tokens) as a `Bearer` token. It carries the [scopes](#available-scopes) you requested in the account request. Provisioning does not return a `personal_api_key` in this response.
 
 ### Deep linking
 
@@ -385,7 +385,7 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/resources/12345/rot
 |---|---|---|---|
 | `label_prefix` | string | No | Label prefix for the new personal API key shown in PostHog, up to 25 characters. The key is labeled `{label_prefix} - {team_name}`. If omitted, empty, or whitespace-only, the key is labeled with just the team name. |
 
-The response has the same shape as the project provisioning response and includes the rotated `api_key`, `host`, and new `personal_api_key`.
+The response has the same shape as the project provisioning response and includes the rotated `api_key` and `host`.
 
 ### Refresh tokens
 
@@ -413,12 +413,13 @@ Each refresh token is single-use. The response includes a new refresh token for 
 
 ### Available scopes
 
-The `scopes` field in the account request controls what permissions the access token receives. If omitted, a default set of scopes is granted. Available scopes:
+The `scopes` field in the account request controls what permissions the access token receives. If omitted, a default set of scopes is granted. The default set does not include every scope below, so request explicitly the scopes your integration needs. Available scopes:
 
 | Scope | Description |
 |---|---|
 | `customer_journey:read` | Read customer journey data |
 | `query:read` | Execute read-only queries |
+| `session_recording:read` | Read session recordings |
 | `conversation:read` | Read PostHog AI conversations |
 | `conversation:write` | Create and update PostHog AI conversations |
 | `experiment:read` | Read experiments |
@@ -607,7 +608,6 @@ async function provisionPostHogAccount(email, name) {
     type: 'provisioned',
     apiKey: resource.complete.access_configuration.api_key,
     host: resource.complete.access_configuration.host,
-    personalApiKey: resource.complete.access_configuration.personal_api_key,
     projectId: resource.id,
     accessToken: tokens.access_token,
     refreshToken: tokens.refresh_token,
