@@ -40,10 +40,10 @@ When you call `identify()` with person properties, those properties are automati
 // Properties are automatically available for flag evaluation
 posthog.identify('user-123', {
     email: 'user@company.com',
-    plan: 'enterprise'
+    is_beta_user: true
 })
 
-// This flag check can use 'plan' immediately
+// This flag check can use 'is_beta_user' immediately
 const showFeature = posthog.isFeatureEnabled('enterprise-feature')
 ```
 
@@ -51,10 +51,10 @@ const showFeature = posthog.isFeatureEnabled('enterprise-feature')
 // Properties are automatically available for flag evaluation
 posthog.identify('user-123', {
     email: 'user@company.com',
-    plan: 'enterprise'
+    is_beta_user: true
 })
 
-// This flag check can use 'plan' immediately
+// This flag check can use 'is_beta_user' immediately
 const showFeature = posthog.isFeatureEnabled('enterprise-feature')
 ```
 
@@ -62,10 +62,10 @@ const showFeature = posthog.isFeatureEnabled('enterprise-feature')
 // Properties are automatically available for flag evaluation
 PostHogSDK.shared.identify("user-123", userProperties: [
     "email": "user@company.com",
-    "plan": "enterprise"
+    "is_beta_user": true
 ])
 
-// This flag check can use 'plan' immediately
+// This flag check can use 'is_beta_user' immediately
 let showFeature = PostHogSDK.shared.isFeatureEnabled("enterprise-feature")
 ```
 
@@ -75,11 +75,11 @@ PostHog.identify(
     "user-123",
     userProperties = mapOf(
         "email" to "user@company.com",
-        "plan" to "enterprise"
+        "is_beta_user" to true
     )
 )
 
-// This flag check can use 'plan' immediately
+// This flag check can use 'is_beta_user' immediately
 val showFeature = PostHog.isFeatureEnabled("enterprise-feature")
 ```
 
@@ -89,11 +89,11 @@ await Posthog().identify(
     userId: 'user-123',
     userProperties: {
         'email': 'user@company.com',
-        'plan': 'enterprise',
+        'is_beta_user': true,
     },
 )
 
-// This flag check can use 'plan' immediately
+// This flag check can use 'is_beta_user' immediately
 final showFeature = await Posthog().isFeatureEnabled('enterprise-feature')
 ```
 
@@ -253,7 +253,7 @@ Use `setPersonPropertiesForFlags()` to explicitly set properties for flag evalua
 ```js file=Web
 // Set properties for flag evaluation
 posthog.setPersonPropertiesForFlags({
-    plan: 'enterprise',
+    is_beta_user: true,
     signup_source: 'organic'
 })
 
@@ -264,7 +264,7 @@ const showFeature = posthog.isFeatureEnabled('enterprise-feature')
 ```react-native
 // Set properties for flag evaluation
 posthog.setPersonPropertiesForFlags({
-    plan: 'enterprise',
+    is_beta_user: true,
     signup_source: 'organic'
 })
 
@@ -275,7 +275,7 @@ const showFeature = posthog.isFeatureEnabled('enterprise-feature')
 ```swift file=iOS
 // Set properties for flag evaluation
 PostHogSDK.shared.setPersonPropertiesForFlags([
-    "plan": "enterprise",
+    "is_beta_user": true,
     "signup_source": "organic"
 ])
 
@@ -287,7 +287,7 @@ let showFeature = PostHogSDK.shared.isFeatureEnabled("enterprise-feature")
 // Set properties for flag evaluation
 PostHog.setPersonPropertiesForFlags(
     mapOf(
-        "plan" to "enterprise",
+        "is_beta_user" to true,
         "signup_source" to "organic"
     )
 )
@@ -299,7 +299,7 @@ val showFeature = PostHog.isFeatureEnabled("enterprise-feature")
 ```dart
 // Set properties for flag evaluation
 await Posthog().setPersonPropertiesForFlags({
-    'plan': 'enterprise',
+    'is_beta_user': true,
     'signup_source': 'organic',
 })
 
@@ -319,7 +319,7 @@ By default, calling `setPersonPropertiesForFlags()` triggers an automatic reload
 
 ```js file=Web
 // Set properties without reloading
-posthog.setPersonPropertiesForFlags({ plan: 'enterprise' }, false)
+posthog.setPersonPropertiesForFlags({ is_beta_user: true }, false)
 posthog.setPersonPropertiesForFlags({ signup_source: 'organic' }, false)
 
 // Manually reload when ready
@@ -328,7 +328,7 @@ posthog.reloadFeatureFlags()
 
 ```react-native
 // Set properties without reloading
-posthog.setPersonPropertiesForFlags({ plan: 'enterprise' }, false)
+posthog.setPersonPropertiesForFlags({ is_beta_user: true }, false)
 posthog.setPersonPropertiesForFlags({ signup_source: 'organic' }, false)
 
 // Manually reload when ready
@@ -337,7 +337,7 @@ posthog.reloadFeatureFlags()
 
 ```swift file=iOS
 // Set properties without reloading
-PostHogSDK.shared.setPersonPropertiesForFlags(["plan": "enterprise"], reloadFeatureFlags: false)
+PostHogSDK.shared.setPersonPropertiesForFlags(["is_beta_user": true], reloadFeatureFlags: false)
 PostHogSDK.shared.setPersonPropertiesForFlags(["signup_source": "organic"], reloadFeatureFlags: false)
 
 // Manually reload when ready
@@ -346,7 +346,7 @@ PostHogSDK.shared.reloadFeatureFlags()
 
 ```kotlin file=Android
 // Set properties without reloading
-PostHog.setPersonPropertiesForFlags(mapOf("plan" to "enterprise"), reloadFeatureFlags = false)
+PostHog.setPersonPropertiesForFlags(mapOf("is_beta_user" to true), reloadFeatureFlags = false)
 PostHog.setPersonPropertiesForFlags(mapOf("signup_source" to "organic"), reloadFeatureFlags = false)
 
 // Manually reload when ready
@@ -355,7 +355,7 @@ PostHog.reloadFeatureFlags()
 
 ```dart
 // Set properties without reloading
-await Posthog().setPersonPropertiesForFlags({'plan': 'enterprise'}, reloadFeatureFlags: false)
+await Posthog().setPersonPropertiesForFlags({'is_beta_user': true}, reloadFeatureFlags: false)
 await Posthog().setPersonPropertiesForFlags({'signup_source': 'organic'}, reloadFeatureFlags: false)
 
 // Manually reload when ready
@@ -531,7 +531,7 @@ Server-side SDKs handle property overrides differently. Instead of persistent se
 ```node
 const flags = await client.evaluateFlags('user-distinct-id', {
     personProperties: {
-        plan: 'enterprise',
+        is_beta_user: true,
         signup_source: 'organic',
     },
     groups: {
@@ -552,7 +552,7 @@ const flagValue = flags.getFlag('feature-flag-key')
 flags = posthog.evaluate_flags(
     "user-distinct-id",
     person_properties={
-        "plan": "enterprise",
+        "is_beta_user": True,
         "signup_source": "organic",
     },
     groups={
@@ -573,7 +573,7 @@ flag_value = flags.get_flag("feature-flag-key")
 $flags = PostHog::evaluateFlags(
     distinctId: 'user-distinct-id',
     personProperties: [
-        'plan' => 'enterprise',
+        'is_beta_user' => true,
         'signup_source' => 'organic',
     ],
     groups: [
@@ -594,7 +594,7 @@ $flagValue = $flags->getFlag('feature-flag-key');
 flags = posthog.evaluate_flags(
     'user-distinct-id',
     person_properties: {
-        plan: 'enterprise',
+        is_beta_user: true,
         signup_source: 'organic',
     },
     groups: {
@@ -615,7 +615,7 @@ flag_value = flags.get_flag('feature-flag-key')
 flags, err := client.EvaluateFlags(posthog.EvaluateFlagsPayload{
     DistinctId: "user-distinct-id",
     PersonProperties: posthog.NewProperties().
-        Set("plan", "enterprise").
+        Set("is_beta_user", true).
         Set("signup_source", "organic"),
     Groups: posthog.NewGroups().
         Set("company", "company-123"),
@@ -636,7 +636,7 @@ flagValue := flags.GetFlag("feature-flag-key")
 PostHogFeatureFlagEvaluations flags = posthog.evaluateFlags(
     "user-distinct-id",
     PostHogEvaluateFlagsOptions.builder()
-        .personProperty("plan", "enterprise")
+        .personProperty("is_beta_user", true)
         .personProperty("signup_source", "organic")
         .group("company", "company-123")
         .groupProperty("company", "plan", "enterprise")
