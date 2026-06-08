@@ -327,8 +327,6 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/resources \
 
 For authenticated REST API calls, use the OAuth `access_token` from [Step 2](#step-2-exchange-the-code-for-tokens) as a `Bearer` token. It carries the [scopes](#available-scopes) you requested in the account request. Provisioning does not return a `personal_api_key` in this response.
 
-> **Breaking change:** Provisioning no longer returns a `personal_api_key`. If your integration read it from the `/resources` response, switch to the OAuth `access_token` above as your `Bearer` credential and list the scopes you need (for example `session_recording:read`, `query:read`) in the [`scopes`](#available-scopes) array of your account request. Refreshing a token can only keep or narrow its scopes, so new scopes apply only to connections provisioned _after_ you add them.
-
 ### Deep linking
 
 For recurring deep links from your application into PostHog – the most common case is an "Open in PostHog" button on a user's connected project – use the deep-link endpoint. Each call returns a short-lived, single-use URL that logs the user into their PostHog project on click. There's no consent screen and no email-mismatch friction: the URL mints a fresh PostHog session for the right user, overriding any other session the browser happens to have.
