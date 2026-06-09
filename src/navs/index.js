@@ -6006,6 +6006,12 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Custom servers',
+                    url: '/docs/mcp-analytics/custom-servers',
+                    icon: 'IconServer',
+                    color: 'teal',
+                },
+                {
                     name: 'Concepts',
                 },
                 {
