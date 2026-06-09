@@ -155,11 +155,11 @@ Ingestion delays can also cause the count not to update as expected.
 
 ## What does the pre-computed badge mean?
 
-Some Web Analytics tiles show a small database-with-a-lightning-bolt icon in their top-right corner. It means the tile's data is pre-computed: we calculated it and had it ready ahead of time, rather than running a live query when you opened the tile.
+Some Web Analytics tiles show a small database-with-a-lightning-bolt icon in their top-right corner. It means the tile loaded from a pre-computed state: we calculated and stored the result ahead of time, rather than running a live query against all your events when you opened the tile.
 
 Pre-computed results have a TTL and are re-computed on a regular cadence, so the data you see should be fresh. They should be very close to a live query, but aren't guaranteed to be exact.
 
-The trade-off is deliberate: on larger datasets, reading a pre-computed roll-up is much faster than scanning your raw events on every load. That speed gain is what makes the small loss of precision worthwhile.
+The trade-off is deliberate: on larger datasets, reading a pre-computed result is much faster than scanning all your events on every load. That speed gain is what makes the small loss of precision worthwhile.
 
 This is currently rolling out and is in test. We pre-compute up to 90 days of data, and we don't use it for very large time ranges yet – those tiles continue to run live. To force every eligible tile to query live data, open the settings menu in the Web Analytics dashboard and turn off **Allow precompute**.
 
