@@ -101,7 +101,7 @@ Overarching goal: You have access to everything and as a result can do work that
 - Complete the onboarding checklist
 - You can work autonomously and drive data analysis & user research for your teams
 - Set up two customer interviews
-- Set up 1:1s with your teams' leads. Other people we'd recommend meeting in your first couple of weeks are people from the marketing, billing, and growth teams
+- Set up 1:1s with your teams' leads. Other people we'd recommend meeting in your first couple of weeks are people from the product marketing, support, billing, sales, and growth teams. Most teams have a expert for your specific product, those are the best fit
 - You've understood the roadmap + quarterly goals for your teams, and perhaps updated some of it on the roadmap (/roadmap)
 - You've reviewed and contributed to at least one RFC or open discussion in your team → chat to a team lead about what makes sense here
 
