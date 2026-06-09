@@ -11,6 +11,8 @@ import {
     LogomarkZed,
 } from 'components/OSIcons/Icons'
 import Link from 'components/Link'
+import WizardFrameworksTeaser from 'components/WizardFrameworksTeaser'
+import { IconArrowUpRight } from '@posthog/icons'
 
 export type InstallMethod = {
     label: string
@@ -45,8 +47,13 @@ export type Platform = PlatformOption & {
 
 export type InstallSchema = {
     title: string
-    learnMoreHref: string
+    /** Optional (?) tooltip shown next to the title */
+    titleTooltip?: React.ReactNode
+    /** Header link on the right (replaces the old hardcoded "Learn more") */
+    secondaryAction?: { label: string; to: string; state?: Record<string, unknown>; icon?: React.ReactNode }
     defaultCommand: string
+    /** Line shown below the command, e.g. "Supports Next.js, React, Python, and 21 more" */
+    supports?: React.ReactNode
     platforms: Platform[]
 }
 
@@ -65,6 +72,9 @@ const replitDeepLink =
     'https://replit.com/integrations?mcp=eyJkaXNwbGF5TmFtZSI6IlBvc3RIb2ciLCJiYXNlVXJsIjoiaHR0cHM6Ly9tY3AucG9zdGhvZy5jb20vbWNwIn0='
 
 const inlineCode = (children: React.ReactNode) => <code className="!bg-transparent !p-0 !border-0">{children}</code>
+
+// Shown below the command. Defined per-schema so each flow can customize it.
+const supportsFrameworks = <WizardFrameworksTeaser />
 
 const buttonRow = (buttons: { label: string; href: string; icon?: React.ReactNode }[]) => (
     <div className="flex flex-wrap items-center gap-1">
@@ -379,84 +389,120 @@ const v0Methods: InstallMethod[] = [
     },
 ]
 
+// Shared by both flows for now. Either schema can swap in its own array to diverge.
+const installPlatforms: Platform[] = [
+    {
+        id: 'claude',
+        label: 'Claude',
+        group: 'editors',
+        icon: <IconClaudeCode className={iconClass} />,
+        subOptions: [
+            {
+                id: 'claude_code',
+                label: 'Claude Code',
+                methods: claudeCodeMethods,
+            },
+            {
+                id: 'claude_desktop',
+                label: 'Claude Desktop',
+                methods: claudeDesktopMethods,
+            },
+        ],
+    },
+    {
+        id: 'cursor',
+        label: 'Cursor',
+        group: 'editors',
+        icon: <LogomarkCursor className={iconClass} />,
+        methods: cursorMethods,
+    },
+    {
+        id: 'vscode',
+        label: 'VS Code',
+        group: 'editors',
+        icon: <LogomarkVSCode className={iconClass} />,
+        methods: vscodeMethods,
+    },
+    {
+        id: 'windsurf',
+        label: 'Windsurf',
+        group: 'editors',
+        icon: <LogomarkWindsurf className={iconClass} />,
+        methods: windsurfMethods,
+    },
+    {
+        id: 'codex',
+        label: 'Codex',
+        group: 'editors',
+        icon: <LogomarkCodex className={iconClass} />,
+        methods: codexMethods,
+    },
+    {
+        id: 'zed',
+        label: 'Zed',
+        group: 'editors',
+        icon: <LogomarkZed className={iconClass} />,
+        methods: zedMethods,
+    },
+    {
+        id: 'lovable',
+        label: 'Lovable',
+        group: 'platforms',
+        icon: <LogomarkLovable className={iconClass} />,
+        methods: lovableMethods,
+    },
+    {
+        id: 'replit',
+        label: 'Replit',
+        group: 'platforms',
+        icon: <LogomarkReplit className={iconClass} />,
+        methods: replitMethods,
+    },
+    {
+        id: 'v0',
+        label: 'v0',
+        group: 'platforms',
+        icon: <LogomarkV0 className={iconClass} />,
+        methods: v0Methods,
+    },
+]
+
 export const mcpInstallSchema: InstallSchema = {
     title: 'Install the PostHog MCP',
-    learnMoreHref: '/docs/model-context-protocol',
+    secondaryAction: { label: 'Learn more', to: '/docs/model-context-protocol', state: { newWindow: true } },
     defaultCommand: wizardCommand,
-    platforms: [
-        {
-            id: 'claude',
-            label: 'Claude',
-            group: 'editors',
-            icon: <IconClaudeCode className={iconClass} />,
-            subOptions: [
-                {
-                    id: 'claude_code',
-                    label: 'Claude Code',
-                    methods: claudeCodeMethods,
-                },
-                {
-                    id: 'claude_desktop',
-                    label: 'Claude Desktop',
-                    methods: claudeDesktopMethods,
-                },
-            ],
-        },
-        {
-            id: 'cursor',
-            label: 'Cursor',
-            group: 'editors',
-            icon: <LogomarkCursor className={iconClass} />,
-            methods: cursorMethods,
-        },
-        {
-            id: 'vscode',
-            label: 'VS Code',
-            group: 'editors',
-            icon: <LogomarkVSCode className={iconClass} />,
-            methods: vscodeMethods,
-        },
-        {
-            id: 'windsurf',
-            label: 'Windsurf',
-            group: 'editors',
-            icon: <LogomarkWindsurf className={iconClass} />,
-            methods: windsurfMethods,
-        },
-        {
-            id: 'codex',
-            label: 'Codex',
-            group: 'editors',
-            icon: <LogomarkCodex className={iconClass} />,
-            methods: codexMethods,
-        },
-        {
-            id: 'zed',
-            label: 'Zed',
-            group: 'editors',
-            icon: <LogomarkZed className={iconClass} />,
-            methods: zedMethods,
-        },
-        {
-            id: 'lovable',
-            label: 'Lovable',
-            group: 'platforms',
-            icon: <LogomarkLovable className={iconClass} />,
-            methods: lovableMethods,
-        },
-        {
-            id: 'replit',
-            label: 'Replit',
-            group: 'platforms',
-            icon: <LogomarkReplit className={iconClass} />,
-            methods: replitMethods,
-        },
-        {
-            id: 'v0',
-            label: 'v0',
-            group: 'platforms',
-            icon: <LogomarkV0 className={iconClass} />,
-            methods: v0Methods,
-        },
-    ],
+    supports: supportsFrameworks,
+    platforms: installPlatforms,
+}
+
+export const wizardInstallSchema: InstallSchema = {
+    title: 'Get started',
+    titleTooltip: (
+        <>
+            <p>
+                PostHog Wizard is an agentic CLI tool that installs and configures PostHog for you – the way an expert
+                would.
+            </p>
+            <p>
+                It starts by analyzing your codebase, then it automagically sets up the right tools, custom events, and
+                dashboards for your product.
+            </p>
+            <div className="inline-flex items-center gap-1">
+                <Link to="/wizard" state={{ newWindow: true }} className="group underline font-semibold">
+                    Learn more{' '}
+                    <IconArrowUpRight className="size-4 inline-block text-secondary group-hover:text-primary" />
+                </Link>
+            </div>
+        </>
+    ),
+    secondaryAction: {
+        label: 'Sign up via web',
+        to: 'https://app.posthog.com/signup',
+        state: { newWindow: true, initialTab: 'signup' },
+        icon: <IconArrowUpRight className="size-4 text-secondary" />,
+    },
+    defaultCommand: 'npx -y @posthog/wizard@latest',
+    supports: supportsFrameworks,
+    // Same install methods as MCP for now; swap in a custom array to diverge.
+    platforms: installPlatforms,
 }

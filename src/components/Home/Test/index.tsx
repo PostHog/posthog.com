@@ -38,7 +38,7 @@ import { buildTabs } from 'components/Home/HeroCarousel/tabs'
 // merge cleanly (no conflicts). Do NOT edit the vendored files here to avoid diverging from
 // 9000; tweak the install UI via the schema prop instead. This homepage integration (Tagline,
 // GetStarted, the carousel) is the only PostHog.com-side glue and is not present on 9000.
-import PlatformInstall from 'components/PlatformInstall'
+import PlatformInstall, { wizardInstallSchema } from 'components/PlatformInstall'
 import { Customers, getSharedDescriptors } from '../shared'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
@@ -47,22 +47,48 @@ const AppCount = () => <span className="text-xs font-normal">{APP_COUNT} apps</s
 const Tagline = () => (
     <>
         {/* @PostHog is styled as a Slack-style mention chip */}
-        <h1 className="!text-2xl pt-4">
+        <h1 className="!text-3xl pt-4">
             Just ask <span className="bg-blue/10 text-blue rounded px-1 font-bold whitespace-nowrap">@PostHog</span>.
         </h1>
-        <p className="text-balance @xl:text-wrap">
+        <p className="text-balance @xl:text-wrap text-lg">
             <span className="bg-blue/10 text-blue rounded px-1 font-bold whitespace-nowrap">@PostHog</span> knows your
             product, customers, and what needs fixing. It answers questions, triages work, writes code, and is always
             working even when you don't prompt it.
         </p>
 
-        <p className="text-balance @xl:text-wrap">500,000+ teams are shipping faster with PostHog.</p>
+        <p className="text-balance @xl:text-wrap text-secondary">
+            500,000+ teams are shipping with PostHog. Don't get fomo.
+        </p>
     </>
 )
 
+const SecondaryActions = () => (
+    <p className="!text-sm flex items-center gap-2 justify-center @xl:justify-start">
+        <Link
+            to="/docs/model-context-protocol"
+            state={{ newWindow: true }}
+            className="text-secondary hover:text-primary"
+        >
+            <IconMCP className="size-4 mr-1 inline-block relative -top-px" />
+            <span className="underline font-semibold">MCP</span>
+        </Link>
+        <span className="text-secondary">•</span>
+        <Link to="/demo" state={{ newWindow: true }} className="text-secondary hover:text-primary">
+            <IconPlayFilled className="size-4 mr-1 inline-block relative -top-px" />
+            <span className="underline font-semibold">Watch a demo</span>
+        </Link>
+        <span className="text-secondary">•</span>
+        <Link to="/talk-to-a-human" state={{ newWindow: true }} className="text-secondary hover:text-primary">
+            <IconHeadset className="size-4 mr-1 inline-block relative -top-px" />
+            <span className="underline font-semibold">Talk to a human</span>
+        </Link>
+    </p>
+)
+
 const GetStarted = () => (
-    <div className="mt-6 flex justify-center @xl:justify-start">
-        <PlatformInstall />
+    <div className="mt-6 flex flex-col items-center @xl:items-start gap-3">
+        <PlatformInstall schema={wizardInstallSchema} className="!mb-0" />
+        <SecondaryActions />
     </div>
 )
 
@@ -129,26 +155,9 @@ export const CTAs = () => {
                 </CallToAction>
             </div>
             */}
-            <p className="!text-sm flex items-center gap-2 mt-4 justify-center @xl:justify-start">
-                <Link
-                    to="/docs/model-context-protocol"
-                    state={{ newWindow: true }}
-                    className="text-secondary hover:text-primary"
-                >
-                    <IconMCP className="size-4 mr-1 inline-block relative -top-px" />
-                    <span className="underline font-semibold">MCP</span>
-                </Link>
-                <span className="text-secondary">•</span>
-                <Link to="/demo" state={{ newWindow: true }} className="text-secondary hover:text-primary">
-                    <IconPlayFilled className="size-4 mr-1 inline-block relative -top-px" />
-                    <span className="underline font-semibold">Watch a demo</span>
-                </Link>
-                <span className="text-secondary">•</span>
-                <Link to="/talk-to-a-human" state={{ newWindow: true }} className="text-secondary hover:text-primary">
-                    <IconHeadset className="size-4 mr-1 inline-block relative -top-px" />
-                    <span className="underline font-semibold">Talk to a human</span>
-                </Link>
-            </p>
+            <div className="mt-4">
+                <SecondaryActions />
+            </div>
         </div>
     )
 }

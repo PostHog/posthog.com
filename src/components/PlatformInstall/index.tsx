@@ -1,10 +1,19 @@
 import React, { useEffect, useMemo, useState } from 'react'
+import { IconQuestion } from '@posthog/icons'
 import Link from 'components/Link'
+import Tooltip from 'components/RadixUI/Tooltip'
 import { cn } from '../../utils'
 import ZoomHover from 'components/ZoomHover'
 import IconButton from './IconButton'
 import { CopyableCommand } from './CopyableCommand'
-import { mcpInstallSchema, type InstallMethod, type InstallSchema, type Platform, type PlatformOption } from './schema'
+import {
+    mcpInstallSchema,
+    wizardInstallSchema,
+    type InstallMethod,
+    type InstallSchema,
+    type Platform,
+    type PlatformOption,
+} from './schema'
 
 type SubTabProps = {
     label: string
@@ -127,6 +136,7 @@ export default function PlatformInstall({
 }: PlatformInstallProps): JSX.Element {
     const [selectedId, setSelectedId] = useState<string | null>(null)
     const [lastSelected, setLastSelected] = useState<Platform | null>(null)
+    const [titleTooltipOpen, setTitleTooltipOpen] = useState(false)
 
     const editors = useMemo(() => schema.platforms.filter((p) => p.group === 'editors'), [schema])
     const platforms = useMemo(() => schema.platforms.filter((p) => p.group === 'platforms'), [schema])
@@ -153,17 +163,40 @@ export default function PlatformInstall({
             )}
         >
             <div className="flex items-start justify-between gap-2">
-                <h3 className="!text-base font-bold text-primary m-0">{schema.title}</h3>
-                <Link
-                    to={schema.learnMoreHref}
-                    state={{ newWindow: true }}
-                    className="text-sm text-secondary hover:text-primary"
-                >
-                    Learn more
-                </Link>
+                <div className="flex items-center gap-1.5">
+                    <h3 className="!text-base font-bold text-primary m-0">{schema.title}</h3>
+                    {schema.titleTooltip ? (
+                        <Tooltip
+                            delay={0}
+                            open={titleTooltipOpen}
+                            onOpenChange={setTitleTooltipOpen}
+                            trigger={<IconQuestion className="size-4 text-secondary inline-block relative -top-px" />}
+                        >
+                            {/* Dismiss when anything inside is clicked (e.g. the "Learn more" link) */}
+                            <div
+                                className="max-w-xs text-sm leading-normal font-normal"
+                                onClick={() => setTitleTooltipOpen(false)}
+                            >
+                                {schema.titleTooltip}
+                            </div>
+                        </Tooltip>
+                    ) : null}
+                </div>
+                {schema.secondaryAction ? (
+                    <Link
+                        to={schema.secondaryAction.to}
+                        state={schema.secondaryAction.state}
+                        className="inline-flex items-center gap-0.5 text-sm text-secondary hover:text-primary whitespace-nowrap"
+                    >
+                        {schema.secondaryAction.label}
+                        {schema.secondaryAction.icon}
+                    </Link>
+                ) : null}
             </div>
 
             <CopyableCommand command={schema.defaultCommand} animate />
+
+            {schema.supports ? <div className="text-sm text-secondary">{schema.supports}</div> : null}
 
             <div className="flex items-center justify-between gap-2">
                 <div className="flex items-center gap-px flex-wrap">
@@ -209,5 +242,5 @@ export default function PlatformInstall({
 }
 
 export { CopyableCommand } from './CopyableCommand'
-export { mcpInstallSchema }
+export { mcpInstallSchema, wizardInstallSchema }
 export type { InstallSchema, Platform, PlatformOption, InstallMethod } from './schema'
