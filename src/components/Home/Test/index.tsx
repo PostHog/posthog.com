@@ -30,6 +30,15 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import IntegrationPrompt from 'components/IntegrationPrompt'
 import { motion } from 'framer-motion'
 import HeroCarousel from 'components/Home/HeroCarousel'
+import { buildTabs } from 'components/Home/HeroCarousel/tabs'
+// NOTE: `components/PlatformInstall` (index/IconButton/schema/CopyableCommand), the new
+// `Logomark*` icons added to `components/OSIcons/Icons.tsx`, and the `canvas-confetti`
+// dependency are all VENDORED VERBATIM from the `9000` branch — kept byte-identical to that
+// branch on purpose. When 9000 lands, the additions will be identical on both sides and 3-way
+// merge cleanly (no conflicts). Do NOT edit the vendored files here to avoid diverging from
+// 9000; tweak the install UI via the schema prop instead. This homepage integration (Tagline,
+// GetStarted, the carousel) is the only PostHog.com-side glue and is not present on 9000.
+import PlatformInstall from 'components/PlatformInstall'
 import { Customers, getSharedDescriptors } from '../shared'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
@@ -37,17 +46,24 @@ const AppCount = () => <span className="text-xs font-normal">{APP_COUNT} apps</s
 
 const Tagline = () => (
     <>
-        <h1 className="!text-2xl pt-4">The new way to build products</h1>
+        {/* @PostHog is styled as a Slack-style mention chip */}
+        <h1 className="!text-2xl pt-4">
+            Just ask <span className="bg-blue/10 text-blue rounded px-1 font-bold whitespace-nowrap">@PostHog</span>.
+        </h1>
         <p className="text-balance @xl:text-wrap">
-            Product development used to mean manually writing code, running analysis, diagnosing bugs, and rolling out
-            changes using dozens of tools.
+            <span className="bg-blue/10 text-blue rounded px-1 font-bold whitespace-nowrap">@PostHog</span> knows your
+            product, customers, and what needs fixing. It answers questions, triages work, writes code, and is always
+            working even when you don't prompt it.
         </p>
 
-        <p className="text-balance @xl:text-wrap">
-            PostHog is the only platform that acts like a co-pilot for you (and your AI agents) to do it all –{' '}
-            <em>autonomously</em>.
-        </p>
+        <p className="text-balance @xl:text-wrap">500,000+ teams are shipping faster with PostHog.</p>
     </>
+)
+
+const GetStarted = () => (
+    <div className="mt-6 flex justify-center @xl:justify-start">
+        <PlatformInstall />
+    </div>
 )
 
 export const CTAs = () => {
@@ -278,7 +294,8 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     { name: 'AppCount', kind: 'flow', props: [], Editor: () => <AppCount /> },
     { name: 'CompanyStageTabs', kind: 'flow', props: [], Editor: () => <CompanyStageTabs /> },
     { name: 'CTAs', kind: 'flow', props: [], Editor: () => <CTAs /> },
-    { name: 'HeroCarousel', kind: 'flow', props: [], Editor: () => <HeroCarousel /> },
+    { name: 'GetStarted', kind: 'flow', props: [], Editor: () => <GetStarted /> },
+    { name: 'HeroCarousel', kind: 'flow', props: [], Editor: () => <HeroCarousel tabs={buildTabs} /> },
     { name: 'HomeHitCounter', kind: 'flow', props: [], Editor: () => <HomeHitCounter /> },
     { name: 'Customers', kind: 'flow', props: [], Editor: () => <Customers tableClassName="bg-white dark:bg-dark" /> },
     {

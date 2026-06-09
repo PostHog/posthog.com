@@ -9,6 +9,8 @@ import WizardCommand from 'components/WizardCommand'
 import Link from 'components/Link'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { CTAs } from 'components/Home/Test'
+import HeroCarousel from 'components/Home/HeroCarousel'
+import { productUsageTabs } from 'components/Home/HeroCarousel/tabs'
 import Tooltip from 'components/RadixUI/Tooltip'
 import WistiaVideo, { WistiaVideoRef } from 'components/WistiaVideo'
 import TVScreen from 'components/Home/Test/TV'
@@ -352,6 +354,9 @@ export default function ProductsTest(): JSX.Element {
                         </div>
                          */}
                     </header>
+
+                    <HeroCarousel tabs={productUsageTabs} />
+                    <hr />
 
                     {/* Sections */}
                     {sections.map((section) => (
