@@ -12,8 +12,8 @@ export const SlackSlide = () => (
                 </p>
                 <h2 className="text-2xl font-bold m-0">Create pull requests in Slack</h2>
                 <p className="text-secondary m-0">
-                    Tag <code>@PostHog</code> in a thread to analyze customer behavior or create a PR &mdash; all
-                    without ever leaving Slack. Triage and build with your team in your existing tools.
+                    Tag <code>@PostHog</code> in a thread to analyze customer behavior or create a PR – all without ever
+                    leaving Slack. Triage and build with your team in your existing tools.
                 </p>
                 <OSButton to="/slack" state={{ newWindow: true }} variant="secondary" asLink>
                     Explore PostHog Slackbot
