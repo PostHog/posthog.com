@@ -57,9 +57,8 @@
     ],
     "redirects": [
         {
-            "source": "/slack",
-            "destination": "/slack-app",
-            "statusCode": 301
+            "source": "/slack-app",
+            "destination": "/slack"
         },
         {
             "source": "/blog/autoresearch-query-bug",
