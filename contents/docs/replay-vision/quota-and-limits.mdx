@@ -1,20 +1,20 @@
 ---
 title: Quota and limits
-featureFlag: replay-vision-docs
+featureFlag: replay-vision
 noindex: true
 ---
 
-Replay Vision usage is metered per organization, on a monthly cycle. This page covers what the cap is, what counts against it, and the other practical limits that affect what you can scan.
+Replay Vision usage is metered per organization, on a monthly cycle. This page covers what the cap is, what counts against it, and what to do when you're approaching it.
 
-<CalloutBox type="fyi" title="Beta pricing">
+<CalloutBox type="caution" title="Closed beta quota will change">
 
-Replay Vision is in beta. The numbers below reflect the current state but are likely to change before general availability. Watch the in-app usage meter for the authoritative current number for your organization.
+Replay Vision is in closed beta. The current cap of 3,000 observations per organization per month is a placeholder for the beta period and will change before general availability. The in-app usage meter is the authoritative current number for your organization.
 
 </CalloutBox>
 
 ## Monthly observation cap
 
-Each organization gets **3,000 observations per calendar month**. The counter resets at the start of each calendar month (UTC).
+During the closed beta, each organization gets **3,000 observations per calendar month**. The counter resets at the start of each calendar month (UTC).
 
 The current month's usage is shown in the Replay Vision app:
 
@@ -32,9 +32,9 @@ You can also fetch it programmatically – see the `vision-quota-retrieve` MCP t
 | **Failed** | No |
 | **Ineligible** | No |
 
-Pending and running observations count to stop a burst of concurrent on-demand triggers from blowing past the cap before any of them complete. Once an observation reaches a terminal failed or ineligible state, it stops counting toward the month's usage.
+Pending and running observations count so a burst of concurrent on-demand triggers can't blow past the cap before any of them complete. Once an observation reaches a terminal failed or ineligible state, it stops counting toward the month's usage.
 
-In practice this means: **every observation that produces a `$recording_observed` event uses one unit of quota.** Ineligibles and failures don't.
+In practice this means: **every observation that produces a `$recording_observed` event uses one unit of quota.** Ineligibles and failures don't consume any.
 
 ## What happens when the cap is reached
 
@@ -63,34 +63,9 @@ If the projection is uncomfortably close to your remaining cap, the cheapest kno
 
 To project a hypothetical scanner *before* creating it (e.g. from a script or agent), use the `vision-scanners-estimate-create` MCP tool. It runs the same projection the editor shows.
 
-## Per-recording uniqueness
-
-Each `(scanner, session)` pair can only be observed once. The unique constraint:
-
-- Prevents accidental duplicate spend when filters or sampling overlap.
-- Means re-sweeping is safe – a session that's already been observed by a scanner will never be re-queued by the background sweep.
-- Means re-running a scanner against the same recording requires deleting the existing observation first (see [observations](/docs/replay-vision/observations#re-running-an-observation)).
-
-## Supported models
-
-Replay Vision currently runs on **Google Gemini** models only. The available flavors at the time of writing:
-
-- `gemini-3-flash-preview` – the default; balanced speed and quality.
-- `gemini-3.1-flash-lite-preview` – lighter and cheaper; useful for high-volume scoring or simple verdicts.
-
-The scanner editor lists the currently available models with a short description of the tradeoff. Choosing a model is done per-scanner – different scanners in the same project can use different models.
-
-Other model families (e.g. Anthropic or OpenAI) are not currently supported. This may change before general availability.
-
-## Other limits worth knowing
-
-- **Eligibility filters** – very short, very long, no-event, or no-recording sessions are marked [ineligible](/docs/replay-vision/running-scanners#ineligible-sessions) instead of consuming quota.
-- **One observation per recording per scanner** – see above.
-- **Templates** – there is no limit on how many templates you can use, or how many scanners you create. The cap is on *observations produced*, not on configuration.
-
 ## What to do if you're hitting the cap
 
-The pragmatic order of operations:
+Try these, in order:
 
 1. **Look at which scanner is consuming the most quota.** The Observations tab makes this easy – a scanner producing thousands of observations a month is probably broader than it needs to be.
 2. **Lower its sampling rate or tighten its filters.** Use the editor's projection to find a setting that gives you enough signal without dominating the cap.

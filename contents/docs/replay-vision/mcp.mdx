@@ -1,6 +1,6 @@
 ---
-title: Replay Vision MCP
-featureFlag: replay-vision-docs
+title: MCP
+featureFlag: replay-vision
 noindex: true
 ---
 
@@ -19,7 +19,7 @@ This works in any MCP client – Cursor, Codex, Claude Code, Windsurf, VS Code, 
 
 ## The tools, by job
 
-The MCP server ships a set of tools all prefixed `vision-` – the [overview](/docs/replay-vision) explains what scanners and observations are. The most useful groupings:
+Replay Vision's MCP tools are all prefixed `vision-`. They fall into a few groups – see the [overview](/docs/replay-vision) for what scanners and observations are.
 
 ### Authoring scanners
 
@@ -40,7 +40,7 @@ Pair these two before calling `vision-scanners-create` to avoid creating a scann
 
 - `vision-scanners-scan-session` – run a specific scanner against a specific session right now. Same code path as the **Scan this recording** action in the replay player.
 
-The call queues a Temporal workflow that takes a few minutes to finish. Poll `vision-scanners-observations-list` to find the result once it lands.
+The call queues the observation asynchronously and returns immediately; the actual scan takes a few minutes. Poll `vision-scanners-observations-list` to find the result once it lands.
 
 ### Reading observations
 

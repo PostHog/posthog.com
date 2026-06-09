@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-featureFlag: replay-vision-docs
+featureFlag: replay-vision
 noindex: true
 ---
 
@@ -23,7 +23,7 @@ A fast way to confirm the scanner itself works: run it [on-demand](/docs/replay-
 
 ## I'm getting a lot of ineligible observations
 
-Ineligibles don't cost you quota, but a high ineligibility rate usually means the scanner's filters don't line up well with what kinds of sessions actually exist in your project. Each reason has a different fix:
+Ineligibles don't cost you quota, but a high ineligibility rate usually means the scanner's filters aren't well-aligned with the kinds of sessions your project actually has. Each reason has a different fix:
 
 | Ineligible reason | Most likely fix |
 | --- | --- |
@@ -46,7 +46,7 @@ Common patterns and fixes:
 - **A classifier is over-using one tag.** Tighten that tag's definition in the vocabulary, or add an `unclear` / `other` tag so the model has somewhere to put marginal cases.
 - **A scorer is bunched up at the extremes.** Explicitly anchor the middle of the scale in the prompt: "5 means moderate friction – occasional misclicks but the user eventually progressed."
 
-After each edit, run the scanner on-demand against the same set of recordings you analyzed and compare. Scanner versioning means past observations stay frozen, so you can iterate freely without rewriting history.
+After each edit, scan a fresh batch of recordings and compare. A recording the scanner has already looked at can't be re-scanned, so iteration always happens on new sessions.
 
 ## Confidence is always low
 
@@ -60,19 +60,19 @@ Confidence is self-reported, so don't over-index on it as a metric. A scanner th
 
 ## Failed observations
 
-Failed observations show an **error reason** on the detail page in the form `kind:human-readable message`. The kinds:
+Failed observations show an **error reason** on the detail page in the form `kind:human-readable message`.
 
 ### `provider_transient`
 
-A transient Gemini error – network hiccup, rate limit, model overloaded. PostHog retries these automatically; a failed observation with this kind has already exhausted retries.
+A transient Gemini error – network hiccup, rate limit, model overloaded.
 
-**What to do:** retry the observation by triggering it on-demand. If the error persists across multiple manual retries, it's not really transient – treat it as `provider_rejected` or `internal_error`.
+**What to do:** a single failure isn't actionable. If you're seeing a burst across many sessions, the upstream model is likely having availability issues – wait it out before triggering more on-demand work.
 
 ### `provider_rejected`
 
 Gemini refused to process the input. The most common cause is content policy – e.g. the recording contains material the model declines to analyze.
 
-**What to do:** there's no automated workaround at the Gemini layer. Narrow the scanner's filters so it doesn't match those sessions, or accept that those specific sessions won't get an observation.
+**What to do:** narrow the scanner's filters so it doesn't match those sessions in future sweeps.
 
 ### `rasterization_failed`
 
@@ -90,20 +90,9 @@ The model returned a response that didn't match the scanner's expected output sh
 
 Something else went wrong on PostHog's side. These should be rare.
 
-**What to do:** retry on-demand. If it persists, [contact support](/questions) with the observation ID.
+**What to do:** if you see it more than once, [contact support](/questions) with the observation ID.
 
 {/* SCREENSHOT: failed-observation-detail — observation detail in the failed state with one of the kinds (e.g. provider_rejected) shown, kind badge highlighted, human-readable message visible. */}
-
-## Quota exhausted mid-month
-
-The cap is per calendar month and resets at the start of the next month (UTC). While you're capped:
-
-1. **Lower sampling rates** on your highest-volume scanners – the editor projection makes this fast to size.
-2. **Tighten filters** on scanners that match too broadly.
-3. **Disable** scanners you're not actively using.
-4. **Wait for the reset.** It's automatic.
-
-See [quota and limits – what to do if you're hitting the cap](/docs/replay-vision/quota-and-limits#what-to-do-if-youre-hitting-the-cap) for the longer version.
 
 ## Something else
 

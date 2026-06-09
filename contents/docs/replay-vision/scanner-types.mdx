@@ -1,6 +1,6 @@
 ---
 title: Scanner types
-featureFlag: replay-vision-docs
+featureFlag: replay-vision
 noindex: true
 ---
 
@@ -80,7 +80,7 @@ A classifier assigns one or more **tags** from a vocabulary you define. You can 
 
 ## Scorer
 
-A scorer assigns a **numeric score** on a scale you define – e.g. 0 to 10 for frustration, or 1 to 5 for clarity. Use it when "how much" matters and a binary verdict would lose information.
+A scorer assigns a **numeric score** on a scale you define – e.g. 0 to 10 for frustration, or 1 to 5 for clarity. Use it when "how much" matters and a yes/no verdict would lose information.
 
 **Output**
 - `score` – numeric value on the scale you defined
@@ -119,7 +119,7 @@ A summarizer produces a short prose summary of what happened in the session, plu
 **When to use it**
 - Daily digest of high-signal sessions
 - Triage queues where humans need a one-line preview before clicking in
-- Feeding into a downstream RAG or analytics pipeline
+- Feeding into a downstream analytics or retrieval pipeline
 
 **Example prompt**
 

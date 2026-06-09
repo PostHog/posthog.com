@@ -1,10 +1,10 @@
 ---
 title: Observations
-featureFlag: replay-vision-docs
+featureFlag: replay-vision
 noindex: true
 ---
 
-Each scanner has an **Observations** tab listing every observation it's produced. The detail view for one observation shows its structured result, the model's reasoning (with clickable citations that jump the embedded player to the cited moment), and the prompt that produced it – frozen even if you've since edited the scanner.
+Each scanner has an **Observations** tab listing every observation it's produced. Click into one to open the detail view: the structured result, the model's reasoning (with clickable citations that jump the embedded player to the cited moment), and the prompt that produced it – frozen even if you've since edited the scanner.
 
 Observations move through a small state machine:
 
@@ -15,10 +15,6 @@ Observations move through a small state machine:
 - **`ineligible`** – terminal. The session can't be analyzed (no recording, too short, no events, etc.). Doesn't count against your quota. See [running scanners](/docs/replay-vision/running-scanners#ineligible-sessions).
 
 Pending and running observations count against your monthly [quota](/docs/replay-vision/quota-and-limits); failed and ineligible ones don't.
-
-## Re-running an observation
-
-Each `(scanner, session)` pair can only be observed once. To re-run a scanner against a session it's already looked at, delete the existing observation first – the next on-demand trigger (or matching background sweep) will produce a fresh one. Deleting an observation also removes its `$recording_observed` event from your project.
 
 ## Querying observations as events
 
@@ -49,7 +45,7 @@ The `timestamp` on the event is the moment the observation completed, not the mo
 
 ### Monitor: count flagged sessions over time
 
-Sessions a "Dead-end pages" monitor scanner flagged true, daily, over the last week:
+Sessions a "Dead-end pages" monitor flagged yes, daily, over the last week:
 
 ```sql
 SELECT
@@ -66,7 +62,7 @@ ORDER BY day
 
 ### Monitor: true rate (flagged / total)
 
-The proportion of observed sessions a monitor flagged true:
+The proportion of observed sessions a monitor flagged yes:
 
 ```sql
 SELECT
@@ -79,7 +75,7 @@ WHERE event = '$recording_observed'
   AND timestamp > now() - INTERVAL 30 DAY
 ```
 
-A creeping true rate is often a more useful early-warning signal than the absolute count.
+A gradually rising true rate is often a more useful early-warning signal than the absolute count.
 
 ### Classifier: top tags
 

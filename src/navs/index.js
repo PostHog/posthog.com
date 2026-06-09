@@ -4120,7 +4120,7 @@ export const docsMenu = {
             color: 'yellow',
             icon: 'IconEye',
             description: 'Use AI to automatically watch your session recordings and turn what it sees into queryable data',
-            featureFlag: 'replay-vision-docs',
+            featureFlag: 'replay-vision',
             children: [
                 {
                     name: 'Replay Vision',
@@ -4162,15 +4162,15 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
-                    name: 'MCP',
-                    url: '/docs/replay-vision/mcp',
-                    icon: 'IconTerminal',
-                    color: 'yellow',
-                },
-                {
                     name: 'Quota and limits',
                     url: '/docs/replay-vision/quota-and-limits',
                     icon: 'IconGauge',
+                    color: 'yellow',
+                },
+                {
+                    name: 'MCP',
+                    url: '/docs/replay-vision/mcp',
+                    icon: 'IconTerminal',
                     color: 'yellow',
                 },
                 {

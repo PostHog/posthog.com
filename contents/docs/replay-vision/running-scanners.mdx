@@ -1,6 +1,6 @@
 ---
 title: Running scanners
-featureFlag: replay-vision-docs
+featureFlag: replay-vision
 noindex: true
 ---
 
@@ -25,7 +25,7 @@ Sweeps run continuously – once a scanner is enabled, observations start accumu
 
 ### What happens when I change filters?
 
-Changing a scanner's filters affects which **new** sessions match going forward. The change does not retroactively rescan old recordings. If you broaden the filters and want to backfill, you can trigger on-demand observations against the recordings you care about (see below), or just wait for new matches to come in.
+Changing a scanner's filters affects which **new** sessions match going forward. Old recordings aren't re-evaluated against the new filters. If you broaden the filters and want to backfill, trigger on-demand observations against the recordings you care about (see below), or wait for new matches to come in.
 
 ### What happens when I disable the scanner?
 

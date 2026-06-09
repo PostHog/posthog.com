@@ -1,6 +1,6 @@
 ---
 title: Replay Vision
-featureFlag: replay-vision-docs
+featureFlag: replay-vision
 noindex: true
 ---
 
@@ -30,7 +30,7 @@ When a scanner runs against a recording, PostHog:
 3. Asks the model to produce a structured response matching the scanner's type.
 4. Saves the result as an observation and captures it as a `$recording_observed` event in your project.
 
-Each observation snapshots the scanner's configuration at the time it ran, so editing a scanner later never retroactively changes past observations.
+Each observation snapshots the scanner's configuration at the time it ran, so editing a scanner later doesn't change past observations.
 
 {/* SCREENSHOT: replay-vision-pipeline-diagram — illustration showing: recording → rendered video + events → Gemini → structured result → observation row + $recording_observed event. Light/dark variants if possible. */}
 

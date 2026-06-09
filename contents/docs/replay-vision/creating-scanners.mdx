@@ -1,6 +1,6 @@
 ---
 title: Creating scanners
-featureFlag: replay-vision-docs
+featureFlag: replay-vision
 noindex: true
 ---
 
@@ -48,7 +48,7 @@ Confusion isn't observable; rage clicks, repeated retries, and dead-end navigati
 
 ### Tell it how to handle uncertainty
 
-The default behavior of a model handed an ambiguous session is to make something up. Preempt that by writing the uncertain branch into the prompt.
+When the model is handed an ambiguous session, its default is to make something up. Preempt that by writing the uncertain branch into the prompt.
 
 ✅ "If there isn't enough evidence to tell, answer no."
 
@@ -74,7 +74,7 @@ Hold off on the automatic background sweep until you trust the scanner's on-dema
 
 ### Drafting prompts with PostHog AI
 
-Inside the scanner editor, you can ask [PostHog AI](/docs/posthog-ai) to draft a prompt by describing what you want in natural language. PostHog AI picks a scanner type, drafts the prompt, and fills it into the form for you to edit.
+Inside the scanner editor, you can ask [PostHog AI](/docs/posthog-ai) to draft a prompt by describing what you want in natural language. It picks a scanner type, drafts the prompt, and fills it into the form for you to edit.
 
 {/* SCREENSHOT: posthog-ai-prompt-drafter — scanner editor with the PostHog AI chat panel open; user has typed "find sessions where someone tries to use a coupon code and it fails" and PostHog AI has drafted a monitor prompt and filled it into the form. */}
 
@@ -85,7 +85,7 @@ Each scanner type has a few extra knobs. The full reference is on the [scanner t
 - **Classifier** – define your tag vocabulary, choose whether multiple tags per session are allowed, and whether the model can invent tags outside the vocabulary.
 - **Scorer** – set the numeric scale (min, max) and an optional label describing what the scale means.
 - **Summarizer** – pick a summary length (short / medium / long).
-- **Monitor** – choose whether the model can return `inconclusive` instead of being forced to pick yes/no.
+- **Monitor** – choose whether the model can return `inconclusive` rather than forcing a yes/no answer.
 
 ## Filters: scoping the scanner
 
@@ -96,7 +96,7 @@ Recording filters use the same query builder as the rest of [Session Replay](/do
 - Cohorts
 - Events the session contains
 
-A scanner with no filters matches every eligible session in your project. A scanner with narrow filters – e.g. "sessions on `/checkout` longer than 30 seconds for users on the trial plan" – is much cheaper, much faster to feedback on, and usually more useful.
+A scanner with no filters matches every eligible session in your project. A scanner with narrow filters – e.g. "sessions on `/checkout` longer than 30 seconds for users on the trial plan" – is much cheaper, much faster to iterate on, and usually more useful.
 
 {/* SCREENSHOT: filters-block — the recording filters block in the scanner editor with two property filters and an event filter applied. */}
 
@@ -117,7 +117,7 @@ If the estimate looks too high, you have two knobs:
 
 ## Enabling and disabling
 
-Scanners are **enabled by default** when you save. An enabled scanner sweeps the background queue every few minutes for new matching sessions.
+Scanners are **enabled by default** when you save. Once enabled, a scanner sweeps for new matching sessions every few minutes.
 
 Toggling a scanner to **disabled** stops the background sweep. On-demand triggers (from the player or via MCP) still work on a disabled scanner – disabling only affects the automatic schedule.
 
