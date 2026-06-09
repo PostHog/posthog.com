@@ -149,6 +149,8 @@ Webhook-synced tables have special behavior when enabling or disabling them:
 
 - **Re-enabling a webhook table** - When you re-enable a previously disabled webhook table, PostHog automatically triggers a full refresh sync. This ensures no data gaps from the period when the webhook was inactive.
 
+- **Enabling a new webhook table** - For sources with provider-side webhook subscriptions (like Stripe), PostHog automatically adds the required events to the webhook when you enable a new table. This requires the appropriate permissions – for example, **Write** on **Webhooks** for Stripe restricted API keys, or an OAuth connection. If automatic sync isn't possible (due to missing permissions or a manually created webhook), PostHog shows a warning banner in the **Webhook** tab listing the events you need to add in your provider's dashboard.
+
 <ProductScreenshot
   imageLight={SettingsLight}
   imageDark={SettingsDark}
