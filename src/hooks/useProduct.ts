@@ -30,6 +30,7 @@ import {
     IconTrends,
     IconCursorClick,
     IconChat,
+    IconAtSign,
 } from '@posthog/icons'
 import useProducts from './useProducts'
 
@@ -93,7 +94,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         },
         {
             name: 'PostHog Slack app',
-            Icon: IconChat,
+            Icon: IconAtSign,
             description:
                 'Tag @PostHog in any Slack thread to ship a fix, answer a data question, or edit content – without leaving the conversation.',
             handle: 'posthog_slack',

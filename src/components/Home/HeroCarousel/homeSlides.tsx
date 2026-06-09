@@ -1,11 +1,6 @@
 import React from 'react'
-import { IconArrowRight, IconChat, IconCheck, IconCoffee, IconSparkles } from '@posthog/icons'
+import { IconArrowRight, IconAtSign, IconCheck, IconCoffee, IconSparkles } from '@posthog/icons'
 import OSButton from 'components/OSButton'
-
-// Slides for the homepage "agentic" carousel (Slack-first). The left image area
-// is left blank for now — screenshots get dropped in later. The "Explore" CTAs
-// are non-linking until their destinations exist.
-// Note: @posthog/icons has no Slack/robot glyph, so IconChat is a placeholder.
 
 export const SlackSlide = () => (
     <div className="@container rounded p-4 @md:p-6 h-full">
@@ -13,7 +8,7 @@ export const SlackSlide = () => (
             <div className="bg-accent border border-primary rounded-md min-h-[220px] @2xl:min-h-[320px]" />
             <div className="flex flex-col gap-3">
                 <p className="flex items-center gap-1.5 text-secondary text-sm font-semibold m-0">
-                    <IconChat className="size-4" /> PostHog Slackbot
+                    <IconAtSign className="size-4" /> PostHog Slackbot
                 </p>
                 <h2 className="text-2xl font-bold m-0">Create pull requests in Slack</h2>
                 <p className="text-secondary m-0">
@@ -36,7 +31,7 @@ export const FixBugsSlide = () => (
                 <p className="flex items-center gap-1.5 text-secondary text-sm font-semibold m-0">
                     <IconCoffee className="size-4" /> PostHog Code
                 </p>
-                <h2 className="text-2xl @lg:text-3xl font-bold m-0">Fix bugs automatically</h2>
+                <h2 className="text-2xl font-bold m-0">Fix bugs automatically</h2>
                 <p className="text-secondary m-0">
                     <strong>PostHog Code</strong>, our AI code editor:
                 </p>
@@ -67,7 +62,7 @@ export const AskAnythingSlide = () => (
                 <p className="flex items-center gap-1.5 text-secondary text-sm font-semibold m-0">
                     <IconSparkles className="size-4" /> PostHog AI
                 </p>
-                <h2 className="text-2xl @lg:text-3xl font-bold m-0">Ask PostHog anything</h2>
+                <h2 className="text-2xl font-bold m-0">Ask PostHog anything</h2>
                 <p className="text-secondary m-0">
                     PostHog has 250+ data and analysis tools that are stitched together on-the-fly to answer any
                     customer usage or data question you have.
