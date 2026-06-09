@@ -1242,7 +1242,7 @@ const SlackAppCallout = () => {
                         <p className="mb-4">
                             Answer data questions, fix bugs, and kick off PRs by mentioning <code>@PostHog</code>.
                         </p>
-                        <OSButton asLink to="/slack-app" state={{ newWindow: true }} variant="primary" size="md">
+                        <OSButton asLink to="/slack" state={{ newWindow: true }} variant="primary" size="md">
                             About the Slack app
                         </OSButton>
                     </div>

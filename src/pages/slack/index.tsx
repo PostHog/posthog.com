@@ -526,7 +526,7 @@ const faqItems = [
                 Set a default repo per channel. Or set regex routing rules so the bot picks the right repo from the
                 channel name or the task description. When the bot isn't sure, it opens a picker in-thread. See the{' '}
                 <Link
-                    to="/docs/slack-app/commands"
+                    to="/docs/slack/commands"
                     state={{ newWindow: true }}
                     className="text-red dark:text-yellow font-semibold hover:underline"
                 >

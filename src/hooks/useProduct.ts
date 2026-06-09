@@ -100,7 +100,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             color: 'sky-blue',
             colorSecondary: 'sky-blue',
             category: 'product_os',
-            slug: 'slack-app',
+            slug: 'slack',
             status: 'beta',
         },
         {
