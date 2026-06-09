@@ -8,7 +8,7 @@ We write and publish a lot of content at PostHog. <SmallTeam slug="editorial" />
 
 1. Guides like [A beginner's guide to testing AI agents](/blog/testing-ai-agents) 
 
-2. Technical blogs about experiences and lessons learned like [Karpathy's Autoresearch found a 3-year-old bug in our query engine (and improved performance by 11%)](/blog/karpathy-autoresearch-query-engine-bug) and [Untangling Tokio and Rayon in production: From 2s latency spikes to 94ms flat](/blog/untangling-rayon-and-tokio)
+2. Technical blogs about experiences and lessons learned like [Karpathy's Autoresearch found a 3-year-old bug in our query engine (and improved performance by 11%)](/blog/karpathy-autoresearch-query-engine-bug), [Untangling Tokio and Rayon in production: From 2s latency spikes to 94ms flat](/blog/untangling-rayon-and-tokio), and [8 learnings from 1 year of agents](/blog/8-learnings-from-1-year-of-agents-posthog-ai)
 
 3. Opinionated blogs like [Being AI-native matters more than experience](/blog/ai-native-hiring) and [AI is killing no-code experiments](/blog/ai-is-killing-no-code-experiments)
 
