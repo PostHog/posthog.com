@@ -409,11 +409,11 @@ PostHog captures the following events:
 
 #### Configuring screen navigation autocapture
 
-Screen navigation autocapture is not enabled by default. You can enable it by setting `captureScreenViews` to `true` in the config.
+Screen navigation autocapture is enabled by default because `captureScreenViews` defaults to `true`. You can disable it by setting `captureScreenViews` to `false` in the config.
 
 | Option                              | Description                                                                                     |
 | ----------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `captureScreenViews`                | **Type:** `boolean`. When set to `true`, autocapture will capture screen views.                 |
+| `captureScreenViews`                | **Type:** `boolean`. Defaults to `true`. When set to `true`, autocapture will capture screen views. |
 | `captureApplicationLifecycleEvents` | **Type:** `boolean`. When set to `true`, autocapture will capture application lifecycle events. |
 
 For example, your initialization code might look like this:
