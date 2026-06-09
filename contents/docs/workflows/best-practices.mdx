@@ -54,7 +54,7 @@ For actions that send messages or update user data: ensure that if some data is 
 
 ### Ensure messaging channels are properly configured and tested
 
-Before sending emails or other messages, [set up and verify your channels](/docs/workflows/configure-channels). For email: configure "from" name, from-address, and DNS (SPF/DKIM) to avoid spam/folder issues. 
+Before sending emails or other messages, [set up and verify your channels](/docs/workflows/configure-channels). For email: configure "from" name, from-address, and DNS (SPF/DKIM/DMARC) to avoid spam/folder issues. 
 
 Use templating and personalization carefully (e.g. with placeholders like `{{ person.name }}`), but also verify that placeholders resolve and avoid sending messages with unresolved variables. 
 
