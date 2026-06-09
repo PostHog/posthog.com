@@ -100,7 +100,7 @@ Both of those qualifiers are important: you cannot learn anything applicable fro
 
 Every time one of those brands is mentioned internally within a company that's got a marketing budget, an MBA student gets their wings. They're flying over to bill you $300 an hour. You brought this on yourself.
 
-Brands with massive followings, while sometimes having been successful for their content strategy, are often big because of their wider branding efforts over several years, not just what they post.
+Brands with massive following, while sometimes having been successful for their content strategy, are often big because of their wider branding efforts over several years, not just what they post.
 
 Your brand's social media is, more likely than not, highly dependent on external factors. Consider them always, and use the following two objectives as your new north star.
 
