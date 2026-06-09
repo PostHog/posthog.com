@@ -59,12 +59,6 @@ await analytics.captureInitialize({
   distinctId: user.id,
 })
 
-// On a tools/list response:
-await analytics.captureToolsList({
-  toolNames: ["search_events", "run_sql"],
-  distinctId: user.id,
-})
-
 // And custom events, exactly like the instrument handle:
 await analytics.capture({
   event: "feedback_submitted",
