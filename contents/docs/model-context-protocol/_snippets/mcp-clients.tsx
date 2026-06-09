@@ -26,7 +26,7 @@ const MCPClients = () => {
         {
             label: 'Cursor',
             url: '/docs/model-context-protocol/cursor',
-            icon: 'IconCursor',
+            icon: 'IconCode',
         },
         {
             label: 'VS Code',
