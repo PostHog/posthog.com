@@ -199,49 +199,55 @@ export default function PlatformInstall({
                 {schema.supports ? <div className="text-sm text-secondary">{schema.supports}</div> : null}
             </div>
 
-            <div
-                className={`flex items-center justify-between gap-2 bg-accent border-t border-primary px-3 py-2 ${
-                    selected ? '' : 'rounded-b'
-                }`}
-            >
-                <div className="flex items-center gap-px flex-wrap">
-                    {editors.map((p) => (
-                        <IconButton
-                            key={p.id}
-                            label={p.label}
-                            icon={p.icon}
-                            selected={selected?.id === p.id}
-                            onClick={() => handleToggle(p.id)}
-                        />
-                    ))}
-                </div>
-                <div className="flex items-center gap-px flex-wrap justify-end">
-                    {platforms.map((p) => (
-                        <IconButton
-                            key={p.id}
-                            label={p.label}
-                            icon={p.icon}
-                            selected={selected?.id === p.id}
-                            onClick={() => handleToggle(p.id)}
-                        />
-                    ))}
-                </div>
-            </div>
-
-            <div
-                className={cn(
-                    'grid transition-[grid-template-rows] duration-300 ease-in-out',
-                    selected ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
-                )}
-            >
-                <div className="overflow-hidden min-h-0">
-                    {lastSelected ? (
-                        <div className="pt-2 border-t border-primary p-3">
-                            <PlatformOptionContent key={lastSelected.id} option={lastSelected} />
+            {/* Install-methods row + expandable panel. Hidden when the schema has no
+               platforms (e.g. the homepage wizard flow). Restore by re-adding platforms. */}
+            {schema.platforms.length > 0 ? (
+                <>
+                    <div
+                        className={`flex items-center justify-between gap-2 bg-accent border-t border-primary px-3 py-2 ${
+                            selected ? '' : 'rounded-b'
+                        }`}
+                    >
+                        <div className="flex items-center gap-px flex-wrap">
+                            {editors.map((p) => (
+                                <IconButton
+                                    key={p.id}
+                                    label={p.label}
+                                    icon={p.icon}
+                                    selected={selected?.id === p.id}
+                                    onClick={() => handleToggle(p.id)}
+                                />
+                            ))}
                         </div>
-                    ) : null}
-                </div>
-            </div>
+                        <div className="flex items-center gap-px flex-wrap justify-end">
+                            {platforms.map((p) => (
+                                <IconButton
+                                    key={p.id}
+                                    label={p.label}
+                                    icon={p.icon}
+                                    selected={selected?.id === p.id}
+                                    onClick={() => handleToggle(p.id)}
+                                />
+                            ))}
+                        </div>
+                    </div>
+
+                    <div
+                        className={cn(
+                            'grid transition-[grid-template-rows] duration-300 ease-in-out',
+                            selected ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+                        )}
+                    >
+                        <div className="overflow-hidden min-h-0">
+                            {lastSelected ? (
+                                <div className="pt-2 border-t border-primary p-3">
+                                    <PlatformOptionContent key={lastSelected.id} option={lastSelected} />
+                                </div>
+                            ) : null}
+                        </div>
+                    </div>
+                </>
+            ) : null}
         </div>
     )
 }

@@ -503,6 +503,8 @@ export const wizardInstallSchema: InstallSchema = {
     },
     defaultCommand: 'npx -y @posthog/wizard@latest',
     supports: supportsFrameworks,
-    // Same install methods as MCP for now; swap in a custom array to diverge.
-    platforms: installPlatforms,
+    // Secondary install-methods row hidden for now on the homepage. Restore by
+    // uncommenting installPlatforms (or swap in a custom array to diverge from MCP).
+    platforms: [],
+    // platforms: installPlatforms,
 }
