@@ -739,8 +739,12 @@ export const handbookSidebar = [
                         url: '/handbook/engineering/customer-comms',
                     },
                     {
-                        name: 'Writing docs (as an engineer)',
+                        name: 'Writing docs as an engineer',
                         url: '/handbook/engineering/writing-docs',
+                    },
+                    {
+                        name: 'Writing blogs as an engineer',
+                        url: '/handbook/engineering/writing-blogs',
                     },
                     {
                         name: 'Working with Data Warehouse',
@@ -1241,6 +1245,10 @@ export const handbookSidebar = [
             {
                 name: 'Product manager role',
                 url: '/handbook/product/product-manager-role',
+            },
+            {
+                name: 'Product manager onboarding',
+                url: '/handbook/product/product-manager-onboarding',
             },
             {
                 name: 'Product manager hiring',
