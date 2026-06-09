@@ -90,37 +90,50 @@ function HeroSection() {
 
     return (
         <section className="my-6 @4xl/editor:mb-16 tracking-[-0.0125em] max-w-3xl mx-auto px-4 @xl:px-8">
-            <div className="mb-8">
-                <div className="flex items-center gap-2 mb-3">
+            <div className="mb-8 ">
+                <div className="mb-6 flex justify-center @2xl:hidden">
+                    <CloudinaryImage
+                        className="max-w-[350px] w-full"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/600898537_01bdccfb_7418_4248_8075_d00a62a810e3_06c543f11b.svg"
+                    />
+                </div>
+                <div className="flex items-start gap-2 mb-3">
                     <IconLlmPromptEvaluation className="size-6 text-yellow" />
                     <span className="text-base font-semibold">Replay Vision</span>
                 </div>
                 <h1 className="text-xl @xl:text-3xl font-bold leading-tight mb-4 @xl:mb-6 !mt-0">
                     The fast-forward button for session replay.
                 </h1>
-                <p className="text-base @xl:text-lg leading-relaxed mb-6">
-                    Point an AI scanner at your recordings, and let it watch every session for you: flagging bugs,
-                    scoring frustration, tagging behavior, and summarizing what happened. You get the findings, while{' '}
-                    <strong>Replay Vision</strong> does the homework.
-                </p>
-            </div>
-
-            <div className="@container max-w-sm">
-                {showForm ? (
-                    <WaitlistForm
-                        autoFocus
-                        showDiscord={false}
-                        productHandle="replay_vision"
-                        productName="Replay Vision"
-                        surveyId={SURVEY_ID}
-                    />
-                ) : (
-                    <div className="flex flex-wrap items-center gap-2">
-                        <OSButton variant="primary" size="lg" onClick={() => setShowForm(true)}>
-                            Join the waitlist
-                        </OSButton>
+                <div className="flex items-start gap-6">
+                    <div className="flex-1">
+                        <p className="text-base @xl:text-lg leading-relaxed mb-6">
+                            Point an AI scanner at your recordings, and let it watch every session for you: flagging
+                            bugs, scoring frustration, tagging behavior, and summarizing what happened. You get the
+                            findings, while <strong>Replay Vision</strong> does the homework.
+                        </p>
+                        <div className="@container max-w-sm">
+                            {showForm ? (
+                                <WaitlistForm
+                                    autoFocus
+                                    showDiscord={false}
+                                    productHandle="replay_vision"
+                                    productName="Replay Vision"
+                                    surveyId={SURVEY_ID}
+                                />
+                            ) : (
+                                <div className="flex flex-wrap items-center gap-2">
+                                    <OSButton variant="primary" size="lg" onClick={() => setShowForm(true)}>
+                                        Join the waitlist
+                                    </OSButton>
+                                </div>
+                            )}
+                        </div>
                     </div>
-                )}
+                    <CloudinaryImage
+                        className="max-w-[324px] w-full hidden @2xl:block"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/600898537_01bdccfb_7418_4248_8075_d00a62a810e3_06c543f11b.svg"
+                    />
+                </div>
             </div>
         </section>
     )
