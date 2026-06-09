@@ -1,32 +1,28 @@
-import React, { useEffect } from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
-import { JsxComponentDescriptor } from '@mdxeditor/editor'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import {
     IconAI,
     IconArrowUpRight,
     IconBolt,
-    IconBook,
     IconCheck,
     IconCode,
     IconCursor,
     IconDatabase,
-    IconExternal,
     IconFlask,
-    IconGithub,
+    IconStack,
     IconGraph,
     IconHandMoney,
+    IconLaptop,
     IconMessage,
     IconPieChart,
     IconPlug,
     IconRewindPlay,
-    IconStack,
     IconTerminal,
     IconToggle,
     IconWarning,
 } from '@posthog/icons'
 import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
-import MDXEditor from 'components/MDXEditor'
+import Editor from 'components/Editor'
 import SEO from 'components/seo'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Link from 'components/Link'
@@ -34,33 +30,12 @@ import WizardCommand from 'components/WizardCommand'
 import WistiaVideo from 'components/WistiaVideo'
 import TeamMember from 'components/TeamMember'
 import { Bang } from 'components/Icons'
-
-function AskClaude({ question, label = 'Ask Claude' }: { question: string; label?: string }): JSX.Element {
-    const url = `https://claude.ai/new?q=${encodeURIComponent(question)}`
-    return (
-        <a
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Open this question in Claude"
-            className="not-prose inline-flex items-center gap-1 text-[10px] uppercase font-semibold tracking-wider px-1.5 py-0.5 rounded border border-border dark:border-border-dark text-secondary hover:text-red dark:hover:text-yellow hover:border-primary hover:bg-accent/60 transition-colors no-underline whitespace-nowrap align-middle"
-        >
-            <IconAI className="size-3" />
-            {label}
-        </a>
-    )
-}
+import ScrollArea from 'components/RadixUI/ScrollArea'
+import { IconPostHog } from 'components/OSIcons'
 
 function Q({ text }: { text?: string }): JSX.Element {
     const heading = text || ''
-    return (
-        <h2 className="!mt-12 !mb-4 first:!mt-6">
-            {heading}
-            <span className="inline-block align-middle ml-2 -translate-y-0.5">
-                <AskClaude question={heading} />
-            </span>
-        </h2>
-    )
+    return <h2 className="!mt-12 !mb-4 first:!mt-6">{heading}</h2>
 }
 
 function MCPHeader(): JSX.Element {
@@ -82,7 +57,7 @@ function MCPHeader(): JSX.Element {
                 className="hidden dark:block absolute inset-0"
                 imgClassName="h-full w-full"
             />
-            <div className="relative flex flex-col-reverse @lg:flex-row items-center px-5 pt-6 pb-12 max-w-3xl mx-auto gap-4 @lg:gap-2">
+            <div className="relative flex flex-col-reverse @lg:flex-row items-center px-5 pt-6 pb-12 max-w-[900px] mx-auto gap-4 @lg:gap-2">
                 <div className="flex-1 text-center @lg:text-left">
                     <div className="flex gap-1.5 justify-center @lg:justify-start items-center mb-3">
                         <span className="w-4 h-4 text-purple">
@@ -129,13 +104,12 @@ function MCPHeader(): JSX.Element {
 function ExplainerVideo(): JSX.Element {
     return (
         <div className="not-prose my-6">
-            <p className="text-sm opacity-70 mb-3">
+            <p className="text-sm text-secondary mb-3">
                 Here&apos;s <TeamMember name="Matt Brooker" photo /> explaining the PostHog MCP server.
             </p>
-            <div className="rounded-md overflow-hidden border border-primary shadow-md">
-                <div className="aspect-video">
-                    <WistiaVideo videoId="tjc4o4lldr" className="!aspect-video" autoPlay={false} />
-                </div>
+
+            <div className="aspect-video">
+                <WistiaVideo videoId="tjc4o4lldr" className="!aspect-video" autoPlay={false} />
             </div>
         </div>
     )
@@ -145,18 +119,6 @@ function DemoVideo(): JSX.Element {
     return (
         <div className="not-prose my-6">
             <div className="rounded-md overflow-hidden border border-primary shadow-md">
-                <div className="bg-accent dark:bg-accent-dark border-b border-primary px-3 py-2 flex items-center gap-2">
-                    <div className="flex gap-1.5">
-                        <span className="size-2.5 rounded-full bg-red/60" />
-                        <span className="size-2.5 rounded-full bg-yellow/80" />
-                        <span className="size-2.5 rounded-full bg-green/70" />
-                    </div>
-                    <span className="text-[11px] font-mono opacity-60 ml-2 truncate">posthog-mcp · claude code</span>
-                    <span className="ml-auto text-[9px] uppercase tracking-wider font-semibold opacity-50 inline-flex items-center gap-1">
-                        <span className="size-1.5 rounded-full bg-green animate-pulse" />
-                        Live
-                    </span>
-                </div>
                 <div className="aspect-video bg-black">
                     <video
                         src="https://res.cloudinary.com/dmukukwp6/video/upload/mcp_error_tracking_debugging30_6e25828d88.mp4"
@@ -208,121 +170,45 @@ function Subfeatures(): JSX.Element {
             {items.map((item) => (
                 <li
                     key={item.title}
-                    className="bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-md p-4"
+                    className="bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-md p-3"
                 >
-                    <span
-                        className={`inline-flex w-9 h-9 mb-3 items-center justify-center rounded bg-${item.color}/10 text-${item.color}`}
-                    >
-                        <span className="w-5 h-5">{item.icon}</span>
-                    </span>
-                    <p className="font-bold text-[15px] mb-1 leading-tight">{item.title}</p>
-                    <p className="text-[13px] opacity-75 m-0 leading-snug">{item.description}</p>
+                    <div className="flex items-center gap-2">
+                        <span className={`inline-flex items-center justify-center rounded text-${item.color}`}>
+                            <span className="w-5 h-5">{item.icon}</span>
+                        </span>
+                        <h5 className="text-lg font-bold leading-tight">{item.title}</h5>
+                    </div>
+                    <p className="text-sm m-0">{item.description}</p>
                 </li>
             ))}
         </ul>
     )
 }
 
-function MCPFaqGrid(): JSX.Element {
-    const rows = [
-        { q: 'Run a funnel?', a: 'Yes' },
-        { q: 'Pull errors by occurrence?', a: 'Yes' },
-        { q: 'Write the SQL?', a: 'Yes' },
-        { q: 'Spin up an experiment?', a: 'Yes' },
-        { q: 'Toggle a feature flag?', a: 'Yes' },
-        { q: 'Create a cohort?', a: 'Yes' },
-        { q: 'Build a survey?', a: 'Yes' },
-        { q: 'Check your logs?', a: 'Yes' },
-        { q: 'Find that one weird replay?', a: 'Yes' },
-        { q: 'Remember your event taxonomy?', a: 'More than you' },
-        { q: 'Make the dashboards obsolete?', a: 'Working on it' },
-    ]
-    return (
-        <div className="not-prose">
-            <div className="border border-primary rounded overflow-hidden bg-white dark:bg-black">
-                {rows.map((row, idx) => (
-                    <div
-                        key={row.q}
-                        className={`grid grid-cols-[1fr,auto] divide-x divide-border dark:divide-border-dark ${
-                            idx > 0 ? 'border-t border-border dark:border-border-dark' : ''
-                        }`}
-                    >
-                        <div className="px-3 py-2 text-sm font-semibold">{row.q}</div>
-                        <div className="px-3 py-2 text-sm font-mono text-secondary min-w-[140px]">{row.a}</div>
-                    </div>
-                ))}
-            </div>
-        </div>
-    )
-}
-
-interface SupportedProduct {
-    label: string
-    url: string
-    icon: React.ReactNode
-}
-
-const supportedProducts: SupportedProduct[] = [
-    { label: 'Product analytics', url: '/product-analytics', icon: <IconGraph /> },
-    { label: 'Web analytics', url: '/web-analytics', icon: <IconPieChart /> },
-    { label: 'Session replay', url: '/session-replay', icon: <IconRewindPlay /> },
-    { label: 'Error tracking', url: '/error-tracking', icon: <IconWarning /> },
-    { label: 'Feature flags', url: '/feature-flags', icon: <IconToggle /> },
-    { label: 'Experiments', url: '/experiments', icon: <IconFlask /> },
-    { label: 'Dashboards', url: '/docs/product-analytics/dashboards', icon: <IconPieChart /> },
-    { label: 'Insights', url: '/docs/product-analytics/insights', icon: <IconGraph /> },
-    { label: 'Cohorts', url: '/docs/data/cohorts', icon: <IconStack /> },
-    { label: 'Surveys', url: '/surveys', icon: <IconMessage /> },
-    { label: 'LLM analytics', url: '/docs/ai-engineering', icon: <IconAI /> },
-    { label: 'Logs', url: '/docs/ai-engineering/observability', icon: <IconTerminal /> },
-    { label: 'Data warehouse', url: '/docs/data-warehouse', icon: <IconDatabase /> },
-    { label: 'CDP / workflows', url: '/docs/cdp', icon: <IconPlug /> },
-    { label: 'Conversations', url: '/docs/support', icon: <IconMessage /> },
-    { label: 'Annotations', url: '/docs/product-analytics/annotations', icon: <IconBook /> },
-    { label: 'Notebooks', url: '/docs/notebooks', icon: <IconBook /> },
-    { label: 'Alerts', url: '/docs/product-analytics/alerts', icon: <IconBolt /> },
-    { label: 'Early access features', url: '/docs/feature-flags/early-access-feature-management', icon: <IconFlask /> },
-    { label: 'HogQL / SQL', url: '/docs/hogql', icon: <IconDatabase /> },
+const checklist = [
+    'Run funnels',
+    'Pull errors by occurrence',
+    'Write the SQL',
+    'Spin up an experiment',
+    'Toggle a feature flag',
+    'Create a cohort',
+    'Build a survey',
+    'Check your logs',
+    'Find that one weird replay',
+    'Remembers your event taxonomy better than you',
 ]
 
-function SupportedProductsSidebar(): JSX.Element {
+function MCPChecklist(): JSX.Element {
     return (
-        <aside className="not-prose bg-accent dark:bg-accent-dark border border-primary rounded-md p-4 h-full flex flex-col">
-            <div className="mb-3">
-                <p className="text-[10px] uppercase font-bold tracking-wider text-secondary m-0 mb-1">
-                    Supported products
-                </p>
-                <p className="text-[12px] opacity-70 m-0 leading-snug">Every PostHog product with MCP tools.</p>
-            </div>
-            <ul className="list-none p-0 m-0 grid grid-cols-2 gap-x-2 gap-y-0.5 flex-1">
-                {supportedProducts.map((product) => (
-                    <li key={product.label}>
-                        <Link
-                            to={product.url}
-                            className="group flex items-center gap-1.5 py-1 px-1.5 rounded text-[12px] !text-inherit !no-underline hover:bg-white dark:hover:bg-black transition-colors"
-                        >
-                            <span className="size-3 text-secondary opacity-75 group-hover:opacity-100 group-hover:text-red dark:group-hover:text-yellow shrink-0">
-                                {product.icon}
-                            </span>
-                            <span className="font-semibold truncate">{product.label}</span>
-                        </Link>
+        <div className="not-prose">
+            <ul className="list-none p-0 m-0 grid grid-cols-1 @xs:grid-cols-2 gap-x-4 gap-y-1.5">
+                {checklist.map((item) => (
+                    <li key={item} className="flex items-start gap-2 text-[14px]">
+                        <IconCheck className="size-4 text-green shrink-0 mt-0.5" />
+                        <span className="font-semibold">{item}</span>
                     </li>
                 ))}
             </ul>
-            <p className="text-[11px] opacity-70 m-0 mt-3 pt-3 border-t border-border dark:border-border-dark leading-snug">
-                <Link to="/docs/model-context-protocol" className="font-semibold !text-inherit hover:underline">
-                    See every tool →
-                </Link>
-            </p>
-        </aside>
-    )
-}
-
-function MCPCapabilitiesLayout(): JSX.Element {
-    return (
-        <div className="not-prose my-6 grid grid-cols-1 @lg:grid-cols-[minmax(0,1fr),minmax(0,1fr)] gap-4 items-stretch">
-            <MCPFaqGrid />
-            <SupportedProductsSidebar />
         </div>
     )
 }
@@ -361,7 +247,7 @@ const capabilityList: CapabilityItem[] = [
     },
     {
         title: 'Experiments',
-        prompt: 'Summarise the results of my running experiments.',
+        prompt: 'Summarize the results of my running experiments.',
         icon: <IconFlask />,
         color: 'purple',
     },
@@ -369,13 +255,13 @@ const capabilityList: CapabilityItem[] = [
         title: 'SQL & warehouse',
         prompt: 'Run a HogQL query to count events from the last 24 hours.',
         icon: <IconDatabase />,
-        color: 'red',
+        color: 'purple',
     },
     {
         title: 'Web analytics',
         prompt: 'Which referrers drove the most traffic last week?',
         icon: <IconPieChart />,
-        color: 'blue',
+        color: 'green-2',
     },
     {
         title: 'LLM analytics',
@@ -385,42 +271,219 @@ const capabilityList: CapabilityItem[] = [
     },
 ]
 
-function Capabilities(): JSX.Element {
+const TYPING_SPEED = 30
+const PAUSE_BEFORE_RESPONSE = 400
+const CYCLE_INTERVAL = 5000
+
+const fakeResponses: Record<string, string[]> = {
+    'Product analytics': [
+        'Running retention query for the last 30 days...',
+        'Day 0: 100% → Day 1: 42% → Day 7: 28% → Day 30: 14%',
+        'Retention is trending up 3% from last month.',
+    ],
+    'Error tracking': [
+        'Fetching top errors by occurrence...',
+        '1. TypeError: Cannot read property "id" of undefined (1,247)',
+        '2. 504 Gateway Timeout on /api/batch (892)',
+        '3. RangeError: Maximum call stack size exceeded (541)',
+        '4. SyntaxError: Unexpected token in JSON at position 0 (327)',
+        '5. Error: ECONNREFUSED 127.0.0.1:5432 (219)',
+    ],
+    'Session replay': [
+        'Searching for rage-click sessions...',
+        'Found 23 sessions with rage clicks in the last 7 days.',
+        'Top page: /checkout (9 sessions, avg 6 clicks)',
+    ],
+    'Feature flags': [
+        'Listing active feature flags...',
+        'new-onboarding: 50% rollout | beta-dashboard: 100%',
+        '12 flags active, 3 stale (no evaluations in 30d)',
+    ],
+    Experiments: [
+        'Fetching running experiments...',
+        'pricing-page-v2: +12% conversion (p=0.03) — significant',
+        'onboarding-flow: +4% activation (p=0.21) — not yet',
+    ],
+    'SQL & warehouse': [
+        'Executing HogQL query...',
+        'SELECT count() FROM events WHERE timestamp > now() - interval 1 day',
+        'Result: 1,847,293 events in the last 24 hours',
+    ],
+    'Web analytics': [
+        'Querying referrer data for last 7 days...',
+        '1. google.com (12,847)',
+        '2. twitter.com (3,291)',
+        '3. github.com (2,103)',
+        '4. (direct) (1,987)',
+    ],
+    'LLM analytics': [
+        'Querying LLM trace metrics...',
+        'Avg tokens/trace today: 2,847 (input: 1,203 / output: 1,644)',
+        'Total cost: $14.29 across 892 traces',
+    ],
+}
+
+function useTypewriter(text: string, speed: number, startTyping: boolean) {
+    const [displayed, setDisplayed] = useState('')
+    const [done, setDone] = useState(false)
+
+    useEffect(() => {
+        setDisplayed('')
+        setDone(false)
+        if (!startTyping) return
+
+        let i = 0
+        const timer = setInterval(() => {
+            i++
+            setDisplayed(text.slice(0, i))
+            if (i >= text.length) {
+                clearInterval(timer)
+                setDone(true)
+            }
+        }, speed)
+        return () => clearInterval(timer)
+    }, [text, speed, startTyping])
+
+    return { displayed, done }
+}
+
+function TerminalResponse({ lines, show }: { lines: string[]; show: boolean }) {
+    const [visibleCount, setVisibleCount] = useState(0)
+
+    useEffect(() => {
+        setVisibleCount(0)
+        if (!show) return
+        let i = 0
+        const timer = setInterval(() => {
+            i++
+            setVisibleCount(i)
+            if (i >= lines.length) clearInterval(timer)
+        }, 300)
+        return () => clearInterval(timer)
+    }, [lines, show])
+
+    if (!show) return null
+
     return (
-        <div className="grid grid-cols-2 @sm:grid-cols-3 @lg:grid-cols-4 gap-3 my-6 not-prose">
-            {capabilityList.map((cap) => {
-                const url = `https://claude.ai/new?q=${encodeURIComponent(cap.prompt)}`
-                return (
-                    <div key={cap.title} className="h-[170px] relative group [perspective:1000px]">
-                        <div className="relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
-                            <div className="absolute h-full w-full [backface-visibility:hidden] flex flex-col justify-center items-center bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded p-3 text-center">
-                                <span
-                                    className={`inline-flex w-10 h-10 mb-2 items-center justify-center rounded bg-${cap.color}/10 text-${cap.color}`}
-                                >
-                                    <span className="w-5 h-5">{cap.icon}</span>
-                                </span>
-                                <h4 className="text-[14px] font-bold mb-0 leading-tight">{cap.title}</h4>
-                            </div>
-                            <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded p-3 flex flex-col text-left">
-                                <p className="text-[9px] uppercase font-bold text-secondary mb-1 tracking-wider">
-                                    Try asking
-                                </p>
-                                <p className="text-[13px] m-0 leading-snug font-mono flex-1">"{cap.prompt}"</p>
-                                <a
-                                    href={url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="mt-2 inline-flex items-center gap-1 text-[10px] uppercase font-bold tracking-wider text-red dark:text-yellow hover:underline no-underline self-start"
-                                >
-                                    <IconAI className="size-3" />
-                                    Run in Claude
-                                    <IconExternal className="size-2.5 opacity-60" />
-                                </a>
-                            </div>
-                        </div>
+        <div className="mt-3 space-y-1">
+            {lines.slice(0, visibleCount).map((line, i) => (
+                <p key={i} className="m-0 text-[12px] @sm:text-[13px] font-mono text-green/90 leading-relaxed">
+                    {line}
+                </p>
+            ))}
+        </div>
+    )
+}
+
+function Capabilities(): JSX.Element {
+    const [activeIndex, setActiveIndex] = useState(0)
+    const [startTyping, setStartTyping] = useState(true)
+    const cycleTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+    const isPaused = useRef(false)
+
+    const cap = capabilityList[activeIndex]
+    const { displayed, done } = useTypewriter(cap.prompt, TYPING_SPEED, startTyping)
+    const [showResponse, setShowResponse] = useState(false)
+
+    useEffect(() => {
+        if (done) {
+            const t = setTimeout(() => setShowResponse(true), PAUSE_BEFORE_RESPONSE)
+            return () => clearTimeout(t)
+        }
+        setShowResponse(false)
+    }, [done])
+
+    const goTo = useCallback(
+        (index: number) => {
+            if (index === activeIndex && startTyping) return
+            isPaused.current = false
+            setShowResponse(false)
+            setStartTyping(false)
+            setActiveIndex(index)
+            requestAnimationFrame(() => setStartTyping(true))
+        },
+        [activeIndex, startTyping]
+    )
+
+    useEffect(() => {
+        if (cycleTimer.current) clearTimeout(cycleTimer.current)
+        if (!showResponse || isPaused.current) return
+
+        cycleTimer.current = setTimeout(() => {
+            goTo((activeIndex + 1) % capabilityList.length)
+        }, CYCLE_INTERVAL)
+
+        return () => {
+            if (cycleTimer.current) clearTimeout(cycleTimer.current)
+        }
+    }, [showResponse, activeIndex, goTo])
+
+    const handleChipClick = (index: number) => {
+        isPaused.current = true
+        if (cycleTimer.current) clearTimeout(cycleTimer.current)
+        goTo(index)
+    }
+
+    return (
+        <div className="not-prose mt-6">
+            <div className="rounded-md overflow-hidden border border-primary shadow-md">
+                <div className="bg-[#1e1e2e] dark:bg-[#11111b] border-b border-white/10 px-3 py-2 flex items-center gap-2">
+                    <div className="flex gap-1.5">
+                        <span className="size-2.5 rounded-full bg-red/60" />
+                        <span className="size-2.5 rounded-full bg-yellow/80" />
+                        <span className="size-2.5 rounded-full bg-green/70" />
                     </div>
-                )
-            })}
+                    <span className="text-[11px] font-mono text-white/40 ml-2 truncate">posthog-mcp</span>
+                    <span className="ml-auto text-[9px] uppercase tracking-wider font-semibold text-white/30 inline-flex items-center gap-1">
+                        <span className="size-1.5 rounded-full bg-green animate-pulse" />
+                        Live
+                    </span>
+                </div>
+
+                <div className="bg-[#1e1e2e] dark:bg-[#11111b] h-[200px] [&_[data-radix-scroll-area-scrollbar]]:bg-white/5 [&_[data-radix-scroll-area-scrollbar]:hover]:bg-white/10 [&_[data-radix-scroll-area-thumb]]:!bg-white/30 [&_[data-radix-scroll-area-thumb]:hover]:!bg-white/50">
+                    <ScrollArea className="h-full">
+                        <div className="px-4 py-4">
+                            <div className="flex items-center gap-2 mb-1">
+                                <span className={`inline-flex size-4 shrink-0 text-${cap.color}`}>{cap.icon}</span>
+                                <span className="text-[10px] uppercase tracking-wider font-semibold text-white/40">
+                                    {cap.title}
+                                </span>
+                            </div>
+                            <p className="m-0 text-[13px] @sm:text-[15px] font-mono text-white/90 leading-relaxed">
+                                <span className="text-yellow mr-1.5">{'>'}</span>
+                                {displayed}
+                                {!done && (
+                                    <span className="inline-block w-[2px] h-[14px] bg-yellow ml-0.5 align-middle animate-[pulse_1s_steps(1)_infinite]" />
+                                )}
+                            </p>
+
+                            <TerminalResponse lines={fakeResponses[cap.title] || []} show={showResponse} />
+                        </div>
+                    </ScrollArea>
+                </div>
+
+                <div
+                    className="bg-[#16161e] dark:bg-[#0a0a12] border-t border-white/10 px-3 py-2.5 overflow-x-auto"
+                    style={{ scrollbarWidth: 'none' }}
+                >
+                    <div className="flex items-center gap-1.5 w-max">
+                        {capabilityList.map((c, i) => (
+                            <button
+                                key={c.title}
+                                onClick={() => handleChipClick(i)}
+                                className={`inline-flex items-center gap-1 px-2 py-1 rounded text-[11px] font-semibold transition-colors cursor-pointer border-0 whitespace-nowrap shrink-0 ${
+                                    i === activeIndex
+                                        ? 'bg-white/15 text-white'
+                                        : 'bg-white/5 text-white/40 hover:bg-white/10 hover:text-white/70'
+                                }`}
+                            >
+                                <span className={`inline-flex size-3 shrink-0 text-${c.color}`}>{c.icon}</span>
+                                {c.title}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
@@ -467,7 +530,7 @@ const complaintList: SocialCardProps[] = [
 function ComplaintCard({ c, rotation }: { c: SocialCardProps; rotation: string }): JSX.Element {
     return (
         <div
-            className={`bg-white dark:bg-accent-dark border border-primary rounded-md p-3 flex flex-col gap-2 ${rotation} hover:rotate-0 hover:scale-[1.02] transition-transform`}
+            className={`bg-white dark:bg-accent-dark border border-primary rounded-md p-3 flex flex-col gap-2 ${rotation}`}
         >
             <div className="flex items-center gap-2">
                 <div
@@ -481,7 +544,11 @@ function ComplaintCard({ c, rotation }: { c: SocialCardProps; rotation: string }
                         {c.platform === 'twitter' ? `@${c.handle}` : `u/${c.handle}`}
                     </p>
                 </div>
-                <span className="ml-auto text-[10px] text-secondary opacity-60 uppercase tracking-wider">
+                <span
+                    className={`ml-auto ${
+                        c.platform === 'twitter' ? 'text-base' : 'text-[10px]'
+                    } text-secondary opacity-60 uppercase tracking-wider`}
+                >
                     {c.platform === 'twitter' ? '𝕏' : 'Reddit'}
                 </span>
             </div>
@@ -492,17 +559,6 @@ function ComplaintCard({ c, rotation }: { c: SocialCardProps; rotation: string }
                     Should've used MCP
                 </span>
             </div>
-        </div>
-    )
-}
-
-function Complaints(): JSX.Element {
-    const rotations = ['-rotate-1', 'rotate-1', '-rotate-[0.5deg]', 'rotate-[0.5deg]']
-    return (
-        <div className="grid grid-cols-1 @sm:grid-cols-2 gap-3 my-6 not-prose">
-            {complaintList.map((c, idx) => (
-                <ComplaintCard key={c.handle} c={c} rotation={rotations[idx % rotations.length]} />
-            ))}
         </div>
     )
 }
@@ -527,7 +583,7 @@ function FutureNoUI(): JSX.Element {
                 <p className="font-semibold">With the MCP, you don&apos;t need to use PostHog to use PostHog.</p>
                 <div className="mt-5 bg-accent dark:bg-accent-dark border border-primary rounded-md p-4">
                     <p className="font-bold text-[15px] m-0 mb-1">"But I like the PostHog UI."</p>
-                    <p className="text-[13px] m-0 opacity-80 leading-snug">
+                    <p className="text-[13px] m-0 text-secondary leading-snug">
                         Then carry on. It&apos;s not going anywhere. And while you&apos;re in there, tell{' '}
                         <TeamMember name="Adam Leith" photo /> &mdash; he&apos;ll be thrilled.
                     </p>
@@ -550,14 +606,14 @@ interface SupportedClient {
 }
 
 const codeEditors: SupportedClient[] = [
-    { label: 'PostHog Code', url: '/code', icon: <IconCursor />, comingSoon: true },
-    { label: 'Cursor', url: '/docs/model-context-protocol/cursor', icon: <IconCursor /> },
+    { label: 'PostHog Code', url: '/code', icon: <IconPostHog />, comingSoon: true },
+    { label: 'Cursor', url: '/docs/model-context-protocol/cursor', icon: <IconLaptop /> },
     { label: 'Claude Code', url: '/docs/model-context-protocol/claude-code', icon: <IconTerminal /> },
-    { label: 'Claude Desktop', url: '/docs/model-context-protocol/claude-desktop', icon: <IconMessage /> },
+    { label: 'Claude Desktop', url: '/docs/model-context-protocol/claude-desktop', icon: <IconLaptop /> },
     { label: 'Codex', url: '/docs/model-context-protocol/codex', icon: <IconTerminal /> },
-    { label: 'VS Code', url: '/docs/model-context-protocol/vscode', icon: <IconCode /> },
-    { label: 'Windsurf', url: '/docs/model-context-protocol/windsurf', icon: <IconCode /> },
-    { label: 'Zed', url: '/docs/model-context-protocol/zed', icon: <IconCode /> },
+    { label: 'VS Code', url: '/docs/model-context-protocol/vscode', icon: <IconLaptop /> },
+    { label: 'Windsurf', url: '/docs/model-context-protocol/windsurf', icon: <IconLaptop /> },
+    { label: 'Zed', url: '/docs/model-context-protocol/zed', icon: <IconLaptop /> },
 ]
 
 const platforms = [
@@ -604,7 +660,7 @@ function SupportedClients(): JSX.Element {
         <li key={client.label}>
             <Link
                 to={client.url}
-                className="group flex items-center gap-2 bg-white dark:bg-black border border-border dark:border-border-dark rounded p-2.5 hover:border-red dark:hover:border-yellow transition-colors !text-inherit !no-underline"
+                className="group flex items-center gap-2 bg-white dark:bg-black border border-border dark:border-border-dark rounded p-2.5 hover:border-primary transition-colors !text-inherit !no-underline"
             >
                 <span className="size-4 text-primary opacity-75 group-hover:opacity-100">{client.icon}</span>
                 <span className="font-semibold text-[13px]">{client.label}</span>
@@ -628,42 +684,24 @@ function SupportedClients(): JSX.Element {
             <ul className="list-none p-0 m-0 grid grid-cols-2 @sm:grid-cols-3 @lg:grid-cols-4 gap-2 mb-4">
                 {platforms.map(renderItem)}
             </ul>
-            <PostHogCodeBoxout />
         </div>
     )
 }
 
 function MCPCTA(): JSX.Element {
     return (
-        <div className="not-prose my-6">
-            <div className="grid grid-cols-1 @sm:grid-cols-[auto,1fr] gap-5 @sm:gap-6 items-center bg-accent dark:bg-accent-dark border border-primary rounded-lg p-5">
+        <div className="not-prose my-6 mt-12">
+            <div className="grid grid-cols-1 @sm:grid-cols-[auto,1fr] gap-5 @sm:gap-6 items-center bg-accent dark:bg-accent-dark border border-primary rounded p-4">
                 <div className="relative flex justify-center shrink-0">
                     <img
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/mcp_hog_05867b6214.png"
                         alt="PostHog hedgehog"
                         className="w-32 @sm:w-40"
                     />
-                    <div className="absolute -top-3 -right-3 @sm:-top-4 @sm:-right-4">
-                        <div className="relative">
-                            <Bang className="w-[90px] @sm:w-[110px] animate-grow" />
-                            <p className="px-2 text-center m-0 absolute top-0 left-0 right-0 bottom-0 flex flex-col items-center justify-center text-black uppercase !leading-none font-bold text-[10px] @sm:text-xs rotate-6">
-                                <span className="text-[8px]">Now with</span>
-                                100% less
-                                <br />
-                                UI
-                            </p>
-                        </div>
-                    </div>
                 </div>
                 <div>
-                    <span className="bg-green inline-flex items-center gap-1 px-1.5 py-0.5 rounded-sm mb-2">
-                        <span className="w-3 h-3">
-                            <IconBolt className="fill-white" />
-                        </span>
-                        <span className="uppercase font-bold text-[10px] text-white tracking-wider">One command</span>
-                    </span>
                     <p className="text-xl @sm:text-2xl font-bold m-0 mb-1">Install the MCP</p>
-                    <p className="opacity-65 m-0 mb-4 text-[13px]">
+                    <p className="text-secondary m-0 mb-4 text-[13px]">
                         One command. Thirty seconds. Works in Cursor, Claude, Codex, PostHog Code, and friends.
                     </p>
                     <div className="mb-4">
@@ -679,15 +717,15 @@ function MCPCTA(): JSX.Element {
                         <Link
                             to="https://github.com/PostHog/posthog/tree/master/services/mcp"
                             external
-                            className="inline-flex items-center gap-1 opacity-75 hover:opacity-100 !text-inherit !no-underline"
+                            className="!text-inherit !no-underline"
                         >
                             View on GitHub
                         </Link>
                         <Link
                             to="/blog/machine-copy-paste-mcp-intro"
-                            className="opacity-75 hover:opacity-100 !text-inherit"
+                            className="font-semibold underline hover:opacity-75 !text-inherit"
                         >
-                            Why we built it →
+                            Why we built it
                         </Link>
                     </div>
                 </div>
@@ -696,75 +734,13 @@ function MCPCTA(): JSX.Element {
     )
 }
 
-function Hr(): JSX.Element {
-    return <hr className="my-8 border-t border-border dark:border-border-dark" />
-}
-
-const jsxComponentDescriptors: JsxComponentDescriptor[] = [
-    {
-        name: 'Q',
-        kind: 'flow',
-        props: [{ name: 'text', type: 'string' }],
-        Editor: ({ text }: { text?: string }) => <Q text={text} />,
-    },
-    {
-        name: 'AskClaude',
-        kind: 'text',
-        props: [
-            { name: 'question', type: 'string' },
-            { name: 'label', type: 'string' },
-        ],
-        Editor: ({ question, label }: { question?: string; label?: string }) => (
-            <AskClaude question={question || ''} label={label} />
-        ),
-    },
-    { name: 'MCPHeader', kind: 'flow', props: [], Editor: () => <MCPHeader /> },
-    { name: 'ExplainerVideo', kind: 'flow', props: [], Editor: () => <ExplainerVideo /> },
-    { name: 'DemoVideo', kind: 'flow', props: [], Editor: () => <DemoVideo /> },
-    { name: 'Subfeatures', kind: 'flow', props: [], Editor: () => <Subfeatures /> },
-    { name: 'MCPFaqGrid', kind: 'flow', props: [], Editor: () => <MCPFaqGrid /> },
-    {
-        name: 'MCPCapabilitiesLayout',
-        kind: 'flow',
-        props: [],
-        Editor: () => <MCPCapabilitiesLayout />,
-    },
-    { name: 'Capabilities', kind: 'flow', props: [], Editor: () => <Capabilities /> },
-    { name: 'Complaints', kind: 'flow', props: [], Editor: () => <Complaints /> },
-    { name: 'FutureNoUI', kind: 'flow', props: [], Editor: () => <FutureNoUI /> },
-    { name: 'SupportedClients', kind: 'flow', props: [], Editor: () => <SupportedClients /> },
-    { name: 'MCPCTA', kind: 'flow', props: [], Editor: () => <MCPCTA /> },
-    { name: 'Hr', kind: 'flow', props: [], Editor: () => <Hr /> },
-    {
-        name: 'TeamMember',
-        kind: 'text',
-        props: [
-            { name: 'name', type: 'string' },
-            { name: 'photo', type: 'string' },
-        ],
-        Editor: ({ name, photo }: { name?: string; photo?: any }) => (
-            <TeamMember name={name || ''} photo={photo !== undefined && photo !== 'false'} />
-        ),
-    },
-]
-
 export default function MCPPage(): JSX.Element {
-    const {
-        mdx: { rawBody, mdxBody },
-    } = useStaticQuery(graphql`
-        query {
-            mdx(slug: { eq: "mcp" }) {
-                rawBody
-                mdxBody: body
-            }
-        }
-    `)
     const { appWindow } = useWindow()
     const { setWindowTitle } = useApp()
 
     useEffect(() => {
         if (appWindow) {
-            setWindowTitle(appWindow, 'mcp.mdx')
+            setWindowTitle(appWindow, 'MCP')
         }
     }, [])
 
@@ -775,13 +751,57 @@ export default function MCPPage(): JSX.Element {
                 description="The PostHog Model Context Protocol lets your coding agent query your real product data in plain English. No SQL, no dashboards, no tabs. Free forever."
                 image="/images/og/default.png"
             />
-            <MDXEditor
-                jsxComponentDescriptors={jsxComponentDescriptors}
-                body={rawBody}
-                mdxBody={mdxBody}
-                maxWidth={900}
-                hasPadding={false}
-            />
+            <Editor type="mdx" hasPadding={false}>
+                <div className="px-4 @xl:px-8 pb-4 max-w-[900px] mx-auto">
+                    <MCPHeader />
+
+                    <Q text="What is the PostHog MCP?" />
+                    <p>
+                        The MCP is a server your coding agent talks to. Ask a question in English. It runs the query
+                        against your PostHog data. The answer lands in your editor. No SQL. No dashboards. No tabs full
+                        of charts you forgot you opened.
+                    </p>
+                    <p>Try things like:</p>
+                    <ul>
+                        <li>
+                            <em>"How many unique users signed up in the last 7 days, broken down by day?"</em>
+                        </li>
+                        <li>
+                            <em>"Create an A/B test for our pricing page that measures conversion to checkout."</em>
+                        </li>
+                        <li>
+                            <em>"What are the top 5 errors in my project this week?"</em>
+                        </li>
+                    </ul>
+
+                    <ExplainerVideo />
+                    <Subfeatures />
+
+                    <Q text="What does the MCP actually do?" />
+                    <p>
+                        Your agent picks the right tool from more than 50 available options, and runs it. You don't even
+                        need to know what's setup; the MCP does it for you (and asks for help if needed).
+                    </p>
+
+                    <MCPChecklist />
+
+                    <Capabilities />
+
+                    <Q text="The future is no UI" />
+                    <FutureNoUI />
+
+                    <Q text="Where does the MCP run?" />
+                    <p>
+                        We know <Link to="/code">which code editor we prefer</Link>, but the MCP is flexible to most
+                        common tools.
+                    </p>
+
+                    <SupportedClients />
+                    <DemoVideo />
+
+                    <MCPCTA />
+                </div>
+            </Editor>
         </>
     )
 }

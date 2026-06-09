@@ -44,7 +44,6 @@ export default function MDXEditor({
     cta,
     noEditorWrapper = false,
     maxWidth,
-    hasPadding = true,
 }: {
     mdxBody?: string
     body: string
@@ -55,7 +54,6 @@ export default function MDXEditor({
     }
     noEditorWrapper?: boolean
     maxWidth?: number
-    hasPadding?: boolean
 }) {
     const [isSSR, setIsSSR] = useState(true)
     const [currentFormat, setCurrentFormat] = useState<FORMAT>(0)
@@ -72,7 +70,7 @@ export default function MDXEditor({
             acc[descriptor.name] = descriptor.Editor
             return acc
         }, {} as Record<string, React.ComponentType<any>>)
-    }, [jsxComponentDescriptors])
+    }, [])
 
     useEffect(() => {
         if (activeEditor) {
@@ -138,10 +136,9 @@ export default function MDXEditor({
         <div
             onClick={handleClick}
             ref={mdxEditorContainerRef}
-            className={!hasPadding ? 'px-4 @xl:px-8 pb-4' : undefined}
             style={maxWidth ? { maxWidth, margin: '0 auto' } : undefined}
         >
-            {mdxBody ? (
+            {(isSSR && mdxBody) || websiteMode ? (
                 <MDXProvider components={{ a: Link, ...mdxComponents }}>
                     <MDXRenderer>{mdxBody}</MDXRenderer>
                 </MDXProvider>
@@ -188,7 +185,6 @@ export default function MDXEditor({
     return (
         <Editor
             type="mdx"
-            hasPadding={hasPadding}
             actionButtons={{
                 undo: {
                     onClick: () => activeEditor?.dispatchCommand(UNDO_COMMAND, undefined),
