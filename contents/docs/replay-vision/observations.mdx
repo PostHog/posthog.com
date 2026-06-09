@@ -1,105 +1,191 @@
 ---
-title: Reading observations
+title: Observations
 featureFlag: replay-vision-docs
 noindex: true
 ---
 
-An **observation** is one run of a scanner against a single recording. Every observation has a row on its scanner's Observations tab and – for successful ones – a `$recording_observed` event in your project.
+Each scanner has an **Observations** tab listing every observation it's produced. The detail view for one observation shows its structured result, the model's reasoning (with clickable citations that jump the embedded player to the cited moment), and the prompt that produced it – frozen even if you've since edited the scanner.
 
-This page covers the in-app UI for reading observations. To work with them as events – charting, dashboards, alerts – see [querying observations](/docs/replay-vision/querying-observations).
+Observations move through a small state machine:
 
-## Observations tab
+`pending → running → succeeded | failed | ineligible`
 
-Each scanner has an **Observations** tab listing every observation it's produced, sorted by most recent first.
+- **`succeeded`** – terminal. The structured result is saved and a [`$recording_observed` event](#querying-observations-as-events) is emitted.
+- **`failed`** – terminal. The detail view shows an error reason. See [troubleshooting](/docs/replay-vision/troubleshooting#failed-observations) for what each failure kind means.
+- **`ineligible`** – terminal. The session can't be analyzed (no recording, too short, no events, etc.). Doesn't count against your quota. See [running scanners](/docs/replay-vision/running-scanners#ineligible-sessions).
 
-{/* SCREENSHOT: observations-tab-overview — the Observations tab on a scanner: columns for session ID, status, result summary, triggered by (Schedule/On demand), and created time. Show a mix of statuses (succeeded, running, failed, ineligible). */}
-
-You can filter the list by:
-
-- **Status** – succeeded, pending, running, failed, ineligible.
-- **Triggered by** – schedule (background sweep) vs. on-demand.
-- **Result** – type-specific filters, e.g. verdict for monitors, tag for classifiers, score range for scorers.
-
-A separate **Sessions** view shows observations grouped by session – useful when multiple scanners have looked at the same recording and you want to see all their verdicts in one place.
-
-## Observation detail
-
-Clicking into an observation opens the detail view. The shape depends on the scanner type, but every detail view has the same five blocks.
-
-{/* SCREENSHOT: observation-detail-annotated — annotated screenshot of the observation detail page with labelled callouts pointing at each of the five blocks below (result, confidence, reasoning + citations, embedded player, prompt snapshot). */}
-
-### 1. Result
-
-The structured output for this observation, rendered appropriately for the scanner type:
-
-- **Monitor** – large yes/no verdict badge.
-- **Classifier** – the picked tags as chips.
-- **Scorer** – the numeric score with the configured scale alongside it.
-- **Summarizer** – the generated title and prose summary.
-
-### 2. Confidence
-
-A 0.0–1.0 number representing how sure the model was about its answer. Treat this as a useful signal for filtering ("only act on high-confidence verdicts"), not as ground truth.
-
-### 3. Reasoning, with citations
-
-The model's plain-language explanation for the result. Wherever the model pointed at a specific moment in the recording, you'll see a clickable citation. Clicking jumps the embedded player to that timestamp.
-
-This is the single most useful block on the page for debugging a scanner. When the model is making bad calls, reading the reasoning next to the moments it cited shows you why.
-
-{/* SCREENSHOT: reasoning-with-citations — close-up of the reasoning section showing two highlighted citation links inline in the text, with the embedded player on the right jumped to one of the cited moments. */}
-
-### 4. Embedded player
-
-The original recording, embedded in the detail view. You can scrub through it normally; citations in the reasoning are deep-links into this player.
-
-### 5. Prompt snapshot
-
-The exact prompt and config that produced this observation – frozen, even if the scanner has been edited since. Includes:
-
-- The full prompt text.
-- The scanner type and type-specific config that was in effect.
-- The model that was used.
-- The scanner version number.
-
-This is what makes editing scanners safe: past observations always show the prompt that actually generated them, not whatever the prompt looks like today.
-
-{/* SCREENSHOT: prompt-snapshot-block — the prompt snapshot block at the bottom of the detail view, showing prompt text, model name ("gemini-3-flash-preview"), and a "Scanner version: 3" badge. */}
-
-## States other than succeeded
-
-The detail view also shows pending, running, failed, and ineligible observations – each with a different layout.
-
-### Pending / running
-
-Shows the session ID, the scanner that's looking at it, the triggered-by attribution, and a progress indicator. No result yet.
-
-{/* SCREENSHOT: observation-pending — observation detail in the "running" state: progress indicator at the top, session metadata visible, result blocks not yet rendered. */}
-
-### Failed
-
-Shows an **error reason** explaining what went wrong. The reason is a structured kind plus a human-readable message – for example:
-
-- `provider_transient` – a transient Gemini error; usually retried automatically.
-- `provider_rejected` – Gemini refused to process the input (most commonly because of content policy).
-- `rasterization_failed` – PostHog couldn't render the recording to video.
-- `validation_failed` – the model returned something that didn't match the scanner's expected output shape.
-- `internal_error` – something else went wrong on PostHog's side.
-
-See [troubleshooting](/docs/replay-vision/troubleshooting) for what to do about each.
-
-{/* SCREENSHOT: observation-failed — observation detail in the "failed" state: error reason badge ("provider_rejected") at the top, human-readable explanation beneath, no result blocks. */}
-
-### Ineligible
-
-Shows the **ineligible reason** explaining why the session was skipped – e.g. `too_short`, `no_recording`, `no_events`. Ineligibles don't count against quota and don't emit `$recording_observed` events. See [running scanners](/docs/replay-vision/running-scanners#ineligible-sessions) for the full taxonomy.
-
-{/* SCREENSHOT: observation-ineligible — observation detail in the "ineligible" state: reason badge ("too_short"), human-readable explanation, the underlying recording length visible for context. */}
+Pending and running observations count against your monthly [quota](/docs/replay-vision/quota-and-limits); failed and ineligible ones don't.
 
 ## Re-running an observation
 
-Each `(scanner, session)` pair can only be observed once – the unique constraint prevents the same scanner from looking at the same session twice. If you want to re-run a scanner against a session whose observation already exists, delete the existing observation first. The next on-demand trigger (or matching background sweep) will produce a fresh one.
+Each `(scanner, session)` pair can only be observed once. To re-run a scanner against a session it's already looked at, delete the existing observation first – the next on-demand trigger (or matching background sweep) will produce a fresh one. Deleting an observation also removes its `$recording_observed` event from your project.
 
-Deleting an observation also removes its `$recording_observed` event from your project so historical queries stay consistent.
+## Querying observations as events
 
-{/* SCREENSHOT: observation-delete — observation detail with the delete action highlighted, confirmation dialog open. */}
+Every successful observation is captured as a `$recording_observed` event in your project, so you can build [insights](/docs/product-analytics/insights), [dashboards](/docs/product-analytics/dashboards), and [alerts](/docs/alerts) on top of Replay Vision output using PostHog's [SQL](/docs/product-analytics/sql).
+
+## Event properties
+
+| Property | Description |
+| --- | --- |
+| `scanner_name` | Human-readable name of the scanner |
+| `scanner_id` | Scanner UUID |
+| `scanner_type` | `monitor`, `classifier`, `scorer`, or `summarizer` |
+| `scanner_version` | Version of the scanner config that produced this observation |
+| `session_id` | The recording that was observed |
+| `triggered_by` | `schedule` (background sweep) or `on_demand` |
+| `model_used` | The Gemini model that produced the result |
+| `scanner_output_confidence` | The model's confidence (0.0 to 1.0) |
+| `scanner_output_reasoning` | The model's reasoning text, including any inline citations |
+| `scanner_output_verdict` | **Monitor only** – `"yes"`, `"no"`, or `"inconclusive"` |
+| `scanner_output_tags` | **Classifier only** – the array of assigned tags |
+| `scanner_output_score` | **Scorer only** – the numeric score |
+| `scanner_output_title` | **Summarizer only** – the generated one-line title |
+| `scanner_output_summary` | **Summarizer only** – the generated prose summary |
+
+The `timestamp` on the event is the moment the observation completed, not the moment the underlying recording was captured.
+
+## SQL recipes
+
+### Monitor: count flagged sessions over time
+
+Sessions a "Dead-end pages" monitor scanner flagged true, daily, over the last week:
+
+```sql
+SELECT
+    toStartOfDay(timestamp) AS day,
+    count() AS flagged_sessions
+FROM events
+WHERE event = '$recording_observed'
+  AND properties.scanner_name = 'Dead-end pages'
+  AND properties.scanner_output_verdict = 'yes'
+  AND timestamp > now() - INTERVAL 7 DAY
+GROUP BY day
+ORDER BY day
+```
+
+### Monitor: true rate (flagged / total)
+
+The proportion of observed sessions a monitor flagged true:
+
+```sql
+SELECT
+    countIf(properties.scanner_output_verdict = 'yes') AS flagged,
+    count() AS total,
+    flagged / total AS true_rate
+FROM events
+WHERE event = '$recording_observed'
+  AND properties.scanner_name = 'Dead-end pages'
+  AND timestamp > now() - INTERVAL 30 DAY
+```
+
+A creeping true rate is often a more useful early-warning signal than the absolute count.
+
+### Classifier: top tags
+
+Most common intent tags from a classifier:
+
+```sql
+SELECT
+    arrayJoin(properties.scanner_output_tags) AS tag,
+    count() AS sessions
+FROM events
+WHERE event = '$recording_observed'
+  AND properties.scanner_name = 'User intent'
+  AND timestamp > now() - INTERVAL 7 DAY
+GROUP BY tag
+ORDER BY sessions DESC
+```
+
+### Scorer: distribution
+
+Histogram of frustration scores:
+
+```sql
+SELECT
+    toInt32(properties.scanner_output_score) AS score,
+    count() AS sessions
+FROM events
+WHERE event = '$recording_observed'
+  AND properties.scanner_name = 'Frustration score'
+  AND timestamp > now() - INTERVAL 7 DAY
+GROUP BY score
+ORDER BY score
+```
+
+For a percentile view:
+
+```sql
+SELECT
+    quantile(0.50)(toFloat64(properties.scanner_output_score)) AS p50,
+    quantile(0.90)(toFloat64(properties.scanner_output_score)) AS p90,
+    quantile(0.99)(toFloat64(properties.scanner_output_score)) AS p99
+FROM events
+WHERE event = '$recording_observed'
+  AND properties.scanner_name = 'Frustration score'
+  AND timestamp > now() - INTERVAL 7 DAY
+```
+
+### Summarizer: recent summaries
+
+Latest summaries from a summarizer scanner:
+
+```sql
+SELECT
+    timestamp,
+    properties.session_id AS session_id,
+    properties.scanner_output_title AS title,
+    properties.scanner_output_summary AS summary
+FROM events
+WHERE event = '$recording_observed'
+  AND properties.scanner_name = 'Session summary'
+ORDER BY timestamp DESC
+LIMIT 50
+```
+
+### Cross-scanner: filter only high-confidence verdicts
+
+```sql
+SELECT *
+FROM events
+WHERE event = '$recording_observed'
+  AND properties.scanner_output_confidence > 0.8
+ORDER BY timestamp DESC
+```
+
+Confidence is self-reported, so this is a heuristic, not a guarantee – but it's often a useful filter for downstream automation.
+
+## Wiring observations into the rest of PostHog
+
+### Insights and dashboards
+
+The recipes above all become [insights](/docs/product-analytics/insights) by saving the query. From there they go on [dashboards](/docs/product-analytics/dashboards) like any other insight.
+
+{/* SCREENSHOT: dashboard-with-vision-tiles — a dashboard with three Replay Vision tiles: "dead-end true rate over time", "intent distribution", "frustration p90". */}
+
+### Alerts
+
+[Alerts](/docs/alerts) on an insight built from `$recording_observed` give you a notification when the metric crosses a threshold – e.g. "alert me when the dead-end true rate over the last hour exceeds 5%."
+
+### Joining to other PostHog data
+
+Because `$recording_observed` events live alongside everything else in your project, you can join them to anything – pageviews, custom events, person properties, cohorts. A useful pattern: find the events the user fired *before* the moment a monitor flagged them, grouped by URL.
+
+```sql
+SELECT
+    pv.properties.$current_url AS url,
+    count(DISTINCT pv.properties.$session_id) AS sessions
+FROM events pv
+INNER JOIN events ro
+    ON ro.properties.session_id = pv.properties.$session_id
+WHERE
+    pv.event = '$pageview'
+    AND ro.event = '$recording_observed'
+    AND ro.properties.scanner_name = 'Dead-end pages'
+    AND ro.properties.scanner_output_verdict = 'yes'
+    AND pv.timestamp BETWEEN ro.timestamp - INTERVAL 5 MINUTE AND ro.timestamp
+GROUP BY url
+ORDER BY sessions DESC
+```
+
+The join is by `session_id`. From there it's the same SQL you'd write for any other event.

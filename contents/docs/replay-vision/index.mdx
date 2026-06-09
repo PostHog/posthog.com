@@ -21,7 +21,7 @@ Replay Vision is currently in beta and rolling out gradually. Some details below
 Replay Vision is built around two concepts:
 
 - **Scanner** – a configured AI probe scoped to your project. A scanner has a natural-language prompt describing what to look for, a [scanner type](/docs/replay-vision/scanner-types) that determines what kind of output it produces, a set of recording filters that select which sessions it applies to, and a sampling rate.
-- **Observation** – one application of a scanner to a single recording. Each observation runs the scanner against that session and produces a structured result that's persisted and emitted as a queryable [`$recording_observed` event](/docs/replay-vision/querying-observations).
+- **Observation** – one application of a scanner to a single recording. Each observation runs the scanner against that session and produces a structured result that's persisted and emitted as a queryable [`$recording_observed` event](/docs/replay-vision/observations#querying-observations-as-events).
 
 When a scanner runs against a recording, PostHog:
 
@@ -50,7 +50,7 @@ Each of these maps to a [scanner type](/docs/replay-vision/scanner-types).
 - **New to Replay Vision?** Walk through your [first scanner](/docs/replay-vision/start-here) end-to-end.
 - **Picking the right scanner type?** Read the [scanner types reference](/docs/replay-vision/scanner-types).
 - **Authoring a scanner?** See [creating scanners](/docs/replay-vision/creating-scanners) for prompt patterns, filters, and sampling.
-- **Already have observations?** Learn how to [query them as events](/docs/replay-vision/querying-observations) to build insights, dashboards, and alerts.
+- **Already have observations?** Learn how to [read them and query them as events](/docs/replay-vision/observations) to build insights, dashboards, and alerts.
 - **Hit a snag?** Check [troubleshooting](/docs/replay-vision/troubleshooting).
 
 ## Further reading

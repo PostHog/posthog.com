@@ -43,7 +43,7 @@ A monitor returns a yes/no verdict for whether the condition in your prompt occu
 
 > *Answer yes if the user appears stuck on a page: scrolling without engaging, hovering over elements with no clear CTA, or abandoning the session shortly after arriving. Otherwise answer no.*
 
-**On `$recording_observed`** – `scanner_output_verdict` is the string `"yes"`, `"no"`, or `"inconclusive"`. See [querying observations](/docs/replay-vision/querying-observations).
+**On `$recording_observed`** – `scanner_output_verdict` is the string `"yes"`, `"no"`, or `"inconclusive"`. See [observations](/docs/replay-vision/observations#querying-observations-as-events).
 
 {/* SCREENSHOT: scanner-monitor-result — observation detail for a monitor scanner: large verdict badge (yes/no), confidence bar, reasoning with two highlighted citation links. */}
 
@@ -125,7 +125,7 @@ A summarizer produces a short prose summary of what happened in the session, plu
 
 > *Summarize what the user did in this session: which pages they visited, what they tried to accomplish, and any notable moments like errors, confusion, or successful completions. Be concrete and don't speculate.*
 
-**On `$recording_observed`** – the title and summary are available via the `scanner_result` payload on the event. See [querying observations](/docs/replay-vision/querying-observations).
+**On `$recording_observed`** – the title and summary are available via the `scanner_result` payload on the event. See [observations](/docs/replay-vision/observations#querying-observations-as-events).
 
 {/* SCREENSHOT: scanner-summarizer-result — observation detail for a summarizer: bold title, prose summary beneath with inline citations. */}
 

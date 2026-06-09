@@ -4148,15 +4148,9 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
-                    name: 'Reading observations',
+                    name: 'Observations',
                     url: '/docs/replay-vision/observations',
                     icon: 'IconList',
-                    color: 'yellow',
-                },
-                {
-                    name: 'Querying observations',
-                    url: '/docs/replay-vision/querying-observations',
-                    icon: 'IconGraph',
                     color: 'yellow',
                 },
                 {
