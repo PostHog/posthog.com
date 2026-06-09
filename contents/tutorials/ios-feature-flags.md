@@ -100,9 +100,9 @@ import PostHog
 @main
 struct posthog_feature_flagsApp: App {
     init() {
-        let POSTHOG_TOKEN = "<ph_project_token>"
+        let POSTHOG_PROJECT_TOKEN = "<ph_project_token>"
         let POSTHOG_HOST = "<ph_client_api_host>" // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
-        let configuration = PostHogConfig(apiKey: POSTHOG_TOKEN, host: POSTHOG_HOST) // TIP: host is optional if you use https://us.i.posthog.com
+        let configuration = PostHogConfig(apiKey: POSTHOG_PROJECT_TOKEN, host: POSTHOG_HOST) // TIP: host is optional if you use https://us.i.posthog.com
         PostHogSDK.shared.setup(configuration)
     }
     

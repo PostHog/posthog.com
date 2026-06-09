@@ -22,7 +22,6 @@ import {
     IconAsterisk,
     IconAI,
     IconSupport,
-    IconSpotlight,
     IconTestTube,
     IconListTreeConnected,
     IconSparkles,
@@ -30,6 +29,8 @@ import {
     IconArrowUpRight,
     IconTrends,
     IconCursorClick,
+    IconChat,
+    IconLlmPromptEvaluation,
 } from '@posthog/icons'
 import useProducts from './useProducts'
 
@@ -92,14 +93,15 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             status: 'beta',
         },
         {
-            name: 'Product Tours',
-            Icon: IconSpotlight,
-            description: 'Guide users through your product with interactive tours and announcements.',
-            handle: 'product_tours',
-            color: 'salmon',
-            colorSecondary: 'salmon',
-            category: 'product_engineering',
-            slug: 'docs/product-tours',
+            name: 'PostHog Slack app',
+            Icon: IconChat,
+            description:
+                'Tag @PostHog in any Slack thread to ship a fix, answer a data question, or edit content – without leaving the conversation.',
+            handle: 'posthog_slack',
+            color: 'sky-blue',
+            colorSecondary: 'sky-blue',
+            category: 'product_os',
+            slug: 'slack-app',
             status: 'beta',
         },
         {
@@ -110,7 +112,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             color: 'seagreen',
             colorSecondary: 'seagreen',
             category: 'ai',
-            slug: 'llm-analytics',
+            slug: 'ai-observability',
         },
         {
             name: 'Generations',
@@ -120,7 +122,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             color: 'yellow',
             colorSecondary: 'yellow',
             category: 'ai',
-            slug: 'llm-analytics',
+            slug: 'ai-observability',
             status: 'beta',
         },
         {
@@ -131,7 +133,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             color: 'blue',
             colorSecondary: 'blue',
             category: 'ai',
-            slug: 'llm-analytics',
+            slug: 'ai-observability',
             status: 'beta',
         },
         {
@@ -1743,6 +1745,17 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 },
             ],
             worksWith: ['feature_flags', 'surveys', 'product_analytics', 'session_replay'],
+        },
+        {
+            name: 'Replay Vision',
+            Icon: IconLlmPromptEvaluation,
+            description: 'AI-powered session replay analysis that watches recordings for you',
+            handle: 'replay_vision',
+            color: 'yellow',
+            colorSecondary: 'yellow',
+            category: 'product_engineering',
+            slug: 'replay-vision',
+            status: 'beta',
         },
         {
             name: 'API',

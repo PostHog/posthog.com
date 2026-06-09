@@ -57,7 +57,7 @@ Personas, on the other hand, describe the motivations and frustrations of specif
 
 Some people think an ICP is just a sales and marketing framework. And, sure, it will help you with those, but it’s so much more than that.
 
-An accurate ICP will define not just which customers you target, but every aspect of your product and go-to-market strategy. It’s the sun around which product, marketing, and sales orbit.
+An accurate ICP will define not just which customers you target, but every aspect of your product and go-to-market strategy. It’s the sun around which product, marketing, and sales orbit. For how your ICP shapes which marketing channels to prioritize first, see [the stuff nobody tells you about startup marketing](/newsletter/the-stuff-nobody-tells-you-about-startup-marketing).
 
 **Why is this important?** Broadly speaking, our ICP is high-growth B2B startups that have product-market fit, where engineers are the decision makers – see our handbook for a more detailed version.
 

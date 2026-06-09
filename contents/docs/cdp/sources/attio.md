@@ -9,7 +9,7 @@ availability:
 sourceId: Attio
 ---
 
-The Attio connector can link companies, people, lists, users, and workspaces to PostHog.
+The Attio connector can link companies, people, deals, lists, users, workspaces, notes, tasks, and workspace members to PostHog.
 
 To link Attio:
 
@@ -24,6 +24,16 @@ To link Attio:
 5. On the next page, set up the schemas you want to sync and modify the method and frequency as needed. Once done, click **Import**.
 
 Once the syncs are complete, you can start using Attio data in PostHog.
+
+## Optional standard objects
+
+The `users`, `workspaces`, and `deals` schemas are optional standard objects in Attio. They only exist in Attio workspaces that have enabled them.
+
+If you try to sync one of these schemas and it isn't enabled in your Attio workspace, the sync fails with an error like:
+
+> "Attio rejected the request for this object query. Please verify the schema is available in Attio and that the request is valid, then try again."
+
+To fix this, either enable the object in your Attio workspace or disable syncing for that schema in PostHog.
 
 ## Configuration
 
