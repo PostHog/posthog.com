@@ -5051,6 +5051,13 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Rate limiting',
+                    url: '/docs/error-tracking/rate-limiting',
+                    icon: 'IconThrottle',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
                     name: 'Code variables',
                     url: '/docs/error-tracking/code-variables',
                     icon: 'IconBrackets',
