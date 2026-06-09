@@ -1095,6 +1095,10 @@ export const handbookSidebar = [
                         url: '/handbook/marketing/email-comms',
                     },
                     {
+                        name: 'Onboarding & lifecycle emails',
+                        url: '/handbook/marketing/onboarding-and-lifecycle-emails',
+                    },
+                    {
                         name: 'In-app messaging',
                         url: '/handbook/marketing/in-app',
                     },
