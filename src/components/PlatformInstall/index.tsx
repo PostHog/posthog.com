@@ -32,7 +32,7 @@ function SubTab({ label, selected, onClick }: SubTabProps): JSX.Element {
                     'inline-flex items-center px-2 py-1 rounded text-sm font-semibold cursor-pointer border border-b-2',
                     selected
                         ? 'border-primary bg-primary text-primary'
-                        : 'border-transparent text-secondary hover:text-primary hover:border-primary'
+                        : 'border-transparent text-secondary hover:text-primary hover:border-primary hover:bg-primary'
                 )}
             >
                 {label}
@@ -157,48 +157,53 @@ export default function PlatformInstall({
 
     return (
         <div
-            className={cn(
-                'not-prose min-w-96 max-w-md inline-block border border-primary rounded bg-accent/40 p-3 space-y-2 mb-4',
-                className
-            )}
+            className={`not-prose min-w-96 max-w-md inline-block border border-primary rounded bg-accent/40 ${className}`}
         >
-            <div className="flex items-start justify-between gap-2">
-                <div className="flex items-center gap-1.5">
-                    <h3 className="!text-base font-bold text-primary m-0">{schema.title}</h3>
-                    {schema.titleTooltip ? (
-                        <Tooltip
-                            delay={0}
-                            open={titleTooltipOpen}
-                            onOpenChange={setTitleTooltipOpen}
-                            trigger={<IconQuestion className="size-4 text-secondary inline-block relative -top-px" />}
-                        >
-                            {/* Dismiss when anything inside is clicked (e.g. the "Learn more" link) */}
-                            <div
-                                className="max-w-xs text-sm leading-normal font-normal"
-                                onClick={() => setTitleTooltipOpen(false)}
+            <div className="p-3 space-y-2">
+                <div className="flex items-start justify-between gap-2">
+                    <div className="flex items-center gap-1.5">
+                        <h3 className="!text-base font-bold text-primary m-0">{schema.title}</h3>
+                        {schema.titleTooltip ? (
+                            <Tooltip
+                                delay={0}
+                                open={titleTooltipOpen}
+                                onOpenChange={setTitleTooltipOpen}
+                                trigger={
+                                    <IconQuestion className="size-4 text-secondary inline-block relative -top-px" />
+                                }
                             >
-                                {schema.titleTooltip}
-                            </div>
-                        </Tooltip>
+                                {/* Dismiss when anything inside is clicked (e.g. the "Learn more" link) */}
+                                <div
+                                    className="max-w-xs text-sm leading-normal font-normal"
+                                    onClick={() => setTitleTooltipOpen(false)}
+                                >
+                                    {schema.titleTooltip}
+                                </div>
+                            </Tooltip>
+                        ) : null}
+                    </div>
+                    {schema.secondaryAction ? (
+                        <Link
+                            to={schema.secondaryAction.to}
+                            state={schema.secondaryAction.state}
+                            className="inline-flex items-center gap-0.5 text-sm text-secondary hover:text-primary whitespace-nowrap"
+                        >
+                            {schema.secondaryAction.label}
+                            {schema.secondaryAction.icon}
+                        </Link>
                     ) : null}
                 </div>
-                {schema.secondaryAction ? (
-                    <Link
-                        to={schema.secondaryAction.to}
-                        state={schema.secondaryAction.state}
-                        className="inline-flex items-center gap-0.5 text-sm text-secondary hover:text-primary whitespace-nowrap"
-                    >
-                        {schema.secondaryAction.label}
-                        {schema.secondaryAction.icon}
-                    </Link>
-                ) : null}
+
+                <CopyableCommand command={schema.defaultCommand} animate />
+
+                {schema.supports ? <div className="text-sm text-secondary">{schema.supports}</div> : null}
             </div>
 
-            <CopyableCommand command={schema.defaultCommand} animate />
-
-            {schema.supports ? <div className="text-sm text-secondary">{schema.supports}</div> : null}
-
-            <div className="flex items-center justify-between gap-2">
+            <div
+                className={`flex items-center justify-between gap-2 bg-accent border-t border-primary px-3 py-2 ${
+                    selected ? '' : 'rounded-b'
+                }`}
+            >
                 <div className="flex items-center gap-px flex-wrap">
                     {editors.map((p) => (
                         <IconButton
@@ -231,7 +236,7 @@ export default function PlatformInstall({
             >
                 <div className="overflow-hidden min-h-0">
                     {lastSelected ? (
-                        <div className="pt-2 border-t border-primary">
+                        <div className="pt-2 border-t border-primary p-3">
                             <PlatformOptionContent key={lastSelected.id} option={lastSelected} />
                         </div>
                     ) : null}

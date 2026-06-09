@@ -86,8 +86,8 @@ const SecondaryActions = () => (
 )
 
 const GetStarted = () => (
-    <div className="mt-6 flex flex-col items-center @xl:items-start gap-3">
-        <PlatformInstall schema={wizardInstallSchema} className="!mb-0" />
+    <div className="mt-6 flex flex-col items-center @xl:items-start">
+        <PlatformInstall schema={wizardInstallSchema} />
         <SecondaryActions />
     </div>
 )

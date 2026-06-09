@@ -35,7 +35,7 @@ export default function IconButton({
             aria-label={label}
             className={cn(
                 'inline-flex items-center rounded px-1 py-px cursor-pointer border border-b-2',
-                selected ? 'border-primary bg-primary' : 'border-transparent hover:border-primary hover:bg-accent',
+                selected ? 'border-primary bg-primary' : 'border-transparent hover:border-primary hover:bg-primary',
                 className
             )}
         >

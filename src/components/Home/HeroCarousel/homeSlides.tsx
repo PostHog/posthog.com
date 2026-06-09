@@ -12,9 +12,9 @@ export const SlackSlide = () => (
             <div className="bg-accent border border-primary rounded-md min-h-[220px] @2xl:min-h-[320px]" />
             <div className="flex flex-col gap-3">
                 <p className="flex items-center gap-1.5 text-secondary text-sm font-semibold m-0">
-                    <IconChat className="size-4" /> PostHog Bot
+                    <IconChat className="size-4" /> PostHog Slackbot
                 </p>
-                <h2 className="text-2xl @lg:text-3xl font-bold m-0">Create pull requests in Slack</h2>
+                <h2 className="text-2xl font-bold m-0">Create pull requests in Slack</h2>
                 <p className="text-secondary m-0">
                     Tag @PostHog in a thread to analyze customer behavior or create a PR &mdash; all without ever
                     leaving Slack. Triage and build with your team in your existing tools.
