@@ -501,7 +501,7 @@ export const wizardInstallSchema: InstallSchema = {
         state: { newWindow: true, initialTab: 'signup' },
         icon: <IconArrowUpRight className="size-4 text-secondary" />,
     },
-    defaultCommand: 'npx -y @posthog/wizard@latest',
+    defaultCommand: 'npx -y @posthog/wizard',
     supports: supportsFrameworks,
     // Secondary install-methods row hidden for now on the homepage. Restore by
     // uncommenting installPlatforms (or swap in a custom array to diverge from MCP).

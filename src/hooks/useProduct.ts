@@ -96,7 +96,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/signals_light_4b3440dc2b.png',
                     srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/signals_dark_b29e5ed8f9.png',
                     alt: 'PostHog Code screenshot',
-                    imgClasses: 'w-full rounded shadow',
+                    imgClasses: 'w-full rounded shadow-xl border border-primary',
                 },
             },
         },
@@ -111,6 +111,14 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             category: 'product_os',
             slug: 'slack',
             status: 'beta',
+            screenshots: {
+                home: {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/slack_light_7b8851bcd2.png',
+                    srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/slack_dark_cd61847004.png',
+                    alt: 'PostHog Slack app screenshot',
+                    imgClasses: 'w-full rounded shadow-xl border border-primary',
+                },
+            },
         },
         {
             name: 'Traces',

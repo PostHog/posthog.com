@@ -8,7 +8,7 @@ import Editor from 'components/Editor'
 import WizardCommand from 'components/WizardCommand'
 import Link from 'components/Link'
 import CloudinaryImage from 'components/CloudinaryImage'
-import { CTAs } from 'components/Home/Test'
+import { CTAs, GetStarted } from 'components/Home/Test'
 import HeroCarousel from 'components/Home/HeroCarousel'
 import { productUsageTabs } from 'components/Home/HeroCarousel/tabs'
 import Tooltip from 'components/RadixUI/Tooltip'
@@ -319,9 +319,9 @@ export default function ProductsTest(): JSX.Element {
                             product usage data – and build and ship new features – lives in one place.
                         </p>
 
-                        <CTAs />
+                        <GetStarted />
 
-                        {/* 
+                        {/*
                         <div className="flex flex-wrap items-center gap-3 not-prose">
                             <Link
                                 to="/download"

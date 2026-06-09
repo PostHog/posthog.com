@@ -5,28 +5,46 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import useProduct from 'hooks/useProduct'
 import { useApp } from '../../../context/App'
 
-export const SlackSlide = () => (
-    <div className="@container rounded p-4 @md:p-6 h-full">
-        <div className="grid grid-cols-1 @2xl:grid-cols-[1.4fr_1fr] gap-6 @2xl:gap-8 items-center h-full">
-            <div className="bg-accent border border-primary rounded-md min-h-[220px] @2xl:min-h-[320px]" />
-            <div className="flex flex-col gap-3">
-                <div className="space-y-2">
-                    <p className="flex items-center gap-1.5 text-secondary text-sm font-semibold m-0">
-                        <IconAtSign className="size-4" /> PostHog Slackbot
+export const SlackSlide = () => {
+    const allProducts = useProduct() as any[]
+    const product = Array.isArray(allProducts) ? allProducts.find((p: any) => p.handle === 'posthog_slack') : undefined
+    const { siteSettings } = useApp()
+    const isDark = siteSettings.theme === 'dark'
+    const screenshot = product?.screenshots?.home
+
+    return (
+        <div data-scheme="primary" className="@container rounded p-4 @md:p-6 h-full bg-[#F3F4F0] dark:bg-[#131316]">
+            <div className="grid grid-cols-1 @2xl:grid-cols-[1.4fr_1fr] gap-6 @2xl:gap-8 items-center h-full">
+                {screenshot ? (
+                    <div className={`flex ${screenshot.classes || ''}`}>
+                        <CloudinaryImage
+                            src={(isDark && screenshot.srcDark ? screenshot.srcDark : screenshot.src) as any}
+                            alt={screenshot.alt}
+                            imgClassName={screenshot.imgClasses}
+                        />
+                    </div>
+                ) : (
+                    <div />
+                )}
+                <div className="flex flex-col gap-3">
+                    <div className="space-y-2">
+                        <p className="flex items-center gap-1.5 text-secondary text-sm font-semibold m-0">
+                            <IconAtSign className="size-4" /> PostHog Slackbot
+                        </p>
+                        <h2 className="text-2xl font-bold m-0">Create pull requests in Slack</h2>
+                    </div>
+                    <p className="text-secondary m-0">
+                        Tag <code>@PostHog</code> in a thread to analyze customer behavior or create a PR – all without
+                        ever leaving Slack. Triage and build with your team in your existing tools.
                     </p>
-                    <h2 className="text-2xl font-bold m-0">Create pull requests in Slack</h2>
+                    <OSButton to="/slack" state={{ newWindow: true }} variant="secondary" asLink>
+                        Explore PostHog Slackbot
+                    </OSButton>
                 </div>
-                <p className="text-secondary m-0">
-                    Tag <code>@PostHog</code> in a thread to analyze customer behavior or create a PR – all without ever
-                    leaving Slack. Triage and build with your team in your existing tools.
-                </p>
-                <OSButton to="/slack" state={{ newWindow: true }} variant="secondary" asLink>
-                    Explore PostHog Slackbot
-                </OSButton>
             </div>
         </div>
-    </div>
-)
+    )
+}
 
 export const FixBugsSlide = () => {
     const allProducts = useProduct() as any[]

@@ -127,7 +127,7 @@ const SecondaryActions = () => (
     </p>
 )
 
-const GetStarted = () => (
+export const GetStarted = () => (
     <div className="mt-6 flex flex-col items-center @xl:items-start">
         <PlatformInstall schema={wizardInstallSchema} />
         <SecondaryActions />
