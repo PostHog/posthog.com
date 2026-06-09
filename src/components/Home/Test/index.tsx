@@ -93,6 +93,7 @@ const Tagline = () => (
         <h1 className="!text-3xl pt-4">
             Just ask <PostHogMention />.
         </h1>
+        <HeroImage />
         <p className="text-balance @xl:text-wrap text-lg">
             <PostHogMention /> knows your product, customers, and what needs fixing. It answers questions, triages work,
             writes code, and is always working even when you don't prompt it.
@@ -333,10 +334,18 @@ const CompanyStageTabs = () => {
 
 function HeroImage(): JSX.Element {
     return (
-        <CloudinaryImage
-            src="https://res.cloudinary.com/dmukukwp6/image/upload/lazy_a2afd552f7.png"
-            className="w-64 @xl:w-48 @xl:float-right @xl:ml-4 @2xl:w-56 @3xl:w-64 @2xl:float-right -scale-x-100 @xl:mt-16 @3xl:mt-8"
-        />
+        <aside className="max-w-[400px] mx-auto mt-4 @xl:mx-0 @2xl:mt-0 @2xl:w-72 @2xl:float-right @2xl:ml-4 @3xl:w-80 @4xl:w-96 @2xl:-mt-20 @3xl:-mt-16 border border-primary rounded shadow-xl overflow-hidden leading-[0] transition-all">
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/slack_light_7b8851bcd2.png"
+                alt="PostHog Slack app"
+                className="dark:hidden"
+            />
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/slack_dark_cd61847004.png"
+                alt="PostHog Slack app"
+                className=" hidden dark:block"
+            />
+        </aside>
     )
 }
 
@@ -361,12 +370,6 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
                 </>
             )
         },
-    },
-    {
-        name: 'HeroImage',
-        kind: 'flow',
-        props: [],
-        Editor: () => <HeroImage />,
     },
     {
         name: 'ButtonDataStack',
