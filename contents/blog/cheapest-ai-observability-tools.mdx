@@ -47,6 +47,72 @@ The best tools go further with:
 - **Dataset curation and experiments:** Build golden datasets from production traces
 - **Self-hosting:** Keep all data in your own infrastructure for privacy or compliance
 
+<ProductComparisonTable
+    competitors={[
+        'posthog',
+        'langfuse',
+        'traceloop',
+        'arize',
+        'lunary',
+        'honeyhive',
+        'langsmith',
+        'braintrust',
+        'datadog',
+        'dynatrace',
+        'fiddler',
+        'wandb',
+    ]}
+    rows={[
+        { label: 'Pricing & free tier' },
+        {
+            label: 'Evergreen free tier',
+            description: 'Ongoing free plan (not time-limited trial).',
+            values: [true, true, true, true, true, true, true, true, true, false, true, true],
+        },
+        {
+            label: 'Free events/month',
+            description: 'Monthly included events/usage on the free plan.',
+            values: [
+                '100K',
+                '50K',
+                '50K',
+                '25K',
+                '10K',
+                '10K',
+                '5K',
+                'Up to $10 credits',
+                '40K',
+                false,
+                'Not disclosed',
+                'Not disclosed',
+            ],
+        },
+        {
+            label: 'Free data retention',
+            description: 'Default data retention included on the free plan.',
+            values: [
+                '30 days',
+                '30 days',
+                '24 hours',
+                '7 days',
+                '30 days',
+                '30 days',
+                '14 days',
+                '14 days',
+                '15 days',
+                false,
+                'Not disclosed',
+                'Not disclosed',
+            ],
+        },
+        {
+            label: 'Free seats',
+            description: 'Included user seats on the free plan.',
+            values: ['Unlimited', '2', '5', '1', '1', '5', '1', 'Unlimited', 'Unlimited', false, 'Not disclosed', '5'],
+        },
+    ]}
+/>
+
 ## Tools with a real free tier
 
 These tools let you keep using the product indefinitely without paying, even when you hit caps.
@@ -321,20 +387,20 @@ ML teams already using Weights & Biases for model training who want LLM tracing 
 
 ## Which AI observability tool should you choose?
 
-- Want one tool that survives the jump from side project to real product? **PostHog** – 100K events/month free, no per-seat tax, and the only option here that can show you the session replay of the actual user behind a broken trace.
-- Want the deepest pure-play LLM platform? **Langfuse** – open source with prompt versioning and eval workflows you can self-host for free at any scale.
-- Living inside LangChain or LangGraph? **LangSmith** – first-party tracing that goes node-by-node, though the 1-seat free limit means teams pay from day one.
-- Shipping production agents on a tiny team? **HoneyHive** – OTel-native traces and evals with 5 seats on the free tier.
-- Want vendor-neutral instrumentation you can route anywhere? **Traceloop** – the Apache-2.0 OpenLLMetry SDK speaks plain OTel, so you're never locked into one UI.
-- Want zero licensing cost and no caps? **Phoenix** – Arize's open-source core self-hosts with unlimited traces, retention, and users.
-- Treating evals as product infrastructure? **Braintrust** – scoring and experiments front and center, with unlimited users on the free plan.
-- Want the simplest single-purpose free tier? **Lunary** – lightweight tracing, prompt management, and conversation threading for solo chatbot and RAG apps.
+- Want one tool that survives the jump from side project to real product? **PostHog** – 100K events/month free, no per-seat fees, and the only option here that can show you the session replay of the actual user behind a broken trace.
+- Want the deepest pure-play LLM platform? **Langfuse**.
+- Living inside LangChain or LangGraph? **LangSmith**.
+- Shipping production agents on a tiny team? **HoneyHive**.
+- Want vendor-neutral instrumentation you can route anywhere? **Traceloop**.
+- Want zero licensing cost and no caps? **Phoenix**.
+- Treating evals as product infrastructure? **Braintrust**.
+- Want the simplest single-purpose free tier? **Lunary**.
 
 ### Recommendations by team type
 
 #### For solo developers and side projects
 
-- **PostHog** for 100K free LLM events a month, no per-seat cost, and product analytics plus session replay behind the same login
+- **PostHog** for 100K free LLM events a month, no per-seat cost, and multiple tools behind the same login
 - **Lunary** for the lightest setup: one-line integration, conversation threading, and 1,000 prompt queries a month for a single chatbot or RAG project
 - **Phoenix self-hosted** for zero licensing cost and no event cap when you're happy owning the infrastructure
 
@@ -353,14 +419,14 @@ ML teams already using Weights & Biases for model training who want LLM tracing 
 #### For evals-first teams
 
 - **Braintrust** when evaluation is core product infrastructure, with scoring and experiments front and center (unlimited users on the free plan)
-- **Langfuse** for LLM-as-judge, human annotation queues, and dataset experiments in an open-source platform
 - **PostHog** for LLM-as-judge and code-based  evals that run automatically after a prompt or model change
+- **Langfuse** for LLM-as-judge, human annotation queues, and dataset experiments in an open-source platform
 
 #### For enterprises with compliance needs
 
+- **Datadog** or **Dynatrace** when you already run their platform and want LLM traces beside infrastructure and APM telemetry (expect per-host platform pricing)
 - **PostHog** for [CDP](/cdp), [data warehouse](/data-stack), and AI observability under one vendor, with self-host and EU hosting for data residency
 - **Fiddler AI** when real-time guardrails and AI governance matter as much as observability
-- **Datadog** or **Dynatrace** when you already run their platform and want LLM traces beside infrastructure and APM telemetry (expect per-host platform pricing)
 
 <WizardCTA />
 
@@ -383,6 +449,8 @@ A **free trial** gives you fuller access for a fixed window, then requires payme
 **LLM observability** focuses on what happened in production: traces, costs, latency, error rates, and user behavior. 
 
 **AI evaluation** focuses on whether what happened was good: scoring responses for quality, factual accuracy, safety, or task completion. 
+
+You usually want both, and roughly in that order – evaluation only starts making sense once you can actually see the outputs you're scoring. For the longer version, see our explainer on [what AI observability is and how it works](https://posthog.com/blog/what-is-ai-observability).
 
 </details>
 
@@ -410,6 +478,8 @@ See our guide to [open-source LLM observability tools](/blog/best-open-source-ll
 **PostHog**, **Lunary**, and **Langfuse** are strong $0 options for side projects. 
 
 Pick PostHog if you also need [product analytics](/product-analytics), [web analytics](/web-analytics), [error tracking](/error-tracking), and [session replay](/session-replay). 
+
+For a fuller walkthrough of what to instrument first, how to tie LLM data to product analytics, and when a free tier stops being enough, see our guide to [AI observability for your MVP](https://posthog.com/blog/ai-observability-for-mvps).
 
 </details>
 
