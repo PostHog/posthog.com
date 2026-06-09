@@ -11,8 +11,6 @@ A scanner is made up of four things you author:
 3. **Recording filters** that select which sessions the scanner applies to.
 4. A **sampling rate** that controls how many matching sessions get scanned.
 
-This page walks through each of those, plus a few details that surprise people the first time: templates, scanner versioning, and authoring prompts with Max.
-
 {/* SCREENSHOT: scanner-editor-full — full scanner editor scene with all sections expanded: name/description, type picker, prompt textarea, type-specific config, filters, sampling, model. */}
 
 ## Start from a template
@@ -67,18 +65,18 @@ Ask for citations in the reasoning, so the result is auditable. The model is alr
 A prompt that reads beautifully on its own can still misfire. The fastest feedback loop:
 
 1. Author the scanner.
-2. Run it on-demand against 5–10 recordings you already understand.
+2. [Run it on-demand](/docs/replay-vision/running-scanners#on-demand-on-a-single-recording) against 5–10 recordings you already understand.
 3. Open the observations and read the reasoning + citations.
-4. Adjust the prompt where the model misread something obvious. Save (this bumps the [scanner version](#scanner-versioning) without affecting past observations).
-5. Re-scan the same recordings and compare.
+4. Adjust the prompt where the model misread something obvious.
+5. Scan another batch of recordings and repeat until the results look right.
 
-Don't enable broad sweeping until the on-demand pass on a known set looks right.
+Hold off on the automatic background sweep until you trust the scanner's on-demand results – every sweep observation counts against your [monthly quota](/docs/replay-vision/quota-and-limits), and a poorly tuned scanner can burn through it fast on results you'd throw away anyway.
 
-### Drafting prompts with Max
+### Drafting prompts with PostHog AI
 
-Inside the scanner editor, you can ask [Max](/docs/max-ai) to draft a prompt by describing what you want in natural language. Max picks a scanner type, drafts the prompt, and fills it into the form for you to edit.
+Inside the scanner editor, you can ask [PostHog AI](/docs/posthog-ai) to draft a prompt by describing what you want in natural language. PostHog AI picks a scanner type, drafts the prompt, and fills it into the form for you to edit.
 
-{/* SCREENSHOT: max-prompt-drafter — scanner editor with the Max chat panel open; user has typed "find sessions where someone tries to use a coupon code and it fails" and Max has drafted a monitor prompt and filled it into the form. */}
+{/* SCREENSHOT: posthog-ai-prompt-drafter — scanner editor with the PostHog AI chat panel open; user has typed "find sessions where someone tries to use a coupon code and it fails" and PostHog AI has drafted a monitor prompt and filled it into the form. */}
 
 ## Type-specific configuration
 
@@ -87,7 +85,7 @@ Each scanner type has a few extra knobs. The full reference is on the [scanner t
 - **Classifier** – define your tag vocabulary, choose whether multiple tags per session are allowed, and whether the model can invent tags outside the vocabulary.
 - **Scorer** – set the numeric scale (min, max) and an optional label describing what the scale means.
 - **Summarizer** – pick a summary length (short / medium / long).
-- **Monitor** – no extra config beyond the prompt itself.
+- **Monitor** – choose whether the model can return `inconclusive` instead of being forced to pick yes/no.
 
 ## Filters: scoping the scanner
 
@@ -112,35 +110,10 @@ The scanner editor shows a **per-month estimate** of how many observations the s
 
 {/* SCREENSHOT: estimate-callout — the per-month estimate widget in the scanner editor with a concrete projected number, a "remaining quota this month" bar beneath it, and the sampling slider visible alongside. */}
 
-If the estimate looks too high, you have three knobs:
+If the estimate looks too high, you have two knobs:
 
 - Narrow the filters.
 - Lower the sampling rate.
-- Reduce the scanner's frequency by combining both.
-
-Each scanner only ever produces **one observation per recording**, so sampling is the right lever for "scan less often," not "scan duplicates."
-
-## Picking a model
-
-Replay Vision currently runs on Google Gemini models. You pick the specific Gemini flavor when you create the scanner – the editor shows the available options with a short description of the speed/quality tradeoff.
-
-The default is the right starting point for most scanners. Choose a heavier model if your prompt requires nuanced judgment; choose a lighter model if you want lots of observations cheaply and you're scoring something simple.
-
-See [quota and limits](/docs/replay-vision/quota-and-limits) for the current model list.
-
-## Scanner versioning
-
-Every time you save a config change to a scanner, its **version** bumps. Past observations keep the version they were produced under, with a frozen copy of the entire scanner config (prompt, filters, sampling, model).
-
-This matters because:
-
-- You can iterate on prompts safely – observations you've already produced stay as-is.
-- The observation detail page shows you the exact prompt that produced *that* observation, even if the live scanner has moved on.
-- If you build dashboards on `$recording_observed`, scanner_version is one of the event properties so you can split results by config era.
-
-{/* SCREENSHOT: scanner-version-tooltip — observation detail showing the prompt block with a small "scanner version: 3" badge or tooltip. */}
-
-The fields that bump the version are: scanner type, scanner config (prompt + type-specific options), filters, sampling rate, provider, and model. Changes to the name, description, or enabled flag don't bump the version.
 
 ## Enabling and disabling
 
@@ -148,6 +121,6 @@ Scanners are **enabled by default** when you save. An enabled scanner sweeps the
 
 Toggling a scanner to **disabled** stops the background sweep. On-demand triggers (from the player or via MCP) still work on a disabled scanner – disabling only affects the automatic schedule.
 
-To stop a scanner entirely, delete it. Deleting a scanner doesn't delete its past observations or its `$recording_observed` events – those stay in your project.
+To stop a scanner entirely, delete it. Deleting a scanner also removes all of its observations from the Observations tab. The `$recording_observed` events the scanner produced are ordinary PostHog events in your project's event stream and aren't affected – they stay queryable.
 
 {/* SCREENSHOT: scanner-list-toggle — the scanner list with the enable/disable toggle visible on each row, one enabled and one disabled. */}

@@ -21,7 +21,7 @@ Only **succeeded** observations are emitted as events. Failed and ineligible obs
 | `model_used` | The Gemini model that produced the result |
 | `scanner_output_confidence` | The model's confidence (0.0 to 1.0) |
 | `scanner_output_reasoning` | The model's reasoning text, including any inline citations |
-| `scanner_output_verdict` | **Monitor only** – the true/false verdict |
+| `scanner_output_verdict` | **Monitor only** – `"yes"`, `"no"`, or `"inconclusive"` |
 | `scanner_output_tags` | **Classifier only** – the array of assigned tags |
 | `scanner_output_score` | **Scorer only** – the numeric score |
 | `scanner_output_title` | **Summarizer only** – the generated one-line title |
@@ -42,7 +42,7 @@ SELECT
 FROM events
 WHERE event = '$recording_observed'
   AND properties.scanner_name = 'Dead-end pages'
-  AND properties.scanner_output_verdict = true
+  AND properties.scanner_output_verdict = 'yes'
   AND timestamp > now() - INTERVAL 7 DAY
 GROUP BY day
 ORDER BY day
@@ -54,7 +54,7 @@ The proportion of observed sessions a monitor flagged true:
 
 ```sql
 SELECT
-    countIf(properties.scanner_output_verdict = true) AS flagged,
+    countIf(properties.scanner_output_verdict = 'yes') AS flagged,
     count() AS total,
     flagged / total AS true_rate
 FROM events
@@ -168,7 +168,7 @@ WHERE
     pv.event = '$pageview'
     AND ro.event = '$recording_observed'
     AND ro.properties.scanner_name = 'Dead-end pages'
-    AND ro.properties.scanner_output_verdict = true
+    AND ro.properties.scanner_output_verdict = 'yes'
     AND pv.timestamp BETWEEN ro.timestamp - INTERVAL 5 MINUTE AND ro.timestamp
 GROUP BY url
 ORDER BY sessions DESC

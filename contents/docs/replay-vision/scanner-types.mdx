@@ -10,26 +10,29 @@ There are four types:
 
 | Type | What it produces | Use it for |
 | --- | --- | --- |
-| [**Monitor**](#monitor) | A true/false verdict, with reasoning | Flagging whether a specific condition occurred |
+| [**Monitor**](#monitor) | A `yes` / `no` verdict, with reasoning | Flagging whether a specific condition occurred |
 | [**Classifier**](#classifier) | One or more tags from a vocabulary you define | Bucketing sessions along a dimension |
 | [**Scorer**](#scorer) | A numeric score on a scale you define | Rating sessions on a dimension |
 | [**Summarizer**](#summarizer) | A title and prose summary | Generating a short narrative of what happened |
 
 Every type also returns:
 
-- A **confidence** value (0.0 to 1.0) representing how sure the model is.
+- A **confidence** percentage representing how sure the model is about the result.
 - **Reasoning** that explains the result in plain language and may include **citations** – timestamps that link directly to the relevant moment in the recording's timeline.
 
 The reasoning and citations are the most powerful debugging tool you have for tuning a scanner. If the model is making bad calls, the reasoning shows you why.
 
 ## Monitor
 
-A monitor is a yes/no question. The model decides whether the condition in your prompt occurred in the session.
+A monitor returns a yes/no verdict for whether the condition in your prompt occurred in the session.
 
 **Output**
-- `verdict` – `true` or `false`
-- `reasoning` – plain-language explanation, with optional citations
-- `confidence` – 0.0 to 1.0
+- `verdict` – `yes` or `no` (or `inconclusive` if you opt the scanner into it)
+- `reasoning` – plain-language explanation, with inline citations
+- `confidence` – how sure the model is
+
+**Type-specific config**
+- **Allow inconclusive** – whether the model can return `inconclusive` when it genuinely can't tell from the recording. Off by default; turn it on if you'd rather have an explicit "don't know" than push the model into a forced yes/no.
 
 **When to use it**
 - "Did the user appear stuck on a page?"
@@ -40,9 +43,9 @@ A monitor is a yes/no question. The model decides whether the condition in your 
 
 > *Answer yes if the user appears stuck on a page: scrolling without engaging, hovering over elements with no clear CTA, or abandoning the session shortly after arriving. Otherwise answer no.*
 
-**On `$recording_observed`** – `scanner_output_verdict` carries the boolean. See [querying observations](/docs/replay-vision/querying-observations).
+**On `$recording_observed`** – `scanner_output_verdict` is the string `"yes"`, `"no"`, or `"inconclusive"`. See [querying observations](/docs/replay-vision/querying-observations).
 
-{/* SCREENSHOT: scanner-monitor-result — observation detail for a monitor scanner: large verdict badge (true/false), confidence bar, reasoning with two highlighted citation links. */}
+{/* SCREENSHOT: scanner-monitor-result — observation detail for a monitor scanner: large verdict badge (yes/no), confidence bar, reasoning with two highlighted citation links. */}
 
 ## Classifier
 
@@ -51,7 +54,7 @@ A classifier assigns one or more **tags** from a vocabulary you define. You can 
 **Output**
 - `tags` – array of tag strings the model picked
 - `reasoning` – why these tags
-- `confidence` – 0.0 to 1.0
+- `confidence` – how sure the model is
 
 **Type-specific config**
 - **Tag vocabulary** – the set of allowed tags. Each tag should have a name and a short definition so the model knows what it means.
@@ -82,7 +85,7 @@ A scorer assigns a **numeric score** on a scale you define – e.g. 0 to 10 for 
 **Output**
 - `score` – numeric value on the scale you defined
 - `reasoning` – why this score
-- `confidence` – 0.0 to 1.0
+- `confidence` – how sure the model is
 
 **Type-specific config**
 - **Scale** – minimum and maximum values (integers).
@@ -107,9 +110,8 @@ A summarizer produces a short prose summary of what happened in the session, plu
 
 **Output**
 - `title` – one-line summary
-- `summary` – longer narrative summary
-- `reasoning` – any additional context the model wants to add
-- `confidence` – 0.0 to 1.0
+- `summary` – longer narrative summary, with inline citations
+- `confidence` – how sure the model is
 
 **Type-specific config**
 - **Summary length** – short, medium, or long. Controls roughly how many sentences the model writes.
@@ -125,7 +127,7 @@ A summarizer produces a short prose summary of what happened in the session, plu
 
 **On `$recording_observed`** – the title and summary are available via the `scanner_result` payload on the event. See [querying observations](/docs/replay-vision/querying-observations).
 
-{/* SCREENSHOT: scanner-summarizer-result — observation detail for a summarizer: bold title, prose summary beneath, reasoning collapsed. */}
+{/* SCREENSHOT: scanner-summarizer-result — observation detail for a summarizer: bold title, prose summary beneath with inline citations. */}
 
 ## Picking a type
 
@@ -142,6 +144,6 @@ If you find yourself encoding a number range as classifier tags ("low / medium /
 
 Confidence is the model's self-reported certainty. It's useful as a filter (e.g. "only alert when confidence > 0.7") but not as ground truth – treat it as a signal, not a guarantee.
 
-Citations are emitted in the reasoning text and rendered as clickable links in the observation detail view. They jump the embedded player to the timestamp the model points at. They're the single best tool for understanding *why* a model returned what it did.
+Citations are emitted inline in the model's free-text output (the `reasoning` field for monitors, classifiers, and scorers; the `summary` field for summarizers) and rendered as clickable links in the observation detail view. They jump the embedded player to the timestamp the model points at. They're the single best tool for understanding *why* a model returned what it did.
 
 {/* SCREENSHOT: citation-detail — close-up of a reasoning paragraph with two citation links, and a side panel showing the embedded player jumped to one of the cited moments. */}

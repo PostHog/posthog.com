@@ -4160,6 +4160,12 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
+                    name: 'MCP',
+                    url: '/docs/replay-vision/mcp',
+                    icon: 'IconTerminal',
+                    color: 'yellow',
+                },
+                {
                     name: 'Quota and limits',
                     url: '/docs/replay-vision/quota-and-limits',
                     icon: 'IconGauge',

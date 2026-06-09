@@ -21,7 +21,7 @@ Each `(scanner, session)` pair is only ever observed once. Re-sweeping never pro
 
 ### When does the next sweep run?
 
-Sweeps run on a per-scanner schedule. You don't normally need to think about the cadence – just enable the scanner and observations start accumulating within a few minutes. The Observations tab shows the most recent observations across all of the scanner's history.
+Sweeps run continuously – once a scanner is enabled, observations start accumulating within a few minutes. The Observations tab shows the most recent observations across all of the scanner's history.
 
 ### What happens when I change filters?
 
@@ -47,17 +47,7 @@ On-demand triggers:
 
 ### Via MCP
 
-You can also scan a session programmatically using the [`vision-scanners-scan-session` MCP tool](/docs/model-context-protocol). This is the same code path the player action uses – one observation per call, against a specific scanner and a specific session ID.
-
-A few other Replay Vision MCP tools you'll often use alongside it:
-
-- `vision-observations-list` – list every observation across all scanners for one session.
-- `vision-observations-retrieve` – fetch a single observation by ID.
-- `vision-scanners-observations-list` – list observations one scanner has produced over time.
-- `vision-quota-retrieve` – check remaining monthly quota before queuing on-demand work.
-- `vision-scanners-estimate-create` – project the per-month volume of a hypothetical scanner before creating it.
-
-See the [MCP overview](/docs/model-context-protocol) for how to connect a client, and [creating scanners](/docs/replay-vision/creating-scanners) for the authoring side.
+You can also trigger an on-demand observation from your editor using the `vision-scanners-scan-session` MCP tool. See [Replay Vision MCP](/docs/replay-vision/mcp) for the full set of tools and example prompts.
 
 ## Ineligible sessions
 
@@ -82,23 +72,3 @@ Ineligible observations:
 {/* SCREENSHOT: ineligible-observation — observation row in the Observations tab marked "Ineligible" with the reason ("too_short") shown alongside, and a detail view explaining the threshold. */}
 
 If you're seeing a lot of ineligibles for one scanner, that's usually a signal to narrow the filters – e.g. exclude sessions below a duration threshold, or require at least one event. See [troubleshooting](/docs/replay-vision/troubleshooting) for more.
-
-## Observation status lifecycle
-
-Every observation moves through a small state machine. Each state is visible on the Observations tab.
-
-```text
-pending  →  running  →  succeeded
-                    ↘   failed
-                    ↘   ineligible
-```
-
-- **`pending`** – queued, waiting for capacity.
-- **`running`** – actively being processed (rendering the video, calling Gemini, validating the result).
-- **`succeeded`** – terminal. Result saved, `$recording_observed` emitted.
-- **`failed`** – terminal. Something went wrong – see [troubleshooting](/docs/replay-vision/troubleshooting) for the failure kinds.
-- **`ineligible`** – terminal. Session can't be analyzed; see above.
-
-Pending and running observations **count against your quota** – this prevents a burst of concurrent on-demand triggers from blowing past the cap before any of them complete. If an observation ends up failed or ineligible, it stops counting once it reaches the terminal state.
-
-See [observations](/docs/replay-vision/observations) for what the detail view shows in each state, and [querying observations](/docs/replay-vision/querying-observations) for what the resulting events look like.

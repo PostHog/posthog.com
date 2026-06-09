@@ -67,7 +67,7 @@ Once it finishes, the observation shows up on the scanner's **Observations** tab
 
 For a monitor scanner you'll see:
 
-- A **true/false verdict** with a confidence score.
+- A **yes/no verdict** with a confidence score.
 - The model's **reasoning**, with **clickable citations** that jump the embedded player to the relevant moment.
 - The **prompt that produced this result** – the exact text Gemini saw, frozen even if you edit the scanner afterwards.
 
@@ -84,7 +84,7 @@ SELECT
 FROM events
 WHERE event = '$recording_observed'
   AND properties.scanner_name = 'Dead-end pages'
-  AND properties.scanner_output_verdict = true
+  AND properties.scanner_output_verdict = 'yes'
   AND timestamp > now() - INTERVAL 7 DAY
 GROUP BY day
 ORDER BY day
