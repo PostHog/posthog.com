@@ -4099,7 +4099,8 @@ export const docsMenu = {
             url: '/docs/replay-vision',
             color: 'yellow',
             icon: 'IconEye',
-            description: 'Use AI to automatically watch your session recordings and turn what it sees into queryable data',
+            description:
+                'Use AI to automatically watch your session recordings and turn what it sees into queryable data',
             featureFlag: 'replay-vision-docs',
             children: [
                 {
@@ -5151,6 +5152,7 @@ export const docsMenu = {
                     featured: true,
                     children: [
                         { name: 'Overview', url: '/docs/surveys/installation' },
+                        { name: 'Android', url: '/docs/surveys/installation/android' },
                         { name: 'Angular', url: '/docs/surveys/installation/angular' },
                         { name: 'Astro', url: '/docs/surveys/installation/astro' },
                         { name: 'Bubble', url: '/docs/surveys/installation/bubble' },
