@@ -363,6 +363,8 @@ export default function HomeTest() {
                 body={rawBody}
                 mdxBody={mdxBody}
                 maxWidth={900}
+                readOnly
+                contentClassName="font-rounded"
                 cta={{
                     url: `https://${
                         posthog?.isFeatureEnabled?.('direct-to-eu-cloud') ? 'eu' : 'app'

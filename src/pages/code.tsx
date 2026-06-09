@@ -1581,7 +1581,7 @@ export default function CodePage() {
                 title="PostHog Code"
                 description="PostHog Code uses signals from production data to diagnose issues and generate pull requests – before you even know there's a problem."
             />
-            <Editor slug="/code" maxWidth="100%" hasPadding={false}>
+            <Editor slug="/code" maxWidth="100%" hasPadding={false} disableFormatting>
                 <div className="@container not-prose font-rounded">
                     <header className="relative mb-12">
                         <CloudinaryImage
