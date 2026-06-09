@@ -87,8 +87,6 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSuccess }) => {
                 }
                 rightNavigation={
                     <div className="flex items-center space-x-2">
-                        {errorMessage && <p className="text-red text-sm m-0 font-bold">{errorMessage}</p>}
-
                         <CallToAction
                             disabled={isSubmitting}
                             type="primary"
@@ -144,6 +142,8 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSuccess }) => {
                             />
                             <button type="submit" className="hidden" />
                         </form>
+                        {errorMessage && <p className="text-red text-sm -mt-2 mb-2 font-bold">{errorMessage}</p>}
+
                         <div className="text-sm">
                             No account yet?{' '}
                             <button className="text-red dark:text-yellow font-semibold" onClick={openRegister}>
