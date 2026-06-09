@@ -4,7 +4,7 @@ date: 2026-06-08
 author:
     - tyler-crandall
 featuredImage: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/gardening_hog_9baff096a6.png
+    https://res.cloudinary.com/dmukukwp6/image/upload/haha3_c997bbaf98.png
 featuredImageType: full
 category: General
 tags:
@@ -61,15 +61,13 @@ Render a compact scorecard, not a wall of text:
 
 Pick the 1–2 highest-leverage paths and state them as a one-line headline with rationale. Some examples of strong triggers:
 
-| Signal in the snapshot | Recommended move |
-|---|---|
-| High-revenue account still on a monthly contract | Annual conversion fit |
-| Credit balance running low vs. burn rate | Start the renewal conversation now |
-| Clear product fit with zero spend | Cross-sell scan |
-| Fast month-over-month growth | Find what's driving it |
-| Forecasted revenue dropping below current | Usage is decaying — dig in |
-| All activity tracing to one person | Broaden the relationship |
-| Low health score or no recent activity | Reconnect first, analyze second |
+- High-revenue account still on a monthly contract → Annual conversion fit
+- Credit balance running low vs. burn rate → Start the renewal conversation now
+- Clear product fit with zero spend → Cross-sell scan
+- Fast month-over-month growth → Find what's driving it
+- Forecasted revenue dropping below current → Usage is decaying, dig in
+- All activity tracing to one person → Broaden the relationship
+- Low health score or no recent activity → Reconnect first, analyze second
 
 If nothing stands out, say so plainly: *"No standout signal — pick a path below."*
 
