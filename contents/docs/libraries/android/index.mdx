@@ -12,7 +12,7 @@ features:
   sessionRecording: true
   featureFlags: true
   groupAnalytics: true
-  surveys: false
+  surveys: true
   aiObservability: false
   errorTracking: true
   logs: true
@@ -287,6 +287,32 @@ To set up [logs](/docs/logs) in your Android app, follow the [Android logs insta
 ## Session replay
 
 To set up [session replay](/docs/session-replay/mobile) in your project, all you need to do is install the Android SDK, enable "Record user sessions" in [your project settings](https://us.posthog.com/settings/project-replay) and enable the `sessionReplay` option.
+
+## Surveys
+
+[Surveys](/docs/surveys) launched with [popover presentation](/docs/surveys/creating-surveys#presentation) are automatically shown to users matching the [display conditions](/docs/surveys/creating-surveys#display-conditions) you set up.
+
+To render them, add the optional `posthog-android-surveys-compose` module alongside the core SDK. It provides a ready-made [Jetpack Compose](https://developer.android.com/jetpack/compose) UI, kept in a separate module so apps that don't use surveys don't pay the extra APK size cost.
+
+```kotlin file=app/build.gradle.kts
+dependencies {
+    implementation("com.posthog:posthog-android:3.+")
+    implementation("com.posthog:posthog-android-surveys-compose:0.+")
+}
+```
+
+Once added, enable surveys in your config and the SDK renders matching surveys automatically — no extra wiring required:
+
+```kotlin
+val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST).apply {
+    surveys = true
+}
+PostHogAndroid.setup(applicationContext, config)
+```
+
+> **Note:** The `posthog-android-surveys-compose` module is currently pre-1.0 (`0.x`), so its public API may change between minor versions.
+
+To build your own survey UI instead, skip the module and set a custom implementation of `PostHogSurveysDelegate` on `config.surveysConfig.surveysDelegate`.
 
 ## Offline behavior
 
