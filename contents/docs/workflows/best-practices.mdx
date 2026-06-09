@@ -74,7 +74,8 @@ Before a full rollout: test with internal users or a small percentage of real us
 Ensure that failures (e.g. email bounce, webhook error) are captured and surfaced. When facing a problem, check the “[Troubleshooting & FAQs](/docs/workflows/troubleshooting)” section for Workflows.
 
 For long-running workflows (with delays), track user state (which step they are in), and provide a way to debug or abort if something goes wrong.
-Periodically review metrics: how many messages sent, how many workflows triggered, bounce/failure rate, etc.
+
+Periodically review the **Metrics** tab in the workflow builder. The overview shows workflow-level summary metrics – started, in progress, completed, and emails sent. Select an individual email action to see email-specific metrics – sent, delivered, opened, clicked, bounced, blocked, and marked as spam.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_12_05_at_14_38_35_2x_908da89b7a.png"
