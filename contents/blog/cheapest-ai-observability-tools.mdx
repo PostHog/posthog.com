@@ -47,72 +47,6 @@ The best tools go further with:
 - **Dataset curation and experiments:** Build golden datasets from production traces
 - **Self-hosting:** Keep all data in your own infrastructure for privacy or compliance
 
-<ProductComparisonTable
-    competitors={[
-        'posthog',
-        'langfuse',
-        'traceloop',
-        'arize',
-        'lunary',
-        'honeyhive',
-        'langsmith',
-        'braintrust',
-        'datadog',
-        'dynatrace',
-        'fiddler',
-        'wandb',
-    ]}
-    rows={[
-        { label: 'Pricing & free tier' },
-        {
-            label: 'Evergreen free tier',
-            description: 'Ongoing free plan (not time-limited trial).',
-            values: [true, true, true, true, true, true, true, true, true, false, true, true],
-        },
-        {
-            label: 'Free events/month',
-            description: 'Monthly included events/usage on the free plan.',
-            values: [
-                '100K',
-                '50K',
-                '50K',
-                '25K',
-                '10K',
-                '10K',
-                '5K',
-                'Up to $10 credits',
-                '40K',
-                false,
-                'Not disclosed',
-                'Not disclosed',
-            ],
-        },
-        {
-            label: 'Free data retention',
-            description: 'Default data retention included on the free plan.',
-            values: [
-                '30 days',
-                '30 days',
-                '24 hours',
-                '7 days',
-                '30 days',
-                '30 days',
-                '14 days',
-                '14 days',
-                '15 days',
-                false,
-                'Not disclosed',
-                'Not disclosed',
-            ],
-        },
-        {
-            label: 'Free seats',
-            description: 'Included user seats on the free plan.',
-            values: ['Unlimited', '2', '5', '1', '1', '5', '1', 'Unlimited', 'Unlimited', false, 'Not disclosed', '5'],
-        },
-    ]}
-/>
-
 ## Tools with a real free tier
 
 These tools let you keep using the product indefinitely without paying, even when you hit caps.
@@ -148,7 +82,41 @@ Teams building AI features inside a real product who want traces, evals, and cos
 
 ### 2. Langfuse
 
-**Langfuse** is a focused LLM engineering platform for tracing, prompt management, datasets, and evals – early in this category and still the benchmark for depth in LLM-native workflows. 
+<ProductComparisonTable
+    competitors={[
+        'posthog',
+        'langfuse',
+    ]}
+    rows={[        {
+            label: 'Evergreen free tier',
+            description: 'Ongoing free plan (not time-limited trial).',
+            values: [true, true],
+        },
+        {
+            label: 'Free events/month',
+            description: 'Monthly included events/usage on the free plan.',
+            values: [
+                '100K',
+                '50K',
+            ],
+        },
+        {
+            label: 'Free data retention',
+            description: 'Default data retention included on the free plan.',
+            values: [
+                '30 days',
+                '30 days',
+            ],
+        },
+        {
+            label: 'Free seats',
+            description: 'Included user seats on the free plan.',
+            values: ['Unlimited', '2'],
+        },
+    ]}
+/>
+
+**Langfuse** is a focused LLM engineering platform for tracing, prompt management, datasets, and evals – early in this category and still the benchmark for depth in LLM-native workflows.
 
 It offers prompt versioning and A/B testing, LLM-as-judge scoring, human annotation workflows, and dataset-based experiments, all in an OpenTelemetry-native platform that is MIT-licensed and self-hostable at scale.
 
@@ -169,6 +137,33 @@ Teams that want a dedicated, open-source LLM engineering platform with deep eval
 </CalloutBox>
 
 ### 3. Traceloop (OpenLLMetry)
+
+
+<ProductComparisonTable
+    competitors={['posthog', 'traceloop']}
+    rows={[
+        {
+            label: 'Evergreen free tier',
+            description: 'Ongoing free plan (not time-limited trial).',
+            values: [true, true],
+        },
+        {
+            label: 'Free events/month',
+            description: 'Monthly included events/usage on the free plan.',
+            values: ['100K', '50K'],
+        },
+        {
+            label: 'Free data retention',
+            description: 'Default data retention included on the free plan.',
+            values: ['30 days', '24 hours'],
+        },
+        {
+            label: 'Free seats',
+            description: 'Included user seats on the free plan.',
+            values: ['Unlimited', '5'],
+        },
+    ]}
+/>
 
 OpenLLMetry is an Apache-2.0 OpenTelemetry layer for LLM apps. 
 
@@ -194,6 +189,32 @@ Developers who want vendor-neutral, OpenTelemetry-native instrumentation they ca
 
 ### 4. Arize (Phoenix)
 
+<ProductComparisonTable
+    competitors={['posthog', 'arize']}
+    rows={[
+        {
+            label: 'Evergreen free tier',
+            description: 'Ongoing free plan (not time-limited trial).',
+            values: [true, true],
+        },
+        {
+            label: 'Free events/month',
+            description: 'Monthly included events/usage on the free plan.',
+            values: ['100K', '25K'],
+        },
+        {
+            label: 'Free data retention',
+            description: 'Default data retention included on the free plan.',
+            values: ['30 days', '7 days'],
+        },
+        {
+            label: 'Free seats',
+            description: 'Included user seats on the free plan.',
+            values: ['Unlimited', '1'],
+        },
+    ]}
+/>
+
 **Arize** built Phoenix, a popular open source AI observability project with no limits on traces, retention, or users when self-hosted.
 
 Phoenix is the open-source core: OpenTelemetry-based tracing, versioned datasets, experiments, a prompt playground, and built-in evaluators for faithfulness, relevance, hallucination, and toxicity, all runnable locally with no limits. 
@@ -216,6 +237,32 @@ Teams already running Phoenix locally who want a hosted, OpenTelemetry-based obs
 
 ### 5. Lunary
 
+<ProductComparisonTable
+    competitors={['posthog', 'lunary']}
+    rows={[
+        {
+            label: 'Evergreen free tier',
+            description: 'Ongoing free plan (not time-limited trial).',
+            values: [true, true],
+        },
+        {
+            label: 'Free events/month',
+            description: 'Monthly included events/usage on the free plan.',
+            values: ['100K', '10K'],
+        },
+        {
+            label: 'Free data retention',
+            description: 'Default data retention included on the free plan.',
+            values: ['30 days', '30 days'],
+        },
+        {
+            label: 'Free seats',
+            description: 'Included user seats on the free plan.',
+            values: ['Unlimited', '1'],
+        },
+    ]}
+/>
+
 **Lunary** is a lean observability layer for LLM apps with prompts, analytics, human review, and agent tracing. Alongside tracing and cost tracking per user, session, and model, it threads conversations so you can follow a full multi-turn exchange, and it collects feedback directly from end users rather than only from internal annotators.
 
 It is lighter than Langfuse or Phoenix, which is the point: a refined layer for teams that want conversation-level threading and prompt collaboration without a heavyweight platform.
@@ -235,6 +282,33 @@ Solo developers building chatbots or RAG apps who want lightweight tracing, prom
 </CalloutBox>
 
 ### 6. HoneyHive
+
+
+<ProductComparisonTable
+    competitors={['posthog', 'honeyhive']}
+    rows={[
+        {
+            label: 'Evergreen free tier',
+            description: 'Ongoing free plan (not time-limited trial).',
+            values: [true, true],
+        },
+        {
+            label: 'Free events/month',
+            description: 'Monthly included events/usage on the free plan.',
+            values: ['100K', '10K'],
+        },
+        {
+            label: 'Free data retention',
+            description: 'Default data retention included on the free plan.',
+            values: ['30 days', '30 days'],
+        },
+        {
+            label: 'Free seats',
+            description: 'Included user seats on the free plan.',
+            values: ['Unlimited', '5'],
+        },
+    ]}
+/>
 
 **HoneyHive** targets production agent observability with OpenTelemetry-native ingestion, evals, and prompt studio features. It shows up in enterprise case studies but still offers a self-serve developer tier.
 
@@ -257,6 +331,32 @@ Small teams building production agents who want OpenTelemetry-native tracing and
 
 ### 7. LangSmith
 
+<ProductComparisonTable
+    competitors={['posthog', 'langsmith']}
+    rows={[
+        {
+            label: 'Evergreen free tier',
+            description: 'Ongoing free plan (not time-limited trial).',
+            values: [true, true],
+        },
+        {
+            label: 'Free events/month',
+            description: 'Monthly included events/usage on the free plan.',
+            values: ['100K', '5K'],
+        },
+        {
+            label: 'Free data retention',
+            description: 'Default data retention included on the free plan.',
+            values: ['30 days', '14 days'],
+        },
+        {
+            label: 'Free seats',
+            description: 'Included user seats on the free plan.',
+            values: ['Unlimited', '1'],
+        },
+    ]}
+/>
+
 LangSmith is the platform layer in LangChain's stack: LangChain is the framework, LangGraph the orchestration runtime, and LangSmith the place you trace, evaluate, and now deploy agents.
 
 Its tracing goes deeper into that ecosystem than anyone else's – node-by-node state diffs, full execution graphs, and model-plus-tool breakdowns you can replay against new model versions – and its eval framework spans datasets, LLM-as-judge, human annotation queues, and pairwise comparison, both pre-ship and on live traffic.
@@ -276,6 +376,32 @@ Teams building on LangChain or LangGraph who want first-party tracing, evaluatio
 </CalloutBox>
 
 ### 8. Braintrust
+
+<ProductComparisonTable
+    competitors={['posthog', 'braintrust']}
+    rows={[
+        {
+            label: 'Evergreen free tier',
+            description: 'Ongoing free plan (not time-limited trial).',
+            values: [true, true],
+        },
+        {
+            label: 'Free events/month',
+            description: 'Monthly included events/usage on the free plan.',
+            values: ['100K', 'Up to $10 credits'],
+        },
+        {
+            label: 'Free data retention',
+            description: 'Default data retention included on the free plan.',
+            values: ['30 days', '14 days'],
+        },
+        {
+            label: 'Free seats',
+            description: 'Included user seats on the free plan.',
+            values: ['Unlimited', 'Unlimited'],
+        },
+    ]}
+/>
 
 **Braintrust** focuses on tracing, evals, and scoring with a strong Loop agent story for automated quality work. It is popular with teams that treat evals as product infrastructure.
 
@@ -301,6 +427,33 @@ These tools either gate full access behind a time-limited trial, bundle LLM obse
 
 ### 1. Datadog LLM Observability
 
+
+<ProductComparisonTable
+    competitors={['posthog', 'datadog']}
+    rows={[
+        {
+            label: 'Evergreen free tier',
+            description: 'Ongoing free plan (not time-limited trial).',
+            values: [true, false],
+        },
+        {
+            label: 'Free events/month',
+            description: 'Monthly included events/usage on the free plan.',
+            values: ['100K', '40K'],
+        },
+        {
+            label: 'Free data retention',
+            description: 'Default data retention included on the free plan.',
+            values: ['30 days', '15 days'],
+        },
+        {
+            label: 'Free seats',
+            description: 'Included user seats on the free plan.',
+            values: ['Unlimited', 'Unlimited'],
+        },
+    ]}
+/>
+
 [Datadog](/blog/best-datadog-alternatives) bolts LLM tracing onto its established APM and infrastructure platform. 
 
 The appeal is correlation: LLM spans sit next to your application traces, host metrics, and logs, so an AI feature becomes one more layer in the same dashboards your ops team already watches.
@@ -325,6 +478,32 @@ Enterprises already standardized on Datadog who want LLM traces correlated with 
 
 ### 2. Dynatrace
 
+<ProductComparisonTable
+    competitors={['posthog', 'dynatrace']}
+    rows={[
+        {
+            label: 'Evergreen free tier',
+            description: 'Ongoing free plan (not time-limited trial).',
+            values: [true, false],
+        },
+        {
+            label: 'Free events/month',
+            description: 'Monthly included events/usage on the free plan.',
+            values: ['100K', false],
+        },
+        {
+            label: 'Free data retention',
+            description: 'Default data retention included on the free plan.',
+            values: ['30 days', false],
+        },
+        {
+            label: 'Free seats',
+            description: 'Included user seats on the free plan.',
+            values: ['Unlimited', false],
+        },
+    ]}
+/>
+
 **Dynatrace** is a full observability platform that folds AI and LLM monitoring into its Davis AI engine. Like Datadog, the pitch is one platform for application, infrastructure, and AI telemetry, aimed at large enterprises.
 
 Its Davis AI engine does causal root-cause analysis across the whole stack, and Grail, its data lakehouse, stores traces, logs, and metrics together so AI telemetry is queryable alongside everything else. For LLM apps, that means anomalies in latency, cost, or output quality get tied back to the underlying infrastructure automatically.
@@ -344,6 +523,32 @@ Large enterprises already running Dynatrace who want AI and LLM monitoring unifi
 </CalloutBox>
 
 ### 3. Fiddler AI
+
+<ProductComparisonTable
+    competitors={['posthog', 'fiddler']}
+    rows={[
+        {
+            label: 'Evergreen free tier',
+            description: 'Ongoing free plan (not time-limited trial).',
+            values: [true, 'Guardrails only'],
+        },
+        {
+            label: 'Free events/month',
+            description: 'Monthly included events/usage on the free plan.',
+            values: ['100K', false],
+        },
+        {
+            label: 'Free data retention',
+            description: 'Default data retention included on the free plan.',
+            values: ['30 days', false],
+        },
+        {
+            label: 'Free seats',
+            description: 'Included user seats on the free plan.',
+            values: ['Unlimited', false],
+        },
+    ]}
+/>
 
 **Fiddler AI** is an enterprise AI observability and security platform that leans into governance: real-time guardrails for hallucination, toxicity, PII/PHI, and prompt injection alongside tracing for agentic and predictive systems. 
 
@@ -366,6 +571,32 @@ Regulated enterprises and government teams that need AI observability bundled wi
 </CalloutBox>
 
 ### 4. Weights & Biases (Weave)
+
+<ProductComparisonTable
+    competitors={['posthog', 'weave']}
+    rows={[
+        {
+            label: 'Evergreen free tier',
+            description: 'Ongoing free plan (not time-limited trial).',
+            values: [true, false],
+        },
+        {
+            label: 'Free events/month',
+            description: 'Monthly included events/usage on the free plan.',
+            values: ['100K', false],
+        },
+        {
+            label: 'Free data retention',
+            description: 'Default data retention included on the free plan.',
+            values: ['30 days', false],
+        },
+        {
+            label: 'Free seats',
+            description: 'Included user seats on the free plan.',
+            values: ['Unlimited', '5'],
+        },
+    ]}
+/>
 
 **Weave** is Weights & Biases' GenAI layer, and its pull is continuity for teams already living in W&B for model training. LLM traces and evals land in the same workspace as experiment tracking, so you can correlate a fine-tune or model swap with downstream app behavior. 
 
