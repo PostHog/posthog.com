@@ -56,7 +56,7 @@ sequenceDiagram
     PH-->>P: { url, expires_at }
     P-->>U: redirect to url
     U->>PH: GET /agentic/login?token=...
-    PH-->>U: redirect to /project/N (session minted)
+    PH-->>U: redirect to path (session minted)
 ```
 
 ## Set up as a partner
@@ -246,7 +246,7 @@ curl -X POST https://us.posthog.com/api/agentic/oauth/token \
 ```json
 {
   "token_type": "bearer",
-  "access_token": "phx_abc123...",
+  "access_token": "pha_abc123...",
   "refresh_token": "phr_def456...",
   "expires_in": 3600,
   "account": {
@@ -283,7 +283,7 @@ Use the access token to provision a PostHog project and get credentials.
 ```bash
 curl -X POST https://us.posthog.com/api/agentic/provisioning/resources \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer phx_abc123..." \
+  -H "Authorization: Bearer pha_abc123..." \
   -H "API-Version: 0.1d" \
   -d '{
     "service_id": "analytics",
@@ -299,7 +299,7 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/resources \
 | Field | Type | Required | Description |
 |---|---|---|---|
 | `service_id` | string | No | The plan to provision. `"analytics"` (default) provisions a standard project. `"free"` and `"pay_as_you_go"` set the billing plan explicitly. |
-| `label_prefix` | string | No | Label prefix for the personal API key shown in PostHog, up to 25 characters. The key is labeled `{label_prefix} - {team_name}`. If omitted, empty, or whitespace-only, the key is labeled with just the team name. |
+| `label_prefix` | string | No | Label prefix for the provisioned personal API key, up to 25 characters, used only when a personal API key is issued (off by default). When issued, the key is labeled `{label_prefix} - {team_name}`; if omitted, empty, or whitespace-only, just the team name. |
 | `configuration.project_name` | string | No | Project name (defaults to `"Default project"`) |
 
 **Response** (HTTP 200):
@@ -312,8 +312,7 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/resources \
   "complete": {
     "access_configuration": {
       "api_key": "phc_abc123...",
-      "host": "https://us.posthog.com",
-      "personal_api_key": "phx_def456..."
+      "host": "https://us.posthog.com"
     }
   }
 }
@@ -325,7 +324,8 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/resources \
 |---|---|
 | `api_key` | The project token (starts with `phc_`) – use this to initialize PostHog SDKs |
 | `host` | The API host (`https://us.posthog.com` or `https://eu.posthog.com`) |
-| `personal_api_key` | A personal API key scoped to this project – use this for the PostHog API |
+
+For authenticated REST API calls, use the OAuth `access_token` from [Step 2](#step-2-exchange-the-code-for-tokens) as a `Bearer` token. It carries the [scopes](#available-scopes) you requested in the account request. Provisioning does not return a `personal_api_key` in this response.
 
 ### Deep linking
 
@@ -334,10 +334,10 @@ For recurring deep links from your application into PostHog – the most common 
 ```bash
 curl -X POST https://us.posthog.com/api/agentic/provisioning/deep_links \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer phx_abc123..." \
+  -H "Authorization: Bearer pha_abc123..." \
   -H "API-Version: 0.1d" \
   -d '{
-    "purpose": "dashboard"
+    "path": "/project/12345/replay/019e6d10-c3b0-7000-8000-000000000000"
   }'
 ```
 
@@ -347,7 +347,10 @@ Authenticate with the `access_token` you got from [Step 2](#step-2-exchange-the-
 
 | Field | Type | Required | Description |
 |---|---|---|---|
-| `purpose` | string | No | What the deep link should land on. Currently only `dashboard` is supported. Defaults to `dashboard`. |
+| `path` | string | No | The in-app path to land the user on after login, for example `/project/12345/replay/<recording_id>`. Must be a relative, same-origin path beginning with a single `/`. If omitted, the link lands on the project home (`/project/<team_id>`). |
+| `purpose` | string | No | Free-form label recorded for your own analytics. Defaults to `dashboard`. It does not affect where the link lands – use `path` for that. |
+
+The `path` is validated when the link is minted and again when it's opened. PostHog rejects open-redirect forms (absolute URLs, protocol-relative `//`, backslashes, and `javascript:`) as well as control characters and whitespace. To find the path for a destination, open it in PostHog and copy everything after the host, including the leading `/`.
 
 **Response:**
 
@@ -367,12 +370,12 @@ This endpoint is gated on the `provisioning_can_issue_deep_links` flag on your p
 
 ### Rotate project credentials
 
-Rotate the project token and create a new personal API key for an existing provisioned project:
+Rotate the project token for an existing provisioned project:
 
 ```bash
 curl -X POST https://us.posthog.com/api/agentic/provisioning/resources/12345/rotate_credentials \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer phx_abc123..." \
+  -H "Authorization: Bearer pha_abc123..." \
   -H "API-Version: 0.1d" \
   -d '{
     "label_prefix": "Acme Co"
@@ -383,9 +386,9 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/resources/12345/rot
 
 | Field | Type | Required | Description |
 |---|---|---|---|
-| `label_prefix` | string | No | Label prefix for the new personal API key shown in PostHog, up to 25 characters. The key is labeled `{label_prefix} - {team_name}`. If omitted, empty, or whitespace-only, the key is labeled with just the team name. |
+| `label_prefix` | string | No | Label prefix for the personal API key, up to 25 characters, used only when a personal API key is issued (off by default). When issued, the key is labeled `{label_prefix} - {team_name}`; if omitted, empty, or whitespace-only, just the team name. |
 
-The response has the same shape as the project provisioning response and includes the rotated `api_key`, `host`, and new `personal_api_key`.
+The response has the same shape as the project provisioning response and includes the rotated `api_key` and `host`.
 
 ### Refresh tokens
 
@@ -403,22 +406,23 @@ curl -X POST https://us.posthog.com/api/agentic/oauth/token \
 ```json
 {
   "token_type": "bearer",
-  "access_token": "phx_new_token...",
+  "access_token": "pha_new_token...",
   "refresh_token": "phr_new_refresh...",
   "expires_in": 3600
 }
 ```
 
-Each refresh token is single-use. The response includes a new refresh token for subsequent refreshes.
+Each refresh token is single-use. The response includes a new refresh token for subsequent refreshes. Refreshing can only keep or narrow a token's scopes, never add them. To grant additional scopes, request them in a new account request; they apply to connections provisioned afterward.
 
 ### Available scopes
 
-The `scopes` field in the account request controls what permissions the access token receives. If omitted, a default set of scopes is granted. Available scopes:
+The `scopes` field in the account request controls what permissions the access token receives. If omitted, a default set of scopes is granted. The default set does not include every scope below, so explicitly request the scopes your integration needs. Available scopes:
 
 | Scope | Description |
 |---|---|
 | `customer_journey:read` | Read customer journey data |
 | `query:read` | Execute read-only queries |
+| `session_recording:read` | Read session recordings |
 | `conversation:read` | Read PostHog AI conversations |
 | `conversation:write` | Create and update PostHog AI conversations |
 | `experiment:read` | Read experiments |
@@ -476,6 +480,7 @@ Common error codes:
 | `expired` | 400 | Account request has expired |
 | `invalid_grant` | 400 | Authorization code is invalid or expired (token endpoint) |
 | `invalid_label_prefix` | 400 | `label_prefix` is not a string, is longer than 25 characters after trimming, or contains control or Unicode format characters |
+| `invalid_path` | 400 | Deep-link `path` is not a relative, same-origin in-app path beginning with a single `/` |
 | `invalid_scope` | 400 | Unrecognized scope requested |
 | `rate_limited` | 429 | Rate limit exceeded |
 | `account_creation_failed` | 500 | Server error during account creation |
@@ -607,7 +612,6 @@ async function provisionPostHogAccount(email, name) {
     type: 'provisioned',
     apiKey: resource.complete.access_configuration.api_key,
     host: resource.complete.access_configuration.host,
-    personalApiKey: resource.complete.access_configuration.personal_api_key,
     projectId: resource.id,
     accessToken: tokens.access_token,
     refreshToken: tokens.refresh_token,
@@ -615,10 +619,10 @@ async function provisionPostHogAccount(email, name) {
 }
 ```
 
-For the "Open in PostHog" button, call this from your click handler with the user's stored `access_token`, then redirect the browser to the returned URL:
+For the "Open in PostHog" button, call this from your click handler with the user's stored `access_token`, then redirect the browser to the returned URL. Pass a `path` to land the user on a specific page, or omit it to land on the project home:
 
 ```javascript
-async function getDeepLinkUrl(accessToken) {
+async function getDeepLinkUrl(accessToken, path) {
   const res = await fetch(
     `${BASE_URL}/api/agentic/provisioning/deep_links`,
     {
@@ -628,7 +632,7 @@ async function getDeepLinkUrl(accessToken) {
         Authorization: `Bearer ${accessToken}`,
         'API-Version': '0.1d',
       },
-      body: JSON.stringify({ purpose: 'dashboard' }),
+      body: JSON.stringify(path ? { path } : {}),
     }
   );
 
