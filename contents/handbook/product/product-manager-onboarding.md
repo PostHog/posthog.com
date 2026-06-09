@@ -71,7 +71,7 @@ There is not one person alone who can assess the success of a new PM. Instead, t
 - Keeper test: If the PM were to leave, would you feel the loss, and fight to keep them?
 
 **Questions for the small team leads:**
-- Does the PM make your job easier, by the context & user feedback they facilitate?
+- Can you see the PM bringing value to the team, by the context & user feedback they facilitate?
 - Does the PM create a collaborative environment in the team, vs. a confrontational one?
 - Does the PM's work, and ways of working, energise the team vs. draining them?
 - Keeper test: If the PM were to leave your team, would you feel the loss, and fight to keep them?
