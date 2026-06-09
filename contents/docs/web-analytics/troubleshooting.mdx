@@ -153,12 +153,9 @@ If users are online but not sending events (e.g., reading a nicely written blog 
 
 Ingestion delays can also cause the count not to update as expected.
 
-## What does the "new query engine" or "pre-computed" badge mean?
+## What does the pre-computed badge mean?
 
-Some Web Analytics tiles show a small icon in their top-right corner indicating they were served by our new query engine. You'll see one of two states:
-
-- **New query engine** – the tile ran a live query, just against a more efficient, pre-aggregated shape of your data. Results are exact.
-- **Pre-computed** – the tile read from data we computed and had ready ahead of time, rather than querying live when you opened it.
+Some Web Analytics tiles show a small icon in their top-right corner – a lightning bolt, or a database with a lightning bolt. It means the tile's data is pre-computed: we calculated it and had it ready ahead of time, rather than running a live query when you opened the tile.
 
 Pre-computed results have a TTL and are re-computed on a regular cadence, so the data you see should be fresh. They should be very close to a live query – typically within ~1% – but aren't guaranteed to be exact.
 
