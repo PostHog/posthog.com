@@ -1980,11 +1980,6 @@
             "source": "/handbook/brand/design-principles",
             "destination": "/handbook/brand/foundations"
         },
-        { "source": "/login", "destination": "https://app.posthog.com/login" },
-        {
-            "source": "/docs/cdp/sources/custom-rest",
-            "destination": "/docs/cdp/sources/custom-rest-source",
-            "statusCode": 301
-        }
+        { "source": "/login", "destination": "https://app.posthog.com/login" }
     ]
 }
