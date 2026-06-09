@@ -7,6 +7,7 @@ import useProduct from 'hooks/useProduct'
 import { useCustomers } from 'hooks/useCustomers'
 import { useProductInterest } from 'hooks/useProductInterest'
 import { docsMenu } from '../../../navs'
+import { useActiveFeatureFlags, filterMenuByFlags } from '../../../hooks/useActiveFeatureFlags'
 import SlideThumbnails from './SlideThumbnails'
 import OverviewSlideColumns from './OverviewSlide/OverviewSlideColumns'
 import OverviewSlideStacked from './OverviewSlide/OverviewSlideStacked'
@@ -60,6 +61,10 @@ export default function SlidesTemplate({
     // Get product data early to check for AI section
     const productData = useProduct({ handle: productHandle }) as any
     const { websiteMode } = useApp()
+    // Filter the docs menu by feature flags so flag-gated entries (e.g. beta products)
+    // aren't surfaced to visitors who shouldn't see them. Fails closed during SSR.
+    const activeFlags = useActiveFeatureFlags()
+    const filteredDocsChildren = filterMenuByFlags(docsMenu.children, activeFlags) || []
 
     // Track product interest for cross-subdomain cookie
     useProductInterest(productData?.slug)
@@ -436,7 +441,7 @@ export default function SlidesTemplate({
                     <DocsSlide
                         productHandle={productData?.slug}
                         docsMenu={
-                            docsMenu.children.find(
+                            filteredDocsChildren.find(
                                 ({ name }) => productData?.name && name.toLowerCase() === productData.name.toLowerCase()
                             )?.children || []
                         }
