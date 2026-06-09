@@ -1,0 +1,42 @@
+---
+title: Query engine
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+
+Web Analytics is backed by a query engine that can serve some tiles from pre-computed data instead of scanning your raw events on every load. This makes the dashboard faster and cheaper to run, especially over long time ranges, while keeping results very close to what a live query would return.
+
+When a tile is served this way, it shows a small icon in its top-right corner. Hover the icon to see how the result was produced and a link back to this page.
+
+## How it works
+
+The engine has two strategies, and the icon tells you which one was used:
+
+- **Optimized with the new query engine** – the tile still runs a live query, but against pre-aggregated tables that summarize your events ahead of time. Results are exact; you're just reading from a more efficient shape of the same data.
+- **Loaded from a pre-computed roll-up** – the tile reads from a roll-up dataset that was computed in advance rather than running a query at all. This is the fastest path, and the one where results are approximate rather than exact.
+
+Both strategies use the same underlying events. The difference is whether the numbers are calculated when you open the tile or recomputed ahead of time and stored.
+
+## How accurate are pre-computed roll-ups?
+
+A pre-computed roll-up is a freshly recomputed summary of your data. It should be very close to querying live data – typically within ~1% – but it isn't guaranteed to be exact.
+
+The small difference comes from how roll-ups are built: they summarize events into a compact form, which trades a little precision for a large gain in speed. For day-to-day analysis – spotting trends, comparing periods, and understanding where your traffic comes from – the difference is rarely meaningful. If you need exact numbers for a specific figure, run the tile live (see below).
+
+## Turning it off
+
+You can opt out of pre-computed roll-ups so every eligible tile runs a live query instead:
+
+- In the Web Analytics dashboard, open the settings menu in the top-right and turn off **Allow precompute**.
+- Or, hover the icon on any pre-computed tile and click **Always query live data**.
+
+Both control the same setting, which is remembered per browser. Turning it off makes those tiles slower but exact. Tiles that use pre-aggregated tables (the "optimized with the new query engine" icon) stay exact either way and aren't affected by this setting.
+
+## Related
+
+- [Web Analytics dashboard](/docs/web-analytics/dashboard) – the tiles this engine powers
+- [Troubleshooting](/docs/web-analytics/troubleshooting) – when numbers don't look right

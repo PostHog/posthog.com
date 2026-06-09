@@ -3889,6 +3889,12 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'Query engine',
+                    url: '/docs/web-analytics/query-engine',
+                    icon: 'IconBolt',
+                    color: 'yellow',
+                },
+                {
                     name: 'Marketing analytics',
                     url: '/docs/web-analytics/marketing-analytics',
                     icon: 'IconGraph',
