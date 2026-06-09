@@ -39,10 +39,10 @@ AI is helpful for research, outlining, line-editing, and finding weak spots, but
 
 If you need a skeleton of post, many technical blogs look like this:
 
-1. Hook: The surprising result or pain you experience.
-2. Context: What the state of things were. Enough so readers can follow.
-3. Journey: The investigation of what you tried, what failed, and what succeeded. Include the "takeaways" as part of the journey.
-4. Resolution: What actually changed? Give specifics, numbers, and/or visuals if you can.
+1. **Hook:** The surprising result or pain you experience.
+2. **Context:** What the state of things were. Enough so readers can follow.
+3. **Journey:** The investigation of what you tried, what failed, and what succeeded. Include the "takeaways" as part of the journey.
+4. **Resolution:** What actually changed? Give specifics, numbers, and/or visuals if you can.
 
 Use descriptive titles along the way rather generic ones like "Background" or "What we learned." If someone was skimming the piece, would the title give them the details they were looking for?
 
@@ -52,11 +52,11 @@ The general workflow for a post looks like this:
 
 1. Have an idea.
 
-2. Share in the [`#content-and-video-ideas`](https://posthog.slack.com/archives/C015CRUQR7Y) Slack channel or write up outline or draft.
+2. Share in the [`#content-and-video-ideas`](https://posthog.slack.com/archives/C015CRUQR7Y) Slack channel. This is optional, but useful if you want feedback on the idea first. You can also just write up an outline or draft right away.
 
 3. Open pull request of your draft in [posthog.com](https://github.com/PostHog/posthog.com). Blogs go in the [`/contents/blog` folder](https://github.com/PostHog/posthog.com/tree/master/contents/blog) (you can see the format from other blogs there).
 
-4. Get review from someone from the <SmallTeam slug="editorial" /> and (optionally) a relevant teammate.
+4. Get review from someone from the <SmallTeam slug="editorial" /> and (optionally) a relevant teammate. If you're not sure who to ask, message the [`#team-editorial`](https://app.slack.com/client/TSS5W8YQZ/C09GU689J1X) Slack channel with a link to your PR.
 
 5. Iterate on feedback (usual 1-2 rounds).
 
