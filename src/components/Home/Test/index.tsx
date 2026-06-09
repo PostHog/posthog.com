@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'components/Link'
-import { IconHeadset, IconPlayFilled } from '@posthog/icons'
+import Tooltip from 'components/RadixUI/Tooltip'
+import { IconArrowUpRight, IconHeadset, IconPlayFilled } from '@posthog/icons'
 import {
     Digit0,
     Digit1,
@@ -44,16 +45,57 @@ import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 const AppCount = () => <span className="text-xs font-normal">{APP_COUNT} apps</span>
 
+// @PostHog styled as a Slack-style mention chip, with a tooltip explaining the Slackbot.
+const PostHogMention = () => {
+    const [open, setOpen] = useState(false)
+    return (
+        <Tooltip
+            delay={0}
+            open={open}
+            onOpenChange={setOpen}
+            trigger={
+                <span className="bg-blue/10 dark:bg-blue/20 text-blue rounded-md px-1 font-bold whitespace-nowrap cursor-help">
+                    @PostHog
+                </span>
+            }
+        >
+            {/* Dismiss when the link inside is clicked */}
+            <div
+                data-scheme="primary"
+                className="text-primary [&_*]:text-primary max-w-xs text-sm leading-normal font-normal prose"
+                onClick={() => setOpen(false)}
+            >
+                <h3>How it works</h3>
+                <ol>
+                    <li>Add PostHog to your app</li>
+                    <li>
+                        <Link
+                            to="https://posthog.slack.com/marketplace/A03M3FN0RSQ-posthog"
+                            externalNoIcon
+                            className="group underline font-semibold"
+                        >
+                            Install PostHog Slackbot{' '}
+                            <IconArrowUpRight className="size-4 inline-block text-secondary group-hover:text-primary" />
+                        </Link>
+                    </li>
+                    <li>
+                        Tag <code>@PostHog</code> in any Slack thread to ship a fix, ask a data question, or edit
+                        content – without leaving the conversation.
+                    </li>
+                </ol>
+            </div>
+        </Tooltip>
+    )
+}
+
 const Tagline = () => (
     <>
-        {/* @PostHog is styled as a Slack-style mention chip */}
         <h1 className="!text-3xl pt-4">
-            Just ask <span className="bg-blue/10 text-blue rounded px-1 font-bold whitespace-nowrap">@PostHog</span>.
+            Just ask <PostHogMention />.
         </h1>
         <p className="text-balance @xl:text-wrap text-lg">
-            <span className="bg-blue/10 text-blue rounded px-1 font-bold whitespace-nowrap">@PostHog</span> knows your
-            product, customers, and what needs fixing. It answers questions, triages work, writes code, and is always
-            working even when you don't prompt it.
+            <PostHogMention /> knows your product, customers, and what needs fixing. It answers questions, triages work,
+            writes code, and is always working even when you don't prompt it.
         </p>
 
         <p className="text-balance @xl:text-wrap text-secondary">
@@ -63,7 +105,7 @@ const Tagline = () => (
 )
 
 const SecondaryActions = () => (
-    <p className="!text-sm flex items-center gap-2 justify-center @xl:justify-start">
+    <p className="!text-sm flex flex-wrap items-center gap-2 justify-center @xl:min-w-96 @xl:max-w-md">
         <Link
             to="/docs/model-context-protocol"
             state={{ newWindow: true }}
