@@ -25,7 +25,8 @@ Examples include:
 - Searching for session recordings in natural language
 - Summarizing experiment results
 - Writing or debugging SQL with AI
-- [AI summaries in subscriptions](/docs/product-analytics/subscriptions#ai-summaries)
+- AI summaries in [insight and dashboard subscriptions](/docs/product-analytics/subscriptions#ai-summaries)
+- [Prompt subscriptions](/docs/product-analytics/subscriptions#prompt-subscriptions)
 
 ## What doesn't consume AI credits
 
@@ -75,4 +76,7 @@ You’re always in control of your AI credit usage:
 - **Default billing limit:** PostHog sets a default $150 billing limit so you don't accidentally rack up costs without a ceiling
 - **Usage alerts:** Get notified when you hit key thresholds
 
-When you hit your credit limit, AI features pause until your credits reset at the next billing period. For [subscriptions with AI summaries](/docs/product-analytics/subscriptions#when-ai-credits-run-out), scheduled deliveries are skipped and automatically resume when credits are available.
+When you hit your credit limit, AI features pause until your credits reset at the next billing period. For subscriptions:
+
+- **[Prompt subscriptions](/docs/product-analytics/subscriptions#prompt-subscriptions)** are paused entirely and automatically resume when credits are available.
+- **[Insight and dashboard subscriptions with AI summaries](/docs/product-analytics/subscriptions#when-ai-credits-run-out)** continue to deliver on schedule, but without the AI-generated summary.
