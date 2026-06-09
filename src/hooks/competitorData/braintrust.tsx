@@ -1,7 +1,7 @@
 export const braintrust = {
     name: 'Braintrust',
     products: {
-        llm_analytics: {
+        ai_observability: {
             available: true,
             features: {
                 generation_tracking: true,

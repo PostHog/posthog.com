@@ -35,6 +35,7 @@ Positioning is dynamic. See [how we name and position things](#how-we-name-and-p
 - [**Experiments**](/handbook/marketing/positioning/experiments) — A/B testing wired to the same data as everything else
 - [**Data warehouse**](/handbook/marketing/positioning/data-warehouse) — The context layer for your agents, not just a SQL bucket
 - [**Data pipelines**](/handbook/marketing/positioning/data-pipelines) — CDP, reverse-ETL, and transformations bundled — typically 5–10x cheaper than Segment
+- [**Endpoints**](/handbook/marketing/positioning/endpoints) — Turn any saved insight or SQL query into a stable, authenticated HTTP endpoint
 - [**LLM analytics**](/handbook/marketing/positioning/llm-analytics) — Knowing why your LLM-powered feature is bleeding money or shipping nonsense
 - [**PostHog AI**](/handbook/marketing/positioning/posthog-ai) — A query interface that already knows your schema (and your users)
 

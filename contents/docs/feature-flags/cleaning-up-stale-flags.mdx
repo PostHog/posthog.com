@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-Feature flags accumulate, and you're billed for every active flag even if no code explicitly checks it. The web SDK evaluates all active flags by default on load, and server-side calls to `getAllFlags()` include them too. Flags that are fully rolled out, linked to completed experiments, or simply forgotten keep generating costs while adding clutter to your codebase. Cleaning them up reduces your bill, removes tech debt, and makes your remaining flags easier to reason about.
+Feature flags accumulate, and you're billed based on `/flags` requests, not the number of flags in your project. However, a `/flags` request is billable when it evaluates at least one active, billable feature flag, even if your code no longer explicitly checks that flag. The web SDK evaluates active flags by default on load, and server-side calls to `getAllFlags()` include them too. Flags that are fully rolled out, linked to completed experiments, or simply forgotten can keep feature flag requests billable while adding clutter to your codebase. Cleaning them up removes tech debt, reduces unnecessary evaluations, and makes your remaining flags easier to reason about.
 
 This guide covers all the ways to find and remove stale flags, from fully manual to fully automated. Pick what fits your workflow. You can also paste this page's URL or contents into any AI coding agent as a prompt to guide the cleanup process.
 

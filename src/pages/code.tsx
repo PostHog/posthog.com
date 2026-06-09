@@ -4,7 +4,7 @@ import Editor from 'components/Editor'
 import { IconArrowUpRight, IconCheck, IconFlask, IconToggle, IconTrends, IconWarning } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import { Accordion } from 'components/RadixUI/Accordion'
-import { LOGOS, type LogoKey } from 'constants/logos'
+import { LOGOS, type LogoKey, getDarkClassForLogo } from 'constants/logos'
 import TabbedCarousel from 'components/TabbedCarousel'
 import type { TabbedCarouselTab } from 'components/TabbedCarousel'
 import { ChoppyReveal } from 'components/Code/ChoppyReveal'
@@ -666,9 +666,14 @@ function HeroSection() {
                             <WaitlistForm autoFocus />
                         ) : (
                             <>
-                                <OSButton variant="primary" size="lg" onClick={() => setShowForm(true)}>
-                                    Join the waitlist
-                                </OSButton>
+                                <div className="flex flex-wrap items-center gap-2">
+                                    <OSButton variant="primary" size="lg" onClick={() => setShowForm(true)}>
+                                        Join the waitlist
+                                    </OSButton>
+                                    <OSButton variant="secondary" size="lg" asLink to="/code/download">
+                                        Have an invite code?
+                                    </OSButton>
+                                </div>
                                 <p className="text-sm text-secondary mt-4">Test drives begin Spring 2026</p>
                             </>
                         )}
@@ -1149,6 +1154,9 @@ const TableStakes = () => {
                                     <code>Claude Sonnet 4.6</code>
                                 </li>
                                 <li className="text-sm font-bold text-primary">
+                                    <code>Claude Opus 4.8</code>
+                                </li>
+                                <li className="text-sm font-bold text-primary">
                                     <code>Claude Opus 4.7</code>
                                 </li>
                                 <li className="text-sm font-bold text-primary">
@@ -1171,7 +1179,9 @@ const TableStakes = () => {
                                     <img
                                         src={LOGOS[row.logoKey]}
                                         alt=""
-                                        className="size-7 shrink-0 object-contain"
+                                        className={`size-7 shrink-0 object-contain ${getDarkClassForLogo(
+                                            LOGOS[row.logoKey]
+                                        )}`}
                                         aria-hidden
                                     />
                                     <p className="m-0 text-base font-bold text-primary">{row.name}</p>

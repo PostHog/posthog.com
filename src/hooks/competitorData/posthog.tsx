@@ -44,7 +44,7 @@ export const posthog = {
             monitoring: {
                 features: {
                     cron_monitoring: false,
-                    distributed_tracing: false,
+                    distributed_tracing: 'Alpha',
                     release_tracking: true,
                     performance_monitoring: true,
                 },
@@ -145,7 +145,7 @@ export const posthog = {
             observability: {
                 features: {
                     metrics: false,
-                    traces: false,
+                    traces: 'Alpha',
                     infra_monitoring: false,
                     alerting: false,
                 },
@@ -512,7 +512,7 @@ export const posthog = {
                 built_in_analytics: true,
             },
         },
-        llm_analytics: {
+        ai_observability: {
             available: true,
             features: {
                 alerting: true,

@@ -11,7 +11,7 @@ import WistiaVideo from 'components/WistiaVideo'
 import TeamMember from 'components/TeamMember'
 import Link from 'components/Link'
 import ProductList from 'components/ProductList'
-import { getLogo } from '../../constants/logos'
+import { getLogo, getDarkClassForLogo } from '../../constants/logos'
 import WizardCommand from 'components/WizardCommand'
 
 function WizardHeader(): JSX.Element {
@@ -138,7 +138,13 @@ function SupportedFrameworks(): JSX.Element {
                                         className="flex items-center gap-2 text-sm !text-inherit hover:underline"
                                         state={{ newWindow: true }}
                                     >
-                                        {logoUrl && <img src={logoUrl} alt={fw.name} className="size-5 rounded-sm" />}
+                                        {logoUrl && (
+                                            <img
+                                                src={logoUrl}
+                                                alt={fw.name}
+                                                className={`size-5 rounded-sm ${getDarkClassForLogo(logoUrl)}`}
+                                            />
+                                        )}
                                         <span>{fw.name}</span>
                                     </Link>
                                 </li>
