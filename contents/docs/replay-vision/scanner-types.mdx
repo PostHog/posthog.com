@@ -45,7 +45,7 @@ A monitor returns a yes/no verdict for whether the condition in your prompt occu
 
 **On `$recording_observed`** – `scanner_output_verdict` is the string `"yes"`, `"no"`, or `"inconclusive"`. See [observations](/docs/replay-vision/observations#querying-observations-as-events).
 
-{/* SCREENSHOT: scanner-monitor-result — observation detail for a monitor scanner: large verdict badge (yes/no), confidence bar, reasoning with two highlighted citation links. */}
+{/* SCREENSHOT: scanner-monitor-result – observation detail for a monitor scanner: large verdict badge (yes/no), confidence bar, reasoning with two highlighted citation links. */}
 
 ## Classifier
 
@@ -76,7 +76,7 @@ A classifier assigns one or more **tags** from a vocabulary you define. You can 
 
 **On `$recording_observed`** – `scanner_output_tags` is the array of tags.
 
-{/* SCREENSHOT: scanner-classifier-result — observation detail for a classifier: picked tags rendered as colored chips, reasoning beneath. Bonus: the scanner-edit view showing the tag vocabulary table. */}
+{/* SCREENSHOT: scanner-classifier-result – observation detail for a classifier: picked tags rendered as colored chips, reasoning beneath. Bonus: the scanner-edit view showing the tag vocabulary table. */}
 
 ## Scorer
 
@@ -102,7 +102,7 @@ A scorer assigns a **numeric score** on a scale you define – e.g. 0 to 10 for 
 
 **On `$recording_observed`** – `scanner_output_score` is the numeric score. Histograms and percentiles over this field tend to be the most useful insights.
 
-{/* SCREENSHOT: scanner-scorer-result — observation detail for a scorer: large numeric score (e.g. "7 / 10") with a visual meter, reasoning beneath with citations to two friction moments. */}
+{/* SCREENSHOT: scanner-scorer-result – observation detail for a scorer: large numeric score (e.g. "7 / 10") with a visual meter, reasoning beneath with citations to two friction moments. */}
 
 ## Summarizer
 
@@ -127,7 +127,7 @@ A summarizer produces a short prose summary of what happened in the session, plu
 
 **On `$recording_observed`** – the title and summary are available via the `scanner_result` payload on the event. See [observations](/docs/replay-vision/observations#querying-observations-as-events).
 
-{/* SCREENSHOT: scanner-summarizer-result — observation detail for a summarizer: bold title, prose summary beneath with inline citations. */}
+{/* SCREENSHOT: scanner-summarizer-result – observation detail for a summarizer: bold title, prose summary beneath with inline citations. */}
 
 ## Picking a type
 
@@ -146,4 +146,4 @@ Confidence is the model's self-reported certainty. It's useful as a filter (e.g.
 
 Citations are emitted inline in the model's free-text output (the `reasoning` field for monitors, classifiers, and scorers; the `summary` field for summarizers) and rendered as clickable links in the observation detail view. They jump the embedded player to the timestamp the model points at. They're the single best tool for understanding *why* a model returned what it did.
 
-{/* SCREENSHOT: citation-detail — close-up of a reasoning paragraph with two citation links, and a side panel showing the embedded player jumped to one of the cited moments. */}
+{/* SCREENSHOT: citation-detail – close-up of a reasoning paragraph with two citation links, and a side panel showing the embedded player jumped to one of the cited moments. */}

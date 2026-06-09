@@ -12,12 +12,12 @@ Check, in order:
 
 1. **Is the scanner enabled?** Disabled scanners don't sweep. The toggle is on the scanner list and on the scanner detail page.
 2. **Are the filters too narrow?** Try removing all filters and see whether observations start showing up. If they do, re-add filters one at a time to find the culprit.
-3. **Is the sampling rate 0%?** Easy to miss – 0% means every matching session gets skipped.
+3. **Is the sampling rate 0%?** A common oversight – 0% means every matching session gets skipped.
 4. **Is the quota exhausted?** Check the usage meter in the Replay Vision header. A scanner whose background sweep is silenced by the cap will silently produce nothing until quota frees up. See [quota and limits](/docs/replay-vision/quota-and-limits).
 5. **Is your project recording sessions at all?** Replay Vision only sees sessions [Session Replay](/docs/session-replay) has captured. No recordings, no observations.
 6. **Are all the matched sessions ineligible?** If your filters happen to match only very short or no-event sessions, the scanner will produce ineligible observations but no successful ones. See [running scanners – ineligible sessions](/docs/replay-vision/running-scanners#ineligible-sessions).
 
-{/* SCREENSHOT: empty-observations-tab — the Observations tab showing zero observations with the empty-state copy, alongside the scanner editor with the filters block open so the reader can pattern-match. */}
+{/* SCREENSHOT: empty-observations-tab – the Observations tab showing zero observations with the empty-state copy, alongside the scanner editor with the filters block open so the reader can pattern-match. */}
 
 A fast way to confirm the scanner itself works: run it [on-demand](/docs/replay-vision/running-scanners#on-demand-on-a-single-recording) against a recording you know is eligible. If that produces a result, the issue is in the filters, the sampling rate, or the quota – not the scanner config.
 
@@ -92,7 +92,7 @@ Something else went wrong on PostHog's side. These should be rare.
 
 **What to do:** if you see it more than once, [contact support](/questions) with the observation ID.
 
-{/* SCREENSHOT: failed-observation-detail — observation detail in the failed state with one of the kinds (e.g. provider_rejected) shown, kind badge highlighted, human-readable message visible. */}
+{/* SCREENSHOT: failed-observation-detail – observation detail in the failed state with one of the kinds (e.g. provider_rejected) shown, kind badge highlighted, human-readable message visible. */}
 
 ## Something else
 

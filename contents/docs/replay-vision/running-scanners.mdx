@@ -17,7 +17,7 @@ Once a scanner is **enabled**, PostHog runs a background sweep every few minutes
 
 Each `(scanner, session)` pair is only ever observed once. Re-sweeping never produces duplicate observations for the same recording.
 
-{/* SCREENSHOT: scanner-observations-tab — the scanner's Observations tab showing a mix of statuses: a few succeeded rows, one running, one failed, one ineligible. Show the "Triggered by" column with "Schedule" and "On demand" values. */}
+{/* SCREENSHOT: scanner-observations-tab – the scanner's Observations tab showing a mix of statuses: a few succeeded rows, one running, one failed, one ineligible. Show the "Triggered by" column with "Schedule" and "On demand" values. */}
 
 ### When does the next sweep run?
 
@@ -37,7 +37,7 @@ Disabling stops the background sweep. Existing in-flight observations finish; no
 
 Open a recording in the [replay player](/docs/session-replay/how-to-watch-recordings), then use the **Scan this recording** action. Pick the scanner you want to run, and PostHog queues a single observation against that session.
 
-{/* SCREENSHOT: player-scan-flow — two-panel screenshot: (left) replay player with the "Scan this recording" menu item highlighted, (right) the scanner picker open with two scanners listed. */}
+{/* SCREENSHOT: player-scan-flow – two-panel screenshot: (left) replay player with the "Scan this recording" menu item highlighted, (right) the scanner picker open with two scanners listed. */}
 
 On-demand triggers:
 
@@ -69,6 +69,6 @@ Ineligible observations:
 - **Do not count against your [quota](/docs/replay-vision/quota-and-limits).**
 - Are not emitted as `$recording_observed` events – querying observations only ever returns succeeded ones.
 
-{/* SCREENSHOT: ineligible-observation — observation row in the Observations tab marked "Ineligible" with the reason ("too_short") shown alongside, and a detail view explaining the threshold. */}
+{/* SCREENSHOT: ineligible-observation – observation row in the Observations tab marked "Ineligible" with the reason ("too_short") shown alongside, and a detail view explaining the threshold. */}
 
 If you're seeing a lot of ineligibles for one scanner, that's usually a signal to narrow the filters – e.g. exclude sessions below a duration threshold, or require at least one event. See [troubleshooting](/docs/replay-vision/troubleshooting) for more.
