@@ -172,16 +172,14 @@ Organizations have limits on how many active AI summaries they can have. If you'
 
 ### When AI credits run out
 
-If your organization exhausts its [AI credit budget](/docs/posthog-ai/pricing), scheduled deliveries that use AI are temporarily paused:
+If your organization exhausts its [AI credit budget](/docs/posthog-ai/pricing), subscriptions with AI summaries will still deliver on schedule, but without the AI-generated summary:
 
-- The delivery is skipped and no AI tokens are spent.
-- The subscription creator receives an email notification explaining why delivery was skipped and when it will resume.
-- The subscription is automatically rescheduled to resume after your billing period resets.
-- The subscription stays **enabled** and resumes automatically once credits are available – no manual action is needed.
+- The subscription delivers as normal with your insights or dashboard
+- The AI summary is skipped for that delivery
+- No notification is sent since the subscription itself continues to function
+- Once credits are available again, AI summaries automatically resume
 
-This is different from a [disabled subscription](#automatically-disabled-subscriptions). A paused subscription isn't broken and doesn't require manual intervention to resume.
-
-You only receive one notification email per billing cycle, even if multiple scheduled deliveries are skipped.
+This is different from [prompt subscriptions](#prompt-subscriptions) which pause entirely when credits run out, and from [disabled subscriptions](#automatically-disabled-subscriptions) which require manual intervention.
 
 ## Next delivery date
 
