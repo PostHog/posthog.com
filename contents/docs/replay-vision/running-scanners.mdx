@@ -1,0 +1,104 @@
+---
+title: Running scanners
+featureFlag: replay-vision-docs
+noindex: true
+---
+
+There are two ways a scanner produces observations: automatically in the background as new recordings come in, or on-demand against a specific recording you pick. Both paths produce the same observation rows and the same `$recording_observed` events – they only differ in how the work gets triggered.
+
+## Automatically on matching sessions
+
+Once a scanner is **enabled**, PostHog runs a background sweep every few minutes. The sweep:
+
+1. Looks for new recordings that match the scanner's filters and that the scanner hasn't already observed.
+2. Applies the sampling rate to that batch (so a 10% rate means roughly one in ten matching sessions get queued).
+3. Queues an observation per session for the model to process.
+4. Records the result – success, failure, or [ineligible](#ineligible-sessions) – and emits a `$recording_observed` event for successes.
+
+Each `(scanner, session)` pair is only ever observed once. Re-sweeping never produces duplicate observations for the same recording.
+
+{/* SCREENSHOT: scanner-observations-tab — the scanner's Observations tab showing a mix of statuses: a few succeeded rows, one running, one failed, one ineligible. Show the "Triggered by" column with "Schedule" and "On demand" values. */}
+
+### When does the next sweep run?
+
+Sweeps run on a per-scanner schedule. You don't normally need to think about the cadence – just enable the scanner and observations start accumulating within a few minutes. The Observations tab shows the most recent observations across all of the scanner's history.
+
+### What happens when I change filters?
+
+Changing a scanner's filters affects which **new** sessions match going forward. The change does not retroactively rescan old recordings. If you broaden the filters and want to backfill, you can trigger on-demand observations against the recordings you care about (see below), or just wait for new matches to come in.
+
+### What happens when I disable the scanner?
+
+Disabling stops the background sweep. Existing in-flight observations finish; no new ones get queued. On-demand triggers continue to work.
+
+## On-demand on a single recording
+
+### From the replay player
+
+Open a recording in the [replay player](/docs/session-replay/how-to-watch-recordings), then use the **Scan this recording** action. Pick the scanner you want to run, and PostHog queues a single observation against that session.
+
+{/* SCREENSHOT: player-scan-flow — two-panel screenshot: (left) replay player with the "Scan this recording" menu item highlighted, (right) the scanner picker open with two scanners listed. */}
+
+On-demand triggers:
+
+- Work even when the scanner is disabled (only the background sweep respects the toggle).
+- Skip the sampling rate – every on-demand trigger produces an observation if the session is eligible.
+- Are attributed to the user who triggered them, so you can tell apart "human spot-check" observations from "background sweep" observations.
+
+### Via MCP
+
+You can also scan a session programmatically using the [`vision-scanners-scan-session` MCP tool](/docs/model-context-protocol). This is the same code path the player action uses – one observation per call, against a specific scanner and a specific session ID.
+
+A few other Replay Vision MCP tools you'll often use alongside it:
+
+- `vision-observations-list` – list every observation across all scanners for one session.
+- `vision-observations-retrieve` – fetch a single observation by ID.
+- `vision-scanners-observations-list` – list observations one scanner has produced over time.
+- `vision-quota-retrieve` – check remaining monthly quota before queuing on-demand work.
+- `vision-scanners-estimate-create` – project the per-month volume of a hypothetical scanner before creating it.
+
+See the [MCP overview](/docs/model-context-protocol) for how to connect a client, and [creating scanners](/docs/replay-vision/creating-scanners) for the authoring side.
+
+## Ineligible sessions
+
+Some sessions can't be analyzed – there's no recording data, the recording is too short to draw conclusions from, or the user did nothing the model can see. Rather than fail noisily, these come back marked **ineligible**.
+
+The taxonomy:
+
+| Ineligible reason | What it means |
+| --- | --- |
+| `no_recording` | The session referenced doesn't have replay data in storage |
+| `too_short` | The recording is below the minimum duration we'll scan |
+| `too_inactive` | The recording is long enough but the user was idle for almost all of it |
+| `too_long` | The recording is above the maximum duration we'll scan |
+| `no_events` | The recording has no analytics events at all |
+
+Ineligible observations:
+
+- Show up on the scanner's Observations tab with the reason, so you can audit why a session was skipped.
+- **Do not count against your [quota](/docs/replay-vision/quota-and-limits).**
+- Are not emitted as `$recording_observed` events – querying observations only ever returns succeeded ones.
+
+{/* SCREENSHOT: ineligible-observation — observation row in the Observations tab marked "Ineligible" with the reason ("too_short") shown alongside, and a detail view explaining the threshold. */}
+
+If you're seeing a lot of ineligibles for one scanner, that's usually a signal to narrow the filters – e.g. exclude sessions below a duration threshold, or require at least one event. See [troubleshooting](/docs/replay-vision/troubleshooting) for more.
+
+## Observation status lifecycle
+
+Every observation moves through a small state machine. Each state is visible on the Observations tab.
+
+```text
+pending  →  running  →  succeeded
+                    ↘   failed
+                    ↘   ineligible
+```
+
+- **`pending`** – queued, waiting for capacity.
+- **`running`** – actively being processed (rendering the video, calling Gemini, validating the result).
+- **`succeeded`** – terminal. Result saved, `$recording_observed` emitted.
+- **`failed`** – terminal. Something went wrong – see [troubleshooting](/docs/replay-vision/troubleshooting) for the failure kinds.
+- **`ineligible`** – terminal. Session can't be analyzed; see above.
+
+Pending and running observations **count against your quota** – this prevents a burst of concurrent on-demand triggers from blowing past the cap before any of them complete. If an observation ends up failed or ineligible, it stops counting once it reaches the terminal state.
+
+See [observations](/docs/replay-vision/observations) for what the detail view shows in each state, and [querying observations](/docs/replay-vision/querying-observations) for what the resulting events look like.

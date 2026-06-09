@@ -1,0 +1,105 @@
+---
+title: Reading observations
+featureFlag: replay-vision-docs
+noindex: true
+---
+
+An **observation** is one run of a scanner against a single recording. Every observation has a row on its scanner's Observations tab and – for successful ones – a `$recording_observed` event in your project.
+
+This page covers the in-app UI for reading observations. To work with them as events – charting, dashboards, alerts – see [querying observations](/docs/replay-vision/querying-observations).
+
+## Observations tab
+
+Each scanner has an **Observations** tab listing every observation it's produced, sorted by most recent first.
+
+{/* SCREENSHOT: observations-tab-overview — the Observations tab on a scanner: columns for session ID, status, result summary, triggered by (Schedule/On demand), and created time. Show a mix of statuses (succeeded, running, failed, ineligible). */}
+
+You can filter the list by:
+
+- **Status** – succeeded, pending, running, failed, ineligible.
+- **Triggered by** – schedule (background sweep) vs. on-demand.
+- **Result** – type-specific filters, e.g. verdict for monitors, tag for classifiers, score range for scorers.
+
+A separate **Sessions** view shows observations grouped by session – useful when multiple scanners have looked at the same recording and you want to see all their verdicts in one place.
+
+## Observation detail
+
+Clicking into an observation opens the detail view. The shape depends on the scanner type, but every detail view has the same five blocks.
+
+{/* SCREENSHOT: observation-detail-annotated — annotated screenshot of the observation detail page with labelled callouts pointing at each of the five blocks below (result, confidence, reasoning + citations, embedded player, prompt snapshot). */}
+
+### 1. Result
+
+The structured output for this observation, rendered appropriately for the scanner type:
+
+- **Monitor** – large true/false verdict badge.
+- **Classifier** – the picked tags as chips.
+- **Scorer** – the numeric score with the configured scale alongside it.
+- **Summarizer** – the generated title and prose summary.
+
+### 2. Confidence
+
+A 0.0–1.0 number representing how sure the model was about its answer. Treat this as a useful signal for filtering ("only act on high-confidence verdicts"), not as ground truth.
+
+### 3. Reasoning, with citations
+
+The model's plain-language explanation for the result. Wherever the model pointed at a specific moment in the recording, you'll see a clickable citation. Clicking jumps the embedded player to that timestamp.
+
+This is the single most useful block on the page for debugging a scanner. When the model is making bad calls, reading the reasoning next to the moments it cited shows you why.
+
+{/* SCREENSHOT: reasoning-with-citations — close-up of the reasoning section showing two highlighted citation links inline in the text, with the embedded player on the right jumped to one of the cited moments. */}
+
+### 4. Embedded player
+
+The original recording, embedded in the detail view. You can scrub through it normally; citations in the reasoning are deep-links into this player.
+
+### 5. Prompt snapshot
+
+The exact prompt and config that produced this observation – frozen, even if the scanner has been edited since. Includes:
+
+- The full prompt text.
+- The scanner type and type-specific config that was in effect.
+- The model that was used.
+- The scanner version number.
+
+This is what makes editing scanners safe: past observations always show the prompt that actually generated them, not whatever the prompt looks like today.
+
+{/* SCREENSHOT: prompt-snapshot-block — the prompt snapshot block at the bottom of the detail view, showing prompt text, model name ("gemini-3-flash-preview"), and a "Scanner version: 3" badge. */}
+
+## States other than succeeded
+
+The detail view also shows pending, running, failed, and ineligible observations – each with a different layout.
+
+### Pending / running
+
+Shows the session ID, the scanner that's looking at it, the triggered-by attribution, and a progress indicator. No result yet.
+
+{/* SCREENSHOT: observation-pending — observation detail in the "running" state: progress indicator at the top, session metadata visible, result blocks not yet rendered. */}
+
+### Failed
+
+Shows an **error reason** explaining what went wrong. The reason is a structured kind plus a human-readable message – for example:
+
+- `provider_transient` – a transient Gemini error; usually retried automatically.
+- `provider_rejected` – Gemini refused to process the input (most commonly because of content policy).
+- `rasterization_failed` – PostHog couldn't render the recording to video.
+- `validation_failed` – the model returned something that didn't match the scanner's expected output shape.
+- `internal_error` – something else went wrong on PostHog's side.
+
+See [troubleshooting](/docs/replay-vision/troubleshooting) for what to do about each.
+
+{/* SCREENSHOT: observation-failed — observation detail in the "failed" state: error reason badge ("provider_rejected") at the top, human-readable explanation beneath, no result blocks. */}
+
+### Ineligible
+
+Shows the **ineligible reason** explaining why the session was skipped – e.g. `too_short`, `no_recording`, `no_events`. Ineligibles don't count against quota and don't emit `$recording_observed` events. See [running scanners](/docs/replay-vision/running-scanners#ineligible-sessions) for the full taxonomy.
+
+{/* SCREENSHOT: observation-ineligible — observation detail in the "ineligible" state: reason badge ("too_short"), human-readable explanation, the underlying recording length visible for context. */}
+
+## Re-running an observation
+
+Each `(scanner, session)` pair can only be observed once – the unique constraint prevents the same scanner from looking at the same session twice. If you want to re-run a scanner against a session whose observation already exists, delete the existing observation first. The next on-demand trigger (or matching background sweep) will produce a fresh one.
+
+Deleting an observation also removes its `$recording_observed` event from your project so historical queries stay consistent.
+
+{/* SCREENSHOT: observation-delete — observation detail with the delete action highlighted, confirmation dialog open. */}
