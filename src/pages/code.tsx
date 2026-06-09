@@ -21,6 +21,8 @@ import { IconDiscord } from 'components/OSIcons/Icons'
 import { WaitlistForm } from 'components/WaitlistForm'
 import { DownloadContent } from 'components/Code/DownloadContent'
 import { usePrefersReducedMotion } from 'components/Code/usePrefersReducedMotion'
+import useProduct from 'hooks/useProduct'
+import { useApp } from '../context/App'
 
 // ─────────────────────────────────────────────
 // Section label ("The old way", "The PostHog way")
@@ -610,6 +612,11 @@ function HeroSection() {
     )
     const [contentVisible, setContentVisible] = useState(true)
     const prefersReducedMotion = usePrefersReducedMotion()
+    const allProducts = useProduct() as any[]
+    const product = Array.isArray(allProducts) ? allProducts.find((p: any) => p.handle === 'posthog_code') : undefined
+    const { siteSettings } = useApp()
+    const isDark = siteSettings.theme === 'dark'
+    const screenshot = product?.screenshots?.home
 
     const swapToDownload = () => {
         if (typeof window !== 'undefined') {
@@ -713,18 +720,19 @@ function HeroSection() {
                             </div>
 
                             <div className="@4xl/flex-1">
-                                <ZoomImage>
-                                    <img
-                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/signals_light_4b3440dc2b.png"
-                                        alt="PostHog Code screenshot"
-                                        className="w-full rounded shadow dark:hidden"
-                                    />
-                                    <img
-                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/signals_dark_b29e5ed8f9.png"
-                                        alt="PostHog Code screenshot"
-                                        className="w-full rounded hidden dark:block"
-                                    />
-                                </ZoomImage>
+                                {screenshot && (
+                                    <ZoomImage>
+                                        <img
+                                            src={
+                                                (isDark && screenshot.srcDark
+                                                    ? screenshot.srcDark
+                                                    : screenshot.src) as string
+                                            }
+                                            alt={screenshot.alt}
+                                            className={screenshot.imgClasses}
+                                        />
+                                    </ZoomImage>
+                                )}
                             </div>
                         </div>
                     </>

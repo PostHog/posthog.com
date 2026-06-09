@@ -91,6 +91,14 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             category: 'automation',
             slug: 'code',
             status: 'beta',
+            screenshots: {
+                home: {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/signals_light_4b3440dc2b.png',
+                    srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/signals_dark_b29e5ed8f9.png',
+                    alt: 'PostHog Code screenshot',
+                    imgClasses: 'w-full rounded shadow',
+                },
+            },
         },
         {
             name: 'PostHog Slack app',
