@@ -1,5 +1,6 @@
 import React from 'react'
 import { IconArrowRight, IconChat, IconCheck, IconCoffee, IconSparkles } from '@posthog/icons'
+import OSButton from 'components/OSButton'
 
 // Slides for the homepage "agentic" carousel (Slack-first). The left image area
 // is left blank for now — screenshots get dropped in later. The "Explore" CTAs
@@ -16,12 +17,12 @@ export const SlackSlide = () => (
                 </p>
                 <h2 className="text-2xl font-bold m-0">Create pull requests in Slack</h2>
                 <p className="text-secondary m-0">
-                    Tag @PostHog in a thread to analyze customer behavior or create a PR &mdash; all without ever
-                    leaving Slack. Triage and build with your team in your existing tools.
+                    Tag <code>@PostHog</code> in a thread to analyze customer behavior or create a PR &mdash; all
+                    without ever leaving Slack. Triage and build with your team in your existing tools.
                 </p>
-                <span className="inline-flex items-center gap-2 w-fit bg-dark text-white dark:bg-white dark:text-dark font-semibold text-sm px-4 py-2.5 rounded-md">
-                    <IconChat className="size-4" /> Explore PostHog Slackbot <IconArrowRight className="size-4" />
-                </span>
+                <OSButton to="/slack" state={{ newWindow: true }} variant="secondary" asLink>
+                    Explore PostHog Slackbot
+                </OSButton>
             </div>
         </div>
     </div>
@@ -50,9 +51,9 @@ export const FixBugsSlide = () => (
                         <IconCheck className="size-5 text-green shrink-0" /> Creates pull requests automatically
                     </li>
                 </ul>
-                <span className="inline-flex items-center gap-2 w-fit bg-dark text-white dark:bg-white dark:text-dark font-semibold text-sm px-4 py-2.5 rounded-md">
-                    <IconCoffee className="size-4" /> Explore PostHog Code <IconArrowRight className="size-4" />
-                </span>
+                <OSButton to="/code" state={{ newWindow: true }} variant="secondary" asLink>
+                    Explore PostHog Code
+                </OSButton>
             </div>
         </div>
     </div>
@@ -75,9 +76,9 @@ export const AskAnythingSlide = () => (
                     Pipe in third party data to analyze alongside customer usage data for a more complete picture of
                     product usage.
                 </p>
-                <span className="inline-flex items-center gap-2 w-fit bg-dark text-white dark:bg-white dark:text-dark font-semibold text-sm px-4 py-2.5 rounded-md">
-                    <IconSparkles className="size-4" /> Explore PostHog AI <IconArrowRight className="size-4" />
-                </span>
+                <OSButton to="/ai" state={{ newWindow: true }} variant="secondary" asLink>
+                    Explore PostHog AI
+                </OSButton>
             </div>
         </div>
     </div>
