@@ -6,7 +6,7 @@ showTitle: true
 
 You volunteered or have been asked  to speak at a dev meetup, give a demo at a conference, or present PostHog to a virtual or in-person audience. Maybe you said yes before you thought too hard about it. That's fine — good talks happen this way. This guide is for preparing and delivering your talk.
 
->*Want slide examples from other speakers?* See [recent talks](#slides-from-recent-talks). *Have questions?* Ask in [#team-irl-events](https://posthog.slack.com/archives/C0AB78YBCNA) or ping whoever put you up to this. *Still need demo tips?* [Here are 24 more](https://newsletter.posthog.com/p/how-to-demo).
+>**Want slide examples from other speakers?** See [recent talks](#slides-from-recent-talks). **Have questions?** Ask in [#team-irl-events](https://posthog.slack.com/archives/C0AB78YBCNA) or ping whoever put you up to this. **Still need demo tips?** [Here are 24 more](https://newsletter.posthog.com/p/how-to-demo).
 
 ## **1. Know your room before you write a word**
 
@@ -123,6 +123,7 @@ If you receive a question that you believe is off-topic or unfitting for the set
 
 ## Slides from recent talks
 
+* June 2026 - <TeamMember name="James Hawkins"/> - [AI happened. Now what?](https://docs.google.com/presentation/d/1QHGxTd8RkABiIQenjqe12dEdrIlfIXFpmhp9wRFeQyM/edit?usp=sharing)  
 * May 2026 - <TeamMember name="Meikel Ratz"/> - [Stop Snacking. Start Cooking](https://www.figma.com/deck/84jm6dUfWcXhFEmhojvMUL/Myke---AI-killed-the-busywork?node-id=1-20157&viewport=-1045%2C-95%2C0.46&t=AWFACVyZDrZb1paw-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1)  
 * March 2026 - <TeamMember name="Sarah Sanders"/> - [Onboarding sucks](https://www.figma.com/slides/4rGB61lnyYnspct1J4sWYR/Future-of-DevEx-talk?node-id=1-20157&t=o4gv82hYwY37dqkj-0)  
 * March 2026 - <TeamMember name="Rafael Audibert"/> - [Just let engineers cook](https://www.figma.com/deck/N9Q3bAvqNKFBTQC6T95Tra/Rafa---PH-slide-deck-template?node-id=1-20157&t=2VKu4S3lHierX7No-1)  
