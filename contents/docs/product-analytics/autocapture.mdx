@@ -422,6 +422,7 @@ For example, your initialization code might look like this:
 let config = PostHogConfig(projectToken: <ph_project_token>, host: <ph_client_api_host>)
 
 config.captureElementInteractions = true // Disabled by default
+config.captureScreenViews = false // Enabled by default; set to false to disable
 config.captureApplicationLifecycleEvents = false // Enabled by default; set to false to disable
 
 PostHogSDK.shared.setup(config)
