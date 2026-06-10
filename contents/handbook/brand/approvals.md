@@ -34,3 +34,11 @@ When in doubt, ask in the `#design-review` Slack channel. Lottie and Cory are, f
 - **Events team** - In-person events, PostHog speaking engagements, meetups.
 - **Docs & Wizard team** - Docs, obviously. 
 - **Everyone** – Handbook updates. 
+
+### Graphics team
+
+To reduce collaboration overhead, the graphics team splits its work into three areas. This is a starting point we're trialing for a few weeks – if someone is overwhelmed or away, others can step in. A few assignments are temporary while we're in the middle of the rebrand (noted below).
+
+- **Illustration (Heidi)** – Newsletter and blog images, email artwork, hedgehog illustrations (used across the website, events, etc.), animating hogs, team crests, and merch design.
+- **Graphic design (Lottie)** – Website art (e.g. icons, backgrounds), paid ads, billboards and OOH, event graphics, and doing more weird. Also owns YouTube thumbnails and video assets temporarily, until the rebrand is done (then → Daniel).
+- **Production design (Daniel)** – Design ops (cleaning up and componentizing Figma), social media (repurposing existing assets only, no net new), merch file formatting, event flyers (soon to be self-serve on the web), and moving off Pitch and into Figma Slides.
