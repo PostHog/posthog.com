@@ -231,12 +231,12 @@ The event is captured as a `$rageclick` event. You can use this event to identif
 
 ### iOS interaction autocapture
 
-The PostHog [iOS SDK](/docs/libraries/ios) captures the following events by default:
+The PostHog [iOS SDK](/docs/libraries/ios) can capture the following interaction events when `captureElementInteractions` is enabled:
 
 - User interactions like `touch`, `swipe`, `pan`, `pinch`, `rotation`, `long_press`, `scroll`
 - Control types `value_changed`, `submit`, `toggle`, `primary_action`, `menu_action`, `change`
 
-Autocaptured events display as the autocaptured interaction type in the [activity tab](https://app.posthog.com/activity/explore), such as `touched ...` or `value_changed ...`.
+Autocaptured interaction events display as the autocaptured interaction type in the [activity tab](https://app.posthog.com/activity/explore), such as `touched ...` or `value_changed ...`.
 
 > 🚧 **Note:** Interaction autocapture is currently supported only in UIKit.
 
@@ -245,7 +245,7 @@ Autocaptured events display as the autocaptured interaction type in the [activit
 Interaction autocapture is **not enabled by default**. You can enable it by setting `captureElementInteractions` to `true` in the config.
 
 ```swift
-let config = PostHogConfig(projectToken: <ph_project_token>, host: <ph_client_api_host>)
+let config = PostHogConfig(projectToken: "<ph_project_token>", host: "<ph_client_api_host>")
 
 config.captureElementInteractions = true // Disabled by default
 
@@ -419,7 +419,7 @@ Screen navigation and application lifecycle autocapture are enabled by default b
 For example, your initialization code might look like this:
 
 ```swift
-let config = PostHogConfig(projectToken: <ph_project_token>, host: <ph_client_api_host>)
+let config = PostHogConfig(projectToken: "<ph_project_token>", host: "<ph_client_api_host>")
 
 config.captureElementInteractions = true // Disabled by default
 config.captureScreenViews = false // Enabled by default; set to false to disable

@@ -7,8 +7,9 @@ PostHog autocapture automatically tracks the following events for you:
 -   **Application Installed** - when the app is installed
 -   **Application Updated** - when the app is updated
 -   **$screen** - when the user navigates (if using `UIViewController`)
--   **$autocapture** - when the user interacts with elements in a screen (`UIKit based`)
 -   **$rageclick** - when the user rapidly taps in the same area (iOS/macCatalyst, `UIKit based`)
+
+`$autocapture` interaction events are not enabled by default. Enable them with `captureElementInteractions = true`.
 
 > 🚧 **Note:** `$autocapture` and `$rageclick` are captured from UIKit interactions. Some SwiftUI views use UIKit under the hood (for example, `TextField` → `UITextField` and `Toggle` → `UISwitch`), so those interactions may also be autocaptured. In other SwiftUI cases, interactions might still be captured, but element metadata (such as `$elements_chain`) may be incomplete.
 
@@ -109,7 +110,7 @@ Interaction autocapture records when users interact with UI elements in your app
 Interaction autocapture is **not enabled by default**. You can enable it by setting `captureElementInteractions` to `true` in the config.
 
 ```swift
-let config = PostHogConfig(projectToken: <ph_project_token>, host: <ph_client_api_host>)
+let config = PostHogConfig(projectToken: "<ph_project_token>", host: "<ph_client_api_host>")
 config.captureElementInteractions = true // Disabled by default
 PostHogSDK.shared.setup(config)
 ```
@@ -125,7 +126,7 @@ This is captured as a `$rageclick` event. You can use this event to identify opp
 It is enabled by default (`rageClickConfig.enabled = true`).
 
 ```swift
-let config = PostHogConfig(projectToken: <ph_project_token>, host: <ph_client_api_host>)
+let config = PostHogConfig(projectToken: "<ph_project_token>", host: "<ph_client_api_host>")
 config.rageClickConfig.enabled = true // Enabled by default
 config.rageClickConfig.minimumTapCount = 3 // Optional, default is 3
 config.rageClickConfig.thresholdPoints = 30 // Optional, default is 30

@@ -96,6 +96,17 @@ PostHogSDK.shared.capture("signed_up", properties: ["plan": "Pro++"], userProper
 PostHogSDK.shared.capture("signed_up", properties: ["plan": "Pro++"], userPropertiesSetOnce: ["user_property_name": "your_value"])
 ```
 
+Use `setPersonProperties` when you want to update the current person's profile without also capturing a custom event. This sends a `$set` event to PostHog.
+
+```swift
+PostHogSDK.shared.setPersonProperties(userPropertiesToSet: ["plan": "Pro++"])
+
+PostHogSDK.shared.setPersonProperties(
+    userPropertiesToSet: ["plan": "Pro++"],
+    userPropertiesToSetOnce: ["first_seen_source": "ios"]
+)
+```
+
 ## Super properties
 
 Super properties are properties associated with events that are set once and then sent with every `capture` call, be it a `$screen`, or anything else.
