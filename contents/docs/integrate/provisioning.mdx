@@ -143,9 +143,9 @@ You can declare which OAuth scopes your partner app needs by adding a `scopes` f
 }
 ```
 
-Only unprivileged, user-grantable scopes are accepted – see [available scopes](#available-scopes) for the full list. Privileged, internal, and unrecognized scope strings are dropped. If every scope you declare is dropped (none are grantable), registration is rejected rather than falling back to an empty ceiling, so make sure at least one declared scope is on the available list.
+Only scopes a user can grant on the consent screen are accepted – see [available scopes](#available-scopes) for the full list. Any scope PostHog reserves for internal use, or doesn't recognize, is dropped. If every scope you declare is dropped (none are grantable), registration is rejected rather than falling back to an empty ceiling, so make sure at least one declared scope is on the available list.
 
-If `com.posthog.scopes` is omitted, the app defaults to the full set of unprivileged scopes. When present, the declared scopes are applied on both initial registration and every subsequent metadata refresh. A scope ceiling is a cap, not a grant – each scope still requires user consent at the authorization step.
+If `com.posthog.scopes` is omitted, your app can request any scope a user can grant. When present, the declared scopes are applied on both initial registration and every subsequent metadata refresh. A scope ceiling is a cap, not a grant – each scope still requires user consent at the authorization step.
 
 CIMD app scopes are managed via the metadata document and are read-only in the PostHog admin UI.
 
