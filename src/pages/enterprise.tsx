@@ -42,7 +42,7 @@ function CustomerLogo({ customer }: { customer: Customer }) {
     if (typeof customer.logo === 'function') {
         const LogoComponent = customer.logo
         const heightClass = customer.height ? `h-${customer.height}` : 'h-8'
-        return <LogoComponent className={`w-auto fill-current object-contain ${heightClass}`} />
+        return <LogoComponent className={`w-auto max-w-full fill-current object-contain ${heightClass}`} />
     }
     const heightClass = customer.height ? `max-h-${customer.height}` : 'max-h-8'
     return (
@@ -50,12 +50,12 @@ function CustomerLogo({ customer }: { customer: Customer }) {
             <img
                 src={customer.logo.light}
                 alt={customer.name}
-                className={`w-auto object-contain dark:hidden ${heightClass}`}
+                className={`w-auto max-w-full object-contain dark:hidden ${heightClass}`}
             />
             <img
                 src={customer.logo.dark}
                 alt={customer.name}
-                className={`w-auto object-contain hidden dark:block ${heightClass}`}
+                className={`w-auto max-w-full object-contain hidden dark:block ${heightClass}`}
             />
         </>
     )

@@ -16,6 +16,8 @@ import CreatifyLogoDark from '../images/customers/creatify-dark.png'
 import ConvexLogo from '../components/CustomerLogos/ConvexLogo'
 import ElevenLabsLogo from '../components/CustomerLogos/ElevenLabsLogo'
 import ExaLogo from 'components/CustomerLogos/ExaLogo'
+import FireworksAILogo from '../images/customers/fireworks-light.png'
+import FireworksAILogoDark from '../images/customers/fireworks-dark.png'
 import GanksterLogo from '../components/CustomerLogos/GanksterLogo'
 import GrantableLogo from '../components/CustomerLogos/GrantableLogo'
 import GreptileLogo from '../components/CustomerLogos/GreptileLogo'
@@ -398,6 +400,18 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'Search API for AI products',
         logo: ExaLogo,
         height: 9,
+        featured: true,
+    },
+    fireworksai: {
+        name: 'Fireworks AI',
+        toolsUsed: [], // TODO: Add toolsUsed
+        industries: ['AI'],
+        notes: 'Generative AI inference platform',
+        logo: {
+            light: FireworksAILogo,
+            dark: FireworksAILogoDark,
+        },
+        height: 6,
         featured: true,
     },
     gankster: {
