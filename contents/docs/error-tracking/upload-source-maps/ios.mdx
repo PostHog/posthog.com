@@ -3,9 +3,9 @@ title: Upload dSYMs for iOS
 showStepsToc: true
 ---
 
-import CLIDownload from "../_snippets/cli/download.mdx"
-import CLIAuthenticate from "../_snippets/cli/authenticate.mdx"
-import StepVerifySymbolSetsUpload from '../_snippets/StepVerifySymbolSetsUpload'
+import CLIDownload from "../_snippets/cli/download.mdx";
+import CLIAuthenticate from "../_snippets/cli/authenticate.mdx";
+import StepVerifySymbolSetsUpload from "../_snippets/StepVerifySymbolSetsUpload";
 
 <CalloutBox icon="IconInfo" title="CLI version requirement" type="action">
 
@@ -17,7 +17,7 @@ A minimum CLI version of [0.7.7](https://github.com/PostHog/posthog/releases/tag
 
 <Step title="Download CLI" badge="required">
 
-<CLIDownload/>
+<CLIDownload />
 
 </Step>
 
@@ -38,10 +38,10 @@ In Xcode, configure your build settings to generate dSYMs:
 5. Make sure Release configurations have **DWARF with dSYM File**
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/DWARF_and_d_SYM_xcode_settings_light_f6a8bb74c3.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/DWARF_and_d_SYM_xcode_settings_7b2c628b52.png"
-    alt="Xcode dSYM setting"
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/DWARF_and_d_SYM_xcode_settings_light_f6a8bb74c3.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/DWARF_and_d_SYM_xcode_settings_7b2c628b52.png"
+  alt="Xcode dSYM setting"
+  classes="rounded"
 />
 
 <CalloutBox icon="IconWarning" title="Disable User Script Sandboxing" type="action">
@@ -53,9 +53,8 @@ You must disable User Script Sandboxing for the upload script to work:
 
 **Why is this required?**
 
-When User Script Sandboxing is enabled, Xcode only allows run scripts to access files explicitly specified in the build phase's **Input Files**. 
+When User Script Sandboxing is enabled, Xcode only allows run scripts to access files explicitly specified in the build phase's **Input Files**.
 The dSYM upload script needs to walk directories to locate and read dSYM bundles, and execute `posthog-cli` which are currently not allowed with User Script Sandboxing enabled.
-
 
 </CalloutBox>
 
@@ -101,7 +100,6 @@ By default, only debug symbols are uploaded. To include source code snippets in 
 
 1. In the Run Script build phase, click the chevron to expand
 2. Set the **environment Variable** when calling the upload script:
-
 
 <MultiLanguage>
 
@@ -154,10 +152,10 @@ view.addSubview(button)
 
 </MultiLanguage>
 
-2. Build and run your app in Xcode, 
-    - Make sure the debugger is not attached, since it will intercept the crash and prevent the report from being collected. You can: 
-        - Detach the debugger (click the stop button in Xcode) and run the app directly from the device/simulator home screen
-        - Or uncheck "Debug executable" in the scheme settings before running
+2. Build and run your app in Xcode,
+   - Make sure the debugger is not attached, since it will intercept the crash and prevent the report from being collected. You can:
+     - Detach the debugger (click the stop button in Xcode) and run the app directly from the device/simulator home screen
+     - Or uncheck "Debug executable" in the scheme settings before running
 
 3. Reopen the app from your device or simulator's home screen (not from Xcode).
 
@@ -165,7 +163,7 @@ view.addSubview(button)
 
 5. Reopen the app once more. This triggers the SDK to send the previously collected crash report to PostHog.
 
-6. Check the [error tracking dashboard](https://us.posthog.com/error_tracking) for your test crash.
+6. Check the [error tracking dashboard](https://app.posthog.com/error_tracking) for your test crash.
 
 <CalloutBox icon="IconInfo" type="info">
 
@@ -190,8 +188,7 @@ Install the CLI using one of these methods:
 npm install -g @posthog/cli
 
 # Or download binary
-curl --proto '=https' --tlsv1.2 -LsSf \
-  https://github.com/PostHog/posthog/releases/latest/download/posthog-cli-installer.sh | sh
+curl --proto '=https' --tlsv1.2 -LsSf https://download.posthog.com/cli | sh
 ```
 
 ### Script fails with permission errors

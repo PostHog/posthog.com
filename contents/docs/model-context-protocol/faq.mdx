@@ -17,7 +17,9 @@ The PostHog MCP server is a hosted [Model Context Protocol](https://modelcontext
 
 ### How much does it cost?
 
-It's free. Connecting to the MCP server and calling its tools doesn't incur any charges on your PostHog bill. Standard PostHog [usage and billing](/docs/billing) still apply to the underlying data your queries consume.
+Connecting to the MCP server and calling its tools is free. Standard PostHog [usage and billing](/docs/billing) still apply to the underlying data your queries consume.
+
+Note that some tools use LLMs internally, and usage of these tools may be billed as PostHog AI spend. These AI-powered tools are only available when [AI data processing is enabled](/docs/posthog-ai/allow-access) in your organization settings – when it's disabled, they're filtered out and not exposed to your MCP client.
 
 ### Which AI clients and editors are supported?
 

@@ -186,6 +186,7 @@ OpenAI
 OpenReplay
 Opsgenie
 Optimizely
+OTel
 Outfunnel
 Pendo
 [Pp]erplexity
