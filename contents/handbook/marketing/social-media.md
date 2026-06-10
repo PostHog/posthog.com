@@ -19,7 +19,6 @@ In the initial (or second) message you share about a launch, Beta, GA, or projec
 - **Link(s) to the blog article**, if we've got one.
 - **When should the first post on social go live?**
 - **Confirm the OpenGraph image is updated on the product page.** See [OpenGraph images](#opengraph-images-for-product-pages) below.
-- 
 
 That's the whole ask. If something doesn't apply (for example, there's no blog post yet), just say so.
 
@@ -30,7 +29,7 @@ You should aim to give as much notice as you can, but ideally at least a week. Y
 - A widely broadcast Slack message you're already sending out about the launch.
 - Post in either the #team-marketing or #team-editorial Slack channels, tagging <TeamMember name="Liam Graham" />.
 
-We want to make sure we're being transparent with this, so you should avoid sending this information by DM. 
+We want to make sure we're being transparent with this, so you should avoid sending this information by DM.
 
 ## OpenGraph images for product pages
 
