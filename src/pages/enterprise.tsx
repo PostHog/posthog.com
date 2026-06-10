@@ -117,9 +117,28 @@ function Customers() {
     const { getCustomers, getCustomer } = useCustomers()
     const customers = getCustomers(CUSTOMER_SLUGS)
 
-    // Featured quote (Arena – source of truth for company performance)
+    // Featured quotes
     const arena = getCustomer('arena')
-    const quote = arena?.quotes?.lily_dinh
+    const lovable = getCustomer('lovable')
+    const arenaQuote = arena?.quotes?.lily_dinh
+    const lovableQuote = lovable?.quotes?.viktor_eriksson
+
+    const featuredQuotes = [
+        arenaQuote && {
+            text: arenaQuote.products?.product_analytics,
+            name: arenaQuote.name,
+            role: arenaQuote.role,
+            company: arena?.name,
+            thumb: arenaQuote.image.thumb,
+        },
+        lovableQuote && {
+            text: lovableQuote.products?.ai_observability,
+            name: lovableQuote.name,
+            role: lovableQuote.role,
+            company: lovable?.name,
+            thumb: lovableQuote.image.thumb,
+        },
+    ].filter((q): q is { text?: string; name: string; role: string; company?: string; thumb: string } => Boolean(q))
 
     return (
         <section className="relative mb-12 @xl:mb-20 px-4 @xl:px-8">
@@ -139,23 +158,27 @@ function Customers() {
                 ))}
             </div>
 
-            {quote && (
-                <figure className="mt-8 max-w-3xl mx-auto text-center">
-                    <blockquote className="text-lg @xl:text-xl font-semibold leading-snug text-primary">
-                        “{quote.products?.product_analytics}”
-                    </blockquote>
-                    <figcaption className="flex items-center justify-center gap-3 mt-4">
-                        <img
-                            src={quote.image.thumb}
-                            alt={quote.name}
-                            className="size-10 rounded-full object-cover"
-                            loading="lazy"
-                        />
-                        <span className="text-sm text-secondary">
-                            <strong className="text-primary">{quote.name}</strong>, {quote.role} at {arena?.name}
-                        </span>
-                    </figcaption>
-                </figure>
+            {featuredQuotes.length > 0 && (
+                <div className="grid @xl:grid-cols-2 gap-6 mt-8">
+                    {featuredQuotes.map((q) => (
+                        <figure key={q.name} className="border border-primary rounded-md bg-accent p-6 m-0">
+                            <blockquote className="text-base @xl:text-lg font-semibold leading-snug text-primary m-0">
+                                “{q.text}”
+                            </blockquote>
+                            <figcaption className="flex items-center gap-3 mt-4">
+                                <img
+                                    src={q.thumb}
+                                    alt={q.name}
+                                    className="size-10 rounded-full object-cover"
+                                    loading="lazy"
+                                />
+                                <span className="text-sm text-secondary">
+                                    <strong className="text-primary">{q.name}</strong>, {q.role} at {q.company}
+                                </span>
+                            </figcaption>
+                        </figure>
+                    ))}
+                </div>
             )}
 
             <p className="text-center mt-8 text-sm">

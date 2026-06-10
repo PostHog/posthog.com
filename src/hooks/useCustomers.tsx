@@ -563,6 +563,10 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                 quotes: [
                     "PostHog is super cool because it is such a broad platform. If you're building a new product or at a startup, it's a no-brainer to use PostHog. It's the only all-in-one platform like it for developers.",
                 ],
+                products: {
+                    ai_observability:
+                        'PostHog is a crucial part of how we debug traces and ask ourselves questions like, ‘Why is the LLM doing that?’',
+                },
             },
         },
     },
