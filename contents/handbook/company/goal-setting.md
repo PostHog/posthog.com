@@ -19,7 +19,7 @@ In terms of accountability, <TeamMember name="Scott Lewis" photo /> will notify 
 
 ### Planning template
 
-Teams should fill in the previous quarter reflection async in the doc before the meeting starts. **HOGS should be written privately and independently – in your own notes, not the shared doc – then pasted in at the start of the session.** Doing them privately first stops people from being skewed by each other's thinking before they've formed their own view. The meeting itself should be 20% reviewing the past, and 80% talking about goals for next quarter. Don't fall into the trap of spending most of your time reviewing and then rushing the goals right at the end. 
+Teams should fill in the previous quarter reflection async in the doc before the meeting starts. **HOGS should be written privately and independently, in your own notes rather than the shared doc, then pasted in at the start of the session.** Doing them privately first stops people from being skewed by each other's thinking before they've formed their own view. The meeting itself should be 20% reviewing the past, and 80% talking about goals for next quarter. Don't fall into the trap of spending most of your time reviewing and then rushing the goals right at the end. 
 
 ```md
 ## Last quarter objectives reflection (5 mins - do as a team)
@@ -32,9 +32,9 @@ What else did we get done? List items from the changelog or PRs merged if they w
 
 You may also want to write some overall thoughts about how the quarter generally went.
 
-## HOGS (10 minutes - written privately beforehand, pasted in at the **start** of the session)
+## HOGS (10 minutes, written privately beforehand and pasted in at the **start** of the session)
 
-Everyone should write their HOGS **privately and independently** before the meeting – in your own notes, not this doc – then paste them in at the start of the session. Keeping them private until then means people don't anchor on each other's thinking. Spend 10 minutes in the meeting silently reading through everyone’s HOGS during the meeting. Add any common themes or otherwise important items to the section below as you read, then only discuss the themes (there generally isn't time to discuss every line of the HOGS).
+Everyone should write their HOGS **privately and independently** before the meeting, in your own notes rather than this doc, then paste them in at the start of the session. Keeping them private until then means people don't anchor on each other's thinking. Spend 10 minutes in the meeting silently reading through everyone’s HOGS during the meeting. Add any common themes or otherwise important items to the section below as you read, then only discuss the themes (there generally isn't time to discuss every line of the HOGS).
 
 Add entries under each question with your initials/name like: "- (your name): My comment"
 
