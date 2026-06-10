@@ -407,14 +407,14 @@ PostHog captures the following events:
 | `Application Opened`       | App becomes active/foreground                     |
 | `Application Backgrounded` | App moves to background                           |
 
-#### Configuring screen navigation autocapture
+#### Configuring screen navigation and lifecycle autocapture
 
-Screen navigation autocapture is not enabled by default. You can enable it by setting `captureScreenViews` to `true` in the config.
+Screen navigation and application lifecycle autocapture are enabled by default because `captureScreenViews` and `captureApplicationLifecycleEvents` default to `true`. You can disable them by setting either option to `false` in the config.
 
-| Option                              | Description                                                                                     |
-| ----------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `captureScreenViews`                | **Type:** `boolean`. When set to `true`, autocapture will capture screen views.                 |
-| `captureApplicationLifecycleEvents` | **Type:** `boolean`. When set to `true`, autocapture will capture application lifecycle events. |
+| Option                              | Description                                                                                         |
+| ----------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `captureScreenViews`                | **Type:** `boolean`. Defaults to `true`. Set to `false` to disable screen view autocapture. |
+| `captureApplicationLifecycleEvents` | **Type:** `boolean`. Defaults to `true`. Set to `false` to disable application lifecycle event autocapture. |
 
 For example, your initialization code might look like this:
 
@@ -422,7 +422,8 @@ For example, your initialization code might look like this:
 let config = PostHogConfig(projectToken: <ph_project_token>, host: <ph_client_api_host>)
 
 config.captureElementInteractions = true // Disabled by default
-config.captureApplicationLifecycleEvents = true // Disabled by default
+config.captureScreenViews = false // Enabled by default; set to false to disable
+config.captureApplicationLifecycleEvents = false // Enabled by default; set to false to disable
 
 PostHogSDK.shared.setup(config)
 ```

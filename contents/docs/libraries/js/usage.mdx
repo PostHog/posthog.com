@@ -10,6 +10,29 @@ import WebSendEvents from '../../integrate/send-events/_snippets/send-events-web
 
 <WebSendEvents />
 
+### Sending events before a page unload
+
+The third argument to `posthog.capture()` accepts a `transport` option. In the browser JavaScript SDK, `transport: "sendBeacon"` tells PostHog to use the browser's [`navigator.sendBeacon`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/sendBeacon) API for that request when it is sent.
+
+```js-web
+posthog.capture(
+    "user_clicked_reload",
+    { button: "reload" },
+    { transport: "sendBeacon", send_instantly: true }
+)
+
+window.location.reload()
+```
+
+`transport` only chooses the network transport. It does **not** skip PostHog's event queue or force all queued events to send immediately. If `request_batching` is enabled, events are batched by default and flushed on an interval. To send a specific event immediately, pass `send_instantly: true` in the capture options as shown above.
+
+For page unloads and reloads:
+
+- Use `{ transport: "sendBeacon", send_instantly: true }` for the event you need to send right before navigation.
+- You don't need to call `posthog.flush()` for browser JavaScript event capture. The browser SDK doesn't expose a public `flush()` method for custom events.
+- With batching enabled, the SDK also attempts to flush queued events with `sendBeacon` during page unload. This helps with events already in the queue, but for critical events immediately before navigation, use `send_instantly: true`.
+- `sendBeacon` improves reliability during unload, but delivery is still ultimately controlled by the browser and network.
+
 ## Anonymous and identified events
 
 import IdentifiedVsAnonymousIntro from '../../product-analytics/_snippets/identified-vs-anonymous-intro.mdx'

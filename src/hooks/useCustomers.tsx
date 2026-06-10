@@ -758,7 +758,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             'product_analytics',
             'session_replay',
             'surveys',
-            'llm_analytics',
+            'ai_observability',
             'warehouse_sources',
         ],
         industries: ['Ad Tech', 'Hospitality', 'Digital Signage'],

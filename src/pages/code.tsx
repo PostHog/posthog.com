@@ -1154,6 +1154,9 @@ const TableStakes = () => {
                                     <code>Claude Sonnet 4.6</code>
                                 </li>
                                 <li className="text-sm font-bold text-primary">
+                                    <code>Claude Opus 4.8</code>
+                                </li>
+                                <li className="text-sm font-bold text-primary">
                                     <code>Claude Opus 4.7</code>
                                 </li>
                                 <li className="text-sm font-bold text-primary">
