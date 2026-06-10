@@ -1594,7 +1594,8 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                                   fromHistory: newWindow.fromHistory,
                                   props: newWindow.props,
                                   location: newWindow.location,
-                                  size: newWindow.size,
+                                  // Keep the window's current size on navigation; only fixed-size apps adopt the target page's size
+                                  size: newWindow.fixedSize ? newWindow.size : w.size,
                               }
                             : w
                     )
