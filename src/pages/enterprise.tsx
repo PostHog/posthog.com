@@ -10,6 +10,9 @@ import Link from 'components/Link'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { useCustomers } from 'hooks/useCustomers'
 import type { Customer } from 'hooks/useCustomers'
+import { RoughAnnotation } from 'components/Code/RoughAnnotation'
+import { IconPop } from 'components/Code/IconPop'
+import { StickerTrophy } from 'components/Stickers/Stickers'
 import {
     IconInfo,
     IconShield,
@@ -68,15 +71,36 @@ function CustomerLogo({ customer }: { customer: Customer }) {
 function Hero() {
     return (
         <section className="max-w-5xl mx-auto px-4 @xl:px-8 pt-6 pb-10 @xl:pt-12 @xl:pb-16">
-            <Eyebrow>PostHog for enterprise</Eyebrow>
-            <h1 className="text-3xl @xl:text-5xl font-bold leading-tight !mt-0 mb-4 max-w-3xl">
-                Big company? <span className="text-red dark:text-yellow">We've got you.</span>
+            <div className="flex items-center gap-2 mb-3">
+                <p className="text-sm font-semibold uppercase tracking-wide text-secondary m-0">
+                    PostHog for enterprise
+                </p>
+                <IconPop>
+                    <StickerTrophy className="size-6 -rotate-6 relative -top-px" />
+                </IconPop>
+            </div>
+            <h1 className="text-3xl @xl:text-5xl font-bold leading-tight !mt-0 mb-5 max-w-3xl">
+                Enterprise-grade,{' '}
+                <span className="whitespace-nowrap">
+                    minus the{' '}
+                    <RoughAnnotation type="circle" color="#F54E00" strokeWidth={2} padding={6} delay={400}>
+                        enterprise
+                    </RoughAnnotation>
+                    .
+                </span>
             </h1>
+            <p className="text-base @xl:text-lg leading-relaxed max-w-2xl mb-4">
+                No "request a demo to unlock pricing." No tier-one support reading from a script. No 45-page contract
+                you're not allowed to touch.
+            </p>
             <p className="text-base @xl:text-lg leading-relaxed max-w-2xl mb-6">
-                We're really good at serving large, serious teams who come to us — from{' '}
-                <strong>Airbus</strong> and the <strong>UK Government</strong> to <strong>MoneyGram</strong>. Same
-                product everyone else gets, plus the security, support, and paperwork your procurement team is going to
-                ask about anyway.
+                <strong>Airbus</strong>, the <strong>UK Government</strong>, and <strong>MoneyGram</strong> didn't pick
+                us because we golf with their CIO. They came to us, kicked the tires, and stayed — and everything their
+                security, legal, and procurement teams asked for is already{' '}
+                <RoughAnnotation type="underline" color="#F54E00" strokeWidth={2} delay={900}>
+                    done
+                </RoughAnnotation>
+                .
             </p>
             <div className="flex flex-wrap items-center gap-2">
                 <SignupCTA size="md" />
@@ -130,9 +154,15 @@ function Customers() {
 
     return (
         <section className="relative mb-12 @xl:mb-20 px-4 @xl:px-8">
-            <SectionLabel>Trusted by teams that can't afford to get it wrong</SectionLabel>
+            <SectionLabel>
+                Trusted by teams that can't afford to{' '}
+                <RoughAnnotation type="underline" color="#F54E00" strokeWidth={2}>
+                    get it wrong
+                </RoughAnnotation>
+            </SectionLabel>
             <p className="max-w-2xl">
-                Planemakers, governments, money movers, and the AI labs defining the frontier all run on PostHog.
+                Planemakers, governments, money movers, and the AI labs defining the frontier all run on PostHog. (No,
+                we're not going to make you sit through a webinar about it.)
             </p>
 
             <div className="grid grid-cols-2 @md:grid-cols-3 @2xl:grid-cols-4 gap-px mt-6 bg-border dark:bg-border-dark border border-primary rounded-md overflow-hidden">
@@ -203,12 +233,15 @@ function Security() {
     return (
         <section className="relative mb-12 @xl:mb-20 px-4 @xl:px-8">
             <SectionLabel>
-                <IconShield className="size-7 inline-block align-middle relative -top-0.5 mr-1.5 text-red dark:text-yellow" />
+                <IconPop className="inline-block mr-1.5">
+                    <IconShield className="size-7 inline-block align-middle relative -top-0.5 text-red dark:text-yellow" />
+                </IconPop>
                 Security &amp; compliance
             </SectionLabel>
             <p className="max-w-2xl">
-                SOC 2 Type II certified, HIPAA-ready, and GDPR-compliant. Everything your security team needs is
-                self-serve — and if they have a 200-row questionnaire, we'll fill it out.
+                SOC 2 Type II certified, HIPAA-ready, and GDPR-compliant. No NDA gymnastics, no "reach out to your
+                account executive for the SOC 2 report" — it's all self-serve. And if your team has a 200-row
+                questionnaire, we'll fill it out.
             </p>
 
             <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-6 my-8">
@@ -300,8 +333,13 @@ function Support() {
     return (
         <section className="relative mb-12 @xl:mb-20 px-4 @xl:px-8">
             <SectionLabel>
-                <IconHeadset className="size-7 inline-block align-middle relative -top-0.5 mr-1.5 text-red dark:text-yellow" />
-                Support that's actually engineers
+                <IconPop className="inline-block mr-1.5">
+                    <IconHeadset className="size-7 inline-block align-middle relative -top-0.5 text-red dark:text-yellow" />
+                </IconPop>
+                Support that's actually{' '}
+                <RoughAnnotation type="underline" color="#F54E00" strokeWidth={2}>
+                    engineers
+                </RoughAnnotation>
             </SectionLabel>
             <p className="max-w-2xl">
                 No outsourced first line. No ticket-routing call center. You get a dedicated Slack channel with the
@@ -366,8 +404,8 @@ function Essentials() {
         <section className="relative mb-12 @xl:mb-20 px-4 @xl:px-8">
             <SectionLabel>Built for big teams</SectionLabel>
             <p className="max-w-2xl">
-                The enterprise platform package bundles the things larger orgs need to run PostHog securely as they
-                grow.
+                The enterprise platform package bundles the boring-but-essential stuff larger orgs need to run PostHog
+                securely as they grow. Yes, including the acronyms.
             </p>
             <ul className="grid @md:grid-cols-2 @2xl:grid-cols-3 gap-x-8 gap-y-4 pt-6">
                 {ESSENTIALS.map((item) => (
@@ -412,8 +450,13 @@ function PricingProcurement() {
     return (
         <section className="relative mb-12 @xl:mb-20 px-4 @xl:px-8">
             <SectionLabel>
-                <IconReceipt className="size-7 inline-block align-middle relative -top-0.5 mr-1.5 text-red dark:text-yellow" />
-                Transparent pricing, painless procurement
+                <IconPop className="inline-block mr-1.5">
+                    <IconReceipt className="size-7 inline-block align-middle relative -top-0.5 text-red dark:text-yellow" />
+                </IconPop>
+                Transparent pricing,{' '}
+                <RoughAnnotation type="underline" color="#F54E00" strokeWidth={2}>
+                    painless procurement
+                </RoughAnnotation>
             </SectionLabel>
             <p className="max-w-2xl">
                 Our pricing is public, our discounts are formulaic (no sales theater), and our procurement process is
