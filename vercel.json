@@ -53,7 +53,8 @@
         { "source": "/next-steps/(.*)", "destination": "/next-steps/index.html" },
         { "source": "/questions/:path((?!topic).*)", "destination": "/questions/[permalink]/index.html" },
         { "source": "/careers/(.*)", "destination": "/careers" },
-        { "source": "/posts/:path*", "destination": "/posts/[slug]/index.html" }
+        { "source": "/posts/:path*", "destination": "/posts/[slug]/index.html" },
+        { "source": "/teams/:slug", "destination": "/teams/[slug]/index.html" }
     ],
     "redirects": [
         {
