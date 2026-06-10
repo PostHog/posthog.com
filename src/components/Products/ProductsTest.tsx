@@ -16,6 +16,8 @@ import WistiaVideo, { WistiaVideoRef } from 'components/WistiaVideo'
 import TVScreen from 'components/Home/Test/TV'
 import { Accordion } from 'components/RadixUI/Accordion'
 import OSButton from 'components/OSButton'
+import { RenderInClient } from 'components/RenderInClient'
+import usePostHog from 'hooks/usePostHog'
 
 const statusDotColor: Record<string, string> = {
     beta: 'bg-yellow',
@@ -286,6 +288,7 @@ const ProductRow = ({ product }: { product: any }) => {
 }
 
 export default function ProductsTest(): JSX.Element {
+    const posthog = usePostHog()
     const allProducts = useProduct() as any[]
 
     const productsByHandle = useMemo(() => {
@@ -355,7 +358,17 @@ export default function ProductsTest(): JSX.Element {
                          */}
                     </header>
 
-                    <HeroCarousel tabs={productUsageTabs} />
+                    <RenderInClient
+                        placeholder={<></>}
+                        render={() =>
+                            posthog?.getFeatureFlag?.('homepage-slack-test', { fresh: true }) === 'test' ? (
+                                <HeroCarousel tabs={productUsageTabs} />
+                            ) : (
+                                <></>
+                            )
+                        }
+                    />
+
                     <hr />
 
                     {/* Sections */}
