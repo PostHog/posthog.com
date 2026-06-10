@@ -4115,25 +4115,6 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Replay Vision',
-            url: '/docs/replay-vision',
-            color: 'yellow',
-            icon: 'IconEye',
-            description: 'Use AI to automatically watch your session recordings and turn what it sees into queryable data',
-            featureFlag: 'replay-vision-docs',
-            children: [
-                {
-                    name: 'Replay Vision',
-                },
-                {
-                    name: 'Overview',
-                    url: '/docs/replay-vision',
-                    icon: 'IconEye',
-                    color: 'seagreen',
-                },
-            ],
-        },
-        {
             name: 'Feature Flags',
             icon: 'IconToggle',
             color: 'seagreen',
