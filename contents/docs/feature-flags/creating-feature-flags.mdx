@@ -368,11 +368,17 @@ To delete multiple Feature Flags at once:
 
 After deletion, PostHog displays a summary of deleted flags along with AI-ready prompts to help you identify and clean up code references to the removed flags.
 
+<CalloutBox icon="IconInfo" title="Deletion is permanent" type="caution">
+
+Deleting a feature flag is permanent and cannot be undone. Make sure you no longer need the flag before deleting it.
+
+</CalloutBox>
+
 ### Deleting flags linked to experiments
 
-You can delete feature flags that are linked to [experiments](/docs/experiments), as long as the experiment isn't currently running. Draft, stopped, and completed experiments don't block flag deletion.
+You can delete feature flags that are linked to experiments, as long as the experiment isn't currently running. Draft, stopped, and completed experiments don't block flag deletion – the experiment's historical results are preserved.
 
-When you delete a flag linked to an experiment:
+If you try to delete a flag linked to a running experiment, PostHog shows a warning and blocks the deletion. Stop the experiment first, then delete the flag.
 
 - The experiment's historical data and results are preserved.
 - The flag key is freed up so you can reuse it for a new flag.
