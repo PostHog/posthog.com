@@ -42,6 +42,9 @@ import { buildTabs } from 'components/Home/HeroCarousel/tabs'
 import PlatformInstall, { wizardInstallSchema } from 'components/PlatformInstall'
 import { Customers, getSharedDescriptors } from '../shared'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import { RenderInClient } from 'components/RenderInClient'
+import { Tagline as ControlTagline, CTAs as ControlCTAs, HeroImage as ControlHeroImage } from '../Control'
+import { TestRolloutSlide, DebugFixSlide, OnePlaceSlide, UnderstandUsageSlide } from '../HeroCarousel/slides'
 
 const AppCount = () => <span className="text-xs font-normal">{APP_COUNT} apps</span>
 
@@ -349,6 +352,95 @@ function HeroImage(): JSX.Element {
     )
 }
 
+function TestHero(): JSX.Element {
+    return (
+        <>
+            <div className="text-center @xl:text-left mb-12">
+                <h1 className="[&_p]:m-0 flex gap-1 flex-wrap justify-center @xl:justify-start !text-2xl mb-8 pt-2">
+                    <Logo />
+                </h1>
+
+                <Tagline />
+
+                <GetStarted />
+            </div>
+
+            <HeroCarousel tabs={buildTabs} />
+        </>
+    )
+}
+
+function ControlHero(): JSX.Element {
+    return (
+        <>
+            <div className="text-center @xl:text-left mb-12">
+                <ControlHeroImage />
+
+                <h1 className="[&_p]:m-0 flex gap-1 flex-wrap justify-center @xl:justify-start !text-2xl mb-8 pt-2">
+                    <Logo />
+                </h1>
+
+                <ControlTagline />
+
+                <ControlCTAs />
+            </div>
+
+            <HeroCarousel
+                tabs={[
+                    {
+                        value: 'understand-usage',
+                        label: 'Understand product usage',
+                        content: <UnderstandUsageSlide />,
+                        color: 'bg-blue',
+                        activeText: 'text-white',
+                        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
+                    },
+                    {
+                        value: 'one-place',
+                        label: 'One place for product data',
+                        content: <OnePlaceSlide />,
+                        color: 'bg-teal',
+                        activeText: 'text-black',
+                        progressBar: 'bg-black/70 shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
+                    },
+                    {
+                        value: 'debug-fix',
+                        label: 'Debug & fix issues',
+                        content: <DebugFixSlide />,
+                        color: 'bg-salmon',
+                        activeText: 'text-white',
+                        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
+                    },
+                    {
+                        value: 'test-rollout',
+                        label: 'Test & roll out changes',
+                        content: <TestRolloutSlide />,
+                        color: 'bg-purple',
+                        activeText: 'text-white',
+                        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
+                    },
+                ]}
+            />
+        </>
+    )
+}
+
+function Hero(): JSX.Element {
+    const posthog = usePostHog()
+    return (
+        <RenderInClient
+            placeholder={<></>}
+            render={() =>
+                posthog?.getFeatureFlag?.('homepage-slack-test', { fresh: true }) === 'test' ? (
+                    <TestHero />
+                ) : (
+                    <ControlHero />
+                )
+            }
+        />
+    )
+}
+
 const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     { name: 'Tagline', kind: 'flow', props: [], Editor: () => <Tagline /> },
     { name: 'AppCount', kind: 'flow', props: [], Editor: () => <AppCount /> },
@@ -380,6 +472,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     { name: 'ButtonPricing', kind: 'flow', props: [], Editor: () => <Button url="/pricing">Explore pricing</Button> },
     { name: 'ButtonAI', kind: 'flow', props: [], Editor: () => <Button url="/ai">Learn about PostHog AI</Button> },
     { name: 'ButtonAbout', kind: 'flow', props: [], Editor: () => <Button url="/about">Read more about us</Button> },
+    { name: 'Hero', kind: 'flow', props: [], Editor: () => <Hero /> },
     ...getSharedDescriptors(),
 ]
 
