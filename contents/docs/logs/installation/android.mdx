@@ -6,7 +6,6 @@ showStepsToc: true
 ---
 
 import { Steps, Step } from 'components/Docs/Steps'
-import AndroidInstall from '../../integrate/_snippets/install-android.mdx'
 import LogsNextSteps from './_snippets/logs-next-steps.mdx'
 
 The PostHog Android SDK has built-in support for capturing structured Logs from Android apps. The SDK handles the OTLP encoding, batching, on-disk persistence across app restarts, and lifecycle integration. You just call `PostHog.logger.{trace,debug,info,warn,error,fatal}(...)`.
@@ -19,9 +18,7 @@ The PostHog Android SDK has built-in support for capturing structured Logs from 
 
 <Step title="Install posthog-android" badge="required">
 
-If you haven't installed `posthog-android` yet, follow the steps below. For full details, see the [Android SDK guide](/docs/libraries/android).
-
-<AndroidInstall />
+If you haven't installed `posthog-android` yet, follow the [Android SDK installation guide](/docs/libraries/android#installation).
 
 </Step>
 
@@ -30,24 +27,13 @@ If you haven't installed `posthog-android` yet, follow the steps below. For full
 Configure Logs through `config.logs` before calling `PostHogAndroid.setup(...)`. All fields are optional; defaults are tuned for mobile (cellular bandwidth, battery, app lifecycle).
 
 ```kotlin
-import com.posthog.android.PostHogAndroid
-import com.posthog.android.PostHogAndroidConfig
-
-class SampleApp : Application() {
-    override fun onCreate() {
-        super.onCreate()
-
-        val config = PostHogAndroidConfig(
-            apiKey = "<ph_project_token>",
-            host = "<ph_client_api_host>",
-        ).apply {
-            logs.serviceName = "my-app"        // OTLP service.name – shown in the Logs UI
-            logs.environment = "production"    // OTLP deployment.environment
-            logs.serviceVersion = "1.2.3"      // OTLP service.version
-        }
-
-        PostHogAndroid.setup(this, config)
-    }
+val config = PostHogAndroidConfig(
+    apiKey = "<ph_project_token>",
+    host = "<ph_client_api_host>",
+).apply {
+    logs.serviceName = "my-app"        // OTLP service.name – shown in the Logs UI
+    logs.environment = "production"    // OTLP deployment.environment
+    logs.serviceVersion = "1.2.3"      // OTLP service.version
 }
 ```
 
