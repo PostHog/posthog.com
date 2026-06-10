@@ -87,9 +87,9 @@ For products that we don't have a landing page for, we send them to the home pag
 
 ## Roles
 
-- <TeamMember name="Brian Young" /> owns budget, channel strategy, analytics, and reporting, inc. ICP signups
-- <TeamMember name="Jonah Svihus" /> writes copy and creative across all platforms, inc. scripts for video ads
-- <TeamMember name="Charles Cook" /> acts as copy editor
+- Brian owns budget, channel strategy, analytics, and reporting, inc. ICP signups
+- Jonah writes copy and creative across all platforms, inc. scripts for video ads
+- Charles acts as copy editor
 
 ### Budget
 
