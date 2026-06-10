@@ -7,6 +7,7 @@ import CodeBlock from 'components/Home/CodeBlock'
 import CloudinaryImage from 'components/CloudinaryImage'
 import SnippetRenderer from 'components/SnippetRenderer'
 import { True } from 'components/ComparisonTable/row'
+import MCPInstall from 'components/Products/MCPInstall'
 
 export const sessionReplay = {
     Icon: IconRewindPlay,
@@ -404,6 +405,32 @@ window.posthog.onFeatureFlags(function () {
                 },
             ],
         },
+        {
+            title: 'MCP',
+            headline: 'Search replays from your editor',
+            description:
+                'Find session recordings from Cursor, Claude Code, VS Code, or any MCP-compatible agent. Filter by events, user properties, and frustration signals.',
+            features: [
+                {
+                    title: 'Investigate bug reports',
+                    description: 'Find session replays where users encountered errors to feed your agent with context.',
+                },
+                {
+                    title: 'Research before coding',
+                    description: 'Summarize current user behavior before making code changes.',
+                },
+                {
+                    title: 'Validate after deploying',
+                    description: 'Monitor how users interact with newly deployed updates.',
+                },
+                {
+                    title: 'Search session replays',
+                    description:
+                        'Filter recordings by events, user properties, time ranges, and specific user behaviors.',
+                },
+            ],
+            children: <MCPInstall />,
+        },
     ],
     postHogOnPostHog: {
         title: 'How PostHog uses Session Replay',
@@ -556,6 +583,8 @@ window.posthog.onFeatureFlags(function () {
         },
     ],
     ai: {
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/SESSION_REPLAY_a3ca565731.png',
+        imageAlt: 'PostHog AI and session replay',
         description: 'search, summarize, cluster, and debug session recordings',
         skills: [
             'Finds recordings through natural language prompts – describe the behavior you want instead of setting filters',

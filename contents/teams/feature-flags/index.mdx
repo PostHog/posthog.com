@@ -8,16 +8,16 @@ template: team
 
 ## What this team does
 
-We build feature flag tools, SDKs, and the in-app UI to help users safely ship new features and make data-driven decisions.  
+We build feature flag tools, SDKs, and the in-app UI to help users safely ship new features and make data-driven decisions. We also own the reliability, stability, and performance of the feature flags targeting service and local evaluation endpoints.
 
 Here are some of the things we own:
 
 - **Feature flag SDKs** - SDKs in JS/TS, Python, Java, Rust, PHP, Go, Ruby, Dotnet, Unity, iOS, Flutter, and Android.
 - **Feature flags UI and CRUD API** - a way to manage your feature flags in PostHog
+- **Feature flag evaluation API** - both the soon-to-be-legacy `/decide` endpoint and the new `/flags` endpoint
+- **Local evaluation** - ensuring fast, reliable flag evaluation at the edge
 
-For the underlying evaluation API and platform reliability, see the [Flags Platform](/teams/flags-platform) team.
-
-We're programming polyglots who care deeply about developer experience. Flags should be trivial to add, obvious to manage, and impossible to forget about. That means:
+We write Rust, Python, and a bunch of client SDK languages. We're programming polyglots who care deeply about developer experience, latency, and uptime. Flags should be trivial to add, obvious to manage, and impossible to forget about. That means:
 
 - **Easy instrumentation** — Adding a flag should be a one-liner in any language. SDKs should feel native, not bolted on.
 - **Sensible management** — The UI should make it obvious what a flag does, who it targets, and whether it's still in use. No flag should become a mystery.

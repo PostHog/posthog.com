@@ -33,6 +33,7 @@ export const LOGOS = {
     crewai: 'https://res.cloudinary.com/dmukukwp6/image/upload/crewai_67ee9f5eb6.svg',
     cloudflareR2: 'https://res.cloudinary.com/dmukukwp6/image/upload/r2_0d79d88d1f.svg',
     cloudfront: 'https://res.cloudinary.com/dmukukwp6/image/upload/Cloud_Front_76c0f62ab5.svg',
+    dedalus: 'https://res.cloudinary.com/dmukukwp6/image/upload/dedalus_labs_logo_e03bb97137.svg',
     deepseek: 'https://res.cloudinary.com/dmukukwp6/image/upload/deepseek_df02608124.svg',
     django: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/integrate/frameworks/django.svg',
     docusaurus:
@@ -89,6 +90,7 @@ export const LOGOS = {
     nodejs: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/nodejs.svg',
     nuxt: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/nuxt.svg',
     ollama: 'https://res.cloudinary.com/dmukukwp6/image/upload/ollama_a058ab8f46.svg',
+    opentelemetry: 'https://res.cloudinary.com/dmukukwp6/image/upload/opentelemetry_afb29df5ab.svg',
     phoenix: 'https://res.cloudinary.com/dmukukwp6/image/upload/Phoenix_Framework_81f5da0296.svg',
     perplexity: 'https://res.cloudinary.com/dmukukwp6/image/upload/perplexity_1_cb4f143ce1.svg',
     php: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/php.svg',
@@ -111,6 +113,7 @@ export const LOGOS = {
         'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/rudderstack.svg',
     pinterestAds: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pinterest_ads_563b842dc5.png',
     revenuecat: 'https://res.cloudinary.com/dmukukwp6/image/upload/logomark_red_background_9ea591e17a.svg',
+    roblox: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Roblox_Corporation_2025_logo_svg_301751b47c.png',
     rollup: 'https://res.cloudinary.com/dmukukwp6/image/upload/Rollup_js_c306a2fde3.svg',
     ruby: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/ruby.svg',
     rust: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/rust.svg',
@@ -153,4 +156,18 @@ export type LogoKey = keyof typeof LOGOS
 
 export function getLogo(key: string): string | undefined {
     return LOGOS[key as LogoKey]
+}
+
+// Logos whose source SVGs have hardcoded dark fills/strokes and render poorly on dark backgrounds.
+// `dark:invert` flips pure-black artwork to white; `dark:hue-rotate-180` preserves the original
+// hue of color elements after inversion (used for logos that mix color with black).
+const LOGO_DARK_CLASS_BY_URL: Record<string, string> = {
+    [LOGOS.ios]: 'dark:invert',
+    [LOGOS.rust]: 'dark:invert',
+    [LOGOS.reactRouter]: 'dark:invert dark:hue-rotate-180',
+}
+
+export function getDarkClassForLogo(url?: string): string {
+    if (!url) return ''
+    return LOGO_DARK_CLASS_BY_URL[url] ?? ''
 }

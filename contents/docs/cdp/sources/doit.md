@@ -24,3 +24,7 @@ To link DoIt:
 5. On the next page, set up the reports you want to sync and modify the method and frequency as needed. Once done, click **Import**. New reports will show up in your schemas list periodically as they're created on DoIt.
 
 Once the syncs are complete, you can start using DoIt data in PostHog.
+
+## Configuration
+
+<SourceParameters />
