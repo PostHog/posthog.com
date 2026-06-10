@@ -74,6 +74,19 @@ PostHog.logger.log("rendered cart", severity = PostHogLogSeverity.DEBUG)
 
 Available severity levels: `TRACE`, `DEBUG`, `INFO`, `WARN`, `ERROR`, `FATAL`.
 
+If you need W3C trace correlation, call `PostHog.captureLog(...)` directly and pass `traceId`, `spanId`, and `traceFlags`.
+
+```kotlin
+PostHog.captureLog(
+    "payment failed",
+    severity = PostHogLogSeverity.ERROR,
+    attributes = mapOf("code" to "PAY_3001"),
+    traceId = "4bf92f3577b34da6a3ce929d0e0e4736",
+    spanId = "00f067aa0ba902b7",
+    traceFlags = 0x01,
+)
+```
+
 Records are buffered, batched, persisted to disk, and flushed automatically – every 30 seconds, when the buffer hits the threshold, when the app moves to the background, or on `PostHog.flush()`. `flush()` drains events, Session Replay, and Logs together.
 
 Each record is automatically tagged with the current distinct ID, session ID, current screen, app foreground/background state, and active Feature Flags at the moment of capture.
