@@ -134,6 +134,62 @@ Every campaign, big or small, is assembled from the same building blocks. When y
 - **Subscription topic.** The consent category the flow sends under (see below).
 - **Message limits.** Frequency caps that stop a person being hit by too many emails across all flows at once. Keep these on.
 
+## Personalizing email content from segments
+
+The flows above decide *who* gets an email and *when*. This section is about personalizing *what's inside* one — specifically the dynamic "next steps" block in the onboarding emails, which recommends the products someone hasn't adopted yet, based on what they've already activated and shown intent in.
+
+One quirk shapes the whole approach: **Customer.io's Liquid can't read segments or event history.** Inside an email you can only reach the person's profile attributes (`customer.*`), the event that triggered the send, and journey attributes — there's no `{% if customer in segment "Activated – Replays" %}`. So to personalize content off the segments we already have, we first copy segment membership onto the profile as plain attributes.
+
+### How it works: segments → sync campaigns → attributes → content
+
+1. **The segments already exist** (Layer 2) — "Activated – Analytics", "Primary Intent: Session Replay", and so on.
+2. **"Attr sync" campaigns mirror those segments onto attributes.** For each segment we care about, a tiny `seg_attr` campaign triggers when someone *enters* it and runs a single **Update attributes** action that stamps a value on their profile. These campaigns send no email — they only write data — and share an `Attr sync` name prefix so they group together in the campaigns list.
+3. **The email's Liquid reads the attributes** and builds the personalized content.
+
+The attributes the sync campaigns maintain:
+
+| Attribute | Set when the person enters… | Example value |
+| --- | --- | --- |
+| `activated_<product>` | "Activated – <product>" | `"true"` |
+| `activated_mcp` | "Activated: MCP" | `"true"` |
+| `intent_primary_product` | "Primary Intent: <product>" | `"session_replay"` |
+| `intent_secondary_product` | "Secondary Intent: <product>" | `"feature_flags"` |
+
+`<product>` is a stable key such as `session_replay`, `feature_flags`, or `llm_analytics`. Once the attributes exist, the email can do things like:
+
+```liquid
+{%- if customer.activated_product_analytics and customer.intent_primary_product == 'session_replay' -%}
+  You've set up analytics — Session replay is your next step.
+{%- endif -%}
+```
+
+> **Why run a campaign just to copy data?** It's the only Customer.io-native way to turn "is in this segment" into "has this attribute." The segment encodes the logic (often several events AND-ed together); the sync campaign flattens it into one attribute the email can actually read. Launch each sync campaign **with backfill** so people already in the segment get the attribute, not just those who enter later.
+
+### What the email does with it
+
+The onboarding "next steps" block is one Liquid snippet (pasted into an HTML/code content block, *not* a text block) that:
+
+- works out the person's **anchor** (the product they're furthest along with) and their **top recommendation** (the highest-priority product they *haven't* activated, biased toward their primary then secondary intent);
+- renders 3–5 bullets — the personalized recommendations first ("You've set up analytics, but data won't tell you everything. Session replay lets PostHog replay the story behind every drop-off."), then always-on nudges to set up the data warehouse and to use PostHog AI;
+- personalizes the **subject line, hero headline, and CTA** to that same top product, plus a closing **"one thing to do" line** that hands the reader a question to ask PostHog AI about it.
+
+All the editable copy lives in a handful of aligned lists at the top of the snippet (product keys, display names, app URLs, and the recommendation sentences). The snippet itself lives in the email in Customer.io, not in this repo — ask <TeamMember name="Joe Martin" photo /> for the current version.
+
+> **Two gotchas if you edit the Liquid:**
+> - **Variables are per-block.** Anything you `{% assign %}` lives only inside that one content block — not in other blocks, and not in the subject field. Each block or field that uses a value needs the logic that computes it included alongside it.
+> - **Use single quotes only inside code blocks.** The HTML/code block HTML-encodes double quotes (`"` becomes `&quot;`), which breaks Liquid. Write the whole snippet with single quotes.
+
+### Adding a new product to the next-steps block
+
+When your product is part of the standard onboarding experience and should show up as a recommendation:
+
+1. **Confirm the source segments exist** — an "Activated – <product>" segment and "Primary/Secondary Intent: <product>" segments. These come from Growth Engineering's [intent](/handbook/growth/growth-engineering/product-intents) and [activation](/handbook/growth/growth-engineering/per-product-activation) instrumentation (Layer 1), so sort that first.
+2. **Create the "Attr sync" campaigns** for those segments — one `seg_attr` campaign per segment whose only action sets the attribute (`activated_<product> = "true"`, or `intent_primary_product = "<product>"`). Launch each with backfill.
+3. **Add the product to the snippet** — add its key, display name, app URL, and recommendation sentence to the aligned config lists (keep every list the same length and order), add its `activated_<product>` check, and add a question for it to the PostHog AI "one thing" list.
+4. **Test** — preview the email against a profile with the new attributes set, and confirm the product shows up in the bullets, the subject, and the CTA.
+
+This is fiddly and easy to get subtly wrong (misaligned lists, or a sync campaign that wasn't backfilled). Loop in <TeamMember name="Joe Martin" photo /> rather than guessing.
+
 ## Conventions and rules of practice
 
 These are the defaults we follow. Deviate when you have a good reason, but know that you're deviating:
@@ -155,7 +211,7 @@ Here's the playbook. Not every step applies to every launch, but this is the pat
 2. **During beta, lean on what already exists.** The beta onboarding flow already catches everyone who enrolls in your feature and asks them for feedback — you usually get that for free. If you want to do more (a dedicated beta nurture, an announcement to a waitlist), build a beta segment for your product (the "Beta Users – [product]" pattern) and a small, single-purpose flow.
 
 3. **Decide: extend the main flow, or build a new one?** This is the key decision.
-   - *Extend Onboarding 8.0* when your product is part of the standard new-user experience. In practice this means adding your product's intent branch and a few product-specific emails (a demo video, a tip, an activation nudge) to the existing flow. This is usually the right answer for a core product — it keeps everything in one place and benefits from the existing branching and exit logic.
+   - *Extend Onboarding 8.0* when your product is part of the standard new-user experience. In practice this means adding your product's intent branch and a few product-specific emails (a demo video, a tip, an activation nudge) to the existing flow. This is usually the right answer for a core product — it keeps everything in one place and benefits from the existing branching and exit logic. If it should also appear in the personalized recommendations, follow [adding a new product to the next-steps block](#adding-a-new-product-to-the-next-steps-block).
    - *Build a standalone flow* when your audience is distinct (a specific program, a specific behavior) or the messaging doesn't fit the new-user arc. Use an event trigger for "when X happens" and a segment trigger for "everyone who is X."
 
 4. **Build the segments you need.** Typically an intent segment (to find interested people), an activation segment (to know who succeeded — often already built as part of step 1), and any audience segment specific to your launch.
