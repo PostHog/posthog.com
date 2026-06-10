@@ -1103,6 +1103,10 @@ export const handbookSidebar = [
                         url: '/handbook/marketing/slack-messaging',
                     },
                     {
+                        name: 'Social media',
+                        url: '/handbook/marketing/social-media',
+                    },
+                    {
                         name: 'Partnerships',
                         url: '/handbook/marketing/partners',
                     },
