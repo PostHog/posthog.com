@@ -10,6 +10,7 @@ import {
     SvelteInstallation,
     NuxtInstallation,
     RemixInstallation,
+    ReactRouterInstallation,
     TanStackInstallation,
     // Mobile SDK installations
     IOSInstallation,
@@ -100,6 +101,12 @@ export const WANuxtInstallationWrapper = () => (
 export const WARemixInstallationWrapper = () => (
     <OnboardingContentWrapper snippets={WEB_SNIPPETS}>
         <RemixInstallation modifySteps={addNextStepsStep} />
+    </OnboardingContentWrapper>
+)
+
+export const WAReactRouterInstallationWrapper = () => (
+    <OnboardingContentWrapper snippets={WEB_SNIPPETS}>
+        <ReactRouterInstallation modifySteps={addNextStepsStep} />
     </OnboardingContentWrapper>
 )
 

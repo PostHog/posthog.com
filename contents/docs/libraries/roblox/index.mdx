@@ -1,0 +1,301 @@
+---
+title: Roblox
+sidebarTitle: Roblox
+sidebar: Docs
+showTitle: true
+github: 'https://github.com/PostHog/posthog-roblox'
+platformLogo: roblox
+features:
+  eventCapture: true
+  userIdentification: true
+  autoCapture: true
+  sessionRecording: false
+  featureFlags: true
+  groupAnalytics: true
+  surveys: false
+  llmAnalytics: false
+  errorTracking: true
+---
+
+> **Note:** This SDK is currently in **beta**. Please report any issues on [GitHub](https://github.com/PostHog/posthog-roblox/issues).
+
+This is the official PostHog SDK for Roblox. It's **server-authoritative**: because only the Roblox server can make outbound HTTP requests, the server owns all batching, identity, feature flags, error tracking, and HTTP. A thin client module relays capture calls and client errors to the server over a `RemoteEvent`.
+
+Each player is a PostHog user, keyed by their stable Roblox `UserId`. The SDK keeps an in-memory event queue that's flushed on an interval and again on `game:BindToClose()`, which suits Roblox's ephemeral servers.
+
+## Installation
+
+import RobloxInstall from '../../integrate/_snippets/install-roblox.mdx'
+
+<RobloxInstall />
+
+## Capturing events
+
+import RobloxSendEvents from '../../integrate/send-events/_snippets/send-events-roblox.mdx'
+
+<RobloxSendEvents />
+
+## Identifying users
+
+> We highly recommend reading our section on [Identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
+
+Every player already has a real identity, their Roblox `UserId`, so player events are attributed and create [person profiles](/docs/data/persons) automatically. There's no anonymous-to-identified transition to manage and no `reset` to call. Use `Identify` to attach [person properties](/docs/product-analytics/person-properties) to a player:
+
+```lua
+PostHog:Identify(player, {
+    display_name = player.DisplayName,
+    level = 12,
+})
+```
+
+The first argument is a [subject](#capturing-events), so you can also identify by `UserId` or distinct ID. Pass a third argument to set properties only if they aren't already set (`$set_once`):
+
+```lua
+PostHog:Identify(player, { favorite_mode = "survival" }, { first_seen = os.time() })
+```
+
+## Anonymous vs identified events
+
+PostHog captures two types of events: [**anonymous** and **identified**](/docs/data/anonymous-vs-identified-events). Identified events are attributed to a person and build a [person profile](/docs/data/persons); anonymous events are not.
+
+On Roblox this is simpler than on most platforms. Every player already has a stable identity, their Roblox `UserId`, so events you capture for a player are **identified** and create a person profile automatically. There's no logged-out or guest state to reconcile, and no `reset` to call.
+
+The events that stay **anonymous** are **server-scoped** events you capture with a `nil` subject. These describe the server or experience as a whole (for example `server_started` or `shop_restocked`) rather than any one player, so they don't create a person profile.
+
+> **Tip:** Anonymous events are cheaper to process than identified ones, so capture server-wide telemetry that isn't about a specific player with a `nil` subject rather than attributing it to an arbitrary player.
+
+### Controlling person profiles
+
+By default, player events create person profiles and server-scoped events (those captured with a `nil` subject) do not. Change this with `personProfiles`:
+
+```lua
+PostHog:Init({
+    apiKey = "<ph_project_token>",
+    personProfiles = "identified_only", -- default
+})
+```
+
+Available options:
+
+- `"identified_only"` (default) – player events create profiles; server-scoped events don't.
+- `"always"` – every event creates or updates a person profile.
+- `"never"` – no event creates a person profile.
+
+## Super properties
+
+Super properties are attached to every event the server sends. They're **server-global**: set once on the server, they apply to events from every player, which makes them a good fit for server-wide context like the place version or region.
+
+Set them with `Register`, which takes a key and value:
+
+```lua
+PostHog:Register("place_version", game.PlaceVersion)
+PostHog:Register("region", "us-east")
+```
+
+> **Note:** Super properties live in memory for the lifetime of the server. Unlike on persistent clients, they aren't stored across sessions, so register the ones you need during `Init` or server startup.
+
+### Removing super properties
+
+```lua
+PostHog:Unregister("region")
+```
+
+## Group analytics
+
+Group analytics lets you associate a player's events with a group (for example a guild, party, or server). Read the [Group analytics](/docs/product-analytics/group-analytics) guide for more information.
+
+> **Note:** This is a paid feature and is not available on the open-source or free cloud plan. Learn more on the [pricing page](/pricing).
+
+- Associate a player's events with a group:
+
+```lua
+PostHog:Group(player, "guild", "guild_id_in_your_db")
+```
+
+- Associate events with a group and update the group's properties:
+
+```lua
+PostHog:Group(player, "guild", "guild_id_in_your_db", {
+    name = "The Knights",
+    member_count = 42,
+})
+```
+
+The `name` is a special property used in the PostHog UI for the group's name. If you don't specify it, the group key is used instead.
+
+## Feature flags
+
+import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
+
+<FeatureFlagsLibsIntro />
+
+import RobloxFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/feature-flags-code-roblox.mdx'
+
+<RobloxFeatureFlagsCode />
+
+## Experiments (A/B tests)
+
+Since [experiments](/docs/experiments/start-here) use feature flags, the code for running an experiment is very similar to the feature flags code:
+
+```lua
+local flag = PostHog:GetFeatureFlag(player, "experiment-feature-flag-key")
+if flag.variant == "control" then
+    -- Do something for the control group
+elseif flag.variant == "test" then
+    -- Do something for the test group
+end
+```
+
+It's also possible to [run experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags).
+
+## Error tracking
+
+The Roblox SDK captures unhandled errors automatically and sends them to PostHog as `$exception` events. This is enabled by default. On the server it listens to `ScriptContext.Error`; requiring the module on the client captures unhandled client errors and relays them to the server.
+
+For the full setup guide, see the [Roblox error tracking installation docs](/docs/error-tracking/installation/roblox).
+
+### Manual exception capture
+
+For handled errors you want to report, call `CaptureException` with a subject, a message, and an optional stack trace and properties:
+
+```lua
+local ok, err = pcall(riskyOperation)
+if not ok then
+    PostHog:CaptureException(player, err, debug.traceback(), {
+        context = "load_world",
+        world = "desert",
+    })
+end
+```
+
+From a `LocalScript`, the relay version takes no subject:
+
+```lua
+PostHog:CaptureException("Something went wrong", debug.traceback())
+```
+
+### Configuration
+
+```lua
+PostHog:Init({
+    apiKey = "<ph_project_token>",
+    captureErrors = true,        -- Enable automatic capture (default: true)
+    errorDebounceSeconds = 1,    -- Minimum gap between auto-captured server errors (default: 1)
+})
+```
+
+To disable automatic capture, set `captureErrors = false`.
+
+## Autocapture
+
+With `captureLifecycleEvents` enabled (the default), the SDK records a set of session and server events automatically, with no manual instrumentation. These give you concurrency, retention, and engagement metrics from the moment you initialize, so there's meaningful data to chart before you write a single custom event.
+
+| Event | When it fires | Key properties |
+| --- | --- | --- |
+| `server_started` | The SDK initializes on a server | `player_count`, `max_players`, `is_private_server`, `is_reserved_server` |
+| `server_shutdown` | The server shuts down (`game:BindToClose`) | `player_count`, `uptime_seconds` |
+| `player_joined` | A player joins | `is_teleport`, `player_count`, `account_age_days`, `membership_type`, `country_code` |
+| `player_left` | A player leaves | `session_duration_seconds`, `player_count`, `platform`, `country_code` |
+| `player_idle` | Roblox reports a player has gone idle | `idle_seconds` |
+
+Every event, autocaptured or manual, also carries standard context such as `$session_id`, `$os`, `$device_type`, place and server identifiers, and the SDK version.
+
+To turn autocapture off:
+
+```lua
+PostHog:Init({
+    apiKey = "<ph_project_token>",
+    captureLifecycleEvents = false,
+})
+```
+
+> **Note:** `platform` is reported by the client relay, so on `player_joined` (which fires the instant a player connects) it's usually not known yet; it's populated by the time `player_left` fires. `country_code` is resolved before `player_joined` is sent.
+
+## Sessions and teleports
+
+A session corresponds to a player's connection to a server, and every event carries its `$session_id`. Because experiences often teleport players between places, you can continue a player's session across a teleport so the whole journey is stitched together.
+
+Merge the SDK's teleport data into your `TeleportData` before teleporting:
+
+```lua
+local TeleportService = game:GetService("TeleportService")
+
+local options = Instance.new("TeleportOptions")
+options:SetTeleportData(PostHog:GetSessionTeleportData(player))
+
+TeleportService:TeleportAsync(placeId, { player }, options)
+```
+
+The destination server restores the session automatically when the player arrives, so their events keep the same `$session_id`.
+
+## The client relay
+
+Requiring `PostHog` from a `LocalScript` gives you a thin relay rather than the full SDK. It can't make HTTP requests, so it forwards capture calls and client errors to the server over a `RemoteEvent`, where they're attributed to the firing player.
+
+```lua
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local PostHog = require(ReplicatedStorage:WaitForChild("PostHog"))
+
+-- Optional. Errors are captured automatically; pass { captureErrors = false } to turn that off.
+PostHog:Init()
+
+PostHog:Capture("button_clicked", { button = "play" })
+```
+
+The client is treated as untrusted. The server validates every relayed message, caps the number of properties, rate-limits per player, blocks reserved (`$`-prefixed) event names, and always attributes events to the sender, so a client can never spoof another player or the server. Set `enableClientRelay = false` during `Init` if you only capture on the server and want no client surface at all.
+
+## Opt out of data capture
+
+For privacy compliance, you can stop and resume capturing for a given subject at any time:
+
+```lua
+PostHog:OptOut(player)
+
+-- Later
+PostHog:OptIn(player)
+```
+
+## Debug mode
+
+If you're not seeing the events or feature flags you expect, raise the log level to see what the SDK is doing in the output:
+
+```lua
+PostHog:Init({
+    apiKey = "<ph_project_token>",
+    host = "<ph_client_api_host>",
+    logLevel = "debug",
+})
+```
+
+Available log levels: `"none"`, `"error"`, `"warn"`, `"info"`, `"debug"`.
+
+## Manual flush
+
+Events are sent in batches (every `flushIntervalSeconds`, or once `flushAt` events are queued). Force a send immediately, for example while testing:
+
+```lua
+PostHog:Flush()
+```
+
+This is asynchronous and doesn't yield. On the client, `Flush` is a no-op since flushing happens on the server.
+
+## Shutdown
+
+The SDK flushes automatically on `game:BindToClose()`, so you rarely need to shut it down explicitly. If you want to stop autocapture, error tracking, and the relay, and flush early:
+
+```lua
+PostHog:Shutdown()
+```
+
+## Troubleshooting
+
+### Events not appearing in PostHog
+
+1. **HTTP is enabled.** Turn on **Game Settings > Security > Allow HTTP Requests**. Without it the server can't send anything.
+2. **`Init` ran on the server.** It must be called from a `Script`, not a `LocalScript`. With `logLevel = "debug"` you should see `PostHog initialized` in the output.
+3. **The key and host are correct.** The key starts with `phc_`, and the host matches your region (`https://us.i.posthog.com` or `https://eu.i.posthog.com`).
+4. **You waited for a flush.** Events batch every `flushIntervalSeconds` or once `flushAt` are queued. Call `PostHog:Flush()` to send immediately.
+
+### Client events not arriving
+
+Client events are relayed to the server, so the server SDK must be initialized with `enableClientRelay = true` (the default). If the client logs that the relay `RemoteEvent` wasn't found, the server SDK isn't running.

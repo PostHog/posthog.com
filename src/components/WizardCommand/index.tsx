@@ -1,25 +1,41 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { IconCopy, IconChevronRight, IconCheck, IconArrowUpRight } from '@posthog/icons'
 import useCloud from 'hooks/useCloud'
 import { useToast } from '../../context/Toast'
 import Link from 'components/Link'
 import ZoomHover from 'components/ZoomHover'
 
+const variantStyles: Record<string, string> = {
+    default: 'bg-white text-black',
+    bordered: 'bg-white text-black border border-primary shadow-sm',
+}
+
 export default function WizardCommand({
     className = '',
+    command = '',
     latest = true,
     slim = false,
+    variant = 'default',
+    onCopy,
 }: {
     className?: string
+    command?: string
     latest?: boolean
     slim?: boolean
+    variant?: keyof typeof variantStyles
+    onCopy?: () => void
 }): JSX.Element {
     const cloud = useCloud()
     const { addToast } = useToast()
-    const code = `npx @posthog/wizard${latest ? '@latest' : ''}${cloud ? ` --region ${cloud}` : ''}`
+    const [copyKey, setCopyKey] = useState(0)
+    const code = `npx @posthog/wizard${latest ? '@latest' : ''}${cloud ? ` --region ${cloud}` : ''}${
+        command ? ` ${command}` : ''
+    }`
 
     const handleCopy = () => {
         navigator.clipboard.writeText(code)
+        setCopyKey((k) => k + 1)
+        onCopy?.()
         addToast({
             description: (
                 <span className="inline-flex items-center gap-1.5">
@@ -36,12 +52,25 @@ export default function WizardCommand({
             <ZoomHover size="lg">
                 <button
                     onClick={handleCopy}
-                    className={`group inline-flex items-center gap-2 bg-dark text-white font-mono text-sm pl-3 pr-3 py-2.5 rounded-md cursor-pointer border-0 dark:border border-secondary ${
+                    className={`group inline-flex items-center gap-2 ${
+                        variantStyles[variant] || variantStyles.default
+                    } font-mono text-sm px-2 py-1.5 rounded-md cursor-pointer ${
                         !slim ? 'relative z-10' : ''
                     } ${className}`}
                 >
                     <IconChevronRight className="size-4 opacity-50" />
-                    <code className="!bg-transparent !p-0 !border-0 mr-1 text-white dark:text-yellow">{code}</code>
+                    <span className="relative mr-1">
+                        <code className="!bg-transparent !p-0 !border-0 text-gradient-wizard select-none">{code}</code>
+                        {copyKey > 0 && (
+                            <code
+                                key={copyKey}
+                                className="!bg-transparent !p-0 !border-0 absolute inset-0 text-[#36C46F] pointer-events-none text-gradient-wizard-flash"
+                                aria-hidden="true"
+                            >
+                                {code}
+                            </code>
+                        )}
+                    </span>
                     <IconCopy className="size-4 opacity-60 group-hover:opacity-80" />
                 </button>
             </ZoomHover>

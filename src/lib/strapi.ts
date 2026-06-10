@@ -89,6 +89,7 @@ export type ProfileData = {
         size: 'XS' | 'S' | 'M' | 'L' | 'XL' | '2XL' | '3XL' | null
         additionalInfo: string | null
     } | null
+    reputation?: number
 }
 
 export type UserData = {
@@ -105,7 +106,9 @@ export type ReplyData = {
     createdAt: string
     updatedAt: string
     publishedAt: string
-    profile?: StrapiData<Pick<ProfileData, 'firstName' | 'lastName' | 'avatar' | 'gravatarURL' | 'teams' | 'pronouns'>>
+    profile?: StrapiData<
+        Pick<ProfileData, 'firstName' | 'lastName' | 'avatar' | 'gravatarURL' | 'teams' | 'pronouns' | 'reputation'>
+    >
     upvoteProfiles: StrapiData<ProfileData[]>
     downvoteProfiles: StrapiData<ProfileData[]>
 }

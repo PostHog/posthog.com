@@ -40,7 +40,7 @@ To help you pick the best of these tools, we put together this list. All of the 
 
 [PostHog](/) is an all-in-one developer platform that combines [LLM observability](/llm-analytics) with several other developer-focused tools, such as [product](/product-analytics) and [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), and [surveys](/surveys).
 
-Its LLM observability product (known as [LLM analytics](/docs/llm-analytics)) integrates with popular LLM providers, captures details of generations, provides an aggregated metrics dashboard, and more.
+Its LLM observability product (known as [AI Observability](/docs/ai-observability)) integrates with popular LLM providers, captures details of generations, provides an aggregated metrics dashboard, and more.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_07_at_11_06_21_678982e3a9.png"
@@ -51,15 +51,15 @@ Its LLM observability product (known as [LLM analytics](/docs/llm-analytics)) in
 
 #### What makes PostHog special?
 
-PostHog’s LLM analytics app works with the rest of our dev tool suite. This means you can visualize LLM-related data along product and business data, create custom queries using [SQL](/docs/product-analytics/sql), view [session replays](/docs/session-replay) of AI interactions, [A/B test prompts](/tutorials/llm-ab-tests), and more.
+PostHog’s AI Observability app works with the rest of our dev tool suite. This means you can visualize LLM-related data along product and business data, create custom queries using [SQL](/docs/product-analytics/sql), view [session replays](/docs/session-replay) of AI interactions, [A/B test prompts](/tutorials/llm-ab-tests), and more.
 
 Two features worth highlighting for teams iterating on LLM apps:
 
-- **[Prompt management](/docs/llm-analytics/prompt-management) (beta):** Create and version prompts directly in PostHog. Prompts are fetched at runtime via the SDK with caching and fallback support, so you can update them without code deploys. Non-engineers can iterate on prompts from the UI, and every change creates an immutable version you can compare, restore, or link to traces to see which prompt versions drive which outputs.
+- **[Prompt management](/docs/ai-observability/prompt-management) (beta):** Create and version prompts directly in PostHog. Prompts are fetched at runtime via the SDK with caching and fallback support, so you can update them without code deploys. Non-engineers can iterate on prompts from the UI, and every change creates an immutable version you can compare, restore, or link to traces to see which prompt versions drive which outputs.
 
-- **[Evaluations](/docs/llm-analytics/evals) (beta):** Score LLM outputs automatically or with human review to track quality over time – not just whether API calls succeed, but [whether they're actually good](/blog/stop-ai-slop).
+- **[Evaluations](/docs/ai-observability/evals) (beta):** Score LLM outputs automatically or with human review to track quality over time – not just whether API calls succeed, but [whether they're actually good](/blog/stop-ai-slop).
 
-PostHog’s hosted Cloud version and all of its LLM analytics features are free to use. It comes with 100k LLM observability events for free every month with 30 day retention. Beyond this, pricing is usage-based and [totally transparent](/pricing). 
+PostHog’s hosted Cloud version and all of its AI Observability features are free to use. It comes with 100k LLM observability events for free every month with 30 day retention. Beyond this, pricing is usage-based and [totally transparent](/pricing).
 
 Use the [setup wizard](/wizard) to get started in minutes – no sales call or elaborate configuration needed.
 
@@ -71,7 +71,7 @@ Use the [setup wizard](/wizard) to get started in minutes – no sales call or e
 - GitHub stars: 23.3k as of March 2026
 - [Langfuse on GitHub](https://github.com/langfuse/langfuse)
 
-[Langfuse](/docs/llm-analytics/integrations/langfuse-posthog) (recently acquired by ClickHouse) is an open source LLM engineering platform. It provides LLM call tracking and tracing, prompt management, evaluation, datasets, and more. These give LLM app developers tools they need for their entire workflow.
+[Langfuse](/docs/ai-observability/integrations/langfuse-posthog) (recently acquired by ClickHouse) is an open source LLM engineering platform. It provides LLM call tracking and tracing, prompt management, evaluation, datasets, and more. These give LLM app developers tools they need for their entire workflow.
 
 Langfuse can be self-hosted for free. If you prefer a managed service, Langfuse Cloud is free to use up to 50k events per month and 2 users, but this only includes 30 day data access. Pricing beyond this starts at $29/m for 100k events with additional events at $8/m more.
 
@@ -145,7 +145,7 @@ Like Opik, Phoenix is connected to a broader AI development platform. Unique to 
 - GitHub stars: 5.3k as of March 2026
 - [Helicone on GitHub](https://github.com/Helicone/helicone)
 
-[Helicone](/docs/llm-analytics/integrations/helicone-posthog) is an open source platform for monitoring, debugging, and improving LLM applications. Beyond integrations with popular LLM providers, tracing, and an aggregate analytics dashboard, Helicone provides more tools like prompt management and evals. 
+[Helicone](/docs/ai-observability/integrations/helicone-posthog) is an open source platform for monitoring, debugging, and improving LLM applications. Beyond integrations with popular LLM providers, tracing, and an aggregate analytics dashboard, Helicone provides more tools like prompt management and evals. 
 
 Recently acquired by Mintlify, it will continue operating in maintenance mode.
 
@@ -175,10 +175,10 @@ Here's the (short) sales pitch.
 We're biased, obviously, but we think you'll love PostHog if:
 
 - You want LLM observability connected to the rest of your product data – session replays, feature flags, A/B testing, and analytics all in one place
-- You're already using PostHog, so adding LLM analytics requires no extra setup or contract
+- You're already using PostHog, so adding AI Observability requires no extra setup or contract
 - You want to try before you buy (we're self-serve with a [generous free tier](/pricing))
 
-It's completely free to get started – no credit card required. Our [setup wizard](/wizard) handles configuration in minutes, or you can check out [our docs](/docs/llm-analytics) to do it yourself.
+It's completely free to get started – no credit card required. Our [setup wizard](/wizard) handles configuration in minutes, or you can check out [our docs](/docs/ai-observability) to do it yourself.
 
 <WizardCTA />
 
@@ -221,7 +221,7 @@ If you're building an LLM-powered app and have shipped to real users, you need o
 - You're not sure which prompts or models are causing user drop-off
 - You're spending more on tokens than expected and don't know where the cost is going
 - You have no visibility into latency spikes or failure rates
-- You want to run evals or compare model versions systematically
+- You want to [run evals or compare model versions systematically](/blog/testing-ai-agents)
 
 Most tools on this list are free to start, so there's no reason to wait.
 
@@ -230,9 +230,9 @@ Most tools on this list are free to start, so there's no reason to wait.
 <details>
 <summary>Do I need a separate LLM observability tool if I already use PostHog?</summary>
 
-No. PostHog's [LLM analytics](/docs/llm-analytics) product is built into the platform, so if you're already using PostHog for product analytics or session replay, you can add LLM observability without any additional setup or contract. You get 100k LLM events free per month.
+No. PostHog's [LLM observability](/docs/ai-observability) product is built into the platform, so if you're already using PostHog for product analytics or session replay, you can add LLM observability without any additional setup or contract. You get 100k LLM events free per month.
 
-[Getting started](docs/llm-analytics/start-here) is easy; once you install the SDK, it will handle all the heavy lifting. Use your LLM provider as normal and we'll capture everything automatically.
+[Getting started](docs/ai-observability/start-here) is easy; once you install the SDK, it will handle all the heavy lifting. Use your LLM provider as normal and we'll capture everything automatically.
 
 </details>
 
@@ -256,7 +256,7 @@ For specific provider support, check each tool's documentation.
 
 ## Related reading
 
-- [PostHog LLM analytics documentation](/docs/llm-analytics)
+- [PostHog LLM observability documentation](/docs/ai-observability)
 - [How to A/B test LLM prompts with PostHog](/tutorials/llm-ab-tests)
 - [The best error tracking tools](/blog/best-error-tracking-tools) – if you're also instrumenting the rest of your app alongside the LLM parts
 

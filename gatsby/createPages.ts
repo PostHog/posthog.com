@@ -40,6 +40,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const HandbookTemplate = path.resolve(`src/templates/Handbook.tsx`)
 
     const DataPipeline = path.resolve(`src/templates/DataPipeline.tsx`)
+    const DataWarehouseSource = path.resolve(`src/templates/DataWarehouseSource.tsx`)
     const SdkReferenceTemplate = path.resolve(`src/templates/sdk/SdkReference.tsx`)
     const SdkTypeTemplate = path.resolve(`src/templates/sdk/SdkType.tsx`)
 
@@ -255,6 +256,23 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     }
                 }
             }
+            localizedNewsletter: allMdx(
+                filter: { frontmatter: { date: { ne: null } }, fields: { slug: { regex: "/^/ko/newsletter/" } } }
+            ) {
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                    frontmatter {
+                        translationOf
+                    }
+                }
+            }
             library: allMdx(
                 filter: {
                     isFuture: { eq: false }
@@ -381,6 +399,38 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     type
                 }
             }
+            postHogSources: allPostHogSource(filter: { mdx: { id: { eq: null } }, unreleased: { ne: true } }) {
+                nodes {
+                    id
+                    name
+                    slug
+                }
+            }
+            postHogSourcesWithDocs: allPostHogSource(filter: { mdx: { id: { ne: null } }, unreleased: { ne: true } }) {
+                nodes {
+                    id
+                    slug
+                    mdx {
+                        id
+                        fields {
+                            slug
+                        }
+                    }
+                }
+            }
+            selfHostedSources: allMdx(
+                filter: {
+                    fields: { slug: { regex: "/^/docs/cdp/sources/(s3|azure-blob|r2|gcs)$/" } }
+                    frontmatter: { title: { ne: "" } }
+                }
+            ) {
+                nodes {
+                    id
+                    fields {
+                        slug
+                    }
+                }
+            }
             allSdkReferences {
                 nodes {
                     info {
@@ -479,6 +529,44 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     }
 
     const menuFlattened = flattenMenu(menu)
+    const localizedNewsletterNodes = result.data.localizedNewsletter.nodes
+    const englishNewsletterSlugs = new Set<string>(
+        result.data.libraryArticles.nodes
+            .map((node: any) => replacePath(node.fields.slug))
+            .filter((slug: string) => slug.startsWith('/newsletter/'))
+    )
+    localizedNewsletterNodes.forEach((node) => {
+        const translationOf = node.frontmatter?.translationOf
+        if (!translationOf) return
+        const normalized = replacePath(translationOf)
+        if (!englishNewsletterSlugs.has(normalized)) {
+            console.warn(
+                `[i18n] Korean translation ${node.fields.slug} references missing English slug: ${translationOf}`
+            )
+        }
+    })
+    const indexableNewsletterTranslations = localizedNewsletterNodes.filter(
+        (node) =>
+            node.frontmatter?.translationOf && englishNewsletterSlugs.has(replacePath(node.frontmatter.translationOf))
+    )
+    const koreanByEnglishSlug = indexableNewsletterTranslations.reduce<Record<string, string>>((acc, node) => {
+        acc[replacePath(node.frontmatter.translationOf)] = replacePath(node.fields.slug)
+        return acc
+    }, {})
+
+    const getNewsletterLanguageAlternates = (slug: string, translationOf?: string) => {
+        const currentSlug = replacePath(slug)
+        const englishSlug = translationOf ? replacePath(translationOf) : currentSlug
+        const koreanSlug = translationOf ? currentSlug : koreanByEnglishSlug[englishSlug]
+
+        if (!koreanSlug) return undefined
+
+        return [
+            { hrefLang: 'en', href: englishSlug },
+            { hrefLang: 'ko', href: koreanSlug },
+            { hrefLang: 'x-default', href: englishSlug },
+        ]
+    }
 
     const findNext = (menu, currentURL) => {
         for (let i = 0; i < menu.length; i++) {
@@ -567,6 +655,8 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 
     result.data.allMdx.nodes.forEach((node) => {
         if (node.parent?.sourceInstanceName === 'posthog-main-repo') return
+        const plainSlug = node.fields?.slug || node.slug
+        if (plainSlug?.startsWith('/ko/newsletter/') || plainSlug?.startsWith('ko/newsletter/')) return
         createPage({
             path: replacePath(node.slug),
             component: PlainTemplate,
@@ -758,6 +848,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     result.data.libraryArticles.nodes.forEach((node) => {
         const { slug } = node.fields
         const tableOfContents = node.headings && formatToc(node.headings)
+        const isEnglishNewsletter = replacePath(slug).startsWith('/newsletter/')
         createPage({
             path: replacePath(slug),
             component: BlogPostTemplate,
@@ -767,6 +858,30 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 slug,
                 post: true,
                 article: true,
+                languageAlternates: isEnglishNewsletter ? getNewsletterLanguageAlternates(slug) : undefined,
+            },
+        })
+    })
+
+    result.data.localizedNewsletter.nodes.forEach((node) => {
+        const { slug } = node.fields
+        const { translationOf } = node.frontmatter || {}
+        const isIndexableTranslation = translationOf && englishNewsletterSlugs.has(replacePath(translationOf))
+        const tableOfContents = node.headings && formatToc(node.headings)
+
+        createPage({
+            path: replacePath(slug),
+            component: BlogPostTemplate,
+            context: {
+                id: node.id,
+                tableOfContents,
+                slug,
+                post: true,
+                article: true,
+                localizedRoot: 'newsletter',
+                languageAlternates: isIndexableTranslation
+                    ? getNewsletterLanguageAlternates(slug, translationOf)
+                    : undefined,
             },
         })
     })
@@ -924,6 +1039,55 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     })
 
+    // Sources WITHOUT hand-written docs: create API-generated pages at both paths
+    result.data.postHogSources.nodes.forEach((node) => {
+        createPage({
+            path: `/docs/data-warehouse/sources/${node.slug}`,
+            component: DataWarehouseSource,
+            context: { id: node.id, ignoreWrapper: true },
+        })
+        createPage({
+            path: `/docs/cdp/sources/${node.slug}`,
+            component: DataWarehouseSource,
+            context: { id: node.id, ignoreWrapper: true },
+        })
+    })
+
+    // Sources WITH hand-written docs: create data-warehouse page from the MDX content
+    // (cdp page is already created by Gatsby's MDX processing from contents/docs/cdp/sources/)
+    result.data.postHogSourcesWithDocs.nodes.forEach((node) => {
+        if (node.mdx?.id) {
+            createPage({
+                path: `/docs/data-warehouse/sources/${node.slug}`,
+                component: HandbookTemplate,
+                context: {
+                    id: node.mdx.id,
+                    links: [],
+                    nextURL: '',
+                    searchFilter: 'Docs',
+                    breadcrumbBase: { name: 'Docs', url: '/docs' },
+                },
+            })
+        }
+    })
+
+    // Self-hosted sources: not in the API, but have MDX files at cdp/sources/
+    // Create data-warehouse alias pages for them
+    result.data.selfHostedSources.nodes.forEach((node) => {
+        const slug = node.fields.slug.replace('/docs/cdp/sources/', '')
+        createPage({
+            path: `/docs/data-warehouse/sources/${slug}`,
+            component: HandbookTemplate,
+            context: {
+                id: node.id,
+                links: [],
+                nextURL: '',
+                searchFilter: 'Docs',
+                breadcrumbBase: { name: 'Docs', url: '/docs' },
+            },
+        })
+    })
+
     // Grab types available for each SDK and version
     const sdkTypesByReference = result.data.allSdkTypes.nodes.reduce((acc, node) => {
         const { referenceId, version, ...types } = node
@@ -1074,6 +1238,20 @@ async function createMinimalPages({
                     }
                 }
             }
+            localizedNewsletter: allMdx(
+                filter: { frontmatter: { date: { ne: null } }, fields: { slug: { regex: "/^/ko/newsletter/" } } }
+            ) {
+                nodes {
+                    id
+                    headings {
+                        depth
+                        value
+                    }
+                    fields {
+                        slug
+                    }
+                }
+            }
         }
     `)
 
@@ -1157,13 +1335,32 @@ async function createMinimalPages({
         handbook: { nodes: any[] }
         productEngineerHandbook: { nodes: any[] }
         posts: { nodes: any[] }
+        localizedNewsletter: { nodes: any[] }
     }
 
     createHandbookPreviewPosts(data.docs.nodes, 'docs', { name: 'Docs', url: '/docs' })
+
     createHandbookPreviewPosts(data.handbook.nodes, 'handbook', { name: 'Handbook', url: '/handbook' })
     createHandbookPreviewPosts(data.productEngineerHandbook.nodes, 'product-engineer', {
         name: 'Product Engineer Handbook',
         url: '/product-engineer',
     })
     createBlogPreviewPosts(data.posts.nodes)
+    data.localizedNewsletter.nodes.forEach((node) => {
+        const slug = node.fields?.slug
+        if (!slug) return
+        const tableOfContents = node.headings && formatToc(node.headings)
+        createPage({
+            path: replacePath(slug),
+            component: BlogPostTemplate,
+            context: {
+                id: node.id,
+                tableOfContents,
+                slug,
+                post: true,
+                article: true,
+                localizedRoot: 'newsletter',
+            },
+        })
+    })
 }

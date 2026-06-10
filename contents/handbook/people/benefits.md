@@ -36,6 +36,8 @@ People like our merch. If you want more, <PrivateLink url="https://github.com/Po
 
 As always, we expect you to use this with restraint and with your own good judgement. The merch store should not become your sole source of clothing for your wardrobe, nor where you go any time a friend has a birthday. But sure, go ahead and buy your mom (or yourself) a hat or a hoodie!
 
+Please note that any free merch received outside of your birthday kit, work anniversary kit, or new hire kit is considered a taxable benefit in most jurisdictions and may be subject to tax. If you have questions about how this applies to you, we recommend checking with your local tax advisor.
+
 ## Support open-source projects
 
 Everyone gets a monthly [open-source sponsorship](/handbook/people/spending-money#open-source-sponsorship-for-individuals) budget to spend as they see fit to support open source projects of their choice.
@@ -56,13 +58,13 @@ We currently offer a [Training budget](/handbook/people/training#training-budget
 
 #### 401k contribution
 
-In the US, our 401k plan is managed by [Guideline](https://www.guideline.com/) and we match up to 4%. 
+In the US, our 401k plan is managed by [Vestwell](https://connect-b.vestwell.com/) and we match up to 4%. 
 
 #### Health care
 
-In the US, our medical insurance is provided via UnitedHealthcare and managed via our payroll provider [Deel](https://app.deel.com/). We also offer dental and vision insurance via Guardian. PostHog pays 100% of the premium of the Platinum plan for team members, and 75% for dependents. Manage your benefits through [Employee Navigator](https://www.employeenavigator.com/).
+In the US, you'll enroll in benefits through [BambooHR](https://posthog.bamboohr.com/login.php) and manage your coverage through [UnitedHealthcare](https://member.uhc.com/) for medical and [Guardian](https://www.guardiananytime.com/) for dental and vision. PostHog pays 100% of the premium of the Platinum plan for team members, and 75% for dependents.
 
-We offer the option to opt in to a [Flexible Savings Account (FSA)](https://www.healthcare.gov/have-job-based-coverage/flexible-spending-accounts/), which is a tax-advantaged account that allows you to contribute pre-tax dollars up to $3,050 per year to be used on out-of-pocket medical expenses. The FSA is a "use it or lose it" benefit, so any dollars that are not spent by the end of the year return to the company.  
+We offer the option to opt in to a [Flexible Savings Account (FSA)](https://www.healthcare.gov/have-job-based-coverage/flexible-spending-accounts/), which is a tax-advantaged account that allows you to contribute pre-tax dollars up to $3,400 per year to be used on out-of-pocket medical expenses. The FSA is a "use it or lose it" benefit, so any dollars that are not spent by the end of the year return to the company.  
 
 There is also the option to choose a lower tier, high deductible health plan (HDHP), which will qualify you for a [Health Savings Account (HSA)](https://www.healthcare.gov/glossary/health-savings-account-hsa/) that has further tax benefits beyond what the FSA provides. At the end of the year, any unused money rolls over and the contribution limit resets.
 
@@ -70,7 +72,7 @@ There is also the option to choose a lower tier, high deductible health plan (HD
 
 #### Pension
 
-In the UK, we use [Royal London](https://www.royallondon.com/). Team members contribute 5% and PostHog contributes 4%, but you can opt out if you like. You can also transfer out of the plan as frequently as you want, in case you would rather manage your own private pension. 
+In the UK, we use [Royal London](https://www.royallondon.com/). Team members contribute 5% and PostHog contributes 4%, but you can opt out if you like. You can also transfer out of the plan as frequently as you want, in case you would rather manage your own private pension. If you wish to increase your own pension contributions, you can download the Parallel Employee benefits app and submit the request.
 
 #### Private health insurance
 

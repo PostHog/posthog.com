@@ -347,7 +347,7 @@ export function InProgress(
                     )}
                 </ul>
             </SideModal>
-            <li className={`pb-4 border border-primary rounded-md ${props?.className ?? ''}`}>
+            <li className={`pb-4 pl-0 border border-primary rounded-md ${props?.className ?? ''}`}>
                 <div className="flex sm:flex-row sm:space-x-4 flex-col-reverse space-y-reverse sm:space-y-0 space-y-4 p-4 bg-accent rounded-t-md">
                     <div className="sm:flex-grow">
                         <h4 className="text-lg flex space-x-1 items-center !m-0">{title}</h4>

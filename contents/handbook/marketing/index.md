@@ -6,7 +6,25 @@ showTitle: true
 
 ## How marketing works
 
-Marketing at PostHog is a collaborative effort across several teams. It is also specifically a multi-disciplinary creative team in it's own right. If that's confusing, you can check [Who can help me?](/handbook/marketing/ownership) for more on who to talk to.
+Marketing at PostHog is a collaborative effort across several teams. There are six distinct teams that handle different aspects of marketing:
+
+- **Graphics** – Leads all art, design, illustration, and brand work for PostHog
+- **Website** – Leads all matters related to posthog.com and handles some product design aspects
+- **Marketing** – A multidisciplinary team that handles Product Marketing, Influencers & Partnerships, and other unowned marketing tasks
+- **Editorial** – Leads content, newsletters, and social
+- **YouTube** – Leads video
+- **Docs & Wizard** – Leads on documentation and the wizard
+
+If you're not sure who to talk to, check [Who can help me?](/handbook/marketing/ownership).
+
+## Slack channels to know
+
+To keep up with what's shipped and what's about to ship across the company, join:
+
+- [`#changelog`](https://posthog.slack.com/archives/C099B0YCULT) – what's just shipped. Owned by the [Docs & Wizard team](/teams/docs-wizard) and updated constantly as PRs merge.
+- [`#coming-soon`](https://posthog.slack.com/archives/C0B5QBS29QU) – what's shipping soon. **Owned by the Marketing team** and posted as a daily digest.
+
+Both channels are populated by agentic workflows that scan merged PRs and feature flag changes in the `posthog/posthog` repo and summarize them into the relevant channel. Engineers can also opt their PR in (or out) manually via the *Publish to changelog?* and *Alert Sales and Marketing teams?* checkboxes on the PR template, or via the `@posthog` Slack app. See [how to publish changelog](/handbook/docs-and-wizard/how-to-publish-changelog) for the full flow.
 
 ## Marketing values
 
@@ -64,7 +82,7 @@ For these reasons, we:
  
 - Don't pretend our customers are different from us – i.e. more gullible, more susceptible to marketing. We are an engineering-led team building products for other engineers. If you wouldn't like it, assume our customers wouldn't either. 
 
-- Don't do cold email marketing to acquire new customers. When was the last time you read the 8th email a company sent you and thought 'ok yes, I now want to use this product'?
+- When doing cold outbound, do it tastefully. When was the last time you read the 8th email a company sent you and thought 'ok yes, I now want to use this product'? Keep it low-volume, thoughtful, and relevant.
 
 ## Marketing vision
 
