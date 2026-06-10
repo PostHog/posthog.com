@@ -37,8 +37,8 @@ If both are equally convenient for you, **email is Liam's preference**.
 Every _product_ page should have a custom OpenGraph (OG) image, so that when someone shares a link on social media it shows a purpose-built visual rather than defaulting to the website homepage image or, worse, showing up as a missing image.
 
 - **What's needed:** a custom OG image for each product page. This is an art request rather than a copy request, so there's usually no messaging doc to go with it.
-- **Good examples:** the [feature flags](/feature-flags) and [session replay](/session-replay) product pages already have working OG images that render correctly. Use these as a reference for what we're aiming for.
-- **Design guidance:** because these render on small screens, keep designs and copy simple — bright colors and chunky text work best.
+- **Good examples:** the [Feature Flags](/feature-flags) and [Session Replay](/session-replay) product pages already have working OG images that render correctly. Use these as a reference for what we're aiming for.
+- **Design guidance:** because these render on small screens, keep designs and copy simple – bright colors and chunky text work best.
 - **Check your work:** paste the product page URL into [opengraph.xyz](https://www.opengraph.xyz/) to preview how the OG image renders across platforms.
 
 If you can sort the OG image yourself for a product as you pick up assignments, that's one less thing to coordinate. Tracking for this work lives in [this GitHub issue](https://github.com/PostHog/posthog.com/issues/16998).
