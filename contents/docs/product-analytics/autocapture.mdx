@@ -434,44 +434,7 @@ PostHogSDK.shared.setup(config)
 
 ### Android navigation and lifecycle autocapture
 
-PostHog automatically captures navigation, lifecycle, and deep-link events as users navigate your app and when the app is launched, updated, backgrounded, or opened from a deep link.
-
-PostHog captures the following events:
-
-| Event name                 | Description                                                  |
-| -------------------------- | ------------------------------------------------------------ |
-| `$screen`                  | Screen view changes for `android.app.Activity` screens       |
-| `Deep Link Opened`         | App opens from a deep link                                   |
-| `Application Installed`    | First app launch                                             |
-| `Application Updated`      | App version updates                                          |
-| `Application Opened`       | App opens from a closed state or comes to the foreground     |
-| `Application Backgrounded` | App moves to the background                                  |
-
-#### Configuring Android navigation and lifecycle autocapture
-
-Screen navigation, deep-link, and application lifecycle autocapture are enabled by default. You can disable them with `PostHogAndroidConfig`.
-
-| Option                              | Description                                                              |
-| ----------------------------------- | ------------------------------------------------------------------------ |
-| `captureScreenViews`                | **Type:** `boolean`. Defaults to `true`. Set to `false` to disable `$screen` autocapture. |
-| `captureDeepLinks`                  | **Type:** `boolean`. Defaults to `true`. Set to `false` to disable `Deep Link Opened` autocapture. |
-| `captureApplicationLifecycleEvents` | **Type:** `boolean`. Defaults to `true`. Set to `false` to disable application lifecycle event autocapture. |
-
-```kotlin
-import com.posthog.android.PostHogAndroid
-import com.posthog.android.PostHogAndroidConfig
-
-val config = PostHogAndroidConfig(
-    apiKey = "<ph_project_token>",
-    host = "<ph_client_api_host>"
-).apply {
-    captureScreenViews = false
-    captureDeepLinks = false
-    captureApplicationLifecycleEvents = false
-}
-
-PostHogAndroid.setup(context, config)
-```
+Android lifecycle, screen, and deep-link autocapture are documented in the [Android SDK capturing events guide](/docs/libraries/android#capturing-events). Configuration options are documented in the [Android SDK configuration reference](/docs/libraries/android#all-configuration-options).
 
 Android does not currently support interaction autocapture for arbitrary taps or gestures.
 

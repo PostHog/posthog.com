@@ -299,7 +299,7 @@ The PostHog Android SDK will continue to capture events when the device is offli
 
 ## Debug mode 
 
-If you're not seeing the expected events being captured, the feature flags being evaluated, or session replay/error tracking behavior, you can enable debug mode to see what's happening. 
+If you're not seeing the expected events being captured, the feature flags being evaluated, surveys being shown, or session replay/error tracking behavior, you can enable debug mode to see what's happening. 
 
 You can enable debug mode by setting the `debug` option to `true` in the `PostHogAndroidConfig` object. This will enable verbose logs about the inner workings of the SDK.
 
@@ -356,7 +356,6 @@ val config = PostHogAndroidConfig(
 | `captureApplicationLifecycleEvents` | `true` | Captures `Application Installed`, `Application Updated`, `Application Opened`, and `Application Backgrounded`. |
 | `captureScreenViews` | `true` | Captures `$screen` for foreground `android.app.Activity` screens. |
 | `captureDeepLinks` | `true` | Captures `Deep Link Opened` with URL/query/referrer properties. |
-| `sessionReplayConfig` | `PostHogSessionReplayConfig()` | Configures Android session replay. See [session replay installation](/docs/session-replay/installation/android). |
 
 ### Core options
 
@@ -386,7 +385,6 @@ val config = PostHogAndroidConfig(
 | `featureFlagCalledCacheSize` | `1000` | Number of feature flag calls cached for deduplicating `$feature_flag_called` events. |
 | `preloadFeatureFlags` | `true` | Fetches feature flags automatically during setup. |
 | `evaluationContexts` | `null` | Context tags that constrain which feature flags are evaluated. Available in version 3.25.0+. |
-| `evaluationEnvironments` | `null` | Deprecated alias for `evaluationContexts`. |
 | `onFeatureFlags` | `null` | Callback invoked when feature flags are loaded. |
 
 ### Product configuration objects
@@ -399,8 +397,6 @@ val config = PostHogAndroidConfig(
 | `errorTrackingConfig` | `PostHogErrorTrackingConfig()` | Configures error tracking. `autoCapture` defaults to `false`; set it to `true` to autocapture uncaught exceptions when project settings also enable error tracking. |
 | `surveys` | `false` | Internal/experimental native Android survey support. Native Android survey UI is not fully supported or documented yet. |
 | `surveysConfig` | `PostHogSurveysConfig()` | Internal/experimental survey display delegate configuration, primarily for hybrid SDKs. |
-
-`remoteConfig` is a deprecated no-op in current Android SDK versions because remote config is always enabled.
 
 ### Event filtering with `beforeSend`
 
@@ -418,13 +414,11 @@ config.addBeforeSend { event ->
 }
 ```
 
-`propertiesSanitizer` still exists for backwards compatibility, but it is deprecated. Use `addBeforeSend` and `removeBeforeSend` for new code.
-
 # FAQ
 
 ## What Android API level is required?
 
-The Android SDK supports Android API 21 and newer. Session replay requires Android API 26 and newer.
+The Android SDK supports Android API 23 and newer.
 
 ## Do I need to declare permissions in the AndroidManifest.xml?
 
