@@ -14,45 +14,6 @@ See the docs runbook for more info: https://posthog.com/handbook/docs-and-wizard
 
 <ErrorTrackingIOSInstallationWrapper />
 
-## Enable crash autocapture
-
-You can autocapture crashes by enabling `errorTrackingConfig.autoCapture` before SDK setup. Crashes are captured on the next app launch.
-
-```swift
-let config = PostHogConfig(projectToken: "<ph_project_token>", host: "<ph_client_api_host>")
-config.errorTrackingConfig.autoCapture = true
-PostHogSDK.shared.setup(config)
-```
-
-Crash autocapture is unavailable on watchOS and visionOS.
-
-## Manually capture exceptions
-
-You can manually capture handled `Error`, `NSError`, and `NSException` values.
-
-```swift
-do {
-    try riskyOperation()
-} catch {
-    PostHogSDK.shared.captureException(error, properties: ["screen": "checkout"])
-}
-
-let exception = NSException(name: .genericException, reason: "Something went wrong")
-PostHogSDK.shared.captureException(exception, properties: ["screen": "checkout"])
-```
-
-## Configure in-app frames
-
-Use in-app frame rules to improve stack trace grouping and highlighting.
-
-```swift
-let config = PostHogConfig(projectToken: "<ph_project_token>", host: "<ph_client_api_host>")
-config.errorTrackingConfig.inAppIncludes = ["com.example.myapp"]
-config.errorTrackingConfig.inAppExcludes = ["com.example.myapp.generated"]
-config.errorTrackingConfig.inAppByDefault = false
-PostHogSDK.shared.setup(config)
-```
-
 # Limitations:
 
  - System symbols and frames are not symbolicated (UIKit, Foundation, etc.) ([issue](https://github.com/PostHog/posthog/issues/50614)).
