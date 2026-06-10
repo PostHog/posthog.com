@@ -9,7 +9,13 @@ availability:
 ---
 import { ProductScreenshot } from 'components/ProductScreenshot'
 
-Incoming webhooks enable you to send data from external systems directly into PostHog. This is useful for integrating with custom applications, third-party services, or any system that can make HTTP requests. 
+<CalloutBox icon="IconInfo" title="Feature preview" type="caution">
+
+Incoming webhook sources are experimental and available behind a [feature preview](https://us.posthog.com/settings/user-feature-previews#cdp-hog-sources). For most use cases, we recommend using a [workflow with a webhook trigger](/docs/workflows/workflow-builder#webhook-triggers) combined with a **capture event** action instead — it's more flexible, doesn't require code, and gives you access to delays, branching, and other workflow features.
+
+</CalloutBox>
+
+Incoming webhooks enable you to send data from external systems directly into PostHog. This is useful for integrating with custom applications, third-party services, or any system that can make HTTP requests.
 
 In general, we recommend using our [SDKs](/docs/libraries) or [capture API](/docs/api/capture) but this is useful when you don't have control over the sender format and need to perform some transformation to match PostHog's event format.
 

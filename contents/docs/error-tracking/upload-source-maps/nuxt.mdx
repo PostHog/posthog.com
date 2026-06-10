@@ -5,13 +5,15 @@ showStepsToc: true
 
 import CLIDownload from '../_snippets/cli/download.mdx'
 import CLIAuthenticate from '../_snippets/cli/authenticate.mdx'
-import StepVerifySymbolSetsUpload from '../_snippets/StepVerifySymbolSetsUpload'
+import WizardSection from './_snippets/wizard-section.mdx'
+
+<WizardSection />
 
 ## Nuxt v3.7 and above
 
 For Nuxt v3.7 and above, the `@posthog/nuxt` module automatically handles source map generation and upload during the build process. 
 
-No manual configuration is needed - follow the [Nuxt error tracking installation guide](/docs/error-tracking/installation/nuxt) to set up the module, and source maps are automatically generated and uploaded when you build your project.
+No manual configuration is needed – follow the [Nuxt Error Tracking installation guide](/docs/error-tracking/installation/nuxt-3-7) to set up the module, and source maps are automatically generated and uploaded when you build your project.
 
 ## Nuxt v3.6 and below
 
@@ -37,7 +39,7 @@ export default defineNuxtConfig({
     client: true // +
   },
   hooks: {
-    'close': async () => {
+    'nitro:build:public-assets': async () => {
       console.log('Running PostHog sourcemap injection and upload...')
       try {
         execSync("posthog-cli sourcemap inject --directory '.output'", { // +
@@ -73,7 +75,7 @@ Before proceeding, confirm that source maps are being properly uploaded.
 
 You can verify the injection is successful by checking your `.mjs` bundle files for `//# chunkId=` comments. The `--delete-after` flag removes the `.map` files after upload so they won't be exposed in your public deployment — PostHog already has them. Make sure to serve the injected JS bundles in production, PostHog will use the `//# chunkId` comments to match them with the uploaded source maps.
 
-<OSButton variant="secondary" asLink className="my-2" size="sm" to="https://app.posthog.com/settings/project-error-tracking#error-tracking-symbol-sets" external>
+<OSButton variant="secondary" asLink className="my-2" size="sm" to="https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-symbol-sets" external>
     Check symbol sets in PostHog
 </OSButton>
 

@@ -1,7 +1,5 @@
 import React from 'react'
-import { IconPiggyBank } from '@posthog/icons'
 import OSButton from 'components/OSButton'
-import Link from 'components/Link'
 
 export const posthog = {
     name: 'PostHog',
@@ -40,13 +38,13 @@ export const posthog = {
                 mobile_sdk_coverage: true,
                 profiling: false,
                 source_map_support: true,
-                stack_tracing: false,
+                stack_tracing: true,
                 user_device_context: true,
             },
             monitoring: {
                 features: {
                     cron_monitoring: false,
-                    distributed_tracing: false,
+                    distributed_tracing: 'Alpha',
                     release_tracking: true,
                     performance_monitoring: true,
                 },
@@ -65,6 +63,7 @@ export const posthog = {
                 free_tier: '5,000 web recordings, 2,500 mobile recordings',
             },
             features: {
+                ai_summaries: 'Beta',
                 canvas_recording: true,
                 chat_with_recordings: true,
                 conditional_recording: true,
@@ -115,11 +114,7 @@ export const posthog = {
                     performance_monitoring: true,
                     network_monitor: true,
                     dom_explorer: true,
-                },
-            },
-            ai: {
-                features: {
-                    ai_summaries: 'Beta',
+                    heatmaps: true,
                 },
             },
         },
@@ -150,7 +145,7 @@ export const posthog = {
             observability: {
                 features: {
                     metrics: false,
-                    traces: false,
+                    traces: 'Alpha',
                     infra_monitoring: false,
                     alerting: false,
                 },
@@ -193,15 +188,7 @@ export const posthog = {
                 historical_trends: true,
                 include_and_exclude_wildcards: true,
                 max_number_of_steps: '20',
-                monetization_analytics: (
-                    <>
-                        Via{' '}
-                        <Link to="/revenue-analytics" className="group !no-underline" state={{ newWindow: true }}>
-                            <IconPiggyBank className="size-4 inline-block text-green" />{' '}
-                            <span className="group-hover:!underline">Revenue Analytics</span>
-                        </Link>
-                    </>
-                ),
+                monetization_analytics: true,
                 predictive_insights: false,
                 private_insights: true,
                 project_level_permissions: true,
@@ -284,7 +271,7 @@ export const posthog = {
             },
         },
         product_tours: {
-            available: 'Private alpha',
+            available: false,
         },
         feature_flags: {
             available: true,
@@ -525,7 +512,7 @@ export const posthog = {
                 built_in_analytics: true,
             },
         },
-        llm_analytics: {
+        ai_observability: {
             available: true,
             features: {
                 alerting: true,

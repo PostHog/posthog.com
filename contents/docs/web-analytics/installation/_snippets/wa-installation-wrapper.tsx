@@ -10,6 +10,7 @@ import {
     SvelteInstallation,
     NuxtInstallation,
     RemixInstallation,
+    ReactRouterInstallation,
     TanStackInstallation,
     // Mobile SDK installations
     IOSInstallation,
@@ -30,9 +31,12 @@ import {
 } from 'onboarding/web-analytics'
 import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
 import { addNextStepsStep } from './shared-helpers'
+import { WebsiteJSHtmlSnippet, WebsiteJSInitSnippet } from 'product-analytics/installation/_snippets/js-web-snippets'
 
 const WEB_SNIPPETS = {
     WebFinalSteps,
+    JSHtmlSnippet: WebsiteJSHtmlSnippet,
+    JSInitSnippet: WebsiteJSInitSnippet,
 }
 
 const MOBILE_SNIPPETS = {
@@ -97,6 +101,12 @@ export const WANuxtInstallationWrapper = () => (
 export const WARemixInstallationWrapper = () => (
     <OnboardingContentWrapper snippets={WEB_SNIPPETS}>
         <RemixInstallation modifySteps={addNextStepsStep} />
+    </OnboardingContentWrapper>
+)
+
+export const WAReactRouterInstallationWrapper = () => (
+    <OnboardingContentWrapper snippets={WEB_SNIPPETS}>
+        <ReactRouterInstallation modifySteps={addNextStepsStep} />
     </OnboardingContentWrapper>
 )
 

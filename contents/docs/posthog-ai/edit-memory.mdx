@@ -2,9 +2,9 @@
 title: Edit and save memory to PostHog AI
 ---
 
-import {IconGear} from '@posthog/icons'
+import { IconGear } from "@posthog/icons";
 
-You can use PostHog AI memory to save context or instructions that persist between conversations. This helps PostHog AI to remember important details about your product, company, or preferred ways of working. 
+You can use PostHog AI memory to save context or instructions that persist between conversations. This helps PostHog AI to remember important details about your product, company, or preferred ways of working.
 
 PostHog AI uses this memory to deliver results that better match your preferences.
 
@@ -17,15 +17,21 @@ PostHog AI uses this memory to deliver results that better match your preference
 
 ## Run /init command
 
-To get started, we recommend running the [`/init`](https://app.posthog.com/#panel=max:/init) command in the PostHog AI chat. 
+To get started, we recommend running the [`/init`](https://app.posthog.com/#panel=max:/init) command in the PostHog AI chat.
 
 1. If you have a client or mobile SDK installed, PostHog AI will retrieve the URL or app bundle and search the web for more information about your product and then save it to memory.
-2. If little or no data is available, PostHog AI will ask you a few baseline questions to learn more and then save it to memory. 
+2. If little or no data is available, PostHog AI will ask you a few baseline questions to learn more and then save it to memory.
 
 ## Edit memory
 
-You can also access PostHog AI's memory to make direct changes. You can access and edit its memory in three ways: 
+You can also access PostHog AI's memory to make direct changes. You can access and edit its memory in three ways:
 
-1. Click the **gear icon** <span className="inline-block"><IconGear className="w-4 h-4" /></span> in the chat 
+1. Click the **gear icon** <span className="inline-block"><IconGear className="w-4 h-4" /></span> in the chat
 2. Navigate to project **Settings** > **AI**
 3. Run the `/remember` command in the chat to add new information to memory
+
+## Memory limits
+
+Memory has a maximum size of 10,000 characters. When memory exceeds 5,000 characters, PostHog AI only sees the first and last 2,500 characters – the middle is truncated.
+
+For best results, keep the most important information at the beginning or end of your memory.

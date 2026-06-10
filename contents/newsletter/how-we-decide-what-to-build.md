@@ -78,7 +78,7 @@ For example, **mobile replay**, in the top right corner (high impact, high effor
 
 This process creates clear ownership and, in turn, makes deciding what to build much clearer. The owner becomes responsible for [validating the idea](/newsletter/validating-product-ideas), implementing the feature, making tweaks and bug fixes, and ensuring ongoing success.
 
-The unique qualities of [product engineers](/blog/what-is-a-product-engineer) are key here. They have all the skills needed to take an idea to a fully-featured, revenue-generating product. This enables them to work with a high degree of autonomy and speed.
+The unique qualities of [product engineers](/product-engineer/what-is-a-product-engineer) are key here. They have all the skills needed to take an idea to a fully-featured, revenue-generating product. This enables them to work with a high degree of autonomy and speed.
 
 This is counter to a larger, ownership-avoidant team. Their process for choosing what to build might look like:
 
@@ -104,7 +104,7 @@ Testing is part of the decision-making process. Building MVPs of features and pr
 
 2. How much effort will building it take?
 
-All of PostHog’s products (beyond product analytics) were initially built in 1 to 3 person teams at our hackathons. Our newest products like [web analytics](/web-analytics) and the [data warehouse](/data-warehouse) are being built by single-person teams.
+All of PostHog’s products (beyond product analytics) were initially built in 1 to 3 person teams at our [hackathons](/newsletter/hackathons). Our newest products like [web analytics](/web-analytics) and the [data warehouse](/data-warehouse) are being built by single-person teams.
 
 This enables us to get stronger validation on demand before investing further. Companies like [Apple](https://review.firstround.com/six-steps-to-superior-product-prototyping-lessons-from-an-apple-and-oculus-engineer) and [Spotify](https://blog.crisp.se/wp-content/uploads/2013/01/HowSpotifyBuildsProducts.pdf) also rely on this prototyping-heavy style.
 

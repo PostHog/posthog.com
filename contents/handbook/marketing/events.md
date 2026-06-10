@@ -14,8 +14,10 @@ The event formats we prefer (and organize ourselves) fall into one of these:
 
 -   Hands-on gatherings that enable our users to build better products for their customers
 -   Experiences that allow engineers and founders to walk away with unique product engineering insights
--   Getting [product engineers](/blog/what-is-a-product-engineer) together to identify problems and build solutions for users
+-   Getting [product engineers](/product-engineer/what-is-a-product-engineer) together to identify problems and build solutions for users
 -   AFK time that we ourselves enjoy like hiking, gaming, cycling, cooking classes, etc.
+
+All plans come together – from conception through to final delivery – on our [event management tool](https://www.notion.so/2f552be1aa2f808494f3e7f9bf4e258c?v=2f552be1aa2f80009544000c428b8082) which centralizes owners, logstics and feedback in one place.
 
 ## Community incubator
 

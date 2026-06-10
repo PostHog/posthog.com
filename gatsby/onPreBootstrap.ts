@@ -80,6 +80,13 @@ posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
     __preview_lazy_load_replay: true,
     __preview_capture_bot_pageviews: true,
     __preview_disable_xhr_credentials: true,
+    // Tune rageclick detection to cut false positives from toggles and other
+    // flip-to-see controls: require 4 rapid clicks (default 3) within 750ms of
+    // each other (default 1000ms) before treating a burst as a $rageclick.
+    rageclick: {
+        click_count: 4,
+        timeout_ms: 750,
+    },
 })`
         const scriptsDir = path.resolve(__dirname, '../static/scripts')
         fs.writeFileSync(path.join(scriptsDir, 'posthog-init.js'), posthogScript)
@@ -96,7 +103,7 @@ posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
 
     // Cache the data if successful
     if (!mcpToolsData.error && mcpToolsData.categories) {
-        await cache.set(MCP_TOOLS_CACHE_KEY, mcpToolsData.categories)
+        await cache.set(MCP_TOOLS_CACHE_KEY, mcpToolsData)
     }
 
     if (process.env.POSTHOG_APP_API_KEY && !(await cache.get(PAGEVIEW_CACHE_KEY))) {

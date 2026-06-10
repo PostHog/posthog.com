@@ -236,8 +236,9 @@ function QuestionFormMain({
 
                             {disclaimer && (
                                 <p className="text-xs text-center mt-4 ml-[50px] [text-wrap:_balance] opacity-60 mb-0 text-primary">
-                                    If you need to share personal info relating to a bug or issue with your account, we
-                                    suggest filing a support ticket in the app.
+                                    [Community questions are independent of PostHog support](/handbook/support/customer-support#community).
+                                    If you have access to support through your PostHog plan, especially if you need to share personal info,
+                                    you can file a support ticket [in the app](https://app.posthog.com#panel=support) instead.
                                 </p>
                             )}
                         </Form>
@@ -382,30 +383,29 @@ export const QuestionForm = ({
     }
 
     const handleMessageSubmit = async (values: QuestionFormValues, user: User | null) => {
+        if (!user) {
+            setFormValues(values)
+            setView('auth')
+            return
+        }
+
         setLoading(true)
+        const transformedValues = await transformValues(values, user)
 
-        if (user) {
-            const transformedValues = await transformValues(values, user)
-            let data
-            if (formType === 'question') {
-                data = await createQuestion(transformedValues)
-            }
-
-            if (formType === 'reply' && questionId) {
-                data = await reply(transformedValues.body)
-            }
-
+        if (formType === 'question') {
+            createQuestion(transformedValues).then((data) => {
+                setLoading(false)
+                setView(null)
+                setFormValues(null)
+                onSubmit?.(transformedValues, formType, data)
+            })
+        } else if (formType === 'reply' && questionId && reply) {
             setLoading(false)
             setView(null)
             setFormValues(null)
-
-            if (onSubmit) {
-                await onSubmit(transformedValues, formType, data)
-            }
-        } else {
-            setFormValues(values)
-            setView('auth')
-            setLoading(false)
+            reply(transformedValues.body).then((data) => {
+                onSubmit?.(transformedValues, formType, data)
+            })
         }
     }
 

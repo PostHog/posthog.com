@@ -50,7 +50,7 @@ You can also add insights from the insights list by clicking, holding, and dragg
 
 You can change the unit of any trends insights, or add custom prefixes/postfixes - e.g. with a prefix of `$`, 123.45 will be displayed as "$123.45".
 
-Units include duration (seconds or milliseconds) and percentage.
+Units include duration (seconds or milliseconds), percentage, currency, and short number. The short number format displays large numbers in compact form (e.g., 1,200 as "1.2K", 1,500,000 as "1.5M").
 
 <ProductScreenshot
     imageLight = {prefixLight} 
@@ -80,13 +80,6 @@ To enable it, click the **Options** dropdown next to the chart type, then check 
 This works with day-level intervals. For hour, minute, week, or month intervals, weekend filtering is not applied since those buckets span multiple days or would lose all data on weekend days.
 
 ## Set goal lines
-
-
-## Hide weekend data
-
-You can hide Saturday and Sunday data points from line charts by enabling the **Hide weekend data** toggle. This is found in the **Options** dropdown under **Display**.
-
-When enabled, weekend days are excluded from both the data aggregation and the chart's x-axis, so only weekday data is shown. This applies to day-grouped intervals. For hour, minute, week, or month intervals, the toggle has no effect.
 
 You can add goal lines to any trend line insight by clicking on **Advanced Options**, then **+ Add goal line**, and then entering a value. This is helpful for highlighting quarterly KPIs, limits, and more.
 

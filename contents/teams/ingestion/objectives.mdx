@@ -1,30 +1,53 @@
-## Q1 2026 objectives
+## Q2 2026 objectives
 
-### Fence off non-ingestion services from persons DB
+### Isolate ingestion Kafka topics
 
-In order to have a single point of reference for all persons DB access so that any future changes to the underlying storage are seamless to the users.
+Kafka infrastructure is shared across ingestion and other teams, making it much harder to maintain ingestion reliability and scale independently.
 
-- Persons Read API for all non-ingestion services
-- Partial Persons Write API for non-ingestion services
+- Separate Kafka infrastructure for ingestion from other teams
+- Evaluate WarpStream as a full MSK replacement
+- Fall back to multi-MSK cluster setup if WarpStream doesn't pan out
 
-### Introduce rate / usage limits
+### PersonHog
 
-So that certain patterns of system abuse are handled without manual intervention from the team.
+Person processing should be stable and fully handled by PersonHog.
 
-- Rate Limiter API integrated into capture
-- Fair rate limits that don't upset customers
-- Public documentation on the rate limits
+- Route all reads and writes through PersonHog — no direct DB calls from other services
+- Define and guarantee SLAs for read/write latency and availability
+- Ship the read/write split architecture to production
+- Roll out safely with strong validation of data
 
-### Move Error Tracking ingestion to ingestion platform
+### Redesign the capture contract
 
-To simplify the ingestion codebase specific to Error Tracking, allow the team to reuse generic ingestion platform tooling, and reduce their maintenance burden.
+Capture lacks the structure needed for strong rate limiting and efficient downstream processing.
 
-- Production-ready ingestion pipeline for Error Tracking that uses Cymbal
+- Define a new capture contract with a strict schema for all endpoints
+- Include critical metadata in headers so downstream consumers don't need to parse payloads
+- Standardize response and error codes for SDKs
+- Establish the SDK harness as the canonical way to stay on contract
+- Migrate all SDKs to the new contract
+- Enable rate limiting
 
-### Implement core features for the ingestion platform
+### Define and commit to ingestion SLAs
 
-- Ingestion Pipelines Framework ready for broader rollout (docs, tutorials, tooling, etc.)
-- Better infrastructure for spinning up new ingestion pipelines (charts, automation, observability)
-- Tools for managing dead letter queues
-- Event restrictions available to all ingestion pipelines
-- Ability to create temporary ingestion pipelines for testing
+The primary ingestion lane needs consistently low latency, not just high availability.
+
+- Publish metrics and SLAs for all pipelines, especially the general lane
+- Automate monitoring to protect 99.99% of traffic from the 0.01% causing lag
+
+### Improve per-partition throughput
+
+Current per-partition processing speed won't support 10x growth.
+
+- Benchmark and identify per-partition bottlenecks
+- Evaluate alternative languages or architectures
+- Reduce the number of running ingestion pods
+
+### Make ingestion pipelines easy to manage
+
+The ingestion team will own more pipelines over time and needs better tooling to manage them efficiently.
+
+- Make Helm charts easy to configure for deploying new pipelines
+- Provision metrics and alerting automatically with each pipeline
+- Build MCP tooling for interactive pipeline support
+

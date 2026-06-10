@@ -20,7 +20,7 @@ We track whether a customer is paying for each product in Vitally using the `Pay
 - Customers already paying for all of the primary products are considered expanded to the max and should go to a Customer Success Manager. They should be pretty sticky as a customer so the main focus here is retention.
 - Otherwise, there is room to grow and a Technical Account Manager should be focused on getting them using the three primary products.
 
-> Today we have lots of customers who aren't paying for the three primary products so it might make sense to allocate some customers who are paying for 2 out of the 3 to a CSM whilst we are hiring more TAMs.
+> This allocation may vary depending on team capacity - there may be some accounts who only have 1 or 2 paid products allocated to a CSM rather than a TAM where there is more capacity in the CSM team for example.
 
 ---
 
@@ -56,7 +56,7 @@ If an account is struggling on these dimensions, that's a signal you need to inv
 
 ## Doing the allocation
 
-It's Simon's job, with input from Charles and Team Leads, to review the list of [$20K accounts without an owner](https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/1c518181-54a5-4c59-98de-f0b0bb54f9c3), as well as accounts which need to be handed over from TAE and TAMs. We use the criteria above to figure out which team should own a customer, and then use Vitally data to understand which region they are primarily based in. Looking at the user list in Vitally will show you where the most users are so make a judgement call on where the TAM or CSM should be based to best support and engage with the customer. Once this has been decided the New Owner trait is populated with one of the following:
+It's Simon's job, with input from Ben and Team Leads, to review the list of [$20K accounts without an owner](https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/1c518181-54a5-4c59-98de-f0b0bb54f9c3), as well as accounts which need to be handed over from TAE and TAMs. We use the criteria above to figure out which team should own a customer, and then use Vitally data to understand which region they are primarily based in. Looking at the user list in Vitally will show you where the most users are so make a judgement call on where the TAM or CSM should be based to best support and engage with the customer. Once this has been decided the New Owner trait is populated with one of the following:
 
 - US TAM
 - US CSM
@@ -67,7 +67,7 @@ And then it is down to the Team Leads to figure out which team member is taking 
 
 ### Quarterly allocation process
 
-At the start of each quarter, Simon (with input from Charles and Team Leads) reviews:
+At the start of each quarter, Simon (with input from Ben and Team Leads) reviews:
 
 1. **[$20K accounts without an owner](https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/1c518181-54a5-4c59-98de-f0b0bb54f9c3)** – accounts that need to be assigned
 2. **Accounts flagged for handover** from TAEs, TAMs, and CSMs
@@ -88,13 +88,13 @@ If you're assigned an account with a previous owner, work with them on a proper 
 
 ## Top 40 account management
 
-Our highest-spend customers (~Top 40 by ARR) get special consideration for ownership decisions. Simon and Charles regularly review these accounts to:
+Our highest-spend customers (~Top 40 by ARR) get special consideration for ownership decisions. Simon and Ben regularly review these accounts to:
 
 - **Minimize ownership changes** – frequent handoffs create whiplash for customers and damage relationships
 - **Ensure continuity** – the bar for changing ownership on a Top 40 account is higher than for the rest of the book
 - **Make judgment calls** – sometimes a TAM should keep a "fully expanded" account if the relationship is strong and there's long-term strategic value
 
-For Top 40 accounts, ownership changes (TAM→CSM or CSM→TAM) are decided directly by Simon and Charles, not through the standard Team Lead allocation process.
+For Top 40 accounts, ownership changes (TAM→CSM or CSM→TAM) are decided directly by Simon and Ben, not through the standard Team Lead allocation process.
 
 ---
 
@@ -104,8 +104,8 @@ To help the new owner of a customer hit the ground running, we should make sure 
 
 | Transition | Typical timing | Condition |
 |------------|----------------|-----------|
-| TAE → TAM | 12 months after initial credit pre-purchase | Customer onboarded to 1-2 primary products |
-| TAE → CSM | 12 months after initial credit pre-purchase | Customer onboarded to 3+ primary products |
+| TAE → TAM | When onboarded, typically 3 months after initial credit purchase OR 12 months after initial credit pre-purchase if the account is retained by the TAE | Customer onboarded to 1-2 primary products |
+| TAE → CSM | When onboarded, typically 3 months after initial credit purchase OR 12 months after initial credit pre-purchase if the account is retained by the TAE | Customer onboarded to 3+ primary products |
 | TAM → CSM | After expansion completes | All 3 core products adopted, discount agreement in place, no remaining expansion levers |
 | CSM → TAM | When expansion opportunity identified | Customer not fully expanded and has clear growth potential |
 
@@ -115,13 +115,11 @@ For handover to take place there should be an Account Plan (saved as a note on t
 
 > All open invoices should also have been paid before handing over. It makes sense to use existing relationships to chase payments, rather than the new owner's first action needing to be chasing payments/suspending access for non-payment.
 
-### Unassign yourself in Vitally
-
-Once the handover is complete, the outgoing owner should unassign themselves from the account in Vitally. This ensures the new owner is the sole point of contact and avoids confusion about who is responsible for the account.
+> For TAE accounts being handed over, set the New Owner to `Ready to move` in Vitally and then flag this with Simon directly.  There's no need to wait for the end of the quarter to do this.  He will review the plan and current state of the customer and then work with TAM or CSM leads to assign a new owner.
 
 ### Account Plan
 
-Every AM Managed account should have an up-to-date [Account Plan](/handbook/growth/sales/risk-mitigation-and-churn-prevention#quarterly-account-planning) saved as a note in Vitally. The existing owner should ensure that this is current and schedule a handover call to walk through it with the new owner. Feel free to push back and ask for it as the new owner if this doesn't happen! Ask your team lead or [Simon](/community/profiles/28895) for help with this if you're not getting the information you need from the previous owner.
+Every account being handed over should have an up-to-date [Account Plan](/handbook/growth/sales/risk-mitigation-and-churn-prevention#quarterly-account-planning) saved as a note in Vitally. The existing owner should ensure that this is current and schedule a handover call to walk through it with the new owner. Feel free to push back and ask for it as the new owner if this doesn't happen! Ask your team lead or [Simon](/community/profiles/28895) for help with this if you're not getting the information you need from the previous owner.
 
 ### Product Onboarding
 
@@ -191,6 +189,8 @@ The incoming TAM should prepare by reviewing the following in Vitally and SFDC b
 - [ ] **Usage metrics** – active users, project count, Feature Flag requests, Session Replay volume, insight/dashboard engagement
 - [ ] **Support history** – recent Zendesk tickets, tags, severity, resolution status
 - [ ] **Conversations & notes** – read all Vitally notes, meeting summaries, and conversation history
+- [ ] **Customer Slack channel** – scan the shared channel for who's actually active on the customer side, what issues have come up, and any open threads worth asking the previous owner about. This is often where the most useful context lives.
+- [ ] **Internal Slack discussions** – search our own Slack (outside the shared channel) for mentions of the customer. Engineering debates, pricing conversations, support escalations, and context from the previous owner often surface things that were never written down in Vitally.
 - [ ] **SFDC opportunity** – deal value, stage, next steps, close date
 - [ ] **Admin emails & user list** – identify who's active, who has admin access, what domains are in play
 - [ ] **The customer's product** – sign up or browse their website. Understand what they do and how they make money
@@ -252,6 +252,49 @@ This is the most valuable part of the handover – relationship context doesn't 
 - **Ask "what would you do next if you were keeping this account?"** This often surfaces the most actionable insight.
 - **Move fast on your intro.** The longer the gap between handover and first contact, the more momentum you lose.
 - **Keep the previous owner in the loop** for the first few weeks if there are open commercial conversations. In some cases they can also serve as a secondary support point for timezone coverage or as an escalation contact.
+
+### Unassign yourself in Vitally
+
+Once the handover is complete, the outgoing owner should unassign themselves from the account in Vitally. This ensures the new owner is the sole point of contact and avoids confusion about who is responsible for the account.
+
+---
+
+## Receiving an account as a CSM
+
+CSM accounts should generally be in a steady state — they're using the products they need, they're engaged, and there aren't major unresolved issues. When you're taking an account from a TAE or TAM, it's worth looking beyond the surface to make sure that's actually the case. These aren't a rigid checklist. They're things to dig into that can surface problems which are otherwise easy to miss.
+
+### Billing and commercial
+
+- **Open invoices** — verify these have been resolved per the [handover requirements above](#handing-over-customers). You don't want your first interaction with a customer to be chasing payment.
+- **MRR trajectory** — is spend steady, declining, increasing, or swinging around? Declining or volatile MRR is worth digging into before you take over.
+- **Credit purchases** — if they've pre-purchased credits, does the amount actually line up with what they're spending month to month?
+- **Non-standard discounts** — review the contract for anything unusual or undocumented. If discounts exist without clear documentation, get context from the previous owner.
+
+### Product adoption
+
+- **Core product coverage** — see [TAM vs CSM](#tam-vs-csm) for the general criteria. We currently have capacity on the CSM side, so we're okay receiving accounts using only 1 core product if the previous owner has determined there isn't a realistic path to expand.
+- **Deployment health** — if the customer doesn't have basic recommendations in place (e.g. session replay minimum duration, high identify call volume), that's a flag. Check the [customer deployment health check guide](/handbook/cs-and-onboarding/health-checks) and the Metabase dashboard to assess this. The [product onboarding checklist](#product-onboarding) is also a good reference for what "properly set up" looks like.
+- **Unexplained usage changes** — big spikes or drops that aren't documented, or where there's no record of a conversation with the customer about them. These can indicate problems nobody's looked into yet.
+
+### Engagement
+
+- **One-sided relationship** — is there a pattern of outreach from our side with no customer engagement? If it's been a one-sided conversation, understand why before you take over.
+- **User concentration** — is usage concentrated among fewer than 3 users? That's inherently risky. Have there been attempts to engage beyond those users? If so, why haven't they been successful?
+
+### Account documentation
+
+- **Account plan** — one should already exist per the [handover requirements above](#account-plan). Check that it's actually there and current — don't assume.
+
+### Lower priority
+
+Worth being aware of, but less likely to be blockers:
+
+- **Open support tickets** — any unresolved tickets or known frustrations with specific products?
+- **Upcoming features** — anything in the pipeline that's relevant to this customer and worth proactively sharing?
+
+### Pushing back
+
+If you're seeing multiple flags — declining usage, no engagement, concentrated users, missing account plan — push back. An account with several of these signals isn't in steady state and probably needs more work from the previous owner before it's ready for CSM. Talk to [Dana](/community/profiles/52723) if you're unsure whether to accept an account.
 
 ---
 

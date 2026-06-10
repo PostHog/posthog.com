@@ -39,6 +39,7 @@ interface ExplorerProps {
     rightActionButtons?: React.ReactNode
     onSearch?: (query: string) => void
     viewportClasses?: string
+    showAddressBar?: boolean
 }
 
 const SidebarContent = ({ content }: { content: React.ReactNode | AccordionItem[] }): JSX.Element | null => {
@@ -92,6 +93,7 @@ export default function Explorer({
     rightActionButtons,
     onSearch,
     viewportClasses = '',
+    showAddressBar = true,
 }: ExplorerProps) {
     const { websiteMode } = useApp()
     const { appWindow } = useWindow()
@@ -146,13 +148,16 @@ export default function Explorer({
                         searchContentRef={searchContainerRef}
                         rightActionButtons={rightActionButtons}
                         onSearch={onSearch}
+                        className={!showAddressBar ? 'border-b border-primary' : ''}
                     />
-                    <AddressBar
-                        selectOptions={selectOptions}
-                        currentPath={currentPath}
-                        handleValueChange={handleValueChange}
-                        selectedCategory={selectedCategory}
-                    />
+                    {showAddressBar && (
+                        <AddressBar
+                            selectOptions={selectOptions}
+                            currentPath={currentPath}
+                            handleValueChange={handleValueChange}
+                            selectedCategory={selectedCategory}
+                        />
+                    )}
                 </>
             )}
             <ContentWrapper>

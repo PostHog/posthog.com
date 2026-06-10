@@ -12,6 +12,7 @@ export const clarity = {
                 free_tier: true,
             },
             features: {
+                ai_summaries: true,
                 canvas_recording: false,
                 chat_with_recordings: false,
                 clickmaps: false,
@@ -113,6 +114,7 @@ export const clarity = {
         deployment: {
             open_source: false,
             self_host: false,
+            eu_hosting: false,
         },
         pricing: {
             free_tier: true,

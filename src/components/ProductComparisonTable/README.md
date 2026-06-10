@@ -163,11 +163,11 @@ import { comparisonRows } from './comparison-rows'
 Product pages can exclude certain sections from rendering using the `excluded_sections` configuration in product data files:
 
 ```typescript
-// In product data file (e.g., llm_analytics.tsx)
-export const llmAnalytics = {
+// In product data file (e.g., ai_observbaility.tsx)
+export const aiObservability = {
     comparison: {
         companies: [...],
-        rows: ['llm_analytics'],
+        rows: ['ai_observability'],
         excluded_sections: ['platform'], // Hide entire platform
     },
 }

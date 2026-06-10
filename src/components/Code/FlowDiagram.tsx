@@ -1,0 +1,137 @@
+import React, { useRef, useState, useEffect } from 'react'
+import { IconActivity, IconLightBulb, IconMessage, IconSparkles, IconPullRequest } from '@posthog/icons'
+import { usePrefersReducedMotion } from './usePrefersReducedMotion'
+
+const steps = [
+    { label: '1. Analyze\nusage', icon: IconActivity, actor: 'Human' as const },
+    { label: '2. Decide what\nto build', icon: IconLightBulb, actor: 'Human' as const },
+    { label: '3. Prompt &\ncontext', icon: IconMessage, actor: 'Human' as const },
+    { label: '4. Build', icon: IconSparkles, actor: 'Machine' as const },
+    { label: '5. Ship', icon: IconPullRequest, actor: 'Human' as const },
+]
+
+const actorColors: Record<string, string> = {
+    Human: 'text-red',
+    Machine: 'text-green',
+}
+
+interface FlowDiagramProps {
+    className?: string
+}
+
+export function FlowDiagram({ className = '' }: FlowDiagramProps) {
+    const ref = useRef<HTMLDivElement>(null)
+    const [isVisible, setIsVisible] = useState(false)
+    const prefersReducedMotion = usePrefersReducedMotion()
+
+    useEffect(() => {
+        if (prefersReducedMotion) {
+            setIsVisible(true)
+            return
+        }
+        const el = ref.current
+        if (!el) return
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true)
+                    observer.disconnect()
+                }
+            },
+            { threshold: 0.4 }
+        )
+        observer.observe(el)
+        return () => observer.disconnect()
+    }, [prefersReducedMotion])
+
+    return (
+        <div ref={ref} className={`@container border border-primary rounded-sm overflow-hidden ${className}`}>
+            <div className="py-1.5 flex items-center justify-between border-b border-secondary mx-4 @xl:mx-5">
+                <span className="text-[13px] uppercase text-primary font-mono">Coding with AI</span>
+                <span className="text-[13px] uppercase text-primary font-mono">(cir. 2022-2025)</span>
+            </div>
+            {/* Mobile: stacked list */}
+            <div className="flex flex-col gap-2 p-4 ">
+                {steps.map((step, i) => (
+                    <div
+                        key={step.label}
+                        className="flex items-center gap-2"
+                        style={{
+                            opacity: isVisible ? 1 : 0,
+                            transform: isVisible ? 'translateY(0)' : 'translateY(8px)',
+                            transition: `opacity 0.3s ease ${i * 100}ms, transform 0.3s ease ${i * 100}ms`,
+                        }}
+                    >
+                        <step.icon className="size-5 text-primary shrink-0" />
+                        <span className="text-sm text-primary whitespace-pre-line leading-tight">
+                            {step.label.replace('\n', ' ')}
+                        </span>
+                        <span className={`text-[13px] font-medium uppercase ml-auto ${actorColors[step.actor]}`}>
+                            {step.actor}
+                        </span>
+                    </div>
+                ))}
+            </div>
+
+            {/* Desktop: 5-col grid, arrows absolutely positioned between cells */}
+            <div className="hidden ">
+                {/* Icons + labels row */}
+                <div
+                    className="relative grid items-start justify-items-center p-4 @xl:p-5 pb-3"
+                    style={{ gridTemplateColumns: `repeat(${steps.length}, 1fr)` }}
+                >
+                    {steps.map((step, i) => (
+                        <div
+                            key={step.label}
+                            className="flex flex-col items-center gap-1.5 text-center px-2"
+                            style={{
+                                opacity: isVisible ? 1 : 0,
+                                transform: isVisible ? 'translateY(0)' : 'translateY(8px)',
+                                transition: `opacity 0.3s ease ${i * 100}ms, transform 0.3s ease ${i * 100}ms`,
+                            }}
+                        >
+                            <step.icon className="size-5 text-primary" />
+                            <span className="text-sm text-primary whitespace-pre-line leading-tight">{step.label}</span>
+                        </div>
+                    ))}
+                    {/* Arrows positioned at column boundaries */}
+                    {steps.slice(0, -1).map((_, i) => (
+                        <span
+                            key={`arrow-${i}`}
+                            className="absolute text-lg text-secondary -translate-x-1/2 -translate-y-1/2"
+                            style={{
+                                left: `${((i + 1) / steps.length) * 100}%`,
+                                top: '50%',
+                                opacity: isVisible ? 1 : 0,
+                                transition: `opacity 0.3s ease ${i * 100 + 50}ms`,
+                            }}
+                        >
+                            &rarr;
+                        </span>
+                    ))}
+                </div>
+
+                {/* Actor labels row — same column count, full-bleed gray background */}
+                <div
+                    className="grid justify-items-center bg-accent/50 py-1 px-4 @xl:px-5"
+                    style={{ gridTemplateColumns: `repeat(${steps.length}, 1fr)` }}
+                >
+                    {steps.map((step, i) => (
+                        <div
+                            key={`actor-${step.label}`}
+                            className="text-center"
+                            style={{
+                                opacity: isVisible ? 1 : 0,
+                                transition: `opacity 0.3s ease ${i * 100 + 150}ms`,
+                            }}
+                        >
+                            <span className={`text-[13px] font-semibold uppercase ${actorColors[step.actor]}`}>
+                                {step.actor}
+                            </span>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+    )
+}
