@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> **Got a launch, Beta, GA, or project you want promoted on social?** Include the checklist below in the message where you'd usually tag <TeamMember name="Liam Graham" />, and you're done. No extra form to fill out.
+> **Got a launch, Beta, GA, or project you want promoted on social?** Tag <TeamMember name="Liam Graham" /> in Slack and use the checklist below to give him the information he needs.
 
 When we promote a launch on social, <TeamMember name="Liam Graham" /> needs a handful of things to turn it into great posts. Rather than asking everyone to fill out a separate form or doc, we keep this lightweight: just include a short checklist in the first or second message you share about the work.
 
@@ -14,23 +14,23 @@ This page explains what to include and where to send it.
 
 In the initial (or second) message you share about a launch, Beta, GA, or project, add this bullet list where you'd normally tag <TeamMember name="Liam Graham" />:
 
-- **ELI5 of what's getting promoted, and how you want it presented on social.** Only needed if it's not already clear from the message.
 - **Messaging doc(s).** Do you have email copy that lives somewhere? A general messaging doc? Send both if you have them.
 - **Link(s) to the main video or photo asset(s).** As a gentle reminder, **4:5** aspect ratio is best for graphics and photos, and **9:16** is best for video.
 - **Link(s) to the blog article**, if we've got one.
 - **When should the first post on social go live?**
 - **Confirm the OpenGraph image is updated on the product page.** See [OpenGraph images](#opengraph-images-for-product-pages) below.
+- 
 
 That's the whole ask. If something doesn't apply (for example, there's no blog post yet), just say so.
 
-## Where to send it
+## Where and when to send it
 
-You can share the checklist in either of two places:
+You should aim to give as much notice as you can, but ideally at least a week. You can share the checklist in either of two places:
 
 - A widely broadcast Slack message you're already sending out about the launch.
-- A separate email to <TeamMember name="Liam Graham" />.
+- Post in either the #team-marketing or #team-editorial Slack channels, tagging <TeamMember name="Liam Graham" />.
 
-If both are equally convenient for you, **email is Liam's preference**.
+We want to make sure we're being transparent with this, so you should avoid sending this information by DM. 
 
 ## OpenGraph images for product pages
 
