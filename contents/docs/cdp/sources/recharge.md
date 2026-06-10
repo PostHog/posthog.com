@@ -29,18 +29,18 @@ Once the syncs are complete, you can start using Recharge data in PostHog.
 
 ## Available tables
 
-| Table | Description | Sync method |
-| ----- | ----------- | ----------- |
-| `customers` | Customers in your account | Incremental |
-| `subscriptions` | Subscriptions | Incremental |
-| `orders` | Orders | Incremental |
-| `charges` | Charges | Incremental |
-| `addresses` | Customer addresses | Incremental |
-| `discounts` | Discounts | Incremental |
-| `onetimes` | One-time purchases | Incremental |
-| `products` | Products | Incremental |
-| `payment_methods` | Customer payment methods (Recharge Pro or Custom plans only) | Incremental |
-| `collections` | Product collections | Full refresh |
+| Table             | Description                                                  | Sync method  |
+| ----------------- | ------------------------------------------------------------ | ------------ |
+| `customers`       | Customers in your account                                    | Incremental  |
+| `subscriptions`   | Subscriptions                                                | Incremental  |
+| `orders`          | Orders                                                       | Incremental  |
+| `charges`         | Charges                                                      | Incremental  |
+| `addresses`       | Customer addresses                                           | Incremental  |
+| `discounts`       | Discounts                                                    | Incremental  |
+| `onetimes`        | One-time purchases                                           | Incremental  |
+| `products`        | Products                                                     | Full refresh |
+| `payment_methods` | Customer payment methods (Recharge Pro or Custom plans only) | Incremental  |
+| `collections`     | Product collections                                          | Full refresh |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 
