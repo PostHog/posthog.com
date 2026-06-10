@@ -114,8 +114,8 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             status: 'beta',
             screenshots: {
                 home: {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/slack_light_7b8851bcd2.png',
-                    srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/slack_dark_cd61847004.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/slack_light_15ad69ec86.png',
+                    srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/slack_dark_fc660ed74e.png',
                     alt: 'PostHog Slack app screenshot',
                     imgClasses: 'w-full rounded shadow-xl border border-primary',
                 },

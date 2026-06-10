@@ -336,12 +336,12 @@ function HeroImage(): JSX.Element {
     return (
         <aside className="max-w-[400px] mx-auto mt-4 @xl:mx-0 @2xl:mt-0 @2xl:w-72 @2xl:float-right @2xl:ml-4 @3xl:w-80 @4xl:w-96 @2xl:-mt-20 @3xl:-mt-16 border border-primary rounded shadow-xl overflow-hidden leading-[0] transition-all">
             <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/slack_light_7b8851bcd2.png"
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/slack_light_15ad69ec86.png"
                 alt="PostHog Slack app"
                 className="dark:hidden"
             />
             <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/slack_dark_cd61847004.png"
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/slack_dark_fc660ed74e.png"
                 alt="PostHog Slack app"
                 className=" hidden dark:block"
             />
