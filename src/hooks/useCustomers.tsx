@@ -31,6 +31,8 @@ import JuiceboxLogo from '../components/CustomerLogos/JuiceboxLogo'
 import LovableLogo from 'components/CustomerLogos/LovableLogo'
 import MentionMeLogo from '../components/CustomerLogos/MentionMeLogo'
 import MistralAILogo from '../components/CustomerLogos/MistralAILogo'
+import MoneyGramLogo from '../images/customers/moneygram-light.png'
+import MoneyGramLogoDark from '../images/customers/moneygram-dark.png'
 import MintlifyLogo from '../components/CustomerLogos/MintlifyLogo'
 import NationalDesignStudioLogo from '../components/CustomerLogos/NationalDesignStudioLogo'
 import NetdataLogo from '../components/CustomerLogos/NetdataLogo'
@@ -612,6 +614,17 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'Open source LLMs',
         logo: MistralAILogo,
         height: 12,
+        featured: true,
+    },
+    moneygram: {
+        name: 'MoneyGram',
+        toolsUsed: [], // TODO: Add toolsUsed
+        notes: 'Cross-border payments and money transfers',
+        logo: {
+            light: MoneyGramLogo,
+            dark: MoneyGramLogoDark,
+        },
+        height: 8,
         featured: true,
     },
     nationaldesignstudio: {
