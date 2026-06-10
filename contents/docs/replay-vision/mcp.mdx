@@ -15,7 +15,7 @@ This works in any MCP client – Cursor, Codex, Claude Code, Windsurf, VS Code, 
 - **Author a scanner from your editor** – describe what to look for in natural language and have the agent draft the scanner config, project the per-month volume, and create it.
 - **Trigger an observation on demand** – scan a specific session you're investigating without switching to the app.
 - **Read observations as part of a coding task** – pull the structured result and the model's reasoning into context as the agent works.
-- **Audit a scanner** – list its recent observations and stats to decide whether the prompt or filters need tuning.
+- **Audit a scanner** – list its recent observations to decide whether the prompt or filters need tuning.
 
 ## The tools, by job
 
@@ -26,7 +26,7 @@ Replay Vision's MCP tools are all prefixed `vision-`. They fall into a few group
 - `vision-scanners-list` – list every scanner in the project.
 - `vision-scanners-get` – read one scanner's config.
 - `vision-scanners-create` – create a new scanner.
-- `vision-scanners-update` / `vision-scanners-partial-update` – edit an existing one.
+- `vision-scanners-update` – edit an existing one.
 - `vision-scanners-delete` – remove one.
 
 ### Sizing before you create
@@ -53,8 +53,6 @@ For one scanner (across sessions):
 
 - `vision-scanners-observations-list` – paginated list of a scanner's observations.
 - `vision-scanners-observations-get` – fetch one of that scanner's observations by ID.
-- `vision-scanners-observations-stats-retrieve` – aggregate stats for the scanner.
-- `vision-scanners-stats-retrieve` – overall scanner-level stats.
 
 ## Example prompts
 

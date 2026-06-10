@@ -17,8 +17,8 @@ There are four types:
 
 Every type also returns:
 
-- A **confidence** percentage representing how sure the model is about the result.
-- **Reasoning** that explains the result in plain language and may include **citations** – timestamps that link directly to the relevant moment in the recording's timeline.
+- A **confidence** score representing how sure the model is about the result – shown as a percentage in the app, stored as a value from 0.0 to 1.0 on the event.
+- **Reasoning** that explains the result in plain language and may include **citations** – timestamps that link directly to the relevant moment in the recording's timeline. (Summarizers are the exception: the summary itself plays this role, so there's no separate reasoning field.)
 
 The reasoning and citations are the most powerful debugging tool you have for tuning a scanner. If the model is making bad calls, the reasoning shows you why.
 
@@ -57,7 +57,7 @@ A classifier assigns one or more **tags** from a vocabulary you define. You can 
 - `confidence` – how sure the model is
 
 **Type-specific config**
-- **Tag vocabulary** – the set of allowed tags. Each tag should have a name and a short definition so the model knows what it means.
+- **Tag vocabulary** – the set of allowed tag names. The vocabulary itself is just names – put a short definition of each tag in the prompt so the model knows what it means (see the example below).
 - **Allow multiple tags** – whether the model can pick more than one per session.
 - **Allow freeform tags** – whether the model can invent new tags outside the vocabulary.
 
@@ -74,7 +74,7 @@ A classifier assigns one or more **tags** from a vocabulary you define. You can 
 > - `support_seeking` – looking for help, docs, or a contact channel
 > - `unclear` – not enough signal to decide
 
-**On `$recording_observed`** – `scanner_output_tags` is the array of tags.
+**On `$recording_observed`** – `scanner_output_tags` is the array of vocabulary tags. Freeform tags, when allowed, land separately in `scanner_output_tags_freeform`.
 
 {/* SCREENSHOT: scanner-classifier-result – observation detail for a classifier: picked tags rendered as colored chips, reasoning beneath. Bonus: the scanner-edit view showing the tag vocabulary table. */}
 
@@ -111,6 +111,10 @@ A summarizer produces a short prose summary of what happened in the session, plu
 **Output**
 - `title` – one-line summary
 - `summary` – longer narrative summary, with inline citations
+- `intent` – one sentence on what the user set out to do
+- `outcome` – one sentence on how the session ended
+- `friction_points` – named blockers or frustrations the user hit (empty if none)
+- `keywords` – distinctive lowercase terms describing the session, for free-text search
 - `confidence` – how sure the model is
 
 **Type-specific config**
@@ -125,7 +129,7 @@ A summarizer produces a short prose summary of what happened in the session, plu
 
 > *Summarize what the user did in this session: which pages they visited, what they tried to accomplish, and any notable moments like errors, confusion, or successful completions. Be concrete and don't speculate.*
 
-**On `$recording_observed`** – the title and summary are available via the `scanner_result` payload on the event. See [observations](/docs/replay-vision/observations#querying-observations-as-events).
+**On `$recording_observed`** – `scanner_output_title` and `scanner_output_summary` carry the title and summary; the facets land as `scanner_output_intent`, `scanner_output_outcome`, `scanner_output_friction_points`, and `scanner_output_keywords`. See [observations](/docs/replay-vision/observations#querying-observations-as-events).
 
 {/* SCREENSHOT: scanner-summarizer-result – observation detail for a summarizer: bold title, prose summary beneath with inline citations. */}
 

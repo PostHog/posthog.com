@@ -17,13 +17,13 @@ A scanner is made up of four things you author:
 
 When you click **New scanner** you land on the templates picker. The built-in templates cover the most common shapes and are a useful starting point even when your real scanner ends up looking quite different.
 
-{/* SCREENSHOT: templates-picker – same as on the start-here page: the templates grid with the six built-in templates plus "Create from scratch". */}
+{/* SCREENSHOT: templates-picker – same as on the start-here page: the templates grid with the five built-in templates plus "Create from scratch". */}
 
 The shipping templates are:
 
 | Template | Type | What it does |
 | --- | --- | --- |
-| **Dead-end pages** | Monitor | Flag sessions where the user appears stuck with no obvious next action |
+| **Dead ends** | Monitor | Flag sessions where the user appears stuck with no obvious next action |
 | **Session summary** | Summarizer | Short narrative of what the user did |
 | **User intent** | Classifier | Tag each session with the likely intent (browsing, purchasing, support…) |
 | **Frustration score** | Scorer | Numeric score for how frustrated the user appeared |
@@ -65,7 +65,7 @@ Ask for citations in the reasoning, so the result is auditable. The model is alr
 A prompt that reads beautifully on its own can still misfire. The fastest feedback loop:
 
 1. Author the scanner.
-2. [Run it on-demand](/docs/replay-vision/running-scanners#on-demand-on-a-single-recording) against 5–10 recordings you already understand.
+2. [Run it on-demand](/docs/replay-vision/running-scanners#on-demand-on-recordings-you-pick) against 5–10 recordings you already understand.
 3. Open the observations and read the reasoning + citations.
 4. Adjust the prompt where the model misread something obvious.
 5. Scan another batch of recordings and repeat until the results look right.

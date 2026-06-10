@@ -12,17 +12,17 @@ You should already have [Session Replay](/docs/session-replay) recording session
 
 Open **Replay Vision** from the side menu, then click **New scanner**. You'll land on the templates picker.
 
-{/* SCREENSHOT: templates-picker – the "Choose a scanner template" page with the six built-in template cards plus the "Create from scratch" card. */}
+{/* SCREENSHOT: templates-picker – the "Choose a scanner template" page with the five built-in template cards plus the "Create from scratch" card. */}
 
 The templates cover the four [scanner types](/docs/replay-vision/scanner-types):
 
-- **Dead-end pages** (monitor) – flag sessions where the user appears stuck
+- **Dead ends** (monitor) – flag sessions where the user appears stuck
 - **Session summary** (summarizer) – short narrative of what happened
 - **User intent** (classifier) – tag each session with the likely intent
 - **Frustration score** (scorer) – numeric score for how frustrated the user appeared
 - **Session outcome** (classifier) – tag the outcome (completed, abandoned, errored, …)
 
-Pick **Dead-end pages** to follow along. You can change the prompt or filters before saving – the template just pre-fills the form.
+Pick **Dead ends** to follow along. You can change anything before saving – the template just pre-fills the form, including the scanner name ("Dead-end pages").
 
 ## 2. Look over the prompt and filters
 
@@ -61,7 +61,7 @@ You can also run a scanner programmatically – see [running scanners](/docs/rep
 
 ## 5. Open the observation
 
-Once it finishes, the observation appears on the scanner's **Observations** tab, and the replay you scanned gets a notification linking back to it. Open the observation to see the structured result.
+Once it finishes, the observation appears in two places: on the scanner's **Observations** tab, and in the **observations dock** at the bottom of the replay player for the recording you scanned. Open the observation to see the structured result.
 
 {/* SCREENSHOT: observation-detail – full observation detail page: verdict + confidence at the top, reasoning with citations beneath, embedded player on the right, and the prompt that produced it at the bottom. */}
 

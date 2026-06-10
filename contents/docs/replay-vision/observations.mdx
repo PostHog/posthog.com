@@ -6,6 +6,10 @@ noindex: true
 
 Each scanner has an **Observations** tab listing every observation it's produced. Click into one to open the detail view: the structured result, the model's reasoning (with clickable citations that jump the embedded player to the cited moment), and the prompt that produced it – frozen even if you've since edited the scanner.
 
+Observations also surface in the replay player: the **observations dock** at the bottom of the player lists everything scanners have found about the session you're watching, and is where the **Scan this recording** action lives.
+
+{/* SCREENSHOT: observations-dock – the replay player with the observations dock expanded at the bottom: two observation cards from different scanners, the "Scan this recording" button visible in the dock header. */}
+
 Observations move through a small state machine:
 
 `pending → running → succeeded | failed | ineligible`
@@ -14,13 +18,13 @@ Observations move through a small state machine:
 - **`failed`** – terminal. The detail view shows an error reason. See [troubleshooting](/docs/replay-vision/troubleshooting#failed-observations) for what each failure kind means.
 - **`ineligible`** – terminal. The session can't be analyzed (no recording, too short, no events, etc.). Doesn't count against your quota. See [running scanners](/docs/replay-vision/running-scanners#ineligible-sessions).
 
-Pending and running observations count against your monthly [quota](/docs/replay-vision/quota-and-limits); failed and ineligible ones don't.
+Succeeded, pending, and running observations count against your monthly [quota](/docs/replay-vision/quota-and-limits); failed and ineligible ones don't.
 
 ## Querying observations as events
 
 Every successful observation is captured as a `$recording_observed` event in your project, so you can build [insights](/docs/product-analytics/insights), [dashboards](/docs/product-analytics/dashboards), and [alerts](/docs/alerts) on top of Replay Vision output using PostHog's [SQL](/docs/product-analytics/sql).
 
-## Event properties
+### Event properties
 
 | Property | Description |
 | --- | --- |
@@ -30,14 +34,21 @@ Every successful observation is captured as a `$recording_observed` event in you
 | `scanner_version` | Version of the scanner config that produced this observation |
 | `session_id` | The recording that was observed |
 | `triggered_by` | `schedule` (background sweep) or `on_demand` |
-| `model_used` | The Gemini model that produced the result |
+| `triggered_by_user_id` | The user who triggered an on-demand observation; null for background sweeps |
+| `model_used` | The model that produced the result |
+| `provider_used` | The LLM provider behind `model_used` |
 | `scanner_output_confidence` | The model's confidence (0.0 to 1.0) |
-| `scanner_output_reasoning` | The model's reasoning text, including any inline citations |
+| `scanner_output_reasoning` | **Monitor, classifier, and scorer** – the model's reasoning text, including any inline citations. Summarizers don't have a separate reasoning field |
 | `scanner_output_verdict` | **Monitor only** – `"yes"`, `"no"`, or `"inconclusive"` |
-| `scanner_output_tags` | **Classifier only** – the array of assigned tags |
+| `scanner_output_tags` | **Classifier only** – the array of vocabulary tags assigned |
+| `scanner_output_tags_freeform` | **Classifier only** – tags outside the vocabulary, when the scanner allows them |
 | `scanner_output_score` | **Scorer only** – the numeric score |
 | `scanner_output_title` | **Summarizer only** – the generated one-line title |
 | `scanner_output_summary` | **Summarizer only** – the generated prose summary |
+| `scanner_output_intent` | **Summarizer only** – one sentence on what the user set out to do |
+| `scanner_output_outcome` | **Summarizer only** – one sentence on how the session ended |
+| `scanner_output_friction_points` | **Summarizer only** – array of named blockers or frustrations (empty if none) |
+| `scanner_output_keywords` | **Summarizer only** – array of lowercase keywords describing the session |
 
 The `timestamp` on the event is the moment the observation completed, not the moment the underlying recording was captured.
 
@@ -137,6 +148,22 @@ WHERE event = '$recording_observed'
   AND properties.scanner_name = 'Session summary'
 ORDER BY timestamp DESC
 LIMIT 50
+```
+
+### Summarizer: top friction points
+
+Summarizers also emit a `scanner_output_friction_points` array naming the blockers and frustrations the user hit. Unnesting it gives you a ranked list of what's tripping people up:
+
+```sql
+SELECT
+    arrayJoin(properties.scanner_output_friction_points) AS friction_point,
+    count() AS sessions
+FROM events
+WHERE event = '$recording_observed'
+  AND properties.scanner_name = 'Session summary'
+  AND timestamp > now() - INTERVAL 7 DAY
+GROUP BY friction_point
+ORDER BY sessions DESC
 ```
 
 ### Cross-scanner: filter only high-confidence verdicts
