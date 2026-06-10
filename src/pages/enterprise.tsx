@@ -124,21 +124,9 @@ function Customers() {
     const lovableQuote = lovable?.quotes?.viktor_eriksson
 
     const featuredQuotes = [
-        arenaQuote && {
-            text: arenaQuote.products?.product_analytics,
-            name: arenaQuote.name,
-            role: arenaQuote.role,
-            company: arena?.name,
-            thumb: arenaQuote.image.thumb,
-        },
-        lovableQuote && {
-            text: lovableQuote.products?.ai_observability,
-            name: lovableQuote.name,
-            role: lovableQuote.role,
-            company: lovable?.name,
-            thumb: lovableQuote.image.thumb,
-        },
-    ].filter((q): q is { text?: string; name: string; role: string; company?: string; thumb: string } => Boolean(q))
+        arenaQuote && { text: arenaQuote.products?.product_analytics, company: arena?.name },
+        lovableQuote && { text: lovableQuote.products?.ai_observability, company: lovable?.name },
+    ].filter((q): q is { text?: string; company?: string } => Boolean(q))
 
     return (
         <section className="relative mb-12 @xl:mb-20 px-4 @xl:px-8">
@@ -161,21 +149,11 @@ function Customers() {
             {featuredQuotes.length > 0 && (
                 <div className="grid @xl:grid-cols-2 gap-6 mt-8">
                     {featuredQuotes.map((q) => (
-                        <figure key={q.name} className="border border-primary rounded-md bg-accent p-6 m-0">
+                        <figure key={q.company} className="border border-primary rounded-md bg-accent p-6 m-0">
                             <blockquote className="text-base @xl:text-lg font-semibold leading-snug text-primary m-0">
                                 “{q.text}”
                             </blockquote>
-                            <figcaption className="flex items-center gap-3 mt-4">
-                                <img
-                                    src={q.thumb}
-                                    alt={q.name}
-                                    className="size-10 rounded-full object-cover"
-                                    loading="lazy"
-                                />
-                                <span className="text-sm text-secondary">
-                                    <strong className="text-primary">{q.name}</strong>, {q.role} at {q.company}
-                                </span>
-                            </figcaption>
+                            <figcaption className="text-sm font-semibold text-secondary mt-4">{q.company}</figcaption>
                         </figure>
                     ))}
                 </div>
