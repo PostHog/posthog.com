@@ -116,7 +116,19 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 home: {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/slack_light_15ad69ec86.png',
                     srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/slack_dark_fc660ed74e.png',
-                    alt: 'PostHog Slack app screenshot',
+                    alt: 'PostHog Slack inbox screenshot',
+                    imgClasses: 'w-full rounded shadow-xl border border-primary',
+                },
+                inbox: {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/inbox_light_a328873cdd.png',
+                    srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/inbox_dark_ac23465bf6.png',
+                    alt: 'PostHog Slack inbox screenshot',
+                    imgClasses: 'w-full rounded shadow-xl border border-primary',
+                },
+                insight: {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/slack_insight_light_61f37a2fc9.png',
+                    srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/slack_insight_dark_e0f978e190.png',
+                    alt: 'PostHog Slack insight screenshot',
                     imgClasses: 'w-full rounded shadow-xl border border-primary',
                 },
             },
