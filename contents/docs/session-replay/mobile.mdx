@@ -12,6 +12,8 @@ We have taken our time to make sure we provide a useful and detailed recording e
 
 ### Wireframe mode (default)
 
+> **Note:** Wireframe mode is only available in the native [Android](/docs/session-replay/installation/android) and [iOS](/docs/session-replay/installation/ios) SDKs. [React Native](/docs/session-replay/installation/react-native) and [Flutter](/docs/session-replay/installation/flutter) always record in [screenshot mode](#screenshot-mode), because wireframe capture doesn't recognize the views these frameworks render with.
+
 Mobile recording is primarily done using native APIs to grab the view hierarchy state when the screen is drawn. This is done carefully so as not to affect performance in any way a user may notice.
 
 The view hierarchy is transformed to a JSON data structure and later rendered as an HTML [wireframe](https://www.figma.com/resource-library/what-is-wireframing/). Since it is a wireframe, the UI won't have the original look and feel but it should be close enough to understand the user's behavior.
@@ -23,6 +25,8 @@ Below is an example of a screen captured in wireframe mode in Android:
 ### Screenshot mode
 
 If `screenshot` (Android) or `screenshotMode` (iOS) option is enabled, the SDK will take a screenshot of the screen instead of a wireframe representation. The screenshot may contain sensitive information, so proceed with caution and ensure you're masking all relevant views.
+
+The React Native and Flutter SDKs always record in screenshot mode. This isn't configurable, as wireframe mode wouldn't capture the content of the views these frameworks render with.
 
 Below is an example of a screen captured in screenshot mode in Android:
 
