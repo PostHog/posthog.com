@@ -4,226 +4,100 @@ sidebar: Handbook
 showTitle: true
 ---
 
-This page explains how our automated onboarding and lifecycle email flows are put together in Customer.io — the broad architecture, the conventions we follow, and what you should do when you launch a new product.
+How PostHog's automated onboarding and lifecycle emails work in Customer.io, and what to do when you launch a new product. Aimed at product marketers. These are the patterns we use *today* — conventions, not hard rules. Build something new when a launch calls for it.
 
-It's aimed at product marketers. It documents how things are set up *today*, but none of it is set in stone. These are broad rules of practice, not hard constraints — it's very possible (and encouraged) to build new things around this structure when a launch calls for it.
+> **Launching something, or want a second pair of eyes?** <TeamMember name="Joe Martin" photo /> owns customer comms — loop him in early.
 
-> **Not sure where to start, or want a second pair of eyes on a new flow?** <TeamMember name="Joe Martin" photo /> owns customer comms and is the best point of contact. Loop him in early rather than late.
+This is about *marketing* onboarding (emails new users get automatically), not the Sales/CS [onboarding program](/handbook/onboarding/onboarding-program). For the underlying email setup — topics, unsubscribes, sending addresses — see [email marketing](/handbook/marketing/email-comms).
 
-This page is about *marketing* onboarding — the emails new users get automatically. It is **not** about the Sales/CS-led [onboarding program](/handbook/onboarding/onboarding-program), which is a human-led pipeline for high-value accounts. Both are called "onboarding," but they're different things.
+## How the system works
 
-For the underlying email infrastructure — broadcasts, transactional sends, tags, unsubscribe behavior, and sending addresses — see the [email marketing page](/handbook/marketing/email-comms). This page builds on that.
+Four layers, stacked:
 
-## The mental model
+1. **Data** — events and attributes synced from PostHog (`user signed up`, `user showed product intent`, activation events).
+2. **Segments** — saved groups built from that data ("signed up but not activated", "interested in flags").
+3. **Campaigns** — the automated flows: *triggered* by data, *branched* by segments, and they *exit* people on conversion.
+4. **Subscription topics** — the consent category each campaign sends under ("Welcome emails", "Changelog updates").
 
-Almost everything we do in Customer.io is built from three layers stacked on top of each other. If you understand these layers, you understand the system:
+Two data concepts drive most of the logic, and both are owned by **Growth Engineering** — so if they don't exist for your product yet, that's step one:
 
-1. **Data** — events and person attributes that flow in from PostHog (e.g. "this person signed up", "this person showed interest in session replay", "this person activated"). This is the raw material.
-2. **Segments** — saved groups of people defined by that data ("everyone who signed up but hasn't activated", "everyone interested in flags"). Segments are how we slice the audience.
-3. **Campaigns** — the automated flows (sometimes called journeys) that send messages. A campaign is *triggered* by data, often *filtered* or *branched* by segments, and *exits* people when they convert.
+- **[Product intent](/handbook/growth/growth-engineering/product-intents)** — which product someone actually came for (primary, secondary, or basic), from the `user showed product intent` event.
+- **[Activation](/handbook/growth/growth-engineering/per-product-activation)** — whether they got value, defined per product by a qualifying event or set of events.
 
-A fourth concept sits across all of it:
+### Segments come in families
 
-4. **Subscription topics** — the consent categories a person can opt in or out of (e.g. "Welcome emails", "Changelog updates"). Every campaign is tied to a topic so people only get what they've agreed to.
+There are hundreds; you only need the families. Before building one, check it doesn't already exist — duplicates are the biggest source of mess. Prefer **dynamic** (auto-updating) over **static** lists.
 
-When you launch something new, you're almost always working across these same four layers: making sure the right data exists, building the segments you need, wiring up a flow, and choosing the right subscription topic.
+| Family | Purpose |
+| --- | --- |
+| Hygiene / deliverability ("Unsubscribed", "Valid Email Address") | Protect deliverability — almost every flow excludes these |
+| Instance & geography ("All Cloud Users", "Self-hosted Users") | Who can be messaged, and how |
+| Lifecycle / recency ("New Signups", "Logged in last 30 days") | Where someone is in their journey |
+| ICP / role ("High ICP", "Org owners or admins") | Tailor by fit and seniority |
+| Product intent ("Primary Intent: Session Replay") | Route people to content for the product they care about |
+| Activation ("Activated – Replays") | Know who succeeded, so we stop nudging them |
+| Beta ("Beta Users – Error Tracking") | Follow up with beta participants |
+| Programs ("Startups & YC") | Power program-specific flows |
 
-## Layer 1: Where the data comes from
+### The core flows
 
-Customer.io doesn't know anything we don't tell it. The events and attributes that drive every flow are captured in PostHog and synced into Customer.io, where they become campaign triggers and segment conditions.
+| Flow | Trigger | What it does | Goal |
+| --- | --- | --- | --- |
+| **Onboarding 8.0** (flagship) | `user signed up` | 130+ emails that branch on product intent and behavior to tailor the first-run experience | Activate within 7 days |
+| **Long-running onboarding** | `user signed up` | Slower, spaced-out nurture over a longer window | Logs in again |
+| **Beta onboarding** | `$feature_enrollment_update` | One feedback email after someone joins *any* beta — you get this free for every beta | Activates a product |
+| **Startups & YC** | *enters a segment* | Program-specific content (credits, job board, integrations) | Activation |
 
-The events that matter most for onboarding are:
+The idea behind the flagship: **it's intent-aware and activation-aware** — it sends people content about the product they came for, and exits the moment they activate. (Avoid Customer.io's legacy "behavioral" campaign type for anything new — it silently excludes existing and backfilled people.)
 
-| Event | What it means | Used for |
+## The personalized "next steps" block
+
+Inside the onboarding emails is a block that recommends each person's best next product, based on what they've already activated and shown intent in. One quirk shapes how it's built: **Customer.io's Liquid can't read segments or event history** — inside an email you only get the person's profile attributes. So we copy segment membership onto attributes first:
+
+> **Segments → "Attr sync" campaigns → attributes → email content.** For each Activated/Intent segment, a tiny `seg_attr` campaign fires when someone *enters* it and runs one **Update attributes** action — no email, it just writes data. They share an `Attr sync` name prefix so they group together.
+
+| Attribute | Set when the person enters | Example |
 | --- | --- | --- |
-| `user signed up` | A new person created an account | The entry trigger for the main onboarding flows |
-| `user showed product intent` | Someone indicated interest in a specific product | Building "intent" segments (see below) |
-| `billing product activated` | An org started paying for / enabled a product | Activation and conversion |
-| Product milestone events | e.g. `insight created`, `feature flag created`, `experiment created`, `survey launched`, `recording analyzed`, `source created` | Defining what "activated" means per product |
-| `$feature_enrollment_update` | Someone joined (or left) a beta / early-access feature | The trigger for the beta feedback flow |
-
-The two concepts worth understanding properly are **product intent** and **activation**, because most of our onboarding logic hangs off them:
-
-- **Product intent** is how we know *which product a person actually came for*. When someone picks products during onboarding (or takes a deep, deliberate action elsewhere), we fire a `user showed product intent` event tagged with the product and whether it's their primary, secondary, or basic intent. This is documented in detail on the [product intents](/handbook/growth/growth-engineering/product-intents) page.
-- **Activation** is how we know someone got value. Each product has its own activation criteria — a qualifying event or set of events. See [per-product activation](/handbook/growth/growth-engineering/per-product-activation).
-
-Both of these are owned and instrumented by Growth Engineering. As a product marketer you generally *consume* them, but if they don't exist yet for your product, that's the first thing to sort out (more on that below).
-
-## Layer 2: How segments are organized
-
-There are several hundred segments in the workspace. You don't need to know them all — most are one-off lists for specific sends. But they fall into a handful of recurring **families**, and knowing the families is enough to find your way around:
-
-| Family | Examples | Purpose |
-| --- | --- | --- |
-| **Hygiene / deliverability** | "Unsubscribed", "Valid Email Address", users who opted out of email in-app | Protect deliverability. Almost every flow excludes these. |
-| **Instance & geography** | "All Cloud Users (US + EU)", "Self-hosted Users", "Open source users", "EU Cloud Users" | Distinguish who can actually be messaged and how. |
-| **Lifecycle / recency** | "New Signups", "Just signed up", "Logged in last 30 days", "Recently engaged (4 months)" | Target by where someone is in their journey. |
-| **ICP / role** | "High ICP", "Org owners or admins", "Founders" | Tailor messaging by fit and seniority. |
-| **Product intent** | "Primary Intent: Product Analytics", "Secondary Intent: Session Replay", "Basic Intent: Flags" | Route people to content about the product they care about. Built from the `user showed product intent` event. |
-| **Activation** | "Activated – Analytics", "Activated – Replays", "Activated anything, or on platform addon" | Know who's succeeded, so we can stop nudging them. Built from product milestone events. |
-| **Beta** | "Beta Users – Joined a beta ever", "Beta Users – Error Tracking", product-specific beta lists | Target and follow up with beta participants. |
-| **Programs** | "PostHog for Startups and YC (new)", "YC Users in Current/Recent Batch" | Power program-specific flows like the Startups & YC onboarding. |
-
-There are two segment types:
-
-- **Dynamic** segments update automatically as people meet (or stop meeting) the conditions. Use these for anything behavioral or ongoing — the vast majority of onboarding segments are dynamic.
-- **Static** segments are fixed lists, usually built by importing or a one-time query. Use these for specific one-off sends (an incident, an apology, a manual export).
-
-> **Convention:** before building a new segment, check whether one already exists. Duplicated, near-identical segments are the single biggest source of mess in the workspace. Give new segments a clear, descriptive name, and prefer dynamic over static unless you specifically need a frozen list.
-
-## Layer 3: The core onboarding flows
-
-These are the long-running flows that make up the backbone of our lifecycle program. Each one is triggered by data, sends a series of messages, and is designed to exit people once they convert.
-
-### Onboarding 8.0 — the flagship
-
-This is the big one, and the model you should understand first. It's a single, large campaign (more than 130 emails, with dozens of branches) that handles the entire first-run experience for new cloud users.
-
-- **Trigger:** the `user signed up` event.
-- **Entry filter:** excludes self-hosted users (they get a different, lighter touch).
-- **Branching:** this is the key idea. Rather than sending everyone the same emails, the flow *branches on product intent*. Near the top it asks "what was this person's primary onboarding product?" (and secondary, and basic) and routes them down a path tailored to that product — a relevant demo video, product-specific tips, and nudges toward that product's activation moment. It also branches on behavior: "have they ingested any data?", "have they activated this product?", "have they activated 2+ products?", "are they an org owner or admin?"
-- **Content mix:** product demo videos (one per product), educational pieces, activation nudges ("connect a source", "ingestion help"), brand/fun emails, and the occasional add-on or upgrade push.
-- **Conversion goal:** entering the "Activated anything, or on platform addon" segment within 7 days. When someone activates, they've succeeded — so they convert and stop receiving nudges.
-- **Subscription topic:** "Welcome emails".
-
-The takeaway: **Onboarding 8.0 is intent-aware and activation-aware.** It tries to send people content about the product they actually came for, and it gets out of the way as soon as they succeed.
-
-### Long-running onboarding — the extended nurture
-
-A lighter, slower flow that also triggers on `user signed up` but plays out over a longer window than the intense first few weeks. It sends spaced-out pushes — content, beta invites, event invites — to keep new users engaged over time. Its conversion goal is simply that the person logs in again (`user logged in`), i.e. they keep coming back.
-
-### Beta onboarding — feedback after joining a beta
-
-A deliberately simple flow that shows the second common pattern: **event-triggered, single-purpose**.
-
-- **Trigger:** the `$feature_enrollment_update` event — fired when someone joins a beta or early-access feature.
-- **Flow:** wait a short while, then send a single "beta feedback request" email asking how the feature is going.
-- **Conversion goal:** the org activates a billing product.
-- **Subscription topic:** "Changelog updates".
-
-This is the flow that catches *every* beta opt-in across *every* product, so when you put a feature into beta you generally get feedback collection for free — you don't need to build a new campaign for it.
-
-### Startups & YC onboarding — a program flow
-
-Shows the third pattern: **segment-triggered**.
-
-- **Trigger:** *entering a segment* (the "Startups & YC – In Onboarding Flow" segment), rather than firing on a single event.
-- **Content:** program-specific — credits guidance, the job board, useful integrations, product combinations, and tailored content.
-- **Conversion goal:** activation, same as the main flow.
-- **Subscription topic:** "Welcome emails".
-
-Segment-triggered flows are the right choice when membership is the thing that matters ("everyone in this program", "everyone who hit this state"), rather than a single moment in time.
-
-> **A note on the legacy flows.** You'll also see older onboarding campaigns for open-source and self-hosted users built on Customer.io's legacy "behavioral" campaign type. Don't copy that pattern for anything new — see the trigger types below.
-
-## The anatomy of a flow
-
-Every campaign, big or small, is assembled from the same building blocks. When you build or read a flow, these are the dials:
-
-- **Trigger type.** How people enter:
-  - *Event-triggered* (Customer.io calls these "transactional" campaigns) — fires the moment an event happens. Best for "do X when Y happens" (signed up, joined a beta). This is the default for new flows.
-  - *Segment-triggered* (`seg_attr`) — fires when someone enters a segment. Best for "everyone who is / becomes part of this group."
-  - **Avoid the legacy "behavioral" type** for new campaigns. It only updates on live transitions, so it silently excludes existing or backfilled people.
-- **Entry filters.** Conditions layered on top of the trigger (e.g. "signed up *and* not self-hosted"). Usually used to exclude people who shouldn't be in the flow.
-- **Delays and send windows.** Waits between messages, and time-of-day windows so emails land at sensible local times rather than 3am.
-- **Branches.** Two kinds:
-  - *Conditional branches* route people based on a yes/no question ("have they activated this product?").
-  - *Split branches* divide people into groups — used for A/B testing content and for routing by product intent.
-- **Conversion goal.** The thing you're trying to make happen (usually activation). Customer.io measures each flow against its goal, which is how you know whether it works.
-- **Exit conditions.** When people should leave — almost always *on conversion*, so we stop emailing someone the moment they've done what we wanted.
-- **Subscription topic.** The consent category the flow sends under (see below).
-- **Message limits.** Frequency caps that stop a person being hit by too many emails across all flows at once. Keep these on.
-
-## Personalizing email content from segments
-
-The flows above decide *who* gets an email and *when*. This section is about personalizing *what's inside* one — specifically the dynamic "next steps" block in the onboarding emails, which recommends the products someone hasn't adopted yet, based on what they've already activated and shown intent in.
-
-One quirk shapes the whole approach: **Customer.io's Liquid can't read segments or event history.** Inside an email you can only reach the person's profile attributes (`customer.*`), the event that triggered the send, and journey attributes — there's no `{% if customer in segment "Activated – Replays" %}`. So to personalize content off the segments we already have, we first copy segment membership onto the profile as plain attributes.
-
-### How it works: segments → sync campaigns → attributes → content
-
-1. **The segments already exist** (Layer 2) — "Activated – Analytics", "Primary Intent: Session Replay", and so on.
-2. **"Attr sync" campaigns mirror those segments onto attributes.** For each segment we care about, a tiny `seg_attr` campaign triggers when someone *enters* it and runs a single **Update attributes** action that stamps a value on their profile. These campaigns send no email — they only write data — and share an `Attr sync` name prefix so they group together in the campaigns list.
-3. **The email's Liquid reads the attributes** and builds the personalized content.
-
-The attributes the sync campaigns maintain:
-
-| Attribute | Set when the person enters… | Example value |
-| --- | --- | --- |
-| `activated_<product>` | "Activated – <product>" | `"true"` |
+| `activated_[product]` | "Activated – [product]" | `"true"` |
 | `activated_mcp` | "Activated: MCP" | `"true"` |
-| `intent_primary_product` | "Primary Intent: <product>" | `"session_replay"` |
-| `intent_secondary_product` | "Secondary Intent: <product>" | `"feature_flags"` |
+| `intent_primary_product` | "Primary Intent: [product]" | `"session_replay"` |
+| `intent_secondary_product` | "Secondary Intent: [product]" | `"feature_flags"` |
 
-`<product>` is a stable key such as `session_replay`, `feature_flags`, or `llm_analytics`. Once the attributes exist, the email can do things like:
+The email's Liquid reads these to pick the person's top un-activated product (biased toward their primary, then secondary intent) and personalizes the bullets, **subject line, headline, CTA, and a closing "ask PostHog AI this" prompt** — all tied to that same product. The editable copy lives in aligned lists at the top of the snippet, which lives in the email in Customer.io (ask <TeamMember name="Joe Martin" photo /> for the current version).
 
-```liquid
-{%- if customer.activated_product_analytics and customer.intent_primary_product == 'session_replay' -%}
-  You've set up analytics — Session replay is your next step.
-{%- endif -%}
-```
+> **If you edit the Liquid:** variables are **per-block** (include the logic in every block/field that uses it — including the subject), and use **single quotes only** (code blocks HTML-encode double quotes and break Liquid).
 
-> **Why run a campaign just to copy data?** It's the only Customer.io-native way to turn "is in this segment" into "has this attribute." The segment encodes the logic (often several events AND-ed together); the sync campaign flattens it into one attribute the email can actually read. Launch each sync campaign **with backfill** so people already in the segment get the attribute, not just those who enter later.
+## Launching a new product: the checklist
 
-### What the email does with it
+Not every step applies to every launch, but this is the path of least surprise:
 
-The onboarding "next steps" block is one Liquid snippet (pasted into an HTML/code content block, *not* a text block) that:
+1. **Confirm intent + activation exist** (Growth Engineering owns these). Without them the system is blind — do this *before* public beta.
+2. **In beta, lean on what's there.** The beta flow already collects feedback for every opt-in, for free. Want more? Build a "Beta Users – [product]" segment and a small, single-purpose flow.
+3. **Decide: extend or build new.**
+   - *Extend Onboarding 8.0* for a core product — add your intent branch and a few product emails to the main flow. Usually the right call.
+   - *Build a standalone flow* for a distinct audience or behavior — event trigger for "when X happens", segment trigger for "everyone who is X".
+4. **Build the segments** you need (intent, activation, plus any launch-specific audience).
+5. **Wire up the flow** — trigger, entry filters, delays and send windows, branches, a real conversion goal, exit-on-conversion, subscription topic, and keep message limits on.
+6. **Add it to the personalized recommendations**, if it should appear there (see below).
+7. **Test, then launch** — preview and test-send every message, sanity-check the branches, move from draft to live, then watch conversion to activation.
 
-- works out the person's **anchor** (the product they're furthest along with) and their **top recommendation** (the highest-priority product they *haven't* activated, biased toward their primary then secondary intent);
-- renders 3–5 bullets — the personalized recommendations first ("You've set up analytics, but data won't tell you everything. Session replay lets PostHog replay the story behind every drop-off."), then always-on nudges to set up the data warehouse and to use PostHog AI;
-- personalizes the **subject line, hero headline, and CTA** to that same top product, plus a closing **"one thing to do" line** that hands the reader a question to ask PostHog AI about it.
+### Adding a product to the personalized recommendations
 
-All the editable copy lives in a handful of aligned lists at the top of the snippet (product keys, display names, app URLs, and the recommendation sentences). The snippet itself lives in the email in Customer.io, not in this repo — ask <TeamMember name="Joe Martin" photo /> for the current version.
+1. **Source segments must exist** — an "Activated – [product]" segment and "Primary/Secondary Intent: [product]" segments (from step 1 above).
+2. **Create the "Attr sync" campaigns** — one `seg_attr` campaign per segment that sets the attribute (`activated_[product] = "true"`, or `intent_primary_product = "[product]"`). **Launch each with backfill** so people already in the segment get the attribute, not just new entrants.
+3. **Add the product to the snippet** — its key, display name, app URL, and recommendation sentence to the aligned lists (keep them the same length and order), its `activated_[product]` check, and its PostHog AI question.
+4. **Test** against a profile with the new attributes set.
 
-> **Two gotchas if you edit the Liquid:**
-> - **Variables are per-block.** Anything you `{% assign %}` lives only inside that one content block — not in other blocks, and not in the subject field. Each block or field that uses a value needs the logic that computes it included alongside it.
-> - **Use single quotes only inside code blocks.** The HTML/code block HTML-encodes double quotes (`"` becomes `&quot;`), which breaks Liquid. Write the whole snippet with single quotes.
+It's fiddly and easy to get subtly wrong (misaligned lists, or a campaign that wasn't backfilled) — loop in <TeamMember name="Joe Martin" photo /> rather than guessing.
 
-### Adding a new product to the next-steps block
+## Rules of practice
 
-When your product is part of the standard onboarding experience and should show up as a recommendation:
+- **Respect consent** — pick the right [subscription topic](/handbook/marketing/email-comms), and never email unsubscribed users.
+- **Always exit on conversion** — stop the moment someone activates.
+- **Set a real conversion goal** (almost always activation) so you can tell if the flow works.
+- **Keep message limits on** — people are in several flows at once.
+- **Prefer extending the main flow over rebuilding.**
+- **Name things clearly**, and check for an existing segment/campaign before creating a near-duplicate.
+- **Test before you launch.**
 
-1. **Confirm the source segments exist** — an "Activated – <product>" segment and "Primary/Secondary Intent: <product>" segments. These come from Growth Engineering's [intent](/handbook/growth/growth-engineering/product-intents) and [activation](/handbook/growth/growth-engineering/per-product-activation) instrumentation (Layer 1), so sort that first.
-2. **Create the "Attr sync" campaigns** for those segments — one `seg_attr` campaign per segment whose only action sets the attribute (`activated_<product> = "true"`, or `intent_primary_product = "<product>"`). Launch each with backfill.
-3. **Add the product to the snippet** — add its key, display name, app URL, and recommendation sentence to the aligned config lists (keep every list the same length and order), add its `activated_<product>` check, and add a question for it to the PostHog AI "one thing" list.
-4. **Test** — preview the email against a profile with the new attributes set, and confirm the product shows up in the bullets, the subject, and the CTA.
-
-This is fiddly and easy to get subtly wrong (misaligned lists, or a sync campaign that wasn't backfilled). Loop in <TeamMember name="Joe Martin" photo /> rather than guessing.
-
-## Conventions and rules of practice
-
-These are the defaults we follow. Deviate when you have a good reason, but know that you're deviating:
-
-- **Respect consent.** Pick the right [subscription topic](/handbook/marketing/email-comms) for the flow. Onboarding and welcome flows use "Welcome emails"; beta and feature news use "Changelog updates". Don't send marketing flows to unsubscribed users.
-- **Always exit on conversion.** A flow should stop the moment someone activates. Nothing reads as more broken than "congrats on activating" followed by "you still haven't activated".
-- **Set a real conversion goal.** If you can't say what the flow is trying to make happen, you can't tell if it's working. For onboarding, that's almost always activation.
-- **Keep message limits on.** People are usually in several flows at once. Frequency caps stop us overwhelming them.
-- **Prefer extending over rebuilding.** If your product has an onboarding story, the main flow is often the right home for it — see below.
-- **Name things clearly** and check for an existing segment/campaign before creating a near-duplicate.
-- **Test before you launch.** Send yourself test emails, check the branching with a few real-looking profiles, and have someone review big sends.
-
-## What to do when you launch a new product
-
-Here's the playbook. Not every step applies to every launch, but this is the path of least surprise:
-
-1. **Make sure intent and activation exist.** Before any email work, confirm Growth Engineering has instrumented a [product intent](/handbook/growth/growth-engineering/product-intents) and [activation criteria](/handbook/growth/growth-engineering/per-product-activation) for your product. Without these, the onboarding system is flying blind — there's no way to route interested people to your content or to know when they've succeeded. This should happen *before* public beta.
-
-2. **During beta, lean on what already exists.** The beta onboarding flow already catches everyone who enrolls in your feature and asks them for feedback — you usually get that for free. If you want to do more (a dedicated beta nurture, an announcement to a waitlist), build a beta segment for your product (the "Beta Users – [product]" pattern) and a small, single-purpose flow.
-
-3. **Decide: extend the main flow, or build a new one?** This is the key decision.
-   - *Extend Onboarding 8.0* when your product is part of the standard new-user experience. In practice this means adding your product's intent branch and a few product-specific emails (a demo video, a tip, an activation nudge) to the existing flow. This is usually the right answer for a core product — it keeps everything in one place and benefits from the existing branching and exit logic. If it should also appear in the personalized recommendations, follow [adding a new product to the next-steps block](#adding-a-new-product-to-the-next-steps-block).
-   - *Build a standalone flow* when your audience is distinct (a specific program, a specific behavior) or the messaging doesn't fit the new-user arc. Use an event trigger for "when X happens" and a segment trigger for "everyone who is X."
-
-4. **Build the segments you need.** Typically an intent segment (to find interested people), an activation segment (to know who succeeded — often already built as part of step 1), and any audience segment specific to your launch.
-
-5. **Wire up the flow.** Choose the trigger, add entry filters to exclude who shouldn't be there, set delays and send windows, add branches if you're routing by intent or behavior, set the conversion goal and exit-on-conversion, pick the subscription topic, and keep message limits on.
-
-6. **Test, draft, and launch.** Preview and test-send every message, sanity-check the branching, then move it from draft to live.
-
-7. **Measure against activation.** Once it's running, watch conversion to your activation goal — that's the number that tells you whether the flow is doing its job.
-
-## This is a starting point, not a cage
-
-Everything above describes the patterns we've converged on because they work — but they're conventions, not rules carved in stone. New launches frequently need something the existing structure doesn't quite cover, and building that is fine and expected. The point of documenting the architecture is so you know what you're building *with* and *around*, not to stop you building.
-
-If you're planning anything substantial — a new flow, a big change to the main onboarding campaign, or a launch that doesn't fit the patterns here — talk to <TeamMember name="Joe Martin" photo /> first. He can point you at prior art, sanity-check the approach, and help you avoid the sharp edges.
+These are conventions, not a cage — launches often need something the structure doesn't quite cover, and that's expected. For anything substantial (a new flow, a big change to the main campaign), talk to <TeamMember name="Joe Martin" photo /> first.
