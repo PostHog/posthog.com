@@ -164,7 +164,8 @@ To avoid this, bootstrap the package and configure its trusted publisher before 
 
 3. **Follow the CLI prompts to configure the Trusted Publisher** for the placeholder:
    - Choose **GitHub Actions** as the publisher.
-   - Fill in the repo details (`PostHog/<repo>`), the release **workflow filename** (e.g. `release.yml`), and the **environment name** (e.g. `NPM Release`).
+   - Fill in the repo details (`PostHog/<repo>`) and the release **workflow filename** (e.g. `release.yml`).
+   - Only set the **environment name** (e.g. `NPM Release`) if the publish job itself runs inside that GitHub environment (see the callout below).
    - Under **Allowed actions**, check **Allow npm publish**.
 
 This bootstraps npm trusted publishing for the package so future automated releases can publish successfully.
@@ -174,6 +175,8 @@ This bootstraps npm trusted publishing for the package so future automated relea
 If the package has already been published, you can configure trusted publishing directly in npm package settings instead.
 
 > **Casing matters when configuring the trusted publisher.** npm validates the GitHub organization, repository, and workflow filename against the values GitHub puts in the OIDC token, and those values are case-sensitive. The PostHog GitHub organization is `PostHog` (capital `P` and `H`) — entering `posthog` causes the publish to fail with a misleading `404 Not Found` from npm, even though the package and the workflow exist. Use `PostHog` exactly when setting up or editing the trusted publisher, both via `setup-npm-trusted-publish` and in the npm package settings UI.
+
+> **Only set an environment if the publish job runs in it.** npm also validates the environment claim in the OIDC token against the trusted publisher settings. Fill in an environment name only if the job that runs `npm publish` has `environment: <name>` set in the workflow. If a GitHub environment is only used to gate approval in an earlier job, leave the environment field blank, otherwise the publish fails with a misleading `404 Not Found` error. 
 
 ### 7. Update the README
 
