@@ -26,8 +26,8 @@ When in doubt, ask in the `#design-review` Slack channel. Lottie and Cory are, f
 
 ## Who owns what
 
-- **Cory** (Design Lead) – Website, copy, major design decisions, motion work for web.
-- **Lottie** (Graphics Lead) - Graphics, artwork, merch, anything illustrated, motion work for video.
+- **Website team** – Website, copy, major design decisions, motion work for web.
+- **Graphics team** - Graphics, artwork, merch, anything illustrated, motion work for video.
 - **Editorial team** – Blog, email copy, messaging guidelines, social presence.
 - **Marketing team** - Email copy, external partnerships, influencers.
 - **YouTube team** - Video production, editing.
@@ -35,9 +35,9 @@ When in doubt, ask in the `#design-review` Slack channel. Lottie and Cory are, f
 - **Docs & Wizard team** - Docs, obviously. 
 - **Everyone** – Handbook updates. 
 
-### Graphics team
+### Graphics team responsibilities
 
-To reduce collaboration overhead, the graphics team splits its work into three areas. This is a starting point we're trialing for a few weeks – if someone is overwhelmed or away, others can step in. A few assignments are temporary while we're in the middle of the rebrand (noted below).
+This is who owns what on #team-graphics:
 
 - **Illustration (Heidi)** – Newsletter and blog images, email artwork, hedgehog illustrations (used across the website, events, etc.), animating hogs, team crests, and merch design.
 - **Graphic design (Lottie)** – Website art (e.g. icons, backgrounds), paid ads, billboards and OOH, event graphics, and doing more weird. Also owns YouTube thumbnails and video assets temporarily, until the rebrand is done (then → Daniel).
