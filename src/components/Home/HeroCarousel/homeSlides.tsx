@@ -110,9 +110,9 @@ export const FixBugsSlide = () => {
                     <div className="flex flex-col gap-3">
                         <div className="space-y-2">
                             <p className="flex items-center gap-1.5 text-secondary text-sm font-semibold m-0">
-                                <IconCoffee className="size-4" /> PostHog Code
+                                <IconCoffee className="size-4" /> PostHog Code (beta)
                             </p>
-                            <h2 className="text-2xl font-bold m-0">Fix bugs automatically (beta)</h2>
+                            <h2 className="text-2xl font-bold m-0">Fix bugs automatically</h2>
                         </div>
                         <p className="text-secondary m-0">
                             <strong>PostHog Code</strong>, our AI code editor:
