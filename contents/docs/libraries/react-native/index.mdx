@@ -355,6 +355,44 @@ The `name` is a special property which is used in the PostHog UI for the name of
 
 To set up error tracking in your project, follow the [React Native installation guide](/docs/error-tracking/installation/react-native).
 
+### Native crash autocapture
+
+By default, autocapture only covers the JavaScript layer (`uncaughtExceptions`, `unhandledRejections`, and `console`). Native iOS and Android crashes – for example, a crash inside a native module or the platform runtime – happen below JavaScript, so the JS handlers never see them.
+
+To also capture native crashes, install the optional `@posthog/react-native-plugin` package and enable `nativeCrashes` in your `errorTracking.autocapture` config:
+
+```bash
+# Expo apps
+npx expo install @posthog/react-native-plugin
+
+# Bare React Native apps
+npm i @posthog/react-native-plugin
+```
+
+```react-native
+const posthog = new PostHog('<ph_project_token>', {
+  errorTracking: {
+    autocapture: {
+      uncaughtExceptions: true,
+      unhandledRejections: true,
+      nativeCrashes: true, // captures native iOS/Android crashes
+    },
+  },
+})
+```
+
+`nativeCrashes` is disabled by default and requires the `@posthog/react-native-plugin` package – if it isn't installed, the SDK logs a warning and native capture is a no-op (your JS-level autocapture is unaffected).
+
+Native autocapture is also gated server-side: it only fires when your project's **Enable exception autocapture** setting is on in [error tracking settings](https://app.posthog.com/settings/project-error-tracking#exception-autocapture), the same remote setting that gates JS exception autocapture.
+
+Native crash stack traces are unreadable until you also upload native debug symbols at build time. See [native crash symbolication](/docs/error-tracking/upload-source-maps/react-native#native-crash-symbolication) for the iOS and Android setup.
+
+<CalloutBox icon="IconInfo" title="Minimum version" type="fyi">
+
+Remote configuration of the **Enable exception autocapture** setting requires `posthog-react-native` 4.35.0 or later.
+
+</CalloutBox>
+
 ### Error boundaries
 
 You can use the `PostHogErrorBoundary` component to capture React rendering errors thrown by components:
