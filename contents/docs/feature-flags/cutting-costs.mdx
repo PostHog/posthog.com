@@ -196,6 +196,8 @@ if isTestEnv {
 ```
 
 ```dart
+import 'dart:io';
+
 // Detect test/CI environment
 final isTestEnv = Platform.environment['CI'] != null;
 
@@ -210,10 +212,9 @@ if (isTestEnv) {
 
 await Posthog().setup(config);
 
-// Override flags locally if needed
-if (isTestEnv) {
-    await Posthog().overrideFeatureFlag('your-flag', true);
-}
+// The Flutter SDK doesn't support local feature flag overrides.
+// If tests need deterministic values, wrap your own flag reads in test code
+// or use a separate PostHog project/environment with fixed flag rules.
 ```
 
 ```react-native
