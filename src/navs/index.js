@@ -4164,7 +4164,7 @@ export const docsMenu = {
                 {
                     name: 'Quota and limits',
                     url: '/docs/replay-vision/quota-and-limits',
-                    icon: 'IconGauge',
+                    icon: 'IconPercentage',
                     color: 'yellow',
                 },
                 {

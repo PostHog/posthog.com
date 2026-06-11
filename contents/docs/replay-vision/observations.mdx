@@ -100,7 +100,7 @@ Most common intent tags from a classifier:
 
 ```sql
 SELECT
-    arrayJoin(properties.scanner_output_tags) AS tag,
+    arrayJoin(JSONExtract(properties.scanner_output_tags ?? '[]', 'Array(String)')) AS tag,
     count() AS sessions
 FROM events
 WHERE event = '$recording_observed'
@@ -162,7 +162,7 @@ Summarizers also emit a `scanner_output_friction_points` array naming the blocke
 
 ```sql
 SELECT
-    arrayJoin(properties.scanner_output_friction_points) AS friction_point,
+    arrayJoin(JSONExtract(properties.scanner_output_friction_points ?? '[]', 'Array(String)')) AS friction_point,
     count() AS sessions
 FROM events
 WHERE event = '$recording_observed'
