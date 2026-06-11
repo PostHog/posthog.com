@@ -7,7 +7,7 @@ PostHog autocapture automatically tracks the following events for you:
 -   **Application Installed** – when the app is installed
 -   **Application Updated** – when the app is updated
 -   **$screen** – when the user navigates (if using `UIViewController`)
--   **$autocapture** – when the user interacts with elements in a screen if using `UIKit` and `captureElementInteractions` is enabled
+-   **$autocapture** – when the user interacts with elements in a screen (`UIKit based`) and `captureElementInteractions` is enabled
 -   **$rageclick** – when the user rapidly taps in the same area (iOS/macCatalyst, `UIKit based`)
 
 > 🚧 **Note:** `$autocapture` and `$rageclick` are captured from UIKit interactions. Some SwiftUI views use UIKit under the hood (for example, `TextField` → `UITextField` and `Toggle` → `UISwitch`), so those interactions may also be autocaptured. In other SwiftUI cases, interactions might still be captured, but element metadata (such as `$elements_chain`) may be incomplete.
