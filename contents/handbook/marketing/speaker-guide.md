@@ -86,7 +86,7 @@ A few principles for building out slides:
 * If a slide doesn't support the one true thing you identified in step 3, cut it.  
 * Speaking of speaker notes, you will save yourself time and head space if you always have notes.
 
-For feedback on design or help with navigating the [PostHog brand assets](https://posthog.com/handbook/company/brand-assets) ([Hoggies](https://www.figma.com/design/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?node-id=2226-55&t=1sj1GezTKuCfaybF-1) included), stop by [\#team-marketing](https://posthog.slack.com/archives/C08CG24E3SR)
+For feedback on design or help with navigating the [PostHog brand assets](https://posthog.com/handbook/company/brand-assets) ([Hoggies](https://www.figma.com/design/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?node-id=2226-55&t=1sj1GezTKuCfaybF-1) included), stop by [\#team-graphics](https://posthog.slack.com/archives/C0AU440KS6P)
 
 ## **6. Practice out loud. Twice minimum.**
 

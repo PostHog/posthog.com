@@ -38,13 +38,7 @@ Feature flags are **not** billed based on `$feature_flag_called` events, which a
 
 The number of `/flags` requests and the number of `$feature_flag_called` events are **not** directly related.
 
-<CalloutBox icon="IconWarning" title="Unused flags still incur charges" type="caution">
-
-  Active feature flags you're not using in your code are still evaluated (and charged) every time the `/flags` endpoint is called. This includes when surveys are loaded, as survey targeting evaluates all active flags to determine eligibility.
-
-  To stop charges for unused flags, you must **disable, delete, or archive** them in the PostHog UI – [simply removing them from your code](/docs/vscode-extension/stale-flag-cleanup) is not enough.
-
-</CalloutBox>
+The number of active flags in your project does not affect the cost of each `/flags` request. However, if a `/flags` request evaluates at least one active, billable flag, it still counts as a billable request, even if you aren't explicitly checking that flag in your code. What reduces your bill is reducing billable `/flags` requests, or making sure requests that still happen don't evaluate any active billable flags (see options below).
 
 ### Creating a billable usage dashboard
 
@@ -124,7 +118,7 @@ Test environments, staging servers, and CI pipelines can silently accumulate fea
 The key settings are:
 - **JavaScript**: `advanced_disable_feature_flags: true` stops the SDK from hitting `/flags` on init
 - **Mobile SDKs**: `preloadFeatureFlags = false` prevents automatic flag fetching
-- **All SDKs**: Use flag overrides or bootstrapping to provide values locally without network requests
+- **SDKs with local overrides or bootstrapping**: Provide values locally without network requests
 
 <MultiLanguage>
 
@@ -155,12 +149,15 @@ posthog.init('<ph_project_token>', {
 ```
 
 ```android
+import com.posthog.android.PostHogAndroid
+import com.posthog.android.PostHogAndroidConfig
+
 // Detect test/CI environment
 val isTestEnv = BuildConfig.DEBUG || System.getProperty("CI") != null
 
-val config = PostHogConfig(apiKey = "<ph_project_token>").apply {
+val config = PostHogAndroidConfig(apiKey = "<ph_project_token>").apply {
     if (isTestEnv) {
-        // Disable flag requests entirely
+        // Disable automatic flag requests
         preloadFeatureFlags = false
         sendFeatureFlagEvent = false
 
@@ -170,12 +167,11 @@ val config = PostHogConfig(apiKey = "<ph_project_token>").apply {
     }
 }
 
-PostHog.setup(context, config)
+PostHogAndroid.setup(context, config)
 
-// If tests need flags to work, override them locally:
-if (isTestEnv) {
-    PostHog.with { it.overrideFeatureFlag("your-flag", true) }
-}
+// The Android SDK doesn't support local feature flag overrides.
+// If tests need deterministic values, wrap your own flag reads in test code
+// or use a separate PostHog project/environment with fixed flag rules.
 ```
 
 ```ios
@@ -242,7 +238,7 @@ if (isTestEnv) {
 
 </MultiLanguage>
 
-For staging environments where you want flags to work but don't need real-time evaluation, consider using [flag overrides and bootstrapping](/docs/feature-flags/testing#method-2-use-posthogfeatureflagsoverridefeatureflags) instead of fetching from the server.
+For staging environments where you want flags to work but don't need real-time evaluation, consider using [flag overrides and bootstrapping](/docs/feature-flags/testing#method-2-use-posthogfeatureflagsoverridefeatureflags) instead of fetching from the server in SDKs that support local overrides.
 
 ## Audit environments to catch unexpected `/flags` calls
 

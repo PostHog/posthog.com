@@ -2,13 +2,13 @@ import AutocaptureConfig from './autocapture-config-ios.mdx'
 
 PostHog autocapture automatically tracks the following events for you:
 
--   **Application Opened** - when the app is opened from a closed state or when the app comes to the foreground (e.g. from the app switcher)
--   **Application Backgrounded** - when the app is sent to the background by the user
--   **Application Installed** - when the app is installed
--   **Application Updated** - when the app is updated
--   **$screen** - when the user navigates (if using `UIViewController`)
--   **$autocapture** - when the user interacts with elements in a screen (`UIKit based`)
--   **$rageclick** - when the user rapidly taps in the same area (iOS/macCatalyst, `UIKit based`)
+-   **Application Opened** – when the app is opened from a closed state or when the app comes to the foreground (e.g. from the app switcher)
+-   **Application Backgrounded** – when the app is sent to the background by the user
+-   **Application Installed** – when the app is installed
+-   **Application Updated** – when the app is updated
+-   **$screen** – when the user navigates (if using `UIViewController`)
+-   **$autocapture** – when the user interacts with elements in a screen (`UIKit based`) and `captureElementInteractions` is enabled
+-   **$rageclick** – when the user rapidly taps in the same area (iOS/macCatalyst, `UIKit based`)
 
 > 🚧 **Note:** `$autocapture` and `$rageclick` are captured from UIKit interactions. Some SwiftUI views use UIKit under the hood (for example, `TextField` → `UITextField` and `Toggle` → `UISwitch`), so those interactions may also be autocaptured. In other SwiftUI cases, interactions might still be captured, but element metadata (such as `$elements_chain`) may be incomplete.
 
@@ -29,7 +29,7 @@ PostHogSDK.shared.screen("Dashboard", properties: ["fromIcon": "bottom"])
 ### Capturing screen views in SwiftUI
 
 To track a screen view in `SwiftUI`, apply the `postHogScreenView` modifier to your full-screen views. 
-PostHog will send a `$screen` event when the `onAppear` action is executed and will infer a screen name based on the view’s type. You can provide a custom name and event properties if needed.
+PostHog will send a `$screen` event when the `onAppear` action is executed and will infer a screen name based on the view's type. You can provide a custom name and event properties if needed.
 
 ```swift file=HomeView.swift
 // This will trigger a screen view event with $screen_name: "HomeViewContent"
@@ -49,7 +49,7 @@ struct HomeView: View {
 }
 ```
 
-In SwiftUI, views can range from entire screens to small UI components. Unlike UIKit, SwiftUI doesn’t clearly distinguish between these levels, which makes automatic tracking of full-screen views harder.
+In SwiftUI, views can range from entire screens to small UI components. Unlike UIKit, SwiftUI doesn't clearly distinguish between these levels, which makes automatic tracking of full-screen views harder.
 
 ### Adding a custom label on autocaptured elements
 
@@ -109,7 +109,7 @@ Interaction autocapture records when users interact with UI elements in your app
 Interaction autocapture is **not enabled by default**. You can enable it by setting `captureElementInteractions` to `true` in the config.
 
 ```swift
-let config = PostHogConfig(projectToken: <ph_project_token>, host: <ph_client_api_host>)
+let config = PostHogConfig(projectToken: "<ph_project_token>", host: "<ph_client_api_host>")
 config.captureElementInteractions = true // Disabled by default
 PostHogSDK.shared.setup(config)
 ```
@@ -125,7 +125,7 @@ This is captured as a `$rageclick` event. You can use this event to identify opp
 It is enabled by default (`rageClickConfig.enabled = true`).
 
 ```swift
-let config = PostHogConfig(projectToken: <ph_project_token>, host: <ph_client_api_host>)
+let config = PostHogConfig(projectToken: "<ph_project_token>", host: "<ph_client_api_host>")
 config.rageClickConfig.enabled = true // Enabled by default
 config.rageClickConfig.minimumTapCount = 3 // Optional, default is 3
 config.rageClickConfig.thresholdPoints = 30 // Optional, default is 30

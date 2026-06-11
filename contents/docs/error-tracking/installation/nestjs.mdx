@@ -78,16 +78,16 @@ The interceptor observes exceptions transparently using an RxJS `catchError` wit
 
 <Step title="Connect frontend context" badge="recommended">
 
-To link server-side errors with client sessions and users, configure `__add_tracing_headers` in your frontend [PostHog JS](/docs/libraries/js) setup:
+To link server-side errors with client sessions and users, configure `tracing_headers` in your frontend [PostHog JS](/docs/libraries/js) setup:
 
 ```js
 posthog.init('<ph_project_token>', {
     api_host: '<ph_client_api_host>',
-    __add_tracing_headers: ['your-nestjs-backend.com']
+    tracing_headers: ['your-nestjs-backend.com']
 })
 ```
 
-This automatically adds `X-POSTHOG-SESSION-ID` and `X-POSTHOG-DISTINCT-ID` headers to all `fetch` and `XMLHttpRequest` calls to the specified hostnames. The `PostHogInterceptor` reads these headers automatically to attach session and user context to captured exceptions.
+Use hostnames only, without the protocol or path. This automatically adds `X-POSTHOG-SESSION-ID` and `X-POSTHOG-DISTINCT-ID` headers to `fetch` and `XMLHttpRequest` calls to the specified hostnames. The `PostHogInterceptor` reads these headers automatically to attach session and user context to captured exceptions.
 
 </Step>
 

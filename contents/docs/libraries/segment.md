@@ -101,15 +101,23 @@ See our [alias docs](/docs/product-analytics/identify#alias-assigning-multiple-d
 
 ### Using group analytics
 
-Although Segment has a `group` definition, it works different than its equivalent in PostHog.
+Segment's `group` definition works a bit differently than [groups in PostHog](/docs/product-analytics/group-analytics). Here's how the two map onto each other.
 
-Calling `analytics.group()` in Segment sends a `$groupidentify` event and creates a `segment_group` type group with the ID you pass it. For example, this creates a `segment_group` type with the ID `Acme Corp`:
+#### The default `segment_group` type
+
+Calling `analytics.group()` in Segment sends a `$groupidentify` event to PostHog and associates the user with a group whose type is `segment_group`. For example:
 
 ```js
 analytics.group('Acme Corp')
 ```
 
-If you want to set any group type on a user, you need to use the `$groups` property on the `track` call instead. For example, this creates a `company` type group with the ID `Twitter`:
+…creates a group with type `segment_group` and key `Acme Corp`. You'll then see this group on subsequent events in PostHog as `$groups: { segment_group: 'Acme Corp' }`.
+
+> **Note:** The raw type key in your event data is literally `segment_group`. PostHog may display it under a friendlier label (e.g. "Accounts") in the UI if you've renamed it, but the key in `$groups` stays the same. Always use `segment_group` when referencing it in code.
+
+#### Using a different group type (or multiple group types)
+
+If you want to associate events with a group type _other than_ `segment_group` — for example a `company` or `project` group then pass `$groups` directly on the `track` call:
 
 ```js
 analytics.track('user_signed_up', {
@@ -117,7 +125,15 @@ analytics.track('user_signed_up', {
 })
 ```
 
-Also, unlike PostHog's JavaScript library's `group` method, you need to pass the `$groups` property on every Segment method call to have that data included.
+You can combine multiple group types in the same call:
+
+```js
+analytics.track('feature_used', {
+    $groups: { company: 'Twitter', project: 'website-redesign' }
+})
+```
+
+Unlike PostHog's JavaScript library where `posthog.group()` sets the active group _stickily_ across subsequent events Segment doesn't carry group state between calls. You need to include `$groups` on every `track`/`page`/etc. call you want associated with that group.
 
 ### Sending pageleaves
 

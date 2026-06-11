@@ -7,9 +7,9 @@ import IOSInstall from "../../integrate/_snippets/install-ios.mdx"
 <IOSInstall />
 
 
-## Step two: Enable surveys in your configuration
+## Step two: Configure surveys
 
-To enable surveys in your iOS app, enable surveys in your PostHog configuration:
+Surveys are enabled by default on iOS 15.0 or later. You can disable surveys or override the display language in your PostHog configuration:
 
 ```swift
 let POSTHOG_PROJECT_TOKEN = "<ph_project_token>"
@@ -17,9 +17,9 @@ let POSTHOG_PROJECT_TOKEN = "<ph_project_token>"
 let POSTHOG_HOST = "<ph_client_api_host>"
 let config = PostHogConfig(projectToken: POSTHOG_PROJECT_TOKEN, host: POSTHOG_HOST) // TIP: host is optional if you use https://us.i.posthog.com
 
-// Surveys require iOS 15.0 or later
 if #available(iOS 15.0, *) {
-    config.surveys = true
+    config.surveys = true // Enabled by default. Set to false to disable surveys.
+    config.surveysConfig.overrideDisplayLanguage = "fr" // Optional language tag override.
 }
 
 PostHogSDK.shared.setup(config)

@@ -4,7 +4,7 @@ import Editor from 'components/Editor'
 import { IconArrowUpRight, IconCheck, IconFlask, IconToggle, IconTrends, IconWarning } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import { Accordion } from 'components/RadixUI/Accordion'
-import { LOGOS, type LogoKey } from 'constants/logos'
+import { LOGOS, type LogoKey, getDarkClassForLogo } from 'constants/logos'
 import TabbedCarousel from 'components/TabbedCarousel'
 import type { TabbedCarouselTab } from 'components/TabbedCarousel'
 import { ChoppyReveal } from 'components/Code/ChoppyReveal'
@@ -666,9 +666,14 @@ function HeroSection() {
                             <WaitlistForm autoFocus />
                         ) : (
                             <>
-                                <OSButton variant="primary" size="lg" onClick={() => setShowForm(true)}>
-                                    Join the waitlist
-                                </OSButton>
+                                <div className="flex flex-wrap items-center gap-2">
+                                    <OSButton variant="primary" size="lg" onClick={() => setShowForm(true)}>
+                                        Join the waitlist
+                                    </OSButton>
+                                    <OSButton variant="secondary" size="lg" asLink to="/code/download">
+                                        Have an invite code?
+                                    </OSButton>
+                                </div>
                                 <p className="text-sm text-secondary mt-4">Test drives begin Spring 2026</p>
                             </>
                         )}
@@ -1149,6 +1154,9 @@ const TableStakes = () => {
                                     <code>Claude Sonnet 4.6</code>
                                 </li>
                                 <li className="text-sm font-bold text-primary">
+                                    <code>Claude Opus 4.8</code>
+                                </li>
+                                <li className="text-sm font-bold text-primary">
                                     <code>Claude Opus 4.7</code>
                                 </li>
                                 <li className="text-sm font-bold text-primary">
@@ -1171,7 +1179,9 @@ const TableStakes = () => {
                                     <img
                                         src={LOGOS[row.logoKey]}
                                         alt=""
-                                        className="size-7 shrink-0 object-contain"
+                                        className={`size-7 shrink-0 object-contain ${getDarkClassForLogo(
+                                            LOGOS[row.logoKey]
+                                        )}`}
                                         aria-hidden
                                     />
                                     <p className="m-0 text-base font-bold text-primary">{row.name}</p>
@@ -1214,6 +1224,56 @@ const TableStakes = () => {
                         <div className="absolute inset-0 bg-gradient-to-b from-light/0 via-light/25 to-light dark:from-dark/0 dark:via-dark/25 dark:to-dark"></div>
                     </div>
                 </div>
+            </div>
+        </section>
+    )
+}
+
+const SlackAppCallout = () => {
+    return (
+        <section className="relative mb-12 @2xl:mb-20 px-4 @xl:px-8">
+            <div className="border border-primary rounded-md bg-accent overflow-hidden">
+                <div className="p-6 @2xl:p-8 grid @2xl:grid-cols-2 gap-6 @2xl:gap-10">
+                    <div>
+                        <p className="text-sm font-semibold uppercase tracking-wide text-secondary mb-2">
+                            While you wait...
+                        </p>
+                        <h2 className="text-2xl font-bold mb-2">PostHog Code in Slack</h2>
+                        <p className="mb-4">
+                            Answer data questions, fix bugs, and kick off PRs by mentioning <code>@PostHog</code>.
+                        </p>
+                        <OSButton asLink to="/slack-app" state={{ newWindow: true }} variant="primary" size="md">
+                            About the Slack app
+                        </OSButton>
+                    </div>
+                    <ul className="space-y-2">
+                        <li className="relative pl-5">
+                            <IconCheck className="size-4 text-green absolute left-0 top-1" />
+                            Ship a fix from a bug report
+                        </li>
+                        <li className="relative pl-5">
+                            <IconCheck className="size-4 text-green absolute left-0 top-1" />
+                            Diagnose and fix failing CI
+                        </li>
+                        <li className="relative pl-5">
+                            <IconCheck className="size-4 text-green absolute left-0 top-1" />
+                            Rip out a feature flag after rollout
+                        </li>
+                        <li className="relative pl-5">
+                            <IconCheck className="size-4 text-green absolute left-0 top-1" />
+                            Fix typos and update content
+                        </li>
+                        <li className="relative pl-5">
+                            <IconCheck className="size-4 text-green absolute left-0 top-1" />
+                            Work across repos
+                        </li>
+                    </ul>
+                </div>
+                <img
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/slack_app_update_docs_f0c917f70a.png"
+                    alt="PostHog Slack app screenshot"
+                    className="w-full block"
+                />
             </div>
         </section>
     )
@@ -1551,6 +1611,8 @@ export default function CodePage() {
                         <TableStakes />
 
                         <TLDR ready={postHogWayDone} />
+
+                        <SlackAppCallout />
 
                         <FAQ />
                     </div>

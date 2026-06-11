@@ -12,7 +12,7 @@ features:
   groupAnalytics: true
   errorTracking: true
   surveys: false
-  llmAnalytics: false
+  aiObservability: false
 ---
 
 This is an optional library you can install if you're working with .NET Core. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server side application that needs performance.
@@ -38,6 +38,8 @@ import DotNetSendEvents from '../../integrate/send-events/_snippets/send-events-
 ## Error tracking
 
 You can manually capture exceptions using `CaptureException`. This sends a `$exception` event with stack frames, inner exceptions, aggregate exceptions, source context when available, and .NET runtime metadata.
+
+File names, line numbers, and source context depend on debug information already available from the captured .NET stack trace. PostHog doesn't support uploading .NET PDB files yet, so production builds without runtime-accessible debug information may show less detailed stack frames.
 
 ```csharp
 try

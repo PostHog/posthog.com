@@ -113,7 +113,7 @@ When an incident is declared, the person who raised the incident is the incident
 
 - Make sure the right people join the call. This includes the current on-call person (@on-call-global in Slack) and the team responsible for the alert (we have a [workflow](https://app.incident.io/posthog/settings/workflows/01K7PVWXBB1EWRJB24BBEHYA51) which will try to add these people automatically). Optionally, add people from Infra and [the feature owner](/handbook/engineering/feature-ownership) and Support. Product Marketers can assist in running communications if required.
 - Take notes in the incident channel. This should include timestamps, and is a brain dump of everything that we know, and everything that we are or have tried. This will give us much more of an opportunity to learn from the incident afterwards.
-- Update the [status page](https://status.posthog.com/). If the incident happens during business hours, the incident should have a <SmallTeam slug="support" /> [watcher](https://posthog.com/handbook/support/support-incident-response#when-an-incident-is-declared). If needed, ask the support team for help managing the status page so you can focus on the technical management of the incident. The status page can be updated from:
+- Update the [status page](#the-posthog-status-page). If the incident happens during business hours, the incident should have a <SmallTeam slug="support" /> [watcher](https://posthog.com/handbook/support/support-incident-response#when-an-incident-is-declared). Support can help review the messaging for clarity. The status page can be updated from:
     - (recommended) the incident Slack channel using `/incident statuspage` (`/inc sp`)
     - the [status page area](https://app.incident.io/posthog/status-pages/01K71VKZT2KS9HHRMKVX7X1ZP4/overview/now) of the incident.io dashboard (only recommended for corrections/modifications - Slack tooling provides better context)
 
@@ -135,7 +135,7 @@ For the full list of guardrails and what the app will refuse to merge, see [Brea
 
 ### The PostHog status page
 
-Our [status page](https://status.posthog.com/) is the central hub for all incident communication. You can update it easily using the `/incident statuspage` (`/inc sp`) Slack command.
+Our [status page](https://status.posthog.com/) is the central hub for all incident communication. The Incident Lead owns creating status page updates unless they explicitly hand this over to a Comms Lead. You can update it easily using the `/incident statuspage` (`/inc sp`) Slack command.
 
 When updating the status page, make sure to mark the affected component appropriately (for example during an ingestion delay, setting `US Cloud 🇺🇸` / `Event and Data Ingestion` to `Degraded Performance`). This allows PostHog's UI to gently surface incidents with a "System status" warning on the right. Only users in the affected region will see the warning:
 

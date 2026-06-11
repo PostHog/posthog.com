@@ -1,5 +1,5 @@
 ---
-title: Writing docs (as an engineer)
+title: Writing docs as an engineer
 sidebar: Handbook
 showTitle: true
 ---
@@ -90,3 +90,4 @@ For an example, see the [PostHog AI `README`](https://github.com/PostHog/posthog
 - [What nobody tells developers about documentation](/newsletter/what-nobody-tells-devs-about-docs)
 - [Docs style guide](/handbook/docs-and-wizard/docs-style-guide)
 - [PostHog style guide](/handbook/content/posthog-style-guide)
+- [Writing blogs as an engineer](/handbook/engineering/writing-blogs)
