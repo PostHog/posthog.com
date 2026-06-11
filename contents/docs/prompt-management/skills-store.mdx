@@ -4,7 +4,7 @@ title: Using the PostHog skills store
 
 Your team's coding agents (Claude Code, Cursor, Codex, Windsurf, and others) all support [MCP](/docs/model-context-protocol). PostHog's skills store gives you a centralized, versioned place to store and share reusable agent skills — following the [Agent Skills specification](https://agentskills.io/specification) — across any tool, for any team member.
 
-> **Shortcut: install the PostHog AI plugin.** The [PostHog AI plugin](https://github.com/PostHog/ai-plugin) ships an official [`skills-store` skill](https://github.com/PostHog/ai-plugin/tree/main/skills/skills-store) — maintained alongside the [canonical version in the PostHog monorepo](https://github.com/PostHog/posthog/tree/master/products/llm_analytics/skills/skills-store) — that teaches your agent exactly how to discover, load, create, and update skills via the PostHog MCP tools. Install the plugin in [Claude Code](/docs/model-context-protocol/claude-code), [Codex](/docs/model-context-protocol/codex), Cursor, or Gemini CLI and your agent already knows how to use the store. The rest of this guide covers the same concepts in case you want to understand what's happening under the hood or roll your own bridge.
+> **Shortcut: install the PostHog AI plugin.** The [PostHog AI plugin](https://github.com/PostHog/ai-plugin) ships an official [`skills-store` skill](https://github.com/PostHog/ai-plugin/tree/main/skills/skills-store) — maintained alongside the [canonical version in the PostHog monorepo](https://github.com/PostHog/posthog/tree/master/products/ai_observability/skills/skills-store) — that teaches your agent exactly how to discover, load, create, and update skills via the PostHog MCP tools. Install the plugin in [Claude Code](/docs/model-context-protocol/claude-code), [Codex](/docs/model-context-protocol/codex), Cursor, or Gemini CLI and your agent already knows how to use the store. The rest of this guide covers the same concepts in case you want to understand what's happening under the hood or roll your own bridge.
 
 ## Why use PostHog as your skills store?
 
@@ -47,7 +47,7 @@ Let's create a skill called `hog-release-notes` that writes release notes in Pos
 
 ### Via the PostHog UI
 
-1. Navigate to **Prompt Management** > **Skills**
+1. Navigate to **[Skills](https://app.posthog.com/skills)**
 2. Click **New skill**
 3. Name it `hog-release-notes`
 4. Add a description that explains _when_ to use the skill — this is what agents use to discover it
@@ -148,7 +148,7 @@ The body can reference bundled files by path. Agents pull them with `skill-file-
 You can deep-link directly to a specific bundled file within a skill by adding a `?file=` query parameter to the skill URL:
 
 ```text
-https://app.posthog.com/prompt-management/skills/hog-release-notes?file=references/changelog.md
+https://app.posthog.com/skills/hog-release-notes?file=references/changelog.md
 ```
 
 When someone visits this URL, the file viewer automatically expands, loads the file content, and scrolls it into view. Combine it with `version` to link to a file in a specific skill version — e.g. `?file=scripts/run.py&version=3`. This is useful for sharing a specific reference document or script with a teammate.

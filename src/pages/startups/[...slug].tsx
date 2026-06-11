@@ -147,7 +147,7 @@ export default function Startups(): JSX.Element {
                                         <p className="m-0">
                                             PostHog for Startups helps early-stage teams and founders build better
                                             products, faster. Get over $50,000 in credits to use across any PostHog
-                                            features, including LLM analytics.
+                                            features, including AI observability.
                                         </p>
                                     ),
                                 },

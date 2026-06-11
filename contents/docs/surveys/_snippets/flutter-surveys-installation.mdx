@@ -4,46 +4,13 @@ Using it requires PostHog's Flutter SDK version >= 5.8.0, but it's recommended t
 
 import FlutterInstallManual from "../../integrate/_snippets/install-flutter-manual.mdx"
 
-> ⚠️ **Note:** For mobile surveys, you must setup the SDK manually.
+> ⚠️ **Note:** For mobile surveys, you must set up the SDK manually.
 
 <FlutterInstallManual />
 
 ## Step two: Install PosthogObserver
 
-For surveys to be shown, you need to add the `PosthogObserver` to your app. The observer allows PostHog to determine the appropriate context for displaying surveys.
-
-```dart
-import 'package:flutter/material.dart';
-
-import 'package:posthog_flutter/posthog_flutter.dart';
-
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return PostHogWidget(
-      child: MaterialApp(
-        navigatorObservers: [PosthogObserver()],
-        title: 'My App',
-        home: const HomeScreen(),
-      ),
-    );
-  }
-}
-```
-
-If you're using `go_router`, check [this page](/docs/libraries/flutter#capturing-screen-views) to learn how to set up the `PosthogObserver`.
+For surveys to be shown, you need to add the `PosthogObserver` to your app. The observer allows PostHog to determine the appropriate context for displaying surveys. See [Capturing screen views](/docs/libraries/flutter#capturing-screen-views) for `navigatorObservers` and `go_router` examples.
 
 ## Configuration
 
@@ -57,7 +24,7 @@ final config = PostHogConfig('<ph_project_token>');
 config.surveys = false; // Disable surveys
 ```
 
-## Supported Features
+## Supported features
 
 | Feature                           | Support                | 
 | --------------------------------- | ---------------------- |
@@ -94,9 +61,9 @@ config.surveys = false; // Disable surveys
 
 - Update your SDK and iOS Pods.
 - Make sure to set the minimum platform version to iOS 13.0 in your Podfile.
-- Make sure you have disabled automatic SDK initialization. 
+- Make sure you have disabled automatic SDK initialization.
 - Run a clean build if you experience issues.
 - If surveys are not being displayed when triggered, make sure you have installed the [PosthogObserver](/docs/surveys/installation/flutter#step-two-install-posthogobserver).
-  - Using [navigationObservers](/docs/libraries/flutter#capturing-screen-views#using-navigatorobservers)
-  - Using [go_router](/docs/libraries/flutter#capturing-screen-views#using-go-router)
+  - Using [navigatorObservers](/docs/libraries/flutter#using-navigatorobservers)
+  - Using [go_router](/docs/libraries/flutter#using-go_router)
 - If you are using multiple navigation observers and encounter a log message `[PostHog] Cannot show survey: No valid context found...`, try placing `PosthogObserver` first in the list of observers. We've noticed that order sometimes matters due to potential interference.

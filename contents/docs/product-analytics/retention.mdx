@@ -155,13 +155,14 @@ The label adapts to your selected retention period (Hour, Day, Week, or Month). 
 
 You can break down your retention numbers and graph by the following property types:
 
-| Name              | Description                                                                                        |
-| ----------------- | -------------------------------------------------------------------------------------------------- |
-| Event properties  | Properties specific to a tracked event (e.g. `Country Name`)                                       |
-| Person properties | Properties stored on a user's person profile (e.g. `company_name`)                                 |
-| Feature flags     | Events where a specific [feature flag](/docs/feature-flags) was enabled                            |
-| Group properties  | Properties stored on a group (requires [group analytics](/docs/product-analytics/group-analytics)) |
-| Cohorts           | Events performed by a pre-defined list of users                                                    |
+| Name              | Description                                                                                                         |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------- |
+| Event properties  | Properties specific to a tracked event (e.g. `Country Name`)                                                        |
+| Person properties | Properties stored on a user's person profile (e.g. `company_name`)                                                  |
+| Feature flags     | Events where a specific [feature flag](/docs/feature-flags) was enabled                                             |
+| Group properties  | Properties stored on a group (requires [group analytics](/docs/product-analytics/group-analytics))                  |
+| Cohorts           | Events performed by a pre-defined list of users                                                                     |
+| SQL expression    | A custom [SQL expression](/docs/sql/expressions) for derived or computed values (e.g. `upper(properties.$browser)`) |
 
 For example, breaking down by **Country Name** can help you see which countries have higher retention for a feature.
 

@@ -86,6 +86,7 @@ function humanReadableName(name) {
 const titleMap: Record<string, string> = {
     actions: 'Actions',
     activity_log: 'Activity log',
+    ai_observability: 'AI observability',
     annotations: 'Annotations',
     batch_exports: 'Batch exports',
     cohorts: 'Cohorts',
@@ -106,7 +107,6 @@ const titleMap: Record<string, string> = {
     hog_functions: 'Hog functions',
     insights: 'Insights',
     invites: 'Invites',
-    llm_analytics: 'AI Observability',
     llm_prompts: 'LLM prompts',
     members: 'Members',
     notebooks: 'Notebooks',
