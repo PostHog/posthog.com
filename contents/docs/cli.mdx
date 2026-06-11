@@ -8,6 +8,8 @@ The PostHog CLI lets you use PostHog from your terminal, local scripts, CI/CD pi
 
 You can use it for existing workflows like uploading source maps, querying data, and downloading schema definitions. You can also use `posthog-cli api` to give agents shell-friendly access to PostHog's [Model Context Protocol (MCP)](/docs/model-context-protocol) tool catalog.
 
+If you want the hosted MCP server in your editor or agent instead, the [PostHog wizard](/docs/ai-engineering/ai-wizard) is the best way to [install it](/docs/model-context-protocol) — run `npx @posthog/wizard mcp add` and it configures every supported client for you. The CLI is the shell-first alternative for agents that work best with commands instead of MCP tool calls.
+
 ## Install the CLI
 
 Install `posthog-cli` globally:
@@ -108,21 +110,21 @@ posthog-cli api call --confirm --json feature-flags-bulk-delete-create '{"ids":[
 
 Because the command prints plain text or JSON, agents can pipe output to tools like `jq`, save intermediate results, and chain commands without spending tokens on unrelated schemas.
 
-## Set up agent instructions and skills
+## Set up agent instructions
 
-If you're using the CLI for agent workflows, run these setup commands from the root of each repo where your agent will work. These steps are important because agents don't automatically know that `posthog-cli api` exists or how PostHog expects them to use it.
+Agents don't automatically know that `posthog-cli api` exists or how PostHog expects them to use it, so something needs to tell them. That something is a managed instructions snippet.
 
-Add the managed `AGENTS.md` snippet and install the relevant PostHog agent skills:
+The easiest way to install it is the [PostHog wizard](/docs/ai-engineering/ai-wizard) — the same tool that's the best way to [install the MCP server](/docs/model-context-protocol). It detects which coding agents you have installed and writes the snippet into the agent's global instructions file, such as `~/.claude/CLAUDE.md` for Claude Code or `~/.codex/AGENTS.md` for Codex:
+
+```bash
+npx -y @posthog/wizard@latest cli add
+```
+
+To set up a single repo instead of your agent globally, run the CLI installer from the repo root:
 
 ```bash
 posthog-cli api agents-md install
-posthog-cli api skill list
-posthog-cli api skill install <skill-id>
 ```
-
-The `AGENTS.md` snippet tells agents to load `posthog-cli api --agent-help` into context, use `posthog-cli api` for PostHog tasks, and follow the search, inspect, schema, and call workflow. Skills add task-specific instructions for common PostHog workflows.
-
-The snippet is installed as a `<posthog>...</posthog>` block. Rerunning the install replaces the block in place, so reinstalling after a CLI update refreshes outdated instructions without duplicating them.
 
 To write to a non-default agent instructions file, pass `--path`:
 
@@ -130,10 +132,17 @@ To write to a non-default agent instructions file, pass `--path`:
 posthog-cli api agents-md install --path ./AGENTS.md
 ```
 
-To set up your coding agent globally instead of per repo, use the [PostHog wizard](/docs/ai-engineering/ai-wizard). It detects which agents you have installed and writes the same snippet into the agent's global instructions file, such as `~/.claude/CLAUDE.md` for Claude Code or `~/.codex/AGENTS.md` for Codex:
+The snippet tells agents to load `posthog-cli api --agent-help` into context, use `posthog-cli api` for PostHog tasks, follow the search, inspect, schema, and call workflow, and install any PostHog skill matching the task at hand before starting it. It's installed as a `<posthog>...</posthog>` block, and rerunning the install replaces the block in place — so reinstalling after a CLI update refreshes outdated instructions without duplicating them.
+
+## Agent skills
+
+Skills add task-specific instructions for common PostHog workflows, installed per repo into `.agents/skills/`. You don't need to install them upfront: the instructions snippet tells agents to check `posthog-cli api skill list` for a matching skill before starting a PostHog task, install it, and follow it.
+
+You can also browse and pre-install skills yourself:
 
 ```bash
-npx -y @posthog/wizard@latest cli add
+posthog-cli api skill list
+posthog-cli api skill install <skill-id>
 ```
 
 To see all skills as JSON, pass `--json`:
@@ -142,7 +151,7 @@ To see all skills as JSON, pass `--json`:
 posthog-cli api skill list --json
 ```
 
-To replace an already installed skill, use `--force`:
+Installed skills are a snapshot. To refresh one after an update, reinstall it with `--force`:
 
 ```bash
 posthog-cli api skill install --force <skill-id>
@@ -230,7 +239,7 @@ posthog-cli api search dashboard
 
 ### Skills are missing or outdated
 
-Skills are installed per repo into `.agents/skills/`. If a skill isn't there, install it:
+Skills are installed per repo into `.agents/skills/`. The instructions snippet tells agents to check for and install a matching skill before starting a PostHog task — if your agent isn't doing that, make sure the snippet is installed and up to date (see above). To install a skill manually:
 
 ```bash
 posthog-cli api skill list
