@@ -1,0 +1,151 @@
+---
+title: Capturing agent intent
+---
+
+import CalloutBox from 'components/Docs/CalloutBox'
+
+Knowing *what* a tool was called is one thing. Knowing *why* the agent called it is what makes MCP analytics useful for product decisions.
+
+The SDK captures intent as a single property — `$mcp_intent` — that can come from one of two sources:
+
+1. **A `context` argument** the agent passes on every tool call. Captured with `$mcp_intent_source = "context_parameter"`.
+2. **A fallback callback** you supply on `instrument()`. Captured with `$mcp_intent_source = "inferred"`.
+
+Explicit context always wins. If the agent passes a non-empty `context`, the fallback is not invoked.
+
+## The `context` argument
+
+When `context: true` (the default), the SDK adds a required `context` string to every tool's JSON Schema. It strips that argument before your handler runs, so your tool implementation never sees it.
+
+What the agent sees in the schema:
+
+```json
+{
+  "type": "object",
+  "properties": {
+    "context": {
+      "type": "string",
+      "description": "Why are you calling this tool? Briefly describe the user's goal."
+    },
+    "...": "your real tool arguments"
+  },
+  "required": ["context", "..."]
+}
+```
+
+What your handler receives:
+
+```ts
+server.tool("search_events", schema, async (args) => {
+  // args.context has been stripped — only your real arguments are here
+})
+```
+
+What lands in PostHog as `$mcp_intent`:
+
+```
+"Finding the last 10 pageviews for user alice@example.com to triage a drop in conversion"
+```
+
+### Customising the prompt
+
+If you want to nudge the agent toward a specific style of context (use case, user goal, ticket id, etc.), pass an object:
+
+```ts
+instrument(server, posthog, {
+  context: {
+    description: "Describe the user's underlying goal in one sentence — not the tool you're calling.",
+  },
+})
+```
+
+### Disabling the injected argument
+
+Set `context: false` if you don't want the SDK to touch your tool schemas at all. You'll lose the agent-supplied intent, and you'll need to rely on `intentFallback` (or accept events without `$mcp_intent`).
+
+## The `intentFallback` callback
+
+The `context` argument is *advertised* as required in JSON Schema but isn't enforced at the SDK validation layer. A client that ignores the schema hint (raw cURL, in-house agents, schema-blind crawlers) will still succeed — the call lands in PostHog with `$mcp_intent` empty.
+
+`intentFallback` is the escape hatch. The SDK calls it whenever no `context` argument is present, takes whatever non-empty string you return, and stamps it as `$mcp_intent` with `$mcp_intent_source = "inferred"`.
+
+The SDK does no inference of its own. It doesn't call an LLM. It doesn't inspect your tool arguments. It doesn't cache results. Whatever logic you want goes in your callback.
+
+### Deterministic, per-tool
+
+The cheapest pattern — synchronous, runs on every uncontextualized call. Good default:
+
+```ts
+instrument(server, posthog, {
+  intentFallback: (request) => {
+    const tool = request.params?.name
+    const args = request.params?.arguments ?? {}
+    if (tool === "search_events") return `Searching events for "${args.query}"`
+    return tool ? `Invoking ${tool}` : null
+  },
+})
+```
+
+### Using transport metadata
+
+`extra` carries MCP transport details — useful when the agent's user-agent or auth context hints at intent:
+
+```ts
+intentFallback: (request, extra) => {
+  const ua = extra?.requestInfo?.headers?.["user-agent"]
+  return `${ua ?? "unknown client"} invoked ${request.params?.name}`
+}
+```
+
+### LLM-derived intent
+
+Possible, but think twice. This callback sits on the hot path of every uncontextualized tool call — every LLM round-trip you add here adds latency to the agent's response. If you do this, cache aggressively and budget for failures:
+
+```ts
+intentFallback: async (request) => {
+  try {
+    return await summariseIntent(request.params)
+  } catch {
+    return null // the SDK swallows null gracefully
+  }
+}
+```
+
+## Filtering on intent source
+
+`$mcp_intent_source` is set to `"context_parameter"` or `"inferred"` only when an intent was captured. If neither a `context` argument nor a fallback result was available, both `$mcp_intent` and `$mcp_intent_source` are absent on the event.
+
+If you want to know what fraction of your traffic is contextualized:
+
+```sql
+SELECT
+  properties.$mcp_intent_source AS source,
+  count() AS calls
+FROM events
+WHERE event = '$mcp_tool_call'
+  AND timestamp > now() - INTERVAL 7 DAY
+GROUP BY source
+ORDER BY calls DESC
+```
+
+A high share of `inferred` means most of your callers are ignoring the schema hint — that's a signal to either improve the `context.description` copy or invest in a better `intentFallback`.
+
+## Gotchas
+
+<CalloutBox icon="IconWarning" title="`get_more_tools` reports its source as `context_parameter`" type="caution">
+
+The virtual `get_more_tools` tool (enabled by `reportMissing: true`) always reports `$mcp_intent_source = "context_parameter"`, even though the SDK is what defined the schema. Defensible — the agent did type a string — but filter it out of source-attribution queries if the number matters.
+
+</CalloutBox>
+
+<CalloutBox icon="IconInfo" title="The schema `required` field isn't enforced" type="fyi">
+
+`context` is advertised as required in JSON Schema, but the SDK does not re-validate against Zod. A client that ignores the schema hint can send `arguments: {}` and the call still succeeds — landing in PostHog with `$mcp_intent` empty. That's exactly why `intentFallback` exists.
+
+</CalloutBox>
+
+<CalloutBox icon="IconInfo" title="Skip `intentFallback` for tight internal servers" type="fyi">
+
+For a single, well-behaved internal client, the fallback is dead code. Don't add it unless you actually expect callers to skip the `context` argument.
+
+</CalloutBox>

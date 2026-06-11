@@ -75,7 +75,7 @@ Currently, alerts are supported on all [trends](/docs/product-analytics/trends).
      classes="rounded"
    />
 
-9. Select how often you want the alert to be checked (e.g. every hour, every day, every week, every month)
+9. Select how often you want the alert to be checked. Options include every 15 minutes (requires Boost, Scale, or Enterprise plan), every hour, every day, every week, and every month.
 
 10. Pick who should be notified when the alert is triggered. Subscribed users automatically receive in-app notifications when the alert fires. You can also add email recipients, Slack channels, or webhook URLs directly in the alert form.
 
@@ -294,6 +294,27 @@ You can add multiple notification destinations to a single alert. Each destinati
 
 You can configure alerts to skip checking on weekends.
 This is useful for daily alerts which would normally trigger on weekends.
+
+### Quiet hours
+
+Quiet hours let you define time windows when an alert won't be checked. This is useful for suppressing notifications during off-hours, such as nights or weekends.
+
+To enable quiet hours, check the **Quiet hours** checkbox in the alert form and configure one or more blocked time windows:
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/quiet_hours_light_e34901f0d8.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/quiet_hours_dark_227bcd9f4f.png"
+  alt="Quiet hours configuration in the alert form"
+  classes="rounded"
+/>
+
+- Specify start and end times in HH:MM format (24-hour clock)
+- Times are based on your project's timezone
+- Each window must span at least 30 minutes
+- You can add up to five time windows per alert
+- If a scheduled check falls during quiet hours, it runs when the window ends
+
+A preset for overnight hours (10 PM–7 AM) is available for quick setup.
 
 ### Check ongoing period
 
