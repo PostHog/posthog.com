@@ -42,6 +42,23 @@ These resource attributes are captured at `setup(...)` and apply to every batch.
 
 > **Web behavior.** On Flutter Web, the SDK attaches to an already-initialized [`posthog-js`](/docs/libraries/js) instance, so `config.logsConfig` is **not** applied on web. Configure your log options in the `posthog.init({...})` call in your `web/index.html` instead. `captureLog` and `logger` still work on web (they are forwarded to `posthog-js`), and `beforeSend` still runs (in Dart) on web. Web also requires a recent `posthog-js` build that exposes `captureLog`.
 
+For example, set the same service identity on the `posthog-js` snippet in `web/index.html`:
+
+```html
+<script>
+  posthog.init('<ph_project_token>', {
+    api_host: '<ph_client_api_host>',
+    logs: {
+      serviceName: 'my-app',
+      environment: 'production',
+      serviceVersion: '1.2.3',
+    },
+  })
+</script>
+```
+
+See the [JavaScript Logs installation guide](/docs/logs/installation/javascript) for the full `posthog-js` logs config.
+
 </Step>
 
 <Step title="Capture logs" badge="required">
