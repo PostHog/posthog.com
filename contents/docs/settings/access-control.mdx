@@ -154,6 +154,18 @@ You cannot set resource-level access controls for organization admins, as they a
   classes="rounded"
 />
 
+### 4. Property level
+
+Property access controls let you restrict who can view and edit properties on events and persons. These can be managed by using **Property definitions**.
+
+Property level access controls have the following levels:
+
+- **Read & write** – Can view and query the property, and update its value via the UI or API.
+- **Read** – Can view and query the property, but cannot change its value.
+- **No access** – The property is completely hidden from the user, and cannot be queried or filtered on.
+
+Currently event, person, and group properties are supported.
+
 ## How object access control precedence works
 
 When determining what a user can access for a specific resource object, PostHog checks permissions in this order (highest priority first):
@@ -212,6 +224,21 @@ Here are some practical examples of how to configure access controls for differe
 2. Give the analyst "Editor" access to all Insights (resource-level)
 3. Give the analyst "Viewer" access to all Dashboards (resource-level)
 4. The analyst can create and edit insights but only view dashboards
+
+#### Hide PII from vendors
+
+**Scenario**: You want to share your event data with vendors while restricting access to properties containing PII.
+
+**Setup**:
+
+1. Create a role for the vendor (e.g. "Vendor", "External collaborator")
+2. For each property containing PII:
+  a. Create a new property definition for the property if one does not already exist, otherwise edit the existing definition
+  b. Navigate to the "Roles" tab under the "Access control" section of the property definition page
+  c. Find your vendor role and select "Add override"
+  d. Select "No access"
+  e. Save the property definition
+3. Any member with the vendor role will not be able to access PII properties
 
 ## Feature availability
 
