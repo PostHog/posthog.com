@@ -6935,6 +6935,7 @@ export const docsMenu = {
                         { name: 'React Native', url: '/docs/logs/installation/react-native' },
                         { name: 'iOS', url: '/docs/logs/installation/ios' },
                         { name: 'Android', url: '/docs/logs/installation/android' },
+                        { name: 'Flutter', url: '/docs/logs/installation/flutter' },
                         { name: 'Datadog', url: '/docs/logs/installation/datadog' },
                         { name: 'Other', url: '/docs/logs/installation/other' },
                     ],
