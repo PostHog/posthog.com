@@ -8,7 +8,13 @@ The PostHog CLI lets you use PostHog from your terminal, local scripts, CI/CD pi
 
 You can use it for existing workflows like uploading source maps, querying data, and downloading schema definitions. You can also use `posthog-cli api` to give agents shell-friendly access to PostHog's [Model Context Protocol (MCP)](/docs/model-context-protocol) tool catalog.
 
-If you want the hosted MCP server in your editor or agent instead, the [PostHog wizard](/docs/ai-engineering/ai-wizard) is the best way to [install it](/docs/model-context-protocol) — run `npx @posthog/wizard mcp add` and it configures every supported client for you. The CLI is the shell-first alternative for agents that work best with commands instead of MCP tool calls.
+The best way to set up the agentic CLI is the [PostHog wizard](/docs/ai-engineering/ai-wizard). It detects your coding agents and configures them to use `posthog-cli api` for PostHog tasks:
+
+```bash
+npx -y @posthog/wizard@latest cli add
+```
+
+See [set up agent instructions](#set-up-agent-instructions) for what this installs and the per-repo alternative.
 
 ## Install the CLI
 
@@ -114,7 +120,7 @@ Because the command prints plain text or JSON, agents can pipe output to tools l
 
 Agents don't automatically know that `posthog-cli api` exists or how PostHog expects them to use it, so something needs to tell them. That something is a managed instructions snippet.
 
-The easiest way to install it is the [PostHog wizard](/docs/ai-engineering/ai-wizard) — the same tool that's the best way to [install the MCP server](/docs/model-context-protocol). It detects which coding agents you have installed and writes the snippet into the agent's global instructions file, such as `~/.claude/CLAUDE.md` for Claude Code or `~/.codex/AGENTS.md` for Codex:
+The best way to install it is the [PostHog wizard](/docs/ai-engineering/ai-wizard). It detects which coding agents you have installed and writes the snippet into the agent's global instructions file, such as `~/.claude/CLAUDE.md` for Claude Code or `~/.codex/AGENTS.md` for Codex:
 
 ```bash
 npx -y @posthog/wizard@latest cli add
@@ -214,11 +220,11 @@ If you see a missing API key error, run `posthog-cli login` or set `POSTHOG_CLI_
 
 ### My agent doesn't know about the CLI
 
-Agents only use `posthog-cli api` if their instructions tell them to. Install the steering snippet into the repo's instructions file, or globally for your agent with the wizard:
+Agents only use `posthog-cli api` if their instructions tell them to. The best way to set that up is the wizard, which installs the steering snippet globally for your agent — or use the CLI to install it into a single repo's instructions file:
 
 ```bash
-posthog-cli api agents-md install
 npx -y @posthog/wizard@latest cli add
+posthog-cli api agents-md install
 ```
 
 If the snippet is installed but the agent still ignores the CLI, check that the instructions file is one your agent actually reads (for example, Claude Code reads `CLAUDE.md` and `AGENTS.md`, Codex reads `AGENTS.md`) and pass `--path` if needed.
