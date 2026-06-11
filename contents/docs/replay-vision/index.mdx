@@ -4,6 +4,8 @@ featureFlag: replay-vision
 noindex: true
 ---
 
+import { ProductScreenshot } from "components/ProductScreenshot";
+
 Replay Vision uses AI to automatically watch your [session recordings](/docs/session-replay) and turn what it sees into structured, queryable data. You configure **scanners** – named AI probes that describe what to look for – and PostHog applies them to your recordings, producing **observations** you can query, chart, and alert on.
 
 The key idea is that Replay Vision actually *watches the video* of each recording alongside its events. This lets it pick up on visual and behavioral cues – hesitation, confusion, where a user's attention goes – that aren't captured by clicks and pageviews alone. Instead of manually reviewing hundreds of replays to spot a pattern, you describe what matters once and let it run continuously.
@@ -14,7 +16,12 @@ Replay Vision is currently in beta and rolling out gradually. Some details below
 
 </CalloutBox>
 
-{/* SCREENSHOT: replay-vision-overview-app – full Replay Vision landing page showing the scanner list (3–4 scanners with mixed types and statuses) and the per-month usage meter in the header. Both light and dark mode. */}
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/replay_vision_overview_app_light_9f82e7b066.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/replay_vision_overview_app_dark_73d0b2c435.png"
+  alt="The Replay Vision overview: observations over time, enabled scanners, the monthly usage meter, and the scanner list"
+  classes="rounded"
+/>
 
 ## How it works
 
@@ -31,8 +38,6 @@ When a scanner runs against a recording, PostHog:
 4. Saves the result as an observation and captures it as a `$recording_observed` event in your project.
 
 Each observation snapshots the scanner's configuration at the time it ran, so editing a scanner later doesn't change past observations.
-
-{/* SCREENSHOT: replay-vision-pipeline-diagram – illustration showing: recording → rendered video + events → Gemini → structured result → observation row + $recording_observed event. Light/dark variants if possible. */}
 
 ## What you can do with it
 

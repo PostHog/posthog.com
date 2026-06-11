@@ -4,6 +4,8 @@ featureFlag: replay-vision
 noindex: true
 ---
 
+import { ProductScreenshot } from "components/ProductScreenshot";
+
 The scanner type determines the shape of the structured output the model returns. It's chosen when you create a scanner and **can't be changed afterwards** – to switch types, create a new scanner.
 
 There are four types:
@@ -45,7 +47,11 @@ A monitor returns a yes/no verdict for whether the condition in your prompt occu
 
 **On `$recording_observed`** – `scanner_output_verdict` is the string `"yes"`, `"no"`, or `"inconclusive"`. See [observations](/docs/replay-vision/observations#querying-observations-as-events).
 
-{/* SCREENSHOT: scanner-monitor-result – observation detail for a monitor scanner: large verdict badge (yes/no), confidence bar, reasoning with two highlighted citation links. */}
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/observation_detail_monitor_77a2192684.png"
+  alt="An observation detail page for a monitor scanner: verdict, confidence, and model reasoning with citation links"
+  classes="rounded"
+/>
 
 ## Classifier
 
@@ -76,7 +82,11 @@ A classifier assigns one or more **tags** from a vocabulary you define. You can 
 
 **On `$recording_observed`** – `scanner_output_tags` is the array of vocabulary tags. Freeform tags, when allowed, land separately in `scanner_output_tags_freeform`.
 
-{/* SCREENSHOT: scanner-classifier-result – observation detail for a classifier: picked tags rendered as colored chips, reasoning beneath. Bonus: the scanner-edit view showing the tag vocabulary table. */}
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/scanner_classifier_result_5582b81446.png"
+  alt="An observation detail page for a classifier scanner: the assigned tag, the tag vocabulary, and the model's reasoning"
+  classes="rounded"
+/>
 
 ## Scorer
 
@@ -102,7 +112,11 @@ A scorer assigns a **numeric score** on a scale you define – e.g. 0 to 10 for 
 
 **On `$recording_observed`** – `scanner_output_score` is the numeric score. Histograms and percentiles over this field tend to be the most useful insights.
 
-{/* SCREENSHOT: scanner-scorer-result – observation detail for a scorer: large numeric score (e.g. "7 / 10") with a visual meter, reasoning beneath with citations to two friction moments. */}
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/scanner_scorer_result_b1064f56fb.png"
+  alt="An observation detail page for a scorer scanner: the numeric score on its scale and the model's reasoning with citations"
+  classes="rounded"
+/>
 
 ## Summarizer
 
@@ -131,7 +145,11 @@ A summarizer produces a short prose summary of what happened in the session, plu
 
 **On `$recording_observed`** – `scanner_output_title` and `scanner_output_summary` carry the title and summary; the facets land as `scanner_output_intent`, `scanner_output_outcome`, `scanner_output_friction_points`, and `scanner_output_keywords`. See [observations](/docs/replay-vision/observations#querying-observations-as-events).
 
-{/* SCREENSHOT: scanner-summarizer-result – observation detail for a summarizer: bold title, prose summary beneath with inline citations. */}
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/scanner_summarizer_result_3692446010.png"
+  alt="An observation detail page for a summarizer scanner: the generated title and prose summary with inline citations"
+  classes="rounded"
+/>
 
 ## Picking a type
 
@@ -149,5 +167,3 @@ If you find yourself encoding a number range as classifier tags ("low / medium /
 Confidence is the model's self-reported certainty. It's useful as a filter (e.g. "only alert when confidence > 0.7") but not as ground truth – treat it as a signal, not a guarantee.
 
 Citations are emitted inline in the model's free-text output (the `reasoning` field for monitors, classifiers, and scorers; the `summary` field for summarizers) and rendered as clickable links in the observation detail view. They jump the embedded player to the timestamp the model points at. They're the single best tool for understanding *why* a model returned what it did.
-
-{/* SCREENSHOT: citation-detail – close-up of a reasoning paragraph with two citation links, and a side panel showing the embedded player jumped to one of the cited moments. */}

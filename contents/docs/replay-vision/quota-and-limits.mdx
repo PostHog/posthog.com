@@ -4,6 +4,8 @@ featureFlag: replay-vision
 noindex: true
 ---
 
+import { ProductScreenshot } from "components/ProductScreenshot";
+
 Replay Vision usage is metered per organization, on a monthly cycle. This page covers what the cap is, what counts against it, and what to do when you're approaching it.
 
 <CalloutBox type="caution" title="Closed beta quota will change">
@@ -18,7 +20,11 @@ During the closed beta, each organization gets **3,000 observations per calendar
 
 The current month's usage is shown in the Replay Vision app:
 
-{/* SCREENSHOT: quota-meter – the per-month usage meter in the Replay Vision app header: "1,247 / 3,000 observations this month" with a progress bar. */}
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/quota_meter_ddcc762a43.png"
+  alt="The monthly usage meter: observations used this month against the organization's cap"
+  classes="rounded"
+/>
 
 You can also fetch it programmatically – see the `vision-quota-retrieve` MCP tool.
 
@@ -53,7 +59,11 @@ The scanner editor shows a **projected per-month observation count** for the sca
 - The filters you've set.
 - The sampling rate.
 
-{/* SCREENSHOT: editor-estimate-vs-quota – close-up of the editor showing the projected per-month estimate alongside the remaining-quota meter, with a clear "X% of remaining quota" callout. */}
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/estimate_callout_2d954ec2cb.png"
+  alt="The triggers step of the scanner editor: sampling rate, recording filters, and the estimated per-month impact against the remaining quota"
+  classes="rounded"
+/>
 
 If the projection is uncomfortably close to your remaining cap, the cheapest knobs are:
 

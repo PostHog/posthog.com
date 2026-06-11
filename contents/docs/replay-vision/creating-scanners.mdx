@@ -4,6 +4,8 @@ featureFlag: replay-vision
 noindex: true
 ---
 
+import { ProductScreenshot } from "components/ProductScreenshot";
+
 A scanner is made up of four things you author:
 
 1. A **prompt** describing what to look for.
@@ -11,13 +13,15 @@ A scanner is made up of four things you author:
 3. **Recording filters** that select which sessions the scanner applies to.
 4. A **sampling rate** that controls how many matching sessions get scanned.
 
-{/* SCREENSHOT: scanner-editor-full – full scanner editor scene with all sections expanded: name/description, type picker, prompt textarea, type-specific config, filters, sampling, model. */}
-
 ## Start from a template
 
 When you click **New scanner** you land on the templates picker. The built-in templates cover the most common shapes and are a useful starting point even when your real scanner ends up looking quite different.
 
-{/* SCREENSHOT: templates-picker – same as on the start-here page: the templates grid with the five built-in templates plus "Create from scratch". */}
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/templates_picker_fb4ef59a19.png"
+  alt="The scanner templates picker with the five built-in templates and the create-from-scratch option"
+  classes="rounded"
+/>
 
 The shipping templates are:
 
@@ -76,7 +80,11 @@ Hold off on the automatic background sweep until you trust the scanner's on-dema
 
 Inside the scanner editor, you can ask [PostHog AI](/docs/posthog-ai) to draft a prompt by describing what you want in natural language. It picks a scanner type, drafts the prompt, and fills it into the form for you to edit.
 
-{/* SCREENSHOT: posthog-ai-prompt-drafter – scanner editor with the PostHog AI chat panel open; user has typed "find sessions where someone tries to use a coupon code and it fails" and PostHog AI has drafted a monitor prompt and filled it into the form. */}
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/posthog_ai_prompt_drafter_7cb9c1fc04.png"
+  alt="The scanner editor with the PostHog AI panel open, ready to draft the scanner prompt"
+  classes="rounded"
+/>
 
 ## Type-specific configuration
 
@@ -98,8 +106,6 @@ Recording filters use the same query builder as the rest of [Session Replay](/do
 
 A scanner with no filters matches every eligible session in your project. A scanner with narrow filters – e.g. "sessions on `/checkout` longer than 30 seconds for users on the trial plan" – is much cheaper, much faster to iterate on, and usually more useful.
 
-{/* SCREENSHOT: filters-block – the recording filters block in the scanner editor with two property filters and an event filter applied. */}
-
 A good default discipline: start with a narrow filter while you're tuning the prompt, then widen the filter once you trust the results.
 
 ## Sampling rate: controlling volume
@@ -108,7 +114,11 @@ The sampling rate (0–100%) is applied **after** the filters match. A scanner w
 
 The scanner editor shows a **per-month estimate** of how many observations the scanner will produce, based on your project's recent recording volume, the filters you've set, and the sampling rate. Use this to size the scanner against your [quota](/docs/replay-vision/quota-and-limits) *before* saving.
 
-{/* SCREENSHOT: estimate-callout – the per-month estimate widget in the scanner editor with a concrete projected number, a "remaining quota this month" bar beneath it, and the sampling slider visible alongside. */}
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/estimate_callout_2d954ec2cb.png"
+  alt="The triggers step of the scanner editor: sampling rate, recording filters, and the estimated per-month impact against the remaining quota"
+  classes="rounded"
+/>
 
 If the estimate looks too high, you have two knobs:
 
@@ -122,5 +132,3 @@ Scanners are **enabled by default** when you save. Once enabled, a scanner sweep
 Toggling a scanner to **disabled** stops the background sweep. On-demand triggers (from the player or via MCP) still work on a disabled scanner – disabling only affects the automatic schedule.
 
 To stop a scanner entirely, delete it. Deleting a scanner also removes all of its observations from the Observations tab. The `$recording_observed` events the scanner produced are ordinary PostHog events in your project's event stream and aren't affected – they stay queryable.
-
-{/* SCREENSHOT: scanner-list-toggle – the scanner list with the enable/disable toggle visible on each row, one enabled and one disabled. */}

@@ -4,11 +4,17 @@ featureFlag: replay-vision
 noindex: true
 ---
 
+import { ProductScreenshot } from "components/ProductScreenshot";
+
 Each scanner has an **Observations** tab listing every observation it's produced. Click into one to open the detail view: the structured result, the model's reasoning (with clickable citations that jump the embedded player to the cited moment), and the prompt that produced it – frozen even if you've since edited the scanner.
 
 Observations also surface in the replay player: the **observations dock** at the bottom of the player lists everything scanners have found about the session you're watching, and is where the **Scan this recording** action lives.
 
-{/* SCREENSHOT: observations-dock – the replay player with the observations dock expanded at the bottom: two observation cards from different scanners, the "Scan this recording" button visible in the dock header. */}
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/observations_dock_0301561e5d.png"
+  alt="The replay player with the observations dock expanded, listing observation cards from several scanners and the Scan this recording action"
+  classes="rounded"
+/>
 
 Observations move through a small state machine:
 

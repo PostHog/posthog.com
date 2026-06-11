@@ -4,6 +4,8 @@ featureFlag: replay-vision
 noindex: true
 ---
 
+import { ProductScreenshot } from "components/ProductScreenshot";
+
 Common things that go wrong with Replay Vision, and what to do about each.
 
 ## My scanner isn't producing any observations
@@ -16,8 +18,6 @@ Check, in order:
 4. **Is the quota exhausted?** Check the usage meter in the Replay Vision header. A scanner whose background sweep is silenced by the cap will silently produce nothing until quota frees up. See [quota and limits](/docs/replay-vision/quota-and-limits).
 5. **Is your project recording sessions at all?** Replay Vision only sees sessions [Session Replay](/docs/session-replay) has captured. No recordings, no observations.
 6. **Are all the matched sessions ineligible?** If your filters happen to match only very short or no-event sessions, the scanner will produce ineligible observations but no successful ones. See [running scanners – ineligible sessions](/docs/replay-vision/running-scanners#ineligible-sessions).
-
-{/* SCREENSHOT: empty-observations-tab – the Observations tab showing zero observations with the empty-state copy, alongside the scanner editor with the filters block open so the reader can pattern-match. */}
 
 A fast way to confirm the scanner itself works: run it [on-demand](/docs/replay-vision/running-scanners#on-demand-on-recordings-you-pick) against a recording you know is eligible. If that produces a result, the issue is in the filters, the sampling rate, or the quota – not the scanner config.
 
@@ -92,7 +92,11 @@ Something else went wrong on PostHog's side. These should be rare.
 
 **What to do:** if you see it more than once, [contact support](/questions) with the observation ID.
 
-{/* SCREENSHOT: failed-observation-detail – observation detail in the failed state with one of the kinds (e.g. provider_rejected) shown, kind badge highlighted, human-readable message visible. */}
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/failed_observation_detail_d3da59138d.png"
+  alt="An observation detail page in the failed state, showing the failure kind and human-readable error message"
+  classes="rounded"
+/>
 
 ## Something else
 

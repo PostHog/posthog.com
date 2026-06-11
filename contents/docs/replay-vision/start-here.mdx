@@ -4,6 +4,8 @@ featureFlag: replay-vision
 noindex: true
 ---
 
+import { ProductScreenshot } from "components/ProductScreenshot";
+
 This walkthrough takes you from zero to your first observation in about five minutes. We'll create a scanner from a built-in template, run it on a recording you pick, and then query the result as a regular PostHog event.
 
 You should already have [Session Replay](/docs/session-replay) recording sessions for your project. Replay Vision watches those recordings – without them there's nothing to scan.
@@ -12,7 +14,11 @@ You should already have [Session Replay](/docs/session-replay) recording session
 
 Open **Replay Vision** from the side menu, then click **New scanner**. You'll land on the templates picker.
 
-{/* SCREENSHOT: templates-picker – the "Choose a scanner template" page with the five built-in template cards plus the "Create from scratch" card. */}
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/templates_picker_fb4ef59a19.png"
+  alt="The scanner templates picker with the five built-in templates and the create-from-scratch option"
+  classes="rounded"
+/>
 
 The templates cover the four [scanner types](/docs/replay-vision/scanner-types):
 
@@ -26,7 +32,11 @@ Pick **Dead ends** to follow along. You can change anything before saving – th
 
 ## 2. Look over the prompt and filters
 
-{/* SCREENSHOT: scanner-editor-prefilled – the editor with the dead-end template loaded. Highlight (a) the prompt textarea, (b) the recording filters block, (c) the sampling rate slider, (d) the per-month estimate. */}
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/scanner_editor_prefilled_57e9a30209.png"
+  alt="The scanner editor pre-filled from the Dead ends template: name, description, prompt, and type-specific config"
+  classes="rounded"
+/>
 
 The template arrives with:
 
@@ -53,7 +63,11 @@ For this walkthrough we won't wait for the sweep – we'll trigger one observati
 
 Open the [replay](/docs/session-replay) for any session of yours, then use the **Scan this recording** action on the player.
 
-{/* SCREENSHOT: player-scan-action – the replay player with the "Scan this recording" menu/button highlighted, scanner picker open with our new "Dead-end pages" scanner listed. */}
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/player_scan_action_0e39437f9a.png"
+  alt="The replay player with the Scan this recording action open and a scanner picker listing available scanners"
+  classes="rounded"
+/>
 
 Pick the scanner you just created. PostHog renders the recording, sends it to Gemini, and produces a result. This usually takes a couple of minutes.
 
@@ -63,7 +77,11 @@ You can also run a scanner programmatically – see [running scanners](/docs/rep
 
 Once it finishes, the observation appears in two places: on the scanner's **Observations** tab, and in the **observations dock** at the bottom of the replay player for the recording you scanned. Open the observation to see the structured result.
 
-{/* SCREENSHOT: observation-detail – full observation detail page: verdict + confidence at the top, reasoning with citations beneath, embedded player on the right, and the prompt that produced it at the bottom. */}
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/observation_detail_monitor_77a2192684.png"
+  alt="An observation detail page for a monitor scanner: verdict, confidence, model reasoning with citations, and the prompt that produced it"
+  classes="rounded"
+/>
 
 For a monitor scanner you'll see:
 
