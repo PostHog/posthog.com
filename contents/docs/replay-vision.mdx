@@ -6,7 +6,7 @@ noindex: true
 
 Replay Vision uses AI to automatically watch your [session recordings](/docs/session-replay) and turn what it sees into structured, queryable data. You configure **scanners** – named AI probes that describe what to look for – and PostHog applies them to your recordings, producing **observations** you can query, chart, and alert on.
 
-The key idea is that Replay Vision actually *watches the video* of each recording alongside its events. This lets it pick up on visual and behavioral cues – hesitation, confusion, where a user's attention goes – that aren't captured by clicks and pageviews alone. Instead of manually reviewing hundreds of replays to spot a pattern, you describe what matters once and let it run continuously.
+The key idea is that Replay Vision actually _watches the video_ of each recording alongside its events. This lets it pick up on visual and behavioral cues – hesitation, confusion, where a user's attention goes – that aren't captured by clicks and pageviews alone. Instead of manually reviewing hundreds of replays to spot a pattern, you describe what matters once and let it run continuously.
 
 <CalloutBox type="fyi" title="Replay Vision is in beta">
 
@@ -34,12 +34,12 @@ Each observation snapshots the scanner's configuration at the time it ran, so ed
 
 The scanner type is chosen when you create a scanner and determines the shape of the output. It can't be changed afterwards – to switch types, create a new scanner.
 
-| Type | What it produces | Use it for |
-| --- | --- | --- |
-| **Monitor** | A true/false verdict, with reasoning | Flagging whether a specific condition occurred, e.g. "did someone get stuck with no clear next step?" |
+| Type           | What it produces                              | Use it for                                                                                                                                     |
+| -------------- | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Monitor**    | A true/false verdict, with reasoning          | Flagging whether a specific condition occurred, e.g. "did someone get stuck with no clear next step?"                                          |
 | **Classifier** | One or more tags from a vocabulary you define | Bucketing sessions, e.g. user intent (`browsing`, `purchasing`, `support`) or outcome (`task_completed`, `task_abandoned`, `blocked_by_error`) |
-| **Scorer** | A numeric score on a scale you define | Rating sessions on a dimension, e.g. a 0 to 10 frustration score |
-| **Summarizer** | A title and prose summary | Generating a short narrative of what happened in each session |
+| **Scorer**     | A numeric score on a scale you define         | Rating sessions on a dimension, e.g. a 0 to 10 frustration score                                                                               |
+| **Summarizer** | A title and prose summary                     | Generating a short narrative of what happened in each session                                                                                  |
 
 Every scanner also returns a **confidence** value and, in its reasoning, may include citations that link directly to the relevant moment in the recording's timeline.
 
@@ -47,14 +47,14 @@ Every scanner also returns a **confidence** value and, in its reasoning, may inc
 
 1. Go to **Replay Vision** in the PostHog app and select **New scanner** (or start from a template).
 2. Pick a [scanner type](#scanner-types). Templates are available for common cases – dead-end detection, session summary, user intent, frustration score, and session outcome.
-3. Write a prompt describing what the scanner should look for. Be concrete and avoid speculation – e.g. *"Return true if someone appears stuck on a page – scrolling without engaging, hovering over elements with no clear CTA, or abandoning shortly after arriving."*
+3. Write a prompt describing what the scanner should look for. Be concrete and avoid speculation – e.g. _"Return true if someone appears stuck on a page – scrolling without engaging, hovering over elements with no clear CTA, or abandoning shortly after arriving."_
 4. Configure the type-specific options:
    - **Classifier** – define your tag vocabulary, and optionally allow multiple tags per session or freeform tags.
    - **Scorer** – set the numeric scale (min, max, and an optional label).
    - **Summarizer** – set the summary length.
 5. Set **recording filters** to choose which sessions the scanner applies to (by person properties, session properties, cohorts, or events) and a **sampling rate** to control how many matching sessions get scanned.
 6. Optionally enable [Signals](#signals) so notable findings can trigger alerts.
-7. Save. The scanner is enabled by default.
+7. Save. The scanner is enabled by default. You can toggle a scanner on or off at any time from its overview page using the **Enabled**/**Disabled** switch in the page header.
 
 <CalloutBox type="fyi" title="Estimate your usage first">
 
@@ -85,6 +85,10 @@ A scanner won't run on a recording that has no replay data, is too short, too in
 
 </CalloutBox>
 
+### Enabling and disabling scanners
+
+Each scanner's overview page has an **Enabled**/**Disabled** toggle in the header. Flip it to pause or resume a scanner without opening the full edit flow. Disabling a scanner stops it from running against new recordings; re-enabling it resumes automatic observation. Toggling requires Editor-level access.
+
 ## Reading results
 
 ### In the app
@@ -97,18 +101,18 @@ Every successful observation is captured as a `$recording_observed` event in you
 
 Key properties on each event:
 
-| Property | Description |
-| --- | --- |
-| `scanner_name` | Name of the scanner that produced the observation |
-| `scanner_type` | `monitor`, `classifier`, `scorer`, or `summarizer` |
-| `session_id` | The recording that was observed |
-| `triggered_by` | Whether the observation was scheduled or run on-demand |
-| `model_used` | The Gemini model used |
-| `scanner_output_confidence` | The model's confidence (0.0 to 1.0) |
-| `scanner_output_verdict` | (Monitor) the true/false verdict |
-| `scanner_output_tags` | (Classifier) the assigned tags |
-| `scanner_output_score` | (Scorer) the numeric score |
-| `scanner_output_reasoning` | The model's reasoning |
+| Property                    | Description                                            |
+| --------------------------- | ------------------------------------------------------ |
+| `scanner_name`              | Name of the scanner that produced the observation      |
+| `scanner_type`              | `monitor`, `classifier`, `scorer`, or `summarizer`     |
+| `session_id`                | The recording that was observed                        |
+| `triggered_by`              | Whether the observation was scheduled or run on-demand |
+| `model_used`                | The Gemini model used                                  |
+| `scanner_output_confidence` | The model's confidence (0.0 to 1.0)                    |
+| `scanner_output_verdict`    | (Monitor) the true/false verdict                       |
+| `scanner_output_tags`       | (Classifier) the assigned tags                         |
+| `scanner_output_score`      | (Scorer) the numeric score                             |
+| `scanner_output_reasoning`  | The model's reasoning                                  |
 
 For example, to count monitor sessions flagged true by a "Dead-end pages" scanner over the last week:
 
