@@ -23,7 +23,7 @@ Note that some tools use LLMs internally, and usage of these tools may be billed
 
 ### Are there rate limits?
 
-MCP tool calls execute against the PostHog API, so they're subject to the same [API rate limits](/docs/api#rate-limiting) as any other personal API key request – there's no separate MCP limit layered on top. For example, analytics tools (insights, persons, session recordings) are limited to `240/minute` and `1200/hour`, SQL queries to `2400/hour`, and most other read/write tools to `480/minute` and `4800/hour`. These limits apply per team, across all users and keys in your organization.
+MCP tool calls execute against the PostHog API, so they're subject to the same [API rate limits](/docs/api#rate-limiting) as any other personal API key request – there's no separate MCP limit layered on top. These limits apply per team, across all users and keys in your organization.
 
 If a tool call does get rate limited, the server automatically retries it a few times – honoring the `Retry-After` header, or backing off exponentially – before surfacing an error, since AI agents can't wait and retry on their own.
 
