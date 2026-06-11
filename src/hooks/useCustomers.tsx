@@ -18,7 +18,8 @@ import ElevenLabsLogo from '../components/CustomerLogos/ElevenLabsLogo'
 import ExaLogo from 'components/CustomerLogos/ExaLogo'
 import GanksterLogo from '../components/CustomerLogos/GanksterLogo'
 import GrantableLogo from '../components/CustomerLogos/GrantableLogo'
-import GreptileLogo from '../components/CustomerLogos/GreptileLogo'
+import GreptileLogoLight from '../images/customers/greptile-light.svg'
+import GreptileLogoDark from '../images/customers/greptile-dark.svg'
 import HasuraLogo from '../components/CustomerLogos/HasuraLogo'
 import HeadshotProLogo from '../components/CustomerLogos/HeadshotProLogo'
 import HeygenLogo from '../components/CustomerLogos/HeygenLogo'
@@ -485,7 +486,10 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         industries: ['SaaS'],
         // users: ['Engineering', 'Product'],
         notes: 'AI code reviewer',
-        logo: GreptileLogo,
+        logo: {
+            light: GreptileLogoLight,
+            dark: GreptileLogoDark,
+        },
         featured: true,
         height: 10,
     },
