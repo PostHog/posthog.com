@@ -5843,10 +5843,6 @@ export const docsMenu = {
                             url: '/docs/ai-evals',
                         },
                         {
-                            name: 'Evaluations',
-                            url: '/docs/ai-evals/evaluations',
-                        },
-                        {
                             name: 'Trace reviews',
                             url: '/docs/ai-observability/trace-reviews',
                         },
@@ -5870,10 +5866,6 @@ export const docsMenu = {
                         {
                             name: 'Overview',
                             url: '/docs/prompt-management',
-                        },
-                        {
-                            name: 'Prompts',
-                            url: '/docs/prompt-management/prompts',
                         },
                         {
                             name: 'Skills store',
