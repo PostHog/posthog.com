@@ -41,7 +41,7 @@ Autocapture is available in the following SDKs, each with a different set of cap
 
 - [JavaScript Web](/docs/libraries/js) – enabled by default
 - [React](/docs/libraries/react) – enabled by default
-- [Android](/docs/libraries/android) – enabled by default
+- [Android](/docs/libraries/android) – navigation, lifecycle, and deep-link autocapture enabled by default; interaction autocapture is not supported
 - [iOS](/docs/libraries/ios) – enabled by default (element interactions – `$autocapture` events disabled by default)
 - [React Native](/docs/libraries/react-native) – disabled by default
 - [Flutter](/docs/libraries/flutter) – disabled by default
@@ -311,10 +311,11 @@ To exclude specific UI elements from autocapture or session replay, add `ph-no-c
 
 ## Navigation and lifecycle event autocapture
 
-<Tab.Group tabs={['Web', 'iOS', 'React Native']}>
+<Tab.Group tabs={['Web', 'iOS', 'Android', 'React Native']}>
 <Tab.List>
 <Tab>Web</Tab>
 <Tab>iOS</Tab>
+<Tab>Android</Tab>
 <Tab>React Native</Tab>
 </Tab.List>
 <Tab.Panels>
@@ -394,6 +395,15 @@ config.captureApplicationLifecycleEvents = false // Enabled by default; set to f
 
 PostHogSDK.shared.setup(config)
 ```
+
+</Tab.Panel>
+<Tab.Panel>
+
+### Android navigation and lifecycle autocapture
+
+Android lifecycle, screen, and deep-link autocapture are documented in the [Android SDK capturing events guide](/docs/libraries/android#capturing-events). Configuration options are documented in the [Android SDK configuration reference](/docs/libraries/android#all-configuration-options).
+
+Android does not currently support interaction autocapture for arbitrary taps or gestures.
 
 </Tab.Panel>
 <Tab.Panel>

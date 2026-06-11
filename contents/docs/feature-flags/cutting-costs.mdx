@@ -118,7 +118,7 @@ Test environments, staging servers, and CI pipelines can silently accumulate fea
 The key settings are:
 - **JavaScript**: `advanced_disable_feature_flags: true` stops the SDK from hitting `/flags` on init
 - **Mobile SDKs**: `preloadFeatureFlags = false` prevents automatic flag fetching
-- **All SDKs**: Use flag overrides or bootstrapping to provide values locally without network requests
+- **SDKs with local overrides or bootstrapping**: Provide values locally without network requests
 
 <MultiLanguage>
 
@@ -149,12 +149,15 @@ posthog.init('<ph_project_token>', {
 ```
 
 ```android
+import com.posthog.android.PostHogAndroid
+import com.posthog.android.PostHogAndroidConfig
+
 // Detect test/CI environment
 val isTestEnv = BuildConfig.DEBUG || System.getProperty("CI") != null
 
-val config = PostHogConfig(apiKey = "<ph_project_token>").apply {
+val config = PostHogAndroidConfig(apiKey = "<ph_project_token>").apply {
     if (isTestEnv) {
-        // Disable flag requests entirely
+        // Disable automatic flag requests
         preloadFeatureFlags = false
         sendFeatureFlagEvent = false
 
@@ -164,12 +167,11 @@ val config = PostHogConfig(apiKey = "<ph_project_token>").apply {
     }
 }
 
-PostHog.setup(context, config)
+PostHogAndroid.setup(context, config)
 
-// If tests need flags to work, override them locally:
-if (isTestEnv) {
-    PostHog.with { it.overrideFeatureFlag("your-flag", true) }
-}
+// The Android SDK doesn't support local feature flag overrides.
+// If tests need deterministic values, wrap your own flag reads in test code
+// or use a separate PostHog project/environment with fixed flag rules.
 ```
 
 ```ios
@@ -236,7 +238,7 @@ if (isTestEnv) {
 
 </MultiLanguage>
 
-For staging environments where you want flags to work but don't need real-time evaluation, consider using [flag overrides and bootstrapping](/docs/feature-flags/testing#method-2-use-posthogfeatureflagsoverridefeatureflags) instead of fetching from the server.
+For staging environments where you want flags to work but don't need real-time evaluation, consider using [flag overrides and bootstrapping](/docs/feature-flags/testing#method-2-use-posthogfeatureflagsoverridefeatureflags) instead of fetching from the server in SDKs that support local overrides.
 
 ## Audit environments to catch unexpected `/flags` calls
 
