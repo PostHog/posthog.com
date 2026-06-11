@@ -82,7 +82,7 @@ For these reasons, we:
  
 - Don't pretend our customers are different from us – i.e. more gullible, more susceptible to marketing. We are an engineering-led team building products for other engineers. If you wouldn't like it, assume our customers wouldn't either. 
 
-- Don't do cold email marketing to acquire new customers. When was the last time you read the 8th email a company sent you and thought 'ok yes, I now want to use this product'?
+- When doing cold outbound, do it tastefully. When was the last time you read the 8th email a company sent you and thought 'ok yes, I now want to use this product'? Keep it low-volume, thoughtful, and relevant.
 
 ## Marketing vision
 

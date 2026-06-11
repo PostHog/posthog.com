@@ -10,7 +10,9 @@ import PromptExample from "./_snippets/prompt-example.tsx"
 
 The PostHog [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) server is a free, hosted endpoint that lets your AI agent use PostHog – with just plain text questions your agents can ship a feature flag from a prompt, dig into a stack trace without leaving your editor, run a HogQL query through Claude, triage a support ticket, set up a CDP destination, and much more.
 
-It works with any MCP-compatible client, including [PostHog Code](/code), Claude Code, Claude Desktop, Cursor, Codex, VS Code, Windsurf, and Zed. 
+It works with any MCP-compatible client, including [PostHog Code](/code), Claude Code, Claude Desktop, Cursor, Codex, VS Code, Windsurf, and Zed.
+
+> Connecting to the MCP server and calling its tools is free, but some tools use LLMs internally and may be billed as PostHog AI spend. These AI-powered tools are only available when [AI data processing is enabled](/docs/posthog-ai/allow-access) in your organization settings.
 
 ## Get started in 30 seconds
 

@@ -57,6 +57,11 @@
     ],
     "redirects": [
         {
+            "source": "/slack",
+            "destination": "/slack-app",
+            "statusCode": 301
+        },
+        {
             "source": "/blog/autoresearch-query-bug",
             "destination": "/blog/karpathy-autoresearch-query-engine-bug"
         },
@@ -113,6 +118,8 @@
         { "source": "/docs/user-guides/:path*", "destination": "/manual/:path*" },
         { "source": "/docs/integrate/(client|server)/:path*", "destination": "/docs/integrate/:path*" },
         { "source": "/docs/session-recording/:path*", "destination": "/docs/session-replay/:path*" },
+        { "source": "/docs/tracing", "destination": "/docs/distributed-tracing", "statusCode": 301 },
+        { "source": "/docs/tracing/:path*", "destination": "/docs/distributed-tracing/:path*", "statusCode": 301 },
         {
             "source": "/docs/posthog-code/inbox/triage",
             "destination": "/docs/posthog-code/inbox/implementation",
@@ -340,6 +347,12 @@
             "source": "/handbook/brand/philosophy",
             "destination": "/handbook/brand/overview"
         },
+        { "source": "/handbook/brand/email-comms", "destination": "/handbook/marketing/email-comms" },
+        { "source": "/handbook/brand/in-app", "destination": "/handbook/marketing/in-app" },
+        { "source": "/handbook/brand/partners", "destination": "/handbook/marketing/partners" },
+        { "source": "/handbook/brand/press", "destination": "/handbook/marketing/press" },
+        { "source": "/handbook/brand/startups", "destination": "/handbook/marketing/startups" },
+        { "source": "/handbook/brand/testimonials", "destination": "/handbook/marketing/testimonials" },
         { "source": "/product-features/self-hosted", "destination": "/product-os" },
         { "source": "/product-features/event-autocapture", "destination": "/product-os" },
         { "source": "/product-features/trends", "destination": "/product-analytics" },

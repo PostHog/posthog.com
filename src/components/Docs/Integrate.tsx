@@ -103,6 +103,7 @@ const query = graphql`
                             "/docs/libraries/python"
                             "/docs/libraries/react"
                             "/docs/libraries/react-native"
+                            "/docs/libraries/roblox"
                             "/docs/libraries/ruby"
                             "/docs/libraries/rust"
                             "/docs/libraries/unity"

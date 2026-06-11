@@ -30,7 +30,7 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import CloudinaryImage from 'components/CloudinaryImage'
 import * as PostHogIcons from '@posthog/icons'
 import * as OSIcons from '../OSIcons/Icons'
-import { getLogo } from '../../constants/logos'
+import { getLogo, getDarkClassForLogo } from '../../constants/logos'
 import SearchProvider from 'components/Editor/SearchProvider'
 import { useLocation } from '@reach/router'
 import { getProseClasses, isMarkdownContentPath } from '../../constants'
@@ -462,7 +462,7 @@ const resolveMenuIcons = (items: MenuItem[] | undefined, resolveIcons = false): 
         if (resolveIcons) {
             if (item.platformLogo) {
                 const url = getLogo(item.platformLogo)
-                if (url) icon = <img src={url} className="size-full" />
+                if (url) icon = <img src={url} className={`size-full ${getDarkClassForLogo(url)}`} />
             } else if (typeof icon === 'string') {
                 const IconComponent = (PostHogIcons as any)[icon] || (OSIcons as any)[icon]
                 if (IconComponent) icon = <IconComponent className="size-full" />

@@ -1,5 +1,5 @@
 ---
-title: Why you need tracing
+title: Why you need distributed tracing
 ---
 
 Tracing follows a single request as it travels through your application – across the functions, services, databases, and APIs it touches along the way. Where [Logs](/docs/logs) record what happened at each point, a trace shows you the whole path: what called what, in what order, and how long each step took.
@@ -28,7 +28,7 @@ Each PostHog product answers a different question about your application:
 | **[Product Analytics](/docs/product-analytics)** | What users did | "User clicked checkout" |
 | **[Logs](/docs/logs)** | What happened at each point | "Inventory service returned 200 with 0 items" |
 | **[Error Tracking](/docs/error-tracking)** | What broke | "TypeError: cannot read property 'price' of undefined" |
-| **Tracing** | How the request flowed and where time went | "Checkout took 3.2s, and 2.8s of it was spent waiting on the inventory service" |
+| **Distributed tracing** | How the request flowed and where time went | "Checkout took 3.2s, and 2.8s of it was spent waiting on the inventory service" |
 
 Errors tell you something broke. Logs tell you what happened at one point. Tracing tells you **how the pieces connected, and where the time and failures actually came from** – across every service a request touched.
 
@@ -74,7 +74,7 @@ Useful tracing is about instrumenting the right boundaries, not every line of co
 
 ## How PostHog makes tracing useful
 
-**No vendor lock-in** - PostHog ingests traces over [OpenTelemetry (OTLP)](/docs/tracing/start-here). Use standard OTel libraries in any language, with no proprietary SDK. If you already export traces, point them at PostHog and you're done.
+**No vendor lock-in** - PostHog ingests traces over [OpenTelemetry (OTLP)](/docs/distributed-tracing/start-here). Use standard OTel libraries in any language, with no proprietary SDK. If you already export traces, point them at PostHog and you're done.
 
 **Built on the same pipeline as Logs** - Tracing uses the same OpenTelemetry-based ingestion as [Logs](/docs/logs), so a single OTel setup covers both.
 
@@ -84,6 +84,6 @@ Useful tracing is about instrumenting the right boundaries, not every line of co
 
 ## Next steps
 
-- **[Get started](/docs/tracing/start-here)** - Install an OpenTelemetry exporter and send your first spans
+- **[Get started](/docs/distributed-tracing/start-here)** - Install an OpenTelemetry exporter and send your first spans
 - **[Logs](/docs/logs)** - Capture what happened at each point, using the same OpenTelemetry setup
 - **[Error Tracking](/docs/error-tracking)** - Turn failures into issues you can assign and resolve

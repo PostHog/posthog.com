@@ -8,7 +8,7 @@ Personal API keys authenticate requests to PostHog's private `GET`, `POST`, `PAT
 
 > **Building an app that other PostHog users will install or connect to?** Use [OAuth](/docs/api/oauth) instead so users can grant your app scoped access without sharing their own keys.
 
-import ObtainPersonalAPIKey from '../integrate/_snippets/obtain-personal-api-key.mdx'
+import ObtainPersonalAPIKey from "../integrate/_snippets/obtain-personal-api-key.mdx";
 
 <ObtainPersonalAPIKey />
 
@@ -17,16 +17,35 @@ import ObtainPersonalAPIKey from '../integrate/_snippets/obtain-personal-api-key
 There are two options:
 
 1. Use the `Authorization` header and `Bearer` authentication, like so:
-    ```js
-    const headers = {
-        Authorization: `Bearer ${POSTHOG_PERSONAL_API_KEY}`
-    }
-    ```
+   ```js
+   const headers = {
+     Authorization: `Bearer ${POSTHOG_PERSONAL_API_KEY}`,
+   };
+   ```
 2. Put the key in request body, like so:
-    ```js
-    const body = {
-        personal_api_key: POSTHOG_PERSONAL_API_KEY
-    }
-    ```
+   ```js
+   const body = {
+     personal_api_key: POSTHOG_PERSONAL_API_KEY,
+   };
+   ```
 
 Any one of these methods works, but only the value encountered first (in the order above) will be used for authentication.
+
+## Viewing keys with organization access
+
+Organization admins and owners can view all personal API keys that have access to their organization or its projects. This is useful for auditing which keys exist, who owns them, and what they can do.
+
+To view these keys, go to [**Settings** > **Organization** > **Security**](https://app.posthog.com/settings/organization-security#organization-personal-api-keys) and look for the **Personal API key access** section.
+
+The table lists every member's key that can reach the organization – including organization-scoped, project-scoped, and unscoped keys. For each key, you can see:
+
+- **Owner** – The member's name and email
+- **Masked value** – A display-safe hint (e.g., `phx_***1234`) that matches what the owner sees in their own settings
+- **Scopes** – The API scopes granted to the key (e.g., `insight:read`), or `*` for full access
+- **Access scope** – Whether the key applies organization-wide, to specific projects, or to all projects (unscoped)
+- **Last used** – When the key was last used to authenticate
+- **Created** – When the key was created
+
+The actual key secret is never exposed – only the masked value is shown.
+
+> **Note:** This feature requires a plan that includes organization security settings and is only visible to organization admins and owners.

@@ -1,0 +1,137 @@
+---
+title: Sample queries
+---
+
+A starter set of HogQL queries for the most common MCP analytics questions. All of them assume the SDK is installed and at least a few `$mcp_tool_call` events have landed. See the [event reference](/docs/mcp-analytics/events) for the full property list.
+
+{/* TODO: ProductScreenshot of the SQL editor showing one of these queries running with real MCP data */}
+
+## Top tools per server
+
+```sql
+SELECT
+  properties.$mcp_server_name AS server,
+  properties.$mcp_tool_name   AS tool,
+  count() AS calls
+FROM events
+WHERE event = '$mcp_tool_call'
+  AND timestamp > now() - INTERVAL 7 DAY
+GROUP BY server, tool
+ORDER BY calls DESC
+LIMIT 50
+```
+
+## Error rate per tool
+
+```sql
+SELECT
+  properties.$mcp_tool_name AS tool,
+  countIf(properties.$mcp_is_error)        AS errors,
+  count()                                  AS total,
+  countIf(properties.$mcp_is_error) / count() AS error_rate
+FROM events
+WHERE event = '$mcp_tool_call'
+  AND timestamp > now() - INTERVAL 7 DAY
+GROUP BY tool
+ORDER BY total DESC
+```
+
+## P95 latency per tool
+
+```sql
+SELECT
+  properties.$mcp_tool_name AS tool,
+  quantile(0.95)(toFloat(properties.$mcp_duration_ms)) AS p95_ms
+FROM events
+WHERE event = '$mcp_tool_call'
+  AND timestamp > now() - INTERVAL 7 DAY
+GROUP BY tool
+ORDER BY p95_ms DESC
+```
+
+## Intent samples split by source
+
+How much of your traffic is supplying explicit context vs falling back to your `intentFallback` callback?
+
+```sql
+SELECT
+  properties.$mcp_intent_source AS source,
+  properties.$mcp_tool_name     AS tool,
+  any(properties.$mcp_intent)   AS sample_intent,
+  count()                       AS calls
+FROM events
+WHERE event = '$mcp_tool_call'
+  AND timestamp > now() - INTERVAL 24 HOUR
+GROUP BY source, tool
+ORDER BY calls DESC
+```
+
+## Active sessions per client
+
+```sql
+SELECT
+  properties.$mcp_client_name AS client,
+  uniq(properties.$session_id) AS sessions
+FROM events
+WHERE event IN ('$mcp_initialize', '$mcp_tool_call')
+  AND timestamp > now() - INTERVAL 7 DAY
+GROUP BY client
+ORDER BY sessions DESC
+```
+
+## Advertised tools that never get called
+
+Tools listed in `tools/list` responses but never invoked. Useful to find dead surface area.
+
+```sql
+WITH listed AS (
+  SELECT DISTINCT arrayJoin(properties.$mcp_listed_tool_names) AS tool_name
+  FROM events
+  WHERE event = '$mcp_tools_list'
+    AND timestamp > now() - INTERVAL 30 DAY
+),
+called AS (
+  SELECT DISTINCT properties.$mcp_tool_name AS tool_name
+  FROM events
+  WHERE event = '$mcp_tool_call'
+    AND timestamp > now() - INTERVAL 30 DAY
+)
+SELECT tool_name AS zombie_tool
+FROM listed
+WHERE tool_name NOT IN (SELECT tool_name FROM called)
+ORDER BY tool_name
+```
+
+## Unmet user requests (requires `reportMissing: true`)
+
+What were users trying to do that your tools couldn't satisfy?
+
+```sql
+SELECT
+  properties.$mcp_intent       AS unmet_request,
+  properties.$mcp_client_name  AS client,
+  count()                      AS times_asked
+FROM events
+WHERE event = '$mcp_missing_capability'
+  AND timestamp > now() - INTERVAL 30 DAY
+GROUP BY unmet_request, client
+ORDER BY times_asked DESC
+LIMIT 50
+```
+
+## Tool call volume by client and tool, daily
+
+Good as a baseline trend for a dashboard.
+
+```sql
+SELECT
+  toDate(timestamp)               AS day,
+  properties.$mcp_client_name     AS client,
+  properties.$mcp_tool_name       AS tool,
+  count()                         AS calls
+FROM events
+WHERE event = '$mcp_tool_call'
+  AND timestamp > now() - INTERVAL 30 DAY
+GROUP BY day, client, tool
+ORDER BY day DESC, calls DESC
+```

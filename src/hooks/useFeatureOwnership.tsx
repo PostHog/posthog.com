@@ -90,6 +90,10 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Cache warming',
         owner: ['analytics-platform'],
     },
+    cli: {
+        feature: 'CLI',
+        owner: ['error-tracking'],
+    },
     'client-libraries': {
         feature: 'Client libraries',
         owner: ['client-libraries'],
@@ -474,6 +478,10 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     subscriptions: {
         feature: 'Subscriptions',
         owner: ['analytics-platform'],
+    },
+    support: {
+        feature: 'Support',
+        owner: ['conversations'],
     },
     surveys: {
         feature: 'Surveys',

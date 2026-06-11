@@ -75,7 +75,15 @@ export const productOrder: Record<string, string[]> = {
         'bi',
         'data_out',
     ],
-    product_engineering: ['session_replay', 'experiments', 'feature_flags', 'logs', 'error_tracking', 'early_access'],
+    product_engineering: [
+        'session_replay',
+        'replay_vision',
+        'experiments',
+        'feature_flags',
+        'logs',
+        'error_tracking',
+        'early_access',
+    ],
     analytics: [
         'web_analytics',
         'product_analytics',

@@ -106,6 +106,7 @@ When you expand each source, you can see:
 - Enable or disable syncing for that table
 - Synced table name in PostHog
 - Time the table was last synced
+- Rows synced – the number of rows in the synced table. During an active sync, a spinner and live row count display, updating approximately every 5 seconds. Once complete, the final row count appears. Rows being synced are not queryable until the sync completes.
 
 If you add new tables to your source database, click **Pull new schemas** to discover them without waiting for the next sync. This only updates the list of available schemas – it doesn't trigger a data sync.
 
@@ -148,6 +149,8 @@ Webhook-synced tables have special behavior when enabling or disabling them:
 - **Disabling a webhook table** - When you turn off syncing for a webhook table, a confirmation dialog warns you that the webhook stops consuming data immediately. Any events sent while the table is disabled are lost.
 
 - **Re-enabling a webhook table** - When you re-enable a previously disabled webhook table, PostHog automatically triggers a full refresh sync. This ensures no data gaps from the period when the webhook was inactive.
+
+- **Enabling a new webhook table** - For sources with provider-side webhook subscriptions (like Stripe), PostHog automatically adds the required events to the webhook when you enable a new table. This requires the appropriate permissions – for example, **Write** on **Webhooks** for Stripe restricted API keys, or an OAuth connection. If automatic sync isn't possible (due to missing permissions or a manually created webhook), PostHog shows a warning banner in the **Webhook** tab listing the events you need to add in your provider's dashboard.
 
 <ProductScreenshot
   imageLight={SettingsLight}
