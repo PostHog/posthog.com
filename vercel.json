@@ -1850,7 +1850,7 @@
         },
         {
             "source": "/docs/llm-analytics/trace-reviews",
-            "destination": "/docs/ai-evals/trace-reviews"
+            "destination": "/docs/ai-observability/trace-reviews"
         },
         {
             "source": "/docs/llm-analytics/prompts",

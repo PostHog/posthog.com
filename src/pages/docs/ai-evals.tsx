@@ -12,7 +12,13 @@ export const Content = ({ quickLinks = false }) => {
     return (
         <>
             {(quickLinks || compact) && (
-                <QuickLinks items={docsMenu.children.find(({ name }) => name === 'Evaluations')?.children} />
+                <QuickLinks
+                    items={
+                        docsMenu.children
+                            .find(({ name }) => name === 'AI Observability')
+                            ?.children?.find(({ name }) => name === 'Evaluations')?.children
+                    }
+                />
             )}
         </>
     )
