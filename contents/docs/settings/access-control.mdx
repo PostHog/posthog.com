@@ -227,18 +227,19 @@ Here are some practical examples of how to configure access controls for differe
 
 #### Hide PII from vendors
 
-**Scenario**: You want to share your event data with vendors while restricting access to properties containing PII.
+**Scenario**: You want to share your event data with vendors while restricting access to a property containing PII (e.g. `email`).
 
 **Setup**:
 
 1. Create a role for the vendor (e.g. "Vendor", "External collaborator")
-2. For each property containing PII:
-   1. Create a new property definition for the property if one does not already exist, otherwise edit the existing definition
-   2. Navigate to the "Roles" tab under the "Access control" section of the property definition page
-   3. Find your vendor role and select "Add override"
-   4. Select "No access"
-   5. Save the property definition
-3. Any member with the vendor role will not be able to access PII properties
+2. Create a property definition for the property if one does not already exist, otherwise edit the existing definition
+3. Navigate to the "Roles" tab under the "Access control" section of the property definition page
+4. Find your vendor role and select "Add override"
+5. Select "No access"
+6. Save the property definition
+7. Any member with the vendor role will not be able to access the PII property
+
+To restrict additional properties, repeat steps 2–6 for each one.
 
 ## Feature availability
 
