@@ -491,7 +491,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             dark: GreptileLogoDark,
         },
         featured: true,
-        height: 10,
+        height: 8,
     },
     groove: {
         name: 'Groove',
