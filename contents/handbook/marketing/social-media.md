@@ -14,6 +14,7 @@ This page explains what to include and where to send it.
 
 In the initial (or second) message you share about a launch, Beta, GA, or project, add this bullet list where you'd normally tag <TeamMember name="Liam Graham" />:
 
+- **ELI5** of what's getting promoted, and how you want it presented on social.
 - **Messaging doc(s).** Do you have email copy that lives somewhere? A general messaging doc? Send both if you have them.
 - **Link(s) to the main video or photo asset(s).** As a gentle reminder, **4:5** aspect ratio is best for graphics and photos, and **9:16** is best for video.
 - **Link(s) to the blog article**, if we've got one.
@@ -27,7 +28,8 @@ That's the whole ask. If something doesn't apply (for example, there's no blog p
 You should aim to give as much notice as you can, but ideally at least a week. You can share the checklist in either of two places:
 
 - A widely broadcast Slack message you're already sending out about the launch.
-- Post in either the #team-marketing or #team-editorial Slack channels, tagging <TeamMember name="Liam Graham" />.
+- Post in either the #team-marketing or #team-editorial Slack channels
+In both cases, tagging <TeamMember name="Liam Graham" />.
 
 We want to make sure we're being transparent with this, so you should avoid sending this information by DM.
 
