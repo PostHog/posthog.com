@@ -1,0 +1,229 @@
+---
+title: Getting started with MCP analytics
+hideRightSidebar: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
+import { IconGraph, IconWarning, IconAIText, IconWrench, IconPlug } from '@posthog/icons'
+import OSButton from 'components/OSButton'
+import CalloutBox from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconInfo" title="MCP analytics is in alpha" type="fyi">
+
+`@posthog/mcp` is published as a `0.1.x` release on npm. We're building it in public — the event shape, options, and tracing behavior may still change before `1.0`. Pin a specific version and don't depend on it for production reporting yet. A Python SDK and a `npx @posthog/wizard mcp-analytics add` installer are on the roadmap.
+
+</CalloutBox>
+
+<QuestLog firstSpeechBubble="Let's instrument your MCP server!" lastSpeechBubble="Time to ship MCP analytics!">
+
+<QuestLogItem
+    title="Add @posthog/mcp to your MCP server"
+    subtitle="Required"
+    icon="IconPlug"
+>
+
+MCP analytics gives you visibility into how AI agents actually use the MCP server you ship. With one wrapper call you can track:
+
+- 🛠️ Every tool call (parameters, response, duration, errors)
+- 🎯 Agent intent — the *why* behind each call, not just the *what*
+- 🧭 Every `tools/list` so you can compare advertised vs called
+- 🪪 The MCP client name and version
+- 🧵 The full session, end to end
+- 🚧 Capabilities the agent wished existed (with `reportMissing`)
+
+The SDK supports any TypeScript MCP server built on `@modelcontextprotocol/sdk`. Install it from npm and call `instrument()` once at startup. You pass your `posthog-node` client as the required second argument:
+
+```bash
+npm install @posthog/mcp posthog-node
+```
+
+```ts
+import { Server } from "@modelcontextprotocol/sdk/server/index.js"
+import { PostHog } from "posthog-node"
+import { instrument } from "@posthog/mcp"
+
+const server = new Server({ name: "my-mcp-server", version: "1.0.0" })
+
+const posthog = new PostHog(process.env.POSTHOG_PROJECT_API_KEY, {
+  host: "https://us.i.posthog.com",
+})
+
+instrument(server, posthog)
+```
+
+<OSButton variant="primary" asLink to="/docs/mcp-analytics/installation">
+Full installation guide
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+    title="See your first events"
+    subtitle="Required"
+    icon="IconGraph"
+>
+
+Run your MCP server and connect an agent to it (Claude Desktop, Cursor, Codex, or your own). Within seconds of the first tool call, PostHog will receive `$mcp_tool_call`, `$mcp_tools_list`, and `$mcp_initialize` events — all prefixed with `$mcp_*` so they never collide with anything else in your project.
+
+Open the [activity feed](https://us.posthog.com/project/2/activity) and filter for `event = $mcp_tool_call`. You should see one row per agent tool invocation, each with `$mcp_tool_name`, `$mcp_parameters`, `$mcp_response`, `$mcp_duration_ms`, and `$mcp_is_error`.
+
+{/* TODO: ProductScreenshot of $mcp_tool_call activity feed once an internal demo project has data */}
+
+<OSButton variant="primary" asLink to="/docs/mcp-analytics/events">
+See every event the SDK emits
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+    title="Capture what the agent was trying to do"
+    subtitle="Recommended"
+    icon="IconAIText"
+>
+
+The single most useful signal in MCP analytics is **intent**: the user goal that led the agent to call this tool. The SDK injects a required `context` argument into every tool's schema and captures it as `$mcp_intent`. Your tool implementation never sees it.
+
+```ts
+instrument(server, posthog, {
+  context: {
+    description: "Describe the user's underlying goal in one sentence — not the tool you're calling.",
+  },
+})
+```
+
+For agents that ignore the schema hint (raw cURL clients, schema-blind crawlers), supply an `intentFallback`. The SDK calls it whenever no `context` argument was passed:
+
+```ts
+instrument(server, posthog, {
+  intentFallback: (request) => {
+    const tool = request.params?.name
+    return tool ? `Invoking ${tool}` : null
+  },
+})
+```
+
+<OSButton variant="primary" asLink to="/docs/mcp-analytics/intent">
+Learn about intent capture
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+    title="Build your first dashboard"
+    subtitle="Recommended"
+    icon="IconLineGraph"
+>
+
+Every event is a normal PostHog event, so insights, dashboards, alerts, and SQL all work without further setup. The four queries we suggest building first:
+
+- ### <IconGraph className="text-blue w-7 -mt-1 inline-block"/> Top tools per server
+  Where is your agent traffic concentrated? Which tools earn their keep?
+
+- ### <IconWarning className="text-red w-7 -mt-1 inline-block"/> Error rate per tool
+  Which tools throw most often? Pair with `$exception` events to triage.
+
+- ### <IconAIText className="text-purple w-7 -mt-1 inline-block"/> Intent samples by source
+  How much of your traffic supplies explicit context vs falls back to `intentFallback`?
+
+- ### <IconWrench className="text-orange w-7 -mt-1 inline-block"/> Advertised tools that never get called
+  Find dead surface area by joining `$mcp_tools_list` against `$mcp_tool_call`.
+
+{/* TODO: ProductScreenshot of a sample MCP analytics dashboard with the four tiles above */}
+
+<OSButton variant="primary" asLink to="/docs/mcp-analytics/queries">
+Copy-paste queries
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+    title="Identify the user behind the agent"
+    subtitle="Recommended"
+    icon="IconPerson"
+>
+
+By default each event is attributed to the MCP connection's session id. To attribute calls to a real user — for per-user retention, group analytics, and person properties — wire an `identify` callback:
+
+```ts
+instrument(server, posthog, {
+  identify: async (request, extra) => {
+    const token = extra?.requestInfo?.headers?.authorization
+    const user = token ? await resolveUserFromToken(token) : null
+    return user ? { distinctId: user.id, properties: { name: user.name } } : null
+  },
+})
+```
+
+The SDK emits a `$identify` event the first time it sees a new identity for a session, and PostHog's standard merge takes care of attributing prior anonymous activity.
+
+<OSButton variant="primary" asLink to="/docs/mcp-analytics/identifying-users">
+Identify users
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+    title="Find capability gaps with `reportMissing`"
+    subtitle="Recommended"
+    icon="IconWrench"
+>
+
+The most actionable signal for an MCP server owner is *the agent wanted to do something I don't support*. Enable `reportMissing: true` and the SDK registers a `get_more_tools` virtual tool. When the agent invokes it, you get a queryable feed of unmet asks — straight into your roadmap.
+
+```ts
+instrument(server, posthog, {
+  reportMissing: true,
+})
+```
+
+```sql
+SELECT
+  properties.$mcp_intent       AS unmet_request,
+  properties.$mcp_client_name  AS client,
+  count()                      AS times_asked
+FROM events
+WHERE event = '$mcp_missing_capability'
+  AND timestamp > now() - INTERVAL 30 DAY
+GROUP BY unmet_request, client
+ORDER BY times_asked DESC
+```
+
+<OSButton variant="primary" asLink to="/docs/mcp-analytics/missing-capability">
+Track missing capabilities
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+    title="Ship safely"
+    subtitle="Required"
+    icon="IconLock"
+>
+
+The SDK runs every event through automatic sanitization (image/audio/binary stubs, sensitive-key masking like `authorization`, `cookie`, `password`, PostHog key patterns) and truncation to fit ingestion limits. For full control, add a `beforeSend` hook that runs on each built PostHog payload right before it's sent — mutate and return the event to send it, or return a nullish value to drop it.
+
+```ts
+instrument(server, posthog, {
+  beforeSend: (event) => {
+    if (event.event === "$exception") return null // drop exceptions
+    return event
+  },
+})
+```
+
+<OSButton variant="primary" asLink to="/docs/mcp-analytics/privacy">
+Privacy & redaction
+</OSButton>
+
+---
+
+That's it. You're ready to ship `@posthog/mcp` to production agents — within the alpha caveats above.
+
+<OSButton variant="primary" asLink to="/docs/mcp-analytics/installation">
+Install MCP analytics
+</OSButton>
+
+</QuestLogItem>
+
+</QuestLog>

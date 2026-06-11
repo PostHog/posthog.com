@@ -303,11 +303,11 @@ type IntroCardProps = {
 
 const introCards: IntroCardProps[] = [
     {
-        icon: IconCoffee,
+        icon: IconCode,
         iconColor: 'text-brown dark:text-brown-dark',
         bulletClass: 'bg-brown dark:bg-brown-dark',
         href: '/code',
-        title: 'PostHog Code',
+        title: 'Coding',
         badge: 'Sandboxed',
         description: (
             <>
@@ -326,7 +326,7 @@ const introCards: IntroCardProps[] = [
         iconColor: 'text-blue',
         bulletClass: 'bg-blue',
         href: '/ai',
-        title: 'PostHog AI',
+        title: 'Analytics',
         badge: 'Via MCP',
         description: (
             <>
@@ -475,8 +475,8 @@ const compareRows: CompareRow[] = [
     },
     {
         label: 'Models',
-        ai: "Auto-picked from OpenAI and Anthropic, we tune so you don't have to.",
-        slack: "Auto-picked from OpenAI and Anthropic (we tune so you don't have to).",
+        ai: "Auto-picked from OpenAI and Anthropic (we tune so you don't have to).",
+        slack: 'Auto-picked from OpenAI and Anthropic.',
         code: 'You pick: Claude Code or Codex, with reasoning effort dialed in per task.',
     },
 ]
@@ -488,6 +488,23 @@ const compareLinks: { label: string; url: string }[] = [
 ]
 
 const faqItems = [
+    {
+        trigger: 'Do I need PostHog Code to use the PostHog Slack app?',
+        content: (
+            <p>
+                No. The Slack app isn't gated on a{' '}
+                <Link
+                    to="/code"
+                    state={{ newWindow: true }}
+                    className="text-red dark:text-yellow font-semibold hover:underline"
+                >
+                    PostHog Code
+                </Link>{' '}
+                subscription. They share the same coding agent under the hood – the Slack app is just the front door if
+                you'd rather work from a thread than a desktop app.
+            </p>
+        ),
+    },
     {
         trigger: 'How does the PostHog Slack app decide when to answer or code?',
         content: (
@@ -604,23 +621,6 @@ const faqItems = [
             <p>
                 Not at all. It's a Slack message. People in sales and marketing have already merged PRs to our main
                 repo. Describe the problem or the idea, and the agent takes it from there.
-            </p>
-        ),
-    },
-    {
-        trigger: 'Do I need PostHog Code to use the PostHog Slack app?',
-        content: (
-            <p>
-                No. The Slack app isn't gated on a{' '}
-                <Link
-                    to="/code"
-                    state={{ newWindow: true }}
-                    className="text-red dark:text-yellow font-semibold hover:underline"
-                >
-                    PostHog Code
-                </Link>{' '}
-                subscription. They share the same coding agent under the hood – the Slack app is just the front door if
-                you'd rather work from a thread than a desktop app.
             </p>
         ),
     },
@@ -786,6 +786,7 @@ export default function SlackAppPage(): JSX.Element {
                     <h3>
                         Choose your <Highlight>fighter</Highlight>
                     </h3>
+                    <p>Same agent, three front doors.</p>
                     <div className="not-prose grid @lg/reader-content:grid-cols-2 gap-6 items-center my-6">
                         <div className="space-y-4">
                             {fighterOptions.map(({ icon: Icon, iconColor, label, copy }, index) => (
