@@ -1,20 +1,19 @@
 ---
 title: Replay Vision
-featureFlag: replay-vision
 noindex: true
 ---
 
 import { ProductScreenshot } from "components/ProductScreenshot";
 
+<CalloutBox icon="IconInfo" title="Replay Vision is in closed beta" type="warning">
+
+Replay Vision is in closed beta and not yet available to everyone. <a href="/replay-vision">Join the waitlist</a> to get access.
+
+</CalloutBox>
+
 Replay Vision uses AI to automatically watch your [session recordings](/docs/session-replay) and turn what it sees into structured, queryable data. You configure **scanners** – named AI probes that describe what to look for – and PostHog applies them to your recordings, producing **observations** you can query, chart, and alert on.
 
 The key idea is that Replay Vision actually *watches the video* of each recording alongside its events. This lets it pick up on visual and behavioral cues – hesitation, confusion, where a user's attention goes – that aren't captured by clicks and pageviews alone. Instead of manually reviewing hundreds of replays to spot a pattern, you describe what matters once and let it run continuously.
-
-<CalloutBox type="fyi" title="Replay Vision is in beta">
-
-Replay Vision is currently in beta and rolling out gradually. Some details below – especially scanner types, quotas, and supported models – may change before general availability.
-
-</CalloutBox>
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/replay_vision_overview_app_light_9f82e7b066.png"

@@ -4120,7 +4120,6 @@ export const docsMenu = {
             color: 'yellow',
             icon: 'IconEye',
             description: 'Use AI to automatically watch your session recordings and turn what it sees into queryable data',
-            featureFlag: 'replay-vision',
             children: [
                 {
                     name: 'Replay Vision',

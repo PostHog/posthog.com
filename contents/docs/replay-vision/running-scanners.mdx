@@ -1,10 +1,15 @@
 ---
 title: Running scanners
-featureFlag: replay-vision
 noindex: true
 ---
 
 import { ProductScreenshot } from "components/ProductScreenshot";
+
+<CalloutBox icon="IconInfo" title="Replay Vision is in closed beta" type="warning">
+
+Replay Vision is in closed beta and not yet available to everyone. <a href="/replay-vision">Join the waitlist</a> to get access.
+
+</CalloutBox>
 
 There are two ways a scanner produces observations: automatically in the background as new recordings come in, or on-demand against recordings you pick. Both paths produce the same observation rows and the same `$recording_observed` events – they only differ in how the work gets triggered.
 
