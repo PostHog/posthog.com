@@ -35,7 +35,10 @@ The Rust SDK resolves stack traces in-process, so captured frames include file n
 <Step title="Initialize the client" badge="required">
 
 ```rust
-let client = posthog_rs::client("<ph_project_token>").await;
+let client = posthog_rs::client((
+    "<ph_project_token>",
+    "<ph_client_api_host>",
+)).await;
 ```
 
 The default client is async (Tokio). Building with `default-features = false` gives you a blocking client instead — the same methods without `.await`.
@@ -86,7 +89,10 @@ if let Err(err) = result {
 Install the panic hook once near application startup to capture Rust panics automatically:
 
 ```rust
-posthog_rs::install_panic_hook("<ph_project_token>").unwrap();
+posthog_rs::install_panic_hook((
+    "<ph_project_token>",
+    "<ph_client_api_host>",
+)).unwrap();
 ```
 
 Panics are captured personlessly with the panic message, the panic site (file, line, and column), and a stack trace. The previously installed hook still runs afterwards, so default panic output and other integrations are unaffected.
@@ -104,6 +110,7 @@ use posthog_rs::{ClientOptionsBuilder, ErrorTrackingOptionsBuilder};
 
 let options = ClientOptionsBuilder::default()
     .api_key("<ph_project_token>".to_string())
+    .host("<ph_client_api_host>")
     .error_tracking(
         ErrorTrackingOptionsBuilder::default()
             // Skip the stack walk entirely, e.g. for high-volume handled errors

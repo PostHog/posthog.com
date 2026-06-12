@@ -88,7 +88,10 @@ client.capture_exception_with(
 To capture panics automatically, install the panic hook once near application startup:
 
 ```rust
-posthog_rs::install_panic_hook("<ph_project_token>").unwrap();
+posthog_rs::install_panic_hook((
+    "<ph_project_token>",
+    "<ph_client_api_host>",
+)).unwrap();
 ```
 
 For the full setup guide, see the [Rust error tracking installation docs](/docs/error-tracking/installation/rust).
