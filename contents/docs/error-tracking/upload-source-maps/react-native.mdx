@@ -6,6 +6,7 @@ showStepsToc: true
 import CLIDownload from "../_snippets/cli/download.mdx"
 import CLIAuthenticate from "../_snippets/cli/authenticate.mdx"
 import StepVerifySymbolSetsUpload from '../_snippets/StepVerifySymbolSetsUpload'
+import Tab from 'components/Tab'
 
 <CalloutBox icon="IconInfo" title="CLI version requirement" type="action">
 
@@ -165,11 +166,7 @@ If you are not using the Expo plugin (step 1), you will need to also disable Use
 
 </Step>
 
-<StepVerifySymbolSetsUpload />
-
-</Steps>
-
-## Native crash symbolication
+<Step title="Native crash symbolication" badge="optional">
 
 The steps above upload **JavaScript** source maps, which symbolicate exceptions thrown in your JS/TS code (including Hermes bytecode). They do **not** cover native iOS and Android crashes.
 
@@ -198,7 +195,13 @@ Symbolicated native crashes need all three of these working together:
 
 Both platforms upload through `posthog-cli`, which must be installed and authenticated – the same setup covered in the **Download CLI** and **Authenticate** steps above. In CI/CD builds (such as EAS Build), set the `POSTHOG_CLI_API_KEY` and `POSTHOG_CLI_PROJECT_ID` environment variables (and `POSTHOG_CLI_HOST` for EU). See [authenticating the CLI](/docs/error-tracking/upload-source-maps/cli) for the full list.
 
-### Expo apps
+<Tab.Group tabs={['Expo', 'Bare React Native']}>
+<Tab.List>
+<Tab>Expo</Tab>
+<Tab>Bare React Native</Tab>
+</Tab.List>
+<Tab.Panels>
+<Tab.Panel>
 
 The `posthog-react-native/expo` config plugin can wire up native symbol upload for you during [prebuild](https://docs.expo.dev/workflow/continuous-native-generation/). It's **opt-in** – set `uploadNativeSymbols` to `true` in your [app.json](https://docs.expo.dev/versions/latest/config/app/#plugins):
 
@@ -226,7 +229,8 @@ To additionally upload native source files for source-code context (iOS only), p
 }
 ```
 
-### Bare React Native apps
+</Tab.Panel>
+<Tab.Panel>
 
 If you aren't using the Expo config plugin, wire up the uploads manually.
 
@@ -289,6 +293,16 @@ apply plugin: "com.posthog.android"
 ```
 
 The plugin uploads ProGuard/R8 mapping files and injects a matching map-id during your release build, so native Android crash stack traces are deobfuscated.
+
+</Tab.Panel>
+</Tab.Panels>
+</Tab.Group>
+
+</Step>
+
+<StepVerifySymbolSetsUpload />
+
+</Steps>
 
 ## Troubleshooting
 
