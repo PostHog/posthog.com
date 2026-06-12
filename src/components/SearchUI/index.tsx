@@ -11,6 +11,8 @@ import { capitalizeFirstLetter } from '../../utils'
 import { Hit } from 'instantsearch.js'
 import OSButton from 'components/OSButton'
 import Input from 'components/OSForm/input'
+import SemanticSearch from './SemanticSearch'
+import { useSemanticSearchEnabled } from 'components/Search/useSemanticSearchEnabled'
 
 const searchClient = algoliasearch(
     process.env.GATSBY_ALGOLIA_APP_ID as string,
@@ -226,6 +228,7 @@ const Search = ({
 export const WindowSearchUI = ({ initialFilter }: { initialFilter?: string }) => {
     const { setWindowTitle, closeWindow } = useApp()
     const { appWindow } = useWindow()
+    const semanticSearchEnabled = useSemanticSearchEnabled()
     const ref = useRef<HTMLDivElement>(null)
 
     const close = () => {
@@ -250,19 +253,26 @@ export const WindowSearchUI = ({ initialFilter }: { initialFilter?: string }) =>
         return () => document.removeEventListener('mousedown', handleClickOutside)
     }, [closeWindow])
 
-    return (
+    const searchProps = {
+        initialFilter,
+        className:
+            'cursor-grab active:cursor-grabbing p-2 rounded bg-white/25 backdrop-blur shadow-2xl border border-primary',
+        onChange: close,
+        onEscape: close,
+    }
+
+    return semanticSearchEnabled ? (
+        <div ref={ref}>
+            <SemanticSearch {...searchProps} />
+        </div>
+    ) : (
         <InstantSearch
             searchClient={searchClient}
             indexName={process.env.GATSBY_ALGOLIA_INDEX_NAME as string}
             stalledSearchDelay={750}
         >
             <div ref={ref}>
-                <Search
-                    initialFilter={initialFilter}
-                    className="cursor-grab active:cursor-grabbing p-2 rounded bg-white/25 backdrop-blur shadow-2xl border border-primary"
-                    onChange={close}
-                    onEscape={close}
-                />
+                <Search {...searchProps} />
             </div>
         </InstantSearch>
     )
@@ -281,19 +291,25 @@ export const SearchUI = ({
     hideFilters?: boolean
     autoFocus?: boolean
 }) => {
-    return (
+    const semanticSearchEnabled = useSemanticSearchEnabled()
+
+    const searchProps = {
+        initialFilter,
+        className,
+        isRefinedClassName,
+        hideFilters,
+        autoFocus,
+    }
+
+    return semanticSearchEnabled ? (
+        <SemanticSearch {...searchProps} />
+    ) : (
         <InstantSearch
             searchClient={searchClient}
             indexName={process.env.GATSBY_ALGOLIA_INDEX_NAME as string}
             stalledSearchDelay={750}
         >
-            <Search
-                initialFilter={initialFilter}
-                className={className}
-                isRefinedClassName={isRefinedClassName}
-                hideFilters={hideFilters}
-                autoFocus={autoFocus}
-            />
+            <Search {...searchProps} />
         </InstantSearch>
     )
 }

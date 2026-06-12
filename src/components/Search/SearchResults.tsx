@@ -37,7 +37,7 @@ type Result = Hit<{
 
 type Category = (typeof categories)[number]
 
-const categories = [
+export const categories = [
     {
         type: 'all',
         name: 'All',

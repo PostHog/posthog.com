@@ -1,6 +1,8 @@
 import { Dialog, Transition } from '@headlessui/react'
 import React, { Fragment } from 'react'
 import SearchResults from './SearchResults'
+import SemanticSearchResults from './SemanticSearchResults'
+import { useSemanticSearchEnabled } from './useSemanticSearchEnabled'
 import { InstantSearch } from 'react-instantsearch-hooks-web'
 import algoliasearch from 'algoliasearch/lite'
 import usePostHog from '../../hooks/usePostHog'
@@ -70,6 +72,8 @@ export const SearchProvider: React.FC = ({ children }) => {
         }
     }, [isVisible])
 
+    const semanticSearchEnabled = useSemanticSearchEnabled()
+
     const open = (from: SearchLocation, filter?: SearchResultType) => {
         posthog?.capture('web search opened', {
             filter,
@@ -117,13 +121,17 @@ export const SearchProvider: React.FC = ({ children }) => {
                                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                             >
                                 <Dialog.Panel className="w-full max-w-4xl md:mx-4 h-[90vh] md:h-[600px] z-[999998]">
-                                    <InstantSearch
-                                        searchClient={searchClient}
-                                        indexName={process.env.GATSBY_ALGOLIA_INDEX_NAME as string}
-                                        stalledSearchDelay={750}
-                                    >
-                                        <SearchResults initialFilter={initialFilter} />
-                                    </InstantSearch>
+                                    {semanticSearchEnabled ? (
+                                        <SemanticSearchResults initialFilter={initialFilter} />
+                                    ) : (
+                                        <InstantSearch
+                                            searchClient={searchClient}
+                                            indexName={process.env.GATSBY_ALGOLIA_INDEX_NAME as string}
+                                            stalledSearchDelay={750}
+                                        >
+                                            <SearchResults initialFilter={initialFilter} />
+                                        </InstantSearch>
+                                    )}
                                 </Dialog.Panel>
                             </Transition.Child>
                         </div>
