@@ -315,6 +315,17 @@ export default function SpotlightSearch({ open, onClose }: { open: boolean; onCl
                     >
                         <div className="flex h-14 shrink-0 items-center gap-3 px-4">
                             <IconSearch className="size-5 shrink-0 text-muted" />
+                            {activeFilter && (
+                                <button
+                                    onClick={removeFilter}
+                                    title="Remove filter"
+                                    className="group flex shrink-0 items-center gap-1 rounded-md border border-primary bg-accent/80 px-1.5 py-1 text-sm font-semibold text-secondary hover:text-primary [&_svg]:size-3.5"
+                                >
+                                    {typeConfig[activeFilter].icon}
+                                    {typeConfig[activeFilter].label}
+                                    <IconX className="opacity-50 group-hover:opacity-100" />
+                                </button>
+                            )}
                             <input
                                 ref={inputRef}
                                 type="text"
@@ -331,28 +342,7 @@ export default function SpotlightSearch({ open, onClose }: { open: boolean; onCl
                                 autoComplete="off"
                                 className="w-full border-0 bg-transparent p-0 text-lg text-primary outline-none placeholder:text-muted focus:ring-0"
                             />
-                            {activeFilter && (
-                                <button
-                                    onClick={removeFilter}
-                                    title="Remove filter"
-                                    className="group flex shrink-0 items-center gap-1 rounded-md border border-primary bg-accent/80 px-1.5 py-1 text-sm font-semibold text-secondary hover:text-primary [&_svg]:size-3.5"
-                                >
-                                    {typeConfig[activeFilter].icon}
-                                    {typeConfig[activeFilter].label}
-                                    <IconX className="opacity-50 group-hover:opacity-100" />
-                                </button>
-                            )}
-                            {query ? (
-                                <button
-                                    onClick={askAI}
-                                    className="flex shrink-0 items-center gap-1 rounded-md border border-primary px-2 py-1 text-sm font-semibold text-secondary hover:bg-accent/60 hover:text-primary"
-                                >
-                                    <IconSparkles className="size-4" />
-                                    Ask AI
-                                </button>
-                            ) : (
-                                !activeFilter && <KeyboardShortcut text="esc" size="xs" className="shrink-0" />
-                            )}
+                            {!query && <KeyboardShortcut text="esc" size="xs" className="shrink-0" />}
                         </div>
 
                         {expanded && (
