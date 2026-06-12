@@ -368,8 +368,24 @@ To delete multiple Feature Flags at once:
 
 After deletion, PostHog displays a summary of deleted flags along with AI-ready prompts to help you identify and clean up code references to the removed flags.
 
-<CalloutBox icon="IconInfo" title="Deletion is permanent" type="caution">
+<CalloutBox icon="IconInfo" title="Deleted flags can be restored" type="fyi">
 
-Deleting a feature flag is permanent and cannot be undone. Make sure you no longer need the flag before deleting it.
+Deleting a feature flag is a soft delete. The flag stops being served and is removed from your list, but its configuration and history are kept. To bring it back, open the flag's page and click **Restore feature flag**.
 
 </CalloutBox>
+
+Some flags can't be deleted until you remove whatever references them. PostHog blocks the deletion and tells you why if the flag is:
+
+- In use by an [early access feature](/docs/feature-flags/early-access-feature-management)
+- Linked to a **running** [experiment](/docs/experiments) (draft, stopped, and completed experiments are fine)
+- Linked to a [survey](/docs/surveys)
+- Used in [session replay](/docs/session-replay) recording conditions
+- Depended on by another active flag
+
+### Deleting flags linked to experiments
+
+You can delete a feature flag that's linked to an experiment, as long as the experiment isn't currently running. Draft, stopped, and completed experiments don't block deletion, and the experiment's historical results are preserved.
+
+Deleting an experiment-linked flag also frees up its key, so you can reuse it for a new flag. The experiment keeps its reference to the original flag.
+
+To re-launch an experiment whose flag was deleted, restore the flag first from its page. Restoring reclaims the original key. If another flag has taken that key in the meantime, PostHog appends a numeric suffix, like `my-flag-2`.

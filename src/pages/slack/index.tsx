@@ -303,11 +303,11 @@ type IntroCardProps = {
 
 const introCards: IntroCardProps[] = [
     {
-        icon: IconCoffee,
+        icon: IconCode,
         iconColor: 'text-brown dark:text-brown-dark',
         bulletClass: 'bg-brown dark:bg-brown-dark',
         href: '/code',
-        title: 'PostHog Code',
+        title: 'Coding',
         badge: 'Sandboxed',
         description: (
             <>
@@ -326,7 +326,7 @@ const introCards: IntroCardProps[] = [
         iconColor: 'text-blue',
         bulletClass: 'bg-blue',
         href: '/ai',
-        title: 'PostHog AI',
+        title: 'Analytics',
         badge: 'Via MCP',
         description: (
             <>
@@ -475,8 +475,8 @@ const compareRows: CompareRow[] = [
     },
     {
         label: 'Models',
-        ai: "Auto-picked from OpenAI and Anthropic, we tune so you don't have to.",
-        slack: "Auto-picked from OpenAI and Anthropic (we tune so you don't have to).",
+        ai: "Auto-picked from OpenAI and Anthropic (we tune so you don't have to).",
+        slack: 'Auto-picked from OpenAI and Anthropic.',
         code: 'You pick: Claude Code or Codex, with reasoning effort dialed in per task.',
     },
 ]
@@ -488,6 +488,23 @@ const compareLinks: { label: string; url: string }[] = [
 ]
 
 const faqItems = [
+    {
+        trigger: 'Do I need PostHog Code to use the PostHog Slack app?',
+        content: (
+            <p>
+                No. The Slack app isn't gated on a{' '}
+                <Link
+                    to="/code"
+                    state={{ newWindow: true }}
+                    className="text-red dark:text-yellow font-semibold hover:underline"
+                >
+                    PostHog Code
+                </Link>{' '}
+                subscription. They share the same coding agent under the hood – the Slack app is just the front door if
+                you'd rather work from a thread than a desktop app.
+            </p>
+        ),
+    },
     {
         trigger: 'How does the PostHog Slack app decide when to answer or code?',
         content: (
@@ -526,7 +543,7 @@ const faqItems = [
                 Set a default repo per channel. Or set regex routing rules so the bot picks the right repo from the
                 channel name or the task description. When the bot isn't sure, it opens a picker in-thread. See the{' '}
                 <Link
-                    to="/docs/slack-app/commands"
+                    to="/docs/slack/commands"
                     state={{ newWindow: true }}
                     className="text-red dark:text-yellow font-semibold hover:underline"
                 >
@@ -608,23 +625,6 @@ const faqItems = [
         ),
     },
     {
-        trigger: 'Do I need PostHog Code to use the PostHog Slack app?',
-        content: (
-            <p>
-                No. The Slack app isn't gated on a{' '}
-                <Link
-                    to="/code"
-                    state={{ newWindow: true }}
-                    className="text-red dark:text-yellow font-semibold hover:underline"
-                >
-                    PostHog Code
-                </Link>{' '}
-                subscription. They share the same coding agent under the hood – the Slack app is just the front door if
-                you'd rather work from a thread than a desktop app.
-            </p>
-        ),
-    },
-    {
         trigger: 'What are the current limitations?',
         content: (
             <>
@@ -691,7 +691,7 @@ export default function SlackAppPage(): JSX.Element {
                 <div className="max-w-2xl mx-auto">
                     <div className="text-center mb-4">
                         <h1 className="text-3xl @md/reader-content-container:text-4xl font-bold m-0 mb-2">
-                            Don't ask me, <Highlight>@PostHog</Highlight>
+                            Don't @ <em>me,</em> <Highlight>@PostHog</Highlight>
                         </h1>
                         <p className="text-secondary text-base @md/reader-content-container:text-lg max-w-lg mx-auto m-0">
                             PostHog now lives in Slack. Ask about your product data, debug issues, and generate PRs
@@ -786,6 +786,7 @@ export default function SlackAppPage(): JSX.Element {
                     <h3>
                         Choose your <Highlight>fighter</Highlight>
                     </h3>
+                    <p>Same agent, three front doors.</p>
                     <div className="not-prose grid @lg/reader-content:grid-cols-2 gap-6 items-center my-6">
                         <div className="space-y-4">
                             {fighterOptions.map(({ icon: Icon, iconColor, label, copy }, index) => (
