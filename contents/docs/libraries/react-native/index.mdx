@@ -294,6 +294,12 @@ Group analytics allows you to associate the events for that person's session wit
 
 To set up error tracking in your project, follow the [React Native installation guide](/docs/error-tracking/installation/react-native).
 
+### Native crash autocapture
+
+The JavaScript-level autocapture only covers exceptions thrown in your JS/TS code. To also capture native iOS and Android crashes – for example, a crash inside a native module or the platform runtime – install the optional `@posthog/react-native-plugin` package and enable `errorTracking.autocapture.nativeCrashes`. Native capture is gated by your project's **Enable exception autocapture** setting, and crash reports need native debug symbols uploaded at build time to produce readable stack traces.
+
+Follow the [React Native installation guide](/docs/error-tracking/installation/react-native) for the full setup, and [native crash symbolication](/docs/error-tracking/upload-source-maps/react-native#native-crash-symbolication) to upload symbols.
+
 ### Error boundaries
 
 You can use the `PostHogErrorBoundary` component to capture React rendering errors thrown by components:
