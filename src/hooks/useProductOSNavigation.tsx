@@ -101,7 +101,7 @@ export const productOSNav = {
         { name: 'Notebooks', url: '/notebooks' },
         { name: 'Toolbar', url: '/toolbar' },
         { name: 'Platform packages', url: '/platform-packages' },
-        { name: 'PostHog Slack app', url: '/slack-app' },
+        { name: 'PostHog Slack app', url: '/slack' },
         { name: 'Developer tools' },
         { name: 'API', url: '/api' },
         { name: 'Webhooks', url: '/webhooks' },

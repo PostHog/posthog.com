@@ -10,15 +10,15 @@ The PostHog Slack app is in beta. Commands, scopes, and behavior are still movin
 
 `@PostHog` brings PostHog into any Slack channel or thread. Mention the bot with a question about your product data and it answers in-thread using the PostHog [MCP](/docs/model-context-protocol).
 
-Mention `@PostHog` with a fix, an edit, or a feature idea and it plans the work in a sandboxed environment, edits files, runs your checks, and opens a draft PR. The same agent that powers [PostHog AI](/docs/posthog-ai) and [PostHog Code](/code), just summoned from where your team already chats. 
+Mention `@PostHog` with a fix, an edit, or a feature idea and it plans the work in a sandboxed environment, edits files, runs your checks, and opens a draft PR. The same agent that powers [PostHog AI](/docs/posthog-ai) and [PostHog Code](/code), just summoned from where your team already chats.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_05_04_at_4_47_08_PM_b8ba794fdc.png"
-    classes="rounded"
-    alt="A PostHog Code task running in a Slack thread"
+imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_05_04_at_4_47_08_PM_b8ba794fdc.png"
+classes="rounded"
+alt="A PostHog Code task running in a Slack thread"
 />
 
-Before you can mention the bot you'll need to [connect the integrations](/docs/slack-app/setup).You'll need to connect:
+Before you can mention the bot you'll need to [connect the integrations](/docs/slack/setup).You'll need to connect:
 - A Slack workspace connection for each project
 - A personal GitHub connection for each teammate who wants to ship PRs.
 
@@ -42,7 +42,7 @@ to everyone with an @example.com email address
 to the onboarding flow to lift the drop-off between step 2 and step 3
 ```
 
-If you have a single repo connected, the task runs against it immediately. If you have several, the bot opens a repo picker in-thread. Pick one and the task starts. The picker times out after 15 minutes; after that, re-mention the bot to try again.
+If you have a single repo connected, the task runs against it immediately. If you have several, the bot opens a repo picker in-thread. Pick one and the task starts. The picker times out after 15 minutes ; after that, re-mention the bot to try again.
 
 Once the agent finishes, it posts a final summary of its work to the thread.
 
@@ -70,14 +70,14 @@ The bot reacts to your `@PostHog` message as it works through your request, so y
 
 ## Link unfurling
 
-When you paste a PostHog insight or dashboard URL in a channel the bot is invited to, Slack shows a rich preview with the title, type, and description. Unfurling respects PostHog access permissions. Only teammates with at least viewer access on the item will see the preview. See [Slack link unfurling](/docs/libraries/slack#link-unfurling) for details.
+When you paste a PostHog insight or dashboard URL in a channel the bot is invited to, Slack shows a rich preview with the title, type, and description. Unfurling respects PostHog access permissions. Only teammates with at least viewer access on the item will see the preview. See [Slack link unfurling](/docs/libraries/slack #link-unfurling) for details.
 
 ## Related
 
-- [Setup](/docs/slack-app/setup) – connect Slack and personal GitHub
-- [Commands](/docs/slack-app/commands) – full command reference and limitations
-- [Pricing](/docs/slack-app/pricing) – how Slack app usage bills
-- [PostHog Slack app overview](/slack-app) – the product page
+- [Setup](/docs/slack/setup) – connect Slack and personal GitHub
+- [Commands](/docs/slack/commands) – full command reference and limitations
+- [Pricing](/docs/slack/pricing) – how Slack app usage bills
+- [PostHog Slack app overview](/slack) – the product page
 - [PostHog Code](/code) – the desktop app for longer-running, multi-repo agent work
 - [Slack integration in PostHog](/docs/libraries/slack) – subscriptions, link unfurl, generic Slack setup
 - [Slack as a Data Pipeline destination](/docs/cdp/destinations/slack) – send event-driven messages

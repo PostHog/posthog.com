@@ -86,15 +86,15 @@ val showFeature = PostHog.isFeatureEnabled("beta-feature")
 ```dart
 // Properties are automatically available for flag evaluation
 await Posthog().identify(
-    userId: 'user-123',
-    userProperties: {
-        'email': 'user@company.com',
-        'is_beta_user': true,
-    },
-)
+  userId: 'user-123',
+  userProperties: {
+    'email': 'user@company.com',
+    'is_beta_user': true,
+  },
+);
 
 // This flag check can use 'is_beta_user' immediately
-final showFeature = await Posthog().isFeatureEnabled('beta-feature')
+final showFeature = await Posthog().isFeatureEnabled('beta-feature');
 ```
 
 </MultiLanguage>
@@ -151,16 +151,16 @@ val showFeature = PostHog.isFeatureEnabled("enterprise-companies-feature")
 
 ```dart
 await Posthog().group(
-    groupType: 'company',
-    groupKey: 'company-123',
-    groupProperties: {
-        'name': 'Acme Inc',
-        'plan': 'enterprise',
-    },
-)
+  groupType: 'company',
+  groupKey: 'company-123',
+  groupProperties: {
+    'name': 'Acme Inc',
+    'plan': 'enterprise',
+  },
+);
 
 // Group properties are available for flag evaluation
-final showFeature = await Posthog().isFeatureEnabled('enterprise-companies-feature')
+final showFeature = await Posthog().isFeatureEnabled('enterprise-companies-feature');
 ```
 
 </MultiLanguage>
@@ -299,12 +299,12 @@ val showFeature = PostHog.isFeatureEnabled("beta-feature")
 ```dart
 // Set properties for flag evaluation
 await Posthog().setPersonPropertiesForFlags({
-    'is_beta_user': true,
-    'email': 'user@company.com',
-})
+  'is_beta_user': true,
+  'email': 'user@company.com',
+});
 
 // Properties persist across flag evaluations
-final showFeature = await Posthog().isFeatureEnabled('beta-feature')
+final showFeature = await Posthog().isFeatureEnabled('beta-feature');
 ```
 
 </MultiLanguage>
@@ -355,11 +355,11 @@ PostHog.reloadFeatureFlags()
 
 ```dart
 // Set properties without reloading
-await Posthog().setPersonPropertiesForFlags({'is_beta_user': true}, reloadFeatureFlags: false)
-await Posthog().setPersonPropertiesForFlags({'email': 'user@company.com'}, reloadFeatureFlags: false)
+await Posthog().setPersonPropertiesForFlags({'is_beta_user': true}, reloadFeatureFlags: false);
+await Posthog().setPersonPropertiesForFlags({'email': 'user@company.com'}, reloadFeatureFlags: false);
 
 // Manually reload when ready
-await Posthog().reloadFeatureFlags()
+await Posthog().reloadFeatureFlags();
 ```
 
 </MultiLanguage>
@@ -387,12 +387,12 @@ PostHog.resetPersonPropertiesForFlags()
 ```
 
 ```dart
-await Posthog().resetPersonPropertiesForFlags()
+await Posthog().resetPersonPropertiesForFlags();
 ```
 
 </MultiLanguage>
 
-On mobile SDKs, this automatically triggers a feature flag reload. Pass `false` to reset without reloading. On web, flags are not automatically reloaded. Call `reloadFeatureFlags()` manually if needed.
+On mobile SDKs, this automatically triggers a feature flag reload. For Flutter, pass `reloadFeatureFlags: false` to reset without reloading. On web, flags are not automatically reloaded. Call `reloadFeatureFlags()` manually if needed.
 
 ### Group property overrides
 
@@ -463,15 +463,15 @@ PostHog.resetGroupPropertiesForFlags()
 ```dart
 // Set group properties for flag evaluation
 await Posthog().setGroupPropertiesForFlags('company', {
-    'plan': 'enterprise',
-    'employee_count': 500,
-})
+  'plan': 'enterprise',
+  'employee_count': 500,
+});
 
 // Reset group properties for a specific type
-await Posthog().resetGroupPropertiesForFlags(groupType: 'company')
+await Posthog().resetGroupPropertiesForFlags(groupType: 'company');
 
 // Reset all group properties
-await Posthog().resetGroupPropertiesForFlags()
+await Posthog().resetGroupPropertiesForFlags();
 ```
 
 </MultiLanguage>
