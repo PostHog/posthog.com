@@ -124,9 +124,9 @@ export const mergeWithReciprocalRankFusion = (
 export const useHybridSearch = (
     query: string,
     // semantic: false skips Inkeep entirely (no proxy calls) and degrades to
-    // Algolia-only — for surfaces gated by the website-semantic-search flag.
-    // keyword: false skips Algolia for semantic-only search (e.g. queries that
-    // read as questions, where keyword matching adds noise).
+    // Algolia-only — the default engine per useSearchMode.
+    // keyword: false skips Algolia for semantic-only search — for users who
+    // have switched to semantic mode.
     { semantic = true, keyword = true }: { semantic?: boolean; keyword?: boolean } = {}
 ): { results: HybridSearchResult[]; loading: boolean; error: string | null } => {
     const { results: semanticResults, loading: semanticLoading, error } = useInkeepSearch(semantic ? query : '')

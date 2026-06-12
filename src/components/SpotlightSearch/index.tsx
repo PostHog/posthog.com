@@ -25,7 +25,6 @@ import KeyboardShortcut from 'components/KeyboardShortcut'
 import Spinner from 'components/Spinner'
 import { useHybridSearch, HybridSearchResult } from 'components/Search/useHybridSearch'
 import { useSearchMode } from 'components/Search/useSearchMode'
-import { useSemanticSearchEnabled } from 'components/Search/useSemanticSearchEnabled'
 import usePostHog from 'hooks/usePostHog'
 import { capitalizeFirstLetter } from '../../utils'
 import { useApp } from '../../context/App'
@@ -161,15 +160,13 @@ export default function SpotlightSearch({
         }
     }, [])
 
-    const semanticEnabled = useSemanticSearchEnabled()
     const [searchMode] = useSearchMode()
 
-    // Semantic-only is the default; the "switch to keyword search" action
-    // (actions.tsx) flips to Algolia-only. The website-semantic-search flag is
-    // a hard gate — with it off, keyword is the only engine available.
+    // Keyword (Algolia) is the default; the "switch to semantic search" action
+    // (actions.tsx) flips to the Inkeep engine
     const trimmedQuery = query.trim()
     const queryWordCount = trimmedQuery.split(/\s+/).filter(Boolean).length
-    const semantic = semanticEnabled && searchMode === 'semantic'
+    const semantic = searchMode === 'semantic'
     const keyword = !semantic
 
     // While the filter picker is open the input holds filter text, not a search

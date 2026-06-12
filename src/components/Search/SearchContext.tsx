@@ -2,7 +2,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import React, { Fragment } from 'react'
 import SearchResults from './SearchResults'
 import SemanticSearchResults from './SemanticSearchResults'
-import { useSemanticSearchEnabled } from './useSemanticSearchEnabled'
+import { useSearchMode } from './useSearchMode'
 import { InstantSearch } from 'react-instantsearch-hooks-web'
 import algoliasearch from 'algoliasearch/lite'
 import usePostHog from '../../hooks/usePostHog'
@@ -72,7 +72,7 @@ export const SearchProvider: React.FC = ({ children }) => {
         }
     }, [isVisible])
 
-    const semanticSearchEnabled = useSemanticSearchEnabled()
+    const semanticSearchEnabled = useSearchMode()[0] === 'semantic'
 
     const open = (from: SearchLocation, filter?: SearchResultType) => {
         posthog?.capture('web search opened', {

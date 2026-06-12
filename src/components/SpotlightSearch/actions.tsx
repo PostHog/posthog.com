@@ -22,7 +22,6 @@ import { useToast } from '../../context/Toast'
 import { themeOptions } from '../../hooks/useTheme'
 import { useHedgehogMode } from 'components/HedgehogMode'
 import { useSearchMode } from 'components/Search/useSearchMode'
-import { useSemanticSearchEnabled } from 'components/Search/useSemanticSearchEnabled'
 
 export type SpotlightAction = {
     id: string
@@ -61,7 +60,6 @@ export const useSpotlightActions = (): SpotlightAction[] => {
     const { addToast } = useToast()
     const [hedgehogModeEnabled, setHedgehogModeEnabled] = useHedgehogMode()
     const [searchMode, setSearchMode] = useSearchMode()
-    const semanticSearchAvailable = useSemanticSearchEnabled()
 
     const darkMode = siteSettings.theme === 'dark'
 
@@ -211,22 +209,15 @@ export const useSpotlightActions = (): SpotlightAction[] => {
                     clickBehavior: siteSettings.clickBehavior === 'double' ? 'single' : 'double',
                 }),
         },
-        // Only offered when the website-semantic-search flag allows the Inkeep
-        // engine — with it off, keyword is the only engine and the toggle
-        // couldn't do anything
-        ...(semanticSearchAvailable
-            ? [
-                  {
-                      id: 'search-mode',
-                      label: searchMode === 'semantic' ? 'Switch to keyword search' : 'Switch to semantic search',
-                      icon: searchMode === 'semantic' ? <IconSearch /> : <IconSparkles />,
-                      keywords: ['search mode', 'semantic', 'keyword', 'algolia', 'ai search', 'search engine'],
-                      keepOpen: true,
-                      clearQuery: true,
-                      perform: toggleSearchMode,
-                  },
-              ]
-            : []),
+        {
+            id: 'search-mode',
+            label: searchMode === 'semantic' ? 'Switch to keyword search' : 'Switch to semantic search',
+            icon: searchMode === 'semantic' ? <IconSearch /> : <IconSparkles />,
+            keywords: ['search mode', 'semantic', 'keyword', 'algolia', 'ai search', 'search engine'],
+            keepOpen: true,
+            clearQuery: true,
+            perform: toggleSearchMode,
+        },
         {
             id: 'boring-mode',
             // One-way from here: boring mode unmounts the desktop (and this

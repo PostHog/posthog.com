@@ -12,7 +12,7 @@ import { Hit } from 'instantsearch.js'
 import OSButton from 'components/OSButton'
 import Input from 'components/OSForm/input'
 import SemanticSearch from './SemanticSearch'
-import { useSemanticSearchEnabled } from 'components/Search/useSemanticSearchEnabled'
+import { useSearchMode } from 'components/Search/useSearchMode'
 
 const searchClient = algoliasearch(
     process.env.GATSBY_ALGOLIA_APP_ID as string,
@@ -238,7 +238,7 @@ export const SearchUI = ({
     hideFilters?: boolean
     autoFocus?: boolean
 }) => {
-    const semanticSearchEnabled = useSemanticSearchEnabled()
+    const semanticSearchEnabled = useSearchMode()[0] === 'semantic'
 
     const searchProps = {
         initialFilter,

@@ -6,13 +6,13 @@ const STORAGE_KEY = 'search-mode'
 const SEARCH_MODE_EVENT = 'search-mode-change'
 
 const getSearchMode = (): SearchMode =>
-    typeof window !== 'undefined' && window.localStorage?.getItem(STORAGE_KEY) === 'keyword' ? 'keyword' : 'semantic'
+    typeof window !== 'undefined' && window.localStorage?.getItem(STORAGE_KEY) === 'semantic' ? 'semantic' : 'keyword'
 
 /**
- * The user's preferred search engine: semantic (Inkeep RAG, the default) or
- * keyword (Algolia). Toggled by the SpotlightSearch "switch search" action and
- * persisted in localStorage. Each call site gets its own state instance, so
- * setters broadcast a window event to keep them in sync (same pattern as
+ * The user's preferred search engine: keyword (Algolia, the default) or
+ * semantic (Inkeep RAG). Toggled by the SpotlightSearch "switch search" action
+ * and persisted in localStorage. Each call site gets its own state instance,
+ * so setters broadcast a window event to keep them in sync (same pattern as
  * useHedgehogMode).
  */
 export const useSearchMode = (): [SearchMode, (mode: SearchMode) => void] => {

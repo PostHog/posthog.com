@@ -4,10 +4,10 @@ The site-wide search overlay, opened with `Cmd/Ctrl+K` or `/` (via `openSearch()
 
 ## Data
 
-Results come from `useHybridSearch` (`components/Search/useHybridSearch.ts` — see `components/Search/README.md` for the engine architecture), gated by `useSemanticSearchEnabled` (the `website-semantic-search` flag, with a `localStorage.setItem('website-semantic-search', 'true')` escape hatch for local dev):
+Results come from `useHybridSearch` (`components/Search/useHybridSearch.ts` — see `components/Search/README.md` for the engine architecture). The engine follows `useSearchMode` (localStorage `search-mode`, window-event-synced, persists across sessions):
 
-- **Flag off:** `useHybridSearch(query, { semantic: false })` — Algolia-only, instant, no Inkeep proxy calls or cost.
-- **Flag on:** the engine follows `useSearchMode` (localStorage `search-mode`, window-event-synced): **semantic-only by default** (`{ semantic: true, keyword: false }`), with the "Switch to keyword search" action (see Actions) flipping to Algolia-only. The preference persists across sessions.
+- **Keyword (default):** `{ semantic: false }` — Algolia-only, instant, no Inkeep proxy calls or cost.
+- **Semantic:** `{ keyword: false }` — Inkeep RAG only, switched on via the "Switch to semantic search" action (see Actions). Requires the `INKEEP_RAG_API_KEY` env var for the `/api/search` proxy.
   - While a semantic query is in flight (~1.5–2s) the hook returns empty results; the panel shows pulsing skeleton rows and the search icon becomes a spinner.
 
 Result `type` comes from the shared `typeForPath.ts` taxonomy; `typeConfig` here covers all of its types (labels mirror the `categories` export in `components/Search/SearchResults.tsx`) and falls back to a generic config for unknown types. Results render grouped by category: Products always first when present, the remaining groups ordered by their best member's RRF `score` (exposed on `HybridSearchResult`) so the strongest match's group sits highest, with `typeOrder` as the tiebreaker. Rank order is preserved within groups.
@@ -25,7 +25,7 @@ Clicks fire `web search result clicked` (title, slug, category, query, type, `se
 
 ### Actions
 
-- `actions.tsx` defines command-palette actions (`useSpotlightActions` — a hook because they close over app context and toasts). Mode toggles: theme, wallpaper cycle, hedgehog mode (via `useHedgehogMode`, now window-event-synced across instances), retro mode (classic skin), heater mode, performance boost, cursor cycle (default/xl/james), click behavior, search mode (semantic ↔ keyword via `useSearchMode`; only offered when the semantic-search flag is on — see Data), boring mode (one-way — it unmounts the desktop and the palette). One-shots: copy desktop link, close all windows, screensaver, confetti.
+- `actions.tsx` defines command-palette actions (`useSpotlightActions` — a hook because they close over app context and toasts). Mode toggles: theme, wallpaper cycle, hedgehog mode (via `useHedgehogMode`, now window-event-synced across instances), retro mode (classic skin), heater mode, performance boost, cursor cycle (default/xl/james), click behavior, search mode (keyword ↔ semantic via `useSearchMode` — see Data), boring mode (one-way — it unmounts the desktop and the palette). One-shots: copy desktop link, close all windows, screensaver, confetti.
 - Actions are for things search can't do — plain navigations don't belong here (pages are what search results are for). Also not included: dance mode and the hedgehog generator have no routes (TapePlayer-internal / addWindow-only), and enterprise/theo modes live in the Layout context, which isn't an ancestor of the overlay.
 - An action row surfaces at the very top (above Ask AI/filter suggestions) when a short query (≤3 words, ≥3 chars) matches an action's `keywords` — prefix, substring, or query-contains-keyword. Capped at 2 rows.
 - Selecting one runs `perform()` and fires `spotlight action used`. One-shots close the palette; `keepOpen` actions (theme, wallpaper) keep it open with the query intact so Enter re-runs them. `clearQuery` (search mode) keeps the palette open but wipes the trigger query — re-running it makes no sense and would fire the trigger words at the newly selected engine.

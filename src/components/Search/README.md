@@ -2,18 +2,14 @@
 
 Site-wide search modal, opened with `/`, `Cmd/Ctrl+K`, or programmatically via `useSearch().open()`.
 
-## Two search engines (feature-flagged)
+## Two search engines (user preference)
 
-`SearchContext.tsx` renders one of two result components inside the modal, gated by the PostHog feature flag **`website-semantic-search`**. For local dev (posthog-js doesn't load without `GATSBY_POSTHOG_API_KEY`, so flags never evaluate) and QA, there's a localStorage escape hatch:
+`SearchContext.tsx` renders one of two result components inside the modal, selected by `useSearchMode` — a localStorage-persisted (`search-mode`), window-event-synced preference toggled by the SpotlightSearch "Switch to semantic search" action. Programmatically: `localStorage.setItem('search-mode', 'semantic')` (undo with `localStorage.removeItem(...)`).
 
-```js
-localStorage.setItem('website-semantic-search', 'true') // undo with localStorage.removeItem(...)
-```
-
-| Flag state | Component | Engine |
+| Mode | Component | Engine |
 |---|---|---|
-| off (default) | `SearchResults.tsx` | Algolia InstantSearch (`react-instantsearch-hooks-web`), browser-direct with the public search key. Index is built at deploy time by `gatsby/algoliaConfig.js`. |
-| on | `SemanticSearchResults.tsx` | Hybrid search via `useHybridSearch.ts`: Algolia (instant, keyword) + Inkeep RAG semantic search, merged with reciprocal rank fusion. |
+| keyword (default) | `SearchResults.tsx` | Algolia InstantSearch (`react-instantsearch-hooks-web`), browser-direct with the public search key. Index is built at deploy time by `gatsby/algoliaConfig.js`. |
+| semantic | `SemanticSearchResults.tsx` | Hybrid search via `useHybridSearch.ts`: Algolia (instant, keyword) + Inkeep RAG semantic search, merged with reciprocal rank fusion. |
 
 ## Hybrid search flow
 
@@ -43,8 +39,7 @@ Both engines keep a session-lived response cache (50 entries, keyed by trimmed q
 
 ## Files
 
-- `useSemanticSearchEnabled.ts` – the flag + localStorage gate, shared by all gated surfaces
-- `useSearchMode.ts` – the user's engine preference (semantic by default, keyword via the Spotlight toggle action), localStorage-persisted and window-event-synced
+- `useSearchMode.ts` – the user's engine preference (keyword by default, semantic via the Spotlight toggle action), localStorage-persisted and window-event-synced; shared by all search surfaces
 - `useHybridSearch.ts` – Algolia + Inkeep in parallel, RRF merge; the hook hybrid UIs consume
 - `typeForPath.ts` – pathname → category type mapping, shared by the proxy and the Algolia normalizer
 - `useInkeepSearch.ts` – debounced fetch hook for the proxy, composed by `useHybridSearch.ts`
@@ -53,4 +48,4 @@ Both engines keep a session-lived response cache (50 entries, keyed by trimmed q
 - `SemanticSearchResults.tsx` – legacy modal semantic UI (same layout: results list, preview pane, filter tabs)
 - `SearchBox.tsx`, `SidebarSearchBox.tsx`, `InlineSearch.tsx` – other entry points (still Algolia-only)
 
-**Note:** on the 9000 branch, the primary search surface is `components/SpotlightSearch` (the fixed glass overlay opened by `Cmd+K` via `openSearch()` in `src/context/App.tsx`), *not* the modal in this folder. It consumes `useHybridSearch` directly, selecting the engine from `useSearchMode`: semantic-only (`{ keyword: false }`) by default, Algolia-only (`{ semantic: false }`) when the user has toggled keyword mode via the Spotlight "Switch to keyword search" action — or always when the flag is off. `components/SearchUI` remains as the websiteMode taskbar search dropdown, gating between its Algolia `Search` component and `SearchUI/SemanticSearch.tsx` — those two are intentional twins; when one engine wins, delete the loser.
+**Note:** on the 9000 branch, the primary search surface is `components/SpotlightSearch` (the fixed glass overlay opened by `Cmd+K` via `openSearch()` in `src/context/App.tsx`), *not* the modal in this folder. It consumes `useHybridSearch` directly, selecting the engine from `useSearchMode`: Algolia-only (`{ semantic: false }`) by default, semantic-only (`{ keyword: false }`) when the user has toggled semantic mode via the Spotlight "Switch to semantic search" action. `components/SearchUI` remains as the websiteMode taskbar search dropdown, gating between its Algolia `Search` component and `SearchUI/SemanticSearch.tsx` — those two are intentional twins; when one engine wins, delete the loser.

@@ -16,8 +16,8 @@ const resultURL = (result: SemanticSearchResult) => result.url + (result.fragmen
  * Hybrid (Algolia + Inkeep RAG) twin of the Algolia-only `Search` component in
  * index.tsx. Same UI and behaviors; data comes from useHybridSearch (instant
  * Algolia results, reranked when semantic results arrive) and type filters are
- * computed client-side. Gated by the website-semantic-search flag in
- * index.tsx — when one engine wins, the loser gets deleted.
+ * computed client-side. index.tsx picks between the two based on the
+ * useSearchMode preference — when one engine wins, the loser gets deleted.
  */
 const SemanticSearch = ({
     initialFilter = '',
