@@ -207,54 +207,7 @@ It's also possible to [run experiments without using feature flags](/docs/experi
 
 `PostHog.AI` adds [AI observability](/docs/ai-observability) for .NET applications using OpenAI or Azure OpenAI. It is currently pre-release, so expect breaking changes before a stable release.
 
-Install the package:
-
-```bash
-dotnet add package PostHog.AI
-```
-
-When using dependency injection, register PostHog first, then register an OpenAI client with the PostHog handler:
-
-```csharp
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using OpenAI;
-using PostHog;
-using PostHog.AI;
-
-var builder = Host.CreateApplicationBuilder(args);
-
-builder.Services.AddPostHog(options =>
-{
-    options.ProjectToken = "<ph_project_token>";
-    options.HostUrl = new Uri("<ph_client_api_host>");
-});
-
-builder.Services.AddPostHogOpenAIClient("<openai_api_key>");
-
-var host = builder.Build();
-var openAIClient = host.Services.GetRequiredService<OpenAIClient>();
-```
-
-Use `PostHogAIContext` to attach trace, session, span, and user context to AI calls made inside a scope:
-
-```csharp
-using PostHog.AI;
-
-using (PostHogAIContext.BeginScope(
-    distinctId: "user-123",
-    traceId: "trace-abc",
-    sessionId: "session-xyz",
-    spanId: "span-1",
-    spanName: "summarize_text",
-    parentId: null))
-{
-    var chatClient = openAIClient.GetChatClient("gpt-4o-mini");
-    await chatClient.CompleteChatAsync("Summarize this text");
-}
-```
-
-The integration captures `$ai_generation` and `$ai_embedding` events with model, latency, token, error, trace, session, and span properties.
+For installation instructions, see the [OpenAI guide for .NET](/docs/ai-observability/installation/openai#net-support) or the [Azure OpenAI guide for .NET](/docs/ai-observability/installation/azure-openai#net-support).
 
 ## GeoIP properties
 
