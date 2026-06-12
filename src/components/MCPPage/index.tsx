@@ -32,6 +32,7 @@ import TeamMember from 'components/TeamMember'
 import { Bang } from 'components/Icons'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { IconPostHog } from 'components/OSIcons'
+import PlatformInstall from 'components/PlatformInstall'
 
 function Q({ text }: { text?: string }): JSX.Element {
     const heading = text || ''
@@ -74,17 +75,17 @@ function MCPHeader(): JSX.Element {
                         We don't think the future has a UI. So we built one without one.
                     </p>
                     <WizardCommand command="mcp add" slim />
-                    <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 justify-center @lg:justify-start text-[11px] uppercase font-semibold tracking-wider opacity-60">
+                    <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 justify-center @lg:justify-start text-[13px] font-medium opacity-70">
                         <span className="inline-flex items-center gap-1">
-                            <IconCheck className="size-3" />
+                            <IconCheck className="size-3.5" />
                             50+ tools
                         </span>
                         <span className="inline-flex items-center gap-1">
-                            <IconCheck className="size-3" />
+                            <IconCheck className="size-3.5" />
                             Open source
                         </span>
                         <span className="inline-flex items-center gap-1">
-                            <IconCheck className="size-3" />
+                            <IconCheck className="size-3.5" />
                             Certified no-UI
                         </span>
                     </div>
@@ -235,7 +236,7 @@ const capabilityList: CapabilityItem[] = [
     },
     {
         title: 'Session replay',
-        prompt: 'Find a replay where a user got frustrated and rage-clicked.',
+        prompt: 'Find a recording where a user got frustrated.',
         icon: <IconRewindPlay />,
         color: 'yellow',
     },
@@ -574,13 +575,16 @@ function FutureNoUI(): JSX.Element {
                 </p>
                 <p>
                     Even our own marketing team can&apos;t{' '}
-                    <Link to="/newsletter/hidden-danger-of-shipping-fast">keep up with how fast we ship</Link>.
+                    <Link to="/newsletter/hidden-danger-of-shipping-fast" state={{ newWindow: true }}>
+                        keep up with how fast we ship
+                    </Link>
+                    .
                 </p>
                 <p>
                     We could have run a campaign telling you the UI is fine. We could have A/B tested a new sidebar
                     every week. We did neither, because we don&apos;t think the future has a UI at all.
                 </p>
-                <p className="font-semibold">With the MCP, you don&apos;t need to use PostHog to use PostHog.</p>
+                <p className="font-semibold">That&apos;s where the MCP comes in.</p>
                 <div className="mt-5 bg-accent dark:bg-accent-dark border border-primary rounded-md p-4">
                     <p className="font-bold text-[15px] m-0 mb-1">"But I like the PostHog UI."</p>
                     <p className="text-[13px] m-0 text-secondary leading-snug">
@@ -598,95 +602,8 @@ function FutureNoUI(): JSX.Element {
     )
 }
 
-interface SupportedClient {
-    label: string
-    url: string
-    icon: React.ReactNode
-    comingSoon?: boolean
-}
-
-const codeEditors: SupportedClient[] = [
-    { label: 'PostHog Code', url: '/code', icon: <IconPostHog />, comingSoon: true },
-    { label: 'Cursor', url: '/docs/model-context-protocol/cursor', icon: <IconLaptop /> },
-    { label: 'Claude Code', url: '/docs/model-context-protocol/claude-code', icon: <IconTerminal /> },
-    { label: 'Claude Desktop', url: '/docs/model-context-protocol/claude-desktop', icon: <IconLaptop /> },
-    { label: 'Codex', url: '/docs/model-context-protocol/codex', icon: <IconTerminal /> },
-    { label: 'VS Code', url: '/docs/model-context-protocol/vscode', icon: <IconLaptop /> },
-    { label: 'Windsurf', url: '/docs/model-context-protocol/windsurf', icon: <IconLaptop /> },
-    { label: 'Zed', url: '/docs/model-context-protocol/zed', icon: <IconLaptop /> },
-]
-
-const platforms = [
-    { label: 'Lovable', url: '/docs/integrations/lovable', icon: <IconStack /> },
-    { label: 'Replit', url: '/docs/integrations/replit', icon: <IconStack /> },
-    { label: 'v0', url: '/docs/integrations/v0', icon: <IconStack /> },
-]
-
-function PostHogCodeBoxout(): JSX.Element {
-    return (
-        <Link
-            to="/code"
-            className="group block bg-accent dark:bg-accent-dark border border-primary rounded-lg p-4 @sm:p-5 hover:border-red dark:hover:border-yellow transition-colors !text-inherit !no-underline not-prose"
-        >
-            <div className="flex flex-col @sm:flex-row @sm:items-center gap-4">
-                <span className="inline-flex w-10 h-10 shrink-0 items-center justify-center rounded bg-brown/10 text-brown">
-                    <span className="w-5 h-5">
-                        <IconCursor />
-                    </span>
-                </span>
-                <div className="flex-1 min-w-0">
-                    <div className="flex flex-wrap items-center gap-2 mb-1">
-                        <p className="font-bold text-base m-0">PostHog Code</p>
-                        <span className="text-[10px] font-bold uppercase tracking-wider opacity-90 bg-yellow px-1.5 py-0.5 rounded-sm text-primary">
-                            Beta
-                        </span>
-                    </div>
-                    <p className="text-[13px] opacity-75 m-0 leading-snug">
-                        Self-driving development is here. PostHog Code is the only AI devtool that understands your
-                        product, not just your codebase. In private beta, sign-up to the waitlist for access soon.
-                    </p>
-                </div>
-                <span className="inline-flex items-center gap-1 text-[12px] font-semibold uppercase tracking-wider shrink-0 group-hover:underline">
-                    Learn more
-                    <IconArrowUpRight className="size-3.5" />
-                </span>
-            </div>
-        </Link>
-    )
-}
-
-function SupportedClients(): JSX.Element {
-    const renderItem = (client: SupportedClient) => (
-        <li key={client.label}>
-            <Link
-                to={client.url}
-                className="group flex items-center gap-2 bg-white dark:bg-black border border-border dark:border-border-dark rounded p-2.5 hover:border-primary transition-colors !text-inherit !no-underline"
-            >
-                <span className="size-4 text-primary opacity-75 group-hover:opacity-100">{client.icon}</span>
-                <span className="font-semibold text-[13px]">{client.label}</span>
-                {client.comingSoon ? (
-                    <span className="ml-auto text-[9px] font-bold uppercase tracking-wider opacity-90 bg-yellow px-1.5 py-0.5 rounded-sm text-primary">
-                        Beta
-                    </span>
-                ) : (
-                    <IconArrowUpRight className="size-3 opacity-0 group-hover:opacity-60 ml-auto" />
-                )}
-            </Link>
-        </li>
-    )
-    return (
-        <div className="not-prose my-6">
-            <p className="uppercase text-[10px] font-bold tracking-wider text-secondary mb-2 mt-0">Code editors</p>
-            <ul className="list-none p-0 m-0 grid grid-cols-2 @sm:grid-cols-3 @lg:grid-cols-4 gap-2 mb-4">
-                {codeEditors.map(renderItem)}
-            </ul>
-            <p className="uppercase text-[10px] font-bold tracking-wider text-secondary mb-2">Platforms</p>
-            <ul className="list-none p-0 m-0 grid grid-cols-2 @sm:grid-cols-3 @lg:grid-cols-4 gap-2 mb-4">
-                {platforms.map(renderItem)}
-            </ul>
-        </div>
-    )
-}
+/* SupportedClients + PostHogCodeBoxout removed — replaced by <PlatformInstall /> for the
+   "Where does the MCP run?" section. */
 
 function MCPCTA(): JSX.Element {
     return (
@@ -787,16 +704,19 @@ export default function MCPPage(): JSX.Element {
 
                     <Capabilities />
 
-                    <Q text="The future is no UI" />
+                    <Q text="You don't need to use PostHog to use PostHog" />
                     <FutureNoUI />
 
                     <Q text="Where does the MCP run?" />
                     <p>
-                        We know <Link to="/code">which code editor we prefer</Link>, but the MCP is flexible to most
-                        common tools.
+                        We know{' '}
+                        <Link to="/code" state={{ newWindow: true }}>
+                            which code editor we prefer
+                        </Link>
+                        , but the MCP is flexible to most common tools.
                     </p>
 
-                    <SupportedClients />
+                    <PlatformInstall />
                     <DemoVideo />
 
                     <MCPCTA />
