@@ -13,8 +13,9 @@ const MIN_QUERY_LENGTH = 3
 
 /**
  * Debounced semantic search against the Inkeep RAG proxy (src/api/search.ts).
- * Stale responses are discarded via AbortController; previous results are kept
- * while a new query is in flight so the list doesn't flash empty.
+ * Stale responses are discarded via AbortController. Previous results linger
+ * in state while a new query is in flight, but `loading` is true for the whole
+ * flight — consumers (useHybridSearch) gate on it rather than showing them.
  */
 export const useInkeepSearch = (
     query: string

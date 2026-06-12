@@ -32,10 +32,10 @@ both lists → mergeWithReciprocalRankFusion (score = Σ 1/(60 + rank), dedupe
            → { results: [{ type, title, url, fragment, excerpt, sources }] }
 ```
 
-The merged list is only published once both engines have settled (~1.5–2s, dominated by Inkeep) — publishing Algolia first and reranking later made results jump under the cursor. Previous results stay visible while a new query is in flight, so the list never flashes empty. Merged duplicates keep Algolia's title but Inkeep's excerpt (the chunk that actually matched the query). If Algolia keys are missing (common in local dev) the hook degrades to semantic-only, and vice versa if the Inkeep proxy errors.
+The merged list is only published once both engines have settled (~1.5–2s, dominated by Inkeep) — publishing Algolia first and reranking later made results jump under the cursor. While a query is in flight the hook returns empty results with `loading: true`, so UIs show their loading state instead of stale results. Merged duplicates keep Algolia's title but Inkeep's excerpt (the chunk that actually matched the query). If Algolia keys are missing (common in local dev) the hook degrades to semantic-only, and vice versa if the Inkeep proxy errors.
 
 - **`INKEEP_RAG_API_KEY`** (no `GATSBY_` prefix — must never reach the client bundle) is required by the proxy. It's an Inkeep **API-type** integration key, not the widget key (`GATSBY_INKEEP_API_KEY`). Locally: export it in your shell (e.g. via `.envrc`) before `pnpm start`; Gatsby Functions are served by the dev server at `localhost:8001/api/search`.
-- Expect ~1.5–2s per query from Inkeep; the UI keeps previous results visible while loading and shows skeletons only on first load.
+- Expect ~1.5–2s per query from Inkeep; the UI shows a loading state (skeletons in the modal, "Searching…" in SearchUI) whenever a query is in flight.
 - Result `type` (docs, blog, tutorial, question, …) is derived from URL path prefixes in `typeForPath.ts` (shared by `src/api/search.ts` and the Algolia side of `useHybridSearch.ts`), mirroring the slug regexes in `gatsby/algoliaConfig.js`, and powers the filter tabs client-side.
 - Analytics: both engines fire `web search result clicked`; the hybrid path adds `searchEngine: 'hybrid'` plus `searchSources` (which engine(s) surfaced the clicked result) for comparison.
 

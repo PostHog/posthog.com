@@ -12,9 +12,11 @@ import {
     generateRawMarkdownPages,
     generateApiSpecMarkdown,
     generateLlmsTxt,
+    generateMarkdownDocs,
     generateSdkReferencesMarkdown,
     generatePricingMd,
 } from './rawMarkdownUtils'
+import { teamSearchDoc } from './utils/teamSearchDoc'
 import { MARKDOWN_CONTENT_PATHS } from '../src/constants'
 import { SdkReferenceData } from '../src/templates/sdk/SdkReference.js'
 import blogTemplate from '../src/templates/OG/blog.js'
@@ -592,7 +594,89 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter
     const filteredPages = await generateRawMarkdownPages(docsQuery.data.allMdx.nodes)
     // Only include docs pages in llms.txt (not handbook)
     const docsPages = filteredPages.filter((page) => page.fields.slug.startsWith('/docs'))
-    generateLlmsTxt(docsPages)
+
+    // Generate markdown pages for products and small teams. Their site pages
+    // render client-side (no indexable HTML), so these .md files are what
+    // LLMs and search crawlers (e.g. Inkeep) ingest.
+    let productPages: Array<{ title: string; url: string }> = []
+    let teamPages: Array<{ title: string; url: string }> = []
+    try {
+        const searchDocsQuery = (await graphql(`
+            query {
+                allProductMarketing {
+                    nodes {
+                        name
+                        slug
+                        rawBody
+                    }
+                }
+                allSqueakTeam(filter: { name: { ne: "Hedgehogs" } }) {
+                    nodes {
+                        name
+                        slug
+                        tagline
+                        description
+                        profiles {
+                            data {
+                                attributes {
+                                    firstName
+                                    lastName
+                                    companyRole
+                                }
+                            }
+                        }
+                        roadmaps {
+                            title
+                            description
+                            complete
+                        }
+                    }
+                }
+                teamMdx: allMdx(filter: { fields: { slug: { regex: "/^/teams/[^/]+$/" } } }) {
+                    nodes {
+                        rawBody
+                        fields {
+                            slug
+                        }
+                    }
+                }
+            }
+        `)) as {
+            data: {
+                allProductMarketing: { nodes: Array<{ name: string; slug: string; rawBody: string }> }
+                allSqueakTeam: { nodes: Array<any> }
+                teamMdx: { nodes: Array<{ rawBody: string; fields: { slug: string } }> }
+            }
+        }
+
+        // Only products with a real page in the build output (some productData
+        // entries have no standalone page)
+        const publicPath = path.resolve(__dirname, '../public')
+        productPages = generateMarkdownDocs(
+            searchDocsQuery.data.allProductMarketing.nodes
+                .filter(({ slug }) => fs.existsSync(path.join(publicPath, slug, 'index.html')))
+                .map(({ name, slug, rawBody }) => ({ title: name, slug, markdown: rawBody }))
+        )
+
+        const mdxBySlug = Object.fromEntries(
+            searchDocsQuery.data.teamMdx.nodes.map((node) => [node.fields.slug, node.rawBody])
+        )
+        teamPages = generateMarkdownDocs(
+            searchDocsQuery.data.allSqueakTeam.nodes
+                .filter(({ slug }) => slug)
+                .map((team) => {
+                    const { title, markdown } = teamSearchDoc(team, mdxBySlug[`/teams/${team.slug}`])
+                    return { title, slug: `teams/${team.slug}`, markdown }
+                })
+        )
+    } catch (error) {
+        console.error('Failed to generate product/team markdown docs:', error)
+    }
+
+    generateLlmsTxt(docsPages, [
+        { title: 'Products', pages: productPages },
+        { title: 'Teams', pages: teamPages },
+    ])
 
     if (process.env.AWS_CODEPIPELINE !== 'true') {
         console.log('Skipping onPostBuild tasks')

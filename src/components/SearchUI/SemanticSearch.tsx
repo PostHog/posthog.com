@@ -172,7 +172,7 @@ const SemanticSearch = ({
                         </ul>
                     )}
 
-                    {loading && hits.length === 0 && query && (!websiteMode || isFocused) && (
+                    {loading && query && (!websiteMode || isFocused) && (
                         <div
                             className={`w-full border-primary z-10 bg-primary shadow-2xl py-2 px-4 text-secondary ${
                                 websiteMode ? 'border-t' : 'mt-2 rounded-md border'

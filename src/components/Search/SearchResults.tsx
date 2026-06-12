@@ -78,6 +78,14 @@ export const categories = [
         type: 'api',
         name: 'API',
     },
+    {
+        type: 'product',
+        name: 'Products',
+    },
+    {
+        type: 'team',
+        name: 'Teams',
+    },
 ]
 
 // Mod function that can handle negative numbers

@@ -97,9 +97,10 @@ export const mergeWithReciprocalRankFusion = (
  * queried in parallel, merged with reciprocal rank fusion. The merged list is
  * only published once both engines have settled — publishing Algolia first
  * and reranking when semantic results arrive ~1.5–2s later made results jump
- * under the cursor. Previous results stay visible while a new query is in
- * flight. If Algolia keys are missing (e.g. local dev) the hook degrades to
- * semantic-only, and vice versa if the Inkeep proxy errors.
+ * under the cursor. While a query is in flight, results are empty so UIs show
+ * their loading state instead of stale results. If Algolia keys are missing
+ * (e.g. local dev) the hook degrades to semantic-only, and vice versa if the
+ * Inkeep proxy errors.
  */
 export const useHybridSearch = (
     query: string
@@ -107,7 +108,6 @@ export const useHybridSearch = (
     const { results: semanticResults, loading: semanticLoading, error } = useInkeepSearch(query)
     const [algoliaResults, setAlgoliaResults] = useState<SemanticSearchResult[]>([])
     const [algoliaLoading, setAlgoliaLoading] = useState(false)
-    const [results, setResults] = useState<HybridSearchResult[]>([])
     const requestIdRef = useRef(0)
 
     useEffect(() => {
@@ -149,9 +149,5 @@ export const useHybridSearch = (
         [algoliaResults, semanticResults]
     )
 
-    useEffect(() => {
-        if (!loading) setResults(merged)
-    }, [loading, merged])
-
-    return { results, loading, error }
+    return { results: loading ? [] : merged, loading, error }
 }

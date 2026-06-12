@@ -495,6 +495,19 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         description: String
         createdAt: Date
     }
+    type ProductMarketingHeading {
+        value: String
+        depth: Int
+        fragment: String
+    }
+    type ProductMarketing implements Node {
+        handle: String!
+        name: String!
+        slug: String!
+        excerpt: String
+        rawBody: String
+        headings: [ProductMarketingHeading]
+    }
     type EventVenue {
         name: String
     }

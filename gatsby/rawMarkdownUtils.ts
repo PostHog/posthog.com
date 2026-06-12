@@ -328,7 +328,41 @@ export const generateSdkReferencesMarkdown = (sdkReferences: SdkReferenceData) =
 }
 
 // Function to generate llms.txt file according to spec
-export const generateLlmsTxt = (pages) => {
+export type LlmsTxtSection = {
+    title: string
+    pages: Array<{ title: string; url: string }>
+}
+
+// Writes pre-rendered markdown documents (products, teams) to public/ so they
+// can be ingested by LLMs and search crawlers (e.g. Inkeep). Unlike
+// generateRawMarkdownPages, the markdown is built from structured data rather
+// than converted from built HTML — these pages render client-side, so their
+// HTML has no indexable content. Returns llms.txt-ready page entries.
+export const generateMarkdownDocs = (
+    docs: Array<{ slug: string; title: string; markdown: string }>
+): LlmsTxtSection['pages'] => {
+    const publicPath = path.resolve(__dirname, '../public')
+    const pages: LlmsTxtSection['pages'] = []
+
+    for (const { slug, title, markdown } of docs) {
+        try {
+            const outputPath = path.join(publicPath, `${slug}.md`)
+            const dirPath = path.dirname(outputPath)
+            if (!fs.existsSync(dirPath)) {
+                fs.mkdirSync(dirPath, { recursive: true })
+            }
+            fs.writeFileSync(outputPath, markdown, 'utf8')
+            console.log(`Generated: ${slug}.md`)
+            pages.push({ title, url: `https://posthog.com/${slug}.md` })
+        } catch (error) {
+            continue
+        }
+    }
+
+    return pages
+}
+
+export const generateLlmsTxt = (pages, extraSections: LlmsTxtSection[] = []) => {
     console.log('Generating llms.txt file...')
 
     // Group pages by their first URL segment
@@ -462,6 +496,18 @@ If the wizard doesn't support the framework, see the [SDKs and Libraries](https:
         llmsTxtContent += `## ${sectionTitle}\n\n`
 
         const sortedPages = pagesBySection[section].sort((a, b) => a.title.localeCompare(b.title))
+        for (const page of sortedPages) {
+            llmsTxtContent += `- [${page.title}](${page.url})\n`
+        }
+        llmsTxtContent += '\n'
+    }
+
+    // Add pre-rendered sections (e.g. product and team pages generated from
+    // structured data rather than MDX)
+    for (const section of extraSections) {
+        if (section.pages.length === 0) continue
+        llmsTxtContent += `## ${section.title}\n\n`
+        const sortedPages = [...section.pages].sort((a, b) => a.title.localeCompare(b.title))
         for (const page of sortedPages) {
             llmsTxtContent += `- [${page.title}](${page.url})\n`
         }

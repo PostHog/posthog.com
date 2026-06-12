@@ -122,7 +122,7 @@ export default function SemanticSearchResults(props: SemanticSearchResultsProps)
 
                     <div className="grid md:grid-cols-2 min-h-0 flex-grow border-b border-primary dark:">
                         <section className="overscroll-none bg-white text-left overflow-y-auto border-r border-input dark:/50">
-                            {loading && filteredResults.length === 0 ? (
+                            {loading ? (
                                 <ol className="list-none m-0 p-0 dark:bg-black">
                                     {new Array(5).fill({}).map((_, index) => (
                                         <li

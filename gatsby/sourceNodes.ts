@@ -10,6 +10,7 @@ import type {
 } from '../src/templates/merch/types'
 import { SUPPORTED_SDK_IDS } from '../src/components/SdkReferences/utils'
 import dayjs from 'dayjs'
+import { getProductSearchEntries } from './utils/productSearchData'
 
 const DEFAULT_CHANGELOG_PLAYLIST_ID = 'PLnOY1RYHjDfxcuWI_L1xwuhoXAsxR59VL'
 
@@ -260,6 +261,21 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             })
         } catch (err) {
             console.error('Error fetching product_active_usage_30d endpoint:', err)
+        }
+    }
+
+    const createProductMarketingNodes = () => {
+        for (const entry of getProductSearchEntries()) {
+            createNode({
+                id: createNodeId(`product-marketing-${entry.handle}`),
+                parent: null,
+                children: [],
+                internal: {
+                    type: 'ProductMarketing',
+                    contentDigest: createContentDigest(entry),
+                },
+                ...entry,
+            })
         }
     }
 
@@ -1329,6 +1345,8 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             console.warn('Failed to fetch data warehouse sources:', error)
         }
     }
+
+    createProductMarketingNodes()
 
     await Promise.all([
         createProductDataNode(),

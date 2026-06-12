@@ -1,6 +1,13 @@
 const { createContentDigest } = require('gatsby-core-utils')
 const Slugger = require('github-slugger')
+const fs = require('fs')
+const path = require('path')
+const { teamSearchDoc } = require('./utils/teamSearchDoc')
 const slugger = new Slugger()
+
+// Only index entries whose page actually exists in the build output (some
+// productData entries, like realtime destinations, have no standalone page)
+const builtPageExists = (slug) => fs.existsSync(path.resolve(__dirname, '../public', slug, 'index.html'))
 
 const retrievePages = (type, regex) => {
     return {
@@ -73,6 +80,98 @@ module.exports = {
             retrievePages('newsletter', '/^newsletter/'),
             retrievePages('product-engineers', '/^product-engineers/'),
             retrievePages('templates', '/^templates/'),
+            {
+                query: `
+                    {
+                      products: allProductMarketing {
+                        nodes {
+                          id
+                          name
+                          slug
+                          excerpt
+                          rawBody
+                          headings {
+                            value
+                            depth
+                            fragment
+                          }
+                          internal {
+                            contentDigest
+                          }
+                        }
+                      }
+                    }
+                `,
+                transformer: ({ data }) =>
+                    data.products.nodes
+                        .filter(({ slug }) => builtPageExists(slug))
+                        .map(({ name, ...product }) => ({
+                            ...product,
+                            title: name,
+                            type: 'product',
+                            path_ranking: 1,
+                        })),
+            },
+            {
+                query: `
+                    {
+                      teams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" } }) {
+                        nodes {
+                          id
+                          name
+                          slug
+                          tagline
+                          description
+                          profiles {
+                            data {
+                              attributes {
+                                firstName
+                                lastName
+                                companyRole
+                              }
+                            }
+                          }
+                          roadmaps {
+                            title
+                            description
+                            complete
+                          }
+                        }
+                      }
+                      teamMdx: allMdx(filter: { fields: { slug: { regex: "/^/teams/[^/]+$/" } } }) {
+                        nodes {
+                          rawBody
+                          fields {
+                            slug
+                          }
+                        }
+                      }
+                    }
+                `,
+                transformer: ({ data }) => {
+                    const mdxBySlug = Object.fromEntries(
+                        data.teamMdx.nodes.map((node) => [node.fields.slug, node.rawBody])
+                    )
+                    return data.teams.nodes
+                        .filter(({ slug }) => slug)
+                        .map(({ id, slug, ...team }) => {
+                            const { title, excerpt, markdown } = teamSearchDoc(team, mdxBySlug[`/teams/${slug}`])
+                            return {
+                                id,
+                                title,
+                                slug: `teams/${slug}`,
+                                type: 'team',
+                                excerpt,
+                                rawBody: markdown,
+                                headings: [],
+                                path_ranking: 1,
+                                internal: {
+                                    contentDigest: createContentDigest(markdown),
+                                },
+                            }
+                        })
+                },
+            },
             // {
             //     query: `
             //                 {

@@ -46,16 +46,20 @@ export const normalizeResults = (documents: InkeepDocument[]): SemanticSearchRes
         // external sources like GitHub that don't belong in site search)
         if (!/(^|\.)posthog\.com$/.test(parsed.hostname)) continue
 
+        // Inkeep ingests the generated markdown mirrors of pages (e.g.
+        // /session-replay.md, /teams/billing.md) — link to the real page
+        const pathname = parsed.pathname.replace(/\.md$/, '')
+
         // Multiple chunks of the same page can match — keep the highest-ranked one
-        if (seenPaths.has(parsed.pathname)) continue
-        seenPaths.add(parsed.pathname)
+        if (seenPaths.has(pathname)) continue
+        seenPaths.add(pathname)
 
         const excerpt = cleanExcerpt((doc.source?.content || []).map((block) => block.text || '').join(' '))
 
         results.push({
-            type: typeForPath(parsed.pathname),
+            type: typeForPath(pathname),
             title: cleanTitle(doc.title),
-            url: parsed.pathname,
+            url: pathname,
             fragment: parsed.hash ? parsed.hash.slice(1) : undefined,
             excerpt,
         })
