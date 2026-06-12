@@ -2,185 +2,159 @@ import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { navigate } from 'gatsby'
 import {
+    IconApps,
     IconBook,
+    IconBrackets,
     IconChat,
     IconCompass,
+    IconCopy,
     IconFilter,
     IconGraduationCap,
+    IconHeart,
     IconNewspaper,
+    IconNotebook,
+    IconPeople,
+    IconPlug,
+    IconPuzzle,
     IconSearch,
     IconSparkles,
     IconX,
 } from '@posthog/icons'
 import KeyboardShortcut from 'components/KeyboardShortcut'
+import Spinner from 'components/Spinner'
+import { useHybridSearch, HybridSearchResult } from 'components/Search/useHybridSearch'
+import { useSemanticSearchEnabled } from 'components/Search/useSemanticSearchEnabled'
+import usePostHog from 'hooks/usePostHog'
+import { capitalizeFirstLetter } from '../../utils'
 import { useApp } from '../../context/App'
 
-type ResultType = 'docs' | 'handbook' | 'blog' | 'tutorial' | 'community'
-
-type SearchResult = {
-    type: ResultType
-    title: string
-    url: string
-    excerpt: string
-}
-
-const typeConfig: Record<ResultType, { label: string; icon: React.ReactNode }> = {
+// The typeForPath.ts taxonomy (shared by both search engines), with labels
+// mirroring the categories export in components/Search/SearchResults.tsx
+const typeConfig: Record<string, { label: string; icon: React.ReactNode }> = {
+    product: { label: 'Products', icon: <IconApps /> },
     docs: { label: 'Docs', icon: <IconBook /> },
-    handbook: { label: 'Handbook', icon: <IconCompass /> },
-    blog: { label: 'Blog', icon: <IconNewspaper /> },
+    api: { label: 'API', icon: <IconBrackets /> },
+    pipelines: { label: 'Pipelines', icon: <IconPlug /> },
+    apps: { label: 'Apps', icon: <IconPuzzle /> },
     tutorial: { label: 'Tutorials', icon: <IconGraduationCap /> },
-    community: { label: 'Community', icon: <IconChat /> },
+    blog: { label: 'Blog', icon: <IconNewspaper /> },
+    post: { label: 'Posts', icon: <IconNotebook /> },
+    handbook: { label: 'Handbook', icon: <IconCompass /> },
+    customers: { label: 'Customers', icon: <IconHeart /> },
+    templates: { label: 'Templates', icon: <IconCopy /> },
+    question: { label: 'Questions', icon: <IconChat /> },
+    team: { label: 'Teams', icon: <IconPeople /> },
 }
 
-const typeOrder: ResultType[] = ['docs', 'handbook', 'blog', 'tutorial', 'community']
+const typeOrder = Object.keys(typeConfig)
+
+const configForType = (type: string): { label: string; icon: React.ReactNode } =>
+    typeConfig[type] ?? { label: capitalizeFirstLetter(type), icon: <IconBook /> }
 
 // Stand-in for semantic matching: each category's label plus words users are
 // likely to type when they mean that category
-const categoryAliases: Record<ResultType, string[]> = {
+const categoryAliases: Record<string, string[]> = {
+    product: ['products', 'features', 'pricing'],
     docs: ['docs', 'documentation', 'reference', 'manual'],
-    handbook: ['handbook', 'company', 'culture', 'teams'],
-    blog: ['blog', 'posts', 'articles', 'news'],
+    api: ['api'],
+    pipelines: ['pipelines', 'cdp', 'destinations'],
+    apps: ['apps'],
     tutorial: ['tutorials', 'guides', 'how-to', 'walkthrough'],
-    community: ['community', 'questions', 'forum', 'answers'],
+    blog: ['blog', 'articles', 'news'],
+    post: ['posts'],
+    handbook: ['handbook', 'company', 'culture'],
+    customers: ['customers'],
+    templates: ['templates'],
+    question: ['questions', 'community', 'forum', 'answers'],
+    team: ['teams', 'people'],
 }
 
-const matchCategory = (query: string): ResultType | null => {
+const matchCategory = (query: string): string | null => {
     const q = query.trim().toLowerCase()
     if (q.length < 3) return null
     for (const type of typeOrder) {
-        if (categoryAliases[type].some((alias) => alias.startsWith(q) || (q.length >= 4 && alias.includes(q)))) {
+        if (categoryAliases[type]?.some((alias) => alias.startsWith(q) || (q.length >= 4 && alias.includes(q)))) {
             return type
         }
     }
     return null
 }
 
-// Placeholder results while the design is being iterated on — swap for
-// useHybridSearch (components/Search/useHybridSearch.ts) when wiring up.
-const mockResults: SearchResult[] = [
-    {
-        type: 'docs',
-        title: 'Feature flags',
-        url: '/docs/feature-flags',
-        excerpt: 'Safely roll out features to specific users or groups with feature flags.',
-    },
-    {
-        type: 'docs',
-        title: 'Session replay',
-        url: '/docs/session-replay',
-        excerpt: 'Watch recordings of visitors using your product or website.',
-    },
-    {
-        type: 'docs',
-        title: 'Funnels',
-        url: '/docs/product-analytics/funnels',
-        excerpt: 'Understand where users drop off in multi-step flows.',
-    },
-    {
-        type: 'docs',
-        title: 'SQL access',
-        url: '/docs/product-analytics/sql',
-        excerpt: 'Directly query your data with SQL insights.',
-    },
-    {
-        type: 'docs',
-        title: 'Experiments',
-        url: '/docs/experiments',
-        excerpt: 'Test changes to your product with A/B tests and measure their impact.',
-    },
-    {
-        type: 'handbook',
-        title: 'Why small teams?',
-        url: '/handbook/company/small-teams',
-        excerpt: 'PostHog is organized into small teams that operate like startups.',
-    },
-    {
-        type: 'handbook',
-        title: 'Communication',
-        url: '/handbook/company/communication',
-        excerpt: 'How we communicate asynchronously across timezones.',
-    },
-    {
-        type: 'handbook',
-        title: 'Writing for PostHog',
-        url: '/handbook/content/writing-for-posthog',
-        excerpt: 'Our approach to writing content that developers actually want to read.',
-    },
-    {
-        type: 'blog',
-        title: 'How PostHog uses PostHog',
-        url: '/blog/posthog-on-posthog',
-        excerpt: 'A look at how our own teams use product analytics, replay, and flags.',
-    },
-    {
-        type: 'blog',
-        title: 'The 80/20 of early-stage startup analytics',
-        url: '/blog/early-stage-analytics',
-        excerpt: 'The handful of metrics that actually matter before product-market fit.',
-    },
-    {
-        type: 'tutorial',
-        title: 'How to set up A/B tests',
-        url: '/tutorials/abtests',
-        excerpt: 'Step-by-step guide to running your first experiment.',
-    },
-    {
-        type: 'tutorial',
-        title: 'Filtering out internal users',
-        url: '/tutorials/filter-internal-users',
-        excerpt: 'Keep your own team from polluting your product data.',
-    },
-    {
-        type: 'community',
-        title: 'How do I capture pageviews in Next.js?',
-        url: '/questions/capture-pageviews-nextjs',
-        excerpt: 'App router pageviews need a manual capture call — here is the pattern.',
-    },
-    {
-        type: 'community',
-        title: 'Can I use feature flags with the API?',
-        url: '/questions/feature-flags-api',
-        excerpt: 'Evaluating flags server-side with the decide endpoint.',
-    },
-]
+const resultURL = (result: HybridSearchResult): string => result.url + (result.fragment ? `#${result.fragment}` : '')
 
-const filterResults = (query: string, activeFilter: ResultType | null): SearchResult[] => {
-    const scoped = activeFilter ? mockResults.filter((result) => result.type === activeFilter) : mockResults
-    const terms = query.toLowerCase().split(/\s+/).filter(Boolean)
-    // With a filter applied, an empty query browses the whole category
-    if (terms.length === 0) return activeFilter ? scoped : []
-    return scoped.filter((result) => {
-        const haystack = `${result.title} ${result.excerpt} ${result.url}`.toLowerCase()
-        return terms.every((term) => haystack.includes(term))
-    })
-}
+const QUESTION_WORDS = /^(how|why|what|when|where|who|which|can|could|does|do|is|are|should|will|did)\b/i
 
-type NavItem = { kind: 'ask-ai' } | { kind: 'filter'; type: ResultType } | { kind: 'result'; result: SearchResult }
+type NavItem = { kind: 'ask-ai' } | { kind: 'filter'; type: string } | { kind: 'result'; result: HybridSearchResult }
 
-export default function SpotlightSearch({ open, onClose }: { open: boolean; onClose: () => void }): JSX.Element {
+const SkeletonRow = () => (
+    <li aria-hidden className="flex items-center gap-3 rounded-lg px-2.5 py-2">
+        <div className="size-8 shrink-0 animate-pulse rounded-md bg-border/50" />
+        <div className="min-w-0 flex-1 space-y-1.5">
+            <div className="h-3.5 w-1/3 animate-pulse rounded bg-border/50" />
+            <div className="h-3 w-2/3 animate-pulse rounded bg-border/50" />
+        </div>
+    </li>
+)
+
+export default function SpotlightSearch({
+    open,
+    onClose,
+    initialFilter,
+}: {
+    open: boolean
+    onClose: () => void
+    initialFilter?: string
+}): JSX.Element {
     const { openNewChat } = useApp()
+    const posthog = usePostHog()
     const [query, setQuery] = useState('')
-    const [activeFilter, setActiveFilter] = useState<ResultType | null>(null)
+    const [activeFilter, setActiveFilter] = useState<string | null>(null)
     const [selectedIndex, setSelectedIndex] = useState(0)
     const inputRef = useRef<HTMLInputElement>(null)
     const itemRefs = useRef<(HTMLLIElement | null)[]>([])
 
-    const results = useMemo(() => filterResults(query, activeFilter), [query, activeFilter])
+    const semanticEnabled = useSemanticSearchEnabled()
+
+    // 1–2 word queries are navigational keyword lookups — Algolia alone is
+    // instant and better at them, so semantic search only engages at 3+ words
+    // or when the query reads as a question (leading question word with at
+    // least one more word, or a trailing "?"). Question-led queries skip
+    // keyword search entirely: their results come from semantic alone.
+    const trimmedQuery = query.trim()
+    const queryWordCount = trimmedQuery.split(/\s+/).filter(Boolean).length
+    const startsWithQuestionWord = queryWordCount >= 2 && QUESTION_WORDS.test(trimmedQuery)
+    const questionSignal = startsWithQuestionWord || trimmedQuery.endsWith('?')
+    const semantic = semanticEnabled && (queryWordCount >= 3 || questionSignal)
+    const keyword = !(semantic && startsWithQuestionWord)
+
+    const { results, loading } = useHybridSearch(query, { semantic, keyword })
 
     const suggestedFilter = useMemo(() => (activeFilter ? null : matchCategory(query)), [query, activeFilter])
 
+    // Grouped by category in typeOrder (unknown types last); rank order is
+    // preserved within each group
+    const groups = useMemo(() => {
+        const scoped = activeFilter ? results.filter((result) => result.type === activeFilter) : results
+        const byType = new Map<string, HybridSearchResult[]>()
+        for (const result of scoped) {
+            byType.set(result.type, [...(byType.get(result.type) || []), result])
+        }
+        const orderedTypes = [
+            ...typeOrder.filter((type) => byType.has(type)),
+            ...Array.from(byType.keys()).filter((type) => !typeOrder.includes(type)),
+        ]
+        return orderedTypes.map((type) => {
+            const items = byType.get(type) as HybridSearchResult[]
+            // Cap per-category rows when browsing all categories; a filter shows everything
+            return { type, results: activeFilter ? items : items.slice(0, 5) }
+        })
+    }, [results, activeFilter])
+
+    const hasResults = groups.length > 0
+
     // 4+ word queries read like questions, and zero-result queries have nowhere
     // else to go — both offer Ask AI as the top result
-    const queryWordCount = query.trim().split(/\s+/).filter(Boolean).length
-    const suggestAskAI = queryWordCount >= 4 || (queryWordCount > 0 && results.length === 0)
-
-    const groups = useMemo(
-        () =>
-            typeOrder
-                .map((type) => ({ type, results: results.filter((result) => result.type === type) }))
-                .filter((group) => group.results.length > 0),
-        [results]
-    )
+    const suggestAskAI = queryWordCount >= 4 || (queryWordCount > 0 && !loading && !hasResults)
 
     // Flat list in rendered order (suggestion rows first), for keyboard navigation
     const navItems = useMemo<NavItem[]>(
@@ -198,12 +172,21 @@ export default function SpotlightSearch({ open, onClose }: { open: boolean; onCl
         onClose()
     }
 
-    const openResult = (result: SearchResult) => {
+    const openResult = (result: HybridSearchResult) => {
+        posthog?.capture('web search result clicked', {
+            title: result.title,
+            slug: result.url.slice(1),
+            category: activeFilter || 'all',
+            query,
+            type: result.type,
+            searchEngine: semantic && !keyword ? 'semantic' : semantic ? 'hybrid' : 'algolia',
+            searchSources: result.sources,
+        })
         close()
-        navigate(result.url, { state: { newWindow: true } })
+        navigate(resultURL(result), { state: { newWindow: true } })
     }
 
-    const applyFilter = (type: ResultType, { keepQuery = false }: { keepQuery?: boolean } = {}) => {
+    const applyFilter = (type: string, { keepQuery = false }: { keepQuery?: boolean } = {}) => {
         setActiveFilter(type)
         if (!keepQuery) {
             setQuery('')
@@ -216,6 +199,12 @@ export default function SpotlightSearch({ open, onClose }: { open: boolean; onCl
         inputRef.current?.focus()
     }
 
+    const askAI = () => {
+        if (!query) return
+        openNewChat({ path: 'ask-max', initialQuestion: query })
+        close()
+    }
+
     const selectItem = (item: NavItem) => {
         if (item.kind === 'ask-ai') {
             askAI()
@@ -226,11 +215,11 @@ export default function SpotlightSearch({ open, onClose }: { open: boolean; onCl
         }
     }
 
-    const askAI = () => {
-        if (!query) return
-        openNewChat({ path: 'ask-max', initialQuestion: query })
-        close()
-    }
+    useEffect(() => {
+        if (open) {
+            setActiveFilter(initialFilter ?? null)
+        }
+    }, [open, initialFilter])
 
     useEffect(() => {
         setSelectedIndex(0)
@@ -314,15 +303,19 @@ export default function SpotlightSearch({ open, onClose }: { open: boolean; onCl
                         onMouseDown={(e) => e.stopPropagation()}
                     >
                         <div className="flex h-14 shrink-0 items-center gap-3 px-4">
-                            <IconSearch className="size-5 shrink-0 text-muted" />
+                            {loading && query ? (
+                                <Spinner className="!h-5 !w-5 shrink-0 !text-muted" />
+                            ) : (
+                                <IconSearch className="size-5 shrink-0 text-muted" />
+                            )}
                             {activeFilter && (
                                 <button
                                     onClick={removeFilter}
                                     title="Remove filter"
                                     className="group flex shrink-0 items-center gap-1 rounded-md border border-primary bg-accent/80 px-1.5 py-1 text-sm font-semibold text-secondary hover:text-primary [&_svg]:size-3.5"
                                 >
-                                    {typeConfig[activeFilter].icon}
-                                    {typeConfig[activeFilter].label}
+                                    {configForType(activeFilter).icon}
+                                    {configForType(activeFilter).label}
                                     <IconX className="opacity-50 group-hover:opacity-100" />
                                 </button>
                             )}
@@ -334,7 +327,7 @@ export default function SpotlightSearch({ open, onClose }: { open: boolean; onCl
                                 onKeyDown={handleInputKeyDown}
                                 placeholder={
                                     activeFilter
-                                        ? `Search ${typeConfig[activeFilter].label.toLowerCase()}...`
+                                        ? `Search ${configForType(activeFilter).label.toLowerCase()}...`
                                         : 'Search PostHog.com...'
                                 }
                                 autoFocus
@@ -347,69 +340,78 @@ export default function SpotlightSearch({ open, onClose }: { open: boolean; onCl
 
                         {expanded && (
                             <>
-                                {navItems.length > 0 ? (
-                                    <div className="max-h-[min(480px,50vh)] overflow-y-auto border-t border-primary p-2">
-                                        {suggestAskAI && (
-                                            <ul className="m-0 list-none p-0">
-                                                <li
-                                                    ref={(el) => (itemRefs.current[0] = el)}
-                                                    onMouseMove={() => setSelectedIndex(0)}
-                                                    onClick={askAI}
-                                                    className={`flex cursor-pointer items-center gap-3 rounded-lg px-2.5 py-2 ${
-                                                        selectedIndex === 0 ? 'bg-accent/80' : ''
-                                                    }`}
-                                                >
-                                                    <div className="flex size-8 shrink-0 items-center justify-center rounded-md border border-primary bg-primary/50 text-secondary [&_svg]:size-4">
-                                                        <IconSparkles />
-                                                    </div>
-                                                    <p className="m-0 min-w-0 truncate text-[15px] text-primary">
-                                                        Ask AI:{' '}
-                                                        <span className="font-semibold">&ldquo;{query}&rdquo;</span>
-                                                    </p>
-                                                    <span className="ml-auto hidden shrink-0 text-xs text-muted @md:block">
-                                                        <KeyboardShortcut text="↵" size="xs" /> to ask
+                                <div className="max-h-[min(480px,50vh)] overflow-y-auto border-t border-primary p-2">
+                                    {suggestAskAI && (
+                                        <ul className="m-0 list-none p-0">
+                                            <li
+                                                ref={(el) => (itemRefs.current[0] = el)}
+                                                onMouseMove={() => setSelectedIndex(0)}
+                                                onClick={askAI}
+                                                className={`flex cursor-pointer items-center gap-3 rounded-lg px-2.5 py-2 ${
+                                                    selectedIndex === 0
+                                                        ? 'bg-accent/60 ring-1 ring-inset ring-border/40'
+                                                        : ''
+                                                }`}
+                                            >
+                                                <div className="flex size-8 shrink-0 items-center justify-center rounded-md border border-primary bg-primary/50 text-secondary [&_svg]:size-4">
+                                                    <IconSparkles />
+                                                </div>
+                                                <p className="m-0 min-w-0 truncate text-[15px] text-primary">
+                                                    Ask AI: <span className="font-semibold">&ldquo;{query}&rdquo;</span>
+                                                </p>
+                                                <span className="ml-auto hidden shrink-0 text-xs text-muted @md:block">
+                                                    <KeyboardShortcut text="↵" size="xs" /> to ask
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    )}
+                                    {suggestedFilter && (
+                                        <ul className="m-0 list-none p-0">
+                                            <li
+                                                ref={(el) => (itemRefs.current[filterRowIndex] = el)}
+                                                onMouseMove={() => setSelectedIndex(filterRowIndex)}
+                                                onClick={() => applyFilter(suggestedFilter)}
+                                                className={`flex cursor-pointer items-center gap-3 rounded-lg px-2.5 py-2 ${
+                                                    selectedIndex === filterRowIndex
+                                                        ? 'bg-accent/60 ring-1 ring-inset ring-border/40'
+                                                        : ''
+                                                }`}
+                                            >
+                                                <div className="flex size-8 shrink-0 items-center justify-center rounded-md border border-primary bg-primary/50 text-secondary [&_svg]:size-4">
+                                                    <IconFilter />
+                                                </div>
+                                                <p className="m-0 flex items-center gap-1.5 text-[15px] text-primary">
+                                                    Filter by category:
+                                                    <span className="flex items-center gap-1 rounded-md border border-primary bg-accent/80 px-1.5 py-0.5 text-sm font-semibold text-secondary [&_svg]:size-3.5">
+                                                        {configForType(suggestedFilter).icon}
+                                                        {configForType(suggestedFilter).label}
                                                     </span>
-                                                </li>
-                                            </ul>
-                                        )}
-                                        {suggestedFilter && (
-                                            <ul className="m-0 list-none p-0">
-                                                <li
-                                                    ref={(el) => (itemRefs.current[filterRowIndex] = el)}
-                                                    onMouseMove={() => setSelectedIndex(filterRowIndex)}
-                                                    onClick={() => applyFilter(suggestedFilter)}
-                                                    className={`flex cursor-pointer items-center gap-3 rounded-lg px-2.5 py-2 ${
-                                                        selectedIndex === filterRowIndex ? 'bg-accent/80' : ''
-                                                    }`}
-                                                >
-                                                    <div className="flex size-8 shrink-0 items-center justify-center rounded-md border border-primary bg-primary/50 text-secondary [&_svg]:size-4">
-                                                        <IconFilter />
-                                                    </div>
-                                                    <p className="m-0 flex items-center gap-1.5 text-[15px] text-primary">
-                                                        Filter by category:
-                                                        <span className="flex items-center gap-1 rounded-md border border-primary bg-accent/80 px-1.5 py-0.5 text-sm font-semibold text-secondary [&_svg]:size-3.5">
-                                                            {typeConfig[suggestedFilter].icon}
-                                                            {typeConfig[suggestedFilter].label}
-                                                        </span>
-                                                    </p>
-                                                    <span className="ml-auto hidden shrink-0 text-xs text-muted @md:block">
-                                                        <KeyboardShortcut text="↵" size="xs" /> to filter
-                                                    </span>
-                                                </li>
-                                            </ul>
-                                        )}
-                                        {groups.map((group) => (
+                                                </p>
+                                                <span className="ml-auto hidden shrink-0 text-xs text-muted @md:block">
+                                                    <KeyboardShortcut text="↵" size="xs" /> to filter
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    )}
+                                    {loading && query ? (
+                                        <ul className="m-0 list-none p-0">
+                                            <SkeletonRow />
+                                            <SkeletonRow />
+                                            <SkeletonRow />
+                                        </ul>
+                                    ) : hasResults ? (
+                                        groups.map((group) => (
                                             <div key={group.type}>
                                                 {!activeFilter && (
                                                     <h5 className="m-0 px-2.5 pb-1 pt-2 text-xs font-semibold uppercase tracking-wide text-muted">
                                                         <button
                                                             onClick={() => applyFilter(group.type, { keepQuery: true })}
-                                                            title={`Only show ${typeConfig[
+                                                            title={`Only show ${configForType(
                                                                 group.type
-                                                            ].label.toLowerCase()}`}
+                                                            ).label.toLowerCase()}`}
                                                             className="uppercase tracking-wide hover:text-primary"
                                                         >
-                                                            {typeConfig[group.type].label}
+                                                            {configForType(group.type).label}
                                                         </button>
                                                     </h5>
                                                 )}
@@ -420,16 +422,18 @@ export default function SpotlightSearch({ open, onClose }: { open: boolean; onCl
                                                         const selected = index === selectedIndex
                                                         return (
                                                             <li
-                                                                key={result.url}
+                                                                key={resultURL(result)}
                                                                 ref={(el) => (itemRefs.current[index] = el)}
                                                                 onMouseMove={() => setSelectedIndex(index)}
                                                                 onClick={() => openResult(result)}
                                                                 className={`flex cursor-pointer items-center gap-3 rounded-lg px-2.5 py-2 ${
-                                                                    selected ? 'bg-accent/80' : ''
+                                                                    selected
+                                                                        ? 'bg-accent/60 ring-1 ring-inset ring-border/40'
+                                                                        : ''
                                                                 }`}
                                                             >
                                                                 <div className="flex size-8 shrink-0 items-center justify-center rounded-md border border-primary bg-primary/50 text-secondary [&_svg]:size-4">
-                                                                    {typeConfig[result.type].icon}
+                                                                    {configForType(result.type).icon}
                                                                 </div>
                                                                 <div className="min-w-0">
                                                                     <p className="m-0 truncate text-[15px] font-semibold text-primary">
@@ -447,19 +451,16 @@ export default function SpotlightSearch({ open, onClose }: { open: boolean; onCl
                                                     })}
                                                 </ul>
                                             </div>
-                                        ))}
-                                    </div>
-                                ) : (
-                                    <div className="border-t border-primary px-4 py-8 text-center">
-                                        <p className="m-0 text-[15px] text-secondary">
-                                            No results for &ldquo;{query}&rdquo;
-                                            {activeFilter ? ` in ${typeConfig[activeFilter].label.toLowerCase()}` : ''}
-                                        </p>
-                                        <p className="m-0 mt-1 text-sm text-muted">
-                                            Try different keywords, or ask AI instead
-                                        </p>
-                                    </div>
-                                )}
+                                        ))
+                                    ) : (
+                                        !query &&
+                                        activeFilter && (
+                                            <p className="m-0 px-2.5 py-4 text-center text-sm text-muted">
+                                                Type to search {configForType(activeFilter).label.toLowerCase()}...
+                                            </p>
+                                        )
+                                    )}
+                                </div>
 
                                 <div className="flex shrink-0 items-center justify-between border-t border-primary px-4 py-2 text-xs text-muted">
                                     <div className="flex items-center gap-3">

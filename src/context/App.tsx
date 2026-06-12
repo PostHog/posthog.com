@@ -1402,6 +1402,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const [posthogInstance, setPosthogInstance] = useState<string>()
     const [searchOpen, setSearchOpen] = useState<boolean>(false)
     const [spotlightOpen, setSpotlightOpen] = useState<boolean>(false)
+    const [spotlightFilter, setSpotlightFilter] = useState<string | undefined>(undefined)
     const { addToast } = useToast()
 
     const destinationNav = useDataPipelinesNav({ type: 'destination' })
@@ -1894,11 +1895,12 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         return newAppWindow
     }
 
-    const openSearch = (_initialFilter?: string) => {
+    const openSearch = (initialFilter?: string) => {
         if (websiteMode) {
             setSearchOpen((prev) => !prev)
             return
         }
+        setSpotlightFilter(initialFilter)
         setSpotlightOpen((prev) => !prev)
     }
 
@@ -2640,7 +2642,13 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             }}
         >
             {children}
-            {!websiteMode && <SpotlightSearch open={spotlightOpen} onClose={() => setSpotlightOpen(false)} />}
+            {!websiteMode && (
+                <SpotlightSearch
+                    open={spotlightOpen}
+                    onClose={() => setSpotlightOpen(false)}
+                    initialFilter={spotlightFilter}
+                />
+            )}
         </Context.Provider>
     )
 }

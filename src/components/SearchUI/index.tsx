@@ -225,59 +225,6 @@ const Search = ({
     )
 }
 
-export const WindowSearchUI = ({ initialFilter }: { initialFilter?: string }) => {
-    const { setWindowTitle, closeWindow } = useApp()
-    const { appWindow } = useWindow()
-    const semanticSearchEnabled = useSemanticSearchEnabled()
-    const ref = useRef<HTMLDivElement>(null)
-
-    const close = () => {
-        if (appWindow) {
-            closeWindow(appWindow)
-        }
-    }
-
-    useEffect(() => {
-        if (appWindow) {
-            setWindowTitle(appWindow, 'Search')
-        }
-    }, [])
-
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (ref.current && !ref.current.contains(event.target as Node) && appWindow) {
-                close()
-            }
-        }
-        document.addEventListener('mousedown', handleClickOutside)
-        return () => document.removeEventListener('mousedown', handleClickOutside)
-    }, [closeWindow])
-
-    const searchProps = {
-        initialFilter,
-        className:
-            'cursor-grab active:cursor-grabbing p-2 rounded bg-white/25 backdrop-blur shadow-2xl border border-primary',
-        onChange: close,
-        onEscape: close,
-    }
-
-    return semanticSearchEnabled ? (
-        <div ref={ref}>
-            <SemanticSearch {...searchProps} />
-        </div>
-    ) : (
-        <InstantSearch
-            searchClient={searchClient}
-            indexName={process.env.GATSBY_ALGOLIA_INDEX_NAME as string}
-            stalledSearchDelay={750}
-        >
-            <div ref={ref}>
-                <Search {...searchProps} />
-            </div>
-        </InstantSearch>
-    )
-}
-
 export const SearchUI = ({
     initialFilter = '',
     className = '',

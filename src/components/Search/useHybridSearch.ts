@@ -103,9 +103,14 @@ export const mergeWithReciprocalRankFusion = (
  * Inkeep proxy errors.
  */
 export const useHybridSearch = (
-    query: string
+    query: string,
+    // semantic: false skips Inkeep entirely (no proxy calls) and degrades to
+    // Algolia-only — for surfaces gated by the website-semantic-search flag.
+    // keyword: false skips Algolia for semantic-only search (e.g. queries that
+    // read as questions, where keyword matching adds noise).
+    { semantic = true, keyword = true }: { semantic?: boolean; keyword?: boolean } = {}
 ): { results: HybridSearchResult[]; loading: boolean; error: string | null } => {
-    const { results: semanticResults, loading: semanticLoading, error } = useInkeepSearch(query)
+    const { results: semanticResults, loading: semanticLoading, error } = useInkeepSearch(semantic ? query : '')
     const [algoliaResults, setAlgoliaResults] = useState<SemanticSearchResult[]>([])
     const [algoliaLoading, setAlgoliaLoading] = useState(false)
     const requestIdRef = useRef(0)
@@ -115,7 +120,7 @@ export const useHybridSearch = (
         const index = getAlgoliaIndex()
         const requestId = ++requestIdRef.current
 
-        if (!trimmed || !index) {
+        if (!trimmed || !index || !keyword) {
             setAlgoliaResults([])
             setAlgoliaLoading(false)
             return
@@ -141,7 +146,7 @@ export const useHybridSearch = (
         }, ALGOLIA_DEBOUNCE_MS)
 
         return () => clearTimeout(timeout)
-    }, [query])
+    }, [query, keyword])
 
     const loading = algoliaLoading || semanticLoading
     const merged = useMemo(
