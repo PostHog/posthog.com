@@ -122,7 +122,7 @@ function SubprocessorsPage(): JSX.Element {
 
             <div className="max-w-6xl mx-auto px-4 py-8 mb-4 prose dark:prose-invert @container">
                 <h1 className="mb-2">Subprocessors</h1>
-                <p className="text-sm opacity-70 m-0">Last updated: April __, 2026</p>
+                <p className="text-sm opacity-70 m-0">Last updated: June 12, 2026</p>
                 <p>
                     PostHog, Inc. together with any of its affiliates and/or subsidiaries (“<strong>PostHog</strong>”, “
                     <strong>we</strong>” or “<strong>us</strong>”) engages certain third-party vendors listed below as
