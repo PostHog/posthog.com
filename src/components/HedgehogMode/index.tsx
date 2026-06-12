@@ -9,12 +9,24 @@ const getHedgehogModeEnabled = () => {
     return typeof window !== 'undefined' && localStorage.getItem('hedgehog-mode-enabled') === 'true'
 }
 
+const HEDGEHOG_MODE_EVENT = 'hedgehog-mode-change'
+
 export const useHedgehogMode = (): [boolean, (enabled: boolean) => void] => {
     const [hedgehogModeEnabled, setHedgehogModeEnabled] = useState(getHedgehogModeEnabled())
+
+    // Each call site gets its own state instance, so toggles broadcast a window
+    // event to keep them in sync (e.g. the SpotlightSearch action toggling the
+    // embed rendered by Desktop)
+    useEffect(() => {
+        const sync = () => setHedgehogModeEnabled(getHedgehogModeEnabled())
+        window.addEventListener(HEDGEHOG_MODE_EVENT, sync)
+        return () => window.removeEventListener(HEDGEHOG_MODE_EVENT, sync)
+    }, [])
 
     const _setHedgehogModeEnabled = (enabled: boolean) => {
         localStorage.setItem('hedgehog-mode-enabled', enabled.toString())
         setHedgehogModeEnabled(enabled)
+        window.dispatchEvent(new Event(HEDGEHOG_MODE_EVENT))
     }
 
     return [hedgehogModeEnabled, _setHedgehogModeEnabled]

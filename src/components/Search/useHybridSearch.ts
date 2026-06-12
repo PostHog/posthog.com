@@ -5,11 +5,28 @@ import { typeForPath } from './typeForPath'
 
 export type HybridSearchResult = SemanticSearchResult & {
     sources: ('algolia' | 'inkeep')[]
+    // RRF relevance: Σ 1/(60 + rank) over the engines that returned the result.
+    // ~0.033 when ranked first by both engines, ~0.0125 for a single-engine tail hit.
+    score: number
 }
 
 const ALGOLIA_DEBOUNCE_MS = 150
 const ALGOLIA_HITS_PER_PAGE = 20
+const ALGOLIA_CACHE_MAX_ENTRIES = 50
 const RRF_K = 60
+
+// Session-lived cache of normalized hits, keyed by trimmed query — repeat
+// queries (parked-query restore, backspaced prefixes) skip the network and the
+// debounce delay. The index only changes on deploy, so no TTL needed.
+const algoliaCache = new Map<string, SemanticSearchResult[]>()
+
+const cacheAlgoliaResults = (query: string, results: SemanticSearchResult[]): void => {
+    if (algoliaCache.size >= ALGOLIA_CACHE_MAX_ENTRIES) {
+        const oldest = algoliaCache.keys().next().value
+        if (oldest !== undefined) algoliaCache.delete(oldest)
+    }
+    algoliaCache.set(query, results)
+}
 
 let algoliaIndex: SearchIndex | null | undefined
 
@@ -69,7 +86,7 @@ export const mergeWithReciprocalRankFusion = (
 
     algolia.forEach((result, rank) => {
         entries.set(pathKey(result.url), {
-            result: { ...result, sources: ['algolia'] },
+            result: { ...result, sources: ['algolia'], score: 0 },
             score: 1 / (RRF_K + rank),
         })
     })
@@ -85,11 +102,13 @@ export const mergeWithReciprocalRankFusion = (
             // is just the top of the page, so prefer the contextual one
             if (result.excerpt) existing.result.excerpt = result.excerpt
         } else {
-            entries.set(key, { result: { ...result, sources: ['inkeep'] }, score })
+            entries.set(key, { result: { ...result, sources: ['inkeep'], score: 0 }, score })
         }
     })
 
-    return [...entries.values()].sort((a, b) => b.score - a.score).map((entry) => entry.result)
+    return [...entries.values()]
+        .sort((a, b) => b.score - a.score)
+        .map((entry) => ({ ...entry.result, score: entry.score }))
 }
 
 /**
@@ -115,13 +134,22 @@ export const useHybridSearch = (
     const [algoliaLoading, setAlgoliaLoading] = useState(false)
     const requestIdRef = useRef(0)
 
+    // Depend on the trimmed query so whitespace-only edits don't refire the effect
+    const trimmed = query.trim()
+
     useEffect(() => {
-        const trimmed = query.trim()
         const index = getAlgoliaIndex()
         const requestId = ++requestIdRef.current
 
         if (!trimmed || !index || !keyword) {
             setAlgoliaResults([])
+            setAlgoliaLoading(false)
+            return
+        }
+
+        const cached = algoliaCache.get(trimmed)
+        if (cached) {
+            setAlgoliaResults(cached)
             setAlgoliaLoading(false)
             return
         }
@@ -134,7 +162,9 @@ export const useHybridSearch = (
                     attributesToRetrieve: ['title', 'excerpt', 'slug', 'fields.slug'],
                 })
                 if (requestIdRef.current !== requestId) return
-                setAlgoliaResults(normalizeAlgoliaHits(hits))
+                const normalized = normalizeAlgoliaHits(hits)
+                cacheAlgoliaResults(trimmed, normalized)
+                setAlgoliaResults(normalized)
                 setAlgoliaLoading(false)
             } catch {
                 // Algolia being unreachable shouldn't break search — semantic
@@ -146,7 +176,7 @@ export const useHybridSearch = (
         }, ALGOLIA_DEBOUNCE_MS)
 
         return () => clearTimeout(timeout)
-    }, [query, keyword])
+    }, [trimmed, keyword])
 
     const loading = algoliaLoading || semanticLoading
     const merged = useMemo(

@@ -9,7 +9,21 @@ export type SemanticSearchResult = {
 }
 
 const DEBOUNCE_MS = 400
-const MIN_QUERY_LENGTH = 3
+const CACHE_MAX_ENTRIES = 50
+
+// Session-lived response cache, keyed by trimmed query. Repeat queries —
+// restoring a parked query after the Spotlight filter picker, Esc-then-retype,
+// backspacing to an earlier prefix — skip the proxy (and its ~1.5–2s RAG
+// round-trip) entirely. Content only changes on deploy, so no TTL needed.
+const responseCache = new Map<string, SemanticSearchResult[]>()
+
+const cacheResponse = (query: string, results: SemanticSearchResult[]): void => {
+    if (responseCache.size >= CACHE_MAX_ENTRIES) {
+        const oldest = responseCache.keys().next().value
+        if (oldest !== undefined) responseCache.delete(oldest)
+    }
+    responseCache.set(query, results)
+}
 
 /**
  * Debounced semantic search against the Inkeep RAG proxy (src/api/search.ts).
@@ -25,12 +39,22 @@ export const useInkeepSearch = (
     const [error, setError] = useState<string | null>(null)
     const abortRef = useRef<AbortController | null>(null)
 
+    // Depend on the trimmed query so whitespace-only edits don't refire the effect
+    const trimmed = query.trim()
+
     useEffect(() => {
         abortRef.current?.abort()
 
-        const trimmed = query.trim()
-        if (trimmed.length < MIN_QUERY_LENGTH) {
+        if (!trimmed) {
             setResults([])
+            setLoading(false)
+            setError(null)
+            return
+        }
+
+        const cached = responseCache.get(trimmed)
+        if (cached) {
+            setResults(cached)
             setLoading(false)
             setError(null)
             return
@@ -50,7 +74,9 @@ export const useInkeepSearch = (
                 })
                 if (!res.ok) throw new Error(`Search failed (${res.status})`)
                 const data = await res.json()
-                setResults(Array.isArray(data?.results) ? data.results : [])
+                const fetched = Array.isArray(data?.results) ? data.results : []
+                cacheResponse(trimmed, fetched)
+                setResults(fetched)
                 setError(null)
                 setLoading(false)
             } catch (err) {
@@ -65,7 +91,7 @@ export const useInkeepSearch = (
             clearTimeout(timeout)
             controller.abort()
         }
-    }, [query])
+    }, [trimmed])
 
     return { results, loading, error }
 }
