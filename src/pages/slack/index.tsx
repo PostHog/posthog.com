@@ -543,7 +543,7 @@ const faqItems = [
                 Set a default repo per channel. Or set regex routing rules so the bot picks the right repo from the
                 channel name or the task description. When the bot isn't sure, it opens a picker in-thread. See the{' '}
                 <Link
-                    to="/docs/slack-app/commands"
+                    to="/docs/slack/commands"
                     state={{ newWindow: true }}
                     className="text-red dark:text-yellow font-semibold hover:underline"
                 >
@@ -691,7 +691,7 @@ export default function SlackAppPage(): JSX.Element {
                 <div className="max-w-2xl mx-auto">
                     <div className="text-center mb-4">
                         <h1 className="text-3xl @md/reader-content-container:text-4xl font-bold m-0 mb-2">
-                            Don't ask me, <Highlight>@PostHog</Highlight>
+                            Don't @ <em>me,</em> <Highlight>@PostHog</Highlight>
                         </h1>
                         <p className="text-secondary text-base @md/reader-content-container:text-lg max-w-lg mx-auto m-0">
                             PostHog now lives in Slack. Ask about your product data, debug issues, and generate PRs

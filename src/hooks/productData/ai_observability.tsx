@@ -103,10 +103,10 @@ export const aiObservability = {
     //   classes: 'absolute bottom-0 right-4 max-w-lg',
     // },
     customers: {
-        elevenlabs: {
-            headline: 'uses AI Observability with session replays (and everything else)',
+        kilocode: {
+            headline: 'uses PostHog as the connective tissue across analytics, experiments, and recordings',
             description:
-                'PostHog is amazing. It reins in the chaos to have everything in one place. Otherwise it’s quite overwhelming to try and understand what’s working and what’s not.',
+                "PostHog is really the connective tissue behind a lot of what we're doing. So many things depend on it, and it adapts as fast as the product does.",
         },
         lovable: {
             headline: 'compared us to every other observability tool, just to be sure',

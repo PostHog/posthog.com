@@ -15,15 +15,15 @@ tags:
   - AI
 ---
 
-Today, we're releasing the [PostHog Slack app](/slack-app/) into beta.
+Today, we're releasing the [PostHog Slack app](/slack) into beta.
 
 We built it for those times when a colleague flags an annoying UI quirk, or a customer mentions a bug. The issues that normally end up on a backlog, untouched and ignored.
 
 With the PostHog Slack app, you **@PostHog** to "fix this" or "build that". It spins up a sandbox, makes a plan, edits files, runs checks, opens a draft PR, and answers review comments in the thread.
 
-The bot uses your product data as context and follows your repo's rules. It even reacts with [emojis](/docs/slack-app#emoji-cues) while it works, which makes it feel less like a coding tool and more like chatting with a clever teammate.
+The bot uses your product data as context and follows your repo's rules. It even reacts with [emojis](/docs/slack#emoji-cues) while it works, which makes it feel less like a coding tool and more like chatting with a clever teammate.
 
-Try it yourself → [setup docs](/docs/slack-app/setup) 
+Try it yourself → [setup docs](/docs/slack/setup) 
 
 ## @PostHog in the #papercuts channel
 
@@ -111,7 +111,7 @@ Then there's [Richard](/community/profiles/40548) (product engineer). He broke h
 
 Over the past two weeks, we've merged 116 <Link to="https://github.com/PostHog/posthog/graphs/contributors" external>contributions</Link> from @PostHog into production across AI Observability, Session Replay, Error Tracking, Feature Flags, Workflows, billing, MCP, and the Data Warehouse. No corner of the codebase is off-limits (except our secrets).
 
-The work it's taken off our hands sorts into roughly these [categories](/docs/slack-app/commands) – and yours probably looks similar:
+The work it's taken off our hands sorts into roughly these [categories](/docs/slack/commands) – and yours probably looks similar:
 
 - **Content and docs** – Navigation changes, removing stale content, adding new pages, copy updates, fixing 404s. Admin chores [fit for a robot](/blog/machine-copy-paste-mcp-intro).
 - **Code maintenance** – Removing released feature flag guards, updating naming conventions, bumping versions, resolving merge conflicts, dead click tracking.
@@ -162,7 +162,7 @@ The PostHog Slack app is in beta – we skipped alpha by [dogfooding](/product-e
 It's free to install, and free to uninstall when you realize this means you can ship production code from your phone (which, frankly, might be too much power for anyone).
 
 <p>
-	<CallToAction to="/docs/slack-app/setup">
+	<CallToAction to="/docs/slack/setup">
 		Connect Slack
 	</CallToAction>
 </p>

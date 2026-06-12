@@ -97,17 +97,31 @@ Currently, resource access controls are available for:
 - Customer Analytics
 - Dashboards
 - Endpoints
+- Error tracking
 - Experiments
 - Feature flags
 - Insights
+- LLM analytics
+- Logs
 - Managed data warehouse sources
 - Notebooks
 - Session recordings
 - Surveys
+- Traces
 - Web analytics
 - (more resource types coming soon – looking for others? Let us know!)
 
-Note: We do not yet support limiting access to querying data, viewing replays, or accessing person / group profiles. Support for these features is planned for the near future.
+<CalloutBox icon="IconWarning" title="Access controls don't yet apply to underlying data" type="caution">
+
+Resource access controls limit access to resources in the PostHog UI and API, but they do **not** yet limit access to the underlying data. We don't currently support restricting:
+
+- **Querying data** – any project member can query events, data warehouse tables, and other data via SQL/HogQL, including through the [PostHog AI assistant](/docs/posthog-ai) and the API. For example, a user with "No access" to data warehouse sources can't open the SQL editor, but can still ask PostHog AI to query those tables on their behalf.
+- **Viewing session replays**
+- **Accessing person and group profiles**
+
+Data-level access control support is planned and actively being worked on.
+
+</CalloutBox>
 
 Resource access controls have four possible access levels:
 

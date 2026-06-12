@@ -172,6 +172,14 @@ You'll capture 20% of every session, and any session that has an exception event
 
 You'll capture 20% of any session on the checkout page that has an exception event.
 
+<CalloutBox icon="IconWarning" title="100% sampling with ANY matching records every session" type="caution">
+
+If you use "any" matching with 100% sampling and other conditions (URL triggers, event triggers, or feature flags), the 100% sampling causes every session to be recorded. Your other conditions become ineffective because the sampling condition alone matches every session.
+
+To fix this, either lower your sample rate or switch to "all" matching.
+
+</CalloutBox>
+
 ## Trigger groups
 
 Trigger groups are a more flexible way to configure recording triggers. Each trigger group can have its own combination of URL triggers, event triggers, feature flags, sample rate, minimum duration, and match type (ANY/ALL).
@@ -187,6 +195,8 @@ For example, you could create:
 - A group that records any session where an exception event occurs
 
 To create a trigger group, go to the [replay ingestion settings page](https://app.posthog.com/replay/settings#selectedSetting=replay-triggers) and click **Add** in the **Trigger groups** section.
+
+If you delete your last trigger group, PostHog automatically replaces it with a default "Record all sessions" group at 100% sampling with no conditions. This keeps your project on trigger groups rather than reverting to legacy recording settings.
 
 ### Migrating from legacy trigger settings
 

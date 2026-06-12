@@ -8,12 +8,16 @@ import Editor from 'components/Editor'
 import WizardCommand from 'components/WizardCommand'
 import Link from 'components/Link'
 import CloudinaryImage from 'components/CloudinaryImage'
-import { CTAs } from 'components/Home/Test'
+import { CTAs, GetStarted } from 'components/Home/Test'
+import HeroCarousel from 'components/Home/HeroCarousel'
+import { productUsageTabs } from 'components/Home/HeroCarousel/tabs'
 import Tooltip from 'components/RadixUI/Tooltip'
 import WistiaVideo, { WistiaVideoRef } from 'components/WistiaVideo'
 import TVScreen from 'components/Home/Test/TV'
 import { Accordion } from 'components/RadixUI/Accordion'
 import OSButton from 'components/OSButton'
+import { RenderInClient } from 'components/RenderInClient'
+import usePostHog from 'hooks/usePostHog'
 
 const statusDotColor: Record<string, string> = {
     beta: 'bg-yellow',
@@ -284,6 +288,7 @@ const ProductRow = ({ product }: { product: any }) => {
 }
 
 export default function ProductsTest(): JSX.Element {
+    const posthog = usePostHog()
     const allProducts = useProduct() as any[]
 
     const productsByHandle = useMemo(() => {
@@ -317,9 +322,9 @@ export default function ProductsTest(): JSX.Element {
                             product usage data – and build and ship new features – lives in one place.
                         </p>
 
-                        <CTAs />
+                        <GetStarted />
 
-                        {/* 
+                        {/*
                         <div className="flex flex-wrap items-center gap-3 not-prose">
                             <Link
                                 to="/download"
@@ -352,6 +357,19 @@ export default function ProductsTest(): JSX.Element {
                         </div>
                          */}
                     </header>
+
+                    <RenderInClient
+                        placeholder={<></>}
+                        render={() =>
+                            posthog?.getFeatureFlag?.('homepage-slack-test', { fresh: true }) === 'test' ? (
+                                <HeroCarousel tabs={productUsageTabs} />
+                            ) : (
+                                <></>
+                            )
+                        }
+                    />
+
+                    <hr />
 
                     {/* Sections */}
                     {sections.map((section) => (
