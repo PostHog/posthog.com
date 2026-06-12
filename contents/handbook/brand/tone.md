@@ -70,6 +70,9 @@ For how the voice shifts across surfaces (website, product UI, docs, blog, socia
 | "See exactly what your users are doing"            | "Unlock actionable user insights"                  |
 | "Built for engineers who ship fast"                | "The all-in-one platform for modern product teams" |
 | "Ship, measure and iterate – all on one platform." | "Streamline your product development lifecycle"    |
+| "Make your product self-driving"                   | "PostHog is self-driving software"                 |
+
+On that last one: PostHog makes _your_ product self-driving. Keep the customer's product as the subject — they get a product that improves itself; PostHog is how. See the [content brand guidelines](/handbook/content/brand-message) for the full nuance.
 
 ### Body copy
 
