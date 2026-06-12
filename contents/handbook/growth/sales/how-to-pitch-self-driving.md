@@ -29,6 +29,15 @@ When the customer starts planning their instrumentation rollout unprompted, the 
 - **Land the flywheel.** Make sure they leave understanding that more data means better signals means better PRs. This is what turns it from a feature into a reason to instrument everything.
 - **Let them sequence the rollout.** The strongest outcome is the customer proposing their own instrumentation audit. When they get there, help them plan it, since that's the start of the flywheel.
 
+## How to frame it
+
+These are framings that help the pitch land. Reach for them when a customer needs help picturing what self-driving actually means for their team.
+
+- **Autonomy from instruction, not from the engineer.** Self-driving means the bots don't need to be told every step, not that they ship without you. Nothing gets Yolo-merged without your approval, so the engineer stays in control.
+- **Robots do maintenance, humans do creative work.** Bots are great at fixing bugs and making optimizations, while people are best at building new features. Self-driving is compelling because it puts maintenance mode on autopilot and frees you up to be in build mode.
+- **It belongs in a shared workspace.** The Slack app is a hit because it brings self-driving behavior into a space the whole team shares. Marketers can prompt work, engineers can help steer it, and everyone gets to feel like an F1 driver.
+- **It's more than cruise control.** Agentic workflows from other companies are basically cruise control, keeping you in the lane you already picked. Self-driving takes you down a road you didn't know was there.
+
 ## Iterating on this page
 
 We're actively refining this pitch. If you run it and learn something, whether what resonated, what fell flat, or a better way to frame the flywheel, add it here so the whole team gets sharper.
