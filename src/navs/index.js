@@ -1393,6 +1393,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/product-led-lead-qualification',
                     },
                     {
+                        name: 'How to pitch self-driving',
+                        url: '/handbook/growth/sales/how-to-pitch-self-driving',
+                    },
+                    {
                         name: 'Expansion, cross-sell & retention',
                         url: '/handbook/growth/sales/expansion-and-retention',
                     },
