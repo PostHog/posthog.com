@@ -42,4 +42,4 @@ Every _product_ page should have a custom OpenGraph (OG) image, so that when som
 - **Design guidance:** because these render on small screens, keep designs and copy simple – bright colors and chunky text work best.
 - **Check your work:** paste the product page URL into [opengraph.xyz](https://www.opengraph.xyz/) to preview how the OG image renders across platforms.
 
-If you can sort the OG image yourself for a product as you pick up assignments, that's one less thing to coordinate. Tracking for this work lives in [this GitHub issue](https://github.com/PostHog/posthog.com/issues/16998).
+If you can sort the OG image yourself for a product as you pick up assignments, that's one less thing to coordinate.
