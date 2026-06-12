@@ -19,6 +19,10 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import Link from 'components/Link'
 import { IconDiscord } from 'components/OSIcons/Icons'
 import { WaitlistForm } from 'components/WaitlistForm'
+import { DownloadContent } from 'components/Code/DownloadContent'
+import { usePrefersReducedMotion } from 'components/Code/usePrefersReducedMotion'
+import useProduct from 'hooks/useProduct'
+import { useApp } from '../context/App'
 
 // ─────────────────────────────────────────────
 // Section label ("The old way", "The PostHog way")
@@ -603,9 +607,35 @@ function PostHogCodeLogomark({ className }) {
 // ─────────────────────────────────────────────
 
 function HeroSection() {
-    const [showForm, setShowForm] = useState(false)
+    const [showDownload, setShowDownload] = useState(
+        () => typeof window !== 'undefined' && window.location.hash === '#download'
+    )
+    const [contentVisible, setContentVisible] = useState(true)
+    const prefersReducedMotion = usePrefersReducedMotion()
+    const allProducts = useProduct() as any[]
+    const product = Array.isArray(allProducts) ? allProducts.find((p: any) => p.handle === 'posthog_code') : undefined
+    const { siteSettings } = useApp()
+    const isDark = siteSettings.theme === 'dark'
+    const screenshot = product?.screenshots?.home
+
+    const swapToDownload = () => {
+        if (typeof window !== 'undefined') {
+            window.history.replaceState(null, '', '#download')
+        }
+        if (showDownload) return
+        if (prefersReducedMotion) {
+            setShowDownload(true)
+            return
+        }
+        setContentVisible(false)
+        setTimeout(() => {
+            setShowDownload(true)
+            setContentVisible(true)
+        }, 300)
+    }
+
     return (
-        <section className="my-6 @4xl/editor:mb-16 tracking-[-0.0125em] max-w-5xl mx-auto">
+        <section className="my-6 @4xl/editor:mb-16 tracking-[-0.0125em] max-w-5xl mx-auto w-full">
             <div className="flex items-center justify-between mb-8">
                 <div>
                     <PostHogCodeLogo />
@@ -623,77 +653,90 @@ function HeroSection() {
                 </div>
             </div>
 
-            <h1 className="text-xl @xl:text-3xl font-bold leading-tight mb-4 @xl:mb-8 !mt-0">
-                The era of{' '}
-                <RoughAnnotation
-                    type="highlight"
-                    color="rgba(48, 164, 108, 0.2)"
-                    strokeWidth={1}
-                    padding={2}
-                    delay={300}
-                >
-                    self-driving development
-                </RoughAnnotation>
-                {' is '}
-                <RoughAnnotation type="underline" color="#F54E00" strokeWidth={2} delay={600}>
-                    <span className="font-bold">here</span>
-                </RoughAnnotation>
-            </h1>
+            <div
+                style={{
+                    opacity: contentVisible ? 1 : 0,
+                    transition: prefersReducedMotion ? undefined : 'opacity 0.3s ease',
+                }}
+            >
+                {showDownload ? (
+                    <DownloadContent className="w-full mx-auto py-8 text-center" />
+                ) : (
+                    <>
+                        <h1 className="text-xl @xl:text-3xl font-bold leading-tight mb-4 @xl:mb-8 !mt-0">
+                            The era of{' '}
+                            <RoughAnnotation
+                                type="highlight"
+                                color="rgba(48, 164, 108, 0.2)"
+                                strokeWidth={1}
+                                padding={2}
+                                delay={300}
+                            >
+                                self-driving development
+                            </RoughAnnotation>
+                            {' is '}
+                            <RoughAnnotation type="underline" color="#F54E00" strokeWidth={2} delay={600}>
+                                <span className="font-bold">here</span>
+                            </RoughAnnotation>
+                        </h1>
 
-            <div className="@4xl/editor:gap-8 flex flex-col @4xl/editor:flex-row items-start">
-                <div className="@4xl/flex-[0_0_280px]">
-                    <p>
-                        PostHog Code is the only AI devtool that understands your <strong>product,</strong> not just
-                        your <strong>codebase</strong>.
-                    </p>
-                    <ul className="list-none p-0 mb-4 text-[15px] space-y-0.5">
-                        <li className="relative pl-5">
-                            <IconCheck className="size-4 text-green absolute left-0 top-1" />
-                            Identifies product usage patterns
-                        </li>
-                        <li className="relative pl-5">
-                            <IconCheck className="size-4 text-green absolute left-0 top-1" />
-                            Triages bugs and errors
-                        </li>
-                        <li className="relative pl-5">
-                            <IconCheck className="size-4 text-green absolute left-0 top-1" />
-                            Creates pull requests automatically
-                        </li>
-                    </ul>
+                        <div className="@4xl/editor:gap-8 flex flex-col @4xl/editor:flex-row items-start">
+                            <div className="@4xl/flex-[0_0_280px]">
+                                <p>
+                                    PostHog Code is the only AI devtool that understands your <strong>product,</strong>{' '}
+                                    not just your <strong>codebase</strong>.
+                                </p>
+                                <ul className="list-none p-0 mb-4 text-[15px] space-y-0.5">
+                                    <li className="relative pl-5">
+                                        <IconCheck className="size-4 text-green absolute left-0 top-1" />
+                                        Identifies product usage patterns
+                                    </li>
+                                    <li className="relative pl-5">
+                                        <IconCheck className="size-4 text-green absolute left-0 top-1" />
+                                        Triages bugs and errors
+                                    </li>
+                                    <li className="relative pl-5">
+                                        <IconCheck className="size-4 text-green absolute left-0 top-1" />
+                                        Creates pull requests automatically
+                                    </li>
+                                </ul>
 
-                    <div className="@container max-w-sm">
-                        {showForm ? (
-                            <WaitlistForm autoFocus />
-                        ) : (
-                            <>
-                                <div className="flex flex-wrap items-center gap-2">
-                                    <OSButton variant="primary" size="lg" onClick={() => setShowForm(true)}>
-                                        Join the waitlist
-                                    </OSButton>
-                                    <OSButton variant="secondary" size="lg" asLink to="/code/download">
-                                        Have an invite code?
-                                    </OSButton>
+                                <div className="@container max-w-sm">
+                                    <WaitlistForm />
+                                    <p className="text-sm text-secondary mt-4">
+                                        Have an invite code?{' '}
+                                        <Link
+                                            to="/code#download"
+                                            className="font-bold underline"
+                                            onClick={(e) => {
+                                                e.preventDefault()
+                                                swapToDownload()
+                                            }}
+                                        >
+                                            Get started
+                                        </Link>
+                                    </p>
                                 </div>
-                                <p className="text-sm text-secondary mt-4">Test drives begin Spring 2026</p>
-                            </>
-                        )}
-                    </div>
-                </div>
+                            </div>
 
-                <div className="@4xl/flex-1">
-                    <ZoomImage>
-                        <img
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/signals_light_4b3440dc2b.png"
-                            alt="PostHog Code screenshot"
-                            className="w-full rounded shadow dark:hidden"
-                        />
-                        <img
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/signals_dark_b29e5ed8f9.png"
-                            alt="PostHog Code screenshot"
-                            className="w-full rounded hidden dark:block"
-                        />
-                    </ZoomImage>
-                </div>
+                            <div className="@4xl/flex-1">
+                                {screenshot && (
+                                    <ZoomImage>
+                                        <img
+                                            src={
+                                                (isDark && screenshot.srcDark
+                                                    ? screenshot.srcDark
+                                                    : screenshot.src) as string
+                                            }
+                                            alt={screenshot.alt}
+                                            className={screenshot.imgClasses}
+                                        />
+                                    </ZoomImage>
+                                )}
+                            </div>
+                        </div>
+                    </>
+                )}
             </div>
         </section>
     )
@@ -1242,7 +1285,7 @@ const SlackAppCallout = () => {
                         <p className="mb-4">
                             Answer data questions, fix bugs, and kick off PRs by mentioning <code>@PostHog</code>.
                         </p>
-                        <OSButton asLink to="/slack-app" state={{ newWindow: true }} variant="primary" size="md">
+                        <OSButton asLink to="/slack" state={{ newWindow: true }} variant="primary" size="md">
                             About the Slack app
                         </OSButton>
                     </div>
@@ -1581,7 +1624,7 @@ export default function CodePage() {
                 title="PostHog Code"
                 description="PostHog Code uses signals from production data to diagnose issues and generate pull requests – before you even know there's a problem."
             />
-            <Editor slug="/code" maxWidth="100%" hasPadding={false}>
+            <Editor slug="/code" maxWidth="100%" hasPadding={false} disableFormatting>
                 <div className="@container not-prose font-rounded">
                     <header className="relative mb-12">
                         <CloudinaryImage
