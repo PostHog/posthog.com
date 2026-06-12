@@ -13,3 +13,24 @@ private val client = OkHttpClient.Builder()
 ```
 
 > **Note:** Only metric-like data like speed, size, and response code are captured. No data is captured from the request or response body.
+
+## Add tracing headers
+
+The same interceptor can also add PostHog tracing headers to specific hosts. Configure exact hostnames with `tracingHeaders`, then add `PostHogOkHttpInterceptor` to the `OkHttpClient` used for those requests.
+
+```android_kotlin
+import com.posthog.PostHogOkHttpInterceptor
+import com.posthog.android.PostHogAndroidConfig
+import okhttp3.OkHttpClient
+
+val config = PostHogAndroidConfig(apiKey = "<ph_project_token>").apply {
+    // Exact hostnames only: no protocol, port, path, or wildcard.
+    tracingHeaders = listOf("api.example.com")
+}
+
+private val client = OkHttpClient.Builder()
+    .addInterceptor(PostHogOkHttpInterceptor(captureNetworkTelemetry = true))
+    .build()
+```
+
+When the request hostname matches, the interceptor adds `X-POSTHOG-DISTINCT-ID` and `X-POSTHOG-SESSION-ID` when those values are available.
