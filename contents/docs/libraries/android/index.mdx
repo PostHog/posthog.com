@@ -290,29 +290,11 @@ To set up [session replay](/docs/session-replay/mobile) in your project, all you
 
 ## Surveys
 
-[Surveys](/docs/surveys) launched with [popover presentation](/docs/surveys/creating-surveys#presentation) are automatically shown to users matching the [display conditions](/docs/surveys/creating-surveys#display-conditions) you set up.
+> 🚧 **Note:** Mobile surveys for Android is currently in **beta**. We'd love to hear your feedback on betas via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Asurveys%3Alow) or one of our other [support options](/docs/support-options).
+>
+> The `posthog-android-surveys-compose` module is pre-1.0 (`0.x`), so its public API may change between minor versions.
 
-To render them, add the optional `posthog-android-surveys-compose` module alongside the core SDK. It provides a ready-made [Jetpack Compose](https://developer.android.com/jetpack/compose) UI, kept in a separate module so apps that don't use surveys don't pay the extra APK size cost.
-
-```kotlin file=app/build.gradle.kts
-dependencies {
-    implementation("com.posthog:posthog-android:3.+")
-    implementation("com.posthog:posthog-android-surveys-compose:0.+")
-}
-```
-
-Once added, enable surveys in your config and the SDK renders matching surveys automatically — no extra wiring required:
-
-```kotlin
-val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST).apply {
-    surveys = true
-}
-PostHogAndroid.setup(applicationContext, config)
-```
-
-> **Note:** The `posthog-android-surveys-compose` module is currently pre-1.0 (`0.x`), so its public API may change between minor versions.
-
-To build your own survey UI instead, skip the module and set a custom implementation of `PostHogSurveysDelegate` on `config.surveysConfig.surveysDelegate`.
+To set up surveys, follow the [additional installation instructions for Android](/docs/surveys/installation/android). Surveys launched with [popover presentation](/docs/surveys/creating-surveys#presentation) are automatically shown to users matching the [display conditions](/docs/surveys/creating-surveys#display-conditions) you set up.
 
 ## Offline behavior
 

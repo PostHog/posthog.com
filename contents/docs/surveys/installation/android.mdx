@@ -12,17 +12,18 @@ See the docs runbook for more info: https://posthog.com/handbook/docs-and-wizard
 
 import { AndroidSurveysInstallationWrapper } from "./_snippets/surveys-installation-wrapper.tsx";
 
+> 🚧 **Note:** Mobile surveys for Android is currently in **beta**. We'd love to hear your feedback on betas via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Asurveys%3Alow) or one of our other [support options](/docs/support-options).
+>
+> The `posthog-android-surveys-compose` module is pre-1.0 (`0.x`), so its public API may change between minor versions.
+
 <AndroidSurveysInstallationWrapper />
 
 ## Supported features
 
 Not all survey features are available on every SDK. See the [SDK feature support matrix](/docs/surveys/sdk-feature-support) for a full comparison.
 
-To build your own survey UI instead of the default Compose module, set a custom implementation of `PostHogSurveysDelegate` on `config.surveysConfig.surveysDelegate`. See the [Android SDK docs](/docs/libraries/android#surveys) for more.
-
 ## Limitations
 
-- The `posthog-android-surveys-compose` module is currently pre-1.0 (`0.x`), so its public API may change between minor versions.
 - HTML descriptions for questions and the thank-you screen render as plain text.
 
 ## Troubleshooting
