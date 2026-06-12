@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import React, { createContext, useContext, useEffect, useMemo, useState, useCallback, useRef } from 'react'
 import { AppWindow } from './Window'
-import { WindowSearchUI } from 'components/SearchUI'
+import SpotlightSearch from 'components/SpotlightSearch'
 import { navigate } from 'gatsby'
 import SignIn from 'components/Squeak/components/Classic/SignIn'
 import Register from 'components/Squeak/components/Classic/Register'
@@ -1401,6 +1401,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const [confetti, setConfetti] = useState(false)
     const [posthogInstance, setPosthogInstance] = useState<string>()
     const [searchOpen, setSearchOpen] = useState<boolean>(false)
+    const [spotlightOpen, setSpotlightOpen] = useState<boolean>(false)
     const { addToast } = useToast()
 
     const destinationNav = useDataPipelinesNav({ type: 'destination' })
@@ -1893,20 +1894,12 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         return newAppWindow
     }
 
-    const openSearch = (initialFilter?: string) => {
+    const openSearch = (_initialFilter?: string) => {
         if (websiteMode) {
             setSearchOpen((prev) => !prev)
             return
         }
-        addWindow(
-            <WindowSearchUI
-                location={{ pathname: `search` }}
-                key={`search`}
-                newWindow
-                minimal
-                initialFilter={initialFilter}
-            />
-        )
+        setSpotlightOpen((prev) => !prev)
     }
 
     const openSignIn = (onSuccess?: (user: User) => void) => {
@@ -2647,6 +2640,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             }}
         >
             {children}
+            {!websiteMode && <SpotlightSearch open={spotlightOpen} onClose={() => setSpotlightOpen(false)} />}
         </Context.Provider>
     )
 }

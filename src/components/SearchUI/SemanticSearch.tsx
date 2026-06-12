@@ -139,7 +139,7 @@ const SemanticSearch = ({
                                 }}
                                 icon={<IconSparkles />}
                                 hover="border"
-                                className="font-semibold underline bg-accent disabled:bg-transparent border border-primary text-primary disabled:border-transparent"
+                                className="font-semibold underline border bg-accent disabled:bg-transparent border-primary text-primary disabled:border-transparent"
                             >
                                 Ask AI
                             </OSButton>
@@ -148,7 +148,7 @@ const SemanticSearch = ({
                     {!hideFilters && hits.length > 0 && query && (!websiteMode || isFocused) && (
                         <ul
                             className={`list-none m-0 p-0 flex space-x-2 snap-x snap-mandatory overflow-x-auto ${
-                                websiteMode ? 'mb-2 px-2 border-t border-primary pt-2' : 'mt-2'
+                                websiteMode ? 'px-2 pt-2 mb-2 border-t border-primary' : 'mt-2'
                             }`}
                         >
                             {filterItems.map((type) => (
@@ -165,7 +165,7 @@ const SemanticSearch = ({
                                         <span className="text-sm">
                                             {capitalizeFirstLetter(type.replace(/-/g, ' '))}
                                         </span>{' '}
-                                        <span className="text-xs opacity-60 font-semibold">({countByType[type]})</span>
+                                        <span className="text-xs font-semibold opacity-60">({countByType[type]})</span>
                                     </button>
                                 </li>
                             ))}
@@ -200,14 +200,14 @@ const SemanticSearch = ({
                                                 active ? 'bg-accent' : 'bg-primary'
                                             }`}
                                         >
-                                            <div className="py-2 px-4 block">
+                                            <div className="block px-4 py-2">
                                                 <p className="text-[13px] text-red dark:text-yellow font-medium m-0">
                                                     {result.url}
                                                 </p>
                                                 <h5 className="text-[15px] m-0 font-bold line-clamp-1">
                                                     {result.title}
                                                 </h5>
-                                                <p className="text-sm text-secondary m-0 my-1">{result.excerpt}</p>
+                                                <p className="m-0 my-1 text-sm text-secondary">{result.excerpt}</p>
                                             </div>
                                         </li>
                                     )}
