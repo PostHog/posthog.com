@@ -6,9 +6,8 @@ showTitle: true
 
 > **Got a launch, Beta, GA, or project you want promoted on social?** Tag <TeamMember name="Liam Graham" /> in Slack and use the checklist below to give him the information he needs.
 
-When we promote a launch on social, <TeamMember name="Liam Graham" /> needs a handful of things to turn it into great posts. Rather than asking everyone to fill out a separate form or doc, we keep this lightweight: just include a short checklist in the first or second message you share about the work.
+When we promote a launch on social, <TeamMember name="Liam Graham" /> needs a handful of things to turn it into great posts. 
 
-This page explains what to include and where to send it.
 
 ## What to share
 
