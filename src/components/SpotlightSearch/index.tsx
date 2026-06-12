@@ -5,10 +5,12 @@ import {
     IconBook,
     IconChat,
     IconCompass,
+    IconFilter,
     IconGraduationCap,
     IconNewspaper,
     IconSearch,
     IconSparkles,
+    IconX,
 } from '@posthog/icons'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import { useApp } from '../../context/App'
@@ -31,6 +33,27 @@ const typeConfig: Record<ResultType, { label: string; icon: React.ReactNode }> =
 }
 
 const typeOrder: ResultType[] = ['docs', 'handbook', 'blog', 'tutorial', 'community']
+
+// Stand-in for semantic matching: each category's label plus words users are
+// likely to type when they mean that category
+const categoryAliases: Record<ResultType, string[]> = {
+    docs: ['docs', 'documentation', 'reference', 'manual'],
+    handbook: ['handbook', 'company', 'culture', 'teams'],
+    blog: ['blog', 'posts', 'articles', 'news'],
+    tutorial: ['tutorials', 'guides', 'how-to', 'walkthrough'],
+    community: ['community', 'questions', 'forum', 'answers'],
+}
+
+const matchCategory = (query: string): ResultType | null => {
+    const q = query.trim().toLowerCase()
+    if (q.length < 3) return null
+    for (const type of typeOrder) {
+        if (categoryAliases[type].some((alias) => alias.startsWith(q) || (q.length >= 4 && alias.includes(q)))) {
+            return type
+        }
+    }
+    return null
+}
 
 // Placeholder results while the design is being iterated on — swap for
 // useHybridSearch (components/Search/useHybridSearch.ts) when wiring up.
@@ -121,22 +144,35 @@ const mockResults: SearchResult[] = [
     },
 ]
 
-const filterResults = (query: string): SearchResult[] => {
+const filterResults = (query: string, activeFilter: ResultType | null): SearchResult[] => {
+    const scoped = activeFilter ? mockResults.filter((result) => result.type === activeFilter) : mockResults
     const terms = query.toLowerCase().split(/\s+/).filter(Boolean)
-    if (terms.length === 0) return []
-    return mockResults.filter((result) => {
+    // With a filter applied, an empty query browses the whole category
+    if (terms.length === 0) return activeFilter ? scoped : []
+    return scoped.filter((result) => {
         const haystack = `${result.title} ${result.excerpt} ${result.url}`.toLowerCase()
         return terms.every((term) => haystack.includes(term))
     })
 }
 
+type NavItem = { kind: 'ask-ai' } | { kind: 'filter'; type: ResultType } | { kind: 'result'; result: SearchResult }
+
 export default function SpotlightSearch({ open, onClose }: { open: boolean; onClose: () => void }): JSX.Element {
     const { openNewChat } = useApp()
     const [query, setQuery] = useState('')
+    const [activeFilter, setActiveFilter] = useState<ResultType | null>(null)
     const [selectedIndex, setSelectedIndex] = useState(0)
+    const inputRef = useRef<HTMLInputElement>(null)
     const itemRefs = useRef<(HTMLLIElement | null)[]>([])
 
-    const results = useMemo(() => filterResults(query), [query])
+    const results = useMemo(() => filterResults(query, activeFilter), [query, activeFilter])
+
+    const suggestedFilter = useMemo(() => (activeFilter ? null : matchCategory(query)), [query, activeFilter])
+
+    // 4+ word queries read like questions, and zero-result queries have nowhere
+    // else to go — both offer Ask AI as the top result
+    const queryWordCount = query.trim().split(/\s+/).filter(Boolean).length
+    const suggestAskAI = queryWordCount >= 4 || (queryWordCount > 0 && results.length === 0)
 
     const groups = useMemo(
         () =>
@@ -146,17 +182,48 @@ export default function SpotlightSearch({ open, onClose }: { open: boolean; onCl
         [results]
     )
 
-    // Flat list in rendered order, for keyboard navigation across groups
-    const flatResults = useMemo(() => groups.flatMap((group) => group.results), [groups])
+    // Flat list in rendered order (suggestion rows first), for keyboard navigation
+    const navItems = useMemo<NavItem[]>(
+        () => [
+            ...(suggestAskAI ? [{ kind: 'ask-ai' as const }] : []),
+            ...(suggestedFilter ? [{ kind: 'filter' as const, type: suggestedFilter }] : []),
+            ...groups.flatMap((group) => group.results.map((result) => ({ kind: 'result' as const, result }))),
+        ],
+        [suggestAskAI, suggestedFilter, groups]
+    )
 
     const close = () => {
         setQuery('')
+        setActiveFilter(null)
         onClose()
     }
 
     const openResult = (result: SearchResult) => {
         close()
         navigate(result.url, { state: { newWindow: true } })
+    }
+
+    const applyFilter = (type: ResultType, { keepQuery = false }: { keepQuery?: boolean } = {}) => {
+        setActiveFilter(type)
+        if (!keepQuery) {
+            setQuery('')
+        }
+        inputRef.current?.focus()
+    }
+
+    const removeFilter = () => {
+        setActiveFilter(null)
+        inputRef.current?.focus()
+    }
+
+    const selectItem = (item: NavItem) => {
+        if (item.kind === 'ask-ai') {
+            askAI()
+        } else if (item.kind === 'filter') {
+            applyFilter(item.type)
+        } else {
+            openResult(item.result)
+        }
     }
 
     const askAI = () => {
@@ -167,7 +234,7 @@ export default function SpotlightSearch({ open, onClose }: { open: boolean; onCl
 
     useEffect(() => {
         setSelectedIndex(0)
-    }, [query])
+    }, [query, activeFilter])
 
     useEffect(() => {
         itemRefs.current[selectedIndex]?.scrollIntoView({ block: 'nearest' })
@@ -178,7 +245,13 @@ export default function SpotlightSearch({ open, onClose }: { open: boolean; onCl
         const handler = (e: KeyboardEvent) => {
             if (e.key === 'Escape') {
                 e.preventDefault()
-                query ? setQuery('') : close()
+                if (query) {
+                    setQuery('')
+                } else if (activeFilter) {
+                    setActiveFilter(null)
+                } else {
+                    close()
+                }
             }
             if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
                 e.preventDefault()
@@ -187,30 +260,38 @@ export default function SpotlightSearch({ open, onClose }: { open: boolean; onCl
         }
         window.addEventListener('keydown', handler)
         return () => window.removeEventListener('keydown', handler)
-    }, [open, query])
+    }, [open, query, activeFilter])
 
     const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'ArrowDown') {
             e.preventDefault()
-            setSelectedIndex((index) => (flatResults.length ? (index + 1) % flatResults.length : 0))
+            setSelectedIndex((index) => (navItems.length ? (index + 1) % navItems.length : 0))
         }
         if (e.key === 'ArrowUp') {
             e.preventDefault()
-            setSelectedIndex((index) =>
-                flatResults.length ? (index - 1 + flatResults.length) % flatResults.length : 0
-            )
+            setSelectedIndex((index) => (navItems.length ? (index - 1 + navItems.length) % navItems.length : 0))
         }
         if (e.key === 'Enter') {
             e.preventDefault()
             if (e.shiftKey) {
                 askAI()
-            } else if (flatResults[selectedIndex]) {
-                openResult(flatResults[selectedIndex])
+            } else if (navItems[selectedIndex]) {
+                selectItem(navItems[selectedIndex])
+            }
+        }
+        if (e.key === 'Backspace' && activeFilter) {
+            const input = e.currentTarget
+            if (input.selectionStart === 0 && input.selectionEnd === 0) {
+                e.preventDefault()
+                removeFilter()
             }
         }
     }
 
-    let flatIndex = -1
+    const expanded = Boolean(query || activeFilter)
+    const filterRowIndex = suggestAskAI ? 1 : 0
+    const resultIndexOffset = (suggestAskAI ? 1 : 0) + (suggestedFilter ? 1 : 0)
+    let flatIndex = resultIndexOffset - 1
 
     return (
         <AnimatePresence>
@@ -235,16 +316,32 @@ export default function SpotlightSearch({ open, onClose }: { open: boolean; onCl
                         <div className="flex h-14 shrink-0 items-center gap-3 px-4">
                             <IconSearch className="size-5 shrink-0 text-muted" />
                             <input
+                                ref={inputRef}
                                 type="text"
                                 value={query}
                                 onChange={(e) => setQuery(e.target.value)}
                                 onKeyDown={handleInputKeyDown}
-                                placeholder="Search PostHog.com..."
+                                placeholder={
+                                    activeFilter
+                                        ? `Search ${typeConfig[activeFilter].label.toLowerCase()}...`
+                                        : 'Search PostHog.com...'
+                                }
                                 autoFocus
                                 spellCheck={false}
                                 autoComplete="off"
                                 className="w-full border-0 bg-transparent p-0 text-lg text-primary outline-none placeholder:text-muted focus:ring-0"
                             />
+                            {activeFilter && (
+                                <button
+                                    onClick={removeFilter}
+                                    title="Remove filter"
+                                    className="group flex shrink-0 items-center gap-1 rounded-md border border-primary bg-accent/80 px-1.5 py-1 text-sm font-semibold text-secondary hover:text-primary [&_svg]:size-3.5"
+                                >
+                                    {typeConfig[activeFilter].icon}
+                                    {typeConfig[activeFilter].label}
+                                    <IconX className="opacity-50 group-hover:opacity-100" />
+                                </button>
+                            )}
                             {query ? (
                                 <button
                                     onClick={askAI}
@@ -254,19 +351,78 @@ export default function SpotlightSearch({ open, onClose }: { open: boolean; onCl
                                     Ask AI
                                 </button>
                             ) : (
-                                <KeyboardShortcut text="esc" size="xs" className="shrink-0" />
+                                !activeFilter && <KeyboardShortcut text="esc" size="xs" className="shrink-0" />
                             )}
                         </div>
 
-                        {query && (
+                        {expanded && (
                             <>
-                                {flatResults.length > 0 ? (
+                                {navItems.length > 0 ? (
                                     <div className="max-h-[min(480px,50vh)] overflow-y-auto border-t border-primary p-2">
+                                        {suggestAskAI && (
+                                            <ul className="m-0 list-none p-0">
+                                                <li
+                                                    ref={(el) => (itemRefs.current[0] = el)}
+                                                    onMouseMove={() => setSelectedIndex(0)}
+                                                    onClick={askAI}
+                                                    className={`flex cursor-pointer items-center gap-3 rounded-lg px-2.5 py-2 ${
+                                                        selectedIndex === 0 ? 'bg-accent/80' : ''
+                                                    }`}
+                                                >
+                                                    <div className="flex size-8 shrink-0 items-center justify-center rounded-md border border-primary bg-primary/50 text-secondary [&_svg]:size-4">
+                                                        <IconSparkles />
+                                                    </div>
+                                                    <p className="m-0 min-w-0 truncate text-[15px] text-primary">
+                                                        Ask AI:{' '}
+                                                        <span className="font-semibold">&ldquo;{query}&rdquo;</span>
+                                                    </p>
+                                                    <span className="ml-auto hidden shrink-0 text-xs text-muted @md:block">
+                                                        <KeyboardShortcut text="↵" size="xs" /> to ask
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                        )}
+                                        {suggestedFilter && (
+                                            <ul className="m-0 list-none p-0">
+                                                <li
+                                                    ref={(el) => (itemRefs.current[filterRowIndex] = el)}
+                                                    onMouseMove={() => setSelectedIndex(filterRowIndex)}
+                                                    onClick={() => applyFilter(suggestedFilter)}
+                                                    className={`flex cursor-pointer items-center gap-3 rounded-lg px-2.5 py-2 ${
+                                                        selectedIndex === filterRowIndex ? 'bg-accent/80' : ''
+                                                    }`}
+                                                >
+                                                    <div className="flex size-8 shrink-0 items-center justify-center rounded-md border border-primary bg-primary/50 text-secondary [&_svg]:size-4">
+                                                        <IconFilter />
+                                                    </div>
+                                                    <p className="m-0 flex items-center gap-1.5 text-[15px] text-primary">
+                                                        Filter by category:
+                                                        <span className="flex items-center gap-1 rounded-md border border-primary bg-accent/80 px-1.5 py-0.5 text-sm font-semibold text-secondary [&_svg]:size-3.5">
+                                                            {typeConfig[suggestedFilter].icon}
+                                                            {typeConfig[suggestedFilter].label}
+                                                        </span>
+                                                    </p>
+                                                    <span className="ml-auto hidden shrink-0 text-xs text-muted @md:block">
+                                                        <KeyboardShortcut text="↵" size="xs" /> to filter
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                        )}
                                         {groups.map((group) => (
                                             <div key={group.type}>
-                                                <h5 className="m-0 px-2.5 pb-1 pt-2 text-xs font-semibold uppercase tracking-wide text-muted">
-                                                    {typeConfig[group.type].label}
-                                                </h5>
+                                                {!activeFilter && (
+                                                    <h5 className="m-0 px-2.5 pb-1 pt-2 text-xs font-semibold uppercase tracking-wide text-muted">
+                                                        <button
+                                                            onClick={() => applyFilter(group.type, { keepQuery: true })}
+                                                            title={`Only show ${typeConfig[
+                                                                group.type
+                                                            ].label.toLowerCase()}`}
+                                                            className="uppercase tracking-wide hover:text-primary"
+                                                        >
+                                                            {typeConfig[group.type].label}
+                                                        </button>
+                                                    </h5>
+                                                )}
                                                 <ul className="m-0 list-none p-0">
                                                     {group.results.map((result) => {
                                                         flatIndex++
@@ -307,6 +463,7 @@ export default function SpotlightSearch({ open, onClose }: { open: boolean; onCl
                                     <div className="border-t border-primary px-4 py-8 text-center">
                                         <p className="m-0 text-[15px] text-secondary">
                                             No results for &ldquo;{query}&rdquo;
+                                            {activeFilter ? ` in ${typeConfig[activeFilter].label.toLowerCase()}` : ''}
                                         </p>
                                         <p className="m-0 mt-1 text-sm text-muted">
                                             Try different keywords, or ask AI instead
@@ -323,10 +480,15 @@ export default function SpotlightSearch({ open, onClose }: { open: boolean; onCl
                                         <span>
                                             <KeyboardShortcut text="↵" size="xs" /> open
                                         </span>
+                                        {activeFilter && (
+                                            <span>
+                                                <KeyboardShortcut text="⌫" size="xs" /> remove filter
+                                            </span>
+                                        )}
                                     </div>
                                     <span>
                                         <KeyboardShortcut text="⇧" size="xs" />
-                                        <KeyboardShortcut text="↵" size="xs" /> ask AI
+                                        <KeyboardShortcut text="↵" size="xs" /> talk to a robot
                                     </span>
                                 </div>
                             </>
