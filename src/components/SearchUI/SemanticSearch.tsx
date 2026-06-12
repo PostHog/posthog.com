@@ -7,15 +7,17 @@ import { IconSparkles } from '@posthog/icons'
 import { capitalizeFirstLetter } from '../../utils'
 import OSButton from 'components/OSButton'
 import Input from 'components/OSForm/input'
-import { useInkeepSearch, SemanticSearchResult } from 'components/Search/useInkeepSearch'
+import { SemanticSearchResult } from 'components/Search/useInkeepSearch'
+import { useHybridSearch } from 'components/Search/useHybridSearch'
 
 const resultURL = (result: SemanticSearchResult) => result.url + (result.fragment ? `#${result.fragment}` : '')
 
 /**
- * Semantic (Inkeep RAG) twin of the Algolia `Search` component in index.tsx.
- * Same UI and behaviors; data comes from the debounced /api/search proxy and
- * type filters are computed client-side. Gated by the website-semantic-search
- * flag in index.tsx — when one engine wins, the loser gets deleted.
+ * Hybrid (Algolia + Inkeep RAG) twin of the Algolia-only `Search` component in
+ * index.tsx. Same UI and behaviors; data comes from useHybridSearch (instant
+ * Algolia results, reranked when semantic results arrive) and type filters are
+ * computed client-side. Gated by the website-semantic-search flag in
+ * index.tsx — when one engine wins, the loser gets deleted.
  */
 const SemanticSearch = ({
     initialFilter = '',
@@ -40,7 +42,7 @@ const SemanticSearch = ({
     const containerRef = useRef<HTMLDivElement>(null)
     const { openNewChat, websiteMode, setSearchOpen } = useApp()
     const { dragControls, appWindow } = useWindow()
-    const { results, loading } = useInkeepSearch(query)
+    const { results, loading } = useHybridSearch(query)
 
     const countByType: Record<string, number> = {}
     results.forEach((result) => {

@@ -9,7 +9,8 @@ import { CallToAction } from 'components/CallToAction'
 import { Search } from 'components/Icons/Icons'
 import usePostHog from '../../hooks/usePostHog'
 import { categories } from './SearchResults'
-import { useInkeepSearch, SemanticSearchResult } from './useInkeepSearch'
+import { SemanticSearchResult } from './useInkeepSearch'
+import { useHybridSearch, HybridSearchResult } from './useHybridSearch'
 
 type Category = (typeof categories)[number]
 
@@ -31,7 +32,7 @@ export default function SemanticSearchResults(props: SemanticSearchResultsProps)
             ? (categories.find((category) => category.type === props.initialFilter) as Category)
             : categories[0]
     )
-    const { results, loading, error } = useInkeepSearch(query)
+    const { results, loading, error } = useHybridSearch(query)
     const { close } = useSearch()
     const posthog = usePostHog()
 
@@ -48,7 +49,7 @@ export default function SemanticSearchResults(props: SemanticSearchResultsProps)
         [results, category]
     )
 
-    const onSelect = (result: SemanticSearchResult | null) => {
+    const onSelect = (result: HybridSearchResult | null) => {
         if (!result) return
         posthog?.capture('web search result clicked', {
             title: result.title,
@@ -56,7 +57,8 @@ export default function SemanticSearchResults(props: SemanticSearchResultsProps)
             category: category.type,
             query,
             type: result.type,
-            searchEngine: 'inkeep-rag',
+            searchEngine: 'hybrid',
+            searchSources: result.sources,
         })
 
         close()

@@ -1,5 +1,6 @@
 import { GatsbyFunctionRequest, GatsbyFunctionResponse } from 'gatsby'
 import fetch from 'node-fetch'
+import { typeForPath } from '../components/Search/typeForPath'
 
 export type SemanticSearchResult = {
     type: string
@@ -7,29 +8,6 @@ export type SemanticSearchResult = {
     url: string
     fragment?: string
     excerpt: string
-}
-
-// Maps a posthog.com pathname to the category types used by the search UI's
-// filter tabs (mirrors the slug regexes in gatsby/algoliaConfig.js).
-const TYPE_BY_PATH: [RegExp, string][] = [
-    [/^\/docs\/api(\/|$)/, 'api'],
-    [/^\/docs\/cdp(\/|$)/, 'pipelines'],
-    [/^\/docs\/apps(\/|$)/, 'apps'],
-    [/^\/docs(\/|$)/, 'docs'],
-    [/^\/handbook(\/|$)/, 'handbook'],
-    [/^\/tutorials(\/|$)/, 'tutorial'],
-    [/^\/questions(\/|$)/, 'question'],
-    [/^\/posts(\/|$)/, 'post'],
-    [/^\/(blog|spotlight|founders|newsletter|product-engineers)(\/|$)/, 'blog'],
-    [/^\/customers(\/|$)/, 'customers'],
-    [/^\/templates(\/|$)/, 'templates'],
-]
-
-const typeForPath = (pathname: string): string => {
-    for (const [regex, type] of TYPE_BY_PATH) {
-        if (regex.test(pathname)) return type
-    }
-    return 'docs'
 }
 
 const cleanTitle = (title: string): string => title.replace(/\s*-\s*(Docs\s*-\s*)?PostHog$/, '').trim()
