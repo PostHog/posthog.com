@@ -414,7 +414,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                 name: 'Ryan Breen',
                 role: 'CTO',
                 image: {
-                    thumb: '/images/customers/craig-hollington.png',
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/Ryan_Breen_456ba746db.jpg',
                 },
                 quotes: [
                     "We love that you're nerd-friendly. You love being a kind of white-labeled substrate, just a fantastic platform for us to build on top of.",

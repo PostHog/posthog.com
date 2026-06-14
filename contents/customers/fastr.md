@@ -32,6 +32,9 @@ One feature that Fastr has repeatedly used is a session browser that enables a c
 
 "Endpoints cache well, give us a nice clean surface in front of the data, and we don't have to think about everything we'd need to set up around it if we built a custom API ourselves," says Ryan.
 
+![Fastr Dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/Fastr_dashboard_8cb5e77d3b.png)
+
+
 Agentic development first
 -------------------------
 
@@ -44,6 +47,8 @@ Agentic development first
 Ryan explains. "When we started consuming endpoints, we needed a lifecycle for managing them, spin them up, spin them down, change them, whatever you need. But now when I tell Claude to build a dashboard it creates all the Endpoints it needs.” 
 
 The reason it works without breaking is that PostHog ships every feature in public, and Claude can keep up with it. "It’s easy for us to ask Claude, go find the bleeding-edge documentation for how this feature works today. That's the nice thing about you guys being so damn transparent about everything you do on GitHub."
+
+![Fastr Customer Heatmap](https://res.cloudinary.com/dmukukwp6/image/upload/Fastr_Workspace_Heatmapping_30f09bbe61.png)
 
 An analytics platform without data engineers
 --------------------------------------------
