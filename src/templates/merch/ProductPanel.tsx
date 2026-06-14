@@ -105,7 +105,7 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
         setJustAdded(false)
     }
 
-    const classes = cn('p-8 pt-20 relative space-y-4 overflow-y-auto', className)
+    const classes = cn('p-8 pt-20 relative space-y-4 overflow-y-auto text-primary', className)
 
     return (
         <div className={classes}>
