@@ -22,13 +22,17 @@ export default function WebsiteFooter(): React.ReactElement {
                         {/* Copyright and status */}
                         <div className="flex items-center gap-4 justify-between @xl:justify-start">
                             <p className="text-secondary m-0">&copy; {new Date().getFullYear()} PostHog, Inc.</p>
-                            <AppStatus textClassName="text-xs underline" />
+                            <AppStatus textClassName="text-xs underline text-secondary" />
                         </div>
 
                         {/* Legal links */}
                         <nav className="flex flex-wrap items-center gap-x-4 gap-y-2">
                             {legalLinks.map((link) => (
-                                <Link key={link.label} to={link.url} className="transition-colors underline">
+                                <Link
+                                    key={link.label}
+                                    to={link.url}
+                                    className="transition-colors underline text-secondary"
+                                >
                                     {link.label}
                                 </Link>
                             ))}
