@@ -353,11 +353,12 @@ function HeroImage(): JSX.Element {
 }
 
 function TestHero(): JSX.Element {
+    const { siteSettings } = useApp()
     return (
         <>
             <div className="text-center @xl:text-left mb-12">
                 <h1 className="[&_p]:m-0 flex gap-1 flex-wrap justify-center @xl:justify-start !text-2xl mb-8 pt-2">
-                    <Logo />
+                    <Logo fill={siteSettings.theme === 'dark' ? 'white' : undefined} />
                 </h1>
 
                 <Tagline />
@@ -371,13 +372,14 @@ function TestHero(): JSX.Element {
 }
 
 function ControlHero(): JSX.Element {
+    const { siteSettings } = useApp()
     return (
         <>
             <div className="text-center @xl:text-left mb-12">
                 <ControlHeroImage />
 
                 <h1 className="[&_p]:m-0 flex gap-1 flex-wrap justify-center @xl:justify-start !text-2xl mb-8 pt-2">
-                    <Logo />
+                    <Logo fill={siteSettings.theme === 'dark' ? 'white' : undefined} />
                 </h1>
 
                 <ControlTagline />
