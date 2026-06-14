@@ -645,5 +645,11 @@
         "link_type": "LinkedIn",
         "link_url": "https://www.linkedin.com/in/fercgomes/",
         "profile_id": 42799
+    },
+    {
+        "handle": "tyler-crandall",
+        "name": "Tyler Crandall",
+        "role": "Technical Account Manager",
+        "profile_id": 34069
     }
 ]

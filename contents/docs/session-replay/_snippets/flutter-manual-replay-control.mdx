@@ -5,9 +5,9 @@ Setting `config.sessionReplay = false` in your PostHog configuration will preven
 You can manually control when to start and stop session recordings using the following methods:
 
 - `startSessionRecording({bool resumeCurrent = true})`
-  - Set **resumeCurrent** to `true` to resume a previous session recording (Default). 
-  - Set **resumeCurrent** to `false` to start a new session recording. 
-- `stopSessionRecording()` 
+  - Set **resumeCurrent** to `true` to resume a previous session recording (default).
+  - Set **resumeCurrent** to `false` to start a new session recording.
+- `stopSessionRecording()`
   - Stops/pauses the current session recording.
 
 > **Note:** Calling these methods will have no effect if session recordings are disabled in your PostHog [Project Settings](https://app.posthog.com/project/settings).

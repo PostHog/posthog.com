@@ -1,0 +1,228 @@
+---
+title: Observations
+---
+
+import { ProductScreenshot } from "components/ProductScreenshot";
+
+<CalloutBox icon="IconInfo" title="Replay Vision is in closed beta" type="warning">
+
+Not yet available to everyone – <a href="/replay-vision">join the waitlist</a> to get updates.
+
+</CalloutBox>
+
+Each scanner has an **Observations** tab listing every observation it's produced. Click into one to open the detail view: the structured result, the model's reasoning (with clickable citations that jump the embedded player to the cited moment), and the prompt that produced it – frozen even if you've since edited the scanner.
+
+Observations also surface in the replay player: the **observations dock** at the bottom of the player lists everything scanners have found about the session you're watching, and is where the **Scan this recording** action lives.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/observations_dock_0301561e5d.png"
+  alt="The replay player with the observations dock expanded, listing observation cards from several scanners and the Scan this recording action"
+  classes="rounded"
+/>
+
+Observations move through a small state machine:
+
+`pending → running → succeeded | failed | ineligible`
+
+- **`succeeded`** – terminal. The structured result is saved and a [`$recording_observed` event](#querying-observations-as-events) is emitted.
+- **`failed`** – terminal. The detail view shows an error reason. See [troubleshooting](/docs/replay-vision/troubleshooting#failed-observations) for what each failure kind means.
+- **`ineligible`** – terminal. The session can't be analyzed (no recording, too short, no events, etc.). Doesn't count against your quota. See [running scanners](/docs/replay-vision/running-scanners#ineligible-sessions).
+
+Succeeded, pending, and running observations count against your monthly [quota](/docs/replay-vision/quota-and-limits); failed and ineligible ones don't.
+
+## Querying observations as events
+
+Every successful observation is captured as a `$recording_observed` event in your project, so you can build [insights](/docs/product-analytics/insights), [dashboards](/docs/product-analytics/dashboards), and [alerts](/docs/alerts) on top of Replay Vision output using PostHog's [SQL](/docs/product-analytics/sql).
+
+### Event properties
+
+| Property | Description |
+| --- | --- |
+| `scanner_name` | Human-readable name of the scanner |
+| `scanner_id` | Scanner UUID |
+| `scanner_type` | `monitor`, `classifier`, `scorer`, or `summarizer` |
+| `scanner_version` | Version of the scanner config that produced this observation |
+| `session_id` | The recording that was observed |
+| `triggered_by` | `schedule` (background sweep) or `on_demand` |
+| `triggered_by_user_id` | The user who triggered an on-demand observation; null for background sweeps |
+| `model_used` | The model that produced the result |
+| `provider_used` | The LLM provider behind `model_used` |
+| `scanner_output_confidence` | The model's confidence (0.0 to 1.0) |
+| `scanner_output_reasoning` | **Monitor, classifier, and scorer** – the model's reasoning text, including any inline citations. Summarizers don't have a separate reasoning field |
+| `scanner_output_verdict` | **Monitor only** – `"yes"`, `"no"`, or `"inconclusive"` |
+| `scanner_output_tags` | **Classifier only** – the array of vocabulary tags assigned |
+| `scanner_output_tags_freeform` | **Classifier only** – tags outside the vocabulary, when the scanner allows them |
+| `scanner_output_score` | **Scorer only** – the numeric score |
+| `scanner_output_title` | **Summarizer only** – the generated one-line title |
+| `scanner_output_summary` | **Summarizer only** – the generated prose summary |
+| `scanner_output_intent` | **Summarizer only** – one sentence on what the user set out to do |
+| `scanner_output_outcome` | **Summarizer only** – one sentence on how the session ended |
+| `scanner_output_friction_points` | **Summarizer only** – array of named blockers or frustrations (empty if none) |
+| `scanner_output_keywords` | **Summarizer only** – array of lowercase keywords describing the session |
+
+The `timestamp` on the event is the moment the observation completed, not the moment the underlying recording was captured.
+
+## SQL recipes
+
+### Monitor: count flagged sessions over time
+
+Sessions a "Dead-end pages" monitor flagged yes, daily, over the last week:
+
+```sql
+SELECT
+    toStartOfDay(timestamp) AS day,
+    count() AS flagged_sessions
+FROM events
+WHERE event = '$recording_observed'
+  AND properties.scanner_name = 'Dead-end pages'
+  AND properties.scanner_output_verdict = 'yes'
+  AND timestamp > now() - INTERVAL 7 DAY
+GROUP BY day
+ORDER BY day
+```
+
+### Monitor: true rate (flagged / total)
+
+The proportion of observed sessions a monitor flagged yes:
+
+```sql
+SELECT
+    countIf(properties.scanner_output_verdict = 'yes') AS flagged,
+    count() AS total,
+    flagged / total AS true_rate
+FROM events
+WHERE event = '$recording_observed'
+  AND properties.scanner_name = 'Dead-end pages'
+  AND timestamp > now() - INTERVAL 30 DAY
+```
+
+A gradually rising true rate is often a more useful early-warning signal than the absolute count.
+
+### Classifier: top tags
+
+Most common intent tags from a classifier:
+
+```sql
+SELECT
+    arrayJoin(JSONExtract(properties.scanner_output_tags ?? '[]', 'Array(String)')) AS tag,
+    count() AS sessions
+FROM events
+WHERE event = '$recording_observed'
+  AND properties.scanner_name = 'User intent'
+  AND timestamp > now() - INTERVAL 7 DAY
+GROUP BY tag
+ORDER BY sessions DESC
+```
+
+### Scorer: distribution
+
+Histogram of frustration scores:
+
+```sql
+SELECT
+    toInt32(properties.scanner_output_score) AS score,
+    count() AS sessions
+FROM events
+WHERE event = '$recording_observed'
+  AND properties.scanner_name = 'Frustration score'
+  AND timestamp > now() - INTERVAL 7 DAY
+GROUP BY score
+ORDER BY score
+```
+
+For a percentile view:
+
+```sql
+SELECT
+    quantile(0.50)(toFloat64(properties.scanner_output_score)) AS p50,
+    quantile(0.90)(toFloat64(properties.scanner_output_score)) AS p90,
+    quantile(0.99)(toFloat64(properties.scanner_output_score)) AS p99
+FROM events
+WHERE event = '$recording_observed'
+  AND properties.scanner_name = 'Frustration score'
+  AND timestamp > now() - INTERVAL 7 DAY
+```
+
+### Summarizer: recent summaries
+
+Latest summaries from a summarizer scanner:
+
+```sql
+SELECT
+    timestamp,
+    properties.session_id AS session_id,
+    properties.scanner_output_title AS title,
+    properties.scanner_output_summary AS summary
+FROM events
+WHERE event = '$recording_observed'
+  AND properties.scanner_name = 'Session summary'
+ORDER BY timestamp DESC
+LIMIT 50
+```
+
+### Summarizer: top friction points
+
+Summarizers also emit a `scanner_output_friction_points` array naming the blockers and frustrations the user hit. Unnesting it gives you a ranked list of what's tripping people up:
+
+```sql
+SELECT
+    arrayJoin(JSONExtract(properties.scanner_output_friction_points ?? '[]', 'Array(String)')) AS friction_point,
+    count() AS sessions
+FROM events
+WHERE event = '$recording_observed'
+  AND properties.scanner_name = 'Session summary'
+  AND timestamp > now() - INTERVAL 7 DAY
+GROUP BY friction_point
+ORDER BY sessions DESC
+```
+
+### Cross-scanner: filter only high-confidence verdicts
+
+```sql
+SELECT *
+FROM events
+WHERE event = '$recording_observed'
+  AND properties.scanner_output_confidence > 0.8
+ORDER BY timestamp DESC
+```
+
+Confidence is self-reported, so this is a heuristic, not a guarantee – but it's often a useful filter for downstream automation.
+
+## Wiring observations into the rest of PostHog
+
+### Insights and dashboards
+
+The recipes above all become [insights](/docs/product-analytics/insights) by saving the query. From there they go on [dashboards](/docs/product-analytics/dashboards) like any other insight.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/dashboard_with_vision_tiles_7d9122a57b.png"
+  alt="A dashboard with three Replay Vision tiles: dead-end true rate over time, user intent distribution, and frustration p90"
+  classes="rounded"
+/>
+
+### Alerts
+
+[Alerts](/docs/alerts) on an insight built from `$recording_observed` give you a notification when the metric crosses a threshold – e.g. "alert me when the dead-end true rate over the last hour exceeds 5%."
+
+### Joining to other PostHog data
+
+Because `$recording_observed` events live alongside everything else in your project, you can join them to anything – pageviews, custom events, person properties, cohorts. A useful pattern: find the events the user fired *before* the moment a monitor flagged them, grouped by URL.
+
+```sql
+SELECT
+    pv.properties.$current_url AS url,
+    count(DISTINCT pv.properties.$session_id) AS sessions
+FROM events pv
+INNER JOIN events ro
+    ON ro.properties.session_id = pv.properties.$session_id
+WHERE
+    pv.event = '$pageview'
+    AND ro.event = '$recording_observed'
+    AND ro.properties.scanner_name = 'Dead-end pages'
+    AND ro.properties.scanner_output_verdict = 'yes'
+    AND pv.timestamp BETWEEN ro.timestamp - INTERVAL 5 MINUTE AND ro.timestamp
+GROUP BY url
+ORDER BY sessions DESC
+```
+
+The join is by `session_id`. From there it's the same SQL you'd write for any other event.
