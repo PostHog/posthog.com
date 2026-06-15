@@ -406,7 +406,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'A conversion rate optimization platform',
         featured: false,
         logo: {
-            'https://res.cloudinary.com/dmukukwp6/image/upload/FASTR_Logo_full_color_a8db0d8cb5.png'
+            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/FASTR_Logo_full_color_a8db0d8cb5.png',
+            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/FASTR_Logo_full_color_a8db0d8cb5.png',
         },
         height: 10,
         quotes: {
