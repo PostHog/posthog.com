@@ -1343,6 +1343,10 @@ export const handbookSidebar = [
                 url: '',
                 children: [
                     {
+                        name: 'How we work',
+                        url: '/handbook/growth/sales/new-business-how-we-work',
+                    },
+                    {
                         name: 'Why buy PostHog',
                         url: '/handbook/growth/sales/why-buy-posthog',
                     },
