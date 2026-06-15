@@ -242,6 +242,14 @@ Example: With a flat quota of $250,000 and 3 fully ramped people, and 1 ramping,
 
 You are likely to need to travel a lot more than the typical PostHog team member in order to meet customers. Please make sure that you follow our company [travel policy](/handbook/people/spending-money) and act in PostHog's best interests. We trust you to do the right thing here and won't pre-approve your travel plans, but we do keep track of what people are spending and the Ops team will follow up with you if it looks like you are wasting money here. We are not a giant company that pays for fancy flights, accommodation, and meals so please be sensible.
 
+As a TAM, we want you to get in front of customers in person on a regular cadence. As a baseline:
+
+- **Visit local customers (those near you) once a quarter.** If a customer is within easy travelling distance, it's a great opportunity to see them regularly. Even if they aren't directly your customer, showing up with donuts helps develop strong relationships.
+- **Visit your big customers twice a year.** Your largest accounts warrant more face time, so plan to see them at least twice a year even if they aren't local to you.
+- **Visit your closest tech hub (SF, London, etc.) once a year.** A lot of customers and prospects cluster around major tech hubs, so make a point of getting to the one nearest you at least annually and stacking up meetings while you're there.
+
+These are guidelines, not limits — if it makes sense to see a customer more often, do it. Use your judgement, be sensible with spend, and prioritize the trips that will have the biggest impact on retention and expansion. As a general rule, larger customers justify more regular visits.
+
 ## Working with engineering teams
 
 We hire Technical AEs. This means you are responsible for dealing with the vast majority of product queries from your customers. However, we still work closely with engineering teams!
