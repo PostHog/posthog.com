@@ -13,69 +13,49 @@ import { SearchUI } from 'components/SearchUI'
 import SmallTeam from 'components/SmallTeam'
 import { useApp } from '../../context/App'
 
-// Process docsMenu to extract structure
-const processDocsMenu = () => {
-    const productOSSection = docsMenu.children.find((item) => item.name === 'Product OS')
-    const productSections = docsMenu.children.filter((item) => item.name !== 'Product OS')
+// Curated entry paths for the docs home — lean + intriguing: route, don't explain.
+// The page tells you where to go; the story itself lives on the Self-driving page.
+const pathCards = [
+    {
+        name: 'Understand self-driving',
+        description: 'How a product prompts itself.',
+        // TODO(PR2): repoint to /docs/self-driving once the hub page lands
+        url: '/docs/product-os',
+        icon: 'IconStack',
+        color: 'red',
+        featured: true,
+    },
+    {
+        name: 'Get started',
+        description: 'Lay the fuel in 5 minutes.',
+        url: '/docs/getting-started/install',
+        icon: 'IconRocket',
+        color: 'salmon',
+    },
+    {
+        name: 'Browse by product',
+        description: 'Every signal feeding the loop.',
+        url: '#all-products',
+        icon: 'IconBox',
+        color: 'blue',
+    },
+]
 
-    const featuredIntegrationItems = [
-        'Install and configure',
-        'SDKs',
-        'Frameworks',
-        'API',
-        'Advanced',
-        'Tools',
-        'AI engineering',
-        'Getting HogPilled',
-    ]
+// The four surfaces where humans interact with their self-driving product.
+const surfaces = [
+    // TODO: confirm the canonical Slack app target
+    { name: 'Slack app', url: '/slack', icon: 'IconMessage', color: 'salmon' },
+    { name: 'Code', url: '/docs/posthog-code', icon: 'IconCoffee', color: 'yellow' },
+    // Stopgap: no dedicated "Web" surface docs page yet — see web-surface-gap
+    { name: 'Web', url: 'https://app.posthog.com', icon: 'IconLaptop', color: 'blue' },
+    { name: 'MCP', url: '/docs/model-context-protocol', icon: 'IconMagic', color: 'purple' },
+]
 
-    const featuredAIPlatformItems = [
-        'PostHog AI',
-        'PostHog Code',
-        'Model Context Protocol (MCP)',
-        'AI wizard',
-        'AI engineering',
-    ]
-
-    const developerAppsSection = { name: 'Developer apps', children: [] }
-    const integrationSection = { name: 'Integration', children: [] }
-    // hardcode a few AI sections for now, until dedicated product docs are created
-    const AIPlatformSection = {
-        name: 'AI platform',
-        children: [
-            {
-                name: 'MCP',
-                url: '/docs/model-context-protocol',
-                icon: 'IconMagic',
-                color: 'blue',
-            },
-            {
-                name: 'AI wizard',
-                url: '/docs/ai-engineering/ai-wizard',
-                icon: 'IconMagicWand',
-                color: 'purple',
-            },
-        ],
-    }
-
-    productSections?.forEach((product) => {
-        if (featuredAIPlatformItems.includes(product.name)) {
-            AIPlatformSection.children.unshift(product)
-        } else {
-            developerAppsSection.children.push(product)
-        }
-    })
-
-    productOSSection?.children?.forEach((child) => {
-        if (featuredAIPlatformItems.includes(child.name)) {
-            AIPlatformSection.children.push(child)
-        } else if (featuredIntegrationItems.includes(child.name)) {
-            integrationSection.children.push(child)
-        }
-    })
-
-    return [integrationSection, AIPlatformSection, developerAppsSection]
-}
+// Full product directory, derived from the docs nav (not hardcoded).
+const getAllProducts = (): any[] =>
+    (docsMenu.children || []).filter(
+        (child: any) => child.name !== 'Product OS' && typeof child.url === 'string' && child.url.startsWith('/docs/')
+    )
 
 const renderSectionContent = (children: any[]) => {
     return (
@@ -106,22 +86,10 @@ const renderSectionContent = (children: any[]) => {
 }
 
 export const DocsIndex = () => {
-    const topLevelSections = processDocsMenu()
     const [isMac, setIsMac] = React.useState<boolean | undefined>(undefined)
     useEffect(() => {
         setIsMac(typeof window !== 'undefined' && window.navigator.userAgent.toLowerCase().includes('macintosh'))
     }, [])
-
-    // Create accordion items
-    const accordionItems = topLevelSections.map((section: any) => ({
-        value: section.name?.toLowerCase()?.replace(/\s+/g, '-') || 'section',
-        trigger: (
-            <span data-scheme="secondary" className="bg-primary pr-2 relative z-10">
-                {section.name}
-            </span>
-        ),
-        content: renderSectionContent(section.children || []),
-    }))
 
     const imagePositioning =
         'absolute @3xl:top-1/2 @3xl:left-1/2  opacity-100 @sm:opacity-80 @md:opacity-100 transition-all duration-300 @2xl:scale-75 @3xl:scale-90 @4xl:scale-100 @5xl:scale-110'
@@ -310,8 +278,13 @@ export const DocsIndex = () => {
                         </div>
 
                         {/* Text overlay - keeping this as is */}
-                        <div className="absolute inset-0 flex flex-col justify-center items-center text-white">
-                            <h1 className="text-2xl lg:text-3xl font-bold mb-1 @3xl:mb-2">Documentation</h1>
+                        <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4">
+                            <h1 className="text-2xl lg:text-3xl font-bold mb-1 @3xl:mb-2">
+                                Your product just learned to drive.
+                            </h1>
+                            <p className="text-sm @3xl:text-base font-medium opacity-90 m-0">
+                                Here's how it works — and how to start.
+                            </p>
                         </div>
                     </div>
                 </section>
@@ -326,16 +299,83 @@ export const DocsIndex = () => {
                             }`}
                             autoFocus={false}
                         />
-                        <div className="@md:-ml-3">
-                            {accordionItems.map((item, index) => (
-                                <Accordion
-                                    key={index}
-                                    skin={false}
-                                    triggerClassName="flex-row-reverse [&>svg]:!-rotate-90 [&[data-state=open]>svg]:!rotate-0 [&>span]:relative [&>span]:after:absolute [&>span]:after:right-0 [&>span]:after:top-1/2 [&>span]:after:h-px [&>span]:after:w-full [&>span]:after:bg-border [&>span]:after:content-['']"
-                                    defaultValue={item.value}
-                                    items={[item]}
-                                />
-                            ))}
+                        {/* Curated entry paths */}
+                        <div data-scheme="primary" className="grid grid-cols-1 @md:grid-cols-2 gap-3 mb-8">
+                            {pathCards.map((card) => {
+                                const Icon = (Icons[card.icon as keyof typeof Icons] as any) || Icons.IconBook
+                                return (
+                                    <ZoomHover key={card.name} className="[&>span]:w-full">
+                                        <Link
+                                            to={card.url}
+                                            className={`bg-accent border ${
+                                                card.featured ? 'border-primary' : 'border-transparent'
+                                            } hover:border-primary px-4 py-4 rounded flex items-start gap-3 h-full w-full`}
+                                        >
+                                            <Icon className={`size-6 shrink-0 text-${card.color}`} />
+                                            <div>
+                                                <div className="font-semibold leading-tight">{card.name}</div>
+                                                <div className="text-sm opacity-70 leading-tight mt-0.5">
+                                                    {card.description}
+                                                </div>
+                                            </div>
+                                        </Link>
+                                    </ZoomHover>
+                                )
+                            })}
+                            {/* Ask PostHog AI opens the in-docs chat */}
+                            <ZoomHover className="[&>span]:w-full">
+                                <AskMax
+                                    linkOnly
+                                    className="bg-accent border border-transparent hover:border-primary px-4 py-4 rounded flex items-start gap-3 h-full w-full text-left"
+                                >
+                                    <Icons.IconSparkles className="size-6 shrink-0 text-purple" />
+                                    <div>
+                                        <div className="font-semibold leading-tight">Ask PostHog AI</div>
+                                        <div className="text-sm opacity-70 leading-tight mt-0.5">Skip the reading.</div>
+                                    </div>
+                                </AskMax>
+                            </ZoomHover>
+                        </div>
+
+                        {/* Where you'll work — the four surfaces */}
+                        <h2 className="text-lg mb-1">Where you'll work</h2>
+                        <p className="text-sm opacity-70 mb-3">
+                            Manage your long-running agents where you already are.
+                        </p>
+                        <div data-scheme="primary" className="grid grid-cols-2 @md:grid-cols-4 gap-2 mb-8">
+                            {surfaces.map((surface) => {
+                                const Icon = (Icons[surface.icon as keyof typeof Icons] as any) || Icons.IconBook
+                                return (
+                                    <ZoomHover key={surface.name} className="items-center text-center [&>span]:w-full">
+                                        <Link
+                                            to={surface.url}
+                                            className="bg-accent border border-transparent hover:border-primary px-2 py-4 rounded flex flex-col h-full justify-start items-center gap-2 w-full font-medium"
+                                        >
+                                            <Icon className={`size-6 text-${surface.color}`} />
+                                            <div className="text-sm leading-tight">{surface.name}</div>
+                                        </Link>
+                                    </ZoomHover>
+                                )
+                            })}
+                        </div>
+
+                        {/* Full product directory — demoted and collapsible */}
+                        <div id="all-products" className="@md:-ml-3 scroll-mt-4">
+                            <Accordion
+                                skin={false}
+                                triggerClassName="flex-row-reverse [&>svg]:!-rotate-90 [&[data-state=open]>svg]:!rotate-0 [&>span]:relative [&>span]:after:absolute [&>span]:after:right-0 [&>span]:after:top-1/2 [&>span]:after:h-px [&>span]:after:w-full [&>span]:after:bg-border [&>span]:after:content-['']"
+                                items={[
+                                    {
+                                        value: 'all-products',
+                                        trigger: (
+                                            <span data-scheme="secondary" className="bg-primary pr-2 relative z-10">
+                                                Browse all products
+                                            </span>
+                                        ),
+                                        content: renderSectionContent(getAllProducts()),
+                                    },
+                                ]}
+                            />
                         </div>
                     </section>
 
