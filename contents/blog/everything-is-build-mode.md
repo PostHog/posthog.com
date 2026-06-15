@@ -68,9 +68,9 @@ You can also make it recurring. [Subscriptions](/docs/product-analytics/subscrip
 
 ### 4. Find out which content drives your best users.
 
-Traffic is the easy metric. The hard one – which content actually brings users who activate and stick – usually lives in a different tool than your analytics. Not in PostHog: your [web analytics](/web-analytics), product events, and activation data all sit in one place.
+Good content decisions come from understanding what actually converts, not just what gets traffic. Because PostHog connects your [web analytics](/web-analytics) to product data, you can ask PostHog AI *"which articles bring in signups that activate within 7 days?"* and see the whole picture at once.
 
-So you can ask PostHog AI *"which articles bring in signups that activate within 7 days?"* and it traces the whole path, from first touch to activated user. Schedule it as a recurring [AI summary](/docs/product-analytics/subscriptions#ai-summaries) and it lands in Slack each week without you asking. Either way, you might find one blog post quietly driving quality signups. Then you go write more like it.
+You might find one post quietly driving your best users. Then you go write more like it. Schedule it as a recurring [AI summary](/docs/product-analytics/subscriptions#ai-summaries) and it lands in Slack each week without you asking.
 
 ![Content and conversion insights in the #marketing-alerts Slack channel](https://res.cloudinary.com/dmukukwp6/image/upload/marketing_alerts_in_slack_e9b76bdb43.png)
 <Caption>The content that's actually converting, surfaced automatically.</Caption>
@@ -107,22 +107,14 @@ Set it on a schedule. Every Monday: *"summarize last week's activation, day-7 re
 
 ### 9. Build a product dashboard like a data engineer.
 
-Whether you're a [PM or a PMM](/blog/pm-pmm-collaboration), having your own view of how the product is doing – what's growing, what's breaking, who's converting – means you stop waiting on someone else to pull it for you.
+Whether you're a [PM or a PMM](/blog/pm-pmm-collaboration) coordinating a launch, the first question is always: what are we actually measuring, and are we even tracking it? Ask PostHog AI *"what events are we tracking in the onboarding flow?"* and it reads your live schema. Then you can spot the gaps before you build anything.
 
-Tell PostHog AI: *"Build me a dashboard for new-signup retention and activation by source."* It assembles the insights, and you go a few turns back and forth until it's filled with the metrics you care about.
+Once you know what's there, tell it: *"Build me a dashboard showing where new users drop off, and how activation rates compare by signup source."* It assembles the insights, and you go a few turns back and forth until it's filled with the metrics you care about.
 
-The same trick works for a post-launch gut check – *"Anything weird in the last two hours versus yesterday?"* – and you'll know whether to relax or roll back.
+The same dashboard tells you when something goes wrong after launch. *"Anything weird in the last two hours versus yesterday?"* – and you'll know whether to relax or roll back. And when the dashboard reveals an opportunity worth testing, that's when you bring in [PostHog Code](/code) or the MCP to build the [experiment](/experiments) properly – [no-code experiment tools can't compete](/blog/ai-is-killing-no-code-experiments) with an agent that already knows your product.
 
 ![A product marketing dashboard built with PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/posthog_code_pmm_dashboard_5ec371cf8d.png)
 <Caption>A glimpse at my real launch dashboard – I didn't build a single insight by hand.</Caption>
-
-### 10. Run a real growth experiment.
-
-Sure, you can test button colors and copy changes. But the experiments that actually move growth usually need a code change.
-
-That used to mean waiting in an engineer's queue. Now it's just a coding task – describe it to an agent that already knows your product, like [PostHog Code](/code) on the desktop, or the PostHog MCP in Cursor, Claude Code, or whatever editor you like: *"Add an experiment that nudges free users to upgrade when they hit the dashboard limit, measuring trial starts."* It builds the variant, wires up the [experiment](/experiments) and metric, and opens the PR.
-
-No engineer, no ticket, no waiting. This is why [AI is killing no-code experiment tools](/blog/ai-is-killing-no-code-experiments).
 
 ## Build mode is multiplayer
 
