@@ -1,55 +1,28 @@
-### Q2 2026 objectives
+### Q3 2026 objectives
 
-#### Goal 1: Rebuild the gateway
+#### Goal 1: General availability
 
-*Description*: Replace today's single-process gateway with a horizontally scalable service that internal PostHog teams can rely on for AI traffic.
-
-*What we will ship*:
-- **Horizontally scalable service** - capacity adds by replica count
-- **True-proxy per provider shape** - native OpenAI and Anthropic shapes, no cross-shape translation
-- **Core modules** - auth, rate limiting, routing, cost, quota, dispatch, and the post-call recording path into AI Observability
-- **Load characterization** - so we can size the fleet from observed throughput
-
-#### Goal 2: Spending controls
-
-*Description*: Make sure a runaway caller can't quietly run up provider cost.
+*Description*: Get the gateway from built to depended-on — all internal AI traffic running through it and the first paying customers live.
 
 *What we will ship*:
-- **Pre-call spending guardrails** - decide whether a request is admitted before it reaches the provider
-- **Runaway-cost protection** - cap how much damage a misbehaving caller can do
+- **100% internal traffic** - PostHog AI, PostHog Code, the Agent Platform, and the AI Observability Playground all routed through the gateway, with the original gateway retired
+- **Alpha/beta paying customers** - first external orgs live on the gateway behind a controlled rollout
+- **Billing concept** - the spend, balance, and enablement foundation needed to charge real usage
 
-#### Goal 3: Provider coverage and failover
+#### Goal 2: $1M ARR
 
-*Description*: Cover the providers PostHog's internal AI features need, with automatic failover when a primary has an incident.
-
-*What we will ship*:
-- **OpenAI and Anthropic at launch** - chat, responses, and messages routes
-- **Failover to a hosted equivalent** - Anthropic to Bedrock, OpenAI to Azure
-- **Best-effort model resolution** - so clients we don't control work without custom config
-
-#### Goal 4: Land gateway calls in AI Observability
-
-*Description*: Every gateway call lands in the existing `$ai_generation` pipeline so traces, evals, and cost analytics work on gateway traffic.
+*Description*: Prove people will actually pay for the gateway — customers pay at cost while we earn our margin on the volume discounts we negotiate with model providers, validated by real revenue rather than a hunch.
 
 *What we will ship*:
-- **No schema change** - same event surface, dashboards keep working
-- **Normalized cached vs billable input split** - one shape across providers
-- **Single cost-calculation path** - converge the two we have today
+- **Pricing and margin model** - customers pay at provider cost; our margin comes from the volume discounts we negotiate with model providers, with credit-card-fee and bank-transfer economics worked out
+- **Billing integration** - wired into PostHog's existing billing stack, with reconciliation and overspend handling
+- **BYOK investigation** - explore whether to offer a bring-your-own-key path for enterprises and customers with existing provider discounts
 
-#### Goal 5: Take ownership of the AI Observability Playground
+#### Goal 3: Auth and attribution as the product
 
-*Description*: Pick up the [AI Observability Playground](/docs/ai-observability/playground) from <SmallTeam slug="ai-observability" /> and keep it moving as gateway capabilities grow.
-
-*What we will ship*:
-- **Clean handover** - clear ownership, on-call, and triage path for Playground bugs and requests
-- **Gateway-aligned model coverage** - Playground keeps pace with the providers and models the gateway supports
-
-#### Goal 6: Migration off the current gateway
-
-*Description*: Cut traffic over from the existing gateway gradually, starting with internal callers, so we shake out failure modes before more services depend on it.
+*Description*: Turn auth and attribution into the core product surface — generalized for PostHog Code, the Agent Platform, and external customers, with per-user spend controls.
 
 *What we will ship*:
-- **Per-team feature flag at ingress** - one-flag rollback per team
-- **Phased rollout** - start with PostHog AI and PostHog Code, then bring more PostHog services on
-- **Production readiness** - observability, admin surfaces, and graceful shutdown for in-flight streams
-- **Retire the original gateway** - once the new one carries all traffic
+- **Per-user spend controls** - rate limits, spend caps, overspend, and sub-wallets scoped per user
+- **Free and paid usage** - usage tiers that cleanly separate free from paid
+- **PHC and Agent Platform on it** - both consuming the generalized auth/attribution model in production
