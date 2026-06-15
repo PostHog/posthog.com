@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-PostHog ships a lot of apps. This section is how we explain each one — what it does, who it's for, why it beats the obvious alternative, and how it fits into the bigger argument we're making about [self-driving product development](/blog/self-driving-product).
+PostHog ships a lot of apps, which act as capabilities our products can access. This section is how we explain each one — what it does, who it's for, why it beats the obvious alternative, and how it fits into the bigger argument we're making about [self-driving product development](/blog/self-driving-product).
 
 These aren't datasheets. They're opinionated playbooks.
 
