@@ -43,7 +43,7 @@ The MCP server acts as a proxy to your PostHog instance and is automatically rou
 
 ### Is it safe to let an agent write to my project?
 
-Be mindful of prompt injection – LLMs can be tricked into following untrusted commands, so always review tool calls before executing them. You can also restrict the session to specific tools or feature categories using [tool filtering](#filtering-available-tools), and pin the agent to a specific organization or project to limit blast radius.
+Be mindful of prompt injection – LLMs can be tricked into following untrusted commands, so always review tool calls before executing them. You can also restrict the session to [read-only tools](#restricting-to-read-only-tools), limit it to specific tools or feature categories using [tool filtering](#filtering-available-tools), and pin the agent to a specific organization or project to limit blast radius.
 
 ## Advanced configuration
 
@@ -99,6 +99,35 @@ Example for Cursor (add to `.cursor/mcp.json`):
         "Authorization": "Bearer phx_your_api_key_here",
         "x-posthog-organization-id": "your_org_id",
         "x-posthog-project-id": "your_project_id"
+      }
+    }
+  }
+}
+```
+
+### Restricting to read-only tools
+
+To stop the agent from writing to your project, you can restrict the session to read-only tools using a header or query parameter. Tools that create, update, or delete data are excluded from the available tool list, leaving only the ones that read.
+
+- **Header:** `x-posthog-read-only`
+- **Query parameter:** `readonly`
+
+Both accept `true` or `1`. The header takes precedence if you set both.
+
+```text
+https://mcp.posthog.com/mcp?readonly=true
+```
+
+Example for Cursor (add to `.cursor/mcp.json`):
+
+```json
+{
+  "mcpServers": {
+    "posthog": {
+      "url": "https://mcp.posthog.com/mcp",
+      "headers": {
+        "Authorization": "Bearer phx_your_api_key_here",
+        "x-posthog-read-only": "true"
       }
     }
   }
