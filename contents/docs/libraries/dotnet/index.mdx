@@ -12,7 +12,7 @@ features:
   groupAnalytics: true
   errorTracking: true
   surveys: false
-  aiObservability: false
+  aiObservability: true
 ---
 
 This is an optional library you can install if you're working with .NET Core. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server side application that needs performance.
@@ -203,6 +203,11 @@ if (variant == "variant-name")
 
 It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags). 
 
+## AI observability
+
+`PostHog.AI` adds [AI observability](/docs/ai-observability) for .NET applications using OpenAI or Azure OpenAI. It is currently pre-release, so expect breaking changes before a stable release.
+
+For installation instructions, see the [OpenAI guide for .NET](/docs/ai-observability/installation/openai#net-support) or the [Azure OpenAI guide for .NET](/docs/ai-observability/installation/azure-openai#net-support).
 
 ## GeoIP properties
 

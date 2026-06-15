@@ -259,6 +259,73 @@ See our guide on [identifying users](/docs/getting-started/identify-users) for m
 
 </Step>
 
+<Step title="Configure advanced options" badge="optional">
+
+### Feature flag bootstrap
+
+Set `bootstrapFlags` to evaluate feature flags on the server and pass the results to the client, which avoids flag flicker on first render:
+
+```tsx
+<PostHogProvider bootstrapFlags>{children}</PostHogProvider>
+```
+
+You can also limit the flags evaluated and provide properties used for evaluation:
+
+```tsx
+<PostHogProvider
+    bootstrapFlags={{
+        flags: ['new-ui', 'pricing-v2'],
+        groups: { company: 'posthog' },
+        personProperties: { plan: 'enterprise' },
+        groupProperties: {
+            company: { industry: 'tech' },
+        },
+    }}
+>
+    {children}
+</PostHogProvider>
+```
+
+Enabling `bootstrapFlags` calls `cookies()` internally, which opts the route into dynamic rendering.
+
+### Consent-aware setup
+
+If your app requires consent before setting cookies, disable anonymous cookie seeding in middleware:
+
+```ts file=middleware.ts
+export default postHogMiddleware({
+    proxy: true,
+    seedAnonymousCookie: false,
+})
+```
+
+Then initialize the client with capture disabled until the user opts in:
+
+```tsx
+<PostHogProvider clientOptions={{ opt_out_capturing_by_default: true }}>{children}</PostHogProvider>
+```
+
+### API proxy options
+
+Pass an object to `proxy` to customize the ingest path or host:
+
+```ts file=middleware.ts
+export default postHogMiddleware({
+    proxy: {
+        pathPrefix: '/analytics',
+        host: 'https://eu.i.posthog.com',
+    },
+})
+```
+
+When you change the proxy path, use the same path in `clientOptions.api_host`:
+
+```tsx
+<PostHogProvider clientOptions={{ api_host: '/analytics' }}>{children}</PostHogProvider>
+```
+
+</Step>
+
 <Step title="Further reading" badge="recommended">
 
 - [How to set up Next.js analytics, Feature Flags, and more](/tutorials/nextjs-analytics)
