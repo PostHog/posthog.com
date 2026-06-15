@@ -5,24 +5,24 @@
 *Description*: Carry all of PostHog's internal AI traffic on the gateway, and go live with the first paying customers.
 
 *What we will ship*:
-- **100% internal traffic** – <SmallTeam slug="posthog-ai" />, <SmallTeam slug="posthog-code" />, <SmallTeam slug="agents" />, and the <SmallTeam slug="ai-observability" /> Playground all routed through the gateway, with the old one switched off
-- **Alpha/beta paying customers** – a handful of external orgs live and billed
-- **Accurate, secure billing** – get usage, spend, and balance tracking correct and locked down before we charge real money
+- **100% internal traffic** – route <SmallTeam slug="posthog-ai" />, <SmallTeam slug="posthog-code" />, <SmallTeam slug="agents" />, and the <SmallTeam slug="ai-observability" /> Playground through the gateway and switch off the old one
+- **Alpha/beta paying customers** – get the first external orgs live and billed
+- **Accurate, secure billing** – track usage, spend, and balances correctly and securely before we charge real money
 
 #### Goal 2: $1M ARR
 
-*Description*: Show people will pay for the gateway, and figure out the pricing and monetization to get there.
+*Description*: Show people will pay for the gateway, and build the pricing and monetization behind it.
 
 *What we will ship*:
-- **Pricing and monetization** – figure out how we price and monetize the features we want to support
-- **Billing integration** – hooked into PostHog's billing stack, with reconciliation and overspend handling
-- **BYOK** – look into bring-your-own-key for enterprises and customers with their own provider discounts
+- **Pricing and monetization** – build a pricing and monetization strategy that scales and supports the features we want
+- **Billing integration** – wire it into PostHog's billing stack with reconciliation and overspend handling
+- **BYOK** – evaluate bring-your-own-key for enterprises and customers with their own provider discounts
 
 #### Goal 3: Auth and attribution
 
 *Description*: Generalize our authentication and attribution solutions for <SmallTeam slug="posthog-code" />, <SmallTeam slug="agents" />, and external customers.
 
 *What we will ship*:
-- **Per-user spend controls** – rate limits, spend caps, overspend, and sub-wallets, all per user
+- **Per-user spend controls** – enforce rate limits, spend caps, overspend, and sub-wallets per user
 - **Free and paid usage** – meter free and paid usage separately
-- **PostHog Code and Agent Platform on it** – both using it in production
+- **PostHog Code and Agent Platform on it** – get both consuming it in production
