@@ -12,6 +12,7 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import { SearchUI } from 'components/SearchUI'
 import SmallTeam from 'components/SmallTeam'
 import { useApp } from '../../context/App'
+import { useActiveFeatureFlags, filterMenuByFlags } from '../../hooks/useActiveFeatureFlags'
 
 // Curated entry paths for the docs home — lean + intriguing: route, don't explain.
 // The page tells you where to go; the story itself lives on the Self-driving page.
@@ -52,8 +53,9 @@ const surfaces = [
 ]
 
 // Full product directory, derived from the docs nav (not hardcoded).
-const getAllProducts = (): any[] =>
-    (docsMenu.children || []).filter(
+// Respect feature-flag gating so flag-only products (e.g. Replay Vision) stay hidden.
+const getAllProducts = (activeFlags: string[] | null): any[] =>
+    (filterMenuByFlags(docsMenu.children, activeFlags) || []).filter(
         (child: any) => child.name !== 'Product OS' && typeof child.url === 'string' && child.url.startsWith('/docs/')
     )
 
@@ -86,6 +88,7 @@ const renderSectionContent = (children: any[]) => {
 }
 
 export const DocsIndex = () => {
+    const activeFlags = useActiveFeatureFlags()
     const [isMac, setIsMac] = React.useState<boolean | undefined>(undefined)
     useEffect(() => {
         setIsMac(typeof window !== 'undefined' && window.navigator.userAgent.toLowerCase().includes('macintosh'))
@@ -372,7 +375,7 @@ export const DocsIndex = () => {
                                                 Browse all products
                                             </span>
                                         ),
-                                        content: renderSectionContent(getAllProducts()),
+                                        content: renderSectionContent(getAllProducts(activeFlags)),
                                     },
                                 ]}
                             />
@@ -414,7 +417,7 @@ export const DocsIndex = () => {
 
                         <p>
                             Our docs are perpetually a work in progress. The
-                            <SmallTeam slug="content" /> is responsible for what you see here.
+                            <SmallTeam slug="docs-wizard" /> is responsible for what you see here.
                         </p>
                         <p>
                             At the end of each page, you can provide feedback about what was (or wasn't) helpful. We
