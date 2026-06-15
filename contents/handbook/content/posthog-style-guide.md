@@ -82,16 +82,6 @@ That doesn't work without the Oxford.
 
 In most cases, PostHog _enables_ users to do things.
 
-### Say "PostHog makes your product self-driving"
-
-When you write about our self-driving positioning, the customer's product is the thing that becomes self-driving — PostHog is what makes that happen.
-
-> ✅ **Do:** "PostHog makes your product self-driving." / "Make your product self-driving."
-
-> ❌ **Don't:** "PostHog is self-driving software." (This centers us instead of the outcome the customer gets.)
-
-We do use the same self-driving capabilities to improve PostHog itself, but in copy that's a proof point, not the pitch. See [content brand guidelines](/handbook/content/brand-message) for the full nuance.
-
 ### Add extra line breaks between long bullet points
 
 Sections with long bullet point items are hard to read without extra line breaks (when looking at Markdown). For example, this passage:
