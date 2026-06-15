@@ -2,27 +2,27 @@
 
 #### Goal 1: General availability
 
-*Description*: Get the gateway from built to depended-on — all internal AI traffic running through it and the first paying customers live.
+*Description*: Carry all of PostHog's internal AI traffic on the gateway, and go live with the first paying customers.
 
 *What we will ship*:
-- **100% internal traffic** - <SmallTeam slug="posthog-ai" />, <SmallTeam slug="posthog-code" />, <SmallTeam slug="agents" />, and the <SmallTeam slug="ai-observability" /> Playground all routed through the gateway, with the original gateway retired
-- **Alpha/beta paying customers** - first external orgs live on the gateway behind a controlled rollout
-- **Billing concept** - the spend, balance, and enablement foundation needed to charge real usage
+- **100% internal traffic** - <SmallTeam slug="posthog-ai" />, <SmallTeam slug="posthog-code" />, <SmallTeam slug="agents" />, and the <SmallTeam slug="ai-observability" /> Playground all routed through the gateway, with the old one switched off
+- **Alpha/beta paying customers** - a handful of external orgs live and billed
+- **Billing** - track spend and balances so we can charge for usage
 
 #### Goal 2: $1M ARR
 
-*Description*: Prove people will actually pay for the gateway — customers pay at cost while we earn our margin on the volume discounts we negotiate with model providers, validated by real revenue rather than a hunch.
+*Description*: Show people will pay for the gateway. Customers pay at cost; we earn on the volume discounts we negotiate with providers.
 
 *What we will ship*:
-- **Pricing and margin model** - customers pay at provider cost; our margin comes from the volume discounts we negotiate with model providers, with credit-card-fee and bank-transfer economics worked out
-- **Billing integration** - wired into PostHog's existing billing stack, with reconciliation and overspend handling
-- **BYOK investigation** - explore whether to offer a bring-your-own-key path for enterprises and customers with existing provider discounts
+- **Pricing and margins** - charge at provider cost and earn the spread from negotiated volume discounts, with credit-card and bank-transfer fees accounted for
+- **Billing integration** - hooked into PostHog's billing stack, with reconciliation and overspend handling
+- **BYOK** - look into bring-your-own-key for enterprises and customers with their own provider discounts
 
 #### Goal 3: Auth and attribution as the product
 
-*Description*: Turn auth and attribution into the core product surface — generalized for <SmallTeam slug="posthog-code" />, <SmallTeam slug="agents" />, and external customers, with per-user spend controls.
+*Description*: Auth and attribution are the real product. Generalize them for <SmallTeam slug="posthog-code" />, <SmallTeam slug="agents" />, and external customers, with per-user spend controls.
 
 *What we will ship*:
-- **Per-user spend controls** - rate limits, spend caps, overspend, and sub-wallets scoped per user
-- **Free and paid usage** - usage tiers that cleanly separate free from paid
-- **PostHog Code and Agent Platform on it** - both consuming the generalized auth/attribution model in production
+- **Per-user spend controls** - rate limits, spend caps, overspend, and sub-wallets, all per user
+- **Free and paid usage** - meter free and paid usage separately
+- **PostHog Code and Agent Platform on it** - both using it in production
