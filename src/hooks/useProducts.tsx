@@ -15,9 +15,8 @@ import { cdp } from './productData/cdp'
 import { webAnalytics } from './productData/web_analytics'
 import { experiments } from './productData/experiments'
 import { posthog_ai } from './productData/posthog_ai'
-import { llmAnalytics } from './productData/llm_analytics'
+import { aiObservability } from './productData/ai_observability'
 import { workflows } from './productData/workflows'
-import { revenueAnalytics } from './productData/revenue_analytics'
 import { logs } from './productData/logs'
 import { realtimeDestinations } from './productData/realtime_destinations'
 import { endpoints } from './productData/endpoints'
@@ -34,8 +33,7 @@ const initialProducts = [
     webAnalytics,
     experiments,
     posthog_ai,
-    llmAnalytics,
-    revenueAnalytics,
+    aiObservability,
     logs,
     workflows,
     endpoints,
@@ -50,9 +48,13 @@ export default function useProducts() {
 
     const [products, setProducts] = useState(
         initialProducts.map((product) => {
+            // Products are joined to live billing data by type. A product can override
+            // the key the billing service uses via `billingType` (e.g. AI Observability
+            // is still `llm_analytics` upstream); otherwise the handle is the key.
+            const billingType = (product as { billingType?: string }).billingType || product.handle
             const billingData =
                 product.billingData ||
-                billingProducts.find((billingProduct: any) => billingProduct.type === product.handle)
+                billingProducts.find((billingProduct: any) => billingProduct.type === billingType)
             const paidPlan = billingData?.plans.find((plan: any) => plan.tiers)
             const startsAt = paidPlan?.tiers?.find((tier: any) => tier.unit_amount_usd !== '0')?.unit_amount_usd
             const freeLimit = paidPlan?.tiers?.find((tier: any) => tier.unit_amount_usd === '0')?.up_to

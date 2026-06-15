@@ -32,6 +32,13 @@ them that they can save by removing the Group Analytics add-on from the billing 
 
 If they aren't benefitting from Autocapture you should reach out to let them know how best to use it. Alternatively, they can tune or turn it off by following the [Autocapture configuration docs](/docs/product-analytics/autocapture#configuring-autocapture).
 
+### Legacy Teams package
+
+Customers on the legacy "Teams" package ($450/month) can save $200 by switching to the [Boost package](/platform-packages) ($250/month) if they don't need SAML SSO. The Teams package has been split into:
+
+- [Boost package](/platform-packages) ($250/month)
+- [Scale package](/platform-packages) ($750/month)
+
 ### Session replay targeting
 
 When Session replay is enabled it will capture all sessions by default.  As every session is counted for billing purposes, customers may end up with a bunch of low value short recordings and still be paying for them.

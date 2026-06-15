@@ -13,7 +13,7 @@ features:
   featureFlags: true
   groupAnalytics: true
   surveys: true
-  llmAnalytics: false
+  aiObservability: false
   errorTracking: true
   logs: true
 ---
@@ -93,9 +93,11 @@ PostHog autocapture can automatically track the following events for you:
 >
 > For React Navigation v7, we recommend disabling automatic screen capture for screens and manually calling `posthog.screen()` inside each screen component. See the [Capturing screen views](/docs/libraries/react-native#capturing-screen-views) section below.
 
-With autocapture, all touch events for children of `PosthogProvider` are tracked, capturing a snapshot of the view hierarchy at that point. This enables you to create [insights](/docs/product-analytics/insights) in PostHog without having to add custom events.
+Application lifecycle events are enabled by default. Screen capture is enabled by default in `PostHogProvider` unless you set `captureScreens: false`. Touch capture is disabled by default and requires `captureTouches: true`.
 
-PostHog will try to generate a sensible name for the touched element based on the React component `displayName` or `name`. If you prefer, you can set your own name using the `ph-label` prop:
+When touch capture is enabled, touch events for children of `PostHogProvider` are tracked, capturing a snapshot of the view hierarchy at that point. This enables you to create [insights](/docs/product-analytics/insights) in PostHog without adding custom events.
+
+PostHog will try to generate a sensible name for touched elements based on the React component `displayName` or `name`. If you prefer, you can set your own name using the `ph-label` prop:
 
 ```react-native
 <View ph-label="my-special-label"></View>
@@ -195,47 +197,36 @@ If you are doing this as part of a user logging out you can instead simply [`pos
 
 ## Opt out of data capture
 
-You can completely opt-out users from data capture. To do this, there are two options:
-
-1. Opt users out by default by setting `opt_out_capturing_by_default` to `true` in your PostHog config:
-
-```javascript
-posthog.init('<ph_project_token>', {
-    opt_out_capturing_by_default: true,
-});
-```
-
-2. Opt users out on a per-person basis by calling `opt_out_capturing()`:
-
-```javascript
-posthog.opt_out_capturing()
-```
-
-Similarly, you can opt users in:
-
-```javascript
-posthog.opt_in_capturing()
-```
-
-To check if a user is opted out:
-
-```javascript
-posthog.has_opted_out_capturing()
-```
+You can completely opt users out from data capture by default or on a per-person basis. See [Opt in/out](#opt-inout) for the current React Native API.
 
 ## Flush
 
-You can set the number of events in the configuration that should queue before flushing.
-Setting this to `1` will send events immediately and will use more battery. This is set to `20` by default.
+import FlushIntro from '../_snippets/flush-intro.mdx'
 
-You can also configure the flush interval. By default we flush all events after `30` seconds,
-no matter how many events have gathered.
+<FlushIntro />
 
-You can also manually flush the queue. If a flush is already in progress it returns a promise for the existing flush.
+You can also configure the flush interval with `flushInterval`, in milliseconds (default `10000`), after which queued events are sent regardless of how many have been gathered:
+
+```javascript
+const posthog = new PostHog('<ph_project_token>', {
+  flushAt: 20,
+  flushInterval: 10000,
+})
+```
+
+import FlushManual from '../_snippets/flush-manual.mdx'
+
+<FlushManual />
 
 ```javascript
 await posthog.flush()
 ```
+
+If a flush is already in progress, it returns a promise for the existing flush.
+
+import FlushNotes from '../_snippets/flush-notes.mdx'
+
+<FlushNotes />
 
 ## Reset after logout
 
@@ -289,56 +280,25 @@ For details on how to implement bootstrapping, see our [bootstrapping guide](/do
 
 ## Experiments (A/B tests)
 
-Since [experiments](/docs/experiments/start-here) use feature flags, the code for running an experiment is very similar to the feature flags code:
-
-```react-native
-// With the useFeatureFlag hook
-import { useFeatureFlag } from 'posthog-react-native'
-
-const MyComponent = () => {
-    const variant = useFeatureFlag('experiment-feature-flag-key')
-
-    if (variant === undefined) {
-        // the response is undefined if the flags are being loaded
-        return null
-    }
-
-    if (variant == 'variant-name') {
-        // do something
-    }
-}           
-```
+Since [experiments](/docs/experiments/start-here) use feature flags, the code for running an experiment is very similar to the feature flags code. See [adding experiment code](/docs/experiments/adding-experiment-code) for React Native examples.
 
 It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
 
 ## Group analytics
 
-Group analytics allows you to associate the events for that person's session with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
+Group analytics allows you to associate the events for that person's session with a group (e.g. teams, organizations, etc.). See [Group Analytics](/docs/product-analytics/group-analytics) for implementation details.
 
 > **Note:**  This is a paid feature and is not available on the open-source or free cloud plan. Learn more on the [pricing page](/pricing).
-
--   Associate the events for this session with a group
-
-```js
-posthog.group('company', 'company_id_in_your_db')
-
-posthog.capture('upgraded_plan') // this event is associated with company ID `company_id_in_your_db`
-```
-
--   Associate the events for this session with a group AND update the properties of that group
-
-```js
-posthog.group('company', 'company_id_in_your_db', {
-    name: 'Awesome Inc.',
-    employees: 11,
-})
-```
-
-The `name` is a special property which is used in the PostHog UI for the name of the group. If you don't specify a `name` property, the group ID will be used instead.
 
 ## Error tracking
 
 To set up error tracking in your project, follow the [React Native installation guide](/docs/error-tracking/installation/react-native).
+
+### Native crash autocapture
+
+The JavaScript-level autocapture only covers exceptions thrown in your JS/TS code. To also capture native iOS and Android crashes – for example, a crash inside a native module or the platform runtime – install the optional `@posthog/react-native-plugin` package and enable `errorTracking.autocapture.nativeCrashes`. Native capture is gated by your project's **Enable exception autocapture** setting, and crash reports need native debug symbols uploaded at build time to produce readable stack traces.
+
+Follow the [React Native installation guide](/docs/error-tracking/installation/react-native) for the full setup, and [native crash symbolication](/docs/error-tracking/upload-source-maps/react-native#native-crash-symbolication) to upload symbols.
 
 ### Error boundaries
 
@@ -440,7 +400,7 @@ You can enable debug mode by setting the `debug` option to `true` in the `PostHo
 
 ```react-native
 <PostHogProvider
-    debug: {true}
+    debug={true}
     apiKey="<ph_project_token>"
     options={{
         host: "<ph_client_api_host>",

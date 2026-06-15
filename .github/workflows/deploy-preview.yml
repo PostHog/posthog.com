@@ -2,19 +2,19 @@ name: Deploy preview to Cloudflare Pages
 
 on:
     pull_request:
-        types: [opened, synchronize, reopened]
+        types: [opened, synchronize, reopened, labeled]
 
 concurrency:
     group: deploy-preview-${{ github.event.pull_request.number }}
     cancel-in-progress: true
 
 env:
-    NODE_OPTIONS: '--max_old_space_size=8192'
+    NODE_OPTIONS: '--max_old_space_size=12288'
 
 jobs:
     build-and-deploy:
         name: Build & deploy preview
-        runs-on: ubuntu-latest
+        runs-on: depot-ubuntu-latest-8
         timeout-minutes: 45
         if: ${{ !github.event.pull_request.head.repo.fork }}
         permissions:
@@ -23,7 +23,7 @@ jobs:
 
         steps:
             - name: Find existing comment
-              uses: peter-evans/find-comment@3eae4d37986fb5a8592848f6a574fdf654e61f9e # v3
+              uses: peter-evans/find-comment@3eae4d37986fb5a8592848f6a574fdf654e61f9e # v3.1.0
               id: find-comment
               with:
                   issue-number: ${{ github.event.pull_request.number }}
@@ -36,7 +36,7 @@ jobs:
 
             - name: Comment pending
               id: comment
-              uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4
+              uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4.0.0
               with:
                   issue-number: ${{ github.event.pull_request.number }}
                   comment-id: ${{ steps.find-comment.outputs.comment-id }}
@@ -50,26 +50,28 @@ jobs:
                       | 🟡 **Building** | [View logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) | ${{ steps.timestamp.outputs.time }} |
 
             - name: Checkout
-              uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+              uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
 
             - name: Set up pnpm
               uses: pnpm/action-setup@c5ba7f7862a0f64c1b1a05fbac13e0b8e86ba08c # v4
 
             - name: Set up Node.js
-              uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+              uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
               with:
                   node-version: '22'
                   cache: 'pnpm'
 
-            - name: Cache Gatsby
-              uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+            # Gatsby builds cold (no .cache restore). Restoring a warm .cache across builds with
+            # differing MDX content caused gatsby-plugin-mdx incoherence ("Can't resolve …mdx",
+            # "X is not defined"); cold builds are reliable. We still restore the small Cloudinary
+            # metadata file (produced by the cache-warmup job) to skip the ~140s onPreInit crawl.
+            - name: Restore Cloudinary metadata cache
+              uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
               with:
-                  path: |
-                      .cache
-                      public
-                  key: gatsby-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml', 'gatsby-config.js') }}
+                  path: .cloudinary-resources.json
+                  key: cloudinary-${{ github.run_id }}
                   restore-keys: |
-                      gatsby-${{ runner.os }}-
+                      cloudinary-
 
             - name: Install dependencies
               run: pnpm install --frozen-lockfile
@@ -78,12 +80,60 @@ jobs:
               run: pnpm build
               env:
                   GATSBY_MINIMAL: 'true'
+                  # Emit the static/dynamic module graph so the eager-graph check below can
+                  # measure the app shell. Reuses this single PR build — no second build.
+                  EMIT_WEBPACK_STATS: 'true'
                   CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
                   CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
 
+            # Bundle + eager-graph report. Runs off the build above, so it adds no build to
+            # the PR. The master baseline (for deltas) is produced by bundle-baseline.yml and
+            # restored from cache here; absent a baseline the comment shows absolute sizes.
+            - name: Restore bundle baseline from master
+              if: success()
+              uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+              with:
+                  path: bundle-report/baseline
+                  key: bundle-baseline-${{ github.event.pull_request.base.sha }}
+                  restore-keys: |
+                      bundle-baseline-
+
+            - name: Measure bundle size and eager graph
+              if: success()
+              run: |
+                  node scripts/bundle/bundle-size-report.mjs
+                  node scripts/bundle/check-eager-graph.mjs --report-only
+                  node scripts/bundle/build-bundle-comment.mjs
+
+            - name: Upload bundle report
+              if: success()
+              uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+              with:
+                  name: bundle-report
+                  path: bundle-report/
+                  retention-days: 7
+
+            - name: Find bundle report comment
+              if: success()
+              uses: peter-evans/find-comment@3eae4d37986fb5a8592848f6a574fdf654e61f9e # v3.1.0
+              id: find-bundle-comment
+              with:
+                  issue-number: ${{ github.event.pull_request.number }}
+                  comment-author: 'github-actions[bot]'
+                  body-includes: '<!-- bundle-size-report -->'
+
+            - name: Post bundle report comment
+              if: success()
+              uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4.0.0
+              with:
+                  issue-number: ${{ github.event.pull_request.number }}
+                  comment-id: ${{ steps.find-bundle-comment.outputs.comment-id }}
+                  edit-mode: replace
+                  body-path: bundle-report/comment.md
+
             - name: Deploy to Cloudflare Pages
               id: deploy
-              uses: cloudflare/wrangler-action@da0e0dfe58b7a431659754fdf3f186c529afbe65 # v3
+              uses: cloudflare/wrangler-action@da0e0dfe58b7a431659754fdf3f186c529afbe65 # v3.14.1
               with:
                   apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
                   accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -97,7 +147,7 @@ jobs:
 
             - name: Comment on success
               if: success()
-              uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4
+              uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4.0.0
               with:
                   issue-number: ${{ github.event.pull_request.number }}
                   comment-id: ${{ steps.comment.outputs.comment-id }}
@@ -112,7 +162,7 @@ jobs:
 
             - name: Notify reviewer on successful builds (Inkeep PRs only)
               if: success() && contains(github.event.pull_request.user.login, 'inkeep')
-              uses: actions/github-script@v7
+              uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
               with:
                   script: |
                       const pr = context.payload.pull_request;
@@ -126,7 +176,7 @@ jobs:
 
             - name: Notify reviewer on build failure (Inkeep PRs only)
               if: failure() && contains(github.event.pull_request.user.login, 'inkeep')
-              uses: actions/github-script@v7
+              uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
               with:
                   script: |
                       const pr = context.payload.pull_request;
@@ -140,7 +190,7 @@ jobs:
 
             - name: Comment on failure
               if: failure()
-              uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4
+              uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4.0.0
               with:
                   issue-number: ${{ github.event.pull_request.number }}
                   comment-id: ${{ steps.comment.outputs.comment-id }}
