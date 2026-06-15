@@ -6,7 +6,7 @@ showTitle: true
 
 You volunteered or have been asked  to speak at a dev meetup, give a demo at a conference, or present PostHog to a virtual or in-person audience. Maybe you said yes before you thought too hard about it. That's fine — good talks happen this way. This guide is for preparing and delivering your talk.
 
->For examples from other speaker, reference slides from [previous talks](#examples-from-previous-talks). **Have any questions?** Ask in [#team-irl-events](https://posthog.slack.com/archives/C0AB78YBCNA) or ping whoever put you up to this.
+>**Want slide examples from other speakers?** See [recent talks](#slides-from-recent-talks). **Have questions?** Ask in [#team-irl-events](https://posthog.slack.com/archives/C0AB78YBCNA) or ping whoever put you up to this. **Still need demo tips?** [Here are 24 more](https://newsletter.posthog.com/p/how-to-demo).
 
 ## **1. Know your room before you write a word**
 
@@ -86,7 +86,7 @@ A few principles for building out slides:
 * If a slide doesn't support the one true thing you identified in step 3, cut it.  
 * Speaking of speaker notes, you will save yourself time and head space if you always have notes.
 
-For feedback on design or help with navigating the [PostHog brand assets](https://posthog.com/handbook/company/brand-assets) ([Hoggies](https://www.figma.com/design/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?node-id=2226-55&t=1sj1GezTKuCfaybF-1) included), stop by [\#team-marketing](https://posthog.slack.com/archives/C08CG24E3SR)
+For feedback on design or help with navigating the [PostHog brand assets](https://posthog.com/handbook/company/brand-assets) ([Hoggies](https://www.figma.com/design/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?node-id=2226-55&t=1sj1GezTKuCfaybF-1) included), stop by [\#team-graphics](https://posthog.slack.com/archives/C0AU440KS6P)
 
 ## **6. Practice out loud. Twice minimum.**
 
@@ -121,9 +121,12 @@ If you receive a question that you believe is off-topic or unfitting for the set
 
 ---
 
-## Examples from previous talks:
+## Slides from recent talks
 
-* Feb 2026 - <TeamMember name="Emanuele Capparelli"/> - [Lisbon SaaS Founders Presentation](https://pitch.com/v/lisbon-saas-founder-x-posthog-x-supabase-hgnmr3)  
+* June 2026 - <TeamMember name="James Hawkins"/> - [AI happened. Now what?](https://docs.google.com/presentation/d/1QHGxTd8RkABiIQenjqe12dEdrIlfIXFpmhp9wRFeQyM/edit?usp=sharing)  
+* May 2026 - <TeamMember name="Meikel Ratz"/> - [Stop Snacking. Start Cooking](https://www.figma.com/deck/84jm6dUfWcXhFEmhojvMUL/Myke---AI-killed-the-busywork?node-id=1-20157&viewport=-1045%2C-95%2C0.46&t=AWFACVyZDrZb1paw-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1)  
+* March 2026 - <TeamMember name="Sarah Sanders"/> - [Onboarding sucks](https://www.figma.com/slides/4rGB61lnyYnspct1J4sWYR/Future-of-DevEx-talk?node-id=1-20157&t=o4gv82hYwY37dqkj-0)  
+* March 2026 - <TeamMember name="Rafael Audibert"/> - [Just let engineers cook](https://www.figma.com/deck/N9Q3bAvqNKFBTQC6T95Tra/Rafa---PH-slide-deck-template?node-id=1-20157&t=2VKu4S3lHierX7No-1)  
 * Feb 2026 - <TeamMember name="Michael Matloka"/> - [10 learning from launching an agentic AI product at scale](https://www.figma.com/slides/zMNBsNihNxKyS6z7sSwiRK/10-learnings-from-launching-an-agentic-AI-product-at-scale?t=6hlWStUDlHsITOKo-6)  
 * Nov 2025 - <TeamMember name="James Hawkins"/> - [How to build a cult](https://drive.google.com/file/d/1BMgl2y817m5t43D6NCr9hstnGO1kKxJy/view)  
 * Oct 2025 - <TeamMember name="Joshua Snyder"/> - [Code that fixes itself](https://docs.google.com/presentation/d/1sYsmTPugdttQqshPa6yIKQcUu5Rje3-fPMbRGtyrfZg/edit?slide=id.p#slide=id.p)  

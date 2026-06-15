@@ -39,12 +39,12 @@ PostHog can automatically capture these types of data without specific tracking 
 
 Autocapture is available in the following SDKs, each with a different set of captured events:
 
-- [JavaScript Web](/docs/libraries/js) - enabled by default
-- [React](/docs/libraries/react) - enabled by default
-- [Android](/docs/libraries/android) - enabled by default
-- [iOS](/docs/libraries/ios) - enabled by default (element interactions - `$autocapture` events disabled by default)
-- [React Native](/docs/libraries/react-native) - disabled by default
-- [Flutter](/docs/libraries/flutter) - disabled by default
+- [JavaScript Web](/docs/libraries/js) – enabled by default
+- [React](/docs/libraries/react) – enabled by default
+- [Android](/docs/libraries/android) – navigation, lifecycle, and deep-link autocapture enabled by default; interaction autocapture is not supported
+- [iOS](/docs/libraries/ios) – enabled by default (element interactions – `$autocapture` events disabled by default)
+- [React Native](/docs/libraries/react-native) – disabled by default
+- [Flutter](/docs/libraries/flutter) – disabled by default
 
 <CalloutBox icon="IconInfo" title="Looking for session and exception autocapture?" type="fyi">
 
@@ -231,110 +231,18 @@ The event is captured as a `$rageclick` event. You can use this event to identif
 
 ### iOS interaction autocapture
 
-The PostHog [iOS SDK](/docs/libraries/ios) captures the following events by default:
+The PostHog [iOS SDK](/docs/libraries/ios) can capture UIKit interaction events when `captureElementInteractions` is enabled. Autocaptured interaction events display as the autocaptured interaction type in the [activity tab](https://app.posthog.com/activity/explore), such as `touched ...` or `value_changed ...`.
 
-- User interactions like `touch`, `swipe`, `pan`, `pinch`, `rotation`, `long_press`, `scroll`
-- Control types `value_changed`, `submit`, `toggle`, `primary_action`, `menu_action`, `change`
-
-Autocaptured events display as the autocaptured interaction type in the [activity tab](https://app.posthog.com/activity/explore), such as `touched ...` or `value_changed ...`.
-
-> 🚧 **Note:** Interaction autocapture is currently supported only in UIKit.
-
-#### Configuring interaction autocapture
-
-Interaction autocapture is **not enabled by default**. You can enable it by setting `captureElementInteractions` to `true` in the config.
-
-```swift
-let config = PostHogConfig(projectToken: <ph_project_token>, host: <ph_client_api_host>)
-
-config.captureElementInteractions = true // Disabled by default
-
-PostHogSDK.shared.setup(config)
-```
-
-You can find more details about how to configure autocapture in the [iOS SDK docs](/docs/libraries/ios#autocapture-configuration).
-
-#### Preventing sensitive data capture
-
-To exclude specific UI elements from autocapture or session replay, add `ph-no-capture` as either an `accessibilityLabel` or `accessibilityIdentifier`. When PostHog detects this label or identifier anywhere in the view hierarchy, the element is either ignored or masked:
-
-```swift
-// This view is excluded from autocapture
-let view = UIView()
-view.accessibilityLabel = "ph-no-capture"
-```
-
-> **Note:** By default, PostHog will make a best effort to automatically exclude fields detected as sensitive, even without the `ph-no-capture` tag. These include password fields, credit card fields, OTP fields, and any other fields related to Personally Identifiable Information (PII).
-
-For more details on how to setup masking for session replay, please refer to our [privacy controls documentation](/docs/session-replay/privacy?tab=iOS).
+See the [iOS autocapture documentation](/docs/libraries/ios/configuration#autocapture-configuration) for supported events, configuration options, and privacy controls.
 
 </Tab.Panel>
 <Tab.Panel>
 
 ### React Native interaction autocapture
 
-The PostHog [React Native SDK](/docs/libraries/react-native) can automatically capture touch events when the user interacts with the screen. To enable this, set the `captureTouches` config option to true in your autocapture config like this:
+The PostHog [React Native SDK](/docs/libraries/react-native) can automatically capture touch events when the user interacts with the screen.
 
-```jsx
-<PostHogProvider
-  apiKey="<ph_project_token>"
-  autocapture={{
-    captureTouches: true,
-  }}
->
-  ...
-</PostHogProvider>
-```
-
-Autocaptured events display as the autocaptured interaction type in the [activity tab](https://app.posthog.com/activity/explore), such as `touched ...`.
-
-#### Configuring interaction autocapture
-
-You can configure the following options:
-
-| Option                | Description                                                                                                                                                                                                      |
-| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `captureTouches`      | **Type:** `boolean`. When set to `true`, autocapture will capture touch events.                                                                                                                                  |
-| `ignoreLabels`        | **Type:** `string[]`. List of labels to ignore from the stack in touch events.                                                                                                                                   |
-| `customLabelProp`     | **Type:** `string`. Default: `ph-label`. If you set a custom label prop such as `<View ph-label="product-card">`, the UI element will display as `product-card` instead of a generic `View`.                     |
-| `maxElementsCaptured` | **Type:** `number`. The maximum number of elements to capture in the component hierarchy.                                                                                                                        |
-| `noCaptureProp`       | **Type:** `string`. Default: `ph-no-capture`. The prop to use for no capture. For example, if set to `data-no-tracking` the component `<Button data-no-tracking>This won't be tracked</Button>` will be ignored. |
-| `propsToCapture`      | **Type:** `string[]`. List of props to capture from the component hierarchy. By default, identifiers and text content are captured.                                                                              |
-
-```jsx
-<PostHogProvider
-  apiKey="<ph_project_token>"
-  autocapture={{
-    captureTouches: true,
-    ignoreLabels: [], // Any labels here will be ignored from the stack in touch events
-    customLabelProp: "ph-label",
-    maxElementsCaptured: 20,
-    noCaptureProp: "ph-no-capture",
-    propsToCapture: ["testID"], // Limit which props are captured. By default, identifiers and text content are captured.
-  }}
->
-  ...
-</PostHogProvider>
-```
-
-#### Preventing sensitive data capture
-
-To exclude specific UI elements from autocapture or session replay, add `ph-no-capture` (or your custom `noCaptureProp`) as either an `accessibilityLabel` or `accessibilityIdentifier`. When PostHog detects this label or identifier anywhere in the view hierarchy, the element is either ignored or masked:
-
-```jsx
-<PostHogProvider apiKey="<ph_project_token>" autocapture={{
-    captureTouches: true,
-    noCaptureProp: "ph-no-capture", // Optionally, you can use a custom prop like "data-no-capture"
-    // ...
-}}>
-    ...
-</PostHogProvider>
-
-// This view will be excluded from autocapture
-<View ph-no-capture>
-    ...
-</View>
-```
+See the [React Native autocapture docs](/docs/libraries/react-native#autocapture) for supported events, configuration options, and privacy controls.
 
 </Tab.Panel>
 </Tab.Panels>
@@ -344,10 +252,11 @@ To exclude specific UI elements from autocapture or session replay, add `ph-no-c
 
 ## Navigation and lifecycle event autocapture
 
-<Tab.Group tabs={['Web', 'iOS', 'React Native']}>
+<Tab.Group tabs={['Web', 'iOS', 'Android', 'React Native']}>
 <Tab.List>
 <Tab>Web</Tab>
 <Tab>iOS</Tab>
+<Tab>Android</Tab>
 <Tab>React Native</Tab>
 </Tab.List>
 <Tab.Panels>
@@ -419,7 +328,7 @@ Screen navigation and application lifecycle autocapture are enabled by default b
 For example, your initialization code might look like this:
 
 ```swift
-let config = PostHogConfig(projectToken: <ph_project_token>, host: <ph_client_api_host>)
+let config = PostHogConfig(projectToken: "<ph_project_token>", host: "<ph_client_api_host>")
 
 config.captureElementInteractions = true // Disabled by default
 config.captureScreenViews = false // Enabled by default; set to false to disable
@@ -431,20 +340,20 @@ PostHogSDK.shared.setup(config)
 </Tab.Panel>
 <Tab.Panel>
 
+### Android navigation and lifecycle autocapture
+
+Android lifecycle, screen, and deep-link autocapture are documented in the [Android SDK capturing events guide](/docs/libraries/android#capturing-events). Configuration options are documented in the [Android SDK configuration reference](/docs/libraries/android#all-configuration-options).
+
+Android does not currently support interaction autocapture for arbitrary taps or gestures.
+
+</Tab.Panel>
+<Tab.Panel>
+
 ### React Native navigation and lifecycle autocapture
 
-PostHog can automatically captures navigation and lifecycle events as the user navigates in the app and when the app is launched, updated, or backgrounded.
+PostHog can automatically capture navigation and lifecycle events as the user navigates in the app and when the app is launched, updated, or backgrounded.
 
-#### Configuring screen navigation autocapture
-
-Screen navigation autocapture is **not enabled by default**. You can enable it by setting `captureScreens` to `true` in the config. When enable, PostHog autocaptures events like:
-
-| `$screen` | When the user navigates. If using `@react-navigation/native` (v6 or lower) or `react-native-navigation`. See [React Native docs](/docs/libraries/react-native#capturing-screen-views) for config options. |
-| `Application Installed` | When app is first installed |
-| `Application Updated` | When app is updated to new version |
-| `Application Opened` | When app is opened from cold start |
-| `Application Became Active` | When app becomes active from background |
-| `Application Backgrounded` | When app goes to background |
+See the [React Native autocapture docs](/docs/libraries/react-native#autocapture) for supported events and configuration details.
 
 </Tab.Panel>
 </Tab.Panels>

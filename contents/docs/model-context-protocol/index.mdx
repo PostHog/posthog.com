@@ -7,6 +7,7 @@ showTitle: true
 
 import MCPClients from "./_snippets/mcp-clients.tsx"
 import PromptExample from "./_snippets/prompt-example.tsx"
+import PlatformInstall from "components/PlatformInstall"
 
 The PostHog [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) server is a free, hosted endpoint that lets your AI agent use PostHog – with just plain text questions your agents can ship a feature flag from a prompt, dig into a stack trace without leaving your editor, run a HogQL query through Claude, triage a support ticket, set up a CDP destination, and much more.
 
@@ -18,9 +19,7 @@ It works with any MCP-compatible client, including [PostHog Code](/code), Claude
 
 The fastest way to setup the MCP is the [PostHog Wizard](https://github.com/PostHog/wizard), which installs the MCP server directly into **PostHog Code**, **Cursor**, **Claude Code**, **Claude Desktop**, **Codex**, **VS Code**, and **Zed**:
 
-```bash
-npx @posthog/wizard mcp add
-```
+<PlatformInstall />
 
 Using something else? Pick your client to set it up manually:
 

@@ -1,0 +1,79 @@
+name: Bundle baseline (master)
+
+# Produces the master baseline that deploy-preview.yml diffs each PR against. Builds the
+# site the same way the preview build does (GATSBY_MINIMAL + EMIT_WEBPACK_STATS) and caches
+# the resulting reports. Path-filtered so content/docs-only commits don't trigger a build —
+# only changes that can move the JS bundle do.
+
+on:
+    push:
+        branches:
+            - master
+        paths:
+            - 'src/**'
+            - 'gatsby-*'
+            - 'gatsby/**'
+            - 'scripts/bundle/**'
+            - 'package.json'
+            - 'pnpm-lock.yaml'
+            - '.github/workflows/bundle-baseline.yml'
+
+concurrency:
+    group: bundle-baseline
+    cancel-in-progress: true
+
+env:
+    NODE_OPTIONS: '--max_old_space_size=12288'
+
+jobs:
+    baseline:
+        name: Build & cache baseline
+        runs-on: depot-ubuntu-latest-8
+        timeout-minutes: 45
+        permissions:
+            contents: read
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+
+            - name: Set up pnpm
+              uses: pnpm/action-setup@c5ba7f7862a0f64c1b1a05fbac13e0b8e86ba08c # v4
+
+            - name: Set up Node.js
+              uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+              with:
+                  node-version: '22'
+                  cache: 'pnpm'
+
+            - name: Restore Cloudinary metadata cache
+              uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+              with:
+                  path: .cloudinary-resources.json
+                  key: cloudinary-${{ github.run_id }}
+                  restore-keys: |
+                      cloudinary-
+
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
+
+            - name: Build site
+              run: pnpm build
+              env:
+                  GATSBY_MINIMAL: 'true'
+                  EMIT_WEBPACK_STATS: 'true'
+                  CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
+                  CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
+
+            - name: Measure bundle size and eager graph
+              run: |
+                  node scripts/bundle/bundle-size-report.mjs
+                  node scripts/bundle/check-eager-graph.mjs --report-only
+                  mkdir -p bundle-report/baseline
+                  cp bundle-report/eager-graph-report.json bundle-report/bundle-size-report.json bundle-report/baseline/
+
+            - name: Save baseline to cache
+              uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+              with:
+                  path: bundle-report/baseline
+                  key: bundle-baseline-${{ github.sha }}

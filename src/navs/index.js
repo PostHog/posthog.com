@@ -1087,6 +1087,10 @@ export const handbookSidebar = [
                         url: '/handbook/marketing/product-announcements',
                     },
                     {
+                        name: 'Collaborating with PMs',
+                        url: '/handbook/marketing/collaborating-with-pms',
+                    },
+                    {
                         name: 'Incident comms',
                         url: '/handbook/marketing/incident-comms',
                     },
@@ -1095,12 +1099,20 @@ export const handbookSidebar = [
                         url: '/handbook/marketing/email-comms',
                     },
                     {
+                        name: 'Onboarding & lifecycle emails',
+                        url: '/handbook/marketing/onboarding-and-lifecycle-emails',
+                    },
+                    {
                         name: 'In-app messaging',
                         url: '/handbook/marketing/in-app',
                     },
                     {
                         name: 'Slack messaging',
                         url: '/handbook/marketing/slack-messaging',
+                    },
+                    {
+                        name: 'Social media',
+                        url: '/handbook/marketing/social-media',
                     },
                     {
                         name: 'Partnerships',
@@ -1383,6 +1395,10 @@ export const handbookSidebar = [
                     {
                         name: 'PLG lead qualification',
                         url: '/handbook/growth/sales/product-led-lead-qualification',
+                    },
+                    {
+                        name: 'How to pitch self-driving',
+                        url: '/handbook/growth/sales/how-to-pitch-self-driving',
                     },
                     {
                         name: 'Expansion, cross-sell & retention',
@@ -4115,6 +4131,72 @@ export const docsMenu = {
             ],
         },
         {
+            name: 'Replay Vision',
+            url: '/docs/replay-vision',
+            color: 'yellow',
+            icon: 'IconEye',
+            description: 'Use AI to automatically watch your session recordings and turn what it sees into queryable data',
+            children: [
+                {
+                    name: 'Replay Vision',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/replay-vision',
+                    icon: 'IconEye',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Getting started',
+                    url: '/docs/replay-vision/start-here',
+                    icon: 'IconRocket',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Scanner types',
+                    url: '/docs/replay-vision/scanner-types',
+                    icon: 'IconShuffle',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Creating scanners',
+                    url: '/docs/replay-vision/creating-scanners',
+                    icon: 'IconPencil',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Running scanners',
+                    url: '/docs/replay-vision/running-scanners',
+                    icon: 'IconPlay',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Observations',
+                    url: '/docs/replay-vision/observations',
+                    icon: 'IconList',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Quota and limits',
+                    url: '/docs/replay-vision/quota-and-limits',
+                    icon: 'IconPercentage',
+                    color: 'yellow',
+                },
+                {
+                    name: 'MCP',
+                    url: '/docs/replay-vision/mcp',
+                    icon: 'IconTerminal',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Troubleshooting',
+                    url: '/docs/replay-vision/troubleshooting',
+                    icon: 'IconQuestion',
+                    color: 'yellow',
+                },
+            ],
+        },
+        {
             name: 'Feature Flags',
             icon: 'IconToggle',
             color: 'seagreen',
@@ -5163,6 +5245,7 @@ export const docsMenu = {
                     featured: true,
                     children: [
                         { name: 'Overview', url: '/docs/surveys/installation' },
+                        { name: 'Android', url: '/docs/surveys/installation/android' },
                         { name: 'Angular', url: '/docs/surveys/installation/angular' },
                         { name: 'Astro', url: '/docs/surveys/installation/astro' },
                         { name: 'Bubble', url: '/docs/surveys/installation/bubble' },
@@ -6741,7 +6824,7 @@ export const docsMenu = {
             name: 'Slack app',
             icon: 'IconAtSign',
             color: 'purple',
-            url: '/docs/slack-app',
+            url: '/docs/slack',
             description: 'Run PostHog from any Slack channel — agent tasks, analytics, and notifications.',
             children: [
                 {
@@ -6749,25 +6832,25 @@ export const docsMenu = {
                 },
                 {
                     name: 'Overview',
-                    url: '/docs/slack-app',
+                    url: '/docs/slack',
                     icon: 'IconHome',
                     color: 'seagreen',
                 },
                 {
                     name: 'Setup',
-                    url: '/docs/slack-app/setup',
+                    url: '/docs/slack/setup',
                     icon: 'IconWrench',
                     color: 'blue',
                 },
                 {
                     name: 'Commands',
-                    url: '/docs/slack-app/commands',
+                    url: '/docs/slack/commands',
                     icon: 'IconTerminal',
                     color: 'purple',
                 },
                 {
                     name: 'Pricing',
-                    url: '/docs/slack-app/pricing',
+                    url: '/docs/slack/pricing',
                     icon: 'IconShield',
                     color: 'red',
                 },
@@ -6931,6 +7014,7 @@ export const docsMenu = {
                         { name: 'React Native', url: '/docs/logs/installation/react-native' },
                         { name: 'iOS', url: '/docs/logs/installation/ios' },
                         { name: 'Android', url: '/docs/logs/installation/android' },
+                        { name: 'Flutter', url: '/docs/logs/installation/flutter' },
                         { name: 'Datadog', url: '/docs/logs/installation/datadog' },
                         { name: 'Other', url: '/docs/logs/installation/other' },
                     ],

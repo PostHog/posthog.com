@@ -193,7 +193,7 @@ Method swizzling is enabled by default, but can be disabled by setting the relev
 | Rage clicks                    | Automatically captures `$rageclick` events for rapid repeated taps in the same area (iOS/macCatalyst, UIKit) | `config.rageClickConfig.enabled` |
 | Session replay                 | Records user sessions                                                                 | `config.sessionReplay`           |
 | Surveys                        | Displays surveys at appropriate times                                                 | `config.surveys`                 |
-| Advanced metrics tracking      | Provides more precise session ID calculation and rotation by detecting user activity and idleness | —                          |
+| Advanced metrics tracking      | Provides more precise session ID calculation and rotation by detecting user activity and idleness | N/A                          |
 
 
 ### Disabling all method swizzling
@@ -222,7 +222,7 @@ Users must explicitly grant Open Access in **Settings > General > Keyboard > Key
 
 ## All configuration options
 
-The [`PostHogConfig` object](https://github.com/PostHog/posthog.com/pull/13379/files?new_files_changed=true#r2480032424:~:text=gonna%20link%20to-,config%20object,-in%20posthog%20for) contains several other settings you can toggle:
+The [`PostHogConfig` object](https://github.com/PostHog/posthog-ios/blob/main/PostHog/PostHogConfig.swift) contains several other settings you can toggle:
 
 | Attribute | Description |
 |-----------|-------------|
@@ -246,7 +246,12 @@ The [`PostHogConfig` object](https://github.com/PostHog/posthog.com/pull/13379/f
 | `personProfiles`<br/><br/>**Type:** Enum<br/>**Default:** `.identifiedOnly` | Determines the behavior for processing user profiles. |
 | `setDefaultPersonProperties`<br/><br/>**Type:** Boolean<br/>**Default:** `true` | Automatically set common device and app properties (such as `$app_version`, `$os_name`, and `$device_type`) as person properties for feature flag evaluation. See [property overrides](/docs/feature-flags/property-overrides) for more details. |
 | `sessionReplay`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Enable Recording of Session Replays. |
-| `sessionReplayConfig`<br/><br/>**Type:** Object<br/>**Default:** `.init()` | Session Replay configuration. https://posthog.com/docs/session-replay/installation for more details |
+| `sessionReplayConfig`<br/><br/>**Type:** Object<br/>**Default:** `.init()` | Session Replay configuration. See [Session Replay installation](/docs/session-replay/installation/ios) for more details. |
+| `tracingHeaders`<br/><br/>**Type:** Array of Strings<br/>**Default:** `nil` | Exact hostnames that should receive PostHog tracing headers when the SDK instruments `URLSession` requests. |
+| `errorTrackingConfig`<br/><br/>**Type:** Object<br/>**Default:** `.init()` | Error Tracking configuration. See [Error Tracking installation](/docs/error-tracking/installation/ios) for more details. |
+| `logs`<br/><br/>**Type:** Object<br/>**Default:** `.init()` | Structured Logs configuration. See [Logs installation](/docs/logs/installation/ios) for more details. |
+| `surveysConfig`<br/><br/>**Type:** Object<br/>**Default:** `.init()` | Surveys configuration, including custom survey delegates and display language overrides. |
+| `urlSessionConfiguration`<br/><br/>**Type:** URLSessionConfiguration<br/>**Default:** `.default` | Custom `URLSessionConfiguration` used by the SDK for PostHog API requests. |
 | `appGroupIdentifier`<br/><br/>**Type:** String<br/>**Default:** `nil` | The identifier of the App Group that should be used to store shared analytics data. PostHog will try to get the physical location of the App Group's shared container, otherwise fallback to the default location. |
 | `reuseAnonymousId`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Whether the SDK should reuse the anonymous Id between user changes. When enabled, a single Id will be used for all anonymous users on this device. |
 | `surveys`<br/><br/>**Type:** Boolean<br/>**Default:** `true` | Enable Surveys. |
