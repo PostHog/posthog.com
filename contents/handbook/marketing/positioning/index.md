@@ -56,7 +56,7 @@ We've repositioned around self-driving. That only works if we all use the same w
 
 The quick mental model:
 
-- **What is it?** A single platform that makes your product self-driving.
+- **What is it?** A single platform for self-driving product development.
 - **How does it work?** It pairs the full context of your data (events, errors, logs, replays, and more) with agents that ship improvements – reactively (prompted, e.g. via Slack) or proactively (e.g. via the Inbox).
 - **Who's it for?** Developers, and anyone with the duty or desire to do technical work, whether or not they write the code themselves.
 - **Where does it live?** Through four products: Web (app.posthog.com), Slack, Desktop (PostHog Code), and MCP.
