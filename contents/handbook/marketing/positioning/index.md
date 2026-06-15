@@ -8,7 +8,7 @@ PostHog ships a lot of apps. This section is how we explain each one — what it
 
 These aren't datasheets. They're opinionated playbooks.
 
-> **The house position:** **PostHog makes _your_ product self-driving.** Every product page ladders up to that — each one is a signal source, a way agents act, or the evaluation that proves it worked. Keep the customer's product as the subject: they get a product that improves itself; PostHog is how. Don't write "PostHog is self-driving software" in customer-facing copy. (We do use the same capabilities on PostHog itself — that's a proof point, not the pitch.) Full nuance in the [content brand guidelines](/handbook/content/brand-message).
+> **The house position:** **PostHog makes _your_ product self-driving.** Every product page ladders up to that — each one is a signal source, a way agents act, or the evaluation that proves it worked. Keep the customer's product as the subject: they get a product that improves itself; PostHog is how. Don't write "PostHog is self-driving software" in customer-facing copy. We do use the same capabilities on PostHog itself — that's a proof point, not the pitch.
 
 > **PMM tip:** Looking to test new messaging or create a new doc? BuildBetter's AI chat is a good starting point and has context from 1,000s of hours of customer interviews.
 
