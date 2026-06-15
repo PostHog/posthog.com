@@ -1,0 +1,63 @@
+---
+title: Replay Vision
+---
+
+import { ProductScreenshot } from "components/ProductScreenshot";
+
+<CalloutBox icon="IconInfo" title="Replay Vision is in closed beta" type="warning">
+
+Not yet available to everyone – <a href="/replay-vision">join the waitlist</a> to get updates.
+
+</CalloutBox>
+
+Replay Vision uses AI to automatically watch your [session recordings](/docs/session-replay) and turn what it sees into structured, queryable data. You configure **scanners** – named AI probes that describe what to look for – and PostHog applies them to your recordings, producing **observations** you can query, chart, and alert on.
+
+The key idea is that Replay Vision actually *watches the video* of each recording alongside its events. This lets it pick up on visual and behavioral cues – hesitation, confusion, where a user's attention goes – that aren't captured by clicks and pageviews alone. Instead of manually reviewing hundreds of replays to spot a pattern, you describe what matters once and let it run continuously.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/replay_vision_overview_app_light_9f82e7b066.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/replay_vision_overview_app_dark_73d0b2c435.png"
+  alt="The Replay Vision overview: observations over time, enabled scanners, the monthly usage meter, and the scanner list"
+  classes="rounded"
+/>
+
+## How it works
+
+Replay Vision is built around two concepts:
+
+- **Scanner** – a configured AI probe scoped to your project. A scanner has a natural-language prompt describing what to look for, a [scanner type](/docs/replay-vision/scanner-types) that determines what kind of output it produces, a set of recording filters that select which sessions it applies to, and a sampling rate.
+- **Observation** – one application of a scanner to a single recording. Each observation runs the scanner against that session and produces a structured result that's persisted and emitted as a queryable [`$recording_observed` event](/docs/replay-vision/observations#querying-observations-as-events).
+
+When a scanner runs against a recording, PostHog:
+
+1. Renders the recording to a sped-up video (inactive periods are trimmed out).
+2. Sends that video, along with the session's raw events (clicks, pageviews, rage clicks, dead clicks, exceptions, and more), to a Google Gemini model.
+3. Asks the model to produce a structured response matching the scanner's type.
+4. Saves the result as an observation and captures it as a `$recording_observed` event in your project.
+
+Each observation snapshots the scanner's configuration at the time it ran, so editing a scanner later doesn't change past observations.
+
+## What you can do with it
+
+A few examples of what teams use Replay Vision for:
+
+- **Spot dead ends** – flag sessions where users get visibly stuck on a page with no clear next action.
+- **Classify intent** – bucket sessions by what the user appeared to be trying to do (browsing, purchasing, getting support).
+- **Score frustration** – assign a numeric score to each session for how much friction the user experienced.
+- **Summarize sessions** – generate a short narrative of what happened in each session, so you can skim instead of watching.
+
+Each of these maps to a [scanner type](/docs/replay-vision/scanner-types).
+
+## Where to go next
+
+- **New to Replay Vision?** Walk through your [first scanner](/docs/replay-vision/start-here) end-to-end.
+- **Picking the right scanner type?** Read the [scanner types reference](/docs/replay-vision/scanner-types).
+- **Authoring a scanner?** See [creating scanners](/docs/replay-vision/creating-scanners) for prompt patterns, filters, and sampling.
+- **Already have observations?** Learn how to [read them and query them as events](/docs/replay-vision/observations) to build insights, dashboards, and alerts.
+- **Hit a snag?** Check [troubleshooting](/docs/replay-vision/troubleshooting).
+
+## Further reading
+
+- [Session Replay](/docs/session-replay)
+- [Summarize sessions with PostHog AI](/docs/session-replay/session-summaries-ai)
+- [Find replays with PostHog AI](/docs/session-replay/find-replays-ai)
