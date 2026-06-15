@@ -98,7 +98,7 @@ Our brand is a reflection of us and [how we’re experienced by others](/blog/br
 
 Community events are better when organizers share what happened, what you learned, and any follow-up actions. [We value feedback](/handbook/people/feedback) and expect the same from event organizers. In addition to what you learned and feedback from attendees, we ask that you share any photos, videos, quotes, data points with our team.
 
-PostHog team members who attended or presented at an event can share their feedback directly through our [event feedback form](https://us.posthog.com/external_surveys/019e8376-1932-0000-4317-ffe4ccf1d008).
+PostHog team members who attended or presented at an event can share their feedback directly through our [event feedback form](/events-feedback-form).
 
 ## Sponsoring external events
 
