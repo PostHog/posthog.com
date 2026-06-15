@@ -141,5 +141,5 @@ Build mode hands you the ability to [always be launching](https://andrewchen.sub
 
 At a previous company, I was cross-functional but still firmly inside a lane (marketing). I wasn't allowed near the source code, and even if I had been, I wouldn't have known where to start. The version of me powered by AI is a completely different shape, and I see it happening all around me. Engineers are [designing](/newsletter/vibe-designing). Product managers are shipping code instead of writing PRDs. Everyone gets to be a product *person*.
 
-This is the thing people actually wanted from AI: the ability to imagine something and then have it exist. It's a genie lamp except you are, in fact, allowed to wish for more wishes.
+This is the thing people actually wanted from AI: the ability to imagine something and [then have it exist](https://x.com/posthog/status/2065480940500267413). It's a genie lamp except you are, in fact, allowed to wish for more wishes.
 
