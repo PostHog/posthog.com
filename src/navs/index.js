@@ -1087,6 +1087,10 @@ export const handbookSidebar = [
                         url: '/handbook/marketing/product-announcements',
                     },
                     {
+                        name: 'Collaborating with PMs',
+                        url: '/handbook/marketing/collaborating-with-pms',
+                    },
+                    {
                         name: 'Incident comms',
                         url: '/handbook/marketing/incident-comms',
                     },
@@ -1105,6 +1109,10 @@ export const handbookSidebar = [
                     {
                         name: 'Slack messaging',
                         url: '/handbook/marketing/slack-messaging',
+                    },
+                    {
+                        name: 'Social media',
+                        url: '/handbook/marketing/social-media',
                     },
                     {
                         name: 'Partnerships',
@@ -1387,6 +1395,10 @@ export const handbookSidebar = [
                     {
                         name: 'PLG lead qualification',
                         url: '/handbook/growth/sales/product-led-lead-qualification',
+                    },
+                    {
+                        name: 'How to pitch self-driving',
+                        url: '/handbook/growth/sales/how-to-pitch-self-driving',
                     },
                     {
                         name: 'Expansion, cross-sell & retention',
