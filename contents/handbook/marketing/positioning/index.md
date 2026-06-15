@@ -69,24 +69,24 @@ Use this whenever you need a standard description of PostHog:
 
 ### Self-driving is the story, not a layer
 
-Self-driving is the narrative everything sits under. PostHog makes your product development self-driving – a better version of you, with your product and all its context in one place. It isn't a product or an app you can point at. It's what PostHog now is. Don't write "the self-driving product" or "the self-driving app." And keep the customer's product as the subject – see [Things PostHog is not](/handbook/content/brand-message#things-posthog-is-not).
+Self-driving is the narrative everything sits under. PostHog makes your product development self-driving – a better version of you, with your product and all its context in one place. It isn't a product or an app you can point at. It's what PostHog is and enables. Don't write "PostHog is a self-driving product" or "the self-driving app." Keep the customer's product as the subject – see [Things PostHog is not](/handbook/content/brand-message#things-posthog-is-not).
 
 ### The four layers
 
 Under that story, everything we offer is one of four things. Use these exactly.
 
-**Products** – the surfaces a customer adopts and pays for. This is how you access self-driving. Each has a distinct job:
+**Products** – the surfaces a customer adopts. This is how you access self-driving. Each has a distinct job:
 
 - **Slack** (the Slack App) – get simple stuff done
 - **Desktop** (PostHog Code) – get complex stuff done
 - **MCP** – reactive work without leaving Claude or your editor
 - **Web** (app.posthog.com) – get simple or complex work done without installing anything
 
-**Apps** – the functional capabilities: product analytics, session replay, feature flags, experiments, error tracking, surveys, web analytics, and so on. Still here, deliberately secondary. They support self-driving; they aren't the headline. We're demoting them, not dropping them.
+**Apps** – the functional capabilities accessed through the products product analytics, session replay, feature flags, experiments, error tracking, surveys, web analytics, and so on.
 
 **Context** – the data that feeds the self-driving loop: events, recordings, errors, logs, and so on. This is the fuel.
 
-**Context warehouse** – the data warehouse plus the full context-ingestion pipeline for your product. It's a named thing, and a significant part of how we bill.
+**Context warehouse** – the data warehouse plus the full context-ingestion pipeline for your product.
 
 In one line: self-driving is the story, products are how you access it, apps are supporting capabilities, context is the fuel, and the context warehouse is where context lives and is billed.
 
