@@ -25,9 +25,9 @@ Build mode is the version of you that ships a *lot* more. You could call it [eve
 
 Look at who's actually building with PostHog's AI products. In the last 30 days, people:
 
-- made more than 8 million [MCP](/docs/model-context-protocol) tool calls
-- held over 600,000 conversations with [PostHog AI](/ai)
-- created more than 750,000 [insights](/product-analytics)
+- Made more than 8 million [MCP](/docs/model-context-protocol) tool calls
+- Held over 600,000 conversations with [PostHog AI](/ai)
+- Created more than 750,000 [insights](/product-analytics)
 
 That's people building things. And a growing share of them would never call themselves engineers.
 
@@ -38,7 +38,7 @@ In other words: build mode isn't really about more output. It's about making eve
 
 ## What you can build
 
-Reading this won't change your job title, so what does build mode mean for you? Here are some concrete things you can do today:
+Reading this won't change your job title, so what does build mode mean for you? Here are some concrete things you can do today with @PostHog in Slack, PostHog AI, the MCP, and PostHog Code:
 
 ### Use @PostHog in Slack
 
@@ -50,7 +50,7 @@ Tag it with "fix this" or "build that" and it can code too. It spins up a sandbo
 
 In the first week it was available, usage split roughly into a quarter engineers, a quarter founders, and the rest marketing, product, support, and sales. People in every one of those roles have [shipped real PRs](/blog/slack-app-beta).
 
-**2. Settle an argument with a chart, in the thread where it started.**
+**2. Settle an argument in the thread where it started.**
 
 A colleague swears users love the new onboarding flow. You swear they hate it. Instead of booking a meeting about it, tag in `@PostHog`. Ask *"How does 7-day retention compare for users who went through the new onboarding versus the old one?"* It drops the data. Debate over.
 
@@ -75,7 +75,7 @@ Our `#marketing-alerts` channel gets daily updates like "LLM prompts that drove 
 On any insight you can follow up with something like `@PostHog`: *"Which articles convert to sign ups with immediate activation?"* It reads your [web analytics](/web-analytics) and product data together, so you might find one blog post quietly drives quality signups. Then you go write more like it.
 
 ![Content and conversion insights in the #marketing-alerts Slack channel](https://res.cloudinary.com/dmukukwp6/image/upload/marketing_alerts_in_slack_e9b76bdb43.png)
-<Caption>Our `#marketing-alerts` channel, where the content that's actually converting shows up daily.</Caption>
+<Caption>Our <code>#marketing-alerts</code> channel, where the content that's actually converting shows up daily.</Caption>
 
 **5. Fix something in production. Yes, really.**
 
@@ -116,7 +116,7 @@ Set it on a schedule. Every Monday: *"summarize last week's activation, day-7 re
 
 **9. Create a cohort for your next campaign – and the tracking to measure it.**
 
-I do this all the time to figure out who to email about a product launch: I ask PostHog AI to pull the list, either in the web app or through the MCP in PostHog Code. The prompt is just a description – *"create a cohort of users who visited the pricing page at least twice in the last 30 days but never started a trial"* – and that [cohort](/docs/data/cohorts) now exists in PostHog, ready to email or sync to your ad platform so you're reaching warm intent instead of cold lists.
+To figure out who to email about a product launch, I always ask PostHog AI to pull the list, either in the web app or through the MCP in PostHog Code. The prompt is just a description – *"create a cohort of users who visited the pricing page at least twice in the last 30 days but never started a trial"* – and that [cohort](/docs/data/cohorts) now exists in PostHog, ready to email or sync to your ad platform so you're reaching warm intent instead of cold lists.
 
 It works the other way too. Ask *"what events are we already tracking in the checkout flow?"* and your agent reads the schema live, then adds the missing `checkout_step_completed` call and opens the PR. Shipping a real change becomes part of the same conversation as asking about your data – the heart of [agent-first product engineering](/newsletter/agent-first-product-engineering).
 
@@ -130,20 +130,15 @@ That used to mean waiting in an engineer's queue. Now you tell PostHog Code: *"A
 
 Build mode isn't a solo act. Some of the best work happening at PostHog is in public Slack channels: a thread starts with an idea and ends with shipped code.
 
-And that know-how compounds. The old way to pass on how you do something was to write an SOP – a document that tells you how to do the thing but can't do it itself. A [skill](/docs/posthog-code/skills) can: it's your judgment written down in a form an agent can actually run, so the next person doesn't start from scratch.
+And that know-how compounds. The old way to pass on how you do something was to write an standard operating procedure – a document that tells you how to do the thing but can't do it itself. A [skill](/docs/posthog-code/skills) can: it's your judgment written down in a form an agent can actually run, so the next person doesn't start from scratch.
 
 If your company is *cautiously* adopting AI, this is the cleanest way to let people work outside their lane – the agent runs on your colleagues' codified judgment, not a blank prompt. We keep ours in a few places: the [skills store](/docs/prompt-management/skills-store), the [`.claude` folder](https://github.com/PostHog/posthog.com/tree/master/.claude) in our website repo, and the company [handbook](/handbook).
 
 ## Meet the 2030 version of you
 
-I get it – it's intimidating. Build mode hands you the ability to [always be launching](https://andrewchen.substack.com/p/always-be-launching), which means you now have to decide what to build. Good news: AI doesn't care what's on your resume.
+Build mode hands you the ability to [always be launching](https://andrewchen.substack.com/p/always-be-launching), which means you now have to decide what to build. Good news: AI doesn't care what's on your resume.
 
 At a previous company, I was cross-functional but still firmly inside a lane (marketing). I wasn't allowed near the source code, and even if I had been, I wouldn't have known where to start. The version of me powered by AI is a completely different shape, and I see it happening all around me. Engineers are [designing](/newsletter/vibe-designing). Product managers are shipping code instead of writing PRDs. Everyone gets to be a product *person*.
 
 This is the thing people actually wanted from AI: the ability to imagine something and then have it exist. It's a genie lamp except you are, in fact, allowed to wish for more wishes.
 
-### So, go build
-
-There's a version of you doing the most interesting work of your life, and the only thing standing between you and that person is the decision to be a builder. Once you're in build mode, the only limits left are your taste and your nerve.
-
-So, go build.
