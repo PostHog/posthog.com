@@ -51,9 +51,26 @@ Flag the churn risk openly in the team channel. We never want to lose a customer
 
 ### Lack of trust in PostHog data
 
-If a customer says PostHog data conflicts with what they see elsewhere, dig in. What stats are they comparing? Where's the implementation issue?
+If a customer says PostHog data conflicts with what they see elsewhere, dig in immediately. This is one of the most dangerous churn signals: a customer who trusts a different source of truth has no reason to stay.
 
-Customers who rely on a different source of truth are at long-term risk — they're not tied to PostHog. Fix this even when it's not an immediate threat.
+Almost every "the numbers are wrong" complaint is one of two things: an apples to oranges comparison, or a real implementation bug. Rule out the first before assuming the second.
+
+**Apples to oranges: are they even measuring the same thing?** Most discrepancies are definitional, not errors. Line the two tools up side by side and check:
+
+- **Metric definitions.** "Session," "active user," and "pageview" mean something different in every tool. A PostHog session times out after 30 minutes of inactivity, and GA4 and others differ. Confirm you're comparing the same concept before anything else.
+- **Time zone and date boundaries.** PostHog reports in your project's time zone, while the other tool may use UTC or the viewer's local time. A day that starts at a different hour produces different daily totals.
+- **Bot and internal traffic filtering.** Is one tool filtering bots, internal IPs, or your own team while the other isn't?
+- **Ad blockers.** Without a [reverse proxy](/docs/advanced/proxy), ad blockers drop events in the browser, so PostHog can legitimately read lower than a tool that collects on the server.
+- **Deduplication and attribution windows.** Different dedup logic and lookback windows change conversion and unique user counts.
+- **Sampling.** Some tools sample at scale. PostHog doesn't, so the "truth" they trust may itself be an estimate.
+
+**Check the math: reproduce the number.** Once you know you're comparing like for like, verify the figure itself:
+
+- Recreate their metric in PostHog yourself and click into the underlying events and persons to confirm they're firing correctly.
+- Look for implementation issues like duplicate or missing events, properties that aren't sent, or `identify`/group calls misfiring. The [implementation health check](/handbook/cs-and-onboarding/health-checks#have-they-implemented-tracking-incorrectly) lists the usual culprits.
+- Trace one concrete user journey from start to finish in both tools. A single reconciled example builds more trust than any dashboard.
+
+Customers who rely on a different source of truth are at long term risk even when there's no immediate threat. Fix this proactively.
 
 ### Privacy, compliance, or data governance
 

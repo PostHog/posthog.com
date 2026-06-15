@@ -16,7 +16,7 @@ See [getting started with customers](/handbook/cs-and-onboarding/getting-started
 
 Once you've worked through your book of business, focus on building trust with your champions.
 
-- **Show, don't tell.** When a customer has a question or goal, build the solution rather than linking to docs. Create the insight or dashboard, then share what you did so they can do it themselves next time. Don't create dependency — they should be able to do it without you.
+- **Show, don't tell.** When a customer has a question or goal, build the solution rather than linking to docs. Create the insight or dashboard, then share what you did so they can do it themselves next time. For anything visual or involving several steps, record a short [Loom](https://www.loom.com/) walkthrough instead of writing it up. It's faster for you, easier for them to follow, and they can rewatch it on their own time. Don't create dependency - they should be able to do it without you. When you catch yourself explaining the same thing across accounts (building a funnel, setting up an alert, reading session replays), record it once and keep a shared library of clips to drop into channels.
 - **Be timely on alerts.** Our automated alerts flag event spikes, drops, and other unusual behavior. Reach out quickly so the customer can investigate. If a customer's company raises funding or gets press, send congrats.
 - **Push beyond the basics.** Look at what they're not using yet. Have they set up tracking funnels for key metrics? Created alerts on important actions? Tried PostHog AI? Implemented error tracking to explain conversion drops? Cross-sell here, but frame it as helping them get more value.
 - **Regularly invite new users to the Slack channel.** The more people on the customer side who know you exist, the more come to you when they hit issues. Monthly is a good cadence — Vitally shows you who's new.
@@ -33,3 +33,9 @@ Two examples:
 - **Real-time alerts.** Customers have wanted notifications when a visitor abandons a purchase, when a download fails, or when high-value actions happen. Each needed custom implementation work.
 
 If your champion can push these changes through, great. If not, ask for an intro to the decision maker — or reach out directly to the head of engineering or product with their quarterly goals and offer to help. Either way, showing you understand their goal helps them justify prioritizing the work internally.
+
+**Stay proactive once you're embedded.** Being deeply embedded only lasts if you keep showing up when nothing is wrong. The trap at this stage is letting every touchpoint become routine, where you only appear when an alert fires or the customer asks a question. Customers drift when the relationship goes purely reactive (see [engaging unengaged customers](/handbook/cs-and-onboarding/engaging-unengaged-customers)). Build a habit of reaching out when there's no problem to solve:
+
+- Review their billing and usage even when no spike alert fired. Catch overspend, unused products, or a plan mismatch before they do.
+- Forward PostHog blog posts, changelog items, and new features that map to *their* goals. Not a newsletter blast, but something specific enough that it's obvious you were thinking about them.
+- Flag bugs or improvements you spot, including ones unrelated to their PostHog setup. You're on their team as much as you're on PostHog's, and that's what earns you the benefit of the doubt later.
