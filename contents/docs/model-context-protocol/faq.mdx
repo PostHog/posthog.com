@@ -109,7 +109,7 @@ Example for Cursor (add to `.cursor/mcp.json`):
 
 The MCP server exposes its tools in one of two modes:
 
-- **CLI mode** ships a single, token-optimized `exec` tool. Instead of loading every tool's schema upfront, the agent uses `exec` to list, search, inspect, and call PostHog tools on demand. Because the server has hundreds of tools, this saves a large amount of context, so it's the mode we typically recommend.
+- **CLI mode** ships a single, token-optimized `exec` tool. Instead of loading every tool's schema upfront, the agent uses `exec` to list, search, inspect, and call PostHog tools on demand. Because the server has hundreds of tools, this saves a large amount of context, so it's the mode we typically recommend. On clients that support MCP apps, CLI mode also ships a `render-ui` tool that renders interactive visualizations on demand.
 - **Tools mode** registers every PostHog tool individually – the standard MCP behavior. Each tool's name and schema is loaded into context when the agent connects.
 
 The mode is auto-detected from your client. The majority of clients default to CLI mode – including Claude, Claude Code, Cowork, and Codex – while a few, such as Cursor, default to tools mode because they handle large tool lists natively.
