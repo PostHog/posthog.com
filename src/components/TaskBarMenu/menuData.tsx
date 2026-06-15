@@ -308,7 +308,7 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
                 categoryItems.unshift({
                     type: 'item' as const,
                     label: 'MCP',
-                    link: '/docs/model-context-protocol',
+                    link: '/mcp',
                     icon: React.createElement(Icons.IconPlug, { className: 'size-4 text-gray' }),
                 })
             }
