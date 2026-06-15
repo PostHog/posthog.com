@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'components/Link'
-import { IconArrowRight } from '@posthog/icons'
+import { IconHeadset, IconPlayFilled } from '@posthog/icons'
 import {
     Digit0,
     Digit1,
@@ -12,9 +12,8 @@ import {
     Digit7,
     Digit8,
     Digit9,
-    DigitDash,
+    IconMCP,
 } from 'components/OSIcons'
-import OSButton from 'components/OSButton'
 import useProduct from 'hooks/useProduct'
 import { JsxComponentDescriptor } from '@mdxeditor/editor'
 import Logo from 'components/Logo'
@@ -24,30 +23,34 @@ import MDXEditor from 'components/MDXEditor'
 import { graphql, useStaticQuery } from 'gatsby'
 import SEO from 'components/seo'
 import usePostHog from 'hooks/usePostHog'
-import Tooltip from 'components/RadixUI/Tooltip'
 import { APP_COUNT } from '../../../constants'
 import { CallToAction } from 'components/CallToAction'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
-import ProductTabs from 'components/ProductTabs'
+import CloudinaryImage from 'components/CloudinaryImage'
 import IntegrationPrompt from 'components/IntegrationPrompt'
 import { motion } from 'framer-motion'
-import { RenderInClient } from 'components/RenderInClient'
+import HeroCarousel from 'components/Home/HeroCarousel'
 import { Customers, getSharedDescriptors } from '../shared'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
-const AppCount = () => {
-    return (
-        <span className="flex items-center gap-1">
-            <Link to="/products">Browse app library</Link>
-            <span>({APP_COUNT})</span>
-        </span>
-    )
-}
+const AppCount = () => <span className="text-xs font-normal">{APP_COUNT} apps</span>
 
-const Tagline = () => (
-    <p className="text-base font-medium">We make dev tools that help product engineers build successful products.</p>
+export const Tagline = () => (
+    <>
+        <h1 className="!text-2xl pt-4">The new way to build products</h1>
+        <p className="text-balance @xl:text-wrap">
+            Product development used to mean manually writing code, running analysis, diagnosing bugs, and rolling out
+            changes using dozens of tools.
+        </p>
+
+        <p className="text-balance @xl:text-wrap">
+            PostHog is the only platform that acts like a co-pilot for you (and your AI agents) to do it all –{' '}
+            <em>autonomously</em>.
+        </p>
+    </>
 )
 
-const CTAs = () => {
+export const CTAs = () => {
     const [showIntegrationPrompt, setShowIntegrationPrompt] = useState(false)
     return (
         <div>
@@ -59,7 +62,11 @@ const CTAs = () => {
                 >
                     Get started - free
                 </CallToAction>
-                <CallToAction type="secondary" size="md" onClick={() => setShowIntegrationPrompt(true)}>
+                <CallToAction
+                    type="secondary"
+                    size="md"
+                    onClick={() => setShowIntegrationPrompt((current) => !current)}
+                >
                     Install with AI
                 </CallToAction>
             </div>
@@ -75,16 +82,56 @@ const CTAs = () => {
                     <IntegrationPrompt />
                 </div>
             </motion.div>
-            <p className="mt-4">
-                Questions?{' '}
-                <Link to="/demo" className="font-semibold underline">
-                    Watch a demo
-                </Link>{' '}
-                or{' '}
-                <Link to="/talk-to-a-human" className="font-semibold underline">
-                    talk to a human
+            {/* @TODO(data-positioning): Restore the original test CTA row below once this experiment no longer needs control-matching primary buttons.
+            Existing test CTA row retained for reference:
+            <div className="flex gap-2 items-center">
+                <div className="flex items-center gap-1">
+                    <WizardCommand latest={false} slim className="border border-primary" />
+                    <Tooltip trigger={<IconInfo className="size-4 text-primary inline-block" />}>
+                        <div className="max-w-sm">
+                            <p className="text-sm mb-1">
+                                <strong className="block mb-1">Add PostHog to your project in ~8 minutes.</strong>
+                            </p>
+                            <p className="text-sm mb-0">
+                                <Link to="/wizard" state={{ newWindow: true }}>
+                                    <span className="underline font-bold">Learn more</span>{' '}
+                                    <IconArrowUpRight className="size-4 inline-block" />
+                                </Link>
+                            </p>
+                        </div>
+                    </Tooltip>
+                </div>
+                <span className="text-sm">or </span>
+                <CallToAction
+                    to="https://app.posthog.com/signup"
+                    size="sm"
+                    state={{ newWindow: true, initialTab: 'signup' }}
+                    type="plain"
+                    className=""
+                >
+                    signup with email
+                </CallToAction>
+            </div>
+            */}
+            <p className="!text-sm flex items-center gap-2 mt-4 justify-center @xl:justify-start">
+                <Link
+                    to="/docs/model-context-protocol"
+                    state={{ newWindow: true }}
+                    className="text-secondary hover:text-primary"
+                >
+                    <IconMCP className="size-4 mr-1 inline-block relative -top-px" />
+                    <span className="underline font-semibold">MCP</span>
                 </Link>
-                .
+                <span className="text-secondary">•</span>
+                <Link to="/demo" state={{ newWindow: true }} className="text-secondary hover:text-primary">
+                    <IconPlayFilled className="size-4 mr-1 inline-block relative -top-px" />
+                    <span className="underline font-semibold">Watch a demo</span>
+                </Link>
+                <span className="text-secondary">•</span>
+                <Link to="/talk-to-a-human" state={{ newWindow: true }} className="text-secondary hover:text-primary">
+                    <IconHeadset className="size-4 mr-1 inline-block relative -top-px" />
+                    <span className="underline font-semibold">Talk to a human</span>
+                </Link>
             </p>
         </div>
     )
@@ -120,360 +167,136 @@ const HomeHitCounter = () => {
         return digitComponents[digit] || Digit0
     }
 
-    return (
-        <div className="flex flex-col justify-center text-center mt-20">
-            <p className="mb-2">Thanks for being visitor number</p>
-            <Tooltip
-                trigger={
-                    <div className="inline-flex bg-black divide-x divide-primary">
-                        {hitCount !== null ? (
-                            formatCount(hitCount)
-                                .split('')
-                                .map((digit, index) => {
-                                    const DigitComponent = getDigitComponent(digit)
-                                    return (
-                                        <div
-                                            key={index}
-                                            className="max-w-7 max-h-8 flex items-center justify-center p-1.5"
-                                        >
-                                            <DigitComponent className="text-[#00FF00] w-full h-full" />
-                                        </div>
-                                    )
-                                })
-                        ) : (
-                            <div className="flex gap-0">
-                                {[...Array(7)].map((_, index) => (
-                                    <div
-                                        key={index}
-                                        className="w-7 max-h-8 flex items-center justify-center text-red p-1.5 border-l border-primary"
-                                    >
-                                        <DigitDash className="text-red w-full h-full" />
-                                    </div>
-                                ))}
-                            </div>
-                        )}
-                    </div>
-                }
-                delay={0}
-            >
-                Total hit count to posthog.com
-            </Tooltip>
-        </div>
-    )
-}
+    if (hitCount === null) return null
 
-const productCategories = [
-    {
-        name: 'Analytics',
-        handles: [
-            'web_analytics',
-            'trenationaldesignstudio',
-            'funnels',
-            'user_paths',
-            'lifecycle',
-            'retention',
-            'stickiness',
-            'correlation_analysis',
-            'group_analytics',
-        ],
-    },
-    {
-        name: 'Data stack',
-        handles: ['data_warehouse', 'cdp', 'data_in', 'sql_editor', 'bi', 'data_modeling', 'data_out'],
-    },
-    {
-        name: 'Feature development',
-        handles: ['posthog_code', 'feature_flags', 'workflows_emails', 'webhooks', 'endpoints', 'early_access'],
-    },
-    {
-        name: 'Debugging & analysis',
-        handles: ['session_replay', 'heatmaps', 'error_tracking', 'logs', 'profiles'],
-    },
-    {
-        name: 'AI tools',
-        handles: ['llm_traces', 'llm_generations', 'llm_evals'],
-    },
-    {
-        name: 'Feedback & testing',
-        handles: ['experiments', 'surveys', 'no_code_ab_testing', 'messaging', 'support', 'user_interviews'],
-    },
-    {
-        name: 'Tools',
-        handles: ['posthog_ai', 'dashboards', 'activity', 'notebooks'],
-    },
-]
-
-const MAX_VISIBLE_ITEMS = 7
-const TRUNCATED_VISIBLE = 6
-
-const StatusDot = ({ status }: { status?: string }) => {
-    if (!status) return null
-
-    const isBeta = status === 'beta'
-    const isAlpha = status === 'private alpha' || status === 'alpha' || status === 'WIP'
-
-    if (!isBeta && !isAlpha) return null
-
-    const dotColor = isBeta ? 'bg-yellow' : 'bg-red'
-    const label = isBeta ? 'Beta' : 'Alpha'
+    const digits = formatCount(hitCount).split('')
 
     return (
-        <Tooltip
-            trigger={<span className={`inline-block size-2 rounded-full ${dotColor} shrink-0`} />}
-            delay={0}
-            side="top"
-        >
-            <span className="text-sm">{label}</span>
-        </Tooltip>
-    )
-}
-
-const ProductCategoryItem = ({
-    product,
-}: {
-    product: { name: string; handle: string; slug?: string; color?: string; Icon?: any; status?: string }
-}) => {
-    const hasLink = !!product.slug
-    const icon = product.Icon ? (
-        <product.Icon className={`size-4 shrink-0 ${!hasLink ? 'text-muted' : `text-${product.color || 'gray'}`}`} />
-    ) : null
-
-    const content = (
-        <span className="flex items-center gap-1.5 py-0.5">
-            {icon}
-            <span className={!hasLink ? 'text-muted' : ''}>{product.name}</span>
-            <StatusDot status={product.status} />
+        <span className="inline-flex items-center gap-0.5">
+            {digits.map((digit, index) => {
+                const DigitComp = getDigitComponent(digit)
+                return <DigitComp key={index} className="h-4 w-auto" />
+            })}
         </span>
     )
-
-    if (!hasLink) {
-        return <span className="text-sm cursor-default">{content}</span>
-    }
-
-    return (
-        <Link
-            to={`/${product.slug}`}
-            state={{ newWindow: true }}
-            className="text-sm text-primary hover:text-primary !font-normal !no-underline hover:!underline"
-            data-attr="product-grid-item"
-        >
-            {content}
-        </Link>
-    )
 }
 
-const ProductCategoryColumn = ({
-    category,
-    allProducts,
-}: {
-    category: { name: string; handles: string[] }
-    allProducts: any[]
-}) => {
-    const [expanded, setExpanded] = useState(false)
-
-    const products = category.handles.map((handle) => allProducts.find((p: any) => p.handle === handle)).filter(Boolean)
-
-    const needsTruncation = products.length > MAX_VISIBLE_ITEMS
-    const visibleProducts = needsTruncation && !expanded ? products.slice(0, TRUNCATED_VISIBLE) : products
-    const remainingCount = products.length - TRUNCATED_VISIBLE
-
-    return (
-        <div className="flex flex-col gap-0.5">
-            <h3 className="text-sm font-normal text-secondary !tracking-normal m-0 mb-1">{category.name}</h3>
-            {visibleProducts.map((product: any) => (
-                <ProductCategoryItem key={product.handle} product={product} />
-            ))}
-            {needsTruncation && !expanded && (
-                <button
-                    onClick={() => setExpanded(true)}
-                    className="text-sm text-secondary hover:text-primary font-medium text-left py-0.5 flex items-center gap-1.5 cursor-pointer"
-                >
-                    <span className="size-4 shrink-0 flex items-center justify-center text-secondary text-xs font-bold">
-                        &bull;&bull;&bull;
-                    </span>
-                    {remainingCount} more
-                </button>
-            )}
-        </div>
-    )
-}
-
-const ProductCategoryGrid = () => {
-    const allProducts = useProduct() as any[]
-
-    return (
-        <div className="product-section-test @container mb-12">
-            <div className="grid grid-cols-2 @xl:grid-cols-3 @3xl:grid-cols-4 gap-x-6 gap-y-8">
-                {productCategories.map((category) => (
-                    <ProductCategoryColumn key={category.name} category={category} allProducts={allProducts} />
-                ))}
-            </div>
-        </div>
-    )
-}
-
-const ProductsSectionControl = () => (
-    <>
-        <header className="flex flex-col items-center @xl:flex-row @xl:justify-between @xl:items-baseline [&_h2]:m-0 mt-10 mb-4">
-            <h2 className="m-0 tracking-tight">
-                Explore apps{' '}
-                <span className="text-secondary text-sm font-normal tracking-normal">by company stage</span>
-            </h2>
-            <aside className="hidden @xl:inline-flex">
-                <span>
-                    <Link to="/products" state={{ newWindow: true }}>
-                        Browse app library
-                    </Link>{' '}
-                    ({APP_COUNT})
-                </span>
-            </aside>
-        </header>
-        <CompanyStageTabs />
-    </>
+const Button = ({ url, children }: { url: string; children: React.ReactNode }) => (
+    <Link to={url} state={{ newWindow: true }}>
+        {children}
+    </Link>
 )
-
-const ProductsSectionTest = () => (
-    <>
-        <header className="product-section-test flex flex-col items-center @xl:flex-row @xl:justify-between @xl:items-baseline [&_h2]:m-0 mt-10 mb-4">
-            <h2 className="m-0 tracking-tight">Products</h2>
-            <Link
-                to="/products"
-                state={{ newWindow: true }}
-                className="text-sm font-semibold flex items-center gap-0.5"
-            >
-                Explore all products <IconArrowRight className="size-4" />
-            </Link>
-        </header>
-        <ProductCategoryGrid />
-    </>
-)
-
-const ProductsSection = () => {
-    const posthog = usePostHog()
-    return (
-        <RenderInClient
-            placeholder={<ProductsSectionControl />}
-            render={() =>
-                posthog?.getFeatureFlag?.('homepage-product-groupings', { fresh: true }) === 'experiment' ? (
-                    <ProductsSectionTest />
-                ) : (
-                    <ProductsSectionControl />
-                )
-            }
-        />
-    )
-}
 
 const CompanyStageTabs = () => {
     const [selectedStage, setSelectedStage] = React.useState('growth')
 
-    const companyStageOptions: ToggleOption[] = [
+    const allProducts = useProduct()
+
+    const getProduct = (handle: string) =>
+        Array.isArray(allProducts) ? allProducts.find((p: any) => p.handle === handle) : undefined
+
+    const stages = [
         {
-            label: (
-                <span>
-                    Startup<span className="hidden @lg:inline"> / Side project</span>
-                </span>
-            ),
-            value: 'startup',
+            value: 'early',
+            label: 'Early-stage',
+            products: [
+                { handle: 'product_analytics', text: 'for understanding user behavior' },
+                { handle: 'session_replay', text: 'for watching real user sessions' },
+                { handle: 'feature_flags', text: 'for safe feature rollouts' },
+                { handle: 'surveys', text: 'for collecting user feedback' },
+                { handle: 'web_analytics', text: 'for tracking website traffic' },
+            ],
         },
         {
-            label: 'Growth',
             value: 'growth',
+            label: 'Growth',
+            products: [
+                { handle: 'experiments', text: 'for A/B testing ideas' },
+                { handle: 'data_warehouse', text: 'for centralizing data' },
+                { handle: 'error_tracking', text: 'for catching bugs fast' },
+                { handle: 'cdp', text: 'for syncing data everywhere' },
+                { handle: 'ai_observability', text: 'for monitoring AI features' },
+            ],
         },
         {
-            label: 'Scale',
             value: 'scale',
+            label: 'At scale',
+            products: [
+                { handle: 'data_warehouse', text: 'for advanced data modeling' },
+                { handle: 'cdp', text: 'for complex data pipelines' },
+                { handle: 'experiments', text: 'for optimizing conversion' },
+                { handle: 'product_analytics', text: 'for deep cohort analysis' },
+                { handle: 'web_analytics', text: 'for multi-channel attribution' },
+            ],
         },
     ]
 
+    const stageOptions: ToggleOption[] = stages.map((stage) => ({
+        label: stage.label,
+        value: stage.value,
+    }))
+
+    const selectedStageData = stages.find((s) => s.value === selectedStage) || stages[0]
+
     return (
-        <>
+        <div className="not-prose">
             <ToggleGroup
-                hideTitle
-                title="Company stage"
-                options={companyStageOptions}
-                onValueChange={setSelectedStage}
+                options={stageOptions}
                 value={selectedStage}
-                className="mb-2"
+                onValueChange={setSelectedStage}
+                className="mb-4"
             />
-
-            {selectedStage === 'startup' && (
-                <div className="flex flex-col gap-2">
-                    <ProductTabs
-                        productHandles={[
-                            'web_analytics',
-                            'session_replay',
-                            'product_analytics',
-                            'feature_flags',
-                            'error_tracking',
-                            'surveys',
-                            'ai_observability',
-                        ]}
-                    />
-                </div>
-            )}
-            {selectedStage === 'growth' && (
-                <div className="flex flex-col gap-2">
-                    <ProductTabs
-                        productHandles={[
-                            'posthog_ai',
-                            'session_replay',
-                            'web_analytics',
-                            'product_analytics',
-                            'error_tracking',
-                            'experiments',
-                            'feature_flags',
-                            'logs',
-                            'cdp',
-                            'workflows_emails',
-                        ]}
-                    />
-                </div>
-            )}
-            {selectedStage === 'scale' && (
-                <div className="flex flex-col gap-2">
-                    <ProductTabs
-                        productHandles={[
-                            'data_warehouse',
-                            'cdp',
-                            'dashboards',
-                            'product_analytics',
-                            'experiments',
-                            'feature_flags',
-                            'error_tracking',
-                        ]}
-                        selectedStage="scale"
-                    />
-                </div>
-            )}
-        </>
+            <ul className="space-y-1.5 text-sm list-none p-0">
+                {selectedStageData.products.map((item, idx) => {
+                    const product = getProduct(item.handle)
+                    return (
+                        <li key={idx} className="flex items-center gap-1.5">
+                            {product?.Icon && <product.Icon className={`size-4 text-${product.color}`} />}
+                            <Link to={`/${product?.slug}`} state={{ newWindow: true }} className="font-semibold">
+                                {product?.name}
+                            </Link>
+                            <span className="text-secondary">{item.text}</span>
+                        </li>
+                    )
+                })}
+            </ul>
+        </div>
     )
 }
 
-const Button = ({ url, children }: { url: string; children: React.ReactNode }) => {
-    return (
-        <OSButton asLink to={url} variant="secondary" size="md" state={{ newWindow: true }}>
-            {children}
-        </OSButton>
-    )
-}
+export const HeroImage = () => (
+    <CloudinaryImage
+        src="https://res.cloudinary.com/dmukukwp6/image/upload/lazy_a2afd552f7.png"
+        className="w-64 @xl:w-48 @xl:float-right @xl:ml-4 @2xl:w-56 @3xl:w-64 @2xl:float-right -scale-x-100 @xl:mt-16 @3xl:mt-8"
+    />
+)
 
 const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     { name: 'Tagline', kind: 'flow', props: [], Editor: () => <Tagline /> },
     { name: 'AppCount', kind: 'flow', props: [], Editor: () => <AppCount /> },
     { name: 'CompanyStageTabs', kind: 'flow', props: [], Editor: () => <CompanyStageTabs /> },
-    { name: 'ProductsSection', kind: 'flow', props: [], Editor: () => <ProductsSection /> },
     { name: 'CTAs', kind: 'flow', props: [], Editor: () => <CTAs /> },
+    { name: 'HeroCarousel', kind: 'flow', props: [], Editor: () => <HeroCarousel /> },
     { name: 'HomeHitCounter', kind: 'flow', props: [], Editor: () => <HomeHitCounter /> },
-    { name: 'Customers', kind: 'flow', props: [], Editor: () => <Customers /> },
+    { name: 'Customers', kind: 'flow', props: [], Editor: () => <Customers tableClassName="bg-white dark:bg-dark" /> },
     {
         name: 'Logo',
         kind: 'flow',
         props: [],
         Editor: () => {
             const { siteSettings } = useApp()
-            return <Logo className="inline-block" fill={siteSettings.theme === 'dark' ? 'white' : undefined} />
+            return (
+                <>
+                    <Logo className="inline-block h-9" fill={siteSettings.theme === 'dark' ? 'white' : undefined} />{' '}
+                </>
+            )
         },
+    },
+    {
+        name: 'HeroImage',
+        kind: 'flow',
+        props: [],
+        Editor: () => <HeroImage />,
     },
     {
         name: 'ButtonDataStack',
@@ -484,14 +307,12 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     { name: 'ButtonPricing', kind: 'flow', props: [], Editor: () => <Button url="/pricing">Explore pricing</Button> },
     { name: 'ButtonAI', kind: 'flow', props: [], Editor: () => <Button url="/ai">Learn about PostHog AI</Button> },
     { name: 'ButtonAbout', kind: 'flow', props: [], Editor: () => <Button url="/about">Read more about us</Button> },
-    { name: 'HeroCarousel', kind: 'flow', props: [], Editor: () => <ProductsSection /> },
-    { name: 'HeroImage', kind: 'flow', props: [], Editor: () => null },
     ...getSharedDescriptors(),
 ]
 
-export default function Home() {
+export default function HomeTest() {
     const data = useStaticQuery(graphql`
-        query {
+        query HomeTestMdx {
             homepageMdx: mdx(fileAbsolutePath: { regex: "/contents/index\\.mdx/" }) {
                 rawBody
                 mdxBody: body

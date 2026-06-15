@@ -63,3 +63,23 @@ When local evaluation is enabled, flag definitions are fetched on initialization
 
 > **Note:** Local evaluation requires providing any person properties, groups, or group properties needed to evaluate the flag's release conditions, since PostHog can't fetch these automatically without a server request.
 
+## Observability
+
+The Rust SDK uses [`tracing`](https://docs.rs/tracing) for structured logging. Add a tracing subscriber to your application to see SDK logs:
+
+```rust
+use tracing_subscriber::{fmt, EnvFilter};
+
+tracing_subscriber::fmt()
+    .with_env_filter(EnvFilter::from_default_env())
+    .init();
+```
+
+Set `RUST_LOG` to control the log level:
+
+```bash
+RUST_LOG=posthog_rs=debug cargo run
+```
+
+Use `posthog_rs=warn` for warnings and errors only, or `posthog_rs=trace` for detailed local-evaluation and cache logs.
+

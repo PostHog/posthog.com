@@ -26,17 +26,7 @@ import IOSSendEvents from '../../integrate/send-events/_snippets/send-events-ios
 
 ## Preventing sensitive data capture
 
-To exclude specific UI elements from autocapture or session replay, add `ph-no-capture` as either an `accessibilityLabel` or `accessibilityIdentifier`. When PostHog detects this label or identifier anywhere in the view hierarchy, the element will be either ignored or masked:
-
-```swift
-// This view will be excluded from autocapture
-let view = UIView()
-view.accessibilityLabel = "ph-no-capture"
-```
-
-> **Important:** By default, PostHog will make a best effort to automatically exclude fields detected as sensitive, even without the `ph-no-capture` tag. These include password fields, credit card fields, OTP fields, and any other fields related to Personally Identifiable Information (PII).
-
-For more details on how to setup masking for session replay, please refer to our [privacy controls](/docs/session-replay/privacy?tab=iOS) documentation.
+To exclude specific UI elements from autocapture or Session Replay, add `ph-no-capture` as either an `accessibilityLabel` or `accessibilityIdentifier`. See [privacy controls](/docs/session-replay/privacy?tab=iOS) for masking behavior and iOS examples.
 
 ## Identifying users
 
@@ -96,6 +86,17 @@ PostHogSDK.shared.capture("signed_up", properties: ["plan": "Pro++"], userProper
 PostHogSDK.shared.capture("signed_up", properties: ["plan": "Pro++"], userPropertiesSetOnce: ["user_property_name": "your_value"])
 ```
 
+Use `setPersonProperties` when you want to update the current person's profile without also capturing a custom event. This sends a `$set` event to PostHog.
+
+```swift
+PostHogSDK.shared.setPersonProperties(userPropertiesToSet: ["plan": "Pro++"])
+
+PostHogSDK.shared.setPersonProperties(
+    userPropertiesToSet: ["plan": "Pro++"],
+    userPropertiesToSetOnce: ["first_seen_source": "ios"]
+)
+```
+
 ## Super properties
 
 Super properties are properties associated with events that are set once and then sent with every `capture` call, be it a `$screen`, or anything else.
@@ -126,63 +127,17 @@ If you are doing this as part of a user logging out, you can instead simply use 
 
 ## Reset after logout
 
-To reset the user's ID and anonymous ID, call `reset`. Usually you would do this right after the user logs out.
-
-```swift
-PostHogSDK.shared.reset()
-```
+To reset the user's ID and anonymous ID after logout, call `reset`. See [Identifying users](/docs/product-analytics/identify#reset) for the shared reset guidance and iOS example.
 
 ## Group analytics
 
-Group analytics allows you to associate the events for that person's session with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
+Group analytics allows you to associate the events for that person's session with a group (e.g. teams, organizations, etc.). See [Group Analytics](/docs/product-analytics/group-analytics) for iOS examples and implementation details.
 
 > **Note:** This is a paid feature and is not available on the open-source or free cloud plan. Learn more on the [pricing page](/pricing).
 
--   Associate the events for this session with a group
-
-```swift
-PostHogSDK.shared.group(type: "company", key: "company_id_in_your_db")
-```
-
--   Associate the events for this session with a group AND update the properties of that group
-
-```swift
-PostHogSDK.shared.group(type: "company", key: "company_id_in_your_db", groupProperties: [
-    "name": "ACME Corp"
-])
-```
-
-The `name` is a special property which is used in the PostHog UI for the name of the group. If you don't specify a `name` property, the group ID will be used instead.
-
 ## Opt out of data capture
 
-You can completely opt-out users from data capture. To do this, there are two options:
-
-1. Opt users out by default by setting `optOut` to `true` in your PostHog config:
-
-```swift
-let config = PostHogConfig(projectToken: "<ph_project_token>", host: "<ph_client_api_host>")
-config.optOut = true
-PostHogSDK.shared.setup(config)
-```
-
-2. Opt users out on a per-person basis by calling `optOut()`:
-
-```swift
-PostHogSDK.shared.optOut()
-```
-
-Similarly, you can opt users in:
-
-```swift
-PostHogSDK.shared.optIn()
-```
-
-To check if a user is opted out:
-
-```swift
-PostHogSDK.shared.isOptOut()
-```
+You can completely opt users out from data capture by default or on a per-person basis. See [Complete opt-out](/docs/product-analytics/privacy#complete-opt-out) for iOS examples.
 
 ## Feature flags
 
@@ -196,13 +151,7 @@ import IOSFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/fe
 
 ## Experiments (A/B tests)
 
-Since [experiments](/docs/experiments/start-here) use feature flags, the code for running an experiment is very similar to the feature flags code:
-
-```swift
-if (PostHogSDK.shared.getFeatureFlag("experiment-feature-flag-key") as? String == "variant-name") {
-    // do something
-}
-```
+Since [experiments](/docs/experiments/start-here) use feature flags, the code for running an experiment is very similar to the feature flags code. See [adding experiment code](/docs/experiments/adding-experiment-code) for iOS examples.
 
 It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
 

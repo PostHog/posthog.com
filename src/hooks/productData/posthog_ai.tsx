@@ -95,8 +95,8 @@ export const posthog_ai = {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog_ai_light_f654818fb0.png',
             srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog_ai_dark_35c03e330c.png',
             alt: 'PostHog AI screenshot',
-            classes: 'justify-start items-end pr-4 @lg:pr-6',
-            imgClasses: 'rounded-tr-md shadow-2xl',
+            classes: 'justify-center items-center',
+            imgClasses: 'rounded shadow-2xl border border-primary',
         },
     },
     hog: {
