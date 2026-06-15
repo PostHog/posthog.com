@@ -66,3 +66,11 @@ import InboundIpAddresses from "../_snippets/inbound-ip-addresses.mdx";
 <InboundIpAddresses />
 
 > **Note:** PostHog connects over IPv4. Supabase's direct database host (`db.<ref>.supabase.co`) is IPv6-only, so you must use the **Session pooler** host instead. Find it in your Supabase project under **Project Settings** → **Database** → **Connection pooling**.
+
+## Troubleshooting
+
+### Row-level security (RLS) causing zero or missing rows
+
+Supabase enables row-level security by default on new tables. If your syncs return zero rows or fewer rows than expected, RLS policies may be restricting which rows the sync role can read. PostHog displays a warning badge in the table picker during source setup for tables that have RLS enabled.
+
+See the [Postgres source troubleshooting](/docs/cdp/sources/postgres#row-level-security-rls-causing-zero-or-missing-rows) for solutions, including granting `BYPASSRLS` to the sync role or adding a permissive policy.

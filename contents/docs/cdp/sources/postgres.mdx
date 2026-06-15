@@ -405,4 +405,32 @@ This happens in self-managed mode when PostHog can't find the publication name y
 
 Check the slot lag query above. If PostHog-managed slot protection dropped the slot, [disable and re-enable CDC](#managing-cdc-after-source-creation) or run a full resync after fixing the underlying issue. If you're in self-managed mode, your DBA must decide whether to keep, advance, or drop the slot.
 
-> **Looking for an example of the Postgres source?** Check out our tutorial where we [connect and query Supabase data](/tutorials/supabase-query).
+### Row-level security (RLS) causing zero or missing rows
+
+If your syncs return zero rows or fewer rows than expected, row-level security (RLS) may be active on the synced tables. When RLS is enabled, PostgreSQL restricts which rows the sync role can read based on security policies. PostHog cannot detect how many rows are hidden.
+
+PostHog displays a warning badge in the table picker during source setup for tables that have RLS enabled, and logs warnings during syncs when RLS is detected.
+
+To resolve this:
+
+- **Grant `BYPASSRLS` to the sync role** — This allows the role to bypass row-level security entirely:
+
+  ```sql
+  ALTER USER "posthog" WITH BYPASSRLS;
+  ```
+
+- **Create a permissive policy** — If you want to keep RLS active but allow the sync role to read all rows, add a policy that permits full access for that role:
+
+  ```sql
+  CREATE POLICY posthog_read_all ON "your_table" FOR SELECT TO "posthog" USING (true);
+  ```
+
+  > **Note:** A permissive `USING (true)` policy lets the role read every row, but `row_security_active` still returns true, so the RLS warning continues to appear.
+
+- **Disable RLS on the table** — If row-level security is not needed for the synced table:
+
+  ```sql
+  ALTER TABLE "your_table" DISABLE ROW LEVEL SECURITY;
+  ```
+
+  > **Looking for an example of the Postgres source?** Check out our tutorial where we [connect and query Supabase data](/tutorials/supabase-query).
