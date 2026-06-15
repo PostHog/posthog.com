@@ -17,7 +17,7 @@ Qubs, a self-funded startup based in Romania, with a 1.5-person engineering team
 <OSQuote
   customer="qubs"
   author="gheorghe_avram"
-  quote={2}
+  quote={1}
 />
 
 From beta to production
@@ -69,6 +69,6 @@ Building all of this from scratch: ingestion, processing, filtering, dashboards,
 
 ![Qubs ad example](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/qubs_menu_example_5b980ec943.png)
 
-Using the infrastructure they’ve developed, Qubs plans to expand beyond Romania and into other service-industry products. And, because of some of the heavier real-time bidding workloads, the team is evaluating PostHog's [Managed Warehouse](/data-stack/managed-warehouse) to help them scale up.
+Using the infrastructure they've developed, Qubs plans to expand beyond Romania and into other service-industry products. And, because of some of the heavier real-time bidding workloads, the team is evaluating PostHog's [Managed Warehouse](/data-stack/managed-warehouse) to help them scale up.
 
 For Gheorghe, flexibility is the point of using PostHog. PostHog handles the events layer, feature flags, and error tracking, and whenever Qubs wants, they can pull data out and run it themselves without re-platforming everything.
