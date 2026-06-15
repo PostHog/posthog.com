@@ -11,7 +11,7 @@ showTitle: true
 We have three types of roles:
 - Technical Account Executives - closing new business from [inbound](/handbook/growth/sales/inbound-sales) and [outbound](/handbook/growth/sales/outbound-sales) leads and expanding their usage of PostHog in the next 12 months
 - Technical Account Managers - [expansion](/handbook/growth/sales/expansion-and-retention) from existing customers, closing new business from [product-led leads](/handbook/growth/sales/product-led-sales)
-- COMING SOON: Business Development Reps, aka BDRs - generating leads for team new business
+- Business Development Reps, aka BDRs - generating leads for new business, including via [cold outbound](/handbook/growth/sales/outbound-sales)
 
 ### Technical Account Managers
 
@@ -179,20 +179,10 @@ You will run into questions that you don't know the answer to from time to time 
 
 ## Working with customers in Slack
 
-Most of our customers use Slack, and it's a great way for us to be responsive to them. Everyone has the permission in Slack to create a Connect channel with a customer, and you should do this as early as possible in your relationship with them.
+Most of our customers use Slack, and it's a great way for us to be responsive to them. Qualifying customers and prospects can get a [shared Slack channel](/handbook/growth/sales/slack-channels), and you should set one up as early as it makes sense in your relationship with them.
 
-When you've created the channel you should also add Pylon, which is used to sync Slack conversations with Zendesk so that our Support and Engineering teams can work on customer issues in a familiar context.
+We share channels via [Slack Connect](https://slack.com/resources/using-slack/getting-started-with-slack-connect) and add SupportHog so that both PostHog and the customer can raise support tickets directly from a Slack thread — react with the :ticket: emoji or mention `@SupportHog`. This syncs the conversation into Zendesk so our Support and Engineering teams can work on customer issues in a familiar context.
 
-To add Pylon to your customer channel:
-
-1. In the Slack desktop app, click the channel name.
-2. On the Settings tab, click Add apps.
-3. Type Pylon and click Add.
-4. In the popup that appears in the Slack channel, select Customer Channel.
-5. Add yourself as the Account Owner.
-6. Click Enable.
-7. Add Tim, Simon, Ben, and Abigail to the channel.
-
-Once enabled, you can add the :ticket: emoji to a Slack thread to create a new Ticket in Zendesk.  Customers can also do this.  Make sure that a Group and Severity are selected or the ticket won't be routed properly.
+See [Shared Slack channels with customers](/handbook/growth/sales/slack-channels) for the full setup steps, including channel naming, who to invite, and how to support customers who use MS Teams instead.
 
 > It's your job to ensure your customer issues are resolved, make sure you follow up with Support and Engineering if you feel like the issue isn't getting the right level of attention.
