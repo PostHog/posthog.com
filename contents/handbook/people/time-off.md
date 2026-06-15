@@ -167,7 +167,7 @@ The gift will usually arrive on the day of or 1-3 days prior to the anniversary 
 
 On your 4th anniversary at PostHog as a big thank you for sticking with us, we give you a choice of 3 gifts:
 
-1. Sage Barista Touch coffee machine
+1. Sage Barista Touch coffee machine or Aiden Precision coffee maker
 2. Apple 27-inch 5K Retina Studio Display with standard glass and tilt-adjustable stand
 3. Rimowa luggage set (large trunk, cabin bag, packing cube, toiletries bag)
 
