@@ -3,7 +3,7 @@ title: How Fastr ships a custom experimentation dashboard to every customer with
 customer: Fastr
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/FASTR_afcc31057f.png
-date: 2026-03-10
+date: 2026-06-15
 ---
 
 Most conversion rate optimization (CRO) platforms hand every customer the same dashboard. [Fastr](https://getfastr.com/) does the opposite. Each of its customers logs into a dashboard built specifically for their business, with only the metrics they care about, segments tailored to how they think about their audience, and an AI interface that turns business questions into answers in plain English.
