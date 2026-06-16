@@ -2144,22 +2144,22 @@ export const docsMenu = {
     icon: 'IconBook',
     children: [
         {
-            name: 'Product OS',
+            name: 'Self-driving product',
             icon: 'IconStack',
             color: 'salmon',
-            url: '/docs/product-os',
-            description: 'The PostHog platform for building and improving your product',
+            url: '/docs/self-driving',
+            description: 'What self-driving means for your product, and how to build it',
             children: [
                 {
                     name: 'Docs',
                 },
                 {
                     name: 'Overview',
-                    url: '/docs',
+                    url: '/docs/self-driving',
                     icon: 'IconInfo',
                 },
                 {
-                    name: 'Integration',
+                    name: 'Get started',
                 },
                 {
                     name: 'Install and configure',
@@ -2911,7 +2911,7 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Winning with PostHog',
+                    name: 'Guides',
                 },
                 {
                     name: 'Getting HogPilled',
@@ -2953,12 +2953,7 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'PostHog explained',
-                },
-                {
-                    name: 'What is Product OS?',
-                    url: '/docs/product-os',
-                    icon: 'IconInfo',
+                    name: 'Concepts',
                 },
                 {
                     name: 'Data types',
@@ -3193,8 +3188,17 @@ export const docsMenu = {
                         },
                     ],
                 },
+            ],
+        },
+        {
+            name: 'Reference',
+            icon: 'IconBook',
+            color: 'salmon',
+            url: '/docs/self-host',
+            description: 'Operational and reference docs',
+            children: [
                 {
-                    name: 'Resources',
+                    name: 'Docs',
                 },
                 {
                     name: 'Self-host',
@@ -4143,7 +4147,8 @@ export const docsMenu = {
             url: '/docs/replay-vision',
             color: 'yellow',
             icon: 'IconEye',
-            description: 'Use AI to automatically watch your session recordings and turn what it sees into queryable data',
+            description:
+                'Use AI to automatically watch your session recordings and turn what it sees into queryable data',
             children: [
                 {
                     name: 'Replay Vision',
@@ -6760,6 +6765,23 @@ export const docsMenu = {
                     url: '/docs/posthog-code/community',
                     icon: 'IconPeople',
                     color: 'purple',
+                },
+            ],
+        },
+        {
+            name: 'Web app',
+            icon: 'IconBrowser',
+            color: 'blue',
+            url: '/docs/web',
+            description: 'The browser surface for your self-driving product — explore data and steer the work.',
+            children: [
+                {
+                    name: 'Docs',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/web',
+                    icon: 'IconInfo',
                 },
             ],
         },
