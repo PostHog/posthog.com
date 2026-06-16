@@ -58,5 +58,37 @@ export const aiObservabilityFeatures = {
             name: 'LLM translation',
             description: 'translation of non-English LLM traces to English',
         },
+        sentiment_classification: {
+            name: 'Sentiment classification',
+            description: 'Automatically classify user messages as positive, neutral, or negative',
+        },
+        privacy_mode: {
+            name: 'Privacy mode',
+            description: 'Mask prompts and responses before they are stored',
+        },
+        agent_tracing: {
+            name: 'Agent/multi-step tracing',
+            description: 'Understand complex agent and tool-calling workflows',
+        },
+        prompt_management: {
+         name: 'Prompt management',
+         description: 'Create, version, and manage prompts',
+        },
+        evaluation_datasets: {
+         name: 'Evaluation datasets',
+         description: 'Create datasets for testing and benchmarking outputs',
+        },
+        human_annotation: {
+        name: 'Human annotation/review',
+        description: 'Review and label model outputs manually',
+        },
+        session_replay: {
+        name: 'Session replay',
+        description: 'Watch recordings of users interacting with AI features',
+        },
+        product_analytics: {
+        name: 'Product analytics',
+        description: 'Analyze AI interactions alongside retention, funnels, and feature adoption',
+},
     },
 }
