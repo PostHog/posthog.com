@@ -1979,7 +1979,6 @@
         },
         { "source": "/professional-services", "destination": "/services" },
         { "source": "/posthug", "destination": "/" },
-        { "source": "/mcp", "destination": "/docs/model-context-protocol" },
         {
             "source": "/handbook/strategy/brand",
             "destination": "/handbook/brand/foundations"
