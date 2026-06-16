@@ -38,7 +38,7 @@ export const mcpAnalytics = {
     overview: {
         title: 'See how agents use your MCP server',
         description:
-            'Wrap your MCP server in one line. Every tool call, what the agent wanted, and every failure lands in PostHog as a normal event you can query, chart, and alert on.',
+            'Product analytics for your MCP server. Wrap it in one line and every tool call, agent intent, and failure lands in PostHog as a normal event you can query, chart, and alert on.',
         textColor: 'text-white',
         layout: 'columns',
     },
@@ -61,7 +61,7 @@ export const mcpAnalytics = {
             color: 'blue',
             headline: 'Every tool call',
             description:
-                'Each <code>tools/call</code> becomes a <code>$mcp_tool_call</code> event with the parameters, response, duration, and error state. See which tools agents reach for and which they ignore.',
+                'Every tool call becomes an event. See exactly what the agent sent, what came back, how long it took, and whether it failed.',
         },
         {
             title: 'Agent intent',
@@ -69,7 +69,7 @@ export const mcpAnalytics = {
             color: 'seagreen',
             headline: 'Agent intent',
             description:
-                'The SDK injects a <code>context</code> argument and captures it as <code>$mcp_intent</code>, so you see the goal behind each call. Set <code>intentFallback</code> for agents that ignore it.',
+                'Capture the goal behind each call, so you can tell a useful request from a confused one. The SDK reads the agent intent automatically.',
         },
         {
             title: 'Advertised vs called',
@@ -77,7 +77,7 @@ export const mcpAnalytics = {
             color: 'purple',
             headline: 'Advertised vs called',
             description:
-                'Every <code>tools/list</code> response is captured as <code>$mcp_tools_list</code>. Join it against tool calls to find the tools you advertise but agents never invoke.',
+                'See which tools you advertise but agents never call, so you can cut what nobody uses and improve what they do.',
         },
         {
             title: 'Clients',
@@ -85,7 +85,7 @@ export const mcpAnalytics = {
             color: 'red',
             headline: 'Clients',
             description:
-                "Every event carries the MCP client name and version, so you know whether it's Claude Desktop, Cursor, Codex, or your own server connecting.",
+                "Know which clients are connecting and which version they're on, whether that's Claude Desktop, Cursor, Codex, or your own.",
         },
         {
             title: 'Sessions',
@@ -93,7 +93,7 @@ export const mcpAnalytics = {
             color: 'yellow',
             headline: 'Sessions',
             description:
-                'A <code>$mcp_conversation_id</code> stitches multi-turn conversations together, so you can follow a single session across every tool call.',
+                'Follow a whole conversation across every tool call. PostHog stitches multi-turn sessions together so you can see how a task really unfolds.',
         },
         {
             title: 'Capability gaps',
@@ -101,7 +101,7 @@ export const mcpAnalytics = {
             color: 'orange',
             headline: 'Capability gaps',
             description:
-                "Flip on <code>reportMissing</code> and agents can tell you what they wanted but you don't offer yet. Every ask is a <code>$mcp_missing_capability</code> event: a roadmap written by your users' agents.",
+                "Let agents tell you what they wanted but you don't offer yet. Unmet demand turns into a roadmap written by your users' agents.",
         },
         {
             title: 'See it in PostHog',
@@ -110,7 +110,7 @@ export const mcpAnalytics = {
             color: 'blue',
             headline: "One wrapper call, then it's just PostHog",
             description:
-                "Wrap your server with <code>instrument()</code> and every request emits a <code>$mcp_*</code> event. From there it's normal PostHog: insights, dashboards, alerts, SQL, and error tracking all work, no extra plumbing.",
+                "Wrap your server in one line and every request becomes a PostHog event. From there it's all the tools you already know: insights, dashboards, alerts, SQL, and error tracking, with no extra setup.",
             children: (
                 <div className="p-8 @2xl:p-12 space-y-6">
                     <pre className="bg-accent rounded-md p-4 text-sm overflow-x-auto">
