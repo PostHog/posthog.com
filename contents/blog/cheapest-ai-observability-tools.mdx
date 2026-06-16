@@ -21,13 +21,13 @@ seo:
     }
 ---
 
-Teams shipping AI features run into the same blind spots: latency, token costs, and model failures don't show up anywhere until a user runs into them first. [AI observability tools](/ai-observability) are how you see them coming.
+Teams shipping AI features run into the same blind spots: latency, token costs, and model failures don't show up until a user runs into them. [AI observability tools](/ai-observability) are how you see them coming.
 
-A lot of LLM observability tools like to flex their "free" muscles, but "free" can mean a lot of things; it can be as generous as 100,000 events a month with no seat limit ([yes, really](/pricing)), or as limited can mean a 24-hour data window and a single seat.
+A lot of LLM observability tools like to flex their "free" muscles, but "free" can mean a lot of things; it can be as generous as 100,000 events a month with no seat limit ([yes, really](/pricing)), or as limited as a 24-hour retention window and a single seat.
 
 This guide ranks these tools by how far their free tiers actually take you.
 
-If you specifically want open source, we have a separate guide to [the best free open-source LLM observability tools](/blog/best-open-source-llm-observability-tools).
+If you specifically want open source, we have a separate guide to [the best free open source LLM observability tools](/blog/best-open-source-llm-observability-tools).
 
 ## What features do you need in an AI observability tool?
 
@@ -35,7 +35,7 @@ At a minimum, a useful AI observability tool should:
 
 - Capture LLM traces with input, output, latency, and token counts
 - Track cost per model and per user
-- Visualize aggregate metrics (P50/P99 latency, error rates, total spend)
+- Visualize aggregate metrics (p50/p99 latency, error rates, total spend)
 - Support the LLM providers you actually use (OpenAI, Anthropic, and others)
 - Offer free access without requiring a credit card
 
@@ -44,27 +44,26 @@ The best tools go further with:
 - **Prompt management:** Version prompts without redeploying code
 - **Evaluations:** Score outputs with LLM-as-judge, human annotations, or automated metrics
 - **User and session context:** Tie model behavior to [product analytics](/product-analytics), [session replay](/session-replay), or [feature flags](/feature-flags)
-- **Dataset curation and experiments:** Build golden datasets from production traces
+- **Dataset curation:** Build golden datasets from production traces
 - **Self-hosting:** Keep all data in your own infrastructure for privacy or compliance
 
 ## AI observability tools with the best free tiers
 
 ### 1. PostHog
 
-**[PostHog](/)** is an all-in-one developer platform where [AI observability](/llm-analytics) sits alongside [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [logs](/logs), and more. 
+**[PostHog](/)** is an all-in-one developer platform where [AI observability](/ai-observability) sits alongside [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [logs](/logs), and more. 
 
-Since LLM data is stored as [regular events](/docs/data/events), you can connect data such as model spend to user behavior, replay sessions where an agent failed, and ship prompt changes behind a feature flag without ever having to switch between tools.
+Since LLM data is stored as [regular events](/docs/data/events), you can connect it to user behavior, replay sessions where an agent failed, and ship prompt changes behind a feature flag without ever having to switch between tools.
 
 PostHog's [AI Evals](/docs/ai-evals/evaluations) score outputs with LLM-as-judge or your own code, and run automatically after a prompt or model change to catch the quality regressions that error rates miss.
 
-And because [PostHog AI](/ai) and the [MCP server](/docs/model-context-protocol) read your trace data, you can ask questions in plain English such as "what were my most expensive calls yesterday?" directly from your code editor.
+And because [PostHog AI](/ai) and the [MCP server](/docs/model-context-protocol) can read your trace data, you can ask questions in plain English such as "what were my most expensive calls yesterday?" directly from your code editor.
 
 **Free tier:** [PostHog's free plan](/pricing) includes 100K LLM events per month, unlimited seats, and 30 day retention.
 
 **Strengths:**
-- Every LLM event is a standard PostHog event, so it's all available to custom SQL, dashboards, and alerts
+- Every LLM event is a standard PostHog event, so it's all available to query with SQL, add to dashboards, and set up alerts on
 - Spend tracking down to cost per conversation, p95/p99 latency views, and LLM errors auto-captured in [error tracking](/error-tracking)
-- Trace summarization plus plain-language querying through [PostHog AI](/ai) and the [MCP server](/docs/model-context-protocol), so you can debug from your editor
 - No per-seat pricing, usage-based billing with [spend limits](/pricing) you set, and free credits for early-stage companies via [PostHog for Startups](/startups)
 
 <CalloutBox icon="IconStarFilled" title="PostHog is best for..." type="fyi">
@@ -77,7 +76,7 @@ Teams building AI features inside a real product who want traces, evals, and cos
 
 ### 2. Langfuse
 
-**Langfuse** is a focused LLM engineering platform for tracing, prompt management, datasets, and evals – early in this category and still the benchmark for depth in LLM-native workflows.
+**Langfuse** is a focused LLM engineering platform for tracing, prompt management, datasets, and evals. It was early in this category and still the benchmark for depth in LLM-native workflows.
 
 It offers prompt versioning and A/B testing, LLM-as-judge scoring, human annotation workflows, and dataset-based experiments, all in an OpenTelemetry-native platform.
 
@@ -109,17 +108,17 @@ Teams that want a dedicated, open-source LLM engineering platform with deep eval
 
 ### 3. Traceloop (OpenLLMetry)
 
-**Traceloop** is a managed backend that ingests those spans from OpenLLMetry an Apache-2.0 OpenTelemetry layer for LLM apps. The catch is retention: trace data disappears every 24 hours, making it useful for active debugging rather than long-term monitoring. 
+**Traceloop** is a managed backend that ingests spans from OpenLLMetry an Apache-2.0 OpenTelemetry layer for LLM apps. The catch is retention: trace data disappears every 24 hours, making it useful for active debugging rather than long-term monitoring. 
 
 For persistent observability, point OpenLLMetry at PostHog, Langfuse, or your own backend instead.
 
 OpenLLMetry's appeal is that it speaks plain OpenTelemetry. Pre-built instrumentations for many popular LLM, vector, and agent libraries are available across multiple programming languages, and spans can flow to any OpenTelemetry-compatible backend or your own collector.
 
-**Free tier:** The Free Forever plan includes 50,000 spans per month, up to 5 seats, and 24-hour data retention only.
+**Free tier:** The Free Forever plan for Traceloop includes 50,000 spans per month, up to 5 seats, and 24-hour data retention only.
 
 **Strengths:**
 - OpenTelemetry-first, so it fits teams that already standardize on OTel
-- 50k free spans a month rivals Langfuse on raw volume
+- 50K free spans a month rivals Langfuse on raw volume
 - Not locked into Traceloop's UI if you self-route telemetry
 
 <details>
@@ -142,7 +141,7 @@ Developers who want vendor-neutral, OpenTelemetry-native instrumentation they ca
 
 **Arize** built Phoenix, a popular open source AI observability project with no limits on traces, retention, or users when self-hosted.
 
-AX Free is the hosted version of that same project for teams who would rather not run infra, and it adds online (production) evaluations that the local OSS build does not include.
+AX Free is the hosted version of that same project for teams who would rather not run infra, and it adds online (production) evaluations that the local open source build does not include.
 
 Phoenix is the open-source core: OpenTelemetry-based tracing, versioned datasets, experiments, a prompt playground, and built-in evaluators for faithfulness, relevance, hallucination, and toxicity, all runnable locally with no limits. 
 
@@ -194,13 +193,13 @@ It is simpler than Langfuse or Phoenix, which is the point: a refined layer for 
 
 <CalloutBox icon="IconStarFilled" title="Lunary is best for..." type="fyi">
 
-Solo developers building chatbots or RAG apps who want lightweight tracing, prompt management, and conversation threading without a heavyweight platform.
+Solo developers building chatbots or RAG apps who want simple platform for lightweight tracing, prompt management, and conversation threading. 
 
 </CalloutBox>
 
 ### 6. HoneyHive
 
-**HoneyHive** targets production agent observability with OpenTelemetry-native ingestion, evals, and prompt studio features. It shows up in enterprise case studies but still offers a self-serve developer tier.
+**HoneyHive** targets production agent observability with OpenTelemetry-native ingestion, evals, and prompt studio features. It mostly deals with enterprises but still offers a self-serve developer tier.
 
 It auto-instruments providers and tools like OpenAI, Anthropic, and Pinecone. HoneyHive then captures every prompt, retrieval, tool call, and model output as OpenTelemetry spans, and lets you run the same evaluators offline on datasets and online against live traffic. Because it is OTel-native, it stays agnostic across models, frameworks, and clouds with no lock-in.
 
@@ -258,16 +257,16 @@ Teams building on LangChain or LangGraph who want first-party tracing, evaluatio
 
 ### 8. Braintrust
 
-**Braintrust** focuses on tracing, evals, and scoring with a strong Loop agent story for automated quality work. It is popular with teams that treat evals as product infrastructure.
+**Braintrust** focuses on tracing, evals, and scoring with a strong AI analysis assistant for automated quality work. It is popular with teams that treat evals as product infrastructure.
 
-Its Loop agent generates scorers, prompts, and datasets from plain-language descriptions and mines production logs for failure patterns, so you are not hand-writing evaluation logic from scratch. Every agent run can be scored asynchronously in production across dimensions like correctness, safety, and efficiency.
+Its "Loop" assistant agent generates scorers, prompts, and datasets from plain-language descriptions and mines production logs for failure patterns, so you are not hand-writing evaluation logic from scratch. Every agent run can be scored asynchronously in production across dimensions like correctness, safety, and efficiency.
 
 **Free tier:** The Starter plan includes $10 in monthly credits, 1 GB processed data, 10,000 scores per month, 14-day retention, and unlimited users and projects.
 
 **Strengths:**
 - Unlimited users on the free plan, rare in this list
 - Scores-and-evals-first UX, strong for teams measuring output quality
-- SOC 2 Type II and Multi-factor authentication (MFA) on the free tier
+- SOC 2 Type II and multi-factor authentication (MFA) on the free tier
 
 <details>
 <summary>Quick PostHog vs Braintrust free tier comparison</summary>
@@ -355,9 +354,8 @@ Enterprises already standardized on Datadog who want LLM traces correlated with 
 
 #### For enterprises with compliance needs
 
-- **Datadog** or **Dynatrace** when you already run their platform and want LLM traces beside infrastructure and APM telemetry (expect per-host platform pricing)
+- **Datadog** when you already run their platform and want LLM traces beside infrastructure and APM telemetry (expect per-host platform pricing)
 - **PostHog** for [CDP](/cdp), [data warehouse](/data-stack), and AI observability under one vendor, with self-host and EU hosting for data residency
-- **Fiddler AI** when real-time guardrails and AI governance matter as much as observability
 
 <WizardCTA />
 
@@ -372,7 +370,7 @@ A real free tier is different: you can keep using the product indefinitely withi
 
 A few plans sit in between; they're technically free, but tight enough that most teams outgrow them fast, like Traceloop's 24-hour retention or LangSmith's single-seat cap.
 
-For tools you can run yourself at no cost, see our guide to [the best free open-source LLM observability tools](/blog/best-open-source-llm-observability-tools).
+For tools you can run yourself at no cost, see our guide to [the best free open source LLM observability tools](/blog/best-open-source-llm-observability-tools).
 
 </details>
 
@@ -402,7 +400,7 @@ You usually want both, and roughly in that order – evaluation only starts maki
 
 Yes. **Langfuse**, **Traceloop**, **Phoenix**, and **PostHog** all offer open-source cores. 
 
-See our guide to [open-source LLM observability tools](/blog/best-open-source-llm-observability-tools) for a feature-by-feature comparison.
+See our guide to [open source LLM observability tools](/blog/best-open-source-llm-observability-tools) for a feature-by-feature comparison.
 
 </details>
 
