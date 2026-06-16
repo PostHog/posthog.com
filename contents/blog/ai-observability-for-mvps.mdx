@@ -120,7 +120,7 @@ You don't need 15 evaluation criteria across five different dimensions of qualit
 - You don't know what "good" looks like for your product yet, so any rubric you write could be wrong
 - You can do better than evals at this scale by *reading your outputs*. Spend 30 minutes a week looking at random traces. You'll catch more than any rubric will.
 
-[Add automated evals](/docs/ai-evals/evaluations) once you have enough generations that you can't read them all (usually a few hundred per day). 
+[Add automated evals](/docs/ai-evals) once you have enough generations that you can't read them all (usually a few hundred per day). 
 
 When you're ready, our [beginner's guide to testing AI agents](/blog/testing-ai-agents) walks through what a minimal eval suite actually looks like – a small dataset from real user queries and recent bugs, one or two cheap code-based evaluators, one LLM-as-a-judge for a subjective criterion, and a regular trace review ritual.
 
@@ -138,7 +138,7 @@ Until you have meaningful traffic: just ship the better-feeling prompt and move 
 
 If only one person on the team writes prompts, and you ship prompt changes through your normal code deploys, you don't need a separate prompt management system yet. A `prompts.py` file in your repo is fine.
 
-[Prompt management](/docs/prompt-management/prompts) becomes valuable once (a) multiple people are editing prompts, (b) you want non-engineers to iterate on prompts without a deploy, or (c) you want to version and roll back prompts independently of code. None of those usually apply on day one.
+[Prompt management](/docs/prompt-management) becomes valuable once (a) multiple people are editing prompts, (b) you want non-engineers to iterate on prompts without a deploy, or (c) you want to version and roll back prompts independently of code. None of those usually apply on day one.
 
 ### Custom-built observability infra
 
@@ -180,7 +180,7 @@ As your product matures, the bar for observability rises. Here's the rough order
 
 **Connect LLM data to product analytics.** "Users who hit our AI feature retain at 2x" is the kind of insight that justifies the whole investment. To do this, your LLM observability needs to share a user model with your [product analytics](/product-analytics) – which is one reason [bundled tools](/blog/best-analytics-stack-vibe-coded-apps) tend to win at this stage.
 
-**Consider prompt management (if it fits).** Once more than one person edits prompts, or you want non-engineers to iterate without a deploy, [prompt management](/docs/prompt-management/prompts) starts earning its keep. Many teams never need this – a `prompts.py` file in your repo is fine if you're shipping prompt changes through code anyway.
+**Consider prompt management (if it fits).** Once more than one person edits prompts, or you want non-engineers to iterate without a deploy, [prompt management](/docs/prompt-management) starts earning its keep. Many teams never need this – a `prompts.py` file in your repo is fine if you're shipping prompt changes through code anyway.
 
 </details>
 
@@ -209,9 +209,9 @@ A quick pitch, since this is our blog after all:
 
 - **[Tracing](/docs/ai-observability/traces)** with a small SDK wrapper around OpenAI, Anthropic, and other providers
 - **Cost, latency, and token tracking** by model, user, and feature
-- **[Evaluations](/docs/ai-evals/evaluations)** with LLM-as-a-judge and human review
+- **[Evaluations](/docs/ai-evals)** with LLM-as-a-judge and human review
 - **[Error tracking](/error-tracking)** alongside traces, so AI-specific failures (tool calls, parsing errors, loop termination) show up next to the calls that caused them
-- **[Prompt management](/docs/prompt-management/prompts)** with versioning, fetch-at-runtime, and rollback
+- **[Prompt management](/docs/prompt-management)** with versioning, fetch-at-runtime, and rollback
 - **[Connected product analytics](/product-analytics)** – the same user IDs flow through, so you can correlate AI usage with retention, conversion, and churn
 - **[Session replay](/docs/ai-observability/link-session-replay)** alongside traces, so you can see exactly what the user was doing when the model misbehaved
 - **An [MCP server](/docs/model-context-protocol)** that lets you query traces, costs, and evals directly from Claude Code or Cursor while you're iterating

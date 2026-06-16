@@ -1857,16 +1857,24 @@
             "destination": "/docs/ai-observability/installation/manual-capture"
         },
         {
+            "source": "/docs/ai-evals/evaluations",
+            "destination": "/docs/ai-evals"
+        },
+        {
+            "source": "/docs/prompt-management/prompts",
+            "destination": "/docs/prompt-management"
+        },
+        {
             "source": "/docs/llm-analytics/evaluations",
-            "destination": "/docs/ai-evals/evaluations"
+            "destination": "/docs/ai-evals"
         },
         {
             "source": "/docs/llm-analytics/trace-reviews",
-            "destination": "/docs/ai-evals/trace-reviews"
+            "destination": "/docs/ai-observability/trace-reviews"
         },
         {
             "source": "/docs/llm-analytics/prompts",
-            "destination": "/docs/prompt-management/prompts"
+            "destination": "/docs/prompt-management"
         },
         {
             "source": "/docs/llm-analytics/skills-store",
