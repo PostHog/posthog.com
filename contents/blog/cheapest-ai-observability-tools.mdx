@@ -107,34 +107,6 @@ Teams that want a dedicated, open-source LLM engineering platform with deep eval
 
 ### 3. Traceloop (OpenLLMetry)
 
-<p>
-<ProductComparisonTable
-    competitors={['posthog', 'traceloop']}
-    rows={[
-        {
-            label: 'Evergreen free tier',
-            description: 'Ongoing free plan (not time-limited trial).',
-            values: [true, true],
-        },
-        {
-            label: 'Free events/month',
-            description: 'Monthly included events/usage on the free plan.',
-            values: ['100K', '50K'],
-        },
-        {
-            label: 'Free data retention',
-            description: 'Default data retention included on the free plan.',
-            values: ['30 days', '24 hours'],
-        },
-        {
-            label: 'Free seats',
-            description: 'Included user seats on the free plan.',
-            values: ['Unlimited', '5'],
-        },
-    ]}
-/>
-</p>
-
 **Traceloop** is a managed backend that ingests those spans from OpenLLMetry an Apache-2.0 OpenTelemetry layer for LLM apps. The catch is retention: trace data disappears every 24 hours, making it useful for active debugging rather than long-term monitoring. 
 
 For persistent observability, point OpenLLMetry at PostHog, Langfuse, or your own backend instead.
