@@ -147,7 +147,7 @@ If either condition can't be met, you'll need an override.
 #### Overrides
 An override is the manual process RevOps uses when credits couldn't be applied before an invoice was finalized. For example, the customer paid part of an invoice with credits, or signed after the invoice was already issued. Overrides are more complex than the standard flow: they can involve pausing or crediting the issued invoice, refunding card payments, and re applying credits in the right order.
 
-Do not refund a card payment until the replacement credits are confirmed and loaded. Refund first, credits later risks leaving the invoice uncovered.
+The refund itself can be done self serve through billing admin. But in an override scenario a refund is not a clean solution. It's tied to metadata override and reapplying credits. So don't process an override refund in isolation: coordinate with the billing team so revenue recognition stays accurate. And don't refund a card payment until the replacement credits are confirmed.
 
 If you're unsure whether a situation needs an override, ask the billing team in #team-billing before taking any action. Don't roll back charges, void invoices, or refund payments on your own.
 
