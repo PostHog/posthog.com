@@ -1,6 +1,18 @@
 import React from 'react'
 import OSButton from 'components/OSButton'
 
+/**
+ * Which stage the early access feature is in, which drives the call to action:
+ * - `register_interest` — we're gathering interest before the beta opens ("concept" stage).
+ * - `request_access` — the beta is open and people can ask to join ("beta" stage).
+ */
+export type EarlyAccessState = 'register_interest' | 'request_access'
+
+const DEFAULT_LABELS: Record<EarlyAccessState, string> = {
+    register_interest: 'Register interest',
+    request_access: 'Get early access',
+}
+
 export interface EarlyAccessOptInProps {
     /**
      * URL of the early access feature in the PostHog app (e.g. an
@@ -10,7 +22,11 @@ export interface EarlyAccessOptInProps {
      * The signed-in user opts into the beta in the app instead.
      */
     to: string
-    /** Button copy. Defaults to "Get early access". */
+    /**
+     * The early access stage, which sets the default CTA copy. Defaults to `request_access`.
+     */
+    state?: EarlyAccessState
+    /** Override the CTA copy. Defaults to the label for `state`. */
     label?: string
     /** Optional extra classes for the button. */
     className?: string
@@ -27,13 +43,14 @@ export interface EarlyAccessOptInProps {
  */
 export default function EarlyAccessOptIn({
     to,
-    label = 'Get early access',
+    state = 'request_access',
+    label,
     className = '',
     size = 'md',
 }: EarlyAccessOptInProps): JSX.Element {
     return (
         <OSButton variant="primary" size={size} asLink external to={to} className={className}>
-            {label}
+            {label || DEFAULT_LABELS[state]}
         </OSButton>
     )
 }

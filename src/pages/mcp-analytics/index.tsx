@@ -90,7 +90,7 @@ export default function MCPAnalytics(): JSX.Element {
             productHandle={PRODUCT_HANDLE}
             data={mergedData}
             slideConfig={slides}
-            rightActionButtons={<EarlyAccessOptIn to={EARLY_ACCESS_URL} label="Get early access" />}
+            rightActionButtons={<EarlyAccessOptIn to={EARLY_ACCESS_URL} state="register_interest" />}
         />
     )
 }

@@ -5,10 +5,25 @@ A small opt-in button that points visitors at a PostHog **early access feature i
 ```tsx
 import EarlyAccessOptIn from 'components/EarlyAccessOptIn'
 
-<EarlyAccessOptIn to="https://us.posthog.com/early_access_features/<id>" label="Get early access" />
+// Gathering interest before the beta opens:
+<EarlyAccessOptIn to="https://us.posthog.com/early_access_features/<id>" state="register_interest" />
+
+// Beta is open, people can request access:
+<EarlyAccessOptIn to="https://us.posthog.com/early_access_features/<id>" state="request_access" />
 ```
 
 It's used in the header of product landing pages via `SlidesTemplate`'s `rightActionButtons` prop — see `src/pages/mcp-analytics/index.tsx`.
+
+## State drives the CTA
+
+An early access feature can be in one of two states, which sets the default button copy:
+
+| `state`             | Maps to app stage | Default CTA          | Use when                                        |
+| ------------------- | ----------------- | -------------------- | ----------------------------------------------- |
+| `register_interest` | `concept`         | "Register interest"  | Gathering interest before the beta opens.       |
+| `request_access`    | `beta`            | "Get early access"   | The beta is open and people can ask to join.    |
+
+Pass `label` to override the copy for either state.
 
 ## Why it's a link, not a local enrollment
 
@@ -23,12 +38,13 @@ So instead, this component is a plain link to the early access feature in the ap
 
 ## Props
 
-| Prop        | Type                                   | Default              | Notes                                                                 |
-| ----------- | -------------------------------------- | -------------------- | --------------------------------------------------------------------- |
-| `to`        | `string` (required)                    | —                    | URL of the early access feature in the app. Must point at the app.    |
-| `label`     | `string`                               | `'Get early access'` | Button copy.                                                          |
-| `className` | `string`                               | `''`                 | Extra classes for the button.                                        |
-| `size`      | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'`               | Button size.                                                          |
+| Prop        | Type                                       | Default            | Notes                                                              |
+| ----------- | ------------------------------------------ | ------------------ | ------------------------------------------------------------------ |
+| `to`        | `string` (required)                        | —                  | URL of the early access feature in the app. Must point at the app. |
+| `state`     | `'register_interest' \| 'request_access'`  | `'request_access'` | Sets the default CTA copy (see above).                             |
+| `label`     | `string`                                   | label for `state`  | Override the CTA copy.                                             |
+| `className` | `string`                                   | `''`               | Extra classes for the button.                                     |
+| `size`      | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'`     | `'md'`             | Button size.                                                      |
 
 ## Finding the `to` URL
 
