@@ -44,9 +44,10 @@ Because these are standard events, you can use them anywhere PostHog events are 
 Each event carries properties so you can filter and break down by workflow, recipient, and message:
 
 - `$workflow_id` — the workflow that sent the email (on every event)
-- `$email_to` — the recipient address (on send-time and provider-callback events)
-- `$email_subject` — the email subject (on the send-time events `$workflows_email_sent` and `$workflows_email_failed`)
-- `$messaging_source` — how the event was captured (`ses` for provider callbacks), on the callback events
+- `$workflow_action_id` — the email step within the workflow that this event belongs to (on every event)
+- `$email_to` — the recipient address (on every event)
+- `$email_subject` — the email subject (on every event)
+- `$messaging_source` — how the event was captured: `direct` for send-time events, `ses` for provider callbacks (on every event)
 - `$link_url` — the clicked link, on `$workflows_email_link_clicked`
 
 ## Relationship to workflow metrics
