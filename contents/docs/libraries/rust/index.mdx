@@ -66,7 +66,7 @@ When local evaluation is enabled, flag definitions are fetched on initialization
 
 ## Error tracking
 
-You can capture exceptions and panics with the Rust SDK. `capture_exception` accepts any `std::error::Error` and records a stack trace at the call site; `capture_exception_with` additionally links a person and attaches context:
+You can capture exceptions with the Rust SDK. `capture_exception` accepts any `std::error::Error` and records a stack trace at the call site; `capture_exception_with` additionally links a person and attaches context:
 
 ```rust
 use posthog_rs::CaptureExceptionOptions;
@@ -83,15 +83,6 @@ client.capture_exception_with(
         .distinct_id("user_distinct_id")
         .property("route", "/checkout").unwrap(),
 ).await.unwrap();
-```
-
-To capture panics automatically, install the panic hook once near application startup:
-
-```rust
-posthog_rs::install_panic_hook((
-    "<ph_project_token>",
-    "<ph_client_api_host>",
-)).unwrap();
 ```
 
 For the full setup guide, see the [Rust error tracking installation docs](/docs/error-tracking/installation/rust).

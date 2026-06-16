@@ -84,23 +84,6 @@ if let Err(err) = result {
 
 </Step>
 
-<Step title="Capture panics" badge="optional">
-
-Install the panic hook once near application startup to capture Rust panics automatically:
-
-```rust
-posthog_rs::install_panic_hook((
-    "<ph_project_token>",
-    "<ph_client_api_host>",
-)).unwrap();
-```
-
-Panics are captured personlessly with the panic message, the panic site (file, line, and column), and a stack trace. The previously installed hook still runs afterwards, so default panic output and other integrations are unaffected.
-
-Panic capture is best-effort: hooks run before unwinding, so panics caught later by `catch_unwind` are still captured, while aborting processes may exit before delivery completes.
-
-</Step>
-
 <Step title="Configure stack traces" badge="optional">
 
 Stack trace capture and in-app frame classification are configured per client through `ErrorTrackingOptionsBuilder`:
