@@ -48,6 +48,41 @@ The AI wizard integrating both the JS Web SDK and Node SDK into a Next.js applic
 
 <WizardInstall />
 
+## Commands
+
+Running `npx @posthog/wizard` with no arguments starts the default integration flow. The wizard also exposes focused commands:
+
+| Command | What it does |
+|---|---|
+| `wizard` | Default flow — installs and instruments PostHog |
+| `wizard audit [skill]` | Audit an existing integration (e.g. `wizard audit events`, `wizard audit all`) |
+| `wizard revenue-analytics` | Wire up Stripe + PostHog revenue analytics |
+| `wizard migrate` | Migrate from another analytics or feature-flag vendor |
+| `wizard upload-source-maps` | Upload source maps to PostHog Error Tracking |
+| `wizard mcp add` / `wizard mcp remove` | Manage the PostHog MCP server for your AI agent |
+
+### Command changes
+
+The CLI was overhauled to consolidate commands into a smaller, more consistent surface. If you used an older command name, here's where it went:
+
+| Old command | New command | What changed |
+|---|---|---|
+| `wizard integrate` | `wizard` | The default flow now runs the integration |
+| `wizard events-audit` | `wizard audit events` | Now an `audit` subcommand |
+| `wizard audit` | `wizard audit [skill]` | Now takes a subcommand; `wizard audit all` runs a full audit |
+| `wizard revenue` | `wizard revenue-analytics` | Renamed — update any scripts using `revenue` |
+| `wizard upload-sourcemaps` | `wizard upload-source-maps` | Renamed (the old `upload-sourcemaps` still works) |
+
+```mermaid
+graph LR
+    A1["wizard integrate"] --> B1["wizard"]
+    A2["wizard events-audit"] --> B2["wizard audit events"]
+    A3["wizard audit"] --> B3["wizard audit &lt;skill&gt;"]
+    A4["wizard revenue"] --> B4["wizard revenue-analytics"]
+    A5["wizard upload-sourcemaps"] --> B5["wizard upload-source-maps"]
+    A6["wizard audit-3000"] --> B6["removed"]
+```
+
 We think flows like the AI wizard are pretty cool and the future of developer experience. The AI wizard is our recommended and default method for [installing PostHog](/docs/getting-started/install?tab=wizard) and getting started.
 
 If you have any feedback or requests, we would love to hear from you. Feel free to comment on this page or open an issue on [GitHub](https://github.com/PostHog/wizard/issues).
