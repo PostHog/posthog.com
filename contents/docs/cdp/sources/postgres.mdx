@@ -405,4 +405,16 @@ This happens in self-managed mode when PostHog can't find the publication name y
 
 Check the slot lag query above. If PostHog-managed slot protection dropped the slot, [disable and re-enable CDC](#managing-cdc-after-source-creation) or run a full resync after fixing the underlying issue. If you're in self-managed mode, your DBA must decide whether to keep, advance, or drop the slot.
 
+### `materialized view has not been populated`
+
+This error occurs when you try to sync a materialized view that was created with `WITH NO DATA` and has never been refreshed. PostgreSQL can't read from an unpopulated materialized view.
+
+To fix this, run the following command in your PostgreSQL database:
+
+```sql
+REFRESH MATERIALIZED VIEW "your_view_name";
+```
+
+After refreshing, re-enable the sync in PostHog.
+
 > **Looking for an example of the Postgres source?** Check out our tutorial where we [connect and query Supabase data](/tutorials/supabase-query).
