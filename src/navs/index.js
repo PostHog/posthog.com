@@ -3207,11 +3207,15 @@ export const docsMenu = {
                             ],
                         },
                         {
-                            name: 'SDK doctor',
-                            url: '/docs/sdk-doctor',
+                            name: 'Health checks',
+                            url: '/docs/sdk-health',
                             children: [
                                 {
                                     name: 'Overview',
+                                    url: '/docs/sdk-health',
+                                },
+                                {
+                                    name: 'SDK doctor',
                                     url: '/docs/sdk-doctor',
                                 },
                                 {
