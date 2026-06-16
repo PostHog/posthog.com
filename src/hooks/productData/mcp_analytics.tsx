@@ -61,6 +61,13 @@ export const mcpAnalytics = {
             headline: 'Every tool call',
             description:
                 'Every tool call becomes an event. See exactly what the agent sent, what came back, how long it took, and whether it failed.',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_activity_feed_light_197cb57f3c.png',
+                    srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_activity_feed_dark_e795d95547.png',
+                    alt: 'MCP tool call activity feed',
+                },
+            ],
         },
         {
             title: 'Agent intent',
@@ -69,6 +76,13 @@ export const mcpAnalytics = {
             headline: 'Agent intent',
             description:
                 'Capture the goal behind each call, so you can tell a useful request from a confused one. The SDK reads the agent intent automatically.',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_card_intent_light_701844569c.png',
+                    srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_card_intent_dark_1b033bf1dc.png',
+                    alt: 'Agent intent captured for each tool call in a session',
+                },
+            ],
         },
         {
             title: 'Advertised vs called',
@@ -77,6 +91,13 @@ export const mcpAnalytics = {
             headline: 'Advertised vs called',
             description:
                 'See which tools you advertise but agents never call, so you can cut what nobody uses and improve what they do.',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_card_advertised_light_2e98fb854f.png',
+                    srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_card_advertised_dark_b189093a50.png',
+                    alt: 'Per-tool call volume and reliability table',
+                },
+            ],
         },
         {
             title: 'Clients',
@@ -85,6 +106,13 @@ export const mcpAnalytics = {
             headline: 'Clients',
             description:
                 "Know which clients are connecting and which version they're on, whether that's Claude Desktop, Cursor, Codex, or your own.",
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_card_clients_light_4a22b61f07.png',
+                    srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_card_clients_dark_42dc6cf72c.png',
+                    alt: 'Share of MCP calls by client',
+                },
+            ],
         },
         {
             title: 'Sessions',
@@ -93,6 +121,13 @@ export const mcpAnalytics = {
             headline: 'Sessions',
             description:
                 'Follow a whole conversation across every tool call. PostHog stitches multi-turn sessions together so you can see how a task really unfolds.',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_sessions_light_bdd1eb84cb.png',
+                    srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_sessions_dark_d5b4aa4577.png',
+                    alt: 'MCP session timeline stepping through tool calls',
+                },
+            ],
         },
         {
             title: 'Capability gaps',
@@ -101,6 +136,13 @@ export const mcpAnalytics = {
             headline: 'Capability gaps',
             description:
                 "Let agents tell you what they wanted but you don't offer yet. Unmet demand turns into a roadmap written by your users' agents.",
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_missing_capability_light_f9864cae92.png',
+                    srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_missing_capability_dark_aac81d58c5.png',
+                    alt: 'Missing capabilities broken down by client',
+                },
+            ],
         },
         {
             title: 'See it in PostHog',
