@@ -3208,11 +3208,55 @@ export const docsMenu = {
                         },
                         {
                             name: 'Health checks',
-                            url: '/docs/sdk-health',
+                            url: '/docs/health-checks',
                             children: [
                                 {
                                     name: 'Overview',
-                                    url: '/docs/sdk-health',
+                                    url: '/docs/health-checks',
+                                },
+                                {
+                                    name: 'SDK health',
+                                    url: '/docs/health-checks/sdk-health',
+                                },
+                                {
+                                    name: 'No live events',
+                                    url: '/docs/health-checks/no-live-events',
+                                },
+                                {
+                                    name: 'No reverse proxy',
+                                    url: '/docs/health-checks/no-reverse-proxy',
+                                },
+                                {
+                                    name: 'Partial reverse-proxy coverage',
+                                    url: '/docs/health-checks/partial-reverse-proxy',
+                                },
+                                {
+                                    name: 'No authorized URLs',
+                                    url: '/docs/health-checks/authorized-urls',
+                                },
+                                {
+                                    name: 'Missing pageleave events',
+                                    url: '/docs/health-checks/pageleave-events',
+                                },
+                                {
+                                    name: 'Missing web vitals',
+                                    url: '/docs/health-checks/web-vitals',
+                                },
+                                {
+                                    name: 'Scroll-depth tracking disabled',
+                                    url: '/docs/health-checks/scroll-depth',
+                                },
+                                {
+                                    name: 'Ingestion warnings',
+                                    url: '/docs/health-checks/ingestion-warnings',
+                                },
+                                {
+                                    name: 'Materialized view failures',
+                                    url: '/docs/health-checks/materialized-view-failures',
+                                },
+                                {
+                                    name: 'External data sync failures',
+                                    url: '/docs/health-checks/external-data-sync-failures',
                                 },
                                 {
                                     name: 'SDK doctor',

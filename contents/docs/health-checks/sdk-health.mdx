@@ -1,0 +1,46 @@
+---
+title: SDK health
+sidebar: Docs
+showTitle: true
+---
+
+The SDK health check watches the versions of the PostHog SDKs sending events to your project and flags any that have fallen significantly behind the latest release. It's powered by [SDK doctor](/docs/sdk-doctor), which is where you'll find the full detail on how versions are evaluated.
+
+{/*SCREENSHOT PLACEHOLDER: the SDK Health page showing SDKs, versions in use, and how far behind each is*/}
+
+## What this check looks for
+
+Once a day, the check samples the SDK name (`$lib`) and version (`$lib_version`) from your recent events and compares each against the latest published release on GitHub. It deliberately avoids noise from frequent releases – a version is only flagged when it's meaningfully out of date (a major version behind, several minor versions behind, or old enough that an upgrade is recommended). See [SDK doctor](/docs/sdk-doctor) for the exact thresholds and the grace period for brand-new releases.
+
+**Severity:** A single outdated SDK is a **warning**. When most of a project's SDKs are outdated, it escalates to **critical**.
+
+## Why it matters
+
+Outdated SDKs miss bug fixes, performance improvements, and new features, and may carry known issues that have since been patched. Keeping current is the cheapest way to avoid problems you'd otherwise have to debug yourself.
+
+## Fix it manually
+
+1. Open the **SDK health** page (in the Health section of the app). It lists every SDK you're sending events from, the versions in use, the latest available version, and how far behind each one is.
+2. For each outdated SDK, bump the dependency in your package manager – `npm`/`yarn`/`pnpm`, `pip`/`poetry`, `gem`, `go get`, etc. – and redeploy.
+3. For browser-snippet installs, make sure you're loading the latest snippet.
+4. Check the SDK's changelog for any breaking changes before upgrading.
+
+See [keeping SDKs current](/docs/sdk-doctor/keeping-sdks-current) for strategies to stay up to date automatically.
+
+## Fix it automatically with Signals and PostHog Code
+
+If you've connected your repository to [PostHog Code](/docs/posthog-code), enable health checks as a [signal source](/docs/posthog-code/inbox/sources) and the agent will:
+
+- Read the issue to identify the affected SDK and its latest version.
+- Query your events to confirm which `$lib` / `$lib_version` values are still sending data.
+- Bump the PostHog SDK dependency in the right manifest (`package.json`, `requirements.txt` / `pyproject.toml`, `Gemfile`, `go.mod`, etc.), update the lockfile, and review the changelog for breaking changes.
+- Open a PR for you to review.
+
+The issue clears on the next check run once the upgraded SDK starts sending events.
+
+## Related
+
+- [Health checks overview](/docs/health-checks)
+- [SDK doctor](/docs/sdk-doctor)
+- [Keeping SDKs current](/docs/sdk-doctor/keeping-sdks-current)
+</content>

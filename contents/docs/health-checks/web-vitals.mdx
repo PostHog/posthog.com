@@ -1,0 +1,43 @@
+---
+title: Missing web vitals
+sidebar: Docs
+showTitle: true
+---
+
+The missing web vitals check fires when your project sends `$pageview` events but no `$web_vitals` events, which means [Core Web Vitals](/docs/web-analytics/web-vitals) won't show up in your analytics.
+
+{/*SCREENSHOT PLACEHOLDER: the Web analytics health page showing the missing web vitals issue*/}
+
+## What this check looks for
+
+Once a day, the check looks back over the **last 30 days**. If it sees `$pageview` events but zero `$web_vitals` events, it raises a **warning**.
+
+## Why it matters
+
+Without `$web_vitals` events, Core Web Vitals (LCP, CLS, INP, FCP) won't appear in web analytics, so you lose visibility into how your pages actually perform for users. It usually means performance capture is disabled in the SDK.
+
+## Fix it manually
+
+1. Open the **Web analytics health** page.
+2. Make sure you're on a recent `posthog-js`.
+3. Confirm `capture_performance` (web vitals) hasn't been turned off in your `posthog.init` config.
+
+See [web vitals](/docs/web-analytics/web-vitals) for the full configuration.
+
+## Fix it automatically with Signals and PostHog Code
+
+With [PostHog Code](/docs/posthog-code) and health checks enabled as a [signal source](/docs/posthog-code/inbox/sources), the agent will:
+
+- Confirm no `$web_vitals` events are arriving.
+- Bump `posthog-js` to a recent version.
+- Enable web vitals in your `posthog.init` config (the `capture_performance: { web_vitals: true }` option).
+- Open a PR.
+
+The issue resolves on the next run once `$web_vitals` events start arriving.
+
+## Related
+
+- [Health checks overview](/docs/health-checks)
+- [Web vitals](/docs/web-analytics/web-vitals)
+- [Missing pageleave events](/docs/health-checks/pageleave-events)
+</content>

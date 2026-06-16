@@ -1,0 +1,42 @@
+---
+title: Scroll-depth tracking disabled
+sidebar: Docs
+showTitle: true
+---
+
+The scroll-depth check fires when your `$pageleave` events arrive without scroll-depth metadata, which leaves scroll-depth reports in web analytics empty.
+
+{/*SCREENSHOT PLACEHOLDER: the Web analytics health page showing the scroll-depth issue*/}
+
+## What this check looks for
+
+Once a day, the check looks back over the **last 30 days** at your `$pageleave` events and checks whether they include the scroll-depth property (`$prev_pageview_max_content_percentage`). If none of them do, it raises a **warning**.
+
+## Why it matters
+
+Scroll depth tells you how far down a page people actually read. Without it, scroll-depth reports are empty and you lose a useful engagement signal. It usually means scroll-depth autocapture is disabled in the SDK.
+
+## Fix it manually
+
+Scroll depth is collected automatically by `posthog-js` as part of `$pageleave` when autocapture is enabled, so the usual fix is:
+
+1. Open the **Web analytics health** page.
+2. Update to a recent `posthog-js` version.
+3. Make sure autocapture (and DOM / scroll tracking) hasn't been disabled in your `posthog.init` config.
+
+## Fix it automatically with Signals and PostHog Code
+
+With [PostHog Code](/docs/posthog-code) and health checks enabled as a [signal source](/docs/posthog-code/inbox/sources), the agent will:
+
+- Inspect a recent `$pageleave` event and confirm the scroll fields are missing.
+- Bump `posthog-js` and check that your `posthog.init` config doesn't disable autocapture or DOM / scroll tracking.
+- Open a PR.
+
+The issue clears on the next run once `posthog-js` starts sending scroll metadata.
+
+## Related
+
+- [Health checks overview](/docs/health-checks)
+- [Autocapture](/docs/product-analytics/autocapture)
+- [Missing pageleave events](/docs/health-checks/pageleave-events)
+</content>
