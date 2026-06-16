@@ -168,9 +168,7 @@ Teams that want a dedicated, open-source LLM engineering platform with deep eval
 />
 </p>
 
-OpenLLMetry is an Apache-2.0 OpenTelemetry layer for LLM apps. 
-
-**Traceloop** hosts a managed backend that ingests those spans, but the catch is retention: trace data disappears every 24 hours, making it useful for active debugging rather than long-term monitoring. 
+**Traceloop** is a managed backend that ingests those spans from OpenLLMetry an Apache-2.0 OpenTelemetry layer for LLM apps. The catch is retention: trace data disappears every 24 hours, making it useful for active debugging rather than long-term monitoring. 
 
 For persistent observability, point OpenLLMetry at PostHog, Langfuse, or your own backend instead.
 
@@ -320,7 +318,7 @@ Solo developers building chatbots or RAG apps who want lightweight tracing, prom
 
 **HoneyHive** targets production agent observability with OpenTelemetry-native ingestion, evals, and prompt studio features. It shows up in enterprise case studies but still offers a self-serve developer tier.
 
-It auto-instruments providers and tools like OpenAI, Anthropic, and Pinecone, captures every prompt, retrieval, tool call, and model output as OpenTelemetry spans, and lets you run the same evaluators offline on datasets and online against live traffic. Because it is OTel-native, it stays agnostic across models, frameworks, and clouds with no lock-in.
+It auto-instruments providers and tools like OpenAI, Anthropic, and Pinecone. HoneyHive then captures every prompt, retrieval, tool call, and model output as OpenTelemetry spans, and lets you run the same evaluators offline on datasets and online against live traffic. Because it is OTel-native, it stays agnostic across models, frameworks, and clouds with no lock-in.
 
 **Free tier:** The Developer plan includes 10,000 events per month, up to 5 users, 30-day retention, and the full observability and eval suite.
 
@@ -669,7 +667,7 @@ ML teams already using Weights & Biases for model training who want LLM tracing 
 #### For evals-first teams
 
 - **Braintrust** when evaluation is core product infrastructure, with scoring and experiments front and center (unlimited users on the free plan)
-- **PostHog** for LLM-as-judge and code-based  evals that run automatically after a prompt or model change
+- **PostHog** for LLM-as-judge and code-based evals that run automatically after a prompt or model change
 - **Langfuse** for LLM-as-judge, human annotation queues, and dataset experiments in an open-source platform
 
 #### For enterprises with compliance needs
@@ -700,7 +698,7 @@ A **free trial** gives you fuller access for a fixed window, then requires payme
 
 **AI evaluation** focuses on whether what happened was good: scoring responses for quality, factual accuracy, safety, or task completion. 
 
-You usually want both, and roughly in that order – evaluation only starts making sense once you can actually see the outputs you're scoring. For the longer version, see our explainer on [what AI observability is and how it works](https://posthog.com/blog/what-is-ai-observability).
+You usually want both, and roughly in that order – evaluation only starts making sense once you can actually see the outputs you're scoring. For the longer version, see our explainer on [what AI observability is and how it works](/blog/what-is-ai-observability).
 
 </details>
 
@@ -729,7 +727,7 @@ See our guide to [open-source LLM observability tools](/blog/best-open-source-ll
 
 Pick PostHog if you also need [product analytics](/product-analytics), [web analytics](/web-analytics), [error tracking](/error-tracking), and [session replay](/session-replay). 
 
-For a fuller walkthrough of what to instrument first, how to tie LLM data to product analytics, and when a free tier stops being enough, see our guide to [AI observability for your MVP](https://posthog.com/blog/ai-observability-for-mvps).
+For a fuller walkthrough of what to instrument first, how to tie LLM data to product analytics, and when a free tier stops being enough, see our guide to [AI observability for your MVP](/blog/ai-observability-for-mvps).
 
 </details>
 
