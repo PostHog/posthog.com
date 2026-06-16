@@ -138,21 +138,27 @@ export const mcpAnalytics = {
     questions: [
         {
             question: 'Which tools is each client calling, and how often?',
+            url: '/docs/mcp-analytics/queries#top-tools-per-server',
         },
         {
             question: "What's the agent trying to do?",
+            url: '/docs/mcp-analytics/intent',
         },
         {
             question: 'Which tools are advertised but never called?',
+            url: '/docs/mcp-analytics/queries#advertised-tools-that-never-get-called',
         },
         {
             question: "What's a tool's error rate and p95 latency?",
+            url: '/docs/mcp-analytics/queries#error-rate-per-tool',
         },
         {
             question: "What did agents ask for that you don't offer?",
+            url: '/docs/mcp-analytics/missing-capability',
         },
         {
             question: 'How does a single session unfold?',
+            url: '/docs/mcp-analytics/conversation-id',
         },
     ],
     pairsWith: [
