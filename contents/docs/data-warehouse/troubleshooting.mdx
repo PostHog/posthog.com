@@ -69,6 +69,17 @@ To fix this:
 3. Upload the new Google Cloud JSON key file.
 4. Re-run the sync.
 
+## Why is my Shopify sync failing with "Payment Required"?
+
+If your Shopify sync fails with a `402 Client Error: Payment Required` message, it means your Shopify store is frozen due to an unpaid bill. Shopify's Admin API returns this error when the store owner has an outstanding balance.
+
+This is a non-retryable error – PostHog stops the sync instead of retrying indefinitely because nothing on PostHog's side can recover from this state.
+
+To fix this:
+
+1. Log into your [Shopify admin](https://admin.shopify.com/) and settle any outstanding balance to unfreeze your store.
+2. Once your store is active again, re-run the sync from [**Data pipelines > Sources**](https://app.posthog.com/data-management/sources) in PostHog.
+
 ## How do I speed up my SQL queries?
 
 1. Reduce the date range you're querying.
