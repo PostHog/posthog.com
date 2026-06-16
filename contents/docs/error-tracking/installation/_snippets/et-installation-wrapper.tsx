@@ -160,6 +160,15 @@ export const ErrorTrackingFlutterInstallationWrapper = () => (
 
 export const ErrorTrackingReactNativeInstallationWrapper = () => (
     <OnboardingContentWrapper snippets={{}}>
-        <ReactNativeInstallation modifySteps={(steps) => addNextStepsStep(steps, 'react-native')} />
+        <ReactNativeInstallation
+            modifySteps={(steps) =>
+                addNextStepsStep(steps, 'react-native', {
+                    mappingsUrl: '/docs/error-tracking/upload-source-maps/react-native',
+                    mappingsLabel: 'Upload source maps & native symbols',
+                    mappingsDescription:
+                        "Great, you're capturing exceptions! The next step is to upload source maps (for JavaScript stack traces) and native symbols (for native iOS/Android crash symbolication) so PostHog can generate accurate stack traces.",
+                })
+            }
+        />
     </OnboardingContentWrapper>
 )

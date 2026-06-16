@@ -108,7 +108,7 @@ The combination of LLM errors + general application errors is how you debug agen
 
 #### 4. Evaluations (evals)
 
-[LLM evals](/docs/ai-evals/evaluations) score the quality of outputs, not just whether they succeeded. They come in two flavors:
+[LLM evals](/docs/ai-evals) score the quality of outputs, not just whether they succeeded. They come in two flavors:
 
 - **Deterministic evals** (code-based): cheap, fast, and reliable. Things like "did the agent call the right tool," "did the output contain a forbidden keyword," "was the response under N tokens," or Levenshtein distance against an expected output.
 - **LLM-as-a-judge evals**: a separate model scores the output against a rubric. Useful for subjective criteria (tone, helpfulness, hallucination) that code can't capture. More expensive, less reliable, sensitive to changes in the judge model.
@@ -123,7 +123,7 @@ Beyond explicit feedback, implicit signals matter too: retries, edits, abandonme
 
 #### 6. Prompt management
 
-Versioning, A/B testing, and runtime control of your prompts without re-deploying code. [Prompt management](/docs/prompt-management/prompts) is useful once multiple people are editing prompts or you want non-engineers to iterate. Often overrated at the MVP stage – a `prompts.py` file in your repo is fine if one person owns prompts and you ship changes through normal deploys.
+Versioning, A/B testing, and runtime control of your prompts without re-deploying code. [Prompt management](/docs/prompt-management) is useful once multiple people are editing prompts or you want non-engineers to iterate. Often overrated at the MVP stage – a `prompts.py` file in your repo is fine if one person owns prompts and you ship changes through normal deploys.
 
 ### How tools instrument your code
 
@@ -167,8 +167,8 @@ The free tier covers 100K LLM events/mo. EU hosting available. SDKs for OpenAI, 
 **Key features:**
 
 - Tracing, cost tracking, latency, token usage, model breakdown
-- [Evals](/docs/ai-evals/evaluations) with deterministic checks and LLM-as-a-judge
-- [Prompt management](/docs/prompt-management/prompts) with versioning and fetch-at-runtime
+- [Evals](/docs/ai-evals) with deterministic checks and LLM-as-a-judge
+- [Prompt management](/docs/prompt-management) with versioning and fetch-at-runtime
 - [Prompt experiments](/docs/prompt-management/prompt-experiments) (beta) for A/B testing prompts with built-in cost, latency, and eval pass rate metrics
 - [MCP server](/docs/model-context-protocol) for querying observability data from Claude Code or Cursor
 - Connected to [product analytics](/docs/product-analytics), [session replay](/docs/session-replay), and [error tracking](/docs/error-tracking) so you can debug AI failures with full user context

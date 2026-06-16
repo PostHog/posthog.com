@@ -30,6 +30,7 @@ import {
     IconTrends,
     IconCursorClick,
     IconChat,
+    IconAtSign,
     IconLlmPromptEvaluation,
 } from '@posthog/icons'
 import useProducts from './useProducts'
@@ -91,18 +92,46 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             category: 'automation',
             slug: 'code',
             status: 'beta',
+            screenshots: {
+                home: {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/signals_light_4b3440dc2b.png',
+                    srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/signals_dark_b29e5ed8f9.png',
+                    alt: 'PostHog Code screenshot',
+                    imgClasses: 'w-full rounded shadow-xl border border-primary',
+                },
+            },
         },
         {
             name: 'PostHog Slack app',
-            Icon: IconChat,
+            Icon: IconAtSign,
             description:
                 'Tag @PostHog in any Slack thread to ship a fix, answer a data question, or edit content – without leaving the conversation.',
             handle: 'posthog_slack',
             color: 'sky-blue',
             colorSecondary: 'sky-blue',
             category: 'product_os',
-            slug: 'slack-app',
+            slug: 'slack',
             status: 'beta',
+            screenshots: {
+                home: {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/slack_light_15ad69ec86.png',
+                    srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/slack_dark_fc660ed74e.png',
+                    alt: 'PostHog Slack inbox screenshot',
+                    imgClasses: 'w-full rounded shadow-xl border border-primary',
+                },
+                inbox: {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/inbox_light_a328873cdd.png',
+                    srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/inbox_dark_ac23465bf6.png',
+                    alt: 'PostHog Slack inbox screenshot',
+                    imgClasses: 'w-full rounded shadow-xl border border-primary',
+                },
+                insight: {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/slack_insight_light_61f37a2fc9.png',
+                    srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/slack_insight_dark_e0f978e190.png',
+                    alt: 'PostHog Slack insight screenshot',
+                    imgClasses: 'w-full rounded shadow-xl border border-primary',
+                },
+            },
         },
         {
             name: 'Traces',
