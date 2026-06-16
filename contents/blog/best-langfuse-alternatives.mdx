@@ -33,7 +33,7 @@ In this guide, we'll compare the best Langfuse alternatives and look at where ea
 
 ### What is PostHog?
 
-**PostHog** (that's us 👋) is an all-in-one developer platform that combines [AI observability](/ai-observability) with [product analytics](/product-analytics), [web analytics](/web-analytics), [session replay](/docs/session-replay), [feature flags](/feature-flags), [surveys](/surveys), [error tracking](/error-tracking), [logs](/logs), [A/B testing](/experiments), and more – which means you can see model performance and user behavior together.
+**[PostHog](/)** (that's us 👋) is an all-in-one developer platform that combines [AI observability](/ai-observability) with [product analytics](/product-analytics), [web analytics](/web-analytics), [session replay](/docs/session-replay), [feature flags](/feature-flags), [surveys](/surveys), [error tracking](/error-tracking), [logs](/logs), [A/B testing](/experiments), and more – which means you can see model performance and user behavior together.
 
 You can correlate AI feature usage with retention and other product metrics. You can watch session replays of users interacting with AI features, query trace data with SQL or [through the MCP server](/docs/ai-observability/query-traces-mcp) directly from your editor, and investigate issues without jumping between tools.
 
@@ -76,10 +76,9 @@ Another difference is what you're paying for. Both PostHog and Langfuse use usag
 <details>
 <summary>Main differences between PostHog and Langfuse</summary>
 
-- Langfuse is purpose-built for LLM engineering workflows, while PostHog is built for teams who want to understand how AI features affect real users and product metrics.
 - Langfuse includes production-ready prompt management with versioning and deployment controls. PostHog's Prompt Management feature is currently in beta.
-- Langfuse provides more detailed agent and multi-step tracing, making it better suited for complex agentic workflows. PostHog supports traces and spans, but its tracing capabilities are less specialized.
 - PostHog adds built-in [sentiment classification](docs/ai-observability/sentiment) and [trace summarization](docs/ai-observability/summarization) on top of raw trace data. Langfuse has no built-in equivalent for either, though sentiment can be scored manually through its LLM-as-a-Judge evaluators.
+- Langfuse provides more detailed agent and multi-step tracing, making it better suited for complex agentic workflows. PostHog supports traces and spans, but its tracing capabilities are less specialized.
 - PostHog connects LLM traces to product analytics covering funnels, retention, and feature adoption. Langfuse focuses primarily on LLM observability.
 
 </details>
@@ -108,83 +107,7 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 
 <WizardCTA />
 
-## 2. Helicone
-
-- **Founded:** 2023
-- **Similar to:** Langfuse, LangSmith
-- **Typical users:** AI engineers and developers
-- **Typical customers:** AI startups, SaaS companies, and teams building LLM-powered applications
-
-### What is Helicone?
-
-Helicone is an LLM observability platform that sits between your application and your LLM provider. It captures requests, tracks costs, monitors latency, manages prompts, and provides visibility into how AI applications behave in production.
-
-Helicone was acquired by Mintlify in March 2026 and is now in maintenance mode: security patches, bug fixes, and new model support continue, but active feature development has stopped, and existing customers are being helped to migrate.
-
-### Key features
-
-- **Request monitoring:** Track LLM requests, responses, costs, latency, and errors across supported providers from a single dashboard.
-- **Prompt management:** Create, version, and manage prompts centrally without hardcoding them into your application.
-- **Caching:** Cache LLM responses to reduce API costs and improve response times for repeated requests.
-- **Evaluations:** Score model outputs and collect feedback to measure quality and identify regressions.
-- **Custom properties:** Attach metadata such as user IDs, organizations, environments, or application-specific attributes to requests for deeper analysis.
-
-### How does Helicone compare to Langfuse?
-
-Helicone and Langfuse are both dedicated LLM observability platforms, but they take different approaches. Helicone is built around a proxy architecture that captures traffic by changing your API endpoint, while Langfuse relies on SDK instrumentation and focuses on deeper tracing, evaluations, datasets, and annotation workflows.
-
-Tracing is another area where the two differ. Helicone focuses primarily on request and response monitoring, while Langfuse provides more detailed traces for multi-step workflows, agent systems, and complex AI applications.
-
-|  | **Helicone** | **Langfuse** |
-| --- | --- | --- |
-| **Tracing & spans**<br>Trace requests across prompts, model calls, and workflows | ✅ | ✅ |
-| **Cost tracking**<br>Monitor token usage and model costs | ✅ | ✅ |
-| **Latency tracking**<br>Track response times and performance metrics | ✅ | ✅ |
-| **Error tracking**<br>Monitor failed requests and model errors | ✅ | ✅ |
-| **Sentiment classification**<br>Automatically classify user messages as positive, neutral, or negative | ❌ | ❌ |
-| **Trace summarization**<br>Generate AI-powered summaries of traces and workflows | ❌ | ❌ |
-| **Privacy mode**<br>Mask prompts and responses before they are stored | ✅ | ✅ |
-| **Agent/multi-step tracing**<br>Understand complex agent and tool-calling workflows | Basic | ✅ |
-| **Prompt management**<br>Create, version, and manage prompts | ✅ | ✅ |
-| **Evaluations**<br>Score and review model outputs automatically | ✅ | ✅ |
-| **Evaluation datasets**<br>Create datasets for testing and benchmarking outputs | ✅ | ✅ |
-| **Human annotation/review**<br>Review and label model outputs manually | ❌ | ✅ |
-| **Session replay**<br>Watch recordings of users interacting with AI features | ❌ | ❌ |
-| **Product analytics**<br>Analyze AI interactions alongside retention, funnels, and feature adoption | ❌ | ❌ |
-
-<details>
-<summary>Main differences between Helicone and Langfuse</summary>
-
-- Helicone uses a proxy-based architecture that can capture LLM traffic by changing your API endpoint. Langfuse primarily relies on SDK-based instrumentation.
-- Helicone focuses on request monitoring, cost tracking, prompt management, and caching. Langfuse provides a broader set of LLM engineering tools, including evaluations, datasets, annotation workflows, and more detailed tracing.
-- Helicone includes built-in response caching to reduce costs and latency. Langfuse does not offer a native caching layer.
-- Langfuse provides more detailed tracing for agent workflows and multi-step AI systems. Helicone's observability is more focused on individual requests and responses.
-
-</details>
-
-<details>
-<summary>Main similarities between Helicone and Langfuse</summary>
-
-- Both capture LLM traces and monitor costs, latency, and errors.
-- Both offer a free tier and usage-based pricing rather than per-seat charges.
-- Both include prompt management capabilities.
-- Both support self-hosting.
-
-</details>
-
-### Why do companies use Helicone?
-
-According to [reviews on G2](https://www.g2.com/sellers/helicone), companies use Helicone because:
-
-- **It's easy to implement:** Teams can start tracking usage, costs, and latency without a complex integration process.
-- **It provides visibility into usage and costs:** Teams use Helicone to monitor token usage, costs, and latency across their LLM applications.
-- **Metrics are broken down by user:** Teams can view usage, costs, and other metrics for individual users through Helicone's analytics interface.
-
-> #### Bottom line
->
-> Helicone was one of the strongest Langfuse competitors for getting visibility into LLM usage, costs, and latency with minimal setup, and its proxy and caching model is still solid. But with the product in maintenance mode since the March 2026 Mintlify acquisition, new projects should weigh that against actively developed alternatives.
-
-## 3. LangSmith
+## 2. LangSmith
 
 - **Founded**: 2023
 - **Similar to**: Langfuse, Arize Phoenix
@@ -259,7 +182,7 @@ According to [reviews on Gartner](https://www.gartner.com/reviews/product/langsm
 >
 > LangSmith is one of the strongest Langfuse competitors for teams building on LangChain and LangGraph. Native integrations capture traces automatically, so there's less setup to debug and evaluate. If you want an open-source, framework-agnostic observability platform, Langfuse is the stronger choice.
 
-## 4. Arize Phoenix
+## 3. Arize Phoenix
 
 - **Founded:** 2020 (Arize AI)
 - **Similar to:** Langfuse, Braintrust
@@ -334,7 +257,7 @@ According to [G2 reviews](https://www.g2.com/products/arize-ai/reviews), compani
 >
 > Arize Phoenix is a strong Langfuse alternative for teams that prioritize observability, deep agent tracing, and evaluation workflows. Both tools cover tracing and evaluations well, but Phoenix goes further on OpenTelemetry-native instrumentation and understanding complex agent behavior.
 
-## 5. Braintrust
+## 4. Braintrust
 
 - **Founded:** 2023
 - **Similar to:** Langfuse, LangSmith
@@ -409,7 +332,7 @@ According to [user reviews](https://www.g2.com/products/braintrust-2024-12-22/re
 >
 > Braintrust is one of the closest Langfuse competitors. Both products cover observability and evaluations well, but Braintrust is more heavily centered on evaluation-driven development, while Langfuse spreads its focus across the broader LLM development workflow.
 
-## 6. Weights & Biases Weave
+## 5. Weights & Biases Weave
 
 - **Founded:** 2024 (Weave)
 - **Similar to:** LangSmith, Arize Phoenix
@@ -481,6 +404,82 @@ According to [user reviews](https://www.gartner.com/reviews/product/wandb-weave)
 > #### Bottom line
 >
 > Weights & Biases Weave is one of the strongest Langfuse competitors for teams already invested in the Weights & Biases ecosystem. Observability, evaluations, datasets, and experimentation fit naturally into existing W&B workflows. If you want a dedicated open-source platform focused on LLM engineering, Langfuse is the stronger choice.
+
+## Honorable mention: Helicone
+
+- **Founded:** 2023
+- **Similar to:** Langfuse, LangSmith
+- **Typical users:** AI engineers and developers
+- **Typical customers:** AI startups, SaaS companies, and teams building LLM-powered applications
+
+### What is Helicone?
+
+**Helicone** is an LLM observability platform that sits between your application and your LLM provider. It captures requests, tracks costs, monitors latency, manages prompts, and provides visibility into how AI applications behave in production.
+
+Helicone was acquired by Mintlify in March 2026 and is now in maintenance mode: security patches, bug fixes, and new model support continue, but active feature development has stopped, and existing customers are being helped to migrate.
+
+### Key features
+
+- **Request monitoring:** Track LLM requests, responses, costs, latency, and errors across supported providers from a single dashboard.
+- **Prompt management:** Create, version, and manage prompts centrally without hardcoding them into your application.
+- **Caching:** Cache LLM responses to reduce API costs and improve response times for repeated requests.
+- **Evaluations:** Score model outputs and collect feedback to measure quality and identify regressions.
+- **Custom properties:** Attach metadata such as user IDs, organizations, environments, or application-specific attributes to requests for deeper analysis.
+
+### How does Helicone compare to Langfuse?
+
+Helicone and Langfuse are both dedicated LLM observability platforms, but they take different approaches. Helicone is built around a proxy architecture that captures traffic by changing your API endpoint, while Langfuse relies on SDK instrumentation and focuses on deeper tracing, evaluations, datasets, and annotation workflows.
+
+Tracing is another area where the two differ. Helicone focuses primarily on request and response monitoring, while Langfuse provides more detailed traces for multi-step workflows, agent systems, and complex AI applications.
+
+|  | **Helicone** | **Langfuse** |
+| --- | --- | --- |
+| **Tracing & spans**<br>Trace requests across prompts, model calls, and workflows | ✅ | ✅ |
+| **Cost tracking**<br>Monitor token usage and model costs | ✅ | ✅ |
+| **Latency tracking**<br>Track response times and performance metrics | ✅ | ✅ |
+| **Error tracking**<br>Monitor failed requests and model errors | ✅ | ✅ |
+| **Sentiment classification**<br>Automatically classify user messages as positive, neutral, or negative | ❌ | ❌ |
+| **Trace summarization**<br>Generate AI-powered summaries of traces and workflows | ❌ | ❌ |
+| **Privacy mode**<br>Mask prompts and responses before they are stored | ✅ | ✅ |
+| **Agent/multi-step tracing**<br>Understand complex agent and tool-calling workflows | Basic | ✅ |
+| **Prompt management**<br>Create, version, and manage prompts | ✅ | ✅ |
+| **Evaluations**<br>Score and review model outputs automatically | ✅ | ✅ |
+| **Evaluation datasets**<br>Create datasets for testing and benchmarking outputs | ✅ | ✅ |
+| **Human annotation/review**<br>Review and label model outputs manually | ❌ | ✅ |
+| **Session replay**<br>Watch recordings of users interacting with AI features | ❌ | ❌ |
+| **Product analytics**<br>Analyze AI interactions alongside retention, funnels, and feature adoption | ❌ | ❌ |
+
+<details>
+<summary>Main differences between Helicone and Langfuse</summary>
+
+- Helicone uses a proxy-based architecture that can capture LLM traffic by changing your API endpoint. Langfuse primarily relies on SDK-based instrumentation.
+- Helicone focuses on request monitoring, cost tracking, prompt management, and caching. Langfuse provides a broader set of LLM engineering tools, including evaluations, datasets, annotation workflows, and more detailed tracing.
+- Helicone includes built-in response caching to reduce costs and latency. Langfuse does not offer a native caching layer.
+- Langfuse provides more detailed tracing for agent workflows and multi-step AI systems. Helicone's observability is more focused on individual requests and responses.
+
+</details>
+
+<details>
+<summary>Main similarities between Helicone and Langfuse</summary>
+
+- Both capture LLM traces and monitor costs, latency, and errors.
+- Both offer a free tier and usage-based pricing rather than per-seat charges.
+- Both include prompt management capabilities.
+- Both support self-hosting.
+
+</details>
+
+### Why do companies use Helicone?
+
+According to [reviews on G2](https://www.g2.com/sellers/helicone), companies use Helicone because:
+
+- **It's easy to implement:** Teams can start tracking usage, costs, and latency without a complex integration process.
+- **It provides visibility into usage and costs:** Teams use Helicone to monitor token usage, costs, and latency across their LLM applications.
+- **Metrics are broken down by user:** Teams can view usage, costs, and other metrics for individual users through Helicone's analytics interface.
+
+> #### Bottom line
+>
+> Helicone was one of the strongest Langfuse competitors for getting visibility into LLM usage, costs, and latency with minimal setup, and its proxy and caching model is still solid. But with the product in maintenance mode since the March 2026 Mintlify acquisition, new projects should weigh that against actively developed alternatives.
 
 ## Which Langfuse alternative should you choose?
 
