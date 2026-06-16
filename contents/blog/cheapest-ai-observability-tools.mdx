@@ -21,7 +21,7 @@ seo:
     }
 ---
 
-Team shipping AI features run into the same blind spots: latency, token costs, and model failures don't show up anywhere until a user runs into them first. [AI observability tools](/ai-observability) are how you see them coming.
+Teams shipping AI features run into the same blind spots: latency, token costs, and model failures don't show up anywhere until a user runs into them first. [AI observability tools](/ai-observability) are how you see them coming.
 
 A lot of LLM observability tools like to flex their "free" muscles, but "free" can mean a lot of things; it can be as generous as 100,000 events a month with no seat limit ([yes, really](/pricing)), or as limited can mean a 24-hour data window and a single seat.
 
@@ -47,9 +47,7 @@ The best tools go further with:
 - **Dataset curation and experiments:** Build golden datasets from production traces
 - **Self-hosting:** Keep all data in your own infrastructure for privacy or compliance
 
-## Tools with a real free tier
-
-These tools let you keep using the product indefinitely without paying, even when you hit caps.
+## AI observability tools with the best free tiers
 
 ### 1. PostHog
 
@@ -93,11 +91,15 @@ What separates Langfuse from simple cost trackers is the depth of its eval and d
 - Python and JS SDKs, OpenTelemetry, and most major agent frameworks supported
 - Self-host core Langfuse features in your own infra for free
 
-**Quick comparison:**
+<details>
+<summary>Quick PostHog vs Langfuse free tier comparison</summary>
+
 - PostHog has 100K free events/month, Langfuse has 50K free events/month
 - PostHog includes unlimited free seats, Langfuse includes 2 free seats
 - Both include 30-day free data retention
 - Both have an evergreen free tier
+
+</details>
 
 <CalloutBox icon="IconStarFilled" title="Langfuse is best for..." type="fyi">
 
@@ -120,11 +122,15 @@ OpenLLMetry's appeal is that it speaks plain OpenTelemetry. Pre-built instrument
 - 50k free spans a month rivals Langfuse on raw volume
 - Not locked into Traceloop's UI if you self-route telemetry
 
-**Quick comparison:**
+<details>
+<summary>Quick PostHog vs Traceloop free tier comparison</summary>
+
 - PostHog has 100K free events/month, Traceloop has 50K free events/month
 - PostHog includes unlimited free seats, Traceloop includes 5 free seats
 - PostHog includes 30-day free data retention, Traceloop includes 24-hour free data retention
 - Both have an evergreen free tier
+
+</details>
 
 <CalloutBox icon="IconStarFilled" title="Traceloop is best for..." type="fyi">
 
@@ -147,11 +153,15 @@ Phoenix is the open-source core: OpenTelemetry-based tracing, versioned datasets
 - Online evals on the free tier, with more eval depth than many hobby plans
 - Upgrade path to enterprise ML observability if you later need ML and CV tooling beyond LLMs
 
-**Quick comparison:**
+<details>
+<summary>Quick PostHog vs Arize free tier comparison</summary>
+
 - PostHog has 100K free events/month, Arize has 25K free events/month
 - PostHog includes unlimited free seats, Arize includes 1 free seat
 - PostHog includes 30-day free data retention, Arize includes 15-day free data retention
 - Both have an evergreen free tier
+
+</details>
 
 <CalloutBox icon="IconStarFilled" title="Arize is best for..." type="fyi">
 
@@ -172,11 +182,15 @@ It is simpler than Langfuse or Phoenix, which is the point: a refined layer for 
 - Built-in prompt management
 - Conversation threading and end-user feedback capture for chat and RAG apps
 
-**Quick comparison:**
+<details>
+<summary>Quick PostHog vs Lunary free tier comparison</summary>
+
 - PostHog has 100K free events/month, Lunary has 10K free events/month
 - PostHog includes unlimited free seats, Lunary includes 1 free seat
 - Both include 30-day free data retention
 - Both have an evergreen free tier
+
+</details>
 
 <CalloutBox icon="IconStarFilled" title="Lunary is best for..." type="fyi">
 
@@ -197,11 +211,15 @@ It auto-instruments providers and tools like OpenAI, Anthropic, and Pinecone. Ho
 - 5 users on the free tier, better for tiny teams than single-seat hobby plans
 - CI/CD integration to run automated quality checks in your deployment pipeline
 
-**Quick summary:**
-- PostHog has 100K free events/month, HoneyHive has 10K free events/month
-- PostHog includes unlimited free seats, HoneyHive includes 5 free seats
+<details>
+<summary>Quick PostHog vs HoneyHive free tier comparison</summary>
+
+- PostHog has 100K free events/month, Lunary has 10K free events/month
+- PostHog includes unlimited free seats, Lunary includes 1 free seat
 - Both include 30-day free data retention
 - Both have an evergreen free tier
+
+</details>
 
 <CalloutBox icon="IconStarFilled" title="HoneyHive is best for..." type="fyi">
 
@@ -222,11 +240,15 @@ Its tracing goes deeper into that ecosystem than anyone else's – node-by-node 
 - Deep LangChain integration across tracing, evals, prompt hub, and deployment tooling
 - Natural fit if you deploy agents on LangGraph and LangSmith infrastructure
 
-**Quick comparison:**
+<details>
+<summary>Quick PostHog vs LangSmith free tier comparison</summary>
+
 - PostHog has 100K free events/month, LangSmith has 5K free events/month
 - PostHog includes unlimited free seats, LangSmith includes 1 free seat
 - PostHog includes 30-day free data retention, LangSmith includes 14-day free data retention
 - Both have an evergreen free tier
+
+</details>
 
 <CalloutBox icon="IconStarFilled" title="LangSmith is best for..." type="fyi">
 
@@ -247,11 +269,15 @@ Its Loop agent generates scorers, prompts, and datasets from plain-language desc
 - Scores-and-evals-first UX, strong for teams measuring output quality
 - SOC 2 Type II and Multi-factor authentication (MFA) on the free tier
 
-**Quick summary:**
+<details>
+<summary>Quick PostHog vs Braintrust free tier comparison</summary>
+
 - PostHog has 100K free events/month, Braintrust offers up to $10 credits
 - Both include unlimited free seats
 - PostHog includes 30-day free data retention, Braintrust includes 14-day free data retention
 - Both have an evergreen free tier
+
+</details>
 
 <CalloutBox icon="IconStarFilled" title="Braintrust is best for..." type="fyi">
 
@@ -274,11 +300,15 @@ It auto-detects and traces LLM calls, surfaces token usage and cost, and runs qu
 - Generous 40,000 LLM span allowance during the 14-day trial
 - Mature alerting, dashboards, and on-call tooling teams already run
 
-**Quick comparison:**
+<details>
+<summary>Quick PostHog vs Datadog free tier comparison</summary>
+
 - PostHog has 100K free events/month, Datadog has 40K free events/month
 - Both include unlimited free seats
 - PostHog includes 30-day free data retention, Datadog includes 15-day free data retention
 - PostHog has an evergreen free tier; Datadog promotes a 14-day free trial for the broader platform, with a free LLM spans allowance for AI/LLM observability
+
+</details>
 
 <CalloutBox icon="IconStarFilled" title="Datadog LLM Observability is best for..." type="fyi">
 
