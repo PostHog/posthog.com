@@ -102,7 +102,7 @@ export default function AIObservabilityLanding(): JSX.Element {
                 contentMaxWidthClass="max-w-5xl"
                 showQuestions={false}
             >
-                <div className="grid grid-cols-1 @lg:grid-cols-[1fr_1.5fr] gap-10 items-center mb-4 max-w-7xl mx-auto">
+                <div className="grid grid-cols-1 @lg:grid-cols-[1.2fr_1fr] gap-10 items-center mb-6 max-w-7xl mx-auto">
                     <div>
                         <h1 className="text-3xl md:text-5xl !mb-4">X-ray vision for your AI product</h1>
                         <p className="text-lg md:text-xl mb-6 text-secondary">
@@ -136,14 +136,14 @@ export default function AIObservabilityLanding(): JSX.Element {
                     </div>
                     <div className="flex justify-center">
                         <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/doctor_and_paitent_cf06d6a5df.png"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Square_X_Ray_98b5f3e3dd.png"
                             alt="X-ray vision for your AI product"
-                            className="w-full mx-auto"
+                            className="w-full max-w-[450px] mx-auto"
                         />
                     </div>
                 </div>
 
-                <div className="mb-6 max-w-7xl mx-auto">
+                <div className="mb-12 max-w-7xl mx-auto">
                     <div className="flex flex-wrap items-center gap-x-12 gap-y-6 text-primary dark:text-primary-dark">
                         <LovableLogo className="fill-current object-contain max-w-full h-10" />
                         <CloudinaryImage
