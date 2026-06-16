@@ -117,9 +117,12 @@ const posthogAsync = PostHog.initAsync('YOUR_API_KEY', {
 ```
 
 ```android
-val config = PostHogConfig(
-    apiKey = "YOUR_API_KEY",
-    host = "https://app.posthog.com"
+import com.posthog.android.PostHogAndroid
+import com.posthog.android.PostHogAndroidConfig
+
+val config = PostHogAndroidConfig(
+    apiKey = "<ph_project_token>",
+    host = "<ph_client_api_host>"
 ).apply {
     evaluationContexts = listOf("main-app", "android", "mobile")
 }

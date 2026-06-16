@@ -1,47 +1,12 @@
 import React, { useCallback, useState } from 'react'
 import { Tabs } from 'radix-ui'
 import { IconPauseFilled, IconPlayFilled } from '@posthog/icons'
-import { OnePlaceSlide, UnderstandUsageSlide, DebugFixSlide, TestRolloutSlide } from './slides'
 import Tooltip from 'components/RadixUI/Tooltip'
+import { Tab, productUsageTabs } from './tabs'
 
 const SLIDE_DURATION = 5000
 
-const tabs = [
-    {
-        value: 'understand-usage',
-        label: 'Understand product usage',
-        content: <UnderstandUsageSlide />,
-        color: 'bg-blue',
-        activeText: 'text-white',
-        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
-    },
-    {
-        value: 'one-place',
-        label: 'One place for product data',
-        content: <OnePlaceSlide />,
-        color: 'bg-teal',
-        activeText: 'text-black',
-        progressBar: 'bg-black/70 shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
-    },
-    {
-        value: 'debug-fix',
-        label: 'Debug & fix issues',
-        content: <DebugFixSlide />,
-        color: 'bg-salmon',
-        activeText: 'text-white',
-        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
-    },
-    {
-        value: 'test-rollout',
-        label: 'Test & roll out changes',
-        content: <TestRolloutSlide />,
-        color: 'bg-purple',
-        activeText: 'text-white',
-        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
-    },
-]
-
-export default function HeroCarousel() {
+export default function HeroCarousel({ tabs = productUsageTabs }: { tabs?: Tab[] }) {
     const [activeTab, setActiveTab] = useState(tabs[0].value)
     const [isPaused, setIsPaused] = useState(false)
     const [isHovering, setIsHovering] = useState(false)

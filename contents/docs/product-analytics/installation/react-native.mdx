@@ -22,36 +22,4 @@ If you're using [React Native Web](https://github.com/necolas/react-native-web) 
 
 ### Without the PostHogProvider
 
-If you prefer not to use the provider, initialize PostHog in its own file and import the instance:
-
-```react-native file=posthog.ts
-import PostHog from 'posthog-react-native'
-
-export const posthog = new PostHog('<ph_project_token>', {
-  host: '<ph_client_api_host>' // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
-})
-```
-
-Then access PostHog by importing your instance:
-
-```react-native
-import { posthog } from './posthog'
-
-export function MyApp() {
-    useEffect(() => {
-        posthog.capture('event_name')
-    }, [])
-
-    return <View>Your app code</View>
-}
-```
-
-You can also use this instance with the PostHogProvider:
-
-```react-native
-import { posthog } from './posthog'
-
-export function MyApp() {
-  return <PostHogProvider client={posthog}>{/* Your app code */}</PostHogProvider>
-}
-```
+If you prefer not to use the provider, see the [React Native SDK installation guide](/docs/libraries/react-native#without-the-posthogprovider) for the standalone client setup.

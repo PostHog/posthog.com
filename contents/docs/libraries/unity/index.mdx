@@ -17,8 +17,6 @@ features:
   errorTracking: true
 ---
 
-> **Note:** This SDK is currently in **beta**. Please report any issues on [GitHub](https://github.com/PostHog/posthog-unity/issues).
-
 This is the official PostHog SDK for Unity. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your Unity game or application.
 
 PostHog Unity SDK supports Windows, Mac, Linux, iOS, Android, and WebGL platforms.
@@ -230,9 +228,7 @@ PostHog.Setup(new PostHogConfig
 
 ## Session Replay
 
-> **Note:** Session Replay for Unity is currently **experimental**. Performance impact varies based on your game's complexity and target devices.
-
-Session Replay enables you to record and watch user sessions in your Unity game. It captures screenshots, touch/mouse input, network requests, and console logs. Session Replay is **disabled by default** and must be explicitly enabled.
+Session Replay enables you to record and watch user sessions in your Unity game. It captures screenshots, touch/mouse input, network requests, and console logs. Session Replay is **disabled by default** and must be explicitly enabled. Performance impact varies based on your game's complexity and target devices.
 
 The SDK uses `AsyncGPUReadback` to capture screenshots without blocking the main thread, ensuring minimal performance impact during gameplay.
 

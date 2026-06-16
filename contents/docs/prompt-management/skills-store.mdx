@@ -47,7 +47,7 @@ Let's create a skill called `hog-release-notes` that writes release notes in Pos
 
 ### Via the PostHog UI
 
-1. Navigate to **Prompt Management** > **Skills**
+1. Navigate to **[Skills](https://app.posthog.com/skills)**
 2. Click **New skill**
 3. Name it `hog-release-notes`
 4. Add a description that explains _when_ to use the skill — this is what agents use to discover it
@@ -148,7 +148,7 @@ The body can reference bundled files by path. Agents pull them with `skill-file-
 You can deep-link directly to a specific bundled file within a skill by adding a `?file=` query parameter to the skill URL:
 
 ```text
-https://app.posthog.com/prompt-management/skills/hog-release-notes?file=references/changelog.md
+https://app.posthog.com/skills/hog-release-notes?file=references/changelog.md
 ```
 
 When someone visits this URL, the file viewer automatically expands, loads the file content, and scrolls it into view. Combine it with `version` to link to a file in a specific skill version — e.g. `?file=scripts/run.py&version=3`. This is useful for sharing a specific reference document or script with a teammate.

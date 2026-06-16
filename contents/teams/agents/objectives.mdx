@@ -1,0 +1,22 @@
+### Q3 2026 Objectives
+
+#### Everything you need to build a really good agent from wherever you work
+
+PostHog users have a vision of what they want to automate – in their work, in their life – and today the path from that vision to a working agent is too long and too lumpy. If we close that gap, we unblock a huge category of users who otherwise give up or build something fragile themselves. The win condition is: someone with an idea can get to a working agent from the app, Slack, MCP, or PostHog Code without hitting a wall.
+
+**What we'll ship:**
+
+- **Agent builder platform core** – the underlying primitives every agent builder surface depends on
+- **Agent builder user experience** – could be concierge, could be PostHog Code, could be MCP; the surface that turns an idea into a working agent
+- **Integrations with Slack, GitHub, Discord, and other useful tools** – agents need to read from and act on the places where work actually happens
+- **End-to-end smoothness** – connections work as close to first-try as possible; we don't ship something that requires babysitting to set up
+- **MCP parity** – anything you can do in the agent builder, you can do via MCP (e.g., from Claude Code)
+
+#### The agent improves itself based on product data
+
+The better the agent builder gets, the more people will build agents – and the more important it becomes for those agents to improve themselves. If every agent needs a human to fix it every time it goes off the rails, building agents collapses into babysitting agents, and we lose. We want a loop where product data flows back into the agent and makes it better without the builder having to intervene.
+
+**What we'll ship:**
+
+- **Agent observability loop with AI Observability integration** – every agent emits the traces, evals, and signals needed to know what's working and what isn't
+- **Agent self-improvement loop** – agents use that data to improve themselves, so builders aren't the bottleneck on every regression

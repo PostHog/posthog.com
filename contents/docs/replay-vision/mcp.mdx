@@ -1,0 +1,69 @@
+---
+title: MCP
+---
+
+<CalloutBox icon="IconInfo" title="Replay Vision is in closed beta" type="warning">
+
+Not yet available to everyone – <a href="/replay-vision">join the waitlist</a> to get updates.
+
+</CalloutBox>
+
+The [PostHog MCP server](/docs/model-context-protocol) exposes Replay Vision through a set of tools your AI coding agent can call directly – author scanners, trigger observations on demand, and read results without leaving your editor.
+
+This works in any MCP client – Cursor, Codex, Claude Code, Windsurf, VS Code, and others.
+
+## What you can do
+
+- **Author a scanner from your editor** – describe what to look for in natural language and have the agent draft the scanner config, project the per-month volume, and create it.
+- **Trigger an observation on demand** – scan a specific session you're investigating without switching to the app.
+- **Read observations as part of a coding task** – pull the structured result and the model's reasoning into context as the agent works.
+- **Audit a scanner** – list its recent observations to decide whether the prompt or filters need tuning.
+
+## The tools, by job
+
+Replay Vision's MCP tools are all prefixed `vision-`. They fall into a few groups – see the [overview](/docs/replay-vision) for what scanners and observations are.
+
+### Authoring scanners
+
+- `vision-scanners-list` – list every scanner in the project.
+- `vision-scanners-get` – read one scanner's config.
+- `vision-scanners-create` – create a new scanner.
+- `vision-scanners-update` – edit an existing one.
+- `vision-scanners-delete` – remove one.
+
+### Sizing before you create
+
+- `vision-scanners-estimate-create` – project the per-month observation volume of a hypothetical scanner before you commit to it.
+- `vision-quota-retrieve` – check the remaining monthly quota.
+
+Pair these two before calling `vision-scanners-create` to avoid creating a scanner that would immediately blow the budget.
+
+### Triggering an observation on demand
+
+- `vision-scanners-scan-session` – run a specific scanner against a specific session right now. Same code path as the **Scan this recording** action in the replay player.
+
+The call queues the observation asynchronously and returns immediately; the actual scan takes a few minutes. Poll `vision-scanners-observations-list` to find the result once it lands.
+
+### Reading observations
+
+For a specific session (across all scanners):
+
+- `vision-observations-list` – every observation any scanner produced for one session.
+- `vision-observations-retrieve` – fetch one observation by ID.
+
+For one scanner (across sessions):
+
+- `vision-scanners-observations-list` – paginated list of a scanner's observations.
+- `vision-scanners-observations-get` – fetch one of that scanner's observations by ID.
+
+## Example prompts
+
+Try these with your MCP-enabled agent:
+
+- `Create a Replay Vision scanner that flags sessions where users get stuck on the /checkout page, narrow to enterprise customers, and start at 25% sampling. Estimate the cost first.`
+- `Scan session abc123 with the "Dead-end pages" scanner and tell me what it found, including the reasoning.`
+- `List the last 20 observations from my "Frustration score" scanner and summarize what's driving high scores.`
+- `Find every Replay Vision observation for session abc123 and give me a one-line summary of each.`
+- `How much Replay Vision quota do we have left this month?`
+
+See the [MCP server docs](/docs/model-context-protocol) for client setup, and the [Replay Vision overview](/docs/replay-vision) for product concepts.

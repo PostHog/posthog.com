@@ -402,8 +402,8 @@ export const UnderstandUsageSlide = () => {
             <div className="grid grid-cols-1 @lg:grid-cols-2 gap-x-8 gap-y-4 mb-2">
                 <div>
                     <p className="text-secondary text-sm">
-                        Measure engagement, track conversion, and understand usage patterns &mdash; whether it's by
-                        person, company, or AI feature.
+                        Measure engagement, track conversion, and understand usage patterns – whether it's by person,
+                        company, or AI feature.
                     </p>
                 </div>
                 <div>

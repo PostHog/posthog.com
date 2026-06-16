@@ -24,6 +24,23 @@ if (PostHog.getFeatureFlag("flag-key") == "variant-key") { // replace 'variant-k
 }
 ```
 
+### Feature flag values and payloads together
+
+If you need both the flag value and payload, use `getFeatureFlagResult` so both values come from the same evaluation result.
+
+```kotlin
+import com.posthog.PostHog
+
+val result = PostHog.getFeatureFlagResult("flag-key")
+
+if (result?.value == "variant-key") {
+    val payload = result.payload
+    // Do something with the variant and payload
+}
+```
+
+You can also inspect all currently loaded feature flag results with `PostHog.getAllFeatureFlags()`.
+
 ### Ensuring flags are loaded before usage
 
 Every time a user opens the app, we send a request in the background to fetch the feature flags that apply to that user. We store those flags in the storage.
@@ -46,7 +63,7 @@ val config = PostHogAndroidConfig(apiKey = "<ph_project_token>").apply {
     }
 }
 
-// And/Or manually the SDK is initialized
+// And/or after the SDK is initialized
 PostHog.reloadFeatureFlags {
     if (PostHog.isFeatureEnabled("flag-key")) {
         // do something
@@ -62,4 +79,15 @@ Feature flag values are cached. If something has changed with your user and you'
 import com.posthog.PostHog
 
 PostHog.reloadFeatureFlags()
+```
+
+### Tracking feature usage
+
+To track when someone sees or interacts with a feature, use `captureFeatureView` and `captureFeatureInteraction`.
+
+```kotlin
+import com.posthog.PostHog
+
+PostHog.captureFeatureView("flag-key", flagVariant = "variant-key")
+PostHog.captureFeatureInteraction("flag-key", flagVariant = "variant-key")
 ```
