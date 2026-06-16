@@ -4,7 +4,6 @@ packages:
 
 minimumReleaseAge: 10080
 minimumReleaseAgeExclude:
-    - '@posthog/types'
     - '@posthog/icons'
     - '@posthog/hedgehog-mode'
 
