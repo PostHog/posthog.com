@@ -60,3 +60,18 @@ To resolve this:
 1. Verify the **Account ID** is the correct numeric ID from your [LinkedIn Campaign Manager](https://www.linkedin.com/campaignmanager/).
 2. Confirm PostHog still has access to the ad account by re-authorizing the LinkedIn Ads integration.
 3. Re-sync the source.
+
+### Invalid Account ID format
+
+If your sync fails with the error "The LinkedIn Ads Account ID is invalid", it means the **Account ID** you entered is not in the correct format. This happens when:
+
+- You entered a LinkedIn URL instead of the numeric ID.
+- You entered a company name or other text instead of the numeric ID.
+- The value contains extra whitespace or special characters.
+
+To resolve this:
+
+1. Go to your [LinkedIn Campaign Manager](https://www.linkedin.com/campaignmanager/).
+2. Find your numeric Account ID – it appears in the URL (e.g., `https://www.linkedin.com/campaignmanager/accounts/123456789/overview`) or in the account dropdown.
+3. Update your PostHog source configuration with the numeric ID only (e.g., `123456789`).
+4. Re-sync the source.
