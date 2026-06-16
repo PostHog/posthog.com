@@ -11,6 +11,7 @@ sourceId: LinkedinAds
 ---
 
 You can sync data from LinkedIn Ads reports by configuring it as a source in PostHog. The supported reports that can be synced include Account, Campaigns, Campaign Stats, Campaign Groups and Campaign Groups Stats, as described here:
+
 - [Accounts](https://learn.microsoft.com/en-us/linkedin/marketing/integrations/ads/account-structure/create-and-manage-accounts?view=li-lms-2025-08&tabs=http)
 - [Campaigns](https://learn.microsoft.com/en-us/linkedin/marketing/integrations/ads/account-structure/create-and-manage-campaigns?view=li-lms-2025-08&viewFallbackFrom=li-lms-2023-05&tabs=http#search-for-campaigns)
 - [Campaign Groups](https://learn.microsoft.com/en-us/linkedin/marketing/integrations/ads/account-structure/create-and-manage-campaign-groups?view=li-lms-2025-08&viewFallbackFrom=li-lms-2023-05&tabs=http#search-for-campaign-groups)
@@ -34,7 +35,6 @@ Additional reports will be added based on user feedback we receive via our [in-a
 
 Connect PostHog to your LinkedIn Ads account using a LinkedIn account. The LinkedIn account must have permission to access data.
 
-
 1. In PostHog, go to the **[Data pipelines](https://app.posthog.com/data-management/sources)** tab.
 2. Open the **+ New** drop-down menu in the top-right and select **Source**.
 3. Find LinkedIn Ads in the sources list and click **Link**.
@@ -45,3 +45,18 @@ Connect PostHog to your LinkedIn Ads account using a LinkedIn account. The Linke
 ## Configuration
 
 <SourceParameters />
+
+## Troubleshooting
+
+### Account not found
+
+If your sync fails with the error "LinkedIn could not find the configured ad account", it means LinkedIn returned a `RESOURCE_NOT_FOUND` response. This happens when:
+
+- The **Account ID** in your source settings is incorrect or doesn't exist.
+- PostHog no longer has access to the LinkedIn ad account.
+
+To resolve this:
+
+1. Verify the **Account ID** is the correct numeric ID from your [LinkedIn Campaign Manager](https://www.linkedin.com/campaignmanager/).
+2. Confirm PostHog still has access to the ad account by re-authorizing the LinkedIn Ads integration.
+3. Re-sync the source.
