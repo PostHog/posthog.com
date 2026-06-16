@@ -42,15 +42,14 @@ export const mcpAnalytics = {
         textColor: 'text-white',
         layout: 'columns',
     },
-    // TODO (asset step): capture the /mcp-analytics scene in the app and upload to Cloudinary,
-    // then add screenshots.overview here and `images` on the feature cards below.
-    // screenshots: {
-    //     overview: {
-    //         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/<mcp_overview>.png',
-    //         alt: 'MCP analytics dashboard',
-    //         classes: '',
-    //     },
-    // },
+    // TODO (asset step): add `images` on the feature cards below.
+    screenshots: {
+        overview: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_dashboard_light_0907967b56.png',
+            alt: 'MCP analytics dashboard',
+            classes: '',
+        },
+    },
     features: [
         {
             label: 'Features',
