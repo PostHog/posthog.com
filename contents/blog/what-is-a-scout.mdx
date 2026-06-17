@@ -15,80 +15,201 @@ tags:
     - signals
 seo:
     metaTitle: 'What is a Scout?'
-    metaDescription: 'TODO: write a one-to-two sentence description of what a Scout is for SEO.'
+    metaDescription: 'A scout is a small scheduled agent that watches your PostHog data, learns what is worth knowing, and emits useful signals you (or your agents) can act on. Here is how they work, with real examples.'
 ---
 
-## What is a Scout?
+A scout is a small agent (don't overthink that word) that looks at, wrangles, and makes sense of any data available in PostHog. Its job is to emit useful **signals** — things worth knowing — that you or your agents can act on. Sometimes that action happens automatically, like an agent opening a PR to fix what the scout found.
 
-A "Scout" is an agent (dont overthink that word) that is able to look at, wrangle, and make sense of any data available via PostHog. 
+The interesting part isn't the agent. It's how little code there is around it. A scout is **99% a markdown file**. The thing that used to be a sprawl of `if/else` branches and helper functions in an old-school data pipeline is now just a few hundred lines of English that anyone can read and improve. This post walks through how that works, with two real scouts we run on our own project — one that watches code feedback, and one that watches what the internet says about us.
 
-It's goal is to emit useful signals based on this data for your or your agents to take action on. 
+If you just want to see scouts in action, skip to [two scouts, end to end](#two-scouts-end-to-end).
 
-Sometimes the action can happen automatically like automaticlly creating a PR for you.
+## What is a scout? (the longer answer)
 
-Signals get picked up by the PostHog self driving pipeline and turned into reports.
+Scouts don't live on their own — they feed a pipeline:
 
-Reports can be made up of many signals from various sources - scouts being just one of them.
+1. **A scout runs** on a schedule, looks at some slice of your PostHog data, and decides whether anything is worth surfacing.
+2. **If it is, the scout emits a signal** — a structured finding with a confidence score, evidence, and a suggested action.
+3. **Signals get picked up by the self-driving pipeline**, grouped, and turned into **reports** that land in your [inbox](/blog/self-driving-product).
+4. **Reports get actioned** — by you, or increasingly by an agent that picks up the report and ships a fix.
+
+The key thing: a report can be made up of many signals from many sources. Scouts are just one of those sources. A single report — say "this MCP tool keeps blowing the token budget" — might be assembled from a scout finding, a few raw events, and a health check, all grouped together because they're about the same underlying problem.
+
+> New to the bigger picture? The [self-driving product](/blog/self-driving-product) post explains the pyramid this all sits inside: routine paper-cuts at the bottom (great for full automation), strategic judgment work at the top (firmly human). Scouts are how the pipeline notices there's something to do at all — at every level of that pyramid.
+
+## The big idea: your pipeline is now (mostly) markdown
+
+Here's the shift worth dwelling on.
+
+In a traditional data pipeline, the logic that decides "is this interesting?" lives in code: thresholds, `if/else` branches, helper functions, a scheduler, a pile of glue. Changing what you care about means a code change, a review, a deploy.
+
+With a scout, almost all of that logic lives in a **skill** — a markdown file the agent is told to read and operate by. The skill is where you encode your business knowledge: what's normal, what's noise, what's worth waking a human for. What used to be `if response_rate < 0.3 and sample_size > 30:` is now a sentence like *"a flagship NPS survey needs ≥30 responses/week and a ≥10% score drop before it's worth acting on."* That's trivially easy to iterate on, and you don't need to be an engineer to do it.
+
+Everything else — the loop, the sandbox, the scheduler, the memory — is deliberately thin plumbing around that one markdown file.
 
 ## How it works
 
-We have a scout harness (yes i used "harness" - you can cross that off the bingo list) here that is really just a small layer that runs your scout skills in a agentic loop.
+We have a scout harness (yes, I used "harness" — cross it off your bingo card) that is really just a small layer running your scout skills in an agentic loop.
 
-TODO: insert ascii diagram of the harness and main moving parts
+```
+            ┌──────────────────────────────────────────────┐
+            │  Temporal coordinator  (ticks every ~30 min)  │
+            │  finds scouts that are due, fans out one       │
+            │  child workflow per (project, scout)           │
+            └───────────────────────┬────────────────────────┘
+                                    │
+                                    ▼
+        ┌────────────────────────────────────────────────────┐
+        │  Scout harness — one run, inside a sandbox           │
+        │                                                      │
+        │     SKILL.md  ──►  agent loop                        │
+        │                      │                               │
+        │          ┌───────────┴────────────┐                 │
+        │          ▼                        ▼                  │
+        │   PostHog MCP tools         scout-only tools         │
+        │   (read your data:          • emit-signal            │
+        │    SQL, insights,           • scratchpad read/write  │
+        │    warehouse, errors…)      • past runs / profile    │
+        └───────────────────────┬─────────────────────────────┘
+                                │  emits findings
+                                ▼
+        signal ─► buffer ─► grouping ─► inbox report ─► action
+```
 
-The main ingredients here are:
+The main ingredients:
 
-- some sort of agent loop runner
-- tools for the agent - we just use the posthog mcp - the aim here is to build as little custom code as we can
-- sandbox to run the loop in
-- some sort of memory (another one to not overthink) for long running capabilities
-- some scheduling system to run the loop regulalry - we use temporal for this
+- **An agent loop runner.** The thing that actually pumps the loop. ([`runner.py`](https://github.com/PostHog/posthog/blob/master/products/signals/backend/scout_harness/runner.py), `arun_signals_scout()`.)
+- **Tools for the agent.** Mostly just the [PostHog MCP](/docs/model-context-protocol) — the same MCP you can connect to Claude Code or Cursor today. The aim is to build as little custom code as we can; the agent reads your data through the exact tools anyone else gets.
+- **A sandbox** to run the loop in, with a project-scoped token so it can only touch the data it's allowed to.
+- **Some memory** (another bingo word — don't overthink it) so a scout can be more than a goldfish that forgets everything between runs.
+- **A scheduler** to run the loop regularly. We use [Temporal](https://temporal.io/): a coordinator ticks every ~30 minutes, finds which scouts are due (most run hourly), and fans out one run per scout.
 
-The main bulk of the logic that actually makes a scout is really just a skill that the agent is told to use and operate according to. 
+The bulk of what actually *makes* a given scout is its skill — the markdown the agent is told to follow. There are a few small config knobs too (how often it runs, whether it's allowed to emit yet), exposed via the scout-config MCP tools.
 
-The skill then becomes where you encode all your busiess knowldeg and the thigns you care about. Wht used to be if/else and helper functions in old school data processing pipelines are now just lines on a markdown file (or example reference scripts as per the agent skills specification etc) that is super easy to iterate and improve on.
+### The "special" tools that make a scout more than a one-shot loop
 
-There are some small config parts like how often the scout should run and things like that - exposed bit the scout config mcp tool.
+On top of the normal read-only MCP, a scout gets a handful of scout-only tools:
 
-The scout does have some "special" tools that help it become more than just a one shot loop each time.
+- **`emit-signal`** — push a finding into the pipeline.
+- **`scratchpad` read/write** — a simple, durable, per-project memory (more on this below).
+- **past runs & project profile** — so a run can see what previous runs already found and avoid repeating itself.
 
-Scouts have a set of scratchpad tools that they can read and write to - this is a fairly simple somewhat domain specific form of memory. The can also look at existing inbox reports and previous scout runs all via plain old posthog mcp tools.
+That's it. The scout reads existing inbox reports and prior runs through plain MCP tools; the only genuinely privileged things it can do are *write to its scratchpad* and *emit signals*.
 
-You can essentially just run a scout manually yourself in any agent surface where the posthog mcp is available - that actually a key feature ax you can easily dogfood a scout on your project along with your agent and just tweak and improve it grounded in actuall useage and painpoints you might hit. 
+### Dogfood it yourself, then let PostHog run it
 
-One thing thats a little different and makes all the difference is that when posthog runs your scouts for you via posthog code - the scouts can maintain and write to the scratchpad and have permission to emit signals into the pipeline. 
+Because a scout is just a skill plus the MCP, **you can run one manually in any agent surface where the PostHog MCP is available** — Claude Code, Cursor, whatever. This is a key feature, not an accident: you can dogfood a scout on your own project, watch it work against your real data, and tweak the markdown until it's good — grounded in actual usage and the pain points you hit.
 
-This is what helps scouts turn into useful long running agents that actually can learn, adapt and evolve as your data in posthog does. All with you easily ble to steer but just maintaining the core skill that each scout actually uses.
+The thing that's a little different — and makes all the difference — is what happens when **PostHog runs your scouts for you**. On the scheduled, sandboxed runs, the scout is allowed to *maintain its scratchpad* and *emit signals into the pipeline*. That permission is what turns a stateless one-shot loop into a long-running agent that learns, adapts, and evolves as your data does — while you steer it just by maintaining the one skill it runs.
+
+## Signal vs noise: what makes a scout good
+
+The hard part of a scout isn't finding things. It's *not* finding things. A scout that emits on every wobble is worse than no scout at all, because it trains you to ignore the inbox.
+
+So the interesting logic in a scout skill is mostly about restraint:
+
+- **A confidence bar.** Every finding carries a confidence score, and the scout only emits above a threshold (roughly 0.65+). Below that, it doesn't bother you — it writes a note to its scratchpad and moves on.
+- **Dedupe keys.** Findings carry stable keys so the pipeline can group repeats and the scout can recognize "I already said this."
+- **Disqualifiers.** Explicit lists of things that look like signal but aren't: a single user, a dev-environment burst, a survey at the natural end of its window, an internal test response.
+- **Severity** (P0–P4) so downstream routing knows what's a five-alarm fire versus a nice-to-fix.
+
+Here's the contrast that makes it concrete. On our brand-mentions scout, a lone *"PostHog is down"* tweet — no detail, no corroboration, one account — got **held below the bar**. The same week, a *"PostHog is getting expensive"* complaint that showed up from **multiple independent voices** got **emitted** as a pricing-perception theme. Same surface, opposite decisions, and the reasoning for both is written in plain English in the skill and the scratchpad.
+
+### The scratchpad: how a scout remembers
+
+The scratchpad is a simple key/value store the scout reads at the start of a run and writes to as it goes. It's deliberately low-tech — but it's where the "learning" actually lives. Over time a scout grows a small, legible memory made of a few entry types:
+
+- **A rolling cursor** — "I've processed everything up to timestamp X" — so the next run doesn't re-read the same data.
+- **Below-bar carries** — things not (yet) worth emitting, each with an explicit *promote trigger*: "emit this if a second independent voice echoes it."
+- **Dedupe / addressed entries** — "I already emitted this theme on June 9; don't re-emit unless it escalates past *this* bar."
+- **An evolving tag taxonomy** — the scout curates its own vocabulary for categorizing findings.
+- **Cross-links** — entries reference each other with `[[wiki-style links]]`, so the memory is a little graph, not just a flat list.
+
+This is the second half of the markdown thesis: not only did the `if/else` become English, the *database row* became a markdown note the agent reads and rewrites every run. You can read a scout's entire memory and understand exactly what it knows and why it's been quiet.
 
 ## Making a scout
 
-A scout really is 99% just a skill, as a user you just have your agent use the `authoring-signals-scouts` skill to make a skill to watch for soemthing that could be interesting or important to you.
+A scout is 99% a skill, so making one is mostly writing (and iterating on) a skill. You don't do that by hand — you have your agent use the **`authoring-signals-scouts`** skill, which walks it through the anatomy: the emit contract, dedupe and memory conventions, disqualifiers, and the schedule config.
 
-PostHog ships with N "canonical" scouts - they live here - have a look. Here is a wuick list of some examples:
+PostHog ships with around 20 **canonical** scouts out of the box — they live in [`products/signals/skills/`](https://github.com/PostHog/posthog/tree/master/products/signals/skills). A sample:
 
-- a - blah blah
-- b - foo bar
-...
+- `signals-scout-error-tracking` — `$exception` bursts, stuck loops, and status regressions.
+- `signals-scout-experiments` — validity threats like sample-ratio mismatch and zombie experiments.
+- `signals-scout-revenue-analytics` — MRR/churn shifts and broken Stripe syncs.
+- `signals-scout-surveys` — NPS/CSAT regressions plus recurring themes in open-text responses.
+- `signals-scout-web-analytics` — acquisition channels diverging, attribution breakage, 404 spikes.
+- `signals-scout-feature-flags` — evaluation cliffs, ghost flags, and flag debt.
 
-You can of course make your own custom internal scouts for anything you care about - again just use the `authoring-signals-scout` to make this fun and easy.
+You can also write your own **custom** scouts for anything you care about — again, just point your agent at `authoring-signals-scouts`. Some internal ones we've built recently to dogfood the system on our own project:
 
-Here are some examples of internal scouts we have recently made:
+- `signals-scout-mcp-feedback` — watches feedback that AI agents file about our MCP server.
+- `signals-scout-brand-mentions` — watches what people say about PostHog across the internet.
+- `signals-scout-discord-feedback` — mines our community Discord for bugs and feature requests.
+- `signals-scout-self-improvement` — reviews the *other scouts* and flags ones that are miscalibrated or broken.
 
-- a - foo 
-- b - bar
-...
+And to see how your scouts are doing, there's (you guessed it) an **`exploring-signals-scouts`** skill — it surveys the fleet, reads recent runs, inspects the scratchpad, and assesses each scout's health.
 
-You can also easily explore your scouts and how they are doing using, you guessed it, the `exploring-signals-scouts` skill. 
+## Two scouts, end to end
 
-## Some real examples
+Theory's cheap. Let's trace two real scouts we run on our own project — one at the bottom of the self-driving pyramid (an auto-fixable code paper-cut) and one nearer the top (judgment work a human owns).
 
-To make all this clear lets look at an example scout and dive in a little to it in detail.
+### 1. The MCP feedback scout (the code one)
 
-TODO: pick an interesting scout and dig into it, explore its recent runs and the things it has on its scratchpad and show some signals it has emitted and how they then flow into inbox reports that can be actioned. i might try and use some internal signals scouts as a nice end to end example or maybe discord or brand mentions - tbd
+`signals-scout-mcp-feedback` watches a single event: `mcp feedback submitted`. When an AI agent (Claude Code, Cursor, etc.) hits friction using our MCP — a confusing schema, a tool that returns the wrong thing, a missing capability — it can file a structured report via the MCP's own `agent-feedback` tool. That report becomes an event. The scout's job is to turn that low-volume, high-signal stream into actionable findings for the MCP team.
 
+A single run on June 16th read a six-hour window containing exactly **two** feedback events, and emitted two findings. The more interesting one was a **P2**, because an agent had been *hard-blocked*:
+
+> **`dashboard-update` claims it can update a dashboard's `filters`, but the input schema has no `filters` field — and calling it with one returns HTTP 200 while silently dropping the value.** An agent was hard-blocked (`task_completed = false`) trying to set a dashboard-level date filter; no other tool can do it. […] **Fix:** add a top-level `filters` object to the `dashboard-update` schema so the documented capability is reachable; or, if filters are intentionally unsupported, remove the "can update … filters" claim from the description.
+
+That's a real, reproducible bug report with a verbatim fix, generated from one piece of agent feedback — and it's exactly the kind of thing an agent can pick up and turn into a PR.
+
+Two things from this scout are worth calling out because they show the system *learning*:
+
+**Signals group into reports.** The other finding from that run — a token-blowout in `heatmaps-list` — didn't create a new report. It **grouped into an existing one**, *"Add pagination and field projection to MCP list/schema tools,"* which was already `in_progress`. Multiple scout runs, over days, all noticing flavors of the same underlying problem, converging into one piece of work.
+
+**Findings escalate via memory.** Days earlier, the scout emitted a P3 about a missing `ensure_experience_continuity` input — and wrote a note in its scratchpad: *"promote to P2 if a second blocked report lands."* When a second agent hit the same wall, the next run read that note, saw the trigger fire, and re-emitted at P2. The escalation rule isn't in any code — it's a sentence the scout wrote to itself.
+
+### 2. The brand mentions scout (the non-code one)
+
+`signals-scout-brand-mentions` watches what the internet says about PostHog. And the way it gets that data is the point.
+
+**Anything you can land in PostHog is scout-able.** We pipe a social-listening tool (Octolens) into a Slack channel, and that channel is synced into the **PostHog data warehouse** as a regular table. The scout just queries it with SQL like any other PostHog data. There's nothing special about "analytics events" here — warehouse sources, Slack relays, third-party feeds, all of it becomes fair game for a scout the moment it's in PostHog. This is a big part of why scouts are general-purpose rather than a product-analytics-only feature.
+
+This scout sits higher on the [self-driving pyramid](/blog/self-driving-product) than the MCP one: when it finds something, the action usually isn't a PR — it's comms, product strategy, or just situational awareness. A few real (anonymized) examples it surfaced:
+
+- **A reputational narrative escalating.** A privacy claim about PostHog jumped from niche threads to a large-audience commentator, with the framing shifting to attack PostHog directly (and, notably, *inaccurately*). The scout emitted a **P2 recommending comms/legal own the narrative** — citing the two earlier, lower-severity findings it had filed about the same theme as it built.
+- **Us, roasted, repeatedly.** The scout maintains a running *"PostHog is too complex / bloated"* theme. It's heard that *"the website was better before the OS Desktop update,"* that people don't love Max AI being the default landing screen, and — my personal favorite — that someone is *"creeped out by the hedgehog sound PostHog Code makes every time it finishes a task."* All real, all public, all genuinely useful to know in aggregate.
+
+And this is the scout whose scratchpad best shows the **memory model evolving**. Across runs it has built up:
+
+- a `pattern:brand_mentions:cursor` entry it overwrites every run (the rolling "I've read up to here" mark),
+- a stack of `*-belowbar` carries — *"a user says PostHog's bot-filtering is letting bots through; n=1, low reach — promote if a second independent voice reports the same,"*
+- `addressed:*` entries recording every theme it's already emitted and the exact bar for re-emitting,
+- and its own `tags:brand_mentions:taxonomy` vocabulary, with entries cross-linked by `[[name]]` references.
+
+You can read that scratchpad top to bottom and reconstruct everything the scout knows, every judgment call it's made, and why it's been quiet on the things it's chosen to stay quiet on. That legibility — being able to *audit an agent's memory in plain text* — is, to me, the whole pitch.
 
 ## Try it yourself
 
-If you want to try this yourself then just download posthog code and ...
+The fastest way to get hands-on is [PostHog Code](https://github.com/PostHog/code/releases/latest), our desktop coding agent — download it, sign in, and the PostHog MCP is wired up for you. From there you can:
 
+1. Ask it to use the **`exploring-signals-scouts`** skill to show you what scouts are already running on your project and how they're doing.
+2. Ask it to use **`authoring-signals-scouts`** to draft a brand-new scout for something *you* care about — a custom event, a warehouse table, a product surface no canonical scout covers.
+3. Run that scout manually, right there in the agent, against your real data — then tweak the markdown until it's good.
 
+Once it's earning its keep, let PostHog run it for you on a schedule, and it'll start emitting into your inbox — learning and adapting as your data changes, with you steering it through nothing more than a markdown file.
+
+<p>
+	<CallToAction to="/docs/model-context-protocol">
+		Get started with the PostHog MCP
+	</CallToAction>
+</p>
+
+{/* TODO(andy): before publishing —
+  - swap featuredImage for a real Scout illustration (currently the default blog image)
+  - verify the GitHub deep-links resolve on public master (runner.py path, skills/ dir)
+  - confirm the canonical scout count ("around 20") against products/signals/skills/ at publish time
+  - double-check internal links: /docs/model-context-protocol and /blog/self-driving-product slugs
+  - consider a screenshot/video of the inbox + a real report, and of a scout's scratchpad
+  - gut-check the anonymized brand-mentions P2 with comms before it goes out
+*/}
