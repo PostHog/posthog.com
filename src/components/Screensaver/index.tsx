@@ -20,14 +20,14 @@ export const Screensaver: React.FC<ScreensaverProps> = ({ isActive, onDismiss })
         autoplay: true,
         path: '/lotties/loading.json',
         rendererSettings: {
-            preserveAspectRatio: 'xMidYMid slice'
-        }
+            preserveAspectRatio: 'xMidYMid slice',
+        },
     }
 
     const updatePosition = useCallback(() => {
         if (!isActive) return
 
-        setPosition(prev => {
+        setPosition((prev) => {
             let newX = prev.x + velocity.x
             let newY = prev.y + velocity.y
             let newVelX = velocity.x
@@ -46,7 +46,6 @@ export const Screensaver: React.FC<ScreensaverProps> = ({ isActive, onDismiss })
                 newVelY = -newVelY
                 newY = newY <= 0 ? 0 : 100 - logoHeightPercent
             }
-
 
             setVelocity({ x: newVelX, y: newVelY })
             return { x: newX, y: newY }
@@ -71,8 +70,6 @@ export const Screensaver: React.FC<ScreensaverProps> = ({ isActive, onDismiss })
         }
     }, [isActive, updatePosition])
 
-
-
     // Mouse move handler
     useEffect(() => {
         const handleMouseMove = () => {
@@ -95,7 +92,7 @@ export const Screensaver: React.FC<ScreensaverProps> = ({ isActive, onDismiss })
                     left: `${position.x}%`,
                     top: `${position.y}%`,
                     width: `${logoSizeRef.current.width}px`,
-                    height: `${logoSizeRef.current.height}px`
+                    height: `${logoSizeRef.current.height}px`,
                 }}
             >
                 <Suspense fallback={null}>
@@ -103,6 +100,7 @@ export const Screensaver: React.FC<ScreensaverProps> = ({ isActive, onDismiss })
                         options={defaultOptions}
                         height={logoSizeRef.current.height}
                         width={logoSizeRef.current.width}
+                        eventListeners={[]}
                     />
                 </Suspense>
             </div>
