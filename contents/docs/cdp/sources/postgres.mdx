@@ -405,4 +405,37 @@ This happens in self-managed mode when PostHog can't find the publication name y
 
 Check the slot lag query above. If PostHog-managed slot protection dropped the slot, [disable and re-enable CDC](#managing-cdc-after-source-creation) or run a full resync after fixing the underlying issue. If you're in self-managed mode, your DBA must decide whether to keep, advance, or drop the slot.
 
+### `materialized view has not been populated`
+
+This error occurs when you try to sync a materialized view that was created with `WITH NO DATA` and has never been refreshed. PostgreSQL can't read from an unpopulated materialized view.
+
+To fix this, run the following command in your PostgreSQL database:
+
+```sql
+REFRESH MATERIALIZED VIEW "your_view_name";
+```
+
+After refreshing, re-enable the sync in PostHog.
+
+### `exceeded the compute time quota`
+
+This error occurs with serverless Postgres providers like Neon when the account or project has exceeded its compute-time quota. The provider suspends the database until the quota resets at the next billing period or the plan is upgraded.
+
+To fix this, upgrade your provider's plan or wait for the quota to reset, then re-enable the sync in PostHog.
+
+### `cannot call jsonb_each on a non-object`
+
+This error occurs when syncing a view or materialized view whose definition calls `jsonb_each()` or `jsonb_each_text()` on a JSONB column that contains non-object values (such as arrays, scalars, or `null`) for at least one row. PostgreSQL evaluates the view at fetch time, and the `jsonb_each()` function fails on non-object values.
+
+To fix this, update the view definition in your database to guard the `jsonb_each()` call:
+
+```sql
+-- Only process rows where the column is a JSON object
+SELECT key, value
+FROM jsonb_each(your_column)
+WHERE jsonb_typeof(your_column) = 'object'
+```
+
+Alternatively, remove the problematic view from your sync selection in PostHog.
+
 > **Looking for an example of the Postgres source?** Check out our tutorial where we [connect and query Supabase data](/tutorials/supabase-query).

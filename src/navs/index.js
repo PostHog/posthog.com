@@ -1087,6 +1087,10 @@ export const handbookSidebar = [
                         url: '/handbook/marketing/product-announcements',
                     },
                     {
+                        name: 'Collaborating with PMs',
+                        url: '/handbook/marketing/collaborating-with-pms',
+                    },
+                    {
                         name: 'Incident comms',
                         url: '/handbook/marketing/incident-comms',
                     },
@@ -1095,12 +1099,20 @@ export const handbookSidebar = [
                         url: '/handbook/marketing/email-comms',
                     },
                     {
+                        name: 'Onboarding & lifecycle emails',
+                        url: '/handbook/marketing/onboarding-and-lifecycle-emails',
+                    },
+                    {
                         name: 'In-app messaging',
                         url: '/handbook/marketing/in-app',
                     },
                     {
                         name: 'Slack messaging',
                         url: '/handbook/marketing/slack-messaging',
+                    },
+                    {
+                        name: 'Social media',
+                        url: '/handbook/marketing/social-media',
                     },
                     {
                         name: 'Partnerships',
@@ -1163,6 +1175,10 @@ export const handbookSidebar = [
                     {
                         name: 'Data pipelines',
                         url: '/handbook/marketing/positioning/data-pipelines',
+                    },
+                    {
+                        name: 'Endpoints',
+                        url: '/handbook/marketing/positioning/endpoints',
                     },
                     {
                         name: 'LLM analytics',
@@ -1331,6 +1347,10 @@ export const handbookSidebar = [
                 url: '',
                 children: [
                     {
+                        name: 'How we work',
+                        url: '/handbook/growth/sales/new-business-how-we-work',
+                    },
+                    {
                         name: 'Why buy PostHog',
                         url: '/handbook/growth/sales/why-buy-posthog',
                     },
@@ -1383,6 +1403,10 @@ export const handbookSidebar = [
                     {
                         name: 'PLG lead qualification',
                         url: '/handbook/growth/sales/product-led-lead-qualification',
+                    },
+                    {
+                        name: 'How to pitch self-driving',
+                        url: '/handbook/growth/sales/how-to-pitch-self-driving',
                     },
                     {
                         name: 'Expansion, cross-sell & retention',
@@ -4115,6 +4139,72 @@ export const docsMenu = {
             ],
         },
         {
+            name: 'Replay Vision',
+            url: '/docs/replay-vision',
+            color: 'yellow',
+            icon: 'IconEye',
+            description: 'Use AI to automatically watch your session recordings and turn what it sees into queryable data',
+            children: [
+                {
+                    name: 'Replay Vision',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/replay-vision',
+                    icon: 'IconEye',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Getting started',
+                    url: '/docs/replay-vision/start-here',
+                    icon: 'IconRocket',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Scanner types',
+                    url: '/docs/replay-vision/scanner-types',
+                    icon: 'IconShuffle',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Creating scanners',
+                    url: '/docs/replay-vision/creating-scanners',
+                    icon: 'IconPencil',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Running scanners',
+                    url: '/docs/replay-vision/running-scanners',
+                    icon: 'IconPlay',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Observations',
+                    url: '/docs/replay-vision/observations',
+                    icon: 'IconList',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Quota and limits',
+                    url: '/docs/replay-vision/quota-and-limits',
+                    icon: 'IconPercentage',
+                    color: 'yellow',
+                },
+                {
+                    name: 'MCP',
+                    url: '/docs/replay-vision/mcp',
+                    icon: 'IconTerminal',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Troubleshooting',
+                    url: '/docs/replay-vision/troubleshooting',
+                    icon: 'IconQuestion',
+                    color: 'yellow',
+                },
+            ],
+        },
+        {
             name: 'Feature Flags',
             icon: 'IconToggle',
             color: 'seagreen',
@@ -4865,6 +4955,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/installation/php',
                         },
                         {
+                            name: 'Rust',
+                            url: '/docs/error-tracking/installation/rust',
+                        },
+                        {
                             name: 'iOS',
                             url: '/docs/error-tracking/installation/ios',
                         },
@@ -5163,6 +5257,7 @@ export const docsMenu = {
                     featured: true,
                     children: [
                         { name: 'Overview', url: '/docs/surveys/installation' },
+                        { name: 'Android', url: '/docs/surveys/installation/android' },
                         { name: 'Angular', url: '/docs/surveys/installation/angular' },
                         { name: 'Astro', url: '/docs/surveys/installation/astro' },
                         { name: 'Bubble', url: '/docs/surveys/installation/bubble' },
@@ -5828,14 +5923,60 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Evaluations',
+                    url: '/docs/ai-evals',
+                    icon: 'IconTarget',
+                    color: 'yellow',
+                    featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/ai-evals',
+                        },
+                        {
+                            name: 'Trace reviews',
+                            url: '/docs/ai-observability/trace-reviews',
+                        },
+                        {
+                            name: 'Datasets',
+                            url: '/docs/ai-evals/datasets',
+                        },
+                        {
+                            name: 'Taggers',
+                            url: '/docs/ai-evals/taggers',
+                        },
+                    ],
+                },
+                {
+                    name: 'Prompt management',
+                    url: '/docs/prompt-management',
+                    icon: 'IconPencil',
+                    color: 'purple',
+                    featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/prompt-management',
+                        },
+                        {
+                            name: 'Skills store',
+                            url: '/docs/prompt-management/skills-store',
+                        },
+                        {
+                            name: 'A/B testing prompts',
+                            url: '/docs/prompt-management/prompt-experiments',
+                        },
+                    ],
+                },
+                {
+                    name: 'Guides',
+                },
+                {
                     name: 'Calculating LLM costs',
                     url: '/docs/ai-observability/calculating-costs',
                     icon: 'IconBalance',
                     color: 'green',
                     featured: true,
-                },
-                {
-                    name: 'Guides',
                 },
                 {
                     name: 'Analyze LLM performance',
@@ -5851,19 +5992,33 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Trace Reviews',
-                    url: '/docs/ai-observability/trace-reviews',
-                    icon: 'IconCheckCircle',
-                    color: 'green',
+                    name: 'Link Session Replay',
+                    url: '/docs/ai-observability/link-session-replay',
+                    icon: 'IconRewindPlay',
+                    color: 'blue',
+                },
+                {
+                    name: 'Link Error Tracking',
+                    url: '/docs/ai-observability/link-error-tracking',
+                    icon: 'IconWarning',
+                    color: 'red',
+                },
+                {
+                    name: 'Collect user feedback',
+                    url: '/docs/ai-observability/collect-user-feedback',
+                    icon: 'IconMessage',
+                    color: 'salmon',
                     featured: true,
-                },
-                {
-                    name: 'Evaluations ↗',
-                    url: 'https://posthog.com/docs/ai-evals',
-                },
-                {
-                    name: 'Prompt management ↗',
-                    url: 'https://posthog.com/docs/prompt-management',
+                    children: [
+                        {
+                            name: 'React integration with useThumbSurvey',
+                            url: '/docs/ai-observability/user-feedback/use-thumb-survey',
+                        },
+                        {
+                            name: 'Manual event capture',
+                            url: '/docs/ai-observability/user-feedback/manual-event-capture',
+                        },
+                    ],
                 },
                 {
                     name: 'PostHog AI',
@@ -5917,35 +6072,6 @@ export const docsMenu = {
                         title: 'Beta',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
-                },
-                {
-                    name: 'Link Session Replay',
-                    url: '/docs/ai-observability/link-session-replay',
-                    icon: 'IconRewindPlay',
-                    color: 'blue',
-                },
-                {
-                    name: 'Link Error Tracking',
-                    url: '/docs/ai-observability/link-error-tracking',
-                    icon: 'IconWarning',
-                    color: 'red',
-                },
-                {
-                    name: 'Collect user feedback',
-                    url: '/docs/ai-observability/collect-user-feedback',
-                    icon: 'IconMessage',
-                    color: 'salmon',
-                    featured: true,
-                    children: [
-                        {
-                            name: 'React integration with useThumbSurvey',
-                            url: '/docs/ai-observability/user-feedback/use-thumb-survey',
-                        },
-                        {
-                            name: 'Manual event capture',
-                            url: '/docs/ai-observability/user-feedback/manual-event-capture',
-                        },
-                    ],
                 },
                 {
                     name: 'Resources',
@@ -6013,98 +6139,106 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Evaluations',
-            url: '/docs/ai-evals',
+            name: 'MCP Analytics',
+            url: '/docs/mcp-analytics',
             color: '[#681291]',
             colorDark: '[#C170E8]',
-            icon: 'IconTarget',
-            description: 'Score and review the quality of your LLM generations',
+            icon: 'IconPlug',
+            description: 'Analytics for the MCP servers you ship to AI agents',
+            badge: {
+                title: 'Alpha',
+                className: 'uppercase !bg-yellow/10 !text-yellow !dark:text-white !dark:bg-yellow/50',
+            },
             children: [
                 {
-                    name: 'Evaluations',
+                    name: 'MCP Analytics',
                 },
                 {
                     name: 'Overview',
-                    url: '/docs/ai-evals',
+                    url: '/docs/mcp-analytics',
                     icon: 'IconHome',
                     color: 'seagreen',
                 },
                 {
-                    name: 'Features',
+                    name: 'Getting started',
                 },
                 {
-                    name: 'Evaluations',
-                    url: '/docs/ai-evals/evaluations',
-                    icon: 'IconTarget',
-                    color: 'yellow',
+                    name: 'Start here',
+                    url: '/docs/mcp-analytics/start-here',
+                    icon: 'IconListCheck',
+                    color: 'orange',
                     featured: true,
-                    badge: {
-                        title: 'Alpha',
-                        className: 'uppercase !bg-yellow/10 !text-yellow !dark:text-white !dark:bg-yellow/50',
-                    },
                 },
                 {
-                    name: 'Taggers',
-                    url: '/docs/ai-evals/taggers',
-                    icon: 'IconTag',
-                    color: 'purple',
-                },
-                {
-                    name: 'Datasets',
-                    url: '/docs/ai-evals/datasets',
-                    icon: 'IconStack',
+                    name: 'Installation',
+                    url: '/docs/mcp-analytics/installation',
+                    icon: 'IconBook',
                     color: 'blue',
-                },
-            ],
-        },
-        {
-            name: 'Prompt Management',
-            url: '/docs/prompt-management',
-            color: '[#681291]',
-            colorDark: '[#C170E8]',
-            icon: 'IconPencil',
-            description: 'Version and ship prompts and reusable agent skills without code deploys',
-            children: [
-                {
-                    name: 'Prompt Management',
+                    featured: true,
                 },
                 {
-                    name: 'Overview',
-                    url: '/docs/prompt-management',
-                    icon: 'IconHome',
+                    name: 'Custom servers',
+                    url: '/docs/mcp-analytics/custom-servers',
+                    icon: 'IconServer',
+                    color: 'teal',
+                },
+                {
+                    name: 'Concepts',
+                },
+                {
+                    name: 'Capturing agent intent',
+                    url: '/docs/mcp-analytics/intent',
+                    icon: 'IconAIText',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Conversation IDs',
+                    url: '/docs/mcp-analytics/conversation-id',
+                    icon: 'IconMessage',
+                    color: 'salmon',
+                },
+                {
+                    name: 'Identifying users',
+                    url: '/docs/mcp-analytics/identifying-users',
+                    icon: 'IconPerson',
                     color: 'seagreen',
                 },
                 {
-                    name: 'Features',
+                    name: 'Missing capabilities',
+                    url: '/docs/mcp-analytics/missing-capability',
+                    icon: 'IconWrench',
+                    color: 'orange',
                 },
                 {
-                    name: 'Prompts',
-                    url: '/docs/prompt-management/prompts',
-                    icon: 'IconPencil',
-                    color: 'purple',
-                    featured: true,
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                },
-                {
-                    name: 'Skills store',
-                    url: '/docs/prompt-management/skills-store',
-                    icon: 'IconStack',
+                    name: 'Custom events & metadata',
+                    url: '/docs/mcp-analytics/custom-events',
+                    icon: 'IconBrackets',
                     color: 'blue',
+                },
+                {
+                    name: 'Privacy & redaction',
+                    url: '/docs/mcp-analytics/privacy',
+                    icon: 'IconLock',
+                    color: 'purple',
                     featured: true,
                 },
                 {
-                    name: 'A/B testing prompts',
-                    url: '/docs/prompt-management/prompt-experiments',
-                    icon: 'IconFlask',
-                    color: 'purple',
+                    name: 'Reference',
+                },
+                {
+                    name: 'Event & property reference',
+                    url: '/docs/mcp-analytics/events',
+                    icon: 'IconList',
+                    color: 'red',
                     featured: true,
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
+                },
+                {
+                    name: 'Sample queries',
+                    url: '/docs/mcp-analytics/queries',
+                    icon: 'IconGraph',
+                    color: 'green',
+                    featured: true,
                 },
             ],
         },
@@ -6637,7 +6771,7 @@ export const docsMenu = {
             name: 'Slack app',
             icon: 'IconAtSign',
             color: 'purple',
-            url: '/docs/slack-app',
+            url: '/docs/slack',
             description: 'Run PostHog from any Slack channel — agent tasks, analytics, and notifications.',
             children: [
                 {
@@ -6645,25 +6779,25 @@ export const docsMenu = {
                 },
                 {
                     name: 'Overview',
-                    url: '/docs/slack-app',
+                    url: '/docs/slack',
                     icon: 'IconHome',
                     color: 'seagreen',
                 },
                 {
                     name: 'Setup',
-                    url: '/docs/slack-app/setup',
+                    url: '/docs/slack/setup',
                     icon: 'IconWrench',
                     color: 'blue',
                 },
                 {
                     name: 'Commands',
-                    url: '/docs/slack-app/commands',
+                    url: '/docs/slack/commands',
                     icon: 'IconTerminal',
                     color: 'purple',
                 },
                 {
                     name: 'Pricing',
-                    url: '/docs/slack-app/pricing',
+                    url: '/docs/slack/pricing',
                     icon: 'IconShield',
                     color: 'red',
                 },
@@ -6827,6 +6961,7 @@ export const docsMenu = {
                         { name: 'React Native', url: '/docs/logs/installation/react-native' },
                         { name: 'iOS', url: '/docs/logs/installation/ios' },
                         { name: 'Android', url: '/docs/logs/installation/android' },
+                        { name: 'Flutter', url: '/docs/logs/installation/flutter' },
                         { name: 'Datadog', url: '/docs/logs/installation/datadog' },
                         { name: 'Other', url: '/docs/logs/installation/other' },
                     ],
@@ -6935,6 +7070,23 @@ export const docsMenu = {
                     icon: 'IconListCheck',
                     color: 'orange',
                     featured: true,
+                },
+                {
+                    name: 'Install OpenTelemetry tracing',
+                    url: '/docs/distributed-tracing/installation',
+                    icon: 'IconCode',
+                    color: 'blue',
+                    featured: true,
+                    children: [
+                        { name: 'Overview', url: '/docs/distributed-tracing/installation' },
+                        { name: 'Node.js', url: '/docs/distributed-tracing/installation/nodejs' },
+                        { name: 'Python', url: '/docs/distributed-tracing/installation/python' },
+                        { name: 'Go', url: '/docs/distributed-tracing/installation/go' },
+                        { name: 'Java', url: '/docs/distributed-tracing/installation/java' },
+                        { name: '.NET', url: '/docs/distributed-tracing/installation/dotnet' },
+                        { name: 'PHP', url: '/docs/distributed-tracing/installation/php' },
+                        { name: 'Ruby', url: '/docs/distributed-tracing/installation/ruby' },
+                    ],
                 },
                 {
                     name: 'Why you need distributed tracing',

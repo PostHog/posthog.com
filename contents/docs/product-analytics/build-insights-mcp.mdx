@@ -19,16 +19,16 @@ With MCP, your coding agent can:
 
 The MCP server provides these tools for working with Product Analytics:
 
-| Tool | Description |
-|------|-------------|
-| `query-run` | Run any analytics query – trends, funnels, retention, lifecycle, paths, stickiness, or custom HogQL. Returns results directly in your editor. |
-| `query-generate-hogql-from-question` | Generate a HogQL query from a natural language question. Useful when you want to inspect or modify the query before running it. |
-| `insight-create-from-query` | Create a saved insight from a query and optionally add it to a dashboard. |
-| `insight-get` | Get details for a specific insight by ID. |
-| `insights-get-all` | List all insights in the current project. Filter by name or type. |
-| `insight-query` | Run the query behind a saved insight and return fresh results. |
-| `insight-update` | Update a saved insight's name, description, or query. |
-| `insight-delete` | Delete a saved insight. |
+| Tool                                 | Description                                                                                                                                   |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `query-run`                          | Run any analytics query – trends, funnels, retention, lifecycle, paths, stickiness, or custom HogQL. Returns results directly in your editor. |
+| `query-generate-hogql-from-question` | Generate a HogQL query from a natural language question. Useful when you want to inspect or modify the query before running it.               |
+| `insight-create-from-query`          | Create a saved insight from a query and optionally add it to a dashboard.                                                                     |
+| `insight-get`                        | Get details for a specific insight by ID.                                                                                                     |
+| `insights-get-all`                   | List all insights in the current project. Filter by name or type.                                                                             |
+| `insight-query`                      | Run the query behind a saved insight and return fresh results.                                                                                |
+| `insight-update`                     | Update a saved insight's name, description, or query.                                                                                         |
+| `insight-delete`                     | Delete a saved insight.                                                                                                                       |
 
 ## Example prompts
 
@@ -40,18 +40,52 @@ Try these with your MCP-enabled agent:
 - `What's the retention rate for users who completed onboarding?`
 - `Run a HogQL query to find the most active users by event count this month.`
 
+## Customize chart display
+
+When creating or updating SQL-backed insights (HogQL queries), you can configure per-series display settings and number formatting on each Y-axis column.
+
+**Per-series display** — set on each Y-axis column under `settings.display`:
+
+| Setting         | Values                        | Description                                                                                         |
+| --------------- | ----------------------------- | --------------------------------------------------------------------------------------------------- |
+| `yAxisPosition` | `left`, `right`               | Which Y axis the series uses. Use `right` for a secondary axis.                                     |
+| `displayType`   | `auto`, `line`, `bar`, `area` | Override the chart-level display for this series. Mix types by setting different values per column. |
+| `trendLine`     | `true`, `false`               | Draw a linear trend line for the series.                                                            |
+| `label`         | string                        | Custom label shown in the legend and tooltips instead of the column name.                           |
+| `color`         | hex string (e.g. `#1d4aff`)   | Custom color for the series.                                                                        |
+
+**Number formatting** — set on each Y-axis column under `settings.formatting`:
+
+| Setting         | Values                               | Description                                                                                |
+| --------------- | ------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `style`         | `none`, `number`, `short`, `percent` | Number format style. `number` adds thousands separators, `short` abbreviates (1.2k, 3.4M). |
+| `prefix`        | string                               | Text prepended to values (e.g. `$`).                                                       |
+| `suffix`        | string                               | Text appended to values (e.g. `%` or `ms`).                                                |
+| `decimalPlaces` | number                               | Number of decimal places to display.                                                       |
+
+**Chart-level settings** — set on the `DataVisualization` node:
+
+| Setting              | Values          | Description                                  |
+| -------------------- | --------------- | -------------------------------------------- |
+| `showValuesOnSeries` | `true`, `false` | Show values on each data point in the chart. |
+
+Example prompts:
+
+- `Create a HogQL chart of daily revenue with values formatted as dollars and a trend line.`
+- `Update insight 123 to show the conversion rate series as a line and the volume series as bars.`
+
 ## Dashboard tools
 
 You can also create and manage dashboards from your editor:
 
-| Tool | Description |
-|------|-------------|
-| `dashboard-create` | Create a new dashboard. |
-| `dashboard-get` | Get a dashboard and its tiles. |
-| `dashboards-get-all` | List all dashboards in the project. |
-| `add-insight-to-dashboard` | Add an existing insight to a dashboard. |
-| `dashboard-update` | Update a dashboard's name or description. |
-| `dashboard-delete` | Delete a dashboard. |
+| Tool                       | Description                               |
+| -------------------------- | ----------------------------------------- |
+| `dashboard-create`         | Create a new dashboard.                   |
+| `dashboard-get`            | Get a dashboard and its tiles.            |
+| `dashboards-get-all`       | List all dashboards in the project.       |
+| `add-insight-to-dashboard` | Add an existing insight to a dashboard.   |
+| `dashboard-update`         | Update a dashboard's name or description. |
+| `dashboard-delete`         | Delete a dashboard.                       |
 
 ## Install the MCP server
 

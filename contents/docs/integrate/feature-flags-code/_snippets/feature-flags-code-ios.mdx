@@ -1,22 +1,37 @@
 ### Boolean feature flags
 
 ```swift
-if (PostHogSDK.shared.isFeatureEnabled("flag-key")) {
+if let result = PostHogSDK.shared.getFeatureFlagResult("flag-key"), result.enabled {
     // Do something differently for this user
 
-    // Optional: fetch the payload
-    let matchedFlagPayload = PostHogSDK.shared.getFeatureFlagPayload("flag-key")
+    // Optional: fetch the payload from the same evaluation result
+    let matchedFlagPayload = result.payload
 }
 ```
 
 ### Multivariate feature flags
 
 ```swift
-if (PostHogSDK.shared.getFeatureFlag("flag-key") as? String == "variant-key") { // replace "variant-key" with the key of your variant
+if let result = PostHogSDK.shared.getFeatureFlagResult("flag-key"), result.variant == "variant-key" { // replace "variant-key" with the key of your variant
     // Do something differently for this user
 
-    // Optional: fetch the payload
-    let matchedFlagPayload = PostHogSDK.shared.getFeatureFlagPayload("flag-key")
+    // Optional: fetch the payload from the same evaluation result
+    let matchedFlagPayload = result.payload
+}
+```
+
+### Typed payloads
+
+If your payload is a JSON object, you can decode it into a `Decodable` type:
+
+```swift
+struct FlagPayload: Decodable {
+    let title: String
+}
+
+if let result = PostHogSDK.shared.getFeatureFlagResult("flag-key"),
+   let payload = result.payloadAs(FlagPayload.self) {
+    // Use payload.title
 }
 ```
 
@@ -67,12 +82,20 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 Alternatively, you can use the completion block of the `reloadFeatureFlags(_:)` method. This allows you to execute logic immediately after the flags are reloaded:
 
-
-``` swift
+```swift
 // Reload feature flags and check if a specific feature is enabled
 PostHogSDK.shared.reloadFeatureFlags {
     if PostHogSDK.shared.isFeatureEnabled("flag-key") {
         // do something
     }
 }
+```
+
+### Tracking feature usage
+
+To track when someone sees or interacts with a feature, use `captureFeatureView` and `captureFeatureInteraction`.
+
+```swift
+PostHogSDK.shared.captureFeatureView(flag: "flag-key", flagVariant: "variant-key")
+PostHogSDK.shared.captureFeatureInteraction(flag: "flag-key", flagVariant: "variant-key")
 ```

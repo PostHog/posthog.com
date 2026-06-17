@@ -50,7 +50,6 @@ const analyticsHandles = [
     'user_paths',
     'lifecycle',
     'llm_traces',
-    'llm_generations',
     'llm_evals',
     'session_replay',
     'heatmaps',
@@ -350,7 +349,6 @@ const productSlots: { handle: string; '@xl': [number, number]; '@2xl': [number, 
         { handle: 'user_paths', '@xl': [12, 96], '@2xl': [8, 96], '@3xl': [6, 96] },
         { handle: 'llm_evals', '@xl': [94, 16], '@2xl': [95, 56], '@3xl': [90, 56] },
         { handle: 'llm_traces', '@xl': [94, 82], '@2xl': [92, 74], '@3xl': [86, 74] },
-        { handle: 'llm_generations', '@xl': [90, 94], '@2xl': [88, 90], '@3xl': [90, 90] },
     ]
 
 const ArcProducts = ({ products, translate = identity }: { products: any[]; translate?: TranslateFn }) => {

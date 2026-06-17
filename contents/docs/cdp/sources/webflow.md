@@ -29,15 +29,15 @@ Once the syncs are complete, you can start using Webflow data in PostHog.
 
 ## Available tables
 
-| Table | Description | Sync method |
-| ----- | ----------- | ----------- |
-| `sites` | Metadata for the configured site | Full refresh |
-| `collections` | CMS collection definitions | Full refresh |
-| `pages` | Pages on the site | Full refresh |
-| `products` | Ecommerce products | Full refresh |
-| `orders` | Ecommerce orders | Full refresh |
-| `users` | Site members / users | Full refresh |
-| `forms` | Forms on the site | Full refresh |
+| Table         | Description                      | Sync method  |
+| ------------- | -------------------------------- | ------------ |
+| `sites`       | Metadata for the configured site | Full refresh |
+| `collections` | CMS collection definitions       | Full refresh |
+| `pages`       | Pages on the site                | Full refresh |
+| `products`    | Ecommerce products               | Full refresh |
+| `orders`      | Ecommerce orders                 | Full refresh |
+| `users`       | Site members / users             | Full refresh |
+| `forms`       | Forms on the site                | Full refresh |
 
 In addition to the static tables above, each CMS collection on your site is discovered automatically and exposed as its own table (named `collection_<slug>`) containing that collection's items.
 
@@ -50,3 +50,14 @@ All Webflow tables are full refresh only. Webflow's v2 list endpoints do not exp
 ## Configuration
 
 <SourceParameters />
+
+## Troubleshooting
+
+### 409 Conflict error
+
+Webflow returns a `409 Conflict` error in two scenarios:
+
+- **Products and Orders tables** – The connected site doesn't have ecommerce enabled. Enable ecommerce in Webflow or remove the `products` and `orders` tables from the sync.
+- **Other resources** – The site has unpublished changes. Publish your Webflow site, then try the sync again.
+
+This error stops the sync automatically because retrying can't resolve it. Fix the underlying issue in Webflow and re-run the sync.

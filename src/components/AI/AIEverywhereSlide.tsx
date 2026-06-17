@@ -59,7 +59,7 @@ export default function AIEverywhereSlide(): JSX.Element {
 
                         <div className="relative border border-primary rounded-md bg-accent flex flex-col overflow-hidden">
                             <Link
-                                to="/docs/slack-app/"
+                                to="/docs/slack"
                                 state={{ newWindow: true }}
                                 className="absolute top-4 right-4 z-10 inline-flex items-center gap-1 text-sm font-semibold text-red hover:underline"
                             >
