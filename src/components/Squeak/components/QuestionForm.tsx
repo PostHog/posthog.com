@@ -236,12 +236,19 @@ function QuestionFormMain({
 
                             {disclaimer && (
                                 <p className="text-xs text-center mt-4 ml-[50px] [text-wrap:_balance] opacity-60 mb-0 text-primary">
-                                    <Link to="/handbook/support/customer-support#community">
+                                    <Link
+                                        to="/handbook/support/customer-support#community"
+                                        className="font-semibold underline"
+                                    >
                                         Community questions are independent of PostHog support
                                     </Link>
                                     . If you have access to support through your PostHog plan, especially if you need to
                                     share personal info, you can file a support ticket{' '}
-                                    <Link to="https://app.posthog.com#panel=support" externalNoIcon>
+                                    <Link
+                                        to="https://app.posthog.com#panel=support"
+                                        externalNoIcon
+                                        className="font-semibold underline"
+                                    >
                                         in the app
                                     </Link>{' '}
                                     instead.
