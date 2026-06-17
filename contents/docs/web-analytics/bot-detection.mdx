@@ -39,6 +39,15 @@ Set `$raw_user_agent` on each event, plus `$host`, `$current_url`, `$pathname`, 
 
 Once `$http_log` events are flowing, the functions and virtual properties below classify them alongside your `$pageview` and `$screen` events.
 
+### Choosing a distinct ID
+
+Server requests don't carry a PostHog cookie, so the ingestion source has to derive a `distinct_id` for each `$http_log` event. The strategy you pick matters for two reasons:
+
+- **Person profiles and cost.** Backend events are [identified](/docs/data/anonymous-vs-identified-events) by default, so every new `distinct_id` creates a person profile and is billed on the person-profiles line. A high-cardinality strategy – a fresh ID per request, or a hash that rotates daily – can create a large number of profiles, which adds cost and slows person-joined queries. If you only need aggregate traffic and bot counts, capture these as [anonymous events](/docs/data/anonymous-vs-identified-events#how-to-capture-anonymous-events) by setting `$process_person_profile` to `false`. Bot detection still works, since it reads event properties, not the person profile.
+- **Unique counts and retention.** A daily-rotating ID counts the same crawler as a new visitor every day, which inflates unique counts and flattens retention. A stable per-client ID – for example a hash of IP, host, and user agent – keeps one identity per client.
+
+The Vercel logs source exposes a **Distinct ID strategy** setting (rotating salt, fixed salt, raw IP, or a custom template) so you can balance privacy, unique-count accuracy, and the number of profiles created.
+
 ## Classification functions
 
 Each function takes a user agent string and returns its classification. PostHog stores the user agent as `$raw_user_agent` (server-side capture and `$http_log` events) or `$user_agent` (the JavaScript SDK), so pass `coalesce(properties.$raw_user_agent, properties.$user_agent)` to cover both. To skip the fallback, use the [virtual properties](#virtual-properties) below, which read the user agent for you.
