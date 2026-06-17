@@ -20,6 +20,7 @@ import { workflows } from './productData/workflows'
 import { logs } from './productData/logs'
 import { realtimeDestinations } from './productData/realtime_destinations'
 import { endpoints } from './productData/endpoints'
+import { selfDriving } from './productData/self_driving'
 
 const initialProducts = [
     productAnalytics,
@@ -36,6 +37,7 @@ const initialProducts = [
     aiObservability,
     logs,
     workflows,
+    selfDriving,
     endpoints,
 ]
 
