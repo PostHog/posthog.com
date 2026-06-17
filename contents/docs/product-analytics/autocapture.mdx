@@ -87,6 +87,7 @@ You can configure the following options:
 | `dom_event_allowlist`<br/>**Type:** `DomAutocaptureEvents[]`       | List of DOM events to enable autocapture on (e.g., `['click', 'change', 'submit']`).                                                                                                                                                                                                                                                  |
 | `element_allowlist`<br/>**Type:** `AutocaptureCompatibleElement[]` | List of DOM elements to enable autocapture on (e.g., `['a', 'button', 'form', 'input', 'select', 'textarea', 'label']`). We consider the element tree from root to target, so if `button` is in the allowlist, clicks on `button` or its children (like `svg`) are captured, but not clicks on parent `div` elements.                 |
 | `css_selector_allowlist`<br/>**Type:** `string[]`                  | List of CSS selectors to enable autocapture on (e.g., `['[ph-capture]']`). We consider the element tree from root to target, so if `['[id]']` is in the allowlist, clicks on elements with IDs or their parents with IDs are captured. Everything is enabled when there's no allowlist.                                               |
+| `css_selector_ignorelist`<br/>**Type:** `string[]`                 | List of CSS selectors to ignore autocapture on (e.g., `['.ph-no-autocapture', '[data-ph-no-autocapture]']`). We consider the element tree from root to target, so matching elements or their parents are ignored. If unset, PostHog ignores `.ph-no-autocapture` and `[data-ph-no-autocapture]` by default. An empty list ignores nothing. Providing any custom list replaces the defaults, so include them explicitly if you still want them honored. |
 | `element_attribute_ignorelist`<br/>**Type:** `string[]`            | Exclude certain element attributes from autocapture (e.g., `['aria-label']` or `['data-attr-pii']`).                                                                                                                                                                                                                                  |
 | `capture_copied_text`<br/>**Type:** `boolean`                      | When set to `true`, autocapture will capture the text of any element that is cut or copied.                                                                                                                                                                                                                                           |
 
@@ -107,6 +108,7 @@ posthog.init('<ph_project_token>', {
         // Element filtering
         element_allowlist: ['a', 'button', 'form', 'input', 'select', 'textarea', 'label'],
         css_selector_allowlist: ['[ph-capture]', '[data-track]'],
+        css_selector_ignorelist: ['.ph-no-autocapture', '[data-ph-no-autocapture]', '[data-sensitive]'],
 
         // Attribute filtering
         element_attribute_ignorelist: ['aria-label', 'data-attr-pii', 'data-sensitive'],
