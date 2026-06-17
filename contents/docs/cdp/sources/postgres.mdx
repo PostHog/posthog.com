@@ -417,4 +417,10 @@ REFRESH MATERIALIZED VIEW "your_view_name";
 
 After refreshing, re-enable the sync in PostHog.
 
+### `exceeded the compute time quota`
+
+This error occurs with serverless Postgres providers like Neon when the account or project has exceeded its compute-time quota. The provider suspends the database until the quota resets at the next billing period or the plan is upgraded.
+
+To fix this, upgrade your provider's plan or wait for the quota to reset, then re-enable the sync in PostHog.
+
 > **Looking for an example of the Postgres source?** Check out our tutorial where we [connect and query Supabase data](/tutorials/supabase-query).
