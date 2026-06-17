@@ -95,7 +95,7 @@ For multivariate flags, you can configure **different payloads for each variant*
 1. Create a multivariate flag with multiple variants (e.g., `control`, `variant_a`, `variant_b`)
 2. For each variant, configure a unique payload in the **Payloads** section
 3. Use release conditions with **optional overrides** to force specific users to specific variants
-4. Retrieve the payload in your code using `getFeatureFlagPayload('flag-key')`
+4. Retrieve the payload in your code using `getFeatureFlagResult('flag-key')?.payload`
 
 **Example use cases:**
 
