@@ -1,0 +1,94 @@
+---
+title: 'What is a Scout?'
+date: 2026-06-17
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+author:
+    - andy-maguire
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/default/blog-image.png
+featuredImageType: full
+category: Engineering
+tags:
+    - signals
+seo:
+    metaTitle: 'What is a Scout?'
+    metaDescription: 'TODO: write a one-to-two sentence description of what a Scout is for SEO.'
+---
+
+## What is a Scout?
+
+A "Scout" is an agent (dont overthink that word) that is able to look at, wrangle, and make sense of any data available via PostHog. 
+
+It's goal is to emit useful signals based on this data for your or your agents to take action on. 
+
+Sometimes the action can happen automatically like automaticlly creating a PR for you.
+
+Signals get picked up by the PostHog self driving pipeline and turned into reports.
+
+Reports can be made up of many signals from various sources - scouts being just one of them.
+
+## How it works
+
+We have a scout harness (yes i used "harness" - you can cross that off the bingo list) here that is really just a small layer that runs your scout skills in a agentic loop.
+
+TODO: insert ascii diagram of the harness and main moving parts
+
+The main ingredients here are:
+
+- some sort of agent loop runner
+- tools for the agent - we just use the posthog mcp - the aim here is to build as little custom code as we can
+- sandbox to run the loop in
+- some sort of memory (another one to not overthink) for long running capabilities
+- some scheduling system to run the loop regulalry - we use temporal for this
+
+The main bulk of the logic that actually makes a scout is really just a skill that the agent is told to use and operate according to. 
+
+The skill then becomes where you encode all your busiess knowldeg and the thigns you care about. Wht used to be if/else and helper functions in old school data processing pipelines are now just lines on a markdown file (or example reference scripts as per the agent skills specification etc) that is super easy to iterate and improve on.
+
+There are some small config parts like how often the scout should run and things like that - exposed bit the scout config mcp tool.
+
+The scout does have some "special" tools that help it become more than just a one shot loop each time.
+
+Scouts have a set of scratchpad tools that they can read and write to - this is a fairly simple somewhat domain specific form of memory. The can also look at existing inbox reports and previous scout runs all via plain old posthog mcp tools.
+
+You can essentially just run a scout manually yourself in any agent surface where the posthog mcp is available - that actually a key feature ax you can easily dogfood a scout on your project along with your agent and just tweak and improve it grounded in actuall useage and painpoints you might hit. 
+
+One thing thats a little different and makes all the difference is that when posthog runs your scouts for you via posthog code - the scouts can maintain and write to the scratchpad and have permission to emit signals into the pipeline. 
+
+This is what helps scouts turn into useful long running agents that actually can learn, adapt and evolve as your data in posthog does. All with you easily ble to steer but just maintaining the core skill that each scout actually uses.
+
+## Making a scout
+
+A scout really is 99% just a skill, as a user you just have your agent use the `authoring-signals-scouts` skill to make a skill to watch for soemthing that could be interesting or important to you.
+
+PostHog ships with N "canonical" scouts - they live here - have a look. Here is a wuick list of some examples:
+
+- a - blah blah
+- b - foo bar
+...
+
+You can of course make your own custom internal scouts for anything you care about - again just use the `authoring-signals-scout` to make this fun and easy.
+
+Here are some examples of internal scouts we have recently made:
+
+- a - foo 
+- b - bar
+...
+
+You can also easily explore your scouts and how they are doing using, you guessed it, the `exploring-signals-scouts` skill. 
+
+## Some real examples
+
+To make all this clear lets look at an example scout and dive in a little to it in detail.
+
+TODO: pick an interesting scout and dig into it, explore its recent runs and the things it has on its scratchpad and show some signals it has emitted and how they then flow into inbox reports that can be actioned. i might try and use some internal signals scouts as a nice end to end example or maybe discord or brand mentions - tbd
+
+
+## Try it yourself
+
+If you want to try this yourself then just download posthog code and ...
+
+
