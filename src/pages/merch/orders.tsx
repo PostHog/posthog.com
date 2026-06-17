@@ -77,13 +77,12 @@ export default function MerchOrders(): JSX.Element {
             <div className="size-full">
                 <Wizard
                     leftNavigation={
-                        <Link
-                            to="/merch"
-                            state={{ newWindow: true }}
-                            className="text-sm text-red dark:text-yellow font-semibold"
-                        >
-                            Back to store
-                        </Link>
+                        <div className="text-sm">
+                            Need help?{' '}
+                            <a href="mailto:merch@posthog.com" className="text-red dark:text-yellow font-semibold">
+                                Email us
+                            </a>
+                        </div>
                     }
                     rightNavigation={
                         <div className="flex items-center space-x-2">
@@ -144,12 +143,6 @@ export default function MerchOrders(): JSX.Element {
                             {errorMessage && (
                                 <p className="text-red dark:text-yellow text-sm m-0 mb-3 font-bold">{errorMessage}</p>
                             )}
-                            <div className="text-sm">
-                                Need help?{' '}
-                                <a href="mailto:hey@posthog.com" className="text-red dark:text-yellow font-semibold">
-                                    Email us
-                                </a>
-                            </div>
                         </div>
                     </div>
                 </Wizard>
