@@ -1,0 +1,10 @@
+The [`@posthog/nuxt`](/docs/libraries/nuxt-js) module provides an auto-imported `usePostHog()` composable. It returns `undefined` during server-side rendering, so use optional chaining when calling methods like `identify`:
+
+```vue
+<script setup>
+const posthog = usePostHog()
+
+// Capture a custom event
+posthog?.capture('button_clicked', { button_name: 'signup' })
+</script>
+```
