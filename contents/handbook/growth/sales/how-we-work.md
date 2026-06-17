@@ -4,41 +4,14 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> This page covers more of the operational detail of how our team generally works - for a broader overview of roles and responsibilities, visit the [overview page](/handbook/growth/sales/overview).
+> This page covers more of the operational detail of how the Technical Account Manager team generally works - for a broader overview of roles and responsibilities, visit the [overview page](/handbook/growth/sales/overview). If you're looking for how the New Business Sales team (Technical Account Executives and BDRs) works, see [their How we work page](/handbook/growth/sales/new-business-how-we-work).
 
 ## Roles
 
 We have three types of roles:
 - Technical Account Executives - closing new business from [inbound](/handbook/growth/sales/inbound-sales) and [outbound](/handbook/growth/sales/outbound-sales) leads and expanding their usage of PostHog in the next 12 months
 - Technical Account Managers - [expansion](/handbook/growth/sales/expansion-and-retention) from existing customers, closing new business from [product-led leads](/handbook/growth/sales/product-led-sales)
-- COMING SOON: Business Development Reps, aka BDRs - generating leads for team new business
-
-### Technical Account Executives
-
-TAEs work with:
-
-- People who email sales@ directly
-- People who book a demo via contact sales
-- Other triggers we see in product, supplemented by data from Clay
-
-As we start to generate cold outbound leads, these will be routed to TAEs to work with as well. Customers move off of a TAE to a TAM or CSM 3 months after closing on a prepaid contract (usually annual) - you have to ensure they are well set up, not just contract signed!
-
-#### TAE Territory Review
-
-In addition to the weekly sprint planning meeting on a Monday, we do a weekly territory review standup on Wednesday. A Technical AE is picked at random, and we spend 30min going through:
-
-1. Brief, mid-week announcements (if any)
-2. For one random Technical AE as chosen by the wheel of names - SFDC Hygiene check — is the deal value, stage, and close date accurate? Are the next steps up to date? No story time here, just data. 
-3. Biweekly, we review all larger ($50k+) opportunities across all Technical AE. For each opportunity, the person reports and discusses:
-- Opportunity value and close date - why this value? when do we think it will close?
-- Progress towards exit criteria of the current stage
-- Concerns and questions about the opportunity
-4. On alternate weeks from the larger deal review, we run wheel of names again (excluding the Technical AE selected for the hygiene check), and the selected Technical AE reports and discusses the opportunities in their pipeline, including:
-- Starting with later stage opportunities, discuss opportunity value and close date - is the value solid? and what confidence do we have in the close?
-- Progress towards exit criteria of the current stage
-- Concerns and questions about the opportunity
-
-> The objective of the meeting is to hold each other to account, provide direct feedback, and also support each other. It is a great place to ask for help from the team with thorny problems - you should not let your teammates fail.
+- Business Development Reps, aka BDRs - generating leads for new business, including via [cold outbound](/handbook/growth/sales/outbound-sales)
 
 ### Technical Account Managers
 
@@ -77,53 +50,6 @@ We want to ensure the expansion potential of a customer has been thoroughly exha
 If the answer to any of the above questions is 'no' then it's likely that there is more work to be done with a customer, but we will use a common sense approach here.
 
 > A customer being negative/difficult to work with isn't a reason to remove them from your book.  It's your job to turn them around to being a happy customer (AKA be their favorite).
-
-## How commission works - Technical Account Executives
-
-**General principles**
-
-- When thinking about commission, we want to particularly incentivize:
-  - Landing new customers
-  - Quickly expanding them into new products using the relationship you've developed in onboarding them as customers.
-- We aim for a 50/50 split between base/commission when calculating OTE by default.
-
-> This plan will almost certainly change as we scale up the size and complexity of our sales machine! This is completely normal - we will ensure everyone is always treated fairly, but you need to be comfortable with this. For now we are generally trying to optimize for something straightforward here so it’s easy for PostHog (and you) to calculate commission. Fraser runs this process, so if you have any questions, ask him in the first instance.
-
-**Variables**
-
-- Your quota is set for the year and then divided by 4 - this means you don't have to cram deals into the end of a quarter.
-- Commission is _uncapped_ and paid out on a sliding scale based on the % of your quota you hit. Hit 100% quota, get 100% of commission. 0% for 0%. And 200% for 200%.
-- Quota is based on $ amount sold, not credits/product usage, so you can't in theory sell a $500k deal with an 80% discount and claim the full $500k to your quota, for example. Ways to hit quota:
-  - The invoice payment amount for any pre-purchased credit deals in the first 12 months after they become a paying customer.
-    - If the purchase is a renewal of an earlier credit purchase (i.e. at the end of the first year) then you'll get recognised on the difference between the initial purchase and renewal purchase.
- - ARR from monthly customers for the first _12 months_ after you sign them up as a monthly customer as long as you are the primary account owner.
-  - For multiyear contracts, we will true the quota ARR up to the year 1 equivalent amount as you'll have given a deeper discount but there is more committed revenue for PostHog which is a good thing.
-    - The way we work this out is by taking the annual credit purchased by the customer and applying the standard 1 year discount to it.
-  - Your quota will depend on your OTE
-- Commission is paid out quarterly, and is subject to clawbacks if the invoices remain unpaid.
-  - We want you to secure upfront payment - which helps PostHog and helps you.
-    - If you close an annual contract with monthly payments, you will still get recognized for the full commission amount, but the actual payout of your commission will be quarterly.
-  - We want you to ensure the customer has paid, and we don't want AEs to throw invoice chasing to a finance person
-    -  This means you should make friends with the finance person on the customer's side, and ensure all payment paperwork is in order to allow for the customer to pay.
-  - For monthly customers, commission is only paid after all 3 invoices have been paid
-    - Commission is still paid out quarterly even if the customer pays monthly
-  - Overdue invoices from the current quarter will be excluded from commission payouts, with the cutoff being the 14th of the calendar month following the quarter (January, April, July, and October)
-  - Invoices that are issued in the final period of the current quarter, but are due at a date beyond the 14th of the calendar month following the quarter (January, April, July, and October), will be paid on the good faith assumption that the customer will pay on time and you will assist in securing timely payment. If the invoice becomes overdue in a future quarter, it will be subject to a clawback in that quarter. 
-  - If we have to give a customer a big refund, we’ll deal with your commission on a case by case basis or via clawback.
-  - Commission payments are made at the end of January, April, July, and October. Fraser will send you an email that breaks down your commission and explains how you did.
-- In your first 3 months, you'll be paid 100% OTE fixed. You can find more info on how quotas work in your ramp period [in the new hire FAQ](/handbook/growth/sales/new-hire-onboarding#new-hire-frequently-asked-questions)
-
-### Performance expectations for Technical Account Executives
-
-There are [cultural](/handbook/company/culture) and [role-based expectations](/handbook/growth/sales/overview) for TAEs at PostHog. We also now have enough data to define minimum performance exceptions for TAEs relative to the annual commmission targets. 
-
-After your ramp period, you should expect to have a performance conversation with your lead and Ben if:
-
-- You are under 80% of your annual quota, _and_
-- You have finished two consecutive quarters under 70% of your quarterly target
-
-These standards are likely to change as the TAE role evolves. Any changes will be reflected in the handbook. We will always consider any relevant context when having these conversations with you - quota does not exist in a vacuum!
-
 
 ## How commission works - Technical Account Managers
 
@@ -202,27 +128,6 @@ In this example, this customer increases your attainment towards your Q2 quota b
 
 > We have a bunch of accounts where they are declining for reasons that have nothing to do with a TAM’s actions. We also have a bunch where they are growing in the same way. These even each other out in the bigger picture of hundreds of accounts, if anything in favor of the latter.  If they fit the criteria for having a TAM assigned, you should be prepared to continue to manage both types of customers in your book, as churn prevention is a key part of the TAM role too.
 
-## How commission works - BDRs
-
-**General principles**
-
-- When thinking about commission, we want to particularly incentivize:
-  - Generating high quality leads
-  - Getting people in who fit our ICP, ie. are easier for us to sell to
-- We aim for a 70/30 split between base/commission when calculating OTE by default.
-
-In your first 3 months, you'll be paid 100% OTE fixed. You can find more info on how quotas work in your ramp period [in the new hire FAQ](/handbook/growth/sales/new-hire-onboarding#new-hire-frequently-asked-questions)
-
-> This plan will almost certainly change as we scale up the size and complexity of our sales machine! This is completely normal - we will ensure everyone is always treated fairly, but you need to be comfortable with this. For now we are generally trying to optimize for something straightforward here so it’s easy for PostHog (and you) to calculate commission. Fraser runs this process, so if you have any questions, ask him in the first instance.
-
-**Variables**
-
-- Quota is based on the number of sales qualified opportunities you generate - basically when an account moves into the Opportunity stage in SFDC
-- Your quota is set for the year and then divided by 4 - this means you don't have to cram meetings into the end of a quarter.
-- Commission is _uncapped_ and paid out on a sliding scale based on the % of your quota you hit. Hit 100% quota, get 100% of commission. 0% for 0%. And 200% for 200%.
-- Commission is paid out quarterly.
-- There is no guaranteed commission during ramp, as the ramp period for BDRs is much shorter than for TAMs/TAEs. 
-
 ## Team lead quota
 
 From your first full quarter as a team lead in Sales, you will move to a 60% base 40% commission split in reflection of your new player/coach role.  This will be based on your team's quota attainment although you will still have your own individual quota target.
@@ -274,20 +179,10 @@ You will run into questions that you don't know the answer to from time to time 
 
 ## Working with customers in Slack
 
-Most of our customers use Slack, and it's a great way for us to be responsive to them. Everyone has the permission in Slack to create a Connect channel with a customer, and you should do this as early as possible in your relationship with them.
+Most of our customers use Slack, and it's a great way for us to be responsive to them. Qualifying customers and prospects can get a [shared Slack channel](/handbook/growth/sales/slack-channels), and you should set one up as early as it makes sense in your relationship with them.
 
-When you've created the channel you should also add Pylon, which is used to sync Slack conversations with Zendesk so that our Support and Engineering teams can work on customer issues in a familiar context.
+We share channels via [Slack Connect](https://slack.com/resources/using-slack/getting-started-with-slack-connect) and add SupportHog so that both PostHog and the customer can raise support tickets directly from a Slack thread — react with the :ticket: emoji or mention `@SupportHog`. This syncs the conversation into Zendesk so our Support and Engineering teams can work on customer issues in a familiar context.
 
-To add Pylon to your customer channel:
-
-1. In the Slack desktop app, click the channel name.
-2. On the Settings tab, click Add apps.
-3. Type Pylon and click Add.
-4. In the popup that appears in the Slack channel, select Customer Channel.
-5. Add yourself as the Account Owner.
-6. Click Enable.
-7. Add Tim, Simon, Ben, and Abigail to the channel.
-
-Once enabled, you can add the :ticket: emoji to a Slack thread to create a new Ticket in Zendesk.  Customers can also do this.  Make sure that a Group and Severity are selected or the ticket won't be routed properly.
+See [Shared Slack channels with customers](/handbook/growth/sales/slack-channels) for the full setup steps, including channel naming, who to invite, and how to support customers who use MS Teams instead.
 
 > It's your job to ensure your customer issues are resolved, make sure you follow up with Support and Engineering if you feel like the issue isn't getting the right level of attention.

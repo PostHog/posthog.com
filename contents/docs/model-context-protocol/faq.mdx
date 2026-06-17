@@ -43,7 +43,7 @@ The MCP server acts as a proxy to your PostHog instance and is automatically rou
 
 ### Is it safe to let an agent write to my project?
 
-Be mindful of prompt injection – LLMs can be tricked into following untrusted commands, so always review tool calls before executing them. You can also restrict the session to specific tools or feature categories using [tool filtering](#filtering-available-tools), and pin the agent to a specific organization or project to limit blast radius.
+Be mindful of prompt injection – LLMs can be tricked into following untrusted commands, so always review tool calls before executing them. You can also restrict the session to [read-only tools](#restricting-to-read-only-tools), limit it to specific tools or feature categories using [tool filtering](#filtering-available-tools), and pin the agent to a specific organization or project to limit blast radius.
 
 ## Advanced configuration
 
@@ -99,6 +99,55 @@ Example for Cursor (add to `.cursor/mcp.json`):
         "Authorization": "Bearer phx_your_api_key_here",
         "x-posthog-organization-id": "your_org_id",
         "x-posthog-project-id": "your_project_id"
+      }
+    }
+  }
+}
+```
+
+### Choosing a tool mode
+
+The MCP server exposes its tools in one of two modes:
+
+- **CLI mode** ships a single, token-optimized `exec` tool. Instead of loading every tool's schema upfront, the agent uses `exec` to list, search, inspect, and call PostHog tools on demand. Because the server has hundreds of tools, this saves a large amount of context, so it's the mode we typically recommend. On clients that support MCP apps, CLI mode also ships a `render-ui` tool that renders interactive visualizations on demand.
+- **Tools mode** registers every PostHog tool individually – the standard MCP behavior. Each tool's name and schema is loaded into context when the agent connects.
+
+The mode is auto-detected from your client. The majority of clients default to CLI mode – including Claude, Claude Code, Cowork, and Codex – while a few, such as Cursor, default to tools mode because they handle large tool lists natively.
+
+You can override the default with a header or query parameter:
+
+- **Header:** `x-posthog-mcp-mode`
+- **Query parameter:** `mode`
+
+Both accept `cli` or `tools`. The header takes precedence if you set both.
+
+```text
+https://mcp.posthog.com/mcp?mode=cli
+```
+
+### Restricting to read-only tools
+
+To stop the agent from writing to your project, you can restrict the session to read-only tools using a header or query parameter. Tools that create, update, or delete data are excluded from the available tool list, leaving only the ones that read.
+
+- **Header:** `x-posthog-read-only`
+- **Query parameter:** `readonly`
+
+Both accept `true` or `1`. The header takes precedence if you set both.
+
+```text
+https://mcp.posthog.com/mcp?readonly=true
+```
+
+Example for Cursor (add to `.cursor/mcp.json`):
+
+```json
+{
+  "mcpServers": {
+    "posthog": {
+      "url": "https://mcp.posthog.com/mcp",
+      "headers": {
+        "Authorization": "Bearer phx_your_api_key_here",
+        "x-posthog-read-only": "true"
       }
     }
   }

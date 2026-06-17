@@ -165,6 +165,10 @@ PostHog Rails automatically applies request-scoped context to events captured du
 
 When `use_tracing_headers` is enabled, PostHog tracing headers (`X-PostHog-Distinct-Id` and `X-PostHog-Session-Id`) are also used as default `distinct_id` and `$session_id` values. Explicit `distinct_id` and properties passed to `PostHog.capture` always take precedence.
 
+If you're using [PostHog JS](/docs/libraries/js) on the frontend, configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your Rails backend hostname so browser requests include the session and distinct ID headers.
+
+Tracing headers are client-controlled analytics context, not authentication or authorization. Pass an authenticated `distinct_id` explicitly for security-sensitive server-side decisions.
+
 Disable tracing header identity/session capture if you do not want client-supplied tracing headers used for server-side events. Request metadata is still captured:
 
 ```ruby

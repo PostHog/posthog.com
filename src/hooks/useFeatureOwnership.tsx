@@ -138,7 +138,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'data-colors-themes': {
         feature: 'Data colors & themes',
-        owner: ['analytics-platform'],
+        owner: ['platform-ux'],
         label: 'feature/colors-and-themes',
     },
     'data-management': {

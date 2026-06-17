@@ -22,6 +22,14 @@ To direct the agent, the wizard uses the PostHog [context mill repository](https
 
 The context mill repo generates a zip file and manifest that determines the structure of the skills packages.
 
+### Commands and skills
+
+The wizard's command surface comes from context mill, not hardcoded in the wizard. A skill becomes a command when its `config.yaml` declares a `cli:` block with `role: command` – so `wizard audit events` *is* the `audit-events` skill, promoted to a command. A skill without that block stays reachable only via `wizard skill <name>`. Same machinery, two surfaces — which is why `wizard audit <subcommand>` chooses an audit area rather than taking a skill name (the `[skill]` label in `wizard audit --help` is an internal positional name, not a prompt for a skill).
+
+Because these entries are read from the published manifest at runtime, adding or renaming a skill-backed command is a **context mill release – no wizard release required**. Family parents (like `audit`) and their picker behavior live in the wizard; their subcommands resolve at runtime.
+
+The full `cli:` block schema (roles, `parentCommand`, the `default` leaf, naming rules) lives in [context mill's CONTRIBUTING.md](https://github.com/PostHog/context-mill/blob/main/CONTRIBUTING.md); the wizard side (command registration, families, aliases) is documented in the wizard repo's [AGENTS.md](https://github.com/PostHog/wizard/blob/main/AGENTS.md).
+
 ## Developing the wizard
 
 Use the [wizard workbench](https://github.com/PostHog/wizard-workbench) for local, end-to-end development of the wizard. The workbench can run the full wizard stack in local development mode, with hot reload where supported.

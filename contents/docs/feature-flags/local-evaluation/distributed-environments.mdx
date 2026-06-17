@@ -13,13 +13,15 @@ import LocalEvalDistributedEnvIntro from "./_snippets/distributed-environments-i
 import LocalEvalDistributedEnvCommonPatterns from "./_snippets/distributed-environments-common-patterns.mdx"
 import LocalEvalDistributedEnvNodeContent from "./_snippets/distributed-environments-node.mdx"
 import LocalEvalDistributedEnvPythonContent from "./_snippets/distributed-environments-python.mdx"
+import LocalEvalDistributedEnvJvmContent from "./_snippets/distributed-environments-jvm.mdx"
 
 <LocalEvalDistributedEnvIntro />
 
-<Tab.Group tabs={['Node.js', 'Python']}>
+<Tab.Group tabs={['Node.js', 'Python', 'JVM (Java)']}>
     <Tab.List>
         <Tab>Node.js</Tab>
         <Tab>Python</Tab>
+        <Tab>JVM (Java)</Tab>
     </Tab.List>
     <Tab.Panels>
         <Tab.Panel>
@@ -27,6 +29,9 @@ import LocalEvalDistributedEnvPythonContent from "./_snippets/distributed-enviro
         </Tab.Panel>
         <Tab.Panel>
             <LocalEvalDistributedEnvPythonContent />
+        </Tab.Panel>
+        <Tab.Panel>
+            <LocalEvalDistributedEnvJvmContent />
         </Tab.Panel>
     </Tab.Panels>
 </Tab.Group>
