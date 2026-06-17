@@ -1,5 +1,5 @@
 ---
-title: Social media metrics are all bad
+title: All social media metrics are bad
 date: 2026-06-09
 author:
   - liam-graham
