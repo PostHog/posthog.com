@@ -6,7 +6,6 @@ import { useWindow } from '../../../../context/Window'
 import { useUser } from '../../../../hooks/useUser'
 import Wizard from 'components/Wizard'
 import { navigate } from 'gatsby'
-import { SQUEAK_HOST } from 'lib/strapi'
 
 import SecurityHog from '../../../../images/security-hog.png'
 import { IconSpinner } from '@posthog/icons'
@@ -83,7 +82,7 @@ const ResetPasswordForm: React.FC = () => {
                     passwordConfirmation: values.password,
                 }
 
-                const response = await fetch(`${SQUEAK_HOST}/api/auth/reset-password`, {
+                const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/auth/reset-password`, {
                     method: 'POST',
                     body: JSON.stringify(body),
                     headers: {
