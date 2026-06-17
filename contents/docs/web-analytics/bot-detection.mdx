@@ -48,6 +48,34 @@ Each function takes a user agent string and returns its classification. Pass the
 
 `isLikelyBot` is named "likely" because detection is based on user agent heuristics – it can't confirm with certainty that a request is automated.
 
+## Traffic types
+
+`getTrafficType` sorts every request into one of four traffic types:
+
+| Traffic type | Description | Examples |
+| --- | --- | --- |
+| `Regular` | Normal human visitors | Chrome, Safari, Firefox |
+| `AI Agent` | AI crawlers, search bots, and assistants | GPTBot, ClaudeBot, PerplexityBot |
+| `Bot` | Traditional crawlers and monitoring | Googlebot, Bingbot, AhrefsBot |
+| `Automation` | HTTP clients, headless browsers, and requests with no user agent | curl, Puppeteer, HeadlessChrome |
+
+## Bot categories
+
+`getTrafficCategory` and `getBotType` return a finer-grained category within each traffic type:
+
+| Category | Traffic type | Description | Examples |
+| --- | --- | --- | --- |
+| `ai_crawler` | AI Agent | Training data collection | GPTBot, ClaudeBot, Google-Extended |
+| `ai_search` | AI Agent | AI-powered search results | OAI-SearchBot, Claude-SearchBot, Applebot |
+| `ai_assistant` | AI Agent | Real-time user-facing AI | ChatGPT-User, Claude-User, Perplexity-User |
+| `search_crawler` | Bot | Traditional search engines | Googlebot, Bingbot, Baidu |
+| `seo_crawler` | Bot | SEO analysis tools | AhrefsBot, SemrushBot, Majestic |
+| `social_crawler` | Bot | Social media preview crawlers | Facebook, Twitter, LinkedIn, Slack |
+| `monitoring` | Bot | Uptime and health monitoring | Pingdom, UptimeRobot, Datadog |
+| `http_client` | Automation | HTTP client libraries | curl, Wget, Python requests, axios |
+| `headless_browser` | Automation | Automated browsers | HeadlessChrome, Puppeteer, Playwright |
+| `no_user_agent` | Automation | Empty or missing user agent | – |
+
 ## Examples
 
 Break down pageviews by traffic type:
@@ -112,3 +140,10 @@ ORDER BY events DESC
 ## How classification works
 
 Classification matches the user agent against a maintained list of known bot, crawler, and automation patterns. The list is open source and pull requests are welcome – you can find it in the [PostHog repository](https://github.com/PostHog/posthog/blob/master/products/web_analytics/backend/hogql_queries/bot_definitions.py).
+
+## Limitations
+
+Detection relies entirely on the user agent string, so two cases are worth keeping in mind:
+
+- **No user agent.** Requests with an empty or missing user agent (server-to-server calls, misconfigured SDKs) can't be classified from the user agent alone. They're treated as `Automation` with the `no_user_agent` category, so `isLikelyBot` returns `true` for them.
+- **Spoofing.** Some bots disguise themselves with regular browser user agents, and some legitimate tools use bot-like ones. User agent detection is a best-effort heuristic, not a guarantee – which is why the boolean function is named `isLikelyBot`.
