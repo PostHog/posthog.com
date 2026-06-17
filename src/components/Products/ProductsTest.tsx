@@ -74,11 +74,7 @@ const sections = [
                 columns: [
                     ['web_analytics', 'product_analytics', 'trends'],
                     ['funnels', 'user_paths', 'lifecycle', 'heatmaps'],
-                    [
-                        { handle: 'llm_traces', label: 'AI Observability' },
-                        { handle: 'llm_evals', label: 'AI Evals' },
-                        'activity',
-                    ],
+                    ['llm_traces', 'llm_evals', 'activity'],
                 ],
             },
             {
@@ -257,7 +253,7 @@ const AIDemos = () => {
     )
 }
 
-const ProductRow = ({ product, label }: { product: any; label?: string }) => {
+const ProductRow = ({ product }: { product: any }) => {
     const isWIP = product.status === 'WIP'
 
     const handleClick = (e: React.MouseEvent) => {
@@ -282,7 +278,7 @@ const ProductRow = ({ product, label }: { product: any; label?: string }) => {
                     isWIP ? '' : 'group-hover:underline underline-offset-2'
                 }`}
             >
-                {label || product.name}
+                {product.name}
             </span>
             {product.status && (
                 <span className={`size-1.5 shrink-0 rounded-full ${statusDotColor[product.status] || 'bg-muted'}`} />
@@ -436,27 +432,11 @@ export default function ProductsTest(): JSX.Element {
                                                 >
                                                     {group.columns.map((col: string[], ci: number) => (
                                                         <div key={ci} className="space-y-1.5">
-                                                            {col.map(
-                                                                (
-                                                                    entry: string | { handle: string; label?: string }
-                                                                ) => {
-                                                                    const handle =
-                                                                        typeof entry === 'string' ? entry : entry.handle
-                                                                    const label =
-                                                                        typeof entry === 'string'
-                                                                            ? undefined
-                                                                            : entry.label
-                                                                    const product = productsByHandle[handle]
-                                                                    if (!product) return null
-                                                                    return (
-                                                                        <ProductRow
-                                                                            key={handle}
-                                                                            product={product}
-                                                                            label={label}
-                                                                        />
-                                                                    )
-                                                                }
-                                                            )}
+                                                            {col.map((handle: string) => {
+                                                                const product = productsByHandle[handle]
+                                                                if (!product) return null
+                                                                return <ProductRow key={handle} product={product} />
+                                                            })}
                                                         </div>
                                                     ))}
                                                 </div>
