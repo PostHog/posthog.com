@@ -41,7 +41,7 @@ Once `$http_log` events are flowing, the functions and virtual properties below 
 
 ## Classification functions
 
-Each function takes a user agent string and returns its classification. Pass the raw user agent from the event, usually `properties.$raw_user_agent`.
+Each function takes a user agent string and returns its classification. PostHog stores the user agent as `$raw_user_agent` (server-side capture and `$http_log` events) or `$user_agent` (the JavaScript SDK), so pass `coalesce(properties.$raw_user_agent, properties.$user_agent)` to cover both. To skip the fallback, use the [virtual properties](#virtual-properties) below, which read the user agent for you.
 
 | Function | Returns | Example |
 | --- | --- | --- |
@@ -88,7 +88,7 @@ Break down pageviews by traffic type:
 
 ```sql
 SELECT
-    getTrafficType(properties.$raw_user_agent) AS traffic_type,
+    getTrafficType(coalesce(properties.$raw_user_agent, properties.$user_agent)) AS traffic_type,
     count() AS events
 FROM events
 WHERE event = '$pageview'
@@ -102,19 +102,19 @@ Count human pageviews by excluding bots:
 SELECT count() AS human_pageviews
 FROM events
 WHERE event = '$pageview'
-    AND NOT isLikelyBot(properties.$raw_user_agent)
+    AND NOT isLikelyBot(coalesce(properties.$raw_user_agent, properties.$user_agent))
 ```
 
 Find which bots hit your site most often:
 
 ```sql
 SELECT
-    getBotName(properties.$raw_user_agent) AS bot,
-    getBotOperator(properties.$raw_user_agent) AS operator,
+    getBotName(coalesce(properties.$raw_user_agent, properties.$user_agent)) AS bot,
+    getBotOperator(coalesce(properties.$raw_user_agent, properties.$user_agent)) AS operator,
     count() AS hits
 FROM events
 WHERE event = '$pageview'
-    AND isLikelyBot(properties.$raw_user_agent)
+    AND isLikelyBot(coalesce(properties.$raw_user_agent, properties.$user_agent))
 GROUP BY bot, operator
 ORDER BY hits DESC
 ```
