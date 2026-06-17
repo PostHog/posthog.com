@@ -69,6 +69,17 @@ To fix this:
 3. Upload the new Google Cloud JSON key file.
 4. Re-run the sync.
 
+
+## Why is my BigQuery sync failing with "Billing has not been enabled"?
+
+If your BigQuery sync fails with a message like "Billing has not been enabled for this project," it means your Google Cloud project is running in BigQuery sandbox mode, which doesn't allow the query jobs PostHog needs to import data. This is a non-retryable error – PostHog stops the sync instead of retrying indefinitely.
+
+To fix this:
+
+1. Go to the [Google Cloud billing console](https://console.cloud.google.com/billing) and enable billing for your project.
+2. In PostHog, go to [**Data pipelines > Sources**](https://app.posthog.com/data-management/sources) and select your BigQuery source.
+3. Re-run the sync.
+
 ## Why is my Shopify sync failing with "Payment Required"?
 
 If your Shopify sync fails with a `402 Client Error: Payment Required` message, it means your Shopify store is frozen due to an unpaid bill. Shopify's Admin API returns this error when the store owner has an outstanding balance.

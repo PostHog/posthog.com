@@ -16,6 +16,7 @@ You can connect your BigQuery tables to PostHog by configuring it as a source. Y
 - [A Google Cloud Service Account](https://cloud.google.com/iam/docs/service-account-overview) with the permissions described below
 - Google Cloud JSON Key file for that account's Dataset ID
 - (Optional) A Dataset ID for temporary tables
+- [Billing enabled](https://console.cloud.google.com/billing) on your Google Cloud project (BigQuery sandbox mode is not supported)
 
 ## Configuring BigQuery
 
@@ -33,18 +34,18 @@ To securely connect your BigQuery account to PostHog, create a dedicated service
 - For simplicity, you can assign the **BigQuery Data Editor**, **BigQuery Job User**, and **BigQuery Read Session User** roles if it meets your security requirements.
 - Alternatively, create a custom role that includes only these permissions:
 
-    ```
-    bigquery.readsessions.create
-    bigquery.readsessions.getData
-    bigquery.datasets.get
-    bigquery.jobs.create
-    bigquery.tables.get
-    bigquery.tables.list
-    bigquery.tables.getData
-    bigquery.tables.create
-    bigquery.tables.updateData
-    bigquery.tables.delete
-    ```
+  ```
+  bigquery.readsessions.create
+  bigquery.readsessions.getData
+  bigquery.datasets.get
+  bigquery.jobs.create
+  bigquery.tables.get
+  bigquery.tables.list
+  bigquery.tables.getData
+  bigquery.tables.create
+  bigquery.tables.updateData
+  bigquery.tables.delete
+  ```
 
 3. **Generate and download the service account key:**
 
