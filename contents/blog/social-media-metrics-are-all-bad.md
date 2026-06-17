@@ -22,7 +22,7 @@ Do not fret: what they're saying may still be true. Success metrics may be up. H
 
 You see, the problem with social media metrics is that they're all bad. To show you how bad, let's go through them one by one.
 
-## Impressions, reach, and views
+### Impressions, reach, and views
 
 I may have already upset some of my social media brethren by lumping these all in the same category. These all have slightly different definitions: impressions counts repeat views, reach is unique accounts, views usually require a unit of time spent looking at content.
 
@@ -38,7 +38,7 @@ And when you track an account's impressions/reach/views in aggregate, you're rem
 
 Unless you're completely changing the sort of content you're posting from week to week or month to month, you're gonna have a data set that doesn't give you any context for how you should change what you're doing.
 
-## Engagements
+### Engagements
 
 Engagements are the best of the bad metrics.
 
@@ -48,7 +48,7 @@ Are they super pissed? Are they loving it? Are they just tagging their friend? I
 
 Engagements as a metric tells you none of that. One post that had your company getting absolutely killed can make it seem as if your metrics are up in a positive way. I can't think of another metric in any business case where what looks good can actually be completely detrimental.
 
-## Followers
+### Followers
 
 Now this is some BS.
 
@@ -60,7 +60,7 @@ Heck, I can just [buy 'em outright](https://docs.google.com/spreadsheets/d/e/2PA
 
 Following should be built gradually, not at any particular rate of speed. It should be a byproduct of your content being engaging, and people choosing to follow you to see more of it.
 
-## Engagement rate
+### Engagement rate
 
 "But Liam", you say: "Surely engagement rate is worth looking at. It's the best way to measure if people are actually looking at what we're putting out!"
 
