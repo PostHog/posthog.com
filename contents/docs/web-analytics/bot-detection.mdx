@@ -6,6 +6,33 @@ PostHog classifies traffic by user agent so you can tell humans apart from bots,
 
 This is different from the [client-side bot blocking](/docs/web-analytics/troubleshooting#do-stats-include-bots-and-crawlers) in the PostHog JavaScript SDK, which stops detected bots from sending events in the first place. The functions here classify traffic that has already been captured, so you can include, exclude, or break down by traffic type at query time without losing the underlying data.
 
+## Capturing server-side traffic with `$http_log`
+
+Most bots don't run JavaScript, so the PostHog JavaScript SDK never fires a `$pageview` for them. To see this traffic, forward your HTTP access logs to PostHog as `$http_log` events – log entries from your web server, CDN, or edge network. They carry the raw user agent, so the functions below classify them the same way they classify `$pageview` and `$screen` events.
+
+Set `$raw_user_agent` on each event, plus `$host`, `$current_url`, `$pathname`, and `status_code` for richer breakdowns. There are a few ways to send them:
+
+- **Log drain source** – in PostHog, go to **Data pipeline > Sources** and add the **Vercel logs** source. PostHog generates an endpoint, registers it with your project, and captures each log line as a `$http_log` event with the user agent populated.
+- **Edge worker** – intercept requests at your CDN or edge (for example, a [Cloudflare Worker](/docs/libraries/cloudflare-workers)) and send a `$http_log` event to the [capture API](/docs/api/capture). This works on any plan and lets you control exactly what's logged.
+- **Capture API directly** – send `$http_log` events from any web server or reverse proxy:
+
+```json
+{
+    "api_key": "<ph_project_token>",
+    "event": "$http_log",
+    "distinct_id": "server-log",
+    "properties": {
+        "$raw_user_agent": "Mozilla/5.0 (compatible; GPTBot/1.2; +https://openai.com/gptbot)",
+        "$current_url": "https://yoursite.com/blog/hello-world",
+        "$pathname": "/blog/hello-world",
+        "status_code": 200,
+        "method": "GET"
+    }
+}
+```
+
+Once `$http_log` events are flowing, the functions and virtual properties below classify them alongside your `$pageview` and `$screen` events.
+
 ## Functions
 
 Each function takes a user agent string and returns its classification. Pass the raw user agent from the event, usually `properties.$raw_user_agent`.
