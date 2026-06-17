@@ -36,8 +36,17 @@ export const loadMapbox = (): Promise<any> => {
     if (typeof window === 'undefined') {
         return Promise.resolve(null)
     }
-    mapboxPromise ??= Promise.all([import('mapbox-gl'), import('mapbox-gl/dist/mapbox-gl.css')]).then(([module]) => {
+    mapboxPromise ??= import('mapbox-gl').then((module) => {
         mapboxModule = (module as any).default ?? module
+        // Inject the mapbox-gl stylesheet via a <link> tag so marker/popup
+        // positioning works correctly. Dynamic import() of .css files is
+        // unreliable under Gatsby's webpack config.
+        if (!document.querySelector('link[href*="mapbox-gl"]')) {
+            const link = document.createElement('link')
+            link.rel = 'stylesheet'
+            link.href = 'https://api.mapbox.com/mapbox-gl-js/v' + mapboxModule.version + '/mapbox-gl.css'
+            document.head.appendChild(link)
+        }
         return mapboxModule
     })
     return mapboxPromise
