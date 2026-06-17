@@ -11,7 +11,6 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import { SingleCodeBlock } from 'components/CodeBlock'
 import WizardCTA from 'components/WizardCTA'
 import usePlatformList from 'hooks/docs/usePlatformList'
-import { IconGraph, IconWarning, IconRewindPlay } from '@posthog/icons'
 import LovableLogo from 'components/CustomerLogos/LovableLogo'
 import PostHogLogo from 'components/CustomerLogos/PostHogLogo'
 
@@ -407,54 +406,58 @@ export default function AIObservabilityLanding(): JSX.Element {
                         </QuestLogItem>
 
                         <QuestLogItem
-                            title="AI data meets your product data"
-                            subtitle="Analytics, error tracking, and session replay — all connected"
-                            icon="IconLogomark"
+                            title="Close the loop with PostHog Code"
+                            subtitle="Most AI tools stop at the PR. PostHog doesn't."
+                            icon="IconRefresh"
                         >
                             <p>
-                                AI Observability events are standard PostHog events. The whole platform — product
-                                analytics, error tracking, session replay — works with your LLM data out of the box.
+                                Most AI coding tools understand your codebase. PostHog Code understands your product. It
+                                finds the work itself, ships a fix, then checks whether the fix actually worked, often
+                                before you even know there's a problem.
                             </p>
 
-                            <h3>
-                                <IconGraph className="text-blue w-6 -mt-1 inline-block" /> Product analytics
-                            </h3>
-                            <ProductScreenshot
-                                imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/llma_insights_da40edc407.png"
-                                imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/llma_insights_dark_558f8f2cd8.png"
-                                alt="AI Observability analytics"
-                                classes="rounded"
-                                padding={false}
-                                zoom={undefined}
-                            />
+                            <div className="@lg:float-right @lg:w-[240px] @lg:ml-6 @lg:mb-3 w-full max-w-[240px] mx-auto my-4">
+                                <CloudinaryImage
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Ring_862678869f.png"
+                                    alt="The PostHog Code loop: signals from your apps become a fix that ships instrumented, then PostHog measures the result and it becomes the next signal"
+                                    className="w-full"
+                                />
+                            </div>
 
-                            <h3>
-                                <IconWarning className="text-orange w-6 -mt-1 inline-block" /> Error tracking
-                            </h3>
-                            <ProductScreenshot
-                                imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/llma_error_4edcb7d7a1.png"
-                                imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/llma_error_dark_a298d3f2b7.png"
-                                alt="AI Observability error tracking"
-                                classes="rounded"
-                                padding={false}
-                                zoom={undefined}
-                            />
+                            <p>
+                                <strong>It finds the work.</strong> AI observability, error tracking, replay vision and
+                                more feed signals to PostHog Code. It picks what matters by impact and severity, before
+                                you've even noticed.
+                            </p>
 
-                            <h3>
-                                <IconRewindPlay className="text-yellow w-6 -mt-1 inline-block" /> Session replay
-                            </h3>
-                            <ProductScreenshot
-                                imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/llma_session_replay_95b9268668.png"
-                                imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/llma_session_replay_dark_767332d926.png"
-                                alt="AI Observability session replay"
-                                classes="rounded"
-                                padding={false}
-                                zoom={undefined}
-                            />
+                            <p>
+                                <strong>It ships the fix.</strong> It opens a draft PR you review and merge, with the
+                                right instrumentation built in: events, feature flags, and staged rollout, all wired up
+                                as it writes the code.
+                            </p>
 
-                            <div className="mt-4">
-                                <CallToAction type="primary" size="md" to="https://app.posthog.com/signup">
-                                    Get started free
+                            <p>
+                                <strong>It measures the result.</strong> Because the fix ships instrumented, PostHog
+                                Code can watch it in production and feed what it learns back in as the next signal. And
+                                the cycle repeats, smarter each time.
+                            </p>
+
+                            <p>
+                                <strong>That's self-driving.</strong> Your product constantly improves itself, with you
+                                at the merge button and it's coming soon.
+                            </p>
+
+                            <p className="text-secondary text-sm">
+                                Join the waitlist to be first in line, and join our Discord to chat with the developers
+                                who are already using it.
+                            </p>
+
+                            <div className="flex flex-wrap gap-2 mt-4 clear-both">
+                                <CallToAction type="primary" size="md" to="/code" state={{ newWindow: true }}>
+                                    Join the waitlist
+                                </CallToAction>
+                                <CallToAction type="secondary" size="md" to="https://discord.com/invite/E9xV2WnR98">
+                                    Join the Discord
                                 </CallToAction>
                             </div>
                         </QuestLogItem>
