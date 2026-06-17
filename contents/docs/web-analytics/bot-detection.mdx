@@ -137,6 +137,18 @@ GROUP BY traffic_type
 ORDER BY events DESC
 ```
 
+## Use in product analytics
+
+You don't need to write SQL to break traffic down. As long as your events carry a user agent – `$raw_user_agent` (set by server-side SDKs and `$http_log` events) or `$user_agent` (set by the JavaScript SDK) – the virtual properties work as breakdowns and filters in any [product analytics](/docs/product-analytics) insight: trends, funnels, retention, paths, and more.
+
+For example:
+
+- **Exclude bots from an insight** – add a filter where `$virt_is_bot` equals `false`.
+- **Break down traffic by type** – set the breakdown to `$virt_traffic_type` to split a trend into Regular, AI Agent, Bot, and Automation.
+- **See which crawlers hit a page** – filter to `$virt_is_bot` is `true` and break down by `$virt_bot_name`.
+
+Because the classification reads the raw user agent, this works for any event that carries one – including server-side and `$http_log` traffic – using the standard insight builder.
+
 ## How classification works
 
 Classification matches the user agent against a maintained list of known bot, crawler, and automation patterns. The list is open source and pull requests are welcome – you can find it in the [PostHog repository](https://github.com/PostHog/posthog/blob/master/products/web_analytics/backend/hogql_queries/bot_definitions.py).
