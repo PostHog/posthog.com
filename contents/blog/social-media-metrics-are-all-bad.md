@@ -7,18 +7,19 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/social_article_d1fa9195ee.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/social_article_d1fa9195ee.png
 featuredImageType: full
 category: Blog
 tags:
   - Marketing
 ---
 
-Picture this: your company's social media team excitedly informs you that stonks are up this month. You can see the screenshots: it's green. Holy smokes. We are killing it. Social media has been solved.
+Picture this: your company's social media team excitedly informs you that stonks are up this month. You can see the screenshots. They're green. Holy smokes. We are killing it. Social media has been solved.
 
 There is a non-zero chance they are taking you for a total sucker.
 
-Do not fret: what they're saying may still be true. Success metrics may be up. However, basing your judgment of social media success on numbers is not helping your business. In a lot of cases, it's doing the opposite.
+Don't fret. What they're saying may still be true. Success metrics may be up. However, basing your judgment of social media success on numbers is not helping your business. In a lot of cases, it's doing the opposite.
 
 You see, the problem with social media metrics is that they're all bad. To show you how bad, let's go through them one by one.
 
@@ -28,11 +29,11 @@ I may have already upset some of my social media brethren by lumping these all i
 
 They all ostensibly track the same thing: how "viral" a post is.
 
-The main problem with these metrics is that, for a single piece of content, they're no better at determining how "good" a piece of content is than what you can get by eyeballing "how it's doing".
+The main problem with these metrics is that, for a single piece of content, they're no better at determining how "good" a piece of content is than eyeballing "how it's doing".
 
 Does it have more likes and shares than usual? Are people commenting in earnest? These are things you can see and make quick content strategy pivots with much more easily than digging into impression numbers.
 
-At very least, likes, comments, and shares will tell you how people are interacting with your content, not just how many screens someone might have seen it on before swiping past, uninterested.
+At the very least, likes, comments, and shares will tell you how people are interacting with your content, not just how many screens someone might have seen it on before swiping past, uninterested.
 
 And when you track an account's impressions/reach/views in aggregate, you're removing all context around what individual pieces did well.
 
@@ -42,7 +43,7 @@ Unless you're completely changing the sort of content you're posting from week t
 
 Engagements are the best of the bad metrics.
 
-Why is it still dumb to track? Because it's not telling you what kind of way people are engaging with your content.
+Why is it still dumb to track? Because it's not telling you _how_ people engage with your content.
 
 Are they super pissed? Are they loving it? Are they just tagging their friend? Is that because they like the post, or because they're [trying to dunk on you and say mean things about your product?](https://x.com/EASPORTS/status/2024974248201142670)
 
@@ -58,13 +59,13 @@ At the same time, it's the most fudgeable performance metric possible. I can cyn
 
 Heck, I can just [buy 'em outright](https://docs.google.com/spreadsheets/d/e/2PACX-1vTo1XGn5gnsjey19COIE-YwSWQ6c5RwbAyAveuvox4rJJP7ibgbOCbT9zfxt9iVEoli1iaHFVEo-AW7/pubhtml?gid=0&single=true) if I wanted to.
 
-Following should be built gradually, not at any particular rate of speed. It should be a byproduct of your content being engaging, and people choosing to follow you to see more of it.
+Following should be built gradually, not at any particular speed. It should be a byproduct of your content being engaging and people choosing to follow you to see more of it.
 
 ### Engagement rate
 
-"But Liam", you say: "Surely engagement rate is worth looking at. It's the best way to measure if people are actually looking at what we're putting out!"
+"But Liam," you say, "surely engagement rate is worth looking at. It's the best way to measure if people are actually looking at what we're putting out!"
 
-No it's not. Because engagement rate is engagements divided by reach (or followers: the fact that there is not one standard way to measure this is indication enough that it's not reliable), one of those metrics being juiced throws everything off.
+No it's not. Because engagement rate is engagements divided by reach (or followers; the fact that there is not one standard way to measure this is indication enough that it's not reliable), one of those metrics being juiced throws everything off.
 
 Have a post that's got a ton of impressions, but not much engagement? You still reached a ton of people. That can still be an objective success. Yet, your engagement rate will dip.
 
@@ -76,7 +77,7 @@ What about one that's got a whack of engagements but hasn't reached many people?
 
 ## What should you focus on, then?
 
-Focus on consistently creating content that appeals to your ideal customer profile (ICP).
+Focus on consistently creating content that appeals to your [ideal customer profile (ICP)](/newsletter/ideal-customer-profile-framework).
 
 I'm PostHog's new social media person. PostHog compensates me obscenely to post stupid shit like the meme below because it's appealing to our ICP: engineers at early-stage startups.
 
@@ -84,7 +85,7 @@ I'm PostHog's new social media person. PostHog compensates me obscenely to post 
 
 These folks are meme-literate and have short attention spans because they're smart, high-functioning people busy with more important things.
 
-What we post has to cut through the stuff on their feeds that they watch on their mental breaks: cat videos, thirst trap videos, and fight videos.
+What we post has to cut through the stuff on their feeds that they watch on their mental breaks: cat, thirst trap, and fight videos.
 
 I don't own a cat, I'm ugly, and I can't fight. Damn, are we ever at a disadvantage!
 
@@ -94,16 +95,16 @@ This ✨ represents our brand voice ✨.
 
 Your brand's success on social media is not conditional on having a similarly irreverent, fun tone. What it does depend on is consistency.
 
-Look at a brand that's…
+To get better at this, look at brands that are...
 
 - In a similar industry to you. For example, at PostHog, we admire [Supabase](https://x.com/supabase) and [Temporal](https://x.com/temporalio).
 - At a similar stage as your company (otherwise I'd have chucked in [Google for Devs](https://www.threads.com/@googlefordevs)).
 
-Both of those qualifiers are important: you cannot learn anything applicable from Nike, Apple, Red Bull, etc's marketing. These are brands with so much built-up credit that almost anything they post would do well. Even when it's [written by AI](https://x.com/TrungTPhan/status/2056450503975018983). _Allegedly_.
+Both of those qualifiers are important: you cannot learn anything applicable from Nike, Apple, or Red Bull's marketing. These are brands with so much built-up credit that almost anything they post would do well. Even when it's [written by AI](https://x.com/TrungTPhan/status/2056450503975018983). _Allegedly_.
 
 Every time one of those brands is mentioned internally within a company that's got a marketing budget, an MBA student gets their wings. They're flying over to bill you $300 an hour. You brought this on yourself.
 
-Brands with massive following, while sometimes having been successful for their content strategy, are often big because of their wider branding efforts over several years, not just what they post.
+Brands with massive following, while sometimes having been successful for their content strategy, are often big because of their wider branding efforts over years or decades, not just what they post.
 
 Your brand's social media is, more likely than not, highly dependent on external factors. Consider them always, and use the following two objectives as your new north star.
 
@@ -123,9 +124,9 @@ Social media should draw from across your entire organization. Everyone should f
 
 One of the things I've tried to do (and am still trying to do better) during my first couple months at PostHog is figure out where content exists that isn't getting pushed externally.
 
-We're proud of the [Changelog](/changelog) and want that info out there every week to show how much we ship? [Let's figure out a way to do that.](https://www.linkedin.com/feed/update/urn:li:activity:7466167787590373377)
+We're proud of the [changelog](/changelog) and want that info out there every week to show how much we ship? [Let's figure out a way to do that.](https://www.linkedin.com/feed/update/urn:li:activity:7466167787590373377)
 
-Talent wants to write a blog article about how what they look for has changed as a result of AI? [Put it out there.](https://www.linkedin.com/pulse/being-ai-native-matters-more-than-experience-posthog-bptje)
+Talent wants to write a blog about how what they look for has changed as a result of AI? [Put it out there](https://www.linkedin.com/pulse/being-ai-native-matters-more-than-experience-posthog-bptje).
 
 A PMM has an idea for a meme that goes completely over your head? [Trust their judgment and stick 'er out](https://www.linkedin.com/feed/update/urn:li:activity:7464676761461616640) (I am not hip enough to have read or seen Watchmen).
 
@@ -133,7 +134,7 @@ A PMM has an idea for a meme that goes completely over your head? [Trust their j
 
 Can it be difficult to do this? Yes. But that's what best-in-class looks like.
 
-It's also important that your company's employees feel empowered to share their own content. It might look different or slightly less buttoned-up than what would come out of a company account, but on LinkedIn, it's more than [twice as likely to be seen and 5x as likely to be engaged with.](https://www.refinelabs.com/article/personal-linkedin-engagement-vs-company-page)
+It's also important that your company's employees feel empowered to share their own content. It might look different or slightly less buttoned-up than what would come out of a company account, but on LinkedIn, it's more than [twice as likely to be seen and 5x as likely to be engaged with](https://www.refinelabs.com/article/personal-linkedin-engagement-vs-company-page).
 
 Internally, we have a Slack channel called #shitposters-unite, where if someone's looking for a little encouragement or inspiration to post, they can get it on demand.
 
@@ -141,8 +142,4 @@ It's inadvertently a fantastic team-building tool for us: posting can be intimid
 
 ## I glossed over this. TL;DR, please
 
-Consistent brand representation that gets attention from your ICP should be the goal for every type of company on social media, and it's something that should be measured qualitatively.
-
-You will be able to tell when your social media sucks. You may find it harder to tell when your social media looks like it's great when you check the numbers, but you're not seeing it convert.
-
-The answer to why is likely that brand work is being sacrificed at the altar of numbers.
+Your goal shouldn't be impressions, engagements, followers, or any other quantitative social media metric. It should be consistent brand representation that gets attention from your ICP.
