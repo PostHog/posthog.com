@@ -9,7 +9,7 @@ availability:
 sourceId: Snowflake
 ---
 
-The data warehouse can link to data in Snowflake. 
+The data warehouse can link to data in Snowflake.
 
 Start by going to the [Data pipeline page](https://app.posthog.com/data-management/sources) and the sources tab and clicking **New source**. Choose Snowflake and enter the following data:
 
@@ -23,9 +23,9 @@ Start by going to the [Data pipeline page](https://app.posthog.com/data-manageme
 - **Table Prefix:** The optional prefix for your tables in PostHog. For example, if your table name ended up being `menu`, a prefix of `snow_prod_` would create a table in PostHog called `snow_prod_menu`.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_07_23_at_13_50_56_2x_c31bfa6237.png" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_07_23_at_13_50_56_2x_c31bfa6237.png"
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_07_23_at_13_50_42_2x_aa20de1109.png"
-  alt="Snowflake details" 
+  alt="Snowflake details"
   classes="rounded"
 />
 
@@ -34,16 +34,26 @@ Once added, click **Next**, select the tables you want to sync, as well as the [
 Once done, you can now [query](/docs/data-warehouse/query) your new table using the table name.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_07_23_at_13_56_32_2x_9c0bc2d35f.png" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_07_23_at_13_56_32_2x_9c0bc2d35f.png"
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_07_23_at_13_56_53_2x_76a2b7f711.png"
-  alt="Snowflake details" 
+  alt="Snowflake details"
   classes="rounded"
 />
+
+## Troubleshooting
+
+### Network policy blocking connection
+
+**Problem:** Your Snowflake sync fails with an error like:
+
+> Incoming request with IP/Token is not allowed to access Snowflake. Contact your account administrator.
+
+**Solution:** Your Snowflake account has a [network policy](https://docs.snowflake.com/en/user-guide/network-policies) (IP allowlist) that doesn't include PostHog's egress IP addresses. Ask your Snowflake administrator to add the IP addresses listed in the [Configuration](#configuration) section below to your network policy allowlist. Once updated, retry the sync.
 
 ## Configuration
 
 <SourceParameters />
 
-import InboundIpAddresses from '../_snippets/inbound-ip-addresses.mdx'
+import InboundIpAddresses from "../_snippets/inbound-ip-addresses.mdx";
 
 <InboundIpAddresses />
