@@ -23,7 +23,7 @@ Don't fret. What they're saying may still be true. Success metrics may be up. Ho
 
 You see, the problem with social media metrics is that they're all bad. To show you how bad, let's go through them one by one.
 
-### Impressions, reach, and views
+## Impressions, reach, and views
 
 I may upset some social media professionals by lumping these in the same category. These all have slightly different definitions: impressions counts repeat views, reach is unique accounts, views usually require a unit of time spent looking at content.
 
