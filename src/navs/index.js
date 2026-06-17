@@ -4955,6 +4955,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/installation/php',
                         },
                         {
+                            name: 'Rust',
+                            url: '/docs/error-tracking/installation/rust',
+                        },
+                        {
                             name: 'iOS',
                             url: '/docs/error-tracking/installation/ios',
                         },
