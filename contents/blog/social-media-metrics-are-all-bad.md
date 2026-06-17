@@ -7,7 +7,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: "https://github.com/user-attachments/assets/0e4f9a12-3ae8-42d1-8fcc-73c9ce34e5d1"
+featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/social_article_d1fa9195ee.png
 featuredImageType: full
 category: Blog
 tags:
@@ -70,7 +70,7 @@ Have a post that's got a ton of impressions, but not much engagement? You still 
 
 What about one that's got a whack of engagements but hasn't reached many people? Sure, it's great that who did see it's interacting, but there's probably a reason the algo hasn't pushed it out to more people. Your engagement rate will be good, but your brand awareness won't be.
 
-<img width="1173" height="743" alt="Hogified graphic" src="https://github.com/user-attachments/assets/fa013cec-aa2c-4fb8-807f-ccca0765c395" />
+![a chart explaining what a good or bad social media post engagement rate is](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Hogified_graphic_9ea6edc8f9.png)
 
 [Goodhart's law](https://en.wikipedia.org/wiki/Goodhart%27s_law) states that when a measure becomes a target, it ceases to be a good measure. Social media's rife with this: you can game the system to hit any one of the above metrics, but it doesn't mean your brand's reaching the right people.
 
@@ -80,7 +80,7 @@ Focus on consistently creating content that appeals to your ideal customer profi
 
 I'm PostHog's new social media person. PostHog compensates me obscenely to post stupid shit like the meme below because it's appealing to our ICP: engineers at early-stage startups.
 
-<img width="1078" height="842" alt="PostHog code omg" src="https://github.com/user-attachments/assets/e28c8c54-4546-49da-929b-72ec7bf10484" />
+![a meme explaining how someone uses PostHog code](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Post_Hog_code_omg_55c2a8d4de.png)
 
 These folks are meme-literate and have short attention spans because they're smart, high-functioning people busy with more important things.
 
@@ -129,8 +129,7 @@ Talent wants to write a blog article about how what they look for has changed as
 
 A PMM has an idea for a meme that goes completely over your head? [Trust their judgment and stick 'er out](https://www.linkedin.com/feed/update/urn:li:activity:7464676761461616640) (I am not hip enough to have read or seen Watchmen).
 
-<img width="1500" height="1750" alt="Dr manhattan meme" src="https://github.com/user-attachments/assets/656094c0-e405-4a5d-85a2-de2fa02615bd" />
-
+![A Dr. Manhattan meme about PostHog code](https://res.cloudinary.com/dmukukwp6/image/upload/h_1600,c_limit,q_auto,f_auto/Dr_manhattan_meme_73f9bc88de.png)
 
 Can it be difficult to do this? Yes. But that's what best-in-class looks like.
 
