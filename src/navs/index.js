@@ -1177,6 +1177,10 @@ export const handbookSidebar = [
                         url: '/handbook/marketing/positioning/data-pipelines',
                     },
                     {
+                        name: 'Endpoints',
+                        url: '/handbook/marketing/positioning/endpoints',
+                    },
+                    {
                         name: 'LLM analytics',
                         url: '/handbook/marketing/positioning/llm-analytics',
                     },
@@ -1342,6 +1346,10 @@ export const handbookSidebar = [
                 name: 'New business',
                 url: '',
                 children: [
+                    {
+                        name: 'How we work',
+                        url: '/handbook/growth/sales/new-business-how-we-work',
+                    },
                     {
                         name: 'Why buy PostHog',
                         url: '/handbook/growth/sales/why-buy-posthog',
@@ -4135,7 +4143,8 @@ export const docsMenu = {
             url: '/docs/replay-vision',
             color: 'yellow',
             icon: 'IconEye',
-            description: 'Use AI to automatically watch your session recordings and turn what it sees into queryable data',
+            description:
+                'Use AI to automatically watch your session recordings and turn what it sees into queryable data',
             children: [
                 {
                     name: 'Replay Vision',
@@ -4945,6 +4954,10 @@ export const docsMenu = {
                         {
                             name: 'PHP',
                             url: '/docs/error-tracking/installation/php',
+                        },
+                        {
+                            name: 'Rust',
+                            url: '/docs/error-tracking/installation/rust',
                         },
                         {
                             name: 'iOS',
@@ -5911,14 +5924,60 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Evaluations',
+                    url: '/docs/ai-evals',
+                    icon: 'IconTarget',
+                    color: 'yellow',
+                    featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/ai-evals',
+                        },
+                        {
+                            name: 'Trace reviews',
+                            url: '/docs/ai-observability/trace-reviews',
+                        },
+                        {
+                            name: 'Datasets',
+                            url: '/docs/ai-evals/datasets',
+                        },
+                        {
+                            name: 'Taggers',
+                            url: '/docs/ai-evals/taggers',
+                        },
+                    ],
+                },
+                {
+                    name: 'Prompt management',
+                    url: '/docs/prompt-management',
+                    icon: 'IconPencil',
+                    color: 'purple',
+                    featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/prompt-management',
+                        },
+                        {
+                            name: 'Skills store',
+                            url: '/docs/prompt-management/skills-store',
+                        },
+                        {
+                            name: 'A/B testing prompts',
+                            url: '/docs/prompt-management/prompt-experiments',
+                        },
+                    ],
+                },
+                {
+                    name: 'Guides',
+                },
+                {
                     name: 'Calculating LLM costs',
                     url: '/docs/ai-observability/calculating-costs',
                     icon: 'IconBalance',
                     color: 'green',
                     featured: true,
-                },
-                {
-                    name: 'Guides',
                 },
                 {
                     name: 'Analyze LLM performance',
@@ -5934,19 +5993,33 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Trace Reviews',
-                    url: '/docs/ai-observability/trace-reviews',
-                    icon: 'IconCheckCircle',
-                    color: 'green',
+                    name: 'Link Session Replay',
+                    url: '/docs/ai-observability/link-session-replay',
+                    icon: 'IconRewindPlay',
+                    color: 'blue',
+                },
+                {
+                    name: 'Link Error Tracking',
+                    url: '/docs/ai-observability/link-error-tracking',
+                    icon: 'IconWarning',
+                    color: 'red',
+                },
+                {
+                    name: 'Collect user feedback',
+                    url: '/docs/ai-observability/collect-user-feedback',
+                    icon: 'IconMessage',
+                    color: 'salmon',
                     featured: true,
-                },
-                {
-                    name: 'Evaluations ↗',
-                    url: 'https://posthog.com/docs/ai-evals',
-                },
-                {
-                    name: 'Prompt management ↗',
-                    url: 'https://posthog.com/docs/prompt-management',
+                    children: [
+                        {
+                            name: 'React integration with useThumbSurvey',
+                            url: '/docs/ai-observability/user-feedback/use-thumb-survey',
+                        },
+                        {
+                            name: 'Manual event capture',
+                            url: '/docs/ai-observability/user-feedback/manual-event-capture',
+                        },
+                    ],
                 },
                 {
                     name: 'PostHog AI',
@@ -6000,35 +6073,6 @@ export const docsMenu = {
                         title: 'Beta',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
-                },
-                {
-                    name: 'Link Session Replay',
-                    url: '/docs/ai-observability/link-session-replay',
-                    icon: 'IconRewindPlay',
-                    color: 'blue',
-                },
-                {
-                    name: 'Link Error Tracking',
-                    url: '/docs/ai-observability/link-error-tracking',
-                    icon: 'IconWarning',
-                    color: 'red',
-                },
-                {
-                    name: 'Collect user feedback',
-                    url: '/docs/ai-observability/collect-user-feedback',
-                    icon: 'IconMessage',
-                    color: 'salmon',
-                    featured: true,
-                    children: [
-                        {
-                            name: 'React integration with useThumbSurvey',
-                            url: '/docs/ai-observability/user-feedback/use-thumb-survey',
-                        },
-                        {
-                            name: 'Manual event capture',
-                            url: '/docs/ai-observability/user-feedback/manual-event-capture',
-                        },
-                    ],
                 },
                 {
                     name: 'Resources',
@@ -6196,102 +6240,6 @@ export const docsMenu = {
                     icon: 'IconGraph',
                     color: 'green',
                     featured: true,
-                },
-            ],
-        },
-        {
-            name: 'Evaluations',
-            url: '/docs/ai-evals',
-            color: '[#681291]',
-            colorDark: '[#C170E8]',
-            icon: 'IconTarget',
-            description: 'Score and review the quality of your LLM generations',
-            children: [
-                {
-                    name: 'Evaluations',
-                },
-                {
-                    name: 'Overview',
-                    url: '/docs/ai-evals',
-                    icon: 'IconHome',
-                    color: 'seagreen',
-                },
-                {
-                    name: 'Features',
-                },
-                {
-                    name: 'Evaluations',
-                    url: '/docs/ai-evals/evaluations',
-                    icon: 'IconTarget',
-                    color: 'yellow',
-                    featured: true,
-                    badge: {
-                        title: 'Alpha',
-                        className: 'uppercase !bg-yellow/10 !text-yellow !dark:text-white !dark:bg-yellow/50',
-                    },
-                },
-                {
-                    name: 'Taggers',
-                    url: '/docs/ai-evals/taggers',
-                    icon: 'IconTag',
-                    color: 'purple',
-                },
-                {
-                    name: 'Datasets',
-                    url: '/docs/ai-evals/datasets',
-                    icon: 'IconStack',
-                    color: 'blue',
-                },
-            ],
-        },
-        {
-            name: 'Prompt Management',
-            url: '/docs/prompt-management',
-            color: '[#681291]',
-            colorDark: '[#C170E8]',
-            icon: 'IconPencil',
-            description: 'Version and ship prompts and reusable agent skills without code deploys',
-            children: [
-                {
-                    name: 'Prompt Management',
-                },
-                {
-                    name: 'Overview',
-                    url: '/docs/prompt-management',
-                    icon: 'IconHome',
-                    color: 'seagreen',
-                },
-                {
-                    name: 'Features',
-                },
-                {
-                    name: 'Prompts',
-                    url: '/docs/prompt-management/prompts',
-                    icon: 'IconPencil',
-                    color: 'purple',
-                    featured: true,
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                },
-                {
-                    name: 'Skills store',
-                    url: '/docs/prompt-management/skills-store',
-                    icon: 'IconStack',
-                    color: 'blue',
-                    featured: true,
-                },
-                {
-                    name: 'A/B testing prompts',
-                    url: '/docs/prompt-management/prompt-experiments',
-                    icon: 'IconFlask',
-                    color: 'purple',
-                    featured: true,
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
             ],
         },
@@ -7015,6 +6963,7 @@ export const docsMenu = {
                         { name: 'iOS', url: '/docs/logs/installation/ios' },
                         { name: 'Android', url: '/docs/logs/installation/android' },
                         { name: 'Flutter', url: '/docs/logs/installation/flutter' },
+                        { name: 'Ruby on Rails', url: '/docs/logs/installation/ruby-on-rails' },
                         { name: 'Datadog', url: '/docs/logs/installation/datadog' },
                         { name: 'Other', url: '/docs/logs/installation/other' },
                     ],

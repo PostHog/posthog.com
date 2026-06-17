@@ -186,6 +186,69 @@ When creating a button tile, you can configure:
 - **Style** – Choose between primary (filled) or secondary (outlined) button styles.
 - **Transparent background** – Toggle to remove the tile's background for a cleaner look.
 
+### Adding widgets
+
+<CalloutBox icon="IconInfo" title="Early access" type="fyi">
+
+Dashboard widgets are an early access feature. Subscribe on the early access features page to enable widgets for your organization.
+
+</CalloutBox>
+
+Widgets let you add live content from other PostHog products directly to your dashboards. Unlike insights, widgets display real-time lists of events, issues, or recordings instead of charts and metrics.
+
+This means your dashboards can be now be the one stop for everything you care about for your project.
+
+To add a widget, click the **Add...** dropdown button and select a widget from the available groups.
+
+#### Activity widget
+
+The Activity widget displays a list of recent events mirroring the [Activity > Explore](https://app.posthog.com/activity/explore) page. Each row shows the event name, person, timestamp, library, and URL.
+
+To add it, click the **Add...** dropdown and select **Recent events** under the **Activity** group.
+
+**Configuration options:**
+
+- **Date range** - The time period to show events from. Default: last 24 hours.
+- **Limit** - Maximum number of events to display. Default: 25, maximum: 50.
+- **Filter test accounts** - Toggle to exclude internal and test users.
+
+Clicking a row opens the event detail page in a new tab. Clicking the tile title navigates to **Activity > Explore**.
+
+#### Error Tracking widget
+
+The Error Tracking widget displays a list of top issues from [Error Tracking](/docs/error-tracking). Each row shows the issue title, occurrences, affected users, and when it was last seen.
+
+To add it, click the **Add...** dropdown and select **Top issues** under the **Error tracking** group.
+
+**Configuration options:**
+
+- **Date range** - The time period to show issues from. Default: last 7 days.
+- **Limit** - Maximum number of issues to display. Default: 10, maximum: 25.
+- **Order by** - Sort issues by occurrences, last seen, first seen, users, or sessions.
+- **Order direction** - Sort ascending or descending.
+- **Status** - Filter by issue status: active, resolved, archived, pending release, suppressed, or all.
+- **Assignee** - Filter to show only issues assigned to specific team members.
+- **Filter test accounts** - Toggle to exclude internal and test users.
+
+Clicking a row opens the issue detail page. Clicking the tile title navigates to **Error Tracking**.
+
+#### Session Replay widget
+
+The Session Replay widget displays a list of recent recordings from [Session Replay](/docs/session-replay). Each row shows the user, recording duration, activity score, and timestamp.
+
+To add it, click the **Add...** dropdown and select **Recent recordings** under the **Session replay** group.
+
+**Configuration options:**
+
+- **Date range** - The time period to show recordings from. Default: last 7 days.
+- **Limit** - Maximum number of recordings to display. Default: 10, maximum: 25.
+- **Order by** - Sort recordings by start time, activity score, duration, clicks, or console errors.
+- **Order direction** - Sort ascending or descending.
+- **Saved filter** - Apply a saved Session Replay filter.
+- **Filter test accounts** - Toggle to exclude internal and test users.
+
+Clicking a row opens the session replay player. Clicking the tile title navigates to **Session Replay**.
+
 ### Toggling labels and values on insights
 
 You can toggle the visibility of labels or values on insight charts directly from the dashboard without editing the insight. Click the **...** icon on an insight card and select the toggle option. For pie charts, the option is **Show/Hide labels on series**. For other supported chart types (trends, lifecycle, stickiness, and funnel trends), the option is **Show/Hide values on series**. This change is saved to the insight.
