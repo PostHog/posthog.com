@@ -4,6 +4,8 @@ title: Bot and traffic detection
 
 PostHog classifies traffic by user agent so you can tell humans apart from bots, crawlers, and automation directly in your queries. The classification runs in [SQL](/docs/sql), so it works anywhere HogQL does – the SQL editor, insights, trends, and Web Analytics breakdowns.
 
+For years, the goal with bots was to block them. That's changing. AI agents – crawlers that train models, assistants that fetch pages for users, and AI search engines that send real visitors – are now a meaningful and growing share of traffic, and you often want to welcome some of them. Knowing which agents reach your site, and what they're doing, matters as much as keeping them out of your human analytics. Bot detection classifies traffic by category so you can decide what to do with each group: welcome it, measure it, or exclude it.
+
 <CalloutBox icon="IconInfo" title="New feature" type="fyi">
 
 This is a brand new feature, and we're actively working on improving it – expanding the list of detected bots and refining classification over time. Function names and behavior may still change. If you have feedback or a bot we should detect, leave a comment on this page or open a pull request against the [bot definitions](https://github.com/PostHog/posthog/blob/master/products/web_analytics/backend/hogql_queries/bot_definitions.py).
