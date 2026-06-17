@@ -349,7 +349,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'query-performance': {
         feature: 'Query performance',
-        owner: ['analytics-platform'],
+        owner: ['query-performance'],
         label: 'feature/insights',
     },
     'quota-limiting': {
