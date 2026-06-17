@@ -2,9 +2,7 @@
 title: Bot and traffic detection
 ---
 
-PostHog classifies traffic by user agent so you can tell humans apart from bots, crawlers, and automation directly in your queries. The classification runs in [SQL](/docs/sql), so it works anywhere HogQL does – the SQL editor, insights, trends, and Web Analytics breakdowns.
-
-For years, the goal with bots was to block them. That's changing. AI agents – crawlers that train models, assistants that fetch pages for users, and AI search engines that send real visitors – are now a meaningful and growing share of traffic, and you often want to welcome some of them. Knowing which agents reach your site, and what they're doing, matters as much as keeping them out of your human analytics. Bot detection classifies traffic by category so you can decide what to do with each group: welcome it, measure it, or exclude it.
+PostHog classifies traffic by user agent so you can tell humans apart from bots, crawlers, and automation directly in your queries. It categorizes each request – so you can welcome, measure, or exclude AI agents, search crawlers, and automation independently, rather than treating every bot the same. The classification runs in [SQL](/docs/sql), so it works anywhere HogQL does – the SQL editor, insights, trends, and Web Analytics breakdowns.
 
 <CalloutBox icon="IconInfo" title="New feature" type="fyi">
 
