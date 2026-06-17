@@ -20,9 +20,11 @@ seo:
 
 A scout is a small agent (don't overthink that word) that looks at, wrangles, and makes sense of any data available in PostHog. Its job is to emit useful **signals** — things worth knowing — that you or your agents can act on. Sometimes that action happens automatically, like an agent opening a PR to fix what the scout found.
 
-The agent loop is genuinely interesting — but it's also the part we wanted to build the least of. The interesting shift is what it lets you do: a scout is, at its core, **a skill** — and that skill becomes the main interface for everyone who touches it, human or agent. The thing that used to be a sprawl of `if/else` branches and helper functions in an old-school data pipeline starts life as a few hundred lines of English that anyone can read, write, and improve (and scales up to bundled reference docs and scripts when a scout needs them). 
+A scout is, at its core, **a skill** — and that skill becomes the main interface for everyone who touches it, human or agent.
 
-Code moves into language and instructions, and the skill becomes the place where the logic actually lives. This post walks through how that works, with two real scouts we run on our own project — one that watches code feedback, and one that watches what the internet says about us.
+The thing that used to be a sprawl of `if/else` branches and helper functions in an old-school data pipeline starts life as a few hundred lines of English that anyone can read, write, and improve (and scales up to bundled reference docs and scripts with progressive disclosure when a scout needs them).
+
+Code moves into language and instruction (obligatory [Karpathy tweet](https://x.com/karpathy/status/1617979122625712128)), and the skill becomes the place where the logic actually lives. This post walks through how that works, with two real scouts we run on our own project — one that watches code feedback, and one that watches what the internet says about us :scream:
 
 If you just want to see scouts in action, skip to [two scouts, end to end](#two-scouts-end-to-end).
 
@@ -35,50 +37,48 @@ Scouts don't live on their own — they feed a pipeline:
 3. **Signals get picked up by the self-driving pipeline**, grouped, and turned into **reports** that land in your [inbox](/blog/self-driving-product).
 4. **Reports get actioned** — by you, or automatically by an agent that picks up the report and ships a fix or improvement.
 
-The key thing: a report can be made up of many signals from many sources. Scouts are just one of those sources. A single report — say "this MCP tool keeps blowing the token budget" — might be assembled from a scout finding, a few raw events, and a health check, all grouped together because they're about the same underlying problem.
+A report can be made up of many signals from many sources. Scouts are just one of those sources. A single report — say "this MCP tool keeps blowing the token budget" — might be assembled from a scout finding, a few raw events, and a health check, all grouped together because they're about the same underlying problem.
 
-> New to the bigger picture? The [self-driving product](/blog/self-driving-product) post explains the pyramid this all sits inside: routine paper-cuts at the bottom (great for full automation), strategic judgment work at the top (firmly human). Scouts are how the pipeline notices there's something to do at all — at every level of that pyramid.
+> What do you mean self driving? - like actual self driving - no of course not silly, this [self-driving product](/blog/self-driving-product) post explains the pyramid this all sits inside: routine paper-cuts at the bottom (great for full automation), strategic judgment work at the top (firmly human). Scouts are how the pipeline notices there's something to do at all — at every level of that pyramid.
 
 ## Your pipeline can be (mostly) markdown
 
-In a traditional data pipeline, the logic that decides "is this interesting?" lives in code: thresholds, `if/else` branches, helper functions, a scheduler, a pile of glue. Changing what you care about means a code change, a review, a deploy.
+In a traditional data pipeline, the logic that decides "is this interesting?" lives in code: thresholds, `if/else` branches, helper functions, a scheduler, a pile of glue. Changing what you care about means a code change, a review, a deploy. This is of course still needed and not going away, but for more subjective and flexibile pipelines, the agent pilled approach can offer many benifits.
 
-With a scout, almost all of that logic lives in a **skill** — a markdown file the agent is told to read and operate by. The skill is where you encode your business knowledge: what's normal, what's noise, what's worth waking a human for. What used to be `if response_rate < 0.3 and sample_size > 30:` is now a sentence like *"a flagship NPS survey needs ≥30 responses/week and a ≥10% score drop before it's worth acting on."* That's trivially easy to iterate on, and you don't need to be an engineer to do it.
+With a scout, almost all of that logic lives in a **skill** — a markdown file (at a minimum) the agent is told to read and operate by. The skill is where you encode your business knowledge: what's normal, what's noise, what's worth waking a human for. What used to be `if response_rate < 0.3 and sample_size > 30:` is now a sentence like *"a flagship NPS survey needs ≥30 responses/week and a ≥10% score drop before it's worth acting on."* That's trivially easy to iterate on and sense check with your agents, and you don't need to be an engineer to do it.
 
-Everything else — the loop, the sandbox, the scheduler, the memory — is deliberately thin plumbing around that skill.
+Everything else — the loop, the sandbox, the scheduler, the memory — is deliberately thin plumbing around that skill. For example, the [scout harness prompt](https://github.com/PostHog/posthog/blob/master/products/signals/backend/scout_harness/prompt.py) is already too long at 200-ish lines I need to try chip away at.
 
 ### Markdown is the entry point, not the ceiling
 
-"A markdown file" is the low bar to entry — and for a lot of scouts it's genuinely all you need. But a scout is a full [Agent Skill](https://agentskills.io/specification), so it scales up the same way any skill does. The `SKILL.md` is the entry point, and a more complex scout can bundle **reference files** the agent loads on demand and **runnable example scripts** for the parts that genuinely want code.
+"A markdown file" is the lowest possible bar to entry — and for a lot of scouts it's genuinely all you need. But a scout is also a full [Agent Skill](https://agentskills.io/specification), so it scales up the same way any skill does. The `SKILL.md` is the entry point, and a more complex scout can bundle **reference files** the agent loads on demand and **runnable example scripts** for the parts that genuinely want code.
 
-A good example is the [anomaly-detection scout](https://github.com/PostHog/posthog/tree/master/products/signals/skills/signals-scout-anomaly-detection): its `SKILL.md` describes the workflow, but it ships a `references/anomaly-methods.md` that spells out the actual scoring math — a robust z-score over a median/MAD baseline, with explicit thresholds and guards. That's logic you *want* pinned down precisely rather than left to the model's judgment. The `exploring-signals-scouts` skill goes further and ships real Python scripts (`fleet_survey.py`, `assess_health.py`) the agent runs directly.
-
-So the spectrum runs from "a few sentences of English" up to "a skill with reference docs and executable scripts" — and the nice part is you start at the easy end and only reach for the heavier machinery when a particular scout actually needs it.
+So the spectrum runs from "a few sentences of English" up to "a skill with reference docs and executable scripts" — and the nice part is you start at the easy end and only reach for the heavier machinery when a particular scout actually needs it. And its easy to get a feel for this as you can just ask your agent how a scout is performing for your project using the [exploring-signals-scouts](https://github.com/PostHog/posthog/blob/master/products/signals/skills/exploring-signals-scouts/SKILL.md) skill we ship with the [PostHog AI Plugin](https://github.com/PostHog/ai-plugin).
 
 ## How it works
 
 We have a scout harness (yes, I used "harness" — cross it off your bingo card) that is really just a small layer running your scout skills in an agentic loop.
 
-```
-            ┌──────────────────────────────────────────────┐
-            │  Temporal coordinator  (ticks every ~30 min)  │
+```                                                             
+            ┌────────────────────────────────────────────────┐
+            │  Temporal coordinator  (ticks every ~30 min)   │
             │  finds scouts that are due, fans out one       │
             │  child workflow per (project, scout)           │
             └───────────────────────┬────────────────────────┘
                                     │
                                     ▼
-        ┌────────────────────────────────────────────────────┐
+        ┌──────────────────────────────────────────────────────┐
         │  Scout harness — one run, inside a sandbox           │
         │                                                      │
         │     SKILL.md  ──►  agent loop                        │
         │                      │                               │
-        │          ┌───────────┴────────────┐                 │
+        │          ┌───────────┴────────────┐                  │
         │          ▼                        ▼                  │
         │   PostHog MCP tools         scout-only tools         │
         │   (read your data:          • emit-signal            │
         │    SQL, insights,           • scratchpad read/write  │
         │    warehouse, errors…)      • past runs / profile    │
-        └───────────────────────┬─────────────────────────────┘
+        └───────────────────────┬──────────────────────────────┘
                                 │  emits findings
                                 ▼
         signal ─► buffer ─► grouping ─► inbox report ─► action
