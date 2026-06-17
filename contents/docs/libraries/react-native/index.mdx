@@ -305,10 +305,10 @@ posthog.updateFlags(
 )
 
 posthog.getFeatureFlag('my-variant-flag') // 'test'
-posthog.getFeatureFlagPayload('my-flag') // { color: 'blue' }
+posthog.getFeatureFlagResult('my-flag')?.payload // { color: 'blue' }
 ```
 
-`updateFlags` replaces the stored flags by default; pass `{ merge: true }` to merge into the existing set instead. Values persist across app restarts, and `getFeatureFlag()` / `getFeatureFlagPayload()` read them back like any other flag.
+`updateFlags` replaces the stored flags by default; pass `{ merge: true }` to merge into the existing set instead. Values persist across app restarts, and `getFeatureFlag()` / `getFeatureFlagResult()` read them back like any other flag.
 
 Note that `reset()` (called on logout) clears the supplied flags, so re-push them with `updateFlags()` after the next identity change. Use `bootstrap` for any flag values that must be available at startup before `updateFlags()` runs.
 

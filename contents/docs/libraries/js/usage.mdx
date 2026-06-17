@@ -217,7 +217,7 @@ posthog.updateFlags(
 )
 
 posthog.getFeatureFlag('my-variant-flag') // 'test'
-posthog.getFeatureFlagPayload('my-flag') // { color: 'blue' }
+posthog.getFeatureFlagResult('my-flag')?.payload // { color: 'blue' }
 ```
 
 `updateFlags` replaces the stored flags by default; pass `{ merge: true }` to merge into the existing set instead. Use `bootstrap` for any flag values that must be available on first load, before `updateFlags()` runs.
