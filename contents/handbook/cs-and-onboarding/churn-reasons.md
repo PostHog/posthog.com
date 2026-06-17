@@ -31,7 +31,7 @@ When you spot a customer evaluating alternatives, get involved early and push fo
 
 ### Poor customer experience
 
-If a customer has struggled to get help or fast responses, turn it around by staying on top of their stuff going forward.
+If a customer has struggled to get help or fast responses, take accountability first. Acknowledging that we dropped the ball is how we build trust, instead of acting like it didn't happen. Then make sure it can't be repeated by setting up alerts on their messages and tickets so they surface immediately.
 
 When you can solve a problem for them, solve it — and explain how, so they can do it themselves next time.
 
