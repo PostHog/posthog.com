@@ -644,6 +644,23 @@ const appSettings: AppSettings = {
             type: 'standard',
         },
     },
+    '/merch/orders': {
+        size: {
+            min: {
+                width: 470,
+                height: 299,
+            },
+            max: {
+                width: 470,
+                height: 299,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+    },
     '/services': {
         size: {
             min: {

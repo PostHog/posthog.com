@@ -300,11 +300,7 @@ export default function AIObservabilityLanding(): JSX.Element {
                             </p>
 
                             <div className="flex flex-wrap gap-2 mt-4">
-                                <CallToAction
-                                    type="primary"
-                                    size="md"
-                                    to="https://app.posthog.com/integrations/slack"
-                                >
+                                <CallToAction type="primary" size="md" to="https://app.posthog.com/integrations/slack">
                                     Connect Slack
                                 </CallToAction>
                                 <CallToAction type="secondary" size="md" to="/slack-app" state={{ newWindow: true }}>
