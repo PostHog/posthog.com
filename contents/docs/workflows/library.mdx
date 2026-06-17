@@ -123,3 +123,15 @@ MCP tools for email templates:
 - `workflows-show-email-template` – Preview a rendered template
 
 See [MCP use cases](/docs/model-context-protocol/use-cases) for example prompts.
+
+### Edit workflows with MCP
+
+You can make surgical edits to a draft workflow's graph using the [PostHog MCP server](/docs/model-context-protocol). Instead of re-transmitting every action and edge, send a small list of id-addressed operations that apply atomically – the graph is validated before saving.
+
+MCP tools for workflow graph editing:
+
+- `workflows-patch-graph` – Apply operations to update, add, or remove actions and edges in a draft workflow
+
+Supported operations include `update_action` (deep-merges a patch into an existing node), `add_action`, `remove_action` (auto-reconnects edges), `add_edge`, `remove_edge`, and `replace_action_edges`.
+
+See [MCP use cases](/docs/model-context-protocol/use-cases#edit-workflow-graphs) for example prompts.
