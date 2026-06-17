@@ -7,6 +7,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+featuredImage: "https://github.com/user-attachments/assets/0e4f9a12-3ae8-42d1-8fcc-73c9ce34e5d1"
 featuredImageType: full
 category: Blog
 tags:
@@ -43,7 +44,7 @@ Engagements are the best of the bad metrics.
 
 Why is it still dumb to track? Because it's not telling you what kind of way people are engaging with your content.
 
-Are they super pissed? Are they loving it? Are they just tagging their friend? Is that because they like the post, or because they're trying to dunk on you and say mean things about your product?
+Are they super pissed? Are they loving it? Are they just tagging their friend? Is that because they like the post, or because they're [trying to dunk on you and say mean things about your product?](https://x.com/EASPORTS/status/2024974248201142670)
 
 Engagements as a metric tells you none of that. One post that had your company getting absolutely killed can make it seem as if your metrics are up in a positive way. I can't think of another metric in any business case where what looks good can actually be completely detrimental.
 
@@ -55,7 +56,7 @@ I once worked for a company for whom followers was a KPI. Let me just say: it is
 
 At the same time, it's the most fudgeable performance metric possible. I can cynically create a giveaway whose call to action is to follow and like, and boom, I've got a whack more followers. And guess what we did at that company? Exactly that! KPI hit!
 
-Heck, I can just buy 'em outright if I wanted to.
+Heck, I can just [buy 'em outright](https://docs.google.com/spreadsheets/d/e/2PACX-1vTo1XGn5gnsjey19COIE-YwSWQ6c5RwbAyAveuvox4rJJP7ibgbOCbT9zfxt9iVEoli1iaHFVEo-AW7/pubhtml?gid=0&single=true) if I wanted to.
 
 Following should be built gradually, not at any particular rate of speed. It should be a byproduct of your content being engaging, and people choosing to follow you to see more of it.
 
@@ -69,7 +70,9 @@ Have a post that's got a ton of impressions, but not much engagement? You still 
 
 What about one that's got a whack of engagements but hasn't reached many people? Sure, it's great that who did see it's interacting, but there's probably a reason the algo hasn't pushed it out to more people. Your engagement rate will be good, but your brand awareness won't be.
 
-Goodhart's law states that when a measure becomes a target, it ceases to be a good measure. Social media's rife with this: you can game the system to hit any one of the above metrics, but it doesn't mean your brand's reaching the right people.
+<img width="1173" height="743" alt="Hogified graphic" src="https://github.com/user-attachments/assets/fa013cec-aa2c-4fb8-807f-ccca0765c395" />
+
+[Goodhart's law](https://en.wikipedia.org/wiki/Goodhart%27s_law) states that when a measure becomes a target, it ceases to be a good measure. Social media's rife with this: you can game the system to hit any one of the above metrics, but it doesn't mean your brand's reaching the right people.
 
 ## What should you focus on, then?
 
@@ -77,7 +80,7 @@ Focus on consistently creating content that appeals to your ideal customer profi
 
 I'm PostHog's new social media person. PostHog compensates me obscenely to post stupid shit like the meme below because it's appealing to our ICP: engineers at early-stage startups.
 
-<!-- TODO @liam-graham: insert meme image here -->
+<img width="1078" height="842" alt="PostHog code omg" src="https://github.com/user-attachments/assets/e28c8c54-4546-49da-929b-72ec7bf10484" />
 
 These folks are meme-literate and have short attention spans because they're smart, high-functioning people busy with more important things.
 
@@ -85,7 +88,7 @@ What we post has to cut through the stuff on their feeds that they watch on thei
 
 I don't own a cat, I'm ugly, and I can't fight. Damn, are we ever at a disadvantage!
 
-So, we lean into hedgehogs with many jobs, the medieval tales, and content that we think would be entertaining or funny. And memes. As long as they're not corny.
+So, we lean into [hedgehogs with many jobs](https://x.com/posthog/status/2057840239121756272), [medieval tales](https://www.youtube.com/watch?v=e_SICQg2Wak&list=PLnOY1RYHjDfxcuWI_L1xwuhoXAsxR59VL), and content that we think would be entertaining or funny. And [memes](https://x.com/posthog/status/2061909127161586140). As long as they're not corny.
 
 This ✨ represents our brand voice ✨.
 
@@ -93,10 +96,10 @@ Your brand's success on social media is not conditional on having a similarly ir
 
 Look at a brand that's…
 
-- In a similar industry to you. For example, at PostHog, we admire Supabase and Temporal.
-- At a similar stage as your company (otherwise I'd have chucked in Google for Devs).
+- In a similar industry to you. For example, at PostHog, we admire [Supabase](https://x.com/supabase) and [Temporal](https://x.com/temporalio).
+- At a similar stage as your company (otherwise I'd have chucked in [Google for Devs](https://www.threads.com/@googlefordevs)).
 
-Both of those qualifiers are important: you cannot learn anything applicable from Nike, Apple, Red Bull, etc's marketing. These are brands with so much built-up credit that almost anything they post would do well. Even when it's written by AI. Allegedly.
+Both of those qualifiers are important: you cannot learn anything applicable from Nike, Apple, Red Bull, etc's marketing. These are brands with so much built-up credit that almost anything they post would do well. Even when it's [written by AI](https://x.com/TrungTPhan/status/2056450503975018983). _Allegedly_.
 
 Every time one of those brands is mentioned internally within a company that's got a marketing budget, an MBA student gets their wings. They're flying over to bill you $300 an hour. You brought this on yourself.
 
@@ -120,17 +123,18 @@ Social media should draw from across your entire organization. Everyone should f
 
 One of the things I've tried to do (and am still trying to do better) during my first couple months at PostHog is figure out where content exists that isn't getting pushed externally.
 
-We're proud of the [Changelog](/changelog) and want that info out there every week to show how much we ship? Let's figure out a way to do that.
+We're proud of the [Changelog](/changelog) and want that info out there every week to show how much we ship? [Let's figure out a way to do that.](https://www.linkedin.com/feed/update/urn:li:activity:7466167787590373377)
 
-Talent wants to write a blog article about how what they look for has changed as a result of AI? Put it out there.
+Talent wants to write a blog article about how what they look for has changed as a result of AI? [Put it out there.](https://www.linkedin.com/pulse/being-ai-native-matters-more-than-experience-posthog-bptje)
 
-A PMM has an idea for a meme that goes completely over your head? Trust their judgment and stick 'er out (I am not hip enough to have read or seen Watchmen).
+A PMM has an idea for a meme that goes completely over your head? [Trust their judgment and stick 'er out](https://www.linkedin.com/feed/update/urn:li:activity:7464676761461616640) (I am not hip enough to have read or seen Watchmen).
 
-<!-- TODO @liam-graham: insert image here -->
+<img width="1500" height="1750" alt="Dr manhattan meme" src="https://github.com/user-attachments/assets/656094c0-e405-4a5d-85a2-de2fa02615bd" />
+
 
 Can it be difficult to do this? Yes. But that's what best-in-class looks like.
 
-It's also important that your company's employees feel empowered to share their own content. It might look different or slightly less buttoned-up than what would come out of a company account, but on LinkedIn, it's more than twice as likely to be seen and 5x as likely to be engaged with.
+It's also important that your company's employees feel empowered to share their own content. It might look different or slightly less buttoned-up than what would come out of a company account, but on LinkedIn, it's more than [twice as likely to be seen and 5x as likely to be engaged with.](https://www.refinelabs.com/article/personal-linkedin-engagement-vs-company-page)
 
 Internally, we have a Slack channel called #shitposters-unite, where if someone's looking for a little encouragement or inspiration to post, they can get it on demand.
 
