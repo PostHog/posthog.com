@@ -456,15 +456,6 @@ Configure these via `PostHog::Rails.configure` or `PostHog::Rails.config`:
 | `current_user_method` | Symbol | `:current_user` | Controller method used to fetch the current user. |
 | `user_id_method` | Symbol | `nil` | Method used to extract the distinct ID from the user object. Auto-detects when nil. |
 
-### Log forwarding options
-
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `logs_enabled` | Boolean | `false` | Master switch for forwarding `Rails.logger` output to PostHog Logs over OTLP. Requires Ruby 3.3+ and the three OpenTelemetry gems — see the [installation guide](/docs/logs/installation/ruby-on-rails). |
-| `logs_forward_rails_logger` | Boolean | `true` | Broadcast `Rails.logger` into the PostHog Logs sink. Takes effect only when `logs_enabled` is true. |
-| `logs_level` | Symbol/Integer | `nil` | Minimum severity to forward (`:debug`, `:info`, `:warn`, `:error`, `:fatal`, or a `Logger` constant). Inherits the Rails logger level when nil. |
-| `logs_max_records_per_minute` | Integer/String | `6000` | Records-per-minute cap. Numeric strings (e.g. from `ENV`) are coerced. Set to `nil` or `0` to disable. |
-| `logs_before_send` | Proc | `nil` | Called with each record hash (`:timestamp`, `:severity`, `:body`, `:attributes`) before sending. Return a modified hash to send or `nil` to drop. Records are dropped if the callback raises. |
 
 ## Troubleshooting
 
@@ -493,19 +484,6 @@ Configure these via `PostHog::Rails.configure` or `PostHog::Rails.config`:
 
 Ensure you've set `personal_api_key` in your configuration.
 
-### Logs not appearing in PostHog
-
-1. **Check the OTel gems are installed:**
-   ```bash
-   bundle list | grep opentelemetry
-   ```
-   You should see `opentelemetry-sdk`, `opentelemetry-logs-sdk` (≥ 0.6.0), and `opentelemetry-exporter-otlp-logs`.
-
-2. **Check for a startup warning** — if the gems are missing or the project token can't be resolved, PostHog logs a warning to stderr at boot. Look for a line starting with `[PostHog]`.
-
-3. **Verify `logs_enabled` is set** in your initializer and that the initializer runs before the railtie (it should if it lives in `config/initializers/`).
-
-4. **Check test mode** — `PostHog.init` with `test_mode: true` disables the logs pipeline entirely. Ensure test mode is only set in the test environment.
 
 ## Next steps
 
