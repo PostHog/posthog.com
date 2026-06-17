@@ -2,7 +2,7 @@
 title: Bot and traffic detection
 ---
 
-PostHog classifies traffic by user agent so you can tell humans apart from bots, crawlers, and automation directly in your queries. The classification runs in [SQL](/docs/sql), so it works anywhere HogQL does – the SQL editor, insights, trends, and web analytics breakdowns.
+PostHog classifies traffic by user agent so you can tell humans apart from bots, crawlers, and automation directly in your queries. The classification runs in [SQL](/docs/sql), so it works anywhere HogQL does – the SQL editor, insights, trends, and Web Analytics breakdowns.
 
 <CalloutBox icon="IconInfo" title="New feature" type="fyi">
 
@@ -39,7 +39,7 @@ Set `$raw_user_agent` on each event, plus `$host`, `$current_url`, `$pathname`, 
 
 Once `$http_log` events are flowing, the functions and virtual properties below classify them alongside your `$pageview` and `$screen` events.
 
-## Functions
+## Classification functions
 
 Each function takes a user agent string and returns its classification. Pass the raw user agent from the event, usually `properties.$raw_user_agent`.
 
@@ -82,7 +82,7 @@ Each function takes a user agent string and returns its classification. Pass the
 | `headless_browser` | Automation | Automated browsers | HeadlessChrome, Puppeteer, Playwright |
 | `no_user_agent` | Automation | Empty or missing user agent | – |
 
-## Examples
+## Example queries
 
 Break down pageviews by traffic type:
 
@@ -143,9 +143,9 @@ GROUP BY traffic_type
 ORDER BY events DESC
 ```
 
-## Use in product analytics
+## Use in Product Analytics
 
-You don't need to write SQL to break traffic down. As long as your events carry a user agent – `$raw_user_agent` (set by server-side SDKs and `$http_log` events) or `$user_agent` (set by the JavaScript SDK) – the virtual properties work as breakdowns and filters in any [product analytics](/docs/product-analytics) insight: trends, funnels, retention, paths, and more.
+You don't need to write SQL to break traffic down. As long as your events carry a user agent – `$raw_user_agent` (set by server-side SDKs and `$http_log` events) or `$user_agent` (set by the JavaScript SDK) – the virtual properties work as breakdowns and filters in any [Product Analytics](/docs/product-analytics) insight: trends, funnels, retention, paths, and more.
 
 For example:
 
@@ -163,5 +163,5 @@ Classification matches the user agent against a maintained list of known bot, cr
 
 Detection relies entirely on the user agent string, so two cases are worth keeping in mind:
 
-- **No user agent.** Requests with an empty or missing user agent (server-to-server calls, misconfigured SDKs) can't be classified from the user agent alone. They're treated as `Automation` with the `no_user_agent` category, so `isLikelyBot` returns `true` for them.
-- **Spoofing.** Some bots disguise themselves with regular browser user agents, and some legitimate tools use bot-like ones. User agent detection is a best-effort heuristic, not a guarantee – which is why the boolean function is named `isLikelyBot`.
+- **No user agent** – requests with an empty or missing user agent (server-to-server calls, misconfigured SDKs) can't be classified from the user agent alone. They're treated as `Automation` with the `no_user_agent` category, so `isLikelyBot` returns `true` for them.
+- **Spoofing** – some bots disguise themselves with regular browser user agents, and some legitimate tools use bot-like ones. User agent detection is a best-effort heuristic, not a guarantee, which is why the boolean function is named `isLikelyBot`.
