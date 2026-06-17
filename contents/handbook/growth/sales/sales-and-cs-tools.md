@@ -14,6 +14,7 @@ Here are the common tools the Sales, CS, and Onboarding teams use daily.
   - [PostHog App + Website](https://us.posthog.com/project/2) reference within PostHog US instance
 - [Pylon](https://usepylon.com/) - use Slack SSO
 - [QuoteHog](https://quote.posthog.net/)
+- [Salesforce](https://posthog.lightning.force.com/)
 - [Vitally](https://posthog.vitally-eu.io/) - once you've logged in once with Google ask your Team Lead to upgrade your role to Team Member
 - [Zendesk](https://posthoghelp.zendesk.com/agent/dashboard)
 - [Zoom](https://zoom.com/)
@@ -25,7 +26,6 @@ You can self-serve access requests to the following tools using Zluri through Sl
   - Download the [Gong Meeting Manager](https://workspace.google.com/marketplace/app/gong_meeting_manager/779001639133) extension to trigger a user consent page when joining calls
   - Connect your Calendly link (if using one) with the Gong consent page [through this guide on Slack](https://posthog.slack.com/archives/C01MGUHFH6G/p1770157267662229?thread_ts=1770157176.458439&cid=C01MGUHFH6G)
 - [PostHog Billing](https://billing.posthog.com) 
-- [Salesforce](https://posthog.lightning.force.com/) 
 - [Stripe](https://dashboard.stripe.com/)
 - [PandaDoc](https://app.pandadoc.com/)
 - [Pitch](https://app.pitch.com/)
