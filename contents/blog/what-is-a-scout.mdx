@@ -20,7 +20,9 @@ seo:
 
 A scout is a small agent (don't overthink that word) that looks at, wrangles, and makes sense of any data available in PostHog. Its job is to emit useful **signals** — things worth knowing — that you or your agents can act on. Sometimes that action happens automatically, like an agent opening a PR to fix what the scout found.
 
-The agent loop is genuinely interesting — but it's also the part we wanted to build the least of. The interesting shift is what it lets you do: a scout is, at its core, **a skill** — and that skill becomes the main interface for everyone who touches it, human or agent. The thing that used to be a sprawl of `if/else` branches and helper functions in an old-school data pipeline starts life as a few hundred lines of English that anyone can read, write, and improve (and scales up to bundled reference docs and scripts when a scout needs them). Code moves into language and instructions, and the skill becomes the place where the logic actually lives. This post walks through how that works, with two real scouts we run on our own project — one that watches code feedback, and one that watches what the internet says about us.
+The agent loop is genuinely interesting — but it's also the part we wanted to build the least of. The interesting shift is what it lets you do: a scout is, at its core, **a skill** — and that skill becomes the main interface for everyone who touches it, human or agent. The thing that used to be a sprawl of `if/else` branches and helper functions in an old-school data pipeline starts life as a few hundred lines of English that anyone can read, write, and improve (and scales up to bundled reference docs and scripts when a scout needs them). 
+
+Code moves into language and instructions, and the skill becomes the place where the logic actually lives. This post walks through how that works, with two real scouts we run on our own project — one that watches code feedback, and one that watches what the internet says about us.
 
 If you just want to see scouts in action, skip to [two scouts, end to end](#two-scouts-end-to-end).
 
@@ -29,17 +31,15 @@ If you just want to see scouts in action, skip to [two scouts, end to end](#two-
 Scouts don't live on their own — they feed a pipeline:
 
 1. **A scout runs** on a schedule, looks at some slice of your PostHog data, and decides whether anything is worth surfacing.
-2. **If it is, the scout emits a signal** — a structured finding with a confidence score, evidence, and a suggested action.
+2. **If it is, the scout emits a signal** — a structured finding with evidence, and a suggested action.
 3. **Signals get picked up by the self-driving pipeline**, grouped, and turned into **reports** that land in your [inbox](/blog/self-driving-product).
-4. **Reports get actioned** — by you, or increasingly by an agent that picks up the report and ships a fix.
+4. **Reports get actioned** — by you, or automatically by an agent that picks up the report and ships a fix or improvement.
 
 The key thing: a report can be made up of many signals from many sources. Scouts are just one of those sources. A single report — say "this MCP tool keeps blowing the token budget" — might be assembled from a scout finding, a few raw events, and a health check, all grouped together because they're about the same underlying problem.
 
 > New to the bigger picture? The [self-driving product](/blog/self-driving-product) post explains the pyramid this all sits inside: routine paper-cuts at the bottom (great for full automation), strategic judgment work at the top (firmly human). Scouts are how the pipeline notices there's something to do at all — at every level of that pyramid.
 
-## The big idea: your pipeline is now (mostly) markdown
-
-Here's the shift worth dwelling on.
+## Your pipeline can be (mostly) markdown
 
 In a traditional data pipeline, the logic that decides "is this interesting?" lives in code: thresholds, `if/else` branches, helper functions, a scheduler, a pile of glue. Changing what you care about means a code change, a review, a deploy.
 
