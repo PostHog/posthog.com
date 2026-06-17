@@ -20,7 +20,7 @@ seo:
 
 A scout is a small agent (don't overthink that word) that looks at, wrangles, and makes sense of any data available in PostHog. Its job is to emit useful **signals** — things worth knowing — that you or your agents can act on. Sometimes that action happens automatically, like an agent opening a PR to fix what the scout found.
 
-The interesting part isn't the agent. It's how little code there is around it. A scout is **99% a markdown file**. The thing that used to be a sprawl of `if/else` branches and helper functions in an old-school data pipeline is now just a few hundred lines of English that anyone can read and improve. This post walks through how that works, with two real scouts we run on our own project — one that watches code feedback, and one that watches what the internet says about us.
+The agent loop is genuinely interesting — but it's also the part we wanted to build the least of. The interesting shift is what it lets you do: a scout is, at its core, **a skill** — and that skill becomes the main interface for everyone who touches it, human or agent. The thing that used to be a sprawl of `if/else` branches and helper functions in an old-school data pipeline starts life as a few hundred lines of English that anyone can read, write, and improve (and scales up to bundled reference docs and scripts when a scout needs them). Code moves into language and instructions, and the skill becomes the place where the logic actually lives. This post walks through how that works, with two real scouts we run on our own project — one that watches code feedback, and one that watches what the internet says about us.
 
 If you just want to see scouts in action, skip to [two scouts, end to end](#two-scouts-end-to-end).
 
@@ -45,7 +45,15 @@ In a traditional data pipeline, the logic that decides "is this interesting?" li
 
 With a scout, almost all of that logic lives in a **skill** — a markdown file the agent is told to read and operate by. The skill is where you encode your business knowledge: what's normal, what's noise, what's worth waking a human for. What used to be `if response_rate < 0.3 and sample_size > 30:` is now a sentence like *"a flagship NPS survey needs ≥30 responses/week and a ≥10% score drop before it's worth acting on."* That's trivially easy to iterate on, and you don't need to be an engineer to do it.
 
-Everything else — the loop, the sandbox, the scheduler, the memory — is deliberately thin plumbing around that one markdown file.
+Everything else — the loop, the sandbox, the scheduler, the memory — is deliberately thin plumbing around that skill.
+
+### Markdown is the entry point, not the ceiling
+
+"A markdown file" is the low bar to entry — and for a lot of scouts it's genuinely all you need. But a scout is a full [Agent Skill](https://agentskills.io/specification), so it scales up the same way any skill does. The `SKILL.md` is the entry point, and a more complex scout can bundle **reference files** the agent loads on demand and **runnable example scripts** for the parts that genuinely want code.
+
+A good example is the [anomaly-detection scout](https://github.com/PostHog/posthog/tree/master/products/signals/skills/signals-scout-anomaly-detection): its `SKILL.md` describes the workflow, but it ships a `references/anomaly-methods.md` that spells out the actual scoring math — a robust z-score over a median/MAD baseline, with explicit thresholds and guards. That's logic you *want* pinned down precisely rather than left to the model's judgment. The `exploring-signals-scouts` skill goes further and ships real Python scripts (`fleet_survey.py`, `assess_health.py`) the agent runs directly.
+
+So the spectrum runs from "a few sentences of English" up to "a skill with reference docs and executable scripts" — and the nice part is you start at the easy end and only reach for the heavier machinery when a particular scout actually needs it.
 
 ## How it works
 
