@@ -4,9 +4,9 @@ title: AI wizard
 
 import WizardInstall from 'getting-started/_snippets/wizard.mdx'
 
-The PostHog wizard automatically installs and instruments PostHog into your application codebase using AI. It's an agentic CLI tool that handles the entire PostHog integration process on your behalf.
+The PostHog wizard is an agentic CLI tool that uses AI to set up and manage PostHog in your codebase. By default, it installs and instruments PostHog for you with a single command: `npx @posthog/wizard`.
 
-Set up the PostHog platform in minutes, with a single command.
+It does more than installation, though. The wizard can also audit an existing integration, migrate you from another vendor, upload source maps, set up Revenue Analytics, and diagnose configuration issues – so it's just as useful after you're up and running as it is on day one.
 
 <WizardCommand slim />
 
@@ -61,11 +61,11 @@ Running `npx @posthog/wizard` starts the default integration flow. The wizard al
 | `wizard upload-source-maps` | Upload source maps to PostHog Error Tracking |
 | `wizard mcp add` / `wizard mcp remove` | Manage the PostHog MCP server for your AI agent |
 | `wizard slack add` | Connect PostHog to your Slack |
-| `wizard skill <skill-name>` | Run a single context-mill skill by name (`wizard skill list` lists them all) |
+| `wizard skill <skill-name>` | Run a single skill by name – browse the available skills in the [context-mill releases](https://github.com/PostHog/context-mill/releases/latest) |
 
 ### Audit subcommands
 
-`wizard audit` on its own runs the `events` audit (the default). Pass a subcommand to run a specific one.
+`@npx @posthog/wizard audit` on its own runs the `events` audit. Pass a subcommand to run a specific one.
 
 | Command | What it does |
 |---|---|
@@ -77,8 +77,6 @@ Running `npx @posthog/wizard` starts the default integration flow. The wizard al
 | `wizard audit session-replay` | Audit session replay setup |
 | `wizard audit web-analytics` | Audit web analytics setup |
 
-> **`wizard audit <subcommand>` chooses an audit area — it does not take a skill name.** Each audit subcommand is a PostHog skill exposed as a command. The separate `wizard skill <skill-name>` command runs any skill directly by name (`wizard skill list` shows them all).
-
 ### Command changes
 
 The CLI was overhauled to consolidate commands into a smaller, more consistent surface. If you used an older command name, here's where it went:
@@ -88,7 +86,7 @@ The CLI was overhauled to consolidate commands into a smaller, more consistent s
 | `wizard integrate` | `wizard` | The default flow now runs the integration |
 | `wizard events-audit` | `wizard audit events` | Now an `audit` subcommand |
 | `wizard audit` | `wizard audit <subcommand>` | Now takes a subcommand; `wizard audit all` runs a full audit |
-| `wizard revenue` | `wizard revenue-analytics` | Renamed — update any scripts using `revenue` |
+| `wizard revenue` | `wizard revenue-analytics` | Renamed – update any scripts using `revenue` |
 | `wizard upload-sourcemaps` | `wizard upload-source-maps` | Renamed (the old `upload-sourcemaps` still works) |
 
 ## Feedback
