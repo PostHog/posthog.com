@@ -197,6 +197,19 @@ And this is the scout whose scratchpad best shows the **memory model evolving**.
 
 You can read that scratchpad top to bottom and reconstruct everything the scout knows, every judgment call it's made, and why it's been quiet on the things it's chosen to stay quiet on. That legibility — being able to *audit an agent's memory in plain text* — is, to me, the whole pitch.
 
+## Where this is going
+
+Scouts today are deliberately narrow: read your data, decide if something's worth knowing, emit a signal. That's the foundation, and keeping it small is the point. But there's a lot of obvious headroom, and a bunch of it is already on the roadmap:
+
+- **Richer, more visual reports.** Right now a scout emits a structured finding and the pipeline turns it into a report. We want scouts to produce more of that report directly — charts, embedded insights, the actual visual evidence — rather than handing off a block of text for something downstream to dress up.
+- **Scouts that take action, not just surface it.** A finding is only useful if something happens. The natural next step is letting a scout do more than emit: ping you on the right channel, or take a PostHog MCP *write* action on your behalf — keep a dashboard tidy automatically, file an alert, tweak a flag — all within guardrails you set.
+- **Bring your own MCP.** Scouts read PostHog through the PostHog MCP today. There's no reason they should be limited to it. Letting a scout reach an *external* MCP would let it plug into the other tools and systems you already use — your issue tracker, your data stack, your on-call — so a finding can flow straight into where you actually work.
+- **Whole units of work, not just PRs.** A real change is rarely one PR. It's the PR *plus* a tracking dashboard, the feature flag to roll it out, the alert to watch it, and an experiment to prove it worked. The ambition is for a scout (and the agents downstream of it) to assemble that whole collection, not just the code.
+- **Right-sized models.** A scout watching for a simple threshold breach doesn't need the same horsepower as one reasoning across products. Letting simpler scouts run on cheaper, faster base models keeps the fleet economical as it grows.
+- **Smarter triggers.** Scouts run on a schedule today. Time is the simplest trigger, but not always the right one — we want scouts that wake on the *event that matters* (a deploy, a spike, another scout's finding) instead of just waiting for the next tick.
+
+The throughline: keep the core tiny and the skill in charge, and let scouts climb the [self-driving pyramid](/blog/self-driving-product) — from noticing, to recommending, to doing.
+
 ## Try it yourself
 
 The fastest way to get hands-on is [PostHog Code](https://github.com/PostHog/code/releases/latest), our desktop coding agent — download it, sign in, and the PostHog MCP is wired up for you. From there you can:
