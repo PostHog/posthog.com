@@ -236,9 +236,15 @@ function QuestionFormMain({
 
                             {disclaimer && (
                                 <p className="text-xs text-center mt-4 ml-[50px] [text-wrap:_balance] opacity-60 mb-0 text-primary">
-                                    [Community questions are independent of PostHog support](/handbook/support/customer-support#community).
-                                    If you have access to support through your PostHog plan, especially if you need to share personal info,
-                                    you can file a support ticket [in the app](https://app.posthog.com#panel=support) instead.
+                                    <Link to="/handbook/support/customer-support#community">
+                                        Community questions are independent of PostHog support
+                                    </Link>
+                                    . If you have access to support through your PostHog plan, especially if you need to
+                                    share personal info, you can file a support ticket{' '}
+                                    <Link to="https://app.posthog.com#panel=support" externalNoIcon>
+                                        in the app
+                                    </Link>{' '}
+                                    instead.
                                 </p>
                             )}
                         </Form>
