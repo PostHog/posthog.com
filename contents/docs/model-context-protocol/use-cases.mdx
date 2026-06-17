@@ -104,6 +104,27 @@ Wire up integrations from a single prompt instead of clicking through the UI.
   outcome="Sends a mock payload and returns execution logs."
 />
 
+### Edit workflow graphs
+
+Make surgical edits to a draft [workflow's](/docs/workflows) graph without resending the entire action and edge list. Operations apply atomically – the graph is validated before saving.
+
+<PromptExample
+  prompt="Change the email subject in the welcome-email step of my onboarding workflow to 'Welcome aboard, {{person.name}}'."
+  outcome="Sends an update_action op that deep-merges just the subject field, leaving the rest of the node untouched."
+/>
+<PromptExample
+  prompt="Add a 1-hour delay step between the signup trigger and the welcome email in my onboarding workflow."
+  outcome="Adds a new delay action and rewires the edges so the trigger flows through the delay into the email step."
+/>
+<PromptExample
+  prompt="Remove the SMS reminder step from my checkout-abandonment workflow."
+  outcome="Removes the action and automatically reconnects incoming edges to the next step in the chain."
+/>
+<PromptExample
+  prompt="Replace all outgoing edges from the conditional branch step in my trial-expiry workflow so the 'enterprise' branch goes to a custom email instead."
+  outcome="Uses replace_action_edges to swap the branch's outgoing connections in one atomic operation."
+/>
+
 ### Create and manage email templates
 
 Design and edit email templates for [Workflows](/docs/workflows) and broadcasts directly from your editor. See the [email creation guide](/docs/workflows/create-emails-ai) for more.
