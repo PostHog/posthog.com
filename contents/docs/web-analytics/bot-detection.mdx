@@ -1,0 +1,87 @@
+---
+title: Bot and traffic detection
+---
+
+PostHog classifies traffic by user agent so you can tell humans apart from bots, crawlers, and automation directly in your queries. The classification runs in [SQL](/docs/sql), so it works anywhere HogQL does – the SQL editor, insights, trends, and web analytics breakdowns.
+
+This is different from the [client-side bot blocking](/docs/web-analytics/troubleshooting#do-stats-include-bots-and-crawlers) in the PostHog JavaScript SDK, which stops detected bots from sending events in the first place. The functions here classify traffic that has already been captured, so you can include, exclude, or break down by traffic type at query time without losing the underlying data.
+
+## Functions
+
+Each function takes a user agent string and returns its classification. Pass the raw user agent from the event, usually `properties.$raw_user_agent`.
+
+| Function | Returns | Example |
+| --- | --- | --- |
+| `isLikelyBot(user_agent)` | `true` if the user agent matches a bot or automation pattern, otherwise `false`. An empty user agent counts as a bot. | `true` |
+| `getTrafficType(user_agent)` | One of `AI Agent`, `Bot`, `Automation`, or `Regular`. | `Bot` |
+| `getTrafficCategory(user_agent)` | A subcategory such as `ai_crawler`, `ai_search`, `search_crawler`, `seo_crawler`, `social_crawler`, `monitoring`, `http_client`, or `headless_browser`. Returns `regular` for human traffic. | `search_crawler` |
+| `getBotType(user_agent)` | The same subcategory as `getTrafficCategory`, but returns an empty string for human traffic – handy for filtering. | `search_crawler` |
+| `getBotName(user_agent)` | The bot's name, such as `Googlebot`, `ChatGPT`, or `curl`. Empty for human traffic. | `Googlebot` |
+| `getBotOperator(user_agent)` | The company or operator behind the bot, such as `Google`, `OpenAI`, or `Anthropic`. Empty for human traffic. | `Google` |
+
+`isLikelyBot` is named "likely" because detection is based on user agent heuristics – it can't confirm with certainty that a request is automated.
+
+## Examples
+
+Break down pageviews by traffic type:
+
+```sql
+SELECT
+    getTrafficType(properties.$raw_user_agent) AS traffic_type,
+    count() AS events
+FROM events
+WHERE event = '$pageview'
+GROUP BY traffic_type
+ORDER BY events DESC
+```
+
+Count human pageviews by excluding bots:
+
+```sql
+SELECT count() AS human_pageviews
+FROM events
+WHERE event = '$pageview'
+    AND NOT isLikelyBot(properties.$raw_user_agent)
+```
+
+Find which bots hit your site most often:
+
+```sql
+SELECT
+    getBotName(properties.$raw_user_agent) AS bot,
+    getBotOperator(properties.$raw_user_agent) AS operator,
+    count() AS hits
+FROM events
+WHERE event = '$pageview'
+    AND isLikelyBot(properties.$raw_user_agent)
+GROUP BY bot, operator
+ORDER BY hits DESC
+```
+
+## Virtual properties
+
+For convenience, PostHog exposes the classification as virtual event properties. They read the user agent for you (falling back from `$raw_user_agent` to `$user_agent`), so you don't have to pass it in. They're available wherever you select event properties, including breakdowns:
+
+| Property | Equivalent to |
+| --- | --- |
+| `$virt_is_bot` | `isLikelyBot(...)` |
+| `$virt_traffic_type` | `getTrafficType(...)` |
+| `$virt_traffic_category` | `getTrafficCategory(...)` |
+| `$virt_bot_name` | `getBotName(...)` |
+| `$virt_bot_operator` | `getBotOperator(...)` |
+
+For example, to break down traffic without writing out the function:
+
+```sql
+SELECT
+    properties.$virt_traffic_type AS traffic_type,
+    count() AS events
+FROM events
+WHERE event = '$pageview'
+GROUP BY traffic_type
+ORDER BY events DESC
+```
+
+## How classification works
+
+Classification matches the user agent against a maintained list of known bot, crawler, and automation patterns. The list is open source and pull requests are welcome – you can find it in the [PostHog repository](https://github.com/PostHog/posthog/blob/master/products/web_analytics/backend/hogql_queries/bot_definitions.py).
