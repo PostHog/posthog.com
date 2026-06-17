@@ -84,6 +84,8 @@ posthog.setPersonProperties(
 
 This creates a special `$set` event that is sent to PostHog. For more details on the difference between `$set` and `$set_once`, see our [person properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
 
+To remove person properties, use `unsetPersonProperties()`. See [person properties](/docs/product-analytics/person-properties#how-to-remove-person-properties) for examples.
+
 ## Resetting a user
 
 If a user logs out or switches accounts, you should call `reset` to unlink any future events made on that device with that user. This prevents multiple users from being grouped together due to shared cookies between sessions. **We recommend you call `reset` on logout even if you don't expect users to share a computer.**

@@ -179,6 +179,8 @@ posthog.capture('some_event', { $set: { userProperty: 'value' } })
 posthog.capture('some_event', { $set_once: { userProperty: 'value' } })
 ```
 
+You can also use `setPersonProperties()` and `unsetPersonProperties()` to manage person properties directly. See [person properties](/docs/product-analytics/person-properties) for examples.
+
 ## Super properties
 
 Super properties are properties associated with events that are set once and then sent with every `capture` call, be it a `$screen`, an autocaptured touch, or anything else.
