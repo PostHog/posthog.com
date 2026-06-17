@@ -172,7 +172,7 @@ export default function PostHogMCPLanding(): JSX.Element {
 
                         <QuestLogItem title="Talk to me, baby" subtitle="Natural language navigation" icon="IconChat">
                             <p>
-                                Once you connect to the PostHog MCP server, see how Hogpilled your agent has become. For
+                                Once you connect to the PostHog MCP server, see how Hogpiled your agent has become. For
                                 example:
                             </p>
 
@@ -243,7 +243,7 @@ export default function PostHogMCPLanding(): JSX.Element {
                                     to="/docs/model-context-protocol"
                                     state={{ newWindow: true }}
                                 >
-                                    Get your agents Hogpilled
+                                    Get your agents Hogpiled
                                 </CallToAction>
                             </div>
                         </QuestLogItem>

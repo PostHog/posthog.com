@@ -126,6 +126,11 @@
         { "source": "/docs/tracing", "destination": "/docs/distributed-tracing", "statusCode": 301 },
         { "source": "/docs/tracing/:path*", "destination": "/docs/distributed-tracing/:path*", "statusCode": 301 },
         {
+            "source": "/docs/new-to-posthog/getting-hogpilled",
+            "destination": "/docs/new-to-posthog/getting-hogpiled",
+            "statusCode": 301
+        }
+        {
             "source": "/docs/posthog-code/inbox/triage",
             "destination": "/docs/posthog-code/inbox/implementation",
             "statusCode": 301

@@ -29,7 +29,7 @@ const processDocsMenu = (activeFlags: string[] | null) => {
         'Advanced',
         'Tools',
         'AI engineering',
-        'Getting HogPilled',
+        'Getting Hogpiled',
     ]
 
     const featuredAIPlatformItems = [

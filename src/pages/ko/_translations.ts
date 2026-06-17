@@ -745,7 +745,7 @@ const koDeepMenuTranslations: Record<string, string> = {
     'Model Context Protocol (MCP)': '모델 컨텍스트 프로토콜(MCP)',
     'Code editors': '코드 편집기',
     Platforms: '플랫폼',
-    'Getting HogPilled': 'Getting HogPilled',
+    'Getting Hogpiled': 'Getting Hogpiled',
     'Measuring activation': '활성화 측정',
     'Tracking retention': '리텐션 추적',
     'Capturing revenue': '수익 캡처',

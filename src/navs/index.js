@@ -2914,8 +2914,8 @@ export const docsMenu = {
                     name: 'Winning with PostHog',
                 },
                 {
-                    name: 'Getting HogPilled',
-                    url: '/docs/new-to-posthog/getting-hogpilled',
+                    name: 'Getting Hogpiled',
+                    url: '/docs/new-to-posthog/getting-hogpiled',
                     icon: 'IconCrown',
                 },
                 {

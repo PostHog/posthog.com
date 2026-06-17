@@ -582,7 +582,7 @@ export default function ProductAnalyticsLanding(): JSX.Element {
                                                 {item.url && (
                                                     <>
                                                         <p className="text-secondary !mb-2">
-                                                            ...or just use the MCP and ask your hogpilled agent to get
+                                                            ...or just use the MCP and ask your hogpiled agent to get
                                                             your answer.
                                                         </p>
                                                         <Link

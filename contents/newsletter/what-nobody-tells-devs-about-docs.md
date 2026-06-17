@@ -36,7 +36,7 @@ When users start with your product, you want them to go from “nothing” to �
 
 Start by writing the most basic, obvious doc to help someone use your product. What would you send to a friend to help them get started with this feature?
 
-If this means helping them [install and set up](/docs/getting-started/install) your product, do it. If this means teaching them the concepts [necessary to succeed](/docs/new-to-posthog/getting-hogpilled), do it. Either way, having a beginner’s mindset to your own product reveals the most important docs you need to write.
+If this means helping them [install and set up](/docs/getting-started/install) your product, do it. If this means teaching them the concepts [necessary to succeed](/docs/new-to-posthog/getting-hogpiled), do it. Either way, having a beginner’s mindset to your own product reveals the most important docs you need to write.
 
 For example, our new [error tracking docs](/docs/error-tracking) have less content than our other products, but it does include the core of installation, monitoring errors, and viewing stack traces. This gives users enough to get started and we can build on it from there.
 
