@@ -20,6 +20,14 @@ To link MongoDB:
 
 > **Tip:** MongoDB Atlas SRV connection strings usually omit the database name (e.g., `mongodb+srv://user:pass@cluster.mongodb.net/`). If yours doesn't include one, fill in the **Database name** field. A database specified in the connection string (e.g., `mongodb+srv://user:pass@cluster.mongodb.net/my_database`) takes precedence over this field.
 
+<CalloutBox icon="IconWarning" title="Percent-encode special characters in credentials" type="caution">
+
+If your MongoDB username or password contains reserved characters (`: / ? # [ ] @ %`), they must be percent-encoded in the connection string. For example, a password of `p@ss:word` becomes `p%40ss%3Aword`.
+
+You can use Python's `urllib.parse.quote_plus()` or any URL encoder to escape these characters. If credentials aren't encoded, syncs fail with a "Username and password must be escaped according to RFC 3986" error.
+
+</CalloutBox>
+
 Once the syncs are complete, you can start using MongoDB data in PostHog.
 
 > **Note:** MongoDB data is unstructured so the returned columns are an `_id` field and a `data` column that contain the entire document contents. Data fields can be selected with dot notation (e.g. `data.field1`)

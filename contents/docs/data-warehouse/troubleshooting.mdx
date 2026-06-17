@@ -69,6 +69,18 @@ To fix this:
 3. Upload the new Google Cloud JSON key file.
 4. Re-run the sync.
 
+## Why is my MongoDB sync failing with "must be escaped according to RFC 3986"?
+
+This error means your MongoDB connection string contains special characters (like `: / ? # [ ] @ %`) in the username or password that aren't percent-encoded. MongoDB connection strings use these characters as URI delimiters, so unescaped special characters in credentials cause parsing errors before any connection is attempted.
+
+This is a non-retryable error – PostHog stops the sync instead of retrying indefinitely.
+
+To fix this:
+
+1. Percent-encode the special characters in your username and password. You can use Python's `urllib.parse.quote_plus()` or any URL encoder. For example, if your password is `p@ss:word`, encode it as `p%40ss%3Aword`.
+2. Update the connection string in PostHog with the encoded credentials.
+3. Re-run the sync.
+
 ## Why is my Shopify sync failing with "Payment Required"?
 
 If your Shopify sync fails with a `402 Client Error: Payment Required` message, it means your Shopify store is frozen due to an unpaid bill. Shopify's Admin API returns this error when the store owner has an outstanding balance.
