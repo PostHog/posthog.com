@@ -10,13 +10,10 @@ posthog.setPersonProperties(
 ```
 
 ```node
-client.capture({
+client.setPersonProperties({
     distinctId: 'distinct_id',
-    event: '$set',
-    properties: {
-        $set: { name: 'Max Hedgehog'  },
-        $set_once: { initial_url: '/blog' },
-    },
+    properties: { name: 'Max Hedgehog' },
+    propertiesOnce: { initial_url: '/blog' },
 })
 ```
 

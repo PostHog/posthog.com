@@ -13,3 +13,17 @@ See the docs runbook for more info: https://posthog.com/handbook/docs-and-wizard
 import { SRReactNativeInstallationWrapper } from './_snippets/sr-installation-wrapper.tsx'
 
 <SRReactNativeInstallationWrapper />
+
+## iOS dependency resolution
+
+By default, the optional React Native native plugin resolves `posthog-ios` through CocoaPods.
+
+If your iOS project uses Swift Package Manager for native dependencies, you can opt in to resolving `posthog-ios` through SPM instead. Add the following to `ios/Podfile.properties.json`:
+
+```json
+{
+  "posthog.useSpm": "true"
+}
+```
+
+This path requires `use_frameworks! :linkage => :dynamic` in your `ios/Podfile`. Without `posthog.useSpm`, the default CocoaPods resolution path is unchanged.

@@ -146,9 +146,9 @@ Enable **Stop evaluation at first matching condition set** to change this behavi
 
 This is useful when you want more deterministic flag behavior – for example, ensuring that a user who matches a targeted condition but is excluded by its rollout doesn't "fall through" to a broader catch-all condition below.
 
-<CalloutBox icon="IconWarning" title="Not supported with local evaluation" type="caution">
+<CalloutBox icon="IconInfo" title="Local evaluation support varies by SDK" type="fyi">
 
-This setting is not applied when a server-side SDK evaluates the flag with [local evaluation](/docs/feature-flags/local-evaluation). Local evaluation SDKs evaluate all condition sets regardless of this setting. It takes effect when the flag is evaluated through the `/flags` endpoint.
+Support for this setting with [local evaluation](/docs/feature-flags/local-evaluation) varies by SDK. Check your SDK's documentation before relying on early exit with local evaluation.
 
 </CalloutBox>
 
