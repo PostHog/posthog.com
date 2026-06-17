@@ -18,6 +18,7 @@ export const webAnalytics = {
         title: 'Web Analytics – Track and measure traffic with PostHog',
         description:
             'Track traffic and performance with Web Analytics. Get privacy-friendly insights, a pre-built dashboard, real-time data, and no sampling.',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_b6d6209ed4.jpg',
     },
     overview: {
         title: 'Privacy-focused web analytics',
