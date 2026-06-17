@@ -303,7 +303,7 @@ export default function AIObservabilityLanding(): JSX.Element {
                                 <CallToAction
                                     type="primary"
                                     size="md"
-                                    to="https://app.posthog.com/settings/project-integrations#integration-slack"
+                                    to="https://app.posthog.com/integrations/slack"
                                 >
                                     Connect Slack
                                 </CallToAction>
