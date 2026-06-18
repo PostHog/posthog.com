@@ -191,19 +191,71 @@ This is all a little hand wavey so far so let's trace two real scouts we run on 
 
 That report becomes an event. The scout's job is to turn that low-volume, high-signal stream into actionable findings for the MCP team.
 
-A single run on June 16th read a six-hour window containing exactly **two** feedback events, and emitted two findings. The more interesting one was a **P2**, because an agent had been *hard-blocked*:
+Here's one finding the whole way through that pipeline — a single agent's gripe becoming a PR. Each hop is a box: skim the summaries for the shape, or pop one open to see the actual artifact.
 
-![A P2 finding from the MCP feedback scout in the PostHog inbox, reporting a hard-blocked agent](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_06_18_at_11_58_50_aa95fd0074.png)
+<details>
 
-> **`dashboard-update` claims it can update a dashboard's `filters`, but the input schema has no `filters` field — and calling it with one returns HTTP 200 while silently dropping the value.** An agent was hard-blocked (`task_completed = false`) trying to set a dashboard-level date filter; no other tool can do it. […] **Fix:** add a top-level `filters` object to the `dashboard-update` schema so the documented capability is reachable; or, if filters are intentionally unsupported, remove the "can update … filters" claim from the description.
+<summary>**① An agent files feedback** — `view-update` quietly drops the `sync_frequency` it advertises</summary>
 
-That's a real, reproducible bug report with a verbatim fix, generated from one piece of agent feedback — and it's exactly the kind of thing an agent can pick up and turn into a PR.
+On June 12th an agent set out to *"set a materialized view's refresh cadence to 12 hours"* — and couldn't. It filed this through the MCP's own `agent-feedback` tool:
 
-Two things from this scout are worth calling out because they show the system *learning*:
+> **What broke:** `view-update`'s description promises a `sync_frequency` parameter ('24hour', '12hour', '6hour', …), but its input schema has no such property and sets `additionalProperties: false`. Calling `view-update {id, sync_frequency: '12hour'}` (tried both normal and `--json`) returns 200 with the value unchanged — the param is silently dropped, no error. `view-materialize` always sets 24h and exposes no frequency arg either, so there's no MCP path to a non-default cadence.
+>
+> **Suggested fix:** Add `sync_frequency` (enum `1min`…`30day`/`never`) to the `view-update` input schema so it's actually forwarded, or add a dedicated `view-set-sync-frequency` tool.
 
-**Signals group into reports.** The other finding from that run — a token-blowout in `heatmaps-list` — didn't create a new report. It **grouped into an existing one**, *"Add pagination and field projection to MCP list/schema tools,"* which was already `in_progress`. Multiple scout runs, over days, all noticing flavors of the same underlying problem, converging into one piece of work.
+*`sentiment: negative` · `category: tool_input_schema` · `task_completed: false` · via `posthog-code`*
 
-**Findings escalate via memory.** Days earlier, the scout emitted a P3 about a missing `ensure_experience_continuity` input — and wrote a note in its scratchpad: *"promote to P2 if a second blocked report lands."* When a second agent hit the same wall, the next run read that note, saw the trigger fire, and re-emitted at P2. The escalation rule isn't in any code — it's a sentence the scout wrote to itself.
+</details>
+
+<details>
+
+<summary>**② The scout emits a signal** — it spots the silent-drop is now *blocking* and re-surfaces it</summary>
+
+The next run read that event and emitted a finding — recognizing the defect wasn't new, and that it had crossed a line:
+
+> **`view-update`'s documented `sync_frequency` parameter is absent from its input schema, so the value is silently dropped — and it has now hard-blocked an agent (`task_completed=false`), two days after we first flagged it at P3 with no fix shipped.**
+>
+> This is an *escalation update*, not a new discovery: the same defect was already emitted on 2026-06-10 at P3 — but every prior report was `mixed` / `task_completed=TRUE` (annoying but recoverable). The 06-12 report is the first `negative` / `task_completed=FALSE`. The silent drop rides the *success* path, so `$mcp_is_error` never catches it — only agent feedback surfaces it.
+>
+> **Fix (reporter-supplied, verbatim):** Add `sync_frequency` to the `view-update` input schema so it's actually forwarded to the saved-query PATCH, or add a dedicated `view-set-sync-frequency` tool.
+
+*finding `mcp-feedback-view-update-sync-frequency-blocks-2026-06-12` · P3 · confidence 0.74*
+
+</details>
+
+<details>
+
+<summary>**③ It becomes an inbox report** — root-caused and marked immediately actionable</summary>
+
+The pipeline turned the signal into a report, which even did the root-cause analysis:
+
+> **fix(data-warehouse): expose `sync_frequency` in view-update MCP schema** — P3, *immediately actionable*
+>
+> **Root cause:** `sync_frequency` is declared as `serializers.SerializerMethodField()`, which DRF treats as read-only. That makes drf-spectacular mark it `readOnly: true`, so Orval omits it from the writable PATCH body, and the MCP `ViewUpdateSchema` never includes it. The backend actually *does* support the write — the serializer reads `sync_frequency` off `request.data` as a side-channel — but the generated schema can't expose what it thinks is read-only.
+>
+> **How to resolve:** Make `sync_frequency` a writable serializer field so it flows into the generated PATCH body, then regenerate the MCP types; reuse the existing `SyncFrequencyEnum`.
+
+</details>
+
+<details>
+
+<summary>**④ An agent opens the fix** — [PR #63393](https://github.com/PostHog/posthog/pull/63393), authored autonomously</summary>
+
+A PostHog Code agent picked up the report and opened the PR on its own — introducing a writable `SyncFrequencyField` so the cadence flows into the generated PATCH body, and adding three regression tests (a writable-field guard, a round-trip update, and an invalid-value rejection).
+
+From the PR's own agent-context section:
+
+> Authored by Claude Code (`claude-opus-4-8`) acting on PostHog inbox report `019ebd3a…`. **Decision:** chose to make `sync_frequency` a writable serializer field over adding a dedicated `view-set-sync-frequency` tool — it's the minimal change that fixes the silent-drop for *all* clients (frontend, API, MCP) at once and follows the existing pattern. Agent-authored — requires human review; do not self-merge.
+
+</details>
+
+That's the whole loop this post is about: one piece of agent feedback, turned into a reproducible finding with a verbatim fix, turned into a root-caused report, and picked up by *another* agent — no human in the chain until review.
+
+Those boxes trace one finding end to end. Two behaviors from this scout generalize beyond it, and both show the system *learning*:
+
+**Signals group into reports.** Take a token-blowout the scout flagged in `heatmaps-list`: it didn't spawn a new report, it **grouped into an existing one**, *"Add pagination and field projection to MCP list/schema tools,"* which was already `in_progress`. Multiple scout runs, over days, all noticing flavors of the same underlying problem, converging into one piece of work.
+
+**Findings escalate via memory.** Earlier the same day, the scout emitted a P3 about a missing `ensure_experience_continuity` input — and wrote a note in its scratchpad: *"promote to P2 if a second blocked report lands."* When a second agent hit the same wall, the next run read that note, saw the trigger fire, and re-emitted at P2. The escalation rule isn't in any code — it's a sentence the scout wrote to itself.
 
 ### 2. The brand mentions scout (the non-code one)
 
