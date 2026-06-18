@@ -16,9 +16,11 @@ However, there are a few things which can break the intended auto-update behavio
 
 - **Outdated snippet code** - The snippet itself (the loader stub) occasionally needs updating, to make sure you're initializing PostHog in a way that includes more recent bug fixes and improvements. To make sure you're using the most recent version of the snippet, copy the HTML snippet directly from your [project settings](https://app.posthog.com/settings/project-details#snippet) and paste it directly into the `<head>` section of the HTML for your site or app. (Be sure to remove the old version while you're at it.)
 
+- **Pinned snippet version** - Projects can intentionally pin the HTML snippet to a major, minor, or exact `posthog-js` version. Exact pins are useful for short-term rollback or debugging, but leaving one in place prevents automatic SDK updates. Check [Project settings → Snippet version](https://app.posthog.com/settings/project-details#js-snippet-version) and see [HTML snippet versioning](/docs/libraries/js/snippet-versioning) for details.
+
 - **See also** - [Caching layers](#caching-layers) for more causes of stale SDK versions hanging around long past the expiry date, when using the HTML snippet.
 
- > **Note:** The HTML snippet supports all the same features, functions, methods, and config options as [installing the npm package](/docs/libraries/js#option-2-install-via-package-manager), while also keeping you up-to-date with the latest available version of the SDK.
+> **Note:** The HTML snippet supports all the same features, functions, methods, and config options as [installing the npm package](/docs/libraries/js#option-2-install-via-package-manager), while also keeping you up-to-date with the latest available version of the SDK.
 
 ### npm and package manager lockfiles
 
@@ -80,11 +82,14 @@ Caching at the CDN layer is closely related to how you build and deploy your app
 > For our [JavaScript web SDK](/docs/libraries/js) (a package within the `posthog-js` monorepo) we recommend the [HTML snippet](/docs/web-analytics/installation/html-snippet), which will serve the latest/current version automatically.
 
 #### JavaScript web HTML snippet
+
 1. Copy your snippet from [project settings](https://app.posthog.com/settings/project-details#snippet). This ensures you're using the current snippet code with your project API key pre-populated.
 2. Do NOT add an `if (!window.posthog)` guard wrapping the snippet.
-3. The snippet loads `posthog-js` from our CDN and will auto-update on each fresh page load. No further action is required unless you're experiencing caching issues (see [Caching layers](#caching-layers)).
+3. Leave [Snippet version](https://app.posthog.com/settings/project-details#js-snippet-version) unset, or set it to the major pin `1`, unless you intentionally need a short-term pin. This keeps the snippet on the latest supported v1 release.
+4. The snippet loads `posthog-js` from our CDN and will auto-update on each fresh page load. No further action is required unless you're experiencing caching issues (see [Caching layers](#caching-layers)).
 
 #### JavaScript web npm package
+
 Dependabot and Renovate can open pull requests when new versions of PostHog packages are published, making it easier to stay current without manual monitoring.
 
 ##### Security considerations
