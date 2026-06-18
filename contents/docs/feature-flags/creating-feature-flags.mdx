@@ -297,7 +297,7 @@ Flags without evaluation contexts continue to evaluate for all requests (default
 
 <CalloutBox icon="IconWarning" title="Evaluation context behavior" type="action">
 
-- SDKs must send the `evaluation_contexts` parameter with matching contexts for the flag to evaluate (the legacy `evaluation_environments` parameter is also supported)
+- Supported SDKs must send the `evaluation_contexts` request parameter with matching contexts for the flag to evaluate (the legacy `evaluation_environments` request parameter is supported by some SDK versions)
 - Flags with no evaluation contexts will evaluate for all requests (default behavior)
 - At least one evaluation context must match for the flag to be included in the evaluation
 

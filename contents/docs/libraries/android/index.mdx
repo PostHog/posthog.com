@@ -414,7 +414,7 @@ val config = PostHogAndroidConfig(
 | `sendFeatureFlagEvent` | `true` | Sends `$feature_flag_called` when a feature flag is evaluated. |
 | `featureFlagCalledCacheSize` | `1000` | Number of feature flag calls cached for deduplicating `$feature_flag_called` events. |
 | `preloadFeatureFlags` | `true` | Fetches feature flags automatically during setup. |
-| `evaluationContexts` | `null` | Context tags that constrain which feature flags are evaluated. Available in version 3.25.0+. |
+| `evaluationContexts` | `null` | Context tags that constrain which feature flags are evaluated. Available in version 3.29.1+. The legacy `evaluationEnvironments` option is available in version 3.24.0+. |
 | `onFeatureFlags` | `null` | Callback invoked when feature flags are loaded. |
 
 ### Product configuration objects
