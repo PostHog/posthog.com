@@ -38,7 +38,7 @@ const surfaces = [
     },
     {
         name: 'Web',
-        url: 'https://app.posthog.com',
+        url: '/docs/start-here/web',
         icon: 'IconLaptop',
         color: 'blue',
         description: 'The PostHog you know and love, in your browser.',
