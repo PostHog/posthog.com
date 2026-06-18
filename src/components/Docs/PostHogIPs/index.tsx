@@ -1,12 +1,12 @@
 import React from 'react'
 import { InlineCode } from 'components/InlineCode'
-import { POSTHOG_OUTBOUND_IPS } from 'constants/outboundIPs'
+import { POSTHOG_IPS } from 'constants/posthogIPs'
 
 // Inline form: bold EU/US labels followed by comma-separated inline code chips.
 // Uses the InlineCode component so the chips render identically to the markdown
 // backticks that were previously hardcoded in posthog-ips.mdx. Renders two
 // paragraphs to match the original markdown output.
-export const OutboundIPsInline = () => {
+export const PostHogIPsInline = () => {
     const renderIPs = (ips: string[]) =>
         ips.map((ip, index) => (
             <React.Fragment key={ip}>
@@ -18,10 +18,10 @@ export const OutboundIPsInline = () => {
     return (
         <>
             <p>
-                <strong>EU</strong>: {renderIPs(POSTHOG_OUTBOUND_IPS.EU)}
+                <strong>EU</strong>: {renderIPs(POSTHOG_IPS.EU)}
             </p>
             <p>
-                <strong>US</strong>: {renderIPs(POSTHOG_OUTBOUND_IPS.US)}
+                <strong>US</strong>: {renderIPs(POSTHOG_IPS.US)}
             </p>
         </>
     )
@@ -31,8 +31,8 @@ export const OutboundIPsInline = () => {
 // `.article-content` prose table styling. Cells are plain text (no code chips)
 // to match the markdown table that was previously hardcoded in
 // inbound-ip-addresses.mdx.
-export const OutboundIPsTable = () => {
-    const { US, EU } = POSTHOG_OUTBOUND_IPS
+export const PostHogIPsTable = () => {
+    const { US, EU } = POSTHOG_IPS
     const rowCount = Math.max(US.length, EU.length)
 
     return (

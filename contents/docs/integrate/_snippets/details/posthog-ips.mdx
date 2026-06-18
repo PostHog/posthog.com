@@ -1,11 +1,11 @@
-import { OutboundIPsInline } from 'components/Docs/OutboundIPs'
+import { PostHogIPsInline } from 'components/Docs/PostHogIPs'
 
 <details>
   <summary>Add IPs to Firewall/WAF allowlists (recommended)</summary>
 
   For certain features like [heatmaps](/docs/toolbar/heatmaps), your Web Application Firewall (WAF) may be blocking PostHog's requests to your site. Add these IP addresses to your WAF allowlist or rules to let PostHog access your site.
 
-  <OutboundIPsInline />
+  <PostHogIPsInline />
 
   These are public, stable IPs used by PostHog services (e.g., Celery tasks for snapshots).
 
