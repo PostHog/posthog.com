@@ -91,9 +91,9 @@ Another difference is what you're paying for. Both PostHog and Langfuse use usag
 <details>
 <summary>Main similarities between PostHog and Langfuse</summary>
 
-- Both are MIT licensed and offer a free tier.
 - Both capture LLM traces and monitor costs, latency, and errors out of the box.
 - Both support multiple framework integrations and work with OpenTelemetry.
+- Both offer a free tier and usage-based pricing.
 - Both can be self-hosted and are SOC 2 compliant.
 
 </details>
@@ -170,7 +170,7 @@ Another major difference is deployment. Langfuse is open source under the MIT li
 <details>
 <summary>Main differences between LangSmith and Langfuse</summary>
 
-- LangSmith automatically captures traces from LangChain and LangGraph applications with no extra instrumentation. Langfuse supports LangChain but takes a framework-agnostic approach.
+- LangSmith automatically captures traces from LangChain and LangGraph applications. Langfuse supports LangChain but takes a framework-agnostic approach.
 - LangSmith uses per-seat pricing at $39 per seat per month on the Plus plan. Langfuse uses usage-based pricing with no per-seat charges.
 - LangSmith is a proprietary product. Langfuse is open source under the MIT license.
 
@@ -381,7 +381,7 @@ Weave instruments LLM calls with a single Python or TypeScript decorator, then s
 
 - **Tracing:** Follow prompts, model calls, tool invocations, and agent workflows through a single trace.
 - **Evaluations:** Score outputs with pre-built, third-party, or custom scorers and compare results side by side across versions.
-- **Guardrails:** Block or modify unsafe outputs in real time using safety scorers for toxicity, bias, PII, and hallucinations.
+- **Guardrails:** Use safety and quality scorers to flag risks such as toxicity, bias, PII, hallucinations, coherence issues, and context-relevance problems.
 - **Monitors:** Track quality and safety metrics over time to catch regressions in production.
 
 ### How does Weights & Biases Weave compare to Langfuse?
