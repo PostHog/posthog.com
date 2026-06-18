@@ -166,6 +166,18 @@ Day-to-day operations your team would otherwise do by hand.
   prompt="Mark ticket #3 as resolved and set ticket #7 to high priority."
   outcome="Updates both tickets in a single call."
 />
+<PromptExample
+  prompt="Read the full message history for ticket #42."
+  outcome="Returns the ticket's message thread in chronological order, including author names, types, and internal notes."
+/>
+<PromptExample
+  prompt="Reply to ticket #42 with: 'Thanks for reporting this. I've escalated to the engineering team.'"
+  outcome="Posts a public reply that gets delivered to the customer via the ticket's channel (email, Slack, Teams, or GitHub)."
+/>
+<PromptExample
+  prompt="Add an internal note to ticket #42 saying 'Customer is on enterprise plan, prioritize this.'"
+  outcome="Stores a private note visible only to team members – the customer won't see it."
+/>
 
 ### Schedule reminders
 
