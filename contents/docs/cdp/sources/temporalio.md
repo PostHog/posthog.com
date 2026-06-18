@@ -27,6 +27,12 @@ Once the syncs are complete, you can start using Temporal.io data in PostHog.
 
 <SourceParameters />
 
+### Fallback decryption keys
+
+If your Temporal.io payloads have been encrypted with different keys over time (for example, during key rotation), you can provide additional decryption keys in the **Fallback decryption keys** field. This is optional and only applies when an **Encryption key** is already configured.
+
+Enter the keys as a comma-separated list (e.g. `key1,key2,key3`). PostHog tries the primary encryption key first, then falls back to these keys when decrypting payloads.
+
 ## Troubleshooting
 
 If your Temporal.io client certificate is expired, revoked, or no longer trusted by your namespace, syncs pause automatically and display an error message. Here are common TLS certificate errors and how to fix them:
