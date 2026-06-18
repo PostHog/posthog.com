@@ -417,6 +417,12 @@ REFRESH MATERIALIZED VIEW "your_view_name";
 
 After refreshing, re-enable the sync in PostHog.
 
+### `exceeded the compute time quota`
+
+This error occurs with serverless Postgres providers like Neon when the account or project has exceeded its compute-time quota. The provider suspends the database until the quota resets at the next billing period or the plan is upgraded.
+
+To fix this, upgrade your provider's plan or wait for the quota to reset, then re-enable the sync in PostHog.
+
 ### `cannot call jsonb_each on a non-object`
 
 This error occurs when syncing a view or materialized view whose definition calls `jsonb_each()` or `jsonb_each_text()` on a JSONB column that contains non-object values (such as arrays, scalars, or `null`) for at least one row. PostgreSQL evaluates the view at fetch time, and the `jsonb_each()` function fails on non-object values.

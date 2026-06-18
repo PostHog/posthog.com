@@ -167,6 +167,31 @@ Day-to-day operations your team would otherwise do by hand.
   outcome="Updates both tickets in a single call."
 />
 
+### Schedule reminders
+
+Set one-off or recurring reminders that fire as in-app notifications. Optionally attach a resource like a dashboard or experiment so the notification links straight to it.
+
+<PromptExample
+  prompt="Remind me every Monday at 9am to review the activation dashboard."
+  outcome="Creates a recurring reminder with a cron schedule and links it to the dashboard."
+/>
+<PromptExample
+  prompt="Set a reminder for tomorrow at 3pm to check the experiment results."
+  outcome="Creates a one-off reminder that fires once and marks itself completed."
+/>
+<PromptExample
+  prompt="What reminders do I have?"
+  outcome="Lists your reminders with their schedule, status, and next fire time."
+/>
+<PromptExample
+  prompt="Change my weekly activation reminder to fire at 10am instead of 9am."
+  outcome="Updates the schedule and recomputes the next fire time."
+/>
+<PromptExample
+  prompt="Cancel the weekly activation reminder."
+  outcome="Deletes the reminder so it stops firing."
+/>
+
 ## Multi-step recipes
 
 Single prompts get you a long way, but the real value of MCP comes from chaining tool calls into end-to-end workflows. Drop these sequences into your agent one step at a time – each prompt builds on the context the previous one returned.

@@ -7,7 +7,7 @@ if (PostHog.isFeatureEnabled("flag-key")) {
     // Do something differently for this user
 
     // Optional: fetch the payload
-    val matchedFlagPayload = PostHog.getFeatureFlagPayload("flag-key")
+    val matchedFlagPayload = PostHog.getFeatureFlagResult("flag-key")?.payload
 }
 ```
 
@@ -20,7 +20,7 @@ if (PostHog.getFeatureFlag("flag-key") == "variant-key") { // replace 'variant-k
     // Do something differently for this user
 
     // Optional: fetch the payload
-    val matchedFlagPayload = PostHog.getFeatureFlagPayload("flag-key")
+    val matchedFlagPayload = PostHog.getFeatureFlagResult("flag-key")?.payload
 }
 ```
 

@@ -1293,6 +1293,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/revops/lifecycle-analysis',
             },
             {
+                name: 'Signup enrichment pipeline',
+                url: '/handbook/growth/revops/enrichment-pipeline',
+            },
+            {
                 name: 'SalesOps',
                 url: '',
                 children: [
@@ -4143,7 +4147,8 @@ export const docsMenu = {
             url: '/docs/replay-vision',
             color: 'yellow',
             icon: 'IconEye',
-            description: 'Use AI to automatically watch your session recordings and turn what it sees into queryable data',
+            description:
+                'Use AI to automatically watch your session recordings and turn what it sees into queryable data',
             children: [
                 {
                     name: 'Replay Vision',
@@ -6962,6 +6967,7 @@ export const docsMenu = {
                         { name: 'iOS', url: '/docs/logs/installation/ios' },
                         { name: 'Android', url: '/docs/logs/installation/android' },
                         { name: 'Flutter', url: '/docs/logs/installation/flutter' },
+                        { name: 'Ruby on Rails', url: '/docs/logs/installation/ruby-on-rails' },
                         { name: 'Datadog', url: '/docs/logs/installation/datadog' },
                         { name: 'Other', url: '/docs/logs/installation/other' },
                     ],
