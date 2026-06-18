@@ -15,6 +15,7 @@ features:
   surveys: true
   aiObservability: false
   errorTracking: true
+  logs: true
 ---
 
 import FlutterIdentify from './_snippets/identify.mdx'
@@ -153,6 +154,10 @@ It's also possible to [run experiments without using feature flags](/docs/experi
 ## Error tracking
 
 To set up error tracking in your project, follow the [Flutter installation guide](/docs/error-tracking/installation/flutter).
+
+## Logs
+
+To set up [logs](/docs/logs) in your Flutter app, follow the [Flutter logs installation guide](/docs/logs/installation/flutter). The SDK exposes `Posthog().logger.{trace,debug,info,warn,error,fatal}` (and `Posthog().captureLog` for full control) for sending structured records to PostHog Logs, with batching, offline persistence, and a rate cap built in.
 
 ## Session replay
 

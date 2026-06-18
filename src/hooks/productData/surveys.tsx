@@ -20,6 +20,7 @@ export const surveys = {
         title: 'Surveys – Collect product feedback with PostHog',
         description:
             'Collect and analyze product feedback with Surveys. Launch customizable no-code surveys fast on web and mobile with templates for NPS, CSAT, user interviews, and more.',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/surveys_b918a1f9e9.jpg',
     },
     overview: {
         title: 'Ask anything with no-code surveys',

@@ -87,6 +87,7 @@ You can configure the following options:
 | `dom_event_allowlist`<br/>**Type:** `DomAutocaptureEvents[]`       | List of DOM events to enable autocapture on (e.g., `['click', 'change', 'submit']`).                                                                                                                                                                                                                                                  |
 | `element_allowlist`<br/>**Type:** `AutocaptureCompatibleElement[]` | List of DOM elements to enable autocapture on (e.g., `['a', 'button', 'form', 'input', 'select', 'textarea', 'label']`). We consider the element tree from root to target, so if `button` is in the allowlist, clicks on `button` or its children (like `svg`) are captured, but not clicks on parent `div` elements.                 |
 | `css_selector_allowlist`<br/>**Type:** `string[]`                  | List of CSS selectors to enable autocapture on (e.g., `['[ph-capture]']`). We consider the element tree from root to target, so if `['[id]']` is in the allowlist, clicks on elements with IDs or their parents with IDs are captured. Everything is enabled when there's no allowlist.                                               |
+| `css_selector_ignorelist`<br/>**Type:** `string[]`                 | List of CSS selectors to ignore autocapture on (e.g., `['.ph-no-autocapture', '[data-ph-no-autocapture]']`). We consider the element tree from root to target, so matching elements or their parents are ignored. If unset, PostHog ignores `.ph-no-autocapture` and `[data-ph-no-autocapture]` by default. An empty list ignores nothing. Providing any custom list replaces the defaults, so include them explicitly if you still want them honored. |
 | `element_attribute_ignorelist`<br/>**Type:** `string[]`            | Exclude certain element attributes from autocapture (e.g., `['aria-label']` or `['data-attr-pii']`).                                                                                                                                                                                                                                  |
 | `capture_copied_text`<br/>**Type:** `boolean`                      | When set to `true`, autocapture will capture the text of any element that is cut or copied.                                                                                                                                                                                                                                           |
 
@@ -107,6 +108,7 @@ posthog.init('<ph_project_token>', {
         // Element filtering
         element_allowlist: ['a', 'button', 'form', 'input', 'select', 'textarea', 'label'],
         css_selector_allowlist: ['[ph-capture]', '[data-track]'],
+        css_selector_ignorelist: ['.ph-no-autocapture', '[data-ph-no-autocapture]', '[data-sensitive]'],
 
         // Attribute filtering
         element_attribute_ignorelist: ['aria-label', 'data-attr-pii', 'data-sensitive'],
@@ -240,68 +242,9 @@ See the [iOS autocapture documentation](/docs/libraries/ios/configuration#autoca
 
 ### React Native interaction autocapture
 
-The PostHog [React Native SDK](/docs/libraries/react-native) can automatically capture touch events when the user interacts with the screen. To enable this, set the `captureTouches` config option to true in your autocapture config like this:
+The PostHog [React Native SDK](/docs/libraries/react-native) can automatically capture touch events when the user interacts with the screen.
 
-```jsx
-<PostHogProvider
-  apiKey="<ph_project_token>"
-  autocapture={{
-    captureTouches: true,
-  }}
->
-  ...
-</PostHogProvider>
-```
-
-Autocaptured events display as the autocaptured interaction type in the [activity tab](https://app.posthog.com/activity/explore), such as `touched ...`.
-
-#### Configuring interaction autocapture
-
-You can configure the following options:
-
-| Option                | Description                                                                                                                                                                                                      |
-| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `captureTouches`      | **Type:** `boolean`. When set to `true`, autocapture will capture touch events.                                                                                                                                  |
-| `ignoreLabels`        | **Type:** `string[]`. List of labels to ignore from the stack in touch events.                                                                                                                                   |
-| `customLabelProp`     | **Type:** `string`. Default: `ph-label`. If you set a custom label prop such as `<View ph-label="product-card">`, the UI element will display as `product-card` instead of a generic `View`.                     |
-| `maxElementsCaptured` | **Type:** `number`. The maximum number of elements to capture in the component hierarchy.                                                                                                                        |
-| `noCaptureProp`       | **Type:** `string`. Default: `ph-no-capture`. The prop to use for no capture. For example, if set to `data-no-tracking` the component `<Button data-no-tracking>This won't be tracked</Button>` will be ignored. |
-| `propsToCapture`      | **Type:** `string[]`. List of props to capture from the component hierarchy. By default, identifiers and text content are captured.                                                                              |
-
-```jsx
-<PostHogProvider
-  apiKey="<ph_project_token>"
-  autocapture={{
-    captureTouches: true,
-    ignoreLabels: [], // Any labels here will be ignored from the stack in touch events
-    customLabelProp: "ph-label",
-    maxElementsCaptured: 20,
-    noCaptureProp: "ph-no-capture",
-    propsToCapture: ["testID"], // Limit which props are captured. By default, identifiers and text content are captured.
-  }}
->
-  ...
-</PostHogProvider>
-```
-
-#### Preventing sensitive data capture
-
-To exclude specific UI elements from autocapture or session replay, add `ph-no-capture` (or your custom `noCaptureProp`) as either an `accessibilityLabel` or `accessibilityIdentifier`. When PostHog detects this label or identifier anywhere in the view hierarchy, the element is either ignored or masked:
-
-```jsx
-<PostHogProvider apiKey="<ph_project_token>" autocapture={{
-    captureTouches: true,
-    noCaptureProp: "ph-no-capture", // Optionally, you can use a custom prop like "data-no-capture"
-    // ...
-}}>
-    ...
-</PostHogProvider>
-
-// This view will be excluded from autocapture
-<View ph-no-capture>
-    ...
-</View>
-```
+See the [React Native autocapture docs](/docs/libraries/react-native#autocapture) for supported events, configuration options, and privacy controls.
 
 </Tab.Panel>
 </Tab.Panels>
@@ -410,18 +353,9 @@ Android does not currently support interaction autocapture for arbitrary taps or
 
 ### React Native navigation and lifecycle autocapture
 
-PostHog can automatically captures navigation and lifecycle events as the user navigates in the app and when the app is launched, updated, or backgrounded.
+PostHog can automatically capture navigation and lifecycle events as the user navigates in the app and when the app is launched, updated, or backgrounded.
 
-#### Configuring screen navigation autocapture
-
-Screen navigation autocapture is **not enabled by default**. You can enable it by setting `captureScreens` to `true` in the config. When enable, PostHog autocaptures events like:
-
-| `$screen` | When the user navigates. If using `@react-navigation/native` (v6 or lower) or `react-native-navigation`. See [React Native docs](/docs/libraries/react-native#capturing-screen-views) for config options. |
-| `Application Installed` | When app is first installed |
-| `Application Updated` | When app is updated to new version |
-| `Application Opened` | When app is opened from cold start |
-| `Application Became Active` | When app becomes active from background |
-| `Application Backgrounded` | When app goes to background |
+See the [React Native autocapture docs](/docs/libraries/react-native#autocapture) for supported events and configuration details.
 
 </Tab.Panel>
 </Tab.Panels>
@@ -472,6 +406,25 @@ posthog.init('<ph_project_token>', {
     // any other config
 })
 ```
+
+To exclude an element from dead click capture without disabling autocapture, session replay, or heatmaps for that element, add the `.ph-no-deadclick` class:
+
+```html
+<button class="ph-no-deadclick">Repeatedly clicked control</button>
+```
+
+For custom selectors, pass `capture_dead_clicks.css_selector_ignorelist` in your JavaScript web config:
+
+```js-web
+posthog.init('<ph_project_token>', {
+    api_host: '<ph_client_api_host>',
+    capture_dead_clicks: {
+        css_selector_ignorelist: ['.ph-no-deadclick', '.ph-no-capture', '[data-no-dead-clicks]'],
+    },
+})
+```
+
+Providing a custom ignore list replaces the defaults, so include `.ph-no-capture` if you still want it to suppress dead click capture.
 
 > **Note:** The PostHog heatmap captures dead clicks for free, collecting only the coordinates of dead clicks to display in heatmaps. Enabling the autocapture of dead clicks here allows for deeper analysis and is priced as a standard product analytics event.
 

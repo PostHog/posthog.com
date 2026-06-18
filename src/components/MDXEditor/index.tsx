@@ -44,6 +44,8 @@ export default function MDXEditor({
     cta,
     noEditorWrapper = false,
     maxWidth,
+    readOnly = false,
+    contentClassName,
 }: {
     mdxBody?: string
     body: string
@@ -54,6 +56,10 @@ export default function MDXEditor({
     }
     noEditorWrapper?: boolean
     maxWidth?: number
+    /** Render the content as static, non-editable markup (no Lexical contentEditable) and grey out the formatting toolbar */
+    readOnly?: boolean
+    /** Extra classes for the content wrapper (e.g. `font-rounded`) */
+    contentClassName?: string
 }) {
     const [isSSR, setIsSSR] = useState(true)
     const [currentFormat, setCurrentFormat] = useState<FORMAT>(0)
@@ -136,9 +142,10 @@ export default function MDXEditor({
         <div
             onClick={handleClick}
             ref={mdxEditorContainerRef}
+            className={contentClassName}
             style={maxWidth ? { maxWidth, margin: '0 auto' } : undefined}
         >
-            {(isSSR && mdxBody) || websiteMode ? (
+            {(isSSR && mdxBody) || websiteMode || readOnly ? (
                 <MDXProvider components={{ a: Link, ...mdxComponents }}>
                     <MDXRenderer>{mdxBody}</MDXRenderer>
                 </MDXProvider>
@@ -185,6 +192,7 @@ export default function MDXEditor({
     return (
         <Editor
             type="mdx"
+            disableFormatting={readOnly}
             actionButtons={{
                 undo: {
                     onClick: () => activeEditor?.dispatchCommand(UNDO_COMMAND, undefined),

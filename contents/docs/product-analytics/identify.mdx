@@ -3,34 +3,237 @@ title: Identifying users
 sidebar: Docs
 showTitle: true
 availability:
-  free: full
-  selfServe: full
-  enterprise: full
+free: full
+selfServe: full
+enterprise: full
 ---
-import JSIdentifyIntro from "../_snippets/identify-intro.mdx"
-import JSIdentifyHowItWorks from "../_snippets/identify-how-it-works"
 import JSIdentifyWhenToCall from "../_snippets/identify-when-to-call.mdx"
 import JSIdentifyUseUniqueIds from "../_snippets/identify-use-unique-ids.mdx"
 import JSIdentifyReset from "../_snippets/identify-reset.mdx"
-import JSIdentifySetUserProperties from "../_snippets/identify-setting-user-properties.mdx"
 import JSIdentifyCrossPlatform from "../_snippets/identify-cross-platform.mdx"
+import IdentifyFrontendCode from "../_snippets/identify-frontend-code.mdx"
+import Tab from "components/Tab"
+import IdentifyFrameworkReact from "./_snippets/identify-framework-react.mdx"
+import IdentifyFrameworkNextjs from "./_snippets/identify-framework-nextjs.mdx"
+import IdentifyFrameworkNuxt from "./_snippets/identify-framework-nuxt.mdx"
+import IdentifyFrameworkVue from "./_snippets/identify-framework-vue.mdx"
+import IdentifyFrameworkPython from "./_snippets/identify-framework-python.mdx"
+import IdentifyFrameworkNode from "./_snippets/identify-framework-node.mdx"
+import IdentifyFrameworkElixir from "./_snippets/identify-framework-elixir.mdx"
 export const mergeRestrictionsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/data/identify/merge-restrictions-tooltip-light-mode.png"
 export const mergeRestrictionsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/data/identify/merge-restrictions-tooltip-dark-mode.png"
 export const splitUsersLight = "https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/docs/data/identify/how-to-split-users-light-mode.mp4"
 export const splitUsersDark = "https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/docs/data/identify/how-to-split-users-dark-mode.mp4"
 
-This page is the API reference for `identify()` – when to call it, what it does, and how to use it across SDKs. For the broader identity strategy (how to design your anonymous-to-identified flow, cross-platform consistency, and common pitfalls), see [Identity resolution](/docs/product-analytics/identity-resolution).
+You need to identify users to know who's using your product and what they're doing. Identifying users lets you follow users across devices and sessions, track their behavior over time in [insights](/docs/product-analytics/insights), build [cohorts](/docs/data/cohorts), and build a story across PostHog products. You can follow identified users across [session replays](/docs/session-replay/start-here), insights, [errors they encounter](/docs/error-tracking/start-here), [LLM traces](/docs/ai-observability/traces), and more. It's one of the most important things to get right when setting up PostHog.
+
+This page will cover how to identify users across SDKs. For the broader identity strategy (how to design your anonymous-to-identified flow, cross-platform consistency, and common pitfalls), see [Identity resolution](/docs/product-analytics/identity-resolution).
 
 <iframe
-    src="https://www.youtube-nocookie.com/embed/3afzkLS-zQA"
-    className="rounded shadow-xl"
+src="https://www.youtube-nocookie.com/embed/3afzkLS-zQA"
+className="rounded shadow-xl"
 />
 
-<JSIdentifyIntro/>
+## How identification works
 
-## How identify works
+Identification happens in layers as a person moves through your product, with each layer building on the one before it.
 
-<JSIdentifyHowItWorks/>
+### Anonymous
+
+When someone first visits your site or app, PostHog automatically assigns them an anonymous ID, stored locally, and captures their events anonymously. If they've [opted into tracking](/docs/product-analytics/privacy#complete-opt-out), this anonymous identity is tracked even across sessions. At this point you don't yet know who they are.
+
+### Identified on the frontend
+
+As soon as you're able to, typically when a user logs in or creates an account, you call `identify` on the frontend with a `distinct_id`. That `distinct_id` is usually something stable like a UID, their email, or their database ID. This merges the anonymous person _into_ the identified person, linking the two IDs together. From then on, looking up by either ID surfaces the user's full event history, from before and after they logged in.
+
+<IdentifyFrontendCode />
+
+Many frameworks wrap the base SDKs, so the way you access PostHog to call `identify` differs. The examples below are copied directly from each framework's setup guide.
+
+<Tab.Group tabs={['React', 'Next.js', 'Nuxt', 'Vue']}>
+
+<Tab.List>
+
+<Tab>React</Tab>
+<Tab>Next.js</Tab>
+<Tab>Nuxt</Tab>
+<Tab>Vue</Tab>
+
+</Tab.List>
+<Tab.Panels>
+
+<Tab.Panel>
+
+<IdentifyFrameworkReact />
+
+</Tab.Panel>
+<Tab.Panel>
+
+<IdentifyFrameworkNextjs />
+
+</Tab.Panel>
+<Tab.Panel>
+
+<IdentifyFrameworkNuxt />
+
+</Tab.Panel>
+<Tab.Panel>
+
+<IdentifyFrameworkVue />
+
+</Tab.Panel>
+
+</Tab.Panels>
+
+</Tab.Group>
+
+### Carried to the backend
+
+You pass that same `distinct_id` into your server-side code and use it when capturing backend events. It's your job to find a way for the frontend and backend IDs to agree, whether through the user's auth session, or by passing the ID as a part of your API requests.
+
+Backend SDKs have no concept of an anonymous session, so there's nothing to merge. Instead, pass the same `distinct_id` you use on the frontend when capturing events. Some SDKs expose an `identify` method, while others set [person properties](/docs/data/user-properties) with `$set` on a captured event.
+
+<MultiLanguage selector="tabs">
+
+```node
+client.capture({
+  distinctId: 'distinct_id', // the same distinct ID you use on the frontend
+  event: 'event_name',
+  properties: {
+    $set: { email: 'max@hedgehogmail.com', name: 'Max Hedgehog' }, // optional: set person properties
+  },
+})
+```
+
+```python
+posthog.capture(
+    'event_name',
+    distinct_id='distinct_id', # the same distinct ID you use on the frontend
+    properties={
+        '$set': {'email': 'max@hedgehogmail.com', 'name': 'Max Hedgehog'} # optional: set person properties
+    }
+)
+```
+
+```php
+PostHog::identify([
+    'distinctId' => 'distinct_id', // the same distinct ID you use on the frontend
+    'properties' => [
+        'email' => 'max@hedgehogmail.com', // optional: set person properties
+        'name' => 'Max Hedgehog',
+    ],
+]);
+```
+
+```ruby
+posthog.identify({
+  distinct_id: 'distinct_id', # the same distinct ID you use on the frontend
+  properties: {
+    email: 'max@hedgehogmail.com', # optional: set person properties
+    name: 'Max Hedgehog'
+  }
+})
+```
+
+```go
+client.Enqueue(posthog.Capture{
+    DistinctId: "distinct_id", // the same distinct ID you use on the frontend
+    Event:      "event_name",
+    Properties: map[string]interface{}{
+        "$set": map[string]interface{}{ // optional: set person properties
+            "email": "max@hedgehogmail.com",
+            "name":  "Max Hedgehog",
+        },
+    },
+})
+```
+
+```java
+posthog.capture(
+    "distinct_id", // the same distinct ID you use on the frontend
+    "event_name",
+    PostHogCaptureOptions
+        .builder()
+        .userProperty("email", "max@hedgehogmail.com") // optional: set person properties
+        .userProperty("name", "Max Hedgehog")
+        .build()
+);
+```
+
+```csharp
+posthog.Capture(
+    "distinct_id", // the same distinct ID you use on the frontend
+    "event_name",
+    personPropertiesToSet: new() { ["email"] = "max@hedgehogmail.com", ["name"] = "Max Hedgehog" } // optional: set person properties
+);
+```
+
+```elixir
+PostHog.capture("event_name", %{
+  distinct_id: "distinct_id", # the same distinct ID you use on the frontend
+  "$set": %{email: "max@hedgehogmail.com", name: "Max Hedgehog"} # optional: set person properties
+})
+```
+
+```rust
+let mut event = Event::new("event_name", "distinct_id"); // the same distinct ID you use on the frontend
+// optional: set person properties
+event.insert_prop("$set", serde_json::json!({ "email": "max@hedgehogmail.com", "name": "Max Hedgehog" })).unwrap();
+client.capture(event).unwrap();
+```
+
+</MultiLanguage>
+
+Some frameworks attach the `distinct_id` for you, often via [contexts](/docs/libraries/python#contexts). The examples below are copied directly from each framework's setup guide.
+
+<Tab.Group tabs={['Python', 'Node', 'Elixir']}>
+
+<Tab.List>
+
+<Tab>Python</Tab>
+<Tab>Node</Tab>
+<Tab>Elixir</Tab>
+
+</Tab.List>
+<Tab.Panels>
+
+<Tab.Panel>
+
+<IdentifyFrameworkPython />
+
+</Tab.Panel>
+<Tab.Panel>
+
+<IdentifyFrameworkNode />
+
+</Tab.Panel>
+<Tab.Panel>
+
+<IdentifyFrameworkElixir />
+
+</Tab.Panel>
+
+</Tab.Panels>
+
+</Tab.Group>
+
+The result is one continuous identity, from the first anonymous pageview through to every server-side event. This lets you track a user across the entire stack.
+
+The distinct ID isn't the only thing worth carrying across the stack. The **session ID** identifies a user's single browser session. Pass it to your backend events too, and those events are associated with that same session. This lets you line up errors, AI observability events, session recordings, and more from one session.
+
+### Setting person properties
+
+When you call `identify`, the `properties` object is where you attach [**person properties**](/docs/product-analytics/person-properties) — attributes that describe who the user is rather than what they did. Used well, they're what you filter, segment, and build cohorts on.
+
+- **What should live here:** durable, person-level attributes such as email, name, plan tier, company, or signup date. Keep event-specific details (the button clicked, the page viewed) on the event itself.
+- **When to set them:** whenever you identify a user, and whenever a value changes. Where possible, pass in all the person properties you have available each time you call `identify`, so the profile stays up to date.
+- **How to set them:** through the `properties` argument of `identify`, or by adding a `$set` property to a `capture` call.
+
+**Property conflicts:** when two profiles are combined through `identify`, `alias`, or a merge, and both have set the same property, the surviving (identified) person's value takes precedence.
+
+## Reset on logout
+
+<JSIdentifyReset/>
 
 ## Best practices when using identify
 
@@ -46,14 +249,13 @@ For guidance on exactly where `identify()` should go in your auth flow — inclu
 
 For a deeper look at choosing and coordinating IDs across environments, see [choosing your identity strategy](/docs/product-analytics/identity-resolution#choosing-your-identity-strategy).
 
-### 3. Set up person profiles and properties
+## Advanced techniques
 
-<JSIdentifySetUserProperties/>
+These advanced techniques are for sorting out edge cases and coalescing fragmented identities. They're meant for correcting errors. When possible, sort out identification problems with the techniques above instead.
 
+### Get the current user's distinct ID
 
-## Get the current user's distinct ID
-
-You may find it helpful to get the current user's distinct ID. For example, to check whether you've already called `identify` for a user or not.
+You may find it helpful to get the current user's distinct ID. For example, to check whether you've already called `identify` for a user or not. For the most part, though, you should know who the user is already from your own systems.
 
 To do this, call the following:
 
@@ -77,15 +279,12 @@ posthog.get_distinct_id()
 ```flutter
 await Posthog().getDistinctId();
 ```
+
 </MultiLanguage>
 
 The ID returned is either the ID automatically generated by PostHog or the ID that has been passed by a call to `identify()`.
 
-## Reset
-
-<JSIdentifyReset/>
-
-## Alias: Assigning multiple distinct IDs to the same user
+### Alias: Assigning multiple distinct IDs to the same user
 
 Sometimes, you want to assign multiple distinct IDs to a single user. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code, you can use `alias` to connect the frontend distinct ID to one accessible on the backend. This will merge all past and future events into the same user.
 
@@ -166,16 +365,13 @@ client.alias({
 ```js-web
 // Assume we previously identified a user with 'user1' using posthog.identify('user1')
 // You should not use user1 as an alias for user2
-client.alias({
-    distinctId: 'user2',
-    alias: 'user1',
-})
+posthog.alias('user1', 'user2');
 ```
 
 ```python
 # Assume we previously identified a user with 'user1' using posthog.identify('user1')
 # You should not use user1 as an alias for user2
-posthog.alias('user2', 'user1');
+posthog.alias(previous_id='user2', distinct_id='user1')
 ```
 
 ```php
@@ -214,20 +410,107 @@ posthog.alias("user2", "user1");
 
 </MultiLanguage>
 
-You can view whether a user can be merged into another user using `alias` when [viewing their properties](/docs/data/user-properties#how-to-view-user-properties) in the PostHog app: Under their ID, you'll see `Merge restrictions`. This will indicate whether there are merge restrictions or not – i.e., whether you can use their ID as an `alias_id` or not.
+You can view whether a user can be merged into another user using `alias` when [viewing their properties](/docs/data/user-properties#how-to-view-user-properties) in the PostHog app. Under their ID, you'll see `Merge restrictions`. This will indicate whether there are merge restrictions or not, i.e. whether you can use their ID as an `alias_id` or not.
 
 <ProductScreenshot
-    imageLight = {mergeRestrictionsLight}
-    imageDark = {mergeRestrictionsDark}
-    classes="rounded"
-    alt="Merge restrictions tooltipl"
+imageLight = {mergeRestrictionsLight}
+imageDark = {mergeRestrictionsDark}
+classes="rounded"
+alt="Merge restrictions tooltipl"
 />
 
-> **Note:** When calling `alias` in the frontend SDKs, if you have set any properties onto the anonymous user, they are merged into the user with `distinct_id`. For more details, see the FAQ on [how properties are managed when identifying anonymous users](/docs/data/identify#how-are-properties-managed-when-identifying-anonymous-users).
+> **Note:** When calling `alias` in the frontend SDKs, if you have set any properties onto the anonymous user, they are merged into the user with `distinct_id`. For more details, see the FAQ on [how properties are managed when identifying anonymous users](/docs/product-analytics/identify#how-are-properties-managed-when-identifying-anonymous-users).
 
-## Troubleshooting and FAQs
+### How to identify users across platforms
 
-### What happens if you call `identify` or `alias` with invalid inputs?
+<JSIdentifyCrossPlatform/>
+
+### How to merge users
+
+It may happen that, due to implementation issues, the same user in your product has multiple users in PostHog associated with them. In these cases, you can use `$merge_dangerously` to merge multiple PostHog users into a single user.
+
+> **⚠️ Warnings:**
+> 1. Merging users with `$merge_dangerously` is irreversible and has no safeguards! Be careful not to merge users who should not be merged together. Due to the dangers, we don't recommend you merge users frequently, but rather as a one-off for recovering from implementation problems.
+> 2. Before using `$merge_dangerously`, first check if [alias](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) would better suit your needs.
+
+Merging users is done by sending a `$merge_dangerously` event:
+
+<MultiLanguage selector="tabs">
+
+```node
+client.capture({
+    distinctId: 'distinct_id_of_user_to_merge_into',
+    event: '$merge_dangerously',
+    properties: {
+        alias: 'distinct_id_of_user_to_be_merged',
+    },
+})
+```
+
+```js-web
+// This will merge distinct_id_of_user_to_be_merged into the user sending this event
+posthog.capture('$merge_dangerously', {
+    alias: 'distinct_id_of_user_to_be_merged',
+})
+```
+
+```py
+posthog.capture(
+  '$merge_dangerously',
+  distinct_id='distinct_id_of_user_to_merge_into',
+  properties={'alias': 'distinct_id_of_user_to_be_merged'}
+)
+```
+
+```go
+client.Enqueue(posthog.Capture{
+  DistinctId: "distinct_id_of_user_to_merge_into",
+  Event:      "$merge_dangerously",
+  Properties: posthog.NewProperties().
+    Set("alias", "distinct_id_of_user_to_be_merged"),
+})
+```
+
+```ruby
+posthog.capture({
+    distinct_id: 'distinct_id_of_user_to_merge_into',
+    event: '$merge_dangerously',
+    properties: {
+        alias: 'distinct_id_of_user_to_be_merged'
+    }
+})
+```
+
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
+    "api_key": "<ph_project_token>",
+    "properties": {
+      "alias": "distinct_id_of_user_to_be_merged"
+    },
+    "timestamp": "2020-08-16 09:03:11.913767",
+    "distinct_id": "distinct_id_of_user_to_merge_into",
+    "event": "$merge_dangerously"
+}' <ph_client_api_host>/i/v0/e/
+```
+
+</MultiLanguage>
+
+### How to split a merged user back into separate users
+
+If you've accidentally linked distinct IDs together that represent different users, or you've made a mistake when merging users, it's possible to split their combined user back into separate users. You can do this in the PostHog app by navigating to the user you'd like split, and then clicking "Split IDs" in the top right corner.
+
+> **Warning:** This will treat the distinct IDs as separate users for future events. However, there is no guarantee as to how past events will be treated. They may be be considered separate users, or be considered a single user for some or all events.
+
+<ProductVideo
+videoLight = {splitUsersLight}
+videoDark = {splitUsersDark}
+classes="rounded"
+alt="How to split users in PostHog"
+/>
+
+### Troubleshooting and FAQs
+
+#### What happens if you call `identify` or `alias` with invalid inputs?
 
 When calling either of these with invalid inputs (such as in the examples described in this doc e.g., using null strings with `identify`, or by trying to use a distinct ID of another user as an alias ID), the following will happen:
 
@@ -237,26 +520,26 @@ When calling either of these with invalid inputs (such as in the examples descri
 
 PostHog also has built-in protections to stop the most common distinct ID mistakes. See the FAQ at the end of this page for more details.
 
-- We do not allow identifying users with empty space strings of any length – e.g.,`' '`, `'       '`, etc.
+- We do not allow identifying users with empty space strings of any length, e.g. `' '`, `'       '`, etc.
 - We do not allow identifying users with the following strings (case insensitive):
-    - `anonymous`
-    - `guest`
-    - `distinctid`
-    - `distinct_id`
-    - `id`
-    - `not_authenticated`
-    - `email`
-    - `undefined`
-    - `true`
-    - `false`
+- `anonymous`
+- `guest`
+- `distinctid`
+- `distinct_id`
+- `id`
+- `not_authenticated`
+- `email`
+- `undefined`
+- `true`
+- `false`
 
 - We do not allow identifying users with the following strings (case sensitive):
-  - `[object Object]`
-  - `NaN`
-  - `None`
-  - `none`
-  - `null`
-  - `0`
+- `[object Object]`
+- `NaN`
+- `None`
+- `none`
+- `null`
+- `0`
 
 - We do not allow identifying a user that has already been identified with a different distinct ID. For example:
 
@@ -295,100 +578,9 @@ PostHogSDK.shared.identify("distinct_id_two",
 
 </MultiLanguage>
 
+#### How are properties managed when merging users?
 
-### How to merge users
-
-It may happen that, due to implementation issues, the same user in your product has multiple users in PostHog associated with them. In these cases, you can use `$merge_dangerously` to merge multiple PostHog users into a single user.
-
-> **⚠️ Warnings:**
-> 1. Merging users with `$merge_dangerously` is irreversible and has no safeguards! Be careful not to merge users who should not be merged together. Due to the dangers, we don't recommend you merge users frequently, but rather as a one-off for recovering from implementation problems.
-> 2. Before using `$merge_dangerously`, first check if [alias](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) would better suit your needs.
-
-Merging users is done by sending a `$merge_dangerously` event:
-
-<MultiLanguage selector="tabs">
-
-```node
-client.capture({
-    distinctId: 'distinct_id_of_user_to_merge_into',
-    event: '$merge_dangerously',
-    properties: {
-        alias: 'distinct_id_of_user_to_be_merged',
-    },
-})
-```
-
-```js-web
-// This will merge distinct_id_of_user_to_be_merged into the user sending this event
-posthog.capture({
-    '$merge_dangerously',
-    {
-        alias: 'distinct_id_of_user_to_be_merged',
-    },
-})
-```
-
-```py
-posthog.capture(
-  '$merge_dangerously',
-  distinct_id='distinct_id_of_user_to_merge_into',
-  {'alias': 'distinct_id_of_user_to_be_merged'}
-)
-```
-
-```go
-client.Enqueue(posthog.Capture{
-  DistinctId: "distinct_id_of_user_to_merge_into",
-  Event:      "$merge_dangerously",
-  Properties: posthog.NewProperties().
-    Set("alias", "distinct_id_of_user_to_be_merged"),
-})
-```
-
-```ruby
-posthog.capture({
-    distinct_id: 'distinct_id_of_user_to_merge_into',
-    event: '$merge_dangerously',
-    properties: {
-        alias: 'distinct_id_of_user_to_be_merged'
-    }
-})
-```
-
-```bash
-curl -v -L --header "Content-Type: application/json" -d '{
-    "api_key": "<ph_project_token>",
-    "properties": {
-      "alias": "distinct_id_of_user_to_be_merged"
-    },
-    "timestamp": "2020-08-16 09:03:11.913767",
-    "distinct_id": "distinct_id_of_user_to_merge_into",
-    "event": "$merge_dangerously"
-}' <ph_client_api_host>/i/v0/e/
-```
-
-</MultiLanguage>
-
-### How to identify users across platforms
-
-<JSIdentifyCrossPlatform/>
-
-### How to split a merged user back into separate users
-
-If you've accidentally linked distinct IDs together that represent different users, or you've made a mistake when merging users, it's possible to split their combined user back into separate users. You can do this in the PostHog app by navigating to the user you'd like split, and then clicking "Split IDs" in the top right corner.
-
-> **Warning:** This will treat the distinct IDs as separate users for future events. However, there is no guarantee as to how past events will be treated – they may be be considered separate users, or be considered a single user for some or all events.
-
-<ProductVideo
-    videoLight = {splitUsersLight}
-    videoDark = {splitUsersDark}
-    classes="rounded"
-    alt="How to split users in PostHog"
-/>
-
-### How are properties managed when merging users?
-
-When a `User B` is merged into another `User A`, all the properties of the `User B` are added to `User A`. If there is a conflict, the properties of `User A` are prioritized over `User B`. For example:
+When a `User B` is merged into another `User A`, all the properties of the `User B` are added to `User A`, following the [property conflict rule](#person-properties) above. For example:
 
 ```node
 /* Assume User A has the properties:
@@ -423,9 +615,9 @@ client.capture({
 */
 ```
 
-### How are properties managed when identifying anonymous users?
+#### How are properties managed when identifying anonymous users?
 
-When an anonymous user is identified as `User A`, all the properties of the anonymous user are added to `User A`. If there is a conflict, the properties of `User A` are prioritized over the anonymous user. For example:
+When an anonymous user is identified as `User A`, all the properties of the anonymous user are added to `User A`, following the [property conflict rule](#person-properties) above. For example:
 
 ```js-web
 /* Assume existing User A has the properties:
@@ -453,11 +645,8 @@ posthog.capture(
 )
 
 // After log in, we identify the user as User A
-client.identify({
-    distinctId: 'user_A',
-    properties: {
-        timezone: 'GMT+8',
-    },
+posthog.identify('user_A', {
+    timezone: 'GMT+8',
 })
 
 /* User A will now have properties:
@@ -469,3 +658,7 @@ client.identify({
 }
 */
 ```
+
+#### Do identified events cost more than anonymous events?
+
+Slightly. Anonymous events can be up to 4x cheaper to process than identified events, because identifying a user involves resolving and updating person profiles. In almost all cases you should still identify your users. The picture you get from a complete person profile is worth it. The cost difference only really matters for very high-volume, genuinely anonymous traffic (such as a marketing site) where person profiles add little value.

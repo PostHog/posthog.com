@@ -12,7 +12,7 @@ features:
   groupAnalytics: true
   errorTracking: true
   surveys: false
-  aiObservability: false
+  aiObservability: true
 ---
 
 This is an optional library you can install if you're working with .NET Core. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server side application that needs performance.
@@ -34,6 +34,37 @@ import IdentifyBackendCallout from '../../_snippets/identify-backend-callout.mdx
 import DotNetSendEvents from '../../integrate/send-events/_snippets/send-events-dotnet.mdx'
 
 <DotNetSendEvents />
+
+## Request context
+
+For ASP.NET Core apps using `PostHog.AspNetCore`, add request context middleware before routes that call PostHog. This reads incoming PostHog tracing headers and attaches request metadata to captures, exceptions, and feature flag evaluation inside the request.
+
+```csharp file=Program.cs
+using PostHog;
+using PostHog.AspNetCore;
+
+var builder = WebApplication.CreateBuilder(args);
+builder.AddPostHog();
+
+var app = builder.Build();
+
+app.UsePostHogRequestContext();
+```
+
+If you're using [PostHog JS](/docs/libraries/js) on the frontend, configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your ASP.NET Core backend hostname so browser requests include the session and distinct ID headers.
+
+The middleware reads `X-PostHog-Distinct-Id` and `X-PostHog-Session-Id` as request-scoped analytics context. It also adds request metadata such as `$current_url`, `$request_method`, `$request_path`, `$user_agent`, and `$ip`. Explicit distinct IDs and event properties always override request context.
+
+Tracing headers are client-controlled analytics context, not authentication or authorization. For security-sensitive server-side decisions, pass an authenticated distinct ID explicitly. You can ignore tracing headers while still collecting request metadata:
+
+```csharp
+app.UsePostHogRequestContext(options =>
+{
+    options.UseTracingHeaders = false;
+});
+```
+
+Request-context overloads like `posthog.Capture("checkout started")` and `posthog.EvaluateFlagsAsync()` use the current request distinct ID when one is available.
 
 ## Error tracking
 
@@ -203,6 +234,11 @@ if (variant == "variant-name")
 
 It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags). 
 
+## AI observability
+
+`PostHog.AI` adds [AI observability](/docs/ai-observability) for .NET applications using OpenAI or Azure OpenAI. It is currently pre-release, so expect breaking changes before a stable release.
+
+For installation instructions, see the [OpenAI guide for .NET](/docs/ai-observability/installation/openai#net-support) or the [Azure OpenAI guide for .NET](/docs/ai-observability/installation/azure-openai#net-support).
 
 ## GeoIP properties
 

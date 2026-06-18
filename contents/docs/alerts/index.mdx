@@ -77,7 +77,7 @@ Currently, alerts are supported on all [trends](/docs/product-analytics/trends).
 
 9. Select how often you want the alert to be checked. Options include every 15 minutes (requires Boost, Scale, or Enterprise plan), every hour, every day, every week, and every month.
 
-10. Pick who should be notified when the alert is triggered. Subscribed users automatically receive in-app notifications when the alert fires. You can also add email recipients, Slack channels, or webhook URLs directly in the alert form.
+10. Pick who should be notified when the alert is triggered. Subscribed users automatically receive in-app notifications when the alert fires. You can also add email recipients, Slack channels, Discord webhooks, or webhook URLs directly in the alert form.
 
     <ProductScreenshot
       imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/filled_alert_627158e6bb.png"
@@ -269,24 +269,27 @@ You can create anomaly detection alerts using [PostHog AI](/docs/posthog-ai/over
 
 ## Notifications
 
-When an alert fires, each subscribed user automatically receives an in-app notification. Clicking the notification navigates to the associated insight. In addition to in-app notifications, alerts support email, Slack, and webhook notifications that you can configure when creating or editing an alert.
+When an alert fires, each subscribed user automatically receives an in-app notification. Clicking the notification navigates to the associated insight. In addition to in-app notifications, alerts support email, Slack, Discord, and webhook notifications that you can configure when creating or editing an alert.
 
-### Add Slack or webhook notifications
+### Add Slack, Discord, or webhook notifications
 
 When creating or editing an alert, you can add notification destinations inline:
 
-1. In the **Destinations** section, select **Slack** or **Webhook** from the dropdown.
+1. In the **Destinations** section, select **Slack**, **Discord**, or **Webhook** from the dropdown.
 
 2. For Slack notifications:
    - If you haven't connected Slack yet, click **Connect to Slack** to set up the integration.
    - Once connected, select the channel where you want alerts sent.
 
-3. For webhook notifications:
+3. For Discord notifications:
+   - Enter your Discord webhook URL. You can create one in your Discord server settings under **Integrations** > **Webhooks**.
+
+4. For webhook notifications:
    - Enter the webhook URL where you want alerts sent.
 
-4. Click **Add notification** to add the destination.
+5. Click **Add notification** to add the destination.
 
-5. Click **Create alert** or **Save** to apply your changes.
+6. Click **Create alert** or **Save** to apply your changes.
 
 You can add multiple notification destinations to a single alert. Each destination appears in the list with its status.
 

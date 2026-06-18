@@ -15,7 +15,7 @@ Use this when you have a candidate change to a prompt (a wording tweak, a new in
 
 You need at least two versions of a prompt before you can create an experiment from it.
 
-1. In **Prompt management** → **Prompts**, open the prompt you want to test (or [create a new one](/docs/prompt-management/prompts#creating-prompts))
+1. In **Prompt management** → **Prompts**, open the prompt you want to test (or [create a new one](/docs/prompt-management#creating-prompts))
 2. If it only has one version, edit the body and save. Every save creates a new immutable version.
 3. Repeat for as many versions as you want to compare (up to 10)
 
@@ -159,7 +159,7 @@ Results populate within seconds of the first events landing. Each tile shows the
 
 - **Cost** — mean LLM cost per user (`$ai_total_cost_usd` on `$ai_generation`). Goal: decrease.
 - **Latency** — mean LLM latency per user (`$ai_latency`). Goal: decrease.
-- **Eval pass rate** — share of `$ai_evaluation` events that returned a pass, scoped to this prompt. Populates only if you have [LLM evaluations](/docs/ai-evals/evaluations) configured.
+- **Eval pass rate** — share of `$ai_evaluation` events that returned a pass, scoped to this prompt. Populates only if you have [LLM evaluations](/docs/ai-evals) configured.
 
 export const PromptExperimentResultsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_05_21_at_17_34_40_5e448cfbdf.png"
 export const PromptExperimentResultsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_05_21_at_17_34_54_68fa203949.png"

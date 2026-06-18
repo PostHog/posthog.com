@@ -1,0 +1,121 @@
+---
+title: Getting started with Replay Vision
+---
+
+import { ProductScreenshot } from "components/ProductScreenshot";
+
+<CalloutBox icon="IconInfo" title="Replay Vision is in closed beta" type="warning">
+
+Not yet available to everyone – <a href="/replay-vision">join the waitlist</a> to get updates.
+
+</CalloutBox>
+
+This walkthrough takes you from zero to your first observation in about five minutes. We'll create a scanner from a built-in template, run it on a recording you pick, and then query the result as a regular PostHog event.
+
+You should already have [Session Replay](/docs/session-replay) recording sessions for your project. Replay Vision watches those recordings – without them there's nothing to scan.
+
+## 1. Open Replay Vision and pick a template
+
+Open **Replay Vision** from the side menu, then click **New scanner**. You'll land on the templates picker.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/templates_picker_fb4ef59a19.png"
+  alt="The scanner templates picker with the five built-in templates and the create-from-scratch option"
+  classes="rounded"
+/>
+
+The templates cover the four [scanner types](/docs/replay-vision/scanner-types):
+
+- **Dead ends** (monitor) – flag sessions where the user appears stuck
+- **Session summary** (summarizer) – short narrative of what happened
+- **User intent** (classifier) – tag each session with the likely intent
+- **Frustration score** (scorer) – numeric score for how frustrated the user appeared
+- **Session outcome** (classifier) – tag the outcome (completed, abandoned, errored, …)
+
+Pick **Dead ends** to follow along. You can change anything before saving – the template just pre-fills the form, including the scanner name ("Dead-end pages").
+
+## 2. Look over the prompt and filters
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/scanner_editor_prefilled_57e9a30209.png"
+  alt="The scanner editor pre-filled from the Dead ends template: name, description, prompt, and type-specific config"
+  classes="rounded"
+/>
+
+The template arrives with:
+
+- A **prompt** describing what "stuck" looks like.
+- An empty **recording filters** block – meaning the scanner will match every eligible session in your project.
+- A **sampling rate** of 100% (every matching session gets scanned).
+- A model selection (Gemini, with the default flavor pre-chosen).
+
+For a first run, leave the prompt and model alone. To keep volume low while you experiment, narrow the filters – e.g. limit to one URL or to a specific cohort – and drop sampling to something like 10%.
+
+<CalloutBox type="fyi" title="Estimate your usage first">
+
+The form shows a projected per-month observation count based on your project's recent recording volume, the filters you set, and the sampling rate. Use that to size against your [quota](/docs/replay-vision/quota-and-limits) before saving.
+
+</CalloutBox>
+
+## 3. Save the scanner
+
+Click **Save**. The scanner is enabled by default and starts sweeping for matching sessions in the background.
+
+For this walkthrough we won't wait for the sweep – we'll trigger one observation by hand against a recording we already know about.
+
+## 4. Run the scanner on one recording
+
+Open the [replay](/docs/session-replay) for any session of yours, then use the **Scan this recording** action on the player.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/player_scan_action_0e39437f9a.png"
+  alt="The replay player with the Scan this recording action open and a scanner picker listing available scanners"
+  classes="rounded"
+/>
+
+Pick the scanner you just created. PostHog renders the recording, sends it to Gemini, and produces a result. This usually takes a couple of minutes.
+
+You can also run a scanner programmatically – see [running scanners](/docs/replay-vision/running-scanners) for the MCP option.
+
+## 5. Open the observation
+
+Once it finishes, the observation appears in two places: on the scanner's **Observations** tab, and in the **observations dock** at the bottom of the replay player for the recording you scanned. Open the observation to see the structured result.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/observation_detail_monitor_77a2192684.png"
+  alt="An observation detail page for a monitor scanner: verdict, confidence, model reasoning with citations, and the prompt that produced it"
+  classes="rounded"
+/>
+
+For a monitor scanner you'll see:
+
+- A **yes/no verdict** with a confidence score.
+- The model's **reasoning**, with **clickable citations** that jump the embedded player to the relevant moment.
+- The **prompt that produced this result** – the exact text Gemini saw, frozen even if you edit the scanner afterwards.
+
+Spend a minute here. Watching the moments the model cited next to its reasoning is the fastest way to develop intuition for what your prompt actually catches.
+
+## 6. Query it as an event
+
+Every successful observation is also captured as a `$recording_observed` event in your project. Open a new [SQL insight](/docs/product-analytics/sql) and run:
+
+```sql
+SELECT
+    toStartOfDay(timestamp) AS day,
+    count() AS flagged_sessions
+FROM events
+WHERE event = '$recording_observed'
+  AND properties.scanner_name = 'Dead-end pages'
+  AND properties.scanner_output_verdict = 'yes'
+  AND timestamp > now() - INTERVAL 7 DAY
+GROUP BY day
+ORDER BY day
+```
+
+You'll see a count over time of sessions the scanner flagged. From here you can chart it, drop it on a dashboard, or wire an alert. See [observations](/docs/replay-vision/observations#querying-observations-as-events) for more SQL patterns.
+
+## What's next
+
+- [Scanner types](/docs/replay-vision/scanner-types) – understand monitor vs. classifier vs. scorer vs. summarizer before authoring your second one.
+- [Creating scanners](/docs/replay-vision/creating-scanners) – prompt patterns that actually work, plus how filters and sampling interact.
+- [Running scanners](/docs/replay-vision/running-scanners) – automatic background sweeps vs. on-demand triggers, and what happens to ineligible sessions.

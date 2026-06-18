@@ -459,6 +459,22 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    '/mcp': {
+        size: {
+            min: {
+                width: 700,
+                height: 500,
+            },
+            max: {
+                width: 900,
+                height: 1000,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
     '/tooling': {
         size: {
             min: {
@@ -626,6 +642,23 @@ const appSettings: AppSettings = {
         },
         modal: {
             type: 'standard',
+        },
+    },
+    '/merch/orders': {
+        size: {
+            min: {
+                width: 470,
+                height: 299,
+            },
+            max: {
+                width: 470,
+                height: 299,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
         },
     },
     '/services': {
