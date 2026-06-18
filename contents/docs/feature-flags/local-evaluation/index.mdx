@@ -10,9 +10,9 @@ availability:
 
 > **Note:** Local evaluation is only available in the [Node](/docs/libraries/node), [Ruby](/docs/libraries/ruby), [Go](/docs/libraries/go), [Python](/docs/libraries/python), [C#/.NET](/docs/libraries/dotnet), [PHP](/docs/libraries/php), [Java](/docs/libraries/java), and [Rust](/docs/libraries/rust) SDKs.
 
-> **Note:** In edge/lambda environments, local evaluation with the default in-memory cache causes performance issues and inflated costs due to per-request initialization. For SDKs that support it, use an [external cache provider](/docs/feature-flags/local-evaluation/distributed-environments) to share flag definitions across requests, or use regular flag evaluation instead. PHP doesn't currently expose an external flag definition cache provider.
+> **Note:** In edge/lambda environments, local evaluation with the default in-memory cache causes performance issues and inflated costs due to per-request initialization. For these environments, use an [external cache provider](/docs/feature-flags/local-evaluation/distributed-environments) to share flag definitions across requests, or use regular flag evaluation instead.
 
-Evaluating feature flags requires making a request to PostHog for each flag. However, you can improve performance by evaluating flags locally. Instead of making a request for each flag, PostHog stores feature flag definitions locally, enabling you to evaluate flags without making additional requests. Most SDKs refresh these definitions periodically; PHP loads them during initialization and when you manually call `loadFlags()`.
+Evaluating feature flags requires making a request to PostHog for each flag. However, you can improve performance by evaluating flags locally. Instead of making a request for each flag, PostHog will periodically request and store feature flag definitions locally, enabling you to evaluate flags without making additional requests.
 
 It is best practice to use local evaluation flags when possible, since this enables you to resolve flags faster and with fewer API calls.
 
@@ -36,14 +36,14 @@ sequenceDiagram
 
 Every flag check is a network round trip. PostHog already has all the data it needs, so you just pass the flag key and a user ID.
 
-With local evaluation, the SDK fetches **flag definitions** from PostHog's `/flags/definitions` endpoint and stores them locally. Most SDKs periodically refresh them in the background. When you check a flag, **you provide the properties** and the SDK evaluates locally — no round trip:
+With local evaluation, the SDK periodically fetches **flag definitions** from PostHog's `/flags/definitions` endpoint in the background. When you check a flag, **you provide the properties** and the SDK evaluates locally — no round trip:
 
 ```mermaid
 sequenceDiagram
     participant App as Your app
     participant SDK as PostHog SDK
     participant PH as PostHog
-    Note over SDK,PH: Background refresh (most SDKs)
+    Note over SDK,PH: Background (every 30s)
     SDK->>PH: GET /flags/definitions
     PH-->>SDK: Flag definitions
     Note over App,SDK: At evaluation time
@@ -68,7 +68,7 @@ import ObtainFeatureFlagsSecureAPIKey from "../../integrate/_snippets/obtain-fla
 
 When you initialize PostHog with your feature flags secure API key, PostHog will use the key to automatically fetch feature flag definitions. These definitions are then used to evaluate feature flags locally.
 
-By default, most SDKs fetch these definitions every 30 seconds (or 5 minutes in the Go SDK). However, you can change this frequency in SDKs that expose a polling interval option. PHP loads definitions on initialization and when you call `loadFlags()` manually.
+By default, PostHog fetches these definitions every 30 seconds (or 5 minutes in the Go SDK). However, you can change this frequency by specifying a different value in the polling interval argument.
 
 > **Note:** For billing purposes, we count the request to fetch the feature flag definitions as being equivalent to `10 flags` requests.
 >
@@ -82,13 +82,13 @@ import ConfigureFlagsSecureKey from "../../integrate/_snippets/configure-flags-s
 
 To evaluate the feature flag, call the flag evaluation method for your SDK. In server-side APIs, evaluate flags once and read values from the returned snapshot. The only difference is that you must provide any `person properties`, `groups`, or `group properties` used to evaluate the [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) of the flag.
 
-Then, by default, PostHog attempts to evaluate the flag locally using cached definitions. If this fails, PostHog then makes a server request to fetch the flag value.
+Then, by default, PostHog attempts to evaluate the flag locally using definitions it loads on initialization and at the `poll interval`. If this fails, PostHog then makes a server request to fetch the flag value.
 
-You can disable this behavior by setting `onlyEvaluateLocally` to `true`. In this case, PostHog will **only** attempt to evaluate the flag locally, and return the SDK's empty value (`undefined`, `None`, `nil`, or `null`) if it was unable to.
+You can disable this behavior by setting `onlyEvaluateLocally` to `true`. In this case, PostHog will **only** attempt to evaluate the flag locally, and return `undefined` / `None` / `nil` if it was unable to.
 
 ### Cold start and fallback defaults
 
-When most SDKs first start, they need up to one polling interval (30 seconds by default) to fetch flag definitions. During this window, local evaluation returns the SDK's empty value because no definitions are loaded yet. Use per-flag defaults to control what users see during this period:
+When the SDK first starts, it needs up to one polling interval (30 seconds by default) to fetch flag definitions. During this window, local evaluation returns `undefined` / `None` because no definitions are loaded yet. Use per-flag defaults to control what users see during this period:
 
 ```javascript
 // Without a default, undefined is falsy — users see nothing

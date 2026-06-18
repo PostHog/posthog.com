@@ -53,7 +53,7 @@ const getUnitySteps = (ctx: any) => {
                 <>
                     <Markdown>
                         {
-                            'Add `SessionReplay = true` to your PostHog configuration.'
+                            'Add `SessionReplay = true` to your PostHog configuration. You can also configure it via the Unity Inspector in **Edit > Project Settings > PostHog**.'
                         }
                     </Markdown>
                     <CodeBlock
@@ -114,8 +114,8 @@ const getUnitySteps = (ctx: any) => {
                     <CalloutBox type="info" title="Limitations">
                         <Markdown>
                             Unity Session Replay is controlled by local SDK configuration. Options like
-                            `CaptureNetworkTelemetry`, `CaptureLogs`, and sampling must be set locally in code at
-                            initialization time.
+                            `CaptureNetworkTelemetry`, `CaptureLogs`, and sampling are **not** remotely configurable
+                            and must be set locally in code at initialization time.
                         </Markdown>
                     </CalloutBox>
                 </>

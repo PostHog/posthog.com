@@ -50,7 +50,7 @@ To enable local evaluation, you need a [personal API key](/docs/api#how-to-obtai
 use posthog_rs::ClientOptionsBuilder;
 
 let options = ClientOptionsBuilder::default()
-    .api_key("your-project-api-key".to_string())
+    .api_key("your-project-api-key")
     .personal_api_key("your-personal-api-key")
     .enable_local_evaluation(true)
     .poll_interval_seconds(30) // Optional, defaults to 30
