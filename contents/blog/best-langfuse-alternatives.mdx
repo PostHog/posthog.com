@@ -363,7 +363,7 @@ According to [user reviews](https://www.g2.com/products/braintrust-2024-12-22/re
 
 ### What is Weights & Biases Weave?
 
-Weights & Biases Weave is an observability and evaluation platform for LLM applications. It traces prompts, model calls, tool usage, and agent workflows, with built-in guardrails and monitors to catch quality and safety issues in production.
+**Weights & Biases Weave** is an observability and evaluation platform for LLM applications. It traces prompts, model calls, tool usage, and agent workflows, with built-in guardrails and monitors to catch quality and safety issues in production.
 
 Weave instruments LLM calls with a single Python or TypeScript decorator, then streams traces, costs, and latency to the W&B platform, which CoreWeave acquired in 2025. Teams use it to score and compare prompt and model versions against evaluation datasets.
 
@@ -380,22 +380,27 @@ Weave sits inside the broader Weights & Biases platform, so it covers model trai
 
 Weave also includes built-in guardrails and production monitors for safety and quality monitoring. Langfuse relies on external guardrail tools and uses tracing and evaluations to measure their effectiveness.
 
-|  | **Weave** | **Langfuse** |
-| --- | --- | --- |
-| **Tracing & spans**<br>Trace requests across prompts, model calls, and workflows | ✅ | ✅ |
-| **Cost tracking**<br>Monitor token usage and model costs | ✅ | ✅ |
-| **Latency tracking**<br>Track response times and performance metrics | ✅ | ✅ |
-| **Error tracking**<br>Monitor failed requests and model errors | ✅ | ✅ |
-| **Sentiment classification**<br>Automatically classify user messages as positive, neutral, or negative | ❌ | ❌ |
-| **Trace summarization**<br>Generate AI-powered summaries of traces and workflows | ❌ | ❌ |
-| **Privacy mode**<br>Mask prompts and responses before they are stored | ✅ | ✅ |
-| **Agent/multi-step tracing**<br>Understand complex agent and tool-calling workflows | ✅ | ✅ |
-| **Prompt management**<br>Create, version, and manage prompts | Basic | ✅ |
-| **Evaluations**<br>Score and review model outputs automatically | ✅ | ✅ |
-| **Evaluation datasets**<br>Create datasets for testing and benchmarking outputs | ✅ | ✅ |
-| **Human annotation/review**<br>Review and label model outputs manually | Basic | ✅ |
-| **Session replay**<br>Watch recordings of users interacting with AI features | ❌ | ❌ |
-| **Product analytics**<br>Analyze AI interactions alongside retention, funnels, and feature adoption | ❌ | ❌ |
+<p>
+<ProductComparisonTable
+    competitors={['weave', 'langfuse']}
+    rows={[
+        'ai_observability.features.trace_visualization',
+        'ai_observability.features.cost_tracking',
+        'ai_observability.features.latency_tracking',
+        'ai_observability.features.error_tracking',
+        'ai_observability.features.sentiment_classification',
+        'ai_observability.features.trace_summarization',
+        'ai_observability.features.privacy_mode',
+        'ai_observability.features.agent_tracing',
+        'ai_observability.features.prompt_management',
+        'ai_observability.features.prompt_evaluations',
+        'ai_observability.features.evaluation_datasets',
+        'ai_observability.features.human_annotation',
+        'ai_observability.features.session_replay',
+        'ai_observability.features.product_analytics',
+    ]}
+/>
+</p>
 
 <details>
 <summary>Main differences between Weights & Biases Weave and Langfuse</summary>
@@ -438,7 +443,7 @@ According to [user reviews](https://www.gartner.com/reviews/product/wandb-weave)
 
 **Helicone** is an LLM observability platform that sits between your application and your LLM provider. It captures requests, tracks costs, monitors latency, manages prompts, and provides visibility into how AI applications behave in production.
 
-Helicone was acquired by Mintlify in March 2026 and is now in maintenance mode: security patches, bug fixes, and new model support continue, but active feature development has stopped, and existing customers are being helped to migrate.
+**Helicone was acquired by Mintlify in March 2026 and is now in maintenance mode**: security patches, bug fixes, and new model support continue, but active feature development has stopped, and existing customers are being helped to migrate.
 
 ### Key features
 
@@ -454,22 +459,27 @@ Helicone and Langfuse are both dedicated LLM observability platforms, but they t
 
 Tracing is another area where the two differ. Helicone focuses primarily on request and response monitoring, while Langfuse provides more detailed traces for multi-step workflows, agent systems, and complex AI applications.
 
-|  | **Helicone** | **Langfuse** |
-| --- | --- | --- |
-| **Tracing & spans**<br>Trace requests across prompts, model calls, and workflows | ✅ | ✅ |
-| **Cost tracking**<br>Monitor token usage and model costs | ✅ | ✅ |
-| **Latency tracking**<br>Track response times and performance metrics | ✅ | ✅ |
-| **Error tracking**<br>Monitor failed requests and model errors | ✅ | ✅ |
-| **Sentiment classification**<br>Automatically classify user messages as positive, neutral, or negative | ❌ | ❌ |
-| **Trace summarization**<br>Generate AI-powered summaries of traces and workflows | ❌ | ❌ |
-| **Privacy mode**<br>Mask prompts and responses before they are stored | ✅ | ✅ |
-| **Agent/multi-step tracing**<br>Understand complex agent and tool-calling workflows | Basic | ✅ |
-| **Prompt management**<br>Create, version, and manage prompts | ✅ | ✅ |
-| **Evaluations**<br>Score and review model outputs automatically | ✅ | ✅ |
-| **Evaluation datasets**<br>Create datasets for testing and benchmarking outputs | ✅ | ✅ |
-| **Human annotation/review**<br>Review and label model outputs manually | ❌ | ✅ |
-| **Session replay**<br>Watch recordings of users interacting with AI features | ❌ | ❌ |
-| **Product analytics**<br>Analyze AI interactions alongside retention, funnels, and feature adoption | ❌ | ❌ |
+<p>
+<ProductComparisonTable
+    competitors={['helicone', 'langfuse']}
+    rows={[
+        'ai_observability.features.trace_visualization',
+        'ai_observability.features.cost_tracking',
+        'ai_observability.features.latency_tracking',
+        'ai_observability.features.error_tracking',
+        'ai_observability.features.sentiment_classification',
+        'ai_observability.features.trace_summarization',
+        'ai_observability.features.privacy_mode',
+        'ai_observability.features.agent_tracing',
+        'ai_observability.features.prompt_management',
+        'ai_observability.features.prompt_evaluations',
+        'ai_observability.features.evaluation_datasets',
+        'ai_observability.features.human_annotation',
+        'ai_observability.features.session_replay',
+        'ai_observability.features.product_analytics',
+    ]}
+/>
+</p>
 
 <details>
 <summary>Main differences between Helicone and Langfuse</summary>
@@ -510,7 +520,7 @@ According to [reviews on G2](https://www.g2.com/sellers/helicone), companies use
 - Need open-source observability with strong tracing, prompt management, evaluations, and self-hosting? **Langfuse** remains one of the best options.
 - Want evaluation-driven development with a heavy focus on benchmarks, experiments, and model quality? **Braintrust** is worth a look.
 - Need deep agent tracing, OpenTelemetry-native instrumentation, and strong evaluation tooling? **Arize Phoenix** is a strong Langfuse alternative.
-- Looking for quick implementation, proxy-based monitoring, and built-in caching? **Helicone** was a great fit, though its maintenance-mode status makes it harder to recommend for new projects.
+- Looking for quick implementation, proxy-based monitoring, and built-in caching? **Helicone** was a great fit, though its maintenance-mode status makes it harder to recommend for new projects.  **Portkey** is the closest actively-developed replacement.
 - Already invested in the Weights & Biases ecosystem? **Weave** lets you add observability and evaluations without introducing another platform.
 
 ## Is PostHog right for you?
@@ -522,9 +532,9 @@ We're biased, but we think PostHog is a strong Langfuse replacement if:
 - You want to understand both AI performance and user behavior on the same platform.
 - You want tools to help you build a better product, not only monitor LLMs (like product analytics, session replay, feature flags, experiments, surveys, and more).
 - You value transparency. We're open source and open core.
-- You want to try before you buy. We're self-serve with a [generous free tier](https://posthog.com/pricing).
+- You want to try before you buy. We're self-serve with a [generous free tier](/pricing).
 
-It's completely free to get started – no credit card required. Our [setup wizard](https://posthog.com/wizard) handles configuration in minutes, or you can [check out our docs](https://posthog.com/docs) to do it yourself.
+It's completely free to get started – no credit card required. Our [setup wizard](/wizard) handles configuration in minutes, or you can [check out our docs](/docs) to do it yourself.
 
 <WizardCTA />
 
@@ -533,14 +543,14 @@ It's completely free to get started – no credit card required. Our [setup wiza
 <details>
 <summary>What is Langfuse used for?</summary>
 
-Langfuse is an open-source platform for LLM observability. You use it to trace requests through your AI app, track cost and latency per call, version your prompts, and run evals on model outputs. It's built for engineers debugging and improving LLM features.
+Langfuse is an open-source platform for [LLM observability](/blog/what-is-ai-observability). You use it to trace requests through your AI app, track cost and latency per call, version your prompts, and run evals on model outputs. It's built for engineers debugging and improving LLM features.
 
 </details>
 
 <details>
 <summary>Why look for a Langfuse alternative?</summary>
 
-Common reasons include wanting AI observability alongside product analytics and session replay, needing tighter LangChain or LangGraph integration, prioritizing evaluations and experimentation, or building agents that require deeper tracing and debugging workflows.
+Common reasons include [wanting AI observability alongside product analytics and session replay](/blog/ai-observability-for-mvps), needing tighter LangChain or LangGraph integration, prioritizing evaluations and experimentation, or building agents that require deeper tracing and debugging workflows.
 
 </details>
 
@@ -562,6 +572,8 @@ For some teams, yes. PostHog covers tracing, cost tracking, latency monitoring, 
 <summary>Is there a free or open-source Langfuse alternative?</summary>
 
 **PostHog** and **Arize Phoenix** are both open source, self-hostable, and free to start. PostHog's free tier includes 100K LLM observability events per month, plus product analytics, session replay, and feature flags. Arize Phoenix is free and open source with no usage limits on the self-hosted version.
+
+For more alternatives, check out our list of [cheapest AI observability tools](/blog/cheapest-ai-observability-tools).
 
 </details>
 

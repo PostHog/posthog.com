@@ -98,6 +98,7 @@ import { vercel_analytics } from 'hooks/competitorData/vercel_analytics'
 import { vwo } from '../../hooks/competitorData/vwo'
 import { walkme } from '../../hooks/competitorData/walkme'
 import { whatfix } from '../../hooks/competitorData/whatfix'
+import { weave } from '../../hooks/competitorData/weave'
 import { zapier } from '../../hooks/competitorData/zapier'
 import { make } from '../../hooks/competitorData/make'
 import { customer_io } from '../../hooks/competitorData/customer_io'
@@ -700,6 +701,7 @@ export default function ProductComparisonTable({
         vwo,
         walkme,
         whatfix,
+        weave,
         zapier,
         make,
         customer_io,
