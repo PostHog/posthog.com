@@ -17,7 +17,7 @@ Do **not** hardcode these IPs in MDX. Import a component below instead.
 
 | Export | Output | Used by |
 | --- | --- | --- |
-| `OutboundIPsInline` | Bold `EU` / `US` labels with comma-separated inline code chips (via `InlineCode`) | The "Add IPs to Firewall/WAF allowlists" `<details>` accordion (`integrate/_snippets/details/posthog-ips.mdx`) |
+| `OutboundIPsInline` | Bold `EU` / `US` labels with comma-separated inline code chips (via `InlineCode`) | The "Add IPs to Firewall/WAF allowlists" `<details>` accordions (`integrate/_snippets/details/posthog-ips.mdx`, `cdp/destinations/webhook.mdx`) |
 | `OutboundIPsTable` | A plain `<table>` with `US` / `EU` columns | The "Inbound IP addresses" snippet (`cdp/_snippets/inbound-ip-addresses.mdx`) used by sources and batch exports |
 
 Both components are pure and hook-free (they read a static constant), so they are
