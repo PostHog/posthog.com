@@ -77,29 +77,38 @@ Or even easier just press one of the suggested questions here on the scouts page
 
 We have a scout harness (yes, I used "harness" — cross it off your bingo card) that is really just a small layer running your scout skills in an agentic loop.
 
-```
-            ┌────────────────────────────────────────────────┐
-            │  Temporal coordinator  (ticks every ~30 min)   │
-            │  finds scouts that are due, fans out one       │
-            │  child workflow per (project, scout)           │
-            └───────────────────────┬────────────────────────┘
-                                    │
-                                    ▼
-        ┌──────────────────────────────────────────────────────┐
-        │  Scout harness — one run, inside a sandbox           │
-        │                                                      │
-        │     SKILL.md  ──►  agent loop                        │
-        │                      │                               │
-        │          ┌───────────┴────────────┐                  │
-        │          ▼                        ▼                  │
-        │   PostHog MCP tools         scout-only tools         │
-        │   (read your data:          • emit-signal            │
-        │    SQL, insights,           • scratchpad read/write  │
-        │    warehouse, errors…)      • past runs / profile    │
-        └───────────────────────┬──────────────────────────────┘
-                                │  emits findings
-                                ▼
-        signal ─► buffer ─► grouping ─► inbox report ─► action
+```mermaid
+flowchart TB
+    Coord["Coordinator<br/>~30 min tick"]
+
+    Coord -->|per scout| Harness
+
+    subgraph Harness["Scout harness"]
+        direction TB
+        Skill["SKILL.md"] --> Loop(["agent loop"])
+        Loop --> MCP["<b>PostHog MCP</b><br/>read your data"]
+        Loop --> Scout["<b>scout tools</b><br/>- profile<br/>- scratchpad<br/>- emit"]
+    end
+
+    Harness -->|findings| Pipe
+
+    subgraph Pipe["Self-driving pipeline"]
+        direction LR
+        Sig["signal"] --> Buf["buffer"] --> Grp["grouping"] --> Rep["report"] --> Act["action"]
+    end
+
+    style Coord fill:#1d4aff,stroke:#1535b3,color:#fff
+    style Harness fill:#f9f9f9,stroke:#d0d0d0,color:#333
+    style Skill fill:#f54e00,stroke:#c43d00,color:#fff
+    style Loop fill:#ffeb9c,stroke:#d9b441,color:#333
+    style MCP fill:#e8f0fe,stroke:#1d4aff,color:#333
+    style Scout fill:#eafbe7,stroke:#3aa655,color:#333
+    style Pipe fill:#fafafa,stroke:#e0e0e0,color:#333
+    style Sig fill:#fff,stroke:#999,color:#333
+    style Buf fill:#fff,stroke:#999,color:#333
+    style Grp fill:#fff,stroke:#999,color:#333
+    style Rep fill:#fff,stroke:#999,color:#333
+    style Act fill:#f54e00,stroke:#c43d00,color:#fff
 ```
 
 The main ingredients:
@@ -195,7 +204,7 @@ Here's one finding the whole way through that pipeline — a single agent's grip
 
 <details>
 
-<summary>**① An agent files feedback** — `view-update` quietly drops the `sync_frequency` it advertises</summary>
+<summary>Step 1: <strong>An agent files feedback</strong> — <code>view-update</code> quietly drops the <code>sync_frequency</code> it advertises</summary>
 
 On June 12th an agent set out to *"set a materialized view's refresh cadence to 12 hours"* — and couldn't. It filed this through the MCP's own `agent-feedback` tool:
 
@@ -209,7 +218,7 @@ On June 12th an agent set out to *"set a materialized view's refresh cadence to 
 
 <details>
 
-<summary>**② The scout emits a signal** — it spots the silent-drop is now *blocking* and re-surfaces it</summary>
+<summary>Step 2: <strong>The scout emits a signal</strong> — it spots the silent-drop is now <em>blocking</em> and re-surfaces it</summary>
 
 The next run read that event and emitted a finding — recognizing the defect wasn't new, and that it had crossed a line:
 
@@ -225,7 +234,7 @@ The next run read that event and emitted a finding — recognizing the defect wa
 
 <details>
 
-<summary>**③ It becomes an inbox report** — root-caused and marked immediately actionable</summary>
+<summary>Step 3: <strong>It becomes an inbox report</strong> — root-caused and marked immediately actionable</summary>
 
 The pipeline turned the signal into a report, which even did the root-cause analysis:
 
@@ -239,7 +248,7 @@ The pipeline turned the signal into a report, which even did the root-cause anal
 
 <details>
 
-<summary>**④ An agent opens the fix** — [PR #63393](https://github.com/PostHog/posthog/pull/63393), authored autonomously</summary>
+<summary>Step 4: <strong>An agent opens the fix</strong> — <a href="https://github.com/PostHog/posthog/pull/63393" rel="noopener noreferrer">PR #63393</a>, authored autonomously</summary>
 
 A PostHog Code agent picked up the report and opened the PR on its own — introducing a writable `SyncFrequencyField` so the cadence flows into the generated PATCH body, and adding three regression tests (a writable-field guard, a round-trip update, and an invalid-value rejection).
 
@@ -271,7 +280,7 @@ This scout sits higher on the [self-driving pyramid](/blog/self-driving-product)
 
 <details>
 
-<summary>🦔 **"Creeped out by the hedgehog sound"**</summary>
+<summary>🦔 <strong>"Creeped out by the hedgehog sound"</strong></summary>
 
 > *"Am I the only one who is creeped out by the hedgehog sound posthog code makes every time it finishes a task?"*
 
@@ -281,7 +290,7 @@ The scout's note to itself: *"a real shipped audio cue and the feedback is speci
 
 <details>
 
-<summary>**"Too complicated, too much noise"** — the too-complex / bloat drip</summary>
+<summary><strong>"Too complicated, too much noise"</strong> — the too-complex / bloat drip</summary>
 
 A steady multi-day trickle, all real, all public:
 
@@ -301,7 +310,7 @@ The scout's verdict: *"steady multi-day drip, not a spike… all generic, low-re
 
 <details>
 
-<summary>**"Don't make the AI the first thing I see"** — Max-as-landing-page</summary>
+<summary><strong>"Don't make the AI the first thing I see"</strong> — Max-as-landing-page</summary>
 
 > *"as much as i love the posthog ai it shouldn't be the first thing i see when i go to posthog… not the thing i wanna see"*
 
