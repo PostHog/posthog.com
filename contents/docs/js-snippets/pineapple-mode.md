@@ -10,7 +10,7 @@ Activating pineapple mode makes it rain pineapples all over your product or webs
 
 ## OK, but why does Pineapple Mode do that?
 
-Pineapple Mode is an example JS snippet. JS snippets are a new, big and currently beta feature which enable you to inject code from PostHog into your website via `posthog-js`.
+Pineapple Mode is an example JS snippet. JS snippets are a new, big, and currently beta feature which enable you to inject code from PostHog into your website via `posthog-js`.
 
 We think JS snippets are a potentially useful feature for things such as displaying forms, notifications or surveys in your product or website. They're also useful for making it rain pineapples!
 

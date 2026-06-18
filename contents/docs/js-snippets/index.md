@@ -10,7 +10,7 @@ JS snippets enable you to easily add functionality to your site without extra co
 
 ## Enabling snippets
 
-Head to the [**Web scripts** app](https://app.posthog.com/web-scripts). Here you can install official PostHog snippets by clicking **+ New Web script**.
+Head to the [**Web scripts** page](https://app.posthog.com/web-scripts). Here you can install official PostHog snippets by clicking **+ New Web script**.
 
 ## Available JS snippets
 
