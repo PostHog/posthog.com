@@ -1,22 +1,24 @@
 ### Boolean feature flags
 
 ```js-web
-if (posthog.isFeatureEnabled('flag-key') ) {
+const result = posthog.getFeatureFlagResult('flag-key')
+if (result?.enabled) {
     // Do something differently for this user
 
-    // Optional: fetch the payload
-    const matchedFlagPayload = posthog.getFeatureFlagResult('flag-key')?.payload
+    // Optional: fetch the payload from the same evaluation result
+    const matchedFlagPayload = result?.payload
 }
 ```
 
 ### Multivariate feature flags
 
 ```js-web
-if (posthog.getFeatureFlag('flag-key')  == 'variant-key') { // replace 'variant-key' with the key of your variant
+const result = posthog.getFeatureFlagResult('flag-key')
+if (result?.variant == 'variant-key') { // replace 'variant-key' with the key of your variant
     // Do something differently for this user
-    
-    // Optional: fetch the payload
-    const matchedFlagPayload = posthog.getFeatureFlagResult('flag-key')?.payload
+
+    // Optional: fetch the payload from the same evaluation result
+    const matchedFlagPayload = result?.payload
 }
 ```
 
