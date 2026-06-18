@@ -13,6 +13,7 @@
 
 2. **Migrate all credits to an in-house ledger (lead: <TeamMember name="Pawel Cebula" />)**
     - Implement a double-entry credit ledger
+    - Seed the ledger based on the new revenue recognition model
     - Deploy and run the shadow ledger
     - Fix unexpected discrepancies
     - Migrate from customer balance to the ledger
@@ -32,6 +33,11 @@
         - Higher frequency exports
     - **Logs**
         - 30 and 90 day retention
+    - **LLM Gateway**
+        - Product-scoped credits (depends on in-house credit ledger)
+        - Access based on positive credit pool balance (prepayments required)
+        - Automated top-ups
+        - Near-realtime limiting
 
 4. **Reduce tech debt and improve developer experience (lead: <TeamMember name="Marce Coll" />)**
     - Improve async task observability and reliability
@@ -55,3 +61,8 @@
     - Source and score additional leads (LinkedIn followers, Appfigures.com targets, Stripe Propensity Leads)
     - Generate outbound sequence content using LLM in Clay
     - Sequence highest scoring targets automatically using Lemlist
+
+8. **Roll out the redesigned TAM compensation plan (lead: <TeamMember name="Mine Kansu" />)**
+    - Finalize the new comp structure
+    - Validate payout scenarios against historical TAM performance
+    - Get sign off from finance / sales leads

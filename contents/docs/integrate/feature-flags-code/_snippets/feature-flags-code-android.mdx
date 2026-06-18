@@ -3,11 +3,12 @@
 ```kotlin
 import com.posthog.PostHog
 
-if (PostHog.isFeatureEnabled("flag-key")) {
+val result = PostHog.getFeatureFlagResult("flag-key")
+if (result?.enabled == true) {
     // Do something differently for this user
 
-    // Optional: fetch the payload
-    val matchedFlagPayload = PostHog.getFeatureFlagPayload("flag-key")
+    // Optional: fetch the payload from the same evaluation result
+    val matchedFlagPayload = result.payload
 }
 ```
 
@@ -16,13 +17,18 @@ if (PostHog.isFeatureEnabled("flag-key")) {
 ```kotlin
 import com.posthog.PostHog
 
-if (PostHog.getFeatureFlag("flag-key") == "variant-key") { // replace 'variant-key' with the key of your variant
+val result = PostHog.getFeatureFlagResult("flag-key")
+if (result?.variant == "variant-key") { // replace "variant-key" with the key of your variant
     // Do something differently for this user
 
-    // Optional: fetch the payload
-    val matchedFlagPayload = PostHog.getFeatureFlagPayload("flag-key")
+    // Optional: fetch the payload from the same evaluation result
+    val matchedFlagPayload = result.payload
 }
 ```
+
+### Inspecting all feature flags
+
+You can inspect all currently loaded feature flags with `PostHog.getAllFeatureFlags()`.
 
 ### Ensuring flags are loaded before usage
 
@@ -46,7 +52,7 @@ val config = PostHogAndroidConfig(apiKey = "<ph_project_token>").apply {
     }
 }
 
-// And/Or manually the SDK is initialized
+// And/or after the SDK is initialized
 PostHog.reloadFeatureFlags {
     if (PostHog.isFeatureEnabled("flag-key")) {
         // do something
@@ -62,4 +68,15 @@ Feature flag values are cached. If something has changed with your user and you'
 import com.posthog.PostHog
 
 PostHog.reloadFeatureFlags()
+```
+
+### Tracking feature usage
+
+To track when someone sees or interacts with a feature, use `captureFeatureView` and `captureFeatureInteraction`.
+
+```kotlin
+import com.posthog.PostHog
+
+PostHog.captureFeatureView("flag-key", flagVariant = "variant-key")
+PostHog.captureFeatureInteraction("flag-key", flagVariant = "variant-key")
 ```

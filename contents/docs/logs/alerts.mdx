@@ -55,6 +55,7 @@ For example, "alert if count goes above 100 in the last 10 minutes" fires when m
 An alert without a destination has nowhere to send notifications. Add at least one of:
 
 - **[Slack](/docs/cdp/destinations/slack)** – pick a connected Slack workspace and channel.
+- **[Microsoft Teams](/docs/cdp/destinations/microsoft-teams)** – provide a Microsoft Teams webhook URL (from a Power Automate Workflows connector).
 - **[Webhook](/docs/cdp/destinations/webhook)** – provide a URL to receive an HTTP POST when the alert fires.
 
 Destinations are delivered through hog functions under the hood, so they reuse the same infrastructure as other PostHog destinations. The **Notifications** column in the alert list shows a struck-through bell when no destinations are configured.
@@ -96,7 +97,7 @@ The alert list shows a table of all your alerts:
 | **Last checked**  | When the alert was last evaluated.                                                                                                                                                         |
 | **Next check**    | When the alert is next scheduled to be evaluated. Shows "Pending" if no time is available. Alerts of the same cadence are spread across the evaluation period to distribute database load. |
 | **Last 24h**      | Sparkline of the alert's state over the last 24 hours. Green = OK, red = firing, orange = resolving/errored, grey = snoozed or disabled.                                                   |
-| **Notifications** | Tags for each configured destination. A struck-through bell indicates no destinations.                                                                                                     |
+| **Notifications** | Tags for each configured destination (Slack, Microsoft Teams, or Webhook). A struck-through bell indicates no destinations.                                                                |
 | **Created by**    | The user who created the alert.                                                                                                                                                            |
 | **Enabled**       | Toggle to enable or disable the alert without deleting it.                                                                                                                                 |
 | **⋯**             | Edit, view history, snooze, reset (when broken), and delete actions.                                                                                                                       |
