@@ -56,11 +56,7 @@
         { "source": "/posts/:path*", "destination": "/posts/[slug]/index.html" }
     ],
     "redirects": [
-        {
-            "source": "/docs/prompt-management/skills-store",
-            "destination": "/docs/ai-engineering/skills-store",
-            "statusCode": 301
-        },
+        { "source": "/docs/prompt-management/skills-store", "destination": "/docs/ai-engineering/skills-store", "statusCode": 301 },
         { "source": "/docs/site-apps", "destination": "/docs/js-snippets" },
         { "source": "/docs/site-apps/:path*", "destination": "/docs/js-snippets/:path*" },
         { "source": "/code/download", "destination": "/code#download" },
