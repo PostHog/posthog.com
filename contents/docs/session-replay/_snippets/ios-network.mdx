@@ -9,7 +9,7 @@ import PostHog
 
 func fetchData(from url: URL) async throws -> Data {
     // let (data, _) = try await URLSession.shared.data(from: url)      // ⬅ replace this
-    let (data, _) = try await URLSession.shared.postHogData(from: url)  // 🦔 with this
+    let (data, _) = try await URLSession.shared.postHogData(from: url, postHog: PostHogSDK.shared)  // 🦔 with this
 
     // your logic here...
     return data

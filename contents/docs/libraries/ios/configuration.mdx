@@ -241,7 +241,7 @@ The [`PostHogConfig` object](https://github.com/PostHog/posthog-ios/blob/main/Po
 | Attribute | Description |
 |-----------|-------------|
 | `flushAt`<br/><br/>**Type:** Integer<br/>**Default:** `20` (`5` on tvOS) | The number of queued events that the posthog client should flush at. Setting this to `1` will not queue any events and will use more battery. |
-| `flushIntervalSeconds`<br/><br/>**Type:** Integer<br/>**Default:** `30` | The amount of time to wait before each tick of the flush timer. Smaller values will make events delivered in a more real-time manner and also use more battery. A value smaller than 10 seconds will seriously degrade overall performance. |
+| `flushIntervalSeconds`<br/><br/>**Type:** TimeInterval<br/>**Default:** `30` | The amount of time to wait before each tick of the flush timer, in seconds. Smaller values will make events delivered in a more real-time manner and also use more battery. A value smaller than 10 seconds will seriously degrade overall performance. |
 | `maxQueueSize`<br/><br/>**Type:** Integer<br/>**Default:** `1000` (`100` on tvOS) | The maximum number of items to queue before starting to drop old ones. This should be a value greater than zero, the behavior is undefined otherwise. |
 | `maxBatchSize`<br/><br/>**Type:** Integer<br/>**Default:** `50` | Number of maximum events in a batch call. |
 | `maxRetries`<br/><br/>**Type:** Integer<br/>**Default:** `3` | Maximum number of consecutive flush attempts before the entire queue is dropped to avoid infinite retries against a permanently-broken backend (e.g. wrong API key, exhausted quota, deterministic 5xx). Increments on every retriable failure including HTTP 413 cap halving; resets on a successful 2xx response. |
@@ -256,7 +256,7 @@ The [`PostHogConfig` object](https://github.com/PostHog/posthog-ios/blob/main/Po
 | `debug`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Logs the SDK messages to the Xcode console. |
 | `optOut`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Prevents capturing any data if enabled. |
 | `getAnonymousId`<br/><br/>**Type:** Function<br/>**Default:** `undefined` | Hook that allows for modification of the default mechanism for generating anonymous id (which as of now is just random UUID v7). |
-| `dataMode`<br/><br/>**Type:** Enum<br/>**Default:** `.any` | Allows to send your data only if the data mode matches your configuration such as wifi only, cellular only or any. |
+| `dataMode`<br/><br/>**Type:** Enum<br/>**Default:** `.any` | Controls when queued data is flushed. Use `.wifi` to flush only on Wi-Fi; `.cellular` is a legacy value and behaves like `.any`. |
 | `personProfiles`<br/><br/>**Type:** Enum<br/>**Default:** `.identifiedOnly` | Determines the behavior for processing user profiles. |
 | `setDefaultPersonProperties`<br/><br/>**Type:** Boolean<br/>**Default:** `true` | Automatically set common device and app properties (such as `$app_version`, `$os_name`, and `$device_type`) as person properties for feature flag evaluation. See [property overrides](/docs/feature-flags/property-overrides) for more details. |
 | `sessionReplay`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Enable Recording of Session Replays. |

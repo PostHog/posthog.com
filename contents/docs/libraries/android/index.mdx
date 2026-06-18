@@ -178,8 +178,8 @@ You can completely opt-out users from data capture. To do this, there are two op
 
 ```kotlin
 val config = PostHogAndroidConfig(
-    apiKey = <ph_project_token>,
-    host = <ph_client_api_host> 
+    apiKey = "<ph_project_token>",
+    host = "<ph_client_api_host>"
 )
 config.optOut = true
 PostHogAndroid.setup(this, config)
@@ -403,7 +403,7 @@ val config = PostHogAndroidConfig(
 | `getAnonymousId` | generated UUID | Optional hook to customize anonymous ID generation. |
 | `reuseAnonymousId` | `false` | Reuses one anonymous ID across user changes on the same device. |
 | `personProfiles` | `PersonProfiles.IDENTIFIED_ONLY` | Controls when person profiles are processed: `IDENTIFIED_ONLY`, `ALWAYS`, or `NEVER`. |
-| `setDefaultPersonProperties` | `true` | Includes default person properties for person profile updates. |
+| `setDefaultPersonProperties` | `true` | Includes default device and app properties in feature flag evaluation requests. |
 | `releaseIdentifier` | app/version fallback | Release identifier used by error tracking and uploaded ProGuard/R8 mappings. The Android Gradle plugin can inject this automatically. |
 | `tracingHeaders` | `null` | Exact hostnames that should receive PostHog tracing headers when using `PostHogOkHttpInterceptor`. |
 

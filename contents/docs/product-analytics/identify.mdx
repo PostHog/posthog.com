@@ -164,7 +164,8 @@ posthog.capture(
 posthog.Capture(
     "distinct_id", // the same distinct ID you use on the frontend
     "event_name",
-    personPropertiesToSet: new() { ["email"] = "max@hedgehogmail.com", ["name"] = "Max Hedgehog" } // optional: set person properties
+    personPropertiesToSet: new() { ["email"] = "max@hedgehogmail.com", ["name"] = "Max Hedgehog" }, // optional: set person properties
+    personPropertiesToSetOnce: new()
 );
 ```
 
@@ -179,7 +180,7 @@ PostHog.capture("event_name", %{
 let mut event = Event::new("event_name", "distinct_id"); // the same distinct ID you use on the frontend
 // optional: set person properties
 event.insert_prop("$set", serde_json::json!({ "email": "max@hedgehogmail.com", "name": "Max Hedgehog" })).unwrap();
-client.capture(event).unwrap();
+client.capture(event).await.unwrap();
 ```
 
 </MultiLanguage>
@@ -369,7 +370,7 @@ posthog.alias('user1', 'user2');
 ```
 
 ```python
-# Assume we previously identified a user with 'user1' using posthog.identify('user1')
+# Assume 'user1' was previously used as a distinct_id
 # You should not use user1 as an alias for user2
 posthog.alias(previous_id='user2', distinct_id='user1')
 ```
@@ -385,7 +386,7 @@ PostHog::alias([
 ```
 
 ```ruby
-# Assume we previously identified a user with 'user1' using posthog.identify('user1')
+# Assume we previously identified a user with 'user1' using posthog.identify({ distinct_id: 'user1' })
 # You should not use user1 as an alias for user2
 posthog.alias({
   distinct_id: "user2",
