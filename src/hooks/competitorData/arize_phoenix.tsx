@@ -1,5 +1,5 @@
-export const braintrust = {
-    name: 'Braintrust',
+export const arize_phoenix = {
+    name: 'Arize Phoenix',
     products: {
         ai_observability: {
             available: true,
@@ -11,14 +11,14 @@ export const braintrust = {
                 token_tracking: true,
                 prompt_playground: true,
                 prompt_evaluations: true,
-                alerting: true,
-                error_tracking: true,
-                byok: true,
+                alerting: false,
                 system_prompts: true,
+                error_tracking: true,
                 clustering: false,
-                trace_summarization: true,
+                trace_summarization: false,
                 llm_translation: false,
-                sentiment_classification: true,
+
+                sentiment_classification: false,
                 privacy_mode: true,
                 agent_tracing: true,
                 prompt_management: true,
@@ -28,5 +28,7 @@ export const braintrust = {
                 product_analytics: false,
             },
         },
+        session_replay: false,
+        feature_flags: false,
     },
 }

@@ -13,6 +13,7 @@ import { airbrake } from '../../hooks/competitorData/airbrake'
 import { amplitude } from '../../hooks/competitorData/amplitude'
 import { appcues } from '../../hooks/competitorData/appcues'
 import { appsignal } from '../../hooks/competitorData/appsignal'
+import { arize_phoenix } from '../../hooks/competitorData/arize_phoenix'
 import { baremetrics } from '../../hooks/competitorData/baremetrics'
 import { better_stack } from '../../hooks/competitorData/better_stack'
 import { braintrust } from '../../hooks/competitorData/braintrust'
@@ -614,6 +615,7 @@ export default function ProductComparisonTable({
         amplitude,
         appcues,
         appsignal,
+        arize_phoenix,
         baremetrics,
         better_stack,
         braintrust,
