@@ -8,7 +8,7 @@ hideAnchor: true
 author:
     - andy-maguire
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/default/blog-image.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_06_18_at_12_09_21_82abf66a9b.png
 featuredImageType: full
 category: Engineering
 tags:
@@ -71,7 +71,7 @@ The really nice thing here is that it's easy to get a feel for this as you can j
 
 Or even easier just press one of the suggested questions here on the the scouts page in PostHog Code. "Make a scout" will use the [authoring-signals-scouts](https://github.com/PostHog/posthog/blob/master/products/signals/skills/authoring-signals-scouts/SKILL.md) skill, scan your project and suggest some custom scouts for you.
 
-https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_06_18_at_11_01_02_101ddc91fe.png
+![The scouts page in PostHog Code, with suggested questions for exploring and making scouts](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_06_18_at_11_01_02_101ddc91fe.png)
 
 ## How it works
 
@@ -193,7 +193,7 @@ That report becomes an event. The scout's job is to turn that low-volume, high-s
 
 A single run on June 16th read a six-hour window containing exactly **two** feedback events, and emitted two findings. The more interesting one was a **P2**, because an agent had been *hard-blocked*:
 
-https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_06_18_at_11_58_50_aa95fd0074.png
+![A P2 finding from the MCP feedback scout in the PostHog inbox, reporting a hard-blocked agent](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_06_18_at_11_58_50_aa95fd0074.png)
 
 > **`dashboard-update` claims it can update a dashboard's `filters`, but the input schema has no `filters` field — and calling it with one returns HTTP 200 while silently dropping the value.** An agent was hard-blocked (`task_completed = false`) trying to set a dashboard-level date filter; no other tool can do it. […] **Fix:** add a top-level `filters` object to the `dashboard-update` schema so the documented capability is reachable; or, if filters are intentionally unsupported, remove the "can update … filters" claim from the description.
 
