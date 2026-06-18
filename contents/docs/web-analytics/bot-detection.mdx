@@ -39,14 +39,12 @@ Set `$raw_user_agent` on each event, plus `$host`, `$current_url`, `$pathname`, 
 
 Once `$http_log` events are flowing, the functions and virtual properties below classify them alongside your `$pageview` and `$screen` events.
 
-### Choosing a distinct ID
+### Person processing and distinct IDs
 
-Server requests don't carry a PostHog cookie, so the ingestion source has to derive a `distinct_id` for each `$http_log` event. The strategy you pick matters for two reasons:
+Server requests don't carry a PostHog cookie, so the ingestion source derives a `distinct_id` for each `$http_log` event and decides whether that ID becomes a person profile. The Vercel logs source has two settings for this:
 
-- **Person profiles and cost.** Backend events are [identified](/docs/data/anonymous-vs-identified-events) by default, so every new `distinct_id` creates a person profile and is billed on the person-profiles line. A high-cardinality strategy – a fresh ID per request, or a hash that rotates daily – can create a large number of profiles, which adds cost and slows person-joined queries. If you only need aggregate traffic and bot counts, capture these as [anonymous events](/docs/data/anonymous-vs-identified-events#how-to-capture-anonymous-events) by setting `$process_person_profile` to `false`. Bot detection still works, since it reads event properties, not the person profile.
-- **Unique counts and retention.** A daily-rotating ID counts the same crawler as a new visitor every day, which inflates unique counts and flattens retention. A stable per-client ID – for example a hash of IP, host, and user agent – keeps one identity per client.
-
-The Vercel logs source exposes a **Distinct ID strategy** setting (rotating salt, fixed salt, raw IP, or a custom template) so you can balance privacy, unique-count accuracy, and the number of profiles created.
+- **Person processing.** Backend events are [identified](/docs/data/anonymous-vs-identified-events) by default, which creates a person profile per `distinct_id` and bills on the person-profiles line. For high-cardinality log traffic that adds cost and slows person-joined queries. The source defaults to [anonymous](/docs/data/anonymous-vs-identified-events#how-to-capture-anonymous-events) (`$process_person_profile` set to `false`), so no person profiles are created – cheaper, faster to query, and bot detection still works since it reads event properties, not the profile. Choose **identified** only if you need person-level stitching.
+- **Distinct ID strategy.** Once events are anonymous, the distinct ID no longer affects cost (no profiles either way) – it only affects unique-visitor counts. The default, **fixed salt**, is a hash of IP, host, and user agent, so the same client keeps one stable ID. Don't collapse everything onto a single shared ID, which would count all traffic as one visitor. Rotating salt adds the day to the hash for extra privacy, at the cost of inflated unique counts; raw IP and a custom template are also available.
 
 ## Classification functions
 
