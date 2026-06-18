@@ -4,7 +4,7 @@ title: Using the PostHog skills store
 
 Your team's coding agents (Claude Code, Cursor, Codex, Windsurf, and others) all support [MCP](/docs/model-context-protocol). PostHog's skills store gives you a centralized, versioned place to store and share reusable agent skills — following the [Agent Skills specification](https://agentskills.io/specification) — across any tool, for any team member.
 
-> **Shortcut: install the PostHog AI plugin.** The [PostHog AI plugin](https://github.com/PostHog/ai-plugin) ships an official [`skills-store` skill](https://github.com/PostHog/ai-plugin/tree/main/skills/skills-store) — maintained alongside the [canonical version in the PostHog monorepo](https://github.com/PostHog/posthog/tree/master/products/ai_observability/skills/skills-store) — that teaches your agent exactly how to discover, load, create, and update skills via the PostHog MCP tools. Install the plugin in [Claude Code](/docs/model-context-protocol/claude-code), [Codex](/docs/model-context-protocol/codex), Cursor, or Gemini CLI and your agent already knows how to use the store. The rest of this guide covers the same concepts in case you want to understand what's happening under the hood or roll your own bridge.
+> **Shortcut: install the PostHog AI plugin.** The [PostHog AI plugin](https://github.com/PostHog/ai-plugin) ships an official [`skills-store` skill](https://github.com/PostHog/ai-plugin/tree/main/skills/skills-store) — maintained alongside the [canonical version in the PostHog monorepo](https://github.com/PostHog/posthog/tree/master/products/skills/skills/skills-store) — that teaches your agent exactly how to discover, load, create, and update skills via the PostHog MCP tools. Install the plugin in [Claude Code](/docs/model-context-protocol/claude-code), [Codex](/docs/model-context-protocol/codex), Cursor, or Gemini CLI and your agent already knows how to use the store. The rest of this guide covers the same concepts in case you want to understand what's happening under the hood or roll your own bridge.
 
 ## Why use PostHog as your skills store?
 
@@ -38,7 +38,7 @@ Agents use these with progressive disclosure: discover by description, fetch the
 
 ## Prerequisites
 
-- A PostHog account with Prompt Management enabled
+- A PostHog account
 - The [PostHog MCP server](/docs/model-context-protocol) configured in your coding agent
 
 ## Step 1: Create a skill

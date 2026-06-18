@@ -2905,6 +2905,10 @@ export const docsMenu = {
                             ],
                         },
                         {
+                            name: 'Skills store',
+                            url: '/docs/ai-engineering/skills-store',
+                        },
+                        {
                             name: 'AI Observability ↗',
                             url: 'https://posthog.com/docs/ai-observability',
                         },
@@ -5962,10 +5966,6 @@ export const docsMenu = {
                         {
                             name: 'Overview',
                             url: '/docs/prompt-management',
-                        },
-                        {
-                            name: 'Skills store',
-                            url: '/docs/prompt-management/skills-store',
                         },
                         {
                             name: 'A/B testing prompts',
