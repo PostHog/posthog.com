@@ -1433,12 +1433,12 @@ export const handbookSidebar = [
                 ],
             },
             {
-                name: 'Guides',
+                name: 'Shareable guides',
                 url: '',
                 children: [
                     {
                         name: 'LLM cost optimization',
-                        url: '/handbook/cs-and-onboarding/guides/llm-cost-optimization',
+                        url: '/handbook/cs-and-onboarding/shareable-guides/llm-cost-optimization',
                     },
                 ],
             },
@@ -4121,7 +4121,8 @@ export const docsMenu = {
             url: '/docs/replay-vision',
             color: 'yellow',
             icon: 'IconEye',
-            description: 'Use AI to automatically watch your session recordings and turn what it sees into queryable data',
+            description:
+                'Use AI to automatically watch your session recordings and turn what it sees into queryable data',
             featureFlag: 'replay-vision-docs',
             children: [
                 {
