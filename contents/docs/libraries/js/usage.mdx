@@ -10,6 +10,29 @@ import WebSendEvents from '../../integrate/send-events/_snippets/send-events-web
 
 <WebSendEvents />
 
+### Sending events before a page unload
+
+The third argument to `posthog.capture()` accepts a `transport` option. In the browser JavaScript SDK, `transport: "sendBeacon"` tells PostHog to use the browser's [`navigator.sendBeacon`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/sendBeacon) API for that request when it is sent.
+
+```js-web
+posthog.capture(
+    "user_clicked_reload",
+    { button: "reload" },
+    { transport: "sendBeacon", send_instantly: true }
+)
+
+window.location.reload()
+```
+
+`transport` only chooses the network transport. It does **not** skip PostHog's event queue or force all queued events to send immediately. If `request_batching` is enabled, events are batched by default and flushed on an interval. To send a specific event immediately, pass `send_instantly: true` in the capture options as shown above.
+
+For page unloads and reloads:
+
+- Use `{ transport: "sendBeacon", send_instantly: true }` for the event you need to send right before navigation.
+- You don't need to call `posthog.flush()` for browser JavaScript event capture. The browser SDK doesn't expose a public `flush()` method for custom events.
+- With batching enabled, the SDK also attempts to flush queued events with `sendBeacon` during page unload. This helps with events already in the queue, but for critical events immediately before navigation, use `send_instantly: true`.
+- `sendBeacon` improves reliability during unload, but delivery is still ultimately controlled by the browser and network.
+
 ## Anonymous and identified events
 
 import IdentifiedVsAnonymousIntro from '../../product-analytics/_snippets/identified-vs-anonymous-intro.mdx'
@@ -60,6 +83,8 @@ posthog.setPersonProperties(
 ```
 
 This creates a special `$set` event that is sent to PostHog. For more details on the difference between `$set` and `$set_once`, see our [person properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
+
+To remove person properties, use `unsetPersonProperties()`. See [person properties](/docs/product-analytics/person-properties#how-to-remove-person-properties) for examples.
 
 ## Resetting a user
 
@@ -169,6 +194,37 @@ import BootstrappingIntro from "../../feature-flags/snippets/bootstrapping-intro
 <BootstrappingIntro />
 
 For details on how to implement bootstrapping, see our [bootstrapping guide](/docs/feature-flags/bootstrapping).
+
+### Supplying flags from your own backend
+
+If you evaluate feature flags outside the SDK – for example on your own server with [`posthog-node` local evaluation](/docs/feature-flags/local-evaluation), then pass the results to the browser – you can have the SDK use those values instead of requesting flags itself.
+
+Set `advanced_disable_feature_flags: true` so PostHog stops evaluating feature flags (the reloads triggered by `identify()`, `group()`, and `setPersonProperties()` no longer fetch flags), then push your evaluated flags at runtime with `updateFlags(flags, payloads?, { merge })`:
+
+```js-web
+posthog.init('<ph_project_token>', {
+    // Don't evaluate flags in the browser – we supply them ourselves.
+    advanced_disable_feature_flags: true,
+    // Optional: values that must be available on load, before updateFlags() runs.
+    bootstrap: {
+        featureFlags: { 'my-flag': true },
+        featureFlagPayloads: { 'my-flag': { color: 'blue' } },
+    },
+})
+
+// Later – e.g. after login, once your backend has evaluated flags for this user:
+posthog.updateFlags(
+    { 'my-flag': true, 'my-variant-flag': 'test' },
+    { 'my-flag': { color: 'blue' } }
+)
+
+posthog.getFeatureFlag('my-variant-flag') // 'test'
+posthog.getFeatureFlagResult('my-flag')?.payload // { color: 'blue' }
+```
+
+`updateFlags` replaces the stored flags by default; pass `{ merge: true }` to merge into the existing set instead. Use `bootstrap` for any flag values that must be available on first load, before `updateFlags()` runs.
+
+Note that surveys rely on feature flags internally, so `advanced_disable_feature_flags` also disables surveys. If you use surveys, set `advanced_only_evaluate_survey_feature_flags: true` instead to keep only survey-related flags evaluated.
 
 ### Enriched flag analytics
 

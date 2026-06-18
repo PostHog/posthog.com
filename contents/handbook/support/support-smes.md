@@ -99,3 +99,17 @@ You and your SME counterpart in the other timezone should work together to:
 
 As we grow, we'll need less manual coordination. For now, always consider coverage and communicate proactively.
 
+### Attending product team offsites
+
+You work closely with the engineering teams behind your products, so when one of them runs an offsite, it's natural to want to be there. Time in person with your product team can be genuinely valuable. A few things to make it work:
+
+- **Give <TeamMember name="Abigail Richardson" photo /> a shout early.** The moment it's on your radar, flag it, so we can sort coverage together. Every now and then we might have to say no if support's stretched thin - and that's better to hear before you've booked flights.
+
+- **Have a reason, or make it easy.** You likely partner with a few different teams, and you can't be at every one of their offsites — nor should you try to be. Joining makes most sense when there's something specific you'll get out of being there in person, or the offsite is local enough that turning up is cheap and easy.
+
+- **You're still on support.** It's their offsite, not yours — so keep up with your normal tickets while you're there. Soak up the context and dip into their agenda, just don't vanish from the queue.
+
+- **Don't leave customers hanging.** We won't post customer notices for these trips, so from a user's side nothing should feel different. People shouldn't be waiting around just because you're away — stay as responsive as you'd be any other week.
+
+None of this is meant to put you off. Loop us in early, keep customers the priority, and these trips are a great thing to do.
+

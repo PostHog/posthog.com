@@ -47,14 +47,14 @@ import InstallNodePackageManagers from "../integrate/_snippets/install-node-pack
 
 <InstallNodePackageManagers />
 
-Add your PostHog API key and host to your `nuxt.config.js` file. If you've already done this when adding PostHog to the client side, you can skip this step.
+Add your PostHog API key and host to your `nuxt.config.js` file, reading them from environment variables. If you've already done this when adding PostHog to the client side, you can skip this step.
 
 ```js file=nuxt.config.js
 export default defineNuxtConfig({
   runtimeConfig: {
     public: {
-      posthogToken: '<ph_project_token>',
-      posthogHost: '<ph_client_api_host>',
+      posthogToken: process.env.NUXT_PUBLIC_POSTHOG_PROJECT_TOKEN || '<ph_project_token>',
+      posthogHost: process.env.NUXT_PUBLIC_POSTHOG_HOST || '<ph_client_api_host>',
       posthogDefaults: '<ph_posthog_js_defaults>',
     }
   }

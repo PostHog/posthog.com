@@ -78,7 +78,7 @@ Webhook syncing is the mode we recommend for almost every Stripe source. Without
 
 PostHog then calls the Stripe API on your behalf to create and register a webhook endpoint pointing at PostHog, subscribed to the events needed for the tables you're syncing. Once it's set up, the **Webhook** tab shows both PostHog's internal status and the Stripe-side webhook status so you can confirm events are flowing.
 
-If creation succeeds, you don't need to do anything else – the signing secret is stored automatically and PostHog starts ingesting events immediately.
+If creation succeeds, you don't need to do anything else – the signing secret is stored automatically and PostHog starts ingesting events immediately. When you enable additional tables later, PostHog automatically updates the webhook subscription to include the required events, so no manual intervention is needed.
 
 ### Updating your restricted API key permissions
 
@@ -93,6 +93,12 @@ If you connected with a restricted API key, PostHog can only create the webhook 
 5. Back in PostHog, return to the **Webhook** tab on your Stripe source and click **Create webhook** again.
 
 We strongly recommend going this route rather than creating the webhook manually – PostHog will pick exactly the right set of events for the tables you're syncing, keep the signing secret in sync, and clean the webhook up if you remove the source later.
+
+### Automatic webhook event synchronization
+
+When you enable a new table on a Stripe source that already has a webhook, PostHog automatically adds the required events to your Stripe webhook subscription. This works when your API key has **Write** permission on **Webhooks** (or you connected via OAuth).
+
+The sync merges events into the existing subscription – it never removes events you or someone else added manually. If the automatic sync fails (for example, a permission error or network issue), the table is still enabled and data flows once the webhook events are corrected. PostHog shows any events that still need to be added in the **Webhook** tab as a **Missing events** banner so you know exactly what to fix.
 
 ### Creating the webhook manually in Stripe
 
@@ -134,6 +140,8 @@ If you'd rather scope the webhook down to just the resources you're syncing, sel
 
 Narrowing events down means you'll need to revisit the webhook any time you enable a new table, which is why we still recommend **All events** unless you have a specific reason not to.
 
+If you created the webhook manually or your API key lacks **Write** permission on **Webhooks**, PostHog can't update the subscription automatically. Instead, the **Webhook** tab shows a **Missing events** banner listing the events that need to be added. You can copy the list directly from the banner and add them in the [Stripe webhook dashboard](https://dashboard.stripe.com/webhooks).
+
 > **Note:** The Discount table is **webhook-only** – Stripe has no API list endpoint for discounts. This means PostHog can't backfill historical discounts; only new `customer.discount.created`, `customer.discount.updated`, and `customer.discount.deleted` events are captured going forward.
 
 ### Subscription discount data
@@ -141,3 +149,11 @@ Narrowing events down means you'll need to revisit the webhook any time you enab
 The `stripe_subscription` table includes a `discounts` JSON column. When synced via the API, this column contains full Discount objects with embedded Coupon details (`amount_off`, `percent_off`, `duration`, `duration_in_months`). Under webhook-only mode, it contains an array of discount IDs (`di_*`) instead – join to the `stripe_discount` table for full details.
 
 If you have existing subscription data that was synced before this feature was available, re-sync (or reset your pipeline) to get the expanded discount objects.
+
+## Troubleshooting
+
+### Sync failing with "does not have access to account"
+
+If your Stripe sync fails with an account access error, your API key isn't authorized for the configured account or your OAuth access has been revoked. Check the **Account id** in your source settings – it's only needed for Stripe Connect platform accounts. If you connected via OAuth, try reconnecting your Stripe account.
+
+For more help, see the [Data Warehouse troubleshooting guide](/docs/data-warehouse/troubleshooting).

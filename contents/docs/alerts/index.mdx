@@ -64,7 +64,7 @@ Currently, alerts are supported on all [trends](/docs/product-analytics/trends).
      classes="rounded"
    />
 
-7. Set the threshold. This is the value you want to compare the series value against. For example, you can set a value of 5000 in the "more than" field to check when pageviews have exceeded 5k.
+7. Set at least one threshold bound. Enter a value in the **more than** field, the **less than** field, or both. For example, set 5000 in the "more than" field to check when pageviews exceed 5k.
 
 8. (Optional) For relative alerts (**increases by**/**decreases by**), you can set a percentage threshold. It compares the percentage change in the series value to the thresholds you've set.
 
@@ -75,9 +75,9 @@ Currently, alerts are supported on all [trends](/docs/product-analytics/trends).
      classes="rounded"
    />
 
-9. Select how often you want the alert to be checked (e.g. every hour, every day, every week, every month)
+9. Select how often you want the alert to be checked. Options include every 15 minutes (requires Boost, Scale, or Enterprise plan), every hour, every day, every week, and every month.
 
-10. Pick who should be notified when the alert is triggered. Subscribed users automatically receive in-app notifications when the alert fires. You can also add email recipients, Slack channels, or webhook URLs directly in the alert form.
+10. Pick who should be notified when the alert is triggered. Subscribed users automatically receive in-app notifications when the alert fires. You can also add email recipients, Slack channels, Discord webhooks, or webhook URLs directly in the alert form.
 
     <ProductScreenshot
       imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/filled_alert_627158e6bb.png"
@@ -269,24 +269,27 @@ You can create anomaly detection alerts using [PostHog AI](/docs/posthog-ai/over
 
 ## Notifications
 
-When an alert fires, each subscribed user automatically receives an in-app notification. Clicking the notification navigates to the associated insight. In addition to in-app notifications, alerts support email, Slack, and webhook notifications that you can configure when creating or editing an alert.
+When an alert fires, each subscribed user automatically receives an in-app notification. Clicking the notification navigates to the associated insight. In addition to in-app notifications, alerts support email, Slack, Discord, and webhook notifications that you can configure when creating or editing an alert.
 
-### Add Slack or webhook notifications
+### Add Slack, Discord, or webhook notifications
 
 When creating or editing an alert, you can add notification destinations inline:
 
-1. In the **Destinations** section, select **Slack** or **Webhook** from the dropdown.
+1. In the **Destinations** section, select **Slack**, **Discord**, or **Webhook** from the dropdown.
 
 2. For Slack notifications:
    - If you haven't connected Slack yet, click **Connect to Slack** to set up the integration.
    - Once connected, select the channel where you want alerts sent.
 
-3. For webhook notifications:
+3. For Discord notifications:
+   - Enter your Discord webhook URL. You can create one in your Discord server settings under **Integrations** > **Webhooks**.
+
+4. For webhook notifications:
    - Enter the webhook URL where you want alerts sent.
 
-4. Click **Add notification** to add the destination.
+5. Click **Add notification** to add the destination.
 
-5. Click **Create alert** or **Save** to apply your changes.
+6. Click **Create alert** or **Save** to apply your changes.
 
 You can add multiple notification destinations to a single alert. Each destination appears in the list with its status.
 
@@ -294,6 +297,27 @@ You can add multiple notification destinations to a single alert. Each destinati
 
 You can configure alerts to skip checking on weekends.
 This is useful for daily alerts which would normally trigger on weekends.
+
+### Quiet hours
+
+Quiet hours let you define time windows when an alert won't be checked. This is useful for suppressing notifications during off-hours, such as nights or weekends.
+
+To enable quiet hours, check the **Quiet hours** checkbox in the alert form and configure one or more blocked time windows:
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/quiet_hours_light_e34901f0d8.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/quiet_hours_dark_227bcd9f4f.png"
+  alt="Quiet hours configuration in the alert form"
+  classes="rounded"
+/>
+
+- Specify start and end times in HH:MM format (24-hour clock)
+- Times are based on your project's timezone
+- Each window must span at least 30 minutes
+- You can add up to five time windows per alert
+- If a scheduled check falls during quiet hours, it runs when the window ends
+
+A preset for overnight hours (10 PM–7 AM) is available for quick setup.
 
 ### Check ongoing period
 
@@ -323,6 +347,7 @@ Common reasons an alert may be auto-disabled:
 - A relative alert condition (**increases by**/**decreases by**) was set on a non-time-series trend (e.g., a pie chart or number)
 - An absolute value alert was configured with a percentage threshold
 - The alert has a missing or invalid check frequency (calculation interval)
+- A threshold alert has no bounds set (neither a lower nor upper value was configured)
 
 <CalloutBox icon="IconWarning" title="Re-enable manually" type="caution">
 

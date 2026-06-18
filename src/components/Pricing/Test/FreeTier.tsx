@@ -99,7 +99,7 @@ export default function FreeTier({ size = 'normal' }: { size?: 'normal' | 'large
             />
             <FreeTierItem
                 name="PostHog AI"
-                allocation="2K credits (worth $20)"
+                allocation="500 credits (worth $5)"
                 icon={<Icons.IconSparkles className={`text-blue size-5 ${size === 'large' && 'size-7'}`} />}
                 size={size}
             />
