@@ -3178,20 +3178,20 @@ export const docsMenu = {
                             url: '/docs/settings/account-settings',
                         },
                         {
-                            name: 'Site Apps',
-                            url: '/docs/site-apps',
+                            name: 'JS snippets',
+                            url: '/docs/js-snippets',
                             children: [
                                 {
                                     name: 'Overview',
-                                    url: '/docs/site-apps',
+                                    url: '/docs/js-snippets',
                                 },
                                 {
                                     name: 'Notification Bar',
-                                    url: '/docs/site-apps/notification-bar',
+                                    url: '/docs/js-snippets/notification-bar',
                                 },
                                 {
                                     name: 'Pineapple Mode',
-                                    url: '/docs/site-apps/pineapple-mode',
+                                    url: '/docs/js-snippets/pineapple-mode',
                                 },
                             ],
                         },

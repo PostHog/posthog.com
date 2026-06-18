@@ -1508,7 +1508,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                     title: 'User opt-in experience',
                     headline: 'Beautiful opt-in UI out of the box',
                     description:
-                        'Pre-built site app or custom implementation for users to discover and control their beta features.',
+                        'Pre-built JS snippet or custom implementation for users to discover and control their beta features.',
                     images: [
                         {
                             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/feature-flags/early-access-feature-demo.png',
@@ -1600,7 +1600,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                     features: [
                         {
                             title: 'One-line setup',
-                            description: 'Enable site app with just opt_in_site_apps: true',
+                            description: 'Enable JS snippet with just opt_in_site_apps: true',
                         },
                         {
                             title: 'Custom API',

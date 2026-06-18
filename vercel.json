@@ -56,6 +56,8 @@
         { "source": "/posts/:path*", "destination": "/posts/[slug]/index.html" }
     ],
     "redirects": [
+        { "source": "/docs/site-apps", "destination": "/docs/js-snippets" },
+        { "source": "/docs/site-apps/:path*", "destination": "/docs/js-snippets/:path*" },
         { "source": "/code/download", "destination": "/code#download" },
         { "source": "/code/download/", "destination": "/code#download" },
         {
