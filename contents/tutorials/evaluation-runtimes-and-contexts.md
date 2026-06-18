@@ -35,7 +35,7 @@ Here's what happens in different scenarios:
 | JavaScript Web | `["main-app", "web"]` | ❌ Blocked by runtime (client SDK can't access server flag) |
 | Node.js | `["marketing-site", "backend"]` | ❌ Blocked by contexts (neither "marketing-site" nor "backend" match flag's tags) |
 | Node.js | `["main-app", "api"]` | ✅ Both filters pass |
-| Python | `["main-app", "backend"]` | ✅ Both filters pass ("main-app" matches) |
+| .NET | `["main-app", "backend"]` | ✅ Both filters pass ("main-app" matches) |
 
 ## Quick setup
 
@@ -44,7 +44,7 @@ You can configure both features when creating or editing a feature flag in PostH
 1. Set **evaluation runtime** to `server`, `client`, or `all`
 2. Add **evaluation contexts** and mark them as constraints (bolt icon ⚡)
 
-Then configure your SDKs with matching `evaluation_contexts`. See the [evaluation contexts documentation](/docs/feature-flags/evaluation-contexts#step-2-configure-your-sdks) for SDK configuration examples.
+Then configure supported SDKs with matching evaluation contexts. See the [evaluation contexts documentation](/docs/feature-flags/evaluation-contexts#step-2-configure-your-sdks) for SDK configuration examples.
 
 ## Common use cases
 
@@ -62,13 +62,13 @@ Then configure your SDKs with matching `evaluation_contexts`. See the [evaluatio
 ```javascript
 // API service - Gets the flag
 const posthog = new PostHog('KEY', {
-    evaluation_contexts: ['main-app', 'api']
+    evaluationContexts: ['main-app', 'api']
 })
 
 // Web browser - Never sees this flag (blocked by runtime)
 // Background worker - Doesn't get the flag (no 'api' tag)
-const posthog = new PostHog('KEY', {
-    evaluation_contexts: ['main-app', 'workers']
+const workerPostHog = new PostHog('KEY', {
+    evaluationContexts: ['main-app', 'workers']
 })
 ```
 
@@ -83,14 +83,16 @@ const posthog = new PostHog('KEY', {
 
 **Why both features?** You need the flag in both client and server contexts (runtime: `all`), but **only** for the marketing site. The context constraint ensures main app services never evaluate this flag, even if they share code with the marketing site.
 
-```python
-# Marketing site recommendation service - Gets the flag
-posthog = Posthog('KEY', 
-    evaluation_contexts=['marketing-site', 'recommendations'])
+```javascript
+// Marketing site recommendation service - Gets the flag
+const marketingPostHog = new PostHog('KEY', {
+    evaluationContexts: ['marketing-site', 'recommendations']
+})
 
-# Main app recommendation service - Doesn't get the flag
-posthog = Posthog('KEY',
-    evaluation_contexts=['main-app', 'recommendations'])
+// Main app recommendation service - Doesn't get the flag
+const mainAppPostHog = new PostHog('KEY', {
+    evaluationContexts: ['main-app', 'recommendations']
+})
 ```
 
 ### Rolling out mobile features without affecting web
@@ -106,8 +108,8 @@ posthog = Posthog('KEY',
 
 ```javascript
 // React Native app - Gets the flag
-posthog.init('KEY', {
-    evaluation_contexts: ['main-app', 'mobile']
+const posthog = new PostHog('KEY', {
+    evaluationContexts: ['main-app', 'mobile']
 })
 
 // Web app - Doesn't get the flag (no 'mobile' tag)
@@ -131,17 +133,17 @@ posthog.init('KEY', {
 
 ```javascript
 // Checkout UI component - Gets the flag
-const posthog = new PostHog('KEY', {
+posthog.init('KEY', {
     evaluation_contexts: ['main-app', 'billing', 'web']
 })
 
-// Billing service - Gets the flag  
-const posthog = new PostHog('KEY', {
-    evaluation_contexts: ['main-app', 'billing', 'api']
+// Billing service - Gets the flag
+const billingPostHog = new PostHog('KEY', {
+    evaluationContexts: ['main-app', 'billing', 'api']
 })
 
 // Main app dashboard - Doesn't get the flag (no 'billing' tag)
-const posthog = new PostHog('KEY', {
+posthog.init('KEY', {
     evaluation_contexts: ['main-app', 'dashboard', 'web']
 })
 ```
@@ -172,7 +174,7 @@ When a flag isn't working as expected, check in this order:
 
 1. **Runtime filter**: Is the SDK type (client/server) allowed?
 2. **Context filter**: Does at least one evaluation tag match?
-3. **SDK config**: Is `evaluation_contexts` set?
+3. **SDK config**: Is the SDK's evaluation context option set?
 
 For detailed troubleshooting steps, see the [evaluation contexts documentation](/docs/feature-flags/evaluation-contexts#troubleshooting).
 
@@ -184,13 +186,13 @@ Runtime blocks first, then contexts. A server-only flag will never reach client 
 
 ### Missing SDK configuration
 
-Without `evaluation_contexts` in your SDK, context filtering won't work:
+Without evaluation contexts in your SDK, context filtering won't work:
 
 ```javascript
 // This SDK ignores all context filtering!
 const posthog = new PostHog('KEY', {
     host: 'https://app.posthog.com'
-    // evaluation_contexts not set!
+    // evaluationContexts not set!
 })
 ```
 

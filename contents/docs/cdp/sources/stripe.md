@@ -149,3 +149,11 @@ If you created the webhook manually or your API key lacks **Write** permission o
 The `stripe_subscription` table includes a `discounts` JSON column. When synced via the API, this column contains full Discount objects with embedded Coupon details (`amount_off`, `percent_off`, `duration`, `duration_in_months`). Under webhook-only mode, it contains an array of discount IDs (`di_*`) instead – join to the `stripe_discount` table for full details.
 
 If you have existing subscription data that was synced before this feature was available, re-sync (or reset your pipeline) to get the expanded discount objects.
+
+## Troubleshooting
+
+### Sync failing with "does not have access to account"
+
+If your Stripe sync fails with an account access error, your API key isn't authorized for the configured account or your OAuth access has been revoked. Check the **Account id** in your source settings – it's only needed for Stripe Connect platform accounts. If you connected via OAuth, try reconnecting your Stripe account.
+
+For more help, see the [Data Warehouse troubleshooting guide](/docs/data-warehouse/troubleshooting).

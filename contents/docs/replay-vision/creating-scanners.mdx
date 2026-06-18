@@ -29,14 +29,14 @@ When you click **New scanner** you land on the templates picker. The built-in te
 
 The shipping templates are:
 
-| Template | Type | What it does |
-| --- | --- | --- |
-| **Dead ends** | Monitor | Flag sessions where the user appears stuck with no obvious next action |
-| **Session summary** | Summarizer | Short narrative of what the user did |
-| **User intent** | Classifier | Tag each session with the likely intent (browsing, purchasing, support…) |
-| **Frustration score** | Scorer | Numeric score for how frustrated the user appeared |
-| **Session outcome** | Classifier | Tag what happened: task completed, abandoned, errored, etc. |
-| **Create from scratch** | – | Blank scanner – pick a type yourself |
+| Template                | Type       | What it does                                                             |
+| ----------------------- | ---------- | ------------------------------------------------------------------------ |
+| **Dead ends**           | Monitor    | Flag sessions where the user appears stuck with no obvious next action   |
+| **Session summary**     | Summarizer | Short narrative of what the user did                                     |
+| **User intent**         | Classifier | Tag each session with the likely intent (browsing, purchasing, support…) |
+| **Frustration score**   | Scorer     | Numeric score for how frustrated the user appeared                       |
+| **Session outcome**     | Classifier | Tag what happened: task completed, abandoned, errored, etc.              |
+| **Create from scratch** | –          | Blank scanner – pick a type yourself                                     |
 
 Picking a template just pre-fills the form. You can change anything before saving.
 
@@ -46,7 +46,7 @@ This is the single most important thing you'll do. A good prompt is concrete, na
 
 ### Be concrete, not speculative
 
-The model is good at describing what it *sees*. It's much less good at guessing intent or emotion from sparse evidence. Anchor the prompt in observable behavior.
+The model is good at describing what it _sees_. It's much less good at guessing intent or emotion from sparse evidence. Anchor the prompt in observable behavior.
 
 ✅ "Answer yes if the user scrolls a page for more than 10 seconds without clicking anything and then leaves."
 
@@ -116,7 +116,7 @@ A good default discipline: start with a narrow filter while you're tuning the pr
 
 The sampling rate (0–100%) is applied **after** the filters match. A scanner with filter "sessions over 30 seconds" and sampling 25% scans roughly one in four of those sessions.
 
-The scanner editor shows a **per-month estimate** of how many observations the scanner will produce, based on your project's recent recording volume, the filters you've set, and the sampling rate. Use this to size the scanner against your [quota](/docs/replay-vision/quota-and-limits) *before* saving.
+The scanner editor shows a **per-month estimate** of how many observations the scanner will produce, based on your project's recent recording volume, the filters you've set, and the sampling rate. Use this to size the scanner against your [quota](/docs/replay-vision/quota-and-limits) _before_ saving.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/estimate_callout_2d954ec2cb.png"
@@ -136,3 +136,13 @@ Scanners are **enabled by default** when you save. Once enabled, a scanner sweep
 Toggling a scanner to **disabled** stops the background sweep. On-demand triggers (from the player or via MCP) still work on a disabled scanner – disabling only affects the automatic schedule.
 
 To stop a scanner entirely, delete it. Deleting a scanner also removes all of its observations from the Observations tab. The `$recording_observed` events the scanner produced are ordinary PostHog events in your project's event stream and aren't affected – they stay queryable.
+
+## Handing off to Responder agents
+
+Each scanner has a **Hand off to Responder agents** toggle in the configuration step. When enabled, the scanner gains a side mission: during each scan, the model looks for clear, actionable product issues – bugs, broken or confusing flows, errors, or significant UX friction – and reports them as findings.
+
+The scanner's primary task (monitoring, classifying, scoring, or summarizing) is unaffected. The side mission runs alongside it, and most scans produce no finding at all. The bar is deliberately high: a finding must be self-contained and concrete enough for someone with no session context to act on it.
+
+Findings are emitted as signals to [PostHog Code Inbox](/docs/posthog-code/inbox/sources), where Responder agents can pick them up, research the issue against your codebase and product data, and potentially open a PR.
+
+The toggle is the only setup required – there's no additional configuration in PostHog Code Inbox for this source.

@@ -75,3 +75,13 @@ To resolve this:
 2. Find your numeric Account ID – it appears in the URL (e.g., `https://www.linkedin.com/campaignmanager/accounts/123456789/overview`) or in the account dropdown.
 3. Update your PostHog source configuration with the numeric ID only (e.g., `123456789`).
 4. Re-sync the source.
+
+### Restricted member account
+
+If your sync fails with an error mentioning `RESTRICTED_MEMBER` or "Member is restricted", it means LinkedIn has restricted the account that authorized this integration. This is a LinkedIn-side restriction (such as a suspended or flagged account) that prevents PostHog from accessing your ad data. Retrying won't help until the restriction is lifted.
+
+To resolve this:
+
+1. Contact LinkedIn to resolve the account restriction.
+2. Once the restriction is lifted, re-authorize the LinkedIn Ads integration in PostHog.
+3. Re-sync the source.

@@ -69,7 +69,7 @@ Each early access feature can include a JSON payload – custom metadata that is
 The EAF payload is **separate from the feature flag payload**:
 
 - **EAF payload**: Returned when users browse available features via `getEarlyAccessFeatures()`. Use it for metadata your opt-in UI displays, such as descriptions, release notes, or settings.
-- **Feature flag payload**: Returned during flag evaluation via `posthog.getFeatureFlagPayload()`. Use it for runtime configuration that affects feature behavior.
+- **Feature flag payload**: Returned during flag evaluation via `posthog.getFeatureFlagResult()?.payload`. Use it for runtime configuration that affects feature behavior.
 
 ### Example
 
