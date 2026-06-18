@@ -6,7 +6,9 @@ showTitle: true
 
 The PostHog CLI lets you use PostHog from your terminal, local scripts, CI/CD pipelines, and coding agents.
 
-You can use it for existing workflows like uploading source maps, querying data, and downloading schema definitions. You can also use `posthog-cli api` to give agents shell-friendly access to PostHog's [Model Context Protocol (MCP)](/docs/model-context-protocol) tool catalog.
+You can use it for existing workflows like uploading source maps, querying data, and downloading schema definitions. 
+
+You can also use `posthog-cli api` to give agents shell-friendly access to PostHog's [Model Context Protocol (MCP)](/docs/model-context-protocol) tool catalog.
 
 The best way to set up the agentic CLI is the [PostHog wizard](/docs/ai-engineering/ai-wizard). It detects your coding agents and configures them to use `posthog-cli api` for PostHog tasks:
 
@@ -16,19 +18,10 @@ npx -y @posthog/wizard@latest cli add
 
 See [set up agent instructions](#set-up-agent-instructions) for what this installs and the per-repo alternative.
 
-## Install the CLI
-
-Install `posthog-cli` globally:
+The CLI can also be installed globally by running:
 
 ```bash
 npm install -g @posthog/cli
-```
-
-Or install the latest release with the installer script. This also installs `posthog-cli-update`, which updates the script-installed binary:
-
-```bash
-curl --proto '=https' --tlsv1.2 -LsSf https://github.com/PostHog/posthog/releases/latest/download/posthog-cli-installer.sh | sh
-posthog-cli-update
 ```
 
 Check that the CLI is installed:
