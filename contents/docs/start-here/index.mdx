@@ -1,0 +1,95 @@
+---
+title: Start here
+sidebarTitle: Overview
+sidebar: Docs
+showTitle: true
+hideRightSidebar: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
+import OSButton from 'components/OSButton'
+import { IconMessage, IconLaptop, IconMagic } from '@posthog/icons'
+
+New to PostHog? Let's get you on the fast track to using it well: understand how it works, get set up, and start shipping.
+
+<QuestLog firstSpeechBubble="Vroom vroom!" lastSpeechBubble="Happy shipping!">
+
+<QuestLogItem title="PostHog makes your product self-driving" subtitle="The big idea" icon="IconStack">
+
+A self-driving product can prompt itself. PostHog turns your product data into signals, and agents act on those signals to ship improvements, all inside the guardrails you set.
+
+Instead of waiting for someone to notice a bug, file a ticket, and assign it, PostHog spots the pattern in your data, drafts a fix, and opens a pull request for you to review.
+
+It runs as a loop. Scouts watch your data and emit signals, signals group into reports, and reports land in your inbox. You pick one up and hand it to an agent that opens a pull request to review and merge, then PostHog checks whether it actually worked and feeds the result back into the next pass.
+
+![The product autonomy loop](https://res.cloudinary.com/dmukukwp6/image/upload/product_autonomy_loop_V2_a5243dfada.png)
+
+Sounds too good to be true? The catch is that you can't run this reliably inside a general-purpose coding agent, because the signals that drive it live in your product data. That's the part PostHog brings.
+
+</QuestLogItem>
+
+<QuestLogItem title="Set up PostHog" subtitle="Wire in your data" icon="IconRocket">
+
+Self-driving is only as good as the data feeding it. First, [install PostHog](/docs/getting-started/install) so it's capturing events. Then run the self-driving wizard, which turns on your signal sources, connects GitHub, and sets up your scouts for you. Add the [Slack app](/docs/slack) to bring your whole team in.
+
+Once data is flowing, your first scout starts running and reports begin landing in your inbox. Most teams are set up in a few minutes.
+
+<OSButton variant="primary" asLink to="/docs/getting-started/install">
+    Install PostHog
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Learn the concepts" subtitle="Scouts, signals, reports, inbox" icon="IconCode2">
+
+A handful of terms carry most of the meaning. Don't worry if they sound like a foreign language, here they are in plain English:
+
+- **[Scouts](/docs/start-here/scouts)** – scheduled agents that watch a slice of your data and raise a hand when something's worth knowing.
+- **[Signals](/docs/start-here/signals)** – what a scout emits: a structured finding, with the evidence behind it and a suggested action. Error tracking, session replay, and tools like Zendesk and Linear emit signals too.
+- **[Reports](/docs/start-here/reports)** – related signals grouped into one item of work, so you deal with the real problem instead of a noisy stream of findings.
+- **[Inbox](/docs/start-here/inbox)** – where reports and pull requests land for you to review, steer, and merge.
+
+Put together, that's the autonomy loop: scouts and sources emit signals, signals become reports, and you act on them from your inbox with an agent doing the legwork, so you stay in control.
+
+<OSButton variant="primary" asLink to="/docs/start-here/autonomy-loop">
+  The autonomy loop
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Use PostHog from anywhere" subtitle="Slack, Web, and MCP" icon="IconLaptop">
+
+Self-driving meets you where you already work. Pick the surface that fits how you want to work.
+
+### <IconMessage className="text-red w-7 -mt-1 inline-block" /> Slack
+
+Mention `@PostHog` in any channel to ask about your data or put an agent to work. It plans in a sandbox, edits files, and opens a draft pull request, and your whole team can steer in the thread. See the [Slack app docs](/docs/slack).
+
+### <IconLaptop className="text-blue w-7 -mt-1 inline-block" /> Web
+
+The full [PostHog app](https://app.posthog.com), in your browser. Explore your data, watch the signals feeding the loop, and review the work agents propose.
+
+### <IconMagic className="text-purple w-7 -mt-1 inline-block" /> MCP
+
+Bring PostHog's data and tools into Claude Code, Cursor, and other AI tools, so your own agent works with product context, not only code. See the [MCP docs](/docs/model-context-protocol).
+
+</QuestLogItem>
+
+<QuestLogItem title="Ship your first task" subtitle="See it work" icon="IconFlag">
+
+The fastest way to feel self-driving is to ship one real change. Point an agent at a concrete problem, like:
+
+- `Look at our onboarding funnel and propose a fix for the drop-off between step 2 and step 3`
+- `Triage this week's top error and open a pull request with a fix`
+- `Audit our feature flags and clean up the stale ones`
+
+The agent plans the work, opens a pull request, and instruments the change so the next pass has better data. You review, iterate, and merge, the same as any other pull request, then watch PostHog check whether it moved the metric.
+
+<OSButton variant="primary" asLink to="/docs/start-here/first-task">
+  Ship your first task
+</OSButton>
+
+</QuestLogItem>
+
+</QuestLog>

@@ -2144,22 +2144,86 @@ export const docsMenu = {
     icon: 'IconBook',
     children: [
         {
-            name: 'Self-driving product',
-            icon: 'IconStack',
-            color: 'salmon',
-            url: '/docs/self-driving',
-            description: 'What self-driving means for your product, and how to build it',
+            name: 'Start here',
+            icon: 'IconFlag',
+            color: 'red',
+            url: '/docs/start-here',
+            description: 'Understand PostHog and get set up',
             children: [
                 {
-                    name: 'Docs',
-                },
-                {
                     name: 'Overview',
-                    url: '/docs/self-driving',
-                    icon: 'IconInfo',
+                    url: '/docs/start-here',
+                    icon: 'IconHome',
                 },
                 {
                     name: 'Get started',
+                },
+                {
+                    name: 'Install PostHog',
+                    url: '/docs/getting-started/install',
+                },
+                {
+                    name: 'Set up self-driving',
+                    url: '/docs/start-here/setup',
+                },
+                {
+                    name: 'Ship your first task',
+                    url: '/docs/start-here/first-task',
+                },
+                {
+                    name: 'Surfaces',
+                },
+                {
+                    name: 'Slack',
+                    url: '/docs/slack',
+                },
+                {
+                    name: 'Web app',
+                    url: '/docs/start-here/web',
+                },
+                {
+                    name: 'MCP',
+                    url: '/docs/model-context-protocol',
+                },
+                // TODO: add PostHog Code (Desktop) as a surface here once it's GA.
+                {
+                    name: 'Concepts',
+                },
+                {
+                    name: 'The autonomy loop',
+                    url: '/docs/start-here/autonomy-loop',
+                },
+                {
+                    name: 'Scouts',
+                    url: '/docs/start-here/scouts',
+                },
+                {
+                    name: 'Signals',
+                    url: '/docs/start-here/signals',
+                },
+                {
+                    name: 'Reports',
+                    url: '/docs/start-here/reports',
+                },
+                {
+                    name: 'Inbox',
+                    url: '/docs/start-here/inbox',
+                },
+                {
+                    name: 'Guardrails',
+                    url: '/docs/start-here/guardrails',
+                },
+            ],
+        },
+        {
+            name: 'Platform',
+            icon: 'IconStack',
+            color: 'salmon',
+            url: '/docs/getting-started/install',
+            description: 'The PostHog platform for building and improving your product',
+            children: [
+                {
+                    name: 'Integration',
                 },
                 {
                     name: 'Install and configure',
@@ -2911,7 +2975,7 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Guides',
+                    name: 'Winning with PostHog',
                 },
                 {
                     name: 'Getting HogPilled',
@@ -2953,7 +3017,12 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Concepts',
+                    name: 'PostHog explained',
+                },
+                {
+                    name: 'What is PostHog?',
+                    url: '/docs/start-here',
+                    icon: 'IconInfo',
                 },
                 {
                     name: 'Data types',
@@ -3153,6 +3222,10 @@ export const docsMenu = {
                             url: '/docs/settings/approvals',
                         },
                         {
+                            name: 'Autonomy settings',
+                            url: '/docs/settings/autonomy',
+                        },
+                        {
                             name: 'SSO, SAML, & SCIM',
                             url: '/docs/settings/sso',
                         },
@@ -3188,17 +3261,8 @@ export const docsMenu = {
                         },
                     ],
                 },
-            ],
-        },
-        {
-            name: 'Reference',
-            icon: 'IconBook',
-            color: 'salmon',
-            url: '/docs/self-host',
-            description: 'Operational and reference docs',
-            children: [
                 {
-                    name: 'Docs',
+                    name: 'Resources',
                 },
                 {
                     name: 'Self-host',
@@ -6765,23 +6829,6 @@ export const docsMenu = {
                     url: '/docs/posthog-code/community',
                     icon: 'IconPeople',
                     color: 'purple',
-                },
-            ],
-        },
-        {
-            name: 'Web app',
-            icon: 'IconBrowser',
-            color: 'blue',
-            url: '/docs/web',
-            description: 'The browser surface for your self-driving product — explore data and steer the work.',
-            children: [
-                {
-                    name: 'Docs',
-                },
-                {
-                    name: 'Overview',
-                    url: '/docs/web',
-                    icon: 'IconInfo',
                 },
             ],
         },

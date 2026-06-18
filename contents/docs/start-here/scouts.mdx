@@ -1,0 +1,36 @@
+---
+title: Scouts
+sidebarTitle: Scouts
+sidebar: Docs
+showTitle: true
+---
+
+import { CallToAction } from 'components/CallToAction'
+
+A scout is a small, scheduled agent that watches a slice of your PostHog data and raises a hand when it finds something worth knowing. Scouts are the start of the [autonomy loop](/docs/start-here/autonomy-loop): they turn raw product data into [signals](/docs/start-here/signals) the rest of the loop can act on.
+
+## How a scout works
+
+A scout runs on a schedule. Each run, it looks at one slice of your data, decides whether anything is worth surfacing, and if so emits a [signal](/docs/start-here/signals): a structured finding with the evidence behind it and a suggested action.
+
+Because scouts run continuously, the loop notices problems and opportunities on its own, instead of waiting for someone to file a ticket.
+
+## Built-in and custom scouts
+
+PostHog ships with a set of scouts that watch common patterns out of the box. You can turn each on or off per project, and teams can add their own scouts for the patterns specific to their product.
+
+<CalloutBox icon="IconWarning" title="TODO: add media" type="caution">
+Screenshot of the scouts list, or a scout run emitting a signal.
+</CalloutBox>
+
+## What scouts watch
+
+Scouts sit on top of your product data, so the pattern itself is the prompt. They watch the products you've turned on, like error tracking and session replay, and the loop pulls in external sources too: Zendesk, GitHub Issues, and Linear. The more data you capture, the more a scout has to work with.
+
+## Next step
+
+A scout's output is a signal. See what's in one.
+
+<CallToAction type="primary" to="/docs/start-here/signals">
+  Signals
+</CallToAction>

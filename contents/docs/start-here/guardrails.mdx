@@ -1,0 +1,41 @@
+---
+title: Guardrails
+sidebarTitle: Guardrails
+sidebar: Docs
+showTitle: true
+---
+
+import { CallToAction } from 'components/CallToAction'
+
+Self-driving watches your product and proposes work without waiting to be asked. Guardrails are what keep that inside limits you set: what the loop can do on its own, what waits for your review, and what data it's allowed to touch.
+
+The principle behind all of them is simple: self-driving is autonomy from having to ask, not autonomy from your judgment.
+
+## Nothing ships without you
+
+When you act on a report, an agent drafts the change but never releases it. It arrives as a pull request in your [inbox](/docs/start-here/inbox), and you review it, request changes, and merge or decline it like any other PR. Nothing reaches production until a human merges it.
+
+## What runs on its own, and what waits for you
+
+The early stages of the [autonomy loop](/docs/start-here/autonomy-loop) run continuously, without asking. The moment the loop wants to change your product, it stops at a review gate.
+
+- **Automated by default:** watching your data, raising [signals](/docs/start-here/signals), grouping them into [reports](/docs/start-here/reports), and re-checking whether a shipped change actually worked.
+- **Up to you:** which reports to act on, reviewing the pull request an agent drafts, merging it, and any rollout that touches production.
+
+You decide where that line sits for each project.
+
+## Where the work happens
+
+When you act on a report, an agent plans and builds the change in a sandboxed environment, not against production. The change comes back as a pull request, so your existing branch protections, CI checks, and review rules apply to it exactly as they would to a teammate's work. Self-driving doesn't get a side door around the controls you already trust.
+
+## What data self-driving can use
+
+Because self-driving runs on your product data, it only operates once you've opted in to AI data processing. From there you control which sources feed the loop and, through [access controls](/docs/settings/access-control), who on your team can change how it's configured.
+
+<CalloutBox icon="IconWarning" title="TODO: add media" type="caution">
+Screenshot of the autonomy settings, showing the review gate and the automated-vs-gated controls.
+</CalloutBox>
+
+## Setting your guardrails
+
+The controls above live in your project settings. For the full list of toggles and how to configure them, see [autonomy settings](/docs/settings/autonomy).

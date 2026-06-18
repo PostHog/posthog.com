@@ -1,0 +1,54 @@
+---
+title: Set up self-driving
+sidebarTitle: Set up self-driving
+sidebar: Docs
+showTitle: true
+---
+
+import { CallToAction } from 'components/CallToAction'
+
+You've [installed PostHog](/docs/getting-started/install) and it's capturing events. Now turn on self-driving: connect the data sources, repositories, and agents that let PostHog ship work for you. Most teams are set up in a few minutes.
+
+<CalloutBox icon="IconInfo" title="Before you start" type="fyi">
+
+You'll need PostHog [installed and capturing events](/docs/getting-started/install), a GitHub repository you want agents to work in, and permission to add an app to your Slack workspace.
+
+</CalloutBox>
+
+<Steps>
+
+<Step title="Run the self-driving wizard" badge="required">
+
+The wizard does the heavy lifting. On a project that already has PostHog installed, it enables your signal sources, connects the GitHub integration, confirms AI data processing for your organization, and sets up your scout fleet, then hands you a link to your inbox.
+
+```bash
+# Coming soon: the self-driving wizard command
+```
+
+The signal sources it can turn on include [error tracking](/docs/error-tracking), [session replay](/docs/session-replay), and external sources like Zendesk, GitHub Issues, and Linear. The more you enable, the more your scouts have to watch.
+
+</Step>
+
+<Step title="Connect Slack" badge="recommended">
+
+Add the [PostHog Slack app](/docs/slack) so you can summon agents and review their work from your team's channels. You connect your Slack workspace once, and each teammate who wants to ship a pull request connects their own GitHub.
+
+</Step>
+
+<Step checkpoint title="Watch your first scout run" badge="required">
+
+The wizard hands you a link to your [inbox](/docs/posthog-code/inbox). From there, scouts run on a schedule and emit [signals](/docs/start-here/signals), related signals group into [reports](/docs/start-here/reports), and those reports land in your inbox ranked by priority and ready to act on.
+
+</Step>
+
+<Step title="Next step">
+
+You've got a working self-driving setup: scouts watching your data, reports landing in your inbox, and an agent ready to open a pull request as soon as you act on one. Now see it work end to end.
+
+<CallToAction type="primary" to="/docs/start-here/first-task">
+  Ship your first task
+</CallToAction>
+
+</Step>
+
+</Steps>

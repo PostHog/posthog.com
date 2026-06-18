@@ -1,0 +1,58 @@
+---
+title: Ship your first self-driving task
+sidebarTitle: Ship your first task
+sidebar: Docs
+showTitle: true
+---
+
+import { CallToAction } from 'components/CallToAction'
+
+The fastest way to feel self-driving is to take one real problem and let an agent ship the change for it, end to end. Here's how.
+
+<Steps>
+
+<Step title="Pick something concrete" badge="required">
+
+Start with a real, bounded problem an agent can act on. Good first tasks:
+
+- A top error from [error tracking](/docs/error-tracking).
+- A drop-off in a [funnel](/docs/product-analytics/funnels).
+- A stale feature flag to clean up.
+
+Or open your [inbox](/docs/start-here/inbox) and pick a report a scout already surfaced.
+
+</Step>
+
+<Step title="Hand it to an agent" badge="required">
+
+Give the agent the task from whichever surface you prefer: mention `@PostHog` in [Slack](/docs/slack), or connect the [MCP server](/docs/model-context-protocol) to your editor. Be specific about the outcome you want:
+
+- `Look at our onboarding funnel and propose a fix for the drop-off between step 2 and step 3`
+- `Triage this week's top error and open a pull request with a fix`
+- `Audit our feature flags and clean up the stale ones`
+
+</Step>
+
+<Step title="Review the pull request" badge="required">
+
+The agent plans the work, opens a pull request, and instruments the change with events, flags, and experiments as it goes. Review it like any other PR: read the diff, leave comments, and ask for changes in the thread.
+
+</Step>
+
+<Step checkpoint title="Merge and watch the metric" badge="required">
+
+Merge when you're happy with it. After the change ships, PostHog re-checks the metric that triggered the work. If it moved, great. If it didn't, the result becomes a new signal and the loop keeps going.
+
+</Step>
+
+<Step title="Next step">
+
+That's the whole loop in a single task. To understand what's happening under the hood, explore the concepts.
+
+<CallToAction type="primary" to="/docs/start-here/autonomy-loop">
+  The autonomy loop
+</CallToAction>
+
+</Step>
+
+</Steps>

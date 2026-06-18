@@ -1,0 +1,45 @@
+---
+title: Inbox
+sidebarTitle: Inbox
+sidebar: Docs
+showTitle: true
+---
+
+import { CallToAction } from 'components/CallToAction'
+
+The inbox is where self-driving hands work back to you. [Reports](/docs/start-here/reports) and the pull requests that come from acting on them both land here, ranked by priority, so the most important work rises to the top.
+
+It's the human side of the [autonomy loop](/docs/start-here/autonomy-loop): the loop watches, enriches, and proposes, and the inbox is where you review, steer, and decide.
+
+## What lands in your inbox
+
+- **Reports** – grouped [signals](/docs/start-here/signals) framed as one problem, with the evidence behind them.
+- **Pull requests** – the changes an agent drafts when you act on a report.
+
+Each item is ranked by priority, so you work top-down instead of triaging a flat list.
+
+## What you do here
+
+From the inbox you:
+
+- **Review** a report and dig into the evidence a scout found.
+- **Steer** the work: approve it, snooze it, or decline what self-driving proposes.
+- **Merge** the pull requests you're happy with, the same as any other PR.
+
+Nothing ships without you. The inbox is where you stay in control of what self-driving does.
+
+<CalloutBox icon="IconWarning" title="TODO: add media" type="caution">
+Screenshot of the inbox with reports and pull requests ranked by priority.
+</CalloutBox>
+
+## Where to find it
+
+The inbox lives in the [web app](/docs/start-here/web) and in [PostHog Code](/docs/posthog-code). To connect your sources and start filling it, see [getting started with the inbox](/docs/posthog-code/inbox).
+
+## Next step
+
+There are limits on what self-driving can do before it reaches your inbox. See how you set them.
+
+<CallToAction type="primary" to="/docs/start-here/guardrails">
+  Guardrails
+</CallToAction>
