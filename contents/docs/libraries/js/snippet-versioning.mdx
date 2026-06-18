@@ -5,36 +5,55 @@ sidebar: Docs
 showTitle: true
 ---
 
-The PostHog HTML snippet loads the JavaScript web SDK (`posthog-js`) from PostHog's CDN. By default, the snippet follows the latest supported v1 release, so new SDK fixes and features reach users automatically on fresh page loads.
+The PostHog HTML snippet loads the JavaScript web SDK (`posthog-js`) from PostHog's CDN. By default, the snippet uses `/static/array.js`, which follows PostHog's current supported web SDK release.
 
-Use snippet versioning when you need to control that rollout, such as pinning a known-good SDK version while debugging a regression, or moving a project through a specific minor version before returning to automatic updates.
+Use snippet versioning when you need to control that rollout, such as pinning a known-good SDK version while debugging a regression, or tracking the latest release in a specific major version.
 
-> **Note:** This page is about the HTML snippet (`/static/array.js`). If you install `posthog-js` from npm, your package manager lockfile controls the SDK version instead. See [Keeping SDKs current](/docs/sdk-doctor/keeping-sdks-current#npm-and-package-manager-lockfiles).
+> **Note:** This page is about the HTML snippet. If you install `posthog-js` from npm, your package manager lockfile controls the SDK version instead. See [Keeping SDKs current](/docs/sdk-doctor/keeping-sdks-current#npm-and-package-manager-lockfiles).
 
-## Recommended setup
+## Supported pins
 
-For most projects, leave the snippet version unset. This uses the default major-version pointer (`1`), which resolves to the latest available v1 SDK release.
+Snippet versioning supports major-version pins and exact-version pins.
 
-If you do need to pin a version, prefer the least-specific pin that solves your problem:
-
-| Pin format | Example | Behavior |
+| Pin format | Example path | Behavior |
 | --- | --- | --- |
-| Major | `1` | Uses the latest available `1.x.x` release. This is the default. |
-| Minor | `1.358` | Uses the latest available `1.358.x` patch release. |
-| Exact | `1.358.0` | Uses exactly that SDK version until you change or remove the pin. |
+| Unpinned | `/static/array.js` | Uses PostHog's default current web SDK release. |
+| Major | `/static/1/array.js` | Uses the latest available `1.x.x` release. |
+| Exact | `/static/1.380.0/array.js` | Uses exactly that SDK version until you change the snippet. |
+
+Minor pins such as `/static/1.380/array.js` are not supported.
 
 Exact pins are safest for short-term rollback or debugging, but they also stop automatic fixes from reaching your users. Remove exact pins once you're done investigating.
 
 ## Change the snippet version
 
-1. Open [Project settings → Snippet version](https://app.posthog.com/settings/project-details#js-snippet-version).
-2. Enter a major, minor, or exact version pin, or leave the field empty to use the default latest v1 release.
-3. Save the setting.
-4. Check the "currently resolves to" value shown in the setting. This is the exact SDK version that will be served.
+There isn't a PostHog setting for this yet. To pin the snippet version, edit the HTML snippet in your site's code.
 
-The setting applies at the project/environment level. You need project admin access to change it. Snippet versioning is currently experimental; if you don't see this setting, contact PostHog support.
+1. Find the `/static/array.js` path in your installed PostHog snippet.
+2. Change it to a supported versioned path.
+3. Deploy the updated snippet.
 
-You do **not** need to edit your installed HTML snippet after changing the version pin. The same snippet URL resolves to the configured SDK version at request time. However, if your installed snippet code is very old or manually modified, copy a fresh snippet from [project settings](https://app.posthog.com/settings/project-details#snippet) as well.
+For example, the generated snippet contains a line like this:
+
+```js
+p.src = s.api_host.replace('.i.posthog.com', '-assets.i.posthog.com') + '/static/array.js'
+```
+
+To track the latest v1 release, change only the path:
+
+```js
+p.src = s.api_host.replace('.i.posthog.com', '-assets.i.posthog.com') + '/static/1/array.js'
+```
+
+To pin an exact version, use the exact version path:
+
+```js
+p.src = s.api_host.replace('.i.posthog.com', '-assets.i.posthog.com') + '/static/1.380.0/array.js'
+```
+
+Keep the rest of the snippet unchanged. In particular, don't wrap the snippet in an extra `if (!window.posthog)` guard; the snippet already handles safe initialization.
+
+To return to the default current version, change the path back to `/static/array.js`.
 
 ## Versioned external scripts
 
@@ -47,7 +66,7 @@ You do **not** need to edit your installed HTML snippet after changing the versi
 By default, these scripts use compatibility URLs like:
 
 ```text
-/static/recorder.js?v=1.370.0
+/static/recorder.js?v=1.380.0
 ```
 
 If your CDN, reverse proxy, or security tooling ignores query strings while caching, enable `strict_script_versioning` so these scripts use exact version paths instead:
@@ -63,10 +82,10 @@ posthog.init('<ph_project_token>', {
 This changes dependency URLs to paths like:
 
 ```text
-/static/1.370.0/recorder.js
+/static/1.380.0/recorder.js
 ```
 
-Use this whenever you want the initial snippet and its feature scripts to be tied to the same SDK version without relying on query-string cache busting.
+Use this whenever you want feature scripts to be tied to the exact SDK version without relying on query-string cache busting.
 
 ## Custom asset hosts and reverse proxies
 
@@ -86,21 +105,24 @@ posthog.init('<ph_project_token>', {
 If you use a reverse proxy, make sure it forwards all PostHog SDK paths your site can request:
 
 - `/static/array.js`
+- `/static/1/array.js` for a major-version snippet pin
+- `/static/1.380.0/array.js` for an exact-version snippet pin
 - `/static/<version>/<asset>.js` when `strict_script_versioning` is enabled
 - `/static/<asset>.js?v=<version>` for compatibility URLs
 - `/array/<token>/config.js`
 - normal API paths such as `/e`, `/flags`, `/decide`, and `/s`
 
-Avoid caching `/static/array.js` for long periods if you want projects on the default latest version to update quickly. Exact versioned paths like `/static/1.370.0/recorder.js` are immutable and safe to cache more aggressively.
+Avoid caching `/static/array.js` or `/static/1/array.js` for long periods if you want users to pick up new SDK releases quickly. Exact versioned paths like `/static/1.380.0/array.js` and `/static/1.380.0/recorder.js` are immutable and safe to cache more aggressively.
 
 ## Troubleshooting
 
 | Symptom | What to check |
 | --- | --- |
-| The browser still loads an old SDK version | Check whether [Project settings → Snippet version](https://app.posthog.com/settings/project-details#js-snippet-version) has an exact or minor pin. Also check CDN, service worker, and reverse proxy caches. |
+| The browser still loads an old SDK version | Inspect the deployed snippet path. `/static/1.380.0/array.js` is an exact pin, `/static/1/array.js` tracks the latest v1 release, and `/static/array.js` is unpinned. Also check CDN, service worker, and reverse proxy caches. |
+| The snippet 404s after adding a pin | Check that the path is either a major pin such as `/static/1/array.js` or an exact pin such as `/static/1.380.0/array.js`. Minor pins such as `/static/1.380/array.js` are not supported. |
 | Session Replay, Surveys, or toolbar scripts 404 | Your proxy may not forward `/static/<version>/<asset>.js`. Either add that route or disable `strict_script_versioning`. |
 | `array.js` updates, but feature scripts stay stale | Enable `strict_script_versioning` so dependency scripts use versioned paths instead of query-string cache busting. |
 | Tag manager installs do not update | Some tag manager templates pin their own `posthog-js` version. Update the tag manager template separately. |
-| You use npm, not the HTML snippet | Update `posthog-js` through your package manager instead; this project setting does not affect bundled npm installs. |
+| You use npm, not the HTML snippet | Update `posthog-js` through your package manager instead; this snippet path does not affect bundled npm installs. |
 
 For broader causes of stale SDKs, see [Keeping SDKs current](/docs/sdk-doctor/keeping-sdks-current).

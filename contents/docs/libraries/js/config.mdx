@@ -80,9 +80,9 @@ Some of the most relevant options are:
 
 ## HTML snippet and script versioning
 
-If you install PostHog with the HTML snippet, the snippet loads `posthog-js` from PostHog's CDN and defaults to the latest supported v1 release. You can pin the project to a major, minor, or exact SDK version in [Project settings → Snippet version](https://app.posthog.com/settings/project-details#js-snippet-version). See [HTML snippet versioning](/docs/libraries/js/snippet-versioning) for when to pin versions and how this interacts with caching.
+If you install PostHog with the HTML snippet, the snippet loads `posthog-js` from PostHog's CDN using `/static/array.js`. To pin the snippet, edit that path by hand to a supported major or exact version path, such as `/static/1/array.js` or `/static/1.380.0/array.js`. See [HTML snippet versioning](/docs/libraries/js/snippet-versioning) for when to pin versions and how this interacts with caching.
 
-Use `strict_script_versioning` when your CDN or reverse proxy should load feature scripts from exact versioned paths such as `/static/1.370.0/recorder.js` instead of query-string URLs such as `/static/recorder.js?v=1.370.0`. Use `asset_host` only when `/static/*` assets need a separate host from `api_host`.
+Use `strict_script_versioning` when your CDN or reverse proxy should load feature scripts from exact versioned paths such as `/static/1.380.0/recorder.js` instead of query-string URLs such as `/static/recorder.js?v=1.380.0`. Use `asset_host` only when `/static/*` assets need a separate host from `api_host`.
 
 ## Tracing headers
 
