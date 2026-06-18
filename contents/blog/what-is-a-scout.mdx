@@ -136,10 +136,11 @@ The hard part of a scout isn't finding things. It's *not* finding things. A scou
 
 So the interesting logic in a scout skill is mostly about restraint:
 
-- **A confidence bar.** Every finding carries a confidence score, and the scout only emits above a threshold (roughly 0.65+). Below that, it doesn't bother you — it writes a note to its scratchpad and moves on.
+- **A sense of when to speak up.** A scout's skill tells it to only emit when it's confident the finding is real and worth your attention — otherwise it writes a note to its scratchpad and moves on. Exactly how that bar is expressed is up to each scout, and it's a convention rather than a hard gate, so you can tune how trigger-happy a given scout is.
 - **Dedupe keys.** Findings carry stable keys so the pipeline can group repeats and the scout can recognize "I already said this."
 - **Disqualifiers.** Explicit lists of things that look like signal but aren't: a single user, a dev-environment burst, a survey at the natural end of its window, an internal test response.
 - **Severity** (P0–P4) so downstream routing knows what's a five-alarm fire versus a nice-to-fix.
+- ...anything else you decide!
 
 Here's the contrast that makes it concrete. On our brand-mentions scout, a lone *"PostHog is down"* tweet — no detail, no corroboration, one account — got **held below the bar**. The same week, a *"PostHog is getting expensive"* complaint that showed up from **multiple independent voices** got **emitted** as a pricing-perception theme. Same surface, opposite decisions, and the reasoning for both is written in plain English in the skill and the scratchpad.
 
