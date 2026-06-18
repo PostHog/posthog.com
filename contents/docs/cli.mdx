@@ -76,8 +76,6 @@ See [source map uploads](/docs/error-tracking/upload-source-maps/cli) and [schem
 
 `posthog-cli api` exposes PostHog's MCP tools through a single shell command. This is useful for agents because they can discover the available tool surface progressively instead of loading every tool and schema into context upfront.
 
-> **Experimental:** the `api` command group is gated behind an opt-in while it stabilizes. Set `POSTHOG_CLI_EXPERIMENTAL_API=1` in the environment, or pass `--experimental` immediately after `api`.
-
 Agents should start a session by loading the full usage guide into context:
 
 ```bash
@@ -210,9 +208,20 @@ posthog-cli --host https://eu.posthog.com api search feature-flag
 
 ## Troubleshooting and FAQ
 
-### The command group is disabled
+### The `api` command is unavailable
 
-`posthog-cli api` is experimental. If it reports that the command group is disabled, set `POSTHOG_CLI_EXPERIMENTAL_API=1` in the environment or pass `--experimental` immediately after `api`.
+Install the latest version of the CLI, then rerun the command:
+
+```bash
+npm install -g @posthog/cli@latest
+posthog-cli api --agent-help
+```
+
+If you don't want to install the CLI globally, invoke the latest release directly:
+
+```bash
+npx -y @posthog/cli@latest api --agent-help
+```
 
 ### Missing API key
 
