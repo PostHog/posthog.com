@@ -24,21 +24,13 @@ The CLI can also be installed globally by running:
 npm install -g @posthog/cli
 ```
 
-Check that the CLI is installed:
-
-```bash
-posthog-cli --version
-```
-
 ## Authenticate
-
-For local use, log in through your browser:
 
 ```bash
 posthog-cli login
 ```
 
-This stores a personal API token locally and reuses it for CLI commands, including `posthog-cli api`.
+This stores a personal API token locally and reuses it for CLI commands.
 
 For CI/CD, headless environments, or agents running without a browser, set environment variables instead:
 
@@ -51,19 +43,6 @@ For CI/CD, headless environments, or agents running without a browser, set envir
 `posthog-cli api` also accepts `POSTHOG_HOST`, `POSTHOG_PROJECT_ID`, and `POSTHOG_API_KEY` if you already use those names in your environment.
 
 For broad agent workflows, create a [personal API key](https://app.posthog.com/settings/user-api-keys?preset=mcp_server) with the **MCP Server** preset. For narrower automation, grant only the scopes needed for the specific command.
-
-## Use existing CLI commands
-
-Existing CLI commands continue to work as before. For example:
-
-```bash
-posthog-cli sourcemap inject --directory ./dist
-posthog-cli sourcemap upload --directory ./dist
-posthog-cli exp schema pull
-posthog-cli exp schema status
-```
-
-See [source map uploads](/docs/error-tracking/upload-source-maps/cli) and [schema management](/docs/product-analytics/schema-management#downloading-your-schema-with-the-cli) for product-specific examples.
 
 ## Use PostHog from coding agents
 
@@ -154,6 +133,19 @@ Installed skills are a snapshot. To refresh one after an update, reinstall it wi
 posthog-cli api skill install --force <skill-id>
 ```
 
+## Use existing CLI commands
+
+Existing CLI commands continue to work as before. For example:
+
+```bash
+posthog-cli sourcemap inject --directory ./dist
+posthog-cli sourcemap upload --directory ./dist
+posthog-cli exp schema pull
+posthog-cli exp schema status
+```
+
+See [source map uploads](/docs/error-tracking/upload-source-maps/cli) and [schema management](/docs/product-analytics/schema-management#downloading-your-schema-with-the-cli) for product-specific examples.
+
 ## Run from a local PostHog checkout
 
 If you're testing unreleased CLI changes from a local `PostHog/posthog` repository checkout, build the API CLI bundle first:
@@ -193,32 +185,7 @@ posthog-cli api skill install [--force] <skill-id>
 posthog-cli api agents-md install [--path AGENTS.md]
 ```
 
-For EU Cloud, either set `POSTHOG_CLI_HOST=https://eu.posthog.com` or pass `--host`:
-
-```bash
-posthog-cli --host https://eu.posthog.com api search feature-flag
-```
-
 ## Troubleshooting and FAQ
-
-### The `api` command is unavailable
-
-Install the latest version of the CLI, then rerun the command:
-
-```bash
-npm install -g @posthog/cli@latest
-posthog-cli api --agent-help
-```
-
-If you don't want to install the CLI globally, invoke the latest release directly:
-
-```bash
-npx -y @posthog/cli@latest api --agent-help
-```
-
-### Missing API key
-
-If you see a missing API key error, run `posthog-cli login` or set `POSTHOG_CLI_API_KEY` and `POSTHOG_CLI_PROJECT_ID`.
 
 ### My agent doesn't know about the CLI
 
@@ -231,12 +198,25 @@ posthog-cli api agents-md install
 
 If the snippet is installed but the agent still ignores the CLI, check that the instructions file is one your agent actually reads (for example, Claude Code reads `CLAUDE.md` and `AGENTS.md`, Codex reads `AGENTS.md`) and pass `--path` if needed.
 
-### The tool list looks outdated
+### The `api` command is unavailable
 
-The tool catalog is bundled with the CLI, so an old binary serves an old catalog. Update the CLI and rerun the command, or invoke the latest release directly without installing:
+Install the latest version of the CLI, then rerun the command:
 
 ```bash
-npx -y @posthog/cli@latest api search feature-flag
+npm install -g @posthog/cli@latest
+posthog-cli api --agent-help
+```
+
+### Missing API key
+
+If you see a missing API key error, run `posthog-cli login` or set `POSTHOG_CLI_API_KEY` and `POSTHOG_CLI_PROJECT_ID`.
+
+### The tool list looks outdated
+
+The tool catalog is bundled with the CLI, so an old binary serves an old catalog. Update the CLI and rerun the command:
+
+```bash
+npm install -g @posthog/cli@latest
 ```
 
 If a tool you used before is gone, names change as the PostHog API evolves — use `search` to find the current name:
