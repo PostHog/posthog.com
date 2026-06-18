@@ -7,7 +7,7 @@ features like heatmaps).
 
 ## Single source of truth
 
-The IP values live in **one place** — [`src/constants/outboundIPs.ts`](../../../constants/outboundIPs.ts)
+The IP values live in **one place** – [`src/constants/outboundIPs.ts`](../../../constants/outboundIPs.ts)
 (`POSTHOG_OUTBOUND_IPS`). Every docs surface that lists these IPs renders them through
 this component, so an IP rotation is a single edit to that constant.
 
