@@ -265,8 +265,51 @@ Those boxes trace one finding end to end. Two behaviors from this scout generali
 
 This scout sits higher on the [self-driving pyramid](/blog/self-driving-product) than the MCP one: when it finds something, the action usually isn't a PR — it's comms, product strategy, or just situational awareness. A few real (anonymized) examples it surfaced:
 
-- **A reputational narrative escalating.** A privacy claim about PostHog jumped from niche threads to a large-audience commentator, with the framing shifting to attack PostHog directly (and, notably, *inaccurately*). The scout emitted a **P2 recommending comms/legal own the narrative** — citing the two earlier, lower-severity findings it had filed about the same theme as it built.
-- **Us, roasted, repeatedly.** The scout maintains a running *"PostHog is too complex / bloated"* theme. It's heard that *"the website was better before the OS Desktop update,"* that people don't love Max AI being the default landing screen, and — my personal favorite — that someone is *"creeped out by the hedgehog sound PostHog Code makes every time it finishes a task."* All real, all public, all genuinely useful to know in aggregate.
+**A reputational narrative escalating.** A privacy claim about PostHog jumped from niche threads to a large-audience commentator, with the framing shifting to attack PostHog directly (and, notably, *inaccurately*). The scout emitted a **P2 recommending comms/legal own the narrative** — citing the two earlier, lower-severity findings it had filed about the same theme as it built.
+
+**Us, roasted, repeatedly.** The scout also keeps a running *"PostHog is too complex / bloated"* theme — and the genuinely useful part is watching it *decide what's worth your attention*. Most of these never clear the bar (one voice, low reach, a matter of taste), so the scout logs each with a deadpan verdict and a *"promote if a second voice echoes"* trigger, and stays quiet. Pop these open for the actual public roasts — and the scout's clinical reasoning for holding them:
+
+<details>
+
+<summary>🦔 **"Creeped out by the hedgehog sound"**</summary>
+
+> *"Am I the only one who is creeped out by the hedgehog sound posthog code makes every time it finishes a task?"*
+
+The scout's note to itself: *"a real shipped audio cue and the feedback is specific, but n=1, low reach, and a matter of taste → does not clear the bar at n=1. If a 2nd distinct voice complains about the PostHog Code sound, this becomes an emittable P3 (suggest a mute/volume toggle)."*
+
+</details>
+
+<details>
+
+<summary>**"Too complicated, too much noise"** — the too-complex / bloat drip</summary>
+
+A steady multi-day trickle, all real, all public:
+
+> *"Am I the only one who hates Posthog UX?"*
+>
+> *"PostHog. Too complicated, too much noise."*
+>
+> *"is it just me or the dashboard is so bloated now? 😭 … this thing could've been a sidebar imo"*
+>
+> *"yeah too much useless features"*
+>
+> *"not sure what substances @posthog employees take to have that much beef with their UI; they're constantly changing it!"*
+
+The scout's verdict: *"steady multi-day drip, not a spike… all generic, low-reach, no high-reach/press voice. Held below bar. Escalate only if a high-reach voice or a tight cluster of 3+ fresh distinct voices in a single day lands."* It *did* cross that bar once — an r/posthog *"the UX is just terrible (new user rant)"* thread tipped it into an emitted P3.
+
+</details>
+
+<details>
+
+<summary>**"Don't make the AI the first thing I see"** — Max-as-landing-page</summary>
+
+> *"as much as i love the posthog ai it shouldn't be the first thing i see when i go to posthog… not the thing i wanna see"*
+
+The sharp bit the scout pulled out: this isn't *"AI bad."* The same accounts praise it (*"they cooked on that thing, it's really really good"*) — the gripe is specifically that the AI is the **default landing screen**, which is a default-setting and discoverability call (there's already an option to customize the landing screen), not a missing feature. Held below bar as a single thread.
+
+</details>
+
+All real, all public, all genuinely useful to know in aggregate — and all held back until they actually matter.
 
 And this is the scout whose scratchpad best shows the **memory model evolving**. Across runs it has built up:
 
