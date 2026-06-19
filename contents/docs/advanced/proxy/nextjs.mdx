@@ -182,7 +182,7 @@ If requests to your proxy path return 404:
 1. Verify your `next.config.js` is in the project root
 2. Restart your dev server after changing the config
 3. Check the rewrite order: static and array rules must come before the catch-all
-4. If you have middleware (`middleware.ts` or `proxy.ts`), check its `matcher` doesn't catch your proxy path. A catch-all matcher redirects the capture endpoints — you'll see something like `POST /yourpath/s` become a 307 to `/en/yourpath/s` that 404s, while `/yourpath/static/*.js` still loads. Add your proxy path to the matcher: `matcher: ['/((?!api|yourpath|_next|_vercel|.*\\..*).*)']`
+4. If you have middleware (`middleware.ts` or `proxy.ts`), check its `matcher` doesn't catch your proxy path. A catch-all matcher redirects the capture endpoints – you'll see something like `POST /yourpath/s` become a 307 to `/en/yourpath/s` that 404s, while `/yourpath/static/*.js` still loads. Add your proxy path to the matcher: `matcher: ['/((?!api|yourpath|_next|_vercel|.*\\..*).*)']`
 
 ### Trailing slash conflicts with SEO
 
