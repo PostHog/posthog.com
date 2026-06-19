@@ -70,8 +70,8 @@ The client keeps a buffer in-memory (see [how the buffer works](#how-the-trigger
 
 ## With Event trigger conditions
 
-Since posthog-js version 1.186.0, you can opt to only start recordings once your user emits a particular event. After the event is captured, the recording continues even after they leave the matching page.
-The client keeps a buffer in-memory (see [how the buffer works](#how-the-trigger-buffer-works) below), so you'll still be able to see activity leading up to that event.
+You can opt to only start recordings once your user emits a particular event. After the event is captured, the recording continues for the rest of the session.
+On the web, the client keeps a buffer in-memory (see [how the buffer works](#how-the-trigger-buffer-works) below), so you'll still be able to see activity leading up to that event.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/event_trigger_light_21a531edbb.png"
@@ -79,6 +79,15 @@ The client keeps a buffer in-memory (see [how the buffer works](#how-the-trigger
   alt="Adding event trigger to control session recordings"
   classes="rounded"
 />
+
+Event triggers are supported on the following SDKs:
+
+- **Web** - posthog-js 1.186.0+
+- **iOS** - 3.48.0+
+- **Android** - 3.40.1+
+- **Flutter** - 5.25.0+
+
+> On mobile platforms, there's no URL or in-memory pre-buffer. Recording starts when the matching event is captured and continues for the rest of the session. A new session re-arms the trigger and requires a fresh matching event.
 
 ### Triggering on exceptions
 

@@ -33,6 +33,7 @@ import {
     IconLlmPromptEvaluation,
 } from '@posthog/icons'
 import useProducts from './useProducts'
+import { mcpAnalytics } from './productData/mcp_analytics'
 
 const dedupe = (products) => {
     const deduped = {}
@@ -1774,6 +1775,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             slug: 'replay-vision',
             status: 'beta',
         },
+        mcpAnalytics,
         {
             name: 'API',
             Icon: IconTerminal,

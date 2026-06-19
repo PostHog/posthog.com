@@ -433,3 +433,9 @@ British
 [Ee]nglish
 European
 UK
+
+# Technology terms
+MCPcat
+[Nn]ullish
+[Ss]anitization
+[Ss]anitize[ds]?
