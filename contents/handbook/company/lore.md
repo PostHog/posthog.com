@@ -47,3 +47,5 @@ A beginner's guide to some of our custom Slack emojis and various anecdotes you'
 * <TeamMember name="Anna-Marie Doudova" photo /> did a presentation at our Barbados offsite about Gen Z slang which encouraged everyone to do Gen Z slangmaxxing like an unc that's cooked 💀. 
 
 * Hire movers. Whenever someone asks the team for moving or packing tips, the unanimous, handbook-sanctioned answer is: hire movers. (And, while you're at it, hire packers.) This was settled in a lengthy thread where someone moving to a second-floor apartment a four-minute drive away — with a flight of stairs and lots of heavy furniture — asked for _packing_ hacks and instead received an avalanche of "hire movers" from everyone.
+
+* We're going to die in around 1,646 weeks, maybe earlier. Someone will periodically remind you in Slack of exactly how many weeks we all have left to live. It's a reference to [Your Life in Weeks](https://waitbutwhy.com/2014/05/life-weeks.html) — a memento mori to keep us shipping. Welcome to the lore.
