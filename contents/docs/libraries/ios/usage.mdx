@@ -171,6 +171,12 @@ To set up [session replay](/docs/session-replay/mobile) in your project, all you
 
 [Surveys](/docs/surveys) launched with [popover presentation](/docs/surveys/creating-surveys#presentation) are automatically shown to users matching the [display conditions](/docs/surveys/creating-surveys#display-conditions) you set up.
 
+## Error tracking
+
+To set up error tracking in your project, follow the [iOS installation guide](/docs/error-tracking/installation/ios).
+
+Use `PostHogSDK.shared.addExceptionStep(_:properties:)` to record breadcrumb-style steps that attach to the next captured `$exception` as `$exception_steps`. Configure the rolling buffer with `errorTrackingConfig.exceptionSteps`. See [exception steps](/docs/error-tracking/capture#add-exception-steps) for details. Available in `posthog-ios` 3.61.0 and later.
+
 ## Debug mode 
 
 If you're not seeing the expected events being captured, the feature flags being evaluated, or the surveys being shown, you can enable debug mode to see what's happening. 
