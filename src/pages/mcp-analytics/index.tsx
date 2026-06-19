@@ -16,7 +16,7 @@ const PRODUCT_HANDLE = 'mcp_analytics'
 // PostHog dogfoods its own site). It's currently in `concept` stage, gated to the PostHog Team
 // cohort. When the beta opens to everyone, swap this for the public early-access surface.
 const EARLY_ACCESS_URL =
-    'https://us.posthog.com/project/2/early_access_features/019ecd58-7e9b-0000-60b6-98b487153c0e'
+    'https://us.posthog.com/early_access_features/019ecd58-7e9b-0000-60b6-98b487153c0e'
 
 export default function MCPAnalytics(): JSX.Element {
     // Get content data from multiple directories
