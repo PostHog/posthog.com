@@ -102,11 +102,10 @@ A demo can also be a great format where questions bubble naturally.
 **Principles:**
 
 - Leverage PostHog's technical credibility by showing vs. telling
-- Uses the demo as a conversation starter rather than a monologue
-- Be adaptable
-- It's okay to say _"I don't know"_. The main thing here is to follow up with an answer after the call.  If you try to fake it, you'll lose credibility.
-- Make sure to pause occasionally and ask if they have any questions and if this is what they are looking for.
+- Use the demo as a conversation starter rather than a monologue
+- It's okay to say _"I don't know"_. The main thing here is to follow up with an answer after the call.  If you try to fake it, you'll lose credibility
 - Read body language and tone.  Communication is [7% verbal, 39% tone of voice, and 55% body language.](https://people-shift.com/articles/mehrabians-7-38-55-communication-model)
+- Be adaptable
 
 **Examples:**
 
