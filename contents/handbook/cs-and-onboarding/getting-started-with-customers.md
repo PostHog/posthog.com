@@ -36,6 +36,23 @@ In their project(s), check the data management tab:
 
 Also worth running through the [basic account review](/handbook/cs-and-onboarding/foundation-check) checklist.
 
+### Trust the data before you trust the dashboards
+
+A customer can be busy in PostHog and still not trust PostHog. Dashboards, saved insights, and regular logins are useful signals, but they do not prove the data matches how the business actually works.
+
+Before your first outreach, take a quick look at the basics:
+
+- Is the project mostly `$pageview` and raw `$autocapture`, or have they defined the events and actions that describe their real funnel?
+- Are users being identified consistently?
+- Do important events have useful properties, or are they too thin to break down later?
+- If they sell to teams, companies, or workspaces, are groups set up where relevant?
+- Do event and property names look deliberate, or are there duplicates and one-off names everywhere?
+- Do the dashboards answer questions the customer clearly cares about, or just report what was easiest to capture?
+
+This matters because bad instrumentation usually shows up before churn does. A customer might still have active users, dashboards, and session replays while quietly losing confidence in the numbers. If the data looks thin, make that your opener: "I noticed your team is using PostHog, but most of the data is still pageviews and autocapture. I think we can make these dashboards much more useful by defining a few events around your actual funnel."
+
+Do not turn this into a full audit before every intro. It is a quick sniff test. If something looks off, use the [foundation check](/handbook/cs-and-onboarding/foundation-check) or [health check](/handbook/cs-and-onboarding/health-checks) as the deeper follow-up.
+
 ## 2. Reach out
 
 How you reach out depends on whether you're inheriting an existing contact or starting cold.
