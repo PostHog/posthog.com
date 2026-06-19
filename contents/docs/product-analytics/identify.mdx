@@ -333,6 +333,17 @@ client.Enqueue(posthog.Alias{
 posthog.alias("frontend_id", "backend_id");
 ```
 
+```rust
+use posthog_rs::Event;
+
+// The Rust SDK doesn't currently expose an alias helper.
+// See /docs/libraries/rust#alias for more details.
+let mut event = Event::new("$create_alias", "frontend_id");
+event.insert_prop("alias", "backend_id").unwrap();
+
+client.capture(event).await.unwrap();
+```
+
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
     "api_key": "<ph_project_token>",
