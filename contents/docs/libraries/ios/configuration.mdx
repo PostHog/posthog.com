@@ -24,6 +24,20 @@ You can enable or disable autocapture through the `PostHogConfig` object.
 
 <iosAutocaptureConfiguration />
 
+## Tracing headers
+
+Use `tracingHeaders` to connect iOS network requests to backend events, errors, and LLM traces captured by a server-side PostHog SDK:
+
+```swift
+let configuration = PostHogConfig(projectToken: "<ph_project_token>", host: "<ph_client_api_host>")
+configuration.tracingHeaders = ["api.example.com"]
+PostHogSDK.shared.setup(configuration)
+```
+
+Hostnames are matched exactly and should not include protocols, paths, ports, or wildcard subdomains. Matching `URLSession` requests include `X-POSTHOG-DISTINCT-ID` and `X-POSTHOG-SESSION-ID` when those values are available.
+
+Tracing headers require method swizzling, so `configuration.enableSwizzling` must remain `true`.
+
 ## Flush configuration
 
 The iOS SDK uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your mobile app.
@@ -227,7 +241,7 @@ The [`PostHogConfig` object](https://github.com/PostHog/posthog-ios/blob/main/Po
 | Attribute | Description |
 |-----------|-------------|
 | `flushAt`<br/><br/>**Type:** Integer<br/>**Default:** `20` (`5` on tvOS) | The number of queued events that the posthog client should flush at. Setting this to `1` will not queue any events and will use more battery. |
-| `flushIntervalSeconds`<br/><br/>**Type:** Integer<br/>**Default:** `30` | The amount of time to wait before each tick of the flush timer. Smaller values will make events delivered in a more real-time manner and also use more battery. A value smaller than 10 seconds will seriously degrade overall performance. |
+| `flushIntervalSeconds`<br/><br/>**Type:** TimeInterval<br/>**Default:** `30` | The amount of time to wait before each tick of the flush timer, in seconds. Smaller values will make events delivered in a more real-time manner and also use more battery. A value smaller than 10 seconds will seriously degrade overall performance. |
 | `maxQueueSize`<br/><br/>**Type:** Integer<br/>**Default:** `1000` (`100` on tvOS) | The maximum number of items to queue before starting to drop old ones. This should be a value greater than zero, the behavior is undefined otherwise. |
 | `maxBatchSize`<br/><br/>**Type:** Integer<br/>**Default:** `50` | Number of maximum events in a batch call. |
 | `maxRetries`<br/><br/>**Type:** Integer<br/>**Default:** `3` | Maximum number of consecutive flush attempts before the entire queue is dropped to avoid infinite retries against a permanently-broken backend (e.g. wrong API key, exhausted quota, deterministic 5xx). Increments on every retriable failure including HTTP 413 cap halving; resets on a successful 2xx response. |
@@ -238,17 +252,17 @@ The [`PostHogConfig` object](https://github.com/PostHog/posthog-ios/blob/main/Po
 | `rageClickConfig`<br/><br/>**Type:** Object<br/>**Default:** `.init()` | (iOS/macCatalyst, UIKit) Rage click detection configuration. Includes `enabled` (default `true`), `minimumTapCount` (default `3`), `thresholdPoints` (default `30`), and `timeoutInterval` (default `1.0`). Works independently of `captureElementInteractions`. Available in version 3.51.0+. |
 | `sendFeatureFlagEvent`<br/><br/>**Type:** Boolean<br/>**Default:** `true` | Send a `$feature_flag_called` event when a feature flag is used automatically. |
 | `preloadFeatureFlags`<br/><br/>**Type:** Boolean<br/>**Default:** `true` | Preload feature flags automatically. |
-| `evaluationContexts`<br/><br/>**Type:** Array of Strings<br/>**Default:** `undefined` | Evaluation context tags that constrain which feature flags are evaluated. When set, only flags with matching evaluation context tags (or no evaluation context tags) will be returned. See [evaluation contexts documentation](/docs/feature-flags/evaluation-contexts) for more details. Available in version 3.34.0+. The legacy parameter `evaluationEnvironments` (version 3.33.0+) is also supported for backward compatibility. |
+| `evaluationContexts`<br/><br/>**Type:** Array of Strings<br/>**Default:** `undefined` | Evaluation context tags that constrain which feature flags are evaluated. When set, only flags with matching evaluation context tags (or no evaluation context tags) will be returned. See [evaluation contexts documentation](/docs/feature-flags/evaluation-contexts) for more details. Available in version 3.38.0+. The legacy parameter `evaluationEnvironments` (version 3.33.0+) is also supported for backward compatibility. |
 | `debug`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Logs the SDK messages to the Xcode console. |
 | `optOut`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Prevents capturing any data if enabled. |
 | `getAnonymousId`<br/><br/>**Type:** Function<br/>**Default:** `undefined` | Hook that allows for modification of the default mechanism for generating anonymous id (which as of now is just random UUID v7). |
-| `dataMode`<br/><br/>**Type:** Enum<br/>**Default:** `.any` | Allows to send your data only if the data mode matches your configuration such as wifi only, cellular only or any. |
+| `dataMode`<br/><br/>**Type:** Enum<br/>**Default:** `.any` | Controls when queued data is flushed. Use `.wifi` to flush only on Wi-Fi; `.cellular` is a legacy value and behaves like `.any`. |
 | `personProfiles`<br/><br/>**Type:** Enum<br/>**Default:** `.identifiedOnly` | Determines the behavior for processing user profiles. |
 | `setDefaultPersonProperties`<br/><br/>**Type:** Boolean<br/>**Default:** `true` | Automatically set common device and app properties (such as `$app_version`, `$os_name`, and `$device_type`) as person properties for feature flag evaluation. See [property overrides](/docs/feature-flags/property-overrides) for more details. |
 | `sessionReplay`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Enable Recording of Session Replays. |
 | `sessionReplayConfig`<br/><br/>**Type:** Object<br/>**Default:** `.init()` | Session Replay configuration. See [Session Replay installation](/docs/session-replay/installation/ios) for more details. |
 | `tracingHeaders`<br/><br/>**Type:** Array of Strings<br/>**Default:** `nil` | Exact hostnames that should receive PostHog tracing headers when the SDK instruments `URLSession` requests. |
-| `errorTrackingConfig`<br/><br/>**Type:** Object<br/>**Default:** `.init()` | Error Tracking configuration. See [Error Tracking installation](/docs/error-tracking/installation/ios) for more details. |
+| `errorTrackingConfig`<br/><br/>**Type:** Object<br/>**Default:** `.init()` | Error Tracking configuration. See the [error tracking docs](/docs/error-tracking) for more details. |
 | `logs`<br/><br/>**Type:** Object<br/>**Default:** `.init()` | Structured Logs configuration. See [Logs installation](/docs/logs/installation/ios) for more details. |
 | `surveysConfig`<br/><br/>**Type:** Object<br/>**Default:** `.init()` | Surveys configuration, including custom survey delegates and display language overrides. |
 | `urlSessionConfiguration`<br/><br/>**Type:** URLSessionConfiguration<br/>**Default:** `.default` | Custom `URLSessionConfiguration` used by the SDK for PostHog API requests. |

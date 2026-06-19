@@ -51,7 +51,7 @@ The short version:
 
 The data model is different too. APM is built around requests, services, and traces across your application stack. AI observability is built around *generations* (individual LLM calls), traces (the chain of generations and tool calls that make up an agent loop), and spans (the steps inside a trace).
 
-AI observability tools also do things APM tools structurally can't, like [semantic clustering of model outputs](/blog/llm-analytics-clustering-how-it-works), which groups traces by what the model actually said rather than which endpoint was hit. That's a kind of analysis only possible when your monitoring layer understands the content of the calls, not just their shape.
+[AI observability tools](/blog/cheapest-ai-observability-tools) also do things APM tools structurally can't, like [semantic clustering of model outputs](/blog/llm-analytics-clustering-how-it-works), which groups traces by what the model actually said rather than which endpoint was hit. That's a kind of analysis only possible when your monitoring layer understands the content of the calls, not just their shape.
 
 ### Who needs AI observability?
 
@@ -62,7 +62,7 @@ Anyone shipping AI features to real users. That includes:
 - **Engineering teams** building agents, chatbots, or RAG systems with multi-step workflows. ([We've written about what we learned building agents at PostHog](/blog/8-learnings-from-1-year-of-agents-posthog-ai) if you want the hard-won version.)
 - **Data and ML teams** evaluating model performance at scale
 
-If you have at least one LLM call in production, you need at least basic AI observability. 
+If you have at least one LLM call in production, [you need at least basic AI observability](/blog/cheapest-ai-observability-tools). 
 
 We've written a more practical guide on [what to set up on day one if you're at the MVP stage](/blog/ai-observability-for-mvps), but the general rule is: tracing, cost tracking, and error capture, before anything else.
 
@@ -280,7 +280,7 @@ If you're picking a tool, here's what actually matters:
 
 - **Integration surface.** Does it work with OpenAI, Anthropic, the open-source model you're using, and the framework (if any) you've built on? Don't pick a tool you'll have to wrap yourself.
 - **Cost model.** Per-event, per-user, per-span, seat-based – they all behave differently as you scale. Read the pricing page carefully.
-- **Free tier reality.** "Free" means different things. Check what's actually included, what's gated, and how long data is retained.
+- **Free tier reality.** "Free" means different things. [Check what's actually included, what's gated, and how long data is retained](/blog/cheapest-ai-observability-tools).
 - **Data ownership.** If you're handling sensitive data (PII, regulated industries), self-hosting or EU residency may matter more than features.
 - **Bundled vs unbundled.** Standalone tools are flexible but fragment user context. Bundled platforms ([PostHog](/) being the obvious example) keep everything in one user model, which makes correlation analysis possible.
 - **MCP support.** If you're shipping in 2026, your AI tools should let you query their data from Claude Code, Cursor, or other AI workflows. Tools that don't are already feeling dated.
@@ -297,7 +297,7 @@ PostHog covers all six core layers (tracing, costs, errors, evals, feedback, pro
 - **A powerful [MCP server](/docs/model-context-protocol)** so you can access your AI observability data directly from Claude Code, Cursor, or whatever other tools you're using
 - **The [PostHog Wizard](/wizard)** that detects your framework, installs the right SDK, wraps your LLM client, and gets traces, cost data, and errors flowing in a few minutes
 
-If you want to take it for a spin, you can [start free](/) – no credit card needed.
+If you want to take it for a spin, you can [start free](/pricing) – no credit card needed.
 
 <WizardCTA />
 
@@ -371,7 +371,7 @@ Several options. Langfuse and Arize Phoenix are MIT-licensed and self-hostable.
 
 PostHog is also open source (MIT) with both cloud and self-hosted deployments. 
 
-For a deeper comparison, see our roundup of [the best open source LLM observability tools](/blog/best-open-source-llm-observability-tools).
+For a deeper comparison, see our roundup of [the best open source LLM observability tools](/blog/best-open-source-llm-observability-tools) and our guide to [the cheapest AI observability tools](/blog/cheapest-ai-observability-tools).
 
 </details>
 

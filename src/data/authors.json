@@ -651,5 +651,20 @@
         "name": "Tyler Crandall",
         "role": "Technical Account Manager",
         "profile_id": 34069
+    },
+    {
+        "handle": "liam-graham",
+        "name": "Liam Graham",
+        "role": "Hog Poster",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/graham-liam/",
+        "profile_id": 44190
+    },
+    {
+        "handle": "rishi-raj-jain",
+        "name": "Rishi Raj Jain",
+        "role": "Freelance Technical Writer",
+        "link_url": "https://www.linkedin.com/in/rishi-raj-jain/",
+        "profile_id": 45748
     }
 ]

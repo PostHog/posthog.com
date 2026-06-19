@@ -784,7 +784,7 @@ const koDeepMenuTranslations: Record<string, string> = {
     Approvals: '승인',
     'Command palette': '명령 팔레트',
     'Account settings': '계정 설정',
-    'Site Apps': '사이트 앱',
+    'JS snippets': 'JS 스니펫',
     'Notification Bar': '알림 바',
     'Pineapple Mode': '파인애플 모드',
 
