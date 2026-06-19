@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> Writing for PostHog? Be sure to check out our full [writing style guide](http://localhost:8002/handbook/content/posthog-style-guide).
+> Writing for PostHog? Be sure to check out our full [writing style guide](/handbook/content/posthog-style-guide).
 
 ## The core principle
 

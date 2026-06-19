@@ -7245,7 +7245,7 @@ export const docsMenu = {
                     color: 'salmon',
                 },
                 {
-                    name: 'Usage analytics',
+                    name: 'Usage and logs',
                     url: '/docs/endpoints/usage-analytics',
                     icon: 'IconGraph',
                     color: 'blue',
