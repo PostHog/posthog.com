@@ -106,6 +106,8 @@ Clicking on a person in the [People tab](https://app.posthog.com/persons) opens 
 
 - **Recordings** shows all of the session replays a person has generated. Note this is subject to the retention policy of your plan, so people who haven't been active recently may have none.
 
+- **Logs** shows every [log](/docs/logs) emitted on behalf of this person — backend OTel logs, frontend SDK logs, anything carrying the `posthogDistinctId` attribute (or a [custom attribute key](/docs/logs/link-person#customizing-the-attribute-key) you've configured). Useful for debugging a specific user's issue across services.
+
 - **Cohorts** shows all the [cohorts](/docs/data/cohorts) a person belongs to.
 
 - **Related groups:** shows [groups](/docs/product-analytics/group-analytics) (e.g. organizations, projects, and instances) a person belongs to.

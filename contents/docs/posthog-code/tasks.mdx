@@ -1,0 +1,42 @@
+---
+title: PostHog Code tasks
+---
+
+A **task** is the unit of work in PostHog Code. Every time you ask the agent to fix a bug, add a feature, or investigate something, you're creating a task. Each task is tied to a specific repository and persists across restarts, handoffs between your computer and the cloud, and handoffs between people.
+
+## Task modes
+
+Tasks run in one of three places. The mode determines _where_ the agent works and _how_ changes are isolated from the rest of your work.
+
+| Mode | Where it runs | Isolation | Best for |
+|------|---------------|-----------|----------|
+| [Local](/docs/posthog-code/git-github-integration) | Your computer, current branch | None | Quick, small changes |
+| [Worktree](/docs/posthog-code/worktrees) | Your computer, dedicated branch + working directory | Per-folder isolation | Longer work, parallel tasks on the same repo |
+| [Cloud](/docs/posthog-code/cloud-runs) | PostHog-managed workspace | Fully isolated from your computer | Long-running tasks |
+
+To run several tasks in a grid (mixing these modes), use [Command Center](/docs/posthog-code/command-center).
+
+### Local
+
+The agent runs on your computer, inside your repo, on your current branch. There's no isolation: changes land in your working tree until you commit them.
+
+Local is the fastest option and the right choice for contained, focused work like a quick fix, a one-off refactor, or something you want to watch closely.
+
+### Worktree
+
+The agent runs on your computer, but inside a dedicated [git worktree](https://git-scm.com/docs/git-worktree) on a per-task branch.
+
+Worktrees give you full isolation without switching branches or juggling separate clones. You can run several tasks in parallel on the same repo, each one on its own branch and in its own working directory.
+
+For setup details and configuration options, see [Worktrees](/docs/posthog-code/worktrees).
+
+### Cloud
+
+The agent runs in a sandbox PostHog spins up for the task. You can close the app, switch networks, or shut your computer, and the task keeps going. Reconnect when you're ready to take over locally or open a PR.
+
+See [Cloud runs](/docs/posthog-code/cloud-runs) for the full story, including how to move tasks between cloud and local.
+
+## Next steps
+
+- Learn how [environments](/docs/posthog-code/environments) prepare a task before the agent starts.
+- Learn how [cloud runs](/docs/posthog-code/cloud-runs) keep a task going without your computer.

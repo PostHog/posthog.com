@@ -6,6 +6,7 @@ showStepsToc: true
 import CLIDownload from "../_snippets/cli/download.mdx"
 import CLIAuthenticate from "../_snippets/cli/authenticate.mdx"
 import StepVerifySymbolSetsUpload from '../_snippets/StepVerifySymbolSetsUpload'
+import Tab from 'components/Tab'
 
 <CalloutBox icon="IconInfo" title="CLI version requirement" type="action">
 
@@ -109,6 +110,7 @@ The plugin accepts the following options:
 | Option | Type | Default | Description |
 | --- | --- | --- | --- |
 | `disableSandboxing` | `boolean` | `true` | iOS only. When `true`, sets `ENABLE_USER_SCRIPT_SANDBOXING=NO` on your main app target's Xcode build configurations during `expo prebuild`. This lets the source map upload script read `.git/` (for release metadata) and lets stock Expo projects build without manually declaring input/output files on every script phase. |
+| `skipOnConflict` | `boolean` | `false` | Adds `--skip-on-conflict` to JavaScript source map uploads on iOS and Android. Use this when the same build can upload the same source maps more than once and you want duplicate uploads to be skipped instead of failing. Requires `posthog-react-native` 4.49.1 or later. |
 
 Example opting out of the sandbox change:
 
@@ -133,6 +135,18 @@ Example opting out of the sandbox change:
 This setting only affects build-time scripts on the build machine. Your shipped app's runtime security is unchanged.
 
 </CalloutBox>
+
+Example skipping duplicate JavaScript source map uploads:
+
+```json
+{
+  "expo": {
+    "plugins": [
+      ["posthog-react-native/expo", { "skipOnConflict": true }]
+    ]
+  }
+}
+```
 
 2. Android: Update the `/android/app/build.gradle` file from your app's root directory so that it looks like this:
 
@@ -162,6 +176,140 @@ To do this through Xcode, open your project in Xcode, go to the project settings
 ```
 
 If you are not using the Expo plugin (step 1), you will need to also disable User Script Sandboxing for the upload script to work. In Xcode, go to Build Settings, search for **User Script Sandboxing** (`ENABLE_USER_SCRIPT_SANDBOXING`) and set it to **No**. This is required because the script needs to read `.git/` for release metadata and execute `posthog-cli`, which are not allowed under Xcode's script sandbox.
+
+</Step>
+
+<Step title="Native crash symbolication" badge="optional">
+
+The steps above upload **JavaScript** source maps, which symbolicate exceptions thrown in your JS/TS code (including Hermes bytecode). They do **not** cover native iOS and Android crashes.
+
+If you enable [native crash autocapture](/docs/libraries/react-native#native-crash-autocapture) (`errorTracking.autocapture.nativeCrashes`), you also need to upload **native** debug symbols at build time so those crash reports are readable. This reuses the native PostHog SDKs' own tooling:
+
+- **iOS** – upload dSYMs via posthog-ios's `upload-symbols.sh`, which runs `posthog-cli dsym upload`. You can optionally include native source files for source-code context around crashes.
+- **Android** – upload ProGuard/R8 mapping files via the official [`com.posthog.android` Gradle plugin](/docs/error-tracking/upload-mappings/android), which also injects a matching map-id into the app.
+
+<CalloutBox icon="IconInfo" title="Source-code context is iOS only" type="fyi">
+
+Including native source files for source-code context (`includeSource` / `POSTHOG_INCLUDE_SOURCE`) is supported on **iOS only**. The Android ProGuard/R8 mapping upload has no source-inclusion equivalent, so the option is ignored on Android.
+
+</CalloutBox>
+
+<CalloutBox icon="IconInfo" title="Three pieces are required end-to-end" type="info">
+
+Symbolicated native crashes need all three of these working together:
+
+1. **Build-time** – upload native symbols (this section).
+2. **Runtime** – enable [`errorTracking.autocapture.nativeCrashes`](/docs/libraries/react-native#native-crash-autocapture) and install `@posthog/react-native-plugin`.
+3. **Server-side** – enable the **Enable exception autocapture** setting in your project's [error tracking settings](https://app.posthog.com/settings/project-error-tracking#exception-autocapture).
+
+</CalloutBox>
+
+### Prerequisites
+
+Both platforms upload through `posthog-cli`, which must be installed and authenticated – the same setup covered in the **Download CLI** and **Authenticate** steps above. In CI/CD builds (such as EAS Build), set the `POSTHOG_CLI_API_KEY` and `POSTHOG_CLI_PROJECT_ID` environment variables (and `POSTHOG_CLI_HOST` for EU). See [authenticating the CLI](/docs/error-tracking/upload-source-maps/cli) for the full list.
+
+<Tab.Group tabs={['Expo', 'Bare React Native']}>
+<Tab.List>
+<Tab>Expo</Tab>
+<Tab>Bare React Native</Tab>
+</Tab.List>
+<Tab.Panels>
+<Tab.Panel>
+
+The `posthog-react-native/expo` config plugin can wire up native symbol upload for you during [prebuild](https://docs.expo.dev/workflow/continuous-native-generation/). It's **opt-in** – set `uploadNativeSymbols` to `true` in your [app.json](https://docs.expo.dev/versions/latest/config/app/#plugins):
+
+```json
+{
+  "expo": {
+    "plugins": [
+      ["posthog-react-native/expo", { "uploadNativeSymbols": true }]
+    ]
+  }
+}
+```
+
+When enabled, `expo prebuild` adds an iOS dSYM-upload build phase and applies the `com.posthog.android` Gradle plugin on Android.
+
+To additionally upload native source files for source-code context (iOS only), pass an options object instead of `true`:
+
+```json
+{
+  "expo": {
+    "plugins": [
+      ["posthog-react-native/expo", { "uploadNativeSymbols": { "includeSource": true } }]
+    ]
+  }
+}
+```
+
+</Tab.Panel>
+<Tab.Panel>
+
+If you aren't using the Expo config plugin, wire up the uploads manually.
+
+#### iOS
+
+In Xcode, add a **Run Script** build phase to your main app target and place it **last** (so it runs after the dSYM bundle is produced). The `upload-symbols.sh` script ships inside the `PostHog` pod, which is pulled in transitively by `@posthog/react-native-plugin`.
+
+<MultiLanguage>
+
+```bash file=CocoaPods
+"${PODS_ROOT}/PostHog/build-tools/upload-symbols.sh"
+```
+
+```bash file=Swift Package Manager
+"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/posthog-ios/build-tools/upload-symbols.sh"
+```
+
+</MultiLanguage>
+
+Then, for your Release configuration, set these build settings:
+
+- **Debug Information Format** (`DEBUG_INFORMATION_FORMAT`) to **DWARF with dSYM File**, so dSYMs are generated.
+- **User Script Sandboxing** (`ENABLE_USER_SCRIPT_SANDBOXING`) to **No**, so the script can locate dSYMs, read `.git/` for release metadata, and run `posthog-cli`.
+
+To also upload native source files for source-code context (iOS only), prefix the script with `POSTHOG_INCLUDE_SOURCE=1`:
+
+<MultiLanguage>
+
+```bash file=CocoaPods
+POSTHOG_INCLUDE_SOURCE=1 "${PODS_ROOT}/PostHog/build-tools/upload-symbols.sh"
+```
+
+```bash file=Swift Package Manager
+POSTHOG_INCLUDE_SOURCE=1 "${BUILD_DIR%/Build/*}/SourcePackages/checkouts/posthog-ios/build-tools/upload-symbols.sh"
+```
+
+</MultiLanguage>
+
+This is the same flow as the [iOS dSYM upload guide](/docs/error-tracking/upload-source-maps/ios), which has a full Xcode walkthrough.
+
+#### Android
+
+In `android/build.gradle`, add the [PostHog Android Gradle plugin](/docs/error-tracking/upload-mappings/android) to your `buildscript` dependencies (and make sure `mavenCentral()` is in the `buildscript` repositories):
+
+```gradle file=android/build.gradle
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("com.posthog:posthog-android-gradle-plugin:1.2.0")
+    }
+}
+```
+
+Then apply the plugin in `android/app/build.gradle`:
+
+```gradle file=android/app/build.gradle
+apply plugin: "com.posthog.android"
+```
+
+The plugin uploads ProGuard/R8 mapping files and injects a matching map-id during your release build, so native Android crash stack traces are deobfuscated.
+
+</Tab.Panel>
+</Tab.Panels>
+</Tab.Group>
 
 </Step>
 

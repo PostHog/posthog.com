@@ -41,13 +41,11 @@ const manageQueryHandles = ['data_modeling', 'sql_editor', 'cdp', 'data_warehous
 const analyticsHandles = [
     'web_analytics',
     'product_analytics',
-    'revenue_analytics',
     'trends',
     'funnels',
     'user_paths',
     'lifecycle',
     'llm_traces',
-    'llm_generations',
     'llm_evals',
     'session_replay',
     'heatmaps',
@@ -66,7 +64,7 @@ const rolloutGroups = [
     },
     {
         title: 'Feedback & training',
-        handles: ['surveys', 'product_tours', 'support', 'user_interviews'] as const,
+        handles: ['surveys', 'support', 'user_interviews'] as const,
     },
 ] as const
 
@@ -329,7 +327,6 @@ const productSlots: { handle: string; '@xl': [number, number]; '@2xl': [number, 
     [
         { handle: 'web_analytics', '@xl': [28, 4], '@2xl': [26, 6], '@3xl': [24, 6] },
         { handle: 'product_analytics', '@xl': [18, 22], '@2xl': [16, 22], '@3xl': [14, 22] },
-        { handle: 'revenue_analytics', '@xl': [72, 4], '@2xl': [72, 6], '@3xl': [74, 6] },
         { handle: 'session_replay', '@xl': [10, 36], '@2xl': [10, 38], '@3xl': [10, 40] },
         { handle: 'funnels', '@xl': [7, 6], '@2xl': [5, 59], '@3xl': [6, 60] },
         { handle: 'heatmaps', '@xl': [76, 22], '@2xl': [78, 22], '@3xl': [80, 22] },
@@ -338,7 +335,6 @@ const productSlots: { handle: string; '@xl': [number, number]; '@2xl': [number, 
         { handle: 'user_paths', '@xl': [12, 96], '@2xl': [8, 96], '@3xl': [6, 96] },
         { handle: 'llm_evals', '@xl': [94, 16], '@2xl': [95, 56], '@3xl': [90, 56] },
         { handle: 'llm_traces', '@xl': [94, 82], '@2xl': [92, 74], '@3xl': [86, 74] },
-        { handle: 'llm_generations', '@xl': [90, 94], '@2xl': [88, 90], '@3xl': [90, 90] },
     ]
 
 const ArcProducts = ({ products }: { products: any[] }) => {
@@ -404,8 +400,8 @@ export const UnderstandUsageSlide = () => {
             <div className="grid grid-cols-1 @lg:grid-cols-2 gap-x-8 gap-y-4 mb-2">
                 <div>
                     <p className="text-secondary text-sm">
-                        Measure engagement, track conversion, and understand usage patterns &mdash; whether it's by
-                        person, company, or AI feature.
+                        Measure engagement, track conversion, and understand usage patterns – whether it's by person,
+                        company, or AI feature.
                     </p>
                 </div>
                 <div>

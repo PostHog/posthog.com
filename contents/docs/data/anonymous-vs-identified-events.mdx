@@ -190,7 +190,7 @@ Not if you already identified them. Once a user is identified, all _future_ even
 <details>
 <summary>How do I revert back to anonymous events after identifying?</summary>
 
-Calling [`reset()`](/docs/product-analytics/identify#3-reset-after-logout) will unlink the person profile from the user and create a new PostHog anonymous ID for capturing events. Any future events are captured as anonymous events. 
+Calling [`reset()`](/docs/product-analytics/identify#reset) will unlink the person profile from the user and create a new PostHog anonymous ID for capturing events. Any future events are captured as anonymous events. 
 
 However, if you capture events using the `distinct_id` used in their previously identified person profile, the events are captured as identified events. You need to use a new `distinct_id` to capture events as anonymous events.
 </details>

@@ -10,8 +10,9 @@ features:
   userIdentification: true
   featureFlags: true
   groupAnalytics: true
+  errorTracking: true
   surveys: false
-  llmAnalytics: false
+  aiObservability: true
 ---
 
 This is an optional library you can install if you're working with .NET Core. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server side application that needs performance.
@@ -33,6 +34,72 @@ import IdentifyBackendCallout from '../../_snippets/identify-backend-callout.mdx
 import DotNetSendEvents from '../../integrate/send-events/_snippets/send-events-dotnet.mdx'
 
 <DotNetSendEvents />
+
+## Request context
+
+For ASP.NET Core apps using `PostHog.AspNetCore`, add request context middleware before routes that call PostHog. This reads incoming PostHog tracing headers and attaches request metadata to captures, exceptions, and feature flag evaluation inside the request.
+
+```csharp file=Program.cs
+using PostHog;
+using PostHog.AspNetCore;
+
+var builder = WebApplication.CreateBuilder(args);
+builder.AddPostHog();
+
+var app = builder.Build();
+
+app.UsePostHogRequestContext();
+```
+
+If you're using [PostHog JS](/docs/libraries/js) on the frontend, configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your ASP.NET Core backend hostname so browser requests include the session and distinct ID headers.
+
+The middleware reads `X-PostHog-Distinct-Id` and `X-PostHog-Session-Id` as request-scoped analytics context. It also adds request metadata such as `$current_url`, `$request_method`, `$request_path`, `$user_agent`, and `$ip`. Explicit distinct IDs and event properties always override request context.
+
+Tracing headers are client-controlled analytics context, not authentication or authorization. For security-sensitive server-side decisions, pass an authenticated distinct ID explicitly. You can ignore tracing headers while still collecting request metadata:
+
+```csharp
+app.UsePostHogRequestContext(options =>
+{
+    options.UseTracingHeaders = false;
+});
+```
+
+Request-context overloads like `posthog.Capture("checkout started")` and `posthog.EvaluateFlagsAsync()` use the current request distinct ID when one is available.
+
+## Error tracking
+
+You can manually capture exceptions using `CaptureException`. This sends a `$exception` event with stack frames, inner exceptions, aggregate exceptions, source context when available, and .NET runtime metadata.
+
+File names, line numbers, and source context depend on debug information already available from the captured .NET stack trace. PostHog doesn't support uploading .NET PDB files yet, so production builds without runtime-accessible debug information may show less detailed stack frames.
+
+```csharp
+try
+{
+    ProcessOrder(orderId);
+}
+catch (Exception exception)
+{
+    posthog.CaptureException(exception, "user_distinct_id");
+}
+```
+
+Add custom properties to include request, tenant, or domain context:
+
+```csharp
+posthog.CaptureException(
+    exception,
+    "user_distinct_id",
+    new Dictionary<string, object>
+    {
+        ["order_id"] = orderId,
+        ["environment"] = "production",
+    }
+);
+```
+
+For the full setup guide, see the [.NET error tracking installation docs](/docs/error-tracking/installation/dotnet).
+
+Automatic exception capture is not available in the .NET SDK yet.
 
 ## Person profiles and properties
 
@@ -114,6 +181,35 @@ import DotNetFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets
 
 <DotNetFeatureFlagsCode />
 
+### Evaluation contexts
+
+Configure evaluation contexts so this SDK only evaluates flags intended for the matching application, platform, or product area. For ASP.NET Core apps using `PostHog.AspNetCore`, add them to the `PostHog` configuration section:
+
+```json
+{
+    "PostHog": {
+        "ProjectToken": "<ph_project_token>",
+        "HostUrl": "<ph_client_api_host>",
+        "EvaluationContexts": ["main-app", "api", "backend"]
+    }
+}
+```
+
+For code-based configuration, set `EvaluationContexts` on `PostHogOptions`:
+
+```csharp
+var posthog = new PostHogClient(new PostHogOptions
+{
+    ProjectToken = "<ph_project_token>",
+    HostUrl = new Uri("<ph_client_api_host>"),
+    EvaluationContexts = ["main-app", "api", "backend"],
+});
+```
+
+Remote `/flags` requests from `EvaluateFlagsAsync()` include `evaluation_contexts` when configured.
+
+For more details, see the [evaluation contexts guide](/docs/feature-flags/evaluation-contexts).
+
 ### Local evaluation
 
 import LocalEvaluationIntro from "../../feature-flags/snippets/local-evaluation-intro.mdx"
@@ -127,10 +223,10 @@ For details on how to implement local evaluation, see our [local evaluation guid
 Since [experiments](/docs/experiments/start-here) use feature flags, the code for running an experiment is very similar to the feature flags code:
 
 ```csharp
-if (await posthog.GetFeatureFlagAsync(
-        "experiment-feature-flag-key",
-        "user_distinct_id")
-    is { VariantKey: "variant-name" })
+var flags = await posthog.EvaluateFlagsAsync("user_distinct_id");
+var variant = flags.GetFlag("experiment-feature-flag-key")?.VariantKey;
+
+if (variant == "variant-name")
 {
     // Do something
 }
@@ -138,6 +234,11 @@ if (await posthog.GetFeatureFlagAsync(
 
 It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags). 
 
+## AI observability
+
+`PostHog.AI` adds [AI observability](/docs/ai-observability) for .NET applications using OpenAI or Azure OpenAI. It is currently pre-release, so expect breaking changes before a stable release.
+
+For installation instructions, see the [OpenAI guide for .NET](/docs/ai-observability/installation/openai#net-support) or the [Azure OpenAI guide for .NET](/docs/ai-observability/installation/azure-openai#net-support).
 
 ## GeoIP properties
 

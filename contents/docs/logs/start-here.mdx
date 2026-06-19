@@ -18,7 +18,7 @@ import LogsInstallationPlatforms from './installation/_snippets/installation-pla
 
 PostHog Logs works with any OpenTelemetry client. No PostHog-specific packages required. Use the OTel SDKs you already have, point them at PostHog's HTTP endpoint, and drop in your project token.
 
-On the frontend, our [JavaScript web SDK](/docs/logs/installation/javascript) includes first-class logging support. 
+On the frontend, our [JavaScript web SDK](/docs/logs/installation/javascript), [React Native SDK](/docs/logs/installation/react-native), [iOS SDK](/docs/logs/installation/ios), and [Android SDK](/docs/logs/installation/android) include first-class logging support. 
 
 Follow the guides below to set up your logging client:
 
@@ -82,6 +82,26 @@ Once your logs are flowing into PostHog, you can:
 
 <CallToAction type="primary" to="/docs/logs/search">
   Learn how to search logs
+</CallToAction>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Set up alerts"
+  subtitle="Recommended"
+  icon="IconBell"
+>
+
+Get notified when your logs match specific conditions. Create alerts to:
+
+- **Monitor error spikes** — Alert when error log counts exceed a threshold
+- **Track specific services** — Watch for issues in critical services
+- **Filter by attributes** — Set up granular alerts based on log attributes
+
+Configure alerting rules in your project settings to stay on top of issues as they happen.
+
+<CallToAction type="primary" to="/docs/logs/alerts">
+  Configure log alerts
 </CallToAction>
 
 </QuestLogItem>
@@ -174,7 +194,7 @@ Logs with `$exception` events become issues you can assign, resolve, and alert o
 
 <QuestLogItem 
   title="Use for free"
-  subtitle="Free 50 GB/mo"
+  subtitle="Free 10 GB/mo"
   icon="IconPiggyBank"
 >
 
@@ -183,8 +203,9 @@ PostHog's Logs is built to be cost-effective by default, with a generous free ti
 ## TL;DR 💸
 
 - No credit card required to start
-- First 50 GB of ingested logs per month are free
-- Above 50 GB we have usage-based pricing at $0.25/GB with discounts 
+- First 10 GB of ingested logs per month are free
+- Above 10 GB we have usage-based pricing at $0.25/GB with discounts 
+- All logs are retained 14 days by default, and we also offer 30-day or 90-day retention options for an additional storage charge – see [pricing](/pricing) for more details
 - Set billing limits to avoid surprise charges
 - See our [pricing page](/docs/logs/pricing) for more up-to-date details
 

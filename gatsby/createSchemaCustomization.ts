@@ -77,7 +77,10 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       authorData: [AuthorsJson] @link(by: "handle", from: "author")
       badge: String
       seo: FrontmatterSEO
+      featureFlag: String
       hideFromIndex: Boolean
+      lang: String
+      translationOf: String
       price: String
       platformLogo: String
       platformIconName: String
@@ -584,6 +587,21 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
 
     createTypes(
         `
+            type AchievementGroupIconAttributes {
+              url: String
+            }
+            type AchievementGroupIconData {
+              attributes: AchievementGroupIconAttributes
+            }
+            type AchievementGroupIcon {
+              data: AchievementGroupIconData
+            }
+            type AchievementGroup implements Node {
+              Title: String
+              description: String
+              tiered: Boolean
+              icon: AchievementGroupIcon
+            }
             type ShopifyCollection implements Node {
               handle: String!
               products: [ShopifyProduct!] @link(by: "shopifyId", from: "products.shopifyId")

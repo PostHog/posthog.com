@@ -1,20 +1,10 @@
 import React, { useRef, useState } from 'react'
 import SEO from 'components/seo'
 import Editor from 'components/Editor'
-import {
-    IconArrowRight,
-    IconArrowUpRight,
-    IconCheck,
-    IconExternal,
-    IconFlask,
-    IconToggle,
-    IconTrends,
-    IconWarning,
-} from '@posthog/icons'
-import Input from 'components/OSForm/input'
+import { IconArrowUpRight, IconCheck, IconFlask, IconToggle, IconTrends, IconWarning } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import { Accordion } from 'components/RadixUI/Accordion'
-import { LOGOS, type LogoKey } from 'constants/logos'
+import { LOGOS, type LogoKey, getDarkClassForLogo } from 'constants/logos'
 import TabbedCarousel from 'components/TabbedCarousel'
 import type { TabbedCarouselTab } from 'components/TabbedCarousel'
 import { ChoppyReveal } from 'components/Code/ChoppyReveal'
@@ -23,94 +13,16 @@ import { IconPop } from 'components/Code/IconPop'
 import { SignalsCallout } from 'components/Code/SignalsCallout'
 import { FlowDiagram } from 'components/Code/FlowDiagram'
 import { DottedConnection } from 'components/Code/DottedConnection'
-import {
-    StickerAi,
-    StickerBulb,
-    StickerCloud,
-    StickerCoffee,
-    StickerELearning,
-    StickerMicroscope,
-    StickerTombstone,
-    StickerPause,
-    StickerPullRequest,
-    StickerRobot,
-    StickerTerminal,
-    StickerUsers,
-    StickerWebsite,
-    StickerZZZ,
-    StickerOne,
-} from 'components/Stickers/Stickers'
+import { StickerTombstone } from 'components/Stickers/Stickers'
 import { ZoomImage } from 'components/ZoomImage'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
-import usePostHog from '../hooks/usePostHog'
-import useProduct from '../hooks/useProduct'
-import { useApp } from '../context/App'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Link from 'components/Link'
 import { IconDiscord } from 'components/OSIcons/Icons'
-
-// ─────────────────────────────────────────────
-// Download CTA Button
-// ─────────────────────────────────────────────
-
-function DownloadButton({ autoFocus = false }: { autoFocus?: boolean }) {
-    const posthog = usePostHog()
-    const selectedProduct = useProduct({ handle: 'posthog_code' })
-    const { setConfetti } = useApp()
-    const [email, setEmail] = useState('')
-    const [submitted, setSubmitted] = useState(false)
-    const inputRef = useRef<HTMLInputElement>(null)
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault()
-        if (!email) return
-        posthog?.capture('subscribe_to_product_updates', { email, selectedProduct })
-        setConfetti(true)
-        setSubmitted(true)
-    }
-
-    if (submitted) {
-        return (
-            <p className="text-sm mt-0 mb-4 border border-green rounded-md p-3 bg-green/10">
-                <strong>You&apos;re on the list!</strong>
-                <br />
-                We&apos;ll let you know when <span className="inline-block">PostHog Code</span> is ready.
-                <br />
-                <br />
-                <Link
-                    className="group flex items-center gap-1 text-sm font-medium"
-                    to="https://discord.com/invite/E9xV2WnR98"
-                    externalNoIcon
-                >
-                    <IconDiscord className="size-6 text-secondary group-hover:text-primary" />
-                    <span className="group-hover:underline">Join our Discord</span>
-                </Link>
-            </p>
-        )
-    }
-
-    return (
-        <form onSubmit={handleSubmit} className="space-y-2">
-            <h3 className="text-lg font-bold mb-2">Join the waitlist</h3>
-            <Input
-                ref={inputRef}
-                autoFocus={autoFocus}
-                label="Email"
-                type="email"
-                size="md"
-                direction="column"
-                showLabel={false}
-                placeholder="Email address"
-                value={email}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
-                required
-            />
-            <OSButton variant="primary" size="md" width="full" onClick={handleSubmit}>
-                Get updates
-            </OSButton>
-        </form>
-    )
-}
+import { WaitlistForm } from 'components/WaitlistForm'
+import { DownloadContent } from 'components/Code/DownloadContent'
+import { usePrefersReducedMotion } from 'components/Code/usePrefersReducedMotion'
+import useProduct from 'hooks/useProduct'
+import { useApp } from '../context/App'
 
 // ─────────────────────────────────────────────
 // Section label ("The old way", "The PostHog way")
@@ -185,7 +97,7 @@ function AIModelBadge({ innerRef }: { innerRef: React.RefObject<HTMLSpanElement>
             className="inline-flex items-center gap-1.5 border border-primary rounded px-2 py-1 text-xs bg-accent align-middle ml-6 mt-0 mb-2"
         >
             <span className="font-semibold">Supports</span>
-            <span className="text-secondary">Haiku, Opus, Sonnet, Codex, GPT 5.4</span>
+            <span className="text-secondary">Fable, Haiku, Opus, Sonnet, GPT 5.4, GPT 5.5</span>
         </span>
     )
 }
@@ -695,9 +607,35 @@ function PostHogCodeLogomark({ className }) {
 // ─────────────────────────────────────────────
 
 function HeroSection() {
-    const [showForm, setShowForm] = useState(false)
+    const [showDownload, setShowDownload] = useState(
+        () => typeof window !== 'undefined' && window.location.hash === '#download'
+    )
+    const [contentVisible, setContentVisible] = useState(true)
+    const prefersReducedMotion = usePrefersReducedMotion()
+    const allProducts = useProduct() as any[]
+    const product = Array.isArray(allProducts) ? allProducts.find((p: any) => p.handle === 'posthog_code') : undefined
+    const { siteSettings } = useApp()
+    const isDark = siteSettings.theme === 'dark'
+    const screenshot = product?.screenshots?.home
+
+    const swapToDownload = () => {
+        if (typeof window !== 'undefined') {
+            window.history.replaceState(null, '', '#download')
+        }
+        if (showDownload) return
+        if (prefersReducedMotion) {
+            setShowDownload(true)
+            return
+        }
+        setContentVisible(false)
+        setTimeout(() => {
+            setShowDownload(true)
+            setContentVisible(true)
+        }, 300)
+    }
+
     return (
-        <section className="my-6 @4xl/editor:mb-16 tracking-[-0.0125em] max-w-5xl mx-auto">
+        <section className="my-6 @4xl/editor:mb-16 tracking-[-0.0125em] max-w-5xl mx-auto w-full">
             <div className="flex items-center justify-between mb-8">
                 <div>
                     <PostHogCodeLogo />
@@ -715,72 +653,90 @@ function HeroSection() {
                 </div>
             </div>
 
-            <h1 className="text-xl @xl:text-3xl font-bold leading-tight mb-4 @xl:mb-8 !mt-0">
-                The era of{' '}
-                <RoughAnnotation
-                    type="highlight"
-                    color="rgba(48, 164, 108, 0.2)"
-                    strokeWidth={1}
-                    padding={2}
-                    delay={300}
-                >
-                    self-driving development
-                </RoughAnnotation>
-                {' is '}
-                <RoughAnnotation type="underline" color="#F54E00" strokeWidth={2} delay={600}>
-                    <span className="font-bold">here</span>
-                </RoughAnnotation>
-            </h1>
+            <div
+                style={{
+                    opacity: contentVisible ? 1 : 0,
+                    transition: prefersReducedMotion ? undefined : 'opacity 0.3s ease',
+                }}
+            >
+                {showDownload ? (
+                    <DownloadContent className="w-full mx-auto py-8 text-center" />
+                ) : (
+                    <>
+                        <h1 className="text-xl @xl:text-3xl font-bold leading-tight mb-4 @xl:mb-8 !mt-0">
+                            The era of{' '}
+                            <RoughAnnotation
+                                type="highlight"
+                                color="rgba(48, 164, 108, 0.2)"
+                                strokeWidth={1}
+                                padding={2}
+                                delay={300}
+                            >
+                                self-driving development
+                            </RoughAnnotation>
+                            {' is '}
+                            <RoughAnnotation type="underline" color="#F54E00" strokeWidth={2} delay={600}>
+                                <span className="font-bold">here</span>
+                            </RoughAnnotation>
+                        </h1>
 
-            <div className="@4xl/editor:gap-8 flex flex-col @4xl/editor:flex-row items-start">
-                <div className="@4xl/flex-[0_0_280px]">
-                    <p>
-                        PostHog Code is the only AI devtool that understands your <strong>product,</strong> not just
-                        your <strong>codebase</strong>.
-                    </p>
-                    <ul className="list-none p-0 mb-4 text-[15px] space-y-0.5">
-                        <li className="relative pl-5">
-                            <IconCheck className="size-4 text-green absolute left-0 top-1" />
-                            Identifies product usage patterns
-                        </li>
-                        <li className="relative pl-5">
-                            <IconCheck className="size-4 text-green absolute left-0 top-1" />
-                            Triages bugs and errors
-                        </li>
-                        <li className="relative pl-5">
-                            <IconCheck className="size-4 text-green absolute left-0 top-1" />
-                            Creates pull requests automatically
-                        </li>
-                    </ul>
+                        <div className="@4xl/editor:gap-8 flex flex-col @4xl/editor:flex-row items-start">
+                            <div className="@4xl/flex-[0_0_280px]">
+                                <p>
+                                    PostHog Code is the only AI devtool that understands your <strong>product,</strong>{' '}
+                                    not just your <strong>codebase</strong>.
+                                </p>
+                                <ul className="list-none p-0 mb-4 text-[15px] space-y-0.5">
+                                    <li className="relative pl-5">
+                                        <IconCheck className="size-4 text-green absolute left-0 top-1" />
+                                        Identifies product usage patterns
+                                    </li>
+                                    <li className="relative pl-5">
+                                        <IconCheck className="size-4 text-green absolute left-0 top-1" />
+                                        Triages bugs and errors
+                                    </li>
+                                    <li className="relative pl-5">
+                                        <IconCheck className="size-4 text-green absolute left-0 top-1" />
+                                        Creates pull requests automatically
+                                    </li>
+                                </ul>
 
-                    <div className="@container max-w-sm">
-                        {showForm ? (
-                            <DownloadButton autoFocus />
-                        ) : (
-                            <>
-                                <OSButton variant="primary" size="lg" onClick={() => setShowForm(true)}>
-                                    Join the waitlist
-                                </OSButton>
-                                <p className="text-sm text-secondary mt-4">Test drives begin Spring 2026</p>
-                            </>
-                        )}
-                    </div>
-                </div>
+                                <div className="@container max-w-sm">
+                                    <WaitlistForm />
+                                    <p className="text-sm text-secondary mt-4">
+                                        Have an invite code?{' '}
+                                        <Link
+                                            to="/code#download"
+                                            className="font-bold underline"
+                                            onClick={(e) => {
+                                                e.preventDefault()
+                                                swapToDownload()
+                                            }}
+                                        >
+                                            Get started
+                                        </Link>
+                                    </p>
+                                </div>
+                            </div>
 
-                <div className="@4xl/flex-1">
-                    <ZoomImage>
-                        <img
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/signals_light_4b3440dc2b.png"
-                            alt="PostHog Code screenshot"
-                            className="w-full rounded shadow dark:hidden"
-                        />
-                        <img
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/signals_dark_b29e5ed8f9.png"
-                            alt="PostHog Code screenshot"
-                            className="w-full rounded hidden dark:block"
-                        />
-                    </ZoomImage>
-                </div>
+                            <div className="@4xl/flex-1">
+                                {screenshot && (
+                                    <ZoomImage>
+                                        <img
+                                            src={
+                                                (isDark && screenshot.srcDark
+                                                    ? screenshot.srcDark
+                                                    : screenshot.src) as string
+                                            }
+                                            alt={screenshot.alt}
+                                            className={screenshot.imgClasses}
+                                        />
+                                    </ZoomImage>
+                                )}
+                            </div>
+                        </div>
+                    </>
+                )}
             </div>
         </section>
     )
@@ -860,7 +816,7 @@ function PostHogWaySection({ onComplete }: { onComplete?: () => void }) {
             </SectionLabel>
 
             <div className="relative">
-                {/* Signals callout — in DOM before paragraph so float-right works on desktop.
+                {/* Signals callout – in DOM before paragraph so float-right works on desktop.
                     On mobile (no float), it falls in normal flow above the paragraph,
                     but we use flex + order to push it below the first paragraph. */}
                 <div className="flex flex-col @2xl/editor:block">
@@ -888,7 +844,7 @@ function PostHogWaySection({ onComplete }: { onComplete?: () => void }) {
                             </span>
                             {' from '}
                             <span className="text-green text-sm">&#9679;</span> <strong>production data</strong> to
-                            diagnose issues and generate pull requests to fix them —
+                            diagnose issues and generate pull requests to fix them –
                             <em>before you even know there&apos;s a problem.</em>
                         </ChoppyReveal>
                     </p>
@@ -900,7 +856,7 @@ function PostHogWaySection({ onComplete }: { onComplete?: () => void }) {
                         <strong>locally</strong>
                         {' or in the '}
                         <strong>cloud</strong>
-                        {' — either way, it automatically uses the right '}
+                        {' – either way, it automatically uses the right '}
                         <span ref={aiModelRef}>
                             <RoughAnnotation type="box" color="currentColor" strokeWidth={1} padding={2}>
                                 <strong className="inline-block">AI model</strong>
@@ -1218,17 +1174,14 @@ const TableStakes = () => {
             <div className="grid @2xl:grid-cols-2 gap-8">
                 <div className="@container">
                     <SectionLabel>Supported LLMs</SectionLabel>
-                    <p>PostHog Code runs on the same models you already use — no markup.</p>
+                    <p>PostHog Code runs on the same models you already use – no markup.</p>
 
                     <div className="mt-4 grid @xs:grid-cols-2 gap-4 @xs:gap-8 mb-8">
                         <div>
                             <p className="m-0 text-xs font-semibold uppercase text-secondary tracking-wide">OpenAI</p>
                             <ul className="m-0 mt-1 list-none p-0 space-y-2">
                                 <li className="text-sm font-bold text-primary">
-                                    <code>GPT-5.2</code>
-                                </li>
-                                <li className="text-sm font-bold text-primary">
-                                    <code>GPT-5.3-codex</code>
+                                    <code>GPT-5.5</code>
                                 </li>
                                 <li className="text-sm font-bold text-primary">
                                     <code>GPT-5.4</code>
@@ -1241,10 +1194,16 @@ const TableStakes = () => {
                             </p>
                             <ul className="m-0 mt-1 list-none p-0 space-y-2">
                                 <li className="text-sm font-bold text-primary">
+                                    <code>Claude Fable 5</code>
+                                </li>
+                                <li className="text-sm font-bold text-primary">
                                     <code>Claude Sonnet 4.6</code>
                                 </li>
                                 <li className="text-sm font-bold text-primary">
-                                    <code>Claude Opus 4.6</code>
+                                    <code>Claude Opus 4.8</code>
+                                </li>
+                                <li className="text-sm font-bold text-primary">
+                                    <code>Claude Opus 4.7</code>
                                 </li>
                                 <li className="text-sm font-bold text-primary">
                                     <code>Claude Haiku 4.5</code>
@@ -1266,7 +1225,9 @@ const TableStakes = () => {
                                     <img
                                         src={LOGOS[row.logoKey]}
                                         alt=""
-                                        className="size-7 shrink-0 object-contain"
+                                        className={`size-7 shrink-0 object-contain ${getDarkClassForLogo(
+                                            LOGOS[row.logoKey]
+                                        )}`}
                                         aria-hidden
                                     />
                                     <p className="m-0 text-base font-bold text-primary">{row.name}</p>
@@ -1314,13 +1275,63 @@ const TableStakes = () => {
     )
 }
 
+const SlackAppCallout = () => {
+    return (
+        <section className="relative mb-12 @2xl:mb-20 px-4 @xl:px-8">
+            <div className="border border-primary rounded-md bg-accent overflow-hidden">
+                <div className="p-6 @2xl:p-8 grid @2xl:grid-cols-2 gap-6 @2xl:gap-10">
+                    <div>
+                        <p className="text-sm font-semibold uppercase tracking-wide text-secondary mb-2">
+                            While you wait...
+                        </p>
+                        <h2 className="text-2xl font-bold mb-2">PostHog Code in Slack</h2>
+                        <p className="mb-4">
+                            Answer data questions, fix bugs, and kick off PRs by mentioning <code>@PostHog</code>.
+                        </p>
+                        <OSButton asLink to="/slack" state={{ newWindow: true }} variant="primary" size="md">
+                            About the Slack app
+                        </OSButton>
+                    </div>
+                    <ul className="space-y-2">
+                        <li className="relative pl-5">
+                            <IconCheck className="size-4 text-green absolute left-0 top-1" />
+                            Ship a fix from a bug report
+                        </li>
+                        <li className="relative pl-5">
+                            <IconCheck className="size-4 text-green absolute left-0 top-1" />
+                            Diagnose and fix failing CI
+                        </li>
+                        <li className="relative pl-5">
+                            <IconCheck className="size-4 text-green absolute left-0 top-1" />
+                            Rip out a feature flag after rollout
+                        </li>
+                        <li className="relative pl-5">
+                            <IconCheck className="size-4 text-green absolute left-0 top-1" />
+                            Fix typos and update content
+                        </li>
+                        <li className="relative pl-5">
+                            <IconCheck className="size-4 text-green absolute left-0 top-1" />
+                            Work across repos
+                        </li>
+                    </ul>
+                </div>
+                <img
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/slack_app_update_docs_f0c917f70a.png"
+                    alt="PostHog Slack app screenshot"
+                    className="w-full block"
+                />
+            </div>
+        </section>
+    )
+}
+
 const TLDR = () => {
     return (
         <section className="relative mb-8 @2xl:mb-12 px-4 @xl:px-8">
             <h2 className="text-2xl font-bold mb-2">Try it</h2>
             <p>PostHog Code is launching in Spring 2026. Join the waitlist to be the first to try it.</p>
             <div className="max-w-lg @container bg-blue/10 border border-blue rounded-md px-8 py-6 shadow-xl">
-                <DownloadButton />
+                <WaitlistForm />
             </div>
         </section>
     )
@@ -1328,118 +1339,253 @@ const TLDR = () => {
 
 const FAQ_ITEMS = [
     {
-        trigger: 'Why is PostHog building an AI code editor?',
+        trigger: 'What is PostHog Code?',
         content: (
             <div className="space-y-3">
                 <p>
-                    The latest generation of AI-powered editors are remarkably capable at writing code. But there's a
-                    problem: they have <em>no idea what your product is or what your users need.</em>
+                    PostHog Code is a{' '}
+                    <a href="/docs/posthog-code" className="underline">
+                        desktop coding agent
+                    </a>{' '}
+                    that understands your product and business, not just your source code. It picks up work from product
+                    signals – errors, support tickets, session replays, GitHub issues, Linear, Zendesk – researches the
+                    causes, and ships pull requests for you to review.
                 </p>
                 <p>
-                    Engineers waste a remarkable amount of time finding and feeding context to orchestrate AI coding
-                    agents.
-                </p>
-                <p>
-                    But <strong>that context already lives in PostHog</strong>. When your product data and AI agents
-                    work together, AI agents can automatically run analysis, fix bugs, and write pull requests so you
-                    can focus on more high-value work
+                    You can also drive it manually like a regular coding agent: open a{' '}
+                    <a href="/docs/posthog-code/tasks" className="underline">
+                        task
+                    </a>
+                    , describe what you want, and watch it work. Run tasks locally, in an isolated{' '}
+                    <a href="/docs/posthog-code/worktrees" className="underline">
+                        worktree
+                    </a>
+                    , or in a{' '}
+                    <a href="/docs/posthog-code/cloud-runs" className="underline">
+                        PostHog-managed cloud sandbox
+                    </a>
+                    .
                 </p>
             </div>
         ),
     },
     {
-        trigger: 'Is my data safe?',
+        trigger: "What's the difference between PostHog AI and PostHog Code?",
         content: (
-            <p>
-                Yes. PostHog Code queries your data through the PostHog API using your personal API key. Data is never
-                stored, cached, or sent anywhere other than to PostHog&apos;s servers. The MCP server runs locally on
-                your machine, and you control exactly what the agent can access through your API key&apos;s permissions.
-            </p>
+            <div className="space-y-3">
+                <p>
+                    PostHog AI is the product assistant built into PostHog Cloud. It's deeply integrated with your data
+                    and helps with things like writing SQL and analyzing user behavior through natural-language prompts.
+                </p>
+                <p>
+                    PostHog Code is a desktop application focused on shipping code. It orchestrates multiple coding
+                    agents from different providers (Anthropic, OpenAI) and turns product signals – errors, support
+                    tickets, session replay trends – into PRs.
+                </p>
+                <p>
+                    In a nutshell:{' '}
+                    <strong>PostHog AI helps you understand your product. PostHog Code helps you build it.</strong>
+                </p>
+            </div>
+        ),
+    },
+    {
+        trigger: 'Why is PostHog building a coding agent?',
+        content: (
+            <div className="space-y-3">
+                <p>
+                    The latest generation of AI-powered coding agents are remarkably capable at writing code. But
+                    there's a problem: they have <em>no idea what your product is or what your users need.</em>
+                </p>
+                <p>
+                    <strong>That context already lives in PostHog</strong>. When your product data and AI agents work
+                    together, agents can automatically run analysis, fix bugs, and write pull requests so you can focus
+                    on more high-value work.
+                </p>
+            </div>
         ),
     },
     {
         trigger: 'Does it replace Cursor or Claude Code?',
         content: (
-            <p>
-                Maybe, but not unless you want to. PostHog Code is the missing layer between data and writing code. Keep
-                your editor if you like it, but give PostHog Code a try first.
-            </p>
+            <div className="space-y-3">
+                <p>
+                    Yep! PostHog Code is a full desktop coding agent – not just a plugin for another editor – so you can
+                    use it as your primary tool for generating code.
+                </p>
+                <p>
+                    If you'd rather keep your existing editor, you can still get the product-data layer: the PostHog MCP
+                    server works with Cursor, Claude Code, Windsurf, and VS Code with Copilot.
+                </p>
+            </div>
         ),
     },
     {
-        trigger: 'What AI models does it work with?',
+        trigger: 'What models and editors does it work with?',
         content: (
-            <p>
-                {' '}
-                PostHog Code works with any MCP-compatible AI coding agent. Currently supported: Claude Code, Cursor,
-                Windsurf, VS Code with Copilot. The MCP standard is growing fast, so more editors will be supported over
-                time.
-            </p>
-        ),
-    },
-    {
-        trigger: 'How much does it cost?',
-        content: (
-            <>
-                <p> PostHog Code is seat-based subscription and we'll announce pricing soon.</p>
+            <div className="space-y-3">
                 <p>
-                    The PostHog MCP server is free and open source. You just need a PostHog account (the generous free
-                    tier works) and an API key from your AI provider. PostHog Code reads from your existing PostHog
-                    data, so you only pay for the PostHog products you already use. There's no additional charge for MCP
-                    access.
-                </p>
-            </>
-        ),
-    },
-    {
-        trigger: 'Can it modify my PostHog configuration?',
-        content: (
-            <>
-                <p>
-                    {' '}
-                    PostHog Code can both read and write to PostHog, depending on your API key permissions. It can
-                    create feature flags, set up experiments, build dashboards, and define actions.
+                    PostHog Code is built on top of two{' '}
+                    <a href="/docs/posthog-code/use-any-model-and-harness" className="underline">
+                        harnesses
+                    </a>
+                    : Claude Code and Codex. You can pick the harness, model, and reasoning effort per task.
                 </p>
                 <p>
-                    Every write operation requires explicit approval from the agent's permission system – nothing
-                    happens without your confirmation.
+                    If you'd rather keep your existing editor, the PostHog MCP server works with any MCP-compatible
+                    agent, including Claude Code, Cursor, Windsurf, and VS Code with Copilot.
                 </p>
-            </>
+            </div>
         ),
     },
     {
         trigger: "What if I don't use PostHog yet?",
         content: (
             <p>
-                {' '}
                 PostHog Code runs on top of PostHog, so you'll need to be on PostHog first. The good news: PostHog is
-                free up to generous limits, and installation takes about 90 seconds with the wizard. This means you can
-                sign up now, download PostHog Code, and have it install PostHog on its own.
+                free up to{' '}
+                <a href="/pricing" className="underline">
+                    generous limits
+                </a>
+                , and installation takes about 90 seconds with the wizard.
             </p>
         ),
     },
     {
-        trigger: 'Can it make bad decisions?',
+        trigger: 'How does it decide what to work on?',
         content: (
-            <>
-                <p>Can't we all?</p>
+            <div className="space-y-3">
                 <p>
-                    The good news is PostHog Code never merges anything on its own. It presents what it thinks should be
-                    fixed and can propose changes, but you choose which tasks it should pick up and which fixed you want
-                    to merge.
+                    PostHog Code's{' '}
+                    <a href="/docs/posthog-code/inbox" className="underline">
+                        Inbox
+                    </a>{' '}
+                    connects to{' '}
+                    <a href="/docs/posthog-code/inbox/sources" className="underline">
+                        signal sources
+                    </a>{' '}
+                    you choose – Error Tracking, support tickets, Session Replay, GitHub Issues, Linear, and Zendesk –
+                    and{' '}
+                    <a href="/docs/posthog-code/inbox/research" className="underline">
+                        ranks issues
+                    </a>{' '}
+                    by code importance (hot paths like checkout or billing), user impact (how many users are affected,
+                    and on what plan), and severity.
                 </p>
-                <p>You can also set a daily limit for agent actions.</p>
-            </>
+                <p>
+                    You set a priority threshold (P0–P4) for what the agent should auto-pick up, and you can read its
+                    full research log to see every file it read and every query it ran before making a recommendation.
+                </p>
+            </div>
+        ),
+    },
+    {
+        trigger: 'Where do tasks run – locally or in the cloud?',
+        content: (
+            <div className="space-y-3">
+                <p>
+                    <a href="/docs/posthog-code/tasks" className="underline">
+                        Three modes
+                    </a>
+                    , picked per task:
+                </p>
+                <p>
+                    <strong>Local</strong> runs in your current branch and working directory.{' '}
+                    <a href="/docs/posthog-code/worktrees" className="underline">
+                        <strong>Worktree</strong>
+                    </a>{' '}
+                    creates an isolated git worktree per task, so you can run several agents in parallel without
+                    stepping on each other.{' '}
+                    <a href="/docs/posthog-code/cloud-runs" className="underline">
+                        <strong>Cloud</strong>
+                    </a>{' '}
+                    runs in a PostHog-managed sandbox that survives app restarts, sleeps, and network changes.
+                </p>
+                <p>
+                    You can hand a task off mid-flight – start in the cloud and pull it down to local to finish, or vice
+                    versa. The full conversation history and any uncommitted changes come with it.
+                </p>
+            </div>
         ),
     },
     {
         trigger: 'Is my code sent to PostHog?',
         content: (
+            <div className="space-y-3">
+                <p>
+                    Your code stays in GitHub. PostHog Code agents access your repo to open PRs, much like any CI/CD
+                    integration.
+                </p>
+                <p>
+                    The local{' '}
+                    <a href="/docs/posthog-code/posthog-integration" className="underline">
+                        enricher
+                    </a>{' '}
+                    uses tree-sitter to detect PostHog SDK calls right on your machine – no source code is uploaded for
+                    that.{' '}
+                    <a href="/docs/posthog-code/cloud-runs" className="underline">
+                        Cloud tasks
+                    </a>{' '}
+                    run in a PostHog-managed sandbox with configurable network rules (trusted allowlist, full internet,
+                    or custom).
+                </p>
+            </div>
+        ),
+    },
+    {
+        trigger: 'Is my PostHog data safe?',
+        content: (
             <p>
-                {' '}
-                PostHog Code agents access your GitHub repo to open PRs, similar to any CI/CD integration. Your code
-                stays in GitHub. PostHog Code simply reads your product data (already in PostHog), and other sources you
-                connect to (like Zendesk, Linear, etc.) to direct the agents.
+                Yes. PostHog Code queries your data through the PostHog API using your personal API key. Data is never
+                stored, cached, or sent anywhere other than to PostHog&apos;s servers, and you control exactly what the
+                agent can access through your API key&apos;s permissions.
+            </p>
+        ),
+    },
+    {
+        trigger: 'Can it modify my PostHog configuration?',
+        content: (
+            <div className="space-y-3">
+                <p>
+                    Yes – PostHog Code can both read and write to PostHog, depending on your API key permissions. It can
+                    create feature flags, set up experiments, build dashboards, and define actions.
+                </p>
+                <p>
+                    Every write operation requires explicit approval from the agent's permission system – nothing
+                    happens without your confirmation.
+                </p>
+            </div>
+        ),
+    },
+    {
+        trigger: 'How much does it cost?',
+        content: (
+            <div className="space-y-3">
+                <p>
+                    PostHog Code is a monthly seat-based subscription. If you've participated in previous betas with
+                    PostHog, you might be surprised to hear that we are charging for this one.
+                </p>
+                <p>
+                    Every user gets a free tier with enough credits for roughly 10 tasks. If you want to use it for
+                    meaningful engineering work (and cancel your Codex and Claude Code subscriptions in the process),
+                    the Pro plan comes with a very generous credit limit.
+                </p>
+            </div>
+        ),
+    },
+    {
+        trigger: 'Is it open source?',
+        content: (
+            <p>
+                <a href="/docs/posthog-code/open-source" className="underline">
+                    Yes – MIT licensed
+                </a>
+                , with the monorepo{' '}
+                <a href="https://github.com/PostHog/code" className="underline">
+                    on GitHub
+                </a>
+                . The desktop app, agent framework, enricher, and bundled skills all live there. macOS is officially
+                supported; Windows is community-maintained.
             </p>
         ),
     },
@@ -1464,6 +1610,14 @@ function FAQ() {
 // Page
 // ─────────────────────────────────────────────
 
+export function DownloadButton() {
+    return (
+        <div className="py-6">
+            <WaitlistForm />
+        </div>
+    )
+}
+
 export default function CodePage() {
     const [postHogWayDone, setPostHogWayDone] = useState(false)
 
@@ -1471,9 +1625,9 @@ export default function CodePage() {
         <>
             <SEO
                 title="PostHog Code"
-                description="PostHog Code uses signals from production data to diagnose issues and generate pull requests — before you even know there's a problem."
+                description="PostHog Code uses signals from production data to diagnose issues and generate pull requests – before you even know there's a problem."
             />
-            <Editor slug="/code" maxWidth="100%" hasPadding={false}>
+            <Editor slug="/code" maxWidth="100%" hasPadding={false} disableFormatting>
                 <div className="@container not-prose font-rounded">
                     <header className="relative mb-12">
                         <CloudinaryImage
@@ -1503,6 +1657,8 @@ export default function CodePage() {
                         <TableStakes />
 
                         <TLDR ready={postHogWayDone} />
+
+                        <SlackAppCallout />
 
                         <FAQ />
                     </div>

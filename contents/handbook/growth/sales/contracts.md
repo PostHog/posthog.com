@@ -125,6 +125,32 @@ We prefer to keep all signatures in PandaDoc, but sometimes clients may prefer t
 
 Once you the signed form in PandaDoc is marked as complete and the Salesforce opportunity status is set to Closed Won, the RevOps team will get a notification and handle setting up the subscription and invoicing. See the [Billing](/handbook/growth/sales/billing) page for steps on how the billing setup works for more information.
 
+### Using prepaid credits to cover an existing pay-as-you-go invoice
+When a pay as you go customer wants to sign a prepaid contract and use their new credits to cover an invoice that is about to be issued, timing is important. Credits can only be applied cleanly to an invoice _before_ that invoice is finalized. Getting it wrong means the credits don't apply cleanly and RevOps has to do a manual override.
+
+#### Flag insufficient credits before the invoice is issued
+
+Monthly invoices are generated automatically at the end of each billing period. As the account owner, if you know a customer intends to purchase more credits to cover their current usage, you should check before the invoice issue date whether they will have enough credits on the account to cover it.
+
+Credits added before billing period ends are applied automatically and the customer never has to pay the PAYG charge out of pocket. No further action needed here. 
+
+If they won't have enough credits to cover an invoice, and won't sign before the invoice issue date, you can ask the billing team to pause collection for a few days. Once the contract is signed and the credits are added, billing can release the invoice and the prepurchase credits will cover it. Flag this as early as possible. Billing can only pause an invoice that hasn't been issued yet.
+
+#### Contract timing rules
+
+For newly purchased credits to cover the intended invoice automatically, both of these must be true:
+- Contract start date must match the first billing period the customer wants to cover. For an existing customer this usually means backdating the Contract.EffectiveDate to the start of the current billing period (see Immediate Activation above). If the start date doesn't line up with the period being covered, the credits won't map to that invoice.
+- Contract must be signed before the period_end date of the invoice they want to cover. If it's signed after the period closes and the invoice has been issued, the automated flow can no longer apply the credits and an override is required.
+
+If either condition can't be met, you'll need an override.
+
+#### Overrides
+An override is the manual process RevOps uses when credits couldn't be applied before an invoice was finalized. For example, the customer paid part of an invoice with credits, or signed after the invoice was already issued. Overrides are more complex than the standard flow: they can involve pausing or crediting the issued invoice, refunding card payments, and re applying credits in the right order.
+
+The refund itself can be done self serve through billing admin. But in an override scenario a refund is not a clean solution. It's tied to metadata override and reapplying credits. So don't process an override refund in isolation: coordinate with the billing team so revenue recognition stays accurate. And don't refund a card payment until the replacement credits are confirmed.
+
+If you're unsure whether a situation needs an override, ask the billing team in #team-billing before taking any action. Don't roll back charges, void invoices, or refund payments on your own.
+
 ## Master Services Agreement (MSA)
 
 Occasionally, customers will want to sign an MSA instead of referencing our terms in an order form. 
@@ -144,13 +170,13 @@ Sometimes large customers will ask for changes to our MSA. We have a list of the
 
 We offer HIPAA Compliance on PostHog Cloud and as such health companies will require us to sign a Business Associate Agreement with them. As this means we take on increased financial risk in case of a breach we ask them as a minimum to subscribe to one of the platform packages which is a guaranteed monthly payment. A maximum of one BAA per organization will be signed. Under most circumstances, it should be the company that owns the org/pays us.
 
-1. Ask the customer to subscribe to the platform add-on (as well as any other paid plans they wish to use). You can verify this in Vitally by ensuring that they are in the `Teams Plan` segment.
+1. Ask the customer to subscribe to a platform package (as well as any other paid plans they wish to use). You can verify this in Vitally by ensuring that they are in the `Teams Plan` segment.
 2. Create a new document from the <PrivateLink url="https://app.pandadoc.com/a/#/templates/4psCXzU527sNE6WEbFBg3a">PandaDoc template</PrivateLink>.
 3. All you need to do it set the `Client.Company` variable and then send it to them for review and signature.
 4. It has been pre-signed by Fraser and will automatically add today's date as the date of signature for PostHog.
 5. You'll get a notification when everybody has signed it - we have automation in place to ensure that the `HIPAA BAA Signed Date` property on the customer's Salesforce Account record is updated.
 
-> We only provide our default BAA for platform add-on subscribers - customization requires >$20k annual spend. The BAA only remains active for as long as the customer is subscribed to a platform add-on - if they unsubscribe, we send them a message that their BAA will become inactive at the end of the month in which they cancelled. A customer who is on a platform add-on trial (with a credit card in PostHog) is eligible to sign a default BAA, but you should make it clear to them that the default BAA will be voided if/when the platform add-on subscription lapses. If the lead is not sure whether they will need a custom BAA and their usage wouldn't put them at $20K, then it is worth pushing them to get legal feedback by sending them our BAA before moving forward, else you risk spending a lot of time on an evaluation that ends up at $450/month.
+> We only provide our default BAA for platform package subscribers - customization requires >$20k annual spend. The BAA only remains active for as long as the customer is subscribed to a platform package - if they unsubscribe, we send them a message that their BAA will become inactive at the end of the month in which they cancelled. Customers on a platform package trial are not eligible to sign a BAA. You'll need to convert their trial to a regular subscription first, before they can sign it. If the lead is not sure whether they will need a custom BAA and their usage wouldn't put them at $20k, then it is worth pushing them to get legal feedback by sending them our BAA before moving forward, else you risk spending a lot of time on an evaluation that ends up at $250/month.
 
 ## Non-disclosure Agreement (NDA)
 In some cases, prospective or current customers require a mutual Non-disclosure Agreement (MNDA) in place before conversastion or product activity can proceed. Terms already specify Confidentiality and if there is still a situation where a documented agreement is requested this can be easily accommodated. 

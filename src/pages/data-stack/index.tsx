@@ -134,10 +134,11 @@ export default function CDP(): JSX.Element {
     return (
         <>
             <SEO
-                title="PostHog data stack"
+                title="PostHog data Stack"
                 updateWindowTitle={false}
-                description="Your modern data stack, powered by PostHog AI and built on DuckDB"
-                image={`images/og/cdp.jpg`}
+                description="Your data is the context layer for your AI. Collect, store, transform, query, and let PostHog self-drive development based on customer signals."
+                image="https://res.cloudinary.com/dmukukwp6/image/upload/opengraph_3_cf73189604.png"
+                imageType="absolute"
             />
             <ReaderView
                 leftSidebar={<LeftSidebarContent />}

@@ -51,13 +51,13 @@ If you want to send physical merch to a customer instead of a merch code, this c
 
 ### PostHog team
 
-If you want more, <PrivateLink url="https://github.com/PostHog/runbooks/blob/main/docs/merch.md"> here's how to get it! </PrivateLink> 
+If you want more, <PrivateLink url="https://wiki.posthog.com/reference/merch"> here's how to get it! </PrivateLink> 
 
 As always, we expect you to use this with restraint and with your own good judgement. The merch store should not become your sole source of clothing for your wardrobe, nor where you go any time a friend has a birthday. But sure, go ahead and buy your mom (or yourself) a hat or a hoodie!
 
 ### YC Deal
 
-You can find instructions for this on the dedicated [YC Deal page](/handbook/growth/sales/yc-onboarding).
+You can find instructions for this on the dedicated [YC Deal page](/handbook/marketing/startups).
 
 ## Troubleshooting customer orders
 

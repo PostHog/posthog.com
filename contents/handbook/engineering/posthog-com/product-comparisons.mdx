@@ -416,7 +416,7 @@ Headers automatically span across all columns and are styled with a border to vi
 
 Product pages list out all sections within a product's feature set by default, but in some cases it doesn't make sense to do so.
 
-For example, showing the `platform.integrations` section might make sense for the [Product Analytics comparison](/product-analytics#feature-comparison), but not for [LLM Analytics comparison](/llm-analytics#feature-comparison) where that product doesn't really integrate with the tools that are otherwise integrated across the PostHog platform.
+For example, showing the `platform.integrations` section might make sense for the [Product Analytics comparison](/product-analytics#feature-comparison), but not for [AI Observability comparison](/llm-analytics#feature-comparison) where that product doesn't really integrate with the tools that are otherwise integrated across the PostHog platform.
 
 If you want to exclude a section from rendering, you can use the `excludedSections` property.
 
@@ -430,10 +430,10 @@ If you want to exclude a section from rendering, you can use the `excludedSectio
 
 For product pages, this is handled by the `excluded_sections` property in the product's feature definition file.
 
-`/src/hooks/productData/llm_analytics.tsx`:
+`/src/hooks/productData/ai_observability.tsx`:
 
 ```typescript
-export const llmAnalytics = {
+export const aiObservability = {
     ...
     comparison: {
         companies: [
@@ -458,7 +458,7 @@ export const llmAnalytics = {
                 key: 'posthog',
             },
         ],
-        rows: ['llm_analytics'],
+        rows: ['ai_observability'],
         excluded_sections: ['platform'], // or an individual node like 'platform.integrations'
     },
 }

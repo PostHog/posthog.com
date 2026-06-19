@@ -90,17 +90,17 @@ This table explains the amount of paid time off, depending on how long you've be
 | 6 - 12 months     | 12 weeks         | 2 - 3 weeks |
 | over 12 months    | up to 24 weeks   | 6 weeks |
 
-> Parental leave at PostHog is designed to be more generous than your local jurisdiction's legal requirements.  This means that in most cases you will receive the PostHog policy, if you live in a country with more generous parental leave, then you will receive that. This PostHog policy is not designed to be _in addition_ to your specific state/country policy.
+> Parental leave at PostHog is designed to be more generous than your local jurisdiction's legal requirements.  This means that in most cases you will receive the PostHog policy, if you live in a country with more generous parental leave, then you will receive that. This PostHog policy is not designed to be _in addition_ to your specific state/country policy. PostHog uses the "top up" method to administer paid leave. This means that if you receive any statutory leave, PostHog will top this up to your full pay. 
 
 We only pay the enhanced parental leave in one continuous block.
 
-Parental leave isn't supposed to be combined with our unlimited PTO policy here - we aren't prescriptive and will trust your judgement. If you need a longer break after childbirth or a staggered return reach out to Fraser or your manager. But please note that we usually won't allow you do a combination of parental leave plus a long holiday in addition to that to extend your time off.
+Parental leave isn't supposed to be combined with our unlimited PTO policy here - we aren't prescriptive and will trust your judgement. If you need a longer break after childbirth or a staggered return, log it in the Ops platform or speak to your manager. But please note that we usually won't allow you do a combination of parental leave plus a long holiday in addition to that to extend your time off.
 
-Please communicate parental leave to Fraser as soon as you feel comfortable doing so, and in any case at least 4 months before it will begin. They will let the People & Ops team know, who will follow up on any logistical arrangements around salary etc. and any statutory paperwork that needs doing.
+Please log parental leave in the Ops platform as soon as you feel comfortable doing so, and in any case at least 4 months before it will begin. The People & Ops team will follow up on any logistical arrangements around salary etc. and any statutory paperwork that needs doing.
 
 ### Maternity leave
 
-The above is in reference to Paid Time Off (PTO). Maternity leave can be extended using unpaid time off, please work with your team to find a reasonable solution for both your family and your team, and let Fraser know the total amount of time you expect to take off as soon as possible.
+The above is in reference to Paid Time Off (PTO). Maternity leave can be extended using unpaid time off, please work with your team to find a reasonable solution for both your family and your team, and log the total amount of time you expect to take off in the Ops platform as soon as possible.
 
 > For quota-carrying Sales roles taking 12 weeks or longer, your OTE will be calculated by averaging your sales quota attainment for the prior two full quarters (capped at 100% OTE).
 
@@ -114,54 +114,15 @@ We celebrate all the big and little milestones at PostHog, including birthdays a
 
 ### Birthdays
 
-We have partnered with [Wellbox](https://wellbox.app/) to send all team members a personalized giftset for their birthday.
-
-These are the steps for making an order:
-
-1. Log into our Wellbox account (details in 1Password)
-2. Select the birthday gift to send
-3. Fill out delivery information
-4. All set!
-
-The birthday gift usually arrives on the day of or 1-3 days prior to the birthday. Shipping fees: UK shipping is free while all other countries will have shipping fees.
+We organize our birthday gifts through Micromerch. They are sent out usually a week prior to the big day! We try to switch up what goes into the birthday boxes every so often so you won't receive the same thing twice.
 
 
 ### Anniversaries
 
-On your first anniversary with PostHog, you will receive a giftcard from [Giftogram](https://giftogram.com/) or [Prezzee](https://www.prezzee.uk/business/signin/) (if you are based in the UK) which can be used on a wide selection of brands. On your second anniversary you'll be gifted a [customized Lego minifig](https://minifig.fab-bricks.com/) in a display case, and on your third anniversary, you'll receive a personalized gift from [Wellbox](https://wellbox.app/).
+All our anniversary gifts are created with Micromerch. On your first anniversary with PostHog, you will receive an exclusive cap and pin. On your second anniversary you'll be gifted custom tee and pin, and on your third anniversary, you'll receive a custom sweatshirt and pin... try to collect them all!
 
-#### 1st year anniversary
+All anniversary gifts will be sent by Kendal, but if for whatever reason, you need to send one yourself, you can do this by creating an order in Shopify.
 
-For the first year anniversary, we give $50 for US gift cards/$55 for all other countries gift cards to cover service fees:
-
-1. Login into [Giftogram](https://app.giftogram.com/sign-in) by using your gmail credentials
-2. Two ways to create a new Giftogram, on the tool bar above where it says “Create and Send'' or you can click on the right hand side on the blue button “Send a Giftogram''.
-3. Walk through the following steps:
-  - Select the appropriate campaign: US Campaign= US team members, GCode Campaign= EU+ALL team members, and CA Campaign= Canada team members
-  - Select a card design of your choice (easiest to just use the anniversary theme)
-  - Next screen, select “individual”, email as a delivery method, and add value (see above for amount) and continue to the next step
-  - Enter the individual’s PostHog email address. You can add multiple email addresses if there is one then one anniversary. The amount will add itself on the right hand side as you add more individuals. Then, continue to the next step
-  - Delivery message; select PostHog team as the sender and select the drop down “1st year anniversary” as the pre-populated message or you can create your own personal message
-  - Last step, schedule the delivery date and you’re done!
-
-#### 2nd year anniversary
-
-The second year anniversary gets you a customized Lego figurine:
-
-1. Log into [Fab-brick](https://fab-bricks.com/login.php) (login credentials are shared in People & Ops 1Password vault)
-2. Select the third tab “MiniFig Creator” and design your mini fig to look like the individual you’re celebrating!
-3. Make sure to include a display case and the three tier brick option
-4. After you’ve completed your design, check out. There should already be a Brex card on file. Please make sure you add the individual’s correct mailing address.
-
-#### 3rd year anniversary
-
-The third year anniversary is a pack of gifts provided via [Wellbox](https://wellbox.app/).
-
-1. Select the 3rd Anniversary gift in our profile
-2. Fill out delivery info
-3. You're all set!
-
-The gift will usually arrive on the day of or 1-3 days prior to the anniversary date. Shipping fees: UK shipping is free while all other countries will have shipping fees.
 
 #### 4th year anniversary
 
@@ -171,4 +132,4 @@ On your 4th anniversary at PostHog as a big thank you for sticking with us, we g
 2. Apple 27-inch 5K Retina Studio Display with standard glass and tilt-adjustable stand
 3. Rimowa luggage set (large trunk, cabin bag, packing cube, toiletries bag)
 
-On the run up to your anniversary, our Ops team will send you a link to the gift options questionnaire and order your 4 year anniversary gift once we receive your completed form. Thank you for making PostHog great!
+On the run up to your anniversary, our Kendal will send you the gift options and order your 4 year anniversary gift once we receive your choice. Thank you for making PostHog great!

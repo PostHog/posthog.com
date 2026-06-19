@@ -253,11 +253,11 @@ A user can now sign up with our app but there are a number of potential drop-off
 Add two new environment variables to `.env.local` that will be used with the PostHog JavaScript SDK:
 
 ```
-NEXT_PUBLIC_POSTHOG_TOKEN=<ph_project_token>
+NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN=<ph_project_token>
 NEXT_PUBLIC_POSTHOG_HOST=your_posthog_host
 ```
 
-The value for `NEXT_PUBLIC_POSTHOG_TOKEN` can be found via **Project** in the left-hand menu of your PostHog app, underneath the **Project token** heading.
+The value for `NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN` can be found via **Project** in the left-hand menu of your PostHog app, underneath the **Project token** heading.
 
 The value for `NEXT_PUBLIC_POSTHOG_HOST` is the public URL for ingesting events into your PostHog instance. If you're using US cloud, this is `https://us.i.posthog.com`.
 
@@ -279,7 +279,7 @@ import { PostHogProvider } from '@posthog/react'
 
 // Check that PostHog is client-side
 if (typeof window !== 'undefined') {
-    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_TOKEN, {
+    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN, {
         api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com',
         // Enable debug mode in development
         loaded: (posthog) => {
