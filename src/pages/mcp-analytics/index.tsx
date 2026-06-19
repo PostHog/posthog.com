@@ -73,7 +73,7 @@ export default function MCPAnalytics(): JSX.Element {
 
     // Lean alpha slide set — no pricing, comparison, or customers yet.
     const slides = createSlideConfig({
-        include: ['overview', 'features', 'answers', 'docs', 'pairs-with', 'getting-started'],
+        include: ['overview', 'features', 'answers', 'docs', 'pairs-with'],
         templates: {
             overview: 'columns',
         },
