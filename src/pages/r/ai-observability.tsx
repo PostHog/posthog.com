@@ -11,7 +11,6 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import { SingleCodeBlock } from 'components/CodeBlock'
 import WizardCTA from 'components/WizardCTA'
 import usePlatformList from 'hooks/docs/usePlatformList'
-import { IconGraph, IconWarning, IconRewindPlay } from '@posthog/icons'
 import LovableLogo from 'components/CustomerLogos/LovableLogo'
 import PostHogLogo from 'components/CustomerLogos/PostHogLogo'
 
@@ -106,13 +105,12 @@ export default function AIObservabilityLanding(): JSX.Element {
                     <div>
                         <h1 className="text-3xl md:text-5xl !mb-4">X-ray vision for your AI product</h1>
                         <p className="text-lg md:text-xl mb-6 text-secondary">
-                            Track every conversation, trace every LLM call, and know exactly what your models are
-                            costing you. Check costs, monitor errors, and analyze model performance from Cursor, Codex,
-                            Claude Code, VS Code, or any{' '}
+                            Know exactly what every LLM call costs, broken down by model, feature, and user. Trace
+                            latency and errors straight from your editor with{' '}
                             <span className="text-gradient-wizard font-semibold whitespace-nowrap">
-                                MCP-compatible agent
+                                the PostHog MCP
                             </span>
-                            .
+                            , for any model.
                         </p>
                         <div className="flex flex-wrap gap-2 mb-6">
                             <CallToAction type="primary" size="md" to="https://app.posthog.com/signup">
@@ -176,7 +174,7 @@ export default function AIObservabilityLanding(): JSX.Element {
 
                             <WizardCTA />
 
-                            <h3>Or pick your framework directly</h3>
+                            <h3>Or pick your model directly</h3>
 
                             <List
                                 className="grid gap-4 grid-cols-2 @md:grid-cols-2 not-prose"
@@ -257,75 +255,14 @@ export default function AIObservabilityLanding(): JSX.Element {
                         </QuestLogItem>
 
                         <QuestLogItem
-                            title="Working in Slack? Talk to the Hog."
-                            subtitle="Turn AI signals into shipped improvements"
-                            icon="IconBell"
-                        >
-                            <p>
-                                PostHog watches your LLM metrics and pings your Slack channel when something's wrong —
-                                cost threshold crossed, error rate spiked, latency jumped. Then tag{' '}
-                                <code>@PostHog</code> to go from signal to fix without ever opening a dashboard.
-                            </p>
-
-                            <h3>Ask @PostHog about your AI product</h3>
-
-                            <ul>
-                                <li>
-                                    <em>"Why did generation costs jump 40% since last deploy?"</em>
-                                </li>
-                                <li>
-                                    <em>"Which users are hitting the most LLM errors today?"</em>
-                                </li>
-                                <li>
-                                    <em>"Is average LLM latency trending up or down this week?"</em>
-                                </li>
-                                <li>
-                                    <em>"Are error rates higher for Claude or GPT-4 on the search feature?"</em>
-                                </li>
-                            </ul>
-
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/slack_app_aio_81db83f84c.png"
-                                alt="PostHog Slack app showing AI observability alerts and answers"
-                                className="rounded-md shadow border border-primary overflow-hidden my-4"
-                                imgClassName="w-full"
-                            />
-
-                            <h3>Tag @PostHog to ship the fix</h3>
-
-                            <p>
-                                Once you've found the problem, tag <code>@PostHog</code> to fix it. It reads your
-                                codebase, writes the change, and opens a draft PR — from the same Slack thread where you
-                                spotted the issue. No editor required.
-                            </p>
-
-                            <div className="flex flex-wrap gap-2 mt-4">
-                                <CallToAction type="primary" size="md" to="https://app.posthog.com/integrations/slack">
-                                    Connect Slack
-                                </CallToAction>
-                                <CallToAction type="secondary" size="md" to="/slack-app" state={{ newWindow: true }}>
-                                    Learn more
-                                </CallToAction>
-                            </div>
-                        </QuestLogItem>
-
-                        <QuestLogItem
-                            title="Every LLM call, captured in full"
-                            subtitle="Inputs, outputs, tokens, cost, and latency — automatically"
+                            title="See cost, tokens, inputs and outputs"
+                            subtitle="Every LLM call, captured in full"
                             icon="IconRecord"
                         >
                             <p>
                                 Each LLM call becomes a <strong>generation</strong> — a full record of what went in and
                                 what came out, with token counts, automatic cost calculation, and latency attached.
                             </p>
-
-                            <ProductVideo
-                                videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/ai_generation_in_app_18f37057ca.mp4"
-                                videoDark={undefined}
-                                classes="rounded border border-primary"
-                                autoPlay={true}
-                                loop={true}
-                            />
 
                             <ul>
                                 <li>Full conversation context — the complete message array, roles and all</li>
@@ -336,14 +273,22 @@ export default function AIObservabilityLanding(): JSX.Element {
                                 <li>Enrichable with user IDs, groups, and custom properties</li>
                             </ul>
 
+                            <ProductVideo
+                                videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/ai_generation_in_app_18f37057ca.mp4"
+                                videoDark={undefined}
+                                classes="rounded border border-primary"
+                                autoPlay={true}
+                                loop={true}
+                            />
+
                             <div className="mt-4">
                                 <CallToAction
                                     type="primary"
                                     size="md"
-                                    to="/docs/ai-observability/generations"
+                                    to="/docs/ai-observability/calculating-costs"
                                     state={{ newWindow: true }}
                                 >
-                                    Learn about generations
+                                    Read the docs
                                 </CallToAction>
                             </div>
                         </QuestLogItem>
@@ -407,54 +352,54 @@ export default function AIObservabilityLanding(): JSX.Element {
                         </QuestLogItem>
 
                         <QuestLogItem
-                            title="AI data meets your product data"
-                            subtitle="Analytics, error tracking, and session replay — all connected"
-                            icon="IconLogomark"
+                            title="Working in Slack? Talk to the Hog."
+                            subtitle="New from PostHog"
+                            icon="IconBell"
                         >
                             <p>
-                                AI Observability events are standard PostHog events. The whole platform — product
-                                analytics, error tracking, session replay — works with your LLM data out of the box.
+                                PostHog watches your LLM metrics and pings your Slack channel when something's wrong —
+                                cost threshold crossed, error rate spiked, latency jumped. Then tag{' '}
+                                <code>@PostHog</code> to go from signal to fix without ever opening a dashboard.
                             </p>
 
-                            <h3>
-                                <IconGraph className="text-blue w-6 -mt-1 inline-block" /> Product analytics
-                            </h3>
-                            <ProductScreenshot
-                                imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/llma_insights_da40edc407.png"
-                                imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/llma_insights_dark_558f8f2cd8.png"
-                                alt="AI Observability analytics"
-                                classes="rounded"
-                                padding={false}
-                                zoom={undefined}
+                            <h3>Ask @PostHog about your AI product</h3>
+
+                            <ul>
+                                <li>
+                                    <em>"Why did generation costs jump 40% since last deploy?"</em>
+                                </li>
+                                <li>
+                                    <em>"Which users are hitting the most LLM errors today?"</em>
+                                </li>
+                                <li>
+                                    <em>"Is average LLM latency trending up or down this week?"</em>
+                                </li>
+                                <li>
+                                    <em>"Are error rates higher for Claude or GPT-4 on the search feature?"</em>
+                                </li>
+                            </ul>
+
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/slack_app_aio_81db83f84c.png"
+                                alt="PostHog Slack app showing AI observability alerts and answers"
+                                className="rounded-md shadow border border-primary overflow-hidden my-4"
+                                imgClassName="w-full"
                             />
 
-                            <h3>
-                                <IconWarning className="text-orange w-6 -mt-1 inline-block" /> Error tracking
-                            </h3>
-                            <ProductScreenshot
-                                imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/llma_error_4edcb7d7a1.png"
-                                imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/llma_error_dark_a298d3f2b7.png"
-                                alt="AI Observability error tracking"
-                                classes="rounded"
-                                padding={false}
-                                zoom={undefined}
-                            />
+                            <h3>Tag @PostHog to ship the fix</h3>
 
-                            <h3>
-                                <IconRewindPlay className="text-yellow w-6 -mt-1 inline-block" /> Session replay
-                            </h3>
-                            <ProductScreenshot
-                                imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/llma_session_replay_95b9268668.png"
-                                imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/llma_session_replay_dark_767332d926.png"
-                                alt="AI Observability session replay"
-                                classes="rounded"
-                                padding={false}
-                                zoom={undefined}
-                            />
+                            <p>
+                                Once you've found the problem, tag <code>@PostHog</code> to fix it. It reads your
+                                codebase, writes the change, and opens a draft PR — from the same Slack thread where you
+                                spotted the issue. No editor required.
+                            </p>
 
-                            <div className="mt-4">
-                                <CallToAction type="primary" size="md" to="https://app.posthog.com/signup">
-                                    Get started free
+                            <div className="flex flex-wrap gap-2 mt-4">
+                                <CallToAction type="primary" size="md" to="https://app.posthog.com/integrations/slack">
+                                    Connect Slack
+                                </CallToAction>
+                                <CallToAction type="secondary" size="md" to="/slack-app" state={{ newWindow: true }}>
+                                    Learn more
                                 </CallToAction>
                             </div>
                         </QuestLogItem>

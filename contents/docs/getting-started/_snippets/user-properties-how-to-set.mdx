@@ -1,4 +1,4 @@
-The recommended way to set person properties is to send a `$set` event with a `$set` property. For SDKs that provide helper methods (such as `posthog.setPersonProperties`), we recommend using them, as they handle important side effects like switching the user to identified mode.
+The recommended way to set person properties is to send a `$set` event with a `$set` property. For SDKs that provide helper methods (such as `posthog.setPersonProperties`), we recommend using them, as they handle important side effects like switching to identified mode.
 
 <MultiLanguage selector="tabs">
 
@@ -86,6 +86,23 @@ posthog.capture("distinct_id", "$set", new HashMap<String, Object>() {
 });
 ```
 
+```rust
+use std::collections::HashMap;
+use posthog_rs::Event;
+
+let mut event = Event::new("$set", "distinct_id");
+
+let mut set = HashMap::new();
+set.insert("name", "Max Hedgehog");
+event.insert_prop("$set", set).unwrap();
+
+let mut set_once = HashMap::new();
+set_once.insert("initial_url", "/blog");
+event.insert_prop("$set_once", set_once).unwrap();
+
+client.capture(event).await.unwrap();
+```
+
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
     "api_key": "<ph_project_token>",
@@ -116,4 +133,4 @@ Person property values can be strings, booleans, numbers, objects, or arrays.  F
 > - Mobile apps batching events while the device is offline
 > - Server-side SDKs with delayed flushes or network retries
 >
-> In these cases, a late-arriving event can overwrite a `$set` value or claim a `$set_once` key before the "true first" event is ingested. If ordering matters for your use case, prefer `$set_once` for values that should not change (though note that `$set_once` is still subject to ingestion ordering — the first ingested event claims the key, not necessarily the earliest event by timestamp). Be aware that `$set` always reflects the last *ingested* value, not the last *timestamped* value.
+> In these cases, a late-arriving event can overwrite a `$set` value or claim a `$set_once` key before the "true first" event is ingested. If ordering matters for your use case, prefer `$set_once` for values that should not change (though note that `$set_once` is still subject to ingestion ordering – the first ingested event claims the key, not necessarily the earliest event by timestamp). Be aware that `$set` always reflects the last *ingested* value, not the last *timestamped* value.

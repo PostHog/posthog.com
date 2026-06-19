@@ -3,11 +3,12 @@
 ```kotlin
 import com.posthog.PostHog
 
-if (PostHog.isFeatureEnabled("flag-key")) {
+val result = PostHog.getFeatureFlagResult("flag-key")
+if (result?.enabled == true) {
     // Do something differently for this user
 
-    // Optional: fetch the payload
-    val matchedFlagPayload = PostHog.getFeatureFlagResult("flag-key")?.payload
+    // Optional: fetch the payload from the same evaluation result
+    val matchedFlagPayload = result.payload
 }
 ```
 
@@ -16,30 +17,18 @@ if (PostHog.isFeatureEnabled("flag-key")) {
 ```kotlin
 import com.posthog.PostHog
 
-if (PostHog.getFeatureFlag("flag-key") == "variant-key") { // replace 'variant-key' with the key of your variant
+val result = PostHog.getFeatureFlagResult("flag-key")
+if (result?.variant == "variant-key") { // replace "variant-key" with the key of your variant
     // Do something differently for this user
 
-    // Optional: fetch the payload
-    val matchedFlagPayload = PostHog.getFeatureFlagResult("flag-key")?.payload
+    // Optional: fetch the payload from the same evaluation result
+    val matchedFlagPayload = result.payload
 }
 ```
 
-### Feature flag values and payloads together
+### Inspecting all feature flags
 
-If you need both the flag value and payload, use `getFeatureFlagResult` so both values come from the same evaluation result.
-
-```kotlin
-import com.posthog.PostHog
-
-val result = PostHog.getFeatureFlagResult("flag-key")
-
-if (result?.value == "variant-key") {
-    val payload = result.payload
-    // Do something with the variant and payload
-}
-```
-
-You can also inspect all currently loaded feature flag results with `PostHog.getAllFeatureFlags()`.
+You can inspect all currently loaded feature flags with `PostHog.getAllFeatureFlags()`.
 
 ### Ensuring flags are loaded before usage
 
