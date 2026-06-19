@@ -4,7 +4,7 @@ github: 'https://github.com/PostHog/posthog-rs'
 platformLogo: rust
 features:
   eventCapture: true
-  userIdentification: false
+  userIdentification: true
   featureFlags: true
   groupAnalytics: true
   surveys: false
@@ -29,6 +29,27 @@ import IdentifyBackendCallout from '../../_snippets/identify-backend-callout.mdx
 import RustSendEvents from '../../integrate/send-events/_snippets/send-events-rust.mdx'
 
 <RustSendEvents />
+
+## Person profiles and properties
+
+The Rust SDK captures identified events when you pass a `distinct_id` to `Event::new`. These create [person profiles](/docs/data/persons). To set [person properties](/docs/product-analytics/person-properties), include `$set` and `$set_once` properties when capturing an event.
+
+To capture [anonymous events](/docs/data/anonymous-vs-identified-events) without person profiles, use `Event::new_anon`.
+
+## Alias
+
+The Rust SDK doesn't currently expose an `alias` helper. If you need to assign multiple distinct IDs to the same user from Rust, send a `$create_alias` event manually:
+
+```rust
+use posthog_rs::Event;
+
+let mut event = Event::new("$create_alias", "frontend_id");
+event.insert_prop("alias", "backend_id").unwrap();
+
+client.capture(event).await.unwrap();
+```
+
+We strongly recommend reading our docs on [alias](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
 ## Feature flags
 

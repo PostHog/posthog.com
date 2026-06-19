@@ -86,6 +86,23 @@ posthog.capture("distinct_id", "$set", new HashMap<String, Object>() {
 });
 ```
 
+```rust
+use std::collections::HashMap;
+use posthog_rs::Event;
+
+let mut event = Event::new("$set", "distinct_id");
+
+let mut set = HashMap::new();
+set.insert("name", "Max Hedgehog");
+event.insert_prop("$set", set).unwrap();
+
+let mut set_once = HashMap::new();
+set_once.insert("initial_url", "/blog");
+event.insert_prop("$set_once", set_once).unwrap();
+
+client.capture(event).await.unwrap();
+```
+
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
     "api_key": "<ph_project_token>",
