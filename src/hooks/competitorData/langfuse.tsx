@@ -15,7 +15,7 @@
                     system_prompts: true,
                     error_tracking: true,
                     clustering: true,
-                    trace_summarization: false,
+                    trace_summarization: true,
                     llm_translation: false,
                     sentiment_classification: false,
                     privacy_mode: true,
