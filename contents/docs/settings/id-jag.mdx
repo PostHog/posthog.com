@@ -7,7 +7,7 @@ showTitle: true
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-ID-JAG (Identity Assertion JWT Authorization Grant, also called [XAA](https://xaa.dev)) lets your organization's identity provider (IdP) — like Okta, Microsoft Entra ID, or any OIDC-compliant SSO — issue short-lived tokens that grant programmatic access to PostHog. Instead of each user creating a [personal API key](/docs/api#authentication) or running an [OAuth](/docs/settings/sso) flow, your IdP issues an **ID-JAG** that's exchanged with PostHog for a short-lived access token. Access is granted, scoped, and revoked centrally in your IdP.
+ID-JAG (Identity Assertion JWT Authorization Grant, also called [XAA](https://xaa.dev)) lets your organization's identity provider (IdP) — like Okta, Microsoft Entra ID, or any OIDC-compliant SSO — issue short-lived tokens that grant programmatic access to PostHog. Instead of each user creating a [personal API key](/docs/api#authentication) or running an [OAuth](/docs/api/oauth) flow, your IdP issues an **ID-JAG** that's exchanged with PostHog for a short-lived access token. Access is granted, scoped, and revoked centrally in your IdP.
 
 <CalloutBox icon="IconInfo" title="ID-JAG/XAA is in beta" type="fyi">
 
@@ -154,4 +154,5 @@ The token endpoint returns standard OAuth errors ([RFC 6749 §5.2](https://www.r
 - [Enterprise-managed authorization for MCP](/docs/model-context-protocol/enterprise-managed-authorization)
 - [ID-JAG / XAA specification](https://xaa.dev)
 - [SSO, SAML, & SCIM](/docs/settings/sso)
+- [OAuth integration](/docs/api/oauth)
 - [API authentication and scopes](/docs/api#authentication)
