@@ -342,11 +342,7 @@ Group analytics allows you to associate the events for that person's session wit
 
 ## Error tracking
 
-To set up error tracking in your project, follow the [React Native installation guide](/docs/error-tracking/installation/react-native).
-
-### Exception steps
-
-Use `posthog.addExceptionStep(message, properties)` to record breadcrumb-style steps that attach to the next captured `$exception` as `$exception_steps`. Configure the rolling buffer with `errorTracking.exceptionSteps`. When native crash capture is enabled, steps are forwarded to the embedded native SDK so native crashes carry the same timeline. See [exception steps](/docs/error-tracking/capture#add-exception-steps) for details. Available in `posthog-react-native` 4.50.0 and later.
+To set up error tracking in your project, see the [error tracking docs](/docs/error-tracking).
 
 ### Native crash autocapture
 
