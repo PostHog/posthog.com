@@ -37,6 +37,10 @@ Anything that speaks MCP works. We've tested and documented setup for Claude Cod
 
 No, OAuth is the recommended path and works out of the box with the wizard. If your client doesn't support OAuth, you can use a [personal API key](https://app.posthog.com/settings/user-api-keys?preset=mcp_server) with the `MCP Server` preset – see the [API key authentication](#using-an-api-key-instead-of-oauth) section below.
 
+### Can my organization manage MCP access centrally through our IdP?
+
+Yes. If you're on an enterprise plan, you can use [enterprise-managed authorization (ID-JAG)](/docs/model-context-protocol/enterprise-managed-authorization) to control MCP access through your identity provider (Okta, Entra ID, etc.) instead of per-user OAuth or API keys.
+
 ### Where is my data sent?
 
 The MCP server acts as a proxy to your PostHog instance and is automatically routed to the correct region (US or EU) based on the account you sign in with. It does not store your analytics data – queries are executed against your PostHog project and results are returned directly to your AI client.
