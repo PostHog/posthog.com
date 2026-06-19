@@ -99,7 +99,7 @@ See [Next.js rewrites documentation](https://nextjs.org/docs/app/api-reference/n
 
 <CalloutBox icon="IconWarning" title="Using middleware? Exclude your proxy path" type="fyi">
 
-If your app already has a `middleware.ts` (or `proxy.ts` in Next.js 16) — common with [next-intl](https://next-intl.dev), [NextAuth](https://authjs.dev), or your own logic — its `matcher` can grab the proxy path before the rewrite runs and break ingestion.
+If your app already has a `middleware.ts` (or `proxy.ts` in Next.js 16) – common with [next-intl](https://next-intl.dev), [NextAuth](https://authjs.dev), or your own logic – its `matcher` can grab the proxy path before the rewrite runs and break ingestion.
 
 A catch-all matcher matches the capture endpoints (`/yourpath/e`, `/yourpath/flags`, `/yourpath/s`) and rewrites or redirects them, so events, feature flags, and recordings never reach PostHog. The static assets at `/yourpath/static/*.js` have a file extension, so a matcher like next-intl's default `'/((?!api|_next|_vercel|.*\\..*).*)'` skips them and they still load, which makes PostHog look connected even though nothing is sending.
 
