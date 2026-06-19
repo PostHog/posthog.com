@@ -38,18 +38,7 @@ To capture [anonymous events](/docs/data/anonymous-vs-identified-events) without
 
 ## Alias
 
-The Rust SDK doesn't currently expose an `alias` helper. If you need to assign multiple distinct IDs to the same user from Rust, send a `$create_alias` event manually:
-
-```rust
-use posthog_rs::Event;
-
-let mut event = Event::new("$create_alias", "frontend_id");
-event.insert_prop("alias", "backend_id").unwrap();
-
-client.capture(event).await.unwrap();
-```
-
-We strongly recommend reading our docs on [alias](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
+The Rust SDK doesn't currently expose an `alias` helper. If you need to assign multiple distinct IDs to the same user from Rust, see the [Rust example in the alias docs](/docs/product-analytics/identify?tab=Rust#alias-assigning-multiple-distinct-ids-to-the-same-user).
 
 ## Feature flags
 
