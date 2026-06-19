@@ -189,15 +189,20 @@ Other campaign parameters (`gad_source`, `mc_cid`, `dclid`, `gbraid`, `wbraid`, 
 
 #### Including browser and device properties
 
-To include current browser and device properties (like `$browser`, `$os`, `$device_type`) with flag requests, use the `setAllPersonProfilePropertiesAsPersonPropertiesForFlags` customization.
+To include current browser and device properties (like `$browser`, `$os`, `$device_type`) with flag requests, use the `setAllPersonProfilePropertiesAsPersonPropertiesForFlags` customization. Call it inside the `loaded` callback so it runs **before the first flag evaluation** (see the note below on why this matters).
 
 **Using npm:**
 
 ```js
+import posthog from 'posthog-js'
 import { setAllPersonProfilePropertiesAsPersonPropertiesForFlags } from 'posthog-js/lib/src/customizations'
 
-// Call after PostHog is initialized
-setAllPersonProfilePropertiesAsPersonPropertiesForFlags(posthog)
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    loaded: (posthog) => {
+        setAllPersonProfilePropertiesAsPersonPropertiesForFlags(posthog)
+    },
+})
 ```
 
 **Using the snippet:**
@@ -205,9 +210,20 @@ setAllPersonProfilePropertiesAsPersonPropertiesForFlags(posthog)
 ```html
 <script type="text/javascript" src="https://us.i.posthog.com/static/customizations.full.js"></script>
 <script>
-  posthogCustomizations.setAllPersonProfilePropertiesAsPersonPropertiesForFlags(posthog)
+  posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    loaded: function (posthog) {
+      posthogCustomizations.setAllPersonProfilePropertiesAsPersonPropertiesForFlags(posthog)
+    },
+  })
 </script>
 ```
+
+> **Why the `loaded` callback?** `setAllPersonProfilePropertiesAsPersonPropertiesForFlags` is a function that takes a one-time snapshot of the current browser and device properties and attaches them to flag requests. It only affects requests sent **after** it runs. The web SDK fires its first flag request automatically during initialization, so if you call the customization as a bare statement right after `posthog.init(...)` it can run too late — and with the asynchronous snippet loader, `posthog` may still be the loading stub, in which case the call is silently skipped. Either way, the **first** flag evaluation goes out without these properties. The `loaded` callback runs once the SDK is ready and before that first request, so the properties are included from the very first evaluation.
+>
+> This is especially important for **exclusion** conditions such as "`$os` is not `Android`": a missing `$os` does not match `Android`, so a visitor whose `$os` hasn't been sent yet is **included** on that first evaluation rather than excluded. Sending the property on the first request avoids this.
+>
+> For a stronger guarantee that the very first network evaluation carries these properties, also set [`advanced_disable_feature_flags_on_first_load: true`](/docs/libraries/js/config) and call `posthog.reloadFeatureFlags()` after the customization inside `loaded`. This suppresses the automatic first request so the only flag evaluation is the one you trigger with the properties already attached.
 
 This adds the following properties to flag requests:
 
