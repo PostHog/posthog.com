@@ -6,10 +6,10 @@ A small opt-in button that points visitors at a PostHog **early access feature i
 import EarlyAccessOptIn from 'components/EarlyAccessOptIn'
 
 // Gathering interest before the beta opens:
-<EarlyAccessOptIn to="https://us.posthog.com/early_access_features/<id>" state="register_interest" />
+<EarlyAccessOptIn to="https://us.posthog.com/settings/user-feature-previews#<feature>" state="register_interest" />
 
 // Beta is open, people can request access:
-<EarlyAccessOptIn to="https://us.posthog.com/early_access_features/<id>" state="request_access" />
+<EarlyAccessOptIn to="https://us.posthog.com/settings/user-feature-previews#<feature>" state="request_access" />
 ```
 
 It's used in the header of product landing pages via `SlidesTemplate`'s `rightActionButtons` prop – see `src/pages/mcp-analytics/index.tsx`.
@@ -40,7 +40,7 @@ So instead, this component is a plain link to the early access feature in the ap
 
 | Prop        | Type                                       | Default            | Notes                                                              |
 | ----------- | ------------------------------------------ | ------------------ | ------------------------------------------------------------------ |
-| `to`        | `string` (required)                        | –                  | URL of the early access feature in the app. Must point at the app. |
+| `to`        | `string` (required)                        | –                  | URL of the feature previews surface in the app. Must point at the app. |
 | `state`     | `'register_interest' \| 'request_access'`  | `'request_access'` | Sets the default CTA copy (see above).                             |
 | `label`     | `string`                                   | label for `state`  | Override the CTA copy.                                             |
 | `className` | `string`                                   | `''`               | Extra classes for the button.                                     |
@@ -48,4 +48,6 @@ So instead, this component is a plain link to the early access feature in the ap
 
 ## Finding the `to` URL
 
-In the app, open the early access feature you want people to join and copy its URL – it looks like `https://us.posthog.com/early_access_features/<id>`. That page is where a signed-in user registers interest / enrolls.
+Point `to` at the public **feature previews** surface – `https://us.posthog.com/settings/user-feature-previews`, anchored to the feature (e.g. `#mcp-analytics`). That page is accessible to any signed-in user and is where they register interest / enroll.
+
+Avoid linking to the internal `/early_access_features/<id>` management page: it's only accessible to your PostHog team, so external visitors hit an error there.
