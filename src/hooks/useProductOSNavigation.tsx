@@ -18,6 +18,7 @@ const productOSStructure = [
     'Platform', // Section header
     'platform_packages',
     'posthog_slack',
+    { name: 'Self-driving', url: '/self-driving' },
 ]
 
 // Build navigation items from structure and products
@@ -102,6 +103,7 @@ export const productOSNav = {
         { name: 'Toolbar', url: '/toolbar' },
         { name: 'Platform packages', url: '/platform-packages' },
         { name: 'PostHog Slack app', url: '/slack' },
+        { name: 'Self-driving', url: '/self-driving' },
         { name: 'Developer tools' },
         { name: 'API', url: '/api' },
         { name: 'Webhooks', url: '/webhooks' },
