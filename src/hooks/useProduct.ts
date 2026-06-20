@@ -134,7 +134,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             },
         },
         {
-            name: 'AI Observability',
+            name: 'AI Traces',
             Icon: IconListTreeConnected,
             description: 'Debug entire AI conversations with full trace visibility.',
             handle: 'llm_traces',
