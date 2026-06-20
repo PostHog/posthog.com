@@ -707,7 +707,14 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         )
             return
         const { resources } = await fetch(
-            `https://${process.env.CLOUDINARY_API_KEY}:${process.env.CLOUDINARY_API_SECRET}@api.cloudinary.com/v1_1/${process.env.GATSBY_CLOUDINARY_CLOUD_NAME}/resources/image?prefix=hogs&type=upload&max_results=500`
+            `https://api.cloudinary.com/v1_1/${process.env.GATSBY_CLOUDINARY_CLOUD_NAME}/resources/image?prefix=hogs&type=upload&max_results=500`,
+            {
+                headers: {
+                    Authorization: `Basic ${Buffer.from(
+                        `${process.env.CLOUDINARY_API_KEY}:${process.env.CLOUDINARY_API_SECRET}`
+                    ).toString('base64')}`,
+                },
+            }
         ).then((res) => res.json())
         resources.forEach((resource) => {
             const node = {
