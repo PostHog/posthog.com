@@ -1,5 +1,5 @@
 import { GatsbyNode } from 'gatsby'
-import fetch from 'node-fetch'
+
 import parseLinkHeader from 'parse-link-header'
 import qs from 'qs'
 import { ApiInfoModel, MenuBuilder, OpenAPIParser } from 'redoc'

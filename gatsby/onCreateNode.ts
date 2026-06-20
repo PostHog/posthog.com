@@ -1,6 +1,6 @@
 import { replacePath, stripFrontmatter } from './utils'
 import { createFilePath, createRemoteFileNode } from 'gatsby-source-filesystem'
-import fetch from 'node-fetch'
+
 import GitUrlParse from 'git-url-parse'
 import slugify from 'slugify'
 import { JSDOM } from 'jsdom'
