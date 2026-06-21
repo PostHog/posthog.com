@@ -1,7 +1,7 @@
 import chromium from 'chrome-aws-lambda'
 import path from 'path'
 import fs from 'fs'
-import fetch from 'node-fetch'
+
 import { GatsbyNode } from 'gatsby'
 import pLimit from 'p-limit'
 import qs from 'qs'
