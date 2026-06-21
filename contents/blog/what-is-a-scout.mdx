@@ -22,25 +22,23 @@ A scout is a small agent (don't overthink that word) that looks at, wrangles, an
 
 Its job is to emit useful **signals** — things worth knowing — that you or your agents can act on. Sometimes that action happens automatically, like an agent opening a PR to fix what the scout found, sometimes it needs some human judgement before you and your agent can tackle it together.
 
-A scout is, at its core, **a skill** — and that skill becomes the main interface for everyone who touches or uses it, human or agent.
+A scout is, at its core, **a skill** — and that skill is the main interface everyone works through, human or agent. The business logic that used to be a sprawl of `if/else` branches and helper functions in an old-school data pipeline now starts life as a few hundred lines of English anyone can read, write, and improve (obligatory [Karpathy tweet](https://x.com/karpathy/status/1617979122625712128)).
 
-Core business logic that used to be a sprawl of `if/else` branches and helper functions in an old-school data pipeline starts life as a few hundred lines of English that anyone can read, write, and improve (and scales up to bundled reference docs and scripts with progressive disclosure when a scout needs them).
+![Andrej Karpathy's tweet: "The hottest new programming language is English"](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_06_21_at_11_40_29_9a3b4d308a.png)
 
-Code moves into language and instruction (obligatory [Karpathy tweet](https://x.com/karpathy/status/1617979122625712128)), and the skill becomes the place where the logic actually lives and breathes.
-
-Of course you can't get away with this for all data pipelines (we still need determinism for a lot of crucial stuff), but for those where you have the flexibility the trade-offs are increasingly worth it.
+You can't get away with this for every data pipeline — plenty still needs determinism — but where you have the flexibility, the trade-offs are increasingly worth it.
 
 This post walks through how scouts work in PostHog, with two real scouts we run on our own project — one that watches agent-driven MCP feedback, and one that watches what the internet says about us 😱.
 
 If you just want to see scouts in action, skip to [two scouts, end to end](#two-scouts-end-to-end).
 
-## What is a scout? (the longer answer)
+## Where scouts fit
 
 Scouts, of course, don't live on their own — they feed a pipeline:
 
 1. **A scout runs** on a schedule, looks at some slice of your PostHog data, and decides whether anything is worth surfacing.
 2. **If it is, the scout emits a signal** — a semi-structured finding with evidence, and a suggested action.
-3. **Signals get picked up by the self-driving pipeline**, grouped, and turned into **reports** that land in your PostHog [Inbox](/blog/self-driving-product).
+3. **Signals get picked up by the self-driving pipeline**, grouped, and turned into **reports** that land in your PostHog [Inbox](/docs/posthog-code/inbox).
 4. **Reports get actioned** — by you, or automatically by a PostHog Code task that picks up the report and ships a fix or improvement.
 
 A report can be made up of many signals from many sources. Scouts are just one of those sources. A single report — say "this MCP tool keeps blowing the token budget" — might be assembled from a scout finding, error tracking, a few raw events, and a health check, all grouped together because they're about the same underlying problem.
