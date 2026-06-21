@@ -342,6 +342,21 @@ And this is the scout whose scratchpad best shows the **memory model evolving**.
 
 You can read that scratchpad top to bottom and reconstruct everything the scout knows, every judgment call it's made, and why it's been quiet on the things it's chosen to stay quiet on. That legibility — being able to *audit an agent's memory in plain text* — is, to me, the whole pitch.
 
+## Ideas: what else to point a scout at
+
+Those two are just two shapes. The thing to internalize is that **anything you can land in PostHog is scout-able**, and a scout's whole job is encoded in a skill you can write in an afternoon. Some directions to steal — most of these are scouts we already run on our own project:
+
+- **Mine any Slack channel.** Sync a channel into the [data warehouse](/docs/data-warehouse) and a scout reads it like any other table — a user-feedback channel, an internal team channel (we run one over our own `#team-self-driving`), an external alerting or on-call channel, even a community Discord relay. The moment it's a table, it's fair game.
+- **Watch any custom event.** Scouts aren't limited to analytics events — point one at *any* event you capture: a custom customer-support event, a feedback submission, a domain-specific action. Internally we run separate scouts on PostHog AI thumbs-down feedback, PostHog Code task feedback, and the per-product in-app feedback widgets.
+- **Keep an eye on what you already care about.** Hand a scout a curated set of *your* dashboards, insights, and alerts — the metrics your team checks every morning — and have it stay quiet until one of them actually moves against its own baseline.
+- **Own a funnel or a journey.** A scout can watch your key funnels and activation flows across every PostHog feature you use, flag a conversion or retention regression against the flow's own trailing baseline — and even propose the A/B [experiment](/docs/experiments) to fix the weakest step.
+- **Have it read your codebase.** Give a scout a repo and a job: scan recent code changes and keep your [agent skills](https://agentskills.io/specification) in sync as things move, catch docs that have drifted out of date, flag a feature shipped with no instrumentation, spot a third-party API version about to be deprecated, or run a static-analysis tool over the last week's diffs.
+- **Let it dogfood your own tools.** A scout can *use* your product, not just read it — we run one that random-walks our own [MCP](/docs/model-context-protocol) tool surface and files the rough edges it hits first-hand (and once scouts can reach external MCPs, this extends to whatever you've built).
+- **Point a scout at your scouts.** A meta-scout that audits the rest of the fleet for miscalibration, plus a follow-up scout that re-checks "resolved" reports after a soak window to confirm the fix actually held.
+- **Let findings carry real depth.** When a finding is more than a sentence, a scout can write the charts and supporting queries into a [notebook](/docs/notebooks) and link it from the signal — the inbox stays scannable, and the full analysis is one click away.
+
+The pattern across all of these: pick a surface you wish someone was watching, write down what *"worth my attention"* means for it in plain English, and let the scout hold that bar for you.
+
 ## Where this is going
 
 Scouts today are deliberately narrow: read your data, decide if something's worth knowing, emit a signal. That's the foundation, and keeping it small is the point. But there's a lot of obvious headroom, and a bunch of it is already on the roadmap:
