@@ -17,7 +17,7 @@ We want to be the first tool that technical founders add to their product.
 | &nbsp; | AI-first software teams |
 | --- | --- |
 | **Description** | Software teams that either have product-market fit and are quickly scaling up with new customers, hiring, and adding more revenue, or are aiming to do this. They believe in an AI first approach to building and are already familiar with standard AI tools. |
-| **Criteria** | - No set employee number - 1 to 500 potential PostHog users, the company itself could be anything from one employee to thousands<br />- Has lots of revenue or aims to raise or has raised from leading investors (not hobbyists or cost concious bootstrappers basically)|
+| **Criteria** | - No set employee number - 1 to 500 potential PostHog users, the company itself could be anything from one employee to thousands<br />- Has lots of revenue or aims to raise or has raised from leading investors (not hobbyists or cost conscious bootstrappers basically)|
 | **Why they matter?** | - We believe AI first companies will outperform non AI first companies <br />- Able to efficiently monetize them<br />- Very quick sales cycle<br />- Act as key opinion leaders for earlier-stage startups/slower moving companies<br />- Strong opinions on what they need - helping us build a better product |
 | **Examples** | PostHog anytime from during YC to IPO, Supabase, ElevenLabs |
 
@@ -27,7 +27,7 @@ Persona is the job title or role of the person actually using a product in PostH
 
 PostHog's initial adoption inside an ICP will come from an engineering persona most of the time, simply because engineers exist first in startups. The more appeal we have to engineers at the earliest stages of their startup's life, the more overall growth we will have. We should never neglect this persona.
 
-Once we're in with engineering, we spread to multiple personas. Artifical Intelligence (AI) taking off in recent years (didn't you know) taking off has meant the emergence of "builders" inside software teams. This is PMs, or Support people or marketers who have realized they _can_ now code. They are unlikely to ever be as technical as an engineer, but the tools and problems they can tackle now overlap.
+Once we're in with engineering, we spread to multiple personas. Artificial Intelligence (AI) taking off in recent years (didn't you know) taking off has meant the emergence of "builders" inside software teams. This is PMs, or Support people or marketers who have realized they _can_ now code. They are unlikely to ever be as technical as an engineer, but the tools and problems they can tackle now overlap.
 
 We should in general go _very_ hard on making sure we have excellent coverage of any needs an engineer has in trying to build a product.
 
