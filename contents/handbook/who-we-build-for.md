@@ -10,37 +10,29 @@ We define who we build for as ICP (ie, the company) and the Persona (ie the actu
 
 AKA our [ideal customer profile](/newsletter/ideal-customer-profile-framework).
 
-We build for the people building products at **high-growth startups**. 
+We build for the people building products in **AI-first software teams at any scale**. 
 
-Marketing and customer success should primarily focus on this ICP, but should also develop **high-*potential* customers** – customers that are likely to later become high-growth customers (e.g. PostHog itself during YC). We should be in maintenance mode for **hobbyists**, such as engineers building side projects. We want to be the first tool that technical founders add to their product.
+We want to be the first tool that technical founders add to their product.
 
-| &nbsp; | High-growth startup |
+| &nbsp; | AI-first software teams |
 | --- | --- |
-| **Description** | Startups that have product-market fit and are quickly scaling up with new customers, hiring, and adding more revenue. |
-| **Criteria** | - 15-500 employees<br />- $100k+/month in revenue _or_ very large number of consumer users<br />- Raised from leading investors<br />- Not yet IPO'ed |
-| **Why they matter?** | - Able to efficiently monetize them<br />- Very quick sales cycle<br />- Act as key opinion leaders for earlier-stage startups/slower moving companies<br />- Strong opinions on what they need - helping us build a better product |
-| **Examples** | PostHog anytime from their Series B to IPO, Supabase, ElevenLabs |
-
+| **Description** | Software teams that either have product-market fit and are quickly scaling up with new customers, hiring, and adding more revenue, or are aiming to do this. They believe in an AI first approach to building and are already familiar with standard AI tools. |
+| **Criteria** | - No set employee number - 1 to 500 potential PostHog users, the company itself could be anything from one employee to thousands<br />- Has lots of revenue or aims to raise or has raised from leading investors (not hobbyists or cost concious bootstrappers basically)|
+| **Why they matter?** | - We believe AI first companies will outperform non AI first companies <br />- Able to efficiently monetize them<br />- Very quick sales cycle<br />- Act as key opinion leaders for earlier-stage startups/slower moving companies<br />- Strong opinions on what they need - helping us build a better product |
+| **Examples** | PostHog anytime from during YC to IPO, Supabase, ElevenLabs |
 
 ## Our current Persona
 
-Persona is the job title or role of the person actually using a product in PostHog. Each team will focus more or less on different members of the product team. This is detailed on their team pages.
+Persona is the job title or role of the person actually using a product in PostHog. 
 
-As companies get bigger, the type of person that uses a product changes. As an example:
+PostHog's initial adoption inside an ICP will come from an engineering persona most of the time, simply because engineers exist first in startups. The more appeal we have to engineers at the earliest stages of their startup's life, the more overall growth we will have. We should never neglect this persona.
 
-- We initially built product analytics for engineers at startups.
-- As those companies get a little bit bigger, they'll hire Product Managers who will mostly use product analytics. PMs have more complicated requirements for what a product analytics tool needs to do.
-- Even bigger companies often have specialized "analytics engineers." These people are the most demanding.
+Once we're in with engineering, we spread to multiple personas. Artifical Intelligence (AI) taking off in recent years (didn't you know) taking off has meant the emergence of "builders" inside software teams. This is PMs, or Support people or marketers who have realized they _can_ now code. They are unlikely to ever be as technical as an engineer, but the tools and problems they can tackle now overlap.
 
-Each product should start with a single persona, usually an early person (preferably engineer) at a startup. Teams should make sure to build a really good product with PMF for that single persona. As the product and user-base matures, new personas will emerge as users. You only serve that new persona if you've found PMF and satisfied requirements for the initial persona.
+We should in general go _very_ hard on making sure we have excellent coverage of any needs an engineer has in trying to build a product.
 
-You still need to keep your initial personas happy too, which is tricky, but important as that initial persona is how we get in first.
+Since PostHog tracks so much data and makes shipping so easier, this means we can target any "builder" type profile - basically people that are close to software and willing to use AI first tools.
 
-How do you know if you have PMF and satisfied requirements? Look at churn. If the initial persona is churning from your product, you still have work to do to retain that persona before moving onto others. If instead the product has been handed off to another persona in the org, and _they_ are churning, that's an indication that you may need to start supporting the needs of this next persona.
+Right now, PostHog is actively targeting engineers, support teams, product managers and technical marketers, to varying extents - reflecting that we started with engineering and product. For example, we have a _ton_ of tools to help understand user behavior, but much more limited capabilities around ad attribution for a technical marketer. Over time, we anticipate becoming more full featured for every role in a software team. This is fine - it is more important to us that we nail the engineering persona, than we nail marketing for example. However, some light touch work can dramatically improve PostHog's usefulness for these other teams and we should be willing to do that when it's obvious. For example, PostHog AI is used by 25% engineers, 25% founders (often technical) and 50% across other roles. An anti goal is to completely ignore the 50% of other roles.
 
-We've not always been successful at building products for personas other than engineers. We're now at a stage where we need to be in order to continue growing. 
-
-### Churn?
-
-If a team does not currently support a persona, and that persona churns off of using that product, we are okay with that, as long as that doesn't cause the customer to churn off of PostHog entirely. We should try to support those personas to gracefully move off of PostHog. For example: we are okay with sales people churning off to a CRM, and we'll provide exports to export PostHog data to those systems.
-
+The anti persona - we are unlikely to build products for people furthest from product. For example, those in finance, ops, or recruitment. There simply is much less need for customer data in those teams hence we don't have any natural advantage here today.
