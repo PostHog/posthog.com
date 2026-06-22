@@ -258,7 +258,7 @@ All possible options below:
 | `verify_batch_events_request`<br/><br/>**Type:** Boolean<br/>**Default:** `true` | Whether to verify successful delivery of batch events (true, synchronous) or fire and forget (false, asynchronous) with the `lib_curl` consumer. |
 | `feature_flag_request_timeout_ms`<br/><br/>**Type:** Integer<br/>**Default:** `3000` | Request timeout for feature flags in milliseconds. |
 | `maximum_backoff_duration`<br/><br/>**Type:** Integer<br/>**Default:** `10000` | Request retry backoff. Retries stop after this duration is hit. |
-| `consumer`<br/><br/>**Type:** String<br/>**Default:** `lib_curl` | One of `socket`, `file`, `lib_curl`, and `fork_curl`. Determines what transport option to use for analytics capture. |
+| `consumer`<br/><br/>**Type:** String<br/>**Default:** `lib_curl` | One of `socket`, `file`, `lib_curl`, `fork_curl`, and `noop`. Determines what transport option to use for analytics capture. |
 | `debug`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Output debug logs or not. |
 | `max_queue_size`<br/><br/>**Type:** Integer<br/>**Default:** `1000` | Maximum number of events to queue before rejecting new events. Applies to queued consumers. |
 | `batch_size`<br/><br/>**Type:** Integer<br/>**Default:** `100` | Number of queued events to send in each batch. Applies to queued consumers. |

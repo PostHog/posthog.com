@@ -166,6 +166,39 @@ Day-to-day operations your team would otherwise do by hand.
   prompt="Mark ticket #3 as resolved and set ticket #7 to high priority."
   outcome="Updates both tickets in a single call."
 />
+<PromptExample
+  prompt="Create a reminder to review the onboarding funnel next Monday at 9am."
+  outcome="Creates a one-off reminder that fires once at the specified time."
+/>
+<PromptExample
+  prompt="Set up a weekly reminder to check the error dashboard every Monday morning."
+  outcome="Creates a recurring reminder that fires weekly at the specified time."
+/>
+
+### Schedule reminders
+
+Set one-off or recurring reminders that fire as in-app notifications. Optionally attach a resource like a dashboard or experiment so the notification links straight to it.
+
+<PromptExample
+  prompt="Remind me every Monday at 9am to review the activation dashboard."
+  outcome="Creates a recurring reminder with a cron schedule and links it to the dashboard."
+/>
+<PromptExample
+  prompt="Set a reminder for tomorrow at 3pm to check the experiment results."
+  outcome="Creates a one-off reminder that fires once and marks itself completed."
+/>
+<PromptExample
+  prompt="What reminders do I have?"
+  outcome="Lists your reminders with their schedule, status, and next fire time."
+/>
+<PromptExample
+  prompt="Change my weekly activation reminder to fire at 10am instead of 9am."
+  outcome="Updates the schedule and recomputes the next fire time."
+/>
+<PromptExample
+  prompt="Cancel the weekly activation reminder."
+  outcome="Deletes the reminder so it stops firing."
+/>
 
 ## Multi-step recipes
 

@@ -10,9 +10,9 @@ Activating pineapple mode makes it rain pineapples all over your product or webs
 
 ## OK, but why does Pineapple Mode do that?
 
-Pineapple Mode is an example site app. Site apps are a new, big and currently beta feature which enable you to inject code from PostHog into your website via `posthog-js`.
+Pineapple Mode is an example JS snippet. JS snippets are a new, big, and currently beta feature which enable you to inject code from PostHog into your website via `posthog-js`.
 
-We think site apps are a potentially useful feature for things such as displaying forms, notifications or surveys in your product or website. They're also useful for making it rain pineapples!
+We think JS snippets are a potentially useful feature for things such as displaying forms, notifications or surveys in your product or website. They're also useful for making it rain pineapples!
 
 ## Requirements
 
@@ -20,17 +20,17 @@ Pineapple Mode requires either PostHog Cloud, or a self-hosted PostHog instance 
 
 Not running 1.41.0? Find out [how to update your self-hosted PostHog deployment](/docs/runbook/upgrading-posthog)!
 
-You'll also need to manually opt in to the site apps feature, as it's currently in beta.
+You'll also need to manually opt in to the JS snippets feature, as it's currently in beta.
 
 ## Installation
 
-First, you need to manually opt in to the site apps beta. You can do this by configuring your `posthog-js` initialization to include `opt_in_site_apps: true`. Please be aware you do this at your own risk and, if you get hit on the head by a pineapple, it's not PostHog's fault.
+First, you need to manually opt in to the JS snippets beta. You can do this by configuring your `posthog-js` initialization to include `opt_in_site_apps: true`. Please be aware you do this at your own risk and, if you get hit on the head by a pineapple, it's not PostHog's fault.
 
 Once you've opted in, simply visit the 'Apps' page in your PostHog instance, search for 'Pineapple Mode' and press install. You may then need to refresh your page. Here's what you should expect:
 
 ## FAQ
 
-### Can I make my own site apps?
+### Can I make my own JS snippets?
 
 You certainly can. Check our tutorial about [how to build a site app in PostHog](/tutorials/build-site-app) to get started. 
 

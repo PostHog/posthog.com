@@ -10,4 +10,4 @@ You can manually control when to start and stop session recordings using the fol
 - `stopSessionRecording()`
   - Stops/pauses the current session recording.
 
-> **Note:** Calling these methods will have no effect if session recordings are disabled in your PostHog [Project Settings](https://app.posthog.com/project/settings).
+> **Note:** Calling these methods will have no effect if session recordings are disabled in your PostHog [Project Settings](https://app.posthog.com/project/settings). Manual starts still respect project ingestion controls, including sampling and event triggers.

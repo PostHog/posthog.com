@@ -48,7 +48,7 @@ export const SEO = ({
         title: title || defaultTitle,
         description: description || defaultDescription,
         image:
-            imageType === 'absolute'
+            imageType === 'absolute' || image?.startsWith('http')
                 ? image
                 : `${process.env.GATSBY_DEPLOY_PRIME_URL || siteUrl}${image || defaultImage}`,
         url: `${siteUrl}${pathname}`,

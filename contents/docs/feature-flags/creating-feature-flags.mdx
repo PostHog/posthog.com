@@ -95,7 +95,7 @@ For multivariate flags, you can configure **different payloads for each variant*
 1. Create a multivariate flag with multiple variants (e.g., `control`, `variant_a`, `variant_b`)
 2. For each variant, configure a unique payload in the **Payloads** section
 3. Use release conditions with **optional overrides** to force specific users to specific variants
-4. Retrieve the payload in your code using `getFeatureFlagPayload('flag-key')`
+4. Retrieve the payload in your code using `getFeatureFlagResult('flag-key')?.payload`
 
 **Example use cases:**
 
@@ -297,7 +297,7 @@ Flags without evaluation contexts continue to evaluate for all requests (default
 
 <CalloutBox icon="IconWarning" title="Evaluation context behavior" type="action">
 
-- SDKs must send the `evaluation_contexts` parameter with matching contexts for the flag to evaluate (the legacy `evaluation_environments` parameter is also supported)
+- Supported SDKs must send the `evaluation_contexts` request parameter with matching contexts for the flag to evaluate (the legacy `evaluation_environments` request parameter is supported by some SDK versions)
 - Flags with no evaluation contexts will evaluate for all requests (default behavior)
 - At least one evaluation context must match for the flag to be included in the evaluation
 

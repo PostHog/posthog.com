@@ -16,7 +16,7 @@ export default function CDP(): JSX.Element {
             <SEO
                 title="CDP sources & destinations"
                 description="Get all your data into PostHog with 60+ sources & destinations"
-                image={`images/og/cdp.jpg`}
+                image="https://res.cloudinary.com/dmukukwp6/image/upload/cdp_3f8703b873.jpg"
             />
             <ReaderView leftSidebar={<LeftSidebarContent />}>
                 <h1 className="mx-auto transition-all max-w-full">PostHog CDP</h1>
