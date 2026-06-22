@@ -3,6 +3,7 @@ date: "2026-06-17"
 title: "What if your product built itself?"
 author:
   - josh-snyder
+  - cleo-lant
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -44,6 +45,8 @@ The first wrinkle is that some of those sources are public. If I visit your webs
 
 Once we've confirmed a signal is safe, we normalize it. An [error arrives with a stack trace](/blog/agents-closed-4063-errors), a log is just JSON or text, an experiment is a set of results in a chart. We flatten all of that into one shape: a source product, a type, the content, a weight (how important we think it is), and finally, an embedding of the contents.
 
+![The pipeline](https://res.cloudinary.com/dmukukwp6/image/upload/self_driving_pipeline_technical_diagram_the_pipeline_dd3f92eae4.png)
+
 ### 2. Grouping signals into problems
 
 This is still a big, noisy stream of signals, and now we want to group them into real problems. You might get a random null pointer exception at the same time a customer messages you on Slack to say checkout is broken for them. Those belong together and we need to link them.
@@ -53,6 +56,8 @@ So we group signals, and assign weights to something we call a report. When a re
 When it comes to this grouping, our first instinct was the obvious one: embed every signal and cluster on those embeddings to find related ones. It worked poorly.
 
 Say you've got an error from checkout, an error from onboarding, and a Slack message about onboarding breaking. The two onboarding signals are the same problem and should land together. But an off-the-shelf embedding model groups text that is **structurally similar**, instead of using it's **meaning**, so it files the two errors together (both are stack traces) and leaves the Slack message off on its own.
+
+![filtering and normalization](https://res.cloudinary.com/dmukukwp6/image/upload/self_driving_pipeline_technical_diagram_ingestion_f0a54bfc0c.png)
 
 The fix was to stop clustering the raw signals. Instead we ask an LLM what each signal is actually about, have it write that as a few short queries, and match those queries in embedding space – the same basic shape we use for [clustering LLM traces](/blog/llm-analytics-clustering-how-it-works#the-complete-clustering-pipeline).
 
@@ -68,6 +73,8 @@ That alone makes the research much more accurate – it is why we think products
 
 What comes out the other side is a summary of the problem, a priority, and (via git blame) a suggestion of who should review the PR if we open one.
 
+![rewrite the query](https://res.cloudinary.com/dmukukwp6/image/upload/self_driving_pipeline_technical_diagram_rewrite_the_query_2025a8d87e.png)
+
 ### 4. Deciding what's actionable
 
 Now we have a set of problems we think are worth working on, and a rough idea of each one. Each gets passed through an actionability step that sorts it into one of three buckets.
@@ -78,15 +85,15 @@ Now we have a set of problems we think are worth working on, and a rough idea of
 
 The difficulty here depends a lot on the source. Errors are specific, and a coding agent works well at solving them. Slack messages and session replays produce much more generic problems with many possible solutions (which tends to make them less actionable).
 
+![research and actionability](https://res.cloudinary.com/dmukukwp6/image/upload/self_driving_pipeline_technical_diagram_research_3b90a0a679.png)
+
 ### 5. Writing the fix
 
 For the actionable problems, we clone the repo into a sandbox, run the Claude Agent SDK to build a fix, and push a PR. When CI fails or someone leaves a comment, we trigger a rerun. We snapshot the sandbox at the end of a run, and when a comment comes in (say, from a reviewing agent) we rehydrate that snapshot and keep going until the PR is green.
 
 The result is that you come in the morning to green PRs, rather than a pile of CI failures and review comments you have to pull down to your local environment and work through by hand.
 
-![Agent opening a PR](https://res.cloudinary.com/dmukukwp6/image/upload/4_merge_ffb549df4a.png)
-
-<Caption>A pull request, lovingly assembled by an entity with no weekend plans.</Caption>
+![execution](https://res.cloudinary.com/dmukukwp6/image/upload/self_driving_pipeline_technical_diagram_execution_8d2f670cd1.png)
 
 ## What we learned building it
 
@@ -103,6 +110,10 @@ If you throw an agent at a problem, it will try to fix something – which is gr
 ### Tokens are free (aren’t they?)
 
 They're obviously not. But while you're experimenting, it pays to act as if they are. You can throw agents at a lot of problems, and they'll do a great job, but cost you lots of money. As a result, you might be tempted to avoid using them to bring down costs, but it's more helpful to use the best tool for the job, and then once it's working well you can learn from traces in production and collapse repeated behaviour into a one-shot LLM call (or a [small model we train](/blog/training-ai-models) that runs much faster).
+
+![Agent opening a PR](https://res.cloudinary.com/dmukukwp6/image/upload/4_merge_ffb549df4a.png)
+
+<Caption>A pull request, lovingly assembled by an entity with no weekend plans.</Caption>
 
 ## Switch on self-driving for your product
 
