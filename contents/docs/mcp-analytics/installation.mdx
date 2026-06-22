@@ -72,6 +72,44 @@ server.tool("search_events", { /* ... */ }, async (args) => {
 })
 ```
 
+### Next.js / Vercel (`mcp-handler`)
+
+[`mcp-handler`](https://github.com/vercel/mcp-handler) gives you a standard `McpServer` in its setup
+callback, so you instrument it the same way — one line, before or after you register tools:
+
+```ts
+import createMcpHandler from "mcp-handler"
+import { PostHog } from "posthog-node"
+import { instrument } from "@posthog/mcp"
+
+// Create the client once at module scope (not per request).
+const posthog = new PostHog(process.env.POSTHOG_PROJECT_API_KEY, {
+  host: "https://us.i.posthog.com", // or https://eu.i.posthog.com
+})
+
+const handler = createMcpHandler(
+  (server) => {
+    instrument(server, posthog)
+    server.registerTool("roll_dice", { /* ... */ }, async ({ sides }) => { /* ... */ })
+  },
+  {},
+  { basePath: "/api" },
+)
+
+export { handler as GET, handler as POST }
+```
+
+Two things to know because of how `mcp-handler` runs on Vercel:
+
+- **Sessions.** With the default streamable-HTTP transport, `mcp-handler` is stateless — it creates a
+  fresh server per request and sends no `Mcp-Session-Id`, so each request is its own `$session_id`.
+  To group a client's calls into one session, run it stateful (configure a `sessionIdGenerator`); the
+  SDK then derives a stable `$session_id` from the header. Use the [`identify`](/docs/mcp-analytics/identifying-users)
+  option to attribute calls to a user regardless.
+- **Flushing.** `posthog-node` batches events, and a serverless function can freeze before they send.
+  Flush at the end of the invocation — `await posthog.flush()`, or `ctx.waitUntil(posthog.flush())` to
+  keep the runtime alive until it completes.
+
 ## Configuration
 
 The `posthog` client is passed as the required second positional argument — not in this options object. `instrument()` accepts these options as an optional third argument:
