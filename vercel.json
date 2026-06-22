@@ -137,12 +137,22 @@
         { "source": "/docs/tracing/:path*", "destination": "/docs/distributed-tracing/:path*", "statusCode": 301 },
         {
             "source": "/docs/posthog-code/inbox/triage",
-            "destination": "/docs/posthog-code/inbox/implementation",
+            "destination": "/docs/start-here/inbox/implementation",
             "statusCode": 301
         },
         {
             "source": "/docs/posthog-code/inbox/triage/",
-            "destination": "/docs/posthog-code/inbox/implementation",
+            "destination": "/docs/start-here/inbox/implementation",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-code/inbox",
+            "destination": "/docs/start-here/inbox",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-code/inbox/:path*",
+            "destination": "/docs/start-here/inbox/:path*",
             "statusCode": 301
         },
         {

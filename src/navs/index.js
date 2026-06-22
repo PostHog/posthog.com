@@ -2208,6 +2208,28 @@ export const docsMenu = {
                 {
                     name: 'Inbox',
                     url: '/docs/start-here/inbox',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/start-here/inbox',
+                        },
+                        {
+                            name: 'Signal sources',
+                            url: '/docs/start-here/inbox/sources',
+                        },
+                        {
+                            name: 'Research tasks',
+                            url: '/docs/start-here/inbox/research',
+                        },
+                        {
+                            name: 'Implementation',
+                            url: '/docs/start-here/inbox/implementation',
+                        },
+                        {
+                            name: 'Troubleshooting',
+                            url: '/docs/start-here/inbox/troubleshooting',
+                        },
+                    ],
                 },
                 {
                     name: 'Resources',
@@ -6734,19 +6756,6 @@ export const docsMenu = {
                     url: '/docs/posthog-code/use-any-model-and-harness',
                     icon: 'IconGraduationCap',
                     color: 'green',
-                },
-                {
-                    name: 'Inbox',
-                    url: '/docs/posthog-code/inbox',
-                    icon: 'IconLetter',
-                    color: 'yellow',
-                    children: [
-                        { name: 'Overview', url: '/docs/posthog-code/inbox' },
-                        { name: 'Sources', url: '/docs/posthog-code/inbox/sources' },
-                        { name: 'Research', url: '/docs/posthog-code/inbox/research' },
-                        { name: 'Implementation', url: '/docs/posthog-code/inbox/implementation' },
-                        { name: 'Troubleshooting', url: '/docs/posthog-code/inbox/troubleshooting' },
-                    ],
                 },
                 {
                     name: 'Skills',

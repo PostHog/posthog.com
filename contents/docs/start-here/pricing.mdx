@@ -17,10 +17,7 @@ PostHog self-driving is priced on an outcome basis, which means you only pay for
 
 You pay a flat **$15 per pull request**: an actionable [report](/docs/start-here/reports) with a code change attached, surfaced in your [inbox](/docs/start-here/inbox).
 
-For billing, PRs are converted into AI credits:
-
-- 100 AI credits = $1
-- 1 PR = 1,500 AI credits = $15
+You're only billed for actionable reports that become a pull request. Reports that aren't actionable, or that need your input instead of a code change, are always free.
 
 ## How PostHog assesses actionability
 
@@ -32,21 +29,21 @@ Before a [report](/docs/start-here/reports) can become a pull request, an agent 
 ## What's free
 
 - Non-actionable reports surfaced in your inbox (a problem without a fix)
-- Your first 3 pull requests each month (= 4,500 AI credits)
+- Your first 3 pull requests each month
 
 ## Track your self-driving usage
 
-PRs are billed as **AI credits**, so they:
+Each pull request you're billed for:
 
-- Appear in your usage alongside the rest of your PostHog spend
-- Respect a dollar **billing limit** you set
-- Pause when you hit that limit, until usage resets next billing period
+- Appears in your usage alongside the rest of your PostHog spend
+- Respects a dollar **billing limit** you set
+- Pauses when you hit that limit, until usage resets next billing period
 
 Track your spend on the [billing overview](https://app.posthog.com/organization/billing/overview) and [billing usage](https://app.posthog.com/organization/billing/usage) pages.
 
 <CalloutBox icon="IconInfo" title="Important" type="fyi">
 
-Credit data may take up to 24 hours to appear on the billing overview and billing usage pages.
+Usage data may take up to 24 hours to appear on the billing overview and billing usage pages.
 
 </CalloutBox>
 
@@ -56,7 +53,7 @@ You can control your self-driving spend on both the usage and billing side.
 
 ### Usage
 
-* Disable [signal sources](/docs/posthog-code/inbox/sources) with limited usefulness to you
+* Disable [signal sources](/docs/start-here/inbox/sources) with limited usefulness to you
 * Disable types of [scouts](/docs/start-here/scouts) with limited usefulness to you
 
 <CalloutBox icon="IconInfo" title="Coming soon" type="fyi">
@@ -72,4 +69,6 @@ We're also considering letting you sample your data to control usage. If that's 
 * **Default billing limit:** PostHog sets a default $150 billing limit so you don't accidentally rack up costs without a ceiling
 * **Usage alerts:** Get notified when you hit key thresholds
 
-When you hit your credit limit, report and PR generation is paused until your credits reset at the next billing period.
+Manage your billing limit and review your spend on the [billing settings](https://app.posthog.com/organization/billing) page.
+
+When you hit your billing limit, report and PR generation is paused until your usage resets at the next billing period.
