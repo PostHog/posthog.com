@@ -19,6 +19,7 @@ export const featureFlags = {
         title: 'Feature Flags – Ship safely and control rollouts with PostHog',
         description:
             "Deploy new features confidently with Feature Flags. Test in production, target cohorts, and measure impact through PostHog's integrated analytics and experiments.",
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/feature_flags_f536371cce.jpg',
     },
     overview: {
         title: 'Safely roll out features to specific users or groups',

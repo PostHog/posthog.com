@@ -1293,6 +1293,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/revops/lifecycle-analysis',
             },
             {
+                name: 'Signup enrichment pipeline',
+                url: '/handbook/growth/revops/enrichment-pipeline',
+            },
+            {
                 name: 'SalesOps',
                 url: '',
                 children: [
@@ -1461,6 +1465,16 @@ export const handbookSidebar = [
                     {
                         name: 'Engaging unengaged customers',
                         url: '/handbook/cs-and-onboarding/engaging-unengaged-customers',
+                    },
+                ],
+            },
+            {
+                name: 'Shareable guides',
+                url: '',
+                children: [
+                    {
+                        name: 'LLM cost optimization',
+                        url: '/handbook/cs-and-onboarding/shareable-guides/llm-cost-optimization',
                     },
                 ],
             },
@@ -2853,6 +2867,10 @@ export const docsMenu = {
                                     url: '/docs/model-context-protocol/faq',
                                 },
                                 {
+                                    name: 'Enterprise auth (ID-JAG)',
+                                    url: '/docs/model-context-protocol/enterprise-managed-authorization',
+                                },
+                                {
                                     name: 'Code editors',
                                 },
                                 {
@@ -2899,6 +2917,10 @@ export const docsMenu = {
                                     url: '/docs/integrations/v0',
                                 },
                             ],
+                        },
+                        {
+                            name: 'Skills store',
+                            url: '/docs/ai-engineering/skills-store',
                         },
                         {
                             name: 'AI Observability ↗',
@@ -3162,6 +3184,10 @@ export const docsMenu = {
                             url: '/docs/settings/sso',
                         },
                         {
+                            name: 'ID-JAG (XAA)',
+                            url: '/docs/settings/id-jag',
+                        },
+                        {
                             name: 'Content Security Policy tracking',
                             url: '/docs/csp-tracking',
                         },
@@ -3174,20 +3200,20 @@ export const docsMenu = {
                             url: '/docs/settings/account-settings',
                         },
                         {
-                            name: 'Site Apps',
-                            url: '/docs/site-apps',
+                            name: 'JS snippets',
+                            url: '/docs/js-snippets',
                             children: [
                                 {
                                     name: 'Overview',
-                                    url: '/docs/site-apps',
+                                    url: '/docs/js-snippets',
                                 },
                                 {
                                     name: 'Notification Bar',
-                                    url: '/docs/site-apps/notification-bar',
+                                    url: '/docs/js-snippets/notification-bar',
                                 },
                                 {
                                     name: 'Pineapple Mode',
-                                    url: '/docs/site-apps/pineapple-mode',
+                                    url: '/docs/js-snippets/pineapple-mode',
                                 },
                             ],
                         },
@@ -3905,6 +3931,12 @@ export const docsMenu = {
                     url: '/docs/web-analytics/web-vitals',
                     icon: 'IconWrench',
                     color: 'seagreen',
+                },
+                {
+                    name: 'Bot and traffic detection',
+                    url: '/docs/web-analytics/bot-detection',
+                    icon: 'IconShield',
+                    color: 'purple',
                 },
                 {
                     name: 'Path cleaning',
@@ -5960,10 +5992,6 @@ export const docsMenu = {
                             url: '/docs/prompt-management',
                         },
                         {
-                            name: 'Skills store',
-                            url: '/docs/prompt-management/skills-store',
-                        },
-                        {
                             name: 'A/B testing prompts',
                             url: '/docs/prompt-management/prompt-experiments',
                         },
@@ -6906,6 +6934,12 @@ export const docsMenu = {
                     name: 'Resources',
                 },
                 {
+                    name: 'Email engagement events',
+                    url: '/docs/workflows/engagement-events',
+                    icon: 'IconGraph',
+                    color: 'yellow',
+                },
+                {
                     name: 'Troubleshooting',
                     url: '/docs/workflows/troubleshooting',
                     icon: 'IconQuestion',
@@ -7235,7 +7269,7 @@ export const docsMenu = {
                     color: 'salmon',
                 },
                 {
-                    name: 'Usage analytics',
+                    name: 'Usage and logs',
                     url: '/docs/endpoints/usage-analytics',
                     icon: 'IconGraph',
                     color: 'blue',

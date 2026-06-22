@@ -6,7 +6,7 @@ topics:
   - notification-bar
 ---
 
-The Notification Bar site app displays a customizable banner at the top of your website. Use it to announce product updates, promotions, events, or important notices to visitors.
+The Notification Bar JS snippet displays a customizable banner at the top of your website. Use it to announce product updates, promotions, events, or important notices to visitors.
 
 ## How it works
 
@@ -21,9 +21,9 @@ The banner:
 - Optionally remembers when a user dismisses it using `localStorage`, so it won't reappear until you change the message
 - Can be restricted to specific domains using a comma-separated list
 
-<CalloutBox icon="IconInfo" title="Site apps are in beta" type="fyi">
+<CalloutBox icon="IconInfo" title="JS snippets are in beta" type="fyi">
 
-Site apps let you inject code from PostHog into your website via `posthog-js`. You need to opt in by setting `opt_in_site_apps: true` in your posthog-js configuration.
+JS snippets let you inject code from PostHog into your website via `posthog-js`. You need to opt in by setting `opt_in_site_apps: true` in your posthog-js configuration.
 
 </CalloutBox>
 
@@ -39,7 +39,7 @@ Site apps let you inject code from PostHog into your website via `posthog-js`. Y
 
 The Notification Bar requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.41.0](https://posthog.com/blog/the-posthog-array-1-41-0#one-more-thing-site-apps) or later.
 
-You also need to opt in to the site apps beta by setting `opt_in_site_apps: true` in your `posthog-js` initialization.
+You also need to opt in to the JS snippets beta by setting `opt_in_site_apps: true` in your `posthog-js` initialization.
 
 ## Installation
 

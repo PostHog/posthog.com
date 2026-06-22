@@ -69,6 +69,24 @@ To fix this:
 3. Upload the new Google Cloud JSON key file.
 4. Re-run the sync.
 
+## Why is my Stripe sync failing with an account access error?
+
+If your Stripe sync fails with a message like "does not have access to account," it means your API key isn't authorized for the configured Stripe account, or your OAuth application access has been revoked. This is a non-retryable error – PostHog stops the sync instead of retrying indefinitely.
+
+This happens when:
+
+- **The Account ID is misconfigured** – You've specified an Account ID in your source settings, but your API key isn't authorized for that account (or you're using a non-Connect key with an Account ID).
+- **OAuth access was revoked** – If you connected via OAuth, the application's access to your Stripe account may have been revoked.
+
+To fix this:
+
+1. In PostHog, go to [**Data pipelines > Sources**](https://app.posthog.com/data-management/sources) and select your Stripe source.
+2. If you're using a restricted API key:
+   - Remove the **Account id** field if your key belongs directly to the account you're syncing. Account ID is only needed for [Stripe Connect](https://docs.stripe.com/connect) platform accounts.
+   - Or verify the Account ID matches the account your key is authorized for.
+3. If you connected via OAuth, reconnect your Stripe account by selecting the OAuth authentication method and authorizing PostHog again.
+4. Re-run the sync.
+
 ## Why is my Microsoft SQL Server sync failing with 'Invalid object name'?
 
 If your Microsoft SQL Server sync fails with a message containing "Invalid object name," it means the database couldn't find an object (table or view) referenced in the query. This is a non-retryable error – PostHog stops the sync instead of retrying indefinitely.

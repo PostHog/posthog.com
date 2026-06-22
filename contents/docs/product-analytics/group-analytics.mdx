@@ -164,8 +164,8 @@ posthog.capture('user_signed_up')
 ```python
 # Not possible
 posthog.capture(
-    'user_distinct_id',
     'user_signed_up',
+    distinct_id='user_distinct_id',
     groups={
         'company': 'company_id_in_your_db',
         'company': 'another_company_id_in_your_db'
@@ -174,8 +174,8 @@ posthog.capture(
 
 # Allowed
 posthog.capture(
-    'user_distinct_id',
     'user_signed_up',
+    distinct_id='user_distinct_id',
     groups={
         'company': 'company_id_in_your_db',
         'channel': 'channel_id_in_your_db'
@@ -248,8 +248,9 @@ posthog.capture({
 ```
 
 ```python
-posthog.capture('static_string_for_group_events', 
-    'group_event_name', 
+posthog.capture(
+    'group_event_name',
+    distinct_id='static_string_for_group_events',
     groups={'company': 'company_id_in_your_db'}
 )
 ```

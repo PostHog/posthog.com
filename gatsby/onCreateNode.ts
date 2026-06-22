@@ -1,6 +1,6 @@
 import { replacePath, stripFrontmatter } from './utils'
 import { createFilePath, createRemoteFileNode } from 'gatsby-source-filesystem'
-import fetch from 'node-fetch'
+
 import GitUrlParse from 'git-url-parse'
 import slugify from 'slugify'
 import { JSDOM } from 'jsdom'
@@ -105,14 +105,17 @@ export const onPreInit: GatsbyNode['onPreInit'] = async function ({ actions }) {
 
     console.log('Fetching cloudinary data')
 
+    const cloudinaryAuth = `Basic ${Buffer.from(
+        `${process.env.CLOUDINARY_API_KEY}:${process.env.CLOUDINARY_API_SECRET}`
+    ).toString('base64')}`
+
     const fetchCloudinaryImages = async (nextCursor = null) => {
         const { resources, next_cursor } = await fetch(
-            `https://${process.env.CLOUDINARY_API_KEY}:${process.env.CLOUDINARY_API_SECRET}@api.cloudinary.com/v1_1/${
+            `https://api.cloudinary.com/v1_1/${
                 process.env.GATSBY_CLOUDINARY_CLOUD_NAME
-            }/resources/image?type=upload&max_results=500${nextCursor ? `&next_cursor=${nextCursor}` : ``}`
-        )
-            .then((res) => res.json())
-            .catch((e) => console.error(e))
+            }/resources/image?type=upload&max_results=500${nextCursor ? `&next_cursor=${nextCursor}` : ``}`,
+            { headers: { Authorization: cloudinaryAuth } }
+        ).then((res) => res.json())
         resources.forEach((resource) => {
             cloudinaryCache[resource.public_id] = resource
         })

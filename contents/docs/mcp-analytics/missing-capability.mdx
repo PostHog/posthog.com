@@ -4,7 +4,7 @@ title: Tracking missing capabilities
 
 import CalloutBox from 'components/Docs/CalloutBox'
 
-One of the most valuable signals an MCP server owner can get is: *the agent wanted to do something I don't currently support.* Without that signal, gaps in your tool surface are invisible — the agent either gives up silently or hallucinates a tool name.
+One of the most valuable signals an MCP server owner can get is: *the agent wanted to do something I don't currently support.* Without that signal, gaps in your tool surface are invisible – the agent either gives up silently or hallucinates a tool name.
 
 `reportMissing` is the SDK's hook for capturing those gaps.
 
@@ -22,7 +22,7 @@ With this on, the SDK registers a virtual tool called `get_more_tools` on your s
 
 When the agent invokes `get_more_tools`, the SDK:
 
-1. Emits its own dedicated `$mcp_missing_capability` event — **not** a `$mcp_tool_call`.
+1. Emits its own dedicated `$mcp_missing_capability` event – **not** a `$mcp_tool_call`.
 2. Stamps `$mcp_intent` with the agent's reasoning describing what the user was trying to do.
 3. Returns a benign response to the agent so it can continue its turn.
 
@@ -43,7 +43,7 @@ LIMIT 50
 
 ## Complementary signal: advertised but uncalled
 
-`reportMissing` tells you what's *missing*. The `$mcp_tools_list` event tells you what's *advertised but ignored* — tools the agent saw but never invoked.
+`reportMissing` tells you what's *missing*. The `$mcp_tools_list` event tells you what's *advertised but ignored* – tools the agent saw but never invoked.
 
 ```sql
 WITH listed AS (
@@ -66,7 +66,12 @@ ORDER BY tool_name
 
 Together, the two queries answer "what tools should I build?" and "what tools should I cut?".
 
-{/* TODO: ProductScreenshot of an insight showing the top unmet asks from get_more_tools, grouped by client */}
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_missing_capability_light_f9864cae92.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_missing_capability_dark_aac81d58c5.png"
+  alt="PostHog insight showing $mcp_missing_capability events broken down by MCP client name"
+  classes="rounded"
+/>
 
 ## Caveats
 
