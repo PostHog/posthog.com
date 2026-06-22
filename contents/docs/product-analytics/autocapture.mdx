@@ -407,6 +407,25 @@ posthog.init('<ph_project_token>', {
 })
 ```
 
+To exclude an element from dead click capture without disabling autocapture, session replay, or heatmaps for that element, add the `.ph-no-deadclick` class:
+
+```html
+<button class="ph-no-deadclick">Repeatedly clicked control</button>
+```
+
+For custom selectors, pass `capture_dead_clicks.css_selector_ignorelist` in your JavaScript web config:
+
+```js-web
+posthog.init('<ph_project_token>', {
+    api_host: '<ph_client_api_host>',
+    capture_dead_clicks: {
+        css_selector_ignorelist: ['.ph-no-deadclick', '.ph-no-capture', '[data-no-dead-clicks]'],
+    },
+})
+```
+
+Providing a custom ignore list replaces the defaults, so include `.ph-no-capture` if you still want it to suppress dead click capture.
+
 > **Note:** The PostHog heatmap captures dead clicks for free, collecting only the coordinates of dead clicks to display in heatmaps. Enabling the autocapture of dead clicks here allows for deeper analysis and is priced as a standard product analytics event.
 
 ## Analyzing autocaptured events and properties

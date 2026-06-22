@@ -5,7 +5,7 @@ title: PostHog Code Inbox signal sources
 import { CalloutBox } from "components/Docs/CalloutBox";
 import List from "components/List";
 
-Inbox uses signal sources to find work worth investigating. A signal can be a production error, a support conversation, a session replay pattern, a log alert state change, or an issue from an external tracker.
+Inbox uses signal sources to find work worth investigating. A signal can be a production error, a support conversation, a session replay pattern, a log alert state change, a Replay Vision scanner finding, or an issue from an external tracker.
 
 ## Configure sources
 
@@ -52,6 +52,13 @@ These sources are available when the matching PostHog product has data in your p
       url: "/docs/logs",
       icon: "IconTerminal",
       description: "Log alerts that fire or break due to threshold breaches.",
+      lineClamp: 2,
+    },
+    {
+      label: "Replay Vision",
+      url: "/docs/replay-vision",
+      icon: "IconReplayVision",
+      description: "Actionable product issues detected by scanners.",
       lineClamp: 2,
     },
   ]}

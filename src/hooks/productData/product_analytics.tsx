@@ -30,6 +30,7 @@ export const productAnalytics = {
         title: 'Product Analytics – Understand your product with PostHog',
         description:
             'Track usage, retention, and feature adoption with Product Analaytics. PostHog connects recordings, experiments, feature flags, and more for full product insight.',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/product_analytics_d5ab5a02cb.jpg',
     },
     overview: {
         title: 'Product analytics with autocapture',

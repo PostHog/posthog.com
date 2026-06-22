@@ -11,7 +11,7 @@ import CalloutBox from 'components/Docs/CalloutBox'
 
 <CalloutBox icon="IconInfo" title="MCP analytics is in alpha" type="fyi">
 
-`@posthog/mcp` is published as a `0.1.x` release on npm. We're building it in public — the event shape, options, and tracing behavior may still change before `1.0`. Pin a specific version and don't depend on it for production reporting yet. A Python SDK and a `npx @posthog/wizard mcp-analytics add` installer are on the roadmap.
+`@posthog/mcp` is published as a `0.1.x` release on npm. We're building it in public – the event shape, options, and tracing behavior may still change before `1.0`. Pin a specific version and don't depend on it for production reporting yet. A Python SDK and a `npx @posthog/wizard mcp-analytics add` installer are on the roadmap.
 
 </CalloutBox>
 
@@ -26,7 +26,7 @@ import CalloutBox from 'components/Docs/CalloutBox'
 MCP analytics gives you visibility into how AI agents actually use the MCP server you ship. With one wrapper call you can track:
 
 - 🛠️ Every tool call (parameters, response, duration, errors)
-- 🎯 Agent intent — the *why* behind each call, not just the *what*
+- 🎯 Agent intent – the *why* behind each call, not just the *what*
 - 🧭 Every `tools/list` so you can compare advertised vs called
 - 🪪 The MCP client name and version
 - 🧵 The full session, end to end
@@ -64,11 +64,16 @@ Full installation guide
     icon="IconGraph"
 >
 
-Run your MCP server and connect an agent to it (Claude Desktop, Cursor, Codex, or your own). Within seconds of the first tool call, PostHog will receive `$mcp_tool_call`, `$mcp_tools_list`, and `$mcp_initialize` events — all prefixed with `$mcp_*` so they never collide with anything else in your project.
+Run your MCP server and connect an agent to it (Claude Desktop, Cursor, Codex, or your own). Within seconds of the first tool call, PostHog will receive `$mcp_tool_call`, `$mcp_tools_list`, and `$mcp_initialize` events – all prefixed with `$mcp_*` so they never collide with anything else in your project.
 
 Open the [activity feed](https://us.posthog.com/project/2/activity) and filter for `event = $mcp_tool_call`. You should see one row per agent tool invocation, each with `$mcp_tool_name`, `$mcp_parameters`, `$mcp_response`, `$mcp_duration_ms`, and `$mcp_is_error`.
 
-{/* TODO: ProductScreenshot of $mcp_tool_call activity feed once an internal demo project has data */}
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_activity_feed_light_197cb57f3c.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_activity_feed_dark_e795d95547.png"
+  alt="PostHog activity feed filtered to $mcp_tool_call events, with tool name, client, error state, and duration columns"
+  classes="rounded"
+/>
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/events">
 See every event the SDK emits
@@ -115,7 +120,7 @@ Learn about intent capture
     icon="IconLineGraph"
 >
 
-Every event is a normal PostHog event, so insights, dashboards, alerts, and SQL all work without further setup. The four queries we suggest building first:
+Every event is a normal PostHog event, so insights, dashboards, alerts, and SQL all work without further setup – and the preview [MCP analytics view](/docs/mcp-analytics) gives you the most useful cuts out of the box. The four queries we suggest building (or reading straight from the dashboard) first:
 
 - ### <IconGraph className="text-blue w-7 -mt-1 inline-block"/> Top tools per server
   Where is your agent traffic concentrated? Which tools earn their keep?
@@ -129,7 +134,14 @@ Every event is a normal PostHog event, so insights, dashboards, alerts, and SQL 
 - ### <IconWrench className="text-orange w-7 -mt-1 inline-block"/> Advertised tools that never get called
   Find dead surface area by joining `$mcp_tools_list` against `$mcp_tool_call`.
 
-{/* TODO: ProductScreenshot of a sample MCP analytics dashboard with the four tiles above */}
+The tool quality tab surfaces error rate and latency percentiles per tool, with a row to drill into for any single tool:
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_tool_quality_light_f91f27f6e1.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_tool_quality_dark_add2659eaa.png"
+  alt="MCP analytics tool quality tab showing calls and errors, success rate, latency percentiles, and a per-tool table"
+  classes="rounded"
+/>
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/queries">
 Copy-paste queries
@@ -143,7 +155,7 @@ Copy-paste queries
     icon="IconPerson"
 >
 
-By default each event is attributed to the MCP connection's session id. To attribute calls to a real user — for per-user retention, group analytics, and person properties — wire an `identify` callback:
+By default each event is attributed to the MCP connection's session ID. To attribute calls to a real user – for per-user retention, group analytics, and person properties – wire an `identify` callback:
 
 ```ts
 instrument(server, posthog, {
@@ -169,7 +181,7 @@ Identify users
     icon="IconWrench"
 >
 
-The most actionable signal for an MCP server owner is *the agent wanted to do something I don't support*. Enable `reportMissing: true` and the SDK registers a `get_more_tools` virtual tool. When the agent invokes it, you get a queryable feed of unmet asks — straight into your roadmap.
+The most actionable signal for an MCP server owner is *the agent wanted to do something I don't support*. Enable `reportMissing: true` and the SDK registers a `get_more_tools` virtual tool. When the agent invokes it, you get a queryable feed of unmet asks – straight into your roadmap.
 
 ```ts
 instrument(server, posthog, {
@@ -201,7 +213,7 @@ Track missing capabilities
     icon="IconLock"
 >
 
-The SDK runs every event through automatic sanitization (image/audio/binary stubs, sensitive-key masking like `authorization`, `cookie`, `password`, PostHog key patterns) and truncation to fit ingestion limits. For full control, add a `beforeSend` hook that runs on each built PostHog payload right before it's sent — mutate and return the event to send it, or return a nullish value to drop it.
+The SDK runs every event through automatic sanitization (image/audio/binary stubs, sensitive-key masking like `authorization`, `cookie`, `password`, PostHog key patterns) and truncation to fit ingestion limits. For full control, add a `beforeSend` hook that runs on each built PostHog payload right before it's sent – mutate and return the event to send it, or return a nullish value to drop it.
 
 ```ts
 instrument(server, posthog, {
@@ -218,7 +230,7 @@ Privacy & redaction
 
 ---
 
-That's it. You're ready to ship `@posthog/mcp` to production agents — within the alpha caveats above.
+That's it. You're ready to ship `@posthog/mcp` to production agents – within the alpha caveats above.
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/installation">
 Install MCP analytics
