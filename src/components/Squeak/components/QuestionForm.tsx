@@ -238,6 +238,7 @@ function QuestionFormMain({
                                 <p className="text-xs text-center mt-4 ml-[50px] [text-wrap:_balance] opacity-60 mb-0 text-primary">
                                     <Link
                                         to="/handbook/support/customer-support#community"
+                                        state={{ newWindow: true }}
                                         className="font-semibold underline"
                                     >
                                         Community questions are independent of PostHog support
