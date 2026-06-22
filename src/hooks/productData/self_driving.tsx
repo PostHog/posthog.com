@@ -12,20 +12,22 @@ export const selfDriving = {
     colorSecondary: 'lilac',
     category: 'automation',
     slider: {
-        marks: [3000, 10000, 50000, 100000],
-        min: 3000,
-        max: 100000,
+        marks: [4500, 15000, 75000, 150000],
+        min: 4500,
+        max: 150000,
     },
-    volume: 3000,
+    volume: 4500,
     customPricingContent: (
         <div data-scheme="secondary" className="prose prose-sm text-lg mt-8 mb-12 leading-normal text-primary">
             <h3 className="text-xl font-bold text-primary mb-4">How credits work</h3>
             <p>
-                Self-Driving credits meter the autonomous work completed for your organization. Billing uses the
-                reported credit total for the month, so more complex investigations and generated changes can consume
-                more credits than simpler tasks.
+                Your first 4,500 Self-Driving credits (worth $45) are free every month. After that, credits are $0.01
+                each.
             </p>
-            <p>Credits use the same convention as PostHog AI: 100 credits cost $1 after the monthly free allowance.</p>
+            <p>
+                Credits meter the autonomous work completed for your organization, so more complex investigations and
+                generated changes can consume more credits than simpler tasks.
+            </p>
         </div>
     ),
     seo: {
