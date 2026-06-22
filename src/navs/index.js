@@ -2213,6 +2213,13 @@ export const docsMenu = {
                     name: 'Guardrails',
                     url: '/docs/start-here/guardrails',
                 },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Pricing',
+                    url: '/docs/start-here/pricing',
+                },
             ],
         },
         {
