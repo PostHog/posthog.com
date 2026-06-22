@@ -1,6 +1,6 @@
 ```python
-posthog.capture("distinct_id", "movie_played", {
-  movie_id: "123",
-  category: "romcom",
-});
+posthog.capture("movie_played", distinct_id="distinct_id", properties={
+  "movie_id": "123",
+  "category": "romcom",
+})
 ```

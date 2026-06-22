@@ -3,7 +3,7 @@ title: How Fastr ships a custom experimentation dashboard to every customer with
 customer: Fastr
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/FASTR_afcc31057f.png
-date: 2026-03-10
+date: 2026-06-15
 ---
 
 Most conversion rate optimization (CRO) platforms hand every customer the same dashboard. [Fastr](https://getfastr.com/) does the opposite. Each of its customers logs into a dashboard built specifically for their business, with only the metrics they care about, segments tailored to how they think about their audience, and an AI interface that turns business questions into answers in plain English.
@@ -11,7 +11,7 @@ Most conversion rate optimization (CRO) platforms hand every customer the same d
 That model only works because Fastr can spin up new analytics infrastructure for every customer on demand. With a four-person engineering team, [PostHog Endpoints](/endpoints), materialized views, and an AI first development workflow; Fastr can serve major e-commerce customers.
 
 <OSQuote
-  customer="Fastr"
+  customer="fastr"
   author="ryan_breen"
   quote={0}
 />
@@ -39,7 +39,7 @@ Agentic development first
 -------------------------
 
 <OSQuote
-  customer="Fastr"
+  customer="fastr"
   author="ryan_breen"
   quote={1}
 />
@@ -56,7 +56,7 @@ An analytics platform without data engineers
 Fastr's customers don't have data engineers waiting to slice their AB test results. They have a marketing team that wants to know whether the last test worked.
 
 <OSQuote
-  customer="Fastr"
+  customer="fastr"
   author="ryan_breen"
   quote={2}
 />

@@ -47,6 +47,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['ai-gateway'],
         label: false,
     },
+    'ai-playground': {
+        feature: 'AI playground',
+        owner: ['ai-gateway'],
+        label: false,
+    },
     alerts: {
         feature: 'Alerts',
         owner: ['analytics-platform'],
@@ -71,7 +76,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     autocapture: {
         feature: 'Autocapture',
-        owner: ['analytics-platform', 'web-analytics'],
+        owner: ['web-analytics'],
     },
     'base-currency': {
         feature: 'Base currency',
@@ -88,7 +93,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'cache-warming': {
         feature: 'Cache warming',
-        owner: ['analytics-platform'],
+        owner: ['query-performance'],
     },
     cli: {
         feature: 'CLI',
@@ -251,13 +256,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     notebooks: {
         feature: 'Notebooks',
-        notes: (
-            <>
-                Owns the notebooks feature and triages other tickets out to the right owner (e.g. insights in notebooks
-                is owned by product analytics)
-            </>
-        ),
-        owner: ['platform-features'],
+        owner: ['data-tools'],
         label: 'feature/notebooks',
     },
     oauth: {
@@ -349,7 +348,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'query-performance': {
         feature: 'Query performance',
-        owner: ['analytics-platform'],
+        owner: ['query-performance'],
         label: 'feature/insights',
     },
     'quota-limiting': {

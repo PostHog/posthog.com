@@ -74,7 +74,7 @@ const sections = [
                 columns: [
                     ['web_analytics', 'product_analytics', 'trends'],
                     ['funnels', 'user_paths', 'lifecycle', 'heatmaps'],
-                    ['llm_traces', 'llm_generations', 'llm_evals', 'activity'],
+                    ['llm_traces', 'llm_evals', 'activity'],
                 ],
             },
             {

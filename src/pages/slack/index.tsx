@@ -32,7 +32,7 @@ import {
     IconWrench,
 } from '@posthog/icons'
 
-const CONNECT_SLACK_URL = 'https://app.posthog.com/settings/project-integrations#integration-slack'
+const CONNECT_SLACK_URL = 'https://app.posthog.com/integrations/slack'
 
 type IconComponent = React.ComponentType<{ className?: string }>
 

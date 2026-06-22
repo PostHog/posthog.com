@@ -29,6 +29,14 @@ The MCP server provides these tools for working with Feature Flags:
 | `update-feature-flag`         | Update a flag's rollout percentage, targeting rules, or variants.                                       |
 | `delete-feature-flag`         | Delete a feature flag.                                                                                  |
 
+The `create-feature-flag` and `update-feature-flag` tools accept these optional parameters:
+
+| Parameter                      | Description                                                                                                                                                                                                                                                                            |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `evaluation_runtime`           | Where the flag evaluates: `server` (server-side SDKs only), `client` (client-side SDKs only), or `all` (both). Defaults to `all`. See [evaluation runtime](/docs/feature-flags/creating-feature-flags#evaluation-runtime-optional).                                                    |
+| `bucketing_identifier`         | Identifier used to bucket users: `distinct_id` (default) or `device_id`. Using `device_id` is incompatible with `ensure_experience_continuity` set to `true`. See [device bucketing](/docs/feature-flags/device-bucketing).                                                        |
+| `ensure_experience_continuity` | Whether to persist a user's flag value across the anonymous-to-identified transition. Incompatible with `device_id` bucketing. See [persisting flags across authentication](/docs/feature-flags/creating-feature-flags#persisting-feature-flags-across-authentication-steps-optional). |
+
 ## Bulk operation tools
 
 These tools operate on multiple feature flags at once:
@@ -61,6 +69,8 @@ Try these with your MCP-enabled agent:
 - `Update the dark-mode flag to roll out to 100% of users.`
 - `Create a multivariate flag called button-color with three variants: red, blue, and green.`
 - `Delete the old-pricing-test flag.`
+- `Create a server-side-only flag called internal-api-v2 with evaluation_runtime set to server.`
+- `Create a flag called device-experiment using device_id bucketing for consistent mobile app experience.`
 
 ### Bulk operation prompts
 

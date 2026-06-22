@@ -19,6 +19,7 @@ export const featureFlags = {
         title: 'Feature Flags – Ship safely and control rollouts with PostHog',
         description:
             "Deploy new features confidently with Feature Flags. Test in production, target cohorts, and measure impact through PostHog's integrated analytics and experiments.",
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/feature_flags_f536371cce.jpg',
     },
     overview: {
         title: 'Safely roll out features to specific users or groups',
@@ -110,7 +111,7 @@ export const featureFlags = {
             description: (
                 <>
                     JSON payloads let you change text, visuals, or entire blocks of code directly from within PostHog –
-                    no code deployments needed with <code>getFeatureFlagPayload()</code> – or server-side with{' '}
+                    no code deployments needed with <code>getFeatureFlagResult()</code> – or server-side with{' '}
                     <Link
                         to="/docs/feature-flags/remote-config"
                         className="font-bold underline"
@@ -146,7 +147,7 @@ export const featureFlags = {
                         <CodeBlock
                             code={`posthog.onFeatureFlags(function () {
   if (posthog.isFeatureEnabled('headline-change')) {
-    const swapText = posthog.getFeatureFlagPayload('headline-change');
+    const swapText = posthog.getFeatureFlagResult('headline-change')?.payload;
     document.querySelector('h1').textContent = swapText.title;
     document.querySelector('h2').textContent = swapText.subtitle;
   }

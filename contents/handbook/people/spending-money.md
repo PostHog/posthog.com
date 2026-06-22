@@ -111,7 +111,9 @@ Joining an offsite? _Only use the offsite budget_, not your User Limit - it help
 - What if I'm driving for work-related purposes?
   - You can claim a mileage reimbursement through Brex. **Do not** separately expense fuel.
 - What if I accidentally used the company card for a personal expense?
-  - Login to Brex > find the charge > click on 'Repay' > Repay to the bank account details provided in [our banking runbook](https://github.com/PostHog/company-internal/blob/37179f74a66e8b779f8e6f116172511709646157/finance/banking.md)
+  - Login to Brex > find the charge > click on 'Repay'.
+    - **US and Canada:** Brex's auto repay function works, so it'll pull the money from your connected bank account for you.
+    - **International:** auto repay isn't available, so the 'Repay' button only tracks the expense. You need to manually transfer the amount **from your personal bank account to PostHog's bank account**, using the details provided in [our banking runbook](https://github.com/PostHog/company-internal/blob/37179f74a66e8b779f8e6f116172511709646157/finance/banking.md).
   - For Revolut charges, repay to the bank account details provided in [our banking runbook](https://github.com/PostHog/company-internal/blob/37179f74a66e8b779f8e6f116172511709646157/finance/banking.md#repayments-to-revolut)
 - How do I get access to WeWork?
   - We have a company All Access account - ask [Kendal](https://posthog.com/community/profiles/28628) in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ).

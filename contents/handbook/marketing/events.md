@@ -98,6 +98,8 @@ Our brand is a reflection of us and [how we’re experienced by others](/blog/br
 
 Community events are better when organizers share what happened, what you learned, and any follow-up actions. [We value feedback](/handbook/people/feedback) and expect the same from event organizers. In addition to what you learned and feedback from attendees, we ask that you share any photos, videos, quotes, data points with our team.
 
+PostHog team members who attended or presented at an event can share their feedback directly through our [event feedback form](/events-feedback-form).
+
 ## Sponsoring external events
 
 We often get invited to sponsor events - these range in size, location, and audience. We rarely say yes.  For these to be a worthwhile endeavor, the sponsorship should be a win-win primarily for the end user and secondarily for us. Hence, it's important that the audience, content, format, and ethos to all align. Even if we don't sponsor financially, we encourage team members to speak at events and we can support with merch. Ask in the [#team-irl-events](https://posthog.slack.com/archives/C0AB78YBCNA) channel.
