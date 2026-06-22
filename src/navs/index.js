@@ -2867,6 +2867,10 @@ export const docsMenu = {
                                     url: '/docs/model-context-protocol/faq',
                                 },
                                 {
+                                    name: 'Enterprise auth (ID-JAG)',
+                                    url: '/docs/model-context-protocol/enterprise-managed-authorization',
+                                },
+                                {
                                     name: 'Code editors',
                                 },
                                 {
@@ -3178,6 +3182,10 @@ export const docsMenu = {
                         {
                             name: 'SSO, SAML, & SCIM',
                             url: '/docs/settings/sso',
+                        },
+                        {
+                            name: 'ID-JAG (XAA)',
+                            url: '/docs/settings/id-jag',
                         },
                         {
                             name: 'Content Security Policy tracking',
