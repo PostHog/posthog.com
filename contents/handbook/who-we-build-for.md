@@ -12,7 +12,7 @@ AKA our [ideal customer profile](/newsletter/ideal-customer-profile-framework).
 
 We build for the people building products in **AI-first software teams at any scale**. 
 
-We want to be the first tool that technical founders add to their product.
+We want to be the first tool that technical founders go to when they start building their product.
 
 | &nbsp; | AI-first software teams |
 | --- | --- |
