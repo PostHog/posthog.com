@@ -11,7 +11,7 @@ features:
   featureFlags: true
   groupAnalytics: true
   surveys: false
-  llmAnalytics: true
+  aiObservability: true
   errorTracking: true
 ---
 
@@ -280,6 +280,37 @@ posthog.set_socket_options([
 ```
 
 Pass `None` to `set_socket_options()` to reset to default behavior.
+
+## Filtering or modifying events before sending
+
+Use `before_send` to modify or drop events before they are queued for delivery. Return the modified event dictionary to send it, or `None` to drop it.
+
+```python
+from typing import Any
+
+import posthog
+
+
+def scrub_pii(event: dict[str, Any]) -> dict[str, Any] | None:
+    properties = event.get("properties", {})
+
+    if "email" in properties:
+        email = properties["email"]
+        properties["email"] = f"***@{email.split('@', 1)[1]}" if "@" in email else "***"
+
+    if event.get("event") == "test_event":
+        return None
+
+    return event
+
+
+client = posthog.Client(
+    "<ph_project_api_key>",
+    before_send=scrub_pii,
+)
+```
+
+If your callback raises an exception, the SDK logs the error and continues with the original unmodified event.
 
 ## Historical migrations
 

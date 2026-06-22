@@ -1,0 +1,30 @@
+---
+title: Android Surveys installation
+platformLogo: android
+tableOfContents: []
+---
+
+<!--
+This page imports shared onboarding content from the main PostHog repo.
+Source: https://github.com/PostHog/posthog/blob/master/docs/onboarding/surveys/android.tsx
+See the docs runbook for more info: https://posthog.com/handbook/docs-and-wizard/onboarding-docs
+-->
+
+import { AndroidSurveysInstallationWrapper } from "./_snippets/surveys-installation-wrapper.tsx";
+
+> 🚧 **Note:** Mobile surveys for Android is currently in **beta**. We'd love to hear your feedback on betas via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Asurveys%3Alow) or one of our other [support options](/docs/support-options).
+
+<AndroidSurveysInstallationWrapper />
+
+## Supported features
+
+Not all survey features are available on every SDK. See the [SDK feature support matrix](/docs/surveys/sdk-feature-support) for a full comparison.
+
+## Limitations
+
+- HTML descriptions for questions and the thank-you screen render as plain text.
+
+## Troubleshooting
+
+- Update your SDK and run a clean build if you experience issues.
+- If surveys aren't shown, make sure `surveys = true` is set in your config and the survey is enabled in your [project settings](https://us.posthog.com/settings/project-surveys).

@@ -54,7 +54,7 @@ This is an overview for what you should actually be doing with a customer at eac
 
 ### 1. You get a lead
 
-We're constantly experimenting with the best lead types, documented [here](/handbook/growth/sales/lead-scoring). Info on _how_ leads are assigned can be [found here](/handbook/growth/sales/crm#how-we-do-lead-assignments). 
+We're constantly experimenting with the best lead types, documented in [lead scoring](/handbook/growth/sales/lead-scoring). Info on _how_ leads are assigned can be [found here](/handbook/growth/sales/crm#how-we-do-lead-assignments). 
 
 ### 2. You qualify
 
@@ -279,7 +279,7 @@ If the customer isn't super clear on how to articulate the success criteria then
 > Don't be over-reliant on support during the evaluation.  As the AE, you should be highly focused on customers during their evaluation to maximize your chance of success.  We deliberately hire people we know customers will love working with, so now is your time to shine.
 
 1. Guide them on how to set up tracking depending on their app paying attention to common points of friction such as:
-   * [Anonymous vs Identified](/docs/product-analytics/identify#anonymous-and-identified-events) events.
+   * [Anonymous vs Identified](/docs/data/anonymous-vs-identified-events) events.
    * Tracking pageviews in [single page apps](/docs/libraries/js/features#manually-capturing-pageviews-and-pageleaves-in-single-page-apps).
    * Deploying a [reverse proxy](/docs/advanced/proxy).
 2. Guide them on creating insights either based on:

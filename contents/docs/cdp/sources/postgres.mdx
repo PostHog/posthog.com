@@ -9,8 +9,8 @@ availability:
 sourceId: Postgres
 ---
 
-import { CalloutBox } from 'components/Docs/CalloutBox'
-import InboundIpAddresses from '../_snippets/inbound-ip-addresses.mdx'
+import { CalloutBox } from "components/Docs/CalloutBox";
+import InboundIpAddresses from "../_snippets/inbound-ip-addresses.mdx";
 
 The Postgres connector can link your database tables to PostHog. You can use it for regular scheduled syncs, or enable change data capture (CDC) for near real-time syncs that capture inserts, updates, and deletes.
 
@@ -33,7 +33,7 @@ To link Postgres:
      - For password authentication, enter your SSH username and password.
      - For key-based authentication, enter your SSH username, private key, and optional passphrase.
    - **Require TLS through tunnel?** - Whether to require TLS encryption through the SSH tunnel. Enabled by default. Disable if your database does not support TLS.
-5. Optional: enable **Change data capture (CDC)** if your database is prepared for logical replication.
+5. Optional: enable **Change data capture (CDC)** if your database is prepared for logical replication. You can also [enable CDC later](#enabling-cdc-on-an-existing-source) from the source's Configuration tab.
 6. Click **Next**, select the tables to sync, choose the sync method for each table, then click **Link**
 
 The data warehouse then starts syncing your Postgres data. You can see details and progress in the [sources tab](https://app.posthog.com/data-management/sources).
@@ -98,7 +98,7 @@ CDC relies on PostgreSQL logical replication and a replication slot. If PostHog 
 
 PostHog's Postgres CDC implementation uses PostgreSQL logical replication with the built-in `pgoutput` plugin.
 
-When you create a CDC source:
+When you enable CDC on a source (either during creation or afterward):
 
 1. PostHog creates a replication slot for the source database.
 2. In PostHog-managed mode, PostHog creates the publication and adds selected CDC tables to it.
@@ -292,6 +292,56 @@ ALTER PUBLICATION "posthog_pub" ADD TABLE "analytics"."new_table";
 
 Avoid putting unrelated tables in the publication. PostHog filters out changes for tables that are not active CDC schemas, but the database still has to decode and send those changes.
 
+## Managing CDC after source creation
+
+You can enable, disable, or adjust CDC settings on an existing Postgres source from the **Configuration** tab without recreating the source.
+
+### Enabling CDC on an existing source
+
+To enable CDC on a source that was created without it:
+
+1. Go to the [sources tab](https://app.posthog.com/data-management/sources) and click your Postgres source.
+2. Open the **Configuration** tab and scroll to the **Change data capture (CDC)** section.
+3. Choose a management mode:
+   - **PostHog-managed** - PostHog creates and manages both the replication slot and publication.
+   - **Self-managed** - You create the publication yourself. PostHog creates and manages the replication slot.
+4. Click **Check database prerequisites** to verify your database is ready.
+5. Click **Enable CDC** (PostHog-managed) or **Set up & enable CDC** (self-managed).
+6. After enabling, go to the **Schemas** tab and switch individual tables to the CDC sync type.
+
+<CalloutBox icon="IconInfo" title="Schemas don't switch automatically" type="fyi">
+
+Enabling CDC on a source provisions the replication slot and publication, but doesn't change how any table syncs. You must switch each table to the CDC sync type on the Schemas tab after enabling.
+
+</CalloutBox>
+
+### Disabling CDC
+
+To disable CDC on a source, open the **Configuration** tab and click **Disable CDC**.
+
+Disabling CDC:
+
+- Cancels running CDC extraction workflows for that source.
+- Drops the replication slot (and publication in PostHog-managed mode) on your source database.
+- Soft-deletes any `_cdc` companion history tables.
+- Clears the sync type on all CDC schemas and pauses them. You must pick a new sync strategy (incremental, append, or full refresh) for each schema before syncing resumes.
+
+<CalloutBox icon="IconWarning" title="Disabling CDC causes data loss" type="caution">
+
+Changes that occur while CDC is disabled are not captured. If you re-enable CDC later, it starts from the current WAL position — not from where it left off. Any schemas that were using CDC require a full resync to recover.
+
+</CalloutBox>
+
+### Updating CDC settings
+
+While CDC is enabled, you can edit the following settings from the Configuration tab without disabling CDC:
+
+- **Automatic slot protection** - Toggle whether PostHog drops the replication slot when WAL lag exceeds the critical threshold.
+- **WAL lag warning threshold** - The lag level (in MB) that triggers a warning. Default is `1024 MB`.
+- **WAL lag critical threshold** - The lag level (in MB) that triggers slot protection. Default is `10240 MB`. Must be greater than the warning threshold.
+
+To change the management mode (PostHog-managed vs. self-managed) or slot/publication names, disable CDC and re-enable it with the new settings.
+
 ## WAL lag protection
 
 Replication slots retain WAL until the consumer advances the slot. If PostHog stops consuming changes, retained WAL can grow.
@@ -301,7 +351,7 @@ PostHog stores two lag thresholds on CDC sources:
 - Warning threshold: `1024 MB` by default
 - Critical threshold: `10240 MB` by default
 
-For PostHog-managed sources, **automatic slot protection** is enabled by default. If lag exceeds the critical threshold, PostHog attempts to drop the replication slot and publication, then marks the source as errored. This protects your source database from unbounded WAL growth, but it means you must recreate or resync the CDC source after fixing the issue.
+For PostHog-managed sources, **automatic slot protection** is enabled by default. If lag exceeds the critical threshold, PostHog attempts to drop the replication slot and publication, then marks the source as errored. This protects your source database from unbounded WAL growth, but it means you must re-enable CDC or resync after fixing the issue. You can [adjust both thresholds](#updating-cdc-settings) from the Configuration tab.
 
 For self-managed sources, PostHog does not drop the slot or publication. It marks the source as errored at the critical threshold, but you remain responsible for cleanup.
 
@@ -326,7 +376,7 @@ CDC is powerful, but it changes how your production database retains WAL. Keep t
 - CDC captures row changes, not a complete history before the initial snapshot.
 - PostgreSQL logical replication doesn't send DDL as normal row changes. Schema changes may require a full resync, especially destructive changes like dropping or changing column types.
 - Large `TOAST`ed values can be omitted from some update messages when they are unchanged. Validate CDC output carefully if your tables include very large `text`, `jsonb`, or `bytea` columns.
-- Disabling a table removes it from the publication in PostHog-managed mode. Changes made while disabled are not recoverable from the slot.
+- Disabling a table removes it from the publication in PostHog-managed mode. Changes made while disabled are not recoverable from the slot. [Disabling CDC entirely](#disabling-cdc) drops the slot and requires a full resync if re-enabled.
 - If a publication does not include a selected table, PostHog won't receive changes for that table.
 - If a table is truncated, PostHog triggers a new snapshot instead of replaying the truncate as individual deletes.
 
@@ -353,6 +403,39 @@ This happens in self-managed mode when PostHog can't find the publication name y
 
 ### Source is errored because of WAL lag
 
-Check the slot lag query above. If PostHog-managed slot protection dropped the slot, create a new CDC source or run a full resync after fixing the underlying issue. If you're in self-managed mode, your DBA must decide whether to keep, advance, or drop the slot.
+Check the slot lag query above. If PostHog-managed slot protection dropped the slot, [disable and re-enable CDC](#managing-cdc-after-source-creation) or run a full resync after fixing the underlying issue. If you're in self-managed mode, your DBA must decide whether to keep, advance, or drop the slot.
+
+### `materialized view has not been populated`
+
+This error occurs when you try to sync a materialized view that was created with `WITH NO DATA` and has never been refreshed. PostgreSQL can't read from an unpopulated materialized view.
+
+To fix this, run the following command in your PostgreSQL database:
+
+```sql
+REFRESH MATERIALIZED VIEW "your_view_name";
+```
+
+After refreshing, re-enable the sync in PostHog.
+
+### `exceeded the compute time quota`
+
+This error occurs with serverless Postgres providers like Neon when the account or project has exceeded its compute-time quota. The provider suspends the database until the quota resets at the next billing period or the plan is upgraded.
+
+To fix this, upgrade your provider's plan or wait for the quota to reset, then re-enable the sync in PostHog.
+
+### `cannot call jsonb_each on a non-object`
+
+This error occurs when syncing a view or materialized view whose definition calls `jsonb_each()` or `jsonb_each_text()` on a JSONB column that contains non-object values (such as arrays, scalars, or `null`) for at least one row. PostgreSQL evaluates the view at fetch time, and the `jsonb_each()` function fails on non-object values.
+
+To fix this, update the view definition in your database to guard the `jsonb_each()` call:
+
+```sql
+-- Only process rows where the column is a JSON object
+SELECT key, value
+FROM jsonb_each(your_column)
+WHERE jsonb_typeof(your_column) = 'object'
+```
+
+Alternatively, remove the problematic view from your sync selection in PostHog.
 
 > **Looking for an example of the Postgres source?** Check out our tutorial where we [connect and query Supabase data](/tutorials/supabase-query).

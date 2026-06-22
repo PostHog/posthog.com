@@ -26,3 +26,19 @@ Once the syncs are complete, you can start using Temporal.io data in PostHog.
 ## Configuration
 
 <SourceParameters />
+
+## Troubleshooting
+
+If your Temporal.io client certificate is expired, revoked, or no longer trusted by your namespace, syncs pause automatically and display an error message. Here are common TLS certificate errors and how to fix them:
+
+- **UnknownCA** - Your client certificate isn't signed by a certificate authority the namespace trusts. This usually means the namespace's CA certificates were rotated. Update the source with a client certificate and key signed by the current CA.
+
+- **CertificateExpired** - Your client certificate has expired. Update the source with a renewed client certificate and key.
+
+- **CertificateRevoked** - Your client certificate has been revoked. Update the source with a new client certificate and key.
+
+- **BadCertificate** / **CertificateUnknown** - Temporal rejected your client certificate. Update the source with a valid client certificate and key.
+
+- **Invalid peer certificate** - The Temporal server's certificate could not be verified. Check that the host and port point at your Temporal namespace's gRPC endpoint.
+
+To resolve these errors, go to the [sources tab](https://app.posthog.com/data-management/sources), find your Temporal.io source, and update the client certificate and key fields with valid credentials. See the [Temporal certificate docs](https://docs.temporal.io/cloud/certificates) for details on generating new certificates.

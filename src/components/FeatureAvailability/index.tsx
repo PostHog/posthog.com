@@ -4,21 +4,28 @@ import CheckIcon from '../../images/check.svg'
 import XIcon from '../../images/x.svg'
 import Tooltip from 'components/Tooltip'
 
+// A tier is either available (true) / unavailable (false), or available with a
+// caveat described inline (e.g. "Up to 5") so limited tiers don't read as unlimited.
+type TierAvailability = boolean | string
+
 type FeatureAvailabilityProps = {
     availability:
         | {
-              openSource?: boolean
-              free: boolean
-              selfServe: boolean
-              boost?: boolean
-              scale?: boolean
-              enterprise: boolean
+              openSource?: TierAvailability
+              free: TierAvailability
+              selfServe: TierAvailability
+              boost?: TierAvailability
+              scale?: TierAvailability
+              enterprise: TierAvailability
           }
         | boolean
 }
 
-const renderAvailabilityIcon = (isAvailable: boolean) => {
-    return isAvailable ? (
+const renderAvailability = (availability: TierAvailability) => {
+    if (typeof availability === 'string') {
+        return <span className="text-sm font-semibold mr-2">{availability}</span>
+    }
+    return availability ? (
         <img src={CheckIcon} alt="Available" className="h-4 w-4 mr-2" aria-hidden="true" />
     ) : (
         <img src={XIcon} alt="Not available" className="h-4 w-4 mr-2" aria-hidden="true" />
@@ -113,25 +120,21 @@ export function FeatureAvailability({ availability }: FeatureAvailabilityProps):
                     </h5>
                 </div>
 
-                {diffOpenSource ? renderAvailabilityIcon(availability.openSource || false) : null}
+                {diffOpenSource ? renderAvailability(availability.openSource || false) : null}
 
-                {renderAvailabilityIcon(typeof availability === 'boolean' ? availability : availability.free)}
+                {renderAvailability(typeof availability === 'boolean' ? availability : availability.free)}
 
-                {renderAvailabilityIcon(typeof availability === 'boolean' ? availability : availability.selfServe)}
+                {renderAvailability(typeof availability === 'boolean' ? availability : availability.selfServe)}
 
                 {typeof availability === 'object' &&
                     'boost' in availability &&
-                    renderAvailabilityIcon(
-                        typeof availability === 'boolean' ? availability : availability.boost || false
-                    )}
+                    renderAvailability(typeof availability === 'boolean' ? availability : availability.boost || false)}
 
                 {typeof availability === 'object' &&
                     'scale' in availability &&
-                    renderAvailabilityIcon(
-                        typeof availability === 'boolean' ? availability : availability.scale || false
-                    )}
+                    renderAvailability(typeof availability === 'boolean' ? availability : availability.scale || false)}
 
-                {renderAvailabilityIcon(typeof availability === 'boolean' ? availability : availability.enterprise)}
+                {renderAvailability(typeof availability === 'boolean' ? availability : availability.enterprise)}
             </div>
         </div>
     )

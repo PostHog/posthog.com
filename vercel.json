@@ -56,6 +56,19 @@
         { "source": "/posts/:path*", "destination": "/posts/[slug]/index.html" }
     ],
     "redirects": [
+        { "source": "/docs/prompt-management/skills-store", "destination": "/docs/ai-engineering/skills-store", "statusCode": 301 },
+        { "source": "/docs/site-apps", "destination": "/docs/js-snippets" },
+        { "source": "/docs/site-apps/:path*", "destination": "/docs/js-snippets/:path*" },
+        { "source": "/code/download", "destination": "/code#download" },
+        { "source": "/code/download/", "destination": "/code#download" },
+        {
+            "source": "/slack-app",
+            "destination": "/slack"
+        },
+        {
+            "source": "/blog/autoresearch-query-bug",
+            "destination": "/blog/karpathy-autoresearch-query-engine-bug"
+        },
         {
             "source": "/handbook/marketing/how-we-position-and-sell",
             "destination": "/handbook/marketing/positioning",
@@ -98,7 +111,16 @@
         { "source": "/teams/brand-vibes", "destination": "/teams/website" },
         { "source": "/teams/llm-gateway", "destination": "/teams/ai-gateway" },
         { "source": "/teams/llm-analytics", "destination": "/teams/ai-observability" },
+        { "source": "/aio", "destination": "/ai-observability" },
         { "source": "/teams/flags-platform", "destination": "/teams/feature-flags" },
+        {
+            "source": "/teams/signals",
+            "destination": "/teams/self-driving"
+        },
+        {
+            "source": "/teams/posthog-ai",
+            "destination": "/teams/self-driving"
+        },
         { "source": "/tutorials/nps-survey", "destination": "/templates/nps-survey" },
         { "source": "/questions/topics/:path*", "destination": "/questions/topic/:path*" },
         { "source": "/docs/sdks/:path*", "destination": "/docs/libraries/:path*" },
@@ -108,6 +130,8 @@
         { "source": "/docs/user-guides/:path*", "destination": "/manual/:path*" },
         { "source": "/docs/integrate/(client|server)/:path*", "destination": "/docs/integrate/:path*" },
         { "source": "/docs/session-recording/:path*", "destination": "/docs/session-replay/:path*" },
+        { "source": "/docs/tracing", "destination": "/docs/distributed-tracing", "statusCode": 301 },
+        { "source": "/docs/tracing/:path*", "destination": "/docs/distributed-tracing/:path*", "statusCode": 301 },
         {
             "source": "/docs/posthog-code/inbox/triage",
             "destination": "/docs/posthog-code/inbox/implementation",
@@ -151,6 +175,14 @@
         { "source": "/docs/integrations/segment-integration", "destination": "/docs/libraries/segment" },
         { "source": "/docs/integrations/sentry-integration", "destination": "/docs/error-tracking" },
         { "source": "/docs/integrations/slack", "destination": "/docs/libraries/slack" },
+        {
+            "source": "/docs/posthog-code/slack",
+            "destination": "/docs/slack"
+        },
+        {
+            "source": "/docs/slack-app",
+            "destination": "/docs/slack"
+        },
         { "source": "/handbook/company/structure", "destination": "/handbook/people/team-structure/why-small-teams" },
         { "source": "/handbook/people/team", "destination": "/people" },
         { "source": "/handbook/company/team", "destination": "/people" },
@@ -334,6 +366,12 @@
             "source": "/handbook/brand/philosophy",
             "destination": "/handbook/brand/overview"
         },
+        { "source": "/handbook/brand/email-comms", "destination": "/handbook/marketing/email-comms" },
+        { "source": "/handbook/brand/in-app", "destination": "/handbook/marketing/in-app" },
+        { "source": "/handbook/brand/partners", "destination": "/handbook/marketing/partners" },
+        { "source": "/handbook/brand/press", "destination": "/handbook/marketing/press" },
+        { "source": "/handbook/brand/startups", "destination": "/handbook/marketing/startups" },
+        { "source": "/handbook/brand/testimonials", "destination": "/handbook/marketing/testimonials" },
         { "source": "/product-features/self-hosted", "destination": "/product-os" },
         { "source": "/product-features/event-autocapture", "destination": "/product-os" },
         { "source": "/product-features/trends", "destination": "/product-analytics" },
@@ -792,6 +830,7 @@
             "destination": "/docs/libraries/google-tag-manager"
         },
         { "source": "/docs/experiments/manual", "destination": "/docs/experiments/start-here" },
+        { "source": "/docs/experiments/new-experimentation-engine", "destination": "/docs/experiments/start-here" },
         { "source": "/docs/experiments/under-the-hood", "destination": "/docs/experiments/experiment-significance" },
         { "source": "/docs/experiments/significance", "destination": "/docs/experiments/experiment-significance" },
         { "source": "/docs/experiments/statistics", "destination": "/docs/experiments/statistics-bayesian" },
@@ -872,6 +911,14 @@
         { "source": "/product-os/features", "destination": "/product-os" },
         { "source": "/docs/integrate/webhooks", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/roadmap/changelog", "destination": "/changelog" },
+        {
+            "source": "/blog/posthog-insforge",
+            "destination": "/tutorials/how-to-connect-posthog-and-insforge"
+        },
+        {
+            "source": "/docs/product-analytics/how-to-connect-posthog-and-insforge",
+            "destination": "/tutorials/how-to-connect-posthog-and-insforge"
+        },
         { "source": "/blog/posthog-changelog", "destination": "/changelog" },
         { "source": "/roadmap/changelog/2023", "destination": "/changelog" },
         { "source": "/changelog/2025", "destination": "/changelog" },
@@ -1817,20 +1864,28 @@
             "destination": "/docs/ai-observability/installation/manual-capture"
         },
         {
+            "source": "/docs/ai-evals/evaluations",
+            "destination": "/docs/ai-evals"
+        },
+        {
+            "source": "/docs/prompt-management/prompts",
+            "destination": "/docs/prompt-management"
+        },
+        {
             "source": "/docs/llm-analytics/evaluations",
-            "destination": "/docs/ai-evals/evaluations"
+            "destination": "/docs/ai-evals"
         },
         {
             "source": "/docs/llm-analytics/trace-reviews",
-            "destination": "/docs/ai-evals/trace-reviews"
+            "destination": "/docs/ai-observability/trace-reviews"
         },
         {
             "source": "/docs/llm-analytics/prompts",
-            "destination": "/docs/prompt-management/prompts"
+            "destination": "/docs/prompt-management"
         },
         {
             "source": "/docs/llm-analytics/skills-store",
-            "destination": "/docs/prompt-management/skills-store"
+            "destination": "/docs/ai-engineering/skills-store"
         },
         {
             "source": "/docs/llm-analytics/:path*",
@@ -1839,6 +1894,10 @@
         {
             "source": "/docs/llm-analytics",
             "destination": "/docs/ai-observability"
+        },
+        {
+            "source": "/llm-analytics",
+            "destination": "/ai-observability"
         },
         {
             "source": "/why",
@@ -1864,9 +1923,11 @@
         { "source": "/pricing/philosophy", "destination": "/pricing#philosophy" },
         { "source": "/handbook/brand/brand-and-vibes", "destination": "/handbook/brand/overview" },
         { "source": "/handbook/brand/process", "destination": "/handbook/engineering/product-design-process" },
-        { "source": "/teams/max-ai", "destination": "/teams/posthog-ai" },
-        { "source": "/teams/twig", "destination": "/teams/posthog-code" },
-        { "source": "/teams/twig/:path*", "destination": "/teams/posthog-code/:path*" },
+        { "source": "/teams/max-ai", "destination": "/teams/self-driving" },
+        {
+            "source": "/teams/twig",
+            "destination": "/teams/posthog-code"
+        },
         {
             "source": "/docs/max-ai",
             "destination": "/docs/posthog-ai"
@@ -1927,7 +1988,6 @@
         },
         { "source": "/professional-services", "destination": "/services" },
         { "source": "/posthug", "destination": "/" },
-        { "source": "/mcp", "destination": "/docs/model-context-protocol" },
         {
             "source": "/handbook/strategy/brand",
             "destination": "/handbook/brand/foundations"

@@ -3,6 +3,7 @@ import ZoomHover from 'components/ZoomHover'
 import React, { useEffect, useState } from 'react'
 import * as NewIcons from '@posthog/icons'
 import * as OSIcons from 'components/OSIcons'
+import { getDarkClassForLogo } from 'constants/logos'
 
 interface IItem {
     label: string | React.ReactNode
@@ -57,7 +58,12 @@ export const ListItem = ({
                     className="group flex w-full justify-between items-center space-x-2 rounded border border-b-4 border-transparent !text-inherit hover:!text-inherit"
                 >
                     <span className="flex items-center space-x-2">
-                        {image && <img className="icon size-8 rounded-sm" src={image} />}
+                        {image && (
+                            <img
+                                className={`icon size-8 rounded-sm ${getDarkClassForLogo(image)}`}
+                                src={image}
+                            />
+                        )}
                         {Icon && <Icon className={`size-8 ${iconColor ? `text-${iconColor}` : ``} shrink-0`} />}
 
                         <span className="grid">

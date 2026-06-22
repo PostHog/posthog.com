@@ -22,21 +22,21 @@ By including session IDs in your LLM events, you can:
 
 There are two ways to pass session IDs from your frontend to your backend:
 
-1. **Automatic header injection** - posthog-js automatically adds headers to your API requests
+1. **Automatic header injection** - `posthog-js` automatically adds headers to your API requests
 2. **Manual approach** - explicitly pass the session ID in your request body
 
 ### Option 1: Automatic header injection (recommended)
 
-Configure posthog-js to automatically inject session headers into requests to your backend:
+Configure `posthog-js` to automatically inject session headers into requests to your backend:
 
 ```javascript
 posthog.init('<ph_project_token>', {
   api_host: '<ph_client_api_host>',
-  __add_tracing_headers: ['api.your-app.com']  // Your backend hostname(s)
+  tracing_headers: ['api.your-app.com']  // Your backend hostname(s)
 })
 ```
 
-This automatically adds `X-POSTHOG-SESSION-ID` (and `X-POSTHOG-DISTINCT-ID`) headers to all `fetch` and `XMLHttpRequest` calls to the specified hostnames.
+Use hostnames only, without the protocol or path. This automatically adds `X-POSTHOG-SESSION-ID` and `X-POSTHOG-DISTINCT-ID` headers to all `fetch` and `XMLHttpRequest` calls to the specified hostnames.
 
 On your backend, read the header and include it in your LLM tracking:
 

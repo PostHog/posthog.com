@@ -925,7 +925,7 @@ export const DataWarehouse = () => {
     )
 }
 
-export const LLMAnalytics = () => {
+export const aiObservability = () => {
     const { enterpriseMode } = useLayoutData()
 
     const BrainIcon = () => (

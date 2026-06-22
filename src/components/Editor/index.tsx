@@ -93,6 +93,8 @@ interface EditorProps {
     extraMenuOptions?: React.ReactNode
     articleRef?: React.RefObject<HTMLDivElement>
     hideToolbar?: boolean
+    /** Grey out the text-formatting buttons (undo/redo/bold/italic/strikethrough/align) for read-only content */
+    disableFormatting?: boolean
     scrollable?: boolean
 }
 
@@ -235,6 +237,7 @@ export function Editor({
     extraMenuOptions,
     articleRef,
     hideToolbar = false,
+    disableFormatting = false,
     scrollable = true,
     ...other
 }: EditorProps) {
@@ -272,7 +275,7 @@ export function Editor({
             hideLabel: true,
             onClick: actionButtons?.undo?.onClick,
             active: actionButtons?.undo?.active,
-            disabled: actionButtons?.undo?.disabled,
+            disabled: disableFormatting || actionButtons?.undo?.disabled,
         },
         {
             type: 'button',
@@ -281,7 +284,7 @@ export function Editor({
             hideLabel: true,
             onClick: actionButtons?.redo?.onClick,
             active: actionButtons?.redo?.active,
-            disabled: actionButtons?.redo?.disabled,
+            disabled: disableFormatting || actionButtons?.redo?.disabled,
         },
         { type: 'separator', className: 'hidden @2xl:block' },
         {
@@ -310,7 +313,7 @@ export function Editor({
             hideLabel: true,
             onClick: actionButtons?.bold?.onClick,
             active: actionButtons?.bold?.active,
-            disabled: actionButtons?.bold?.disabled,
+            disabled: disableFormatting || actionButtons?.bold?.disabled,
         },
         {
             type: 'button',
@@ -319,7 +322,7 @@ export function Editor({
             hideLabel: true,
             onClick: actionButtons?.italic?.onClick,
             active: actionButtons?.italic?.active,
-            disabled: actionButtons?.italic?.disabled,
+            disabled: disableFormatting || actionButtons?.italic?.disabled,
         },
         {
             type: 'button',
@@ -328,7 +331,7 @@ export function Editor({
             hideLabel: true,
             onClick: actionButtons?.strikethrough?.onClick,
             active: actionButtons?.strikethrough?.active,
-            disabled: actionButtons?.strikethrough?.disabled,
+            disabled: disableFormatting || actionButtons?.strikethrough?.disabled,
             className: 'hidden @md:inline-flex',
         },
         { type: 'separator', className: 'hidden @3xl:block' },
@@ -356,7 +359,7 @@ export function Editor({
             onClick: actionButtons?.leftAlign?.onClick,
             active: actionButtons?.leftAlign?.active,
             hideLabel: true,
-            disabled: actionButtons?.leftAlign?.disabled,
+            disabled: disableFormatting || actionButtons?.leftAlign?.disabled,
             className: 'hidden @lg:inline-flex',
         },
         {
@@ -366,7 +369,7 @@ export function Editor({
             onClick: actionButtons?.centerAlign?.onClick,
             active: actionButtons?.centerAlign?.active,
             hideLabel: true,
-            disabled: actionButtons?.centerAlign?.disabled,
+            disabled: disableFormatting || actionButtons?.centerAlign?.disabled,
             className: 'hidden @lg:inline-flex',
         },
         {
@@ -376,7 +379,7 @@ export function Editor({
             onClick: actionButtons?.rightAlign?.onClick,
             active: actionButtons?.rightAlign?.active,
             hideLabel: true,
-            disabled: actionButtons?.rightAlign?.disabled,
+            disabled: disableFormatting || actionButtons?.rightAlign?.disabled,
             className: 'hidden @lg:inline-flex',
         },
 

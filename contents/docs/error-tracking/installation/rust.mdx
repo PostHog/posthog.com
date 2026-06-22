@@ -1,0 +1,127 @@
+---
+title: Rust error tracking installation
+platformLogo: rust
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<Steps>
+
+<Step title="Install the Rust SDK" badge="required">
+
+Install the [PostHog Rust SDK](/docs/libraries/rust):
+
+```bash
+cargo add posthog-rs
+```
+
+Error tracking ships enabled by default through the `error-tracking` feature. If you build with `default-features = false`, add it back explicitly:
+
+```toml
+[dependencies]
+posthog-rs = { version = "*", default-features = false, features = ["error-tracking"] }
+```
+
+<CalloutBox icon="IconInfo" title="Source context not yet supported" type="fyi">
+
+The Rust SDK resolves stack traces in-process, so captured frames include file names, line numbers, and function names without any symbol uploads. Source context (displaying the surrounding lines of code in the error tracking UI) is not yet supported.
+
+</CalloutBox>
+
+</Step>
+
+<Step title="Initialize the client" badge="required">
+
+```rust
+let client = posthog_rs::client((
+    "<ph_project_token>",
+    "<ph_client_api_host>",
+)).await;
+```
+
+The default client is async (Tokio). Building with `default-features = false` gives you a blocking client instead — the same methods without `.await`.
+
+</Step>
+
+<Step title="Capture exceptions" badge="required">
+
+`capture_exception` works with any `std::error::Error` and captures it personlessly — the exception type, message, and full `source()` chain are sent, with a stack trace recorded at the call site:
+
+```rust
+let error = std::io::Error::new(std::io::ErrorKind::Other, "connection refused");
+
+client.capture_exception(&error).await.unwrap();
+```
+
+To associate the exception with a person or attach context, use `capture_exception_with`:
+
+```rust
+use posthog_rs::CaptureExceptionOptions;
+
+client.capture_exception_with(
+    &error,
+    CaptureExceptionOptions::new()
+        .distinct_id("user_distinct_id")
+        .property("route", "/checkout").unwrap()
+        .group("company", "company_id")
+        .fingerprint("my-custom-fingerprint")
+        .level("warning"),
+).await.unwrap();
+```
+
+All options are optional: `distinct_id` links a person, `property` and `group` add context, `fingerprint` overrides [issue grouping](/docs/error-tracking/grouping-issues), and `level` sets the severity (defaults to `error`).
+
+If you use `anyhow`, pass the underlying error with `err.as_ref()`:
+
+```rust
+let result: anyhow::Result<()> = do_work();
+if let Err(err) = result {
+    client.capture_exception(err.as_ref()).await.unwrap();
+}
+```
+
+</Step>
+
+<Step title="Configure stack traces" badge="optional">
+
+Stack trace capture and in-app frame classification are configured per client through `ErrorTrackingOptionsBuilder`:
+
+```rust
+use posthog_rs::{ClientOptionsBuilder, ErrorTrackingOptionsBuilder};
+
+let options = ClientOptionsBuilder::default()
+    .api_key("<ph_project_token>".to_string())
+    .host("<ph_client_api_host>")
+    .error_tracking(
+        ErrorTrackingOptionsBuilder::default()
+            // Skip the stack walk entirely, e.g. for high-volume handled errors
+            .capture_stacktrace(false)
+            // Mark frames from a crate as library code rather than in-app
+            .in_app_exclude_paths(vec!["other_crate::".to_string()])
+            .build()
+            .unwrap(),
+    )
+    .build()
+    .unwrap();
+
+let client = posthog_rs::client(options).await;
+```
+
+In-app patterns match both file paths and function symbols, so crate prefixes like `"my_crate::"` and path fragments like `"/service/"` both work. By default, frames from the cargo registry, the standard library, and vendored or target paths are classified as library code.
+
+</Step>
+
+<Step title="Verify error tracking" badge="recommended">
+
+Trigger a test exception to confirm events are being sent to PostHog. You should see it appear in the [error tracking issues view](https://app.posthog.com/error_tracking).
+
+```rust
+let error = std::io::Error::new(std::io::ErrorKind::Other, "This is a test exception from Rust");
+client.capture_exception(&error).await.unwrap();
+```
+
+</Step>
+
+</Steps>

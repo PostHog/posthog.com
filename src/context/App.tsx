@@ -34,6 +34,10 @@ export interface MenuItem {
     platformLogo?: string
     showChildrenIcons?: boolean
     sortChildrenAlpha?: boolean
+    // When set, this item (and its children) is only shown to users for whom the
+    // named PostHog feature flag is enabled. Gating is client-side only — see
+    // src/hooks/useActiveFeatureFlags.ts and note the static-site caveat.
+    featureFlag?: string
     children?: MenuItem[]
 }
 
@@ -455,6 +459,22 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    '/mcp': {
+        size: {
+            min: {
+                width: 700,
+                height: 500,
+            },
+            max: {
+                width: 900,
+                height: 1000,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
     '/tooling': {
         size: {
             min: {
@@ -472,6 +492,22 @@ const appSettings: AppSettings = {
         },
     },
     '/code': {
+        size: {
+            min: {
+                width: 700,
+                height: 500,
+            },
+            max: {
+                width: 900,
+                height: 1000,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
+    '/replay-vision': {
         size: {
             min: {
                 width: 700,
@@ -606,6 +642,23 @@ const appSettings: AppSettings = {
         },
         modal: {
             type: 'standard',
+        },
+    },
+    '/merch/orders': {
+        size: {
+            min: {
+                width: 470,
+                height: 299,
+            },
+            max: {
+                width: 470,
+                height: 299,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
         },
     },
     '/services': {

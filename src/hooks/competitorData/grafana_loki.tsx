@@ -14,7 +14,7 @@ export const grafana_loki = {
         error_tracking: {
             available: true,
         },
-        llm_analytics: {
+        ai_observability: {
             available: false,
         },
         logs: {

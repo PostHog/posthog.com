@@ -64,10 +64,9 @@ function BAAGenerator() {
                         app.
                     </p>
                     <p className="text-sm">
-                        Important: You'll need to be subscribed to our{' '}
-                        <Link to="/platform-packages">Boost</Link>,{' '}
-                        <Link to="/platform-packages">Scale</Link>, or{' '}
-                        <Link to="/platform-packages">Enterprise</Link> package to get a BAA.
+                        Important: You'll need to be subscribed to our <Link to="/platform-packages">Boost</Link>,{' '}
+                        <Link to="/platform-packages">Scale</Link>, or <Link to="/platform-packages">Enterprise</Link>{' '}
+                        package to get a BAA.
                     </p>
 
                     <Link
@@ -162,8 +161,8 @@ function BAAGenerator() {
                         </p>
                         <p>
                             This BAA is only available to customers with the applicable Platform Package, as defined
-                            below, and is effective only if the Customer has the required package in place at the time of
-                            signing. By signing this BAA, the Customer represents and warrants that they meet the
+                            below, and is effective only if the Customer has the required package in place at the time
+                            of signing. By signing this BAA, the Customer represents and warrants that they meet the
                             requirements of and have entered into the applicable Platform Package. This BAA shall be
                             null, void, and of no effect if the Customer does not meet those requirements at the time of
                             signing, regardless of whether this BAA has been electronically executed.

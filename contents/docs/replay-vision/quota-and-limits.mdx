@@ -1,0 +1,87 @@
+---
+title: Quota and limits
+---
+
+import { ProductScreenshot } from "components/ProductScreenshot";
+
+<CalloutBox icon="IconInfo" title="Replay Vision is in closed beta" type="warning">
+
+Not yet available to everyone – <a href="/replay-vision">join the waitlist</a> to get updates.
+
+</CalloutBox>
+
+Replay Vision usage is metered per organization, on a monthly cycle. This page covers what the cap is, what counts against it, and what to do when you're approaching it.
+
+<CalloutBox type="caution" title="Closed beta quota will change">
+
+The current cap of 3,000 observations per organization per month is a placeholder for the beta period and will change before general availability. The in-app usage meter is the authoritative current number for your organization.
+
+</CalloutBox>
+
+## Monthly observation cap
+
+During the closed beta, each organization gets **3,000 observations per calendar month**. The counter resets at the start of each calendar month (UTC).
+
+The current month's usage is shown in the Replay Vision app:
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/quota_meter_ddcc762a43.png"
+  alt="The monthly usage meter: observations used this month against the organization's cap"
+  classes="rounded"
+/>
+
+You can also fetch it programmatically – see the `vision-quota-retrieve` MCP tool.
+
+## What counts against the cap
+
+| Observation outcome | Counts against cap? |
+| --- | --- |
+| **Succeeded** | Yes |
+| **Pending** | Yes |
+| **Running** | Yes |
+| **Failed** | No |
+| **Ineligible** | No |
+
+Pending and running observations count so a burst of concurrent on-demand triggers can't blow past the cap before any of them complete. Once an observation reaches a terminal failed or ineligible state, it stops counting toward the month's usage.
+
+In practice this means: **every observation that produces a `$recording_observed` event uses one unit of quota.** Ineligibles and failures don't consume any.
+
+## What happens when the cap is reached
+
+Both enforcement paths use the same check:
+
+- **Background sweeps** – new observations queued by the automatic schedule are silently skipped. The scanner stays enabled, the sweep keeps running, but no work gets queued until quota frees up (next month, or as in-flight observations resolve to ineligible/failed).
+- **On-demand triggers** – the player action and the `vision-scanners-scan-session` MCP tool return a `402 Payment Required` response with a `quota_limit_exceeded` code.
+
+A scanner that's been silenced by the cap will resume producing observations automatically once usage drops below the cap (e.g. at the start of the next month).
+
+## Sizing scanners against the cap
+
+The scanner editor shows a **projected per-month observation count** for the scanner you're configuring, based on:
+
+- Your project's recent recording volume.
+- The filters you've set.
+- The sampling rate.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/estimate_callout_2d954ec2cb.png"
+  alt="The triggers step of the scanner editor: sampling rate, recording filters, and the estimated per-month impact against the remaining quota"
+  classes="rounded"
+/>
+
+If the projection is uncomfortably close to your remaining cap, the cheapest knobs are:
+
+- **Narrow the filters** – e.g. require a specific URL pattern, exclude bots, restrict to a cohort.
+- **Lower the sampling rate** – samples are random, so a 10% rate gives you a representative slice of matching sessions for one-tenth the volume.
+- **Combine both** – a tight filter on the sessions you care most about, plus 100% sampling, is usually better signal-per-observation than a loose filter with low sampling.
+
+To project a hypothetical scanner *before* creating it (e.g. from a script or agent), use the `vision-scanners-estimate-create` MCP tool. It runs the same projection the editor shows.
+
+## What to do if you're hitting the cap
+
+Try these, in order:
+
+1. **Look at which scanner is consuming the most quota.** The Observations tab makes this easy – a scanner producing thousands of observations a month is probably broader than it needs to be.
+2. **Lower its sampling rate or tighten its filters.** Use the editor's projection to find a setting that gives you enough signal without dominating the cap.
+3. **Disable scanners you're not actively using.** A disabled scanner produces zero new background observations.
+4. **Wait for the cap to reset.** Caps reset at the start of each calendar month in UTC.

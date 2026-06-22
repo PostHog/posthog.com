@@ -106,10 +106,41 @@ When you expand each source, you can see:
 - Enable or disable syncing for that table
 - Synced table name in PostHog
 - Time the table was last synced
+- Rows synced – the number of rows in the synced table. During an active sync, a spinner and live row count display, updating approximately every 5 seconds. Once complete, the final row count appears. Rows being synced are not queryable until the sync completes.
 
 If you add new tables to your source database, click **Pull new schemas** to discover them without waiting for the next sync. This only updates the list of available schemas – it doesn't trigger a data sync.
 
-To sync all enabled schemas at once, click **Sync now**. A confirmation dialog appears before the sync starts. This triggers a new sync for every enabled schema that isn't already syncing, so you don't need to sync schemas one by one.
+To sync all enabled schemas at once, click **Sync all enabled schemas**. A confirmation dialog appears before the sync starts. This triggers a new sync for every enabled schema that isn't already syncing, so you don't need to sync schemas one by one.
+
+### Filtering and sorting schemas
+
+The schemas table supports filtering and sorting to help you find specific schemas in sources with many tables.
+
+You can filter schemas by:
+
+- **Status** - Running, Completed, Error, etc.
+- **Sync method** - Incremental, Full table, CDC, or schemas not yet set up
+- **Frequency** - Filter by a specific sync interval
+
+You can also use the name search and the **Show enabled only** toggle to narrow results further.
+
+All columns in the schemas table are sortable, including schema name, status, frequency, last synced, and rows synced.
+
+### Managing schemas in bulk
+
+Select multiple schemas using the checkboxes in the schemas table to perform bulk actions. The following bulk actions are available:
+
+- **Disable** - Disable syncing for all selected schemas. A confirmation dialog appears if any selected schemas use CDC or webhook sync, since re-enabling them requires a full resync.
+- **Set frequency** - Change the sync frequency for all selected schemas at once. If the selection includes non-CDC schemas, only frequencies of 5 minutes or longer are available.
+- **Sync now** - Trigger an immediate sync for all selected schemas that are enabled and have a sync method configured. Schemas that are disabled or don't have a sync method set up are skipped.
+- **Delete tables and resync** - Delete the synced data in PostHog and re-import it from scratch.
+- **Delete tables from PostHog** - Remove the synced tables from PostHog without affecting the data in the source.
+
+Bulk enable is not available – you must enable schemas individually since each one requires selecting a sync method and configuration.
+
+### Sync frequency
+
+CDC (Change Data Capture) schemas support sync frequencies as low as every 1 minute. All other sync methods (Incremental, Full table, Append only) have a minimum sync frequency of 5 minutes. This restriction is enforced in both the UI and the API.
 
 ### Managing webhook tables
 
@@ -118,6 +149,8 @@ Webhook-synced tables have special behavior when enabling or disabling them:
 - **Disabling a webhook table** - When you turn off syncing for a webhook table, a confirmation dialog warns you that the webhook stops consuming data immediately. Any events sent while the table is disabled are lost.
 
 - **Re-enabling a webhook table** - When you re-enable a previously disabled webhook table, PostHog automatically triggers a full refresh sync. This ensures no data gaps from the period when the webhook was inactive.
+
+- **Enabling a new webhook table** - For sources with provider-side webhook subscriptions (like Stripe), PostHog automatically adds the required events to the webhook when you enable a new table. This requires the appropriate permissions – for example, **Write** on **Webhooks** for Stripe restricted API keys, or an OAuth connection. If automatic sync isn't possible (due to missing permissions or a manually created webhook), PostHog shows a warning banner in the **Webhook** tab listing the events you need to add in your provider's dashboard.
 
 <ProductScreenshot
   imageLight={SettingsLight}

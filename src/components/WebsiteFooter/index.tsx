@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'components/Link'
 import AppStatus from 'components/AppStatus'
+import { useApp } from '../../context/App'
 
 const legalLinks = [
     { label: 'Terms', url: '/terms' },
@@ -11,8 +12,9 @@ const legalLinks = [
 ]
 
 export default function WebsiteFooter(): React.ReactElement {
+    const { websiteMode } = useApp()
     return (
-        <footer className="@container z-40">
+        <footer className={`@container z-40 ${websiteMode ? '' : 'hidden'}`}>
             <div data-scheme="secondary" className="bg-primary border-t border-primary">
                 {/* Bottom bar */}
                 <div className="p-3 @lg:px-8 bg-accent/30 border-t border-primary/10 text-xs">
