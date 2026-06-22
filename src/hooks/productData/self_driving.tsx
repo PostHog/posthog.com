@@ -8,9 +8,9 @@ export const selfDriving = {
     color: 'blue',
     // No category or slug yet: keep this visible on pricing surfaces, not product/app navigation.
     slider: {
-        marks: [4500, 15000, 75000, 150000],
-        min: 4500,
-        max: 150000,
+        marks: [3, 10, 50, 100],
+        min: 3,
+        max: 100,
     },
-    volume: 4500,
+    volume: 3,
 }

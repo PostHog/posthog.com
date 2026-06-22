@@ -105,7 +105,7 @@ export default function FreeTier({ size = 'normal' }: { size?: 'normal' | 'large
             />
             <FreeTierItem
                 name="Self-Driving"
-                allocation="4.5K credits (worth $45)"
+                allocation="3 PRs"
                 icon={<Icons.IconSparkles className={`text-blue size-5 ${size === 'large' && 'size-7'}`} />}
                 size={size}
             />
