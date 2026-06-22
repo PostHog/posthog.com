@@ -25,7 +25,7 @@ We want to be the first tool that technical founders add to their product.
 
 Persona is the job title or role of the person actually using a product in PostHog. 
 
-PostHog's initial adoption inside an ICP should come from an _engineering_ persona most of the time, simply because engineers exist first in startups. The more we appeal to engineers at the earliest stages of their startup's life, the more overall growth we will have. 
+PostHog's initial adoption inside an ICP should come from an _engineering_ persona most of the time, simply because engineers exist first in startups. This persona can include technical founders. The more we appeal to engineers at the earliest stages of their startup's life, the more overall growth we will have. 
 
 > We should in general go _very_ hard on making sure we have excellent coverage of any needs an engineer has in trying to build a product first.
 
