@@ -21,7 +21,7 @@ A self-driving product can prompt itself. PostHog turns your product data into s
 
 Instead of waiting for someone to notice a bug, file a ticket, and assign it, PostHog spots the pattern in your data, drafts a fix, and opens a pull request for you to review.
 
-It runs as a loop. Scouts and signal sources emit signals, signals group into reports, and an agent investigates each report. When it's confident and the report clears the priority threshold you set, it opens a pull request for you to review and merge; otherwise it surfaces the report for your input. PostHog then checks whether the change worked and feeds the result back into the next pass.
+It runs as a loop. Scouts and signal sources emit signals, signals group into reports, and an agent investigates each report. When a report is actionable, PostHog opens a pull request for you to review and merge; when it needs your input, it surfaces the report in your inbox instead. PostHog then checks whether the change worked and feeds the result back into the next pass.
 
 ```mermaid
 %%{init: {'themeVariables': {'fontSize': '18px'}}}%%
@@ -73,7 +73,7 @@ A handful of terms carry most of the meaning. Don't worry if they sound like a f
 - **[Reports](/docs/start-here/reports)** – related signals grouped into one item of work, so you deal with the real problem instead of a noisy stream of findings.
 - **[Inbox](/docs/start-here/inbox)** – where reports and pull requests land for you to review, steer, and merge.
 
-Put together, that's the self-improving loop: scouts and sources emit signals, signals become reports, agents open pull requests for the reports that clear your threshold and ask for input on the rest, and you stay in control from your inbox.
+Put together, that's the self-improving loop: scouts and sources emit signals, signals become reports, agents open pull requests for the actionable reports and ask for input on the rest, and you stay in control from your inbox.
 
 <OSButton variant="primary" asLink to="/docs/start-here/self-improving-loop">
   The self-improving loop

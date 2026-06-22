@@ -2210,10 +2210,6 @@ export const docsMenu = {
                     url: '/docs/start-here/inbox',
                 },
                 {
-                    name: 'Guardrails',
-                    url: '/docs/start-here/guardrails',
-                },
-                {
                     name: 'Resources',
                 },
                 {

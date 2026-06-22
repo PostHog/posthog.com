@@ -53,12 +53,12 @@ An agent investigates every report. It digs into your codebase and your PostHog 
 
 ## Open a pull request, or ask for input
 
-What happens next depends on the report and on a threshold you control, the **auto-create-PR threshold**:
+What happens next depends on whether the report is actionable:
 
-- If the report is actionable and its priority is at or above your threshold, an agent opens a **pull request** for it. The change is built in a sandbox and comes back with your CI and code review attached, like a teammate's PR.
+- If the report is **actionable**, an agent opens a **pull request** for it. The change is built in a sandbox and comes back with your CI and code review attached, like a teammate's PR.
 - Otherwise, the report is **surfaced in your inbox for input**, for example when it needs business context or a choice between valid approaches.
 
-The threshold is set per person, with a team default, so you decide how much the loop does on its own and how much waits for you. Since [pricing](/docs/start-here/pricing) is per pull request, the threshold also controls spend.
+Every actionable report gets a pull request, so the work that reaches you already has a proposed change attached. Since [pricing](/docs/start-here/pricing) is per pull request, that's also what you're billed for.
 
 ## Review and ship
 

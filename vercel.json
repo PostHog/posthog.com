@@ -82,6 +82,7 @@
         { "source": "/docs/self-driving/:path*", "destination": "/docs/start-here/:path*", "statusCode": 301 },
         { "source": "/docs/product-os", "destination": "/docs/start-here", "statusCode": 301 },
         { "source": "/docs/start-here/responders", "destination": "/docs/start-here/inbox", "statusCode": 301 },
+        { "source": "/docs/start-here/guardrails", "destination": "/docs/start-here", "statusCode": 301 },
         {
             "source": "/docs/start-here/autonomy-loop",
             "destination": "/docs/start-here/self-improving-loop",
