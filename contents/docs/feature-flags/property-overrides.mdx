@@ -189,15 +189,20 @@ Other campaign parameters (`gad_source`, `mc_cid`, `dclid`, `gbraid`, `wbraid`, 
 
 #### Including browser and device properties
 
-To include current browser and device properties (like `$browser`, `$os`, `$device_type`) with flag requests, use the `setAllPersonProfilePropertiesAsPersonPropertiesForFlags` customization.
+To include current browser and device properties (like `$browser`, `$os`, `$device_type`) with flag requests, use the `setAllPersonProfilePropertiesAsPersonPropertiesForFlags` customization. Call it inside the `loaded` callback so it runs before the SDK's first flag request and those properties are included from the very first evaluation.
 
 **Using npm:**
 
 ```js
+import posthog from 'posthog-js'
 import { setAllPersonProfilePropertiesAsPersonPropertiesForFlags } from 'posthog-js/lib/src/customizations'
 
-// Call after PostHog is initialized
-setAllPersonProfilePropertiesAsPersonPropertiesForFlags(posthog)
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    loaded: (posthog) => {
+        setAllPersonProfilePropertiesAsPersonPropertiesForFlags(posthog)
+    },
+})
 ```
 
 **Using the snippet:**
@@ -205,7 +210,12 @@ setAllPersonProfilePropertiesAsPersonPropertiesForFlags(posthog)
 ```html
 <script type="text/javascript" src="https://us.i.posthog.com/static/customizations.full.js"></script>
 <script>
-  posthogCustomizations.setAllPersonProfilePropertiesAsPersonPropertiesForFlags(posthog)
+  posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    loaded: function (posthog) {
+      posthogCustomizations.setAllPersonProfilePropertiesAsPersonPropertiesForFlags(posthog)
+    },
+  })
 </script>
 ```
 

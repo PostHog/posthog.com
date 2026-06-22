@@ -487,6 +487,11 @@
         "profile_id": 35321
     },
     {
+        "handle": "josh-snyder",
+        "name": "Josh Snyder",
+        "role": "Product Engineer"
+    },
+    {
         "handle": "posthog-team",
         "name": "PostHog Team",
         "role": "Equip every developer to build successful products",
