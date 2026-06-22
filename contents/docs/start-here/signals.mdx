@@ -21,12 +21,12 @@ That structure is what lets the rest of the loop reason about a signal, group it
 
 ## Where signals come from
 
-Signals come from two places:
+Signals come from two kinds of source, which you can turn on independently:
 
-- **[Scouts](/docs/start-here/scouts)** that watch your PostHog data on a schedule.
-- **Connected sources**: error tracking, session replay, and health checks inside PostHog, plus external tools like Zendesk, GitHub Issues, and Linear.
+- **Signal sources** are built-in pipelines that watch one stream continuously: error tracking, session replay, and health checks inside PostHog, plus external tools like Zendesk, GitHub Issues, and Linear.
+- **[Scouts](/docs/start-here/scouts)** are agents that run on a schedule and look across your product data more holistically.
 
-A single problem usually shows up as several signals from several sources. The loop groups them so you act on the problem, not the noise.
+Both feed signals into the same pipeline. A single problem usually shows up as several signals from several sources, so the loop deduplicates and groups them, and you act on the problem, not the noise.
 
 ## From signals to reports
 
