@@ -5,9 +5,11 @@ sidebar: Docs
 showTitle: true
 ---
 
-The PostHog HTML snippet loads the JavaScript web SDK (`posthog-js`) from PostHog's CDN. By default, the snippet uses `/static/array.js`, which follows PostHog's current supported web SDK release.
+The PostHog HTML snippet loads the JavaScript web SDK (`posthog-js`) from a CDN. By default, the snippet loads from the legacy path `/static/array.js`, which follows the latest v1 web SDK release.
 
-Use snippet versioning when you need to control that rollout, such as pinning a known-good SDK version while debugging a regression, or tracking the latest release in a specific major version.
+Use snippet versioning when you need to control that rollout, such as pinning a known-good SDK version while debugging a regression, tracking the latest release in a specific major version, or guaranteeing that the SDK script itself won't change until you edit the snippet again.
+
+PostHog SDK releases are designed to be backwards compatible, so pinning isn't about opting into a safer channel. It's for teams that need stricter change control over exactly which script loads.
 
 > **Note:** This page is about the HTML snippet. If you install `posthog-js` from npm, your package manager lockfile controls the SDK version instead. See [Keeping SDKs current](/docs/sdk-doctor/keeping-sdks-current#npm-and-package-manager-lockfiles).
 
@@ -17,17 +19,17 @@ Snippet versioning supports major-version pins and exact-version pins.
 
 | Pin format | Example path | Behavior |
 | --- | --- | --- |
-| Unpinned | `/static/array.js` | Uses PostHog's default current web SDK release. |
+| Default / legacy | `/static/array.js` | Uses the latest available `1.x.x` release. This is equivalent to `/static/1/array.js`. |
 | Major | `/static/1/array.js` | Uses the latest available `1.x.x` release. |
 | Exact | `/static/1.380.0/array.js` | Uses exactly that SDK version until you change the snippet. |
 
-Minor pins such as `/static/1.380/array.js` are not supported.
+Minor pins such as `/static/1.380/array.js` are currently not supported.
 
-Exact pins are safest for short-term rollback or debugging, but they also stop automatic fixes from reaching your users. Remove exact pins once you're done investigating.
+Exact pins are best when you need short-term rollback, debugging, or strict change control. They guarantee the SDK version won't change until you update the snippet, but they also stop automatic fixes from reaching your users. Remove exact pins once you no longer need that guarantee.
 
 ## Change the snippet version
 
-There isn't a PostHog setting for this yet. To pin the snippet version, edit the HTML snippet in your site's code.
+To pin the snippet version, edit the HTML snippet in your site's code.
 
 1. Find the `/static/array.js` path in your installed PostHog snippet.
 2. Change it to a supported versioned path.
@@ -39,21 +41,19 @@ For example, the generated snippet contains a line like this:
 p.src = s.api_host.replace('.i.posthog.com', '-assets.i.posthog.com') + '/static/array.js'
 ```
 
-To track the latest v1 release, change only the path:
+To make the v1 major-version path explicit, change only the path:
 
 ```js
 p.src = s.api_host.replace('.i.posthog.com', '-assets.i.posthog.com') + '/static/1/array.js'
 ```
 
-To pin an exact version, use the exact version path:
+To guarantee the snippet keeps loading the same SDK until you change it again, use the exact version path:
 
 ```js
 p.src = s.api_host.replace('.i.posthog.com', '-assets.i.posthog.com') + '/static/1.380.0/array.js'
 ```
 
-Keep the rest of the snippet unchanged. In particular, don't wrap the snippet in an extra `if (!window.posthog)` guard; the snippet already handles safe initialization.
-
-To return to the default current version, change the path back to `/static/array.js`.
+Keep the rest of the snippet unchanged. To return to the default snippet path, change the path back to `/static/array.js`.
 
 ## Versioned external scripts
 
@@ -69,7 +69,7 @@ By default, these scripts use compatibility URLs like:
 /static/recorder.js?v=1.380.0
 ```
 
-If your CDN, reverse proxy, or security tooling ignores query strings while caching, enable `strict_script_versioning` so these scripts use exact version paths instead:
+We recommend enabling `strict_script_versioning` whenever your setup can serve versioned `/static/*` asset paths:
 
 ```js
 posthog.init('<ph_project_token>', {
@@ -79,30 +79,34 @@ posthog.init('<ph_project_token>', {
 })
 ```
 
-This changes dependency URLs to paths like:
+This changes dependency URLs to exact version paths like:
 
 ```text
 /static/1.380.0/recorder.js
 ```
 
-Use this whenever you want feature scripts to be tied to the exact SDK version without relying on query-string cache busting.
+This recommendation is independent of whether you pin the initial snippet. It ensures feature scripts, such as `recorder.js`, load from the same SDK version as the loaded `array.js`, instead of relying on query-string cache busting.
 
 ## Custom asset hosts and reverse proxies
 
-Use `asset_host` if static PostHog assets must be served from a different host than event capture or feature flag requests:
+Prefer routing `/static/*` through your reverse proxy. This keeps SDK asset requests on your first-party domain, which is the best option for avoiding [ad blockers](/docs/privacy/ad-blockers). [PostHog's managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) supports this out of the box.
+
+Use `asset_host` if you're running a custom reverse proxy for PostHog traffic, but that proxy does not route `/static/*` requests. In that case, keep `api_host` pointed at your proxy and point `asset_host` at the correct regional PostHog asset host:
 
 ```js
 posthog.init('<ph_project_token>', {
     api_host: '<ph_client_api_host>',
     defaults: '<ph_posthog_js_defaults>',
     strict_script_versioning: true,
-    asset_host: 'https://posthog-assets.example.com',
+    asset_host: 'https://us-assets.i.posthog.com', // or 'https://eu-assets.i.posthog.com'
 })
 ```
 
 `asset_host` only applies to `/static/*` assets such as `recorder.js`, `surveys.js`, and `toolbar.js`. It does not change event capture, feature flag requests, or the token-specific remote config URL (`/array/<token>/config.js`).
 
-If you use a reverse proxy, make sure it forwards all PostHog SDK paths your site can request:
+If you use a reverse proxy for `/static/*`, pick a regional asset host to serve requests: `https://us-assets.i.posthog.com` or `https://eu-assets.i.posthog.com`. Both hosts are served through a global CDN with edge caching, but it can still be worth choosing the host that gives your setup the lowest cache-miss latency, usually the one closest to your users or reverse proxy.
+
+Your reverse proxy should forward all PostHog SDK paths your site can request:
 
 - `/static/array.js`
 - `/static/1/array.js` for a major-version snippet pin
@@ -118,7 +122,7 @@ Avoid caching `/static/array.js` or `/static/1/array.js` for long periods if you
 
 | Symptom | What to check |
 | --- | --- |
-| The browser still loads an old SDK version | Inspect the deployed snippet path. `/static/1.380.0/array.js` is an exact pin, `/static/1/array.js` tracks the latest v1 release, and `/static/array.js` is unpinned. Also check CDN, service worker, and reverse proxy caches. |
+| The browser still loads an old SDK version | Inspect the deployed snippet path. `/static/1.380.0/array.js` is an exact pin. `/static/1/array.js` and `/static/array.js` both track the latest v1 release. Also check CDN, service worker, and reverse proxy caches. |
 | The snippet 404s after adding a pin | Check that the path is either a major pin such as `/static/1/array.js` or an exact pin such as `/static/1.380.0/array.js`. Minor pins such as `/static/1.380/array.js` are not supported. |
 | Session Replay, Surveys, or toolbar scripts 404 | Your proxy may not forward `/static/<version>/<asset>.js`. Either add that route or disable `strict_script_versioning`. |
 | `array.js` updates, but feature scripts stay stale | Enable `strict_script_versioning` so dependency scripts use versioned paths instead of query-string cache busting. |
