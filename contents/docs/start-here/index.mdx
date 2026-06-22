@@ -53,7 +53,7 @@ Self-driving works because the signals that drive the loop live in your product 
 
 <QuestLogItem title="Set up PostHog" subtitle="Wire in your data" icon="IconRocket">
 
-Self-driving is only as good as the data feeding it. First, [install PostHog](/docs/getting-started/install) with the setup wizard so it's capturing events. Then run `npx @posthog/wizard self-driving` to turn on your signal sources and set up your scouts. Add the [Slack app](/docs/slack) to bring your whole team in.
+Self-driving is only as good as the data feeding it. First, [install PostHog](/docs/getting-started/install) with the setup wizard so it's capturing events. Then run our self-driving wizard to turn on your signal sources and set up your scouts. Add the [Slack app](/docs/slack) to bring your whole team in.
 
 Once data is flowing, PostHog will continuously monitor your product and reports begin landing in your inbox. Most teams are set up in a few minutes.
 
@@ -65,7 +65,7 @@ Once data is flowing, PostHog will continuously monitor your product and reports
 
 <QuestLogItem title="Learn the concepts" subtitle="Context, scouts, signals, reports, inbox" icon="IconCode2">
 
-A handful of terms carry most of the meaning. Don't worry if they sound like a foreign language, here they are in plain English:
+There's a small set of terms worth knowing. Here's a breakdown:
 
 - **[Context](/docs/start-here/context)** – everything your agents need to know about your product, tied together in your context warehouse. The context a general-purpose agent doesn't have.
 - **[Scouts](/docs/start-here/scouts)** – scheduled agents that watch a slice of your data and raise a hand when something's worth knowing.
@@ -102,12 +102,6 @@ Bring PostHog's data and tools into Claude Code, Cursor, and other AI tools, so 
 <QuestLogItem title="See it work" subtitle="Your day-to-day" icon="IconFlag">
 
 Once self-driving is running, you don't have to prompt it. Scouts keep watching your product, reports become pull requests, and they land in your [inbox](/docs/start-here/inbox) ranked by priority. The day-to-day is simple: open your inbox, review what's waiting, and merge the changes you're happy with, the same as any other pull request. PostHog then checks whether each change moved the metric and feeds the result into the next pass.
-
-Want to see it sooner? You can also hand an agent a [concrete first task](/docs/start-here/first-task) and watch it open a pull request end to end:
-
-- `Look at our onboarding funnel and propose a fix for the drop-off between step 2 and step 3`
-- `Triage this week's top error and open a pull request with a fix`
-- `Audit our feature flags and clean up the stale ones`
 
 <OSButton variant="primary" asLink to="/docs/start-here/inbox">
   Explore your inbox

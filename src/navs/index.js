@@ -2163,10 +2163,6 @@ export const docsMenu = {
                     url: '/docs/start-here/setup',
                 },
                 {
-                    name: 'Ship your first task',
-                    url: '/docs/start-here/first-task',
-                },
-                {
                     name: 'Surfaces',
                 },
                 {

@@ -156,6 +156,11 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/start-here/first-task",
+            "destination": "/docs/start-here/inbox",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/posthog-code/quick-tour",
             "destination": "/docs/posthog-code",
             "statusCode": 301
