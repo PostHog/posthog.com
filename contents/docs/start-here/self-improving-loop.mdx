@@ -1,15 +1,15 @@
 ---
-title: The product autonomy loop
-sidebarTitle: The autonomy loop
+title: The self-improving loop
+sidebarTitle: The self-improving loop
 sidebar: Docs
 showTitle: true
 ---
 
 import { CallToAction } from 'components/CallToAction'
 
-The autonomy loop is how PostHog turns product data into shipped changes, then checks whether they worked. The [overview](/docs/start-here) has the loop at a glance. This page is how it works under the hood, stage by stage.
+The self-improving loop is how PostHog turns product data into shipped changes, then checks whether they worked. The [overview](/docs/start-here) has the loop at a glance. This page is how it works under the hood, stage by stage.
 
-![The product autonomy loop](https://res.cloudinary.com/dmukukwp6/image/upload/product_autonomy_loop_V2_a5243dfada.png)
+![The self-improving loop](https://res.cloudinary.com/dmukukwp6/image/upload/product_autonomy_loop_V2_a5243dfada.png)
 
 ## Collect data
 
@@ -48,10 +48,6 @@ This is the stage that makes it a loop rather than a one-shot. After a change sh
 The result is written back into the loop. If the metric moved the way you hoped, the work is done. If it didn't move, or moved the wrong way, the outcome becomes a new signal, and you can revert or reopen the change.
 
 Because every shipped change is instrumented, each pass also leaves better data behind than the last. Better data means sharper signals, sharper signals mean better-targeted work, and the loop gets more useful the longer it runs.
-
-<CalloutBox icon="IconWarning" title="TODO: add media" type="caution">
-Diagram or GIF tracing one signal through clustering, a pull request, and evaluation.
-</CalloutBox>
 
 ## Next step
 

@@ -6,24 +6,39 @@ showTitle: true
 ---
 
 import { CallToAction } from 'components/CallToAction'
+import WizardCommand from 'components/WizardCommand'
 
-You've [installed PostHog](/docs/getting-started/install) and it's capturing events. Now turn on self-driving: connect the data sources, repositories, and agents that let PostHog ship work for you. Most teams are set up in a few minutes.
+Turning on self-driving means connecting the data sources, repositories, and agents that let PostHog ship work for you. It builds on a PostHog project that's already capturing events, so we start there. Most teams are set up in a few minutes.
 
 <CalloutBox icon="IconInfo" title="Before you start" type="fyi">
 
-You'll need PostHog [installed and capturing events](/docs/getting-started/install), a GitHub repository you want agents to work in, and permission to add an app to your Slack workspace.
+You'll need PostHog installed and capturing events, a GitHub repository you want agents to work in, and permission to add an app to your Slack workspace.
 
 </CalloutBox>
 
 <Steps>
 
-<Step title="Run the self-driving wizard" badge="required">
+<Step title="Install PostHog" badge="required">
 
-The wizard does the heavy lifting. On a project that already has PostHog installed, it enables your signal sources, connects the GitHub integration, confirms AI data processing for your organization, and sets up your scout fleet, then hands you a link to your inbox.
+To set up self-driving, you first need to install PostHog and have it capturing events. The fastest way is the standard setup wizard:
 
-```bash
-# Coming soon: the self-driving wizard command
-```
+<WizardCommand />
+
+If you already have PostHog installed and capturing events, skip ahead. Prefer to set up manually? Follow the [install guide](/docs/getting-started/install).
+
+<CalloutBox icon="IconInfo" title="AI data processing required" type="fyi">
+
+Self-driving relies on AI, so your organization needs [AI data processing turned on](/docs/posthog-ai/allow-access). The wizard checks this and tells you how to enable it if it's off.
+
+</CalloutBox>
+
+</Step>
+
+<Step title="Run the self-driving setup" badge="required">
+
+On your onboarded project, the self-driving setup enables your signal sources, sets up your scouts, and hands you a link to your inbox.
+
+<WizardCommand command="self-driving" />
 
 The signal sources it can turn on include [error tracking](/docs/error-tracking), [session replay](/docs/session-replay), and external sources like Zendesk, GitHub Issues, and Linear. The more you enable, the more your scouts have to watch.
 

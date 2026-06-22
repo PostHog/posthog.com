@@ -2159,10 +2159,6 @@ export const docsMenu = {
                     name: 'Get started',
                 },
                 {
-                    name: 'Install PostHog',
-                    url: '/docs/getting-started/install',
-                },
-                {
                     name: 'Set up self-driving',
                     url: '/docs/start-here/setup',
                 },
@@ -2190,8 +2186,12 @@ export const docsMenu = {
                     name: 'Concepts',
                 },
                 {
-                    name: 'The autonomy loop',
-                    url: '/docs/start-here/autonomy-loop',
+                    name: 'The self-improving loop',
+                    url: '/docs/start-here/self-improving-loop',
+                },
+                {
+                    name: 'Context',
+                    url: '/docs/start-here/context',
                 },
                 {
                     name: 'Scouts',
@@ -2219,7 +2219,7 @@ export const docsMenu = {
             name: 'Platform',
             icon: 'IconStack',
             color: 'salmon',
-            url: '/docs/getting-started/install',
+            url: '/docs/data',
             description: 'The PostHog platform for building and improving your product',
             children: [
                 {
@@ -3220,10 +3220,6 @@ export const docsMenu = {
                         {
                             name: 'Approvals',
                             url: '/docs/settings/approvals',
-                        },
-                        {
-                            name: 'Autonomy settings',
-                            url: '/docs/settings/autonomy',
                         },
                         {
                             name: 'SSO, SAML, & SCIM',

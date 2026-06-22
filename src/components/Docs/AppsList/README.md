@@ -1,18 +1,18 @@
 # AppsList
 
-Renders the PostHog product "apps" as a compact, multi-column list of icon links.
+Renders PostHog's products as a compact, multi-column list of icon links to their docs.
 
-The list is derived from the docs navigation (`docsMenu` in `src/navs/index.js`), so it stays in sync with the products that exist in docs without a separate hand-maintained list.
+The list is sourced from `useProducts()` (`src/hooks/useProducts.tsx`), which is the canonical product set, the same data that powers the `/products` page. This keeps the docs "Apps" list in sync with the real product lineup instead of scraping the docs navigation (which pulled in nav entries that aren't standalone products).
 
-## What counts as an app
+## Docs URLs
 
-An entry is included when it:
+For most products the docs URL is `/docs/<slug>`, derived from the product's marketing `slug`. A few products have a slug that doesn't map cleanly, so they're overridden by `handle` in `docsUrlOverrides`:
 
-- is a top-level docs section with a `/docs/...` URL, and
-- is not a surface (Slack, MCP, or PostHog Code; Web is excluded automatically because it isn't a `/docs/` URL), and
-- is not a non-product section (`Start here`, `Platform`, `Reference`, and the legacy `Self-driving` / `Product OS` names).
+- `data_warehouse` to `/docs/data-warehouse`
+- `realtime_destinations` to `/docs/cdp/destinations`
+- `posthog_ai` to `/docs/posthog-ai`
 
-Feature-flag-gated products are hidden until their flag resolves, via `useActiveFeatureFlags` + `filterMenuByFlags`. During SSR (flags `null`) gated items are hidden (fails closed).
+If a new product is added whose slug isn't its docs path, add an override.
 
 ## Usage
 
@@ -29,11 +29,11 @@ It renders only the grid of links, so provide your own heading and intro copy ar
 
 ## Props
 
-| Prop        | Type     | Default | Description                                  |
-| ----------- | -------- | ------- | -------------------------------------------- |
-| `className` | `string` | `''`    | Extra classes appended to the grid wrapper.  |
+| Prop        | Type     | Default | Description                                 |
+| ----------- | -------- | ------- | ------------------------------------------- |
+| `className` | `string` | `''`    | Extra classes appended to the grid wrapper. |
 
 ## Notes
 
-- Uses project color tokens only (`text-primary`, plus per-product tokens like `text-blue`). The dynamic `text-${color}` classes mirror the pattern already used elsewhere and rely on those tokens being safelisted.
+- Uses project color tokens only via each product's `color` (e.g. `text-blue`). The dynamic `text-${color}` classes mirror the pattern already used on `/products` and rely on those tokens being safelisted.
 - Layout uses `@container` queries (`@md`, `@2xl`), so it reflows correctly inside resizable app windows.

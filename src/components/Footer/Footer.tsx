@@ -83,7 +83,7 @@ const linklist: IProps[] = [
     },
     {
         title: 'Platform',
-        url: '/docs/getting-started/install',
+        url: '/docs/data',
         items: [
             {
                 title: 'New? Start here.',

@@ -876,22 +876,6 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
-    '/docs/about': {
-        size: {
-            min: {
-                width: 460,
-                height: 560,
-            },
-            max: {
-                width: 460,
-                height: 560,
-            },
-            fixed: true,
-        },
-        position: {
-            center: true,
-        },
-    },
     '/kbd': {
         size: {
             min: {

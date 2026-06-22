@@ -75,6 +75,8 @@ export const DocsIndex = () => {
                             className="mb-6 rounded border border-primary bg-primary shadow-sm overflow-hidden [&_input]:bg-primary [&_input]:py-3 [&_input]:text-base"
                             autoFocus={false}
                         />
+                        <h2 className="text-lg mb-1">Get started</h2>
+                        <p className="text-sm opacity-70 mb-3">New to PostHog? Pick a starting point.</p>
                         {/* Curated entry paths */}
                         <div data-scheme="primary" className="grid grid-cols-1 @md:grid-cols-3 gap-3 mb-6">
                             {pathCards.map((card) => {
@@ -144,15 +146,6 @@ export const DocsIndex = () => {
                             Every PostHog product is an app you can use from any surface.
                         </p>
                         <AppsList />
-                        <div className="mt-6">
-                            <Link
-                                to="/docs/about"
-                                state={{ newWindow: true }}
-                                className="text-sm text-muted hover:text-primary"
-                            >
-                                About our docs
-                            </Link>
-                        </div>
                     </section>
                 </div>
             </ScrollArea>

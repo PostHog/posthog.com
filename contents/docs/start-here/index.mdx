@@ -23,37 +23,38 @@ Instead of waiting for someone to notice a bug, file a ticket, and assign it, Po
 
 It runs as a loop. Scouts watch your data and emit signals, signals group into reports, and reports land in your inbox. You pick one up and hand it to an agent that opens a pull request to review and merge, then PostHog checks whether it actually worked and feeds the result back into the next pass.
 
-![The product autonomy loop](https://res.cloudinary.com/dmukukwp6/image/upload/product_autonomy_loop_V2_a5243dfada.png)
+![The self-improving loop](https://res.cloudinary.com/dmukukwp6/image/upload/product_autonomy_loop_V2_a5243dfada.png)
 
-Sounds too good to be true? The catch is that you can't run this reliably inside a general-purpose coding agent, because the signals that drive it live in your product data. That's the part PostHog brings.
+Self-driving works because the signals that drive the loop live in your product data, and that's exactly what PostHog has. A general-purpose coding agent has your code, but not your context. PostHog ties everything together into your [context warehouse](/docs/start-here/context): your product usage data, your data warehouse, and the context your agents need, in one place. That's what helps your agents do their best work.
 
 </QuestLogItem>
 
 <QuestLogItem title="Set up PostHog" subtitle="Wire in your data" icon="IconRocket">
 
-Self-driving is only as good as the data feeding it. First, [install PostHog](/docs/getting-started/install) so it's capturing events. Then run the self-driving wizard, which turns on your signal sources, connects GitHub, and sets up your scouts for you. Add the [Slack app](/docs/slack) to bring your whole team in.
+Self-driving is only as good as the data feeding it. First, [install PostHog](/docs/getting-started/install) with the setup wizard so it's capturing events. Then run `npx @posthog/wizard self-driving` to turn on your signal sources and set up your scouts. Add the [Slack app](/docs/slack) to bring your whole team in.
 
 Once data is flowing, your first scout starts running and reports begin landing in your inbox. Most teams are set up in a few minutes.
 
-<OSButton variant="primary" asLink to="/docs/getting-started/install">
-    Install PostHog
+<OSButton variant="primary" asLink to="/docs/start-here/setup">
+    Set up self-driving
 </OSButton>
 
 </QuestLogItem>
 
-<QuestLogItem title="Learn the concepts" subtitle="Scouts, signals, reports, inbox" icon="IconCode2">
+<QuestLogItem title="Learn the concepts" subtitle="Context, scouts, signals, reports, inbox" icon="IconCode2">
 
 A handful of terms carry most of the meaning. Don't worry if they sound like a foreign language, here they are in plain English:
 
+- **[Context](/docs/start-here/context)** – everything your agents need to know about your product, tied together in your context warehouse. The context a general-purpose agent doesn't have.
 - **[Scouts](/docs/start-here/scouts)** – scheduled agents that watch a slice of your data and raise a hand when something's worth knowing.
 - **[Signals](/docs/start-here/signals)** – what a scout emits: a structured finding, with the evidence behind it and a suggested action. Error tracking, session replay, and tools like Zendesk and Linear emit signals too.
 - **[Reports](/docs/start-here/reports)** – related signals grouped into one item of work, so you deal with the real problem instead of a noisy stream of findings.
 - **[Inbox](/docs/start-here/inbox)** – where reports and pull requests land for you to review, steer, and merge.
 
-Put together, that's the autonomy loop: scouts and sources emit signals, signals become reports, and you act on them from your inbox with an agent doing the legwork, so you stay in control.
+Put together, that's the self-improving loop: scouts and sources emit signals, signals become reports, and you act on them from your inbox with an agent doing the legwork, so you stay in control.
 
-<OSButton variant="primary" asLink to="/docs/start-here/autonomy-loop">
-  The autonomy loop
+<OSButton variant="primary" asLink to="/docs/start-here/self-improving-loop">
+  The self-improving loop
 </OSButton>
 
 </QuestLogItem>
