@@ -1,7 +1,7 @@
 export const langfuse = {
     name: 'Langfuse',
     products: {
-        llm_analytics: {
+        ai_observability: {
             available: true,
             features: {
                 generation_tracking: true,

@@ -25,19 +25,21 @@ Try these prompts with your MCP-enabled agent:
 
 ## Logs tools
 
-The MCP server provides three tools for working with logs:
+The MCP server provides four tools for working with logs:
 
-| Tool | Description |
-|------|-------------|
-| `logs-query` | Search and query logs with filters for severity levels (trace, debug, info, warn, error, fatal), service names, date ranges, and free text. Supports pagination for large result sets. |
-| `logs-list-attributes` | List available log attributes in your project to discover what you can filter on. Supports filtering by attribute type (log or resource). |
-| `logs-list-attribute-values` | Get possible values for a specific log attribute. Find service names, log levels, or other attribute values before querying. |
+| Tool                         | Description                                                                                                                                                                                     |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `logs-query`                 | Search and query logs with filters for severity levels (trace, debug, info, warn, error, fatal), service names, date ranges, and free text. Supports pagination for large result sets.          |
+| `logs-list-attributes`       | List available log attributes in your project to discover what you can filter on. Supports filtering by attribute type (log or resource).                                                       |
+| `logs-list-attribute-values` | Get possible values for a specific log attribute. Find service names, log levels, or other attribute values before querying.                                                                    |
+| `logs-count`                 | Get a count of logs matching your filters. Use as a pre-flight check before `logs-query` – if the count exceeds 1,000 (the maximum limit), narrow your filters or shorten the date range first. |
 
 A typical workflow:
 
 1. Call `logs-list-attributes` to discover available filter attributes.
 2. Call `logs-list-attribute-values` to find specific values (e.g., which service names exist).
-3. Call `logs-query` to search logs with the right filters.
+3. Call `logs-count` to check how many logs match your filters before querying.
+4. Call `logs-query` to search logs with the right filters.
 
 ## Get started
 

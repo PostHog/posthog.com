@@ -17,6 +17,7 @@ export const errorTracking = {
         title: 'Error Tracking – Catch and fix issues faster with PostHog',
         description:
             'Capture, monitor, and resolve exceptions with error tracking. Connect Product Analytics and Session Replay to ship confidently with full context.',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/error_tracking_ae1263a1b8.jpg',
     },
     overview: {
         title: 'Track errors and resolve issues',

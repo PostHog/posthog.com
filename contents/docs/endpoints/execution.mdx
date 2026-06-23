@@ -2,9 +2,6 @@
 title: Execution
 ---
 
-
-
-
 When you execute an endpoint, PostHog runs your query and returns the results. This page explains what happens under the hood and how to control execution behavior.
 
 ## Trying it out
@@ -37,11 +34,11 @@ Reads from pre-computed results stored in S3. This is faster but only available 
 
 Control query behavior when executing an endpoint:
 
-| Value | Behavior |
-|-------|----------|
-| `cache` | (default) If available, return cached results. Otherwise, either return the materialized results or run the query against raw data, depending on whether the endpoint is materialized. |
-| `force` | Forcefully bypass cached results, and either return materialized results or run the query against raw data, depending on whether the endpoint is materialized. |
-| `direct` | Only valid for a materialized endpoint. Bypass the materialized results and run the query against raw data. |
+| Value    | Behavior                                                                                                                                                                               |
+| -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `cache`  | (default) If available, return cached results. Otherwise, either return the materialized results or run the query against raw data, depending on whether the endpoint is materialized. |
+| `force`  | Forcefully bypass cached results, and either return materialized results or run the query against raw data, depending on whether the endpoint is materialized.                         |
+| `direct` | Only valid for a materialized endpoint. Bypass the materialized results and run the query against raw data.                                                                            |
 
 ```bash
 curl -X POST \
@@ -61,13 +58,15 @@ A successful response (HTTP 200) includes:
     ["value1", "value2"],
     ["value3", "value4"]
   ],
-  "columns": ["column_a", "column_b"]
+  "columns": ["column_a", "column_b"],
+  "execution_id": "01968a3b-..."
 }
 ```
 
 - `results` - Array of rows, each row is an array of values
 - `columns` - Column names matching the order of values in each row
-- and a few more fields with additional metadata around materialization status, endpoint version, etc
+- `execution_id` - Unique identifier for this execution, useful for tracing results to their [log entries](#execution-logs)
+- Additional metadata fields for materialization status, endpoint version, etc
 
 ## Debugging
 
@@ -82,3 +81,11 @@ curl -X POST \
 ```
 
 Main bit of extra information here to help you debug is the `hogql` field which includes the exact query that's been run against our database, mostly useful when you want to verify the query ran against a materialized endpoint.
+
+## Execution logs
+
+The **Logs** tab on an endpoint's page shows one log entry per execution. Each entry includes metadata like the execution path (inline or materialized), cache outcome, duration, and row count.
+
+Both successful (`INFO`) and failed (`ERROR`) runs appear in the logs, including rejected requests that fail validation (for example, an invalid `refresh` value). Filter by log level or search by free text to find specific entries.
+
+Each log entry's instance ID matches the `execution_id` returned in the [run response](#response-format), so you can trace a specific API response back to its log entry.

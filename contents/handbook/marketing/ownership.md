@@ -8,13 +8,25 @@ If you have a general marketing question, go to `#group-marketing-and-content` i
 
 If you need help with the website, go to `#posthogdotcom`.
 
-Here's a quick guide to who to ask if you want help with a specific marketing activity.
+**Product marketer (PMM) and product manager (PM) assignments**
 
+We generally only have product marketers on teams that _already_ have a product manager. Products without a product manager a) are usually too early for marketing to get involved, and b) distract engineers as they need to spend time briefing the product marketer, vs. shipping more stuff. [Product managers](/handbook/product/product-manager-role) help teams figure out what to build and how much to charge for it, product marketers then help you get as many users as possible. 
+
+| Product | PM | PMM | Blitzscale |
+|---|---|---|---|
+| *Data warehouse* | Anna | Lizzie | Raquel |
+| *PostHog AI* | Annika | Joe | James H |
+| *PostHog Code* | Annika | Cleo | James H |
+| *PostHog Slack* | Annika | Cleo | James H |
+| *AI Gateway* | Marco |  | Ben W |
+| *Inbox* | Annika | Sara | James H |
+| *Agents* |  | Joe | Ben W |
+| *MCP* | | Joe | |
 
 <details>
-<summary>I need a product marketer, but I don't know which</summary>
+<summary>I need a product marketer, but my team hasn't been assigned one</summary>
 
-Product marketing is part of <SmallTeam slug="marketing" />. You can see which PMM is focused on which team on the <SmallTeam slug="marketing" /> team page. If it's a team which doesn't currently have an assigned marketer, just ask in #group-marketing-and-content in Slack and tag the team lead. 
+Just ask in #group-marketing-and-content in Slack and tag the team lead. 
 </details>
 
 
@@ -91,13 +103,13 @@ For larger pieces of work â€” a new product page, a significant copy overhaul â€
 <details>
 <summary>Hey, can we run some paid ads for my product?</summary>
 
-We probably are already, but if you have something specific in mind, speak to <TeamMember name="Brian Young" />, who is a Growth Marketing Manager embedded in the sales team.
+We probably are already, but if you have something specific in mind, ask in the `#team-demand-gen` Slack channel. 
 </details>
 
 <details>
 <summary>I need a new hedgehog design, illustration, or other art asset.</summary>
 
-Speak to <TeamMember name="Lottie Coxon" /> or <TeamMember name="Daniel Hawkins" />, but please read [Art and branding requests](/handbook/brand/art-requests) first.
+Read [art and branding requests](/handbook/brand/art-requests) first!
 </details>
 
 <details>
@@ -109,5 +121,5 @@ See [Logos, brand, hedgehogs](/handbook/company/brand-assets)
 <details>
 <summary>A journalist has contacted me</summary>
 
-Direct them to press@posthog.com, where one of Joe, James, Charles, or Tim can respond. They're the only people who should speak to press. See: [Press & PR](/handbook/brand/press)
+Direct them to press@posthog.com, where one of Joe, James, Charles, or Tim can respond. They're the only people who should speak to press. See: [Press & PR](/handbook/marketing/press)
 </details>

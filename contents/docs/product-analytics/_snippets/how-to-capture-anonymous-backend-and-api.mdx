@@ -14,9 +14,9 @@ client.capture({
 
 ```python
 posthog.capture(
-    "distinct_id_of_the_user", 
-    "your_event_name", 
-    {
+    "your_event_name",
+    distinct_id="distinct_id_of_the_user",
+    properties={
         "$process_person_profile": false
     }
 )
@@ -37,7 +37,7 @@ posthog.capture({
     distinct_id: 'distinct_id_of_the_user',
     event: 'your_event_name',
     properties: {
-        $process_person_profile: false
+        '$process_person_profile': false
     }
 })
 ```
@@ -64,7 +64,7 @@ let mut event = Event::new("your_event_name", "distinct_id_of_the_user");
 
 event.insert_prop("$process_person_profile", false).unwrap();
 
-client.capture(event).unwrap();
+client.capture(event).await.unwrap();
 ```
 
 ```elixir

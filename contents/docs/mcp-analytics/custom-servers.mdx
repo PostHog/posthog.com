@@ -1,0 +1,106 @@
+---
+title: Instrumenting a custom server
+---
+
+import CalloutBox from 'components/Docs/CalloutBox'
+
+[`instrument()`](/docs/mcp-analytics/installation) works by wrapping a `@modelcontextprotocol/sdk` `Server` or `McpServer` — it patches that object's request handlers. But not every MCP server is built that way. If you run a **custom dispatcher** — a [Hono](https://hono.dev/) or Express HTTP handler, a Cloudflare Worker / Vercel edge function, or anything that speaks the MCP protocol without the SDK's server abstraction — there's no object for `instrument()` to wrap.
+
+For those servers, use **`PostHogMCP`** instead. It's a subclass of the [`posthog-node`](/docs/libraries/node) client, so it's a drop-in replacement for your existing PostHog client — `capture`, `identify`, `flush`, `shutdown`, and feature flags all work unchanged — with `captureToolCall` and `captureInitialize` added on top. You resolve identity and context per request and call those methods yourself. They build the same canonical `$mcp_*` events as `instrument()` (same sanitization, truncation, and `$exception` fan-out) and hand them to the inherited `capture()`, so nothing downstream (insights, dashboards, error tracking) can tell the difference.
+
+## When to use which
+
+| Your server | Use |
+|---|---|
+| Built on `@modelcontextprotocol/sdk`'s `Server` / `McpServer` | [`instrument(server, posthog, options?)`](/docs/mcp-analytics/installation) |
+| A custom HTTP/Hono/edge dispatcher with no server object to wrap | `new PostHogMCP(apiKey, options?)` |
+
+## Set up
+
+`PostHogMCP` takes the exact same constructor arguments as `posthog-node`'s `PostHog`, so swap the class and you keep one client for your whole app:
+
+```ts
+import { PostHogMCP } from "@posthog/mcp"
+
+const posthog = new PostHogMCP(process.env.POSTHOG_PROJECT_API_KEY, {
+  host: "https://us.i.posthog.com", // or https://eu.i.posthog.com
+  // standard posthog-node options apply, e.g. beforeSend, enableExceptionAutocapture
+})
+```
+
+Because it *is* a `PostHog` client, every option and method you already know is available — including `beforeSend` (which runs on the MCP events too) and `enableExceptionAutocapture` (set it to `false` to stop errored tool calls from fanning out a `$exception`). The wrapping-path hooks (`identify`, `context`, `intentFallback`, `eventProperties`) don't apply here: there's no wrapped server to run them against, so you pass identity and properties on each call instead.
+
+## Capture events
+
+Call the matching method from inside your dispatcher, after you've resolved who the user is and run the tool. The methods are fire-and-forget, just like `posthog.capture()`:
+
+```ts
+// On a tools/call, after the tool runs:
+posthog.captureToolCall({
+  toolName: "search_events",
+  parameters: request.params.arguments,
+  response: result,
+  durationMs: Date.now() - start,
+  isError: false,
+  distinctId: user.id,                       // → distinct_id (enables person processing)
+  sessionId: mcpSessionId,                    // → $session_id (omitted if you don't pass one)
+  groups: { organization: user.orgId },       // → $groups
+  properties: { $mcp_client_name: "claude-code" }, // any extra props, spread verbatim
+})
+
+// On the initialize handshake:
+posthog.captureInitialize({
+  clientName: "claude-code",
+  clientVersion: "1.2.3",
+  distinctId: user.id,
+})
+
+// Custom events use the inherited posthog-node capture():
+posthog.capture({
+  distinctId: user.id,
+  event: "feedback_submitted",
+  properties: { rating: 5 },
+})
+```
+
+### Fields shared by every method
+
+| Field | Maps to | Notes |
+|---|---|---|
+| `distinctId` | `distinct_id` | Supplying it enables person processing so `$set` lands on a real person. Omit it for anonymous traffic — events are sent with `$process_person_profile: false`. |
+| `sessionId` | `$session_id` | Omitted from the event entirely when you don't pass one (so stateless captures don't bucket into a non-existent [Session Replay](/docs/session-replay) session). |
+| `groups` | `$groups` | `{ groupType: groupKey }`, stamped on the event so you never hand-write the `$groups` key. |
+| `setProperties` | `$set` | Person properties (`{ name, email, plan }`), same as the `properties` you'd pass to `identify`. |
+| `properties` | spread verbatim | Extra event properties, sitting alongside the `$mcp_*` keys. Values must be JSON-serializable. |
+| `timestamp` | event time | Defaults to the time of the capture call. |
+
+### Tool-call specific fields
+
+`toolName` → `$mcp_tool_name`, `toolDescription` → `$mcp_tool_description`, `parameters` → `$mcp_parameters`, `response` → `$mcp_response`, `durationMs` → `$mcp_duration_ms`, `isError` → `$mcp_is_error`. When `isError` is true and `enableExceptionAutocapture` isn't `false`, the `error` you pass becomes the `$exception` sibling event (if you don't pass one, a generic exception is synthesized from the tool name).
+
+<CalloutBox icon="IconInfo" title="Analytics never breaks your request" type="fyi">
+
+`captureToolCall` and `captureInitialize` are fire-and-forget (they enqueue on the client, like `posthog.capture()`) and never throw — a failure to record analytics can't take down your tool. In serverless or edge environments, flush at the end of the invocation so queued events aren't dropped (see below).
+
+</CalloutBox>
+
+## What you don't get (vs `instrument()`)
+
+Because there's no wrapped server, `PostHogMCP` does **not** manage these for you — you pass the equivalent data per call:
+
+- **Sessions** — no MCP-session-derived `$session_id` or inactivity rollover. Pass your own `sessionId`.
+- **Identity caching / `$identify` dedupe** — pass `distinctId` (and optional `setProperties`) on each call.
+- **The injected `context` argument, `intentFallback`, `reportMissing`, and `conversation_id`** — these patch tool schemas and request handlers, which only the wrapping path can do.
+
+Everything from the [event reference](/docs/mcp-analytics/events) onward — event names, property shapes, sanitization, error tracking — is identical.
+
+## Graceful shutdown
+
+`PostHogMCP` is a `posthog-node` client, so flush it yourself. In serverless or edge environments, flush at the end of each invocation rather than relying on `SIGTERM`:
+
+```ts
+// at the end of the request/invocation
+await posthog.flush()
+// or keep the runtime alive until the flush completes
+ctx.waitUntil(posthog.flush())
+```

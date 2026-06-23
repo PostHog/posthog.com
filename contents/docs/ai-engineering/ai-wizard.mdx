@@ -4,9 +4,9 @@ title: AI wizard
 
 import WizardInstall from 'getting-started/_snippets/wizard.mdx'
 
-The PostHog wizard automatically installs and instruments PostHog into your application codebase using AI. It's an agentic CLI tool that handles the entire PostHog integration process on your behalf.
+The PostHog wizard is an agentic CLI tool that uses AI to set up and manage PostHog in your codebase. By default, it installs and instruments PostHog for you with a single command: `npx -y @posthog/wizard@latest`.
 
-Set up the PostHog platform in minutes, with a single command.
+It does more than installation, though. The wizard can also audit an existing integration, migrate you from another vendor, upload source maps, set up Revenue Analytics, and diagnose configuration issues – so it's just as useful after you're up and running as it is on day one.
 
 <WizardCommand slim />
 
@@ -47,6 +47,49 @@ The AI wizard integrating both the JS Web SDK and Node SDK into a Next.js applic
 ## AI wizard installation
 
 <WizardInstall />
+
+## Commands
+
+Running `npx @posthog/wizard` starts the default integration flow. The wizard also supports the following commands:
+
+| Command | What it does |
+|---|---|
+| `wizard` | Default flow – installs and instruments PostHog |
+| `wizard audit <subcommand>` | Audit an existing integration – see [Audit subcommands](#audit-subcommands) |
+| `wizard revenue-analytics` | Wire up Stripe + PostHog revenue analytics |
+| `wizard migrate` | Migrate from another analytics or feature-flag vendor |
+| `wizard upload-source-maps` | Upload source maps to PostHog Error Tracking |
+| `wizard mcp add` / `wizard mcp remove` / `wizard mcp tutorial` | Manage the PostHog MCP server for your AI agent, or explore the MCP tutorial |
+| `wizard slack add` | Connect PostHog to your Slack |
+| `wizard skill <skill-name>` | Run a single skill by name – browse the available skills in the [context-mill releases](https://github.com/PostHog/context-mill/releases/latest) |
+
+### Audit subcommands
+
+`@npx @posthog/wizard audit` on its own runs the `events` audit. Pass a subcommand to run a specific one.
+
+| Command | What it does |
+|---|---|
+| `wizard audit events` | Audit event capture quality and cost (default) |
+| `wizard audit all` | Comprehensive audit across every area |
+| `wizard audit autocapture` | Audit autocapture setup and cost |
+| `wizard audit feature-flags` | Audit feature flag usage and cost |
+| `wizard audit identify` | Audit your `$identify` implementation |
+| `wizard audit session-replay` | Audit session replay setup |
+| `wizard audit web-analytics` | Audit web analytics setup |
+
+### Legacy commands
+
+The CLI was overhauled to consolidate commands into a smaller, more consistent surface. If you used an older command name, here's where it went:
+
+| Old command | New command | What changed |
+|---|---|---|
+| `wizard integrate` | `wizard` | The default flow now runs the integration |
+| `wizard events-audit` | `wizard audit events` | Now an `audit` subcommand |
+| `wizard audit` | `wizard audit <subcommand>` | Now takes a subcommand; `wizard audit all` runs a full audit |
+| `wizard revenue` | `wizard revenue-analytics` | Renamed – update any scripts using `revenue` |
+| `wizard upload-sourcemaps` | `wizard upload-source-maps` | Renamed (the old `upload-sourcemaps` still works) |
+
+## Feedback
 
 We think flows like the AI wizard are pretty cool and the future of developer experience. The AI wizard is our recommended and default method for [installing PostHog](/docs/getting-started/install?tab=wizard) and getting started.
 

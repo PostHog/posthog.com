@@ -2,7 +2,7 @@ PostHog is available for install via [Pub](https://pub.dev/packages/posthog_flut
 
 ### Configuration
 
-Set your PostHog project token and change the automatic event tracking on if you wish the library to take care of it for you.
+Set your PostHog project token and enable automatic event tracking if you want the library to capture lifecycle events for you.
 
 Remember that the application lifecycle events won't have any special context set for you by the time it is initialized. If you are using a self-hosted instance of PostHog you will need to have the public hostname or IP for your instance as well.
 
@@ -14,14 +14,14 @@ To start, add `posthog_flutter` to your `pubspec.yaml`:
 dependencies:
   flutter:
     sdk: flutter
-  posthog_flutter: ^5.24.0
+  posthog_flutter: ^5.26.0
 
 # rest of your code
 ```
 
-Then complete the set up for each platform:
+Then complete the setup for each platform:
 
-> For Session replay and Surveys you must setup the SDK manually by disabling the `com.posthog.posthog.AUTO_INIT` mode.
+> For Session Replay and Surveys, you must set up the SDK manually by disabling the `com.posthog.posthog.AUTO_INIT` mode.
 
 #### Android setup
 
@@ -121,9 +121,10 @@ platform :ios, '13.0'
 ```
 
 #### Dart setup (For manual step only)
-If you followed the automatic SDK setup, then there's no more configuration needed in Dart. 
 
-If you followed the manual SDK setup: 
+If you followed the automatic SDK setup, then there's no more configuration needed in Dart.
+
+If you followed the manual SDK setup:
 
 ```dart
 import 'package:flutter/material.dart';

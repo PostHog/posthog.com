@@ -199,7 +199,7 @@ sequenceDiagram
 
 ### How do batch exports handle periods with no data?
 
-If no data is found for a particular batch period, then the batch export run will immediately succeed. No data to export is not considered a failure, as it is expected that there may be times of low or no volume of events coming into PostHog, and it is particularly relevant when heavily filtering the batch export.
+If no data is found for a particular batch period, then the batch export run will immediately succeed with a "Completed" status. No data to export is not considered a failure, as it is expected that there may be times of low or no volume of events coming into PostHog, and it is particularly relevant when heavily filtering the batch export.
 
 When this happens, the batch export logs will display a message like "Batch export will finish early as there is no data matching specified filters".
 

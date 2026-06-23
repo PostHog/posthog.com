@@ -354,7 +354,7 @@ export const amplitude = {
         error_tracking: {
             available: false,
         },
-        llm_analytics: {
+        ai_observability: {
             available: false,
         },
         logs: {

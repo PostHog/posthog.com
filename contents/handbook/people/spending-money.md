@@ -106,12 +106,14 @@ Joining an offsite? _Only use the offsite budget_, not your User Limit - it help
     - [Attaching receipts for multiple expenses](https://www.brex.com/support/receipts-for-expenses#attaching-receipts-to-multiple-expenses)
 - What do I do if I have a new tool/enterprise software subscription for the team to use?
   - Add [Janani](https://posthog.com/community/profiles/34497) as the Billing Admin to manage payments.
-- If I'm asked for a billing email for bill payments, what do I use?
+- If I'm asked for a billing email – for bill payments or when signing a vendor contract – what do I use?
   - Use finance@posthog.com
 - What if I'm driving for work-related purposes?
   - You can claim a mileage reimbursement through Brex. **Do not** separately expense fuel.
 - What if I accidentally used the company card for a personal expense?
-  - Login to Brex > find the charge > click on 'Repay' > Repay to the bank account details provided in [our banking runbook](https://github.com/PostHog/company-internal/blob/37179f74a66e8b779f8e6f116172511709646157/finance/banking.md)
+  - Login to Brex > find the charge > click on 'Repay'.
+    - **US and Canada:** Brex's auto repay function works, so it'll pull the money from your connected bank account for you.
+    - **International:** auto repay isn't available, so the 'Repay' button only tracks the expense. You need to manually transfer the amount **from your personal bank account to PostHog's bank account**, using the details provided in [our banking runbook](https://github.com/PostHog/company-internal/blob/37179f74a66e8b779f8e6f116172511709646157/finance/banking.md).
   - For Revolut charges, repay to the bank account details provided in [our banking runbook](https://github.com/PostHog/company-internal/blob/37179f74a66e8b779f8e6f116172511709646157/finance/banking.md#repayments-to-revolut)
 - How do I get access to WeWork?
   - We have a company All Access account - ask [Kendal](https://posthog.com/community/profiles/28628) in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ).
@@ -153,7 +155,7 @@ Talk to [Tara](https://posthog.com/community/profiles/34526) who handles most Ma
       - US only: use your Brex since we earn cashback
       - UK only: use your Revolut since we claim back the VAT
       - Do not get AppleCare since it doesn't have great value for money
-    - You can request a new laptop in `#team-people-and-ops` if it is over 4 years old or significantly impacting your productivity. We do ask that you do some diligence to make sure it's not a setup issue though - i.e. other applications aren't hogging the memory, etc.
+    - You can request a new laptop in `#team-people-and-ops` if it is over 4 years old, (for engineering machines) has less than 48GB of RAM, or is significantly impacting your productivity. We do ask that you do some diligence to make sure it's not a setup issue though - i.e. other applications aren't hogging the memory, etc.
     - Part of `#team-client-libraries` and need to purchase a phone for testing? Talk to [Tara](https://posthog.com/community/profiles/34526) in `#team-people-and-ops`.
 
 #### Yubikey (for specific roles only)
@@ -170,6 +172,8 @@ As a guide, here's what we'd consider reasonable spend:
 - Desk - up to $500
 - Chair - up to $500
 - Keyboard - up to $250
+
+If you want something more expensive, you can pay personally and submit a reimbursement request on Brex for up to the amount above.
 
 ### Software
 We are _strongly opposed_ to introducing new software that is designed for collaboration by default. There needs to be a very significant upside to introducing a new piece of software to outweigh its cost.

@@ -11,8 +11,8 @@ client.capture({
 
 ```python
 posthog.capture(
-    "distinct_id_of_the_user", 
-    "your_event_name", 
+    "your_event_name",
+    distinct_id="distinct_id_of_the_user",
 )
 ```
 
@@ -44,7 +44,7 @@ posthog.capture("distinct_id_of_the_user", "your_event_name", new HashMap<String
 ```rust
 let mut event = Event::new("your_event_name", "distinct_id_of_the_user");
 
-client.capture(event).unwrap();
+client.capture(event).await.unwrap();
 ```
 
 ```elixir

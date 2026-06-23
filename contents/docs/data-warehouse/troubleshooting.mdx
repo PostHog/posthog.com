@@ -13,20 +13,126 @@ This page covers troubleshooting for Data Warehouse. For setup, see the [install
 From the [source page](https://app.posthog.com/data-management/sources), click the source that's failing, scroll over to the **Status** column and hover over the error message.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_27_at_12_12_23_2x_7ed2ac106d.png" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_27_at_12_12_23_2x_7ed2ac106d.png"
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_27_at_12_08_29_2x_8b7160e3b9.png"
-  alt="Viewing the error message for a failed sync" 
+  alt="Viewing the error message for a failed sync"
   classes="rounded"
 />
 
 You can also click the **Syncs** tab and expand any failed sync to see all the logs.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_27_at_12_17_09_2x_7da05def87.png" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_27_at_12_17_09_2x_7da05def87.png"
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_27_at_12_16_50_2x_13222eaa4c.png"
-  alt="Viewing the logs for a failed sync" 
+  alt="Viewing the logs for a failed sync"
   classes="rounded"
 />
+
+## Why is "Pull new schemas" not finding any tables?
+
+When you click **Pull new schemas** on an external data source (Postgres, MySQL, Redshift, etc.) and see a warning that no tables were found, this typically means:
+
+1. **Missing SELECT permissions** - The database user configured for the source doesn't have SELECT access to the target schema.
+2. **Incorrect configuration** - The schema name, credentials, or connection details in your source settings are wrong.
+
+To fix this, check that your database user has SELECT permissions on the target schema and its tables, and verify that your source credentials and configuration are correct.
+
+## Why does "Pull new schemas" show "no schema changes"?
+
+If you click **Pull new schemas** and see a success message saying there are no schema changes, this means the connection to your source is working correctly and all tables in the source schema are already being tracked.
+
+This is expected behavior when your source configuration is up to date. New tables only appear if they've been added to the source database since your last refresh.
+
+## Why am I seeing an error when pulling schemas?
+
+When **Pull new schemas** fails, the error message shows the specific underlying cause instead of a generic failure message. Common errors include:
+
+- **Authentication failures** - Invalid credentials or expired passwords.
+- **Connection errors** - Network issues, firewall rules, or the database server being unreachable.
+- **Permission denied** - The user lacks access to the specified schema or database.
+
+Use the error details in the toast notification to diagnose and fix the issue in your database configuration.
+
+## Why is my BigQuery sync failing with credential errors?
+
+If your BigQuery sync fails with a message like "Your BigQuery service account credentials were rejected by Google," it means Google's token endpoint rejected the service account grant. This is a non-retryable error – PostHog stops the sync instead of retrying indefinitely.
+
+This happens when:
+
+- **The service account's private key was rotated or revoked** – Google returns an `Invalid JWT Signature` error.
+- **The service account was deleted** – Google returns an `account not found` error.
+
+To fix this:
+
+1. Generate a new JSON key file for your service account in the [Google Cloud Console](https://console.cloud.google.com/) under **IAM & Admin > Service Accounts**.
+2. In PostHog, go to [**Data pipelines > Sources**](https://app.posthog.com/data-management/sources) and select your BigQuery source.
+3. Upload the new Google Cloud JSON key file.
+4. Re-run the sync.
+
+## Why is my BigQuery source failing with 'Dataset not found'?
+
+If your BigQuery source fails with a message like "BigQuery couldn't find the configured dataset or table," it means the dataset or table you specified doesn't exist in the region PostHog is querying. This is a non-retryable error – PostHog stops the sync instead of retrying indefinitely.
+
+This happens when:
+
+- **The dataset was deleted or renamed** – The dataset you originally configured no longer exists in BigQuery.
+- **The dataset is in a different region** – Your dataset lives in a non-US region, but no custom region is set in your source configuration.
+- **The Project ID was entered in the Dataset ID field** – The Dataset ID should be just the dataset name (e.g., `analytics`), not `project.dataset`.
+- **Incorrect dataset or table names** – A typo or stale name in your source configuration.
+
+To fix this:
+
+1. In PostHog, go to [**Data pipelines > Sources**](https://app.posthog.com/data-management/sources) and select your BigQuery source.
+2. Verify that the **Dataset ID** contains only the dataset name (e.g., `analytics`), not `project.dataset`.
+3. Check that the dataset and table names match what exists in your [BigQuery console](https://console.cloud.google.com/bigquery).
+4. If your dataset isn't in the US region, toggle **Manually specify your dataset region** and enter the correct region (e.g., `us-east1`, `europe-west1`).
+5. Re-run the sync.
+
+## Why is my Stripe sync failing with an account access error?
+
+If your Stripe sync fails with a message like "does not have access to account," it means your API key isn't authorized for the configured Stripe account, or your OAuth application access has been revoked. This is a non-retryable error – PostHog stops the sync instead of retrying indefinitely.
+
+This happens when:
+
+- **The Account ID is misconfigured** – You've specified an Account ID in your source settings, but your API key isn't authorized for that account (or you're using a non-Connect key with an Account ID).
+- **OAuth access was revoked** – If you connected via OAuth, the application's access to your Stripe account may have been revoked.
+
+To fix this:
+
+1. In PostHog, go to [**Data pipelines > Sources**](https://app.posthog.com/data-management/sources) and select your Stripe source.
+2. If you're using a restricted API key:
+   - Remove the **Account id** field if your key belongs directly to the account you're syncing. Account ID is only needed for [Stripe Connect](https://docs.stripe.com/connect) platform accounts.
+   - Or verify the Account ID matches the account your key is authorized for.
+3. If you connected via OAuth, reconnect your Stripe account by selecting the OAuth authentication method and authorizing PostHog again.
+4. Re-run the sync.
+
+## Why is my Microsoft SQL Server sync failing with 'Invalid object name'?
+
+If your Microsoft SQL Server sync fails with a message containing "Invalid object name," it means the database couldn't find an object (table or view) referenced in the query. This is a non-retryable error – PostHog stops the sync instead of retrying indefinitely.
+
+This happens when:
+
+- **A table or view was dropped or renamed** – The object you're syncing no longer exists.
+- **A view references a missing object** – The view's underlying query references a table or another view that was deleted or renamed.
+- **Cross-database permission issues** – The connection user can't access an object in another database that a view depends on.
+
+To fix this:
+
+1. Check that all tables and views you're syncing still exist in your database.
+2. If you're syncing views, verify that all objects referenced in the view definitions are accessible.
+3. Ensure your connection user has SELECT permissions on all required objects, including cross-database dependencies.
+4. In PostHog, go to [**Data pipelines > Sources**](https://app.posthog.com/data-management/sources) and re-sync after fixing the issue.
+
+## Why is my Shopify sync failing with "Payment Required"?
+
+If your Shopify sync fails with a `402 Client Error: Payment Required` message, it means your Shopify store is frozen due to an unpaid bill. Shopify's Admin API returns this error when the store owner has an outstanding balance.
+
+This is a non-retryable error – PostHog stops the sync instead of retrying indefinitely because nothing on PostHog's side can recover from this state.
+
+To fix this:
+
+1. Log into your [Shopify admin](https://admin.shopify.com/) and settle any outstanding balance to unfreeze your store.
+2. Once your store is active again, re-run the sync from [**Data pipelines > Sources**](https://app.posthog.com/data-management/sources) in PostHog.
 
 ## How do I speed up my SQL queries?
 
@@ -38,14 +144,14 @@ We have other suggestions in our [product analytics docs](/docs/product-analytic
 
 ## How do I run partial SQL queries?
 
-If you want to run a part of your query in the SQL editor, highlight the part you want to run and hit **CMD + Enter** (Mac) or **CTRL + Enter** (Windows). 
+If you want to run a part of your query in the SQL editor, highlight the part you want to run and hit **CMD + Enter** (Mac) or **CTRL + Enter** (Windows).
 
 This is useful if you have a complex query and you want to test parts of it without running the whole query.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_09_02_at_14_24_06_2x_cc350ac9b1.png" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_09_02_at_14_24_06_2x_cc350ac9b1.png"
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_09_02_at_14_24_23_2x_6dad899bb8.png"
-  alt="Running partial SQL queries" 
+  alt="Running partial SQL queries"
   classes="rounded"
 />
 
@@ -65,11 +171,10 @@ To fix parsing issues, try recreating the table with the other quote handling op
 This error occurs when files in your S3 bucket are stored in S3 Glacier or S3 Intelligent-Tiering archive storage classes. These storage classes are designed for long-term archival and cannot be accessed directly.
 
 To resolve this:
+
 1. Restore the files to Standard storage class in AWS S3.
 2. Or narrow your URL pattern to exclude the archived files.
 
 ## Solved community questions
 
-<SolvedQuestions
-    topicLabel="Data Warehouse"
-/>
+<SolvedQuestions topicLabel="Data Warehouse" />

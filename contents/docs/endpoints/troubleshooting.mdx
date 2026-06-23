@@ -12,6 +12,14 @@ This page covers troubleshooting for Endpoints. For setup, see the [installation
 
 <AskAIInput placeholder="Type your question and hit enter..." />
 
+## Check the Logs tab
+
+The **Logs** tab on each endpoint's page shows one entry per execution, including both successful and failed runs. Each entry includes metadata like the execution path (inline or materialized), cache outcome, duration, and row count.
+
+Rejected requests that fail validation — such as an invalid `refresh` value or a missing `limit` for pagination — also appear as `ERROR` entries. Filter by log level or search by free text to find specific entries.
+
+Each run returns an `execution_id` in the API response. This matches the log entry's instance ID, so you can trace a specific API response back to its log. See [execution logs](/docs/endpoints/execution#execution-logs) for more details.
+
 ## Endpoint not found (404)
 
 - Verify the endpoint name is correct
@@ -91,6 +99,7 @@ The `filters_override` parameter has been removed. Requests using `filters_overr
 
 If endpoints are slow:
 
+- Check the **Logs** tab on the endpoint's page for `duration_ms` values
 - Look at the [endpoints usage tab](https://app.posthog.com/endpoints/usage) with the filter for the slow endpoint
 - Check if the underlying query is optimized
 - Consider materializing your endpoint

@@ -8,7 +8,7 @@ Our primary focus is on making our paying customers successful, not forcing sale
 
 While this means working with a smaller number of users than typical B2B SaaS companies, we know that the people we talk to are mostly already pre-qualified and genuinely interested in potentially using PostHog. 
 
-The Sales team act as genuine partners with our users. We should feel as motivated to help and delight users as if we were on their team. In practical terms, this means:
+Our teams act as genuine partners with our users. We should feel as motivated to help and delight users as if we were on their team. In practical terms, this means:
 
 - No BS sales-y talk - we are direct, open and honest with customers. We share as much as possible publicly, rather than hiding it behind a mandatory demo call. We are honest when we don't know the answer, or if we're not sure that PostHog is the right solution for a customer.
 
@@ -23,7 +23,18 @@ The Sales team act as genuine partners with our users. We should feel as motivat
 - We don't do margin negative deals in order to win - this doesn't set us up for a successful long term relationship with a paying customer if we're ultimately losing money to land them. Yes, this includes fancy companies whose logos would make us look good. 
 
 
-## Sales team vision 
+## Our teams
+
+We're not one big Sales team. We're several small teams, each owning a different part of the customer journey:
+
+- **[New Business Sales](/teams/sales-cs)** – our Technical Account Executives (TAEs) own initial inbound contact and make it easy for users to become paying customers. Our business development representatives (BDRs) sit here too, running warm outbound and handing qualified leads to the TAEs.
+- **Product-led Sales** – our Technical Account Managers (TAMs) grow and retain a book of existing customers. We run this as two regional teams, [East](/teams/sales-product-led) and [West](/teams/product-led-sales-west), to cover both time zones.
+- **[Customer Success](/teams/customer-success)** – our Customer Success Managers (CSMs) focus on retaining customers, split across Europe and North America.
+- **[Onboarding](/teams/onboarding)** – our Onboarding Specialists support hundreds of newer customers at scale, getting them set up and on track for long-term success.
+
+Each team has its own Slack channel for day-to-day work: [`#team-new-business-sales`](https://posthog.slack.com/archives/C09677WV1GW), [`#team-product-led-sales`](https://posthog.slack.com/archives/C093XHYMGBE), [`#team-customer-success`](https://posthog.slack.com/archives/C08M011SBCM), and [`#team-onboarding`](https://posthog.slack.com/archives/C098D86DZDZ). Anything that spans all of us goes to [`#group-cs-sales-support`](https://posthog.slack.com/archives/C090RCG671C).
+
+## Our vision
 
 ### Things we want to be great at
 
@@ -43,7 +54,7 @@ The Sales team act as genuine partners with our users. We should feel as motivat
 
 - **Events:** These _may_ be a good way for us to reach more of our ICP in future, done in the right way, e.g. by giving talks. However events are not a scalable/automatable channel, and are slightly in the zone of 'outbound sales'.
 
-- **Winning the deal at all costs:** We have overall ARR targets at PostHog, but these are not exclusively achieved by the Sales & CS team - the vast majority of our paying customers come in without ever talking to us. This means that revenue isn't the CS team's responsibility alone, so we don't have to close deals where we get a short term bump to revenue in exchange for long term pain/churn (e.g. forcing a non-ICP deal to close with extremely discounted pricing).
+- **Winning the deal at all costs:** We have overall ARR targets at PostHog, but these are not exclusively achieved by the Sales, CS & Onboarding teams - the vast majority of our paying customers come in without ever talking to us. This means that revenue isn't these teams' responsibility alone, so we don't have to close deals where we get a short term bump to revenue in exchange for long term pain/churn (e.g. forcing a non-ICP deal to close with extremely discounted pricing).
 
 ## How to work with different types of customer
 
@@ -69,12 +80,21 @@ We'd typically define a deal as a large deal if it has most of the following:
 - There are multiple stakeholders on the customer side, some or all of whom are not engineers
 - The deal is larger than $250k/year
 
-## Who the Sales team are
+## Who we are
 
-Our small team page is maintained on the [Sales & CS team page](/teams/sales-cs). In addition to people who share PostHog's culture, we also value:
+Our people are spread across the [teams above](#our-teams), each with its own small team page. In addition to people who share PostHog's culture, we also value:
 
 - People who have very high empathy with product teams and their needs
 - People who are happy to choose their own objectives if it meets a business goal
 - Low ego, and a willingness to turn around even the most disgruntled and unreasonable customer
 - Hands-on people not motivated by managing a team
 - We would want to buy PostHog from them - this is more important than cool logos
+
+## Staying current with what we ship
+
+Being a [power user of PostHog](#our-vision) means knowing what just shipped and what's about to land. Two internal Slack channels make this easy, and we recommend everyone on the Sales, CS & Onboarding teams joins both:
+
+- [`#changelog`](https://posthog.slack.com/archives/C099B0YCULT) – what's just shipped. Owned by the [Docs & Wizard team](/teams/docs-wizard) and updated constantly as PRs merge.
+- [`#coming-soon`](https://posthog.slack.com/archives/C0B5QBS29QU) – what's shipping soon. Owned by the [Marketing team](/teams/marketing) and posted as a daily digest.
+
+Both channels are populated by agentic workflows that scan merged PRs and feature flag changes and summarize them into the channel. Authors can also opt in or out using the *Publish to changelog?* and *Alert Sales and Marketing teams?* checkboxes on the `posthog/posthog` PR template, or via the `@posthog` Slack app. See [how to publish changelog](/handbook/docs-and-wizard/how-to-publish-changelog).
