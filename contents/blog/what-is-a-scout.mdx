@@ -30,7 +30,9 @@ You can't get away with this for every data pipeline — plenty still needs dete
 
 This post walks through how scouts work in PostHog, with two real scouts we run on our own project – one that [watches agent-driven MCP feedback](#1-the-mcp-feedback-scout-the-code-one), and one that [watches what the internet says about us](#2-the-brand-mentions-scout-the-non-code-one).
 
-This is the deep dive. If you just want the short version, the [Self-driving docs](/docs/start-here) walk the whole [self-improving loop](/docs/start-here/self-improving-loop) – scouts, signals, reports, and the inbox – at a glance. And if you just want to see scouts in action, skip to [two scouts, end to end](#two-scouts-end-to-end) – there's an ~8 minute video walkthrough of a real scout run there too.
+This is the deep dive. If you just want the short version, the [Self-driving docs](/docs/start-here) walk the whole [self-improving loop](/docs/start-here/self-improving-loop) – scouts, signals, reports, and the inbox – at a glance. 
+
+If you just want to see scouts in action, skip to [Two example scouts, explained end to end](#two-example-scouts-explained-end-to-end) – there's an ~8 minute video walkthrough of a real scout run there too.
 
 ## The scout's role in PostHog's self-driving pipeline
 
@@ -47,7 +49,7 @@ A single report – say "this MCP tool keeps blowing the token budget" – might
 
 Scouts are one (agent-pilled) way PostHog Self-driving detects there's something to do at all. They help [make your product self driving](/blog/self-driving-product) by automating routine papercuts (great for full automation), so you can focus more on strategic judgement work (firmly human still).
 
-## How it works
+## How scouts work
 
 There are really only two parts to a scout: the **skill** that holds all the logic (mostly markdown), and a thin **harness** that runs it on a loop. Here's each in turn.
 
