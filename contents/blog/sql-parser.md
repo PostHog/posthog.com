@@ -13,6 +13,8 @@ tags:
   - Inside PostHog
 ---
 
+> This blog post was written by a human (me!) on a very clacky keyboard.
+
 PostHog has run 61.3 million SQL queries in the last 7 days. Our SQL parser's p95 was about 400ms. That's 14 days each week spent waiting for just the worst 5% of queries to parse. 
 
 There are a lot of ways to optimize this, but most involve writing your own parser, which could take weeks or months of dedicated engineering time we didn't have.
@@ -23,7 +25,7 @@ But after the success of using agents to [improve query performance through auto
 
 PostHog lets you [access your data directly with SQL](/docs/sql). We transpile your SQL to raw ClickHouse SQL because:
 
-1. ClickHouse SQL is ugly and verbose, making it inaccessible to a lot of people. 
+1. ClickHouse SQL requires you to know exactly how we store your data under the hood, making it inaccessible to a lot of people. 
 2. We need access controls to ensure users can only access their own data.
 3. People try mean things like prompt injections or reading others data with the untrusted inputs and we need to protect ourselves.
 4. There are a bunch of performance optimizations we add during transpilation. A lot of our other queries, like product analytics, also go through this same transpilation. 
@@ -114,4 +116,4 @@ And although I didn’t write any of the code by hand, I wouldn’t call this �
 
 What does this means for tools like ANTLR? I suspect an AI-based approach will become the new normal. A parser generator will provide the oracle and then an LLM “hand”-rolls a higher performance parser using PBT/fuzzing to make them match.
 
-What specifically did I end up with? My new parser was entirely written by Claude Opus 4.7 in Rust. It is a predominantly predictive recursive-descent parser with a Pratt expression core, an LL(2) cursor widened at specific spots by bounded non-consuming look-ahead probes, plus localized ordered-choice speculative backtracking reserved for the few decisions that need it.
+What specifically did I end up with? My new parser was entirely written by Claude Opus 4.7 in Rust in May 2026. It is a predominantly predictive recursive-descent parser with a Pratt expression core, an LL(2) cursor widened at specific spots by bounded non-consuming look-ahead probes, plus localized ordered-choice speculative backtracking reserved for the few decisions that need it.
