@@ -69,6 +69,25 @@ To fix this:
 3. Upload the new Google Cloud JSON key file.
 4. Re-run the sync.
 
+## Why is my BigQuery source failing with 'Dataset not found'?
+
+If your BigQuery source fails with a message like "BigQuery couldn't find the configured dataset or table," it means the dataset or table you specified doesn't exist in the region PostHog is querying. This is a non-retryable error – PostHog stops the sync instead of retrying indefinitely.
+
+This happens when:
+
+- **The dataset was deleted or renamed** – The dataset you originally configured no longer exists in BigQuery.
+- **The dataset is in a different region** – Your dataset lives in a non-US region, but no custom region is set in your source configuration.
+- **The Project ID was entered in the Dataset ID field** – The Dataset ID should be just the dataset name (e.g., `analytics`), not `project.dataset`.
+- **Incorrect dataset or table names** – A typo or stale name in your source configuration.
+
+To fix this:
+
+1. In PostHog, go to [**Data pipelines > Sources**](https://app.posthog.com/data-management/sources) and select your BigQuery source.
+2. Verify that the **Dataset ID** contains only the dataset name (e.g., `analytics`), not `project.dataset`.
+3. Check that the dataset and table names match what exists in your [BigQuery console](https://console.cloud.google.com/bigquery).
+4. If your dataset isn't in the US region, toggle **Manually specify your dataset region** and enter the correct region (e.g., `us-east1`, `europe-west1`).
+5. Re-run the sync.
+
 ## Why is my Stripe sync failing with an account access error?
 
 If your Stripe sync fails with a message like "does not have access to account," it means your API key isn't authorized for the configured Stripe account, or your OAuth application access has been revoked. This is a non-retryable error – PostHog stops the sync instead of retrying indefinitely.
