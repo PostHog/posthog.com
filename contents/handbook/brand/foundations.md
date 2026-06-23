@@ -91,7 +91,7 @@ Hacker News is intensely logical and skeptical. They'll call out corporate spin,
 
 A few things to avoid when describing PostHog:
 
-- **Not "an analytics platform."** PostHog has grown well beyond analytics. Lead with what we actually are: a suite of apps that helps people build successful products.
-- **Not a single product.** We're platform that help you (and your AI agents) build product autonomously.
+- **Not "an analytics platform."** PostHog has grown well beyond analytics. Lead with what we actually are: a platform that makes your product self-driving, with a suite of tools (product analytics, session replay, feature flags, and more) that helps people build successful products.
+- **Not a single product.** We're a platform that helps you (and your AI agents) build product autonomously.
 - **Not a "product improvement platform."** This is vague and buzzwordy.
 - **Not enterprise-first.** We build for people who self-serve. We get in early and grow with our customers. We don't go out of our way to build niche features just to chase a large contract. Don't let copy, design, or tone drift toward enterprise-speak.

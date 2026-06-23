@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-PostHog ships a lot of apps, which act as capabilities our products can access. This section is how we explain each one — what it does, who it's for, why it beats the obvious alternative, and how it fits into the bigger argument we're making about [self-driving product development](/blog/self-driving-product).
+PostHog ships a lot of tools, which act as capabilities our products can access. This section is how we explain each one — what it does, who it's for, why it beats the obvious alternative, and how it fits into the bigger argument we're making about [self-driving product development](/blog/self-driving-product).
 
 These aren't datasheets. They're opinionated playbooks.
 
@@ -12,11 +12,11 @@ These aren't datasheets. They're opinionated playbooks.
 
 > **PMM tip:** Looking to test new messaging or create a new doc? BuildBetter's AI chat is a good starting point and has context from 1,000s of hours of customer interviews.
 
-## What's on each app page
+## What's on each tool page
 
-Every app in this section follows the same shape, so you can scan them quickly:
+Every tool in this section follows the same shape, so you can scan them quickly:
 
-- **The unique belief** — the one-sentence argument for why this app exists and why ours is different
+- **The unique belief** — the one-sentence argument for why this tool exists and why ours is different
 - **Who it's for / who it isn't for** — honest segmentation, so we stop selling to people we shouldn't
 - **Elevator pitch and three messages** — the short version, then the three framings that hold up in detail
 - **Battle cards** — how we stack against the obvious competitors (Segment, Snowflake, Amplitude, and friends)
@@ -29,7 +29,7 @@ You're welcome to pull from these, but these ideas work best when remixed, and p
 
 Positioning is dynamic. See [how we name and position things](#how-we-name-and-position-things) below for how that evolves at PostHog. These pages capture where we are *today*. If you spot drift between what's written here and what the product actually does, fix it.
 
-## The apps
+## The tools
 
 - [**Analytics**](/handbook/marketing/positioning/analytics) — Product analytics built for engineers, not dashboard tourists
 - [**Session replay**](/handbook/marketing/positioning/session-replay) — Watching real users beats imagining them
@@ -44,7 +44,7 @@ Positioning is dynamic. See [how we name and position things](#how-we-name-and-p
 ## What this isn't
 
 - **Not a feature list.** That's what [the docs](/docs) are for.
-- **Not static.** Apps evolve, pricing changes, and competitors ship things. Treat every page as the current best version, not the final one.
+- **Not static.** Tools evolve, pricing changes, and competitors ship things. Treat every page as the current best version, not the final one.
 
 If something here feels off, doesn't match what the product team is actually building, or contradicts itself across pages — open a PR or flag it in #ask-marketing.
 
@@ -59,7 +59,7 @@ The quick mental model:
 - **What is it?** A single platform for self-driving product development.
 - **How does it work?** It pairs the full context of your data (events, errors, logs, replays, and more) with agents that ship improvements – reactively (prompted, e.g. via Slack) or proactively (e.g. via the Inbox).
 - **Who's it for?** Developers, and anyone with the duty or desire to do technical work, whether or not they write the code themselves.
-- **Where does it live?** Through four products: Web (app.posthog.com), Slack, Desktop (PostHog Code), and MCP.
+- **Where does it live?** Through our products: Web (app.posthog.com), Slack, MCP, and Code (with Mobile to come). The context warehouse is the platform they're all built on.
 
 ### The standard description
 
@@ -77,38 +77,42 @@ Under that story, everything we offer is one of four things. Use these exactly.
 
 **Products** – the surfaces a customer adopts. This is how you access self-driving. Each has a distinct job:
 
+- **Web** (app.posthog.com) – get simple or complex work done without installing anything (this is where Inbox and PostHog AI live today)
 - **Slack** (the Slack App) – get simple stuff done
-- **Desktop** (PostHog Code) – get complex stuff done
 - **MCP** – reactive work without leaving Claude or your editor
-- **Web** (app.posthog.com) – get simple or complex work done without installing anything
+- **Code** (PostHog Code) – get complex stuff done. Becomes **Desktop** in future, once it has non-coding use cases
+- **Mobile** – in future
 
-**Apps** – the functional capabilities accessed through the products product analytics, session replay, feature flags, experiments, error tracking, surveys, web analytics, and so on.
+The **context warehouse** is also a product from a marketing perspective (its own PM/PMM, pricing, and so on), but on posthog.com we present it as the platform everything else is built on, *not* as another item in this list.
 
-**Context** – the data that feeds the self-driving loop: events, recordings, errors, logs, and so on. This is the fuel.
+**Tools** – the functional capabilities accessed through the products: product analytics, session replay, feature flags, experiments, error tracking, surveys, web analytics, and so on. (We used to call these "apps.")
 
-**Context warehouse** – the data warehouse plus the full context-ingestion pipeline for your product.
+**Context** – the data that feeds the self-driving loop: events, recordings, errors, and logs from PostHog, plus other business data (Slack, code, Notion, support tickets, and so on). This is the fuel.
 
-In one line: self-driving is the story, products are how you access it, apps are supporting capabilities, context is the fuel, and the context warehouse is where context lives and is billed.
+**Context warehouse** – the data warehouse plus the full context-ingestion pipeline (data pipelines, batch exports, and so on) for your product.
+
+In one line: self-driving is the story, products are how you access it, tools are supporting capabilities, context is the fuel, and the context warehouse is the platform where context lives and is billed.
 
 ### Use these words
 
-- **"Products"** for Slack / Desktop / MCP / Web
-- **"Apps"** for analytics / replay / flags / error tracking, etc.
-- **"Context"** for events / recordings / logs, etc.
+- **"Products"** for Web / Slack / MCP / Code (and Mobile in future)
+- **"Tools"** for analytics / replay / flags / error tracking, etc.
+- **"Context"** for events / recordings / logs / business data, etc.
 - **"Context warehouse"** for the data warehouse plus ingestion pipeline
 
 ### Avoid these
 
-- **Don't call the surfaces "tools."** In an AI product, "tools" reads as the things agents call, not the things humans use. Only use "tool" when you literally mean agent tool-calling.
-- **Don't call the surfaces "interfaces."** Too corporate for a developer audience.
-- **Don't call apps "products."** That's the old multi-product framing we're moving away from.
+- **Don't call the products "tools."** "Tools" is reserved for the functional capabilities (analytics, replay, flags). It also overlaps with agent tool-calling, so keep the surfaces called "products."
+- **Don't call the products "interfaces."** Too corporate for a developer audience.
+- **Don't call tools "products."** That's the old multi-product framing we're moving away from.
+- **Don't say "PostHog Data Stack."** The data warehouse, modelling, pipelines, and batch exports are all part of the broader context warehouse. "Data Stack" is not a thing we talk about externally.
 - **Don't call context "sources."** "Sources" already means something specific in the data warehouse (Stripe, Postgres, etc.) and will collide.
 
 ### Examples
 
 > ✅ Say: "Add the PostHog Slack product." / ❌ Not: "Add the PostHog Slack tool."
 
-> ✅ Say: "Product analytics is one of our apps." / ❌ Not: "Product analytics is one of our products."
+> ✅ Say: "Product analytics is one of our tools." / ❌ Not: "Product analytics is one of our products."
 
 > ✅ Say: "Your events, replays, and logs are the context that feeds self-driving." / ❌ Not: "...the sources that feed self-driving."
 
@@ -138,9 +142,9 @@ This has a downside - it's messier from a user perspective, but the upside is th
 
 By default, everything should be positioned as something a _user_ is familiar with, not what is necessarily the most technically accurate description.
 
-For example, when we build new apps, we often name them based on what the major competitors are calling themselves.
+For example, when we build new tools, we often name them based on what the major competitors are calling themselves.
 
-This means users get it way faster, so we grow more quickly, and it encourages us to build the basic features that a given app needs versus trying to innovate _before_ we hit product market fit with a new app in our platform.
+This means users get it way faster, so we grow more quickly, and it encourages us to build the basic features that a given tool needs versus trying to innovate _before_ we hit product market fit with a new tool in our platform.
 
 ### What positioning actually means
 
@@ -152,6 +156,6 @@ We also think about how new capabilities fit into the **broader PostHog story**.
 
 ### Positioning is dynamic
 
-The reality is that positioning changes as apps mature. Early on, we might position something narrowly to get feedback from a specific user segment. As it grows and we understand usage patterns, we can broaden or refine that positioning.
+The reality is that positioning changes as tools mature. Early on, we might position something narrowly to get feedback from a specific user segment. As it grows and we understand usage patterns, we can broaden or refine that positioning.
 
 We're comfortable with this iterative approach because it means we're not overthinking positioning before we know what users actually want, and how the product fits into the broader market.
