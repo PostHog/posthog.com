@@ -78,7 +78,7 @@ server.tool("search_events", { /* ... */ }, async (args) => {
 callback, so you instrument it the same way — one line, before or after you register tools:
 
 ```ts
-import createMcpHandler from "mcp-handler"
+import { createMcpHandler } from "mcp-handler"
 import { PostHog } from "posthog-node"
 import { instrument } from "@posthog/mcp"
 
