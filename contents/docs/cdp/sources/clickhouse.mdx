@@ -45,7 +45,7 @@ The data warehouse then starts syncing your ClickHouse data. You can see details
 
 By default, PostHog syncs all columns from each table. To sync only specific columns:
 
-1. During source setup, click **Columns** next to any table in the table picker.
+1. During source setup, click the columns button at the end of the row (it says "All 7" if the table has 7 columns)
 2. Uncheck columns you don't want to sync.
 3. Primary key columns and the incremental sync field (if configured) are always synced and cannot be disabled.
 
@@ -53,7 +53,7 @@ You can also change column selection after setup:
 
 1. Go to the [sources tab](https://app.posthog.com/data-management/sources) and click your ClickHouse source.
 2. Click **Configure** next to any schema.
-3. Under **Columns**, select which columns to sync.
+3. Under **Columns and filters**, select which columns to sync.
 
 <CalloutBox icon="IconInfo" title="Adding columns to existing syncs" type="fyi">
 
@@ -70,7 +70,7 @@ Row filters let you sync only specific rows from a table. During source setup, y
 
 To add row filters:
 
-1. During source setup, after selecting your tables, click **Configure** next to any table.
+1. During source setup, click the columns button at the end of the row (it says "All 7" if the table has 7 columns)
 2. Under **Row filters**, click **Add filter**.
 3. Select a column, operator (such as `equals`, `greater than`, or `in`), and enter a value.
 4. Add additional filters as needed. Multiple filters are combined with AND logic.
