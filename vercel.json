@@ -58,6 +58,7 @@
     "redirects": [
         { "source": "/coupons/:path*", "destination": "https://app.posthog.com/coupons/:path*", "statusCode": 301 },
         { "source": "/handbook/growth/marketing", "destination": "/handbook/marketing", "statusCode": 301 },
+        { "source": "/handbook/growth/revops/lead-assignment-ooo", "destination": "/handbook/growth/revops/lead-assignment-tracker", "statusCode": 301 },
         {
             "source": "/handbook/growth/marketing/:path*",
             "destination": "/handbook/marketing/:path*",
