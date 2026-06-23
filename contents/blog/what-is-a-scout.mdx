@@ -32,7 +32,7 @@ You can't get away with this for every data pipeline — plenty still needs dete
 
 This post walks through how scouts work in PostHog, with two real scouts we run on our own project — one that watches agent-driven MCP feedback, and one that watches what the internet says about us 😱.
 
-This is the deep dive. If you just want the short version, the [docs](/docs/start-here) walk the whole [autonomy loop](/docs/start-here/autonomy-loop) — scouts, signals, reports, and the inbox — at a glance. And if you just want to see scouts in action, skip to [two scouts, end to end](#two-scouts-end-to-end).
+This is the deep dive. If you just want the short version, the [docs](/docs/start-here) walk the whole [autonomy loop](/docs/start-here/autonomy-loop) — scouts, signals, reports, and the inbox — at a glance. And if you just want to see scouts in action, skip to [two scouts, end to end](#two-scouts-end-to-end) — there's an ~8 minute video walkthrough of a real scout run there too.
 
 ## Where scouts fit
 
@@ -201,6 +201,18 @@ And to see how your scouts are doing, there's (you guessed it) an [**`exploring-
 ## Two scouts, end to end
 
 This is all a little hand-wavy so far, so let's trace two real scouts we run on our own project — one at the bottom of the [self-driving product pyramid](/blog/self-driving-product) (an auto-fixable code paper-cut) and one nearer the top (judgment work a human owns).
+
+Prefer to watch? Here's an ~8 minute walkthrough of a real run of the MCP feedback scout below — me clicking through an actual scout run end to end, from what it read to what it emitted.
+
+<iframe
+    width="560"
+    height="315"
+    src="https://www.youtube-nocookie.com/embed/I5S3vAgkgfI"
+    title="A scout run, end to end: the MCP feedback scout"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+></iframe>
 
 ### 1. The MCP feedback scout (the code one)
 
