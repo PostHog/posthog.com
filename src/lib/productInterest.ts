@@ -33,7 +33,6 @@ const PRODUCT_SLUGS = new Set([
     'workflows',
     'logs',
     'endpoints',
-    'self-driving',
     'posthog-code',
     'inbox',
 ])
