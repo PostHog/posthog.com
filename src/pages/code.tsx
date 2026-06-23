@@ -1457,16 +1457,16 @@ const FAQ_ITEMS = [
             <div className="space-y-3">
                 <p>
                     PostHog Code's{' '}
-                    <a href="/docs/posthog-code/inbox" className="underline">
+                    <a href="/docs/start-here/inbox" className="underline">
                         Inbox
                     </a>{' '}
                     connects to{' '}
-                    <a href="/docs/posthog-code/inbox/sources" className="underline">
+                    <a href="/docs/start-here/inbox/sources" className="underline">
                         signal sources
                     </a>{' '}
                     you choose – Error Tracking, support tickets, Session Replay, GitHub Issues, Linear, and Zendesk –
                     and{' '}
-                    <a href="/docs/posthog-code/inbox/research" className="underline">
+                    <a href="/docs/start-here/inbox/research" className="underline">
                         ranks issues
                     </a>{' '}
                     by code importance (hot paths like checkout or billing), user impact (how many users are affected,

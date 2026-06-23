@@ -104,6 +104,12 @@ export default function FreeTier({ size = 'normal' }: { size?: 'normal' | 'large
                 size={size}
             />
             <FreeTierItem
+                name="Inbox"
+                allocation="3 PRs"
+                icon={<Icons.IconSparkles className={`text-blue size-5 ${size === 'large' && 'size-7'}`} />}
+                size={size}
+            />
+            <FreeTierItem
                 name="Workflows"
                 allocation="10K messages per channel"
                 icon={<Icons.IconDecisionTree className={`text-teal size-5 ${size === 'large' && 'size-7'}`} />}

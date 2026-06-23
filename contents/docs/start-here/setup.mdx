@@ -1,0 +1,75 @@
+---
+title: Set up self-driving
+sidebarTitle: Set up self-driving
+sidebar: Docs
+showTitle: true
+---
+
+import { CallToAction } from 'components/CallToAction'
+import WizardCommand from 'components/WizardCommand'
+
+<CalloutBox icon="IconInfo" title="Open beta" type="fyi">
+
+Self-driving is currently in open beta.
+
+</CalloutBox>
+
+Turning on self-driving means connecting the data sources, repositories, and agents that let PostHog ship work for you. It builds on a PostHog project that's already capturing events, so we start there. Most teams are set up in a few minutes.
+
+<CalloutBox icon="IconInfo" title="Before you start" type="fyi">
+
+You'll need PostHog installed and capturing events and a GitHub repository you want agents to work in.
+
+</CalloutBox>
+
+<Steps>
+
+<Step title="Install PostHog" badge="required">
+
+To set up self-driving, you first need to install PostHog and have it capturing events. The fastest way is to use our setup wizard which does the work for you:
+
+<WizardCommand />
+
+If you already have PostHog installed and capturing events, skip ahead. Prefer to set up manually? Follow the [install guide](/docs/getting-started/install).
+
+<CalloutBox icon="IconInfo" title="AI data processing required" type="fyi">
+
+Self-driving relies on AI, so your organization needs [AI data processing turned on](/docs/posthog-ai/allow-access). The wizard checks this and tells you how to enable it if it's off.
+
+</CalloutBox>
+
+</Step>
+
+<Step title="Run the self-driving setup" badge="required">
+
+On your onboarded project, the self-driving setup enables your signal sources, sets up your scouts, and hands you a link to your inbox.
+
+<WizardCommand command="self-driving" />
+
+The signal sources it can turn on include [error tracking](/docs/error-tracking), [session replay](/docs/session-replay), and external sources like Zendesk, GitHub Issues, and Linear. The more you enable, the more PostHog can watch to make your product self-driving.
+
+</Step>
+
+<Step title="Connect Slack" badge="recommended">
+
+Add the [PostHog Slack app](/docs/slack) so you can summon agents and review their work from your team's channels. You connect your Slack workspace once, and each teammate who wants to ship a pull request connects their own GitHub. PostHog also posts a notification to the **#posthog-inbox** channel whenever a new report lands, so your team sees work as it comes in.
+
+</Step>
+
+<Step checkpoint title="Watch your first scout run" badge="required">
+
+The wizard hands you a link to your [inbox](/docs/start-here/inbox). From there, scouts run on a schedule and emit [signals](/docs/start-here/signals), related signals group into [reports](/docs/start-here/reports), and those reports land in your inbox ranked by priority and ready to act on.
+
+</Step>
+
+<Step title="Next step">
+
+You've got a working self-driving setup: scouts watching your data, reports landing in your inbox, and an agent ready to open a pull request for every actionable report. Now head to your inbox to review and merge what lands.
+
+<CallToAction type="primary" to="/docs/start-here/inbox">
+  Your inbox
+</CallToAction>
+
+</Step>
+
+</Steps>

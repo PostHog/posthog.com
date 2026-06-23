@@ -8,17 +8,19 @@ showTitle: true
 
 ### HTML snippet for the JavaScript web SDK
 
-The [HTML snippet](/docs/web-analytics/installation/html-snippet) loads `posthog-js` directly from our CDN. When a new version is released, visitors to your site should get the latest version automatically.
+The [HTML snippet](/docs/web-analytics/installation/html-snippet) loads `posthog-js` directly from our CDN. When a new v1 version is released, visitors to your site should get that version automatically.
 
 However, there are a few things which can break the intended auto-update behavior:
 
-- **Invalid changes to the HTML snippet** - Making changes to the HTML snippet, other than those covered in the [config](/docs/libraries/js/config) and [reference](/docs/references/posthog-js) docs, can cause problems. For example: wrapping the snippet in an additional `if (!window.posthog)` check will cause the browser to serve the old SDK from cache, so the browser gets stuck on the first version they loaded (until/unless the end-user does a hard refresh). This error is often a result of LLMs "defensively" trying to prevent the snippet from being loaded twice, even though the snippet already handles that.
+- **Invalid changes to the HTML snippet** – Making changes to the HTML snippet, other than those covered in the [config](/docs/libraries/js/config) and [reference](/docs/references/posthog-js) docs, can cause problems. For example: wrapping the snippet in an additional `if (!window.posthog)` check will cause the browser to serve the old SDK from cache, so the browser gets stuck on the first version they loaded (until/unless the end-user does a hard refresh). This error is often a result of LLMs "defensively" trying to prevent the snippet from being loaded twice, even though the snippet already handles that.
 
-- **Outdated snippet code** - The snippet itself (the loader stub) occasionally needs updating, to make sure you're initializing PostHog in a way that includes more recent bug fixes and improvements. To make sure you're using the most recent version of the snippet, copy the HTML snippet directly from your [project settings](https://app.posthog.com/settings/project-details#snippet) and paste it directly into the `<head>` section of the HTML for your site or app. (Be sure to remove the old version while you're at it.)
+- **Outdated snippet code** – The snippet itself (the loader stub) occasionally needs updating, to make sure you're initializing PostHog in a way that includes more recent bug fixes and improvements. To make sure you're using the most recent version of the snippet, copy the HTML snippet directly from your [project settings](https://app.posthog.com/settings/project-details#snippet) and paste it directly into the `<head>` section of the HTML for your site or app. (Be sure to remove the old version while you're at it.)
 
-- **See also** - [Caching layers](#caching-layers) for more causes of stale SDK versions hanging around long past the expiry date, when using the HTML snippet.
+- **Pinned snippet version** – Projects can intentionally pin the HTML snippet by editing the script path (`/static/array.js`) to a major path like `/static/1/array.js` or an exact path like `/static/1.380.0/array.js`. Exact pins are useful for short-term rollback, debugging, or stricter change control when you need the SDK script to stay unchanged until you edit the snippet again. That tradeoff also prevents automatic SDK updates. See [HTML snippet versioning](/docs/libraries/js/snippet-versioning) for details.
 
- > **Note:** The HTML snippet supports all the same features, functions, methods, and config options as [installing the npm package](/docs/libraries/js#option-2-install-via-package-manager), while also keeping you up-to-date with the latest available version of the SDK.
+- **See also** – [Caching layers](#caching-layers) for more causes of stale SDK versions hanging around long past the expiry date, when using the HTML snippet.
+
+> **Note:** The HTML snippet supports all the same features, functions, methods, and config options as [installing the npm package](/docs/libraries/js#option-2-install-via-package-manager), while also keeping you up-to-date with the latest available v1 version of the SDK.
 
 ### npm and package manager lockfiles
 
@@ -44,9 +46,9 @@ yarn upgrade posthog-js
 
 Other patterns that cause version drift in npm setups:
 
-- **Micro-frontends** - Each micro-frontend may bundle its own version of `posthog-js`. If they're updated independently, you can end up with multiple versions active simultaneously.
-- **Monorepos** - Different packages in a monorepo may depend on different versions of `posthog-js`, especially if each has its own lockfile.
-- **Dependabot or Renovate misconfiguration** - Automated dependency tools may be configured to ignore or pin PostHog packages, preventing updates from being proposed.
+- **Micro-frontends** – Each micro-frontend may bundle its own version of `posthog-js`. If they're updated independently, you can end up with multiple versions active simultaneously.
+- **Monorepos** – Different packages in a monorepo may depend on different versions of `posthog-js`, especially if each has its own lockfile.
+- **Dependabot or Renovate misconfiguration** – Automated dependency tools may be configured to ignore or pin PostHog packages, preventing updates from being proposed.
 
 > **Fix:** [Staying current automatically](#staying-current-automatically) covers how to configure Dependabot and Renovate to keep PostHog packages updated safely.
 
@@ -68,23 +70,27 @@ One effective way to prevent CDN and proxy caching from impacting the PostHog we
 
 Caching at the CDN layer is closely related to how you build and deploy your app:
 
-- **Incremental deploys without clean builds** - If your build system only rebuilds changed files, old JavaScript chunks may still reference the old version of `posthog-js`. This can result in different versions of the library being active at the same time within the same session.
+- **Incremental deploys without clean builds** – If your build system only rebuilds changed files, old JavaScript chunks may still reference the old version of `posthog-js`. This can result in different versions of the library being active at the same time within the same session.
 - **Tag manager templates** (GTM, Segment, etc.) can pin a specific version of `posthog-js`. These templates need to be manually updated when you want to move to a newer version of the HTML snippet.
-- **Multiple entry points** - Apps with multiple build entry points may load different builds of `posthog-js`, some updated, some not, depending on which entry point a user lands on.
+- **Multiple entry points** – Apps with multiple build entry points may load different builds of `posthog-js`, some updated, some not, depending on which entry point a user lands on.
 
 ---
 ## Ways to keep SDK versions current
 
 ### Staying current automatically
 
-> For our [JavaScript web SDK](/docs/libraries/js) (a package within the `posthog-js` monorepo) we recommend the [HTML snippet](/docs/web-analytics/installation/html-snippet), which will serve the latest/current version automatically.
+> For our [JavaScript web SDK](/docs/libraries/js) (a package within the `posthog-js` monorepo) we recommend the [HTML snippet](/docs/web-analytics/installation/html-snippet), which will serve the latest v1 version automatically.
 
 #### JavaScript web HTML snippet
+
 1. Copy your snippet from [project settings](https://app.posthog.com/settings/project-details#snippet). This ensures you're using the current snippet code with your project API key pre-populated.
 2. Do NOT add an `if (!window.posthog)` guard wrapping the snippet.
-3. The snippet loads `posthog-js` from our CDN and will auto-update on each fresh page load. No further action is required unless you're experiencing caching issues (see [Caching layers](#caching-layers)).
+3. Keep the snippet path as `/static/array.js` unless you intentionally need an explicit major path like `/static/1/array.js` or an exact path like `/static/1.380.0/array.js` for rollback, debugging, or stricter change control.
+4. Set `strict_script_versioning: true` if your CDN or reverse proxy can serve versioned `/static/*` asset paths. This is useful even without an exact snippet pin, because it keeps feature scripts on the same SDK version as the loaded `array.js`. [PostHog's managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) supports this out of the box.
+5. On the default path, the snippet loads `posthog-js` from our CDN and will auto-update with new v1 releases on each fresh page load. No further action is required unless you're experiencing caching issues (see [Caching layers](#caching-layers)).
 
 #### JavaScript web npm package
+
 Dependabot and Renovate can open pull requests when new versions of PostHog packages are published, making it easier to stay current without manual monitoring.
 
 ##### Security considerations

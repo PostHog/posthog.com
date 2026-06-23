@@ -1,0 +1,43 @@
+---
+title: Web app
+sidebarTitle: Web app
+sidebar: Docs
+showTitle: true
+---
+
+import { CallToAction } from 'components/CallToAction'
+import { AppsList } from 'components/Docs/AppsList'
+
+The [PostHog web app](https://app.posthog.com) is the PostHog you already know, now a surface for self-driving. It's the full product in your browser, and it ties the whole loop together: your data lives here, your apps run here, and the inbox where you review the work agents do lives here too.
+
+It's one of the surfaces you work from, alongside [Slack](/docs/slack) and [MCP](/docs/model-context-protocol). Slack is for summoning agents in the flow of your day. The web app is for going deep: exploring your data, reviewing proposed work, and steering what self-driving does.
+
+## Your inbox
+
+The inbox is where self-driving surfaces work for you. [Reports](/docs/start-here/reports) and the pull requests agents open land here, ranked by priority. From the inbox you review what a scout found, dig into the evidence behind it, and approve, steer, or decline the change.
+
+See the [inbox docs](/docs/start-here/inbox) for how it works.
+
+## Your apps
+
+Every PostHog product is an app you use in the web app:
+
+<AppsList className="my-4" />
+
+They aren't only dashboards. The data these apps capture is what [scouts](/docs/start-here/scouts) watch, and the patterns they find become the [signals](/docs/start-here/signals) that drive self-driving. The more apps you use, the richer your signals, and the more self-driving has to act on.
+
+## Explore and steer
+
+The web app is where you go beyond the inbox:
+
+- **Explore your data** with dashboards, insights, funnels, session replays, and [SQL](/docs/sql).
+- **Ask [PostHog AI](/docs/posthog-ai)** questions about your product in plain language.
+- **Steer the work** self-driving proposes, and manage your [data](/docs/data) and [access controls](/docs/settings/access-control).
+
+## Next steps
+
+If you have a [PostHog account](https://app.posthog.com/signup), you can launch the web app. To see your own data, inbox, and signals in it, you'll need PostHog [set up and capturing events](/docs/start-here/setup) first.
+
+<CallToAction type="primary" to="https://app.posthog.com">
+  Open the web app
+</CallToAction>
