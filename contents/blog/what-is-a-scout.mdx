@@ -20,15 +20,15 @@ seo:
 
 A scout is a small agent (don't overthink that word) that looks at, wrangles, and makes sense of any data available in PostHog. It's a core component of [Self-driving](/docs/start-here) in PostHog (now in open beta), an autonomous loop that monitors your product for patterns and drafts fixes. 
 
-Its job is to emit useful **signals** — things worth knowing — that you or your agents can act on. Sometimes that action happens automatically, like an agent opening a PR to fix what the scout found, sometimes it needs some human judgement before you and your agent can tackle it together.
+A scout's job is to emit useful **signals** – things worth knowing – that you or your agents can act on. Sometimes that action happens automatically, like an agent opening a PR to fix what the scout found, sometimes it needs some human judgement before you and your agent can tackle it together.
 
-A scout is, at its core, **a skill** — and that skill is the main interface everyone works through, human or agent. The business logic that used to be a sprawl of `if/else` branches and helper functions now starts life as a few hundred lines of English anyone can read, write, and improve (obligatory [Karpathy tweet](https://x.com/karpathy/status/1617979122625712128)).
+A scout is, at its core, **a skill** – and that skill is the main interface everyone works through, human or agent. The business logic that used to be a sprawl of `if/else` branches and helper functions now starts life as a few hundred lines of English anyone can read, write, and improve (obligatory [Karpathy tweet](https://x.com/karpathy/status/1617979122625712128)).
 
 ![Andrej Karpathy's tweet: "The hottest new programming language is English"](https://res.cloudinary.com/dmukukwp6/image/upload/karpathy_tweet_8e8a64e5ed.png)
 
 You can't get away with this for every data pipeline — plenty still needs determinism — but where you have the flexibility, the trade-offs are increasingly worth it.
 
-This post walks through how scouts work in PostHog, with two real scouts we run on our own project — one that [watches agent-driven MCP feedback](#1-the-mcp-feedback-scout-the-code-one), and one that [watches what the internet says about us](#2-the-brand-mentions-scout-the-non-code-one).
+This post walks through how scouts work in PostHog, with two real scouts we run on our own project – one that [watches agent-driven MCP feedback](#1-the-mcp-feedback-scout-the-code-one), and one that [watches what the internet says about us](#2-the-brand-mentions-scout-the-non-code-one).
 
 This is the deep dive. If you just want the short version, the [Self-driving docs](/docs/start-here) walk the whole [self-improving loop](/docs/start-here/self-improving-loop) – scouts, signals, reports, and the inbox – at a glance. And if you just want to see scouts in action, skip to [two scouts, end to end](#two-scouts-end-to-end) – there's an ~8 minute video walkthrough of a real scout run there too.
 
