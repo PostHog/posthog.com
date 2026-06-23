@@ -35,7 +35,9 @@ if let result = PostHogSDK.shared.getFeatureFlagResult("flag-key"),
 }
 ```
 
-You can also inspect all currently loaded feature flags at once with `getAllFeatureFlags()`. It returns each flag's `key`, `enabled` state, `variant`, and `payload`, and does not send a `$feature_flag_called` event:
+### Inspecting all feature flags
+
+You can inspect all currently loaded feature flags with `getAllFeatureFlags()`. It returns each flag's `key`, `enabled` state, `variant`, and `payload`, and does not send a `$feature_flag_called` event:
 
 ```swift
 for flag in PostHogSDK.shared.getAllFeatureFlags() ?? [] {
