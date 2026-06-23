@@ -29,7 +29,7 @@ In this guide, we'll compare the best Langfuse alternatives and look at where ea
 - **Typical users**: Engineers and product teams
 - **Typical customers**: Mid-size B2Bs and startups
 
-![PostHog AI Observability](https://res.cloudinary.com/dmukukwp6/image/upload/Posthog_AI_Observability_428690d037.png)
+![PostHog AI Observability](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2026_06_22_at_13_19_01_2x_acc4617c50.png)
 
 ### What is PostHog?
 
@@ -43,11 +43,11 @@ The free tier includes 100K AI observability events per month, with usage-based 
 
 ### Key features
 
-- [**Generations**](docs/ai-observability/generations): Monitor model performance, token usage, costs, latency, and errors across your AI features from a single view.
-- [**Traces**](docs/ai-observability/traces): Follow complete AI workflows from start to finish to understand how requests move through prompts, tools, and model calls.
-- [**AI evals**](docs/ai-evals/evaluations): Automatically score model outputs using LLM-as-a-judge or code-based checks to track quality and identify regressions over time.
-- [**Prompt management**](docs/prompt-management) *(beta):* Create, version, and update prompts without redeploying code. Compare versions and understand how prompt changes affect outputs.
-- [**SQL access**](docs/sql): Query AI observability data with SQL and analyze it alongside product, user, and business data.
+- [**Generations**](/docs/ai-observability/generations): Monitor model performance, token usage, costs, latency, and errors across your AI features from a single view.
+- [**Traces**](/docs/ai-observability/traces): Follow complete AI workflows from start to finish to understand how requests move through prompts, tools, and model calls.
+- [**AI evals**](/docs/ai-evals/evaluations): Automatically score model outputs using LLM-as-a-judge or code-based checks to track quality and identify regressions over time.
+- [**Prompt management**](/docs/prompt-management) *(beta):* Create, version, and update prompts without redeploying code. Compare versions and understand how prompt changes affect outputs.
+- [**SQL access**](/docs/sql): Query AI observability data with SQL and analyze it alongside product, user, and business data.
 - [**Session replay**](/docs/ai-observability/link-session-replay): Watch recordings of users interacting with AI features and investigate issues alongside the actions that triggered them.
 
 ### How does PostHog compare to Langfuse?
@@ -100,7 +100,7 @@ Another difference is what you're paying for. Both PostHog and Langfuse use usag
 
 ### Why do companies use PostHog?
 
-According to [reviews on G2](https://www.g2.com/products/posthog/reviews), companies use PostHog because:
+According to reviews on G2, companies use PostHog because:
 
 1. **It replaces multiple tools:** PostHog can replace Google Analytics (web and product analytics), Sentry (error monitoring), and standalone AI observability tools. Teams can monitor LLM performance, investigate AI interactions, and analyze product usage from the same dashboard.
 2. **Pricing is transparent and scalable:** Reviewers value the usage-based pricing and the generous free tier they can keep using as they grow.
@@ -108,10 +108,10 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 
 PostHog can also do more than just report on your product: it can act on it. By holding the full context of what's happening, agents can use that context to suggest and ship improvements. And you can steer it from wherever you already work:
 
-- **[In Slack](/blog)** – tag `@PostHog` in any thread to ask a data question ("why did EU signups drop last week?") or to ship a fix. 
+- **[In Slack](/slack)** – tag `@PostHog` in any thread to ask a data question ("why did EU signups drop last week?") or to ship a fix. 
 - **[In the app (PostHog AI)](/ai)** – ask questions in plain English, build dashboards, and dig into traces or replays without writing SQL.
 - **[In your own editor or agent (via MCP)](/mcp)** – wire PostHog's live product context into Claude Code, Codex, or Cowork, so your agent can pull real data and take action alongside everything else.
-- **[On the desktop (PostHog Code)](/mcp)** – run coding agents on top of your product data, with signals turned into a ranked inbox and up to nine agents working in parallel.
+- **[On the desktop (PostHog Code)](/code)** – run coding agents on top of your product data, with signals turned into a ranked inbox and up to nine agents working in parallel.
 
 > #### Bottom line
 >
@@ -224,7 +224,7 @@ Phoenix is built for teams running complex AI systems in production. It integrat
 
 ### How does Arize Phoenix compare to Langfuse?
 
-Arize Phoenix and Langfuse are both observability platforms for LLM applications, but they focus on different areas. Phoenix emphasizes deep tracing, agent observability, evaluations, and OpenTelemetry-based instrumentation.
+Phoenix emphasizes deep tracing, agent observability, evaluations, and OpenTelemetry-based instrumentation.
 
 Langfuse provides stronger prompt management and workflow tooling, while Phoenix goes deeper on observability, OpenTelemetry-native instrumentation, and agent analysis.
 
@@ -306,7 +306,7 @@ Braintrust is best known for its evaluation tooling. Teams can build datasets, r
 
 ### How does Braintrust compare to Langfuse?
 
-Braintrust and Langfuse both provide observability and evaluation tooling for LLM applications. The biggest difference is emphasis. Braintrust is built around evaluation-driven development, while Langfuse balances observability, prompt management, datasets, and workflow tooling in a broader LLM engineering platform.
+Braintrust is built around evaluation-driven development. Langfuse balances observability, prompt management, datasets, and workflow tooling in a broader LLM engineering platform.
 
 Another major difference is experimentation. Braintrust places experiments, benchmarks, and evaluation workflows at the center of the product. Langfuse includes evaluations, but its focus extends beyond model quality measurement.
 
@@ -335,7 +335,6 @@ Another major difference is experimentation. Braintrust places experiments, benc
 <details>
 <summary>Main differences between Braintrust and Langfuse</summary>
 
-- Braintrust is built around evaluation-driven development, while Langfuse balances observability, prompt management, datasets, and evaluation workflows.
 - Braintrust puts experiments, benchmarks, and quality measurement at the center of the product. Langfuse treats evaluations as one part of a broader observability platform.
 - Braintrust includes built-in sentiment classifiers and evaluation workflows for measuring output quality. Langfuse focuses more heavily on tracing, prompt management, and workflow observability.
 - Langfuse is open source and can be self-hosted, while Braintrust is a proprietary platform.
@@ -622,14 +621,14 @@ For more alternatives, check out our list of [cheapest AI observability tools](/
 <details>
 <summary>What other AI observability tools are available?</summary>
 
-Beyond the tools in this guide, there are plenty of other options worth exploring. See our roundup of the [best AI observability tools](https://posthog.com/blog/best-open-source-llm-observability-tools) for a broader comparison.
+Beyond the tools in this guide, there are plenty of other options worth exploring. See our roundup of the [best AI observability tools](/blog/best-open-source-llm-observability-tools) for a broader comparison.
 
 </details>
 
 <details>
 <summary>What's the difference between LLM observability and traditional observability?</summary>
 
-Traditional observability helps you monitor infrastructure, logs, errors, and application performance. [LLM observability](https://posthog.com/blog/what-is-ai-observability) (also known as AI observability) focuses on prompts, model outputs, token usage, evaluations, tool calls, and agent workflows. Most AI teams need both.
+Traditional observability helps you monitor infrastructure, logs, errors, and application performance. [LLM observability](/blog/what-is-ai-observability) (also known as AI observability) focuses on prompts, model outputs, token usage, evaluations, tool calls, and agent workflows. Most AI teams need both.
 
 </details>
 
