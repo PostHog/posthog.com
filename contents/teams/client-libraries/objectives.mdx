@@ -12,6 +12,7 @@ What we'll ship:
 -   Use the harness in CI so SDK changes stay on contract
 -   Make it easier for SDK contributors and employees to validate changes before release
 -   Publish shared SDK skills that customers can install and use directly, using the SDK specs as the source of truth
+-   Explore a spec-driven "software factory" workflow where changes to SDK specs can drive agent-assisted updates across SDKs, with human review and approval
 -   Experiment with a GitHub Action that triages issues and opens PRs for straightforward fixes automatically, similar to [clawsweeper](https://github.com/openclaw/clawsweeper)
 
 #### Goal 2: Mobile push notifications (Driver: <TeamMember name="Ioannis Josephides" />)
@@ -33,6 +34,9 @@ What we'll try to ship:
 -   Flutter desktop SDK
 -   Session replay for macOS
 -   React Native Expo Router touch events
+-   Flutter SDK init bootstrapping for feature flags
+-   Framework-level SDK experiences and docs that feel native to the frameworks customers actually use
+-   CocoaPods sunset migration plan
 -   Rust SDK v1 GA
 -   iOS SDK next major version
 -   Async version of the Python SDK
@@ -53,11 +57,11 @@ What we'll ship:
 
 #### Goal 5: SDK observability (Driver: <TeamMember name="Ioannis Josephides" />)
 
-Improve observability for SDK behavior so we can better understand reliability, performance, and customer-impacting issues across client libraries.
+Research SDK observability so we can understand what is feasible before committing to specific implementation work. The goal is to learn how we can better understand reliability, performance, and customer-impacting issues across client libraries.
 
-What we'll ship:
+What we'll explore:
 
--   Instrument SDK behavior that affects reliability and customer experience
--   Add visibility into SDK errors, delivery failures, and performance issues
--   Use SDK observability to improve support and debugging workflows
--   Feed learnings back into SDK quality, release, and support processes
+-   Whether we can safely instrument SDK behavior that affects reliability and customer experience
+-   Visibility into SDK errors, delivery failures, and performance issues
+-   How SDK observability could improve support and debugging workflows
+-   How feasible learnings should feed back into SDK quality, release, and support processes
