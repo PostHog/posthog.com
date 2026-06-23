@@ -18,7 +18,7 @@ seo:
     metaDescription: 'A scout is a small scheduled agent that watches your PostHog data, learns what is worth knowing, and emits useful signals you (or your agents) can act on. Here is how they work, with real examples.'
 ---
 
-A scout is a small agent (don't overthink that word) that looks at, wrangles, and makes sense of any data available in PostHog. 
+A scout is a small agent (don't overthink that word) that looks at, wrangles, and makes sense of any data available in PostHog. It's a core component of [Self-driving](/docs/start-here) in PostHog (now in open beta), an autonomous loop that monitors your product for patterns and drafts fixes. 
 
 Its job is to emit useful **signals** — things worth knowing — that you or your agents can act on. Sometimes that action happens automatically, like an agent opening a PR to fix what the scout found, sometimes it needs some human judgement before you and your agent can tackle it together.
 
@@ -32,7 +32,7 @@ This post walks through how scouts work in PostHog, with two real scouts we run 
 
 This is the deep dive. If you just want the short version, the [Self-driving docs](/docs/start-here) walk the whole [self-improving loop](/docs/start-here/self-improving-loop) – scouts, signals, reports, and the inbox – at a glance. And if you just want to see scouts in action, skip to [two scouts, end to end](#two-scouts-end-to-end) – there's an ~8 minute video walkthrough of a real scout run there too.
 
-## Where scouts fit
+## The scout's role in PostHog's self-driving pipeline
 
 Scouts don't live on their own, they feed our self-driving product pipeline:
 
@@ -45,7 +45,7 @@ A report can be made up of many signals from many sources. Scouts are just one o
 
 A single report – say "this MCP tool keeps blowing the token budget" – might be assembled from a scout finding, error tracking, a few raw events, and a health check, all grouped together because they're about the same underlying problem.
 
-Scouts are one (agent-pilled) way self-driving detects there's something to do at all.
+Scouts are one (agent-pilled) way PostHog Self-driving detects there's something to do at all. They help [make your product self driving](/blog/self-driving-product) by automating routine papercuts (great for full automation), so you can focus more on strategic judgement work (firmly human still).
 
 ## How it works
 
@@ -59,9 +59,7 @@ With a scout, almost all of that logic lives in a **skill** — a markdown file 
 
 What used to be `if response_rate < 0.3 and sample_size > 30:` is now a sentence like *"a flagship NPS survey needs ≥30 responses/week and a ≥10% score drop before it's worth acting on."* That's trivially easy to iterate on and sense check with your agents, and you don't need to be an engineer to do it.
 
-Or even better (in many cases) you just tell the agent what you care about and are trying to achieve and let it handle the actual logic under the hood in the weights!
-
-As your scout runs over time of course you can easily add a list of dos and don'ts or anything else you want to steer it in ways that are valuable to you.
+You can be as prescriptive as you like, but in many cases you can just tell the agent what you care about, give it a goal, and let it handle the actual logic. You can then fine tune your agent as it runs by adding dos and don'ts, and other parameters that guide its approach.
 
 Everything else — the loop, the sandbox, the scheduler, the memory — is deliberately thin plumbing around that skill. The [scout harness prompt](https://github.com/PostHog/posthog/blob/master/products/signals/backend/scout_harness/prompt.py), for example, is already too long at 200-ish lines – I need to chip away at that!
 
