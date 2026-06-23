@@ -483,6 +483,83 @@ Status values: `new` (just created), `open` (being worked on), `pending` (waitin
 
 ## Schema discovery with information_schema
 
+PostHog provides four queryable `system.information_schema` tables that let you discover tables, columns, data types, and relationships directly in HogQL. These virtual tables are computed at query time from your project's live schema, so they always reflect your current tables — including data warehouse sources and saved views.
+
+### `system.information_schema.tables`
+
+Lists all tables visible to your project.
+
+```sql
+SELECT table_name, table_type, description
+FROM system.information_schema.tables
+```
+
+| Column          | Description                                                                        |
+| --------------- | ---------------------------------------------------------------------------------- |
+| `table_catalog` | Catalog identifier (same as table_name)                                            |
+| `table_schema`  | Schema grouping: `public`, `system`, `warehouse`, `views`, or `information_schema` |
+| `table_name`    | Fully qualified table name                                                         |
+| `table_type`    | One of `posthog`, `system`, `data_warehouse`, `view`, or `information_schema`      |
+| `description`   | Human-readable description of the table (if available)                             |
+| `row_count`     | Approximate row count (data warehouse tables only)                                 |
+
+### `system.information_schema.columns`
+
+Lists all columns for every visible table, including their types and descriptions.
+
+```sql
+SELECT column_name, data_type, is_nullable, description
+FROM system.information_schema.columns
+WHERE table_name = 'events'
+```
+
+| Column             | Description                                               |
+| ------------------ | --------------------------------------------------------- |
+| `table_schema`     | Schema the table belongs to                               |
+| `table_name`       | Table the column belongs to                               |
+| `column_name`      | Name of the column                                        |
+| `ordinal_position` | Column position within the table                          |
+| `data_type`        | HogQL type (e.g. `String`, `DateTime`, `Integer`, `JSON`) |
+| `is_nullable`      | Whether the column can be null                            |
+| `is_array`         | Whether the column is an array type                       |
+| `field_kind`       | One of `column`, `expression`, or `virtual_table`         |
+| `description`      | Human-readable description of the column (if available)   |
+
+### `system.information_schema.relationships`
+
+Shows how tables relate to each other through lazy joins and field traversers.
+
+```sql
+SELECT source_table, source_column, target_table, relationship_kind
+FROM system.information_schema.relationships
+WHERE source_table = 'events'
+```
+
+| Column              | Description                                |
+| ------------------- | ------------------------------------------ |
+| `source_table`      | Table the relationship originates from     |
+| `source_column`     | Column or field on the source table        |
+| `target_table`      | Table the relationship points to           |
+| `target_column`     | Column on the target table (if applicable) |
+| `relationship_kind` | Either `lazy_join` or `field_traverser`    |
+| `via`               | Join resolver name (for lazy joins)        |
+
+### `system.information_schema.data_types`
+
+A static reference of all HogQL data types and their descriptions.
+
+```sql
+SELECT type_name, description
+FROM system.information_schema.data_types
+```
+
+| Column        | Description              |
+| ------------- | ------------------------ |
+| `type_name`   | Name of the HogQL type   |
+| `description` | What the type represents |
+
+## Schema discovery with information_schema
+
 The `system.information_schema` namespace provides four queryable virtual tables that describe your database schema. You can use them to discover available tables, columns, relationships, and data types directly through SQL queries.
 
 This is useful for exploring the schema interactively in the [SQL editor](/docs/data-warehouse/query), and it's also used by [PostHog AI](/docs/posthog-ai) and other AI agents to understand the database structure when writing queries.
