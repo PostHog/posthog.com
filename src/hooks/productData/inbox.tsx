@@ -6,7 +6,7 @@ export const inbox = {
     handle: 'inbox',
     type: 'inbox',
     color: 'blue',
-    status: 'beta',
+    pricingBadge: 'Beta',
     // No category or slug yet: keep this visible on pricing surfaces, not product/app navigation.
     slider: {
         marks: [3, 10, 50, 100],
