@@ -10,7 +10,7 @@ We define who we build for as ICP, i.e. the team, and the persona, i.e. the actu
 
 AKA our [ideal customer profile](/newsletter/ideal-customer-profile-framework).
 
-We build for the people building products in **AI-first software teams at any scale**. 
+We build for the people building products in **AI-pilled software teams at any scale**. 
 
 We want to be the first tool that technical founders go to when they start building their product.
 
