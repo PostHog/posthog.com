@@ -1,10 +1,10 @@
 import { IconSparkles } from '@posthog/icons'
 
-export const selfDriving = {
-    name: 'Self-Driving',
+export const inbox = {
+    name: 'Inbox',
     Icon: IconSparkles,
-    handle: 'self_driving',
-    type: 'self_driving',
+    handle: 'inbox',
+    type: 'inbox',
     color: 'blue',
     // No category or slug yet: keep this visible on pricing surfaces, not product/app navigation.
     slider: {

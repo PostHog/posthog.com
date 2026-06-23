@@ -104,7 +104,7 @@ export default function FreeTier({ size = 'normal' }: { size?: 'normal' | 'large
                 size={size}
             />
             <FreeTierItem
-                name="Self-Driving"
+                name="Inbox"
                 allocation="3 PRs"
                 icon={<Icons.IconSparkles className={`text-blue size-5 ${size === 'large' && 'size-7'}`} />}
                 size={size}
