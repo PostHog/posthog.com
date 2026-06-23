@@ -72,3 +72,14 @@ We're also considering letting you sample your data to control usage. If that's 
 Manage your billing limit and review your spend on the [billing settings](https://app.posthog.com/organization/billing) page.
 
 When you hit your billing limit, report and PR generation is paused until your usage resets at the next billing period.
+
+## Refunds
+
+Self-driving is currently in open beta, and we don't get it right every time yet.
+
+You're charged per PR, so a PR should be worth paying for. We hold every PR to two standards:
+
+* **Accurate report:** The report identifies a real issue and describes it correctly, without false positives or hallucinated problems.
+* **Solves the stated problem:** The code actually addresses the issue described in the report, rather than a tangent or partial fix.
+
+If a PR doesn't meet this bar, we'll refund it. Get in touch via in-app support and tell us what went wrong.
