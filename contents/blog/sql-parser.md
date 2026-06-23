@@ -24,7 +24,7 @@ I used multiple long-running Claude Code sessions in parallel, after the success
 ## Why does PostHog even have an SQL parser?
 
 PostHog lets you [access your data directly with SQL](/docs/sql). We transpile your SQL to raw ClickHouse SQL because:
-* We want to present a logical view of your data which is independant of the physical layout in the DB
+* We want to present a logical view of your data which is independent of the physical layout in the DB
 * This lets us change things at the DB layer without breaking existing queries
 * We can also add a bunch of performance optimizations and access controls
 
