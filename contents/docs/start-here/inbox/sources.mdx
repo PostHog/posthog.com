@@ -1,0 +1,96 @@
+---
+title: Signal sources
+sidebarTitle: Signal sources
+sidebar: Docs
+showTitle: true
+---
+
+import { CallToAction } from 'components/CallToAction'
+import List from 'components/List'
+
+<CalloutBox icon="IconInfo" title="Open beta" type="fyi">
+
+Self-driving is currently in open beta.
+
+</CalloutBox>
+
+Signal sources are what fill your inbox. A [signal](/docs/start-here/signals) can be a production error, a support conversation, a session replay pattern, a log alert changing state, a Replay Vision scanner finding, or an issue from an external tracker. Each source watches one of these streams and turns what it finds into work worth investigating.
+
+## Configure sources
+
+From the inbox, open settings and configure your sources. Toggle the ones you want to enable, then follow the authentication prompts for any external services. The inbox is available across surfaces — the [web app](/docs/start-here/web), [PostHog Code](/docs/posthog-code), and Slack — and your sources stay the same wherever you open it.
+
+<CalloutBox icon="IconInfo" title="MCP is handled for you" type="fyi">
+
+You don't need to configure MCP servers for inbox sources manually. Once your repository is connected, research tasks can run automatically.
+
+</CalloutBox>
+
+## PostHog sources
+
+These sources are available when the matching PostHog product has data in your project.
+
+<List
+  className="grid gap-4 grid-cols-1 @md:grid-cols-3 not-prose"
+  items={[
+    {
+      label: "Error tracking",
+      url: "/docs/error-tracking",
+      icon: "IconWarning",
+      description: "New exceptions, reopened issues, and error volume spikes.",
+      lineClamp: 2,
+    },
+    {
+      label: "Support",
+      url: "/docs/support",
+      icon: "IconChat",
+      description: "Actionable items from conversations.",
+      lineClamp: 2,
+    },
+    {
+      label: "Session replay",
+      url: "/docs/session-replay",
+      icon: "IconRewindPlay",
+      description: "UX friction, unusual behavior, rage clicks.",
+      lineClamp: 2,
+    },
+    {
+      label: "Logs",
+      url: "/docs/logs",
+      icon: "IconTerminal",
+      description: "Log alerts that fire or break due to threshold breaches.",
+      lineClamp: 2,
+    },
+    {
+      label: "Replay Vision",
+      url: "/docs/replay-vision",
+      icon: "IconReplayVision",
+      description: "Actionable product issues detected by scanners.",
+      lineClamp: 2,
+    },
+  ]}
+/>
+
+## External sources
+
+External sources pull issue context into the same inbox queue as your product signals.
+
+| Source        | What the inbox reads                                 | What the inbox does                                                              |
+| ------------- | ---------------------------------------------------- | -------------------------------------------------------------------------------- |
+| GitHub Issues | New issues in connected repositories                 | Starts a research task to find related code and decide whether a fix is possible |
+| Linear        | Issue title, description, labels, and linked context | Searches the codebase and keeps the report tied to the original issue            |
+| Zendesk       | Customer support ticket context                      | Turns actionable bug reports into researched implementation work                 |
+
+## What happens next
+
+When a signal arrives, the inbox creates a [report](/docs/start-here/reports) and starts research if the source is enabled. The research agent connects the signal to your codebase, checks user impact, and marks the report as **Actionable** when a code fix is possible.
+
+From there, you can review the report, ask for more research, let an implementation agent open a pull request, or audit the agent log to see exactly what it read and why.
+
+## Next step
+
+See how the inbox researches each report.
+
+<CallToAction type="primary" to="/docs/start-here/inbox/research">
+  Research tasks
+</CallToAction>

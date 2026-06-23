@@ -1,0 +1,40 @@
+---
+title: Reports
+sidebarTitle: Reports
+sidebar: Docs
+showTitle: true
+---
+
+import { CallToAction } from 'components/CallToAction'
+
+<CalloutBox icon="IconInfo" title="Open beta" type="fyi">
+
+Self-driving is currently in open beta.
+
+</CalloutBox>
+
+A report groups related [signals](/docs/start-here/signals) into one item of work. Instead of triaging a noisy stream of findings, you get a single, framed problem with the evidence behind it.
+
+## Why reports, not raw signals
+
+A real problem rarely shows up as one clean signal. "Checkout is broken" might surface as a spike in error tracking, a cluster of rage-clicks in session replay, and a handful of support tickets, all at once. A report ties those together so you see one problem instead of a dozen alerts.
+
+## What's in a report
+
+A report is enriched and ranked:
+
+- **Grouped signals** – the related findings, from one or more sources, with the evidence behind them.
+- **Priority** – how urgent it is, so the most important work rises to the top.
+- **State** – whether it's **actionable**, so an agent can open a pull request, or **needs input** before anything can be worked on.
+
+## Where reports go
+
+Reports land in your [inbox](/docs/start-here/inbox), ranked by priority. An agent investigates each one. Actionable reports get a pull request to review and merge – the rest wait in your inbox for your input.
+
+## Next step
+
+See where reports land and how you act on them.
+
+<CallToAction type="primary" to="/docs/start-here/inbox">
+  The inbox
+</CallToAction>

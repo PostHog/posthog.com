@@ -1,0 +1,85 @@
+---
+title: Self-driving pricing
+sidebarTitle: Pricing
+sidebar: Docs
+showTitle: true
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconInfo" title="Open beta" type="fyi">
+
+Self-driving is currently in open beta, and pricing is subject to change.
+
+</CalloutBox>
+
+PostHog self-driving is priced on an outcome basis, which means you only pay for a completed piece of work.
+
+You pay a flat **$15 per pull request**: an actionable [report](/docs/start-here/reports) with a code change attached, surfaced in your [inbox](/docs/start-here/inbox).
+
+You're only billed for actionable reports that become a pull request. Reports that aren't actionable, or that need your input instead of a code change, are always free.
+
+## How PostHog assesses actionability
+
+Before a [report](/docs/start-here/reports) can become a pull request, an agent investigates it. It digs into your codebase and your PostHog data to confirm the problem is real and to work out whether there's a concrete change it could make. Based on what it finds, every report lands in one of two states:
+
+- **PR (= actionable):** There's a clear code change an agent can make right now.
+- **Report (= needs input):** A finding worth your attention that requires input, such as business context or a trade-off between several valid approaches.
+
+## What's free
+
+- Non-actionable reports surfaced in your inbox (a problem without a fix)
+- Your first 3 pull requests each month
+
+## Track your self-driving usage
+
+Each pull request you're billed for:
+
+- Appears in your usage alongside the rest of your PostHog spend
+- Respects a dollar **billing limit** you set
+- Pauses when you hit that limit, until usage resets next billing period
+
+Track your spend on the [billing overview](https://app.posthog.com/organization/billing/overview) and [billing usage](https://app.posthog.com/organization/billing/usage) pages.
+
+<CalloutBox icon="IconInfo" title="Important" type="fyi">
+
+Usage data may take up to 24 hours to appear on the billing overview and billing usage pages.
+
+</CalloutBox>
+
+## Control your self-driving spend
+
+You can control your self-driving spend on both the usage and billing side.
+
+### Usage
+
+* Disable [signal sources](/docs/start-here/inbox/sources) with limited usefulness to you
+* Disable types of [scouts](/docs/start-here/scouts) with limited usefulness to you
+
+<CalloutBox icon="IconInfo" title="Coming soon" type="fyi">
+
+We're also considering letting you sample your data to control usage. If that's something you'd find useful, get in touch via in-app support.
+
+</CalloutBox>
+
+### Billing
+
+* **Real-time tracking:** See costs as you go
+* **Custom billing limit:** Set hard caps to prevent overspending
+* **Default billing limit:** PostHog sets a default $150 billing limit so you don't accidentally rack up costs without a ceiling
+* **Usage alerts:** Get notified when you hit key thresholds
+
+Manage your billing limit and review your spend on the [billing settings](https://app.posthog.com/organization/billing) page.
+
+When you hit your billing limit, report and PR generation is paused until your usage resets at the next billing period.
+
+## Refunds
+
+Self-driving is currently in open beta, and we don't get it right every time yet.
+
+You're charged per PR, so a PR should be worth paying for. We hold every PR to two standards:
+
+* **Accurate report:** The report identifies a real issue and describes it correctly, without false positives or hallucinated problems.
+* **Solves the stated problem:** The code actually addresses the issue described in the report, rather than a tangent or partial fix.
+
+If a PR doesn't meet this bar, we'll refund it. Get in touch via in-app support and tell us what went wrong.
