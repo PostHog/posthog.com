@@ -7,7 +7,7 @@ templateId:
 import FeedbackQuestions from "../\_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../\_snippets/posthog-maintained.mdx"
 
-> **IMPORTANT:** This is an alpha destination using Microsoft's Conversions API (CAPI), which is currently in pilot. Contact your Microsoft Advertising account manager to enable it on your account.
+> **IMPORTANT:** This is an experimental destination using Microsoft's Conversions API (CAPI), which we do not currently provide official support for. CAPI is currently in pilot, and you'll need to contact your Microsoft Advertising account manager to enable it on your account.
 
 You'll also need access to the relevant Microsoft Advertising account.
 
