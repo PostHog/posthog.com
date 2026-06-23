@@ -19,7 +19,7 @@ I rewrote PostHog’s SQL parser to be ~70x faster, and I barely looked at the c
 
 (There’s a test for `SELECT SELECT FROM FROM WHERE WHERE AND AND` which is completely valid SQL)
 
-I used multiple long-running Claude Code sessions in parallel, after the success of using agents to [improve query performance through autoresearch](/blog/karpathy-autoresearch-query-engine-bug)
+After the success of using agents to [improve query performance through autoresearch](/blog/karpathy-autoresearch-query-engine-bug), I wanted to try something more ambitious.
 
 ## Why does PostHog even have an SQL parser?
 
@@ -28,13 +28,13 @@ PostHog lets you [access your data directly with SQL](/docs/sql). We transpile y
 * This lets us change things at the DB layer without breaking existing queries
 * We can also add a bunch of performance optimizations and access controls
 
-The majority of PostHog tools (e.g. product analytics, session replay, error tracking, etc) have queries written in SQL and it goes through the exact same transpilation process. One important detail for this work: the parser itself sits before the access control boundary, and operates on untrusted input.
+The majority of PostHog tools (e.g. product analytics, session replay, error tracking) have queries written in SQL and it goes through the exact same transpilation process. One important detail for this work: the parser itself sits before the access control boundary, and operates on untrusted input.
 
-But before we can do this transpilation, we need to use a parser to turn the SQL into an AST (Abstract Syntax Tree) that then gets transpiled into ClickHouse SQL. The parser is the first thing that touches a query. Everything downstream, like access controls and  optimizations, operate on the tree it produces. 
+But before we can do this transpilation, we need to use a parser to turn the SQL into an AST (Abstract Syntax Tree) that then gets transpiled into ClickHouse SQL. The parser is the first thing that touches a query. Everything downstream, like access controls and optimizations, operate on the tree it produces. 
 
 ## Generating our parser with ANTLR
 
-We didn't write this parser by hand because, at least pre-AI-coding, parsers were extremely difficult to maintain. Writing one without AI would have taken months instead of a few days, and it probably wouldn’t have been worth it, even if had dramatically improved our p95 response time.
+We didn't write this parser by hand because, at least pre-AI-coding, parsers were extremely difficult to maintain. Writing one without AI would have taken months instead of a few days, and it probably wouldn’t have been worth it, even if it had dramatically improved our p95 response time.
 
 Instead, we use [ANTLR](https://github.com/antlr/antlr4), a state-of-the-art, open source parser generator. You provide your grammar declaratively in a [.g4](https://github.com/PostHog/posthog/blob/master/posthog/hogql/grammar/HogQLParser.g4) file and ANTLR generates most of the parser code for you. We use the C++ version, so it’s already in a “fast” language. Unlike our [flags rewrite](/blog/even-faster-more-reliable-flags), the speedup wouldn't just come from moving to Rust.
 
@@ -54,7 +54,7 @@ I used multiple long-running Claude Code sessions to test two approaches in para
 
 In the end, both of those approaches worked about as well as each other, but I wouldn’t know this until I’d been working on it for a couple of days.
 
-My goal was complete agreement with the oracle (i.e. the existing C++ parser) for all realistic queries and to get as close as possible for contrived ones. Having an oracle was critical for how I developed the new parser, because I could essentially do test-driven-development by finding some SQL that the parsers disagreed on, fixing the new parser to agree, and repeating.
+My goal was complete agreement with the oracle (i.e. the existing C++ parser) for all realistic queries and to get as close as possible for contrived ones. Having an oracle was critical for how I developed the new parser, because I could essentially do test-driven development by finding some SQL that the parsers disagreed on, fixing the new parser to agree, and repeating.
 
 ## Generating disagreement (many ways)
 
@@ -66,7 +66,7 @@ I had previously found bugs in our SQL transpiler using [Hypothesis](https://git
 
 To give a specific example, the property of my new parser is that it agrees with the oracle. The input is an SQL query. This means that Hypothesis is going to try to find an SQL query where my new parser does not agree with the oracle.
 
-I had to tell Hypothesis how to generate interesting SQL so I (with Claude) wrote a tool to codegen an SQL generator based on the ANTLR grammar file. I have to admit that I chuckled a bit when writing a new SQL parser led writing a new parser for `.g4` files too. Later on, I also added a step to add extra permutations to the generated SQL like swapping tokens or adding parentheses.
+I had to tell Hypothesis how to generate interesting SQL so I (with Claude) wrote a tool to codegen an SQL generator based on the ANTLR grammar file. I have to admit that I chuckled a bit when writing a new SQL parser led to writing a new parser for `.g4` files too. Later on, I also added a step to add extra permutations to the generated SQL like swapping tokens or adding parentheses.
 
 ### Prompt engineering against brittle fixes
 
@@ -76,7 +76,7 @@ This could be solved by some basic prompt engineering. I simply told it to load 
 
 ### Maxing out and thinking hard
 
-At this point, I wanted to keep my CPU maxed on PBT and my Claude inference maxed writing the parser, so I wrote some tooling to have the PBT run constantly in the background, writing new failing test cases to a file rather only surfacing them. Claude could fetch them when it had nothing else to work on.
+At this point, I wanted to keep my CPU maxed on PBT and my Claude inference maxed writing the parser, so I wrote some tooling to have the PBT run constantly in the background, writing new failing test cases to a file rather than only surfacing them. Claude could fetch them when it had nothing else to work on.
 
 I had a few other ways of generating failing test cases:
 
@@ -115,7 +115,6 @@ On production queries, it was on average 454x faster than the previous parser. T
 This was an update for me. It felt extremely empowering to be able to build something that would have taken months for someone with specific knowledge in a couple of days. 
 
 And although I didn’t write any of the code by hand, I wouldn’t call this “vibe-coded” at all. My PBT setup with code-genned inputs based on the grammar file is pretty close to the state-of-the-art for parser fuzzing.
-
 
 It’s interesting to think about what this means for tools like ANTLR. I suspect an AI-based approach like mine will become the new normal. A parser generator will provide the oracle and then an LLM “hand”-rolls a higher performance parser using PBT/fuzzing to make them match.
 
