@@ -87,11 +87,17 @@ Here is a overview that shows which of our PMs currently works with which team:
 </fieldset>
 
 <fieldset>
+<legend><TeamMember name="Ruby Childs" photo /></legend>
+
+-   <SmallTeam slug="experiments" />
+-   <SmallTeam slug="feature-flags" />
+
+</fieldset>
+
+<fieldset>
 <legend>Product teams with no PM currently</legend>
 
 -   <SmallTeam slug="conversations" />
--   <SmallTeam slug="experiments" />
--   <SmallTeam slug="feature-flags" />
 
 </fieldset>
 
