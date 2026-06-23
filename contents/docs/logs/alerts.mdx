@@ -62,7 +62,7 @@ Destinations are delivered through hog functions under the hood, so they reuse t
 
 ## Signals for the self-driving inbox
 
-When an alert enters the **Firing** or **Broken** state, it automatically emits a signal to the [self-driving inbox](/docs/start-here/inbox/sources). The signal includes the alert name, threshold, observed count, window, filters, and a direct link to the matching logs. This enables the inbox research agent to correlate the alert with your codebase and investigate the root cause.
+When an alert enters the **Firing** or **Broken** state, it automatically emits a signal to the [self-driving inbox](/docs/self-driving/inbox/sources). The signal includes the alert name, threshold, observed count, window, filters, and a direct link to the matching logs. This enables the inbox research agent to correlate the alert with your codebase and investigate the root cause.
 
 Only **Firing** and **Broken** state changes emit signals. **Resolving** and **Errored** states don't generate signals.
 
