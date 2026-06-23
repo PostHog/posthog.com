@@ -79,8 +79,7 @@ callback, so you instrument it the same way — one line, before or after you re
 
 ```ts
 import { createMcpHandler } from "mcp-handler"
-import { PostHog } from "posthog-node"
-import { instrument } from "@posthog/mcp"
+import { PostHog, instrument } from "@posthog/mcp"
 
 // Create the client once at module scope (not per request).
 const posthog = new PostHog(process.env.POSTHOG_PROJECT_API_KEY, {
