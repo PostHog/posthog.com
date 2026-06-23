@@ -38,7 +38,7 @@ Scouts don't live on their own, they feed our self-driving product pipeline:
 
 1. **A scout runs** on a schedule, looks at some slice of your PostHog data, and decides whether anything is worth surfacing.
 2. **If it is, the scout emits a [signal](/docs/start-here/signals)** — a semi-structured finding with evidence, and a suggested action.
-3. **Signals get picked up by the [self-driving pipeline](/docs/start-here/autonomy-loop)**, grouped, and turned into **[reports](/docs/start-here/reports)** that land in your PostHog [Inbox](/docs/start-here/inbox).
+3. **Signals get picked up by the [self-driving pipeline](/docs/start-here/self-improving-loop)**, grouped, and turned into **[reports](/docs/start-here/reports)** that land in your PostHog [Inbox](/docs/start-here/inbox).
 4. **Reports get actioned** — by you, or automatically by a PostHog Code task that picks up the report and ships a fix or improvement.
 
 A report can be made up of many signals from many sources. Scouts are just one of those sources. 
@@ -47,8 +47,11 @@ A single report – say "this MCP tool keeps blowing the token budget" – might
 
 Scouts are one (agent-pilled) way self-driving detects there's something to do at all.
 
+## How it works
 
-## Your pipeline can be (mostly) markdown
+There are really only two parts to a scout: the **skill** that holds all the logic (mostly markdown), and a thin **harness** that runs it on a loop. Here's each in turn.
+
+### Your pipeline can be (mostly) markdown
 
 In a traditional data pipeline, the logic that decides "is this interesting?" lives in code: thresholds, `if/else` branches, helper functions, a scheduler, a pile of glue. Changing what you care about means a code change, a review, a deploy. This is still needed, but for more subjective and flexible pipelines, the agent-pilled approach can offer many benefits.
 
@@ -72,7 +75,7 @@ Or even easier just press one of the suggested questions here on the scouts page
 
 ![The scouts page in PostHog Code, with suggested questions for exploring and making scouts](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_06_18_at_11_01_02_101ddc91fe.png)
 
-## How it works
+### The scout harness
 
 We have a scout harness (yes, I used "harness" — cross it off your bingo card) that is really just a small layer running your scout skills in an agentic loop.
 
