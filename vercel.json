@@ -85,14 +85,14 @@
         },
         { "source": "/docs/product-tours", "destination": "/docs", "statusCode": 301 },
         { "source": "/docs/product-tours/:path*", "destination": "/docs", "statusCode": 301 },
-        { "source": "/docs/self-driving", "destination": "/docs/start-here", "statusCode": 301 },
-        { "source": "/docs/self-driving/:path*", "destination": "/docs/start-here/:path*", "statusCode": 301 },
-        { "source": "/docs/product-os", "destination": "/docs/start-here", "statusCode": 301 },
-        { "source": "/docs/start-here/responders", "destination": "/docs/start-here/inbox", "statusCode": 301 },
-        { "source": "/docs/start-here/guardrails", "destination": "/docs/start-here", "statusCode": 301 },
+        { "source": "/docs/start-here", "destination": "/docs/self-driving", "statusCode": 301 },
+        { "source": "/docs/start-here/:path*", "destination": "/docs/self-driving/:path*", "statusCode": 301 },
+        { "source": "/docs/product-os", "destination": "/docs/self-driving", "statusCode": 301 },
+        { "source": "/docs/self-driving/responders", "destination": "/docs/self-driving/inbox", "statusCode": 301 },
+        { "source": "/docs/self-driving/guardrails", "destination": "/docs/self-driving", "statusCode": 301 },
         {
-            "source": "/docs/start-here/autonomy-loop",
-            "destination": "/docs/start-here/self-improving-loop",
+            "source": "/docs/self-driving/autonomy-loop",
+            "destination": "/docs/self-driving/self-improving-loop",
             "statusCode": 301
         },
         {
@@ -148,27 +148,27 @@
         { "source": "/docs/tracing/:path*", "destination": "/docs/distributed-tracing/:path*", "statusCode": 301 },
         {
             "source": "/docs/posthog-code/inbox/triage",
-            "destination": "/docs/start-here/inbox/implementation",
+            "destination": "/docs/self-driving/inbox/implementation",
             "statusCode": 301
         },
         {
             "source": "/docs/posthog-code/inbox/triage/",
-            "destination": "/docs/start-here/inbox/implementation",
+            "destination": "/docs/self-driving/inbox/implementation",
             "statusCode": 301
         },
         {
             "source": "/docs/posthog-code/inbox",
-            "destination": "/docs/start-here/inbox",
+            "destination": "/docs/self-driving/inbox",
             "statusCode": 301
         },
         {
             "source": "/docs/posthog-code/inbox/:path*",
-            "destination": "/docs/start-here/inbox/:path*",
+            "destination": "/docs/self-driving/inbox/:path*",
             "statusCode": 301
         },
         {
-            "source": "/docs/start-here/first-task",
-            "destination": "/docs/start-here/inbox",
+            "source": "/docs/self-driving/first-task",
+            "destination": "/docs/self-driving/inbox",
             "statusCode": 301
         },
         {

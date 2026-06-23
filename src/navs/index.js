@@ -2254,7 +2254,7 @@ export const docsMenu = {
             name: 'Platform',
             icon: 'IconStack',
             color: 'salmon',
-            url: '/docs/data',
+            url: '/docs/getting-started/install',
             description: 'The PostHog platform for building and improving your product',
             children: [
                 {
@@ -3065,6 +3065,11 @@ export const docsMenu = {
                 },
                 {
                     name: 'PostHog explained',
+                },
+                {
+                    name: 'What is PostHog?',
+                    url: '/docs/self-driving',
+                    icon: 'IconFlag',
                 },
                 {
                     name: 'Data types',
