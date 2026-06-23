@@ -115,7 +115,7 @@ The main ingredients are:
 | Ingredient | What it is |
 | --- | --- |
 | Agent loop runner | The thing that actually pumps the loop (`runner.py`, `arun_signals_scout()`). |
-| Tools for the agent | Mostly just the [PostHog MCP](https://1c173e83.posthog-preview.pages.dev/docs/model-context-protocol) — the same one you can connect to Claude Code or Cursor today. The aim is to build as little custom code as possible; the agent reads your data through the exact tools anyone else gets. |
+| Tools for the agent | Mostly just the [PostHog MCP](/docs/model-context-protocol) — the same one you can connect to Claude Code or Cursor today. The aim is to build as little custom code as possible; the agent reads your data through the exact tools anyone else gets. |
 | Sandbox | An environment to run the loop in, with a project-scoped token so it can only touch the data it's allowed to. |
 | Memory | Another bingo word — don't overthink it. Lets a scout be more than a goldfish that forgets everything between runs (see the [scratchpad](https://github.com/PostHog/posthog/blob/master/products/signals/backend/scout_harness/tools/scratchpad.py) tools). |
 | Scheduler | Runs the loop regularly. We use [Temporal](https://temporal.io/): a coordinator ticks every ~30 minutes, finds which scouts are due (most run hourly), and fans out one run per scout (see the [coordinator code](https://github.com/PostHog/posthog/blob/master/products/signals/backend/temporal/agentic/scout_coordinator.py)). |
