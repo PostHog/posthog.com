@@ -1,0 +1,36 @@
+---
+title: Troubleshooting
+sidebarTitle: Troubleshooting
+sidebar: Docs
+showTitle: true
+---
+
+<CalloutBox icon="IconInfo" title="Open beta" type="fyi">
+
+Self-driving is currently in open beta.
+
+</CalloutBox>
+
+This page covers common issues with inbox reports and agent research.
+
+## Reports are not appearing
+
+Background research is deep, so it can take up to fifteen minutes. If you've just connected a [source](/docs/start-here/inbox/sources), check which case applies.
+
+### The source already has data
+
+If the source already has data to ingest, records should appear in the inbox after a minute or two. For example, this applies when you connect [error tracking](/docs/error-tracking) and already have error issues in PostHog.
+
+### The source is empty
+
+If the source is empty, the inbox has nothing to report yet. For example, this applies when you connect error tracking in a blank project. The inbox will surface reports once there are user issues to resolve.
+
+## Audit the agent
+
+Every action the agent takes is logged. Open the **Agent log** in the inbox to see:
+
+- Which files the agent read
+- Which search queries it ran
+- How it arrived at the final implementation logic
+
+Use the log to check what the agent saw, which decisions it made, and where to step in if the result looks wrong.

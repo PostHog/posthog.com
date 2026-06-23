@@ -1,0 +1,40 @@
+---
+title: Scouts
+sidebarTitle: Scouts
+sidebar: Docs
+showTitle: true
+---
+
+import { CallToAction } from 'components/CallToAction'
+
+<CalloutBox icon="IconInfo" title="Open beta" type="fyi">
+
+Self-driving is currently in open beta.
+
+</CalloutBox>
+
+A scout is a scheduled agent that explores your PostHog data and raises a hand when it finds something worth knowing. Scouts are one of the things that start the [self-improving loop](/docs/start-here/self-improving-loop): they turn raw product data into [signals](/docs/start-here/signals) the rest of the loop can act on.
+
+## How a scout works
+
+A scout runs on a schedule. Each run, it looks at one slice of your data, decides whether anything is worth surfacing, and if so emits a [signal](/docs/start-here/signals): a structured finding with the evidence behind it and a suggested action.
+
+Because scouts run on a schedule, the loop keeps noticing problems and opportunities on its own, instead of waiting for someone to file a ticket.
+
+## Built-in and custom scouts
+
+PostHog ships with a set of scouts that watch common patterns out of the box. You can turn each on or off per project, and teams can add their own scouts for the patterns specific to their product.
+
+## Scouts and signal sources
+
+Scouts aren't the only thing that emits [signals](/docs/start-here/signals). PostHog also has **signal sources**: built-in pipelines that watch one specific stream continuously, like error tracking, session replay, Zendesk, GitHub Issues, and Linear.
+
+The difference is how they look. A signal source watches a single stream in real time; a scout runs on a schedule and explores your product data more holistically. You turn them on independently, and both feed the same pipeline, where their signals are deduplicated and grouped into reports. The more data you capture, the more both have to work with.
+
+## Next step
+
+A scout's output is a signal. See what's in one.
+
+<CallToAction type="primary" to="/docs/start-here/signals">
+  Signals
+</CallToAction>

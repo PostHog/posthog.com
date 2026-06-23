@@ -2158,20 +2158,105 @@ export const docsMenu = {
     icon: 'IconBook',
     children: [
         {
-            name: 'Product OS',
-            icon: 'IconStack',
-            color: 'salmon',
-            url: '/docs/product-os',
-            description: 'The PostHog platform for building and improving your product',
+            name: 'Start here',
+            icon: 'IconFlag',
+            color: 'red',
+            url: '/docs/start-here',
+            description: 'Understand PostHog and get set up',
             children: [
                 {
-                    name: 'Docs',
+                    name: 'Overview',
+                    url: '/docs/start-here',
+                    icon: 'IconHome',
                 },
                 {
-                    name: 'Overview',
-                    url: '/docs',
-                    icon: 'IconInfo',
+                    name: 'Get started',
                 },
+                {
+                    name: 'Set up self-driving',
+                    url: '/docs/start-here/setup',
+                },
+                {
+                    name: 'Surfaces',
+                },
+                {
+                    name: 'Slack',
+                    url: '/docs/slack',
+                },
+                {
+                    name: 'Web app',
+                    url: '/docs/start-here/web',
+                },
+                {
+                    name: 'MCP',
+                    url: '/docs/model-context-protocol',
+                },
+                // TODO: add PostHog Code (Desktop) as a surface here once it's GA.
+                {
+                    name: 'Concepts',
+                },
+                {
+                    name: 'The self-improving loop',
+                    url: '/docs/start-here/self-improving-loop',
+                },
+                {
+                    name: 'Context',
+                    url: '/docs/start-here/context',
+                },
+                {
+                    name: 'Scouts',
+                    url: '/docs/start-here/scouts',
+                },
+                {
+                    name: 'Signals',
+                    url: '/docs/start-here/signals',
+                },
+                {
+                    name: 'Reports',
+                    url: '/docs/start-here/reports',
+                },
+                {
+                    name: 'Inbox',
+                    url: '/docs/start-here/inbox',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/start-here/inbox',
+                        },
+                        {
+                            name: 'Signal sources',
+                            url: '/docs/start-here/inbox/sources',
+                        },
+                        {
+                            name: 'Research tasks',
+                            url: '/docs/start-here/inbox/research',
+                        },
+                        {
+                            name: 'Implementation',
+                            url: '/docs/start-here/inbox/implementation',
+                        },
+                        {
+                            name: 'Troubleshooting',
+                            url: '/docs/start-here/inbox/troubleshooting',
+                        },
+                    ],
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Pricing',
+                    url: '/docs/start-here/pricing',
+                },
+            ],
+        },
+        {
+            name: 'Platform',
+            icon: 'IconStack',
+            color: 'salmon',
+            url: '/docs/data',
+            description: 'The PostHog platform for building and improving your product',
+            children: [
                 {
                     name: 'Integration',
                 },
@@ -2234,6 +2319,10 @@ export const docsMenu = {
                                 {
                                     name: 'Configuration',
                                     url: '/docs/libraries/js/config',
+                                },
+                                {
+                                    name: 'Snippet versioning',
+                                    url: '/docs/libraries/js/snippet-versioning',
                                 },
                                 {
                                     name: 'Persistence',
@@ -2978,8 +3067,8 @@ export const docsMenu = {
                     name: 'PostHog explained',
                 },
                 {
-                    name: 'What is Product OS?',
-                    url: '/docs/product-os',
+                    name: 'What is PostHog?',
+                    url: '/docs/start-here',
                     icon: 'IconInfo',
                 },
                 {
@@ -6699,19 +6788,6 @@ export const docsMenu = {
                     url: '/docs/posthog-code/use-any-model-and-harness',
                     icon: 'IconGraduationCap',
                     color: 'green',
-                },
-                {
-                    name: 'Inbox',
-                    url: '/docs/posthog-code/inbox',
-                    icon: 'IconLetter',
-                    color: 'yellow',
-                    children: [
-                        { name: 'Overview', url: '/docs/posthog-code/inbox' },
-                        { name: 'Sources', url: '/docs/posthog-code/inbox/sources' },
-                        { name: 'Research', url: '/docs/posthog-code/inbox/research' },
-                        { name: 'Implementation', url: '/docs/posthog-code/inbox/implementation' },
-                        { name: 'Troubleshooting', url: '/docs/posthog-code/inbox/troubleshooting' },
-                    ],
                 },
                 {
                     name: 'Skills',

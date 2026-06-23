@@ -1,0 +1,46 @@
+---
+title: Context
+sidebarTitle: Context
+sidebar: Docs
+showTitle: true
+---
+
+import { CallToAction } from 'components/CallToAction'
+
+<CalloutBox icon="IconInfo" title="Open beta" type="fyi">
+
+Self-driving is currently in open beta.
+
+</CalloutBox>
+
+Context is everything your agents need to know about your product, tied together in one place. We call it your **context warehouse**, and it's what self-driving runs on.
+
+Context helps your agents do their best work.
+
+## What is context?
+
+Context is every piece of knowledge an agent needs to understand your product and act on it. It's more than the data stored in a warehouse, and it comes from two places.
+
+### Product usage data
+
+How your product actually behaves: events, [session replays](/docs/session-replay), [error tracking](/docs/error-tracking), [web analytics](/docs/web-analytics), and the feedback from [surveys](/docs/surveys) and support. This is the in-product data a warehouse usually misses.
+
+### Your data warehouse and imports
+
+The [managed data warehouse](/docs/data-warehouse), [SDKs](/docs/libraries), and data imports that bring your other sources together, so the data living outside PostHog sits alongside your product data.
+
+Tied together, these give an agent the full picture of your product instead of one slice.
+
+## How self-driving uses your context
+
+Self-driving can't be reproduced by pointing a general-purpose coding agent at your repo. That agent has your code, but not your context. The signals that drive the loop live in your product data, and PostHog is where that data, and the meaning around it, already lives.
+
+The richer your context, the better self-driving performs. Every product you turn on and every source you connect gives your agents more to work with.
+
+## Next step
+
+Scouts are what read your context and turn it into signals.
+
+<CallToAction type="primary" to="/docs/start-here/scouts">
+  Scouts
+</CallToAction>

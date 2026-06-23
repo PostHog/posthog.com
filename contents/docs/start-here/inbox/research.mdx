@@ -1,0 +1,58 @@
+---
+title: Research tasks
+sidebarTitle: Research tasks
+sidebar: Docs
+showTitle: true
+---
+
+import { CallToAction } from 'components/CallToAction'
+
+<CalloutBox icon="IconInfo" title="Open beta" type="fyi">
+
+Self-driving is currently in open beta.
+
+</CalloutBox>
+
+When a [signal](/docs/start-here/signals) arrives – an [error tracking](/docs/error-tracking) exception, a GitHub issue, anything from a connected source – an agent investigates it automatically. It uses the MCP servers in your workspace, starting with the PostHog MCP, to figure out what's happening and how big the impact is, with access to your product's code for grounding.
+
+The result is a [report](/docs/start-here/reports) rated on two axes:
+
+- **Actionability** – marked **Actionable** when the problem can be solved with code.
+- **Priority (P0–P4)** – how urgent the work is, so the most important reports rise to the top.
+
+You can audit the research agent's logs at any point to see exactly how it navigated your repo and reached its conclusions.
+
+## How priority is determined
+
+The inbox doesn't rank by error frequency. It weighs three things:
+
+1. **Code importance.** Is the issue in a hot path like checkout, signup, or billing?
+2. **User impact.** How many users are affected, and are they on a paid plan?
+3. **Severity.** Is the product broken for these users, or is it a minor UX issue?
+
+## Triage workflow
+
+The queue is processed in this order:
+
+1. **P0 and P1.** If one of these is marked **Actionable**, an agent has usually already opened a pull request.
+2. **Actionable items.** After P0 and P1, the agent works through the remaining actionable items.
+3. **Items needing research.** If a report isn't actionable yet and there's nothing actionable left, the agent triggers a research task.
+
+## Root cause analysis
+
+The agent pairs the production signal with codebase access to find the root cause. For example, it sees a `DoesNotExist` error in production and points to the exact line in `billing_manager.py` where a database query is missing a null check.
+
+## Assign owners
+
+The inbox suggests reviewers and owners for each report from two signals:
+
+- **Git blame** – who recently touched the affected lines.
+- **Historical ownership** – who has resolved similar issues in this part of the codebase.
+
+## Next step
+
+See what happens once a fix is identified.
+
+<CallToAction type="primary" to="/docs/start-here/inbox/implementation">
+  Implementation
+</CallToAction>
