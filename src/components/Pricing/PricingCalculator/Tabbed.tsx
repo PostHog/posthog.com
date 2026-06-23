@@ -369,42 +369,51 @@ export default function Tabbed() {
                 <div className="col-span-12 @2xl:col-span-4 md:pr-6 mb-4 md:mb-0">
                     <h4 className="m-0 md:pl-3 pb-1 font-normal text-sm opacity-70">Products</h4>
                     <ul className="list-none m-0 p-0 pb-2 flex flex-row md:flex-col gap-px overflow-x-auto w-screen @md:w-auto -mx-4 px-4 @md:px-0 @md:mx-0">
-                        {products.map(({ name, Icon, cost, color, billingData, handle, categoryName }, index) => {
-                            const active = activeTab === index
-                            const addonsPrice = productAddons
-                                .filter(
-                                    (addon) =>
-                                        addon.checked &&
-                                        billingData?.addons.some((billingAddon) => addon.type === billingAddon.type)
-                                )
-                                .reduce((acc, addon) => acc + addon.totalCost, 0)
-                            return (
-                                <li key={name} className="flex-1">
-                                    <button
-                                        onClick={() => setActiveTab(index)}
-                                        className={`p-2 rounded-md font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full click ${
-                                            active ? 'font-bold bg-accent' : 'hover:bg-accent'
-                                        }`}
-                                    >
-                                        <div className="flex items-center space-x-2">
-                                            {Icon && (
-                                                <span>
-                                                    <Icon className={`w-5 h-6 text-${color}`} />
+                        {products.map(
+                            ({ name, Icon, cost, color, billingData, handle, categoryName, pricingBadge }, index) => {
+                                const active = activeTab === index
+                                const addonsPrice = productAddons
+                                    .filter(
+                                        (addon) =>
+                                            addon.checked &&
+                                            billingData?.addons.some((billingAddon) => addon.type === billingAddon.type)
+                                    )
+                                    .reduce((acc, addon) => acc + addon.totalCost, 0)
+                                return (
+                                    <li key={name} className="flex-1">
+                                        <button
+                                            onClick={() => setActiveTab(index)}
+                                            className={`p-2 rounded-md font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full click ${
+                                                active ? 'font-bold bg-accent' : 'hover:bg-accent'
+                                            }`}
+                                        >
+                                            <div className="flex items-center space-x-2">
+                                                {Icon && (
+                                                    <span>
+                                                        <Icon className={`w-5 h-6 text-${color}`} />
+                                                    </span>
+                                                )}
+                                                <span className="flex items-center gap-1.5">
+                                                    <span>{categoryName || name}</span>
+                                                    {pricingBadge && (
+                                                        <span className="bg-yellow uppercase text-2xs rounded-xs px-0.5 py-0.5 font-semibold text-black leading-none">
+                                                            {pricingBadge}
+                                                        </span>
+                                                    )}
                                                 </span>
-                                            )}
-                                            <span>{categoryName || name}</span>
-                                        </div>
-                                        {name == 'Experiments' ? (
-                                            <span className="opacity-25">--</span>
-                                        ) : (
-                                            <div className="opacity-70 pl-5 md:pl-0">
-                                                {formatUSD(cost + addonsPrice)}
                                             </div>
-                                        )}
-                                    </button>
-                                </li>
-                            )
-                        })}
+                                            {name == 'Experiments' ? (
+                                                <span className="opacity-25">--</span>
+                                            ) : (
+                                                <div className="opacity-70 pl-5 md:pl-0">
+                                                    {formatUSD(cost + addonsPrice)}
+                                                </div>
+                                            )}
+                                        </button>
+                                    </li>
+                                )
+                            }
+                        )}
                     </ul>
                 </div>
                 <div className="col-span-12 @2xl:col-span-8 md:pl-0">

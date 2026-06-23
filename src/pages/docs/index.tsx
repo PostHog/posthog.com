@@ -21,7 +21,7 @@ const pathCards = [
     {
         name: 'Understand self-driving',
         description: 'How your product learns to drive itself.',
-        url: '/docs/start-here',
+        url: '/docs/self-driving',
         icon: 'IconStack',
         color: 'red',
     },
@@ -38,7 +38,7 @@ const surfaces = [
     },
     {
         name: 'Web',
-        url: '/docs/start-here/web',
+        url: '/docs/self-driving/web',
         icon: 'IconLaptop',
         color: 'blue',
         description: 'The PostHog you know and love, in your browser.',

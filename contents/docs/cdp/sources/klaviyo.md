@@ -28,3 +28,23 @@ Once the syncs are complete, you can start using Klaviyo data in PostHog.
 ## Configuration
 
 <SourceParameters />
+
+## Syncing list membership data
+
+The Klaviyo connector includes an opt-in `list_profiles` table that maps which profiles belong to which list. This is disabled by default — to enable it, toggle it on in the schema configuration when setting up or editing your Klaviyo source.
+
+This table is useful because Klaviyo only exposes list membership as relationship links that can't be queried directly in PostHog. The `list_profiles` table materializes this many-to-many relationship as a flat join table with two columns:
+
+- `list_id` – the Klaviyo list ID
+- `profile_id` – the Klaviyo profile ID
+
+Once synced, you can join it with your profiles table to query members of a specific list:
+
+```sql
+SELECT p.*
+FROM klaviyo_profiles p
+JOIN klaviyo_list_profiles lp ON lp.profile_id = p.id
+WHERE lp.list_id = 'your_list_id'
+```
+
+> **Note:** The `list_profiles` table uses full refresh sync only. Incremental sync isn't available because Klaviyo's relationship API doesn't support filtering by change date. This also means removed memberships are correctly reflected after each sync.

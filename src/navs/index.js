@@ -2158,15 +2158,15 @@ export const docsMenu = {
     icon: 'IconBook',
     children: [
         {
-            name: 'Start here',
+            name: 'Self-driving',
             icon: 'IconFlag',
             color: 'red',
-            url: '/docs/start-here',
+            url: '/docs/self-driving',
             description: 'Understand PostHog and get set up',
             children: [
                 {
                     name: 'Overview',
-                    url: '/docs/start-here',
+                    url: '/docs/self-driving',
                     icon: 'IconHome',
                 },
                 {
@@ -2174,7 +2174,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Set up self-driving',
-                    url: '/docs/start-here/setup',
+                    url: '/docs/self-driving/setup',
                 },
                 {
                     name: 'Surfaces',
@@ -2185,7 +2185,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Web app',
-                    url: '/docs/start-here/web',
+                    url: '/docs/self-driving/web',
                 },
                 {
                     name: 'MCP',
@@ -2197,47 +2197,47 @@ export const docsMenu = {
                 },
                 {
                     name: 'The self-improving loop',
-                    url: '/docs/start-here/self-improving-loop',
+                    url: '/docs/self-driving/self-improving-loop',
                 },
                 {
                     name: 'Context',
-                    url: '/docs/start-here/context',
+                    url: '/docs/self-driving/context',
                 },
                 {
                     name: 'Scouts',
-                    url: '/docs/start-here/scouts',
+                    url: '/docs/self-driving/scouts',
                 },
                 {
                     name: 'Signals',
-                    url: '/docs/start-here/signals',
+                    url: '/docs/self-driving/signals',
                 },
                 {
                     name: 'Reports',
-                    url: '/docs/start-here/reports',
+                    url: '/docs/self-driving/reports',
                 },
                 {
                     name: 'Inbox',
-                    url: '/docs/start-here/inbox',
+                    url: '/docs/self-driving/inbox',
                     children: [
                         {
                             name: 'Overview',
-                            url: '/docs/start-here/inbox',
+                            url: '/docs/self-driving/inbox',
                         },
                         {
                             name: 'Signal sources',
-                            url: '/docs/start-here/inbox/sources',
+                            url: '/docs/self-driving/inbox/sources',
                         },
                         {
                             name: 'Research tasks',
-                            url: '/docs/start-here/inbox/research',
+                            url: '/docs/self-driving/inbox/research',
                         },
                         {
                             name: 'Implementation',
-                            url: '/docs/start-here/inbox/implementation',
+                            url: '/docs/self-driving/inbox/implementation',
                         },
                         {
                             name: 'Troubleshooting',
-                            url: '/docs/start-here/inbox/troubleshooting',
+                            url: '/docs/self-driving/inbox/troubleshooting',
                         },
                     ],
                 },
@@ -2246,7 +2246,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Pricing',
-                    url: '/docs/start-here/pricing',
+                    url: '/docs/self-driving/pricing',
                 },
             ],
         },
@@ -2254,7 +2254,7 @@ export const docsMenu = {
             name: 'Platform',
             icon: 'IconStack',
             color: 'salmon',
-            url: '/docs/data',
+            url: '/docs/getting-started/install',
             description: 'The PostHog platform for building and improving your product',
             children: [
                 {
@@ -3068,8 +3068,8 @@ export const docsMenu = {
                 },
                 {
                     name: 'What is PostHog?',
-                    url: '/docs/start-here',
-                    icon: 'IconInfo',
+                    url: '/docs/self-driving',
+                    icon: 'IconFlag',
                 },
                 {
                     name: 'Data types',

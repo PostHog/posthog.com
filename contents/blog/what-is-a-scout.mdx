@@ -18,7 +18,7 @@ seo:
     metaDescription: 'A scout is a small scheduled agent that watches your PostHog data, learns what is worth knowing, and emits useful signals you (or your agents) can act on. Here is how they work, with real examples.'
 ---
 
-A scout is a small agent (don't overthink that word) that looks at, wrangles, and makes sense of any data available in PostHog. It's a core component of [Self-driving](/docs/start-here) in PostHog (now in open beta), an autonomous loop that monitors your product for patterns and drafts fixes. 
+A scout is a small agent (don't overthink that word) that looks at, wrangles, and makes sense of any data available in PostHog. It's a core component of [Self-driving](/docs/self-driving) in PostHog (now in open beta), an autonomous loop that monitors your product for patterns and drafts fixes. 
 
 A scout's job is to emit useful **signals** – things worth knowing – that you or your agents can act on. Sometimes that action happens automatically, like an agent opening a PR to fix what the scout found, sometimes it needs some human judgement before you and your agent can tackle it together.
 
@@ -30,7 +30,7 @@ You can't get away with this for every data pipeline – plenty still needs dete
 
 This post walks through how scouts work in PostHog, with two real scouts we run on our own project – one that [watches agent-driven MCP feedback](#1-the-mcp-feedback-scout-the-code-one), and one that [watches what the internet says about us](#2-the-brand-mentions-scout-the-non-code-one).
 
-This is the deep dive. If you just want the short version, the [Self-driving docs](/docs/start-here) walk the whole [self-improving loop](/docs/start-here/self-improving-loop) – scouts, signals, reports, and the inbox – at a glance. 
+This is the deep dive. If you just want the short version, the [Self-driving docs](/docs/self-driving) walk the whole [self-improving loop](/docs/self-driving/self-improving-loop) – scouts, signals, reports, and the inbox – at a glance. 
 
 If you just want to see scouts in action, skip to [Two example scouts, explained end to end](#two-example-scouts-explained-end-to-end) – there's an ~8 minute video walkthrough of a real scout run there too.
 
@@ -39,8 +39,8 @@ If you just want to see scouts in action, skip to [Two example scouts, explained
 Scouts don't live on their own, they feed our self-driving product pipeline:
 
 1. **A scout runs** on a schedule, looks at some slice of your PostHog data, and decides whether anything is worth surfacing.
-2. **If it is, the scout emits a [signal](/docs/start-here/signals)** – a semi-structured finding with evidence, and a suggested action.
-3. **Signals get picked up by the [self-driving pipeline](/docs/start-here/self-improving-loop)**, grouped, and turned into **[reports](/docs/start-here/reports)** that land in your PostHog [Inbox](/docs/start-here/inbox).
+2. **If it is, the scout emits a [signal](/docs/self-driving/signals)** – a semi-structured finding with evidence, and a suggested action.
+3. **Signals get picked up by the [self-driving pipeline](/docs/self-driving/self-improving-loop)**, grouped, and turned into **[reports](/docs/self-driving/reports)** that land in your PostHog [Inbox](/docs/self-driving/inbox).
 4. **Reports get actioned** – by you, or automatically by a PostHog Code task that picks up the report and ships a fix or improvement.
 
 A report can be made up of many signals from many sources. Scouts are just one of those sources. 
@@ -401,7 +401,7 @@ The pattern here is to lean in and embrace being agent pilled, keep the core tin
 
 Scouts are still rolling out gradually and are invite-only for now while we shake out the rough edges – wider access is coming soon. If you want in early, email [team-self-driving@posthog.com](mailto:team-self-driving@posthog.com) and we'll get you set up.
 
-Once they're available to you, the home base is [PostHog Code](/code), our desktop coding agent – download it, sign in, and the PostHog MCP is wired up for you. From there you can navigate to the Agents section and explore the set of [canonical scouts](/docs/start-here/scouts) PostHog ships with as well as make your own custom scouts.
+Once they're available to you, the home base is [PostHog Code](/code), our desktop coding agent – download it, sign in, and the PostHog MCP is wired up for you. From there you can navigate to the Agents section and explore the set of [canonical scouts](/docs/self-driving/scouts) PostHog ships with as well as make your own custom scouts.
 
 ## AGI Buzzword bingo
 

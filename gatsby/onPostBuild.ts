@@ -767,10 +767,10 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter
         }
     `)
 
+    await createOrUpdateStrapiPosts(data.allMDXPosts.nodes, data.allRoadmap.nodes)
+
     console.log('Creating OG images')
     await createCareersOG()
     await createOGImages(data)
     console.log('Finished creating OG images')
-
-    await createOrUpdateStrapiPosts(data.allMDXPosts.nodes, data.allRoadmap.nodes)
 }
