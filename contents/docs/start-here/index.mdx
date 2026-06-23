@@ -21,7 +21,9 @@ A self-driving product can prompt itself. PostHog turns your product data into s
 
 Instead of waiting for someone to notice a bug, file a ticket, and assign it, PostHog spots the pattern in your data, drafts a fix, and opens a pull request for you to review.
 
-It runs as a loop. Scouts and signal sources emit signals, signals group into reports, and an agent investigates each report. When a report is actionable, PostHog opens a pull request for you to review and merge; when it needs your input, it surfaces the report in your inbox instead. PostHog then checks whether the change worked and feeds the result back into the next pass.
+It runs as a loop. Scouts and signal sources emit signals, signals group into reports, and an agent investigates each report. 
+
+When a report is actionable, PostHog opens a pull request for you to review and merge; when it needs your input, it surfaces the report in your inbox instead. PostHog then checks whether the change worked and feeds the result back into the next pass.
 
 ```mermaid
 %%{init: {'themeVariables': {'fontSize': '18px'}}}%%
@@ -101,7 +103,11 @@ Bring PostHog's data and tools into Claude Code, Cursor, and other AI tools, so 
 
 <QuestLogItem title="See it work" subtitle="Your day-to-day" icon="IconFlag">
 
-Once self-driving is running, you don't have to prompt it. Scouts keep watching your product, reports become pull requests, and they land in your [inbox](/docs/start-here/inbox) ranked by priority. The day-to-day is simple: open your inbox, review what's waiting, and merge the changes you're happy with, the same as any other pull request. PostHog then checks whether each change moved the metric and feeds the result into the next pass.
+Once self-driving is running, you don't have to prompt it. Scouts keep watching your product, reports become pull requests, and they land in your [inbox](/docs/start-here/inbox) ranked by priority. 
+
+The day-to-day is simple: open your inbox, review what's waiting, and merge the changes you're happy with, the same as any other pull request. 
+
+PostHog then checks whether each change moved the metric and feeds the result into the next pass.
 
 <OSButton variant="primary" asLink to="/docs/start-here/inbox">
   Explore your inbox
