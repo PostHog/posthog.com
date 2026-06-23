@@ -1,0 +1,176 @@
+---
+title: Bot and traffic detection
+---
+
+PostHog classifies traffic by user agent so you can tell humans apart from bots, crawlers, and automation directly in your queries. It categorizes each request – so you can welcome, measure, or exclude AI agents, search crawlers, and automation independently, rather than treating every bot the same. The classification runs in [SQL](/docs/sql), so it works anywhere HogQL does – the SQL editor, insights, trends, and Web Analytics breakdowns.
+
+<CalloutBox icon="IconInfo" title="New feature" type="fyi">
+
+This is a brand new feature, and we're actively working on improving it – expanding the list of detected bots and refining classification over time. Function names and behavior may still change. If you have feedback or a bot we should detect, leave a comment on this page or open a pull request against the [bot definitions](https://github.com/PostHog/posthog/blob/master/products/web_analytics/backend/hogql_queries/bot_definitions.py).
+
+</CalloutBox>
+
+This is different from the [client-side bot blocking](/docs/web-analytics/troubleshooting#do-stats-include-bots-and-crawlers) in the PostHog JavaScript SDK, which stops detected bots from sending events in the first place. The functions here classify traffic that has already been captured, so you can include, exclude, or break down by traffic type at query time without losing the underlying data.
+
+## Capturing server-side traffic with `$http_log`
+
+Most bots don't run JavaScript, so the PostHog JavaScript SDK never fires a `$pageview` for them. To see this traffic, forward your HTTP access logs to PostHog as `$http_log` events – log entries from your web server, CDN, or edge network. They carry the raw user agent, so the functions below classify them the same way they classify `$pageview` and `$screen` events.
+
+Set `$raw_user_agent` on each event, plus `$host`, `$current_url`, `$pathname`, and `status_code` for richer breakdowns. There are a few ways to send them:
+
+- **Log drain source** – in PostHog, go to **Data pipeline > Sources** and add the **Vercel logs** source. PostHog generates an endpoint, registers it with your project, and captures each log line as a `$http_log` event with the user agent populated.
+- **Edge worker** – intercept requests at your CDN or edge (for example, a [Cloudflare Worker](/docs/libraries/cloudflare-workers)) and send a `$http_log` event to the [capture API](/docs/api/capture). This works on any plan and lets you control exactly what's logged.
+- **Capture API directly** – send `$http_log` events from any web server or reverse proxy:
+
+```json
+{
+    "api_key": "<ph_project_token>",
+    "event": "$http_log",
+    "distinct_id": "server-log",
+    "properties": {
+        "$raw_user_agent": "Mozilla/5.0 (compatible; GPTBot/1.2; +https://openai.com/gptbot)",
+        "$current_url": "https://yoursite.com/blog/hello-world",
+        "$pathname": "/blog/hello-world",
+        "status_code": 200,
+        "method": "GET"
+    }
+}
+```
+
+Once `$http_log` events are flowing, the functions and virtual properties below classify them alongside your `$pageview` and `$screen` events.
+
+### Person processing and distinct IDs
+
+Server requests don't carry a PostHog cookie, so for any `$http_log` ingestion you decide two things per event: what `distinct_id` to assign, and whether the event creates a person profile. Both are worth thinking about:
+
+- **Person processing.** Backend events are [identified](/docs/data/anonymous-vs-identified-events) by default, which creates a person profile per `distinct_id` and bills on the person-profiles line. For high-cardinality log traffic that adds cost and slows person-joined queries. Capturing these as [anonymous events](/docs/data/anonymous-vs-identified-events#how-to-capture-anonymous-events) (`$process_person_profile` set to `false`) avoids that, and bot detection still works since it reads event properties, not the profile. Use identified only if you need person-level stitching.
+- **Distinct ID.** When events are anonymous, the distinct ID no longer affects cost – it only affects unique-visitor counts. A derived, per-client ID – for example a hash of IP, host, and user agent – keeps one stable identity per client. Avoid a single shared ID, which counts all traffic as one visitor; a random per-request ID makes every request its own visitor.
+
+How you set these depends on how you ingest. With the [capture API](/docs/api/capture) or an edge worker you set `$process_person_profile` and the `distinct_id` directly on each event. The **Vercel logs source** exposes both as settings, and defaults to anonymous person processing with a fixed-salt distinct ID (one stable ID per client) – you can change either.
+
+## Classification functions
+
+Each function takes a user agent string and returns its classification. PostHog stores the user agent as `$raw_user_agent` (server-side capture and `$http_log` events) or `$user_agent` (the JavaScript SDK), so pass `coalesce(properties.$raw_user_agent, properties.$user_agent)` to cover both. To skip the fallback, use the [virtual properties](#virtual-properties) below, which read the user agent for you.
+
+| Function | Returns | Example |
+| --- | --- | --- |
+| `isLikelyBot(user_agent)` | `true` if the user agent matches a bot or automation pattern, otherwise `false`. An empty user agent counts as a bot. | `true` |
+| `getTrafficType(user_agent)` | One of `AI Agent`, `Bot`, `Automation`, or `Regular`. | `Bot` |
+| `getTrafficCategory(user_agent)` | A subcategory such as `ai_crawler`, `ai_search`, `search_crawler`, `seo_crawler`, `social_crawler`, `monitoring`, `http_client`, or `headless_browser`. Returns `regular` for human traffic. | `search_crawler` |
+| `getBotType(user_agent)` | The same subcategory as `getTrafficCategory`, but returns an empty string for human traffic – handy for filtering. | `search_crawler` |
+| `getBotName(user_agent)` | The bot's name, such as `Googlebot`, `ChatGPT`, or `curl`. Empty for human traffic. | `Googlebot` |
+| `getBotOperator(user_agent)` | The company or operator behind the bot, such as `Google`, `OpenAI`, or `Anthropic`. Empty for human traffic. | `Google` |
+
+`isLikelyBot` is named "likely" because detection is based on user agent heuristics – it can't confirm with certainty that a request is automated.
+
+## Traffic types
+
+`getTrafficType` sorts every request into one of four traffic types:
+
+| Traffic type | Description | Examples |
+| --- | --- | --- |
+| `Regular` | Normal human visitors | Chrome, Safari, Firefox |
+| `AI Agent` | AI crawlers, search bots, and assistants | GPTBot, ClaudeBot, PerplexityBot |
+| `Bot` | Traditional crawlers and monitoring | Googlebot, Bingbot, AhrefsBot |
+| `Automation` | HTTP clients, headless browsers, and requests with no user agent | curl, Puppeteer, HeadlessChrome |
+
+## Bot categories
+
+`getTrafficCategory` and `getBotType` return a finer-grained category within each traffic type:
+
+| Category | Traffic type | Description | Examples |
+| --- | --- | --- | --- |
+| `ai_crawler` | AI Agent | Training data collection | GPTBot, ClaudeBot, Google-Extended |
+| `ai_search` | AI Agent | AI-powered search results | OAI-SearchBot, Claude-SearchBot, Applebot |
+| `ai_assistant` | AI Agent | Real-time user-facing AI | ChatGPT-User, Claude-User, Perplexity-User |
+| `search_crawler` | Bot | Traditional search engines | Googlebot, Bingbot, Baidu |
+| `seo_crawler` | Bot | SEO analysis tools | AhrefsBot, SemrushBot, Majestic |
+| `social_crawler` | Bot | Social media preview crawlers | Facebook, Twitter, LinkedIn, Slack |
+| `monitoring` | Bot | Uptime and health monitoring | Pingdom, UptimeRobot, Datadog |
+| `http_client` | Automation | HTTP client libraries | curl, Wget, Python requests, axios |
+| `headless_browser` | Automation | Automated browsers | HeadlessChrome, Puppeteer, Playwright |
+| `no_user_agent` | Automation | Empty or missing user agent | – |
+
+## Example queries
+
+Break down pageviews by traffic type:
+
+```sql
+SELECT
+    getTrafficType(coalesce(properties.$raw_user_agent, properties.$user_agent)) AS traffic_type,
+    count() AS events
+FROM events
+WHERE event = '$pageview'
+GROUP BY traffic_type
+ORDER BY events DESC
+```
+
+Count human pageviews by excluding bots:
+
+```sql
+SELECT count() AS human_pageviews
+FROM events
+WHERE event = '$pageview'
+    AND NOT isLikelyBot(coalesce(properties.$raw_user_agent, properties.$user_agent))
+```
+
+Find which bots hit your site most often:
+
+```sql
+SELECT
+    getBotName(coalesce(properties.$raw_user_agent, properties.$user_agent)) AS bot,
+    getBotOperator(coalesce(properties.$raw_user_agent, properties.$user_agent)) AS operator,
+    count() AS hits
+FROM events
+WHERE event = '$pageview'
+    AND isLikelyBot(coalesce(properties.$raw_user_agent, properties.$user_agent))
+GROUP BY bot, operator
+ORDER BY hits DESC
+```
+
+## Virtual properties
+
+For convenience, PostHog exposes the classification as virtual event properties. They read the user agent for you (falling back from `$raw_user_agent` to `$user_agent`), so you don't have to pass it in. They're available wherever you select event properties, including breakdowns:
+
+| Property | Equivalent to |
+| --- | --- |
+| `$virt_is_bot` | `isLikelyBot(...)` |
+| `$virt_traffic_type` | `getTrafficType(...)` |
+| `$virt_traffic_category` | `getTrafficCategory(...)` |
+| `$virt_bot_name` | `getBotName(...)` |
+| `$virt_bot_operator` | `getBotOperator(...)` |
+
+For example, to break down traffic without writing out the function:
+
+```sql
+SELECT
+    properties.$virt_traffic_type AS traffic_type,
+    count() AS events
+FROM events
+WHERE event = '$pageview'
+GROUP BY traffic_type
+ORDER BY events DESC
+```
+
+## Use in Product Analytics
+
+You don't need to write SQL to break traffic down. As long as your events carry a user agent – `$raw_user_agent` (set by server-side SDKs and `$http_log` events) or `$user_agent` (set by the JavaScript SDK) – the virtual properties work as breakdowns and filters in any [Product Analytics](/docs/product-analytics) insight: trends, funnels, retention, paths, and more.
+
+For example:
+
+- **Exclude bots from an insight** – add a filter where `$virt_is_bot` equals `false`.
+- **Break down traffic by type** – set the breakdown to `$virt_traffic_type` to split a trend into Regular, AI Agent, Bot, and Automation.
+- **See which crawlers hit a page** – filter to `$virt_is_bot` is `true` and break down by `$virt_bot_name`.
+
+Because the classification reads the raw user agent, this works for any event that carries one – including server-side and `$http_log` traffic – using the standard insight builder.
+
+## How classification works
+
+Classification matches the user agent against a maintained list of known bot, crawler, and automation patterns. The list is open source and pull requests are welcome – you can find it in the [PostHog repository](https://github.com/PostHog/posthog/blob/master/products/web_analytics/backend/hogql_queries/bot_definitions.py).
+
+## Limitations
+
+Detection relies entirely on the user agent string, so two cases are worth keeping in mind:
+
+- **No user agent** – requests with an empty or missing user agent (server-to-server calls, misconfigured SDKs) can't be classified from the user agent alone. They're treated as `Automation` with the `no_user_agent` category, so `isLikelyBot` returns `true` for them.
+- **Spoofing** – some bots disguise themselves with regular browser user agents, and some legitimate tools use bot-like ones. User agent detection is a best-effort heuristic, not a guarantee, which is why the boolean function is named `isLikelyBot`.

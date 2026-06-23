@@ -47,6 +47,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['ai-gateway'],
         label: false,
     },
+    'ai-playground': {
+        feature: 'AI playground',
+        owner: ['ai-gateway'],
+        label: false,
+    },
     alerts: {
         feature: 'Alerts',
         owner: ['analytics-platform'],

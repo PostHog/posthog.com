@@ -1,0 +1,45 @@
+---
+title: Implementation
+sidebarTitle: Implementation
+sidebar: Docs
+showTitle: true
+---
+
+import { CallToAction } from 'components/CallToAction'
+
+<CalloutBox icon="IconInfo" title="Open beta" type="fyi">
+
+Self-driving is currently in open beta.
+
+</CalloutBox>
+
+Once [research](/docs/start-here/inbox/research) is complete and a report is marked **Actionable**, an implementation agent builds the change and opens a pull request for you to review.
+
+## Sandboxed execution
+
+The agent clones your repository into a secure, sandboxed environment. It then:
+
+1. Creates a new git branch (for example, `ai-fix/billing-null-check`).
+2. Applies the code changes.
+3. Runs any local tests, if configured.
+
+## Pull request generation
+
+The agent pushes the branch to your remote and opens a pull request:
+
+- **Description** – an AI-generated summary of the problem, the proposed change, and the research reasoning.
+- **Labels** – PRs are automatically labeled (for example, `LLM context` or `PostHog Agent`) so reviewers know where they came from.
+
+## Reviewing and merging
+
+Your job is to review the code the same way you would any other pull request, then click **Merge** when you're happy with it. If something needs tweaking, you can chat with the implementation agent directly and it'll make the changes you ask for.
+
+Nothing ships without you — the agent opens the PR, but merging is always your call.
+
+## Next step
+
+Run into something unexpected? See how to debug it.
+
+<CallToAction type="primary" to="/docs/start-here/inbox/troubleshooting">
+  Troubleshooting
+</CallToAction>
