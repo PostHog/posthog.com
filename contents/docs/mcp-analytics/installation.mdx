@@ -89,7 +89,11 @@ const posthog = new PostHog(process.env.POSTHOG_PROJECT_API_KEY, {
 
 const handler = createMcpHandler(
   (server) => {
-    instrument(server, posthog)
+    instrument(server, posthog, {
+      // mcp-handler is stateless on Vercel, so group a client's calls with a
+      // conversation id instead of a transport session (see "Grouping calls" below).
+      enableConversationId: true,
+    })
     server.registerTool("roll_dice", { /* ... */ }, async ({ sides }) => { /* ... */ })
   },
   {},
@@ -99,16 +103,27 @@ const handler = createMcpHandler(
 export { handler as GET, handler as POST }
 ```
 
-Two things to know because of how `mcp-handler` runs on Vercel:
+#### Grouping a client's calls
 
-- **Sessions.** With the default streamable-HTTP transport, `mcp-handler` is stateless — it creates a
-  fresh server per request and sends no `Mcp-Session-Id`, so each request is its own `$session_id`.
-  To group a client's calls into one session, run it stateful (configure a `sessionIdGenerator`); the
-  SDK then derives a stable `$session_id` from the header. Use the [`identify`](/docs/mcp-analytics/identifying-users)
-  option to attribute calls to a user regardless.
-- **Flushing.** `posthog-node` batches events, and a serverless function can freeze before they send.
-  Flush at the end of the invocation — `await posthog.flush()`, or `ctx.waitUntil(posthog.flush())` to
-  keep the runtime alive until it completes.
+On Vercel, `mcp-handler`'s streamable-HTTP transport is **stateless**: it spins up a fresh server per
+request and issues no `Mcp-Session-Id`, so there's no connection for the SDK to derive a shared
+`$session_id` from — left alone, every request lands in its own session.
+
+Turn on **`enableConversationId`** to stitch the calls together instead. The SDK adds a `conversation_id`
+argument to each tool, generates one when the client doesn't pass it, and asks the agent to echo it on
+later calls — so a client's tool calls correlate via
+[`$mcp_conversation_id`](/docs/mcp-analytics/conversation-id), even with no persistent connection. Group
+or break down by that property to see a whole interaction together.
+
+To also tie the calls to *who* made them, add [`identify`](/docs/mcp-analytics/identifying-users) and
+return a `distinctId` from your auth (e.g. the OAuth subject) — that sets `distinct_id` so the calls
+group by user as well.
+
+#### Flushing
+
+`posthog-node` batches events, and a serverless function can freeze before they send. Flush at the end
+of the invocation — `await posthog.flush()`, or `ctx.waitUntil(posthog.flush())` to keep the runtime
+alive until it completes.
 
 ## Configuration
 
