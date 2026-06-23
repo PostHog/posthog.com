@@ -110,6 +110,34 @@ with new_context():
     detection_disabled_only_here()
 ```
 
+### Masking connection string credentials
+
+Credentials embedded in connection strings and URLs are scrubbed automatically, regardless of the variable name. Only the credentials are replaced — the scheme, host, and path are kept so the value stays useful for debugging:
+
+```
+postgresql://user:password@db.example.com:5432/mydb
+→ postgresql://***@db.example.com:5432/mydb
+```
+
+This is enabled by default. To disable it globally:
+
+```python
+posthog = Posthog(
+    "<ph_project_token>",
+    enable_exception_autocapture=True,
+    capture_exception_code_variables=True,
+    code_variables_mask_url_credentials=False,
+)
+```
+
+Or for a specific code block using contexts:
+
+```python
+with new_context():
+    set_code_variables_mask_url_credentials_context(False)
+    masking_disabled_only_here()
+```
+
 ### Ignoring variables
 
 Variable names matching ignore patterns are not captured at all. This is useful for excluding internal variables, temporary data, or framework-specific variables that don't provide debugging value.
