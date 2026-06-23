@@ -17,7 +17,6 @@ export const arize_phoenix = {
                 clustering: false,
                 trace_summarization: false,
                 llm_translation: false,
-
                 sentiment_classification: false,
                 privacy_mode: true,
                 agent_tracing: true,
