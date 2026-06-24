@@ -119,3 +119,5 @@ And although I didn’t write any of the code by hand, I wouldn’t call this �
 It’s interesting to think about what this means for tools like ANTLR. I suspect an AI-based approach like mine will become the new normal. A parser generator will provide the oracle and then an LLM “hand”-rolls a higher performance parser using PBT/fuzzing to make them match.
 
 What specifically did I end up with? Formally, my new parser is a "hand"-written, predominantly predictive recursive-descent parser with a Pratt expression core, an LL(2) cursor widened at specific spots by bounded non-consuming look-ahead probes, plus localized ordered-choice speculative backtracking reserved for the few decisions that need it. It was entirely written by Claude Opus 4.7, in Rust, in May 2026.
+
+[Discuss on Hacker News](https://news.ycombinator.com/item?id=48663544)
