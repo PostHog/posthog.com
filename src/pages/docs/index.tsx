@@ -21,7 +21,7 @@ const pathCards = [
     {
         name: 'Understand self-driving',
         description: 'How your product learns to drive itself.',
-        url: '/docs/start-here',
+        url: '/docs/self-driving',
         icon: 'IconStack',
         color: 'red',
     },
@@ -38,7 +38,7 @@ const surfaces = [
     },
     {
         name: 'Web',
-        url: '/docs/start-here/web',
+        url: '/docs/self-driving/web',
         icon: 'IconLaptop',
         color: 'blue',
         description: 'The PostHog you know and love, in your browser.',
@@ -140,11 +140,9 @@ export const DocsIndex = () => {
                             })}
                         </div>
 
-                        {/* Apps: the PostHog products you use from any surface */}
-                        <h2 className="text-lg mb-1">Apps</h2>
-                        <p className="text-sm opacity-70 mb-3">
-                            Every PostHog product is an app you can use from any surface.
-                        </p>
+                        {/* Tools: the PostHog tools you use from any surface */}
+                        <h2 className="text-lg mb-1">Tools</h2>
+                        <p className="text-sm opacity-70 mb-3">Use every PostHog tool from any surface.</p>
                         <AppsList />
                     </section>
                 </div>

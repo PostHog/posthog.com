@@ -1,5 +1,5 @@
 ---
-title: Start here
+title: Self-driving
 sidebarTitle: Overview
 sidebar: Docs
 showTitle: true
@@ -51,7 +51,7 @@ flowchart LR
 
 Self-driving works because the signals that drive the loop live in your product data, and that's exactly what PostHog has. 
 
-A general-purpose coding agent has your code, but not your context. PostHog ties everything together into a [context warehouse](/docs/start-here/context): your product usage data, your data warehouse, and the context your agents need, in one place. That's what helps your agents do their best work.
+A general-purpose coding agent has your code, but not your context. PostHog ties everything together into a [context warehouse](/docs/self-driving/context): your product usage data, your data warehouse, and the context your agents need, in one place. That's what helps your agents do their best work.
 
 </QuestLogItem>
 
@@ -61,7 +61,7 @@ Self-driving is only as good as the data feeding it. First, [install PostHog](/d
 
 Once data is flowing, PostHog will continuously monitor your product and reports begin landing in your inbox. Most teams are set up in a few minutes.
 
-<OSButton variant="primary" asLink to="/docs/start-here/setup">
+<OSButton variant="primary" asLink to="/docs/self-driving/setup">
     Set up self-driving
 </OSButton>
 
@@ -71,15 +71,15 @@ Once data is flowing, PostHog will continuously monitor your product and reports
 
 There's a small set of terms worth knowing. Here's a breakdown:
 
-- **[Context](/docs/start-here/context)** – everything your agents need to know about your product, tied together in your context warehouse. The context a general-purpose agent doesn't have.
-- **[Scouts](/docs/start-here/scouts)** – scheduled agents that watch a slice of your data and raise a hand when something's worth knowing.
-- **[Signals](/docs/start-here/signals)** – what a scout emits: a structured finding, with the evidence behind it and a suggested action. Error tracking, session replay, and tools like Zendesk and Linear emit signals too.
-- **[Reports](/docs/start-here/reports)** – related signals grouped into one item of work, so you deal with the real problem instead of a noisy stream of findings.
-- **[Inbox](/docs/start-here/inbox)** – where reports and pull requests land for you to review, steer, and merge.
+- **[Context](/docs/self-driving/context)** – everything your agents need to know about your product, tied together in your context warehouse. The context a general-purpose agent doesn't have.
+- **[Scouts](/docs/self-driving/scouts)** – scheduled agents that watch a slice of your data and raise a hand when something's worth knowing.
+- **[Signals](/docs/self-driving/signals)** – what a scout emits: a structured finding, with the evidence behind it and a suggested action. Error tracking, session replay, and tools like Zendesk and Linear emit signals too.
+- **[Reports](/docs/self-driving/reports)** – related signals grouped into one item of work, so you deal with the real problem instead of a noisy stream of findings.
+- **[Inbox](/docs/self-driving/inbox)** – where reports and pull requests land for you to review, steer, and merge.
 
 Put together, that's the self-improving loop: scouts and sources emit signals, signals become reports, agents open pull requests for the actionable reports and ask for input on the rest, and you stay in control from your inbox.
 
-<OSButton variant="primary" asLink to="/docs/start-here/self-improving-loop">
+<OSButton variant="primary" asLink to="/docs/self-driving/self-improving-loop">
   The self-improving loop
 </OSButton>
 
@@ -105,13 +105,13 @@ Bring PostHog's data and tools into Claude Code, Cursor, and other AI tools, so 
 
 <QuestLogItem title="See it work" subtitle="Your day-to-day" icon="IconFlag">
 
-Once self-driving is running, you don't have to prompt it. Scouts keep watching your product, reports become pull requests, and they land in your [inbox](/docs/start-here/inbox) ranked by priority. 
+Once self-driving is running, you don't have to prompt it. Scouts keep watching your product, reports become pull requests, and they land in your [inbox](/docs/self-driving/inbox) ranked by priority. 
 
 The day-to-day is simple: open your inbox, review what's waiting, and merge the changes you're happy with, the same as any other pull request. 
 
 PostHog then checks whether each change moved the metric and feeds the result into the next pass.
 
-<OSButton variant="primary" asLink to="/docs/start-here/inbox">
+<OSButton variant="primary" asLink to="/docs/self-driving/inbox">
   Explore your inbox
 </OSButton>
 

@@ -25,7 +25,7 @@ import { AppsList } from 'components/Docs/AppsList'
 It renders only the grid of links, so provide your own heading and intro copy around it. Used on:
 
 - the docs landing page (`src/pages/docs/index.tsx`), under the "Apps" heading
-- the self-driving "Web app" surface page (`contents/docs/start-here/web.mdx`), under "Your apps"
+- the self-driving "Web app" surface page (`contents/docs/self-driving/web.mdx`), under "Your apps"
 
 ## Props
 

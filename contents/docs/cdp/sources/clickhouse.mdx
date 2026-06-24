@@ -9,6 +9,8 @@ availability:
 sourceId: ClickHouse
 ---
 
+import { CalloutBox } from "components/Docs/CalloutBox";
+
 The ClickHouse connector can link your ClickHouse database tables to PostHog. ClickHouse databases are often very large, so we stream the data in Arrow batches to keep memory bounded.
 
 To link ClickHouse:
@@ -38,6 +40,44 @@ The data warehouse then starts syncing your ClickHouse data. You can see details
 ## Configuration
 
 <SourceParameters />
+
+## Selecting columns
+
+By default, PostHog syncs all columns from each table. To sync only specific columns:
+
+1. During source setup, click the columns button at the end of the row (it says "All 7" if the table has 7 columns)
+2. Uncheck columns you don't want to sync.
+3. Primary key columns and the incremental sync field (if configured) are always synced and cannot be disabled.
+
+You can also change column selection after setup:
+
+1. Go to the [sources tab](https://app.posthog.com/data-management/sources) and click your ClickHouse source.
+2. Click **Configure** next to any schema.
+3. Under **Columns and filters**, select which columns to sync.
+
+<CalloutBox icon="IconInfo" title="Adding columns to existing syncs" type="fyi">
+
+When you add columns to a schema using incremental or append sync, PostHog prompts you to choose:
+
+- **Sync forward only** - New columns are populated only for future data. Existing rows show `NULL` for the new columns.
+- **Full resync** - Triggers a complete resync to backfill the new columns for all rows.
+
+</CalloutBox>
+
+## Row filters
+
+Row filters let you sync only specific rows from a table. During source setup, you can define predicates (column, operator, value) that PostHog applies to the extraction query.
+
+To add row filters:
+
+1. During source setup, click the columns button at the end of the row (it says "All 7" if the table has 7 columns)
+2. Under **Row filters**, click **Add filter**.
+3. Select a column, operator (such as `equals`, `greater than`, or `in`), and enter a value.
+4. Add additional filters as needed. Multiple filters are combined with AND logic.
+
+Row filters compose with incremental syncs — the incremental cursor predicate is applied first, then your filters.
+
+Row filters are especially useful for large ClickHouse tables. For example, filtering by a `timestamp` column can prune partitions at the source, significantly reducing the amount of data transferred during each sync.
 
 ## Supported table engines
 
