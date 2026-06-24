@@ -40,29 +40,33 @@ Let’s get into it.
 
 ## Show me the money
 
-Our typical monthly marketing spend looks like this:
+Our typical monthly marketing spend looks like this.
 
-- **People: $210k per month** (3x vs. 2023)
-  - Marketing: 4 product marketers  + 1 influencer manager
-  - Editorial: 3 content marketers + 1 social media manager
-  - YouTube: lead + 2 producers + 1 developer advocate
-  - Events: 2 events managers
-  - Docs & Wizard: 3 context engineers
-  - Demand gen: 1 performance marketer + 1 copywriter
-  - Graphics: 3 designers
-  - 1 exec who mostly gets in the way
-- **Not people: ~$1m per month** (13x vs. 2023)
-  - Tools & subscriptions: $5,000
-  - Paid ads: $488,000
-  - Video: $45,000
-  - Editorial freelancers: $30,000
-  - Sponsorships (newsletters & influencers): $228,000
-  - Out of home (ie. billboards): $67,000
-  - Merch: $60,000
-  - Events: $65,000
-  - Do more weird: $45,000
-  - PR: $0
-- **Total: ~$1.2m per month**
+**People: $210k per month** (3x vs. 2023):
+
+- Marketing: 4 product marketers  + 1 influencer manager
+- Editorial: 3 content marketers + 1 social media manager
+- YouTube: 2 producers + 1 developer advocate
+- Events: 2 events managers
+- Docs & Wizard: 3 context engineers
+- Demand gen: 1 performance marketer + 1 copywriter
+- Graphics: 3 designers
+- 1 exec who mostly gets in the way
+
+**Not people: ~$1m per month** (13x vs. 2023):
+
+- Tools & subscriptions: $5,000
+- Paid ads: $488,000
+- Video: $45,000
+- Editorial freelancers: $20,000
+- Sponsorships (newsletters & influencers): $228,000
+- Out of home (ie. billboards): $67,000
+- Merch: $60,000
+- Events: $65,000
+- Do more weird: $45,000
+- PR: $0
+
+**Total: ~$1.2m per month**
 
 ### Some notes
 
