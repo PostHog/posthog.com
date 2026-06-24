@@ -7,7 +7,7 @@ We have different roles within the team who manage customers at various stages i
 
 ## TAM vs CSM
 
-[Technical Account Managers](/handbook/growth/sales/how-we-work#technical-account-managers) (Sales Team) and [Customer Success Managers](/handbook/cs-and-onboarding/customer-success) (Customer Success Team) are the primary owner of customers spending $20k a year and above; and we aim to have full coverage of those customers across the two teams and roles. When deciding whether a customer should be with a TAM or CSM we factor in to account their usage of our primary products.
+[Technical Account Managers](/handbook/growth/sales/how-we-work#technical-account-managers) (Sales Team) and [Customer Success Managers](/handbook/cs-and-onboarding/customer-success) (Customer Success Team) are the primary owner of customers spending $20k a year and above; and we aim to have full coverage of those customers across the two teams and roles. Our default is for a CSM/CSE to be the point of contact on every $20k+ account, with a TAM requested as an overlay where there's room to grow. When deciding whether to request that overlay we factor in their usage of our primary products.
 
 **Primary products** are the set of billable main products which we believe that all engineers should be using, not including add-ons or platform features. Our current set of primary products are:
 
@@ -21,6 +21,10 @@ We track whether a customer is paying for each product in Vitally using the `Pay
 - Otherwise, there is room to grow and a Technical Account Manager should be focused on getting them using the three primary products.
 
 > This allocation may vary depending on team capacity - there may be some accounts who only have 1 or 2 paid products allocated to a CSM rather than a TAM where there is more capacity in the CSM team for example.
+
+### Requesting a TAM overlay
+
+Because a CSM/CSE is the default point of contact on every $20k+ account, the decision is no longer "TAM or CSM" but whether to add a TAM overlay on top. Request one where there's clear expansion potential and it's worth having a second person on the account: commercial depth from the TAM, technical depth from the CSM/CSE. Accounts that are fully expanded and in steady state stay CSM/CSE-only. Where there's expansion potential but no TAM capacity yet, an account may sit CSM/CSE-only for a period until an overlay can be added.
 
 ---
 

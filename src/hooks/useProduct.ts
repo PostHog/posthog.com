@@ -23,7 +23,6 @@ import {
     IconAI,
     IconSupport,
     IconTestTube,
-    IconListTreeConnected,
     IconTarget,
     IconArrowUpRight,
     IconTrends,
@@ -33,6 +32,7 @@ import {
     IconLlmPromptEvaluation,
 } from '@posthog/icons'
 import useProducts from './useProducts'
+import { mcpAnalytics } from './productData/mcp_analytics'
 
 const dedupe = (products) => {
     const deduped = {}
@@ -131,16 +131,6 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                     imgClasses: 'w-full rounded shadow-xl border border-primary',
                 },
             },
-        },
-        {
-            name: 'AI Observability',
-            Icon: IconListTreeConnected,
-            description: 'Debug entire AI conversations with full trace visibility.',
-            handle: 'llm_traces',
-            color: 'seagreen',
-            colorSecondary: 'seagreen',
-            category: 'ai',
-            slug: 'ai-observability',
         },
         {
             name: 'AI Evals',
@@ -1774,6 +1764,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             slug: 'replay-vision',
             status: 'beta',
         },
+        mcpAnalytics,
         {
             name: 'API',
             Icon: IconTerminal,

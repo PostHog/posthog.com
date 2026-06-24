@@ -71,6 +71,7 @@ Here is a overview that shows which of our PMs currently works with which team:
 
 -   <SmallTeam slug="analytics-platform" />
 -   <SmallTeam slug="product-analytics" />
+-   <SmallTeam slug="query-performance" />
 -   <SmallTeam slug="web-analytics" />
 
 

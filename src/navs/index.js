@@ -1305,8 +1305,8 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/refunds',
                     },
                     {
-                        name: 'Lead assignment during time off',
-                        url: '/handbook/growth/revops/lead-assignment-ooo',
+                        name: 'Lead assignment tracker',
+                        url: '/handbook/growth/revops/lead-assignment-tracker',
                     },
                     {
                         name: 'Giving credits to customers',
@@ -1465,6 +1465,16 @@ export const handbookSidebar = [
                     {
                         name: 'Engaging unengaged customers',
                         url: '/handbook/cs-and-onboarding/engaging-unengaged-customers',
+                    },
+                ],
+            },
+            {
+                name: 'Shareable guides',
+                url: '',
+                children: [
+                    {
+                        name: 'LLM cost optimization',
+                        url: '/handbook/cs-and-onboarding/shareable-guides/llm-cost-optimization',
                     },
                 ],
             },
@@ -2148,20 +2158,115 @@ export const docsMenu = {
     icon: 'IconBook',
     children: [
         {
-            name: 'Product OS',
-            icon: 'IconStack',
-            color: 'salmon',
-            url: '/docs/product-os',
-            description: 'The PostHog platform for building and improving your product',
+            name: 'Self-driving',
+            icon: 'IconFlag',
+            color: 'red',
+            url: '/docs/self-driving',
+            description: 'Understand PostHog and get set up',
             children: [
                 {
-                    name: 'Docs',
+                    name: 'Overview',
+                    url: '/docs/self-driving',
+                    icon: 'IconHome',
                 },
                 {
-                    name: 'Overview',
-                    url: '/docs',
-                    icon: 'IconInfo',
+                    name: 'Get started',
                 },
+                {
+                    name: 'Set up self-driving',
+                    url: '/docs/self-driving/setup',
+                },
+                {
+                    name: 'Surfaces',
+                },
+                {
+                    name: 'Slack',
+                    url: '/docs/slack',
+                },
+                {
+                    name: 'Web app',
+                    url: '/docs/self-driving/web',
+                },
+                {
+                    name: 'MCP',
+                    url: '/docs/model-context-protocol',
+                },
+                // TODO: add PostHog Code (Desktop) as a surface here once it's GA.
+                {
+                    name: 'Concepts',
+                },
+                {
+                    name: 'The self-improving loop',
+                    url: '/docs/self-driving/self-improving-loop',
+                },
+                {
+                    name: 'Context',
+                    url: '/docs/self-driving/context',
+                },
+                {
+                    name: 'Scouts',
+                    url: '/docs/self-driving/scouts',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/self-driving/scouts',
+                        },
+                        {
+                            name: 'Examples',
+                            url: '/docs/self-driving/scout-examples',
+                        },
+                    ],
+                },
+                {
+                    name: 'Signals',
+                    url: '/docs/self-driving/signals',
+                },
+                {
+                    name: 'Reports',
+                    url: '/docs/self-driving/reports',
+                },
+                {
+                    name: 'Inbox',
+                    url: '/docs/self-driving/inbox',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/self-driving/inbox',
+                        },
+                        {
+                            name: 'Signal sources',
+                            url: '/docs/self-driving/inbox/sources',
+                        },
+                        {
+                            name: 'Research tasks',
+                            url: '/docs/self-driving/inbox/research',
+                        },
+                        {
+                            name: 'Implementation',
+                            url: '/docs/self-driving/inbox/implementation',
+                        },
+                        {
+                            name: 'Troubleshooting',
+                            url: '/docs/self-driving/inbox/troubleshooting',
+                        },
+                    ],
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Pricing',
+                    url: '/docs/self-driving/pricing',
+                },
+            ],
+        },
+        {
+            name: 'Platform',
+            icon: 'IconStack',
+            color: 'salmon',
+            url: '/docs/getting-started/install',
+            description: 'The PostHog platform for building and improving your product',
+            children: [
                 {
                     name: 'Integration',
                 },
@@ -2224,6 +2329,10 @@ export const docsMenu = {
                                 {
                                     name: 'Configuration',
                                     url: '/docs/libraries/js/config',
+                                },
+                                {
+                                    name: 'Snippet versioning',
+                                    url: '/docs/libraries/js/snippet-versioning',
                                 },
                                 {
                                     name: 'Persistence',
@@ -2857,6 +2966,10 @@ export const docsMenu = {
                                     url: '/docs/model-context-protocol/faq',
                                 },
                                 {
+                                    name: 'Enterprise auth (ID-JAG)',
+                                    url: '/docs/model-context-protocol/enterprise-managed-authorization',
+                                },
+                                {
                                     name: 'Code editors',
                                 },
                                 {
@@ -2964,9 +3077,9 @@ export const docsMenu = {
                     name: 'PostHog explained',
                 },
                 {
-                    name: 'What is Product OS?',
-                    url: '/docs/product-os',
-                    icon: 'IconInfo',
+                    name: 'What is PostHog?',
+                    url: '/docs/self-driving',
+                    icon: 'IconFlag',
                 },
                 {
                     name: 'Data types',
@@ -3168,6 +3281,10 @@ export const docsMenu = {
                         {
                             name: 'SSO, SAML, & SCIM',
                             url: '/docs/settings/sso',
+                        },
+                        {
+                            name: 'ID-JAG (XAA)',
+                            url: '/docs/settings/id-jag',
                         },
                         {
                             name: 'Content Security Policy tracking',
@@ -3913,6 +4030,12 @@ export const docsMenu = {
                     url: '/docs/web-analytics/web-vitals',
                     icon: 'IconWrench',
                     color: 'seagreen',
+                },
+                {
+                    name: 'Bot and traffic detection',
+                    url: '/docs/web-analytics/bot-detection',
+                    icon: 'IconShield',
+                    color: 'purple',
                 },
                 {
                     name: 'Path cleaning',
@@ -6677,19 +6800,6 @@ export const docsMenu = {
                     color: 'green',
                 },
                 {
-                    name: 'Inbox',
-                    url: '/docs/posthog-code/inbox',
-                    icon: 'IconLetter',
-                    color: 'yellow',
-                    children: [
-                        { name: 'Overview', url: '/docs/posthog-code/inbox' },
-                        { name: 'Sources', url: '/docs/posthog-code/inbox/sources' },
-                        { name: 'Research', url: '/docs/posthog-code/inbox/research' },
-                        { name: 'Implementation', url: '/docs/posthog-code/inbox/implementation' },
-                        { name: 'Troubleshooting', url: '/docs/posthog-code/inbox/troubleshooting' },
-                    ],
-                },
-                {
                     name: 'Skills',
                     url: '/docs/posthog-code/skills',
                     icon: 'IconMagic',
@@ -7245,7 +7355,7 @@ export const docsMenu = {
                     color: 'salmon',
                 },
                 {
-                    name: 'Usage analytics',
+                    name: 'Usage and logs',
                     url: '/docs/endpoints/usage-analytics',
                     icon: 'IconGraph',
                     color: 'blue',
