@@ -13,11 +13,11 @@ crosspost:
   - Blog
 ---
 
-It still really annoys me that no one is willing to talk about how much they _actually_ spend on marketing in startup-land. I wrote about it [in 2023](/founders/actual-marketing-budget), but nothing's changed, so here I am again but with more budget to talk about. 
+It still really annoys me that no one is willing to talk about how much they _actually_ spend on marketing in startup-land. I wrote about it [in 2023](/founders/actual-marketing-budget), but nothing's changed, so here I am again, but with more budget to talk about. 
 
-So how much does a typical startup [like PostHog](/about) spend on [B2B marketing](/newsletter/b2b-startup-marketing-strategy). And why doesn’t anyone talk about it?
+So how much does a typical scale-up [like PostHog](/about) spend on marketing. And why doesn’t anyone talk about it?
 
-“But Charles, you naive idiot” asked nobody, “surely competitors will use this information against you?”
+“But Charles, you naive idiot” asked nobody but in 2026 now, “surely competitors will use this information against you?”
 
 Um, sure I guess? But especially if you’re into product-led growth (like we are), how you spend marketing $ seems pretty far down the list of competitive advantages. We're open source and we already [tell everyone](/roadmap) what we’re going to build next, and that doesn’t seem to have hurt us so far. 
 
@@ -68,7 +68,7 @@ Our typical monthly marketing spend looks like this:
 
 - We are in the middle of repositioning PostHog as the platform that makes your product [self-driving](/blog/what-if-your-product-built-itself). This means we are thinking a lot more about awareness, especially as we've seen our [ICP](/handbook/who-we-build-for) changing. 
 
-- We do a lot of things in house that other companies would probably use freelancers for. We're not _averse_ to freelancers, but given how important brand marketing is to PostHog, it has been worth it for us to over-invest here. 
+- We do a lot of things in-house that other companies would probably use freelancers for. We're not _averse_ to freelancers, but given how important brand marketing is to PostHog, it has been worth it for us to over-invest here. 
 
 - <SmallTeam slug="website" /> is its own team at PostHog), but I appreciate at most companies your website will be considered a marketing expense (we disagree - treat your website like a product!)
 
@@ -76,13 +76,16 @@ If you want to learn more about how we implement these things in practice at Pos
 
 ## What we’ve changed recently
 
-TODO
+In the last 9 months, we've roughly doubled the marketing teams, including hiring many first people in their role such as influencer manager, dev advocate for YouTube, copywriter, and social media manager (and we've gone form 1 to 4 product marketers). An extremely obvious observation - you need to hire people in order to be able to spend more money (unless you are keen to just set money on fire). You can just turn up the magic marketing budget dial and expect results. For example, we did a bit of influencer marketing as a side project before hiring, but it would have been pointless to increase the budget for the sake of it even though it was 'working'. Our general framework for any new marketing channel is, broadly:
 
-- Hired n = 1 roles
-- Shift to awareness
-- what we've doubled down on
-- You need to hire people in order to be able to spend money, there is no point just turning up the magic money dial
-- We're hiring a couple more people this year, check out the careers page
+1. Have someone try it as a side project, give them a bit of budget.
+2. Use this to decide if the thing broadly works.
+3. Hire someone dedicated who is really good at that thing.
+4. Give them lots of budget. 
+
+We've also shifted our budget more broadly from 80/20 conversion/awareness focus to 60/40. The line between the two buckets is blurry, but generally marketing designed to get folks to sign up to PostHog directly we consider to be conversion-focused, whereas stuff that is purely to make people aware that PostHog exists we call... awareness. For the second half of 2026, we also shuffled budget around a bit to invest more heavily in the stuff that is really working. We're doubling down on influencer marketing and merch in particular, and have also added a new line for [do more weird](/handbook/company/do-more-weird) which _anyone_ at PostHog can use. This will hopefully help us keep things fresh and not accidentally creep into the pure-ROI-based marketing that sucks the life out of companies as they scale. 
+
+> Oh and did you know we're hiring? Probably only 3-4 more people into marketing this year, but keep an eye out on our [careers page](/careers)!
 
 ## What do you think?
 
