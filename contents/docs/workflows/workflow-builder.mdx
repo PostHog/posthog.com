@@ -13,14 +13,14 @@ Workflows are a collection of steps that automate a process or deliver messages 
 
 Workflows are composed of the following components:
 
-| Component                             | Description                                                                                                           |
-| ------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| [Triggers](#triggers)                 | What starts the workflow. You can trigger a workflow from an event, a batch audience, a webhook, or a tracking pixel. |
-| [Dispatches](#dispatches)             | The messages you send, mail, slack, SMS, webhook, or any PostHog real time destinations.                              |
-| [Delays](#delays)                     | Wait steps such as "wait 2 days" or "wait until condition is true."                                                   |
-| [Audience splits](#audience-splits)   | Target and split your users so you can automate some action for them or send a message with more specificity.         |
-| [PostHog actions](#posthog-actions)   | Change a person's properties, or trigger other events, once a person reaches a specific point in your workflow.       |
-| [Output variables](#output-variables) | Store data from step results in workflow variables for use in later steps.                                            |
+| Component                             | Description                                                                                                                                                |
+| ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Triggers](#triggers)                 | What starts the workflow. You can trigger a workflow from an event, a batch audience (optionally on a recurring schedule), a webhook, or a tracking pixel. |
+| [Dispatches](#dispatches)             | The messages you send, mail, slack, SMS, webhook, or any PostHog real time destinations.                                                                   |
+| [Delays](#delays)                     | Wait steps such as "wait 2 days" or "wait until condition is true."                                                                                        |
+| [Audience splits](#audience-splits)   | Target and split your users so you can automate some action for them or send a message with more specificity.                                              |
+| [PostHog actions](#posthog-actions)   | Change a person's properties, or trigger other events, once a person reaches a specific point in your workflow.                                            |
+| [Output variables](#output-variables) | Store data from step results in workflow variables for use in later steps.                                                                                 |
 
 ## Draft and enabled workflows
 
@@ -92,7 +92,9 @@ The trigger shows a real-time estimate of how many persons will be affected (e.g
 
 #### Recurring schedule
 
-By default, a batch trigger runs once. Add an optional schedule to run it on a recurring basis, like "every Monday at 9am" or "the last day of every month." Use this for time-based, audience-targeted automations such as a weekly digest email or a monthly re-engagement campaign.
+By default, a batch trigger runs once, when you start it manually. Click **Trigger** in the top right of the workflow editor and then **Run workflow** to evaluate the audience and run the workflow for each matching person right away.
+
+Add an optional schedule to run the batch on a recurring basis instead, like "every Monday at 9am" or "the last day of every month." Use this for time-based, audience-targeted automations such as a weekly digest email or a monthly re-engagement campaign.
 
 Configure the recurrence with the schedule picker:
 
