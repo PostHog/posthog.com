@@ -477,7 +477,10 @@
             "source": "/peterelbaum",
             "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=peterelbaum"
         },
-        { "source": "/theo", "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=theo" },
+        {
+            "source": "/theo",
+            "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=theo&theo=true"
+        },
         {
             "source": "/morningmaker",
             "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=morningmaker"

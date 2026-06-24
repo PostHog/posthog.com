@@ -29,6 +29,7 @@ import { CallToAction } from 'components/CallToAction'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import CloudinaryImage from 'components/CloudinaryImage'
 import IntegrationPrompt from 'components/IntegrationPrompt'
+import TheoEasterEgg from 'components/TheoEasterEgg'
 import { motion } from 'framer-motion'
 import HeroCarousel from 'components/Home/HeroCarousel'
 import { buildTabs } from 'components/Home/HeroCarousel/tabs'
@@ -515,6 +516,7 @@ export default function HomeTest() {
                 description="All your developer tools in one place. PostHog gives engineers everything to build, test, measure, and ship successful products faster. Get started free."
                 image="/images/og/default.png"
             />
+            <TheoEasterEgg />
             <MDXEditor
                 jsxComponentDescriptors={jsxComponentDescriptors}
                 body={rawBody}

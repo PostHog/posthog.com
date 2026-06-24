@@ -22,9 +22,13 @@ const getRandomWaveformBars = () => Array.from({ length: 60 }, () => Math.random
 
 interface TapePlayerProps {
     id?: string
+    defaultShowVideo?: boolean
+    location?: { pathname: string }
+    newWindow?: boolean
+    key?: string
 }
 
-export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
+export default function TapePlayer({ id, defaultShowVideo = false }: TapePlayerProps): JSX.Element {
     const { getJwt, user, isModerator } = useUser()
     const { appWindow } = useWindow()
     const { addWindow, windows, closeWindow, updateWindow } = useApp()
@@ -61,7 +65,7 @@ export default function TapePlayer({ id }: TapePlayerProps): JSX.Element {
     const [fastForwarding, setFastForwarding] = useState(false)
     const [mixtapeDrawerOpen, setMixtapeDrawerOpen] = useState(true)
     const [mixtapeTitle, setMixtapeTitle] = useState<string>()
-    const [showVideo, setShowVideo] = useState(false)
+    const [showVideo, setShowVideo] = useState(defaultShowVideo)
 
     const fetchMixtapeSongs = async (mixtapeId: number) => {
         setMixtapeId(mixtapeId)
