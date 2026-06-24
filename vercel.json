@@ -1179,6 +1179,10 @@
             "source": "/docs/getting-started/estimating-usage-costs",
             "destination": "/docs/billing/estimating-usage-costs"
         },
+        { "source": "/docs/billing", "destination": "/docs/billing/estimating-usage-costs" },
+        { "source": "/docs/billing-and-payments", "destination": "/docs/billing/estimating-usage-costs" },
+        { "source": "/docs/billing/annual-plans", "destination": "/docs/billing/pre-paid-plans" },
+        { "source": "/legal", "destination": "/terms" },
         { "source": "/docs/getting-started/actions-and-insights", "destination": "/docs/data/actions" },
         { "source": "/docs/getting-started/person-properties", "destination": "/docs/data/persons" },
         { "source": "/docs/getting-started/group-analytics", "destination": "/docs/product-analytics/group-analytics" },
