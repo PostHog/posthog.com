@@ -19,11 +19,11 @@ Once a day, the check looks at recent `$pageview` / `$screen` events and checks 
 
 ## Why it matters
 
-Without a reverse proxy, ad blockers can silently drop a meaningful share of your `$pageview` / `$screen` events. That undercounts traffic and skews every web analytics metric – and because it's silent, it's easy to mistake for a real drop in visitors.
+Without a reverse proxy, ad blockers can silently drop a meaningful share of your `$pageview` / `$screen` events. That undercounts traffic and skews every Web Analytics metric – and because it's silent, it's often mistaken for a real drop in visitors.
 
 ## Fix it manually
 
-1. Set up a reverse proxy that forwards a path on your own domain (for example `https://ph.example.com` or `https://example.com/ingest`) to PostHog. There are several options: a [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy), Cloudflare, Vercel, AWS CloudFront, nginx, and more.
+1. Set up a reverse proxy that forwards a path on your own domain (for example `https://ph.example.com` or `https://example.com/ingest`) to PostHog. There are several options: a [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy), Cloudflare, Vercel, AWS CloudFront, NGINX, and more.
 2. Point your SDK's `api_host` at the proxy URL and redeploy.
 
 See the [reverse proxy guide](/docs/advanced/proxy) for setup instructions for each platform.
@@ -33,7 +33,7 @@ See the [reverse proxy guide](/docs/advanced/proxy) for setup instructions for e
 With the [Inbox](/docs/self-driving) and health checks enabled as a [signal source](/docs/self-driving/inbox/sources), the agent will either:
 
 - Stand up a PostHog-[managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) and give you the DNS record to add, **or**
-- Implement a proxy in your codebase – a `rewrites` entry in `next.config.js`, a `vercel.json` route, an nginx `location` block, or a Cloudflare worker, depending on your stack.
+- Implement a proxy in your codebase – a `rewrites` entry in `next.config.js`, a `vercel.json` route, an NGINX `location` block, or a Cloudflare worker, depending on your stack.
 
 Either way, it sets `api_host` (and `ui_host`) in your `posthog.init` call to the proxied URL and opens a PR. The issue resolves once proxied events arrive.
 
