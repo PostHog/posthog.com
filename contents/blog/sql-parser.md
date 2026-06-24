@@ -116,7 +116,7 @@ On production queries, it was on average 454x faster than the previous parser. T
 
 This was an update for me. It felt extremely empowering to be able to build something that would have taken months for someone with specific knowledge in a couple of days. 
 
-And although I didn’t write any of the code by hand, I wouldn’t call this “vibe-coded” at all. My PBT setup — code-genned inputs based on the grammar file, plus coverage-guided generation — is pretty close to the state-of-the-art for parser fuzzing.
+And although I didn’t write any of the code by hand, I wouldn’t call this “vibe-coded” at all. My PBT setup with code-genned inputs based on the grammar file, with coverage-guided generation, is pretty close to the state-of-the-art for parser fuzzing.
 
 It’s interesting to think about what this means for tools like ANTLR. I suspect an AI-based approach like mine will become the new normal. A parser generator will provide the oracle and then an LLM “hand”-rolls a higher performance parser using PBT/fuzzing to make them match.
 
