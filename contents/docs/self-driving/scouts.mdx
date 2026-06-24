@@ -19,11 +19,15 @@ A scout is a scheduled agent that explores your PostHog data and raises a hand w
 
 A scout runs on a schedule. Each run, it looks at one slice of your data, decides whether anything is worth surfacing, and if so emits a [signal](/docs/self-driving/signals): a structured finding with the evidence behind it and a suggested action.
 
+A scout reads your data through the same [PostHog MCP](/docs/model-context-protocol) you can connect to Claude Code or Cursor, so it can see anything in PostHog out of the box – events, [data warehouse](/docs/data-warehouse) tables, insights, dashboards – with nothing to wire up per scout. Because any source you land in PostHog becomes queryable, a scout isn't limited to product analytics: a Slack channel, a billing system, or a support inbox synced to your warehouse is fair game too.
+
+A scout also keeps a durable memory between runs. Each run, it reads back what earlier runs learned and recorded – what's normal, what it's already surfaced, what it decided to hold – so it dedupes against itself and gets sharper over time instead of starting cold. That memory is what makes a scout a long-running agent rather than a one-shot check.
+
 Because scouts run on a schedule, the loop keeps noticing problems and opportunities on its own, instead of waiting for someone to file a ticket.
 
 ## Built-in and custom scouts
 
-PostHog ships with a set of scouts that watch common patterns out of the box. You can turn each on or off per project, and teams can add their own scouts for the patterns specific to their product.
+PostHog ships with a set of scouts that watch common patterns out of the box. You can turn each on or off per project, and teams can add their own scouts for the patterns specific to their product. See [scout examples](/docs/self-driving/scout-examples) for the scouts PostHog ships with and ideas for your own.
 
 ## Scouts and signal sources
 
