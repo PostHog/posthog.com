@@ -17,19 +17,19 @@ A [scout](/docs/self-driving/scouts) can watch almost anything you land in PostH
 
 ## Canonical scouts
 
-PostHog ships around 20 canonical scouts out of the box, each watching a common pattern. You turn each one on or off per project. Here's a sample of what they watch:
+PostHog ships around 20 canonical scouts out of the box, each watching a common pattern. You turn each one on or off per project. Each scout is just a skill you can read – the table links straight to its `SKILL.md` in the [PostHog repo](https://github.com/PostHog/posthog/tree/master/products/signals/skills). Here's a sample of what they watch:
 
 | Scout | What it looks for |
 |---|---|
-| `signals-scout-error-tracking` | Error spikes and new issues, triaged by how many users they hit |
-| `signals-scout-experiments` | Validity threats like sample-ratio mismatch and zombie experiments |
-| `signals-scout-revenue-analytics` | MRR and churn shifts, and broken Stripe syncs |
-| `signals-scout-surveys` | NPS and CSAT regressions, plus recurring themes in open-text responses |
-| `signals-scout-web-analytics` | Acquisition channels diverging, attribution breakage, and 404 spikes |
-| `signals-scout-feature-flags` | Evaluation cliffs, ghost flags, and flag debt |
-| `signals-scout-session-replay` | Friction patterns like rage-clicks and dead-ends across sessions |
+| [`signals-scout-error-tracking`](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-error-tracking/SKILL.md) | Error spikes and new issues, triaged by how many users they hit |
+| [`signals-scout-experiments`](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-experiments/SKILL.md) | Validity threats like sample-ratio mismatch and zombie experiments |
+| [`signals-scout-revenue-analytics`](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-revenue-analytics/SKILL.md) | MRR and churn shifts, and broken Stripe syncs |
+| [`signals-scout-surveys`](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-surveys/SKILL.md) | NPS and CSAT regressions, plus recurring themes in open-text responses |
+| [`signals-scout-web-analytics`](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-web-analytics/SKILL.md) | Acquisition channels diverging, attribution breakage, and 404 spikes |
+| [`signals-scout-feature-flags`](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-feature-flags/SKILL.md) | Evaluation cliffs, ghost flags, and flag debt |
+| [`signals-scout-session-replay`](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-session-replay/SKILL.md) | Friction patterns like rage-clicks and dead-ends across sessions |
 
-The full set covers more surfaces, including logs, AI observability, and APM. A cross-product generalist also watches the seams between surfaces – a deploy, then an error burst, then a conversion dip – that no single specialist would catch on its own.
+The full set covers more surfaces, including logs, AI observability, and APM. A cross-product [generalist](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-general/SKILL.md) also watches the seams between surfaces – a deploy, then an error burst, then a conversion dip – that no single specialist would catch on its own. Browse them all in the [`products/signals/skills`](https://github.com/PostHog/posthog/tree/master/products/signals/skills) directory.
 
 ## Ideas for custom scouts
 
