@@ -56,3 +56,7 @@ Only the `stories` table supports incremental sync (via the `created_at` or `upd
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

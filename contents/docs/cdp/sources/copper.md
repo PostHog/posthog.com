@@ -54,3 +54,7 @@ Incremental tables sync on the `date_modified` or `date_created` field (both Uni
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

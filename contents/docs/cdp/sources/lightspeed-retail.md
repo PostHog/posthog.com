@@ -56,3 +56,7 @@ All tables support incremental sync using the `version` field. Every record in t
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

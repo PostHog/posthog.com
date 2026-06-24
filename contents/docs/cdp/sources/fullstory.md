@@ -43,3 +43,7 @@ Session and event data in Fullstory is only available through async Data Export 
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />
