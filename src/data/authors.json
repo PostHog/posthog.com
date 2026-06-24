@@ -674,5 +674,21 @@
         "role": "Freelance Technical Writer",
         "link_url": "https://www.linkedin.com/in/rishi-raj-jain/",
         "profile_id": 45748
+    },
+    {
+        "handle": "anna-garcia",
+        "name": "Anna Garcia",
+        "role": "Mobile Engineer",
+        "link_type": "github",
+        "link_url": "https://github.com/turnipdabeets",
+        "profile_id": 44258
+    },
+    {
+        "handle": "ioannis-josephides",
+        "name": "Ioannis Josephides",
+        "role": "Mobile Engineer",
+        "link_type": "github",
+        "link_url": "https://github.com/ioannisj",
+        "profile_id": 31730
     }
 ]

@@ -10,10 +10,10 @@ PostHog supports [OAuth 2.0](https://datatracker.ietf.org/doc/html/rfc6749) for 
 
 PostHog's OAuth endpoints are available per-region, as well as through a region-agnostic domain that transparently handles routing between US and EU Cloud:
 
-| Region | Base URL |
-|--------|----------|
-| US Cloud | `https://us.posthog.com` |
-| EU Cloud | `https://eu.posthog.com` |
+| Region          | Base URL                    |
+| --------------- | --------------------------- |
+| US Cloud        | `https://us.posthog.com`    |
+| EU Cloud        | `https://eu.posthog.com`    |
 | Region-agnostic | `https://oauth.posthog.com` |
 
 If you're building an integration that should work for any PostHog customer regardless of their region, use `https://oauth.posthog.com`. The [well-known metadata endpoint](#client-id-metadata-document-cimd) works the same way for all three domains.
@@ -37,9 +37,7 @@ The JSON document you host at your `client_id` URL should include at least:
   "client_id": "https://myapp.example.com/oauth-client",
   "client_name": "My App",
   "logo_uri": "https://myapp.example.com/logo.png",
-  "redirect_uris": [
-    "https://myapp.example.com/oauth/callback"
-  ]
+  "redirect_uris": ["https://myapp.example.com/oauth/callback"]
 }
 ```
 
@@ -51,7 +49,9 @@ See the [OAuth Client ID Metadata Document draft](https://datatracker.ietf.org/d
 
 ## Server metadata discovery
 
-PostHog exposes its OAuth server configuration through the standard well-known metadata endpoint:
+### Authorization server metadata
+
+PostHog exposes its OAuth server configuration through the standard well-known metadata endpoint ([RFC 8414](https://datatracker.ietf.org/doc/html/rfc8414)):
 
 - `https://oauth.posthog.com/.well-known/oauth-authorization-server`
 - `https://us.posthog.com/.well-known/oauth-authorization-server`
@@ -70,6 +70,29 @@ The response contains the endpoints and capabilities you need, including:
 - `scopes_supported` – Available OAuth scopes (see below)
 - `response_types_supported` – Supported response types
 
+### Protected resource metadata
+
+PostHog also serves OAuth 2.0 Protected Resource Metadata ([RFC 9728](https://datatracker.ietf.org/doc/html/rfc9728)) at:
+
+- `https://oauth.posthog.com/.well-known/oauth-protected-resource`
+- `https://us.posthog.com/.well-known/oauth-protected-resource`
+- `https://eu.posthog.com/.well-known/oauth-protected-resource`
+
+Example:
+
+```bash
+curl https://oauth.posthog.com/.well-known/oauth-protected-resource
+```
+
+The response tells OAuth clients which authorization server issues tokens for PostHog's API:
+
+- `resource` – The resource server identifier (the PostHog instance URL)
+- `authorization_servers` – The authorization server(s) that issue tokens for this resource
+- `scopes_supported` – Available OAuth scopes
+- `bearer_methods_supported` – How to present tokens (PostHog supports `header` only)
+
+OAuth clients and MCP-style agents discover this endpoint automatically through the `WWW-Authenticate: Bearer resource_metadata="..."` header returned on `401` responses. This lets a client that receives a `401` follow the metadata URL to find the correct authorization server without any prior configuration.
+
 ## Supported scopes
 
 The scopes available through OAuth are listed in the `scopes_supported` field of the metadata document and mirror the scopes available for [personal API keys in our REST API](/docs/api). Request only the scopes your application actually needs – this is a security best practice and reduces friction for users on the authorization screen.
@@ -86,9 +109,9 @@ Have a question while integrating? [Reach out to us](/talk-to-a-human).
 
 PostHog OAuth uses the following token prefixes:
 
-| Token type | Prefix | Description |
-|------------|--------|-------------|
-| Access token | `pha_` | Short-lived token for API access |
+| Token type    | Prefix | Description                                  |
+| ------------- | ------ | -------------------------------------------- |
+| Access token  | `pha_` | Short-lived token for API access             |
 | Refresh token | `phr_` | Long-lived token to obtain new access tokens |
 
 Both token types are automatically revoked if detected by [GitHub secret scanning](/docs/api#github-secret-scanning).
@@ -97,6 +120,7 @@ Both token types are automatically revoked if detected by [GitHub secret scannin
 
 - [OAuth 2.0 (RFC 6749)](https://datatracker.ietf.org/doc/html/rfc6749) – The core OAuth 2.0 authorization framework
 - [OAuth 2.0 Authorization Server Metadata (RFC 8414)](https://datatracker.ietf.org/doc/html/rfc8414) – Server metadata discovery via `.well-known`
+- [OAuth 2.0 Protected Resource Metadata (RFC 9728)](https://datatracker.ietf.org/doc/html/rfc9728) – Protected resource metadata discovery via `.well-known`
 - [OAuth Client ID Metadata Document](https://datatracker.ietf.org/doc/draft-parecki-oauth-client-id-metadata-document/) – The CIMD specification
 - [API overview](/docs/api) – Learn about PostHog's API authentication options and scopes
 - [Personal API keys](/docs/api/personal-api-keys) – Alternative authentication for scripts and integrations
