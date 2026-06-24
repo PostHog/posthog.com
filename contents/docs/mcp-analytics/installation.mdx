@@ -4,9 +4,9 @@ title: Installing the MCP analytics SDK
 
 import CalloutBox from 'components/Docs/CalloutBox'
 
-<CalloutBox icon="IconInfo" title="Alpha SDK" type="fyi">
+<CalloutBox icon="IconInfo" title="Beta SDK" type="fyi">
 
-`@posthog/mcp` is published as a `0.1.x` alpha. Pin a specific version while we iterate — minor versions may include breaking changes to event shape or option names. A wizard-driven install (`npx @posthog/wizard mcp-analytics add`) is on the roadmap and will replace most of this page once it ships.
+`@posthog/mcp` is in beta (pre-1.0). The API may still change — including breaking changes in minor `0.x` releases — until `v1`, so pin a version while we iterate. A wizard-driven install (`npx @posthog/wizard mcp-analytics add`) is on the roadmap and will replace most of this page once it ships.
 
 </CalloutBox>
 
@@ -71,6 +71,63 @@ server.tool("search_events", { /* ... */ }, async (args) => {
   // your handler runs untouched
 })
 ```
+
+### Next.js / Vercel (`mcp-handler`)
+
+[`mcp-handler`](https://github.com/vercel/mcp-handler) gives you a standard `McpServer` in its setup
+callback, so you instrument it the same way — one line, before or after you register tools:
+
+```ts
+import { createMcpHandler } from "mcp-handler"
+import { PostHog, instrument } from "@posthog/mcp"
+
+// Create the client once at module scope (not per request).
+const posthog = new PostHog(process.env.POSTHOG_PROJECT_API_KEY, {
+  host: "https://us.i.posthog.com", // or https://eu.i.posthog.com
+})
+
+const handler = createMcpHandler(
+  (server) => {
+    instrument(server, posthog)
+    server.registerTool("roll_dice", { /* ... */ }, async ({ sides }) => { /* ... */ })
+  },
+  {},
+  { basePath: "/api" },
+)
+
+export { handler as GET, handler as POST }
+```
+
+#### Grouping a client's calls
+
+On Vercel, `mcp-handler`'s streamable-HTTP transport is **stateless**: it spins up a fresh server per
+request and issues no `Mcp-Session-Id`, so there's no connection for the SDK to derive a shared
+`$session_id` from — left alone, every request lands in its own session.
+
+The robust way to group is **by user**. Pass [`identify`](/docs/mcp-analytics/identifying-users) and
+return a `distinctId` from your auth (e.g. the OAuth subject) — that sets `distinct_id`, so a person's
+calls group together no matter how many stateless requests they span, and it requires nothing from the
+client:
+
+```ts
+instrument(server, posthog, {
+  identify: (request, extra) => ({ distinctId: getUserId(extra) }),
+})
+```
+
+For finer, per-conversation grouping you can also enable
+[`enableConversationId`](/docs/mcp-analytics/conversation-id): the SDK adds a `conversation_id`
+argument, generates one when the client doesn't send it, and asks the agent to echo it on later calls,
+correlating them via `$mcp_conversation_id`. It's **best-effort** — it works by appending a short
+instruction to the tool result, which a cooperative agent echoes but some clients ignore or treat as
+untrusted server content (the same wariness they apply to prompt injection). Use it when you control the
+client or that trade-off is acceptable; otherwise stick with `identify`.
+
+#### Flushing
+
+`posthog-node` batches events, and a serverless function can freeze before they send. Flush at the end
+of the invocation — `await posthog.flush()`, or `ctx.waitUntil(posthog.flush())` to keep the runtime
+alive until it completes.
 
 ## Configuration
 

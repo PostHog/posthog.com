@@ -56,7 +56,13 @@
         { "source": "/posts/:path*", "destination": "/posts/[slug]/index.html" }
     ],
     "redirects": [
-        { "source": "/docs/prompt-management/skills-store", "destination": "/docs/ai-engineering/skills-store", "statusCode": 301 },
+        { "source": "/teams/customer-success", "destination": "/teams/customer-success-eu" },
+        { "source": "/teams/customer-success/:path*", "destination": "/teams/customer-success-eu/:path*" },
+        {
+            "source": "/docs/prompt-management/skills-store",
+            "destination": "/docs/ai-engineering/skills-store",
+            "statusCode": 301
+        },
         { "source": "/docs/site-apps", "destination": "/docs/js-snippets" },
         { "source": "/docs/site-apps/:path*", "destination": "/docs/js-snippets/:path*" },
         { "source": "/code/download", "destination": "/code#download" },
@@ -81,6 +87,16 @@
         },
         { "source": "/docs/product-tours", "destination": "/docs", "statusCode": 301 },
         { "source": "/docs/product-tours/:path*", "destination": "/docs", "statusCode": 301 },
+        { "source": "/docs/start-here", "destination": "/docs/self-driving", "statusCode": 301 },
+        { "source": "/docs/start-here/:path*", "destination": "/docs/self-driving/:path*", "statusCode": 301 },
+        { "source": "/docs/product-os", "destination": "/docs/self-driving", "statusCode": 301 },
+        { "source": "/docs/self-driving/responders", "destination": "/docs/self-driving/inbox", "statusCode": 301 },
+        { "source": "/docs/self-driving/guardrails", "destination": "/docs/self-driving", "statusCode": 301 },
+        {
+            "source": "/docs/self-driving/autonomy-loop",
+            "destination": "/docs/self-driving/self-improving-loop",
+            "statusCode": 301
+        },
         {
             "source": "/docs/product-analytics/sampling",
             "destination": "/docs/product-analytics",
@@ -90,6 +106,7 @@
         { "source": "/docs/api/product-tours/:path*", "destination": "/docs/api", "statusCode": 301 },
         { "source": "/coupons/:path*", "destination": "https://app.posthog.com/coupons/:path*", "statusCode": 301 },
         { "source": "/handbook/growth/marketing", "destination": "/handbook/marketing", "statusCode": 301 },
+        { "source": "/handbook/growth/revops/lead-assignment-ooo", "destination": "/handbook/growth/revops/lead-assignment-tracker", "statusCode": 301 },
         {
             "source": "/handbook/growth/marketing/:path*",
             "destination": "/handbook/marketing/:path*",
@@ -134,12 +151,27 @@
         { "source": "/docs/tracing/:path*", "destination": "/docs/distributed-tracing/:path*", "statusCode": 301 },
         {
             "source": "/docs/posthog-code/inbox/triage",
-            "destination": "/docs/posthog-code/inbox/implementation",
+            "destination": "/docs/self-driving/inbox/implementation",
             "statusCode": 301
         },
         {
             "source": "/docs/posthog-code/inbox/triage/",
-            "destination": "/docs/posthog-code/inbox/implementation",
+            "destination": "/docs/self-driving/inbox/implementation",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-code/inbox",
+            "destination": "/docs/self-driving/inbox",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-code/inbox/:path*",
+            "destination": "/docs/self-driving/inbox/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/self-driving/first-task",
+            "destination": "/docs/self-driving/inbox",
             "statusCode": 301
         },
         {
