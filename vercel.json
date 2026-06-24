@@ -56,6 +56,8 @@
         { "source": "/posts/:path*", "destination": "/posts/[slug]/index.html" }
     ],
     "redirects": [
+        { "source": "/teams/customer-success", "destination": "/teams/customer-success-eu" },
+        { "source": "/teams/customer-success/:path*", "destination": "/teams/customer-success-eu/:path*" },
         {
             "source": "/docs/prompt-management/skills-store",
             "destination": "/docs/ai-engineering/skills-store",
