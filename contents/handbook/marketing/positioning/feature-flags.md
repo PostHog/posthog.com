@@ -82,7 +82,7 @@ Without flags, agents can't ship incrementally. Without incremental shipping, ag
 - No per-developer pricing — typically 80-90% cheaper for equal team sizes
 - Native analytics and session replay — LaunchDarkly requires separate tools for impact measurement
 - PostHog Code integration — LaunchDarkly has no agent loop equivalent
-- Sources are free in PostHog; every PostHog product shares the same event stream
+- Sources are free in PostHog; every PostHog tool shares the same event stream
 
 ### vs GrowthBook
 

@@ -34,14 +34,12 @@ Both channels are populated by agentic workflows that scan merged PRs and featur
 
 ### 1. Be opinionated
 
-PostHog was created because we believed that product analytics was broken, and we had a vision of how it could be much better. We're more than just product analytics now, but the principles are the same.
+PostHog makes your product self-driving – that's the vision our marketing and content needs to reflect, and not dilute it with boring corporate-speak. (For the canonical positioning, see [Brand foundations](/handbook/brand/foundations#how-we-describe-posthog).)
 
-We need to reflect this vision in our marketing and content, and not dilute it with boring corporate-speak. When we write content, we take a firm stance on what we believe is right. We would rather have 50% of people love us and 50% hate us than 80% mildly agree with us. 
- 
-We communicate clearly, directly, and honestly.
- 
-It's ok to have a sense of humor. We are more likely to die because we are forgettable, not because we made a lame joke once. We have a very distinctive and weird company culture, and we should share that with customers instead of putting on a fake corporate persona when we talk to them. PostHog should not look like a generic software company.
- 
+When we write content, we take a firm stance on what we believe is right. We would rather have 50% of people love us and 50% hate us than 80% mildly agree with us.
+
+How we say it – clear, direct, honest, and with room for genuine humor – lives in the [voice & tone guide](/handbook/brand/tone). The short version: we have a distinctive, weird company culture and we share it with customers rather than putting on a fake corporate persona. PostHog should not look like a generic software company.
+
 (Sometimes we use terminology like 'value propositions' because that is the standard marketing term for a well-understood concept. That's allowed.)
 
 ### 2. Pull, don't push

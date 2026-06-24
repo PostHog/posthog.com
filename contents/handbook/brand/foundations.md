@@ -59,7 +59,7 @@ PostHog should feel:
 
 ## Who we're talking to
 
-Our primary audience is **product engineers** and product-minded builders. Many of them are technical founders or assume the role. It's incredibly important that we don't alienate them, as they're a driver of word-of-mouth growth.
+Our primary audience is **product engineers** – product-minded, full-stack engineers with a slight bias toward the frontend – and product-minded builders more broadly. Many of them are technical founders or assume the role. It's incredibly important that we don't alienate them, as they're a driver of word-of-mouth growth.
 
 This shapes everything. Developers...
 
@@ -87,11 +87,36 @@ Before you ship anything – copy, design, a campaign, a policy – ask: *how wo
 
 Hacker News is intensely logical and skeptical. They'll call out corporate spin, vague claims, and try-hard humor in seconds. If you think your thing would get roasted, change it. If it would hold up to scrutiny, ship it.
 
+## How we describe PostHog
+
+Nothing has changed about our overall positioning: **PostHog makes _your_ product self-driving.** This is the frame everyone at PostHog should use, across the product, website, marketing, content, and support. Product marketers can find the granular vocabulary rules and the per-tool playbooks in [Positioning and selling](/handbook/marketing/positioning).
+
+### Self-driving is the story
+
+Self-driving is the narrative everything sits under. PostHog makes your product development self-driving – a better version of you, with your product and all its context in one place. It isn't a product or a tool you can point at. It's what PostHog is and enables. Don't write "PostHog is a self-driving product" or "the self-driving app" – keep the customer's product as the subject.
+
+### The standard description
+
+Use this whenever you need a standard description of PostHog:
+
+> PostHog is the platform for self-driving products. It pairs the full context of your data (events, errors, logs, replays, and more) with agents that enable you to ship better products, faster. Agents can work reactively (e.g. prompted via Slack) or proactively (e.g. via the Inbox), so your product becomes entirely self-driving.
+
+### The four layers
+
+Everything we offer is one of four things. Use these words exactly:
+
+- **Products** – the surfaces a customer adopts; how you access self-driving. Today that's **Web** (app.posthog.com, where Inbox and PostHog AI live), **Slack**, **MCP**, and **Code** (PostHog Code; becomes **Desktop** in future, once it has non-coding use cases). **Mobile** is coming. The **context warehouse** is a product from a marketing perspective (its own PM/PMM, pricing, and so on), but on posthog.com we present it as the platform everything is built on, *not* as another item in this list.
+- **Tools** – the functional capabilities accessed through the products: product analytics, session replay, feature flags, experiments, error tracking, surveys, web analytics, and so on (as granular as annotations or comments). We used to call these "apps."
+- **Context** – the data that feeds the self-driving loop: events, recordings, errors, and logs from PostHog, plus other business data (Slack, code, Notion, support tickets, and so on). This is the fuel.
+- **Context warehouse** – the data warehouse plus the full context-ingestion pipeline (modelling, data pipelines, batch exports, and so on). Don't say "**PostHog Data Stack**" – the warehouse, modelling, pipelines, and exports are all part of the broader context warehouse, and "Data Stack" isn't something we talk about externally.
+
+In one line: self-driving is the story, products are how you access it, tools are the supporting capabilities, context is the fuel, and the context warehouse is the platform where context lives.
+
 ## What we are not
 
 A few things to avoid when describing PostHog:
 
-- **Not "an analytics platform."** PostHog has grown well beyond analytics. Lead with what we actually are: a platform that makes your product self-driving, with a suite of tools (product analytics, session replay, feature flags, and more) that helps people build successful products.
-- **Not a single product.** We're a platform that helps you (and your AI agents) build product autonomously.
+- **Not "an analytics platform."** PostHog has grown well beyond analytics. Lead with what we actually are: a platform that makes your product self-driving, with tools — product analytics, session replay, feature flags, and more — that help people build successful products.
+- **Not a single product.** We're a platform that makes _your_ product self-driving — you (and your AI agents) ship improvements from your product's own context.
 - **Not a "product improvement platform."** This is vague and buzzwordy.
 - **Not enterprise-first.** We build for people who self-serve. We get in early and grow with our customers. We don't go out of our way to build niche features just to chase a large contract. Don't let copy, design, or tone drift toward enterprise-speak.
