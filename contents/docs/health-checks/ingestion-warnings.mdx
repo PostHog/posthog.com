@@ -6,7 +6,12 @@ showTitle: true
 
 The ingestion warnings check surfaces [ingestion warnings](/docs/data/ingestion-warnings) – events that PostHog had to drop, mis-merge, or degrade as they came in – as a health issue, so you can trace them back to the code that produced them.
 
-{/*SCREENSHOT PLACEHOLDER: the Ingestion warnings page grouped by type with example events*/}
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_58_33_140_Z_62d59e1845.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_58_27_154_Z_317b4ae43a.png"
+    alt="Ingestion warnings check in the Health checks section in the PostHog app"
+    classes="rounded"
+/>
 
 ## What this check looks for
 
@@ -30,9 +35,9 @@ Ingestion warnings mean events are being dropped, mis-merged, or degraded on the
 2. Use the type and the examples to trace the warning back to the instrumentation that produced it.
 3. Fix how those events are sent. See [ingestion warnings](/docs/data/ingestion-warnings) for guidance on each type.
 
-## Fix it automatically with Signals and PostHog Code
+## Fix it automatically with the Inbox and PostHog Code
 
-With [PostHog Code](/docs/posthog-code) and health checks enabled as a [signal source](/docs/posthog-code/inbox/sources), the agent will:
+With the [Inbox](/docs/self-driving) and health checks enabled as a [signal source](/docs/self-driving/inbox/sources), the agent will:
 
 - Read the warning type and affected count from the issue.
 - Pull example offending events so it can see the exact properties involved.

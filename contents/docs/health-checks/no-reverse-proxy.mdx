@@ -6,7 +6,12 @@ showTitle: true
 
 The no reverse proxy check fires when none of your traffic is being sent through a [reverse proxy](/docs/advanced/proxy). A reverse proxy serves PostHog from your own domain, which keeps ad blockers from silently dropping your data.
 
-{/*SCREENSHOT PLACEHOLDER: the Web analytics health page showing the "No reverse proxy" issue*/}
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_51_47_886_Z_8eef00f253.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_51_41_323_Z_f33ec8ce4e.png"
+    alt="No reverse proxy check in the Health checks section in the PostHog app"
+    classes="rounded"
+/>
 
 ## What this check looks for
 
@@ -23,9 +28,9 @@ Without a reverse proxy, ad blockers can silently drop a meaningful share of you
 
 See the [reverse proxy guide](/docs/advanced/proxy) for setup instructions for each platform.
 
-## Fix it automatically with Signals and PostHog Code
+## Fix it automatically with the Inbox and PostHog Code
 
-With [PostHog Code](/docs/posthog-code) and health checks enabled as a [signal source](/docs/posthog-code/inbox/sources), the agent will either:
+With the [Inbox](/docs/self-driving) and health checks enabled as a [signal source](/docs/self-driving/inbox/sources), the agent will either:
 
 - Stand up a PostHog-[managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) and give you the DNS record to add, **or**
 - Implement a proxy in your codebase – a `rewrites` entry in `next.config.js`, a `vercel.json` route, an nginx `location` block, or a Cloudflare worker, depending on your stack.

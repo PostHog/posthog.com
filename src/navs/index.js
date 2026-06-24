@@ -3219,6 +3219,10 @@ export const docsMenu = {
                                     url: '/docs/health-checks/sdk-health',
                                 },
                                 {
+                                    name: 'Keeping SDKs current',
+                                    url: '/docs/health-checks/keeping-sdks-current',
+                                },
+                                {
                                     name: 'No live events',
                                     url: '/docs/health-checks/no-live-events',
                                 },
@@ -3257,14 +3261,6 @@ export const docsMenu = {
                                 {
                                     name: 'External data sync failures',
                                     url: '/docs/health-checks/external-data-sync-failures',
-                                },
-                                {
-                                    name: 'SDK doctor',
-                                    url: '/docs/sdk-doctor',
-                                },
-                                {
-                                    name: 'Keeping SDKs current',
-                                    url: '/docs/sdk-doctor/keeping-sdks-current',
                                 },
                             ],
                         },

@@ -20,7 +20,7 @@ To check the version that you're using, you can run the following in your browse
 window.posthog.LIB_VERSION;
 ```
 
-You can also check using the [SDK doctor](/docs/sdk-doctor) tool.
+You can also check using the [SDK health check](/docs/health-checks/sdk-health).
 
 ## Check the replay status on your events
 
@@ -253,7 +253,7 @@ Some Cookie banners or "CMP"s modify the webpage in reaction to any changes to c
 
 ## Enable recordings when URL matches not working as expected
 
-The **Enable recordings when URL matches** setting is only supported in the web SDK version `1.171.0` and above. If your recordings aren't being recorded as expected, even when the URL matches your regex, it's likely due to an [outdated SDK version](/docs/sdk-doctor).
+The **Enable recordings when URL matches** setting is only supported in the web SDK version `1.171.0` and above. If your recordings aren't being recorded as expected, even when the URL matches your regex, it's likely due to an [outdated SDK version](/docs/health-checks/sdk-health).
 
 Make sure you're using version `1.171.0` or newer to ensure this feature works correctly.
 

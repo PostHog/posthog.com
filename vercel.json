@@ -56,6 +56,12 @@
         { "source": "/posts/:path*", "destination": "/posts/[slug]/index.html" }
     ],
     "redirects": [
+        {
+            "source": "/docs/sdk-doctor/keeping-sdks-current",
+            "destination": "/docs/health-checks/keeping-sdks-current",
+            "statusCode": 301
+        },
+        { "source": "/docs/sdk-doctor", "destination": "/docs/health-checks/sdk-health", "statusCode": 301 },
         { "source": "/teams/customer-success", "destination": "/teams/customer-success-eu" },
         { "source": "/teams/customer-success/:path*", "destination": "/teams/customer-success-eu/:path*" },
         {
@@ -111,7 +117,11 @@
         { "source": "/docs/api/product-tours/:path*", "destination": "/docs/api", "statusCode": 301 },
         { "source": "/coupons/:path*", "destination": "https://app.posthog.com/coupons/:path*", "statusCode": 301 },
         { "source": "/handbook/growth/marketing", "destination": "/handbook/marketing", "statusCode": 301 },
-        { "source": "/handbook/growth/revops/lead-assignment-ooo", "destination": "/handbook/growth/revops/lead-assignment-tracker", "statusCode": 301 },
+        {
+            "source": "/handbook/growth/revops/lead-assignment-ooo",
+            "destination": "/handbook/growth/revops/lead-assignment-tracker",
+            "statusCode": 301
+        },
         {
             "source": "/handbook/growth/marketing/:path*",
             "destination": "/handbook/marketing/:path*",

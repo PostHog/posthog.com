@@ -6,7 +6,12 @@ showTitle: true
 
 The authorized URLs check fires when your project has no authorized URLs (also called app URLs) configured. Authorized URLs tell PostHog which domains your product runs on.
 
-{/*SCREENSHOT PLACEHOLDER: Project settings → Authorized URLs, empty*/}
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_51_47_886_Z_8eef00f253.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_51_41_323_Z_f33ec8ce4e.png"
+    alt="Authorized URLs check in the Health checks section in the PostHog app"
+    classes="rounded"
+/>
 
 ## What this check looks for
 
@@ -22,9 +27,9 @@ Without authorized URLs, the [toolbar](/docs/toolbar) can't launch on your site,
 2. Add each domain you run on, including staging and any subdomains – for example `https://example.com` and `https://app.example.com`.
 3. Use wildcards for dynamic subdomains where needed.
 
-## Fix it automatically with Signals and PostHog Code
+## Fix it automatically with the Inbox and PostHog Code
 
-Because authorized URLs are a security boundary, [PostHog Code](/docs/posthog-code) handles this one carefully and **never adds a domain unattended**. With health checks enabled as a [signal source](/docs/posthog-code/inbox/sources), the agent will:
+Because authorized URLs are a security boundary, [PostHog Code](/docs/posthog-code) handles this one carefully and **never adds a domain unattended**. With health checks enabled as a [signal source](/docs/self-driving/inbox/sources), the agent will:
 
 - Discover candidate domains from your recent `$pageview` events (a domain appearing in events is not proof you own it – anyone with your public project token can send spoofed events).
 - Present the discovered domains and ask you to confirm which you actually own.

@@ -12,7 +12,12 @@ Health checks continuously inspect your PostHog setup for problems that quietly 
   The set of checks below is expanding over time. If there's a problem you'd like PostHog to catch, <a href="https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&projects=&template=feature_request.yml">let us know</a>.
 </CalloutBox>
 
-{/*SCREENSHOT PLACEHOLDER: the Health section overview in the PostHog app, with a few issues listed*/}
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_27_52_142_Z_1c46cecabc.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_28_02_297_Z_52956d4234.png"
+    alt="Health checks section in the PostHog app"
+    classes="rounded"
+/>
 
 ## How health checks work
 
@@ -21,8 +26,6 @@ A health check is a scheduled job that looks at your recent events, project sett
 1. **It runs on a schedule.** Most checks run once a day and look back over a recent window – anywhere from the last day to the last 30 days, depending on what they measure.
 2. **It writes an issue when something's wrong.** The issue shows up on the matching Health page in the app, tagged with a [severity](#severity-levels) and a plain-English explanation of what's happening.
 3. **It resolves itself.** When a later run sees the problem is gone – events start arriving again, the proxy is in place, the sync succeeds – the issue clears automatically. You don't need to dismiss it by hand.
-
-[SDK doctor](/docs/sdk-doctor) was the first of these checks. It's now one part of a larger system that also covers web analytics, ingestion, and your data pipelines.
 
 ### Severity levels
 
@@ -44,13 +47,13 @@ Every issue links straight to the place you fix it – a project setting, the da
 
 When an issue fires or resolves, PostHog emits `$health_check_issue_firing` and `$health_check_issue_resolved` events. Route these to Slack, email, or a webhook with [destinations](/docs/cdp/destinations) so the right team hears about problems without watching the Health pages.
 
-### 3. Let PostHog fix it automatically with Signals and PostHog Code
+### 3. Let PostHog Fix it automatically with the Inbox and PostHog Code
 
-This is the most powerful option. Most health checks emit a [Signal](/docs/posthog-code/inbox/sources) into the **PostHog Code Inbox**. If you've connected your repository to [PostHog Code](/docs/posthog-code), an agent can take the issue from detection all the way to a pull request:
+This is the most powerful option. Most health checks emit a [Signal](/docs/self-driving/inbox/sources) into the [**Inbox**](/docs/self-driving/inbox). If you've connected your repository to PostHog, an agent can take the issue from detection all the way to a pull request:
 
-1. **Enable health checks as a signal source.** In PostHog Code, open **Inbox → Configure sources** and turn on health checks. See [signal sources](/docs/posthog-code/inbox/sources).
-2. **The agent researches the issue.** It reads the issue, queries your data with the [PostHog MCP](/docs/model-context-protocol), and locates the cause in your codebase. See [research tasks](/docs/posthog-code/inbox/research).
-3. **It applies the fix.** Where the fix lives in your code – an SDK config flag, a dependency bump, a proxy route – the [implementation agent](/docs/posthog-code/inbox/implementation) opens a PR for you to review. Where the fix is a PostHog setting or data model, it uses the MCP tools to apply it directly.
+1. **Enable health checks as a signal source.** In PostHog Code, open **Inbox → Configure sources** and turn on health checks. See [signal sources](/docs/self-driving/inbox/sources).
+2. **The agent researches the issue.** It reads the issue, queries your data with the [PostHog MCP](/docs/model-context-protocol), and locates the cause in your codebase. See [research tasks](/docs/self-driving/inbox/research).
+3. **It applies the fix.** Where the fix lives in your code – an SDK config flag, a dependency bump, a proxy route – the [implementation agent](/docs/self-driving/inbox/implementation) opens a PR for you to review. Where the fix is a PostHog setting or data model, it uses the MCP tools to apply it directly.
 
 This integration was added in [PostHog/posthog#61955](https://github.com/PostHog/posthog/pull/61955). Each check's page explains exactly what the agent does for that specific problem.
 

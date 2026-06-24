@@ -3,7 +3,7 @@ title: Keeping SDKs current
 sidebar: Docs
 showTitle: true
 ---
-[SDK doctor](/docs/sdk-doctor) identifies when your PostHog SDKs are outdated, but understanding why they fall behind, and how to prevent it, helps avoid the problem in the first place.
+The [SDK health check](/docs/health-checks/sdk-health) identifies when your PostHog SDKs are outdated, but understanding why they fall behind, and how to prevent it, helps avoid the problem in the first place.
 ## Ways SDK versions fall behind
 
 ### HTML snippet for the JavaScript web SDK
@@ -247,7 +247,7 @@ flutter pub upgrade
 
 </MultiLanguage>
 
-> **Note:** SDK doctor applies more lenient outdatedness thresholds for mobile SDKs (six months vs. four months for other SDKs). This is intentional, since your users control when they update their apps. So, it's normal to see older versions in mobile event data, well after you've released an update.
+> **Note:** The [SDK health check](/docs/health-checks/sdk-health) applies more lenient outdatedness thresholds for mobile SDKs (six months vs. four months for other SDKs). This is intentional, since your users control when they update their apps. So, it's normal to see older versions in mobile event data, well after you've released an update.
 
 #### Services, CMS no-code builders, etc.
 

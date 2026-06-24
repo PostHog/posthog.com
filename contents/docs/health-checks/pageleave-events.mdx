@@ -6,7 +6,12 @@ showTitle: true
 
 The missing pageleave events check fires when your project sends `$pageview` events but no `$pageleave` events. PostHog uses the pair to measure how long people stay on a page.
 
-{/*SCREENSHOT PLACEHOLDER: the Web analytics health page showing the missing $pageleave issue*/}
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_49_21_883_Z_cc950bcef7.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_49_17_151_Z_c31cc5ea92.png"
+    alt="Missing pageleave events check in the Health checks section in the PostHog app"
+    classes="rounded"
+/>
 
 ## What this check looks for
 
@@ -24,9 +29,9 @@ The fix is almost always on the SDK side:
 2. Make sure you're on a recent `posthog-js` with pageview autocapture enabled – it emits `$pageleave` automatically when the user navigates away.
 3. If you capture pageviews manually (`capture_pageview: false`), add a matching `$pageleave` capture on route changes and page unload.
 
-## Fix it automatically with Signals and PostHog Code
+## Fix it automatically with the Inbox and PostHog Code
 
-With [PostHog Code](/docs/posthog-code) and health checks enabled as a [signal source](/docs/posthog-code/inbox/sources), the agent will:
+With the [Inbox](/docs/self-driving) and health checks enabled as a [signal source](/docs/self-driving/inbox/sources), the agent will:
 
 - Confirm the gap in your data (`$pageview` events present, `$pageleave` absent).
 - Locate your `posthog.init` call and ensure pageview autocapture is enabled.

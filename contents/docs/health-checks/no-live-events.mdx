@@ -6,7 +6,12 @@ showTitle: true
 
 The no live events check fires when your project hasn't received any `$pageview` or `$screen` events for a sustained period. It's the most serious web analytics check, because it usually means PostHog isn't receiving data at all.
 
-{/*SCREENSHOT PLACEHOLDER: the Web analytics health page showing the "No live events" issue*/}
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_49_21_883_Z_cc950bcef7.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_49_17_151_Z_c31cc5ea92.png"
+    alt="No live events check in the Health checks section in the PostHog app"
+    classes="rounded"
+/>
 
 ## What this check looks for
 
@@ -22,9 +27,9 @@ Web and product analytics stay completely empty until capture is restored. This 
 2. Confirm the PostHog snippet or SDK is installed and initialized on your site or app, and that you're using the correct project API key (**Project settings → Web snippet / API key**).
 3. Load a page on your site, then check **Activity → Live events** to see whether events arrive in real time.
 
-## Fix it automatically with Signals and PostHog Code
+## Fix it automatically with the Inbox and PostHog Code
 
-With [PostHog Code](/docs/posthog-code) and health checks enabled as a [signal source](/docs/posthog-code/inbox/sources), the agent will:
+With the [Inbox](/docs/self-driving) and health checks enabled as a [signal source](/docs/self-driving/inbox/sources), the agent will:
 
 - Check whether _any_ events are landing. Other events but no `$pageview`/`$screen` points to autocapture being disabled; nothing at all points to the SDK not sending.
 - Find where PostHog is initialized in your codebase and make sure `posthog.init` runs with the correct project API key.

@@ -6,7 +6,12 @@ showTitle: true
 
 The partial reverse-proxy coverage check fires when some of your hostnames send events through a [reverse proxy](/docs/advanced/proxy) but others don't. It's a more subtle cousin of the [no reverse proxy](/docs/health-checks/no-reverse-proxy) check.
 
-{/*SCREENSHOT PLACEHOLDER: the Web analytics health page showing partial proxy coverage with the unproxied hosts listed*/}
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_51_47_886_Z_8eef00f253.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_51_41_323_Z_f33ec8ce4e.png"
+    alt="Partial reverse-proxy coverage check in the Health checks section in the PostHog app"
+    classes="rounded"
+/>
 
 ## What this check looks for
 
@@ -21,9 +26,9 @@ Traffic from the unproxied hosts is more likely to be blocked by ad blockers and
 1. Open the **Web analytics health** page. It lists the hostnames that aren't going through a proxy.
 2. For each of those, point the SDK's `api_host` at your reverse proxy – the same proxy your other domains already use – and redeploy.
 
-## Fix it automatically with Signals and PostHog Code
+## Fix it automatically with the Inbox and PostHog Code
 
-With [PostHog Code](/docs/posthog-code) and health checks enabled as a [signal source](/docs/posthog-code/inbox/sources), the agent will:
+With the [Inbox](/docs/self-driving) and health checks enabled as a [signal source](/docs/self-driving/inbox/sources), the agent will:
 
 - Read the unproxied hosts from the issue and verify coverage per host in your data.
 - Check your existing proxies and, for the deployments serving those hosts, set `api_host` to the existing reverse proxy URL (adding a route, or a new managed proxy, for any host that doesn't have one yet).
