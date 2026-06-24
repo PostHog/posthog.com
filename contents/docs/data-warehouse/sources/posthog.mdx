@@ -480,3 +480,161 @@ The `system.support_tickets` table contains support ticket data from the Convers
 | `updated_at`            | When the ticket was last updated                                                                        |
 
 Status values: `new` (just created), `open` (being worked on), `pending` (waiting for customer), `on_hold` (paused), `resolved` (completed).
+
+## Schema discovery with information_schema
+
+PostHog provides four queryable `system.information_schema` tables that let you discover tables, columns, data types, and relationships directly in HogQL. These virtual tables are computed at query time from your project's live schema, so they always reflect your current tables — including data warehouse sources and saved views.
+
+### `system.information_schema.tables`
+
+Lists all tables visible to your project.
+
+```sql
+SELECT table_name, table_type, description
+FROM system.information_schema.tables
+```
+
+| Column          | Description                                                                        |
+| --------------- | ---------------------------------------------------------------------------------- |
+| `table_catalog` | Catalog identifier (same as table_name)                                            |
+| `table_schema`  | Schema grouping: `public`, `system`, `warehouse`, `views`, or `information_schema` |
+| `table_name`    | Fully qualified table name                                                         |
+| `table_type`    | One of `posthog`, `system`, `data_warehouse`, `view`, or `information_schema`      |
+| `description`   | Human-readable description of the table (if available)                             |
+| `row_count`     | Approximate row count (data warehouse tables only)                                 |
+
+### `system.information_schema.columns`
+
+Lists all columns for every visible table, including their types and descriptions.
+
+```sql
+SELECT column_name, data_type, is_nullable, description
+FROM system.information_schema.columns
+WHERE table_name = 'events'
+```
+
+| Column             | Description                                               |
+| ------------------ | --------------------------------------------------------- |
+| `table_schema`     | Schema the table belongs to                               |
+| `table_name`       | Table the column belongs to                               |
+| `column_name`      | Name of the column                                        |
+| `ordinal_position` | Column position within the table                          |
+| `data_type`        | HogQL type (e.g. `String`, `DateTime`, `Integer`, `JSON`) |
+| `is_nullable`      | Whether the column can be null                            |
+| `is_array`         | Whether the column is an array type                       |
+| `field_kind`       | One of `column`, `expression`, or `virtual_table`         |
+| `description`      | Human-readable description of the column (if available)   |
+
+### `system.information_schema.relationships`
+
+Shows how tables relate to each other through lazy joins and field traversers.
+
+```sql
+SELECT source_table, source_column, target_table, relationship_kind
+FROM system.information_schema.relationships
+WHERE source_table = 'events'
+```
+
+| Column              | Description                                |
+| ------------------- | ------------------------------------------ |
+| `source_table`      | Table the relationship originates from     |
+| `source_column`     | Column or field on the source table        |
+| `target_table`      | Table the relationship points to           |
+| `target_column`     | Column on the target table (if applicable) |
+| `relationship_kind` | Either `lazy_join` or `field_traverser`    |
+| `via`               | Join resolver name (for lazy joins)        |
+
+### `system.information_schema.data_types`
+
+A static reference of all HogQL data types and their descriptions.
+
+```sql
+SELECT type_name, description
+FROM system.information_schema.data_types
+```
+
+| Column        | Description              |
+| ------------- | ------------------------ |
+| `type_name`   | Name of the HogQL type   |
+| `description` | What the type represents |
+
+## Schema discovery with information_schema
+
+The `system.information_schema` namespace provides four queryable virtual tables that describe your database schema. You can use them to discover available tables, columns, relationships, and data types directly through SQL queries.
+
+This is useful for exploring the schema interactively in the [SQL editor](/docs/data-warehouse/query), and it's also used by [PostHog AI](/docs/posthog-ai) and other AI agents to understand the database structure when writing queries.
+
+> **Note:** The `information_schema` tables respect access control. You only see tables and columns your project has access to.
+
+### `system.information_schema.tables`
+
+Lists all available tables in your project.
+
+| Column          | Description                                                                                  |
+| --------------- | -------------------------------------------------------------------------------------------- |
+| `table_catalog` | Catalog name (same as table_name)                                                            |
+| `table_schema`  | Schema grouping: `public`, `system`, `warehouse`, `views`, or `information_schema`           |
+| `table_name`    | Fully qualified table name                                                                   |
+| `table_type`    | Table classification: `posthog`, `system`, `data_warehouse`, `view`, or `information_schema` |
+| `description`   | Human-readable description of the table (nullable)                                           |
+| `row_count`     | Row count for data warehouse tables (nullable)                                               |
+
+```sql
+SELECT table_name, table_type, description
+FROM system.information_schema.tables
+```
+
+### `system.information_schema.columns`
+
+Lists columns for each table with their types and descriptions.
+
+| Column             | Description                                                    |
+| ------------------ | -------------------------------------------------------------- |
+| `table_schema`     | Schema the table belongs to                                    |
+| `table_name`       | Name of the table the column belongs to                        |
+| `column_name`      | Name of the column                                             |
+| `ordinal_position` | Position of the column within the table (1-indexed)            |
+| `data_type`        | HogQL data type (e.g. `String`, `Integer`, `DateTime`, `JSON`) |
+| `is_nullable`      | Whether the column accepts null values                         |
+| `is_array`         | Whether the column is an array type                            |
+| `field_kind`       | Kind of field: `column`, `expression`, or `virtual_table`      |
+| `description`      | Human-readable description of the column (nullable)            |
+
+```sql
+SELECT column_name, data_type, is_nullable, description
+FROM system.information_schema.columns
+WHERE table_name = 'events'
+```
+
+### `system.information_schema.relationships`
+
+Shows relationships between tables, including lazy joins and field traversers.
+
+| Column              | Description                                                 |
+| ------------------- | ----------------------------------------------------------- |
+| `source_table`      | Table the relationship originates from                      |
+| `source_column`     | Column or field path on the source table                    |
+| `target_table`      | Table the relationship points to                            |
+| `target_column`     | Column or field path on the target table (nullable)         |
+| `relationship_kind` | Type of relationship: `lazy_join` or `field_traverser`      |
+| `via`               | Resolver or path used to follow the relationship (nullable) |
+
+```sql
+SELECT source_table, source_column, target_table, relationship_kind
+FROM system.information_schema.relationships
+WHERE source_table = 'events'
+```
+
+### `system.information_schema.data_types`
+
+A reference of all HogQL data types and their descriptions.
+
+| Column        | Description                 |
+| ------------- | --------------------------- |
+| `type_name`   | Name of the HogQL data type |
+| `description` | Human-readable description  |
+
+```sql
+SELECT type_name, description
+FROM system.information_schema.data_types
+```
