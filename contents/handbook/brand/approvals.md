@@ -26,13 +26,13 @@ When in doubt, ask in the `#design-review` Slack channel. Lottie and Cory are, f
 
 ## Who owns what
 
-- **Website team** – Website, copy, major design decisions, motion work for web.
-- **Graphics team** – Graphics, artwork, merch, anything illustrated, motion work for video.
-- **Editorial team** – Blog, email copy, messaging guidelines, social presence.
-- **Marketing team** – Email copy, external partnerships, influencers.
-- **YouTube team** – Video production, editing.
-- **Events team** – In-person events, PostHog speaking engagements, meetups.
-- **Docs & Wizard team** – Docs, obviously. 
+- <SmallTeam slug="website" /> – Website, copy, major design decisions, motion work for web.
+- <SmallTeam slug="graphics" /> – Graphics, artwork, merch, anything illustrated, motion work for video.
+- <SmallTeam slug="editorial" /> – Blog, email copy, messaging guidelines, social presence.
+- <SmallTeam slug="marketing" /> – Email copy, external partnerships, influencers.
+- <SmallTeam slug="youtube" /> – Video production, editing.
+- <SmallTeam slug="irl-events" /> – In-person events, PostHog speaking engagements, meetups.
+- <SmallTeam slug="docs-wizard" /> – Docs, obviously. 
 - **Everyone** – Handbook updates. 
 
 ### Graphics team responsibilities

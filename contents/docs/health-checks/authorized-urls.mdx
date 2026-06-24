@@ -1,0 +1,43 @@
+---
+title: No authorized URLs
+sidebar: Docs
+showTitle: true
+---
+
+The authorized URLs check fires when your project has no authorized URLs (also called app URLs) configured. Authorized URLs tell PostHog which domains your product runs on.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_51_47_886_Z_8eef00f253.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_51_41_323_Z_f33ec8ce4e.png"
+    alt="Authorized URLs check in the Health checks section in the PostHog app"
+    classes="rounded"
+/>
+
+## What this check looks for
+
+Once a day, the check inspects your project settings and raises a **warning** if the list of authorized URLs is empty.
+
+## Why it matters
+
+Without authorized URLs, the [toolbar](/docs/toolbar) can't launch on your site, and some web analytics filters won't work correctly. Authorized URLs are also a **security boundary** – they're the allowlist the toolbar uses to decide which domains it may redirect to, so they should only ever contain domains you actually own.
+
+## Fix it manually
+
+1. Go to **Project settings → Authorized URLs** (also reachable from the Web analytics health page).
+2. Add each domain you run on, including staging and any subdomains – for example `https://example.com` and `https://app.example.com`.
+3. Use wildcards for dynamic subdomains where needed.
+
+## Fix it automatically with the Inbox and PostHog Code
+
+Because authorized URLs are a security boundary, [PostHog Code](/docs/posthog-code) handles this one carefully and **never adds a domain unattended**. With health checks enabled as a [signal source](/docs/self-driving/inbox/sources), the agent will:
+
+- Discover candidate domains from your recent `$pageview` events (a domain appearing in events is not proof you own it – anyone with your public project token can send spoofed events).
+- Present the discovered domains and ask you to confirm which you actually own.
+- Append only the confirmed domains to your project settings, without clobbering existing entries.
+
+The issue resolves once at least one authorized URL is set.
+
+## Related
+
+- [Health checks overview](/docs/health-checks)
+- [Toolbar](/docs/toolbar)

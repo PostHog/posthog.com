@@ -8,7 +8,7 @@ Case studies should make our users look smart, our products look useful, and Pos
 
 **Things we don't care about:**
 - if they pay us or not (most customers don't)
-- if they use every tool in the box (they might be a power user of only one product)
+- if they use every tool in the box (they might be a power user of only one tool)
 - if they have a recognizable brand (big logos are nice, but more frequent, smaller stories often beat enterprise red tape)
 
 **Things we do care about:**

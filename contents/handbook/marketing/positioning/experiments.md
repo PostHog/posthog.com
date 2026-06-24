@@ -4,8 +4,6 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> **Owner:** Experiments Team
-
 ## Elevator pitch
 
 PostHog Experiments run on top of Feature Flags, so every experiment is a controlled rollout by default. Multiple metric types — funnels, trends, retention, ratio metrics — let you measure what actually matters, not just what's easy to track. Watch session replays of each variant's users. Measure side effects across your entire product. 

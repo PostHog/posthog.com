@@ -4,8 +4,6 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> **Owner:** Cleo Lant
-
 ## Elevator pitch
 
 PostHog LLM Analytics tracks every model call — latency, tokens, cost per user, quality signals, errors — alongside the product events and session data from the humans using your AI features. When something goes wrong, you can trace it back to the exact conversation, the exact prompt, and the exact user cohort affected. And because it's PostHog, PostHog Code can read those traces and propose fixes — automatically.
