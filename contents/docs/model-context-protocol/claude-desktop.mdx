@@ -5,6 +5,7 @@ sidebarTitle: Claude Desktop
 
 import ClaudeDesktopSetup from './_snippets/claude-desktop.mdx'
 import SharedContent from "./_snippets/shared.mdx"
+import { CalloutBox } from 'components/Docs/CalloutBox'
 
 The PostHog [MCP server](https://modelcontextprotocol.io/introduction) enables Claude Desktop to directly interact with your PostHog data – managing feature flags, querying analytics, investigating errors, and more.
 
@@ -17,6 +18,14 @@ The quickest way to install the PostHog MCP into Claude Desktop is the [PostHog 
 3. When prompted, sign in to PostHog to finish authentication.
 
 After that, PostHog MCP tools are available in Claude Desktop wherever that connector is supported.
+
+<CalloutBox icon="IconInfo" title="Already added to your team? You still need to connect." type="fyi">
+
+If you're an admin and added PostHog to your team (the connector shows a gear icon and a **Remove from your team** button instead of **Connect**), that only makes it available org-wide – it doesn't connect your own account.
+
+Each person, including you, still has to authenticate individually under **Settings > Connectors**. Click **Connect** on PostHog and sign in when prompted. See Anthropic's guide to [using connectors](https://support.claude.com/en/articles/11176164-use-connectors-to-extend-claude-s-capabilities) for more.
+
+</CalloutBox>
 
 ## Server URL
 
@@ -34,7 +43,7 @@ npx @posthog/wizard mcp add
 
 ## Manual setup
 
-You can also edit Claude Desktop's configuration file directly:
+You can also edit Claude Desktop's configuration file directly. For more on Claude's custom connector options, see Anthropic's [remote MCP guide](https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp).
 
 <ClaudeDesktopSetup />
 
