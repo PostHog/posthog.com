@@ -56,6 +56,8 @@
         { "source": "/posts/:path*", "destination": "/posts/[slug]/index.html" }
     ],
     "redirects": [
+        { "source": "/teams/logs", "destination": "/teams/apm" },
+        { "source": "/teams/logs/:path*", "destination": "/teams/apm/:path*" },
         {
             "source": "/docs/sdk-doctor/keeping-sdks-current",
             "destination": "/docs/health-checks/keeping-sdks-current",
