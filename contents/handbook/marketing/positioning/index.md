@@ -42,7 +42,7 @@ We've repositioned around self-driving. That only works if we all use the same w
 - **Not a feature list.** That's what [the docs](/docs) are for.
 - **Not static.** Tools evolve, pricing changes, and competitors ship things. Treat this as the current best version, not the final one.
 
-If something here feels off, doesn't match what the product team is actually building, or contradicts itself — open a PR or flag it in #ask-marketing.
+If something here feels off, doesn't match what the product team is actually building, or contradicts itself — open a PR or flag it in #team-marketing.
 
 ## How we name and position things
 
