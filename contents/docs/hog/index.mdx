@@ -271,7 +271,7 @@ for (let food, value in obj) {
 
 ## Hog's standard library
 
-Hog's standard library includes the following functions and will expand. To see the the most update-to-date list, check the [Python VM's `stl/__init__.py` file](https://github.com/PostHog/posthog/blob/master/common/hogvm/python/stl/__init__.py).
+Hog's standard library includes the following functions and will expand. To see the most up-to-date list, check the [Python VM's `stl/__init__.py` file](https://github.com/PostHog/posthog/blob/master/common/hogvm/python/stl/__init__.py).
 
 ### Type conversion
 
@@ -348,7 +348,7 @@ Hog's standard library includes the following functions and will expand. To see 
 - `toTimeZone(input: DateTime, zone: string): DateTime | Date`
 - `toDate(input: string | integer | float): Date`
 - `toDateTime(input: string | integer | float, zone?: string): DateTime`
-- `formatDateTime(input: DateTime, format: string, zone?: string): string` - we use use the [ClickHouse formatDateTime syntax](https://clickhouse.com/docs/en/sql-reference/functions/date-time-functions#formatdatetime).
+- `formatDateTime(input: DateTime, format: string, zone?: string): string` - we use the [ClickHouse formatDateTime syntax](https://clickhouse.com/docs/en/sql-reference/functions/date-time-functions#formatdatetime).
 - `toInt(arg: any): integer` - Converts `arg` to a 64-bit integer. Converts `Date`s into days from epoch, and `DateTime`s into seconds from epoch
 - `toFloat(arg: any): float` - Converts `arg` to a 64-bit float. Converts `Date`s into days from epoch, and `DateTime`s into seconds from epoch
 - `toDate(arg: string | integer): Date` - `arg` must be a string `YYYY-MM-DD` or a Unix timestamp in seconds

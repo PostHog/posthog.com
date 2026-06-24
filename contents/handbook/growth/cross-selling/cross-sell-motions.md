@@ -42,7 +42,7 @@ Successful expansion strengthens customer relationships and increases account st
 - Churn rate by specific products i.e. are there products that once adopted lead to a noticeably lower (or higher) churn rate.
 - Customer feedback on expanded products
 - Percentage of revenue from a customer spread across products
-  - Is all the revenue for a customer coming from person profiles or is is spread between recordings, events, feature flags, and exceptions
+  - Is all the revenue for a customer coming from person profiles or is spread between recordings, events, feature flags, and exceptions
 
 > Since we have different folks at different stages of ramp and onboarding, instead of making these metrics flat or percentage based, we are looking for an increase quarter over quarter.
 

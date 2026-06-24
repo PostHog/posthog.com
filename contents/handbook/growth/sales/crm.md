@@ -143,7 +143,7 @@ When you disqualify a task, choose the picklist reason that best matches the sit
 - **No Response – Prospect** — They showed qualifying signals but went dark; create a **follow-up task** with a date (revisit in roughly 3–6 months).
 - **Below Sales Assist Threshold – Pass** — TAE judged under ~$20K potential with no signals worth revisiting.
 - **Below Sales Assist Threshold – Prospect** — Same economic band but signals worth another pass (ICP, growth, usage); create a **follow-up task** (e.g. BDR or named list). If nothing happens within ~90 days, revisit whether this split is useful.
-- **Using Competitor / Unsolicited RFP** — Locked in or chose a competitor; set a reminder to check in in about **9 months** (see [new sales playbook](/handbook/growth/sales/new-sales)).
+- **Using Competitor / Unsolicited RFP** — Locked in or chose a competitor; set a reminder to check in about **9 months** (see [new sales playbook](/handbook/growth/sales/new-sales)).
 - **Other** — Requires a free-text comment when selected; if a large share of disqualifications land here, propose a new reason.
 
 ### Manual entry
