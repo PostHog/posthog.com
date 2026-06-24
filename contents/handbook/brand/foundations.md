@@ -87,7 +87,7 @@ Nothing has changed about our overall positioning: **PostHog makes _your_ produc
 
 Self-driving is the narrative everything sits under. PostHog makes your product development self-driving – a better version of you, with your product and all its context in one place. It isn't a product or a tool you can point at. It's what PostHog is and enables. Don't write "PostHog is a self-driving product" or "the self-driving app" – keep the customer's product as the subject.
 
-Because it's a capability, not a product, always write it lowercase and hyphenated – "self-driving". Never "Self-Driving", "Self Driving", or "self driving".
+Because it's a capability, not a product, always write it lowercase and hyphenated: it's not "Self-Driving" or "self driving", it's "self-driving".
 
 ### The standard description
 
