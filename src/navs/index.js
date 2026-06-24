@@ -2206,6 +2206,16 @@ export const docsMenu = {
                 {
                     name: 'Scouts',
                     url: '/docs/self-driving/scouts',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/self-driving/scouts',
+                        },
+                        {
+                            name: 'Examples',
+                            url: '/docs/self-driving/scout-examples',
+                        },
+                    ],
                 },
                 {
                     name: 'Signals',
