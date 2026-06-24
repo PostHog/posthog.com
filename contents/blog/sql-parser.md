@@ -50,7 +50,7 @@ With AI, it is much more possible to write and maintain a hand-rolled parser. Sa
 
 I tested two approaches in parallel:
 
-1. One focused on performance. I knew that a recursive-descent parser with a Pratt expression loop would be the theoretical fastest parser if it worked, adding lookahead and backtracking only where necessary.
+1. One focused on performance. I knew that, in theory, if it worked, the fastest possible parser would be recursive-descent with a Pratt expression loop, adding lookahead and backtracking only where necessary.
 
 2. The other focused on an approach most likely to result in a successful parser. It followed ANTLR’s behavior as closely as possible, but implemented the transitions in explicit code rather than as generic graph traversal.
 
