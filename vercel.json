@@ -57,7 +57,7 @@
     ],
     "redirects": [
         { "source": "/teams/logs", "destination": "/teams/apm" },
-        { "source": "/teams/logs/:path*", "destination": "/teams/apm/:path*" },
+        { "source": "/self-driving", "destination": "/docs/self-driving", "statusCode": 302 },
         {
             "source": "/docs/sdk-doctor/keeping-sdks-current",
             "destination": "/docs/health-checks/keeping-sdks-current",
