@@ -13,7 +13,7 @@ tags:
   - Inside PostHog
 ---
 
-> This blog post was written by a human (me!) on a very clacky keyboard.
+> This blog post was written by a human on a very clacky keyboard.
 
 I rewrote PostHog’s SQL parser to be ~70x faster, and I barely looked at the code directly.
 
