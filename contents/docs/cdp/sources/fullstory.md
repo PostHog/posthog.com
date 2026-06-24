@@ -6,7 +6,7 @@ availability:
   free: full
   selfServe: full
   enterprise: full
-sourceId: Fullstory
+sourceId: FullStory
 ---
 
 <CalloutBox icon="IconInfo" title="Alpha release" type="fyi">

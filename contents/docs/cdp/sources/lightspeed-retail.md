@@ -6,7 +6,7 @@ availability:
   free: full
   selfServe: full
   enterprise: full
-sourceId: Lightspeed Retail
+sourceId: LightspeedRetail
 ---
 
 <CalloutBox icon="IconInfo" title="Alpha release" type="fyi">
