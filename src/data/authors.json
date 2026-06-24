@@ -681,5 +681,12 @@
         "role": "Mobile Engineer",
         "link_type": "github",
         "link_url": "https://github.com/turnipdabeets"
+    },
+    {
+        "handle": "ioannis-j",
+        "name": "Ioannis J",
+        "role": "Mobile Engineer",
+        "link_type": "github",
+        "link_url": "https://github.com/ioannisj"
     }
 ]
