@@ -1305,8 +1305,8 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/refunds',
                     },
                     {
-                        name: 'Lead assignment during time off',
-                        url: '/handbook/growth/revops/lead-assignment-ooo',
+                        name: 'Lead assignment tracker',
+                        url: '/handbook/growth/revops/lead-assignment-tracker',
                     },
                     {
                         name: 'Giving credits to customers',
