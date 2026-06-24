@@ -8,12 +8,12 @@ showTitle: true
 
 Marketing at PostHog is a collaborative effort across several teams. There are six distinct teams that handle different aspects of marketing:
 
-- **Graphics** – Leads all art, design, illustration, and brand work for PostHog
-- **Website** – Leads all matters related to posthog.com and handles some product design aspects
-- **Marketing** – A multidisciplinary team that handles Product Marketing, Influencers & Partnerships, and other unowned marketing tasks
-- **Editorial** – Leads content, newsletters, and social
-- **YouTube** – Leads video
-- **Docs & Wizard** – Leads on documentation and the wizard
+- <SmallTeam slug="graphics" /> – Leads all art, design, illustration, and brand work for PostHog
+- <SmallTeam slug="website" /> – Leads all matters related to posthog.com and handles some product design aspects
+- <SmallTeam slug="marketing" /> – A multidisciplinary team that handles Product Marketing, Influencers & Partnerships, and other unowned marketing tasks
+- <SmallTeam slug="editorial" /> – Leads content, newsletters, and social
+- <SmallTeam slug="youtube" /> – Leads video
+- <SmallTeam slug="docs-wizard" /> – Leads on documentation and the wizard
 
 If you're not sure who to talk to, check [Who can help me?](/handbook/marketing/ownership).
 
@@ -99,8 +99,6 @@ Beyond PostHog's company [mission and strategy](/handbook/why-does-posthog-exist
 - **Supporting YC founders:** Lots of PostHog's DNA comes from Y Combinator. Their companies and founders are our ideal customers. We've done a great job being valuable to them (50%+ of batches using us) and want to continue to do so.
 
 - **Merch:** We make the coolest tech company merch. Let's keep it this way. 
- 
-### Things we want to be good at
 
 - **Events:** We have been involved in some events, but we are still figuring out "the PostHog way" to do them. We don't just want to be a name on the sponsor list. We want to create superfans. 
 
@@ -114,14 +112,6 @@ Beyond PostHog's company [mission and strategy](/handbook/why-does-posthog-exist
 
 - **Billboards:** Billboards are a way to get our brand in front of a lot of people.
 
-- **Doing sales without salespeople:** Rather than care a lot about "capturing every lead" or "marketing qualified leads," we'd rather work with sales to create content that helps potential customers, ideally without a salesperson.
-
-### Things we might want to be good at but haven't tested yet
-
-- **Broader partnerships:** PostHog is a complement to a bunch of types of companies, from vibe coding tools to infrastructure platforms. Our data warehouse and CDP are built to enable integrations. How can we leverage this?
-
-- **Video essays:** Video essay style content is a natural extension of what we are doing in our newsletter. When done well, it is what "great video content" looks like.
- 
 ### Things we don't want to spend time on
 
 - **Optimizing marketing spend:** We're more concerned about growing fast than being the most efficient marketing team. Go fast, run experiments, look for upside.

@@ -556,10 +556,6 @@ export const handbookSidebar = [
                 name: 'Resources',
             },
             {
-                name: 'Quick reference',
-                url: '/handbook/brand/reference',
-            },
-            {
                 name: 'Brand assets',
                 url: '/handbook/brand/assets',
             },
@@ -1149,46 +1145,8 @@ export const handbookSidebar = [
                 ],
             },
             {
-                name: 'Positioning and selling',
+                name: 'Positioning',
                 url: '/handbook/marketing/positioning',
-                children: [
-                    {
-                        name: 'Analytics',
-                        url: '/handbook/marketing/positioning/analytics',
-                    },
-                    {
-                        name: 'Session replay',
-                        url: '/handbook/marketing/positioning/session-replay',
-                    },
-                    {
-                        name: 'Feature flags',
-                        url: '/handbook/marketing/positioning/feature-flags',
-                    },
-                    {
-                        name: 'Experiments',
-                        url: '/handbook/marketing/positioning/experiments',
-                    },
-                    {
-                        name: 'Data warehouse',
-                        url: '/handbook/marketing/positioning/data-warehouse',
-                    },
-                    {
-                        name: 'Data pipelines',
-                        url: '/handbook/marketing/positioning/data-pipelines',
-                    },
-                    {
-                        name: 'Endpoints',
-                        url: '/handbook/marketing/positioning/endpoints',
-                    },
-                    {
-                        name: 'LLM analytics',
-                        url: '/handbook/marketing/positioning/llm-analytics',
-                    },
-                    {
-                        name: 'PostHog AI',
-                        url: '/handbook/marketing/positioning/posthog-ai',
-                    },
-                ],
             },
         ],
     },

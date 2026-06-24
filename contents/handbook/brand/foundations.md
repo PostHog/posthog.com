@@ -71,15 +71,7 @@ This shapes everything. Developers...
 
 The right model: **you're talking to a smart, skeptical friend who happens to be a product builder.** Not an enterprise buyer. Not an executive. A person.
 
-## The dating profile test
-
-Most SaaS companies write like they're submitting a résumé. Formal, big words – intended to impress the most serious of visitors.
-
-PostHog writes more like a dating profile: authentic, maybe a bit weird – but most importantly, showing actual personality. We might not be for everybody, but our style will connect with the right audience. 
-
-Ours connects with personality and ideas. Even the decision maker at an enterprise company is a human behind the screen.
-
-Ask yourself when writing or designing: *is this a résumé or a dating profile?* If it's written like a résumé – or if it's something a lawyer might enjoy reading, it's not PostHog enough.
+For the full picture, see [who we build for](/handbook/who-we-build-for).
 
 ## The Hacker News test
 
@@ -99,7 +91,7 @@ Self-driving is the narrative everything sits under. PostHog makes your product 
 
 Use this whenever you need a standard description of PostHog:
 
-> PostHog is the platform for self-driving products. It pairs the full context of your data (events, errors, logs, replays, and more) with agents that enable you to ship better products, faster. Agents can work reactively (e.g. prompted via Slack) or proactively (e.g. via the Inbox), so your product becomes entirely self-driving.
+<AboutPostHog />
 
 ### The four layers
 

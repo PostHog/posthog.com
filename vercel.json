@@ -80,7 +80,17 @@
         },
         {
             "source": "/handbook/marketing/how-we-position-and-sell/:path*",
-            "destination": "/handbook/marketing/positioning/:path*",
+            "destination": "/handbook/marketing/positioning",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/marketing/positioning/:path*",
+            "destination": "/handbook/marketing/positioning",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/brand/reference",
+            "destination": "/handbook/brand/overview",
             "statusCode": 301
         },
         { "source": "/docs/product-tours", "destination": "/docs", "statusCode": 301 },
