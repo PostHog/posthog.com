@@ -30,7 +30,7 @@ export const weave = {
         session_replay: {
             available: false,
         },
-        feature_flags: {
+        product_analytics: {
             available: false,
         },
     },
