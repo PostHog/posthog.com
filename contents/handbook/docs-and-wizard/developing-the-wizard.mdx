@@ -32,6 +32,11 @@ A **brand-new top-level command word is the exception – it also needs a wizard
 
 > **Worked example — adding `wizard mcp-analytics`.** This flat top-level command was added across four PRs and is the canonical reference for the pattern: the skill ([context-mill#202](https://github.com/PostHog/context-mill/pull/202)), the wizard command stub ([wizard#731](https://github.com/PostHog/wizard/pull/731)), the test fixtures ([wizard-workbench#2158](https://github.com/PostHog/wizard-workbench/pull/2158)), and the docs/`wizardSupport` label ([posthog.com#17939](https://github.com/PostHog/posthog.com/pull/17939)). Copy that shape rather than inferring from the `cli:` schema alone.
 
+Cover **both test layers** when you add a command:
+
+- **Unit (wizard repo)** — a per-command test in [`programs-cli.test.ts`](https://github.com/PostHog/wizard/blob/main/src/__tests__/programs-cli.test.ts) asserting the command registers in the expected shape (flat vs. family) and dispatches the right `skillId`. Fast, runs in the wizard's CI.
+- **End-to-end (workbench)** — a PostHog-less fixture app under [`apps/<command>/`](https://github.com/PostHog/wizard-workbench/tree/main/apps) plus an entry in `apps/manifest.json`, so the workbench can drive the real agent run via `phrocs`. Add a fixture per distinct path the skill handles (mcp-analytics ships one for the SDK-wrap path and one for the custom-dispatcher path).
+
 The full `cli:` block schema (roles, `parentCommand`, the `default` leaf, naming rules) lives in [context mill's CONTRIBUTING.md](https://github.com/PostHog/context-mill/blob/main/CONTRIBUTING.md); the wizard side (command registration, families, aliases) is documented in the wizard repo's [AGENTS.md](https://github.com/PostHog/wizard/blob/main/AGENTS.md). The command surface is **curated, not inclusive** — new `role: command` promotions want a wizard-maintainer sign-off, since a public command name is hard to deprecate.
 
 ## Developing the wizard
