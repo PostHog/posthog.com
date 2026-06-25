@@ -255,7 +255,7 @@ export const dataPipelines = {
             featured: true,
             children: [
                 {
-                    name: 'Amazon S3',
+                    name: 'S3',
                     url: '/docs/cdp/batch-exports/s3',
                 },
                 {
