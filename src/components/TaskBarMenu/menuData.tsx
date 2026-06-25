@@ -319,7 +319,7 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
                     type: 'item' as const,
                     label: 'Self-driving',
                     link: '/self-driving',
-                    icon: React.createElement(Icons.IconCompass, { className: 'size-4 text-red' }),
+                    icon: React.createElement(Icons.IconBolt, { className: 'size-4 text-red' }),
                 })
             }
 
