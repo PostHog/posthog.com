@@ -100,7 +100,7 @@ let mut set_once = HashMap::new();
 set_once.insert("initial_url", "/blog");
 event.insert_prop("$set_once", set_once).unwrap();
 
-client.capture(event).await.unwrap();
+client.capture(event);
 ```
 
 ```bash
