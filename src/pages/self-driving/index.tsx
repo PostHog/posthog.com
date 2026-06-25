@@ -8,13 +8,14 @@ import { productOSNav } from 'hooks/useProductOSNavigation'
 import { Accordion } from 'components/RadixUI/Accordion'
 import TabbedCarousel from 'components/TabbedCarousel'
 import type { TabbedCarouselTab } from 'components/TabbedCarousel'
-import Tabs from 'components/RadixUI/Tabs'
 import Link from 'components/Link'
 import WizardCommand from 'components/WizardCommand'
 import { SignalsCallout } from 'components/Code/SignalsCallout'
 import {
     IconArrowRight,
+    IconAtSign,
     IconBolt,
+    IconBrowser,
     IconChat,
     IconCheck,
     IconCheckCircle,
@@ -27,8 +28,7 @@ import {
     IconRefresh,
     IconSearch,
     IconShieldLock,
-    IconShuffle,
-    IconSparkles,
+    IconStack,
     IconStar,
     IconTarget,
     IconWarning,
@@ -37,7 +37,6 @@ import {
 type IconComponent = React.ComponentType<{ className?: string }>
 
 const HEADER_IMAGE = 'https://res.cloudinary.com/dmukukwp6/image/upload/inbox_prs_cloud_full_9c9dbb504c.png'
-const BUILD_MODE_IMAGE = 'https://res.cloudinary.com/dmukukwp6/image/upload/evolution_of_build_mode_0bdd109b00.png'
 const LOOP_SIGNALS_IMAGE = 'https://res.cloudinary.com/dmukukwp6/image/upload/sources_modal_5badfc44b6.png'
 const LOOP_SCOUTS_IMAGE = 'https://res.cloudinary.com/dmukukwp6/image/upload/scout_modal_4c95317f12.png'
 const LOOP_INBOX_IMAGE = 'https://res.cloudinary.com/dmukukwp6/image/upload/inbox_reports_80b35211c4.png'
@@ -146,26 +145,6 @@ const SplitPanel = ({
     </div>
 )
 
-const scoutRunFlow: string[] = ['On a schedule', 'Reads one slice', 'Decides what matters', 'Emits a signal']
-
-const scoutControls: { label: string; copy: string; color: string }[] = [
-    {
-        label: 'Out of the box',
-        copy: 'PostHog ships with scouts for the patterns most products hit.',
-        color: 'bg-blue',
-    },
-    {
-        label: 'On or off per project',
-        copy: 'Toggle each scout so a project only runs what’s relevant to it.',
-        color: 'bg-yellow',
-    },
-    {
-        label: 'Bring your own',
-        copy: 'Teams add scouts for the patterns specific to their product.',
-        color: 'bg-green',
-    },
-]
-
 const loopTabs: TabbedCarouselTab[] = [
     {
         value: 'signals',
@@ -246,7 +225,7 @@ const loopTabs: TabbedCarouselTab[] = [
                             color: 'text-red',
                             text: (
                                 <>
-                                    <strong className="text-primary">Ranked by impact</strong> — P0–P4 by how many users
+                                    <strong className="text-primary">Ranked by impact</strong> — P1–P3 by how many users
                                     it hits, whether they pay, and how core the code is. Not how loud the log is.
                                 </>
                             ),
@@ -256,8 +235,9 @@ const loopTabs: TabbedCarouselTab[] = [
                             color: 'text-yellow',
                             text: (
                                 <>
-                                    <strong className="text-primary">Routed to the right person</strong> — it suggests
-                                    reviewers by tracing who wrote the code. If your name's on it, it floats to the top.
+                                    <strong className="text-primary">Routed to the right person</strong> — it suggests a
+                                    reviewer from git blame, whoever last touched that code. If your name's on it, it
+                                    floats to the top.
                                 </>
                             ),
                         },
@@ -286,56 +266,132 @@ const loopTabs: TabbedCarouselTab[] = [
             <TabPanel eyebrow="Step 4 · Fix & ship" title="The fix, already written" image={LOOP_MERGE_IMAGE} bleed>
                 <p className="m-0">
                     When the fix is clear, an agent writes it in a sandbox, runs your tests, and opens a real pull
-                    request.
+                    request – with its receipts attached.
                 </p>
                 <IconList
                     items={[
+                        {
+                            Icon: IconStack,
+                            color: 'text-blue',
+                            text: (
+                                <>
+                                    <strong className="text-primary">Carries its receipts</strong> — the source it came
+                                    from, an evidence bundle, and why PostHog acted, all on the PR.
+                                </>
+                            ),
+                        },
                         { Icon: IconShieldLock, color: 'text-purple', text: 'Sandboxed, scoped to one repo' },
                         { Icon: IconCheckCircle, color: 'text-green', text: 'Tests run before it’s ever proposed' },
-                        { Icon: IconStar, color: 'text-yellow', text: 'Your name suggested as reviewer' },
                     ]}
                 />
-                <Callout>Nothing merges without you — you read the diff and hit merge.</Callout>
+                <Callout>
+                    Nothing merges without you — archive it, mark it as needing input, or merge. You only pay for PRs,
+                    never reports.
+                </Callout>
             </TabPanel>
         ),
     },
 ]
+
+const slackReports: { label: string; src: string }[] = [
+    { label: 'P0', src: 'https://res.cloudinary.com/dmukukwp6/image/upload/P0_report_in_slack_21ed6fa69a.png' },
+    {
+        label: 'P1 · Replay',
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/P1_report_in_slack_replay_5fcf5aac7d.png',
+    },
+    {
+        label: 'P1 · Zendesk',
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/P1_report_in_slack_zendesk_316671edcb.png',
+    },
+    { label: 'P2', src: 'https://res.cloudinary.com/dmukukwp6/image/upload/P2_report_in_slack_b35af9738a.png' },
+    { label: 'P3', src: 'https://res.cloudinary.com/dmukukwp6/image/upload/P3_report_in_slack_97d9c6d8d4.png' },
+    { label: 'P4', src: 'https://res.cloudinary.com/dmukukwp6/image/upload/P4_report_in_slack_7119174383.png' },
+]
+
+// Scattered, tilted report screenshots you can scroll through – like the PostHog AI prompt cards.
+const SlackReportsRow = (): JSX.Element => {
+    const railRef = React.useRef<HTMLDivElement>(null)
+    const scrollByCards = (dir: number) => railRef.current?.scrollBy({ left: dir * 280, behavior: 'smooth' })
+    return (
+        <div className="not-prose relative">
+            <div ref={railRef} className="flex snap-x gap-8 overflow-x-auto scroll-smooth px-4 pb-8 pt-8">
+                {slackReports.map(({ label, src }) => (
+                    <CloudinaryImage
+                        key={label}
+                        src={src as `https://res.cloudinary.com/${string}`}
+                        alt={`A ${label} self-driving report delivered to a Slack channel`}
+                        className="w-[280px] flex-shrink-0 snap-center odd:-rotate-3 even:rotate-3 @lg/reader-content:w-[320px]"
+                        imgClassName="w-full rounded shadow-md"
+                    />
+                ))}
+            </div>
+            <button
+                type="button"
+                aria-label="Previous report"
+                onClick={() => scrollByCards(-1)}
+                className="absolute left-1 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center rounded-full border border-primary bg-primary shadow-md hover:bg-accent"
+            >
+                <IconArrowRight className="size-4 rotate-180 text-primary" />
+            </button>
+            <button
+                type="button"
+                aria-label="Next report"
+                onClick={() => scrollByCards(1)}
+                className="absolute right-1 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center rounded-full border border-primary bg-primary shadow-md hover:bg-accent"
+            >
+                <IconArrowRight className="size-4 text-primary" />
+            </button>
+        </div>
+    )
+}
 
 const fighterOptions: {
     icon: IconComponent
     iconColor: string
     label: React.ReactNode
     copy: React.ReactNode
+    cta?: React.ReactNode
 }[] = [
     {
-        icon: IconSparkles,
+        icon: IconBrowser,
         iconColor: 'text-blue',
-        label: (
-            <Link to="/ai" state={{ newWindow: true }} className="font-bold text-primary">
-                PostHog AI
+        label: <span className="font-bold text-primary">PostHog web app</span>,
+        copy: 'The main way in. Review reports, open and merge pull requests, and manage your scouts – all from the Inbox in the PostHog app.',
+        cta: (
+            <Link to="https://app.posthog.com/signup" external className="text-secondary font-semibold underline">
+                Sign up free
             </Link>
         ),
-        copy: "When you're already in the app staring at data – ask it to write the SQL, build the dashboard, or explain what you're looking at.",
     },
     {
         icon: IconCode,
         iconColor: 'text-brown dark:text-brown-dark',
         label: (
-            <Link to="/code" state={{ newWindow: true }} className="font-bold text-primary">
-                PostHog Code
+            <span className="inline-flex items-center gap-2">
+                <Link to="/code" state={{ newWindow: true }} className="font-bold text-primary">
+                    PostHog Code
+                </Link>
+                <span className="inline-flex items-center rounded-sm bg-yellow/15 px-1 py-0.5 text-xs font-bold text-yellow">
+                    Waitlist
+                </span>
+            </span>
+        ),
+        copy: 'The same Inbox on the desktop, for driving agents hands-on. Still rolling out from a waitlist, so not everyone has access yet.',
+        cta: (
+            <Link to="/code" state={{ newWindow: true }} className="text-secondary font-semibold underline">
+                Join the waitlist
             </Link>
         ),
-        copy: 'The desktop cockpit. Drive the agents hands-on, run them in parallel, and review every diff before it ships.',
     },
     {
-        icon: IconChat,
+        icon: IconAtSign,
         iconColor: 'text-sky-blue',
         label: (
             <Link to="/slack" state={{ newWindow: true }} className="font-bold text-primary">
-                Slack app
+                PostHog Slack app
             </Link>
         ),
-        copy: 'Where the team already is. Drop a report in a thread, tag a teammate, and investigate together – the agent answers inline.',
+        copy: 'Route reports into the Slack channels each team already watches – autotagged based on the product areas they own.',
     },
     {
         icon: IconPlug,
@@ -345,7 +401,7 @@ const fighterOptions: {
                 PostHog MCP
             </Link>
         ),
-        copy: 'Wire the same product context into the editor or agent you already use, so your tools know your users too.',
+        copy: 'Look ma, no hands! Pull self-driving context into other tools, and pull context from your other tools into self-driving.',
     },
 ]
 
@@ -398,107 +454,22 @@ const workModes: WorkMode[] = [
 
 const humanRoles: { heading: string; copy: string; image: string; alt: string }[] = [
     {
-        heading: 'You call the shots',
-        copy: 'You decide what matters and where to point it. Strategy stays human.',
+        heading: 'You’re (still) the driver',
+        copy: "Like a Waymo, a self-driving product doesn't decide where you're going (it just makes getting there easier). You pick which problems are worth solving and where the product goes next.",
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/hog_head_point_b6a2ffb400.png',
         alt: 'A hedgehog gesturing toward the work',
     },
     {
-        heading: 'Grab the popcorn',
-        copy: 'Reports research themselves and PRs land in your inbox while you do literally anything else.',
+        heading: 'Watch your product improve',
+        copy: 'Scouts sit on top of your product data, so the pattern itself is the prompt. A leak found today has a PR tomorrow – which has quietly become my favourite show.',
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/hog_head_popcorn_82aa11ea69.png',
         alt: 'A hedgehog eating popcorn',
     },
     {
-        heading: 'Nothing hits prod alone',
-        copy: 'Sandboxed work, and every change is a PR you merge. No 3am incident from a rogue agent.',
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/hog_head_safety_e1a8daa592.png',
-        alt: 'A hedgehog in a hi-vis safety vest',
-    },
-]
-
-type AutonomyLevel = {
-    level: number
-    title: string
-    blurb: React.ReactNode
-    nodeClass: string
-    youAreHere?: boolean
-    destination?: boolean
-    capabilities?: { term: string; desc: React.ReactNode }[]
-}
-
-const autonomyLevels: AutonomyLevel[] = [
-    {
-        level: 1,
-        title: 'Assisted',
-        blurb: 'A coding assistant writes snippets and answers questions when you ask. It speeds you up, but you frame every input and make every call. The cruise control and lane assist of building software.',
-        nodeClass: 'bg-accent text-secondary border border-border',
-    },
-    {
-        level: 2,
-        title: 'Self-fixing',
-        blurb: 'The product holds its own line. When the software drifts — a regression slips in, a flag breaks, a bug hits production — it catches it and corrects back to where things should be.',
-        nodeClass: 'bg-blue text-white',
-        capabilities: [
-            {
-                term: 'Localization',
-                desc: 'Knows what state it’s in — which users do what, which features are healthy, what shipped yesterday.',
-            },
-            {
-                term: 'Feedback',
-                desc: 'Checks whether a change worked. Did engagement go up? Did latency drop? Did the tooltip matter?',
-            },
-        ],
-    },
-    {
-        level: 3,
-        title: 'Self-improving',
-        blurb: 'It stops just correcting and starts making moves — improving what’s there, taking the turns on its own. You still approve every pull request, and anything genuinely complex still comes to you.',
-        nodeClass: 'bg-red text-white ring-4 ring-red/20',
-        youAreHere: true,
-        capabilities: [
-            {
-                term: 'Perception',
-                desc: 'Curates its own context — support tickets connect to session replays, Slack threads to code changes.',
-            },
-            {
-                term: 'Planning',
-                desc: 'Decides what to do — a fix, an experiment, a doc — and, just as important, what not to do.',
-            },
-            {
-                term: 'Control',
-                desc: 'Has what it needs to act without asking: skills to ship a flag, permission to merge to master.',
-            },
-            {
-                term: 'Learning',
-                desc: 'Updates the next decision on what it learns. If the fix flopped, it tries something else. If you said no em dashes, it listens.',
-            },
-        ],
-    },
-    {
-        level: 4,
-        title: 'Self-driving',
-        blurb: 'It can handle every part of the job, under the right conditions. You set the direction and step in for the hard or high-stakes calls — the obvious work just disappears. Takes long, multi-week loops and steerable swarms of agents.',
-        nodeClass: 'bg-highlight text-red dark:text-yellow border-2 border-dashed border-red dark:border-yellow',
-        destination: true,
-        capabilities: [
-            {
-                term: 'Prediction',
-                desc: 'Holds a working model of what’s about to happen — this cohort is about to churn, this feature could go viral.',
-            },
-        ],
-    },
-    {
-        level: 5,
-        title: 'Product autonomy',
-        blurb: 'No human in the loop, on anything. The product sets its own direction and runs the whole show. That’s AGI — not here, and not the thing we’re building toward.',
-        nodeClass: 'bg-accent text-secondary border border-dashed border-border',
-        capabilities: [
-            {
-                term: 'Direction',
-                desc: 'Sets its own goals and priorities — the one thing a human still held at level 4, handed over.',
-            },
-        ],
+        heading: 'You stay in build mode',
+        copy: 'Founder mode for your whole product (sweating the details), because you’re in build mode. The paper cuts a founder would obsess over on launch week get that attention every week.',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/hog_head_laptop_2afc8d8955.png',
+        alt: 'A hedgehog working at a laptop',
     },
 ]
 
@@ -649,6 +620,18 @@ const faqItems = [
         ),
     },
     {
+        trigger: 'How does setup work, and what does the wizard do?',
+        content: (
+            <p>
+                Setup is a single command. The wizard reads your codebase and product, detects the services you run, and
+                enables only the sources and scouts relevant to what it finds. It checks your GitHub connection, that
+                the PostHog SDK is installed, and that AI data processing is approved, then hands back a setup report
+                showing exactly what was and wasn't enabled, and why. Your first reports land in ~20–30 minutes – just
+                enough time to build the cache and ingest from your first sources.
+            </p>
+        ),
+    },
+    {
         trigger: 'Is my code safe?',
         content: (
             <p>
@@ -684,7 +667,7 @@ export default function SelfDrivingPage(): JSX.Element {
                                 <Highlight>self-driving</Highlight>
                             </h1>
                             <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                                <WizardCommand />
+                                <WizardCommand command="self-driving" />
                             </div>
                         </div>
                     </div>
@@ -717,12 +700,6 @@ export default function SelfDrivingPage(): JSX.Element {
                     />
                     <hr className="border-t border-primary m-0 mb-6" />
 
-                    {/* Gradient quote */}
-                    <p className="my-6 text-center text-2xl font-bold @md/reader-content:text-3xl">
-                        A few good people behind the wheel,{' '}
-                        <em className="text-gradient not-italic">outrunning teams ten times the size.</em>
-                    </p>
-
                     {/* It runs on the data you already have */}
                     <h3>
                         It runs on the data you <Highlight>already have</Highlight>
@@ -751,47 +728,42 @@ export default function SelfDrivingPage(): JSX.Element {
                         imgClassName="w-full"
                     />
                     <p>
-                        A scout runs on a schedule. Each run, it looks at one slice of your data, decides whether
-                        anything is worth surfacing, and if so emits a{' '}
+                        A scout is a small agent that watches one corner of your product for you. It looks for a pattern
+                        worth flagging – a conversion rate slipping, rage-clicks piling up on a button, a new error
+                        spiking – and when it spots one, raises a{' '}
                         <Link to="/docs/start-here/signals" state={{ newWindow: true }}>
                             signal
                         </Link>{' '}
-                        – a structured finding with the evidence behind it and a suggested action.
+                        for the loop to pick up.
                     </p>
-                    <div className="not-prose flex flex-wrap items-center gap-2 my-6">
-                        {scoutRunFlow.map((step, i) => (
-                            <React.Fragment key={step}>
-                                {i > 0 && <IconArrowRight className="size-4 shrink-0 text-secondary" />}
-                                <span className="inline-flex items-center rounded-md border border-primary bg-primary px-2.5 py-1 text-sm font-semibold text-primary">
-                                    {step}
-                                </span>
-                            </React.Fragment>
-                        ))}
-                    </div>
-                    <p>
-                        Scouts sit on top of your product data, so the pattern itself is the prompt. They watch the
-                        products you’ve turned on, like error tracking and session replay, and the loop pulls in
-                        external sources too: Zendesk, GitHub Issues, and Linear. The more data you capture, the more a
-                        scout has to work with.
-                    </p>
+                    <p>You don’t have to wire any of this up:</p>
+                    <DottedList
+                        items={[
+                            <>
+                                <strong className="text-primary">~20 out of the box</strong> – scouts for the patterns
+                                most products hit, running from day one.
+                            </>,
+                            <>
+                                <strong className="text-primary">On or off per project</strong> – each one only runs
+                                where it’s relevant to you.
+                            </>,
+                            <>
+                                <strong className="text-primary">Make your own</strong> – describe what to watch and an
+                                agent builds the scout alongside you.
+                            </>,
+                            <>
+                                <strong className="text-primary">Not just code</strong> – UI confusion or a pricing
+                                complaint gets surfaced for product, no PR attached.
+                            </>,
+                        ]}
+                        bulletClass="bg-blue"
+                    />
                     <div className="clear-both" />
-                    <div className="not-prose grid @md/reader-content:grid-cols-3 gap-4 my-6">
-                        {scoutControls.map(({ label, copy, color }) => (
-                            <div key={label} className="border border-primary rounded-md p-4 bg-primary">
-                                <div className="flex items-center gap-2 mb-2">
-                                    <span className={`size-2.5 rounded-full ${color}`} />
-                                    <span className="font-bold text-primary">{label}</span>
-                                </div>
-                                <p className="m-0 text-sm text-secondary">{copy}</p>
-                            </div>
-                        ))}
-                    </div>
 
                     {/* How a product develops itself */}
-                    <h3 id="how">
-                        How a product <Highlight>develops itself</Highlight>
-                    </h3>
-                    <p>Four steps, start to finish. You only show up for the last one.</p>
+                    <p id="how" className="my-6 text-center text-2xl font-bold @md/reader-content:text-3xl">
+                        How a product <em className="text-gradient not-italic">develops itself</em>
+                    </p>
                     <div className="not-prose my-6">
                         <TabbedCarousel tabs={loopTabs} />
                     </div>
@@ -816,68 +788,6 @@ export default function SelfDrivingPage(): JSX.Element {
                                 )
                             )}
                         </ul>
-                    </div>
-
-                    {/* Steer it from Slack */}
-                    <h3>
-                        Steer it from Slack with <span className="bg-blue/10 p-0.5 font-bold text-blue">@PostHog</span>
-                    </h3>
-                    <p>
-                        Self-driving isn’t only autonomous. The{' '}
-                        <Link to="/slack" state={{ newWindow: true }}>
-                            PostHog Slack app
-                        </Link>{' '}
-                        puts the same agent in any thread – tag <code>@PostHog</code> and it picks up the work, right
-                        where your team already talks.
-                    </p>
-                    <div className="not-prose grid @md/reader-content:grid-cols-2 gap-4 my-6">
-                        <div className="border border-primary rounded-md p-4 bg-primary">
-                            <div className="flex items-center gap-2 mb-2">
-                                <IconShuffle className="size-5 shrink-0 text-blue" />
-                                <h4 className="m-0 text-base font-bold">Routed to the right channel</h4>
-                            </div>
-                            <p className="m-0 text-sm text-secondary">
-                                Route reports into the Slack channels each team already watches – autotagged based on
-                                the product areas they own.
-                            </p>
-                        </div>
-                        <div className="border border-primary rounded-md p-4 bg-primary">
-                            <div className="flex items-center gap-2 mb-2">
-                                <IconPeople className="size-5 shrink-0 text-purple" />
-                                <h4 className="m-0 text-base font-bold">Solve it together, in situ</h4>
-                            </div>
-                            <p className="m-0 text-sm text-secondary">
-                                Work through a report or PR with collaborators in a thread. Add context, steer the
-                                agent, and decide what ships.
-                            </p>
-                        </div>
-                    </div>
-                    <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/Inbox_in_slack_229d1d3693.png"
-                        alt="Steering an agent from a Slack thread"
-                        className="w-full !block m-0"
-                        imgClassName="w-full !block"
-                    />
-                    <hr className="border-t border-primary m-0 mb-6" />
-
-                    {/* Autopilot, or hands on the wheel */}
-                    <h3>
-                        Autopilot, or <Highlight>hands on the wheel</Highlight>
-                    </h3>
-                    <p>
-                        Self-driving isn't a black box. Whenever you want to steer, the same product context is one
-                        message away — reach it from whichever surface you already live in.
-                    </p>
-                    <div className="not-prose grid @md/reader-content:grid-cols-2 gap-x-6 gap-y-4 my-6">
-                        {fighterOptions.map(({ icon: Icon, iconColor, label, copy }, index) => (
-                            <div key={index}>
-                                <p className="m-0 inline-flex items-center gap-2 font-bold text-base">
-                                    <Icon className={`size-5 shrink-0 ${iconColor}`} />
-                                    {label}
-                                </p>
-                                <p className="m-0 mt-1 text-sm text-secondary">{copy}</p>
-                            </div>
-                        ))}
                     </div>
 
                     {/* Autonomy from instruction, not from you */}
@@ -923,35 +833,101 @@ export default function SelfDrivingPage(): JSX.Element {
                         </div>
                     </div>
 
-                    {/* A product line that gets 1% better every day */}
+                    {/* Where you work with it */}
                     <h3>
-                        A product line that gets <Highlight>1% better</Highlight> every day
+                        Where you <Highlight>work with it</Highlight>
                     </h3>
                     <p>
-                        Toyota didn't win on one big idea. They won on <em>kaizen</em> — thousands of tiny improvements,
-                        made every day, by everyone, forever. No fix too small to be worth making. That compounding is
-                        how an assembly line outruns a factory ten times its size.
+                        Self-driving runs on its own, but you stay in control. The same Inbox and agent show up across
+                        four surfaces – use whichever fits how you work.
                     </p>
+                    <div className="not-prose grid @md/reader-content:grid-cols-2 gap-x-6 gap-y-4 my-6">
+                        {fighterOptions.map(({ icon: Icon, iconColor, label, copy, cta }, index) => (
+                            <div key={index}>
+                                <p className="m-0 inline-flex items-center gap-2 font-bold text-base">
+                                    <Icon className={`size-5 shrink-0 ${iconColor}`} />
+                                    {label}
+                                </p>
+                                <p className="m-0 mt-1 text-sm text-secondary">{copy}</p>
+                                {cta && <p className="m-0 mt-1.5 text-sm">{cta}</p>}
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Steer it from Slack */}
+                    <h3>
+                        The opposite of a <Highlight>quick call</Highlight>
+                    </h3>
                     <p>
-                        Self-driving runs your product the same way. Not a feature factory chasing the next big launch —
-                        a production line where the small stuff gets fixed quietly, continuously, in the background. One
-                        percent at a time.
+                        Self-driving isn’t only autonomous. Some fixes are better hashed out by three people in a
+                        thread.
                     </p>
+                    <div className="not-prose grid @md/reader-content:grid-cols-2 gap-4 my-6">
+                        <div className="border border-primary rounded-md p-4 bg-primary">
+                            <div className="flex items-center gap-2 mb-2">
+                                <IconPeople className="size-5 shrink-0 text-purple" />
+                                <span className="font-bold text-primary">Solve it together</span>
+                            </div>
+                            <p className="m-0 text-sm text-secondary">
+                                Work through a report or PR with collaborators in a thread. Add context, steer the
+                                agent, and decide what ships.
+                            </p>
+                        </div>
+                        <div className="border border-primary rounded-md p-4 bg-primary">
+                            <div className="flex items-center gap-2 mb-2">
+                                <IconTarget className="size-5 shrink-0 text-red" />
+                                <span className="font-bold text-primary">Sorted by priority</span>
+                            </div>
+                            <p className="m-0 text-sm text-secondary">
+                                Each report arrives tagged P0–P4 by impact, so the channel sees what needs attention now
+                                and what can wait.
+                            </p>
+                        </div>
+                    </div>
+                    <SlackReportsRow />
+                    <p className="my-6 text-center text-2xl font-bold @md/reader-content:text-3xl">
+                        <em className="text-gradient not-italic">Suspiciously chill</em> for how much it's doing.
+                    </p>
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/Inbox_in_slack_229d1d3693.png"
+                        alt="Steering a self-driving report from a Slack thread"
+                        className="w-full !block m-0"
+                        imgClassName="w-full !block"
+                    />
+                    <hr className="border-t border-primary m-0 mb-6" />
+
+                    {/* 1% better every day */}
+                    <h3>
+                        <Highlight>1% better</Highlight> every day
+                    </h3>
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog_ai_hogs_d4c45b4550.png"
+                        alt="PostHog hogs calmly working the long tail of product fixes"
+                        className="@lg/reader-content:float-right @lg/reader-content:max-w-[320px] @lg/reader-content:ml-6 mb-4 mt-2"
+                        imgClassName="w-full"
+                    />
+                    <p>
+                        The big features get all the attention. It's the small stuff that quietly caps your numbers (the
+                        signup edge case, the confusing empty state, the flag nobody deleted), and none of it ever wins
+                        a prioritization fight. Self-driving keeps chipping away at it in the background, so the product
+                        gets a little better every day.
+                    </p>
+                    <div className="clear-both" />
                     <div className="not-prose grid @lg/reader-content:grid-cols-2 gap-4 my-6">
                         <div className="rounded-md border border-primary bg-accent p-5 opacity-90">
                             <p className="m-0 mb-2 inline-flex items-center gap-2 font-bold text-lg text-secondary">
                                 <IconWarning className="size-5 shrink-0 text-orange" />
-                                The feature factory
+                                Without it
                             </p>
                             <p className="m-0 text-sm text-secondary">
-                                Ship the big thing, move on, never look back. The small stuff — the bugs, the rough
-                                edges, the slow leaks — piles up in a backlog nobody gets to.
+                                The small stuff that moves activation and retention loses every prioritization fight to
+                                the roadmap.
                             </p>
                             <DottedList
                                 items={[
-                                    'Big launches, then silence',
-                                    'Paper cuts age out',
-                                    'Improvement waits for headcount',
+                                    'Small bugs sit in the backlog for quarters',
+                                    'A conversion leak goes unnoticed until QBR',
+                                    'Every fix waits on scarce engineering time',
                                 ]}
                                 bulletClass="bg-orange"
                             />
@@ -959,27 +935,30 @@ export default function SelfDrivingPage(): JSX.Element {
                         <div className="rounded-md border border-primary bg-primary p-5 ring-1 ring-red/20 dark:ring-yellow/20">
                             <p className="m-0 mb-2 inline-flex items-center gap-2 font-bold text-lg">
                                 <IconGraph className="size-5 shrink-0 text-green" />
-                                The production line
+                                With self-driving
                             </p>
                             <p className="m-0 text-sm text-secondary">
-                                Kaizen, but for software. Every bug, paper cut, and conversion leak becomes a pull
-                                request — small fixes landing continuously, compounding while you build.
+                                The long tail gets worked continuously, so the metrics those paper cuts were quietly
+                                draining start to recover.
                             </p>
                             <DottedList
-                                items={['1% better, every day', 'Nothing too small to fix', 'Improvement runs itself']}
+                                items={[
+                                    'A leak found today has a PR tomorrow',
+                                    'Improvements ship without booking a sprint',
+                                    'You spend your time on the big bets',
+                                ]}
                                 bulletClass="bg-green"
                             />
                         </div>
                     </div>
-                    <p className="my-6 text-center text-2xl font-bold @md/reader-content:text-3xl">
-                        PostHog isn't a feature factory.{' '}
-                        <em className="text-gradient not-italic">It's a production line that never stops improving.</em>
-                    </p>
 
                     {/* So, what's left for you? */}
                     <h3>
                         So, what’s <Highlight>left for you?</Highlight>
                     </h3>
+                    <p>
+                        Work lands while you sleep. You wake up to diffs and reports waiting for review. And then what?
+                    </p>
                     <div className="not-prose grid grid-cols-1 @md/reader-content:grid-cols-3 gap-4 my-6">
                         {humanRoles.map(({ heading, copy, image, alt }) => (
                             <div
@@ -987,7 +966,7 @@ export default function SelfDrivingPage(): JSX.Element {
                                 className="flex flex-col overflow-hidden rounded-md border border-primary bg-primary"
                             >
                                 <div className="p-4">
-                                    <h4 className="m-0 text-base font-bold text-primary">{heading}</h4>
+                                    <p className="m-0 text-base font-bold text-primary">{heading}</p>
                                     <p className="m-0 mt-1 text-sm text-secondary">{copy}</p>
                                 </div>
                                 <div className="mt-auto px-6 @md/reader-content:px-8">
@@ -1002,104 +981,29 @@ export default function SelfDrivingPage(): JSX.Element {
                         ))}
                     </div>
 
-                    {/* The road to self-driving products */}
-                    <img
-                        src={BUILD_MODE_IMAGE}
-                        alt="The evolution of build mode – a hog going from crawling, to caveman, to suit, to hunched 996 coder, to standing upright and free"
-                        className="not-prose mb-6 h-auto w-full select-none"
-                    />
-                    <h3>
-                        The road to <Highlight>self-driving</Highlight> products
-                    </h3>
-                    <p>
-                        Like a Waymo, a self-driving product doesn't decide where you're going – it just makes getting
-                        there easier. Product autonomy arrives on a scale, the same way it does for cars.
-                    </p>
-                    <div className="not-prose my-6">
-                        <Tabs.Root orientation="horizontal" defaultValue="3" className="w-full">
-                            <Tabs.List
-                                orientation="horizontal"
-                                className="w-full !min-w-0 rounded-md border border-primary bg-primary"
-                            >
-                                {autonomyLevels.map((lvl) => (
-                                    <Tabs.Trigger
-                                        key={lvl.level}
-                                        value={String(lvl.level)}
-                                        className="flex-col !h-auto !justify-center !gap-1.5 !px-1 !py-2"
-                                    >
-                                        <span
-                                            className={`flex size-8 shrink-0 items-center justify-center rounded-full text-sm font-bold ${lvl.nodeClass}`}
-                                        >
-                                            {lvl.level}
-                                        </span>
-                                        <span className="text-center text-[11px] font-semibold leading-tight text-secondary">
-                                            {lvl.youAreHere
-                                                ? 'You are here'
-                                                : lvl.destination
-                                                ? 'The goal'
-                                                : `Level ${lvl.level}`}
-                                        </span>
-                                    </Tabs.Trigger>
-                                ))}
-                            </Tabs.List>
-                            {autonomyLevels.map((lvl) => (
-                                <Tabs.Content
-                                    key={lvl.level}
-                                    value={String(lvl.level)}
-                                    className="mt-3 w-full rounded-md border border-primary bg-primary p-4 focus-visible:outline-none"
-                                >
-                                    <div className="flex flex-wrap items-center gap-2">
-                                        <span className="text-[11px] font-bold uppercase tracking-wide text-secondary">
-                                            Level {lvl.level}
-                                        </span>
-                                        <h4 className="m-0 text-lg font-bold">{lvl.title}</h4>
-                                        {lvl.youAreHere && <Badge>You are here</Badge>}
-                                        {lvl.destination && (
-                                            <span className="rounded-sm border border-dashed border-red px-1 py-0.5 text-[11px] font-bold uppercase tracking-wide text-red dark:border-yellow dark:text-yellow">
-                                                The goal
-                                            </span>
-                                        )}
-                                    </div>
-                                    <p className="m-0 mt-2 text-sm text-secondary">{lvl.blurb}</p>
-                                    {lvl.capabilities && (
-                                        <>
-                                            <p className="m-0 mt-3 text-xs font-bold uppercase tracking-wide text-secondary">
-                                                What this unlocks
-                                            </p>
-                                            <ul className="m-0 mt-1.5 list-none space-y-1.5 pl-0">
-                                                {lvl.capabilities.map(({ term, desc }) => (
-                                                    <li key={String(term)} className="text-sm text-secondary">
-                                                        <strong className="text-primary">{term}</strong> — {desc}
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </>
-                                    )}
-                                </Tabs.Content>
-                            ))}
-                        </Tabs.Root>
-                    </div>
-
                     {/* CTA */}
                     <div className="not-prose relative overflow-hidden bg-accent border border-primary rounded-md p-4 @md/reader-content:p-6 my-6">
                         <div className="grid @lg/reader-content:grid-cols-[1fr_170px] gap-6 items-end">
                             <div>
-                                <h3 className="mt-0 mb-2 text-2xl font-bold">Get your product driving</h3>
+                                <h3 className="mt-0 mb-3 inline-flex items-center gap-2 text-2xl font-bold">
+                                    Set up your Inbox
+                                    <Badge>Beta</Badge>
+                                </h3>
                                 <p className="mt-0 mb-4 text-secondary">
                                     Install PostHog, then run the wizard – it turns on your signal sources, connects
-                                    GitHub, and sets up your scouts. Your first reports start landing within minutes.
+                                    GitHub, and sets up your scouts. Your first reports start landing in ~20–30 minutes.
                                 </p>
-                                <WizardCommand />
+                                <WizardCommand command="self-driving" />
                                 <p className="mt-4 mb-0 text-sm text-secondary">
-                                    New to all this?{' '}
-                                    <Link to="/docs/start-here" state={{ newWindow: true }}>
-                                        Start here
+                                    New to all this? Read the{' '}
+                                    <Link
+                                        to="/docs/self-driving"
+                                        state={{ newWindow: true }}
+                                        className="text-red dark:text-yellow font-semibold underline"
+                                    >
+                                        self-driving docs
                                     </Link>
-                                    , or read how{' '}
-                                    <Link to="/docs/start-here/autonomy-loop" state={{ newWindow: true }}>
-                                        the autonomy loop
-                                    </Link>{' '}
-                                    works.
+                                    .
                                 </p>
                             </div>
                             <div className="hidden @lg/reader-content:block self-end -mb-4 @md/reader-content:-mb-6">
