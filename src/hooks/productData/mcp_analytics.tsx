@@ -27,6 +27,9 @@ export const mcpAnalytics = {
     color: 'blue',
     colorSecondary: 'sky-blue',
     category: 'analytics',
+    // Wizard install (`npx @posthog/wizard mcp-analytics`) ships via a context-mill
+    // release. Flip to `true` once that release is live; 'In development' until then.
+    wizardSupport: 'In development',
     // Alpha, gated behind the `mcp-analytics` early access feature. 'beta' renders the badge on
     // the overview slide and keeps the product clickable in nav (only 'WIP' is disabled).
     status: 'beta',
