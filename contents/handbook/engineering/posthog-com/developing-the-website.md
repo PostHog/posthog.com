@@ -75,7 +75,7 @@ Use the built-in Git tab in VS Code to commit and push your changes.
 ### Stopping the server
 
 1. Place your cursor into Terminal and type `Cmd+C` to stop the server.
-1. In the bottom left corner of the window, click **Codspaces: [your codespace name]**, then **Stop current codespace.**
+1. In the bottom left corner of the window, click **Codespaces: [your codespace name]**, then **Stop current codespace.**
 
 ### Notes
 
