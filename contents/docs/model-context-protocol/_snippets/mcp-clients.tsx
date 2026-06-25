@@ -61,6 +61,11 @@ const MCPClients = () => {
             url: '/docs/integrations/v0',
             icon: 'IconApps',
         },
+        {
+            label: 'Gamut',
+            url: '/docs/model-context-protocol/gamut',
+            icon: 'IconApps',
+        },
     ]
 
     return (
