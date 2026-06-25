@@ -288,6 +288,43 @@ To add it, click the **Add...** dropdown and select **Recent logs** under the **
 
 Clicking a row opens the log on the Logs page in a new tab. Clicking the tile title navigates to **Logs**.
 
+#### Experiments list widget
+
+The Experiments list widget displays a filterable list of [experiments](/docs/experiments). Each row shows the experiment name, status, conclusion, creator, and when it was created.
+
+To add it, click the **Add...** dropdown and select **Experiments list** under the **Experiments** group.
+
+**Configuration options:**
+
+- **Sort by** - Sort experiments by created date, name, or start date.
+- **Direction** - Sort ascending or descending.
+- **Number of experiments** - Maximum number of experiments to display. Default: 10, maximum: 25.
+
+The tile also includes a filter bar where you can filter by experiment status (draft, running, paused, complete, or any status) and by creator.
+
+Clicking a row opens the experiment detail page. Clicking the tile title navigates to **Experiments**.
+
+#### Experiment Results widget
+
+The Experiment Results widget displays the current results for a selected experiment's primary and secondary metrics. It shows the experiment name, status, total exposures, and a breakdown of variant results for each metric.
+
+To add it, click the **Add...** dropdown and select **Experiment results** under the **Experiments** group.
+
+**Configuration options:**
+
+- **Experiment** - Select which experiment to display results for. You can pick an experiment when adding the widget or later from the widget settings.
+
+The widget displays:
+
+- Experiment name and current status
+- Total exposures count
+- Primary metrics with variant-level results
+- Secondary metrics, if configured on the experiment
+
+If the selected experiment is still in draft status, the widget shows a message indicating that results appear once the experiment is running.
+
+Clicking the experiment name opens the experiment detail page in a new tab.
+
 ### Sharing a dashboard
 
 By clicking 'Share' in the top right corner you can:
