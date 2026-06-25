@@ -14,7 +14,7 @@ Self-driving is currently in open beta.
 
 </CalloutBox>
 
-Signal sources are what fill your inbox. A [signal](/docs/self-driving/signals) can be a production error, a support conversation, a session replay pattern, a log alert changing state, a Replay Vision scanner finding, or an issue from an external tracker. Each source watches one of these streams and turns what it finds into work worth investigating.
+Signal sources are what fill your inbox. A [signal](/docs/self-driving/signals) can be a production error, a support conversation, a Session Replay pattern, a log alert changing state, a Replay Vision scanner finding, or an issue from an external tracker. Each source watches one of these streams and turns what it finds into work worth investigating.
 
 ## Configure sources
 
@@ -66,6 +66,13 @@ These sources are available when the matching PostHog product has data in your p
       url: "/docs/replay-vision",
       icon: "IconReplayVision",
       description: "Actionable product issues detected by scanners.",
+      lineClamp: 2,
+    },
+    {
+      label: "Health checks",
+      url: "/docs/health-checks",
+      icon: "IconStethoscope",
+      description: "Outdated SDKs, proxy gaps, ingestion warnings, broken data models, and more.",
       lineClamp: 2,
     },
   ]}
