@@ -58,5 +58,17 @@ export const aiObservabilityFeatures = {
             name: 'LLM translation',
             description: 'translation of non-English LLM traces to English',
         },
+        prompt_management: {
+            name: 'Prompt management',
+            description: 'Version, deploy, and A/B test prompts at runtime',
+        },
+        human_annotation: {
+            name: 'Annotation queues',
+            description: 'Assign human reviewers to score LLM outputs',
+        },
+        evaluation_datasets: {
+            name: 'Datasets & experiments',
+            description: 'Curate test sets and run evaluation pipelines',
+},
     },
 }

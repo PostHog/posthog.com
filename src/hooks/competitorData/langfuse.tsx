@@ -17,6 +17,15 @@ export const langfuse = {
                 clustering: true,
                 trace_summarization: true,
                 llm_translation: false,
+                prompt_management: true,
+                human_annotation: true,
+                evaluation_datasets: true,
+            },
+        },
+        platform: {
+            deployment: {
+                open_source: true,
+                eu_hosting: true,
             },
         },
     },
