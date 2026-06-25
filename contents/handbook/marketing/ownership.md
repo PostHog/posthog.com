@@ -14,7 +14,7 @@ We generally only have product marketers on teams that _already_ have a product 
 
 | Product | PM | PMM | Blitzscale |
 |---|---|---|---|
-| *Data warehouse* | Anna | Lizzie | Raquel |
+| *Context warehouse* | Anna | Lizzie | Raquel |
 | *PostHog AI* | Annika | Joe | James H |
 | *PostHog Code* | Annika | Cleo | James H |
 | *PostHog Slack* | Annika | Cleo | James H |
