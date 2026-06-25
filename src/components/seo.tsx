@@ -67,6 +67,13 @@ export const SEO = ({
             {seo.description && <meta name="description" content={seo.description} />}
             {seo.image && <meta name="image" content={seo.image} />}
             {<link rel="canonical" href={canonicalUrl ? canonicalUrl : seo.url} />}
+            {/* Standard.site publication discovery hint for the blog (https://standard.site) */}
+            {pathname?.startsWith('/blog') && (
+                <link
+                    rel="site.standard.publication"
+                    href="at://did:plc:go7eemqz4y5nhonj4kg5w2p6/site.standard.publication/blog"
+                />
+            )}
             {languageAlternates?.map(({ hrefLang, href }) => (
                 <link
                     key={hrefLang}
