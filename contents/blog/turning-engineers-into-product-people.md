@@ -18,7 +18,7 @@ Great engineers will either get autonomy at your company, or they'll get it some
 
 At PostHog, new people are usually surprised by the lack of [micromanagement](https://posthog.com/handbook/company/management), onerous KPIs, and [death by meetings](https://posthog.com/blog/meetings). Rather, we run two-week sprints where everyone decides what they’re going to work on for the next 14 days following a retrospective at the end of each sprint. 
 
-New problems are usually discovered and solved during each sprint that weren’t originally planned for, such as two of our main features - [session recording](/product/session-recording) and [feature flags](/product/feature-flags) - which were ideated during one of our hackathons.
+New problems are usually discovered and solved during each sprint that weren’t originally planned for, such as two of our main features - [session recording](/product/session-recording) and [feature flags](/product/feature-flags) - which were ideated during one of [our hackathons](/newsletter/hackathons).
 
 When you give engineers the freedom to play around with new ideas, magical things happen.
 

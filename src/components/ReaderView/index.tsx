@@ -30,12 +30,13 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import CloudinaryImage from 'components/CloudinaryImage'
 import * as PostHogIcons from '@posthog/icons'
 import * as OSIcons from '../OSIcons/Icons'
-import { getLogo } from '../../constants/logos'
+import { getLogo, getDarkClassForLogo } from '../../constants/logos'
 import SearchProvider from 'components/Editor/SearchProvider'
 import { useLocation } from '@reach/router'
 import { getProseClasses, isMarkdownContentPath } from '../../constants'
 import { useWindow } from '../../context/Window'
 import { MenuItem, useApp } from '../../context/App'
+import { useActiveFeatureFlags, filterMenuByFlags } from '../../hooks/useActiveFeatureFlags'
 import { Questions } from 'components/Squeak'
 import { navigate } from 'gatsby'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
@@ -43,7 +44,7 @@ import CopyMarkdownActionsDropdown, { useMarkdownUrlExists } from 'components/Ma
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import CustomerMetadata from './CustomerMetadata'
 import { getVideoClasses } from '../../constants'
-import { Blockquote } from 'components/BlockQuote'
+import AboutPostHog from 'components/AboutPostHog'
 
 dayjs.extend(relativeTime)
 
@@ -461,7 +462,7 @@ const resolveMenuIcons = (items: MenuItem[] | undefined, resolveIcons = false): 
         if (resolveIcons) {
             if (item.platformLogo) {
                 const url = getLogo(item.platformLogo)
-                if (url) icon = <img src={url} className="size-full" />
+                if (url) icon = <img src={url} className={`size-full ${getDarkClassForLogo(url)}`} />
             } else if (typeof icon === 'string') {
                 const IconComponent = (PostHogIcons as any)[icon] || (OSIcons as any)[icon]
                 if (IconComponent) icon = <IconComponent className="size-full" />
@@ -479,9 +480,13 @@ const resolveMenuIcons = (items: MenuItem[] | undefined, resolveIcons = false): 
 
 const Menu = (props: { parent: MenuItem }) => {
     const { setActiveInternalMenu, activeInternalMenu: windowActiveInternalMenu, parent: windowParent } = useWindow()
+    const activeFlags = useActiveFeatureFlags()
 
     const parent = props.parent || windowParent
-    const activeInternalMenu = windowActiveInternalMenu || parent.children?.[0]
+    // Hide any flag-gated products/pages the current user can't see.
+    const visibleChildren = filterMenuByFlags(parent.children, activeFlags)
+    const activeInternalMenu = windowActiveInternalMenu || visibleChildren?.[0]
+    const visibleActiveChildren = filterMenuByFlags(activeInternalMenu?.children, activeFlags)
 
     return (
         <>
@@ -489,7 +494,7 @@ const Menu = (props: { parent: MenuItem }) => {
                 groups={[
                     {
                         label: null,
-                        items: parent.children?.map((menuItem) => {
+                        items: visibleChildren?.map((menuItem) => {
                             return {
                                 value: menuItem.url || menuItem.name,
                                 label: menuItem.name,
@@ -504,7 +509,7 @@ const Menu = (props: { parent: MenuItem }) => {
                 className="w-full mb-2"
                 value={activeInternalMenu?.url || activeInternalMenu?.name}
                 onValueChange={(value) => {
-                    const selectedMenu = parent.children?.find(
+                    const selectedMenu = visibleChildren?.find(
                         (menuItem) => menuItem.url === value || menuItem.name === value
                     )
                     setActiveInternalMenu(selectedMenu)
@@ -514,7 +519,7 @@ const Menu = (props: { parent: MenuItem }) => {
                 }}
                 dataScheme="primary"
             />
-            <TreeMenu key={activeInternalMenu?.url} items={resolveMenuIcons(activeInternalMenu?.children)} />
+            <TreeMenu key={activeInternalMenu?.url} items={resolveMenuIcons(visibleActiveChildren)} />
         </>
     )
 }
@@ -747,10 +752,10 @@ function ReaderViewContent({
                                         : 'rounded-r-0 border-r-0 @4xl/app-reader:rounded-r @4xl/app-reader:border-r'
                                     : 'border-r-0'
                             } ${
-                            selectedBackgroundOption && selectedBackgroundOption.value !== 'none'
-                                ? 'before:absolute before:inset-0 before:bg-primary before:opacity-75'
-                                : ''
-                        }`}
+                                selectedBackgroundOption && selectedBackgroundOption.value !== 'none'
+                                    ? 'before:absolute before:inset-0 before:bg-primary before:opacity-75'
+                                    : ''
+                            }`}
                         style={
                             selectedBackgroundOption && selectedBackgroundOption.value !== 'none'
                                 ? {
@@ -920,20 +925,7 @@ function ReaderViewContent({
                                                 : contentMaxWidthClass || 'max-w-2xl'
                                         }`}
                                     >
-                                        <Blockquote>
-                                            PostHog is an all-in-one developer platform for building successful
-                                            products. We provide <a href="/product-analytics">product analytics</a>,{' '}
-                                            <a href="/web-analytics">web analytics</a>,{' '}
-                                            <a href="/session-replay">session replay</a>,{' '}
-                                            <a href="/error-tracking">error tracking</a>,{' '}
-                                            <a href="/feature-flags">feature flags</a>,{' '}
-                                            <a href="/experiments">experiments</a>, <a href="/surveys">surveys</a>,{' '}
-                                            <a href="/llm-analytics">LLM analytics</a>, <a href="/logs">logs</a>,{' '}
-                                            <a href="/workflows">workflows</a>, <a href="/endpoints">endpoints</a>,{' '}
-                                            <a href="/data-warehouse">data warehouse</a>, <a href="/cdp">CDP</a>, and an{' '}
-                                            <a href="/ai">AI product assistant</a> to help debug your code, ship
-                                            features faster, and keep all your usage and customer data in one stack.
-                                        </Blockquote>
+                                        <AboutPostHog />
                                     </div>
                                 )}
                                 {showQuestions && (

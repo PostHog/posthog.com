@@ -1,7 +1,7 @@
 import chromium from 'chrome-aws-lambda'
 import path from 'path'
 import fs from 'fs'
-import fetch from 'node-fetch'
+
 import { GatsbyNode } from 'gatsby'
 import pLimit from 'p-limit'
 import qs from 'qs'
@@ -767,10 +767,10 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter
         }
     `)
 
+    await createOrUpdateStrapiPosts(data.allMDXPosts.nodes, data.allRoadmap.nodes)
+
     console.log('Creating OG images')
     await createCareersOG()
     await createOGImages(data)
     console.log('Finished creating OG images')
-
-    await createOrUpdateStrapiPosts(data.allMDXPosts.nodes, data.allRoadmap.nodes)
 }

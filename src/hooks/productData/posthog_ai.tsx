@@ -28,11 +28,11 @@ export const posthog_ai = {
     category: 'automation',
     slug: 'ai',
     slider: {
-        marks: [2000, 10000, 50000, 100000],
-        min: 2000,
+        marks: [500, 3000, 10000, 50000, 100000],
+        min: 500,
         max: 100000,
     },
-    volume: 2000,
+    volume: 500,
     customPricingContent: (
         <div data-scheme="secondary" className="prose prose-sm text-lg mt-8 mb-12 leading-normal text-primary">
             <h3 className="text-xl font-bold text-primary mb-4">How credits work</h3>
@@ -55,8 +55,8 @@ export const posthog_ai = {
             </ul>
             <p>
                 PostHog automatically selects the most efficient model for each AI feature. We apply a simple,
-                consistent 20% markup over the underlying LLM provider’s cost: So 1 PostHog AI credit equals $0.8333 of
-                raw inference, and 1,000 credits cost $10.
+                consistent 20% markup over the underlying LLM provider’s cost: So 1 PostHog AI credit equals $0.008333
+                of raw inference, and 100 credits cost $1.
             </p>
         </div>
     ),
@@ -95,8 +95,8 @@ export const posthog_ai = {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog_ai_light_f654818fb0.png',
             srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog_ai_dark_35c03e330c.png',
             alt: 'PostHog AI screenshot',
-            classes: 'justify-start items-end pr-4 @lg:pr-6',
-            imgClasses: 'rounded-tr-md shadow-2xl',
+            classes: 'justify-center items-center',
+            imgClasses: 'rounded shadow-2xl border border-primary',
         },
     },
     hog: {
@@ -207,18 +207,18 @@ export const posthog_ai = {
             ],
         },
         {
-            title: 'LLM Analytics',
-            headline: 'LLM Analytics',
-            team: 'llm-analytics',
+            title: 'AI Observability',
+            headline: 'AI Observability',
+            team: 'ai-observability',
             layout: 'ai',
             icon: <IconLlmAnalytics className="size-5" />,
             color: 'purple',
             description:
-                "Why was today's token spend more than your salary? PostHog AI and LLM analytics help keep an eye on your AI.",
+                "Why was today's token spend more than your salary? PostHog AI and AI Observability help keep an eye on your AI.",
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_cde5a95040.png',
-                    alt: 'LLM Analytics',
+                    alt: 'AI Observability',
                     className: 'h-80 w-full object-contain @2xl:h-64',
                     // stylize: true,
                     // shadow: true,
@@ -861,11 +861,11 @@ export const posthog_ai = {
         'posthog-on-posthog':
             "We use PostHog AI constantly. Like, genuinely use it—not in a 'marketing uses our own product once for a screenshot' way. Our engineers use it to write complex SQL queries against our data warehouse without having to remember every table schema. Product managers use it to build dashboards in seconds instead of bothering engineering. Support uses it to summarize session replays when debugging user issues. We trained it on our blog and docs too, so it can answer questions about how to use PostHog without you having to search through documentation. It's become the fastest way to go from question to answer.",
         features:
-            "Each PostHog product has its own set of AI capabilities, and they're pretty specific to what you'd actually want to do in that context.<br /><br />In <strong>Product Analytics</strong>, you can generate insights and dashboards from plain English. Write 'show me DAU over the last month broken down by country' and it builds the chart. It also writes HogQL queries and explains what they do, which is useful when you're learning the syntax or dealing with complex joins.<br /><br />For <strong>Session Replay</strong>, you can search recordings using natural language ('users who abandoned checkout'), and it'll find the relevant sessions. You can also ask it to cluster similar sessions and pull out representative examples from thousands of recordings, which saves hours of manual review.<br /><br /><strong>Feature Flags</strong> setup becomes conversational. Describe what you want to roll out and it configures the flag. It can also detect stale flags in your codebase—super useful for cleanup.<br /><br /><strong>Experiments</strong> get easier too. Create A/B tests by describing what you're testing, and get AI-generated analysis of results with recommendations for next steps.<br /><br />For <strong>Surveys</strong>, describe what you want to learn and it generates questions, sets targeting rules, and later synthesizes responses to surface themes without you reading every single answer.<br /><br />In <strong>Error Tracking</strong>, you can search exceptions with natural language and get impact scoring based on affected users and business context—not just stack traces.<br /><br /><strong>LLM Analytics</strong> is where it gets meta: use LLM-as-a-judge to evaluate your own LLM traces at scale, summarize complex interactions, and analyze token spend without drowning in logs.<br /><br />The <strong>Data Warehouse</strong> integration means it can help fix SQL errors, generate queries that join your external data sources, and navigate schemas you don't have memorized.<br /><br />And with <strong>Workflows</strong>, you can build multi-step automations and generate email templates using natural language instead of dragging boxes around a UI builder.<br /><br />It's not about replacing what you do—it's about handling the repetitive parts so you can focus on the actual decision-making.",
+            "Each PostHog product has its own set of AI capabilities, and they're pretty specific to what you'd actually want to do in that context.<br /><br />In <strong>Product Analytics</strong>, you can generate insights and dashboards from plain English. Write 'show me DAU over the last month broken down by country' and it builds the chart. It also writes HogQL queries and explains what they do, which is useful when you're learning the syntax or dealing with complex joins.<br /><br />For <strong>Session Replay</strong>, you can search recordings using natural language ('users who abandoned checkout'), and it'll find the relevant sessions. You can also ask it to cluster similar sessions and pull out representative examples from thousands of recordings, which saves hours of manual review.<br /><br /><strong>Feature Flags</strong> setup becomes conversational. Describe what you want to roll out and it configures the flag. It can also detect stale flags in your codebase—super useful for cleanup.<br /><br /><strong>Experiments</strong> get easier too. Create A/B tests by describing what you're testing, and get AI-generated analysis of results with recommendations for next steps.<br /><br />For <strong>Surveys</strong>, describe what you want to learn and it generates questions, sets targeting rules, and later synthesizes responses to surface themes without you reading every single answer.<br /><br />In <strong>Error Tracking</strong>, you can search exceptions with natural language and get impact scoring based on affected users and business context—not just stack traces.<br /><br /><strong>AI Observability</strong> is where it gets meta: use LLM-as-a-judge to evaluate your own LLM traces at scale, summarize complex interactions, and analyze token spend without drowning in logs.<br /><br />The <strong>Data Warehouse</strong> integration means it can help fix SQL errors, generate queries that join your external data sources, and navigate schemas you don't have memorized.<br /><br />And with <strong>Workflows</strong>, you can build multi-step automations and generate email templates using natural language instead of dragging boxes around a UI builder.<br /><br />It's not about replacing what you do—it's about handling the repetitive parts so you can focus on the actual decision-making.",
         answers:
             "These are real questions our users ask. The useful thing about PostHog AI is it's not just searching your data—it's building the analysis for you. Want to know your churn rate? It'll create the cohort definition, run the calculation, and show you the visualization. Need to understand where users drop off? It builds the funnel and then lets you jump to session recordings of those exact users. The SQL query requests are probably the most common—people know what data they want but don't want to spend 30 minutes remembering the exact syntax and table names. It's basically your coworker who's really good at PostHog and has time to help.",
         pricing:
-            "We charge for AI based on the actual token usage from the underlying LLM providers, with a 20% markup. One PostHog AI credit equals $0.8333 of raw inference cost, so 1,000 credits is $10. Simple queries like 'what were my daily active users in October?' use very few credits—maybe 50-100 credits. More complex tasks like analyzing hundreds of session recordings or rewriting SQL queries multiple times will consume more, but you see the cost in real-time so there's no surprises.<br /><br />Everyone starts with 2,000 free credits per month. After that, you pay for what you use. The more credits you need, the cheaper they get (volume pricing). We automatically route to the most efficient model for each task—you're not stuck paying GPT-4 prices when a smaller model works fine.<br /><br />The thing is, even complex queries are usually cheaper than the time you'd spend building them manually. A 500-credit task that saves you 20 minutes is still a good deal. And unlike seat-based pricing, your whole team can use it without multiplying costs.",
+            "We charge for AI based on the actual token usage from the underlying LLM providers, with a 20% markup. One PostHog AI credit equals $0.008333 of raw inference cost, so 500 credits is $5. Simple queries like 'what were my daily active users in October?' use very few credits, maybe 50-100 credits. More complex tasks like analyzing hundreds of session recordings or rewriting SQL queries multiple times will consume more, but you see the cost in real-time so there are no surprises.<br /><br />Everyone starts with 500 free credits per month. After that, you pay for what you use. The more credits you need, the cheaper they get (volume pricing). We automatically route to the most efficient model for each task, so you're not stuck paying GPT-4 prices when a smaller model works fine.<br /><br />The thing is, even complex queries are usually cheaper than the time you'd spend building them manually. A 500-credit task that saves you 20 minutes is still a good deal. And unlike seat-based pricing, your whole team can use it without multiplying costs.",
         'comparison-summary':
             "Most analytics platforms either (a) don't have AI, (b) slapped ChatGPT onto their dashboard and called it 'AI-powered,' or (c) have AI that only does one thing like anomaly detection. PostHog AI is different because it's deeply integrated into every product and actually understands your data model. It can write valid HogQL, knows your event names, understands your feature flags—it's not just a general-purpose LLM trying to help.<br /><br />The closest comparison is probably Amplitude's AI, but that only works inside Amplitude. We're open source, so you can see exactly how it works and even self-host if you want. Our pricing is also transparent and usage-based instead of requiring an enterprise contract.",
         docs: "The docs for PostHog AI explain how it works under the hood—what models we use, how we handle context, what each AI agent specializes in. We're upfront about limitations too: it's not perfect, it can make mistakes, and you should verify important queries before acting on them. That said, it's getting better fast. We're constantly training it on more examples and improving the prompts.<br /><br />If you run into issues or have ideas for how AI could be more useful in specific workflows, tell us. The team actively monitors feedback because this is still early days and we're trying to build something that's actually useful, not just a checkbox feature.",

@@ -3,7 +3,7 @@ import { useStaticQuery, graphql, navigate } from 'gatsby'
 import OSTable from 'components/OSTable'
 import Link from 'components/Link'
 import { Select } from 'components/RadixUI/Select'
-import { getLogo } from 'constants/logos'
+import { getLogo, getDarkClassForLogo } from 'constants/logos'
 import { SELF_HOSTED_SOURCES } from 'constants/sources'
 
 const getIconUrl = (iconUrl: string) => {
@@ -27,7 +27,7 @@ const Title = ({ pipeline }: { pipeline: any }) => {
             <img
                 src={getIconUrl(pipeline.icon_url)}
                 alt={pipeline.name}
-                className="w-6 h-6 object-contain flex-shrink-0"
+                className={`w-6 h-6 object-contain flex-shrink-0 ${getDarkClassForLogo(pipeline.icon_url)}`}
             />
             {url ? (
                 <Link to={url} state={{ newWindow: true }}>

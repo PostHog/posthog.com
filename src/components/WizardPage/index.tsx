@@ -11,7 +11,7 @@ import WistiaVideo from 'components/WistiaVideo'
 import TeamMember from 'components/TeamMember'
 import Link from 'components/Link'
 import ProductList from 'components/ProductList'
-import { getLogo } from '../../constants/logos'
+import { getLogo, getDarkClassForLogo } from '../../constants/logos'
 import WizardCommand from 'components/WizardCommand'
 
 function WizardHeader(): JSX.Element {
@@ -56,7 +56,7 @@ function WizardHeader(): JSX.Element {
 function DemoVideo(): JSX.Element {
     return (
         <ProductVideo
-            videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/ai_wizard_install_cursor_331d174d75.mp4"
+            videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/wizard_clip_0a996d3379.mp4"
             videoDark=""
             autoPlay={true}
             classes="rounded"
@@ -138,7 +138,13 @@ function SupportedFrameworks(): JSX.Element {
                                         className="flex items-center gap-2 text-sm !text-inherit hover:underline"
                                         state={{ newWindow: true }}
                                     >
-                                        {logoUrl && <img src={logoUrl} alt={fw.name} className="size-5 rounded-sm" />}
+                                        {logoUrl && (
+                                            <img
+                                                src={logoUrl}
+                                                alt={fw.name}
+                                                className={`size-5 rounded-sm ${getDarkClassForLogo(logoUrl)}`}
+                                            />
+                                        )}
                                         <span>{fw.name}</span>
                                     </Link>
                                 </li>
@@ -196,6 +202,27 @@ function GetStarted(): JSX.Element {
     )
 }
 
+function SelfDriving(): JSX.Element {
+    return (
+        <div className="not-prose border border-border rounded-md p-5 bg-accent/40 my-6">
+            <p className="text-sm font-semibold mb-2 opacity-70">Open beta</p>
+            <p className="mb-3">
+                Once PostHog is installed and capturing events, the wizard can turn on{' '}
+                <Link to="/docs/self-driving" state={{ newWindow: true }} className="font-bold hover:opacity-75">
+                    self-driving
+                </Link>
+                . A self-driving product can prompt itself: PostHog turns your product data into signals, and agents act
+                on those signals to ship improvements – all inside the guardrails you set.
+            </p>
+            <p className="mb-4">
+                The self-driving setup enables your signal sources, sets up your scouts, and hands you a link to your
+                inbox, where reports land ranked by priority with a pull request ready to review.
+            </p>
+            <WizardCommand command="self-driving" latest={false} slim />
+        </div>
+    )
+}
+
 function ExplainerVideo(): JSX.Element {
     return (
         <div className="not-prose">
@@ -246,6 +273,12 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         kind: 'flow',
         props: [],
         Editor: () => <SupportedFrameworks />,
+    },
+    {
+        name: 'SelfDriving',
+        kind: 'flow',
+        props: [],
+        Editor: () => <SelfDriving />,
     },
     {
         name: 'ExplainerVideo',

@@ -1,5 +1,6 @@
 // AUTO GENERATED FILE
 
+import AboutPostHog from './components/AboutPostHog'
 import CountriesWeHireIn from './components/AMCharts/CountriesWeHireIn'
 import { ArrayCTA } from './components/ArrayCTA'
 import AskAIInput from './components/AskAIInput'
@@ -8,6 +9,7 @@ import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BorderWrapper } from './components/BorderWrapper'
 import { CallToAction } from './components/CallToAction'
 import { Caption } from './components/Caption'
+import { HearAboutUsCarousel } from './components/CardStackCarousel/HearAboutUsCarousel'
 import { Images } from './components/Careers/Images'
 import CloudinaryImage from './components/CloudinaryImage'
 import { ComparisonTable } from './components/ComparisonTable'
@@ -24,6 +26,7 @@ import { FeatureAvailability } from './components/FeatureAvailability'
 import FeatureOwnershipTable from './components/FeatureOwnershipTable'
 import { FormulaScreenshot } from './components/FormulaScreenshot'
 import { GDPRForm } from './components/GDPRForm'
+import { AdvisoryAnchor } from './components/Heading'
 import { HiddenSection } from './components/HiddenSection'
 import { HubSpotForm } from './components/HubSpotForm'
 import ImageSlider from './components/ImageSlider'
@@ -73,12 +76,14 @@ import WizardCommand from './components/WizardCommand'
 import WizardCTA from './components/WizardCTA'
 
 export const shortcodes = {
+    AboutPostHog,
     ArrayCTA,
     BasicHedgehogImage,
     BorderWrapper,
     CallToAction,
     CalloutBox,
     Caption,
+    HearAboutUsCarousel,
     CloudinaryImage,
     Images,
     ImageSlider,
@@ -94,6 +99,7 @@ export const shortcodes = {
     FeatureAvailability,
     FormulaScreenshot,
     GDPRForm,
+    AdvisoryAnchor,
     HiddenSection,
     HubSpotForm,
     KeyboardShortcut,

@@ -85,7 +85,6 @@ See the table below for a summary of project-level permissions:
 | Delete project                                                                 | <span className="text-red text-lg">✖</span>   | <span className="text-green text-lg">✔</span> |
 | Edit project settings                                                          | <span className="text-red text-lg">✖</span>   | <span className="text-green text-lg">✔</span> |
 | View/edit own or permitted resources (based on resource-level access controls) | <span className="text-green text-lg">✔</span> | <span className="text-green text-lg">✔</span> |
-| View/edit all resources (regardless of resource-level access controls)         | <span className="text-red text-lg">✖</span>   | <span className="text-green text-lg">✔</span> |
 
 ### 3. Resource level
 
@@ -97,18 +96,33 @@ Currently, resource access controls are available for:
 - Activity logs
 - Customer Analytics
 - Dashboards
+- Endpoints
+- Error tracking
 - Experiments
+- Exports
 - Feature flags
 - Insights
+- LLM analytics
+- Logs
 - Managed data warehouse sources
 - Notebooks
-- Revenue analytics
 - Session recordings
 - Surveys
+- Traces
 - Web analytics
 - (more resource types coming soon – looking for others? Let us know!)
 
-Note: We do not yet support limiting access to querying data, viewing replays, or accessing person / group profiles. Support for these features is planned for the near future.
+<CalloutBox icon="IconWarning" title="Access controls don't yet apply to underlying data" type="caution">
+
+Resource access controls limit access to resources in the PostHog UI and API, but they do **not** yet limit access to the underlying data. We don't currently support restricting:
+
+- **Querying data** – any project member can query events, data warehouse tables, and other data via SQL/HogQL, including through the [PostHog AI assistant](/docs/posthog-ai) and the API. For example, a user with "No access" to data warehouse sources can't open the SQL editor, but can still ask PostHog AI to query those tables on their behalf.
+- **Viewing session replays**
+- **Accessing person and group profiles**
+
+Data-level access control support is planned and actively being worked on.
+
+</CalloutBox>
 
 Resource access controls have four possible access levels:
 
@@ -125,9 +139,9 @@ These settings allow you to control who can view and edit a specific resource ob
 
 By default, new resources are set to "Editor" access. Users with appropriate permissions can modify this default and set specific permissions for members and roles.
 
-Resource creators, project admins, and users with "Manager" access can always view and edit resources, as well as manage their access controls.
+Resource creators, organization admins, and users with "Manager" access can always view and edit resources, as well as manage their access controls.
 
-You cannot set resource-level access controls for project admins, as they always have full access.
+You cannot set resource-level access controls for organization admins, as they always have full access.
 
 <ProductScreenshot
   imageLight={objectAccessControlLight}
@@ -135,6 +149,8 @@ You cannot set resource-level access controls for project admins, as they always
   alt="Object access control"
   classes="rounded"
 />
+
+Each project can have up to 1,000 objects per resource type with individual access controls. For example, you can set custom access controls on up to 1,000 dashboards, 1,000 insights, and so on. If you need a higher limit, contact support.
 
 #### b. All resource objects of a given type in a project (resource access controls)
 
@@ -144,7 +160,7 @@ You can set default access levels for all resources of a given type in a project
 
 Individual resource object access controls for specific users or roles take precedence over resource-level access controls.
 
-You cannot set resource-level access controls for project admins, as they always have full access.
+You cannot set resource-level access controls for organization admins, as they always have full access.
 
 <ProductScreenshot
   imageLight={resourceAccessControlLight}
@@ -152,6 +168,18 @@ You cannot set resource-level access controls for project admins, as they always
   alt="Resource access control"
   classes="rounded"
 />
+
+### 4. Property level
+
+Property access controls let you restrict who can view and edit properties on events and persons. These can be managed by using **Property definitions**.
+
+Property level access controls have the following levels:
+
+- **Read & write** – Can view and query the property, and update its value via the UI or API.
+- **Read** – Can view and query the property, but cannot change its value.
+- **No access** – The property is completely hidden from the user, and cannot be queried or filtered on.
+
+Currently event, person, and group properties are supported.
 
 ## How object access control precedence works
 
@@ -212,6 +240,22 @@ Here are some practical examples of how to configure access controls for differe
 3. Give the analyst "Viewer" access to all Dashboards (resource-level)
 4. The analyst can create and edit insights but only view dashboards
 
+#### Hide PII from vendors
+
+**Scenario**: You want to share your event data with vendors while restricting access to a property containing PII (e.g. `email`).
+
+**Setup**:
+
+1. Create a role for the vendor (e.g. "Vendor", "External collaborator")
+2. Create a property definition for the property if one does not already exist, otherwise edit the existing definition
+3. Navigate to the "Roles" tab under the "Access control" section of the property definition page
+4. Find your vendor role and select "Add override"
+5. Select "No access"
+6. Save the property definition
+7. Any member with the vendor role will not be able to access the PII property
+
+To restrict additional properties, repeat steps 2–6 for each one.
+
 ## Feature availability
 
 ### Free / Pay-as-you-go
@@ -220,7 +264,7 @@ These plans do not currently offer any access control features. All projects are
 
 ### Boost or Scale
 
-The Boost and Scale add-ons include access controls for teams with stricter security requirements.
+The Boost and Scale packages include access controls for teams with stricter security requirements.
 
 **What you can do:**
 

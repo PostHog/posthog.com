@@ -125,7 +125,7 @@ Here are some best practices for internal linking:
 
 ### 10. Optimize for LLMs
 
-We’re no longer just writing for Google – we’re writing for the answer engines too. ChatGPT, Perplexity, Claude, and Google’s AI Overviews are pulling from our content to build answers. To win those spots, we need to make our pages easy to retrieve, easy to quote, and obviously authoritative.
+We’re no longer just writing for Google – [we’re writing for the answer engines too](/handbook/aeo-advice). ChatGPT, Perplexity, Claude, and Google’s AI Overviews are pulling from our content to build answers. To win those spots, we need to make our pages easy to retrieve, easy to quote, and obviously authoritative.
 
 The goal is to make our content the easiest, clearest, most trustworthy answer in the room, for both humans and machines. How we do that:
 

@@ -63,9 +63,10 @@ export default function ManagedWarehouse(): JSX.Element {
     return (
         <>
             <SEO
-                title="Managed DuckDB warehouse - PostHog data stack"
-                description="Learn about our managed warehouse solution powered by DuckDB"
-                image="images/og/cdp.jpg"
+                title="Managed Warehouse - PostHog data Stack"
+                description="All your data, ready in PostHog's Managed Warehouse"
+                image="https://res.cloudinary.com/dmukukwp6/image/upload/opengraph_3_cf73189604.png"
+                imageType="absolute"
             />
             <ReaderView leftSidebar={<LeftSidebarContent />} title="Managed DuckDB warehouse">
                 <p>

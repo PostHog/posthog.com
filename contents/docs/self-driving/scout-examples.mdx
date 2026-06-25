@@ -1,0 +1,74 @@
+---
+title: Scout examples
+sidebarTitle: Examples
+sidebar: Docs
+showTitle: true
+---
+
+import { CallToAction } from 'components/CallToAction'
+
+<CalloutBox icon="IconInfo" title="Open beta" type="fyi">
+
+Self-driving is currently in open beta.
+
+</CalloutBox>
+
+A [scout](/docs/self-driving/scouts) can watch almost anything you land in PostHog. There are two kinds: the **canonical** scouts PostHog ships with, and **custom** scouts you write for the patterns specific to your product. This page is a catalog of both, to spark ideas for what to point a scout at.
+
+## Canonical scouts
+
+PostHog ships a fleet of canonical scouts out of the box, each watching a common pattern. You turn each one on or off per project. Each scout is just a skill you can read (named `signals-scout-*`) – the table links straight to its `SKILL.md` in the [PostHog repo](https://github.com/PostHog/posthog/tree/master/products/signals/skills). Here's the full set:
+
+| Scout | What it looks for |
+|---|---|
+| [AI observability](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-ai-observability/SKILL.md) | Cost, latency, error, eval, and tool-usage trends and spikes across your AI traffic |
+| [Anomaly detection](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-anomaly-detection/SKILL.md) | Bursts, drops, flat-lines, and trend breaks in your most-viewed dashboards and insights |
+| [APM](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-apm/SKILL.md) | RED-metric regressions (error rate, p95 latency, volume) and new errors per service and operation |
+| [CSP violations](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-csp-violations/SKILL.md) | Content Security Policy violation clusters, per-directive bursts, and suspicious third-party domains |
+| [Customer analytics](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-customer-analytics/SKILL.md) | Churn-risk shapes on named accounts – engagement cliffs, dormancy, single-threaded champions |
+| [Data pipelines](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-data-pipelines/SKILL.md) | Delivery failures across CDP destinations, batch exports, and workflows, where config and reality disagree |
+| [Error tracking](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-error-tracking/SKILL.md) | Error spikes, stuck loops, and fingerprint clusters, triaged by how many users they hit |
+| [Experiments](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-experiments/SKILL.md) | Validity threats like sample-ratio mismatch, plus zombie experiments running past their useful life |
+| [Feature flags](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-feature-flags/SKILL.md) | Evaluation cliffs, ghost flags (keys no longer in code), and flag debt |
+| [General](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-general/SKILL.md) | Cross-product correlations and any surface no specialist covers |
+| [Health checks](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-health-checks/SKILL.md) | Setup health issues – no live events, outdated SDKs, missing reverse proxy, failing warehouse models |
+| [Inbox validation](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-inbox-validation/SKILL.md) | Whether a merged fix actually held, re-measured after a deployment soak window |
+| [Logs](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-logs/SKILL.md) | Volume bursts, severity-distribution shifts, service silence, and new error message patterns |
+| [Observability gaps](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-observability-gaps/SKILL.md) | Coverage gaps – high-volume events with no insight, dashboard, or alert |
+| [Product analytics](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-product-analytics/SKILL.md) | Regressions in your funnels, retention, lifecycle, stickiness, and paths |
+| [Replay Vision](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-replay-vision/SKILL.md) | Whether Replay Vision scanners are still observing, and what their observations surface |
+| [Revenue analytics](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-revenue-analytics/SKILL.md) | MRR and churn shifts, broken Stripe syncs, and revenue config drift |
+| [Session replay](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-session-replay/SKILL.md) | Recording capture integrity, plus rage-click and dead-click friction clusters |
+| [Surveys](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-surveys/SKILL.md) | NPS and CSAT regressions, plus recurring themes in open-text responses |
+| [Web analytics](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-web-analytics/SKILL.md) | Acquisition channels diverging, attribution breakage, and 404 spikes |
+
+Most are specialists that watch one surface in depth; the [general](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-general/SKILL.md) scout is the exception – it watches the seams between surfaces, like a deploy, then an error burst, then a conversion dip, that no single specialist would catch on its own. Browse them all in the [`products/signals/skills`](https://github.com/PostHog/posthog/tree/master/products/signals/skills) directory.
+
+## Ideas for custom scouts
+
+You can write your own scout for anything you care about. The job is the same each time: pick a surface you wish someone was watching, write down what "worth my attention" means for it in plain English, and let the scout hold that bar for you. Some directions to steal:
+
+| Use case | What it does |
+|---|---|
+| **Mine any Slack channel** | Sync a channel into the [data warehouse](/docs/data-warehouse) and a scout reads it like any other table – a user-feedback channel, an on-call channel, even a community Discord relay. The moment it's a table, it's fair game. |
+| **Watch any custom event** | Point a scout at any event you capture – a support event, a feedback submission, a domain-specific action – and have it turn that stream into findings. |
+| **Keep an eye on what you already care about** | Hand a scout a curated set of *your* dashboards, insights, and alerts – the metrics your team checks every morning – and have it stay quiet until one moves against its own baseline. |
+| **Own a funnel or a journey** | A scout can watch your key funnels and activation flows, flag a conversion or retention regression against the flow's own trailing baseline, and even propose the [experiment](/docs/experiments) to fix the weakest step. |
+| **Have it read your codebase** | Give a scout a repo and a job: catch docs that have drifted out of date, flag a feature shipped with no instrumentation, spot a deprecated API, or run a static-analysis tool over the last week's diffs. |
+| **Point a scout at your scouts** | A meta-scout that audits the rest of the fleet for miscalibration, plus a follow-up that re-checks "resolved" reports after a soak window to confirm the fix actually held. |
+
+The common thread is that a scout isn't limited to product analytics. Any source you land in PostHog – a warehouse table, a Slack relay, a third-party feed – becomes something a scout can watch.
+
+## Make your own
+
+You don't write a scout by hand. In [PostHog Code](/code), open the scouts page and pick the "Make a scout" suggestion: it scans your project and proposes custom scouts grounded in your actual data. You can also ask any agent connected to the PostHog MCP to build one.
+
+For a deep dive – two real scouts traced end to end, with a walkthrough video – read [What is a scout?](/blog/what-is-a-scout).
+
+## Next step
+
+See what a scout emits when it finds something.
+
+<CallToAction type="primary" to="/docs/self-driving/signals">
+  Signals
+</CallToAction>
