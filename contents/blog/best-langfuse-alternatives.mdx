@@ -18,7 +18,7 @@ seo:
 
 **Langfuse** is a well-known [open-source LLM observability platform](/blog/best-open-source-llm-observability-tools). It combines [tracing](/docs/ai-observability/traces), [prompt management](/docs/prompt-management/prompts), [evaluations](/docs/ai-evals/evaluations), and cost tracking to help developers understand how their LLM applications behave in production.
 
-But just like pineapple on pizza isn't for everyone, Langfuse isn't right for every team. Some need deeper evaluation tooling, some need a more integrated analytics experience or a better way to understand how AI performance affects the overall product experience, and some may just want a cheaper alternative.
+But just like pineapple on pizza isn't for everyone, Langfuse isn't right for every team. Some need deeper evaluation tooling, a better way to understand how AI performance affects the overall product experience, or may just want a cheaper alternative.
 
 In this guide, we'll compare the best Langfuse alternatives and look at where each tool excels, where it falls short, and who it's actually built for.
 
@@ -33,7 +33,7 @@ In this guide, we'll compare the best Langfuse alternatives and look at where ea
 
 ### What is PostHog?
 
-**[PostHog](/)** is the leading platform for self-driving products. You can use our desktop ([Code](/code)), [web](/ai), [Slack](/slack), and [MCP](/mcp) products to leverage apps like [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [AI observability](/ai-observability), [logs](/logs), and more.
+**[PostHog](/)** is the leading platform for self-driving products. You can use our desktop ([Code](/code)), [web](/ai), [Slack](/slack), and [MCP](/mcp) products to leverage tools like [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [AI observability](/ai-observability), [logs](/logs), and more.
 
 PostHog captures full traces of your LLM calls, so you can follow a request through every prompt, tool call, and model response. For each generation, it tracks token usage, cost, latency, and errors, and you can score outputs with LLM-as-a-judge or code-based evals to catch quality regressions over time. 
 
@@ -53,7 +53,7 @@ PostHog ships new AI observability features fast, including prompt management (b
 ### Key features
 
 - [**Generations**](docs/ai-observability/generations): Monitor model performance, token usage, costs, latency, and errors across your AI features from a single view.
-- [**Traces**](docs/ai-observability/traces): Follow complete AI workflows from start to finish to understand how requests move through prompts, tools, and model calls.
+- [**Traces**](docs/ai-observability/traces): Follow AI workflows from start to finish to understand how requests move through prompts, tools, and model calls.
 - [**AI evals**](docs/ai-evals/evaluations): Automatically score model outputs using LLM-as-a-judge or code-based checks to track quality and identify regressions over time.
 - [**Prompt management**](docs/prompt-management) *(beta):* Create, version, and update prompts without redeploying code. Compare versions and understand how prompt changes affect outputs.
 - [**SQL access**](docs/sql): Query AI observability data with SQL and analyze it alongside product, user, and business data.
@@ -130,7 +130,7 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 
 **LangSmith** is an observability and evaluation platform for LLM applications. It has its deepest, native integration with the LangChain and LangGraph ecosystem, but works with any stack, and provides tracing, debugging, monitoring, prompt management, and evaluation tooling.
 
-LangSmith automatically captures traces from LangChain and LangGraph applications, including agent runs, tool calls, prompts, and model responses. It also includes evaluation workflows, annotation queues, and datasets for testing model performance.
+LangSmith automatically captures traces from LangChain and LangGraph applications, including agent runs, tool calls, prompts, and model responses. It also includes annotation queues and datasets for testing model performance.
 
 It is self-serve, with a free Developer plan (1 seat, 5K traces/month). The Plus plan is $39 per seat per month for up to 10 seats and 10K traces; Enterprise is custom. 
 
@@ -216,7 +216,7 @@ According to [reviews on Gartner](https://www.gartner.com/reviews/product/langsm
 
 **Arize Phoenix** is an open-source LLM observability platform focused on tracing, evaluation, and monitoring for AI applications. It's built on OpenTelemetry and OpenInference, so one-line auto-instrumentation captures every prompt, model call, retrieval step, tool call, and agent action as a nested span, and you can attach evaluation scores directly back onto those traces.
 
-It s is built for teams running complex AI systems in production. It integrates with frameworks such as LangChain, LlamaIndex, LangGraph, Crew AI, DSPy, and others, and includes evaluation tooling for monitoring quality over time.
+It's built for teams running complex AI systems in production. It integrates with frameworks such as LangChain, LlamaIndex, LangGraph, Crew AI, DSPy, and others, and includes evaluation tooling for monitoring quality over time.
 
 Phoenix is free to self-host with no usage caps. The managed version, Arize AX, has a free tier (25K spans/month) and AX Pro at $50/month for 50K spans, billed on span volume rather than seats.
 
@@ -395,7 +395,7 @@ Weave instruments LLM calls with a single Python or TypeScript decorator, then s
 Their free tier for small teams includes 1 GB of Weave data ingestion per month. Pro is $50 per seat per month with higher limits; Enterprise is custom.
 
 <details>
-<summary>What sets Braintrust apart?</summary>
+<summary>What sets Weave apart?</summary>
 
 It lives inside the full W&B platform, so teams already doing model training, fine-tuning, and experiment tracking get LLM observability in the same place, with one-decorator instrumentation to capture traces and cost. It also ships built-in guardrails and production monitors that flag toxicity, PII, and hallucinations in real time. 
 
@@ -460,7 +460,7 @@ According to [user reviews](https://www.gartner.com/reviews/product/wandb-weave)
 
 > #### Bottom line
 >
-> Weights & Biases Weave is one of the strongest Langfuse competitors for teams already invested in the Weights & Biases ecosystem. Observability, evaluations, datasets, and experimentation fit naturally into existing W&B workflows. If you want a dedicated open-source platform focused on LLM engineering, Langfuse is the stronger choice.
+> Weights & Biases Weave is a strong Langfuse competitor for teams already invested in the Weights & Biases ecosystem. Observability, evaluations, datasets, and experimentation fit naturally into existing W&B workflows. If you want a dedicated open-source platform focused on LLM engineering, Langfuse is a better choice.
 
 ## Which Langfuse alternative should you choose?
 
@@ -469,7 +469,7 @@ According to [user reviews](https://www.gartner.com/reviews/product/wandb-weave)
 - Need open-source observability with strong tracing, prompt management, evaluations, and self-hosting? **Langfuse** remains one of the best options.
 - Want evaluation-driven development with a heavy focus on benchmarks, experiments, and model quality? **Braintrust** is worth a look.
 - Need deep agent tracing, OpenTelemetry-native instrumentation, and strong evaluation tooling? **Arize Phoenix** is a strong Langfuse alternative.
-- Looking for quick implementation, proxy-based monitoring, and built-in caching? **Helicone** was a great fit, though its maintenance-mode status makes it harder to recommend for new projects.  **Portkey** is the closest actively-developed replacement.
+- Looking for quick implementation, proxy-based monitoring, and built-in caching? Other options not detailed here might be better. **Helicone** was a great fit, though its maintenance-mode status makes it harder to recommend for new projects. **Portkey** is the closest actively-developed replacement.
 - Already invested in the Weights & Biases ecosystem? **Weave** lets you add observability and evaluations without introducing another platform.
 
 ## Is PostHog right for you?
@@ -483,7 +483,7 @@ We're biased, but we think PostHog is a strong Langfuse replacement if:
 - You value transparency. We're open source and open core.
 - You want to try before you buy. We're self-serve with a [generous free tier](/pricing).
 
-It's completely free to get started – no credit card required. Our [setup wizard](/wizard) handles configuration in minutes, or you can [check out our docs](/docs) to do it yourself.
+It's completely free to get started – no credit card required. Our [setup wizard](/wizard) handles configuration in minutes, or you can [check out our docs](/docs/ai-observability) to do it yourself.
 
 <WizardCTA />
 
@@ -506,7 +506,9 @@ Common reasons include [wanting AI observability alongside product analytics and
 <details>
 <summary>What's the best Langfuse alternative overall?</summary>
 
-**PostHog** is the strongest choice if you want AI observability connected to product analytics and session replay. It's the only tool in this comparison that combines AI observability with product analytics, session replay, feature flags, and other product-development tools. If your priority is prompt management, evaluation workflows, and annotation queues, Langfuse remains the stronger option.
+**PostHog** is the strongest choice if you want AI observability connected to product analytics and session replay. It's the only tool in this comparison that combines AI observability with product analytics, session replay, feature flags, and other product-development tools. It also has a more generous free tier.
+
+If your priority is prompt management, evaluation workflows, and annotation queues, Langfuse remains the stronger option.
 
 </details>
 
@@ -557,7 +559,7 @@ For more alternatives, check out our list of [cheapest AI observability tools](/
 <details>
 <summary>What other AI observability tools are available?</summary>
 
-Beyond the tools in this guide, there are plenty of other options worth exploring. See our roundup of the [best AI observability tools](https://posthog.com/blog/best-open-source-llm-observability-tools) for a broader comparison.
+Beyond the tools in this guide, there are plenty of other options worth exploring. See our roundup of the [best AI observability tools](/blog/best-open-source-llm-observability-tools) for a broader comparison.
 
 </details>
 

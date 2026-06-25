@@ -16,7 +16,7 @@ export const aiObservabilityFeatures = {
         },
         cost_tracking: {
             name: 'Cost tracking',
-            description: 'Includes cost per user',
+            description: 'Includes cost per user and broken down by provider, models',
         },
         trace_visualization: {
             name: 'Trace visualization',
