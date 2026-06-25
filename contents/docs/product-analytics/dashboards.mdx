@@ -258,8 +258,11 @@ To add it, click the **Add...** dropdown and select **Recent recordings** under 
 - **Limit** - Maximum number of recordings to display. Default: 10, maximum: 25.
 - **Order by** - Sort recordings by start time, activity score, duration, clicks, or console errors.
 - **Order direction** - Sort ascending or descending.
-- **Saved filter** - Apply a saved Session Replay filter.
+- **Collection** - Scope the widget to a curated set of pinned recordings from a [collection](/docs/session-replay).
+- **Saved filter** - Apply a saved Session Replay filter to refine which recordings are shown.
 - **Filter test accounts** - Toggle to exclude internal and test users.
+
+Collection and Saved filter are composable. Collection acts as the scope – a fixed set of pinned session IDs – while Saved filter acts as refinement, applying its date range and property filters on top. When both are set, the widget first scopes to the collection's recordings, then narrows the results using the saved filter criteria. A collection on its own is not date-bounded, so older pinned recordings still appear.
 
 Clicking a row opens the session replay player. Clicking the tile title navigates to **Session Replay**.
 
