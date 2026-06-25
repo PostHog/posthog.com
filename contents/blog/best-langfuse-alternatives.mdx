@@ -1,6 +1,6 @@
 ---
 title: 'The best Langfuse alternatives & competitors, compared'
-date: 2026-06-18
+date: 2026-06-25
 author:
     - rohit-rajpal
     - natalia-amorim
@@ -109,7 +109,7 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 
 1. **It replaces multiple tools:** PostHog can replace Google Analytics (web and product analytics), Sentry (error monitoring), and standalone AI observability tools. Teams can monitor LLM performance, investigate AI interactions, and analyze product usage from the same dashboard.
 2. **Pricing is transparent and scalable:** Reviewers value the usage-based pricing and the generous free tier they can keep using as they grow.
-3. **A game-changer for AI builders:** Reviewers implementing AI features single out PostHog's LLM observability tracing and monitoring for their AI functionality without standing up a separate tool, alongside the analytics and error tracking they're already running.
+3. **They get a complete picture of users:** Funnels, session replay, A/B testing, surveys, and more sit alongside the analytics, so teams can see behavior end to end.
 
 > #### Bottom line
 >
@@ -117,180 +117,7 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 
 <WizardCTA />
 
-## 2. LangSmith
-
-- **Founded**: 2023
-- **Similar to**: Langfuse, Arize Phoenix
-- **Typical users**: AI engineers and ML engineers
-- **Typical customers**: AI startups, enterprise AI teams, LangChain users
-
-![LangSmith Dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/Langsmith_Dashboard_09ad5e1ab0.png)
-
-### What is LangSmith?
-
-**LangSmith** is an observability and evaluation platform for LLM applications. It has its deepest, native integration with the LangChain and LangGraph ecosystem, but works with any stack, and provides tracing, debugging, monitoring, prompt management, and evaluation tooling.
-
-LangSmith automatically captures traces from LangChain and LangGraph applications, including agent runs, tool calls, prompts, and model responses. It also includes annotation queues and datasets for testing model performance.
-
-It is self-serve, with a free Developer plan (1 seat, 5K traces/month). The Plus plan is $39 per seat per month for up to 10 seats and 10K traces; Enterprise is custom. 
-
-<details>
-<summary>What sets LangSmith apart from Langfuse?</summary>
-
-Mainly the native LangChain and LangGraph integration. Agent runs, tool calls, prompts, and model responses are captured automatically with near-zero instrumentation, so there's almost no setup to start debugging or evaluating. This also extends to LangGraph deployment, where you can ship and trace agents in one workflow.
-
-</details>
-
-### Key features
-
-- **Tracing:** Follow prompts, model calls, tool invocations, and agent runs through a single trace to debug LLM applications.
-- **Evaluations:** Automatically score model outputs and compare prompts, models, and application versions over time.
-- **Annotation queues:** Review, label, and curate model outputs to support evaluation and quality improvement workflows.
-- **Datasets:** Create and manage datasets for testing prompts, models, and application changes against consistent benchmarks.
-
-### How does LangSmith compare to Langfuse?
-
-<p>
-<ProductComparisonTable
-    competitors={['langsmith', 'langfuse']}
-    rows={[
-        'ai_observability.features.trace_visualization',
-        'ai_observability.features.cost_tracking',
-        'ai_observability.features.latency_tracking',
-        'ai_observability.features.error_tracking',
-        'ai_observability.features.sentiment_classification',
-        'ai_observability.features.trace_summarization',
-        'ai_observability.features.privacy_mode',
-        'ai_observability.features.agent_tracing',
-        'ai_observability.features.prompt_management',
-        'ai_observability.features.prompt_evaluations',
-        'ai_observability.features.evaluation_datasets',
-        'ai_observability.features.human_annotation',
-        'ai_observability.features.session_replay',
-        'ai_observability.features.product_analytics',
-    ]}
-/>
-</p>
-
-<details>
-<summary>Main differences between LangSmith and Langfuse</summary>
-
-- LangSmith automatically captures traces from LangChain and LangGraph applications. Langfuse supports LangChain but takes a framework-agnostic approach.
-- LangSmith uses per-seat pricing at $39 per seat per month on the Plus plan. Langfuse uses usage-based pricing with no per-seat charges.
-- LangSmith is a proprietary product. Langfuse is open source under the MIT license.
-
-</details>
-
-<details>
-<summary>Main similarities between LangSmith and Langfuse</summary>
-
-- Both capture LLM traces and monitor costs, latency, and errors.
-- Both support agent and multi-step workflow tracing.
-- Both include prompt management capabilities.
-- Both provide evaluations, datasets, and human annotation workflows.
-
-</details>
-
-### Why do companies use LangSmith?
-
-According to [reviews on Gartner](https://www.gartner.com/reviews/product/langsmith), companies use LangSmith because:
-
-- **It provides detailed traces:** LangSmith lets teams inspect prompts, model responses, tool calls, and agent actions step by step, making it easier to understand how AI workflows behave in production.
-- **It helps debug LLM workflows:** Teams use LangSmith to track model behavior, investigate issues, and understand unexpected outputs without manually piecing together logs.
-- **It includes built-in evaluations:** LangSmith combines tracing with evaluation tooling, helping teams monitor output quality and maintain production-ready AI applications.
-
-> #### Bottom line
->
-> LangSmith is one of the strongest Langfuse competitors for teams building on LangChain and LangGraph. Native integrations capture traces automatically, so there's less setup to debug and evaluate. If you want an open-source, framework-agnostic observability platform, Langfuse is the stronger choice.
-
-## 3. Arize Phoenix
-
-- **Founded:** 2020 (Arize AI)
-- **Similar to:** Langfuse, Braintrust
-- **Typical users:** AI engineers and ML engineers
-- **Typical customers:** Enterprise AI teams, ML platforms, companies building agentic applications
-
-![Arize Phoenix Dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/Arize_Phoenix_Dashboard_0c05ff7970.png)
-
-### What is Arize Phoenix?
-
-**Arize Phoenix** is an open-source LLM observability platform focused on tracing, evaluation, and monitoring for AI applications. It's built on OpenTelemetry and OpenInference, so one-line auto-instrumentation captures every prompt, model call, retrieval step, tool call, and agent action as a nested span, and you can attach evaluation scores directly back onto those traces.
-
-It's built for teams running complex AI systems in production. It integrates with frameworks such as LangChain, LlamaIndex, LangGraph, Crew AI, DSPy, and others, and includes evaluation tooling for monitoring quality over time.
-
-Phoenix is free to self-host with no usage caps. The managed version, Arize AX, has a free tier (25K spans/month) and AX Pro at $50/month for 50K spans, billed on span volume rather than seats.
-
-<details>
-<summary>What sets Phoenix apart from Langfuse?</summary>
-
-Phoenix takes the embeddings from your RAG pipeline, reduces their dimensionality, and clusters them semantically, so you can visually spot outliers and pockets of poor retrieval, then drill into the exact spans behind them. This embedding and cluster visualization (inherited from Arize's ML observability roots) is something Langfuse doesn't do.
-
-</details>
-
-### Key features
-
-- **Tracing:** Follow prompts, retrieval steps, model calls, tool invocations, and agent workflows through a single trace.
-- **Evaluations:** Run LLM-based and code-based evaluations to measure quality, correctness, and performance.
-- **Agent observability:** Visualize multi-step agent workflows, tool calls, and reasoning chains.
-- **OpenTelemetry support:** Capture observability data using open standards instead of proprietary instrumentation.
-
-### How does Arize Phoenix compare to Langfuse?
-
-<p>
-<ProductComparisonTable
-    competitors={['arize_phoenix', 'langfuse']}
-    rows={[
-        'ai_observability.features.trace_visualization',
-        'ai_observability.features.cost_tracking',
-        'ai_observability.features.latency_tracking',
-        'ai_observability.features.error_tracking',
-        'ai_observability.features.sentiment_classification',
-        'ai_observability.features.trace_summarization',
-        'ai_observability.features.privacy_mode',
-        'ai_observability.features.agent_tracing',
-        'ai_observability.features.prompt_management',
-        'ai_observability.features.prompt_evaluations',
-        'ai_observability.features.evaluation_datasets',
-        'ai_observability.features.human_annotation',
-        'ai_observability.features.session_replay',
-        'ai_observability.features.product_analytics',
-    ]}
-/>
-</p>
-
-<details>
-<summary>Main differences between Arize Phoenix and Langfuse</summary>
-
-- Phoenix can visualize and cluster the embeddings from a RAG pipeline to debug retrieval quality and surface drift. Langfuse doesn't offer this capability.
-- Langfuse has more mature, production-grade prompt management, with versioning, deployment labels, and caching. Phoenix includes prompt management too, but it's lighter and more development-oriented.
-- Arize Phoenix is OpenTelemetry-native, which enables teams to instrument AI applications using open observability standards. Langfuse supports OpenTelemetry, but it is not built around it in the same way.
-- Langfuse is MIT-licensed. Phoenix is under the Elastic License 2.0, which is source-available but restricts offering it as a hosted service.
-
-</details>
-
-<details>
-<summary>Main similarities between Arize Phoenix and Langfuse</summary>
-
-- Both capture LLM traces and monitor costs, latency, and errors.
-- Both support agent and multi-step workflow tracing.
-- Both provide evaluation capabilities for monitoring model quality.
-- Both support OpenTelemetry-based observability workflows.
-
-</details>
-
-### Why do companies use Arize Phoenix?
-
-According to [G2 reviews](https://www.g2.com/products/arize-ai/reviews), companies use Arize Phoenix because:
-
-- **Detailed traces and span views:** Phoenix makes it easy to inspect traces, spans, sessions, and trace trees, so teams can see exactly what happened at each step of a workflow.
-- **Experiments and evaluations:** Phoenix includes evaluators, human annotations, and both online and offline evaluation workflows, plus datasets and experiments for testing prompts and models against consistent benchmarks.
-- **Agent and tool-calling analysis:** Phoenix captures inputs, outputs, and the full sequence of tool calls and reasoning steps in multi-step agent workflows to review how an agent behaved and pinpoint where things went wrong.
-
-> #### Bottom line
->
-> Arize Phoenix is a strong Langfuse alternative for teams that prioritize observability, deep agent tracing, and evaluation workflows. Both tools cover tracing and evaluations well, but Phoenix goes further on OpenTelemetry-native instrumentation and understanding complex agent behavior.
-
-## 4. Braintrust
+## 2. Braintrust
 
 - **Founded:** 2023
 - **Similar to:** Langfuse, LangSmith
@@ -377,6 +204,179 @@ According to [user reviews](https://www.g2.com/products/braintrust-2024-12-22/re
 >
 > Braintrust is one of the closest Langfuse competitors. Both products cover observability and evaluations well, but Braintrust is more heavily centered on evaluation-driven development, while Langfuse spreads its focus across the broader LLM development workflow.
 
+## 3. LangSmith
+
+- **Founded**: 2023
+- **Similar to**: Langfuse, Arize Phoenix
+- **Typical users**: AI engineers and ML engineers
+- **Typical customers**: AI startups, enterprise AI teams, LangChain users
+
+![LangSmith Dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/Langsmith_Dashboard_09ad5e1ab0.png)
+
+### What is LangSmith?
+
+**LangSmith** is an observability and evaluation platform for LLM applications. It has its deepest, native integration with the LangChain and LangGraph ecosystem, but works with any stack, and provides tracing, debugging, monitoring, prompt management, and evaluation tooling.
+
+LangSmith automatically captures traces from LangChain and LangGraph applications, including agent runs, tool calls, prompts, and model responses. It also includes annotation queues and datasets for testing model performance.
+
+It is self-serve, with a free Developer plan (1 seat, 5K traces/month). The Plus plan is $39 per seat per month for up to 10 seats and 10K traces; Enterprise is custom. 
+
+<details>
+<summary>What sets LangSmith apart from Langfuse?</summary>
+
+Mainly the native LangChain and LangGraph integration. Agent runs, tool calls, prompts, and model responses are captured automatically with near-zero instrumentation, so there's almost no setup to start debugging or evaluating. This also extends to LangGraph deployment, where you can ship and trace agents in one workflow.
+
+</details>
+
+### Key features
+
+- **Tracing:** Follow prompts, model calls, tool invocations, and agent runs through a single trace to debug LLM applications.
+- **Evaluations:** Automatically score model outputs and compare prompts, models, and application versions over time.
+- **Annotation queues:** Review, label, and curate model outputs to support evaluation and quality improvement workflows.
+- **Datasets:** Create and manage datasets for testing prompts, models, and application changes against consistent benchmarks.
+
+### How does LangSmith compare to Langfuse?
+
+<p>
+<ProductComparisonTable
+    competitors={['langsmith', 'langfuse']}
+    rows={[
+        'ai_observability.features.trace_visualization',
+        'ai_observability.features.cost_tracking',
+        'ai_observability.features.latency_tracking',
+        'ai_observability.features.error_tracking',
+        'ai_observability.features.sentiment_classification',
+        'ai_observability.features.trace_summarization',
+        'ai_observability.features.privacy_mode',
+        'ai_observability.features.agent_tracing',
+        'ai_observability.features.prompt_management',
+        'ai_observability.features.prompt_evaluations',
+        'ai_observability.features.evaluation_datasets',
+        'ai_observability.features.human_annotation',
+        'ai_observability.features.session_replay',
+        'ai_observability.features.product_analytics',
+    ]}
+/>
+</p>
+
+<details>
+<summary>Main differences between LangSmith and Langfuse</summary>
+
+- LangSmith automatically captures traces from LangChain and LangGraph applications. Langfuse supports LangChain but takes a framework-agnostic approach.
+- LangSmith uses per-seat pricing at $39 per seat per month on the Plus plan. Langfuse uses usage-based pricing with no per-seat charges.
+- LangSmith is a proprietary product. Langfuse is open source under the MIT license.
+
+</details>
+
+<details>
+<summary>Main similarities between LangSmith and Langfuse</summary>
+
+- Both capture LLM traces and monitor costs, latency, and errors.
+- Both support agent and multi-step workflow tracing.
+- Both include prompt management capabilities.
+- Both provide evaluations, datasets, and human annotation workflows.
+
+</details>
+
+### Why do companies use LangSmith?
+
+According to [reviews on Gartner](https://www.gartner.com/reviews/product/langsmith), companies use LangSmith because:
+
+- **It provides detailed traces:** LangSmith lets teams inspect prompts, model responses, tool calls, and agent actions step by step, making it easier to understand how AI workflows behave in production.
+- **It helps debug LLM workflows:** Teams use LangSmith to track model behavior, investigate issues, and understand unexpected outputs without manually piecing together logs.
+- **It includes built-in evaluations:** LangSmith combines tracing with evaluation tooling, helping teams monitor output quality and maintain production-ready AI applications.
+
+> #### Bottom line
+>
+> LangSmith is one of the strongest Langfuse competitors for teams building on LangChain and LangGraph. Native integrations capture traces automatically, so there's less setup to debug and evaluate. If you want an open-source, framework-agnostic observability platform, Langfuse is the stronger choice.
+
+## 4. Arize Phoenix
+
+- **Founded:** 2020 (Arize AI)
+- **Similar to:** Langfuse, Braintrust
+- **Typical users:** AI engineers and ML engineers
+- **Typical customers:** Enterprise AI teams, ML platforms, companies building agentic applications
+
+![Arize Phoenix Dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/Arize_Phoenix_Dashboard_0c05ff7970.png)
+
+### What is Arize Phoenix?
+
+**Arize Phoenix** is an open-source LLM observability platform focused on tracing, evaluation, and monitoring for AI applications. It's built on OpenTelemetry and OpenInference, so one-line auto-instrumentation captures every prompt, model call, retrieval step, tool call, and agent action as a nested span, and you can attach evaluation scores directly back onto those traces.
+
+It's built for teams running complex AI systems in production. It integrates with frameworks such as LangChain, LlamaIndex, LangGraph, Crew AI, DSPy, and others, and includes evaluation tooling for monitoring quality over time.
+
+Phoenix is free to self-host with no usage caps. The managed version, Arize AX, has a free tier (25K spans/month) and AX Pro at $50/month for 50K spans, billed on span volume rather than seats.
+
+<details>
+<summary>What sets Phoenix apart from Langfuse?</summary>
+
+Phoenix takes the embeddings from your RAG pipeline, reduces their dimensionality, and clusters them semantically, so you can visually spot outliers and pockets of poor retrieval, then drill into the exact spans behind them. This embedding and cluster visualization (inherited from Arize's ML observability roots) is something Langfuse doesn't do.
+
+</details>
+
+### Key features
+
+- **Tracing:** Follow prompts, retrieval steps, model calls, tool invocations, and agent workflows through a single trace.
+- **Evaluations:** Run LLM-based and code-based evaluations to measure quality, correctness, and performance.
+- **Agent observability:** Visualize multi-step agent workflows, tool calls, and reasoning chains.
+- **OpenTelemetry support:** Capture observability data using open standards instead of proprietary instrumentation.
+
+### How does Arize Phoenix compare to Langfuse?
+
+<p>
+<ProductComparisonTable
+    competitors={['arize_phoenix', 'langfuse']}
+    rows={[
+        'ai_observability.features.trace_visualization',
+        'ai_observability.features.cost_tracking',
+        'ai_observability.features.latency_tracking',
+        'ai_observability.features.error_tracking',
+        'ai_observability.features.sentiment_classification',
+        'ai_observability.features.trace_summarization',
+        'ai_observability.features.privacy_mode',
+        'ai_observability.features.agent_tracing',
+        'ai_observability.features.prompt_management',
+        'ai_observability.features.prompt_evaluations',
+        'ai_observability.features.evaluation_datasets',
+        'ai_observability.features.human_annotation',
+        'ai_observability.features.session_replay',
+        'ai_observability.features.product_analytics',
+    ]}
+/>
+</p>
+
+<details>
+<summary>Main differences between Arize Phoenix and Langfuse</summary>
+
+- Phoenix can visualize and cluster the embeddings from a RAG pipeline to debug retrieval quality and surface drift. Langfuse doesn't offer this capability.
+- Langfuse has more mature, production-grade prompt management, with versioning, deployment labels, and caching. Phoenix includes prompt management too, but it's lighter and more development-oriented.
+- Arize Phoenix is OpenTelemetry-native, which enables teams to instrument AI applications using open observability standards. Langfuse supports OpenTelemetry, but it is not built around it in the same way.
+- Langfuse is MIT-licensed. Phoenix is under the Elastic License 2.0, which is source-available but restricts offering it as a hosted service.
+
+</details>
+
+<details>
+<summary>Main similarities between Arize Phoenix and Langfuse</summary>
+
+- Both capture LLM traces and monitor costs, latency, and errors.
+- Both support agent and multi-step workflow tracing.
+- Both provide evaluation capabilities for monitoring model quality.
+- Both support OpenTelemetry-based observability workflows.
+
+</details>
+
+### Why do companies use Arize Phoenix?
+
+According to [G2 reviews](https://www.g2.com/products/arize-ai/reviews), companies use Arize Phoenix because:
+
+- **Detailed traces and span views:** Phoenix makes it easy to inspect traces, spans, sessions, and trace trees, so teams can see exactly what happened at each step of a workflow.
+- **Experiments and evaluations:** Phoenix includes evaluators, human annotations, and both online and offline evaluation workflows, plus datasets and experiments for testing prompts and models against consistent benchmarks.
+- **Agent and tool-calling analysis:** Phoenix captures inputs, outputs, and the full sequence of tool calls and reasoning steps in multi-step agent workflows to review how an agent behaved and pinpoint where things went wrong.
+
+> #### Bottom line
+>
+> Arize Phoenix is a strong Langfuse alternative for teams that prioritize observability, deep agent tracing, and evaluation workflows. Both tools cover tracing and evaluations well, but Phoenix goes further on OpenTelemetry-native instrumentation and understanding complex agent behavior.
+
 ## 5. Weights & Biases Weave
 
 - **Founded:** 2024 (Weave)
@@ -437,7 +437,7 @@ It lives inside the full W&B platform, so teams already doing model training, fi
 
 - Weave includes built-in guardrails and production monitors for real-time safety and quality control. Langfuse handles this by integrating external guardrail libraries and tracing their results, rather than blocking outputs natively.
 - Langfuse provides more mature prompt management and annotation workflows.
-- Langfuse is open source under the MIT license and free to self-host. Weave is part of the commercial W&B ecosystem and runs primarily on the hosted platform.
+- Langfuse is open source under the MIT license and free to self-host. Weave's client library is open source, but the platform is proprietary, with self-hosting available only on the Enterprise tier.
 
 </details>
 
@@ -447,6 +447,7 @@ It lives inside the full W&B platform, so teams already doing model training, fi
 - Both capture LLM traces and monitor costs, latency, and errors.
 - Both support agent and multi-step workflow tracing.
 - Both provide evaluations, datasets, and benchmarking workflows.
+- Both are part of larger platforms (Langfuse is owned by ClickHouse).
 
 </details>
 
@@ -529,9 +530,9 @@ For more alternatives, check out our list of [cheapest AI observability tools](/
 </details>
 
 <details>
-<summary>Any open-source alternatives to LangSmith for tracing and debugging?</summary>
+<summary>What are the best open-source AI observability tools for tracing and debugging?</summary>
 
-**Langfuse** and **Arize Phoenix** are the strongest open-source alternatives. Langfuse covers tracing, prompt management, and evals, and is fully self-hostable. Arize Phoenix is OpenTelemetry-native and provides deep visibility into agent and multi-step workflows. **PostHog** is also open source and adds product analytics and session replay on top of tracing.
+**Langfuse** and **Arize Phoenix** are the [strongest open-source alternatives](/blog/best-open-source-llm-observability-tools). Langfuse covers tracing, prompt management, and evals, and is fully self-hostable. Arize Phoenix is OpenTelemetry-native and provides deep visibility into agent and multi-step workflows. **PostHog** is also open source and adds product analytics and session replay on top of tracing.
 
 </details>
 
