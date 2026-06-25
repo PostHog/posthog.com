@@ -27,7 +27,11 @@ export const arize_phoenix = {
                 product_analytics: false,
             },
         },
-        session_replay: false,
-        feature_flags: false,
+        session_replay: {
+            available: false,
+        },
+        feature_flags: {
+            available: false,
+        },
     },
 }

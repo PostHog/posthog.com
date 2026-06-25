@@ -27,5 +27,11 @@ export const langsmith = {
                 product_analytics: false,
             },
         },
+        session_replay: {
+            available: false,
+        },
+        product_analytics: {
+            available: false,
+        },
     },
 }

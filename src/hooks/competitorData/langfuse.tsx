@@ -28,5 +28,11 @@
                     feature_flags: false,
                 },
         },
+        session_replay: {
+            available: false,
+        },
+        product_analytics: {
+            available: false,
+        },
     },
 }
