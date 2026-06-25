@@ -212,7 +212,7 @@ What won’t change: qualify each step, solve a real problem, and don’t assume
 
 ## How TAEs accept and work BDR opportunities
 
-Whether a BDR-sourced meeting becomes an opportunity is dependent on a set of fixed criteria to ensure the consistent and smooth handoff of qualified pipeline vs. simply converting opps based on vibes. 
+Whether a BDR-sourced meeting becomes an opportunity is dependent on a set of fixed criteria to ensure the consistent and smooth handoff of qualified pipeline vs. simply converting oops based on vibes. 
 
 ### When a BDR meeting becomes an opp
 
