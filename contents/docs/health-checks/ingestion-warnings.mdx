@@ -1,0 +1,53 @@
+---
+title: Ingestion warnings
+sidebar: Docs
+showTitle: true
+---
+
+The ingestion warnings check surfaces [ingestion warnings](/docs/data/ingestion-warnings) – events that PostHog had to drop, mis-merge, or degrade as they came in – as a health issue, so you can trace them back to the code that produced them.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_58_33_140_Z_62d59e1845.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_58_27_154_Z_317b4ae43a.png"
+    alt="Ingestion warnings check in the Health checks section in the PostHog app"
+    classes="rounded"
+/>
+
+## What this check looks for
+
+PostHog writes ingestion warnings during event ingestion. Once a day, this check aggregates those warnings over the **last 7 days** and raises an issue for any warning type that fired at least 10 times. High-volume warning types escalate from **warning** to **critical** past per-type thresholds.
+
+Common warning types include:
+
+- Oversized messages or properties (`message_size_too_large`)
+- Merges into already-identified people (`cannot_merge_already_identified`)
+- Illegal distinct IDs (`cannot_merge_with_illegal_distinct_id`)
+- Event timestamps too far out of range (`message_timestamp_diff_too_large`)
+- Invalid heatmap data (`invalid_heatmap_data`)
+
+## Why it matters
+
+Ingestion warnings mean events are being dropped, mis-merged, or degraded on the way in – so the affected data is incomplete or inaccurate. Because the events never land cleanly, you can't fix this after the fact; you have to fix the instrumentation producing them.
+
+## Fix it manually
+
+1. Open the **Ingestion warnings** page. It groups warnings by type and shows examples of the affected events.
+2. Use the type and the examples to trace the warning back to the instrumentation that produced it.
+3. Fix how those events are sent. See [ingestion warnings](/docs/data/ingestion-warnings) for guidance on each type.
+
+## Fix it automatically with the Inbox and PostHog Code
+
+With the [Inbox](/docs/self-driving) and health checks enabled as a [signal source](/docs/self-driving/inbox/sources), the agent will:
+
+- Read the warning type and affected count from the issue.
+- Pull example offending events so it can see the exact properties involved.
+- Fix the `posthog.capture` (or autocapture) call sites that emit those events – for example, stop sending oversized or malformed properties, correct the event timestamp, or align the event name.
+- Open a PR.
+
+The issue clears once the warning stops firing.
+
+## Related
+
+- [Health checks overview](/docs/health-checks)
+- [Ingestion warnings](/docs/data/ingestion-warnings)
+- [Identifying users](/docs/product-analytics/identify)
