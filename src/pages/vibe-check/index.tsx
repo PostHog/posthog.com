@@ -42,12 +42,12 @@ function Slide({ card, slideIndex }: { card: any; slideIndex: number }) {
                     {card.Image && <div className={`${card.ImageSize || 'h-full'}`}>{card.Image}</div>}
                     <div className="flex-1">
                         <div className="max-w-sm mx-auto">
-                            <h2 className="text-3xl font-bold mb-6 text-balance">
-                                <span className="underline underline-offset-4">
+                            <h2 className="text-3xl font-bold mb-6 text-balance text-light-12">
+                                <span className="underline underline-offset-4 ">
                                     {typeof card.top === 'string' ? card.top : card.top}
                                 </span>
                             </h2>
-                            <p className="text-base text-secondary text-balance">{card.bottom}</p>
+                            <p className="text-base text-balance text-light-11">{card.bottom}</p>
                         </div>
                     </div>
                 </div>
@@ -101,7 +101,7 @@ export default function Ick() {
                 <ScrollArea className="flex-1 w-full [&>div>div]:h-full [&>div>div]:!flex [&>div>div]:flex-col [&>div>div]:py-4">
                     {!isFinalSlide && (
                         <header className="pb-4">
-                            <h1 className="text-2xl flex items-center justify-center gap-2">
+                            <h1 className="text-2xl flex items-center justify-center gap-2 text-primary dark:text-white">
                                 You'll hate <Logo className="relative -top-px" /> if...
                             </h1>
                         </header>
