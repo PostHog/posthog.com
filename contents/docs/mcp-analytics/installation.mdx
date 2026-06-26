@@ -74,11 +74,13 @@ server.tool("search_events", { /* ... */ }, async (args) => {
 
 ## Python
 
-A Python SDK ships inside the [`posthog`](/docs/libraries/python) package (the same way [`posthog.ai`](/docs/ai-engineering) does). Install it with the `mcp` extra:
+A Python SDK ships inside the [`posthog`](/docs/libraries/python) package (the same way [`posthog.ai`](/docs/ai-engineering) does), so there's nothing extra to install:
 
 ```bash
-pip install posthog[mcp]
+pip install posthog
 ```
+
+`instrument()` needs the MCP SDK at runtime, but you already have it — you built your server with `mcp` or `fastmcp`, so it's treated as a peer dependency rather than bundled. (`PostHogMCP` for custom dispatchers needs nothing beyond `posthog`.)
 
 `instrument(server, posthog_client, options?)` works with every common Python MCP server:
 
@@ -142,11 +144,11 @@ await analytics.flush()   # drain in-flight auto-capture events
 posthog.shutdown()        # flush + stop the posthog client
 ```
 
-No server object to wrap (a custom HTTP/edge dispatcher)? Use `PostHogMCP`, a `posthog` client subclass with `capture_tool_call()`, `capture_initialize()`, `prepare_tool_list()`, and `prepare_tool_call()` — the Python equivalent of [Custom servers](/docs/mcp-analytics/custom-servers).
+No server object to wrap (a custom HTTP/edge dispatcher)? Use `PostHogMCP`, a `posthog` client subclass (needs nothing beyond `posthog` — no MCP SDK) with `capture_tool_call()`, `capture_initialize()`, `prepare_tool_list()`, and `prepare_tool_call()` — the Python equivalent of [Custom servers](/docs/mcp-analytics/custom-servers).
 
-<CalloutBox icon="IconInfo" title="Python SDK is alpha" type="fyi">
+<CalloutBox icon="IconInfo" title="Python SDK is beta" type="fyi">
 
-The Python SDK is alpha and TypeScript-only features may land first. It emits the identical `$mcp_*` events documented on the [events](/docs/mcp-analytics/events) page.
+The Python SDK is in beta (pre-1.0); the API may still change before `v1`, and some TypeScript-only features may land first. It emits the identical `$mcp_*` events documented on the [events](/docs/mcp-analytics/events) page.
 
 </CalloutBox>
 

@@ -146,4 +146,4 @@ posthog.capture_initialize(client_name="claude-code", client_version="1.2.3", di
 posthog.flush()  # PostHogMCP is a posthog client — flush/shutdown it yourself
 ```
 
-`PostHogMCP(api_key, missing_capability_tool_name="get_more_tools", **posthog_kwargs)` accepts the standard `posthog` client kwargs (e.g. `host`). As in TypeScript, the wrapping-path hooks (`identify`, `context`, `intent_fallback`, `event_properties`) don't apply here — pass identity and properties on each `capture_*` call.
+`PostHogMCP(api_key, missing_capability_tool_name="get_more_tools", mcp_exception_autocapture=True, **posthog_kwargs)` accepts the standard `posthog` client kwargs (e.g. `host`). Set `mcp_exception_autocapture=False` to stop a failed tool call from emitting a `$exception` sibling. As in TypeScript, the wrapping-path hooks (`identify`, `context`, `intent_fallback`, `event_properties`) don't apply here — pass identity and properties on each `capture_*` call.
