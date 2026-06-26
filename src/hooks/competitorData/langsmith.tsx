@@ -17,7 +17,21 @@ export const langsmith = {
                 system_prompts: true,
                 trace_summarization: true,
                 llm_translation: false,
+                sentiment_classification: false,
+                privacy_mode: true,
+                agent_tracing: true,
+                prompt_management: true,
+                evaluation_datasets: true,
+                human_annotation: true,
+                session_replay: false,
+                product_analytics: false,
             },
+        },
+        session_replay: {
+            available: false,
+        },
+        product_analytics: {
+            available: false,
         },
     },
 }

@@ -51,3 +51,7 @@ Logs, audit logs, and events read access is governed by your Datadog account's d
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

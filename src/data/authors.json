@@ -660,7 +660,7 @@
         "role": "Technical Account Manager",
         "profile_id": 34069
     },
-    {
+  {
         "handle": "liam-graham",
         "name": "Liam Graham",
         "role": "Hog Poster",
@@ -676,17 +676,9 @@
         "profile_id": 45748
     },
     {
-        "handle": "anna-garcia",
-        "name": "Anna Garcia",
-        "role": "Mobile Engineer",
-        "link_type": "github",
-        "link_url": "https://github.com/turnipdabeets",
-        "profile_id": 44258
-    },
-    {
-        "handle": "ioannis-josephides",
-        "name": "Ioannis Josephides",
-        "role": "Mobile Engineer",
+        "handle": "rohit-rajpal",
+        "name": "Rohit Rajpal ",
+        "role": "Freelance Technical Writer",
         "link_type": "github",
         "link_url": "https://github.com/ioannisj",
         "profile_id": 31730
