@@ -41,20 +41,17 @@ export const mcpAnalytics = {
     overview: {
         title: 'See how agents use your MCP server',
         description:
-            'Product analytics for your MCP server. Wrap it in one line and every tool call, agent intent, and failure lands in PostHog as a normal event you can query, chart, and alert on.',
+            'Product analytics for your MCP server. Wrap it in one line and every tool call, agent intent, and failure lands in PostHog as a normal event.',
         textColor: 'text-white',
-        layout: 'columns',
+        layout: 'stacked',
     },
     // TODO (asset step): add `images` on the feature cards below.
     screenshots: {
         overview: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_dashboard_light_0907967b56.png',
             alt: 'MCP Analytics dashboard',
-            // Position absolutely (bottom-left) so the image doesn't push the title and
-            // description out of the slide — matches the columns-overview pattern session
-            // replay uses. The text block reserves the top-right via its @2xl padding.
-            imgClasses:
-                'absolute bottom-0 left-0 max-w-[95%] @2xl:max-w-[560px] rounded-tr-md overflow-hidden shadow-2xl',
+            classes: '',
+            imgClasses: 'rounded-tl-md shadow-2xl',
         },
     },
     features: [

@@ -74,7 +74,7 @@ export default function MCPAnalytics(): JSX.Element {
     const slides = createSlideConfig({
         include: ['overview', 'features', 'answers', 'docs', 'pairs-with'],
         templates: {
-            overview: 'columns',
+            overview: 'stacked',
         },
     })
 
