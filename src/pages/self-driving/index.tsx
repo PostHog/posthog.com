@@ -19,7 +19,6 @@ import {
     IconCheckCircle,
     IconCode,
     IconCompass,
-    IconEye,
     IconFlag,
     IconGraph,
     IconLock,
@@ -28,10 +27,10 @@ import {
     IconPullRequest,
     IconRefresh,
     IconRewindPlay,
+    IconSearch,
     IconShieldLock,
     IconSparkles,
     IconStack,
-    IconStar,
     IconTarget,
     IconWarning,
 } from '@posthog/icons'
@@ -181,6 +180,17 @@ const loopTabs: TabbedCarouselTab[] = [
                         </div>
                     ))}
                 </div>
+                <Callout>
+                    <Badge>Beta</Badge> On their own, raw signals are noisy. Grouped into a{' '}
+                    <Link
+                        to="/docs/self-driving/reports"
+                        state={{ newWindow: true }}
+                        className="font-semibold text-red dark:text-yellow"
+                    >
+                        report
+                    </Link>
+                    , they become a single thing you can act on.
+                </Callout>
             </TabPanel>
         ),
     },
@@ -193,10 +203,18 @@ const loopTabs: TabbedCarouselTab[] = [
         content: (
             <TabPanel title="Field intel from your product" image={LOOP_SCOUTS_IMAGE}>
                 <p className="m-0">
-                    Scouts are specialist agents that watch one surface in depth. Canonical scouts watch common
-                    patterns. Custom scouts are specific to your product.
+                    Scouts are specialist agents that watch one surface in depth.{' '}
+                    <strong className="text-primary">Canonical</strong> scouts are pre-built to watch common patterns.{' '}
+                    <strong className="text-primary">Custom</strong> scouts are specific to your product. Here's a
+                    sample of each:
                 </p>
                 <IconGroupColumns groups={scoutGroups} />
+                <Callout>
+                    <span className="inline-flex flex-wrap items-center gap-2">
+                        <Badge>Beta</Badge>
+                        We run a troop of 35 scouts on the PostHog web app.
+                    </span>
+                </Callout>
             </TabPanel>
         ),
     },
@@ -209,44 +227,42 @@ const loopTabs: TabbedCarouselTab[] = [
         content: (
             <TabPanel title="One worklist, already sorted" image={LOOP_INBOX_IMAGE}>
                 <p className="m-0">
-                    Everything that surfaces lands in one place – clustered into real issues and researched down to the
-                    file and line.
+                    The inbox is where self-driving hands work back to you. Related findings are clustered, researched,
+                    and weighed into reports, then worked in priority order:
                 </p>
-                <IconList
-                    items={[
-                        {
-                            Icon: IconTarget,
-                            color: 'text-red',
-                            text: (
-                                <>
-                                    <strong className="text-primary">Ranked by impact</strong> – P1–P3 by how many users
-                                    it hits, whether they pay, and how core the code is. Not how loud the log is.
-                                </>
-                            ),
-                        },
-                        {
-                            Icon: IconStar,
-                            color: 'text-yellow',
-                            text: (
-                                <>
-                                    <strong className="text-primary">Routed to the right person</strong> – it suggests a
-                                    reviewer from git blame, whoever last touched that code. If your name's on it, it
-                                    floats to the top.
-                                </>
-                            ),
-                        },
-                        {
-                            Icon: IconPullRequest,
-                            color: 'text-green',
-                            text: (
-                                <>
-                                    <strong className="text-primary">Fix attached</strong> – actionable reports arrive
-                                    with a pull request already open.
-                                </>
-                            ),
-                        },
-                    ]}
-                />
+                <div className="not-prose mt-4 grid grid-cols-1 gap-4 @sm:grid-cols-3">
+                    <div>
+                        <div className="flex items-center gap-1.5">
+                            <IconCode className="size-4 shrink-0 text-blue" />
+                            <span className="text-sm font-bold text-primary">Code importance</span>
+                        </div>
+                        <p className="m-0 mt-1 text-xs leading-snug text-secondary">
+                            Is the issue in a hot path like checkout, signup, or billing?
+                        </p>
+                    </div>
+                    <div>
+                        <div className="flex items-center gap-1.5">
+                            <IconPeople className="size-4 shrink-0 text-purple" />
+                            <span className="text-sm font-bold text-primary">User impact</span>
+                        </div>
+                        <p className="m-0 mt-1 text-xs leading-snug text-secondary">
+                            How many users are affected, and are they on a paid plan?
+                        </p>
+                    </div>
+                    <div>
+                        <div className="flex items-center gap-1.5">
+                            <IconWarning className="size-4 shrink-0 text-red" />
+                            <span className="text-sm font-bold text-primary">Severity</span>
+                        </div>
+                        <p className="m-0 mt-1 text-xs leading-snug text-secondary">
+                            Is the product broken for these users, or just a minor UX issue?
+                        </p>
+                    </div>
+                </div>
+                <Callout>
+                    <Badge>Beta</Badge> Reviewers are suggested from git blame (whoever last touched that bit of code).
+                    Add your own if someone else should take a look.
+                </Callout>
             </TabPanel>
         ),
     },
@@ -265,22 +281,41 @@ const loopTabs: TabbedCarouselTab[] = [
                 <IconList
                     items={[
                         {
-                            Icon: IconStack,
+                            Icon: IconSearch,
                             color: 'text-blue',
                             text: (
                                 <>
-                                    <strong className="text-primary">Carries its receipts</strong> – the source it came
-                                    from, an evidence bundle, and why PostHog acted, all on the PR.
+                                    <strong className="text-primary">Root cause analysis</strong> – it pairs the
+                                    production signal with codebase access to find the actual cause, not just the
+                                    symptom.
                                 </>
                             ),
                         },
-                        { Icon: IconShieldLock, color: 'text-purple', text: 'Sandboxed, scoped to one repo' },
-                        { Icon: IconCheckCircle, color: 'text-green', text: 'Tests run before it’s ever proposed' },
+                        {
+                            Icon: IconShieldLock,
+                            color: 'text-purple',
+                            text: (
+                                <>
+                                    <strong className="text-primary">Sandboxed execution</strong> – it clones your repo,
+                                    applies the fix, and runs your tests.
+                                </>
+                            ),
+                        },
+                        {
+                            Icon: IconCheckCircle,
+                            color: 'text-green',
+                            text: (
+                                <>
+                                    <strong className="text-primary">You review and merge</strong> – chat with the agent
+                                    to tweak it, or merge as-is (lgtm!).
+                                </>
+                            ),
+                        },
                     ]}
                 />
                 <Callout>
-                    Nothing merges without you – archive it, mark it as needing input, or merge. You only pay for PRs,
-                    never reports.
+                    P0s and P1s that are actionable usually have a PR open before you've even seen them. If a report
+                    isn't actionable, the agent triggers a research task.
                 </Callout>
             </TabPanel>
         ),
@@ -377,7 +412,7 @@ const SlackReportsRow = (): JSX.Element => {
     )
 }
 
-const fighterOptions: {
+const workSurfaces: {
     icon: IconComponent
     iconColor: string
     label: React.ReactNode
@@ -388,7 +423,7 @@ const fighterOptions: {
         icon: IconBrowser,
         iconColor: 'text-blue',
         label: <span className="font-bold text-primary">PostHog web app</span>,
-        copy: 'The main way in. Review reports, open and merge pull requests, and manage your scouts – all from the Inbox in the PostHog app.',
+        copy: 'The full product in your browser. Explore your data, review proposed work, and dig into the evidence.',
         cta: (
             <Link to="https://app.posthog.com/signup" external className="text-secondary font-semibold underline">
                 Sign up free
@@ -408,7 +443,7 @@ const fighterOptions: {
                 </span>
             </span>
         ),
-        copy: 'The same Inbox on the desktop, for driving agents hands-on. Still rolling out from a waitlist, so not everyone has access yet.',
+        copy: 'A desktop app for driving parallel agents to edit your product. The same Inbox and reports live here.',
         cta: (
             <Link to="/code" state={{ newWindow: true }} className="text-secondary font-semibold underline">
                 Join the waitlist
@@ -423,7 +458,7 @@ const fighterOptions: {
                 PostHog Slack app
             </Link>
         ),
-        copy: 'Route reports into the Slack channels each team already watches – autotagged based on the product areas they own.',
+        copy: '@PostHog brings PostHog into Slack channels. Route reports to the ones each team already watches (hedgehog mode not included).',
     },
     {
         icon: IconPlug,
@@ -449,57 +484,57 @@ const workModes: WorkMode[] = [
     {
         tag: 'Prompted',
         tagClass: 'bg-blue/15 text-blue',
-        title: 'You point it at something',
-        copy: 'Hand it a problem you’ve spotted – a report, a flaky page, a metric that dipped – and it investigates, writes the fix, and opens the PR.',
+        title: 'It builds what you spec',
+        copy: "This is what you're used to (you set the spec and the agents do the work). Prompt a task from PostHog AI, PostHog Code, or the Slack app, and agents build it.",
         guard: {
-            icon: IconCheckCircle,
-            color: 'text-green',
-            label: 'Merge is the gate',
-            copy: 'Nothing ships until you approve the diff.',
+            icon: IconStack,
+            color: 'text-blue',
+            label: 'Full product context',
+            copy: '2025: ship faster. 2026: ship better.',
         },
     },
     {
         tag: 'Reactive',
         tagClass: 'bg-orange/15 text-orange',
-        title: 'It responds',
-        copy: 'A signal fires on its own – a new error, a support ticket, a rage-click replay – and a researched report lands in your Inbox, often with a PR already attached.',
+        title: 'It acts on your data',
+        copy: 'This is what signals does. It watches the data you already have in PostHog and turns anything worth acting on into a researched report, often with a fix attached.',
         guard: {
-            icon: IconEye,
-            color: 'text-blue',
-            label: 'Replayable log',
-            copy: 'Every step it took is logged, so you can audit the path before you trust it.',
+            icon: IconBolt,
+            color: 'text-yellow',
+            label: 'Always on',
+            copy: 'Reads logs and tickets for fun. Sick, honestly.',
         },
     },
     {
         tag: 'Proactive',
         tagClass: 'bg-red/15 text-red',
-        title: 'It goes looking',
-        copy: 'Scouts wake on a schedule and dig for the slow leaks no single event reveals, then surface only what’s worth your time.',
+        title: 'It looks for work',
+        copy: "This is where it gets good. Scouts dig through your data and flag problems you haven't thought about (yet). Your product improves everywhere, every day.",
         guard: {
-            icon: IconShieldLock,
+            icon: IconRefresh,
             color: 'text-purple',
-            label: 'Sandboxed and scoped',
-            copy: 'Work happens in an isolated sandbox, one repo; your data stays in PostHog.',
+            label: 'Memory',
+            copy: 'Scouts know what your product did last summer.',
         },
     },
 ]
 
 const humanRoles: { heading: string; copy: string; image: string; alt: string }[] = [
     {
-        heading: 'You’re (still) the driver',
+        heading: "You're (still) the driver",
         copy: "Like a Waymo, a self-driving product doesn't decide where you're going (it just makes getting there easier). You choose where the product goes next.",
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/hog_head_point_b6a2ffb400.png',
         alt: 'A hedgehog gesturing toward the work',
     },
     {
         heading: 'Skip to the good part',
-        copy: 'Now streaming: every problem in your product (don’t worry, each episode ends well). Scouts sit on top of your product data, so the pattern itself is the prompt to PR.',
+        copy: 'Now streaming: every problem in your product (and every fix). Your product just started developing at a pace that felt impossible last week.',
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/hog_head_popcorn_82aa11ea69.png',
         alt: 'A hedgehog eating popcorn',
     },
     {
         heading: 'Ship like crazy',
-        copy: 'Self-driving puts the product maintenance on autopilot and leaves build mode to you. A few good people behind the wheel can outship companies 10x the size.',
+        copy: 'Self-driving puts product maintenance on autopilot. A few good people behind the wheel can outship companies 10x the size (so get building).',
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/hog_head_laptop_2afc8d8955.png',
         alt: 'A hedgehog working at a laptop',
     },
@@ -510,43 +545,39 @@ const faqItems = [
         trigger: 'What is a self-driving product?',
         content: (
             <p>
-                A product that improves itself without waiting to be told to. PostHog watches how people actually use
-                your product, finds what's broken or worth changing, writes the fix, and opens a pull request. You
-                review and merge. The "self" is autonomy from <em>instruction</em> – it doesn't need you to spot the
-                problem first – not autonomy from <em>you</em>. You're still the one who ships.
+                A product that improves itself without waiting to be prompted. PostHog watches how people actually use
+                your product, finds what's broken or worth changing, writes the fix, and opens a pull request (in a
+                never-ending loop).
             </p>
         ),
     },
     {
-        trigger: 'We’re a tiny team – is this overkill?',
+        trigger: "We're a tiny team – is this overkill?",
         content: (
             <p>
-                The opposite. The whole point is that a small team can ship like a much bigger one – Midjourney did
-                $200M in revenue with 40 people; Cursor hit $100M ARR in under a year with fewer than 20. Self-driving
-                keeps that fix-it-today, founder-mode energy at any ARR: it handles detection, instrumentation, and
-                low-risk iteration, so your best people stay on the few things that decide whether you make it. The
-                hands-on part scales; the judgment stays yours.
+                The opposite. The whole point is that a small team can ship like a much bigger one. Self-driving is
+                basically founder mode for your product (sweat the details, focus on the work, get involved where you
+                are needed).
             </p>
         ),
     },
     {
-        trigger: 'Won’t it just flood my codebase with AI slop?',
+        trigger: "Won't it just flood my codebase with AI slop?",
         content: (
             <p>
-                That’s the failure mode – a pile of code chasing thin signal. What stops it is keeping a small team on
-                strategy: self-driving handles detection, instrumentation, and low-risk iteration, but every change is a
-                pull request a human reviews and merges. Nothing ships on the agent’s say-so.
+                That's the failure mode (we're not selling you a slop-cannon). PostHog self-driving handles detection,
+                instrumentation, and low-risk iteration, but every change is a pull request a human reviews and merges.
+                The code is good because we're using the same AI models you are.
             </p>
         ),
     },
     {
-        trigger: 'Why can’t I just run this in Cursor, Claude Code, or Devin?',
+        trigger: "Why can't I just run this in Cursor, Claude Code, or Devin?",
         content: (
             <p>
-                Those are great at the coding half, but they start from a ticket and see only your codebase – no funnel,
-                no replay, no experiment result. They can’t originate work from "users are struggling here."
-                Self-driving can, because the signals live in your product data. You can still bring that context into
-                your own agent via{' '}
+                Those are great at the coding half, but they start from a ticket or prompt and see only your repo. They
+                can't originate work from vague signals like "users are struggling here." Self-driving can, because the
+                signals live in your product data. You can still bring that context into your own agent via{' '}
                 <Link to="/docs/model-context-protocol" state={{ newWindow: true }}>
                     PostHog MCP
                 </Link>
@@ -566,9 +597,8 @@ const faqItems = [
                 <Link to="/code" state={{ newWindow: true }} className="text-red dark:text-yellow font-semibold">
                     PostHog Code
                 </Link>{' '}
-                is the desktop coding agent you drive hands-on. Self-driving is what happens when you point that agent
-                at your product data and let it work on its own – the Inbox is the autopilot, Code is where you take the
-                wheel.
+                is the desktop coding agent you edit your product with. Self-driving is what happens when you point that
+                agent at your product data and let it work on its own.
             </p>
         ),
     },
@@ -576,11 +606,10 @@ const faqItems = [
         trigger: 'What are signal sources and Scouts?',
         content: (
             <p>
-                The two ways work shows up in your Inbox. <strong>Signal sources</strong> are the inputs – a new error,
-                a support ticket, a session replay, a GitHub or Linear issue – that flag something the moment it
-                happens. <strong>Scouts</strong> are proactive agents that wake on a schedule and go looking for the
-                slow leaks no single event reveals, like a retention curve sliding or rage-clicks piling up on one
-                button. Both feed the Inbox.
+                The two ways work shows up in your Inbox. <strong>Signal sources</strong> are raw inputs (like errors,
+                support tickets, and replays). They trigger a reactive investigation. <strong>Scouts</strong> are
+                proactive agents that wake on a schedule. They search for slow leaks no single event reveals (and have
+                memory across runs so they're not silly goldfish).
             </p>
         ),
     },
@@ -588,39 +617,9 @@ const faqItems = [
         trigger: 'Does it really open pull requests on its own?',
         content: (
             <p>
-                Yes. When a fix is clear,{' '}
-                <Link
-                    to="/code"
-                    state={{ newWindow: true }}
-                    className="text-red dark:text-yellow font-semibold hover:underline"
-                >
-                    PostHog Code
-                </Link>{' '}
-                – the same coding agent behind the{' '}
-                <Link
-                    to="/slack"
-                    state={{ newWindow: true }}
-                    className="text-red dark:text-yellow font-semibold hover:underline"
-                >
-                    Slack app
-                </Link>{' '}
-                – clones your repo into a sandbox, makes the change, runs your tests, and opens a real PR with a written
-                description and a suggested reviewer. It even babysits CI until the PR is mergeable. What it doesn't do
-                is merge it. That part's yours.
-            </p>
-        ),
-    },
-    {
-        trigger: 'Will it merge anything without me?',
-        content: (
-            <p>
-                No. Nothing ships without a human hitting merge. The watch-and-propose stages run continuously, but
-                anything that changes your product waits for your review – you set the guardrails, you read the diff,
-                and every step the agent took is logged so you can check its reasoning before you trust it. See{' '}
-                <Link to="/docs/start-here/guardrails" state={{ newWindow: true }}>
-                    guardrails
-                </Link>{' '}
-                for the full breakdown.
+                You betcha. When a fix is well-researched and clear, an agent opens a real PR with a written description
+                and a suggested reviewer. It even babysits CI until the PR is mergeable. What it doesn't do is merge it
+                (that's your job).
             </p>
         ),
     },
@@ -628,11 +627,8 @@ const faqItems = [
         trigger: 'What does it cost?',
         content: (
             <p>
-                Self-driving is in open paid beta. Scouts, reports, and the Inbox are all included – there's no separate
-                subscription for the agents doing the watching. You pay per pull request, priced by how serious the
-                issue is – a critical production fix costs more than a tidy-up. Reports without a fix are free, and
-                there's a free tier to start. You're paying for outcomes, not tokens: if it doesn't ship you something
-                worth merging, you don't pay for it. See{' '}
+                Self-driving is in open paid beta. Scouts, reports, and the Inbox are all free. You pay a flat fee per
+                pull request (valuable work actually completed) and there's a free tier to start. See{' '}
                 <Link to="/pricing" state={{ newWindow: true }} className="text-red dark:text-yellow font-semibold">
                     pricing
                 </Link>{' '}
@@ -644,10 +640,9 @@ const faqItems = [
         trigger: 'What can it watch, and can I control it?',
         content: (
             <p>
-                Anything you already send to PostHog – errors, session replays, logs, funnels, flags, experiments,
-                revenue – plus external sources like GitHub issues, Linear, Zendesk, and your support inbox. The more of
-                your product PostHog can see, the better the fixes get. You choose which sources are connected and tune
-                what the agents pay attention to. If something's noise, tell it once and it remembers.
+                Anything you already send to PostHog (errors, session replays, logs, funnels, flags, experiments,
+                revenue) plus external sources like GitHub issues, Linear, Zendesk. You can toggle them on and off at
+                any time to control costs.
             </p>
         ),
     },
@@ -655,11 +650,11 @@ const faqItems = [
         trigger: 'How does setup work, and what does the wizard do?',
         content: (
             <p>
-                Setup is a single command. The wizard reads your codebase and product, detects the services you run, and
-                enables only the sources and scouts relevant to what it finds. It checks your GitHub connection, that
-                the PostHog SDK is installed, and that AI data processing is approved, then hands back a setup report
-                showing exactly what was and wasn't enabled, and why. Your first reports land in ~20–30 minutes – just
-                enough time to build the cache and ingest from your first sources.
+                Setup is a single command with the PostHog wizard. The wizard reads your codebase and product, detects
+                the services you run, and enables only the sources and scouts relevant to what it finds. It checks your
+                GitHub connection, that the PostHog SDK is installed, and that AI data processing is approved, then
+                hands back a setup report showing exactly what was and wasn't enabled, and why. Your first reports land
+                in ~20–30 minutes – just enough time to build the cache and ingest from your first sources.
             </p>
         ),
     },
@@ -772,7 +767,7 @@ export default function SelfDrivingPage(): JSX.Element {
                         <p className="m-0 text-sm text-secondary">
                             Every change ships with the instrumentation to measure it – the agent adds the events,
                             feature flags, and experiments as it goes. After it merges, PostHog checks whether the
-                            metric actually moved. If it didn’t, that’s a new signal (and the change can be rolled
+                            metric actually moved. If it didn't, that's a new signal (and the change can be rolled
                             back).
                         </p>
                         <Link
@@ -780,7 +775,7 @@ export default function SelfDrivingPage(): JSX.Element {
                             state={{ newWindow: true }}
                             className="mt-4 inline-flex flex-wrap items-center gap-x-2 gap-y-1 text-sm font-semibold"
                         >
-                            {['Signal', 'Report', 'Ship', 'Measure'].map((step, i) => (
+                            {['Signal', 'Research', 'Report', 'PR', 'Ship', 'Measure'].map((step, i) => (
                                 <React.Fragment key={step}>
                                     {i > 0 && <IconArrowRight className="size-4 shrink-0 text-secondary" />}
                                     <span className="text-primary">{step}</span>
@@ -872,12 +867,9 @@ export default function SelfDrivingPage(): JSX.Element {
                     <h3>
                         Where you <Highlight>work with it</Highlight>
                     </h3>
-                    <p>
-                        Self-driving runs on its own, but you stay in control. The same Inbox and agent show up across
-                        four surfaces – use whichever fits how you work.
-                    </p>
+                    <p>The same Inbox and agents show up across four surfaces (everywhere you go, there's PostHog).</p>
                     <div className="not-prose grid @md/reader-content:grid-cols-2 gap-x-6 gap-y-4 my-6">
-                        {fighterOptions.map(({ icon: Icon, iconColor, label, copy, cta }, index) => (
+                        {workSurfaces.map(({ icon: Icon, iconColor, label, copy, cta }, index) => (
                             <div key={index}>
                                 <p className="m-0 inline-flex items-center gap-2 font-bold text-base">
                                     <Icon className={`size-5 shrink-0 ${iconColor}`} />
@@ -901,7 +893,7 @@ export default function SelfDrivingPage(): JSX.Element {
                         The opposite of a <Highlight>quick call</Highlight>
                     </h3>
                     <p>
-                        Self-driving isn’t only autonomous. Some fixes are better hashed out by three people in a
+                        Self-driving isn't only autonomous. Some fixes are better hashed out by three people in a
                         thread.
                     </p>
                     <div className="not-prose grid @md/reader-content:grid-cols-2 gap-4 my-6">
@@ -934,8 +926,10 @@ export default function SelfDrivingPage(): JSX.Element {
                     {/* You prompt it → it works on its own */}
                     <div className="not-prose my-6">
                         <div className="mb-2 flex items-center justify-between text-[11px] font-bold uppercase tracking-wide text-secondary">
-                            <span>You prompt it</span>
-                            <span>It works on its own</span>
+                            <span>building with AI</span>
+                            <span>
+                                building <em>with</em> AI
+                            </span>
                         </div>
                         <div className="mb-4 h-1 rounded-full bg-gradient-to-r from-blue to-red" />
                         <div className="grid gap-3 @md/reader-content:grid-cols-3">
@@ -953,8 +947,8 @@ export default function SelfDrivingPage(): JSX.Element {
                                         </span>
                                         <p className="m-0 mt-2 text-base font-bold">{mode.title}</p>
                                         <p className="m-0 mt-1 text-sm text-secondary">{mode.copy}</p>
-                                        <p className="m-0 mt-3 flex items-start gap-1.5 border-t border-primary pt-3 text-xs text-secondary">
-                                            <GuardIcon className={`size-3.5 shrink-0 mt-px ${mode.guard.color}`} />
+                                        <p className="m-0 mt-3 flex items-start gap-1.5 border-t border-primary pt-3 text-sm text-secondary">
+                                            <GuardIcon className={`size-4 shrink-0 mt-0.5 ${mode.guard.color}`} />
                                             <span>
                                                 <strong className="text-primary">{mode.guard.label}</strong> –{' '}
                                                 {mode.guard.copy}
@@ -968,7 +962,7 @@ export default function SelfDrivingPage(): JSX.Element {
 
                     {/* So, what's left for you? */}
                     <h3>
-                        So, what’s <Highlight>left for you?</Highlight>
+                        So, what's <Highlight>left for you?</Highlight>
                     </h3>
                     <p>
                         Work lands while you sleep. You wake up to diffs and reports waiting for review. <em>Then</em>{' '}
