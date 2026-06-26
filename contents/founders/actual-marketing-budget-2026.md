@@ -80,7 +80,7 @@ If you want to learn more about how we implement these things in practice, it’
 
 ## What we’ve changed recently
 
-In the last 9 months, we've roughly doubled the marketing teams, including hiring many first people in their role such as influencer manager, dev advocate for YouTube, copywriter, and social media manager (and we've gone form 1 to 4 product marketers). 
+In the last 9 months, we've roughly doubled the marketing teams, including hiring many first people in their role such as influencer manager, dev advocate for YouTube, copywriter, and social media manager (and we've gone from 1 to 4 product marketers). 
 
 An extremely obvious observation - you need to hire people to be able to spend more money (unless you are keen to just set money on fire). You can't just turn up the magic marketing budget dial and expect results. For example, we did influencer marketing as a side project before hiring, but it would have been pointless to increase the budget for the sake of it even though it was 'working'. Events turned out to be  very difficult to do on the side, so we didn't spend anything on them until we hired our first person there. 
 
