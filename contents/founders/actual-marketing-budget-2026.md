@@ -19,7 +19,7 @@ So how much does a typical scale-up [like PostHog](/about) spend on marketing. A
 
 “But Charles, you naive idiot, surely competitors will use this information against you?”
 
-Um, sure I guess? But especially if you’re into product-led growth (like we are), how you spend marketing $ seems pretty far down the list of competitive advantages. We're open source and we already tell everyone [our strategy](/handbook] and [what we’re going to build next](/roadmap). That doesn’t seem to have hurt us so far. 
+Um, sure I guess? But especially if you’re into product-led growth (like we are), how you spend marketing $ seems pretty far down the list of competitive advantages. We're open source and we already tell everyone [our strategy](/handbook) and [what we’re going to build next](/roadmap). That doesn’t seem to have hurt us so far. 
 
 By sharing some of this info, I’m hoping it’ll help others as a data point. **I am not saying this is the best way to spend your marketing budget.** I have no idea! That’s the point!! But I’m hoping _maybe_ someone will see this and tell us how we could do better...
 
