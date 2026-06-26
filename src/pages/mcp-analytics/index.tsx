@@ -9,14 +9,13 @@ const PRODUCT_HANDLE = 'mcp_analytics'
 
 // MCP analytics is gated behind the `mcp-analytics` early access feature in the app. Logins
 // aren't shared between posthog.com and the app, so we can't enroll the visitor's website
-// identity here — instead the opt-in links to the early access feature in the app, where the
-// signed-in user can join the beta. See src/components/EarlyAccessOptIn/README.md.
+// identity here — instead the opt-in links to the app, where the signed-in user can join the
+// beta. See src/components/EarlyAccessOptIn/README.md.
 //
-// This is the canonical URL for the "MCP Analytics" early access feature (project 2, where
-// PostHog dogfoods its own site). It's currently in `concept` stage, gated to the PostHog Team
-// cohort. When the beta opens to everyone, swap this for the public early-access surface.
-const EARLY_ACCESS_URL =
-    'https://us.posthog.com/early_access_features/019ecd58-7e9b-0000-60b6-98b487153c0e'
+// This points at the public feature previews surface (anchored to the MCP Analytics feature),
+// where any signed-in user can opt in — not the internal `/early_access_features/<id>`
+// management page, which is only accessible to the PostHog team.
+const EARLY_ACCESS_URL = 'https://us.posthog.com/settings/user-feature-previews#mcp-analytics'
 
 export default function MCPAnalytics(): JSX.Element {
     // Get content data from multiple directories

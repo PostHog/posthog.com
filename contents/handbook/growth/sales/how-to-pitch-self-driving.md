@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-This is a living page for how we pitch PostHog as a self-driving product. We're still early, so treat this as a starting point and iterate on it as we practice the pitch and learn what lands.
+This is a living page for how we pitch PostHog as a self-driving product. It covers the core pitch, how to run it, and a [reverse demo](#the-reverse-demo) format that lets the customer experience self-driving on their own data. We're still early, so treat this as a starting point and iterate on it as we practice the pitch and learn what lands.
 
 ### The core pitch
 
@@ -28,6 +28,31 @@ When the customer starts planning their instrumentation rollout unprompted and i
 - **Draw the line from data to PR.** Walk through it: data goes to signals, signals to an agent in a sandbox, and the agent to PRs that ship improvements. Let them follow the chain rather than asserting the conclusion.
 - **Land the flywheel.** Make sure they leave understanding that more data means better signals means better PRs. This is what turns it from a feature into a reason to instrument everything.
 - **Let them sequence the rollout.** The strongest outcome is the customer proposing their own instrumentation audit. When they get there, help them plan it, since that's the start of the flywheel.
+
+### The reverse demo
+
+A [reverse demo](https://www.clay.com/blog/reverse-demo) (a term Clay recently popularized) flips the usual script: instead of you driving a polished demo environment, the customer drives their own data. It's a faster path to the aha moment because the value shows up in their product, not a sandbox account.
+
+The honest catch for us is that a reverse demo only works once there's enough clean data in PostHog for the agent to act on. Clay can have someone build a lead list on the first call before they're even a customer; we can't conjure signals out of an empty project. That makes the reverse demo a great fit for existing customers who already have the data flowing (a natural play for TAMs), and a tougher one for prospects who haven't connected anything yet (TAEs will usually need to get data flowing first, see the pre-call prep below).
+
+#### Pre-call prep
+
+The whole demo depends on there being real signals to work from, so set that up before the call:
+
+- Ask them to turn on error tracking and session replays for a window of time ahead of the call, so the agent has fresh, real signals to act on by the time you meet.
+- Have them get PostHog Code downloaded and their GitHub and PostHog connected, so they can kick off a PR live.
+- Frame the cost honestly: offer to credit any usage on errors and replays during the demo window, since you need them on to show it at its best, and they can turn them back off after. If it wows them, they'll want to keep them on anyway, and that's the flywheel starting.
+
+#### Running it
+
+Let them drive the whole way. You narrate, they click.
+
+1. Have them open the PostHog Code inbox.
+2. Walk them through what they're seeing in the reports and PRs tabs, using their own data.
+3. Have them pick a report to inspect and kick off a PR from it themselves.
+4. Explain the self-driving part: they can set it up to handle bugfix and maintenance PRs automatically, while humans still drive product decisions and new features. (This is the same line as "robots do maintenance, humans do creative work" below, made concrete.)
+
+Because they're looking at their own product the whole time, the conclusion lands on its own, which is exactly the same dynamic that makes the core pitch work.
 
 ### How to frame it
 

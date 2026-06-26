@@ -10,7 +10,7 @@ availability:
 
 Alerts enable you to monitor your [insights](/product-analytics) and get notified when something important changes. You can set fixed thresholds (e.g., notify me when unique visitors exceed 5,000) or use [anomaly detection](#anomaly-detection) to automatically flag unusual patterns in your data.
 
-Currently, alerts are supported on all [trends](/docs/product-analytics/trends).
+Alerts are supported on [trends](/docs/product-analytics/trends) and [SQL (HogQL)](/docs/sql) insights.
 
 ## How to create an alert
 
@@ -120,7 +120,7 @@ PostHog AI can create alerts on existing insights or generate new trend insights
 
 <CalloutBox icon="IconInfo" title="Note" type="fyi">
 
-PostHog AI can only create alerts on [trends](/docs/product-analytics/trends). Other insight types like funnels and retention don't support alerts.
+PostHog AI can only create alerts on [trends](/docs/product-analytics/trends) and [SQL (HogQL)](/docs/sql) insights. Other insight types like funnels and retention don't support alerts.
 
 </CalloutBox>
 
@@ -170,7 +170,8 @@ Instead of setting a fixed threshold, anomaly detection uses statistical algorit
 
 ### Creating an anomaly detection alert
 
-1. Open an existing [trend insight](/docs/product-analytics/trends) or create a new one.
+1. Open an existing [trend insight](/docs/product-analytics/trends) or [SQL insight](/docs/sql), or create a new one.
+   - For SQL insights, use **last row** or **first row** evaluation mode. Anomaly detection isn't supported with **any row** evaluation because those rows represent individual entities, not a time series.
 2. Click **Actions** in the sidebar and select **Alerts**, then click **New alert**.
 3. Under alert type, select **Anomaly detection** instead of a threshold condition.
 4. Choose a **detector** (see [available detectors](#available-detectors) below).

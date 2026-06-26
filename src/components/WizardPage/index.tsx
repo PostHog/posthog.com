@@ -202,6 +202,27 @@ function GetStarted(): JSX.Element {
     )
 }
 
+function SelfDriving(): JSX.Element {
+    return (
+        <div className="not-prose border border-border rounded-md p-5 bg-accent/40 my-6">
+            <p className="text-sm font-semibold mb-2 opacity-70">Open beta</p>
+            <p className="mb-3">
+                Once PostHog is installed and capturing events, the wizard can turn on{' '}
+                <Link to="/docs/self-driving" state={{ newWindow: true }} className="font-bold hover:opacity-75">
+                    self-driving
+                </Link>
+                . A self-driving product can prompt itself: PostHog turns your product data into signals, and agents act
+                on those signals to ship improvements – all inside the guardrails you set.
+            </p>
+            <p className="mb-4">
+                The self-driving setup enables your signal sources, sets up your scouts, and hands you a link to your
+                inbox, where reports land ranked by priority with a pull request ready to review.
+            </p>
+            <WizardCommand command="self-driving" latest={false} slim />
+        </div>
+    )
+}
+
 function ExplainerVideo(): JSX.Element {
     return (
         <div className="not-prose">
@@ -252,6 +273,12 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         kind: 'flow',
         props: [],
         Editor: () => <SupportedFrameworks />,
+    },
+    {
+        name: 'SelfDriving',
+        kind: 'flow',
+        props: [],
+        Editor: () => <SelfDriving />,
     },
     {
         name: 'ExplainerVideo',

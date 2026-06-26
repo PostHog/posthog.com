@@ -71,3 +71,7 @@ Incremental and append-only syncs aren't available because Cloudflare's v4 REST 
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

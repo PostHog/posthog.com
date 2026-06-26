@@ -46,3 +46,7 @@ The `conversations` table uses the Dixa Exports API, which is rate limited to 10
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

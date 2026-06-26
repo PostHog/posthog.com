@@ -1,5 +1,5 @@
 import { GatsbyNode } from 'gatsby'
-import fetch from 'node-fetch'
+
 import qs from 'qs'
 import authors from '../../src/data/authors.json'
 

@@ -98,7 +98,7 @@ We send a short, founder-focused newsletter once per month to all program partic
 
 ## Credit usage
 
-Credits can be used for almost all PostHog products and add-ons, including [platform packages](/platform-packages).
+Credits can be used for almost all PostHog tools and add-ons, including [platform packages](/platform-packages).
 
 -   **Startups**: ❌ Cannot use credits toward a BAA due to legal risk.
 -   **YC teams**: ✅ Can use credits for a BAA under the Boost plan.

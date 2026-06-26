@@ -64,6 +64,10 @@ Data is partitioned by the `created_at` field using monthly partitions.
 
 <SourceParameters />
 
+## Supported tables
+
+<SourceTables />
+
 ## Troubleshooting
 
 ### 403 Forbidden error at connection time
