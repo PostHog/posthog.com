@@ -48,3 +48,7 @@ You can see details and progress in the data pipelines [sources tab](https://app
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

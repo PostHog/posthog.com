@@ -57,3 +57,7 @@ The App API list endpoints sync via full refresh, and the webhook-backed event t
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

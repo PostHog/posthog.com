@@ -1,0 +1,47 @@
+---
+title: Missing pageleave events
+sidebar: Docs
+showTitle: true
+---
+
+The missing pageleave events check fires when your project sends `$pageview` events but no `$pageleave` events. PostHog uses the pair to measure how long people stay on a page.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_49_21_883_Z_cc950bcef7.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_49_17_151_Z_c31cc5ea92.png"
+    alt="Missing pageleave events check in the Health checks section in the PostHog app"
+    classes="rounded"
+/>
+
+## What this check looks for
+
+Once a day, the check looks back over the **last 30 days**. If it sees `$pageview` events but zero `$pageleave` events, it raises a **warning**.
+
+## Why it matters
+
+Missing `$pageleave` breaks bounce rate, session duration, and scroll-depth metrics in web analytics. It usually means pageleave capture is disabled in the SDK, so these reports will be empty or wrong even though pageviews look fine.
+
+## Fix it manually
+
+The fix is almost always on the SDK side:
+
+1. Open the **Web analytics health** page.
+2. Make sure you're on a recent `posthog-js` with pageview autocapture enabled – it emits `$pageleave` automatically when someone navigates away.
+3. If you capture pageviews manually (`capture_pageview: false`), add a matching `$pageleave` capture on route changes and page unload.
+
+## Fix it automatically with the Inbox and PostHog Code
+
+With the [Inbox](/docs/self-driving) and health checks enabled as a [signal source](/docs/self-driving/inbox/sources), the agent will:
+
+- Confirm the gap in your data (`$pageview` events present, `$pageleave` absent).
+- Locate your `posthog.init` call and ensure pageview autocapture is enabled.
+- If pageviews are captured manually, add a matching `$pageleave` capture on navigation.
+- Open a PR.
+
+The issue resolves on the next run once `$pageleave` events arrive.
+
+## Related
+
+- [Health checks overview](/docs/health-checks)
+- [Configuring pageview and pageleave capture](/docs/libraries/js/config)
+- [Missing web vitals](/docs/health-checks/web-vitals)

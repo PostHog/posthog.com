@@ -45,3 +45,7 @@ The `calls` table only syncs the last 365 days of data on the initial sync.
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

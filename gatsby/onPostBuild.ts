@@ -1,7 +1,8 @@
 import chromium from 'chrome-aws-lambda'
 import path from 'path'
 import fs from 'fs'
-import fetch from 'node-fetch'
+import nodeFetch from 'node-fetch'
+
 import { GatsbyNode } from 'gatsby'
 import pLimit from 'p-limit'
 import qs from 'qs'
@@ -100,7 +101,7 @@ const createOGImages = async (data) => {
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
     const fontDir = path.resolve(__dirname, '../fonts')
     if (!fs.existsSync(fontDir)) fs.mkdirSync(fontDir)
-    const res = await fetch('https://d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQVF.woff', {
+    const res = await nodeFetch(process.env.CLOUDFRONT_FONT_URL, {
         headers: {
             Origin: 'https://posthog.com',
         },
@@ -767,10 +768,10 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter
         }
     `)
 
+    await createOrUpdateStrapiPosts(data.allMDXPosts.nodes, data.allRoadmap.nodes)
+
     console.log('Creating OG images')
     await createCareersOG()
     await createOGImages(data)
     console.log('Finished creating OG images')
-
-    await createOrUpdateStrapiPosts(data.allMDXPosts.nodes, data.allRoadmap.nodes)
 }

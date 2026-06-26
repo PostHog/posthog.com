@@ -50,3 +50,7 @@ Once the syncs are complete, you can start using Twilio data in PostHog.
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

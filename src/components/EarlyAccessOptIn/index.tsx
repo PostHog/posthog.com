@@ -15,11 +15,12 @@ const DEFAULT_LABELS: Record<EarlyAccessState, string> = {
 
 export interface EarlyAccessOptInProps {
     /**
-     * URL of the early access feature in the PostHog app (e.g. an
-     * `/early_access_features/{id}` page). This MUST point at the app, not a local
-     * enrollment call: logins are not shared between posthog.com and the app, so the
-     * visitor's website identity is anonymous and enrolling it here would be meaningless.
-     * The signed-in user opts into the beta in the app instead.
+     * URL of the early access feature in the PostHog app — typically the public feature
+     * previews surface (e.g. `/settings/user-feature-previews#<feature>`), where any
+     * signed-in user can opt in. This MUST point at the app, not a local enrollment call:
+     * logins are not shared between posthog.com and the app, so the visitor's website
+     * identity is anonymous and enrolling it here would be meaningless. The signed-in user
+     * opts into the beta in the app instead.
      */
     to: string
     /**
