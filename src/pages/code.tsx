@@ -1325,54 +1325,6 @@ const SlackAppCallout = () => {
     )
 }
 
-const SelfDrivingCallout = () => {
-    return (
-        <section className="relative mb-12 @2xl:mb-20 px-4 @xl:px-8">
-            <div className="border border-primary rounded-md bg-accent overflow-hidden">
-                <div className="p-6 @2xl:p-8 grid @2xl:grid-cols-2 gap-6 @2xl:gap-10">
-                    <div>
-                        <p className="text-sm font-semibold uppercase tracking-wide text-secondary mb-2">
-                            The bigger picture
-                        </p>
-                        <h2 className="text-2xl font-bold mb-2">Code is how self-driving ships</h2>
-                        <p className="mb-4">
-                            Code is the agent that turns signals into pull requests. Self-driving is the whole loop
-                            around it – scouts watch your data, signals cluster into reports, and solutions land in your
-                            inbox just in time.
-                        </p>
-                        <OSButton asLink to="/self-driving" state={{ newWindow: true }} variant="primary" size="md">
-                            How self-driving works
-                        </OSButton>
-                    </div>
-                    <ul className="space-y-2">
-                        <li className="relative pl-5">
-                            <IconCheck className="size-4 text-green absolute left-0 top-1" />
-                            Scouts watch your data on a schedule
-                        </li>
-                        <li className="relative pl-5">
-                            <IconCheck className="size-4 text-green absolute left-0 top-1" />
-                            Signals cluster into one evidenced report
-                        </li>
-                        <li className="relative pl-5">
-                            <IconCheck className="size-4 text-green absolute left-0 top-1" />
-                            Solutions land in your inbox as PRs
-                        </li>
-                        <li className="relative pl-5">
-                            <IconCheck className="size-4 text-green absolute left-0 top-1" />
-                            PostHog checks whether the fix worked
-                        </li>
-                    </ul>
-                </div>
-                <img
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/self_driving_banner_fde531c7fb.png"
-                    alt="Self-driving products on PostHog"
-                    className="w-full block"
-                />
-            </div>
-        </section>
-    )
-}
-
 const TLDR = () => {
     return (
         <section className="relative mb-8 @2xl:mb-12 px-4 @xl:px-8">
@@ -1705,8 +1657,6 @@ export default function CodePage() {
                         <TableStakes />
 
                         <TLDR ready={postHogWayDone} />
-
-                        <SelfDrivingCallout />
 
                         <SlackAppCallout />
 

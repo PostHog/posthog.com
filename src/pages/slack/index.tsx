@@ -846,8 +846,7 @@ export default function SlackAppPage(): JSX.Element {
                         <Link to="/self-driving" state={{ newWindow: true }}>
                             Self-driving
                         </Link>{' '}
-                        is the bigger loop around it – scouts watch your data, reports cluster the signals, and
-                        solutions land in your inbox before you’ve filed the ticket.
+                        is the bigger loop around it.
                     </p>
                     <div
                         id="try"
