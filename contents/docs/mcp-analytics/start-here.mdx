@@ -1,5 +1,5 @@
 ---
-title: Getting started with MCP analytics
+title: Getting started with MCP Analytics
 hideRightSidebar: true
 contentMaxWidthClass: max-w-5xl
 ---
@@ -9,13 +9,13 @@ import { IconGraph, IconWarning, IconAIText, IconWrench, IconPlug } from '@posth
 import OSButton from 'components/OSButton'
 import CalloutBox from 'components/Docs/CalloutBox'
 
-<CalloutBox icon="IconInfo" title="MCP analytics is in alpha" type="fyi">
+<CalloutBox icon="IconInfo" title="MCP Analytics is in alpha" type="fyi">
 
 `@posthog/mcp` is published as a `0.1.x` release on npm. We're building it in public – the event shape, options, and tracing behavior may still change before `1.0`. Pin a specific version and don't depend on it for production reporting yet. A Python SDK and a `npx @posthog/wizard mcp-analytics add` installer are on the roadmap.
 
 </CalloutBox>
 
-<QuestLog firstSpeechBubble="Let's instrument your MCP server!" lastSpeechBubble="Time to ship MCP analytics!">
+<QuestLog firstSpeechBubble="Let's instrument your MCP server!" lastSpeechBubble="Time to ship MCP Analytics!">
 
 <QuestLogItem
     title="Add @posthog/mcp to your MCP server"
@@ -23,7 +23,7 @@ import CalloutBox from 'components/Docs/CalloutBox'
     icon="IconPlug"
 >
 
-MCP analytics gives you visibility into how AI agents actually use the MCP server you ship. With one wrapper call you can track:
+MCP Analytics gives you visibility into how AI agents actually use the MCP server you ship. With one wrapper call you can track:
 
 - 🛠️ Every tool call (parameters, response, duration, errors)
 - 🎯 Agent intent – the *why* behind each call, not just the *what*
@@ -87,7 +87,7 @@ See every event the SDK emits
     icon="IconAIText"
 >
 
-The single most useful signal in MCP analytics is **intent**: the user goal that led the agent to call this tool. The SDK injects a required `context` argument into every tool's schema and captures it as `$mcp_intent`. Your tool implementation never sees it.
+The single most useful signal in MCP Analytics is **intent**: the user goal that led the agent to call this tool. The SDK injects a required `context` argument into every tool's schema and captures it as `$mcp_intent`. Your tool implementation never sees it.
 
 ```ts
 instrument(server, posthog, {
@@ -120,7 +120,7 @@ Learn about intent capture
     icon="IconLineGraph"
 >
 
-Every event is a normal PostHog event, so insights, dashboards, alerts, and SQL all work without further setup – and the preview [MCP analytics view](/docs/mcp-analytics) gives you the most useful cuts out of the box. The four queries we suggest building (or reading straight from the dashboard) first:
+Every event is a normal PostHog event, so insights, dashboards, alerts, and SQL all work without further setup – and the preview [MCP Analytics view](/docs/mcp-analytics) gives you the most useful cuts out of the box. The four queries we suggest building (or reading straight from the dashboard) first:
 
 - ### <IconGraph className="text-blue w-7 -mt-1 inline-block"/> Top tools per server
   Where is your agent traffic concentrated? Which tools earn their keep?
@@ -139,7 +139,7 @@ The tool quality tab surfaces error rate and latency percentiles per tool, with 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_tool_quality_light_f91f27f6e1.png"
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_tool_quality_dark_add2659eaa.png"
-  alt="MCP analytics tool quality tab showing calls and errors, success rate, latency percentiles, and a per-tool table"
+  alt="MCP Analytics tool quality tab showing calls and errors, success rate, latency percentiles, and a per-tool table"
   classes="rounded"
 />
 
@@ -233,7 +233,7 @@ Privacy & redaction
 That's it. You're ready to ship `@posthog/mcp` to production agents – within the alpha caveats above.
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/installation">
-Install MCP analytics
+Install MCP Analytics
 </OSButton>
 
 </QuestLogItem>
