@@ -42,3 +42,7 @@ Once the syncs are complete, you can start using Delighted data in PostHog.
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

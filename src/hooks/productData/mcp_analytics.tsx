@@ -27,6 +27,9 @@ export const mcpAnalytics = {
     color: 'blue',
     colorSecondary: 'sky-blue',
     category: 'analytics',
+    // Wizard install (`npx @posthog/wizard mcp-analytics`) ships via a context-mill
+    // release. Flip to `true` once that release is live; 'In development' until then.
+    wizardSupport: 'In development',
     // Alpha, gated behind the `mcp-analytics` early access feature. 'beta' renders the badge on
     // the overview slide and keeps the product clickable in nav (only 'WIP' is disabled).
     status: 'beta',
@@ -64,7 +67,8 @@ export const mcpAnalytics = {
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_activity_feed_light_197cb57f3c.png',
-                    srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_activity_feed_dark_e795d95547.png',
+                    srcDark:
+                        'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_activity_feed_dark_e795d95547.png',
                     alt: 'MCP tool call activity feed',
                 },
             ],
@@ -79,7 +83,8 @@ export const mcpAnalytics = {
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_card_intent_light_701844569c.png',
-                    srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_card_intent_dark_1b033bf1dc.png',
+                    srcDark:
+                        'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_card_intent_dark_1b033bf1dc.png',
                     alt: 'Agent intent captured for each tool call in a session',
                 },
             ],
@@ -94,7 +99,8 @@ export const mcpAnalytics = {
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_card_advertised_light_2e98fb854f.png',
-                    srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_card_advertised_dark_b189093a50.png',
+                    srcDark:
+                        'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_card_advertised_dark_b189093a50.png',
                     alt: 'Per-tool call volume and reliability table',
                 },
             ],
@@ -109,7 +115,8 @@ export const mcpAnalytics = {
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_card_clients_light_4a22b61f07.png',
-                    srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_card_clients_dark_42dc6cf72c.png',
+                    srcDark:
+                        'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_card_clients_dark_42dc6cf72c.png',
                     alt: 'Share of MCP calls by client',
                 },
             ],
@@ -124,7 +131,8 @@ export const mcpAnalytics = {
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_sessions_light_bdd1eb84cb.png',
-                    srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_sessions_dark_d5b4aa4577.png',
+                    srcDark:
+                        'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_sessions_dark_d5b4aa4577.png',
                     alt: 'MCP session timeline stepping through tool calls',
                 },
             ],
@@ -139,7 +147,8 @@ export const mcpAnalytics = {
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_missing_capability_light_f9864cae92.png',
-                    srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_missing_capability_dark_aac81d58c5.png',
+                    srcDark:
+                        'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_missing_capability_dark_aac81d58c5.png',
                     alt: 'Missing capabilities broken down by client',
                 },
             ],

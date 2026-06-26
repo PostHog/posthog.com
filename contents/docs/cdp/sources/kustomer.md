@@ -52,3 +52,7 @@ All Kustomer tables are full refresh only. Kustomer's GET list endpoints have no
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

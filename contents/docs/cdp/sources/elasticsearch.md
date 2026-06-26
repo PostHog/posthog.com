@@ -55,3 +55,7 @@ Elasticsearch uses **full refresh** sync only. Each sync re-reads the entire ind
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

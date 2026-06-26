@@ -85,6 +85,7 @@ Event triggers are supported on the following SDKs:
 - **Web** - posthog-js 1.186.0+
 - **iOS** - 3.48.0+
 - **Android** - 3.40.1+
+- **React Native** - 4.52.0+
 - **Flutter** - 5.25.0+
 
 > On mobile platforms, there's no URL or in-memory pre-buffer. Recording starts when the matching event is captured and continues for the rest of the session. A new session re-arms the trigger and requires a fresh matching event.
@@ -234,6 +235,7 @@ Supported on the following SDKs:
 - **Web:** posthog-js 1.291.0+
 - **iOS:** 3.53.0+
 - **Android:** 3.44.0+
+- **React Native:** 4.52.0+
 - **Flutter:** 5.24.3+
 
 <ProductScreenshot
@@ -299,9 +301,9 @@ This mode is **more accurate** for filtering out short sessions, especially on s
 - **Use legacy mode** if you want to capture as much session data as possible and are okay with potentially missing early parts of sessions after page refreshes
 - **Use strict mode** if you want to ensure you only record sessions where users actually spend the minimum duration on a single page, accepting that you may miss more bouncing users
 
-### iOS, Android, and Flutter behavior
+### Mobile behavior
 
-On iOS, Android, and Flutter, minimum duration is enforced using **buffer length**, similar to web strict mode:
+On mobile, minimum duration is enforced using **buffer length**, similar to web strict mode:
 
 - Snapshots are buffered, and PostHog checks the duration of buffered replay data (from the oldest to newest buffered snapshot)
 - Recording starts sending only after that buffered duration reaches the configured minimum duration
