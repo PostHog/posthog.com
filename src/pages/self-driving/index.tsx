@@ -16,21 +16,24 @@ import {
     IconAtSign,
     IconBolt,
     IconBrowser,
-    IconChat,
     IconCheckCircle,
     IconCode,
+    IconCompass,
     IconEye,
+    IconFlag,
+    IconGraph,
     IconLock,
     IconPeople,
     IconPlug,
     IconPullRequest,
     IconRefresh,
-    IconSearch,
+    IconRewindPlay,
     IconShieldLock,
     IconSparkles,
     IconStack,
     IconStar,
     IconTarget,
+    IconWarning,
 } from '@posthog/icons'
 
 type IconComponent = React.ComponentType<{ className?: string }>
@@ -38,8 +41,9 @@ type CloudinarySrc = `https://res.cloudinary.com/${string}`
 
 const HEADER_IMAGE: CloudinarySrc =
     'https://res.cloudinary.com/dmukukwp6/image/upload/inbox_prs_cloud_full_9c9dbb504c.png'
-const LOOP_SCOUTS_IMAGE: CloudinarySrc = 'https://res.cloudinary.com/dmukukwp6/image/upload/scout_modal_4c95317f12.png'
-const LOOP_INBOX_IMAGE: CloudinarySrc = 'https://res.cloudinary.com/dmukukwp6/image/upload/inbox_reports_80b35211c4.png'
+const LOOP_SCOUTS_IMAGE: CloudinarySrc = 'https://res.cloudinary.com/dmukukwp6/image/upload/scouts_8fe0af6de1.png'
+const LOOP_INBOX_IMAGE: CloudinarySrc =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/inbox_prs_cloud_f44f8ba69b.png'
 const LOOP_MERGE_IMAGE: CloudinarySrc = 'https://res.cloudinary.com/dmukukwp6/image/upload/4_merge_ffb549df4a.png'
 
 const Highlight = ({ children }: { children: React.ReactNode }) => (
@@ -68,17 +72,23 @@ const Callout = ({ children }: { children: React.ReactNode }) => (
     <div className="mt-3 rounded border border-yellow bg-yellow/10 px-3 py-2 text-sm text-secondary">{children}</div>
 )
 
-// Row of icon + label chips, like the Slack app carousel slides.
-const IconChipRow = ({ items }: { items: { Icon: IconComponent; color: string; name: string }[] }) => (
-    <div className="mt-3 grid grid-cols-1 gap-x-1 @sm:grid-cols-2 @2xl:grid-cols-4">
-        {items.map(({ Icon, color, name }) => (
-            <span
-                key={name}
-                className="inline-flex items-center gap-1.5 whitespace-nowrap p-2 text-sm font-semibold text-primary"
-            >
-                <Icon className={`size-4 shrink-0 ${color}`} />
-                {name}
-            </span>
+// Titled columns of icon + label, like the Slack app "ship a fix" slide.
+type IconGroup = { title: string; items: { Icon: IconComponent; color: string; name: string }[] }
+
+const IconGroupColumns = ({ groups }: { groups: IconGroup[] }) => (
+    <div className="not-prose mt-4 grid grid-cols-1 gap-6 @sm:grid-cols-2">
+        {groups.map((group) => (
+            <div key={group.title} className="flex flex-col gap-3">
+                <div className="border-b border-secondary pb-1 text-sm text-secondary">{group.title}</div>
+                <div className="flex flex-col gap-1.5">
+                    {group.items.map(({ Icon, color, name }) => (
+                        <span key={name} className="inline-flex items-center gap-1.5 text-sm text-primary">
+                            <Icon className={`size-4 shrink-0 ${color}`} />
+                            {name}
+                        </span>
+                    ))}
+                </div>
+            </div>
         ))}
     </div>
 )
@@ -93,6 +103,56 @@ const TabPanel = ({ title, children, image }: { title: string; children: React.R
     </div>
 )
 
+// Signal sources shown on the carousel's first slide, à la the homepage "debug and fix" slide.
+const signalSources: { Icon: IconComponent; color: string; name: string; description: string }[] = [
+    {
+        Icon: IconWarning,
+        color: 'text-red',
+        name: 'Error tracking',
+        description: 'Exceptions and stack traces grouped into issues',
+    },
+    {
+        Icon: IconRewindPlay,
+        color: 'text-orange',
+        name: 'Session replay',
+        description: 'Dead ends, rage clicks, and user confusion',
+    },
+    {
+        Icon: IconCompass,
+        color: 'text-blue',
+        name: 'Scouts',
+        description: 'Scheduled agents with durable memory',
+    },
+    {
+        Icon: IconPlug,
+        color: 'text-purple',
+        name: 'External tools',
+        description: 'Zendesk, Linear, GitHub issues (and more)',
+    },
+]
+
+// Example scouts, drawn from /docs/self-driving/scout-examples.
+const scoutGroups: IconGroup[] = [
+    {
+        title: 'Canonical scouts',
+        items: [
+            { Icon: IconWarning, color: 'text-red', name: 'Error spikes' },
+            { Icon: IconGraph, color: 'text-blue', name: 'Funnel regressions' },
+            { Icon: IconFlag, color: 'text-orange', name: 'Feature flag debt' },
+            { Icon: IconRewindPlay, color: 'text-yellow', name: 'Replay friction' },
+        ],
+    },
+    {
+        title: 'Custom scouts',
+        items: [
+            { Icon: IconAtSign, color: 'text-sky-blue', name: 'A Slack channel' },
+            { Icon: IconBolt, color: 'text-yellow', name: 'A custom event' },
+            { Icon: IconCode, color: 'text-blue', name: 'Your codebase' },
+            { Icon: IconCompass, color: 'text-purple', name: 'The fleet itself' },
+        ],
+    },
+]
+
 const loopTabs: TabbedCarouselTab[] = [
     {
         value: 'signals',
@@ -101,22 +161,26 @@ const loopTabs: TabbedCarouselTab[] = [
         activeText: 'text-white',
         progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
         content: (
-            <TabPanel title="Something breaks, and PostHog notices" image={LOOP_INBOX_IMAGE}>
+            <TabPanel
+                title="Everything worth knowing, in one stream"
+                image="https://res.cloudinary.com/dmukukwp6/image/upload/2_report_0256ec0da2.png"
+            >
                 <p className="m-0">
-                    A new error, a one-star support reply, a rage-click replay – each becomes a <strong>signal</strong>{' '}
-                    the moment it happens.
+                    Signals are things worth knowing about your product. Some come from sources like Error tracking and
+                    Linear. Others come from scouts that sweep your data on a schedule. When something breaks or needs
+                    improvement, PostHog notices.
                 </p>
-                <IconList
-                    items={[
-                        {
-                            Icon: IconBolt,
-                            color: 'text-yellow',
-                            text: 'Errors, logs, and session replays from PostHog',
-                        },
-                        { Icon: IconChat, color: 'text-sky-blue', text: 'Support tickets and conversations' },
-                        { Icon: IconCode, color: 'text-blue', text: 'GitHub and Linear issues' },
-                    ]}
-                />
+                <div className="not-prose mt-4 grid grid-cols-1 gap-x-4 gap-y-3 @sm:grid-cols-2">
+                    {signalSources.map(({ Icon, color, name, description }) => (
+                        <div key={name} className="flex items-start gap-2">
+                            <Icon className={`mt-0.5 size-5 shrink-0 ${color}`} />
+                            <div>
+                                <p className="m-0 text-sm font-bold text-primary">{name}</p>
+                                <p className="m-0 text-xs leading-snug text-secondary">{description}</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </TabPanel>
         ),
     },
@@ -127,30 +191,18 @@ const loopTabs: TabbedCarouselTab[] = [
         activeText: 'text-white',
         progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
         content: (
-            <TabPanel title="Scouts go looking on their own" image={LOOP_SCOUTS_IMAGE}>
+            <TabPanel title="Field intel from your product" image={LOOP_SCOUTS_IMAGE}>
                 <p className="m-0">
-                    Scheduled agents dig for the slow leaks no single event reveals – then surface only what's worth
-                    your time.
+                    Scouts are specialist agents that watch one surface in depth. Canonical scouts watch common
+                    patterns. Custom scouts are specific to your product.
                 </p>
-                <Callout>
-                    <strong className="text-primary">~20</strong> ship out of the box, and you can spin up your own just
-                    by describing what to watch. They flag non-code issues too – UI or pricing gripes go to product, no
-                    PR attached.
-                </Callout>
-                <IconChipRow
-                    items={[
-                        { Icon: IconTarget, color: 'text-red', name: 'Conversion dips' },
-                        { Icon: IconSearch, color: 'text-blue', name: 'Stale flags' },
-                        { Icon: IconEye, color: 'text-purple', name: 'Rage-clicks' },
-                        { Icon: IconBolt, color: 'text-yellow', name: 'Error spikes' },
-                    ]}
-                />
+                <IconGroupColumns groups={scoutGroups} />
             </TabPanel>
         ),
     },
     {
         value: 'inbox',
-        label: 'The Inbox',
+        label: 'The inbox',
         color: 'bg-yellow',
         activeText: 'text-black',
         progressBar: 'bg-black/70 shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
@@ -205,10 +257,10 @@ const loopTabs: TabbedCarouselTab[] = [
         activeText: 'text-white',
         progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
         content: (
-            <TabPanel title="The fix, already written" image={LOOP_MERGE_IMAGE}>
+            <TabPanel title="The fix, ready to ship" image={LOOP_MERGE_IMAGE}>
                 <p className="m-0">
-                    When the fix is clear, an agent writes it in a sandbox, runs your tests, and opens a real pull
-                    request – with its receipts attached.
+                    When a report is actionable it turns into code. An implementation agent builds the change and opens
+                    a pull request for you to review.
                 </p>
                 <IconList
                     items={[
