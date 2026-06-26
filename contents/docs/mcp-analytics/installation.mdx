@@ -129,6 +129,44 @@ client or that trade-off is acceptable; otherwise stick with `identify`.
 of the invocation — `await posthog.flush()`, or `ctx.waitUntil(posthog.flush())` to keep the runtime
 alive until it completes.
 
+### NestJS (`@rekog/mcp-nest`)
+
+With [`@rekog/mcp-nest`](https://github.com/rekog-labs/MCP-Nest) you don't construct the server yourself — `McpModule.forRoot(...)` does, and you define tools with `@Tool()` decorators. Instrument it through the module's `serverMutator` hook using `instrumentMutator`, which returns the server for you:
+
+```ts
+import { Module } from "@nestjs/common"
+import { McpModule } from "@rekog/mcp-nest"
+import { PostHog, instrumentMutator } from "@posthog/mcp"
+
+// Create the client once at module scope.
+const posthog = new PostHog(process.env.POSTHOG_PROJECT_API_KEY, {
+  host: "https://us.i.posthog.com", // or https://eu.i.posthog.com
+})
+
+@Module({
+  imports: [
+    McpModule.forRoot({
+      name: "my-mcp-server",
+      version: "1.0.0",
+      serverMutator: instrumentMutator(posthog),
+    }),
+  ],
+})
+export class AppModule {}
+```
+
+`instrumentMutator(posthog)` is shorthand for `(server) => { instrument(server, posthog); return server }`. It returns the *server*, not the analytics handle, so it slots straight into `serverMutator`. The tools mcp-nest registers after the mutator runs are still captured.
+
+If you need the analytics handle for [custom events](/docs/mcp-analytics/custom-events), call `instrument()` directly inside the mutator and return the server yourself:
+
+```ts
+serverMutator: (server) => {
+  const analytics = instrument(server, posthog)
+  // ...use `analytics.capture(...)` elsewhere...
+  return server
+}
+```
+
 ## Configuration
 
 The `posthog` client is passed as the required second positional argument — not in this options object. `instrument()` accepts these options as an optional third argument:
