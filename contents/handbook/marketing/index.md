@@ -8,12 +8,12 @@ showTitle: true
 
 Marketing at PostHog is a collaborative effort across several teams. There are six distinct teams that handle different aspects of marketing:
 
-- **Graphics** – Leads all art, design, illustration, and brand work for PostHog
-- **Website** – Leads all matters related to posthog.com and handles some product design aspects
-- **Marketing** – A multidisciplinary team that handles Product Marketing, Influencers & Partnerships, and other unowned marketing tasks
-- **Editorial** – Leads content, newsletters, and social
-- **YouTube** – Leads video
-- **Docs & Wizard** – Leads on documentation and the wizard
+- <SmallTeam slug="graphics" /> – Leads all art, design, illustration, and brand work for PostHog
+- <SmallTeam slug="website" /> – Leads all matters related to posthog.com and handles some product design aspects
+- <SmallTeam slug="marketing" /> – A multidisciplinary team that handles Product Marketing, Influencers & Partnerships, and other unowned marketing tasks
+- <SmallTeam slug="editorial" /> – Leads content, newsletters, and social
+- <SmallTeam slug="youtube" /> – Leads video
+- <SmallTeam slug="docs-wizard" /> – Leads on documentation and the wizard
 
 If you're not sure who to talk to, check [Who can help me?](/handbook/marketing/ownership).
 
@@ -34,14 +34,12 @@ Both channels are populated by agentic workflows that scan merged PRs and featur
 
 ### 1. Be opinionated
 
-PostHog was created because we believed that product analytics was broken, and we had a vision of how it could be much better. We're more than just product analytics now, but the principles are the same.
+PostHog makes your product self-driving – that's the vision our marketing and content needs to reflect, and not dilute it with boring corporate-speak. (For the canonical positioning, see [Brand foundations](/handbook/brand/foundations#how-we-describe-posthog).)
 
-We need to reflect this vision in our marketing and content, and not dilute it with boring corporate-speak. When we write content, we take a firm stance on what we believe is right. We would rather have 50% of people love us and 50% hate us than 80% mildly agree with us. 
- 
-We communicate clearly, directly, and honestly.
- 
-It's ok to have a sense of humor. We are more likely to die because we are forgettable, not because we made a lame joke once. We have a very distinctive and weird company culture, and we should share that with customers instead of putting on a fake corporate persona when we talk to them. PostHog should not look like a generic software company.
- 
+When we write content, we take a firm stance on what we believe is right. We would rather have 50% of people love us and 50% hate us than 80% mildly agree with us.
+
+How we say it – clear, direct, honest, and with room for genuine humor – lives in the [voice & tone guide](/handbook/brand/tone). The short version: we have a distinctive, weird company culture and we share it with customers rather than putting on a fake corporate persona. PostHog should not look like a generic software company.
+
 (Sometimes we use terminology like 'value propositions' because that is the standard marketing term for a well-understood concept. That's allowed.)
 
 ### 2. Pull, don't push
@@ -101,8 +99,6 @@ Beyond PostHog's company [mission and strategy](/handbook/why-does-posthog-exist
 - **Supporting YC founders:** Lots of PostHog's DNA comes from Y Combinator. Their companies and founders are our ideal customers. We've done a great job being valuable to them (50%+ of batches using us) and want to continue to do so.
 
 - **Merch:** We make the coolest tech company merch. Let's keep it this way. 
- 
-### Things we want to be good at
 
 - **Events:** We have been involved in some events, but we are still figuring out "the PostHog way" to do them. We don't just want to be a name on the sponsor list. We want to create superfans. 
 
@@ -116,14 +112,6 @@ Beyond PostHog's company [mission and strategy](/handbook/why-does-posthog-exist
 
 - **Billboards:** Billboards are a way to get our brand in front of a lot of people.
 
-- **Doing sales without salespeople:** Rather than care a lot about "capturing every lead" or "marketing qualified leads," we'd rather work with sales to create content that helps potential customers, ideally without a salesperson.
-
-### Things we might want to be good at but haven't tested yet
-
-- **Broader partnerships:** PostHog is a complement to a bunch of types of companies, from vibe coding tools to infrastructure platforms. Our data warehouse and CDP are built to enable integrations. How can we leverage this?
-
-- **Video essays:** Video essay style content is a natural extension of what we are doing in our newsletter. When done well, it is what "great video content" looks like.
- 
 ### Things we don't want to spend time on
 
 - **Optimizing marketing spend:** We're more concerned about growing fast than being the most efficient marketing team. Go fast, run experiments, look for upside.

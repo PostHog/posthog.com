@@ -65,3 +65,7 @@ Rows are keyed by `_marketer_id` and `_date`, so restated data merges correctly 
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

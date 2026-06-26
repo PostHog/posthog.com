@@ -49,3 +49,7 @@ All Asana tables are full refresh only. Asana's list endpoints do not expose a u
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

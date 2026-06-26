@@ -50,6 +50,20 @@ Once done, you can now [query](/docs/data-warehouse/query) your new table using 
 
 **Solution:** Your Snowflake account has a [network policy](https://docs.snowflake.com/en/user-guide/network-policies) (IP allowlist) that doesn't include PostHog's egress IP addresses. Ask your Snowflake administrator to add the IP addresses listed in the [Configuration](#configuration) section below to your network policy allowlist. Once updated, retry the sync.
 
+### Invalid JWT token with key-pair authentication
+
+**Problem:** Your Snowflake sync fails with an error like:
+
+> JWT token is invalid
+
+**Solution:** Snowflake rejected key-pair authentication because the private key you configured doesn't match the public key registered on the Snowflake user. This can happen when:
+
+- The public key was rotated or removed from the Snowflake user
+- You pasted the wrong private key
+- The private key belongs to a different Snowflake user
+
+To fix this, verify that the public key matching your private key is registered on your Snowflake user. See [Snowflake's key-pair authentication documentation](https://docs.snowflake.com/en/user-guide/key-pair-auth) for instructions. Either re-register the matching public key on the Snowflake user, or update your PostHog source configuration with the correct private key. Once corrected, resync your data.
+
 ## Configuration
 
 <SourceParameters />

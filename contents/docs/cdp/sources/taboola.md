@@ -73,3 +73,7 @@ Taboola uses OAuth2 client credentials authentication. Tokens are short-lived; P
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

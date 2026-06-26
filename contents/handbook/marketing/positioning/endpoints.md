@@ -4,8 +4,6 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> **Owner:** [Lizzie Epton (PMM)](/community/profiles/43387)
-
 ## Elevator pitch
 
 PostHog Endpoints turns any saved insight or SQL query into a stable, authenticated HTTP endpoint. No backend to build, pipeline to maintain, or data engineer needed.

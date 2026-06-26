@@ -255,7 +255,7 @@ export const dataPipelines = {
             featured: true,
             children: [
                 {
-                    name: 'Amazon S3',
+                    name: 'S3',
                     url: '/docs/cdp/batch-exports/s3',
                 },
                 {
@@ -554,10 +554,6 @@ export const handbookSidebar = [
             },
             {
                 name: 'Resources',
-            },
-            {
-                name: 'Quick reference',
-                url: '/handbook/brand/reference',
             },
             {
                 name: 'Brand assets',
@@ -1149,7 +1145,7 @@ export const handbookSidebar = [
                 ],
             },
             {
-                name: 'Positioning and selling',
+                name: 'Positioning',
                 url: '/handbook/marketing/positioning',
                 children: [
                     {
@@ -1305,8 +1301,8 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/refunds',
                     },
                     {
-                        name: 'Lead assignment during time off',
-                        url: '/handbook/growth/revops/lead-assignment-ooo',
+                        name: 'Lead assignment tracker',
+                        url: '/handbook/growth/revops/lead-assignment-tracker',
                     },
                     {
                         name: 'Giving credits to customers',
@@ -2158,20 +2154,115 @@ export const docsMenu = {
     icon: 'IconBook',
     children: [
         {
-            name: 'Product OS',
-            icon: 'IconStack',
-            color: 'salmon',
-            url: '/docs/product-os',
-            description: 'The PostHog platform for building and improving your product',
+            name: 'Self-driving',
+            icon: 'IconFlag',
+            color: 'red',
+            url: '/docs/self-driving',
+            description: 'Understand PostHog and get set up',
             children: [
                 {
-                    name: 'Docs',
+                    name: 'Overview',
+                    url: '/docs/self-driving',
+                    icon: 'IconHome',
                 },
                 {
-                    name: 'Overview',
-                    url: '/docs',
-                    icon: 'IconInfo',
+                    name: 'Get started',
                 },
+                {
+                    name: 'Set up self-driving',
+                    url: '/docs/self-driving/setup',
+                },
+                {
+                    name: 'Surfaces',
+                },
+                {
+                    name: 'Slack',
+                    url: '/docs/slack',
+                },
+                {
+                    name: 'Web app',
+                    url: '/docs/self-driving/web',
+                },
+                {
+                    name: 'MCP',
+                    url: '/docs/model-context-protocol',
+                },
+                // TODO: add PostHog Code (Desktop) as a surface here once it's GA.
+                {
+                    name: 'Concepts',
+                },
+                {
+                    name: 'The self-improving loop',
+                    url: '/docs/self-driving/self-improving-loop',
+                },
+                {
+                    name: 'Context',
+                    url: '/docs/self-driving/context',
+                },
+                {
+                    name: 'Scouts',
+                    url: '/docs/self-driving/scouts',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/self-driving/scouts',
+                        },
+                        {
+                            name: 'Examples',
+                            url: '/docs/self-driving/scout-examples',
+                        },
+                    ],
+                },
+                {
+                    name: 'Signals',
+                    url: '/docs/self-driving/signals',
+                },
+                {
+                    name: 'Reports',
+                    url: '/docs/self-driving/reports',
+                },
+                {
+                    name: 'Inbox',
+                    url: '/docs/self-driving/inbox',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/self-driving/inbox',
+                        },
+                        {
+                            name: 'Signal sources',
+                            url: '/docs/self-driving/inbox/sources',
+                        },
+                        {
+                            name: 'Research tasks',
+                            url: '/docs/self-driving/inbox/research',
+                        },
+                        {
+                            name: 'Implementation',
+                            url: '/docs/self-driving/inbox/implementation',
+                        },
+                        {
+                            name: 'Troubleshooting',
+                            url: '/docs/self-driving/inbox/troubleshooting',
+                        },
+                    ],
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Pricing',
+                    url: '/docs/self-driving/pricing',
+                },
+            ],
+        },
+        {
+            name: 'Platform',
+            icon: 'IconStack',
+            color: 'salmon',
+            url: '/docs/getting-started/install',
+            description: 'The PostHog platform for building and improving your product',
+            children: [
                 {
                     name: 'Integration',
                 },
@@ -2234,6 +2325,10 @@ export const docsMenu = {
                                 {
                                     name: 'Configuration',
                                     url: '/docs/libraries/js/config',
+                                },
+                                {
+                                    name: 'Snippet versioning',
+                                    url: '/docs/libraries/js/snippet-versioning',
                                 },
                                 {
                                     name: 'Persistence',
@@ -2978,9 +3073,9 @@ export const docsMenu = {
                     name: 'PostHog explained',
                 },
                 {
-                    name: 'What is Product OS?',
-                    url: '/docs/product-os',
-                    icon: 'IconInfo',
+                    name: 'What is PostHog?',
+                    url: '/docs/self-driving',
+                    icon: 'IconFlag',
                 },
                 {
                     name: 'Data types',
@@ -3112,16 +3207,60 @@ export const docsMenu = {
                             ],
                         },
                         {
-                            name: 'SDK doctor',
-                            url: '/docs/sdk-doctor',
+                            name: 'Health checks',
+                            url: '/docs/health-checks',
                             children: [
                                 {
                                     name: 'Overview',
-                                    url: '/docs/sdk-doctor',
+                                    url: '/docs/health-checks',
+                                },
+                                {
+                                    name: 'SDK health',
+                                    url: '/docs/health-checks/sdk-health',
                                 },
                                 {
                                     name: 'Keeping SDKs current',
-                                    url: '/docs/sdk-doctor/keeping-sdks-current',
+                                    url: '/docs/health-checks/keeping-sdks-current',
+                                },
+                                {
+                                    name: 'No live events',
+                                    url: '/docs/health-checks/no-live-events',
+                                },
+                                {
+                                    name: 'No reverse proxy',
+                                    url: '/docs/health-checks/no-reverse-proxy',
+                                },
+                                {
+                                    name: 'Partial reverse-proxy coverage',
+                                    url: '/docs/health-checks/partial-reverse-proxy',
+                                },
+                                {
+                                    name: 'No authorized URLs',
+                                    url: '/docs/health-checks/authorized-urls',
+                                },
+                                {
+                                    name: 'Missing pageleave events',
+                                    url: '/docs/health-checks/pageleave-events',
+                                },
+                                {
+                                    name: 'Missing web vitals',
+                                    url: '/docs/health-checks/web-vitals',
+                                },
+                                {
+                                    name: 'Scroll-depth tracking disabled',
+                                    url: '/docs/health-checks/scroll-depth',
+                                },
+                                {
+                                    name: 'Ingestion warnings',
+                                    url: '/docs/health-checks/ingestion-warnings',
+                                },
+                                {
+                                    name: 'Materialized view failures',
+                                    url: '/docs/health-checks/materialized-view-failures',
+                                },
+                                {
+                                    name: 'External data sync failures',
+                                    url: '/docs/health-checks/external-data-sync-failures',
                                 },
                             ],
                         },
@@ -6699,19 +6838,6 @@ export const docsMenu = {
                     url: '/docs/posthog-code/use-any-model-and-harness',
                     icon: 'IconGraduationCap',
                     color: 'green',
-                },
-                {
-                    name: 'Inbox',
-                    url: '/docs/posthog-code/inbox',
-                    icon: 'IconLetter',
-                    color: 'yellow',
-                    children: [
-                        { name: 'Overview', url: '/docs/posthog-code/inbox' },
-                        { name: 'Sources', url: '/docs/posthog-code/inbox/sources' },
-                        { name: 'Research', url: '/docs/posthog-code/inbox/research' },
-                        { name: 'Implementation', url: '/docs/posthog-code/inbox/implementation' },
-                        { name: 'Troubleshooting', url: '/docs/posthog-code/inbox/troubleshooting' },
-                    ],
                 },
                 {
                     name: 'Skills',

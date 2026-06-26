@@ -53,3 +53,7 @@ Each row includes a synthetic `event_id` (a hash of the full payload for dedupli
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />
