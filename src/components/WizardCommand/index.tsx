@@ -55,7 +55,7 @@ export default function WizardCommand({
                     className={`group inline-flex items-center gap-2 ${
                         variantStyles[variant] || variantStyles.default
                     } font-mono text-sm px-2 py-1.5 cursor-pointer ${
-                        !slim ? 'rounded-t-md relative z-10' : 'rounded-md'
+                        !slim ? 'rounded-t-md relative z-10 border border-primary' : 'rounded-md'
                     } ${className}`}
                 >
                     <IconChevronRight className="size-4 opacity-50" />
