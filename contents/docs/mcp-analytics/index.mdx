@@ -2,8 +2,8 @@
 title: MCP analytics
 ---
 
-import CalloutBox from 'components/Docs/CalloutBox'
-import OSButton from 'components/OSButton'
+import CalloutBox from "components/Docs/CalloutBox";
+import OSButton from "components/OSButton";
 
 <CalloutBox icon="IconInfo" title="MCP analytics is in alpha" type="fyi">
 
@@ -17,12 +17,12 @@ The SDK wraps your existing MCP server and emits PostHog events on every tool ca
 
 <CalloutBox icon="IconInfo" title="A dedicated MCP analytics view is in preview" type="fyi">
 
-PostHog has a purpose-built **MCP analytics** view – a dashboard, a sessions explorer, per-tool quality breakdowns, and intent clustering, all built on the `$mcp_*` events the SDK sends. It's in preview behind a feature flag while we build it in public. Because every signal is a normal PostHog event, you don't have to wait for it: you can query and visualize the same data today through [Product Analytics](/docs/product-analytics) for trends and funnels, the [SQL editor](/docs/data-warehouse/sql) for ad-hoc HogQL, [Dashboards](/docs/product-analytics/dashboards) for at-a-glance views, and [Error Tracking](/docs/error-tracking) for `$exception` events. The events on this page won't change shape as the view matures.
+PostHog has a purpose-built **MCP analytics** view – a dashboard, a sessions explorer, per-tool quality breakdowns, and intent clustering, all built on the `$mcp_*` events the SDK sends. Each tab includes an **Ask PostHog AI** button that opens [PostHog AI](/docs/posthog-ai) with a context-aware question tailored to what you're looking at – tool reliability, agent intent themes, unmet capability gaps, or an overall summary. It's in preview behind a feature flag while we build it in public. Because every signal is a normal PostHog event, you don't have to wait for it: you can query and visualize the same data today through [Product Analytics](/docs/product-analytics) for trends and funnels, the [SQL editor](/docs/data-warehouse/sql) for ad-hoc HogQL, [Dashboards](/docs/product-analytics/dashboards) for at-a-glance views, and [Error Tracking](/docs/error-tracking) for `$exception` events. The events on this page won't change shape as the view matures.
 
 </CalloutBox>
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/start-here">
-Get started
+  Get started
 </OSButton>
 
 ## What you can answer
@@ -78,23 +78,23 @@ npm install @posthog/mcp posthog-node
 ```
 
 ```ts
-import { Server } from "@modelcontextprotocol/sdk/server/index.js"
-import { PostHog } from "posthog-node"
-import { instrument } from "@posthog/mcp"
+import { Server } from "@modelcontextprotocol/sdk/server/index.js";
+import { PostHog } from "posthog-node";
+import { instrument } from "@posthog/mcp";
 
-const server = new Server({ name: "my-mcp-server", version: "1.0.0" })
+const server = new Server({ name: "my-mcp-server", version: "1.0.0" });
 
 const posthog = new PostHog(process.env.POSTHOG_PROJECT_API_KEY, {
   host: "https://us.i.posthog.com",
-})
+});
 
-instrument(server, posthog)
+instrument(server, posthog);
 ```
 
 That's the minimum. With this in place, every `tools/call`, `tools/list`, `initialize`, `resources/read`, and `prompts/get` request emits a PostHog event prefixed with `$mcp_*`.
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/installation">
-Full installation guide
+  Full installation guide
 </OSButton>
 
 ## Where to go next
