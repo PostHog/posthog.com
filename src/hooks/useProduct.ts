@@ -84,7 +84,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         {
             name: 'PostHog Code',
             Icon: IconBook,
-            description: 'AI code editor that knows how people use your product',
+            description: 'A desktop app for steering coding agents – and editing your product, not just your code',
             handle: 'posthog_code',
             color: 'brown',
             colorSecondary: 'brown',

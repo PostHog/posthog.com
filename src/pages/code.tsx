@@ -1,11 +1,24 @@
 import React, { useRef, useState } from 'react'
 import SEO from 'components/seo'
 import Editor from 'components/Editor'
-import { IconArrowUpRight, IconCheck, IconFlask, IconToggle, IconTrends, IconWarning } from '@posthog/icons'
+import {
+    IconArrowUpRight,
+    IconBrowser,
+    IconCheck,
+    IconColumns,
+    IconDashboard,
+    IconFlask,
+    IconGraph,
+    IconList,
+    IconToggle,
+    IconTrends,
+    IconWarning,
+} from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import { Accordion } from 'components/RadixUI/Accordion'
-import { LOGOS, type LogoKey, getDarkClassForLogo } from 'constants/logos'
+import { LOGOS, type LogoKey } from 'constants/logos'
 import TabbedCarousel from 'components/TabbedCarousel'
+import OSTabs from 'components/OSTabs'
 import type { TabbedCarouselTab } from 'components/TabbedCarousel'
 import { ChoppyReveal } from 'components/Code/ChoppyReveal'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
@@ -70,25 +83,6 @@ function KeyBadge({ children }: { children: React.ReactNode }) {
 // ─────────────────────────────────────────────
 // AI Model badge with connection point
 // ─────────────────────────────────────────────
-
-function WavyDivider() {
-    return (
-        <div className="my-8 max-w-lg px-4 @xl:px-8">
-            <div className="max-w-xs">
-                <svg width="100%" height="20" preserveAspectRatio="none" className="text-muted">
-                    <path
-                        d="M0,10 Q25,2 50,10 T100,10 T150,10 T200,10 T250,10 T300,10 T350,10 T400,10 T450,10 T500,10 T550,10 T600,10 T650,10 T700,10 T750,10 T800,10 T850,10 T900,10 T950,10 T1000,10"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth={1}
-                        strokeDasharray="8 6"
-                        vectorEffect="non-scaling-stroke"
-                    />
-                </svg>
-            </div>
-        </div>
-    )
-}
 
 function AIModelBadge({ innerRef }: { innerRef: React.RefObject<HTMLSpanElement> }) {
     return (
@@ -664,7 +658,7 @@ function HeroSection() {
                 ) : (
                     <>
                         <h1 className="text-xl @xl:text-3xl font-bold leading-tight mb-4 @xl:mb-8 !mt-0">
-                            The era of{' '}
+                            Not just a code editor.{' '}
                             <RoughAnnotation
                                 type="highlight"
                                 color="rgba(48, 164, 108, 0.2)"
@@ -672,32 +666,32 @@ function HeroSection() {
                                 padding={2}
                                 delay={300}
                             >
-                                self-driving development
+                                A product editor
                             </RoughAnnotation>
-                            {' is '}
+                            {' for '}
                             <RoughAnnotation type="underline" color="#F54E00" strokeWidth={2} delay={600}>
-                                <span className="font-bold">here</span>
+                                <span className="font-bold">your product</span>
                             </RoughAnnotation>
                         </h1>
 
                         <div className="@4xl/editor:gap-8 flex flex-col @4xl/editor:flex-row items-start">
                             <div className="@4xl/flex-[0_0_280px]">
                                 <p>
-                                    PostHog Code is the only AI devtool that understands your <strong>product,</strong>{' '}
-                                    not just your <strong>codebase</strong>.
+                                    PostHog Code is the desktop app for <strong>steering coding agents</strong> – and it
+                                    edits your <strong>product</strong>, not just your <strong>codebase</strong>.
                                 </p>
                                 <ul className="list-none p-0 mb-4 text-[15px] space-y-0.5">
                                     <li className="relative pl-5">
                                         <IconCheck className="size-4 text-green absolute left-0 top-1" />
-                                        Identifies product usage patterns
+                                        Run and steer a fleet of agents
                                     </li>
                                     <li className="relative pl-5">
                                         <IconCheck className="size-4 text-green absolute left-0 top-1" />
-                                        Triages bugs and errors
+                                        Instruments and configures PostHog as it builds
                                     </li>
                                     <li className="relative pl-5">
                                         <IconCheck className="size-4 text-green absolute left-0 top-1" />
-                                        Creates pull requests automatically
+                                        Ships pull requests you review
                                     </li>
                                 </ul>
 
@@ -830,7 +824,7 @@ function PostHogWaySection({ onComplete }: { onComplete?: () => void }) {
                     <p className="text-base leading-loose mb-5 order-1">
                         <ChoppyReveal wordDelay={40} onComplete={() => setP1Done(true)}>
                             <strong>{' PostHog Code'}</strong>
-                            {' uses '}
+                            {' reads '}
                             <span ref={signalsWordRef}>
                                 <RoughAnnotation
                                     type="highlight"
@@ -843,9 +837,9 @@ function PostHogWaySection({ onComplete }: { onComplete?: () => void }) {
                                 </RoughAnnotation>
                             </span>
                             {' from '}
-                            <span className="text-green text-sm">&#9679;</span> <strong>production data</strong> to
-                            diagnose issues and generate pull requests to fix them –
-                            <em>before you even know there&apos;s a problem.</em>
+                            <span className="text-green text-sm">&#9679;</span> <strong>production data</strong> so it
+                            builds the right thing – and edits your <strong>product</strong>, not just your{' '}
+                            <strong>code</strong>.
                         </ChoppyReveal>
                     </p>
                 </div>
@@ -869,10 +863,10 @@ function PostHogWaySection({ onComplete }: { onComplete?: () => void }) {
                 {p2Done && <AIModelBadge innerRef={aiModelBadgeRef} />}
 
                 <p className="text-base leading-loose mb-5">
-                    <ChoppyReveal wordDelay={25} initialDelay={p2Done ? 0 : 999999}>
-                        <strong>TL;DR:</strong> There are plenty of AI coding tools, but{' '}
+                    <ChoppyReveal wordDelay={25} initialDelay={p2Done ? 0 : 999999} onComplete={() => onComplete?.()}>
+                        <strong>TL;DR:</strong> Plenty of AI tools edit your code, but{' '}
                         <RoughAnnotation type="underline" color="currentColor" strokeWidth={1.5} delay={400}>
-                            <span className="inline-block">only one that knows your product</span>
+                            <span className="inline-block">only one understands – and edits – your product</span>
                         </RoughAnnotation>{' '}
                         like <strong>PostHog Code</strong>.
                     </ChoppyReveal>
@@ -925,57 +919,30 @@ const featureTabs: TabbedCarouselTab[] = [
         ),
     },
     {
-        value: 'signals',
-        label: 'Signals inbox',
-        color: 'bg-yellow',
-        activeText: 'text-black',
-        progressBar: 'bg-black/70 shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
-        content: (
-            <div className="p-4 @xl:p-8">
-                <h3 className="text-2xl font-bold mb-2">Signals inbox</h3>
-                <>
-                    <p>
-                        PostHog Signals are clustered and ranked by impact and urgency to help identify the most
-                        important issues. With one click, you can spin up a new agent to investigate the issue and
-                        generate a pull request to fix it.
-                    </p>
-                </>
-                <ZoomImage>
-                    <img
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/signals_full_light_1ceb88aa2c.png"
-                        alt="Signals inbox"
-                        className="w-full rounded-md shadow-xl border border-primary dark:hidden"
-                    />
-                    <img
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/signals_full_dark_b1e18be734.png"
-                        alt="Signals inbox"
-                        className="w-full rounded-md shadow-xl border border-primary hidden dark:block"
-                    />
-                </ZoomImage>
-            </div>
-        ),
-    },
-    {
         value: 'plan',
-        label: 'Plan',
+        label: 'Plan mode',
         color: 'bg-green',
         activeText: 'text-white',
         progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
         content: (
             <div className="p-4 @xl:p-8">
-                <h3 className="text-2xl font-bold mb-2">Plan your work</h3>
+                <h3 className="text-2xl font-bold mb-2">Agree on the plan before any code</h3>
                 <>
-                    <p>Create a plan for your coding agents to follow and review it before execution.</p>
+                    <p>
+                        Tasks can start in Plan mode: the agent explores your codebase and asks clarifying questions –
+                        multiple choice or freeform – then writes an implementation plan you approve. Tweak it, send it
+                        back with notes, or say go. Nothing gets written until you're happy.
+                    </p>
                 </>
                 <ZoomImage>
                     <img
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/plan_light_b34b9ad492.png"
-                        alt="Plan your work"
+                        alt="Plan mode: clarifying questions and an implementation plan to approve"
                         className="w-full rounded-md shadow-xl border border-primary dark:hidden"
                     />
                     <img
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/plan_dark_d27c25debd.png"
-                        alt="Plan your work"
+                        alt="Plan mode: clarifying questions and an implementation plan to approve"
                         className="w-full rounded-md shadow-xl border border-primary hidden dark:block"
                     />
                 </ZoomImage>
@@ -983,26 +950,61 @@ const featureTabs: TabbedCarouselTab[] = [
         ),
     },
     {
-        value: 'review',
-        label: 'Review',
-        color: 'bg-orange',
+        value: 'steer',
+        label: 'Steer mid-run',
+        color: 'bg-purple',
         activeText: 'text-white',
         progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
         content: (
             <div className="p-4 @xl:p-8">
-                <h3 className="text-2xl font-bold mb-2">Review code changes</h3>
+                <h3 className="text-2xl font-bold mb-2">Steer or queue, while it runs</h3>
                 <>
-                    <p>Compare diffs and commit and push changes in a couple clicks.</p>
+                    <p>
+                        Inject a message mid-turn at the next tool boundary to nudge an agent back on track – or queue
+                        it to send the moment the current turn ends. No stopping, no starting over.
+                    </p>
                 </>
+                {/* TODO: replace with real Steer/Queue screenshot */}
                 <ZoomImage>
                     <img
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/diff_light_8a0eef0b28.png"
-                        alt="Review code changes"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/command_center_light_096957d499.png"
+                        alt="Steer or queue messages while an agent runs"
                         className="w-full rounded-md shadow-xl border border-primary dark:hidden"
                     />
                     <img
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/diff_dark_7ba60e6ded.png"
-                        alt="Review code changes"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/command_center_dark_3712be03b1.png"
+                        alt="Steer or queue messages while an agent runs"
+                        className="w-full rounded-md shadow-xl border border-primary hidden dark:block"
+                    />
+                </ZoomImage>
+            </div>
+        ),
+    },
+    {
+        value: 'channels',
+        label: 'Channels & canvases',
+        color: 'bg-yellow',
+        activeText: 'text-black',
+        progressBar: 'bg-black/70 shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
+        content: (
+            <div className="p-4 @xl:p-8">
+                <h3 className="text-2xl font-bold mb-2">Channels &amp; canvases</h3>
+                <>
+                    <p>
+                        Group work into channels with shared context, and let agents build live canvases – single-file
+                        apps and dashboards that render your real product data, shareable with a link.
+                    </p>
+                </>
+                {/* TODO: replace with real Channels & canvases screenshot */}
+                <ZoomImage>
+                    <img
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/code_screenshot_light_d0c42a8067.png"
+                        alt="Channels and agent-built canvases"
+                        className="w-full rounded-md shadow-xl border border-primary dark:hidden"
+                    />
+                    <img
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/code_screenshot_dark_b2a90f3c71.png"
+                        alt="Channels and agent-built canvases"
                         className="w-full rounded-md shadow-xl border border-primary hidden dark:block"
                     />
                 </ZoomImage>
@@ -1048,7 +1050,7 @@ const Features = () => {
             <div className="px-4 @xl:px-8">
                 <div className="max-w-[654px] mx-auto relative">
                     <CloudinaryImage
-                        src="/>https://res.cloudinary.com/dmukukwp6/image/upload/code_screenshot_light_d0c42a8067.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/code_screenshot_light_d0c42a8067.png"
                         className="dark:hidden"
                         imgClassName="w-full rounded border border-secondary"
                     />
@@ -1069,6 +1071,93 @@ const Features = () => {
             </div>
 
             <TabbedCarousel tabs={featureTabs} />
+        </section>
+    )
+}
+
+const homeViews = [
+    {
+        value: 'list',
+        icon: IconList,
+        color: 'text-yellow',
+        title: 'List',
+        description:
+            'Triage what needs you. Two simple lanes – Needs attention and In progress – so you always know what to pick up next.',
+        // TODO: replace with real Home List view screenshot
+        imgLight: 'https://res.cloudinary.com/dmukukwp6/image/upload/plan_light_b34b9ad492.png',
+        imgDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/plan_dark_d27c25debd.png',
+    },
+    {
+        value: 'board',
+        icon: IconColumns,
+        color: 'text-blue',
+        title: 'Board',
+        description:
+            'A kanban of everything in flight, with columns for Working, In review, CI failing, Changes requested, Comments waiting, and Ready to merge.',
+        // TODO: replace with real Home Board view screenshot
+        imgLight: 'https://res.cloudinary.com/dmukukwp6/image/upload/command_center_light_096957d499.png',
+        imgDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/command_center_dark_3712be03b1.png',
+    },
+    {
+        value: 'config',
+        icon: IconGraph,
+        color: 'text-purple',
+        title: 'Config',
+        description:
+            'A visual workflow map. Bind an agent action to each stage – like Fix CI or Address comments – so the right next step is one click away.',
+        // TODO: replace with real Home Config (workflow map) screenshot
+        imgLight: 'https://res.cloudinary.com/dmukukwp6/image/upload/code_screenshot_light_d0c42a8067.png',
+        imgDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/code_screenshot_dark_b2a90f3c71.png',
+    },
+]
+
+const homeViewTabs = homeViews.map(({ value, icon: Icon, color, title, description, imgLight, imgDark }) => ({
+    value,
+    label: (
+        <span className="inline-flex items-center gap-1.5">
+            <Icon className={`size-4 ${color}`} />
+            {title}
+        </span>
+    ),
+    content: (
+        <div className="pt-4">
+            <p className="text-sm text-secondary max-w-2xl mb-3">{description}</p>
+            <ZoomImage>
+                <img
+                    src={imgLight}
+                    alt={`Home ${title} view`}
+                    className="w-full rounded-md shadow-2xl border border-primary dark:hidden"
+                />
+                <img
+                    src={imgDark}
+                    alt={`Home ${title} view`}
+                    className="w-full rounded-md shadow-2xl border border-primary hidden dark:block"
+                />
+            </ZoomImage>
+        </div>
+    ),
+}))
+
+const HomeSection = () => {
+    return (
+        <section className="relative mb-12 @2xl:mb-20 px-4 @xl:px-8">
+            <SectionLabel>
+                <span className="inline-flex items-center gap-2">
+                    Stay in flow with Home
+                    <span className="text-xs font-semibold uppercase tracking-wide rounded-full border border-primary bg-accent px-2 py-0.5 text-secondary">
+                        Alpha
+                    </span>
+                </span>
+            </SectionLabel>
+            <p className="max-w-2xl">
+                Stop bouncing between GitHub, CI, and review tabs. Home pulls everything that needs you – PR feedback,
+                failing checks, review requests, stale branches – into one place, so you stay in flow and keep shipping.
+            </p>
+
+            <p className="mt-8 mb-2 text-sm font-semibold uppercase tracking-wide text-secondary">
+                Three views of the same work
+            </p>
+            <OSTabs tabs={homeViewTabs} defaultValue="list" border={false} contentPadding={false} scrollable={false} />
         </section>
     )
 }
@@ -1102,15 +1191,27 @@ const instrumentationItems = [
         title: 'Experiments',
         description: 'Scaffolds variants, split, and goal metrics',
     },
+    {
+        icon: IconDashboard,
+        color: 'text-red',
+        title: 'Dashboards & actions',
+        description: 'Builds dashboards to track impact and defines actions – every write gated by your approval',
+    },
+    {
+        icon: IconBrowser,
+        color: 'text-orange',
+        title: 'Live canvases',
+        description: 'Spins up canvases – single-file apps and dashboards that render your real product data',
+    },
 ]
 
 const Instrumentation = () => {
     return (
         <section className="relative mb-12 @2xl:mb-20 px-4 @xl:px-8">
-            <SectionLabel>Automatic PostHog instrumentation</SectionLabel>
+            <SectionLabel>It edits your product, not just your code</SectionLabel>
             <p>
-                PostHog Code automatically builds new features with the proper PostHog instrumentation so you can
-                progressively roll out changes and monitor their impact.
+                As PostHog Code builds, it wires up the right PostHog instrumentation and configuration – so you can
+                progressively roll out changes and measure their impact without a second pass.
             </p>
 
             <ul className="grid @xl:grid-cols-2 gap-x-8 gap-y-4 pt-8">
@@ -1126,47 +1227,58 @@ const Instrumentation = () => {
     )
 }
 
-const integrationRows: { name: string; logoKey: LogoKey }[] = [
-    { name: 'Linear', logoKey: 'linear' },
-    { name: 'Slack', logoKey: 'slack' },
-    { name: 'GitHub', logoKey: 'github' },
-    { name: 'Granola', logoKey: 'granola' },
-    { name: 'Zendesk', logoKey: 'zendesk' },
-]
-
-interface MCPServerRow {
+// MCP marketplace: ~38 servers across six categories. Servers with a dedicated
+// brand asset use a LOGOS key; the rest fall back to a favicon by domain (same
+// pattern the `granola` logo already uses in constants/logos.ts).
+interface MCPServer {
     name: string
-    description: string
-    logoKey: LogoKey
+    logoKey?: LogoKey
+    domain?: string
 }
 
-const mcpServerRows: MCPServerRow[] = [
-    {
-        name: 'Attio',
-        description: 'Manage Attio CRM contacts, companies, and deals.',
-        logoKey: 'attio',
-    },
-    {
-        name: 'HubSpot',
-        description: 'Sync contacts, companies, and marketing lifecycle for richer agent context.',
-        logoKey: 'hubspot',
-    },
-    {
-        name: 'Stripe',
-        description: 'Look up customers, subscriptions, and invoices from billing.',
-        logoKey: 'stripe',
-    },
-    {
-        name: 'Salesforce',
-        description: 'Query accounts, opportunities, and CRM records your agents need in context.',
-        logoKey: 'salesforce',
-    },
-    {
-        name: 'Sentry',
-        description: 'Pull issues, releases, and stack traces so agents debug against real errors.',
-        logoKey: 'sentry',
-    },
+const mcpServers: MCPServer[] = [
+    { name: 'AirOps', domain: 'airops.com' },
+    { name: 'Atlassian', domain: 'atlassian.com' },
+    { name: 'Attio', logoKey: 'attio' },
+    { name: 'Box', domain: 'box.com' },
+    { name: 'Browserbase', domain: 'browserbase.com' },
+    { name: 'Canva', domain: 'canva.com' },
+    { name: 'Circle', domain: 'circle.so' },
+    { name: 'Cisco ThousandEyes', domain: 'thousandeyes.com' },
+    { name: 'Clerk', domain: 'clerk.com' },
+    { name: 'ClickHouse', domain: 'clickhouse.com' },
+    { name: 'Cloudflare', logoKey: 'cloudflare' },
+    { name: 'Context7', domain: 'context7.com' },
+    { name: 'Datadog', domain: 'datadoghq.com' },
+    { name: 'Figma', domain: 'figma.com' },
+    { name: 'Firetiger', domain: 'firetiger.com' },
+    { name: 'GitHub', logoKey: 'github' },
+    { name: 'GitLab', domain: 'gitlab.com' },
+    { name: 'Granola', logoKey: 'granola' },
+    { name: 'Hex', domain: 'hex.tech' },
+    { name: 'HubSpot', logoKey: 'hubspot' },
+    { name: 'LaunchDarkly', domain: 'launchdarkly.com' },
+    { name: 'Linear', logoKey: 'linear' },
+    { name: 'Mem0', domain: 'mem0.ai' },
+    { name: 'Monday', domain: 'monday.com' },
+    { name: 'Neon', domain: 'neon.tech' },
+    { name: 'Notion', domain: 'notion.so' },
+    { name: 'PagerDuty', domain: 'pagerduty.com' },
+    { name: 'PlanetScale', domain: 'planetscale.com' },
+    { name: 'Postman', domain: 'postman.com' },
+    { name: 'Prisma', domain: 'prisma.io' },
+    { name: 'Render', domain: 'render.com' },
+    { name: 'Sanity', domain: 'sanity.io' },
+    { name: 'Sentry', logoKey: 'sentry' },
+    { name: 'Slack', logoKey: 'slack' },
+    { name: 'Stripe', logoKey: 'stripe' },
+    { name: 'Supabase', logoKey: 'supabase' },
+    { name: 'Svelte', domain: 'svelte.dev' },
+    { name: 'Wix', domain: 'wix.com' },
 ]
+
+const mcpServerIcon = (server: MCPServer): string =>
+    server.logoKey ? LOGOS[server.logoKey] : `https://www.google.com/s2/favicons?domain=${server.domain}&sz=64`
 
 const TableStakes = () => {
     return (
@@ -1211,65 +1323,51 @@ const TableStakes = () => {
                             </ul>
                         </div>
                     </div>
-
-                    <SectionLabel>Integrations</SectionLabel>
-
-                    <div className="relative -mt-2">
-                        <div className="divide-y divide-primary">
-                            {integrationRows.map((row, i) => (
-                                <div
-                                    key={row.logoKey}
-                                    className={`flex min-h-0 flex-1 items-center gap-3 py-2
-                                    }`}
-                                >
-                                    <img
-                                        src={LOGOS[row.logoKey]}
-                                        alt=""
-                                        className={`size-7 shrink-0 object-contain ${getDarkClassForLogo(
-                                            LOGOS[row.logoKey]
-                                        )}`}
-                                        aria-hidden
-                                    />
-                                    <p className="m-0 text-base font-bold text-primary">{row.name}</p>
-                                </div>
-                            ))}
-                        </div>
-                        <div className="absolute inset-0 bg-gradient-to-b from-light/0 via-light/25 to-light dark:from-dark/0 dark:via-dark/25 dark:to-dark"></div>
-                    </div>
                 </div>
                 <div>
-                    <SectionLabel>MCP support</SectionLabel>
+                    <SectionLabel>MCP marketplace</SectionLabel>
                     <p>
-                        Manage MCP servers for your AI agents. Connect external services to extend your agent's
-                        capabilities.
+                        Browse a marketplace of {mcpServers.length}+ MCP servers – including newly added{' '}
+                        <strong>Granola</strong> and <strong>Mem0</strong> – across six categories. Connect any of them
+                        in a click to extend your agents.
                     </p>
 
-                    <div className="relative">
-                        {mcpServerRows.map((row, i) => (
-                            <div
-                                key={row.logoKey}
-                                className={`flex min-h-0 flex-1 items-start gap-3 py-3 ${
-                                    i < mcpServerRows.length - 1 ? 'border-b border-primary' : ''
-                                }`}
-                            >
+                    <div className="grid grid-cols-2 @lg:grid-cols-3 gap-x-4 gap-y-2.5 mt-4">
+                        {mcpServers.map((server) => (
+                            <div key={server.name} className="flex min-w-0 items-center gap-2">
                                 <img
-                                    src={LOGOS[row.logoKey]}
+                                    src={mcpServerIcon(server)}
                                     alt=""
-                                    className="size-7 shrink-0 object-contain"
+                                    className="size-5 shrink-0 rounded object-contain"
+                                    loading="lazy"
                                     aria-hidden
                                 />
-                                <div className="min-w-0 flex-1">
-                                    <p className="m-0 text-base font-bold text-primary">{row.name}</p>
-                                    <p className="m-0 mt-0.5 text-sm text-secondary leading-snug line-clamp-2">
-                                        {row.description}
-                                    </p>
-                                </div>
+                                <p className="m-0 truncate text-sm font-semibold text-primary">{server.name}</p>
                             </div>
                         ))}
-
-                        <div className="absolute inset-0 bg-gradient-to-b from-light/0 via-light/25 to-light dark:from-dark/0 dark:via-dark/25 dark:to-dark"></div>
                     </div>
                 </div>
+            </div>
+        </section>
+    )
+}
+
+const InboxCallout = () => {
+    return (
+        <section className="relative mb-12 @2xl:mb-20 px-4 @xl:px-8">
+            <div className="border border-primary rounded-md bg-accent p-6 @2xl:p-8">
+                <p className="text-sm font-semibold uppercase tracking-wide text-secondary mb-2">
+                    Part of the self-driving loop
+                </p>
+                <h2 className="text-2xl font-bold mb-2">Your Inbox lives in Code</h2>
+                <p className="mb-4 max-w-2xl">
+                    PostHog watches your product and files what needs doing – errors, support tickets, replay trends –
+                    as ranked reports. They land in your Inbox inside Code, where you turn any of them into a task in a
+                    click. Code is where you action the self-driving loop.
+                </p>
+                <OSButton asLink to="/self-driving" state={{ newWindow: true }} variant="primary" size="md">
+                    How self-driving works
+                </OSButton>
             </div>
         </section>
     )
@@ -1456,25 +1554,19 @@ const FAQ_ITEMS = [
         content: (
             <div className="space-y-3">
                 <p>
-                    PostHog Code's{' '}
-                    <a href="/docs/self-driving/inbox" className="underline">
-                        Inbox
+                    You can always just tell it what to do. But Code also has an Inbox: PostHog's{' '}
+                    <a href="/self-driving" className="underline">
+                        self-driving
                     </a>{' '}
-                    connects to{' '}
-                    <a href="/docs/self-driving/inbox/sources" className="underline">
-                        signal sources
-                    </a>{' '}
-                    you choose – Error Tracking, support tickets, Session Replay, GitHub Issues, Linear, and Zendesk –
-                    and{' '}
-                    <a href="/docs/self-driving/inbox/research" className="underline">
-                        ranks issues
-                    </a>{' '}
-                    by code importance (hot paths like checkout or billing), user impact (how many users are affected,
-                    and on what plan), and severity.
+                    layer watches your product, ranks what needs doing by importance, impact, and severity, and files it
+                    as reports you can turn into a task in a click.
                 </p>
                 <p>
-                    You set a priority threshold (P0–P4) for what the agent should auto-pick up, and you can read its
-                    full research log to see every file it read and every query it ran before making a recommendation.
+                    The full ranking, signal sources, and priority thresholds live in the{' '}
+                    <a href="/docs/self-driving" className="underline">
+                        self-driving docs
+                    </a>{' '}
+                    – Code is where you review and action what it surfaces.
                 </p>
             </div>
         ),
@@ -1623,10 +1715,7 @@ export default function CodePage() {
 
     return (
         <>
-            <SEO
-                title="PostHog Code"
-                description="PostHog Code uses signals from production data to diagnose issues and generate pull requests – before you even know there's a problem."
-            />
+            <SEO title="PostHog Code" description="A desktop app for steering coding agents and editing your product" />
             <Editor slug="/code" maxWidth="100%" hasPadding={false} disableFormatting>
                 <div className="@container not-prose font-rounded">
                     <header className="relative mb-12">
@@ -1652,9 +1741,13 @@ export default function CodePage() {
 
                         <Features />
 
+                        <HomeSection />
+
                         <Instrumentation />
 
                         <TableStakes />
+
+                        <InboxCallout />
 
                         <TLDR ready={postHogWayDone} />
 
