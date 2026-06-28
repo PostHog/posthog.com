@@ -1,0 +1,92 @@
+---
+title: Microsoft Teams integration
+sidebar: Docs
+showTitle: true
+---
+
+The **SupportHog** Microsoft Teams bot connects your Teams tenant to PostHog Support, enabling two-way sync between Teams conversations and support tickets.
+
+- **Teams to PostHog** – messages in configured Teams channels automatically create support tickets and add comments
+- **PostHog to Teams** – team replies in PostHog are posted back to the original Teams thread
+
+This is separate from PostHog's main integrations. SupportHog has its own bot, credentials, and event handling.
+
+## Connecting Microsoft Teams
+
+1. Go to [**Support > Settings**](https://app.posthog.com/support/settings) in PostHog
+2. Under **Microsoft Teams**, click **Connect Microsoft Teams**
+3. A Microsoft authorization window opens – sign in and grant the SupportHog app access to your tenant
+
+<CalloutBox icon="IconInfo" title="Admin required" type="fyi">
+
+Connecting Microsoft Teams requires a Teams admin to authorize the SupportHog app. Only organization admins in PostHog can manage the Teams integration.
+
+</CalloutBox>
+
+## Adding support channels
+
+After connecting, you can configure up to 25 Teams channels to monitor for support tickets. You can add one channel per Teams group.
+
+1. In [**Support > Settings**](https://app.posthog.com/support/settings), under **Support channels**, click **Add Teams channel**
+2. Select a **team group** from the dropdown – this lists all Teams groups the authorized user has joined
+3. PostHog installs the SupportHog app into the selected group (this is automatic and idempotent)
+4. Select a **channel** within that group
+5. The channel appears in your configured list
+
+To remove a channel, click the trash icon next to it. Existing tickets from that channel aren't affected, but new messages will no longer create tickets.
+
+Click **Refresh** to reload the list of available team groups or channels if you've recently made changes in Microsoft Teams.
+
+## How tickets are created
+
+There are two ways a Teams message becomes a support ticket:
+
+### Support channel messages
+
+Any top-level message in a configured support channel automatically creates a new ticket. Thread replies on that message sync as ticket messages.
+
+### Bot mentions
+
+Type `@SupportHog` in any channel to create a ticket from that message. This works in any channel, not just configured support channels. The bot mention feature is always active when Teams is connected.
+
+Both methods:
+
+- Set `channel_source` to `teams` on the ticket
+- Resolve the Teams user's name and avatar
+- Convert Teams message formatting to PostHog's rich text format
+- Post a confirmation reply in the Teams thread with the ticket number
+
+<h2 id="org-catalog">Org catalog setup</h2>
+
+If your Microsoft tenant's app setup policy blocks the public Teams Store, PostHog can't automatically install the SupportHog bot. When this happens, you'll see a warning banner:
+
+> **SupportHog isn't available in your Microsoft tenant's app catalog.**
+
+To resolve this, a Teams admin needs to upload the SupportHog app package to your organization's app catalog:
+
+1. Get the SupportHog app package (`.zip` file) from the PostHog team
+2. Open the [Microsoft Teams admin center](https://admin.teams.microsoft.com/)
+3. Go to **Teams apps > Manage apps**
+4. Click **Upload new app** and select the SupportHog `.zip` file
+5. Return to PostHog and click **Retry install**
+
+This is a one-time setup per Microsoft tenant.
+
+## Viewing Teams tickets
+
+Teams-sourced tickets appear in your [inbox](https://app.posthog.com/support/tickets) alongside widget, email, and Slack tickets. Each Teams ticket shows:
+
+- A Teams icon indicating the channel source
+- The Teams user's name and avatar on messages
+
+You can filter the ticket list by channel source to see only Teams tickets.
+
+## Disconnecting
+
+To remove the Microsoft Teams integration:
+
+1. Go to [**Support > Settings**](https://app.posthog.com/support/settings)
+2. Click **Disconnect Microsoft Teams** at the bottom of the Microsoft Teams section
+3. Confirm the disconnection
+
+Existing tickets created from Teams aren't affected – they remain in your inbox but no longer sync new messages.
