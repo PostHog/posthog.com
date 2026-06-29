@@ -632,70 +632,6 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'Wizard & Docs',
-        url: '/handbook/wizard-and-docs',
-        children: [
-            {
-                name: 'Overview',
-                url: '/handbook/wizard-and-docs',
-            },
-            {
-                name: 'How to publish changelog',
-                url: '/handbook/wizard-and-docs/how-to-publish-changelog',
-            },
-            {
-                name: 'Wizard',
-            },
-            {
-                name: 'AI wizard',
-                url: '/handbook/wizard-and-docs/developing-the-wizard',
-            },
-            {
-                name: 'Context mill',
-                url: '/handbook/wizard-and-docs/context-mill',
-            },
-            {
-                name: 'Docs',
-            },
-            {
-                name: 'Ownership',
-                url: '/handbook/wizard-and-docs/docs-ownership',
-            },
-            {
-                name: 'Style guide',
-                url: '/handbook/wizard-and-docs/docs-style-guide',
-            },
-            {
-                name: 'Vale (prose linter)',
-                url: '/handbook/wizard-and-docs/vale',
-            },
-            {
-                name: 'MDX and components',
-                url: '/handbook/wizard-and-docs/mdx-and-components',
-            },
-            {
-                name: 'How to write product docs',
-                url: '/handbook/wizard-and-docs/writing-product-docs',
-            },
-            {
-                name: 'How to use the content writer agent',
-                url: '/handbook/wizard-and-docs/content-writer-agent',
-            },
-            {
-                name: 'Onboarding docs',
-                url: '/handbook/wizard-and-docs/onboarding-docs',
-            },
-            {
-                name: 'SDK reference docs',
-                url: '/handbook/wizard-and-docs/sdk-reference-docs',
-            },
-            {
-                name: 'API specs and docs',
-                url: '/handbook/wizard-and-docs/api-specifications',
-            },
-        ],
-    },
-    {
         name: 'Engineering',
         url: '',
         children: [
@@ -1867,6 +1803,70 @@ export const handbookSidebar = [
                         url: '/handbook/community/profiles',
                     },
                 ],
+            },
+        ],
+    },
+    {
+        name: 'Wizard & Docs',
+        url: '/handbook/wizard-and-docs',
+        children: [
+            {
+                name: 'Overview',
+                url: '/handbook/wizard-and-docs',
+            },
+            {
+                name: 'How to publish changelog',
+                url: '/handbook/wizard-and-docs/how-to-publish-changelog',
+            },
+            {
+                name: 'Wizard',
+            },
+            {
+                name: 'AI wizard',
+                url: '/handbook/wizard-and-docs/developing-the-wizard',
+            },
+            {
+                name: 'Context mill',
+                url: '/handbook/wizard-and-docs/context-mill',
+            },
+            {
+                name: 'Docs',
+            },
+            {
+                name: 'Ownership',
+                url: '/handbook/wizard-and-docs/docs-ownership',
+            },
+            {
+                name: 'Style guide',
+                url: '/handbook/wizard-and-docs/docs-style-guide',
+            },
+            {
+                name: 'Vale (prose linter)',
+                url: '/handbook/wizard-and-docs/vale',
+            },
+            {
+                name: 'MDX and components',
+                url: '/handbook/wizard-and-docs/mdx-and-components',
+            },
+            {
+                name: 'How to write product docs',
+                url: '/handbook/wizard-and-docs/writing-product-docs',
+            },
+            {
+                name: 'How to use the content writer agent',
+                url: '/handbook/wizard-and-docs/content-writer-agent',
+            },
+            {
+                name: 'Onboarding docs',
+                url: '/handbook/wizard-and-docs/onboarding-docs',
+            },
+            {
+                name: 'SDK reference docs',
+                url: '/handbook/wizard-and-docs/sdk-reference-docs',
+            },
+            {
+                name: 'API specs and docs',
+                url: '/handbook/wizard-and-docs/api-specifications',
             },
         ],
     },
