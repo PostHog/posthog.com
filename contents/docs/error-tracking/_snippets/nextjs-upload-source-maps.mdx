@@ -1,4 +1,4 @@
-We provide a helper package that will hook into the Next.js build process and upload source maps for your client and server code. This process is enabled by default for production builds but you can disable it by setting `enabled` to `false` in the `sourcemaps` object.
+We provide a helper package that works alongside `@posthog/next`, hooks into the Next.js build process, and uploads source maps for your client and server code. This process is enabled by default for production builds but you can disable it by setting `enabled` to `false` in the `sourcemaps` object.
 
 #### 1. Install package
 
@@ -19,7 +19,7 @@ const nextConfig = {
 export default withPostHogConfig(nextConfig, {
   personalApiKey: process.env.POSTHOG_API_KEY, // Personal API Key
   projectId: process.env.POSTHOG_PROJECT_ID, // Project ID
-  host: process.env.NEXT_PUBLIC_POSTHOG_HOST, // (optional), defaults to https://us.posthog.com
+  host: process.env.NEXT_PUBLIC_POSTHOG_HOST, // (optional), reuse the host from @posthog/next
   sourcemaps: { // (optional)
       enabled: true, // (optional) Enable sourcemaps generation and upload, default to true on production builds
       releaseName: "my-application", // (optional) Release name, defaults to repository name
@@ -36,7 +36,7 @@ Where you should set the following environment variables:
 | --- | --- |
 | `POSTHOG_API_KEY` | [Personal API key](https://app.posthog.com/settings/user-api-keys#variables) with at least `write` access on `error tracking` |
 | `POSTHOG_PROJECT_ID` | Project ID you can find in your [project settings](https://app.posthog.com/settings/project#variables) |
-| `NEXT_PUBLIC_POSTHOG_HOST` | Your PostHog instance URL. Defaults to `https://us.posthog.com` |
+| `NEXT_PUBLIC_POSTHOG_HOST` | Your PostHog instance URL. Reuse the same value you use for `@posthog/next`. |
 
 ### That's it!
 

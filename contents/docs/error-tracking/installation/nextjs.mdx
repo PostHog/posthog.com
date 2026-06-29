@@ -1,15 +1,128 @@
 ---
-title: Next.js error tracking installation
+title: Next.js Error Tracking installation
 platformLogo: nextjs
 showStepsToc: true
 ---
 
-<!--
-This page imports shared onboarding content from the main PostHog repo.
-Source: https://github.com/PostHog/posthog/blob/master/docs/onboarding/error-tracking/nextjs.tsx
-See the docs runbook for more info: https://posthog.com/handbook/docs-and-wizard/onboarding-docs
--->
+import { Steps, Step } from 'components/Docs/Steps'
 
-import { ErrorTrackingNextJSInstallationWrapper } from './_snippets/et-installation-wrapper.tsx'
+Use `@posthog/next` to capture exceptions in Next.js. It enables browser-side exception capture through `PostHogProvider` and exposes a Next.js `onRequestError` handler for server-side request errors, so you don't need to wire `posthog-js` and `posthog-node` separately.
 
-<ErrorTrackingNextJSInstallationWrapper />
+<Steps>
+
+<Step title="Install and configure @posthog/next" badge="required">
+
+If you already followed the [Next.js setup guide](/docs/libraries/next-js), you can skip this step. Otherwise, install `@posthog/next`:
+
+<MultiLanguage>
+
+```bash file=npm
+npm install --save @posthog/next
+```
+
+```bash file=Yarn
+yarn add @posthog/next
+```
+
+```bash file=pnpm
+pnpm add @posthog/next
+```
+
+```bash file=Bun
+bun add @posthog/next
+```
+
+</MultiLanguage>
+
+Add your project token and host to `.env.local` and your hosting provider:
+
+```shell file=.env.local
+NEXT_PUBLIC_POSTHOG_KEY=<ph_project_api_key>
+NEXT_PUBLIC_POSTHOG_HOST=<ph_client_api_host>
+```
+
+Then wrap your app with `PostHogProvider` as shown in the [Next.js SDK docs](/docs/libraries/next-js#wrap-your-app-with-posthogprovider).
+
+</Step>
+
+<Step title="Capture client-side exceptions" badge="required">
+
+`@posthog/next` sets `capture_exceptions: true` by default, so unhandled browser errors and unhandled promise rejections are captured once your app is wrapped with `PostHogProvider`.
+
+To capture a handled client-side exception manually, use `usePostHog()` in a client component:
+
+```tsx
+'use client'
+import { usePostHog } from '@posthog/next'
+
+export function SaveButton() {
+    const posthog = usePostHog()
+
+    return (
+        <button
+            onClick={async () => {
+                try {
+                    await saveSettings()
+                } catch (error) {
+                    posthog.captureException(error, { area: 'settings' })
+                    throw error
+                }
+            }}
+        >
+            Save settings
+        </button>
+    )
+}
+```
+
+If you need to disable automatic browser exception capture, pass `clientOptions={{ capture_exceptions: false }}` to `PostHogProvider`.
+
+</Step>
+
+<Step title="Capture server-side request errors" badge="required">
+
+For Next.js versions that support `onRequestError`, export the handler from your root `instrumentation.ts` file:
+
+```ts file=instrumentation.ts
+export { onRequestError } from '@posthog/next'
+```
+
+Next.js calls this hook when a server render, route handler, or server action throws during a request. `@posthog/next` reads the PostHog identity cookie set by the middleware so server-side exceptions are linked to the same person and session as client-side events when possible.
+
+To customize captured properties or filter errors, create the handler yourself:
+
+```ts file=instrumentation.ts
+import { createOnRequestError } from '@posthog/next'
+
+export const onRequestError = createOnRequestError({
+    beforeCapture: ({ error, context, properties }) => {
+        if (context.routePath?.startsWith('/health')) {
+            return false
+        }
+
+        return {
+            ...properties,
+            error_area: 'nextjs-server',
+            error_name: error instanceof Error ? error.name : undefined,
+        }
+    },
+})
+```
+
+</Step>
+
+<Step title="Upload source maps" badge="recommended">
+
+Upload source maps so PostHog can show readable stack traces for minified client and server bundles. Use the [Next.js source map guide](/docs/error-tracking/upload-source-maps/nextjs), which configures `@posthog/nextjs-config` for your build.
+
+</Step>
+
+<Step checkpoint title="Verify exceptions are captured" subtitle="Trigger one client-side and one server-side test error">
+
+1. Trigger a handled client-side error and confirm a `$exception` event appears in PostHog.
+2. Add `export { onRequestError } from '@posthog/next'`, trigger a server route handler error, and confirm the server-side `$exception` event appears.
+3. Open the issue in [Error Tracking](https://app.posthog.com/error_tracking) and confirm stack traces are readable after source maps are uploaded.
+
+</Step>
+
+</Steps>

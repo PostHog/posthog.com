@@ -24,7 +24,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 }
 ```
 
-**Event flushing:** On Vercel, `@posthog/next` auto-detects [`waitUntil`](https://vercel.com/docs/functions/functions-api-reference/vercel-functions-package#waituntil) from `@vercel/functions` so events are flushed after the response is sent without blocking it. No manual `shutdown()` call is needed. In other environments, you can pass a custom `waitUntil` via `serverOptions` on the `PostHogProvider`, or events will be batched and flushed normally.
+**Event flushing:** On Vercel, `@posthog/next` auto-detects [`waitUntil`](https://vercel.com/docs/functions/functions-api-reference/vercel-functions-package#waituntil) from `@vercel/functions` so events are flushed after the response is sent without blocking it. No manual `shutdown()` call is needed. In other environments, you can pass a custom `waitUntil` in the server client options, for example `getServerSidePostHog(ctx, undefined, { waitUntil })`, or events will be batched and flushed normally.
 
 Then wire the bootstrap data into the provider:
 

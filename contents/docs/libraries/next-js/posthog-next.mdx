@@ -41,6 +41,16 @@ tableOfContents: [
         depth: 1,
     },
     {
+        url: 'capture-server-side-request-errors',
+        value: 'Capture server-side request errors',
+        depth: 1,
+    },
+    {
+        url: 'configure-advanced-options',
+        value: 'Configure advanced options',
+        depth: 1,
+    },
+    {
         url: 'further-reading',
         value: 'Further reading',
         depth: 1,
@@ -59,20 +69,13 @@ features:
 ---
 
 import { Steps, Step } from 'components/Docs/Steps'
-import { CalloutBox } from 'components/Docs/CalloutBox'
 import Tab from "components/Tab"
 import AppProviderSetup from "./_snippets/posthog-next-app-provider.mdx"
 import PagesProviderSetup from "./_snippets/posthog-next-pages-provider.mdx"
 import AppServerSetup from "./_snippets/posthog-next-app-server-setup.mdx"
 import PagesServerSetup from "./_snippets/posthog-next-pages-server-setup.mdx"
 
-<CalloutBox icon="IconInfo" type="fyi" title="Pre-release">
-
-`@posthog/next` is currently in pre-release. The API may change before the stable release. For production apps, see the [standard Next.js setup guide](/docs/libraries/next-js).
-
-</CalloutBox>
-
-`@posthog/next` is a unified package for integrating PostHog into your Next.js app. It provides a simplified interface that handles common patterns out of the box:
+`@posthog/next` is the recommended package for integrating PostHog into your Next.js app. It provides a simplified interface that handles common patterns out of the box:
 
 - **Synchronized identity across client and server**, so both sides share the same user automatically
 - **Server-side feature flag bootstrapping** so hooks return real values immediately with no flicker
@@ -136,6 +139,8 @@ export const config = {
 ```
 
 Setting `proxy: true` routes PostHog API calls through your domain at `/ingest`, which helps avoid ad blockers. You can customize the path prefix by passing `proxy: { pathPrefix: '/analytics' }` instead.
+
+> **Consent-sensitive apps:** The default middleware seeds an anonymous identity cookie before client-side consent code runs. If your GDPR/ePrivacy posture requires opt-in before setting analytics identifiers, use `postHogMiddleware({ proxy: true, seedAnonymousCookie: false })` and initialize the provider with `clientOptions={{ opt_out_capturing_by_default: true }}` until consent is granted. With this setting, anonymous server-side flag bootstrapping and server captures won't be linked to a PostHog identity until after consent.
 
 > **Note:** Middleware requires a server runtime and is not available with `output: 'export'` (fully static sites). If you can't use middleware, you can set up a [reverse proxy](/docs/advanced/proxy) separately to route traffic through your domain.
 
@@ -209,7 +214,7 @@ export function NewBanner() {
 }
 ```
 
-You can also read [the full `posthog-js` documentation](/docs/libraries/js/features) for all the usable functions.
+`@posthog/next` re-exports the PostHog React hooks, backed by the Next.js-aware provider above.
 
 </Step>
 
@@ -259,11 +264,23 @@ See our guide on [identifying users](/docs/getting-started/identify-users) for m
 
 </Step>
 
+<Step title="Capture server-side request errors" badge="recommended">
+
+`@posthog/next` enables client-side exception capture by default through `PostHogProvider`. To capture server-side request errors handled by Next.js, export `onRequestError` from your `instrumentation.ts` file:
+
+```ts file=instrumentation.ts
+export { onRequestError } from '@posthog/next'
+```
+
+Next.js calls this hook when a server render, route handler, or server action throws during a request. See the [Next.js Error Tracking guide](/docs/error-tracking/installation/nextjs) for filtering and source map setup.
+
+</Step>
+
 <Step title="Configure advanced options" badge="optional">
 
-### Feature flag bootstrap
+### Feature Flags bootstrapping
 
-Set `bootstrapFlags` to evaluate feature flags on the server and pass the results to the client, which avoids flag flicker on first render:
+Set `bootstrapFlags` to evaluate Feature Flags on the server and pass the results to the client, which avoids flag flicker on first render:
 
 ```tsx
 <PostHogProvider bootstrapFlags>{children}</PostHogProvider>
@@ -299,7 +316,7 @@ export default postHogMiddleware({
 })
 ```
 
-Then initialize the client with capture disabled until the user opts in:
+Then initialize the client with capture disabled until consent is granted:
 
 ```tsx
 <PostHogProvider clientOptions={{ opt_out_capturing_by_default: true }}>{children}</PostHogProvider>
@@ -330,6 +347,7 @@ When you change the proxy path, use the same path in `clientOptions.api_host`:
 
 - [How to set up Next.js analytics, Feature Flags, and more](/tutorials/nextjs-analytics)
 - [How to set up Next.js A/B tests](/tutorials/nextjs-ab-tests)
+- [Upload source maps for Next.js Error Tracking](/docs/error-tracking/upload-source-maps/nextjs)
 
 </Step>
 

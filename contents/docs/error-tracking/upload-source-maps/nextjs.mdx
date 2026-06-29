@@ -9,6 +9,8 @@ import WizardSection from './_snippets/wizard-section.mdx'
 
 ## Manual setup
 
+Use `@posthog/nextjs-config` alongside `@posthog/next` to inject source map identifiers and upload source maps during `next build`.
+
 <Steps>
 <Step title="Install the PostHog Next.js config package" badge="required">
 
@@ -32,7 +34,7 @@ import WizardSection from './_snippets/wizard-section.mdx'
   export default withPostHogConfig(nextConfig, {
     personalApiKey: process.env.POSTHOG_API_KEY!, // Personal API Key
     projectId: process.env.POSTHOG_PROJECT_ID, // Project ID
-    host: process.env.NEXT_PUBLIC_POSTHOG_HOST, // (optional), defaults to https://us.posthog.com
+    host: process.env.NEXT_PUBLIC_POSTHOG_HOST, // (optional), reuse the host from @posthog/next
     sourcemaps: { // (optional)
         enabled: true, // (optional) Enable sourcemaps generation and upload, default to true on production builds
         releaseName: "my-application", // (optional) Release name, defaults to repository name
@@ -51,7 +53,7 @@ import WizardSection from './_snippets/wizard-section.mdx'
   | --- | --- |
   | `POSTHOG_API_KEY` | [Personal API key](https://app.posthog.com/settings/user-api-keys#variables) with at least `write` access on `error tracking` |
   | `POSTHOG_PROJECT_ID` | Project ID you can find in your [project settings](https://app.posthog.com/settings/project#variables) |
-  | `NEXT_PUBLIC_POSTHOG_HOST` | Your PostHog instance URL. Defaults to `https://us.posthog.com` |
+  | `NEXT_PUBLIC_POSTHOG_HOST` | Your PostHog instance URL. Reuse the same value you use for `@posthog/next`. |
 
   </div>
 

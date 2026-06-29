@@ -1,6 +1,7 @@
 ---
 title: Next.js
 platformLogo: nextjs
+showStepsToc: true
 features:
   eventCapture: true
   userIdentification: true
@@ -13,95 +14,298 @@ features:
   errorTracking: true
 ---
 
-import DetailSetUpReverseProxy from "../../integrate/_snippets/details/set-up-reverse-proxy.mdx"
-import DetailGroupProductsInOneProject from "../../integrate/_snippets/details/group-products-in-one-project.mdx"
-import DetailPostHogIPs from "../../integrate/_snippets/details/posthog-ips.mdx"
+import { Steps, Step } from 'components/Docs/Steps'
+import Tab from "components/Tab"
+import AgentIntegrationSection from "../../components/AgentIntegrationSection.mdx"
+import AppProviderSetup from "./_snippets/posthog-next-app-provider.mdx"
+import PagesProviderSetup from "./_snippets/posthog-next-pages-provider.mdx"
+import AppServerSetup from "./_snippets/posthog-next-app-server-setup.mdx"
+import PagesServerSetup from "./_snippets/posthog-next-pages-server-setup.mdx"
 
-PostHog makes it easy to get data about traffic and usage of your [Next.js](https://nextjs.org/) app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
+PostHog helps you collect data about traffic and usage of your [Next.js](https://nextjs.org/) app. Integrating PostHog into your site enables analytics about user behavior, custom event capture, session recordings, Feature Flags, Error Tracking, and more.
 
-This guide walks you through integrating PostHog into your Next.js app using the [React](/docs/libraries/react) and the [Node.js](/docs/libraries/node) SDKs.
+This guide uses `@posthog/next`, the recommended PostHog package for Next.js apps. It wraps the browser and server SDKs with Next.js-specific defaults, so new apps should install and import `@posthog/next` instead of configuring `posthog-js` on the client and `posthog-node` on the server separately.
 
-> You can see a working example of this integration in our [Next.js demo app](https://github.com/PostHog/posthog-js/tree/main/playground/nextjs).
+> Maintaining an older manual setup? The lower-level [React](/docs/libraries/react), [JavaScript](/docs/libraries/js), and [Node.js](/docs/libraries/node) SDK docs still apply, but we recommend migrating new Next.js work to `@posthog/next`.
 
-Next.js has both client and server-side rendering, as well as pages and app routers. We'll cover all of these options in this guide.
-
-> **Try `@posthog/next` (pre-release):** A simplified Next.js integration with synchronized client/server identity, server-side flag bootstrapping, and a built-in API proxy. [Read the setup guide →](/docs/libraries/next-js/posthog-next)
+You can see a working App Router example in the [`@posthog/next` example app](https://github.com/PostHog/posthog-js/tree/main/examples/example-next-app-router).
 
 ## Prerequisites
 
-To follow this guide along, you need:
+To follow this guide, you need:
 
 1. A PostHog instance (either [Cloud](https://app.posthog.com/signup) or [self-hosted](/docs/self-host))
-2. A Next.js application
-
-import AgentIntegrationSection from "../../components/AgentIntegrationSection.mdx"
+2. A Next.js 13.0.0+ application
 
 <AgentIntegrationSection framework="Next.js" />
 
-## Client-side setup
+<Steps>
 
-import NextJSInstall from "../../integrate/_snippets/nextjs/install-nextjs.mdx"
+<Step title="Install @posthog/next" badge="required">
 
-<NextJSInstall />
+<MultiLanguage>
 
-## Identifying users
+```bash file=npm
+npm install --save @posthog/next
+```
 
-import IdentifyFrontendCallout from '../../_snippets/identify-frontend-callout.mdx'
+```bash file=Yarn
+yarn add @posthog/next
+```
 
-<IdentifyFrontendCallout />
+```bash file=pnpm
+pnpm add @posthog/next
+```
 
-<DetailSetUpReverseProxy />
+```bash file=Bun
+bun add @posthog/next
+```
 
-<DetailGroupProductsInOneProject />
+</MultiLanguage>
 
-<DetailPostHogIPs />
+</Step>
 
-## Accessing PostHog
+<Step title="Add your environment variables" badge="required">
 
-import InstrumentationClientSetup from "./_snippets/instrumentation-client-access.mdx"
+Add these to your `.env.local` file and to your hosting provider (for example, Vercel, Netlify, or AWS). You can find your project token in your [project settings](https://app.posthog.com/project/settings).
 
-<InstrumentationClientSetup />
+```shell file=.env.local
+NEXT_PUBLIC_POSTHOG_KEY=<ph_project_api_key>
+NEXT_PUBLIC_POSTHOG_HOST=<ph_client_api_host>
+```
 
-### Usage
+`NEXT_PUBLIC_POSTHOG_HOST` is optional and defaults to `https://us.i.posthog.com`.
 
-See the [React SDK docs](/docs/libraries/react) for examples of how to use:
+</Step>
 
-- [`posthog-js` functions like custom event capture, user identification, and more.](/docs/libraries/react#using-posthog-js-functions)
-- [Feature flags including variants and payloads.](/docs/libraries/react#feature-flags)
+<Step title="Add the middleware" badge="recommended">
 
-You can also read [the full `posthog-js` documentation](/docs/libraries/js/features) for all the usable functions.
+The middleware seeds an identity cookie on first visit so the client and server share the same user. It can also proxy PostHog API requests through your domain.
 
-## Server-side analytics
+```ts file=middleware.ts
+import { postHogMiddleware } from '@posthog/next'
 
-import NextJSInstallServer from "../../integrate/_snippets/nextjs/install-nextjs-server.mdx"
+export default postHogMiddleware({ proxy: true })
 
-<NextJSInstallServer />
+export const config = {
+    matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
+}
+```
 
-### Server-side configuration
+Setting `proxy: true` routes PostHog API calls through your domain at `/ingest`, which helps avoid ad blockers. You can customize the path prefix with `proxy: { pathPrefix: '/analytics' }`.
 
-Next.js overrides the default `fetch` behavior on the server to introduce their own cache. PostHog ignores that cache by default, as this is Next.js's default behavior for any fetch call.
+> **Consent-sensitive apps:** The default middleware seeds an anonymous identity cookie before client-side consent code runs. If your GDPR/ePrivacy posture requires opt-in before setting analytics identifiers, use `postHogMiddleware({ proxy: true, seedAnonymousCookie: false })` and initialize the provider with `clientOptions={{ opt_out_capturing_by_default: true }}` until consent is granted. With this setting, anonymous server-side flag bootstrapping and server captures won't be linked to a PostHog identity until after consent.
 
-You can override that configuration when initializing PostHog, but make sure you understand the pros/cons of using Next.js's cache and that you might get cached results rather than the actual result our server would return. This is important for feature flags, for example.
+> Middleware requires a server runtime and is not available with `output: 'export'` (fully static sites). If you can't use middleware, set up a [reverse proxy](/docs/advanced/proxy) separately and point `clientOptions.api_host` at it.
+
+</Step>
+
+<Step title="Wrap your app with PostHogProvider" badge="required">
+
+<Tab.Group tabs={['App Router', 'Pages Router']}>
+    <Tab.List>
+        <Tab>App Router</Tab>
+        <Tab>Pages Router</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <AppProviderSetup />
+        </Tab.Panel>
+        <Tab.Panel>
+            <PagesProviderSetup />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>
+
+</Step>
+
+<Step checkpoint title="Verify events are captured" subtitle="Confirm that events arrive in your PostHog project">
+
+Visit your app and click around. Within a minute or two, you should see `$pageview` and [autocaptured](/docs/product-analytics/autocapture) events (like clicks) appear in the [activity tab](https://app.posthog.com/activity/explore).
+
+</Step>
+
+<Step title="Access PostHog in client components" badge="required">
+
+All hooks must be used in client components (`'use client'`).
+
+**Capture events:**
 
 ```tsx
-posthog.init(process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN, {
-  // ... your configuration
-  fetch_options: {
-    cache: 'force-cache', // Use Next.js cache
-    next_options: {       // Passed to the `next` option for `fetch`
-      revalidate: 60,     // Cache for 60 seconds
-      tags: ['posthog'],  // Can be used with Next.js `revalidateTag` function
-    },
-  }
+'use client'
+import { usePostHog } from '@posthog/next'
+
+export function TrackButton() {
+    const posthog = usePostHog()
+
+    return <button onClick={() => posthog.capture('button_clicked')}>Track</button>
+}
+```
+
+**Feature Flags:**
+
+```tsx
+'use client'
+import { useFeatureFlag } from '@posthog/next'
+
+export function MyComponent() {
+    const flag = useFeatureFlag('new-feature')
+
+    return flag?.enabled ? <NewFeature /> : <OldFeature />
+}
+```
+
+**Conditional rendering with `PostHogFeature`:**
+
+```tsx
+'use client'
+import { PostHogFeature } from '@posthog/next'
+
+export function NewBanner() {
+    return (
+        <PostHogFeature flag="show-banner" match={true}>
+            <div>New feature available!</div>
+        </PostHogFeature>
+    )
+}
+```
+
+`@posthog/next` re-exports the PostHog React hooks, backed by the Next.js-aware provider above.
+
+</Step>
+
+<Step title="Identify your user" badge="recommended">
+
+Call `posthog.identify()` on the client after login to link events to a known user. This connects event captures, [session replays](/docs/session-replay), [LLM traces](/docs/ai-engineering), and [Error Tracking](/docs/error-tracking) to the same person across client and server.
+
+```tsx
+'use client'
+import { usePostHog } from '@posthog/next'
+
+export function LoginButton() {
+    const posthog = usePostHog()
+
+    const handleLogin = async () => {
+        const user = await signIn()
+        posthog.identify(user.id, {
+            email: user.email,
+            name: user.name,
+        })
+    }
+
+    return <button onClick={handleLogin}>Log in</button>
+}
+```
+
+See our guide on [identifying users](/docs/getting-started/identify-users) for more details.
+
+</Step>
+
+<Step title="Use PostHog on the server" badge="recommended">
+
+<Tab.Group tabs={['App Router', 'Pages Router']}>
+    <Tab.List>
+        <Tab>App Router</Tab>
+        <Tab>Pages Router</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <AppServerSetup />
+        </Tab.Panel>
+        <Tab.Panel>
+            <PagesServerSetup />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>
+
+</Step>
+
+<Step title="Capture server-side request errors" badge="recommended">
+
+`@posthog/next` enables client-side exception capture by default through `PostHogProvider`. To capture server-side request errors handled by Next.js, export `onRequestError` from your `instrumentation.ts` file:
+
+```ts file=instrumentation.ts
+export { onRequestError } from '@posthog/next'
+```
+
+Next.js calls this hook when a server render, route handler, or server action throws during a request. See the [Next.js Error Tracking guide](/docs/error-tracking/installation/nextjs) for filtering and source map setup.
+
+</Step>
+
+<Step title="Configure advanced options" badge="optional">
+
+### Feature Flags bootstrapping
+
+Set `bootstrapFlags` to evaluate Feature Flags on the server and pass the results to the client, which avoids flag flicker on first render:
+
+```tsx
+<PostHogProvider bootstrapFlags>{children}</PostHogProvider>
+```
+
+You can also limit the flags evaluated and provide properties used for evaluation:
+
+```tsx
+<PostHogProvider
+    bootstrapFlags={{
+        flags: ['new-ui', 'pricing-v2'],
+        groups: { company: 'posthog' },
+        personProperties: { plan: 'enterprise' },
+        groupProperties: {
+            company: { industry: 'tech' },
+        },
+    }}
+>
+    {children}
+</PostHogProvider>
+```
+
+Enabling `bootstrapFlags` calls `cookies()` internally, which opts the route into dynamic rendering.
+
+### Consent-aware setup
+
+If your app requires consent before setting cookies, disable anonymous cookie seeding in middleware:
+
+```ts file=middleware.ts
+export default postHogMiddleware({
+    proxy: true,
+    seedAnonymousCookie: false,
 })
 ```
 
-## Configuring a reverse proxy to PostHog
+Then initialize the client with capture disabled until consent is granted:
 
-To improve the reliability of client-side tracking and make requests less likely to be intercepted by tracking blockers, you can setup a reverse proxy in Next.js. Read more about deploying a reverse proxy using [Next.js rewrites](/docs/advanced/proxy/nextjs), [Next.js middleware](/docs/advanced/proxy/nextjs-middleware), and [Vercel rewrites](/docs/advanced/proxy/vercel).
+```tsx
+<PostHogProvider clientOptions={{ opt_out_capturing_by_default: true }}>{children}</PostHogProvider>
+```
 
-## Further reading
+### API proxy options
 
-- [How to set up Next.js analytics, feature flags, and more](/tutorials/nextjs-analytics)
-- [How to set up Next.js pages router analytics, feature flags, and more](/tutorials/nextjs-pages-analytics)
+Pass an object to `proxy` to customize the ingest path or host:
+
+```ts file=middleware.ts
+export default postHogMiddleware({
+    proxy: {
+        pathPrefix: '/analytics',
+        host: 'https://eu.i.posthog.com',
+    },
+})
+```
+
+When you change the proxy path, use the same path in `clientOptions.api_host`:
+
+```tsx
+<PostHogProvider clientOptions={{ api_host: '/analytics' }}>{children}</PostHogProvider>
+```
+
+</Step>
+
+<Step title="Further reading" badge="recommended">
+
+- [How to set up Next.js analytics, Feature Flags, and more](/tutorials/nextjs-analytics)
+- [How to set up Next.js pages router analytics, Feature Flags, and more](/tutorials/nextjs-pages-analytics)
 - [How to set up Next.js A/B tests](/tutorials/nextjs-ab-tests)
+- [Upload source maps for Next.js Error Tracking](/docs/error-tracking/upload-source-maps/nextjs)
+
+</Step>
+
+</Steps>

@@ -17,4 +17,4 @@ export default async function DashboardPage() {
 
 > **Note:** `getPostHog()` calls `cookies()` internally, which opts the route into dynamic rendering. Pages using it cannot be statically generated.
 
-**Event flushing:** On Vercel, `@posthog/next` auto-detects [`waitUntil`](https://vercel.com/docs/functions/functions-api-reference/vercel-functions-package#waituntil) from `@vercel/functions` so events are flushed after the response is sent without blocking it. No manual `shutdown()` call is needed. In other environments, you can pass a custom `waitUntil` via `serverOptions` on the `PostHogProvider`, or events will be batched and flushed normally.
+**Event flushing:** On Vercel, `@posthog/next` auto-detects [`waitUntil`](https://vercel.com/docs/functions/functions-api-reference/vercel-functions-package#waituntil) from `@vercel/functions` so events are flushed after the response is sent without blocking it. No manual `shutdown()` call is needed. In other environments, you can pass a custom `waitUntil` in the server client options, for example `getPostHog(undefined, { waitUntil })`, or events will be batched and flushed normally.

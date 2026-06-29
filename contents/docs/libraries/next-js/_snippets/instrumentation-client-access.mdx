@@ -1,29 +1,31 @@
-Once initialized in `instrumentation-client.js|ts`, import `posthog` from `posthog-js` anywhere and call the methods you need on the `posthog` object.
+Import PostHog from `@posthog/next` in client components and call the methods you need from the `usePostHog` hook.
 
-```js
-"use client";
-import posthog from "posthog-js";
+```tsx
+'use client'
+import { usePostHog } from '@posthog/next'
 
 export default function Home() {
-  return (
-    <div>
-      <button onClick={() => posthog.capture("test_event")}>Click me for an event</button>
-    </div>
-  );
+    const posthog = usePostHog()
+
+    return (
+        <div>
+            <button onClick={() => posthog.capture('test_event')}>Click me for an event</button>
+        </div>
+    )
 }
 ```
 
-### Using React hooks
+### Using feature flag hooks
 
-The [React feature flag hooks](/docs/libraries/react#feature-flags) work automatically when PostHog is initialized via `instrumentation-client.ts`. The hooks use the initialized posthog-js singleton:
+The feature flag hooks from `@posthog/next` use the initialized `PostHogProvider`. If you enabled `bootstrapFlags`, the first render uses server-evaluated flag values to avoid flicker.
 
-```js
-"use client";
-import { useFeatureFlagEnabled } from "@posthog/react";
+```tsx
+'use client'
+import { useFeatureFlag } from '@posthog/next'
 
 export default function FeatureComponent() {
-  const showNewFeature = useFeatureFlagEnabled("new-feature");
+    const flag = useFeatureFlag('new-feature')
 
-  return showNewFeature ? <NewFeature /> : <OldFeature />;
+    return flag?.enabled ? <NewFeature /> : <OldFeature />
 }
 ```
