@@ -53,7 +53,6 @@ seo:
 ### Body
 
 - Copy all writing **verbatim** — do not paraphrase, restructure, or summarize.
-- Convert the subtitle (if present) to an italicized line at the top: `*Subtitle text here*`
 - Format section headers as `##` and subsections as `###`. **Do not modify header text** — copy it exactly as it appears in the source, including any numbering format (e.g. `1.`, `2.`, not `Rule 1:`, `Rule 2:`).
 - For quote blocks: Substack sometimes renders pull quotes or highlighted excerpts as italicized text in quotation marks (e.g. `*"Quote text here."*`). Convert these to markdown blockquotes: `> Quote text here.` — drop the surrounding quotation marks and italics.
 - Place `<NewsletterForm />` once mid-article (after the first major section) and once at the very end.
@@ -65,6 +64,7 @@ seo:
 
 These are Substack-specific and should NOT appear in the posthog.com version:
 
+- Subtitles (the italicized tagline below the title, e.g. *"The magic behind our AI onboarding wizard"*)
 - Bylines (e.g. *"Words by X who declares..."*)
 - Related texts / recommended reading sections
 - Job listings / open positions sections
