@@ -47,3 +47,7 @@ LaunchDarkly's API exposes no server-side timestamp filter on these resources, s
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

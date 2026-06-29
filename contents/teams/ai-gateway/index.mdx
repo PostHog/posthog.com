@@ -10,7 +10,7 @@ The AI gateway is PostHog's internal routing layer for calling LLM providers. It
 
 ## Working with other teams
 
-The gateway sits underneath PostHog's AI features, so most internal teams shipping AI functionality will end up calling it instead of providers directly. We work closely with <SmallTeam slug="posthog-ai" />, <SmallTeam slug="posthog-code" />, <SmallTeam slug="ai-observability" />, and any small team adding AI features to their product.
+The gateway sits underneath PostHog's AI features, so most internal teams shipping AI functionality call it instead of providers directly — and as we move to general availability, external customers route through the same gateway. We work closely with <SmallTeam slug="posthog-ai" />, <SmallTeam slug="posthog-code" />, <SmallTeam slug="agents" />, <SmallTeam slug="self-driving" />, <SmallTeam slug="ai-observability" />, and any small team adding AI features to their product.
 
 Come to us if you:
 
@@ -18,3 +18,14 @@ Come to us if you:
 - Need a new provider, model, or capability added to the gateway
 - Are debugging gateway latency, errors, or cost attribution
 - Want gateway-level features like caching, fallbacks, structured outputs, or rate-limit handling
+
+## Who we're building for
+
+Teams and companies building AI features who want a single endpoint in front of their LLM providers, with auth, cost attribution, spend controls, failover, and observability handled for them — instead of calling providers directly.
+
+**The gateway is a good fit if you:**
+
+- Call one or more LLM providers and want shared auth, cost attribution, and failover in front of them
+- Need per-team or per-customer spend controls and accurate cost attribution
+- Want automatic failover to a hosted equivalent when a provider has an incident
+- Already send AI traffic through PostHog and want traces, evals, and cost analytics on it without extra setup

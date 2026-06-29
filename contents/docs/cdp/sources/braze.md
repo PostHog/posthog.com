@@ -47,3 +47,7 @@ Only the email templates and content blocks tables support incremental sync, usi
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

@@ -49,3 +49,7 @@ All Confluence tables are full refresh only. The Confluence Cloud v2 list endpoi
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

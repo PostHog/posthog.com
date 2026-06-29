@@ -61,6 +61,10 @@ Ramp locks scopes when the developer app is created. You can't add scopes later 
 
 <SourceParameters />
 
+## Supported tables
+
+<SourceTables />
+
 ## Sync modes
 
 The transactions table supports incremental syncing using the `user_transaction_time` field. All other tables use full refresh.

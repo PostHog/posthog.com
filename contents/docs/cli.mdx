@@ -4,33 +4,37 @@ sidebar: Docs
 showTitle: true
 ---
 
-The PostHog CLI lets you use PostHog from your terminal, local scripts, CI/CD pipelines, and coding agents.
+The PostHog CLI lets you use PostHog from your terminal, your coding agents, local scripts, and CI/CD pipelines.
 
-You can use it for existing workflows like uploading source maps, querying data, and downloading schema definitions. 
+- **API**: Use `posthog-cli api` to access PostHog's API and MCP tool catalog from shell-friendly commands
+- **Querying data**: Run SQL queries against data in PostHog
+- **Source maps**: Inject and upload source maps for PostHog error tracking
+- **Schema management**: Download and check schema definitions for product analytics workflows
+- **Tasks:** List, create, update, and delete PostHog tasks
 
-You can also use `posthog-cli api` to give agents shell-friendly access to PostHog's [Model Context Protocol (MCP)](/docs/model-context-protocol) tool catalog.
+## Installation
 
-The best way to set up the agentic CLI is the [PostHog wizard](/docs/ai-engineering/ai-wizard). It detects your coding agents and configures them to use `posthog-cli api` for PostHog tasks:
+Install the PostHog CLI with our wizard by running this command:
 
 ```bash
 npx -y @posthog/wizard@latest cli add
 ```
 
-See [set up agent instructions](#set-up-agent-instructions) for what this installs and the per-repo alternative.
-
-The CLI can also be installed globally by running:
+If you'd rather not use our wizard, you can install the CLI by running:
 
 ```bash
-npm install -g @posthog/cli
+npm install -g @posthog/cli@latest
 ```
 
-## Authenticate
+Note: if you are installing the CLI for use with a coding agent, you should follow our [setup for agents](#setup-for-agents) instructions.
+
+### Authentication
 
 ```bash
 posthog-cli login
 ```
 
-This stores a personal API token locally and reuses it for CLI commands.
+This opens a browser-based login flow, stores a personal API token locally, and reuses it for CLI commands.
 
 For CI/CD, headless environments, or agents running without a browser, set environment variables instead:
 
@@ -44,73 +48,43 @@ For CI/CD, headless environments, or agents running without a browser, set envir
 
 For broad agent workflows, create a [personal API key](https://app.posthog.com/settings/user-api-keys?preset=mcp_server) with the **MCP Server** preset. For narrower automation, grant only the scopes needed for the specific command.
 
-## Use PostHog from coding agents
+## Command reference
 
-`posthog-cli api` exposes PostHog's MCP tools through a single shell command. This is useful for agents because they can discover the available tool surface progressively instead of loading every tool and schema into context upfront.
+| Command | Description |
+| --- | --- |
+| `posthog-cli login` | Authenticate with PostHog and store a personal API token locally |
+| `posthog-cli api` | Use agent-first PostHog API tools |
+| `posthog-cli sourcemap` | Upload bundled JavaScript chunks and source maps to PostHog |
+| `posthog-cli dsym` | Upload Apple dSYM debug symbol files |
+| `posthog-cli hermes` | Upload Hermes source maps |
+| `posthog-cli proguard` | Upload ProGuard mapping files |
+| `posthog-cli symbol-sets` | Manage uploaded symbol sets |
+| `posthog-cli exp` | Run experimental commands |
+| `posthog-cli help` | Print CLI help or help for a subcommand |
 
-Agents should start a session by loading the full usage guide into context:
+## Using the CLI with a coding agent
 
-```bash
-posthog-cli api --agent-help
-```
+PostHog supports both CLI and [MCP](/docs/model-context-protocol) interfaces for agent workflows. You usually only need one, and which one you choose depends on how you want the agent to interact with PostHog.
 
-This prints the same tool reference the PostHog MCP server serves — command reference, schema drill-down rules, data discovery workflow, and the tool index — rewritten for CLI invocation.
+### When to use the CLI
 
-The workflow is:
+The CLI interface is familiar to agents and allows for composability, so it's more useful for scripting and deterministic flows. It can be more token-efficient when working with large datasets because the agent can stream, filter, aggregate, or sample data before it enters the model context.
 
-1. Search for the right tool.
-2. Inspect the tool before calling it.
-3. Drill into nested schemas only when needed.
-4. Call the tool with JSON input.
+### When to use the MCP
 
-For example:
+MCP is useful when you're working with an AI agent that doesn't have access to terminal or shell commands. This is especially important in non-coding environments, where the agent may support tool calling but doesn't have access to a terminal.
 
-```bash
-posthog-cli api search feature-flag
-posthog-cli api info feature-flag-get-all
-posthog-cli api schema query-trends series
-posthog-cli api call --json feature-flag-get-all '{"limit":5}'
-```
+MCP is also preferred when you want a native tool-calling experience, you need typed tool calls and results, and your workflows are happening in an AI client rather than script, CI, or shell.
 
-Use `--dry-run` before mutations:
+### Setup for agents
 
-```bash
-posthog-cli api call --dry-run feature-flags-bulk-delete-create '{"ids":[123]}'
-```
+Agents don't automatically know that a CLI tool exists or is available, so we need to tell them. The PostHog wizard installation path inserts agent instructions into the instructions file your agent reads, such as `AGENTS.md` or `CLAUDE.md`.
 
-Destructive tools require `--confirm`:
+`npx -y @posthog/wizard@latest cli add`
 
-```bash
-posthog-cli api call --confirm --json feature-flags-bulk-delete-create '{"ids":[123]}'
-```
+If you wish to install the CLI directly, you should add a snippet in your agent's instructions or tell it directly to use the `posthog-cli` for PostHog tasks. You can manually install the snippet with `posthog-cli api agents-md install [--path AGENTS.md]`.
 
-Because the command prints plain text or JSON, agents can pipe output to tools like `jq`, save intermediate results, and chain commands without spending tokens on unrelated schemas.
-
-## Set up agent instructions
-
-Agents don't automatically know that `posthog-cli api` exists or how PostHog expects them to use it, so something needs to tell them. That something is a managed instructions snippet.
-
-The best way to install it is the [PostHog wizard](/docs/ai-engineering/ai-wizard). It detects which coding agents you have installed and writes the snippet into the agent's global instructions file, such as `~/.claude/CLAUDE.md` for Claude Code or `~/.codex/AGENTS.md` for Codex:
-
-```bash
-npx -y @posthog/wizard@latest cli add
-```
-
-To set up a single repo instead of your agent globally, run the CLI installer from the repo root:
-
-```bash
-posthog-cli api agents-md install
-```
-
-To write to a non-default agent instructions file, pass `--path`:
-
-```bash
-posthog-cli api agents-md install --path ./AGENTS.md
-```
-
-The snippet tells agents to load `posthog-cli api --agent-help` into context, use `posthog-cli api` for PostHog tasks, follow the search, inspect, schema, and call workflow, and install any PostHog skill matching the task at hand before starting it. It's installed as a `<posthog>...</posthog>` block, and rerunning the install replaces the block in place — so reinstalling after a CLI update refreshes outdated instructions without duplicating them.
-
-## Agent skills
+### Skills
 
 Skills add task-specific instructions for common PostHog workflows, installed per repo into `.agents/skills/`. You don't need to install them upfront: the instructions snippet tells agents to check `posthog-cli api skill list` for a matching skill before starting a PostHog task, install it, and follow it.
 
@@ -133,63 +107,11 @@ Installed skills are a snapshot. To refresh one after an update, reinstall it wi
 posthog-cli api skill install --force <skill-id>
 ```
 
-## Use existing CLI commands
-
-Existing CLI commands continue to work as before. For example:
-
-```bash
-posthog-cli sourcemap inject --directory ./dist
-posthog-cli sourcemap upload --directory ./dist
-posthog-cli exp schema pull
-posthog-cli exp schema status
-```
-
-See [source map uploads](/docs/error-tracking/upload-source-maps/cli) and [schema management](/docs/product-analytics/schema-management#downloading-your-schema-with-the-cli) for product-specific examples.
-
-## Run from a local PostHog checkout
-
-If you're testing unreleased CLI changes from a local `PostHog/posthog` repository checkout, build the API CLI bundle first:
-
-```bash
-pnpm install
-pnpm --filter=@posthog/mcp build:cli
-```
-
-Then run the CLI through Cargo from the same checkout:
-
-```bash
-cargo run -- api search feature-flag
-cargo run -- api info feature-flag-get-all
-```
-
-If you're using an installed `posthog-cli` binary with a locally built API CLI bundle, point the binary at the bundle:
-
-```bash
-export POSTHOG_API_CLI_PATH=/path/to/posthog/services/mcp/dist/posthog-api-cli.mjs
-posthog-cli api search feature-flag
-```
-
-If the bundle can't be found, the CLI tells you to run `pnpm --filter=@posthog/mcp build:cli` or set `POSTHOG_API_CLI_PATH`.
-
-## Command reference
-
-```bash
-posthog-cli api --agent-help
-posthog-cli api tools
-posthog-cli api search <regex>
-posthog-cli api info [--json] <tool>
-posthog-cli api schema <tool> [field.path]
-posthog-cli api call [--json] [--dry-run] [--confirm] <tool> '<json>'
-posthog-cli api skill list [--json]
-posthog-cli api skill install [--force] <skill-id>
-posthog-cli api agents-md install [--path AGENTS.md]
-```
-
-## Troubleshooting and FAQ
+## FAQ
 
 ### My agent doesn't know about the CLI
 
-Agents only use `posthog-cli api` if their instructions tell them to. The best way to set that up is the wizard, which installs the steering snippet globally for your agent — or use the CLI to install it into a single repo's instructions file:
+Agents only use `posthog-cli api` if their instructions tell them to. The best way to set that up is the wizard, which installs the agent instructions globally for your agent — or use the CLI to install it into a single repo's instructions file:
 
 ```bash
 npx -y @posthog/wizard@latest cli add
@@ -207,10 +129,6 @@ npm install -g @posthog/cli@latest
 posthog-cli api --agent-help
 ```
 
-### Missing API key
-
-If you see a missing API key error, run `posthog-cli login` or set `POSTHOG_CLI_API_KEY` and `POSTHOG_CLI_PROJECT_ID`.
-
 ### The tool list looks outdated
 
 The tool catalog is bundled with the CLI, so an old binary serves an old catalog. Update the CLI and rerun the command:
@@ -223,41 +141,4 @@ If a tool you used before is gone, names change as the PostHog API evolves — u
 
 ```bash
 posthog-cli api search dashboard
-```
-
-### Skills are missing or outdated
-
-Skills are installed per repo into `.agents/skills/`. The instructions snippet tells agents to check for and install a matching skill before starting a PostHog task — if your agent isn't doing that, make sure the snippet is installed and up to date (see above). To install a skill manually:
-
-```bash
-posthog-cli api skill list
-posthog-cli api skill install <skill-id>
-```
-
-Installed skills are a snapshot — they don't update themselves. To refresh a stale skill, reinstall it with `--force`:
-
-```bash
-posthog-cli api skill install --force <skill-id>
-```
-
-### The installed `AGENTS.md` snippet is outdated
-
-Rerun the install with the latest CLI. The snippet lives in a `<posthog>...</posthog>` block that's replaced in place, so this refreshes the instructions without duplicating them:
-
-```bash
-npx -y @posthog/cli@latest api agents-md install
-```
-
-### Schema errors
-
-Run `info` before every `call`:
-
-```bash
-posthog-cli api info query-trends
-```
-
-If the schema output includes a nested field you need to populate, inspect that field with `schema`:
-
-```bash
-posthog-cli api schema query-trends series
 ```

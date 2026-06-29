@@ -84,11 +84,24 @@ Try these with your MCP-enabled agent:
 - `Show me 5 sample rows from the hubspot_contacts table.`
 - `What properties are available on the purchase_completed event?`
 
+For schema discovery:
+
+- `Query system.information_schema.tables to list all available tables with their descriptions.`
+- `What columns does the events table have? Use system.information_schema.columns.`
+- `Show me all relationships from the events table using system.information_schema.relationships.`
+- `List all HogQL data types from system.information_schema.data_types.`
+
 For querying alerts:
 
 - `Query system.alerts to find all enabled alerts in the project.`
 - `Show me alerts that check hourly and their last check results.`
 - `Write a HogQL query to find alerts that fired in the last week.`
+
+For schema discovery using [`system.information_schema`](/docs/data-warehouse/sources/posthog#schema-discovery-with-information_schema):
+
+- `Query system.information_schema.columns to find all columns in the events table with their types and descriptions.`
+- `Use system.information_schema.relationships to show me how the events table joins to other tables.`
+- `Search system.information_schema.tables for any table related to subscriptions.`
 
 For view management:
 

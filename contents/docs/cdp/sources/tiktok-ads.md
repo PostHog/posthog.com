@@ -46,3 +46,7 @@ Connect PostHog to your TikTok Ads account. The TikTok account must have permiss
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

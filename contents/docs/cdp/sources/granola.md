@@ -43,3 +43,7 @@ Only notes that already have a generated AI summary and transcript are returned 
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

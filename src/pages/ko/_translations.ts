@@ -772,7 +772,7 @@ const koDeepMenuTranslations: Record<string, string> = {
     'Sidebar dashboard': '사이드바 대시보드',
     'Flag management': '플래그 관리',
     'Stale flag cleanup': '오래된 플래그 정리',
-    'SDK doctor': 'SDK 닥터',
+    'SDK health': 'SDK 상태',
     'Keeping SDKs current': 'SDK 최신 상태 유지',
     'SQL access': 'SQL 접근',
     'SQL expressions': 'SQL 표현식',
