@@ -19,7 +19,7 @@ So how much does a typical scale-up [like PostHog](/about) spend on marketing. A
 
 “But Charles, you naive idiot, surely competitors will use this information against you?”
 
-Um, sure I guess? But especially if you’re into product-led growth (like we are), how you spend marketing $ seems pretty far down the list of competitive advantages. We're open source and we already tell everyone [our strategy](/handbook] and [what we’re going to build next](/roadmap). That doesn’t seem to have hurt us so far. 
+Um, sure I guess? But especially if you’re into product-led growth (like we are), how you spend marketing $ seems pretty far down the list of competitive advantages. We're open source and we already tell everyone [our strategy](/handbook) and [what we’re going to build next](/roadmap). That doesn’t seem to have hurt us so far. 
 
 By sharing some of this info, I’m hoping it’ll help others as a data point. **I am not saying this is the best way to spend your marketing budget.** I have no idea! That’s the point!! But I’m hoping _maybe_ someone will see this and tell us how we could do better...
 
@@ -80,7 +80,7 @@ If you want to learn more about how we implement these things in practice, it’
 
 ## What we’ve changed recently
 
-In the last 9 months, we've roughly doubled the marketing teams, including hiring many first people in their role such as influencer manager, dev advocate for YouTube, copywriter, and social media manager (and we've gone form 1 to 4 product marketers). 
+In the last 9 months, we've roughly doubled the marketing teams, including hiring many first people in their role such as influencer manager, dev advocate for YouTube, copywriter, and social media manager (and we've gone from 1 to 4 product marketers). 
 
 An extremely obvious observation - you need to hire people to be able to spend more money (unless you are keen to just set money on fire). You can't just turn up the magic marketing budget dial and expect results. For example, we did influencer marketing as a side project before hiring, but it would have been pointless to increase the budget for the sake of it even though it was 'working'. Events turned out to be  very difficult to do on the side, so we didn't spend anything on them until we hired our first person there. 
 

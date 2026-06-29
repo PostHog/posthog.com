@@ -38,3 +38,7 @@ To fix this, either enable the object in your Attio workspace or disable syncing
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

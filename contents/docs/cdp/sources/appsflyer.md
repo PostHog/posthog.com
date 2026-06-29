@@ -47,3 +47,7 @@ All tables sync incrementally on the `date` field.
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

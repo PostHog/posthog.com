@@ -93,7 +93,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'cache-warming': {
         feature: 'Cache warming',
-        owner: ['query-performance'],
+        owner: ['analytics-platform'],
     },
     cli: {
         feature: 'CLI',
@@ -348,7 +348,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'query-performance': {
         feature: 'Query performance',
-        owner: ['query-performance'],
+        owner: ['analytics-platform'],
         label: 'feature/insights',
     },
     'quota-limiting': {
