@@ -16,7 +16,8 @@ export const errorTracking = {
     seo: {
         title: 'Error Tracking – Catch and fix issues faster with PostHog',
         description:
-            'Error tracking ties every exception to the user who hit it and the session that caused it – the context agents use to ship the fix and make your product self-driving.',
+            'Capture, monitor, and resolve exceptions with error tracking. Connect Product Analytics and Session Replay to ship confidently with full context.',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/error_tracking_ae1263a1b8.jpg',
     },
     overview: {
         title: 'Track errors and resolve issues',

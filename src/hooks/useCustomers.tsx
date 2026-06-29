@@ -407,9 +407,9 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         featured: false,
         logo: {
             light: 'https://res.cloudinary.com/dmukukwp6/image/upload/FASTR_Logo_full_color_a8db0d8cb5.png',
-            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/FASTR_Logo_full_color_a8db0d8cb5.png',
+            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/FASTR_Logo_white_3c093b166c.png',
         },
-        height: 10,
+        height: 8,
         quotes: {
             ryan_breen: {
                 name: 'Ryan Breen',
@@ -489,7 +489,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             light: 'https://res.cloudinary.com/dmukukwp6/image/upload/e_trim,q_auto,f_auto/kilocodelogo_93f0668287.png',
             dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/e_trim,q_auto,f_auto/kilocodelogo_93f0668287.png',
         },
-        height: 8,
+        height: 14,
         quotes: {
             job_rietbergen: {
                 // This is the author handle used in OSQuote
@@ -794,8 +794,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'A digital menu platform with its own ad network',
         featured: false,
         logo: {
-            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/qubs_logo_white_outline_2x_5430c8f472.png',
-            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/qubs_logo_black_2x_c4ca11cba9.png',
+            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/qubs_logo_black_2x_c4ca11cba9.png',
+            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/qubs_logo_white_outline_2x_5430c8f472.png',
         },
         height: 10,
         quotes: {

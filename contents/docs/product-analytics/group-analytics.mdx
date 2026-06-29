@@ -164,8 +164,8 @@ posthog.capture('user_signed_up')
 ```python
 # Not possible
 posthog.capture(
-    'user_distinct_id',
     'user_signed_up',
+    distinct_id='user_distinct_id',
     groups={
         'company': 'company_id_in_your_db',
         'company': 'another_company_id_in_your_db'
@@ -174,8 +174,8 @@ posthog.capture(
 
 # Allowed
 posthog.capture(
-    'user_distinct_id',
     'user_signed_up',
+    distinct_id='user_distinct_id',
     groups={
         'company': 'company_id_in_your_db',
         'channel': 'channel_id_in_your_db'
@@ -248,8 +248,9 @@ posthog.capture({
 ```
 
 ```python
-posthog.capture('static_string_for_group_events', 
-    'group_event_name', 
+posthog.capture(
+    'group_event_name',
+    distinct_id='static_string_for_group_events',
     groups={'company': 'company_id_in_your_db'}
 )
 ```
@@ -331,7 +332,7 @@ This shows how many individual groups completed each step, the drop-off percenta
 
 ### Use group types with feature flags
 
-[Create a feature flag](/docs/feature-flags/creating-feature-flags) and select your group type in the **Match by** dropdown under **Release conditions**.
+[Create a feature flag](/docs/feature-flags/creating-feature-flags) and use the **Target by** selector on a condition set to choose your group type. See [user and group targeting](/docs/feature-flags/user-and-group-targeting) for details.
 
 <ProductVideo
     videoLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/user-guides/group-analytics/groups-in-feature-flags-light-mode.mp4"

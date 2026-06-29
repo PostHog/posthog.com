@@ -433,3 +433,15 @@ British
 [Ee]nglish
 European
 UK
+
+# Technology terms
+MCPcat
+[Nn]ullish
+[Ss]anitization
+[Ss]anitize[ds]?
+[Aa]llowlist
+[Pp]ageleave
+[Pp]roxied
+[Uu]nproxied
+[Uu]ndercount(s|ed|ing)?
+[Rr]esync(s|ed|ing)?

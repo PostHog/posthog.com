@@ -26,11 +26,19 @@ When in doubt, ask in the `#design-review` Slack channel. Lottie and Cory are, f
 
 ## Who owns what
 
-- **Cory** (Design Lead) – Website, copy, major design decisions, motion work for web.
-- **Lottie** (Graphics Lead) - Graphics, artwork, merch, anything illustrated, motion work for video.
-- **Editorial team** – Blog, email copy, messaging guidelines, social presence.
-- **Marketing team** - Email copy, external partnerships, influencers.
-- **YouTube team** - Video production, editing.
-- **Events team** - In-person events, PostHog speaking engagements, meetups.
-- **Docs & Wizard team** - Docs, obviously. 
+- <SmallTeam slug="website" /> – Website, copy, major design decisions, motion work for web.
+- <SmallTeam slug="graphics" /> – Graphics, artwork, merch, anything illustrated, motion work for video.
+- <SmallTeam slug="editorial" /> – Blog, email copy, messaging guidelines, social presence.
+- <SmallTeam slug="marketing" /> – Email copy, external partnerships, influencers.
+- <SmallTeam slug="youtube" /> – Video production, editing.
+- <SmallTeam slug="irl-events" /> – In-person events, PostHog speaking engagements, meetups.
+- <SmallTeam slug="docs-wizard" /> – Docs, obviously. 
 - **Everyone** – Handbook updates. 
+
+### Graphics team responsibilities
+
+This is who owns what on #team-graphics:
+
+- **Illustration (Heidi)** – Newsletter and blog images, email artwork, hedgehog illustrations (used across the website, events, etc.), animating hogs, team crests, and merch design.
+- **Graphic design (Lottie)** – Website art (e.g. icons, backgrounds), paid ads, billboards and OOH, event graphics, and doing more weird. Also owns YouTube thumbnails and video assets temporarily, until the rebrand is done (then → Daniel).
+- **Production design (Daniel)** – Design ops (cleaning up and componentizing Figma), social media (repurposing existing assets only, no net new), merch file formatting, event flyers (soon to be self-serve on the web), and moving off Pitch and into Figma Slides.

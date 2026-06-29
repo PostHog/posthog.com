@@ -57,6 +57,10 @@ For incremental tables, you can choose which cursor field to use:
 
 <SourceParameters />
 
+## Supported tables
+
+<SourceTables />
+
 ## Timestamps and timezone
 
 ShipStation's v1 API returns all DateTime values in **US Pacific time**, not UTC. PostHog handles this conversion automatically during sync, but be aware of it when querying raw timestamp fields.

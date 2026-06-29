@@ -56,6 +56,25 @@
         { "source": "/posts/:path*", "destination": "/posts/[slug]/index.html" }
     ],
     "redirects": [
+        { "source": "/teams/logs", "destination": "/teams/apm" },
+        { "source": "/teams/query-performance", "destination": "/teams/analytics-platform" },
+        { "source": "/teams/query-performance/:path*", "destination": "/teams/analytics-platform/:path*" },
+        { "source": "/self-driving", "destination": "/docs/self-driving", "statusCode": 302 },
+        {
+            "source": "/docs/sdk-doctor/keeping-sdks-current",
+            "destination": "/docs/health-checks/keeping-sdks-current",
+            "statusCode": 301
+        },
+        { "source": "/docs/sdk-doctor", "destination": "/docs/health-checks/sdk-health", "statusCode": 301 },
+        { "source": "/teams/customer-success", "destination": "/teams/customer-success-eu" },
+        { "source": "/teams/customer-success/:path*", "destination": "/teams/customer-success-eu/:path*" },
+        {
+            "source": "/docs/prompt-management/skills-store",
+            "destination": "/docs/ai-engineering/skills-store",
+            "statusCode": 301
+        },
+        { "source": "/docs/site-apps", "destination": "/docs/js-snippets" },
+        { "source": "/docs/site-apps/:path*", "destination": "/docs/js-snippets/:path*" },
         { "source": "/code/download", "destination": "/code#download" },
         { "source": "/code/download/", "destination": "/code#download" },
         {
@@ -76,8 +95,23 @@
             "destination": "/handbook/marketing/positioning/:path*",
             "statusCode": 301
         },
+        {
+            "source": "/handbook/brand/reference",
+            "destination": "/handbook/brand/overview",
+            "statusCode": 301
+        },
         { "source": "/docs/product-tours", "destination": "/docs", "statusCode": 301 },
         { "source": "/docs/product-tours/:path*", "destination": "/docs", "statusCode": 301 },
+        { "source": "/docs/start-here", "destination": "/docs/self-driving", "statusCode": 301 },
+        { "source": "/docs/start-here/:path*", "destination": "/docs/self-driving/:path*", "statusCode": 301 },
+        { "source": "/docs/product-os", "destination": "/docs/self-driving", "statusCode": 301 },
+        { "source": "/docs/self-driving/responders", "destination": "/docs/self-driving/inbox", "statusCode": 301 },
+        { "source": "/docs/self-driving/guardrails", "destination": "/docs/self-driving", "statusCode": 301 },
+        {
+            "source": "/docs/self-driving/autonomy-loop",
+            "destination": "/docs/self-driving/self-improving-loop",
+            "statusCode": 301
+        },
         {
             "source": "/docs/product-analytics/sampling",
             "destination": "/docs/product-analytics",
@@ -87,6 +121,11 @@
         { "source": "/docs/api/product-tours/:path*", "destination": "/docs/api", "statusCode": 301 },
         { "source": "/coupons/:path*", "destination": "https://app.posthog.com/coupons/:path*", "statusCode": 301 },
         { "source": "/handbook/growth/marketing", "destination": "/handbook/marketing", "statusCode": 301 },
+        {
+            "source": "/handbook/growth/revops/lead-assignment-ooo",
+            "destination": "/handbook/growth/revops/lead-assignment-tracker",
+            "statusCode": 301
+        },
         {
             "source": "/handbook/growth/marketing/:path*",
             "destination": "/handbook/marketing/:path*",
@@ -110,10 +149,14 @@
         { "source": "/teams/llm-analytics", "destination": "/teams/ai-observability" },
         { "source": "/aio", "destination": "/ai-observability" },
         { "source": "/teams/flags-platform", "destination": "/teams/feature-flags" },
-        { "source": "/teams/signals", "destination": "/teams/self-driving" },
-        { "source": "/teams/signals/:path*", "destination": "/teams/self-driving/:path*" },
-        { "source": "/teams/posthog-ai", "destination": "/teams/self-driving" },
-        { "source": "/teams/posthog-ai/:path*", "destination": "/teams/self-driving/:path*" },
+        {
+            "source": "/teams/signals",
+            "destination": "/teams/self-driving"
+        },
+        {
+            "source": "/teams/posthog-ai",
+            "destination": "/teams/self-driving"
+        },
         { "source": "/tutorials/nps-survey", "destination": "/templates/nps-survey" },
         { "source": "/questions/topics/:path*", "destination": "/questions/topic/:path*" },
         { "source": "/docs/sdks/:path*", "destination": "/docs/libraries/:path*" },
@@ -127,12 +170,27 @@
         { "source": "/docs/tracing/:path*", "destination": "/docs/distributed-tracing/:path*", "statusCode": 301 },
         {
             "source": "/docs/posthog-code/inbox/triage",
-            "destination": "/docs/posthog-code/inbox/implementation",
+            "destination": "/docs/self-driving/inbox/implementation",
             "statusCode": 301
         },
         {
             "source": "/docs/posthog-code/inbox/triage/",
-            "destination": "/docs/posthog-code/inbox/implementation",
+            "destination": "/docs/self-driving/inbox/implementation",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-code/inbox",
+            "destination": "/docs/self-driving/inbox",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-code/inbox/:path*",
+            "destination": "/docs/self-driving/inbox/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/self-driving/first-task",
+            "destination": "/docs/self-driving/inbox",
             "statusCode": 301
         },
         {
@@ -1140,6 +1198,10 @@
             "source": "/docs/getting-started/estimating-usage-costs",
             "destination": "/docs/billing/estimating-usage-costs"
         },
+        { "source": "/docs/billing", "destination": "/docs/billing/estimating-usage-costs" },
+        { "source": "/docs/billing-and-payments", "destination": "/docs/billing/estimating-usage-costs" },
+        { "source": "/docs/billing/annual-plans", "destination": "/docs/billing/pre-paid-plans" },
+        { "source": "/legal", "destination": "/terms" },
         { "source": "/docs/getting-started/actions-and-insights", "destination": "/docs/data/actions" },
         { "source": "/docs/getting-started/person-properties", "destination": "/docs/data/persons" },
         { "source": "/docs/getting-started/group-analytics", "destination": "/docs/product-analytics/group-analytics" },
@@ -1878,7 +1940,7 @@
         },
         {
             "source": "/docs/llm-analytics/skills-store",
-            "destination": "/docs/prompt-management/skills-store"
+            "destination": "/docs/ai-engineering/skills-store"
         },
         {
             "source": "/docs/llm-analytics/:path*",
@@ -1917,8 +1979,10 @@
         { "source": "/handbook/brand/brand-and-vibes", "destination": "/handbook/brand/overview" },
         { "source": "/handbook/brand/process", "destination": "/handbook/engineering/product-design-process" },
         { "source": "/teams/max-ai", "destination": "/teams/self-driving" },
-        { "source": "/teams/twig", "destination": "/teams/posthog-code" },
-        { "source": "/teams/twig/:path*", "destination": "/teams/posthog-code/:path*" },
+        {
+            "source": "/teams/twig",
+            "destination": "/teams/posthog-code"
+        },
         {
             "source": "/docs/max-ai",
             "destination": "/docs/posthog-ai"

@@ -58,3 +58,7 @@ The `events` table is GoCardless's append-only change log, making it the only ta
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

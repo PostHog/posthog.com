@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> Writing for PostHog? Be sure to check out our full [writing style guide](http://localhost:8002/handbook/content/posthog-style-guide).
+> Writing for PostHog? Be sure to check out our full [writing style guide](/handbook/content/posthog-style-guide).
 
 ## The core principle
 
@@ -72,7 +72,7 @@ For how the voice shifts across surfaces (website, product UI, docs, blog, socia
 | "Ship, measure and iterate – all on one platform." | "Streamline your product development lifecycle"    |
 | "Make your product self-driving"                   | "PostHog is self-driving software"                 |
 
-On that last one: PostHog makes _your_ product self-driving. Keep the customer's product as the subject — they get a product that improves itself; PostHog is how. See the [content brand guidelines](/handbook/content/brand-message) for the full nuance.
+On that last one: PostHog makes _your_ product self-driving. Keep the customer's product as the subject — they get a product that improves itself; PostHog is how. See [how we describe PostHog](/handbook/brand/foundations#self-driving-is-the-story) for the full nuance.
 
 ### Body copy
 

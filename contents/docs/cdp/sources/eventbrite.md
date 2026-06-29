@@ -49,3 +49,7 @@ Only `orders` and `attendees` expose a server-side `changed_since` filter, so th
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

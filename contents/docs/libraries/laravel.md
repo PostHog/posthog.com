@@ -136,6 +136,18 @@ For older Laravel versions, call `PostHog::captureException()` from your excepti
 
 In normal PHP request lifecycles, queued events flush when the client is destroyed. In long-running Laravel processes such as queue workers, Horizon, or Octane, call `PostHog::flush()` after capturing important events or at the end of a job/request.
 
+If you prefer immediate delivery in queue workers, configure the PHP SDK with `batch_size` set to `1` for those workers:
+
+```php
+PostHog::init(
+    '<ph_project_token>',
+    [
+        'host' => config('services.posthog.host'),
+        'batch_size' => 1,
+    ]
+);
+```
+
 ## Next steps
 
 See the [PHP SDK docs](/docs/libraries/php) for usage examples and the full API reference.

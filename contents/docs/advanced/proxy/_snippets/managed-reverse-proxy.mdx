@@ -1,6 +1,14 @@
 import { Steps, Step } from "components/Docs/Steps";
 import { CalloutBox } from "components/Docs/CalloutBox";
 
+<CalloutBox icon="IconWarning" title="Third-party processing and HIPAA" type="caution">
+
+This feature routes traffic through [Cloudflare](https://www.cloudflare.com), which is listed as a [subprocessor](https://posthog.com/subprocessors) in our [Data Processing Agreement](https://posthog.com/dpa). By enabling the managed reverse proxy, data is transmitted to and processed by Cloudflare.
+
+This feature is **not HIPAA-compliant** and should not be used to process Protected Health Information (PHI). Any Business Associate Agreement (BAA) you have with PostHog does not cover this feature.
+
+</CalloutBox>
+
 PostHog's managed reverse proxy routes traffic through our infrastructure. We handle SSL certificates, routing, and maintenance automatically.
 
 This option is free for all PostHog Cloud users. You just need access to your domain's DNS settings.
@@ -170,3 +178,9 @@ That said, the managed reverse proxy is designed so that **no request content is
 - Cloudflare has confirmed to us that they do not retain request logs for this traffic either.
 
 Once traffic reaches PostHog, it is ingested into the region you selected (EU or US Cloud). If strict EU-only termination at the edge is a hard requirement for your compliance posture, we recommend setting up a [self-hosted proxy](/docs/advanced/proxy) on infrastructure you control instead.
+
+### Is the managed reverse proxy HIPAA-compliant?
+
+No. The managed reverse proxy is not HIPAA-compliant and should not be used to process Protected Health Information (PHI). Any Business Associate Agreement (BAA) you have with PostHog does not apply to this feature.
+
+If you need HIPAA compliance, set up a [self-hosted proxy](/docs/advanced/proxy) on infrastructure you control instead.

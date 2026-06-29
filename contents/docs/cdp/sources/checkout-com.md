@@ -45,3 +45,7 @@ Incremental syncs use the `last_update` field as a cursor. Disputes are fetched 
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

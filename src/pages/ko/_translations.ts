@@ -772,7 +772,7 @@ const koDeepMenuTranslations: Record<string, string> = {
     'Sidebar dashboard': '사이드바 대시보드',
     'Flag management': '플래그 관리',
     'Stale flag cleanup': '오래된 플래그 정리',
-    'SDK doctor': 'SDK 닥터',
+    'SDK health': 'SDK 상태',
     'Keeping SDKs current': 'SDK 최신 상태 유지',
     'SQL access': 'SQL 접근',
     'SQL expressions': 'SQL 표현식',
@@ -784,7 +784,7 @@ const koDeepMenuTranslations: Record<string, string> = {
     Approvals: '승인',
     'Command palette': '명령 팔레트',
     'Account settings': '계정 설정',
-    'Site Apps': '사이트 앱',
+    'JS snippets': 'JS 스니펫',
     'Notification Bar': '알림 바',
     'Pineapple Mode': '파인애플 모드',
 

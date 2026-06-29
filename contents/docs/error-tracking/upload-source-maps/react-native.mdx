@@ -110,6 +110,7 @@ The plugin accepts the following options:
 | Option | Type | Default | Description |
 | --- | --- | --- | --- |
 | `disableSandboxing` | `boolean` | `true` | iOS only. When `true`, sets `ENABLE_USER_SCRIPT_SANDBOXING=NO` on your main app target's Xcode build configurations during `expo prebuild`. This lets the source map upload script read `.git/` (for release metadata) and lets stock Expo projects build without manually declaring input/output files on every script phase. |
+| `skipOnConflict` | `boolean` | `false` | Adds `--skip-on-conflict` to JavaScript source map uploads on iOS and Android. Use this when the same build can upload the same source maps more than once and you want duplicate uploads to be skipped instead of failing. Requires `posthog-react-native` 4.49.1 or later. |
 
 Example opting out of the sandbox change:
 
@@ -134,6 +135,18 @@ Example opting out of the sandbox change:
 This setting only affects build-time scripts on the build machine. Your shipped app's runtime security is unchanged.
 
 </CalloutBox>
+
+Example skipping duplicate JavaScript source map uploads:
+
+```json
+{
+  "expo": {
+    "plugins": [
+      ["posthog-react-native/expo", { "skipOnConflict": true }]
+    ]
+  }
+}
+```
 
 2. Android: Update the `/android/app/build.gradle` file from your app's root directory so that it looks like this:
 

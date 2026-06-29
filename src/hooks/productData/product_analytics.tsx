@@ -29,7 +29,8 @@ export const productAnalytics = {
     seo: {
         title: 'Product Analytics – Understand your product with PostHog',
         description:
-            'Product analytics that connects to session replays, feature flags, and experiments – the full context your agents use to find what works and make your product self-driving.',
+            'Track usage, retention, and feature adoption with Product Analaytics. PostHog connects recordings, experiments, feature flags, and more for full product insight.',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/product_analytics_d5ab5a02cb.jpg',
     },
     overview: {
         title: 'Product analytics with autocapture',
