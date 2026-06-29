@@ -1,23 +1,23 @@
 ---
-title: MCP analytics
+title: MCP Analytics
 ---
 
 import CalloutBox from 'components/Docs/CalloutBox'
 import OSButton from 'components/OSButton'
 
-<CalloutBox icon="IconInfo" title="MCP analytics is in alpha" type="fyi">
+<CalloutBox icon="IconInfo" title="MCP Analytics is in alpha" type="fyi">
 
 `@posthog/mcp` is a TypeScript SDK for instrumenting Model Context Protocol (MCP) servers with PostHog analytics. It's published on npm as a `0.1.x` release while we build it in public. The API, event names, properties, and tracing behavior may change before the SDK reaches `1.0`. Don't depend on it for production reporting yet. Today, only TypeScript MCP servers are supported – a Python SDK is on the roadmap.
 
 </CalloutBox>
 
-MCP analytics helps you understand how AI agents actually use the MCP server you ship: which tools get called, how often, what intent the agent had, where calls are failing, what tools the agent asked for but you don't offer yet, and how individual sessions flow end to end.
+MCP Analytics helps you understand how AI agents actually use the MCP server you ship: which tools get called, how often, what intent the agent had, where calls are failing, what tools the agent asked for but you don't offer yet, and how individual sessions flow end to end.
 
 The SDK wraps your existing MCP server and emits PostHog events on every tool call, resource read, prompt fetch, and initialize handshake. You can keep using whatever tooling you already have on top of PostHog – insights, dashboards, alerts, Error Tracking – without any additional ingestion plumbing.
 
-<CalloutBox icon="IconInfo" title="A dedicated MCP analytics view is in preview" type="fyi">
+<CalloutBox icon="IconInfo" title="A dedicated MCP Analytics view is in preview" type="fyi">
 
-PostHog has a purpose-built **MCP analytics** view – a dashboard, a sessions explorer, per-tool quality breakdowns, and intent clustering, all built on the `$mcp_*` events the SDK sends. It's in preview behind a feature flag while we build it in public. Because every signal is a normal PostHog event, you don't have to wait for it: you can query and visualize the same data today through [Product Analytics](/docs/product-analytics) for trends and funnels, the [SQL editor](/docs/data-warehouse/sql) for ad-hoc HogQL, [Dashboards](/docs/product-analytics/dashboards) for at-a-glance views, and [Error Tracking](/docs/error-tracking) for `$exception` events. The events on this page won't change shape as the view matures.
+PostHog has a purpose-built **MCP Analytics** view – a dashboard, a sessions explorer, per-tool quality breakdowns, and intent clustering, all built on the `$mcp_*` events the SDK sends. It's in preview behind a feature flag while we build it in public. Because every signal is a normal PostHog event, you don't have to wait for it: you can query and visualize the same data today through [Product Analytics](/docs/product-analytics) for trends and funnels, the [SQL editor](/docs/data-warehouse/sql) for ad-hoc HogQL, [Dashboards](/docs/product-analytics/dashboards) for at-a-glance views, and [Error Tracking](/docs/error-tracking) for `$exception` events. The events on this page won't change shape as the view matures.
 
 </CalloutBox>
 
@@ -34,12 +34,12 @@ Get started
 - Did an agent hit `get_more_tools` because the right capability didn't exist?
 - How does a single MCP session unfold across tool calls?
 
-The MCP analytics dashboard answers most of these at a glance – tool call volume, error rate, p95 latency, and the share of traffic per client:
+The MCP Analytics dashboard answers most of these at a glance – tool call volume, error rate, p95 latency, and the share of traffic per client:
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_dashboard_light_0907967b56.png"
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_dashboard_dark_5023c584d4.png"
-  alt="MCP analytics dashboard showing sessions, tool calls, error rate, p95 latency, daily activity, and share of calls by client"
+  alt="MCP Analytics dashboard showing sessions, tool calls, error rate, p95 latency, daily activity, and share of calls by client"
   classes="rounded"
 />
 
@@ -48,7 +48,7 @@ Drill into any single MCP session to step through its tool calls, intents, and e
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_sessions_light_bdd1eb84cb.png"
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_sessions_dark_d5b4aa4577.png"
-  alt="MCP analytics sessions explorer showing a session's tool calls, intents, and an errored call"
+  alt="MCP Analytics sessions explorer showing a session's tool calls, intents, and an errored call"
   classes="rounded"
 />
 
