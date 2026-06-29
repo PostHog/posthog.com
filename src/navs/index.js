@@ -632,66 +632,66 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'Docs & Wizard',
-        url: '/handbook/docs-and-wizard',
+        name: 'Wizard & Docs',
+        url: '/handbook/wizard-and-docs',
         children: [
             {
                 name: 'Overview',
-                url: '/handbook/docs-and-wizard',
+                url: '/handbook/wizard-and-docs',
             },
             {
                 name: 'How to publish changelog',
-                url: '/handbook/docs-and-wizard/how-to-publish-changelog',
+                url: '/handbook/wizard-and-docs/how-to-publish-changelog',
             },
             {
                 name: 'Wizard',
             },
             {
                 name: 'AI wizard',
-                url: '/handbook/docs-and-wizard/developing-the-wizard',
+                url: '/handbook/wizard-and-docs/developing-the-wizard',
             },
             {
                 name: 'Context mill',
-                url: '/handbook/docs-and-wizard/context-mill',
+                url: '/handbook/wizard-and-docs/context-mill',
             },
             {
                 name: 'Docs',
             },
             {
                 name: 'Ownership',
-                url: '/handbook/docs-and-wizard/docs-ownership',
+                url: '/handbook/wizard-and-docs/docs-ownership',
             },
             {
                 name: 'Style guide',
-                url: '/handbook/docs-and-wizard/docs-style-guide',
+                url: '/handbook/wizard-and-docs/docs-style-guide',
             },
             {
                 name: 'Vale (prose linter)',
-                url: '/handbook/docs-and-wizard/vale',
+                url: '/handbook/wizard-and-docs/vale',
             },
             {
                 name: 'MDX and components',
-                url: '/handbook/docs-and-wizard/mdx-and-components',
+                url: '/handbook/wizard-and-docs/mdx-and-components',
             },
             {
                 name: 'How to write product docs',
-                url: '/handbook/docs-and-wizard/writing-product-docs',
+                url: '/handbook/wizard-and-docs/writing-product-docs',
             },
             {
                 name: 'How to use the content writer agent',
-                url: '/handbook/docs-and-wizard/content-writer-agent',
+                url: '/handbook/wizard-and-docs/content-writer-agent',
             },
             {
                 name: 'Onboarding docs',
-                url: '/handbook/docs-and-wizard/onboarding-docs',
+                url: '/handbook/wizard-and-docs/onboarding-docs',
             },
             {
                 name: 'SDK reference docs',
-                url: '/handbook/docs-and-wizard/sdk-reference-docs',
+                url: '/handbook/wizard-and-docs/sdk-reference-docs',
             },
             {
                 name: 'API specs and docs',
-                url: '/handbook/docs-and-wizard/api-specifications',
+                url: '/handbook/wizard-and-docs/api-specifications',
             },
         ],
     },

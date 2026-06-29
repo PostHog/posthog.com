@@ -145,6 +145,13 @@
         { "source": "/teams/words-and-pictures", "destination": "/teams/website" },
         { "source": "/teams/words-pictures", "destination": "/teams/website" },
         { "source": "/teams/brand-vibes", "destination": "/teams/website" },
+        { "source": "/teams/docs-wizard", "destination": "/teams/wizard-and-docs" },
+        { "source": "/handbook/docs-and-wizard", "destination": "/handbook/wizard-and-docs", "statusCode": 301 },
+        {
+            "source": "/handbook/docs-and-wizard/:path*",
+            "destination": "/handbook/wizard-and-docs/:path*",
+            "statusCode": 301
+        },
         { "source": "/teams/llm-gateway", "destination": "/teams/ai-gateway" },
         { "source": "/teams/llm-analytics", "destination": "/teams/ai-observability" },
         { "source": "/aio", "destination": "/ai-observability" },
