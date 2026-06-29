@@ -47,3 +47,7 @@ All BambooHR tables are full refresh only – the BambooHR API does not expose a
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

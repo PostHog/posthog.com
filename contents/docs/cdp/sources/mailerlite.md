@@ -51,3 +51,7 @@ The MailerLite API exposes no server-side timestamp filter on any list endpoint,
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

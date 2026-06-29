@@ -30,6 +30,10 @@ Once the sync completes, you can start querying your Coda data in PostHog.
 
 <SourceParameters />
 
+## Supported tables
+
+<SourceTables />
+
 ## Available tables
 
 Coda's data model is hierarchical: docs contain tables, and tables contain rows. PostHog injects parent linkage fields (`_doc_id`, `_table_id`) to form composite primary keys, since table and row IDs are only unique within their parent.

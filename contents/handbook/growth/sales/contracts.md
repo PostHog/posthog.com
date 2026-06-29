@@ -67,6 +67,7 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
     - **Client.Company** - The legal company name
     - **Contract.Discount** - The discount % (appears in the Additional credit purchase section)
     - **Startup credits** - If the customer [qualifies for the 2 free months](/handbook/growth/sales/contract-rules#startup-plan-discounts) when rolling off the startup plan, add up their total and discount as normal, and then add a note about the free credits in this format: "An additional credit in the amount of XXXXX (offered to customers in exchange for rolling off the Startup plan) to be applied to Customer's account upon signature with the same expiration date." For example, if a customer is signing a standard $20k annual contract to get the 20% discount, the total will be $25k, 20% discount of $5k, total cost to the customer would be $20k. In the notes, you would write: "An additional credit in the amount of USD $4,166.67 (offered to customers in exchange for rolling off the Startup plan) to be applied to Customer's account upon signature with the same expiration date."
+    - **Contract buyout credits** - If the customer is [buying out a competitor contract](/handbook/growth/sales/contract-rules#contract-buyouts), add the buyout credit to the Special Terms in this format: "Customer will receive a one-time and additional PostHog Cloud Credit of $XX,YYY (the "Contract Buyout Credit") to be applied against monthly usage expiring on the Credit Allocation Date." Any buyout is subject to team lead approval before it goes on an order form.
     - **Contract.EffectiveDate**
 
         - Set the start date of the contract in the format DD MMM YYYY (e.g., 01 Feb 2023). For a new customer, this would be the date they choose to start their subscription. For an existing customer, we have two options:
@@ -76,6 +77,7 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
                 - If a customer wants to start using credits immediately for the October cycle, your contract start date should be October 1.
                 - If a customer wants to start using credits starting the next billing cycle, your contract start date should be November 1.
                 - If you set the start date correctly, our Zapier automation flow will create the invoices with correct dates so our revenue calculations are not affected from the transition.
+            - **Do not backdate beyond the current billing period.** You can only set the start date as far back as the beginning of the *current, not-yet-invoiced* billing period (Immediate Activation above). Never set it into a period we have already issued an invoice for. Doing so rewrites an issued invoice and breaks revenue recognition, which is not something we support.
         - **Note:** Pay-as-you-go products are charged after the end of the period, while flat-rate subscriptions are charged at the beginning of the period. As a result the first two payments on a monthly schedule may occur within the same billing period as part of the transition. Make sure to send a note to the customer to ensure they're fully informed!
         - **Startup credits** - If the customer [qualifies for the 2 free months](/handbook/growth/sales/contract-rules#startup-plan-discounts) set the start date of the contract for 2 months in the future, to account for the two free months ahead of the contract.
 
@@ -141,15 +143,10 @@ If they won't have enough credits to cover an invoice, and won't sign before the
 For newly purchased credits to cover the intended invoice automatically, both of these must be true:
 - Contract start date must match the first billing period the customer wants to cover. For an existing customer this usually means backdating the Contract.EffectiveDate to the start of the current billing period (see Immediate Activation above). If the start date doesn't line up with the period being covered, the credits won't map to that invoice.
 - Contract must be signed before the period_end date of the invoice they want to cover. If it's signed after the period closes and the invoice has been issued, the automated flow can no longer apply the credits and an override is required.
+- You can only backdate to the start of the current, open billing period, never to a period that has already been invoiced. 
 
 If either condition can't be met, you'll need an override.
 
-#### Overrides
-An override is the manual process RevOps uses when credits couldn't be applied before an invoice was finalized. For example, the customer paid part of an invoice with credits, or signed after the invoice was already issued. Overrides are more complex than the standard flow: they can involve pausing or crediting the issued invoice, refunding card payments, and re applying credits in the right order.
-
-The refund itself can be done self serve through billing admin. But in an override scenario a refund is not a clean solution. It's tied to metadata override and reapplying credits. So don't process an override refund in isolation: coordinate with the billing team so revenue recognition stays accurate. And don't refund a card payment until the replacement credits are confirmed.
-
-If you're unsure whether a situation needs an override, ask the billing team in #team-billing before taking any action. Don't roll back charges, void invoices, or refund payments on your own.
 
 ## Master Services Agreement (MSA)
 

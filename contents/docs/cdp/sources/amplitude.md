@@ -44,3 +44,7 @@ The events stream uses Amplitude's Export API, which enforces a roughly 2-hour d
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

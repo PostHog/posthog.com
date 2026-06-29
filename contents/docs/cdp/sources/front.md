@@ -50,3 +50,7 @@ The `events` table only syncs the last 365 days on its initial sync to avoid an 
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

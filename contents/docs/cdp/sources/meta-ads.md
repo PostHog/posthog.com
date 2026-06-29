@@ -45,3 +45,7 @@ Connect PostHog to your Meta Ads account using a Meta account. The Meta account 
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

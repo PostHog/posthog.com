@@ -43,3 +43,7 @@ Once the syncs are complete, you can start using Aircall data in PostHog.
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

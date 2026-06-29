@@ -62,3 +62,7 @@ The account or API key needs **read** access to the tables you want to sync. Thi
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

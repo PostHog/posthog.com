@@ -50,3 +50,7 @@ Incremental sync on `incidents` filters on `created_at`, so it only picks up new
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

@@ -51,3 +51,7 @@ Once the syncs are complete, you can start using Productboard data in PostHog.
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

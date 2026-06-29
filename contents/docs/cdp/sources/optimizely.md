@@ -43,3 +43,7 @@ All tables use **full refresh** sync. Optimizely's REST API v2 doesn't expose up
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

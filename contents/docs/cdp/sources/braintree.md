@@ -49,6 +49,10 @@ Once the sync completes, you can start querying your Braintree data in PostHog.
 
 <SourceParameters />
 
+## Supported tables
+
+<SourceTables />
+
 ## Sync details
 
 - **Incremental sync** - All tables support incremental syncs using the `createdAt` field. PostHog filters server-side using a `greaterThanOrEqualTo` search filter, so only new records are fetched on each run.

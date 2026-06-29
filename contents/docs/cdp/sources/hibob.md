@@ -56,3 +56,7 @@ Employee data is returned with human-readable values – list and reference fiel
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

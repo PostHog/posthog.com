@@ -49,3 +49,7 @@ All Drip tables are full refresh only. Drip's only documented server-side timest
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

@@ -58,3 +58,7 @@ Deel API tokens are scoped per dataset. Your token needs the read permission for
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

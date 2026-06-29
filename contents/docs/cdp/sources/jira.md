@@ -54,3 +54,7 @@ Only the `issues` table supports incremental syncing, using Jira's server-side `
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

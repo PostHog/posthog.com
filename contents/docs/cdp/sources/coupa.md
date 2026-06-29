@@ -59,3 +59,7 @@ If a sync is interrupted, it resumes from where it left off rather than starting
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

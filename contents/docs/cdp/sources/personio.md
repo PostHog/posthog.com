@@ -68,3 +68,7 @@ Incremental syncing is more efficient for large Personio accounts, reducing sync
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

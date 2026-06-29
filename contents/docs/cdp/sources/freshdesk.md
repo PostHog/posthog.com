@@ -57,3 +57,7 @@ Only `tickets` and `contacts` have a server-side `updated_since` filter, so they
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

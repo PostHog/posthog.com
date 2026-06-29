@@ -49,3 +49,7 @@ Only the `export` table supports incremental syncing, since it is the only endpo
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

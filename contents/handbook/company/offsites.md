@@ -38,12 +38,13 @@ We want to try to encourage small teams to get together once each year. Ideally 
 
 We want team offsites to be social events and encourage you to optimize offsites for meeting as many colleagues as is reasonably possible, even if it means spending more money or travelling further. [Hogpatch](/handbook/people/hogpatch-operations) in San Francisco or the [Hedge House](#hedge-house) in London should be the default choice, because:
 
-- They're places where there are already a lot of PostHog people that you can hang out with. The more we have random cross-pollination, the more ambitious ideas we'll come up with
-- If most teams do their offsites there, you're much more likely to run into even more people
-- We've put a lot of money and effort into making Hogpatch and Hedge House beautiful spaces that you want to work from
-- SF has the benefit of being the epicenter of everything happening in tech, and we have lots of YC founders working out of Hogpatch who you can meet and learn from
+- They're places where there are already a lot of PostHog people that you can hang out with. If most teams do their offsites there, you're much more likely to run into even more people
+  - The more we have random cross-pollination, the more ambitious ideas we'll come up with and the more successful we'll be.
+  - These hubs are places where you can get to know people outside your current team, which means you'll be more effective at getting stuff done.
+- SF has the benefit of being the epicenter of everything happening in tech, and we have lots of YC founders working out of Hogpatch who you can meet and learn from. It's good to get exposure to this, especially if you don't live in SF or haven't been recently.
 
-We prefer AirBnBs over hotels, to give your team even more time to hang out, but this is not mandatory.
+
+Traveling to new places is a perk for PostHog employees. At the same time, going to the hubs, especially for newer joiners, can be beneficial to you as an employee and to the company as a whole. We trust you to make the right decision here, balancing personal preference with what's best for the company. 
 
 If you do decide to do a small team offsite somewhere outside of these two hubs, let Kendal know why. That way we can figure out how to make going to the hubs more appealing, or perhaps open new hubs.
 
@@ -65,6 +66,7 @@ Each team member is still responsible for booking their own flights.
 
 Some guidelines:
 
+- We prefer AirBnBs over hotels, to give your team even more time to hang out, but this is not mandatory.
 - Quarterly planning is a great focal point for team offsites – it's worth scheduling your meetup for the week of planning.
 - Outside of your small team, you should only invite people who actually need to attend to make the offsite a success - if it would be 'nice to have' them attend, they shouldn't be going.
 - It can be useful to combine offsites but beware if you add too many people everything gets harder to arrange. There's no hard and fast rule here but the more people that are attending the more concrete you need to be on who is organising and why people are attending. It will be more work and you should be purposeful about it.
@@ -256,30 +258,6 @@ Below is a rough timeline for planning your next offsite, as well as links to te
 **1 week after**
 - [ ] Collect post-mortem feedback from the team
   - We generally do this as an [open GitHub issue](https://github.com/PostHog/company-internal/issues/new?assignees=&labels=&projects=&template=small-team-offsite-retro.md&title=%5BRETRO%5D+%7Bteam_name%7D+%7Byear%7D+%7Blocation%7D+offsite), but you can also create a Google form to facilitate this
-
-
-## All company offsite hackathon
-
-The hackathon is always a highlight of the offsite. We tend to run them like this:
-
-**Session 1: ideation dinner**
-The day before the start of the hackathon we do a casual 'ideation' dinner where we encourage people to chat about ideas
-
-**Session 2: hackathon kick-off**
-The hackathon kick off is 1.5 hours at the end of the day. Ideally we do this in a conference room with beers and wine.
-
-- Everyone writes down their ideas on multiple post-it notes in about 10 minutes.
-- People come up to the front one-by-one, and they get 30 seconds to pitch all their ideas.
-- Everyone gets three votes to put on whichever ideas they like most. Just do this as a tally. You can't vote on your own idea
-- We dismiss all ideas with zero votes, and sort all the other ideas from top to bottom based on the number of votes.
-- Everyone writes their name on the other side of the sticky bit of a small piece of post-it note, then add their name to the idea they want to work on. Every group should have at least two people in it, and ideally 3.
-- Once groups are formed, everyone can go off and ideate or hack.
-
-**Session 3: presentations**
-
-This should be the last work related session of the offsite. Again ideally in a conference center with beer and wine provided.
-
-Each group gets 5 minutes to demo and present their idea.
 
 
 **2 weeks after**

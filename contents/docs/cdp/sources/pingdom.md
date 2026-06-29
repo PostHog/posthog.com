@@ -41,6 +41,10 @@ Once the sync completes, you can query your Pingdom data directly in PostHog.
 
 <SourceParameters />
 
+## Supported tables
+
+<SourceTables />
+
 ## Sync modes
 
 Pingdom tables use different sync strategies depending on whether the Pingdom API supports filtering by time:

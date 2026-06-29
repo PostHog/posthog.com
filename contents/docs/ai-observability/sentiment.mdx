@@ -20,11 +20,11 @@ Sentiment classification automatically labels user messages in your LLM [traces]
 
 ## How it works
 
-Sentiment is computed **on-demand** when you view traces or generations in the PostHog UI. No batch pipeline or upfront processing is needed.
+Sentiment classification runs as a [sentiment analysis evaluation](/docs/ai-evals#sentiment-analysis-evaluations). Once you configure one, PostHog classifies the user messages in your sampled generations and stores the results, which then power the **Sentiment** tab and the sentiment bars shown on traces and generations.
 
-1. When you open the **Traces** or **Generations** tab, PostHog sends a request for each visible row to classify sentiment.
-2. A local ML model ([cardiffnlp/twitter-roberta-base-sentiment-latest](https://huggingface.co/cardiffnlp/twitter-roberta-base-sentiment-latest), converted to ONNX) classifies each user message as positive, neutral, or negative.
-3. Results are cached for 24 hours so subsequent views load instantly.
+1. Create a sentiment evaluation in **AI Evals** > **Evaluations** (see [Creating a sentiment evaluation](/docs/ai-evals#creating-a-sentiment-evaluation)).
+2. As generations are captured and sampled, a local ML model ([cardiffnlp/twitter-roberta-base-sentiment-latest](https://huggingface.co/cardiffnlp/twitter-roberta-base-sentiment-latest), converted to ONNX) classifies each user message as positive, neutral, or negative.
+3. Results are stored and displayed across AI observability.
 
 **No data is sent to third-party services.** The model runs entirely within PostHog's infrastructure.
 
@@ -75,3 +75,4 @@ Sentiment classification runs on PostHog's infrastructure using a local ONNX mod
 ## Requirements
 
 - **LLM events captured** – Set up event capture using the [installation guide](/docs/ai-observability/installation).
+- **A sentiment evaluation configured** – Without one, the **Sentiment** tab shows onboarding instead of results. See [Creating a sentiment evaluation](/docs/ai-evals#creating-a-sentiment-evaluation).

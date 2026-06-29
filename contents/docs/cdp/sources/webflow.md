@@ -51,6 +51,10 @@ All Webflow tables are full refresh only. Webflow's v2 list endpoints do not exp
 
 <SourceParameters />
 
+## Supported tables
+
+<SourceTables />
+
 ## Troubleshooting
 
 ### 409 Conflict error

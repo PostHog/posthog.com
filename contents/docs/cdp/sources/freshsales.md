@@ -48,3 +48,7 @@ Once the syncs are complete, you can start using Freshsales data in PostHog.
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

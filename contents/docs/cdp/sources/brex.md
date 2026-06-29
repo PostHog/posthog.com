@@ -51,3 +51,7 @@ Brex API user tokens expire after 90 days without API activity. If your syncs st
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

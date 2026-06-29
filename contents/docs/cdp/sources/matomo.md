@@ -49,3 +49,7 @@ Once the syncs are complete, you can query your Matomo data in PostHog.
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

@@ -51,3 +51,7 @@ The `cards` schema supports incremental sync using the `lastModified` field, so 
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

@@ -55,3 +55,7 @@ Sponsored Products rows (`sp_campaigns` and `sp_ad_groups`) include a `_profile_
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

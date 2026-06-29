@@ -22,6 +22,16 @@ if (result?.variant == 'variant-key') { // replace 'variant-key' with the key of
 }
 ```
 
+### Inspecting all feature flags
+
+You can inspect all currently loaded feature flags with `getAllFeatureFlags()`. It returns each flag's `key`, `enabled` state, `variant`, and `payload`, and does not send a `$feature_flag_called` event, so calling it won't affect your experiment results or flag usage analytics:
+
+```js-web
+for (const flag of posthog.getAllFeatureFlags()) {
+    console.log(flag.key, flag.enabled, flag.variant, flag.payload)
+}
+```
+
 ### Ensuring flags are loaded before usage
 
 Every time a user loads a page, we send a request in the background to fetch the feature flags that apply to that user. We store those flags in your chosen persistence option (local storage by default).

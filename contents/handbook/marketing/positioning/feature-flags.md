@@ -4,8 +4,6 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> **Owner:** Team
-
 ## Elevator pitch
 
 PostHog Feature Flags support boolean flags, multivariate variants, JSON payloads for config changes without deploys, and local evaluation for <50ms latency. Every flag is queryable alongside your analytics and session replay — filter any insight by which flag variant a user saw. And every flag PostHog Code ships is automatically wired into the analytics that measures whether it worked.
@@ -82,7 +80,7 @@ Without flags, agents can't ship incrementally. Without incremental shipping, ag
 - No per-developer pricing — typically 80-90% cheaper for equal team sizes
 - Native analytics and session replay — LaunchDarkly requires separate tools for impact measurement
 - PostHog Code integration — LaunchDarkly has no agent loop equivalent
-- Sources are free in PostHog; every PostHog product shares the same event stream
+- Sources are free in PostHog; every PostHog tool shares the same event stream
 
 ### vs GrowthBook
 

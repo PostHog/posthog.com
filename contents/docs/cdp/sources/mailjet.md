@@ -51,3 +51,7 @@ Only the statistics tables (`openinformation` and `clickstatistics`) support inc
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

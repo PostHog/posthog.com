@@ -255,7 +255,7 @@ export const dataPipelines = {
             featured: true,
             children: [
                 {
-                    name: 'Amazon S3',
+                    name: 'S3',
                     url: '/docs/cdp/batch-exports/s3',
                 },
                 {
@@ -554,10 +554,6 @@ export const handbookSidebar = [
             },
             {
                 name: 'Resources',
-            },
-            {
-                name: 'Quick reference',
-                url: '/handbook/brand/reference',
             },
             {
                 name: 'Brand assets',
@@ -1149,7 +1145,7 @@ export const handbookSidebar = [
                 ],
             },
             {
-                name: 'Positioning and selling',
+                name: 'Positioning',
                 url: '/handbook/marketing/positioning',
                 children: [
                     {
@@ -3211,16 +3207,60 @@ export const docsMenu = {
                             ],
                         },
                         {
-                            name: 'SDK doctor',
-                            url: '/docs/sdk-doctor',
+                            name: 'Health checks',
+                            url: '/docs/health-checks',
                             children: [
                                 {
                                     name: 'Overview',
-                                    url: '/docs/sdk-doctor',
+                                    url: '/docs/health-checks',
+                                },
+                                {
+                                    name: 'SDK health',
+                                    url: '/docs/health-checks/sdk-health',
                                 },
                                 {
                                     name: 'Keeping SDKs current',
-                                    url: '/docs/sdk-doctor/keeping-sdks-current',
+                                    url: '/docs/health-checks/keeping-sdks-current',
+                                },
+                                {
+                                    name: 'No live events',
+                                    url: '/docs/health-checks/no-live-events',
+                                },
+                                {
+                                    name: 'No reverse proxy',
+                                    url: '/docs/health-checks/no-reverse-proxy',
+                                },
+                                {
+                                    name: 'Partial reverse-proxy coverage',
+                                    url: '/docs/health-checks/partial-reverse-proxy',
+                                },
+                                {
+                                    name: 'No authorized URLs',
+                                    url: '/docs/health-checks/authorized-urls',
+                                },
+                                {
+                                    name: 'Missing pageleave events',
+                                    url: '/docs/health-checks/pageleave-events',
+                                },
+                                {
+                                    name: 'Missing web vitals',
+                                    url: '/docs/health-checks/web-vitals',
+                                },
+                                {
+                                    name: 'Scroll-depth tracking disabled',
+                                    url: '/docs/health-checks/scroll-depth',
+                                },
+                                {
+                                    name: 'Ingestion warnings',
+                                    url: '/docs/health-checks/ingestion-warnings',
+                                },
+                                {
+                                    name: 'Materialized view failures',
+                                    url: '/docs/health-checks/materialized-view-failures',
+                                },
+                                {
+                                    name: 'External data sync failures',
+                                    url: '/docs/health-checks/external-data-sync-failures',
                                 },
                             ],
                         },
@@ -6203,6 +6243,16 @@ export const docsMenu = {
                 },
                 {
                     name: 'Resources',
+                },
+                {
+                    name: 'Custom parsers',
+                    url: '/docs/ai-observability/custom-parser',
+                    icon: 'IconBrackets',
+                    color: 'purple',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'Demos & examples',

@@ -47,3 +47,7 @@ Only the tasks table supports incremental sync, using `date_updated` as the curs
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

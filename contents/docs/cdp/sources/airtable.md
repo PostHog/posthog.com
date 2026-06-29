@@ -47,3 +47,7 @@ Once the syncs are complete, you can start using Airtable data in PostHog.
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

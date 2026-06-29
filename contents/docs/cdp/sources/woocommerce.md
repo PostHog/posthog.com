@@ -51,3 +51,7 @@ Only `products`, `orders`, and `coupons` support incremental sync, using the Woo
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

@@ -71,6 +71,10 @@ The client secret is only shown once when you create the API client. If you lose
 
 <SourceParameters />
 
+## Supported tables
+
+<SourceTables />
+
 ## Sync modes
 
 commercetools tables support both incremental and full refresh syncing:

@@ -45,3 +45,7 @@ Once the syncs are complete, you can start using Kit data in PostHog.
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

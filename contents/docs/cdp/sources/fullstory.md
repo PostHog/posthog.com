@@ -6,7 +6,7 @@ availability:
   free: full
   selfServe: full
   enterprise: full
-sourceId: Fullstory
+sourceId: FullStory
 ---
 
 <CalloutBox icon="IconFlask" title="Alpha release" type="action">
@@ -43,3 +43,7 @@ Session and event data in Fullstory is only available through async Data Export 
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

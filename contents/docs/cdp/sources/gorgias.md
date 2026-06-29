@@ -55,3 +55,7 @@ All Gorgias tables are full refresh only. Gorgias list endpoints have no server-
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

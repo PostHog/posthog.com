@@ -47,3 +47,7 @@ Gladly retains export job files for **14 days**. The initial sync imports all av
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

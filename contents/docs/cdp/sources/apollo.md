@@ -50,3 +50,7 @@ If the cap is reached during a sync, PostHog logs an error so the truncation is 
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

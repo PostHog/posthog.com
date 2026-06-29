@@ -56,6 +56,16 @@
         { "source": "/posts/:path*", "destination": "/posts/[slug]/index.html" }
     ],
     "redirects": [
+        { "source": "/teams/logs", "destination": "/teams/apm" },
+        { "source": "/teams/query-performance", "destination": "/teams/analytics-platform" },
+        { "source": "/teams/query-performance/:path*", "destination": "/teams/analytics-platform/:path*" },
+        { "source": "/self-driving", "destination": "/docs/self-driving", "statusCode": 302 },
+        {
+            "source": "/docs/sdk-doctor/keeping-sdks-current",
+            "destination": "/docs/health-checks/keeping-sdks-current",
+            "statusCode": 301
+        },
+        { "source": "/docs/sdk-doctor", "destination": "/docs/health-checks/sdk-health", "statusCode": 301 },
         { "source": "/teams/customer-success", "destination": "/teams/customer-success-eu" },
         { "source": "/teams/customer-success/:path*", "destination": "/teams/customer-success-eu/:path*" },
         {
@@ -85,6 +95,11 @@
             "destination": "/handbook/marketing/positioning/:path*",
             "statusCode": 301
         },
+        {
+            "source": "/handbook/brand/reference",
+            "destination": "/handbook/brand/overview",
+            "statusCode": 301
+        },
         { "source": "/docs/product-tours", "destination": "/docs", "statusCode": 301 },
         { "source": "/docs/product-tours/:path*", "destination": "/docs", "statusCode": 301 },
         { "source": "/docs/start-here", "destination": "/docs/self-driving", "statusCode": 301 },
@@ -106,7 +121,11 @@
         { "source": "/docs/api/product-tours/:path*", "destination": "/docs/api", "statusCode": 301 },
         { "source": "/coupons/:path*", "destination": "https://app.posthog.com/coupons/:path*", "statusCode": 301 },
         { "source": "/handbook/growth/marketing", "destination": "/handbook/marketing", "statusCode": 301 },
-        { "source": "/handbook/growth/revops/lead-assignment-ooo", "destination": "/handbook/growth/revops/lead-assignment-tracker", "statusCode": 301 },
+        {
+            "source": "/handbook/growth/revops/lead-assignment-ooo",
+            "destination": "/handbook/growth/revops/lead-assignment-tracker",
+            "statusCode": 301
+        },
         {
             "source": "/handbook/growth/marketing/:path*",
             "destination": "/handbook/marketing/:path*",
@@ -1179,6 +1198,10 @@
             "source": "/docs/getting-started/estimating-usage-costs",
             "destination": "/docs/billing/estimating-usage-costs"
         },
+        { "source": "/docs/billing", "destination": "/docs/billing/estimating-usage-costs" },
+        { "source": "/docs/billing-and-payments", "destination": "/docs/billing/estimating-usage-costs" },
+        { "source": "/docs/billing/annual-plans", "destination": "/docs/billing/pre-paid-plans" },
+        { "source": "/legal", "destination": "/terms" },
         { "source": "/docs/getting-started/actions-and-insights", "destination": "/docs/data/actions" },
         { "source": "/docs/getting-started/person-properties", "destination": "/docs/data/persons" },
         { "source": "/docs/getting-started/group-analytics", "destination": "/docs/product-analytics/group-analytics" },
