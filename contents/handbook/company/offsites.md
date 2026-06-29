@@ -43,14 +43,10 @@ We want team offsites to be social events and encourage you to optimize offsites
   - These hubs are places where you can get to know people outside your current team, which means you'll be more effective at getting stuff done.
 - SF has the benefit of being the epicenter of everything happening in tech, and we have lots of YC founders working out of Hogpatch who you can meet and learn from. It's good to get exposure to this, especially if you don't live in SF or haven't been recently.
 
-Some reasons to _not_ have your offsite in one of our hubs include:
-- Visa restrictions into both UK and US
-- Excessive travel time
-- You're running a large, multi team (10+ people) offsite, and want to optimize for lots of quality time, over hanging out with other PostHog people
-- You want to be heads down to start or complete a big project, and don't want the distraction of other people around
-- You and a large portion of the people at this offsite have been to both London and SF a lot, and so would prefer a different location
 
-As always, we trust you to make the right decision here, balancing personal preference with what's best for the company. If you do decide to do a small team offsite somewhere outside of these two hubs, let Kendal know why. That way we can figure out how to make going to the hubs more appealing, or perhaps open new hubs.
+Traveling to new places is a perk for PostHog employees. At the same time, going to the hubs, especially for newer joiners, can be beneficial to you as an employee and to the company as a whole. We trust you to make the right decision here, balancing personal preference with what's best for the company. 
+
+If you do decide to do a small team offsite somewhere outside of these two hubs, let Kendal know why. That way we can figure out how to make going to the hubs more appealing, or perhaps open new hubs.
 
 Planning a small team offsite? Kendal’s got you covered.
 Here’s how it works:
