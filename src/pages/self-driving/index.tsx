@@ -16,12 +16,10 @@ import {
     IconAtSign,
     IconBolt,
     IconBrowser,
-    IconCheck,
     IconCheckCircle,
     IconCode,
+    IconCoffee,
     IconCompass,
-    IconFlag,
-    IconGraph,
     IconLock,
     IconPeople,
     IconPlug,
@@ -35,7 +33,7 @@ import {
     IconTarget,
     IconWarning,
 } from '@posthog/icons'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import { IconMCP } from 'components/OSIcons/Icons'
 
 type IconComponent = React.ComponentType<{ className?: string }>
 type CloudinarySrc = `https://res.cloudinary.com/${string}`
@@ -72,17 +70,22 @@ const Callout = ({ children }: { children: React.ReactNode }) => (
 )
 
 // Titled columns of icon + label, like the Slack app "ship a fix" slide.
-type IconGroup = { title: string; items: { Icon: IconComponent; color: string; name: string }[] }
+type IconGroup = { title: string; description: string; items: { Icon: IconComponent; color: string; name: string }[] }
 
 const IconGroupColumns = ({ groups }: { groups: IconGroup[] }) => (
     <div className="not-prose mt-4 grid grid-cols-1 gap-6 @sm:grid-cols-2">
         {groups.map((group) => (
-            <div key={group.title} className="flex flex-col gap-3">
-                <div className="border-b border-secondary pb-1 text-sm text-secondary">{group.title}</div>
-                <div className="flex flex-col gap-1.5">
+            // @container so the items below can wrap to two columns when the group is wide enough
+            // (full-width on mobile → 2 cols, keeping the slide short; side-by-side on desktop → 1 col)
+            <div key={group.title} className="@container flex flex-col gap-3">
+                <div>
+                    <p className="m-0 text-base font-bold text-primary">{group.title}</p>
+                    <p className="m-0 text-sm text-secondary">{group.description}</p>
+                </div>
+                <div className="grid grid-cols-1 gap-x-4 gap-y-1.5 @xs:grid-cols-2">
                     {group.items.map(({ Icon, color, name }) => (
-                        <span key={name} className="inline-flex items-center gap-1.5 text-sm text-primary">
-                            <Icon className={`size-4 shrink-0 ${color}`} />
+                        <span key={name} className="flex items-start gap-1.5 text-sm text-primary">
+                            <Icon className={`mt-0.5 size-5 shrink-0 ${color}`} />
                             {name}
                         </span>
                     ))}
@@ -95,7 +98,8 @@ const IconGroupColumns = ({ groups }: { groups: IconGroup[] }) => (
 const TabPanel = ({ title, children, image }: { title: string; children: React.ReactNode; image: CloudinarySrc }) => (
     <div className="rounded bg-primary p-4 @xl:p-6">
         <h2 className="mt-0 mb-2 text-2xl font-bold">{title}</h2>
-        <div className="text-secondary text-sm">{children}</div>
+        {/* text-[15px] matches the page body copy – the codebase defines .prose-sm as text-[15px] */}
+        <div className="text-secondary text-[15px]">{children}</div>
         <div className="-mx-4 -mb-4 mt-4 overflow-hidden rounded-b leading-[0] @xl:-mx-6 @xl:-mb-6">
             <CloudinaryImage src={image} alt={title} imgClassName="w-full block" />
         </div>
@@ -106,7 +110,7 @@ const TabPanel = ({ title, children, image }: { title: string; children: React.R
 const signalSources: { Icon: IconComponent; color: string; name: string; description: string }[] = [
     {
         Icon: IconWarning,
-        color: 'text-red',
+        color: 'text-yellow',
         name: 'Error tracking',
         description: 'Exceptions and stack traces grouped into issues',
     },
@@ -114,7 +118,7 @@ const signalSources: { Icon: IconComponent; color: string; name: string; descrip
         Icon: IconRewindPlay,
         color: 'text-orange',
         name: 'Session replay',
-        description: 'Dead ends, rage clicks, and user confusion',
+        description: 'Dead clicks, quick backs, long stalls',
     },
     {
         Icon: IconCompass,
@@ -126,7 +130,7 @@ const signalSources: { Icon: IconComponent; color: string; name: string; descrip
         Icon: IconPlug,
         color: 'text-purple',
         name: 'External tools',
-        description: 'Zendesk, Linear, GitHub issues (and more)',
+        description: 'Zendesk, Linear, GitHub issues',
     },
 ]
 
@@ -134,20 +138,22 @@ const signalSources: { Icon: IconComponent; color: string; name: string; descrip
 const scoutGroups: IconGroup[] = [
     {
         title: 'Canonical scouts',
+        description: 'Pre-built to watch common patterns.',
         items: [
-            { Icon: IconWarning, color: 'text-red', name: 'Error spikes' },
-            { Icon: IconGraph, color: 'text-blue', name: 'Funnel regressions' },
-            { Icon: IconFlag, color: 'text-orange', name: 'Feature flag debt' },
-            { Icon: IconRewindPlay, color: 'text-yellow', name: 'Replay friction' },
+            { Icon: IconCheckCircle, color: 'text-green', name: 'Health checks' },
+            { Icon: IconStack, color: 'text-blue', name: 'Data pipelines' },
+            { Icon: IconSparkles, color: 'text-purple', name: 'AI observability' },
+            { Icon: IconSearch, color: 'text-orange', name: 'Observability gaps' },
         ],
     },
     {
         title: 'Custom scouts',
+        description: 'Specific to your product.',
         items: [
             { Icon: IconAtSign, color: 'text-sky-blue', name: 'A Slack channel' },
             { Icon: IconBolt, color: 'text-yellow', name: 'A custom event' },
-            { Icon: IconCode, color: 'text-blue', name: 'Your codebase' },
-            { Icon: IconCompass, color: 'text-purple', name: 'The fleet itself' },
+            { Icon: IconCode, color: 'text-blue', name: 'A GitHub repo' },
+            { Icon: IconCompass, color: 'text-purple', name: 'The troop itself' },
         ],
     },
 ]
@@ -161,27 +167,25 @@ const loopTabs: TabbedCarouselTab[] = [
         progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
         content: (
             <TabPanel
-                title="Everything worth knowing, in one stream"
-                image="https://res.cloudinary.com/dmukukwp6/image/upload/2_report_0256ec0da2.png"
+                title="Notable things happening in your product"
+                image="https://res.cloudinary.com/dmukukwp6/image/upload/report_177cacd2dd.png"
             >
                 <p className="m-0">
-                    Signals are things worth knowing about your product. Some come from sources like Error tracking and
-                    Linear. Others come from scouts that sweep your data on a schedule. When something breaks or needs
-                    improvement, PostHog notices.
+                    A signal is a single observation about your product. Signal sources are the pipes that produce them:
                 </p>
                 <div className="not-prose mt-4 grid grid-cols-1 gap-x-4 gap-y-3 @sm:grid-cols-2">
                     {signalSources.map(({ Icon, color, name, description }) => (
                         <div key={name} className="flex items-start gap-2">
                             <Icon className={`mt-0.5 size-5 shrink-0 ${color}`} />
                             <div>
-                                <p className="m-0 text-sm font-bold text-primary">{name}</p>
-                                <p className="m-0 text-xs leading-snug text-secondary">{description}</p>
+                                <p className="m-0 text-base font-bold text-primary">{name}</p>
+                                <p className="m-0 text-sm leading-snug text-secondary">{description}</p>
                             </div>
                         </div>
                     ))}
                 </div>
                 <Callout>
-                    <Badge>Beta</Badge> On their own, raw signals are noisy. Grouped into a{' '}
+                    On their own, raw signals are noisy. Grouped into a{' '}
                     <Link
                         to="/docs/self-driving/reports"
                         state={{ newWindow: true }}
@@ -201,68 +205,57 @@ const loopTabs: TabbedCarouselTab[] = [
         activeText: 'text-white',
         progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
         content: (
-            <TabPanel title="Field intel from your product" image={LOOP_SCOUTS_IMAGE}>
+            <TabPanel title="Specialist agents that go deep on one surface" image={LOOP_SCOUTS_IMAGE}>
                 <p className="m-0">
-                    Scouts are specialist agents that watch one surface in depth.{' '}
-                    <strong className="text-primary">Canonical</strong> scouts are pre-built to watch common patterns.{' '}
-                    <strong className="text-primary">Custom</strong> scouts are specific to your product. Here's a
-                    sample of each:
+                    Scouts <Badge>Beta</Badge> run on a schedule and build durable memory of what they've seen.
                 </p>
                 <IconGroupColumns groups={scoutGroups} />
-                <Callout>
-                    <span className="inline-flex flex-wrap items-center gap-2">
-                        <Badge>Beta</Badge>
-                        We run a troop of 35 scouts on the PostHog web app.
-                    </span>
-                </Callout>
+                <Callout>We run a troop of 35 scouts on the PostHog web app.</Callout>
             </TabPanel>
         ),
     },
     {
         value: 'inbox',
-        label: 'The inbox',
+        label: 'Inbox',
         color: 'bg-yellow',
         activeText: 'text-black',
         progressBar: 'bg-black/70 shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
         content: (
-            <TabPanel title="One worklist, already sorted" image={LOOP_INBOX_IMAGE}>
+            <TabPanel title="One prioritized list of work to review" image={LOOP_INBOX_IMAGE}>
                 <p className="m-0">
-                    The inbox is where self-driving hands work back to you. Related findings are clustered, researched,
-                    and weighed into reports, then worked in priority order:
+                    The Inbox <Badge>Beta</Badge> clusters related findings into researched reports, ranked by priority.
+                    Reviewers are suggested from git blame (whoever last touched that bit of code) – add your own if
+                    someone else should take a look.
                 </p>
                 <div className="not-prose mt-4 grid grid-cols-1 gap-4 @sm:grid-cols-3">
                     <div>
                         <div className="flex items-center gap-1.5">
-                            <IconCode className="size-4 shrink-0 text-blue" />
-                            <span className="text-sm font-bold text-primary">Code importance</span>
+                            <IconCode className="size-5 shrink-0 text-blue" />
+                            <span className="text-base font-bold text-primary">Code importance</span>
                         </div>
-                        <p className="m-0 mt-1 text-xs leading-snug text-secondary">
+                        <p className="m-0 mt-1 text-sm leading-snug text-secondary">
                             Is the issue in a hot path like checkout, signup, or billing?
                         </p>
                     </div>
                     <div>
                         <div className="flex items-center gap-1.5">
-                            <IconPeople className="size-4 shrink-0 text-purple" />
-                            <span className="text-sm font-bold text-primary">User impact</span>
+                            <IconPeople className="size-5 shrink-0 text-purple" />
+                            <span className="text-base font-bold text-primary">User impact</span>
                         </div>
-                        <p className="m-0 mt-1 text-xs leading-snug text-secondary">
+                        <p className="m-0 mt-1 text-sm leading-snug text-secondary">
                             How many users are affected, and are they on a paid plan?
                         </p>
                     </div>
                     <div>
                         <div className="flex items-center gap-1.5">
-                            <IconWarning className="size-4 shrink-0 text-red" />
-                            <span className="text-sm font-bold text-primary">Severity</span>
+                            <IconWarning className="size-5 shrink-0 text-red" />
+                            <span className="text-base font-bold text-primary">Severity</span>
                         </div>
-                        <p className="m-0 mt-1 text-xs leading-snug text-secondary">
+                        <p className="m-0 mt-1 text-sm leading-snug text-secondary">
                             Is the product broken for these users, or just a minor UX issue?
                         </p>
                     </div>
                 </div>
-                <Callout>
-                    <Badge>Beta</Badge> Reviewers are suggested from git blame (whoever last touched that bit of code).
-                    Add your own if someone else should take a look.
-                </Callout>
             </TabPanel>
         ),
     },
@@ -273,49 +266,44 @@ const loopTabs: TabbedCarouselTab[] = [
         activeText: 'text-white',
         progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
         content: (
-            <TabPanel title="The fix, ready to ship" image={LOOP_MERGE_IMAGE}>
+            <TabPanel title="Actionable reports, opened as pull requests" image={LOOP_MERGE_IMAGE}>
                 <p className="m-0">
-                    When a report is actionable it turns into code. An implementation agent builds the change and opens
-                    a pull request for you to review.
+                    When something needs a code change, an agent clones your repo into a sandbox, traces the root cause,
+                    writes the code, and opens a pull request. If a report <em>isn't</em> actionable, it triggers a
+                    research task.
                 </p>
-                <IconList
-                    items={[
-                        {
-                            Icon: IconSearch,
-                            color: 'text-blue',
-                            text: (
-                                <>
-                                    <strong className="text-primary">Root cause analysis</strong> – it pairs the
-                                    production signal with codebase access to find the actual cause, not just the
-                                    symptom.
-                                </>
-                            ),
-                        },
-                        {
-                            Icon: IconShieldLock,
-                            color: 'text-purple',
-                            text: (
-                                <>
-                                    <strong className="text-primary">Sandboxed execution</strong> – it clones your repo,
-                                    applies the fix, and runs your tests.
-                                </>
-                            ),
-                        },
-                        {
-                            Icon: IconCheckCircle,
-                            color: 'text-green',
-                            text: (
-                                <>
-                                    <strong className="text-primary">You review and merge</strong> – chat with the agent
-                                    to tweak it, or merge as-is (lgtm!).
-                                </>
-                            ),
-                        },
-                    ]}
-                />
+                <div className="not-prose mt-4 grid grid-cols-1 gap-4 @sm:grid-cols-3">
+                    <div>
+                        <div className="flex items-center gap-1.5">
+                            <IconSearch className="size-5 shrink-0 text-blue" />
+                            <span className="text-base font-bold text-primary">Root cause analysis</span>
+                        </div>
+                        <p className="m-0 mt-1 text-sm leading-snug text-secondary">
+                            Pairs the signal with your code to find what's actually broken.
+                        </p>
+                    </div>
+                    <div>
+                        <div className="flex items-center gap-1.5">
+                            <IconShieldLock className="size-5 shrink-0 text-purple" />
+                            <span className="text-base font-bold text-primary">Sandboxed execution</span>
+                        </div>
+                        <p className="m-0 mt-1 text-sm leading-snug text-secondary">
+                            Clones your repo, applies the fix, and runs your tests.
+                        </p>
+                    </div>
+                    <div>
+                        <div className="flex items-center gap-1.5">
+                            <IconCheckCircle className="size-5 shrink-0 text-green" />
+                            <span className="text-base font-bold text-primary">You review and merge</span>
+                        </div>
+                        <p className="m-0 mt-1 text-sm leading-snug text-secondary">
+                            Chat with the agent to tweak it, or merge as-is (lgtm!).
+                        </p>
+                    </div>
+                </div>
                 <Callout>
-                    P0s and P1s that are actionable usually have a PR open before you've even seen them. If a report
-                    isn't actionable, the agent triggers a research task.
+                    <strong className="text-primary">Best part:</strong> the agents babysit CI and rerun flaky jobs
+                    until the PR is actually mergeable.
                 </Callout>
             </TabPanel>
         ),
@@ -425,13 +413,13 @@ const workSurfaces: {
         label: <span className="font-bold text-primary">PostHog web app</span>,
         copy: 'The full product in your browser. Explore your data, review proposed work, and dig into the evidence.',
         cta: (
-            <Link to="https://app.posthog.com/signup" external className="text-secondary font-semibold underline">
+            <CallToAction to="https://app.posthog.com/signup" externalNoIcon type="primary" size="md">
                 Sign up free
-            </Link>
+            </CallToAction>
         ),
     },
     {
-        icon: IconCode,
+        icon: IconCoffee,
         iconColor: 'text-brown dark:text-brown-dark',
         label: (
             <span className="inline-flex items-center gap-2">
@@ -439,15 +427,15 @@ const workSurfaces: {
                     PostHog Code
                 </Link>
                 <span className="inline-flex items-center rounded-sm bg-yellow/15 px-1 py-0.5 text-xs font-bold text-yellow">
-                    Waitlist
+                    Beta
                 </span>
             </span>
         ),
         copy: 'A desktop app for driving parallel agents to edit your product. The same Inbox and reports live here.',
         cta: (
-            <Link to="/code" state={{ newWindow: true }} className="text-secondary font-semibold underline">
-                Join the waitlist
-            </Link>
+            <CallToAction to="/code" state={{ newWindow: true }} type="secondary" size="md">
+                Learn more
+            </CallToAction>
         ),
     },
     {
@@ -461,7 +449,7 @@ const workSurfaces: {
         copy: '@PostHog brings PostHog into Slack channels. Route reports to the ones each team already watches (hedgehog mode not included).',
     },
     {
-        icon: IconPlug,
+        icon: IconMCP,
         iconColor: 'text-purple',
         label: (
             <Link to="/mcp" state={{ newWindow: true }} className="font-bold text-primary">
@@ -477,44 +465,38 @@ type WorkMode = {
     tagClass: string
     title: string
     copy: string
-    guard: { icon: IconComponent; color: string; label: string; copy: string }
+    guard: { label: string; copy: string }
 }
 
 const workModes: WorkMode[] = [
     {
         tag: 'Prompted',
-        tagClass: 'bg-blue/15 text-blue',
+        tagClass: 'bg-red/15 text-red',
         title: 'It builds what you spec',
         copy: "This is what you're used to (you set the spec and the agents do the work). Prompt a task from PostHog AI, PostHog Code, or the Slack app, and agents build it.",
         guard: {
-            icon: IconStack,
-            color: 'text-blue',
             label: 'Full product context',
-            copy: '2025: ship faster. 2026: ship better.',
+            copy: "Understands your users, not just the diff it's editing.",
         },
     },
     {
         tag: 'Reactive',
-        tagClass: 'bg-orange/15 text-orange',
+        tagClass: 'bg-yellow/15 text-yellow',
         title: 'It acts on your data',
-        copy: 'This is what signals does. It watches the data you already have in PostHog and turns anything worth acting on into a researched report, often with a fix attached.',
+        copy: 'This is what the Inbox is for. It watches the data you already have in PostHog and turns anything worth acting on into a researched report, often with a fix attached.',
         guard: {
-            icon: IconBolt,
-            color: 'text-yellow',
             label: 'Always on',
             copy: 'Reads logs and tickets for fun. Sick, honestly.',
         },
     },
     {
         tag: 'Proactive',
-        tagClass: 'bg-red/15 text-red',
+        tagClass: 'bg-blue/15 text-blue',
         title: 'It looks for work',
         copy: "This is where it gets good. Scouts dig through your data and flag problems you haven't thought about (yet). Your product improves everywhere, every day.",
         guard: {
-            icon: IconRefresh,
-            color: 'text-purple',
-            label: 'Memory',
-            copy: 'Scouts know what your product did last summer.',
+            label: 'Remembers everything',
+            copy: 'Including that. Especially, that.',
         },
     },
 ]
@@ -528,13 +510,13 @@ const humanRoles: { heading: string; copy: string; image: string; alt: string }[
     },
     {
         heading: 'Skip to the good part',
-        copy: 'Now streaming: every problem in your product (and every fix). Your product just started developing at a pace that felt impossible last week.',
+        copy: "Somebody's gotta clean up around here. Turns out it doesn't have to be you. Bug fixes and maintenance work land in your inbox. Hit merge and move on with your day.",
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/hog_head_popcorn_82aa11ea69.png',
         alt: 'A hedgehog eating popcorn',
     },
     {
-        heading: 'Ship like crazy',
-        copy: 'Self-driving puts product maintenance on autopilot. A few good people behind the wheel can outship companies 10x the size (so get building).',
+        heading: 'Outship everyone',
+        copy: "Product capability used to scale with headcount. Now it's handled (without adding any). A small team with self-driving can outship companies 10x the size.",
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/hog_head_laptop_2afc8d8955.png',
         alt: 'A hedgehog working at a laptop',
     },
@@ -697,7 +679,7 @@ export default function SelfDrivingPage(): JSX.Element {
                                 <div className="@container relative z-10">
                                     <div className="flex flex-col @[22rem]:flex-row @[22rem]:items-center gap-4 mb-4 mt-2">
                                         <CallToAction
-                                            to="/docs/posthog-code/inbox"
+                                            to="/docs/self-driving/inbox"
                                             state={{ newWindow: true }}
                                             size="sm"
                                         >
@@ -751,7 +733,10 @@ export default function SelfDrivingPage(): JSX.Element {
                         </div>
 
                         {/* …then it loops */}
-                        <div className="not-prose my-8 rounded-md border border-primary bg-accent p-4 @md/reader-content:p-6">
+                        <div
+                            data-scheme="secondary"
+                            className="not-prose my-8 rounded-md border border-primary bg-primary p-4 @md/reader-content:p-6"
+                        >
                             <div className="flex items-center gap-2 mb-2">
                                 <IconRefresh className="size-4 shrink-0 text-purple" />
                                 <h3 className="m-0 text-base font-bold text-primary">…then it loops</h3>
@@ -774,11 +759,11 @@ export default function SelfDrivingPage(): JSX.Element {
                                     </React.Fragment>
                                 ))}
                                 <IconArrowRight className="size-4 shrink-0 text-secondary" />
-                                <span className="text-red underline dark:text-yellow">the self-improving loop</span>
+                                <span className="text-red underline dark:text-yellow">The self-improving loop</span>
                             </Link>
                         </div>
 
-                        {/* Self-driving is autonomy from instruction, not from you */}
+                        {/* PostHog agents run on their own, but don't run wild */}
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/transformer_hedgehog_2a379334d7.png"
                             alt="A hedgehog transforming into a self-driving machine"
@@ -786,9 +771,12 @@ export default function SelfDrivingPage(): JSX.Element {
                             imgClassName="w-full"
                         />
                         <h3>
-                            Self-driving is autonomy from <Highlight>instruction</Highlight>, not from you
+                            PostHog agents run on their own, but <Highlight>don't run wild</Highlight>
                         </h3>
-                        <p>PostHog agents run on their own, but don't run wild:</p>
+                        <p>
+                            Self-driving is autonomy from instruction, not from you. Agents work in the background
+                            without you prompting them to make progress, but nothing ships on autopilot.
+                        </p>
                         <IconList
                             items={[
                                 {
@@ -848,16 +836,16 @@ export default function SelfDrivingPage(): JSX.Element {
                             It runs on the data you <Highlight>already have</Highlight>
                         </h3>
                         <p>
-                            Your product is a context goldmine. Self-driving just puts that data to work. The more
-                            sources PostHog can see, the sharper the fixes get.
+                            Your product is a context goldmine. Self-driving puts that data to work. The more sources
+                            PostHog can see, the sharper the fixes get.
                         </p>
                         <div className="not-prose mt-6 mb-12 flex justify-center">
                             <SignalsCallout className="max-w-md" />
                         </div>
 
-                        {/* Where you work with it */}
+                        {/* Works in your workflow */}
                         <h3>
-                            Where you <Highlight>work with it</Highlight>
+                            Works in <Highlight>your workflow</Highlight>
                         </h3>
                         <p>
                             The same Inbox and agents show up across four surfaces (everywhere you go, there's PostHog).
@@ -884,7 +872,7 @@ export default function SelfDrivingPage(): JSX.Element {
                         />
                         <hr className="border-t border-primary m-0 mb-6" />
                         <h3>
-                            The opposite of a <Highlight>quick call</Highlight>
+                            Build in public (with <Highlight>the whole team</Highlight>)
                         </h3>
                         <p>
                             Self-driving isn't only autonomous. Some fixes are better hashed out by three people in a
@@ -925,32 +913,26 @@ export default function SelfDrivingPage(): JSX.Element {
                                     building <em>with</em> AI
                                 </span>
                             </div>
-                            <div className="mb-4 h-1 rounded-full bg-gradient-to-r from-blue to-red" />
+                            <div className="mb-4 h-1 rounded-full bg-gradient-to-r from-red via-yellow to-blue" />
                             <div className="grid gap-3 @md/reader-content:grid-cols-3">
-                                {workModes.map((mode) => {
-                                    const GuardIcon = mode.guard.icon
-                                    return (
-                                        <div
-                                            key={mode.title}
-                                            className="flex flex-col rounded-md border border-primary bg-primary p-4"
+                                {workModes.map((mode) => (
+                                    <div
+                                        key={mode.title}
+                                        className="flex flex-col rounded-md border border-primary bg-primary p-4"
+                                    >
+                                        <span
+                                            className={`inline-block self-start rounded-full px-2 py-0.5 text-xs font-bold ${mode.tagClass}`}
                                         >
-                                            <span
-                                                className={`inline-block self-start rounded-full px-2 py-0.5 text-xs font-bold ${mode.tagClass}`}
-                                            >
-                                                {mode.tag}
-                                            </span>
-                                            <p className="m-0 mt-2 text-base font-bold">{mode.title}</p>
-                                            <p className="m-0 mt-1 text-sm text-secondary">{mode.copy}</p>
-                                            <p className="m-0 mt-3 flex items-start gap-1.5 border-t border-primary pt-3 text-sm text-secondary">
-                                                <GuardIcon className={`size-4 shrink-0 mt-0.5 ${mode.guard.color}`} />
-                                                <span>
-                                                    <strong className="text-primary">{mode.guard.label}</strong> –{' '}
-                                                    {mode.guard.copy}
-                                                </span>
-                                            </p>
-                                        </div>
-                                    )
-                                })}
+                                            {mode.tag}
+                                        </span>
+                                        <p className="m-0 mt-2 text-base font-bold">{mode.title}</p>
+                                        <p className="m-0 mt-1 text-sm text-secondary">{mode.copy}</p>
+                                        <p className="m-0 mt-3 border-t border-primary pt-3 text-sm text-secondary">
+                                            <strong className="text-primary">{mode.guard.label}</strong> –{' '}
+                                            {mode.guard.copy}
+                                        </p>
+                                    </div>
+                                ))}
                             </div>
                         </div>
 
