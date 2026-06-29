@@ -6245,6 +6245,16 @@ export const docsMenu = {
                     name: 'Resources',
                 },
                 {
+                    name: 'Custom parsers',
+                    url: '/docs/ai-observability/custom-parser',
+                    icon: 'IconBrackets',
+                    color: 'purple',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
                     name: 'Demos & examples',
                     url: '/docs/ai-observability/demos',
                     icon: 'IconFlask',
