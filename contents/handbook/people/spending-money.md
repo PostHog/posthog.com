@@ -209,7 +209,11 @@ You can ask for access to team/company tools by submitted a request in Slack. Fi
 
 #### Hub travel budget
 
-We want to encourage people to visit our hubs in SF (Hogpatch) and London (Hedgehouse). You still need _some_ reason, like an event you're talking at, working with a specific person who will also be there, but 
+We encourage people to visit our hubs in SF (Hogpatch) and London (Hedgehouse). These places generally have a high density of PostHog employees around, so you'll get to meet people from other teams, which makes cross-team work much easier and more successful. SF also has the benefit of being the epicenter of everything happening in tech, and we have lots of YC founders working out of Hogpatch who you can meet and learn from. It's good to get exposure to this, especially if you don't live in SF or haven't been recently.
+
+There is no specific travel budget, this can come out of your general employee budget. We strongly encourage you to use your budget for this reason!
+
+If you do decide to come, we ask that you make the trip worthwhile - attend a conference, speak at an event, gather a few colleagues to come with you at the same time and work on something specific together. Don't just pop in and put your headphones in while there - make it worth your while.
 
 ### Sponsorships
 If you believe an open-source project is fundamentally important to the success of PostHog then we should set up a recurring sponsorship. In this case, see the [open-source sponsorship Marketing initiative](/handbook/marketing/open-source-sponsorship).
