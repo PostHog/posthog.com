@@ -46,6 +46,10 @@ Connect PostHog to your LinkedIn Ads account using a LinkedIn account. The Linke
 
 <SourceParameters />
 
+## Supported tables
+
+<SourceTables />
+
 ## Troubleshooting
 
 ### Account not found

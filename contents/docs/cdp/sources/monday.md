@@ -45,3 +45,7 @@ All monday.com tables are full refresh only. monday.com's GraphQL API doesn't ex
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

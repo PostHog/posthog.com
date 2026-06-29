@@ -51,3 +51,7 @@ Only the `incidents` table supports incremental sync because it's the only endpo
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

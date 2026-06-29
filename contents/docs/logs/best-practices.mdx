@@ -337,6 +337,19 @@ PostHog Logs is billed by GB ingested per month with volume-based pricing. Use t
 
 </details>
 
+## Drop and rate-limit logs in PostHog
+
+The strategies above reduce volume in your own logging pipeline, before logs ever leave your infrastructure. When you can't change the source — a third-party service, a noisy dependency, or a team that hasn't adopted sampling yet — you can reduce volume in PostHog instead, with **drop rules**.
+
+Drop rules run during ingestion, before logs are stored, so noisy or sensitive lines never reach your storage. Find them under **Logs → Configuration → Drop rules**. There are two actions:
+
+- **Drop** — remove every log line matching the rule. Use it for high-frequency, low-value logs like health checks, load balancer pings, and liveness probes.
+- **Rate limit** — cap a service's throughput in KB/s. Lines above the limit are dropped, so a single chatty service can't dominate your volume while quieter services keep flowing.
+
+Match rules by service name, severity, or any log attribute. Rules run top to bottom in ingestion order (after optional PII scrubbing and JSON parsing), so order them from most to least specific — drag the handle on each row to reorder.
+
+Because drop rules apply before storage, they're the fastest way to cut volume without shipping a code change. Pair them with the client-side practices above: sample at the source where you can, and use drop rules to catch the noise you can't.
+
 ## Add trace and session context
 
 Isolated logs are hard to correlate. Adding trace IDs and session IDs connects individual log events to the broader request journey.

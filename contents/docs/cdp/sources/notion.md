@@ -53,3 +53,7 @@ For large workspaces, syncs may take longer due to Notion's rate limits (~3 requ
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

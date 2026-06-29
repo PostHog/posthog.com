@@ -48,6 +48,24 @@ The AI wizard integrating both the JS Web SDK and Node SDK into a Next.js applic
 
 <WizardInstall />
 
+## Self-driving
+
+<CalloutBox icon="IconInfo" title="Open beta" type="fyi">
+
+Self-driving is currently in open beta.
+
+</CalloutBox>
+
+The wizard is also how you turn on [self-driving](/docs/self-driving). A self-driving product can prompt itself: PostHog turns your product data into signals, and agents act on those signals to ship improvements – all inside the guardrails you set.
+
+Once PostHog is installed and capturing events, run the self-driving setup. It enables your signal sources, sets up your scouts, and hands you a link to your inbox:
+
+<WizardCommand command="self-driving" />
+
+From there, scouts run on a schedule and emit signals, related signals group into reports, and those reports land in your inbox ranked by priority – with a pull request ready to review whenever a report is actionable.
+
+For the full walkthrough, see the [self-driving setup guide](/docs/self-driving/setup).
+
 ## Commands
 
 Running `npx @posthog/wizard` starts the default integration flow. The wizard also supports the following commands:
@@ -55,6 +73,7 @@ Running `npx @posthog/wizard` starts the default integration flow. The wizard al
 | Command | What it does |
 |---|---|
 | `wizard` | Default flow – installs and instruments PostHog |
+| `wizard self-driving` | Turn on [self-driving](/docs/self-driving) – enable signal sources, set up scouts, and get your inbox link |
 | `wizard audit <subcommand>` | Audit an existing integration – see [Audit subcommands](#audit-subcommands) |
 | `wizard revenue-analytics` | Wire up Stripe + PostHog revenue analytics |
 | `wizard migrate` | Migrate from another analytics or feature-flag vendor |

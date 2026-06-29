@@ -54,3 +54,7 @@ All Campaign Monitor tables currently sync via full refresh. Incremental sync is
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

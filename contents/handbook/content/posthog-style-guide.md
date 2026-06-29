@@ -46,7 +46,7 @@ PostHog is a global company. Our team and our customers are distributed around t
 
 ### Use sentence case for titles
 
-Write "Documentation style guide", not "Documentation Style Guide" and "PostHog has product analytics and session replay apps", not "PostHog has Product Analytics and Session Replay apps".
+Write "Documentation style guide", not "Documentation Style Guide" and "PostHog has product analytics and session replay tools", not "PostHog has Product Analytics and Session Replay tools".
 
 But...
 

@@ -2,7 +2,7 @@ Install the `posthog-rs` crate by adding it to your `Cargo.toml`.
 
 ```toml file=Cargo.toml
 [dependencies]
-posthog-rs = "0.13.1"
+posthog-rs = "0.14"
 ```
 
 Next, set up the client with your PostHog project key.
@@ -19,7 +19,7 @@ If you need to use a synchronous client instead – like we do in our [CLI](http
 
 ```toml
 [dependencies]
-posthog-rs = { version = "0.13.1", default-features = false }
+posthog-rs = { version = "0.14", default-features = false }
 ```
 
-In blocking mode, calls to `capture` and related methods will block until the PostHog event capture API returns – generally this is on the order of tens of milliseconds, but you may want to `thread::spawn` a background thread when you send an event.
+With the blocking client, the same methods are available without `.await`. Either way, `capture` is non-blocking: it hands the event to a background worker that batches and sends it, so it returns immediately instead of waiting on the network. Because delivery happens in the background, call `flush()` or `shutdown()` before your program exits, or buffered events may be lost.

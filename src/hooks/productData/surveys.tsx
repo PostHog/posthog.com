@@ -73,7 +73,7 @@ export const surveys = {
         },
     },
     hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/surveys-hog.png',
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/surveys_hog_99cd6e8e8b.png',
         alt: 'A hedgehog looking at survey results',
         classes: 'absolute bottom-0 right-0 max-w-md',
     },

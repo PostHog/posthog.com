@@ -134,7 +134,6 @@ const Logs: React.FC = () => {
                         buttonLink="/docs/logs/start-here"
                         imageColumnClasses="mt-4 md:-mt-8"
                         imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/hog_logs_29cd8c8402.png"
-                        imageClasses="max-h-48 md:max-h-64"
                     />
                 </section>
 

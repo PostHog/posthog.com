@@ -104,9 +104,9 @@ export const aiObservability = {
     // },
     customers: {
         kilocode: {
-            headline: 'uses PostHog as the connective tissue across analytics, experiments, and recordings',
+            headline: 'keeps visibility into what its AI coding platform is actually doing',
             description:
-                "PostHog is really the connective tissue behind a lot of what we're doing. So many things depend on it, and it adapts as fast as the product does.",
+                'Everything we do is about speed. PostHog helps us move fast without losing visibility into what’s actually happening.',
         },
         lovable: {
             headline: 'compared us to every other observability tool, just to be sure',

@@ -6,7 +6,7 @@ availability:
   free: full
   selfServe: full
   enterprise: full
-sourceId: Lightspeed Retail
+sourceId: LightspeedRetail
 ---
 
 <CalloutBox icon="IconInfo" title="Alpha release" type="fyi">
@@ -56,3 +56,7 @@ All tables support incremental sync using the `version` field. Every record in t
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

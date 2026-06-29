@@ -43,3 +43,7 @@ All tables use **full refresh**, which reloads all data on each sync.
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />
