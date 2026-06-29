@@ -188,8 +188,7 @@ const ErrorTracking: React.FC = () => {
                         buttonText="Installation guide"
                         buttonLink="/docs/error-tracking/start-here"
                         imageColumnClasses="mt-4 md:-mt-8"
-                        imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/error_f2df714c47.png"
-                        imageClasses="max-h-48 md:max-h-64"
+                        imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/ERROR_TRACKING_2f807c123b.png"
                     />
                 </section>
 
