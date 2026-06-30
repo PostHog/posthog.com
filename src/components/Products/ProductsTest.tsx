@@ -315,11 +315,13 @@ export default function ProductsTest(): JSX.Element {
                             imgClassName="@xl:float-right @xl:!ml-4 w-60 @xl:w-48 @3xl:w-60 @xl:mt-4 @3xl:!ml-8 @3xl:!-mr-4"
                         />
                         <h1 className="text-2xl @lg:text-3xl font-bold leading-tight">
-                            Devtools and product data infrastructure for building successful products
+                            Everything you need to make your product self-driving
                         </h1>
                         <p className="text-lg leading-relaxed">
-                            Humans and AI agents build with PostHog because everything you need to collect and analyze
-                            product usage data – and build and ship new features – lives in one place.
+                           Two layers make this work. The capabilities – analytics, replay, flags, logs,  experiments, and more –
+                           give agents the context to see what's working and act on it. The surfaces – Slack, PostHog Code,
+                           the MCP, and the web app – are how you reach those agents. 
+                           Together, they make your product self-driving.
                         </p>
 
                         <GetStarted />

@@ -9,7 +9,7 @@ availability:
 sourceId: Guru
 ---
 
-<CalloutBox icon="IconInfo" title="Alpha release" type="fyi">
+<CalloutBox icon="IconFlask" title="Alpha release" type="action">
 
 This source is currently in **alpha**. The interface and available schemas may change.
 

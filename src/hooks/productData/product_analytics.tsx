@@ -35,7 +35,7 @@ export const productAnalytics = {
     overview: {
         title: 'Product analytics with autocapture',
         description:
-            'PostHog is the only developer platform built to natively work with session replay, feature flags, experiments, and surveys.',
+            'Product analytics is one of the tools that makes your product self-driving: the measurement agents use to see what works. Built to natively work with session replay, feature flags, experiments, and surveys.',
         textColor: 'text-white', // tw
     },
     screenshots: {
@@ -424,7 +424,7 @@ export const productAnalytics = {
         // title: '',
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/PRODUCT_ANALYTICS_hog_23b2808c18.png',
         imageAlt: 'PostHog AI and product analytics',
-        description: 'answer product questions faster',
+        description: 'answer product questions and ship the fix',
         skills: [
             'Builds dashboards and insights based on what you want visualized',
             'Edits filters, sets breakdowns, builds retention curves (and more) with simple prompts',
@@ -503,6 +503,9 @@ export const productAnalytics = {
                 },
             ],
             us: [
+                {
+                    title: 'Agents can query your analytics and act on it – the context that powers self-driving',
+                },
                 {
                     title: 'Linking between analytics and other features, so you can jump from a graph to a relevant recording',
                 },
@@ -608,7 +611,7 @@ export const productAnalytics = {
         pricing:
             "1 million events free every month. Forever. Then it's pay-as-you-go, and the price goes down as you use more. No seat limits - everyone on your team can use it. Anonymous events cost way less than identified ones. Set billing limits so there's no surprises. You see usage in real-time. No annual contracts required.",
         'comparison-summary':
-            "Other companies buy tools and try to glue them together. We built everything from scratch to work as one system. We're also open source, so you can self-host if you want. Our pricing actually makes sense at scale. Basically, we're built by engineers for engineers.",
+            "Other companies buy tools and try to glue them together. We built everything from scratch to work as one system. Because it's one system, agents can act on your analytics directly – it's not just a dashboard, it's the context that makes your product self-driving. We're also open source, so you can self-host if you want. Our pricing actually makes sense at scale. Basically, we're built by engineers for engineers.",
         'feature-comparison':
             "We don't have everything. No predictive analytics (yet). But what we do have goes deeper than anyone else. Our funnels have correlation analysis. Our paths support regex. These details matter when you're trying to actually understand your data, not just make pretty charts.",
         docs: "Engineers write our docs. Not marketing, not technical writers - the people who built the features. So they're actually accurate and cover the weird edge cases you'll hit. We update them constantly based on user questions. Over 100k people read them every month because they're genuinely helpful.",

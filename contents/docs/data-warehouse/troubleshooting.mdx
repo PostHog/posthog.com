@@ -123,6 +123,26 @@ To fix this:
 3. Ensure your connection user has SELECT permissions on all required objects, including cross-database dependencies.
 4. In PostHog, go to [**Data pipelines > Sources**](https://app.posthog.com/data-management/sources) and re-sync after fixing the issue.
 
+## Why is my ClickHouse sync failing with 'not supported for conversion into Arrow data format'?
+
+If your ClickHouse sync fails with an error containing "is not supported for conversion into Arrow data format," it means one of the selected columns has a type that ClickHouse can't serialize to Arrow format. This most commonly happens with `AggregateFunction(...)` state columns on aggregating materialized views.
+
+The full error looks like:
+
+```
+Code: 50. DB::Exception: The type 'AggregateFunction(...)' of a column '<name>'
+is not supported for conversion into Arrow data format: While executing Arrow. (UNKNOWN_TYPE)
+```
+
+This is a non-retryable error – PostHog stops the sync instead of retrying indefinitely because the column type is fixed.
+
+To fix this:
+
+1. In PostHog, go to [**Data pipelines > Sources**](https://app.posthog.com/data-management/sources) and select your ClickHouse source.
+2. [Deselect the offending column](/docs/cdp/sources/clickhouse#selecting-columns) in the schema's column settings.
+3. Or sync a view that finalizes the aggregate (for example, using `finalizeAggregation()`).
+4. Re-run the sync.
+
 ## Why is my Shopify sync failing with "Payment Required"?
 
 If your Shopify sync fails with a `402 Client Error: Payment Required` message, it means your Shopify store is frozen due to an unpaid bill. Shopify's Admin API returns this error when the store owner has an outstanding balance.

@@ -5,7 +5,7 @@ title: MCP Analytics
 import CalloutBox from 'components/Docs/CalloutBox'
 import OSButton from 'components/OSButton'
 
-<CalloutBox icon="IconInfo" title="MCP Analytics is in alpha" type="fyi">
+<CalloutBox icon="IconFlask" title="MCP Analytics is in alpha" type="action">
 
 `@posthog/mcp` is a TypeScript SDK for instrumenting Model Context Protocol (MCP) servers with PostHog analytics. It's published on npm as a `0.1.x` release while we build it in public. The API, event names, properties, and tracing behavior may change before the SDK reaches `1.0`. Don't depend on it for production reporting yet. Today, only TypeScript MCP servers are supported – a Python SDK is on the roadmap.
 
@@ -15,7 +15,7 @@ MCP Analytics helps you understand how AI agents actually use the MCP server you
 
 The SDK wraps your existing MCP server and emits PostHog events on every tool call, resource read, prompt fetch, and initialize handshake. You can keep using whatever tooling you already have on top of PostHog – insights, dashboards, alerts, Error Tracking – without any additional ingestion plumbing.
 
-<CalloutBox icon="IconInfo" title="A dedicated MCP Analytics view is in preview" type="fyi">
+<CalloutBox icon="IconFlask" title="A dedicated MCP Analytics view is in preview" type="action">
 
 PostHog has a purpose-built **MCP Analytics** view – a dashboard, a sessions explorer, per-tool quality breakdowns, and intent clustering, all built on the `$mcp_*` events the SDK sends. It's in preview behind a feature flag while we build it in public. Because every signal is a normal PostHog event, you don't have to wait for it: you can query and visualize the same data today through [Product Analytics](/docs/product-analytics) for trends and funnels, the [SQL editor](/docs/data-warehouse/sql) for ad-hoc HogQL, [Dashboards](/docs/product-analytics/dashboards) for at-a-glance views, and [Error Tracking](/docs/error-tracking) for `$exception` events. The events on this page won't change shape as the view matures.
 

@@ -24,13 +24,12 @@ export const sessionReplay = {
     seo: {
         title: 'Session Replay – Debug and analyze sessions with PostHog',
         description:
-            'See how users interact with your product with Session Replay. Inspect sessions, diagnose issues, debug errors, and understand user behavior.',
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/session_replay_44ec6fc51f.jpg',
+            'Watch exactly why something happened so the fix is obvious – the session context agents use to debug and ship. One of the tools that makes your product self-driving.',
     },
     overview: {
         title: 'Watch people use your product',
         description:
-            'Play back sessions to diagnose UI issues, improve support, and get context on nuanced user behavior in your product, website, or mobile app.',
+            'Session replay is one of the tools that makes your product self-driving: play back sessions to see exactly why something happened so the fix is obvious. The context agents use to debug UI issues and nuanced user behavior in your product, website, or mobile app.',
         textColor: 'text-black', // tw
     },
     videos: {
@@ -519,6 +518,9 @@ window.posthog.onFeatureFlags(function () {
             ],
             us: [
                 {
+                    title: 'Agents can search replays and act on what they see – the context that powers self-driving',
+                },
+                {
                     title: 'Interlinking with feature flags and insights',
                     subtitle: 'Jump between them easily',
                 },
@@ -586,7 +588,7 @@ window.posthog.onFeatureFlags(function () {
     ai: {
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/SESSION_REPLAY_a3ca565731.png',
         imageAlt: 'PostHog AI and session replay',
-        description: 'search, summarize, cluster, and debug session recordings',
+        description: 'find the recording, see why it broke, and ship the fix',
         skills: [
             'Finds recordings through natural language prompts – describe the behavior you want instead of setting filters',
             'Reads the event stream from a recording and produces a summary',
@@ -611,7 +613,7 @@ window.posthog.onFeatureFlags(function () {
         pricing:
             "You get 5,000 recordings per month for free – this is <em>significantly</em> more than other replay products. After that, it's metered by usage. No lock-ins, no guessing what tier you need. You pay only for what you record. The more you use, the cheaper it gets. And unlike some other tools, you're not paying for seats or stuck in an enterprise contract just to unlock basic features. This lets both small teams and large ones get the same level of insight, with pricing that's scalable. And you can also control which sessions you want to keep costs down and set billing limits so you never end up with a surprise bill.<br /><br />There's also that time <a href='/blog/session-replay-pricing'>we reduced pricing for everyone across the board</a>, and we're planning on doing it again soon.",
         'comparison-summary':
-            "<strong>TL;DR:</strong> If you want a replay product that deeply integrates with other analytics tools, use PostHog. We're always shipping code to get to feature parity with any competing product, so even if we don't have what you need yet, there's a good chance we'll have it soon. Plus you can follow along with this product's roadmap and see what the Replay Team is shipping next.",
+            "<strong>TL;DR:</strong> If you want a replay product that deeply integrates with other analytics tools, use PostHog. Because it's one system, agents can search recordings and act on what they see – it's not just playback, it's the context that makes your product self-driving. We're always shipping code to get to feature parity with any competing product, so even if we don't have what you need yet, there's a good chance we'll have it soon. Plus you can follow along with this product's roadmap and see what the Replay Team is shipping next.",
         'feature-comparison':
             "We don't have it all (yet) but we're working on it. We hope this comparison chart adds some Clarity for you.",
         docs: "We put a lot of effort into our documentation because we know that for most teams, this is your first real experience using PostHog. And we don't outsource it. The people writing the docs are the same engineers building the product. That means what you're reading is usually up to date, technically accurate, and written by someone who knows what it's like to implement this stuff in production.<br /><br />We treat the docs like a product of their own. Our team actively monitors GitHub issues, community Slack, forums, and feedback that comes through the site. So if something's unclear, we try to fix it quickly.<br /><br />We also understand that getting things configured properly is only part of the job. If your team is concerned about session replay costs, sampling strategy, just reach out – we're happy to suggest optimizations and help you get the right setup for your use case, even if it means we make less money. We want you to get the most out of PostHog without surprises.",

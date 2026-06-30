@@ -537,7 +537,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     wizard: {
         feature: 'Wizard',
-        owner: ['docs-wizard'],
+        owner: ['wizard-and-docs'],
     },
 }
 

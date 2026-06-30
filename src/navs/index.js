@@ -632,70 +632,6 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'Docs & Wizard',
-        url: '/handbook/docs-and-wizard',
-        children: [
-            {
-                name: 'Overview',
-                url: '/handbook/docs-and-wizard',
-            },
-            {
-                name: 'How to publish changelog',
-                url: '/handbook/docs-and-wizard/how-to-publish-changelog',
-            },
-            {
-                name: 'Wizard',
-            },
-            {
-                name: 'AI wizard',
-                url: '/handbook/docs-and-wizard/developing-the-wizard',
-            },
-            {
-                name: 'Context mill',
-                url: '/handbook/docs-and-wizard/context-mill',
-            },
-            {
-                name: 'Docs',
-            },
-            {
-                name: 'Ownership',
-                url: '/handbook/docs-and-wizard/docs-ownership',
-            },
-            {
-                name: 'Style guide',
-                url: '/handbook/docs-and-wizard/docs-style-guide',
-            },
-            {
-                name: 'Vale (prose linter)',
-                url: '/handbook/docs-and-wizard/vale',
-            },
-            {
-                name: 'MDX and components',
-                url: '/handbook/docs-and-wizard/mdx-and-components',
-            },
-            {
-                name: 'How to write product docs',
-                url: '/handbook/docs-and-wizard/writing-product-docs',
-            },
-            {
-                name: 'How to use the content writer agent',
-                url: '/handbook/docs-and-wizard/content-writer-agent',
-            },
-            {
-                name: 'Onboarding docs',
-                url: '/handbook/docs-and-wizard/onboarding-docs',
-            },
-            {
-                name: 'SDK reference docs',
-                url: '/handbook/docs-and-wizard/sdk-reference-docs',
-            },
-            {
-                name: 'API specs and docs',
-                url: '/handbook/docs-and-wizard/api-specifications',
-            },
-        ],
-    },
-    {
         name: 'Engineering',
         url: '',
         children: [
@@ -1870,6 +1806,70 @@ export const handbookSidebar = [
             },
         ],
     },
+    {
+        name: 'Wizard & Docs',
+        url: '/handbook/wizard-and-docs',
+        children: [
+            {
+                name: 'Overview',
+                url: '/handbook/wizard-and-docs',
+            },
+            {
+                name: 'How to publish changelog',
+                url: '/handbook/wizard-and-docs/how-to-publish-changelog',
+            },
+            {
+                name: 'Wizard',
+            },
+            {
+                name: 'AI wizard',
+                url: '/handbook/wizard-and-docs/developing-the-wizard',
+            },
+            {
+                name: 'Context mill',
+                url: '/handbook/wizard-and-docs/context-mill',
+            },
+            {
+                name: 'Docs',
+            },
+            {
+                name: 'Ownership',
+                url: '/handbook/wizard-and-docs/docs-ownership',
+            },
+            {
+                name: 'Style guide',
+                url: '/handbook/wizard-and-docs/docs-style-guide',
+            },
+            {
+                name: 'Vale (prose linter)',
+                url: '/handbook/wizard-and-docs/vale',
+            },
+            {
+                name: 'MDX and components',
+                url: '/handbook/wizard-and-docs/mdx-and-components',
+            },
+            {
+                name: 'How to write product docs',
+                url: '/handbook/wizard-and-docs/writing-product-docs',
+            },
+            {
+                name: 'How to use the content writer agent',
+                url: '/handbook/wizard-and-docs/content-writer-agent',
+            },
+            {
+                name: 'Onboarding docs',
+                url: '/handbook/wizard-and-docs/onboarding-docs',
+            },
+            {
+                name: 'SDK reference docs',
+                url: '/handbook/wizard-and-docs/sdk-reference-docs',
+            },
+            {
+                name: 'API specs and docs',
+                url: '/handbook/wizard-and-docs/api-specifications',
+            },
+        ],
+    },
 ]
 
 export const productEngineerHandbookSidebar = [
@@ -2769,6 +2769,10 @@ export const docsMenu = {
                         {
                             name: 'Environments',
                             url: '/docs/api/environments',
+                        },
+                        {
+                            name: 'Error tracking',
+                            url: '/docs/api/error-tracking',
                         },
                         {
                             name: 'Evaluation runs',
@@ -5375,8 +5379,8 @@ export const docsMenu = {
                             url: '/docs/references/posthog-python?filter=error-tracking',
                         },
                         {
-                            name: 'Error Tracking API',
-                            url: '/docs/api',
+                            name: 'Error tracking API',
+                            url: '/docs/api/error-tracking',
                         },
                     ],
                 },
@@ -6243,6 +6247,16 @@ export const docsMenu = {
                 },
                 {
                     name: 'Resources',
+                },
+                {
+                    name: 'Custom parsers',
+                    url: '/docs/ai-observability/custom-parser',
+                    icon: 'IconBrackets',
+                    color: 'purple',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'Demos & examples',

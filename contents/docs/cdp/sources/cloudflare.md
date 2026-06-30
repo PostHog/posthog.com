@@ -11,7 +11,7 @@ sourceId: Cloudflare
 
 The Cloudflare connector syncs your Cloudflare configuration data into PostHog, including accounts, zones, and DNS records.
 
-<CalloutBox icon="IconInfo" title="Alpha release" type="fyi">
+<CalloutBox icon="IconFlask" title="Alpha release" type="action">
 
 The Cloudflare source is currently in alpha. It syncs configuration data from Cloudflare's v4 REST API. High-volume analytics data from Cloudflare's GraphQL API is not yet supported.
 

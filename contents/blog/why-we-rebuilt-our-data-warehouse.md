@@ -92,6 +92,6 @@ Your failed queries, error patterns, conversion drops, and user behaviour as wel
 
 A unified warehouse gives your agents access to your full business context to do things that weren't possible before. Not just "this funnel dropped", but "this funnel dropped, here's the revenue impact, here are the cohorts affected, here's what those users have in common, here's an action plan and a PR already open to fix the issue." That's the signal quality that makes agentic workflows useful.
 
-Try it for yourself — join the waitlist to get notified when we release the Managed Warehouse beta.
+Try it for yourself — [join the waitlist](https://posthog.com/data-stack/managed-warehouse) to get notified when we release the Managed Warehouse beta.
 
 <DuckDBWaitlistSurvey />

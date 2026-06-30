@@ -2,9 +2,35 @@
 title: Search logs
 ---
 
-Filter logs from the filter bar at the top of the [logs page](https://app.posthog.com/logs). Pick a field, choose an operator, and enter a value. Add as many filters as you need — they're combined with AND.
+There are two ways to filter logs on the [logs page](https://app.posthog.com/logs): the **facet rail** on the left sidebar and the **filter bar** at the top.
 
-There are four kinds of fields you can filter on:
+## Facet rail
+
+The facet rail is a sidebar on the left side of the logs viewer. It shows curated filters you can click to narrow results without typing in the filter bar.
+
+Two facets always appear:
+
+- **Level** – filter by log severity (`trace`, `debug`, `info`, `warn`, `error`, `fatal`)
+- **Service** – filter by `service.name`
+
+Additional facets appear automatically when your logs contain common OpenTelemetry resource attributes:
+
+| Facet           | Resource attribute            | Group          |
+| --------------- | ----------------------------- | -------------- |
+| **Environment** | `deployment.environment.name` | Standard       |
+| **Namespace**   | `k8s.namespace.name`          | Kubernetes     |
+| **Deployment**  | `k8s.deployment.name`         | Kubernetes     |
+| **Pod**         | `k8s.pod.name`                | Kubernetes     |
+| **Node**        | `k8s.node.name`               | Kubernetes     |
+| **Host**        | `host.name`                   | Infrastructure |
+
+These facets are presence-gated — they only show up when your logs actually contain the corresponding resource attribute. For example, the Kubernetes facets won't appear if your services don't emit Kubernetes metadata.
+
+## Filter bar
+
+The filter bar at the top of the logs page lets you build precise filters. Pick a field, choose an operator, and enter a value. Add as many filters as you need — they're combined with AND.
+
+There are four kinds of fields you can filter on in the filter bar:
 
 - **Logs** – top-level log properties: `severity_level`, `trace_id`, and `span_id`
 - **Message** – full-text search over the log body
@@ -49,6 +75,22 @@ To search log bodies, pick the **Message** field from the filter bar. Message su
 - **Equals** `Health check OK` – matches only logs whose body is exactly that string.
 - **Matches regex** `timeout|refused|reset` – matches logs mentioning any of those words (useful when you'd otherwise add multiple contains filters).
 - **Doesn't contain** `healthcheck` – exclude noisy healthcheck lines while keeping everything else.
+
+## Filter from the facet rail
+
+The facet rail is a sidebar on the left of the logs page that displays available log fields grouped by category. Click any facet value to add it as a filter — the logs list updates immediately to show only matching logs.
+
+Each facet group shows the available values for that field along with their counts. This helps you explore your log data and quickly narrow down to specific services, severity levels, or custom attributes.
+
+### Search facets
+
+When the facet rail contains many fields, use the search input at the top to find the facet you need. Type a field name or group name and the rail filters to show only matching facets. Empty groups are hidden automatically.
+
+The facet search:
+
+- Matches field titles and group names (case-insensitive)
+- Persists in the URL so you can bookmark or share your filtered view
+- Clears when you remove the search text
 
 ## Tips
 
