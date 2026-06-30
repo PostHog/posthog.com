@@ -1,6 +1,6 @@
 import React from 'react'
 import ReaderView from 'components/ReaderView'
-import SEO from 'components/seo'
+import SEO, { buildProductStructuredData } from 'components/seo'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { CallToAction } from 'components/CallToAction'
 import { TreeMenu } from 'components/TreeMenu'
@@ -684,8 +684,14 @@ export default function SlackAppPage(): JSX.Element {
         <>
             <SEO
                 title="PostHog Slack app"
-                description="Tag @PostHog in any Slack thread to ship a fix, answer a data question, or edit content – without leaving the conversation."
+                description="The reactive way to reach self-driving: tag @PostHog in any Slack thread to ship a fix, answer a data question, or edit content – without leaving the conversation."
                 image="/images/og/default.png"
+                structuredData={buildProductStructuredData({
+                    name: 'PostHog Slack app',
+                    description:
+                        'The reactive way to reach self-driving: tag @PostHog in any Slack thread to ship a fix, answer a data question, or edit content – without leaving the conversation.',
+                    slug: 'slack-app',
+                })}
             />
             <ReaderView leftSidebar={<LeftSidebarContent />} title="posthog-slack-app.md" hideTitle={true}>
                 <div className="max-w-2xl mx-auto">
@@ -694,8 +700,8 @@ export default function SlackAppPage(): JSX.Element {
                             Don't @ <em>me,</em> <Highlight>@PostHog</Highlight>
                         </h1>
                         <p className="text-secondary text-base @md/reader-content-container:text-lg max-w-lg mx-auto m-0">
-                            PostHog now lives in Slack. Ask about your product data, debug issues, and generate PRs
-                            without leaving the thread.
+                            The Slack app is the reactive way to reach self-driving – tag @PostHog in any thread to ask
+                            about your product data, debug issues, and generate PRs without leaving the conversation.
                         </p>
                     </div>
 

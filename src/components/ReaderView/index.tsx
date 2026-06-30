@@ -752,10 +752,10 @@ function ReaderViewContent({
                                         : 'rounded-r-0 border-r-0 @4xl/app-reader:rounded-r @4xl/app-reader:border-r'
                                     : 'border-r-0'
                             } ${
-                                selectedBackgroundOption && selectedBackgroundOption.value !== 'none'
-                                    ? 'before:absolute before:inset-0 before:bg-primary before:opacity-75'
-                                    : ''
-                            }`}
+                            selectedBackgroundOption && selectedBackgroundOption.value !== 'none'
+                                ? 'before:absolute before:inset-0 before:bg-primary before:opacity-75'
+                                : ''
+                        }`}
                         style={
                             selectedBackgroundOption && selectedBackgroundOption.value !== 'none'
                                 ? {

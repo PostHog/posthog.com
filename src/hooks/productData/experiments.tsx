@@ -16,16 +16,17 @@ export const experiments = {
     category: 'product_engineering',
     wizardSupport: 'In development',
     seo: {
-        title: 'Experiments – Run A/B tests and validate ideas with PostHog',
+        title: 'Experiments – Run tests and validate ideas with PostHog',
         description:
-            'Validate feature impact and make release decisions confidently with Experiments. Run A/B and multivariate tests with robust targeting & exclusion rules.',
+            'Run A/B tests, multivariate tests, and other experiments to see if a change worked – the results agents use to validate impact and make your product self-driving.',
     },
     overview: {
         title: 'Test changes with statistical significance',
         description: (
             <>
-                Run statistically rigorous experiments, use precise targeting and exclusion rules, and analyze your
-                groups with{' '}
+                Experiments is one of the tools that makes your product self-driving: the evaluation that proves a change
+                actually worked. Run statistically rigorous tests, use precise targeting and exclusion rules, and
+                analyze your groups with{' '}
                 <Link to="/session-replay" className="font-bold underline" state={{ newWindow: true }}>
                     Session Replay
                 </Link>
@@ -363,6 +364,11 @@ export const experiments = {
             ],
             us: [
                 {
+                    title: 'Agents can read experiment results and act on them – the evaluation that powers self-driving',
+                    subtitle:
+                        'Results are part of one platform, so an agent can check whether a change actually worked and ship the winner.',
+                },
+                {
                     title: 'Integration with other PostHog products',
                     subtitle:
                         'Attach surveys to experiments or view replays for a test group. Analyze results beyond your initial hypothesis or goal metric.',
@@ -439,7 +445,7 @@ export const experiments = {
         pricing:
             'Experiments are billed as feature flag requests since that\'s what they are under the hood. You get 1 million requests free per month, then pay-as-you-go after that. This is radically different from tools like Optimizely that can run 5-figures annually for experimentation. With PostHog, a typical B2C app running 5-10 experiments might use 10-20 million requests per month. That\'s a few hundred dollars, not tens of thousands. And you get all features—no "enterprise" tier needed for basic functionality like API access or advanced metrics. And the best part: get it all without "jumping on a quick call with sales!"',
         'comparison-summary':
-            'The experimentation landscape has three camps: dedicated tools like Optimizely, analytics add-ons like Amplitude, and integrated platforms like PostHog. Optimizely is powerful but expensive and complex. Amplitude requires you to already use Amplitude. PostHog gives you experimentation as part of a complete platform with both Bayesian and frequentist engines. We also support group-level experiments for B2B products and integrate deeply with session replay for qualitative insights.',
+            "The experimentation landscape has three camps: dedicated tools like Optimizely, analytics add-ons like Amplitude, and integrated platforms like PostHog. Optimizely is powerful but expensive and complex. Amplitude requires you to already use Amplitude. PostHog gives you experimentation as part of a complete platform with both Bayesian and frequentist engines. Because results live in one platform, agents can read them directly and act on what actually worked – it's the evaluation that makes your product self-driving. We also support group-level experiments for B2B products and integrate deeply with session replay for qualitative insights.",
         'feature-comparison':
             "This comparison highlights our unique strengths. Group-level experiments are exclusive to PostHog, critical for B2B products. The integrated session replay means you can watch users in each variant to understand the 'why' behind the numbers. Our shared metrics library ensures consistency across experiments.",
         docs: "Our experimentation docs go deep into the statistical methodology because we believe you should understand the tools you're using. We explain Bayesian vs. frequentist approaches, sequential testing, and why we've made certain choices. But we also keep it practical with guides on common patterns: testing pricing changes, optimizing onboarding funnels, and measuring long-term impact.",
@@ -452,7 +458,7 @@ export const experiments = {
     ai: {
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/EXPERIMENTS_f9f880f1b2.png',
         imageAlt: 'PostHog AI and experiments',
-        description: 'set up experiments, interpret results, and connect winners to the rest of your product data',
+        description: 'set up experiments, read the results, and ship the winner',
         skills: [
             'Configures experiments and variants from natural language',
             'Summarizes results, identifies likely winners, and suggests ideas for follow-up tests',

@@ -19,13 +19,12 @@ export const surveys = {
     seo: {
         title: 'Surveys – Collect product feedback with PostHog',
         description:
-            'Collect and analyze product feedback with Surveys. Launch customizable no-code surveys fast on web and mobile with templates for NPS, CSAT, user interviews, and more.',
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/surveys_b918a1f9e9.jpg',
+            'No-code surveys on web and mobile with templates for NPS, CSAT, and more – the qualitative signal agents use to learn what users say and self-drive your product.',
     },
     overview: {
         title: 'Ask anything with no-code surveys',
         description:
-            'Build in-app or on-page popups with freeform text responses, multiple choice, NPS, ratings, and emoji reactions. Or use the API for a headless implementation.',
+            'Surveys is one of the tools that makes your product self-driving: the qualitative signal in the loop – what users say, not just what they do. Build in-app or on-page popups with freeform text responses, multiple choice, NPS, ratings, and emoji reactions, or use the API for a headless implementation.',
         textColor: 'text-white', // tw
     },
     videos: {
@@ -73,7 +72,7 @@ export const surveys = {
         },
     },
     hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/surveys-hog.png',
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/surveys_hog_99cd6e8e8b.png',
         alt: 'A hedgehog looking at survey results',
         classes: 'absolute bottom-0 right-0 max-w-md',
     },
@@ -379,6 +378,9 @@ export const surveys = {
             ],
             us: [
                 {
+                    title: 'Agents can act on what users tell you – the qualitative signal that powers self-driving',
+                },
+                {
                     title: 'No-code surveys with customizable colors and removable branding',
                 },
                 {
@@ -425,7 +427,7 @@ export const surveys = {
         // title: '',
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/surveys_284d9e66f4.png',
         imageAlt: 'PostHog AI and surveys',
-        description: 'collect user feedback and contextualize the results with product data',
+        description: 'collect what users say and act on the feedback to ship the fix',
         skills: [
             'Generates complete surveys with display conditions and targeting',
             'Suggests appropriate question types (freeform text, rating scales, multiple choice, etc.) based on your research goals',
@@ -459,13 +461,13 @@ export const surveys = {
         customers:
             "<strong>Purplewave</strong> hit a 25% response rate by targeting active users who were more likely to respond which meant more actionable feedback from loyal users without annoying those who weren't likely to respond anyway. <strong>ElevenLabs</strong> uses them creatively - they pop surveys asking power users to review them on G2. Instead of email surveys people ignore, PostHog surveys are contextual, in-app, at can be tailored to show at exactly the right moment.",
         features:
-            "<strong>Question types:</strong> Everything you'd expect like multiple choice, ratings (1-5, 1-7 for Likert, 0-10 for NPS), emojis, free text. Plus you can embed links as the survey's CTA – great for external forms or scheduling calls like user interviews.<br /><br /><strong>Templates:</strong> We've got many of the acronyms covered including <strong>NPS</strong> (Net Promoter Score), <strong>PMF</strong> (product-market tit), <strong>CSAT</strong> (customer satisfaction score), <strong>CES</strong> (customer effort score), and others like one that helps schedule user interviews, one for user-provided context that fires after hitting an exception, and of course a freeform text option for collecting user feedback. Start from a template or build your own from scratch.<br /><br /><strong>Display conditions:</strong> Target by URL, user properties, or feature flags. You can ask beta users about new features or survey only enterprise customers.<br /><br /><strong>Multi-step surveys:</strong> Up to 10 questions, progress bar included.<br /><br /><strong>Link somewhere:</strong> End with a calendar link for user interviews or send to a detailed feedback form. Mix in-app and external collection.<br /><br /><strong>No-code and API:</strong> Visual builder for most cases and an API when you need custom UI or complex logic – both use the same backend.<br /><br /><strong>More features:</strong><br /><br /><strong>Aggregated results:</strong> See response distributions, average scores, trends over time.<br /><br /><strong>Slack notifications:</strong> Get responses in real-time – great for catching urgent feedback.<br /><br /><strong>Customizable wait periods:</strong> Avoid annoying users new users – set delays before showing surveys so you trigger at the right time.",
+            "<strong>Question types:</strong> Everything you'd expect like multiple choice, ratings (1-5, 1-7 for Likert, 0-10 for NPS), emojis, free text. Plus you can embed links as the survey's CTA – great for external forms or scheduling calls like user interviews.<br /><br /><strong>Templates:</strong> We've got many of the acronyms covered including <strong>NPS</strong> (Net Promoter Score), <strong>PMF</strong> (product-market fit), <strong>CSAT</strong> (customer satisfaction score), <strong>CES</strong> (customer effort score), and others like one that helps schedule user interviews, one for user-provided context that fires after hitting an exception, and of course a freeform text option for collecting user feedback. Start from a template or build your own from scratch.<br /><br /><strong>Display conditions:</strong> Target by URL, user properties, or feature flags. You can ask beta users about new features or survey only enterprise customers.<br /><br /><strong>Multi-step surveys:</strong> Up to 10 questions, progress bar included.<br /><br /><strong>Link somewhere:</strong> End with a calendar link for user interviews or send to a detailed feedback form. Mix in-app and external collection.<br /><br /><strong>No-code and API:</strong> Visual builder for most cases and an API when you need custom UI or complex logic – both use the same backend.<br /><br /><strong>More features:</strong><br /><br /><strong>Aggregated results:</strong> See response distributions, average scores, trends over time.<br /><br /><strong>Slack notifications:</strong> Get responses in real-time – great for catching urgent feedback.<br /><br /><strong>Customizable wait periods:</strong> Avoid annoying users new users – set delays before showing surveys so you trigger at the right time.",
         answers:
             'These are actual survey questions our customers use. User interviews? End with a Calendly link. PMF survey? Use the template. Support satisfaction? Time it after ticket resolution. The key is asking at the right moment - after they use a feature, complete a task, or hit a milestone.',
         pricing:
             "Use surveys free, or enter a credit card for advanced features. Either way, your first 1500 survey responses are free – every month, then it's simple usage-based pricing. No limits on surveys created or questions asked. Compare that to SurveyMonkey charging $99/month for basic features. We include everything – targeting, multi-step, API access – out of the box.",
         'comparison-summary':
-            "Traditional survey tools (SurveyMonkey, Typeform) are disconnected from your product. Modern tools (Pendo, Sprig) are expensive and still siloed. We built surveys into the platform, so responses connect to user data, sessions, and analytics. (We're the only one with feature flag targeting.)",
+            "Traditional survey tools (SurveyMonkey, Typeform) are disconnected from your product. Modern tools (Pendo, Sprig) are expensive and still siloed. We built surveys into the platform, so responses connect to user data, sessions, and analytics. Because it's one system, agents can act on what users tell you – it's the qualitative signal that makes your product self-driving. (We're the only one with feature flag targeting.)",
         'feature-comparison':
             "We have all the core features. What we don't have: AI analysis (yet) or complex form logic. But we uniquely support feature flag targeting - survey only users who have a specific feature enabled. Nobody else does that.",
         docs: "We've got clear setup guides for both no-code and API approaches with real-world examples of different survey types and when to use them. Common patterns like NPS calculation and user interview scheduling are documented with copy-paste examples.",

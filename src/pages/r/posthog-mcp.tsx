@@ -46,7 +46,7 @@ export default function PostHogMCPLanding(): JSX.Element {
         <>
             <SEO
                 title="PostHog MCP - A product analyst that lives in your editor"
-                description="With PostHog MCP, your AI agents can grab session replays, summarize user behavior, build funnels, and turn bug reports into PRs, all from Claude Code, Cursor, Zed, or Windsurf. No per-seat pricing, no credit card."
+                description="PostHog MCP brings self-driving into your editor: your AI agents grab session replays, build funnels, and turn bug reports into PRs from Claude Code, Cursor, Zed, or Windsurf. No per-seat pricing, no credit card."
                 noindex
             />
             <ReaderView
@@ -61,7 +61,7 @@ export default function PostHogMCPLanding(): JSX.Element {
                     <div>
                         <h1 className="text-3xl md:text-5xl !mb-4">PostHog MCP</h1>
                         <p className="text-lg md:text-xl mb-6 text-secondary">
-                            A product analyst that lives in your editor. Ask anything.
+                            Self-driving, in your editor – a product analyst that lives where you code. Ask anything.
                         </p>
                         <div className="flex flex-wrap gap-2 mb-6">
                             <CallToAction type="primary" size="md" to="https://app.posthog.com/signup">

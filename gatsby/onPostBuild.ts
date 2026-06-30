@@ -15,6 +15,8 @@ import {
     generateLlmsTxt,
     generateSdkReferencesMarkdown,
     generatePricingMd,
+    generatePlatformMd,
+    generateProductPagesMarkdown,
 } from './rawMarkdownUtils'
 import { MARKDOWN_CONTENT_PATHS } from '../src/constants'
 import { SdkReferenceData } from '../src/templates/sdk/SdkReference.js'
@@ -594,6 +596,10 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter
     // Only include docs pages in llms.txt (not handbook)
     const docsPages = filteredPages.filter((page) => page.fields.slug.startsWith('/docs'))
     generateLlmsTxt(docsPages)
+
+    // Generate the self-driving platform overview + per-product markdown for LLMs/agents
+    generatePlatformMd()
+    generateProductPagesMarkdown()
 
     if (process.env.AWS_CODEPIPELINE !== 'true') {
         console.log('Skipping onPostBuild tasks')
