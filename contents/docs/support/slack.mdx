@@ -29,11 +29,11 @@ Each PostHog project can connect to one Slack workspace. If the workspace is alr
 
 After connecting, configure the integration in **Support > Settings**:
 
-| Setting | Description | Default |
-|---------|-------------|---------|
-| **Support channel** | Every top-level message in this channel becomes a ticket. Thread replies sync as ticket messages. | – |
-| **Ticket emoji** | React with this emoji on any message in any channel to create a ticket from it. | `:ticket:` |
-| **Bot mentions** | Always active – `@SupportHog` in any channel creates a ticket from that message. | – |
+| Setting             | Description                                                                                       | Default    |
+| ------------------- | ------------------------------------------------------------------------------------------------- | ---------- |
+| **Support channel** | Every top-level message in this channel becomes a ticket. Thread replies sync as ticket messages. | –          |
+| **Ticket emoji**    | React with this emoji on any message in any channel to create a ticket from it.                   | `:ticket:` |
+| **Bot mentions**    | Always active – `@SupportHog` in any channel creates a ticket from that message.                  | –          |
 
 ### Picking a support channel
 
@@ -54,6 +54,11 @@ Type `@SupportHog` in any channel to create a ticket from that message. If menti
 ### 3. Emoji reactions
 
 React with the configured emoji (default `:ticket:`) on any message to create a ticket from it. If a ticket already exists for that thread, the reaction is ignored to prevent duplicates.
+
+The behavior depends on where you react within a thread:
+
+- **Emoji on a thread root** – creates a ticket seeded from the root message and backfills all existing replies into the ticket
+- **Emoji on a reply** – creates a ticket seeded from that specific reply and backfills only the replies posted after it
 
 All three methods:
 
