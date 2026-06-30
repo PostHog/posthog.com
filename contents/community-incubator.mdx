@@ -1,164 +1,143 @@
 ---
-title: PostHog community incubator
+title: PostHog builder collective
 showTitle: false
 showSidebar: true
 width: lg
 ---
 
 import CommunityIncubatorForm from 'components/CommunityIncubatorForm'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CollectiveCarousel from 'components/BuilderCollective/CollectiveCarousel'
 
-<div className="md:-mt-12 flex flex-col lg:flex-row-reverse gap-8 md:items-center">
+export const fullBleed =
+  'w-[calc(100%_+_2rem)] @md/reader-content-container:w-[calc(100%_+_3rem)] @lg/reader-content-container:w-[calc(100%_+_4rem)] -mx-4 @md/reader-content-container:-mx-6 @lg/reader-content-container:-mx-8'
 
-<div className="flex-1 lg:flex-[0_0_400px] xl:flex-[0_0_600px]">
+<div className="max-w-6xl -mt-12">
+
+<div>
   <img
-    src="https://res.cloudinary.com/dmukukwp6/image/upload/f_webp,h_680,w_1209,c_fill,g_auto,q_auto/mykonoshackathon_979cf7bec6?_a=AXAH4nI0"
-    alt="Builders at Mykonos hackathon"
-    className="w-full shadow-xl rounded"
+    src="https://res.cloudinary.com/dmukukwp6/image/upload/f_webp,q_auto/builder_collective_banner_experiment_7d225ace04.png"
+    alt="Builder collectives"
+    className="w-full h-36 sm:h-52 md:h-64 object-cover object-center rounded-lg"
   />
 </div>
 
-<div className="mx-auto lg:my-6">
-  <h1 className="text-4xl lg:!text-5xl !mb-1">PostHog community incubator</h1>
-  <h2 className="!text-xl font-semibold mb-6 opacity-70">Cash grants and support to help you start a <span className="whitespace-nowrap">co-working</span> group in your city</h2>
+<div className="relative">
+  <div className="flex items-end justify-between gap-4 -mt-12 sm:-mt-16 mb-4">
+    <img
+      src="https://res.cloudinary.com/dmukukwp6/image/upload/hacker_0b39c191ae.svg"
+      alt="Builder collective"
+      className="size-36 sm:size-48 rounded-full border-4 border-light dark:border-dark bg-accent object-contain p-2"
+    />
+    <CallToAction to="#apply" type="primary" className="mb-2">Apply here</CallToAction>
+  </div>
 
+  <h1 className="text-3xl md:text-4xl font-bold !mb-1">Start a builder collective</h1>
+  <p className="text-secondary !mt-0 !mb-4">Get your builder crew together. We've got your back.</p>
 
-  <p className="text-lg lg:text-xl mt-4 mb-4">
-    Want to start a co-working community of builders in your city? We're looking for builders who want to build a community we'll invest in. We've already successfully kicked off in <Link to="https://github.com/PostHog/meta/issues/327#issuecomment-3067453536">Austin</Link>, <Link to="https://github.com/PostHog/meta/issues/331#issuecomment-3119258647">Barcelona</Link>, and <Link to="https://github.com/PostHog/meta/issues/336#issuecomment-3097106340">NYC</Link>.
+  <p className="text-lg !mb-3 max-w-2xl">
+    Do you and your builder friends want support from PostHog? Round up a crew, pick a spot, and start building together. We'll back your collective with a cash grant, merch, and hands-on support. Already running in cities around the globe, from <Link to="https://github.com/PostHog/requests-for-comments-public/issues/508">Córdoba (Argentina)</Link> to <Link to="https://github.com/PostHog/requests-for-comments-public/issues/498">Austin (Texas)</Link> and <Link to="https://github.com/PostHog/requests-for-comments-public/issues/516">Lisbon (Portugal)</Link>.
   </p>
 
-  <a href="#apply" className="inline-block mb-10">
-    <CallToAction to="#apply" type="primary">Apply to start a chapter</CallToAction>
-  </a>
-  
+  <div className="flex flex-wrap gap-x-6 gap-y-1 text-[15px]">
+    <span><span className="font-bold text-primary">12+</span> <span className="text-secondary">collectives</span></span>
+    <span><span className="font-bold text-primary">100+</span> <span className="text-secondary">builders</span></span>
+    <span><span className="font-bold text-primary">100+</span> <span className="text-secondary">sessions hosted</span></span>
+    <span><span className="font-bold text-primary">$800</span> <span className="text-secondary">grant per collective</span></span>
+  </div>
 </div>
 
 </div>
 
-<div className="my-12 md:my-24">
-  <h3 className="text-2xl lg:text-4xl m-0 md:text-center mb-6">Here's how we support organizers</h3>
-  <div className="flex justify-center">
-    <ul className="m-0 p-0 list-none inline-grid sm:grid-cols-2 lg:grid-cols-3 gap-[10px] justify-evenly relative md:text-center sm:text-left">
-      <li className="bg-accent relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8 rounded-2xl shadow-sm transition-colors duration-300">
-        <h5 className="text-xl font-extrabold !m-0 pb-1 pr-4 text-black dark:text-white">$800 cash grant</h5>
-        <p className="m-0 text-[15px] text-gray-800 dark:text-gray-300">
-          This will get you going and is to be used at the organizer's discretion. You can use it for food, coffees, or an activity. We'll also send merch. 
-        </p>
+<div className="my-14 md:my-20">
+  <h2 className="text-2xl md:text-3xl font-bold !mb-2">This could be you</h2>
+  <p className="text-secondary !mt-0 !mb-6">Builders are already gathering around the world. You'd be in good company.</p>
+  <div className="w-full">
+    <CollectiveCarousel />
+  </div>
+</div>
+
+<div id="how-it-works" className="my-14 md:my-20 scroll-mt-24">
+  <h2 className="text-2xl md:text-3xl font-bold !mb-6">What we'll back you with</h2>
+  <div className="grid sm:grid-cols-3 gap-4">
+    <div className="bg-accent rounded-lg p-6">
+      <h3 className="text-lg font-bold !mt-0 !mb-2">$800 cash grant</h3>
+      <p className="!mb-0 text-secondary">Yours to spend however you like. Food, coffee, or an activity to bring the crew together. We'll send merch too.</p>
+    </div>
+    <div className="bg-accent rounded-lg p-6">
+      <h3 className="text-lg font-bold !mt-0 !mb-2">Help growing the crew</h3>
+      <p className="!mb-0 text-secondary">The people you gather are the spark. We'll help you find more of the builders you'd be glad to ship alongside.</p>
+    </div>
+    <div className="bg-accent rounded-lg p-6">
+      <h3 className="text-lg font-bold !mt-0 !mb-2">Help finding a space</h3>
+      <p className="!mb-0 text-secondary">We've worked out of coffee shops and co-working spaces for years. We can help you find a spot for your group.</p>
+    </div>
+  </div>
+</div>
+
+<div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center my-14 md:my-20">
+  <div className="relative order-2 md:order-1">
+    <div className="border-8 border-white shadow-xl rounded overflow-hidden relative rotate-1">
+      <img
+        src="https://res.cloudinary.com/dmukukwp6/image/upload/cambridge_9a4e27f42e"
+        alt="A builder collective in action"
+        className="w-full"
+      />
+      <div className="absolute bottom-0 left-0 w-full text-white bg-gradient-to-b from-black/0 to-black/60 p-3 pt-10 text-sm">
+        This could be you, building alongside us
+      </div>
+    </div>
+  </div>
+  <div className="order-1 md:order-2">
+    <h2 className="text-2xl md:text-3xl font-bold !mb-6">How a collective works</h2>
+    <ul className="space-y-4 list-none p-0 m-0">
+      <li className="flex gap-3">
+        <span className="text-red font-bold leading-tight">01</span>
+        <span><strong>Round up your crew.</strong> Pull together at least 6 builders to co-work and ship across 4 sessions. We give the initial push; you take it from there.</span>
       </li>
-      <li className="bg-accent relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8 rounded-2xl shadow-sm transition-colors duration-300">
-        <h5 className="text-xl font-extrabold !m-0 pb-1 pr-4 text-black dark:text-white">Help attracting attendees</h5>
-        <p className="m-0 text-[15px] text-gray-800 dark:text-gray-300">
-          The people you gather are the sparks of your community. We'll help you find the builders we'd be glad to work alongside on any day. 
-        </p>
+      <li className="flex gap-3">
+        <span className="text-red font-bold leading-tight">02</span>
+        <span><strong>Find your rhythm.</strong> Pick a time that works for the crew, maybe evenings or weekends. For format, we suggest two key ingredients: build and demo.</span>
       </li>
-      <li className="bg-accent relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8 rounded-2xl shadow-sm transition-colors duration-300">
-        <h5 className="text-xl font-extrabold !m-0 pb-1 pr-4 text-black dark:text-white">Help finding a venue</h5>
-        <p className="m-0 text-[15px] text-gray-800 dark:text-gray-300">
-          We've been remote working in coffee shops and co-working spaces for four years. We can help you find a space for your group.
-        </p>
+      <li className="flex gap-3">
+        <span className="text-red font-bold leading-tight">03</span>
+        <span><strong>Keep us posted.</strong> Tell us how it's going along the way. As your collective grows, we'll put it in the spotlight.</span>
       </li>
     </ul>
   </div>
 </div>
 
-<div className="grid md:grid-cols-2 gap-8 items-start mt-6">
-  <div>
-    <h2 className="text-3xl lg:text-4xl mb-6">What we're asking from incubator organizers</h2>
-    <p>
-      Bring together a group of at least 6 people to co-work and build for 4 sessions. The goal is to give you the initial push but let you carry forward afterwards. If the group continues and grows, we're going to highlight it in our community. 
-    </p>
-    <p>
-      Create a consistent time and structure that works for your group. For times, do evenings or weekends. For format, we suggest two ingredients: building and demo-ing.
-    </p>
-    <p>
-      Let us know how it's going along the way.
-    </p>
-  </div>
-  <div className="relative">
-    <div className="border-8 border-white shadow-xl rounded relative rotate-1">
-      <img
-        src="https://res.cloudinary.com/dmukukwp6/image/upload/cambridge_9a4e27f42e"
-        alt="Builder community in action"
-        className="w-full"
-      />
-      <div className="absolute bottom-0 left-0 w-full text-white bg-gradient-to-b from-black/0 to-black/50 p-2 pt-8 text-sm">
-        This could be you, hacking alongside us
-      </div>
-    </div>
-  </div>
+<div className="my-14 md:my-20 max-w-3xl">
+  <h2 className="text-2xl md:text-3xl font-bold !mb-4">Who starts a collective</h2>
+  <p className="text-lg text-secondary !mb-0">
+    Collectives start with builders who'd rather make things together than alone. Founders, engineers, designers, product people. You don't need a big following or event experience, just a crew you'd want to build with and a bias for action. If this sounds like you, let's talk.
+  </p>
 </div>
 
-<div className="mt-6">
-  <div className="text-center max-w-4xl mx-auto mb-12">
-    <h2 className="text-3xl lg:text-4xl mb-6">It all starts with you, the (visionary) organizer</h2>
-    <div className="space-y-4 text-lg">
-      <p>
-        One thing that's clear from the community incubators already in motion is that the organizer sets the tone. They come from different backgrounds (founders, engineering, product) but all have a clear vision for and desire to make an impact locally.
-      </p>
+<section id="apply" className={`${fullBleed} my-14 md:my-20 scroll-mt-24`}>
+  <div className="bg-accent py-12 md:py-16 px-4">
+    <div className="max-w-screen-md mx-auto mb-8">
+      <h2 className="text-2xl md:text-3xl font-bold !mb-2">Start your collective</h2>
+      <p className="text-secondary !mb-0">Tell us about you and your city. What is the builder scene like?</p>
+    </div>
+    <div className="max-w-screen-md mx-auto px-4">
+      <CommunityIncubatorForm />
     </div>
   </div>
-</div>
-
-<div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-  <div className="relative">
-    <div className="border-8 border-white shadow-xl rounded relative rotate-1">
-      <img
-        src="https://res.cloudinary.com/dmukukwp6/image/upload/Austin_community_incubator_photo_1049a2853e.png"
-        alt="Austin community incubator"
-        className="w-full"
-      />
-       <div className="absolute bottom-0 left-0 w-full text-white bg-gradient-to-b from-black/0 to-black/50 p-2 pt-8 text-sm">
-        <Link to="https://www.linkedin.com/in/kliment-minchev-a1847160/">Kliment</Link> leading community incubator, Austin
-      </div>
-    </div>
-  </div>
-
-  <div className="relative">
-    <div className="border-8 border-white shadow-xl rounded relative -rotate-1">
-      <img
-        src="https://res.cloudinary.com/dmukukwp6/image/upload/NYC_community_incubator_photo_57f844e7c4.jpeg"
-        alt="NYC community incubator"
-        className="w-full"
-      />
-       <div className="absolute bottom-0 left-0 w-full text-white bg-gradient-to-b from-black/0 to-black/50 p-2 pt-8 text-sm">
-        <Link to="https://www.linkedin.com/in/garrettawolfe/">Garrett</Link> and <Link to="https://linkedin.com/in/mitchbregs/">Mitch</Link> with community incubator, NYC
-      </div>
-    </div>
-  </div>
-
-  <div className="relative">
-    <div className="border-8 border-white shadow-xl rounded relative rotate-1">
-      <img
-        src="https://res.cloudinary.com/dmukukwp6/image/upload/Barcelona_community_incubator_photo_bc90b36bbe.png"
-        alt="Barcelona community incubator"
-        className="w-full"
-      />
-       <div className="absolute bottom-0 left-0 w-full text-white bg-gradient-to-b from-black/0 to-black/50 p-2 pt-8 text-sm">
-        Barcelona community incubator by <Link to="https://www.linkedin.com/in/guillem-tarraga/">Guillem</Link> and <Link to="https://www.linkedin.com/in/jesauraoller/">Jose</Link>
-      </div>
-    </div>
-  </div>
-</div>
-
-<section id="apply" className="pt-6 md:pt-12">
-<div className="max-w-screen-md mx-auto">
-<h2 className="text-3xl lg:text-4xl text-center mb-8">Apply to lead a chapter</h2>
-
-<CommunityIncubatorForm />
-
-</div>
 </section>
 
-<section className="my-12 md:my-24 px-5">
-<div className="max-w-screen-md mx-auto space-y-1">
+<section className="my-14 md:my-20">
+  <div className="max-w-screen-md mx-auto">
+  <h2 className="text-2xl md:text-3xl font-bold !mb-6">Frequently asked questions</h2>
+  <div className="space-y-1">
+
 <details>
-<summary>Who is eligible to lead?</summary>
-<p>You are someone who really wants to get together with other builders. You are plugged into your local ecosystem and operate with a bias for action.</p>
+<summary>Who can start a collective?</summary>
+<p>Anyone who really wants to build alongside other people. You're plugged into your local scene and you operate with a bias for action.</p>
 </details>
 
 <details>
-<summary>Who is eligible to attend?</summary>
-<p>Individuals or small teams who are already or want to build products.</p>
+<summary>Who can join a collective?</summary>
+<p>Individuals or small teams who are already building products, or want to.</p>
 </details>
 
 <details>
@@ -168,18 +147,19 @@ import CloudinaryImage from 'components/CloudinaryImage'
 
 <details>
 <summary>What happens after 4 sessions?</summary>
-<p>You've now bootstrapped a community, keep it going. If you didn't get the traction required to keep it going, let's learn about what happened and iterate for the next one.</p>
+<p>You've bootstrapped a collective, so keep it going. If it didn't get the traction to continue, let's learn what happened and iterate on the next one.</p>
 </details>
 
 <details>
 <summary>What level of support do I get?</summary>
-<p>We're looking for organizers who can drive this builder community with limited support from us. Venue? Participants? Promotion? This is up to you. Still, we'll be here to help along the way. We also have existing community organizers who can serve as inspiration.</p>
+<p>We're looking for crews who can drive this with limited support from us. Space? Members? Promotion? That's up to you. Still, we'll be here to help along the way, and existing collectives can serve as inspiration.</p>
 </details>
 
 <details>
-<summary>What's in it for us?</summary>
-<p>We are excited about helping to bootstrap communities of builders around the world. That's what we're in it for. No one needs to use PostHog as part of this initiative.</p>
+<summary>What's in it for PostHog?</summary>
+<p>We're excited about helping bootstrap collectives of builders around the world. That's what we're in it for. No one needs to use PostHog to be part of this.</p>
 </details>
-    
-</div>
+
+  </div>
+  </div>
 </section>
