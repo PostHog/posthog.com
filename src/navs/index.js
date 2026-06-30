@@ -2771,6 +2771,10 @@ export const docsMenu = {
                             url: '/docs/api/environments',
                         },
                         {
+                            name: 'Error tracking',
+                            url: '/docs/api/error-tracking',
+                        },
+                        {
                             name: 'Evaluation runs',
                             url: '/docs/api/evaluation-runs',
                         },
@@ -5375,8 +5379,8 @@ export const docsMenu = {
                             url: '/docs/references/posthog-python?filter=error-tracking',
                         },
                         {
-                            name: 'Error Tracking API',
-                            url: '/docs/api',
+                            name: 'Error tracking API',
+                            url: '/docs/api/error-tracking',
                         },
                     ],
                 },
