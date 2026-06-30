@@ -683,9 +683,8 @@ function HeroSection() {
                         <div className="@4xl/editor:gap-8 flex flex-col @4xl/editor:flex-row items-start">
                             <div className="@4xl/flex-[0_0_280px]">
                                 <p>
-                                    PostHog Code is the desktop app for self-driving development – the only AI devtool
-                                    that understands your <strong>product,</strong> not just your{' '}
-                                    <strong>codebase</strong>.
+                                    PostHog Code is the only AI devtool that understands your <strong>product,</strong>{' '}
+                                    not just your <strong>codebase</strong>.
                                 </p>
                                 <ul className="list-none p-0 mb-4 text-[15px] space-y-0.5">
                                     <li className="relative pl-5">
@@ -1626,11 +1625,11 @@ export default function CodePage() {
         <>
             <SEO
                 title="PostHog Code"
-                description="PostHog Code is the desktop app for self-driving development – it uses signals from production data to diagnose issues and generate pull requests, before you even know there's a problem."
+                description="PostHog Code uses signals from production data to diagnose issues and generate pull requests – before you even know there's a problem."
                 structuredData={buildProductStructuredData({
                     name: 'PostHog Code',
                     description:
-                        "PostHog Code is the desktop app for self-driving development – it uses signals from production data to diagnose issues and generate pull requests, before you even know there's a problem.",
+                        "PostHog Code uses signals from production data to diagnose issues and generate pull requests – before you even know there's a problem.",
                     slug: 'code',
                     operatingSystem: 'macOS, Windows, Linux',
                 })}

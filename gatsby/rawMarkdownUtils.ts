@@ -347,19 +347,20 @@ const PLATFORM_ITEMS: PlatformItem[] = [
         slug: 'slack-app',
         layer: 'product',
         oneLiner:
-            'The reactive way to reach self-driving: tag @PostHog in any thread to ship a fix or answer a data question.',
+            'Tag @PostHog in any Slack thread to ship a fix, answer a data question, or edit content – without leaving the conversation.',
     },
     {
         name: 'PostHog Code',
         slug: 'code',
         layer: 'product',
-        oneLiner: 'The desktop product for complex, agentic engineering work on your product.',
+        oneLiner:
+            "The desktop app that uses signals from production data to diagnose issues and generate pull requests, before you know there's a problem.",
     },
     {
         name: 'PostHog MCP',
         layer: 'product',
         link: 'https://posthog.com/docs/model-context-protocol',
-        oneLiner: 'Brings reactive self-driving into your own editor or agent via MCP.',
+        oneLiner: 'A product analyst that lives in your editor, via MCP.',
     },
     // Tools — the functional capabilities that produce and act on your product's context
     {
