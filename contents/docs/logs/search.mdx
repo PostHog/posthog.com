@@ -50,6 +50,36 @@ To search log bodies, pick the **Message** field from the filter bar. Message su
 - **Matches regex** `timeout|refused|reset` – matches logs mentioning any of those words (useful when you'd otherwise add multiple contains filters).
 - **Doesn't contain** `healthcheck` – exclude noisy healthcheck lines while keeping everything else.
 
+## Discover recurring log patterns
+
+Pattern mining clusters your log messages into recurring templates, replacing variable parts (IDs, timestamps, IP addresses, numbers) with placeholder tokens like `<*>`, `<uuid>`, `<ip>`, and `<num>`.
+
+For example, if your logs contain:
+
+```
+User abc123 not found
+User xyz789 not found
+User def456 not found
+```
+
+Pattern mining groups them into a single template: `User <*> not found`.
+
+This is useful when you want to:
+
+- **Find noisy log templates** — identify which patterns dominate your log volume.
+- **Spot recurring errors** — surface error patterns you didn't know existed without manually searching.
+- **Understand log distribution** — see how your log volume breaks down across different message types.
+
+Each discovered pattern includes:
+
+- How many times it occurred and what share of total volume it represents
+- How many occurrences were errors
+- When it was first and last seen
+- Example raw log bodies that produced the pattern
+- Which services generated it
+
+For large time windows, patterns are mined from a random sample rather than every matching log. When this happens, you can use the reported sample size and total count to estimate full-window numbers.
+
 ## Tips
 
 - **Stack filters to narrow down.** Every filter you add is ANDed together — combine a `service.name` filter with a Message contains to scope full-text search to one service.
