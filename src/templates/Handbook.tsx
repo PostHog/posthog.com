@@ -21,6 +21,7 @@ import { OverflowXSection } from 'components/OverflowXSection'
 import APIExamples from 'components/Product/Pipelines/APIExamples'
 import Configuration from 'components/Product/Pipelines/Configuration'
 import SourceConfiguration from 'components/Product/Sources/Configuration'
+import SourceTables from 'components/Product/Sources/Tables'
 import Link from 'components/Link'
 import SEO from 'components/seo'
 import { IconWarning, IconCheck, IconX } from '@posthog/icons'
@@ -307,6 +308,24 @@ export const SourceParametersFactory: (params: SourceParametersProps) => React.F
     return SourceParameters
 }
 
+type SourceTablesProps = {
+    tables:
+        | {
+              name?: string | null
+              label?: string | null
+              description?: string | null
+              sync_methods?: (string | null)[] | null
+              incremental_fields?: (string | null)[] | null
+              primary_keys?: (string | null)[] | null
+          }[]
+        | null
+}
+
+export const SourceTablesFactory: (params: SourceTablesProps) => React.FC = ({ tables }) => {
+    const SourceTablesComponent = () => <SourceTables tables={tables} />
+    return SourceTablesComponent
+}
+
 const A = (props) => <Link {...props} />
 
 export default function Handbook({ data: { post, postHogSource }, pageContext: { breadcrumbBase, tableOfContents } }) {
@@ -330,6 +349,7 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
     } = post
 
     const sourceFields = postHogSource?.sourceFields ?? null
+    const sourceTables = postHogSource?.tables ?? null
     const posthog = usePostHog()
 
     // Track product interest for cross-subdomain cookie
@@ -353,6 +373,7 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
         AppParameters: AppParametersFactory({ config: appConfig }),
         TemplateParameters: TemplateParametersFactory(templateConfigs),
         SourceParameters: SourceParametersFactory({ sourceFields }),
+        SourceTables: SourceTablesFactory({ tables: sourceTables }),
         TeamRoadmap: (props) => TeamRoadmap({ team: title?.replace(/team/gi, '').trim(), ...props }),
         TeamMembers: (props) => TeamMembers({ team: title?.replace(/team/gi, '').trim(), ...props }),
         CategoryData,
@@ -444,6 +465,14 @@ export const query = graphql`
                 required
                 placeholder
                 caption
+            }
+            tables {
+                name
+                label
+                description
+                sync_methods
+                incremental_fields
+                primary_keys
             }
         }
         glossary: allMdx(filter: { fields: { slug: { in: $links } } }) {

@@ -13,6 +13,7 @@ In your [Account settings](https://app.posthog.com/settings/user-api-keys#person
 - [Authentication](#authentication)
 - [Connected applications](#connected-applications)
 - [Personal API keys](#personal-api-keys)
+- [Reminders](#reminders)
 - [Notifications](#notifications)
 - [Theming options](#theming-and-customization)
 
@@ -66,6 +67,28 @@ For each connected application, you can see:
 To revoke an application's access, click the **Revoke** button next to the application. This immediately revokes all tokens and permissions granted to that application.
 
 If you need to use the application again, you can re-authorize it through the application's own interface.
+
+## Reminders
+
+Reminders are personal, scheduled nudges that notify you in-app when they're due. You can create, edit, and delete reminders in [your account settings](https://app.posthog.com/settings/user-reminders#reminders) under **Reminders**.
+
+Each reminder has a title, an optional message, and a schedule. You can scope a reminder to a specific project or leave it organization-wide.
+
+### Schedule types
+
+When creating a reminder, choose one of three schedule types:
+
+- **One-off** – Fires once at a specific date and time.
+- **Repeats** – Fires on a recurring interval: daily, weekly, monthly, or yearly. You can optionally set an end date.
+- **Advanced** – Uses a 5-field cron expression for custom schedules (max four fires per day). You can optionally set an end date.
+
+### Timezone
+
+Each reminder has its own timezone setting, which defaults to your browser's local timezone. You can change it to any supported timezone when creating or editing a reminder.
+
+### Creating reminders with PostHog AI
+
+You can also create and manage reminders through [PostHog MCP](/docs/model-context-protocol) or PostHog AI without using the settings UI.
 
 ## Notifications
 

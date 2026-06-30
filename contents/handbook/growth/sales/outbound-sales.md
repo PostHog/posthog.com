@@ -190,7 +190,6 @@ This is internal hygiene. Track tasks to reflect the opportunity:
 - If qualified + next step, create an opportunity in `Problem Agreement` and use stage exit criteria  
 - If marginal/no next step, switch task from `In progress` to `Nurturing` and progress them toward an opportunity  
 - If not qualified, disqualify with reason and share feedback with <TeamMember name="Dmytro Sitalo" /> in Slack  
-
 ### 9. Rinse, lather, and repeat
 
 You should always aim to get them into a shared Slack channel or establish a regular communication cadence with them (call/email). Nothing will happen if we aren't talking.
@@ -210,6 +209,22 @@ Otherwise, you can:
 - Ship them merch
 
 What won’t change: qualify each step, solve a real problem, and don’t assume interest just because a task became an opportunity. Stay focused on their pain and you’ll earn the right to keep moving.
+
+## How TAEs accept and work BDR opportunities
+
+Whether a BDR-sourced meeting becomes an opportunity is dependent on a set of fixed criteria to ensure the consistent and smooth handoff of qualified pipeline vs. simply converting oops based on vibes. 
+
+### When a BDR meeting becomes an opp
+
+Create an opportunity in `Problem Agreement` only when all of the following are true:
+
+- **The meeting was held** - No-shows are not qualified. If rescheduled, fantastic - the meeting must happen before opportunity creation. 
+- **ICP fit is confirmed** — the account matches [who we build for](/handbook/who-we-build-for) or the "fit" for PostHog is otherwise undeniable.
+- **A specific pain is identified** — there is a concrete problem PostHog addresses.
+- **The prospect agrees the problem is worth exploring** -- as we're reaching out to these folks, they need to tell us it's a big enough problem to solve. 
+- **There's a known timeline** — they intend to do something about it inside a defined window (roughly the next two quarters).
+- **You have access to authority** — you're talking to, or have a confirmed path to, whoever decides or could champion PostHog internally. 
+- **A mutually-agreed next step** is on the calendar — demo, trial kickoff, technical eval, with a date. Ideally, we secure a verbal commitment on the call, and this is an emphasis point for TAEs. No committed next step, no opp.
 
 ## How our outbound data pipelines work
 

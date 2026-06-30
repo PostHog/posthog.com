@@ -25,7 +25,7 @@ This post is about the setup we used, the bug itself, and what we're building no
 
 ## What's autoresearch?
 
-The general idea isn't ours. Andrej Karpathy [packaged it up](https://github.com/karpathy/autoresearch) and gave it a name in March 2026: give an AI agent a small but real system, a benchmark, and a budget, and let it loop; propose a change, run the benchmark, keep what helps, throw away what doesn't.
+The general idea isn't ours. Andrej Karpathy [packaged it up](https://github.com/karpathy/autoresearch) and gave it a name in March 2026: give an AI agent a small but real system, a benchmark, and a budget, and [let it loop](/newsletter/loops); propose a change, run the benchmark, keep what helps, throw away what doesn't.
 
 Karpathy ran it for two days against a depth-12 nanochat training run and found [about 20 changes that improved validation loss](https://x.com/karpathy/status/2031135152349524125), some of which transferred to a bigger model. The shape isn't new (DeepMind's [FunSearch](https://www.nature.com/articles/s41586-023-06924-6) (2023) and [Sakana's AI Scientist](https://sakana.ai/ai-scientist/) (2024) are earlier examples), but Karpathy's repo is small and concrete enough to inspire you to build your own version in an afternoon.
 

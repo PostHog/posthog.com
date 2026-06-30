@@ -62,6 +62,10 @@ You can organize dashboards into folders for easier navigation. There are two wa
 
 > **Note:** Moving a dashboard to a folder requires editor access.
 
+The dashboards list page includes a **Folder** column that shows which folder each dashboard belongs to. Dashboards that haven't been filed into a folder display a dash (`—`).
+
+Click a folder name in the **Folder** column to filter the list to dashboards in that folder. The active filter appears as a clearable chip in the filters bar. The folder filter is saved to the URL as a `?folder=` query parameter, so filtered views persist across page reloads and can be shared with teammates.
+
 ## Copying dashboards and templates between projects
 
 You can copy dashboards and project-scoped dashboard templates from one project to another within the same organization. This is useful when you want to reuse work you've built without recreating it from scratch.
@@ -145,13 +149,22 @@ Tapping 'F' enables full-screen mode.
 
 ### Insight card options
 
-Each insight card on a dashboard has a **⋯** menu with quick visualization toggles. These let you adjust how an insight displays without opening the full insight editor.
+Each insight card on a dashboard has a **⋯** menu with a **Display options** submenu. This provides access to the same display settings available in the insight editor's Options menu, so you can adjust how an insight displays without opening the full editor.
 
-- **Show legend** / **Hide legend** – Toggle the chart legend on or off. Available for Trends, Stickiness, and Lifecycle insights.
-- **Show values on series** / **Hide values on series** – Toggle data value labels on chart series. Available for Trends, Stickiness, Lifecycle, and Funnel (trends view) insights. For pie charts, this appears as **Show labels on series** / **Hide labels on series**.
-- **Show annotations** / **Hide annotations** – Toggle annotation markers on or off. Available for Trends time-series charts and Funnel historical trends insights.
+Available settings vary by insight type and chart type, but can include:
 
-These options require editor access to the insight.
+- Smoothing
+- Y-axis scale (linear or logarithmic)
+- Percentage stack view
+- Show or hide legend
+- Show values on series
+- Show annotations
+- Confidence intervals and moving averages
+- Axis labels and formatting
+- Multiple Y-axes
+- Decimal places
+
+The **Display options** submenu requires editor access to the insight. Changes are saved to the insight and apply everywhere it appears.
 
 ### Moving and copying widgets
 
@@ -186,9 +199,131 @@ When creating a button tile, you can configure:
 - **Style** – Choose between primary (filled) or secondary (outlined) button styles.
 - **Transparent background** – Toggle to remove the tile's background for a cleaner look.
 
-### Toggling labels and values on insights
+### Adding widgets
 
-You can toggle the visibility of labels or values on insight charts directly from the dashboard without editing the insight. Click the **...** icon on an insight card and select the toggle option. For pie charts, the option is **Show/Hide labels on series**. For other supported chart types (trends, lifecycle, stickiness, and funnel trends), the option is **Show/Hide values on series**. This change is saved to the insight.
+<CalloutBox icon="IconFlask" title="Early access" type="action">
+
+Dashboard widgets are an early access feature. Subscribe on the early access features page to enable widgets for your organization.
+
+</CalloutBox>
+
+Widgets let you add live content from other PostHog products directly to your dashboards. Unlike insights, widgets display real-time lists of events, issues, or recordings instead of charts and metrics.
+
+This means your dashboards can be now be the one stop for everything you care about for your project.
+
+To add a widget, click the **Add...** dropdown button and select a widget from the available groups.
+
+#### Activity widget
+
+The Activity widget displays a list of recent events mirroring the [Activity > Explore](https://app.posthog.com/activity/explore) page. Each row shows the event name, person, timestamp, library, and URL.
+
+To add it, click the **Add...** dropdown and select **Recent events** under the **Activity** group.
+
+**Configuration options:**
+
+- **Date range** - The time period to show events from. Default: last 24 hours.
+- **Event** - Scope the widget to a single event. Pick an event from the dropdown, or leave as **All events** to show everything. Default: All events.
+- **Limit** - Maximum number of events to display. Default: 25, maximum: 50.
+- **Filter test accounts** - Toggle to exclude internal and test users.
+
+Clicking a row opens the event detail page in a new tab. Clicking the tile title navigates to **Activity > Explore**.
+
+#### Error Tracking widget
+
+The Error Tracking widget displays a list of top issues from [Error Tracking](/docs/error-tracking). Each row shows the issue title, occurrences, affected users, and when it was last seen.
+
+To add it, click the **Add...** dropdown and select **Top issues** under the **Error tracking** group.
+
+**Configuration options:**
+
+- **Date range** - The time period to show issues from. Default: last 7 days.
+- **Limit** - Maximum number of issues to display. Default: 10, maximum: 25.
+- **Order by** - Sort issues by occurrences, last seen, first seen, users, or sessions.
+- **Order direction** - Sort ascending or descending.
+- **Status** - Filter by issue status: active, resolved, archived, pending release, suppressed, or all.
+- **Assignee** - Filter to show only issues assigned to specific team members.
+- **Filter test accounts** - Toggle to exclude internal and test users.
+
+Clicking a row opens the issue detail page. Clicking the tile title navigates to **Error Tracking**.
+
+#### Session Replay widget
+
+The Session Replay widget displays a list of recent recordings from [Session Replay](/docs/session-replay). Each row shows the user, recording duration, activity score, and timestamp.
+
+To add it, click the **Add...** dropdown and select **Recent recordings** under the **Session replay** group.
+
+**Configuration options:**
+
+- **Date range** - The time period to show recordings from. Default: last 7 days.
+- **Limit** - Maximum number of recordings to display. Default: 10, maximum: 25.
+- **Order by** - Sort recordings by start time, activity score, duration, clicks, or console errors.
+- **Order direction** - Sort ascending or descending.
+- **Collection** - Scope the widget to a curated set of pinned recordings from a [collection](/docs/session-replay).
+- **Saved filter** - Apply a saved Session Replay filter to refine which recordings are shown.
+- **Filter test accounts** - Toggle to exclude internal and test users.
+
+Collection and Saved filter are composable. Collection acts as the scope – a fixed set of pinned session IDs – while Saved filter acts as refinement, applying its date range and property filters on top. When both are set, the widget first scopes to the collection's recordings, then narrows the results using the saved filter criteria. A collection on its own is not date-bounded, so older pinned recordings still appear.
+
+Clicking a row opens the session replay player. Clicking the tile title navigates to **Session Replay**.
+
+#### Logs widget
+
+The Logs widget displays a list of recent log entries from [Logs](/docs/logs). Each row shows a severity bar, timestamp, and the log body, matching the style of the Logs page.
+
+To add it, click the **Add...** dropdown and select **Recent logs** under the **Logs** group.
+
+**Tile filters:**
+
+- **Severity** - Filter by log severity levels (trace, debug, info, warn, error, fatal). Default: all levels.
+- **Service** - Filter logs by specific services. Default: all services.
+- **Sort** - Sort by newest first or oldest first. Default: newest first.
+- **Saved view** - Point the tile at a saved logs view. When set, the saved view owns the date range, severity, service, and property filters; only sort and limit still apply from the tile.
+
+**Display settings (edit modal):**
+
+- **Date range** - The time period to show logs from. Default: last hour.
+- **Limit** - Maximum number of log entries to display. Default: 50, maximum: 100.
+- **Timestamps** - Display log times in UTC or your local timezone. Default: UTC.
+- **Wrap long log lines** - Toggle line wrapping vs. truncation. Default: off.
+
+Clicking a row opens the log on the Logs page in a new tab. Clicking the tile title navigates to **Logs**.
+
+#### Experiments list widget
+
+The Experiments list widget displays a filterable list of [experiments](/docs/experiments). Each row shows the experiment name, status, conclusion, creator, and when it was created.
+
+To add it, click the **Add...** dropdown and select **Experiments list** under the **Experiments** group.
+
+**Configuration options:**
+
+- **Sort by** - Sort experiments by created date, name, or start date.
+- **Direction** - Sort ascending or descending.
+- **Number of experiments** - Maximum number of experiments to display. Default: 10, maximum: 25.
+
+The tile also includes a filter bar where you can filter by experiment status (draft, running, paused, complete, or any status) and by creator.
+
+Clicking a row opens the experiment detail page. Clicking the tile title navigates to **Experiments**.
+
+#### Experiment Results widget
+
+The Experiment Results widget displays the current results for a selected experiment's primary and secondary metrics. It shows the experiment name, status, total exposures, and a breakdown of variant results for each metric.
+
+To add it, click the **Add...** dropdown and select **Experiment results** under the **Experiments** group.
+
+**Configuration options:**
+
+- **Experiment** - Select which experiment to display results for. You can pick an experiment when adding the widget or later from the widget settings.
+
+The widget displays:
+
+- Experiment name and current status
+- Total exposures count
+- Primary metrics with variant-level results
+- Secondary metrics, if configured on the experiment
+
+If the selected experiment is still in draft status, the widget shows a message indicating that results appear once the experiment is running.
+
+Clicking the experiment name opens the experiment detail page in a new tab.
 
 ### Sharing a dashboard
 
@@ -197,6 +332,14 @@ By clicking 'Share' in the top right corner you can:
 - Restrict edit access to certain members within a project. Dashboards can be shared either by members with administrator privileges or by the dashboard creator ([platform package](/platform-packages) required).
 
 - Create a link to share your dashboard publicly, or embed your dashboard on a website. Read more about this in our [sharing and embedding docs](/docs/product-analytics/sharing).
+
+### Refreshing individual tiles
+
+You can refresh a single insight tile without refreshing the entire dashboard. Hover over the tile header to reveal a refresh icon. Click it to recompute just that tile.
+
+The tooltip on the refresh icon shows when the tile's data was last computed. If the tile is rate-limited, the icon is disabled and the tooltip explains when the next refresh is available.
+
+The refresh icon is hidden while the tile is actively refreshing and isn't available on shared or public dashboards. You can also refresh a tile from the **⋯** menu by selecting **Refresh data**, which is useful for touch and keyboard users.
 
 ### Auto refresh
 

@@ -122,7 +122,7 @@ Build mode isn't a solo act. Some of the best work happening at PostHog is in pu
 
 And that know-how compounds. The old way to pass on how you do something was to write a standard operating procedure – a document that tells you how to do the thing but can't do it itself. A [skill](/docs/posthog-code/skills) can: it's your judgment written down in a form an agent can actually run, so the next person doesn't start from scratch.
 
-If your company is *cautiously* adopting AI, this is the cleanest way to let people work outside their lane – the agent runs on your colleagues' codified judgment, not a blank prompt. We keep ours in a few places: the [skills store](/docs/prompt-management/skills-store), the [`.claude` folder](https://github.com/PostHog/posthog.com/tree/master/.claude) in our website repo, and the company [handbook](/handbook).
+If your company is *cautiously* adopting AI, this is the cleanest way to let people work outside their lane – the agent runs on your colleagues' codified judgment, not a blank prompt. We keep ours in a few places: the [skills store](/docs/ai-engineering/skills-store), the [`.claude` folder](https://github.com/PostHog/posthog.com/tree/master/.claude) in our website repo, and the company [handbook](/handbook).
 
 ![Linear vs exponential growth comic](https://res.cloudinary.com/dmukukwp6/image/upload/linear_vs_exponential_comic_906763385b.webp)
 <Caption>We're wired to expect progress in straight lines, but build mode is exponential.</Caption>

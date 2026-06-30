@@ -195,7 +195,7 @@ json=ph_flag
 ).json()
 ```
 
-Once done, you can replace your `statsig.getConfig` call with a `posthog.getFeatureFlagPayload` one.
+Once done, you can replace your `statsig.getConfig` call with a `posthog.getFeatureFlagResult()?.payload` one.
 
 > **Note:** As of writing this guide, Statsig does not have an endpoint for listing parameter stores, but you would follow a similar process to migrate them.
 
