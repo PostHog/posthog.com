@@ -3,9 +3,9 @@ title: Implementing custom surveys
 sidebar: Docs
 showTitle: true
 availability:
-    free: none
-    selfServe: full
-    enterprise: full
+  free: none
+  selfServe: full
+  enterprise: full
 ---
 
 > Custom surveys is currently supported only with the [JavaScript Web SDK](/docs/libraries/js).
@@ -63,7 +63,7 @@ If you create a [popover survey](/docs/surveys/creating-surveys#presentation), u
 
 Although we recommend using popover surveys and display conditions, if you want to show surveys programmatically without setting up all the extra logic needed for API surveys, you can render surveys programmatically with the `displaySurvey` (recommended) or `renderSurvey` (deprecated) method.
 
-import OnSurveysLoaded from './_snippets/onsurveysloaded-callout.md'
+import OnSurveysLoaded from "./_snippets/onsurveysloaded-callout.md";
 
 <OnSurveysLoaded />
 
@@ -79,11 +79,11 @@ The `displaySurvey` method is the recommended way to show surveys programmatical
 To display a survey as a popover, simply call `displaySurvey` with the survey ID:
 
 ```js
-import React from 'react';
-import { DisplaySurveyType } from 'posthog-js';
-import { usePostHog } from '@posthog/react';
+import React from "react";
+import { DisplaySurveyType } from "posthog-js";
+import { usePostHog } from "@posthog/react";
 
-const coolSurveyID = "01942e4c-d028-0000-6ab5-afb4ed961263"
+const coolSurveyID = "01942e4c-d028-0000-6ab5-afb4ed961263";
 
 function App() {
   const posthog = usePostHog();
@@ -93,7 +93,7 @@ function App() {
     posthog.displaySurvey(coolSurveyID, {
       displayType: DisplaySurveyType.Popover,
       ignoreConditions: false,
-      ignoreDelay: false
+      ignoreDelay: false,
     });
   }, []);
 
@@ -102,7 +102,7 @@ function App() {
     posthog.displaySurvey(coolSurveyID, {
       displayType: DisplaySurveyType.Popover,
       ignoreConditions: true,
-      ignoreDelay: true
+      ignoreDelay: true,
     });
   };
 
@@ -110,9 +110,7 @@ function App() {
     <div className="App">
       <h1>Survey Tutorial with PostHog</h1>
       <div className="survey-controls">
-        <button onClick={handleForceShowSurvey}>
-          Force Show Survey
-        </button>
+        <button onClick={handleForceShowSurvey}>Force Show Survey</button>
       </div>
     </div>
   );
@@ -126,11 +124,11 @@ export default App;
 You can pre-fill survey answers programmatically by passing `initialResponses` to `displaySurvey`. This works with single choice, multiple choice, and rating questions, and is only supported for **popover** surveys.
 
 ```js
-import React from 'react';
-import { DisplaySurveyType } from 'posthog-js';
-import { usePostHog } from '@posthog/react';
+import React from "react";
+import { DisplaySurveyType } from "posthog-js";
+import { usePostHog } from "@posthog/react";
 
-const coolSurveyID = "01942e4c-d028-0000-6ab5-afb4ed961263"
+const coolSurveyID = "01942e4c-d028-0000-6ab5-afb4ed961263";
 
 function App() {
   const posthog = usePostHog();
@@ -139,10 +137,10 @@ function App() {
     posthog.displaySurvey(coolSurveyID, {
       displayType: DisplaySurveyType.Popover,
       initialResponses: {
-        0: 2,          // Single choice: select the 3rd choice (0-based index)
-        1: 9,          // Rating: pre-fill with a rating of 9
-        2: [0, 2]      // Multiple choice: select the 1st and 3rd choices (0-based indices)
-      }
+        0: 2, // Single choice: select the 3rd choice (0-based index)
+        1: 9, // Rating: pre-fill with a rating of 9
+        2: [0, 2], // Multiple choice: select the 1st and 3rd choices (0-based indices)
+      },
     });
   };
 
@@ -150,9 +148,7 @@ function App() {
     <div className="App">
       <h1>Survey Tutorial with PostHog</h1>
       <div className="survey-controls">
-        <button onClick={handleShowPrefilled}>
-          Show Pre-filled Survey
-        </button>
+        <button onClick={handleShowPrefilled}>Show Pre-filled Survey</button>
       </div>
     </div>
   );
@@ -170,6 +166,7 @@ export default App;
   - **Rating**: Rating value as a number (e.g., `9` for a 0-10 scale)
 
 **Important notes:**
+
 - Only supported for popover surveys — inline surveys will log a warning and ignore the prefill
 - Choice and question indices are 0-based
 - Invalid indices are silently ignored
@@ -181,11 +178,11 @@ export default App;
 To display a survey inline within a specific element, specify the `displayType` and `selector`:
 
 ```js
-import React from 'react';
-import { DisplaySurveyType } from 'posthog-js';
-import { usePostHog } from '@posthog/react';
+import React from "react";
+import { DisplaySurveyType } from "posthog-js";
+import { usePostHog } from "@posthog/react";
 
-const coolSurveyID = "01942e4c-d028-0000-6ab5-afb4ed961263"
+const coolSurveyID = "01942e4c-d028-0000-6ab5-afb4ed961263";
 
 function App() {
   const posthog = usePostHog();
@@ -195,7 +192,7 @@ function App() {
       displayType: DisplaySurveyType.Inline,
       ignoreConditions: false,
       ignoreDelay: false,
-      selector: '#survey-container'
+      selector: "#survey-container",
     });
   }, []);
 
@@ -205,7 +202,7 @@ function App() {
       displayType: DisplaySurveyType.Inline,
       ignoreConditions: true,
       ignoreDelay: true,
-      selector: '#survey-container'
+      selector: "#survey-container",
     });
   };
 
@@ -213,9 +210,7 @@ function App() {
     <div className="App">
       <h1>Survey Tutorial with PostHog</h1>
       <div className="survey-controls">
-        <button onClick={handleForceShowInlineSurvey}>
-          Force Show Inline Survey
-        </button>
+        <button onClick={handleForceShowInlineSurvey}>Force Show Inline Survey</button>
       </div>
       <div id="survey-container">
         <p>Survey will render here</p>
@@ -234,26 +229,24 @@ export default App;
 The legacy `renderSurvey` method renders an **unstyled** survey in a specific HTML element, ignoring any display conditions:
 
 ```js
-import './App.css';
-import React from 'react';
-import { usePostHog } from '@posthog/react';
+import "./App.css";
+import React from "react";
+import { usePostHog } from "@posthog/react";
 
 function App() {
   const posthog = usePostHog();
 
-  const coolSurveyID = "01942e4c-d028-0000-6ab5-afb4ed961263"
+  const coolSurveyID = "01942e4c-d028-0000-6ab5-afb4ed961263";
 
   const handleRenderSurvey = () => {
-    posthog.renderSurvey(coolSurveyID, '#survey-container');
+    posthog.renderSurvey(coolSurveyID, "#survey-container");
   };
 
   return (
     <div className="App">
       <h1>Survey Tutorial with PostHog</h1>
       <div className="survey-controls">
-        <button onClick={handleRenderSurvey}>
-          Render Survey
-        </button>
+        <button onClick={handleRenderSurvey}>Render Survey</button>
       </div>
       <div id="survey-container">
         <p>Survey will render here</p>
@@ -268,10 +261,10 @@ export default App;
 This renders an unstyled survey in the `#survey-container` element that looks like this:
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_03_at_15_01_34_2x_761478ffdc.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_03_at_15_01_34_2x_761478ffdc.png"
-    alt="Survey templates"
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_03_at_15_01_34_2x_761478ffdc.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_03_at_15_01_34_2x_761478ffdc.png"
+  alt="Survey templates"
+  classes="rounded"
 />
 
 You can then style the survey by targeting the classes like `survey-box`, `survey-question`, `textarea`, `buttons`, `footer-branding`, and `thank-you-message`.
@@ -290,30 +283,45 @@ Both methods return a callback with an array of surveys in this format:
 
 ```json
 // Example surveys response:
-[{
-  "id": "your_survey_id",
-  "name": "Your survey name",
-  "description": "Metadata describing your survey",
-  "type": "api", // "api" or "popover"
-  "linked_flag_key": null, // Linked feature flag key, if any.
-  "targeting_flag_key": "your_survey_targeting_flag_key",
-  "questions": [
-    {
-      "type": "single_choice",
-      "choices": [
-        "Yes",
-        "No"
-      ],
-      "question": "Are you enjoying PostHog?",
-      "id": "7ce5b831-dc71-4648-b6b0-b583d48a0c11" // Each question has a UUID
-    }
-  ],
-  "conditions": null,
-  "appearance": {},
-  "start_date": "2023-09-19T13:10:49.505000Z",
-  "end_date": null
-}]
+[
+  {
+    "id": "your_survey_id",
+    "name": "Your survey name",
+    "description": "Metadata describing your survey",
+    "type": "api", // "api" or "popover"
+    "linked_flag_key": null, // Linked feature flag key, if any.
+    "targeting_flag_key": "your_survey_targeting_flag_key",
+    "questions": [
+      {
+        "type": "single_choice",
+        "choices": ["Yes", "No"],
+        "question": "Are you enjoying PostHog?",
+        "id": "7ce5b831-dc71-4648-b6b0-b583d48a0c11" // Each question has a UUID
+      }
+    ],
+    "conditions": null,
+    "appearance": {
+      "allowGoBack": true,
+      "backButtonText": "Back"
+    },
+    "translations": {
+      "es": {
+        "submitButtonText": "Enviar",
+        "backButtonText": "Atrás"
+      }
+    },
+    "start_date": "2023-09-19T13:10:49.505000Z",
+    "end_date": null
+  }
+]
 ```
+
+The `appearance` object includes the following optional fields for multi-question surveys:
+
+- **`allowGoBack`** - When `true`, displays a back button allowing users to navigate to previous questions
+- **`backButtonText`** - Custom text for the back button (defaults to "Back")
+
+The `translations` object can contain localized versions of translatable text keyed by language code, including `submitButtonText` and `backButtonText`.
 
 As an example, we can use `getActiveMatchingSurveys()` to make our Next.js feedback survey more dynamic:
 
@@ -367,6 +375,7 @@ export default function Feedback() {
 ```
 
 > **Tip:** To keep track of surveys shown, dismissed, or responded to, store values in a cookie or local storage like this:
+>
 > ```js-web
 > //... other code
 > posthog.capture("survey sent", {
