@@ -77,6 +77,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       authorData: [AuthorsJson] @link(by: "handle", from: "author")
       badge: String
       seo: FrontmatterSEO
+      featureFlag: String
       hideFromIndex: Boolean
       lang: String
       translationOf: String
@@ -348,6 +349,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       featured: Boolean
       caption: String
       sourceFields: [PostHogSourceField]
+      tables: [PostHogSourceTable]
       permissionsCaption: String
       featureFlag: String
     }
@@ -358,6 +360,14 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       required: Boolean
       placeholder: String
       caption: String
+    }
+    type PostHogSourceTable {
+      name: String
+      label: String
+      description: String
+      sync_methods: [String]
+      incremental_fields: [String]
+      primary_keys: [String]
     }
     type SdkReferences implements Node {
       info: SdkReferencesInfo

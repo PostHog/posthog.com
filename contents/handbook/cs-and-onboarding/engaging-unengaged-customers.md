@@ -46,15 +46,15 @@ This gives you a firsthand view of what the customer is (or isn't) capturing. Yo
 
 Ordered roughly by how often the trigger comes up — the first few you can do for almost any account, the last few only when external events line up. Apply the [meta-tactics](#meta-tactics) below to whichever you pick.
 
-### SDK Doctor — flag outdated SDKs
+### SDK health — flag outdated SDKs
 
-Use SDK Doctor to check if the customer is running outdated SDKs. This is one of the easiest, most concrete reasons to reach out. We recommend customers update monthly so they don't miss bug fixes and improvements.
+Use the SDK health check to see if the customer is running outdated SDKs. This is one of the easiest, most concrete reasons to reach out. We recommend customers update monthly so they don't miss bug fixes and improvements.
 
-**Suggested cadence:** Run SDK Doctor on each of your accounts quarterly, or whenever a customer is ramping up usage of a specific SDK.
+**Suggested cadence:** Run the SDK health check on each of your accounts quarterly, or whenever a customer is ramping up usage of a specific SDK.
 
 **Suggested wording:**
 
-> BTW our SDK Doctor is warning that you are using a three year old version of our Python SDK — I promise we've improved it since then! Also your iOS and Android SDKs are really out of date. Any chance of updating these?
+> BTW our SDK health check is warning that you are using a three year old version of our Python SDK — I promise we've improved it since then! Also your iOS and Android SDKs are really out of date. Any chance of updating these?
 
 **Why it works:** Specific, helpful, and low-effort for both sides. The tone is light and friendly, not alarming.
 
@@ -66,7 +66,7 @@ Watch customer activity for signs they're exploring a product they haven't adopt
 
 **Suggested wording:**
 
-> Hey @[contact], saw you checking out LLM analytics and wanted to share a few things. It occurred to me that our LLM observability suite might be really helpful for your team.
+> Hey @[contact], saw you checking out AI observability and wanted to share a few things. It occurred to me that our LLM observability suite might be really helpful for your team.
 >
 > Not only do you get evals/traces/generations to track model performance, token usage, etc, you can then also connect those things back to PostHog session/user data. Which means you can actually easily run A/B and multivariate tests on things like prompts, models, and so on, while ALSO seeing how the LLM performance/quality have an impact on conversion and funnel.
 >
@@ -177,3 +177,29 @@ Don't push when they push back. Close the loop publicly with a clean "let's put 
 ### Strike while energy is high
 
 Same-day follow-ups after calls beat polished follow-ups sent a week later. Small unexpected perks (custom merch codes, personalized touches) sent in the momentum window punch above their weight.
+
+## Investigating further with MCP
+
+### Use MCP to find frustration signals for specific outreach
+
+Our MCP can be a great tool for understanding silent user frustation. Below are some signals to look out for and find specific individuals worth reaching out to.
+
+**Lost insights:**: You can ask our MCP how many insights were started versus how many were saved and by who. This can signal users may be having difficulty trying to create the right insights. For example, a customer may have started 130 insights in the past week but only saved 6.
+
+**Rage clicks:** This can be great to understand if there are specific pages or insights the user is showing higher than usual frustration. Understanding what the page or insight is about, and coupling this with session replay can give you an idea as to what the user was trying to accomplish as a way to be helpful.
+
+**Product engagement:** By default, AI will sometimes assume certain users are not engaged because it's measuring PostHog UI engagement. To get around this, ask about MCP engagement as well to better understand how active users are engaging with PostHog. Additionally, Vitally may sometimes report low dashboard activities or product usage but this can be a false positive as its measuring dashboard views and not specific insights. Checking actual user engagement will get you a more accurate view of who is active and who isn't, and specifically what products they're engaging in to reach out with specific questions or help.
+
+**Query failures:** Vitally can help surface query failtures but MCP can get more specific on the failures customers are encountering so this could be an opportunity to reach out with a specific message to see if the customer may want assistance with getting a specific query working. Sometimes the MCP will highlight the specific query that is failing giving you something to directly investigate and fix before reaching out.
+
+**Client request failures:** This is separate from query failures and can mean customers are having issues loading specific data and could be a great opportunity to resolve the issue for them or reach out to confirm and file a bug fix on their behalf.
+
+**Priority summary:** After requesting AI to look at all the potential frustration signals, you can request a prioritization summary for users you should reach out to with specific summaries of issues that particular user is dealing with and a sample crafted outreach message. The MCP will then priortize these and give suggestions that you can tweak making it easier to reach out to users that you typically may not speak with.
+
+### Use MCP to understand events changes for outreach
+
+**Event changes:** MCP is great at is surfacing event changes on a daily, weekly, or monthly basis, and any potential implementation changes or product drops that can be easily missed. Ask the MCP to do an analysis at the organization level (important as sometimes the MCP can default to user engagement rather than product events), and if there are changes in event volume, request who was actively using these products prior to the change before reaching out to learn about the changes. For example, AIO volume suddenly changed 7 days ago, ask if this could have been related to implementation changes.
+
+**Product adoption:** A quick way to see product adoption changes is to ask MCP for this info. Rather than only look at event volume increasing or decreasing, MCP has been able to surface when customers were testing a new product, sample events, reduce product usage, etc. These are all perfect opportunities for reaching out to specific users who are working on these with specifics such as "I see you recently are tested our data warehouse briefly but have discontinued sending data. Was there anything specific you were looking to do with data warehouse that I could help with or answer questions around. Curious on how your team is thinking about using data warehouse and what goals you have in adopting PostHog's data warehouse as a solution."
+
+_Note:_ It can be helpful to request MCP ignore weekend events when doing these analysis as weekend events often dips and can create false positive signals in your analysis.

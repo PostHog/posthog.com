@@ -1,6 +1,3 @@
-import React from 'react'
-import OSButton from 'components/OSButton'
-
 export const posthog = {
     name: 'PostHog',
     key: 'posthog',
@@ -528,6 +525,14 @@ export const posthog = {
                 system_prompts: true,
                 trace_summarization: true,
                 llm_translation: true,
+                sentiment_classification: 'Beta',
+                privacy_mode: true,
+                agent_tracing: 'Basic',
+                prompt_management: 'Beta',
+                evaluation_datasets: false,
+                human_annotation: false,
+                session_replay: true,
+                product_analytics: true,
             },
         },
         workflows: {

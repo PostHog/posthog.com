@@ -47,6 +47,10 @@ export const aiObservability = {
     description: 'Track costs, performance, and usage of your AI features',
     handle: 'ai_observability',
     type: 'ai_observability',
+    // The billing service still exposes this product under its original type
+    // (`llm_analytics`) from before the "AI Observability" rename. Billing data is
+    // joined on this value so pricing/calculator surfaces can find it.
+    billingType: 'llm_analytics',
     slug: 'ai-observability',
     color: 'purple',
     colorSecondary: 'green-2',
@@ -61,12 +65,12 @@ export const aiObservability = {
     seo: {
         title: 'AI Observability – Observe and optimize AI products in PostHog',
         description:
-            'Monitor and optimize AI products with AI Observability. Get full observability across every conversation. See model performance, cost, and errors.',
+            'Track traces, costs, latency, and errors across your AI features, giving agents the context to fix LLM behavior and make your product self-driving.',
     },
     overview: {
         title: 'Observe and debug AI in production',
         description:
-            'Product analytics for LLMs. Inspect traces, spans, latency, usage, and per-user costs for AI-powered features.',
+            'AI observability is one of the tools that makes your product self-driving: inspect traces, spans, latency, usage, and per-user costs for your AI features – the context agents use to fix LLM behavior.',
         textColor: 'text-white',
         layout: 'overlay',
     },
@@ -99,10 +103,10 @@ export const aiObservability = {
     //   classes: 'absolute bottom-0 right-4 max-w-lg',
     // },
     customers: {
-        elevenlabs: {
-            headline: 'uses AI Observability with session replays (and everything else)',
+        kilocode: {
+            headline: 'keeps visibility into what its AI coding platform is actually doing',
             description:
-                'PostHog is amazing. It reins in the chaos to have everything in one place. Otherwise it’s quite overwhelming to try and understand what’s working and what’s not.',
+                'Everything we do is about speed. PostHog helps us move fast without losing visibility into what’s actually happening.',
         },
         lovable: {
             headline: 'compared us to every other observability tool, just to be sure',
@@ -310,7 +314,7 @@ export const aiObservability = {
             color: 'yellow',
             headline: 'Errors',
             description:
-                'Debug failed LLM calls and monitor exception rates with the full story: prompt, response, parameters, and metadata.',
+                'Debug failed LLM calls and monitor exception rates with the full story: prompt, response, parameters, and metadata – the context agents use to fix what broke.',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/errors_screenshot_e413f3f20b.png',
@@ -598,6 +602,9 @@ export const aiObservability = {
                 },
             ],
             us: [
+                {
+                    title: 'Agents can act on your LLM traces, costs, and errors – the context that makes your product self-driving',
+                },
                 {
                     title: 'You want to understand LLM costs on a per user basis',
                     subtitle: 'in addition to other axes',

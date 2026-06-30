@@ -1,0 +1,15 @@
+For Django, Flask, and FastAPI, wrap the request in `new_context()` and call `identify_context`. With the [Django middleware](/docs/libraries/django#django-contexts-middleware), the distinct ID is taken from request headers or the authenticated Django user automatically.
+
+```python
+import posthog
+from posthog import identify_context
+
+def some_request(request):
+    with posthog.new_context():
+        # Django includes request.user for anonymous visitors too. Only identify
+        # the context when the visitor is logged in.
+        if request.user.is_authenticated:
+            identify_context(str(request.user.pk))
+
+        posthog.capture('event_name')
+```

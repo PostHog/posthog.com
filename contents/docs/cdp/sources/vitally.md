@@ -36,3 +36,7 @@ To sync custom object records, refresh your source schemas. Each custom object a
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

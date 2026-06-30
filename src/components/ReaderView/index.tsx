@@ -44,7 +44,7 @@ import CopyMarkdownActionsDropdown, { useMarkdownUrlExists } from 'components/Ma
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import CustomerMetadata from './CustomerMetadata'
 import { getVideoClasses } from '../../constants'
-import { Blockquote } from 'components/BlockQuote'
+import AboutPostHog from 'components/AboutPostHog'
 
 dayjs.extend(relativeTime)
 
@@ -925,20 +925,7 @@ function ReaderViewContent({
                                                 : contentMaxWidthClass || 'max-w-2xl'
                                         }`}
                                     >
-                                        <Blockquote>
-                                            PostHog is an all-in-one developer platform for building successful
-                                            products. We provide <a href="/product-analytics">product analytics</a>,{' '}
-                                            <a href="/web-analytics">web analytics</a>,{' '}
-                                            <a href="/session-replay">session replay</a>,{' '}
-                                            <a href="/error-tracking">error tracking</a>,{' '}
-                                            <a href="/feature-flags">feature flags</a>,{' '}
-                                            <a href="/experiments">experiments</a>, <a href="/surveys">surveys</a>,{' '}
-                                            <a href="/ai-observability">AI Observability</a>, <a href="/logs">logs</a>,{' '}
-                                            <a href="/workflows">workflows</a>, <a href="/endpoints">endpoints</a>,{' '}
-                                            <a href="/data-warehouse">data warehouse</a>, <a href="/cdp">CDP</a>, and an{' '}
-                                            <a href="/ai">AI product assistant</a> to help debug your code, ship
-                                            features faster, and keep all your usage and customer data in one stack.
-                                        </Blockquote>
+                                        <AboutPostHog />
                                     </div>
                                 )}
                                 {showQuestions && (

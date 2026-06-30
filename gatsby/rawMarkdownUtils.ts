@@ -328,6 +328,204 @@ export const generateSdkReferencesMarkdown = (sdkReferences: SdkReferenceData) =
 }
 
 // Function to generate llms.txt file according to spec
+// Canonical self-driving taxonomy used to generate /platform.md, the per-product .md files,
+// and the "Products and tools" section of llms.txt. Single source so they stay in sync.
+// Copy mirrors the handbook canonical vocabulary: products = the surfaces you adopt;
+// tools = the functional capabilities; context = the data; context warehouse = warehouse + ingestion.
+type PlatformItem = { name: string; slug?: string; layer: 'product' | 'tool'; oneLiner: string; link?: string }
+
+const PLATFORM_ITEMS: PlatformItem[] = [
+    // Products — the surfaces a customer adopts to access self-driving
+    {
+        name: 'Web (app.posthog.com)',
+        layer: 'product',
+        link: 'https://app.posthog.com',
+        oneLiner: 'Get simple or complex work done without installing anything — the full surface, next to your data.',
+    },
+    {
+        name: 'PostHog Slack app',
+        slug: 'slack-app',
+        layer: 'product',
+        oneLiner:
+            'The reactive way to reach self-driving: tag @PostHog in any thread to ship a fix or answer a data question.',
+    },
+    {
+        name: 'PostHog Code',
+        slug: 'code',
+        layer: 'product',
+        oneLiner: 'The desktop product for complex, agentic engineering work on your product.',
+    },
+    {
+        name: 'PostHog MCP',
+        layer: 'product',
+        link: 'https://posthog.com/docs/model-context-protocol',
+        oneLiner: 'Brings reactive self-driving into your own editor or agent via MCP.',
+    },
+    // Tools — the functional capabilities that produce and act on your product's context
+    {
+        name: 'Product analytics',
+        slug: 'product-analytics',
+        layer: 'tool',
+        oneLiner: 'The measurement agents use to see what works.',
+    },
+    {
+        name: 'Web analytics',
+        slug: 'web-analytics',
+        layer: 'tool',
+        oneLiner: 'The lightweight measurement layer feeding the loop.',
+    },
+    {
+        name: 'Session replay',
+        slug: 'session-replay',
+        layer: 'tool',
+        oneLiner: 'A proactive signal — watch exactly why something happened.',
+    },
+    {
+        name: 'Feature flags',
+        slug: 'feature-flags',
+        layer: 'tool',
+        oneLiner: 'How agents roll a change out and roll it back.',
+    },
+    { name: 'Experiments', slug: 'experiments', layer: 'tool', oneLiner: 'The evaluation that proves a change worked.' },
+    {
+        name: 'Error tracking',
+        slug: 'error-tracking',
+        layer: 'tool',
+        oneLiner: 'The signal that triggers a fix — every error tied to the user who hit it.',
+    },
+    {
+        name: 'Surveys',
+        slug: 'surveys',
+        layer: 'tool',
+        oneLiner: 'The qualitative signal — what users say, not just what they do.',
+    },
+    {
+        name: 'AI observability',
+        slug: 'ai-observability',
+        layer: 'tool',
+        oneLiner: 'Observability for your AI features — the context agents use to fix LLM behavior.',
+    },
+    {
+        name: 'Logs',
+        slug: 'logs',
+        layer: 'tool',
+        oneLiner: 'Backend signal that triggers fixes, tied to the user who hit it.',
+    },
+    {
+        name: 'Data warehouse',
+        slug: 'data-warehouse',
+        layer: 'tool',
+        oneLiner: "Where your product's context lives so agents can use all of it.",
+    },
+    {
+        name: 'CDP',
+        slug: 'cdp',
+        layer: 'tool',
+        oneLiner: 'How agents move and act on your data across 50+ destinations.',
+    },
+    {
+        name: 'Endpoints',
+        slug: 'endpoints',
+        layer: 'tool',
+        oneLiner: "How your product's context flows out to agents and tools.",
+    },
+    { name: 'Workflows', slug: 'workflows', layer: 'tool', oneLiner: 'How agents act — automated actions in the loop.' },
+    {
+        name: 'PostHog AI',
+        slug: 'ai',
+        layer: 'tool',
+        oneLiner: 'The interface humans and agents use to understand the product.',
+    },
+]
+
+const CONTEXT_BLURB =
+    'Events, recordings, errors, and logs — the data that feeds the self-driving loop. This is the fuel.'
+const CONTEXT_WAREHOUSE_BLURB =
+    'The data warehouse plus the full context-ingestion pipeline for your product — where context lives and a significant part of how we bill.'
+
+const pageLinkFor = (item: PlatformItem): string => item.link || `https://posthog.com/${item.slug}`
+const mdLinkFor = (item: PlatformItem): string =>
+    item.slug ? `https://posthog.com/${item.slug}.md` : item.link || 'https://posthog.com'
+
+// Generate /platform.md — a machine-readable four-layer overview for LLMs/agents.
+export const generatePlatformMd = () => {
+    const publicPath = path.resolve(__dirname, '../public')
+    if (!fs.existsSync(publicPath)) fs.mkdirSync(publicPath, { recursive: true })
+
+    const list = (layer: 'product' | 'tool') =>
+        PLATFORM_ITEMS.filter((i) => i.layer === layer)
+            .map((i) => `- [${i.name}](${pageLinkFor(i)}) — ${i.oneLiner}`)
+            .join('\n')
+
+    const content = `# PostHog: the platform for self-driving products
+
+PostHog makes your product self-driving. It pairs the full context of your data (events, errors, logs, replays, and more) with agents that find problems and opportunities and ship the fix — reactively (e.g. prompted via Slack) or proactively. Everything PostHog offers is one of four layers.
+
+## Products — how you access self-driving
+
+The surfaces a customer adopts. Each has a distinct job.
+
+${list('product')}
+
+## Tools — the functional capabilities
+
+The tools produce and act on your product's context. They sit below the products, but this is where the work happens.
+
+${list('tool')}
+
+## Context — the fuel
+
+${CONTEXT_BLURB}
+
+## Context warehouse — where context lives
+
+${CONTEXT_WAREHOUSE_BLURB}
+
+---
+
+Pricing: every tool has a generous free tier, then usage-based pricing. Exact numbers: https://posthog.com/pricing.md
+All docs are available as Markdown (append \`.md\` to any docs URL). Full index: https://posthog.com/llms.txt
+`
+
+    fs.writeFileSync(path.join(publicPath, 'platform.md'), content, 'utf8')
+    console.log('Generated: platform.md')
+}
+
+// Generate a clean .md for each product/tool page (built from the curated taxonomy, not HTML-scraped,
+// since the slide-based pages don't convert to useful markdown).
+export const generateProductPagesMarkdown = () => {
+    const publicPath = path.resolve(__dirname, '../public')
+
+    for (const item of PLATFORM_ITEMS) {
+        if (!item.slug) continue // Web / MCP point at existing pages, no bespoke .md
+        const layerLabel =
+            item.layer === 'product'
+                ? "one of PostHog's products — the surfaces you adopt to access self-driving"
+                : "one of PostHog's tools — the functional capabilities that make your product self-driving"
+
+        const content = `# ${item.name}
+
+${item.oneLiner}
+
+${item.name} is ${layerLabel}.
+
+PostHog is the platform for self-driving products: it pairs the full context of your data (events, errors, logs, replays, and more) with agents that ship better products, faster.
+
+- Full page: ${pageLinkFor(item)}
+- All products and tools: https://posthog.com/platform.md
+- Pricing: https://posthog.com/pricing.md
+
+For features, screenshots, and details, see ${pageLinkFor(item)}.
+`
+
+        const outputPath = path.join(publicPath, `${item.slug}.md`)
+        const dirPath = path.dirname(outputPath)
+        if (!fs.existsSync(dirPath)) fs.mkdirSync(dirPath, { recursive: true })
+        fs.writeFileSync(outputPath, content, 'utf8')
+        console.log(`Generated: ${item.slug}.md`)
+    }
+}
+
 export const generateLlmsTxt = (pages) => {
     console.log('Generating llms.txt file...')
 
@@ -426,7 +624,7 @@ export const generateLlmsTxt = (pages) => {
     // Build llms.txt content
     let llmsTxtContent = `# PostHog
 
-> PostHog is an open-source product and data tools platform. It provides product analytics, session replay, feature flags, A/B testing, error tracking, surveys, LLM observability, web analytics, data warehouse, and more - all in one platform. The fastest way to integrate PostHog is with the setup wizard: \`npx @posthog/wizard@latest\`
+> PostHog is the platform for self-driving products. It pairs the full context of your product's data (events, errors, logs, replays, and more) with agents that find problems and ship changes with you. It includes tools for product analytics, session replay, feature flags, A/B testing, error tracking, surveys, AI observability, web analytics, a data warehouse, and more. The fastest way to integrate PostHog is with the setup wizard: \`npx @posthog/wizard@latest\`
 
 PostHog can be added to any web, mobile, or backend application. All docs pages below are available as raw Markdown by appending \`.md\` to any URL.
 
@@ -452,6 +650,27 @@ If the wizard doesn't support the framework, see the [SDKs and Libraries](https:
 **API:** The PostHog API base URL is \`https://us.i.posthog.com\` (US cloud) or \`https://eu.i.posthog.com\` (EU cloud). Use a personal API key (not the project API key) for API access. See the [API docs](https://posthog.com/docs/api.md).
 
 **MCP and AI tools:** PostHog has an official MCP server for AI coding assistants. Install with \`npx @posthog/wizard mcp add\`. There is also a Claude Code plugin: \`claude plugin install posthog\`.
+
+`
+
+    // Products and tools overview (self-driving taxonomy) — kept in sync with /platform.md via PLATFORM_ITEMS.
+    llmsTxtContent += `## Products and tools
+
+PostHog has one umbrella story — self-driving — and four layers. Full machine-readable overview: https://posthog.com/platform.md
+
+**Products** (the surfaces you adopt to access self-driving):
+${PLATFORM_ITEMS.filter((i) => i.layer === 'product')
+    .map((i) => `- [${i.name}](${mdLinkFor(i)}) — ${i.oneLiner}`)
+    .join('\n')}
+
+**Tools** (the functional capabilities):
+${PLATFORM_ITEMS.filter((i) => i.layer === 'tool')
+    .map((i) => `- [${i.name}](${mdLinkFor(i)}) — ${i.oneLiner}`)
+    .join('\n')}
+
+**Context** — ${CONTEXT_BLURB}
+
+**Context warehouse** — ${CONTEXT_WAREHOUSE_BLURB}
 
 `
 

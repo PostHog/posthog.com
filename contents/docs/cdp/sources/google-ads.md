@@ -6,7 +6,6 @@ availability:
   free: full
   selfServe: full
   enterprise: full
-beta: true
 sourceId: GoogleAds
 ---
 
@@ -46,6 +45,10 @@ Connect PostHog to your Google Ads account using a Google account. The Google ac
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />
 
 ## Manager (MCC) accounts
 

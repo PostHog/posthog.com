@@ -1,0 +1,20 @@
+Once initialized in [`instrumentation-client.ts`](/docs/libraries/next-js), the `posthog-js` singleton is ready, so you import `posthog` directly and call `identify` as in the React example. The pre-release [`@posthog/next`](/docs/libraries/next-js/posthog-next) package instead exposes its own `usePostHog` hook and keeps client and server identity in sync:
+
+```tsx
+'use client'
+import { usePostHog } from '@posthog/next'
+
+export function LoginButton() {
+    const posthog = usePostHog()
+
+    const handleLogin = async () => {
+        const user = await signIn()
+        posthog.identify(user.id, {
+            email: user.email,
+            name: user.name,
+        })
+    }
+
+    return <button onClick={handleLogin}>Log in</button>
+}
+```
