@@ -11,7 +11,7 @@ import CalloutBox from 'components/Docs/CalloutBox'
 
 <CalloutBox icon="IconFlask" title="MCP Analytics is in beta" type="action">
 
-`@posthog/mcp` is published as a `0.1.x` release on npm. We're building it in public – the event shape, options, and tracing behavior may still change before `1.0`. Pin a specific version and don't depend on it for production reporting yet. A Python SDK and a `npx @posthog/wizard mcp-analytics add` installer are on the roadmap.
+`@posthog/mcp` is published as a `0.1.x` release on npm. We're building it in public – the event shape, options, and tracing behavior may still change before `1.0`. Pin a specific version and don't depend on it for production reporting yet.
 
 </CalloutBox>
 
@@ -32,7 +32,13 @@ MCP Analytics gives you visibility into how AI agents actually use the MCP serve
 - 🧵 The full session, end to end
 - 🚧 Capabilities the agent wished existed (with `reportMissing`)
 
-The SDK supports any TypeScript MCP server built on `@modelcontextprotocol/sdk`. Install it from npm and call `instrument()` once at startup. You pass your `posthog-node` client as the required second argument:
+The SDK supports any TypeScript MCP server built on `@modelcontextprotocol/sdk`. The fastest way to get set up is the wizard, which installs the package and wires up `instrument()` for you:
+
+```bash
+npx @posthog/wizard mcp-analytics
+```
+
+Prefer to do it by hand? Install it from npm and call `instrument()` once at startup. You pass your `posthog-node` client as the required second argument:
 
 ```bash
 npm install @posthog/mcp posthog-node
