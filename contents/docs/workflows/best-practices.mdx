@@ -76,6 +76,8 @@ Before a full rollout: test with internal users or a small percentage of real us
 
 Ensure that failures (e.g. email bounce, webhook error) are captured and surfaced. When facing a problem, check the “[Troubleshooting & FAQs](/docs/workflows/troubleshooting)” section for Workflows.
 
+Email delivery failures like bounces and complaints are automatically logged as entries on individual invocations, so you can debug specific issues. You can also click the **Bounced** and **Blocked** metric tiles to jump directly to the **Invocations** tab filtered to invocations that experienced those failures.
+
 For long-running workflows (with delays), track user state (which step they are in), and provide a way to debug or abort if something goes wrong.
 Periodically review metrics: how many messages sent, how many workflows triggered, bounce/failure rate, conversion rate (if you've configured a conversion goal), etc.
 
