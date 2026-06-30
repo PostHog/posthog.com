@@ -2,7 +2,7 @@
 title: Traces
 ---
 
-import TraceEventSnippet from "./_snippets/trace-event.mdx"
+import TraceEventSnippet from "./_snippets/trace-event.mdx";
 
 Traces are a collection of [generations](/docs/ai-observability/generations) and [spans](/docs/ai-observability/spans) that capture a full interaction between a user and an LLM. The [traces tab](https://app.posthog.com/ai-observability/traces) lists them along with the properties autocaptured by PostHog like the person, total cost, total latency, and more.
 
@@ -26,6 +26,11 @@ Clicking on a trace opens a timeline of the interaction with all the generation 
 
 <Caption>A trace presents LLM event data in a timeline, tree-structured view </Caption>
 
+## Sharing traces
+
+Traces have shareable URLs that encode the trace ID, selected span, and a timestamp hint for fast loading. You can copy a trace link and send it to a teammate — when they open it, they see the same trace and span you were viewing.
+
+To copy a trace URL, click the **Copy link** button in the trace drawer header or in the span row actions. Browser back and forward navigation also works when viewing traces, so you can move through traces you've opened without losing your place.
 
 ## Conversation display options
 
