@@ -30,14 +30,14 @@ const scannerCards = [
         color: 'text-red',
         bgColor: 'bg-red/10',
         title: 'Dead ends',
-        description: 'Detect sessions where the user gets stuck on a page with no clear path forward.',
+        description: 'Catch the moment someone hits a wall, stares at it, and rage-quits.',
     },
     {
         icon: IconDocument,
         color: 'text-seagreen',
         bgColor: 'bg-green/10',
         title: 'Session summary',
-        description: 'Generate a short narrative of what the user actually did in the session.',
+        description: "The TL;DR of the session, so you don't have to sit through 14 minutes of someone scrolling.",
     },
     {
         icon: IconCursorClick,
@@ -51,7 +51,7 @@ const scannerCards = [
         color: 'text-yellow',
         bgColor: 'bg-yellow/10',
         title: 'Frustration score',
-        description: 'Score how much friction or frustration the user appeared to experience.',
+        description: 'Rate how mad the page made someone, from mild sigh to keyboard-smash.',
     },
     {
         icon: IconCheckCircle,
@@ -68,20 +68,21 @@ const useCaseCards = [
         color: 'text-red',
         title: 'Find the bugs that hurt',
         description:
-            'Surface errors that were actually visible to users and blocked them from finishing a task. Eliminate the console noise nobody saw.',
+            'Surface errors that were actually visible to users and blocked them from finishing a task.',
     },
     {
         icon: IconTrending,
         color: 'text-yellow',
-        title: 'Triage by frustration, not guesswork',
-        description: "Let the scorer rank your sessions so you watch the 10 that matter, not 10,000 that don't.",
+        title: 'Stop watching sessions at random',
+        description:
+            "The scorer ranks your sessions according to relevance, so you won't waste time watching sessions that don't matter.",
     },
     {
         icon: IconCursorClick,
         color: 'text-blue',
-        title: 'Spot patterns at scale',
+        title: 'Spot patterns without losing your afternoon',
         description:
-            'Sessions get tagged automatically, so "where are people getting stuck on mobile checkout?" becomes a search, not hours of watching.',
+            'Sessions get tagged automatically, so finding out where people get stuck on mobile checkout is just a search away.',
     },
 ]
 
@@ -162,7 +163,7 @@ function HowItWorks() {
 
             <p className="text-sm text-secondary">
                 Every observation comes with a confidence score and links straight to the exact moment in the recording,
-                so you can verify it in one click, not go hunting.
+                so you can verify it in one click.
             </p>
         </section>
     )
