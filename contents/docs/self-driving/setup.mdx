@@ -14,23 +14,25 @@ Self-driving is currently in open beta.
 
 </CalloutBox>
 
-Turning on self-driving means connecting the data sources, repositories, and agents that let PostHog ship work for you. It builds on a PostHog project that's already capturing events, so we start there. Most teams are set up in a few minutes.
+Turning on self-driving means connecting the data sources, repositories, and agents that let PostHog ship work for you. The setup wizard handles it all in one command, including installing PostHog if you haven't already. Most teams are set up in a few minutes.
 
 <CalloutBox icon="IconInfo" title="Before you start" type="fyi">
 
-You'll need PostHog installed and capturing events and a GitHub repository you want agents to work in.
+You'll need a GitHub repository you want agents to work in. If you don't have PostHog installed yet, the wizard sets it up for you as part of the flow.
 
 </CalloutBox>
 
 <Steps>
 
-<Step title="Install PostHog" badge="required">
+<Step title="Run the self-driving setup" badge="required">
 
-To set up self-driving, you first need to install PostHog and have it capturing events. The fastest way is to use our setup wizard which does the work for you:
+The fastest way to turn on self-driving is our setup wizard:
 
-<WizardCommand />
+<WizardCommand command="self-driving" />
 
-If you already have PostHog installed and capturing events, skip ahead. Prefer to set up manually? Follow the [install guide](/docs/getting-started/install).
+The wizard checks whether PostHog is already installed and capturing events. If it isn't, it installs PostHog first, then continues straight into self-driving. From there it enables your signal sources, sets up your scouts, and hands you a link to your inbox.
+
+The signal sources it can turn on include [error tracking](/docs/error-tracking), [session replay](/docs/session-replay), and external sources like Zendesk, GitHub Issues, and Linear. The more you enable, the more PostHog can watch to make your product self-driving.
 
 <CalloutBox icon="IconInfo" title="AI data processing required" type="fyi">
 
@@ -38,15 +40,7 @@ Self-driving relies on AI, so your organization needs [AI data processing turned
 
 </CalloutBox>
 
-</Step>
-
-<Step title="Run the self-driving setup" badge="required">
-
-On your onboarded project, the self-driving setup enables your signal sources, sets up your scouts, and hands you a link to your inbox.
-
-<WizardCommand command="self-driving" />
-
-The signal sources it can turn on include [error tracking](/docs/error-tracking), [session replay](/docs/session-replay), and external sources like Zendesk, GitHub Issues, and Linear. The more you enable, the more PostHog can watch to make your product self-driving.
+Prefer to install PostHog manually? Follow the [install guide](/docs/getting-started/install) first, then run the command above.
 
 </Step>
 
