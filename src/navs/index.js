@@ -6328,7 +6328,7 @@ export const docsMenu = {
             icon: 'IconPlug',
             description: 'Analytics for the MCP servers you ship to AI agents',
             badge: {
-                title: 'Alpha',
+                title: 'Beta',
                 className: 'uppercase !bg-yellow/10 !text-yellow !dark:text-white !dark:bg-yellow/50',
             },
             children: [
