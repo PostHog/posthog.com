@@ -128,7 +128,7 @@ We prefer to keep all signatures in PandaDoc, but sometimes clients may prefer t
 Once you the signed form in PandaDoc is marked as complete and the Salesforce opportunity status is set to Closed Won, the RevOps team will get a notification and handle setting up the subscription and invoicing. See the [Billing](/handbook/growth/sales/billing) page for steps on how the billing setup works for more information.
 
 ### Using prepaid credits to cover an existing pay-as-you-go invoice
-When a pay as you go customer wants to sign a prepaid contract and use their new credits to cover an invoice that is about to be issued, timing is important. Credits can only be applied cleanly to an invoice _before_ that invoice is finalized. Getting it wrong means the credits don't apply cleanly and RevOps has to do a manual override.
+When a pay as you go customer wants to sign a prepaid contract and use their new credits to cover an invoice that is about to be issued, timing is important. Credits can only be applied cleanly to an invoice _before_ that invoice is finalized. 
 
 #### Flag insufficient credits before the invoice is issued
 
@@ -142,10 +142,8 @@ If they won't have enough credits to cover an invoice, and won't sign before the
 
 For newly purchased credits to cover the intended invoice automatically, both of these must be true:
 - Contract start date must match the first billing period the customer wants to cover. For an existing customer this usually means backdating the Contract.EffectiveDate to the start of the current billing period (see Immediate Activation above). If the start date doesn't line up with the period being covered, the credits won't map to that invoice.
-- Contract must be signed before the period_end date of the invoice they want to cover. If it's signed after the period closes and the invoice has been issued, the automated flow can no longer apply the credits and an override is required.
+- Contract must be signed before the period_end date of the invoice they want to cover. If it's signed after the period closes and the invoice has been issued, the automated flow can no longer apply the credits.
 - You can only backdate to the start of the current, open billing period, never to a period that has already been invoiced. 
-
-If either condition can't be met, you'll need an override.
 
 
 ## Master Services Agreement (MSA)
