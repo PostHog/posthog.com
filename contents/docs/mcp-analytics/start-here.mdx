@@ -8,6 +8,7 @@ import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
 import { IconGraph, IconWarning, IconAIText, IconWrench, IconPlug } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import CalloutBox from 'components/Docs/CalloutBox'
+import WizardCommand from 'components/WizardCommand'
 
 <CalloutBox icon="IconFlask" title="MCP Analytics is in beta" type="action">
 
@@ -32,11 +33,9 @@ MCP Analytics gives you visibility into how AI agents actually use the MCP serve
 - 🧵 The full session, end to end
 - 🚧 Capabilities the agent wished existed (with `reportMissing`)
 
-The SDK supports any TypeScript MCP server built on `@modelcontextprotocol/sdk`. The fastest way to get set up is the wizard, which installs the package and wires up `instrument()` for you:
+The SDK supports any TypeScript MCP server built on `@modelcontextprotocol/sdk`. The fastest way to get set up is our wizard, which installs the package and wires up `instrument()` for you (it also works for [LLM coding agents](/blog/envoy-wizard-llm-agent) like Cursor and Bolt):
 
-```bash
-npx @posthog/wizard mcp-analytics
-```
+<WizardCommand command="mcp-analytics" />
 
 Prefer to do it by hand? Install it from npm and call `instrument()` once at startup. You pass your `posthog-node` client as the required second argument:
 
