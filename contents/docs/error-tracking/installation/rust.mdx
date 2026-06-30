@@ -107,7 +107,7 @@ let options = ClientOptionsBuilder::default()
 posthog_rs::init_global(options).await.unwrap();
 ```
 
-Each panic is captured as a personless `$exception` carrying the panic message, the panic-site location (`$exception_panic_file`, `$exception_panic_line`, `$exception_panic_column`), and a call-site stack trace (subject to `capture_stacktrace`). The previously installed hook still runs afterwards.
+Each panic is captured as a personless `$exception` carrying the panic message, the panic-site location, and a call-site stack trace (subject to `capture_stacktrace`). The previously installed hook still runs afterwards.
 
 Because a panic hook is process-global, panic autocapture pairs with the global client — there is no per-`Client` panic API. Capture routes through the SDK's background worker, so it needs no async runtime, and the flush is bounded to a short timeout (2s) so a slow or unreachable PostHog can't freeze the crashing process. Delivery is best-effort: under sustained backpressure the event may not be sent before the process exits.
 
