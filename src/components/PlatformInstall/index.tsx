@@ -7,6 +7,8 @@ import ZoomHover from 'components/ZoomHover'
 import useCloud from 'hooks/useCloud'
 import IconButton from './IconButton'
 import { CopyableCommand } from './CopyableCommand'
+import { InlineCommand } from './InlineCommand'
+import { buildWizardCommand, buildSchemaCommand } from './buildCommand'
 import {
     mcpInstallSchema,
     wizardInstallSchema,
@@ -58,10 +60,10 @@ function MethodList({ methods, platformLabel }: { methods: InstallMethod[]; plat
                         {method.command ? (
                             method.indentCommand ? (
                                 <div className="pl-4">
-                                    <CopyableCommand command={method.command} />
+                                    <CopyableCommand command={method.command} copyCommand={method.copyCommand} />
                                 </div>
                             ) : (
-                                <CopyableCommand command={method.command} />
+                                <CopyableCommand command={method.command} copyCommand={method.copyCommand} />
                             )
                         ) : null}
                         {method.note ? <div className="text-xs text-secondary">{method.note}</div> : null}
@@ -129,17 +131,36 @@ function PlatformOptionContent({ option }: { option: PlatformOption }): JSX.Elem
 export interface PlatformInstallProps {
     schema?: InstallSchema
     className?: string
-    /** Append the `self-driving` subcommand to the default command (display + copy). */
+    /**
+     * `card` (default) = the full/compact schema-driven card. `inline` = the bare inline command
+     * button (the consolidated home of the old `WizardCommand`). Inline ignores the schema and
+     * builds `npx @posthog/wizard …` from the flag props below.
+     */
+    variant?: 'card' | 'inline'
+    /** Append the `self-driving` subcommand to the command (display + copy). */
     selfDriving?: boolean
-    /** Escape hatch to append any other subcommand to the default command (display + copy). */
+    /** Escape hatch to append any other subcommand to the command (display + copy). */
     command?: string
+    /** Inline only: hide the "Learn more" tab and fully round the button. */
+    slim?: boolean
+    /** Inline only: bordered button style. */
+    bordered?: boolean
+    /** Inline only: "Learn more" link target (default `/wizard`). */
+    secondaryTo?: string
+    /** Copy callback (inline). */
+    onCopy?: () => void
 }
 
 export default function PlatformInstall({
     schema = mcpInstallSchema,
     className = '',
+    variant = 'card',
     selfDriving = false,
     command,
+    slim = false,
+    bordered = false,
+    secondaryTo,
+    onCopy,
 }: PlatformInstallProps): JSX.Element {
     const [selectedId, setSelectedId] = useState<string | null>(null)
     const [lastSelected, setLastSelected] = useState<Platform | null>(null)
@@ -162,18 +183,36 @@ export default function PlatformInstall({
         setSelectedId((current) => (current === id ? null : id))
     }
 
-    // `selfDriving` appends the `self-driving` subcommand; `command` is the escape hatch for any
-    // other subcommand. `appendRegion` tacks the user's cloud region on last (matching WizardCommand),
-    // e.g. `npx @posthog/wizard self-driving --region eu`. All added to both display and copy.
+    // `selfDriving` is shorthand for the `self-driving` subcommand; `command` is the escape hatch.
     const cloud = useCloud()
-    const subcommand = selfDriving ? 'self-driving' : command
-    const commandSuffix = subcommand ? ` ${subcommand}` : ''
-    const regionSuffix = schema.appendRegion && cloud ? ` --region ${cloud}` : ''
-    const displayCommand = `${schema.defaultCommand}${commandSuffix}${regionSuffix}`
-    const copyCommand =
-        schema.defaultCopyCommand || subcommand || regionSuffix
-            ? `${schema.defaultCopyCommand ?? schema.defaultCommand}${commandSuffix}${regionSuffix}`
-            : undefined
+    const subcommand = selfDriving ? 'self-driving' : command || undefined
+
+    // Inline variant: the bare command button (consolidated WizardCommand look). Builds the command
+    // from flags via the shared builder so display/copy semantics can never drift from the card.
+    if (variant === 'inline') {
+        const inline = buildWizardCommand({ subcommand, cloud })
+        return (
+            <InlineCommand
+                displayCommand={inline.displayCommand}
+                copyCommand={inline.copyCommand}
+                slim={slim}
+                bordered={bordered}
+                className={className}
+                secondaryTo={secondaryTo}
+                onCopy={onCopy}
+            />
+        )
+    }
+
+    // Card variant: append the subcommand + the user's cloud region (when the schema opts in) to the
+    // schema's base command(s), e.g. `npx @posthog/wizard self-driving --region eu`.
+    const { displayCommand, copyCommand } = buildSchemaCommand({
+        base: schema.defaultCommand,
+        copyBase: schema.defaultCopyCommand,
+        subcommand,
+        appendRegion: schema.appendRegion,
+        cloud,
+    })
 
     return (
         <div

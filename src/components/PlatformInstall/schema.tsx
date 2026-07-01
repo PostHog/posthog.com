@@ -13,12 +13,15 @@ import {
 import Link from 'components/Link'
 import WizardFrameworksTeaser from 'components/WizardFrameworksTeaser'
 import { IconArrowUpRight } from '@posthog/icons'
+import { buildWizardCommand } from './buildCommand'
 
 export type InstallMethod = {
     label: string
     /** Description / instructions shown before the command */
     helper?: React.ReactNode
     command?: string
+    /** Clipboard override for `command` (display shows `command`, copy writes this). */
+    copyCommand?: string
     /**
      * Indent the command snippet so it lines up with the text of a numbered
      * list above (used when the command is a continuation of a list step).
@@ -64,7 +67,11 @@ export type InstallSchema = {
 const iconClass = 'size-4'
 
 const MCP_URL = 'https://mcp.posthog.com/mcp'
-const wizardCommand = 'npx @posthog/wizard mcp add'
+// Displayed clean (`npx @posthog/wizard mcp add`); copied with `-y` and `@latest` pinned but hidden
+// from view, matching the inline command.
+const { displayCommand: wizardCommand, copyCommand: wizardCommandCopy } = buildWizardCommand({
+    subcommand: 'mcp add',
+})
 
 // Deep-link install URLs ported from src/components/Products/MCPInstall.tsx
 const cursorConfig = btoa(JSON.stringify({ url: MCP_URL }))
@@ -101,6 +108,7 @@ const claudeCodeMethods: InstallMethod[] = [
         label: 'PostHog Wizard',
         helper: <>The PostHog Wizard installs the MCP server directly into Claude Code.</>,
         command: wizardCommand,
+        copyCommand: wizardCommandCopy,
     },
     {
         label: 'Claude Code plugin',
@@ -179,6 +187,7 @@ const cursorMethods: InstallMethod[] = [
         label: 'PostHog Wizard',
         helper: <>The PostHog Wizard installs the MCP server directly into Cursor.</>,
         command: wizardCommand,
+        copyCommand: wizardCommandCopy,
     },
     {
         label: 'Manual setup',
@@ -226,6 +235,7 @@ const vscodeMethods: InstallMethod[] = [
         label: 'PostHog Wizard',
         helper: <>The PostHog Wizard installs the MCP server directly into VS Code.</>,
         command: wizardCommand,
+        copyCommand: wizardCommandCopy,
     },
     {
         label: 'Manual setup',
@@ -254,6 +264,7 @@ const windsurfMethods: InstallMethod[] = [
         label: 'PostHog Wizard',
         helper: <>The PostHog Wizard installs the MCP server directly into Windsurf.</>,
         command: wizardCommand,
+        copyCommand: wizardCommandCopy,
     },
     {
         label: 'Manual setup',
@@ -286,6 +297,7 @@ const codexMethods: InstallMethod[] = [
         label: 'PostHog Wizard',
         helper: <>The PostHog Wizard installs the MCP server directly into Codex.</>,
         command: wizardCommand,
+        copyCommand: wizardCommandCopy,
     },
     {
         label: 'Codex plugin',
@@ -309,6 +321,7 @@ const zedMethods: InstallMethod[] = [
         label: 'PostHog Wizard',
         helper: <>The PostHog Wizard installs the MCP server directly into Zed.</>,
         command: wizardCommand,
+        copyCommand: wizardCommandCopy,
     },
     {
         label: 'Manual setup',
@@ -475,6 +488,7 @@ export const mcpInstallSchema: InstallSchema = {
     title: 'Install the PostHog MCP',
     secondaryAction: { label: 'Learn more', to: '/docs/model-context-protocol', state: { newWindow: true } },
     defaultCommand: wizardCommand,
+    defaultCopyCommand: wizardCommandCopy,
     supports: supportsFrameworks,
     platforms: installPlatforms,
 }
