@@ -4425,6 +4425,7 @@ export const docsMenu = {
                         { name: 'Node.js', url: '/docs/feature-flags/installation/nodejs' },
                         { name: 'PHP', url: '/docs/feature-flags/installation/php' },
                         { name: 'Python', url: '/docs/feature-flags/installation/python' },
+                        { name: 'OpenFeature (Python)', url: '/docs/feature-flags/installation/openfeature' },
                         { name: 'React', url: '/docs/feature-flags/installation/react' },
                         { name: 'React Native', url: '/docs/feature-flags/installation/react-native' },
                         { name: 'React Router', url: '/docs/feature-flags/installation/react-router' },
@@ -6328,7 +6329,7 @@ export const docsMenu = {
             icon: 'IconPlug',
             description: 'Analytics for the MCP servers you ship to AI agents',
             badge: {
-                title: 'Alpha',
+                title: 'Beta',
                 className: 'uppercase !bg-yellow/10 !text-yellow !dark:text-white !dark:bg-yellow/50',
             },
             children: [
@@ -7163,6 +7164,12 @@ export const docsMenu = {
                     icon: 'IconSearch',
                     color: 'purple',
                     featured: true,
+                },
+                {
+                    name: 'PII scrubbing',
+                    url: '/docs/logs/pii-scrubbing',
+                    icon: 'IconSearch',
+                    color: 'blue',
                 },
                 {
                     name: 'Link Session Replay',

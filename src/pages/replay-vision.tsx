@@ -67,8 +67,7 @@ const useCaseCards = [
         icon: IconWarning,
         color: 'text-red',
         title: 'Find the bugs that hurt',
-        description:
-            'Surface errors that were actually visible to users and blocked them from finishing a task.',
+        description: 'Surface errors that were actually visible to users and blocked them from finishing a task.',
     },
     {
         icon: IconTrending,

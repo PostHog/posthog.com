@@ -447,6 +447,11 @@ const workSurfaces: {
             </Link>
         ),
         copy: '@PostHog brings PostHog into Slack channels. Route reports to the ones each team already watches (hedgehog mode not included).',
+        cta: (
+            <CallToAction to="/slack" state={{ newWindow: true }} type="secondary" size="md">
+                Learn more
+            </CallToAction>
+        ),
     },
     {
         icon: IconMCP,
@@ -457,6 +462,11 @@ const workSurfaces: {
             </Link>
         ),
         copy: 'Look ma, no hands! Pull self-driving context into other tools, and pull context from your other tools into self-driving.',
+        cta: (
+            <CallToAction to="/mcp" state={{ newWindow: true }} type="secondary" size="md">
+                Learn more
+            </CallToAction>
+        ),
     },
 ]
 
@@ -850,7 +860,7 @@ export default function SelfDrivingPage(): JSX.Element {
                         <p>
                             The same Inbox and agents show up across four surfaces (everywhere you go, there's PostHog).
                         </p>
-                        <div className="not-prose grid @md/reader-content:grid-cols-2 gap-x-6 gap-y-4 my-6">
+                        <div className="not-prose grid @md/reader-content:grid-cols-2 gap-x-6 gap-y-8 mt-6 mb-12">
                             {workSurfaces.map(({ icon: Icon, iconColor, label, copy, cta }, index) => (
                                 <div key={index}>
                                     <p className="m-0 inline-flex items-center gap-2 font-bold text-base">

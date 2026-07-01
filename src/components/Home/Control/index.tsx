@@ -86,7 +86,7 @@ export const CTAs = () => {
             Existing test CTA row retained for reference:
             <div className="flex gap-2 items-center">
                 <div className="flex items-center gap-1">
-                    <WizardCommand latest={false} slim className="border border-primary" />
+                    <WizardCommand slim className="border border-primary" />
                     <Tooltip trigger={<IconInfo className="size-4 text-primary inline-block" />}>
                         <div className="max-w-sm">
                             <p className="text-sm mb-1">
