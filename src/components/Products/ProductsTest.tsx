@@ -315,14 +315,35 @@ export default function ProductsTest(): JSX.Element {
                             imgClassName="@xl:float-right @xl:!ml-4 w-60 @xl:w-48 @3xl:w-60 @xl:mt-4 @3xl:!ml-8 @3xl:!-mr-4"
                         />
                         <h1 className="text-2xl @lg:text-3xl font-bold leading-tight">
-                            Devtools and product data infrastructure for building self-driving products
+                            Devtools and product data infrastructure
+                            {/* Test appends "for building self-driving products"; control keeps it generic. */}
+                            <RenderInClient
+                                placeholder={null}
+                                render={() =>
+                                    posthog?.getFeatureFlag?.('self-driving-mode-test', { fresh: true }) === 'test' ? (
+                                        <>{' for building self-driving products'}</>
+                                    ) : (
+                                        <></>
+                                    )
+                                }
+                            />
                         </h1>
                         <p className="text-lg leading-relaxed">
                             Humans and AI agents build with PostHog because everything you need to collect and analyze
                             product usage data – and build and ship new features – lives in one place.
                         </p>
 
-                        <GetStarted />
+                        {/* Test installs with the self-driving subcommand; control stays generic. */}
+                        <RenderInClient
+                            placeholder={<GetStarted />}
+                            render={() =>
+                                posthog?.getFeatureFlag?.('self-driving-mode-test', { fresh: true }) === 'test' ? (
+                                    <GetStarted selfDriving />
+                                ) : (
+                                    <GetStarted />
+                                )
+                            }
+                        />
 
                         {/*
                         <div className="flex flex-wrap items-center gap-3 not-prose">
@@ -361,7 +382,7 @@ export default function ProductsTest(): JSX.Element {
                     <RenderInClient
                         placeholder={<></>}
                         render={() =>
-                            posthog?.getFeatureFlag?.('homepage-slack-test', { fresh: true }) === 'test' ? (
+                            posthog?.getFeatureFlag?.('self-driving-mode-test', { fresh: true }) === 'test' ? (
                                 <HeroCarousel tabs={productUsageTabs} />
                             ) : (
                                 <></>

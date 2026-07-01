@@ -7,19 +7,15 @@ import OSButton from 'components/OSButton'
 
 <CalloutBox icon="IconFlask" title="MCP Analytics is in beta" type="action">
 
-`@posthog/mcp` is a TypeScript SDK for instrumenting Model Context Protocol (MCP) servers with PostHog analytics. It's published on npm as a `0.1.x` release while we build it in public. The API, event names, properties, and tracing behavior may change before the SDK reaches `1.0`. Don't depend on it for production reporting yet. Today, only TypeScript MCP servers are supported – a Python SDK is on the roadmap.
+`@posthog/mcp` instruments Model Context Protocol (MCP) servers with PostHog analytics. It's published on npm as a `0.x` release while we build it in public, so the API, event names, properties, and tracing behavior may change before the SDK reaches `1.0` – pin a version and don't depend on it for production reporting yet. Both [TypeScript and Python](/docs/mcp-analytics/installation#python) servers are supported.
+
+PostHog also has a purpose-built **MCP Analytics** view – a dashboard, a sessions explorer, per-tool quality breakdowns, and intent clustering – all built on the `$mcp_*` events the SDK sends. It's in beta behind a feature preview: [enable the MCP Analytics feature preview](https://app.posthog.com/settings/user-feature-previews#mcp-analytics) to turn it on. You don't have to wait for it, though – because every signal is a normal PostHog event, you can query and visualize the same data today through [Product Analytics](/docs/product-analytics), the [SQL editor](/docs/data-warehouse/sql), [Dashboards](/docs/product-analytics/dashboards), and [Error Tracking](/docs/error-tracking).
 
 </CalloutBox>
 
 MCP Analytics helps you understand how AI agents actually use the MCP server you ship: which tools get called, how often, what intent the agent had, where calls are failing, what tools the agent asked for but you don't offer yet, and how individual sessions flow end to end.
 
-The SDK wraps your existing MCP server and emits PostHog events on every tool call, resource read, prompt fetch, and initialize handshake. You can keep using whatever tooling you already have on top of PostHog – insights, dashboards, alerts, Error Tracking – without any additional ingestion plumbing.
-
-<CalloutBox icon="IconFlask" title="A dedicated MCP Analytics view is in preview" type="action">
-
-PostHog has a purpose-built **MCP Analytics** view – a dashboard, a sessions explorer, per-tool quality breakdowns, and intent clustering, all built on the `$mcp_*` events the SDK sends. It's in preview behind a feature flag while we build it in public. Because every signal is a normal PostHog event, you don't have to wait for it: you can query and visualize the same data today through [Product Analytics](/docs/product-analytics) for trends and funnels, the [SQL editor](/docs/data-warehouse/sql) for ad-hoc HogQL, [Dashboards](/docs/product-analytics/dashboards) for at-a-glance views, and [Error Tracking](/docs/error-tracking) for `$exception` events. The events on this page won't change shape as the view matures.
-
-</CalloutBox>
+The SDK wraps your existing MCP server and emits PostHog events on every tool call, resource read, prompt fetch, and initialize handshake – no additional ingestion plumbing required.
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/start-here">
 Get started
