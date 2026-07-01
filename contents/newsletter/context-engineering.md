@@ -181,7 +181,7 @@ Here's how it changed our onboarding:
 
 Building a context layer is high-leverage for any company shipping agents, but it takes real investment and a shift in how you think about the work.
 
-We created a whole new team for it. It's a kind of work that didn't exist a year ago, and it's only going to get bigger as more of what companies ship runs on agents.
+We created a whole [new team](/teams/docs-wizard) for it. It's a kind of work that didn't exist a year ago, and it's only going to get bigger as more of what companies ship runs on agents.
 
 The job is context.
 
