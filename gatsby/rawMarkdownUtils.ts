@@ -387,7 +387,12 @@ const PLATFORM_ITEMS: PlatformItem[] = [
         layer: 'tool',
         oneLiner: 'How agents roll a change out and roll it back.',
     },
-    { name: 'Experiments', slug: 'experiments', layer: 'tool', oneLiner: 'The evaluation that proves a change worked.' },
+    {
+        name: 'Experiments',
+        slug: 'experiments',
+        layer: 'tool',
+        oneLiner: 'The evaluation that proves a change worked.',
+    },
     {
         name: 'Error tracking',
         slug: 'error-tracking',
@@ -430,7 +435,12 @@ const PLATFORM_ITEMS: PlatformItem[] = [
         layer: 'tool',
         oneLiner: "How your product's context flows out to agents and tools.",
     },
-    { name: 'Workflows', slug: 'workflows', layer: 'tool', oneLiner: 'How agents act — automated actions in the loop.' },
+    {
+        name: 'Workflows',
+        slug: 'workflows',
+        layer: 'tool',
+        oneLiner: 'How agents act — automated actions in the loop.',
+    },
     {
         name: 'PostHog AI',
         slug: 'ai',

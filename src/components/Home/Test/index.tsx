@@ -27,7 +27,6 @@ import usePostHog from 'hooks/usePostHog'
 import { APP_COUNT } from '../../../constants'
 import { CallToAction } from 'components/CallToAction'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
-import CloudinaryImage from 'components/CloudinaryImage'
 import IntegrationPrompt from 'components/IntegrationPrompt'
 import { motion } from 'framer-motion'
 import HeroCarousel from 'components/Home/HeroCarousel'
@@ -45,6 +44,7 @@ import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import { RenderInClient } from 'components/RenderInClient'
 import { Tagline as ControlTagline, CTAs as ControlCTAs, HeroImage as ControlHeroImage } from '../Control'
 import { TestRolloutSlide, DebugFixSlide, OnePlaceSlide, UnderstandUsageSlide } from '../HeroCarousel/slides'
+import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 
 const AppCount = () => <span className="text-xs font-normal">{APP_COUNT} apps</span>
 
@@ -91,23 +91,6 @@ const PostHogMention = () => {
     )
 }
 
-const Tagline = () => (
-    <>
-        <h1 className="!text-3xl pt-4">
-            Just ask <PostHogMention />.
-        </h1>
-        <HeroImage />
-        <p className="text-balance @xl:text-wrap text-lg">
-            <PostHogMention /> knows your product, customers, and what needs fixing. It answers questions, triages work,
-            writes code, and is always working even when you don't prompt it.
-        </p>
-
-        <p className="text-balance @xl:text-wrap text-secondary">
-            500,000+ teams are shipping with PostHog. Don't get fomo.
-        </p>
-    </>
-)
-
 const SecondaryActions = () => (
     <p className="!text-sm flex flex-wrap items-center gap-2 justify-center @xl:min-w-96 @xl:max-w-md">
         <Link
@@ -131,9 +114,11 @@ const SecondaryActions = () => (
     </p>
 )
 
-export const GetStarted = () => (
+// PostHog.com-side glue (see note above): the install UI + secondary links, used by the
+// homepage hero (inlined) and the /products page (via this export).
+export const GetStarted = ({ selfDriving }: { selfDriving?: boolean }) => (
     <div className="mt-6 flex flex-col items-center @xl:items-start">
-        <PlatformInstall schema={wizardInstallSchema} />
+        <PlatformInstall schema={wizardInstallSchema} selfDriving={selfDriving} />
         <SecondaryActions />
     </div>
 )
@@ -174,7 +159,7 @@ export const CTAs = () => {
             Existing test CTA row retained for reference:
             <div className="flex gap-2 items-center">
                 <div className="flex items-center gap-1">
-                    <WizardCommand latest={false} slim className="border border-primary" />
+                    <WizardCommand slim className="border border-primary" />
                     <Tooltip trigger={<IconInfo className="size-4 text-primary inline-block" />}>
                         <div className="max-w-sm">
                             <p className="text-sm mb-1">
@@ -335,28 +320,11 @@ const CompanyStageTabs = () => {
     )
 }
 
-function HeroImage(): JSX.Element {
-    return (
-        <aside className="max-w-[400px] mx-auto mt-4 @xl:mx-0 @2xl:mt-0 @2xl:w-72 @2xl:float-right @2xl:ml-4 @3xl:w-80 @4xl:w-96 @2xl:-mt-20 @3xl:-mt-16 border border-primary rounded shadow-xl overflow-hidden leading-[0] transition-all">
-            <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/slack_light_15ad69ec86.png"
-                alt="PostHog Slack app"
-                className="dark:hidden"
-            />
-            <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/slack_dark_fc660ed74e.png"
-                alt="PostHog Slack app"
-                className=" hidden dark:block"
-            />
-        </aside>
-    )
-}
-
 function TestHero(): JSX.Element {
     return (
         <>
-            <div className="text-center @xl:text-left mb-12">
-                <h1 className="[&_p]:m-0 flex gap-1 flex-wrap justify-center @xl:justify-start !text-2xl mb-8 pt-2">
+            <div className="mb-12">
+                <h1 className="[&_p]:m-0 flex gap-1 flex-wrap !text-2xl !mb-4 pt-2">
                     <div className="dark:hidden">
                         <Logo />
                     </div>
@@ -365,12 +333,77 @@ function TestHero(): JSX.Element {
                     </div>
                 </h1>
 
-                <Tagline />
+                <h1 className="!text-3xl @xl:!text-4xl pt-4">
+                    Shift your product into{' '}
+                    <span className="bg-blue/10 dark:bg-blue/20 text-blue rounded-md px-1 whitespace-nowrap">
+                        self-driving mode
+                    </span>
+                </h1>
 
-                <GetStarted />
+                <div className="grid @xl:grid-cols-2 @xl:gap-8">
+                    <div>
+                        <p className="text-balance @xl:text-wrap text-[17px]">
+                            PostHog already knows your customers, which features they use, and the issues they have.
+                        </p>
+                        <p className="text-balance @xl:text-wrap text-[17px]">
+                            Now, PostHog automatically{' '}
+                            <RoughAnnotation
+                                type="highlight"
+                                color="rgba(247, 165, 1, 0.15)"
+                                strokeWidth={1}
+                                padding={2}
+                                delay={0}
+                                multiline
+                            >
+                                diagnoses problems
+                            </RoughAnnotation>
+                            ,{' '}
+                            <RoughAnnotation
+                                type="highlight"
+                                color="rgba(247, 165, 1, 0.15)"
+                                strokeWidth={1}
+                                padding={2}
+                                delay={500}
+                                multiline
+                            >
+                                fixes bugs
+                            </RoughAnnotation>
+                            , and{' '}
+                            <RoughAnnotation
+                                type="highlight"
+                                color="rgba(247, 165, 1, 0.15)"
+                                strokeWidth={1}
+                                padding={2}
+                                delay={900}
+                                multiline
+                            >
+                                generates pull requests
+                            </RoughAnnotation>
+                            {' – all '}
+                            <RoughAnnotation
+                                type="underline"
+                                color="currentColor"
+                                strokeWidth={1}
+                                delay={1800}
+                                multiline
+                                className="text-secondary"
+                            >
+                                without you having to prompt it.
+                            </RoughAnnotation>
+                        </p>
+                        <p className="text-balance @xl:text-wrap text-secondary">
+                            Join 500,000+ teams already shipping with PostHog.
+                        </p>
+                    </div>
+
+                    <div className="mt-6 flex flex-col items-center @xl:items-start">
+                        <PlatformInstall schema={wizardInstallSchema} selfDriving />
+                        <SecondaryActions />
+                    </div>
+                </div>
             </div>
 
-            <HeroCarousel tabs={buildTabs} />
+            <HeroCarousel tabs={buildTabs} className="mb-8" />
         </>
     )
 }
@@ -441,7 +474,7 @@ function Hero(): JSX.Element {
         <RenderInClient
             placeholder={<></>}
             render={() =>
-                posthog?.getFeatureFlag?.('homepage-slack-test', { fresh: true }) === 'test' ? (
+                posthog?.getFeatureFlag?.('self-driving-mode-test', { fresh: true }) === 'test' ? (
                     <TestHero />
                 ) : (
                     <ControlHero />
@@ -452,11 +485,9 @@ function Hero(): JSX.Element {
 }
 
 const jsxComponentDescriptors: JsxComponentDescriptor[] = [
-    { name: 'Tagline', kind: 'flow', props: [], Editor: () => <Tagline /> },
     { name: 'AppCount', kind: 'flow', props: [], Editor: () => <AppCount /> },
     { name: 'CompanyStageTabs', kind: 'flow', props: [], Editor: () => <CompanyStageTabs /> },
     { name: 'CTAs', kind: 'flow', props: [], Editor: () => <CTAs /> },
-    { name: 'GetStarted', kind: 'flow', props: [], Editor: () => <GetStarted /> },
     { name: 'HeroCarousel', kind: 'flow', props: [], Editor: () => <HeroCarousel tabs={buildTabs} /> },
     { name: 'HomeHitCounter', kind: 'flow', props: [], Editor: () => <HomeHitCounter /> },
     { name: 'Customers', kind: 'flow', props: [], Editor: () => <Customers tableClassName="bg-white dark:bg-dark" /> },
