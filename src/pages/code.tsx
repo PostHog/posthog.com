@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import SEO from 'components/seo'
+import SEO, { buildProductStructuredData } from 'components/seo'
 import Editor from 'components/Editor'
 import { IconArrowUpRight, IconCheck, IconFlask, IconToggle, IconTrends, IconWarning } from '@posthog/icons'
 import OSButton from 'components/OSButton'
@@ -1457,16 +1457,16 @@ const FAQ_ITEMS = [
             <div className="space-y-3">
                 <p>
                     PostHog Code's{' '}
-                    <a href="/docs/posthog-code/inbox" className="underline">
+                    <a href="/docs/self-driving/inbox" className="underline">
                         Inbox
                     </a>{' '}
                     connects to{' '}
-                    <a href="/docs/posthog-code/inbox/sources" className="underline">
+                    <a href="/docs/self-driving/inbox/sources" className="underline">
                         signal sources
                     </a>{' '}
                     you choose – Error Tracking, support tickets, Session Replay, GitHub Issues, Linear, and Zendesk –
                     and{' '}
-                    <a href="/docs/posthog-code/inbox/research" className="underline">
+                    <a href="/docs/self-driving/inbox/research" className="underline">
                         ranks issues
                     </a>{' '}
                     by code importance (hot paths like checkout or billing), user impact (how many users are affected,
@@ -1626,6 +1626,13 @@ export default function CodePage() {
             <SEO
                 title="PostHog Code"
                 description="PostHog Code uses signals from production data to diagnose issues and generate pull requests – before you even know there's a problem."
+                structuredData={buildProductStructuredData({
+                    name: 'PostHog Code',
+                    description:
+                        "PostHog Code uses signals from production data to diagnose issues and generate pull requests – before you even know there's a problem.",
+                    slug: 'code',
+                    operatingSystem: 'macOS, Windows, Linux',
+                })}
             />
             <Editor slug="/code" maxWidth="100%" hasPadding={false} disableFormatting>
                 <div className="@container not-prose font-rounded">

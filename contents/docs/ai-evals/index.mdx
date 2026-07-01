@@ -2,10 +2,11 @@
 title: Evaluations
 ---
 
-Evaluations automatically assess the quality of your LLM [generations](/docs/ai-observability/generations) and return a pass/fail result with reasoning. PostHog supports two types of evaluations:
+Evaluations automatically assess the quality of your LLM [generations](/docs/ai-observability/generations). PostHog supports three types of evaluations:
 
-- **LLM-as-a-judge** – Uses an LLM to score each generation against a prompt you define. Great for nuanced, subjective checks like tone, helpfulness, or hallucination detection.
-- **Code-based (Hog)** – Runs deterministic code you write against each generation. Great for rule-based checks like format validation, keyword detection, or length limits. Free to run with no LLM cost.
+- **LLM-as-a-judge** – Uses an LLM to score each generation against a prompt you define, returning a pass/fail result with reasoning. Great for nuanced, subjective checks like tone, helpfulness, or hallucination detection.
+- **Code-based (Hog)** – Runs deterministic code you write against each generation, returning a pass/fail result. Great for rule-based checks like format validation, keyword detection, or length limits. Free to run with no LLM cost.
+- **Sentiment analysis** – Classifies the sentiment of user messages as positive, neutral, or negative using a local ML model. Great for monitoring how users feel during conversations with your AI features. Free to run with no LLM cost.
 
 ## Why use evaluations?
 
@@ -16,13 +17,13 @@ Evaluations automatically assess the quality of your LLM [generations](/docs/ai-
 
 ## Choosing an evaluation type
 
-|                 | LLM-as-a-judge                                               | Code-based (Hog)                                           |
-| --------------- | ------------------------------------------------------------ | ---------------------------------------------------------- |
-| **Best for**    | Subjective quality checks (tone, helpfulness, hallucination) | Deterministic rule-based checks (format, keywords, length) |
-| **Cost**        | LLM API call per evaluation                                  | Free                                                       |
-| **Speed**       | Seconds                                                      | Milliseconds                                               |
-| **Consistency** | May vary between runs                                        | Deterministic — same input always produces same result     |
-| **Setup**       | Write a prompt                                               | Write Hog code                                             |
+|                 | LLM-as-a-judge                                               | Code-based (Hog)                                           | Sentiment analysis                                       |
+| --------------- | ------------------------------------------------------------ | ---------------------------------------------------------- | -------------------------------------------------------- |
+| **Best for**    | Subjective quality checks (tone, helpfulness, hallucination) | Deterministic rule-based checks (format, keywords, length) | Tracking how users feel during conversations             |
+| **Cost**        | LLM API call per evaluation                                  | Free                                                       | Free                                                     |
+| **Speed**       | Seconds                                                      | Milliseconds                                               | Milliseconds                                             |
+| **Output**      | Pass/fail with reasoning                                     | Pass/fail with reasoning                                   | Positive, neutral, or negative with a confidence score   |
+| **Setup**       | Write a prompt                                               | Write Hog code                                             | Pick the type — no prompt or code required               |
 
 ## LLM-as-a-judge evaluations
 
@@ -272,6 +273,33 @@ Click **Generate with AI** in the code editor to open Max, PostHog's AI assistan
 - Debug errors in your existing code
 - Iterate on the logic by testing and refining
 
+## Sentiment analysis evaluations
+
+Sentiment evaluations classify the sentiment of the user messages in each generation as **positive**, **neutral**, or **negative**. They're ideal for monitoring how users feel during conversations with your AI features — spotting frustrated users, tracking satisfaction trends, and prioritizing the conversations that matter most.
+
+### How they work
+
+When a [generation](/docs/ai-observability/generations) is sampled, PostHog runs a local open-source ML model ([cardiffnlp/twitter-roberta-base-sentiment-latest](https://huggingface.co/cardiffnlp/twitter-roberta-base-sentiment-latest)) against the user messages in that generation. Each message is classified as positive, neutral, or negative with a confidence score, and the result is stored and linked to the original generation.
+
+The model only processes user messages (the `$ai_input` property) — it does not process LLM outputs. Sentiment runs entirely within PostHog's infrastructure, so **no data is sent to any third-party AI provider**, and there's no LLM cost.
+
+Sentiment evaluations share the same sampling rate and property filter options as the other evaluation types, so you can scope them to production traffic, specific models, or particular user segments.
+
+### Creating a sentiment evaluation
+
+1. Navigate to **AI Evals** > **Evaluations**
+2. Click **New evaluation**
+3. Select **Sentiment analysis** as the evaluation type
+4. Configure:
+   - **Name**: A descriptive name for the evaluation
+   - **Sampling rate**: Percentage of generations to evaluate (0.1% – 100%)
+   - **Property filters** (optional): Narrow which generations to evaluate using event or person properties
+5. Enable the evaluation and click **Save**
+
+### Viewing sentiment results
+
+Once a sentiment evaluation is running, the **Sentiment** tab in AI Observability lets you browse user messages by sentiment, and traces and generations display a color-coded sentiment bar. See [Sentiment classification](/docs/ai-observability/sentiment) for details on the viewing experience.
+
 ## Managing evaluations via MCP
 
 You can also manage evaluations through the [PostHog MCP server](/docs/model-context-protocol) using AI agents like Claude Code, Cursor, or any MCP-connected tool.
@@ -366,5 +394,7 @@ Each evaluation run counts as one AI Observability event toward your quota.
 If a provider API key is deleted or an evaluation hits trial limits, PostHog automatically disables the affected evaluations and shows an error status. See [Evaluation status and errors](#evaluation-status-and-errors) for details on error states and how to resolve them.
 
 **Code-based evaluations** have no LLM cost — they run your Hog code directly with no external API calls.
+
+**Sentiment evaluations** have no LLM cost — they run a local ML model with no external API calls.
 
 Use sampling rates strategically to balance coverage and cost – 5-10% sampling often provides sufficient signal for quality monitoring.

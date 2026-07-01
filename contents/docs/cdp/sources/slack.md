@@ -123,3 +123,7 @@ See Slack's [Events API](https://api.slack.com/apis/events-api) documentation fo
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

@@ -49,7 +49,7 @@ If a customer has Session replay enabled, log in as them and look at their sessi
 
 Outdated SDKs miss out on bug fixes, performance improvements, and new features. A customer using a three-year-old SDK will hit issues we've already solved, which can silently erode trust over time.
 
-Check SDK versions using [SDK Doctor](/docs/sdk-doctor) or in Metabase via the `Library version audit` table. At minimum, the SDK sending the bulk of their event volume shouldn't be more than 3 months behind the latest. Monthly updates are the best-practice habit to encourage. Some SDKs have breaking changes between versions, and if so, make sure you make the customer aware about the breaking change.
+Check SDK versions using the [SDK health check](/docs/health-checks/sdk-health) or in Metabase via the `Library version audit` table. At minimum, the SDK sending the bulk of their event volume shouldn't be more than 3 months behind the latest. Monthly updates are the best-practice habit to encourage. Some SDKs have breaking changes between versions, and if so, make sure you make the customer aware about the breaking change.
 
 A light nudge on this also doubles as a natural re-engagement touchpoint for customers you haven't spoken to in a while.
 
