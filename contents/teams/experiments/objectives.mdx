@@ -47,14 +47,17 @@ We have good traction here, so we should double down and improve the product:
   2. The same for agent parameters (model name, available tools, temperature, max tokens, etc.).
 
 #### Product pricing <TeamMember name="Ruby Childs" photo />
-Understand the costs of experiments and put advanced features behind a paywall.
+Understand the costs of experiments, advanced feature usage and the best position for pricing.
 
 #### Skills <TeamMember name="Ruby Childs" photo />
-Ship skills that help users get set up and run experiments correctly:
-- Diagnose the code setup and validate experiment code (e.g. is exposure being sent from the right place?).
-- A "Learn Experiments" skill.
+Skills are our onboarding surface for the redefined, less-technical ICP — the MCP-facing layer that gets an experiment right the first time (~30% of experiment users already interact via MCP).
 
-<TODO Ruby: specify further.>
+- Onboarding: help users get set up and run experiments correctly, aimed at the less-technical ICP and self-driving onboarding.
+- Diagnosing: a skill/scout that inspects setup and flags errors.
+    - Over MCP (config): flag and variants are sane, metric events are known, and custom exposure events are valid.
+    - In a coding agent / PostHog Code (source): the flag is evaluated where the variant is shown, and the boolean-flag → experiment migration is done right.
+- Educational ("Learn Experiments"): teach the concepts a non-statistical user needs to trust a result such as exposure, MDE, significance, sequential testing and common interpretation traps.
+- Summarize & interpret results: a plain-language, one-page verdict on a finished experiment.
 
 #### Side quests
 
