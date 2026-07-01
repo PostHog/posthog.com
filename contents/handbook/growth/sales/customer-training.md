@@ -329,6 +329,12 @@ Build on what they learned in Session 1, applied to marketing use cases.
 
 **For $80k+ customers who are in-office** – pitch a half-day onsite. Frame it as "we'll sit with your team and build your analytics stack together." Informal one-on-one time at someone's desk is worth 3x a scheduled Zoom.
 
+### Let the customer demo their product to you
+
+Get the customer to demo their own product for you on a call, then run discovery from the position of their users while they show you around. This works especially well with new AI products – teams are usually keen to show them off. It feels more relaxed than a traditional discovery grilling, and you learn what their users actually care about.
+
+This is a slightly different move to the [reverse demo](/handbook/growth/sales/how-to-pitch-self-driving#the-reverse-demo), where they drive their own PostHog instance while you show them how to use self-driving – here they're driving their own product instead.
+
 ### Gather feedback with Surveys
 
 Set up a PostHog survey targeting training participants after each session. This does two things: it collects real feedback on the training, and it shows attendees a live example of Surveys in action on themselves. Good dog-fooding moment.
