@@ -161,7 +161,7 @@ Arguably the most powerful source of context we unlocked wasn't even technical, 
 
 Because our business playbooks are open source alongside our docs, the same context system that produces skills for Next.js integrations can produce skills to support enterprise customers, or run marketing campaigns.
 
-Today our small teams are building their own fleet of wizards. Many as forward-deployed agents to help users with support, outreach, sales playbooks, and other business motions.
+Today our [small teams](/teams) are building their own fleet of wizards. Many as forward-deployed agents to help users with support, outreach, sales playbooks, and other business motions.
 
 Turns out being a [transparent company](/founders/how-to-run-a-transparent-company) also makes you agent-ready.
 
