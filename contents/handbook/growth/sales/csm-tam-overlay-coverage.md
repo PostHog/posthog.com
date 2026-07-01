@@ -37,7 +37,7 @@ The customer should never have to figure out who to contact. They reach out to e
 - Use case discovery, mapping products to problems
 - Renewal process
 - Multi-threading into new teams and stakeholders
-- Account planning (quarterly in Vitally)
+- Account planning (updated regularly in Vitally)
 - Stakeholder management
 
 ### Both
