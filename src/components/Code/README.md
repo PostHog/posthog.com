@@ -25,7 +25,7 @@ Hook that returns `true` when the user has `prefers-reduced-motion: reduce` enab
 ## Content components
 
 ### `DownloadContent`
-Download UI for PostHog Code, shared by the `/code#download` hero swap and the standalone `/code/download` page. Detects the visitor's OS and architecture client-side (via `userAgentData` where available, with UA sniffing as the Linux fallback) and links every button to `https://code.posthog.com/download/*`, the redirect worker backed by the auto-update server. Arch-specific paths are used because browsers don't send `Sec-CH-UA-Arch` on cross-origin navigation, so the worker can't distinguish Intel from Apple Silicon on its own. GitHub is only linked for release notes.
+Download UI for PostHog Code, shared by the `/code#download` hero swap and the standalone `/code/download` page. Detects the visitor's OS and architecture client-side (via `userAgentData` where available, with UA sniffing as the Linux fallback) and links every button to `https://code.posthog.com/download/*`, a Cloudflare Worker that redirects to the matching asset on the latest published release. Arch-specific paths are used because browsers don't send `Sec-CH-UA-Arch` on cross-origin navigation, so the worker can't distinguish Intel from Apple Silicon on its own. GitHub is only linked for release notes.
 
 **Props:** `className`
 

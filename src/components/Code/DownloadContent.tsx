@@ -8,10 +8,11 @@ const RELEASES_URL = 'https://github.com/PostHog/code/releases/latest'
 type OS = 'mac' | 'windows' | 'linux' | 'unknown'
 type Arch = 'arm64' | 'x64' | 'unknown'
 
-// code.posthog.com redirects to the latest build published to the auto-update
-// server. Arch is detected client-side and passed as an explicit path because
-// browsers don't send the Sec-CH-UA-Arch hint on cross-origin navigation, so
-// the worker can't tell an Intel Mac from Apple Silicon on its own.
+// code.posthog.com is a Cloudflare Worker that redirects to the matching asset
+// on the latest published release. Arch is detected client-side and passed as
+// an explicit path because browsers don't send the Sec-CH-UA-Arch hint on
+// cross-origin navigation, so the worker can't tell an Intel Mac from Apple
+// Silicon on its own.
 const PLATFORMS = [
     { key: 'mac-arm64', label: 'macOS (Apple Silicon)', url: `${DOWNLOAD_URL}/mac/arm64` },
     { key: 'mac-x64', label: 'macOS (Intel)', url: `${DOWNLOAD_URL}/mac/intel` },
