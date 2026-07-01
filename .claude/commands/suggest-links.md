@@ -53,9 +53,7 @@ Find at least 3 existing posts in `contents/` that would naturally link to the n
 
 - **Find the most relevant existing posts** by searching for content that discusses the same concepts as the new post's sections. Use `grep` or `Bash` if needed.
 - **Match section to section.** Don't just link to the new post's root — link to the specific `#anchor` that matches the concept being discussed in the existing post. Derive the anchor from the heading text (lowercase, spaces → hyphens, punctuation removed).
-- **Keep it natural.** The backlink should either:
-  - Fit within an existing sentence (preferred), or
-  - Be a brief new sentence that flows naturally from the surrounding paragraph.
+- **Do NOT add new sentences or content.** The backlink must fit within an existing sentence — never invent new prose to host a link. If there's no existing sentence a link fits into, skip that candidate.
 - **Don't add a standalone "further reading" line** unless the existing post already has a "Further reading" section — in that case, a bullet there is fine.
 - **Don't use the new article's title as anchor text.** Describe the concept, not the article.
 
