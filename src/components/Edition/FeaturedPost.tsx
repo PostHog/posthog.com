@@ -40,17 +40,17 @@ export default function FeaturedPost({
 
     // `containerStack` opts into @container-relative stacking (for resizable window columns);
     // the default keeps the blog's viewport-breakpoint layout untouched.
-    // containerStack: the image tracks the row height (set by the text column) instead of growing
-    // 16:9 with the column width, so a short article no longer leaves a big empty gap beside a
-    // huge image. Text is vertically centered next to it. The blog default is left untouched.
+    // containerStack: the image always stays 16:9 (never cropped/stretched). While the column is
+    // narrow the text stacks *under* the image; it only moves beside the image once there's room
+    // (@3xl), so it never leaves a big empty gap next to a tall image. Blog default untouched.
     const sectionClasses = containerStack
-        ? 'grid @2xl:grid-cols-2 gap-6 @2xl:gap-8 items-stretch rounded-md border border-input p-5 bg-accent'
+        ? 'grid @3xl:grid-cols-2 gap-6 @3xl:gap-8 items-center rounded-md border border-input p-5 bg-accent'
         : 'grid md:grid-cols-2 gap-6 md:gap-8 items-center rounded-md border border-input p-5 md:mx-4 bg-accent'
     const imageWrapperClasses = containerStack
-        ? 'w-full aspect-video @2xl:aspect-auto @2xl:h-full @2xl:min-h-[220px] rounded-md overflow-hidden'
+        ? 'w-full aspect-video rounded-md overflow-hidden'
         : 'w-full aspect-[600/315] rounded-md overflow-hidden'
-    const linkClasses = containerStack ? 'block w-full h-full' : ''
-    const textClasses = containerStack ? 'flex flex-col justify-center' : ''
+    const linkClasses = ''
+    const textClasses = ''
 
     const section = (
         <section className={sectionClasses}>

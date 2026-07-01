@@ -7,7 +7,7 @@ import { useCategoryTags } from './useCategoryTags'
 
 export const tagOptions = {
     'Being a founder': {
-        icon: 'IconPeople',
+        icon: 'IconLightBulb',
     },
     Culture: {
         icon: 'IconHandwave',
@@ -25,7 +25,7 @@ export const tagOptions = {
         icon: 'IconGear',
     },
     People: {
-        icon: 'IconPeople',
+        icon: 'IconPerson',
     },
     Product: {
         icon: 'IconRocket',
@@ -34,7 +34,7 @@ export const tagOptions = {
         icon: 'IconTarget',
     },
     Revenue: {
-        icon: 'IconPieChart',
+        icon: 'IconPiggyBank',
     },
     'Sales & CS': {
         icon: 'IconPhone',
@@ -58,7 +58,10 @@ export const tagOptions = {
         icon: 'IconGear',
     },
     'Growth engineering': {
-        icon: 'IconTrends',
+        icon: 'IconCode',
+    },
+    'Growth Engineering': {
+        icon: 'IconCode',
     },
     Guides: {
         icon: 'IconBook',
@@ -67,7 +70,7 @@ export const tagOptions = {
         icon: 'IconGraph',
     },
     'Product engineers': {
-        icon: 'IconPeople',
+        icon: 'IconWrench',
     },
     'Product metrics': {
         icon: 'IconPieChart',
