@@ -19,6 +19,12 @@ interface TreeMenuProps {
     activeItem?: MenuItem
     watchPath?: boolean
     activeUrl?: string
+    /**
+     * When true, parent (collapsible) rows only toggle open/closed on click instead of
+     * navigating, and their `icon` is rendered like leaf rows. Used by landing sidebars that
+     * want expand-in-place categories. Defaults to false, so existing nav is unchanged.
+     */
+    expandOnly?: boolean
 }
 
 const TreeLink = ({
@@ -71,7 +77,7 @@ const getActiveItem = (items: MenuItem[], currentUrl: string): MenuItem | undefi
 }
 
 export function TreeMenu(props: TreeMenuProps) {
-    const { watchPath = true, activeUrl } = props
+    const { watchPath = true, activeUrl, expandOnly = false } = props
     const { appWindow } = useWindow()
     const { pathname } = useLocation()
     const [activeItem, setActiveItem] = useState<MenuItem | undefined>(
@@ -97,7 +103,14 @@ export function TreeMenu(props: TreeMenuProps) {
                     const key = `${item.name}-${index}-${item.url}`
                     const hasChildren = item.children && item.children.length > 0
                     return hasChildren ? (
-                        <TreeMenuItem key={key} item={item} activeItem={activeItem} index={0} onClick={handleClick} />
+                        <TreeMenuItem
+                            key={key}
+                            item={item}
+                            activeItem={activeItem}
+                            index={0}
+                            onClick={handleClick}
+                            expandOnly={expandOnly}
+                        />
                     ) : (
                         <TreeLink key={key} menuItem={item} index={0} onClick={handleClick} activeItem={activeItem} />
                     )
@@ -124,11 +137,13 @@ function TreeMenuItem({
     activeItem,
     index = 0,
     onClick,
+    expandOnly = false,
 }: {
     item: MenuItem
     activeItem: MenuItem | undefined
     index: number
     onClick: (item: MenuItem) => void
+    expandOnly?: boolean
 }) {
     const [open, setOpen] = useState(false)
     const hasChildren = item.children && item.children.length > 0
@@ -153,8 +168,10 @@ function TreeMenuItem({
                     width="full"
                     className={index === 0 ? '' : `pl-${2 + index * 4}`}
                     active={activeItem === item}
-                    to={item.url || item.children?.[0]?.url}
-                    asLink
+                    // expandOnly: click only toggles the collapsible (no navigation), and the
+                    // parent's icon is shown like leaf rows. Otherwise keep the linking default.
+                    {...(expandOnly ? {} : { to: item.url || item.children?.[0]?.url, asLink: true })}
+                    icon={expandOnly && typeof item.icon !== 'string' ? item.icon : undefined}
                     onClick={() => onClick(item)}
                     size="md"
                     hover="background"
@@ -181,6 +198,7 @@ function TreeMenuItem({
                                     activeItem={activeItem}
                                     index={index + 1}
                                     onClick={onClick}
+                                    expandOnly={expandOnly}
                                 />
                             ) : (
                                 <TreeLink

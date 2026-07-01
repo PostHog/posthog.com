@@ -1,19 +1,22 @@
 import React, { useState } from 'react'
 import ReaderView from 'components/ReaderView'
 import { NewsletterForm } from 'components/NewsletterForm'
+import { TreeMenu } from 'components/TreeMenu'
+import FeaturedPost from 'components/Edition/FeaturedPost'
+import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import { useLandingPosts } from '../useLandingPosts'
 import { useCategoryMenu } from '../useCategoryMenu'
-import CategoryTree from '../CategoryTree'
 import PostSection from '../PostSection'
-import Hero from '../Hero'
-import SortToggle, { SortValue } from '../SortToggle'
 import { LandingVariantProps } from '../types'
+
+type SortValue = 'recent' | 'popular'
 
 /**
  * Sidebar explorer, built on the handbook's `ReaderView` shell so it inherits the exact chrome:
  * the darker `secondary`-scheme sub-toolbar + left nav rail, with bright `primary`-scheme main
- * content. Categories render through `CategoryTree` (collapsible, expand-in-place). The main column shows the hero
- * (most popular) plus a 2-up feed toggled between Recent and Popular.
+ * content. Categories render through the shared `TreeMenu` in `expandOnly` mode (collapsible,
+ * expand-in-place). The main column shows the hero (most popular) via the shared `FeaturedPost`
+ * plus a 2-up feed toggled between Recent and Popular.
  */
 export default function SidebarExplorer({ folder, title, intro }: LandingVariantProps) {
     const { hero, popular, recent, isLoading } = useLandingPosts(folder)
@@ -37,7 +40,9 @@ export default function SidebarExplorer({ folder, title, intro }: LandingVariant
                         ))}
                     </div>
                 ) : (
-                    <CategoryTree items={categoryItems} />
+                    // Keyed on load so it mounts once the items are present (TreeMenu memoizes items on
+                    // first render). expandOnly = category rows toggle in place instead of navigating.
+                    <TreeMenu key="loaded" items={categoryItems} watchPath={false} expandOnly />
                 )}
             </div>
         </div>
@@ -54,13 +59,29 @@ export default function SidebarExplorer({ folder, title, intro }: LandingVariant
             proseSize="base"
         >
             <div className="not-prose space-y-8">
-                <Hero post={hero} isLoading={isLoading} titleClassName="text-xl @2xl:text-2xl" />
+                <FeaturedPost
+                    {...hero?.attributes}
+                    isLoading={isLoading}
+                    containerStack
+                    titleClassName="text-xl @2xl:text-2xl"
+                />
                 <PostSection
                     title={sort === 'recent' ? 'Most recent' : 'Most popular'}
                     posts={posts}
                     isLoading={isLoading}
                     columns={2}
-                    action={<SortToggle value={sort} onChange={setSort} />}
+                    action={
+                        <ToggleGroup
+                            title="Sort by"
+                            hideTitle
+                            value={sort}
+                            onValueChange={(v) => v && setSort(v as SortValue)}
+                            options={[
+                                { label: 'Recent', value: 'recent' },
+                                { label: 'Popular', value: 'popular' },
+                            ]}
+                        />
+                    }
                 />
                 <NewsletterForm placement="blog-index" />
             </div>

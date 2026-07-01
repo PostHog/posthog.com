@@ -117,7 +117,7 @@ const CategoryTile = ({ folder, label }: { folder: string; label: string }) => {
 /**
  * Renders the clickable category tiles for a folder as a responsive auto-fit grid, sourced from
  * the Squeak/Strapi `post-tags` API. Used by the founders Hub. Preserves the exact tag set,
- * icons, and `/${folder}/${slug}` links. (The landing sidebar uses `CategoryTree` instead.)
+ * icons, and `/${folder}/${slug}` links. (The landing sidebar uses the shared `TreeMenu` instead.)
  */
 export default function CategoryGrid({ folder, className = '' }: CategoryGridProps) {
     const { tags, loading } = useCategoryTags(folder)
