@@ -50,7 +50,7 @@ The agent routinely got these details wrong because it was operating in a contex
 
 ![The PostHog Wizard in action](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/wizard_b75470874d.jpg)
 
-*The wizard is open source. You should steal it!*
+<Caption>The wizard is <a href="https://github.com/PostHog/wizard">open source</a>. You should steal it!</Caption>
 
 Our Docs team of technical writers became a [Docs & Wizard team](/teams/docs-wizard) of context engineers – same people, different mission. Their job became building a library of context for agents, and a delivery system that made it accessible.
 
