@@ -5,6 +5,21 @@ import { getParams, sortOptions } from 'components/Edition/Posts'
 const POPULAR_SORT = sortOptions[0].sort
 const RECENT_SORT = sortOptions[1].sort
 
+// CMS excerpts are auto-generated with inline markdown stripped, which leaves double spaces and
+// spaces before punctuation (e.g. "Session Replay , Data Warehouse ,"). Tidy it for display.
+const cleanExcerpt = (excerpt: unknown): unknown =>
+    typeof excerpt === 'string'
+        ? excerpt
+              .replace(/\s+/g, ' ')
+              .replace(/\s+([,.;:!?])/g, '$1')
+              .trim()
+        : excerpt
+
+const cleanPost = (post: any) =>
+    post?.attributes?.excerpt
+        ? { ...post, attributes: { ...post.attributes, excerpt: cleanExcerpt(post.attributes.excerpt) } }
+        : post
+
 interface UseLandingPostsResult {
     hero: any | undefined
     popular: any[]
@@ -15,7 +30,7 @@ interface UseLandingPostsResult {
 /**
  * Fetches the "most popular" and "most recent" posts for a given folder (e.g. `founders`,
  * `blog`, `newsletter`) using the same Strapi query the rest of the site uses. The hero is the
- * single highest-scoring post; `popular` excludes it so it isn't shown twice.
+ * single highest-scoring post; both feeds exclude it so it's never shown twice.
  */
 export function useLandingPosts(folder: string): UseLandingPostsResult {
     const { posts: popularPosts, isLoading: popularLoading } = usePosts({
@@ -28,9 +43,10 @@ export function useLandingPosts(folder: string): UseLandingPostsResult {
     const [hero, ...popular] = popularPosts || []
 
     return {
-        hero,
-        popular,
-        recent: recentPosts || [],
+        hero: cleanPost(hero),
+        popular: popular.map(cleanPost),
+        // Drop the hero from the recent feed too (popular already excludes it via destructuring).
+        recent: (recentPosts || []).filter((post: any) => post?.id !== hero?.id).map(cleanPost),
         isLoading: popularLoading || recentLoading,
     }
 }
