@@ -15,7 +15,7 @@ The customer should never have to figure out who to contact. They reach out to e
 ### tl;dr
  - TAM is focused on and leading commercial conversations (product adoption, renewals, expansion, etc...)
  - CSM is focused on and leading technical conversations (efficient implementation, product training, support escalation)
- - TAMs and CSMs should meet regularly (every other week / once a month) to discuss where each person is focused on the account and agree to next steps
+ - TAMs and CSMs should meet regularly (every other week / once a month) to discuss where each person is focused on the account and agree to next steps and have a shared account plan documented
  - These roles are not exclusive. CSM should be able to speak to product adoption, TAMs should be able to speak to efficient implementation
 
 
