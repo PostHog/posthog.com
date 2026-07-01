@@ -105,8 +105,11 @@ We use Gmail for our email and the team uses many different clients from [Superh
 **Calendly:**
 We use Calendly for scheduling meetings. In order to schedule a meeting between a customer and multiple members on the PostHog team, click on "Event types" in the left hand navigation, then click "+ New Event Type" button in the top right, and select "Group" from the dropdown. This will allow you to create a group meeting and add multiple team members to the event and create a link you can share with the customer.
 
+**Gong**
+We use Gong for call recording and notetaking. You will need to integrate Gong with your calendar so it can automatically join your calls. You can request access via Zluri (type /zluri in any Slack channel), then follow the setup steps on the [Sales & CS Tools handbook page](/handbook/growth/sales/sales-and-cs-tools). Note that Gong requires a Zoom Pro account, and you will want the Gong Meeting Manager extension to trigger the consent page when joining calls.
+
 **BuildBetter:**
-We use BuildBetter for call recording and notetaking. You will need to integrate BuildBetter with your calendar in order for it to automatically join your calls. To do so, click on settings and look for the integrations link under account (not the one under organization) and follow the steps from there.
+We used BuildBetter for call recording and note-taking. Some recordings in BuildBetter are still used for training purposes.
 
 **Zoom:**
 We use Zoom for sales calls, and if you have Calendly properly integrated, calls that are booked through the tool will default to Zoom. You can find backgrounds to use for the calls here: [This is fine \(and other awesome PostHog wallpapers\)](/blog/posthog-wallpapers).
