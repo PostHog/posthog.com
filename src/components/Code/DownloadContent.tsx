@@ -2,39 +2,29 @@ import { CallToAction, TrackedCTA } from 'components/CallToAction'
 import Link from 'components/Link'
 import React, { useEffect, useState } from 'react'
 
+const DOWNLOAD_URL = 'https://code.posthog.com/download'
 const RELEASES_URL = 'https://github.com/PostHog/code/releases/latest'
-const LATEST_API_URL = 'https://api.github.com/repos/PostHog/code/releases/latest'
-
-const CACHE_KEY = 'posthog-code-latest-release'
-const CACHE_TTL = 1000 * 60 * 60
-
-type PlatformKey = 'mac-arm64' | 'mac-x64' | 'windows-x64' | 'linux-x64' | 'linux-arm64'
-
-type Release = {
-    version?: string
-    platforms: Partial<Record<PlatformKey, string>>
-}
 
 type OS = 'mac' | 'windows' | 'linux' | 'unknown'
-type Arch = 'arm64' | 'x64' | 'unknown'
+type MacArch = 'arm64' | 'x64'
 
-const PLATFORM_LABELS: Record<PlatformKey, string> = {
-    'mac-arm64': 'macOS (Apple Silicon)',
-    'mac-x64': 'macOS (Intel)',
-    'windows-x64': 'Windows',
-    'linux-x64': 'Linux (x64)',
-    'linux-arm64': 'Linux (Arm64)',
+// code.posthog.com serves the latest build published to the auto-update server.
+// It only covers Apple Silicon and Windows today; Intel Mac and Linux link to
+// the GitHub release assets because the worker bounces unsupported platforms
+// back to /code.
+const PLATFORMS = [
+    { key: 'mac-arm64', label: 'macOS (Apple Silicon)', url: `${DOWNLOAD_URL}/mac` },
+    { key: 'mac-x64', label: 'macOS (Intel)', url: RELEASES_URL },
+    { key: 'windows-x64', label: 'Windows', url: `${DOWNLOAD_URL}/windows` },
+    { key: 'linux', label: 'Linux', url: RELEASES_URL },
+] as const
+
+type Platform = (typeof PLATFORMS)[number]
+type PlatformKey = Platform['key']
+
+function getPlatform(key: PlatformKey): Platform {
+    return PLATFORMS.find((p) => p.key === key) as Platform
 }
-
-const ALL_PLATFORMS: PlatformKey[] = ['mac-arm64', 'mac-x64', 'windows-x64', 'linux-x64', 'linux-arm64']
-
-const ASSET_MATCHERS: Array<[PlatformKey, (name: string) => boolean]> = [
-    ['mac-arm64', (n) => n.endsWith('-arm64.dmg')],
-    ['mac-x64', (n) => n.endsWith('-x64.dmg')],
-    ['windows-x64', (n) => n.endsWith('.exe')],
-    ['linux-x64', (n) => n.endsWith('-x64.AppImage')],
-    ['linux-arm64', (n) => n.endsWith('-arm64.AppImage')],
-]
 
 function detectOS(): OS {
     if (typeof navigator === 'undefined') return 'unknown'
@@ -55,91 +45,41 @@ function detectOS(): OS {
     return 'unknown'
 }
 
-async function detectArch(os: OS): Promise<Arch> {
+async function detectMacArch(): Promise<MacArch> {
     try {
         const uaData = (navigator as any)?.userAgentData
         if (uaData?.getHighEntropyValues) {
             const { architecture } = await uaData.getHighEntropyValues(['architecture'])
-            if (architecture === 'arm') return 'arm64'
             if (architecture === 'x86') return 'x64'
         }
     } catch {
-        // ignore — fall through to defaults
+        // ignore — assume Apple Silicon
     }
-    if (os === 'mac') return 'arm64'
-    if (os === 'linux') return 'x64'
-    return 'unknown'
-}
-
-function platformKey(os: OS, arch: Arch): PlatformKey | null {
-    if (os === 'mac') return arch === 'x64' ? 'mac-x64' : 'mac-arm64'
-    if (os === 'windows') return 'windows-x64'
-    if (os === 'linux') return arch === 'arm64' ? 'linux-arm64' : 'linux-x64'
-    return null
-}
-
-function parseRelease(data: any): Release {
-    const assets: Array<{ name?: string; browser_download_url?: string }> = Array.isArray(data?.assets)
-        ? data.assets
-        : []
-    const platforms: Partial<Record<PlatformKey, string>> = {}
-    for (const [key, match] of ASSET_MATCHERS) {
-        const asset = assets.find((a) => typeof a?.name === 'string' && match(a.name))
-        if (asset?.browser_download_url) platforms[key] = asset.browser_download_url
-    }
-    const tag = typeof data?.tag_name === 'string' ? data.tag_name : undefined
-    return { version: tag ? tag.replace(/^v/, '') : undefined, platforms }
-}
-
-async function loadRelease(): Promise<Release | null> {
-    try {
-        const cached = window.localStorage.getItem(CACHE_KEY)
-        if (cached) {
-            const parsed = JSON.parse(cached)
-            if (parsed && typeof parsed.ts === 'number' && Date.now() - parsed.ts < CACHE_TTL) {
-                return parsed.data as Release
-            }
-        }
-    } catch {
-        // ignore cache read errors
-    }
-    try {
-        const res = await fetch(LATEST_API_URL, { headers: { Accept: 'application/vnd.github+json' } })
-        if (!res.ok) return null
-        const release = parseRelease(await res.json())
-        try {
-            window.localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), data: release }))
-        } catch {
-            // ignore cache write errors
-        }
-        return release
-    } catch {
-        return null
-    }
+    return 'arm64'
 }
 
 export function DownloadContent({ className }: { className?: string }): JSX.Element {
     const [os, setOS] = useState<OS>('unknown')
-    const [arch, setArch] = useState<Arch>('unknown')
-    const [release, setRelease] = useState<Release | null>(null)
+    const [macArch, setMacArch] = useState<MacArch>('arm64')
 
     useEffect(() => {
-        const detectedOS = detectOS()
-        setOS(detectedOS)
-        detectArch(detectedOS).then(setArch)
-        loadRelease().then(setRelease)
+        const detected = detectOS()
+        setOS(detected)
+        if (detected === 'mac') detectMacArch().then(setMacArch)
     }, [])
 
-    const platforms = release?.platforms || {}
-    const urlFor = (key: PlatformKey | null): string => (key && platforms[key]) || RELEASES_URL
-
-    const primaryKey = platformKey(os, arch)
-    const primaryUrl = urlFor(primaryKey)
-    const primaryLabel = primaryKey ? `Download for ${PLATFORM_LABELS[primaryKey]}` : 'Download PostHog Code'
-
-    const macAltKey: PlatformKey | null = os === 'mac' ? (primaryKey === 'mac-x64' ? 'mac-arm64' : 'mac-x64') : null
-
-    const version = release?.version
+    const primaryKey: PlatformKey | null =
+        os === 'mac'
+            ? macArch === 'x64'
+                ? 'mac-x64'
+                : 'mac-arm64'
+            : os === 'windows'
+            ? 'windows-x64'
+            : os === 'linux'
+            ? 'linux'
+            : null
+    const primary = primaryKey ? getPlatform(primaryKey) : null
+    const macAlt = os === 'mac' ? getPlatform(macArch === 'x64' ? 'mac-arm64' : 'mac-x64') : null
 
     return (
         <div className={className}>
@@ -150,23 +90,23 @@ export function DownloadContent({ className }: { className?: string }): JSX.Elem
 
             <div className="flex flex-wrap gap-3 mb-3 justify-center">
                 <TrackedCTA
-                    event={{ name: 'clicked code download', platform: primaryKey || 'unknown', version }}
+                    event={{ name: 'clicked code download', platform: primary?.key || 'unknown' }}
                     type="primary"
                     size="lg"
-                    to={primaryUrl}
+                    to={primary?.url || DOWNLOAD_URL}
                 >
-                    {primaryLabel}
+                    {primary ? `Download for ${primary.label}` : 'Download PostHog Code'}
                 </TrackedCTA>
                 <CallToAction type="secondary" size="lg" to="/docs/posthog-code" state={{ newWindow: true }}>
                     Read the docs
                 </CallToAction>
             </div>
 
-            {macAltKey && (
+            {macAlt && (
                 <p className="mb-8 text-sm text-secondary">
-                    {primaryKey === 'mac-arm64' ? 'On an Intel Mac? ' : 'On an Apple Silicon Mac? '}
-                    <Link to={urlFor(macAltKey)} external>
-                        Download the {PLATFORM_LABELS[macAltKey]} build
+                    {macAlt.key === 'mac-x64' ? 'On an Intel Mac? ' : 'On an Apple Silicon Mac? '}
+                    <Link to={macAlt.url} external>
+                        Download the {macAlt.label} build
                     </Link>
                 </p>
             )}
@@ -174,20 +114,19 @@ export function DownloadContent({ className }: { className?: string }): JSX.Elem
             <div className="mt-12">
                 <p className="mb-4 text-sm text-secondary uppercase tracking-wide">All platforms</p>
                 <div className="flex flex-wrap gap-2 justify-center">
-                    {ALL_PLATFORMS.map((key) => (
+                    {PLATFORMS.map((p) => (
                         <TrackedCTA
-                            key={key}
-                            event={{ name: 'clicked code download', platform: key, version }}
+                            key={p.key}
+                            event={{ name: 'clicked code download', platform: p.key }}
                             type="secondary"
                             size="sm"
-                            to={urlFor(key)}
+                            to={p.url}
                         >
-                            {PLATFORM_LABELS[key]}
+                            {p.label}
                         </TrackedCTA>
                     ))}
                 </div>
                 <p className="mt-6 text-sm text-secondary">
-                    {version ? `Latest release: v${version}. ` : ''}
                     <Link to={RELEASES_URL} external>
                         View all releases and notes
                     </Link>

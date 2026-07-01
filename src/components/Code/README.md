@@ -24,6 +24,11 @@ Hook that returns `true` when the user has `prefers-reduced-motion: reduce` enab
 
 ## Content components
 
+### `DownloadContent`
+Download UI for PostHog Code, shared by the `/code#download` hero swap and the standalone `/code/download` page. Detects the visitor's OS (and Mac architecture via `userAgentData` where available) and links to `https://code.posthog.com/download/*`, the redirect worker backed by the auto-update server. The worker only serves macOS (Apple Silicon) and Windows; Intel Mac and Linux buttons link to the latest GitHub release page instead, since the worker redirects unsupported platforms back to `/code`.
+
+**Props:** `className`
+
 ### `SignalsCallout`
 Grid display of signal types (In-app activity, Logs, Errors, etc.) with icons. Responsive: 3-col at `@2xl`, 2-col below.
 
