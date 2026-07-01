@@ -158,7 +158,7 @@ It's the same plumbing you already use for general software infrastructure, but 
 
 When a PR is merged, or a docs page is updated at PostHog, that context can reach an agent within minutes.
 
-![Context infrastructure network diagram](https://res.cloudinary.com/dmukukwp6/image/upload/v1782746621/context_engineering_lesson5_infrastructure_55c74eff3b.png)
+![Context infrastructure network diagram](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Group_144561_8e52377cd6.png)
 
 With the wizard's context layer as shared infrastructure, we can ship a new customer-facing agent to production in an afternoon.
 
