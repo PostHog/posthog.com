@@ -35,9 +35,7 @@ Missing capabilities are a failure mode. Say you ask an agent to set up an [A/B 
 
 ![Agent-first infrastructure](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Pasted_image_20260630115314_6ae3550668.png)
 
-This doesn't mean that tools are all you need. It won't be enough to just let Claude use your product on its own. Relying entirely on a model provider is too much risk. Building your own harness lets you guarantee quality, protect your brand, and make continuous improvements. 
-
-Even [OpenAI has said](https://openai.com/index/harness-engineering/) that early usage of Codex struggled "not because Codex was incapable, but because the environment was underspecified. The agent lacked the tools, abstractions, and internal structure required to make progress toward high-level goals. The primary job of our engineering team became enabling the agents to do useful work."
+This doesn't mean that tools are all you need. It won't be enough to just let Claude use your product on its own. Relying entirely on a model provider is too much risk. Building your own harness lets you guarantee quality, protect your brand, and make continuous improvements. Even [OpenAI has said](https://openai.com/index/harness-engineering/) that agents have struggled not because they are incapable, but because they lack "the tools, abstractions, and internal structure required to make progress toward high-level goals."
 
 Finally, what makes your agent special is its context. The model is the same for everyone, your moat is the source code, usage data, customer data, and product skills you feed it. This means [context engineering](https://newsletter.posthog.com/p/we-used-ai-to-5x-conversion-and-2x), creating pipelines and flows to get fresh, valuable context to the agents when they need it.  
 
@@ -56,9 +54,9 @@ Most generative UI will be disposable, but some will become artifacts: outputs w
 Text and generative UI cover much of what a product needs, but not everything. Some jobs will continue to need persistent, purpose-built UIs, like:
 
 - **Trust and verification surfaces** confirming the agent did what you wanted. Checking work, not doing it.
-- **Triage and inbox surfaces** listing decisions that need a human. Approvals, ambiguous calls, unclosed support tickets. 
+- **Triage and inbox surfaces** listing decisions that need a human. Approvals, ambiguous calls, unclosed support tickets.
 
-The trap is keeping your old UI and just making it read only. This feels like progress as your agent is now doing all the doing, but it's a half-measure. Most of that UI existed to power the doing and now that can be delivered as text by an agent.
+It's tempting to make your UI agent-first by removing the buttons, forms, and other parts of the UI that power the doing, but this is a half-measure. Most of this new "read-only" UI can be delivered as text by an agent, making it redundant and misaligned with what humans need the UI for.
 
 Take our feature flags page. The jobs to be done are:
 
@@ -69,7 +67,7 @@ Take our feature flags page. The jobs to be done are:
 
 An agent can answer all these questions in a sentence. You're not verifying the agent's work and there's no decision to be made. You're just checking the flag's state. A 2030 flags page shows how agents change rollouts and previews a pull request to clear up stale flags. 
 
-The question to ask is: **is a human looking at this for trust and judgement, or to act?** If it's an action and give the agent the capability, if it's to trust or judgement, build for that specifically. 
+The question to ask is: **is a human looking at this for trust and judgement, or to act?** If it's an action, give the agent the capability. If it's to trust or judgement, build for that specifically. 
 
 ## Be everywhere
 
