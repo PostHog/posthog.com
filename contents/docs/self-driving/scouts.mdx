@@ -13,17 +13,28 @@ Self-driving is currently in open beta.
 
 </CalloutBox>
 
-A scout is a scheduled agent that explores your PostHog data and raises a hand when it finds something worth knowing. Scouts are one of the things that start the [self-improving loop](/docs/self-driving/self-improving-loop): they turn raw product data into [signals](/docs/self-driving/signals) the rest of the loop can act on.
+A scout is a scheduled agent that explores your PostHog data and raises a hand when it finds something worth knowing. Scouts are one of the things that start the [self-improving loop](/docs/self-driving/self-improving-loop): they turn raw product data into [signals](/docs/self-driving/signals) and [reports](/docs/self-driving/reports) the rest of the loop can act on.
 
 ## How a scout works
 
-A scout runs on a schedule. Each run, it looks at one slice of your data, decides whether anything is worth surfacing, and if so emits a [signal](/docs/self-driving/signals): a structured finding with the evidence behind it and a suggested action.
+A scout runs on a schedule. Each run, it looks at one slice of your data, decides whether anything is worth surfacing, and if so files what it found. A scout has two ways to do that:
+
+- **File a report directly.** When a scout finishes its research with a complete, well-formed finding, it authors a [report](/docs/self-driving/reports) straight into your [inbox](/docs/self-driving/inbox) – a title, a summary, the evidence behind it, and a call on how actionable it is. Most of the built-in scouts work this way, and a scout-authored report shows the scout's name in the inbox so you know where it came from.
+- **Emit a signal.** When a finding is a weaker or partial observation – the kind that only becomes meaningful next to other findings – the scout emits a [signal](/docs/self-driving/signals) instead and lets the pipeline deduplicate it and group it with related signals into a report.
+
+Either way, the bar is the same: a structured finding with the evidence behind it and a suggested action. The difference is whether the scout has already done enough research to stand behind the finding as a single inbox item, or whether the pipeline should consolidate it with others first.
 
 A scout reads your data through the same [PostHog MCP](/docs/model-context-protocol) you can connect to Claude Code or Cursor, so it can see anything in PostHog out of the box – events, [data warehouse](/docs/data-warehouse) tables, insights, dashboards – with nothing to wire up per scout. Because any source you land in PostHog becomes queryable, a scout isn't limited to product analytics: a Slack channel, a billing system, or a support inbox synced to your warehouse is fair game too.
 
 A scout also keeps a durable memory between runs. Each run, it reads back what earlier runs learned and recorded – what's normal, what it's already surfaced, what it decided to hold – so it dedupes against itself and gets sharper over time instead of starting cold. That memory is what makes a scout a long-running agent rather than a one-shot check.
 
 Because scouts run on a schedule, the loop keeps noticing problems and opportunities on its own, instead of waiting for someone to file a ticket.
+
+## Running a scout on demand
+
+Scouts run themselves on their schedule, but you can also trigger a run on demand – useful to test a scout right after authoring it, or to refresh its findings without waiting for the next scheduled run. A scout that's still disabled can be run this way too, so you can see what it would surface before turning it on.
+
+On-demand runs count against the same daily run budget as scheduled runs, so repeatedly re-running the same scout can use up your project's daily allowance.
 
 ## Built-in and custom scouts
 
@@ -37,7 +48,7 @@ The difference is how they look. A signal source watches a single stream in real
 
 ## Next step
 
-A scout's output is a signal. See what's in one.
+Whether a scout files a report directly or lets the pipeline do the grouping, every finding is built on signals. See what's in one.
 
 <CallToAction type="primary" to="/docs/self-driving/signals">
   Signals

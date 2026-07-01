@@ -27,13 +27,16 @@ PostHog ships a fleet of canonical scouts out of the box, each watching a common
 | [CSP violations](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-csp-violations/SKILL.md) | Content Security Policy violation clusters, per-directive bursts, and suspicious third-party domains |
 | [Customer analytics](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-customer-analytics/SKILL.md) | Churn-risk shapes on named accounts – engagement cliffs, dormancy, single-threaded champions |
 | [Data pipelines](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-data-pipelines/SKILL.md) | Delivery failures across CDP destinations, batch exports, and workflows, where config and reality disagree |
+| [Data warehouse](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-data-warehouse/SKILL.md) | Imports that quietly stop keeping their promise – failed source connections, stuck or silently stale syncs, row-volume cliffs, and failed materialized views |
 | [Error tracking](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-error-tracking/SKILL.md) | Error spikes, stuck loops, and fingerprint clusters, triaged by how many users they hit |
 | [Experiments](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-experiments/SKILL.md) | Validity threats like sample-ratio mismatch, plus zombie experiments running past their useful life |
 | [Feature flags](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-feature-flags/SKILL.md) | Evaluation cliffs, ghost flags (keys no longer in code), and flag debt |
 | [General](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-general/SKILL.md) | Cross-product correlations and any surface no specialist covers |
 | [Health checks](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-health-checks/SKILL.md) | Setup health issues – no live events, outdated SDKs, missing reverse proxy, failing warehouse models |
 | [Inbox validation](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-inbox-validation/SKILL.md) | Whether a merged fix actually held, re-measured after a deployment soak window |
+| [Insight alerts](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-insight-alerts/SKILL.md) | Alert firings a human likely missed, especially ones the normal notification path stayed silent on |
 | [Logs](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-logs/SKILL.md) | Volume bursts, severity-distribution shifts, service silence, and new error message patterns |
+| [MCP tool calls](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-mcp-tool-calls/SKILL.md) | MCP tools that need improvement – broad failure rates, retry hammering, and slow or context-bloating responses |
 | [Observability gaps](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-observability-gaps/SKILL.md) | Coverage gaps – high-volume events with no insight, dashboard, or alert |
 | [Product analytics](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-product-analytics/SKILL.md) | Regressions in your funnels, retention, lifecycle, stickiness, and paths |
 | [Replay Vision](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-replay-vision/SKILL.md) | Whether Replay Vision scanners are still observing, and what their observations surface |
@@ -61,7 +64,7 @@ The common thread is that a scout isn't limited to product analytics. Any source
 
 ## Make your own
 
-You don't write a scout by hand. In [PostHog Code](/code), open the scouts page and pick the "Make a scout" suggestion: it scans your project and proposes custom scouts grounded in your actual data. You can also ask any agent connected to the PostHog MCP to build one.
+You don't write a scout by hand. In [PostHog Code](/code), open the scouts page and pick the "Make a scout" suggestion: it scans your project and proposes custom scouts grounded in your actual data. You can also ask any agent connected to the PostHog MCP to build one. Once it exists, [run it on demand](/docs/self-driving/scouts#running-a-scout-on-demand) to see what it surfaces before enabling it.
 
 For a deep dive – two real scouts traced end to end, with a walkthrough video – read [What is a scout?](/blog/what-is-a-scout).
 
