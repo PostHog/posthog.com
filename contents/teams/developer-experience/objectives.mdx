@@ -1,38 +1,19 @@
 ## Q3 2026 Objectives
 
-**North star: make it so shipping 10,000 PRs a month is easy.** Agents are going to write most of the code, so the quarter is about hardening the one loop that makes that volume survivable: write → verify → review/merge → measure. We want it fast, trusted, and driveable end to end. These are directions and bets, not a fixed plan.
+**North star: make shipping 10,000 PRs a month easy.** Agents will write most of the code, so the quarter is about hardening the loop that makes that volume work: write → verify → review/merge → measure.
 
 ### Write: local dev loop (<TeamMember name="Raúl Negrón-Otero" photo />)
 
-Cut inner-loop time and let agents run the stack and tests locally.
-- Make cloud devboxes the easy, sanctioned way to spin up a full stack
-- Same commands run locally and in CI, with per-product health checks
-- Keep cutting startup time and memory footprint
+Shorten the inner loop and let agents run the stack and tests locally, with devboxes as a favored way to spin up a full stack. Local agent steering (skills, contexts) is part of this.
 
-### Verify: CI loop we trust (<TeamMember name="Julian Bez" photo />, <TeamMember name="Georges-Antoine Assi" photo />)
+### Verify: CI loop we trust (<TeamMember name="Julian Bez" photo />, <TeamMember name="Georges-Antoine Assi" photo />, <TeamMember name="Raúl Negrón-Otero" photo />)
 
-Fast, cheap, low-flake CI that people actually believe.
-- Keep test sharding optimal and hold a wall-clock target
-- Faster preview and end-to-end environments on sandboxes
-- Drive flakiness down and make trust measurable
-- Explore merge queues and deeper CI-runner partnerships
+Fast, cheap, low-flake CI that people actually believe. Keep sharding optimal against a wall-clock target, move preview and end-to-end onto sandboxes, and drive flakiness down.
 
 ### Review & merge: agents gating agents (everyone)
 
-As agents author most PRs and humans move up to steering, no one reviews every diff by hand. That judgment gets delegated to independent reviewer agents, with humans as policy authors and escalation handlers. The subject is **trust**: how do you land agent-authored code without a human reading every line?
-- Route PRs by blast radius, from auto-merge for mechanical changes to human review for anything risky
-- Reviewer agents that gate, not just comment, aligned with existing review tooling
-- A merge orchestrator as the final gate (already gating bot-authored and stacked PRs)
-- Deploy and rollback as the safety valve that makes aggressive auto-merge cheap to undo
+As agents author most PRs, no one reviews every diff by hand. Route PRs by blast radius, let independent reviewer agents gate rather than just comment, and lean on deploy and rollback as the safety valve.
 
-### Measure: how do we know it's getting better? (<TeamMember name="Raúl Negrón-Otero" photo />)
+### Measure: how do we know it's getting better? (everyone)
 
-Every loop above gets a metric.
-- PR-to-merge time, flakiness, and CI run times
-- Per-product attribution so teams own their own CI cost and flakiness
-- A clear read on what DevEx costs and returns
-- Non-goal: measuring individual engineering productivity
-
-### Cross-cutting: local agent steering (everyone)
-
-Skills, prompts, and context that make the whole loop agent-driveable: the generation half that review gates.
+Every loop above gets a metric: PR-to-merge time, flakiness, CI run times, and per-product attribution so teams own their own cost. Non-goal: measuring individual engineering productivity.
