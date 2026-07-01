@@ -36,6 +36,7 @@ import TeamMember from './components/TeamMember'
 import WistiaEmbed from './components/WistiaEmbed'
 import WizardCommand from './components/WizardCommand'
 import WizardCTA from './components/WizardCTA'
+import PlatformInstall from './components/PlatformInstall'
 
 // Global MDX components
 export const shortcodes = {
@@ -78,4 +79,5 @@ export const shortcodes = {
     WistiaEmbed,
     WizardCommand,
     WizardCTA,
+    PlatformInstall,
 }
