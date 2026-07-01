@@ -771,14 +771,15 @@ const appSettings: AppSettings = {
     '/connect/posthog/redirect': {
         size: {
             min: {
-                width: 420,
-                height: 340,
+                width: 425,
+                height: 250,
             },
             max: {
-                width: 520,
-                height: 460,
+                width: 425,
+                height: 280,
             },
-            fixed: false,
+            fixed: true,
+            autoHeight: true,
         },
         position: {
             center: true,

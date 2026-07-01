@@ -1,6 +1,9 @@
 import React, { useRef, useState } from 'react'
 import { CallToAction } from 'components/CallToAction'
 import { useUser } from 'hooks/useUser'
+import Input from 'components/OSForm/input'
+import Wizard from 'components/Wizard'
+import { IconSpinner } from '@posthog/icons'
 
 interface PostHogDisambiguationProps {
     pendingToken: string
@@ -60,52 +63,18 @@ const PostHogDisambiguation: React.FC<PostHogDisambiguationProps> = ({ pendingTo
     }
 
     return (
-        <div data-scheme="primary" className="max-w-sm w-full space-y-3">
-            {mode === 'choose' ? (
-                <>
-                    <h3 className="text-base font-semibold leading-tight m-0">Welcome to PostHog.com</h3>
-                    <p className="text-sm m-0">Create a new community account, or connect one you already have.</p>
-                    <CallToAction type="primary" size="sm" width="full" disabled={busy} onClick={handleCreate}>
-                        Create a new account
-                    </CallToAction>
-                    <button
-                        type="button"
-                        className="text-sm text-red dark:text-yellow font-semibold"
-                        onClick={() => setMode('link')}
-                    >
-                        I already have an account
-                    </button>
-                </>
-            ) : (
-                <>
-                    <h3 className="text-base font-semibold leading-tight m-0">Connect your existing account</h3>
-                    <p className="text-sm m-0">Log in to link PostHog sign-in to your posthog.com account.</p>
-                    <form onSubmit={handleLink} className="space-y-2">
-                        <input
-                            className="rounded-md border !border-border p-1 w-full"
-                            placeholder="Email"
-                            value={identifier}
-                            onChange={(e) => setIdentifier(e.target.value)}
-                        />
-                        <input
-                            className="rounded-md border !border-border p-1 w-full"
-                            type="password"
-                            placeholder="Password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                        <button type="submit" className="hidden" />
-                        <CallToAction
-                            type="primary"
-                            size="sm"
-                            width="full"
-                            disabled={busy}
-                            onClick={() => handleLink()}
+        <div className="size-full">
+            <Wizard
+                leftNavigation={
+                    mode === 'choose' ? (
+                        <button
+                            type="button"
+                            className="text-sm text-red dark:text-yellow font-semibold"
+                            onClick={() => setMode('link')}
                         >
-                            Log in and connect
-                        </CallToAction>
-                    </form>
-                    {!emailInUse && (
+                            I already have an account
+                        </button>
+                    ) : !emailInUse ? (
                         <button
                             type="button"
                             className="text-sm text-red dark:text-yellow font-semibold"
@@ -113,10 +82,66 @@ const PostHogDisambiguation: React.FC<PostHogDisambiguationProps> = ({ pendingTo
                         >
                             Back
                         </button>
-                    )}
-                </>
-            )}
-            {error && <p className="text-red text-sm font-bold m-0">{error}</p>}
+                    ) : undefined
+                }
+                rightNavigation={
+                    mode === 'choose' ? (
+                        <CallToAction type="primary" size="sm" disabled={busy} onClick={handleCreate}>
+                            {busy ? <IconSpinner className="size-4 animate-spin my-0.5" /> : 'Create a new account'}
+                        </CallToAction>
+                    ) : (
+                        <CallToAction type="primary" size="sm" disabled={busy} onClick={() => handleLink()}>
+                            {busy ? <IconSpinner className="size-4 animate-spin my-0.5" /> : 'Log in and connect'}
+                        </CallToAction>
+                    )
+                }
+            >
+                <div className="bg-accent px-6 py-5 flex-1">
+                    <div data-scheme="primary">
+                        {mode === 'choose' ? (
+                            <>
+                                <h3 className="text-base font-semibold leading-tight mb-2">Welcome to PostHog.com</h3>
+                                <p className="text-sm mb-0">
+                                    Create a new community account, or connect one you already have.
+                                </p>
+                            </>
+                        ) : (
+                            <>
+                                <h3 className="text-base font-semibold leading-tight">Connect your existing account</h3>
+                                <p className="text-sm mb-3">
+                                    Log in to link PostHog sign-in to your posthog.com account.
+                                </p>
+                                <form onSubmit={handleLink} className="space-y-2">
+                                    <Input
+                                        label="Email"
+                                        type="email"
+                                        size="sm"
+                                        direction="row"
+                                        name="email"
+                                        value={identifier}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                                            setIdentifier(e.target.value)
+                                        }
+                                    />
+                                    <Input
+                                        label="Password"
+                                        type="password"
+                                        size="sm"
+                                        direction="row"
+                                        name="password"
+                                        value={password}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                                            setPassword(e.target.value)
+                                        }
+                                    />
+                                    <button type="submit" className="hidden" />
+                                </form>
+                            </>
+                        )}
+                        {error && <p className="text-red dark:text-yellow text-sm font-bold mt-2 mb-0">{error}</p>}
+                    </div>
+                </div>
+            </Wizard>
         </div>
     )
 }

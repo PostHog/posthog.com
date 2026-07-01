@@ -94,30 +94,28 @@ export default function PostHogRedirect(): JSX.Element {
     return (
         <>
             <SEO title="Signing in" noindex />
-            <div data-scheme="primary" className="flex flex-col items-center justify-center h-full gap-4 p-8">
-                {errorMessage ? (
-                    <>
-                        <p className="text-red font-semibold m-0">{errorMessage}</p>
-                        <CallToAction type="primary" size="sm" to="/community">
-                            Back to community
-                        </CallToAction>
-                    </>
-                ) : pending ? (
-                    <PostHogDisambiguation
-                        pendingToken={pending.pendingToken}
-                        emailInUse={pending.emailInUse}
-                        onSuccess={() => {
-                            addToast({ title: 'Successfully signed in to PostHog.com', description: 'Welcome!' })
-                            navigate('/community', { replace: true })
-                        }}
-                    />
-                ) : (
-                    <>
-                        <IconSpinner className="size-8 animate-spin" />
-                        <p className="m-0">Signing you in&hellip;</p>
-                    </>
-                )}
-            </div>
+            {errorMessage ? (
+                <div data-scheme="primary" className="flex flex-col items-center justify-center h-full gap-4 p-8">
+                    <p className="text-red font-semibold m-0">{errorMessage}</p>
+                    <CallToAction type="primary" size="sm" to="/community">
+                        Back to community
+                    </CallToAction>
+                </div>
+            ) : pending ? (
+                <PostHogDisambiguation
+                    pendingToken={pending.pendingToken}
+                    emailInUse={pending.emailInUse}
+                    onSuccess={() => {
+                        addToast({ title: 'Successfully signed in to PostHog.com', description: 'Welcome!' })
+                        navigate('/community', { replace: true })
+                    }}
+                />
+            ) : (
+                <div data-scheme="primary" className="flex flex-col items-center justify-center h-full gap-4 p-8">
+                    <IconSpinner className="size-8 animate-spin" />
+                    <p className="m-0">Signing you in&hellip;</p>
+                </div>
+            )}
         </>
     )
 }
