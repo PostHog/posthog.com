@@ -23,8 +23,6 @@ Oh, and PostHog Cloud EU also happens to be faster for users located in Europe, 
 
 PostHog Cloud EU offers everything you'd expect of PostHog – analytics, session recording, experiments and more. The only difference is that you can now choose to host in a different region, at no extra cost. 
 
-<WizardCTA />
-
 <GDPRForm />
 
 ## FAQ
@@ -50,6 +48,8 @@ For now, we're charging [the same as "regular" PostHog Cloud](../pricing). The f
 It is possible to migrate event data from another PostHog instance to EU Cloud, but it is a time-consuming process likely to take several days or weeks. There is currently no way to migrate other information, including insights, dashboards, user accounts, feature flags or API keys. 
 
 We strongly recommend that users with large volumes of data begin by setting up and connect a new EU cloud instance and only attempt to migrate data later, if needed, by following [this migration tutorial](/tutorials/migrate-eu-cloud). 
+
+<WizardCTA />
 
 ## GDPR compliance checklist
 
