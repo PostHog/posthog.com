@@ -1,51 +1,40 @@
-## Q2 2026 Objectives
+## Q3 2026 Objectives
 
-### Dev environments — <TeamMember name="Raúl Negrón-Otero" photo />, <TeamMember name="Georges-Antoine Assi" photo />
+**North star: make it so 10,000 PRs a month is easy.** Agents are going to do most of the coding, so the quarter is about hardening the one loop that makes that volume survivable — write → verify → review/merge → measure — until it's fast, trusted, and driveable end to end. Directions and bets, not a Gantt chart.
 
-Clear golden path for devboxes and local isolation. Engineers can spin up an isolated stack without workarounds. Collaborate with infra and security on the approach.
-- Local resource optimization, push intent system harder
-- Worktree and stack isolation (dynamic ports, namespaced containers)
-- Devbox golden path — make it good enough that nobody builds their own
+### Write — local dev loop — <TeamMember name="Raúl Negrón-Otero" photo />
 
-### Local stack and dev experience — <TeamMember name="Georges-Antoine Assi" photo />
+Cut inner-loop time and let agents run the stack and tests locally.
+- Devboxes become the sanctioned way to spin a full stack: clean boot, agent-usable, documented
+- `hogli` everywhere it makes sense — same commands locally and in CI; `hogli doctor` smoke happy-paths per product
+- Push some of CI down to the local machine; run more tests locally
+- Keep cutting startup time (whole stack, not just Django); set a RAM ceiling
 
-Make local dev better — optimize resource usage, reduce what engineers need running.
-- Address high RAM from typegen and TS watch, runaway node processes
-- Push dev intents smarter — do we really need the whole stack?
+### Verify — CI loop we trust — <TeamMember name="Julian Bez" photo />, <TeamMember name="Georges-Antoine Assi" photo />
 
-### CI improvements — everyone
+Fast, cheap, low-flake CI that people actually believe.
+- Keep shards optimal, set a wall-clock target
+- Playwright / E2E on hogland sandboxes — faster startup for previews and E2E
+- Drive flakiness down with the flake overseer + quarantine-with-expiry; make "trust" measurable
+- Spike merge queues; formalize the Depot CI partnership
 
-Keep costs in check, improve trust in CI, address flakiness at a more general level.
-- Evaluate alternative CI runners
-- Continue flaky test visibility and management
-- Build CI observer / flaky test analyzer
+### Review & merge — agents gating agents — everyone
 
-### Product isolation — <TeamMember name="Julian Bez" photo />
+As agents author most PRs and humans level up to steering, no one reviews every diff by hand. That per-PR judgment gets delegated to independent reviewer agents, with humans as policy authors and escalation handlers. The subject is **trust** — how do you land agent-authored code without a human reading every diff? Generation without gating is slop at scale.
+- Route PRs by blast radius: mechanical (auto-merge when green + fresh), scoped inside one sealed product (agent review + policy), risky/core/migrations/security (human + agent, never auto-merged)
+- Independent / adversarial reviewer agents that gate, not just comment
+- Align with existing review tooling — don't build a competing reviewer
+- stamphog as the approver and final gate; first step already shipped (gates bot-authored and stacked PRs)
+- Deploy & rollback as the safety valve so aggressive auto-merge is cheap to undo (later)
 
-Continue migration — find products that benefit from isolation, move them. Harden multi-DB, land team scoping.
+### Measure — how do we know it's getting better? — <TeamMember name="Raúl Negrón-Otero" photo />
 
-### Visual review rollout — <TeamMember name="Julian Bez" photo />
+Every loop above gets a metric.
+- Open-PR-to-merge time, flakiness (jobs run >1×/PR), CI run times
+- Per-product attribution so teams own their own CI cost and flakiness
+- A clear number for what % of engineering spend goes to devex, so leadership can see what it costs and returns
+- Non-goal: measuring engineering productivity
 
-Continue wiring visual review into CI for screenshots. Goal: snapshot headaches move out of PRs, teams actively use it.
+### Cross-cutting — local agent steering — everyone
 
-### Major version upgrades — <TeamMember name="Julian Bez" photo />, <TeamMember name="Raúl Negrón-Otero" photo />
-
-Django 5.2 and other major versions where the performance or compatibility gains justify the effort.
-
-### Agentic coding patterns — everyone
-
-Stay on top of how engineers use agents. Continue adding skills, explore what the 6-month picture looks like.
-- How does DevEx support agent-driven development?
-- Where is the overlap with AI teams?
-
-### Secure patterns — everyone
-
-Provide secure defaults across the codebase.
-- Explore replacing dependabot with renovate, dependency cooldown periods
-- Dev machine security, supply chain safety
-
-### Metrics and observability — <TeamMember name="Raúl Negrón-Otero" photo />
-
-Track and explore more metrics to leverage for decisions.
-- CI observer, leveraging PostHog Signals
-- Running surveys or gathering data to understand dev pains
+Skills, prompts, and contexts that make the write/verify/review loop agent-driveable — the generation half that the review station gates.
