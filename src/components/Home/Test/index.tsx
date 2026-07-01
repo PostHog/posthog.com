@@ -545,6 +545,11 @@ export default function HomeTest() {
                 updateWindowTitle={false}
                 description="All your developer tools in one place. PostHog gives engineers everything to build, test, measure, and ship successful products faster. Get started free."
                 image="/images/og/default.png"
+                languageAlternates={[
+                    { hrefLang: 'en', href: '/' },
+                    { hrefLang: 'ko', href: '/ko' },
+                    { hrefLang: 'x-default', href: '/' },
+                ]}
             />
             <MDXEditor
                 jsxComponentDescriptors={jsxComponentDescriptors}
