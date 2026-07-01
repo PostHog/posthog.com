@@ -57,6 +57,7 @@ seo:
 - For quote blocks: Substack sometimes renders pull quotes or highlighted excerpts as italicized text in quotation marks (e.g. `*"Quote text here."*`). Convert these to markdown blockquotes: `> Quote text here.` — drop the surrounding quotation marks and italics.
 - Place `<NewsletterForm />` once mid-article (after the first major section) and once at the very end.
 - For images: write a placeholder in the format `![PLACEHOLDER: description of image](PLACEHOLDER)` so the user knows where to upload. **Detection tip:** a sentence that ends with a colon (`:`) followed by a blank line almost always precedes an inline image in the Substack source — treat those as image locations even if the scraper didn't return an `<img>` tag.
+- For image captions (italicized text directly below an image in Substack): use the `<Caption>` component instead of plain markdown italics, e.g. `<Caption>Caption text here</Caption>` — see `contents/newsletter/building-ai-agents.md` for examples. It renders centered by default, unlike bare `*italic*` text. If the caption contains a link, keep it as an inline `<a href="...">` tag inside the component (per "Preserve original links" below) rather than dropping it — this is easy to miss since the caption reads like a quote at first glance.
 - For code blocks: preserve the language and exact content.
 - For footnotes: use markdown footnote syntax — `[^1]` inline, and `[^1]: text` at the bottom.
 
