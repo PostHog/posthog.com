@@ -15,9 +15,9 @@ tags:
 
 By 2030, AI agents will be the primary users of software. 
 
-Many of the conversations and decisions about what we're building now are impacted by this. More and more, we're aiming towards building "2030 shaped software."
+Many of the conversations and decisions about what we're building now are impacted by this. More and more, we're aiming towards building "2030-shaped software."
 
-Of course, this is a sort of vague aspiration and "agent-first software" isn't much better. We can't predict the future, but we can share our thinking as to what 2030 shaped software will look like.
+This is a vague aspiration and "agent-first software" isn't much better. But, while we can't predict the future, we can share how we're thinking about the problem.
 
 ## Human and agent work is split
 
@@ -27,7 +27,6 @@ The current era of software is designed for humans to do all the work, but in 20
 2. **Understanding and trusting.** Humans will evaluate whether it worked, if it's safe, and what's changed.
 
 "Doing" UI like buttons and forms are going away. They will be replaced with UI that supports the two types of work above. This helps optimize humans' limited time and energy by pointing them where their input actually matters.
-f
 ## Product infrastructure is agent-first
 
 If a human can do something with your product, agents should be able to do it too. This means complete APIs, an [MCP server](/mcp), tools, and permissions. Build for [agents as a primary surface](/newsletter/agent-first-product-engineering), not an afterthought. 
@@ -44,17 +43,17 @@ Finally, what makes your agent special is its context. The model is the same for
 
 ## Chat is the front door, generative UI inside
 
-As much as people like to complain about chat as an interface, we think it's a good one. There's a reason why it's still the primary interface to work with agents and companies are doubling down with products like Slack apps (see [us](/slack)). Telling an agent what's needed and letting it go do it is a powerful interaction method.
+People like to complain about chat as an interface, but we think it's a good one. There's a reason why it's still the primary interface to work with agents and companies are doubling down with products, like Slack apps – have you tried the [PostHog Slack app](/slack)) yet? Telling an agent what's needed and letting it go do it is a powerful interaction method.
 
 But chat isn't enough because sometimes reading a paragraph is worse than glancing at a chart or flicking a toggle. Text can be too low bandwidth as it's flexible but linear; a UI is legible but rigid. Generative UI is in between. 
 
 ![Generative UI](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Pasted_image_20260630140620_c0f8fec2c3.png)
 
-Most generative UI you will throw away like any particular chat session, but some become artifacts: outputs worth keeping, sharing, and forking. Examples include reports, documents, code, pull requests, configuration, even entire apps. All of them are backed by your app's data. Generative UI is how you work with the agent right now; artifacts are what you walk away with. 
+Most generative UI will be disposable, but some will become artifacts: outputs worth keeping, sharing, and forking. Examples include reports, documents, code, pull requests, configuration, even entire apps. All of them are backed by your app's data. Generative UI is how you work with the agent right now; artifacts are what you walk away with. 
 
 ## Build UI when text isn't enough
 
-Text and generative UI cover much of what a product needs, but not everything. Some jobs will continue to need persistent, purpose-built UIs:
+Text and generative UI cover much of what a product needs, but not everything. Some jobs will continue to need persistent, purpose-built UIs, like:
 
 - **Trust and verification surfaces** confirming the agent did what you wanted. Checking work, not doing it.
 - **Triage and inbox surfaces** listing decisions that need a human. Approvals, ambiguous calls, unclosed support tickets. 
@@ -68,15 +67,15 @@ Take our feature flags page. The jobs to be done are:
 - Does it have a payload?
 - What type is it?
 
-Every one of these questions an agent can answer in a sentence. You're not verifying the agent's work and there's no decision to be made. You're just checking the flag's state. A 2030 flags page shows how agents change rollouts and previews a pull requests to clear up stale flags. 
+An agent can answer all these questions in a sentence. You're not verifying the agent's work and there's no decision to be made. You're just checking the flag's state. A 2030 flags page shows how agents change rollouts and previews a pull request to clear up stale flags. 
 
 The question to ask is: **is a human looking at this for trust and judgement, or to act?** If it's an action and give the agent the capability, if it's to trust or judgement, build for that specifically. 
 
 ## Be everywhere
 
-Agents don't work like apps. They run on their own, often for a long time. Nobody shouldn't have to sit in a browser tab watching them. 2030 products come to their users, no matter if that means [desktop](/code), Slack, mobile, email, API, or voice. 
+Agents don't work like apps. They run on their own, often for a long time. Nobody should have to sit in a browser tab watching them. 2030 products come to their users, no matter if that means [desktop](/code), Slack, mobile, email, API, or voice. 
 
-These aren't separate products; they're a shared control plane between humans and agents. They're thin clients over a shared backend so the experience is the same anywhere and the handoff between surfaces is seamless. 
+These aren't separate products; they're a shared control plane between humans and agents. They're thin clients over a shared backend, so the experience is the same anywhere and the handoff between surfaces is seamless. 
 
 This pushes you towards cloud-first. The real bottleneck when working with agents is concurrency and babysitting. Builders want to run many agents at once, point them at a backlog, and refine the output from anywhere. On-device execution can't do that. 
 
@@ -84,7 +83,7 @@ This pushes you towards cloud-first. The real bottleneck when working with agent
 
 Cloud-first only works if all that infrastructure is excellent. Sandboxes need to be rock solid: fast repo imaging, snappy execution, no crashing or freezing. Your app is ubiquitous, your infrastructure invisible. 
 
-## Building 2030 shaped software now
+## Building 2030-shaped software now
 
 2030 software requires a lot of changes, and 2026 is not 2030. As a company with multiple successful products and thousands of users relying on us, the hard part is getting there while having a real product and revenue to support. Do we retrofit or start fresh?
 
