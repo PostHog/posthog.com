@@ -1,40 +1,38 @@
 ## Q3 2026 Objectives
 
-**North star: make it so 10,000 PRs a month is easy.** Agents are going to do most of the coding, so the quarter is about hardening the one loop that makes that volume survivable — write → verify → review/merge → measure — until it's fast, trusted, and driveable end to end. Directions and bets, not a Gantt chart.
+**North star: make it so shipping 10,000 PRs a month is easy.** Agents are going to write most of the code, so the quarter is about hardening the one loop that makes that volume survivable: write → verify → review/merge → measure. We want it fast, trusted, and driveable end to end. These are directions and bets, not a fixed plan.
 
-### Write — local dev loop — <TeamMember name="Raúl Negrón-Otero" photo />
+### Write: local dev loop (<TeamMember name="Raúl Negrón-Otero" photo />)
 
 Cut inner-loop time and let agents run the stack and tests locally.
-- Devboxes become the sanctioned way to spin a full stack: clean boot, agent-usable, documented
-- `hogli` everywhere it makes sense — same commands locally and in CI; `hogli doctor` smoke happy-paths per product
-- Push some of CI down to the local machine; run more tests locally
-- Keep cutting startup time (whole stack, not just Django); set a RAM ceiling
+- Make cloud devboxes the easy, sanctioned way to spin up a full stack
+- Same commands run locally and in CI, with per-product health checks
+- Keep cutting startup time and memory footprint
 
-### Verify — CI loop we trust — <TeamMember name="Julian Bez" photo />, <TeamMember name="Georges-Antoine Assi" photo />
+### Verify: CI loop we trust (<TeamMember name="Julian Bez" photo />, <TeamMember name="Georges-Antoine Assi" photo />)
 
 Fast, cheap, low-flake CI that people actually believe.
-- Keep shards optimal, set a wall-clock target
-- Playwright / E2E on hogland sandboxes — faster startup for previews and E2E
-- Drive flakiness down with the flake overseer + quarantine-with-expiry; make "trust" measurable
-- Spike merge queues; formalize the Depot CI partnership
+- Keep test sharding optimal and hold a wall-clock target
+- Faster preview and end-to-end environments on sandboxes
+- Drive flakiness down and make trust measurable
+- Explore merge queues and deeper CI-runner partnerships
 
-### Review & merge — agents gating agents — everyone
+### Review & merge: agents gating agents (everyone)
 
-As agents author most PRs and humans level up to steering, no one reviews every diff by hand. That per-PR judgment gets delegated to independent reviewer agents, with humans as policy authors and escalation handlers. The subject is **trust** — how do you land agent-authored code without a human reading every diff? Generation without gating is slop at scale.
-- Route PRs by blast radius: mechanical (auto-merge when green + fresh), scoped inside one sealed product (agent review + policy), risky/core/migrations/security (human + agent, never auto-merged)
-- Independent / adversarial reviewer agents that gate, not just comment
-- Align with existing review tooling — don't build a competing reviewer
-- stamphog as the approver and final gate; first step already shipped (gates bot-authored and stacked PRs)
-- Deploy & rollback as the safety valve so aggressive auto-merge is cheap to undo (later)
+As agents author most PRs and humans move up to steering, no one reviews every diff by hand. That judgment gets delegated to independent reviewer agents, with humans as policy authors and escalation handlers. The subject is **trust**: how do you land agent-authored code without a human reading every line?
+- Route PRs by blast radius, from auto-merge for mechanical changes to human review for anything risky
+- Reviewer agents that gate, not just comment, aligned with existing review tooling
+- A merge orchestrator as the final gate (already gating bot-authored and stacked PRs)
+- Deploy and rollback as the safety valve that makes aggressive auto-merge cheap to undo
 
-### Measure — how do we know it's getting better? — <TeamMember name="Raúl Negrón-Otero" photo />
+### Measure: how do we know it's getting better? (<TeamMember name="Raúl Negrón-Otero" photo />)
 
 Every loop above gets a metric.
-- Open-PR-to-merge time, flakiness (jobs run >1×/PR), CI run times
+- PR-to-merge time, flakiness, and CI run times
 - Per-product attribution so teams own their own CI cost and flakiness
-- A clear number for what % of engineering spend goes to devex, so leadership can see what it costs and returns
-- Non-goal: measuring engineering productivity
+- A clear read on what DevEx costs and returns
+- Non-goal: measuring individual engineering productivity
 
-### Cross-cutting — local agent steering — everyone
+### Cross-cutting: local agent steering (everyone)
 
-Skills, prompts, and contexts that make the write/verify/review loop agent-driveable — the generation half that the review station gates.
+Skills, prompts, and context that make the whole loop agent-driveable: the generation half that review gates.
