@@ -5,6 +5,7 @@ import { TreeMenu } from 'components/TreeMenu'
 import SEO from 'components/seo'
 import Link from 'components/Link'
 import { ProductScreenshot } from 'components/ProductScreenshot'
+import { CalloutBox } from 'components/Docs/CalloutBox'
 
 const LeftSidebarContent = () => {
     return <TreeMenu items={customerDataInfrastructureNav.children} />
@@ -23,14 +24,10 @@ export default function DataModeling(): JSX.Element {
                     PostHog provides powerful tools to clean, enrich, and model your data into the exact shape you need
                     for downstream use.
                 </p>
-                <div className="dark:bg-dark bg-accent border border-input p-4 rounded">
+                <CalloutBox icon="IconInfo" type="fyi" title="PostHog modeling is in beta">
                     <p className="!mt-0">
-                        <strong>Note:</strong> PostHog modeling is in{' '}
-                        <span className="rounded-sm bg-highlight py-0.5 ml-2 px-1 text-xs font-bold text-red dark:text-yellow">
-                            Beta
-                        </span>
-                        . It's great for product teams who have light modeling workloads today, with support for
-                        advanced use-cases in active development.
+                        It's great for product teams who have light modeling workloads today, with support for advanced
+                        use-cases in active development.
                     </p>
                     <p className="!mb-0">
                         If you have advanced modeling needs, we recommend you connect your favorite modeling tooling
@@ -40,7 +37,7 @@ export default function DataModeling(): JSX.Element {
                         </Link>{' '}
                         to your PostHog DuckDB warehouse.
                     </p>
-                </div>
+                </CalloutBox>
 
                 <h3>Step 1: Create reusable queries with views</h3>
 

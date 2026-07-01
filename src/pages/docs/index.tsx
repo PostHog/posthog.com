@@ -75,7 +75,7 @@ export const DocsIndex = () => {
                             className="mb-6 rounded border border-primary bg-primary shadow-sm overflow-hidden [&_input]:bg-primary [&_input]:py-3 [&_input]:text-base"
                             autoFocus={false}
                         />
-                        <h2 className="text-lg mb-1">Get started</h2>
+                        <h2 className="text-sm font-semibold uppercase tracking-wide text-muted mb-1">Get started</h2>
                         <p className="text-sm opacity-70 mb-3">New to PostHog? Pick a starting point.</p>
                         {/* Curated entry paths */}
                         <div data-scheme="primary" className="grid grid-cols-1 @md:grid-cols-3 gap-3 mb-6">
@@ -116,7 +116,9 @@ export const DocsIndex = () => {
                         </div>
 
                         {/* Use PostHog from anywhere: the surfaces */}
-                        <h2 className="text-lg mb-1">Use PostHog from anywhere</h2>
+                        <h2 className="text-sm font-semibold uppercase tracking-wide text-muted mb-1">
+                            Use PostHog from anywhere
+                        </h2>
                         <p className="text-sm opacity-70 mb-3">Pick the surface that fits how you work.</p>
                         <div data-scheme="primary" className="grid grid-cols-1 @md:grid-cols-3 gap-3 mb-6">
                             {surfaces.map((surface) => {
@@ -141,7 +143,7 @@ export const DocsIndex = () => {
                         </div>
 
                         {/* Tools: the PostHog tools you use from any surface */}
-                        <h2 className="text-lg mb-1">Tools</h2>
+                        <h2 className="text-sm font-semibold uppercase tracking-wide text-muted mb-1">Tools</h2>
                         <p className="text-sm opacity-70 mb-3">Use every PostHog tool from any surface.</p>
                         <AppsList />
                     </section>
