@@ -35,11 +35,9 @@ Early versions were primitive, but today's wizard completes two hours of work in
 
 Building it taught us some important lessons about how to build agents people genuinely love (with great ROI, too!), starting with the most important lesson of all...
 
-![The PostHog Wizard CLI in action](https://res.cloudinary.com/dmukukwp6/image/upload/v1782746597/context_engineering_intro_0d5f764925.png)
+![People love the PostHog Wizard](https://res.cloudinary.com/dmukukwp6/image/upload/v1782746600/context_engineering_lesson1_7f570e119f.png)
 
 ## Lesson #1: Reasoning isn't the bottleneck
-
-![Context supply vs reasoning diagram](https://res.cloudinary.com/dmukukwp6/image/upload/v1782746600/context_engineering_lesson1_7f570e119f.png)
 
 We initially tried solving everything at the agent layer – better progressive disclosure techniques, multi-step planning, subagents, pruning, compaction – but the gains were marginal.
 
@@ -53,7 +51,7 @@ With 20+ products, 17+ SDKs, and 25+ frameworks, there are thousands of ways to 
 
 The agent routinely got these details wrong because it was operating in a context deficit. So we started engineering the context that powered it.
 
-![Company-wide context layer diagram](https://res.cloudinary.com/dmukukwp6/image/upload/v1782746603/context_engineering_lesson1_context_layer_518d78d053.png)
+![The PostHog Wizard in action](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/wizard_b75470874d.jpg)
 
 *The wizard is open source. You should steal it!*
 
@@ -158,9 +156,9 @@ It's the same plumbing you already use for general software infrastructure, but 
 
 When a PR is merged, or a docs page is updated at PostHog, that context can reach an agent within minutes.
 
-![Context infrastructure network diagram](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Group_144561_8e52377cd6.png)
-
 With the wizard's context layer as shared infrastructure, we can ship a new customer-facing agent to production in an afternoon.
+
+![A company of wizards](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/company_of_wizards_alt_82f3cfdedf.png)
 
 Arguably the most powerful source of context we unlocked wasn't even technical, it was our [company handbook](/handbook).
 
