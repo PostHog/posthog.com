@@ -1,6 +1,7 @@
 import React from 'react'
 import useSWRInfinite from 'swr/infinite'
 import qs from 'qs'
+import { fetchJSON } from '../lib'
 
 const query = (params: any, offset: number) => {
     return qs.stringify(
@@ -22,7 +23,7 @@ const query = (params: any, offset: number) => {
 export const usePosts = ({ params }: { params?: any }) => {
     const { data, size, setSize, isLoading, error, mutate, isValidating } = useSWRInfinite(
         (offset) => `${process.env.GATSBY_SQUEAK_API_HOST}/api/posts?${query(params, offset)}`,
-        (url: string) => fetch(url).then((r) => r.json())
+        (url: string) => fetchJSON(url)
     )
     const posts = React.useMemo(() => {
         return data?.reduce((acc, cur) => [...(acc || []), ...(cur.data || [])], []) ?? []

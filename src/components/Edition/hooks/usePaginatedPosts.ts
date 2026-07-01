@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import useSWR from 'swr'
 import qs from 'qs'
+import { fetchJSON } from '../lib'
 
 const POSTS_PER_PAGE = 20
 
@@ -32,7 +33,7 @@ export const usePaginatedPosts = ({ params, pageSize = POSTS_PER_PAGE, onPageCha
 
     const { data, isLoading, error, mutate, isValidating } = useSWR(
         `${process.env.GATSBY_SQUEAK_API_HOST}/api/posts?${query(params, currentPage, pageSize)}`,
-        (url: string) => fetch(url).then((r) => r.json())
+        (url: string) => fetchJSON(url)
     )
 
     const posts = data?.data ?? []
