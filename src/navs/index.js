@@ -4426,6 +4426,7 @@ export const docsMenu = {
                         { name: 'PHP', url: '/docs/feature-flags/installation/php' },
                         { name: 'Python', url: '/docs/feature-flags/installation/python' },
                         { name: 'OpenFeature (Python)', url: '/docs/feature-flags/installation/openfeature' },
+                        { name: 'OpenFeature (JavaScript)', url: '/docs/feature-flags/installation/openfeature-js' },
                         { name: 'React', url: '/docs/feature-flags/installation/react' },
                         { name: 'React Native', url: '/docs/feature-flags/installation/react-native' },
                         { name: 'React Router', url: '/docs/feature-flags/installation/react-router' },
