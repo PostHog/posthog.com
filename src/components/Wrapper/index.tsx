@@ -73,7 +73,7 @@ export default function Wrapper() {
                     })}
                 </AnimatePresence>
             </div>
-            {websiteMode && <WebsiteFooter />}
+            <WebsiteFooter />
             {/*             
             {!compact && <Dock />}
             */}

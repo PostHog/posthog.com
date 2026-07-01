@@ -51,13 +51,17 @@ If you want to send physical merch to a customer instead of a merch code, this c
 
 ### PostHog team
 
-If you want more, <PrivateLink url="https://github.com/PostHog/runbooks/blob/main/docs/merch.md"> here's how to get it! </PrivateLink> 
+If you want more, <PrivateLink url="https://wiki.posthog.com/reference/merch"> here's how to get it! </PrivateLink> 
 
 As always, we expect you to use this with restraint and with your own good judgement. The merch store should not become your sole source of clothing for your wardrobe, nor where you go any time a friend has a birthday. But sure, go ahead and buy your mom (or yourself) a hat or a hoodie!
 
+Please note that any free merch received outside of your birthday kit, work anniversary kit, or new hire kit is considered a taxable benefit in most jurisdictions and may be subject to tax. If you have questions about how this applies to you, we recommend checking with your local tax advisor.
+
+For select exclusive or higher-value items, a cost-price discount code will be shared at the time of launch in lieu of the complimentary allowance, this will always be clearly communicated in advance. 
+
 ### YC Deal
 
-You can find instructions for this on the dedicated [YC Deal page](/handbook/growth/sales/yc-onboarding).
+You can find instructions for this on the dedicated [YC Deal page](/handbook/marketing/startups).
 
 ## Troubleshooting customer orders
 

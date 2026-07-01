@@ -7,7 +7,7 @@ We have different roles within the team who manage customers at various stages i
 
 ## TAM vs CSM
 
-[Technical Account Managers](/handbook/growth/sales/how-we-work#technical-account-managers) (Sales Team) and [Customer Success Managers](/handbook/cs-and-onboarding/customer-success) (Customer Success Team) are the primary owner of customers spending $20k a year and above; and we aim to have full coverage of those customers across the two teams and roles. When deciding whether a customer should be with a TAM or CSM we factor in to account their usage of our primary products.
+[Technical Account Managers](/handbook/growth/sales/how-we-work#technical-account-managers) (Sales Team) and [Customer Success Managers](/handbook/cs-and-onboarding/customer-success) (Customer Success Team) are the primary owner of customers spending $20k a year and above; and we aim to have full coverage of those customers across the two teams and roles. Our default is for a CSM/CSE to be the point of contact on every $20k+ account, with a TAM requested as an overlay where there's room to grow. When deciding whether to request that overlay we factor in their usage of our primary products.
 
 **Primary products** are the set of billable main products which we believe that all engineers should be using, not including add-ons or platform features. Our current set of primary products are:
 
@@ -21,6 +21,10 @@ We track whether a customer is paying for each product in Vitally using the `Pay
 - Otherwise, there is room to grow and a Technical Account Manager should be focused on getting them using the three primary products.
 
 > This allocation may vary depending on team capacity - there may be some accounts who only have 1 or 2 paid products allocated to a CSM rather than a TAM where there is more capacity in the CSM team for example.
+
+### Requesting a TAM overlay
+
+Because a CSM/CSE is the default point of contact on every $20k+ account, the decision is no longer "TAM or CSM" but whether to add a TAM overlay on top. Request one where there's clear expansion potential and it's worth having a second person on the account: commercial depth from the TAM, technical depth from the CSM/CSE. Accounts that are fully expanded and in steady state stay CSM/CSE-only. Where there's expansion potential but no TAM capacity yet, an account may sit CSM/CSE-only for a period until an overlay can be added.
 
 ---
 
@@ -56,7 +60,7 @@ If an account is struggling on these dimensions, that's a signal you need to inv
 
 ## Doing the allocation
 
-It's Simon's job, with input from Charles and Team Leads, to review the list of [$20K accounts without an owner](https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/1c518181-54a5-4c59-98de-f0b0bb54f9c3), as well as accounts which need to be handed over from TAE and TAMs. We use the criteria above to figure out which team should own a customer, and then use Vitally data to understand which region they are primarily based in. Looking at the user list in Vitally will show you where the most users are so make a judgement call on where the TAM or CSM should be based to best support and engage with the customer. Once this has been decided the New Owner trait is populated with one of the following:
+It's Simon's job, with input from Ben and Team Leads, to review the list of [$20K accounts without an owner](https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/1c518181-54a5-4c59-98de-f0b0bb54f9c3), as well as accounts which need to be handed over from TAE and TAMs. We use the criteria above to figure out which team should own a customer, and then use Vitally data to understand which region they are primarily based in. Looking at the user list in Vitally will show you where the most users are so make a judgement call on where the TAM or CSM should be based to best support and engage with the customer. Once this has been decided the New Owner trait is populated with one of the following:
 
 - US TAM
 - US CSM
@@ -67,7 +71,7 @@ And then it is down to the Team Leads to figure out which team member is taking 
 
 ### Quarterly allocation process
 
-At the start of each quarter, Simon (with input from Charles and Team Leads) reviews:
+At the start of each quarter, Simon (with input from Ben and Team Leads) reviews:
 
 1. **[$20K accounts without an owner](https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/1c518181-54a5-4c59-98de-f0b0bb54f9c3)** – accounts that need to be assigned
 2. **Accounts flagged for handover** from TAEs, TAMs, and CSMs
@@ -88,13 +92,13 @@ If you're assigned an account with a previous owner, work with them on a proper 
 
 ## Top 40 account management
 
-Our highest-spend customers (~Top 40 by ARR) get special consideration for ownership decisions. Simon and Charles regularly review these accounts to:
+Our highest-spend customers (~Top 40 by ARR) get special consideration for ownership decisions. Simon and Ben regularly review these accounts to:
 
 - **Minimize ownership changes** – frequent handoffs create whiplash for customers and damage relationships
 - **Ensure continuity** – the bar for changing ownership on a Top 40 account is higher than for the rest of the book
 - **Make judgment calls** – sometimes a TAM should keep a "fully expanded" account if the relationship is strong and there's long-term strategic value
 
-For Top 40 accounts, ownership changes (TAM→CSM or CSM→TAM) are decided directly by Simon and Charles, not through the standard Team Lead allocation process.
+For Top 40 accounts, ownership changes (TAM→CSM or CSM→TAM) are decided directly by Simon and Ben, not through the standard Team Lead allocation process.
 
 ---
 
@@ -189,6 +193,8 @@ The incoming TAM should prepare by reviewing the following in Vitally and SFDC b
 - [ ] **Usage metrics** – active users, project count, Feature Flag requests, Session Replay volume, insight/dashboard engagement
 - [ ] **Support history** – recent Zendesk tickets, tags, severity, resolution status
 - [ ] **Conversations & notes** – read all Vitally notes, meeting summaries, and conversation history
+- [ ] **Customer Slack channel** – scan the shared channel for who's actually active on the customer side, what issues have come up, and any open threads worth asking the previous owner about. This is often where the most useful context lives.
+- [ ] **Internal Slack discussions** – search our own Slack (outside the shared channel) for mentions of the customer. Engineering debates, pricing conversations, support escalations, and context from the previous owner often surface things that were never written down in Vitally.
 - [ ] **SFDC opportunity** – deal value, stage, next steps, close date
 - [ ] **Admin emails & user list** – identify who's active, who has admin access, what domains are in play
 - [ ] **The customer's product** – sign up or browse their website. Understand what they do and how they make money

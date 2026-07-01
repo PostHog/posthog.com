@@ -1,5 +1,5 @@
 import { GatsbyNode } from 'gatsby'
-import fetch from 'node-fetch'
+
 import parseLinkHeader from 'parse-link-header'
 import qs from 'qs'
 import { ApiInfoModel, MenuBuilder, OpenAPIParser } from 'redoc'
@@ -173,15 +173,16 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         if (endpoint.items.length > maxEndpointItems) {
             const chunks = []
             for (let i = 0; i < endpoint.items.length; i += maxEndpointItems) {
-                const next =
-                    i + maxEndpointItems < endpoint.items.length &&
-                    `${endpoint.name}-${Math.floor(i / maxEndpointItems) + 2}`
-                const name = i === 0 ? endpoint.name : `${endpoint.name}-${Math.floor(i / maxEndpointItems) + 1}`
+                const pos = Math.floor(i / maxEndpointItems)
+                const next = i + maxEndpointItems < endpoint.items.length && `${endpoint.name}-${pos + 2}`
+                const name = pos === 0 ? endpoint.name : `${endpoint.name}-${pos + 1}`
+                const previous = pos === 0 ? null : pos === 1 ? endpoint.name : `${endpoint.name}-${pos}`
                 const chunk = {
                     ...endpoint,
                     name,
                     items: endpoint.items.slice(i, i + maxEndpointItems),
                     next,
+                    previous,
                 }
                 chunks.push(chunk)
             }
@@ -205,6 +206,9 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             url: '/docs/api/' + endpoint.name.replace(/_/g, '-'),
             name: endpoint.name,
             nextURL: endpoint.next ? '/docs/api/' + endpoint.next.replace(/_/g, '-') : null,
+            previousURL: (endpoint as any).previous
+                ? '/docs/api/' + (endpoint as any).previous.replace(/_/g, '-')
+                : null,
         }
         createNode(node)
     })
@@ -601,7 +605,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             }
 
             const products = moveNodesToParent(collection.data.collectionByHandle.products.nodes).filter(
-                (product) => product.status === 'ACTIVE'
+                (product) => product.status === 'ACTIVE' && !!product.featuredMedia
             )
             products.forEach((product) => {
                 product.variants = moveNodesToParent(
@@ -703,7 +707,14 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         )
             return
         const { resources } = await fetch(
-            `https://${process.env.CLOUDINARY_API_KEY}:${process.env.CLOUDINARY_API_SECRET}@api.cloudinary.com/v1_1/${process.env.GATSBY_CLOUDINARY_CLOUD_NAME}/resources/image?prefix=hogs&type=upload&max_results=500`
+            `https://api.cloudinary.com/v1_1/${process.env.GATSBY_CLOUDINARY_CLOUD_NAME}/resources/image?prefix=hogs&type=upload&max_results=500`,
+            {
+                headers: {
+                    Authorization: `Basic ${Buffer.from(
+                        `${process.env.CLOUDINARY_API_KEY}:${process.env.CLOUDINARY_API_SECRET}`
+                    ).toString('base64')}`,
+                },
+            }
         ).then((res) => res.json())
         resources.forEach((resource) => {
             const node = {
@@ -1086,6 +1097,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     const fetchAchievements = async () => {
         const query = qs.stringify({
             populate: ['icon', 'achievement_group.achievements.icon'],
+            publicationState: 'preview',
         })
         const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/achievements?${query}`).then((res) =>
             res.json()
@@ -1106,7 +1118,8 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
 
     const fetchAchievementGroups = async () => {
         const query = qs.stringify({
-            populate: ['achievements.icon'],
+            populate: ['achievements.icon', 'icon'],
+            publicationState: 'preview',
         })
         const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/achievement-groups?${query}`).then(
             (res) => res.json()
@@ -1155,11 +1168,16 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             for (const config of configs) {
                 const displayName = config.label || config.name
                 if (!displayName) continue
-                const slug = displayName
+                // Prefer the slug from the source's own posthog.com docsUrl so the listing link always
+                // matches the committed doc file (e.g. `active-campaign`, not the label-derived
+                // `activecampaign`). Fall back to the label for sources without a posthog docs URL.
+                const docsSlug = config.docsUrl?.match(/\/docs\/cdp\/sources\/([^/?#]+)/)?.[1]
+                const labelSlug = displayName
                     .toLowerCase()
                     .replace(/\./g, '')
                     .replace(/\s+/g, '-')
                     .replace(/[^a-z0-9-]/g, '')
+                const slug = docsSlug || labelSlug
 
                 createNode({
                     id: createNodeId(`posthog-source-${config.name}`),
@@ -1177,6 +1195,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                     featured: config.featured || false,
                     caption: config.caption || null,
                     sourceFields: config.fields || [],
+                    tables: config.tables || [],
                     permissionsCaption: config.permissionsCaption || null,
                     featureFlag: config.featureFlag || null,
                 })

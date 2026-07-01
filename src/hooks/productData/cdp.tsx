@@ -17,13 +17,14 @@ export const cdp = {
     hideFromPricingTableAndCalculator: true,
     seo: {
         title: 'Ingest, transform, and send data between hundreds of tools',
-        description: 'Import data from a warehouse, sync with event data, and export to other products',
+        description:
+            'Import data from a warehouse, sync with event data, and move it across 50+ destinations – the context agents act on to make your product self-driving.',
     },
     answersDescription: 'Ingest, transform, and send data between 145+ tools',
     overview: {
         title: 'Ingest, transform, and send data between 145+ tools',
         description:
-            "PostHog's customer data platform (CDP) makes it easy to import data from a warehouse, sync with event data, and export to other products in your stack.",
+            'The CDP is one of the tools that make your product self-driving: it moves your data wherever agents need to act on it. Import from a warehouse, sync with event data, and send it across 50+ destinations in your stack.',
         textColor: 'text-white', // tw
     },
     screenshots: {

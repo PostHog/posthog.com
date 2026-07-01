@@ -2,10 +2,12 @@ packages:
     - .
     - plugins/*
 
-minimumReleaseAge: 1440
+minimumReleaseAge: 10080
 minimumReleaseAgeExclude:
-    - '@posthog/types'
     - '@posthog/icons'
+    - '@posthog/hedgehog-mode'
+blockExoticSubdeps: true
+trustPolicy: no-downgrade
 
 # Hoist Gatsby's internal dependencies for webpack compatibility
 publicHoistPattern:

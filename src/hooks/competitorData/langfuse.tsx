@@ -1,7 +1,7 @@
 export const langfuse = {
     name: 'Langfuse',
     products: {
-        llm_analytics: {
+        ai_observability: {
             available: true,
             features: {
                 generation_tracking: true,
@@ -17,7 +17,22 @@ export const langfuse = {
                 clustering: true,
                 trace_summarization: true,
                 llm_translation: false,
+                sentiment_classification: false,
+                privacy_mode: true,
+                agent_tracing: true,
+                prompt_management: true,
+                evaluation_datasets: true,
+                human_annotation: true,
+                session_replay: false,
+                product_analytics: false,
+                feature_flags: false,
             },
+        },
+        session_replay: {
+            available: false,
+        },
+        product_analytics: {
+            available: false,
         },
     },
 }

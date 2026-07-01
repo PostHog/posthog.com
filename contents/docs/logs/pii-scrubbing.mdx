@@ -24,7 +24,7 @@ These patterns are detected anywhere in log text:
 
 ### Sensitive attribute keys
 
-If an attribute or resource attribute key contains any of these substrings (case-insensitive), the **entire value** is replaced with `{{REDACTED}}`:
+If an attribute or resource attribute key contains any of these strings (case-insensitive), the **entire value** is replaced with `{{REDACTED}}`:
 
 `password`, `secret`, `token`, `authorization`, `cookie`, `credential`, `apikey`, `api_key`, `access_token`, `refresh_token`, `bearer`, `email`
 
@@ -77,4 +77,4 @@ Do not rely on ingestion-time scrubbing as your primary control. The most reliab
 - **Redact on the client.** Filter or mask sensitive fields in your application before handing them to your logger.
 - **Review what your logger captures automatically.** Some frameworks log full request/response bodies or headers by default – strip `Authorization`, `Cookie`, and similar headers at the source.
 
-See our [logging best practices guide](/docs/logs/best-practices) for more on structured logging patterns that make it easy to keep PII out of your Logs.
+See our [logging best practices guide](/docs/logs/best-practices) for more on structured logging patterns that help keep PII out of your Logs.

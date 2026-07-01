@@ -1,0 +1,90 @@
+## Installation
+
+External flag definition caches are available in the Ruby SDK. No additional PostHog package is required.
+
+Import the SDK and pass a cache provider object when you initialize the client:
+
+```ruby
+require 'posthog'
+```
+
+## The interface
+
+The Ruby SDK accepts any object that responds to the required cache provider methods. The provider is validated when you pass it as `flag_definition_cache_provider`.
+
+```ruby
+require 'json'
+
+class YourCacheProvider
+  # Retrieve cached flag definitions
+  def flag_definitions
+    # Return cached definitions as a hash, or nil if the cache is empty
+    cached = shared_cache.get('posthog:flag-definitions')
+    cached ? JSON.parse(cached) : nil
+  end
+
+  # Determine if this instance should fetch new definitions
+  def should_fetch_flag_definitions?
+    # Return true if this process owns the distributed fetch lock
+    lock.acquire_or_refresh('posthog:flag-definitions:lock')
+  end
+
+  # Store definitions after a successful fetch
+  def on_flag_definitions_received(data)
+    # Store the hash as JSON in Redis, a database, or another shared cache
+    shared_cache.set('posthog:flag-definitions', JSON.dump(data))
+  end
+
+  # Clean up resources on shutdown
+  def shutdown
+    # Release locks and close cache clients
+    lock.release_if_owned('posthog:flag-definitions:lock')
+  end
+end
+```
+
+When the SDK fetches flag definitions from the API, it passes a hash to `on_flag_definitions_received(data)` for you to store. Return the same shape from `flag_definitions`:
+
+```ruby
+{
+  flags: [],
+  group_type_mapping: {},
+  cohorts: {}
+}
+```
+
+- `flags`: Feature flag definitions
+- `group_type_mapping`: Group type index to name mapping
+- `cohorts`: Cohort definitions for local evaluation
+
+The SDK accepts either symbol or string keys for this hash, so returning data parsed from JSON is supported.
+
+### Method details
+
+| Method | Purpose | Return value |
+| :----- | :------ | :----------- |
+| `flag_definitions` | Retrieve cached definitions. Called when the poller refreshes and `should_fetch_flag_definitions?` returns `false`. | Cached data, or `nil` if cache is empty |
+| `should_fetch_flag_definitions?` | Decide if this process should fetch. Use for distributed coordination (e.g., locks). | `true` to fetch from PostHog and store the result, `false` to read from cache |
+| `on_flag_definitions_received(data)` | Store definitions after a successful API fetch. | void |
+| `shutdown` | Release locks, close connections, and clean up resources. | void |
+
+> **Note:** Provider methods may raise errors. The SDK catches and logs provider errors: failed `should_fetch_flag_definitions?` calls fall back to fetching from PostHog, failed cache reads fall back to the API, and failed writes or shutdowns do not stop flag evaluation or shutdown. If `flag_definitions` returns `nil` before the first successful load, the SDK fetches from PostHog; if definitions are already loaded, it keeps the in-memory definitions.
+
+The provider is used by local evaluation polling, so configure `personal_api_key`. Without it, the Ruby SDK disables local evaluation and doesn't poll flag definitions. Provider methods can run during client initialization and from the background polling task, so implementations should be safe to call repeatedly. If your cache uses TTLs, use a TTL longer than the polling interval; `on_flag_definitions_received(data)` is called only after modified API responses, not after `304 Not Modified` responses.
+
+## Using your cache provider
+
+Pass your cache provider when initializing PostHog:
+
+```ruby
+require 'posthog'
+
+cache = YourCacheProvider.new
+
+posthog = PostHog::Client.new({
+  api_key: '<ph_project_token>',
+  host: '<ph_client_api_host>',
+  personal_api_key: '<ph_personal_api_key>',
+  flag_definition_cache_provider: cache
+})
+```

@@ -5,17 +5,24 @@ import { useToast } from '../../context/Toast'
 import Link from 'components/Link'
 import ZoomHover from 'components/ZoomHover'
 
+const variantStyles: Record<string, string> = {
+    default: 'bg-white text-black',
+    bordered: 'bg-white text-black border border-primary shadow-sm',
+}
+
 export default function WizardCommand({
     className = '',
     command = '',
     latest = true,
     slim = false,
+    variant = 'default',
     onCopy,
 }: {
     className?: string
     command?: string
     latest?: boolean
     slim?: boolean
+    variant?: keyof typeof variantStyles
     onCopy?: () => void
 }): JSX.Element {
     const cloud = useCloud()
@@ -45,8 +52,10 @@ export default function WizardCommand({
             <ZoomHover size="lg">
                 <button
                     onClick={handleCopy}
-                    className={`group inline-flex items-center gap-2 bg-white text-black font-mono text-sm px-2 py-1.5 rounded-md cursor-pointer ${
-                        !slim ? 'relative z-10' : ''
+                    className={`group inline-flex items-center gap-2 ${
+                        variantStyles[variant] || variantStyles.default
+                    } font-mono text-sm px-2 py-1.5 cursor-pointer ${
+                        !slim ? 'rounded-t-md relative z-10 border border-primary' : 'rounded-md'
                     } ${className}`}
                 >
                     <IconChevronRight className="size-4 opacity-50" />

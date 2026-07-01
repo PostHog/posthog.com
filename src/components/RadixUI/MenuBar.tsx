@@ -409,7 +409,7 @@ const MenuBar: React.FC<MenuBarProps> = ({
                                     : undefined
                             }
                             onClick={
-                                websiteMode
+                                websiteMode && showChevronDown && !menu.hideChevron
                                     ? () => {
                                           const url = menu.mobileLink || menu.items.find((item) => item.link)?.link
                                           if (url) {
