@@ -2,6 +2,13 @@ import Hub from 'components/Hub'
 import Link from 'components/Link'
 import SEO from 'components/seo'
 import React from 'react'
+import usePostHog from 'hooks/usePostHog'
+import { RenderInClient } from 'components/RenderInClient'
+import SidebarExplorer from 'components/BlogLanding/variants/SidebarExplorer'
+
+// Multivariate flag driving the founders-hub redesign A/B test.
+// control = existing icon-grid Hub, test = new SidebarExplorer landing.
+export const FOUNDERS_REDESIGN_FLAG = 'founders-hub-redesign'
 
 export const Sidebar = () => {
     return (
@@ -15,42 +22,6 @@ export const Sidebar = () => {
                 PostHog to product-market fit and beyond.
             </p>
 
-            {/* <p>
-                        Each collection is a work in progress. You can{' '}
-                        <Link to="/suggestion" className="underline font-medium">
-                            suggest an article topic
-                        </Link>{' '}
-                        or{' '}
-                        <Link to="/vote" className="underline font-medium">
-                            vote on ideas
-                        </Link>{' '}
-                        we haven't written about yet.
-                    </p> */}
-
-            {/* <hr className="my-4" />
-
-        <h6>Key</h6>
-
-        <div className="mb-4">
-            <div className="flex items-center gap-2 mb-2">
-                <Icons.IconLightBulb className="size-4" />
-                <span className="font-medium italic">An article we haven't written yet</span>
-            </div>
-            <p className="text-sm text-muted ml-6">
-                Vote on unwritten articles — we prioritize writing the most popular ones!
-            </p>
-        </div>
-
-        <div className="mb-4">
-            <div className="flex items-center gap-2 mb-2">
-                <Icons.IconArrowUpRight className="size-4" />
-                <span className="font-medium">Links to another site</span>
-            </div>
-            <p className="text-sm text-muted ml-6">
-                Somebody else wrote a banger — no sense in writing our own!
-            </p>
-        </div> */}
-
             <hr className="my-4" />
 
             <p>
@@ -63,11 +34,39 @@ export const Sidebar = () => {
     )
 }
 
+// Intro copy for the redesigned (test) layout. Exported so the preview page can reuse it.
+export const foundersIntro = (
+    <>
+        <p>We've curated the best advice to build a successful company.</p>
+        <p>
+            Some are lessons we've heard from fellow founders, others are from first-hand experience building PostHog to
+            product-market fit and beyond. You might also like our{' '}
+            <Link to="/product-engineers" className="underline font-medium">
+                Product engineer's hub
+            </Link>
+            .
+        </p>
+    </>
+)
+
+const ControlHub = () => <Hub title="Founder's hub" folder="founders" sidebar={<Sidebar />} />
+
 export default function Founders() {
+    const posthog = usePostHog()
+
     return (
         <>
             <SEO title="Founder's hub - PostHog" />
-            <Hub title="Founder's hub" folder="founders" sidebar={<Sidebar />} />
+            <RenderInClient
+                placeholder={<ControlHub />}
+                render={() =>
+                    posthog?.getFeatureFlag?.(FOUNDERS_REDESIGN_FLAG) === 'test' ? (
+                        <SidebarExplorer folder="founders" title="Founder's hub" intro={foundersIntro} />
+                    ) : (
+                        <ControlHub />
+                    )
+                }
+            />
         </>
     )
 }
