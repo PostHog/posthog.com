@@ -1,0 +1,44 @@
+---
+title: No reverse proxy
+sidebar: Docs
+showTitle: true
+---
+
+The no reverse proxy check fires when none of your traffic is being sent through a [reverse proxy](/docs/advanced/proxy). A reverse proxy serves PostHog from your own domain, which keeps ad blockers from silently dropping your data.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_51_47_886_Z_8eef00f253.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_51_41_323_Z_f33ec8ce4e.png"
+    alt="No reverse proxy check in the Health checks section in the PostHog app"
+    classes="rounded"
+/>
+
+## What this check looks for
+
+Once a day, the check looks at recent `$pageview` / `$screen` events and checks whether any of them were sent through a custom API host (the `$lib_custom_api_host` property). If none were, it raises a **warning**.
+
+## Why it matters
+
+Without a reverse proxy, ad blockers can silently drop a meaningful share of your `$pageview` / `$screen` events. That undercounts traffic and skews every Web Analytics metric – and because it's silent, it's often mistaken for a real drop in visitors.
+
+## Fix it manually
+
+1. Set up a reverse proxy that forwards a path on your own domain (for example `https://ph.example.com` or `https://example.com/ingest`) to PostHog. There are several options: a [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy), Cloudflare, Vercel, AWS CloudFront, NGINX, and more.
+2. Point your SDK's `api_host` at the proxy URL and redeploy.
+
+See the [reverse proxy guide](/docs/advanced/proxy) for setup instructions for each platform.
+
+## Fix it automatically with the Inbox and PostHog Code
+
+With the [Inbox](/docs/self-driving) and health checks enabled as a [signal source](/docs/self-driving/inbox/sources), the agent will either:
+
+- Stand up a PostHog-[managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) and give you the DNS record to add, **or**
+- Implement a proxy in your codebase – a `rewrites` entry in `next.config.js`, a `vercel.json` route, an NGINX `location` block, or a Cloudflare worker, depending on your stack.
+
+Either way, it sets `api_host` (and `ui_host`) in your `posthog.init` call to the proxied URL and opens a PR. The issue resolves once proxied events arrive.
+
+## Related
+
+- [Health checks overview](/docs/health-checks)
+- [Reverse proxy](/docs/advanced/proxy)
+- [Partial reverse-proxy coverage](/docs/health-checks/partial-reverse-proxy)

@@ -155,7 +155,7 @@ We use a number of different tools to organise our work and communicate at PostH
 -   Fondo - US accounting
 -   Deel - international payroll and contracts management
 -   Ashby - recruitment
--   Micromerch - merch inventory management, [YC onboarding](/handbook/brand/startups) merch, and merch [drop-shipping for small events](https://github.com/PostHog/meta/issues/31)
+-   Micromerch - merch inventory management, [YC onboarding](/handbook/marketing/startups) merch, and merch [drop-shipping for small events](https://github.com/PostHog/meta/issues/31)
 
 ## Signatories
 

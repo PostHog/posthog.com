@@ -369,6 +369,14 @@
         "profile_id": 30833
     },
     {
+        "handle": "daniel-visca",
+        "name": "Daniel Visca",
+        "role": "Lumberjack",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/daniel-visca",
+        "profile_id": 43453
+    },
+    {
         "handle": "danilo-campos",
         "name": "Danilo Campos",
         "role": "Robopsychologist",
@@ -477,6 +485,14 @@
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/nataliahelenaamorim/",
         "profile_id": 35321
+    },
+    {
+        "handle": "josh-snyder",
+        "name": "Josh Snyder",
+        "role": "Product Engineer",
+        "link_type": "github",
+        "link_url": "https://github.com/joshsny",
+        "profile_id": 32497
     },
     {
         "handle": "posthog-team",
@@ -637,5 +653,50 @@
         "link_type": "LinkedIn",
         "link_url": "https://www.linkedin.com/in/fercgomes/",
         "profile_id": 42799
+    },
+    {
+        "handle": "tyler-crandall",
+        "name": "Tyler Crandall",
+        "role": "Technical Account Manager",
+        "profile_id": 34069
+    },
+    {
+        "handle": "liam-graham",
+        "name": "Liam Graham",
+        "role": "Hog Poster",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/graham-liam/",
+        "profile_id": 44190
+    },
+    {
+        "handle": "rishi-raj-jain",
+        "name": "Rishi Raj Jain",
+        "role": "Freelance Technical Writer",
+        "link_url": "https://www.linkedin.com/in/rishi-raj-jain/",
+        "profile_id": 45748
+    },
+    {
+        "handle": "eric-duong",
+        "name": "Eric Duong",
+        "role": "Software Engineer",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/eric-duong-074420154/",
+        "profile_id": 30209
+    },
+    {
+        "handle": "rohit-rajpal",
+        "name": "Rohit Rajpal ",
+        "role": "Freelance Technical Writer",
+        "link_type": "github",
+        "link_url": "https://github.com/ioannisj",
+        "profile_id": 31730
+    },
+    {
+        "handle": "nyior-clement",
+        "name": "Nyior Clement",
+        "role": "Freelance Technical Writer",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/nyior/",
+        "profile_id": 46202
     }
 ]

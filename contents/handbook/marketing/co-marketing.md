@@ -15,7 +15,7 @@ If it does seem promising, a product marketer will take the lead and loop in eve
 
 What this article doesn’t cover:
 - [Influencers](/handbook/marketing/influencers) and newsletters
-- Rev-share [partners](/handbook/brand/partners) and individual consultants
+- Rev-share [partners](/handbook/marketing/partners) and individual consultants
 - [Sponsorships](/handbook/marketing/open-source-sponsorship)
 
 ## Integrations and CDP destinations
@@ -63,7 +63,7 @@ Social media co-marketing for case studies naturally follows since most companie
 We also will typically thank customers who participate in case studies and collab content by sending them a merch voucher. We're nice like that.
 
 ## Startup and ecosystem partnerships
-We already run a strong [startup program](/handbook/brand/startups). Accepted companies get $50K in PostHog credits plus access to partner benefits. This is one of the best types of co-marketing because it’s a simple value exchange: we help their users, they help ours. 
+We already run a strong [startup program](/handbook/marketing/startups). Accepted companies get $50K in PostHog credits plus access to partner benefits. This is one of the best types of co-marketing because it’s a simple value exchange: we help their users, they help ours. 
 
 However, we are very selective about which teams we partner with here because these partnerships usually offer outsized benefits to them. As a rule, we want to have no more than three such partners at once - and it's one-in, one-out. 
 

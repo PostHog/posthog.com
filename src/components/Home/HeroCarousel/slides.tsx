@@ -45,8 +45,7 @@ const analyticsHandles = [
     'funnels',
     'user_paths',
     'lifecycle',
-    'llm_traces',
-    'llm_generations',
+    'ai_observability',
     'llm_evals',
     'session_replay',
     'heatmaps',
@@ -335,8 +334,7 @@ const productSlots: { handle: string; '@xl': [number, number]; '@2xl': [number, 
         { handle: 'lifecycle', '@xl': [6, 84], '@2xl': [6, 78], '@3xl': [10, 78] },
         { handle: 'user_paths', '@xl': [12, 96], '@2xl': [8, 96], '@3xl': [6, 96] },
         { handle: 'llm_evals', '@xl': [94, 16], '@2xl': [95, 56], '@3xl': [90, 56] },
-        { handle: 'llm_traces', '@xl': [94, 82], '@2xl': [92, 74], '@3xl': [86, 74] },
-        { handle: 'llm_generations', '@xl': [90, 94], '@2xl': [88, 90], '@3xl': [90, 90] },
+        { handle: 'ai_observability', '@xl': [94, 82], '@2xl': [92, 74], '@3xl': [86, 74] },
     ]
 
 const ArcProducts = ({ products }: { products: any[] }) => {
@@ -402,8 +400,8 @@ export const UnderstandUsageSlide = () => {
             <div className="grid grid-cols-1 @lg:grid-cols-2 gap-x-8 gap-y-4 mb-2">
                 <div>
                     <p className="text-secondary text-sm">
-                        Measure engagement, track conversion, and understand usage patterns &mdash; whether it's by
-                        person, company, or AI feature.
+                        Measure engagement, track conversion, and understand usage patterns – whether it's by person,
+                        company, or AI feature.
                     </p>
                 </div>
                 <div>

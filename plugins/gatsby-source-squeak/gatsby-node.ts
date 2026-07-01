@@ -1,6 +1,9 @@
 import { GatsbyNode } from 'gatsby'
-import fetch from 'node-fetch'
+
 import qs from 'qs'
+import authors from '../../src/data/authors.json'
+
+const authorProfileIds = authors.filter((a) => a.profile_id).map((a) => a.profile_id)
 
 export const sourceNodes: GatsbyNode['sourceNodes'] = async (
     { actions, createContentDigest, createNodeId, cache },
@@ -9,21 +12,30 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
     const { apiHost } = pluginOptions
     const { createNode } = actions
 
-    // Fetch all profiles
+    // Fetch all profiles (active team members + any author with a profile_id)
     let page = 1
     while (true) {
         let profileQuery = qs.stringify(
             {
                 filters: {
-                    $and: [
+                    $or: [
                         {
-                            startDate: {
-                                $notNull: true,
-                            },
+                            $and: [
+                                {
+                                    startDate: {
+                                        $notNull: true,
+                                    },
+                                },
+                                {
+                                    startDate: {
+                                        $lte: new Date(),
+                                    },
+                                },
+                            ],
                         },
                         {
-                            startDate: {
-                                $lte: new Date(),
+                            id: {
+                                $in: authorProfileIds,
                             },
                         },
                     ],

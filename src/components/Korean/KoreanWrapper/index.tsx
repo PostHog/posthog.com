@@ -73,7 +73,7 @@ export default function KoreanWrapper() {
                     })}
                 </AnimatePresence>
             </div>
-            {websiteMode && <WebsiteFooter />}
+            <WebsiteFooter />
             {/*
             {!compact && <Dock />}
             */}

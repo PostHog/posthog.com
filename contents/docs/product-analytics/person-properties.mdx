@@ -30,26 +30,18 @@ Person properties are stored on [person profiles](/docs/data/persons). When sett
 
 ### How to remove person properties
 
-Similarly to how you set properties, you can use `$unset` to remove properties from person profiles with any event and including an array of property keys:
+Similarly to how you set properties, you can remove properties from person profiles. SDKs with helper methods provide `unsetPersonProperties()`. In other SDKs, send an event with a `$unset` array of property keys:
 
 <MultiLanguage selector="tabs">
 
 ```js-web
-posthog.capture(
-    'event_name', 
-    { 
-        $unset: ['email'],
-    }
-)
+posthog.unsetPersonProperties('email')
 ```
 
 ```node
-client.capture({
+client.unsetPersonProperties({
     distinctId: 'distinct_id',
-    event: 'event_name',
-    properties: {
-        $unset: ['email'],
-    },
+    properties: ['email'],
 })
 ```
 

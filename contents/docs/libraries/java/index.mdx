@@ -121,6 +121,10 @@ posthog.capture(
 
 Use request context to apply a distinct ID, session ID, and common properties to all captures inside a request scope. This allows you to associate frontend user activity with backend events, session replay, error tracking, and feature flag evaluation.
 
+If you're using [PostHog JS](/docs/libraries/js) on the frontend, configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your Java backend hostname so browser requests include the session and distinct ID headers.
+
+Then read the incoming headers in your Java request scope:
+
 ```java
 Map<String, Object> headers = new HashMap<>();
 headers.put(

@@ -31,7 +31,7 @@ We may typically support medium announcements by:
 - Creating an in-app changelog notification.
 - Writing a Twitter and LinkedIn post.
 
-An example of a medium announcement includes the [launch of the NPS app](/changelog?id=1787).
+An example of a medium announcement includes the [launch of the NPS survey tool](/changelog?id=1787).
 
 ### Major announcements
 Major announcements involve changes which have a noticeable impact on the experience of most users, or require specific action from affected users. They may introduce new features, require product downtime, or include opt-in betas for upcoming work.
@@ -60,7 +60,7 @@ Comms should also be aware of [the engineering best practices for product launch
 If the product is moving from free beta to paid general availability (GA) you might also want to choose a reward for beta users. Examples of this include giving PostHog AI beta users 30 extra days of unlimited free usage, or giving Workflows beta users a discount code for merch.
 
 ### PR announcements
-We do not typically do public relations for anything other than company-level news. We have separate [processes and guides for managing press announcements](/handbook/brand/press). 
+We do not typically do public relations for anything other than company-level news. We have separate [processes and guides for managing press announcements](/handbook/marketing/press). 
 
 ## Maintenance communications
 
