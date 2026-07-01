@@ -1,0 +1,381 @@
+---
+title: 'The best AI observability tools for developers, compared'
+date: 2026-06-26
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+author:
+    - natalia-amorim
+    - nyior-clement
+featuredImage: >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/Film_Noir_Hog_Evals_beta_announcement_blog_b7b25b6aeb.png
+featuredImageType: full
+category: General
+tags:
+    - Comparisons
+seo:
+    {
+        metaTitle: 'The best AI observability tools, compared',
+        metaDescription: 'Compare the best LLM observability tools (PostHog, Langfuse, Braintrust, and more) on features, pricing, and honest trade-offs.',
+    }
+---
+
+Picture a kitchen you can't see into. Orders go in, plates come out, and when a customer sends a dish back, you're stuck guessing what went wrong. 
+
+LLM-powered apps have the same problem: a prompt goes in, text comes out, and when something breaks or degrades, you're left wondering why.
+
+AI observability tools puts glass walls on that kitchen. They captures every request, response, and the steps in between, recording traces, token usage, latency, and more. They also often go beyond tracing and performance monitoring, helping you evaluate output quality – was the response actually accurate and relevant?
+
+In this article, we compare the top 9 AI observability tools through features, pricing, and honest trade-offs, so you can pick the right one for your stack.
+
+## What features do you need in an LLM observability tool?
+
+Every solid LLM observability tool should clear this minimum bar:
+
+- **Tracing and logging:** Capture each LLM call; inputs, outputs, latency, and token usage.
+- **Cost tracking:** Token usage and spend across providers and models.
+- **An aggregated dashboard:** Spot trends over time, including throughput, instead of reading logs one by one.
+
+The best go further: 
+- **Prompt management:** version and update prompts without a redeploy 
+- **Evaluations:** score outputs against criteria like relevance, faithfulness, and accuracy – not just whether the API call succeeded 
+- **Datasets for regression testing:** save a set of real prompts and expected outputs, then re-run them automatically whenever you change something to catch regressions
+
+One more thing worth checking early: integration method. A proxy sits on your request path and adds some latency; an SDK wraps your LLM client; and an OTel-native tool emits standard OpenTelemetry spans that many engineering teams already pipe into their existing observability stack.
+
+## The 9 best AI observability tools
+
+### 1. PostHog
+
+![PostHog AI Observability dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2026_06_22_at_13_19_01_2x_acc4617c50.png)
+
+**[PostHog](/)** is the leading platform for self-driving products. You can use our desktop ([Code](/code)), [web](/ai), [Slack](/slack), and [MCP](/mcp) products to leverage tool like [AI observability](/ai-observability), [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [logs](/logs), and more.
+
+Its [AI Observability](/docs/ai-observability) tool captures every instrumented LLM call: prompts, responses, token usage, cost, latency, and traces.
+
+Beyond that, two features stand out for teams iterating on LLM apps:
+
+1. [Prompt management](/docs/prompt-management) (beta) lets you version and update prompts at runtime without a redeploy.
+2. [Evaluations](/docs/ai-evals) use code and LLM-as-a-judge to score outputs for quality, not just whether the API call succeeded.
+
+PostHog is free to start: 100k AI observability events per month, no credit card needed. Beyond that, [pricing is usage-based and fully transparent](/pricing).
+
+#### Strengths
+
+- Query traces and ship fixes [from Slack](/slack), your editor ([via MCP](/mcp)), [PostHog Code](/code), or [PostHog AI](/ai) in the app.
+- Tie a bad generation to the exact session replay, funnel, or experiment it affected.
+- Run SQL directly on your trace data and join it against product, user, and revenue data in the same query.
+- Usage-based pricing with no per-seat fees, so adding teammates doesn't inflate the bill.
+
+<CalloutBox icon="IconStarFilled" title="PostHog is best for..." type="fyi">
+Product engineers and startups who want AI observability connected to the rest of their product data, in one self-serve platform, instead of buying and wiring up a separate tool.
+</CalloutBox>
+
+<WizardCTA />
+
+### 2. Langfuse
+
+![Langfuse AI Observability dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/langfuse_dashboard_a3a2012cb1.png)
+
+[Langfuse](/blog/best-langfuse-alternatives) is a fully featured [open-source LLM observability platform](/blog/best-open-source-llm-observability-tools). It covers the entire workflow: tracing, prompt management, evaluation, datasets, and more. Langfuse can ingest OTLP traces by acting as an OpenTelemetry backend, enabling it to fit into existing observability stacks.
+
+Langfuse is free to self-host. The managed cloud is free up to 50k units per month (30-day retention), then $29/month for 100k units, with additional units at $8 per 100k.
+
+#### Strengths
+
+- One of the most complete feature sets in the category.
+- MIT-licensed with no per-seat or per-event cost if you run it yourself.
+- Can ingest OpenTelemetry traces directly, making it easy to integrate into existing OTel-based systems.
+
+<CalloutBox icon="IconStarFilled" title="Langfuse is best for..." type="fyi">
+Teams that want the most complete open-source LLM observability platform and are happy to self-host or pay for the managed cloud.
+</CalloutBox>
+
+### 3. LangSmith
+
+![LangSmith dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/langsmith_dashboard_4655cd6670.png)
+
+**LangSmith** is the observability and evaluation platform from the LangChain team.
+
+The framework integration is the deepest available for LangChain and LangGraph applications: native traces, annotation queues, and minimal instrumentation overhead. LangSmith also ships a full OpenTelemetry endpoint, so it's usable outside the LangChain world too, though the experience is best inside it.
+
+LangSmith is proprietary (the LangChain framework is open source, the platform isn't), and self-hosting is reserved for Enterprise. The free tier permits 5k base traces/mo, 14-day retention, and 1 seat, then pay as you go (with an added cost of $39 per seat per month).
+
+#### Strengths
+
+- Native tracing with no extra setup, plus LangGraph Studio.
+- Strong evaluation and annotation tooling for human review and dataset building.
+- OpenTelemetry support for teams that aren't all-in on LangChain.
+
+<CalloutBox icon="IconStarFilled" title="LangSmith is best for..." type="fyi">
+Teams building primarily on LangChain or LangGraph who want native, near-zero config tracing and don't mind a proprietary, per-seat platform.
+</CalloutBox>
+
+### 4. Arize Phoenix
+
+![Arize Phoenix dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/phoenix_dashboard_1cdc9b9962.png)
+
+**Phoenix** is an open-source AI observability platform built by Arize AI, and it's the pick for teams that want machine-learning-grade rigor. 
+
+It provides tracing, evaluation, experiments, and prompt management, works out of the box with frameworks like LlamaIndex and LangChain, and is OpenTelemetry-native, so it slots into an existing telemetry stack with minimal friction. 
+
+It's released under the Elastic License 2.0 (source-available rather than strict OSI open source) and is free to self-host.
+
+Arize offers managed cloud tiers through Arize AX: a free AX Free tier covers 25,000 spans a month (15-day retention), and AX Pro is $50 per month for 50,000 spans, 30-day retention, and 10 GB of ingestion volume. 
+
+Phoenix itself stays free to self-host with no usage caps. What makes Arize's broader platform distinct is its heritage in classical ML and computer vision observability, which is useful if you're debugging more than just LLMs.
+
+#### Strengths
+
+- OpenTelemetry-native with a strong, well-regarded open-source evaluation library.
+- ML-grade rigor, backed by Arize's history monitoring traditional ML models.
+- Free to self-host for teams with the infrastructure to run it.
+
+<CalloutBox icon="IconStarFilled" title="Arize Phoenix is best for..." type="fyi">
+Platform and ML engineers who want OpenTelemetry-native, standards-based observability with rigorous evals, and who may also monitor non-LLM models.
+</CalloutBox>
+
+### 5. Braintrust
+
+![Braintrust dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/braintrust_dashboard_4432b9d90e.png)
+
+**Braintrust** takes an opinionated stance on observability: it shouldn't be separate from evaluation, and evals should gate what reaches production.
+
+It's best described as an observability platform built around evaluation-driven development, with evaluation workflows that can be integrated into CI/CD pipelines to block releases when quality drops. 
+
+Braintrust charges no per-seat fees. Its pricing is a flat platform fee plus data-based overages, with a free Starter tier that includes 1 GB of processed data, 10,000 evaluation scores, and unlimited users. 
+
+The trade-off is focus, since Braintrust leans more toward evaluation than deep production tracing. Self-hosting is also enterprise-only.
+
+#### Strengths
+
+- Evaluation-first with CI/CD gating to stop bad prompts and models from shipping.
+- No per-seat pricing, so adding collaborators doesn't inflate the bill.
+- Generous free tier of 1 GB of data, enough for many early-stage production workloads.
+
+<CalloutBox icon="IconStarFilled" title="Braintrust is best for..." type="fyi">
+Teams that ship LLM features fast and want evaluation to determine what reaches production, with deployment gating and team-wide pricing.
+</CalloutBox>
+
+
+### 6. Weights & Biases Weave
+
+![Weights & Biases Weave dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/weave_dashboard_def536a79b.png)
+
+**Weave** is the LLM observability product from Weights & Biases, and it's the natural choice for teams already living in W&B for model training. You instrument calls with a simple `@weave.op` decorator, and it captures inputs, outputs, traces, latency, and cost information for supported model providers.
+
+Weave has matured into a serious observability and evaluation platform, with built-in scorers for common risks such as toxicity, PII exposure, and hallucinations, plus a playground for testing prompts against production traces.
+
+Weave's client library is open source, but the platform itself is a proprietary SaaS, with on-prem reserved for Enterprise. Pricing combines seat-based plans (Pro starts at $60 a month) with usage-based billing on the bytes you ingest into Weave – Pro includes 1.5 GB of Weave ingestion a month, then $0.10 per MB beyond that. That ingestion overage, more than seat count, is usually what drives a Weave bill.
+
+#### Strengths
+
+- Effortless if you already use W&B for ML experiment tracking.
+- Strong agent monitoring with built-in safety and quality scorers.
+- Mature evaluation tooling carried over from W&B's ML heritage.
+
+<CalloutBox icon="IconStarFilled" title="Weights & Biases Weave is best for..." type="fyi">
+Teams already using Weights & Biases for model training who want LLM observability and evals in the same platform they already know.
+</CalloutBox>
+
+### 7. Opik
+
+![Opik dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/opik_dashboard_eb90b7cc5d.png)
+
+**Opik** is an open-source platform for evaluating, testing, and monitoring LLM apps, built by Comet.
+
+It provides tracing, annotations, a prompt and model playground, and evaluation, and with around 19,500 GitHub stars it has strong adoption for an open-source tool. It's Apache 2.0-licensed with a free hosted plan of 25,000 spans per month, 10 team members, and 60-day retention.
+
+What makes Opik distinct is its connection to Comet's broader MLOps and experiment-tracking platform. Like W&B Weave, it appeals to teams training and hosting their own models, not just teams calling LLM provider APIs – but Opik is open source, where Weave is proprietary. If your work spans model training and LLM apps, Opik covers both.
+
+#### Strengths
+
+- Strong open-source traction and a generous free tier with 60 day retention.
+- Appeals to model builders, thanks to Comet, not just LLM app developers.
+- Full feature set: tracing, evals, annotations, and a playground.
+
+<CalloutBox icon="IconStarFilled" title="Opik is best for..." type="fyi">
+Teams that train or fine-tune their own models as well as build LLM apps, and want open-source observability and evals that cover both.
+</CalloutBox>
+
+### 8. LangWatch
+
+![LangWatch dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/langwatch_dashboard_aca064ca7b.png)
+
+**LangWatch** is an open-source LLMOps platform that's OpenTelemetry-native and framework-agnostic, with support for LangGraph, DSPy, Vercel AI SDK, and others. 
+
+It covers traces, evaluations, prompt management, and datasets, but its standout features are agent simulation testing (run a simulated user against your agent across realistic scenarios before production) and automatic prompt optimization via Stanford's DSPy framework, meaning prompts are improved through structured, data-driven experimentation, not guesswork. Setup takes about five minutes, often a single environment variable.
+
+It's a newer entrant than the leaders here, but it's actively developed and occupies a genuinely differentiated niche. Its free plan includes 50,000 events a month, 14-day data retention, and up to 2 users. The Growth plan is €29 per core seat per month, with 200,000 events included, pay-as-you-go overage at €0.00005 per event, and 30-day data retention.
+
+#### Strengths
+
+- Agent simulation testing, a forward-looking capability few competitors offer.
+
+- OpenTelemetry-native and framework-agnostic, so you avoid lock-in.
+
+- Auto-prompt optimization via DSPy, built into the platform.
+
+<CalloutBox icon="IconStarFilled" title="LangWatch is best for..." type="fyi">
+Teams building complex agents who want open-source observability with agent simulation testing and prompt optimization, not just passive tracing.
+</CalloutBox>
+
+### 9. OpenLLMetry
+
+![OpenLLMetry dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/openllmetry_dashboard_ec040a225c.png)
+
+OpenLLMetry is an open-source set of extensions to OpenTelemetry, built by Traceloop. It's the pick for teams that already run OpenTelemetry and want LLM instrumentation to fit their existing stack rather than introduce a new platform. 
+
+It captures data from a wide range of LLM providers, vector databases, and frameworks, then sends it to whatever backend you already use, from Datadog to New Relic to Honeycomb. It's Apache 2.0-licensed, and its conventions directly seeded the OpenTelemetry GenAI SIG – now the upstream standard for LLM observability, though still in experimental status as of 2026.
+
+One thing to factor in: Traceloop was acquired by ServiceNow in March 2026 to power its AI Control Tower governance platform. The platform's roadmap and pricing are now shaped by a large enterprise vendor rather than an independent startup; worth knowing before you build a dependency on it.
+
+OpenLLMetry is instrumentation, not a full platform, so it isn't where you go for prompt management. Traceloop, the company behind it, adds an evaluation and dashboard layer; its free tier covers 50,000 spans per month with 24-hour data retention.
+
+#### Strengths
+
+- Plugs into your existing observability tools instead of replacing them.
+- Part of the OpenTelemetry ecosystem, so it can instrument your database and API calls too.
+- Standards-based, with conventions that seeded the OpenTelemetry GenAI SIG.
+
+<CalloutBox icon="IconStarFilled" title="OpenLLMetry is best for..." type="fyi">
+Teams already invested in OpenTelemetry who want LLM tracing to flow into the APM backend they already run.
+</CalloutBox>
+
+## How much do LLM observability tools cost at scale?
+
+The free tier is not a good indicator of how your cost would scale. What actually decides your bill is the pricing model, because each one gets expensive in a different way. Here's what each tool charges on:
+
+| Tool | Pricing model | What spikes the bill |
+| --- | --- | --- |
+| PostHog | Usage-based per event, no seat fees | Event volume above the free tier |
+| Langfuse | Free self-host, or per-observation cloud | Observation volume on the cloud plan |
+| LangSmith | Per seat + per trace | Team size and trace volume, together |
+| Arize Phoenix | Free self-host; Arize AX usage-based | Span volume on the cloud (AX) plan |
+| Braintrust | Flat fee + data, no seats | Data volume and score count above your tier |
+| W&B Weave | Per seat + data ingestion | Seats plus ingested bytes |
+| Opik | Usage-based per span | Span volume |
+| LangWatch | Per seat + event-based overage | Seat plus event volume |
+| OpenLLMetry | Free library, backend billed separately | Your backend's storage costs |
+
+Two patterns cause most of the bill shock. **Per-seat pricing** punishes team growth. **Per-span, per-observation, or per-event pricing** punishes agents, because a single agent run can emit ten or more spans, so your volume balloons faster than your traffic does. 
+
+The exception is **per-trace pricing** (LangSmith): one trace covers a whole request no matter how many calls are nested inside, so an agent's fan-out doesn't inflate the count – there, the cost drivers are seats and request volume instead.
+
+> Here's a concrete example. Say you're a five-engineer team running an LLM feature in production. It handles 100,000 user requests a month, but each request is an agent making around five model calls plus two tool calls – roughly seven spans/operations per request, so about 700,000 spans a month across 100,000 top-level requests. 
+
+Let's see how much this would cost, across different platforms:
+
+- **PostHog (usage-based per event):** the first 100,000 LLM analytics events each month are free, then you pay a $0.00006 per-event rate with no seat fees. Each generation and span is an event, so this workload is roughly 700,000 events; you'd pay for the ~600,000 above the free tier = ~$36.
+
+- **LangSmith (per seat + per trace):** one trace typically represents an entire user request, regardless of how many spans or model calls happen inside it. In this example, 100,000 requests produce 100,000 billable traces. With five seats at $39/month (Plus plan), that's $195 in seat costs. After the 10,000 included traces (Plus plan), the remaining 90,000 traces cost about $225 in overages ($0.0025/trace), bringing the total to roughly $420/month. The important thing is that the bill grows with request volume, not with the number of spans inside each request.
+
+- **Braintrust (flat fee, no seats):** the free Starter tier includes 1GB of processed data (roughly 1 million spans at typical payload sizes), so this ~700,000-span workload still fits inside the free tier at $0. If you outgrow it, Pro is a flat $249 a month with unlimited users and data-based overages. Adding engineers costs nothing.
+
+- **Langfuse cloud (per observation):** a note on terminology first – Langfuse's billable unit is anything you send it: traces, observations (spans, generations), and scores. If 100,000 user requests create 100,000 traces and about 700,000 observations, the workload is about 800,000 billable units. On the Core plan, that means $29 for the first 100,000 units, plus $56 for the remaining 700,000 units, or about $85/month.
+
+- **Self-hosting (PostHog, Langfuse, Phoenix, Opik, LangWatch, or OpenLLMetry):** no per-observation or per-seat fee at all. You trade that for the infrastructure and the engineering time to run it. At high volume, this is usually the cheapest path if you have the people to maintain it.
+
+**Takeaway**: if your team is growing, avoid per-seat models. If your app is agent-heavy, watch per-span pricing closely. And if you have the ops capacity, self-hosting an open-source tool is the most predictable bill at scale. 
+
+## Which LLM observability tool should you choose?
+
+- Want a full AI observability suite (tracing, evals, prompt management) inside one platform with multiple tools (product analytics, replays, flags, and more) that agents can act on? **PostHog**.
+- Building on LangChain or LangGraph and want native tracing with near-zero setup? **LangSmith**.
+- Want the most complete open-source platform, with the option to self-host and own your data? **Langfuse**.
+- Want OpenTelemetry-native, standards-based observability with no lock-in? **Arize Phoenix** for a full platform, or **OpenLLMetry** if you'd rather pipe LLM spans into the backend you already run.
+- Training or fine-tuning your own models alongside building LLM apps? **Opik**.
+- Is evaluation quality your real bottleneck, and you want to gate releases on it? **Braintrust**.
+- Building complex agents you want to simulate and optimize before shipping? **LangWatch**.
+- Already living in Weights & Biases for model training? **W&B Weave**.
+
+## Recommendations by team type
+
+The framework above is the quick answer. Here's the detailed version, by the kind of team you're on.
+
+### Solo developers and side projects
+
+You want free, fast, and low-maintenance, and you don't want a sales call? **PostHog** gives you 100,000 LLM events free a month plus everything else in the platform, **Langfuse** is free to self-host or 50,000 observations on the cloud, and **Opik** offers 25,000 spans with 60 day retention. 
+
+Avoid per-seat tools – you're paying for capacity you don't need. If your side project is an agent specifically, **AgentOps** is a lightweight honorable mention with time-travel debugging and session replay across Python and TypeScript SDKs.
+
+### Early-stage startups
+
+You want a generous free tier, room to grow without re-platforming, and ideally observability that sits next to your product analytics so you can see how features land? **PostHog** is built for exactly this, since LLM observability is one app among many you'll grow into. 
+
+**Langfuse** is the strongest dedicated open-source option, and **Braintrust** is compelling thanks to its 1GB data (~1M spans) free tier and the absence of any seat tax as your team grows.
+
+### Scaling teams
+
+Both your team and your traffic are growing, which makes per-seat pricing painful and evaluation discipline essential? Lean toward tools with no seat charges and real eval workflows: **Braintrust** for CI/CD gating, **PostHog** for usage-based pricing with no seat fees, **Langfuse** if you want to self-host and own the data, and **LangWatch** if you're shipping complex agents that need simulation testing before release.
+
+### Enterprises (SOC 2, HIPAA, self-hosting)
+
+You need compliance, SSO, and on-prem or VPC deployment? **Arize**, **Braintrust** (Enterprise), **LangSmith** (Enterprise and hybrid), and **W&B Weave** (on-prem) all serve this tier. 
+
+**PostHog** is open source and its cloud is SOC 2 Type II compliant. For a compliance-first shop that wants it out of the box, **HoneyHive** is an honorable mention with SOC 2 Type II, HIPAA, and GDPR built in, though it's enterprise-priced and sales-led rather than self-serve.
+
+<WizardCTA />
+
+## Frequently asked questions
+
+<details>
+<summary>What is AI observability?</summary>
+
+AI observability is the practice of monitoring and understanding how your LLM-powered app behaves in production. It captures individual LLM calls (inputs, outputs, latency, token usage), aggregates metrics across requests, and gives you tools to debug issues and improve performance. It's like traditional application observability, but focused on the things that make LLMs different: non-deterministic outputs, high token costs, prompt sensitivity, and the difficulty of judging whether an answer is actually good.
+
+</details>
+
+<details>
+<summary>What's the best LLM observability tool?</summary>
+
+There's no single best LLM observability tool, only the best for your situation. **PostHog** is best if you want observability connected to your product analytics, session replays, and feature flags in one platform. **Langfuse** is the most complete open-source option. **LangSmith** is best inside LangChain. **Braintrust** and **LangWatch** are strongest when evaluation quality is your real problem. Match the tool to your stack and your bottleneck rather than chasing a universal winner.
+
+</details>
+
+<details>
+<summary>What's the difference between LLM observability and traditional observability (e.g. Datadog)?</summary>
+
+Traditional observability tools like [Datadog](/blog/best-datadog-alternatives) track infrastructure: latency, error rates, uptime, and throughput. Those are mostly binary, since something either worked or it didn't. 
+
+LLM observability adds a quality dimension. A model call can return a perfectly valid response that's also wrong, biased, or off-topic, and a normal monitor would call that a success. LLM observability tools capture the actual prompts and outputs, and many add evaluations to measure whether responses are good, which traditional APM tools don't do.
+
+</details>
+
+<details>
+<summary>Do I need LLM observability if I'm just using OpenAI's API?</summary>
+
+Yes, if real users are involved. Calling OpenAI's API directly still leaves you blind to which prompts cause bad answers, where your token spend is going, and how latency behaves under load. Even a simple setup benefits from capturing requests and costs. Tools like PostHog and Langfuse can start logging your OpenAI calls with very little setup, so there's little reason to fly blind.
+
+</details>
+
+<details>
+<summary>What's the best open-source LLM observability tool?</summary>
+
+**Langfuse** is the most complete open-source LLM observability platform, with tracing, prompt management, evals, and datasets under an MIT license. **PostHog** (MIT), **Opik** (Apache 2.0), **Arize Phoenix** (Elastic License 2.0), **LangWatch**, **Helicone** (Apache 2.0), and **OpenLLMetry** (Apache 2.0) are all open source too. We compare the field in depth in our guide to the [best open-source LLM observability tools](/blog/best-open-source-llm-observability-tools).
+
+</details>
+
+<details>
+<summary>Which has the most generous free tier?</summary>
+
+By raw volume, **Braintrust** leads with 1 GB of data (~1 million trace spans) free per month and no per-seat charges, which is enough for real production workloads. **PostHog** offers 100,000 LLM events free monthly, and self-hosting **Langfuse**, **Phoenix**, or **Opik** is effectively unlimited since you only pay for infrastructure. The most generous tier depends on whether you measure by spans, events, or the freedom to self-host.
+
+</details>
+
+<details>
+<summary>Which is best for evals specifically?</summary>
+
+**Braintrust** is the most eval-focused tool, with CI/CD gating that can block a release when output quality drops. **LangWatch** is strong on evaluation too, with agent simulation testing and prompt optimization. **Langfuse**, **Arize Phoenix**, and **Opik** all have solid built-in evals, and **PostHog**'s [evaluations](/docs/llm-analytics/evaluations) let you score outputs to track [whether they're actually good](/blog/stop-ai-slop) over time.
+
+</details>
+
+<details>
+<summary>Is OpenTelemetry-based observability a good fit for LLM apps?</summary>
+
+Yes, especially if you already run OpenTelemetry for the rest of your stack. **OpenLLMetry** and **Arize Phoenix** are OpenTelemetry-native, and **LangWatch**, **Langfuse**, and **LangSmith** all support it. The big advantage is no lock-in: instrument once with OpenTelemetry and you can switch backends later without re-instrumenting your app. Given how fast this space is consolidating, that flexibility is worth a lot.
+
+</details>
+
+<NewsletterForm />
