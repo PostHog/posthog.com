@@ -165,7 +165,7 @@ Today our [small teams](/teams) are building their own fleet of wizards. Many as
 
 Turns out being a [transparent company](/founders/how-to-run-a-transparent-company) also makes you agent-ready.
 
-**Remember:** "The context with the most leverage is the context you already have. Building shared infrastructure will free the context trapped within your systems to accelerate agent development across teams."
+> **Remember:** The context with the most leverage is the context you already have. Building shared infrastructure will free the context trapped within your systems to accelerate agent development across teams.
 
 ## Lesson #6: Investing in context pays off
 
