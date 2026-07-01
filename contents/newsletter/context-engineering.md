@@ -174,7 +174,7 @@ Turns out being a [transparent company](/founders/how-to-run-a-transparent-compa
 
 ## Lesson #6: Investing in context pays off
 
-![Onboarding conversion and activation results](https://res.cloudinary.com/dmukukwp6/image/upload/v1782746624/context_engineering_lesson6_31133fce8a.png)
+![Onboarding conversion and activation results](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/7a19b89f_5592_4037_a9d3_536595f481b1_2002x876_ab9bb1f735.png)
 
 The wizard is one of the highest-impact things we've shipped, and the context behind it is the main reason why.
 
