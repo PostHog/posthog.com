@@ -6,17 +6,18 @@ const DOWNLOAD_URL = 'https://code.posthog.com/download'
 const RELEASES_URL = 'https://github.com/PostHog/code/releases/latest'
 
 type OS = 'mac' | 'windows' | 'linux' | 'unknown'
-type MacArch = 'arm64' | 'x64'
+type Arch = 'arm64' | 'x64' | 'unknown'
 
-// code.posthog.com serves the latest build published to the auto-update server.
-// It only covers Apple Silicon and Windows today; Intel Mac and Linux link to
-// the GitHub release assets because the worker bounces unsupported platforms
-// back to /code.
+// code.posthog.com redirects to the latest build published to the auto-update
+// server. Arch is detected client-side and passed as an explicit path because
+// browsers don't send the Sec-CH-UA-Arch hint on cross-origin navigation, so
+// the worker can't tell an Intel Mac from Apple Silicon on its own.
 const PLATFORMS = [
-    { key: 'mac-arm64', label: 'macOS (Apple Silicon)', url: `${DOWNLOAD_URL}/mac` },
-    { key: 'mac-x64', label: 'macOS (Intel)', url: RELEASES_URL },
+    { key: 'mac-arm64', label: 'macOS (Apple Silicon)', url: `${DOWNLOAD_URL}/mac/arm64` },
+    { key: 'mac-x64', label: 'macOS (Intel)', url: `${DOWNLOAD_URL}/mac/intel` },
     { key: 'windows-x64', label: 'Windows', url: `${DOWNLOAD_URL}/windows` },
-    { key: 'linux', label: 'Linux', url: RELEASES_URL },
+    { key: 'linux-x64', label: 'Linux (x64)', url: `${DOWNLOAD_URL}/linux/x64` },
+    { key: 'linux-arm64', label: 'Linux (Arm64)', url: `${DOWNLOAD_URL}/linux/arm64` },
 ] as const
 
 type Platform = (typeof PLATFORMS)[number]
@@ -45,41 +46,48 @@ function detectOS(): OS {
     return 'unknown'
 }
 
-async function detectMacArch(): Promise<MacArch> {
+async function detectArch(os: OS): Promise<Arch> {
     try {
         const uaData = (navigator as any)?.userAgentData
         if (uaData?.getHighEntropyValues) {
             const { architecture } = await uaData.getHighEntropyValues(['architecture'])
+            if (architecture === 'arm') return 'arm64'
             if (architecture === 'x86') return 'x64'
         }
     } catch {
-        // ignore — assume Apple Silicon
+        // ignore — fall through to defaults
     }
-    return 'arm64'
+    if (os === 'linux') {
+        const ua = (navigator.userAgent || '').toLowerCase()
+        return ua.includes('aarch64') || ua.includes('arm64') ? 'arm64' : 'x64'
+    }
+    return 'unknown'
 }
 
 export function DownloadContent({ className }: { className?: string }): JSX.Element {
     const [os, setOS] = useState<OS>('unknown')
-    const [macArch, setMacArch] = useState<MacArch>('arm64')
+    const [arch, setArch] = useState<Arch>('unknown')
 
     useEffect(() => {
         const detected = detectOS()
         setOS(detected)
-        if (detected === 'mac') detectMacArch().then(setMacArch)
+        detectArch(detected).then(setArch)
     }, [])
 
     const primaryKey: PlatformKey | null =
         os === 'mac'
-            ? macArch === 'x64'
+            ? arch === 'x64'
                 ? 'mac-x64'
                 : 'mac-arm64'
             : os === 'windows'
             ? 'windows-x64'
             : os === 'linux'
-            ? 'linux'
+            ? arch === 'arm64'
+                ? 'linux-arm64'
+                : 'linux-x64'
             : null
     const primary = primaryKey ? getPlatform(primaryKey) : null
-    const macAlt = os === 'mac' ? getPlatform(macArch === 'x64' ? 'mac-arm64' : 'mac-x64') : null
+    const macAlt = os === 'mac' ? getPlatform(primaryKey === 'mac-x64' ? 'mac-arm64' : 'mac-x64') : null
 
     return (
         <div className={className}>
@@ -127,6 +135,17 @@ export function DownloadContent({ className }: { className?: string }): JSX.Elem
                     ))}
                 </div>
                 <p className="mt-6 text-sm text-secondary">
+                    Linux builds are also available as a{' '}
+                    <Link to={`${DOWNLOAD_URL}/linux/deb`} external>
+                        .deb
+                    </Link>{' '}
+                    or{' '}
+                    <Link to={`${DOWNLOAD_URL}/linux/rpm`} external>
+                        .rpm
+                    </Link>
+                    .
+                </p>
+                <p className="mt-2 text-sm text-secondary">
                     <Link to={RELEASES_URL} external>
                         View all releases and notes
                     </Link>
