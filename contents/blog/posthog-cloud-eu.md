@@ -23,6 +23,8 @@ Oh, and PostHog Cloud EU also happens to be faster for users located in Europe, 
 
 PostHog Cloud EU offers everything you'd expect of PostHog – analytics, session recording, experiments and more. The only difference is that you can now choose to host in a different region, at no extra cost. 
 
+<WizardCTA />
+
 <GDPRForm />
 
 ## FAQ
