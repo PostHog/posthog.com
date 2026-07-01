@@ -81,7 +81,7 @@ The flexibility of the sandbox plus the scalability of MCP tools and skill stand
 
 When building an agent, there’s ultimately one question you need to answer to succeed: How does this beat Claude?
 
-Context is the most important part of an answer. The combination of your app’s functionality and user data create a unique blend no other product can match. Building our [PostHog Wizard](/wizard) confirmed this — every optimization at the agent layer was marginal; the real gains came from [engineering the context that powered it](/newsletter/context-engineering#lesson-1-reasoning-isnt-the-bottleneck).
+Context is the most important part of an answer. The combination of your app’s functionality and user data create a unique blend no other product can match. 
 
 Although you have product and user context sitting around, you need structure and format it to be useful for the agent. We do this with:
 
