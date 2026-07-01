@@ -66,7 +66,7 @@ This iteration is guided by feedback. For us, this means reviewing:
 
 <Caption>Our most unhelpful docs 🙈</Caption>
 
-We take time every week to review these and make improvements to docs. We also benefit from a huge amount of small fixes from [our community](/blog/github-cms). As your codebase moves faster, you can also [close the loop with a docs agent](/newsletter/context-engineering#lesson-3-fix-context-drift-at-the-source) that drafts updates from merged feature PRs, so documentation velocity keeps pace with code velocity.
+We take time every week to review these and make improvements to docs. We also benefit from a huge amount of small fixes from [our community](/blog/github-cms). 
 
 It is the repeated little improvements that creates a coveted polished docs experience.
 
