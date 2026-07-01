@@ -434,7 +434,7 @@ const workSurfaces: {
         copy: 'A desktop app for driving parallel agents to edit your product. The same Inbox and reports live here.',
         cta: (
             <CallToAction to="/code" state={{ newWindow: true }} type="secondary" size="md">
-                Learn more
+                Get the app
             </CallToAction>
         ),
     },
@@ -449,7 +449,7 @@ const workSurfaces: {
         copy: '@PostHog brings PostHog into Slack channels. Route reports to the ones each team already watches (hedgehog mode not included).',
         cta: (
             <CallToAction to="/slack" state={{ newWindow: true }} type="secondary" size="md">
-                Learn more
+                Add to Slack
             </CallToAction>
         ),
     },
@@ -464,7 +464,7 @@ const workSurfaces: {
         copy: 'Look ma, no hands! Pull self-driving context into other tools, and pull context from your other tools into self-driving.',
         cta: (
             <CallToAction to="/mcp" state={{ newWindow: true }} type="secondary" size="md">
-                Learn more
+                Hook it up
             </CallToAction>
         ),
     },
