@@ -450,7 +450,12 @@ export default function HubSpotForm({
 
     useEffect(() => {
         fetch(`/api/hubspot-form?formID=${formID}`)
-            .then((res) => res.json())
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(`Failed to fetch HubSpot form: ${res.status}`)
+                }
+                return res.json()
+            })
             .then((form: Form) => {
                 const fields = form.formFieldGroups
                     .map((group) => {
@@ -480,6 +485,9 @@ export default function HubSpotForm({
                     )
                     setValidationSchema(validationSchema)
                 }
+            })
+            .catch((error) => {
+                console.error(error)
             })
     }, [])
 

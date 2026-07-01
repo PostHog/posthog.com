@@ -115,9 +115,18 @@ export default function Hub({ folder, sidebar, title }: { folder: string; sideba
             { encodeValuesOnly: true }
         )
         fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/post-tags?${query}`)
-            .then((response) => response.json())
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch post tags: ${response.status}`)
+                }
+                return response.json()
+            })
             .then((data) => {
                 setTags(data.data)
+                setLoading(false)
+            })
+            .catch((error) => {
+                console.error(error)
                 setLoading(false)
             })
     }, [])
