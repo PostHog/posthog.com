@@ -49,10 +49,10 @@ first you always have to ground the agent in reality. or you ask for words and t
 
 we downloaded example data from the largest recordings and the top p75
 
-and wrote scripts together to analyse them and assess where the data was coming from.
+and wrote scripts together to analyze them and assess where the data was coming from.
 
 the main risk in this kind of work is that the agent will slurp in too much data and start to get stupid
-so the main work was in prompting how to analyse in parts over just asking an open question
+so the main work was in prompting how to analyze in parts over just asking an open question
 and then arguing with it about its statements to force it to fake think better
 
 mostly what we discovered was that early assumptions about what would happen in reality were wrong
