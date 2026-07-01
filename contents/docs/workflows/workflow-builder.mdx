@@ -116,6 +116,40 @@ When the pixel is loaded (e.g. when a recipient opens an email), the workflow fi
 
 You can pass data via query parameters on the pixel URL and map them to event properties in the trigger configuration.
 
+### Conversion goals
+
+Conversion goals let you define success criteria for your workflow. When a user meets the conversion goal, PostHog records a conversion metric and emits a `$workflows_conversion` event for the converting person.
+
+You can configure two types of conversion goals:
+
+| Goal type      | Description                                                     |
+| -------------- | --------------------------------------------------------------- |
+| Event-based    | The user performs a specific event (e.g. `purchase_completed`)  |
+| Property-based | A person property matches a condition (e.g. `plan` is `growth`) |
+
+To add a conversion goal, click on the trigger step and configure the **Conversion goal** settings.
+
+Conversions are tracked regardless of whether your workflow is configured to exit on conversion. This means you can measure conversions even for workflows that continue running after a user converts.
+
+Once configured, you'll see **Converted** and **Conversion rate** cards in the **Metrics** tab. The conversion rate is calculated as conversions divided by started workflow runs over the selected date range, capped at 100%. Click **View converted users** on either card to see the list of users who completed the conversion goal.
+
+The `$workflows_conversion` event carries the following properties:
+
+| Property                          | Description                                                            |
+| --------------------------------- | ---------------------------------------------------------------------- |
+| `$workflow_id`                    | The workflow that recorded the conversion                              |
+| `$workflow_conversion_type`       | Either `event` or `property`                                           |
+| `$workflow_conversion_event`      | The event name that triggered the conversion (event-based only)        |
+| `$workflow_conversion_event_uuid` | The UUID of the event that triggered the conversion (event-based only) |
+
+Because `$workflows_conversion` is a standard PostHog event, you can use it in insights, funnels, cohorts, and dashboards like any other event.
+
+<CalloutBox type="fyi" title="Conversion events count toward your event usage">
+
+Each conversion emits a billable `$workflows_conversion` event. This counts toward your PostHog event ingestion volume.
+
+</CalloutBox>
+
 ## Dispatches
 
 Dispatches are the messages you send, mail, slack, SMS, webhook, or any PostHog real time destinations. There are 4 main types of dispatches:

@@ -7,7 +7,7 @@ import { ProductScreenshot } from 'components/ProductScreenshot'
 import { ProductVideo } from 'components/ProductVideo'
 import Link from 'components/Link'
 import CloudinaryImage from 'components/CloudinaryImage'
-import { SingleCodeBlock } from 'components/CodeBlock'
+import PlatformInstall from 'components/PlatformInstall'
 import ProductList from 'components/ProductList'
 import WizardCTA from 'components/WizardCTA'
 import ElevenLabsLogo from 'components/CustomerLogos/ElevenLabsLogo'
@@ -151,9 +151,7 @@ export default function PostHogMCPLanding(): JSX.Element {
                                 <strong>Already using PostHog and just want to add the MCP?</strong>
                             </p>
 
-                            <SingleCodeBlock language="bash" showAskAI={false}>
-                                npx @posthog/wizard mcp add
-                            </SingleCodeBlock>
+                            <PlatformInstall variant="inline" command="mcp add" slim />
 
                             <div className="mt-4">
                                 <CallToAction

@@ -1,28 +1,29 @@
-## Q2 2026 goals
+## Q3 2026 goals
 
-- PostHog = AI First (James)
-    - Every product should be usable by an MCP and/or have useful signals implemented (James)
-    - Launch PostHog Code (James)
-    - Positioning (James)
-- Hit our [ARR target](https://docs.google.com/document/d/1Ofpxd5N4e_PKlSbRDEJ86T9Rs2ihfpKQf5MFuohWP1g/edit?tab=t.0) (Tim)
-    - Launch managed warehouse with pricing (Raquel)
-    - Launch PostHog Code with pricing (James)
-    - Ongoing margin + cost work (Tim)
-- Increase reliability (Ben)
-    - Set up better limits/boundaries/guidance where relevant (Ben)
-    - Figure out, across the various use cases, what are the root problems of reliability and what do the product teams need to do (Ben)
-    - We understand the root causes of and assign owners to get to X nine’s (depending on product - part of the goal is figuring out what this number should be) (Ben)
-- Query performance (Paul)
-    - significantly reduce the count of slow queries per day
-    - significantly reduce p95 of seconds users spend waiting for results
-- Make sure we’re marketing and cross selling every product the right amount, to keep moving us away from being seen as analytics++ (Charles)
+- Redefine our ICP (and who we sell to) and reposition PostHog on our website (James)
+- What is PostHog, rebuild PostHog towards our redefined ICP (Raquel)
+    - Existing products - new features welcome but make sure new features are shipped into the MCP via API
+    - Raquel to write a doc - what are we doing with the current UI? Should people be adding new features there? How do we not ostracize our existing customers who aren’t AI-pilled yet? How do we handle this before/after the new PostHog v2 is ready for everyone to use?
+- PostHog is known as a self-driving product company, not an analytics company (Charles)
+- We find ways to get good at higher margin revenue to pay for the party (Ben B)
+    - Switch to selling self driving deal visionary-style into big customers
+    - Figure out if big means tech forward or traditional enterprise, or both, so we can scale what works here, refine the pitch
+- Figure out onboarding onto self driving for new users (and fallback to PostHog Classic) (Tim)
+    - What metrics do we care about with this switch?
+- 2030 CI (Paul)
+    - number of PRs merged per month is climbing at about 10% a month but speed and efficiency of CI is not
+    - we need to build our CI for a world where the cost of generating a PR is low and so the cost of CI must be low 
+- Reliability/scalability doesn't need to be a goal next quarter (Ben)
+    - we have much more solid metrics for reliability - some manual and some automated, per team and global
+    - impact of incidents / time to resolve goes way down (we need better metrics to understand this)
+    - we have automated most of our detection and resolution with teams driving automation rather than reacting to incidents
+    - critical services have clear SLA/SLOs and are keeping to them
+    - security related incidents are handled fast and we aggressively work towards ambitious changes that up the bar here
+    - we make progress towards a cell-based infrastructure so that we can test at scale in isolation
 
-- **Charles:** Sales & demand gen, customer success, onboarding, marketing & content, support, and billing
-- **James:** <SmallTeam slug="website" />, and core AI products
-- **Raquel:** data stack, and PMs
-- **Paul:** Product analtyics, Web analytics, Analytics platform, Customer analytics, Client libraries, Session replay, Platform UX
-- **Tim:** growth, devex, sales/CS/ops/finance/people
-- **Ben:** Infra, ClickHouse, & various product teams
+### Ungoals
+
+- Hitting new revenue goals. We should make sure revenue from existing customers on existing products continues to grow. But because we are experimenting with new products, new customers might not convert to revenue as well as they would have done. That's okay.
 
 ## Working together
 
@@ -36,4 +37,4 @@ To keep the group focused:
 - We will review who is in the weekly meeting every three months and adjust as needed.
 - Not being in the meeting does not mean your work is not important. It usually means you are doing a great job communicating everything the team might need to be aware about, so staying focused on your area is more important.
 
-Notes are posted in [#team-blitzscale](https://posthog.slack.com/archives/C06LMMS3YP4) later in the week.
+Blitzscale team members post a weekly update in [#team-blitzscale](https://posthog.slack.com/archives/C06LMMS3YP4) for the things they are working on that everyone should be aware of. 

@@ -53,3 +53,7 @@ Connect PostHog to your AdRoll account using your API credentials.
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

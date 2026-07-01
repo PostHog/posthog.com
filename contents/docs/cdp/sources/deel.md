@@ -9,7 +9,7 @@ availability:
 sourceId: Deel
 ---
 
-<CalloutBox icon="IconInfo" title="Alpha release" type="fyi">
+<CalloutBox icon="IconFlask" title="Alpha release" type="action">
 
 This source is currently in **alpha**. The interface and available tables may change.
 
@@ -58,3 +58,7 @@ Deel API tokens are scoped per dataset. Your token needs the read permission for
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />
