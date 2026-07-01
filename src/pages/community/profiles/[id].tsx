@@ -51,6 +51,7 @@ import LevelBadge from 'components/Squeak/components/LevelBadge'
 import OSButton from 'components/OSButton'
 import { IconNoEntry, IconStrapi } from 'components/OSIcons'
 import Points from 'components/Points'
+import ConnectedAccounts from 'components/Squeak/components/ConnectedAccounts'
 import { useWindow } from '../../../context/Window'
 
 dayjs.extend(relativeTime)
@@ -1740,6 +1741,11 @@ export default function ProfilePage({ params }: PageProps) {
                                 </Block>
                             )}
                             {isEditing && <BackgroundImageField setFieldValue={setFieldValue} values={values} />}
+                            {isEditing && isCurrentUser && (
+                                <Block title="Connected accounts">
+                                    <ConnectedAccounts hideHeading stacked />
+                                </Block>
+                            )}
                             {isModerator && isEditing && (
                                 <Block title="Special employee things">
                                     <ModeratorFields setFieldValue={setFieldValue} values={values} errors={errors} />

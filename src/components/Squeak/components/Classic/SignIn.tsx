@@ -28,7 +28,7 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSuccess }) => {
     const { setWindowTitle, closeWindow, openRegister, openForgotPassword } = useApp()
     const { appWindow } = useWindow()
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
-    const { handleSubmit, submitForm, touched, errors, getFieldProps, isSubmitting, values } = useFormik({
+    const { handleSubmit, submitForm, touched, errors, getFieldProps, isSubmitting } = useFormik({
         initialValues: {
             email: '',
             password: '',
@@ -39,6 +39,8 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSuccess }) => {
                 errors.email = 'Required'
             } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
                 errors.email = 'Invalid email address'
+            } else if (isPostHogEmail(values.email)) {
+                errors.email = 'PostHog employees sign in with PostHog above.'
             }
             // The password field is hidden for @posthog.com (OAuth-only) emails, so
             // don't require it — otherwise the form is permanently invalid for them.
@@ -80,11 +82,6 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSuccess }) => {
         }
     }, [])
 
-    // PostHog employees must authenticate via OAuth — the backend rejects password
-    // login for @posthog.com accounts, so hide the password path and steer them
-    // to the PostHog button.
-    const isEmployeeEmail = isPostHogEmail(values.email)
-
     return (
         <div className="size-full">
             <Wizard
@@ -95,17 +92,15 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSuccess }) => {
                 }
                 rightNavigation={
                     <div className="flex items-center space-x-2">
-                        {!isEmployeeEmail && (
-                            <CallToAction
-                                disabled={isSubmitting}
-                                type="primary"
-                                size="sm"
-                                onClick={submitForm}
-                                className="flex-shrink-0"
-                            >
-                                {isSubmitting ? <IconSpinner className="size-4 animate-spin my-0.5" /> : 'Login'}
-                            </CallToAction>
-                        )}
+                        <CallToAction
+                            disabled={isSubmitting}
+                            type="primary"
+                            size="sm"
+                            onClick={submitForm}
+                            className="flex-shrink-0"
+                        >
+                            {isSubmitting ? <IconSpinner className="size-4 animate-spin my-0.5" /> : 'Login'}
+                        </CallToAction>
                     </div>
                 }
             >
@@ -121,22 +116,16 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSuccess }) => {
                             or
                             <span className="flex-1 border-t border-border" />
                         </div>
-                        {isEmployeeEmail ? (
-                            <p className="text-xs text-red dark:text-orange mb-2">
-                                PostHog employees sign in with PostHog above.
-                            </p>
-                        ) : (
-                            <p className="text-xs text-red dark:text-orange mb-2">
-                                The email and password below are separate from your PostHog app account.{' '}
-                                <Link
-                                    to="https://app.posthog.com"
-                                    external
-                                    className="text-primary font-semibold underline"
-                                >
-                                    Go to app
-                                </Link>
-                            </p>
-                        )}
+                        <p className="text-xs text-red dark:text-orange mb-2">
+                            The email and password below are separate from your PostHog app account.{' '}
+                            <Link
+                                to="https://app.posthog.com"
+                                external
+                                className="text-primary font-semibold underline"
+                            >
+                                Go to app
+                            </Link>
+                        </p>
                         <form onSubmit={handleSubmit} className="space-y-2 mb-4">
                             <Input
                                 label="Email"
@@ -147,17 +136,15 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSuccess }) => {
                                 error={errors.email}
                                 {...getFieldProps('email')}
                             />
-                            {!isEmployeeEmail && (
-                                <Input
-                                    label="Password"
-                                    type="password"
-                                    size="sm"
-                                    direction="row"
-                                    touched={!!touched.password}
-                                    error={errors.password}
-                                    {...getFieldProps('password')}
-                                />
-                            )}
+                            <Input
+                                label="Password"
+                                type="password"
+                                size="sm"
+                                direction="row"
+                                touched={!!touched.password}
+                                error={errors.password}
+                                {...getFieldProps('password')}
+                            />
                             <button type="submit" className="hidden" />
                         </form>
                         {errorMessage && <p className="text-red text-sm -mt-2 mb-2 font-bold">{errorMessage}</p>}

@@ -1,11 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { navigate } from 'gatsby'
 import SEO from 'components/seo'
 import { CallToAction } from 'components/CallToAction'
 import { IconSpinner } from '@posthog/icons'
 import { useUser } from 'hooks/useUser'
 import { useToast } from '../../../context/Toast'
 import PostHogDisambiguation from 'components/Squeak/components/Classic/PostHogDisambiguation'
+import Wizard from 'components/Wizard'
+import { useWindow } from '../../../context/Window'
+import { useApp } from '../../../context/App'
 
 // Landing page for the PostHog OAuth flow. Strapi finishes the PKCE exchange
 // with oauth.posthog.com server-side, then redirects the browser here with
@@ -15,11 +17,18 @@ import PostHogDisambiguation from 'components/Squeak/components/Classic/PostHogD
 // intent (set when connecting from account settings) instead links the identity
 // to the already-logged-in account.
 export default function PostHogRedirect(): JSX.Element {
+    const { appWindow } = useWindow()
+    const { closeWindow, openSignIn } = useApp()
     const { loginWithProvider, linkCurrent, getJwt } = useUser()
     const { addToast } = useToast()
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
     const [pending, setPending] = useState<{ pendingToken: string; emailInUse: boolean } | null>(null)
     const hasRun = useRef(false)
+
+    const handleSuccess = () => {
+        addToast({ title: 'Successfully signed in to PostHog.com', description: 'Welcome!' })
+        closeWindow(appWindow!)
+    }
 
     useEffect(() => {
         if (hasRun.current) return
@@ -63,7 +72,7 @@ export default function PostHogRedirect(): JSX.Element {
                     return
                 }
                 addToast({ title: 'PostHog login connected' })
-                navigate('/community/profile/edit', { replace: true })
+                closeWindow(appWindow!)
                 return
             }
 
@@ -85,36 +94,52 @@ export default function PostHogRedirect(): JSX.Element {
                 title: 'Successfully signed in to PostHog.com',
                 description: 'Welcome back!',
             })
-            navigate('/community', { replace: true })
+            closeWindow(appWindow!)
         }
 
         run()
     }, [])
 
+    const handleTryAgain = () => {
+        if (appWindow) {
+            closeWindow(appWindow)
+        }
+        openSignIn()
+    }
+
     return (
         <>
             <SEO title="Signing in" noindex />
             {errorMessage ? (
-                <div data-scheme="primary" className="flex flex-col items-center justify-center h-full gap-4 p-8">
-                    <p className="text-red font-semibold m-0">{errorMessage}</p>
-                    <CallToAction type="primary" size="sm" to="/community">
-                        Back to community
-                    </CallToAction>
-                </div>
+                <Wizard
+                    rightNavigation={
+                        <CallToAction type="primary" size="sm" onClick={handleTryAgain}>
+                            Try again
+                        </CallToAction>
+                    }
+                >
+                    <div className="bg-accent px-6 py-5 flex-1">
+                        <div data-scheme="primary">
+                            <h3 className="text-base font-semibold leading-tight mb-2">Couldn&apos;t sign you in</h3>
+                            <p className="text-sm text-red dark:text-yellow font-semibold mb-0">{errorMessage}</p>
+                        </div>
+                    </div>
+                </Wizard>
             ) : pending ? (
                 <PostHogDisambiguation
                     pendingToken={pending.pendingToken}
                     emailInUse={pending.emailInUse}
-                    onSuccess={() => {
-                        addToast({ title: 'Successfully signed in to PostHog.com', description: 'Welcome!' })
-                        navigate('/community', { replace: true })
-                    }}
+                    onSuccess={handleSuccess}
                 />
             ) : (
-                <div data-scheme="primary" className="flex flex-col items-center justify-center h-full gap-4 p-8">
-                    <IconSpinner className="size-8 animate-spin" />
-                    <p className="m-0">Signing you in&hellip;</p>
-                </div>
+                <Wizard>
+                    <div className="bg-accent px-6 py-5 flex-1">
+                        <div data-scheme="primary" className="flex items-center gap-2">
+                            <IconSpinner className="size-5 animate-spin flex-shrink-0" />
+                            <p className="text-sm m-0">Signing you in&hellip;</p>
+                        </div>
+                    </div>
+                </Wizard>
             )}
         </>
     )
