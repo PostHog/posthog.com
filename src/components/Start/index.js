@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import React, { Fragment, useState } from 'react'
 import SEO from 'components/seo'
 import Wizard from 'components/Wizard'
 import { CallToAction } from 'components/CallToAction'
@@ -14,8 +14,8 @@ import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
 import CodeBlock from '../Home/CodeBlock'
 import ContactForm from '../Home/ContactForm'
-import { useLocation } from '@reach/router'
 import OSTabs from 'components/OSTabs'
+import OSButton from 'components/OSButton'
 import WizardCommand from 'components/WizardCommand'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
@@ -31,12 +31,19 @@ const AIInstall = ({ setActiveTab }) => (
             <h3>Install with AI in a single prompt</h3>
             <p className="text-[15px]">Paste into your terminal or code editor and make AI do the work.</p>
             <WizardCommand />
-            <p className="border-t border-primary pt-4 mt-6 text-sm">
-                Not into AI?{' '}
-                <button className="cursor-pointer font-semibold underline" onClick={() => setActiveTab('signup')}>
-                    Sign up the old fashioned way.
-                </button>
-            </p>
+            <div className="border-t border-primary pt-4 mt-6 flex flex-col @md:flex-row @md:items-center gap-3">
+                <p className="text-sm m-0 flex-1">
+                    Not into AI? Create your account with an email and password instead.
+                </p>
+                <OSButton
+                    variant="secondary"
+                    size="md"
+                    onClick={() => setActiveTab('signup')}
+                    className="shrink-0 self-start @md:self-auto"
+                >
+                    Sign up with email
+                </OSButton>
+            </div>
         </div>
         <div
             data-scheme="primary"
@@ -79,14 +86,6 @@ const BoomerInstall = () => (
 
 export default function Start({ subdomain = 'app', initialTab = 'ai' }) {
     const [activeTab, setActiveTab] = useState(initialTab)
-    const { search } = useLocation()
-    useEffect(() => {
-        const params = new URLSearchParams(search)
-        const flow = params.get('flow')
-        if (flow) {
-            setCurrentFlow(flow)
-        }
-    }, [search])
 
     return (
         <>
