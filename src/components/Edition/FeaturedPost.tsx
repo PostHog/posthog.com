@@ -40,10 +40,17 @@ export default function FeaturedPost({
 
     // `containerStack` opts into @container-relative stacking (for resizable window columns);
     // the default keeps the blog's viewport-breakpoint layout untouched.
+    // containerStack: the image tracks the row height (set by the text column) instead of growing
+    // 16:9 with the column width, so a short article no longer leaves a big empty gap beside a
+    // huge image. Text is vertically centered next to it. The blog default is left untouched.
     const sectionClasses = containerStack
-        ? 'grid @2xl:grid-cols-2 gap-6 @2xl:gap-8 items-center rounded-md border border-input p-5 bg-accent'
+        ? 'grid @2xl:grid-cols-2 gap-6 @2xl:gap-8 items-stretch rounded-md border border-input p-5 bg-accent'
         : 'grid md:grid-cols-2 gap-6 md:gap-8 items-center rounded-md border border-input p-5 md:mx-4 bg-accent'
-    const imageAspect = containerStack ? 'aspect-video' : 'aspect-[600/315]'
+    const imageWrapperClasses = containerStack
+        ? 'w-full aspect-video @2xl:aspect-auto @2xl:h-full @2xl:min-h-[220px] rounded-md overflow-hidden'
+        : 'w-full aspect-[600/315] rounded-md overflow-hidden'
+    const linkClasses = containerStack ? 'block w-full h-full' : ''
+    const textClasses = containerStack ? 'flex flex-col justify-center' : ''
 
     const section = (
         <section className={sectionClasses}>
@@ -51,12 +58,12 @@ export default function FeaturedPost({
                 <Skeleton />
             ) : (
                 <>
-                    <div className={`w-full ${imageAspect} rounded-md overflow-hidden`}>
-                        <Link to={slug}>
+                    <div className={imageWrapperClasses}>
+                        <Link to={slug} className={linkClasses}>
                             <img className="w-full h-full object-cover" src={imageURL || '/images/og/default.png'} />
                         </Link>
                     </div>
-                    <div>
+                    <div className={textClasses}>
                         <p className="m-0 text-[15px] opacity-75">{postDate}</p>
                         <h2 className={`mt-2 mb-3 ${titleClassName || 'text-3xl lg:text-4xl'}`}>
                             <Link

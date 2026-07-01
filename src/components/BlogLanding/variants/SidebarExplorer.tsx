@@ -69,7 +69,7 @@ export default function SidebarExplorer({ folder, title, intro }: LandingVariant
                     title={sort === 'recent' ? 'Most recent' : 'Most popular'}
                     posts={posts}
                     isLoading={isLoading}
-                    columns={2}
+                    columns={3}
                     action={
                         <ToggleGroup
                             title="Sort by"
