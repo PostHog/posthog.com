@@ -1,104 +1,31 @@
-import React, { useMemo, useRef, useState } from 'react'
-import confetti from 'canvas-confetti'
+import React, { useRef, useState } from 'react'
 import { IconCheck, IconCopy } from '@posthog/icons'
-import { useApp } from '../../context/App'
 import { useToast } from '../../context/Toast'
 import { cn } from '../../utils'
-
-/** Portaled confetti must paint above `AppWindow` (`motion.div` z-index) and taskbar chrome. */
-function useCopyConfettiZIndex(): number {
-    const { windows } = useApp()
-    return useMemo(() => {
-        const maxWindowZ = windows.reduce((max, w) => Math.max(max, w.zIndex ?? 0), 0)
-        return Math.max(maxWindowZ + 5000, 200_000)
-    }, [windows])
-}
-
-/**
- * Viewport-scoped burst anchored to a real element. `react-confetti-explosion` measured a 0×0
- * node and misaligned inside nested scroll/transform (OS windows); canvas-confetti uses normalized
- * viewport coordinates from the button’s bounding rect.
- */
-function fireCopyConfetti(originEl: HTMLElement | null, zIndex: number): void {
-    if (!originEl || typeof window === 'undefined') return
-
-    const shoot = (): void => {
-        const rect = originEl.getBoundingClientRect()
-        const vw = window.innerWidth || 1
-        const vh = window.innerHeight || 1
-        const x = (rect.left + rect.width / 2) / vw
-        const y = (rect.top + rect.height / 2) / vh
-
-        /** Wide `spread` (degrees) widens the cone; extra burst + staggered angles reduce a single tight cluster. */
-        const base = {
-            origin: { x, y },
-            zIndex,
-            disableForReducedMotion: true,
-        }
-
-        confetti({
-            ...base,
-            angle: 76,
-            particleCount: 72,
-            spread: 92,
-            startVelocity: 26,
-            ticks: 260,
-            gravity: 1.16,
-        })
-        confetti({
-            ...base,
-            angle: 80,
-            particleCount: 64,
-            spread: 138,
-            startVelocity: 22,
-            ticks: 250,
-            decay: 0.92,
-            gravity: 1.1,
-        })
-        confetti({
-            ...base,
-            angle: 78,
-            particleCount: 98,
-            spread: 198,
-            startVelocity: 18,
-            ticks: 240,
-            scalar: 0.85,
-            decay: 0.87,
-            gravity: 1.1,
-        })
-        confetti({
-            ...base,
-            angle: 78,
-            particleCount: 48,
-            spread: 220,
-            startVelocity: 14,
-            ticks: 220,
-            scalar: 0.78,
-            decay: 0.86,
-            gravity: 1.08,
-        })
-    }
-
-    requestAnimationFrame(() => {
-        requestAnimationFrame(shoot)
-    })
-}
+import { useCopyConfettiZIndex, fireCopyConfetti } from './confetti'
 
 export type CopyableCommandProps = {
     command: string
+    /** Clipboard override: when set, this is copied instead of `command` (display still shows `command`). */
+    copyCommand?: string
     className?: string
     /** Apply the wizard gradient text effect to the command */
     animate?: boolean
 }
 
-export function CopyableCommand({ command, className = '', animate = false }: CopyableCommandProps): JSX.Element {
+export function CopyableCommand({
+    command,
+    copyCommand,
+    className = '',
+    animate = false,
+}: CopyableCommandProps): JSX.Element {
     const { addToast } = useToast()
     const confettiZIndex = useCopyConfettiZIndex()
     const copyButtonRef = useRef<HTMLButtonElement>(null)
     const [copied, setCopied] = useState(false)
 
     const handleCopy = () => {
-        navigator.clipboard.writeText(command)
+        navigator.clipboard.writeText(copyCommand ?? command)
         setCopied(true)
         fireCopyConfetti(copyButtonRef.current, confettiZIndex)
         window.setTimeout(() => setCopied(false), 1500)
@@ -122,7 +49,18 @@ export function CopyableCommand({ command, className = '', animate = false }: Co
                 className
             )}
         >
-            <pre className="flex-1 m-0 p-0 bg-transparent text-[13px] leading-[1.45] font-mono text-primary whitespace-pre-wrap break-all">
+            <pre
+                className={cn(
+                    'flex-1 min-w-0 m-0 p-0 bg-transparent text-[13px] leading-[1.45] font-mono text-primary',
+                    // Single-line commands scroll horizontally (no wrap) with a hidden scrollbar and a
+                    // right-edge fade so long commands don't run into the copy button. The fade only
+                    // visually bites when the text actually overflows (short commands end before it).
+                    // Multiline snippets (e.g. JSON MCP configs) keep wrapping so newlines aren't collapsed.
+                    isMultiline
+                        ? 'whitespace-pre-wrap break-all'
+                        : 'overflow-x-auto whitespace-nowrap [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [mask-image:linear-gradient(to_right,#000_calc(100%-2rem),transparent)] [-webkit-mask-image:linear-gradient(to_right,#000_calc(100%-2rem),transparent)]'
+                )}
+            >
                 <code className={cn('!bg-transparent !p-0 !border-0', animate && 'text-gradient-wizard')}>
                     {command}
                 </code>

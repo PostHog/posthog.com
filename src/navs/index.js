@@ -7165,6 +7165,12 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'PII scrubbing',
+                    url: '/docs/logs/pii-scrubbing',
+                    icon: 'IconSearch',
+                    color: 'blue',
+                },
+                {
                     name: 'Link Session Replay',
                     url: '/docs/logs/link-session-replay',
                     icon: 'IconRewindPlay',

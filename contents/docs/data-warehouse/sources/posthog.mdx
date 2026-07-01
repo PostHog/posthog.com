@@ -534,17 +534,20 @@ FROM system.information_schema.columns
 WHERE table_name = 'events'
 ```
 
-| Column             | Description                                               |
-| ------------------ | --------------------------------------------------------- |
-| `table_schema`     | Schema the table belongs to                               |
-| `table_name`       | Table the column belongs to                               |
-| `column_name`      | Name of the column                                        |
-| `ordinal_position` | Column position within the table                          |
-| `data_type`        | HogQL type (e.g. `String`, `DateTime`, `Integer`, `JSON`) |
-| `is_nullable`      | Whether the column can be null                            |
-| `is_array`         | Whether the column is an array type                       |
-| `field_kind`       | One of `column`, `expression`, or `virtual_table`         |
-| `description`      | Human-readable description of the column (if available)   |
+| Column             | Description                                                                 |
+| ------------------ | --------------------------------------------------------------------------- |
+| `table_schema`     | Schema the table belongs to                                                 |
+| `table_name`       | Table the column belongs to                                                 |
+| `column_name`      | Name of the column                                                          |
+| `ordinal_position` | Column position within the table                                            |
+| `data_type`        | HogQL type (e.g. `String`, `DateTime`, `Integer`, `JSON`)                   |
+| `is_nullable`      | Whether the column can be null                                              |
+| `is_array`         | Whether the column is an array type                                         |
+| `field_kind`       | One of `column`, `expression`, or `virtual_table`                           |
+| `description`      | Human-readable description of the column (if available)                     |
+| `null_fraction`    | Fraction of NULL values in the column, 0.0–1.0 (data warehouse tables only) |
+| `min_value`        | Minimum observed value from Delta-log stats (data warehouse tables only)    |
+| `max_value`        | Maximum observed value from Delta-log stats (data warehouse tables only)    |
 
 ### `system.information_schema.relationships`
 
@@ -609,17 +612,20 @@ FROM system.information_schema.tables
 
 Lists columns for each table with their types and descriptions.
 
-| Column             | Description                                                    |
-| ------------------ | -------------------------------------------------------------- |
-| `table_schema`     | Schema the table belongs to                                    |
-| `table_name`       | Name of the table the column belongs to                        |
-| `column_name`      | Name of the column                                             |
-| `ordinal_position` | Position of the column within the table (1-indexed)            |
-| `data_type`        | HogQL data type (e.g. `String`, `Integer`, `DateTime`, `JSON`) |
-| `is_nullable`      | Whether the column accepts null values                         |
-| `is_array`         | Whether the column is an array type                            |
-| `field_kind`       | Kind of field: `column`, `expression`, or `virtual_table`      |
-| `description`      | Human-readable description of the column (nullable)            |
+| Column             | Description                                                                 |
+| ------------------ | --------------------------------------------------------------------------- |
+| `table_schema`     | Schema the table belongs to                                                 |
+| `table_name`       | Name of the table the column belongs to                                     |
+| `column_name`      | Name of the column                                                          |
+| `ordinal_position` | Position of the column within the table (1-indexed)                         |
+| `data_type`        | HogQL data type (e.g. `String`, `Integer`, `DateTime`, `JSON`)              |
+| `is_nullable`      | Whether the column accepts null values                                      |
+| `is_array`         | Whether the column is an array type                                         |
+| `field_kind`       | Kind of field: `column`, `expression`, or `virtual_table`                   |
+| `description`      | Human-readable description of the column (nullable)                         |
+| `null_fraction`    | Fraction of NULL values in the column, 0.0–1.0 (data warehouse tables only) |
+| `min_value`        | Minimum observed value from Delta-log stats (data warehouse tables only)    |
+| `max_value`        | Maximum observed value from Delta-log stats (data warehouse tables only)    |
 
 ```sql
 SELECT column_name, data_type, is_nullable, description

@@ -6,6 +6,11 @@ minimumReleaseAge: 10080
 minimumReleaseAgeExclude:
     - '@posthog/icons'
     - '@posthog/hedgehog-mode'
+    - '@typecaast/react'
+    - '@typecaast/core'
+    - '@typecaast/schema'
+    - '@typecaast/skin-kit'
+    - '@typecaast/skins'
 blockExoticSubdeps: true
 trustPolicy: no-downgrade
 
