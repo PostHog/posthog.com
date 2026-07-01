@@ -49,6 +49,9 @@ All events include these base properties: `ticket_id`, `ticket_number`, `channel
 | `old_status`           | string | Previous status                                              |
 | `new_status`           | string | New status (`new`, `open`, `pending`, `on_hold`, `resolved`) |
 | `customer_name`        | string | Customer name                                                |
+| `customer_name`        | string | Customer name                                                |
+| `customer_email`       | string | Customer email                                               |
+| `customer_distinct_id` | string | Customer's PostHog distinct ID                               |
 | `customer_email`       | string | Customer email                                               |
 | `customer_distinct_id` | string | Customer's PostHog distinct ID                               |
 
@@ -59,6 +62,9 @@ All events include these base properties: `ticket_id`, `ticket_number`, `channel
 
 | Property               | Type           | Description                    |
 | ---------------------- | -------------- | ------------------------------ |
+| `customer_name`        | string         | Customer name                  |
+| `customer_email`       | string         | Customer email                 |
+| `customer_distinct_id` | string         | Customer's PostHog distinct ID |
 | `old_priority`         | string or null | Previous priority              |
 | `new_priority`         | string or null | New priority                   |
 | `customer_name`        | string         | Customer name                  |
@@ -69,6 +75,9 @@ All events include these base properties: `ticket_id`, `ticket_number`, `channel
 
 - **Event ID:** `$conversation_ticket_assigned`
 - **Event description:** Ticket is assigned or unassigned.
+  | `customer_name` | string | Customer name |
+  | `customer_email` | string | Customer email |
+  | `customer_distinct_id` | string | Customer's PostHog distinct ID |
 
 | Property               | Type        | Description                     |
 | ---------------------- | ----------- | ------------------------------- |
