@@ -32,7 +32,7 @@ Early versions were primitive, but today's wizard completes two hours of work in
 
 Building it taught us some important lessons about how to build agents people genuinely love (with great ROI, too!), starting with the most important lesson of all...
 
-![People love the PostHog Wizard](https://res.cloudinary.com/dmukukwp6/image/upload/v1782746600/context_engineering_lesson1_7f570e119f.png)
+![Context supply vs reasoning diagram](https://res.cloudinary.com/dmukukwp6/image/upload/v1782926286/context_engineering_lesson1_reasoning_a86611f1d7.png)
 
 ## Lesson #1: Reasoning isn't the bottleneck
 
@@ -62,13 +62,13 @@ The result was a company-wide context layer that could pull from everything we m
 
 ## Lesson #2: Don't hardcode knowledge
 
-![Context mill pipeline diagram](https://res.cloudinary.com/dmukukwp6/image/upload/v1782746606/context_engineering_lesson2_6bfad14d12.png)
-
 The naive way to supply more context (which we did) was to hardcode it into its harness.
 
 In v1, the wizard's context and code were locked together, so the two couldn't scale independently. Supporting a new framework or product in the wizard meant shipping a whole new agent.
 
 Our answer was the [context mill](https://github.com/PostHog/context-mill), an assembly-line service for turning scattered PostHog knowledge into portable, versioned zip files that agents can consume remotely.
+
+![Context mill pipeline diagram](https://res.cloudinary.com/dmukukwp6/image/upload/v1782926288/context_engineering_lesson2_pipeline_f043d88bb2.png)
 
 Here's how the context mill works:
 
@@ -87,13 +87,13 @@ The same pipeline also delivers skills to our [AI plugins](https://github.com/Po
 
 ## Lesson #3: Fix context drift at the source
 
-![Docs agent feedback loop diagram](https://res.cloudinary.com/dmukukwp6/image/upload/v1782746609/context_engineering_lesson3_460b168dcd.png)
-
 The context mill solved packaging and distribution, but the wizard was still instrumenting out-of-date SDK versions and settings. We realized its context was going stale further upstream, at the source.
 
 The culprit was something we're very proud of: we ship fast. Like, weirdly fast. Our cracked engineers were moving faster than our documentation could keep up with, which meant drift crept into the context mill's output.
 
 So we added a docs agent to close the loop on knowledge management.
+
+![Docs agent feedback loop diagram](https://res.cloudinary.com/dmukukwp6/image/upload/v1782926290/context_engineering_lesson3_feedback_loop_a6e506b4bd.png)
 
 It uses a system of deep research subagents with RAG powered by Inkeep. The docs agent retrieves embeddings across our entire platform and internal repos, follows our style guide, and uses skills and MCPs to draft documentation.
 
@@ -105,11 +105,11 @@ Within weeks, our docs velocity matched our code velocity. We're at an all-time 
 
 ## Lesson #4: Reuse context to compose new skills
 
-![Declarative YAML spec for skill assembly](https://res.cloudinary.com/dmukukwp6/image/upload/v1782746611/context_engineering_lesson4_8f01f27e23.png)
-
 Our context mill was delivering fresh but unstructured context at first. We needed a way to shape it into skills the agent could run.
 
 So we gave the wizard a declarative YAML spec – a recipe for which pieces of context to pull together and how to assemble them into skills.
+
+![Declarative YAML spec for skill assembly](https://res.cloudinary.com/dmukukwp6/image/upload/v1782926293/context_engineering_lesson4_yaml_spec_1f20a11bb9.png)
 
 Say we want to teach the wizard how to set up [Error Tracking](/docs/error-tracking). The context spec might include:
 
@@ -123,11 +123,11 @@ But error tracking doesn't work the same way in every language, so the spec also
 - **Python**: the Python SDK reference, a Flask example app
 - **JavaScript**: the JS SDK reference, a React example app
 
-![Skill composition across frameworks](https://res.cloudinary.com/dmukukwp6/image/upload/v1782746616/context_engineering_lesson4_skill_spec_a002c5c6d2.png)
-
 The context mill then stitches everything into a collection of skills. Namespacing keeps the Python skill and the JavaScript skill from getting tangled up, even though they came from the same context recipe.
 
 That's how the wizard went from supporting 5 frameworks to 25+ in a few days. Composing context from shared pieces was more flexible and efficient than writing from scratch, even with AI's help.
+
+![Skill composition across frameworks](https://res.cloudinary.com/dmukukwp6/image/upload/v1782926295/context_engineering_lesson4_skill_composition_6a1f6a4441.png)
 
 Once we had building blocks, we started seeing context shapes that should exist but didn't, kind of like how building a REST API makes you notice endpoints inside your data model.
 
@@ -139,8 +139,6 @@ The skill's shape and scope completely surprised us. But to the team who built i
 
 ## Lesson #5: Eliminate context silos
 
-![Context silos across a company](https://res.cloudinary.com/dmukukwp6/image/upload/v1782746618/context_engineering_lesson5_bf9754389b.png)
-
 Going in, we assumed making the wizard work would mean creating context. We spent most of our time digging it out.
 
 Like data, context is generated everywhere, but most of it sits stuck in silos.
@@ -148,6 +146,8 @@ Like data, context is generated everywhere, but most of it sits stuck in silos.
 We found those barriers everywhere at PostHog. The API references live in the codebase, the installation steps in the docs, and the troubleshooting steps in a runbook. All of it valuable context to the wizard, all of it trapped in separate systems.
 
 We connected the gaps with a network of APIs, MCPs, CI/CD, and gateways, so context can circulate across the company. It looks less like a monolith and more like an ecosystem.
+
+![Context infrastructure network diagram](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Group_144561_8e52377cd6.png)
 
 It's the same plumbing you already use for general software infrastructure, but landscaped for context, so it can run downhill to wherever it's needed.
 
