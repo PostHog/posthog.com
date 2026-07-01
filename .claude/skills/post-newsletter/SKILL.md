@@ -82,7 +82,10 @@ Images in Substack posts must be uploaded to Cloudinary via the posthog.com Stra
 
 ### 3a: Get the hero image
 
-Ask the user if they have the hero image file locally. If they provide a path, note it for upload in step 3c. If not, leave the frontmatter `featuredImage` as the placeholder and skip hero upload.
+Ask the user two things:
+
+1. Do they have the hero image file locally? If they provide a path, note it for upload in step 3c. **Remind them that posthog.com's hero image is a wider aspect ratio than Substack's** (Substack's is closer to square) — if they only have the Substack version, flag that it may need to be re-cropped rather than reused as-is.
+2. If not: **ask whether the hero image is actually embedded in the Substack article itself**, or whether it only shows up on the Substack homepage/social card. Substack's `og:image` (the social-preview image) is not always the same as an image inside the article body, and posthog.com always needs a real featured image in frontmatter — don't assume the `og:image` is the right one without confirming with the user. If they're unsure or say it's not in the article, leave the frontmatter `featuredImage` as the placeholder and skip hero upload rather than guessing.
 
 ### 3b: Get images from Substack
 
