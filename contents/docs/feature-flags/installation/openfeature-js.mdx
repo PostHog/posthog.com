@@ -10,15 +10,15 @@ availability:
 
 PostHog provides official [OpenFeature](https://openfeature.dev) providers for JavaScript, so you can evaluate PostHog feature flags through the standard OpenFeature API. There are two packages, matching OpenFeature's split between the server and web (client) SDKs:
 
-- **`@posthog/openfeature-node`** – for server/Node.js apps, backed by [`posthog-node`](/docs/libraries/node) and the [OpenFeature server SDK](https://openfeature.dev/docs/reference/technologies/server/javascript).
-- **`@posthog/openfeature-web`** – for browser apps, backed by [`posthog-js`](/docs/libraries/js) and the [OpenFeature web SDK](https://openfeature.dev/docs/reference/technologies/client/web).
+- **`@posthog/openfeature-node-provider`** – for server/Node.js apps, backed by [`posthog-node`](/docs/libraries/node) and the [OpenFeature server SDK](https://openfeature.dev/docs/reference/technologies/server/javascript).
+- **`@posthog/openfeature-web-provider`** – for browser apps, backed by [`posthog-js`](/docs/libraries/js) and the [OpenFeature web SDK](https://openfeature.dev/docs/reference/technologies/client/web).
 
 ## Server (Node.js)
 
 ### Installation
 
 ```bash
-npm install @posthog/openfeature-node @openfeature/server-sdk posthog-node
+npm install @posthog/openfeature-node-provider @openfeature/server-sdk posthog-node
 ```
 
 ### Usage
@@ -27,7 +27,7 @@ The server model is asynchronous and multi-user: the distinct ID arrives per eva
 
 ```ts
 import { OpenFeature } from '@openfeature/server-sdk'
-import { PostHogServerProvider } from '@posthog/openfeature-node'
+import { PostHogServerProvider } from '@posthog/openfeature-node-provider'
 import { PostHog } from 'posthog-node'
 
 // personalApiKey enables local evaluation
@@ -53,7 +53,7 @@ You own the PostHog client lifecycle — call `posthog.shutdown()` when your app
 ### Installation
 
 ```bash
-npm install @posthog/openfeature-web @openfeature/web-sdk posthog-js
+npm install @posthog/openfeature-web-provider @openfeature/web-sdk posthog-js
 ```
 
 ### Usage
@@ -62,7 +62,7 @@ The browser model is single-user and synchronous: `posthog-js` owns the user ide
 
 ```ts
 import { OpenFeature } from '@openfeature/web-sdk'
-import { PostHogWebProvider } from '@posthog/openfeature-web'
+import { PostHogWebProvider } from '@posthog/openfeature-web-provider'
 import posthog from 'posthog-js'
 
 posthog.init('<ph_project_api_key>', { api_host: '<ph_client_api_host>' })
