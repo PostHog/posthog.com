@@ -21,6 +21,11 @@ seo:
 It all started with a friction log.
 
 A year ago, [Josh Snyder](/community/profiles/32497), then on the growth team, binged [session recordings](/session-replay) of users trying to onboard to PostHog. The long list of failure modes was painful.
+It all started with a friction log.
+
+A year ago, [Josh Snyder](/community/profiles/32497), then on the growth team, binged [session recordings](/session-replay) of users trying to onboard to PostHog. The long list of failure modes was painful.
+
+![Slack conversation about session replay logs](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Group_144344_7025248ece.png)
 
 But it jolted an idea loose: what if AI could handle the onboarding for you? So we built an AI onboarding wizard.
 
