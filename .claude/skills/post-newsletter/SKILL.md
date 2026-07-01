@@ -86,11 +86,12 @@ Ask the user if they have the hero image file locally. If they provide a path, n
 
 ### 3b: Get images from Substack
 
-Fetch the Substack URL again with this prompt:
-> "For each image in the article body, tell me: what tip number, section, or paragraph it appears after, and a brief description of what the image shows. List them in order of appearance."
+Fetch the Substack URL **once** for images — do not split this into a separate "descriptions" fetch and a separate "raw URLs" fetch. Two independent fetches can disagree on count or order (an image dropped from one but not the other), and zipping them back together by position silently shifts every image after the mismatch onto the wrong caption. This has happened before (PR #18012) and produced a missing image plus a run of wrong images for the rest of the post.
 
-Also run a second fetch to extract the raw image URLs:
-> "List all image src URLs from the article body in order of appearance. Include only article body images, not avatar or profile images."
+Use one prompt that returns the URL and its anchor text together, per image:
+> "List every image in the article body, in order of appearance. For each one, give: (1) its exact `src` URL, (2) the sentence or heading immediately before it, quoted verbatim, and (3) a brief description of what it shows. Include only article body images, not avatar or profile images."
+
+Count the images returned against the number of `![PLACEHOLDER: ...]` entries already written in step 2. If the counts don't match, stop and tell the user which section appears to be missing an image instead of guessing.
 
 ### 3c: Authenticate and upload
 
@@ -133,7 +134,7 @@ The upload response returns a Cloudinary URL in the format:
 
 ### 3d: Update the markdown
 
-Replace all `[PLACEHOLDER_...]` and `![PLACEHOLDER: ...](PLACEHOLDER)` entries with the real Cloudinary URLs and descriptive alt text. Use the position mapping from step 3b to insert images in the right places.
+Replace all `[PLACEHOLDER_...]` and `![PLACEHOLDER: ...](PLACEHOLDER)` entries with the real Cloudinary URLs and descriptive alt text. Match each uploaded image to its placeholder using the quoted anchor text from step 3b — find that exact sentence or heading in the file and insert the image there — never by list position or order. Before moving on, re-read the finished file and confirm each image's description actually matches the paragraph it now sits next to.
 
 **Indentation rule:** Example paragraphs and images that follow a numbered tip and illustrate it should be indented as list continuations (3 spaces for tips 1–9, 4 spaces for tips 10+). Checklists inside a tip should be wrapped in a blockquote (`>`).
 
