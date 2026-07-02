@@ -6,7 +6,7 @@ showTitle: true
 
 Yes, I realize LinkedIn has a bad reputation, but it’s a popular channel with our ICP, important for recruiting, and our posts often do well there. We're posting more there, so here's what we've learned about doing it well so far.
 
-## Advice on LinkedInposting
+## Advice on LinkedIn posting
 
 - The hook is everything. Get people to click “show more.” What works:
   - **Money** - “We spend $X and here are the best things we learned”
@@ -15,7 +15,7 @@ Yes, I realize LinkedIn has a bad reputation, but it’s a popular channel with 
   - **Transformation stories, before and after** - “This product helped us go from X to Y”
   - **Data reveals** - “PostHog has seen an ~8x increase in traffic from ChatGPT in the last year”
   - **Resource lists** - “Here are the 10 best posts on X”
-  - **Takeaways** - “After weeks of researching X, I’ve published Y deepdive. Here are Z interesting things I learned a long the way.”
+  - **Takeaways** - “After weeks of researching X, I’ve published Y deepdive. Here are Z interesting things I learned along the way.”
   - **Work** - “I wrote a 2000-word long article on how AI impacts performance of software and systems.”
 - Use lists and numbers.
 
