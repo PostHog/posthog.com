@@ -3,7 +3,7 @@ title: Grafana
 platformLogo: grafana
 ---
 
-[Grafana](https://grafana.com/) is an open source observability platform for visualizing metrics, logs, and traces. Grafana's echo service captures frontend usage events from your Grafana instance, and as of Grafana v13.1 it can forward them to PostHog. With this integration, you can:
+[Grafana](https://grafana.com/) is an open source observability and data visualization platform. Grafana's echo service captures frontend usage events from your Grafana instance, and as of Grafana v13.1 it can forward them to PostHog. With this integration, you can:
 
 - Track how your team uses Grafana, including pageviews and UI interactions
 - See which dashboards and features get the most use
@@ -63,7 +63,7 @@ Grafana forwards all of its echo event types to PostHog:
 
 If the signed-in Grafana user has an analytics identifier, Grafana also identifies them in PostHog with their `email`, `name`, `orgId`, `orgName`, and `orgRole` as person properties.
 
-## FAQ
+## Frequently asked questions
 
 ### Where can I find out more?
 
