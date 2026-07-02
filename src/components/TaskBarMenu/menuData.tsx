@@ -335,6 +335,29 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
     return items
 }
 
+// Menu items used to each carry a colored product icon, which made the menu hard to parse.
+// We now blank the icon slot for everything except the AI (sparkles) icon and the green/red
+// status "badges" — those stay in the icon slot so success/alert state is still visible.
+const shouldKeepMenuIcon = (icon: React.ReactNode): boolean => {
+    if (!React.isValidElement(icon)) return false
+    const isSparkle = icon.type === IconSparksJoy || icon.type === Icons.IconSparkles
+    const className = String((icon.props as { className?: string })?.className || '')
+    const isStatusBadge = /\btext-(green|red)\b/.test(className)
+    return isSparkle || isStatusBadge
+}
+
+const filterMenuIcons = (items: MenuItemType[]): MenuItemType[] =>
+    items.map((item) => {
+        const next: MenuItemType = { ...item }
+        if (next.icon && !shouldKeepMenuIcon(next.icon)) {
+            next.icon = undefined
+        }
+        if (Array.isArray(next.items)) {
+            next.items = filterMenuIcons(next.items)
+        }
+        return next
+    })
+
 export function useMenuData(): MenuType[] {
     const smallTeamsMenuItems = useSmallTeamsMenuItems()
     const allProducts = useProduct() as any[]
@@ -970,7 +993,7 @@ export function useMenuData(): MenuType[] {
                   : []),
           ]
 
-    return [
+    const menus: MenuType[] = [
         {
             trigger: (
                 <>
@@ -997,6 +1020,12 @@ export function useMenuData(): MenuType[] {
         // On desktop, show main navigation items
         ...(!isMobile ? mainNavItems : []),
     ]
+
+    // Keep only the AI (sparkles) icon and green/red status badges in item icon slots
+    return menus.map((menu) => ({
+        ...menu,
+        items: Array.isArray(menu.items) ? filterMenuIcons(menu.items) : menu.items,
+    }))
 }
 
 export const DocsItemsStart = [
