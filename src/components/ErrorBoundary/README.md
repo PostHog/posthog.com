@@ -1,11 +1,11 @@
-# ErrorBoundary
+# Error boundary
 
 Catches client-side rendering and asset-loading failures so pages degrade
 gracefully instead of showing a blank screen.
 
 ## Why this exists
 
-posthog.com is a static Gatsby site that navigates client-side. Two failure
+PostHog.com is a static Gatsby site that navigates client-side. Two failure
 modes were leaving visitors on blank/half-rendered screens, most visibly when
 clicking through the docs/handbook sidebar:
 
@@ -14,8 +14,8 @@ clicking through the docs/handbook sidebar:
    hashes change and the old files are removed from the CDN. The next
    client-side navigation tries to fetch a file that no longer exists and dies
    with `ChunkLoadError` / `We couldn't load "/page-data/…json"`.
-2. **Uncaught render exceptions** in a page component, which — with no boundary
-   anywhere in the tree — unmounted the whole app to a white screen.
+2. **Uncaught render exceptions** in a page component, which – with no boundary
+   anywhere in the tree – unmounted the whole app to a white screen.
 
 The app previously had **no error boundary and no retry** for either case.
 
