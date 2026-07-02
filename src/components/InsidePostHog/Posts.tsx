@@ -12,7 +12,7 @@ const FeaturedPostSkeleton = () => {
     return <div className="w-full h-96 animate-pulse bg-accent rounded-md" />
 }
 
-const FeaturedPost = ({ attributes: { featuredImage, title, excerpt, post_category, slug } }) => {
+const FeaturedPost = ({ attributes: { featuredImage, title, excerpt, post_category, slug } = {} }) => {
     return (
         <Link className="prose font-normal" to={slug}>
             <img className="w-full mb-0" src={featuredImage?.url} />
@@ -112,7 +112,7 @@ export default function Posts() {
 
     return (
         <div className="@container space-y-8 @lg:space-y-4 [&>span]:block">
-            {isLoading ? <FeaturedPostSkeleton /> : <FeaturedPost {...posts?.[0]} />}
+            {isLoading ? <FeaturedPostSkeleton /> : posts?.[0] ? <FeaturedPost {...posts[0]} /> : null}
 
             {isLoading ? (
                 <PostPreviewSkeleton />
