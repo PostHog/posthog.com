@@ -34,5 +34,33 @@ export const langfuse = {
         product_analytics: {
             available: false,
         },
+        web_analytics: {
+            available: false,
+        },
+        feature_flags: {
+            available: false,
+        },
+        experiments: {
+            available: false,
+        },
+        error_tracking: {
+            available: false,
+        },
+        surveys: {
+            available: false,
+        },
+        data_warehouse: {
+            available: false,
+        },
+        CDP: {
+            available: false,
+        },
+    },
+    platform: {
+        available: true,
+        features: {
+            eu_hosting: true,
+            open_source: true,
+        },
     },
 }
