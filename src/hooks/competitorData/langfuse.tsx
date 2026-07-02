@@ -52,15 +52,17 @@ export const langfuse = {
         data_warehouse: {
             available: false,
         },
-        CDP: {
+        cdp: {
             available: false,
         },
     },
     platform: {
-        available: true,
-        features: {
-            eu_hosting: true,
-            open_source: true,
+        deployment: {
+            available: true,
+            features: {
+                eu_hosting: true,
+                open_source: true,
+            },
         },
     },
 }
