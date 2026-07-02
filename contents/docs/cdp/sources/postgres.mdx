@@ -438,4 +438,18 @@ WHERE jsonb_typeof(your_column) = 'object'
 
 Alternatively, remove the problematic view from your sync selection in PostHog.
 
+### `Network is unreachable` or `No route to host`
+
+This error occurs when PostHog has no network route to your PostgreSQL host. The connection fails before reaching the database, typically because the host resolves to a private or non-routable address.
+
+This is a non-retryable error — PostHog stops syncing until you fix the underlying issue and re-enable the sync or CDC.
+
+Common causes:
+
+- The hostname resolves to a private IP address (like `10.x.x.x`, `172.16.x.x`, or `192.168.x.x`) or an unreachable IPv6 address.
+- The hostname is misconfigured or doesn't resolve to a publicly accessible address.
+- Your database server's firewall blocks connections from PostHog's IP addresses.
+
+To fix this, verify your PostgreSQL host resolves to a reachable IPv4 address, ensure your firewall allows inbound connections from PostHog's IP addresses, and if your database is on a private network, configure an SSH tunnel during source setup. PostHog doesn't support IPv6 connections, so if your host only resolves to an IPv6 address, configure it to be accessible via IPv4.
+
 > **Looking for an example of the Postgres source?** Check out our tutorial where we [connect and query Supabase data](/tutorials/supabase-query).

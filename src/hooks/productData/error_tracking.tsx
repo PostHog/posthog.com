@@ -21,7 +21,8 @@ export const errorTracking = {
     },
     overview: {
         title: 'Track errors and resolve issues',
-        description: 'Take your product from exception to exceptional 🥁',
+        description:
+            'Error tracking is one of the tools that makes your product self-driving: every exception is tied to the user who hit it, so agents have the context to ship the fix.',
         textColor: 'text-black', // tw
     },
     screenshots: {
@@ -152,7 +153,8 @@ export const errorTracking = {
         {
             title: 'Investigate and resolve',
             headline: 'Investigate and resolve',
-            description: 'Use PostHog session replay to investigate and resolve issues with complete customer context',
+            description:
+                'Use PostHog session replay to investigate and resolve issues with the complete customer context an agent needs to ship the fix',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/error_tracking_session_replay_investigate_da4ee40642.gif',
@@ -246,7 +248,10 @@ export const errorTracking = {
             ],
             us: [
                 {
-                    title: 'Integration with other PostHog products',
+                    title: 'Agents can act on every error and the user who hit it – the context that powers self-driving',
+                },
+                {
+                    title: 'Integration with other PostHog tools',
                 },
                 {
                     title: 'Feature flags for error recovery',
@@ -339,7 +344,7 @@ export const errorTracking = {
     ai: {
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/ERROR_TRACKING_2f807c123b.png',
         imageAlt: 'PostHog AI and error tracking',
-        description: 'investigate exceptions with stack traces, session replay, and product context',
+        description: 'investigate the exception and ship the fix',
         skills: [
             'Finds specific errors and affected users with natural language',
             'Summarizes stack traces, explains likely causes (and likely fixes)',
@@ -367,7 +372,7 @@ export const errorTracking = {
         pricing:
             "Log up to 100k errors without even entering a credit card. You also get the monthly free tier even if you <em>have</em> added a card. Beyond that, it's simple, usage-based pricing. Compare that to Sentry who charges per seat <em>plus</em> usage. No surprise bills when you add developers, and you can set a billing limit so you never pay more than expected.",
         'comparison-summary':
-            "Sentry is the 800-pound gorilla. They're <em>exception</em>ally good at pure error tracking. But errors don't happen in isolation. PostHog gives you the full context – what the user did, which flags were on, and the related session recording. For mobile-heavy apps, Sentry's still better (though we're actively working on that). For everything else, context wins.",
+            "Sentry is the 800-pound gorilla. They're <em>exception</em>ally good at pure error tracking. But errors don't happen in isolation. PostHog gives you the full context – what the user did, which flags were on, and the related session recording. Because it's all one system, agents can act on that context directly – it's what makes your product self-driving, not just another dashboard. For mobile-heavy apps, Sentry's still better (though we're actively working on that). For everything else, context wins.",
         'feature-comparison':
             "We have the core features. For now, we're missing a few things like uptime monitoring, advanced alert rules, and our mobile SDKs are in active development. But what we uniquely have: deep integration with analytics, replays, and feature flags. Choose according to your stage of growth, and keep in mind PostHog is designed to grow <em>with</em> you, so even if we don't have all the features you need, we likely will soon!",
         docs: 'Setup guides for all major languages and frameworks. Source map upload instructions. Common patterns like error boundaries and custom grouping. Written by engineers who actually built (and use) this stuff themselves!',

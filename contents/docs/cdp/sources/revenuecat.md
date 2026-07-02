@@ -42,6 +42,10 @@ The data warehouse then starts syncing your RevenueCat data. You can see details
 
 <SourceParameters />
 
+## Supported tables
+
+<SourceTables />
+
 ## Setting up webhooks for real-time syncing
 
 Webhook syncing gives you real-time visibility into subscription and purchase events. Without it, you only get periodic snapshots of your RevenueCat data through API syncs.

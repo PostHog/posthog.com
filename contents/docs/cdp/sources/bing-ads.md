@@ -78,3 +78,7 @@ Connect PostHog to your Bing Ads account using a Microsoft account. The Microsof
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

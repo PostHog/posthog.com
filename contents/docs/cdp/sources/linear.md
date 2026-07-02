@@ -26,3 +26,7 @@ Once the syncs are complete, you can start using Linear data in PostHog.
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

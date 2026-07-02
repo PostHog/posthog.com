@@ -12,13 +12,20 @@ The customer should never have to figure out who to contact. They reach out to e
 
 ## What each role focuses on
 
+### tl;dr
+ - TAM is focused on and leading commercial conversations (product adoption, renewals, expansion, etc...)
+ - CSM is focused on and leading technical conversations (efficient implementation, product training, support escalation)
+ - TAMs and CSMs should meet regularly (every other week / once a month) to discuss where each person is focused on the account and agree to next steps and have a shared account plan documented
+ - These roles are not exclusive. CSM should be able to speak to product adoption, TAMs should be able to speak to efficient implementation
+
+
 ### CSM
 
 - Operational health and [health score](/handbook/cs-and-onboarding/health-tracking) monitoring
 - Support escalation and follow-through
 - Credit usage optimization
 - Onboarding, training, getting new users set up
-- Renewal process end-to-end
+- Renewal process
 - Day-to-day responsiveness
 - Health of the technical implementation
 - Surface cross-sell signals from product usage and conversations to TAM
@@ -28,8 +35,9 @@ The customer should never have to figure out who to contact. They reach out to e
 - Cross-sell strategy and execution
 - Credit discount negotiation and deal structuring for new credit purchases, invoicing
 - Use case discovery, mapping products to problems
+- Renewal process
 - Multi-threading into new teams and stakeholders
-- Account planning (quarterly in Vitally)
+- Account planning (updated regularly in Vitally)
 - Stakeholder management
 
 ### Both

@@ -1,6 +1,6 @@
 import React from 'react'
 import ReaderView from 'components/ReaderView'
-import SEO from 'components/seo'
+import SEO, { buildProductStructuredData } from 'components/seo'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { CallToAction } from 'components/CallToAction'
 import { TreeMenu } from 'components/TreeMenu'
@@ -686,6 +686,12 @@ export default function SlackAppPage(): JSX.Element {
                 title="PostHog Slack app"
                 description="Tag @PostHog in any Slack thread to ship a fix, answer a data question, or edit content – without leaving the conversation."
                 image="/images/og/default.png"
+                structuredData={buildProductStructuredData({
+                    name: 'PostHog Slack app',
+                    description:
+                        'Tag @PostHog in any Slack thread to ship a fix, answer a data question, or edit content – without leaving the conversation.',
+                    slug: 'slack-app',
+                })}
             />
             <ReaderView leftSidebar={<LeftSidebarContent />} title="posthog-slack-app.md" hideTitle={true}>
                 <div className="max-w-2xl mx-auto">
@@ -841,6 +847,13 @@ export default function SlackAppPage(): JSX.Element {
                             }))}
                         />
                     </div>
+                    <p className="text-sm text-secondary">
+                        Steering an agent from Slack is one way work gets done.{' '}
+                        <Link to="/self-driving" state={{ newWindow: true }}>
+                            Self-driving
+                        </Link>{' '}
+                        is the bigger loop around it.
+                    </p>
                     <div
                         id="try"
                         className="not-prose bg-accent border border-primary rounded-md p-4 @md/reader-content:p-6 my-6"

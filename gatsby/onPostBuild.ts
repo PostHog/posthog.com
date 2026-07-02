@@ -1,6 +1,7 @@
 import chromium from 'chrome-aws-lambda'
 import path from 'path'
 import fs from 'fs'
+import nodeFetch from 'node-fetch'
 
 import { GatsbyNode } from 'gatsby'
 import pLimit from 'p-limit'
@@ -14,6 +15,8 @@ import {
     generateLlmsTxt,
     generateSdkReferencesMarkdown,
     generatePricingMd,
+    generatePlatformMd,
+    generateProductPagesMarkdown,
 } from './rawMarkdownUtils'
 import { MARKDOWN_CONTENT_PATHS } from '../src/constants'
 import { SdkReferenceData } from '../src/templates/sdk/SdkReference.js'
@@ -100,7 +103,7 @@ const createOGImages = async (data) => {
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
     const fontDir = path.resolve(__dirname, '../fonts')
     if (!fs.existsSync(fontDir)) fs.mkdirSync(fontDir)
-    const res = await fetch('https://d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQVF.woff', {
+    const res = await nodeFetch(process.env.CLOUDFRONT_FONT_URL, {
         headers: {
             Origin: 'https://posthog.com',
         },
@@ -593,6 +596,10 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter
     // Only include docs pages in llms.txt (not handbook)
     const docsPages = filteredPages.filter((page) => page.fields.slug.startsWith('/docs'))
     generateLlmsTxt(docsPages)
+
+    // Generate the self-driving platform overview + per-product markdown for LLMs/agents
+    generatePlatformMd()
+    generateProductPagesMarkdown()
 
     if (process.env.AWS_CODEPIPELINE !== 'true') {
         console.log('Skipping onPostBuild tasks')
