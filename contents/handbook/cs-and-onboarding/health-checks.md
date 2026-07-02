@@ -142,13 +142,19 @@ In this process of creating clarity for them, we should never cast blame or get 
 - Exa MCP (for reading through PostHog docs)
 - Slack MCP (for reading through past threads)
 - PostHog MCP
-- Local clone of PostHog's product repo on your machine
+- Local clone of PostHog's product repo on your machine 
 
 These will serve as context layers for your coding agent to help research and collate our own product's behavior and map it against their custom implementation. 
 
+To get started, just ask your coding agent:
+
+>/reliability-audit for {Customer} - here's their org ID: [xxx], Slack channel: [xxx], custom implementation documentation: [paste the full doc or link to it]. 
+
+The `/reliability-audit` skill is available <PrivateLink url="https://us.posthog.com/project/2/skills/reliability-audit">here</PrivateLink>.
+
 One helpful way to frame your audit is to organize it into these dimensions: issue, date, root cause, verdict, resolution, link to the original Slack thread / ticket. The idea of "verdict" is to give yourself a clear space to articulate whether the issue was due to their custom implementation or PostHog. 
 
-While the format of what you deliver to the customer is entirely up to you, a Slack Canvas with a clear table and some descriptions can go a long way. <PrivateLink url="https://posthog.slack.com/docs/TSS5W8YQZ/F0B585Y1N9Y">Here's an example</PrivateLink>
+While the format of what you deliver to the customer is entirely up to you, a Slack Canvas with a clear table and some descriptions can go a long way. <PrivateLink url="https://posthog.slack.com/docs/TSS5W8YQZ/F0B585Y1N9Y">Here's an example</PrivateLink>.
 
 Your audit should push your customer to take action, so it may be helpful to include a clear articulation of what to keep versus change about their custom implementation. Make it easy for them to decide which parts of your audit they want to act on.
 
