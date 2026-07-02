@@ -36,6 +36,14 @@ Scouts run themselves on their schedule, but you can also trigger a run on deman
 
 On-demand runs count against the same daily run budget as scheduled runs, so repeatedly re-running the same scout can use up your project's daily allowance.
 
+## Every report is also an event
+
+When a scout emits a report, PostHog also captures a `$scout_report_emitted` event into your project (and a `$scout_report_edited` event when a scout later updates one). The event carries the scout's name, the report's title, summary, priority, and actionability, whether it surfaced in your inbox or was held back, and a `report_url` link straight to the report.
+
+Because it's a regular event in your stream, everything in PostHog can build on your scouts' output with nothing to wire up: query scout activity with [SQL](/docs/sql), chart it in an insight, set an [alert](/docs/alerts) on it, or point a [destination](/docs/cdp) at it – like forwarding every surfaced report to a [Slack channel](/docs/cdp/destinations/slack), templated from the event's title, summary, and link.
+
+Scout report events are captured against a synthetic per-scout ID with person processing off, so they never create person profiles or mix into your user analytics.
+
 ## Built-in and custom scouts
 
 PostHog ships with a set of scouts that watch common patterns out of the box. You can turn each on or off per project, and teams can add their own scouts for the patterns specific to their product. See [scout examples](/docs/self-driving/scout-examples) for the scouts PostHog ships with and ideas for your own.
