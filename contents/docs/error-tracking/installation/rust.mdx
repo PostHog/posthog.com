@@ -84,6 +84,35 @@ if let Err(err) = result {
 
 </Step>
 
+<Step title="Capture panics" badge="optional">
+
+Panic autocapture is opt-in and uses the process-global client. Enable `capture_panics` and initialize the global client with `init_global`; the SDK then installs a process-wide `std::panic` hook:
+
+```rust
+use posthog_rs::{ClientOptionsBuilder, ErrorTrackingOptionsBuilder};
+
+let options = ClientOptionsBuilder::default()
+    .api_key("<ph_project_token>".to_string())
+    .host("<ph_client_api_host>")
+    .error_tracking(
+        ErrorTrackingOptionsBuilder::default()
+            .capture_panics(true)
+            .build()
+            .unwrap(),
+    )
+    .build()
+    .unwrap();
+
+// Installs the panic hook and routes panics through the global client.
+posthog_rs::init_global(options).await.unwrap();
+```
+
+Each panic is captured as a personless `$exception` carrying the panic message, the panic-site location, and a call-site stack trace (subject to `capture_stacktrace`). The previously installed hook still runs afterwards.
+
+Because a panic hook is process-global, panic autocapture pairs with the global client — there is no per-`Client` panic API. Capture routes through the SDK's background worker, so it needs no async runtime, and the flush is bounded to a short timeout (2s) so a slow or unreachable PostHog can't freeze the crashing process. Delivery is best-effort: under sustained backpressure the event may not be sent before the process exits.
+
+</Step>
+
 <Step title="Configure stack traces" badge="optional">
 
 Stack trace capture and in-app frame classification are configured per client through `ErrorTrackingOptionsBuilder`:

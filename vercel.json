@@ -58,8 +58,10 @@
     "redirects": [
         { "source": "/teams/logs", "destination": "/teams/apm" },
         { "source": "/teams/query-performance", "destination": "/teams/analytics-platform" },
-        { "source": "/teams/query-performance/:path*", "destination": "/teams/analytics-platform/:path*" },
-        { "source": "/self-driving", "destination": "/docs/self-driving", "statusCode": 302 },
+        {
+            "source": "/teams/query-performance/:path*",
+            "destination": "/teams/analytics-platform/:path*"
+        },
         {
             "source": "/docs/sdk-doctor/keeping-sdks-current",
             "destination": "/docs/health-checks/keeping-sdks-current",

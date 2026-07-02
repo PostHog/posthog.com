@@ -51,10 +51,15 @@ If you do decide to do a small team offsite somewhere outside of these two hubs,
 Planning a small team offsite? Kendal’s got you covered.
 Here’s how it works:
 
-- The team lead should message Kendal with their proposed dates.
+- The team lead should request an offsite through slack using the '/offsite' command. They will need to input:
+  - Team name
+  - Location
+  - Dates
+  - Attendees
+  - Number of attendees
+This will automatically create a Slack channel and Brex budget for all attendees. If the offsite is happening in London or San Francisco, it will also post an announcement in those channels so people can come and say hi 
+
 - Kendal will then:
-  - Create a Slack channel for the offsite (use `#offsite-[team]-[month]-[year]-[where]`) and add everyone who’s going.
-  - Set up the offsite budget in Brex.
   - Update the team’s Canvas with:
     - Accommodation details and a handy map
     - A flight tracker
