@@ -8,6 +8,34 @@ showTitle: true
 
 Product marketers take responsibility for coordinating and publicizing news about PostHog, including product announcements. We also help with [incident](/handbook/engineering/operations/incidents) and [maintenance announcements](/handbook/marketing/product-announcements#announcing-scheduled-maintenance), if needed. 
 
+## Releases vs. launches
+
+The word "launch" gets used to mean a dozen different things, which creates confusion about who owns what. So we split shipping something new into two distinct moments, with two different owners:
+
+- **A release** gets a product or feature into the hands of our _existing_ users — hundreds of thousands of people who already use PostHog. This is the **product team's** responsibility. The PM or team lead drives it, using [their own release checklist](/handbook/product/releasing-new-products-and-features). They control the rollout, the pricing, and the flags. Marketing contributes — email, docs, in-app — but does not lead.
+
+- **A launch** gets a product in front of _new_ people — potentially millions who've never heard of us. This is **Marketing's** responsibility, with the **product marketer leading** and working from the launch checklist below. It's about breaking through the noise and creating the momentum a product needs to succeed.
+
+A release is about depth (the people we already have); a launch is about reach (the people we don't). Same product, two different audiences, two different owners.
+
+### How the two line up
+
+Where we can, releases and launches should happen together — ship it and shout about it on the same day. But they don't _have_ to, and forcing them to can waste effort.
+
+If pricing, the feature set, or even the name is still moving right up until the day before release, it makes no sense to build and then rebuild the product page, the video, and the campaign around a moving target. In those cases it's completely fine for the launch to follow immediately after the release, once the details are locked. **Timing depends on how certain we are about what we're shipping.** The more settled it is, the tighter the two can be coupled.
+
+## How we launch: rolling, not big bang
+
+You'll see companies like Amplitude and Linear save everything up for a single, coordinated, big-bang moment. That's not us, and it's a deliberate choice.
+
+Our style is a **rolling** one: a smallish launch, followed by shipping lots of stuff the moment it's ready. This fits how our [small teams](/handbook/company/small-teams) actually work — they move independently and don't wait for a company-wide launch train to leave the station. The alternative means more coordination, more launch meetings, and more waiting, and we don't think the payoff is worth it.
+
+It's easy to look at what competitors post on X and feel like we should be slicker. Resist that. We pay far more attention to that stuff than the wider world does. Look at the actual numbers rather than the vibes: on a comparable launch, we tend to massively outscore peers on **release** (we simply have far more users) _and_ on **launch** (far more people watch and read our content). We may not look as coordinated in the moment, but we ship things that huge numbers of people genuinely watch and read.
+
+None of this means the initial moment can't be louder. We have ideas to make the opening bang bigger on the marketing side — we just do it without abandoning the rolling approach that works for us.
+
+> **Got feedback on what you'd like to see from a launch?** We'd genuinely love to hear it — drop it in the marketing channel. Feedback on _what_ we launch and how loud we go is always welcome; the rolling approach itself is settled.
+
 ## Types of announcement
 
 We classify announcements using the general guidelines below, with full discretion for doing something different.
