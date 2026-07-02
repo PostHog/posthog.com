@@ -1,6 +1,6 @@
 ---
 title: 'PostHog vs Langfuse: in-depth tool comparison'
-date: 2026-06-29
+date: 2026-07-02
 author:
   - natalia-amorim
 rootpage: /blog
@@ -22,7 +22,7 @@ If you're shipping AI features, you're probably familiar with the pain of debugg
 
 1. **Langfuse** is a dedicated [AI observability](/blog/what-is-ai-observability) platform with deep tracing, prompt management, evaluation pipelines, and dataset experiments. It's open source (MIT licensed), self-hostable, and built for teams that want fine-grained control over their AI stack. It was acquired by ClickHouse in January 2026.
 
-2. **PostHog** is an all-in-one developer platform for building self-driving products. [AI observability](/ai-observability) is one of many tools alongside [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [surveys](/surveys), and more. It's built for engineers and product teams who want their AI data living next to everything else.
+2. **PostHog** is a developer platform for building self-driving products. [AI observability](/ai-observability) is one of many tools alongside [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [surveys](/surveys), and more. It's built for engineers and product teams who want their AI data living next to everything else.
 
 ## How is PostHog different?
 
@@ -348,7 +348,8 @@ It's obvious that Langfuse does one thing well: AI observability. But PostHog ta
 
 Here's what you can get out-of-the-box, without any extra integration work:
 
-### Product analytics
+<details>
+<summary>Product analytics</summary>
 
 You've [shipped your AI feature](/blog/ai-observability-for-mvps). Now what do you do? You can use [product analytics](/product-analytics) to tell you whether it actually changed how people use your product. For instance, you can build funnels to see how many users reach your AI feature and how many complete the task it's supposed to help with. Or track retention to see whether AI users return more often than non-AI users.
 
@@ -356,43 +357,10 @@ If you need to run a deeper analysis, run a cohort analysis to compare behavior 
 
 In short: Langfuse can tell you what your model did, but PostHog can tell you whether users actually experienced a positive difference.
 
-<ProductComparisonTable
-    competitors={['posthog', 'langfuse']}
-    rows={[
-        {
-            label: 'Funnels',
-            description: 'Track conversion rates across multi-step user flows',
-            values: [true, false],
-        },
-        {
-            label: 'Retention',
-            description: 'Measure how often users come back over time',
-            values: [true, false],
-        },
-        {
-            label: 'User paths',
-            description: 'Visualize the routes users take through your product',
-            values: [true, false],
-        },
-        {
-            label: 'Trends',
-            description: 'Chart event counts, uniques, and properties over time',
-            values: [true, false],
-        },
-        {
-            label: 'Cohort analysis',
-            description: 'Compare behavior across user segments',
-            values: [true, false],
-        },
-        {
-            label: 'Group analytics',
-            description: 'Analyze usage at the company or team level',
-            values: [true, false],
-        },
-    ]}
-/>
+</details>
 
-### Session replay
+<details>
+<summary>Session replay</summary>
 
 LLMs are non-deterministic in nature. So it's actually normal for a user to say something like "the AI gave me a weird answer." In those, you need more than a trace to tell what's going on.
 
@@ -406,48 +374,10 @@ PostHog's Session Replay lets you watch the actual session and review parameters
 
 You can click [straight from an LLM trace to the session recording](/docs/ai-observability/link-session-replay) that triggered it. As a result, you can tie the model's behavior to why the user saw what they did. It's something most AI observability tools don't tell you today.
 
-<ProductComparisonTable
-    competitors={['posthog', 'langfuse']}
-    rows={[
-        {
-            label: 'Web app recordings',
-            description: 'Capture sessions from single-page apps and websites',
-            values: [true, false],
-        },
-        {
-            label: 'iOS and Android recordings',
-            description: 'Record sessions from mobile apps',
-            values: [true, false],
-        },
-        {
-            label: 'Console log capture',
-            description: 'See console.log, console.error, and warnings inline',
-            values: [true, false],
-        },
-        {
-            label: 'Network request inspection',
-            description: 'View API calls, status codes, and payloads',
-            values: [true, false],
-        },
-        {
-            label: 'Trace-to-session linking',
-            description: 'Click from an LLM trace to the session that triggered it',
-            values: [true, false],
-        },
-        {
-            label: 'Privacy masking',
-            description: 'Automatic and manual masking of sensitive user data',
-            values: [true, false],
-        },
-        {
-            label: 'Playlists',
-            description: 'Sort recordings into static and dynamic playlists',
-            values: [true, false],
-        },
-    ]}
-/>
+</details>
 
-### Feature flags and experimentation
+<details>
+<summary>Feature flags and experimentation</summary>
 
 You can use PostHog to confidently roll out a new model version to every user at once. It's a simple coin flip, in fact. Just use feature flags to gate AI features behind targeting rules like specific users or properties. If something goes wrong, you can even add a kill switch and fallback options using flags.
 
@@ -455,33 +385,19 @@ That said, Experiments let you test the performance of individual LLM parameters
 
 Even though Langfuse has evaluation pipelines for pre-deployment quality checks, it doesn't offer any possibility to measure whether a change moved the needle for actual users in production. You'll have to connect it to a separate analytics tool to do that.
 
-| Feature | PostHog | Langfuse |
-| --- | --- | --- |
-| [**Feature flags**](/docs/feature-flags/creating-feature-flags)  Target by user, cohort, percentage, or property | ✅ | ❌ |
-| [**Percentage-based rollouts**](/docs/feature-flags/phased-rollout)  Ship to 5% of users and scale up gradually | ✅ | ❌ |
-| **Kill switches**  Instantly roll back a feature flag in production | ✅ | ❌ |
-| [**A/B experiments**](/tutorials/abn-testing)  Statistically rigorous tests tied to product metrics | ✅ | ❌ |
-| [**Bayesian**](/docs/experiments/statistics-bayesian) **and [frequentist analysis](/docs/experiments/statistics-frequentist)**  Choose your statistical framework | ✅ | ❌ |
-| **Multivariate experiments**  Test more than two variants at once | ✅ | ❌ |
+</details>
 
-### Error tracking
+<details>
+<summary>Error tracking</summary>
 
 You can use error tracking to monitor exceptions and stack traces across your app. Then, use that data to correlate them with every change you make - for example, a new AI deployment or a change in a feature flag.
 
 If you roll out a feature and error rates spike 15 minutes later, you'll see it in your dashboard immediately and know which change caused it because the data lives on the same platform. Langfuse doesn't offer this right off the bat.
 
-| Feature | PostHog | Langfuse |
-| --- | --- | --- |
-| **Exception monitoring**  Capture errors with full stack traces | ✅ | ❌ |
-| **Error grouping**  Automatically cluster similar errors together | ✅ | ❌ |
-| **Error trends**  Track error rates over time and spot spikes | ✅ | ❌ |
-| **Deployment correlation**  See which deploy introduced new errors | ✅ | ❌ |
-| **Feature flag correlation**  Link error spikes to specific flag changes | ✅ | ❌ |
-| **Source maps**  Upload source maps for readable stack traces | ✅ | ❌ |
-| **User impact**  See which users and how many are affected by each error | ✅ | ❌ |
-| **Session replay link**  Click on an error in the session recording where it happened | ✅ | ❌ |
+</details>
 
-### Surveys, data warehouse, and web analytics
+<details>
+<summary>Surveys, data warehouse, and web analytics</summary>
 
 Here are a few more pieces that round out PostHog's capabilities:
 
@@ -491,22 +407,13 @@ Here are a few more pieces that round out PostHog's capabilities:
 
 - Use Web Analytics to track website traffic, UTM parameters, sources, and conversions. You'll be able to measure the full funnel from landing page to AI feature activation and see how users move through your website as well.
 
-| Feature | PostHog | Langfuse |
-| --- | --- | --- |
-| **In-app surveys**  Collect feedback with targeted popups and modals | ✅ | ❌ |
-| **NPS and rating scales**  Measure user satisfaction with standard question types | ✅ | ❌ |
-| **Survey targeting**  Show surveys based on user properties, cohorts, or events | ✅ | ❌ |
-| **Data warehouse imports**  Pull data from `Stripe`, `Hubspot`, `S3`, `Postgres`, and more | ✅ | ❌ |
-| **SQL queries across sources**  Join imported data with product events via `HogQL` | ✅ | ❌ |
-| **Web analytics**  Page views, bounce rates, and traffic sources | ✅ | ❌ |
-| **UTM tracking**  Attribute signups and conversions to marketing campaigns | ✅ | ❌ |
-| **Conversion goals**  Track how marketing traffic converts into product usage | ✅ | ❌ |
+</details>
 
 ## Pricing and open source
 
-As of June 2026, PostHog and Langfuse are MIT-licensed and open source. You can inspect the code and even contribute if needed. Also, both platforms offer a self-hosted version. You can inspect the code, contribute, and self-host either product.
+As of June 2026, PostHog and Langfuse are MIT-licensed and open source. You can inspect the code and even contribute if needed. Also, both platforms offer a self-hosted version.
 
-When it comes to pricing, Langfuse and PostHog differ drastically. Langfuse uses tier-based pricing, but PostHog uses usage-based pricing with no seat limits, so you can pay for only what you need.
+When it comes to pricing, Langfuse uses tier-based pricing, while PostHog uses [usage-based pricing](/pricing) with no seat limits, so you can pay for only what you need.
 
 |  | PostHog | Langfuse |
 | --- | --- | --- |
@@ -516,50 +423,7 @@ When it comes to pricing, Langfuse and PostHog differ drastically. Langfuse uses
 | **Paid plans** | Pay only for usage above free tiers (Starts at $0.00006/event) | $29/month to $2,499/month |
 | **Overages** | Scales with usage | Billed on top of the paid tier |
 | **Startup program** | [$50,000 in free credits](/startups) for 12 months | 50% off the first year |
-| **Self-hosting** | `ClickHouse`, `Kafka`, `Postgres`, `Redis` | `ClickHouse`, `Redis`, `Postgres`, `S3` |
-| **Self-hosted pricing** | Open-source version is free, but there are no paid support plans for the [self-hosted version](/docs/self-host) | Open-source version is free, and the self-hosted version is based on custom pricing |
 | **License** | MIT | MIT |
-| **Pricing page** | [PostHog pricing](/pricing) | [Langfuse pricing](https://langfuse.com/pricing) |
-
-**Heads-up:** If you're evaluating self-hosting costs, both products run on ClickHouse for analytical storage. Langfuse's self-hosted stack requires `ClickHouse`, `Redis`, `Postgres`, and `S3`. PostHog's self-hosted deployment uses `ClickHouse`, `Kafka`, `Postgres`, and `Redis`. Since ClickHouse [acquired Langfuse](https://clickhouse.com/blog/welcome-langfuse-to-clickhouse) in January 2026, the self-hosted version [may evolve over the next few months](https://www.producthunt.com/products/langfuse/reviews?review=542141), so we recommend checking their docs for the latest information.
-
-## Using PostHog and Langfuse together
-
-We do need to note that [PostHog and Langfuse](/docs/ai-observability/integrations/langfuse-posthog) offer built-in integrations with each other. There might be cases where you've already started using Langfuse for AI observability but realize that you want to connect it to other product-related metrics. PostHog even offers a dashboard template to help you get started with data visualization almost immediately.
-
-The setup works like this:
-
-- Langfuse handles the LLM engineering inner loop - prompt versioning, evaluation pipelines, annotation queues, and dataset experiments.
-- PostHog handles the product outer loop - measuring how AI features affect user behavior, [running A/B experiments on model variants](/tutorials/llm-ab-tests), tracking costs by user segment, and correlating traces with session recordings.
-- Both tools support `OpenTelemetry`, so you can instrument once and send trace data to both.
-
-At the end of it, your product and engineering team gets the deep trace exploration capabilities and behavioral analytics data in one place.
-
-But the trade-off is that you now have to maintain two different platforms. If you have a small team and AI features are one part of a larger platform, you'd be better off using PostHog. But if you have a dedicated AI/ML team that literally uses evaluation workflows all day, Langfuse makes more sense. Just connect it with PostHog to get the "outer loop" data.
-
-**Worth reading:** Learn [how Juicebox uses PostHog and Langfuse](/customers/juicebox) to track AI latency in its product.
-
-## Why users switch from Langfuse to PostHog
-
-Here are some of the reasons we've seen users switch from Langfuse to PostHog:
-
-1. **They want their LLM data in context:** Traces in isolation tell you what the model did, and that's not enough when you want to know how it affected the user. In PostHog, you get traces alongside product analytics, session recordings, feature flag evaluations, and user profiles so you can make better product-related decisions.
-
-2. **They're tired of stitching tools together:** If you're using Langfuse for LLM observability, you need to tack on another tool for product analytics, session replays, and so on. It bloats your stack, and the costs add up, too. PostHog replaces *all* those vendors with a single platform, so you need fewer integrations and deal with fewer billing headaches.
-
-3. **They need experimentation capabilities:** Langfuse's evaluation system is strong for pre-deployment quality checks. But when you need to know whether a change made a positive difference for the user, you need statistical A/B tests tied to product metrics. PostHog's experimentation framework does this natively.
-
-4. **They hit seat limits:** Langfuse's free plan caps at 2 users. PostHog has no seat limits on any plan, so your whole team gets access to every product you use from day one.
-
-## Why users love PostHog for AI observability
-
-1. **Session replay correlation lets you debug with hard data:** When a user reports a bad AI response, you can click from the LLM trace to the exact session recording. You can see what the user did before and after, check the console for errors, inspect network requests, and understand the full context.
-
-2. **`HogQL` lets you ask any question:** PostHog's SQL engine queries trace data alongside product events, user properties, feature flag evaluations, and imported data. You can ask specific questions, such as "What's the average latency for `GPT-4o` calls among users on our enterprise plan who signed up in the last 30 days?" and get an instant response.
-
-3. **One bill, one platform, unlimited users:** You don't pay per seat, nor do you manage multiple vendor integrations. Your AI traces live on the same platform as your product analytics, feature flags, experiments, session recordings, and error tracking, and it's all queryable from a single interface.
-
-4. **Feature flags [make AI rollouts safer](/newsletter/hidden-danger-of-shipping-fast):** You can gate new model versions behind a flag and roll them out to a percentage of your users at a time. Then, watch the traces alongside product metrics. If something looks off, you can either roll the feature back and see what went wrong or kill it completely. It's built into PostHog's platform - but in Langfuse, you'd need to bring your own feature flag system.
 
 ## When to choose PostHog vs Langfuse
 
@@ -567,20 +431,17 @@ The platform you choose for LLM or AI observability will depend on your current 
 
 ### Choose PostHog for AI observability if:
 
-- You're building AI features as part of a larger product and want to understand how they affect user behavior and business outcomes.
-- You already use PostHog for analytics, session replay, experiments, or feature flags, and want to add AI observability without introducing another tool in your stack.
-- Your primary question is how your AI features perform for real users, and answering that requires traces connected to product data.
+- You're building AI features as part of a larger product and want to understand how they affect user behavior and business outcomes.- Your primary question is how your AI features perform for real users, and answering that requires traces connected to product data.
 - You need to A/B test different models or prompt variants and measure their impact on business metrics like conversion and retention.
 - You want one platform for your entire product data stack, from web analytics and error tracking to LLM monitoring.
+- You already use PostHog for analytics, session replay, experiments, or something else, and want to add AI observability without introducing another tool in your stack.
 
 ### Choose Langfuse for AI observability if:
 
-- LLM observability is your primary concern, and you don't need surrounding product analytics or session replay.
-- You need prompt management, evaluation pipelines, annotation queues, or dataset experiments today, and Langfuse has more mature tooling in these specific areas.
+- LLM observability is your primary concern, and you don't need surrounding tools.
+- You need prompt management, evaluation pipelines, annotation queues, or dataset experiments today.
 - Your team is focused on improving model output quality before shipping, with workflows like LLM-as-a-judge scoring and curated dataset experiments.
-- You want to self-host a standalone LLM observability tool with a straightforward stack (`ClickHouse`, `Redis`, `Postgres`, and `S3`).
-- You need the most polished trace exploration UI for debugging complex agent workflows and multi-step chains.
-
+- You want to self-host a standalone LLM observability tool.
 
 <WizardCTA />
 
@@ -607,7 +468,9 @@ The platform you choose for LLM or AI observability will depend on your current 
 <details>
 <summary>What's the main difference between PostHog and Langfuse?</summary>
 
-**Langfuse** is a dedicated LLM observability tool that provides tracing, prompt management, evaluation, and annotation queues. **PostHog** is an all-in-one product platform where AI observability is one product alongside [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), and more. The difference comes down to depth versus breadth - for AI observability. While Langfuse goes deeper on LLM-specific workflows, PostHog connects your LLM data to everything else happening in your product.
+**Langfuse** is a dedicated LLM observability tool that provides tracing, prompt management, evaluation, and annotation queues. **PostHog** is an all-in-one platform for self-driving products where AI observability is one tool alongside [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), and more. 
+
+The difference comes down to depth versus breadth - for AI observability. While Langfuse goes deeper on LLM-specific workflows, PostHog connects your LLM data to everything else happening in your product.
 
 </details>
 
@@ -616,30 +479,36 @@ The platform you choose for LLM or AI observability will depend on your current 
 
 Depends on what you mean by "better." For trace visualization, evaluation pipelines, annotation queues, and prompt playground testing, **Langfuse** is more mature. That has been its sole focus since its launch.
 
-But for connecting traces to user behavior or running tests during AI deployment, **PostHog** is a much better platform. You can run A/B tests on prompt variants, replay the session where a bad AI response happened, and query trace data alongside product events via `HogQL`. It gives you a more comprehensive answer.
+But for connecting traces to user behavior or running tests during AI deployment, **PostHog** is a much better option. You can run A/B tests on prompt variants, replay the session where a bad AI response happened, and query trace data alongside product events via SQL. It gives you a more comprehensive answer.
 
 </details>
 
 <details>
 <summary>Can PostHog replace Langfuse?</summary>
 
-For many teams, yes. **PostHog** covers tracing, cost tracking, [prompt management](/docs/prompt-management/prompts) (beta), and A/B testing of prompt versions. But it also offers product analytics, session replay, feature flags, and error tracking - which Langfuse doesn't. That said, if you need advanced AI observability features like an annotation queue for human review or composable prompt chains, you'll still need **Langfuse** (or both\!).
+For many teams, yes. **PostHog** covers tracing, cost tracking, [prompt management](/docs/prompt-management/prompts) (beta), and A/B testing of prompt versions. But it also offers product analytics, session replay, flags, error tracking, and more, which Langfuse doesn't. That said, if you need advanced AI observability features like an annotation queue for human review or composable prompt chains, you'll still need **Langfuse** (or both\!).
 
 </details>
 
 <details>
 <summary>Can I use PostHog and Langfuse together?</summary>
 
-Yes. Both support `OpenTelemetry` so that you can instrument your LLM calls once and send traces to both platforms. Just use **Langfuse** for the LLM engineering inner loop (prompt iteration, evals, annotation queues) and **PostHog** for the product outer loop (behavioral analytics, A/B experiments, session replay, cost tracking by user segment).
+Yes. Both support `OpenTelemetry` so that you can instrument your LLM calls once and send traces to both platforms. [PostHog and Langfuse](/docs/ai-observability/integrations/langfuse-posthog) also offer a built-in integration.
+
+The trade-off is maintaining two platforms. That means more setup, more integrations, and potentially more cost. For smaller teams, or teams where AI is one part of a broader product, PostHog is usually simpler to manage.
+
+However, if you need the specialized features of both platforms, using them together can provide a more comprehensive solution.
 
 </details>
 
 <details>
 <summary>What is the best alternative to Langfuse?</summary>
 
-It depends on what you're looking for. For dedicated LLM observability and tracing, [LangSmith](https://smith.langchain.com/) and [Braintrust](https://braintrust.dev/) are the closest alternatives as they both focus on tracing, evals, and prompt iteration. [Helicone](https://helicone.ai/) is another option if you want a lighter-weight proxy-based approach to LLM monitoring. You can find a few more in our [guide on LLM observability tools](/blog/best-open-source-llm-observability-tools).
+It depends on what you're looking for. For dedicated LLM observability and tracing, LangSmith and Braintrust are the closest alternatives as they both focus on tracing, evals, and prompt iteration.
 
-If you want LLM observability as part of a broader product analytics platform, **PostHog** is the best alternative to Langfuse. We're the only tool that ties model performance to actual product outcomes on a single platform.
+If you want LLM observability as part of a broader product analytics platform, **PostHog** is the [best alternative to Langfuse](/blog/langfuse-alternatives). We're the only tool that ties model performance to actual product outcomes on a single platform.
+
+You can find a few more in our [guide on LLM observability tools](/blog/best-open-source-llm-observability-tools).
 
 </details>
 
@@ -661,7 +530,9 @@ If you want LLM observability as part of a broader product analytics platform, *
 <details>
 <summary>Which is better for evals and testing LLM quality?</summary>
 
-**Langfuse** is better for evaluating and testing LLM quality if you mean pre-deployment quality checks. It has LLM-as-a-judge scoring, custom code evaluators, human annotation queues, curated datasets, and experiment runs across those datasets. If you mean post-deployment impact testing, PostHog is the better option. **PostHog** runs statistical A/B tests on live users to measure whether a change to your AI feature moved real product metrics, such as conversion or retention.
+**Langfuse** is more mature for evaluating and testing LLM quality if you mean pre-deployment quality checks. It has LLM-as-a-judge scoring, custom code evaluators, human annotation queues, curated datasets, and experiment runs across those datasets. 
+
+If you mean post-deployment impact testing, PostHog is the better option. **PostHog** runs statistical A/B tests on live users to measure whether a change to your AI feature moved real product metrics, such as conversion or retention.
 
 </details>
 
@@ -678,7 +549,7 @@ If you want LLM observability as part of a broader product analytics platform, *
 <details>
 <summary>Can I self-host PostHog or Langfuse? What's involved?</summary>
 
-Yes to both. **Langfuse's** self-hosted stack requires `ClickHouse`, `Redis`, `Postgres`, and `S3`. **PostHog** requires `ClickHouse`, `Kafka`, `Postgres`, and `Redis`. Both these platforms use `ClickHouse` as their analytical engine, and since ClickHouse [acquired Langfuse](https://clickhouse.com/blog/welcome-langfuse-to-clickhouse) in January 2026, Langfuse's self-hosted architecture may change. Check each project's docs for the latest deployment guides.
+Yes to both. **Langfuse's** self-hosted stack requires `ClickHouse`, `Redis`, `Postgres`, and `S3`. **PostHog** requires `ClickHouse`, `Kafka`, `Postgres`, and `Redis`. Check each project's docs for the latest deployment guides.
 
 </details>
 
@@ -687,7 +558,7 @@ Yes to both. **Langfuse's** self-hosted stack requires `ClickHouse`, `Redis`, `P
 
 PostHog's pricing is usage-based with no seat limits. You pay for what you use across each product, starting from generous free tiers. The AI observability product is free for up to 100,000 events each month. Your 50th team member costs the same as your second team member. That said, Langfuse's pricing is tiered, with plans ranging from free (50,000 observations, 2 users) to $2,499/month for enterprise, with overages billed on top.
 
-At scale, the final bill will depend on your observation volume and team size. If you have a large team, PostHog's unlimited seats can save you money. If you have a small team but a very high trace volume, compare the per-event costs for [PostHog](/pricing) and [Langfuse](https://langfuse.com/pricing).
+At scale, the final bill will depend on your observation volume and team size. If you have a large team, PostHog's unlimited seats can save you money. If you have a small team but a very high trace volume, compare the per-event costs for [PostHog](/pricing) and Langfuse.
 
 </details>
 
@@ -695,6 +566,20 @@ At scale, the final bill will depend on your observation volume and team size. I
 <summary>Which is better for building an AI agent vs. adding LLM features to an existing product?</summary>
 
 If you're building a standalone AI agent where the agent *is* the product, **Langfuse's** depth in trace exploration, eval pipelines, and annotation queues gives you a tighter feedback loop for iterating on agent behavior. If you're adding AI features to an existing product, **PostHog** is the stronger pick.
+
+</details>
+
+<details>
+<summary>Why is session replay useful for AI observability?</summary>
+
+Session replay gives you context that traces alone cannot. When a user gets a bad AI response, you can jump from the LLM trace to the exact session recording, inspect what the user did before and after, check console logs, review network requests, and debug the full experience.
+
+</details>
+
+<details>
+<summary>How do feature flags make AI rollouts safer?</summary>
+
+Feature flags let you roll out new AI features, prompts, or model versions gradually. You can release to a small percentage of users, monitor traces and product metrics, and roll back instantly if something looks wrong — without redeploying code.
 
 </details>
 
