@@ -3,12 +3,6 @@ title: Grafana
 platformLogo: grafana
 ---
 
-## Objective
-
-Forwarding Grafana usage analytics to PostHog using Grafana's built-in PostHog analytics backend.
-
-## Why is this useful?
-
 [Grafana](https://grafana.com/) is an open source observability platform for visualizing metrics, logs, and traces. Grafana's echo service captures frontend usage events from your Grafana instance, and as of Grafana v13.1 it can forward them to PostHog. With this integration, you can:
 
 - Track how your team uses Grafana, including pageviews and UI interactions
@@ -16,33 +10,23 @@ Forwarding Grafana usage analytics to PostHog using Grafana's built-in PostHog a
 - Capture frontend performance metrics and JavaScript errors from your Grafana instance
 - Analyze Grafana usage alongside the rest of your product data in PostHog
 
-This is particularly useful for platform and observability teams who want to understand how their internal Grafana deployment is used.
-
 ## Prerequisites
 
-To follow this tutorial, you should:
-
-1. Have a [PostHog account](https://us.posthog.com/signup) (Cloud or self-hosted)
+1. Have a [PostHog account](https://app.posthog.com/signup)
 2. Run a self-managed [Grafana instance](https://grafana.com/docs/grafana/latest/setup-grafana/) on version 13.1 or later
 
-## Step-by-step instructions
+## Configuring Grafana
 
-### Getting your PostHog project token
-
-1. In PostHog, go to [your project settings](https://app.posthog.com/settings/project).
-2. Copy your project token.
-
-### Configuring Grafana
-
-1. Open your Grafana configuration file (`grafana.ini`, or `custom.ini` on Windows).
-2. Add your project token to the `[analytics]` section. The integration is disabled unless a token is set.
+1. In PostHog, copy your project token from [your project settings](https://app.posthog.com/settings/project).
+2. Open your Grafana configuration file (`grafana.ini`, or `custom.ini` on Windows).
+3. Add your project token to the `[analytics]` section. The integration is disabled unless a token is set.
 
    ```ini
    [analytics]
    posthog_token = <ph_project_token>
    ```
 
-3. If you use PostHog Cloud EU or a self-hosted PostHog instance, also set `posthog_host`. It defaults to `https://us.i.posthog.com` if not set.
+4. If you use PostHog Cloud EU, also set `posthog_host`. It defaults to `https://us.i.posthog.com` if not set.
 
    ```ini
    [analytics]
@@ -50,7 +34,7 @@ To follow this tutorial, you should:
    posthog_host = https://eu.i.posthog.com
    ```
 
-4. Restart Grafana for the changes to take effect.
+5. Restart Grafana for the changes to take effect.
 
 If you run Grafana in Docker or Kubernetes, you can use Grafana's standard environment variable overrides instead of editing the configuration file:
 
@@ -59,7 +43,7 @@ GF_ANALYTICS_POSTHOG_TOKEN=<ph_project_token>
 GF_ANALYTICS_POSTHOG_HOST=https://eu.i.posthog.com
 ```
 
-### Verifying the integration
+## Verifying the integration
 
 1. Open your Grafana instance and click around a few dashboards.
 2. Check that events appear in your [PostHog activity tab](https://app.posthog.com/activity/explore).
@@ -88,10 +72,6 @@ See Grafana's [configuration documentation](https://grafana.com/docs/grafana/lat
 ### Who maintains this integration?
 
 This integration is part of Grafana core and was contributed by PostHog. If you have issues with the integration not functioning as intended, [let us know in-app](http://app.posthog.com/home#supportModal).
-
-### Can I use this with a self-hosted PostHog instance?
-
-Yes! Set `posthog_host` to your self-hosted instance URL in the `[analytics]` section of your Grafana configuration.
 
 ### What if my question isn't answered above?
 
