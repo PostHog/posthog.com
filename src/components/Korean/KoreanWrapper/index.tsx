@@ -6,6 +6,7 @@ import CookieBannerToast from 'components/CookieBanner/ToastVersion'
 import { DotLottiePlayer, PlayerEvents } from '@dotlottie/react-player'
 import KoreanDesktop from '../KoreanDesktop'
 import KoreanTaskBarMenu from '../KoreanTaskBarMenu'
+import { SearchOverlay } from 'components/SearchUI'
 
 export default function KoreanWrapper() {
     const {
@@ -15,7 +16,6 @@ export default function KoreanWrapper() {
         closingAllWindowsAnimation,
         setClosingAllWindowsAnimation,
         closeAllWindows,
-        searchOpen,
     } = useApp()
     const [shakeReady, setShakeReady] = useState(false)
     const dotLottieRef = useRef<any>(null)
@@ -57,7 +57,7 @@ export default function KoreanWrapper() {
                                     },
                                 }}
                             >
-                                <AppWindow item={item} key={item.key} chrome={item.key !== 'search'} />
+                                <AppWindow item={item} key={item.key} />
                             </motion.div>
                         )
                     })}
@@ -66,6 +66,7 @@ export default function KoreanWrapper() {
             {/*
             {!compact && <Dock />}
             */}
+            <SearchOverlay />
             <CookieBannerToast />
             <AnimatePresence>
                 <motion.div

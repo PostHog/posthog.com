@@ -15,7 +15,7 @@ import {
     IconPeople,
     IconPinFilled,
 } from '@posthog/icons'
-import { useAppActions, useAppSettings, useAppUIState, useAppWindows } from '../../context/App'
+import { useAppActions, useAppSettings, useAppWindows } from '../../context/App'
 
 import MenuBar, { MenuType } from 'components/RadixUI/MenuBar'
 import ActiveWindowsPanel from 'components/ActiveWindowsPanel'
@@ -27,8 +27,6 @@ import { useMenuData } from './menuData'
 import CloudinaryImage from 'components/CloudinaryImage'
 import MediaUploadModal from 'components/MediaUploadModal'
 import KeyboardShortcut from 'components/KeyboardShortcut'
-import { Popover } from 'components/RadixUI/Popover'
-import { SearchUI } from 'components/SearchUI'
 
 function TaskBarMenu() {
     const { windows } = useAppWindows()
@@ -43,7 +41,6 @@ function TaskBarMenu() {
         updateTaskbarHeight,
     } = useAppActions()
     const { posthogInstance } = useAppSettings()
-    const { searchOpen } = useAppUIState()
     const [isAnimating, setIsAnimating] = useState(false)
     const shouldAnimate = useRef(
         typeof window !== 'undefined' && window.location.pathname === '/' && !localStorage.getItem('intro-seen')
@@ -107,10 +104,6 @@ function TaskBarMenu() {
             document.activeElement.blur()
         }
         openSignIn()
-    }
-
-    const handleSearchOpenChange = () => {
-        openSearch()
     }
 
     const avatarURL = getAvatarURL(user?.profile)
@@ -385,32 +378,18 @@ function TaskBarMenu() {
                                     {posthogInstance ? 'Dashboard' : 'Get started – free'}
                                 </OSButton>
                             </div>
-                            <Popover
-                                open={searchOpen}
-                                dataScheme="primary"
-                                onOpenChange={handleSearchOpenChange}
+                            <Tooltip
                                 trigger={
-                                    <span>
-                                        <Tooltip
-                                            trigger={
-                                                <span>
-                                                    <OSButton size="sm" className="relative top-px">
-                                                        <IconSearch className="size-5" />
-                                                    </OSButton>
-                                                </span>
-                                            }
-                                        >
-                                            <div className="flex flex-col items-center gap-1">
-                                                <p className="text-sm mb-0">Search</p>
-                                                <KeyboardShortcut text="/" size="sm" />
-                                            </div>
-                                        </Tooltip>
-                                    </span>
+                                    <OSButton onClick={() => openSearch()} size="sm" className="relative top-px">
+                                        <IconSearch className="size-5" />
+                                    </OSButton>
                                 }
-                                contentClassName="w-[450px] border border-primary rounded !p-0 overflow-hidden"
                             >
-                                <SearchUI />
-                            </Popover>
+                                <div className="flex flex-col items-center gap-1">
+                                    <p className="text-sm mb-0">Search</p>
+                                    <KeyboardShortcut text="/" size="sm" />
+                                </div>
+                            </Tooltip>
                             <Tooltip
                                 trigger={
                                     <OSButton
@@ -441,5 +420,5 @@ function TaskBarMenu() {
 }
 
 // Memoized so it survives Wrapper re-renders (e.g. the navigate() on window
-// open/close); it still updates when it reads changed context (windows, searchOpen).
+// open/close); it still updates when it reads changed context (e.g. windows).
 export default React.memo(TaskBarMenu)

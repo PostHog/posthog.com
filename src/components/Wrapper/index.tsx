@@ -4,6 +4,7 @@ import Desktop from 'components/Desktop'
 import TaskBarMenu from 'components/TaskBarMenu'
 import AppWindow from 'components/AppWindow'
 import CookieBannerToast from 'components/CookieBanner/ToastVersion'
+import { SearchOverlay } from 'components/SearchUI'
 
 // Isolates the `windows` subscription so that opening/closing a window only
 // re-renders this list, not the whole Wrapper (and therefore not the desktop,
@@ -14,7 +15,7 @@ const WindowList = React.memo(function WindowList() {
     return (
         <div className="flex size-full justify-center items-center">
             {windows.map((item) => (
-                <AppWindow item={item} key={item.key} chrome={item.key !== 'search'} />
+                <AppWindow item={item} key={item.key} />
             ))}
         </div>
     )
@@ -34,6 +35,7 @@ export default function Wrapper() {
             {/*             
             {!compact && <Dock />}
             */}
+            <SearchOverlay />
             <CookieBannerToast />
         </div>
     )

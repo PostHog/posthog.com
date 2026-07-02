@@ -27,8 +27,6 @@ import { useMenuData } from './menuData'
 import CloudinaryImage from 'components/CloudinaryImage'
 import MediaUploadModal from 'components/MediaUploadModal'
 import KeyboardShortcut from 'components/KeyboardShortcut'
-import { Popover } from 'components/RadixUI/Popover'
-import { SearchUI } from 'components/SearchUI'
 import { translateKo } from '../../../pages/ko/_translations'
 
 const translateMenuItem = (item: any): any => {
@@ -64,7 +62,6 @@ export default function TaskBarMenu() {
         addWindow,
         taskbarRef,
         posthogInstance,
-        searchOpen,
     } = useApp()
     const [isAnimating, setIsAnimating] = useState(false)
     const [rendered, setRendered] = useState(false)
@@ -111,10 +108,6 @@ export default function TaskBarMenu() {
             document.activeElement.blur()
         }
         openSignIn()
-    }
-
-    const handleSearchOpenChange = () => {
-        openSearch()
     }
 
     const avatarURL = getAvatarURL(user?.profile)
@@ -348,32 +341,18 @@ export default function TaskBarMenu() {
                                 {posthogInstance ? translateKo('Dashboard') : translateKo('Get started – free')}
                             </OSButton>
                         </div>
-                        <Popover
-                            open={searchOpen}
-                            dataScheme="primary"
-                            onOpenChange={handleSearchOpenChange}
+                        <Tooltip
                             trigger={
-                                <span>
-                                    <Tooltip
-                                        trigger={
-                                            <span>
-                                                <OSButton size="sm" className="relative top-px">
-                                                    <IconSearch className="size-5" />
-                                                </OSButton>
-                                            </span>
-                                        }
-                                    >
-                                        <div className="flex flex-col items-center gap-1">
-                                            <p className="text-sm mb-0">{translateKo('Search')}</p>
-                                            <KeyboardShortcut text="/" size="sm" />
-                                        </div>
-                                    </Tooltip>
-                                </span>
+                                <OSButton onClick={() => openSearch()} size="sm" className="relative top-px">
+                                    <IconSearch className="size-5" />
+                                </OSButton>
                             }
-                            contentClassName="w-[450px] border border-primary rounded !p-0 overflow-hidden"
                         >
-                            <SearchUI />
-                        </Popover>
+                            <div className="flex flex-col items-center gap-1">
+                                <p className="text-sm mb-0">{translateKo('Search')}</p>
+                                <KeyboardShortcut text="/" size="sm" />
+                            </div>
+                        </Tooltip>
                         <Tooltip
                             trigger={
                                 <OSButton

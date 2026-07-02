@@ -10,7 +10,6 @@ import React, {
     useRef,
 } from 'react'
 import { AppWindow } from './Window'
-import { WindowSearchUI } from 'components/SearchUI'
 import { navigate } from 'gatsby'
 import SignIn from 'components/Squeak/components/Classic/SignIn'
 import Register from 'components/Squeak/components/Classic/Register'
@@ -153,6 +152,7 @@ interface AppContextType {
     windowsInView: AppWindow[]
     searchOpen: boolean
     setSearchOpen: (isOpen: boolean) => void
+    searchInitialFilter: string
     updateTaskbarHeight: () => void
 }
 
@@ -386,6 +386,7 @@ export const Context = createContext<AppContextType>({
     windowsInView: [],
     searchOpen: false,
     setSearchOpen: () => {},
+    searchInitialFilter: '',
     updateTaskbarHeight: () => {},
 })
 
@@ -1612,6 +1613,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const [confetti, setConfetti] = useState(false)
     const [posthogInstance, setPosthogInstance] = useState<string>()
     const [searchOpen, setSearchOpen] = useState<boolean>(false)
+    const [searchInitialFilter, setSearchInitialFilter] = useState<string>('')
     const { addToast } = useToast()
 
     // Hydrate client-only state before first paint to avoid layout flash
@@ -2154,15 +2156,8 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }
 
     const openSearch = (initialFilter?: string) => {
-        addWindow(
-            <WindowSearchUI
-                location={{ pathname: `search` }}
-                key={`search`}
-                newWindow
-                minimal
-                initialFilter={initialFilter}
-            />
-        )
+        setSearchInitialFilter(initialFilter || '')
+        setSearchOpen(true)
     }
 
     const openSignIn = (onSuccess?: (user: User) => void) => {
@@ -2937,6 +2932,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                                 windowsInView,
                                 searchOpen,
                                 setSearchOpen,
+                                searchInitialFilter,
                                 updateTaskbarHeight,
                             }}
                         >

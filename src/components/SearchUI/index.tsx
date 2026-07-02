@@ -116,12 +116,12 @@ const Search = ({
         <div ref={containerRef} className={`flex flex-col ${className}`} onMouseDown={handleMouseDown}>
             <Combobox value={null} onChange={handleChange} nullable>
                 <div className="relative">
-                    <div className="bg-accent !border-primary overflow-hidden relative border rounded">
+                    <div className="relative">
                         <Combobox.Input
                             as={Input}
                             label=""
                             showLabel={false}
-                            className="w-full text-primary border-0 bg-transparent focus:ring-0"
+                            className="w-full text-primary border border-primary bg-transparent focus:ring-0"
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.target.value)}
                             onKeyDown={handleKeyDown}
                             placeholder={`Search ${initialFilter ? 'the ' + initialFilter : 'PostHog.com'}...`}
@@ -130,7 +130,11 @@ const Search = ({
                             containerClassName="m-0"
                         />
 
-                        <div data-scheme="primary" className="absolute right-1 top-1/2 -translate-y-1/2">
+                        <div
+                            data-scheme="primary"
+                            className="absolute right-1 top-1/2 -translate-y-1/2"
+                            onMouseDown={(e) => e.stopPropagation()}
+                        >
                             <OSButton
                                 disabled={!query}
                                 size="md"
@@ -190,63 +194,22 @@ const Search = ({
     )
 }
 
-export const WindowSearchUI = ({ initialFilter }: { initialFilter?: string }) => {
-    const { setWindowTitle, closeWindow } = useApp()
-    const { appWindow } = useWindow()
-    const ref = useRef<HTMLDivElement>(null)
-
-    const close = () => {
-        if (appWindow) {
-            closeWindow(appWindow)
-        }
-    }
-
-    useEffect(() => {
-        if (appWindow) {
-            setWindowTitle(appWindow, 'Search')
-        }
-    }, [])
-
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (ref.current && !ref.current.contains(event.target as Node) && appWindow) {
-                close()
-            }
-        }
-        document.addEventListener('mousedown', handleClickOutside)
-        return () => document.removeEventListener('mousedown', handleClickOutside)
-    }, [closeWindow])
-
-    return (
-        <InstantSearch
-            searchClient={searchClient}
-            indexName={process.env.GATSBY_ALGOLIA_INDEX_NAME as string}
-            stalledSearchDelay={750}
-        >
-            <div ref={ref}>
-                <Search
-                    initialFilter={initialFilter}
-                    className="cursor-grab active:cursor-grabbing p-2 rounded bg-white/25 backdrop-blur shadow-2xl border border-primary"
-                    onChange={close}
-                    onEscape={close}
-                />
-            </div>
-        </InstantSearch>
-    )
-}
-
 export const SearchUI = ({
     initialFilter = '',
     className = '',
     isRefinedClassName = 'bg-primary',
     hideFilters = false,
     autoFocus = true,
+    onChange,
+    onEscape,
 }: {
     initialFilter?: string
     className?: string
     isRefinedClassName?: string
     hideFilters?: boolean
     autoFocus?: boolean
+    onChange?: () => void
+    onEscape?: () => void
 }) => {
     return (
         <InstantSearch
@@ -260,7 +223,36 @@ export const SearchUI = ({
                 isRefinedClassName={isRefinedClassName}
                 hideFilters={hideFilters}
                 autoFocus={autoFocus}
+                onChange={onChange}
+                onEscape={onEscape}
             />
         </InstantSearch>
+    )
+}
+
+// Global search overlay. Rendered once (in the desktop wrapper) and toggled via
+// the app-level `searchOpen` flag instead of being managed as a draggable window.
+export const SearchOverlay = () => {
+    const { searchOpen, setSearchOpen, searchInitialFilter } = useApp()
+
+    if (!searchOpen) {
+        return null
+    }
+
+    const close = () => setSearchOpen(false)
+
+    return (
+        <div data-scheme="primary" className="fixed inset-0 z-[9999] flex items-start justify-center">
+            <div className="absolute inset-0 bg-black/50 animate-overlay-fade-in" onClick={close} />
+            <div className="relative w-[90vw] max-w-[600px] mt-[12vh]">
+                <SearchUI
+                    initialFilter={searchInitialFilter}
+                    autoFocus
+                    onChange={close}
+                    onEscape={close}
+                    className="p-2 rounded bg-primary shadow-2xl border border-primary"
+                />
+            </div>
+        </div>
     )
 }
