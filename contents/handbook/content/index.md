@@ -41,7 +41,7 @@ It should be the same as [who we are building for](/handbook/who-we-are-building
 
 ## What kind of content do we produce?
 
-1. **Opinionated advice:** Articles where we offer a strong point of view on a topic that impacts our audience. Examples include [The Product-Market Fit Game](/founders/product-market-fit-game), [Burning money on paid ads for a dev tool](/founders/dev-marketing-paid-ads), and [How to design your company for speed](https://newsletter.posthog.com/p/how-to-design-your-company-for-speed) 
+1. **Opinionated advice:** Articles where we offer a strong point of view on a topic that impacts our audience. Examples include [The Product-Market Fit Game](/founders/product-market-fit-game), [Burning money on paid ads for a dev tool](/founders/dev-marketing-paid-ads), and [How to design your company for speed](https://newsletter.posthog.com/p/how-to-design-your-company-for-speed)
 
 2. **High intent SEO comparisons:** Articles for people actively considering PostHog, or searching for a product like ours. Examples include comparisons between [PostHog and competing products](/blog/tags/comparisons), guides on the [best alternatives to popular tools](/blog/best-heap-alternatives), and guides to [most popular tools in our segments](/blog/best-open-source-ab-testing-tools).
 
@@ -98,7 +98,7 @@ Tips for writing a good post:
 
 ### 4. Share internally
 
-Internal teams, especially sales, CS, and the relevant product team, can often make use of the content you write if they know about it. They can share it with customers and use the ideas and examples in their conversations. 
+Internal teams, especially sales, CS, and the relevant product team, can often make use of the content you write if they know about it. They can share it with customers and use the ideas and examples in their conversations.
 
 It's worth sharing in their Slack channels directly as they don't see everything we publish. Asking them to smash the like button, subscribe, and share with their friends and family is a good tactic too.
 
