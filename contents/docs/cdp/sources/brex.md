@@ -9,7 +9,7 @@ availability:
 sourceId: Brex
 ---
 
-<CalloutBox icon="IconInfo" title="Alpha release" type="fyi">
+<CalloutBox icon="IconFlask" title="Alpha release" type="action">
 
 This source is currently in **alpha**. The interface and available tables may change.
 
@@ -51,3 +51,7 @@ Brex API user tokens expire after 90 days without API activity. If your syncs st
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

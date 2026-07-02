@@ -4,8 +4,8 @@ sidebar: Docs
 showTitle: true
 ---
 
-import MigrationWarning from "./_snippets/migration-warning.mdx"
-import { CalloutBox } from 'components/Docs/CalloutBox'
+import MigrationWarning from "./_snippets/migration-warning.mdx";
+import { CalloutBox } from "components/Docs/CalloutBox";
 
 <MigrationWarning />
 
@@ -45,13 +45,22 @@ Direct imports enable you to migrate data directly from Mixpanel or Amplitude wi
 
 Each direct import job supports a maximum date range of one year. To migrate data spanning more than one year, run multiple jobs that cover smaller, consecutive ranges.
 
+### Credentials
+
+Each source type requires different credentials:
+
+| Source        | Required credentials   | Where to find them                                                                                                                                         |
+| ------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Mixpanel**  | Project secret         | **Project settings** > **Access keys** in Mixpanel. See [Mixpanel's docs](https://docs.mixpanel.com/docs/orgs-and-projects/managing-projects#access-keys). |
+| **Amplitude** | API key and Secret key | Both are required for Amplitude's Export API, which uses Basic auth.                                                                                       |
+
 When setting up an Amplitude direct import, you can configure the following options:
 
-| Option | Description | Enabled by default |
-|--------|-------------|-------------------|
-| **Import events from Amplitude** | Import Amplitude events into PostHog. | ✅ Yes |
-| **Generate identify events to link user IDs with device IDs** | Automatically generate `$identify` events whenever a new device ID is associated with a user ID. These identify events help maintain proper user identity linking in PostHog by connecting anonymous device IDs with known user IDs. | ✅ Yes |
-| **Generate group identify events from group property changes** | Generate group identify events when group properties change. | ✅ Yes |
+| Option                                                         | Description                                                                                                                                                                                                                          | Enabled by default |
+| -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------ |
+| **Import events from Amplitude**                               | Import Amplitude events into PostHog.                                                                                                                                                                                                | ✅ Yes             |
+| **Generate identify events to link user IDs with device IDs**  | Automatically generate `$identify` events whenever a new device ID is associated with a user ID. These identify events help maintain proper user identity linking in PostHog by connecting anonymous device IDs with known user IDs. | ✅ Yes             |
+| **Generate group identify events from group property changes** | Generate group identify events when group properties change.                                                                                                                                                                         | ✅ Yes             |
 
 <CalloutBox icon="IconInfo" title="Importing groups from Amplitude" type="fyi">
 
@@ -107,7 +116,12 @@ If you upload Amplitude or Mixpanel events to S3, select the matching content ty
 Minimal example for `posthog` content type (one line per event):
 
 ```json
-{"event":"$pageview","distinct_id":"user_123","properties":{"$current_url":"https://example.com"},"timestamp":"2024-01-01T00:00:00Z"}
+{
+  "event": "$pageview",
+  "distinct_id": "user_123",
+  "properties": { "$current_url": "https://example.com" },
+  "timestamp": "2024-01-01T00:00:00Z"
+}
 ```
 
 ### Setting up an S3 import
@@ -115,12 +129,13 @@ Minimal example for `posthog` content type (one line per event):
 1. **Prepare your data**: Export your events and format them as JSONL (one JSON object per line)
 2. **Upload to S3**: Place your `.jsonl` or `.jsonl.gz` files in an S3 bucket
 3. **Start import**: Provide PostHog with:
-  - S3 region
-  - S3 bucket name
-  - AWS access key ID
-  - AWS secret access key
-  - Content Type (choose one of: `amplitude`, `mixpanel`, or `posthog`; your files must match this schema)
-  - Endpoint URL (optional – only needed for [S3-compatible storage](#s3-compatible-storage))
+
+- S3 region
+- S3 bucket name
+- AWS access key ID
+- AWS secret access key
+- Content Type (choose one of: `amplitude`, `mixpanel`, or `posthog`; your files must match this schema)
+- Endpoint URL (optional – only needed for [S3-compatible storage](#s3-compatible-storage))
 
 When using the `amplitude` content type, you can also configure the same Amplitude-specific options available for [direct imports](#direct-imports-mixpanel-amplitude), including whether to import events, generate identify events, and generate group identify events.
 
@@ -129,13 +144,16 @@ When using the `amplitude` content type, you can also configure the same Amplitu
 You can source data from any S3-compatible blob storage by providing an **Endpoint URL**. The endpoint must resolve to a public address – internal or private IPs aren't allowed.
 
 #### Cloudflare R2
+
 - Set the **Endpoint URL** to `https://<ACCOUNT_ID>.r2.cloudflarestorage.com` (replace `<ACCOUNT_ID>` with your Cloudflare account ID).
 - For the **Region**, select one of the Cloudflare R2 regions that correspond to your bucket, like "Automatic (AUTO)".
 
 #### MinIO
+
 - Set the **Endpoint URL** to your MinIO instance's host and port, for example: `https://my-minio-storage:9000`.
 
 #### Google Cloud Storage (GCS)
+
 1. Create a [Service Account](https://cloud.google.com/iam/docs/service-accounts-create) and grant it the `Storage Object Viewer` role (or a custom role with `storage.objects.get` and `storage.objects.list` permissions) on your bucket.
 2. Create an [HMAC key](https://cloud.google.com/storage/docs/authentication/managing-hmackeys#console) for the Service Account.
 3. Use the HMAC key access key and secret as the **AWS Access Key ID** and **AWS Secret Access Key** respectively.
@@ -161,6 +179,7 @@ You can source data from any S3-compatible blob storage by providing an **Endpoi
 ## Monitoring your migration
 
 Once started, you can monitor your migration progress:
+
 1. **Migration dashboard**: View real-time progress and status of your migration
 2. **Event validation**: Query for your events as they come in to ensure proper transformation and ingestion
 
@@ -287,7 +306,7 @@ Start with a small date range as a test migration to a fresh project to preview 
 
 ### Run a test batch first
 
-Before migrating your full dataset, we highly recommend you run a small test migration with a subset of your data against a new project. 
+Before migrating your full dataset, we highly recommend you run a small test migration with a subset of your data against a new project.
 
 1. **Create a test project** to avoid polluting your production data.
 2. **Migrate a small batch** of 10,000 events from a representative time period.
