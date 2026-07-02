@@ -21,15 +21,15 @@ Improve the experience of loading and working with experiment results:
 - Improve the UI.
 
 #### Use qualitative data in experiments <TeamMember name="Marcel Poelker" photo />
-Use [Replay Vision](https://posthog.slack.com/archives/C03PB072FMJ/p1781794491138089) data to enrich experiment analysis:
+- Use [Replay Vision](https://posthog.slack.com/archives/C03PB072FMJ/p1781794491138089) data to enrich experiment analysis.
 - Improve the product integration between experiments and replays.
-- Promote related products such as Surveys.
+- Promote related products such as Surveys in chat sessions.
 
 #### Embed experiments in the self-driving loop <TeamMember name="Marcel Poelker" photo />
 Ship self-driving PRs as experiments to validate that they actually work (inbox → PR → roll out to a subset of users first). Recommend whether to accept or reject based on the signal.
 
-#### Experiments auto-creation <TeamMember name="Marcel Poelker" photo />
-<TODO Marcel: write a use case / user story for this.>
+#### Create well-configured experiments without involving the user <TeamMember name="Marcel Poelker" photo />
+Ultimately we want to embed experiments in the self-driving loop, which means triggering experimentation ideas and experiment creation. Triggering ideas can have various shapes (out of thin air like scanning the codebase or by having a concrete hook like PR creation). Either way, for best user experience, the creation process should "get it right" without asking the user. This goal focuses on the 2nd step, the "getting it right" creation of experiments.
 
 #### No-code experiments 2.0 <TeamMember name="Rodrigo Iloro" photo />
 Deprecate the current no-code experiments and replace them with a better approach:
