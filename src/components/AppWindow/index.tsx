@@ -34,6 +34,7 @@ import usePostHog from '../../hooks/usePostHog'
 import Modal from 'components/RadixUI/Modal'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import FloatingModal from 'components/FloatingModal'
+import ErrorBoundary from 'components/ErrorBoundary'
 
 const recursiveSearch = (array: MenuItem[] | undefined, value: string): boolean => {
     if (!array) return false
@@ -97,29 +98,36 @@ const Router = (props) => {
         }
     }, [minimizing])
 
-    if (/^\/questions/.test(path)) {
-        return <Inbox {...props} />
+    const renderContent = () => {
+        if (/^\/questions/.test(path)) {
+            return <Inbox {...props} />
+        }
+        if (/^\/handbook|^\/docs\/(?!api)|^\/manual/.test(path) && props.data?.post) {
+            return <Handbook {...props} />
+        }
+        if ((props.pageContext?.post || /^posts/.test(path)) && props.data) {
+            return <BlogPost {...props} />
+        }
+        if (['/terms', '/privacy', '/dpa', '/baa', '/subprocessors'].includes(path)) {
+            return <Legal defaultTab={path}>{children}</Legal>
+        }
+        return (
+            <>
+                {appWindow?.modal?.type === 'standard' ? (
+                    <PageModal>{children}</PageModal>
+                ) : appWindow?.modal?.type === 'floating' ? (
+                    <FloatingModal>{children}</FloatingModal>
+                ) : (
+                    (!props.minimizing || appWindow?.appSettings?.size?.autoHeight) && children
+                )}
+            </>
+        )
     }
-    if (/^\/handbook|^\/docs\/(?!api)|^\/manual/.test(path) && props.data?.post) {
-        return <Handbook {...props} />
-    }
-    if ((props.pageContext?.post || /^posts/.test(path)) && props.data) {
-        return <BlogPost {...props} />
-    }
-    if (['/terms', '/privacy', '/dpa', '/baa', '/subprocessors'].includes(path)) {
-        return <Legal defaultTab={path}>{children}</Legal>
-    }
-    return (
-        <>
-            {appWindow?.modal?.type === 'standard' ? (
-                <PageModal>{children}</PageModal>
-            ) : appWindow?.modal?.type === 'floating' ? (
-                <FloatingModal>{children}</FloatingModal>
-            ) : (
-                (!props.minimizing || appWindow?.appSettings?.size?.autoHeight) && children
-            )}
-        </>
-    )
+
+    // Wrap page content so a broken page (or a chunk that failed to evaluate)
+    // degrades to a readable fallback instead of a blank screen. resetKey clears
+    // the fallback when navigating to a different path.
+    return <ErrorBoundary resetKey={path}>{renderContent()}</ErrorBoundary>
 }
 
 const WindowContainer = ({ children, closing }: { children: React.ReactNode; closing: boolean }) => {
@@ -646,8 +654,8 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                         siteSettings.experience === 'boring'
                                             ? '100%'
                                             : item.appSettings?.size?.autoHeight
-                                            ? 'auto'
-                                            : size.height,
+                                              ? 'auto'
+                                              : size.height,
                                 }}
                                 animate={{
                                     scale: 1,
@@ -658,8 +666,8 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                         siteSettings.experience === 'boring'
                                             ? '100%'
                                             : item.appSettings?.size?.autoHeight
-                                            ? 'auto'
-                                            : size.height,
+                                              ? 'auto'
+                                              : size.height,
                                     transition: {
                                         duration:
                                             siteSettings.experience === 'boring' ||

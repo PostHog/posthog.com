@@ -190,7 +190,7 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
                                             >
                                                 {group.label}
                                             </RadixSelect.Label>
-                                            {group.items.map((item, itemIndex) => (
+                                            {(group.items || []).map((item, itemIndex) => (
                                                 <SelectItem
                                                     key={`item-${groupIndex}-${itemIndex}-${item.value}`}
                                                     value={item.value}

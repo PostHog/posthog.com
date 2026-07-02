@@ -9,7 +9,30 @@ import { UserProvider } from './src/hooks/useUser'
 import Wrapper from './src/components/Wrapper'
 import KoreanWrapper from './src/components/Korean/KoreanWrapper'
 import { Provider } from './src/context/App'
+import { isStaleAssetError, reloadForStaleAssets } from './src/components/ErrorBoundary'
 initKea(false)
+
+// Chunk / page-data fetch failures during client-side navigation are thrown
+// inside Gatsby's loader — outside React render — so no error boundary can catch
+// them, and they leave the visitor on a blank screen. These are almost always a
+// stale-deploy race (the loaded HTML references asset hashes that no longer
+// exist on the CDN). Recover with a guarded one-time reload of the current URL,
+// which pulls the fresh post-deploy assets.
+export const onClientEntry = () => {
+    if (typeof window === 'undefined') {
+        return
+    }
+    window.addEventListener('unhandledrejection', (event) => {
+        if (isStaleAssetError(event?.reason)) {
+            reloadForStaleAssets()
+        }
+    })
+    window.addEventListener('error', (event) => {
+        if (isStaleAssetError(event?.error || event?.message)) {
+            reloadForStaleAssets()
+        }
+    })
+}
 
 const isKoreanPath = (pathname?: string) => pathname === '/ko' || pathname?.startsWith('/ko/')
 
