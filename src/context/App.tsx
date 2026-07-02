@@ -1507,6 +1507,9 @@ const appSettings: AppSettings = {
     '/merch': {
         toolbar: true,
     },
+    '/trash': {
+        toolbar: true,
+    },
 } as const
 
 export interface SiteSettings {

@@ -22,6 +22,7 @@ export default function Trash(): JSX.Element {
                 image={`/images/og/default.png`}
             />
             <Explorer
+                className="border-t border-primary"
                 template="generic"
                 slug="trash"
                 title="Trash"

@@ -38,6 +38,7 @@ interface ExplorerProps {
     onSearch?: (query: string) => void
     viewportClasses?: string
     showAddressBar?: boolean
+    className?: string
 }
 
 const SidebarContent = ({ content }: { content: React.ReactNode | AccordionItem[] }): JSX.Element | null => {
@@ -92,6 +93,7 @@ export default function Explorer({
     onSearch,
     viewportClasses = '',
     showAddressBar = true,
+    className = '',
 }: ExplorerProps) {
     const { appWindow } = useWindow()
     const currentPath = appWindow?.path?.replace(/^\//, '') || '' // Remove leading slash, default to empty string
@@ -137,7 +139,7 @@ export default function Explorer({
     }, [windowWidth, viewportClasses])
 
     return (
-        <div className="@container w-full h-full flex flex-col min-h-1">
+        <div className={`@container w-full h-full flex flex-col min-h-1 ${className}`}>
             <>
                 <HeaderBar
                     {...getHeaderBarProps()}

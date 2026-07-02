@@ -420,12 +420,14 @@ export const AppLink = ({
             </span>
             <figcaption
                 className={`text-[13px] font-medium leading-tight ${
-                    orientation === 'row' ? 'text-left' : 'text-center text-balance'
-                }`}
+                    source === 'desktop' ? 'text-white' : 'text-primary'
+                } ${orientation === 'row' ? 'text-left' : 'text-center text-balance'}`}
             >
                 <span className={`inline-block leading-tight`}>
                     <span
-                        className={`skin-classic:underline decoration-dotted decoration-primary underline-offset-[3px] ${finalBackground}  rounded-[2px] px-0.5 py-0 text-shadow-desktop font-medium`}
+                        className={`skin-classic:underline decoration-dotted decoration-primary underline-offset-[3px] ${finalBackground}  rounded-[2px] px-0.5 py-0 ${
+                            source === 'desktop' ? 'text-shadow-desktop' : ''
+                        } font-medium`}
                     >
                         {label}
                         {extension && <span className="opacity-75">.{extension}</span>}
@@ -442,13 +444,15 @@ export const AppLink = ({
             ? 'flex w-full gap-2'
             : 'inline-flex flex-col justify-center w-auto space-y-0.5 max-w-28 text-center'
 
+    const shadowClassName = source === 'desktop' ? 'drop-shadow-lg' : ''
+
     return (
         <figure ref={ref}>
             {url ? (
                 <Link
                     to={url}
                     {...(external ? { externalNoIcon: true } : { state: { newWindow: true } })}
-                    className={`${commonClassName} ${orientationClassName} drop-shadow-lg`}
+                    className={`${commonClassName} ${orientationClassName} ${shadowClassName}`}
                     onClick={(e) => {
                         if (hasDragged) {
                             e.preventDefault()
@@ -468,7 +472,7 @@ export const AppLink = ({
                             onClick()
                         }
                     }}
-                    className={`${commonClassName} ${orientationClassName} drop-shadow-lg`}
+                    className={`${commonClassName} ${orientationClassName} ${shadowClassName}`}
                 >
                     {content}
                 </button>
