@@ -29,7 +29,12 @@ export default function Anniversaries() {
             { encodeValuesOnly: true }
         )
         fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles?${query}`)
-            .then((res) => res.json())
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(`Failed to fetch profiles: ${res.status}`)
+                }
+                return res.json()
+            })
             .then(({ data }) => {
                 const teamMembers = data.filter((teamMember) => {
                     const {
@@ -43,6 +48,10 @@ export default function Anniversaries() {
                     return date.isBefore(dayjs().subtract(364, 'days')) && startMonth === currentMonth
                 })
                 setTeamMembers(teamMembers)
+                setLoading(false)
+            })
+            .catch(() => {
+                setTeamMembers([])
                 setLoading(false)
             })
     }, [])

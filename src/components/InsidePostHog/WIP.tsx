@@ -28,7 +28,12 @@ const getRecentUpdate = async () => {
             },
             { encodeValuesOnly: true }
         )}`
-    ).then((res) => res.json())
+    ).then((res) => {
+        if (!res.ok) {
+            throw new Error(`Failed to fetch team updates: ${res.status}`)
+        }
+        return res.json()
+    })
     return data
 }
 
@@ -36,14 +41,11 @@ export default function WIP() {
     const [recentUpdate, setRecentUpdate] = useState()
     const [loading, setLoading] = useState(true)
     useEffect(() => {
-        getRecentUpdate().then((recentUpdate) => setRecentUpdate(recentUpdate?.[0]))
+        getRecentUpdate()
+            .then((recentUpdate) => setRecentUpdate(recentUpdate?.[0]))
+            .catch(() => setRecentUpdate(undefined))
+            .finally(() => setLoading(false))
     }, [])
-
-    useEffect(() => {
-        if (recentUpdate) {
-            setLoading(false)
-        }
-    }, [recentUpdate])
 
     const team = recentUpdate?.attributes?.team?.data?.attributes
     const profile = recentUpdate?.attributes?.question?.data?.attributes?.profile?.data
@@ -51,9 +53,15 @@ export default function WIP() {
     const avatarURL = profile?.attributes?.avatar?.data?.attributes?.formats?.thumbnail?.url
     const roadmap = recentUpdate?.attributes?.roadmap?.data
 
-    return loading ? (
-        <Skeleton />
-    ) : (
+    if (loading) {
+        return <Skeleton />
+    }
+
+    if (!recentUpdate) {
+        return null
+    }
+
+    return (
         <div>
             <h3 className="m-0">WIP</h3>
             <p className="m-0 opacity-60">Updates on things we're working on right now</p>

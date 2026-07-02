@@ -29,9 +29,18 @@ export default function Newbies() {
             { encodeValuesOnly: true }
         )
         fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles?${query}`)
-            .then((res) => res.json())
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(`Failed to fetch profiles: ${res.status}`)
+                }
+                return res.json()
+            })
             .then(({ data }) => {
                 setNewbies(data)
+                setLoading(false)
+            })
+            .catch(() => {
+                setNewbies([])
                 setLoading(false)
             })
     }, [])
