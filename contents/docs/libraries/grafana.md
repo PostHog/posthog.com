@@ -1,5 +1,6 @@
 ---
 title: Grafana
+platformLogo: grafana
 ---
 
 ## Objective
@@ -26,26 +27,26 @@ To follow this tutorial, you should:
 
 ## Step-by-step instructions
 
-### Getting your PostHog project API key
+### Getting your PostHog project token
 
-1. In PostHog, go to [your project settings](https://us.posthog.com/settings/project).
-2. Copy your project API key.
+1. In PostHog, go to [your project settings](https://app.posthog.com/settings/project).
+2. Copy your project token.
 
 ### Configuring Grafana
 
 1. Open your Grafana configuration file (`grafana.ini`, or `custom.ini` on Windows).
-2. Add your project API key to the `[analytics]` section. The integration is disabled unless a token is set.
+2. Add your project token to the `[analytics]` section. The integration is disabled unless a token is set.
 
    ```ini
    [analytics]
-   posthog_token = <ph_project_api_key>
+   posthog_token = <ph_project_token>
    ```
 
 3. If you use PostHog Cloud EU or a self-hosted PostHog instance, also set `posthog_host`. It defaults to `https://us.i.posthog.com` if not set.
 
    ```ini
    [analytics]
-   posthog_token = <ph_project_api_key>
+   posthog_token = <ph_project_token>
    posthog_host = https://eu.i.posthog.com
    ```
 
@@ -54,14 +55,14 @@ To follow this tutorial, you should:
 If you run Grafana in Docker or Kubernetes, you can use Grafana's standard environment variable overrides instead of editing the configuration file:
 
 ```shell
-GF_ANALYTICS_POSTHOG_TOKEN=<ph_project_api_key>
+GF_ANALYTICS_POSTHOG_TOKEN=<ph_project_token>
 GF_ANALYTICS_POSTHOG_HOST=https://eu.i.posthog.com
 ```
 
 ### Verifying the integration
 
 1. Open your Grafana instance and click around a few dashboards.
-2. Check that events appear in your [PostHog activity tab](https://us.posthog.com/activity/explore).
+2. Check that events appear in your [PostHog activity tab](https://app.posthog.com/activity/explore).
 
 ## What data is sent?
 
@@ -86,7 +87,7 @@ See Grafana's [configuration documentation](https://grafana.com/docs/grafana/lat
 
 ### Who maintains this integration?
 
-This integration is part of Grafana core and was contributed by PostHog. If you have issues with the integration not functioning as intended, [let us know in-app](http://us.posthog.com/home#supportModal).
+This integration is part of Grafana core and was contributed by PostHog. If you have issues with the integration not functioning as intended, [let us know in-app](http://app.posthog.com/home#supportModal).
 
 ### Can I use this with a self-hosted PostHog instance?
 
