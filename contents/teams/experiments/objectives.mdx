@@ -17,8 +17,8 @@ Add an `experiment_exposure` event. This will:
 
 ##### Loading experience <TeamMember name="Rodrigo Iloro" photo />
 Improve the experience of loading and working with experiment results:
-- Make it usable by MCP.
-- Improve the UI.
+- Exposing the experiment recalculation async workflow to agents via MCP.
+- Continuing to iterating on the experiments metric loading experience.
 
 #### Use qualitative data in experiments <TeamMember name="Marcel Poelker" photo />
 - Use [Replay Vision](https://posthog.slack.com/archives/C03PB072FMJ/p1781794491138089) data to enrich experiment analysis.
@@ -32,11 +32,14 @@ Ship self-driving PRs as experiments to validate that they actually work (inbox 
 Ultimately we want to embed experiments in the self-driving loop, which means triggering experimentation ideas and experiment creation. Triggering ideas can have various shapes (out of thin air like scanning the codebase or by having a concrete hook like PR creation). Either way, for best user experience, the creation process should "get it right" without asking the user. This goal focuses on the 2nd step, the "getting it right" creation of experiments.
 
 #### No-code experiments 2.0 <TeamMember name="Rodrigo Iloro" photo />
-Deprecate the current no-code experiments and replace them with a better approach:
-- Add the ability to set up experiments visually and have them translated into code (open a PR).
-- Research the impact of deprecating the old version, and validate what end state is desirable for the customer.
-
-<TODO Rodrigo: specify further / write a use case / user story for this.>
+Deprecate the current no-code experiments and replace them with a fundamentally better approach:
+- Research the deprecation. Understand the impact of retiring the old toolbar and SDK web experiments features, and validate the best end state for customers, including a simple migration path so no one loses existing experiments.
+- Add the ability to set up experiments visually and have them translated into code by opening a PR in the customer’s repo.
+  - Deprecate the toolbar and SDK web experiments in favor of in-place, AI-integrated tooling within PostHog Code.
+- Add the ability to set up experiments visually and have them translated into code (by opening a PR).
+  - Deprecate the PostHog toolbar and SDK web experiments features in favor of in-place, AI-integrated tooling within PostHog Code.
+- Give users no-code experiments they can trust and own.
+  - They don’t need to write any code, but changes still live in their version-controlled codebase instead of being injected at runtime, so every experiment is easy to review, diff, and roll back.
 
 #### Prompt experiments <TeamMember name="Juraj Majerik" photo />
 We have good traction here, so we should double down and improve the product:
