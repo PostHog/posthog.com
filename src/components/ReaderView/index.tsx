@@ -730,7 +730,7 @@ const SidebarSearchResults = ({
     })
 
     return (
-        <div className="text-sm space-y-3" data-sidebar-label>
+        <div className="text-sm space-y-3 pt-2" data-sidebar-label>
             {onPageMatches.length > 0 && (
                 <div>
                     <h4 className="text-[11px] font-semibold text-muted uppercase tracking-wide m-0 mb-1 px-1">
@@ -1305,6 +1305,8 @@ const FloatingSearch = ({
 }) => {
     const [open, setOpen] = useState(false)
     const panelRef = useRef<HTMLDivElement>(null)
+    const { searchQuery } = useSearch()
+    const hasQuery = searchQuery.trim().length >= 2
 
     useEffect(() => {
         if (!open) return
@@ -1324,45 +1326,72 @@ const FloatingSearch = ({
         }
     }, [open])
 
+    useEffect(() => {
+        if (open) {
+            panelRef.current?.querySelector('input')?.focus()
+        }
+    }, [open])
+
     return (
-        <div ref={panelRef} data-scheme="secondary z-50">
-            <div className="p-2">
-                <OSButton
-                    size="md"
-                    icon={open ? <IconX className="size-4" /> : <IconSearch className="size-4" />}
-                    onClick={() => setOpen(!open)}
-                />
-            </div>
-            <AnimatePresence initial={false}>
-                {open && (
-                    <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.2, ease: 'easeInOut' }}
-                        className="relative"
-                    >
-                        <div className="px-2 space-y-2">
-                            <div className="flex items-center gap-2 mb-2">
-                                <div className="flex-1">
-                                    <InlineSearch
-                                        contentRef={onSearch ? undefined : contentRef}
-                                        onSearch={onSearch}
-                                        placeholder="Search..."
-                                        clearable={false}
-                                        autoFocus
-                                    />
-                                </div>
-                            </div>
-                            <ScrollArea className="!m-0">
-                                <div className="max-h-[300px]">
-                                    <SidebarSearchResults contentRef={contentRef} currentPath={currentPath} />
-                                </div>
-                            </ScrollArea>
+        <div
+            ref={panelRef}
+            data-scheme="secondary"
+            className=" absolute top-0 left-0 flex z-10 p-1 max-w-[450px] w-full"
+        >
+            <motion.div
+                animate={{ width: open ? '100%' : 'auto' }}
+                transition={{ duration: 0.2, ease: 'easeInOut' }}
+                className="relative space-y-2"
+            >
+                {open ? (
+                    <div className="flex items-start gap-1">
+                        <div className="flex-1 min-w-0 space-y-2">
+                            <InlineSearch
+                                contentRef={onSearch ? undefined : contentRef}
+                                onSearch={onSearch}
+                                placeholder="Search..."
+                                clearable={false}
+                                icon
+                            />
+                            <AnimatePresence initial={false}>
+                                {hasQuery && (
+                                    <motion.div
+                                        initial={{ height: 0, opacity: 0 }}
+                                        animate={{ height: 'auto', opacity: 1 }}
+                                        exit={{ height: 0, opacity: 0 }}
+                                        transition={{ duration: 0.2, ease: 'easeInOut' }}
+                                        className={`overflow-hidden rounded-md border border-primary shadow-lg ${FROSTED_BG}`}
+                                    >
+                                        <ScrollArea className="!m-0 [mask-image:linear-gradient(to_bottom,black_calc(100%_-_1.5rem),transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_calc(100%_-_1.5rem),transparent_100%)]">
+                                            <div className="max-h-[300px]">
+                                                <SidebarSearchResults
+                                                    contentRef={contentRef}
+                                                    currentPath={currentPath}
+                                                />
+                                            </div>
+                                        </ScrollArea>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
                         </div>
-                    </motion.div>
+                        <OSButton
+                            size="md"
+                            className="rounded-full size-7"
+                            icon={<IconX className="size-full" />}
+                            onClick={() => setOpen(false)}
+                        />
+                    </div>
+                ) : (
+                    <button
+                        type="button"
+                        aria-label="Search"
+                        onClick={() => setOpen(true)}
+                        className="flex h-[30px] w-[32px] items-center justify-center rounded border border-transparent text-secondary transition-colors hover:border-primary"
+                    >
+                        <IconSearch className="size-4" />
+                    </button>
                 )}
-            </AnimatePresence>
+            </motion.div>
         </div>
     )
 }

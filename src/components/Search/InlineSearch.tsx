@@ -19,6 +19,7 @@ export const InlineSearch = ({
     className,
     clearable = true,
     autoFocus = false,
+    icon = true,
 }: {
     contentRef?: React.RefObject<HTMLElement>
     onSearch?: (search: string) => void
@@ -26,6 +27,7 @@ export const InlineSearch = ({
     className?: string
     clearable?: boolean
     autoFocus?: boolean
+    icon?: boolean
 }) => {
     const { searchQuery, setSearchQuery } = useSearch()
     const [inputValue, setInputValue] = useState(searchQuery)
@@ -80,12 +82,14 @@ export const InlineSearch = ({
         <div className={`flex items-center gap-1 ${className || ''}`}>
             <div className="relative flex-1 min-w-0">
                 <span className="absolute left-2 top-1/2 -translate-y-1/2 pointer-events-none text-secondary inline-flex">
-                    <IconSearch className="size-4" />
+                    {icon && <IconSearch className="size-4" />}
                 </span>
                 <input
                     type="text"
                     placeholder={placeholder}
-                    className="w-full pl-7 pr-2 py-1 rounded border border-input text-primary text-sm bg-light dark:bg-dark"
+                    className={`w-full pr-2 py-1 rounded border border-input text-primary text-sm bg-light dark:bg-dark ${
+                        icon ? 'pl-7' : ''
+                    }`}
                     value={inputValue}
                     onChange={handleInputChange}
                     autoFocus={autoFocus}
