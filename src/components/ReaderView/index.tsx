@@ -653,9 +653,11 @@ const HighlightedSnippet = ({ text, query }: { text: string; query: string }) =>
 const SidebarSearchResults = ({
     contentRef,
     currentPath,
+    onResultClick,
 }: {
     contentRef?: React.RefObject<HTMLElement>
     currentPath?: string
+    onResultClick?: () => void
 }) => {
     const { searchQuery } = useSearch()
     const [onPageMatches, setOnPageMatches] = useState<OnPageMatch[]>([])
@@ -752,7 +754,10 @@ const SidebarSearchResults = ({
                                         <li key={match.id}>
                                             <button
                                                 type="button"
-                                                onClick={() => scrollToMatch(match.element)}
+                                                onClick={() => {
+                                                    scrollToMatch(match.element)
+                                                    onResultClick?.()
+                                                }}
                                                 className="w-full text-left px-2 py-1 rounded hover:bg-accent transition-colors cursor-pointer"
                                             >
                                                 <HighlightedSnippet text={match.snippet} query={searchQuery} />
@@ -795,6 +800,7 @@ const SidebarSearchResults = ({
                                 <Link
                                     to={hit.fields?.slug || `/${hit.slug}`}
                                     state={{ newWindow: true }}
+                                    onClick={() => onResultClick?.()}
                                     className="block px-2 py-1.5 rounded hover:bg-accent transition-colors group"
                                 >
                                     <span className="block text-[13px] font-medium text-primary truncate">
@@ -1367,6 +1373,7 @@ const FloatingSearch = ({
                                                 <SidebarSearchResults
                                                     contentRef={contentRef}
                                                     currentPath={currentPath}
+                                                    onResultClick={() => setOpen(false)}
                                                 />
                                             </div>
                                         </ScrollArea>
