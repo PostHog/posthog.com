@@ -7,7 +7,7 @@
     maxElementsCaptured: 20,
     noCaptureProp: "ph-no-capture",
     propsToCapture: ["testID"], // Limit which props are captured. By default, identifiers and text content are captured.
-
+    ignoreScreenNames: ['about'], // Ignore certain screens during autocapture.
     navigation: {
         // By default, only the screen name is tracked but it is possible to track the
         // params or modify the name by intercepting the autocapture like so

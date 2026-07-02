@@ -59,6 +59,7 @@ export function App() {
             <PostHogProvider apiKey="<ph_project_token>" autocapture={{
               captureScreens: false, // Screen events are handled differently for v7 and higher
               captureTouches: true,
+              ignoreScreenNames: ['about'], // Ignore certain screens during autocapture.
             }}>
                 {/* Rest of app */}
             </PostHogProvider>
@@ -92,6 +93,7 @@ export const SharedPostHogProvider = (props: any) => {
     <PostHogProvider client={posthog} autocapture={{
       captureScreens: false, // Screen events are handled differently for react-native-navigation
       captureTouches: true,
+      ignoreScreenNames: ['about'], // Ignore certain screens during autocapture.
     }}>
       {props.children}
     </PostHogProvider>
@@ -122,6 +124,7 @@ Navigation.events().registerAppLaunchedListener(async () => {
       // (Optional) Tracks all passProps as properties. Defaults to undefined
       routeToProperties: (name, properties) => properties,
     },
+    ignoreScreenNames: ['about'],
     captureScreens: true,
   });
 });
