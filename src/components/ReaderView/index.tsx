@@ -1393,9 +1393,9 @@ const FloatingTOC = ({
     return (
         <aside
             data-scheme="secondary"
-            className={`flex-shrink-0 flex flex-col border-l border-primary ${
+            className={`flex-shrink-0 hidden @4xl/app-reader:flex flex-col border-l border-primary ${
                 hasMounted ? 'transition-[width] duration-300' : ''
-            } overflow-hidden ${resolveBackground(background)} ${isTocVisible ? 'w-[250px]' : 'w-12'}`}
+            } overflow-hidden ${resolveBackground(background)} ${isTocVisible ? 'w-[250px]' : 'w-12'} `}
         >
             <div className="flex-1 min-h-0 flex flex-col w-[250px]">
                 {isTocVisible && (
