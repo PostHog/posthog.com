@@ -220,7 +220,7 @@ Langfuse built prompt management as a core pillar from day one. However, PostHog
         {
             label: 'Prompt playground',
             description: 'Test and compare prompts interactively',
-            values: [false, true],
+            values: [true, true],
         },
         {
             label: 'Composable prompts',
@@ -353,7 +353,7 @@ Here's what you can get out-of-the-box, without any extra integration work:
 
 You've [shipped your AI feature](/blog/ai-observability-for-mvps). Now what do you do? You can use [product analytics](/product-analytics) to tell you whether it actually changed how people use your product. For instance, you can build funnels to see how many users reach your AI feature and how many complete the task it's supposed to help with. Or track retention to see whether AI users return more often than non-AI users.
 
-If you need to run a deeper analysis, run a cohort analysis to compare behavior across user segments. For example, free vs. paid, power users vs. new signups, or users who got `GPT-4o` vs. `Claude` responses.
+If you need to run a deeper analysis, run a cohort analysis to compare behavior across user segments. For example, free vs. paid, power users vs. new signups, or users who got `GPT-5.5` vs. `Opus` responses.
 
 In short: Langfuse can tell you what your model did, but PostHog can tell you whether users actually experienced a positive difference.
 
@@ -420,7 +420,7 @@ When it comes to pricing, Langfuse uses tier-based pricing, while PostHog uses [
 | **Pricing model** | Usage-based | Tiered plans |
 | **Free tier** | Generous limits per product (100,000 events free per month for AI observability) | 50,000 units/month (Units \= Count of Traces \+ Count of Observations \+ Count of Scores) |
 | **Seat limits** | None, as you get unlimited users on every plan | 2 users on the free plan |
-| **Paid plans** | Pay only for usage above free tiers (Starts at $0.00006/event) | $29/month to $2,499/month |
+| **Paid plans** | Pay only for usage above free tier (Starts at $0.00006/event) | Starts at $29/month for 100k units (extra events at $0.00008/event) |
 | **Overages** | Scales with usage | Billed on top of the paid tier |
 | **Startup program** | [$50,000 in free credits](/startups) for 12 months | 50% off the first year |
 | **License** | MIT | MIT |
@@ -449,19 +449,19 @@ The platform you choose for LLM or AI observability will depend on your current 
 
 **For startups building their first AI feature:**
 
-- **PostHog** - You need analytics, session replay, feature flags, and error tracking anyway. So, adding AI observability to the same platform saves you from having to manage another vendor for something that's still finding product-market fit. Start with traces and cost tracking, then layer in experiments when you're ready to iterate on prompts.
+- **PostHog** – You need analytics, session replay, feature flags, and error tracking anyway. So, adding AI observability to the same platform saves you from having to manage another vendor for something that's still finding product-market fit. Start with traces and cost tracking, then layer in experiments when you're ready to iterate on prompts.
 
 **For ML/AI teams focused on model quality:**
 
-- **Langfuse** - If your day-to-day is iterating on prompts, running evals, managing annotation queues, and curating test datasets, Langfuse's depth will be a better fit for your needs. You can pair it with whatever analytics tool the product team already uses.
+- **Langfuse** – If your day-to-day is iterating on prompts, running evals, managing annotation queues, and curating test datasets, Langfuse's depth will be a better fit for your needs. You can pair it with whatever analytics tool the product team already uses.
 
 **For product teams adding AI to an existing app:**
 
-- **PostHog** - Your question is "Did this AI feature actually help users?" That requires connecting LLM traces to user behavior - funnels, retention, session recordings, and A/B experiments. At the moment, very few LLM observability tools give you that context and PostHog is one of them.
+- **PostHog** – Your question is "Did this AI feature actually help users?" That requires connecting LLM traces to user behavior - funnels, retention, session recordings, and A/B experiments. At the moment, very few LLM observability tools give you that context and PostHog is one of them.
 
 **For enterprises with separate LLMOps and product teams:**
 
-- **PostHog or Langfuse** - You can use Langfuse for the LLM engineering team's inner loop (prompt iteration, evals, dataset management, quality assurance). And add PostHog for the product team so that they can measure business outcomes after shipping the feature. They solve different problems for different people in the organization,
+- **PostHog or Langfuse** – You can use Langfuse for the LLM engineering team's inner loop (prompt iteration, evals, dataset management, quality assurance). And add PostHog for the product team so that they can measure business outcomes after shipping the feature. They solve different problems for different people in the organization,
 
 ## Frequently asked questions
 
