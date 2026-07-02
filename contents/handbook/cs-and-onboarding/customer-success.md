@@ -32,6 +32,57 @@ No two accounts need the same thing. Some need deep ticket involvement, some nee
 - **Finding and navigating friction.** Spotting where a customer is trying to do something they expect PostHog to handle and can't. Sometimes the fix is implementation or troubleshooting, sometimes it's training or pointing them to a feature they didn't know about, sometimes it's a feature request or bug report on our end. When it's genuinely our gap, we give credits generously. [Churn reasons](/handbook/cs-and-onboarding/churn-reasons) lists the patterns we see most.
 - **Monitoring health.** [Health tracking](/handbook/cs-and-onboarding/health-tracking) is our main signal for who needs attention. Don't just look at the score, look at what changed.
 - **Cost optimization.** We think about cost and value together - customers should be paying for what they're actually getting. Optimizing spend (over-ingestion, session replay you can sample down, products on a plan they aren't using) is one of the easiest ways to show you're genuinely helpful.
-- **Running trainings.** [Customer training](/handbook/growth/customer-training) sessions for a customer's team on a specific PostHog area, usually requested by the customer or proposed when we see a clear gap.
+- **Running trainings.** Trainings should be focused on the customer's specific use case, not a generic walkthrough of PostHog. Start with the outcome the customer cares about, then choose the smallest set of docs that helps them get there.
+
+  <details>
+  <summary>Useful customer training resources</summary>
+
+  **Implementation foundations**
+
+  * [Getting started with Product Analytics](/docs/product-analytics/start-here)
+  * [Events](/docs/data/events)
+  * [Identifying users](/docs/product-analytics/identify)
+  * [Group analytics](/docs/product-analytics/group-analytics)
+
+  **Product analytics and reporting**
+
+  * [Dashboards](/docs/product-analytics/dashboards)
+  * [Web analytics](/docs/web-analytics/getting-started)
+  * [Cohorts](/docs/data/cohorts)
+
+  **Session Replay**
+
+  * [Getting started with Session Replay](/docs/session-replay/start-here)
+  * [Session Replay privacy controls](/docs/session-replay/privacy)
+  * [Session Replay troubleshooting](/docs/session-replay/troubleshooting)
+
+  **Feature releases and experimentation**
+
+  * [Getting started with Feature Flags](/docs/feature-flags/start-here)
+  * [Getting started with Experiments](/docs/experiments/start-here)
+  * [Creating an experiment](/docs/experiments/creating-an-experiment)
+
+  **Reliability and debugging**
+
+  * [Getting started with Error Tracking](/docs/error-tracking/start-here)
+  * [Error Tracking troubleshooting](/docs/error-tracking/troubleshooting)
+
+  **Data movement and warehouse use cases**
+
+  * [Data pipelines](/docs/cdp)
+  * [Realtime destinations](/docs/cdp/destinations)
+  * [Batch exports](/docs/cdp/batch-exports)
+  * [Getting started with Data Warehouse](/docs/data-warehouse/start-here)
+  * [Querying the Data Warehouse with SQL](/docs/data-warehouse/query)
+
+  **Cost control**
+
+  * [Billing limits and alerts](/docs/billing/limits-alerts)
+  * [Spike detection](/docs/billing/spike-detection)
+  * [Cutting feature flag costs](/docs/feature-flags/cutting-costs)
+
+  </details>
+
+  For customer-facing trainings, avoid sending this whole list. Pick the 3–5 links that match the customer's goal and pair them with a concrete workflow, e.g. "debug checkout drop-off with funnel + replay" or "roll out a new feature with flags + experiment metrics."
 - **Credit purchases.** Helping customers buy ahead of usage they can predict, like annual deals, top-ups, and plan changes. [Renewals](/handbook/cs-and-onboarding/renewals) covers the mechanics.
 
