@@ -37,7 +37,7 @@ config.sessionReplay = true;
 config.sessionReplayConfig.maskAllPlatformViews = false;
 ```
 
-For per-view control, wrap an individual platform view with the `PostHogPlatformView` widget. This overrides the global `maskAllPlatformViews` setting for that view (and every platform view in its subtree):
+For per-view control, wrap an individual platform view with the `PostHogPlatformView` widget. This overrides the global `maskAllPlatformViews` setting for that view (and every platform view nested inside it):
 
 ```dart
 // Reveal this view even when maskAllPlatformViews is true
@@ -53,6 +53,6 @@ PostHogPlatformView(
 )
 ```
 
-> **Platform support:** On iOS, only `WKWebView`-backed platform views (for example `webview_flutter` in its default mode) are captured. Other platform view types — Google Maps, ARKit, camera previews, and so on — are always masked, because the iOS compositor cannot safely snapshot arbitrary native views without risking leaking unmasked content. Capture is not supported on macOS, where all platform views are always masked.
+> **Platform support:** On iOS, only `WKWebView`-backed platform views (for example `webview_flutter` in its default mode) are captured. Other platform view types (Google Maps, camera previews, and so on) are always masked, because the iOS compositor cannot safely snapshot arbitrary native views without risking leaking unmasked content. Capture is not supported on macOS, where all platform views are always masked.
 
 <SensitiveThirdPartyScreens />
