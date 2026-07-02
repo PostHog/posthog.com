@@ -180,7 +180,7 @@ PostHog.capture("event_name", %{
 let mut event = Event::new("event_name", "distinct_id"); // the same distinct ID you use on the frontend
 // optional: set person properties
 event.insert_prop("$set", serde_json::json!({ "email": "max@hedgehogmail.com", "name": "Max Hedgehog" })).unwrap();
-client.capture(event).await.unwrap();
+client.capture(event);
 ```
 
 </MultiLanguage>
@@ -341,7 +341,7 @@ use posthog_rs::Event;
 let mut event = Event::new("$create_alias", "frontend_id");
 event.insert_prop("alias", "backend_id").unwrap();
 
-client.capture(event).await.unwrap();
+client.capture(event);
 ```
 
 ```bash

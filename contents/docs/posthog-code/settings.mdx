@@ -26,9 +26,17 @@ Cloud environments control network access rules and environment variables for re
 
 Configure auto-suspension to reclaim disk space from stale worktrees. Set a max active count and an inactivity threshold. Suspended worktrees restore on demand.
 
-## Signals
+## Self-driving
 
-Connect GitHub, toggle which data sources feed your [inbox](/docs/self-driving/inbox), and set a priority threshold (P0 through P4) that controls when the agent auto-starts tasks assigned to you.
+The **Self-driving** tab configures the same [self-driving](/docs/self-driving) setup you manage in the PostHog web app – it's one shared configuration, not a separate copy for the desktop app. From here you can:
+
+- Connect GitHub and toggle which [signal sources](/docs/self-driving/inbox/sources) feed your [inbox](/docs/self-driving/inbox). These are the same sources you'd configure in the web UI.
+- Set a priority threshold (P0 through P4) that controls when the agent auto-starts tasks assigned to you.
+- Choose where report notifications go:
+  - **Default notification channel** – where every report is posted for the whole team.
+  - **Notify me directly** – when you're a suggested reviewer, get pinged in your own channel instead of the team's default. Reviewers who set their own channel are notified there.
+
+You can configure the same signal sources from the **Agents** tab in PostHog Code (the same nav level as Command Center and your tasks) or from the [web app](/docs/self-driving/web). It's all one setup, so a change in any of these places applies everywhere.
 
 ## Task defaults
 

@@ -28,6 +28,10 @@ Once the syncs are complete, you can start using MongoDB data in PostHog.
 
 <SourceParameters />
 
+## Supported tables
+
+<SourceTables />
+
 ### Incremental and append-only syncing
 
 MongoDB supports incremental and append-only sync methods. For a field to be available for these sync methods, it must:

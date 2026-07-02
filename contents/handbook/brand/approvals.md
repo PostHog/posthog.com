@@ -32,7 +32,7 @@ When in doubt, ask in the `#design-review` Slack channel. Lottie and Cory are, f
 - <SmallTeam slug="marketing" /> – Email copy, external partnerships, influencers.
 - <SmallTeam slug="youtube" /> – Video production, editing.
 - <SmallTeam slug="irl-events" /> – In-person events, PostHog speaking engagements, meetups.
-- <SmallTeam slug="docs-wizard" /> – Docs, obviously. 
+- <SmallTeam slug="wizard-and-docs" /> – Docs, obviously. 
 - **Everyone** – Handbook updates. 
 
 ### Graphics team responsibilities
