@@ -1672,6 +1672,16 @@ export const handbookSidebar = [
                     },
                 ],
             },
+            {
+                name: 'GTM engineering',
+                url: '',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/handbook/growth/sales/gtm-engineering',
+                    },
+                ],
+            },
         ],
     },
     {
