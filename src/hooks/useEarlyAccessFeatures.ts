@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { graphql, useStaticQuery } from 'gatsby'
 import usePostHog from './usePostHog'
 
 export type EarlyAccessFeatureStage = 'concept' | 'alpha' | 'beta' | 'general-availability'
@@ -30,12 +31,12 @@ const POLL_INTERVAL_MS = 300
 const GIVE_UP_MS = 6000
 
 interface UseEarlyAccessFeaturesOptions {
-    /** Which stages to request from the API. Defaults to concept + alpha + beta. */
+    /** Which stages the client-side revalidation requests. Defaults to concept + alpha + beta. */
     stages?: EarlyAccessFeatureStage[]
     /**
-     * Bypass posthog-js's cached EAF result. Defaults to true: posthog-js caches the
-     * list keyed without the stage filter, so a prior default (beta-only) fetch elsewhere
-     * on the site would otherwise mask the concept/alpha "coming soon" items here.
+     * Bypass posthog-js's cached EAF result when revalidating. Defaults to true: posthog-js
+     * caches the list keyed without the stage filter, so a prior default (beta-only) fetch
+     * elsewhere on the site would otherwise mask the concept/alpha "coming soon" items here.
      */
     forceReload?: boolean
 }
@@ -49,18 +50,38 @@ interface UseEarlyAccessFeaturesResult {
 }
 
 /**
- * Fetches PostHog Early Access Features client-side, grouped by stage. Call this ONCE
- * per page — it hits the network.
+ * PostHog Early Access Features, grouped by stage. Stale-while-revalidate:
+ *  - Seeded from build-time nodes (`gatsby/sourceNodes.ts` → `EarlyAccessFeature`), so the
+ *    list server-renders instantly and is indexable.
+ *  - Revalidated client-side via posthog-js once it loads, so features added in-app since
+ *    the last deploy still appear without a rebuild.
  *
  * posthog-js is loaded as a CDN snippet; its EAF methods only exist once the async
- * `array.js` has loaded, so this polls for `getEarlyAccessFeatures` before calling it
- * and guards SSR (the snippet stub / window are absent at build time).
+ * `array.js` has loaded, so revalidation polls for `getEarlyAccessFeatures` before calling
+ * it and guards SSR (the snippet stub / window are absent at build time).
  */
 export function useEarlyAccessFeatures(options: UseEarlyAccessFeaturesOptions = {}): UseEarlyAccessFeaturesResult {
     const { stages = DEFAULT_STAGES, forceReload = true } = options
     const posthog = usePostHog()
-    const [features, setFeatures] = useState<EarlyAccessFeature[]>([])
-    const [loading, setLoading] = useState(true)
+
+    const staticData = useStaticQuery(graphql`
+        query EarlyAccessFeaturesQuery {
+            allEarlyAccessFeature {
+                nodes {
+                    name
+                    description
+                    stage
+                    documentationUrl
+                    flagKey
+                    payload
+                }
+            }
+        }
+    `)
+    const staticFeatures: EarlyAccessFeature[] = staticData?.allEarlyAccessFeature?.nodes || []
+
+    const [features, setFeatures] = useState<EarlyAccessFeature[]>(staticFeatures)
+    const [loading, setLoading] = useState(staticFeatures.length === 0)
     const [error, setError] = useState(false)
     const pollRef = useRef<ReturnType<typeof setInterval> | null>(null)
     const stagesKey = JSON.stringify(stages)
@@ -73,7 +94,10 @@ export function useEarlyAccessFeatures(options: UseEarlyAccessFeaturesOptions = 
         try {
             posthog.getEarlyAccessFeatures(
                 (result: EarlyAccessFeature[]) => {
-                    setFeatures(Array.isArray(result) ? result : [])
+                    // Keep the build-time list when the live response is empty/invalid.
+                    if (Array.isArray(result) && result.length > 0) {
+                        setFeatures(result)
+                    }
                     setLoading(false)
                 },
                 forceReload,

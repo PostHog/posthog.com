@@ -1199,9 +1199,49 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         }
     }
 
+    // Early Access Features ("Coming Soon" / betas) from PostHog's public EAF endpoint,
+    // sourced at build time so /roadmap server-renders instantly and is indexable.
+    // The page still revalidates client-side via posthog-js for freshness.
+    const sourceEarlyAccessFeatures = async () => {
+        const token = process.env.GATSBY_POSTHOG_API_KEY
+        if (!token) return
+        try {
+            const host = process.env.GATSBY_POSTHOG_API_HOST || 'https://us.i.posthog.com'
+            const res = await fetch(
+                `${host}/api/early_access_features/?token=${token}&stage=concept&stage=alpha&stage=beta`
+            )
+            if (!res.ok) {
+                console.warn(`Failed to fetch early access features: HTTP ${res.status}`)
+                return
+            }
+            const { earlyAccessFeatures } = await res.json()
+            if (!Array.isArray(earlyAccessFeatures)) return
+            earlyAccessFeatures
+                .filter((feature) => feature?.flagKey)
+                .forEach((feature) => {
+                    createNode({
+                        id: createNodeId(`early-access-feature-${feature.flagKey}`),
+                        internal: {
+                            type: 'EarlyAccessFeature',
+                            contentDigest: createContentDigest(feature),
+                        },
+                        name: feature.name,
+                        description: feature.description,
+                        stage: feature.stage,
+                        documentationUrl: feature.documentationUrl,
+                        flagKey: feature.flagKey,
+                        payload: feature.payload || {},
+                    })
+                })
+        } catch (error) {
+            console.warn('Failed to fetch early access features:', error)
+        }
+    }
+
     await Promise.all([
         createProductDataNode(),
         createRoadmapItems(),
+        sourceEarlyAccessFeatures(),
         sourceChangelogVideos(),
         sourcePostCategories(),
         sourceShopifyNodes(),

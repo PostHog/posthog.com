@@ -1,12 +1,16 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { IconRocket, IconClock } from '@posthog/icons'
 import Input from 'components/OSForm/input'
 import OSButton from 'components/OSButton'
+import EarlyAccessOptIn from 'components/EarlyAccessOptIn'
 import SurveySignup from 'components/SurveySignup'
 import useEarlyAccessFeatures, { EarlyAccessFeature } from 'hooks/useEarlyAccessFeatures'
 
-// Where in-app betas are toggled on. Betas don't collect an email — we point people here.
-const FEATURE_PREVIEWS_URL = 'https://app.posthog.com/settings/feature-previews'
+// The in-app feature previews page supports deep links: /settings/user-feature-previews#<flagKey>
+// scrolls to (and highlights) that feature's toggle, so each beta card links straight to it.
+const featurePreviewUrl = (flagKey: string): string =>
+    `https://us.posthog.com/settings/user-feature-previews#${flagKey}`
+
 // Only surface the search + filter controls once the list is long enough to need them.
 const CONTROLS_THRESHOLD = 8
 
@@ -46,7 +50,8 @@ const FeatureCard = ({
 }): JSX.Element => (
     <div
         data-scheme="secondary"
-        className="@container bg-primary border border-primary rounded-md p-4 flex flex-col gap-2 h-full"
+        id={feature.flagKey}
+        className="@container bg-primary border border-primary rounded-md p-4 flex flex-col gap-2 h-full scroll-mt-24 target:border-red dark:target:border-yellow"
     >
         <h3 className="text-base @md:text-lg m-0 leading-tight">{feature.name}</h3>
         {feature.description && <p className="text-sm text-secondary m-0 line-clamp-3">{feature.description}</p>}
@@ -59,6 +64,19 @@ const FeatureCard = ({
         )}
         {children && <div className="mt-auto pt-1">{children}</div>}
     </div>
+)
+
+// Beta — live now. Link straight to this feature's toggle in the app (identities aren't
+// shared between posthog.com and the app, so enrollment has to happen there).
+const BetaCard = ({ feature }: { feature: EarlyAccessFeature }): JSX.Element => (
+    <FeatureCard feature={feature}>
+        <EarlyAccessOptIn
+            to={featurePreviewUrl(feature.flagKey)}
+            state="request_access"
+            label="Enable in PostHog"
+            size="sm"
+        />
+    </FeatureCard>
 )
 
 // Coming soon — collect an email via the feature's linked waitlist survey. Reveal the
@@ -93,12 +111,17 @@ const ComingSoonCard = ({ feature }: { feature: EarlyAccessFeature }): JSX.Eleme
     )
 }
 
+// Joinable items (with a linked survey) surface first so the actionable cards lead.
+const bySignupAvailability = (a: EarlyAccessFeature, b: EarlyAccessFeature): number =>
+    Number(!!b.payload?.survey_id) - Number(!!a.payload?.survey_id)
+
 /**
- * The roadmap's Early Access Feature sections, fetched live from posthog-js so newly
- * added in-app features appear without a rebuild:
- *  - Betas — live now; one CTA points to feature previews to enable them (no email).
+ * The roadmap's Early Access Feature sections. Data is sourced at build time (SEO-friendly,
+ * renders instantly) and revalidated client-side via posthog-js — see useEarlyAccessFeatures.
+ *  - Betas — live now; each card deep-links to its toggle in the app's feature previews.
  *  - Coming soon — collect an email via each feature's linked waitlist survey.
- * Search + a stage filter keep a long list scannable. Renders nothing when empty.
+ * Cards are addressable (/roadmap#flag-key) and highlight when targeted. Search + a stage
+ * filter keep a long list scannable. Renders nothing when empty.
  */
 export default function EarlyAccessFeaturesSection(): JSX.Element | null {
     const { grouped, loading } = useEarlyAccessFeatures()
@@ -108,6 +131,16 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
     const totalBeta = grouped.beta.length
     const totalComing = grouped.comingSoon.length
     const total = totalBeta + totalComing
+    const hasFeatures = total > 0
+
+    // Deep links to a card (/roadmap#flag-key) should scroll it into view once cards exist —
+    // the browser's native anchor jump fires before this list finishes rendering.
+    useEffect(() => {
+        if (!hasFeatures || typeof window === 'undefined' || !window.location.hash) {
+            return
+        }
+        document.getElementById(window.location.hash.slice(1))?.scrollIntoView({ block: 'center' })
+    }, [hasFeatures])
 
     if (loading && total === 0) {
         return <p className="text-muted text-sm">Loading what's new…</p>
@@ -120,7 +153,7 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
     const matches = (f: EarlyAccessFeature) =>
         !q || f.name.toLowerCase().includes(q) || (f.description || '').toLowerCase().includes(q)
     const beta = grouped.beta.filter(matches)
-    const comingSoon = grouped.comingSoon.filter(matches)
+    const comingSoon = grouped.comingSoon.filter(matches).sort(bySignupAvailability)
 
     const showBeta = (stageFilter === 'all' || stageFilter === 'beta') && beta.length > 0
     const showComing = (stageFilter === 'all' || stageFilter === 'coming-soon') && comingSoon.length > 0
@@ -177,27 +210,11 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
                         icon={<IconRocket className="size-6 text-red dark:text-yellow" />}
                         title="In beta – try it now"
                         count={beta.length}
-                        description="These are live. Turn any of them on in your PostHog account."
+                        description="These are live. Each one links straight to its toggle in your PostHog account."
                     />
-                    <div
-                        data-scheme="secondary"
-                        className="bg-accent border border-primary rounded-md p-3 mb-4 flex flex-col @md:flex-row @md:items-center @md:justify-between gap-2"
-                    >
-                        <p className="m-0 text-sm text-secondary">Enable betas under Settings → Feature previews.</p>
-                        <OSButton
-                            asLink
-                            to={FEATURE_PREVIEWS_URL}
-                            external
-                            variant="secondary"
-                            size="md"
-                            className="@md:shrink-0"
-                        >
-                            Open feature previews
-                        </OSButton>
-                    </div>
                     <Grid>
                         {beta.map((feature) => (
-                            <FeatureCard key={feature.flagKey} feature={feature} />
+                            <BetaCard key={feature.flagKey} feature={feature} />
                         ))}
                     </Grid>
                 </section>

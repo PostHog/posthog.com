@@ -137,6 +137,14 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       maintainer: String,
       imageUrl: String,
     }
+    type EarlyAccessFeature implements Node {
+      name: String,
+      description: String,
+      stage: String,
+      documentationUrl: String,
+      flagKey: String,
+      payload: JSON,
+    }
     type Plugin implements Node {
       name: String,
       url: String,
