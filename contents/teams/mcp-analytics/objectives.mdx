@@ -4,24 +4,25 @@ MCP analytics is greenfield. This quarter is about making onboarding magical, la
 
 ### Self-driving (top priority)
 
-**Motivation:** We don't want to be the bottleneck for improving MCP servers. Instead of manually shipping every fix, we push signals to agents so they improve themselves, closing the loop from a failing tool call to a merged PR.
+**Motivation:** We don't want to be the bottleneck for improving MCP servers. Instead of shipping every fix by hand, we push signals to agents so they can improve themselves.
 
-* Build the feedback loop: a failing tool call creates a signal and auto-generates a PR. Simple changes merge on their own, complex ones go to human review
-* Ship intent clustering based on synthetic sessions (group calls within a ~1 hour gap) instead of per-tool, so we can infer what the user actually wanted rather than over-indexing on generic tools like `execute_sql`
-* Standardize the SDK by migrating the internal MCP server's custom events to out-of-the-box `@posthog/mcp` functionality, so feedback events feed the pipeline cleanly
-* Define a controlled release framework and validate self-driving as a 24-hour experiment against baseline
+* Error-driven loop: a failing tool call creates a signal that auto-generates a PR. Simple changes merge on their own, complex ones go to human review
+* Agent feedback loop: `feedback` events from MCP clients create signals that feed the same pipeline, turning what agents tell us into real fixes
+* Cluster each user's tool calls by session to figure out what they're actually trying to do, since one task usually chains several tools together. Use the proper `$session_id` where we have it, and fall back to a simple time gap (say, an hour between calls) as a stopgap until then
+* Standardize the SDK by moving the internal MCP server's custom events onto the standard `@posthog/mcp` SDK
+* Set up a safe release process and test self-driving as a 24-hour experiment against a baseline
 
-**We'll know it worked when** a failing tool call can turn into an auto-merged improvement, gated by a release framework we trust.
+**We'll know it worked when** a failing tool call can turn into a fix on its own, with a release process we trust deciding what actually ships.
 
 ### Magical onboarding
 
-**Motivation:** Onboarding is where we're losing people. Most who start the wizard don't finish. Getting to value should be as simple as running a command, and every drop-off is a warm lead.
+**Motivation:** Onboarding is where we're losing people. Most who start the wizard don't finish. Getting started should be as simple as running a command, and every drop-off is someone we can learn from.
 
-* Make wizard onboarding work end to end, validated against real usage ([wizard stats](https://us.posthog.com/project/2/dashboard/1781611))
-* Reach out to the drop-offs and the people who signed up but never activated, and figure out what blocked them
+* Make wizard onboarding work end to end, and make sure it works for real users ([wizard stats](https://us.posthog.com/project/2/dashboard/1781611))
+* Reach out to the people who dropped off or signed up but never got going, and find out what got in the way
 * Make the docs genuinely good and write up what we learn as blog posts. That's how we get Claude and Codex to actually use our content
 
-**We'll know it worked when** wizard completion climbs and new users reach value without us holding their hand.
+**We'll know it worked when** more people finish the wizard and get to value without us walking them through it.
 
 ### Launch
 
@@ -29,17 +30,17 @@ MCP analytics is greenfield. This quarter is about making onboarding magical, la
 
 * Get product marketing on our side for a launch about a month out
 * Land 5 to 10 close customers to build with
-* Publish blog posts on what we learn, not just docs, so we get indexed by Claude, ChatGPT and the rest early
-* Settle pricing: pull MCP events into their own bucket instead of mixing them with product analytics, charge the same rate as product analytics events but with a separate, conservative free tier. Sanity-check it by asking what PostHog would pay if it were the customer
+* Publish blog posts on what we learn, not just docs, so Claude, ChatGPT and the rest pick us up early
+* Settle pricing: give MCP events their own bucket instead of mixing them with Product Analytics, charge the same rate as Product Analytics events but with a separate, smaller free tier to start. Sanity-check it by asking what PostHog would pay if it were the customer
 
-**We'll know it worked when** we've launched with marketing support, have a handful of active design partners, and a pricing model we believe in.
+**We'll know it worked when** we've launched with marketing support, have a handful of customers building with us, and a pricing model we believe in.
 
 ### CLI & skills analytics (exploratory)
 
-**Motivation:** Agents don't only act through MCP. CLIs and skills are next, and we'd rather reuse what we have than build a new SDK for each surface.
+**Motivation:** Agents don't only act through MCP. CLIs and skills are next, and we'd rather reuse what we have than build a new SDK for each one.
 
 * CLI analytics: wrap existing CLIs with the MCP analytics SDK (Python, Go and Rust are already covered) and ship a wizard, so tool calls just show up as MCP events. No separate CLI SDK
-* Skills analytics: this one's harder and depends on LLM-side hooks we don't have yet. Talk to Anthropic and OpenAI about capturing skill-level data. We can probably build one for PostHog Code first
+* Skills analytics: harder, and it needs hooks on the LLM side that we don't have yet. Talk to Anthropic and OpenAI about capturing skill-level data. We can probably build one for PostHog Code first
 * Keep it exploratory and pick it up once the core MCP work has settled
 
-**We'll know it worked when** CLI tool calls show up through the existing SDK, and we know whether skills analytics is actually feasible.
+**We'll know it worked when** CLI tool calls show up through the existing SDK, and we know whether skills analytics is actually doable.
