@@ -2,7 +2,7 @@
 title: Traces
 ---
 
-import TraceEventSnippet from "./_snippets/trace-event.mdx"
+import TraceEventSnippet from "./_snippets/trace-event.mdx";
 
 Traces are a collection of [generations](/docs/ai-observability/generations) and [spans](/docs/ai-observability/spans) that capture a full interaction between a user and an LLM. The [traces tab](https://app.posthog.com/ai-observability/traces) lists them along with the properties autocaptured by PostHog like the person, total cost, total latency, and more.
 
@@ -24,8 +24,22 @@ Clicking on a trace opens a timeline of the interaction with all the generation 
   classes="rounded"
 />
 
-<Caption>A trace presents LLM event data in a timeline, tree-structured view </Caption>
+<Caption>A trace presents LLM event data in a timeline, tree-structured view</Caption>
 
+### Waterfall timeline
+
+Above the trace tree, a waterfall timeline shows when each operation started and how long it ran. Each bar represents a generation, span, or embedding event, color-coded to match the tree view.
+
+The waterfall helps you:
+
+- **See latency breakdown** — Identify which operations took the longest and where time was spent waiting.
+- **Spot concurrency** — Operations running in parallel appear on separate lanes. Parent-child connectors distinguish nested operations from concurrent siblings.
+- **Find errors at a glance** — Errored operations display a red border on their bar.
+- **Navigate the trace** — Click any bar to select the corresponding event in the tree view.
+
+The time axis uses clock-friendly intervals (e.g. 15s, 30s, 1m, 2m). For deeply nested traces, the timeline caps at 6 visible lanes and scrolls vertically. You can collapse the timeline or expand it to full screen.
+
+The waterfall also appears in the session view's steps drawer when inspecting a specific trace.
 
 ## Conversation display options
 
