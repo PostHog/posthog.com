@@ -23,6 +23,8 @@ Once a scanner is **enabled**, PostHog runs a background sweep every few minutes
 
 Each `(scanner, session)` pair is only ever observed once. Re-sweeping never produces duplicate observations for the same recording.
 
+> **Tip:** When you first create a scanner, the observations table is empty until the first background sweep runs. If you want immediate results, use the **Scan a recording now** link in the empty state to jump to the [on-demand tab](#on-demand-on-recordings-you-pick) and trigger a scan manually.
+
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/scanner_observations_tab_2513e7ee3e.png"
   alt="A scanner's observations list showing succeeded, running, pending, failed, and ineligible rows, triggered by both schedule and on demand"
@@ -81,13 +83,13 @@ Some sessions can't be analyzed – there's no recording data, the recording is 
 
 The taxonomy:
 
-| Ineligible reason | What it means |
-| --- | --- |
-| `no_recording` | The session referenced doesn't have replay data in storage |
-| `too_short` | The recording is below the minimum duration we'll scan |
-| `too_inactive` | The recording is long enough but the user was idle for almost all of it |
-| `too_long` | The recording is above the maximum duration we'll scan |
-| `no_events` | The recording has no analytics events at all |
+| Ineligible reason | What it means                                                           |
+| ----------------- | ----------------------------------------------------------------------- |
+| `no_recording`    | The session referenced doesn't have replay data in storage              |
+| `too_short`       | The recording is below the minimum duration we'll scan                  |
+| `too_inactive`    | The recording is long enough but the user was idle for almost all of it |
+| `too_long`        | The recording is above the maximum duration we'll scan                  |
+| `no_events`       | The recording has no analytics events at all                            |
 
 Ineligible observations:
 
