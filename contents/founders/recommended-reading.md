@@ -150,7 +150,7 @@ The SaaS Playbook isn’t your normal startup how-to guide, according to Lior. I
 ## [The Innovator’s Dilemma by Clayton Christensen](https://www.goodreads.com/book/show/2615.The_Innovator_s_Dilemma)
 **Recommended by [Raquel Smith, Engineering exec](/raquel)**
 
-Raquel has done a bit of everything — customer success, marketing, [product engineering](/blog/why-product-engineering-is-so-fun) — and now looks after many of PostHog’s product teams. Her recommendation is the book that coined the term “disruptive innovation”, and it explains why market leaders keep losing to smaller companies with cheaper, simpler products.
+Raquel has done a bit of everything — customer success, growth engineering, [product engineering](/blog/why-product-engineering-is-so-fun) — and now looks after many of PostHog’s product teams. Her recommendation is the book that coined the term “disruptive innovation”, and it explains why market leaders keep losing to smaller companies with cheaper, simpler products.
 
 **Raquel's review:** “It explains why big companies with all the money and all the customers still lose to startups. Serving your best customers pulls you upmarket, and someone cheaper and simpler picks up everyone you left behind. Once you’ve read it, you’ll spot the pattern in every market — including ours.”
 
