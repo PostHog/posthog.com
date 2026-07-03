@@ -370,6 +370,21 @@ The `system.error_tracking_issues` table contains error tracking issues from you
 | `name`        | Name of the issue                |
 | `description` | Description of the issue         |
 
+### `system.error_tracking_bypass_rules`
+
+The `system.error_tracking_bypass_rules` table contains rate limit bypass rule configurations. Exceptions matching a bypass rule skip the project-wide and per-issue [rate limits](/docs/error-tracking/rate-limiting).
+
+| Column          | Description                                                       |
+| --------------- | ----------------------------------------------------------------- |
+| `id`            | Unique identifier for the bypass rule                             |
+| `team_id`       | Team ID the rule belongs to                                       |
+| `order_key`     | Evaluation order; lower runs first                                |
+| `filters`       | JSON conditions an exception must match for the rule to apply     |
+| `bytecode`      | Compiled Hog bytecode for the filters (nullable)                  |
+| `disabled_data` | JSON state when the rule is disabled; null when active (nullable) |
+| `created_at`    | When the rule was created                                         |
+| `updated_at`    | When the rule was last updated                                    |
+
 ### `system.hog_flows`
 
 The `system.hog_flows` table contains workflow definitions from your project.
