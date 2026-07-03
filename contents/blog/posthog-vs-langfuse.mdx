@@ -60,6 +60,7 @@ When it comes to the fundamentals of LLM tracing, PostHog and Langfuse are very 
 
 The differences show up in what surrounds the trace.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'langfuse']}
     rows={[
@@ -77,6 +78,7 @@ The differences show up in what surrounds the trace.
         'ai_observability.tracing.features.trace_explorer_ui',
     ]}
 />
+</p>
 
 **Keep in mind:** Langfuse's trace visualization UI is more mature as it was purpose-built for trace exploration, so the waterfall views and detail panels are more polished. However, PostHog's advantage is what happens *around* the trace. You can link the trace to the user's session recording and behavioral history. You can also query trace data alongside product events using SQL.
 
@@ -84,6 +86,7 @@ The differences show up in what surrounds the trace.
 
 Langfuse built prompt management as a core pillar from day one. However, PostHog is playing catch-up with a [Prompt Management](/docs/prompt-management) tool (currently in beta). But while it already covers versioning, runtime fetching, and A/B testing of prompt versions, Langfuse is still further along with features like labels, playground testing, and composable prompts.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'langfuse']}
     rows={[
@@ -98,6 +101,7 @@ Langfuse built prompt management as a core pillar from day one. However, PostHog
         'ai_observability.prompt_management.features.ab_test_prompt_versions',
     ]}
 />
+</p>
 
 **Worth noting:** Right now, PostHog's prompt management handles core workflows like creating versioned prompts for fetching them at runtime with caching and fallback. But Langfuse still has deeper features, such as environment-based deployment labels and composable prompt chains. If you really need in-depth metrics *just for LLM* features, Langfuse is the stronger pick.
 
@@ -109,6 +113,7 @@ PostHog has whole-trace human reviews rather than span-level annotations, and da
 
 For pre-deployment quality assurance, Langfuse is the stronger pick right now.
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'langfuse']}
     rows={[
@@ -120,6 +125,7 @@ For pre-deployment quality assurance, Langfuse is the stronger pick right now.
         'ai_observability.evaluations.features.ab_experiments_on_product_metrics',
     ]}
 />
+</p>
 
 **Keep in mind:** When we use the term "experiments," it can mean different things within Langfuse and PostHog. Langfuse experiment runs execute an eval pipeline across a curated dataset to score quality *before* you deploy. PostHog experiments are statistical A/B tests on live users, measuring retention, conversion, and revenue *after* you deploy.
 
@@ -131,41 +137,13 @@ Right now, both tools track token usage and calculate costs per model call. But 
 <ProductComparisonTable
     competitors={['posthog', 'langfuse']}
     rows={[
-        {
-            label: 'Token counting',
-            description: 'Track input and output tokens per call',
-            values: [true, true],
-        },
-        {
-            label: 'Cost calculation',
-            description: 'Dollar cost per generation',
-            values: [true, true],
-        },
-        {
-            label: 'Cost by model',
-            description: 'Break down spending by model',
-            values: [true, true],
-        },
-        {
-            label: 'Cost trends',
-            description: 'Historical cost over time',
-            values: [true, true],
-        },
-        {
-            label: 'Cost by user',
-            description: 'See what individual users cost you',
-            values: [true, 'Partial'],
-        },
-        {
-            label: 'Cost by feature',
-            description: 'Break down spending by product feature',
-            values: [true, false],
-        },
-        {
-            label: 'Cost by cohort',
-            description: 'Compare costs across user segments',
-            values: [true, false],
-        },
+        'ai_observability.costs.features.token_counting',
+        'ai_observability.costs.features.cost_calculation',
+        'ai_observability.costs.features.cost_by_model',
+        'ai_observability.costs.features.cost_trends',
+        'ai_observability.costs.features.cost_by_user',
+        'ai_observability.costs.features.cost_by_feature',
+        'ai_observability.costs.features.cost_by_cohort',
     ]}
 />
 </p>
