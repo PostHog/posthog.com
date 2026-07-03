@@ -1,93 +1,122 @@
 ### Q3 2026
 
-The big shift this quarter is the switchover from Zendesk to Conversations, so every goal below assumes a Conversations-native world. A migration this big makes SLA attainment harder to measure and easy to let slip, so our overriding aim is to protect the customer experience through the transition: hold response times and SLA attainment as steady as we can, and keep CSAT high. Success this quarter looks like customers barely noticing the switchover.
 
-#### 1. Improve the proactive and in-app support customers get
+The big shift this quarter is the switchover from Zendesk to conversations, so every goal below assumes we are working in conversations. SLA attainment will be harder to measure and easy to let slip, so our overriding aim is to protect the customer experience through the transition: hold response times and SLA attainment as steady as we can, and keep CSAT high. Success this quarter looks like customers barely noticing the switchover.
 
-##### 1.1 Surface why a replay won't play
 
-**Owner:** <TeamMember name="Christian Rafferty" photo />
+### 1. Improve the proactive and in-app support customers get
 
-**Objective:** A continuation of last quarter's replay work. Last quarter we surfaced "why is my replay missing?"; this quarter we'll tackle our other most common question, "why is my replay not playing / infinitely buffering?". Our events already carry the debug information to answer this — the challenge is presenting it clearly enough that customers can self-solve without raising a ticket. We'll know this is working when fewer "replay won't play" tickets reach the queue.
 
-##### 1.2 Troubleshooting skills and tools for common issues
+<details>
+<summary>Surface why a replay won't play (<TeamMember name="Christian Rafferty" photo />)</summary>
 
-**Owner:** <TeamMember name="Phillip Ramirez" photo />
+- **Rationale:** reduce number of replay tickets by providing more context around our most asked question: "why is my replay not playing / infinitely buffering?"
+- **What we'll ship:** our events already carry debug information to be able to answer this. We will use that information and surface it in a way that customers can self-solve rather than needing to raise a ticket.
+- **We'll know we're successful when:** fewer "replay won't play" tickets reach the ticket queue.
 
-**Objective:** Build troubleshooting skills and tools for the issues we see again and again, starting with Experiments. The aim is to turn common cause-and-fix patterns into reusable skills, likely alongside the docs team. We'll know this is working when we've shipped at least one troubleshooting skill and can point to the recurring tickets it's designed to eliminate.
+</details>
 
-##### 1.3 Measure and improve support via PostHog AI
+<details>
+<summary>Build out experiments ticket investigation skill (<TeamMember name="Phillip Ramirez" photo />)</summary>
 
-**Owner:** <TeamMember name="Christiaan Hendriksen" photo />
+- **Rationale:** we receive a number of common questions around experiments that we can help customers to self-serve the answers to. The plan here is to reduce the number of these tickets we recieve.
+- **What we'll ship:** we'll build a skill that defines how experiments tickets can be investigated. This can be a skill to be used internally and we can even consider making this a customer-facing skill.
+- **We'll know we're successful when:** we've shipped at least one troubleshooting skill for experiments and can see those recurring tickets reducing.
 
-**Objective:** A two-parter. First, research what PostHog AI is doing in a support context and how well it's doing it, before trying to fix anything. Then, based on what we find, improve the experience of getting support via PostHog AI - including how customers raise tickets through AI chats. We'll know this is working when we have a data-backed picture of AI support quality and at least one concrete improvement shipped.
+</details>
 
-##### 1.4 Define the future of proactive support
- 
-**Owner:** <TeamMember name="Luke Belton" photo />
- 
-**Objective:** Define what the future of proactive support should look like for us — using signals in a customer's own data (churn risk, sharp changes in usage, signs something isn't set up correctly) to spot people who need help and reach out before they come to us. The output this quarter is that framing, plus one or two signals we could reliably use to raise support tickets from. We'll know this is working when we have a shared view of where proactive support is heading and a shortlist of signals worth acting on.
+<details>
+<summary>Improve the experience of getting support via PostHog AI (<TeamMember name="Christiaan Hendriksen" photo />)</summary>
 
-##### 1.5 Surface useful context and grow the health overview
+- **Rationale:** we want customers to receive correct and reliable information via PostHog AI and we want them to be able to seamlessly raise tickets from wherever they are, without having to switch to the PostHog sidebar.
+- **What we'll ship:** collect and build data analysis of support quality via PostHog AI. Ship improvements to the way that AI hands-off to support tickets and ship ways for customers to raise tickets via the AI.
+- **We'll know we're successful when:** we have a data-backed picture of AI support quality and customers can raise tickets via AI.
 
-**Owner:** <TeamMember name="Kyle Swank" photo />
+</details>
 
-**Objective:** A continuation of last quarter's work, now built around Conversations and the health overview rather than Zendesk. Start by enriching the context captured on Conversations tickets to speed up investigations, then look longer term at the health overview — including how we might surface this diagnostic information to customers so they can help themselves. We'll know this is working when tickets arrive with richer context and we have a clear direction for the health overview.
+<details>
+<summary>Define signals for proactive support (<TeamMember name="Luke Belton" photo />)</summary>
 
-#### 2. Make support faster and smarter in Conversations
+- **Rationale:** if we spot something customers might need help with before they do, we can create a ticket and reach out to them - creating a support experience that sparks joy and prevents churn in a very proactive way.
+- **What we'll ship:** define a set of data-backed signals we could use to proactively help customers. This should be based on churn data, information from tickets where customers are getting stuck, changes in customer usage, or ways that we can determine something is not right in the customer's set up. 
+- **We'll know we're successful when:** we have a set of concrete signals we could use to create proactive tickets from.
 
-##### 2.1 Bring valuable HogDesk features into Conversations
+</details>
 
-**Owner:** <TeamMember name="Xander Jones" photo />
 
-**Objective:** Conversations is our way forward, and as a team using it every day we're well placed to make it better. Evaluate the features we find most valuable in HogDesk and bring them across into Conversations - getting it right for ourselves as much as for our customers. We'll know this is working when the HogDesk functionality we rely on is available in Conversations.
+### 2. Make support faster and smarter in Conversations
 
-##### 2.2 Improve HogDesk features and workflows
- 
-**Owner:** <TeamMember name="Ben Lea" photo />
- 
-**Objective:** Keep building out HogDesk — improving the features we use most and streamlining our day-to-day support workflows so the team can work faster. This runs alongside the work to bring the best of HogDesk into Conversations, and helps us learn what's worth carrying across. We'll know this is working when engineers can do more of their support work in HogDesk with less friction.
+<details>
+<summary>Bring valuable HogDesk features into Conversations (<TeamMember name="Xander Jones" photo />)</summary>
 
-##### 2.3 Improve the customer support experience and sidebar
+- **Rationale:** conversations is our new home for support, and as a team using it every day we're well placed to make it better. 
+- **What we'll ship:** ship two features we find most valuable in HogDesk and bring them across into Conversations - getting it right for ourselves as much as for our customers.
+- **We'll know we're successful when:** our productivity in conversations is improved by these new features
 
-**Owner:** <TeamMember name="Ben Lea" photo />
+</details>
 
-**Objective:** Focus on the Conversations experience from the customer side, starting with the support sidebar — currently a long, unwieldy scroll of tickets that needs fixing. We'll know this is working when customers have a clearer, faster experience raising and following up on tickets.
+<details>
+<summary>Tidy up the customer support experience and sidebar (<TeamMember name="Ben Lea" photo />)</summary>
 
-##### 2.4 Feedback recordings in the Conversations ticket flow
+- **Rationale:** we want it to be easy for customers to raise tickets with us (from the sidebar, from error messages, as feature feedback), and be able to see what ongoing tickets they have open. At the moment the sidebar is a long, unwieldy scroll of tickets that needs fixing.
+- **What we'll ship:** ship changes to the ticket sidebar so that customers don't see all of their tickets at once - resolved tickets can be hidden or available somewhere else. Ship changes so that conversations tickets are raised from error messages and feature feedback.
+- **We'll know we're successful when:** customers have a clearer, faster experience raising and following up on tickets.
 
-**Owner:** <TeamMember name="Luke Belton" photo />
+</details>
 
-**Objective:** Get Loom-style feedback recordings into the Conversations ticket-raising flow, building on the work started in Toronto — making it easier for customers to raise a ticket and giving us richer context up front. We'll know this is working when customers can attach a feedback recording when raising a ticket in Conversations.
+<details>
+<summary>Better information captured on tickets (<TeamMember name="Kyle Swank" photo />)</summary>
 
-##### 2.5 Improve account impersonation
+- **Rationale:** the more information we can capture at ticket creation time, the quicker it is for us to investigate a ticket and get solutions to our customers
+- **What we'll ship:** we'll create a skill that is invoked when a ticket is created to gather additional information and helps the customer submit a better ticket for us to investigate
+- **We'll know we're successful when:** we are receiving better constructed tickets and more immediate context on tickets
 
-**Owner:** <TeamMember name="Steven Shults" photo />
+</details>
 
-**With:** <TeamMember name="Xander Jones" photo /> on switching QoL work
+<details>
+<summary>Feedback recordings in the Conversations ticket flow (<TeamMember name="Luke Belton" photo />)</summary>
 
-**Objective:** Make impersonation faster and less clunky. The main new piece is adding MCP impersonation to HogDesk, so we can investigate complex tickets faster; if time allows, we'll extend it to PostHog Code and Conversations. Alongside this, Xander will finish work on switching between impersonated users in the same org. We'll know this is working when engineers can get into an impersonated MCP session without the current clunky re-auth, and switching users is quick.
+- **Rationale:** customers being able to submit recordings with their ticket will allow them to show us exactly what they think is going wrong. This makes it easier for customers to raise a ticket and gives us richer context up front.
+- **What we'll ship:** the ability for customers to submit a recording with their ticket.
+- **We'll know we're successful when:** we are receiving tickets from customers with recordings showing us their issues.
 
-#### 3. Billing and legal self-serve
+</details>
 
-##### 3.1 Streamline the BAA process for startup-plan customers
+<details>
+<summary>More efficient impersonation (<TeamMember name="Steven Shults" photo />)</summary>
 
-**Owner:** <TeamMember name="Eleftheria Trivyzaki" photo />
+- **Rationale:** we want account impersonation to be fast and seamless so that we don't lose time while investigating tickets.
+- **What we'll ship:** <TeamMember name="Steven Shults" photo /> will add MCP impersonation to HogDesk - if time allows, we will extend this to conversations and PostHog code. <TeamMember name="Xander Jones" photo /> will ship the ability to switch between impersonated users in the same org.
+- **We'll know we're successful when:** when engineers can get into an impersonated MCP session with a less clunky re-auth than the impersonation-toolkit steps, and switching users is quicker.
 
-**Objective:** Make the BAA process self-serve for startup-plan customers. BAAs need the Boost add-on, which startup credits don't cover, and there's currently no defined path — so handling is ad hoc. We'll stop customers from signing a BAA they aren't covered by, and ship a self-serve flow so they can add Boost and get set up properly without needing to talk to sales, plus a documented process for these requests. We'll know we're successful when startup-plan customers can resolve this themselves and we can report on BAA coverage across the startup plan.
+</details>
 
-#### 4. Raise the bar: migration, offering, and team clarity
+<details>
+<summary>Surface ticket trends and potential incidents (<TeamMember name="Ben Haynes" photo />)</summary>
 
-**Owner:** <TeamMember name="Abigail Richardson" photo />
+- **Rationale:** spotting ticket patterns and trends helps us to identify incidents and prominent bugs faster, leading to faster fixes.
+- **What we'll ship:** implement functionality in conversations that identifies ticket trends and surfaces potential incidents.
+- **We'll know we're successful when:** we are alerted of prominent bugs and possible incidents from conversations tickets, rather than relying on one person to spot them.
 
-##### 4.1 Complete the move to Conversations and retire Zendesk
+</details>
 
-**Objective:** Finish the migration from Zendesk to Conversations and turn Zendesk off — handbook updates, workflows and notifications in place, and reporting and CSAT working again. We'll know this is working when support runs entirely in Conversations, Zendesk is retired, and reporting and CSAT are back to full health.
+<details>
+<summary>Complete the move to Conversations and retire Zendesk (<TeamMember name="Abigail Richardson" photo />)</summary>
 
-##### 4.2 Define our support offering and packaging
+- **Rationale:** move 100% into conversations for all of our support. This helps us to give feedback into our own product and help it grow.
+- **What we'll ship:** handbook updates, workflows and notifications in place, and reporting and CSAT working again
+- **We'll know we're successful when:** support tickets are entirely in conversations, Zendesk is retired, and reporting is in place for conversations
 
-**Objective:** Look at how we structure and package our support offering, focused on improving response times and coverage for high-paying customers. Build on the Q2 work defining when it makes sense to share a ticket across timezones vs. take care of it yourself. We'll know this is working when we have an agreed, documented support offering and response times for managed and high-paying customers are improving.
+</details>
 
-##### 4.3 Clarify the boundary between Sales/CS-owned and support-owned tickets
 
-**Objective:** Create clarity around which tickets support picks up vs. which are managed by Sales/CS — a continuation of the Q2 boundary work. We'll know this is done when these tickets are handled more efficiently and fewer remain breaching-but-answered in the queue.
+### 3. Billing and legal self-serve
+
+<details>
+<summary>Make the BAA process self-serve for startup-plan customers (<TeamMember name="Eleftheria Trivyzaki" photo />)</summary>
+
+- **Rationale:** BAAs require the Boost add-on, but startup credits don’t cover BAAs. Startups on credits shouldn’t be able to sign a BAA in-app without a separate subscription. We also don't currently track BAAs for startup customers or have a defined process, so handling is ad hoc.
+- **What we'll ship:** a self-serve path for startup plan customers to request Boost and get a BAA, plus a documented process for handling these requests. Nice to have: visibility into how many existing startup plan customers already have a BAA in place without a separate subscription.
+- **We'll know we're successful when:** startup plan customers can resolve the BAA/Boost limitation on their own, we have a repeatable process for handling these requests, and we can report on BAA coverage across the startup plan.
+
+</details>
