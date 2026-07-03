@@ -14,7 +14,7 @@ showTitle: true
 
 ### Customer Success Managers
 
-Each CSM is assigned customer accounts accumulating to ~$1.5m ARR to work with.  We use the CSM Managed Segment in Vitally to track this against goals and CSMs should not assign this themselves (that's up to Dana or Charles).
+Each CSM is assigned customer accounts accumulating to ~$2.5m ARR to work with.  We use the CSM Managed Segment in Vitally to track this against goals and CSMs should not assign this themselves (that's up to Dana, Phil and Simon).
 
 ## Weekly Customer Success standup
 
@@ -33,26 +33,26 @@ CSMs are responsible for ensuring that a larger book of existing customers - bot
 - Your OTE comprises an 80/20 split between base and contractual bonus.
 - Bonus is paid based on revenue retention above 100%, and is _uncapped_.
   - For example, if you have 100% revenue retention and your target is 120% revenue retention, you get 0% of bonus. For 120% retention, it's 100% bonus, and for 140% retention, it's 200% bonus. This is on a sliding scale so if you hit 110% retention you get 50% bonus.
-  - The Q4 2025 target is 120% half-yearly NRR. This may change in future depending on how things go.
-  - To calculate retention we use the total usage over the past 2 quarters and annualize this, then compare it to the 2 quarters before that.
-    - For monthly customers this is the total of their 6 invoices multiplied by 2
-    - For annual customers, we look at the usage-based MRR and multiply by 2
-    - For newer customers: if there's at least 2 quarters of revenue, we use quarter-on-quarter comparison for that specific customer. If it's a brand new customer with less than 1 quarter of revenue, we start measuring next quarter.
+  - The Q3 2026 target is 110% quarterly NRR. This may change in future depending on how things go.
+  - To calculate retention we use the total usage over the past quarter and annualize this, then compare it to the quarter before that.
+    - For monthly customers this is the total of their 3 invoices multiplied by 4
+    - For annual customers, we look at the usage-based MRR and multiply by 4
+    - For newer customers: If it's a brand new customer with less than 1 quarter of revenue, we start measuring next quarter.
 - Bonuses are paid out quarterly, and in any case after an invoice is paid
   - Bonus payments are made at the end of January, April, July, and October - at the end of each quarter, we'll monitor how many invoices actually get paid in the first two weeks of the next quarter. Fraser will send you an email that breaks down how you did.
 - Your bonus is guaranteed at 100% for your first 3 months at PostHog - this gives you time to get up to speed, but also if you over-perform then you will get your additional bonus.
 - If an account is added to your book:
   - If you inherit a new account that hasn't been managed by a PostHog human before, you have a 3 month grace period - if they drop or churn in that initial period, they won't be counted against you. We want to encourage you to right-size customers, rather than your deliberately letting them wastefully spend money due to some poor implementation.
-  - If you inherit an account from another CSM, AE, or AM, it will count toward your NRR in that quarter, even in the first 3 months.
+  - If you inherit an account from another CSM, AE, or AM, it will normally count toward your NRR in that quarter, even in the first 3 months.
+    - In exceptional circumstances we may need you to take on an account which we know isn't in a good state (ie. despite the previous owners best efforts we haven't been able to work with them).  We will note in writing on a case by case basis that any churn or downgrade in the first 3 months won't be counted against you.
 - How bonus is calculated:
-  - In general, we compare annualized ARR over the past 2 quarters with annualized ARR 2 quarters before.
-    - For Q4 2025 bonus: (Q4 + Q3 ARR) vs (Q2 + Q1 ARR)
-    - For Q1 2026 bonus: (Q1 + Q4 ARR) vs (Q3 + Q2 ARR)
+  - In general, we compare annualized ARR over the past quarter with annualized ARR from the previous quarter.
+    - For Q3 2026 bonus: Q3 ARR vs Q2 ARR
   - For customers on annual plans, we will look at their usage-based spending (instead of total contract amount / 12)
   - If an account is removed from your book mid-quarter, they will not be included in bonus calculation. We do this extremely rarely, even if a customer shuts down. If we have to give a customer a big refund, we’ll deal with your bonus on a case by case basis depending on what happened, but usually this will still be counted. 
  
 **Account allocation**
-- CSMs manage approximately $1.5M in ARR.
+- CSMs manage approximately $2.5M in ARR.
 - This coverage amount will grow ~10% quarterly to match our growth targets.
 - When rebalancing accounts (e.g., if accounts drop below the $20k threshold), we'll bring you up to the current quarter's target amount.
 
