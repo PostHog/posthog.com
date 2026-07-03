@@ -91,18 +91,47 @@ export function useEarlyAccessFeatures(options: UseEarlyAccessFeaturesOptions = 
         if (typeof window === 'undefined' || typeof posthog?.getEarlyAccessFeatures !== 'function') {
             return false
         }
+
+        // Attach each feature's waitlist survey by matching the survey's linked_flag_key to
+        // the feature's flagKey (mirrors the build-time join in gatsby/sourceNodes.ts).
+        // Explicit payload from the feature wins; the flag-key join is the fallback.
+        const applyFeatures = (result: EarlyAccessFeature[]) => {
+            // Keep the build-time list when the live response is empty/invalid.
+            if (!Array.isArray(result) || result.length === 0) {
+                setLoading(false)
+                return
+            }
+            const finish = (features: EarlyAccessFeature[]) => {
+                setFeatures(features)
+                setLoading(false)
+            }
+            if (typeof posthog.getSurveys !== 'function') {
+                finish(result)
+                return
+            }
+            posthog.getSurveys((surveys: any[]) => {
+                const waitlistSurveyByFlagKey: Record<string, { survey_id: string; survey_question_id?: string }> = {}
+                if (Array.isArray(surveys)) {
+                    surveys
+                        .filter((s) => s?.type === 'api' && s?.linked_flag_key && s?.start_date && !s?.end_date)
+                        .forEach((s) => {
+                            waitlistSurveyByFlagKey[s.linked_flag_key] = {
+                                survey_id: s.id,
+                                survey_question_id: s.questions?.[0]?.id,
+                            }
+                        })
+                }
+                finish(
+                    result.map((feature) => ({
+                        ...feature,
+                        payload: { ...waitlistSurveyByFlagKey[feature.flagKey], ...(feature.payload || {}) },
+                    }))
+                )
+            })
+        }
+
         try {
-            posthog.getEarlyAccessFeatures(
-                (result: EarlyAccessFeature[]) => {
-                    // Keep the build-time list when the live response is empty/invalid.
-                    if (Array.isArray(result) && result.length > 0) {
-                        setFeatures(result)
-                    }
-                    setLoading(false)
-                },
-                forceReload,
-                stages
-            )
+            posthog.getEarlyAccessFeatures(applyFeatures, forceReload, stages)
             return true
         } catch {
             setError(true)

@@ -1201,36 +1201,65 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
 
     // Early Access Features ("Coming Soon" / betas) from PostHog's public EAF endpoint,
     // sourced at build time so /roadmap server-renders instantly and is indexable.
-    // The page still revalidates client-side via posthog-js for freshness.
+    // Each feature's waitlist survey is joined in from the public surveys endpoint by
+    // matching the survey's linked_flag_key to the feature's flagKey, so the roadmap can
+    // collect sign-ups without any backend coupling. The page still revalidates
+    // client-side via posthog-js for freshness.
     const sourceEarlyAccessFeatures = async () => {
         const token = process.env.GATSBY_POSTHOG_API_KEY
         if (!token) return
         try {
             const host = process.env.GATSBY_POSTHOG_API_HOST || 'https://us.i.posthog.com'
-            const res = await fetch(
-                `${host}/api/early_access_features/?token=${token}&stage=concept&stage=alpha&stage=beta`
-            )
-            if (!res.ok) {
-                console.warn(`Failed to fetch early access features: HTTP ${res.status}`)
+            const [featuresRes, surveysRes] = await Promise.all([
+                fetch(`${host}/api/early_access_features/?token=${token}&stage=concept&stage=alpha&stage=beta`),
+                fetch(`${host}/api/surveys/?token=${token}`),
+            ])
+            if (!featuresRes.ok) {
+                console.warn(`Failed to fetch early access features: HTTP ${featuresRes.status}`)
                 return
             }
-            const { earlyAccessFeatures } = await res.json()
+            const { earlyAccessFeatures } = await featuresRes.json()
             if (!Array.isArray(earlyAccessFeatures)) return
+
+            // Launched `api` surveys linked to a flag, keyed by that flag — these are the
+            // waitlist surveys for Coming Soon features.
+            const waitlistSurveyByFlagKey: Record<string, { survey_id: string; survey_question_id?: string }> = {}
+            if (surveysRes.ok) {
+                const { surveys } = await surveysRes.json()
+                if (Array.isArray(surveys)) {
+                    surveys
+                        .filter((s) => s?.type === 'api' && s?.linked_flag_key && s?.start_date && !s?.end_date)
+                        .forEach((s) => {
+                            waitlistSurveyByFlagKey[s.linked_flag_key] = {
+                                survey_id: s.id,
+                                survey_question_id: s.questions?.[0]?.id,
+                            }
+                        })
+                }
+            } else {
+                console.warn(`Failed to fetch surveys for waitlist join: HTTP ${surveysRes.status}`)
+            }
+
             earlyAccessFeatures
                 .filter((feature) => feature?.flagKey)
                 .forEach((feature) => {
+                    // Explicit payload from the feature wins; the flag-key join is the fallback.
+                    const payload = {
+                        ...waitlistSurveyByFlagKey[feature.flagKey],
+                        ...(feature.payload || {}),
+                    }
                     createNode({
                         id: createNodeId(`early-access-feature-${feature.flagKey}`),
                         internal: {
                             type: 'EarlyAccessFeature',
-                            contentDigest: createContentDigest(feature),
+                            contentDigest: createContentDigest({ ...feature, payload }),
                         },
                         name: feature.name,
                         description: feature.description,
                         stage: feature.stage,
                         documentationUrl: feature.documentationUrl,
                         flagKey: feature.flagKey,
-                        payload: feature.payload || {},
+                        payload,
                     })
                 })
         } catch (error) {

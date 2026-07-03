@@ -8,6 +8,7 @@ export type PostHog = {
     captureException: (...args: any[]) => void
     createPersonProfile: (...args: any[]) => void
     getEarlyAccessFeatures: (...args: any[]) => void
+    getSurveys: (...args: any[]) => void
     updateEarlyAccessFeatureEnrollment: (...args: any[]) => void
     getFeatureFlag: (...args: any[]) => any
     getFeatureFlagPayload: (...args: any[]) => any

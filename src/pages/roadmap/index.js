@@ -10,10 +10,15 @@ const RoadmapPage = () => {
         value: '/roadmap',
         content: (
             <div className="p-4 @xl:p-8">
+                <img
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/hog_engineer_0eebaf7af1.png"
+                    alt="A hedgehog engineer hard at work"
+                    className="@xl:float-right @xl:ml-4 max-h-40 -mt-2"
+                />
                 <h1>Roadmap</h1>
                 <p className="text-secondary max-w-2xl">
-                    See what's new in beta and what's coming next. Try betas now, or join a waitlist and we'll email you
-                    the moment it ships.
+                    Here's what we're building. Betas are ready to enable today, and anything coming soon has a waitlist
+                    – drop your email and we'll let you know the moment it ships.
                 </p>
                 <EarlyAccessFeaturesSection />
             </div>

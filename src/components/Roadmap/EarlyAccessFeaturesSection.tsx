@@ -35,7 +35,9 @@ const SectionHeader = ({
         <div className="flex items-center gap-2">
             {icon}
             <h2 className="m-0">{title}</h2>
-            <span className="text-sm text-muted font-normal">{count}</span>
+            <span className="bg-accent border border-primary rounded-full px-2 py-0.5 text-xs font-semibold text-secondary">
+                {count}
+            </span>
         </div>
         <p className="text-secondary mt-1 mb-4 text-sm">{description}</p>
     </>
@@ -210,7 +212,7 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
                         icon={<IconRocket className="size-6 text-red dark:text-yellow" />}
                         title="In beta – try it now"
                         count={beta.length}
-                        description="These are live. Each one links straight to its toggle in your PostHog account."
+                        description="These are live. Each card links straight to its toggle in your PostHog account – flip it on and go."
                     />
                     <Grid>
                         {beta.map((feature) => (
@@ -236,7 +238,18 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
                 </section>
             )}
 
-            {q && !showBeta && !showComing && <p className="text-muted text-sm">No features match “{query}”.</p>}
+            {q && !showBeta && !showComing && (
+                <div className="flex flex-col items-center gap-2 py-8 text-center">
+                    <img
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/detective_hog_9b2bb1da51.png"
+                        alt="A hedgehog detective, stumped"
+                        className="max-h-32"
+                    />
+                    <p className="text-secondary text-sm m-0">
+                        No features match “{query}”. Detective Hog has no leads – try a different search.
+                    </p>
+                </div>
+            )}
         </div>
     )
 }
