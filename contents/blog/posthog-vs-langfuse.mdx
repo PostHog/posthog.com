@@ -19,7 +19,7 @@ seo:
 
 A real user types something you never tested, your agent takes a hard left turn, and suddenly you're scrolling through raw logs trying to reconstruct what happened.
 
-Both [PostHog](/) and [Langfuse](/blog/best-langfuse-alternatives) exist for this exact moment. They both show you what your LLMs are actually doing in production – traces, token costs, latency, the works. 
+Both [PostHog](/) and [Langfuse](/blog/best-langfuse-alternatives) exist for this exact moment. They both show you [what your LLMs are actually doing](blog/what-is-ai-observability) in production – traces, token costs, latency, the works. 
 
 But they take different roads to get there, and which road you want depends on what kind of visibility you're after.
 
@@ -35,13 +35,11 @@ PostHog connects your [traces](/docs/ai-observability/traces) to the rest of the
 
 When your assistant's response quality dips, you can check whether that tracks with a drop in retention or if users even noticed the regression.
 
-
 ### 2. We let you A/B test prompts and AI features on real users
 
 Although both have prompt playgrounds, PostHog goes further with [prompt experiments (beta)](/docs/prompt-management/prompt-experiments) let you pit two or more versions of a prompt against each other. It splits users between them [via a feature flag](/docs/feature-flags) and reports cost, latency, eval pass rate, and usage analytics per variant, with a confidence interval against the control.
 
 And because [experiments](/experiments) aren't limited to prompts, you can take it further: route a percentage of users to a new model or retrieval strategy, then measure the impact on real product goals using PostHog's [Bayesian](/docs/experiments/statistics-bayesian) and [Frequentist](/docs/experiments/statistics-frequentist) stats engines.
-
 
 ### 3. We make your product self-driving
 
@@ -52,49 +50,9 @@ Because PostHog holds the full context of your product (traces, events, replays,
 - On the desktop [(PostHog Code)](/code) – run coding agents on top of your product data, with signals turned into a ranked inbox.
 - In the app [(PostHog AI)](/ai) – ask questions in plain English, build dashboards, and dig into traces or replays without writing SQL.
 
-
 <WizardCTA />
 
 ## Comparing PostHog and Langfuse
-
-Before we get into AI observability specifically, here's how Langfuse vs PostHog breaks down across the board.
-
-### Platform
-
-<p>
-<ProductComparisonTable
-    competitors={['posthog', 'langfuse']}
-    rows={[
-        'ai_observability',
-        'product_analytics',
-        'web_analytics',
-        'session_replay',
-        'feature_flags',
-        'experiments',
-        'error_tracking',
-        'surveys',
-        'data_warehouse',
-        'cdp',
-        'ai_observability.features.prompt_management',
-        'ai_observability.features.human_annotation',
-        'ai_observability.features.evaluation_datasets',
-        'ai_observability.features.prompt_playground',
-        'platform.deployment.open_source',
-        'platform.deployment.eu_hosting',
-    ]}
-/>
-</p>
-
-[AI observability](/blog/what-is-ai-observability) is the one area where PostHog and Langfuse overlap. At the moment, both of these trace LLM calls and support `OpenTelemetry,` so you can inspect individual generations with token counts and inputs/outputs. But where they actually diverge is what each tool builds around that trace data.
-
-PostHog treats traces as product data. So, it's another signal you can query and [correlate alongside everything else](/docs/ai-observability/integrations) you're already tracking. Langfuse treats traces as the core object and builds dedicated workflows on top of the following:
-
-- Prompt versioning
-- Evaluation pipelines
-- Annotation queues
-- Dataset experiments
-
-If you need those LLM-specific workflows today, Langfuse has more of them. If you need your AI data connected to product analytics, session replay, feature flags, experimentation, and a lot more, PostHog is the better alternative.
 
 ### Tracing and spans
 
@@ -102,73 +60,23 @@ When it comes to the fundamentals of LLM tracing, PostHog and Langfuse are very 
 
 The differences show up in what surrounds the trace.
 
-<p>
 <ProductComparisonTable
     competitors={['posthog', 'langfuse']}
     rows={[
-        {
-            label: 'Hierarchical traces',
-            description: 'Nested spans showing the full call flow',
-            values: [true, true],
-        },
-        {
-            label: 'Custom spans',
-            description: 'Instrument any operation as a span',
-            values: [true, true],
-        },
-        {
-            label: 'Tool call tracking',
-            description: 'Track function/tool calls in AI agents',
-            values: [true, true],
-        },
-        {
-            label: 'RAG retrieval tracking',
-            description: 'Monitor retrieval steps in RAG pipelines',
-            values: [true, true],
-        },
-        {
-            label: 'Session grouping',
-            description: 'Group traces into user sessions',
-            values: [true, true],
-        },
-        {
-            label: 'OpenTelemetry support',
-            description: 'Ingest traces via the OTel protocol',
-            values: [true, true],
-        },
-        {
-            label: 'Async ingestion',
-            description: 'Non-blocking trace collection',
-            values: [true, true],
-        },
-        {
-            label: 'Multi-model support',
-            description: 'Track calls across LLM providers',
-            values: [true, true],
-        },
-        {
-            label: 'Session replay link',
-            description: "Jump from a trace to the user's session recording",
-            values: [true, false],
-        },
-        {
-            label: 'User profile context',
-            description: 'Connect traces to full user profiles with behavioral history',
-            values: [true, 'Partial'],
-        },
-        {
-            label: 'SQL queries on traces',
-            description: 'Query trace data alongside product events',
-            values: [true, false],
-        },
-        {
-            label: 'Trace explorer UI',
-            description: 'Dedicated interface for browsing and filtering traces',
-            values: ['Basic', 'Advanced'],
-        },
+        'ai_observability.tracing.features.hierarchical_traces',
+        'ai_observability.tracing.features.custom_spans',
+        'ai_observability.tracing.features.tool_call_tracking',
+        'ai_observability.tracing.features.rag_retrieval_tracking',
+        'ai_observability.tracing.features.session_grouping',
+        'ai_observability.tracing.features.opentelemetry_support',
+        'ai_observability.tracing.features.async_ingestion',
+        'ai_observability.tracing.features.multi_model_support',
+        'ai_observability.tracing.features.session_replay_link',
+        'ai_observability.tracing.features.user_profile_context',
+        'ai_observability.tracing.features.sql_queries_on_traces',
+        'ai_observability.tracing.features.trace_explorer_ui',
     ]}
 />
-</p>
 
 **Keep in mind:** Langfuse's trace visualization UI is more mature as it was purpose-built for trace exploration, so the waterfall views and detail panels are more polished. However, PostHog's advantage is what happens *around* the trace. You can link the trace to the user's session recording and behavioral history. You can also query trace data alongside product events using SQL.
 
@@ -176,58 +84,20 @@ The differences show up in what surrounds the trace.
 
 Langfuse built prompt management as a core pillar from day one. However, PostHog is playing catch-up with a [Prompt Management](/docs/prompt-management) tool (currently in beta). But while it already covers versioning, runtime fetching, and A/B testing of prompt versions, Langfuse is still further along with features like labels, playground testing, and composable prompts.
 
-<p>
 <ProductComparisonTable
     competitors={['posthog', 'langfuse']}
     rows={[
-        {
-            label: 'Prompt versioning',
-            description: 'Track changes to prompts over time',
-            values: ['Beta', true],
-        },
-        {
-            label: 'Template variables',
-            description: 'Dynamic {{variables}} compiled at runtime',
-            values: ['Beta', true],
-        },
-        {
-            label: 'Prompt deployment API',
-            description: 'Fetch the active prompt version via SDK',
-            values: ['Beta', true],
-        },
-        {
-            label: 'Version comparison',
-            description: 'Side-by-side diff of prompt versions',
-            values: ['Beta', true],
-        },
-        {
-            label: 'Prompt labels',
-            description: 'Tag prompts as production, staging, latest',
-            values: [false, true],
-        },
-        {
-            label: 'Prompt playground',
-            description: 'Test and compare prompts interactively',
-            values: [true, true],
-        },
-        {
-            label: 'Composable prompts',
-            description: 'Link and chain prompts together',
-            values: [false, true],
-        },
-        {
-            label: <a href="/docs/model-context-protocol">MCP server for prompts</a>,
-            description: 'Manage prompts via AI coding agents',
-            values: ['Beta', false],
-        },
-        {
-            label: 'A/B test prompt versions',
-            description: 'Split users between versions, measure cost, latency, and eval pass rate',
-            values: ['Beta', false],
-        },
+        'ai_observability.prompt_management.features.prompt_versioning',
+        'ai_observability.prompt_management.features.template_variables',
+        'ai_observability.prompt_management.features.prompt_deployment_api',
+        'ai_observability.prompt_management.features.version_comparison',
+        'ai_observability.prompt_management.features.prompt_labels',
+        'ai_observability.prompt_management.features.prompt_playground',
+        'ai_observability.prompt_management.features.composable_prompts',
+        'ai_observability.prompt_management.features.mcp_server_for_prompts',
+        'ai_observability.prompt_management.features.ab_test_prompt_versions',
     ]}
 />
-</p>
 
 **Worth noting:** Right now, PostHog's prompt management handles core workflows like creating versioned prompts for fetching them at runtime with caching and fallback. But Langfuse still has deeper features, such as environment-based deployment labels and composable prompt chains. If you really need in-depth metrics *just for LLM* features, Langfuse is the stronger pick.
 
@@ -239,43 +109,17 @@ PostHog has whole-trace human reviews rather than span-level annotations, and da
 
 For pre-deployment quality assurance, Langfuse is the stronger pick right now.
 
-<p>
 <ProductComparisonTable
     competitors={['posthog', 'langfuse']}
     rows={[
-        {
-            label: 'LLM-as-a-judge',
-            description: 'Use models to score outputs automatically',
-            values: [true, true],
-        },
-        {
-            label: 'Code evaluators',
-            description: 'Custom scoring functions for automated eval',
-            values: [true, true],
-        },
-        {
-            label: 'Annotation queues',
-            description: 'Assign human reviewers to score outputs',
-            values: [false, true],
-        },
-        {
-            label: 'Datasets',
-            description: 'Curate sets of inputs and expected outputs',
-            values: [false, true],
-        },
-        {
-            label: 'Experiment runs',
-            description: 'Run evaluation pipelines across datasets',
-            values: [false, true],
-        },
-        {
-            label: 'A/B experiments on product metrics',
-            description: 'Statistical tests measuring impact on real user behavior',
-            values: [true, false],
-        },
+        'ai_observability.evaluations.features.llm_as_a_judge',
+        'ai_observability.evaluations.features.code_evaluators',
+        'ai_observability.evaluations.features.annotation_queues',
+        'ai_observability.evaluations.features.datasets',
+        'ai_observability.evaluations.features.experiment_runs',
+        'ai_observability.evaluations.features.ab_experiments_on_product_metrics',
     ]}
 />
-</p>
 
 **Keep in mind:** When we use the term "experiments," it can mean different things within Langfuse and PostHog. Langfuse experiment runs execute an eval pipeline across a curated dataset to score quality *before* you deploy. PostHog experiments are statistical A/B tests on live users, measuring retention, conversion, and revenue *after* you deploy.
 
@@ -330,72 +174,35 @@ Right now, both tools track token usage and calculate costs per model call. But 
 
 But PostHog adds another layer to that question. You can dig into the user-side of things and answer questions like "Which user segment costs us the most?" or "Do high-value users cost more than users who churn?" You can do this because cost data sits alongside your product analytics and can be queried with SQL.
 
-## Everything else PostHog gives you
+Before we get into AI observability specifically, here's how Langfuse vs PostHog breaks down across the board.
 
-It's obvious that Langfuse does one thing well: AI observability. But PostHog takes it several steps further by giving you a lot more within the same platform. 
+### Platform
 
-Here's what you can get out-of-the-box, without any extra integration work:
+If you need those LLM-specific workflows today, Langfuse has more of them. If you need your AI data connected to product analytics, session replay, feature flags, experimentation, and a lot more, PostHog is the better alternative.
 
-<details>
-<summary>Product analytics</summary>
-
-You've [shipped your AI feature](/blog/ai-observability-for-mvps). Now what do you do? You can use [product analytics](/product-analytics) to tell you whether it actually changed how people use your product. For instance, you can build funnels to see how many users reach your AI feature and how many complete the task it's supposed to help with. Or track retention to see whether AI users return more often than non-AI users.
-
-If you need to run a deeper analysis, run a cohort analysis to compare behavior across user segments. For example, free vs. paid, power users vs. new signups, or users who got `GPT-5.5` vs. `Opus` responses.
-
-In short: Langfuse can tell you what your model did, but PostHog can tell you whether users actually experienced a positive difference.
-
-</details>
-
-<details>
-<summary>Session replay</summary>
-
-LLMs are non-deterministic in nature. So it's actually normal for a user to say something like "the AI gave me a weird answer." In those, you need more than a trace to tell what's going on.
-
-PostHog's Session Replay lets you watch the actual session and review parameters like:
-
-- What the user clicked
-- What they typed
-- What they saw on screen
-- What showed up in the console
-- Which network requests were fired
-
-You can click [straight from an LLM trace to the session recording](/docs/ai-observability/link-session-replay) that triggered it. As a result, you can tie the model's behavior to why the user saw what they did. It's something most AI observability tools don't tell you today.
-
-</details>
-
-<details>
-<summary>Feature flags and experimentation</summary>
-
-You can use PostHog to confidently roll out a new model version to every user at once. It's a simple coin flip, in fact. Just use feature flags to gate AI features behind targeting rules like specific users or properties. If something goes wrong, you can even add a kill switch and fallback options using flags.
-
-That said, Experiments let you test the performance of individual LLM parameters. You can run statistically rigorous A/B tests on prompt variants, model swaps, retrieval strategies, or entirely different AI architectures. It's measured against real product metrics like conversion, retention, and revenue, so you're never in the dark about how your LLM features impact users.
-
-Even though Langfuse has evaluation pipelines for pre-deployment quality checks, it doesn't offer any possibility to measure whether a change moved the needle for actual users in production. You'll have to connect it to a separate analytics tool to do that.
-
-</details>
-
-<details>
-<summary>Error tracking</summary>
-
-You can use error tracking to monitor exceptions and stack traces across your app. Then, use that data to correlate them with every change you make - for example, a new AI deployment or a change in a feature flag.
-
-If you roll out a feature and error rates spike 15 minutes later, you'll see it in your dashboard immediately and know which change caused it because the data lives on the same platform. Langfuse doesn't offer this right off the bat.
-
-</details>
-
-<details>
-<summary>Surveys, data warehouse, and web analytics</summary>
-
-Here are a few more pieces that round out PostHog's capabilities:
-
-- Use Surveys for in-app feedback collection and NPS. You can ask users directly whether your AI feature helped, then correlate their responses with trace data and session recordings.
-
-- Use the data warehouse to import data from `Stripe`, `HubSpot`, `S3`, `Postgres`, and other platforms. You can connect revenue data with AI usage to answer questions like "What's the LTV of users who engage with AI features?"
-
-- Use Web Analytics to track website traffic, UTM parameters, sources, and conversions. You'll be able to measure the full funnel from landing page to AI feature activation and see how users move through your website as well.
-
-</details>
+<p>
+<ProductComparisonTable
+    competitors={['posthog', 'langfuse']}
+    rows={[
+        'ai_observability',
+        'product_analytics',
+        'web_analytics',
+        'session_replay',
+        'feature_flags',
+        'experiments',
+        'error_tracking',
+        'surveys',
+        'data_warehouse',
+        'cdp',
+        'ai_observability.features.prompt_management',
+        'ai_observability.features.human_annotation',
+        'ai_observability.features.evaluation_datasets',
+        'ai_observability.features.prompt_playground',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
+</p>
 
 ## Pricing and open source
 
