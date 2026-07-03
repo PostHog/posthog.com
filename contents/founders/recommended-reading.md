@@ -146,4 +146,24 @@ The SaaS Playbook isn’t your normal startup how-to guide, according to Lior. I
 
 > **Putting it into practice:** Product launches are a perpetual activity at PostHog, so our marketing team is always working in bootstrap mode — with help from [their favourite tool](/blog/posthog-marketing).
 
+
+## [The Innovator’s Dilemma by Clayton Christensen](https://www.goodreads.com/book/show/2615.The_Innovator_s_Dilemma)
+**Recommended by [Raquel Smith, Engineering](/raquel)**
+
+Raquel has done a bit of everything — customer success, marketing, [product engineering](/blog/why-product-engineering-is-so-fun) — and now looks after many of PostHog’s product teams. Her recommendation is the book that coined the term “disruptive innovation”, and it explains why market leaders keep losing to smaller companies with cheaper, simpler products.
+
+**Raquel's review:** “It explains why big companies with all the money and all the customers still lose to startups. Serving your best customers pulls you upmarket, and someone cheaper and simpler picks up everyone you left behind. Once you’ve read it, you’ll spot the pattern in every market — including ours.”
+
+> **Putting it into practice:** It’s why we aim to [get in first](/handbook/which-products) with products for early-stage teams, and why we [keep prices low](/handbook/low-prices) as we grow.
+
+
+## [Turn the Ship Around! by L. David Marquet](https://www.goodreads.com/book/show/16158601-turn-the-ship-around)
+**Recommended by [Paul D'Ambra, Engineering](/paul)**
+
+Paul looks after a whole fleet of PostHog’s engineering teams, which means plenty of opportunities to give orders. This book is a big part of why he tries not to. Marquet took command of the USS Santa Fe when it was the worst-performing submarine in the US Navy, and turned it into one of the best by handing control to his crew.
+
+**Paul's review:** “Marquet’s crew stopped waiting for orders and started saying ‘I intend to...’ instead, which moved decisions to the people who actually had the information. I think about that constantly. Delegated authority is most of the job — build enough clarity and competence around you that you can just say ‘very well’ and get out of the way.”
+
+> **Putting it into practice:** Managers at PostHog [don’t assign tasks](/handbook/company/management) — they set context, and our [small teams](/handbook/company/small-teams) decide what to do with it.
+
 <NewsletterForm />
