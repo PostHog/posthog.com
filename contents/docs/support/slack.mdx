@@ -16,7 +16,7 @@ This is separate from PostHog's main Slack integration (used for alerts and dash
 1. Go to **Support > Settings** in PostHog
 2. Click **Add SupportHog to Slack**
 3. Authorize the app in your Slack workspace
-4. Select a **support channel** – messages posted there automatically become tickets
+4. Select one or more **support channels** – messages posted in any of them automatically become tickets
 5. You're redirected back to PostHog settings
 
 <CalloutBox icon="IconInfo" title="One workspace per project" type="fyi">
@@ -29,15 +29,15 @@ Each PostHog project can connect to one Slack workspace. If the workspace is alr
 
 After connecting, configure the integration in **Support > Settings**:
 
-| Setting | Description | Default |
-|---------|-------------|---------|
-| **Support channel** | Every top-level message in this channel becomes a ticket. Thread replies sync as ticket messages. | – |
-| **Ticket emoji** | React with this emoji on any message in any channel to create a ticket from it. | `:ticket:` |
-| **Bot mentions** | Always active – `@SupportHog` in any channel creates a ticket from that message. | – |
+| Setting              | Description                                                                                                                                                                   | Default    |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| **Support channels** | Every top-level message in any of these channels becomes a ticket. Thread replies sync as ticket messages. Make sure the SupportHog bot is invited to every selected channel. | –          |
+| **Ticket emoji**     | React with this emoji on any message in any channel to create a ticket from it.                                                                                               | `:ticket:` |
+| **Bot mentions**     | Always active – `@SupportHog` in any channel creates a ticket from that message.                                                                                              | –          |
 
-### Picking a support channel
+### Picking support channels
 
-When you click the channel selector, PostHog lists all public and private channels the SupportHog bot has access to. Select the channel you want to use as your dedicated support inbox.
+When you click the channel selector, PostHog lists all public and private channels the SupportHog bot has access to. Select the channels you want to use as your dedicated support inboxes. You can add up to 50 channels.
 
 ## How tickets are created
 
@@ -45,7 +45,7 @@ There are three ways a Slack message becomes a support ticket:
 
 ### 1. Support channel messages
 
-Any top-level message in your configured support channel automatically creates a new ticket. Thread replies on that message sync as ticket messages.
+Any top-level message in any of your configured support channels automatically creates a new ticket. Thread replies on that message sync as ticket messages.
 
 ### 2. Bot mentions
 
@@ -67,7 +67,7 @@ All three methods:
 
 ### Slack to PostHog
 
-- New messages in the support channel create tickets
+- New messages in any configured support channel create tickets
 - Thread replies sync as ticket messages
 - Images from Slack are downloaded and stored in PostHog
 
