@@ -32,17 +32,17 @@ The MCP server provides these tools for running SQL:
 
 The MCP server also provides tools for managing [Data Warehouse views](/docs/data-warehouse/views):
 
-| Tool                 | Description                                                                                                |
-| -------------------- | ---------------------------------------------------------------------------------------------------------- |
-| `view-list`          | List all saved views in your project with their materialization status, sync frequency, and column schema. |
-| `view-get`           | Get full details of a specific view by ID, including its HogQL query and run history.                      |
-| `view-create`        | Create a new view from a HogQL query. Upserts by name if a view with the same name exists.                 |
-| `view-update`        | Update a view's name, HogQL query, or sync frequency.                                                      |
-| `view-delete`        | Delete a view (soft delete).                                                                               |
-| `view-materialize`   | Enable materialization for a view with a 24-hour refresh schedule.                                         |
-| `view-unmaterialize` | Revert a materialized view back to a virtual query.                                                        |
-| `view-run`           | Trigger a manual refresh of a materialized view.                                                           |
-| `view-run-history`   | Get the last 5 materialization run statuses for a view.                                                    |
+| Tool                 | Description                                                                                                              |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `view-list`          | List all saved views in your project with their materialization status, sync frequency, column schema, and descriptions. |
+| `view-get`           | Get full details of a specific view by ID, including its HogQL query, run history, and descriptions.                     |
+| `view-create`        | Create a new view from a HogQL query with an optional description. Upserts by name if a view with the same name exists.  |
+| `view-update`        | Update a view's name, HogQL query, sync frequency, or description.                                                       |
+| `view-delete`        | Delete a view (soft delete).                                                                                             |
+| `view-materialize`   | Enable materialization for a view with a 24-hour refresh schedule.                                                       |
+| `view-unmaterialize` | Revert a materialized view back to a virtual query.                                                                      |
+| `view-run`           | Trigger a manual refresh of a materialized view.                                                                         |
+| `view-run-history`   | Get the last 5 materialization run statuses for a view.                                                                  |
 
 ## Source management tools
 
@@ -110,6 +110,7 @@ For view management:
 - `Materialize my 'revenue_summary' view for faster queries.`
 - `Trigger a refresh of my 'user_metrics' materialized view.`
 - `Show me the run history for my 'sales_data' view.`
+- `Set the description for my 'daily_active_users' view to explain what it calculates.`
 
 For source management:
 
