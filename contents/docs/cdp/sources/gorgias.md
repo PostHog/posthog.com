@@ -9,7 +9,7 @@ availability:
 sourceId: Gorgias
 ---
 
-<CalloutBox icon="IconInfo" title="Alpha release" type="fyi">
+<CalloutBox icon="IconFlask" title="Alpha release" type="action">
 
 This source is currently in **alpha**. The interface and available tables may change.
 
@@ -55,3 +55,7 @@ All Gorgias tables are full refresh only. Gorgias list endpoints have no server-
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

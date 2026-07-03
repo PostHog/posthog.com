@@ -368,6 +368,7 @@ MDX
 MLOps
 \.NET
 Next\.js
+nextjs
 Node\.js
 npm
 Nuxt
@@ -439,3 +440,9 @@ MCPcat
 [Nn]ullish
 [Ss]anitization
 [Ss]anitize[ds]?
+[Aa]llowlist
+[Pp]ageleave
+[Pp]roxied
+[Uu]nproxied
+[Uu]ndercount(s|ed|ing)?
+[Rr]esync(s|ed|ing)?

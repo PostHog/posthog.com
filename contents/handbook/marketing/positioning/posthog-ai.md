@@ -4,8 +4,6 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> **Owner:** Cleo Lant
-
 ## Elevator pitch
 
 PostHog AI understands your full data model — event taxonomy, user properties, cohorts, flags, experiments, warehouse sources. Ask it a question in plain English. It writes the query, runs it, and explains the result. No prompt engineering. No schema briefing. No waiting for a data team ticket to be picked up. It will also speak like a pirate to you on International Speak Like A Pirate Day. 

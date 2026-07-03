@@ -23,6 +23,10 @@ The Typeform connector can link data from your Typeform account into PostHog.
 
 <SourceParameters />
 
+## Supported tables
+
+<SourceTables />
+
 ## Available datasets and endpoints
 
 The Typeform source currently supports syncing the following datasets and API endpoints:

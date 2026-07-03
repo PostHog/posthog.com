@@ -11,7 +11,7 @@ sourceId: Braintree
 
 The Braintree connector syncs your payment data into PostHog, including transactions, refunds, and disputes.
 
-<CalloutBox icon="IconInfo" title="Alpha release" type="fyi">
+<CalloutBox icon="IconFlask" title="Alpha release" type="action">
 
 The Braintree source is currently in alpha. Customer, plan, and subscription data isn't available yet — these live in Braintree's legacy SDK API and are planned as a follow-up.
 
@@ -48,6 +48,10 @@ Once the sync completes, you can start querying your Braintree data in PostHog.
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />
 
 ## Sync details
 
