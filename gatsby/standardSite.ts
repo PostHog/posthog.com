@@ -202,7 +202,8 @@ const POSTS_QUERY = `
     query {
         allMdx(
             filter: {
-                fields: { slug: { regex: "/^/blog//" }, isFuture: { eq: false } }
+                fields: { slug: { regex: "/^/blog//" } }
+                isFuture: { eq: false }
                 frontmatter: { date: { ne: null } }
             }
         ) {
