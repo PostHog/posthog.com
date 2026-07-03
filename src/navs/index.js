@@ -2634,6 +2634,10 @@ export const docsMenu = {
                             url: '/docs/libraries/google-tag-manager',
                         },
                         {
+                            name: 'Grafana',
+                            url: '/docs/libraries/grafana',
+                        },
+                        {
                             name: 'MoEngage',
                             url: '/docs/libraries/moengage',
                         },

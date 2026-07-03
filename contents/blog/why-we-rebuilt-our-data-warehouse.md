@@ -1,5 +1,5 @@
 ---
-title: Why we rebuilt on data warehouse on DuckDB over ClickHouse
+title: Why we rebuilt our data warehouse on DuckDB over ClickHouse
 date: 2026-06-29
 rootPage: /blog
 sidebar: Blog

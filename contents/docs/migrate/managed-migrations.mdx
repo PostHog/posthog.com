@@ -187,6 +187,8 @@ If an unexpected error occurs during a migration, the job will be paused and the
 
 If the error indicates your job is attempting to import too much data (for example, exceeding export size limits), consider switching to an [S3 import](#s3-imports), which is better suited for large migrations.
 
+A job can also pause if a single part of your import is too large to process at once — for direct imports this is one date range, and for S3 imports it is one file. When this happens, the pause message will say the part is too large. To fix it, split the import into smaller date ranges (direct imports) or smaller files (S3 imports) and run them as separate jobs. Because [managed migrations do not deduplicate events](#limitations), only re-run the date ranges or files that haven't already been imported.
+
 ## Event transformations
 
 When you use direct imports, PostHog transforms events from your source (Amplitude or Mixpanel) into PostHog’s schema. Below is an overview of what changes.
