@@ -6,7 +6,7 @@ showTitle: true
 
 A beginner's guide to some of our custom Slack emojis and various anecdotes you'll see and hear about.
 
-* A PostHog employee is officially known as a **hedgelord**. Collectively, a group of them – or the company as a whole – is an **array**, which is fitting given that a group of hedgehogs is technically called an array (and it's also how you store a bunch of things in code). This was settled by emoji consensus in a suitably chaotic Slack thread, after strong showings from "hogginhos" and "employees".
+* A PostHog employee is officially known as a **hedgelord**. Collectively, a group of them (or the company as a whole) is an **array**, which is fitting given that a group of hedgehogs is technically called an array (and it's also how you store a bunch of things in code). This was settled by emoji consensus in a suitably chaotic Slack thread, after strong showings from "hogginhos" and "employees".
 
 * <Emoji name="bad-internet" src="/images/emojis/bad-internet.png" /> Yakko always had bad internet when demoing. <em>Always.</em>
 
