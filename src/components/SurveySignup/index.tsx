@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Input from 'components/OSForm/input'
 import OSButton from 'components/OSButton'
 import Link from 'components/Link'
@@ -55,6 +55,18 @@ export function SurveySignup({
     const [submitted, setSubmitted] = useState(false)
     const [error, setError] = useState('')
 
+    // Remember sign-ups locally so returning visitors see their "on the list" state
+    // instead of being asked again. Best-effort — localStorage can be unavailable.
+    useEffect(() => {
+        try {
+            if (surveyId && window.localStorage?.getItem(`ph-waitlist-${surveyId}`)) {
+                setSubmitted(true)
+            }
+        } catch {
+            // Ignore storage access errors (private mode, blocked storage)
+        }
+    }, [surveyId])
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
         setError('')
@@ -68,6 +80,11 @@ export function SurveySignup({
                 props[`$survey_response_${surveyQuestionId}`] = email
             }
             posthog?.capture('survey sent', props)
+            try {
+                window.localStorage?.setItem(`ph-waitlist-${surveyId}`, '1')
+            } catch {
+                // Ignore storage access errors
+            }
         }
         if (confetti) {
             setConfetti(true)
@@ -79,21 +96,28 @@ export function SurveySignup({
     if (submitted) {
         return (
             <div className={`@container ${className}`}>
-                <div className="text-sm mt-0 mb-0 border border-green rounded-md p-3 bg-green/10 flex flex-col gap-1">
-                    <span className="flex items-center gap-1 font-bold">
-                        <IconCheckCircle className="size-4 text-green" /> {successTitle}
-                    </span>
-                    <span>{successMessage ?? `We'll email you the moment ${productName ?? 'it'} is ready.`}</span>
-                    {showDiscord && (
-                        <Link
-                            className="group flex items-center gap-1 text-sm font-medium mt-2"
-                            to="https://discord.com/invite/E9xV2WnR98"
-                            externalNoIcon
-                        >
-                            <IconDiscord className="size-6 text-secondary group-hover:text-primary" />
-                            <span className="group-hover:underline">Join our Discord</span>
-                        </Link>
-                    )}
+                <div className="text-sm mt-0 mb-0 border border-green rounded-md p-3 bg-green/10 flex items-center gap-3">
+                    <div className="flex flex-col gap-1 flex-1">
+                        <span className="flex items-center gap-1 font-bold">
+                            <IconCheckCircle className="size-4 text-green" /> {successTitle}
+                        </span>
+                        <span>{successMessage ?? `We'll email you the moment ${productName ?? 'it'} is ready.`}</span>
+                        {showDiscord && (
+                            <Link
+                                className="group flex items-center gap-1 text-sm font-medium mt-2"
+                                to="https://discord.com/invite/E9xV2WnR98"
+                                externalNoIcon
+                            >
+                                <IconDiscord className="size-6 text-secondary group-hover:text-primary" />
+                                <span className="group-hover:underline">Join our Discord</span>
+                            </Link>
+                        )}
+                    </div>
+                    <img
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/hoggie_mail_48daf2f4b4.png"
+                        alt="A hedgehog holding a letter"
+                        className="max-h-14 shrink-0"
+                    />
                 </div>
             </div>
         )
