@@ -28,24 +28,17 @@ If you're shipping AI features, you're probably familiar with the pain of debugg
 
 ### 1. We connect model performance to user behavior
 
-Most [AI observability tools](/blog/best-ai-observability-tools) stop at the trace. You can see that a model call was slow or that a generation scored poorly on your eval pipeline, but you're left wondering whether any of that actually mattered to a real person on the other end of the screen.
+PostHog connects your [traces](/docs/ai-observability/traces) to the rest of the picture. Every span links to a user with their full usage and business context, so you can tell whether a bad generation hit a churning free-trial user or your biggest enterprise account. You can also jump straight from a trace into [session replay](/session-replay) to watch what the user actually experienced. 
 
-PostHog connects your [traces](/docs/ai-observability/traces) to the rest of the picture. Every span links to a user with their full usage and business context, so you can tell whether a bad generation hit a churning free-trial user or your biggest enterprise account. 
+When your assistant's response quality dips, you can check whether that tracks with a drop in retention or if users even noticed the regression.
 
-When your assistant's response quality dips, you can check whether that tracks with a drop in retention or if users even noticed the regression. You can also jump straight from a trace into [session replay](/session-replay) to watch what the user actually experienced. Standalone AI observability tools can't do this because they don't have the session data to inform that analysis.
-
-> *"I use PostHog primarily for product analytics and also for AI analytics and session recordings. I find it pretty easy to use and set up, and I appreciate that it's an all-in-one solution. The UX/UI is simple to understand, and whenever I'm stuck, its AI is very good at getting me back on track. I like that it provides a single UI for many analytics-related tools. I've used it for product analytics, AI analytics, and session recordings, but it can also handle web analytics, revenue analytics, heatmaps, and more. It serves as a data warehouse, providing a single point of access to all my data."*
-- Daniel A., [G2 user](https://www.g2.com/products/posthog/reviews/posthog-review-12089725)
 
 ### 2. We let you A/B test prompts and AI features on real users
 
-Langfuse has a prompt playground where you can compare outputs side-by-side. That works well during development, but once your feature is in production serving real users, you need to know whether switching models or rewriting a prompt actually moved the needle on conversion or retention.
+Although both have prompt playgrounds, PostHog goes further with [prompt experiments (beta)](/docs/prompt-management/prompt-experiments) let you pit two or more versions of a prompt against each other. It splits users between them [via a feature flag](/docs/feature-flags) and reports cost, latency, eval pass rate, and usage analytics per variant, with a confidence interval against the control.
 
-PostHog enables you to do exactly that. [Prompt experiments (beta)](/docs/prompt-management/prompt-experiments) let you pit two or more versions of a prompt against each other – PostHog splits users between them, routes each to the right version [via a feature flag](/docs/feature-flags), and reports cost, latency, and eval pass rate per variant, with a confidence interval against the control. So you can validate a wording tweak or a new system message before rolling it out.
+And because [experiments](/experiments) aren't limited to prompts, you can take it further: route a percentage of users to a new model or retrieval strategy, then measure the impact on real product goals using PostHog's [Bayesian](/docs/experiments/statistics-bayesian) and [Frequentist](/docs/experiments/statistics-frequentist) stats engines.
 
-And because [experiments](/experiments) aren't limited to prompts, you can take it further: route a percentage of users to a new model or retrieval strategy [with a feature flag](/feature-flags), then measure the impact on real product goals using PostHog's [Bayesian](/docs/experiments/statistics-bayesian) and [Frequentist](/docs/experiments/statistics-frequentist) stats engines.
-
-Even though eval scores are useful, they can't tell you whether users stuck around, and that's where the money is.
 
 ### 3. We make your product self-driving
 
