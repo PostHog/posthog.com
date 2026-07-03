@@ -16,7 +16,7 @@ export default function EmbeddedSurvey({ surveyId, host = 'https://us.posthog.co
         iframe.id = `posthog-survey-${surveyId}`
         iframe.width = '100%'
         iframe.frameBorder = '0'
-        iframe.style.cssText = 'border: none; border-radius: 12px; max-width: 720px;'
+        iframe.style.cssText = 'border: none; max-width: 720px;'
 
         let url = `${host}/external_surveys/${surveyId}?embed=true`
         const distinctId = (window as any).posthog?.get_distinct_id?.()
