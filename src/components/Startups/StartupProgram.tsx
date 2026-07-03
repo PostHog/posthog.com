@@ -525,14 +525,14 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                                     <Logo noText className="h-8 relative -top-px" fill="white" />
                                     {partnerConfig.title}
                                 </div>
-                            ) : null}
-                            {/* Real, crawlable H1 – the hedgehog mark is decorative; the text is what search engines read. */}
-                            <h1 className="flex items-center gap-2.5 mb-0 text-2xl @md:text-3xl">
-                                <Logo noText className="h-8 relative -top-px" fill="white" />
-                                <span>
-                                    PostHog <span className="text-yellow">for startups</span>
-                                </span>
-                            </h1>
+                            ) : (
+                                <h1 className="flex items-center gap-2.5 mb-0 text-2xl @md:text-3xl">
+                                    <Logo noText className="h-8 relative -top-px" fill="white" />
+                                    <span>
+                                        PostHog <span className="text-yellow">for startups</span>
+                                    </span>
+                                </h1>
+                            )}
                             <p className="text-white mt-2 mb-3 max-w-xl">
                                 Get {creditValue} in credits to build a{' '}
                                 <Link
