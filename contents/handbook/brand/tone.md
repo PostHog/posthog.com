@@ -103,4 +103,4 @@ On that last one: PostHog makes _your_ product self-driving. Keep the customer's
 | We have a million products and never talk about most of them, so here's a full list | PostHog has more than two dozen varied products for your needs. They are: |
 | Introducing PostHog Code, the product editor that:<br>• Understands your product<br>• Identifies usage patterns<br>• Triages bugs and errors for you<br>• Creates PRs to fix them<br>• Continuously monitors and improves your product | Introducing PostHog Code, the product editor that: understands your product, identifies usage patterns, triages bugs and errors for you, creates PRs to fix them, and continuously monitors and improves your product. |
 | Fable 5's in PostHog Code (again) | We're proud to announce that Fable 5 is now available in PostHog Code. Happy coding! |
-| (reply) this is incredible | (reply) Nice work! We love it! |
+| (reply) this is incredible | (reply) Nice work! We love it! 😁|
