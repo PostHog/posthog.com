@@ -696,12 +696,15 @@ export default function SlackAppPage(): JSX.Element {
             <ReaderView leftSidebar={<LeftSidebarContent />} title="posthog-slack-app.md" hideTitle={true}>
                 <div className="max-w-2xl mx-auto">
                     <div className="text-center mb-4">
+                        <div className="not-prose mb-3">
+                            <Badge>Beta</Badge>
+                        </div>
                         <h1 className="text-3xl @md/reader-content-container:text-4xl font-bold m-0 mb-2">
                             Don't @ <em>me,</em> <Highlight>@PostHog</Highlight>
                         </h1>
                         <p className="text-secondary text-base @md/reader-content-container:text-lg max-w-lg mx-auto m-0">
                             PostHog now lives in Slack. Ask about your product data, debug issues, and generate PRs
-                            without leaving the thread.
+                            without leaving the thread. It's in beta, so expect rough edges as we improve it.
                         </p>
                     </div>
 
