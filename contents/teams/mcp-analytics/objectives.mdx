@@ -4,15 +4,14 @@ MCP analytics is greenfield. This quarter is about making onboarding magical, la
 
 ### Self-driving (top priority)
 
-**Motivation:** We don't want to be the bottleneck for improving MCP servers. Instead of shipping every fix by hand, we push signals to agents so they can improve themselves.
+**Motivation:** We don't want to be the bottleneck for improving MCP servers. Instead of fixing everything by hand, we want the system to catch problems and fix itself, with us stepping in only when it matters.
 
-* Error-driven loop: a failing tool call creates a signal that auto-generates a PR. Simple changes merge on their own, complex ones go to human review
-* Agent feedback loop: `feedback` events from MCP clients create signals that feed the same pipeline, turning what agents tell us into real fixes
-* Cluster each user's tool calls by session to figure out what they're actually trying to do, since one task usually chains several tools together. Use the proper `$session_id` where we have it, and fall back to a simple time gap (say, an hour between calls) as a stopgap until then
-* Standardize the SDK by moving the internal MCP server's custom events onto the standard `@posthog/mcp` SDK
-* Set up a safe release process and test self-driving as a 24-hour experiment against a baseline
+* When a tool call fails, it opens a PR automatically. Small fixes merge on their own, bigger ones get a human review
+* When an agent leaves feedback, it feeds into the same flow, so what agents tell us turns into real fixes
+* Group each user's tool calls by session to see what they're actually trying to do, since one task usually spans several tools. Use `$session_id` when it's there, and fall back to a simple time gap between calls until it is
+* Try the whole thing fully self-driving on our own MCP server first: let it ship improvements end to end with no human in the loop, and see how that compares to how we work today
 
-**We'll know it worked when** a failing tool call can turn into a fix on its own, with a release process we trust deciding what actually ships.
+**We'll know it worked when** a failing tool call can fix itself, and we trust the process enough to let it ship on its own.
 
 ### Magical onboarding
 
