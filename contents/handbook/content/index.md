@@ -80,13 +80,11 @@ Follow our [SEO best practices guide](/handbook/content/seo-guide) for more on s
 
 ### 2. LinkedIn
 
-Share a post using either your own account or the company account, but note that the company account will have dramatically less reach than your personal one. To post using the company account, use [Buffer](https://buffer.com/) (ask <TeamMember name="Andy Vandervell" /> to add you to it if you don't have access).
+Share a post using either your own account or the company account, but note that the company account will have dramatically less reach than your personal one. If you feel something needs to go out on the company account, (tag <TeamMember name="Liam Graham" />) in `#team-editorial`.
 
 See our [LinkedIn posting advice](/handbook/content/linkedin) for more.
 
 ### 3. Twitter / X
-
-Again, use Buffer to post from the company account.
 
 Tips for writing a good post:
 
