@@ -6,7 +6,7 @@ showTitle: true
 
 Yes, I realize LinkedIn has a bad reputation, but it’s a popular channel with our ICP, important for recruiting, and our posts often do well there. We're posting more there, so here's what we've learned about doing it well so far.
 
-## Advice on LinkedInposting
+## Advice on LinkedIn posting
 
 - The hook is everything. Get people to click “show more.” What works:
   - **Money** - “We spend $X and here are the best things we learned”

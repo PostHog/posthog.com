@@ -22,7 +22,7 @@ Make it easy for your reader to implement their feature or solve their issue, wh
 
 If you're explaining something, don't wait three paragraphs to do so. Start with the explanation and expand later. Almost all articles can be improved by shortening (or removing) the intro.
 
-Don't be boring.
+Don't be boring. Ever.
 
 ### Make it easy to read
 
