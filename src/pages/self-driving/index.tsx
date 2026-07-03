@@ -676,9 +676,6 @@ export default function SelfDrivingPage(): JSX.Element {
                     <div className="not-prose mb-6 @3xl:mb-10 pt-1 @md/reader-content:pt-2 @lg/reader-content:pt-4 @4xl:pb-6 relative border-b border-primary shadow-xl -mx-4 @md/reader-content:-mx-6 @xl/reader-content:-mx-8 px-4 @md/reader-content:px-6 @xl/reader-content:px-8">
                         <div className="grid @3xl:grid-cols-5 gap-4 @3xl:gap-8 max-w-7xl mx-auto">
                             <div className="@3xl:col-span-2">
-                                <p className="not-prose mb-2">
-                                    <Badge>Beta</Badge>
-                                </p>
                                 <h1 className="@md/reader-content:text-3xl @xl/reader-content:text-4xl mb-2 @3xl:mb-4">
                                     Shift your product into <Highlight>self-driving</Highlight> mode
                                 </h1>
