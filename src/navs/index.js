@@ -2168,6 +2168,10 @@ export const docsMenu = {
                     name: 'Overview',
                     url: '/docs/self-driving',
                     icon: 'IconHome',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'Get started',
@@ -6964,6 +6968,10 @@ export const docsMenu = {
                     url: '/docs/slack',
                     icon: 'IconHome',
                     color: 'seagreen',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'Setup',
