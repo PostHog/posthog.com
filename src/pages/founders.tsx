@@ -6,8 +6,9 @@ import usePostHog from 'hooks/usePostHog'
 import { RenderInClient } from 'components/RenderInClient'
 import SidebarExplorer from 'components/BlogLanding/variants/SidebarExplorer'
 
-// Multivariate flag driving the founders-hub redesign A/B test.
-// control = existing icon-grid Hub, test = new SidebarExplorer landing.
+// Boolean kill-switch flag for the founders-hub redesign. Rolled out to 100% — everyone gets the
+// new SidebarExplorer layout. Disable the flag in PostHog to instantly revert everyone to the
+// old icon-grid Hub (no deploy needed).
 export const FOUNDERS_REDESIGN_FLAG = 'founders-hub-redesign'
 
 export const Sidebar = () => {
@@ -50,6 +51,7 @@ export const foundersIntro = (
 )
 
 const ControlHub = () => <Hub title="Founder's hub" folder="founders" sidebar={<Sidebar />} />
+const RedesignedHub = () => <SidebarExplorer folder="founders" title="Founder's hub" intro={foundersIntro} />
 
 export default function Founders() {
     const posthog = usePostHog()
@@ -57,14 +59,16 @@ export default function Founders() {
     return (
         <>
             <SEO title="Founder's hub - PostHog" />
+            {/*
+              Kill switch: show the new layout by default (it's the 100% experience) and only fall
+              back to the old Hub when the flag is explicitly disabled. Rendering the new layout as
+              the placeholder means no flash while flags load, and if PostHog is unreachable users
+              still get the intended new layout.
+            */}
             <RenderInClient
-                placeholder={<ControlHub />}
+                placeholder={<RedesignedHub />}
                 render={() =>
-                    posthog?.getFeatureFlag?.(FOUNDERS_REDESIGN_FLAG) === 'test' ? (
-                        <SidebarExplorer folder="founders" title="Founder's hub" intro={foundersIntro} />
-                    ) : (
-                        <ControlHub />
-                    )
+                    posthog?.isFeatureEnabled?.(FOUNDERS_REDESIGN_FLAG) === false ? <ControlHub /> : <RedesignedHub />
                 }
             />
         </>
