@@ -37,12 +37,14 @@ const fetchAllPosts = async (folder: string): Promise<PostNode[]> => {
         )
     const first = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/posts?${buildQuery(1)}`).then((r) => r.json())
     const pageCount = first?.meta?.pagination?.pageCount || 1
-    const rest = await Promise.all(
+    // allSettled so a single flaky page doesn't drop every post (which would empty the whole nav).
+    const rest = await Promise.allSettled(
         Array.from({ length: Math.max(0, pageCount - 1) }, (_, i) =>
             fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/posts?${buildQuery(i + 2)}`).then((r) => r.json())
         )
     )
-    return [first, ...rest].flatMap((d) => d?.data || [])
+    const restData = rest.flatMap((r) => (r.status === 'fulfilled' ? r.value?.data || [] : []))
+    return [...(first?.data || []), ...restData]
 }
 
 /**

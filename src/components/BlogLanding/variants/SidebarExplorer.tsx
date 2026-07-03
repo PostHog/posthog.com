@@ -61,7 +61,9 @@ export default function SidebarExplorer({ folder, title, intro }: LandingVariant
             <div className="not-prose space-y-8">
                 <FeaturedPost
                     {...hero?.attributes}
-                    isLoading={isLoading}
+                    // Keep the skeleton until a hero exists, so an empty/partial folder never
+                    // renders a broken "Invalid Date" card with an undefined link.
+                    isLoading={isLoading || !hero}
                     containerStack
                     titleClassName="text-xl @2xl:text-2xl"
                 />
