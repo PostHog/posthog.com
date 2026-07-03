@@ -8,6 +8,7 @@
 - **DOMEncoder** - encoder for DOM state.
 - **RRWebEncoder** - encoder for rrweb replay events.
 - **Data prep** - pipelines to turn raw replays into training-ready inputs for the encoders and renderer.
+- **Sampling pipeline** - select and sample which sessions feed training, so the model learns from a representative, high-signal slice of replays.
 - **Full model training** - train the QFormer first (it starts from random weights) to compress per-event replay vectors into a compact representation, and train the language model last to avoid catastrophic forgetting.
 - **Model observability suite** - tooling (e.g. MLflow) to visualize neurons and debug problems during training.
 - **Eval dataset** - a held-out dataset to measure whether the model actually understands replays.
