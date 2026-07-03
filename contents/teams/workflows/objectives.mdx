@@ -1,24 +1,33 @@
-### Q2 2026 Objectives
+### Q3 2026 Objectives
 
-- **Fit into product autonomy** (Champion: Dan)
-  - Solve the blockers for autonomous workflows by ensuring compatibility with LLM agents.
-  - What we’ll ship:
-    - PostHog AI can reliably create and iterate on workflows and email designs via multi-turn agent threads
-    - Integration with PostHog Signals
-    - LLM workflow node with bring-your-own credentials
-- **Workflows engine scaling** (Champion: Myke)
-  - Strengthen our infrastructure so we can maintain high product velocity going forward.
-  - What we’ll ship:
-    - A job queue we feel confident iterating on
-    - Reduced data throughput to support continued scaling
-    - Product guardrails to protect reliability
-    - Dead letter queue and invocation outcomes store
-    - Message sending rate throttling (follow-up to cron/batch workflows)
-- **Messaging feature depth** (Champion: Haven)
-  - Fill the remaining gaps in our messaging capabilities and polish the end-to-end experience.
-  - What we’ll ship:
-    1. Realtime "wait for event" listeners (wait until event performed, exit early on conversion)
-    2. Behavioral cohort triggers (batch workflows for entire cohorts, trigger on membership changes)
-    3. Additional native channels (push notifications, SMTP relay)
-    4. UX improvements for large workflows (goto/early exit nodes, full-screen mode, general papercuts)
-    5. Iteration on table-stakes features (message previewing, email editor)
+- **Become a 2030 Workflows Product** (Champion: Harley)
+  - Motivation: Agents are far better at building context and making modifications than users.
+  - What we'll ship:
+    - Fully AI native & agentic workflow product
+      - Chat interface for rapid iteration
+      - Move to read-only UI for workflows / email templates / messaging
+    - Removal of hefty existing UI if new experience & user testing is superior
+    - Revisions
+    - Reshape APIs to be agentic-friendly for rapid turnaround
+- **Fit into self-driving products** (Champion: Dan)
+  - Motivation: A single person can drive 1000 workflows.
+  - What we'll ship:
+    - Get our data right so 'self-driving' can first suggest changes
+    - Integrate with 'self-driving' to propose the change (using revisions and APIs)
+    - Test revisions of actions against each other for improvements (still human in the loop)
+    - Self-driving applying the outcomes of the A/B tests
+- **Reliability & Trust** (Champion: Myke)
+  - Motivation: Customers trust us fully with their workflows.
+  - What we'll ship:
+    - Harden our systems to never drop data
+    - Finalise the re-run system so we can replay failed invocations
+    - Full visibility into every messaging channel
+- **Nail Messaging** (Champions: Dan & Myke)
+  - Motivation: Feature parity on table-stakes features with our competitors.
+  - What we'll ship:
+    - Behavioural cohorts (no backfilling)
+    - Push notifications
+    - A/B testing
+    - Email events
+    - Messaging metrics
+    - Email with multiple links / more detailed metrics

@@ -303,13 +303,23 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
                 }
             }
 
-            // Prepend MCP link as the first item in 'Utilities, add-ons, & packages'
+            // Prepend MCP as the first item in 'Utilities, add-ons, & packages'
             if (category === 'product_os') {
                 categoryItems.unshift({
                     type: 'item' as const,
                     label: 'MCP',
                     link: '/mcp',
                     icon: React.createElement(Icons.IconPlug, { className: 'size-4 text-gray' }),
+                })
+            }
+
+            // Lead the Automation section with Self-driving
+            if (category === 'automation') {
+                categoryItems.unshift({
+                    type: 'item' as const,
+                    label: 'Self-driving',
+                    link: '/self-driving',
+                    icon: React.createElement(Icons.IconBolt, { className: 'size-4 text-red' }),
                 })
             }
 

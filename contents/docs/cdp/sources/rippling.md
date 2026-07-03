@@ -9,7 +9,7 @@ availability:
 sourceId: Rippling
 ---
 
-<CalloutBox icon="IconInfo" title="Alpha release" type="fyi">
+<CalloutBox icon="IconFlask" title="Alpha release" type="action">
 
 This source is currently in **alpha**. The interface and available tables may change.
 
@@ -68,3 +68,7 @@ Rippling API tokens are scoped per dataset. Your token needs the read permission
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />
