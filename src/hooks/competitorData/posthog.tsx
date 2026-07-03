@@ -584,7 +584,6 @@ ai_observability: {
             cost_by_cohort: true,
         },
     },
-},
         },
         workflows: {
             available: true,
@@ -801,5 +800,6 @@ ai_observability: {
     },
     pricing: {
         model: 'Usage-based',
+    },
     },
 }
