@@ -33,7 +33,6 @@ The three tools layer on top of each other: Zoom hosts the call, Gong records it
 - Metabase [US](https://metabase.prod-us.posthog.dev/) and [EU](https://metabase.prod-eu.posthog.dev/)
 - PostHog [US](https://us.posthog.com/) and [EU](https://eu.posthog.com/) instances. Login to both as this is needed for admin access
   - [PostHog App + Website](https://us.posthog.com/project/2) reference within PostHog US instance
-- [Pylon](https://usepylon.com/) - use Slack SSO
 - [QuoteHog](https://quote.posthog.net/)
 - [Salesforce](https://posthog.lightning.force.com/)
 - [Vitally](https://posthog.vitally-eu.io/) - once you've logged in once with Google ask your Team Lead to upgrade your role to Team Member
