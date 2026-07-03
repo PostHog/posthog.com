@@ -1,45 +1,45 @@
 ## Q3 2026 objectives
 
-MCP analytics is greenfield — this quarter is about making onboarding magical, launching to real customers, and betting on "self-driving" as our top engineering priority. These goals will evolve as we learn from customers.
+MCP analytics is greenfield. This quarter is about making onboarding magical, launching to real customers, and betting on "self-driving" as our top engineering priority. Expect these to change as we learn from customers.
 
 ### Self-driving (top priority)
 
-**Motivation:** We shouldn't be the bottleneck for improving MCP servers. Instead of manually shipping fixes, we push signals to agents so they self-improve — closing the loop from a failing tool call to a merged PR.
+**Motivation:** We don't want to be the bottleneck for improving MCP servers. Instead of manually shipping every fix, we push signals to agents so they improve themselves, closing the loop from a failing tool call to a merged PR.
 
-* Build the feedback loop: a failing tool call creates a signal and auto-generates a PR — simple changes merge automatically, complex ones go to human review
-* Ship intent clustering based on synthetic sessions (group calls within a ~1-hour gap) rather than per-tool, so we infer real user goals instead of over-indexing on generic tools like `execute_sql`
-* Standardize the SDK: migrate the internal MCP server's custom events to out-of-the-box `@posthog/mcp` functionality so feedback events feed the pipeline cleanly
+* Build the feedback loop: a failing tool call creates a signal and auto-generates a PR. Simple changes merge on their own, complex ones go to human review
+* Ship intent clustering based on synthetic sessions (group calls within a ~1 hour gap) instead of per-tool, so we can infer what the user actually wanted rather than over-indexing on generic tools like `execute_sql`
+* Standardize the SDK by migrating the internal MCP server's custom events to out-of-the-box `@posthog/mcp` functionality, so feedback events feed the pipeline cleanly
 * Define a controlled release framework and validate self-driving as a 24-hour experiment against baseline
 
-**We'll know we're successful when:** a failing tool call can result in an auto-merged improvement, gated by a release framework we trust.
+**We'll know it worked when** a failing tool call can turn into an auto-merged improvement, gated by a release framework we trust.
 
 ### Magical onboarding
 
-**Motivation:** Onboarding is our funnel bottleneck (69 started, 12 completed). Getting to value should be as simple as a command, and the drop-offs are a warm outreach list.
+**Motivation:** Onboarding is where we're losing people. 69 started, 12 finished. Getting to value should be as simple as running a command, and every drop-off is a warm lead.
 
-* Make wizard onboarding work magically end-to-end, validated against real-world usage ([wizard stats](https://us.posthog.com/project/2/dashboard/1781611))
-* Contact onboarding drop-offs and signed-up non-activators to diagnose blockers
-* Make the docs great and publish implementation blog posts — this is how we get Claude/Codex to actually use our content
+* Make wizard onboarding work end to end, validated against real usage ([wizard stats](https://us.posthog.com/project/2/dashboard/1781611))
+* Reach out to the drop-offs and the people who signed up but never activated, and figure out what blocked them
+* Make the docs genuinely good and write up what we learn as blog posts. That's how we get Claude and Codex to actually use our content
 
-**We'll know we're successful when:** wizard onboarding completion climbs and new users reach value without hand-holding.
+**We'll know it worked when** wizard completion climbs and new users reach value without us holding their hand.
 
 ### Launch
 
-**Motivation:** "MCP analytics" is a low-competition keyword today — there's an opening to own the agent-analytics space before competitors catch up, but we need real customers and marketing behind us.
+**Motivation:** Almost nobody is competing on "MCP analytics" yet, so there's a window to own agent analytics before that changes. We need real customers and marketing behind us to use it.
 
-* Get product marketing alignment for a launch roughly one month out
-* Land 5-10 close design-partner customers to iterate with
-* Publish blog posts on our learnings (not just docs) to capture SEO/AEO early and get indexed by Claude, ChatGPT, etc.
-* Decide pricing: separate MCP events into their own bucket (not mixed with product analytics), same rate as product analytics events but a distinct, conservative free tier — validate by modeling what PostHog would charge itself
+* Get product marketing on our side for a launch about a month out
+* Land 5 to 10 close customers to build with
+* Publish blog posts on what we learn, not just docs, so we get indexed by Claude, ChatGPT and the rest early
+* Settle pricing: pull MCP events into their own bucket instead of mixing them with product analytics, charge the same rate as product analytics events but with a separate, conservative free tier. Sanity-check it by asking what PostHog would pay if it were the customer
 
-**We'll know we're successful when:** we've launched with marketing support, have a handful of active design partners, and a validated pricing model.
+**We'll know it worked when** we've launched with marketing support, have a handful of active design partners, and a pricing model we believe in.
 
 ### CLI & skills analytics (exploratory)
 
-**Motivation:** Agents don't only act through MCP — CLIs and skills are the next surfaces. We want the same instrumentation surface without building specialized SDKs for each.
+**Motivation:** Agents don't only act through MCP. CLIs and skills are next, and we'd rather reuse what we have than build a new SDK for each surface.
 
-* CLI analytics: wrap existing CLIs with the MCP analytics SDK (Python/Go/Rust are already covered) and ship a wizard, so tool calls show up as MCP events — no separate CLI SDK
-* Skills analytics: exploratory — it depends on LLM-side hooks we don't have yet. Reach out to Anthropic (and OpenAI) about capturing skill-level data; we can likely build one for PostHog Code first
-* Treat as exploratory and start once core MCP work is stable
+* CLI analytics: wrap existing CLIs with the MCP analytics SDK (Python, Go and Rust are already covered) and ship a wizard, so tool calls just show up as MCP events. No separate CLI SDK
+* Skills analytics: this one's harder and depends on LLM-side hooks we don't have yet. Talk to Anthropic and OpenAI about capturing skill-level data. We can probably build one for PostHog Code first
+* Keep it exploratory and pick it up once the core MCP work has settled
 
-**We'll know we're successful when:** CLI tool calls can be captured via the existing SDK, and we have a clear read on whether skills analytics is feasible.
+**We'll know it worked when** CLI tool calls show up through the existing SDK, and we know whether skills analytics is actually feasible.
