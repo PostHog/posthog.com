@@ -688,6 +688,7 @@ ai_observability: {
                 no_separate_ingestion: true,
             },
         },
+    },
     platform: {
         deployment: {
             eu_hosting: true,
@@ -801,5 +802,4 @@ ai_observability: {
     pricing: {
         model: 'Usage-based',
     },
-    },
-}
+    }
