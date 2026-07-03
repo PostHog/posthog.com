@@ -2,7 +2,7 @@
 title: Rate limiting
 ---
 
-import { CalloutBox } from 'components/Docs/CalloutBox'
+import { CalloutBox } from "components/Docs/CalloutBox";
 
 Rate limits cap how many exception events PostHog ingests, so a single noisy client or runaway issue can't blow through your quota – or your bill. Exceptions received above the configured rate are dropped at ingestion, before they're [stored or billed](/docs/error-tracking/pricing).
 
@@ -19,33 +19,47 @@ There are two types of rate limit. They're applied independently, and you can us
 This limit applies across your entire project, regardless of which issue an exception belongs to. It acts as a single safety cap on total exception volume.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_06_07_T14_08_44_937_Z_c8badbee44.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_06_07_T14_04_59_591_Z_1f50e085fa.png"
-    alt="Project-wide rate limit settings"
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_06_07_T14_08_44_937_Z_c8badbee44.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_06_07_T14_04_59_591_Z_1f50e085fa.png"
+  alt="Project-wide rate limit settings"
+  classes="rounded"
 />
 
 ### Per-issue rate limit
 
-You set a single limit, and PostHog automatically applies it to every issue individually – each issue gets its own bucket. Once an issue exceeds the configured rate, further exceptions for *that issue* are dropped, while exceptions from your other issues keep flowing. Use this to stop a single noisy issue from drowning out everything else.
+You set a single limit, and PostHog automatically applies it to every issue individually – each issue gets its own bucket. Once an issue exceeds the configured rate, further exceptions for _that issue_ are dropped, while exceptions from your other issues keep flowing. Use this to stop a single noisy issue from drowning out everything else.
 
 When configuring a per-issue limit, you can pick an issue from your most active issues to preview its recent exception volume against the limit, so you can choose a threshold before saving.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_06_07_T14_09_34_375_Z_d89669f2f6.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_06_07_T14_10_04_339_Z_652b6381b6.png"
-    alt="Per-issue rate limit settings"
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_06_07_T14_09_34_375_Z_d89669f2f6.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_06_07_T14_10_04_339_Z_652b6381b6.png"
+  alt="Per-issue rate limit settings"
+  classes="rounded"
 />
 
 ## Configuring rate limits
 
 The following options are available for each limit:
 
-| Option | Description |
-| --- | --- |
-| **Maximum exceptions** | The most exceptions to ingest per window. Leave this empty for no limit. |
-| **Per** | The time window the limit applies over – 15 minutes, 30 minutes, or 1 hour. |
+| Option                 | Description                                                                 |
+| ---------------------- | --------------------------------------------------------------------------- |
+| **Maximum exceptions** | The most exceptions to ingest per window. Leave this empty for no limit.    |
+| **Per**                | The time window the limit applies over – 15 minutes, 30 minutes, or 1 hour. |
+
+## Bypass rules
+
+Bypass rules exempt specific exceptions from both the project-wide and per-issue rate limits. Exceptions matching a bypass rule are always ingested, even when rate limits would otherwise drop them. This is useful for critical errors that must never be lost.
+
+<CalloutBox icon="IconWarning" title="Bypass rules affect billing" type="caution">
+
+Since bypassed exceptions are always ingested, broad bypass rules can cause unbounded volume during error spikes. Keep filters scoped to the specific errors that must never be dropped.
+
+</CalloutBox>
+
+Every bypass rule must include at least one filter condition — empty match-all rules are rejected. If you want to disable rate limiting entirely, remove the rate limit instead of creating a catch-all bypass rule.
+
+You can configure bypass rules in the [Error Tracking configuration page](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-rate-limits) or through the [PostHog MCP server](/docs/error-tracking/debug-errors-mcp).
 
 <CalloutBox icon="IconInfo" title="Rate limits vs. client-side controls" type="fyi">
 
