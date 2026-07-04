@@ -80,7 +80,7 @@ Follow our [SEO best practices guide](/handbook/content/seo-guide) for more on s
 
 ### 2. LinkedIn
 
-Share a post using either your own account or the company account, but note that the company account will have dramatically less reach than your personal one. If you feel something needs to go out on the company account, (tag <TeamMember name="Liam Graham" />) in `#team-editorial`.
+Share a post using either your own account or the company account, but note that the company account will have dramatically less reach than your personal one. If you feel something needs to go out on from company account, tag <TeamMember name="Liam Graham" /> in `#team-editorial`.
 
 See our [LinkedIn posting advice](/handbook/content/linkedin) for more.
 
