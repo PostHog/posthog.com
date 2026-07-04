@@ -18,7 +18,7 @@ That means:
 - **Honest.** Including about limitations. Developers trust honesty more than polish.
 - **Conversational.** Contractions are fine. Starting a sentence with "But" or "And" is fine.
 - **No jargon for jargon's sake.** Technical precision when it helps. No buzzwords.
-- **No emojis.** Emojis can make a brand seem try-hard and cringe. Avoid them.
+- **No emojis.** Emojis come off as try-hard and cringe. Avoid them, and prioritize using plain English.
 
 If there's an industry-standard phrase, question if it's actually the best way to describe something – or if somebody came up with it once and then everyone else followed suit. Maybe it makes sense to stick with it, but we also have the unique opportunity to coin a new term if the juice is worth the squeeze.
 
