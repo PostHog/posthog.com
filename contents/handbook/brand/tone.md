@@ -98,9 +98,33 @@ On that last one: PostHog makes _your_ product self-driving. Keep the customer's
 
 ### Social Media  
 
-| ✅ Do | ❌ Don't |
-| --- | --- |
-| We have a million products and never talk about most of them, so here's a full list | PostHog has more than two dozen varied products for your needs. They are: |
-| Introducing PostHog Code, the product editor that:<br/>• Understands your product<br/>• Identifies usage patterns<br/>• Triages bugs and errors for you<br/>• Creates PRs to fix them<br/>• Continuously monitors and improves your product | Introducing PostHog Code, the product editor that: understands your product, identifies usage patterns, triages bugs and errors for you, creates PRs to fix them, and continuously monitors and improves your product. |
-| Fable 5's in PostHog Code (again) | We're proud to announce that Fable 5 is now available in PostHog Code. Happy coding! |
-| (reply) this is incredible | (reply) Nice work! We love it! 😁|
+<table>
+  <colgroup>
+    <col style={{ width: '50%' }} />
+    <col style={{ width: '50%' }} />
+  </colgroup>
+  <thead>
+    <tr>
+      <th>✅ Do</th>
+      <th>❌ Don't</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>"We have a million products and never talk about most of them, so here's a full list"</td>
+      <td>"PostHog has more than two dozen varied products for your needs. They are:"</td>
+    </tr>
+    <tr>
+      <td>"Introducing PostHog Code, the product editor that:<br/>• Understands your product<br/>• Identifies usage patterns<br/>• Triages bugs and errors for you<br/>• Creates PRs to fix them<br/>• Continuously monitors and improves your product"</td>
+      <td>"PostHog Code is the product editor that understands your product, identifies usage patterns, triages bugs and errors for you, creates PRs to fix them, and continuously monitors and improves your product."</td>
+    </tr>
+    <tr>
+      <td>"Fable 5's in PostHog Code (again)"</td>
+      <td>"We're proud to announce that Fable 5 is now available in PostHog Code. Happy coding!"</td>
+    </tr>
+    <tr>
+      <td>(reply) "this is incredible"</td>
+      <td>(reply) "Nice work! We love it!" 😁</td>
+    </tr>
+  </tbody>
+</table>
