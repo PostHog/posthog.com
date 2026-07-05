@@ -1,5 +1,14 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import React, { createContext, useContext, useEffect, useMemo, useState, useCallback, useRef } from 'react'
+import React, {
+    createContext,
+    useContext,
+    useEffect,
+    useLayoutEffect,
+    useMemo,
+    useState,
+    useCallback,
+    useRef,
+} from 'react'
 import { AppWindow } from './Window'
 import { WindowSearchUI } from 'components/SearchUI'
 import { navigate } from 'gatsby'
@@ -1407,18 +1416,31 @@ export interface SiteSettings {
 
 const isLabel = (item: any) => !item?.url && item?.name
 
+// The defaults the server renders with (no `window`, so no localStorage). The server always
+// emits `<body className="light" data-wallpaper="keyboard-garden">` and this settings shape, so
+// the first client render must reproduce these exact values to match the SSR HTML during
+// hydration. See `activeSiteSettings` below.
+const SSR_DEFAULT_SITE_SETTINGS: SiteSettings = {
+    experience: 'posthog',
+    colorMode: 'light',
+    theme: 'light',
+    skinMode: 'modern',
+    cursor: 'default',
+    wallpaper: 'keyboard-garden',
+    clickBehavior: 'double',
+    performanceBoost: false,
+    screensaverDisabled: true,
+}
+
+// useLayoutEffect warns during SSR; fall back to useEffect on the server where it's a no-op anyway.
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
+
 const getInitialSiteSettings = (isMobile: boolean, compact: boolean) => {
     const lastReset = typeof window !== 'undefined' ? localStorage.getItem('lastReset') : null
     const siteSettings = {
-        experience: 'posthog',
+        ...SSR_DEFAULT_SITE_SETTINGS,
         colorMode: (typeof window !== 'undefined' && (window as any).__theme) || 'light',
         theme: (typeof window !== 'undefined' && (window as any).__theme) || 'light',
-        skinMode: 'modern',
-        cursor: 'default',
-        wallpaper: 'keyboard-garden',
-        clickBehavior: 'double',
-        performanceBoost: false,
-        screensaverDisabled: true,
         ...(typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('siteSettings') || '{}') : {}),
         ...(!lastReset ? { experience: 'posthog' } : {}),
     }
@@ -1441,7 +1463,19 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const taskbarRef = useRef<HTMLDivElement>(null)
     const [isMobile, setIsMobile] = useState(!isSSR && window.innerWidth < 768)
     const [siteSettings, setSiteSettings] = useState<SiteSettings>(getInitialSiteSettings(isMobile, compact))
-    const websiteMode = siteSettings.experience === 'boring'
+    // The first client render must match the server HTML, which is always rendered with the
+    // defaults (no localStorage). Personalized settings (dark theme, "boring" experience, classic
+    // skin, a non-default wallpaper) only get exposed to consumers after hydration — otherwise the
+    // divergent first render triggers a React #418 hydration mismatch. The internal `siteSettings`
+    // state keeps the real values so the body-attribute and persistence effects below stay correct
+    // (theme-init.js has already applied theme/skin/wallpaper to <body>, so this swap is invisible
+    // for CSS-driven personalization and only re-renders the settings-dependent React subtrees).
+    const [hasHydrated, setHasHydrated] = useState(false)
+    useIsomorphicLayoutEffect(() => {
+        setHasHydrated(true)
+    }, [])
+    const activeSiteSettings = hasHydrated ? siteSettings : SSR_DEFAULT_SITE_SETTINGS
+    const websiteMode = activeSiteSettings.experience === 'boring'
     const [taskbarHeight, setTaskbarHeight] = useState(38)
     const [lastClickedElementRect, setLastClickedElementRect] = useState<{ x: number; y: number } | null>(null)
     const [desktopCopied, setDesktopCopied] = useState(false)
@@ -2621,7 +2655,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 openSignIn,
                 openRegister,
                 openForgotPassword,
-                siteSettings,
+                siteSettings: activeSiteSettings,
                 updateSiteSettings,
                 openNewChat,
                 isNotificationsPanelOpen,
