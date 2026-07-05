@@ -1987,7 +1987,8 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         const lastClickedElementRect = getLastClickedElementRect()
 
         const isWindowed =
-            element.props.location.state?.windowed || (element.props.location.pathname === '/' && !introSeen())
+            element.props.location.state?.windowed ||
+            (element.props.location.pathname === '/' && !introSeen() && (isSSR || window.innerWidth >= 768))
         const shouldExpand =
             element.props.location.state?.expanded ??
             (!keyToUse?.startsWith('ask-max') &&
