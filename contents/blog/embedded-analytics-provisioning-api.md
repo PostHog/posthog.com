@@ -57,6 +57,8 @@ const challenge = base64url(sha256(verifier))
 
 ## Creating an account the farmer never sees
 
+With HogFarm registered, the first call creates the farmer's PostHog account. I request the account on their behalf and PostHog provisions it in the background.
+
 ```ts
 await fetch(`${HOST}/api/agentic/provisioning/account_requests`, {
   method: "POST",
@@ -82,7 +84,7 @@ There are a few cases to handle for this response:
 
 ## Getting the farmer's project key
 
-I swap the code for tokens:
+The account exists but it's empty. Two calls fix that: first I trade the code for an access token, replaying the PKCE verifier to prove it's me, then I use that token to provision the project. That second call hands back the `phc_` key that goes into the farm site and starts the data flowing. First, the token swap:
 
 ```ts
 await fetch(`${HOST}/api/agentic/oauth/token`, {
