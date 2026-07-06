@@ -245,6 +245,34 @@ The difference comes down to depth versus breadth. While Langfuse goes deeper on
 </details>
 
 <details>
+<summary>How do PostHog events compare to Langfuse units?</summary>
+
+They're the same idea with different names: one billed record per captured thing.
+
+**Langfuse bills per unit**, where units = traces + observations + scores. A trace is the top-level container for one request (one chatbot turn, one agent run). An observation is every step inside it: each LLM call, each retrieval or function step, each event. A score is any evaluation attached to a trace or observation – LLM-as-a-judge results, human annotations, experiment scores – and these count even when created by Langfuse's own features. A trace with 3 LLM calls and 2 retrieval steps is 6 units before you've run a single eval.
+
+**PostHog bills per event**, and every captured item is a separate event: `$ai_generation` for each LLM call, `$ai_span` for each step, `$ai_trace` for the trace itself, `$ai_embedding` for vectorization calls, and one AI Observability event per [evaluation run](/docs/ai-evals).
+
+|  | Langfuse unit | PostHog event |
+| --- | --- | --- |
+| **Trace container** | Billed (1 unit) | Billed (`$ai_trace`)* |
+| **Each LLM call** | Billed (observation) | Billed (`$ai_generation`) |
+| **Each span/step** | Billed (observation) | Billed (`$ai_span`) |
+| **Embedding call** | Billed (observation) | Billed (`$ai_embedding`) |
+| **Each evaluation run** | Billed (score) | Billed (one AI event per run) |
+| **Free tier** | 50K units/month | 100K events/month |
+
+<small>*PostHog auto-reconstructs traces from child events; `$ai_trace` is only billed if you explicitly emit it.</small>
+
+Bottom line: both platforms count nearly identically – trace, plus every step inside it, plus every eval you run on it – so for the same app with the same instrumentation, you land at roughly the same billable volume. 
+
+The differences are the free allocation (100K events vs 50K units) and the fact that PostHog has no seat limits at any tier, while Langfuse's free tier caps at two users. 
+
+For the other pricing alternatives, see our guide to the [cheapest AI observability tools](/blog/cheapest-ai-observability-tools).
+
+</details>
+
+<details>
 <summary>Is PostHog or Langfuse better for LLM observability specifically?</summary>
 
 Depends on what you mean by "better." For trace visualization, evaluation pipelines, annotation queues, and prompt playground testing, **Langfuse** is more mature. That has been its sole focus since its launch.
@@ -300,9 +328,11 @@ You can find a few more in our [guide on LLM observability tools](/blog/best-ope
 <details>
 <summary>Which is better for evals and testing LLM quality?</summary>
 
-**Langfuse** is more mature for evaluating and testing LLM quality if you mean pre-deployment quality checks. It has LLM-as-a-judge scoring, custom code evaluators, human annotation queues, curated datasets, and experiment runs across those datasets. 
+It depends on where in the lifecycle you're testing.
 
-If you mean post-deployment impact testing, PostHog is the better option. **PostHog** runs statistical A/B tests on live users to measure whether a change to your AI feature moved real product metrics, such as conversion or retention.
+For pre-deployment quality checks, **Langfuse** is more mature. It has LLM-as-a-judge scoring, custom code evaluators, human annotation queues, curated datasets, and experiment runs across those datasets. **PostHog** also supports [evals](/docs/ai-evals) – including LLM-as-a-judge scoring on your production generations – but doesn't yet match Langfuse's dataset curation and experiment tooling.
+
+For post-deployment impact testing, **PostHog** is the better option. It runs statistical [A/B tests](/experiments) on live users to measure whether a change to your AI feature moved real product metrics like conversion or retention – something Langfuse doesn't do at all. The combination matters: evals tell you the output was good, experiments tell you it made the product better.
 
 </details>
 
@@ -316,13 +346,25 @@ If you mean post-deployment impact testing, PostHog is the better option. **Post
 
 </details>
 
-
 <details>
 <summary>How does pricing compare at scale?</summary>
 
-PostHog's pricing is usage-based with no seat limits. You pay for what you use across each product, starting from generous free tiers. The AI observability product is free for up to 100,000 events each month. Your 50th team member costs the same as your second team member. That said, Langfuse's pricing is tiered, with plans ranging from free (50,000 units, 2 users) to $2,499/month for enterprise, with overages billed on top.
+Neither product bills by traces – PostHog bills per event, Langfuse per unit, and one request produces several of either (see the events vs units question above). Using a ratio derived from the example in Langfuse's docs (~7 units per trace, or ~6 events per trace for PostHog, since the trace container isn't billed by default), here's roughly what monthly volumes cost. 
 
-At scale, the final bill will depend on your observation volume and team size. If you have a large team, PostHog's unlimited seats can save you money. If you have a small team but a very high trace volume, compare the per-event costs for [PostHog](/pricing) and Langfuse.
+| Traces/month | PostHog (~6x events) | Langfuse Core (~7x units) | Langfuse Pro (~7x units) |
+| --- | --- | --- | --- |
+| 100K | ~$30 | ~$77 | ~$247 |
+| 500K | ~$174 | ~$276 | ~$446 |
+| 1M | ~$354 | ~$521 | ~$691 |
+| 5M | ~$1,794 | ~$2,356 | ~$2,526 |
+
+PostHog comes out cheaper at every volume, but the reason shifts as you scale. At entry volume it's the per-record rate ($6 vs $8 per 100K); at high volume Langfuse's graduated tiers converge toward PostHog's rate, and the durable difference becomes the base fee – PostHog doesn't have one. 
+
+Your real bill depends heavily on instrumentation depth: a simple chatbot logging one call per request shrinks every column, while a multi-step agent emitting 15–20 records per request grows them.
+
+On team size: neither platform charges per seat. Langfuse's free tier caps at 2 users, but its paid plans include unlimited users at a flat base fee, and PostHog has no seat limits on any tier. 
+
+Pricing current as of July 2026 – check [PostHog](/pricing) and [Langfuse](https://langfuse.com/pricing) for live rates, or see our [cheapest AI observability tools](/blog/cheapest-ai-observability-tools) guide for other options.
 
 </details>
 
