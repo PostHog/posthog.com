@@ -351,7 +351,6 @@ A few things to keep in mind:
 - **Dismissing counts as answering.** A user who dismisses the survey won't see it again until the next iteration, same as a user who submitted a response.
 - **Iteration boundaries are approximate.** PostHog processes iteration changes a few times per day, so a new iteration can begin a few hours after its scheduled start.
 - **Users must still match your display conditions** each time the survey becomes eligible to show again.
-- **React Native doesn't currently re-show surveys across iterations.** On React Native, once a user has answered or dismissed the survey on a device, it won't show again on that device when a new iteration starts. Web, iOS, Android, and Flutter all support repeating as described above.
 
 If you want per-user spacing instead, like "don't show this user a survey more than once every 30 days, no matter the calendar," use [Every time the display conditions are met](#every-time-the-display-conditions-are-met) combined with the **Wait period** display condition. Note that the wait period applies across all your surveys: it hides the survey from users who have seen _any_ survey within that period, not just this one.
 
