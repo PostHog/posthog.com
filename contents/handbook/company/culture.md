@@ -17,7 +17,7 @@ Being all remote has a bunch of advantages:
 * It creates space for lots of uninterrupted work.
 * We judge performance based on real outcomes, not hours spent in an office.
 
-In addition to all the equipment you'll need, we provide [a budget to help you find coworking space](/handbook/people/spending-money#work-space), or to cover coffee shop expenses. Everyone also has a [$1,500 quarterly travel budget](/handbook/people/spending-money#budget-for-working-togethersocializing) for ad-hoc meetups.
+In addition to all the equipment you'll need, we provide [a budget to help you find coworking space](/handbook/people/spending-money#how-it-works), or to cover coffee shop expenses. There's no fixed travel budget, but you can [use your monthly budget](/handbook/people/spending-money#hub-travel-budget) for ad-hoc meetups.
 
 ## We're extremely welcoming
 
@@ -63,7 +63,7 @@ Default to _not_ asking for permission to do something if you are acting in the 
 
 ## We're on the maker's schedule
 
-We're big believers in the importance of the [maker's schedule](http://www.paulgraham.com/makersschedule.html). If we have meetings at all, we'll cluster them around any stand-ups, so our day doesn't get split up.
+We're big believers in the importance of the [maker's schedule](https://www.paulgraham.com/makersschedule.html). If we have meetings at all, we'll cluster them around any stand-ups, so our day doesn't get split up.
 
 ![Screenshot of an engineer's calendar at PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/a0d634a2_bd3e_4229_ae8f_f98269a6c4f7_2268x1473_06595e2e80.jpg)
 
