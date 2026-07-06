@@ -37,7 +37,7 @@ CSMs are responsible for ensuring that a larger book of existing customers - bot
   - To calculate retention we use the total usage over the past quarter and annualize this, then compare it to the quarter before that.
     - For monthly customers this is the total of their 3 invoices multiplied by 4
     - For annual customers, we look at the usage-based MRR and multiply by 4
-    - For newer customers: If it's a brand new customer with less than 1 quarter of revenue, we start measuring next quarter.
+    - An account starts counting toward NRR once it has 3 paid invoices in the previous quarter (a $0 month doesn't count).
 - Bonuses are paid out quarterly, and in any case after an invoice is paid
   - Bonus payments are made at the end of January, April, July, and October - at the end of each quarter, we'll monitor how many invoices actually get paid in the first two weeks of the next quarter. Fraser will send you an email that breaks down how you did.
 - Your bonus is guaranteed at 100% for your first 3 months at PostHog - this gives you time to get up to speed, but also if you over-perform then you will get your additional bonus.
