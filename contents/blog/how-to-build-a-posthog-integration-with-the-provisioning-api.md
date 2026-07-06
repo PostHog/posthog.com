@@ -14,7 +14,7 @@ tags:
   - Engineering
   - AI
 seo:
-  metaTitle: "How to build a PostHog integration with the provisioning API"
+  metaTitle: "How to set up embedded analytics with the PostHog provisioning API"
   metaDescription: "I built a fake farm-website company on PostHog's provisioning API. Here's how it creates accounts for its users and reads their analytics back, with the gotchas I hit."
 ---
 
@@ -55,7 +55,7 @@ const verifier = base64url(randomBytes(32))
 const challenge = base64url(sha256(verifier))
 ```
 
-## Creating the account
+## Creating an account the farmer never sees
 
 ```ts
 await fetch(`${HOST}/api/agentic/provisioning/account_requests`, {
@@ -80,7 +80,7 @@ There are a few cases to handle for this response:
 - **An email that's already a PostHog user** comes back as `{ type: "requires_auth", requires_auth: { url } }`. They have to consent in the browser first, so I send them to `url` and PostHog redirects back to my `redirect_uri` with a code.
 - **The very first call from a new CIMD client** comes back as a `202` with `{ type: "registering" }`. PostHog fetches the metadata document in the background, so I wait the `retry_after` seconds and call again. This happens once per deployment, and it caught me off guard the first time (see below).
 
-## Getting the project key
+## Getting the farmer's project key
 
 I swap the code for tokens:
 
@@ -114,7 +114,7 @@ The response carries `complete.access_configuration.api_key` (the `phc_` token) 
 
 ![The generated farm site, with the PostHog snippet already wired in](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/generated_farm_site_af6902b4a8.png)
 
-## Reading the data back
+## Reading the data back to the farmer
 
 Now for the fun part, giving farmers access to useful info about their users. The dashboard reads through [Endpoints](/docs/endpoints): named saved queries you publish once and call by name, versioned and rate-limited as a first-class API. That's the right tool when the same query runs over and over, which is exactly what a dashboard does. At provision time I publish each read once with `endpoint:write`:
 
