@@ -257,7 +257,7 @@ const koTranslations: Record<string, string> = {
     'Pay & perks': '보상과 복지',
     Hiring: '채용',
     Blitzscale: '블리츠스케일',
-    'Docs & Wizard': '문서와 위저드',
+    'Wizard & Docs': '위저드와 문서',
     Engineering: '엔지니어링',
     Graphics: '그래픽',
     Marketing: '마케팅',

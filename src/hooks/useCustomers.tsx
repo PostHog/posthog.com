@@ -489,7 +489,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             light: 'https://res.cloudinary.com/dmukukwp6/image/upload/e_trim,q_auto,f_auto/kilocodelogo_93f0668287.png',
             dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/e_trim,q_auto,f_auto/kilocodelogo_93f0668287.png',
         },
-        height: 8,
+        height: 14,
         quotes: {
             job_rietbergen: {
                 // This is the author handle used in OSQuote

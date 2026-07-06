@@ -660,7 +660,7 @@
         "role": "Technical Account Manager",
         "profile_id": 34069
     },
-  {
+    {
         "handle": "liam-graham",
         "name": "Liam Graham",
         "role": "Hog Poster",
@@ -676,11 +676,27 @@
         "profile_id": 45748
     },
     {
+        "handle": "eric-duong",
+        "name": "Eric Duong",
+        "role": "Software Engineer",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/eric-duong-074420154/",
+        "profile_id": 30209
+    },
+    {
         "handle": "rohit-rajpal",
         "name": "Rohit Rajpal ",
         "role": "Freelance Technical Writer",
         "link_type": "github",
-        "link_url": "https://github.com/rajpalrohit04",
-        "profile_id": 46025
+        "link_url": "https://github.com/ioannisj",
+        "profile_id": 31730
+    },
+    {
+        "handle": "nyior-clement",
+        "name": "Nyior Clement",
+        "role": "Freelance Technical Writer",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/nyior/",
+        "profile_id": 46202
     }
 ]

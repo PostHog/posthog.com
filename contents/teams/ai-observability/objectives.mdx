@@ -1,50 +1,44 @@
-### Q2 2026 objectives
+### Q3 2026 objectives
 
-#### Goal 1: Agent-first AI Observability
+#### Objective 1: Self-driving proactiveness
 
-*Description*: Make AI Observability usable directly from agents and developer workflows, not just through the product UI.
+**Motivation:** AI Observability should not be a place users only visit after something goes wrong. It should proactively detect problems, surface the right signals in Slack and PostHog, and help teams improve their AI products before users complain.
 
-*What we will ship*:
-- **MCP tools and skills** - expose core AI Observability workflows through MCP tools and reusable skills
-- **PostHog AI integration** - bring AI Observability capabilities directly into PostHog AI workflows
+**What we'll ship:**
+- **Daily digest in Slack** - a daily summary of the most important AIO changes, regressions, and failures
+- **Easy anomaly detection alerts in Slack** - a simple way to set up alerts for cost, latency, error, volume, sentiment, and evaluation regressions
+- **More AI Observability signals** - emit useful signals from more places in the product so the Self-Driving inbox has concrete issues to work on
+- **Suggested online evals** - automatically suggest online evaluations when problems are detected
+- **PostHog AI products dogfooding** - use our online evaluations to effectively improve PostHog's AI products
 
-#### Goal 2: Eval experience and reliability
+#### Objective 2: Multimodal + large context ingestion
 
-*Description*: Make evaluations easier to run and give teams clearer visibility into where their AI systems fail.
+**Motivation:** Teams are building AI products that contain images/audio/video/documents messages, as well as large text context. AI Observability needs to capture and display that content.
 
-*What we will ship*:
-- **Trace-level evaluations** - run evaluations directly against traces
-- **Session-level evaluations** - extend evaluations to broader user and agent sessions where it makes sense
-- **Improve observability of failures** - show errors more transparently
+**What we'll ship:**
+- **Multimodal and large context event ingestion** - a way to ingest multimodal and large text content inputs and outputs on AIO events
+- **Multimodal and large context in trace views** - display captured multimodal and large text content in traces
 
-#### Goal 3: Prompt management improvements
+#### Objective 3: UI simplification
 
-*Description*: Make prompts easier to organize, scope, and connect to experimentation.
+**Motivation:** The current navigation and trace experience make basic conversation review harder than it should be.
 
-*What we will ship*:
-- **Prompts and experiments integration** - tighter connections between prompt workflows and experimentation
-- **Prompt tags** - tag prompts and fetch them by tag for better organization
-- **Private project API keys** - switch prompt management from personal API keys to scoped, private project API keys so prompts aren't tied to an individual user's account
+**What we'll ship:**
+- **Simple conversation view** - redesign the single trace view so users can read a conversation without unnecessary metadata, nesting, or visual noise
+- **Trace detail redesign** - keep advanced trace, span, generation, tool, cost, latency, and metadata details available without making them the default reading experience
+- **Navigation simplification** - review whether Traces, Generations, Sessions, Sentiment, and Evals need separate top-level tabs, and merge or rename concepts where that makes the product easier to understand
 
-#### Goal 4: Reliability and performance
+#### Objective 4: Offline evals and datasets
 
-*Description*: Continue improving the speed, resilience, and overall quality of AI Observability, with a particular focus on trace-heavy workflows.
+**Motivation:** Teams need a way to inspect offline evaluation experiments and manage the production examples they use for evaluations.
 
-*What we will ship*:
-- **Trace and platform improvements** - ongoing improvements to the speed, resilience, and overall quality of core AI Observability workflows
+**What we'll ship:**
+- **Offline eval experiment dashboard** - a dashboard to view offline evaluation experiments
+- **Dataset manager** - a focused interface for creating, updating, and organizing datasets from traces and sessions
+- **Programmatic dataset access** - APIs or SDK helpers to fetch and update datasets made from traces and sessions
 
-#### Goal 5: Trace and session UI
+#### What we're not shipping
 
-*Description*: Revamp the single trace and session experience for modern agentic use cases.
-
-*What we will ship*:
-- **Single trace UI refresh** - modernize the trace experience for agent-first workflows
-- **Session UI improvements** - bring the same quality bar to session-level investigation
-- **Custom message parsers** - define parsers for different agent and LLM message structures
-
-#### Goal 6: Cluster migration
-
-*Description*: Finish migrating to the new `ai_events` cluster architecture.
-
-*What we will ship*:
-- **`ai_events` cluster migration** - migrate to new architecture, which is optimized for point lookups of traces
+- Running evals on multimodal content
+- Executing offline evals in our infrastructure
+- An SDK for defining offline evaluators; we want to stay agnostic and let users use any open source evaluation library

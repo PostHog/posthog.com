@@ -71,24 +71,24 @@ export const aiObservabilityFeatures = {
             description: 'Understand complex agent and tool-calling workflows',
         },
         prompt_management: {
-         name: 'Prompt management',
-         description: 'Create, version, and manage prompts',
+            name: 'Prompt management',
+            description: 'Create, version, and manage prompts',
         },
         evaluation_datasets: {
-         name: 'Evaluation datasets',
-         description: 'Create datasets for testing and benchmarking outputs',
+            name: 'Evaluation datasets',
+            description: 'Create datasets for testing and benchmarking outputs',
         },
         human_annotation: {
-        name: 'Human annotation/review',
-        description: 'Review and label model outputs manually',
+            name: 'Human annotation/review',
+            description: 'Review and label model outputs manually',
         },
         session_replay: {
-        name: 'Session replay',
-        description: 'Watch recordings of users interacting with AI features',
+            name: 'Session replay',
+            description: 'Watch recordings of users interacting with AI features',
         },
         product_analytics: {
-        name: 'Product analytics',
-        description: 'Analyze AI interactions alongside retention, funnels, and feature adoption',
-},
+            name: 'Product analytics',
+            description: 'Analyze AI interactions alongside retention, funnels, and feature adoption',
+        },
     },
 }

@@ -551,14 +551,16 @@ Use `<WizardCommand />` to render a copyable install button for the PostHog wiza
 
 <WizardCommand />
 
-The command automatically includes `--region eu` or `--region us` based on the user's feature flags.
+The displayed command is always the clean `npx @posthog/wizard …`; the copied command always pins `-y` and `@latest`. The `--region eu` / `--region us` suffix is added automatically based on the user's feature flags. `<WizardCommand />` is a thin alias for `<PlatformInstall variant="inline" />`.
 
 **Props:**
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `latest` | `boolean` | `true` | Appends `@latest` to the package name |
+| `command` | `string` | `''` | Subcommand appended after `@posthog/wizard` (e.g. `mcp add`) |
+| `selfDriving` | `boolean` | `false` | Shorthand for `command="self-driving"` |
 | `slim` | `boolean` | `false` | Hides the "Learn more" link below the button |
+| `variant` | `'default' \| 'bordered'` | `'default'` | Bordered button style |
 | `className` | `string` | `''` | Additional classes for the button element |
 
 **Slim mode** (button only, no "Learn more" link):
@@ -566,13 +568,6 @@ The command automatically includes `--region eu` or `--region us` based on the u
 <!-- prettier-ignore -->
 ```tsx
 <WizardCommand slim />
-```
-
-**Without `@latest`** (used on the homepage and wizard page):
-
-<!-- prettier-ignore -->
-```tsx
-<WizardCommand latest={false} slim />
 ```
 
 ## Call to action
