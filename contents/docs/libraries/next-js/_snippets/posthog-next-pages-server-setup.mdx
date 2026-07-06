@@ -1,11 +1,11 @@
-Create a shared PostHog module with `createPostHog()`, then use the returned `getServerSidePostHog` inside `getServerSideProps` to capture events and evaluate feature flags for the current user.
+Create a shared PostHog module with `createPostHog()`, then call the returned `getPostHog` with the request context inside `getServerSideProps` to capture events and evaluate feature flags for the current user.
 
 ```ts file=lib/posthog.ts
 import { createPostHog } from '@posthog/next/pages'
 import { getServerSession } from 'next-auth'
 import { authOptions } from './auth'
 
-export const { getServerSidePostHog } = createPostHog({
+export const { getPostHog } = createPostHog({
     // Optional: resolve the current user from your auth session. The GetServerSidePropsContext
     // is passed so you can read the session from the request. When set, server-side events and
     // feature flags are attributed to this user instead of the client-provided identity, which
@@ -17,10 +17,10 @@ export const { getServerSidePostHog } = createPostHog({
 
 ```tsx file=pages/dashboard.tsx
 import type { GetServerSideProps } from 'next'
-import { getServerSidePostHog } from '@/lib/posthog'
+import { getPostHog } from '@/lib/posthog'
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-    const posthog = await getServerSidePostHog(ctx)
+    const posthog = await getPostHog(ctx)
 
     const flags = await posthog.getAllFlags()
     posthog.capture({ event: 'dashboard_viewed' })
@@ -33,7 +33,7 @@ To bootstrap feature flags and eliminate flicker on page load, pass the flag dat
 
 ```tsx file=pages/dashboard.tsx
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-    const posthog = await getServerSidePostHog(ctx)
+    const posthog = await getPostHog(ctx)
     const bootstrap = await posthog.getAllFlagsAndPayloads()
     return { props: { posthogBootstrap: bootstrap } }
 }
