@@ -135,9 +135,14 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false,
     // matches the "From $X" header. Scoped to compute so other products' rate precision is untouched;
     // only pads, never truncates a finer rate.
     const minRateDecimals = isComputeProduct ? 2 : 0
-    const maxRateDecimals = Math.max(
-        minRateDecimals,
-        ...(displayTiers || []).map((tier) => tier.unit_amount_usd.split('.')[1]?.length ?? 0)
+    // Cap compute at 4 dp as float-noise defense (an upstream rate like 0.20000016 must render
+    // $0.20, not all 8 decimals) — same treatment the storage rate gets above.
+    const maxRateDecimals = Math.min(
+        isComputeProduct ? 4 : Number.POSITIVE_INFINITY,
+        Math.max(
+            minRateDecimals,
+            ...(displayTiers || []).map((tier) => tier.unit_amount_usd.split('.')[1]?.length ?? 0)
+        )
     )
 
     return (
@@ -236,7 +241,7 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false,
                                         <>
                                             <strong>${parseFloat(unit_amount_usd).toFixed(maxRateDecimals)}</strong>/
                                             {rateUnit}
-                                            {isComputeProduct && (
+                                            {isComputeProduct && parseFloat(unit_amount_usd) > 0 && (
                                                 <Tooltip
                                                     content={() => {
                                                         // Derive from the live tier rate so a price change can't

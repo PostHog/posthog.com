@@ -1,4 +1,4 @@
-import { IconDatabase } from '@posthog/icons'
+import { IconServer } from '@posthog/icons'
 
 import { COMPUTE_RAM_DIVISOR, HOURS_PER_MONTH } from '../../constants/pricing'
 
@@ -10,13 +10,14 @@ import { COMPUTE_RAM_DIVISOR, HOURS_PER_MONTH } from '../../constants/pricing'
 // calculator can resolve storage's tiers (see useProducts.tsx).
 export const managedDataWarehouse = {
     name: 'Managed data warehouse',
-    Icon: IconDatabase,
+    Icon: IconServer,
     type: 'managed_data_warehouse',
     handle: 'managed_data_warehouse',
     slug: 'managed-data-warehouse',
     color: 'purple',
     colorSecondary: 'lilac',
-    category: 'data',
+    // category: not set on purpose — hides the entry from navigation and /products until a
+    // real product page exists (same convention as realtime_destinations).
     status: 'beta',
     includeAddonRates: true,
     categoryName: 'Managed data warehouse',

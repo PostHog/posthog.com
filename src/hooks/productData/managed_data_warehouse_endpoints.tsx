@@ -1,4 +1,4 @@
-import { IconDatabase } from '@posthog/icons'
+import { IconCode } from '@posthog/icons'
 
 // Standalone pricing entry for Managed Data Warehouse endpoints (its own product card, not
 // grouped under "Managed data warehouse").
@@ -7,13 +7,14 @@ import { IconDatabase } from '@posthog/icons'
 // compute-hours. Pricing joins by `type` from /api/products-v2 at build time.
 export const managedDataWarehouseEndpoints = {
     name: 'Data warehouse endpoints',
-    Icon: IconDatabase,
+    Icon: IconCode,
     type: 'managed_data_warehouse_endpoints',
     handle: 'managed_data_warehouse_endpoints',
     slug: 'managed-data-warehouse-endpoints',
     color: 'purple',
     colorSecondary: 'lilac',
-    category: 'data',
+    // category: not set on purpose — hides the entry from navigation and /products until a
+    // real product page exists (same convention as realtime_destinations).
     status: 'beta',
     slider: {
         marks: [50, 250, 1000, 5000, 20000],

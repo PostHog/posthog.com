@@ -288,8 +288,10 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
 
     const [addonData, setAddonData] = useState(
         () =>
-            activeProduct.addonSliders?.map((addon) => ({
-                volume: addon.volume || 0,
+            activeProduct.addonSliders?.map((addon, index) => ({
+                // Prefer the persisted volume so addon sliders (e.g. storage) survive tab
+                // switches, like the worker configurator's persisted state.
+                volume: activeProduct.addonVolumes?.[index] ?? (addon.volume || 0),
                 cost: 0,
                 costByTier: [],
             })) || []
@@ -342,9 +344,10 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
                 cost: totalCost,
                 volume: mainVolume,
                 costByTier,
+                addonVolumes: addonData.map((addon) => addon.volume),
             })
         }
-    }, [totalCost, mainVolume, mainBillingTiers, activeProduct.handle, setProduct])
+    }, [totalCost, mainVolume, mainBillingTiers, activeProduct.handle, setProduct, addonData])
 
     const handleMainVolumeChange = (volume, cost) => {
         setMainVolume(volume)
