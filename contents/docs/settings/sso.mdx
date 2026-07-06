@@ -161,6 +161,10 @@ PostHog supports multi-tenant SAML, which means you can have multiple SAML authe
 
 > If you are self-hosting, please be sure to [update PostHog](/docs/health-checks/sdk-health) to version 1.35.0+. Before this version, SAML used to work instance-based with environment variables and this behavior is fully deprecated.
 
+### Supported authentication flows
+
+PostHog supports both **SP-initiated** and **IdP-initiated** SAML authentication flows. In an SP-initiated flow, the user starts at PostHog's login page, enters their email, and is redirected to their Identity Provider. In an IdP-initiated flow, the user clicks on PostHog directly from their Identity Provider's app launcher (e.g. the Okta dashboard or Azure AD portal) without visiting PostHog first. PostHog automatically detects IdP-initiated logins and routes users to the correct organization — no additional configuration is required.
+
 ### Warnings
 
 When using SAML to authenticate your users in PostHog there are a few considerations to keep in mind. Please make sure to read them to avoid any security issues.
