@@ -1,24 +1,24 @@
 ---
-title: Data warehouse
+title: Context warehouse
 sidebar: Handbook
 showTitle: true
 ---
 
-> **Owner:** [Lizzie Epton (PMM)](/community/profiles/43387)
+> The context warehouse is the platform everything else in PostHog is built on, not a co-equal tool. It's the data warehouse plus the full context-ingestion pipeline — [data pipelines](/handbook/marketing/positioning/data-pipelines), modelling, and batch exports. Don't call this "the PostHog Data Stack" externally.
 
 ## Elevator pitch
 
-PostHog's data warehouse stores your product events and business data — Stripe, HubSpot, Salesforce, Zendesk, and 40+ more — in one place, queryable together with SQL (and with PostHog AI to help you write it). And because the warehouse is part of PostHog, every piece of data is immediately available to your analytics, experiments, feature flags, and agents.
+The context warehouse brings your product events and business data — Stripe, HubSpot, Salesforce, Zendesk, and 40+ more — into one place, queryable together with SQL (and with PostHog AI to help you write it). Because it's part of PostHog, every piece of data is immediately available to your tools — analytics, experiments, feature flags — and to your agents.
 
-Snowflake stores data. PostHog stores data *and* acts on it.
+Snowflake stores data. The context warehouse stores data *and* acts on it.
 
-## The unique belief (in terms of the data warehouse)
+## The unique belief (in terms of the context warehouse)
 
-PostHog is building the infrastructure for self-driving product development. The [product autonomy loop](/blog/self-driving-product) — signals in, work out, evaluation, repeat — only closes when agents can see the full picture. That means product events *and* business context: revenue, plan tier, support history, CRM data.
+PostHog is building the platform for self-driving product development, and the context warehouse is the layer everything else is built on. The [product autonomy loop](/blog/self-driving-product) — signals in, work out, evaluation, repeat — only closes when agents can see the full picture. That means product events *and* business context: revenue, plan tier, support history, CRM data.
 
-**The data warehouse is where that picture lives.** Every event PostHog captures, every Stripe charge, every HubSpot deal, every Zendesk ticket — it all lands in one place, queryable together. That unified store is what makes PostHog Code meaningful. Agents running the autonomy loop need context. The warehouse is the context layer.
+**The context warehouse is where that picture lives.** Every event PostHog captures, every Stripe charge, every HubSpot deal, every Zendesk ticket — it all lands in one place, queryable together. That unified store is what makes PostHog Code meaningful. Agents running the autonomy loop need context, and the context warehouse is the context layer.
 
-Snowflake, BigQuery, and Databricks are powerful. They're also expensive, complex to operate, and don't connect to your product tools without significant glue, which usually has to be owned by a dedicated data team. PostHog's warehouse is different: it's integrated, not bolted on. Your data never needs to leave the platform that acts on it.
+Snowflake, BigQuery, and Databricks are powerful. They're also expensive, complex to operate, and don't connect to your product tools without significant glue, which usually has to be owned by a dedicated data team. The context warehouse is different: it's integrated, not bolted on. Your data never needs to leave the platform that acts on it.
 
 ## Who this is for
 

@@ -16,6 +16,7 @@ const generateCode = (config: ConfigState): string => {
     if (checkboxes.recordConsoleLogs) configLines.push(`    enable_recording_console_log: true,`)
     if (checkboxes.enableHeatmaps) configLines.push(`    enable_heatmaps: true,`)
     if (!checkboxes.enableSurveys) configLines.push(`    disable_surveys: true,`)
+    if (checkboxes.disableFeatureFlags) configLines.push(`    advanced_disable_feature_flags: true,`)
     if (checkboxes.maskAllText) configLines.push(`    mask_all_text: true,`)
     if (checkboxes.maskAllAttributes) configLines.push(`    mask_all_element_attributes: true,`)
     if (checkboxes.optOutByDefault) configLines.push(`    opt_out_capturing_by_default: true,`)
@@ -90,6 +91,13 @@ export const JSConfigBuilder: React.FC = () => {
                     label: 'Enable surveys',
                     description: 'Load the surveys script to show surveys to users',
                     defaultValue: true,
+                    group: 'advanced',
+                },
+                {
+                    id: 'disableFeatureFlags',
+                    label: 'Disable feature flags',
+                    description: 'Stop requesting and evaluating feature flags (also disables surveys)',
+                    defaultValue: false,
                     group: 'advanced',
                 },
                 {

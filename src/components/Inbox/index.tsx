@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useMemo } from 'react'
+import React, { useEffect, useRef, useState, useMemo, lazy, Suspense } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useQuestions } from 'hooks/useQuestions'
 import HeaderBar from 'components/OSChrome/HeaderBar'
@@ -24,7 +24,6 @@ import { useToast } from '../../context/Toast'
 import { QuestionData, StrapiRecord } from 'lib/strapi'
 import { useUser } from 'hooks/useUser'
 import { navigate } from 'gatsby'
-import Lottie from 'lottie-react'
 import hourglassAnimation from 'images/icons8-hourglass.json'
 import hourglassAnimationWhite from 'images/icons8-hourglass-white.json'
 import { useInView } from 'react-intersection-observer'
@@ -40,6 +39,9 @@ import Link from 'components/Link'
 import { Select } from 'components/RadixUI/Select'
 import SEO from 'components/seo'
 dayjs.extend(relativeTime)
+
+// lottie-react bundles lottie-web (~600 KiB); load it on demand instead of on every page.
+const Lottie = typeof window !== 'undefined' ? lazy(() => import('lottie-react')) : () => null
 
 const Menu = ({ onValueChange }: { onValueChange: (value: string) => void }) => {
     const { user } = useUser()
@@ -522,16 +524,18 @@ export default function Inbox(props) {
                                                 )}
                                                 {isLoading && (
                                                     <div className="flex items-center justify-center py-8 h-full">
-                                                        <Lottie
-                                                            animationData={hourglassAnimation}
-                                                            className="size-6 opacity-75 dark:hidden"
-                                                            title="Loading questions..."
-                                                        />
-                                                        <Lottie
-                                                            animationData={hourglassAnimationWhite}
-                                                            className="size-6 opacity-75 hidden dark:block"
-                                                            title="Loading questions..."
-                                                        />
+                                                        <Suspense fallback={null}>
+                                                            <Lottie
+                                                                animationData={hourglassAnimation}
+                                                                className="size-6 opacity-75 dark:hidden"
+                                                                title="Loading questions..."
+                                                            />
+                                                            <Lottie
+                                                                animationData={hourglassAnimationWhite}
+                                                                className="size-6 opacity-75 hidden dark:block"
+                                                                title="Loading questions..."
+                                                            />
+                                                        </Suspense>
                                                     </div>
                                                 )}
                                             </div>

@@ -1,23 +1,56 @@
+### Q3 2026 Objectives
+
+**Objective 1: 3 product experiences live inside PostHog Code (PHC)** (Adam, Raquel)
+
+Motivation: Prove the AI-first, PHC-native UI works across products with different UI needs — so we don't recreate the same sprawling, confusing UI that PostHog web has.
+
+What we'll ship:
+- 3 product experiences inside PHC, each with the right amount of UI for its needs (Adam, Raquel)
+    - Flags — minimal UI
+    - Support — more UI needed
+    - AIO — files / tasks / inbox items pane when clicking channel name; pinning; "view more" in channel list
+- Nav and structure for each
+- Visualizations for each
+- Session replay: link out to PH web and track who does that
+
+**Objective 2: Platform UX owns new UI approval** (OWNER TBD)
+
+Motivation: Stop PostHog code from drifting back into extensive, confusing UI. Temporary, non-posthoggy guardrail.
+
+What we'll ship:
+- Doc / process: any new UI in PostHog code for existing products (anything outside Signals) goes through Platform UX for "approval"
+
+**Objective 3: Track adoption of PHC vs web** (OWNER TBD)
+
+What we'll ship:
+- Any link leaving PH code appends the task ID and tracks that it's coming from PH code
+
+#### Goals (measurable)
+
+- 3 product experiences for different PostHog products live inside PHC (Flags, Support, AIO)
+- 5 external AI-pilled people tell us they prefer using PostHog via PHC over the web app
+- 15 internal people tell us the same
+
 ### Q2 2026 Objectives
 
 1. **Ai first-design**
-    1. AI homepage 
+    1. ✅ AI homepage 
 		1. Extend the chat first home page with useful links
 		2. Release flag to rest of users
 		3. Handle feedback/ iterate until key issues are resolved (spark joy)
 2. Papercuts no one else can do
-    1. Taxonomic filter
-		1. rebuild
+    1. ✅ Taxonomic filter
+		1. ✅ rebuild
 		2. release experiment
 		3. call winner/iterate
-    2. Calendar
+    2. ✅ Calendar
 		1. rebuild
 		2. release experiment
 		3. call winner/iterate
     3. Continue to help with UX related papercuts
 3. **New UI library "Quill"**
-    1. Work on, merge phase ONE and TWO of [RFC](https://github.com/PostHog/requests-for-comments-internal/blob/98f1114527a84e42b116ba1e6e371d882adcd8bf/engineering/2026-04-07-unified-ui-library.md)
+    1. ✅ Work on, merge phase ONE and TWO of [RFC](https://github.com/PostHog/requests-for-comments-internal/blob/98f1114527a84e42b116ba1e6e371d882adcd8bf/engineering/2026-04-07-unified-ui-library.md)
 		1. Colors, Primitives, some useful components
 		2. Storybook with visual regression tracking
 		3. Skills.md "PostHog UI/UX.md" allowing developers to incrementally build with new UI library
-4. Hiring into the team and onboarding that person
+4. Hiring into the team

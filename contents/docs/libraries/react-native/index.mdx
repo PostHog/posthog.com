@@ -50,6 +50,7 @@ You can further customize how PostHog works through its configuration on initial
 | `sendFeatureFlagEvent`<br/><br/>**Type:** Boolean<br/>**Default:** `true`                               | Whether to track that `getFeatureFlag` was called (used by experiments).                                                                                                                                                                                                                                   |
 | `preloadFeatureFlags`<br/><br/>**Type:** Boolean<br/>**Default:** `true`                                | Whether to load feature flags when initialized or not.                                                                                                                                                                                                                                                     |
 | `bootstrap`<br/><br/>**Type:** Object<br/>**Default:** `{}`                                             | An object containing the `distinctId`, `isIdentifiedId`, `featureFlags`, and `featureFlagPayloads` keys. `distinctId` is a string, and `featureFlags` and `featureFlagPayloads` are objects of key-value pairs. Used to ensure data is available as soon as the SDK loads.                                 |
+| `disableRemoteFeatureFlags`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                         | When `true`, the SDK never fetches or evaluates feature flags from PostHog, and `identify()`, `group()`, and `reset()` stop triggering `/flags` requests. Supply flag values yourself via `bootstrap` (at startup) and `updateFlags()` (at runtime). Available in version 4.49.0+.                          |
 | `fetchRetryCount`<br/><br/>**Type:** Number<br/>**Default:** `3`                                        | How many times HTTP requests will be retried.                                                                                                                                                                                                                                                              | 
 | `fetchRetryDelay`<br/><br/>**Type:** Number<br/>**Default:** `3000`                                     | The delay between HTTP request retries.                                                                                                                                                                                                                                                                    |
 | `requestTimeout`<br/><br/>**Type:** Number<br/>**Default:** `10000`                                     | Timeout in milliseconds for any calls.                                                                                                                                                                                                                                                                     |
@@ -63,8 +64,22 @@ You can further customize how PostHog works through its configuration on initial
 | `enableSessionReplay`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                               | Enable Recording of Session replay for Android and iOS.                                                                                                                                                                                                                                                    |
 | `sessionReplayConfig`<br/><br/>**Type:** Object<br/>**Default:** `null`                                 | Session replay configuration. See the [replay install docs](/docs/session-replay/installation) for more details.                                                                                                                                                                                                       |
 | `enablePersistSessionIdAcrossRestart`<br/><br/>**Type:** Boolean<br/>**Default:** `false`               | When true, persists the `$session_id` across app restarts. If false, `$session_id` always resets on app restart.                                                                                                                                                                                           |
-| `evaluationContexts`<br/><br/>**Type:** Array of Strings<br/>**Default:** `undefined`               | Evaluation context tags that constrain which feature flags are evaluated. When set, only flags with matching evaluation context tags (or no evaluation context tags) will be returned. This helps reduce unnecessary flag evaluations and improves performance. See [evaluation contexts documentation](/docs/feature-flags/evaluation-contexts) for more details. Available in version 4.21.0+. The legacy parameter `evaluationEnvironments` (version 4.7.2+) is also supported for backward compatibility. |
+| `evaluationContexts`<br/><br/>**Type:** Array of Strings<br/>**Default:** `undefined`               | Evaluation context tags that constrain which feature flags are evaluated. When set, only flags with matching evaluation context tags (or no evaluation context tags) will be returned. This helps reduce unnecessary flag evaluations and improves performance. See [evaluation contexts documentation](/docs/feature-flags/evaluation-contexts) for more details. Available in version 4.21.0+. The legacy parameter `evaluationEnvironments` (version 4.10.0+) is also supported for backward compatibility. |
+| `addTracingHeaders`<br/><br/>**Type:** Array of Strings<br/>**Default:** `undefined`                 | Hostnames for which PostHog should add tracing headers to outgoing `fetch` requests. Matching requests include `X-POSTHOG-DISTINCT-ID` and `X-POSTHOG-SESSION-ID`, which lets backend events, errors, and LLM traces link back to frontend sessions and replays. Use hostnames only, without the protocol or path. |
 | `before_send`<br/><br/>**Type:** Function<br/>**Default:** `undefined`                              | A callback function that is called before each event is sent to PostHog. You can use it to modify, filter, or suppress events. Return `null` to drop the event, or return the modified event to send it. See [customizing exception capture](#customizing-exception-capture-with-before_send) for details. |
+
+### Tracing headers
+
+Use `addTracingHeaders` to connect React Native network requests to backend events, errors, and LLM traces captured by a server-side PostHog SDK:
+
+```typescript
+const posthog = new PostHog('<ph_project_token>', {
+  host: '<ph_client_api_host>',
+  addTracingHeaders: ['api.example.com'],
+})
+```
+
+Hostnames are matched exactly. The SDK patches global `fetch` and sends `X-POSTHOG-DISTINCT-ID` and `X-POSTHOG-SESSION-ID` on matching requests when those values are available.
 
 ## Capturing events
 
@@ -163,6 +178,8 @@ posthog.capture('some_event', { $set: { userProperty: 'value' } })
 ```js
 posthog.capture('some_event', { $set_once: { userProperty: 'value' } })
 ```
+
+You can also use `setPersonProperties()` and `unsetPersonProperties()` to manage person properties directly. See [person properties](/docs/product-analytics/person-properties) for examples.
 
 ## Super properties
 
@@ -278,6 +295,39 @@ import BootstrappingIntro from "../../feature-flags/snippets/bootstrapping-intro
 
 For details on how to implement bootstrapping, see our [bootstrapping guide](/docs/feature-flags/bootstrapping).
 
+### Supplying flags from your own backend
+
+If you evaluate feature flags outside the SDK – for example on your own server with [`posthog-node` local evaluation](/docs/feature-flags/local-evaluation), then pass the results into your app – you can have the SDK use those values and never fetch flags itself.
+
+Set `disableRemoteFeatureFlags: true` so the SDK never requests `/flags` (including the refetches that `identify()`, `group()`, and `reset()` normally trigger), then push your evaluated flags at runtime with `updateFlags(flags, payloads?, { merge })`:
+
+```react-native
+const posthog = new PostHog('<ph_project_token>', {
+  host: '<ph_client_api_host>',
+  // Don't fetch or evaluate flags on-device – we supply them ourselves.
+  disableRemoteFeatureFlags: true,
+  // Optional: values that must be available at startup, before updateFlags() runs.
+  // Without this, reads return their not-loaded defaults until you push flags.
+  bootstrap: {
+    featureFlags: { 'my-flag': true },
+    featureFlagPayloads: { 'my-flag': { color: 'blue' } },
+  },
+})
+
+// Later – e.g. after login, once your backend has evaluated flags for this user:
+posthog.updateFlags(
+  { 'my-flag': true, 'my-variant-flag': 'test' },
+  { 'my-flag': { color: 'blue' } }
+)
+
+posthog.getFeatureFlag('my-variant-flag') // 'test'
+posthog.getFeatureFlagResult('my-flag')?.payload // { color: 'blue' }
+```
+
+`updateFlags` replaces the stored flags by default; pass `{ merge: true }` to merge into the existing set instead. Values persist across app restarts, and `getFeatureFlag()` / `getFeatureFlagResult()` read them back like any other flag.
+
+Note that `reset()` (called on logout) clears the supplied flags, so re-push them with `updateFlags()` after the next identity change. Use `bootstrap` for any flag values that must be available at startup before `updateFlags()` runs.
+
 ## Experiments (A/B tests)
 
 Since [experiments](/docs/experiments/start-here) use feature flags, the code for running an experiment is very similar to the feature flags code. See [adding experiment code](/docs/experiments/adding-experiment-code) for React Native examples.
@@ -292,7 +342,13 @@ Group analytics allows you to associate the events for that person's session wit
 
 ## Error tracking
 
-To set up error tracking in your project, follow the [React Native installation guide](/docs/error-tracking/installation/react-native).
+To set up error tracking in your project, see the [error tracking docs](/docs/error-tracking).
+
+### Native crash autocapture
+
+The JavaScript-level autocapture only covers exceptions thrown in your JS/TS code. To also capture native iOS and Android crashes – for example, a crash inside a native module or the platform runtime – install the optional `@posthog/react-native-plugin` package and enable `errorTracking.autocapture.nativeCrashes`. Native capture is gated by your project's **Enable exception autocapture** setting, and crash reports need native debug symbols uploaded at build time to produce readable stack traces.
+
+Follow the [React Native installation guide](/docs/error-tracking/installation/react-native) for the full setup, and [native crash symbolication](/docs/error-tracking/upload-source-maps/react-native#native-crash-symbolication) to upload symbols.
 
 ### Error boundaries
 

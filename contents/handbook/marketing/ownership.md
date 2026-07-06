@@ -14,35 +14,20 @@ We generally only have product marketers on teams that _already_ have a product 
 
 | Product | PM | PMM | Blitzscale |
 |---|---|---|---|
-| *Error Tracking* | Cory S | Sara | Paul D'A |
-| *Logs* | Abe | Sara | Ben W |
-| *Workflows* | Abe | Sara | Ben W |
-| *Endpoints* | Anna | Lizzie | Raquel |
-| *Data stack (all teams)* | Anna | Lizzie | Raquel |
-| *PostHog AI* | Annika | Cleo | James H |
+| *Context warehouse* | Anna | Lizzie | Raquel |
 | *PostHog Code* | Annika | Cleo | James H |
-| *Replay* | Cory S | Sara* | Paul D'A |
-| *Surveys* | Cory S | | Surveys |
-| *AI Observability* | Marco (new) | To be hired | James H |
-| *AI Gateway* | Marco (new) | | Ben W |
-| *Product Analytics* | Mike W | To be hired | Paul D'A |
-| *Web Analytics* | Mike W | To be hired | Paul D'A |
-| *Conversations* | | Too early | James H |
-| *Platform features* | | To be hired (sales-focused PMM) | Raquel |
-| *Experiments* | Ruby | | Raquel |
-| *Feature Flags* | Ruby | | Ben W |
-| *MCP* | | Joe** | |
-| *Integrations* | | Joe** | |
+| *PostHog Slack* | Annika | Cleo | James H |
+| *Inbox* | Annika | Sara | James H |
+| *PostHog AI* | Annika | Joe | James H |
+| *MCP* | n/a | Joe | James |
+| *AI Gateway* | Marco | n/a | Ben W |
+| *Agents* | n/a | Danilo | Ben W |
 
-*AI summaries specifically
-**Not a 'product' team at PostHog, but we think they're worth specific marketing focus
-
-Even if a product already has a product manager, a team is only ready for a product marketer when a proper launch needs preparing for, usually beta or GA. Before that, product teams are responsible for launching their own products, but can ask for help with ad hoc things - see below. It is also fine for a product to have a product manager but not product marketer - we generally focus on heavily investing in 2-3 product areas at a time, so we can do a good job at a handful of things, instead of an average job at many. 
 
 <details>
 <summary>I need a product marketer, but my team hasn't been assigned one</summary>
 
-Just ask in #group-marketing-and-content in Slack and tag the team lead. 
+Just ask in #team-marketing in Slack and tag <TeamMember name="Joe Martin" photo />. 
 </details>
 
 
@@ -61,9 +46,9 @@ Speak to <SmallTeam slug="marketing" /> and read about [product launches](/handb
 <details>
 <summary>I need help with documentation</summary>
 
-Your main contact is the <SmallTeam slug="docs-wizard" />, but please read the [docs ownership handbook](/handbook/docs-and-wizard/docs-ownership) to understand how best to work with them. 
+Your main contact is the <SmallTeam slug="wizard-and-docs" />, but please read the [docs ownership handbook](/handbook/wizard-and-docs/docs-ownership) to understand how best to work with them. 
 
-If you just need someone to review something, tag `Team Docs & Wizard` in GitHub.
+If you just need someone to review something, tag `Team Wizard & Docs` in GitHub.
 </details>
 
 <details>
