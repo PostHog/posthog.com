@@ -96,6 +96,20 @@ As with incremental syncing, selecting a nullable field as the cursor skips any 
 
 This reloads the whole table on every sync. This is great for tables with common data deletions or ones without an incrementing field (such as a `updated_at` timestamp).
 
+## Filtering rows
+
+SQL sources (Postgres, MySQL, MSSQL, Snowflake, BigQuery, Redshift) and ClickHouse support row-level filtering, which lets you sync only rows that match specific conditions. This is useful for excluding test data, limiting to specific date ranges, or syncing only active records.
+
+To set up row filters:
+
+1. Go to the [sources tab](https://app.posthog.com/data-management/sources) and click your source.
+2. Click **Configure** next to any schema.
+3. Under **Row filters**, add conditions using column names, operators, and values.
+
+Filters are applied as a `WHERE` clause on the source query, so only matching rows are fetched and synced.
+
+> **Note:** Row filters are only available for SQL sources and ClickHouse. API sources (Stripe, HubSpot, Zendesk, Paddle, etc.) do not support row filtering.
+
 ## Syncing
 
 Once you add a source, you can see its status, sync frequency, and last successful run in the [sources page](https://app.posthog.com/data-management/sources). You can also reload or delete sources here.
