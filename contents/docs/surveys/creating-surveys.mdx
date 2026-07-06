@@ -332,20 +332,20 @@ For example, you can configure settings like:
 
 -   **Repeat this survey `3` times, once every `30` days**: The survey has 3 iterations, each lasting 30 days. A user can respond once per iteration.
 
-**How iterations work:** The repeat interval is anchored to the survey's **start date**, not to when each individual user last responded. When you launch a survey, PostHog divides its lifetime into fixed calendar windows ("iterations") counted from the start date. Every user shares the same window boundaries. Within an iteration, a user who has already responded won't be shown the survey again — but when the next iteration begins, that gate resets for everyone and eligible users can be shown the survey again.
+**How iterations work:** The repeat interval is anchored to the survey's **start date**, not to when each individual user last responded. When you launch a survey, PostHog divides its lifetime into fixed calendar windows ("iterations") counted from the start date. Every user shares the same window boundaries. Within an iteration, a user who has already responded won't be shown the survey again. When the next iteration begins, that gate resets for everyone and eligible users can be shown the survey again.
 
 Using the example above (survey starts Jan 1, repeats every 30 days, 3 times):
 
-| Iteration   | Window        | Behavior                                                                                     |
-| ----------- | ------------- | -------------------------------------------------------------------------------------------- |
-| Iteration 1 | Jan 1–Jan 30  | Survey is shown until the user responds. After responding, they aren't shown it again in this window |
-| Iteration 2 | Jan 31–Mar 1  | The gate resets. Users who haven't yet responded in this window become eligible again        |
-| Iteration 3 | Mar 2–Mar 31  | The gate resets again. This is the final iteration                                            |
-| After Mar 31 | —            | The survey has reached its maximum number of repetitions and is never shown again            |
+| Iteration            | Window          | Behavior                                                                                             |
+| -------------------- | --------------- | --------------------------------------------------------------------------------------------------- |
+| Iteration 1          | Jan 1 – Jan 30  | Survey is shown until the user responds. After responding, they aren't shown it again in this window |
+| Iteration 2          | Jan 31 – Mar 1  | The gate resets. Users who haven't yet responded in this window become eligible again                |
+| Iteration 3          | Mar 2 – Mar 31  | The gate resets again. This is the final iteration                                                   |
+| After final iteration | (survey ended) | The survey has reached its maximum number of repetitions and is never shown again                   |
 
 A survey is considered "shown" when a user either completes or dismisses it, which marks them as having responded for the current iteration.
 
-> **Important tradeoff:** Because iterations are anchored to the survey's start date rather than each user's last response, the actual gap a user experiences between showings can be **shorter than the repeat interval**. If a user first responds late in an iteration's window, the next iteration may open only a few days later. For example, with a 30-day interval and windows of Jan 1–Jan 30 / Jan 31–Mar 1, a user who responds on Jan 29 becomes eligible again on Jan 31 — just 2 days later, not 30. The full interval is only guaranteed for a user who responds right at the start of each window.
+> **Important tradeoff:** Because iterations are anchored to the survey's start date rather than each user's last response, the actual gap a user experiences between showings can be **shorter than the repeat interval**. If a user first responds late in an iteration's window, the next iteration may open only a few days later. For example, with a 30-day interval and windows of Jan 1 – Jan 30 / Jan 31 – Mar 1, a user who responds on Jan 29 becomes eligible again on Jan 31, just 2 days later, not 30. The full interval is only guaranteed for a user who responds right at the start of each window.
 >
 > If you need a strict per-user cooldown (e.g. "never show this user a survey more than once every 30 days regardless of the calendar"), use the **`Wait time`** option under [Every time the display conditions are met](#every-time-the-display-conditions-are-met) instead, which is based on `$survey_last_seen_date` per user.
 
