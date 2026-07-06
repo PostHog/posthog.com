@@ -16,11 +16,20 @@ const INLINE_MARKUP_REGEX = /\s*<([a-z]+).+?>.+?<\/\1>/g
 
 // Remove inline markup and trim, so a heading like `<span>...</span> Feature flags`
 // yields `Feature flags` rather than ` Feature flags` (a leading space would otherwise
-// slug to `-feature-flags`). After removing balanced tag pairs, any stray angle
-// brackets are dropped too so no partial/malformed tag can survive — the result is
-// always safe as plain text (this also feeds github-slugger, which strips the rest).
-const stripHeadingMarkup = (value = '') =>
-    typeof value === 'string' ? value.replace(INLINE_MARKUP_REGEX, '').replace(/[<>]/g, '').trim() : ''
+// slug to `-feature-flags`). The removal is applied to a fixed point (repeat until the
+// string stops changing) so nested or adjacent tags can't leave a partial tag behind.
+const stripHeadingMarkup = (value = '') => {
+    if (typeof value !== 'string') {
+        return ''
+    }
+    let result = value
+    let previous
+    do {
+        previous = result
+        result = result.replace(INLINE_MARKUP_REGEX, '')
+    } while (result !== previous)
+    return result.trim()
+}
 
 // Slugify a heading's text, ignoring any inline markup it contains. Pass an
 // existing GithubSlugger instance to keep per-page de-duplication counters in sync.
