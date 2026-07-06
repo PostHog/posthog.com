@@ -6,6 +6,7 @@ import { PricingTiers } from '../../Plans'
 import { NumericFormat } from 'react-number-format'
 import AutosizeInput from 'react-input-autosize'
 import pluralizeWord from 'pluralize'
+import { COMPUTE_RAM_DIVISOR, HOURS_PER_MONTH } from '../../../../constants/pricing'
 
 const TriggerEventsModal = ({ onClose, isVisible }) => {
     return (
@@ -52,6 +53,7 @@ const SliderRow = ({
     billingTiers,
     freeAllocation,
     freeAllocationText,
+    volumeAnnotation,
 }) => {
     const [currentVolume, setCurrentVolume] = useState(volume)
 
@@ -77,7 +79,7 @@ const SliderRow = ({
             <div className="col-span-6">
                 <p className="mb-2">
                     <NumericFormat
-                        inputClassName="bg-transparent text-center focus:ring-0 focus:border-red dark:focus:border-yellow focus:bg-white dark:focus:bg-accent-dark font-code max-w-[103px] text-sm border border-light hover:border-button dark:border-dark rounded-sm py-1 px-0 min-w-[25px] px-1"
+                        inputClassName={numericInputClassName}
                         value={currentVolume}
                         thousandSeparator=","
                         onValueChange={({ floatValue }) => handleVolumeChange(floatValue)}
@@ -85,6 +87,11 @@ const SliderRow = ({
                     />{' '}
                     <span className="opacity-70 text-sm">{label}s/month</span>
                 </p>
+                {volumeAnnotation && (
+                    <p className="mb-2 -mt-1 text-sm text-primary/60 dark:text-primary-dark/60">
+                        {volumeAnnotation(currentVolume)}
+                    </p>
+                )}
             </div>
             <div className="col-span-2 text-right pr-3">
                 <p className="font-semibold mb-0">{formatUSD(cost)}</p>
@@ -112,6 +119,156 @@ const SliderRow = ({
                                 <em>every month!</em>
                             </>
                         )}
+                    </span>
+                </div>
+            )}
+        </div>
+    )
+}
+
+// Shared styling for the calculator's numeric inputs (slider rows + worker configurator).
+const numericInputClassName =
+    'bg-transparent text-center focus:ring-0 focus:border-red dark:focus:border-yellow focus:bg-white dark:focus:bg-accent-dark font-code max-w-[103px] text-sm border border-light hover:border-button dark:border-dark rounded-sm py-1 px-0 min-w-[25px] px-1'
+
+// Fallbacks if a product config omits fields — one merge, not per-field `??`s scattered below.
+// managed_data_warehouse.tsx's computeConfigurator is the authoritative source for MDW.
+const COMPUTE_CONFIGURATOR_DEFAULTS = {
+    ramDivisor: COMPUTE_RAM_DIVISOR,
+    presets: [] as { vcpu: number; memory: number }[],
+    defaultVcpu: 8,
+    defaultMemory: 16,
+    defaultHours: 100,
+    maxVcpu: 96,
+    maxMemory: 384,
+    hoursMarks: [1, 24, 168, HOURS_PER_MONTH],
+    maxHours: HOURS_PER_MONTH,
+}
+
+// Compute isn't a single slider: cost = the worker you run (vCPU + memory) × how long. This lets you
+// pick/size a worker + hours, derives compute-hours = (vCPU + memory/ramDivisor) × hours, and prices
+// them with the same billing tiers as everything else — so the rate + free tier come from billing.
+const WorkerConfigurator = ({ config: configProp, billingTiers, setVolume, persistedState, onStateChange }) => {
+    const config = { ...COMPUTE_CONFIGURATOR_DEFAULTS, ...configProp }
+    const ramDivisor = config.ramDivisor
+    // Seed from the state persisted on the product: the calculator remounts this component on every
+    // tab switch (TabContent is keyed by product type), and without restoring the inputs the mount
+    // effect below would reset the user's worker back to the defaults.
+    const [vcpu, setVcpu] = useState(persistedState?.vcpu ?? config.defaultVcpu)
+    const [memory, setMemory] = useState(persistedState?.memory ?? config.defaultMemory)
+    const [hours, setHours] = useState(persistedState?.hours ?? config.defaultHours)
+
+    useEffect(() => {
+        onStateChange?.({ vcpu, memory, hours })
+    }, [vcpu, memory, hours])
+
+    // $/compute-hour from the live billing tiers (first paid tier) — single source of truth for the
+    // rate, so the worker $/hr and the cost can't drift from what billing charges.
+    const perUnitRate = useMemo(() => {
+        const paid = (billingTiers || []).find((t) => parseFloat(t.unit_amount_usd) > 0)
+        return paid ? parseFloat(paid.unit_amount_usd) : 0
+    }, [billingTiers])
+    const freeUnits = useMemo(() => {
+        const free = (billingTiers || []).find((t) => parseFloat(t.unit_amount_usd) === 0)
+        return free?.up_to ?? 0
+    }, [billingTiers])
+
+    const computeUnits = (vcpu || 0) + (memory || 0) / ramDivisor // compute-hours per connected hour
+    const workerRatePerHour = computeUnits * perUnitRate
+    const monthlyComputeHours = Math.round(computeUnits * (hours || 0))
+    const cost = billingTiers ? calculatePrice(monthlyComputeHours, billingTiers).total : 0
+
+    useEffect(() => {
+        if (billingTiers) {
+            setVolume(monthlyComputeHours, cost)
+        }
+    }, [monthlyComputeHours, billingTiers])
+
+    const isPreset = (p) => p.vcpu === vcpu && p.memory === memory
+
+    return (
+        <div className="mb-2">
+            <div className="flex flex-wrap gap-2 mb-3">
+                {config.presets?.map((p) => (
+                    <button
+                        key={`${p.vcpu}-${p.memory}`}
+                        onClick={() => {
+                            setVcpu(p.vcpu)
+                            setMemory(p.memory)
+                        }}
+                        className={`text-sm px-3 py-1 rounded-sm border ${
+                            isPreset(p)
+                                ? 'border-red dark:border-yellow bg-red/10 dark:bg-yellow/10 font-semibold'
+                                : 'border-light dark:border-dark hover:border-button'
+                        }`}
+                    >
+                        {p.vcpu} vCPU · {p.memory} GB
+                    </button>
+                ))}
+            </div>
+
+            <div className="grid grid-cols-8 gap-2 items-end mb-1">
+                <div className="col-span-3">
+                    <label className="text-sm opacity-70 block mb-1">vCPU</label>
+                    <NumericFormat
+                        inputClassName={numericInputClassName}
+                        value={vcpu}
+                        allowNegative={false}
+                        thousandSeparator=","
+                        onValueChange={({ floatValue }) => setVcpu(Math.min(config.maxVcpu, floatValue || 0))}
+                        customInput={AutosizeInput}
+                    />
+                </div>
+                <div className="col-span-3">
+                    <label className="text-sm opacity-70 block mb-1">Memory (GB)</label>
+                    <NumericFormat
+                        inputClassName={numericInputClassName}
+                        value={memory}
+                        allowNegative={false}
+                        thousandSeparator=","
+                        onValueChange={({ floatValue }) => setMemory(Math.min(config.maxMemory, floatValue || 0))}
+                        customInput={AutosizeInput}
+                    />
+                </div>
+                <div className="col-span-2 text-right pr-3">
+                    <p className="font-semibold mb-0">{formatUSD(cost)}</p>
+                    <p className="text-xs opacity-60 mb-0">/month</p>
+                </div>
+            </div>
+
+            <p className="mb-3 text-sm text-primary/60 dark:text-primary-dark/60">
+                Worker ≈ <strong>{formatUSD(workerRatePerHour)}/hour</strong> while connected →{' '}
+                {monthlyComputeHours.toLocaleString()} compute-hours/month
+            </p>
+
+            <div className="mb-2">
+                <p className="mb-2">
+                    <NumericFormat
+                        inputClassName={numericInputClassName}
+                        value={hours}
+                        allowNegative={false}
+                        thousandSeparator=","
+                        onValueChange={({ floatValue }) => setHours(Math.min(config.maxHours, floatValue || 0))}
+                        customInput={AutosizeInput}
+                    />{' '}
+                    <span className="opacity-70 text-sm">hours/month connected</span>
+                </p>
+                <div className="pr-1.5">
+                    <LogSlider
+                        stepsInRange={100}
+                        marks={config.hoursMarks}
+                        min={1}
+                        max={config.maxHours}
+                        onChange={(value) => setHours(Math.round(sliderCurve(value)))}
+                        value={inverseCurve(hours)}
+                    />
+                </div>
+            </div>
+
+            {freeUnits > 0 && (
+                <div className="pr-1.5 mt-10 md:mt-8 pb-4 flex gap-1 items-center">
+                    <IconLightBulb className="size-5 inline-block text-[#4f9032] dark:text-green relative -top-px" />
+                    <span className="text-sm text-[#4f9032] dark:text-green font-semibold">
+                        First {Math.round(freeUnits).toLocaleString()} compute-hours free every month.
                     </span>
                 </div>
             )}
@@ -217,17 +374,27 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
                 <h4 className="mb-3 text-base font-semibold">
                     {activeProduct.productVariantName || activeProduct.name}
                 </h4>
-                <SliderRow
-                    label={activeProduct.billingData.unit}
-                    sliderConfig={activeProduct.slider}
-                    volume={mainVolume}
-                    setVolume={handleMainVolumeChange}
-                    unit={activeProduct.billingData.unit}
-                    cost={mainCost}
-                    billingTiers={mainBillingTiers}
-                    freeAllocation={activeProduct.slider.min}
-                    freeAllocationText={activeProduct.freeAllocationText}
-                />
+                {activeProduct.computeConfigurator ? (
+                    <WorkerConfigurator
+                        config={activeProduct.computeConfigurator}
+                        billingTiers={mainBillingTiers}
+                        setVolume={handleMainVolumeChange}
+                        persistedState={activeProduct.configuratorState}
+                        onStateChange={(state) => setProduct(activeProduct.handle, { configuratorState: state })}
+                    />
+                ) : (
+                    <SliderRow
+                        label={activeProduct.billingData.unit}
+                        sliderConfig={activeProduct.slider}
+                        volume={mainVolume}
+                        setVolume={handleMainVolumeChange}
+                        unit={activeProduct.billingData.unit}
+                        cost={mainCost}
+                        billingTiers={mainBillingTiers}
+                        freeAllocation={activeProduct.slider.min}
+                        freeAllocationText={activeProduct.freeAllocationText}
+                    />
+                )}
             </div>
 
             {addonBillingData.map(
@@ -247,6 +414,7 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
                                     addon.freeAllocation !== undefined ? addon.freeAllocation : addon.sliderConfig.min
                                 }
                                 freeAllocationText={addon.freeAllocationText}
+                                volumeAnnotation={addon.volumeAnnotation}
                             />
                         </div>
                     )

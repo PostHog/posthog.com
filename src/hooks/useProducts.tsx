@@ -10,6 +10,8 @@ import { sessionReplay } from './productData/session_replay'
 import { featureFlags } from './productData/feature_flags'
 import { surveys } from './productData/surveys'
 import { dataWarehouse } from './productData/data_warehouse'
+import { managedDataWarehouse } from './productData/managed_data_warehouse'
+import { managedDataWarehouseEndpoints } from './productData/managed_data_warehouse_endpoints'
 import { errorTracking } from './productData/error_tracking'
 import { cdp } from './productData/cdp'
 import { webAnalytics } from './productData/web_analytics'
@@ -28,6 +30,8 @@ const initialProducts = [
     featureFlags,
     surveys,
     dataWarehouse,
+    managedDataWarehouse,
+    managedDataWarehouseEndpoints,
     realtimeDestinations,
     errorTracking,
     cdp,
@@ -54,9 +58,19 @@ export default function useProducts() {
             // the key the billing service uses via `billingType` (e.g. AI Observability
             // is still `llm_analytics` upstream); otherwise the handle is the key.
             const billingType = (product as { billingType?: string }).billingType || product.handle
-            const billingData =
+            let billingData =
                 product.billingData ||
                 billingProducts.find((billingProduct: any) => billingProduct.type === billingType)
+
+            // Managed Data Warehouse is two billing products (compute + storage) but presented as
+            // one. Nest the storage billing product into compute's addons so the calculator's
+            // addon-slider can resolve storage's tiers.
+            if (billingType === 'managed_data_warehouse' && billingData) {
+                const storageBilling = billingProducts.find((bp: any) => bp.type === 'managed_data_warehouse_storage')
+                if (storageBilling) {
+                    billingData = { ...billingData, addons: [...(billingData.addons || []), storageBilling] }
+                }
+            }
             const paidPlan = billingData?.plans.find((plan: any) => plan.tiers)
             const startsAt = paidPlan?.tiers?.find((tier: any) => tier.unit_amount_usd !== '0')?.unit_amount_usd
             const freeLimit = paidPlan?.tiers?.find((tier: any) => tier.unit_amount_usd === '0')?.up_to

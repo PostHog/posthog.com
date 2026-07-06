@@ -67,6 +67,41 @@ export default function FreeTier({ size = 'normal' }: { size?: 'normal' | 'large
                 size={size}
             />
             <FreeTierItem
+                name="Managed data warehouse"
+                allocation="50 compute-hours (worth $10)"
+                icon={<Icons.IconServer className={`text-purple size-5 ${size === 'large' && 'size-7'}`} />}
+                size={size}
+            />
+            <FreeTierItem
+                name="Warehouse storage"
+                allocation={
+                    <>
+                        100 GB{' '}
+                        <Tooltip
+                            content={() => (
+                                <>
+                                    Up to 100 GB of stored data, free. Storage is a held level (billed on what you keep)
+                                    — it carries over and doesn't reset monthly.
+                                </>
+                            )}
+                            placement="top"
+                        >
+                            <Icons.IconInfo
+                                className={`size-3 inline-block relative -top-px ${size === 'large' && 'size-5'}`}
+                            />
+                        </Tooltip>
+                    </>
+                }
+                icon={<Icons.IconHardDrive className={`text-purple size-5 ${size === 'large' && 'size-7'}`} />}
+                size={size}
+            />
+            <FreeTierItem
+                name="Data warehouse endpoints"
+                allocation="50 compute-hours (worth $10)"
+                icon={<Icons.IconCode className={`text-purple size-5 ${size === 'large' && 'size-7'}`} />}
+                size={size}
+            />
+            <FreeTierItem
                 name="Data pipelines"
                 allocation={
                     <>

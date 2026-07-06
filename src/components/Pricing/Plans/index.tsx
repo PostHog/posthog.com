@@ -13,6 +13,7 @@ import Link from 'components/Link'
 import { IconInfo } from '@posthog/icons'
 import { formatUSD } from '../PricingSlider/pricingSliderLogic'
 import pluralizeWord from 'pluralize'
+import { COMPUTE_RAM_DIVISOR, HOURS_PER_MONTH } from '../../../constants/pricing'
 
 // Don't pluralize all-uppercase units like GB, MB, TB
 const pluralizeUnit = (unit: string, count: number): string => {
@@ -104,6 +105,41 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false,
         set_tiers(plans[plans.length - 1]?.tiers)
     }, [plans])
 
+    // Managed data warehouse storage arrives from the API in its real billed unit — GB-hours, with a
+    // per-GB-hour rate. Boundaries/usage stay in GB-hours, but the per-GB-hour $ is tiny, so on the
+    // STATIC table the RATE column shows the readable $/GB-month equivalent (× 744 h/mo) and the free
+    // tier is a level shown as "100 GB". The calculator breakdown (showSubtotal) deliberately keeps
+    // the raw per-GB-hour rate so each row's rate × units = its subtotal reconciles — and the footnote
+    // (rendered in BOTH, keyed on isStorageProduct) ties per-GB-hour back to the $/GB-month table.
+    const isStorageProduct = type === 'managed_data_warehouse_storage'
+    const isStorage = isStorageProduct && !showSubtotal
+    const displayTiers =
+        isStorage && tiers
+            ? tiers.map((tier) => ({
+                  ...tier,
+                  // per-GB-hour rate → readable $/GB-month; round to 4 dp to drop float noise.
+                  unit_amount_usd: (
+                      Math.round(parseFloat(tier.unit_amount_usd) * HOURS_PER_MONTH * 1e4) / 1e4
+                  ).toString(),
+              }))
+            : tiers
+    const rowUnit = unit
+    const rateUnit = isStorage ? 'GB-month' : unit
+    // GB level of the free allocation ($0 tier's GB-hour boundary ÷ 744) for the free-row label.
+    const freeAllocationGb =
+        isStorage && tiers
+            ? Math.round((tiers.find((tier) => parseFloat(tier.unit_amount_usd) === 0)?.up_to ?? 0) / HOURS_PER_MONTH)
+            : null
+    const isComputeProduct = type === 'managed_data_warehouse' || type === 'managed_data_warehouse_endpoints'
+    // MDW compute is a clean per-hour $ (e.g. $0.20), so show ≥2 decimals — it reads like money and
+    // matches the "From $X" header. Scoped to compute so other products' rate precision is untouched;
+    // only pads, never truncates a finer rate.
+    const minRateDecimals = isComputeProduct ? 2 : 0
+    const maxRateDecimals = Math.max(
+        minRateDecimals,
+        ...(displayTiers || []).map((tier) => tier.unit_amount_usd.split('.')[1]?.length ?? 0)
+    )
+
     return (
         <>
             {showSubtotal && (
@@ -114,7 +150,8 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false,
                     <h4 className="m-0 col-span-2 text-base text-right">Subtotal</h4>
                 </Row>
             )}
-            {tiers.map(({ up_to, unit_amount_usd, eventsInThisTier, tierCost }, index) => {
+            {displayTiers.map(({ up_to, unit_amount_usd, eventsInThisTier, tierCost }, index) => {
+                const isFreeStorageTier = isStorage && parseFloat(unit_amount_usd) === 0
                 return compact && parseFloat(unit_amount_usd) <= 0 ? null : (
                     <Row
                         className={`!py-1 ${compact ? '!px-0 !space-x-0' : ''} ${
@@ -125,16 +162,27 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false,
                         <Title
                             className={`${compact ? 'text-sm' : ''} ${showSubtotal ? 'col-span-3' : 'flex-grow'}`}
                             title={
-                                index === 0 && up_to
-                                    ? `First ${formatCompactNumber(up_to)} ${pluralizeUnit(unit, up_to)}`
+                                isFreeStorageTier
+                                    ? `Up to ${formatCompactNumber(freeAllocationGb)} GB`
+                                    : isStorage
+                                    ? // storage: anchor the GB-hours unit on every paid row (the free row
+                                      // above is shown in GB, so ranges can't inherit the unit implicitly)
+                                      up_to
+                                        ? `${formatCompactNumber(displayTiers[index - 1]?.up_to)}–${formatCompactNumber(
+                                              up_to
+                                          )} ${pluralizeUnit(rowUnit, up_to)}`
+                                        : `${formatCompactNumber(displayTiers[index - 1]?.up_to)}+ ${pluralizeUnit(
+                                              rowUnit,
+                                              2
+                                          )}`
+                                    : index === 0 && up_to
+                                    ? `First ${formatCompactNumber(up_to)} ${pluralizeUnit(rowUnit, up_to)}`
                                     : index === 0 && !up_to
-                                    ? `Unlimited ${pluralizeUnit(unit, 2)}`
+                                    ? `Unlimited ${pluralizeUnit(rowUnit, 2)}`
                                     : !up_to
-                                    ? `${formatCompactNumber(plans[plans.length - 1].tiers[index - 1]?.up_to)}+`
+                                    ? `${formatCompactNumber(displayTiers[index - 1]?.up_to)}+`
                                     : `${
-                                          formatCompactNumber(plans[plans.length - 1].tiers[index - 1]?.up_to).split(
-                                              / |k/
-                                          )[0]
+                                          formatCompactNumber(displayTiers[index - 1]?.up_to).split(/ |k/)[0]
                                       }-${formatCompactNumber(up_to)}`
                             }
                         />
@@ -148,7 +196,7 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false,
                             <Title
                                 className={`${compact ? 'text-sm' : ''}`}
                                 title={
-                                    plans[0].free_allocation === up_to ? (
+                                    isFreeStorageTier || plans[0].free_allocation === up_to ? (
                                         <strong>Free</strong>
                                     ) : type === 'product_analytics' && index === tiers.length - 1 ? (
                                         // last row
@@ -186,17 +234,36 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false,
                                         </div>
                                     ) : (
                                         <>
-                                            <strong>
-                                                $
-                                                {parseFloat(unit_amount_usd).toFixed(
-                                                    Math.max(
-                                                        ...plans[plans.length - 1].tiers.map(
-                                                            (tier) => tier.unit_amount_usd.split('.')[1]?.length ?? 0
+                                            <strong>${parseFloat(unit_amount_usd).toFixed(maxRateDecimals)}</strong>/
+                                            {rateUnit}
+                                            {isComputeProduct && (
+                                                <Tooltip
+                                                    content={() => {
+                                                        // Derive from the live tier rate so a price change can't
+                                                        // make the tooltip contradict the cell next to it.
+                                                        const rate = parseFloat(unit_amount_usd)
+                                                        const defaultWorkerUnits = 8 + 16 / COMPUTE_RAM_DIVISOR
+                                                        return (
+                                                            <div>
+                                                                A compute-hour is a normalized usage unit. In worker
+                                                                terms it's{' '}
+                                                                <strong>
+                                                                    ${rate.toFixed(2)}/vCPU-hour + $
+                                                                    {(rate / COMPUTE_RAM_DIVISOR).toFixed(3)}/GB-hour
+                                                                </strong>{' '}
+                                                                — so a default 8 vCPU / 16 GB worker is about{' '}
+                                                                <strong>
+                                                                    ${(rate * defaultWorkerUnits).toFixed(2)}/hour
+                                                                </strong>{' '}
+                                                                while connected.
+                                                            </div>
                                                         )
-                                                    )
-                                                )}
-                                            </strong>
-                                            /{unit}
+                                                    }}
+                                                    contentContainerClassName="max-w-xs"
+                                                >
+                                                    <IconInfo className="w-3 h-3 ml-1 opacity-50 inline-block relative -top-px" />
+                                                </Tooltip>
+                                            )}
                                         </>
                                     )
                                 }
@@ -227,6 +294,19 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false,
                     </Row>
                 )
             })}
+            {isStorageProduct && !compact && (
+                <Row className="!py-1">
+                    <p className="m-0 text-sm opacity-70">
+                        Storage is billed per GB-hour. {HOURS_PER_MONTH} GB-hours ≈ 1 GB held for a full month
+                        {freeAllocationGb
+                            ? `, so the ${formatCompactNumber(freeAllocationGb)} GB free tier = ${(
+                                  freeAllocationGb * HOURS_PER_MONTH
+                              ).toLocaleString()} GB-hours`
+                            : ''}
+                        .
+                    </p>
+                </Row>
+            )}
         </>
     )
 }
