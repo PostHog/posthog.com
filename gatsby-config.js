@@ -125,6 +125,8 @@ module.exports = {
                     new URL(node.url).hostname === 'raw.githubusercontent.com',
                 extensions: ['.mdx', '.md'],
                 gatsbyRemarkPlugins: [
+                    // Must run before autolink-headers so heading IDs ignore inline markup (icons, labels)
+                    { resolve: require.resolve('./plugins/gatsby-remark-heading-slug') },
                     { resolve: 'gatsby-remark-autolink-headers', options: { icon: false } },
                     {
                         resolve: require.resolve('./plugins/gatsby-remark-video'),

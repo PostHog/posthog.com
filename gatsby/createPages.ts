@@ -6,6 +6,7 @@ import menu from '../src/navs/index'
 import type { GatsbyContentResponse, MetaobjectsCollection } from '../src/templates/merch/types'
 import { flattenMenu, replacePath } from './utils'
 const Slugger = require('github-slugger')
+const { stripHeadingMarkup, slugifyHeading } = require('./utils/headingSlug')
 const markdownLinkExtractor = require('markdown-link-extractor')
 
 const isMinimalBuild = process.env.GATSBY_MINIMAL === 'true'
@@ -621,15 +622,14 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         // need to use slugger for header links to match
         const slugger = new Slugger()
         return headings.map((heading) => {
-            // Strip HTML tags from heading value
-            // Useful if we wanna add a beta label to a header
-            const cleanValue = heading.value.replace(/\s*<([a-z]+).+?>.+?<\/\1>/g, '')
-
+            // Strip inline markup from heading value (icons, beta labels, etc.) so it
+            // doesn't leak into the display text or the anchor URL. Kept in sync with
+            // the heading IDs via the shared helper in ./utils/headingSlug.
             return {
                 ...heading,
                 depth: heading.depth - 2,
-                url: slugger.slug(cleanValue),
-                value: cleanValue,
+                url: slugifyHeading(heading.value, slugger),
+                value: stripHeadingMarkup(heading.value),
             }
         })
     }
@@ -1265,12 +1265,11 @@ async function createMinimalPages({
     function formatToc(headings: Array<{ depth: number; value: string }>) {
         const slugger = new Slugger()
         return headings.map((heading) => {
-            const cleanValue = heading.value.replace(/\s*<([a-z]+).+?>.+?<\/\1>/g, '')
             return {
                 ...heading,
                 depth: heading.depth - 2,
-                url: slugger.slug(cleanValue),
-                value: cleanValue,
+                url: slugifyHeading(heading.value, slugger),
+                value: stripHeadingMarkup(heading.value),
             }
         })
     }
