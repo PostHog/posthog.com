@@ -26,7 +26,7 @@ The code is [on GitHub](https://github.com/Brooker-Fam/hogfarm) and there's a [l
 
 ![The HogFarm builder: a farmer enters their farm name and what they grow](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/builder_landing_8dd50079e6.png)
 
-## Registering your OAuth client via CIMD
+## Registering your OAuth client
 
 To register my OAuth client, I added a small JSON file. The first time I called the API, PostHog fetched the file and registered my OAuth app. It's called a [Client ID Metadata Document](/docs/api/oauth#client-id-metadata-document-cimd), or CIMD.
 
@@ -154,7 +154,7 @@ I didn't have the `refresh` in there at first, and the dashboard froze on an emp
 
 Access tokens last an hour, so for anything long-lived you're storing the refresh token. Encrypt it. I keep them in Postgres with AES-256-GCM and a key that only lives in the environment, never in the database.
 
-## Session replay, mostly for free
+## Kicking off session replays
 
 The farm site loads the PostHog snippet with session recording turned on, but that alone records nothing: a brand-new project is opted out at the project level, and the client-side switch can't override it. So at provision time I flip it on with `project:write`:
 
