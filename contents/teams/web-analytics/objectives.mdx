@@ -3,29 +3,31 @@
 These are the primary goals the team is prioritizing this quarter.
 
 <details>
-<summary>Take Marketing Analytics from beta to GA – <TeamMember name="Javier Bahamondes" photo /></summary>
+<summary>Take Marketing Analytics to GA – <TeamMember name="Javier Bahamondes" photo /></summary>
 
-- Close the gaps blocking GA: reliability, attribution accuracy, and channel coverage
-- Polish onboarding and source setup so marketing teams can self-serve
-- Nail pricing and packaging for GA
-
-</details>
-
-<details>
-<summary>Launch Customer Analytics – <TeamMember name="Arthur Moreira de Deus" photo /></summary>
-
-- Ship a first version with opinionated default views: who your best accounts are and what they do
-- Connect it to the rest of PostHog – one click from a customer view to the underlying events, sessions, and replays
-- Validate with early customers and iterate toward a public beta
+- Rework the product based on last quarter's feedback and PMF investigation, and ship a new onboarding so setup is self-serve
+- Ship organic insights: Google Search Console keywords next to paid channels
+- Keep pushing performance down – the dashboard p95 went from ~23s to ~15s and still has a long way to go
+- Add MCP write tools so AI can propose fixes, source setup, and budget changes instead of only reading
 
 </details>
 
 <details>
-<summary>Ship achievements and a weekly recap – <TeamMember name="Jordan Mryyan" photo /></summary>
+<summary>Replace Vitally with Customer Analytics – <TeamMember name="Arthur Moreira de Deus" photo /></summary>
 
-- Ship achievements for meaningful site milestones (traffic records, conversion streaks, launch spikes)
-- Ship a weekly recap that summarizes what happened, what changed, and what's worth celebrating
-- Make both shareable so wins travel beyond the person watching the dashboard
+- Vitally is only meaningful because we pipe PostHog data into it and sync it back – cut the middleman and build what we're missing
+- Centralize customer communications (email, Slack, meeting notes) and make account modeling flexible with custom properties
+- Enable automations on top of customer accounts via Workflows, plus MCP skills to automate repetitive CS work
+- We're done when CS, onboarding, and sales run 100% on Customer Analytics and we cancel Vitally – October at the latest
+
+</details>
+
+<details>
+<summary>Get heatmaps out of beta and make it earn its keep – <TeamMember name="Jordan Mryyan" photo /></summary>
+
+- Heatmaps is free and barely kept alive today, yet it's one of the things users keep asking for
+- Define pricing and limits (which pages we record, snapshots and comparisons over time as paid features)
+- Work with the demand gen team to make content experiments self-driving with web analytics data
 
 </details>
 
@@ -34,19 +36,34 @@ These are the primary goals the team is prioritizing this quarter.
 
 Web analytics shouldn't wait to be asked – it should watch, explain, and act on its own:
 
-- Insight comes to you: what changed, why, and what to do about it, before anyone opens a dashboard (think subscribable digests, anomaly-driven signals)
-- Move from reporting to acting: PostHog AI suggests the next move, like shifting budget to an outperforming campaign
-- See every visitor, human or not: AEO / agent analytics for the AI crawlers that never run JavaScript (server-side `$http_log` ingestion is the current blocker)
+- Figure out what a self-driving website workflow really looks like – not just "more automations"
+- Make scouts great at web fundamentals (web vitals, bounce rate, UTM tracking) and emit signals that turn into concrete code changes
+- Fully release agent analytics and grow bot analytics toward $50k MRR, including AEO correlations between bot traffic and conversions – capturing non-JS AI crawlers is blocked on server-side `$http_log` ingestion
 
 </details>
 
+<details>
+<summary>Shared: fix the performance embarrassments</summary>
+
+- Release the precomputed improvements (3–30x speedups) to everyone
+- Bring down the Marketing Analytics dashboard p95 and the 3s+ accounts list load
+
+</details>
+
+### Stretch goals
+
+- Make web analytics digest emails traceable (views, CTR) – <TeamMember name="Jordan Mryyan" photo />
+- Add AI-driven insights to the digest – <TeamMember name="Jordan Mryyan" photo />
+
 ## Q2 2026 recap
 
-- Web analytics skills shipped so PostHog AI routes questions to the right insight types
-- Agent/bot analytics segmentation launched across web analytics, product analytics, and SQL
-- Marketing Analytics expanded beyond paid ads with new channels
-- Live view improvements shipped; heatmaps reliability work ongoing
-- Activation investigation kicked off to understand the metric decline
+- Activation: reversed the decline in Web Analytics activation
+- Signals, Skills & MCP: Marketing Analytics AI and MCP integration shipped, but read-only and lightly used so far
+- Agent and bot analytics: building blocks and docs merged, working everywhere HogQL works (12 teams and ~15M events over 21 days organically) – full release pending
+- Marketing Analytics: PMF investigation nearly wrapped, performance improved (p95 ~23s to ~15s), drill-down navigation shipped (channels to sources to campaigns, UTM and ad group breakdowns)
+- Precomputed improvements ready to release to everyone (3–30x speedups)
+- Arthur joined the team to lead the Customer Analytics / Vitally replacement effort
+- Virtual HogQL properties and Google Search Console integration shipped
 
 ## Q1 2026 recap
 
