@@ -49,7 +49,10 @@ CSMs are responsible for ensuring that a larger book of existing customers - bot
   - In general, we compare annualized ARR over the past quarter with annualized ARR from the previous quarter.
     - For Q3 2026 bonus: Q3 ARR vs Q2 ARR
   - For customers on annual plans, we will look at their usage-based spending (instead of total contract amount / 12)
-  - If an account is removed from your book mid-quarter, they will not be included in bonus calculation. We do this extremely rarely, even if a customer shuts down. If we have to give a customer a big refund, we’ll deal with your bonus on a case by case basis depending on what happened, but usually this will still be counted. 
+  - If an account is removed from your book mid-quarter (we do this extremely rarely), it will not be included in bonus calculation.
+  - If a customer churns during the quarter, their current ARR counts as $0 and they will be removed from your book the next quarter.
+  - If a customer drops below the $20k threshold with no likelihood of growing, we don't adjust their ARR - it counts as-is, and they will be removed from your book the next quarter.
+  - If we have to give a customer a big refund, we'll deal with your bonus on a case by case basis depending on what happened, but usually this will still be counted. 
  
 **Account allocation**
 - CSMs manage approximately $2.5M in ARR.
