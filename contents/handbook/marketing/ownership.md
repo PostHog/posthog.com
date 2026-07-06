@@ -15,18 +15,19 @@ We generally only have product marketers on teams that _already_ have a product 
 | Product | PM | PMM | Blitzscale |
 |---|---|---|---|
 | *Context warehouse* | Anna | Lizzie | Raquel |
-| *PostHog AI* | Annika | Joe | James H |
 | *PostHog Code* | Annika | Cleo | James H |
 | *PostHog Slack* | Annika | Cleo | James H |
-| *AI Gateway* | Marco |  | Ben W |
 | *Inbox* | Annika | Sara | James H |
-| *Agents* |  | Joe | Ben W |
-| *MCP* | | Joe | |
+| *PostHog AI* | Annika | Joe | James H |
+| *MCP* | n/a | Joe | James |
+| *AI Gateway* | Marco | n/a | Ben W |
+| *Agents* | n/a | Danilo | Ben W |
+
 
 <details>
 <summary>I need a product marketer, but my team hasn't been assigned one</summary>
 
-Just ask in #group-marketing-and-content in Slack and tag the team lead. 
+Just ask in #team-marketing in Slack and tag <TeamMember name="Joe Martin" photo />. 
 </details>
 
 
