@@ -8,7 +8,7 @@ availability:
   enterprise: full
 ---
 
-import PersonsModelNote from '../_snippets/persons-model-note.mdx'
+import PersonsModelNote from "../_snippets/persons-model-note.mdx";
 
 Batch exports can be used to export data to a BigQuery table.
 
@@ -35,16 +35,18 @@ Regardless of which authentication method you choose, you need a service account
 2. Create one or more roles which have the specific permissions the batch export requires.
 
 At the project level, we require permission to run BigQuery jobs:
-   * `bigquery.jobs.create`
+
+- `bigquery.jobs.create`
 
 And at the dataset level we require permissions to interact with the dataset and its tables:
-   * `bigquery.datasets.get`
-   * `bigquery.tables.create`
-   * `bigquery.tables.get`
-   * `bigquery.tables.getData`
-   * `bigquery.tables.list`
-   * `bigquery.tables.updateData`
-   * (Optional, for mutable models) `bigquery.tables.delete`
+
+- `bigquery.datasets.get`
+- `bigquery.tables.create`
+- `bigquery.tables.get`
+- `bigquery.tables.getData`
+- `bigquery.tables.list`
+- `bigquery.tables.updateData`
+- (Optional, for mutable models) `bigquery.tables.delete`
 
 ![Create custom role for batch exports](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/batch-exports/bigquery/create-role.png)
 
@@ -78,9 +80,9 @@ This is required as we use the service account's description to verify your Post
 
 To do so, use the sidebar to navigate to "IAM" and navigate to "Service Accounts". Select your service account with BigQuery access created in the previous section and click on the "Principals with access" tab. Click on "Grant access". Input PostHog's service account email as the principal:
 
-   ```
-   posthog-batch-exports@posthog-external.iam.gserviceaccount.com
-   ```
+```
+posthog-batch-exports@posthog-external.iam.gserviceaccount.com
+```
 
 And assign the aforementioned roles. This allows PostHog to impersonate your service account and to read your service account's description to verify ownership.
 
@@ -118,7 +120,7 @@ This section describes the models that can be exported to BigQuery.
 This is the default model for BigQuery batch exports. The schema of the model as created in BigQuery is:
 
 | Field                 | Type               | Description                                                               |
-|-----------------------|--------------------|---------------------------------------------------------------------------|
+| --------------------- | ------------------ | ------------------------------------------------------------------------- |
 | uuid                  | `STRING`           | The unique ID of the event within PostHog                                 |
 | event                 | `STRING`           | The name of the event that was sent                                       |
 | properties            | `STRING` or `JSON` | A JSON object with all the properties sent along with an event            |
@@ -159,19 +161,21 @@ OPTIONS(description = 'PostHog events table')
 >
 > The `PARTITION BY DATE(timestamp)` clause matches what PostHog creates automatically; if you need a different partition column or want to configure clustering, adjust the query accordingly.
 
+> **Note:** PostHog creates all columns as nullable. If you create your own table with `REQUIRED` (NOT NULL) fields, the batch export will fail if any exported row contains a NULL value for that field. See [the FAQ](#what-happens-if-i-create-my-own-table-with-required-fields) for more details.
+
 ### Persons model
 
 The schema of the model as created in BigQuery is:
 
-| Field                      | Type               | Description                                                                                                                        |
-|----------------------------|--------------------|------------------------------------------------------------------------------------------------------------------------------------|
-| team_id                    | `INT64`            | The id of the project (team) the person belongs to                                                                                 |
-| distinct_id                | `STRING`           | A `distinct_id` associated with the person                                                                                         |
-| person_id                  | `STRING`           | The id of the person associated to this (`team_id`, `distinct_id`) pair                                                            |
-| properties                 | `STRING` or `JSON` | A JSON object with all the latest properties of the person                                                                         |
+| Field                      | Type               | Description                                                                                                                                        |
+| -------------------------- | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| team_id                    | `INT64`            | The id of the project (team) the person belongs to                                                                                                 |
+| distinct_id                | `STRING`           | A `distinct_id` associated with the person                                                                                                         |
+| person_id                  | `STRING`           | The id of the person associated to this (`team_id`, `distinct_id`) pair                                                                            |
+| properties                 | `STRING` or `JSON` | A JSON object with all the latest properties of the person                                                                                         |
 | person_version             | `INT64`            | Internal version of the person properties associated with a (`team_id`, `distinct_id`) pair, used by batch export in merge operation               |
 | person_distinct_id_version | `INT64`            | Internal version of the person to `distinct_id` mapping associated with a (`team_id`, `distinct_id`) pair, used by batch export in merge operation |
-| created_at                 | `TIMESTAMP`        | The timestamp when the person was created                                                                                          |
+| created_at                 | `TIMESTAMP`        | The timestamp when the person was created                                                                                                          |
 
 The BigQuery table will contain one row per `(team_id, distinct_id)` pair, and each pair is mapped to their corresponding `person_id` and latest `properties`. The `properties` field can be either `STRING` or `JSON`, depending on whether the corresponding checkbox is marked or not when creating the batch export.
 
@@ -194,6 +198,8 @@ OPTIONS(description = 'PostHog persons table')
 
 > **Note:** If you unchecked the JSON columns option when creating the batch export, replace `JSON` with `STRING` for the `properties` column.
 
+> **Note:** PostHog creates all columns as nullable. If you create your own table with `REQUIRED` (NOT NULL) fields, the batch export will fail if any exported row contains a NULL value for that field. See [the FAQ](#what-happens-if-i-create-my-own-table-with-required-fields) for more details.
+
 ### Sessions model
 
 You can view the schema for the sessions model in the configuration form when creating a batch export (there are a few too many fields to display here!).
@@ -210,13 +216,14 @@ You can view the schema for the sessions model in the configuration form when cr
 ## BigQuery configuration
 
 Configuring a batch export targeting BigQuery requires the following BigQuery-specific configuration values:
-* **Table ID:** The ID of the destination BigQuery table. This is not the fully-qualified name of a table, so omit the dataset and project IDs. For example for the fully-qualified table name `project-123:dataset:MyExportTable`, use only `MyExportTable` as the table ID.
-* **Dataset ID:** The ID of the BigQuery dataset which contains the destination table. Only the dataset ID is required, so omit the project ID if present. For example for the fully-qualified dataset `project-123:my-dataset`, use only `my-dataset` as the dataset ID.
+
+- **Table ID:** The ID of the destination BigQuery table. This is not the fully-qualified name of a table, so omit the dataset and project IDs. For example for the fully-qualified table name `project-123:dataset:MyExportTable`, use only `MyExportTable` as the table ID.
+- **Dataset ID:** The ID of the BigQuery dataset which contains the destination table. Only the dataset ID is required, so omit the project ID if present. For example for the fully-qualified dataset `project-123:my-dataset`, use only `my-dataset` as the dataset ID.
 
 The configuration of a Google Cloud service account integration depends on your authentication method:
 
-* **If using service account impersonation:** Provide the **Service Account Email** and **Project ID**. No key file is needed.
-* **If using a JSON key file:** Upload the **Google Cloud JSON key file** for your Service Account. The project ID and service account information are extracted automatically from the key file.
+- **If using service account impersonation:** Provide the **Service Account Email** and **Project ID**. No key file is needed.
+- **If using a JSON key file:** Upload the **Google Cloud JSON key file** for your Service Account. The project ID and service account information are extracted automatically from the key file.
 
 See the [BigQuery access setup section](#setting-up-bigquery-access) for more information on configuring authentication.
 
@@ -227,8 +234,9 @@ These examples illustrate how to use the data from batch exports in BigQuery.
 ### Requirements
 
 Two batch exports need to be created:
-* An events model batch export.
-* A persons model batch export.
+
+- An events model batch export.
+- A persons model batch export.
 
 For the purposes of these examples, assume that these two batch exports have already been created and have exported some data to BigQuery in tables `example.events` and `example.persons`.
 
@@ -262,8 +270,8 @@ The operation the PostHog batch export executes in BigQuery roughly involves the
 1. Creating a stage table.
 2. Inserting new data into stage table.
 3. Execute a merge operation between existing table and stage table.
-    a. Any rows that match in the final table and for which any of the stage table's version fields is higher are updated.
-    b. Any new rows not found in the final table are inserted.
+   a. Any rows that match in the final table and for which any of the stage table's version fields is higher are updated.
+   b. Any new rows not found in the final table are inserted.
 4. Drop the stage table.
 
 ### Why are additional permissions required to export the persons model?
@@ -281,3 +289,14 @@ If you are noticing an issue with your BigQuery batch export, it may be useful t
 ### How is the BigQuery table partitioned?
 
 When PostHog creates the BigQuery table, it is automatically partitioned by day using the `timestamp` column. If you need a different partition column or want to configure clustering, you should create the table manually in BigQuery before setting up the batch export (see the [Events model](#events-model) and [Persons model](#persons-model) sections above for the schemas). PostHog will use the existing table as long as it has a compatible schema.
+
+### What happens if I create my own table with REQUIRED fields?
+
+When PostHog creates BigQuery tables, all fields are created as nullable (non-REQUIRED). This is because some fields in PostHog data can legitimately be NULL.
+
+If you bring your own table and mark any fields as `REQUIRED`, the batch export will fail with a non-retryable error if it encounters a NULL value for that field. The error message will indicate which field caused the issue and prompt you to update your schema.
+
+To resolve this, either:
+
+- Alter your table schema to make the field nullable: `ALTER TABLE \`your_table\` ALTER COLUMN your_field DROP NOT NULL`
+- Or recreate your table without the `REQUIRED` constraint
