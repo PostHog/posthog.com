@@ -240,15 +240,15 @@ You can also create a similar `global-error.jsx` file to capture errors affectin
 
 Because backend requests in Next.js vary between server-side rendering, short-lived processes and more, we can't rely on exception autocapture.
 
-The context of a user and their session lives on the frontend. As such it is necessary to pass this data to your backend when making requests. We recommend configuring PostHog to send this data on every request by specifying the domains you wish to patch with the session and user distinct ID.
+The context of a user and their session lives on the frontend. As such it is necessary to pass this data to your backend when making requests. We recommend configuring PostHog to send this data to your backend by specifying the hostnames you wish to patch with the session and user distinct ID.
 
 ```js
 posthog.init('<ph_project_token>', {
-    __add_tracing_headers: ['your-backend-domain.com'] // +
+    tracing_headers: ['your-backend-domain.com'] // +
 })
 ```
 
-Alternatively, you can manually set the `X-POSTHOG-SESSION-ID` and `X-POSTHOG-DISTINCT-ID`, which can be fetched using the `posthog.get_session_id()` and `posthog.get_distinct_id()` methods respectively.
+Use hostnames only, without the protocol or path. Alternatively, you can manually set the `X-POSTHOG-SESSION-ID` and `X-POSTHOG-DISTINCT-ID`, which can be fetched using the `posthog.get_session_id()` and `posthog.get_distinct_id()` methods respectively.
 
 On the backend create a [`instrumentation.js`](https://nextjs.org/docs/app/building-your-application/optimizing/instrumentation) file at the root of our project and set up an `onRequestError` handler there. Importantly, we check the request is running in the `nodejs` runtime to ensure PostHog works. We get the `session_id` and `distinct_id` from request headers to add to the captured exception.
 

@@ -13,3 +13,7 @@ private val client = OkHttpClient.Builder()
 ```
 
 > **Note:** Only metric-like data like speed, size, and response code are captured. No data is captured from the request or response body.
+
+## Add tracing headers
+
+The same interceptor can also add PostHog tracing headers to matching hosts. See the [Android tracing headers docs](/docs/libraries/android#tracing-headers) for setup.

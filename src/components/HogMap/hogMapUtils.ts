@@ -26,15 +26,35 @@ export const computeOffsets = (count: number, baseRadius: number): Array<{ dx: n
     return offsets
 }
 
-// Delay requiring mapbox-gl until client to avoid SSR issues
-export const getMapbox = () => {
+// Load mapbox-gl (and its stylesheet) on the client via a dynamic import so it is
+// code-split out of the always-loaded bundle. A CommonJS require() is bundled statically
+// by webpack and would ship mapbox-gl (~1.5 MiB) on every page of the site.
+let mapboxModule: any = null
+let mapboxPromise: Promise<any> | null = null
+
+export const loadMapbox = (): Promise<any> => {
     if (typeof window === 'undefined') {
-        return null
+        return Promise.resolve(null)
     }
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const mapboxgl = require('mapbox-gl')
-    return mapboxgl
+    mapboxPromise ??= import('mapbox-gl').then((module) => {
+        mapboxModule = (module as any).default ?? module
+        // Inject the mapbox-gl stylesheet via a <link> tag so marker/popup
+        // positioning works correctly. Dynamic import() of .css files is
+        // unreliable under Gatsby's webpack config.
+        if (!document.querySelector('link[href*="mapbox-gl"]')) {
+            const link = document.createElement('link')
+            link.rel = 'stylesheet'
+            link.href = 'https://api.mapbox.com/mapbox-gl-js/v' + mapboxModule.version + '/mapbox-gl.css'
+            document.head.appendChild(link)
+        }
+        return mapboxModule
+    })
+    return mapboxPromise
 }
+
+// Returns the loaded module, or null until loadMapbox() has resolved. Callers gate on the
+// null and re-run once their mapboxReady state flips.
+export const getMapbox = () => mapboxModule
 
 // Ensure a clustered GeoJSON source exists or update its data
 export const ensureClusterSource = (map: any, id: string, data: any): void => {

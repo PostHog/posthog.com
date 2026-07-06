@@ -38,6 +38,10 @@ The data warehouse then starts syncing your SurveyMonkey data. You can see detai
 
 <SourceParameters />
 
+## Supported tables
+
+<SourceTables />
+
 ## Data centers
 
 SurveyMonkey hosts data in regional data centers. Select the region that matches your SurveyMonkey account:

@@ -39,9 +39,8 @@ Here is a overview that shows which of our PMs currently works with which team:
 <fieldset>
 <legend><TeamMember name="Annika Schmid" photo /></legend>
 
--   <SmallTeam slug="posthog-ai" />
 -   <SmallTeam slug="posthog-code" />
--   <SmallTeam slug="signals" />
+-   <SmallTeam slug="self-driving" />
 
 </fieldset>
 
@@ -61,7 +60,7 @@ Here is a overview that shows which of our PMs currently works with which team:
 <legend><TeamMember name="Abe Basu" photo /></legend>
 
 -   <SmallTeam slug="batch-exports" />
--   <SmallTeam slug="logs" />
+-   <SmallTeam slug="apm" />
 -   <SmallTeam slug="workflows" />
 
 
@@ -72,6 +71,7 @@ Here is a overview that shows which of our PMs currently works with which team:
 
 -   <SmallTeam slug="analytics-platform" />
 -   <SmallTeam slug="product-analytics" />
+-   <SmallTeam slug="query-performance" />
 -   <SmallTeam slug="web-analytics" />
 
 
@@ -87,11 +87,17 @@ Here is a overview that shows which of our PMs currently works with which team:
 </fieldset>
 
 <fieldset>
+<legend><TeamMember name="Ruby Childs" photo /></legend>
+
+-   <SmallTeam slug="experiments" />
+-   <SmallTeam slug="feature-flags" />
+
+</fieldset>
+
+<fieldset>
 <legend>Product teams with no PM currently</legend>
 
 -   <SmallTeam slug="conversations" />
--   <SmallTeam slug="experiments" />
--   <SmallTeam slug="feature-flags" />
 
 </fieldset>
 

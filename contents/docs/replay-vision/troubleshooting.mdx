@@ -1,0 +1,107 @@
+---
+title: Troubleshooting
+---
+
+import { ProductScreenshot } from "components/ProductScreenshot";
+
+<CalloutBox icon="IconFlask" title="Replay Vision is in closed beta" type="action">
+
+Not yet available to everyone – <a href="/replay-vision">join the waitlist</a> to get updates.
+
+</CalloutBox>
+
+Common things that go wrong with Replay Vision, and what to do about each.
+
+## My scanner isn't producing any observations
+
+Check, in order:
+
+1. **Is the scanner enabled?** Disabled scanners don't sweep. The toggle is on the scanner list and on the scanner detail page.
+2. **Are the filters too narrow?** Try removing all filters and see whether observations start showing up. If they do, re-add filters one at a time to find the culprit.
+3. **Is the sampling rate 0%?** A common oversight – 0% means every matching session gets skipped.
+4. **Is the quota exhausted?** Check the usage meter in the Replay Vision header. A scanner whose background sweep is silenced by the cap will silently produce nothing until quota frees up. See [quota and limits](/docs/replay-vision/quota-and-limits).
+5. **Is your project recording sessions at all?** Replay Vision only sees sessions [Session Replay](/docs/session-replay) has captured. No recordings, no observations.
+6. **Are all the matched sessions ineligible?** If your filters happen to match only very short or no-event sessions, the scanner will produce ineligible observations but no successful ones. See [running scanners – ineligible sessions](/docs/replay-vision/running-scanners#ineligible-sessions).
+
+A fast way to confirm the scanner itself works: run it [on-demand](/docs/replay-vision/running-scanners#on-demand-on-recordings-you-pick) against a recording you know is eligible. If that produces a result, the issue is in the filters, the sampling rate, or the quota – not the scanner config.
+
+## I'm getting a lot of ineligible observations
+
+Ineligibles don't cost you quota, but a high ineligibility rate usually means the scanner's filters aren't well-aligned with the kinds of sessions your project actually has. Each reason has a different fix:
+
+| Ineligible reason | Most likely fix |
+| --- | --- |
+| `no_recording` | The session ID exists but its replay data is missing or expired. Usually a sign you're scanning sessions older than your replay retention. |
+| `too_short` | Add a duration filter (e.g. `session_duration > 30`) so only sessions long enough to analyze are queued. |
+| `too_inactive` | Add an event-presence filter (e.g. require at least one `$pageview` or `$autocapture`) so silent sessions are skipped earlier. |
+| `too_long` | Add an upper duration filter. |
+| `no_events` | Same as `too_inactive` – require at least one event. |
+
+Once you've added the filter, the ineligibility rate should drop. The Observations tab is the source of truth – check it after the next sweep.
+
+## The model is making bad calls
+
+The reasoning + citations on each observation are your debugging tool here. Open three or four observations the scanner got wrong and read them.
+
+Common patterns and fixes:
+
+- **The model is guessing intent or emotion from sparse evidence.** Rewrite the prompt around observable behavior (rage clicks, repeated retries, time without progress) instead of inferred states (frustrated, confused). See [creating scanners – writing the prompt](/docs/replay-vision/creating-scanners#writing-the-prompt).
+- **The model is taking a position on ambiguous sessions.** Add an explicit "when unsure" branch: "If there isn't enough evidence to tell, answer no" or "tag it `unclear`."
+- **A classifier is over-using one tag.** Tighten that tag's definition in the vocabulary, or add an `unclear` / `other` tag so the model has somewhere to put marginal cases.
+- **A scorer is bunched up at the extremes.** Explicitly anchor the middle of the scale in the prompt: "5 means moderate friction – occasional misclicks but the user eventually progressed."
+
+After each edit, scan a fresh batch of recordings and compare. A recording the scanner has already looked at can't be re-scanned, so iteration always happens on new sessions.
+
+## Confidence is always low
+
+A few causes:
+
+- **Sessions are too short or too sparse.** The model genuinely has little to go on. Tighten the filters to longer / event-rich sessions.
+- **The prompt is too open-ended.** A prompt that asks the model to judge something it can't see (intent, satisfaction, "user happy?") will keep confidence low. Anchor it in observable behavior.
+- **The model picked a tag from a weak vocabulary.** For classifiers, vague tag definitions push the model to hedge. Sharpen the definitions.
+
+Confidence is self-reported, so don't over-index on it as a metric. A scanner that's wrong with confidence 0.95 is still wrong. Use confidence as a filter for downstream automation (e.g. "only alert when confidence > 0.7"), not as a quality bar for the scanner itself.
+
+## Failed observations
+
+Failed observations show an **error reason** on the detail page in the form `kind:human-readable message`.
+
+### `provider_transient`
+
+A transient Gemini error – network hiccup, rate limit, model overloaded.
+
+**What to do:** a single failure isn't actionable. If you're seeing a burst across many sessions, the upstream model is likely having availability issues – wait it out before triggering more on-demand work.
+
+### `provider_rejected`
+
+Gemini refused to process the input. The most common cause is content policy – e.g. the recording contains material the model declines to analyze.
+
+**What to do:** narrow the scanner's filters so it doesn't match those sessions in future sweeps.
+
+### `rasterization_failed`
+
+PostHog couldn't render the recording to video. Usually a sign of corrupted snapshot data for that session, or a recording with no usable frames.
+
+**What to do:** confirm the recording plays in the regular replay player. If it does and rasterization still fails, [contact support](/questions). If it doesn't play in the regular player either, the underlying recording is the problem – not Replay Vision.
+
+### `validation_failed`
+
+The model returned a response that didn't match the scanner's expected output shape (e.g. a classifier returned a tag not in the vocabulary, or a scorer returned a non-numeric value).
+
+**What to do:** tighten the prompt to spell out the allowed responses. For classifiers, restate the vocabulary inside the prompt body, not just in the config. For scorers, repeat the scale.
+
+### `internal_error`
+
+Something else went wrong on PostHog's side. These should be rare.
+
+**What to do:** if you see it more than once, [contact support](/questions) with the observation ID.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/failed_observation_detail_d3da59138d.png"
+  alt="An observation detail page in the failed state, showing the failure kind and human-readable error message"
+  classes="rounded"
+/>
+
+## Something else
+
+If you're hitting something that doesn't fit the above, [reach out](/questions) – Replay Vision is in beta and the team is actively looking for sharp edges.

@@ -22,6 +22,13 @@ Example prompts for schema exploration:
 - "What columns are in the `stripe_subscriptions` table?"
 - "Show me 5 sample rows from `hubspot_contacts`"
 
+You can also query `system.information_schema` tables directly for programmatic schema discovery — useful when you want to filter, join, or search across your full catalog:
+
+- "Query `system.information_schema.columns` to find all columns in the events table with their types"
+- "Show me the relationships between the events table and other tables using `system.information_schema.relationships`"
+
+See [schema discovery with information_schema](/docs/data-warehouse/sources/posthog#schema-discovery-with-information_schema) for the full reference.
+
 ## Try it
 
 Select a prompt to try it out in the PostHog app:

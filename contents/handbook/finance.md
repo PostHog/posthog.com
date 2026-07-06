@@ -61,4 +61,4 @@ We group them into **monthly financials** (the basics — what we made, what we 
 
 **Cash runway (quarters)** — how many quarters our cash lasts at our current burn. The cash balance question, framed against how fast we're spending. Relevant to everyone, especially anyone making hiring or major spend decisions. Longer is better. Default alive means we reach profitability before this hits zero.
 
-[Curious about our revenue metrics?]([url](https://posthog.com/handbook/growth/revops/retention-metrics))
+[Curious about our revenue metrics?](/handbook/growth/revops/retention-metrics)

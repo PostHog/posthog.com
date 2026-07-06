@@ -1,0 +1,144 @@
+---
+title: PostHog CLI
+sidebar: Docs
+showTitle: true
+---
+
+The PostHog CLI lets you use PostHog from your terminal, your coding agents, local scripts, and CI/CD pipelines.
+
+- **API**: Use `posthog-cli api` to access PostHog's API and MCP tool catalog from shell-friendly commands
+- **Querying data**: Run SQL queries against data in PostHog
+- **Source maps**: Inject and upload source maps for PostHog error tracking
+- **Schema management**: Download and check schema definitions for product analytics workflows
+- **Tasks:** List, create, update, and delete PostHog tasks
+
+## Installation
+
+Install the PostHog CLI with our wizard by running this command:
+
+```bash
+npx -y @posthog/wizard@latest cli add
+```
+
+If you'd rather not use our wizard, you can install the CLI by running:
+
+```bash
+npm install -g @posthog/cli@latest
+```
+
+Note: if you are installing the CLI for use with a coding agent, you should follow our [setup for agents](#setup-for-agents) instructions.
+
+### Authentication
+
+```bash
+posthog-cli login
+```
+
+This opens a browser-based login flow, stores a personal API token locally, and reuses it for CLI commands.
+
+For CI/CD, headless environments, or agents running without a browser, set environment variables instead:
+
+| Environment variable | Description |
+| --- | --- |
+| `POSTHOG_CLI_HOST` | PostHog host to connect to. Defaults to `https://us.posthog.com`. Use `https://eu.posthog.com` for EU Cloud. |
+| `POSTHOG_CLI_PROJECT_ID` | Your PostHog project ID. This is the number in your project URL, such as `12345` in `https://us.posthog.com/project/12345`. |
+| `POSTHOG_CLI_API_KEY` | A personal API key with the scopes required for the commands you run. |
+
+`posthog-cli api` also accepts `POSTHOG_HOST`, `POSTHOG_PROJECT_ID`, and `POSTHOG_API_KEY` if you already use those names in your environment.
+
+For broad agent workflows, create a [personal API key](https://app.posthog.com/settings/user-api-keys?preset=mcp_server) with the **MCP Server** preset. For narrower automation, grant only the scopes needed for the specific command.
+
+## Command reference
+
+| Command | Description |
+| --- | --- |
+| `posthog-cli login` | Authenticate with PostHog and store a personal API token locally |
+| `posthog-cli api` | Use agent-first PostHog API tools |
+| `posthog-cli sourcemap` | Upload bundled JavaScript chunks and source maps to PostHog |
+| `posthog-cli dsym` | Upload Apple dSYM debug symbol files |
+| `posthog-cli hermes` | Upload Hermes source maps |
+| `posthog-cli proguard` | Upload ProGuard mapping files |
+| `posthog-cli symbol-sets` | Manage uploaded symbol sets |
+| `posthog-cli exp` | Run experimental commands |
+| `posthog-cli help` | Print CLI help or help for a subcommand |
+
+## Using the CLI with a coding agent
+
+PostHog supports both CLI and [MCP](/docs/model-context-protocol) interfaces for agent workflows. You usually only need one, and which one you choose depends on how you want the agent to interact with PostHog.
+
+### When to use the CLI
+
+The CLI interface is familiar to agents and allows for composability, so it's more useful for scripting and deterministic flows. It can be more token-efficient when working with large datasets because the agent can stream, filter, aggregate, or sample data before it enters the model context.
+
+### When to use the MCP
+
+MCP is useful when you're working with an AI agent that doesn't have access to terminal or shell commands. This is especially important in non-coding environments, where the agent may support tool calling but doesn't have access to a terminal.
+
+MCP is also preferred when you want a native tool-calling experience, you need typed tool calls and results, and your workflows are happening in an AI client rather than script, CI, or shell.
+
+### Setup for agents
+
+Agents don't automatically know that a CLI tool exists or is available, so we need to tell them. The PostHog wizard installation path inserts agent instructions into the instructions file your agent reads, such as `AGENTS.md` or `CLAUDE.md`.
+
+`npx -y @posthog/wizard@latest cli add`
+
+If you wish to install the CLI directly, you should add a snippet in your agent's instructions or tell it directly to use the `posthog-cli` for PostHog tasks. You can manually install the snippet with `posthog-cli api agents-md install [--path AGENTS.md]`.
+
+### Skills
+
+Skills add task-specific instructions for common PostHog workflows, installed per repo into `.agents/skills/`. You don't need to install them upfront: the instructions snippet tells agents to check `posthog-cli api skill list` for a matching skill before starting a PostHog task, install it, and follow it.
+
+You can also browse and pre-install skills yourself:
+
+```bash
+posthog-cli api skill list
+posthog-cli api skill install <skill-id>
+```
+
+To see all skills as JSON, pass `--json`:
+
+```bash
+posthog-cli api skill list --json
+```
+
+Installed skills are a snapshot. To refresh one after an update, reinstall it with `--force`:
+
+```bash
+posthog-cli api skill install --force <skill-id>
+```
+
+## FAQ
+
+### My agent doesn't know about the CLI
+
+Agents only use `posthog-cli api` if their instructions tell them to. The best way to set that up is the wizard, which installs the agent instructions globally for your agent — or use the CLI to install it into a single repo's instructions file:
+
+```bash
+npx -y @posthog/wizard@latest cli add
+posthog-cli api agents-md install
+```
+
+If the snippet is installed but the agent still ignores the CLI, check that the instructions file is one your agent actually reads (for example, Claude Code reads `CLAUDE.md` and `AGENTS.md`, Codex reads `AGENTS.md`) and pass `--path` if needed.
+
+### The `api` command is unavailable
+
+Install the latest version of the CLI, then rerun the command:
+
+```bash
+npm install -g @posthog/cli@latest
+posthog-cli api --agent-help
+```
+
+### The tool list looks outdated
+
+The tool catalog is bundled with the CLI, so an old binary serves an old catalog. Update the CLI and rerun the command:
+
+```bash
+npm install -g @posthog/cli@latest
+```
+
+If a tool you used before is gone, names change as the PostHog API evolves — use `search` to find the current name:
+
+```bash
+posthog-cli api search dashboard
+```

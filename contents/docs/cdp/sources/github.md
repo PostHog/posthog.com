@@ -9,28 +9,51 @@ availability:
 sourceId: Github
 ---
 
-The GitHub connector can link issues, pull requests, commits, stargazers, releases, and workflow runs to PostHog.
+import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
+import SyncModes from "../_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
-To link GitHub:
+The GitHub connector syncs your repository data – issues, pull requests, commits, and more – into PostHog, so you can analyze engineering activity alongside your product data.
 
-1. Go to the [sources tab](https://app.posthog.com/data-management/sources) of the data pipeline section in PostHog.
+## Prerequisites
 
-2. Click **+ New source** and then click **Link** next to GitHub.
+You need access to the GitHub repository you want to sync. You can authenticate using OAuth (recommended), which connects your GitHub account automatically, or with a personal access token.
 
-3. Select your **Authentication type**. OAuth is the default and recommended method:
-   - **OAuth (GitHub App)** – Click the GitHub account field and follow the prompts to connect your GitHub account. This handles authentication automatically.
-   - **Personal access token (PAT)** – If you prefer using a PAT, select this option. Go to your [personal access tokens settings](https://github.com/settings/tokens) in GitHub, click **Generate new token**, give it a name, select the required scopes (`repo` for private repositories or `public_repo` for public repositories), and paste the token into PostHog.
+## Adding a data source
 
-4. Select the repository you want to sync:
-   - **OAuth** – Use the searchable dropdown to find and select a repository your GitHub integration has access to.
-   - **PAT** – Manually enter the repository in the format `owner/repo` (e.g., `posthog/posthog`).
+<SourceSetupIntro />
 
-   Click **Next**.
+When linking GitHub, choose an **Authentication type**:
 
-5. Set up the schemas you want to sync and modify the method and frequency as needed. Once done, click **Import**.
+- **OAuth (GitHub App)** – the default and recommended method. Select your GitHub account and follow the prompts to connect it. This handles authentication automatically.
+- **Personal access token** – create a token in your [GitHub Settings](https://github.com/settings/tokens) under **Developer settings > Personal access tokens**, then paste it into PostHog.
 
-Once the syncs are complete, you can start using GitHub data in PostHog.
+Then enter the **Repository** you want to sync in the format `owner/repo` (e.g. `posthog/posthog`).
+
+## Sync modes
+
+<SyncModes />
+
+## Webhooks
+
+The workflow runs and workflow jobs tables can be kept up to date in real time using a GitHub webhook, rather than re-polling. PostHog attempts to create the webhook automatically. If automatic creation fails, your token needs webhook permissions – the **admin:repo_hook** scope on a classic token, or **Repository webhooks: read and write** on a fine-grained token – or you can set the webhook up manually:
+
+1. Go to your repository's **Settings > Webhooks** on GitHub
+2. Click **Add webhook**
+3. Paste the webhook URL shown during setup into the **Payload URL** field
+4. Set **Content type** to **application/json**
+5. Enter a **Secret** and add the same value to the **Signing secret** field in PostHog
+6. Under **Which events would you like to trigger this webhook?**, choose **Let me select individual events** and tick **Workflow jobs** and **Workflow runs**
+7. Click **Add webhook**
 
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />
+
+## Troubleshooting
+
+<TroubleshootingLink />

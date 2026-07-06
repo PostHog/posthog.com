@@ -1,6 +1,7 @@
 import React from 'react'
 import { JSEventCapture } from 'onboarding/product-analytics'
 import {
+    SurveysAndroidInstallation,
     SurveysAngularInstallation,
     SurveysAstroInstallation,
     SurveysBubbleInstallation,
@@ -31,6 +32,14 @@ const SURVEYS_SNIPPETS_WEB = {
 
 const SURVEYS_SNIPPETS_MOBILE = {
     SurveysFinalSteps,
+}
+
+export const AndroidSurveysInstallationWrapper = () => {
+    return (
+        <OnboardingContentWrapper snippets={SURVEYS_SNIPPETS_MOBILE}>
+            <SurveysAndroidInstallation />
+        </OnboardingContentWrapper>
+    )
 }
 
 export const SurveysAngularInstallationWrapper = () => {

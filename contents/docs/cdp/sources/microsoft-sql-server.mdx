@@ -27,7 +27,7 @@ To link Azure SQL Server:
    - **Database:** The name of the database you want like `analytics_db`.
    - **User:** The username with the necessary permissions to access the database.
    - **Password:** The password for the user.
-   - **Schema:** The schema for your database where your tables are located. The default is `dbo`.
+   - **Schema:** (Optional) The schema for your database. Leave blank to browse and sync tables from all schemas, or specify one to limit the selection. The default is `dbo`.
 4. Click **Link**
 
 The data warehouse then starts syncing your Azure SQL Server data. You can see details and progress in the [sources tab](https://app.posthog.com/data-management/sources).
@@ -43,6 +43,12 @@ Numeric, decimal, and money columns with values exceeding a precision of 76 or s
 - Constrain the column with a lower precision/scale
 - Cast it to text in a view
 - Round the values at the source
+
+</CalloutBox>
+
+<CalloutBox icon="IconWarning" title="Invalid object name errors" type="caution">
+
+If your sync fails with "Invalid object name," the database couldn't find a table or view you're syncing. Common causes include dropped or renamed objects, views referencing missing tables, or cross-database permission issues. Check that all synced objects exist and that the connection user has SELECT permissions on them and their dependencies.
 
 </CalloutBox>
 
