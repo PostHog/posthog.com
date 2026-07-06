@@ -199,6 +199,8 @@ export function LoginButton() {
 
 See our guide on [identifying users](/docs/getting-started/identify-users) for more details.
 
+On the server, you don't need to call `identify()` — configure `getDistinctId` in `createPostHog()` (next step) and server-side events and feature flags are attributed to the logged-in user automatically. This is also the safest option when you can't rely on client-provided identity, since cookies and headers can be spoofed.
+
 </Step>
 
 <Step title="Use PostHog on the server" badge="recommended">

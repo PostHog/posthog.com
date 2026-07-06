@@ -78,6 +78,7 @@ import PagesServerSetup from "./_snippets/posthog-next-pages-server-setup.mdx"
 `@posthog/next` is the recommended package for integrating PostHog into your Next.js app. It provides a simplified interface that handles common patterns out of the box:
 
 - **Synchronized identity across client and server**, so both sides share the same user automatically
+- **Server-side identity resolution** via your auth session, so server events and feature flags are attributed to the authenticated user without trusting client-provided identity
 - **Server-side feature flag bootstrapping** so hooks return real values immediately with no flicker
 - **Eager client initialization** ensures PostHog is always available when your components render
 - **Built-in API proxy** that routes SDK traffic through your domain to avoid ad blockers
@@ -242,6 +243,8 @@ export function LoginButton() {
 ```
 
 See our guide on [identifying users](/docs/getting-started/identify-users) for more details.
+
+On the server, you don't need to call `identify()` — configure `getDistinctId` in `createPostHog()` (next step) and server-side events and feature flags are attributed to the logged-in user automatically. This is also the safest option when you can't rely on client-provided identity, since cookies and headers can be spoofed.
 
 </Step>
 

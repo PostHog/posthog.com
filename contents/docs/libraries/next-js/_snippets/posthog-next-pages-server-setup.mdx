@@ -1,8 +1,23 @@
-Use `getServerSidePostHog` inside `getServerSideProps` to capture events and evaluate feature flags for the current user:
+Create a shared PostHog module with `createPostHog()`, then use the returned `getServerSidePostHog` inside `getServerSideProps` to capture events and evaluate feature flags for the current user.
+
+```ts file=lib/posthog.ts
+import { createPostHog } from '@posthog/next/pages'
+import { getServerSession } from 'next-auth'
+import { authOptions } from './auth'
+
+export const { getServerSidePostHog } = createPostHog({
+    // Optional: resolve the current user from your auth session. The GetServerSidePropsContext
+    // is passed so you can read the session from the request. When set, server-side events and
+    // feature flags are attributed to this user instead of the client-provided identity, which
+    // can be spoofed. Return null/undefined to fall back to the cookie identity.
+    getDistinctId: async (ctx) =>
+        ctx ? (await getServerSession(ctx.req, ctx.res, authOptions))?.user?.id : undefined,
+})
+```
 
 ```tsx file=pages/dashboard.tsx
 import type { GetServerSideProps } from 'next'
-import { getServerSidePostHog } from '@posthog/next/pages'
+import { getServerSidePostHog } from '@/lib/posthog'
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const posthog = await getServerSidePostHog(ctx)
@@ -24,7 +39,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 }
 ```
 
-**Event flushing:** On Vercel, `@posthog/next` auto-detects [`waitUntil`](https://vercel.com/docs/functions/functions-api-reference/vercel-functions-package#waituntil) from `@vercel/functions` so events are flushed after the response is sent without blocking it. No manual `shutdown()` call is needed. In other environments, you can pass a custom `waitUntil` in the server client options, for example `getServerSidePostHog(ctx, undefined, { waitUntil })`, or events will be batched and flushed normally.
+**Event flushing:** On Vercel, `@posthog/next` auto-detects [`waitUntil`](https://vercel.com/docs/functions/functions-api-reference/vercel-functions-package#waituntil) from `@vercel/functions` so events are flushed after the response is sent without blocking it. No manual `shutdown()` call is needed. In other environments, you can pass a custom `waitUntil` in the server client options, for example `createPostHog({ options: { waitUntil } })`, or events will be batched and flushed normally.
 
 Then wire the bootstrap data into the provider:
 

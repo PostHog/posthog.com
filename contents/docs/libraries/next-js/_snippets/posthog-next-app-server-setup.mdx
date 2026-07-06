@@ -1,7 +1,20 @@
-Use `getPostHog()` in server components, route handlers, and server actions to capture events and evaluate feature flags. The client is automatically scoped to the current user via the identity cookie set by the middleware.
+Create a shared PostHog module with `createPostHog()`, then use the returned `getPostHog` in server components, route handlers, and server actions to capture events and evaluate feature flags.
 
-```tsx
-import { getPostHog } from '@posthog/next'
+```ts file=lib/posthog.ts
+import 'server-only'
+import { createPostHog } from '@posthog/next'
+import { auth } from '@/auth'
+
+export const { getPostHog } = createPostHog({
+    // Optional: resolve the current user from your auth session. When set, server-side
+    // events and feature flags are attributed to this user instead of the client-provided
+    // identity, which can be spoofed. Return null/undefined to fall back to the cookie identity.
+    getDistinctId: async () => (await auth())?.user?.id,
+})
+```
+
+```tsx file=app/dashboard/page.tsx
+import { getPostHog } from '@/lib/posthog'
 
 export default async function DashboardPage() {
     const posthog = await getPostHog()
@@ -15,6 +28,8 @@ export default async function DashboardPage() {
 }
 ```
 
-> **Note:** `getPostHog()` calls `cookies()` internally, which opts the route into dynamic rendering. Pages using it cannot be statically generated.
+Without `getDistinctId`, the client is automatically scoped to the current user via the identity cookie set by the middleware. With it, the server-resolved distinct id takes precedence — use this when you can't rely on client-provided identity. Session and device linkage stays client-provided, so server events still correlate with the browser session and replays. The resolver is never called for users who have opted out of capture.
 
-**Event flushing:** On Vercel, `@posthog/next` auto-detects [`waitUntil`](https://vercel.com/docs/functions/functions-api-reference/vercel-functions-package#waituntil) from `@vercel/functions` so events are flushed after the response is sent without blocking it. No manual `shutdown()` call is needed. In other environments, you can pass a custom `waitUntil` in the server client options, for example `getPostHog(undefined, { waitUntil })`, or events will be batched and flushed normally.
+> **Note:** `getPostHog()` calls `cookies()` internally, which opts the route into dynamic rendering. Pages using it cannot be statically generated. Keep `import 'server-only'` at the top of your shared module so accidentally importing it from a client component fails with a clear build-time error.
+
+**Event flushing:** On Vercel, `@posthog/next` auto-detects [`waitUntil`](https://vercel.com/docs/functions/functions-api-reference/vercel-functions-package#waituntil) from `@vercel/functions` so events are flushed after the response is sent without blocking it. No manual `shutdown()` call is needed. In other environments, you can pass a custom `waitUntil` in the server client options, for example `createPostHog({ options: { waitUntil } })`, or events will be batched and flushed normally.
