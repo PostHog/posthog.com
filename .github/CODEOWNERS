@@ -1,16 +1,18 @@
 # Gatsby build pipeline
-/gatsby/ @smallbrownbike @corywatilo
-/gatsby-config.js @smallbrownbike @corywatilo
-/gatsby-node.ts @smallbrownbike @corywatilo
-/gatsby-browser.tsx @smallbrownbike @corywatilo
-/gatsby-ssr.js @smallbrownbike @corywatilo
+/gatsby/ @smallbrownbike @corywatilo @charlescook-ph
+/gatsby-config.js @smallbrownbike @corywatilo @charlescook-ph
+/gatsby-node.ts @smallbrownbike @corywatilo @charlescook-ph
+/gatsby-browser.tsx @smallbrownbike @corywatilo @charlescook-ph
+/gatsby-ssr.js @smallbrownbike @corywatilo @charlescook-ph
 
 # Gatsby plugins
-/plugins/ @smallbrownbike @corywatilo
+/plugins/ @smallbrownbike @corywatilo @charlescook-ph
 
 # Core app context and window management
-/src/context/App.tsx @smallbrownbike @corywatilo
-/src/components/AppWindow/ @smallbrownbike @corywatilo
+/src/context/App.tsx @smallbrownbike @corywatilo @charlescook-ph
+/src/components/AppWindow/ @smallbrownbike @corywatilo @charlescook-ph
 
 # Serverless API functions
-/api/ @smallbrownbike @corywatilo
+/api/ @smallbrownbike @corywatilo @charlescook-ph
+
+/.github/CODEOWNERS @smallbrownbike @corywatilo @charlescook-ph
