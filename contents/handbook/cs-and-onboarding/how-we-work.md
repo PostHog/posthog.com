@@ -55,8 +55,8 @@ CSMs are responsible for ensuring that a larger book of existing customers - bot
   - If we have to give a customer a big refund, we'll deal with your bonus on a case by case basis depending on what happened, but usually this will still be counted. 
  
 **Account allocation**
-- CSMs manage approximately $2.5M in ARR.
-- This coverage amount will grow ~10% quarterly to match our growth targets.
+- CSMs manage approximately $2.5M in ARR. Books are balanced by shape as well as total: a target number of accounts per ARR bucket, so a single large account doesn't dominate a book.
+- As of Q3 2026, a typical book is roughly 4 accounts at $20-30k, 12 at $30-60k, 5 at $60-100k, 5 at $100-250k, and 2 at $250k+. These numbers come from our [live capacity calculation](https://us.posthog.com/project/2/dashboard/1737835), and will shift as coverage grows and capacity modelling improves.
 - When rebalancing accounts (e.g., if accounts drop below the $20k threshold), we'll bring you up to the current quarter's target amount.
 
 ## Working with engineering teams
