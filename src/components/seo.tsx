@@ -19,7 +19,11 @@ interface SEOProps {
     languageAlternates?: LanguageAlternate[]
     /** schema.org JSON-LD object(s) emitted as <script type="application/ld+json"> */
     structuredData?: Record<string, any> | Record<string, any>[]
+    documentRkey?: string
 }
+
+// PostHog's AT Protocol identity, used for Standard.site discovery links
+const STANDARD_SITE_DID = 'did:plc:go7eemqz4y5nhonj4kg5w2p6'
 
 export type LanguageAlternate = {
     hrefLang: string
@@ -38,6 +42,7 @@ export const SEO = ({
     lang,
     languageAlternates,
     structuredData,
+    documentRkey,
 }: SEOProps): JSX.Element => {
     const { appWindow } = useWindow()
     const { setWindowTitle } = useApp()
@@ -76,11 +81,18 @@ export const SEO = ({
             {seo.description && <meta name="description" content={seo.description} />}
             {seo.image && <meta name="image" content={seo.image} />}
             {<link rel="canonical" href={canonicalUrl ? canonicalUrl : seo.url} />}
-            {/* Standard.site publication discovery hint for the blog (https://standard.site) */}
+            {/* Standard.site publication discovery hint for the blog */}
             {pathname?.startsWith('/blog') && (
                 <link
                     rel="site.standard.publication"
-                    href="at://did:plc:go7eemqz4y5nhonj4kg5w2p6/site.standard.publication/blog"
+                    href={`at://${STANDARD_SITE_DID}/site.standard.publication/blog`}
+                />
+            )}
+            {/* Standard.site document record for this blog post */}
+            {documentRkey && (
+                <link
+                    rel="site.standard.document"
+                    href={`at://${STANDARD_SITE_DID}/site.standard.document/${documentRkey}`}
                 />
             )}
             {languageAlternates?.map(({ hrefLang, href }) => (

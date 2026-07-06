@@ -1,17 +1,16 @@
 ### Q3 2026 objectives
 
-#### Objective 1: Ship the first version of the replay vision / self-driving model
+#### Goal: Ship the first version of the replay vision / self-driving model
 
-**What we'll ship:**
-- **Data labeling suite** - tooling to label replay sessions so we have high-quality supervision for training and evaluation.
-- **Session replay text renderer** - a programmatic renderer that extracts the objective facts already present in a recording ("user clicked button X, then Y happened") into text, used to ground the model's decoder. There's precedent here in screen-reader work.
-- **DOMEncoder** - encoder for DOM state.
-- **RRWebEncoder** - encoder for rrweb replay events.
-- **Data prep** - pipelines to turn raw replays into training-ready inputs for the encoders and renderer.
-- **Sampling pipeline** - select and sample which sessions feed training, so the model learns from a representative, high-signal slice of replays.
-- **Full model training** - train the QFormer first (it starts from random weights) to compress per-event replay vectors into a compact representation, and train the language model last to avoid catastrophic forgetting.
-- **Model observability suite** - tooling (e.g. MLflow) to visualize neurons and debug problems during training.
-- **Eval dataset** - a held-out dataset to measure whether the model actually understands replays.
+**Components:**
+- **Data labeling suite**
+- **Session replay text renderer**
+- **Write data prep pipeline**
+- **Build the sampling pipeline**
+- **Train the Replay encoder model**
+- **Train the end-to-end agent**
+- **Build the model observability suite**
+- **Build an eval dataset**
 
-**What we're not shipping:**
+**Non-goals:**
 - **Hand-rolled inference**
