@@ -37,9 +37,9 @@ Add to any menu item to control mobile behavior:
 ```
 
 **Values:**
-- `string` - URL to link to on mobile (converts submenu to simple link)
-- `false` - Completely omit this item from mobile menu
-- `undefined` - Use default mobile processing
+- `string` – URL to link to on mobile (converts submenu to simple link)
+- `false` – Completely omit this item from mobile menu
+- `undefined` – Use default mobile processing
 
 ### 2. mobileLink Property
 
@@ -138,9 +138,9 @@ Submenus are automatically converted to simple links on mobile:
 
 ## File Structure
 
-- `menuData.tsx` - Menu data and mobile processing logic
-- `index.tsx` - TaskBar component that renders the menu
-- `../RadixUI/MenuBar.tsx` - Base menu component with mobile support
+- `menuData.tsx` – Menu data and mobile processing logic
+- `index.tsx` – TaskBar component that renders the menu
+- `../RadixUI/MenuBar.tsx` – Base menu component with mobile support
 
 ## Testing Mobile Menu
 
