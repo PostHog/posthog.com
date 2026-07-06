@@ -6,15 +6,6 @@ import { useSmallTeamsMenuItems } from './SmallTeamsMenuItems'
 import Logo from 'components/Logo'
 import { APP_COUNT } from '../../constants'
 import SearchableProductMenu from './SearchableProductMenu'
-import {
-    categoryOrder,
-    categoryDisplayNames,
-    categoryIcons,
-    buildCategoryMenuItems,
-    buildProductMenuItems,
-    popularProducts,
-    newestProducts,
-} from '../../constants/productNavigation'
 import useProduct from '../../hooks/useProduct'
 import {
     IconXNotTwitter,
@@ -239,98 +230,58 @@ const processHandbookSidebar = (items: any[], isRoot = true): any[] => {
         })
 }
 
-// Build Product OS menu items with categories
-const buildProductOSMenuItems = (allProducts: any[]) => {
+// Build Products menu items
+const buildProductsMenuItems = (allProducts: any[]) => {
     const items: any[] = [
         {
             type: 'item',
-            label: `Browse all apps (${APP_COUNT})`,
+            label: 'PostHog Code',
+            link: '/code',
+            icon: <Icons.IconCoffee className="size-4 text-brown" />,
+        },
+        {
+            type: 'item',
+            label: 'PostHog Web',
+            link: '/self-driving',
+            icon: <Icons.IconBolt className="size-4 text-red" />,
+        },
+        {
+            type: 'item',
+            label: 'PostHog Slack',
+            link: '/slack',
+            icon: <Icons.IconAtSign className="size-4 text-sky-blue" />,
+        },
+        {
+            type: 'item',
+            label: 'PostHog MCP',
+            link: '/mcp',
+            icon: <Icons.IconPlug className="size-4 text-gray" />,
+        },
+        {
+            type: 'item',
+            label: 'Context Warehouse',
+            link: '/data-stack',
+            icon: <Icons.IconDatabase className="size-4 text-blue" />,
+        },
+        {
+            type: 'separator',
+        },
+        {
+            type: 'item',
+            label: `Browse all tools (${APP_COUNT})`,
             link: '/products',
             icon: <Icons.IconApps className="size-4 text-red" />,
             mobileDestination: '/products',
         },
         {
-            type: 'separator',
-        },
-        {
             type: 'submenu' as const,
-            label: 'Search apps',
+            label: 'Search tools',
             link: '/products',
             items: <SearchableProductMenu products={allProducts} />,
             icon: <Icons.IconSearch className="size-4 text-gray" />,
             mobileDestination: '/products',
         },
-        {
-            type: 'submenu',
-            label: 'Popular products',
-            items: buildProductMenuItems(popularProducts, allProducts),
-            icon: <Icons.IconTrending className="size-4 text-green" />,
-            mobileDestination: '/products',
-        },
-        {
-            type: 'submenu',
-            label: 'New products',
-            items: buildProductMenuItems(newestProducts, allProducts),
-            icon: <Icons.IconPresent className="size-4 text-blue" />,
-            mobileDestination: '/products',
-        },
-        {
-            type: 'separator',
-        },
-        {
-            type: 'item',
-            label: 'Categories',
-            disabled: true,
-        },
     ]
-
-    // Add category submenus
-    categoryOrder.forEach((category) => {
-        const categoryProducts = allProducts.filter((product: any) => product.category === category)
-        if (categoryProducts.length === 0) return
-
-        const categoryItems = buildCategoryMenuItems(category, allProducts)
-        if (categoryItems.length > 0) {
-            // Get the icon for this category
-            let iconElement = null
-            const iconConfig = categoryIcons[category]
-            if (iconConfig) {
-                const IconComponent = Icons[iconConfig.icon as keyof typeof Icons]
-                if (IconComponent) {
-                    iconElement = React.createElement(IconComponent, {
-                        className: `size-4 text-${iconConfig.color}`,
-                    })
-                }
-            }
-
-            // Prepend MCP as the first item in 'Utilities, add-ons, & packages'
-            if (category === 'product_os') {
-                categoryItems.unshift({
-                    type: 'item' as const,
-                    label: 'MCP',
-                    link: '/mcp',
-                    icon: React.createElement(Icons.IconPlug, { className: 'size-4 text-gray' }),
-                })
-            }
-
-            // Lead the Automation section with Self-driving
-            if (category === 'automation') {
-                categoryItems.unshift({
-                    type: 'item' as const,
-                    label: 'Self-driving',
-                    link: '/self-driving',
-                    icon: React.createElement(Icons.IconBolt, { className: 'size-4 text-red' }),
-                })
-            }
-
-            items.push({
-                type: 'submenu',
-                label: categoryDisplayNames[category] || category,
-                icon: iconElement,
-                items: categoryItems,
-            })
-        }
-    })
 
     return items
 }
@@ -354,8 +305,8 @@ export function useMenuData(): MenuType[] {
     // Define main navigation items (excluding logo menu)
     const mainNavItems: MenuType[] = [
         {
-            trigger: 'Product OS',
-            items: buildProductOSMenuItems(allProducts),
+            trigger: 'Products',
+            items: buildProductsMenuItems(allProducts),
             mobileLink: '/products', // Direct link on mobile
         },
         {

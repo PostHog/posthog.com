@@ -16,7 +16,7 @@ The TaskBar menu system provides a desktop-style navigation experience that adap
 On mobile, the main navigation items are moved from the top-level menu bar into the logo menu dropdown. This consolidates navigation into a single menu button to save space.
 
 ```
-Desktop: [Logo Menu] [Product OS] [Pricing] [Docs] [Library] [Company]
+Desktop: [Logo Menu] [Products] [Pricing] [Docs] [Library] [Company]
 Mobile:  [Logo Menu ▼] (contains all navigation items)
 ```
 
@@ -47,8 +47,8 @@ Add to top-level menus to convert the menu trigger itself into a direct link on 
 
 ```typescript
 {
-    trigger: 'Product OS',
-    items: buildProductOSMenuItems(allProducts),
+    trigger: 'Products',
+    items: buildProductsMenuItems(allProducts),
     mobileLink: '/products', // Entire menu becomes a link on mobile
 }
 ```
@@ -118,9 +118,9 @@ Submenus are automatically converted to simple links on mobile:
 
 ```typescript
 {
-    trigger: 'Product OS',
-    items: buildProductOSMenuItems(allProducts),
-    mobileLink: '/products', // "Product OS" becomes a link to /products on mobile
+    trigger: 'Products',
+    items: buildProductsMenuItems(allProducts),
+    mobileLink: '/products', // "Products" becomes a link to /products on mobile
 }
 ```
 
