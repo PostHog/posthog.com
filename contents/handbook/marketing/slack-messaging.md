@@ -4,9 +4,9 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> This page isn't accurate - we are figuring out how to replace previous broadcast capability
+> This page isn't accurate - we have deprecated Pylon and don't have a comparable broadcast capability in SupportHog or elsewhere.  In the meantime if you want to get a Slack message out to customers ask account owners to do it on your behalf in [#group-cs-sales-support](https://posthog.slack.com/archives/C090RCG671C)
 
-We share [Slack channels with many of our customers and partners](/handbook/growth/sales/slack-channels) via Slack Connect, managed through [SupportHog](/handbook/growth/sales/slack-channels), our own tool. These channels are normally used for support and relationship building, but SupportHog's **broadcast** functionality also lets us send a single message to every customer or partner Slack channel at once.
+We share [Slack channels with many of our customers and partners](/handbook/growth/sales/slack-channels) via Slack Connect, managed through [Pylon](/handbook/growth/sales/slack-channels), our own tool. These channels are normally used for support and relationship building, but Pylon's **broadcast** functionality also lets us send a single message to every customer or partner Slack channel at once.
 
 This is a powerful way to amplify [product announcements](/handbook/marketing/product-announcements) and other comms directly to the people building on PostHog, alongside our usual [email](/handbook/marketing/email-comms) and [in-app](/handbook/marketing/in-app) channels.
 
@@ -32,21 +32,21 @@ Broadcasts reach live customer and partner channels, and Sales or the TAMs may k
 3. **Ping more than once.** A single message is easy to miss. Follow up a couple of times, and give a final heads-up with the scheduled send time (e.g. "this is going out at X") so people have a last chance to flag anything.
 4. If no feedback is received within that window, go ahead and send - you don't need to wait for explicit sign-off or be blocked.
 
-SupportHog broadcasts should be treated like email messages and added to the Marketing Messaging calendar as standard.
+Pylon broadcasts should be treated like email messages and added to the Marketing Messaging calendar as standard.
 This step is required, but it keeps PMMs unblocked while giving the people closest to our customers a simple way to catch anything sensitive.
 
 ### Excluding channels before you send
 
 Beyond accounts that sales or CS flags, scan the audience yourself for channels that shouldn't receive the message:
 
-- **Drop legacy and archived channels.** SupportHog's audience often includes old or inactive channels. They're usually obvious from the name – exclude them so the message only lands in live channels.
+- **Drop legacy and archived channels.** Pylon's audience often includes old or inactive channels. They're usually obvious from the name – exclude them so the message only lands in live channels.
 - **Check for recent negative sentiment.** It's worth quickly asking an LLM to scan the `#posthog-*` channels and surface any negative sentiment from the last two weeks. This usually turns up a handful worth excluding.
 - **Consider excluding people already using the feature.** If the broadcast is nudging people towards something, exclude accounts that already use it – or word the message so it still works for them (e.g. framing it as "in case you missed these features" rather than assuming they haven't seen them).
 
-## How to send a broadcast in SupportHog
+## How to send a broadcast in Pylon
 
-1. Log into SupportHog using SSO with your PostHog email address.
-2. Find the broadcasts feature in SupportHog and create a new broadcast.
+1. Log into Pylon using SSO with your PostHog email address.
+2. Find the broadcasts feature in Pylon and create a new broadcast.
 3. Select the audience – typically all customer and/or partner Slack channels. Double-check the audience before sending, as the message goes to live customer channels.
 4. Write your message. Keep it short, friendly, and link out to the [changelog](/changelog), blog post, or docs for the full detail.
 5. **Send the message as yourself, not as PostHog.** Pylon lets you choose the sender - sending from a real person feels more personal and gets a better response than a faceless company message.
