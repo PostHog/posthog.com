@@ -235,12 +235,6 @@ const buildProductsMenuItems = (allProducts: any[]) => {
     const items: any[] = [
         {
             type: 'item',
-            label: 'PostHog Code',
-            link: '/code',
-            icon: <Icons.IconCoffee className="size-4 text-brown" />,
-        },
-        {
-            type: 'item',
             label: 'PostHog Web',
             link: '/self-driving',
             icon: <Icons.IconBolt className="size-4 text-red" />,
@@ -256,6 +250,12 @@ const buildProductsMenuItems = (allProducts: any[]) => {
             label: 'PostHog MCP',
             link: '/mcp',
             icon: <Icons.IconPlug className="size-4 text-gray" />,
+        },
+        {
+            type: 'item',
+            label: 'PostHog Code',
+            link: '/code',
+            icon: <Icons.IconCoffee className="size-4 text-brown" />,
         },
         {
             type: 'item',
