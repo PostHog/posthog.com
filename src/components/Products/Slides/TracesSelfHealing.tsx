@@ -26,7 +26,7 @@ const steps: {
         color: 'bg-blue',
         activeText: 'text-white',
         progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
-        copy: 'You set a scout to watch your slowest traces. It runs on a schedule and keeps an eye on the queries and endpoints that matter.',
+        copy: 'Turn on the APM scout. It watches latency and request volume per service, on a schedule, and files any regression as a report.',
     },
     {
         value: 'signal',
