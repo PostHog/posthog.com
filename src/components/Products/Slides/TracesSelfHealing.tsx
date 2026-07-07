@@ -19,6 +19,7 @@ const steps: {
     activeText: string
     progressBar: string
     copy: string
+    image?: string
 }[] = [
     {
         value: 'scout',
@@ -27,6 +28,7 @@ const steps: {
         activeText: 'text-white',
         progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
         copy: 'Turn on the APM scout. It watches latency and request volume per service, on a schedule, and files any regression as a report.',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Scout_troop_Mock_b59fadf110.png',
     },
     {
         value: 'signal',
@@ -62,10 +64,13 @@ const steps: {
     },
 ]
 
-const TabPanel = ({ title, children }: { title: string; children: React.ReactNode }) => (
+const TabPanel = ({ title, children, image }: { title: string; children: React.ReactNode; image?: string }) => (
     <div className="rounded bg-primary p-4 @xl:p-6 h-full flex flex-col justify-center">
         <h2 className="mt-0 mb-3 text-3xl @xl:text-4xl font-bold">{title}</h2>
         <div className="text-secondary text-lg @xl:text-xl !leading-normal">{children}</div>
+        {image && (
+            <img src={image} alt={title} className="mt-6 block w-full rounded-md border border-primary shadow-lg" />
+        )}
     </div>
 )
 
@@ -76,7 +81,7 @@ const tabs: TabbedCarouselTab[] = steps.map((step) => ({
     activeText: step.activeText,
     progressBar: step.progressBar,
     content: (
-        <TabPanel title={step.label}>
+        <TabPanel title={step.label} image={step.image}>
             <p className="m-0">{step.copy}</p>
         </TabPanel>
     ),
