@@ -1264,6 +1264,7 @@ const appSettings: AppSettings = {
         modal: {
             type: 'standard',
         },
+        toolbar: true,
     },
     'hedgehog-generator': {
         size: {
