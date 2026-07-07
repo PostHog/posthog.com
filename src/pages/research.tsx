@@ -365,9 +365,9 @@ function PostCard({ post }: { post: ResearchPost }) {
         <Link
             to={post.fields.slug}
             state={{ newWindow: true }}
-            className="group border border-primary rounded bg-accent overflow-hidden flex flex-col no-underline text-primary transition-all duration-150 hover:border-purple hover:-translate-y-1 hover:shadow-lg"
+            className="group h-full border border-primary rounded bg-accent overflow-hidden flex flex-col no-underline text-primary transition-all duration-150 hover:border-purple hover:-translate-y-1 hover:shadow-lg"
         >
-            <div className="relative pt-[56.25%] bg-primary overflow-hidden">
+            <div className="relative aspect-video shrink-0 bg-primary overflow-hidden">
                 {image ? (
                     <GatsbyImage
                         image={image}
@@ -388,15 +388,15 @@ function PostCard({ post }: { post: ResearchPost }) {
                 )}
             </div>
             <div className="p-4 flex flex-col flex-1">
-                <h3 className="text-base font-bold m-0 mb-2 leading-snug group-hover:underline line-clamp-3">
+                <h3 className="text-base font-bold m-0 mb-2 leading-snug group-hover:underline line-clamp-3 min-h-[4.125rem]">
                     {post.frontmatter.title}
                 </h3>
                 <div className="mt-auto flex items-center gap-2 text-sm text-secondary">
                     {author?.profile?.avatar?.url && (
                         <img src={author.profile.avatar.url} alt="" className="size-6 rounded-full bg-primary" />
                     )}
-                    {author && <span>{author.name}</span>}
-                    <span className="ml-auto">{post.frontmatter.date}</span>
+                    {author && <span className="truncate">{author.name}</span>}
+                    <span className="ml-auto shrink-0">{post.frontmatter.date}</span>
                 </div>
             </div>
         </Link>
@@ -411,7 +411,7 @@ function ResearchPostsSection({ posts }: { posts: ResearchPost[] }) {
                 We publish what we learn as we go – the wins, the faceplants, and the 3-year-old bugs our agents dig up
                 at 3am.
             </p>
-            <div className="grid @md:grid-cols-2 @xl:grid-cols-3 gap-4 mb-6">
+            <div className="grid @md:grid-cols-2 @xl:grid-cols-3 auto-rows-fr gap-4 mb-6">
                 {posts.map((post) => (
                     <PostCard key={post.id} post={post} />
                 ))}
