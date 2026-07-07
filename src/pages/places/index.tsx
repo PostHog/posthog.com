@@ -135,7 +135,15 @@ function Places(): JSX.Element {
                 image="/images/og/default.png"
             />
 
-            <Explorer template="generic" slug="places" title="Places" fullScreen viewportClasses="[&>div>div]:h-full">
+            <Explorer
+                template="generic"
+                slug="places"
+                title="Places"
+                headerBarOptions={['showBack', 'showForward']}
+                showAddressBar={false}
+                fullScreen
+                viewportClasses="[&>div>div]:h-full"
+            >
                 <div data-scheme="primary" className="flex flex-col @xl:flex-row text-primary h-full">
                     <aside
                         data-scheme="secondary"

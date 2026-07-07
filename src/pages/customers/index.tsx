@@ -152,6 +152,7 @@ export default function Customers(): JSX.Element {
                 proseSize="lg"
                 showQuestions={false}
                 hideRightSidebar
+                hideLeftSidebar
                 hideMenu
                 defaultNavVisible={false}
             >

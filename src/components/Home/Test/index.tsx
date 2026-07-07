@@ -5,7 +5,6 @@ import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
 import { useApp } from '../../../context/App'
 import { useWindow } from '../../../context/Window'
-import ControlHero from 'components/Home/Sections/Hero'
 import DataStackSection from 'components/Home/Sections/DataStackSection'
 import PricingSection from 'components/Home/Sections/PricingSection'
 import WhyPostHogSection from 'components/Home/Sections/WhyPostHogSection'
@@ -25,6 +24,7 @@ import IntegrationPrompt from 'components/IntegrationPrompt'
 import { motion } from 'framer-motion'
 import HeroCarousel from 'components/Home/HeroCarousel'
 import { buildTabs } from 'components/Home/HeroCarousel/tabs'
+import { TestRolloutSlide, DebugFixSlide, OnePlaceSlide, UnderstandUsageSlide } from '../HeroCarousel/slides'
 // NOTE: `components/PlatformInstall` (index/IconButton/schema/CopyableCommand), the new
 // `Logomark*` icons added to `components/OSIcons/Icons.tsx`, and the `canvas-confetti`
 // dependency are all VENDORED VERBATIM from the `9000` branch — kept byte-identical to that
@@ -39,6 +39,7 @@ import { Typecaast } from '@typecaast/react'
 import configSlack from './typecaast-slack.json'
 import configCursor from './typecaast-cursor.json'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
+import { Tagline as ControlTagline, CTAs as ControlCTAs, HeroImage as ControlHeroImage } from '../Control'
 
 const SecondaryActions = ({ justify = 'center' }: { className?: string; justify?: 'center' | 'start' }) => (
     <p
@@ -287,6 +288,66 @@ function TestHero(): JSX.Element {
     )
 }
 
+function ControlHero(): JSX.Element {
+    return (
+        <>
+            <div className="text-center @xl:text-left mb-12">
+                <ControlHeroImage />
+
+                <h1 className="[&_p]:m-0 flex gap-1 flex-wrap justify-center @xl:justify-start !text-2xl mb-8 pt-2">
+                    <div className="dark:hidden">
+                        <Logo />
+                    </div>
+                    <div className="hidden dark:block">
+                        <Logo fill="white" />
+                    </div>
+                </h1>
+
+                <ControlTagline />
+
+                <ControlCTAs />
+            </div>
+
+            <HeroCarousel
+                tabs={[
+                    {
+                        value: 'understand-usage',
+                        label: 'Understand product usage',
+                        content: <UnderstandUsageSlide />,
+                        color: 'bg-blue',
+                        activeText: 'text-white',
+                        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
+                    },
+                    {
+                        value: 'one-place',
+                        label: 'One place for product data',
+                        content: <OnePlaceSlide />,
+                        color: 'bg-teal',
+                        activeText: 'text-black',
+                        progressBar: 'bg-black/70 shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
+                    },
+                    {
+                        value: 'debug-fix',
+                        label: 'Debug & fix issues',
+                        content: <DebugFixSlide />,
+                        color: 'bg-salmon',
+                        activeText: 'text-white',
+                        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
+                    },
+                    {
+                        value: 'test-rollout',
+                        label: 'Test & roll out changes',
+                        content: <TestRolloutSlide />,
+                        color: 'bg-purple',
+                        activeText: 'text-white',
+                        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
+                    },
+                ]}
+            />
+        </>
+    )
+}
+
 function Hero(): JSX.Element {
     const posthog = usePostHog()
     return (
@@ -326,7 +387,7 @@ export default function HomeTest() {
                     { hrefLang: 'x-default', href: '/' },
                 ]}
             />
-            <ReaderView proseSize="lg" hideLeftSidebar>
+            <ReaderView proseSize="lg" hideLeftSidebar showQuestions={false}>
                 <div className="space-y-12">
                     <Hero />
                     <Customers />

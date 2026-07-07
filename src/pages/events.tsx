@@ -321,6 +321,7 @@ export const EventsContent = ({ initialSelectedId, initialSelectedEvent }: Event
             template="generic"
             slug="events"
             title="Cool tech events"
+            headerBarOptions={['showBack', 'showForward']}
             fullScreen
             viewportClasses="[&>div>div]:h-full"
             showAddressBar={false}
