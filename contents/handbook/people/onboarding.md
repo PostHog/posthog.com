@@ -41,6 +41,9 @@ Every new joiner at PostHog has an onboarding buddy. If possible, a new joiner w
     -   Make sure to add the details of the in-person onboarding to the [In-person Onboarding Calendar](https://calendar.google.com/calendar/u/0?cid=Y19lMzdjNjE0NzM0NDAyOGJlY2ZkMTc0Y2MxZjUxZjY5ZTkxMzY0NzVlNTFjMTE3MjA4OGM2NWQwNjE1YTczNmRlQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20) so that other PostHog team members can join, if possible. Simply create an event in your calendar and then invite the in-person onboarding calendar as a guest.
 -   You will remain the new joiner's main point of contact for the first few weeks, so please continue to check in with them at least once a week for the first month or so.
 -   As onboarding buddy, you are responsible for making sure the onboarding is fun and effective, so you should make sure there's a clear plan for work _and_ social time. Great in-person onboarding is crucial for getting someone started at PostHog.
+    -   The plan doesn't need to be minute-by-minute, but do have a rough shape for the days you're together so the new joiner isn't left wondering what's next once the initial intro conversations are done. A little structure goes a long way, and still leaves plenty of room to explore and learn by doing.
+-   Point the new joiner to the [handbook](/handbook) early and talk through why it matters – it's how we default to sharing context at PostHog, and knowing their way around it is one of the most useful things they can pick up in week one.
+-   **Not run an onboarding before?** That's completely fine – ask the People & Ops team or your team lead to pair you with someone who's done it before to support _you_. It's much easier to give someone a great start when you're not figuring out what "great" looks like at the same time.
 
 ## In-person onboarding
 
