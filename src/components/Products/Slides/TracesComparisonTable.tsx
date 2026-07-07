@@ -94,8 +94,8 @@ export default function TracesComparisonTable(): JSX.Element {
     ]
 
     return (
-        <div className="h-full text-primary bg-primary overflow-auto p-4 @md:p-8 flex flex-col justify-center [&_.OSTable]:mb-0">
-            <OSTable columns={columns} rows={rows} width="full" size="lg" rowAlignment="center" editable={false} />
+        <div className="h-full text-primary bg-primary overflow-auto p-4 @md:p-6 [&_.OSTable]:mb-0">
+            <OSTable columns={columns} rows={rows} width="full" size="md" rowAlignment="center" editable={false} />
         </div>
     )
 }

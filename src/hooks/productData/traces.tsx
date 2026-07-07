@@ -39,8 +39,8 @@ export const traces = {
     handle: 'traces',
     type: 'traces',
     slug: 'traces',
-    color: 'purple',
-    colorSecondary: 'blue',
+    color: 'blue',
+    colorSecondary: 'sky-blue',
     category: 'product_engineering',
     status: 'beta',
     seo: {
@@ -49,7 +49,7 @@ export const traces = {
             'Traces pinpoint the exact query that broke. PostHog Code opens the PR and sends it to your Inbox. You hit merge. That’s the whole job.',
     },
     overview: {
-        title: 'Accurate traces',
+        title: 'Straight to the line that broke',
         description:
             'Traces pinpoint the exact query. PostHog Code opens the PR and sends it to your Inbox. You hit merge. That’s the whole job.',
         textColor: 'text-white',
@@ -60,7 +60,7 @@ export const traces = {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Group_144145_2a408da79b.png',
             alt: 'Traces overview',
             classes: 'max-w-5xl mt-auto',
-            imgClasses: 'rounded-lg',
+            imgClasses: 'rounded-md',
             classesMobile: '',
             imgClassesMobile: '',
         },
@@ -75,13 +75,13 @@ export const traces = {
             template: 'splitImage',
             headline: 'Every span of a request, in one waterfall',
             description:
-                '<span class="block mb-4">A trace stitches one request into a tree of spans across every service, queue, and third-party call it touches. Follow the <code>trace_id</code> and you get the full path: where the time went and which span actually broke, even across async boundaries, where stack traces give up.</span><span class="block">Built on OpenTelemetry, so there’s no proprietary SDK to adopt. Point your existing exporter at PostHog and you’re done. Traces land in the same project as your replays, errors, logs, and analytics, with correlated logs on every span.</span>',
+                '<span class="block mb-4">A trace stitches one request into a tree of spans across every service, queue, and third-party call it touches. Follow the <span class="font-code">trace_id</span> and you get the full path: where the time went and which span actually broke, even across async boundaries, where stack traces give up.</span><span class="block">Built on OpenTelemetry, so there’s no proprietary SDK to adopt. Point your existing exporter at PostHog and you’re done. Traces land in the same project as your replays, errors, logs, and analytics, with correlated logs on every span.</span>',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_07_01_at_14_32_15_2x_1_2e2baf7533.png',
                     alt: 'A distributed trace shown as a waterfall of spans',
                     shadow: true,
-                    className: 'justify-center items-center mt-12 rounded-lg',
+                    className: 'justify-center items-center mt-24 rounded-md',
                 },
             ],
         },
@@ -92,7 +92,7 @@ export const traces = {
             template: 'grid',
             headline: 'Catnip for agents',
             description:
-                'Every signal source tells self-driving <em>that</em> something is wrong. Traces are the only one that says <em>where and why.</em>',
+                '<span class="text-2xl @2xl:text-3xl">Every signal source tells self-driving <em>that</em> something is wrong. Traces are the only one that says <em>where and why.</em></span>',
             features: [],
             children: (
                 <div className="max-w-6xl mx-auto w-full text-left">
@@ -112,7 +112,7 @@ export const traces = {
                             </li>
                         ))}
                     </ul>
-                    <p className="mt-10 text-2xl @2xl:text-3xl !leading-snug max-w-5xl">
+                    <p className="mt-14 mb-2 text-xl @2xl:text-2xl !leading-snug max-w-5xl">
                         The first three are symptoms. The trace is the one that hands an agent the right location. The
                         agent starts where the trace points and fixes the span that’s actually slow.
                     </p>

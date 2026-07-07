@@ -19,7 +19,9 @@ export default function TracesSlackCallout(): JSX.Element {
                         <p className="text-sm font-semibold uppercase tracking-wide text-secondary mb-2">
                             PostHog in Slack
                         </p>
-                        <h2 className="text-4xl @2xl:text-3xl font-bold mb-2">Latency?</h2>
+                        <h2 className="text-4xl @2xl:text-3xl font-bold mb-2">
+                            Latency? <span className="font-code font-normal">@PostHog</span>
+                        </h2>
                         <p className="text-xl mb-6">
                             Mention <code>@PostHog</code> on a slow endpoint. It pulls the traces, finds the span eating
                             your time, and opens a PR right there in the thread. You review without leaving the channel.
@@ -40,7 +42,7 @@ export default function TracesSlackCallout(): JSX.Element {
                 <img
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/Group_144141_842b4283dd.png"
                     alt="PostHog in Slack, fixing a slow trace"
-                    className="mx-auto block w-full max-w-2xl"
+                    className="mx-auto block w-full max-w-4xl"
                 />
             </div>
         </div>
