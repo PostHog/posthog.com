@@ -10,12 +10,10 @@ For customers who want to sign up for an annual (or longer) plan there is some a
 
 ### Multi-year deals and credit allocation
 
-For a multi-year deal, the credit term matches the length of the contract (e.g. 24 months for a two-year deal), not 12 months.
+The credit term only extends beyond 12 months (e.g. to 24 months for a two-year deal) if the customer pays the full amount for the entire term upfront (e.g. the full two-year amount paid upfront). How the credits are allocated depends on how the customer pays:
 
-How the credits are allocated depends on how the customer pays:
-
--   **Paying per year (or in tranches):** credits are granted in tranches allocated on each renewal date. For example, a two-year deal split evenly grants half the credits in the first year and half in the second.
--   **Paying all upfront:** the customer gets the full credit amount added in bulk at the start, with an expiry set to the full length of the term (e.g. a two-year expiry for a two-year deal).
+-   **Paying all upfront for the full term:** the customer gets the full credit amount added in bulk at the start, with an expiry set to the full length of the term (e.g. a two-year expiry for a two-year deal paid upfront).
+-   **Paying per year (or in tranches):** the extended term does not apply. Credits are granted in tranches allocated on each renewal date, each with a 12-month term. For example, a two-year deal split evenly grants half the credits in the first year and half on the renewal date at the start of the second.
 
 ### What about monthly customers?
 
