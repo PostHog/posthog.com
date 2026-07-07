@@ -61,24 +61,31 @@ export default function TracesComparisonTable(): JSX.Element {
 
     const rows = [
         sectionRow('Tracing'),
-        featureRow('Distributed tracing', [<Check />, <Check />, <Check />, <Check />]),
+        featureRow('Distributed trace waterfall', [<Check />, <Check />, <Check />, <Check />]),
+        featureRow('Service / dependency map', [<Check />, <Check />, <Cross />, <Cross />]),
+        featureRow('Code-level profiling (flame graphs)', [<Cross />, <Check />, <Check />, <Cross />]),
+        featureRow('Sampling & retention controls', [
+            <Check />,
+            <Check />,
+            <span>Head sampling only</span>,
+            <span>Via OTel SDK</span>,
+        ]),
+        sectionRow('Standards & setup'),
         featureRow('Native OpenTelemetry ingestion', [
             <Check />,
-            <span>Converts to its own format</span>,
+            <CheckWith note="maps to its own model" />,
             <CheckWith note="beta" />,
             <Check />,
         ]),
-        featureRow('No proprietary SDK required', [
-            <Check />,
-            <span>
-                <code>dd-trace</code> for full features
-            </span>,
-            <span>SDK is the mature path</span>,
-            <Check />,
+        featureRow('No proprietary SDK required', [<Check />, <span>Partial</span>, <span>Partial</span>, <Check />]),
+        featureRow('Instrumentation', [
+            <span>eBPF</span>,
+            <span>Agent</span>,
+            <span>SDK</span>,
+            <span>OpenTelemetry</span>,
         ]),
         sectionRow('One platform'),
         featureRow('Errors, logs & session replay alongside traces', [<Check />, <Check />, <Check />, <Check />]),
-        featureRow('Product analytics on the same data', [<Cross />, <Check />, <Cross />, <Check />]),
         sectionRow('AI & self-driving'),
         featureRow('AI opens a code fix PR', [<Cross />, <Cross />, <CheckWith note="beta" />, <Check />]),
         featureRow('Fix a bug and open a PR from Slack', [<Cross />, <Cross />, <CheckWith note="beta" />, <Check />]),
