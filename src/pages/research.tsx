@@ -9,6 +9,15 @@ import Link from 'components/Link'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { Accordion } from 'components/RadixUI/Accordion'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
+import { ChoppyReveal } from 'components/Code/ChoppyReveal'
+import {
+    StickerBulb,
+    StickerMicroscope,
+    StickerRun,
+    StickerTerminal,
+    StickerUsers,
+    StickerZZZ,
+} from 'components/Stickers/Stickers'
 import usePostHog from 'hooks/usePostHog'
 import {
     IconArrowRight,
@@ -20,6 +29,33 @@ import {
     IconPullRequest,
 } from '@posthog/icons'
 import { useEvents, type Event } from './events'
+
+// ─────────────────────────────────────────────
+// Section header (sticker + kicker + title + subtitle)
+// ─────────────────────────────────────────────
+
+function SectionHeader({
+    sticker: Sticker,
+    kicker,
+    title,
+    subtitle,
+}: {
+    sticker: React.ComponentType<{ className?: string }>
+    kicker: string
+    title: string
+    subtitle?: React.ReactNode
+}) {
+    return (
+        <div className="mb-6">
+            <div className="flex items-center gap-2 mb-1.5">
+                <Sticker className="size-8 -rotate-3" />
+                <span className="text-xs font-semibold uppercase tracking-widest text-secondary">{kicker}</span>
+            </div>
+            <h2 className="text-2xl m-0 mb-2">{title}</h2>
+            {subtitle && <p className="text-secondary max-w-2xl m-0">{subtitle}</p>}
+        </div>
+    )
+}
 
 // ─────────────────────────────────────────────
 // Hero (H1 is a live PostHog experiment: research-page-h1)
@@ -69,25 +105,25 @@ function HeroSection({ teamCrestUrl }: { teamCrestUrl?: string }) {
             </div>
 
             <h1 className="text-xl @xl:text-3xl font-bold leading-tight mb-4 !mt-0 max-w-3xl">
-                {H1_VARIANTS[variant]}
+                <ChoppyReveal wordDelay={45}>{H1_VARIANTS[variant]}</ChoppyReveal>
             </h1>
 
             <div className="inline-flex items-start gap-2 border border-primary rounded bg-accent px-3 py-2 mb-6 max-w-2xl">
                 <IconFlask className="size-5 text-purple shrink-0 mt-0.5" />
                 <p className="text-sm text-secondary m-0">
-                    That headline is a live A/B test – you're seeing variant{' '}
+                    That headline is a live A/B experiment we're running – you're seeing variant{' '}
                     <strong className="text-primary">{variant === 'control' ? 'A' : 'B'}</strong>, half of visitors get
                     the other one, and we're measuring which makes people stick around. Yes, we're{' '}
                     <Link to="/experiments" state={{ newWindow: true }} className="underline">
-                        A/B testing
+                        running an experiment
                     </Link>{' '}
-                    the research page with our own product while you read about it.
+                    on our own research page. How meta.
                 </p>
             </div>
 
             <div className="max-w-2xl space-y-3">
                 <p>
-                    PostHog is becoming a company that{' '}
+                    PostHog helps you{' '}
                     <RoughAnnotation
                         type="highlight"
                         color="rgba(48, 164, 108, 0.2)"
@@ -95,28 +131,16 @@ function HeroSection({ teamCrestUrl }: { teamCrestUrl?: string }) {
                         padding={2}
                         delay={300}
                     >
-                        ships fixes while you sleep
+                        ship fixes while you sleep
                     </RoughAnnotation>
-                    . That's not a metaphor: agents that watch session replays, error tracking, and conversion funnels,
-                    work out what's broken, and open the pull request before you've finished your coffee.
-                </p>
-                <p>
-                    Getting there means doing things analytics companies don't usually do – training our own models on
-                    the data behind session replays, building agents that understand your product (not just your
-                    codebase), and occasionally pointing them at our own query engine overnight to see what they dig up.{' '}
-                    <RoughAnnotation type="underline" color="#F54E00" strokeWidth={2} delay={800} multiline>
-                        They found a 3-year-old bug.
-                    </RoughAnnotation>{' '}
-                    It's fine. We're fine.
+                    , but we can't do that with your standard, off-the-shelf ideas and apps. That's why we're training
+                    our own models, building open source tools, and pursuing all sorts of hare-brained schemes. It's
+                    research. It's fine.
                 </p>
                 <p className="text-sm text-secondary">
-                    The master plan is in{' '}
+                    Find out why this important in{' '}
                     <Link to="/blog/posthogs-next-chapter" state={{ newWindow: true }} className="underline">
-                        PostHog's next chapter
-                    </Link>
-                    . The model-training confessional is in{' '}
-                    <Link to="/blog/training-ai-models" state={{ newWindow: true }} className="underline">
-                        Training our own AI models
+                        our master plan for PostHog
                     </Link>
                     .
                 </p>
@@ -209,12 +233,12 @@ function StatusStamp({ status, rotate }: { status: RoadmapStatus; rotate: string
 function RoadmapSection() {
     return (
         <section className="mb-12 px-4 @xl:px-8">
-            <h2 className="text-2xl m-0 mb-2">What we're researching right now</h2>
-            <p className="text-secondary max-w-2xl mb-6">
-                The AI Research team's current pipeline, in roughly the order the whiteboard says. Each step gets us
-                closer to models and agents that understand products the way PostHog does. One of these comes with a job
-                attached.
-            </p>
+            <SectionHeader
+                sticker={StickerMicroscope}
+                kicker="The pipeline"
+                title="What we're researching right now"
+                subtitle="Here are just some of the things the AI Research team is currently thinking about, working on, or begging for help with."
+            />
             <div className="grid @lg:grid-cols-2 gap-4">
                 {ROADMAP_ITEMS.map((item, index) => (
                     <div
@@ -278,42 +302,60 @@ function ShippedSection() {
 
     return (
         <section className="mb-12 px-4 @xl:px-8">
-            <h2 className="text-2xl m-0 mb-2">Fresh from the lab</h2>
-            <p className="text-secondary max-w-2xl mb-6">
-                Merged pull requests from the research team, pulled live from GitHub across PostHog's public repos. The
-                actual work, as it lands – no press-release filter.
-            </p>
+            <SectionHeader
+                sticker={StickerTerminal}
+                kicker="Live from GitHub"
+                title="Fresh from the lab"
+                subtitle="Merged pull requests from the AI research team, pulled live from GitHub across PostHog's public repos. This is how we know they aren't just sitting around eating ramen like other academics."
+            />
 
-            {prs && prs.length > 0 ? (
-                <div className="space-y-2 mb-6">
-                    {prs.map((pr) => (
-                        <Link
-                            key={pr.url}
-                            to={pr.url}
-                            externalNoIcon
-                            className="group border border-primary rounded bg-accent px-4 py-3 flex flex-col @md:flex-row @md:items-center gap-1 @md:gap-3 no-underline text-primary transition-all duration-150 hover:border-purple hover:-translate-y-0.5 hover:shadow-md"
-                        >
-                            <span className="inline-flex items-center gap-1.5 shrink-0 @md:w-40">
-                                <IconPullRequest className="size-4 text-purple shrink-0" />
-                                <span className="text-xs font-mono text-secondary truncate">{pr.repo}</span>
-                            </span>
-                            <span className="flex-1 font-semibold text-sm group-hover:underline">{pr.title}</span>
-                            <span className="text-xs text-secondary shrink-0">
-                                @{pr.author}
-                                {pr.mergedAt ? ` · ${dayjs(pr.mergedAt).format('MMM D')}` : ''}
-                            </span>
-                        </Link>
-                    ))}
+            <div className="border border-primary rounded overflow-hidden mb-6 shadow-lg">
+                <div className="flex items-center gap-1.5 px-3 py-2 bg-accent border-b border-primary">
+                    <span className="size-2.5 rounded-full bg-red" />
+                    <span className="size-2.5 rounded-full bg-yellow" />
+                    <span className="size-2.5 rounded-full bg-green" />
+                    <span className="ml-2 text-xs font-mono text-secondary truncate">
+                        ai-research – git log --merges
+                    </span>
                 </div>
-            ) : (
-                <div className="border border-primary rounded bg-accent p-6 text-center mb-6">
-                    <IconPullRequest className="size-8 text-muted mx-auto mb-2" />
-                    <p className="font-semibold m-0 mb-1">
-                        {prs === null ? 'Rummaging through GitHub…' : 'GitHub is rate-limiting us. Fair.'}
-                    </p>
-                    <p className="text-sm text-secondary m-0">The work continues regardless – see it at the source.</p>
-                </div>
-            )}
+                {prs && prs.length > 0 ? (
+                    <div className="bg-primary">
+                        {prs.map((pr) => (
+                            <Link
+                                key={pr.url}
+                                to={pr.url}
+                                externalNoIcon
+                                className="group border-t border-primary first:border-t-0 px-4 py-2.5 flex flex-col @md:flex-row @md:items-center gap-1 @md:gap-3 no-underline text-primary transition-colors duration-150 hover:bg-accent"
+                            >
+                                <span className="inline-flex items-center gap-1.5 shrink-0 @md:w-36">
+                                    <IconPullRequest className="size-4 text-purple shrink-0" />
+                                    <span className="text-xs font-mono text-secondary truncate">{pr.repo}</span>
+                                </span>
+                                <span className="flex-1 font-mono text-sm group-hover:underline truncate">
+                                    {pr.title}
+                                </span>
+                                <span className="text-xs font-mono text-secondary shrink-0">
+                                    @{pr.author}
+                                    {pr.mergedAt ? ` · ${dayjs(pr.mergedAt).format('MMM D')}` : ''}
+                                </span>
+                            </Link>
+                        ))}
+                        <div className="border-t border-primary px-4 py-2 text-xs font-mono text-secondary">
+                            <span className="animate-pulse">▋</span> agents still working…
+                        </div>
+                    </div>
+                ) : (
+                    <div className="bg-primary p-6 text-center">
+                        <IconPullRequest className="size-8 text-muted mx-auto mb-2" />
+                        <p className="font-semibold font-mono text-sm m-0 mb-1">
+                            {prs === null ? '$ fetching merged PRs…' : '$ error 403: GitHub is rate-limiting us. Fair.'}
+                        </p>
+                        <p className="text-sm text-secondary m-0">
+                            The work continues regardless – see it at the source.
+                        </p>
+                    </div>
+                )}
+            </div>
 
             <OSButton
                 asLink
@@ -406,11 +448,12 @@ function PostCard({ post }: { post: ResearchPost }) {
 function ResearchPostsSection({ posts }: { posts: ResearchPost[] }) {
     return (
         <section className="mb-12 px-4 @xl:px-8">
-            <h2 className="text-2xl m-0 mb-2">Research in the open</h2>
-            <p className="text-secondary max-w-2xl mb-6">
-                We publish what we learn as we go – the wins, the faceplants, and the 3-year-old bugs our agents dig up
-                at 3am.
-            </p>
+            <SectionHeader
+                sticker={StickerBulb}
+                kicker="The receipts"
+                title="Research in the open"
+                subtitle="We publish what we learn as we go – the big wins, the disastrous errors, the cancelled projects we gave up on along the way."
+            />
             <div className="grid @md:grid-cols-2 @xl:grid-cols-3 auto-rows-fr gap-4 mb-6">
                 {posts.map((post) => (
                     <PostCard key={post.id} post={post} />
@@ -481,10 +524,12 @@ function PeopleSection({ teamProfiles, posts }: { teamProfiles: TeamProfile[]; p
 
     return (
         <section className="mb-12 px-4 @xl:px-8">
-            <h2 className="text-2xl m-0 mb-2">Who's doing research at PostHog?</h2>
-            <p className="text-secondary max-w-2xl mb-6">
-                The AI Research team, plus the people who can't stop writing about it.
-            </p>
+            <SectionHeader
+                sticker={StickerUsers}
+                kicker="The humans"
+                title="Who's doing research at PostHog?"
+                subtitle="The AI Research team isn't the only team doing science stuff. Everyone at PostHog can pitch in on our research, or write about it. Here are all the people contributing to our research."
+            />
             <div className="flex flex-wrap gap-3">
                 {everyone.map((person) => {
                     const card = (
@@ -548,11 +593,12 @@ function EventsSection() {
 
     return (
         <section className="mb-12 px-4 @xl:px-8">
-            <h2 className="text-2xl m-0 mb-2">Hear it from the humans</h2>
-            <p className="text-secondary max-w-2xl mb-6">
-                Our engineers take this show on the road – meetups, conferences, and anywhere else with a projector and
-                a tolerant audience.
-            </p>
+            <SectionHeader
+                sticker={StickerRun}
+                kicker="On tour"
+                title="Attend a PostHog lecture"
+                subtitle="OK, it's probably less of a lecture and more like a meet-up, but still. Our engineers take this show on the road whenever they can find a tolerant audience and somewhere to plug in a projector."
+            />
 
             {upcomingTalks.length > 0 ? (
                 <div className="space-y-3 mb-6">
@@ -585,10 +631,10 @@ function EventsSection() {
                 </div>
             ) : (
                 <div className="border border-primary rounded bg-accent p-6 text-center mb-6">
-                    <IconCalendar className="size-8 text-muted mx-auto mb-2" />
+                    <StickerZZZ className="size-12 mx-auto mb-2 -rotate-3" />
                     <p className="font-semibold m-0 mb-1">No research talks on the calendar right now</p>
                     <p className="text-sm text-secondary m-0">
-                        The researchers are researching. Check the events page for everything else we're up to.
+                        The researchers are busy researching. Check back soon for more upcoming events!
                     </p>
                 </div>
             )}
@@ -613,14 +659,14 @@ function EventsSection() {
 
 const FAQ_ITEMS = [
     {
-        trigger: 'Will you train models on my data?',
+        trigger: 'Do you train models and do research using my data?',
         content: (
             <div className="space-y-2">
                 <p>
-                    Only with the guardrails we published up front: users on our EU cloud are opted out by default, as
-                    is anyone with an agreement that prevents training (BAA, MSA, or similar). Other US cloud users are
-                    opted in by default. Everything is anonymized before training, we train in-house, and nothing goes
-                    to third-party model providers.
+                    Only with the guardrails we published up front: users on our EU cloud are opted out of model
+                    training by default, as is anyone with an agreement that prevents training (BAA, MSA, or similar).
+                    Other US cloud users are opted in by default. Everything is anonymized before training, we train
+                    in-house, and nothing goes to third-party model providers.
                 </p>
                 <p>
                     The full internet-friendly numbered list is in{' '}
@@ -633,7 +679,7 @@ const FAQ_ITEMS = [
         ),
     },
     {
-        trigger: 'Can I opt out?',
+        trigger: 'Can I ask you not to train with my data?',
         content: (
             <p>
                 Yes, at any time, in your{' '}
@@ -646,33 +692,18 @@ const FAQ_ITEMS = [
     },
     {
         trigger: 'Will you sell my data, or models trained on it?',
-        content: (
-            <p>
-                No. The point is making PostHog better at finding and fixing problems in your product – not monetizing
-                your data. We do all the training ourselves, which is also why we won't send it to third-party model
-                providers.
-            </p>
-        ),
+        content: <p>Easy answer: No.</p>,
     },
     {
-        trigger: 'Is any of this actually real?',
+        trigger: 'Can I be a researcher too?',
         content: (
             <p>
-                Suspiciously real. The pull requests above are fetched live from GitHub, the blog posts are the
-                receipts, and this page's headline is an A/B test running in PostHog right now. We would not build this
-                much infrastructure for a bit.
-            </p>
-        ),
-    },
-    {
-        trigger: 'Are you hiring researchers?',
-        content: (
-            <p>
-                Yes –{' '}
+                Yes! We're hiring –{' '}
                 <Link to="/careers/ai-research-engineer" state={{ newWindow: true }} className="underline">
-                    AI research engineer
+                    AI research engineers
                 </Link>
-                . Bring strong opinions about data pipelines and a tolerance for hedgehogs.
+                and nearly all our code if open-source so you can contribute directly. Research should be transparent,
+                right?
             </p>
         ),
     },
@@ -699,25 +730,37 @@ function FAQSection() {
 function CTASection() {
     return (
         <section className="mb-12 px-4 @xl:px-8">
-            <div className="border border-primary rounded bg-accent p-6 @xl:p-8 text-center">
-                <h2 className="text-2xl m-0 mb-2">Use the research before it's finished</h2>
-                <p className="text-secondary max-w-xl mx-auto mb-6">
-                    Most of this ships as public betas long before it's polished. See what we're building this week, or
-                    flip on feature previews and break something new.
-                </p>
-                <div className="flex flex-col @md:flex-row items-center justify-center gap-3">
-                    <OSButton asLink to="/wip" state={{ newWindow: true }} variant="primary" size="md">
-                        See what we're working on
-                    </OSButton>
-                    <OSButton
-                        asLink
-                        to="https://app.posthog.com/settings/user-feature-previews"
-                        external
-                        variant="secondary"
-                        size="md"
-                    >
-                        Enable feature previews
-                    </OSButton>
+            <div className="relative border border-primary rounded overflow-hidden p-6 @xl:p-8 text-center">
+                <CloudinaryImage
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/texture_tan_9608fcca70.png"
+                    className="dark:hidden absolute inset-0"
+                    imgClassName="h-full w-full object-cover"
+                />
+                <CloudinaryImage
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/texture_tan_dark_a92b0e022d.png"
+                    className="hidden dark:block absolute inset-0"
+                    imgClassName="h-full w-full object-cover"
+                />
+                <div className="relative">
+                    <h2 className="text-2xl m-0 mb-2">Use the research before it's finished</h2>
+                    <p className="text-secondary max-w-xl mx-auto mb-6">
+                        Most of this ships as public betas long before it's polished. See what we're building this week,
+                        or flip on feature previews and break something new.
+                    </p>
+                    <div className="flex flex-col @md:flex-row items-center justify-center gap-3">
+                        <OSButton asLink to="/wip" state={{ newWindow: true }} variant="primary" size="md">
+                            See what we're working on
+                        </OSButton>
+                        <OSButton
+                            asLink
+                            to="https://app.posthog.com/settings/user-feature-previews"
+                            external
+                            variant="secondary"
+                            size="md"
+                        >
+                            Enable feature previews
+                        </OSButton>
+                    </div>
                 </div>
             </div>
         </section>
