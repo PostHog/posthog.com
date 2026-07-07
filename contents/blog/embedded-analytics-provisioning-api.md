@@ -12,15 +12,14 @@ hideAnchor: true
 category: Engineering
 tags:
   - Engineering
-  - AI
 seo:
   metaTitle: "How to set up embedded analytics with the PostHog provisioning API"
   metaDescription: "I built a fake farm-website company on PostHog's provisioning API. Here's how it creates accounts for its users and reads their analytics back, with the gotchas I hit."
 ---
 
-I live on a little farm and recently built a [website](https://creeksidefields.com/) to sell shares of hogs. My fellow farmers are better versed in the subtle arts of soil, plants, and animals than the [latest coding tool](https://posthog.com/code), so I threw together a website builder for them.
+I live on a little farm and recently built a [website](https://creeksidefields.com/) to sell shares of hogs. My fellow farmers are better versed in the subtle arts of soil, plants, and animals than the [latest coding tool](/code), so I threw together a website builder for them: HogFarm.
 
-Knowing who you're selling to is critical to generating demand, so wiring up PostHog for product analytics, session replay, and error reporting was a no-brainer. But farmers want to farm, not sign up for accounts and copy-paste API keys. So HogFarm provisions a PostHog account for each farm behind the scenes, then reads the analytics back into a dashboard the farmer never leaves to see.
+Knowing who you're selling to is critical to generating demand, so wiring up PostHog for product analytics, session replay, and error reporting was a no-brainer. But farmers want to farm, not sign up for accounts and copy-paste API keys. So HogFarm provisions a PostHog account for each farm behind the scenes, then reads the analytics back into a dashboard the farmer sees without ever leaving HogFarm.
 
 The code is [on GitHub](https://github.com/Brooker-Fam/hogfarm) and there's a [live version](https://hogfarm-guava-tri.vercel.app) you can click around. Here's how I built it.
 
@@ -34,14 +33,14 @@ It looks like this:
 
 ```json
 {
-  "client_id": "https://hogfarm-guava-tri.vercel.app/.well-known/posthog-client.json",
+  "client_id": "https://hogfarm-guava-tri.vercel.app/.well-known/posthog-client-v6.json",
   "client_name": "HogFarm",
   "redirect_uris": ["https://hogfarm-guava-tri.vercel.app/api/oauth/callback"],
   "token_endpoint_auth_method": "none",
   "grant_types": ["authorization_code"],
   "response_types": ["code"],
   "com.posthog": {
-    "scopes": ["endpoint:read", "endpoint:write", "insight:read", "project:read", "person:read", "session_recording:read", "sharing_configuration:write", "project:write"]
+    "scopes": ["endpoint:read", "endpoint:write", "query:read", "session_recording:read", "sharing_configuration:write", "project:write"]
   }
 }
 ```
@@ -57,7 +56,7 @@ const challenge = base64url(sha256(verifier))
 
 ## Creating an account the farmer never sees
 
-With HogFarm registered, the first call creates the farmer's PostHog account. I request the account on their behalf and PostHog provisions it in the background.
+With HogFarm registered, the first call creates the farmer's PostHog account. I request the account on their behalf and PostHog provisions it in the background. The API is pre-1.0, so every call pins the version with the `API-Version: 0.1d` header.
 
 ```ts
 await fetch(`${HOST}/api/agentic/provisioning/account_requests`, {
@@ -70,7 +69,7 @@ await fetch(`${HOST}/api/agentic/provisioning/account_requests`, {
     client_id: clientId,
     code_challenge: challenge,
     code_challenge_method: "S256",
-    scopes: ["endpoint:read", "endpoint:write", "insight:read", "project:read", "person:read", "session_recording:read", "sharing_configuration:write", "project:write"],
+    scopes: ["endpoint:read", "endpoint:write", "query:read", "session_recording:read", "sharing_configuration:write", "project:write"],
     configuration: { region: "US", organization_name: farmName },
   }),
 })
@@ -84,14 +83,15 @@ There are a few cases to handle for this response:
 
 ## Getting the farmer's project key
 
-The account exists but it's empty. Two calls fix that: first I trade the code for an access token, replaying the PKCE verifier to prove it's me, then I use that token to provision the project. That second call hands back the `phc_` key that goes into the farm site and starts the data flowing. First, the token swap:
+The account exists but it's empty. Two calls fix that: one to trade the code for an access token, replaying the PKCE verifier to prove it's me, then another to provision the project. Here's the token swap:
 
 ```ts
-await fetch(`${HOST}/api/agentic/oauth/token`, {
+const res = await fetch(`${HOST}/api/agentic/oauth/token`, {
   method: "POST",
   headers: { "API-Version": "0.1d", "Content-Type": "application/x-www-form-urlencoded" },
   body: new URLSearchParams({ grant_type: "authorization_code", code, code_verifier: verifier }),
 })
+const { access_token: accessToken, refresh_token: refreshToken } = await res.json()
 ```
 
 The next call provisions a project:
@@ -113,6 +113,8 @@ await fetch(`${HOST}/api/agentic/provisioning/resources`, {
 ```
 
 The response carries `complete.access_configuration.api_key` (the `phc_` token) and `host`, plus a top-level `id`: the team id for the project it just created, which I hold onto for every read below (it shows up as `teamId`). That key goes into the farm site HogFarm generates, so visits start landing in PostHog right away. `service_id: "free"` gives a free-tier project with no card required, which is all HogFarm needs.
+
+Access tokens last an hour, so anything long-lived means holding onto the refresh token. I store both encrypted in Postgres with AES-256-GCM, and the key lives only in the environment, never in the database.
 
 ![The generated farm site, with the PostHog snippet already wired in](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/generated_farm_site_af6902b4a8.png)
 
@@ -136,7 +138,7 @@ await fetch(`${HOST}/api/projects/${teamId}/endpoints/`, {
 })
 ```
 
-That publishes the seven-day trend; two more cover unique visitors and top pages. Endpoints live in the project, so I create all three in each farm's project right after I provision it. From then on the dashboard just calls them by name with `endpoint:read`:
+That publishes the seven-day trend; two more cover unique visitors and top pages. Endpoints live in the project, so I create all three in each farm's project right after I provision it. I also seed a week of demo pageviews at the same time, so a brand-new dashboard has something to show (a trap there, see below). From then on the dashboard just calls them by name with `endpoint:read`:
 
 ```ts
 const res = await fetch(
@@ -150,9 +152,7 @@ const res = await fetch(
 const { results } = await res.json()
 ```
 
-I didn't have the `refresh` in there at first, and the dashboard froze on an empty read for the first minute after provisioning. An Endpoint caches its result by default, so my very first call, fired before any events had landed, cached an empty answer and kept handing it back, at the moment the dashboard needs to look alive. Adding `refresh: "force"` fixed it: it recomputes on every call, so the dashboard always reflects what's actually in the project. That default caching is the whole point of an Endpoint when a query runs constantly, but for a fresh project viewed a handful of times right after setup it was working against me. A busier dashboard would drop the `force` and let the cache do its job.
-
-Access tokens last an hour, so for anything long-lived you're storing the refresh token. Encrypt it. I keep them in Postgres with AES-256-GCM and a key that only lives in the environment, never in the database.
+I didn't have the `refresh` in there at first, and the dashboard froze on an empty read for the first minute after provisioning. An Endpoint caches its result by default, so my very first call, fired before the seeded events had landed, cached an empty answer and kept handing it back, at the moment the dashboard needs to look alive. Adding `refresh: "force"` fixed it: it recomputes on every call, so the dashboard always reflects what's actually in the project. That default caching is the whole point of an Endpoint when a query runs constantly, but for a fresh project viewed a handful of times right after setup it was working against me. A busier dashboard would drop the `force` and let the cache do its job.
 
 ## Kicking off session replays
 
@@ -166,7 +166,24 @@ await fetch(`${HOST}/api/projects/${teamId}/`, {
 })
 ```
 
-Now every visit records. On the dashboard I play the most recent one inline. The provisioning token also has `sharing_configuration:write`, so I flip on public sharing for the latest recording and get an embed token back:
+Now every visit records. On the dashboard I play the most recent one inline. Finding it is one HogQL query, which is what `query:read` is for:
+
+```ts
+const recRes = await fetch(`${HOST}/api/projects/${teamId}/query/`, {
+  method: "POST",
+  headers: { Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json" },
+  body: JSON.stringify({
+    query: {
+      kind: "HogQLQuery",
+      query: `SELECT session_id FROM raw_session_replay_events
+              ORDER BY max_last_timestamp DESC LIMIT 1`,
+    },
+  }),
+})
+const [[recordingId]] = (await recRes.json()).results
+```
+
+The provisioning token also has `sharing_configuration:write`, so I flip on public sharing for that recording and get an embed token back:
 
 ```ts
 const res = await fetch(
