@@ -5,6 +5,7 @@ import TaskBarMenu from 'components/TaskBarMenu'
 import AppWindow from 'components/AppWindow'
 import CookieBannerToast from 'components/CookieBanner/ToastVersion'
 import { SearchOverlay } from 'components/SearchUI'
+import { ChatOverlay } from 'hooks/useChat'
 
 // Isolates the `windows` subscription so that opening/closing a window only
 // re-renders this list, not the whole Wrapper (and therefore not the desktop,
@@ -36,6 +37,7 @@ export default function Wrapper() {
             {!compact && <Dock />}
             */}
             <SearchOverlay />
+            <ChatOverlay />
             <CookieBannerToast />
         </div>
     )

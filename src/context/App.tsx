@@ -15,7 +15,6 @@ import SignIn from 'components/Squeak/components/Classic/SignIn'
 import Register from 'components/Squeak/components/Classic/Register'
 import ForgotPassword from 'components/Squeak/components/Classic/ForgotPassword'
 import { User } from 'hooks/useUser'
-import { ChatProvider } from 'hooks/useChat'
 import Start from 'components/Start'
 import useDataPipelinesNav from '../navs/useDataPipelinesNav'
 import useSourcesNav from '../navs/useSourcesNav'
@@ -54,6 +53,16 @@ export type Menu = MenuItem[]
 interface ChatContext {
     type: 'page'
     value: { path: string; label: string }
+}
+
+export interface ChatParams {
+    path: string
+    context?: ChatContext[]
+    quickQuestions?: string[]
+    chatId?: string
+    date?: string
+    initialQuestion?: string
+    codeSnippet?: { code: string; language: string; sourceUrl: string }
 }
 
 type WindowElement = React.ReactNode & {
@@ -111,23 +120,7 @@ interface AppContextType {
     openForgotPassword: () => void
     siteSettings: SiteSettings
     updateSiteSettings: (settings: SiteSettings) => void
-    openNewChat: ({
-        path,
-        context,
-        quickQuestions,
-        chatId,
-        date,
-        initialQuestion,
-        codeSnippet,
-    }: {
-        path: string
-        context?: ChatContext[]
-        quickQuestions?: string[]
-        chatId?: string
-        date?: string
-        initialQuestion?: string
-        codeSnippet?: { code: string; language: string; sourceUrl: string }
-    }) => void
+    openNewChat: (params: ChatParams) => void
     isNotificationsPanelOpen: boolean
     setIsNotificationsPanelOpen: (isOpen: boolean) => void
     isActiveWindowsPanelOpen: boolean
@@ -153,6 +146,9 @@ interface AppContextType {
     searchOpen: boolean
     setSearchOpen: (isOpen: boolean) => void
     searchInitialFilter: string
+    chatOpen: boolean
+    setChatOpen: (isOpen: boolean) => void
+    chatParams: ChatParams | null
     updateTaskbarHeight: () => void
 }
 
@@ -190,6 +186,7 @@ type AppActionKeys =
     | 'setConfetti'
     | 'copyDesktopParams'
     | 'setSearchOpen'
+    | 'setChatOpen'
     | 'updateTaskbarHeight'
 
 export type AppActionsContextType = Pick<AppContextType, AppActionKeys> & {
@@ -215,6 +212,8 @@ type AppUIStateKeys =
     | 'screensaverPreviewActive'
     | 'confetti'
     | 'searchOpen'
+    | 'chatOpen'
+    | 'chatParams'
 
 export type AppUIStateContextType = Pick<AppContextType, AppUIStateKeys>
 
@@ -387,6 +386,9 @@ export const Context = createContext<AppContextType>({
     searchOpen: false,
     setSearchOpen: () => {},
     searchInitialFilter: '',
+    chatOpen: false,
+    setChatOpen: () => {},
+    chatParams: null,
     updateTaskbarHeight: () => {},
 })
 
@@ -424,6 +426,7 @@ export const ActionsContext = createContext<AppActionsContextType>({
     setConfetti: () => {},
     copyDesktopParams: () => {},
     setSearchOpen: () => {},
+    setChatOpen: () => {},
     updateTaskbarHeight: () => {},
     windowsInViewRef: { current: [] },
 })
@@ -459,6 +462,8 @@ export const UIStateContext = createContext<AppUIStateContextType>({
     screensaverPreviewActive: false,
     confetti: false,
     searchOpen: false,
+    chatOpen: false,
+    chatParams: null,
 })
 
 export const WindowsContext = createContext<AppWindowsContextType>({
@@ -1618,6 +1623,8 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const [posthogInstance, setPosthogInstance] = useState<string>()
     const [searchOpen, setSearchOpen] = useState<boolean>(false)
     const [searchInitialFilter, setSearchInitialFilter] = useState<string>('')
+    const [chatOpen, setChatOpen] = useState<boolean>(false)
+    const [chatParams, setChatParams] = useState<ChatParams | null>(null)
     const { addToast } = useToast()
 
     // Hydrate client-only state before first paint to avoid layout flash
@@ -2204,38 +2211,12 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         )
     }
 
-    const openNewChat = ({
-        path,
-        context,
-        quickQuestions,
-        chatId,
-        date,
-        initialQuestion,
-        codeSnippet,
-    }: {
-        path: string
-        context?: ChatContext[]
-        quickQuestions?: string[]
-        chatId?: string
-        date?: string
-        initialQuestion?: string
-        codeSnippet?: { code: string; language: string; sourceUrl: string }
-    }) => {
-        addWindow(
-            <ChatProvider
-                location={{
-                    pathname: path,
-                }}
-                key={path}
-                newWindow
-                context={context}
-                quickQuestions={quickQuestions}
-                chatId={chatId}
-                date={date}
-                initialQuestion={initialQuestion}
-                codeSnippet={codeSnippet}
-            />
-        )
+    // The chat UI is rendered once as a global overlay (see `ChatOverlay`) rather
+    // than as a managed window. Opening a chat just stores its params and flips the
+    // `chatOpen` flag; a fresh set of params remounts the overlay's `ChatProvider`.
+    const openNewChat = (params: ChatParams) => {
+        setChatParams(params)
+        setChatOpen(true)
     }
 
     function getSnapDimensions(side: 'left' | 'right') {
@@ -2803,6 +2784,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         setConfetti,
         copyDesktopParams,
         setSearchOpen,
+        setChatOpen,
         updateTaskbarHeight,
         windowsInViewRef,
     }
@@ -2842,6 +2824,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             setScreensaverPreviewActive,
             setConfetti,
             setSearchOpen,
+            setChatOpen,
             constraintsRef,
             taskbarRef,
             windowsInViewRef,
@@ -2868,6 +2851,8 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             screensaverPreviewActive,
             confetti,
             searchOpen,
+            chatOpen,
+            chatParams,
         }),
         [
             isNotificationsPanelOpen,
@@ -2876,6 +2861,8 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             screensaverPreviewActive,
             confetti,
             searchOpen,
+            chatOpen,
+            chatParams,
         ]
     )
 
@@ -2938,6 +2925,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                                 searchOpen,
                                 setSearchOpen,
                                 searchInitialFilter,
+                                chatOpen,
+                                setChatOpen,
+                                chatParams,
                                 updateTaskbarHeight,
                             }}
                         >

@@ -2790,7 +2790,7 @@ article.reader-view-content-container:has(.quest-sidebar) {
 }
 
 div[data-radix-popper-content-wrapper] {
-    @apply !z-50; /* layer website mode menu over menubar for y-overflowing menus */
+    @apply !z-[9999]; /* layer website mode menu over menubar for y-overflowing menus */
 }
 
 .product-description {

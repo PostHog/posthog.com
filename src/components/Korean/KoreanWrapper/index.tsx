@@ -7,6 +7,7 @@ import { DotLottiePlayer, PlayerEvents } from '@dotlottie/react-player'
 import KoreanDesktop from '../KoreanDesktop'
 import KoreanTaskBarMenu from '../KoreanTaskBarMenu'
 import { SearchOverlay } from 'components/SearchUI'
+import { ChatOverlay } from 'hooks/useChat'
 
 export default function KoreanWrapper() {
     const {
@@ -67,6 +68,7 @@ export default function KoreanWrapper() {
             {!compact && <Dock />}
             */}
             <SearchOverlay />
+            <ChatOverlay />
             <CookieBannerToast />
             <AnimatePresence>
                 <motion.div
