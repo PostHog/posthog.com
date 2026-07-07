@@ -19,7 +19,7 @@ We use [Zendesk Support](https://posthoghelp.zendesk.com/agent) as our internal 
 Customers can [create tickets from Slack](/handbook/engineering/support-hero#creating-zendesk-tickets-from-slack-posts) by adding the 🎫 emoji reaction (or mentioning `@SupportHog`). This means they can get help even when you're asleep or on holiday. Let your customer know about this, and remind them now and then.
 
 
-If you're working on a ticket the customer raised in Slack, let support know to avoid duplicate effort. Leave an internal note in PostHog.
+If you're working on a ticket the customer raised in Slack, assign yourself as the owner in PostHog Support, and then either resolve it or assign it to Team Support if you need to escalate it.
 
 > Tip: Customer messages from SupportHog channels also go to [#support-managed-customers](https://posthog.slack.com/archives/C05MUMZLC13). Find the ticket there and follow the link to see the ticket in PostHog.
 
