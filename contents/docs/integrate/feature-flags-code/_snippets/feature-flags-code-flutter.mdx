@@ -1,28 +1,30 @@
 ### Boolean feature flags
 
 ```dart
-if (await Posthog().isFeatureEnabled('flag-key')) {
+final result = await Posthog().getFeatureFlagResult('flag-key');
+if (result != null && result.enabled) {
   // Do something differently for this user
 
-  // Optional: fetch the payload
-  final matchedFlagPayload = await Posthog().getFeatureFlagPayload('flag-key');
+  // Optional: fetch the payload from the same evaluation result
+  final matchedFlagPayload = result.payload;
 }
 ```
 
 ### Multivariate feature flags
 
 ```dart
-if (await Posthog().getFeatureFlag('flag-key') == 'variant-key') { // replace 'variant-key' with the key of your variant
+final result = await Posthog().getFeatureFlagResult('flag-key');
+if (result != null && result.variant == 'variant-key') { // replace 'variant-key' with the key of your variant
   // Do something differently for this user
 
-  // Optional: fetch the payload
-  final matchedFlagPayload = await Posthog().getFeatureFlagPayload('flag-key');
+  // Optional: fetch the payload from the same evaluation result
+  final matchedFlagPayload = result.payload;
 }
 ```
 
 ### Ensuring flags are loaded before usage
 
-> To use the `onFeatureFlags` callback, you must [set up the SDK manually](#installation) by disabling the `com.posthog.posthog.AUTO_INIT` mode.
+> To use the `onFeatureFlags` callback, you must [set up the SDK manually](#installation). On Android and iOS, disable `com.posthog.posthog.AUTO_INIT` first.
 
 Every time a user opens the app, we send a request in the background to fetch the feature flags that apply to that user. We store those flags in the storage.
 

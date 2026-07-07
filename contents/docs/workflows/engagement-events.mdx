@@ -1,0 +1,74 @@
+---
+title: Workflow events
+sidebar: Docs
+showTitle: true
+---
+
+PostHog Workflows captures two types of events as standard PostHog events: **email engagement events** and **conversion events**. These are in addition to the per-step workflow metrics that are always recorded. You can use these events to build insights, funnels, retention reports, and dashboards from workflow data the same way you would for any other product event.
+
+## Enable engagement events
+
+Go to **Settings → Workflows → Engagement events** and toggle **Capture email engagement events** on. You can also enable it inline from the email step in the workflow builder, the toggle in settings is the same setting.
+
+The setting takes effect within a couple of minutes for future email sends. Emails that were already sent before you enabled it won't backfill, but provider callbacks (opens, clicks, bounces) for those in-flight messages will still produce engagement events once the setting is on.
+
+## Conversion events
+
+When a workflow has a [conversion goal](/docs/workflows/workflow-builder) configured, PostHog automatically captures a `$workflows_conversion` event each time a user meets that goal. This works regardless of whether the workflow is configured to exit on conversion — so you get conversion data even for workflows that continue running after a user converts.
+
+Each conversion is counted once per workflow run to avoid double-counting.
+
+### Properties on conversion events
+
+| Property                          | Description                                                     |
+| --------------------------------- | --------------------------------------------------------------- |
+| `$workflow_id`                    | The workflow that recorded the conversion                       |
+| `$workflow_conversion_type`       | The type of conversion: `event` or `property`                   |
+| `$workflow_conversion_event`      | The name of the conversion event (event-based conversions only) |
+| `$workflow_conversion_event_uuid` | The UUID of the triggering event (event-based conversions only) |
+
+Conversion events count toward your PostHog event ingestion like any other event.
+
+## Email engagement events
+
+Every event below is captured as a standard PostHog event under the recipient's distinct ID. They appear in the event explorer, insights builder, and any other place PostHog events are available.
+
+| Event                           | When it fires                                                                                                                                             |
+| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `$workflows_email_sent`         | The workflow handed the email to the email provider (SES) for delivery.                                                                                   |
+| `$workflows_email_delivered`    | The email provider confirmed the message was accepted by the recipient's mail server.                                                                     |
+| `$workflows_email_opened`       | The recipient opened the email. Detected via the tracking pixel embedded in the HTML body, so requires the recipient's mail client to load remote images. |
+| `$workflows_email_link_clicked` | The recipient clicked a tracked link in the email body.                                                                                                   |
+| `$workflows_email_bounced`      | The provider reported a hard or soft bounce (invalid address, mailbox full, etc.).                                                                        |
+| `$workflows_email_blocked`      | The recipient marked the email as spam (a complaint).                                                                                                     |
+| `$workflows_email_failed`       | The send failed for another reason (provider error, malformed request, transient outage).                                                                 |
+
+`$workflows_email_sent` is recorded when the email is handed off for delivery. The delivery, open, click, bounce, and block events depend on the email provider sending event callbacks back to PostHog, so they only appear once those callbacks arrive.
+
+## Building insights from workflow events
+
+Because these are standard events, you can use them anywhere PostHog events are available:
+
+- **Trends**: chart `$workflows_email_opened` over time, broken down by `$workflow_id`.
+- **Funnels**: measure the path from `$workflows_email_sent` → `$workflows_email_opened` → `$workflows_email_link_clicked` → a downstream product conversion event.
+- **Retention**: cohort recipients who received an email last week and see how many returned to the product.
+- **Dashboards**: combine engagement metrics with revenue or feature-flag exposure to attribute workflows impact.
+- **Conversion tracking**: measure conversion rates by workflow using `$workflows_conversion` broken down by `$workflow_id`.
+
+## Properties on email engagement events
+
+Each email engagement event carries properties so you can filter and break down by workflow, recipient, and message:
+
+- `$workflow_id` — the workflow that sent the email (on every event)
+- `$workflow_action_id` — the email step within the workflow that this event belongs to (on every event)
+- `$email_to` — the recipient address (on every event)
+- `$email_subject` — the email subject (on every event)
+- `$link_url` — the clicked link, on `$workflows_email_link_clicked`
+
+## Relationship to workflow metrics
+
+Workflow metrics (the per-step success/failure counters you see on the workflow page) keep working exactly as before. Workflow events are an _additional_ signal, not a replacement, so you can use both: workflow metrics for operational dashboards inside Workflows, workflow events for cross-product analysis everywhere else in PostHog.
+
+## Privacy and cost
+
+Both email engagement events and conversion events count toward your PostHog event ingestion like any other event. If you send a high volume of email or have many converting users, enabling these can meaningfully increase event volume. You can disable email engagement events at any time in **Settings → Workflows → Engagement events** and the workflow will fall back to metrics-only without any other configuration change. Conversion events are captured automatically whenever a conversion goal is configured.

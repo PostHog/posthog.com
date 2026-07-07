@@ -12,12 +12,22 @@ sourceId: BingAds
 
 You can sync data from Bing Ads reports by configuring it as a source in PostHog. These are the supported entity and reports:
 
-| Report Type | Description |
-|------------|-------------|
-| [Campaigns](https://learn.microsoft.com/en-us/advertising/guides/campaign-management-guides?view=bingads-13) | |
-| [Campaign Performance Report](https://learn.microsoft.com/en-us/advertising/guides/reports) | Performance metrics at the campaign level |
-| [Ad Group Performance Report](https://learn.microsoft.com/en-us/advertising/guides/reports) | Performance metrics at the ad group level |
-| [Ad Performance Report](https://learn.microsoft.com/en-us/advertising/guides/reports) | Performance metrics at the ad level |
+| Report Type                                                                                                  | Description                               |
+| ------------------------------------------------------------------------------------------------------------ | ----------------------------------------- |
+| [Campaigns](https://learn.microsoft.com/en-us/advertising/guides/campaign-management-guides?view=bingads-13) |                                           |
+| [Campaign Performance Report](https://learn.microsoft.com/en-us/advertising/guides/reports)                  | Performance metrics at the campaign level |
+| [Ad Group Performance Report](https://learn.microsoft.com/en-us/advertising/guides/reports)                  | Performance metrics at the ad group level |
+| [Ad Performance Report](https://learn.microsoft.com/en-us/advertising/guides/reports)                        | Performance metrics at the ad level       |
+
+<CalloutBox icon="IconInfo" title="Performance reports limited to 36 months" type="fyi">
+
+Microsoft Advertising only retains daily-aggregated performance report data for 36 months. When syncing performance reports (Campaign Performance Report, Ad Group Performance Report, Ad Performance Report), PostHog automatically limits the historical data sync to this 36-month window.
+
+This doesn't affect the Campaigns entity, which syncs all available data.
+
+See [Microsoft's data retention documentation](https://learn.microsoft.com/en-us/advertising/guides/report-data-retention-time-periods?view=bingads-13) for details.
+
+</CalloutBox>
 
 Additional reports will be added based on user feedback we receive via our [in-app support form](https://app.posthog.com/#panel=support%3Afeedback%3Adata_warehouse%3Alow%3Atrue).
 
@@ -64,3 +74,11 @@ Connect PostHog to your Bing Ads account using a Microsoft account. The Microsof
 4. Enter the **Account ID** of the Bing Ads account you want to sync.
 5. Select an existing Bing Ads account, or create a new integration.
 6. (Optional) Add a prefix for the table name.
+
+## Configuration
+
+<SourceParameters />
+
+## Supported tables
+
+<SourceTables />

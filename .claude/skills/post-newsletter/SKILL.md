@@ -53,7 +53,6 @@ seo:
 ### Body
 
 - Copy all writing **verbatim** — do not paraphrase, restructure, or summarize.
-- Convert the subtitle (if present) to an italicized line at the top: `*Subtitle text here*`
 - Format section headers as `##` and subsections as `###`. **Do not modify header text** — copy it exactly as it appears in the source, including any numbering format (e.g. `1.`, `2.`, not `Rule 1:`, `Rule 2:`).
 - For quote blocks: Substack sometimes renders pull quotes or highlighted excerpts as italicized text in quotation marks (e.g. `*"Quote text here."*`). Convert these to markdown blockquotes: `> Quote text here.` — drop the surrounding quotation marks and italics.
 - Place `<NewsletterForm />` once mid-article (after the first major section) and once at the very end.
@@ -65,6 +64,7 @@ seo:
 
 These are Substack-specific and should NOT appear in the posthog.com version:
 
+- Subtitles (the italicized tagline below the title, e.g. *"The magic behind our AI onboarding wizard"*)
 - Bylines (e.g. *"Words by X who declares..."*)
 - Related texts / recommended reading sections
 - Job listings / open positions sections
@@ -76,62 +76,82 @@ All inline links from the Substack source must be preserved exactly as-is in the
 
 The only transformation allowed: convert absolute `https://posthog.com/...` links to relative `/...` links.
 
-### Internal links
+## Step 3: Upload images to Cloudinary
 
-Apply internal links from two sources (in priority order):
+Images in Substack posts must be uploaded to Cloudinary via the posthog.com Strapi backend. Do this before running `/suggest-links`.
 
-1. **Suggested-links file** (if it exists at repo root): apply all High priority suggestions, and Medium priority ones that fit naturally.
-2. **InternalLinkData.csv** at `.claude/skills/InternalLinkData.csv`: scan for unlinked mentions of PostHog products and features.
+### 3a: Get the hero image
 
-Rules:
-- Link only the **first mention** of each concept — never repeat.
-- Convert any absolute `https://posthog.com/...` links to relative `/...` links.
-- Do not link text that is already inside a link.
-- Prefer product pages for first mentions (e.g. `/feature-flags`), docs for technical/setup references.
+Ask the user if they have the hero image file locally. If they provide a path, note it for upload in step 3c. If not, leave the frontmatter `featuredImage` as the placeholder and skip hero upload.
 
-## Step 3: Find backlink candidates in existing content
+### 3b: Get images from Substack
 
-After writing the newsletter file, search for 3 existing blog posts or newsletters that should link back to the new one.
+Fetch the Substack URL again with this prompt:
+> "For each image in the article body, tell me: what tip number, section, or paragraph it appears after, and a brief description of what the image shows. List them in order of appearance."
 
-### What to search for
+Also run a second fetch to extract the raw image URLs:
+> "List all image src URLs from the article body in order of appearance. Include only article body images, not avatar or profile images."
 
-Run Grep searches across `contents/newsletter/` and `contents/blog/` for posts that mention related topics. For each newsletter, the topics will differ — look for overlap with the new post's core themes (section headers are a good guide).
+### 3c: Authenticate and upload
 
-Useful Grep patterns (adjust to the article's topics):
-- Specific practices mentioned in the new post (e.g. "traces hour", "dogfood", "MCP")
-- Core concepts the new post covers (e.g. "agent", "model context protocol", "skill")
-- PostHog products the post mentions that older posts might also cover
+Ask the user for their **PostHog community credentials** (the account used to sign in at posthog.com/community — not their PostHog app login):
 
-### What makes a good backlink candidate
+> Please run: `! export SQUEAK_EMAIL=you@posthog.com SQUEAK_PASSWORD=yourpassword`
 
-- **Topic overlap**: the older post covers something the new post expands on or approaches from a different angle
-- **Natural insertion point**: there's a specific sentence or section end where a cross-reference fits without feeling forced
-- **Reader benefit**: a reader of the older post would genuinely click through
+Once credentials are set, authenticate and upload all images with a shell script:
 
-### Insertion style
+```bash
+# Authenticate
+JWT=$(curl -s -X POST "https://better-animal-d658c56969.strapiapp.com/api/auth/local" \
+  -H "Content-Type: application/json" \
+  -d "{\"identifier\":\"${SQUEAK_EMAIL}\",\"password\":\"${SQUEAK_PASSWORD}\"}" \
+  | python3 -c "import sys,json; print(json.load(sys.stdin)['jwt'])")
 
-Keep additions short — one sentence, italicized or as a plain sentence at a section end. Examples:
+# Upload hero (if local file provided)
+# curl -s -X POST "https://better-animal-d658c56969.strapiapp.com/api/upload" \
+#   -H "Authorization: Bearer $JWT" \
+#   -F "files=@/path/to/hero.png;filename={slug}-hero.png" \
+#   | python3 -c "import sys,json; d=json.load(sys.stdin); print(d[0]['url'])"
 
-```md
-*If you're building an MCP server alongside your agent, [the golden rules of agent-first product engineering](/newsletter/agent-first-product-engineering) goes deeper on how to design those tools well.*
+# For each body image: download from Substack S3 URL, then upload
+upload() {
+  local url="$1" name="$2" tmpfile
+  tmpfile=$(mktemp /tmp/${name}.XXXXXX.png)
+  curl -s -L "$url" -o "$tmpfile"
+  curl -s -X POST "https://better-animal-d658c56969.strapiapp.com/api/upload" \
+    -H "Authorization: Bearer $JWT" \
+    -F "files=@${tmpfile};filename=${name}.png" \
+    | python3 -c "import sys,json; d=json.load(sys.stdin); print(d[0]['url'])"
+  rm -f "$tmpfile"
+}
 ```
 
-```md
-For the product engineering principles behind this process, see [the golden rules of agent-first product engineering](/newsletter/agent-first-product-engineering).
-```
+Name each image descriptively: `{slug}-tip{N}-{description}` (e.g. `how-to-demo-tip4-phone-number`).
 
-For `building-ai-features.md`-style insertions where it fits mid-paragraph, append to the relevant sentence rather than adding a new line.
+The upload response returns a Cloudinary URL in the format:
+`https://res.cloudinary.com/dmukukwp6/image/upload/v.../filename.png`
 
-### Make the edits
+### 3d: Update the markdown
 
-Edit each of the 3 candidate files to insert the backlink at the identified location.
+Replace all `[PLACEHOLDER_...]` and `![PLACEHOLDER: ...](PLACEHOLDER)` entries with the real Cloudinary URLs and descriptive alt text. Use the position mapping from step 3b to insert images in the right places.
+
+**Indentation rule:** Example paragraphs and images that follow a numbered tip and illustrate it should be indented as list continuations (3 spaces for tips 1–9, 4 spaces for tips 10+). Checklists inside a tip should be wrapped in a blockquote (`>`).
+
+## Step 4: Run /suggest-links on the new file
+
+Prioritize backlinks as forward links should already be set. But, if the article has almost no forward links, recommend forward links, too.
+
+After writing the file, invoke the `/suggest-links` skill passing the path to the new newsletter file as the argument. The skill will:
+
+- Suggest forward links (PostHog product/feature mentions to link in the new post)
+- Find backlink candidates in existing content and suggest exact inline edits with section anchors
+
+Apply all **High priority** forward link suggestions. Apply backlink suggestions to all 3 candidate files.
 
 ## Step 4: Report to the user
 
 After all edits, report:
 
 1. **Image placeholders** — list each one so the user knows what to upload.
-2. **Forward links applied** — list every link added with anchor text and target URL, so the user can review appropriateness.
-3. **Backlinks added** — for each of the 3 files edited, show the file path, the sentence added, and where it was inserted.
-4. **Sections omitted** — confirm what Substack-only content was removed.
-5. **Author slug** — flag if the author slug may not exist yet in the codebase (check with Grep for the slug in `contents/`).
+2. **Sections omitted** — confirm what Substack-only content was removed.
+3. **Author slug** — flag if the author slug may not exist yet in the codebase (check with Grep for the slug in `contents/`).

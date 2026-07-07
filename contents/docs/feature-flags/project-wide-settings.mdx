@@ -40,21 +40,46 @@ You can set a custom message to display in the confirmation modal. If no custom 
 
 Custom messages are limited to 500 characters and can help provide context specific to your team or project needs.
 
+## Default release conditions
+
+When enabled, newly created feature flags are pre-populated with the release conditions you configure here. This helps teams maintain consistent rollout patterns across flags without relying on manual processes.
+
+Default release conditions include property filters and rollout percentages, just like regular release conditions on individual flags. Users can still modify or remove these conditions during flag creation.
+
+> **Note:** Default release conditions don't apply to remote config flags, which always have a fixed 100% rollout. When applying a flag template, default conditions are prepended before the template's conditions.
+
+## Default release conditions
+
+When enabled, newly created feature flags are pre-populated with a set of default release conditions. This helps teams enforce consistent rollout patterns (e.g., targeting specific user segments or rollout percentages) without relying on manual setup each time.
+
+To configure, navigate to [**Settings** > **Feature Flags** > **Default release conditions**](https://app.posthog.com/settings/environment-feature-flags#feature-flag-default-release-conditions) and toggle **Apply default release conditions to new flags**. Then use the release conditions editor to define your default groups, including property filters and rollout percentages.
+
+> **Note:** Default conditions are pre-populated, not enforced. Users can modify or remove them during flag creation.
+
+Key behaviors:
+
+- When applying a [feature flag template](/docs/feature-flags/creating-feature-flags), default groups are prepended before the template's groups.
+- [Remote config](/docs/feature-flags/remote-config) flags skip defaults since they always use a fixed 100% rollout.
+- Modifying this setting requires admin permissions. Non-admin team members have read-only access.
+
 ## Feature flags secure API key
 
-Use secure API keys to retrieve feature flag definitions for [local evaluation](/docs/feature-flags/local-evaluation) or [remote config settings](/docs/feature-flags/remote-config). These keys replace personal API keys for flag-related operations.
+> **Deprecated:** The feature flags secure API key is deprecated. Use a [project secret API key](https://us.posthog.com/settings/environment-secret-api-keys) with the `feature_flag:read` scope instead — it works as a drop-in replacement for [local evaluation](/docs/feature-flags/local-evaluation) and [remote config settings](/docs/feature-flags/remote-config), no SDK code changes needed. Existing feature flags secure API keys continue to work until you switch.
+
+Secure API keys retrieve feature flag definitions for [local evaluation](/docs/feature-flags/local-evaluation) or [remote config settings](/docs/feature-flags/remote-config).
 
 ### Key management
+
+If you still use a feature flags secure API key, you can manage it from the Feature flags tab of your project settings:
 
 - **Primary key**: The currently active key used for API requests
 - **Backup key**: Created when you rotate keys to support safe migration
 - **Key rotation**: Generate new keys while keeping the old one temporarily active
 
-### Best practices
+Rotation without downtime works by maintaining both primary and backup keys during the transition period. Delete the backup key once all your systems use the new one.
 
-1. **Keep keys private**: Never expose these keys in client-side code
-2. **Rotate regularly**: Generate new keys periodically for security
-3. **Clean up backups**: Delete backup keys once you've migrated all systems
-4. **Use project-specific keys**: Each PostHog project should use its own secure API key
+### Migrating to a project secret API key
 
-The secure API key system enables you to safely rotate keys without downtime by maintaining both primary and backup keys during the transition period.
+1. Create a [project secret API key](https://us.posthog.com/settings/environment-secret-api-keys) with the **Local feature flag evaluation** preset (the `feature_flag:read` scope).
+2. Replace the key in your SDK configuration. Both key types use the same `phs_` prefix and the same configuration option, so nothing else changes.
+3. Once all your deployments use the new key, delete the legacy feature flags secure API key.

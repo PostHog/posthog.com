@@ -1,7 +1,7 @@
 export const helicone = {
     name: 'Helicone',
     products: {
-        llm_analytics: {
+        ai_observability: {
             available: true,
             features: {
                 generation_tracking: true,
@@ -17,6 +17,14 @@ export const helicone = {
                 clustering: false,
                 trace_summarization: false,
                 llm_translation: false,
+                sentiment_classification: false,
+                privacy_mode: true,
+                agent_tracing: 'Basic',
+                prompt_management: true,
+                evaluation_datasets: true,
+                human_annotation: false,
+                session_replay: false,
+                product_analytics: false,
             },
         },
     },

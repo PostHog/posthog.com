@@ -200,7 +200,7 @@ We hit 100,000 customers either paying or free, and over a quarter of a million 
 
 We've added some people in [sales](/teams/sales-cs), but it is strictly (i) sales assist, talking to people that have asked to speak to us, and (ii) cross sell to existing customers. 
 
-[We do _not_ do outbound](/sales), so we can remain efficient and either hire more engineers or cut our pricing for our customers so more of them recommend us! 
+[We're inbound-led, and most customers buy from us without ever talking to sales](/sales), so we can remain efficient and either hire more engineers or cut our pricing for our customers so more of them recommend us! 
 
 We've hired a sales engineer super early (Mine, she's awesome) and we're really working on the culture in this team proactively.
 

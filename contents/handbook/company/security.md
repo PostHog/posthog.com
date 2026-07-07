@@ -22,20 +22,30 @@ Please set up passkeys for Google Workspace and GitHub at the very least. If you
 
 It is recommended to have most passkeys saved in 1Password itself, which will allow you to use them from your phone.
 
-### YubiKeys for infrastructure accounts
+### Yubikeys
 
-YubiKeys are required for certain infrastructure-specific accounts as determined by the security team. If your role requires access to these accounts you will be told by the team - if in doubt ask in #team-security.
+We previously required all employees to purchase and configure two Yubikeys. These have been replaced with passkeys, and Yubikeys are no longer required nor recommended.
 
-We recommend purchasing:
+## Mobile device management (MDM)
 
-- One [YubiKey 5C Nano](https://www.yubico.com/gb/product/yubikey-5-series/yubikey-5c-nano/) for use with the work computer (can be left plugged in most of the time)
-- One [YubiKey 5C NFC](https://www.yubico.com/gb/product/yubikey-5-series/yubikey-5c-nfc/) (or [YubiKey 5Ci](https://www.yubico.com/gb/product/yubikey-5-series/yubikey-5ci/) if you have an older iPhone model) for use with mobile devices, and as backup
+We use [Fleet](https://fleetdm.com/) to manage all of our laptops. It applies targeted policies that raise the security baseline of every device, including:
 
-#### Setting up your YubiKeys
+- minimum password length
+- screen lock
+- auto-install of software updates
+- auto-provisioning of software like 1Password
+- absence of static SSH keys on the filesystem
 
-1. **Register your YubiKeys** with each required service. The security team will let you know which accounts need YubiKey authentication.
-2. **Always register both keys** with every service so the second acts as a backup if you lose one.
-3. **Disable OTP mode** — avoid spamming OTPs if you accidentally touch your YubiKey by installing the [YubiKey Manager](https://www.yubico.com/support/download/yubikey-manager/) or by running `brew install ykman && ykman config usb --disable OTP`
+We also use Fleet to investigate supply chain attacks, for example to see whether any laptops have been exposed to a malicious package or browser extension.
+
+We chose Fleet because they are open source and a [transparent](https://fleetdm.com/better) company. In the same spirit, all of the policies we provision are stored in git at <PrivateLink url="https://github.com/PostHog/fleet-gitops">PostHog/fleet-gitops</PrivateLink>. Any employee can see the same data our security team sees by clicking the Fleet icon in the macOS menu bar and choosing "My device".
+
+Fleet does not see:
+
+- your screen
+- your messages or photos
+- what you type
+- which URLs you visit
 
 ## SOC 2
 import SOC2 from './_snippets/soc2.mdx'

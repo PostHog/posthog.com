@@ -67,6 +67,7 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
     - **Client.Company** - The legal company name
     - **Contract.Discount** - The discount % (appears in the Additional credit purchase section)
     - **Startup credits** - If the customer [qualifies for the 2 free months](/handbook/growth/sales/contract-rules#startup-plan-discounts) when rolling off the startup plan, add up their total and discount as normal, and then add a note about the free credits in this format: "An additional credit in the amount of XXXXX (offered to customers in exchange for rolling off the Startup plan) to be applied to Customer's account upon signature with the same expiration date." For example, if a customer is signing a standard $20k annual contract to get the 20% discount, the total will be $25k, 20% discount of $5k, total cost to the customer would be $20k. In the notes, you would write: "An additional credit in the amount of USD $4,166.67 (offered to customers in exchange for rolling off the Startup plan) to be applied to Customer's account upon signature with the same expiration date."
+    - **Contract buyout credits** - If the customer is [buying out a competitor contract](/handbook/growth/sales/contract-rules#contract-buyouts), add the buyout credit to the Special Terms in this format: "Customer will receive a one-time and additional PostHog Cloud Credit of $XX,YYY (the "Contract Buyout Credit") to be applied against monthly usage expiring on the Credit Allocation Date." Any buyout is subject to team lead approval before it goes on an order form.
     - **Contract.EffectiveDate**
 
         - Set the start date of the contract in the format DD MMM YYYY (e.g., 01 Feb 2023). For a new customer, this would be the date they choose to start their subscription. For an existing customer, we have two options:
@@ -76,6 +77,7 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
                 - If a customer wants to start using credits immediately for the October cycle, your contract start date should be October 1.
                 - If a customer wants to start using credits starting the next billing cycle, your contract start date should be November 1.
                 - If you set the start date correctly, our Zapier automation flow will create the invoices with correct dates so our revenue calculations are not affected from the transition.
+            - **Do not backdate beyond the current billing period.** You can only set the start date as far back as the beginning of the *current, not-yet-invoiced* billing period (Immediate Activation above). Never set it into a period we have already issued an invoice for. Doing so rewrites an issued invoice and breaks revenue recognition, which is not something we support.
         - **Note:** Pay-as-you-go products are charged after the end of the period, while flat-rate subscriptions are charged at the beginning of the period. As a result the first two payments on a monthly schedule may occur within the same billing period as part of the transition. Make sure to send a note to the customer to ensure they're fully informed!
         - **Startup credits** - If the customer [qualifies for the 2 free months](/handbook/growth/sales/contract-rules#startup-plan-discounts) set the start date of the contract for 2 months in the future, to account for the two free months ahead of the contract.
 
@@ -125,6 +127,25 @@ We prefer to keep all signatures in PandaDoc, but sometimes clients may prefer t
 
 Once you the signed form in PandaDoc is marked as complete and the Salesforce opportunity status is set to Closed Won, the RevOps team will get a notification and handle setting up the subscription and invoicing. See the [Billing](/handbook/growth/sales/billing) page for steps on how the billing setup works for more information.
 
+### Using prepaid credits to cover an existing pay-as-you-go invoice
+When a pay as you go customer wants to sign a prepaid contract and use their new credits to cover an invoice that is about to be issued, timing is important. Credits can only be applied cleanly to an invoice _before_ that invoice is finalized. 
+
+#### Flag insufficient credits before the invoice is issued
+
+Monthly invoices are generated automatically at the end of each billing period. As the account owner, if you know a customer intends to purchase more credits to cover their current usage, you should check before the invoice issue date whether they will have enough credits on the account to cover it.
+
+Credits added before billing period ends are applied automatically and the customer never has to pay the PAYG charge out of pocket. No further action needed here. 
+
+If they won't have enough credits to cover an invoice, and won't sign before the invoice issue date, you can ask the billing team to pause collection for a few days. Once the contract is signed and the credits are added, billing can release the invoice and the prepurchase credits will cover it. Flag this as early as possible. Billing can only pause an invoice that hasn't been issued yet.
+
+#### Contract timing rules
+
+For newly purchased credits to cover the intended invoice automatically, both of these must be true:
+- Contract start date must match the first billing period the customer wants to cover. For an existing customer this usually means backdating the Contract.EffectiveDate to the start of the current billing period (see Immediate Activation above). If the start date doesn't line up with the period being covered, the credits won't map to that invoice.
+- Contract must be signed before the period_end date of the invoice they want to cover. If it's signed after the period closes and the invoice has been issued, the automated flow can no longer apply the credits.
+- You can only backdate to the start of the current, open billing period, never to a period that has already been invoiced. 
+
+
 ## Master Services Agreement (MSA)
 
 Occasionally, customers will want to sign an MSA instead of referencing our terms in an order form. 
@@ -144,13 +165,13 @@ Sometimes large customers will ask for changes to our MSA. We have a list of the
 
 We offer HIPAA Compliance on PostHog Cloud and as such health companies will require us to sign a Business Associate Agreement with them. As this means we take on increased financial risk in case of a breach we ask them as a minimum to subscribe to one of the platform packages which is a guaranteed monthly payment. A maximum of one BAA per organization will be signed. Under most circumstances, it should be the company that owns the org/pays us.
 
-1. Ask the customer to subscribe to the platform add-on (as well as any other paid plans they wish to use). You can verify this in Vitally by ensuring that they are in the `Teams Plan` segment.
+1. Ask the customer to subscribe to a platform package (as well as any other paid plans they wish to use). You can verify this in Vitally by ensuring that they are in the `Teams Plan` segment.
 2. Create a new document from the <PrivateLink url="https://app.pandadoc.com/a/#/templates/4psCXzU527sNE6WEbFBg3a">PandaDoc template</PrivateLink>.
 3. All you need to do it set the `Client.Company` variable and then send it to them for review and signature.
 4. It has been pre-signed by Fraser and will automatically add today's date as the date of signature for PostHog.
 5. You'll get a notification when everybody has signed it - we have automation in place to ensure that the `HIPAA BAA Signed Date` property on the customer's Salesforce Account record is updated.
 
-> We only provide our default BAA for platform add-on subscribers - customization requires >$20k annual spend. The BAA only remains active for as long as the customer is subscribed to a platform add-on - if they unsubscribe, we send them a message that their BAA will become inactive at the end of the month in which they cancelled. A customer who is on a platform add-on trial (with a credit card in PostHog) is eligible to sign a default BAA, but you should make it clear to them that the default BAA will be voided if/when the platform add-on subscription lapses. If the lead is not sure whether they will need a custom BAA and their usage wouldn't put them at $20K, then it is worth pushing them to get legal feedback by sending them our BAA before moving forward, else you risk spending a lot of time on an evaluation that ends up at $450/month.
+> We only provide our default BAA for platform package subscribers - customization requires >$20k annual spend. The BAA only remains active for as long as the customer is subscribed to a platform package - if they unsubscribe, we send them a message that their BAA will become inactive at the end of the month in which they cancelled. Customers on a platform package trial are not eligible to sign a BAA. You'll need to convert their trial to a regular subscription first, before they can sign it. If the lead is not sure whether they will need a custom BAA and their usage wouldn't put them at $20k, then it is worth pushing them to get legal feedback by sending them our BAA before moving forward, else you risk spending a lot of time on an evaluation that ends up at $250/month.
 
 ## Non-disclosure Agreement (NDA)
 In some cases, prospective or current customers require a mutual Non-disclosure Agreement (MNDA) in place before conversastion or product activity can proceed. Terms already specify Confidentiality and if there is still a situation where a documented agreement is requested this can be easily accommodated. 
