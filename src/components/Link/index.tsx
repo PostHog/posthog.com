@@ -1,6 +1,6 @@
 import { TooltipContent, TooltipContentProps } from 'components/GlossaryElement'
 import Tooltip from 'components/Tooltip'
-import { Link as GatsbyLink } from 'gatsby'
+import { Link as GatsbyLink, navigate } from 'gatsby'
 import React, { useMemo } from 'react'
 import usePostHog from '../../hooks/usePostHog'
 import { IconArrowUpRight } from '@posthog/icons'
@@ -16,13 +16,12 @@ const createStandardMenuItems = (url: string, state?: any, isExternal = false): 
         {
             type: 'item',
             disabled: isExternal,
-            children: isExternal ? (
-                <span>Open in new PostHog window</span>
-            ) : (
-                <Link to={url} state={{ ...state, newWindow: true }} contextMenu={false}>
-                    Open in new PostHog window
-                </Link>
-            ),
+            label: 'Open in new PostHog window',
+            onClick: isExternal
+                ? undefined
+                : () => {
+                      navigate(url, { state: { ...state, newWindow: true } })
+                  },
         },
         {
             type: 'item',

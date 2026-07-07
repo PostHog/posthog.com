@@ -31,7 +31,7 @@ This isn't just a meaningless corporate statement. Most of our communication hap
 
 Almost everything we do is open for anyone else to edit. This includes things like the contents of this very Handbook. Anyone can give direct feedback on work they think could be improved, which helps increase our responsiveness to the community. 
 
-We're committed to much more than just [public code](/handbook/company/values#make-it-public). 
+We're committed to much more than just [public code](/handbook/values#make-it-public). 
 
 ## We write everything down
 
@@ -71,7 +71,7 @@ On Tuesdays and Thursdays, we don't have internal meetings at all. Occasionally 
 
 ## We're structured for speed and autonomy
 
-Hiring high-performing and self-sufficient team members means we don't need the typical corporate processes that are designed to slow teams down. Instead, we're organized into [small teams](/handbook/team-structure), which prioritize speed by delegating decision-making autonomy as much as possible. 
+Hiring high-performing and self-sufficient team members means we don't need the typical corporate processes that are designed to slow teams down. Instead, we're organized into [small teams](/handbook/company/small-teams), which prioritize speed by delegating decision-making autonomy as much as possible. 
 
 Our [management approach](/handbook/company/management) is super simple - small teams report to their team leader, and each of the team leaders reports to one of our four execs. We don't want to create a fancy hierarchy of titles, as we believe this can lead, consciously or not, to people feeling less empowered to make changes and step on toes, especially if they are not in a 'senior' role. 
 

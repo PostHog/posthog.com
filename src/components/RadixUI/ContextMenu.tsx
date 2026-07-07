@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { ContextMenu as RadixContextMenu } from 'radix-ui'
-import KeyboardShortcut from "components/KeyboardShortcut"
+import KeyboardShortcut from 'components/KeyboardShortcut'
 
 export interface ContextMenuItemProps {
     type: 'item' | 'separator'
@@ -41,27 +41,13 @@ const ContextMenu = ({ children, menuItems, className }: ContextMenuProps) => {
                                 key={index}
                                 className={ItemClasses}
                                 disabled={item.disabled}
-                                onSelect={(e) => {
+                                onSelect={() => {
                                     // Execute any onClick handlers
                                     item.onClick?.()
                                 }}
                             >
-                                <div
-                                    onClick={(e) => {
-                                        // Force close the context menu by dispatching Escape key
-                                        setTimeout(() => {
-                                            const escapeEvent = new KeyboardEvent('keydown', {
-                                                key: 'Escape',
-                                                bubbles: true,
-                                            })
-                                            document.dispatchEvent(escapeEvent)
-                                        }, 0)
-                                    }}
-                                    className="w-full flex justify-between items-center gap-1"
-                                >
-                                    <span>
-                                        {item.children || item.label}
-                                    </span>
+                                <div className="w-full flex justify-between items-center gap-1">
+                                    <span>{item.children || item.label}</span>
                                     <span>
                                         {item.shortcut && <KeyboardShortcut text={item.shortcut.join(' ')} size="sm" />}
                                     </span>
