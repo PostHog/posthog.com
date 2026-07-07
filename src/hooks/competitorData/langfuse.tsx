@@ -106,15 +106,6 @@ costs: {
             available: false,
         },
     },
-    platform: {
-        deployment: {
-            available: true,
-            features: {
-                eu_hosting: true,
-                open_source: true,
-            },
-        },
-    },
         platform: {
         deployment: {
             eu_hosting: true,
