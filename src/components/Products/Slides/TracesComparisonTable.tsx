@@ -1,7 +1,6 @@
 import React from 'react'
 import OSTable from 'components/OSTable'
 import Logo from 'components/Logo'
-import { LOGOS } from 'constants/logos'
 import { useApp } from '../../../context/App'
 
 // Small building blocks for the comparison cells
@@ -13,8 +12,8 @@ const CheckWith = ({ note }: { note: string }) => (
     </span>
 )
 
-const CompetitorLogo = ({ src, alt, className = '' }: { src: string; alt: string; className?: string }) => (
-    <img src={src} alt={alt} className={`h-6 mx-auto w-auto max-w-full object-contain ${className}`} />
+const CompetitorName = ({ children }: { children: React.ReactNode }) => (
+    <span className="text-base font-bold text-primary">{children}</span>
 )
 
 export default function TracesComparisonTable(): JSX.Element {
@@ -24,23 +23,17 @@ export default function TracesComparisonTable(): JSX.Element {
     const columns = [
         { name: '', align: 'left' as const, width: 'minmax(180px, 1.6fr)' },
         {
-            name: <CompetitorLogo src="/images/competitors/betterstack.png" alt="Better Stack" />,
+            name: <CompetitorName>Better Stack</CompetitorName>,
             align: 'center' as const,
             width: '1fr',
         },
         {
-            name: (
-                <CompetitorLogo
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/datadog_db7bb8e269.jpeg"
-                    alt="Datadog"
-                    className="rounded"
-                />
-            ),
+            name: <CompetitorName>Datadog</CompetitorName>,
             align: 'center' as const,
             width: '1fr',
         },
         {
-            name: <CompetitorLogo src={LOGOS.sentry} alt="Sentry" />,
+            name: <CompetitorName>Sentry</CompetitorName>,
             align: 'center' as const,
             width: '1fr',
         },
@@ -68,7 +61,7 @@ export default function TracesComparisonTable(): JSX.Element {
 
     const rows = [
         sectionRow('Tracing'),
-        featureRow('Distributed tracing', [<Check />, <Check />, <Check />, <CheckWith note="alpha" />]),
+        featureRow('Distributed tracing', [<Check />, <Check />, <Check />, <Check />]),
         featureRow('Native OpenTelemetry ingestion', [
             <Check />,
             <span>Converts to its own format</span>,
@@ -101,8 +94,8 @@ export default function TracesComparisonTable(): JSX.Element {
     ]
 
     return (
-        <div className="h-full text-primary bg-primary overflow-auto p-4 @md:p-8">
-            <OSTable columns={columns} rows={rows} width="full" size="sm" rowAlignment="center" editable={false} />
+        <div className="h-full text-primary bg-primary overflow-auto p-4 @md:p-8 flex flex-col justify-center [&_.OSTable]:mb-0">
+            <OSTable columns={columns} rows={rows} width="full" size="lg" rowAlignment="center" editable={false} />
         </div>
     )
 }

@@ -63,8 +63,24 @@ export default function Traces(): JSX.Element {
     // Create slide configuration with custom templates.
     // Building this page out slide by slide – start with just the hero.
     const slides = createSlideConfig({
-        include: ['overview', 'traces-self-healing', 'features', 'comparison-summary', 'traces-comparison', 'traces-slack'],
-        order: ['overview', 'traces-self-healing', 'features', 'comparison-summary', 'traces-comparison', 'traces-slack'],
+        include: [
+            'overview',
+            'traces-self-healing',
+            'features',
+            'comparison-summary',
+            'traces-comparison',
+            'traces-slack',
+            'getting-started',
+        ],
+        order: [
+            'overview',
+            'traces-self-healing',
+            'features',
+            'comparison-summary',
+            'traces-comparison',
+            'traces-slack',
+            'getting-started',
+        ],
         templates: {
             overview: 'stacked',
         },
@@ -81,7 +97,7 @@ export default function Traces(): JSX.Element {
             },
             {
                 slug: 'traces-slack',
-                name: 'PostHog Code in Slack',
+                name: 'PostHog in Slack',
                 component: TracesSlackCallout,
             },
         ],

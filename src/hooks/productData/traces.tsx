@@ -9,19 +9,19 @@ const catnipSignals = [
         icon: IconWarning,
         color: 'text-white/60',
         title: 'Error tracking',
-        description: 'a request broke.',
+        description: 'A request broke.',
     },
     {
         icon: IconRewindPlay,
         color: 'text-white/60',
         title: 'Session replay',
-        description: 'a user waited, then left.',
+        description: 'A user waited, then left.',
     },
     {
         icon: IconFunnels,
         color: 'text-white/60',
         title: 'Funnel drop-off',
-        description: 'checkout conversion fell.',
+        description: 'Checkout conversion fell.',
     },
     {
         icon: IconGanttChart,
@@ -70,7 +70,7 @@ export const traces = {
         // Image pushed lower (mt-12) with rounded corners, matching the Logs
         // "Full stack context" slide.
         {
-            title: 'Waterfall',
+            title: 'Request span',
             handle: 'waterfall',
             template: 'splitImage',
             headline: 'Every span of a request, in one waterfall',
@@ -95,22 +95,24 @@ export const traces = {
                 'Every signal source tells self-driving <em>that</em> something is wrong. Traces are the only one that says <em>where and why.</em>',
             features: [],
             children: (
-                <div className="max-w-4xl mx-auto text-left">
-                    <ul className="grid @xl:grid-cols-2 gap-x-8 gap-y-6 p-0 m-0 list-none">
+                <div className="max-w-6xl mx-auto w-full text-left">
+                    <ul className="grid @xl:grid-cols-2 gap-6 @2xl:gap-8 p-0 m-0 list-none">
                         {catnipSignals.map(({ icon: Icon, color, title, description, highlight }) => (
                             <li
                                 key={title}
-                                className={`relative pl-9 ${
-                                    highlight ? 'rounded-md bg-white/10 py-3 pr-4 pl-11' : ''
+                                className={`flex items-start gap-5 rounded-lg border p-6 @2xl:p-8 ${
+                                    highlight ? 'border-white/40 bg-white/10' : 'border-white/20'
                                 }`}
                             >
-                                <Icon className={`size-6 absolute top-0.5 ${highlight ? 'left-4 top-3.5' : 'left-0'} ${color}`} />
-                                <h3 className="text-xl font-bold mb-0">{title}</h3>
-                                <p className="mt-1 text-lg !leading-normal">{description}</p>
+                                <Icon className={`size-10 @2xl:size-12 shrink-0 ${color}`} />
+                                <div>
+                                    <h3 className="text-2xl @2xl:text-3xl font-bold mb-1">{title}</h3>
+                                    <p className="m-0 text-lg @2xl:text-xl !leading-normal">{description}</p>
+                                </div>
                             </li>
                         ))}
                     </ul>
-                    <p className="mt-8 text-2xl @2xl:text-xl !leading-normal">
+                    <p className="mt-10 text-2xl @2xl:text-3xl !leading-snug max-w-5xl">
                         The first three are symptoms. The trace is the one that hands an agent the right location. The
                         agent starts where the trace points and fixes the span that’s actually slow.
                     </p>
@@ -122,7 +124,7 @@ export const traces = {
         summary: {
             them: [
                 {
-                    title: 'You need mature, full-featured tracing today. PostHog tracing is still in alpha.',
+                    title: 'You need a specialized, deep full-featured tracing today as a separate tool.',
                 },
                 {
                     title: 'Your workflow is infrastructure-first, built around hosts, dashboards, and on-call.',
