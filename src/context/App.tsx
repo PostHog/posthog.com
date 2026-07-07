@@ -507,6 +507,22 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    '/research': {
+        size: {
+            min: {
+                width: 700,
+                height: 500,
+            },
+            max: {
+                width: 900,
+                height: 1000,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
     '/replay-vision': {
         size: {
             min: {
