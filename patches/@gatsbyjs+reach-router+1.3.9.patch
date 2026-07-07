@@ -1,0 +1,75 @@
+diff --git a/node_modules/@gatsbyjs/reach-router/es/lib/history.js b/node_modules/@gatsbyjs/reach-router/es/lib/history.js
+index 8fb51a5..c9c42e0 100644
+--- a/node_modules/@gatsbyjs/reach-router/es/lib/history.js
++++ b/node_modules/@gatsbyjs/reach-router/es/lib/history.js
+@@ -18,8 +18,19 @@ var getLocation = function getLocation(source) {
+     pathname = url.pathname;
+   }
+ 
++  // patch-package: guard against malformed URLs (e.g. a bad percent-escape like
++  // "%ea" that is not valid UTF-8). decodeURI would otherwise throw "URI malformed"
++  // here at bootstrap and white-screen the whole app. Fall back to the raw pathname
++  // so the router can still render (and 404) the request.
++  var safePathname;
++  try {
++    safePathname = encodeURI(decodeURI(pathname));
++  } catch (e) {
++    safePathname = pathname;
++  }
++
+   return {
+-    pathname: encodeURI(decodeURI(pathname)),
++    pathname: safePathname,
+     search: search,
+     hash: hash,
+     href: href,
+diff --git a/node_modules/@gatsbyjs/reach-router/lib/history.js b/node_modules/@gatsbyjs/reach-router/lib/history.js
+index a9f0032..73ce50a 100644
+--- a/node_modules/@gatsbyjs/reach-router/lib/history.js
++++ b/node_modules/@gatsbyjs/reach-router/lib/history.js
+@@ -22,8 +22,19 @@ var getLocation = function getLocation(source) {
+     pathname = url.pathname;
+   }
+ 
++  // patch-package: guard against malformed URLs (e.g. a bad percent-escape like
++  // "%ea" that is not valid UTF-8). decodeURI would otherwise throw "URI malformed"
++  // here at bootstrap and white-screen the whole app. Fall back to the raw pathname
++  // so the router can still render (and 404) the request.
++  var safePathname;
++  try {
++    safePathname = encodeURI(decodeURI(pathname));
++  } catch (e) {
++    safePathname = pathname;
++  }
++
+   return {
+-    pathname: encodeURI(decodeURI(pathname)),
++    pathname: safePathname,
+     search: search,
+     hash: hash,
+     href: href,
+diff --git a/node_modules/@gatsbyjs/reach-router/umd/reach-router.js b/node_modules/@gatsbyjs/reach-router/umd/reach-router.js
+index d627575..6cc1eaf 100644
+--- a/node_modules/@gatsbyjs/reach-router/umd/reach-router.js
++++ b/node_modules/@gatsbyjs/reach-router/umd/reach-router.js
+@@ -1667,8 +1667,19 @@ var getLocation = function getLocation(source) {
+     pathname = url.pathname;
+   }
+ 
++  // patch-package: guard against malformed URLs (e.g. a bad percent-escape like
++  // "%ea" that is not valid UTF-8). decodeURI would otherwise throw "URI malformed"
++  // here at bootstrap and white-screen the whole app. Fall back to the raw pathname
++  // so the router can still render (and 404) the request.
++  var safePathname;
++  try {
++    safePathname = encodeURI(decodeURI(pathname));
++  } catch (e) {
++    safePathname = pathname;
++  }
++
+   return {
+-    pathname: encodeURI(decodeURI(pathname)),
++    pathname: safePathname,
+     search: search,
+     hash: hash,
+     href: href,
