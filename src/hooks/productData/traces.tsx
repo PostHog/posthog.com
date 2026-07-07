@@ -51,7 +51,7 @@ export const traces = {
     overview: {
         title: 'Straight to the line that broke',
         description:
-            'Traces pinpoint the exact query. PostHog Code opens the PR and sends it to your Inbox. You hit merge. That’s the whole job.',
+            'A trace pinpoints the exact query. The agent reads it, opens a PR that fixes the right line, and sends it to your Inbox. You hit merge. That’s the whole job.',
         textColor: 'text-white',
         layout: 'stacked',
     },
