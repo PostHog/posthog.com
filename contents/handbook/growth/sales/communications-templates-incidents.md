@@ -46,7 +46,7 @@ Reach out before customers ask, even if it’s just to say, “We’re aware and
 
 > **This overrides the standard workflow.** CMOC sends directly to all affected Slack customer channels without waiting for account owners. Account owners follow up individually once online.
 
-**Initial broadcast (SupportHog):**
+**Initial message (Slack):**
 
 We're investigating a major incident affecting [feature/service]. [Symptom — e.g., "Event ingestion is fully stopped" or "The PostHog app is unreachable."]
 
