@@ -54,66 +54,46 @@ If the answer to any of the above questions is 'no' then it's likely that there 
 ## How commission works - Technical Account Managers
 
 **General principles**
+- We want to align incentives - TAMs get paid when PostHog gets paid
+- 100% quota attainment leads to a 50/50 of OTE and Commission split
+- TAMs cover 5x their OTE with their quota
 
-- When thinking about commission, we want to particularly incentivize:
-  - Cross-selling new products - all-in-one is how we will beat the competition.
-- We aim for a 50/50 split between base/commission when calculating OTE by default.
+> This plan, including the OTE to quota ratio, may change as we scale up the size and complexity of our sales machine! This is completely normal - we will ensure everyone is treated fairly. For now we are generally trying to optimize for something straightforward here so it’s easy for PostHog (and you) to calculate commission.
 
-> This plan will almost certainly change as we scale up the size and complexity of our sales machine! This is completely normal - we will ensure everyone is always treated fairly, but you need to be comfortable with this. For now we are generally trying to optimize for something straightforward here so it’s easy for PostHog (and you) to calculate commission. Fraser runs this process, so if you have any questions, ask him in the first instance.
+**How we calculate**
+- Quota is calculated annually, and is paid out quarterly
+- A deal counts toward quota in the quarter of its **effective date**. For annual deals, the effective date is the contract start date or the signature date, whichever is later. For monthly accounts, each payment counts toward the quarter it falls in.
+- Because the signature date sets the floor, a deal can never be credited to a quarter that has already closed, even if its contract start was backdated to align with the customer's current billing period.
+- The Commission rate is 10% flat and uncapped, regardless of whether it is monthly or annual
+	- There is an additional 6.7% incentive on net-new annual contracts 
+	- There is also an additional 6.7% incentive on growth in annual renewals
+	- There is no additional incentive on monthly payments
+ - An account counts toward your quota only from the date it is added to your book (when the `AM Managed` segment is applied). Cash paid before that date does not count toward commission, even if it lands in the current quarter. We don't pay retroactively on an account that wasn't yet in your book.
 
-**Variables**
+**Examples**
+Ator, the TAM has a book account that pays month to month. In the quarter, that account makes 3 payments of $2,200, $2,100, and $2,500 totaling $6,800. The quota realized and paid out to Ator on this account is 10% of the total for that quarter, $680.
 
-- Your quota is set as _the additional $ on a usage basis you are expected to add to your book of business_ - ie. any new product usage counts. This is different from TAEs, because here we care about the invoiced usage _not_ the actual $ amount.
-  - For example, if you start a quarter with $700k in ARR and are set a target to grow this by $200k ARR, your commission is based on your attainment towards the $200k figure based on amounts invoiced.
-  - We measure the change in annualised quarterly ARR. Take Q1's usage ARR x4, compare it to Q2's usage ARR x4 - the difference in these numbers is your attainment towards quota.
-     - Where a customer is new and has <3 periods in the previous quarter, we will use the number of periods to calculate the ARR. eg if it has one month it is that month multiplied by 12, if it has two invoices, then its the total of those two months multiplied by 6.
-     - When a customer has churned eg they have no revenue in the final period of the month and/or they have cancelled their subscription, then that quarter will count as $0 ARR.
-- This means you can hit quota by a combo of bringing in new business and expanding existing. Because your target is based on invoiced usage, this means that even if you have an annual customer in your book, you can still expand their usage and get recognized for that.
-  - It also means that you are less likely to totally neglect existing customers because if they reduce usage, it hurts your overall ARR figure.
-- We apply a multiplier to each invoice in the calculation based on how many of our primary products they are paying for, to incentivise cross-sell.
-  - Primary products are: Product Analytics, Session Replay, Feature Flags, Surveys, Error Tracking, AI Observability, Data Warehouse, CDP Destinations, Workflows, Logs, and PostHog AI.
-  - We start off at a base of 0.7x for customers with only 1 paid product, as it represents a bigger churn risk.
-  - We then apply an additional 0.2x for each paid product above 1 (ie, 3 paid products = 1.1x)
-  - A product is counted as paid if the invoice amount for that product is greater than $200
-- Commission is _uncapped_ and paid out based on the % of your quota you hit, on a sliding scale. Hit 100% commission, get 100% of commission. 0% for 0%. And 200% for 200%. Ways to hit quota:
-  - Increase ARR for your monthly customers
-  - For customers already on annual plans, additional usage ARR _beyond_ their annual run rate - for example, if you have a customer on a $120k annual contract, but they are being invoiced $20k/mo for their usage, you will get recognized on the additional $10k/mo
-  - Your quota will depend on your OTE
-- Commission is paid out quarterly, and in any case after an invoice is paid
-  - We don't want TAMs to throw invoice chasing to a finance person - you should make friends with the finance person on the customer's side too
-  - For monthly customers, commission is only paid after the first 2 invoices have been paid (ie. you don't get commission due to a random spike)
-    - To clarify, this means the first 2 invoices the customer has ever paid, ie. you still get commission from 'your' month 1 if you inherit a paying monthly customer
-    - Commission is still paid out quarterly even if the customer pays monthly
-  - If we have to give a customer a big refund, we’ll deal with your commission on a case by case basis - in the future we may introduce a more formal clawback
-  - Commission payments are made at the end of January, April, July, and October - at the end of each quarter, we'll monitor how many invoices actually get paid in the first two weeks of the next quarter. Fraser will send you an email that breaks down your commission into the above 4 buckets and how you did.
-- In your first 3 months you are expected to retain your existing book and have closed at least one deal (either a [cross-sell opportunity](/handbook/growth/cross-selling/tracking-cross-sells) or a prepaid credit conversion) - you'll be paid 100% OTE fixed. You can find more info on how quotas work in your ramp period [in the new hire FAQ](/handbook/growth/sales/new-hire-onboarding#new-hire-frequently-asked-questions)
+Ator has another book account that he lands on an annual credit purchase that quarter. The first month of the quarter, they paid $8,000 and then they signed an annual credit purchase for $142,857.15 in credits. After discount, they paid PostHog $100,000. Ator realizes: 
+- $10,000 in quota from the 10% on the cash paid
+- $6,700 in quota from the 6.7% incentive to balance out the annual discount
+- $800 from their single monthly payment that quarter
+Ator is paid a total of $17,500 for that account that quarter.
 
-> Your quota and assigned customers are likely to change slightly from quarter to quarter. In any case, your quota will be amended appropriately (up or down) to account for any movement. We will also be flexible in making changes mid-quarter if it's obviously the sensible thing to do. If you inherit a new account, you have a 3 month grace period - if they churn in that initial period, they won't be counted against your quota.
->
-> If you have a customer you converted from monthly to annual under the old, non-usage-based commission plan, you won't _also_ get recognized for additional usage beyond their annual run rate in the first year - no double dipping!
+Ator has (yet) another book account coming up for renewal. Last year, that account spent $100,000 with PostHog. This year, they are increasing their annual credit purchase to $171,428.57. After discount, they pay PostHog $120,000. Ator realizes:
+- $12,000 in quota from the 10% on the cash paid
+- $1,340 in quota from the 6.7% incentive on the increase over last year
+Ator is paid a total of $13,340 for this account.
 
-If you believe there is a justifiable reason to vary these rules, then in the first instance talk them through with your team lead.  Simon (Ben as backup) will be the decider here.
+**Effective date example**
+A customer's billing period runs June 23 to July 23. The TAM signs the annual deal on July 20 and the contract start is set to June 23. The effective date is July 20, the later of the two, so the deal counts toward Q3 rather than the already-closed Q2.
 
-You can see how we are tracking on the [TAM Quota Tracker](https://us.posthog.com/project/2/dashboard/498582) dashboard.
+Situations where PostHog credits a customer due to circumstances outside of the TAM's control will be handled on a case by case basis.
 
-Here is an illustrative example of how quota calculation works. Let's look at a customer's invoice history:
+**During ramp**
 
-| | Month | Jan | Feb | Mar | Apr | May | Jun |
-|---|---|---|---|---|---|---|---|
-| (A) | Invoice Amount | 2300 | 2200 | 2500 | 2700 | 2800 | 3000 |
-| | Number of Products | 1 | 1 | 1 | 2 | 1 | 3 |
-| (B) | Multiplier | 0.7 | 0.7 | 0.7 | 0.9 | 0.7 | 1.1 |
-| (A × B) | Quota Invoice Amt | 1610 | 1540 | 1750 | 2430 | 1960 | 3300 |
+For your first three months you carry a full quota, not a reduced ramp quota. You are guaranteed 100% of your OTE as a floor, so a slow start won't cost you. In each ramp period you are paid the higher of that floor or the commission you earn on net new business you personally close. You do not get the floor and commission on top of it.
 
-For your Q2 quota calculation:
-
-| Metric | Calculation | Result |
-|---|---|---|
-| Q2 Starting ARR | 4 × (1610 + 1540 + 1750) | 19600 |
-| Q2 Ending ARR | 4 × (2430 + 1960 + 3300) | 30760 |
-| Q2 Quota ARR Diff | 30760 − 19600 | 11160 |
-
-In this example, this customer increases your attainment towards your Q2 quota by $11,160. We do this same calculation for every customer in your book of business to determine the overall attainment towards your quota in a quarter.
+Deals a previous owner signed (including ones with a future-dated start that lands in your ramp quarter) do not count toward ramp commission. The floor already covers you while you build. See the [new hire FAQ](/handbook/growth/sales/new-hire-onboarding#new-hire-frequently-asked-questions) for how the floor is prorated by start date.
 
 ### TAM book of business rules
 

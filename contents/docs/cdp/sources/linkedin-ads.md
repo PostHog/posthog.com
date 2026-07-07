@@ -6,7 +6,6 @@ availability:
   free: full
   selfServe: full
   enterprise: full
-beta: true
 sourceId: LinkedinAds
 ---
 
@@ -45,6 +44,10 @@ Connect PostHog to your LinkedIn Ads account using a LinkedIn account. The Linke
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />
 
 ## Troubleshooting
 

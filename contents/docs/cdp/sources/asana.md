@@ -9,7 +9,7 @@ availability:
 sourceId: Asana
 ---
 
-<CalloutBox icon="IconInfo" title="Alpha release" type="fyi">
+<CalloutBox icon="IconFlask" title="Alpha release" type="action">
 
 This source is currently in **alpha**. The interface and available tables may change.
 
@@ -49,3 +49,7 @@ All Asana tables are full refresh only. Asana's list endpoints do not expose a u
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

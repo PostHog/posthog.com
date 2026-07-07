@@ -8,13 +8,12 @@ Our email communications can be broadly divided into broadcasts (one-off emails 
 
 This page doesn't deal with [our Product for Engineers newsletter](https://newsletter.posthog.com/), which is sent through Substack and managed by the Content & Docs team. 
 
-## Linking to the PostHog app
+## Linking to the PostHog app or PostHog AI
 
 To point users at a page in the PostHog app via email, use this format: `https://app.posthog.com/` and do not include the project path. 
 
 For example:
-`https://app.posthog.com/endpoints` instead of `https://app.posthog.com/project/2/endpoints`
-`https://app.posthog.com//logs?activeTab=alerts`
+`https://app.posthog.com/endpoints` instead of `https://app.posthog.com/project/2/endpoints`.
 
 The `app.posthog.com` prefix works for both US and EU instances, and the project path resolves itself for the recipient.
 
@@ -23,7 +22,6 @@ To preload a prompt for PostHog AI, use this format:
 
 For example:
 `https://app.posthog.com/#panel=max:!What's%20my%20churn%20rate?`
-`https://app.posthog.com/#panel=max:!All%20hail%20hogzilla`
 
 ## Email broadcasts
 We regularly send three types of email broadcasts. 

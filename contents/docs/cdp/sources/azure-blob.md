@@ -47,3 +47,7 @@ That's it! You should be able to query the data from the PostHog SQL editor.
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

@@ -46,6 +46,7 @@ import { DocsPageSurvey } from 'components/DocsPageSurvey'
 import CopyMarkdownActionsDropdown, { useMarkdownUrlExists } from 'components/MarkdownActionsDropdown'
 import CustomerMetadata from './CustomerMetadata'
 import { getVideoClasses } from '../../constants'
+import AboutPostHog from 'components/AboutPostHog'
 import { Blockquote } from 'components/BlockQuote'
 
 dayjs.extend(relativeTime)

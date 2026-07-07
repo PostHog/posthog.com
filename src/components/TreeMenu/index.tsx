@@ -15,6 +15,10 @@ interface MenuItem {
     icon?: React.ReactNode
     /** Renders a trailing ↗ and opens in a new tab. Also inferred for `http(s)` URLs. */
     external?: boolean
+    badge?: {
+        title: string
+        className?: string
+    }
 }
 
 /** A flat list of `{name}` headers + `{name,url}` links grouped into sections. */
@@ -32,6 +36,11 @@ type TreeMenuVariant = 'grouped' | 'listed'
  * `hover:text-primary hover:bg-accent` and muted section labels.
  */
 type TreeMenuAppearance = 'os' | 'sidebar'
+
+const badgeClasses = 'bg-accent text-secondary text-xs font-medium rounded-sm px-1 py-0.5 inline-block leading-none'
+
+const Badge = ({ badge }: { badge?: MenuItem['badge'] }) =>
+    badge?.title ? <span className={`${badgeClasses} ${badge.className || ''}`}>{badge.title}</span> : null
 
 interface TreeMenuProps {
     items: MenuItem[]
@@ -95,6 +104,10 @@ const TreeLink = ({
             <span data-sidebar-label className="flex items-center gap-1">
                 {menuItem.name}
                 {arrow && !httpExternal && <IconArrowUpRight className="size-3.5 text-secondary shrink-0" />}
+            </span>
+            <span className={`inline-flex items-center gap-1.5${menuItem.badge?.title ? ' pr-1' : ''}`}>
+                <span>{menuItem.name}</span>
+                <Badge badge={menuItem.badge} />
             </span>
         </OSButton>
     ) : (
@@ -618,8 +631,9 @@ function TreeMenuItem({
                             <IconChevronRight className="size-4" />
                         </motion.div>
                     )}
-                    <span className={`${open ? 'font-semibold' : ''}`} data-sidebar-label>
-                        {item.name}
+                    <span className={`inline-flex items-center gap-1.5 ${open ? 'font-semibold' : ''}`}>
+                        <span>{item.name}</span>
+                        <Badge badge={item.badge} />
                     </span>
                 </OSButton>
             </Collapsible.Trigger>

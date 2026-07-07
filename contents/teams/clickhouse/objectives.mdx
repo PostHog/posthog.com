@@ -1,52 +1,58 @@
-**ClickHouse Team's Mission at PostHog**
+## Q3 2026 objectives
 
-ClickHouse Team's mission is to provide a storage and query engine that meets these requirements:
-- Continue to meet the needs of the product today now and in the future
-- Maintain and optimize our current ClickHouse deployment
-- Elastically scale our capacity with little effort
-- Support multiple query quality of service (QOS) guarantees (Real-time, Batch, etc.)
-- Data is stored once and queryable from the appropriate tool
-- Queries are optimized for cost and performance
-- Tunable execution performance to allow trade-offs between cost and performance
-- Storage is durable
+### 🧬 Cell-based architecture - (Driver: <TeamMember name="Rory Shanks" />)
+Large customers can break smaller ones, the blast radius is huge, and changes are hard to test. Splitting things up and isolating them lets us manage all of this far better.
 
-In service of this mission, our objectives for Q2 2026 are:
+**What we'll ship:**
+* A team 2 cell, set up together with the Query Performance team
+* Tooling to manage the different backends and migrate data between cells
 
-**Objective 1: Spread load on Clickhouse across purpose driven clusters <TeamMember name="Rory Shanks" />**  
-Motivation: All in one means load cannot be spread to specific workloads or products \- one workload scales all others  
-What we will ship:
+### 📦 JSON datatype in the app - (Driver: <TeamMember name="Rory Shanks" />)
+We have a lot of duplicated data sitting in the cluster eating disk. Newer storage formats give us more efficient disk usage, and therefore better performance.
 
-* OPs cluster for all observability, non customer facing workloads  
-* Sessions cluster  
-* AI “heavy” events cluster  
-* (Insert other appropriate clusters here)   
-* (Zoo|Clickhouse)Keeper migration  
-* Cluster upgrades to get the gains that help us here
+**What we'll ship:**
+* The app can use the JSON datatype natively (with Query Performance)
+* A rebuilt events table using the JSON datatype
+* The app switched over to the new table
 
-**Objective 2: No one customer affects another customer <TeamMember name="Paweł Szczur" />**  
-Motivation: We still have the possibility for a single expensive customer to negatively impact *all* other customers  
-What we will ship:
+### 🔐 ClickHouse is up to date and secure - (Driver: <TeamMember name="Thomas Gilmore" />)
+New ClickHouse versions bring big wins, so we should be able to upgrade faster. And secrets rotation shouldn't be a painful, high-risk process that can take down the app or silently break a team - secrets need to be swappable at any time with no real risk.
 
-* Every single query is tagged across multiple dimensions  
-* We control the query control plane (API between the app and Clickhouse)  
-* We are able to throttle or drop by team,product,priority,etc.  
-* We will have a manual system and some sort of automated system  
-* Will support Robbie and co on the query performance optimization side of things
+**What we'll ship:**
+* Meaningful, fully automated ClickHouse version upgrade testing
+* An upgrade to a new ClickHouse version
+* Short-lived secrets to remove the need for manual rotation almost entirely, without creating issues for users
+* Failing that: consolidated secret sources and an automated, zero-downtime way to rotate them
+* An end to our reliance on the default user
 
-**Objective 3: Operational tooling for managing our clusters is better <TeamMember name="Bryan Ciaraldi" />**  
-Motivation: Normal operations and incidents are intensely time consuming and slow all of us down.   
-What we will ship:
+### 🚚 ClickHouse migration system - (Driver: <TeamMember name="Paweł Szczur" />)
+Our ClickHouse migrations suck and our topology is very complex. We should figure out a good way of doing this.
 
-* Better standardisation of configs across envs (better, more enforced IaC)  
-* Make sure migrations are possible and ideally delightful in this topology  
-* HouseKeeper \- AI tooling etc. that helps to debug live issues (and any other tooling we can find)  
-* Ship more info into the ops cluster so we can hit it harder and build strong dashboards \-  
-* MCP connection to OPs cluster via AWS bedrock (so we never have to limit ourselves due to data protection)
+**What we'll ship:**
+* hclexp for all migrations in PostHog
+* Good reporting and good workflows
+* Automatic schema drift detection that proposes queries to fix it
 
-**Objective 4: Data deletion is self-serve (at least internally) <TeamMember name="Rory Shanks" />**  
-Motivation: This comes up all the time from customers  
-What we will ship:
+### 🗑️ Data lifecycle management - (Driver: <TeamMember name="Paweł Szczur" />)
+We need to delete data all the time, and our systems for it need to be top-notch.
 
-* Cluster updates to enable part rewriting on demand  
-* A proper concept in place for storing scheduled deletions / being able to visualise / debug this etc.  
-* Some sort of self serve interface (can for starters be internal for support/ops)
+**What we'll ship:**
+* Self-driving DataDeletionRequests, with minimal human intervention
+* Person and team deletion mapped across systems and topologies
+* Per-team retention periods
+
+### 🚦 Query proxy for ClickHouse - (Driver: <TeamMember name="Matt Field" />)
+We want more control over the queries hitting ClickHouse - resource usage, queueing, load shedding, routing, and adherence to the tagging schema.
+
+**What we'll ship:**
+* A ClickHouse query proxy
+* The PostHog app talking to ClickHouse through the proxy
+
+### 🤖 Self-driving operations - (Driver: <TeamMember name="Bryan Ciaraldi" />)
+Interrupt-driven ops has the biggest impact on the team's ability to ship: operational toil, alert noise, and "fear of breaking ClickHouse" all track to it. We make routine operations self-driving so we're only interrupted when judgment is actually required.
+
+**What we'll ship:**
+* ClickHouse MCP + Bedrock for diagnostic and proactive signals, with no data-protection limits on what the agent can see
+* MCP that turns warning-level alerts into proposed fixes / auto-generated PRs
+* A stable, low-noise alerting base that automation can build on
+* High-signal ops dashboards living on the ops cluster

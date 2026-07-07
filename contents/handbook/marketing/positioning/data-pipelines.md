@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> **Owner:** See [who owns this feature](https://posthog.com/handbook/engineering/feature-ownership)
+> Data pipelines are part of the broader [context warehouse](/handbook/marketing/positioning/data-warehouse) — the platform that ingests and stores your context. This page covers the pipelines specifically.
 
 ## Elevator pitch
 

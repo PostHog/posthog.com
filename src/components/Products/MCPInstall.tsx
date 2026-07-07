@@ -1,7 +1,8 @@
 import React from 'react'
-import { SingleCodeBlock } from 'components/CodeBlock'
 import Link from 'components/Link'
 import OSButton from 'components/OSButton'
+import PlatformInstall from 'components/PlatformInstall'
+import { SingleCodeBlock } from 'components/CodeBlock'
 
 const MCP_URL = 'https://mcp.posthog.com/mcp'
 
@@ -44,6 +45,7 @@ export default function MCPInstall({ showIDEButtons = true }: MCPInstallProps) {
                     </div>
                 </div>
             ) : null}
+            <PlatformInstall variant="inline" command="mcp add" slim />
             <p className="text-sm opacity-60 mt-3">
                 See the{' '}
                 <Link to="/docs/model-context-protocol" className="underline">

@@ -154,7 +154,7 @@ export const CTAs = () => {
                 animate={{ height: showInstall ? 'auto' : 0 }}
             >
                 <div className="mt-4">
-                    <WizardCommand latest={false} slim />
+                    <WizardCommand slim />
                 </div>
             </motion.div>
         </div>

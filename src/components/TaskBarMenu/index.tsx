@@ -12,6 +12,7 @@ import {
     IconCode,
     IconFeatures,
     IconPlay,
+    IconPencil,
     IconPeople,
     IconPinFilled,
 } from '@posthog/icons'
@@ -213,6 +214,12 @@ function TaskBarMenu() {
                                     label: 'Components',
                                     link: '/components',
                                     icon: <IconCode className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                                },
+                                {
+                                    type: 'item' as const,
+                                    label: 'Art library',
+                                    link: '/art-library',
+                                    icon: <IconPencil className="opacity-50 group-hover/item:opacity-75 size-4" />,
                                 },
                                 {
                                     type: 'item' as const,

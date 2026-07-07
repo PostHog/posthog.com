@@ -105,27 +105,29 @@
         }
     ],
     "redirects": [
+        { "source": "/teams/logs", "destination": "/teams/apm" },
+        { "source": "/teams/query-performance", "destination": "/teams/analytics-platform" },
+        {
+            "source": "/teams/query-performance/:path*",
+            "destination": "/teams/analytics-platform/:path*"
+        },
+        {
+            "source": "/docs/sdk-doctor/keeping-sdks-current",
+            "destination": "/docs/health-checks/keeping-sdks-current",
+            "statusCode": 301
+        },
+        { "source": "/docs/sdk-doctor", "destination": "/docs/health-checks/sdk-health", "statusCode": 301 },
+        { "source": "/teams/customer-success", "destination": "/teams/customer-success-eu" },
+        { "source": "/teams/customer-success/:path*", "destination": "/teams/customer-success-eu/:path*" },
         {
             "source": "/docs/prompt-management/skills-store",
             "destination": "/docs/ai-engineering/skills-store",
             "statusCode": 301
         },
-        {
-            "source": "/docs/site-apps",
-            "destination": "/docs/js-snippets"
-        },
-        {
-            "source": "/docs/site-apps/:path*",
-            "destination": "/docs/js-snippets/:path*"
-        },
-        {
-            "source": "/code/download",
-            "destination": "/code#download"
-        },
-        {
-            "source": "/code/download/",
-            "destination": "/code#download"
-        },
+        { "source": "/docs/site-apps", "destination": "/docs/js-snippets" },
+        { "source": "/docs/site-apps/:path*", "destination": "/docs/js-snippets/:path*" },
+        { "source": "/code/download", "destination": "/code#download" },
+        { "source": "/code/download/", "destination": "/code#download" },
         {
             "source": "/slack-app",
             "destination": "/slack"
@@ -145,13 +147,20 @@
             "statusCode": 301
         },
         {
-            "source": "/docs/product-tours",
-            "destination": "/docs",
+            "source": "/handbook/brand/reference",
+            "destination": "/handbook/brand/overview",
             "statusCode": 301
         },
+        { "source": "/docs/product-tours", "destination": "/docs", "statusCode": 301 },
+        { "source": "/docs/product-tours/:path*", "destination": "/docs", "statusCode": 301 },
+        { "source": "/docs/start-here", "destination": "/docs/self-driving", "statusCode": 301 },
+        { "source": "/docs/start-here/:path*", "destination": "/docs/self-driving/:path*", "statusCode": 301 },
+        { "source": "/docs/product-os", "destination": "/docs/self-driving", "statusCode": 301 },
+        { "source": "/docs/self-driving/responders", "destination": "/docs/self-driving/inbox", "statusCode": 301 },
+        { "source": "/docs/self-driving/guardrails", "destination": "/docs/self-driving", "statusCode": 301 },
         {
-            "source": "/docs/product-tours/:path*",
-            "destination": "/docs",
+            "source": "/docs/self-driving/autonomy-loop",
+            "destination": "/docs/self-driving/self-improving-loop",
             "statusCode": 301
         },
         {
@@ -184,6 +193,11 @@
             "statusCode": 301
         },
         {
+            "source": "/handbook/growth/revops/lead-assignment-ooo",
+            "destination": "/handbook/growth/revops/lead-assignment-tracker",
+            "statusCode": 301
+        },
+        {
             "source": "/handbook/growth/marketing/:path*",
             "destination": "/handbook/marketing/:path*",
             "statusCode": 301
@@ -208,34 +222,20 @@
             "source": "/handbook/growth/marketing/product-announcements",
             "destination": "/handbook/marketing/product-announcements"
         },
+        { "source": "/teams/words-and-pictures", "destination": "/teams/website" },
+        { "source": "/teams/words-pictures", "destination": "/teams/website" },
+        { "source": "/teams/brand-vibes", "destination": "/teams/website" },
+        { "source": "/teams/docs-wizard", "destination": "/teams/wizard-and-docs" },
+        { "source": "/handbook/docs-and-wizard", "destination": "/handbook/wizard-and-docs", "statusCode": 301 },
         {
-            "source": "/teams/words-and-pictures",
-            "destination": "/teams/website"
+            "source": "/handbook/docs-and-wizard/:path*",
+            "destination": "/handbook/wizard-and-docs/:path*",
+            "statusCode": 301
         },
-        {
-            "source": "/teams/words-pictures",
-            "destination": "/teams/website"
-        },
-        {
-            "source": "/teams/brand-vibes",
-            "destination": "/teams/website"
-        },
-        {
-            "source": "/teams/llm-gateway",
-            "destination": "/teams/ai-gateway"
-        },
-        {
-            "source": "/teams/llm-analytics",
-            "destination": "/teams/ai-observability"
-        },
-        {
-            "source": "/aio",
-            "destination": "/ai-observability"
-        },
-        {
-            "source": "/teams/flags-platform",
-            "destination": "/teams/feature-flags"
-        },
+        { "source": "/teams/llm-gateway", "destination": "/teams/ai-gateway" },
+        { "source": "/teams/llm-analytics", "destination": "/teams/ai-observability" },
+        { "source": "/aio", "destination": "/ai-observability" },
+        { "source": "/teams/flags-platform", "destination": "/teams/feature-flags" },
         {
             "source": "/teams/signals",
             "destination": "/teams/self-driving"
@@ -292,12 +292,27 @@
         },
         {
             "source": "/docs/posthog-code/inbox/triage",
-            "destination": "/docs/posthog-code/inbox/implementation",
+            "destination": "/docs/self-driving/inbox/implementation",
             "statusCode": 301
         },
         {
             "source": "/docs/posthog-code/inbox/triage/",
-            "destination": "/docs/posthog-code/inbox/implementation",
+            "destination": "/docs/self-driving/inbox/implementation",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-code/inbox",
+            "destination": "/docs/self-driving/inbox",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-code/inbox/:path*",
+            "destination": "/docs/self-driving/inbox/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/self-driving/first-task",
+            "destination": "/docs/self-driving/inbox",
             "statusCode": 301
         },
         {
@@ -3192,6 +3207,25 @@
             "source": "/blog/ceo-diary-4",
             "destination": "/founders/ceo-diary-4"
         },
+        { "source": "/docs/billing", "destination": "/docs/billing/estimating-usage-costs" },
+        { "source": "/docs/billing-and-payments", "destination": "/docs/billing/estimating-usage-costs" },
+        { "source": "/docs/billing/annual-plans", "destination": "/docs/billing/pre-paid-plans" },
+        { "source": "/legal", "destination": "/terms" },
+        { "source": "/docs/getting-started/actions-and-insights", "destination": "/docs/data/actions" },
+        { "source": "/docs/getting-started/person-properties", "destination": "/docs/data/persons" },
+        { "source": "/docs/getting-started/group-analytics", "destination": "/docs/product-analytics/group-analytics" },
+        { "source": "/docs/data/data-management", "destination": "/docs/data" },
+        { "source": "/docs/batch-exports", "destination": "/docs/cdp/batch-exports" },
+        { "source": "/docs/batch-exports/s3", "destination": "/docs/cdp/batch-exports/s3" },
+        { "source": "/docs/batch-exports/snowflake", "destination": "/docs/cdp/batch-exports/snowflake" },
+        { "source": "/blog/startup-golioth", "destination": "/spotlight/startup-golioth" },
+        { "source": "/blog/startup-unified", "destination": "/spotlight/startup-unified" },
+        { "source": "/handbook/engineering", "destination": "/handbook/engineering/developing-locally" },
+        { "source": "/blog/startup-inlang", "destination": "/spotlight/startup-inlang" },
+        { "source": "/docs/cdp/automatic-cohort-creator", "destination": "/docs/product-analytics/group-analytics" },
+        { "source": "/blog/asynchronous-remote-companies", "destination": "/founders/asynchronous-remote-companies" },
+        { "source": "/blog/ceo-diary-2", "destination": "/founders/ceo-diary-2" },
+        { "source": "/blog/ceo-diary-4", "destination": "/founders/ceo-diary-4" },
         {
             "source": "/blog/creating-ideal-customer-profile",
             "destination": "/founders/creating-ideal-customer-profile"

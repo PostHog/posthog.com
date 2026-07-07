@@ -23,8 +23,7 @@ const Support: React.FC = () => {
                 description="Built-in customer support with an embeddable chat widget and a unified inbox with session replays and user context."
                 buttonText="Get started"
                 buttonLink="/docs/support/start-here"
-                imageClasses="max-h-48 md:max-h-64"
-                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/hog_support_5b92c08b1a.png"
+                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/support_hog_f7ed8447c9.png"
             />
             <section className="mb-12">
                 <h3 className="m-0 text-xl">Everything you need to help your users</h3>

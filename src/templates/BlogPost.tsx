@@ -395,6 +395,12 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                 imageType="absolute"
                 lang={lang || (languageAlternates ? 'en' : undefined)}
                 languageAlternates={languageAlternates}
+                // Standard.site document rkey (only for /blog posts; this template is shared with other sections)
+                documentRkey={
+                    fields?.slug?.startsWith('/blog/')
+                        ? fields.slug.replace(/^\/blog\//, '').replace(/\/$/, '')
+                        : undefined
+                }
             />
 
             <ReaderView

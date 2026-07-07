@@ -31,6 +31,10 @@ Triage and fix issues from your editor instead of context-switching to a browser
   prompt="Mark this issue as resolved and assign all future TypeErrors to the backend team."
   outcome="Updates issue status and creates an assignment rule in one go."
 />
+<PromptExample
+  prompt="Link the top error to Jira project BACKEND as a bug."
+  outcome="Creates an external reference linking the PostHog issue to a new Jira issue in the specified project."
+/>
 
 ### Explore product analytics
 
@@ -165,6 +169,14 @@ Day-to-day operations your team would otherwise do by hand.
 <PromptExample
   prompt="Mark ticket #3 as resolved and set ticket #7 to high priority."
   outcome="Updates both tickets in a single call."
+/>
+<PromptExample
+  prompt="Create a reminder to review the onboarding funnel next Monday at 9am."
+  outcome="Creates a one-off reminder that fires once at the specified time."
+/>
+<PromptExample
+  prompt="Set up a weekly reminder to check the error dashboard every Monday morning."
+  outcome="Creates a recurring reminder that fires weekly at the specified time."
 />
 
 ### Schedule reminders
