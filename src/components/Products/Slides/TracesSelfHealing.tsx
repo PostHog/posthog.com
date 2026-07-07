@@ -37,6 +37,7 @@ const steps: {
         activeText: 'text-white',
         progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
         copy: 'Latency on GET /api/checkout starts climbing. The scout catches it and files a report. Nobody had to notice first.',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Post_Hog_Inbox_Mock_6485bb0963.png',
     },
     {
         value: 'investigate',
