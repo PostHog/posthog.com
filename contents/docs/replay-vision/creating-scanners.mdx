@@ -10,12 +10,13 @@ Not yet available to everyone – <a href="/replay-vision">join the waitlist</a>
 
 </CalloutBox>
 
-A scanner is made up of four things you author:
+A scanner is made up of five things you author:
 
 1. A **prompt** describing what to look for.
 2. A **scanner type** that determines the output shape – see [scanner types](/docs/replay-vision/scanner-types).
 3. **Recording filters** that select which sessions the scanner applies to.
-4. A **sampling rate** that controls how many matching sessions get scanned.
+4. A **session coverage** mode that pre-filters by recording quality.
+5. A **sampling rate** that controls how many matching sessions get scanned.
 
 ## Start from a template
 
@@ -112,11 +113,33 @@ A scanner with no filters matches every eligible session in your project. A scan
 
 A good default discipline: start with a narrow filter while you're tuning the prompt, then widen the filter once you trust the results.
 
+## Session coverage: filtering by quality
+
+The **Session coverage** toggle pre-filters recordings by their predicted quality before sampling is applied. It uses an internally-computed surfacing score that estimates how much meaningful activity a recording contains – engagement, errors, navigation – versus idle or empty sessions.
+
+| Mode              | What it keeps                                    |
+| ----------------- | ------------------------------------------------ |
+| **Focused**       | Roughly the top 25% of sessions by quality score |
+| **Balanced**      | Roughly the top 65% of sessions by quality score |
+| **Comprehensive** | All sessions – no quality filtering (default)    |
+
+Sessions without a score are skipped by Focused and Balanced modes.
+
+The three-step filtering process is:
+
+1. **Recording filters** pick sessions matching your criteria.
+2. **Session coverage** drops low-quality sessions by surfacing score.
+3. **Sampling rate** randomly keeps a fraction of what's left.
+
+Existing scanners default to Comprehensive, so they behave the same as before.
+
+Use a tighter coverage mode when you want to spend your observation budget on sessions where something actually happened, rather than idle or empty recordings.
+
 ## Sampling rate: controlling volume
 
 The sampling rate (0–100%) is applied **after** the filters match. A scanner with filter "sessions over 30 seconds" and sampling 25% scans roughly one in four of those sessions.
 
-The scanner editor shows a **per-month estimate** of how many observations the scanner will produce, based on your project's recent recording volume, the filters you've set, and the sampling rate. Use this to size the scanner against your [quota](/docs/replay-vision/quota-and-limits) _before_ saving.
+The scanner editor shows a **per-month estimate** of how many observations the scanner will produce, based on your project's recent recording volume, the filters you've set, the session coverage mode, and the sampling rate. Use this to size the scanner against your [quota](/docs/replay-vision/quota-and-limits) _before_ saving.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/estimate_callout_2d954ec2cb.png"
@@ -124,9 +147,10 @@ The scanner editor shows a **per-month estimate** of how many observations the s
   classes="rounded"
 />
 
-If the estimate looks too high, you have two knobs:
+If the estimate looks too high, you have three knobs:
 
 - Narrow the filters.
+- Tighten the session coverage mode (Comprehensive → Balanced → Focused).
 - Lower the sampling rate.
 
 ## Enabling and disabling
