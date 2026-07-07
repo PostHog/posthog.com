@@ -78,7 +78,16 @@ function HeroSection({ teamCrestUrl }: { teamCrestUrl?: string }) {
     }, [posthog])
 
     return (
-        <section className="my-6 @4xl/editor:mb-12 tracking-[-0.0125em] max-w-5xl mx-auto w-full">
+        <section className="relative my-6 @4xl/editor:mb-12 tracking-[-0.0125em] max-w-5xl mx-auto w-full">
+            <div
+                aria-hidden="true"
+                className="hidden @md:block absolute bottom-8 right-0 @xl:right-8 -rotate-12 border-4 border-double border-red/50 text-red/50 rounded px-4 py-1.5 text-center pointer-events-none select-none"
+            >
+                <span className="block text-2xl font-black uppercase tracking-[0.2em] leading-none">Preprint</span>
+                <span className="block text-[10px] font-bold uppercase tracking-widest mt-1">
+                    Not peer reviewed · results may vary
+                </span>
+            </div>
             <div className="flex items-start justify-between gap-4 mb-6">
                 <div className="flex items-center gap-3">
                     <IconBrain className="size-10 text-purple" />
@@ -134,15 +143,15 @@ function HeroSection({ teamCrestUrl }: { teamCrestUrl?: string }) {
                         ship fixes while you sleep
                     </RoughAnnotation>
                     , but we can't do that with your standard, off-the-shelf ideas and apps. That's why we're training
-                    our own models, building open source tools, and pursuing all sorts of hare-brained schemes. It's
-                    research. It's fine.
+                    our own models, building open source tools, and pursuing all sorts of hare-brained schemes.
+                    <sup className="font-semibold text-secondary">[1]</sup> It's research. It's fine.
                 </p>
-                <p className="text-sm text-secondary">
-                    Find out why this important in{' '}
+                <p className="text-xs text-secondary font-mono border-t border-primary pt-2 mt-4 max-w-xl">
+                    [1] Hawkins, J. (2026).{' '}
                     <Link to="/blog/posthogs-next-chapter" state={{ newWindow: true }} className="underline">
-                        our master plan for PostHog
-                    </Link>
-                    .
+                        "PostHog's next chapter."
+                    </Link>{' '}
+                    <em>posthog.com</em>, May 2026. The master plan, in the founder's own words.
                 </p>
             </div>
         </section>
