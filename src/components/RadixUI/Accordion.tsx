@@ -50,12 +50,13 @@ interface AccordionContentProps extends React.ComponentPropsWithoutRef<typeof Ra
 const AccordionContent = React.forwardRef<HTMLDivElement, AccordionContentProps>(
     ({ children, className, ...props }, forwardedRef) => (
         <RadixAccordion.Content
-            className={`overflow-hidden data-[state=closed]:animate-slideUp data-[state=open]:animate-slideDown pb-3 [&>p:first-child]:mt-0 [&>p:last-child]:mb-0 ${className}`}
+            className="overflow-hidden data-[state=closed]:animate-slideUp data-[state=open]:animate-slideDown"
             {...props}
             ref={forwardedRef}
-            asChild
         >
-            <div className="text-base">{children}</div>
+            <div className={`text-base pb-3 [&>p:first-child]:mt-0 [&>p:last-child]:mb-0 ${className ?? ''}`}>
+                {children}
+            </div>
         </RadixAccordion.Content>
     )
 )

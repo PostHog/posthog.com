@@ -166,22 +166,18 @@ const SidebarContent = ({ content }: { content: React.ReactNode | AccordionItem[
 
     if (Array.isArray(content)) {
         return (
-            <>
-                {content.map((item, index) => (
-                    <Accordion
-                        key={index}
-                        data-scheme="primary"
-                        className=""
-                        defaultValue="item-0"
-                        items={[
-                            {
-                                trigger: item.title,
-                                content: item.content,
-                            },
-                        ]}
-                    />
-                ))}
-            </>
+            <Accordion
+                data-scheme="primary"
+                type="multiple"
+                className="[&>*:first-child_button]:!pt-0"
+                triggerClassName="!text-sm !font-semibold"
+                contentClassName="!text-sm [&_p]:!text-sm"
+                items={content.map((item, index) => ({
+                    value: `item-${index}`,
+                    trigger: item.title,
+                    content: item.content,
+                }))}
+            />
         )
     }
 
@@ -588,10 +584,8 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                             data-scheme="secondary"
                             className="@3xl:w-64 w-full bg-primary  @3xl:border-r border-t @3xl:border-t-0 border-primary h-full"
                         >
-                            <ScrollArea className={`p-2`}>
-                                <div className="space-y-3">
-                                    <SidebarContent content={leftSidebarContent} />
-                                </div>
+                            <ScrollArea className={`p-4`}>
+                                <SidebarContent content={leftSidebarContent} />
                             </ScrollArea>
                         </aside>
                     )}
