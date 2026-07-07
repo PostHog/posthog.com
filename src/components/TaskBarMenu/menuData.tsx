@@ -236,7 +236,7 @@ const buildProductsMenuItems = (allProducts: any[]) => {
         {
             type: 'item',
             label: 'PostHog Web',
-            link: '/self-driving',
+            link: '/products',
             icon: <Icons.IconBolt className="size-4 text-red" />,
         },
         {
