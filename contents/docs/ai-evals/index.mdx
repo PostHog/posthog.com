@@ -17,13 +17,13 @@ Evaluations automatically assess the quality of your LLM [generations](/docs/ai-
 
 ## Choosing an evaluation type
 
-|                 | LLM-as-a-judge                                               | Code-based (Hog)                                           | Sentiment analysis                                       |
-| --------------- | ------------------------------------------------------------ | ---------------------------------------------------------- | -------------------------------------------------------- |
-| **Best for**    | Subjective quality checks (tone, helpfulness, hallucination) | Deterministic rule-based checks (format, keywords, length) | Tracking how users feel during conversations             |
-| **Cost**        | LLM API call per evaluation                                  | Free                                                       | Free                                                     |
-| **Speed**       | Seconds                                                      | Milliseconds                                               | Milliseconds                                             |
-| **Output**      | Pass/fail with reasoning                                     | Pass/fail with reasoning                                   | Positive, neutral, or negative with a confidence score   |
-| **Setup**       | Write a prompt                                               | Write Hog code                                             | Pick the type — no prompt or code required               |
+|              | LLM-as-a-judge                                               | Code-based (Hog)                                           | Sentiment analysis                                     |
+| ------------ | ------------------------------------------------------------ | ---------------------------------------------------------- | ------------------------------------------------------ |
+| **Best for** | Subjective quality checks (tone, helpfulness, hallucination) | Deterministic rule-based checks (format, keywords, length) | Tracking how users feel during conversations           |
+| **Cost**     | LLM API call per evaluation                                  | Free                                                       | Free                                                   |
+| **Speed**    | Seconds                                                      | Milliseconds                                               | Milliseconds                                           |
+| **Output**   | Pass/fail with reasoning                                     | Pass/fail with reasoning                                   | Positive, neutral, or negative with a confidence score |
+| **Setup**    | Write a prompt                                               | Write Hog code                                             | Pick the type — no prompt or code required             |
 
 ## LLM-as-a-judge evaluations
 
@@ -351,6 +351,12 @@ You can adjust the report configuration after creating an evaluation:
 - Add email or Slack delivery targets to receive notifications when reports are generated
 - Disable the report if you don't need automated summaries
 
+### Inbox signals
+
+Evaluation reports can appear as signals in your [inbox](/docs/self-driving/inbox). To receive these signals, enable the **AI observability** source in your inbox signal sources settings.
+
+When enabled, the inbox receives a signal each time a report is generated, letting you review evaluation trends alongside other product signals. This is opt-in and disabled by default.
+
 ## Evaluation status and errors
 
 Each evaluation has a status that indicates whether it's running:
@@ -363,10 +369,10 @@ Each evaluation has a status that indicates whether it's running:
 
 PostHog automatically disables evaluations and sets them to error status when:
 
-| Error reason             | Cause                                                     | How to resolve                                                                                                                                   |
-| ------------------------ | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Error reason             | Cause                                                     | How to resolve                                                                                                                                            |
+| ------------------------ | --------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Trial limit reached**  | The 100 free trial evaluation runs have been exhausted.   | Add your own API key in [**Settings** > **AI Observability**](https://app.posthog.com/settings/environment-ai-observability#ai-observability-byok).       |
-| **Model not allowed**    | The selected model isn't available on the trial plan.     | Switch to a trial-allowed model, or add your own provider API key.                                                                               |
+| **Model not allowed**    | The selected model isn't available on the trial plan.     | Switch to a trial-allowed model, or add your own provider API key.                                                                                        |
 | **Provider key deleted** | The provider API key used by this evaluation was removed. | Add a new provider API key in [**Settings** > **AI Observability**](https://app.posthog.com/settings/environment-ai-observability#ai-observability-byok). |
 
 ### Identifying errored evaluations

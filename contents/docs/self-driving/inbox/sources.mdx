@@ -5,8 +5,8 @@ sidebar: Docs
 showTitle: true
 ---
 
-import { CallToAction } from 'components/CallToAction'
-import List from 'components/List'
+import { CallToAction } from "components/CallToAction";
+import List from "components/List";
 
 <CalloutBox icon="IconFlask" title="Open beta" type="action">
 
@@ -14,7 +14,7 @@ Self-driving is currently in open beta.
 
 </CalloutBox>
 
-Signal sources are what fill your inbox. A [signal](/docs/self-driving/signals) can be a production error, a support conversation, a Session Replay pattern, a log alert changing state, a Replay Vision scanner finding, or an issue from an external tracker. Each source watches one of these streams and turns what it finds into work worth investigating.
+Signal sources are what fill your inbox. A [signal](/docs/self-driving/signals) can be a production error, a support conversation, a Session Replay pattern, a log alert changing state, a Replay Vision scanner finding, an AI evaluation report, or an issue from an external tracker. Each source watches one of these streams and turns what it finds into work worth investigating.
 
 ## Configure sources
 
@@ -73,6 +73,13 @@ These sources are available when the matching PostHog product has data in your p
       url: "/docs/health-checks",
       icon: "IconStethoscope",
       description: "Outdated SDKs, proxy gaps, ingestion warnings, broken data models, and more.",
+      lineClamp: 2,
+    },
+    {
+      label: "AI observability",
+      url: "/docs/ai-evals/evaluations",
+      icon: "IconAI",
+      description: "Findings from evaluation reports on your LLM traffic.",
       lineClamp: 2,
     },
   ]}
