@@ -1,16 +1,6 @@
 import React from 'react'
 import { IconGanttChart, IconWarning, IconRewindPlay, IconFunnels } from '@posthog/icons'
 
-// "Your product, fixing itself" section. Each step below becomes a tab in the
-// features slide. The section headline + intro stay constant across tabs, while
-// the tab-specific copy changes. Per-tab illustrations will be added later –
-// the `columns` layout leaves an aside slot ready for them.
-const SELF_HEALING_HEADLINE = 'Your product, fixing itself'
-const SELF_HEALING_INTRO =
-    'Point a scout at your slowest traces. It runs on a schedule, and when a query or endpoint starts creeping up, it reports the regression and kicks off an investigation into why.'
-const TRACE_IS_THE_EVIDENCE =
-    'Throughout, the trace is the evidence: what the scout watches to raise the alarm, and what the agent reads to land the fix on the right line.'
-
 // "Catnip for agents" cards. Mirrors the "Automatic PostHog instrumentation"
 // section on the /code page: a 2-column grid of icon + title + description cards.
 // The trace card is highlighted since it's the one that hands over the location.
@@ -42,29 +32,6 @@ const catnipSignals = [
     },
 ]
 
-const selfHealingSteps = [
-    {
-        title: 'Scout',
-        copy: 'You set a scout to watch your slowest traces. It runs on a schedule and keeps an eye on the queries and endpoints that matter.',
-    },
-    {
-        title: 'Signal',
-        copy: 'Latency on GET /api/checkout starts climbing. The scout catches it and files a report. Nobody had to notice first.',
-    },
-    {
-        title: 'Investigate',
-        copy: 'The agent pulls the slow traces, lines them up against the fast ones, and finds the span they share: the inventory service firing one DB query per cart item. Classic N+1.',
-    },
-    {
-        title: 'PR',
-        copy: 'The agent fixes the exact query it located and opens a pull request, wired up with the instrumentation to measure whether it worked.',
-    },
-    {
-        title: 'Merge',
-        copy: 'You review the diff in your Inbox and hit merge. Nothing ships until you do.',
-    },
-]
-
 export const traces = {
     name: 'Traces',
     Icon: IconGanttChart,
@@ -82,7 +49,7 @@ export const traces = {
             'Traces pinpoint the exact query that broke. PostHog Code opens the PR and sends it to your Inbox. You hit merge. That’s the whole job.',
     },
     overview: {
-        title: 'Straight to the line that broke',
+        title: 'Accurate traces',
         description:
             'Traces pinpoint the exact query. PostHog Code opens the PR and sends it to your Inbox. You hit merge. That’s the whole job.',
         textColor: 'text-white',
@@ -90,35 +57,18 @@ export const traces = {
     },
     screenshots: {
         overview: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Group_144143_b7a6b4aa06.png',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Group_144145_2a408da79b.png',
             alt: 'Traces overview',
             classes: 'max-w-5xl mt-auto',
-            imgClasses: '',
+            imgClasses: 'rounded-lg',
             classesMobile: '',
             imgClassesMobile: '',
         },
     },
     features: [
-        // Tabbed "Your product, fixing itself" section (no template = tabs slide)
-        ...selfHealingSteps.map((step) => ({
-            title: step.title,
-            headline: SELF_HEALING_HEADLINE,
-            description: SELF_HEALING_INTRO,
-            layout: 'columns',
-            features: [
-                {
-                    title: step.title,
-                    description: step.copy,
-                },
-                {
-                    title: 'The trace is the evidence',
-                    description: TRACE_IS_THE_EVIDENCE,
-                },
-            ],
-            // TODO: add a per-tab illustration here later (renders in the aside slot)
-            images: [],
-        })),
-        // Standalone split slide: copy on the left, screenshot on the right
+        // Standalone split slide: copy on the left, screenshot on the right.
+        // Image pushed lower (mt-12) with rounded corners, matching the Logs
+        // "Full stack context" slide.
         {
             title: 'Waterfall',
             handle: 'waterfall',
@@ -131,7 +81,7 @@ export const traces = {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_07_01_at_14_32_15_2x_1_2e2baf7533.png',
                     alt: 'A distributed trace shown as a waterfall of spans',
                     shadow: true,
-                    className: 'justify-center items-center',
+                    className: 'justify-center items-center mt-12 rounded-lg',
                 },
             ],
         },

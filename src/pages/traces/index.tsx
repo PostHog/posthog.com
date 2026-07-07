@@ -3,6 +3,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 import { SlidesTemplate, createSlideConfig } from 'components/Products/Slides'
 import TracesComparisonTable from 'components/Products/Slides/TracesComparisonTable'
 import TracesSlackCallout from 'components/Products/Slides/TracesSlackCallout'
+import TracesSelfHealing from 'components/Products/Slides/TracesSelfHealing'
 import { useContentData } from 'hooks/useContentData'
 
 const PRODUCT_HANDLE = 'traces'
@@ -62,12 +63,17 @@ export default function Traces(): JSX.Element {
     // Create slide configuration with custom templates.
     // Building this page out slide by slide – start with just the hero.
     const slides = createSlideConfig({
-        include: ['overview', 'features', 'comparison-summary', 'traces-comparison', 'traces-slack'],
-        order: ['overview', 'features', 'comparison-summary', 'traces-comparison', 'traces-slack'],
+        include: ['overview', 'traces-self-healing', 'features', 'comparison-summary', 'traces-comparison', 'traces-slack'],
+        order: ['overview', 'traces-self-healing', 'features', 'comparison-summary', 'traces-comparison', 'traces-slack'],
         templates: {
             overview: 'stacked',
         },
         custom: [
+            {
+                slug: 'traces-self-healing',
+                name: 'Your product, fixing itself',
+                component: TracesSelfHealing,
+            },
             {
                 slug: 'traces-comparison',
                 name: 'Feature comparison',
