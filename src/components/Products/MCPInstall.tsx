@@ -2,7 +2,6 @@ import React from 'react'
 import Link from 'components/Link'
 import OSButton from 'components/OSButton'
 import PlatformInstall from 'components/PlatformInstall'
-import { SingleCodeBlock } from 'components/CodeBlock'
 
 const MCP_URL = 'https://mcp.posthog.com/mcp'
 
@@ -28,11 +27,7 @@ export default function MCPInstall({ showIDEButtons = true }: MCPInstallProps) {
     return (
         <div className="mt-4 pt-4 border-t border-border">
             <p className="text-sm font-semibold mb-2 opacity-70">Install the MCP server</p>
-            <div className="[&_.code-block]:mb-0 [&_.code-block]:mt-0 [&_.pb-2]:pb-0">
-                <SingleCodeBlock language="bash" showAskAI={false}>
-                    npx @posthog/wizard mcp add
-                </SingleCodeBlock>
-            </div>
+            <PlatformInstall variant="inline" command="mcp add" slim />
             {showIDEButtons ? (
                 <div className="mt-3">
                     <p className="text-xs font-semibold opacity-60 m-0 mb-1.5">Or install directly in your editor:</p>
@@ -45,7 +40,6 @@ export default function MCPInstall({ showIDEButtons = true }: MCPInstallProps) {
                     </div>
                 </div>
             ) : null}
-            <PlatformInstall variant="inline" command="mcp add" slim />
             <p className="text-sm opacity-60 mt-3">
                 See the{' '}
                 <Link to="/docs/model-context-protocol" className="underline">
