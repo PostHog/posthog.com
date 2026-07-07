@@ -35,12 +35,12 @@ You can also fetch it programmatically – see the `vision-quota-retrieve` MCP t
 ## What counts against the cap
 
 | Observation outcome | Counts against cap? |
-| --- | --- |
-| **Succeeded** | Yes |
-| **Pending** | Yes |
-| **Running** | Yes |
-| **Failed** | No |
-| **Ineligible** | No |
+| ------------------- | ------------------- |
+| **Succeeded**       | Yes                 |
+| **Pending**         | Yes                 |
+| **Running**         | Yes                 |
+| **Failed**          | No                  |
+| **Ineligible**      | No                  |
 
 Pending and running observations count so a burst of concurrent on-demand triggers can't blow past the cap before any of them complete. Once an observation reaches a terminal failed or ineligible state, it stops counting toward the month's usage.
 
@@ -61,6 +61,7 @@ The scanner editor shows a **projected per-month observation count** for the sca
 
 - Your project's recent recording volume.
 - The filters you've set.
+- The session coverage mode.
 - The sampling rate.
 
 <ProductScreenshot
@@ -72,16 +73,17 @@ The scanner editor shows a **projected per-month observation count** for the sca
 If the projection is uncomfortably close to your remaining cap, the cheapest knobs are:
 
 - **Narrow the filters** – e.g. require a specific URL pattern, exclude bots, restrict to a cohort.
+- **Tighten session coverage** – switching from Comprehensive to Balanced or Focused mode filters out low-quality sessions before sampling, so your budget goes toward recordings with meaningful activity.
 - **Lower the sampling rate** – samples are random, so a 10% rate gives you a representative slice of matching sessions for one-tenth the volume.
-- **Combine both** – a tight filter on the sessions you care most about, plus 100% sampling, is usually better signal-per-observation than a loose filter with low sampling.
+- **Combine all three** – a tight filter on the sessions you care most about, plus Focused or Balanced coverage, plus a higher sampling rate, often yields better signal-per-observation than a loose filter with Comprehensive coverage and low sampling.
 
-To project a hypothetical scanner *before* creating it (e.g. from a script or agent), use the `vision-scanners-estimate-create` MCP tool. It runs the same projection the editor shows.
+To project a hypothetical scanner _before_ creating it (e.g. from a script or agent), use the `vision-scanners-estimate-create` MCP tool. It runs the same projection the editor shows.
 
 ## What to do if you're hitting the cap
 
 Try these, in order:
 
 1. **Look at which scanner is consuming the most quota.** The Observations tab makes this easy – a scanner producing thousands of observations a month is probably broader than it needs to be.
-2. **Lower its sampling rate or tighten its filters.** Use the editor's projection to find a setting that gives you enough signal without dominating the cap.
+2. **Tighten its filters, session coverage, or sampling rate.** Use the editor's projection to find a setting that gives you enough signal without dominating the cap.
 3. **Disable scanners you're not actively using.** A disabled scanner produces zero new background observations.
 4. **Wait for the cap to reset.** Caps reset at the start of each calendar month in UTC.
