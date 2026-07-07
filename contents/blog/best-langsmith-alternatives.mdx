@@ -33,7 +33,7 @@ Whatever brought you here, this guide compares the best LangSmith alternatives, 
 
 ### What is PostHog?
 
-**[PostHog](/)** (that's us 👋) is the leading platform for self-driving products. You can use our desktop ([Code](/code)), [web](/ai), [Slack](/slack), and [MCP](/mcp) products to leverage tools like [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [AI observability](/ai-observability), [logs](/logs), and more.
+**[PostHog](/)** (that's us 👋) is the leading platform for self-driving products. You can use our desktop ([Code](/code)), [web](/ai), [Slack](/slack), and [MCP](/mcp) products to leverage tools like [AI observability](/ai-observability), [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [logs](/logs), and more.
 
 PostHog captures full traces of your LLM calls, so you can follow a request through every prompt, tool call, and model response. For each generation, it tracks token usage, cost, latency, and errors, and you can score outputs with LLM-as-a-judge or code-based evals to catch quality regressions over time.
 
@@ -45,19 +45,19 @@ Engineers and product teams use PostHog to build AI-powered products. Customers 
 
 ### Key features
 
-- [**Generations**](docs/ai-observability/generations): Monitor model performance, token usage, costs, latency, and errors across your AI features from a single view.
+- [**Generations**](/docs/ai-observability/generations): Monitor model performance, token usage, costs, latency, and errors across your AI features from a single view.
 
-- [**Traces**](docs/ai-observability/traces): Follow AI workflows from start to finish to understand how requests move through prompts, tools, and model calls.
+- [**Traces**](/docs/ai-observability/traces): Follow AI workflows from start to finish to understand how requests move through prompts, tools, and model calls.
 
-- [**AI evals**](docs/ai-evals/evaluations): Automatically score model outputs using LLM-as-a-judge or code-based checks to track quality and identify regressions over time.
+- [**AI evals**](/docs/ai-evals/evaluations): Automatically score model outputs using LLM-as-a-judge or code-based checks to track quality and identify regressions over time.
 
-- [**Prompt management**](docs/prompt-management) *(beta):* Create, version, and update prompts without redeploying code. Compare versions and understand how prompt changes affect outputs.
+- [**Prompt management**](/docs/prompt-management) *(beta):* Create, version, and update prompts without redeploying code. Compare versions and understand how prompt changes affect outputs.
 
-- [**Session replay:**](docs/session-replay) Watch [real user sessions alongside LLM traces](/docs/ai-observability/link-session-replay) to understand exactly what happened in context, including console logs and network activity.
+- [**Session replay:**](/docs/session-replay) Watch [real user sessions alongside LLM traces](/docs/ai-observability/link-session-replay) to understand exactly what happened in context, including console logs and network activity.
 
 - [**Feature flags and experiments:**](/docs/feature-flags) Safely roll out AI features with multivariate flags and [run A/B tests on prompts](/docs/prompt-management/prompt-experiments), models, or AI features to measure real product impact.
 
-- [**Error tracking:**](docs/error-tracking) Capture and triage errors with full [stack traces correlated with user sessions and LLM events](/docs/ai-observability/link-error-tracking) via error tracking.
+- [**Error tracking:**](/docs/error-tracking) Capture and triage errors with full [stack traces correlated with user sessions and LLM events](/docs/ai-observability/link-error-tracking) via error tracking.
 
 ### How does PostHog compare to LangSmith?
 
@@ -272,7 +272,7 @@ Brainstore, its purpose-built database, keeps trace queries fast even across mil
 
 - Braintrust's CI/CD integration works with any agent stack via a native GitHub Action that blocks merges based on eval scores. LangSmith's CI/CD quality gates are available but tied specifically to LangGraph and LangSmith Deployment infrastructure.
 - Braintrust has a more complete eval lifecycle – dataset curation, CI/CD-gated releases, and AI-assisted scorer generation via Loop. LangSmith's eval workflows are strong but do not include the same end-to-end automation from production trace to CI gate.
-- Braintrust's free tier includes 1M trace spans. LangSmith's Developer plan includes 5K base traces per month on a recurring basis.
+- Braintrust's free tier includes 1 GB processed data. LangSmith's Developer plan includes 5K base traces per month.
 
 </details>
 
@@ -289,7 +289,7 @@ Brainstore, its purpose-built database, keeps trace queries fast even across mil
 
 ### Why do companies use Braintrust?
 
-Based on usage across teams at Notion, Zapier, Stripe, Vercel, and Cloudflare, teams choose Braintrust because:
+Based on usage across Notion, Zapier, Stripe, Vercel, and Cloudflare, teams choose Braintrust because:
 
 - **End-to-end eval workflow:** Tracing, dataset curation, prompt management, and CI/CD-gated releases in a single platform. The one-click trace-to-dataset workflow is consistently cited as a standout feature.
 
@@ -306,7 +306,7 @@ Based on usage across teams at Notion, Zapier, Stripe, Vercel, and Cloudflare, t
 - **Founded:** 2020
 - **Most similar to:** LangSmith, Langfuse
 - **Typical users:** AI engineers and data scientists building and monitoring LLM applications
-- **Typical customers:** Enterprise engineering teams – customers include DoorDash, Instacart, Uber, Roblox, Microsoft, and Booking.com
+- **Typical customers:** Enterprise engineering teams – customers include DoorDash, Instacart, Uber, and Booking.com
 
 ![Arize Phoenix Dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/Arize_Phoenix_Dashboard_0c05ff7970.png)
 
@@ -395,7 +395,7 @@ According to the Arize Phoenix page and community feedback, teams use it because
 - **Founded:** 2018
 - **Most similar to:** LangSmith, Arize Phoenix
 - **Typical users:** ML engineers and AI developers building and iterating on LLM applications
-- **Typical customers:** Research teams and companies running both ML and LLM workloads – customers include OpenAI, Meta, NVIDIA, Cohere, Toyota, Salesforce, and Microsoft
+- **Typical customers:** Research teams and companies running both ML and LLM workloads – customers include Canva, Toyota, Salesforce, and Shell
 
 ![Weights & Biases Weave Dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/Weights_and_Biases_Weave_dashboard_ba22386509.png)
 
@@ -475,7 +475,7 @@ According to discussions on Reddit and the MLOps community, teams use Weave beca
 
 > #### Bottom line
 >
-> W&B Weave is a good choice if your team already uses Weights & Biases for model development and experiment tracking. If you only need LLM observability, you might find more focused options in this guide.
+> W&B Weave is a good choice if your team already uses Weights & Biases for model development and experiment tracking. If you only need LLM observability, you might find a more focused option better.
 
 ## 6. Lunary
 
@@ -534,8 +534,7 @@ The core application is Apache 2.0 licensed and self-hostable, with a lightweigh
 <summary>Main differences between Lunary and LangSmith</summary>
 
 - Lunary is optimized for chatbot and RAG applications with built-in conversation threading and multi-turn session tracking. LangSmith works across frameworks but is optimized for LangChain chain and agent debugging.
-- Lunary's topic classification automatically categorizes and flags LLM responses against custom criteria. LangSmith has no equivalent 
-automated response categorization feature.
+- Lunary's topic classification automatically categorizes and flags LLM responses against custom criteria. LangSmith has no equivalent automated response categorization feature.
 - LangSmith has significantly deeper eval workflows, including LangGraph-native debugging and dataset versioning. Lunary's eval features are more basic.
 - Lunary supports Python and JavaScript runtimes with a lightweight SDK. LangSmith's SDK coverage is broader but skewed toward Python and LangChain-native workflows.
 
@@ -649,7 +648,7 @@ Yes – if your primary goal is understanding how AI features perform in product
 
 **PostHog** covers LLM tracing, cost monitoring, and prompt tracking, while also connecting that data to product analytics, session replay, feature flags, and experiments, error tracking, and more in one platform.
 
-LangSmith remains stronger for advanced eval pipelines and LangGraph-native debugging. If evals are your primary requirement, Langfuse or Braintrust are stronger fits. 
+LangSmith remains stronger for advanced eval pipelines and LangGraph-native debugging. Although [PostHog has evals](/docs/ai-evals), if they are your primary requirement, Langfuse or Braintrust are stronger fits. 
 
 If you want to connect LLM behavior to real user outcomes, PostHog is one of the strongest alternatives available.
 
