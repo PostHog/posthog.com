@@ -1,0 +1,141 @@
+---
+title: Zendesk import
+sidebar: Docs
+showTitle: true
+---
+
+The Zendesk import lets you backfill historical Zendesk Support tickets into PostHog. Tickets, message threads, and attachments are imported into your [inbox](/docs/support/inbox) so your team has full conversation history in one place.
+
+The import is **idempotent** – already-imported tickets are skipped on re-run – and **resumable**, so interrupted imports pick up where they left off.
+
+## Prerequisites
+
+You need:
+
+- A Zendesk Support account with API access
+- A **Zendesk API token** – generate one in Zendesk Admin Center under **Apps and integrations > Zendesk API > Settings**
+- The **email address** of the Zendesk agent tied to the API token
+- Your Zendesk **subdomain** (e.g. `acme` from `acme.zendesk.com`)
+
+<CalloutBox icon="IconInfo" title="Admin access required" type="action">
+
+Only organization admins can start a Zendesk import. The import section is visible in **Support > Settings** for admins with Conversations enabled.
+
+</CalloutBox>
+
+## Starting an import
+
+1. Go to [**Support > Settings**](https://app.posthog.com/support/settings) in PostHog
+2. Find the **Zendesk import** section
+3. Enter your Zendesk **subdomain**, **agent email**, and **API token**
+4. (Optional) Choose how many tickets to import – useful for a test run before a full import
+5. (Optional) Select a **default email channel** for tickets whose original Zendesk recipient doesn't match a configured support address
+6. Click **Start import**
+
+The import status updates live in settings. You'll see:
+
+| Status      | Meaning                                                          |
+| ----------- | ---------------------------------------------------------------- |
+| **Syncing** | Import is in progress – ticket counts update as batches complete |
+| **Done**    | Import finished successfully                                     |
+| **Failed**  | Import encountered an error – check the error message shown      |
+
+Once complete, the summary shows how many tickets were imported, skipped (already existed), and failed.
+
+## Import options
+
+### Ticket count limit
+
+Cap the number of tickets to import for a test run. Options include 10, 100, 1,000, or 10,000 tickets – or import all tickets. Start small to verify everything looks right before running a full import.
+
+### Default email channel
+
+If your Zendesk tickets were received at an address that matches one of your configured [email channels](/docs/support/email), the imported ticket is linked to that channel automatically.
+
+For tickets whose Zendesk recipient doesn't match any configured address (e.g. a `*.zendesk.com` address), you can select a fallback email channel. If no default is set, those tickets are imported without an email channel.
+
+## What gets imported
+
+| Zendesk data                                       | PostHog equivalent                       |
+| -------------------------------------------------- | ---------------------------------------- |
+| Tickets                                            | Support tickets                          |
+| Ticket comments                                    | Ticket messages                          |
+| Internal notes                                     | Private notes (not visible to customers) |
+| Attachments (images and files)                     | Message attachments                      |
+| Ticket status (new, open, pending, solved, closed) | Mapped to PostHog statuses               |
+| Ticket priority                                    | Mapped to PostHog priority levels        |
+| Requester email and name                           | Customer identity on the ticket          |
+| Original timestamps                                | Preserved as created/updated dates       |
+| Zendesk ticket ID                                  | Shown in ticket info for reference       |
+
+### Status mapping
+
+Zendesk statuses are mapped to their PostHog equivalents:
+
+- **new** → New
+- **open** → Open
+- **pending** → Pending
+- **solved** / **closed** → Resolved
+
+### Author types
+
+Each message is tagged with its author type based on the Zendesk user's role:
+
+- **End-users** and requesters → Customer messages
+- **Agents** and **admins** → Support messages
+- **Internal notes** (non-public comments) → Private notes, hidden from customers
+
+## How it works
+
+### Idempotent imports
+
+Each imported ticket stores its original Zendesk ticket ID. If you re-run the import, tickets that already exist in PostHog are skipped. This makes it safe to restart or re-run an import without creating duplicates.
+
+### Resumable progress
+
+The import checkpoints its progress as it runs. If the import is interrupted (e.g. by a network issue), starting a new import resumes from where the previous one stopped rather than restarting from scratch.
+
+### Person matching
+
+The import attempts to match Zendesk requesters to existing PostHog persons by email. When a match is found, the ticket is linked to that person. When no match exists, the requester's name and email from Zendesk are stored so the customer still displays correctly in the inbox.
+
+<CalloutBox icon="IconWarning" title="Imported tickets don't trigger Workflows" type="caution">
+
+Imported tickets are created silently – they do **not** fire the signals that trigger [Workflows](/docs/support/workflows) or AI auto-responses. This prevents automated replies from being sent for years-old tickets. Only new tickets created after import trigger Workflows as normal.
+
+</CalloutBox>
+
+## Viewing imported tickets
+
+Imported tickets appear in your [inbox](/docs/support/inbox) alongside all other tickets. Each imported ticket shows:
+
+- The original Zendesk ticket ID in the ticket info panel
+- The requester's name and email from Zendesk
+- All messages and internal notes with their original timestamps
+- Attachments from Zendesk comments
+
+You can identify imported tickets by the Zendesk ticket ID displayed in ticket details.
+
+## Troubleshooting
+
+### Import shows "Failed"
+
+The error message in settings gives a general description. Common causes:
+
+- **Invalid credentials** – double-check your subdomain, email, and API token
+- **Insufficient permissions** – the API token needs read access to tickets
+- **Rate limiting** – large imports may hit Zendesk API rate limits; the import retries automatically, but persistent rate limiting can cause failure
+
+If the import fails partway through, tickets already imported are kept. Start a new import to resume – already-imported tickets are skipped.
+
+### Some tickets show as "skipped"
+
+Skipped tickets were already imported in a previous run. This is expected behavior when re-running an import.
+
+### Some tickets show as "failed"
+
+Individual tickets can fail if their data can't be fetched from Zendesk (e.g. the ticket was deleted in Zendesk). Failed ticket count is shown in the import summary. The remaining tickets are still imported successfully.
+
+### Deleted Zendesk tickets
+
+Tickets that were permanently deleted in Zendesk are not available through the API and are silently skipped during import. Soft-deleted tickets (in Zendesk's trash) may also be skipped depending on their state.
