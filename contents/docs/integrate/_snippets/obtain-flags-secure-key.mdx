@@ -1,13 +1,15 @@
-The feature flags secure API key is a secret project specific token listed in the [Feature Flags tab of your project settings](https://us.posthog.com/settings/environment-feature-flags) in the "Feature Flags Secure API Key" section. It provides the SDKs with access to the feature flag definitions for your project so they can evaluate flags locally.
+Local evaluation requires a secret API key that gives the SDK access to the feature flag definitions for your project. This key needs to be kept secret, and should not be used in the frontend or exposed to users.
 
-This key needs to be kept secret, and should not be used in the frontend or exposed to users.
+We recommend using a **project secret API key** with the `feature_flag:read` scope. Project secret API keys are hashed at rest, scoped to only what they need, and you can create up to 50 per project, so you can issue and roll keys per deployment without affecting the others.
 
-> **Note:** Existing personal API keys will continue to work for local evaluation, but we recommend switching to the feature flags secure API key for local evaluation moving forward. We will be deprecating personal API keys for local evaluation in the future.
+> **Note:** Existing feature flags secure API keys and personal API keys continue to work for local evaluation, but both are deprecated. We recommend switching to a project secret API key.
 
-#### How to obtain a feature flags secure API key
+#### How to create a project secret API key
 
-1. Go to the [Feature Flags tab of your project settings](https://us.posthog.com/settings/environment-feature-flags)
+1. Go to the [project secret API keys section of your project settings](https://us.posthog.com/settings/environment-secret-api-keys)
 
-2. The key should be displayed in the "Feature Flags Secure API Key" section.
+2. Create a new key with the **Local feature flag evaluation** preset (the `feature_flag:read` scope) and give it a label.
 
-3. Copy the key and use it to initialize the PostHog client.
+3. Copy the key. It's only displayed once, so store it somewhere safe, like a secrets manager.
+
+4. Use it to initialize the PostHog client.

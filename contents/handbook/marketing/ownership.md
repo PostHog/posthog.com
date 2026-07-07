@@ -12,17 +12,16 @@ If you need help with the website, go to `#posthogdotcom`.
 
 We generally only have product marketers on teams that _already_ have a product manager. Products without a product manager a) are usually too early for marketing to get involved, and b) distract engineers as they need to spend time briefing the product marketer, vs. shipping more stuff. [Product managers](/handbook/product/product-manager-role) help teams figure out what to build and how much to charge for it, product marketers then help you get as many users as possible. 
 
-| Product | PM | PMM | Blitzscale |
-|---|---|---|---|
-| *Context warehouse* | Anna | Lizzie | Raquel |
-| *PostHog Code* | Annika | Cleo | James H |
-| *PostHog Slack* | Annika | Cleo | James H |
-| *Inbox* | Annika | Sara | James H |
-| *PostHog AI* | Annika | Joe | James H |
-| *MCP* | n/a | Joe | James |
-| *AI Gateway* | Marco | n/a | Ben W |
-| *Agents* | n/a | Danilo | Ben W |
-
+| Product             | PM     | PMM    | Blitzscale |
+| ------------------- | ------ | ------ | ---------- |
+| *Context warehouse* | Anna   | Lizzie | Raquel     |
+| *PostHog Desktop*   | Annika | Cleo   | James H    |
+| *PostHog Slack*     | Annika | Cleo   | James H    |
+| *PostHog Web*       | Annika | Sara   | James H    |
+| *PostHog Research*  | n/a    | Joe    | James H    |
+| *PostHog MCP*       | n/a    | Joe    | James      |
+| *AI Gateway*        | Marco  | n/a    | Ben W      |
+| *Agents*            | n/a    | Danilo | Ben W      |
 
 <details>
 <summary>I need a product marketer, but my team hasn't been assigned one</summary>
