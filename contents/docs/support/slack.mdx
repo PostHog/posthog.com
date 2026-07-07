@@ -29,11 +29,11 @@ Each PostHog project can connect to one Slack workspace. If the workspace is alr
 
 After connecting, configure the integration in **Support > Settings**:
 
-| Setting | Description | Default |
-|---------|-------------|---------|
-| **Support channel** | Every top-level message in this channel becomes a ticket. Thread replies sync as ticket messages. | – |
-| **Ticket emoji** | React with this emoji on any message in any channel to create a ticket from it. | `:ticket:` |
-| **Bot mentions** | Always active – `@SupportHog` in any channel creates a ticket from that message. | – |
+| Setting             | Description                                                                                       | Default    |
+| ------------------- | ------------------------------------------------------------------------------------------------- | ---------- |
+| **Support channel** | Every top-level message in this channel becomes a ticket. Thread replies sync as ticket messages. | –          |
+| **Ticket emoji**    | React with this emoji on any message in any channel to create a ticket from it.                   | `:ticket:` |
+| **Bot mentions**    | Always active – `@SupportHog` in any channel creates a ticket from that message.                  | –          |
 
 ### Picking a support channel
 
@@ -86,6 +86,7 @@ Slack-sourced tickets appear in your [inbox](/docs/support/inbox) alongside widg
 - A Slack icon indicating the channel source
 - A link to the original Slack thread in the ticket sidebar
 - The Slack user's name and avatar on messages
+- A **Verified** identity badge, since Slack authentication is trusted
 
 You can filter the ticket list by channel source to see only Slack tickets.
 
