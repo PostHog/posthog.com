@@ -279,7 +279,7 @@ const buildProductsMenuItems = (allProducts: any[]) => {
             link: '/products',
             items: <SearchableProductMenu products={allProducts} />,
             icon: <Icons.IconSearch className="size-4 text-gray" />,
-            mobileDestination: '/products',
+            mobileDestination: false, // Omit from mobile menu; desktop-only search
         },
     ]
 
@@ -307,7 +307,6 @@ export function useMenuData(): MenuType[] {
         {
             trigger: 'Products',
             items: buildProductsMenuItems(allProducts),
-            mobileLink: '/products', // Direct link on mobile
         },
         {
             trigger: 'Pricing',
