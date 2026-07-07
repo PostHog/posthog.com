@@ -340,7 +340,7 @@ If you do discover any potentially offensive content in a customer account then 
 
 ### Creating Zendesk tickets from Slack posts
 
-We use [SupportHog](/handbook/growth/sales/slack-channels), our own tool, to create PostHog Support tickets from Slack posts. To do so, add the `:ticket:` (🎫) emoji reaction to the post that you want to create a Zendesk ticket from, or mention `@SupportHog` in the thread.
+We use [SupportHog](/handbook/growth/sales/slack-channels), our own tool, to create PostHog Support tickets from Slack posts. To do so, add the `:ticket:` (🎫) emoji reaction to the post that you want to create a PostHog Support ticket from, or mention `@SupportHog` in the thread.
 
 Zendesk tickets created this way will normally be marked as high priority tickets. You can respond to them either in Zendesk or Slack, as there is a two-way sync.
 
