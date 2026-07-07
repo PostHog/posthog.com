@@ -92,12 +92,6 @@ export const useProductLinks = () => {
                 url: '/talk-to-a-human',
                 source: 'desktop',
             },
-            {
-                label: 'Download',
-                Icon: <GlassIcon path={DOWNLOAD_SILHOUETTE} fillRule="evenodd" />,
-                url: '/download',
-                source: 'desktop',
-            },
         ],
         []
     )
