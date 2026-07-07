@@ -40,8 +40,12 @@ import configSlack from './typecaast-slack.json'
 import configCursor from './typecaast-cursor.json'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 
-const SecondaryActions = () => (
-    <p className="!text-sm flex flex-wrap items-center gap-2 justify-center @xl:min-w-96 @xl:max-w-md">
+const SecondaryActions = ({ justify = 'center' }: { className?: string; justify?: 'center' | 'start' }) => (
+    <p
+        className={`!text-sm flex flex-wrap items-center gap-2 ${
+            justify === 'start' ? 'justify-start' : 'justify-center'
+        } @xl:min-w-96 @xl:max-w-md`}
+    >
         <Link
             to="/docs/model-context-protocol"
             state={{ newWindow: true }}
@@ -136,7 +140,7 @@ export const CTAs = () => {
             </div>
             */}
             <div className="mt-4">
-                <SecondaryActions />
+                <SecondaryActions justify="start" />
             </div>
         </div>
     )
