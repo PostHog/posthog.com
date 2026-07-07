@@ -39,5 +39,5 @@ export const arize_phoenix = {
             eu_hosting: true,
             open_source: true,
         },
-},
+    },
 }

@@ -40,5 +40,5 @@ export const braintrust = {
             eu_hosting: true,
             open_source: false,
         },
-},
+    },
 }

@@ -46,5 +46,5 @@ export const lunary = {
                 open_source: true,
                 eu_hosting: true,
             },
-        },
-    }
+    },
+}
