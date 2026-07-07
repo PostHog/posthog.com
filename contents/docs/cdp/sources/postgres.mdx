@@ -79,6 +79,12 @@ PostgreSQL sources created after February 18, 2026 require SSL/TLS encryption fo
 
 Postgres tables support full table, incremental, append-only, and CDC sync methods.
 
+<CalloutBox icon="IconFlask" title="CDC sync is in alpha" type="action">
+
+CDC sync is currently in **alpha**. It works end to end, but you may still hit rough edges, and the interface and behavior may change. [Let us know](https://us.posthog.com/#panel=support%3Asupport%3Adata_warehouse%3A%3Atrue) if you run into issues.
+
+</CalloutBox>
+
 Use CDC when you need PostHog to stay close to your source database and you care about deletes. It is especially useful when:
 
 - Your table has inserts, updates, and deletes.

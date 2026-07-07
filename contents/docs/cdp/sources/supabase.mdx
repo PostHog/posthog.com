@@ -11,6 +11,12 @@ sourceId: Supabase
 
 The Supabase connector can link your Supabase database tables to PostHog. Supabase is built on top of Postgres, so this connector uses the same underlying integration as the [Postgres source](/docs/cdp/sources/postgres).
 
+<CalloutBox icon="IconFlask" title="CDC sync is in alpha" type="action">
+
+Because Supabase uses the Postgres integration, you can also enable change data capture (CDC) sync. CDC sync is currently in **alpha**. It works end to end, but you may still hit rough edges, and the interface and behavior may change. See the [Postgres source documentation](/docs/cdp/sources/postgres#sync-methods) for details, and [let us know](https://us.posthog.com/#panel=support%3Asupport%3Adata_warehouse%3A%3Atrue) if you run into issues.
+
+</CalloutBox>
+
 To link Supabase:
 
 1. Go to the [Data pipeline page](https://app.posthog.com/data-management/sources) and the sources tab in PostHog
