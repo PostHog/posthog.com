@@ -220,7 +220,7 @@ Some applications send server-side events using a shared distinct ID like `"syst
 
 This is a problem when person processing is enabled (the default). PostHog creates a single person profile for that distinct ID, and every event funnels into it. As this profile accumulates thousands or millions of events, it causes:
 
-- **Rate limiting** – PostHog applies per-distinct-ID rate limits to protect the ingestion pipeline. A catch-all ID will hit these limits, causing events to be dropped.
+- **Rate limiting** – PostHog applies a [per-distinct-ID rate limit](/docs/how-posthog-works/ingestion-pipeline#rate-limiting-high-volume-distinct-ids) to protect the ingestion pipeline. A catch-all ID that sustains a high volume of events crosses this limit, and its events are then processed without strict ordering and without person profile updates for the duration of the spike. Events are not dropped, but the person data for that ID becomes unreliable.
 - **Increased costs** – identified events (with person processing) cost up to 4x more per event than anonymous events. Sending high-volume system events as identified is an unnecessary expense.
 - **Unusable data** – a single person profile containing events from unrelated system processes has no analytical value.
 

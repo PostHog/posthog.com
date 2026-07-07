@@ -38,7 +38,7 @@ There are separate limits for different kinds of resources.
 
 - For the rest of the create, read, update, and delete endpoints, the rate limits are `480/minute` and `4800/hour`.
 
-- For public POST-only endpoints like event capture (`/i/v0/e`) and feature flag evaluation (`/flags`), there are no rate limits.
+- For public POST-only endpoints like event capture (`/i/v0/e`) and feature flag evaluation (`/flags`), there are no request-level rate limits and these endpoints never return `429`. Event capture does apply a [per-distinct-ID ingestion protection](/docs/how-posthog-works/ingestion-pipeline#rate-limiting-high-volume-distinct-ids): if a single distinct ID sends a high, sustained volume of events (roughly 5,000 per minute), those events are still accepted with a `200` response but are processed without strict ordering and without person profile updates for the duration of the spike.
 
 These limits apply to **the entire team** (i.e. all users within your PostHog organization). For example, if a script requesting feature flag metadata hits the rate limit, and another user, using a different personal API key, makes a single request to the persons API, this gets rate limited as well.
 

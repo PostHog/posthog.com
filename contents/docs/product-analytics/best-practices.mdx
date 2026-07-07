@@ -88,7 +88,7 @@ Your `distinct_id` is how PostHog links events to a person. If you get it wrong,
 
 The most common mistakes:
 
-- **Using a catch-all ID like `"system"` or `"backend"`** for server-side events that aren't tied to a specific user. This funnels all events into a single person profile, triggering rate limiting and unnecessary costs. Send these events with [person processing disabled](/docs/product-analytics/capture-events#how-to-capture-anonymous-events) instead.
+- **Using a catch-all ID like `"system"` or `"backend"`** for server-side events that aren't tied to a specific user. This funnels all events into a single person profile and unnecessary costs. A single distinct ID that sends a high, sustained volume of events (roughly 5,000 per minute) also crosses a [per-distinct-ID rate limit](/docs/how-posthog-works/ingestion-pipeline#rate-limiting-high-volume-distinct-ids), after which its events lose strict ordering and person profile updates until the spike subsides. Send these events with [person processing disabled](/docs/product-analytics/capture-events#how-to-capture-anonymous-events) instead.
 - **Using different ID formats across platforms** – e.g., `"user-456"` on the web and `"USER-456"` on mobile. PostHog treats these as two separate people.
 - **Not linking anonymous and identified IDs** – if you don't call `identify()` at the right time, pre-login events won't be connected to the logged-in user.
 
