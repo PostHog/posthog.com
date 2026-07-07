@@ -1120,9 +1120,15 @@ const LeftSidebar = ({
                     width: expanded ? 250 : 48,
                     transition: hasMounted ? SIDEBAR_CSS_TRANSITION : 'none',
                 }}
-                className={`absolute inset-y-0 left-0 flex flex-col min-h-0 overflow-hidden border-r border-primary will-change-[transform,backdrop-filter] transform-gpu ${resolveBackground(
-                    background
-                )} ${!isPinned && expanded ? 'z-50 shadow-2xl' : 'z-30'}`}
+                className={`absolute inset-y-0 left-0 flex flex-col min-h-0 overflow-hidden border-r border-primary will-change-[transform,backdrop-filter] transform-gpu ${
+                    // When collapsed and hover-expanded, the panel floats as an
+                    // overlay above the content — it always needs an opaque
+                    // background so the menu is readable, even when the caller
+                    // didn't pass one. Otherwise fall back to the caller's value.
+                    !isPinned && expanded
+                        ? `z-50 shadow-2xl ${resolveBackground(background) || FROSTED_BG}`
+                        : `z-30 ${resolveBackground(background)}`
+                }`}
             >
                 {/* Top icon stack: edit-related actions */}
                 <div className="flex flex-col items-center gap-px p-1 flex-shrink-0">
