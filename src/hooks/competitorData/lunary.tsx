@@ -20,6 +20,11 @@ export const lunary = {
                 prompt_management: true,
                 framework_agnostic: true,
                 opentelemetry: false,
+                sentiment_classification: false,
+                privacy_mode: true,
+                agent_tracing: true,
+                evaluation_datasets: true,
+                human_annotation: false,
             },
         },
         product_analytics: { 
@@ -31,15 +36,15 @@ export const lunary = {
         feature_flags: {
             available: false
         },
-        platform: {
-            pricing: {
-                self_serve: true,
-                free_tier: true,
-            },
+    },
+    platform: {
+        pricing: {
+            self_serve: true,
+            free_tier: true,
+        },
             deployment: {
                 open_source: true,
                 eu_hosting: true,
             },
         },
-    },
-}
+    }

@@ -1,6 +1,6 @@
 ---
 title: 'The best LangSmith alternatives & competitors, compared'
-date: 2026-07-02
+date: 2026-07-07
 author:
     - natalia-amorim
 rootpage: /blog
@@ -25,7 +25,7 @@ Whatever brought you here, this guide compares the best LangSmith alternatives, 
 ## 1. PostHog
 
 - **Founded:** 2020
-- **Similar to:** LangSmith, Langfuse
+- **Similar to:** Langfuse, Braintrust
 - **Typical users:** Engineers and product teams building AI-powered products
 - **Typical customers:** Mid-size B2Bs and startups
 
@@ -37,9 +37,11 @@ Whatever brought you here, this guide compares the best LangSmith alternatives, 
 
 PostHog captures full traces of your LLM calls, so you can follow a request through every prompt, tool call, and model response. For each generation, it tracks token usage, cost, latency, and errors, and you can score outputs with LLM-as-a-judge or code-based evals to catch quality regressions over time.
 
-Because traces are stored as regular PostHog events, you can connect AI behavior to downstream product metrics – like whether users who hit a slow generation churn, or whether a new prompt version improves activation. You can query trace data with SQL or through the [MCP server](/mcp) directly from your editor, and [manage and version prompts (beta)](/docs/prompt-management) without redeploying code. It [supports popular frameworks](/docs/ai-observability/installation), including OpenAI, Anthropic, LangChain, xAI, LlamaIndex, and the Vercel AI SDK.
+Because traces are stored as regular PostHog events, you can connect AI behavior to downstream product metrics – like whether users who hit a slow generation churn, or whether a new prompt version improves activation. 
 
-Engineers and product teams at startups and mid-size companies use PostHog to build AI-powered products. Customers include [Lovable](/customers/lovable), [Supabase](/customers/supabase), and [Arena](/customers/arena).
+You can query trace data with SQL or through the [MCP server](/mcp) directly from your editor, and [manage and version prompts (beta)](/docs/prompt-management) without redeploying code. It [supports popular frameworks](/docs/ai-observability/installation), including OpenAI, Anthropic, LangChain, xAI, LlamaIndex, and the Vercel AI SDK.
+
+Engineers and product teams use PostHog to build AI-powered products. Customers include [Lovable](/customers/lovable), [Supabase](/customers/supabase), and [Arena](/customers/arena).
 
 ### Key features
 
@@ -51,11 +53,11 @@ Engineers and product teams at startups and mid-size companies use PostHog to bu
 
 - [**Prompt management**](docs/prompt-management) *(beta):* Create, version, and update prompts without redeploying code. Compare versions and understand how prompt changes affect outputs.
 
-- **Session replay:** Watch real [user sessions](/docs/session-replay) alongside LLM traces to understand exactly what happened in context, including console logs and network activity.
+- [**Session replay:**](docs/session-replay) Watch [real user sessions alongside LLM traces](/docs/ai-observability/link-session-replay) to understand exactly what happened in context, including console logs and network activity.
 
-- **Feature flags and experiments:** Safely roll out AI features with [multivariate flags](/docs/feature-flags) and run A/B tests on prompts, models, or AI features to measure real product impact.
+- [**Feature flags and experiments:**](/docs/feature-flags) Safely roll out AI features with multivariate flags and [run A/B tests on prompts](/docs/prompt-management/prompt-experiments), models, or AI features to measure real product impact.
 
-- **Error tracking:** [Capture and triage errors](/docs/error-tracking) with full stack traces correlated with user sessions and LLM events via error tracking.
+- [**Error tracking:**](docs/error-tracking) Capture and triage errors with full [stack traces correlated with user sessions and LLM events](/docs/ai-observability/link-error-tracking) via error tracking.
 
 ### How does PostHog compare to LangSmith?
 
@@ -89,7 +91,7 @@ Engineers and product teams at startups and mid-size companies use PostHog to bu
 - PostHog connects LLM traces to product analytics, session replay, flags, experiments, and more in one platform. LangSmith focuses on tracing and evaluating, and delivers deep debugging experience for LangChain and LangGraph workflows.
 - PostHog's [free tier](/pricing) includes 100K AI observability events, 1M product analytics events, and 5K session recordings per month. LangSmith's Developer plan includes 5K base traces and one seat.
 - PostHog has no per-seat pricing. LangSmith's free tier is limited to one seat – adding a second engineer means the Plus plan at $39/seat/month, before any trace overage.
-- LangSmith has more mature eval workflows with native LangGraph tracing and agent step visualization. PostHog's LLM analytics is newer and still developing on that front.
+- LangSmith has more mature eval workflows with native LangGraph tracing and agent step visualization. PostHog's LLM observability is newer and still developing on that front.
 
 </details>
 
@@ -115,7 +117,7 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 
 > #### Bottom line
 >
-> PostHog is the strongest LangSmith alternative for teams building user-facing AI products who want LLM observability, analytics, experimentation, and more in one place.
+> PostHog is the strongest LangSmith alternative for teams building user-facing AI products who want AI observability, analytics, experimentation, and more in one place.
 
 <WizardCTA />
 
@@ -130,9 +132,11 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 
 ### What is Langfuse?
 
-[Langfuse](/blog/best-langfuse-alternatives) is an open source LLM engineering platform built for tracing, evaluating, and improving LLM applications in production. It combines tracing, prompt management, evaluations, and analytics dashboards in one platform.
+[Langfuse](/blog/posthog-vs-langfuse) is an open source LLM engineering platform built for tracing, evaluating, and improving LLM applications in production. It combines tracing, prompt management, evaluations, and analytics dashboards in one platform.
 
-Langfuse captures detailed traces of LLM calls with spans, observations, and metrics across any framework or provider. Its SDK is built on the official OpenTelemetry client, so token usage, cost tracking, and prompt linking work with any OTel-compatible library out of the box. On top of tracing, it layers prompt management with one-click rollbacks, evaluations via LLM-as-a-judge, heuristics, or human review, and dashboards for monitoring cost, latency, and quality trends.
+[Langfuse](/blog/best-langfuse-alternatives) captures detailed traces of LLM calls with spans, observations, and metrics across any framework or provider. Its SDK is built on the official OpenTelemetry client, so token usage, cost tracking, and prompt linking work with any OTel-compatible library out of the box. 
+
+On top of tracing, it layers prompt management with one-click rollbacks, evaluations via LLM-as-a-judge, heuristics, or human review, and dashboards for monitoring cost, latency, and quality trends.
 
 In January 2026, ClickHouse acquired Langfuse.
 
@@ -215,7 +219,7 @@ According to Langfuse customer stories, companies use Langfuse because:
 - **Typical users:** Engineers and AI teams running evaluation-heavy LLM workflows
 - **Typical customers:** Mid-size to enterprise companies shipping AI products – customers include Notion, Zapier, Stripe, Vercel, and Cloudflare
 
-![Braintrust](Braintrust image)
+![Braintrust Dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/Braintrust_dashboard_0b54958363.png)
 
 ### What is Braintrust?
 
@@ -596,7 +600,29 @@ It's completely free to get started – no credit card required. Our [setup wiza
 
 No. LangSmith works across frameworks and has customers who do not use LangChain at all. That said, it delivers its deepest debugging experience for LangChain and LangGraph applications – things like zero-config setup, node-by-node state diffs, and native LangGraph agent graph visualization are only available within that ecosystem. 
 
-If you want open-source, lower-cost, or product analytics-connected observability, alternatives like **Langfuse**, **PostHog**, or **Arize Phoenix** may be a better fit.
+If you want [open-source](/blog/best-open-source-llm-observability-tools), [lower-cost](/blog/cheapest-ai-observability-tools), or product analytics-connected observability, alternatives like **Langfuse**, **PostHog**, or **Arize Phoenix** may be a better fit.
+
+</details>
+
+<details>
+<summary>How does LangSmith pricing compare to PostHog at scale?</summary>
+
+The two bill differently: LangSmith charges per trace (one per user request, regardless of internal steps) plus $39 per seat on its Plus plan. PostHog charges per event – roughly 6 events per request for a typical multi-step app (each LLM call, span, and embedding is one event) – with no seat fees.
+
+Here's what monthly volumes cost, assuming a 5-person team (LangSmith Plus at $195/month in seats, 10K traces included, $2.50 per 1K base trace overage) versus PostHog ($6 per 100K events after 100K free):
+
+| Requests/month | LangSmith (5 seats, base retention) | PostHog (~6 events/request) |
+| --- | --- | --- |
+| 100K | ~$420 | ~$30 |
+| 500K | ~$1,420 | ~$174 |
+| 1M | ~$2,670 | ~$354 |
+| 5M | ~$12,670 | ~$1,794 |
+
+Three things drive the gap. LangSmith's per-request rate is higher ($2.50 per 1K traces versus roughly $0.36 per 1K requests' worth of PostHog events). Seats add a fixed floor that grows with your team – a 10-person team starts at $390/month before a single trace. And LangSmith's base rate only buys 14-day retention; extended retention (400 days) doubles the trace rate to $5 per 1K, while PostHog's free plan retains data for a year.
+
+The honest caveats: PostHog's event count scales with instrumentation depth, so a simple one-call-per-request app emits fewer events (cheaper), while a complex agent emits more (the gap narrows but doesn't close – even at 40 events per request, PostHog is ~$12K at 5M requests, comparable to LangSmith *before* extended retention or extra seats). And LangSmith's included traces (10K on Plus) matter at very low volumes, where both tools are effectively free.
+
+Pricing current as of July 2026. For other alternatives, see our guide to the [cheapest AI observability tools](/blog/cheapest-ai-observability-tools).
 
 </details>
 

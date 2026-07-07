@@ -35,4 +35,10 @@ export const langfuse = {
             available: false,
         },
     },
+        platform: {
+        deployment: {
+            eu_hosting: true,
+            open_source: true,
+        },
+    },
 }
