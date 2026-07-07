@@ -172,24 +172,6 @@ const LeftSidebarContent = React.memo(
 
         return (
             <ScrollArea className="h-full">
-                {/* Search input */}
-                <div className="mb-4">
-                    <OSInput
-                        type="text"
-                        label="Search roles"
-                        showLabel={false}
-                        placeholder="Search roles..."
-                        value={searchQuery}
-                        onChange={handleSearchChange}
-                        onKeyDown={handleSearchKeyDown}
-                        onClear={handleClearSearch}
-                        showClearButton={true}
-                        size="sm"
-                        width="full"
-                        name="job-search"
-                    />
-                </div>
-
                 {/* Job list */}
                 <div ref={jobListRef}>
                     {searchQuery.trim() ? (
