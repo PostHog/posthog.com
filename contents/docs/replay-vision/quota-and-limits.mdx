@@ -35,12 +35,12 @@ You can also fetch it programmatically – see the `vision-quota-retrieve` MCP t
 ## What counts against the cap
 
 | Observation outcome | Counts against cap? |
-| --- | --- |
-| **Succeeded** | Yes |
-| **Pending** | Yes |
-| **Running** | Yes |
-| **Failed** | No |
-| **Ineligible** | No |
+| ------------------- | ------------------- |
+| **Succeeded**       | Yes                 |
+| **Pending**         | Yes                 |
+| **Running**         | Yes                 |
+| **Failed**          | No                  |
+| **Ineligible**      | No                  |
 
 Pending and running observations count so a burst of concurrent on-demand triggers can't blow past the cap before any of them complete. Once an observation reaches a terminal failed or ineligible state, it stops counting toward the month's usage.
 
@@ -65,7 +65,7 @@ The scanner editor shows a **projected per-month observation count** for the sca
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/estimate_callout_2d954ec2cb.png"
-  alt="The triggers step of the scanner editor: sampling rate, recording filters, and the estimated per-month impact against the remaining quota"
+  alt="The scan conditions step of the scanner editor: sampling rate, recording filters, and the estimated per-month impact against the remaining quota"
   classes="rounded"
 />
 
@@ -75,7 +75,7 @@ If the projection is uncomfortably close to your remaining cap, the cheapest kno
 - **Lower the sampling rate** – samples are random, so a 10% rate gives you a representative slice of matching sessions for one-tenth the volume.
 - **Combine both** – a tight filter on the sessions you care most about, plus 100% sampling, is usually better signal-per-observation than a loose filter with low sampling.
 
-To project a hypothetical scanner *before* creating it (e.g. from a script or agent), use the `vision-scanners-estimate-create` MCP tool. It runs the same projection the editor shows.
+To project a hypothetical scanner _before_ creating it (e.g. from a script or agent), use the `vision-scanners-estimate-create` MCP tool. It runs the same projection the editor shows.
 
 ## What to do if you're hitting the cap
 
