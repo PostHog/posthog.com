@@ -41,7 +41,7 @@ It should be the same as [who we are building for](/handbook/who-we-are-building
 
 ## What kind of content do we produce?
 
-1. **Opinionated advice:** Articles where we offer a strong point of view on a topic that impacts our audience. Examples include [The Product-Market Fit Game](/founders/product-market-fit-game), [Burning money on paid ads for a dev tool](/founders/dev-marketing-paid-ads), and [How to design your company for speed](https://newsletter.posthog.com/p/how-to-design-your-company-for-speed)
+1. **Opinionated advice:** Articles where we offer a strong point of view on a topic that impacts our audience. Examples include [The Product-Market Fit Game](/founders/product-market-fit-game), [Burning money on paid ads for a dev tool](/founders/dev-marketing-paid-ads), and [How to design your company for speed](https://newsletter.posthog.com/p/how-to-design-your-company-for-speed).
 
 2. **High intent SEO comparisons:** Articles for people actively considering PostHog, or searching for a product like ours. Examples include comparisons between [PostHog and competing products](/blog/tags/comparisons), guides on the [best alternatives to popular tools](/blog/best-heap-alternatives), and guides to [most popular tools in our segments](/blog/best-open-source-ab-testing-tools).
 
