@@ -101,13 +101,13 @@ const TreeLink = ({
             onClick={() => onClick(menuItem)}
             icon={typeof menuItem.icon !== 'string' && menuItem.icon}
         >
-            <span data-sidebar-label className="flex items-center gap-1">
-                {menuItem.name}
-                {arrow && !httpExternal && <IconArrowUpRight className="size-3.5 text-secondary shrink-0" />}
-            </span>
-            <span className={`inline-flex items-center gap-1.5${menuItem.badge?.title ? ' pr-1' : ''}`}>
+            <span
+                data-sidebar-label
+                className={`inline-flex items-center gap-1.5${menuItem.badge?.title ? ' pr-1' : ''}`}
+            >
                 <span>{menuItem.name}</span>
                 <Badge badge={menuItem.badge} />
+                {arrow && !httpExternal && <IconArrowUpRight className="size-3.5 text-secondary shrink-0" />}
             </span>
         </OSButton>
     ) : (
@@ -631,7 +631,10 @@ function TreeMenuItem({
                             <IconChevronRight className="size-4" />
                         </motion.div>
                     )}
-                    <span className={`inline-flex items-center gap-1.5 ${open ? 'font-semibold' : ''}`}>
+                    <span
+                        data-sidebar-label
+                        className={`inline-flex items-center gap-1.5 ${open ? 'font-semibold' : ''}`}
+                    >
                         <span>{item.name}</span>
                         <Badge badge={item.badge} />
                     </span>
