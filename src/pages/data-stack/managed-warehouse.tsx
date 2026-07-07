@@ -178,7 +178,7 @@ export default function ManagedWarehouse(): JSX.Element {
                 imageType="absolute"
             />
             <ReaderView leftSidebar={<LeftSidebarContent />} title="Your business context, ready in PostHog">
-                <p className="text-lg">
+                <p className="text-lg mt-0">
                     Query everything your product touches without provisioning infrastructure, writing sync jobs, or
                     using a separate tool with PostHog's fully managed data warehouse.
                 </p>
