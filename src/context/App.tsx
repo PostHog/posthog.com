@@ -494,6 +494,7 @@ export interface AppSetting {
         type: 'standard' | 'side' | 'floating'
     }
     toolbar?: boolean
+    hideTitle?: boolean
     mesh?: 'green' | 'red' | 'yellow' | 'blue' | 'purple'
 }
 
@@ -1511,6 +1512,7 @@ const appSettings: AppSettings = {
     },
     '/merch': {
         toolbar: true,
+        hideTitle: true,
     },
     '/trash': {
         toolbar: true,
