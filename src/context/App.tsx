@@ -623,7 +623,6 @@ const appSettings: AppSettings = {
         position: {
             center: true,
         },
-        toolbar: true,
         mesh: 'yellow',
     },
     '/session-replay': {
@@ -1042,7 +1041,7 @@ const appSettings: AppSettings = {
                 width: 960,
                 height: 682,
             },
-            fixed: false,
+            fixed: true,
             autoHeight: true,
         },
         position: {
@@ -1514,6 +1513,45 @@ const appSettings: AppSettings = {
         toolbar: true,
     },
     '/trash': {
+        toolbar: true,
+    },
+    '/product-analytics': {
+        toolbar: true,
+    },
+    '/web-analytics': {
+        toolbar: true,
+    },
+    '/feature-flags': {
+        toolbar: true,
+    },
+    '/experiments': {
+        toolbar: true,
+    },
+    '/surveys': {
+        toolbar: true,
+    },
+    '/error-tracking': {
+        toolbar: true,
+    },
+    '/logs': {
+        toolbar: true,
+    },
+    '/workflows': {
+        toolbar: true,
+    },
+    '/endpoints': {
+        toolbar: true,
+    },
+    '/ai': {
+        toolbar: true,
+    },
+    '/ai-observability': {
+        toolbar: true,
+    },
+    '/mcp-analytics': {
+        toolbar: true,
+    },
+    '/hog': {
         toolbar: true,
     },
 } as const

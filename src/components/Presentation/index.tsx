@@ -133,6 +133,7 @@ export default function Presentation({
 }: PresentationProps) {
     const { siteSettings } = useApp()
     const { appWindow } = useWindow()
+    const hasToolbar = appWindow?.appSettings?.toolbar
     const [isMobile, setIsMobile] = useState<boolean>(false)
 
     const [isNavVisible, setIsNavVisible] = useState<boolean>(config?.thumbnails ?? true)
@@ -358,7 +359,9 @@ export default function Presentation({
             <div
                 ref={containerRef}
                 data-scheme="secondary"
-                className="@container w-full transition-all duration-300 h-full flex flex-col min-h-1 max-w-full"
+                className={`@container w-full transition-all duration-300 h-full flex flex-col min-h-1 max-w-full ${
+                    hasToolbar ? 'border-t border-primary' : ''
+                }`}
             >
                 <div
                     data-scheme="secondary"

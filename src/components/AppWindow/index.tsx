@@ -738,7 +738,14 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                     }
                 >
                     <div className={`${hasToolbar ? 'bg-primary flex items-center py-0.5 px-1' : ''}`}>
-                        {hasToolbar && <div className="flex-1" />}
+                        {hasToolbar && (
+                            <>
+                                <p className="text-primary text-left text-sm font-semibold ml-1.5 my-0 line-clamp-1">
+                                    {item.meta?.title?.replace(/ - PostHog$/, '')}
+                                </p>
+                                <div className="flex-1" />
+                            </>
+                        )}
                         <div
                             data-scheme="tertiary"
                             onDoubleClick={handleDoubleClick}

@@ -375,29 +375,18 @@ export default function HeaderBar({
                 )}
                 <div className="flex items-center gap-1">
                     {showDrawerToggle && (
-                        <>
-                            <OSButton
-                                variant="secondary"
-                                size="md"
-                                asLink
-                                to="https://app.posthog.com/signup"
-                                className="mr-1"
-                            >
-                                Get started – free
-                            </OSButton>
-                            <Tooltip
-                                trigger={
-                                    <OSButton
-                                        size="md"
-                                        icon={<IconBottomPanel />}
-                                        active={isDrawerOpen}
-                                        onClick={onToggleDrawer}
-                                    />
-                                }
-                            >
-                                {isDrawerOpen ? 'Hide' : 'Show'} presenter notes
-                            </Tooltip>
-                        </>
+                        <Tooltip
+                            trigger={
+                                <OSButton
+                                    size="md"
+                                    icon={<IconBottomPanel />}
+                                    active={isDrawerOpen}
+                                    onClick={onToggleDrawer}
+                                />
+                            }
+                        >
+                            {isDrawerOpen ? 'Hide' : 'Show'} presenter notes
+                        </Tooltip>
                     )}
                     {exportToPdf && (
                         <Tooltip

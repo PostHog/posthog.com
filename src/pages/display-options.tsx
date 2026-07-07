@@ -222,109 +222,90 @@ export default function DisplayOptions() {
     return (
         <>
             <SEO title="Display options" description="Personalize your PostHog.com experience" />
-            <div data-scheme="secondary" className="w-full h-full bg-primary text-primary p-2 border-t border-primary">
-                <Fieldset legend="Display">
-                    <div className="bg-primary grid grid-cols-2 gap-2">
+            <div data-scheme="secondary" className="w-full h-full bg-primary text-primary p-4 border-t border-primary">
+                <div className="bg-primary grid grid-cols-2 gap-2">
+                    <ToggleGroup
+                        title="Color mode"
+                        options={colorModeOptions}
+                        onValueChange={handleColorModeChange}
+                        value={siteSettings.colorMode}
+                    />
+                </div>
+                <div className="bg-primary grid grid-cols-2 gap-2">
+                    <ToggleGroup
+                        title="Theme"
+                        options={skinOptions}
+                        onValueChange={handleSkinChange}
+                        value={siteSettings.skinMode}
+                    />
+                </div>
+                <div className="bg-primary grid grid-cols-2 gap-2 mt-2">
+                    <ToggleGroup
+                        title="Cursor"
+                        options={cursorOptions}
+                        onValueChange={handleCursorChange}
+                        value={siteSettings.cursor}
+                    />
+                </div>
+                <div className="bg-primary grid grid-cols-2 gap-2 my-2">
+                    <WallpaperSelect
+                        title="Desktop background"
+                        onValueChange={handleWallpaperChange}
+                        value={siteSettings.wallpaper}
+                    />
+                </div>
+                <div className="bg-primary grid grid-cols-2 gap-2">
+                    <div className="flex items-center gap-1 mb-1">
+                        <span className="text-sm">Screensaver</span>
+                        <button
+                            onClick={(e) => {
+                                e.preventDefault()
+                                setPreviewScreensaver(true)
+                                setTimeout(() => setPreviewScreensaver(false), 100000) // Auto-dismiss after 100s
+                            }}
+                            className="text-sm text-primary underline font-medium"
+                        >
+                            preview
+                        </button>
+                    </div>
+                    <div>
                         <ToggleGroup
-                            title="Color mode"
-                            options={colorModeOptions}
-                            onValueChange={handleColorModeChange}
-                            value={siteSettings.colorMode}
+                            title=""
+                            options={[
+                                { label: 'Disabled', value: 'true' },
+                                { label: 'Enabled', value: 'false' },
+                            ]}
+                            onValueChange={(value) => {
+                                updateSiteSettings({ ...siteSettings, screensaverDisabled: value === 'true' })
+                            }}
+                            value={siteSettings.screensaverDisabled ? 'true' : 'false'}
                         />
                     </div>
-                    <div className="bg-primary grid grid-cols-2 gap-2">
+                </div>
+                <div className="bg-primary grid grid-cols-2 gap-2">
+                    <div className="flex items-center gap-1 mb-1">
+                        <span className="text-sm">Heater mode</span>
+                        <Tooltip trigger={<IconInfo className="size-4 inline-block relative -top-px" />} delay={0}>
+                            <p className="max-w-sm my-0 leading-snug">
+                                A visual enhancement that uses partially transparent backgrounds in app windows for a
+                                nice diffused glass effect. Will absolutely destroy your battery and possibly cause
+                                third degree burns.
+                            </p>
+                        </Tooltip>
+                    </div>
+                    <div>
                         <ToggleGroup
-                            title="Theme"
-                            options={skinOptions}
-                            onValueChange={handleSkinChange}
-                            value={siteSettings.skinMode}
+                            title=""
+                            options={[
+                                { label: 'Disabled', value: 'false' },
+                                { label: 'Enabled', value: 'true' },
+                            ]}
+                            onValueChange={(value) => {
+                                updateSiteSettings({ ...siteSettings, heaterMode: value === 'true' })
+                            }}
+                            value={siteSettings.heaterMode ? 'true' : 'false'}
                         />
                     </div>
-                    <div className="bg-primary grid grid-cols-2 gap-2 mt-2">
-                        <ToggleGroup
-                            title="Cursor"
-                            options={cursorOptions}
-                            onValueChange={handleCursorChange}
-                            value={siteSettings.cursor}
-                        />
-                    </div>
-                    <div className="bg-primary grid grid-cols-2 gap-2 my-2">
-                        <WallpaperSelect
-                            title="Desktop background"
-                            onValueChange={handleWallpaperChange}
-                            value={siteSettings.wallpaper}
-                        />
-                    </div>
-                    <div className="bg-primary grid grid-cols-2 gap-2">
-                        <div className="flex items-center gap-1 mb-1">
-                            <span className="text-sm">Screensaver</span>
-                            <button
-                                onClick={(e) => {
-                                    e.preventDefault()
-                                    setPreviewScreensaver(true)
-                                    setTimeout(() => setPreviewScreensaver(false), 100000) // Auto-dismiss after 100s
-                                }}
-                                className="text-sm text-primary underline font-medium"
-                            >
-                                preview
-                            </button>
-                        </div>
-                        <div>
-                            <ToggleGroup
-                                title=""
-                                options={[
-                                    { label: 'Disabled', value: 'true' },
-                                    { label: 'Enabled', value: 'false' },
-                                ]}
-                                onValueChange={(value) => {
-                                    updateSiteSettings({ ...siteSettings, screensaverDisabled: value === 'true' })
-                                }}
-                                value={siteSettings.screensaverDisabled ? 'true' : 'false'}
-                            />
-                        </div>
-                    </div>
-                    <div className="bg-primary grid grid-cols-2 gap-2">
-                        <div className="flex items-center gap-1 mb-1">
-                            <span className="text-sm">Heater mode</span>
-                            <Tooltip trigger={<IconInfo className="size-4 inline-block relative -top-px" />} delay={0}>
-                                <p className="max-w-sm my-0 leading-snug">
-                                    A visual enhancement that uses partially transparent backgrounds in app windows for
-                                    a nice diffused glass effect. Will absolutely destroy your battery and possibly
-                                    cause third degree burns.
-                                </p>
-                            </Tooltip>
-                        </div>
-                        <div>
-                            <ToggleGroup
-                                title=""
-                                options={[
-                                    { label: 'Disabled', value: 'false' },
-                                    { label: 'Enabled', value: 'true' },
-                                ]}
-                                onValueChange={(value) => {
-                                    updateSiteSettings({ ...siteSettings, heaterMode: value === 'true' })
-                                }}
-                                value={siteSettings.heaterMode ? 'true' : 'false'}
-                            />
-                        </div>
-                    </div>
-                </Fieldset>
-                <div className="hidden md:block">
-                    <Fieldset legend="Animation">
-                        <div className="bg-primary grid grid-cols-2 gap-2">
-                            <ToggleGroup
-                                title="Animation"
-                                options={[
-                                    { label: 'Disabled', value: 'true' },
-                                    { label: 'Enabled', value: 'false' },
-                                ]}
-                                onValueChange={(value) =>
-                                    updateSiteSettings({ ...siteSettings, performanceBoost: value === 'true' })
-                                }
-                                value={siteSettings.performanceBoost ? 'true' : 'false'}
-                            />
-                        </div>
-                    </Fieldset>
                 </div>
             </div>
             {previewScreensaver &&
