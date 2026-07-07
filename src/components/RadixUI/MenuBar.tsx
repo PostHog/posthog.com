@@ -11,6 +11,7 @@ import { navigate } from 'gatsby'
 export type MenuItemType = {
     type: 'item' | 'submenu' | 'separator'
     label?: string
+    description?: string // Optional secondary line rendered under the label
     link?: string
     shortcut?: string | string[] // Support both string and array of keys
     disabled?: boolean
@@ -35,8 +36,10 @@ export type MenuType = {
 // websiteMode ? 'text-base' : 'text-[13px]'
 const RootClasses = 'flex gap-px py-0.5 h-full'
 const TriggerClasses = `group flex select-none items-center justify-between gap-0.5 rounded px-1.5 py-0.5 text-[13px] leading-none text-primary outline-none data-[highlighted]:bg-accent hover:bg-accent-2 data-[state=open]:bg-accent`
-const ItemClasses =
-    'hover:bg-accent group relative flex h-[25px] select-none justify-between items-center rounded text-[13px] leading-none text-primary bg-primary outline-none data-[disabled]:pointer-events-none data-[disabled]:text-muted [&>span]:inline-flex [&>span]:w-full'
+const ItemClassesBase =
+    'hover:bg-accent group relative flex select-none justify-between items-center rounded text-[13px] leading-none text-primary bg-primary outline-none data-[disabled]:pointer-events-none data-[disabled]:text-muted [&>span]:inline-flex [&>span]:w-full'
+const ItemClasses = `${ItemClassesBase} h-[25px]`
+const ItemClassesWithDescription = `${ItemClassesBase} min-h-[25px]`
 const SubTriggerClasses =
     'hover:bg-accent group relative flex h-[25px] select-none items-center rounded px-2.5 text-[13px] leading-none text-primary bg-primary outline-none data-[disabled]:pointer-events-none data-[disabled]:text-muted'
 const ContentClasses =
@@ -249,9 +252,11 @@ const MenuItem: React.FC<{
         }
     }
 
+    const hasDescription = !!item.description
+
     return (
         <RadixMenubar.Item
-            className={`${ItemClasses} ${item.active ? 'bg-accent' : ''}`}
+            className={`${hasDescription ? ItemClassesWithDescription : ItemClasses} ${item.active ? 'bg-accent' : ''}`}
             disabled={item.disabled}
             onClick={item.onClick}
         >
@@ -260,15 +265,28 @@ const MenuItem: React.FC<{
                     to={item.link}
                     state={{ newWindow: true }}
                     externalNoIcon={item.external}
-                    className="w-full min-h-[25px] h-full px-2.5 flex items-center gap-2 no-underline text-primary"
+                    className={`w-full min-h-[25px] h-full px-2.5 flex gap-2 no-underline text-primary ${
+                        hasDescription ? 'items-start py-1.5' : 'items-center'
+                    }`}
                     onClick={() => onCloseMenu?.()}
                 >
                     {item.icon ? (
-                        item.icon
+                        <span className={hasDescription ? 'mt-0.5 flex items-center' : 'flex items-center'}>
+                            {item.icon}
+                        </span>
                     ) : forceIconIndent ? (
                         <span style={{ display: 'inline-block', width: 16, minWidth: 16 }} />
                     ) : null}
-                    <span>{item.label}</span>
+                    {hasDescription ? (
+                        <span className="flex flex-col gap-0.5">
+                            <span>{item.label}</span>
+                            <span className="text-[11px] leading-snug text-muted group-hover:text-secondary">
+                                {item.description}
+                            </span>
+                        </span>
+                    ) : (
+                        <span>{item.label}</span>
+                    )}
                 </Link>
             ) : (
                 <span className="px-2.5 flex w-full justify-between items-center gap-2">
