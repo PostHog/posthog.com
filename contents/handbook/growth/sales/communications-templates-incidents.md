@@ -143,7 +143,7 @@ Heads up — maintenance on \[system\] from \[time window\]. No downtime expecte
 
 ### **Workflow**
 
-> **SEV 0 override:** For SEV 0 incidents, the CMOC skips steps 4–5 and sends the initial message directly via Slack broadcast to all affected customer channels. Account owners are notified in [#group-cs-sales-support](https://posthog.slack.com/archives/C090RCG671C) simultaneously, and take over individual follow-up threads once online. The CMOC continues to own broadcast updates until the incident is resolved or downgraded.
+> **SEV 0 override:** For SEV 0 incidents, the CMOC skips steps 4–5 and sends the initial message directly via Slack to all affected customer channels. Account owners are notified in [#group-cs-sales-support](https://posthog.slack.com/archives/C090RCG671C) simultaneously, and take over individual follow-up threads once online. The CMOC continues to own broadcast updates until the incident is resolved or downgraded.
 1. **Incident declared** (Engineering).
 2. **CMOC activated**, notified of impact.
 3. **Assess customer impact**, this <PrivateLink url="https://us.posthog.com/project/2/insights/EBiXOD91">insight</PrivateLink> (or this <PrivateLink url="https://docs.google.com/spreadsheets/d/1EyV55L0vWTfD4W02j5A3Vx3YZYPUODmQQC1toFPcKXU/edit?gid=1396499197#gid=1396499197">Google Sheet</PrivateLink> as a backup) will help you understand which customers are using which components in which cloud environment.
