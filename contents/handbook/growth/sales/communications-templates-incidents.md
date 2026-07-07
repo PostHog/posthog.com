@@ -44,7 +44,7 @@ Reach out before customers ask, even if it’s just to say, “We’re aware and
 
 ### **Emergency (SEV 0)**
 
-> **This overrides the standard workflow.** CMOC sends directly to all affected customer channels via Slack broadcast without waiting for account owners. Account owners follow up individually once online.
+> **This overrides the standard workflow.** CMOC sends directly to all affected Slack customer channels without waiting for account owners. Account owners follow up individually once online.
 
 **Initial broadcast (SupportHog):**
 
