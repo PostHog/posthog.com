@@ -29,7 +29,7 @@ Ask for specifics: links to the insight, feature flag, or dashboard; a screensho
 
 If it helps, log in as the customer. Clicking a link from their PostHog instance will sometimes offer a "log in as" option. Otherwise, go to <PrivateLink url="https://us.posthog.com/admin/">US admin</PrivateLink> (<PrivateLink url="https://eu.posthog.com/admin/">EU admin</PrivateLink>), search for the org or user, and click "Log in as user". If you don't see that option, ask <TeamMember name="Dana Zou" photo /> to add you as a staff member in admin.
 
-Use our [docs](/docs), [troubleshooting tips](/handbook/support/troubleshooting-tips), and search Slack, Zendesk, and GitHub for similar issues. If you've just joined, spend 30 mins to an hour investigating yourself before asking for help — onboarding is when you learn the products best. Use common sense based on urgency.
+Use our [docs](/docs), [troubleshooting tips](/handbook/support/troubleshooting-tips), and search Slack, PostHog Support, Zendesk, and GitHub for similar issues. If you've just joined, spend 30 mins to an hour investigating yourself before asking for help — onboarding is when you learn the products best. Use common sense based on urgency.
 
 Keep the customer in the loop while you investigate — progress, blockers, next steps.
 
