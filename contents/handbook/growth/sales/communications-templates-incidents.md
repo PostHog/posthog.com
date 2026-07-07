@@ -34,7 +34,7 @@ Reach out before customers ask, even if it’s just to say, “We’re aware and
 
 | Level | Description | Examples | Channels | Cadence |
 | ----- | ----- | ----- | ----- | ----- |
-| **SEV 0 – Emergency** | Existential service failure; all or most customers impacted with no workaround. CMOC sends immediately via broadcast. Account owners do **not** gate comms. | Full platform outage, data loss, security breach with active customer impact. | Slack broadcast → Email → DM/SMS | Immediate broadcast, then every 15–30 min; postmortem within 24h |
+| **SEV 0 – Emergency** | Existential service failure; all or most customers impacted with no workaround. CMOC sends immediately via broadcast. Account owners do **not** gate comms. | Full platform outage, data loss, security breach with active customer impact. | Slack message → Email → DM/SMS | Immediate broadcast, then every 15–30 min; postmortem within 24h |
 | **SEV 1 – Critical** | Major outage or data loss; widespread impact. | API unavailable, ingestion halted, login failures. | Slack → Email → (DM or SMS if needed) | Every 30–60 min; postmortem within 48h |
 | **SEV 2 – Major** | Partial degradation or downtime; workaround available. | Replay or query delays \>30 min, flag evaluation slow. | Slack or Email | Every 1–2 hrs |
 | **SEV 3 – Minor** | Limited impact or slow recovery. | Billing sync delays, isolated org issues. | Slack | Start and close |
