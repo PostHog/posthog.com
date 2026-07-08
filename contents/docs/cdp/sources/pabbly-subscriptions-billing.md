@@ -16,7 +16,7 @@ import AlphaRelease from "../_snippets/alpha-release.mdx"
 
 <AlphaRelease />
 
-The Pabbly Subscription Billing connector syncs your customers, subscriptions, products, invoices, transactions, refunds, and related billing data into the PostHog Data warehouse, so you can analyze your recurring revenue alongside your product data.
+The Pabbly Subscription Billing connector syncs your customers, subscriptions, products, invoices, transactions, refunds, and related billing data into the PostHog Data Warehouse, so you can analyze your recurring revenue alongside your product data.
 
 ## Prerequisites
 

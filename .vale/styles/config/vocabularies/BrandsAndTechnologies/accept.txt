@@ -188,6 +188,7 @@ Opsgenie
 Optimizely
 OTel
 Outfunnel
+Pabbly
 Pendo
 [Pp]erplexity
 Phabricator
