@@ -1321,6 +1321,7 @@ const FloatingSearch = ({
     const [open, setOpen] = useState(false)
     const panelRef = useRef<HTMLDivElement>(null)
     const { searchQuery } = useSearch()
+    const { appWindow } = useWindow()
     const hasQuery = searchQuery.trim().length >= 2
 
     useEffect(() => {
@@ -1351,7 +1352,7 @@ const FloatingSearch = ({
         <div
             ref={panelRef}
             data-scheme="secondary"
-            className=" absolute top-0 left-0 flex z-10 p-1 max-w-[450px] w-full"
+            className={`absolute top-0 left-0 flex z-10 max-w-[450px] w-full ${appWindow?.windowed ? 'p-3' : 'p-1'}`}
         >
             <motion.div
                 animate={{ width: open ? '100%' : 'auto' }}

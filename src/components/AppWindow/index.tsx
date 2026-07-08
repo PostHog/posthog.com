@@ -753,7 +753,11 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                             data-scheme="tertiary"
                             onDoubleClick={handleDoubleClick}
                             className={`inline-flex gap-1 items-center py-0.5 pl-1.5 pr-0.5 skin-classic:bg-primary opacity-40 hover:opacity-75 transition-opacity duration-100 ${
-                                hasToolbar ? 'flex-1 justify-end' : 'absolute z-20 right-1 top-1'
+                                hasToolbar
+                                    ? 'flex-1 justify-end'
+                                    : item.windowed
+                                    ? 'absolute z-20 right-3 top-3'
+                                    : 'absolute z-20 right-1 top-1'
                             }`}
                         >
                             <div className="flex justify-end">
