@@ -1,0 +1,506 @@
+---
+title: 'The best Helicone alternatives & competitors, compared'
+date: 2026-07-07
+author:
+    - natalia-amorim
+rootpage: /blog
+featuredImage: >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/ai_powered_features_13eba8675a.jpg
+featuredImageType: full
+category: General
+tags:
+    - Comparisons
+seo:
+  metaTitle: 'The best Helicone alternatives & competitors, compared'
+  metaDescription: 'Helicone is in maintenance mode after the Mintlify acquisition. Compare the best alternatives, including PostHog, Langfuse, and LangSmith, and how to migrate.'
+---
+
+If you're a Helicone user, you've probably seen the news: [Mintlify acquired it](https://www.helicone.ai/blog/joining-mintlify) in March 2026, and the platform is now in maintenance mode. It keeps running, it gets security updates and new model support, but the roadmap is frozen.
+
+That's not an emergency – nothing is breaking tomorrow. But "no new features, ever" is a significant limitation in a space where the tools reinvent themselves every six months. Agent tracing, evals, OTel support: whatever the next must-have is, Helicone won't have it.
+
+So whether you're planning a migration or just starting a new project, here are the best Helicone alternatives available today – what each does well, how it compares, and who it's actually for.
+
+<details>
+<summary>What does Helicone's maintenance mode mean for you?</summary>
+
+For Helicone, maintenance mode means the platform still works and will keep getting security updates, bug fixes, and support for new models, but no new features.
+
+You don't have to move right away. If Helicone does what you need, you can keep using it for now. Mintlify has said it will help existing customers move to other platforms if they choose to. The choice matters more if you're starting something new or planning for the next year or two.
+
+If you do decide to move, look at how each tool fits into your workflow. Helicone uses a proxy-based approach, while many alternatives rely on SDKs and code-level instrumentation. Also consider the features you need the most, whether that's tracing, cost tracking, prompt management, evaluations, or something else.
+
+</details>
+
+## 1. PostHog
+- **Founded:** 2020
+- **Similar to:** Langfuse, LangSmith
+- **Typical users:** Engineers and product teams
+- **Typical customers:** Startups and SaaS companies
+
+### What is PostHog?
+
+**[PostHog](/)** (that's us 👋) is the leading platform for self-driving products. You can use our desktop ([Code](/code)), [web](/ai), [Slack](/slack), and [MCP](/mcp) products to leverage tools like [AI observability](/ai-observability), [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [logs](/logs), and more.
+
+Companies like [Y Combinator](/customers/ycombinator), [Supabase](/customers/supabase), [Lovable](/customers/lovable), and Mistral AI use PostHog to understand how people use their products.
+
+That means it is not just a Helicone alternative. Many teams also use it instead of separate tools for product analytics, feature management, and experimentation, so data from their AI features can be analyzed alongside the rest of their product data instead of in a separate dashboard.
+
+### Key features
+
+- **AI observability:** Track traces, token usage, costs, and latency across your AI applications so you can understand how they perform in production.
+- **Product analytics:** See how people use your AI features, including adoption, engagement, retention, and conversion.
+- **Session replay:** Watch user sessions to understand what happened before, during, and after an AI interaction.
+- **Feature flags and experiments:** Roll out new models, prompts, and AI features gradually, then measure their impact before making them available to everyone.
+- **Prompt management:** Create, version, and manage prompts without hardcoding them into your application.
+- **Data warehouse:** Bring AI and product data together in one place so you can query and analyze it without moving data between tools.
+
+### How does PostHog compare to Helicone?
+
+PostHog covers the same core observability features as Helicone, including tracing, cost tracking, prompt management, and evaluations. The difference is that PostHog combines those features with product analytics, session replay, feature flags, and experiments.
+Helicone uses a proxy-based approach, which usually means less setup and fewer code changes. PostHog is SDK-based, so migrating typically requires more work. PostHog also gives you a wider view of how AI features affect the rest of your product.
+
+| Feature | PostHog | Helicone |
+| --- | --- | --- |
+| Tracing | ✅ | ✅ |
+| Cost tracking | ✅ | ✅ |
+| [Evaluations](https://posthog.com/docs/ai-evals/evaluations) | ✅ | ⚠️ Limited |
+| [Prompt management](https://posthog.com/docs/prompt-management/prompts) | ✅ | ✅ |
+| Open source | ✅ | ✅ |
+| Self-hosting | ✅ | ✅ |
+| AI gateway / proxy | ❌ SDK-based | ✅ |
+| Actively developed | ✅ | ⚠️ Maintenance mode |
+
+<details>
+<summary>Main differences between PostHog and Helicone</summary>
+- Helicone uses a proxy-based architecture, while PostHog is SDK-based. For many teams, that means migrating to PostHog requires more instrumentation and code changes.
+- Helicone focuses on LLM observability. PostHog combines AI observability with product analytics, session replay, feature flags, experiments, and other developer tools.
+- PostHog is actively developed with [frequent releases](/changelog), while Helicone is currently in maintenance mode following its acquisition by Mintlify.
+- Helicone has been focused on LLM observability for longer. PostHog's AI observability product is newer.
+</details>
+
+<details>
+<summary>Main similarities between PostHog and Helicone</summary>
+- Both provide AI observability features such as tracing and usage monitoring.
+- Both support cost tracking for AI workloads.
+- Both offer prompt management features.
+- Both are open source and can be self-hosted.
+
+</details>
+
+### Why do companies use PostHog?
+According to reviews on [G2](https://www.g2.com/products/posthog/reviews) and other review sites, teams tend to choose PostHog for three main reasons:
+1. **It replaces multiple tools:** Several reviewers mention that PostHog combines analytics, session replay, feature flags, experiments, and other capabilities that would otherwise require [multiple separate products](https://www.g2.com/compare/microsoft-microsoft-clarity-vs-posthog).
+2. **It helps teams understand user behavior:** PostHog connects analytics with session replay, making it easier to see what users did before they dropped off, got stuck, or completed an action.
+3. **It's quick to get started with:** Reviewers frequently mention [easy setup and ease of use](https://technologychecker.io/technology/posthog), along with the flexibility PostHog gives developers when working with their data.
+
+> #### Bottom line
+>
+> PostHog is a good fit for teams that want to understand both how their AI features perform and how people use them. It's not the easiest migration from Helicone, but it gives you more context around what happens before and after an AI interaction.
+
+<WizardCTA />
+
+## 2. Langfuse
+
+- **Founded:** 2023
+- **Similar to:** LangSmith, Arize Phoenix
+- **Typical users:** AI and ML engineers
+- **Typical customers:** Startups to large enterprises
+
+### What is Langfuse?
+Langfuse is an open-source platform for building, monitoring, and improving LLM applications. It helps teams track traces, costs, and evaluations, and manage prompts. It can be used as a managed cloud service or self-hosted.
+Langfuse is focused on LLM observability rather than a broader developer platform. In January 2026, it was acquired by ClickHouse and continues to be developed as an open-source project.
+
+### Key features
+- **LLM observability and tracing:** Track traces, costs, latency, token usage, and model outputs across your LLM applications.
+- **Prompt management:** Create, version, and manage prompts outside your application code.
+- **Evaluations:** Test and score model outputs to measure quality and catch issues before they reach users.
+- **Datasets and experiments:** Run experiments against datasets to compare prompts, models, and changes over time.
+- **Playground:** Test prompts and models in an interactive environment before deploying them to production.
+
+### How does Langfuse compare to Helicone?
+Both companies were acquired in 2026, but while Helicone moved into maintenance mode, Langfuse remains actively developed under ClickHouse and provides an [official migration guide for Helicone users](https://langfuse.com/faq/all/migrate-from-helicone).
+| Feature | Langfuse | Helicone |
+| --- | --- | --- |
+| Tracing | ✅ | ✅ |
+| Cost tracking | ✅ | ✅ |
+| Evaluations | ✅ | ⚠️ Limited |
+| Prompt management | ✅ | ✅ |
+| Open source | ✅ | ✅ |
+| Self-hosting | ✅ | ✅ |
+| AI gateway / proxy | ❌ SDK-based | ✅ |
+| Actively developed | ✅ | ⚠️ Maintenance mode |
+
+<details>
+<summary>Main differences between Langfuse and Helicone</summary>
+- Helicone works as a proxy you route requests through; Langfuse uses an SDK you add to your code, so migrating takes more setup.
+- Langfuse can trace each step of a multi-step agent run, while Helicone mainly logs individual requests at the gateway level.
+- Langfuse runs on a ClickHouse backend designed for high-volume trace data.
+</details>
+
+<details>
+<summary>Main similarities between Langfuse and Helicone</summary>
+- Both are built for LLM observability, with tracing and monitoring of LLM requests.
+- Both provide cost tracking.
+- Both offer prompt management features.
+- Both are open source and support self-hosting.
+</details>
+
+### Why do companies use Langfuse?
+Based on user reviews on [Product Hunt](https://www.producthunt.com/products/langfuse/reviews) and [Gartner Peer Insights](https://www.gartner.com/reviews/product/langfuse-658437652), teams choose Langfuse for a few reasons:
+1. **It's easy to integrate:** Reviewers describe the SDK as quick to set up and easy to add to an existing application.
+2. **The tracing is detailed:** Users point to the depth of its tracing and latency data, and say the visualizations make debugging easier.
+3. **It moves fast:** Reviewers note that the open-source project ships frequent updates and continues to add new capabilities.
+
+> #### Bottom line
+>
+> Langfuse is a strong option for teams that want a dedicated LLM observability platform. It requires more setup than Helicone's proxy-based approach, but it remains actively developed and offers a broad set of observability features.
+
+## 3. LangSmith
+- **Founded:** 2023
+- **Similar to:** Langfuse, Arize Phoenix
+- **Typical users:** AI and ML engineers
+- **Typical customers:** Startups to large enterprises
+
+### What is LangSmith?
+LangSmith is a platform for building and monitoring LLM applications and AI agents. It helps teams trace requests, test prompts, evaluate outputs, and monitor applications in production.
+LangSmith is developed by LangChain and works with or without the LangChain framework. Unlike Langfuse and Helicone, it is closed source. It is primarily offered as a managed cloud platform, with self-hosting available for enterprise customers.
+### Key features
+- **Tracing and observability:** Trace requests, inspect application behavior, and debug issues across your LLM applications.
+- **Evaluation:** Test and score model outputs to measure quality and catch issues before they reach users.
+- **Prompt management:** Create, version, and manage prompts outside your application code.
+- **Datasets and experiments:** Run experiments against datasets to compare prompts, models, and application changes.
+- **Monitoring:** Track production metrics such as latency, cost, token usage, and error rates with dashboards and alerts.
+
+### How does LangSmith compare to Helicone?
+LangSmith covers much of what Helicone does, but the biggest difference is that it's closed source, which matters if open source was part of why you chose Helicone.
+
+| Feature | LangSmith | Helicone |
+| --- | --- | --- |
+| Tracing | ✅ | ✅ |
+| Cost tracking | ✅ | ✅ |
+| Evaluations | ✅ | ⚠️ Limited |
+| Prompt management | ✅ | ✅ |
+| Open source | ❌ | ✅ |
+| Self-hosting | ⚠️ Enterprise only | ✅ |
+| AI gateway / proxy | ❌ SDK-based | ✅ |
+| Actively developed | ✅ | ⚠️ Maintenance mode |
+
+<details>
+<summary>Main differences between LangSmith and Helicone</summary>
+- Helicone uses a proxy-based approach, while LangSmith relies on SDK instrumentation.
+- LangSmith is built by LangChain and works closely with the LangChain ecosystem, while Helicone is independent of any framework.
+- LangSmith offers self-hosting only on its enterprise plan, while Helicone can be self-hosted by any team.
+</details>
+
+<details>
+<summary>Main similarities between LangSmith and Helicone</summary>
+- Both are built for LLM observability, with tracing and monitoring of LLM requests.
+- Both provide cost tracking
+- Both offer prompt management features.
+</details>
+
+### Why do companies use LangSmith?
+Based on user reviews on [Gartner Peer Insights](https://www.gartner.com/reviews/product/langsmith) and [Product Hunt](https://www.producthunt.com/products/langsmith/reviews), teams choose LangSmith for a few reasons:
+1. **It gives clear visibility into model behavior:** Reviewers say it helps them understand step by step how an application arrived at a response.
+2. **It's especially useful in production:** Users highlight debugging, evaluations, and regression testing as projects move beyond early experimentation.
+3. **It fits naturally with LangChain:** Teams already using LangChain or LangGraph often choose LangSmith because the tools work well together.
+
+> #### Bottom line
+>
+> LangSmith is a good fit for teams already using LangChain or LangGraph. It covers many of the same use cases as Helicone, but it is closed source and takes a different approach to instrumentation.
+
+## 4. Arize Phoenix
+- **Founded:** 2023
+- **Similar to:** Langfuse, LangSmith
+- **Typical users:** AI and ML engineers
+- **Typical customers:** Engineering teams that self-host their observability
+
+### What is Arize Phoenix?
+Arize Phoenix is an open-source platform for tracing, evaluating, and improving LLM applications and AI agents. It can be run locally, self-hosted, or used as a hosted cloud service.
+Phoenix is built by Arize AI and works with many AI frameworks and model providers. It is built on open standards such as OpenTelemetry and OpenInference, and includes tools for evaluating AI systems, including retrieval and RAG evaluation.
+
+### Key features
+- **Tracing and observability:** Trace requests, agent workflows, and tool calls. Use the traces to understand what happened during an execution and debug issues more easily.
+- **Evaluations:** Evaluate model outputs and application behavior using scores and automated checks.
+- **Datasets and experiments:** Run experiments against datasets to compare prompts, models, and application changes.
+- **RAG and retrieval evaluation:** Measure retrieval quality, document relevance, and how well your RAG pipeline supports model responses.
+- **OpenTelemetry and OpenInference support:** Use open standards for tracing and observability instead of proprietary instrumentation and trace formats.
+
+### How does Arize Phoenix compare to Helicone?
+Arize Phoenix and Helicone both help teams monitor their LLM applications, but Phoenix includes evaluation for retrieval and RAG quality that Helicone doesn't offer.
+| Feature | Arize Phoenix | Helicone |
+| --- | --- | --- |
+| Tracing | ✅ | ✅ |
+| Cost tracking | ✅ | ✅ |
+| Evaluations | ✅ | ⚠️ Limited |
+| Prompt management | ✅ | ✅ |
+| Open source | ✅ | ✅ |
+| Self-hosting | ✅ | ✅ |
+| AI gateway / proxy | ❌ SDK-based | ✅ |
+| Actively developed | ✅ | ⚠️ Maintenance mode |
+
+<details>
+<summary>Main differences between Arize Phoenix and Helicone</summary>
+- Helicone routes requests through its proxy. Phoenix only observes what happens in your application.
+- Phoenix is built on open standards (OpenTelemetry and OpenInference), while Helicone relies on its own format.
+- Migrating to Phoenix means adding instrumentation to your code, so it takes more setup than Helicone.
+</details>
+
+<details>
+<summary>Main similarities between Arize Phoenix and Helicone</summary>
+- Both are built for LLM observability, with tracing and monitoring of LLM applications.
+- Both provide cost tracking.
+- Both are open source and support self-hosting.
+</details>
+
+### Why do companies use Arize Phoenix?
+Based on community discussions, teams choose Phoenix for a few reasons:
+1. **It's open source and free to self-host:** Teams can run Phoenix themselves and keep full control over their observability data.
+2. **It's built on open standards:** Phoenix uses OpenTelemetry and OpenInference, making it easier to work across frameworks and integrate with other tools.
+3. **It's strong on evaluations:** Teams use Phoenix to evaluate response quality, retrieval performance, and other aspects of LLM applications.
+
+> #### Bottom line
+>
+> Arize Phoenix is a good fit for teams that want an open-source observability platform with strong evaluation and RAG capabilities. It doesn't act as a gateway like Helicone, so it's best suited to teams that care more about tracing and evaluation than request routing.
+
+
+## 5. Braintrust
+- **Founded:** 2023
+- **Similar to:** LangSmith, Langfuse
+- **Typical users:** AI and product engineers
+- **Typical customers:** Startups and enterprises building AI products
+
+### What is Braintrust?
+Braintrust is an evaluation-first platform that helps teams measure, monitor, and improve AI applications in production. What sets it apart is how it ties evaluation directly to the development process.
+Teams can turn production traces into test datasets, run evaluation suites on code changes, and see how updates affect quality before they deploy them. It works with a wide range of AI frameworks and providers and is designed for teams building AI products in production.
+### Key features
+- **Evaluations:** Run automated, human, and LLM-based evaluations to measure the quality of AI outputs.
+- **Tracing and observability:** Trace AI interactions, tool calls, latency, and costs to understand how your application behaves in production.
+- **Datasets and experiments:** Turn production traces into datasets and use them to compare prompts, models, and application changes.
+- **Prompt playground:** Test prompts and models side by side and compare outputs before making changes in production.
+- **CI/CD quality gates:** Run evaluation suites on code changes and block releases that fail your quality bar.
+
+### How does Braintrust compare to Helicone?
+Braintrust focuses on evaluating AI output quality, while Helicone is a proxy-based gateway for logging and cost tracking.
+| Feature | Braintrust | Helicone |
+| --- | --- | --- |
+| Tracing | ✅ | ✅ |
+| Cost tracking | ✅ | ✅ |
+| Evaluations | ✅ | ⚠️ Limited |
+| Prompt management | ✅ | ✅ |
+| Open source | ❌ | ✅ |
+| Self-hosting | ⚠️ Enterprise only | ✅ |
+| AI gateway / proxy | ⚠️ Limited | ✅ |
+| Actively developed | ✅ | ⚠️ Maintenance mode |
+
+
+<details>
+<summary>Main differences between Braintrust and Helicone</summary>
+- Braintrust can run evaluation suites on code changes and block releases that fail a quality threshold.
+- Braintrust is closed source, while Helicone is open source.
+- Braintrust's self-hosting is limited to enterprise plans, while Helicone can be self-hosted by any team.
+</details>
+
+<details>
+<summary>Main similarities between Braintrust and Helicone</summary>
+- Both help teams trace and monitor AI applications.
+- Both provide cost tracking.
+- Both support multiple AI models and providers.
+</details>
+
+### Why do companies use Braintrust?
+Based on [reviews on G2](https://www.g2.com/products/braintrust-2024-12-22/reviews), teams choose Braintrust for a few reasons:
+1. **It brings evaluations, observability, and experimentation into one platform:** Reviewers describe it as an all-in-one place for measuring and improving AI applications.
+2. **It makes changes easier to evaluate:** Users say it helps them compare prompts, models, and pipelines to see whether updates actually improve quality.
+3. **It supports fast iteration:** Reviewers frequently mention how easy it is to test ideas, collaborate with teammates, and move quickly.
+
+> #### Bottom line
+>
+> Braintrust is a good fit for teams that want evaluations to play a larger role in how they build and ship AI products. It's closed source and doesn't provide the gateway capabilities that Helicone is known for, but it offers a more evaluation-focused workflow.
+
+## 6. Portkey
+- **Founded:** 2023
+- **Similar to:** Helicone, LiteLLM
+- **Typical users:** AI and platform engineers
+- **Typical customers:** Enterprises running AI in production
+
+### What is Portkey?
+Portkey is an AI gateway and observability platform that helps teams build, manage, and monitor AI applications. It provides a single API for accessing multiple AI models and includes tools for routing, logging, cost tracking, tracing, and reliability.
+Portkey can be used as a hosted service, and it also offers an open-source AI Gateway that teams can self-host or run locally. In 2026, it was acquired by Palo Alto Networks.
+
+### Key features
+- **AI gateway:** Route requests across multiple AI providers through a single API, with support for caching, retries, fallback, and rate limits.
+- **Observability and tracing:** Track requests, latency, costs, errors, and model performance to understand how AI applications behave in production.
+- **Guardrails:** Apply safety checks, validation rules, and policies to AI inputs and outputs.
+- **Prompt management:** Store, version, and manage prompts across teams and environments.
+- **AI governance:** Manage access controls, audit logs, and organizational policies for AI applications.
+
+### How does Portkey compare to Helicone?
+Like Helicone, Portkey works as an AI gateway, so migrating between the two usually requires fewer changes than moving to an SDK-based tool.
+| Feature | Portkey | Helicone |
+| --- | --- | --- |
+| Tracing | ✅ | ✅ |
+| Cost tracking | ✅ | ✅ |
+| Evaluations | ⚠️ Limited | ⚠️ Limited |
+| Prompt management | ✅ | ✅ |
+| Open source | ⚠️ Gateway only | ✅ |
+| Self-hosting | ✅ | ✅ |
+| AI gateway / proxy | ✅ | ✅ |
+| Actively developed | ✅ | ⚠️ Maintenance mode |
+
+<details>
+<summary>Main differences between Portkey and Helicone</summary>
+- Portkey includes governance and guardrail features for managing AI at scale.
+- Portkey's gateway is open source, but the full platform is not. Helicone is fully open source.
+- Helicone is now in maintenance mode, while Portkey is being integrated into Palo Alto Networks' Prisma AIRS security platform.
+</details>
+
+<details>
+<summary>Main similarities between Portkey and Helicone</summary>
+- Both are built around an AI gateway.
+- Both provide tracing and observability for AI applications.
+- Both support cost tracking.
+- Both support self-hosting.
+</details>
+
+### Why do companies use Portkey?
+Based on [reviews on G2](https://www.g2.com/products/portkey/reviews), teams choose Portkey for a few reasons:
+1. **It's easy to set up:** Reviewers describe the integration as quick and the APIs as easy to work with across different models.
+2. **The gateway simplifies working with multiple providers:** Users highlight how easily it lets them switch between models and providers, with fallback options when needed.
+3. **Monitoring and cost tracking are built in:** Reviewers point to centralized logs, observability, and usage tracking that make debugging and optimization easier.
+
+> #### Bottom line
+>
+> Portkey is a good option for teams that want a gateway-based alternative to Helicone. It offers many of the same core capabilities, but its full platform is not open source and it is now part of Palo Alto Networks.
+
+## 7. Weights & Biases Weave
+- **Founded:** 2024
+- **Similar to:** LangSmith, Arize Phoenix
+- **Typical users:** AI and ML engineers
+- **Typical customers:** ML teams already using Weights & Biases
+
+### What is Weights & Biases Weave?
+Weights & Biases (W&B) Weave is an observability and evaluation platform for LLM applications. It helps teams trace requests, evaluate outputs, monitor application behavior, and improve AI systems using real-world data.
+Weave is part of the Weights & Biases ecosystem and is designed for teams that already use W&B for machine learning workflows. It supports tracing, evaluations, prompt management, and dataset management, bringing LLM observability and evaluation into the same platform.
+
+### Key features
+- **Tracing and observability:** Trace requests, tool calls, inputs, outputs, and application behavior to understand how LLM applications perform.
+- **Evaluations:** Run evaluations using custom scorers, human feedback, or LLM judges to measure the quality of AI outputs.
+- **Prompt testing:** Test prompt changes and compare outputs before deploying them.
+- **Datasets:** Create and manage datasets for evaluations, testing, and benchmarking.
+- **Guardrails:** Use built-in scorers to check for issues such as hallucinations, bias, toxicity, and sensitive information.
+
+### How does Weights & Biases Weave compare to Helicone?
+Weave brings LLM observability into the W&B platform, so it's mainly for teams already using W&B, while Helicone is a standalone tool.
+| Feature | Weave | Helicone |
+| --- | --- | --- |
+| Tracing | ✅ | ✅ |
+| Cost tracking | ✅ | ✅ |
+| Evaluations | ✅ | ⚠️ Limited |
+| Prompt management | ✅ | ✅ |
+| Open source | ⚠️ Partial | ✅ |
+| Self-hosting | ✅ | ✅ |
+| AI gateway / proxy | ❌ SDK-based | ✅ |
+| Actively developed | ✅ | ⚠️ Maintenance mode |
+
+<details>
+<summary>Main differences between Weights & Biases Weave and Helicone</summary>
+- Helicone works as a proxy you route requests through, while Weave is instrumented in your code with an SDK.
+- Weave is only partially open source, while Helicone is fully open source.
+- Weave's LLM visibility is newer and less mature than W&B's core ML tools, while Helicone has focused on LLM observability since it launched.
+</details>
+
+<details>
+<summary>Main similarities between Weights & Biases Weave and Helicone</summary>
+- Both provide tracing and observability for AI applications.
+- Both support cost tracking.
+- Both include prompt management features.
+- Both can be self-hosted.
+</details>
+
+### Why do companies use Weave?
+Based on Weave documentation and community discussions, teams choose Weave for a few reasons:
+1. **It fits teams already using W&B:** Weave brings tracing, evaluations, and testing into the same platform many ML teams already use for experiments and model development.
+2. **Instrumentation is simple:** Adding the `@weave.op` decorator to a function automatically captures traces with minimal code changes.
+3. **It keeps observability and evaluation in one workflow:** Teams can trace requests, run evaluations, and investigate issues from the same interface.
+
+> #### Bottom line
+>
+> Weave is a good fit for teams that already use W&B and want observability, evaluations, and testing in the same platform. It benefits from W&B's established machine learning ecosystem, though its LLM tooling is still relatively new.
+
+
+## Which Helicone alternatives should you choose?
+- Want an all-in-one platform that connects AI observability with product analytics, feature flags, experiments, and session replay? Go with **PostHog**.
+- Want open-source LLM observability that's still actively developed? **Langfuse** is a strong choice.
+- Already building with LangChain or LangGraph? **LangSmith** fits naturally into that ecosystem.
+- Want open-source observability with strong evaluation and RAG capabilities? Consider **Arize Phoenix**.
+- Need evaluation to play a bigger role in how you develop and ship AI applications? **Braintrust** is built for that.
+- Want a gateway-based alternative that feels familiar coming from Helicone? **Portkey** is worth a look.
+- Already using Weights & Biases for machine learning workflows? **Weave** brings LLM observability into the same platform.
+
+## Is PostHog right for you?
+Here's the (short) sales pitch.
+We're biased, obviously, but we think PostHog is the perfect Helicone replacement if:
+- You want AI observability connected to the rest of your product data, so you can tie a model's behavior to the user session, feature flag, or funnel it affected.
+- You value open source. PostHog's core is MIT licensed, with a public roadmap and self-hosting.
+- You want to get started without a large upfront commitment. PostHog includes a [generous free tier](/pricing) with 100k AI observability events each month.
+It's completely free to get started – no credit card required. Our [setup wizard](/wizard) handles configuration in minutes, or you can check out [our docs](/docs) to do it yourself.
+
+<WizardCTA />
+
+## Frequently asked questions
+<details>
+<summary>Is Helicone shutting down?</summary>
+No. **Helicone** is still available and continues to receive security updates, bug fixes, and support for new models. However, it is now in maintenance mode following its acquisition by **Mintlify**, and no major new features are planned.
+</details>
+
+<details>
+<summary>What does Helicone's maintenance mode mean?</summary>
+Maintenance mode means **Helicone** will continue running, but active feature development has stopped. The team has said it will continue shipping security updates, bug fixes, performance improvements, and support for new models, but its focus has shifted to **Mintlify**.
+</details>
+
+<details>
+<summary>What happened to Helicone?</summary>
+**Helicone** was acquired by **Mintlify** in 2026. After the acquisition, the Helicone team joined Mintlify and the product moved into maintenance mode. Helicone is still available, but the focus is now on keeping it running rather than adding major new features.
+</details>
+
+<details>
+<summary>Should I migrate off Helicone now or wait?</summary>
+There's no need to rush. If **Helicone** meets your needs today, you can keep using it. But if active development and a long-term roadmap are important to you, it's worth exploring alternatives.
+</details>
+
+<details>
+<summary>What's the easiest Helicone alternative to migrate to?</summary>
+**Portkey** is likely the easiest option for most teams because it uses a similar proxy-based approach. In many cases, migrating involves updating your API endpoint rather than adding new SDK instrumentation throughout your application.
+</details>
+
+<details>
+<summary>Is there a proxy-based Helicone alternative?</summary>
+Yes. **Portkey** is the closest proxy-based alternative in this list. Like **Helicone**, it sits between your application and model providers, allowing you to add observability, cost tracking, routing, and governance features without instrumenting your application code. **Portkey** was acquired by Palo Alto Networks in 2026 and is being integrated into its Prisma AIRS security platform.
+</details>
+
+<details>
+<summary>Can PostHog replace Helicone?</summary>
+Yes, for many teams. **PostHog** includes AI observability, tracing, evaluations, cost tracking, prompt management, and self-hosting. Unlike **Helicone**, it also connects AI observability with product analytics, session replay, feature flags, and experiments in the same platform.
+The tradeoff is that **PostHog** uses SDK-based instrumentation rather than a proxy, so migration typically involves more setup. Its AI observability tooling is also newer than some dedicated LLM observability platforms.
+</details>
+
+<details>
+<summary>Is there a free or open-source Helicone alternative?</summary>
+Yes. **PostHog**, **Langfuse**, and **Arize Phoenix** are open-source alternatives to **Helicone.** All three offer free ways to get started, whether through self-hosting, free tiers, or both. The best one depends on what you're looking for: **PostHog** combines observability with product analytics, **Langfuse** is the closest dedicated observability alternative, **Phoenix** is strong for evaluations and RAG workflows.
+</details>
+
+<details>
+<summary>What's the difference between a proxy-based and an SDK-based observability tool?</summary>
+A proxy-based tool sits between your application and the model provider, so you can capture requests and responses by routing traffic through it. An SDK-based tool requires you to add instrumentation to your application code, but it can provide deeper visibility into workflows, tool calls, and application logic.
+**Helicone** and **Portkey** use a proxy-based approach. **PostHog**, **Langfuse**, **LangSmith**, **Arize Phoenix**, **Braintrust**, and **Weave** rely primarily on SDK-based instrumentation.
+</details>
+
+<details>
+<summary>Will my Helicone data export to a new tool?</summary>
+Usually, yes. **Helicone** provides a data export tool that lets you export logs in JSON, JSONL, or CSV format, so your data isn't locked in.
+The migration process depends on the tool you're moving to. Some platforms provide migration resources. For example, **Langfuse** publishes a [migration guide for moving from **Helicone**](https://langfuse.com/faq/all/migrate-from-helicone), and [**Helicone** integrates with **PostHog**](https://posthog.com/docs/ai-observability/integrations/helicone-posthog) to export events for analysis. For other tools, check the platform's migration and import documentation before making the switch.
+</details>
+
+<NewsletterForm />
