@@ -6,6 +6,7 @@ import { useApp } from '../../../context/App'
 interface ReaderViewContextType {
     isNavVisible: boolean
     isTocVisible: boolean
+    isNarrow: boolean
     fullWidthContent: boolean
     setFullWidthContent: (value: boolean) => void
     backgroundImage: string | null
@@ -39,6 +40,11 @@ export function ReaderViewProvider({
     const { appWindow } = useWindow()
     // @2xl breakpoint for sidebar visibility (equivalent to @2xl/app-reader used in CSS)
     const isWideEnoughForSidebar = appWindow?.size?.width && appWindow?.size?.width >= 672 // 42rem = 672px
+    // Below the @2xl threshold the inline sidebar rail eats too much of the
+    // reading column, so on mobile we hide it entirely and swap in a floating
+    // control cluster + off-canvas drawer. Only treat as narrow once the width
+    // is actually known so SSR/first paint defaults to the desktop layout.
+    const isNarrow = !!appWindow?.size?.width && appWindow.size.width < 672
     const [isNavVisible, setIsNavVisible] = useState<boolean>(defaultNavVisible ?? true)
     const [navUserToggled, setNavUserToggled] = useState(false)
     // @6xl breakpoint is 72rem = 1152px
@@ -133,6 +139,7 @@ export function ReaderViewProvider({
     const value = {
         isNavVisible,
         isTocVisible,
+        isNarrow,
         fullWidthContent,
         setFullWidthContent,
         backgroundImage,

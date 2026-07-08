@@ -844,6 +844,11 @@ interface LeftSidebarProps {
     currentPath?: string
     isMdx?: boolean
     background?: boolean | string
+    /** On narrow windows the sidebar renders as an off-canvas drawer instead
+     *  of an inline column, driven by the props below. */
+    mobile?: boolean
+    mobileOpen?: boolean
+    onMobileClose?: () => void
 }
 
 const SIDEBAR_CSS_TRANSITION = 'width 300ms cubic-bezier(0.32, 0.72, 0, 1)'
@@ -994,6 +999,9 @@ const LeftSidebar = ({
     currentPath,
     isMdx = false,
     background = false,
+    mobile = false,
+    mobileOpen = false,
+    onMobileClose,
 }: LeftSidebarProps) => {
     const { searchQuery } = useSearch()
     const { hasMounted } = useReaderView()
@@ -1026,7 +1034,9 @@ const LeftSidebar = ({
     const isPinned = isNavVisible
     const [searchFocused, setSearchFocused] = useState(false)
     const [hovered, setHovered] = useState(false)
-    const expanded = isPinned || searchFocused || hovered
+    // On mobile the panel is a drawer: it's fully expanded whenever open and
+    // fully hidden otherwise, so pin/hover state is bypassed entirely.
+    const expanded = mobile ? mobileOpen : isPinned || searchFocused || hovered
 
     // `displayExpanded` mirrors `expanded` instantly when growing, but only
     // flips to false AFTER the panel's shrink transition finishes (driven by
@@ -1089,7 +1099,7 @@ const LeftSidebar = ({
     }
 
     const handleMouseEnter = () => {
-        if (!isPinned) setHovered(true)
+        if (!isPinned && !mobile) setHovered(true)
     }
     const handleMouseLeave = () => {
         setHovered(false)
@@ -1109,8 +1119,8 @@ const LeftSidebar = ({
     return (
         <aside
             data-scheme="secondary"
-            className={`relative flex-shrink-0 ${hasMounted ? 'transition-[flex-basis] duration-300' : ''} ${
-                isPinned ? 'basis-[250px]' : 'basis-12'
+            className={`relative flex-shrink-0 ${hasMounted && !mobile ? 'transition-[flex-basis] duration-300' : ''} ${
+                mobile ? 'basis-0' : isPinned ? 'basis-[250px]' : 'basis-12'
             }`}
         >
             <div
@@ -1123,15 +1133,26 @@ const LeftSidebar = ({
                 onMouseLeave={handleMouseLeave}
                 data-scheme="secondary"
                 style={{
-                    width: expanded ? 250 : 48,
-                    transition: hasMounted ? SIDEBAR_CSS_TRANSITION : 'none',
+                    width: mobile ? 250 : expanded ? 250 : 48,
+                    transform: mobile && !mobileOpen ? 'translateX(-110%)' : undefined,
+                    transition: hasMounted
+                        ? mobile
+                            ? 'transform 300ms cubic-bezier(0.32, 0.72, 0, 1)'
+                            : SIDEBAR_CSS_TRANSITION
+                        : 'none',
                 }}
                 className={`absolute inset-y-0 left-0 flex flex-col min-h-0 overflow-hidden border-r border-primary will-change-[transform,backdrop-filter] transform-gpu ${
-                    // When collapsed and hover-expanded, the panel floats as an
-                    // overlay above the content — it always needs an opaque
-                    // background so the menu is readable, even when the caller
-                    // didn't pass one. Otherwise fall back to the caller's value.
-                    !isPinned && expanded
+                    // On mobile the panel is always an overlay drawer above the
+                    // content; it just slides off-screen when closed.
+                    mobile
+                        ? `z-50 shadow-2xl ${resolveBackground(background) || FROSTED_BG} ${
+                              mobileOpen ? '' : 'pointer-events-none'
+                          }`
+                        : // When collapsed and hover-expanded, the panel floats as an
+                        // overlay above the content — it always needs an opaque
+                        // background so the menu is readable, even when the caller
+                        // didn't pass one. Otherwise fall back to the caller's value.
+                        !isPinned && expanded
                         ? `z-50 shadow-2xl ${resolveBackground(background) || FROSTED_BG}`
                         : `z-30 ${resolveBackground(background)}`
                 }`}
@@ -1285,14 +1306,16 @@ const LeftSidebar = ({
                         trigger={
                             <OSButton
                                 size="md"
-                                onClick={handleToggleNav}
-                                active={isPinned}
-                                icon={isPinned ? <IconSidebarOpen /> : <IconSidebarClose />}
+                                onClick={mobile ? onMobileClose : handleToggleNav}
+                                active={!mobile && isPinned}
+                                icon={
+                                    mobile ? <IconSidebarOpen /> : isPinned ? <IconSidebarOpen /> : <IconSidebarClose />
+                                }
                             />
                         }
                         side="right"
                     >
-                        {isPinned ? 'Unpin sidebar' : 'Pin sidebar'}
+                        {mobile ? 'Close' : isPinned ? 'Unpin sidebar' : 'Pin sidebar'}
                     </Tooltip>
                     {displayExpanded && (
                         <div className="ml-auto flex items-center gap-px">
@@ -1509,10 +1532,20 @@ function ReaderViewContent({
     // Handle slug-to-key mapping (e.g., great-expectations → greatexpectations)
     const customerKey = customerSlug ? customerSlug.replace(/-/g, '') : null
 
-    const { isNavVisible, isTocVisible, fullWidthContent, backgroundImage, toggleNav, toggleToc } = useReaderView()
+    const { isNavVisible, isTocVisible, isNarrow, fullWidthContent, backgroundImage, toggleNav, toggleToc } =
+        useReaderView()
 
     const showSidebar = tableOfContents && tableOfContents?.length > 0 && !hideRightSidebar
     const renderLeftSidebar = !compact && !hideLeftSidebar
+    // On narrow windows the left rail is hidden and replaced by a floating
+    // control cluster that opens the sidebar as an off-canvas drawer.
+    const showMobileNav = renderLeftSidebar && isNarrow
+    const [mobileNavOpen, setMobileNavOpen] = useState(false)
+
+    // Close the drawer whenever the reader navigates to a new page.
+    useEffect(() => {
+        setMobileNavOpen(false)
+    }, [appWindow?.path])
 
     const selectedBackgroundOption = backgroundImage
         ? backgroundImageOptions.find((option) => option.value === backgroundImage)
@@ -1578,12 +1611,15 @@ function ReaderViewContent({
             <div
                 data-scheme="secondary"
                 data-app="ReaderView"
-                className="@container/app-reader w-full h-full flex min-h-0 max-w-full"
+                className="@container/app-reader relative w-full h-full flex min-h-0 max-w-full"
             >
                 {renderLeftSidebar && (
                     <LeftSidebar
                         isNavVisible={isNavVisible}
                         toggleNav={toggleNav}
+                        mobile={showMobileNav}
+                        mobileOpen={mobileNavOpen}
+                        onMobileClose={() => setMobileNavOpen(false)}
                         isEditing={isEditing}
                         filePath={filePath}
                         sourceInstanceName={sourceInstanceName}
@@ -1603,6 +1639,16 @@ function ReaderViewContent({
                     >
                         {leftSidebar || (!hideMenu && <Menu parent={parent as MenuItem} />)}
                     </LeftSidebar>
+                )}
+
+                {showMobileNav && (
+                    <div
+                        aria-hidden
+                        onClick={() => setMobileNavOpen(false)}
+                        className={`absolute inset-0 z-40 bg-black/40 transition-opacity duration-300 ${
+                            mobileNavOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                        }`}
+                    />
                 )}
 
                 <div
@@ -1626,6 +1672,18 @@ function ReaderViewContent({
                             onSearch={onSearch}
                             currentPath={appWindow?.path}
                         />
+                    )}
+                    {showMobileNav && (
+                        <button
+                            type="button"
+                            aria-label="Open navigation"
+                            onClick={() => setMobileNavOpen(true)}
+                            className={`absolute bottom-4 right-4 z-30 flex size-11 items-center justify-center rounded-full border border-primary text-primary shadow-lg transition-opacity duration-200 hover:bg-accent ${FROSTED_BG} ${
+                                mobileNavOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'
+                            }`}
+                        >
+                            <IconSidebarClose className="size-5" />
+                        </button>
                     )}
                     <div className="flex flex-1 min-h-0">
                         <ScrollArea
