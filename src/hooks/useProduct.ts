@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import {
     IconThoughtBubble,
-    IconBook,
+    IconCoffee,
     IconDashboard,
     IconDownload,
     IconNotebook,
@@ -23,7 +23,6 @@ import {
     IconAI,
     IconSupport,
     IconTestTube,
-    IconListTreeConnected,
     IconTarget,
     IconArrowUpRight,
     IconTrends,
@@ -34,6 +33,7 @@ import {
 } from '@posthog/icons'
 import useProducts from './useProducts'
 import { mcpAnalytics } from './productData/mcp_analytics'
+import { traces } from './productData/traces'
 
 const dedupe = (products) => {
     const deduped = {}
@@ -59,6 +59,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         //     name: 'Product analytics',
         //     slug: 'product-analytics',
         // },
+        traces,
         {
             name: 'User interviews',
             Icon: IconThoughtBubble,
@@ -84,7 +85,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         },
         {
             name: 'PostHog Code',
-            Icon: IconBook,
+            Icon: IconCoffee,
             description: 'AI code editor that knows how people use your product',
             handle: 'posthog_code',
             color: 'brown',
@@ -132,16 +133,6 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                     imgClasses: 'w-full rounded shadow-xl border border-primary',
                 },
             },
-        },
-        {
-            name: 'AI Observability',
-            Icon: IconListTreeConnected,
-            description: 'Debug entire AI conversations with full trace visibility.',
-            handle: 'llm_traces',
-            color: 'seagreen',
-            colorSecondary: 'seagreen',
-            category: 'ai',
-            slug: 'ai-observability',
         },
         {
             name: 'AI Evals',

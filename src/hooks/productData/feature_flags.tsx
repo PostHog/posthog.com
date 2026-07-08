@@ -25,7 +25,9 @@ export const featureFlags = {
         title: 'Safely roll out features to specific users or groups',
         description: (
             <>
-                Test changes with small groups of users before rolling out wider. Then analyze usage with{' '}
+                Feature flags are one of the tools that make your product self-driving: the control layer agents use to
+                roll a change out and roll it back. Test changes with small groups of users before rolling out wider,
+                then analyze usage with{' '}
                 <Link to="/product-analytics" className="font-bold underline" state={{ newWindow: true }}>
                     Product Analytics
                 </Link>{' '}
@@ -455,6 +457,9 @@ export const featureFlags = {
             ],
             us: [
                 {
+                    title: 'Agents can roll a change out and roll it back from flag context – the control that powers self-driving',
+                },
+                {
                     title: 'Integration with other analysis products',
                     subtitle: 'View replays attached to a flag, analyze data based on a flag, etc.',
                 },
@@ -528,7 +533,7 @@ export const featureFlags = {
         pricing:
             "1 million requests free per month. Then pay for what you use. LaunchDarkly charges $10-20 per developer PLUS usage. We just charge usage. A typical SaaS uses 5-10M requests/month. Even at 100M requests, we're way cheaper. And no 'enterprise tier' gatekeeping.",
         'comparison-summary':
-            'LaunchDarkly pioneered standalone flags. Optimizely came from A/B testing. We built flags as part of a complete platform. Everything shares the same data model. LaunchDarkly has more enterprise workflow stuff, but most teams just want flags that work with their analytics.',
+            "LaunchDarkly pioneered standalone flags. Optimizely came from A/B testing. We built flags as part of a complete platform. Everything shares the same data model. Because it's one system, agents can act on flag context directly – roll a change out, watch the impact, and roll it back – which is what makes your product self-driving. LaunchDarkly has more enterprise workflow stuff, but most teams just want flags that work with their analytics.",
         'feature-comparison':
             "We auto-resolve IPs and recall person properties. Sounds minor but eliminates whole bug categories. We don't have data export because... why would you? Your flag data is already in our analytics. Query it there.",
         docs: "Written by engineers who've actually built flag systems. Real code examples for every SDK. We cover the weird stuff - clock skew, network failures, race conditions. If something's broken, we tell you how to work around it.",
@@ -541,7 +546,7 @@ export const featureFlags = {
     ai: {
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/FEATURE_FLAGS_hog_95e008723c.png',
         imageAlt: 'PostHog AI and feature flags',
-        description: 'set up, monitor, and manage feature flags using natural language',
+        description: 'roll a change out, watch the impact, and roll it back',
         skills: [
             'Configures and modifies flags with simple prompts – including rollout rules, targeting, and variants',
             'Identifies stale flags to remove from your codebase',

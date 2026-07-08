@@ -56,11 +56,11 @@ Some of the influencers we sponsor include:
 
 - We generally let influencers decide on what the ad read is like so that it best fits their audience. We can provide guidance on what to talk about though. These points are helpful to share:
   - The frame we want everything to ladder up to: **PostHog makes _your_ product self-driving** — it has all your product's data in one place, turns it into signals, and uses agents to find problems and opportunities and ship the fix. Keep the creator's product (or their viewers' products) as the thing that becomes self-driving. Avoid "PostHog is self-driving software" — that centers us instead of the outcome.
-  - PostHog is a developer platform that helps people build successful products. It provides all the apps developers need to do this.
+  - PostHog is the platform for self-driving products. It provides all the tools developers need to build successful products.
   - This means product analytics, web analytics, session replay, error tracking, experimentation, feature flags, AI Observability, surveys, and more.
-  - We also have a CDP for sending data to 50+ destinations and a data warehouse app that lets you connect to external sources like your database, Stripe or Hubspot to query with SQL (or no code insights) alongside your product data.
-  - The goal of these apps is to help founders and engineers debug their product, understand their customers, analyze usage, and ship a more successful product faster.
-  - We have a generous free tier for every one of our apps. You can sign up and get started with all of them for free right away. 90% of users use PostHog for free.
+  - We also have a CDP for sending data to 50+ destinations and a data warehouse that lets you connect to external sources like your database, Stripe or Hubspot to query with SQL (or no code insights) alongside your product data.
+  - The goal of these tools is to help founders and engineers debug their product, understand their customers, analyze usage, and ship a more successful product faster.
+  - We have a generous free tier for every one of our tools. You can sign up and get started with all of them for free right away. 90% of users use PostHog for free.
   - Setup is as simple as installing one of our SDKs or pasting a snippet into your site header, we then autocapture data like pageviews, button clicks, and sessions. We also have SDKs for all the popular backend languages like Python, Node, Go, etc.
 
 - There are a handful of video assets for them to [use here](https://drive.google.com/drive/folders/1RFTEb4E1D71wYuQm9smZ9eK79glmHp1m?usp=sharing). Feel free to add more, but also suggest the website and in-app as sources.

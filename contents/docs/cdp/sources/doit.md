@@ -28,3 +28,7 @@ Once the syncs are complete, you can start using DoIt data in PostHog.
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />
