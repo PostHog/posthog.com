@@ -1086,10 +1086,10 @@ function CTASection() {
                     imgClassName="h-full w-full object-cover"
                 />
                 <div className="relative">
-                    <h2 className="text-2xl m-0 mb-2">Use the research before it's finished</h2>
+                    <h2 className="text-2xl m-0 mb-2">Put our research into practice</h2>
                     <p className="text-secondary max-w-xl mx-auto mb-6">
-                        Most of this ships as public betas long before it's polished. Enable feature previews and try
-                        the newest work first.
+                        Most of what we're working on ships as public betas long before it's polished. Check what
+                        feature previews are currently available to try in the app.
                     </p>
                     <div className="flex flex-col @md:flex-row items-center justify-center gap-3">
                         <OSButton asLink to="/wip" state={{ newWindow: true }} variant="primary" size="md">
