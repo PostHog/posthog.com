@@ -6,9 +6,53 @@ title: Metrics
 
 PostHog Metrics lets you send application and infrastructure metrics – request counts, latencies, queue depths, resource usage – to PostHog and analyze them alongside your [logs](/docs/logs), [traces](/docs/distributed-tracing), and product data.
 
-Metrics works with any OpenTelemetry-compatible client. You don't need any PostHog-specific packages – use standard OpenTelemetry libraries or an OpenTelemetry Collector and point them at PostHog's OTLP endpoint.
+There are two ways to send metrics:
 
-## Set up metrics
+1. **Already have PostHog installed?** Record metrics directly with the [`posthog.metrics` API](#already-have-posthog-installed-use-posthogmetrics) built into the PostHog SDK – no extra packages.
+2. **Using OpenTelemetry?** Point any standard OpenTelemetry library or Collector at [PostHog's OTLP endpoint](#set-up-metrics-with-opentelemetry) – no PostHog-specific packages.
+
+## Already have PostHog installed? Use posthog.metrics
+
+If [posthog-js](/docs/libraries/js) is already running on your site, you can record metrics immediately – no OpenTelemetry setup, no new dependencies, and no extra authentication beyond the project API key you already configured:
+
+```js
+// A counter for things that only go up
+posthog.metrics.count('checkout.completed')
+
+// A gauge for values that go up and down
+posthog.metrics.gauge('cart.items', 3)
+
+// A histogram for distributions like durations
+posthog.metrics.histogram('api.request.duration', 187, { unit: 'ms' })
+```
+
+Add attributes to slice a metric by dimension, and set a service name so your metrics are easy to find and filter:
+
+```js
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    metrics: {
+        serviceName: 'storefront-web',
+        environment: 'production',
+    },
+})
+
+posthog.metrics.count('checkout.completed', 1, { attributes: { plan: 'pro' } })
+posthog.metrics.histogram('api.request.duration', 187, {
+    unit: 'ms',
+    attributes: { route: '/api/checkout', status: '200' },
+})
+```
+
+Metrics are safe to record from hot paths. Samples are aggregated in memory and sent as one data point per series every 10 seconds – a burst of 10,000 `count()` calls costs one data point on the wire. Pending metrics are flushed automatically when the page is hidden or closed, and you can force a flush with `posthog.metrics.flush()`.
+
+The `metrics` config also accepts `flushIntervalMs`, `maxSeriesPerFlush` (a cardinality guardrail, default 1000 series per window), `resourceAttributes`, and a `beforeSend` hook to filter or modify metrics before they're aggregated.
+
+Metrics deliberately carry no user or session context: every distinct attribute value creates a new series, so attach low-cardinality dimensions like plan, route, or status – not user IDs.
+
+> **Note:** `posthog.metrics` is currently available in posthog-js (web). Support in posthog-node and other SDKs is coming. If you're on another SDK, or not using PostHog SDKs at all, use the OpenTelemetry setup below.
+
+## Set up metrics with OpenTelemetry
 
 ### 1. Get your project token
 
@@ -134,6 +178,19 @@ PostHog ingests all OTLP metric types:
 
 A metric's identity is its **name, type, and attributes** together. `http.requests` with `{route: "/home"}` and `http.requests` with `{route: "/checkout"}` are separate series, so keep attribute values low-cardinality – attach things like route, status, or plan, not user IDs or request IDs.
 
+### Naming and units
+
+Give metrics descriptive, dot-separated names like `checkout.failed`, `email.sent`, or `queue.depth` – not vague ones like `metric1` or `counter`. Set an explicit unit on histograms (`ms`, `bytes`) so charts are unambiguous. Use one name per metric type: recording `queue.depth` as both a gauge and a counter blends both series in charts.
+
+### What to instrument
+
+Good starting points:
+
+- **Critical operations** – count successes and failures of the flows that matter: checkouts, signups, imports
+- **Service boundaries** – time external API calls and database queries with histograms
+- **Business events** – counters for orders, upgrades, or invites, sliced by plan or region
+- **Resource usage** – gauge queue depths, connection pools, and cache sizes
+
 ## Use your metrics
 
 Once metrics are flowing, open [Metrics](https://app.posthog.com/metrics) in PostHog.
@@ -164,6 +221,7 @@ Use it for anything the viewer doesn't cover – joining metrics against each ot
 1. Check you're using your **project token** (`phc_...`), not a personal API key (`phx_...`)
 2. Check the endpoint path is exactly `/i/v1/metrics` – requests without a token return `401 Unauthorized`
 3. OTLP SDKs export on an interval (60 seconds by default) – lower `export_interval_millis` while testing, and in short-lived scripts flush before exit (`meterProvider.forceFlush()` / `shutdown()`), or your metrics may never be sent
+4. Using `posthog.metrics`? The SDK flushes every 10 seconds – call `posthog.metrics.flush()` to send immediately while testing, and check you're not opted out of capturing
 
 ## Next steps
 
