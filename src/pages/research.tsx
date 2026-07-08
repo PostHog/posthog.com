@@ -209,9 +209,25 @@ type Publication = {
     venue?: string
     year?: string
     url?: string
+    note?: string
 }
 
-const PUBLICATIONS: Publication[] = []
+const PUBLICATIONS: Publication[] = [
+    {
+        arxivId: '2403.06015',
+        title: 'Grafting: Making Random Forests Consistent',
+        authors: 'Waltz, N.',
+        year: '2024',
+        note: 'Published before joining PostHog',
+    },
+    {
+        arxivId: '2403.14798',
+        title: 'Time Series Clustering Using DBSCAN',
+        authors: 'Waltz, N.',
+        year: '2024',
+        note: 'Published before joining PostHog',
+    },
+]
 
 type ResolvedPublication = Required<Pick<Publication, 'title' | 'url'>> & Publication
 
@@ -299,7 +315,7 @@ function PublicationCard({ paper, index }: { paper: ResolvedPublication; index: 
                     {paper.title}
                 </Link>
                 <span className="block text-sm text-secondary font-mono mt-0.5">
-                    {[paper.authors, paper.venue, paper.year].filter(Boolean).join(' · ')}
+                    {[paper.authors, paper.venue, paper.year, paper.note].filter(Boolean).join(' · ')}
                 </span>
             </span>
             <OSButton size="sm" variant="secondary" onClick={copyCitation} tooltip="Copy BibTeX citation">
@@ -322,10 +338,15 @@ function PublicationsSection() {
             />
 
             {publications.length > 0 ? (
-                <div className="max-w-3xl space-y-3">
-                    {publications.map((paper, index) => (
-                        <PublicationCard key={paper.url} paper={paper} index={index} />
-                    ))}
+                <div className="max-w-3xl">
+                    <div className="space-y-3">
+                        {publications.map((paper, index) => (
+                            <PublicationCard key={paper.url} paper={paper} index={index} />
+                        ))}
+                    </div>
+                    <p className="text-sm text-secondary mt-3 mb-0">
+                        The first paper from our current research is in progress and will be linked here on release.
+                    </p>
                 </div>
             ) : (
                 <div className="border border-primary rounded bg-accent p-6 max-w-3xl">
@@ -656,7 +677,54 @@ const TALKS: { videoId: string; title: string; byline: string }[] = [
     },
 ]
 
+function TalkCard({ talk }: { talk: (typeof TALKS)[number] }) {
+    return (
+        <div className="h-full border border-primary rounded bg-accent overflow-hidden flex flex-col">
+            <div className="relative aspect-video shrink-0 bg-primary">
+                <iframe
+                    src={`https://www.youtube-nocookie.com/embed/${talk.videoId}`}
+                    title={talk.title}
+                    className="absolute inset-0 w-full h-full"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    loading="lazy"
+                    frameBorder="0"
+                />
+            </div>
+            <div className="p-4 flex flex-col flex-1">
+                <h3 className="text-base font-bold m-0 mb-2 leading-snug line-clamp-3 min-h-[4.125rem]">
+                    {talk.title}
+                </h3>
+                <div className="mt-auto flex items-center gap-2 text-sm text-secondary">
+                    <span className="truncate">{talk.byline}</span>
+                    <span className="ml-auto shrink-0">Talk</span>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+type FeedItem = { key: string; element: React.ReactNode }
+
+// Interleave a talk video after every two posts, so recordings read as part of the feed
+const buildFeed = (posts: ResearchPost[]): FeedItem[] => {
+    const feed: FeedItem[] = []
+    const talks = [...TALKS]
+    posts.forEach((post, index) => {
+        feed.push({ key: post.id, element: <PostCard post={post} /> })
+        if ((index + 1) % 2 === 0 && talks.length > 0) {
+            const talk = talks.shift() as (typeof TALKS)[number]
+            feed.push({ key: talk.videoId, element: <TalkCard talk={talk} /> })
+        }
+    })
+    talks.forEach((talk) => feed.push({ key: talk.videoId, element: <TalkCard talk={talk} /> }))
+    return feed
+}
+
 function ResearchPostsSection({ posts }: { posts: ResearchPost[] }) {
+    const feed = buildFeed(posts)
+    const isCarousel = feed.length > 6
+
     return (
         <section className="mb-12 px-4 @xl:px-8">
             <SectionHeader
@@ -665,11 +733,21 @@ function ResearchPostsSection({ posts }: { posts: ResearchPost[] }) {
                 title="Research in the open"
                 subtitle="We publish what we learn as we go – the big wins, the disastrous errors, the cancelled projects we gave up on along the way. We're not here just to share the glamorous bits."
             />
-            <div className="grid @md:grid-cols-2 @xl:grid-cols-3 auto-rows-fr gap-4 mb-6">
-                {posts.map((post) => (
-                    <PostCard key={post.id} post={post} />
-                ))}
-            </div>
+            {isCarousel ? (
+                <div className="flex gap-4 mb-6 snap-x overflow-x-auto overflow-y-hidden pb-2 -mx-4 px-4 @xl:-mx-8 @xl:px-8">
+                    {feed.map((item) => (
+                        <div key={item.key} className="w-72 @2xl:w-80 shrink-0 snap-start">
+                            {item.element}
+                        </div>
+                    ))}
+                </div>
+            ) : (
+                <div className="grid @md:grid-cols-2 @xl:grid-cols-3 auto-rows-fr gap-4 mb-6">
+                    {feed.map((item) => (
+                        <React.Fragment key={item.key}>{item.element}</React.Fragment>
+                    ))}
+                </div>
+            )}
             <OSButton
                 asLink
                 to="/blog/tags/research"
@@ -680,29 +758,6 @@ function ResearchPostsSection({ posts }: { posts: ResearchPost[] }) {
             >
                 View all research posts
             </OSButton>
-
-            <h3 className="text-base font-bold mt-8 mb-3">Prefer to watch?</h3>
-            <div className="grid @md:grid-cols-2 @2xl:grid-cols-3 gap-4">
-                {TALKS.map((talk) => (
-                    <div key={talk.videoId} className="border border-primary rounded bg-accent overflow-hidden">
-                        <div className="aspect-video bg-primary">
-                            <iframe
-                                src={`https://www.youtube-nocookie.com/embed/${talk.videoId}`}
-                                title={talk.title}
-                                className="w-full h-full"
-                                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen
-                                loading="lazy"
-                                frameBorder="0"
-                            />
-                        </div>
-                        <div className="p-3">
-                            <h4 className="text-sm font-bold m-0 leading-snug">{talk.title}</h4>
-                            <p className="text-sm text-secondary m-0 mt-0.5">{talk.byline}</p>
-                        </div>
-                    </div>
-                ))}
-            </div>
         </section>
     )
 }
