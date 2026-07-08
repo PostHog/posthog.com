@@ -6,12 +6,12 @@ be reused for `/blog` and `/newsletter` by passing a different `folder`.
 
 ## Status
 
-The **sidebar** layout (`variants/SidebarExplorer.tsx`) is live on `/founders` behind an A/B test.
-`src/pages/founders.tsx` renders control (`Hub`) vs test (`SidebarExplorer`) via `RenderInClient` +
-`posthog.getFeatureFlag('founders-hub-redesign')`. The experiment is
-[Founders hub redesign](https://us.posthog.com/project/2/experiments/380435) (project 2, draft),
-primary metric = founders-article click-through. `/founders-preview` always renders the test layout
-for review. Once the test wins, drop the flag branch (keep `SidebarExplorer`) and reuse for `/blog`
+The **sidebar** layout (`variants/SidebarExplorer.tsx`) is live on `/founders` at 100% rollout,
+gated behind a boolean kill-switch flag rather than an A/B test. `src/pages/founders.tsx` renders
+the new layout by default via `RenderInClient` + `posthog.isFeatureEnabled('founders-hub-redesign')`,
+falling back to the old `Hub` only when that flag is explicitly disabled — see
+[the flag](https://us.posthog.com/project/2/feature_flags/741153) (project 2). Disabling it reverts
+`/founders` to the old hub instantly, no deploy needed. Next: reuse `SidebarExplorer` for `/blog`
 and `/newsletter` by passing a different `folder`.
 
 ## Components

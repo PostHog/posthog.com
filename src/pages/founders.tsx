@@ -35,8 +35,7 @@ export const Sidebar = () => {
     )
 }
 
-// Intro copy for the redesigned (test) layout. Exported so the preview page can reuse it.
-export const foundersIntro = (
+const foundersIntro = (
     <>
         <p>We've curated the best advice to build a successful company.</p>
         <p>
