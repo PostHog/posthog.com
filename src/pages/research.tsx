@@ -29,6 +29,7 @@ import {
     IconNewspaper,
     IconPullRequest,
 } from '@posthog/icons'
+import { useToast } from '../context/Toast'
 import { useEvents, type Event } from './events'
 
 // ─────────────────────────────────────────────
@@ -62,9 +63,25 @@ function SectionHeader({
 // Hero (H1 is a live PostHog experiment: research-page-h1)
 // ─────────────────────────────────────────────
 
-const H1_VARIANTS: Record<'control' | 'test', string> = {
-    control: "If we knew what we were doing, it wouldn't be called research.",
-    test: "We're training models on product data to build software that fixes itself",
+const H1_TEST = "We're training models on product data to build software that fixes itself"
+
+function ControlHeadline() {
+    return (
+        <>
+            We do research that is{' '}
+            <RoughAnnotation type="highlight" color="rgba(48, 164, 108, 0.2)" strokeWidth={1} padding={2} delay={300}>
+                open-source
+            </RoughAnnotation>
+            ,{' '}
+            <RoughAnnotation type="highlight" color="rgba(182, 42, 217, 0.15)" strokeWidth={1} padding={2} delay={700}>
+                responsible
+            </RoughAnnotation>
+            , and{' '}
+            <RoughAnnotation type="underline" color="#F54E00" strokeWidth={2} delay={1100} multiline>
+                helps you build better software
+            </RoughAnnotation>
+        </>
+    )
 }
 
 function HeroSection({ teamCrestUrl }: { teamCrestUrl?: string }) {
@@ -90,7 +107,11 @@ function HeroSection({ teamCrestUrl }: { teamCrestUrl?: string }) {
                     </div>
 
                     <h1 className="text-xl @xl:text-3xl font-bold leading-tight mb-4 !mt-0 max-w-3xl">
-                        <ChoppyReveal wordDelay={45}>{H1_VARIANTS[variant]}</ChoppyReveal>
+                        {variant === 'test' ? (
+                            <ChoppyReveal wordDelay={45}>{H1_TEST}</ChoppyReveal>
+                        ) : (
+                            <ControlHeadline />
+                        )}
                     </h1>
 
                     <div className="inline-flex items-start gap-2 border border-primary rounded bg-accent px-3 py-2 mb-6 max-w-2xl">
@@ -123,10 +144,17 @@ function HeroSection({ teamCrestUrl }: { teamCrestUrl?: string }) {
                             <sup className="font-semibold text-secondary">[1]</sup>
                         </p>
                         <p>
-                            Some of this work is genuinely novel, extending earlier research with techniques like a
-                            multi-axis RoPE built on additive Euler angles. And we believe useful research shouldn't
-                            happen behind closed doors: our code is open source, we publish findings as we go, and the
-                            work is headed to arXiv and major ML conferences, beginning with our first pretraining run.
+                            We believe useful research shouldn't happen behind closed doors: our code is open source
+                            where possible, we publish findings as we go, and the work is headed to arXiv and major ML
+                            conferences. When we release something based on research, our{' '}
+                            <Link
+                                to="/handbook/engineering/feature-pricing"
+                                state={{ newWindow: true }}
+                                className="underline"
+                            >
+                                pricing principles
+                            </Link>{' '}
+                            always apply.
                         </p>
                         <p className="text-xs text-secondary font-mono border-t border-primary pt-2 mt-4 max-w-xl">
                             [1] Hawkins, J. (2026).{' '}
@@ -164,17 +192,126 @@ function HeroSection({ teamCrestUrl }: { teamCrestUrl?: string }) {
 // ─────────────────────────────────────────────
 
 // Paste new publications here as they're released – they render automatically.
-// Example:
-// {
-//     title: 'A multi-axis rotary position embedding for session data',
-//     authors: 'Waltz, N., et al.',
-//     venue: 'arXiv preprint',
-//     year: '2026',
-//     url: 'https://arxiv.org/abs/0000.00000',
-// }
-const PUBLICATIONS: { title: string; authors?: string; venue?: string; year?: string; url: string }[] = []
+// Easiest: just the arXiv ID, and title/authors/year are fetched from the arXiv API:
+//     { arxivId: '2501.00000' }
+// Or provide everything yourself (required for non-arXiv venues):
+//     {
+//         title: 'A multi-axis rotary position embedding for session data',
+//         authors: 'Waltz, N., et al.',
+//         venue: 'arXiv preprint',
+//         year: '2026',
+//         url: 'https://arxiv.org/abs/2501.00000',
+//     }
+type Publication = {
+    arxivId?: string
+    title?: string
+    authors?: string
+    venue?: string
+    year?: string
+    url?: string
+}
+
+const PUBLICATIONS: Publication[] = []
+
+type ResolvedPublication = Required<Pick<Publication, 'title' | 'url'>> & Publication
+
+const resolvePublication = (paper: Publication): ResolvedPublication => ({
+    ...paper,
+    title: paper.title ?? (paper.arxivId ? `arXiv:${paper.arxivId}` : 'Untitled'),
+    url: paper.url ?? `https://arxiv.org/abs/${paper.arxivId}`,
+    venue: paper.venue ?? (paper.arxivId ? 'arXiv preprint' : undefined),
+})
+
+const toBibtex = (paper: ResolvedPublication): string => {
+    const firstWord = (paper.title.split(/\s+/)[0] || 'paper').toLowerCase().replace(/[^a-z0-9]/g, '')
+    const key = `posthog${paper.year ?? ''}${firstWord}`
+    const fields = [
+        `  title = {${paper.title}}`,
+        paper.authors ? `  author = {${paper.authors}}` : null,
+        paper.year ? `  year = {${paper.year}}` : null,
+        paper.arxivId ? `  eprint = {${paper.arxivId}}` : null,
+        paper.arxivId ? `  archivePrefix = {arXiv}` : null,
+        !paper.arxivId && paper.venue ? `  journal = {${paper.venue}}` : null,
+        `  url = {${paper.url}}`,
+    ].filter(Boolean)
+    return `@${paper.arxivId ? 'misc' : 'article'}{${key},\n${fields.join(',\n')}\n}`
+}
+
+// Fetches title/authors/year for entries that only provide an arXiv ID
+const usePublications = (): ResolvedPublication[] => {
+    const [publications, setPublications] = useState<ResolvedPublication[]>(PUBLICATIONS.map(resolvePublication))
+
+    useEffect(() => {
+        const pendingIds = PUBLICATIONS.filter((paper) => paper.arxivId && !paper.title).map(
+            (paper) => paper.arxivId as string
+        )
+        if (pendingIds.length === 0) return
+
+        fetch(`https://export.arxiv.org/api/query?id_list=${pendingIds.join(',')}`)
+            .then((response) => (response.ok ? response.text() : Promise.reject(new Error(response.statusText))))
+            .then((xml) => {
+                const doc = new DOMParser().parseFromString(xml, 'application/xml')
+                const metadataById: Record<string, Partial<Publication>> = {}
+                doc.querySelectorAll('entry').forEach((entry) => {
+                    const id = entry.querySelector('id')?.textContent?.match(/abs\/([^v]+)/)?.[1]
+                    if (!id) return
+                    metadataById[id] = {
+                        title: entry.querySelector('title')?.textContent?.replace(/\s+/g, ' ').trim(),
+                        authors: Array.from(entry.querySelectorAll('author > name'))
+                            .map((name) => name.textContent)
+                            .filter(Boolean)
+                            .join(', '),
+                        year: entry.querySelector('published')?.textContent?.slice(0, 4),
+                    }
+                })
+                setPublications(
+                    PUBLICATIONS.map((paper) =>
+                        resolvePublication({
+                            ...(paper.arxivId ? metadataById[paper.arxivId] : undefined),
+                            ...paper,
+                        })
+                    )
+                )
+            })
+            .catch(() => {
+                // Keep the fallback rendering (arXiv ID as title, link still works)
+            })
+    }, [])
+
+    return publications
+}
+
+function PublicationCard({ paper, index }: { paper: ResolvedPublication; index: number }) {
+    const { addToast } = useToast()
+
+    const copyCitation = () => {
+        navigator.clipboard
+            .writeText(toBibtex(paper))
+            .then(() => addToast({ title: 'Citation copied', description: 'BibTeX entry copied to your clipboard.' }))
+            .catch(() => addToast({ title: 'Copy failed', description: 'Select and copy manually.', error: true }))
+    }
+
+    return (
+        <div className="flex items-start gap-3 border border-primary rounded bg-accent p-4 transition-all duration-150 hover:border-purple hover:shadow-md">
+            <span className="font-mono text-sm text-secondary shrink-0 pt-0.5">[{index + 1}]</span>
+            <span className="min-w-0 flex-1">
+                <Link to={paper.url} external className="font-bold text-primary">
+                    {paper.title}
+                </Link>
+                <span className="block text-sm text-secondary font-mono mt-0.5">
+                    {[paper.authors, paper.venue, paper.year].filter(Boolean).join(' · ')}
+                </span>
+            </span>
+            <OSButton size="sm" variant="secondary" onClick={copyCitation} tooltip="Copy BibTeX citation">
+                Cite
+            </OSButton>
+        </div>
+    )
+}
 
 function PublicationsSection() {
+    const publications = usePublications()
+
     return (
         <section className="mb-12 px-4 @xl:px-8">
             <SectionHeader
@@ -184,23 +321,10 @@ function PublicationsSection() {
                 subtitle="Papers, preprints, and technical reports the team has published or contributed to. Everything we release is linked here."
             />
 
-            {PUBLICATIONS.length > 0 ? (
+            {publications.length > 0 ? (
                 <div className="max-w-3xl space-y-3">
-                    {PUBLICATIONS.map((paper, index) => (
-                        <Link
-                            key={paper.url}
-                            to={paper.url}
-                            external
-                            className="group flex gap-3 border border-primary rounded bg-accent p-4 no-underline text-primary transition-all duration-150 hover:border-purple hover:-translate-y-0.5 hover:shadow-md"
-                        >
-                            <span className="font-mono text-sm text-secondary shrink-0">[{index + 1}]</span>
-                            <span className="min-w-0">
-                                <span className="block font-bold group-hover:underline">{paper.title}</span>
-                                <span className="block text-sm text-secondary font-mono mt-0.5">
-                                    {[paper.authors, paper.venue, paper.year].filter(Boolean).join(' · ')}
-                                </span>
-                            </span>
-                        </Link>
+                    {publications.map((paper, index) => (
+                        <PublicationCard key={paper.url} paper={paper} index={index} />
                     ))}
                 </div>
             ) : (
@@ -518,7 +642,7 @@ function ResearchPostsSection({ posts }: { posts: ResearchPost[] }) {
                 sticker={StickerBulb}
                 kicker="Blog"
                 title="Research in the open"
-                subtitle="We publish what we learn as we go – the big wins, the disastrous errors, the cancelled projects we gave up on along the way."
+                subtitle="We publish what we learn as we go – the big wins, the disastrous errors, the cancelled projects we gave up on along the way. We're not here just to share the glamorous bits."
             />
             <div className="grid @md:grid-cols-2 @xl:grid-cols-3 auto-rows-fr gap-4 mb-6">
                 {posts.map((post) => (
