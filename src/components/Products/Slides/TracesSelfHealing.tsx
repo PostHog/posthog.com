@@ -55,6 +55,7 @@ const steps: {
         activeText: 'text-white',
         progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
         copy: 'The agent fixes the exact query it located and opens a pull request, wired up with the instrumentation to measure whether it worked.',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Mock_5b8cf42dcd.png',
     },
     {
         value: 'merge',
