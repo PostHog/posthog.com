@@ -55,7 +55,7 @@ const steps: {
         activeText: 'text-white',
         progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
         copy: 'The agent fixes the exact query it located and opens a pull request, wired up with the instrumentation to measure whether it worked.',
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Mock_5b8cf42dcd.png',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Mock_1_8c4240dc83.png',
     },
     {
         value: 'merge',
@@ -64,6 +64,7 @@ const steps: {
         activeText: 'text-black',
         progressBar: 'bg-black/70 shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
         copy: 'You review the diff in your Inbox and hit merge. Nothing ships until you do.',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Merged_Mock_1_5b9cf8f4b5.png',
     },
 ]
 
