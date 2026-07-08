@@ -28,7 +28,7 @@ Whatever brought you here, this guide compares the best LangSmith alternatives, 
 - **Founded:** 2020
 - **Similar to:** Langfuse, Braintrust
 - **Typical users:** Engineers and product teams building AI-powered products
-- **Typical customers:** Mid-size B2Bs and startups
+- **Typical customers:** Mid-size B2Bs and startups – customers include Supabase, Lovable, ElevenLabs, and more.
 
 ![PostHog AI Observability](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2026_06_22_at_13_19_01_2x_acc4617c50.png)
 
@@ -127,7 +127,7 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 - **Founded:** 2023
 - **Most similar to:** LangSmith
 - **Typical users:** Engineers and AI teams building and debugging LLM applications
-- **Typical customers:** Startups and mid-size companies shipping LLM features to production
+- **Typical customers:** Startups and mid-size companies shipping LLM features to production – customers include Juicebox.ai, Twilio, Circleback, and Canva
 
 ![Langfuse](https://res.cloudinary.com/dmukukwp6/image/upload/langfuse_92ec8c1295.png)
 
@@ -207,7 +207,7 @@ According to Langfuse customer stories, companies use Langfuse because:
 
 - **It helps teams iterate faster:** Cresta says Langfuse makes it easier to test, learn, and improve AI agents, speeding up iteration on LLM behavior.
 
-- **It can reduce operational costs:** SumUp reports saving 30% of external BPO costs by deflecting 50% of support conversations to AI.
+- **It can reduce operational costs:** SumUp reports saving 30% of external BPO (Business Process Outsourcing) costs by deflecting 50% of support conversations to AI.
 
 > #### Bottom line
 >
@@ -611,12 +611,37 @@ The two bill differently: LangSmith charges per trace (one per user request, reg
 
 Here's what monthly volumes cost, assuming a 5-person team (LangSmith Plus at $195/month in seats, 10K traces included, $2.50 per 1K base trace overage) versus PostHog ($6 per 100K events after 100K free):
 
-| Requests/month | LangSmith (5 seats, base retention) | PostHog (~6 events/request) |
-| --- | --- | --- |
-| 100K | ~$420 | ~$30 |
-| 500K | ~$1,420 | ~$174 |
-| 1M | ~$2,670 | ~$354 |
-| 5M | ~$12,670 | ~$1,794 |
+<table>
+  <thead>
+    <tr>
+      <th>Requests/month</th>
+      <th>LangSmith (5 seats, base retention)</th>
+      <th>PostHog (~6 events/request)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>100K</td>
+      <td>~$420</td>
+      <td>~$30</td>
+    </tr>
+    <tr>
+      <td>500K</td>
+      <td>~$1,420</td>
+      <td>~$174</td>
+    </tr>
+    <tr>
+      <td>1M</td>
+      <td>~$2,670</td>
+      <td>~$354</td>
+    </tr>
+    <tr>
+      <td>5M</td>
+      <td>~$12,670</td>
+      <td>~$1,794</td>
+    </tr>
+  </tbody>
+</table>
 
 Three things drive the gap. LangSmith's per-request rate is higher ($2.50 per 1K traces versus roughly $0.36 per 1K requests' worth of PostHog events). Seats add a fixed floor that grows with your team – a 10-person team starts at $390/month before a single trace. And LangSmith's base rate only buys 14-day retention; extended retention (400 days) doubles the trace rate to $5 per 1K, while PostHog's free plan retains data for a year.
 
