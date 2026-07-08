@@ -346,7 +346,7 @@ export default function MediaPlayer({ videoId, source = 'youtube', startTime = 0
                             {source === 'youtube' ? (
                                 <div id={`video-player-iframe-${videoId}`} className="rounded w-full aspect-video" />
                             ) : (
-                                <div ref={containerRef} className="rounded w-full aspect-video" />
+                                <div ref={containerRef} className="w-full aspect-video overflow-hidden" />
                             )}
                         </div>
 
