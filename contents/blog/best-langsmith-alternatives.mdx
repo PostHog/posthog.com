@@ -613,13 +613,14 @@ Here's what monthly volumes cost, assuming a 5-person team (LangSmith Plus at $1
 
 This table is great, but broken for me. You might need to use HTML components to get it working.  
 
-<table>
-<tr><th>Requests/month</th><th>LangSmith (5 seats, base retention)</th><th>PostHog (about 6 events/request)</th></tr>
-<tr><td>100K</td><td>$420</td><td>$30</td></tr>
-<tr><td>500K</td><td>$1,420</td><td>$174</td></tr>
-<tr><td>1M</td><td>$2,670</td><td>$354</td></tr>
-<tr><td>5M</td><td>$12,670</td><td>$1,794</td></tr>
-</table>
+This table is great, but broken for me. You might need to use HTML components to get it working.  
+
+| Requests/month | LangSmith (5 seats, base retention) | PostHog (~6 events/request) |
+| --- | --- | --- |
+| 100K | ~$420 | ~$30 |
+| 500K | ~$1,420 | ~$174 |
+| 1M | ~$2,670 | ~$354 |
+| 5M | ~$12,670 | ~$1,794 |
 
 Three things drive the gap. LangSmith's per-request rate is higher ($2.50 per 1K traces versus roughly $0.36 per 1K requests' worth of PostHog events). Seats add a fixed floor that grows with your team – a 10-person team starts at $390/month before a single trace. And LangSmith's base rate only buys 14-day retention; extended retention (400 days) doubles the trace rate to $5 per 1K, while PostHog's free plan retains data for a year.
 
