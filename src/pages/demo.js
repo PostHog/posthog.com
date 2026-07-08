@@ -6,7 +6,6 @@ import Layout from 'components/Layout'
 import { SignupCTA } from 'components/SignupCTA'
 import { StaticImage } from 'gatsby-plugin-image'
 import { Link } from 'gatsby'
-import WistiaEmbed from 'components/WistiaEmbed'
 
 export default function BookADemo() {
     return (
@@ -40,9 +39,10 @@ export default function BookADemo() {
                         </CallToAction>
                     </div>
                 </div>
-                <div className="rounded shadow-xl overflow-hidden order-2 md:order-3">
-                    <WistiaEmbed mediaId="nnp7k9r717" />
-                </div>
+                <iframe
+                    src="https://www.youtube-nocookie.com/embed/1FZji2L-LmM"
+                    className="rounded shadow-xl order-2 md:order-3"
+                />
             </section>
 
             <section className="px-4 lg:pb-12 py-4 max-w-6xl mx-auto flex flex-col">
