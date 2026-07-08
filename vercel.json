@@ -29,6 +29,7 @@
         }
     ],
     "rewrites": [
+        { "source": "/favicon.ico", "destination": "/favicon-32x32.png" },
         {
             "source": "/docs/:path*/",
             "has": [{ "type": "header", "key": "accept", "value": "(?:.*text/markdown.*)" }],
