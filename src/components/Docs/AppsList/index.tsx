@@ -8,6 +8,7 @@ const docsUrlOverrides: Record<string, string> = {
     data_warehouse: '/docs/data-warehouse',
     realtime_destinations: '/docs/cdp/destinations',
     posthog_ai: '/docs/posthog-ai',
+    inbox: '/docs/self-driving/inbox',
 }
 
 const docsUrlFor = (product: any): string => docsUrlOverrides[product.handle] || `/docs/${product.slug}`

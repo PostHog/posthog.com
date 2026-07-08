@@ -16,10 +16,10 @@ This week is about getting set up and learning how we talk about PostHog. You'll
 
 **Focus on:**
 
-- Setting up the day-to-day tools you'll be using - Vitally, Gong, Slack, Metabase. See [sales and CS tools](/handbook/growth/sales/sales-and-cs-tools) for set-up, and start copying other CSM's views and automations (or even better, build your own!)
+- Setting up the day-to-day tools you'll be using - Vitally, our [canonical call stack](/handbook/growth/sales/sales-and-cs-tools#our-canonical-call-stack) (Zoom, Gong, and Granola), Slack, and Metabase. See [sales and CS tools](/handbook/growth/sales/sales-and-cs-tools) for set-up, and start copying other CSM's views and automations (or even better, build your own!)
 - Reading the [CS](/handbook/cs-and-onboarding/customer-success) and [sales](/handbook/growth/sales/) sections of the handbook.
 - Preparing your PostHog demo.
-- Picking a recent customer call on Gong/BuildBetter to watch, and asking team members to add you to as many of their live calls as you can - the goal is exposure to how we talk about PostHog and how we talk to customers.
+- Picking a recent customer call on Gong to watch, and asking team members to add you to as many of their live calls as you can - the goal is exposure to how we talk about PostHog and how we talk to customers.
 - Nailing the product fundamentals - use the [framework](#learning-posthog) as a guide and work through the [onboarding exercise](/handbook/cs-and-onboarding/new-hire-onboarding-exercise). Use the demo environments or your own PostHog project to test different features and use cases.
   - [Events](/docs/data/events), [persons](/docs/data/persons), and [product analytics](/docs/product-analytics) are the foundation for everything else - start here.
   - [Session replay](/docs/session-replay), [feature flags](/docs/feature-flags), and [experiments](/docs/experiments) are the next priority. They're PostHog's most mature products with the most overlap with everything else. But let your book guide you - if your customers are all-in on [error tracking](/docs/error-tracking), [logs](/docs/logs), or [AI observability](/docs/ai-observability), that's an opportunity to go deep early.

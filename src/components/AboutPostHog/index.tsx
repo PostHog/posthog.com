@@ -8,15 +8,15 @@ import { Blockquote } from 'components/BlockQuote'
 export default function AboutPostHog(): JSX.Element {
     return (
         <Blockquote>
-            PostHog is an all-in-one developer platform for building successful products. We provide{' '}
-            <a href="/product-analytics">product analytics</a>, <a href="/web-analytics">web analytics</a>,{' '}
-            <a href="/session-replay">session replay</a>, <a href="/error-tracking">error tracking</a>,{' '}
-            <a href="/feature-flags">feature flags</a>, <a href="/experiments">experiments</a>,{' '}
-            <a href="/surveys">surveys</a>, <a href="/ai-observability">AI Observability</a>, <a href="/logs">logs</a>,{' '}
-            <a href="/workflows">workflows</a>, <a href="/endpoints">endpoints</a>,{' '}
-            <a href="/data-warehouse">data warehouse</a>, <a href="/cdp">CDP</a>, and an{' '}
-            <a href="/ai">AI product assistant</a> to help debug your code, ship features faster, and keep all your
-            usage and customer data in one stack.
+            PostHog is the leading platform for building self-driving products. With a full suite of developer tools –{' '}
+            <a href="/ai-observability">AI observability</a>, <a href="/product-analytics">product analytics</a>,{' '}
+            <a href="/session-replay">session replay</a>, <a href="/feature-flags">feature flags</a>,{' '}
+            <a href="/experiments">experiments</a>, <a href="/error-tracking">error tracking</a>,{' '}
+            <a href="/logs">logs</a>, and more – PostHog captures all the context agents need to diagnose problems,
+            uncover opportunities, and ship fixes. A <a href="/data-stack">data warehouse</a> and <a href="/cdp">CDP</a>{' '}
+            tie it all together, unifying that context into one source agents can read across. You can steer it all from{' '}
+            <a href="/slack">Slack</a>, <a href="/ai">the web app</a>, the desktop (<a href="/code">PostHog Code</a>),
+            or your own editor via <a href="/mcp">the MCP</a>.
         </Blockquote>
     )
 }

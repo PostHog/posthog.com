@@ -17,7 +17,13 @@ interface SEOProps {
     updateWindowTitle?: boolean
     lang?: string
     languageAlternates?: LanguageAlternate[]
+    /** schema.org JSON-LD object(s) emitted as <script type="application/ld+json"> */
+    structuredData?: Record<string, any> | Record<string, any>[]
+    documentRkey?: string
 }
+
+// PostHog's AT Protocol identity, used for Standard.site discovery links
+const STANDARD_SITE_DID = 'did:plc:go7eemqz4y5nhonj4kg5w2p6'
 
 export type LanguageAlternate = {
     hrefLang: string
@@ -35,6 +41,8 @@ export const SEO = ({
     updateWindowTitle = true,
     lang,
     languageAlternates,
+    structuredData,
+    documentRkey,
 }: SEOProps): JSX.Element => {
     const { appWindow } = useWindow()
     const { setWindowTitle } = useApp()
@@ -43,6 +51,12 @@ export const SEO = ({
 
     const { defaultTitle, titleTemplate, defaultDescription, siteUrl, defaultImage, twitterUsername } =
         site.siteMetadata
+
+    const structuredDataItems = structuredData
+        ? Array.isArray(structuredData)
+            ? structuredData
+            : [structuredData]
+        : []
 
     const seo = {
         title: title || defaultTitle,
@@ -67,6 +81,20 @@ export const SEO = ({
             {seo.description && <meta name="description" content={seo.description} />}
             {seo.image && <meta name="image" content={seo.image} />}
             {<link rel="canonical" href={canonicalUrl ? canonicalUrl : seo.url} />}
+            {/* Standard.site publication discovery hint for the blog */}
+            {pathname?.startsWith('/blog') && (
+                <link
+                    rel="site.standard.publication"
+                    href={`at://${STANDARD_SITE_DID}/site.standard.publication/blog`}
+                />
+            )}
+            {/* Standard.site document record for this blog post */}
+            {documentRkey && (
+                <link
+                    rel="site.standard.document"
+                    href={`at://${STANDARD_SITE_DID}/site.standard.document/${documentRkey}`}
+                />
+            )}
             {languageAlternates?.map(({ hrefLang, href }) => (
                 <link
                     key={hrefLang}
@@ -91,11 +119,78 @@ export const SEO = ({
             {seo.description && <meta name="twitter:description" content={seo.description} />}
             {seo.image && <meta name="twitter:image" content={seo.image} />}
             <meta name="twitter:site" content="@PostHog" />
+
+            {structuredDataItems.map((item, i) => (
+                <script key={`ld-${i}`} type="application/ld+json">
+                    {JSON.stringify(item)}
+                </script>
+            ))}
         </Helmet>
     )
 }
 
 export default SEO
+
+/**
+ * Build schema.org JSON-LD for a product/app page: a SoftwareApplication, the PostHog
+ * Organization, and (optionally) a FAQPage. Pass the result to <SEO structuredData={...} />.
+ * FAQ entries without an `answer` are skipped, so FAQPage only renders once answers exist.
+ */
+export const buildProductStructuredData = ({
+    name,
+    description,
+    slug,
+    operatingSystem = 'Web',
+    faq,
+}: {
+    name: string
+    description?: string
+    slug: string
+    operatingSystem?: string
+    faq?: { question?: string; answer?: string }[]
+}): Record<string, any>[] => {
+    const items: Record<string, any>[] = [
+        {
+            '@context': 'https://schema.org',
+            '@type': 'SoftwareApplication',
+            name,
+            description,
+            applicationCategory: 'BusinessApplication',
+            operatingSystem,
+            url: `https://posthog.com/${(slug || '').replace(/^\//, '')}`,
+            offers: {
+                '@type': 'Offer',
+                price: '0',
+                priceCurrency: 'USD',
+                description: 'Generous free tier, then usage-based pricing',
+            },
+            publisher: { '@type': 'Organization', name: 'PostHog', url: 'https://posthog.com' },
+        },
+        {
+            '@context': 'https://schema.org',
+            '@type': 'Organization',
+            name: 'PostHog',
+            url: 'https://posthog.com',
+            logo: 'https://posthog.com/images/og/default.png',
+            sameAs: [
+                'https://twitter.com/PostHog',
+                'https://github.com/PostHog',
+                'https://www.linkedin.com/company/posthog',
+            ],
+        },
+    ]
+    const faqEntities = (faq || [])
+        .filter((q) => q && q.question && q.answer)
+        .map((q) => ({
+            '@type': 'Question',
+            name: q.question,
+            acceptedAnswer: { '@type': 'Answer', text: q.answer },
+        }))
+    if (faqEntities.length) {
+        items.push({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqEntities })
+    }
+    return items
+}
 
 const query = graphql`
     query SEO {

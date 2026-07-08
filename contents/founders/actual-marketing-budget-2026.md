@@ -48,7 +48,7 @@ Our typical monthly marketing spend looks like this.
 - Editorial: 3 content marketers + 1 social media manager
 - YouTube: 2 producers + 1 developer advocate
 - Events: 2 events managers
-- Docs & Wizard: 3 context engineers
+- Wizard & Docs: 3 context engineers
 - Demand gen: 1 performance marketer + 1 copywriter
 - Graphics: 3 designers
 - 1 exec who mostly gets in the way

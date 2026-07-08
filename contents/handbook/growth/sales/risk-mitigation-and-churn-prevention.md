@@ -20,7 +20,12 @@ Risk mitigation is about building habits that surface problems before they becom
 
 ### Quarterly account planning
 
-Every AM Managed account should have an Account Plan note created in Vitally once per quarter. You should also review this weekly with your manager.  This forces you to step back and evaluate the account holistically rather than just reacting to whatever's in front of you.
+Every AM Managed account should have an Account Plan note created in Vitally once per quarter. You should also review this regularly with your manager and updated it as needed.  This forces you to step back and evaluate the account holistically rather than just reacting to whatever's in front of you.
+
+The plan can be broken into two parts. Initial writeup and ongoing updates.
+
+#### Initial Writeup
+This happens when you first onboard an account and will change less frequently (every 1 - 3 quarters) and can largely remain stable.
 
 **Title format:** `Q[X] Account Plan - [Company Name]`
 
@@ -44,30 +49,16 @@ Use the Account Plan template in Vitally, which auto-populates key fields from t
 
 **Stakeholders and users**
 
-- Admin emails and total user count
-- Percentage of active users (30 days)
 - Key contacts with their priorities, goals, and preferred communication
 - Multithreading status: do we have two-way dialogue with technical stakeholders, budget holders, and end-users?
-- Record of multithreading attempts and progress
 
-**Current usage and cross-sell**
+#### Ongoing updates
+1. What did you do with them last week.
+2. Any risks to flag or opportunities you are working
+3. Who are you talking to
+4. What are you working on with them this week
 
-- Products adopted (Product Analytics, Feature Flags, Group Analytics, Error Tracking, Session Replay, Surveys, Data Warehouse)
-- Usage notes on how they're actually using each product
-- Cross-sell opportunities with specific use cases, next steps, and relevant content to share
-- Optimization opportunities for existing products (underused features, configuration improvements)
-
-**Risks**
-
-- Document each risk with: the challenge, what's at stake, plan of action, and next key date
-
-**Action items**
-
-- Multithreading: who, why, progress, anyone at PostHog who can help
-- Finding new opportunity: what are you doing to find new revenue?
-- Mitigating risk: what are you doing to uncover and mitigate risk?
-
-If you can't fill out most of this template, that's a signal you need to dig deeper into the account. An incomplete account plan usually means incomplete understanding of the customer.
+This can largely mirror what goes in our sprint planning, and shouldn't be duplicate work.
 
 ### Early warning signals
 

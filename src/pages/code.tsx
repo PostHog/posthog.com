@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import SEO from 'components/seo'
+import SEO, { buildProductStructuredData } from 'components/seo'
 import Editor from 'components/Editor'
 import { IconArrowUpRight, IconCheck, IconFlask, IconToggle, IconTrends, IconWarning } from '@posthog/icons'
 import OSButton from 'components/OSButton'
@@ -1626,6 +1626,13 @@ export default function CodePage() {
             <SEO
                 title="PostHog Code"
                 description="PostHog Code uses signals from production data to diagnose issues and generate pull requests – before you even know there's a problem."
+                structuredData={buildProductStructuredData({
+                    name: 'PostHog Code',
+                    description:
+                        "PostHog Code uses signals from production data to diagnose issues and generate pull requests – before you even know there's a problem.",
+                    slug: 'code',
+                    operatingSystem: 'macOS, Windows, Linux',
+                })}
             />
             <Editor slug="/code" maxWidth="100%" hasPadding={false} disableFormatting>
                 <div className="@container not-prose font-rounded">

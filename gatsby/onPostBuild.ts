@@ -15,6 +15,8 @@ import {
     generateLlmsTxt,
     generateSdkReferencesMarkdown,
     generatePricingMd,
+    generatePlatformMd,
+    generateProductPagesMarkdown,
 } from './rawMarkdownUtils'
 import { MARKDOWN_CONTENT_PATHS } from '../src/constants'
 import { SdkReferenceData } from '../src/templates/sdk/SdkReference.js'
@@ -23,6 +25,7 @@ import docsHandbookTemplate from '../src/templates/OG/docs-handbook.js'
 import customerTemplate from '../src/templates/OG/customer.js'
 import jobTemplate from '../src/templates/OG/job.js'
 import { flattenMenu } from './utils'
+import { syncStandardSiteDocuments } from './standardSite'
 
 const limit = pLimit(10)
 
@@ -594,6 +597,15 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter
     // Only include docs pages in llms.txt (not handbook)
     const docsPages = filteredPages.filter((page) => page.fields.slug.startsWith('/docs'))
     generateLlmsTxt(docsPages)
+
+    // Generate the self-driving platform overview + per-product markdown for LLMs/agents
+    generatePlatformMd()
+    generateProductPagesMarkdown()
+
+    // Publish/update Standard.site document records for blog posts.
+    // Self-gates on env (AWS_CODEPIPELINE / STANDARD_SITE_SYNC) and BSKY_APP_PASSWORD; safe no-op otherwise.
+    // Placed before the prod-only return so STANDARD_SITE_SYNC=true can drive a local/dry run.
+    await syncStandardSiteDocuments(graphql)
 
     if (process.env.AWS_CODEPIPELINE !== 'true') {
         console.log('Skipping onPostBuild tasks')

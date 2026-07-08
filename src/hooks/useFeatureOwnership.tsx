@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react'
 import { PrivateLink } from '../components/PrivateLink'
+import TeamMember from '../components/TeamMember'
 
 export interface Feature {
     slug: string
@@ -170,7 +171,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'embedding-worker': {
         feature: 'Embedding worker',
-        owner: ['signals'],
+        owner: ['self-driving'],
         label: false,
     },
     'early-access-features': {
@@ -197,7 +198,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'github-integration': {
         feature: 'GitHub integration',
-        owner: ['signals'],
+        owner: ['self-driving'],
     },
     'group-analytics': {
         feature: 'Group analytics',
@@ -249,9 +250,14 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Marketing analytics',
         owner: ['web-analytics'],
     },
+    'mcp-analytics': {
+        feature: 'MCP analytics',
+        owner: ['mcp-analytics'],
+        label: 'feature/mcp-analytics',
+    },
     'mcp-server': {
         feature: 'MCP server',
-        owner: ['signals'],
+        owner: ['self-driving'],
         label: 'feature/mcp',
     },
     notebooks: {
@@ -318,12 +324,12 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'PostHog.com': {
         feature: 'PostHog.com',
-        owner: ['brand'],
+        owner: ['website'],
         label: false,
     },
     'posthog-ai': {
         feature: 'PostHog AI platform',
-        owner: ['signals'],
+        owner: ['self-driving'],
         label: 'feature/posthog-ai',
     },
     'posthog-code': {
@@ -335,6 +341,16 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Project homepage',
         owner: ['platform-ux'],
         label: 'feature/home',
+    },
+    'project-secret-api-keys': {
+        feature: 'Project secret API keys',
+        owner: ['platform-features'],
+        notes: (
+            <>
+                <TeamMember name="Jovan Sakovic" /> is the point owner.
+            </>
+        ),
+        label: false,
     },
     'property-filters': {
         feature: 'Property filters',
@@ -403,7 +419,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     security: {
         feature: 'Security',
-        owner: ['infrastructure'],
+        owner: ['security'],
         notes: <>It's every team's job to consider and react to security issues.</>,
     },
     'self-hosting': {
@@ -433,7 +449,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     signals: {
         feature: 'Signals',
-        owner: ['signals'],
+        owner: ['self-driving'],
         label: 'feature/signals',
     },
     signup: {
@@ -443,7 +459,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'slack-app': {
         feature: 'Slack app',
-        owner: ['signals'],
+        owner: ['self-driving'],
         label: 'feature/slack-app',
     },
     settings: {
@@ -537,7 +553,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     wizard: {
         feature: 'Wizard',
-        owner: ['docs-wizard'],
+        owner: ['wizard-and-docs'],
     },
 }
 

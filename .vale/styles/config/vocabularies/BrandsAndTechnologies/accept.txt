@@ -368,6 +368,7 @@ MDX
 MLOps
 \.NET
 Next\.js
+nextjs
 Node\.js
 npm
 Nuxt
