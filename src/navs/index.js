@@ -7257,6 +7257,24 @@ export const docsMenu = {
             ],
         },
         {
+            name: 'Metrics',
+            icon: 'IconTrends',
+            color: 'green',
+            url: '/docs/metrics',
+            description: 'Send OpenTelemetry metrics to PostHog and analyze them.',
+            children: [
+                {
+                    name: 'Metrics',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/metrics',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                },
+            ],
+        },
+        {
             name: 'Distributed tracing',
             icon: 'IconListTree',
             color: 'purple',
