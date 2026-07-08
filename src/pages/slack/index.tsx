@@ -9,6 +9,7 @@ import { Accordion } from 'components/RadixUI/Accordion'
 import TabbedCarousel from 'components/TabbedCarousel'
 import type { TabbedCarouselTab } from 'components/TabbedCarousel'
 import OSTable from 'components/OSTable'
+import WistiaEmbed from 'components/WistiaEmbed'
 import Link from 'components/Link'
 import {
     IconBell,
@@ -705,17 +706,8 @@ export default function SlackAppPage(): JSX.Element {
                         </p>
                     </div>
 
-                    <div className="relative w-full overflow-hidden aspect-video m-0">
-                        <iframe
-                            title="PostHog Slack app"
-                            src="https://www.youtube-nocookie.com/embed/SaVTePqaPeM?rel=0"
-                            className="absolute inset-0 h-full w-full"
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowFullScreen
-                            loading="lazy"
-                            referrerPolicy="strict-origin-when-cross-origin"
-                        />
+                    <div className="rounded overflow-hidden border border-primary not-prose m-0">
+                        <WistiaEmbed mediaId="ifyltgbxid" />
                     </div>
                     <hr className="border-t border-primary m-0 mb-6 mt-6" />
 
