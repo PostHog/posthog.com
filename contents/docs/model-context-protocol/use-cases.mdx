@@ -36,6 +36,23 @@ Triage and fix issues from your editor instead of context-switching to a browser
   outcome="Creates an external reference linking the PostHog issue to a new Jira issue in the specified project."
 />
 
+### Investigate ingestion health
+
+Diagnose why events are missing, dropped, or degraded during ingestion. Useful for debugging instrumentation issues.
+
+<PromptExample
+  prompt="What ingestion warnings has my project received in the last 24 hours?"
+  outcome="Returns recent ingestion issues like events dropped for invalid IDs, merge failures, or size limits."
+/>
+<PromptExample
+  prompt="Show me all error-severity ingestion warnings with sample events."
+  outcome="Filters to critical ingestion problems and includes example events to help debug the root cause."
+/>
+<PromptExample
+  prompt="Why are my person merges failing?"
+  outcome="Queries merge-related warnings explaining why identify or alias calls were rejected."
+/>
+
 ### Explore product analytics
 
 Ask data questions in plain English and get answers backed by a real PostHog query. See the [analytics guide](/docs/product-analytics/build-insights-mcp) for more.
