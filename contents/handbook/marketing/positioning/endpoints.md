@@ -4,6 +4,8 @@ sidebar: Handbook
 showTitle: true
 ---
 
+*For the canonical frame everyone at PostHog uses – the self-driving story and standard description – see [Brand foundations](/handbook/brand/foundations#how-we-describe-posthog).*
+
 ## Elevator pitch
 
 PostHog Endpoints turns any saved insight or SQL query into a stable, authenticated HTTP endpoint. No backend to build, pipeline to maintain, or data engineer needed.
