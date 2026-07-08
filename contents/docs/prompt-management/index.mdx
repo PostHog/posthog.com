@@ -47,7 +47,7 @@ The MCP server provides four prompt management tools:
 | `prompt-list` | List all team prompts with optional name filtering |
 | `prompt-get` | Get a prompt by name, including full content |
 | `prompt-create` | Create a new prompt with a unique name and content |
-| `prompt-update` | Update an existing prompt's content by name |
+| `prompt-update` | Publish a new version of a prompt by name, optionally with a note describing the change |
 
 This enables teams to manage prompts programmatically from agent workflows without using the web UI.
 
@@ -78,6 +78,9 @@ Every prompt change creates a new immutable version. Previous versions are prese
 1. Open a prompt and click **New version**
 2. Make your changes
 3. Click **Publish** — the button shows the number the new version will get, for example **Publish v4**
+4. Review the diff of your changes, optionally add a note describing what changed, and confirm
+
+The note appears alongside the version in the **Version history** sidebar, so you can scan past changes without opening diffs. It can also be set programmatically via the `version_description` field on the publish API and the MCP `prompt-update` tool.
 
 If someone else published a new version while you were editing, publishing fails with a warning. Your edits are preserved in the editor — review them against the new latest version and publish again.
 
@@ -86,7 +89,7 @@ If someone else published a new version while you were editing, publishing fails
 1. Open a prompt and select a version from the **Version history** sidebar
 2. Click **New version** — the editor is prefilled with that version's content
 3. Edit the prompt content if needed
-4. Click **Publish**
+4. Click **Publish** and confirm in the review dialog
 
 This publishes the old content as a new version. The original version remains unchanged.
 

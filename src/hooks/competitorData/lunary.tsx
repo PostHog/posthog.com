@@ -1,5 +1,5 @@
-export const weave = {
-    name: 'Weave',
+export const lunary = {
+    name: 'Lunary',
     products: {
         ai_observability: {
             available: true,
@@ -10,34 +10,41 @@ export const weave = {
                 trace_visualization: true,
                 token_tracking: true,
                 prompt_playground: true,
-                prompt_evaluations: true,
+                prompt_evaluations: 'Basic',
                 alerting: false,
                 error_tracking: true,
-                system_prompts: false,
+                system_prompts: true,
                 clustering: false,
                 trace_summarization: false,
                 llm_translation: false,
+                prompt_management: true,
+                framework_agnostic: true,
+                opentelemetry: true,
                 sentiment_classification: false,
                 privacy_mode: true,
                 agent_tracing: true,
-                prompt_management: 'Basic',
                 evaluation_datasets: true,
-                human_annotation: 'Basic',
-                session_replay: false,
-                product_analytics: false,
+                human_annotation: true,
             },
         },
-        session_replay: {
-            available: false,
+        product_analytics: { 
+            available: false
         },
-        product_analytics: {
-            available: false,
+        session_replay: {
+            available: false
+        },
+        feature_flags: {
+            available: false
         },
     },
-        platform: {
-        deployment: {
-            eu_hosting: true,
-            open_source: false,
+    platform: {
+        pricing: {
+            self_serve: true,
+            free_tier: true,
         },
+            deployment: {
+                open_source: true,
+                eu_hosting: true,
+            },
     },
 }
