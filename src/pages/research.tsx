@@ -120,13 +120,13 @@ function HeroSection({ teamCrestUrl }: { teamCrestUrl?: string }) {
             <div className="inline-flex items-start gap-2 border border-primary rounded bg-accent px-3 py-2 mb-6 max-w-2xl">
                 <IconFlask className="size-5 text-purple shrink-0 mt-0.5" />
                 <p className="text-sm text-secondary m-0">
-                    That headline is a live A/B experiment we're running – you're seeing variant{' '}
-                    <strong className="text-primary">{variant === 'control' ? 'A' : 'B'}</strong>, half of visitors get
-                    the other one, and we're measuring which makes people stick around. Yes, we're{' '}
+                    This headline is a live A/B test – you're seeing variant{' '}
+                    <strong className="text-primary">{variant === 'control' ? 'A' : 'B'}</strong>, and half of visitors
+                    see the other one. We're running it with{' '}
                     <Link to="/experiments" state={{ newWindow: true }} className="underline">
-                        running an experiment
+                        PostHog Experiments
                     </Link>{' '}
-                    on our own research page. How meta.
+                    on our own research page.
                 </p>
             </div>
 
@@ -142,16 +142,21 @@ function HeroSection({ teamCrestUrl }: { teamCrestUrl?: string }) {
                     >
                         ship fixes while you sleep
                     </RoughAnnotation>
-                    , but we can't do that with your standard, off-the-shelf ideas and apps. That's why we're training
-                    our own models, building open source tools, and pursuing all sorts of hare-brained schemes.
-                    <sup className="font-semibold text-secondary">[1]</sup> It's research. It's fine.
+                    . Getting there takes more than off-the-shelf models, so we're training our own – starting with a
+                    foundation model for the data behind session replay.
+                    <sup className="font-semibold text-secondary">[1]</sup>
+                </p>
+                <p>
+                    Some of this work is genuinely novel, extending earlier research with techniques like a multi-axis
+                    RoPE built on additive Euler angles. We're writing it up properly, too: expect papers on arXiv and
+                    submissions to major ML conferences, beginning with our first pretraining run.
                 </p>
                 <p className="text-xs text-secondary font-mono border-t border-primary pt-2 mt-4 max-w-xl">
                     [1] Hawkins, J. (2026).{' '}
                     <Link to="/blog/posthogs-next-chapter" state={{ newWindow: true }} className="underline">
                         "PostHog's next chapter."
                     </Link>{' '}
-                    <em>posthog.com</em>, May 2026. The master plan, in the founder's own words.
+                    <em>posthog.com</em>, May 2026.
                 </p>
             </div>
         </section>
@@ -174,49 +179,47 @@ const ROADMAP_ITEMS: { title: string; description: string; status: RoadmapStatus
     {
         title: 'Data labeling suite',
         description:
-            'Tooling to label anonymized product data, so models learn the difference between "delighted user" and "user rage-clicking the checkout button".',
+            'Tooling to label anonymized product data, so models learn what healthy and broken user sessions actually look like.',
         status: 'in progress',
     },
     {
         title: 'Session replay text renderer',
         description:
-            'Rendering the DOM data behind replays as text a model can read. Session replay, but legible to LLMs at scale.',
+            'Rendering the DOM data behind replays as text a model can read, making replay analysis tractable at scale.',
         status: 'in progress',
     },
     {
         title: 'Write data prep pipeline',
         description:
-            'Anonymizing and normalizing opted-in data before any of it goes near a model. The least glamorous step, and the one we refuse to get wrong.',
+            'Anonymizing and normalizing opted-in data before any of it reaches training. The least glamorous step, and the one we refuse to get wrong.',
         status: 'in progress',
     },
     {
         title: 'Build the sampling pipeline',
         description:
-            'Picking sessions and events that reflect real product usage, not noise. Garbage in, garbage out – so, no garbage.',
+            'Selecting sessions and events that reflect real product usage, so training data quality matches production reality.',
         status: 'up next',
     },
     {
         title: 'Train the Replay encoder model',
         description:
-            'A model trained on the raw data behind session replay, so analyzing 10,000 replays takes seconds instead of taking your afternoon.',
+            'A foundation model pretrained on the raw data behind session replay, using novel techniques like a multi-axis RoPE built on additive Euler angles.',
         status: 'up next',
     },
     {
         title: 'Train the end-to-end agent',
         description:
-            'Agents that predict and simulate user behavior, catch problems before you ship, and hand you a fix instead of a dashboard.',
+            'Agents that predict and simulate user behavior, catch problems before you ship, and propose the fix rather than a dashboard.',
         status: 'help wanted',
     },
     {
         title: 'Build the model observability suite',
-        description:
-            'Dogfooding our own LLM analytics to trace, evaluate, and debug every model we train. Research you can watch happen.',
+        description: 'Using our own LLM analytics to trace, evaluate, and debug every model we train.',
         status: 'in progress',
     },
     {
         title: 'Build an eval dataset',
-        description:
-            'A benchmark of real product problems to score every model iteration against, so progress is provable rather than vibes.',
+        description: 'A benchmark of real product problems, so progress is measurable across every model iteration.',
         status: 'in progress',
     },
 ]
@@ -230,7 +233,7 @@ function StatusStamp({ status, rotate }: { status: RoadmapStatus; rotate: string
                 to="/careers/ai-research-engineer"
                 state={{ newWindow: true }}
                 className={`${base} no-underline transition-transform duration-150 hover:scale-110 hover:rotate-0`}
-                title="Yes, this is a job ad"
+                title="We're hiring for this"
             >
                 Help wanted
             </Link>
@@ -246,7 +249,7 @@ function RoadmapSection() {
                 sticker={StickerMicroscope}
                 kicker="The pipeline"
                 title="What we're researching right now"
-                subtitle="Here are just some of the things the AI Research team is currently thinking about, working on, or begging for help with."
+                subtitle="Some of what the AI Research team is currently working on, in rough order. Each stage of pretraining breaks new ground, and we plan to publish as we go – expect multiple papers and technical reports from this list."
             />
             <div className="grid @lg:grid-cols-2 gap-4">
                 {ROADMAP_ITEMS.map((item, index) => (
@@ -315,7 +318,7 @@ function ShippedSection() {
                 sticker={StickerTerminal}
                 kicker="Live from GitHub"
                 title="Fresh from the lab"
-                subtitle="Merged pull requests from the AI research team, pulled live from GitHub across PostHog's public repos. This is how we know they aren't just sitting around eating ramen like other academics."
+                subtitle="Merged pull requests from the research team, pulled live from GitHub across PostHog's public repos – the work as it lands."
             />
 
             <div className="border border-primary rounded overflow-hidden mb-6 shadow-lg">
@@ -357,11 +360,11 @@ function ShippedSection() {
                     <div className="bg-primary p-6 text-center">
                         <IconPullRequest className="size-8 text-muted mx-auto mb-2" />
                         <p className="font-semibold font-mono text-sm m-0 mb-1">
-                            {prs === null ? '$ fetching merged PRs…' : '$ error 403: GitHub is rate-limiting us. Fair.'}
+                            {prs === null
+                                ? '$ fetching merged PRs…'
+                                : '$ GitHub rate limit reached – try again shortly'}
                         </p>
-                        <p className="text-sm text-secondary m-0">
-                            The work continues regardless – see it at the source.
-                        </p>
+                        <p className="text-sm text-secondary m-0">You can browse the work directly on GitHub.</p>
                     </div>
                 )}
             </div>
@@ -459,7 +462,7 @@ function ResearchPostsSection({ posts }: { posts: ResearchPost[] }) {
         <section className="mb-12 px-4 @xl:px-8">
             <SectionHeader
                 sticker={StickerBulb}
-                kicker="The receipts"
+                kicker="Publications"
                 title="Research in the open"
                 subtitle="We publish what we learn as we go – the big wins, the disastrous errors, the cancelled projects we gave up on along the way."
             />
@@ -520,7 +523,7 @@ function PeopleSection({ teamProfiles, posts }: { teamProfiles: TeamProfile[]; p
             seen.add(author.name.toLowerCase())
             authors.push({
                 name: author.name,
-                role: author.role ?? 'Writes about it',
+                role: author.role ?? 'Author',
                 avatar: author.profile?.avatar?.url,
                 link: author.link_url ?? undefined,
                 external: !!author.link_url && !author.link_url.startsWith('/'),
@@ -535,9 +538,9 @@ function PeopleSection({ teamProfiles, posts }: { teamProfiles: TeamProfile[]; p
         <section className="mb-12 px-4 @xl:px-8">
             <SectionHeader
                 sticker={StickerUsers}
-                kicker="The humans"
+                kicker="The team"
                 title="Who's doing research at PostHog?"
-                subtitle="The AI Research team isn't the only team doing science stuff. Everyone at PostHog can pitch in on our research, or write about it. Here are all the people contributing to our research."
+                subtitle="Research at PostHog isn't limited to one team. These are the people building it and writing about it."
             />
             <div className="flex flex-wrap gap-3">
                 {everyone.map((person) => {
@@ -604,9 +607,9 @@ function EventsSection() {
         <section className="mb-12 px-4 @xl:px-8">
             <SectionHeader
                 sticker={StickerRun}
-                kicker="On tour"
-                title="Attend a PostHog lecture"
-                subtitle="OK, it's probably less of a lecture and more like a meet-up, but still. Our engineers take this show on the road whenever they can find a tolerant audience and somewhere to plug in a projector."
+                kicker="Events"
+                title="Hear it in person"
+                subtitle="Our engineers regularly talk about this work at meetups and conferences. Upcoming talks appear here."
             />
 
             {upcomingTalks.length > 0 ? (
@@ -643,7 +646,7 @@ function EventsSection() {
                     <StickerZZZ className="size-12 mx-auto mb-2 -rotate-3" />
                     <p className="font-semibold m-0 mb-1">No research talks on the calendar right now</p>
                     <p className="text-sm text-secondary m-0">
-                        The researchers are busy researching. Check back soon for more upcoming events!
+                        Check back soon, or browse everything else happening on the events page.
                     </p>
                 </div>
             )}
@@ -695,24 +698,33 @@ const FAQ_ITEMS = [
                 <Link to="https://app.posthog.com/settings/organization-details" external className="underline">
                     organization settings
                 </Link>{' '}
-                (admin access required). No dark patterns, no exit interview.
+                (admin access required).
             </p>
         ),
     },
     {
         trigger: 'Will you sell my data, or models trained on it?',
-        content: <p>Easy answer: No.</p>,
+        content: <p>No.</p>,
+    },
+    {
+        trigger: 'Will you publish your research?',
+        content: (
+            <p>
+                Yes. We plan to publish papers on arXiv and submit to major ML conferences, along with technical reports
+                for each stage of pretraining. The first paper is underway now that our first training run is
+                completing.
+            </p>
+        ),
     },
     {
         trigger: 'Can I be a researcher too?',
         content: (
             <p>
-                Yes! We're hiring –{' '}
+                We're hiring{' '}
                 <Link to="/careers/ai-research-engineer" state={{ newWindow: true }} className="underline">
                     AI research engineers
                 </Link>
-                and nearly all our code if open-source so you can contribute directly. Research should be transparent,
-                right?
+                , and nearly all our code is open source, so you can contribute directly.
             </p>
         ),
     },
@@ -721,7 +733,7 @@ const FAQ_ITEMS = [
 function FAQSection() {
     return (
         <section className="mb-12 px-4 @xl:px-8 max-w-2xl">
-            <h2 className="text-2xl m-0 mb-6">Questions you were about to ask</h2>
+            <h2 className="text-2xl m-0 mb-6">Frequently asked questions</h2>
             <Accordion
                 type="multiple"
                 triggerClassName="!px-3 !py-2"
@@ -754,7 +766,7 @@ function CTASection() {
                     <h2 className="text-2xl m-0 mb-2">Use the research before it's finished</h2>
                     <p className="text-secondary max-w-xl mx-auto mb-6">
                         Most of this ships as public betas long before it's polished. See what we're building this week,
-                        or flip on feature previews and break something new.
+                        or enable feature previews to try the newest work first.
                     </p>
                     <div className="flex flex-col @md:flex-row items-center justify-center gap-3">
                         <OSButton asLink to="/wip" state={{ newWindow: true }} variant="primary" size="md">
@@ -798,7 +810,7 @@ export default function ResearchPage({
         <>
             <SEO
                 title="PostHog Research"
-                description="The cutting-edge research PostHog is working on: training models on product data, replay encoders, and agents that fix problems while you sleep."
+                description="AI research at PostHog: training foundation models on the data behind session replay, building agents that fix products autonomously, and publishing the results."
             />
             <Editor slug="/research" maxWidth="100%" hasPadding={false} disableFormatting>
                 <div className="@container not-prose font-rounded">
