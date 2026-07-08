@@ -46,7 +46,7 @@ const steps: {
         activeText: 'text-white',
         progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
         copy: 'The agent pulls the slow traces, lines them up against the fast ones, and finds the span they share: the inventory service firing one DB query per cart item. Classic N+1.',
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Report_Investigate_Mock_1e38561f90.png',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Report_Investigate_Mock_2_76290ef07e.png',
     },
     {
         value: 'pr',
