@@ -70,15 +70,15 @@ export const traces = {
         // Image pushed lower (mt-12) with rounded corners, matching the Logs
         // "Full stack context" slide.
         {
-            title: 'Request span',
+            title: 'Trace waterfall',
             handle: 'waterfall',
             template: 'splitImage',
             headline: 'Every span of a request, in one waterfall',
             description:
-                '<span class="block mb-4">A trace stitches one request into a tree of spans across every service, queue, and third-party call it touches. Follow the <span class="font-code">trace_id</span> and you get the full path: where the time went and which span actually broke, even across async boundaries, where stack traces give up.</span><span class="block">Built on OpenTelemetry, so there’s no proprietary SDK to adopt. Point your existing exporter at PostHog and you’re done. Traces land in the same project as your replays, errors, logs, and analytics, with correlated logs on every span.</span>',
+                '<ul class="list-disc pl-5 space-y-4"><li>One request becomes a tree of spans across every service, queue, and third-party call it touches.</li><li>Follow the <span class="font-code">trace_id</span> to see where the time went and which span actually broke – even across async boundaries, where stack traces give up.</li><li>Built on OpenTelemetry: no proprietary SDK. Point your existing exporter at PostHog and you’re done.</li><li>Traces land in the same project as your replays, errors, logs, and analytics – with correlated logs on every span.</li></ul>',
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_07_01_at_14_32_15_2x_1_2e2baf7533.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/image_3_c7dd33ad13.png',
                     alt: 'A distributed trace shown as a waterfall of spans',
                     shadow: true,
                     className: 'justify-center items-center mt-24 rounded-md',
