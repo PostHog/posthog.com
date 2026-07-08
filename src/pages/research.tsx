@@ -12,6 +12,7 @@ import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import { ChoppyReveal } from 'components/Code/ChoppyReveal'
 import {
     StickerBulb,
+    StickerELearning,
     StickerMicroscope,
     StickerRun,
     StickerTerminal,
@@ -78,33 +79,75 @@ function HeroSection({ teamCrestUrl }: { teamCrestUrl?: string }) {
     }, [posthog])
 
     return (
-        <section className="relative my-6 @4xl/editor:mb-12 tracking-[-0.0125em] max-w-5xl mx-auto w-full">
-            <div
-                aria-hidden="true"
-                className="hidden @md:block absolute bottom-8 right-0 @xl:right-8 -rotate-12 border-4 border-double border-red/50 text-red/50 rounded px-4 py-1.5 text-center pointer-events-none select-none"
-            >
-                <span className="block text-2xl font-black uppercase tracking-[0.2em] leading-none">Preprint</span>
-                <span className="block text-[10px] font-bold uppercase tracking-widest mt-1">
-                    Not peer reviewed · results may vary
-                </span>
-            </div>
-            <div className="flex items-start justify-between gap-4 mb-6">
-                <div className="flex items-center gap-3">
-                    <IconBrain className="size-10 text-purple" />
-                    <span className="text-sm font-semibold uppercase tracking-wide text-secondary">
-                        PostHog Research
-                    </span>
+        <section className="mt-2 mb-6 @4xl/editor:mb-10 tracking-[-0.0125em] max-w-5xl mx-auto w-full">
+            <div className="flex items-start gap-6">
+                <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-3 mb-4">
+                        <IconBrain className="size-10 text-purple" />
+                        <span className="text-sm font-semibold uppercase tracking-wide text-secondary">
+                            PostHog Research
+                        </span>
+                    </div>
+
+                    <h1 className="text-xl @xl:text-3xl font-bold leading-tight mb-4 !mt-0 max-w-3xl">
+                        <ChoppyReveal wordDelay={45}>{H1_VARIANTS[variant]}</ChoppyReveal>
+                    </h1>
+
+                    <div className="inline-flex items-start gap-2 border border-primary rounded bg-accent px-3 py-2 mb-6 max-w-2xl">
+                        <IconFlask className="size-5 text-purple shrink-0 mt-0.5" />
+                        <p className="text-sm text-secondary m-0">
+                            This headline is a live A/B test – you're seeing variant{' '}
+                            <strong className="text-primary">{variant === 'control' ? 'A' : 'B'}</strong>, and half of
+                            visitors see the other one. We're running it with{' '}
+                            <Link to="/experiments" state={{ newWindow: true }} className="underline">
+                                PostHog Experiments
+                            </Link>{' '}
+                            on our own research page.
+                        </p>
+                    </div>
+
+                    <div className="max-w-2xl space-y-3">
+                        <p>
+                            PostHog helps you{' '}
+                            <RoughAnnotation
+                                type="highlight"
+                                color="rgba(48, 164, 108, 0.2)"
+                                strokeWidth={1}
+                                padding={2}
+                                delay={300}
+                            >
+                                ship fixes while you sleep
+                            </RoughAnnotation>
+                            . Getting there takes more than off-the-shelf models, so we're doing original research –
+                            starting with a foundation model for the data behind session replay.
+                            <sup className="font-semibold text-secondary">[1]</sup>
+                        </p>
+                        <p>
+                            Some of this work is genuinely novel, extending earlier research with techniques like a
+                            multi-axis RoPE built on additive Euler angles. And we believe useful research shouldn't
+                            happen behind closed doors: our code is open source, we publish findings as we go, and the
+                            work is headed to arXiv and major ML conferences, beginning with our first pretraining run.
+                        </p>
+                        <p className="text-xs text-secondary font-mono border-t border-primary pt-2 mt-4 max-w-xl">
+                            [1] Hawkins, J. (2026).{' '}
+                            <Link to="/blog/posthogs-next-chapter" state={{ newWindow: true }} className="underline">
+                                "PostHog's next chapter."
+                            </Link>{' '}
+                            <em>posthog.com</em>, May 2026.
+                        </p>
+                    </div>
                 </div>
+
                 {teamCrestUrl && (
                     <Link
                         to="/teams/ai-research"
                         state={{ newWindow: true }}
-                        className="group flex flex-col items-center shrink-0 no-underline"
+                        className="group hidden @lg:flex flex-col items-center shrink-0 no-underline pt-2"
                     >
                         <img
                             src={teamCrestUrl}
                             alt="AI Research team crest"
-                            className="size-20 @xl:size-28 object-contain transition-transform duration-150 group-hover:scale-105 group-hover:-rotate-2"
+                            className="size-28 @2xl:size-36 object-contain transition-transform duration-150 group-hover:scale-105 group-hover:-rotate-2"
                         />
                         <span className="text-xs text-secondary group-hover:text-primary group-hover:underline mt-1 text-center">
                             Meet the AI Research team
@@ -112,53 +155,64 @@ function HeroSection({ teamCrestUrl }: { teamCrestUrl?: string }) {
                     </Link>
                 )}
             </div>
+        </section>
+    )
+}
 
-            <h1 className="text-xl @xl:text-3xl font-bold leading-tight mb-4 !mt-0 max-w-3xl">
-                <ChoppyReveal wordDelay={45}>{H1_VARIANTS[variant]}</ChoppyReveal>
-            </h1>
+// ─────────────────────────────────────────────
+// Publications (papers, preprints, technical reports)
+// ─────────────────────────────────────────────
 
-            <div className="inline-flex items-start gap-2 border border-primary rounded bg-accent px-3 py-2 mb-6 max-w-2xl">
-                <IconFlask className="size-5 text-purple shrink-0 mt-0.5" />
-                <p className="text-sm text-secondary m-0">
-                    This headline is a live A/B test – you're seeing variant{' '}
-                    <strong className="text-primary">{variant === 'control' ? 'A' : 'B'}</strong>, and half of visitors
-                    see the other one. We're running it with{' '}
-                    <Link to="/experiments" state={{ newWindow: true }} className="underline">
-                        PostHog Experiments
-                    </Link>{' '}
-                    on our own research page.
-                </p>
-            </div>
+// Paste new publications here as they're released – they render automatically.
+// Example:
+// {
+//     title: 'A multi-axis rotary position embedding for session data',
+//     authors: 'Waltz, N., et al.',
+//     venue: 'arXiv preprint',
+//     year: '2026',
+//     url: 'https://arxiv.org/abs/0000.00000',
+// }
+const PUBLICATIONS: { title: string; authors?: string; venue?: string; year?: string; url: string }[] = []
 
-            <div className="max-w-2xl space-y-3">
-                <p>
-                    PostHog helps you{' '}
-                    <RoughAnnotation
-                        type="highlight"
-                        color="rgba(48, 164, 108, 0.2)"
-                        strokeWidth={1}
-                        padding={2}
-                        delay={300}
-                    >
-                        ship fixes while you sleep
-                    </RoughAnnotation>
-                    . Getting there takes more than off-the-shelf models, so we're training our own – starting with a
-                    foundation model for the data behind session replay.
-                    <sup className="font-semibold text-secondary">[1]</sup>
-                </p>
-                <p>
-                    Some of this work is genuinely novel, extending earlier research with techniques like a multi-axis
-                    RoPE built on additive Euler angles. We're writing it up properly, too: expect papers on arXiv and
-                    submissions to major ML conferences, beginning with our first pretraining run.
-                </p>
-                <p className="text-xs text-secondary font-mono border-t border-primary pt-2 mt-4 max-w-xl">
-                    [1] Hawkins, J. (2026).{' '}
-                    <Link to="/blog/posthogs-next-chapter" state={{ newWindow: true }} className="underline">
-                        "PostHog's next chapter."
-                    </Link>{' '}
-                    <em>posthog.com</em>, May 2026.
-                </p>
-            </div>
+function PublicationsSection() {
+    return (
+        <section className="mb-12 px-4 @xl:px-8">
+            <SectionHeader
+                sticker={StickerELearning}
+                kicker="Papers"
+                title="Published research"
+                subtitle="Papers, preprints, and technical reports the team has published or contributed to. Everything we release is linked here."
+            />
+
+            {PUBLICATIONS.length > 0 ? (
+                <div className="max-w-3xl space-y-3">
+                    {PUBLICATIONS.map((paper, index) => (
+                        <Link
+                            key={paper.url}
+                            to={paper.url}
+                            external
+                            className="group flex gap-3 border border-primary rounded bg-accent p-4 no-underline text-primary transition-all duration-150 hover:border-purple hover:-translate-y-0.5 hover:shadow-md"
+                        >
+                            <span className="font-mono text-sm text-secondary shrink-0">[{index + 1}]</span>
+                            <span className="min-w-0">
+                                <span className="block font-bold group-hover:underline">{paper.title}</span>
+                                <span className="block text-sm text-secondary font-mono mt-0.5">
+                                    {[paper.authors, paper.venue, paper.year].filter(Boolean).join(' · ')}
+                                </span>
+                            </span>
+                        </Link>
+                    ))}
+                </div>
+            ) : (
+                <div className="border border-primary rounded bg-accent p-6 max-w-3xl">
+                    <p className="font-semibold m-0 mb-1">Our first paper is in progress</p>
+                    <p className="text-sm text-secondary m-0">
+                        Our first pretraining run is completing now, and the write-up is underway. Papers, preprints,
+                        and technical reports will be linked here as they're released – on arXiv first, then wherever
+                        peer review takes them.
+                    </p>
+                </div>
+            )}
         </section>
     )
 }
@@ -462,7 +516,7 @@ function ResearchPostsSection({ posts }: { posts: ResearchPost[] }) {
         <section className="mb-12 px-4 @xl:px-8">
             <SectionHeader
                 sticker={StickerBulb}
-                kicker="Publications"
+                kicker="Blog"
                 title="Research in the open"
                 subtitle="We publish what we learn as we go – the big wins, the disastrous errors, the cancelled projects we gave up on along the way."
             />
@@ -832,6 +886,8 @@ export default function ResearchPage({
 
                     <div className="max-w-5xl mx-auto">
                         <RoadmapSection />
+
+                        <PublicationsSection />
 
                         <ShippedSection />
 
