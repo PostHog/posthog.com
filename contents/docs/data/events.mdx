@@ -120,6 +120,8 @@ Below is a list of some of the properties that PostHog captures by default in cl
 | Plugins Deferred            | `$plugins_deferred`      | `['plugin4']`                  |
 | IP Address                  | `$ip`                    | `192.168.1.1`                  |
 
+> **Note on `$device_type`:** This property is set by `posthog-js` from the browser's [User Agent](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/userAgent), so it describes the *web* client. Possible values are `Desktop`, `Mobile`, `Tablet`, `Console`, and `Wearable`. This means `Mobile` refers to a mobile **web browser**, not a native mobile app. Events from native apps come through the [iOS](/docs/libraries/ios), [Android](/docs/libraries/android), [React Native](/docs/libraries/react-native), and [Flutter](/docs/libraries/flutter) SDKs, which don't populate `$device_type` this way — distinguish native app traffic using `$lib` (the SDK name) or `$os` instead.
+
 ### Different timestamp properties
 
 An event has 2 `DATETIME` type fields - `timestamp` and `created_at`.

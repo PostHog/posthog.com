@@ -293,6 +293,24 @@ You can display your survey to specific users based on:
 
 This enables you to stop your survey once you receive a specific number of responses. Note that because it takes time for PostHog to process responses, this is a rough guideline. Your survey might receive slightly more responses than you set. The completion conditions properties are evaluated with internal feature flags.
 
+## Common survey types
+
+You can build any survey from the question types above, but the most common ones have ready-made [templates](/templates?filter=type&value=survey) you can start from in the survey wizard. Popular options include [net promoter score (NPS)](/templates/nps-survey), [customer satisfaction (CSAT)](/templates/csat-survey), [product-market fit (PMF)](/templates/pmf-survey), and [customer effort score (CES)](/templates/ces-survey).
+
+### Setting up a customer effort score (CES) survey
+
+A [customer effort score (CES) survey](/templates/ces-survey) measures how easy it was for a user to complete a specific task. It's a strong predictor of loyalty and retention, and works especially well right after a key flow like onboarding, checkout, or contacting support.
+
+To set one up:
+
+1. Create a new survey and select the **Customer effort score (CES)** template (or start from a blank survey).
+2. For the question, use a **Rating - number** question type with a **1–5 scale**. Phrase it around effort, for example _"How easy was it to [complete the task]?"_ where `1` is "very difficult" and `5` is "very easy".
+3. Optionally, add a **Freeform text** follow-up question like _"What could we do to make this easier?"_ to capture qualitative feedback.
+4. Under [display conditions](#display-conditions), target the survey so it appears right after the flow you want to measure — for example, use **User sends events** to trigger it after a key event, or **Selector matches** to show it after a specific action. Placing it immediately after the task keeps the effort fresh in the user's mind.
+5. Launch the survey, then track your average score over time in [viewing results](/docs/surveys/viewing-results). A score of 4 or above is generally considered strong.
+
+CES tells you how *easy* your product is to use, but not how much users *value* it — pair it with an [NPS survey](/templates/nps-survey) for the full picture.
+
 ## Repeating surveys
 
 By default, surveys are shown once to each user until they either dismiss it or complete it. After that, they won't see the survey again. However, there are a few exceptions.

@@ -524,6 +524,7 @@ Autocaptured events (and client-side custom events) have many default properties
 
 - If enabled, [GeoIP data](/docs/cdp/geoip-enrichment) is added also as properties at ingestion.
 - Many of these are also captured as [session properties](/docs/data/sessions).
+- `$device_type` is set by `posthog-js` from the browser's User Agent, so it describes the *web* client. Possible values are `Desktop`, `Mobile`, `Tablet`, `Console`, and `Wearable` — `Mobile` means a mobile **web browser**, not a native app. Native mobile app events come through the iOS, Android, React Native, and Flutter SDKs, which don't populate `$device_type` this way; distinguish them using `$lib` or `$os`.
 - These properties can be hidden in activity by checking the **Hide PostHog properties** box.
 
 </Tab.Panel>
