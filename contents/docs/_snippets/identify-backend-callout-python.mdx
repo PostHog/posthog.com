@@ -1,0 +1,15 @@
+<CalloutBox icon="IconInfo" title="Identifying users is required">
+
+Backend events need a `distinct_id` that matches the ID your frontend sets when calling `posthog.identify()`. The Python SDK has no top-level `identify()` method — associate the user inside a [context](/docs/libraries/python#contexts) with `identify_context()`:
+
+```python
+from posthog import new_context, identify_context
+
+with new_context():
+    identify_context(user_id)
+    posthog.capture("event_name")
+```
+
+Without a matching `distinct_id`, backend events are orphaned — they can't be linked to frontend event captures, [session replays](/docs/session-replay), [LLM traces](/docs/ai-engineering), or [error tracking](/docs/error-tracking). See our guide on [identifying users](/docs/getting-started/identify-users) for more.
+
+</CalloutBox>
