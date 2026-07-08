@@ -770,6 +770,25 @@ function PeopleSection({ teamProfiles, posts }: { teamProfiles: TeamProfile[]; p
 // Events
 // ─────────────────────────────────────────────
 
+// Recordings of past talks – add new ones here as they're published.
+const PAST_TALKS: { videoId: string; title: string; byline: string }[] = [
+    {
+        videoId: 'zMiSRliEzv4',
+        title: 'Self-driving products: product signals to pull requests',
+        byline: 'Joshua Snyder · AI Engineer',
+    },
+    {
+        videoId: 'juoNbJiZUi0',
+        title: "LLM codegen fails and how to stop 'em",
+        byline: 'Danilo Campos · AI Engineer',
+    },
+    {
+        videoId: 'Yw4AR6Zuckc',
+        title: "PostHog's wild bet on AI coding",
+        byline: 'James Hawkins · The Secure Disclosure',
+    },
+]
+
 function EventsSection() {
     const { events } = useEvents()
 
@@ -826,10 +845,33 @@ function EventsSection() {
                     <StickerZZZ className="size-12 mx-auto mb-2 -rotate-3" />
                     <p className="font-semibold m-0 mb-1">No research talks on the calendar right now</p>
                     <p className="text-sm text-secondary m-0">
-                        Check back soon, or browse everything else happening on the events page.
+                        Check back soon, or watch a talk from a previous event below.
                     </p>
                 </div>
             )}
+
+            <h3 className="text-base font-bold mt-8 mb-3">Watch a past talk</h3>
+            <div className="grid @md:grid-cols-2 @2xl:grid-cols-3 gap-4 mb-6">
+                {PAST_TALKS.map((talk) => (
+                    <div key={talk.videoId} className="border border-primary rounded bg-accent overflow-hidden">
+                        <div className="aspect-video bg-primary">
+                            <iframe
+                                src={`https://www.youtube-nocookie.com/embed/${talk.videoId}`}
+                                title={talk.title}
+                                className="w-full h-full"
+                                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                                loading="lazy"
+                                frameBorder="0"
+                            />
+                        </div>
+                        <div className="p-3">
+                            <h4 className="text-sm font-bold m-0 leading-snug">{talk.title}</h4>
+                            <p className="text-sm text-secondary m-0 mt-0.5">{talk.byline}</p>
+                        </div>
+                    </div>
+                ))}
+            </div>
 
             <OSButton
                 asLink
