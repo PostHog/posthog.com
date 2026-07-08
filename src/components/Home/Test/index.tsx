@@ -378,7 +378,7 @@ export default function HomeTest() {
     return (
         <>
             <SEO
-                title="PostHog – We make dev tools for product engineers"
+                title="PostHog – We make your product self-driving"
                 updateWindowTitle={false}
                 description="All your developer tools in one place. PostHog gives engineers everything to build, test, measure, and ship successful products faster. Get started free."
                 image="/images/og/default.png"
