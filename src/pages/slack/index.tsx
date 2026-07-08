@@ -706,7 +706,7 @@ export default function SlackAppPage(): JSX.Element {
                         </p>
                     </div>
 
-                    <div className="rounded overflow-hidden border border-primary not-prose m-0">
+                    <div className="rounded overflow-hidden not-prose m-0">
                         <WistiaEmbed mediaId="ifyltgbxid" />
                     </div>
                     <hr className="border-t border-primary m-0 mb-6 mt-6" />
