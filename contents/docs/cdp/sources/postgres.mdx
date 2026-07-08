@@ -294,7 +294,7 @@ Avoid putting unrelated tables in the publication. PostHog filters out changes f
 
 ## Managing CDC after source creation
 
-You can enable, disable, or adjust CDC settings on an existing Postgres source from the **Configuration** tab without recreating the source.
+You can enable, disable, repair, or adjust CDC settings on an existing Postgres source from the **Configuration** tab without recreating the source.
 
 ### Enabling CDC on an existing source
 
@@ -332,6 +332,26 @@ Changes that occur while CDC is disabled are not captured. If you re-enable CDC 
 
 </CalloutBox>
 
+### Repairing CDC
+
+If a CDC source loses its replication slot — either because [WAL lag protection](#wal-lag-protection) dropped it or because it was removed on the source database — CDC syncs stop and PostHog marks the source as broken.
+
+Instead of disabling and re-enabling CDC (which resets every schema's sync type and requires you to reconfigure each one), you can use **Repair CDC** to recover in place:
+
+1. Go to the [sources tab](https://app.posthog.com/data-management/sources) and click your Postgres source.
+2. Open the **Configuration** tab. A banner indicates that the replication slot or publication is missing.
+3. Click **Repair CDC** and confirm the action.
+
+Repair recreates the replication slot and publication on your source database, resets every active CDC schema to snapshot mode for a full re-sync, clears the broken markers, and resumes the paused schedules. Changes that occurred between the slot being lost and the repair completing cannot be recovered — tables will match the current source state once the re-sync finishes.
+
+The action is idempotent. If a repair fails partway through (for example, due to a connection error), you can safely retry it.
+
+<CalloutBox icon="IconWarning" title="Repair triggers a full re-sync" type="caution">
+
+Repairing CDC forces every active CDC schema to re-snapshot from the current source state. WAL changes since the old slot was lost are unrecoverable, so a fresh snapshot is the only correct baseline. History rows in any `_cdc` companion tables for the gap period will be missing.
+
+</CalloutBox>
+
 ### Updating CDC settings
 
 While CDC is enabled, you can edit the following settings from the Configuration tab without disabling CDC:
@@ -351,7 +371,7 @@ PostHog stores two lag thresholds on CDC sources:
 - Warning threshold: `1024 MB` by default
 - Critical threshold: `10240 MB` by default
 
-For PostHog-managed sources, **automatic slot protection** is enabled by default. If lag exceeds the critical threshold, PostHog attempts to drop the replication slot and publication, then marks the source as errored. This protects your source database from unbounded WAL growth, but it means you must re-enable CDC or resync after fixing the issue. You can [adjust both thresholds](#updating-cdc-settings) from the Configuration tab.
+For PostHog-managed sources, **automatic slot protection** is enabled by default. If lag exceeds the critical threshold, PostHog attempts to drop the replication slot and publication, then marks the source as broken. This protects your source database from unbounded WAL growth, but it means you must [repair CDC](#repairing-cdc) or resync after fixing the issue. You can [adjust both thresholds](#updating-cdc-settings) from the Configuration tab.
 
 For self-managed sources, PostHog does not drop the slot or publication. It marks the source as errored at the critical threshold, but you remain responsible for cleanup.
 
@@ -403,7 +423,13 @@ This happens in self-managed mode when PostHog can't find the publication name y
 
 ### Source is errored because of WAL lag
 
-Check the slot lag query above. If PostHog-managed slot protection dropped the slot, [disable and re-enable CDC](#managing-cdc-after-source-creation) or run a full resync after fixing the underlying issue. If you're in self-managed mode, your DBA must decide whether to keep, advance, or drop the slot.
+Check the slot lag query above. If PostHog-managed slot protection dropped the slot, use [Repair CDC](#repairing-cdc) to recreate it and re-sync. If you're in self-managed mode, your DBA must decide whether to keep, advance, or drop the slot.
+
+### Replication slot or publication is missing
+
+This happens when the replication slot is dropped — either by [WAL lag protection](#wal-lag-protection), manually on the source database, or by the database itself (for example, when `max_slot_wal_keep_size` is exceeded). PostHog marks the CDC source as broken and pauses its schedules.
+
+To recover, use [Repair CDC](#repairing-cdc) from the **Configuration** tab. Repair recreates the slot and publication, then re-syncs every CDC schema from a fresh snapshot. WAL changes since the slot was lost cannot be recovered.
 
 ### `materialized view has not been populated`
 
