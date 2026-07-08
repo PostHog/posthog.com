@@ -125,7 +125,7 @@ According to reviews on [G2](https://www.g2.com/products/posthog/reviews) and ot
 
 > #### Bottom line
 >
-> PostHog is a good fit for teams that want to understand both how their AI features perform and how people use them. It's not the easiest migration from Helicone, but it gives you more context around what happens before and after an AI interaction.
+> PostHog is the strongest choice if you want your Helicone migration to be an upgrade, not a lateral move: AI observability connected to product analytics, session replay, experiments, and more in one platform. The SDK migration takes more work than a proxy swap, but you end up with more than you left with.
 
 <WizardCTA />
 
@@ -136,49 +136,87 @@ According to reviews on [G2](https://www.g2.com/products/posthog/reviews) and ot
 - **Typical users:** AI and ML engineers
 - **Typical customers:** Startups to large enterprises
 
+![Langfuse](https://res.cloudinary.com/dmukukwp6/image/upload/langfuse_92ec8c1295.png)
+
 ### What is Langfuse?
-Langfuse is an open-source platform for building, monitoring, and improving LLM applications. It helps teams track traces, costs, and evaluations, and manage prompts. It can be used as a managed cloud service or self-hosted.
-Langfuse is focused on LLM observability rather than a broader developer platform. In January 2026, it was acquired by ClickHouse and continues to be developed as an open-source project.
+
+[Langfuse](/blog/posthog-vs-langfuse) is an open-source platform for building, monitoring, and improving LLM applications. It captures detailed traces with spans, observations, and metrics across any framework or provider. Its SDK is built on the official OpenTelemetry client, so token usage, cost tracking, and prompt linking work with any OTel-compatible library out of the box.
+
+On top of tracing, it layers prompt management with one-click rollbacks, evaluations via LLM-as-a-judge, heuristics, or human review, and dashboards for monitoring cost, latency, and quality trends.
+
+The main shift from Helicone is architectural – [Langfuse](/blog/best-langfuse-alternatives) instruments via SDK rather than a proxy, so you gain per-step visibility into multi-step workflows but lose gateway features like caching.
+
+In January 2026, it was acquired by ClickHouse and continues to be developed as an open-source project.
 
 ### Key features
-- **LLM observability and tracing:** Track traces, costs, latency, token usage, and model outputs across your LLM applications.
-- **Prompt management:** Create, version, and manage prompts outside your application code.
-- **Evaluations:** Test and score model outputs to measure quality and catch issues before they reach users.
-- **Datasets and experiments:** Run experiments against datasets to compare prompts, models, and changes over time.
-- **Playground:** Test prompts and models in an interactive environment before deploying them to production.
+
+- **LLM tracing:** Detailed production tracing with spans, observations, and metrics across any framework or provider.
+
+- **Prompt management:** Version control and deployment of prompts with integrated monitoring and one-click rollbacks.
+
+- **Evaluations:** LLM-as-a-judge, heuristic functions, and human review workflows. Run evaluators on production data or during experiments.
+
+- **OpenTelemetry support:** Langfuse SDK v4 is built on top of the official OpenTelemetry client, giving it first-class support for token usage, cost tracking, and prompt linking across any OTel-compatible framework or library.
+
+- **Analytics dashboards:** Monitor cost, latency, and quality trends across your LLM applications with built-in dashboards and automated alerts.
 
 ### How does Langfuse compare to Helicone?
-Both companies were acquired in 2026, but while Helicone moved into maintenance mode, Langfuse remains actively developed under ClickHouse and provides an [official migration guide for Helicone users](https://langfuse.com/faq/all/migrate-from-helicone).
-| Feature | Langfuse | Helicone |
-| --- | --- | --- |
-| Tracing | ✅ | ✅ |
-| Cost tracking | ✅ | ✅ |
-| Evaluations | ✅ | ⚠️ Limited |
-| Prompt management | ✅ | ✅ |
-| Open source | ✅ | ✅ |
-| Self-hosting | ✅ | ✅ |
-| AI gateway / proxy | ❌ SDK-based | ✅ |
-| Actively developed | ✅ | ⚠️ Maintenance mode |
+
+<p>
+<ProductComparisonTable
+    competitors={['langfuse', 'helicone']}
+    rows={[
+        'ai_observability.features.trace_visualization',
+        'ai_observability.features.cost_tracking',
+        'ai_observability.features.latency_tracking',
+        'ai_observability.features.error_tracking',
+        'ai_observability.features.ai_gateway_proxy',
+        'ai_observability.features.prompt_management',
+        'ai_observability.features.prompt_evaluations',
+        'ai_observability.features.evaluation_datasets',
+        'ai_observability.features.agent_tracing',
+        'ai_observability.features.privacy_mode',
+        'ai_observability.features.session_replay',
+        'ai_observability.features.product_analytics',
+        {
+            label: 'Actively developed',
+            description: 'Whether the product is actively shipping new features',
+            values: [true, 'Maintenance mode'],
+        },
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
+</p>
 
 <details>
 <summary>Main differences between Langfuse and Helicone</summary>
+
 - Helicone works as a proxy you route requests through; Langfuse uses an SDK you add to your code, so migrating takes more setup.
 - Langfuse can trace each step of a multi-step agent run, while Helicone mainly logs individual requests at the gateway level.
-- Langfuse runs on a ClickHouse backend designed for high-volume trace data.
+- Langfuse has substantially deeper evaluation workflows: LLM-as-a-judge, heuristic evaluators, human annotation queues, and experiments across datasets. Helicone's eval features are basic.
+- Langfuse's cloud pricing is unit-based. Helicone billed per request at the gateway, so teams with complex multi-step traces will see higher relative volumes on Langfuse than they're used to.
+
 </details>
 
 <details>
 <summary>Main similarities between Langfuse and Helicone</summary>
+
 - Both are built for LLM observability, with tracing and monitoring of LLM requests.
 - Both provide cost tracking.
-- Both offer prompt management features.
-- Both are open source and support self-hosting.
+- Both offer prompt management and versioning.
+- Both are open source and self-hostable.
+
 </details>
 
 ### Why do companies use Langfuse?
-Based on user reviews on [Product Hunt](https://www.producthunt.com/products/langfuse/reviews) and [Gartner Peer Insights](https://www.gartner.com/reviews/product/langfuse-658437652), teams choose Langfuse for a few reasons:
+
+Based on user reviews on Product Hunt and Gartner Peer Insight, teams choose Langfuse for a few reasons:
+
 1. **It's easy to integrate:** Reviewers describe the SDK as quick to set up and easy to add to an existing application.
+
 2. **The tracing is detailed:** Users point to the depth of its tracing and latency data, and say the visualizations make debugging easier.
+
 3. **It moves fast:** Reviewers note that the open-source project ships frequent updates and continues to add new capabilities.
 
 > #### Bottom line
@@ -186,34 +224,61 @@ Based on user reviews on [Product Hunt](https://www.producthunt.com/products/lan
 > Langfuse is a strong option for teams that want a dedicated LLM observability platform. It requires more setup than Helicone's proxy-based approach, but it remains actively developed and offers a broad set of observability features.
 
 ## 3. LangSmith
+
 - **Founded:** 2023
 - **Similar to:** Langfuse, Arize Phoenix
 - **Typical users:** AI and ML engineers
 - **Typical customers:** Startups to large enterprises
 
+![LangSmith Dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/Langsmith_Dashboard_09ad5e1ab0.png)
+
 ### What is LangSmith?
-LangSmith is a platform for building and monitoring LLM applications and AI agents. It helps teams trace requests, test prompts, evaluate outputs, and monitor applications in production.
-LangSmith is developed by LangChain and works with or without the LangChain framework. Unlike Langfuse and Helicone, it is closed source. It is primarily offered as a managed cloud platform, with self-hosting available for enterprise customers.
+
+[LangSmith](/blog/best-langsmith-alternatives) is LangChain's platform for building and monitoring LLM applications and AI agents. It offers tracing across every step of a chain or agent run, prompt management with a playground for side-by-side testing, evaluation workflows with datasets and scoring, and production monitoring with dashboards and alerts.
+
+LangSmith works with or without the LangChain framework, but it delivers its deepest experience inside that ecosystem. Unlike Langfuse and Helicone, it is closed source. It is primarily offered as a managed cloud platform, with self-hosting available for enterprise customers.
+
 ### Key features
+
 - **Tracing and observability:** Trace requests, inspect application behavior, and debug issues across your LLM applications.
+
 - **Evaluation:** Test and score model outputs to measure quality and catch issues before they reach users.
+
 - **Prompt management:** Create, version, and manage prompts outside your application code.
+
 - **Datasets and experiments:** Run experiments against datasets to compare prompts, models, and application changes.
+
 - **Monitoring:** Track production metrics such as latency, cost, token usage, and error rates with dashboards and alerts.
 
 ### How does LangSmith compare to Helicone?
-LangSmith covers much of what Helicone does, but the biggest difference is that it's closed source, which matters if open source was part of why you chose Helicone.
 
-| Feature | LangSmith | Helicone |
-| --- | --- | --- |
-| Tracing | ✅ | ✅ |
-| Cost tracking | ✅ | ✅ |
-| Evaluations | ✅ | ⚠️ Limited |
-| Prompt management | ✅ | ✅ |
-| Open source | ❌ | ✅ |
-| Self-hosting | ⚠️ Enterprise only | ✅ |
-| AI gateway / proxy | ❌ SDK-based | ✅ |
-| Actively developed | ✅ | ⚠️ Maintenance mode |
+
+<p>
+<ProductComparisonTable
+    competitors={['langsmith', 'helicone']}
+    rows={[
+        'ai_observability.features.trace_visualization',
+        'ai_observability.features.cost_tracking',
+        'ai_observability.features.latency_tracking',
+        'ai_observability.features.error_tracking',
+        'ai_observability.features.ai_gateway_proxy',
+        'ai_observability.features.prompt_management',
+        'ai_observability.features.prompt_evaluations',
+        'ai_observability.features.evaluation_datasets',
+        'ai_observability.features.agent_tracing',
+        'ai_observability.features.privacy_mode',
+        'ai_observability.features.session_replay',
+        'ai_observability.features.product_analytics',
+        {
+            label: 'Actively developed',
+            description: 'Whether the product is actively shipping new features',
+            values: [true, 'Maintenance mode'],
+        },
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
+</p>
 
 <details>
 <summary>Main differences between LangSmith and Helicone</summary>
