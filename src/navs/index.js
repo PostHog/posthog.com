@@ -2958,6 +2958,10 @@ export const docsMenu = {
                             url: '/docs/ai-engineering/ai-wizard',
                         },
                         {
+                            name: 'Sign up with the wizard',
+                            url: '/docs/ai-engineering/wizard-signup',
+                        },
+                        {
                             name: 'Model Context Protocol (MCP)',
                             url: '/docs/model-context-protocol',
                             children: [
@@ -3341,6 +3345,10 @@ export const docsMenu = {
                         {
                             name: 'ID-JAG (XAA)',
                             url: '/docs/settings/id-jag',
+                        },
+                        {
+                            name: 'Agent discovery (auth.md)',
+                            url: '/docs/settings/agent-discovery',
                         },
                         {
                             name: 'Content Security Policy tracking',

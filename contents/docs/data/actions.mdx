@@ -3,9 +3,9 @@ title: Actions
 sidebar: Docs
 showTitle: true
 availability:
-    free: full
-    selfServe: full
-    enterprise: full
+  free: full
+  selfServe: full
+  enterprise: full
 ---
 
 ## What is an action?
@@ -34,9 +34,9 @@ Actions are also useful for tracking conversions on your website. Our website ho
 
 ## How to create an action
 
-You can create new actions by either: 
+You can create new actions by either:
 
-1. Clicking the "New action" button in the "Actions" tab in [Data Management](https://us.posthog.com/data-management/actions).
+1. Clicking the "New action" button in the "Actions" tab in [Data Management](https://app.posthog.com/data-management/actions).
 
 2. Using the [PostHog Toolbar](/docs/toolbar) to tag the elements that are relevant – see our step-by-step tutorial on [creating actions using the toolbar](/tutorials/how-to-capture-events-the-easy-way).
 
@@ -46,12 +46,12 @@ You can create actions using events from four sources:
 
 ### 1. Autocapture
 
-[Autocapture](/docs/product-analytics/autocapture) actions are based on frontend elements from your website, such as a button or an input. 
+[Autocapture](/docs/product-analytics/autocapture) actions are based on frontend elements from your website, such as a button or an input.
 
 The easiest way to select them is [using the toolbar](/tutorials/how-to-capture-events-the-easy-way), but you can also set them manually by providing something to identify the element, like a selector.
 
-Our autocapture functionality captures a lot of frontend elements by default, but you'll need to manually set anything else you want to be captured. 
- 
+Our autocapture functionality captures a lot of frontend elements by default, but you'll need to manually set anything else you want to be captured.
+
 Autocapture captures any click or change of input or submission of `a`, `button`, `form`, `input`, `select`, `textarea`, and `label` tags. All other elements need to be set manually. This is important to remember if you deviate from established HTML practices, such as using a `div` as a button.
 
 Autocapture is also conservative regarding `input` tags to prevent grabbing sensitive data. See [our Autocapture docs](/docs/product-analytics/autocapture) for more details.
@@ -64,7 +64,7 @@ There are three ways to match your elements:
 
 3. **Matching selectors:** details below.
 
-You can have more than one match type selected_. Having multiple fields selected is an `AND` statement, so all of them will need to match an event for it to count as the action.
+You can have more than one match type selected\_. Having multiple fields selected is an `AND` statement, so all of them will need to match an event for it to count as the action.
 
 #### Matching selectors
 
@@ -105,7 +105,7 @@ The following types of selectors are supported:
 
 The following patterns _are not_ currently supported:
 
-- Wildcard operators (e.g. <code>*</code>, <code>~</code>, <code>|</code>)
+- Wildcard operators (e.g. <code>\*</code>, <code>~</code>, <code>|</code>)
 - Combining multiple attribute selectors
 - [Non-alphanumeric classes](https://github.com/PostHog/posthog/issues/15480) (like clases containing `-`, `[]`, `.`)
 
@@ -124,7 +124,7 @@ Screen view actions are for mobile apps that track `$screen` events with a `$scr
 You can match screen names using three methods:
 
 - **contains** - the screen name contains the specified string (default)
-- **matches exactly** - the screen name matches the specified value exactly
+- **matches exactly** - the screen name matches one of the specified values exactly (supports multiple screen names)
 - **matches regex** - the screen name matches a regex pattern, useful for screens with dynamic names like `Profile_123`
 
 This works similarly to pageview URL matching, but for mobile app navigation.
