@@ -68,7 +68,7 @@ const H1_TEST = "We're training models on product data to build software that fi
 function ControlHeadline() {
     return (
         <>
-            We do research that is{' '}
+            Our research is{' '}
             <RoughAnnotation type="highlight" color="rgba(48, 164, 108, 0.2)" strokeWidth={1} padding={2} delay={300}>
                 open-source
             </RoughAnnotation>
@@ -139,22 +139,22 @@ function HeroSection({ teamCrestUrl }: { teamCrestUrl?: string }) {
                             >
                                 ship fixes while you sleep
                             </RoughAnnotation>
-                            . Getting there takes more than off-the-shelf models, so we're doing original research –
-                            starting with a foundation model for the data behind session replay.
+                            . That takes more than off-the-shelf models, so we're training our own – starting with a
+                            foundation model for session replay.
                             <sup className="font-semibold text-secondary">[1]</sup>
                         </p>
                         <p>
-                            We believe useful research shouldn't happen behind closed doors: our code is open source
-                            where possible, we publish findings as we go, and the work is headed to arXiv and major ML
-                            conferences. When we release something based on research, our{' '}
+                            Useful research shouldn't happen behind closed doors: our code is open source where
+                            possible, we publish findings as we go, and the work is headed to arXiv and major ML
+                            conferences. Anything we release at a cost is based on our{' '}
                             <Link
                                 to="/handbook/engineering/feature-pricing"
                                 state={{ newWindow: true }}
                                 className="underline"
                             >
                                 pricing principles
-                            </Link>{' '}
-                            always apply.
+                            </Link>
+                            .
                         </p>
                         <p className="text-xs text-secondary font-mono border-t border-primary pt-2 mt-4 max-w-xl">
                             [1] Hawkins, J. (2026).{' '}
@@ -318,7 +318,7 @@ function PublicationsSection() {
                 sticker={StickerELearning}
                 kicker="Papers"
                 title="Published research"
-                subtitle="Papers, preprints, and technical reports the team has published or contributed to. Everything we release is linked here."
+                subtitle="Papers, preprints, and technical reports from the team, all linked here."
             />
 
             {publications.length > 0 ? (
@@ -331,9 +331,8 @@ function PublicationsSection() {
                 <div className="border border-primary rounded bg-accent p-6 max-w-3xl">
                     <p className="font-semibold m-0 mb-1">Our first paper is in progress</p>
                     <p className="text-sm text-secondary m-0">
-                        Our first pretraining run is completing now, and the write-up is underway. Papers, preprints,
-                        and technical reports will be linked here as they're released – on arXiv first, then wherever
-                        peer review takes them.
+                        Our first pretraining run is completing and the write-up is underway. Papers will be linked here
+                        as they're released – arXiv first, then wherever peer review takes them.
                     </p>
                 </div>
             )}
@@ -427,7 +426,7 @@ function RoadmapSection() {
                 sticker={StickerMicroscope}
                 kicker="The pipeline"
                 title="What we're researching right now"
-                subtitle="Some of what the AI Research team is currently working on, in rough order. Each stage of pretraining breaks new ground, and we plan to publish as we go – expect multiple papers and technical reports from this list."
+                subtitle="The team's current pipeline, in rough order. Each stage of pretraining breaks new ground, and each will produce papers and technical reports."
             />
             <div className="grid @lg:grid-cols-2 gap-4">
                 {ROADMAP_ITEMS.map((item, index) => (
@@ -473,18 +472,21 @@ function ShippedSection() {
         const query = `org:posthog is:pr is:merged -repo:posthog/posthog.com ${RESEARCHER_HANDLES.map(
             (handle) => `author:${handle}`
         ).join(' ')}`
-        fetch(`https://api.github.com/search/issues?q=${encodeURIComponent(query)}&sort=updated&order=desc&per_page=8`)
+        fetch(`https://api.github.com/search/issues?q=${encodeURIComponent(query)}&sort=updated&order=desc&per_page=50`)
             .then((response) => (response.ok ? response.json() : Promise.reject(new Error(response.statusText))))
             .then((data) => {
                 const items = Array.isArray(data?.items) ? data.items : []
                 setPrs(
-                    items.map((item: any) => ({
-                        title: item.title,
-                        url: item.html_url,
-                        repo: item.repository_url?.split('/').pop() ?? 'posthog',
-                        author: item.user?.login ?? 'unknown',
-                        mergedAt: item.pull_request?.merged_at ?? item.closed_at,
-                    }))
+                    items
+                        .filter((item: any) => /^(feat|epic)/i.test((item.title ?? '').trim()))
+                        .slice(0, 8)
+                        .map((item: any) => ({
+                            title: item.title,
+                            url: item.html_url,
+                            repo: item.repository_url?.split('/').pop() ?? 'posthog',
+                            author: item.user?.login ?? 'unknown',
+                            mergedAt: item.pull_request?.merged_at ?? item.closed_at,
+                        }))
                 )
             })
             .catch(() => setPrs([]))
@@ -496,7 +498,7 @@ function ShippedSection() {
                 sticker={StickerTerminal}
                 kicker="Live from GitHub"
                 title="Fresh from the lab"
-                subtitle="Merged pull requests from the research team, pulled live from GitHub across PostHog's public repos – the work as it lands."
+                subtitle="Feature work from the research team, pulled live from GitHub."
             />
 
             <div className="border border-primary rounded overflow-hidden mb-6 shadow-lg">
@@ -505,7 +507,7 @@ function ShippedSection() {
                     <span className="size-2.5 rounded-full bg-yellow" />
                     <span className="size-2.5 rounded-full bg-green" />
                     <span className="ml-2 text-xs font-mono text-secondary truncate">
-                        ai-research – git log --merges
+                        ai-research – git log --merges --grep=feat
                     </span>
                 </div>
                 {prs && prs.length > 0 ? (
@@ -718,7 +720,7 @@ function PeopleSection({ teamProfiles, posts }: { teamProfiles: TeamProfile[]; p
                 sticker={StickerUsers}
                 kicker="The team"
                 title="Who's doing research at PostHog?"
-                subtitle="Research at PostHog isn't limited to one team. These are the people building it and writing about it."
+                subtitle="The people doing the research, and the people writing about it."
             />
             <div className="flex flex-wrap gap-3">
                 {everyone.map((person) => {
@@ -787,7 +789,7 @@ function EventsSection() {
                 sticker={StickerRun}
                 kicker="Events"
                 title="Hear it in person"
-                subtitle="Our engineers regularly talk about this work at meetups and conferences. Upcoming talks appear here."
+                subtitle="Our engineers talk about this work at meetups and conferences."
             />
 
             {upcomingTalks.length > 0 ? (
@@ -943,8 +945,8 @@ function CTASection() {
                 <div className="relative">
                     <h2 className="text-2xl m-0 mb-2">Use the research before it's finished</h2>
                     <p className="text-secondary max-w-xl mx-auto mb-6">
-                        Most of this ships as public betas long before it's polished. See what we're building this week,
-                        or enable feature previews to try the newest work first.
+                        Most of this ships as public betas long before it's polished. Enable feature previews and try
+                        the newest work first.
                     </p>
                     <div className="flex flex-col @md:flex-row items-center justify-center gap-3">
                         <OSButton asLink to="/wip" state={{ newWindow: true }} variant="primary" size="md">
