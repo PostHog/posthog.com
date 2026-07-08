@@ -75,7 +75,9 @@ Alerts are supported on [trends](/docs/product-analytics/trends) and [SQL (HogQL
      classes="rounded"
    />
 
-9. Select how often you want the alert to be checked. Options include every 15 minutes (requires Boost, Scale, or Enterprise plan), every hour, every day, every week, and every month.
+9. Select how often you want the alert to be checked. Options range from **real time** — for time-sensitive metrics where you want to be notified as soon as a threshold is breached — through every 15 minutes (requires Boost, Scale, or Enterprise plan), every hour, every day, every week, and every month.
+
+   Real-time alerts are best suited to metrics where minutes matter, such as error spikes, checkout failures, or sudden traffic drops. For most metrics, a less frequent interval is sufficient and reduces notification noise.
 
 10. Pick who should be notified when the alert is triggered. Subscribed users automatically receive in-app notifications when the alert fires. You can also add email recipients, Slack channels, Discord webhooks, Microsoft Teams channels, or webhook URLs directly in the alert form.
 
