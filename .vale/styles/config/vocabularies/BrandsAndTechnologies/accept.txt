@@ -59,6 +59,7 @@ Cloudflare
 Cloudwatch
 Codecov
 CodeSandbox
+Coevera
 Cognito
 [Cc]ohere
 Coinbase
@@ -193,6 +194,7 @@ Pendo
 Phabricator
 Pinterest
 Pipedrive
+Pipeliner
 Pixar
 PlanetScale
 PlayerZero
