@@ -47,7 +47,7 @@ If you're unsure which data center your account uses, check your SurveySparrow a
 
 <SyncModes />
 
-The `responses` table supports incremental sync on `completed_time`, using SurveySparrow's server-side submission date filter. Only completed responses are synced — partial (in-progress) submissions are not imported. All other tables are full refresh only, since their API endpoints expose no reliable incremental cursor.
+The `responses` table supports incremental sync on `completed_time`, using SurveySparrow's server-side submission date filter. Only completed responses are synced – partial (in-progress) submissions are not imported. All other tables are full refresh only, since their API endpoints expose no reliable incremental cursor.
 
 ## Configuration
 
