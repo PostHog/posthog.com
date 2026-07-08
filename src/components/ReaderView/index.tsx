@@ -837,10 +837,12 @@ function ReaderViewContent({
                                 )}
                                 {title && !hideTitle && (
                                     <h1
-                                        className={`mx-auto transition-all ${
+                                        className={`transition-all ${
                                             fullWidthContent || body?.type !== 'mdx'
-                                                ? 'max-w-full'
-                                                : contentMaxWidthClass || 'max-w-2xl'
+                                                ? 'max-w-full mx-auto'
+                                                : contentMaxWidthClass
+                                                  ? contentMaxWidthClass
+                                                  : 'max-w-2xl mx-auto'
                                         }`}
                                     >
                                         {title}
@@ -848,10 +850,12 @@ function ReaderViewContent({
                                 )}
                                 {(body.date || body.contributors || body.tags) && (
                                     <div
-                                        className={`flex items-center space-x-2 mb-4 flex-wrap mx-auto transition-all ${
+                                        className={`flex items-center space-x-2 mb-4 flex-wrap transition-all ${
                                             fullWidthContent || body?.type !== 'mdx'
-                                                ? 'max-w-full'
-                                                : contentMaxWidthClass || 'max-w-2xl'
+                                                ? 'max-w-full mx-auto'
+                                                : contentMaxWidthClass
+                                                  ? contentMaxWidthClass
+                                                  : 'max-w-2xl mx-auto'
                                         }`}
                                     >
                                         {body.contributors && <ContributorsSmall contributors={body.contributors} />}
@@ -878,10 +882,12 @@ function ReaderViewContent({
                                         <div
                                             id="mobile-toc"
                                             data-scheme="secondary"
-                                            className={`@4xl/app-reader:hidden mt-4 mx-auto transition-all ${
+                                            className={`@4xl/app-reader:hidden mt-4 transition-all ${
                                                 fullWidthContent || body?.type !== 'mdx'
-                                                    ? 'max-w-full'
-                                                    : contentMaxWidthClass || 'max-w-2xl'
+                                                    ? 'max-w-full mx-auto'
+                                                    : contentMaxWidthClass
+                                                      ? contentMaxWidthClass
+                                                      : 'max-w-2xl mx-auto'
                                             }`}
                                         >
                                             <TableOfContents
@@ -919,10 +925,12 @@ function ReaderViewContent({
                                 </div>
                                 {showAbout && (
                                     <div
-                                        className={`mt-8 mx-auto transition-all ${
+                                        className={`mt-8 transition-all ${
                                             fullWidthContent || body?.type !== 'mdx'
-                                                ? 'max-w-full'
-                                                : contentMaxWidthClass || 'max-w-2xl'
+                                                ? 'max-w-full mx-auto'
+                                                : contentMaxWidthClass
+                                                  ? contentMaxWidthClass
+                                                  : 'max-w-2xl mx-auto'
                                         }`}
                                     >
                                         <AboutPostHog />
@@ -930,10 +938,12 @@ function ReaderViewContent({
                                 )}
                                 {showQuestions && (
                                     <div
-                                        className={`mt-8 mx-auto transition-all ${
+                                        className={`mt-8 transition-all ${
                                             fullWidthContent || body?.type !== 'mdx'
-                                                ? 'max-w-full'
-                                                : contentMaxWidthClass || 'max-w-2xl'
+                                                ? 'max-w-full mx-auto'
+                                                : contentMaxWidthClass
+                                                  ? contentMaxWidthClass
+                                                  : 'max-w-2xl mx-auto'
                                         }`}
                                     >
                                         <h3 id="squeak-questions" className="mb-4">
@@ -942,20 +952,24 @@ function ReaderViewContent({
                                         <Questions
                                             slug={appWindow?.path}
                                             parentName={activeInternalMenu?.name}
-                                            className={`mx-auto transition-all ${
+                                            className={`transition-all ${
                                                 fullWidthContent || body?.type !== 'mdx'
-                                                    ? 'max-w-full'
-                                                    : contentMaxWidthClass || 'max-w-2xl'
+                                                    ? 'max-w-full mx-auto'
+                                                    : contentMaxWidthClass
+                                                      ? contentMaxWidthClass
+                                                      : 'max-w-2xl mx-auto'
                                             }`}
                                         />
                                     </div>
                                 )}
                                 {showSurvey && (
                                     <div
-                                        className={`mt-8 mx-auto transition-all ${
+                                        className={`mt-8 transition-all ${
                                             fullWidthContent || body?.type !== 'mdx'
-                                                ? 'max-w-full'
-                                                : contentMaxWidthClass || 'max-w-2xl'
+                                                ? 'max-w-full mx-auto'
+                                                : contentMaxWidthClass
+                                                  ? contentMaxWidthClass
+                                                  : 'max-w-2xl mx-auto'
                                         }`}
                                     >
                                         <DocsPageSurvey filePath={filePath} />

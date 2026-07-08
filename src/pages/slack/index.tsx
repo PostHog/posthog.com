@@ -684,12 +684,12 @@ export default function SlackAppPage(): JSX.Element {
         <>
             <SEO
                 title="PostHog Slack app"
-                description="The reactive way to reach self-driving: tag @PostHog in any Slack thread to ship a fix, answer a data question, or edit content – without leaving the conversation."
+                description="Tag @PostHog in any Slack thread to ship a fix, answer a data question, or edit content – without leaving the conversation."
                 image="/images/og/default.png"
                 structuredData={buildProductStructuredData({
                     name: 'PostHog Slack app',
                     description:
-                        'The reactive way to reach self-driving: tag @PostHog in any Slack thread to ship a fix, answer a data question, or edit content – without leaving the conversation.',
+                        'Tag @PostHog in any Slack thread to ship a fix, answer a data question, or edit content – without leaving the conversation.',
                     slug: 'slack-app',
                 })}
             />
@@ -700,8 +700,8 @@ export default function SlackAppPage(): JSX.Element {
                             Don't @ <em>me,</em> <Highlight>@PostHog</Highlight>
                         </h1>
                         <p className="text-secondary text-base @md/reader-content-container:text-lg max-w-lg mx-auto m-0">
-                            The Slack app is the reactive way to reach self-driving – tag @PostHog in any thread to ask
-                            about your product data, debug issues, and generate PRs without leaving the conversation.
+                            PostHog now lives in Slack. Ask about your product data, debug issues, and generate PRs
+                            without leaving the thread.
                         </p>
                     </div>
 
@@ -847,6 +847,13 @@ export default function SlackAppPage(): JSX.Element {
                             }))}
                         />
                     </div>
+                    <p className="text-sm text-secondary">
+                        Steering an agent from Slack is one way work gets done.{' '}
+                        <Link to="/self-driving" state={{ newWindow: true }}>
+                            Self-driving
+                        </Link>{' '}
+                        is the bigger loop around it.
+                    </p>
                     <div
                         id="try"
                         className="not-prose bg-accent border border-primary rounded-md p-4 @md/reader-content:p-6 my-6"

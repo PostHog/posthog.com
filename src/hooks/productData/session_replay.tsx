@@ -29,7 +29,7 @@ export const sessionReplay = {
     overview: {
         title: 'Watch people use your product',
         description:
-            'Session replay is one of the tools that makes your product self-driving: play back sessions to see exactly why something happened so the fix is obvious. The context agents use to debug UI issues and nuanced user behavior in your product, website, or mobile app.',
+            'Session Replay is one of the tools that makes your product self-driving: play back sessions to see exactly why something happened so the fix is obvious. The context agents use to debug UI issues and nuanced user behavior in your product, website, or mobile app.',
         textColor: 'text-black', // tw
     },
     videos: {

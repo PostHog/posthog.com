@@ -12,7 +12,7 @@ import { Steps, Step } from 'components/Docs/Steps'
 
 <CalloutBox icon="IconInfo" title="Data transfer costs" type="fyi">
 
-Rewrites route all PostHog traffic – events, session recordings, feature flag polls, and SDK assets – through your Next.js server. On Vercel, this counts toward [Fast Data Transfer and Edge Requests](https://vercel.com/docs/pricing); on other hosts it counts against their bandwidth and compute quotas. Session recordings are the biggest driver (often 1–5 MB per session) and can consume a plan quickly on high-traffic sites.
+Rewrites route all PostHog traffic – events, session recordings, feature flag polls, and SDK assets – through your Next.js server. On Vercel, this counts toward [Fast Data Transfer and Edge Requests](https://vercel.com/docs/pricing); on other hosts it counts against their bandwidth and compute quotas. Session recordings are the biggest driver (often 1 to 5 MB per session) and can consume a plan quickly on high-traffic sites.
 
 To avoid these costs, use the [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) (free for PostHog Cloud users) or a provider without egress fees like [Cloudflare Workers](/docs/advanced/proxy/cloudflare).
 
@@ -97,6 +97,22 @@ The static and array rewrites must come before the catch-all. Next.js evaluates 
 
 See [Next.js rewrites documentation](https://nextjs.org/docs/app/api-reference/next-config-js/rewrites) for more details.
 
+<CalloutBox icon="IconWarning" title="Using middleware? Exclude your proxy path" type="fyi">
+
+If your app already has a `middleware.ts` (or `proxy.ts` in Next.js 16) – common with [next-intl](https://next-intl.dev), [NextAuth](https://authjs.dev), or your own logic – its `matcher` can grab the proxy path before the rewrite runs and break ingestion.
+
+A catch-all matcher matches the capture endpoints (`/yourpath/e`, `/yourpath/flags`, `/yourpath/s`) and rewrites or redirects them, so events, feature flags, and recordings never reach PostHog. The static assets at `/yourpath/static/*.js` have a file extension, so a matcher like next-intl's default `'/((?!api|_next|_vercel|.*\\..*).*)'` skips them and they still load, which makes PostHog look connected even though nothing is sending.
+
+Add your proxy path to the matcher's negative lookahead:
+
+```js
+export const config = {
+  matcher: ['/((?!api|yourpath|_next|_vercel|.*\\..*).*)'],
+}
+```
+
+</CalloutBox>
+
 </Step>
 
 <Step title="Update your PostHog SDK">
@@ -166,6 +182,7 @@ If requests to your proxy path return 404:
 1. Verify your `next.config.js` is in the project root
 2. Restart your dev server after changing the config
 3. Check the rewrite order: static and array rules must come before the catch-all
+4. If you have middleware (`middleware.ts` or `proxy.ts`), check its `matcher` doesn't catch your proxy path. A catch-all matcher redirects the capture endpoints – you'll see something like `POST /yourpath/s` become a 307 to `/en/yourpath/s` that 404s, while `/yourpath/static/*.js` still loads. Add your proxy path to the matcher: `matcher: ['/((?!api|yourpath|_next|_vercel|.*\\..*).*)']`
 
 ### Trailing slash conflicts with SEO
 

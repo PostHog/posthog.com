@@ -110,6 +110,15 @@ importers:
       '@tanstack/react-virtual':
         specifier: ^3.13.12
         version: 3.13.12(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@typecaast/react':
+        specifier: ^0.5.4
+        version: 0.5.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@typecaast/skin-kit':
+        specifier: 0.4.1
+        version: 0.4.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@typecaast/skins':
+        specifier: 0.3.3
+        version: 0.3.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@types/lodash.groupby':
         specifier: ^4.6.7
         version: 4.6.9
@@ -5243,6 +5252,45 @@ packages:
 
   '@turist/time@0.0.2':
     resolution: {integrity: sha512-qLOvfmlG2vCVw5fo/oz8WAZYlpe5a5OurgTj3diIxJCdjRHpapC+vQCz3er9LV79Vcat+DifBjeAhOAdmndtDQ==}
+
+  '@typecaast/core@0.4.0':
+    resolution: {integrity: sha512-zy6eO7/okeox+3jr3GMzqmKgDHRWX6zCTGLJpwqU9isN+JrJIZyXJU8d0PM0SWVTzRVmv9NrWZKDX+Yhmy8R1Q==}
+
+  '@typecaast/core@0.6.0':
+    resolution: {integrity: sha512-NZtYH7JD3emTmR+Gt4eUB84AdgMs6hEpvTeDRvgK3WW48NKjpuPEJd9PcMrJsJE9zaPWihtCYrExDVcWxUdHLg==}
+
+  '@typecaast/react@0.5.4':
+    resolution: {integrity: sha512-OxoTfJQQcBcSXtL/vZqW/IbLofG0wDaBravNwiBXdbPuIEV7nlUryTsXab42DGsQWqpMEqO3xqCiFvvGkRDRpA==}
+    peerDependencies:
+      react: '>=18'
+
+  '@typecaast/schema@0.2.1':
+    resolution: {integrity: sha512-0xUp4Aqt60kiBOBv49zZX3NDh5MAZvATd4iU0XsOPS1fw7Ak05aeM/H8uT528w/aR6WekGw34qLt2MJfNtvTzg==}
+
+  '@typecaast/schema@0.4.0':
+    resolution: {integrity: sha512-RBbb7pbiGulBFoJUxaSIBz8htJ0Np5Avz1Mo8lyPCRzvZALOCfKFQeqHVRs1LcB61y4PGa3gP3nwFa/Ktunm6A==}
+
+  '@typecaast/skin-kit@0.4.1':
+    resolution: {integrity: sha512-U6/2EaugtUG1QpvXf9ruHd+q6wryMv9Onlt8i9NoAAwnYoQEeDP6x+ChTRLDdJHJfB32CTIeNhUyESQlQ5FHUw==}
+    peerDependencies:
+      react: '>=18'
+      react-dom: '>=18'
+
+  '@typecaast/skin-kit@0.6.0':
+    resolution: {integrity: sha512-Eyx0tXJ4jMCwKvLaZPGyAz9Z7mqcDxF8ABwcOoTlISWkg0JJld5Sk/gnFxMHFT287Wc6ygFMkPO1loCzDNhgNQ==}
+    peerDependencies:
+      react: '>=18'
+      react-dom: '>=18'
+
+  '@typecaast/skins@0.3.3':
+    resolution: {integrity: sha512-yrigJwxb48Bxei2qRyf9xeaQ4de4vD4CH8gMI4133O2uZiw0TGiN9jtuxVwPRUoiM1OXbRvwfzdfMrY7eH2SUA==}
+    peerDependencies:
+      react: '>=18'
+
+  '@typecaast/skins@0.5.0':
+    resolution: {integrity: sha512-iAJVo24le/l7Os5+ztE/VOyT+LT+cFzAPgjt1/d7ksKixXk1v8Hig6Y2cc1W5AwYUvZpuTDiYWTGae3/6vLT4Q==}
+    peerDependencies:
+      react: '>=18'
 
   '@types/babel__core@7.20.5':
     resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
@@ -17449,6 +17497,9 @@ packages:
   zen-observable@0.8.15:
     resolution: {integrity: sha512-PQ2PC7R9rslx84ndNBZB/Dkv8V8fZEpk83RLgXtYd0fwUgEjseMn1Dgajh2x6S8QbZAFa9p2qVCEuYZNgve0dQ==}
 
+  zod@4.4.3:
+    resolution: {integrity: sha512-ytENFjIJFl2UwYglde2jchW2Hwm4GJFLDiSXWdTrJQBIN9Fcyp7n4DhxJEiWNAJMV1/BqWfW/kkg71UDcHJyTQ==}
+
   zustand@4.5.7:
     resolution: {integrity: sha512-CHOUy7mu3lbD6o6LJLfllpjkzhHXSBlX8B9+qPddUsIfeF5S/UZ5q0kmCsnRqT1UHFQZchNFDDzMbQsuesHWlw==}
     engines: {node: '>=12.7.0'}
@@ -23790,6 +23841,68 @@ snapshots:
       node-fetch: 2.7.0
 
   '@turist/time@0.0.2': {}
+
+  '@typecaast/core@0.4.0':
+    dependencies:
+      '@typecaast/schema': 0.2.1
+
+  '@typecaast/core@0.6.0':
+    dependencies:
+      '@typecaast/schema': 0.4.0
+
+  '@typecaast/react@0.5.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@typecaast/core': 0.6.0
+      '@typecaast/schema': 0.4.0
+      '@typecaast/skin-kit': 0.6.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@typecaast/skins': 0.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react: 18.3.1
+    transitivePeerDependencies:
+      - react-dom
+
+  '@typecaast/schema@0.2.1':
+    dependencies:
+      zod: 4.4.3
+
+  '@typecaast/schema@0.4.0':
+    dependencies:
+      zod: 4.4.3
+
+  '@typecaast/skin-kit@0.4.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@typecaast/core': 0.4.0
+      '@typecaast/schema': 0.2.1
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      zod: 4.4.3
+
+  '@typecaast/skin-kit@0.6.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@typecaast/core': 0.6.0
+      '@typecaast/schema': 0.4.0
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      zod: 4.4.3
+
+  '@typecaast/skins@0.3.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@typecaast/core': 0.4.0
+      '@typecaast/schema': 0.2.1
+      '@typecaast/skin-kit': 0.4.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react: 18.3.1
+      zod: 4.4.3
+    transitivePeerDependencies:
+      - react-dom
+
+  '@typecaast/skins@0.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@typecaast/core': 0.6.0
+      '@typecaast/schema': 0.4.0
+      '@typecaast/skin-kit': 0.6.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react: 18.3.1
+      zod: 4.4.3
+    transitivePeerDependencies:
+      - react-dom
 
   '@types/babel__core@7.20.5':
     dependencies:
@@ -40603,6 +40716,8 @@ snapshots:
       zen-observable: 0.8.15
 
   zen-observable@0.8.15: {}
+
+  zod@4.4.3: {}
 
   zustand@4.5.7(@types/react@16.14.66)(immer@9.0.21)(react@18.3.1):
     dependencies:

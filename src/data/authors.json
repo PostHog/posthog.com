@@ -698,5 +698,13 @@
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/nyior/",
         "profile_id": 46202
+    },
+    {
+        "handle": "tanaaz-khan",
+        "name": "Tanaaz Khan",
+        "role": "Freelance Technical Writer",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/tanaaz-khan/",
+        "profile_id": 46489
     }
 ]

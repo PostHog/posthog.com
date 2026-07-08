@@ -18,7 +18,7 @@ Prompt management lets you create and update LLM prompts directly in PostHog. Wh
 
 ## Creating prompts
 
-1. Navigate to **Prompt Management** > **Prompts**
+1. Navigate to **Prompt management** > **Prompts**
 2. Click **New prompt**
 3. Enter a name for your prompt
 4. Write your prompt content, using `{{variables}}` for dynamic values
@@ -75,18 +75,18 @@ Every prompt change creates a new immutable version. Previous versions are prese
 
 ### Publish a new version
 
-1. Open a prompt and click **Edit latest**
+1. Open a prompt and click **New version**
 2. Make your changes
-3. Click **Publish version**
+3. Click **Publish** — the button shows the number the new version will get, for example **Publish v4**
 
-If someone else published a new version while you were editing, you'll see a conflict error. Refresh the page to load the latest version and try again.
+If someone else published a new version while you were editing, publishing fails with a warning. Your edits are preserved in the editor — review them against the new latest version and publish again.
 
 ### Restore a previous version
 
 1. Open a prompt and select a version from the **Version history** sidebar
-2. Click **Use as latest**
+2. Click **New version** — the editor is prefilled with that version's content
 3. Edit the prompt content if needed
-4. Click **Publish version**
+4. Click **Publish**
 
 This publishes the old content as a new version. The original version remains unchanged.
 
