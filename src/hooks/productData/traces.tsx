@@ -51,7 +51,7 @@ export const traces = {
     overview: {
         title: 'Straight to the line that broke',
         description:
-            'A trace pinpoints the exact query. The agent reads it, opens a PR that fixes the right line, and sends it to your Inbox. You hit merge. That’s the whole job.',
+            'A trace pinpoints the slow query, failed API call, or service that broke the request. The agent traces it to the right line of code, opens a PR with the fix, and sends it to your inbox. You hit merge. That’s the whole job.',
         textColor: 'text-white',
         layout: 'stacked',
     },
