@@ -25,7 +25,26 @@ export const helicone = {
                 human_annotation: false,
                 session_replay: false,
                 product_analytics: false,
-            },
+                ai_gateway_proxy: true,
+             },
+        },
+        session_replay: {
+            available: false,
+        },
+        product_analytics: {
+            available: false,
+        },
+        feature_flags: {
+            available: false,
+        },
+        experiments: {
+            available: false,
+        },
+    },
+    platform: {
+        deployment: {
+            open_source: true,
+            eu_hosting: true,
         },
     },
 }

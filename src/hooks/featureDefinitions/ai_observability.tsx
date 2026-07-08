@@ -142,6 +142,10 @@ export const aiObservabilityFeatures = {
             name: 'Trace explorer UI',
             description: 'Dedicated interface for browsing and filtering traces',
         },
+        ai_gateway_proxy: {
+        name: 'AI gateway/proxy',
+        description: 'Route LLM requests through a gateway for caching, rate limits, fallbacks, and observability',
+        },
     },
 },
 prompt_management: {

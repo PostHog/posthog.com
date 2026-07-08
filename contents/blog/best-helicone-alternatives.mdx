@@ -1,6 +1,6 @@
 ---
 title: 'The best Helicone alternatives & competitors, compared'
-date: 2026-07-07
+date: 2026-07-08
 author:
     - natalia-amorim
 rootpage: /blog
@@ -15,9 +15,11 @@ seo:
   metaDescription: 'Helicone is in maintenance mode after the Mintlify acquisition. Compare the best alternatives, including PostHog, Langfuse, and LangSmith, and how to migrate.'
 ---
 
-If you're a Helicone user, you've probably seen the news: [Mintlify acquired it](https://www.helicone.ai/blog/joining-mintlify) in March 2026, and the platform is now in maintenance mode. It keeps running, it gets security updates and new model support, but the roadmap is frozen.
+If you're a Helicone user, you've probably seen the news: [Mintlify acquired it](https://www.helicone.ai/blog/joining-mintlify) in March 2026, and the platform is now in maintenance mode. It'll keep running, getting security updates and receiving new model support, but the roadmap is frozen.
 
-That's not an emergency – nothing is breaking tomorrow. But "no new features, ever" is a significant limitation in a space where the tools reinvent themselves every six months. Agent tracing, evals, OTel support: whatever the next must-have is, Helicone won't have it.
+That's not an emergency – nothing is breaking tomorrow. But "no new features, ever" is a significant limitation in a space where the tools reinvent themselves every six months. 
+
+Agent tracing, evals, OTel support: whatever the next must-have is, Helicone won't have it.
 
 So whether you're planning a migration or just starting a new project, here are the best Helicone alternatives available today – what each does well, how it compares, and who it's actually for.
 
@@ -33,66 +35,93 @@ If you do decide to move, look at how each tool fits into your workflow. Helicon
 </details>
 
 ## 1. PostHog
+
 - **Founded:** 2020
 - **Similar to:** Langfuse, LangSmith
 - **Typical users:** Engineers and product teams
 - **Typical customers:** Startups and SaaS companies
 
+![PostHog AI Observability](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2026_06_22_at_13_19_01_2x_acc4617c50.png)
+
 ### What is PostHog?
 
 **[PostHog](/)** (that's us 👋) is the leading platform for self-driving products. You can use our desktop ([Code](/code)), [web](/ai), [Slack](/slack), and [MCP](/mcp) products to leverage tools like [AI observability](/ai-observability), [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [logs](/logs), and more.
 
-Companies like [Y Combinator](/customers/ycombinator), [Supabase](/customers/supabase), [Lovable](/customers/lovable), and Mistral AI use PostHog to understand how people use their products.
+PostHog captures full traces of your LLM calls, so you can follow a request through every prompt, tool call, and model response. For each generation, it tracks token usage, cost, latency, and errors – including per-user cost attribution, so you can see what individual customers cost you, just like Helicone's per-key tracking. 
 
-That means it is not just a Helicone alternative. Many teams also use it instead of separate tools for product analytics, feature management, and experimentation, so data from their AI features can be analyzed alongside the rest of their product data instead of in a separate dashboard.
+You can also score outputs with [LLM-as-a-judge or code-based evals](/docs/ai-evals), [manage and version prompts (beta)](/docs/prompt-management) without redeploying code, and query trace data with SQL or through the [MCP server](/mcp) directly from your editor.
+
+The architectural difference from Helicone is that PostHog instruments via SDK rather than sitting in your request path as a proxy. 
+
+That means a bit more setup, no gateway features like caching or rate limiting, but also no proxy between you and your LLM provider, and much deeper context on the other side. Because traces are stored as regular PostHog events, you can connect AI behavior to what users actually did: whether people who hit a slow generation churned, or whether a new prompt version improved activation.
 
 ### Key features
 
-- **AI observability:** Track traces, token usage, costs, and latency across your AI applications so you can understand how they perform in production.
-- **Product analytics:** See how people use your AI features, including adoption, engagement, retention, and conversion.
-- **Session replay:** Watch user sessions to understand what happened before, during, and after an AI interaction.
-- **Feature flags and experiments:** Roll out new models, prompts, and AI features gradually, then measure their impact before making them available to everyone.
-- **Prompt management:** Create, version, and manage prompts without hardcoding them into your application.
-- **Data warehouse:** Bring AI and product data together in one place so you can query and analyze it without moving data between tools.
+- [**Generations**](docs/ai-observability/generations): Monitor model performance, token usage, costs, latency, and errors across your AI features from a single view.
+- [**Traces**](docs/ai-observability/traces): Follow AI workflows from start to finish to understand how requests move through prompts, tools, and model calls.
+- [**AI evals**](docs/ai-evals/evaluations): Automatically score model outputs using LLM-as-a-judge or code-based checks to track quality and identify regressions over time.
+- [**Prompt management**](docs/prompt-management) *(beta):* Create, version, and update prompts without redeploying code. Compare versions and understand how prompt changes affect outputs.
+- [**SQL access**](docs/sql): Query AI observability data with SQL and analyze it alongside product, user, and business data.
+- [**Session replay**](/docs/ai-observability/link-session-replay): Watch recordings of users interacting with AI features and investigate issues alongside the actions that triggered them.
 
 ### How does PostHog compare to Helicone?
 
-PostHog covers the same core observability features as Helicone, including tracing, cost tracking, prompt management, and evaluations. The difference is that PostHog combines those features with product analytics, session replay, feature flags, and experiments.
-Helicone uses a proxy-based approach, which usually means less setup and fewer code changes. PostHog is SDK-based, so migrating typically requires more work. PostHog also gives you a wider view of how AI features affect the rest of your product.
-
-| Feature | PostHog | Helicone |
-| --- | --- | --- |
-| Tracing | ✅ | ✅ |
-| Cost tracking | ✅ | ✅ |
-| [Evaluations](https://posthog.com/docs/ai-evals/evaluations) | ✅ | ⚠️ Limited |
-| [Prompt management](https://posthog.com/docs/prompt-management/prompts) | ✅ | ✅ |
-| Open source | ✅ | ✅ |
-| Self-hosting | ✅ | ✅ |
-| AI gateway / proxy | ❌ SDK-based | ✅ |
-| Actively developed | ✅ | ⚠️ Maintenance mode |
+<p>
+<ProductComparisonTable
+    competitors={['posthog', 'helicone']}
+    rows={[
+        'ai_observability.features.trace_visualization',
+        'ai_observability.features.cost_tracking',
+        'ai_observability.features.latency_tracking',
+        'ai_observability.features.error_tracking',
+        'ai_observability.features.ai_gateway_proxy',
+        'ai_observability.features.prompt_management',
+        'ai_observability.features.prompt_evaluations',
+        'ai_observability.features.evaluation_datasets',
+        'ai_observability.features.agent_tracing',
+        'ai_observability.features.privacy_mode',
+        'ai_observability.features.session_replay',
+        'ai_observability.features.product_analytics',
+        {
+            label: 'Actively developed',
+            description: 'Whether the product is actively shipping new features',
+            values: [true, 'Maintenance mode'],
+        },
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
+</p>
 
 <details>
 <summary>Main differences between PostHog and Helicone</summary>
-- Helicone uses a proxy-based architecture, while PostHog is SDK-based. For many teams, that means migrating to PostHog requires more instrumentation and code changes.
+
+- Helicone uses a proxy-based architecture with gateway features like caching, rate limiting, and multi-provider routing. PostHog is SDK-based with no gateway – migrating means more instrumentation, but nothing sits between you and your LLM provider.
 - Helicone focuses on LLM observability. PostHog combines AI observability with product analytics, session replay, feature flags, experiments, and other developer tools.
-- PostHog is actively developed with [frequent releases](/changelog), while Helicone is currently in maintenance mode following its acquisition by Mintlify.
-- Helicone has been focused on LLM observability for longer. PostHog's AI observability product is newer.
+- PostHog supports [LLM-as-a-judge and code-based evals](/docs/ai-evals) on production generations. Helicone's eval features are basic, and maintenance mode means they won't develop further.
+- PostHog is actively developed with [frequent releases](/changelog), while Helicone is in maintenance mode following its acquisition by Mintlify.
+
 </details>
 
 <details>
 <summary>Main similarities between PostHog and Helicone</summary>
-- Both provide AI observability features such as tracing and usage monitoring.
+
+- Both track LLM traces, token usage, costs, and latency across providers like OpenAI and Anthropic.
 - Both support cost tracking for AI workloads.
 - Both offer prompt management features.
-- Both are open source and can be self-hosted.
+- Both are open source and self-serve with a free tier.
 
 </details>
 
 ### Why do companies use PostHog?
+
 According to reviews on [G2](https://www.g2.com/products/posthog/reviews) and other review sites, teams tend to choose PostHog for three main reasons:
-1. **It replaces multiple tools:** Several reviewers mention that PostHog combines analytics, session replay, feature flags, experiments, and other capabilities that would otherwise require [multiple separate products](https://www.g2.com/compare/microsoft-microsoft-clarity-vs-posthog).
+
+1. **It replaces multiple tools:** Several reviewers mention that PostHog combines analytics, session replay, feature flags, experiments, and other capabilities that would otherwise require multiple separate products.
+
 2. **It helps teams understand user behavior:** PostHog connects analytics with session replay, making it easier to see what users did before they dropped off, got stuck, or completed an action.
-3. **It's quick to get started with:** Reviewers frequently mention [easy setup and ease of use](https://technologychecker.io/technology/posthog), along with the flexibility PostHog gives developers when working with their data.
+
+3. **It's quick to get started with:** Reviewers frequently mention easy setup and ease of use, along with the flexibility PostHog gives developers when working with their data.
 
 > #### Bottom line
 >
