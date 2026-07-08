@@ -24,6 +24,8 @@ import {
     IconArrowRight,
     IconBrain,
     IconCalendar,
+    IconChevronLeft,
+    IconChevronRight,
     IconFlask,
     IconMap,
     IconNewspaper,
@@ -329,7 +331,7 @@ function PublicationsSection() {
     const publications = usePublications()
 
     return (
-        <section className="mb-12 px-4 @xl:px-8">
+        <section id="papers" className="scroll-mt-16 mb-12 px-4 @xl:px-8">
             <SectionHeader
                 sticker={StickerELearning}
                 kicker="Papers"
@@ -442,7 +444,7 @@ function StatusStamp({ status, rotate }: { status: RoadmapStatus; rotate: string
 
 function RoadmapSection() {
     return (
-        <section className="mb-12 px-4 @xl:px-8">
+        <section id="pipeline" className="scroll-mt-16 mb-12 px-4 @xl:px-8">
             <SectionHeader
                 sticker={StickerMicroscope}
                 kicker="The pipeline"
@@ -514,7 +516,7 @@ function ShippedSection() {
     }, [])
 
     return (
-        <section className="mb-12 px-4 @xl:px-8">
+        <section id="shipped" className="scroll-mt-16 mb-12 px-4 @xl:px-8">
             <SectionHeader
                 sticker={StickerTerminal}
                 kicker="Live from GitHub"
@@ -724,9 +726,26 @@ const buildFeed = (posts: ResearchPost[]): FeedItem[] => {
 function ResearchPostsSection({ posts }: { posts: ResearchPost[] }) {
     const feed = buildFeed(posts)
     const isCarousel = feed.length > 6
+    const scrollerRef = React.useRef<HTMLDivElement>(null)
+    const [canScroll, setCanScroll] = useState({ left: false, right: true })
+
+    const updateArrows = () => {
+        const el = scrollerRef.current
+        if (!el) return
+        setCanScroll({
+            left: el.scrollLeft > 8,
+            right: el.scrollLeft < el.scrollWidth - el.clientWidth - 8,
+        })
+    }
+
+    const scrollByCards = (direction: 1 | -1) => {
+        const el = scrollerRef.current
+        if (!el) return
+        el.scrollBy({ left: direction * Math.round(el.clientWidth * 0.8), behavior: 'smooth' })
+    }
 
     return (
-        <section className="mb-12 px-4 @xl:px-8">
+        <section id="blog" className="scroll-mt-16 mb-12 px-4 @xl:px-8">
             <SectionHeader
                 sticker={StickerBulb}
                 kicker="Blog"
@@ -734,12 +753,38 @@ function ResearchPostsSection({ posts }: { posts: ResearchPost[] }) {
                 subtitle="We publish what we learn as we go – the big wins, the disastrous errors, the cancelled projects we gave up on along the way. We're not here just to share the glamorous bits."
             />
             {isCarousel ? (
-                <div className="flex gap-4 mb-6 snap-x overflow-x-auto overflow-y-hidden pb-2 -mx-4 px-4 @xl:-mx-8 @xl:px-8">
-                    {feed.map((item) => (
-                        <div key={item.key} className="w-72 @2xl:w-80 shrink-0 snap-start">
-                            {item.element}
-                        </div>
-                    ))}
+                <div className="relative mb-6">
+                    <div
+                        ref={scrollerRef}
+                        onScroll={updateArrows}
+                        className="flex gap-4 snap-x overflow-x-auto overflow-y-hidden pb-2 -mx-4 px-4 @xl:-mx-8 @xl:px-8"
+                    >
+                        {feed.map((item) => (
+                            <div key={item.key} className="w-72 @2xl:w-80 shrink-0 snap-start">
+                                {item.element}
+                            </div>
+                        ))}
+                    </div>
+                    <button
+                        type="button"
+                        onClick={() => scrollByCards(-1)}
+                        aria-label="Scroll to previous cards"
+                        className={`hidden @md:flex items-center justify-center absolute -left-2 @xl:-left-4 top-1/2 -translate-y-1/2 size-9 rounded-full border border-primary bg-primary shadow-md text-primary transition-opacity duration-150 hover:bg-accent ${
+                            canScroll.left ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                        }`}
+                    >
+                        <IconChevronLeft className="size-5" />
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => scrollByCards(1)}
+                        aria-label="Scroll to next cards"
+                        className={`hidden @md:flex items-center justify-center absolute -right-2 @xl:-right-4 top-1/2 -translate-y-1/2 size-9 rounded-full border border-primary bg-primary shadow-md text-primary transition-opacity duration-150 hover:bg-accent ${
+                            canScroll.right ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                        }`}
+                    >
+                        <IconChevronRight className="size-5" />
+                    </button>
                 </div>
             ) : (
                 <div className="grid @md:grid-cols-2 @xl:grid-cols-3 auto-rows-fr gap-4 mb-6">
@@ -812,7 +857,7 @@ function PeopleSection({ teamProfiles, posts }: { teamProfiles: TeamProfile[]; p
     if (everyone.length === 0) return null
 
     return (
-        <section className="mb-12 px-4 @xl:px-8">
+        <section id="team" className="scroll-mt-16 mb-12 px-4 @xl:px-8">
             <SectionHeader
                 sticker={StickerUsers}
                 kicker="The team"
@@ -882,7 +927,7 @@ function EventsSection() {
         .slice(0, 4)
 
     return (
-        <section className="mb-12 px-4 @xl:px-8">
+        <section id="events" className="scroll-mt-16 mb-12 px-4 @xl:px-8">
             <SectionHeader
                 sticker={StickerRun}
                 kicker="Events"
@@ -1010,7 +1055,7 @@ const FAQ_ITEMS = [
 
 function FAQSection() {
     return (
-        <section className="mb-12 px-4 @xl:px-8 max-w-2xl">
+        <section id="faq" className="scroll-mt-16 mb-12 px-4 @xl:px-8 max-w-2xl">
             <h2 className="text-2xl m-0 mb-6">Frequently asked questions</h2>
             <Accordion
                 type="multiple"
@@ -1089,6 +1134,18 @@ export default function ResearchPage({
             <SEO
                 title="PostHog Research"
                 description="AI research at PostHog: training foundation models on the data behind session replay, building agents that fix products autonomously, and publishing the results."
+                structuredData={PUBLICATIONS.map((paper) => {
+                    const resolved = resolvePublication(paper)
+                    return {
+                        '@context': 'https://schema.org',
+                        '@type': 'ScholarlyArticle',
+                        headline: resolved.title,
+                        author: resolved.authors,
+                        datePublished: resolved.year,
+                        url: resolved.url,
+                        publisher: { '@type': 'Organization', name: 'PostHog' },
+                    }
+                })}
             />
             <Editor slug="/research" maxWidth="100%" hasPadding={false} disableFormatting>
                 <div className="@container not-prose font-rounded">
