@@ -2181,7 +2181,7 @@ export const docsMenu = {
                     url: '/docs/self-driving/setup',
                 },
                 {
-                    name: 'Surfaces',
+                    name: 'Products',
                 },
                 {
                     name: 'Slack',
@@ -2194,6 +2194,10 @@ export const docsMenu = {
                 {
                     name: 'MCP',
                     url: '/docs/model-context-protocol',
+                },
+                {
+                    name: 'CLI',
+                    url: '/docs/cli',
                 },
                 // TODO: add PostHog Code (Desktop) as a surface here once it's GA.
                 {
