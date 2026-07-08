@@ -1593,6 +1593,9 @@ const getInitialSiteSettings = () => {
         siteSettings.wallpaper = 'keyboard-garden'
     }
 
+    // The classic skin has been retired; force anyone with it saved back to modern
+    siteSettings.skinMode = 'modern'
+
     return siteSettings
 }
 

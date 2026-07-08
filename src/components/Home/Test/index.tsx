@@ -289,18 +289,19 @@ function TestHero(): JSX.Element {
 }
 
 function ControlHero(): JSX.Element {
+    const { siteSettings } = useApp()
+    const isDark = siteSettings.theme === 'dark'
     return (
         <>
             <div className="text-center @xl:text-left mb-12">
                 <ControlHeroImage />
 
                 <h1 className="[&_p]:m-0 flex gap-1 flex-wrap justify-center @xl:justify-start !text-2xl mb-8 pt-2">
-                    <div className="dark:hidden">
-                        <Logo />
-                    </div>
-                    <div className="hidden dark:block">
-                        <Logo fill="white" />
-                    </div>
+                    <Logo
+                        className="h-9 w-auto"
+                        variant={isDark ? 'mono' : 'gradient'}
+                        color={isDark ? 'white' : undefined}
+                    />
                 </h1>
 
                 <ControlTagline />

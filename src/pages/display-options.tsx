@@ -36,19 +36,6 @@ const colorModeOptions: ToggleOption[] = [
     },
 ]
 
-const skinOptions: ToggleOption[] = [
-    {
-        label: 'Modern',
-        value: 'modern',
-        // icon: <IconLaptop className="size-5" />,
-    },
-    {
-        label: 'Classic',
-        value: 'classic',
-        // icon: <IconLaptop className="size-5" />,
-    },
-]
-
 const cursorOptions: ToggleOption[] = [
     {
         label: 'Default',
@@ -204,10 +191,6 @@ export default function DisplayOptions() {
         }
     }
 
-    const handleSkinChange = (value: string) => {
-        updateSiteSettings({ ...siteSettings, skinMode: value as SiteSettings['skinMode'] })
-    }
-
     const handleCursorChange = (value: string) => {
         updateSiteSettings({ ...siteSettings, cursor: value as SiteSettings['cursor'] })
     }
@@ -229,14 +212,6 @@ export default function DisplayOptions() {
                         options={colorModeOptions}
                         onValueChange={handleColorModeChange}
                         value={siteSettings.colorMode}
-                    />
-                </div>
-                <div className="bg-primary grid grid-cols-2 gap-2">
-                    <ToggleGroup
-                        title="Theme"
-                        options={skinOptions}
-                        onValueChange={handleSkinChange}
-                        value={siteSettings.skinMode}
                     />
                 </div>
                 <div className="bg-primary grid grid-cols-2 gap-2 mt-2">
