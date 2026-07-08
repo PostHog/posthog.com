@@ -612,6 +612,7 @@ export default function TeamPage(props: TeamPageProps) {
                 }
                 proseSize="sm"
                 rightActionButtons={editing ? editActions : editButton}
+                hideAppOptions
                 showQuestions={false}
                 {...({
                     header: (

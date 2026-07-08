@@ -178,6 +178,7 @@ const TeamsPage = () => {
                 proseSize="base"
                 onSearch={(query) => setSearchTerm(query)}
                 rightActionButtons={newTeamButton}
+                hideAppOptions
             >
                 <div className="@container">
                     <p className="mt-0">

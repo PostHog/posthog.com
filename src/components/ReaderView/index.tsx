@@ -125,6 +125,8 @@ interface ReaderViewProps {
     padding?: boolean
     proseSize?: 'sm' | 'base' | 'lg'
     rightActionButtons?: React.ReactNode
+    /** Hide the sidebar's app-options (gear) button. Defaults to false. */
+    hideAppOptions?: boolean
     isEditing?: boolean
     onSearch?: (query: string) => void
     showSurvey?: boolean
@@ -359,7 +361,7 @@ const AppOptionsButton = ({ isMdx }: { isMdx: boolean }) => {
             dataScheme="secondary"
             trigger={
                 <span>
-                    <OSButton icon={<IconGear className="size-5" />} size="md" />
+                    <OSButton icon={<IconGear />} size="md" />
                 </span>
             }
             contentClassName="w-80"
@@ -460,6 +462,7 @@ export default function ReaderView({
     padding = true,
     proseSize = 'sm',
     rightActionButtons,
+    hideAppOptions = false,
     isEditing,
     onSearch,
     showSurvey = false,
@@ -494,6 +497,7 @@ export default function ReaderView({
                 padding={padding}
                 proseSize={proseSize}
                 rightActionButtons={rightActionButtons}
+                hideAppOptions={hideAppOptions}
                 isEditing={isEditing}
                 onSearch={onSearch}
                 showSurvey={showSurvey}
@@ -831,6 +835,7 @@ interface LeftSidebarProps {
     commits?: any[]
     pageUrl: string | undefined
     rightActionButtons?: React.ReactNode
+    hideAppOptions?: boolean
     productSelect?: React.ReactNode
     inlineSearch?: React.ReactNode
     menuTabs?: MenuTab[]
@@ -980,6 +985,7 @@ const LeftSidebar = ({
     commits,
     pageUrl,
     rightActionButtons,
+    hideAppOptions = false,
     productSelect,
     inlineSearch,
     menuTabs,
@@ -1130,13 +1136,6 @@ const LeftSidebar = ({
                         : `z-30 ${resolveBackground(background)}`
                 }`}
             >
-                {/* Top icon stack: edit-related actions */}
-                <div className="flex flex-col items-center gap-px p-1 flex-shrink-0">
-                    <ConditionalMarkdownDropdown pageUrl={pageUrl} />
-                    <EditHistoryPopover commits={commits || []} />
-                    {rightActionButtons}
-                </div>
-
                 {/* Middle content — always rendered so the bottom row stays
                     anchored. The single fade rule on this container reaches
                     every `[data-sidebar-label]` descendant — product name,
@@ -1145,7 +1144,7 @@ const LeftSidebar = ({
                     smooth instead of an abrupt cut. */}
                 <SidebarExpandedContext.Provider value={displayExpanded}>
                     <div
-                        className={`flex-1 min-h-0 flex flex-col w-[250px] [&_[data-sidebar-label]]:transition-opacity [&_[data-sidebar-label]]:duration-200 ${
+                        className={`flex-1 min-h-0 flex flex-col w-[250px] pt-2 [&_[data-sidebar-label]]:transition-opacity [&_[data-sidebar-label]]:duration-200 ${
                             expanded
                                 ? ''
                                 : '[&_[data-sidebar-label]]:opacity-0 [&_a]:!bg-transparent [&_button]:!bg-transparent [&_a]:!border-transparent [&_button]:!border-transparent'
@@ -1297,8 +1296,11 @@ const LeftSidebar = ({
                     </Tooltip>
                     {displayExpanded && (
                         <div className="ml-auto flex items-center gap-px">
+                            <ConditionalMarkdownDropdown pageUrl={pageUrl} />
+                            <EditHistoryPopover commits={commits || []} />
                             <EditOnGitHubButton filePath={filePath} sourceInstanceName={sourceInstanceName} />
-                            <AppOptionsButton isMdx={isMdx} />
+                            {!hideAppOptions && <AppOptionsButton isMdx={isMdx} />}
+                            {rightActionButtons}
                         </div>
                     )}
                 </div>
@@ -1479,6 +1481,7 @@ function ReaderViewContent({
     padding = true,
     proseSize,
     rightActionButtons,
+    hideAppOptions = false,
     isEditing,
     onSearch,
     showSurvey = false,
@@ -1586,6 +1589,7 @@ function ReaderViewContent({
                         commits={commits}
                         pageUrl={appWindow?.path}
                         rightActionButtons={rightActionButtons}
+                        hideAppOptions={hideAppOptions}
                         productSelect={productSelect}
                         inlineSearch={
                             <InlineSearch contentRef={onSearch ? undefined : contentRef} onSearch={onSearch} />

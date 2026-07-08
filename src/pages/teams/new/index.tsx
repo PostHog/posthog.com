@@ -78,6 +78,7 @@ export default function NewTeam(props: TeamPageProps) {
                 leftSidebar={<TreeMenu items={teamsNavigation} />}
                 proseSize="base"
                 rightActionButtons={editActions}
+                hideAppOptions
             >
                 <div className="max-w-screen-lg mx-auto px-4">
                     <Team
