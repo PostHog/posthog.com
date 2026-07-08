@@ -1,5 +1,5 @@
-export const arize_phoenix = {
-    name: 'Arize Phoenix',
+export const portkey = {
+    name: 'Portkey',
     products: {
         ai_observability: {
             available: true,
@@ -11,9 +11,9 @@ export const arize_phoenix = {
                 token_tracking: true,
                 prompt_playground: true,
                 prompt_evaluations: true,
-                alerting: false,
-                system_prompts: true,
+                alerting: true,
                 error_tracking: true,
+                system_prompts: true,
                 clustering: false,
                 trace_summarization: false,
                 llm_translation: false,
@@ -22,10 +22,11 @@ export const arize_phoenix = {
                 agent_tracing: true,
                 prompt_management: true,
                 evaluation_datasets: true,
-                human_annotation: true,
+                human_annotation: false,
                 session_replay: false,
                 product_analytics: false,
-                ai_gateway_proxy: false,
+                feature_flags: false,
+                ai_gateway_proxy: true,
             },
         },
         session_replay: {
@@ -34,11 +35,17 @@ export const arize_phoenix = {
         product_analytics: {
             available: false,
         },
+        feature_flags: {
+            available: false,
+        },
+        experiments: {
+            available: false,
+        },
     },
-            platform: {
+    platform: {
         deployment: {
-            eu_hosting: true,
             open_source: true,
+            eu_hosting: true,
         },
     },
 }
