@@ -109,6 +109,8 @@ There's no fixed dollar amount that trips a formal approval - we stay trust-base
 
 Past a certain spend, it's worth challenging the tool or contract itself, if feasible - and it's up to you to decide what feasible means here. Software keeps getting cheaper, and at some point it may be cheaper to build than to buy. Pull in your exec to discuss this - it's exactly the kind of trade-off they should be weighing in on.
 
+**Renewals are the same process.** A renewal isn't a rubber stamp - do the due diligence and see where you can optimize. Vendors can usually help here, so ask them. Pull in your exec and Finance for help negotiating the terms.
+
 
 ## Frequently asked questions 🤨
 - Can I use my personal card for a work-related expense?
