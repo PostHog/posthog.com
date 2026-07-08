@@ -45,11 +45,11 @@ The `values` table supports incremental syncs on the dot `timestamp` (Unix epoch
 
 <SourceTables />
 
-The `values` table contains one row per dot (data point), with the owning variable's id injected in the `variable` column so you can join it to the `variables` table.
+The `values` table contains one row per dot (data point), with the owning variable's ID injected in the `variable` column so you can join it to the `variables` table.
 
 ## Troubleshooting
 
-- If you see an authentication error, your API token is invalid or has expired. Temporary tokens expire after a few hours — use the permanent token from your profile's API Credentials page, then reconnect.
+- If you see an authentication error, your API token is invalid or has expired. Temporary tokens expire after a few hours – use the permanent token from your profile's API Credentials page, then reconnect.
 - If your account lives on the legacy consumer tier and the connection fails, switch the API base URL to `https://things.ubidots.com`.
 
 <TroubleshootingLink />
