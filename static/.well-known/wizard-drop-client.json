@@ -1,0 +1,13 @@
+{
+    "client_id": "https://posthog.com/.well-known/wizard-drop-client.json",
+    "client_name": "Website wizard drop",
+    "redirect_uris": ["https://posthog.com/api/wizard/oauth-callback"],
+    "grant_types": ["authorization_code"],
+    "response_types": ["code"],
+    "token_endpoint_auth_method": "none",
+    "com.posthog": {
+        "verification_token": "phvt_PLACEHOLDER_REPLACE_BEFORE_LAUNCH",
+        "scopes": [],
+        "optional_scopes": []
+    }
+}

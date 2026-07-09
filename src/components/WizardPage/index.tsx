@@ -13,6 +13,7 @@ import Link from 'components/Link'
 import ProductList from 'components/ProductList'
 import { getLogo, getDarkClassForLogo } from '../../constants/logos'
 import WizardCommand from 'components/WizardCommand'
+import WizardDrop from 'components/WizardDrop'
 
 function WizardHeader(): JSX.Element {
     return (
@@ -249,6 +250,12 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         kind: 'flow',
         props: [],
         Editor: () => <WizardHeader />,
+    },
+    {
+        name: 'WizardDrop',
+        kind: 'flow',
+        props: [],
+        Editor: () => <WizardDrop />,
     },
     {
         name: 'DemoVideo',

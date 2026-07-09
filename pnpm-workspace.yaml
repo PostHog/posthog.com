@@ -22,3 +22,5 @@ publicHoistPattern:
     - '*platform*'
     - '*css.escape*'
     - '*anser*'
+    # gatsby/algoliaConfig.js requires this without it being a direct dependency
+    - '*gatsby-core-utils*'
