@@ -713,6 +713,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                         }
                     }}
                     data-app="AppWindow"
+                    data-fixed-size={item.appSettings?.size?.fixed || undefined}
                     data-scheme="tertiary"
                     className={`@container relative overflow-hidden ${
                         item.appSettings?.size?.fixed
@@ -775,7 +776,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                             }`}
                         >
                             {!item.fixedSize && (
-                                <div className="flex justify-end">
+                                <div className="window-expand-control flex justify-end">
                                     <Tooltip
                                         trigger={
                                             <OSButton
