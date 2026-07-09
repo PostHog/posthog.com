@@ -74,7 +74,7 @@ When creating a subscription for a dashboard, you can select which specific insi
 
 You can give each subscription a custom name to help distinguish between them. This is especially useful when you have multiple subscriptions to the same dashboard or insight – for example, different reports for different teams or frequencies.
 
-For Slack subscriptions, the custom name appears in the message header. For example, a subscription named "Weekly KPI Report" for a dashboard called "Main Dashboard" displays as **Weekly KPI Report** (dashboard: Main Dashboard) in the Slack message. Without a custom name, the message references the dashboard or insight name directly.
+For Slack subscriptions, the custom name is used as the message title in place of the dashboard or insight name.
 
 ## Email subscriptions
 
@@ -124,14 +124,6 @@ You can then select any channel the app has access to and set a frequency. **Pri
   classes="rounded"
   alt="Slack channel selection"
 />
-
-## Asking @PostHog about subscription reports
-
-When you receive a Slack subscription, you can reply in the message thread and mention [`@PostHog`](/docs/slack) to ask follow-up questions about the delivered report. If the [PostHog Slack app](/docs/slack) is fully configured with the required scopes, a hint appears at the bottom of each subscription message encouraging you to do this.
-
-If the hint links to setup docs instead, your Slack integration needs to be reconnected with updated scopes. See the [PostHog Slack app setup guide](/docs/slack/setup) for instructions.
-
-This feature requires your organization to have AI data processing consent enabled in your organization settings.
 
 ## Scheduling options
 
@@ -261,4 +253,4 @@ To re-enable a disabled subscription:
 
 PostHog validates that the issue is resolved before allowing re-enable. If the prerequisite is still broken (e.g., Slack is still disconnected or the bot isn't in the channel), re-enabling is rejected with an error message.
 
-When you successfully re-enable a subscription, PostHog immediately sends a confirmation delivery and sets the next scheduled delivery date.
+Once re-enabled, the subscription resumes delivering on its regular schedule.
