@@ -12,6 +12,8 @@ Alerts enable you to monitor your [insights](/product-analytics) and get notifie
 
 Alerts are supported on [trends](/docs/product-analytics/trends), [funnels](/docs/product-analytics/funnels) (steps and trends views only), and [SQL (HogQL)](/docs/sql) insights.
 
+Free tier organizations can create up to 5 alerts total. Paid plans raise or remove this limit.
+
 ## Use cases
 
 Since alerts work on [trends](/docs/product-analytics/trends), [funnels](/docs/product-analytics/funnels), and [SQL (HogQL)](/docs/sql) insights, you can monitor nearly any metric you track in PostHog. Common use cases include:
@@ -89,9 +91,9 @@ Since alerts work on [trends](/docs/product-analytics/trends), [funnels](/docs/p
      classes="rounded"
    />
 
-9. Select how often you want the alert to be checked. Options range from **real time** — for time-sensitive metrics where you want to be notified as soon as a threshold is breached — through every 15 minutes (requires Boost, Scale, or Enterprise plan), every hour, every day, every week, and every month.
+9. Select how often you want the alert to be checked. Options range from [**real time**](#real-time-alerts) (requires a Scale or Enterprise plan) through every 15 minutes (requires Boost, Scale, or Enterprise plan), every hour, every day, every week, and every month.
 
-   Real-time alerts are best suited to metrics where minutes matter, such as error spikes, checkout failures, or sudden traffic drops. For most metrics, a less frequent interval is sufficient and reduces notification noise.
+   For most metrics, a less frequent interval is sufficient and reduces notification noise.
 
 10. Pick who should be notified when the alert is triggered. Subscribed users automatically receive in-app notifications when the alert fires. You can also add email recipients, Slack channels, Discord webhooks, Microsoft Teams channels, or webhook URLs directly in the alert form.
 
@@ -170,6 +172,17 @@ This will then also enable you to set a percentage threshold.
 We support both **absolute value** thresholds (insight value more than or less than a certain number) or **percentage** thresholds (insight value changed by a certain percentage).
 Percentage thresholds are only available for relative alerts (as you need to compare two values to figure out percentage change).
 
+## Real-time alerts
+
+Real-time is the highest-frequency check interval available (see step 9 in [how to create an alert](#how-to-create-an-alert)). Instead of running on a fixed schedule like hourly or daily, real-time alerts are re-evaluated roughly every 2 minutes and always query ClickHouse directly rather than reading a cached result, so a notification reflects the most current data.
+
+**What you need:**
+
+- A **Scale or Enterprise** plan. This is a higher bar than the every-15-minutes interval, which is available on Boost, Scale, or Enterprise.
+- Your plan's real-time alert limit isn't exceeded. Each plan caps the number of active real-time alerts you can have at once.
+
+Real-time alerts work on trends, funnels, and SQL insights, same as any other check interval. They're best suited to metrics where minutes matter, such as error spikes, checkout failures, or sudden traffic drops.
+
 ## Alerts on funnels
 
 You can create alerts on [funnel insights](/docs/product-analytics/funnels) to monitor conversion rates. Funnel alerts track the overall conversion rate percentage and notify you when it crosses your defined thresholds.
@@ -213,7 +226,7 @@ Instead of setting a fixed threshold, anomaly detection uses statistical algorit
 
 ### Available detectors
 
-PostHog includes 13 anomaly detection algorithms. For most use cases, **Z-score** or **MAD** are good starting points.
+PostHog includes 13 anomaly detection algorithms (12 individual detectors plus the ensemble combiner below). For most use cases, **Z-score** or **MAD** are good starting points.
 
 #### Statistical detectors
 
@@ -222,6 +235,7 @@ PostHog includes 13 anomaly detection algorithms. For most use cases, **Z-score*
 | **Z-score**                         | General purpose      | Flags points that are many standard deviations from the rolling mean. Uses first-order differencing by default to handle cyclical data.   |
 | **MAD** (Median Absolute Deviation) | Data with outliers   | Similar to Z-score but uses median instead of mean, making it more robust to existing outliers. Uses first-order differencing by default. |
 | **IQR** (Interquartile Range)       | Skewed distributions | Flags values outside the interquartile range. Less sensitive to distribution shape than Z-score.                                          |
+| **Threshold**                        | Known fixed bounds    | Flags points outside a static value you set, rather than one learned from historical data.                                               |
 
 #### Machine learning detectors
 
