@@ -2763,17 +2763,51 @@ article.reader-view-content-container:has(.quest-sidebar) {
 
 /* On mobile, always present AppWindows as expanded (full-screen) regardless of SSR windowed state. */
 @media (max-width: 767px) {
-    div[data-app='AppWindow']:not([data-fixed-size]) {
+    #app-container div[data-app='AppWindow']:not([data-fixed-size]) {
         @apply size-full rounded-tr-none rounded-tl-none;
     }
 
-    div[data-app='AppWindow']:not([data-fixed-size]) > .size-full.flex-grow {
+    #app-container div[data-app='AppWindow']:not([data-fixed-size]) > .size-full.flex-grow {
         @apply rounded-tr-none rounded-tl-none;
     }
 
-    div[data-app='AppWindow']:not([data-fixed-size]) .window-expand-control {
+    #app-container div[data-app='AppWindow']:not([data-fixed-size]) .window-expand-control {
         @apply hidden;
     }
+
+    #app-container #taskbar {
+        @apply rounded-bl-none rounded-br-none;
+    }
+}
+
+#app-container[data-window-expanded] #taskbar {
+    @apply rounded-bl-none rounded-br-none;
+}
+
+#app-container[data-window-snapped-left]:not([data-window-expanded]) #taskbar {
+    @apply rounded-bl-none;
+}
+
+#app-container[data-window-snapped-right]:not([data-window-expanded]) #taskbar {
+    @apply rounded-br-none;
+}
+
+#app-container[data-window-expanded] div[data-app='AppWindow'][data-expanded]:not([data-fixed-size]) {
+    @apply size-full rounded-tr-none rounded-tl-none;
+}
+
+#app-container[data-window-expanded]
+    div[data-app='AppWindow'][data-expanded]:not([data-fixed-size])
+    > .size-full.flex-grow {
+    @apply rounded-tr-none rounded-tl-none;
+}
+
+#app-container[data-window-snapped-left] div[data-app='AppWindow'][data-snapped='left']:not([data-fixed-size]) {
+    @apply rounded-tl-none rounded-tr-none rounded-br-none;
+}
+
+#app-container[data-window-snapped-right] div[data-app='AppWindow'][data-snapped='right']:not([data-fixed-size]) {
+    @apply rounded-tl-none rounded-tr-none rounded-bl-none;
 }
 
 .reader-content-container {

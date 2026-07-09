@@ -6,6 +6,7 @@ import AppWindow from 'components/AppWindow'
 import CookieBannerToast from 'components/CookieBanner/ToastVersion'
 import { SearchOverlay } from 'components/SearchUI'
 import { ChatOverlay } from 'hooks/useChat'
+import AppContainer from 'components/AppContainer'
 
 // Isolates the `windows` subscription so that opening/closing a window only
 // re-renders this list, not the whole Wrapper (and therefore not the desktop,
@@ -27,7 +28,7 @@ export default function Wrapper() {
     const { compact } = useAppSettings()
 
     return (
-        <div data-scheme="primary" className="h-screen flex flex-col p-2" id="app-container">
+        <AppContainer className="h-screen flex flex-col p-2">
             {!compact && <TaskBarMenu />}
             <div ref={constraintsRef} className={`flex-grow relative min-h-0 overflow-clip`}>
                 <Desktop />
@@ -39,6 +40,6 @@ export default function Wrapper() {
             <SearchOverlay />
             <ChatOverlay />
             <CookieBannerToast />
-        </div>
+        </AppContainer>
     )
 }

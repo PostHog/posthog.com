@@ -8,6 +8,7 @@ import KoreanDesktop from '../KoreanDesktop'
 import KoreanTaskBarMenu from '../KoreanTaskBarMenu'
 import { SearchOverlay } from 'components/SearchUI'
 import { ChatOverlay } from 'hooks/useChat'
+import AppContainer from 'components/AppContainer'
 
 export default function KoreanWrapper() {
     const {
@@ -28,7 +29,7 @@ export default function KoreanWrapper() {
     }, [closingAllWindowsAnimation])
 
     return (
-        <div data-scheme="primary" className="fixed inset-0 size-full flex flex-col" id="app-container">
+        <AppContainer className="fixed inset-0 size-full flex flex-col">
             {!compact && <KoreanTaskBarMenu />}
             <div ref={constraintsRef} className={`flex-grow relative`}>
                 <KoreanDesktop />
@@ -97,6 +98,6 @@ export default function KoreanWrapper() {
                     />
                 </motion.div>
             </AnimatePresence>
-        </div>
+        </AppContainer>
     )
 }

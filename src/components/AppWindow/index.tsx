@@ -714,6 +714,9 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                     }}
                     data-app="AppWindow"
                     data-fixed-size={item.appSettings?.size?.fixed || undefined}
+                    data-expanded={item.expanded || undefined}
+                    data-windowed={item.windowed || undefined}
+                    data-snapped={item.snapped || undefined}
                     data-scheme="tertiary"
                     className={`@container relative overflow-hidden ${
                         item.appSettings?.size?.fixed

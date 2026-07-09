@@ -16,7 +16,7 @@ import {
     IconPeople,
     IconPinFilled,
 } from '@posthog/icons'
-import { useAppActions, useAppSettings, useAppWindows } from '../../context/App'
+import { useAppActions, useAppSettings } from '../../context/App'
 
 import MenuBar, { MenuType } from 'components/RadixUI/MenuBar'
 import ActiveWindowsPanel from 'components/ActiveWindowsPanel'
@@ -30,7 +30,6 @@ import MediaUploadModal from 'components/MediaUploadModal'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 
 function TaskBarMenu() {
-    const { windows } = useAppWindows()
     const {
         openSearch,
         openSignIn,
@@ -290,13 +289,7 @@ function TaskBarMenu() {
                         width: '100%',
                         boxSizing: 'border-box',
                     }}
-                    className={`bg-primary/50 backdrop-blur-3xl will-change-[transform,backdrop-filter] transform-gpu skin-classic:bg-accent wallpaper-keyboard-garden:dark:bg-black/15 border-secondary rounded pl-0.5 pr-2 shadow-2xl ${
-                        windows.some((w) => w.expanded && !w.minimized)
-                            ? 'rounded-br-none rounded-bl-none'
-                            : `${windows.some((w) => w.snapped === 'left' && !w.minimized) ? 'rounded-bl-none' : ''} ${
-                                  windows.some((w) => w.snapped === 'right' && !w.minimized) ? 'rounded-br-none' : ''
-                              }`
-                    }`}
+                    className="bg-primary/50 backdrop-blur-3xl will-change-[transform,backdrop-filter] transform-gpu skin-classic:bg-accent wallpaper-keyboard-garden:dark:bg-black/15 border-secondary rounded pl-0.5 pr-2 shadow-2xl"
                 >
                     {/* Top and bottom edges of the 3D box — visible during rotation */}
                     <div
@@ -411,5 +404,5 @@ function TaskBarMenu() {
 }
 
 // Memoized so it survives Wrapper re-renders (e.g. the navigate() on window
-// open/close); it still updates when it reads changed context (e.g. windows).
+// open/close); it still updates when it reads changed context.
 export default React.memo(TaskBarMenu)
