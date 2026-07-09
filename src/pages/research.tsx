@@ -14,6 +14,7 @@ import {
     StickerBulb,
     StickerELearning,
     StickerMicroscope,
+    StickerMindMap,
     StickerRun,
     StickerTerminal,
     StickerUsers,
@@ -30,6 +31,7 @@ import {
     IconMap,
     IconNewspaper,
     IconPullRequest,
+    IconShieldLock,
 } from '@posthog/icons'
 import { useToast } from '../context/Toast'
 import { useEvents, type Event } from './events'
@@ -131,7 +133,8 @@ function HeroSection({ teamCrestUrl }: { teamCrestUrl?: string }) {
 
                     <div className="max-w-2xl space-y-3">
                         <p>
-                            PostHog helps you{' '}
+                            PostHog holds one of the richest behavioral datasets anywhere: how real software actually
+                            gets used, across events, sessions, and replays.{' '}
                             <RoughAnnotation
                                 type="highlight"
                                 color="rgba(48, 164, 108, 0.2)"
@@ -139,11 +142,15 @@ function HeroSection({ teamCrestUrl }: { teamCrestUrl?: string }) {
                                 padding={2}
                                 delay={300}
                             >
-                                ship fixes while you sleep
-                            </RoughAnnotation>
-                            . That takes more than off-the-shelf models, so we're training our own – starting with a
-                            foundation model for session replay.
+                                Nobody has trained a foundation model on data like this.
+                            </RoughAnnotation>{' '}
+                            We're doing it – so PostHog can find and fix problems in your product while you sleep.
                             <sup className="font-semibold text-secondary">[1]</sup>
+                        </p>
+                        <p>
+                            This isn't speculative: agents already create the majority of new dashboards in PostHog, and
+                            MCP usage roughly doubles every month.
+                            <sup className="font-semibold text-secondary">[1]</sup> The models come next.
                         </p>
                         <p>
                             Useful research shouldn't happen behind closed doors: our code is open source where
@@ -157,6 +164,13 @@ function HeroSection({ teamCrestUrl }: { teamCrestUrl?: string }) {
                                 pricing principles
                             </Link>
                             .
+                        </p>
+                        <p className="text-sm text-secondary m-0">
+                            <IconShieldLock className="size-4 text-green inline-block align-text-bottom mr-1" />
+                            EU cloud opted out of training by default · data anonymized first · opt out anytime –{' '}
+                            <Link to="#faq" className="underline">
+                                details in the FAQ
+                            </Link>
                         </p>
                         <p className="text-xs text-secondary font-mono border-t border-primary pt-2 mt-4 max-w-xl">
                             [1] Hawkins, J. (2026).{' '}
@@ -375,51 +389,59 @@ const STATUS_STYLES: Record<RoadmapStatus, string> = {
     'help wanted': 'border-red text-red',
 }
 
-const ROADMAP_ITEMS: { title: string; description: string; status: RoadmapStatus }[] = [
+const ROADMAP_ITEMS: { title: string; description: string; outcome: string; status: RoadmapStatus }[] = [
     {
         title: 'Data labeling suite',
         description:
             'Tooling to label anonymized product data, so models learn what healthy and broken user sessions actually look like.',
+        outcome: 'Models that know a broken session when they see one',
         status: 'in progress',
     },
     {
         title: 'Session replay text renderer',
         description:
             'Rendering the DOM data behind replays as text a model can read, making replay analysis tractable at scale.',
+        outcome: 'AI that can watch thousands of your replays for you',
         status: 'in progress',
     },
     {
         title: 'Write data prep pipeline',
         description:
             'Anonymizing and normalizing opted-in data before any of it reaches training. The least glamorous step, and the one we refuse to get wrong.',
+        outcome: 'Training that never sees identifiable data',
         status: 'in progress',
     },
     {
         title: 'Build the sampling pipeline',
         description:
             'Selecting sessions and events that reflect real product usage, so training data quality matches production reality.',
+        outcome: 'Models tuned to real usage, not noise',
         status: 'up next',
     },
     {
         title: 'Train the Replay encoder model',
         description:
             'A foundation model pretrained on the raw data behind session replay, using novel techniques like a multi-axis RoPE built on additive Euler angles.',
+        outcome: 'Replays triaged automatically, at any volume',
         status: 'up next',
     },
     {
         title: 'Train the end-to-end agent',
         description:
             'Agents that predict and simulate user behavior, catch problems before you ship, and propose the fix rather than a dashboard.',
+        outcome: 'Problems caught before your users find them',
         status: 'help wanted',
     },
     {
         title: 'Build the model observability suite',
         description: 'Using our own LLM analytics to trace, evaluate, and debug every model we train.',
+        outcome: 'You can inspect how our models behave',
         status: 'in progress',
     },
     {
         title: 'Build an eval dataset',
         description: 'A benchmark of real product problems, so progress is measurable across every model iteration.',
+        outcome: 'Provable accuracy before anything reaches you',
         status: 'in progress',
     },
 ]
@@ -466,9 +488,79 @@ function RoadmapSection() {
                             <p className="text-sm text-secondary m-0 transition-colors duration-150 group-hover:text-primary">
                                 {item.description}
                             </p>
+                            <p className="text-xs text-secondary m-0 mt-2">
+                                <span className="font-semibold text-green">In practice:</span> {item.outcome}
+                            </p>
                         </div>
                     </div>
                 ))}
+            </div>
+        </section>
+    )
+}
+
+// ─────────────────────────────────────────────
+// Open problems (technical depth + recruiting)
+// ─────────────────────────────────────────────
+
+const OPEN_PROBLEMS: { title: string; body: string }[] = [
+    {
+        title: 'Positional embeddings for session data',
+        body: 'Session data isn\'t a flat token sequence: it has time, DOM depth, and user-action order as separate axes, and standard rotary embeddings collapse them. We\'re extending RoPE to multiple axes using additive Euler angles, so the model keeps all three notions of "position" without blowing up the attention pattern.',
+    },
+    {
+        title: 'Making replays legible to models',
+        body: 'A session replay is a stream of DOM mutations – far too large and too structural to feed to a model directly. The open question is a rendering that preserves what matters (layout, interaction targets, state changes) at a token budget that makes training on millions of sessions economical.',
+    },
+    {
+        title: 'Evaluating agents that change what they measure',
+        body: "An agent that ships fixes alters the product it's being evaluated on, so static benchmarks go stale immediately. We're building an eval dataset from real product problems, and working out how to score models against a moving target without fooling ourselves.",
+    },
+]
+
+function OpenProblemsSection() {
+    return (
+        <section id="problems" className="scroll-mt-16 mb-12 px-4 @xl:px-8">
+            <SectionHeader
+                sticker={StickerMindMap}
+                kicker="Open problems"
+                title="Problems we haven't solved yet"
+                subtitle="The hardest parts of the pipeline, stated plainly. If one of these nerd-snipes you, that's the idea."
+            />
+            <div className="grid @lg:grid-cols-3 gap-4 mb-6">
+                {OPEN_PROBLEMS.map((problem) => (
+                    <div
+                        key={problem.title}
+                        className="border border-primary rounded bg-accent p-4 transition-all duration-150 hover:border-purple hover:-translate-y-0.5 hover:shadow-md"
+                    >
+                        <h3 className="text-base font-bold m-0 mb-2">{problem.title}</h3>
+                        <p className="text-sm text-secondary m-0">{problem.body}</p>
+                    </div>
+                ))}
+            </div>
+
+            <div className="border border-primary rounded bg-accent p-5 flex flex-col @lg:flex-row @lg:items-center gap-4">
+                <div className="flex-1">
+                    <p className="font-bold m-0 mb-1">Want to own one of these?</p>
+                    <p className="text-sm text-secondary m-0">
+                        We're hiring researchers to take these problems from whiteboard to arXiv – with the dataset, the
+                        compute, and the freedom to publish what you find.
+                    </p>
+                </div>
+                <div className="flex flex-col @md:flex-row gap-3 shrink-0">
+                    <OSButton
+                        asLink
+                        to="/careers/ai-research-engineer"
+                        state={{ newWindow: true }}
+                        variant="primary"
+                        size="md"
+                    >
+                        AI research engineer role
+                    </OSButton>
+                    <OSButton asLink to="/teams/ai-research" state={{ newWindow: true }} variant="secondary" size="md">
+                        Meet the team
+                    </OSButton>
+                </div>
             </div>
         </section>
     )
@@ -1167,6 +1259,8 @@ export default function ResearchPage({
 
                     <div className="max-w-5xl mx-auto">
                         <RoadmapSection />
+
+                        <OpenProblemsSection />
 
                         <PublicationsSection />
 
