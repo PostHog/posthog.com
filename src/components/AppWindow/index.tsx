@@ -208,7 +208,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     // The open animation should only play once, on mount. `playOpenAnimation` is
     // decided from mount-time props and cleared when the animation finishes, so
     // later state changes (expand/collapse) never replay the pop-in.
-    const [playOpenAnimation, setPlayOpenAnimation] = useState(!(item.expanded && !item.fromOrigin))
+    const [playOpenAnimation, setPlayOpenAnimation] = useState(!!item.fromOrigin)
     const skipsOpenAnimation = !playOpenAnimation
     const [animating, setAnimating] = useState(playOpenAnimation)
     const animationStartTimeRef = useRef<number | null>(null)
