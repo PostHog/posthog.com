@@ -10,7 +10,7 @@ availability:
 
 Alerts enable you to monitor your [insights](/product-analytics) and get notified when something important changes. You can set fixed thresholds (e.g., notify me when unique visitors exceed 5,000) or use [anomaly detection](#anomaly-detection) to automatically flag unusual patterns in your data.
 
-Alerts are supported on [trends](/docs/product-analytics/trends) and [SQL (HogQL)](/docs/sql) insights.
+Alerts are supported on [trends](/docs/product-analytics/trends), [funnels](/docs/product-analytics/funnels) (steps and trends views only), and [SQL (HogQL)](/docs/sql) insights.
 
 ## How to create an alert
 
@@ -122,7 +122,7 @@ PostHog AI can create alerts on existing insights or generate new trend insights
 
 <CalloutBox icon="IconInfo" title="Note" type="fyi">
 
-PostHog AI can only create alerts on [trends](/docs/product-analytics/trends) and [SQL (HogQL)](/docs/sql) insights. Other insight types like funnels and retention don't support alerts.
+PostHog AI can only create alerts on [trends](/docs/product-analytics/trends), [funnels](/docs/product-analytics/funnels) (steps and trends views), and [SQL (HogQL)](/docs/sql) insights. Retention insights and funnel time-to-convert or flow views don't support alerts.
 
 </CalloutBox>
 
@@ -155,6 +155,22 @@ This will then also enable you to set a percentage threshold.
 
 We support both **absolute value** thresholds (insight value more than or less than a certain number) or **percentage** thresholds (insight value changed by a certain percentage).
 Percentage thresholds are only available for relative alerts (as you need to compare two values to figure out percentage change).
+
+## Alerts on funnels
+
+You can create alerts on [funnel insights](/docs/product-analytics/funnels) to monitor conversion rates. Funnel alerts track the overall conversion rate percentage and notify you when it crosses your defined thresholds.
+
+Funnel alerts work with:
+
+- **Steps view** — the standard funnel visualization showing conversion between steps
+- **Trends view** — funnel results displayed as a trend over time
+
+Funnel alerts are **not supported** for:
+
+- **Time-to-convert view** — measures duration rather than conversion rate
+- **Flow view** (sankey) — visualizes user paths without a single conversion rate metric
+
+When creating a funnel alert, the threshold values represent the conversion rate percentage. For example, setting a "less than 10" threshold triggers when the funnel's conversion rate drops below 10%.
 
 ## Anomaly detection
 
