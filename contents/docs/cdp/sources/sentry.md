@@ -36,6 +36,10 @@ To link Sentry:
 
 <SourceParameters />
 
+## Supported tables
+
+<SourceTables />
+
 ## Available datasets and endpoints
 
 The Sentry source currently supports syncing the following datasets and API endpoints:

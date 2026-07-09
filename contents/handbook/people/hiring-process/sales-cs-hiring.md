@@ -7,12 +7,13 @@ hideAnchor: true
 
 ## Sales and Customer Success hiring at PostHog
 
-Our Sales and Customer Success teams look after customers paying $20k a year or more for PostHog, as well as new customers who _may_ end up in that bucket.  The job of the teams is to land and expand usage of PostHog in these customers. We have three roles on the Sales and CS team: 
+Our Sales and Customer Success teams look after customers paying $20k a year or more for PostHog, as well as new customers who _may_ end up in that bucket.  The job of the teams is to land and expand usage of PostHog in these customers. We have the following roles on the Sales and CS team: 
 
  - Technical Account Executives focused on closing new business from inbound and outbound leads
  - Technical Account Managers focused on expansion from existing customers and closing new business from product-led leads.
  - Customer Success Managers focused on the retention of customers using all of our products already.
  - Onboarding Specialists focused on ensuring newer and smaller customers are set up for success with PostHog.
+ - [Forward Deployed Engineers](/teams/forward-deployed-engineering) focused on getting embedded with customers to fill the gap between what PostHog does and what the customer needs.
 
 We've proven that [the way we do sales](/sales) works at a small scale, we are now growing the team in line with increased top-of-funnel growth for PostHog. Please check our [careers page](/careers) for our open roles. 
 
@@ -38,7 +39,7 @@ We want someone who is in it to develop customers for the long run, we don't wan
 
 Ultimately, we want someone who we'd want to buy from.
 
-### Sales hiring process 
+### Sales and Onboarding hiring process 
 
 #### Culture interview
 
@@ -46,13 +47,21 @@ This is our usual first-round interview with a member of the Talent team.
 
 #### Technical interview and demo
 
-The technical interview with the relevant team lead usually lasts ~45 minutes. Part of this session will be a demo role-play so that we can assess how you talk about your current product to a prospective customer who knows nothing about it. You can assume that the customer is a prospective buyer but otherwise knows nothing about your product, and you should approach the demo as if they were a real prospective customer. What we care about here is not the content of the demo, but seeing how you'd interact with a prospective customer. After a short introduction, we will jump into questions for 25-30 minutes, and then move on to the role play where you should aim to present and demo your product for 15-20 minutes with 10 minutes. After this, we will allow you to ask anything that's on your mind. 
+The technical interview with the relevant team lead usually lasts ~45 minutes. How we run it depends on the role you're interviewing for.
+
+##### Technical Account Executive (TAE)
+
+For TAE candidates, this session is structured around a consistent set of questions that we ask every candidate, so we can make clear comparisons. The questions are designed to understand your skills, your experience, and how you think about the role — including how you approach prospecting and closing new business, how you handle technical conversations with engineers, and how you think about building long-term customer relationships. After we've worked through the questions, we'll leave time at the end for you to ask anything that's on your mind.
+
+##### Technical Account Manager (TAM)
+
+Part of this session will be a demo role-play so that we can assess how you talk about your current product to a prospective customer who knows nothing about it. You can assume that the customer is a prospective buyer but otherwise knows nothing about your product, and you should approach the demo as if they were a real prospective customer. What we care about here is not the content of the demo, but seeing how you'd interact with a prospective customer. After a short introduction, we will jump into questions for 25-30 minutes, and then move on to the role play where you should aim to present and demo your product for 15-20 minutes with 10 minutes. After this, we will allow you to ask anything that's on your mind. 
 
 #### Culture and motivation interview
 
-In this 30-minute interview, you'll meet with [Simon](/community/profiles/28895), who will be trying to answer "Are they a good cultural fit for the Sales team at PostHog?".  
+In this 30-minute interview, you'll meet with [Ben](/community/profiles/30205), who will be trying to answer "Are they a good cultural fit for the Sales team at PostHog?".  
 
-#### Sales SuperDay
+#### Sales and Onboarding SuperDay
 
 The final stage of our interview process is what we call a PostHog [SuperDay](/handbook/people/hiring-process#posthog-superday). This is a paid full day of work, which we can flexibly arrange around your schedule. 
 
@@ -62,16 +71,16 @@ A Sales and CS SuperDay usually looks like this (_there is a degree of flexibili
 
 *   Kick-off session
 *   Meet with [Tim](/tim), who will be trying to answer "Would I buy from this person?"
-*   Meet with [Charles](/community/profiles/28625), who will be doing a culture and vibe check.
+*   Meet with [Ben](/community/profiles/30205), who will be doing a culture and vibe check.
 *   Time to focus on the task, we can provide support via your personal Slack channel (use the channel, don't slide into people's DMs)
-*   PostHog demo role-play with the team lead and [Simon](/community/profiles/28895)
+*   PostHog demo role-play with the team lead
 *   Meet a few members of our team for a quick chat
 
 Overall, you should spend at least 80% of your time and energy on the task and less than 20% on meeting people, as we will base our decision on your output of the day. However, we encourage everyone to use the Slack channel as much as needed for any questions or problems. 
 
 > In line with our [values](/handbook/company/values) and [culture](/handbook/company/culture), you might get short replies like "step on toes" or "bias for action".
 
-### CS and Onboarding hiring process
+### CS and FDE hiring process
 
 #### Culture interview
 
@@ -85,17 +94,17 @@ The small team interview with the relevant team lead usually lasts 45 minutes.  
 
 In this 30-minute interview, you'll meet with [Simon](/community/profiles/28895), who will be trying to answer "Are they a good cultural fit for the Sales team at PostHog?".
 
-#### CS and Onboarding SuperDay
+#### CS and FDE SuperDay
 
 The final stage of our interview process is what we call a PostHog [SuperDay](/handbook/people/hiring-process#posthog-superday). This is a paid full day of work, which we can flexibly arrange around your schedule.
 
 We will share the task with you at the start of the day. The task is representative of the work someone in this role at PostHog is doing, and it is always the same for each candidate, so we can make clear comparisons. It will typically involve doing actual PostHog work, e.g. prioritizing customers, doing a demo, etc.
 
-A CS and Onboarding SuperDay usually looks like this (_there is a degree of flexibility due to time zone differences):_
+A CS and FDE SuperDay usually looks like this (_there is a degree of flexibility due to time zone differences):_
 
 *   Kick-off session
 *   Meet with [Tim](/tim), who will be trying to answer "Would I buy from this person?"
-*   Meet with [Charles](/community/profiles/28625), who will be doing a culture and vibe check.
+*   Meet with [Ben](/community/profiles/30205), who will be doing a culture and vibe check.
 *   Time to focus on the task, we can provide support via your personal Slack channel (use the channel, don't slide into people's DMs)
 *   Demo role-play with the team lead and [Simon](/community/profiles/28895)
 *   Meet a few members of our team for a quick chat

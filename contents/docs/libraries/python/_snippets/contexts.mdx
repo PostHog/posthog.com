@@ -108,16 +108,7 @@ with new_context():
 
 <CalloutBox icon="IconInfo" title="Using PostHog on your frontend too?">
 
-If you're using the PostHog JavaScript Web SDK on your frontend, it generates a session ID for you.
-You can pass it to your backend by adding your backend hostname to `tracing_headers` in your config. This will automatically add tracing headers to your requests.
-
-```js
-posthog.init('<ph_project_token>', {
-    tracing_headers: ['your-backend-domain.com'] // +
-});
-```
-
-Use hostnames only, without the protocol or path. Alternatively, you can retrieve it on the frontend by calling `posthog.get_session_id()`. You then need to pass that session ID to your backend by setting the `X-POSTHOG-SESSION-ID` header on each fetch request.
+If you're using the PostHog JavaScript Web SDK on your frontend, it generates a session ID for you. Configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your backend hostname to add the session and distinct ID headers to browser requests automatically.
 
 You need to extract the header in your request handler (if you're using our Django middleware integration, this happens automatically).
 

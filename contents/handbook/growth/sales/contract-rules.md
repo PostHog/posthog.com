@@ -61,6 +61,8 @@ Beyond optimization, we offer discounts based on four levers:
 
 **For renewals:** +5% additional discount
 - Early renewal commitment (60+ days before expiration)
+- Customer must be actively on a prepaid credit plan at the time of signing. If credits ran out before a new order form is signed and the customer rolled onto pay-as-you-go, the +5% does not apply; this is treated as a re-entry into a credit plan, not an early renewal. The spirit of this discount is to reward customers committing to a new renewal plan earlier than required, often because of recent rapid growth or a planned increase in usage, both of which result in a deeper partnership. 
+
 
 **If timelines change:** We will handle these on a case by case basis, but the default is to withdraw the additional discount if the customer does not sign an order form by the time that was originally agreed. 
 
@@ -208,12 +210,16 @@ If your customer must pay via credit card, you absolutely _need_ to let Mine (Si
 
 Sometimes customers will be locked into a contract with a competitor, but want to switch to PostHog when their contract is up. In this case, we are willing to let them use PostHog for free for up to 6 months. This is beneficial to PostHog as well, as we can get them set up and using PostHog sooner, capitalizing on the momentum of their interest today, and giving them more time to get comfortable with the platform.
 
+### The guiding principle: The buyout amount needs to make financial sense
+When considering a contract buyout, the goal is to pay a little up front to make more money over the long term. It doesn't make sense to buy out a contract for $60k if the customer is only planning on spending $20k annually with PostHog.
+
 Some rules:
 
 -   They need to share a copy of their current contract/pricing/bank statement as proof.
 -   They sign up to an annual contract worth $20k+/year, paid up front. Their PostHog contract starts when their current one expires.
 -   Their usage in the overlap period needs to be proportionate to the contract they've signed, ie. if they sign a $50k contract and have 6 months to run, they get $25k of PostHog credit for free.
 -   The competitor they're using has to be 'real', ie. not some random side project. As a general rule, anyone we have written a [comparison article](/blog/tags/comparisons) about counts.
+-   Any buyout is subject to team lead approval before it goes on an order form.
 -   We have final discretion on deciding who gets the deal.
 -   We can still provide a standard free trial period of 2-4 weeks before they sign the contract, as they will likely need to figure out whether PostHog is right for them before committing.
 

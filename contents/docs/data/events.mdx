@@ -160,4 +160,13 @@ Every event has a `uuid`. Events that share the same `uuid`, `event` name, `time
 
 Most of the time you don't need to think about this. PostHog generates a `uuid` for each event, and client-side SDKs like [JavaScript Web](/docs/libraries/js) set one automatically, so retried events are de-duplicated for you.
 
-You can rely on deduplication to modify events, for example if some events were missing required properties. Sending an event with a `uuid`, `event` name, `timestamp`, and `distinct_id` that matches an already-ingested event lets you upsert it. De-duplication is eventual, as it happens during background [ClickHouse](/docs/how-posthog-works/clickhouse) merges, so duplicates may persist for a while before they're merged.
+You can rely on deduplication to modify events, for example if some events were missing required properties. Sending an event with a `uuid`, `event` name, `timestamp`, and `distinct_id` that matches an already-ingested event lets you upsert it. De-duplication is eventual, as it happens during background [ClickHouse](/docs/how-posthog-works/clickhouse) merges, so duplicates may persist for a while before they're merged. When the modified event is re-ingested, it completely replaces the original - you must therefore include **all** properties you want to be present on the final event.
+
+<CalloutBox icon="IconWarning" title="Things to know when modifying events" type="caution">
+
+- Keep the `timestamp` identical to the original, or the event won't be deduplicated. Avoid sending a `sent_at` query parameter, as PostHog uses it to [adjust the timestamp](/docs/data/timestamps).
+- Omit `$set` and `$set_once` to avoid overwriting person properties that have changed since the event was originally ingested.
+- Person properties on the re-ingested event reflect the person's current values, not those at the time of the original event.
+- Downstream consumers like realtime destinations, webhooks, and [batch exports](/docs/cdp/batch-exports) may re-trigger or duplicate rows.
+
+</CalloutBox>

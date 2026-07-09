@@ -5,7 +5,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-import { CalloutBox } from 'components/Docs/CalloutBox'
+import { CalloutBox } from "components/Docs/CalloutBox";
 
 <CalloutBox type="caution" title="Important">
 
@@ -61,6 +61,12 @@ We strongly recommend teams which need HIPAA compliance use PostHog Cloud under 
 
 </CalloutBox>
 
+<CalloutBox type="caution" title="Managed reverse proxy is not HIPAA-compliant">
+
+The [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) is **not** covered by BAAs and should not be used to process Protected Health Information (PHI). If you need a reverse proxy for HIPAA-compliant deployments, set up a [self-hosted proxy](/docs/advanced/proxy) on infrastructure you control instead.
+
+</CalloutBox>
+
 The best way to use PostHog in a way which is HIPAA compliant is with a BAA covering a PostHog Cloud instance. This ensures that PostHog remains scalable and that you have access to all premium features and security enhancements. BAAs are only available to users with a [platform package for our standard BAA, or the Enterprise package for a custom BAA](/platform-packages).
 
 However, it is possible to host PostHog yourself using our open-source hobby deployment. It is important to note that the hobby deployment is **only suitable for smaller event volumes** and provided without guarantee. It also lacks many of the advanced features available under PostHog Cloud.
@@ -78,5 +84,5 @@ We strongly recommend that you use HTTPS to secure data in transmission, whether
 
 ### Further reading
 
--   [A simple guide to personal data & PII](/blog/what-is-personal-data-pii)
--   [Is Google Analytics HIPAA compliant?](/blog/is-google-analytics-hipaa-compliant)
+- [A simple guide to personal data & PII](/blog/what-is-personal-data-pii)
+- [Is Google Analytics HIPAA compliant?](/blog/is-google-analytics-hipaa-compliant)

@@ -6,6 +6,10 @@ description: Suggest internal links for a blog post, newsletter, or other conten
 
 Analyze a piece of content and suggest specific internal links based on PostHog's internal linking resource. The user will provide a file path: $ARGUMENTS
 
+## Core constraint: link existing text only
+
+**Never suggest adding, rewriting, or expanding content** — not in the post being analyzed, and not in the posts being linked to. Every suggestion must wrap a link around text that *already exists* in the file. You are only ever adding `[...]()` markup around words that are already on the page. If a good link target exists but there's no existing text to attach it to, do not invent a sentence, clause, or "further reading" line to host it — skip it instead.
+
 ## Step 1: Get the content
 
 Read the file at the provided path. If no argument is provided, ask the user which file to analyze.
@@ -42,8 +46,8 @@ Scan the content for opportunities to add internal links. For each suggestion, p
 
 Find at least 3 existing posts in `contents/` that would naturally link to the new content. For each:
 
-1. Read the candidate file to find the best insertion point — a sentence or paragraph whose topic closely matches a specific section of the new post.
-2. Suggest the exact sentence edit, including the link. **Prefer linking to a specific section anchor** (e.g., `/founders/my-post#section-name`) rather than just the root URL, so readers land in the most relevant part.
+1. Read the candidate file to find an **existing** sentence whose topic closely matches a specific section of the new post — one that already contains words you can wrap a link around. If no such sentence exists, skip that candidate rather than writing one.
+2. Suggest wrapping the link around existing text in that sentence — do not reword the sentence beyond what's needed to insert the `[...]()` markup. **Prefer linking to a specific section anchor** (e.g., `/founders/my-post#section-name`) rather than just the root URL, so readers land in the most relevant part.
 3. Write anchor text that fits naturally into the surrounding sentence. **Do not use the article title as anchor text.** The link should feel like it belongs in the prose, not like a citation. Good examples:
    - "making those traits [queryable across every team](/founders/growth-metrics-for-startups#2-make-customer-traits-queryable-across-all-functions)"
    - "[Consistent growth in ICP customers](/founders/growth-metrics-for-startups#4-be-opinionated-but-defensible-with-your-numbers) who pay..."
@@ -53,10 +57,7 @@ Find at least 3 existing posts in `contents/` that would naturally link to the n
 
 - **Find the most relevant existing posts** by searching for content that discusses the same concepts as the new post's sections. Use `grep` or `Bash` if needed.
 - **Match section to section.** Don't just link to the new post's root — link to the specific `#anchor` that matches the concept being discussed in the existing post. Derive the anchor from the heading text (lowercase, spaces → hyphens, punctuation removed).
-- **Keep it natural.** The backlink should either:
-  - Fit within an existing sentence (preferred), or
-  - Be a brief new sentence that flows naturally from the surrounding paragraph.
-- **Don't add a standalone "further reading" line** unless the existing post already has a "Further reading" section — in that case, a bullet there is fine.
+- **The backlink must fit within an existing sentence.** Wrap the link around words already present in the candidate post. Never propose a new sentence, clause, or "further reading" line to carry the link — if there's no existing text to attach it to, skip the candidate.
 - **Don't use the new article's title as anchor text.** Describe the concept, not the article.
 
 ## Step 5: Output
@@ -83,8 +84,8 @@ For each suggested backlink, show:
 ```
 ### Backlinks
 
-- **existing-post.md, line X** — insert after/around: "quoted existing text"
-  → suggested edit: "...surrounding sentence with [natural anchor text](/new-post#section-anchor)..."
+- **existing-post.md, line X** — existing sentence: "quoted existing text"
+  → linked version: "...same sentence with [natural anchor text](/new-post#section-anchor) wrapped around existing words..."
   Why: one-line reason this existing post's topic connects to that section
 ```
 

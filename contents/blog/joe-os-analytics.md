@@ -1,5 +1,5 @@
 ---
-date: 2026-08-05
+date: 2026-06-08
 title: I didn't understand the OS I built with AI until the MCP gave it analytics
 rootPage: /blog
 sidebar: Blog

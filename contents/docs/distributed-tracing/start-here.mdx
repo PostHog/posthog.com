@@ -4,7 +4,7 @@ hideRightSidebar: true
 contentMaxWidthClass: max-w-5xl
 ---
 
-import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
+import { QuestLog, QuestLogItem } from "components/Docs/QuestLog";
 
 > **Note:** Distributed tracing is in alpha. Setup details, including the ingestion endpoint, may change before general availability.
 
@@ -29,6 +29,12 @@ OTEL_SERVICE_NAME="my-app"
 `<ph_client_api_host>` and `<ph_project_token>` are filled in with your project's values when you're logged in. Use your **project token** (the same one you use for capturing events), not a [personal API key](/docs/api#authentication).
 
 This is a different endpoint from PostHog's AI/LLM tracing (`/i/v0/ai/otel`), which only accepts generative-AI spans. For general application traces, use `/i/v1/traces`.
+
+For language-specific setup, follow one of our installation guides:
+
+<CallToAction type="primary" to="/docs/tracing/installation">
+  Configure your tracing client
+</CallToAction>
 
 </QuestLogItem>
 
@@ -66,6 +72,7 @@ Once spans are flowing into PostHog, you can:
 - **Search and filter spans** by service, status, duration, and attributes
 - **Follow a trace end to end** as a waterfall to see where time goes
 - **Spot slow and failing operations** across your services
+- **View correlated logs** in the span inspector, scoped to a single span or the whole trace
 
 </QuestLogItem>
 

@@ -106,18 +106,18 @@ variant = your_flag_system.get_variant('new-checkout-flow')
 
 # Send exposure event
 posthog.capture(
-    'user_id',
     '$pageview',
-    {
+    distinct_id='user_id',
+    properties={
         '$feature/new-checkout-flow': variant
     }
 )
 
 # Later, send metric events
 posthog.capture(
-    'user_id',
     'purchase_completed',
-    {
+    distinct_id='user_id',
+    properties={
         '$feature/new-checkout-flow': variant,
         'revenue': 99.99
     }
