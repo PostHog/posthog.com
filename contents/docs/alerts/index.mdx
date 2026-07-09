@@ -136,7 +136,7 @@ PostHog AI can create alerts on existing insights or generate new trend insights
 
 <CalloutBox icon="IconInfo" title="Note" type="fyi">
 
-PostHog AI can only create alerts on [trends](/docs/product-analytics/trends), [funnels](/docs/product-analytics/funnels) (steps and trends views), and [SQL (HogQL)](/docs/sql) insights. Retention insights and funnel time-to-convert or flow views don't support alerts.
+PostHog AI can currently only create alerts on [trends](/docs/product-analytics/trends) insights. For funnel or [SQL (HogQL)](/docs/sql) alerts, create them in the UI or via the [MCP server](#manage-alerts-via-mcp).
 
 </CalloutBox>
 
@@ -172,14 +172,10 @@ Percentage thresholds are only available for relative alerts (as you need to com
 
 ## Real-time alerts
 
-Most alert intervals (hourly, daily, weekly, monthly) check a cached result on a schedule. Real-time alerts are re-evaluated roughly every 2 minutes and always query ClickHouse fresh rather than a cached result, so a notification reflects the most current data.
-
-Real time is best suited to metrics where minutes matter, such as error spikes, checkout failures, or sudden traffic drops. For most metrics, a less frequent interval is sufficient and reduces notification noise and query load.
-
-What you need:
-
-- A **Scale or Enterprise plan**. This is separate from the every-15-minutes interval, which is not real time and only needs a Boost, Scale, or Enterprise add-on.
-- Your plan may cap how many real-time alerts you can have enabled at once. If you hit the limit, disable an existing real-time alert or switch it to a less frequent interval to free up a slot.
+- Skips the cache and queries ClickHouse fresh on every check, unlike other intervals (hourly, daily, weekly, monthly), which check a scheduled cached result.
+- Best suited to metrics where minutes matter, such as error spikes, checkout failures, or sudden traffic drops. For most metrics, a less frequent interval is sufficient and reduces notification noise.
+- Requires a **Scale or Enterprise plan**. This is separate from the every-15-minutes interval, which is not real time and only needs a Boost, Scale, or Enterprise add-on.
+- Has its own limit on how many real-time alerts you can have enabled at once, separate from your overall alert limit. If you hit it, disable an existing real-time alert or switch it to a less frequent interval to free up a slot.
 
 ## Alerts on funnels
 
@@ -296,9 +292,9 @@ For ensemble detectors, the chart shows individual score lines for each sub-dete
 
 Use the date range dropdown to test the detector over different time periods (e.g., last 24 hours, last 7 days, last 30 days).
 
-### Create anomaly detection alerts with PostHog AI
+### Create anomaly detection alerts via MCP
 
-You can create anomaly detection alerts using [PostHog AI](/docs/posthog-ai/overview) or the [MCP server](/docs/model-context-protocol). Example prompts:
+PostHog AI currently only creates threshold-based alerts. To create or simulate a detector-based alert with natural language, use the [MCP server](/docs/model-context-protocol) from your AI coding agent. Example prompts:
 
 - "Create an anomaly detection alert on my pageviews insight using Z-score"
 - "Set up an ensemble alert using Z-score AND Isolation Forest on daily signups"
