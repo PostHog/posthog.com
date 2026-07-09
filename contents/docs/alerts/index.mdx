@@ -89,9 +89,7 @@ Since alerts work on [trends](/docs/product-analytics/trends), [funnels](/docs/p
      classes="rounded"
    />
 
-9. Select how often you want the alert to be checked. Options range from **real time** — for time-sensitive metrics where you want to be notified as soon as a threshold is breached — through every 15 minutes (requires Boost, Scale, or Enterprise plan), every hour, every day, every week, and every month.
-
-   Real-time alerts are best suited to metrics where minutes matter, such as error spikes, checkout failures, or sudden traffic drops. For most metrics, a less frequent interval is sufficient and reduces notification noise.
+9. Select how often you want the alert to be checked: **real time**, every 15 minutes, every hour, every day, every week, or every month. Real-time and 15-minute checks are plan-gated — see [real-time alerts](#real-time-alerts) below.
 
 10. Pick who should be notified when the alert is triggered. Subscribed users automatically receive in-app notifications when the alert fires. You can also add email recipients, Slack channels, Discord webhooks, Microsoft Teams channels, or webhook URLs directly in the alert form.
 
@@ -169,6 +167,17 @@ This will then also enable you to set a percentage threshold.
 
 We support both **absolute value** thresholds (insight value more than or less than a certain number) or **percentage** thresholds (insight value changed by a certain percentage).
 Percentage thresholds are only available for relative alerts (as you need to compare two values to figure out percentage change).
+
+## Real-time alerts
+
+Most alert intervals (hourly, daily, weekly, monthly) check a cached result on a schedule. Real-time alerts skip the cache and query ClickHouse fresh on every check, so you're notified as close to the moment a threshold is breached as possible.
+
+Real time is best suited to metrics where minutes matter, such as error spikes, checkout failures, or sudden traffic drops. For most metrics, a less frequent interval is sufficient and reduces notification noise and query load.
+
+What you need:
+
+- A **Scale or Enterprise plan**. Every 15 minutes is a separate, lower tier that only needs a Boost, Scale, or Enterprise add-on.
+- Your plan may cap how many real-time alerts you can have enabled at once. If you hit the limit, disable an existing real-time alert or switch it to a less frequent interval to free up a slot.
 
 ## Alerts on funnels
 
@@ -331,8 +340,7 @@ You can add multiple notification destinations to a single alert. Each destinati
 
 ## Advanced options
 
-You can configure alerts to skip checking on weekends.
-This is useful for daily alerts which would normally trigger on weekends.
+You can configure real-time, 15-minute, hourly, and daily alerts to skip checking on weekends. This is useful for alerts that would otherwise fire on lower, non-representative weekend traffic. Weekly and monthly alerts don't support this option.
 
 ### Quiet hours
 
