@@ -127,9 +127,20 @@ To view all the alerts set, click [Product analytics](https://app.posthog.com/in
   classes="rounded"
 />
 
-## Create alerts with PostHog AI
+## Create alerts with AI
 
-You can also create and manage alerts using [PostHog AI](/docs/posthog-ai/overview) with natural language commands. Open [PostHog AI](https://app.posthog.com/#panel=max) from anywhere in the app and describe the alert you want.
+The [MCP server](/docs/model-context-protocol) is the most complete way to create and manage alerts with natural language. It works from your AI coding agent and supports trends, funnels, and SQL (HogQL) insights, for both threshold and anomaly detection alerts.
+
+**Example prompts:**
+
+- "Create an alert when daily signups exceed 1000"
+- "List all my alerts and their current state"
+- "Update my pageview alert threshold to 5000"
+- "Delete the old conversion alert"
+
+### PostHog AI
+
+You can also create and manage alerts using [PostHog AI](/docs/posthog-ai/overview) with natural language commands, without leaving the app. Open [PostHog AI](https://app.posthog.com/#panel=max) from anywhere in the app and describe the alert you want.
 
 **Example commands:**
 
@@ -143,20 +154,9 @@ PostHog AI can create alerts on existing insights or generate new trend insights
 
 <CalloutBox icon="IconInfo" title="Note" type="fyi">
 
-PostHog AI can currently only create alerts on [trends](/docs/product-analytics/trends) insights. For funnel or [SQL (HogQL)](/docs/sql) alerts, create them in the UI or via the [MCP server](#manage-alerts-via-mcp).
+PostHog AI can currently only create threshold-based alerts on [trends](/docs/product-analytics/trends) insights. For funnel, SQL, or anomaly detection alerts, use the [MCP server](#create-alerts-with-ai) above.
 
 </CalloutBox>
-
-### Manage alerts via MCP
-
-The [PostHog MCP server](/docs/model-context-protocol) provides tools to list, create, update, and delete alerts directly from your AI coding agent. This is useful for integrating alert management into your development workflow.
-
-**Example prompts:**
-
-- "Create an alert when daily signups exceed 1000"
-- "List all my alerts and their current state"
-- "Update my pageview alert threshold to 5000"
-- "Delete the old conversion alert"
 
 ## Relative alerts
 
@@ -301,9 +301,9 @@ For ensemble detectors, the chart shows individual score lines for each sub-dete
 
 Use the date range dropdown to test the detector over different time periods (e.g., last 24 hours, last 7 days, last 30 days).
 
-### Create anomaly detection alerts with AI
+### Create anomaly detection alerts via MCP
 
-PostHog AI currently only creates threshold-based alerts. To create or simulate a detector-based alert with natural language, use the [MCP server](/docs/model-context-protocol) from your AI coding agent. Example prompts:
+Use the [MCP server](/docs/model-context-protocol) from your AI coding agent to create or simulate a detector-based alert with natural language. PostHog AI can't create these yet. Example prompts:
 
 - "Create an anomaly detection alert on my pageviews insight using Z-score"
 - "Set up an ensemble alert using Z-score AND Isolation Forest on daily signups"
