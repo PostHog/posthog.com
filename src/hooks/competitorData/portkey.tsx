@@ -10,7 +10,7 @@ export const portkey = {
                 trace_visualization: true,
                 token_tracking: true,
                 prompt_playground: true,
-                prompt_evaluations: true,
+                prompt_evaluations: false,
                 alerting: true,
                 error_tracking: true,
                 system_prompts: true,
@@ -21,7 +21,7 @@ export const portkey = {
                 privacy_mode: true,
                 agent_tracing: true,
                 prompt_management: true,
-                evaluation_datasets: true,
+                evaluation_datasets: false,
                 human_annotation: false,
                 session_replay: false,
                 product_analytics: false,
@@ -44,7 +44,7 @@ export const portkey = {
     },
     platform: {
         deployment: {
-            open_source: true,
+            open_source: "Partial",
             eu_hosting: true,
         },
     },
