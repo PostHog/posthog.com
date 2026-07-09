@@ -147,6 +147,15 @@ export default function MediaPlayer({ videoId, source = 'youtube', startTime = 0
                         playerColor: '000000',
                     },
                     onReady: (video: any) => {
+                        // Aurora's <wistia-player> rounds its corners inside shadow DOM, which
+                        // outer CSS/overflow-hidden can't reach. Square it off via the player's
+                        // own rounded-player attribute (0 = square) so it matches the app window.
+                        const playerEl = containerRef.current?.querySelector('wistia-player') as any
+                        if (playerEl) {
+                            playerEl.roundedPlayer = 0
+                            playerEl.setAttribute('rounded-player', '0')
+                        }
+
                         setPlayerState((prev: any) => ({
                             ...prev,
                             player: video,
