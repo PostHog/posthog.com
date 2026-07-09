@@ -173,6 +173,15 @@ Delays help you control the timing of your messages. There are 3 types of delays
 
 You can see an example of a delay in the [email drip campaign](/docs/workflows/email-drip-campaign) tutorial.
 
+### Waiting for events
+
+A **wait until condition** step can wait for one or more events instead of (or as well as) a property condition. The step resumes when the person in the workflow run sends a matching event - events from other people never resume it. If no matching event arrives before the step's maximum wait duration, the workflow continues down the timeout branch.
+
+A couple of things to keep in mind:
+
+- **Event filters use fixed values.** Filter values are set when you save the workflow and can't reference the trigger event's properties. For example, you can wait for any `order_shipped` event from the person, but you can't wait for an `order_shipped` event whose `order_id` matches the `order_id` on the event that triggered the workflow. Template syntax like `{{event.properties.order_id}}` in a filter value is compared as a literal string, so it will never match.
+- **Each run waits independently.** If the same person triggers the workflow more than once, each run has its own wait step, and a single matching event resumes all of them. If your trigger can fire multiple times per person concurrently, design the workflow so that any matching event is a valid reason to continue.
+
 ## Audience splits
 
 Audience splits help you target your automation or messages to specific groups of users. There are 2 types of audience splits:

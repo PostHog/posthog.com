@@ -47,6 +47,36 @@ The following options are available for each limit:
 | **Maximum exceptions** | The most exceptions to ingest per window. Leave this empty for no limit. |
 | **Per** | The time window the limit applies over – 15 minutes, 30 minutes, or 1 hour. |
 
+## Bypass rules
+
+Bypass rules exempt matching exceptions from rate limiting entirely. When an incoming exception matches an enabled rule, it's always ingested, skipping both the project-wide and per-issue limits, and consuming no tokens from either bucket. Use them to guarantee that critical exceptions always get through, no matter how full your buckets are.
+
+You define each rule with a set of filters on error tracking or event properties, matching **All** or **Any** of them. Rules are ordered and evaluated greedily: the first enabled rule an exception matches wins. You can add, reorder, enable, disable, and delete rules from the [Error Tracking configuration page](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-rate-limits).
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_07_06_T14_08_19_648_Z_b39f0353fe.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_07_06_T14_08_40_900_Z_b3182a1ce3.png"
+    alt="Bypass rules list"
+    classes="rounded"
+/>
+
+<CalloutBox icon="IconWarning" title="Bypassed exceptions are still billed" type="caution">
+
+Unlike rate-limited exceptions, which are dropped before ingestion, bypassed exceptions are ingested in full – so they're [stored and billed](/docs/error-tracking/pricing) like any other exception.
+
+</CalloutBox>
+
+Bypass rules run inside the rate-limiting stage, which happens after [suppression](/docs/error-tracking/capture#suppressing-exceptions). A bypass rule can't rescue an exception that a suppression rule already dropped.
+
+The rate limit history view breaks down ingested versus rate-limited exceptions over time, and shows how many were bypassed, so you can see your rules taking effect.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_07_06_T14_07_45_916_Z_19493a99a1.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_07_06_T14_07_17_681_Z_43d1133227.png"
+    alt="Rate limit history showing bypassed exceptions"
+    classes="rounded"
+/>
+
 <CalloutBox icon="IconInfo" title="Rate limits vs. client-side controls" type="fyi">
 
 Rate limits run server-side, at ingestion, and apply to every client sending exceptions to your project. To reduce exceptions before they leave the client, see [burst protection](/docs/error-tracking/capture#burst-protection), [suppression rules](/docs/error-tracking/capture#suppressing-exceptions), and the [`before_send` hook](/docs/error-tracking/capture). For more ways to lower your bill, see [reducing Error Tracking costs](/docs/error-tracking/pricing).

@@ -34,4 +34,10 @@ export const arize_phoenix = {
             available: false,
         },
     },
+            platform: {
+        deployment: {
+            eu_hosting: true,
+            open_source: true,
+        },
+    },
 }

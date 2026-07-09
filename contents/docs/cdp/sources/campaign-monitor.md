@@ -15,7 +15,7 @@ This source is currently in **alpha**. The interface and available tables may ch
 
 </CalloutBox>
 
-The Campaign Monitor (CreateSend) connector syncs your email marketing data – clients, campaigns, lists, segments, templates, suppression lists, and subscriber states – into PostHog.
+The Campaign Monitor (CreateSend) connector syncs your email marketing data – clients, campaigns, lists, segments, templates, suppression lists, subscriber states, and campaign performance reports – into PostHog.
 
 ## Adding a data source
 
@@ -31,19 +31,25 @@ Once the syncs are complete, you can start using Campaign Monitor data in PostHo
 
 ## Available tables
 
-| Table | Description | Sync method |
-| ----- | ----------- | ----------- |
-| `clients` | Clients in your Campaign Monitor account | Full refresh |
-| `campaigns` | Sent campaigns for the selected client | Full refresh |
-| `scheduled_campaigns` | Campaigns scheduled to send | Full refresh |
-| `draft_campaigns` | Draft campaigns | Full refresh |
-| `lists` | Subscriber lists for the client | Full refresh |
-| `segments` | Segments defined on the client's lists | Full refresh |
-| `templates` | Email templates for the client | Full refresh |
-| `suppression_list` | The client's suppression list | Full refresh |
-| `active_subscribers` | Active subscribers across the client's lists | Full refresh |
-| `unsubscribed_subscribers` | Unsubscribed subscribers across the client's lists | Full refresh |
-| `bounced_subscribers` | Bounced subscribers across the client's lists | Full refresh |
+| Table                      | Description                                                                                                         | Sync method  |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------ |
+| `clients`                  | Clients in your Campaign Monitor account                                                                            | Full refresh |
+| `campaigns`                | Sent campaigns for the selected client                                                                              | Full refresh |
+| `scheduled_campaigns`      | Campaigns scheduled to send                                                                                         | Full refresh |
+| `draft_campaigns`          | Draft campaigns                                                                                                     | Full refresh |
+| `lists`                    | Subscriber lists for the client                                                                                     | Full refresh |
+| `segments`                 | Segments defined on the client's lists                                                                              | Full refresh |
+| `templates`                | Email templates for the client                                                                                      | Full refresh |
+| `suppression_list`         | The client's suppression list                                                                                       | Full refresh |
+| `active_subscribers`       | Active subscribers across the client's lists                                                                        | Full refresh |
+| `unsubscribed_subscribers` | Unsubscribed subscribers across the client's lists                                                                  | Full refresh |
+| `bounced_subscribers`      | Bounced subscribers across the client's lists                                                                       | Full refresh |
+| `campaign_summary`         | Aggregate performance summary per sent campaign (recipients, opens, clicks, unsubscribes, bounces, spam complaints) | Full refresh |
+| `campaign_opens`           | Individual open events for each sent campaign                                                                       | Full refresh |
+| `campaign_clicks`          | Individual link click events for each sent campaign                                                                 | Full refresh |
+| `campaign_unsubscribes`    | Recipients who unsubscribed from each sent campaign                                                                 | Full refresh |
+| `campaign_bounces`         | Recipients whose email bounced for each sent campaign                                                               | Full refresh |
+| `campaign_spam_complaints` | Recipients who marked each sent campaign as spam                                                                    | Full refresh |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 

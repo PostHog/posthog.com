@@ -55,9 +55,15 @@ You can write your own scout for anything you care about. The job is the same ea
 |---|---|
 | **Mine any Slack channel** | Sync a channel into the [data warehouse](/docs/data-warehouse) and a scout reads it like any other table – a user-feedback channel, an on-call channel, even a community Discord relay. The moment it's a table, it's fair game. |
 | **Watch any custom event** | Point a scout at any event you capture – a support event, a feedback submission, a domain-specific action – and have it turn that stream into findings. |
-| **Keep an eye on what you already care about** | Hand a scout a curated set of *your* dashboards, insights, and alerts – the metrics your team checks every morning – and have it stay quiet until one moves against its own baseline. |
+| **Keep an eye on what you already care about** | Hand a scout a curated set of *your* dashboards, insights, and alerts – the metrics your team checks every morning – and have it stay quiet until one moves against its own baseline. Tags work as the config surface too: tag the entities you want watched in PostHog, and untag to turn it off. |
 | **Own a funnel or a journey** | A scout can watch your key funnels and activation flows, flag a conversion or retention regression against the flow's own trailing baseline, and even propose the [experiment](/docs/experiments) to fix the weakest step. |
-| **Have it read your codebase** | Give a scout a repo and a job: catch docs that have drifted out of date, flag a feature shipped with no instrumentation, spot a deprecated API, or run a static-analysis tool over the last week's diffs. |
+| **Get a morning digest** | Most scouts stay quiet until something clears a bar. A digest scout inverts that: one report a day synthesizing its surface – your AI traffic, the day's merged PRs grouped into workstreams – where a quiet day gets a short "all green" and that's the product. |
+| **Turn free text into themes** | [Survey](/docs/surveys) responses, feedback submissions, support messages: instead of forwarding every item, a scout aggregates – "these six responses all describe the same checkout bug" is one actionable finding, not six noisy ones. |
+| **Triage what already pages you** | If a detector already exists – billing spike alerts, an incident pipeline, a support channel where a bot classifies every ticket – a scout can be the judgment layer on top: bundling related items into one finding, weighing who's affected, and flagging the items nobody acted on. |
+| **Guard your SLOs** | If your team has explicit success-rate targets, a scout can score against the error budget instead of a trailing baseline – catching fast burns (an incident eating the budget right now) and slow burns (a success rate quietly creeping below target). |
+| **Have it read your codebase** | Give a scout a repo and a job: catch docs that have drifted out of date, flag a feature shipped with no instrumentation, spot a third-party API your code pins that's headed for sunset, or run a static-analysis tool over the last week's diffs. |
+| **Cross-reference code with PostHog** | Some signals only exist in the overlap: a fully-rolled-out [feature flag](/docs/feature-flags) whose key still litters the codebase is cleanup work, but only a scout that reads both the flag's state *and* the repo can tell. The same shape catches insights pointing at events the code stopped emitting. |
+| **Dogfood your own product** | If your product has an API, MCP, or agent surface, a scout can use it like a real user each run – working through realistic tasks and reporting the friction it hits first-hand, before your users do. |
 | **Point a scout at your scouts** | A meta-scout that audits the rest of the fleet for miscalibration, plus a follow-up that re-checks "resolved" reports after a soak window to confirm the fix actually held. |
 
 The common thread is that a scout isn't limited to product analytics. Any source you land in PostHog – a warehouse table, a Slack relay, a third-party feed – becomes something a scout can watch.
@@ -65,6 +71,8 @@ The common thread is that a scout isn't limited to product analytics. Any source
 ## Make your own
 
 You don't write a scout by hand. In [PostHog Code](/code), open the scouts page and pick the "Make a scout" suggestion: it scans your project and proposes custom scouts grounded in your actual data. You can also ask any agent connected to the PostHog MCP to build one. Once it exists, [run it on demand](/docs/self-driving/scouts#running-a-scout-on-demand) to see what it surfaces before enabling it.
+
+Every idea above is a variation on a small set of reference shapes – anomaly watcher, watchlist, warehouse-backed source, daily digest, and so on. The [scout patterns cookbook](https://github.com/PostHog/posthog/blob/master/products/signals/skills/authoring-scouts/references/scout-patterns.md) catalogs them all, with the discriminator, memory, and gotchas for each – it's what the authoring agent reads, and it's worth a skim if you're deciding what to build.
 
 For a deep dive – two real scouts traced end to end, with a walkthrough video – read [What is a scout?](/blog/what-is-a-scout).
 
