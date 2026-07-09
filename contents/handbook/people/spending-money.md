@@ -105,7 +105,7 @@ Need help getting at the financial data or the tools to track your spend? Ask in
 - Pull in [#legal](https://posthog.slack.com/archives/C08MYQX74KH) if this is a _new_ contract, or if the legal details have changed and need a second look. Straight re-commits or renewals usually don't need legal, but a new contract always does (see [Adding tools](/handbook/company/adding-tools)).
 - For company-level tool billing, [Janani](https://posthog.com/community/profiles/34497) in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ) is the default admin, so billing stays owned and categorized correctly. The billing email for any vendor contract is finance@posthog.com.
 
-There's no fixed dollar amount that trips a formal approval - we stay trust-based and lead with context, not permission. But spend at this scale isn't comparable to a personal subscription, so be proactive and transparent about it _early_ rather than once the overage has already landed.
+There's no fixed dollar amount that trips a formal approval - we stay trust-based and lead with context, not permission. Use your judgement for what counts as material. But spend at this scale isn't comparable to a personal subscription, so be proactive and transparent about it _early_ rather than once the overage has already landed.
 
 Past a certain spend, it's worth challenging the tool or contract itself, if feasible - and it's up to you to decide what feasible means here. Software keeps getting cheaper, and at some point it may be cheaper to build than to buy. Pull in your exec to discuss this - it's exactly the kind of trade-off they should be weighing in on.
 
@@ -132,7 +132,7 @@ Past a certain spend, it's worth challenging the tool or contract itself, if fea
 - If I'm asked for a billing email – for bill payments or when signing a vendor contract – what do I use?
   - Use finance@posthog.com
 - A vendor contract we rely on is running into overages / about to cost more – what do I do?
-  - Flag it early - see [High-value & ongoing vendor contracts](#high-value--ongoing-vendor-contracts). Whoever has the most context on the contract should drive, keep your team lead and the responsible exec aware, and ping `@finance-folks` in Slack as soon as the overage looks material so Finance can forecast it.
+  - Flag it early - see [High-value & ongoing vendor contracts](#high-value--ongoing-vendor-contracts). Whoever has the most context on the contract should drive, keep your team lead and the responsible exec aware, and ping `@finance-folks` in Slack as soon as the overage looks material so Finance can forecast it. Use your judgement to assess what counts as material.
 - What if I'm driving for work-related purposes?
   - You can claim a mileage reimbursement through Brex. **Do not** separately expense fuel.
 - What if I accidentally used the company card for a personal expense?
