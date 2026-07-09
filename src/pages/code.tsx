@@ -714,7 +714,7 @@ function HeroSection() {
                             </div>
 
                             <div className="@4xl/flex-1">
-                                <div className="rounded-md overflow-hidden shadow-xl not-prose max-w-[650px] mx-auto">
+                                <div className="rounded-md overflow-hidden shadow-xl not-prose">
                                     <WistiaEmbed mediaId="vm9mn1m4dv" />
                                 </div>
                             </div>
