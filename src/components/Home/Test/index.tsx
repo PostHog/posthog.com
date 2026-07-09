@@ -390,7 +390,7 @@ export default function HomeTest() {
                     { hrefLang: 'x-default', href: '/' },
                 ]}
             />
-            <ReaderView proseSize="lg" hideLeftSidebar showQuestions={false}>
+            <ReaderView proseSize="lg" hideLeftSidebar hideFloatingSearch showQuestions={false}>
                 <div className="space-y-12">
                     <Hero />
                     <Customers />

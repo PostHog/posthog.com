@@ -120,6 +120,11 @@ interface ReaderViewProps {
     children?: React.ReactNode
     leftSidebar?: React.ReactNode
     hideLeftSidebar?: boolean
+    /**
+     * When the left sidebar is hidden, a floating search cluster is rendered in
+     * its place. Set this to true to suppress that floating search as well.
+     */
+    hideFloatingSearch?: boolean
     hideRightSidebar?: boolean
     contentMaxWidthClass?: string
     padding?: boolean
@@ -457,6 +462,7 @@ export default function ReaderView({
     children,
     leftSidebar,
     hideLeftSidebar = false,
+    hideFloatingSearch = false,
     hideRightSidebar = false,
     contentMaxWidthClass,
     padding = true,
@@ -492,6 +498,7 @@ export default function ReaderView({
                 filePath={filePath}
                 leftSidebar={leftSidebar}
                 hideLeftSidebar={hideLeftSidebar}
+                hideFloatingSearch={hideFloatingSearch}
                 hideRightSidebar={hideRightSidebar}
                 contentMaxWidthClass={contentMaxWidthClass}
                 padding={padding}
@@ -1500,6 +1507,7 @@ function ReaderViewContent({
     children,
     leftSidebar,
     hideLeftSidebar = false,
+    hideFloatingSearch = false,
     hideRightSidebar = false,
     contentMaxWidthClass,
     padding = true,
@@ -1666,7 +1674,7 @@ function ReaderViewContent({
                             : undefined
                     }
                 >
-                    {hideLeftSidebar && !compact && (
+                    {hideLeftSidebar && !hideFloatingSearch && !compact && (
                         <FloatingSearch
                             contentRef={onSearch ? undefined : contentRef}
                             onSearch={onSearch}

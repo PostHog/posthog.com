@@ -205,8 +205,12 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     const [closing, setClosing] = useState(false)
     const [closed, setClosed] = useState(false)
     const [minimizing, setMinimizing] = useState(false)
-    const skipsOpenAnimation = item.expanded && !item.fromOrigin
-    const [animating, setAnimating] = useState(!skipsOpenAnimation)
+    // The open animation should only play once, on mount. `playOpenAnimation` is
+    // decided from mount-time props and cleared when the animation finishes, so
+    // later state changes (expand/collapse) never replay the pop-in.
+    const [playOpenAnimation, setPlayOpenAnimation] = useState(!(item.expanded && !item.fromOrigin))
+    const skipsOpenAnimation = !playOpenAnimation
+    const [animating, setAnimating] = useState(playOpenAnimation)
     const animationStartTimeRef = useRef<number | null>(null)
     const posthog = usePostHog()
     const [view, setView] = useState<'marketing' | 'developer'>('marketing')
@@ -335,6 +339,20 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
             collapseWindow()
         } else {
             expandWindow()
+        }
+    }
+
+    const toggleExpanded = () => {
+        if (item.fixedSize) return
+        if (item.expanded) {
+            updateWindow(item, {
+                expanded: false,
+                windowed: true,
+                snapped: false,
+            })
+        } else {
+            // Expanding a side-by-side window drops the other and takes over the screen.
+            expandWindow(item)
         }
     }
 
@@ -604,6 +622,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     }
     const onAnimationComplete = () => {
         setAnimating(false)
+        setPlayOpenAnimation(false)
         const endTime = performance.now()
         const startTime = animationStartTimeRef.current || 0
         const duration = endTime - startTime
@@ -712,7 +731,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                         item.appSettings?.size?.fixed
                             ? '!absolute top-2 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1rem)]'
                             : item.windowed
-                            ? 'h-[95%] w-[85%]'
+                            ? 'h-[95%] w-[80%]'
                             : 'size-full'
                     } !select-auto flex flex-col border-primary ${
                         siteSettings.heaterMode
@@ -753,13 +772,38 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                             data-scheme="tertiary"
                             onDoubleClick={handleDoubleClick}
                             className={`inline-flex gap-1 items-center py-0.5 pl-1.5 pr-0.5 skin-classic:bg-primary opacity-40 hover:opacity-75 transition-opacity duration-100 ${
-                                hasToolbar
-                                    ? 'flex-1 justify-end'
-                                    : item.windowed
-                                    ? 'absolute z-20 right-3 top-3'
-                                    : 'absolute z-20 right-1 top-1'
+                                hasToolbar ? 'flex-1 justify-end' : 'absolute z-20 right-1 top-1'
                             }`}
                         >
+                            {!item.fixedSize && (
+                                <div className="flex justify-end">
+                                    <Tooltip
+                                        trigger={
+                                            <OSButton
+                                                windowButton
+                                                size="md"
+                                                onClick={toggleExpanded}
+                                                icon={
+                                                    item.expanded ? (
+                                                        <IconCollapse45Chevrons />
+                                                    ) : (
+                                                        <IconExpand45Chevrons />
+                                                    )
+                                                }
+                                            />
+                                        }
+                                    >
+                                        <div className="flex flex-col items-center gap-2">
+                                            <span>{item.expanded ? 'Restore window' : 'Expand window'}</span>
+                                            <div>
+                                                <KeyboardShortcut text="Shift" size="xs" />
+                                                &nbsp;
+                                                <KeyboardShortcut text="↑" size="xs" />
+                                            </div>
+                                        </div>
+                                    </Tooltip>
+                                </div>
+                            )}
                             <div className="flex justify-end">
                                 <Tooltip
                                     trigger={<OSButton windowButton size="md" onClick={handleClose} icon={<IconX />} />}

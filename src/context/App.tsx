@@ -100,6 +100,7 @@ interface AppContextType {
             previousSize?: { width?: number; height?: number }
             element?: any
             expanded?: boolean
+            windowed?: boolean
             snapped?: 'left' | 'right' | false
         }
     ) => void
@@ -113,7 +114,7 @@ interface AppContextType {
     handleSnapToSide: (side: 'left' | 'right') => void
     constraintsRef: React.RefObject<HTMLDivElement>
     taskbarRef: React.RefObject<HTMLDivElement>
-    expandWindow: () => void
+    expandWindow: (target?: AppWindow) => void
     getExpandedDimensions: () => { position: { x: number; y: number }; size: { width: number; height: number } }
     openSignIn: (onSuccess?: (user: User) => void) => void
     openRegister: () => void
@@ -1806,6 +1807,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             location?: Location,
             additional: {
                 expanded?: boolean
+                windowed?: boolean
                 snapped?: 'left' | 'right' | false
                 size?: { width: number; height: number }
                 position?: { x: number; y: number }
@@ -1848,7 +1850,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                                   snapped: newWindow.snapped,
                                   size: newWindow.size,
                                   position: newWindow.position,
-                                  windowed: false,
+                                  windowed: newWindow.windowed,
                               }
                             : w
                     )
@@ -2037,9 +2039,18 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         const settings = appSettings[keyToUse]
         const lastClickedElementRect = getLastClickedElementRect()
 
+        // Windowed (centered, 85%×95%) is the default for regular pages. Fixed,
+        // modal, minimal, and ask-max windows manage their own sizing, and mobile
+        // falls back to full-screen since a centered window reads poorly on narrow
+        // viewports.
+        const canWindow = isSSR || window.innerWidth >= 768
         const isWindowed =
-            element.props.location.state?.windowed ||
-            (element.props.location.pathname === '/' && !introSeen() && (isSSR || window.innerWidth >= 768))
+            element.props.location.state?.windowed ??
+            (canWindow &&
+                !keyToUse?.startsWith('ask-max') &&
+                !settings?.size?.fixed &&
+                !element.props.minimal &&
+                !settings?.modal)
         const shouldExpand =
             element.props.location.state?.expanded ??
             (!keyToUse?.startsWith('ask-max') &&
@@ -2113,6 +2124,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             newWindow.position = sideSnap.position
             newWindow.snapped = location?.state?.sideBySide
             newWindow.expanded = false
+            // Snapped windows render full-bleed so the flex container can split
+            // them 50/50; a windowed (85%) width would break the side-by-side layout.
+            newWindow.windowed = false
         }
 
         if (newWindow.key !== '/' && !isSideBySide && !newWindow.appSettings?.size?.fixed) {
@@ -2122,11 +2136,12 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 newWindow.position = sideSnap.position
                 newWindow.snapped = focusedWindow.snapped
                 newWindow.expanded = false
-            } else {
-                const expandedDimensions = getExpandedDimensions()
-                newWindow.size = expandedDimensions.size
-                newWindow.position = expandedDimensions.position
-                newWindow.expanded = true
+                newWindow.windowed = false
+            } else if (focusedWindow) {
+                // Navigating in place: keep the focused window's current display mode
+                // (windowed vs. expanded) so pages don't jump between sizes.
+                newWindow.expanded = focusedWindow.expanded ?? false
+                newWindow.windowed = focusedWindow.expanded ? false : focusedWindow.windowed ?? newWindow.windowed
                 newWindow.snapped = false
             }
         }
@@ -2137,6 +2152,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             } else {
                 bringToFront(existingWindow, element.props.location, {
                     expanded: newWindow.expanded,
+                    windowed: newWindow.windowed,
                     snapped: newWindow.snapped,
                     size: newWindow.size,
                     position: newWindow.position,
@@ -2153,6 +2169,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 position: sideSnap.position,
                 snapped: focusedSide as const,
                 expanded: false,
+                windowed: false,
             }
             setWindows([...windows.map((w) => (w === focusedWindow ? snappedFocused : w)), newWindow])
         } else if (newWindow.appSettings?.size?.fixed) {
@@ -2179,6 +2196,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             previousSize?: { width?: number; height?: number }
             element?: any
             expanded?: boolean
+            windowed?: boolean
             snapped?: 'left' | 'right' | false
             appSettings?: AppSetting
         }
@@ -2203,6 +2221,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             },
             ...(updates.element ? { element: updates.element } : {}),
             ...(updates.expanded !== undefined ? { expanded: updates.expanded } : {}),
+            ...(updates.windowed !== undefined ? { windowed: updates.windowed } : {}),
             ...(updates.snapped !== undefined ? { snapped: updates.snapped } : {}),
             ...(updates.appSettings ? { appSettings: { ...appWindow.appSettings, ...updates.appSettings } } : {}),
         }
@@ -2295,6 +2314,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             previousPosition: prevPos,
             snapped: side,
             expanded: false,
+            windowed: false,
         })
     }
 
@@ -2309,14 +2329,37 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         }
     }
 
-    const expandWindow = () => {
-        if (!focusedWindow) return
-        updateWindow(focusedWindow, {
-            previousSize: focusedWindow.size,
-            previousPosition: focusedWindow.position,
-            expanded: true,
-            snapped: false,
-        })
+    const expandWindow = (target?: AppWindow) => {
+        const windowToExpand = target ?? focusedWindow
+        if (!windowToExpand) return
+        // When expanding a side-by-side (snapped) window, drop the other snapped
+        // window(s) so the one being expanded takes over the whole screen. Sync the
+        // URL to it without re-running the page/window setup (skipPageUpdate).
+        const dropSnappedSiblings = !!windowToExpand.snapped
+        if (dropSnappedSiblings && windowToExpand.path.startsWith('/')) {
+            navigate(`${windowToExpand.path}${windowToExpand.location?.search || ''}`, {
+                state: { skipPageUpdate: true },
+            })
+        }
+        setWindows((windows) =>
+            windows
+                .filter(
+                    (w) => !(dropSnappedSiblings && w !== windowToExpand && w.snapped && !w.appSettings?.size?.fixed)
+                )
+                .map((w) =>
+                    w === windowToExpand
+                        ? {
+                              ...w,
+                              previousSize: w.size,
+                              previousPosition: w.position,
+                              expanded: true,
+                              windowed: false,
+                              snapped: false,
+                              zIndex: windows.length,
+                          }
+                        : w
+                )
+        )
     }
 
     const updateSiteSettings = (settings: SiteSettings) => {
@@ -2519,7 +2562,11 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 handleSnapToSide('right')
             }
             if (e.shiftKey && e.key === 'ArrowUp') {
-                expandWindow()
+                if (focusedWindow?.expanded) {
+                    updateWindow(focusedWindow, { expanded: false, windowed: true, snapped: false })
+                } else {
+                    expandWindow()
+                }
             }
             if (e.shiftKey && e.key === 'ArrowDown') {
                 e.preventDefault()
