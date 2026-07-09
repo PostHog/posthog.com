@@ -82,19 +82,9 @@ You will run into questions that you don't know the answer to from time to time 
 
 Most of our customers use Slack, and it's a great way for us to be responsive to them. Everyone has the permission in Slack to create a Connect channel with a customer, and you should do this as early as possible in your relationship with them.
 
-When you've created the channel you should also add Pylon, which is used to sync Slack conversations with Zendesk so that our Support and Engineering teams can work on customer issues in a familiar context.
+When you've created the channel you should also add SupportHog, our own tool that syncs Slack conversations with PostHog so that our Support and Engineering teams can work on customer issues in a familiar context. Follow the [shared Slack channel setup steps](/handbook/growth/sales/slack-channels#setting-up-a-shared-slack-channel-via-slack-connect) to invite SupportHog and configure the channel.
 
-To add Pylon to your customer channel:
-
-1. In the Slack desktop app, click the channel name.
-2. On the Settings tab, click Add apps.
-3. Type Pylon and click Add.
-4. In the popup that appears in the Slack channel, select Customer Channel.
-5. Add yourself as the Account Owner.
-6. Click Enable.
-7. Add Tim, Charles, and Abigail to the channel.
-
-Once enabled, you can add the :ticket: emoji to a Slack thread to create a new Ticket in Zendesk.  Customers can also do this.  Make sure that a Group and Severity are selected or the ticket won't be routed properly.
+Once it's in the channel, you can add the :ticket: emoji to a Slack thread — or mention `@SupportHog` — to create a new ticket in Zendesk.  Customers can also do this.
 
 > It's your job to ensure your customer issues are resolved, make sure you follow up with Support and Engineering if you feel like the issue isn't getting the right level of attention.
 
