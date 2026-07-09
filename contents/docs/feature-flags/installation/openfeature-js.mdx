@@ -30,9 +30,10 @@ import { OpenFeature } from '@openfeature/server-sdk'
 import { PostHogServerProvider } from '@posthog/openfeature-node-provider'
 import { PostHog } from 'posthog-node'
 
-// personalApiKey enables local evaluation
-const posthog = new PostHog('<ph_project_api_key>', { host: '<ph_client_api_host>' })
-
+const posthog = new PostHog('<ph_project_api_key>', {
+    host: '<ph_client_api_host>',
+    // personalApiKey: '<ph_personal_api_key>', // Enables local evaluation
+})
 await OpenFeature.setProviderAndWait(new PostHogServerProvider(posthog))
 const client = OpenFeature.getClient()
 
