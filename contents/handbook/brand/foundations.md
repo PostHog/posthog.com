@@ -114,3 +114,24 @@ A few things to avoid when describing PostHog:
 - **Not a single product.** We're a platform that makes _your_ product self-driving — you (and your AI agents) ship improvements from your product's own context.
 - **Not a "product improvement platform."** This is vague and buzzwordy.
 - **Not enterprise-first.** We build for people who self-serve. We get in early and grow with our customers. We don't go out of our way to build niche features just to chase a large contract. Don't let copy, design, or tone drift toward enterprise-speak.
+
+## Messaging framework
+
+This is our shared messaging framework. For the full context behind it, see the [repositioning RFC](https://github.com/PostHog/requests-for-comments-internal/blob/4573b61da0dd3764b90ed7eeca02b62f4a6b87f3/marketing/2026-07-06-Repositioning-PostHog-a-more-structured-approach.md).
+
+- **Product name and one line description**
+  - PostHog makes your product self-driving. Hand off issues, the analysis, and the grunt work, and put your time where it counts - figuring out what customers want and shipping it.
+- **Market category and sub-category**
+  - Market category: Self-driving AI systems. Sub-category: Self-driving software product platforms.
+- **Competitive alternatives**
+  - Anthropic (with very thin product context via MCP)
+  - Snowflake (without the coding)
+  - Amplitude Wave (without the business context or engineer focus)
+  - Anyone shipping 'self-healing' or 'self-improving' software
+- **Unique attributes -> value**
+  - Agents that act unprompted, off your data -> your product improves without you driving every step, so your time goes to the creative work only you can do
+  - Your product and business context, unified in one context warehouse -> PRs grounded in how your product actually behaves, not generic slop -- and near-impossible to match without the data you already give us
+  - We train our own models -> lower cost to you, with open source models tuned for finding and fixing product bugs rather than general-purpose coding
+  - Open source and transparent -> no black box and no lock-in: you can read it, fork it, and see exactly what's running inside your product
+- **Who cares a lot?**
+  - Engineers building products in AI-pilled software teams at any scale.
