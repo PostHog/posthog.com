@@ -30,7 +30,7 @@ The plan can be broken into two parts: the quarterly plan and ongoing updates.
 
 Add the plan as an account note in PostHog customer analytics on the account's profile. For each account, work through these six questions:
 
-1. **What type of opportunities (opps) are there this quarter?** Name each one — conversion (moving a free or trialing account onto a paid plan), renewal (securing an existing contract for another term), or cross-sell (getting them onto a product they aren't using yet) — so you're clear on what you're actually driving toward.
+1. **What type of opportunities (opps) are there this quarter?** Name each one — conversion (moving a pay-as-you-go plan onto a discounted credit plan), renewal (securing an existing contract for another term), or cross-sell (getting them onto a product they aren't using yet) — so you're clear on what you're actually driving toward.
 2. **What's the desired outcome for the account by the end of the quarter?** State the concrete result you want (renewal signed, in with a new team, error tracking adopted) so success is measurable rather than vague.
 3. **Does the customer know about this plan?** Note whether you've aligned with them, because a plan they haven't bought into is just a guess.
 4. **Is it blocked on anything right now, and are there any other risks?** Call out current blockers and any other risks so you can get ahead of them before they derail the outcome.
