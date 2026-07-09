@@ -116,12 +116,15 @@ Tags can also be set automatically via [workflow automation](/docs/support/workf
 
 Messages you send to customers display delivery status indicators:
 
-| Status   | Meaning                                    |
-| -------- | ------------------------------------------ |
-| **Sent** | Message has been delivered to the customer |
-| **Read** | Customer has viewed the message            |
+| Status             | Meaning                                             |
+| ------------------ | --------------------------------------------------- |
+| **Sent**           | Message has been delivered to the customer          |
+| **Read**           | Customer has viewed the message                     |
+| **Failed to send** | Message could not be delivered (email tickets only) |
 
 Status indicators appear on messages sent by your team. They help you understand whether customers have seen your responses.
+
+For email tickets, delivery is asynchronous — the message is saved immediately, but the actual email is sent in the background. The per-message delivery status badge is the source of truth for whether the email was delivered. If delivery fails (for example, because your domain isn't verified), a **Failed to send** badge appears on the message.
 
 ### Private notes
 
