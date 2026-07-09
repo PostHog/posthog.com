@@ -105,7 +105,39 @@ The scopes available through OAuth are listed in the `scopes_supported` field of
 
 Start with [CIMD](#client-id-metadata-document-cimd). For most integrations, hosting a metadata document on a domain you control is all you need to go live, and your app's name and logo appear on the authorization screen. There's no registration step to wait on.
 
-Verification is optional and isn't required to go live. If you'd like your app marked as a verified integration, which removes the **unverified application** notice shown on the authorization screen, email [team-growth@posthog.com](mailto:team-growth@posthog.com).
+Verification is optional and isn't required to go live. It removes the **unverified application** notice shown on the authorization screen.
+
+### What verification means
+
+A verified badge means PostHog has confirmed the identity of the developer behind the app and reviewed the app's name, logo, and requested scopes for fit. It is an identity check in the style of publisher verification. It is not a security audit of your application and it is not an endorsement by PostHog.
+
+### What we check
+
+We aim to approve requests on arrival, so make sure the following are true before you email us:
+
+- Your client metadata document is served from your production domain over HTTPS, not a tunnel (for example `trycloudflare.com`) or a preview deployment URL.
+- Your `redirect_uris` all use HTTPS and live on that same production domain.
+- You have a public product page a reviewer can look at.
+- Your requested scopes are limited to what your product actually needs. Declaring a [scope ceiling](#declare-your-scopes) makes this explicit.
+
+### Requesting verification
+
+Email [team-growth@posthog.com](mailto:team-growth@posthog.com) with:
+
+- Your app name.
+- Your client metadata URL (your `client_id`).
+- A link to your product.
+- Which PostHog organization is yours (recommended, see below).
+
+PostHog may remove verification if an app's scopes, branding, or behavior change materially, and you can re-request it at any time.
+
+### Link your app to a PostHog organization
+
+We recommend adding a CIMD verification token to your metadata document. Create it in **Organization settings → CIMD verification tokens** and add it under the `com.posthog` namespace as `com.posthog.verification_token`. Linking your app to a PostHog organization raises your provisioning rate limits and surfaces the integration to that organization's admins. It is recommended but not required, and it doesn't affect the unverified notice on the authorization screen. See [Link your partner app to a PostHog organization](/docs/integrate/provisioning#link-your-partner-app-to-a-posthog-organization-optional) for the full walkthrough.
+
+### Declare your scopes
+
+We also recommend declaring the OAuth scopes your app needs under `com.posthog.scopes` in your metadata document. This sets a scope ceiling, the maximum set of scopes any token for your app can carry, so a reviewer can see exactly what your app asks for. See [Declare OAuth scopes for your app](/docs/integrate/provisioning#declare-oauth-scopes-for-your-app-optional) for details.
 
 Have a question while integrating? [Reach out to us](/talk-to-a-human).
 
