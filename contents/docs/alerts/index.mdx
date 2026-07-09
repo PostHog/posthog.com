@@ -10,7 +10,7 @@ availability:
 
 Alerts enable you to monitor your [insights](/product-analytics) and get notified when something important changes. You can set fixed thresholds (e.g., notify me when unique visitors exceed 5,000) or use [anomaly detection](#anomaly-detection) to automatically flag unusual patterns in your data.
 
-Currently, alerts are supported on all [trends](/docs/product-analytics/trends).
+Alerts are supported on [trends](/docs/product-analytics/trends), [funnels](/docs/product-analytics/funnels) (steps and trends views only), and [SQL (HogQL)](/docs/sql) insights.
 
 ## How to create an alert
 
@@ -75,9 +75,11 @@ Currently, alerts are supported on all [trends](/docs/product-analytics/trends).
      classes="rounded"
    />
 
-9. Select how often you want the alert to be checked. Options include every 15 minutes (requires Boost, Scale, or Enterprise plan), every hour, every day, every week, and every month.
+9. Select how often you want the alert to be checked. Options range from **real time** — for time-sensitive metrics where you want to be notified as soon as a threshold is breached — through every 15 minutes (requires Boost, Scale, or Enterprise plan), every hour, every day, every week, and every month.
 
-10. Pick who should be notified when the alert is triggered. Subscribed users automatically receive in-app notifications when the alert fires. You can also add email recipients, Slack channels, Discord webhooks, or webhook URLs directly in the alert form.
+   Real-time alerts are best suited to metrics where minutes matter, such as error spikes, checkout failures, or sudden traffic drops. For most metrics, a less frequent interval is sufficient and reduces notification noise.
+
+10. Pick who should be notified when the alert is triggered. Subscribed users automatically receive in-app notifications when the alert fires. You can also add email recipients, Slack channels, Discord webhooks, Microsoft Teams channels, or webhook URLs directly in the alert form.
 
     <ProductScreenshot
       imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/filled_alert_627158e6bb.png"
@@ -120,7 +122,7 @@ PostHog AI can create alerts on existing insights or generate new trend insights
 
 <CalloutBox icon="IconInfo" title="Note" type="fyi">
 
-PostHog AI can only create alerts on [trends](/docs/product-analytics/trends). Other insight types like funnels and retention don't support alerts.
+PostHog AI can only create alerts on [trends](/docs/product-analytics/trends), [funnels](/docs/product-analytics/funnels) (steps and trends views), and [SQL (HogQL)](/docs/sql) insights. Retention insights and funnel time-to-convert or flow views don't support alerts.
 
 </CalloutBox>
 
@@ -154,9 +156,25 @@ This will then also enable you to set a percentage threshold.
 We support both **absolute value** thresholds (insight value more than or less than a certain number) or **percentage** thresholds (insight value changed by a certain percentage).
 Percentage thresholds are only available for relative alerts (as you need to compare two values to figure out percentage change).
 
+## Alerts on funnels
+
+You can create alerts on [funnel insights](/docs/product-analytics/funnels) to monitor conversion rates. Funnel alerts track the overall conversion rate percentage and notify you when it crosses your defined thresholds.
+
+Funnel alerts work with:
+
+- **Steps view** — the standard funnel visualization showing conversion between steps
+- **Trends view** — funnel results displayed as a trend over time
+
+Funnel alerts are **not supported** for:
+
+- **Time-to-convert view** — measures duration rather than conversion rate
+- **Flow view** (sankey) — visualizes user paths without a single conversion rate metric
+
+When creating a funnel alert, the threshold values represent the conversion rate percentage. For example, setting a "less than 10" threshold triggers when the funnel's conversion rate drops below 10%.
+
 ## Anomaly detection
 
-<CalloutBox icon="IconFlask" title="Feature preview" type="info">
+<CalloutBox icon="IconFlask" title="Feature preview" type="action">
 
 Anomaly detection alerts are in **beta**. To enable them, go to [Settings > Feature previews](https://app.posthog.com/settings/user-feature-previews) and toggle on **Anomaly Detection Alerts**.
 
@@ -170,7 +188,8 @@ Instead of setting a fixed threshold, anomaly detection uses statistical algorit
 
 ### Creating an anomaly detection alert
 
-1. Open an existing [trend insight](/docs/product-analytics/trends) or create a new one.
+1. Open an existing [trend insight](/docs/product-analytics/trends) or [SQL insight](/docs/sql), or create a new one.
+   - For SQL insights, use **last row** or **first row** evaluation mode. Anomaly detection isn't supported with **any row** evaluation because those rows represent individual entities, not a time series.
 2. Click **Actions** in the sidebar and select **Alerts**, then click **New alert**.
 3. Under alert type, select **Anomaly detection** instead of a threshold condition.
 4. Choose a **detector** (see [available detectors](#available-detectors) below).
@@ -269,13 +288,13 @@ You can create anomaly detection alerts using [PostHog AI](/docs/posthog-ai/over
 
 ## Notifications
 
-When an alert fires, each subscribed user automatically receives an in-app notification. Clicking the notification navigates to the associated insight. In addition to in-app notifications, alerts support email, Slack, Discord, and webhook notifications that you can configure when creating or editing an alert.
+When an alert fires, each subscribed user automatically receives an in-app notification. Clicking the notification navigates to the associated insight. In addition to in-app notifications, alerts support email, Slack, Discord, Microsoft Teams, and webhook notifications that you can configure when creating or editing an alert.
 
-### Add Slack, Discord, or webhook notifications
+### Add Slack, Discord, Microsoft Teams, or webhook notifications
 
 When creating or editing an alert, you can add notification destinations inline:
 
-1. In the **Destinations** section, select **Slack**, **Discord**, or **Webhook** from the dropdown.
+1. In the **Destinations** section, select **Slack**, **Discord**, **Microsoft Teams**, or **Webhook** from the dropdown.
 
 2. For Slack notifications:
    - If you haven't connected Slack yet, click **Connect to Slack** to set up the integration.
@@ -284,12 +303,15 @@ When creating or editing an alert, you can add notification destinations inline:
 3. For Discord notifications:
    - Enter your Discord webhook URL. You can create one in your Discord server settings under **Integrations** > **Webhooks**.
 
-4. For webhook notifications:
+4. For Microsoft Teams notifications:
+   - Enter your Microsoft Teams webhook URL. You can create one in Microsoft Teams by going to your channel, clicking the three dots, selecting **Workflows**, and choosing **Post to a channel when a webhook request is received**. See the [Microsoft Teams destination docs](/docs/cdp/destinations/microsoft-teams) for more details.
+
+5. For webhook notifications:
    - Enter the webhook URL where you want alerts sent.
 
-5. Click **Add notification** to add the destination.
+6. Click **Add notification** to add the destination.
 
-6. Click **Create alert** or **Save** to apply your changes.
+7. Click **Create alert** or **Save** to apply your changes.
 
 You can add multiple notification destinations to a single alert. Each destination appears in the list with its status.
 

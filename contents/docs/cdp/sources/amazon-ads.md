@@ -9,7 +9,7 @@ availability:
 sourceId: AmazonAds
 ---
 
-<CalloutBox icon="IconInfo" title="Alpha release" type="fyi">
+<CalloutBox icon="IconFlask" title="Alpha release" type="action">
 
 This source is currently in **alpha**. The interface and available tables may change.
 
@@ -55,3 +55,7 @@ Sponsored Products rows (`sp_campaigns` and `sp_ad_groups`) include a `_profile_
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

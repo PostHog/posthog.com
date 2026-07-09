@@ -67,6 +67,7 @@ In your SDK repository settings:
 1. Verify that both `@PostHog/client-libraries-approvers` and `@PostHog/team-client-libraries` teams have at least read access to the repository. This is required for them to be able to approve release workflows.
 2. Access "Collaborators and teams"
 3. Make sure both teams are added as collaborators with at least write access
+4. For new repositories, make sure **Enable release immutability** is enabled in the repository settings
 
 ### 3. Create a release environment
 
@@ -77,6 +78,8 @@ In your SDK repository settings:
    - **Required reviewers:** Add `PostHog/client-libraries-approvers` and `PostHog/team-client-libraries` as the only teams allowed to approve this release
    - **Prevent self-review:** **Check** this box
    - **Allow administrators to bypass:** **Uncheck** this box
+   - **Deployment branches and tags:** Select **Selected branches and tags** and add `main` as the only selected branch or tag
+      - If the package manager requires publishing from tags, such as pub.dev, also add `[0-9]*.[0-9]*.[0-9]*` as an allowed deployment branch or tag pattern
 
 ![Protection rules]([https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_29_T17_26_43_879_Z_cee626f86a.png](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_02_18_T18_21_01_089_Z_2dd8982a33.png))
 
@@ -110,6 +113,7 @@ The GitHub App needs to bypass certain protections to push release commits direc
 2. Navigate to **Rules** → **Rulesets**
 3. Open the ruleset that requires PRs (may have various names)
    1. If this ruleset doesn't exist, create one requiring PRs and reviews from codeowners which should be `@PostHog/client-libraries-approvers` for all files
+   2. Under **Rules**, make sure **Require signed commits** is enabled
 4. Under **Bypass list**, click **Add bypass**
 5. Select your GitHub App (`Releaser (<sdk_name>)`)
 6. Click the three-dot menu and choose **Exempt**

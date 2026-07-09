@@ -11,7 +11,7 @@ Use snippet versioning when you need to control that rollout, such as pinning a 
 
 PostHog SDK releases are designed to be backwards compatible, so pinning isn't about opting into a safer channel. It's for teams that need stricter change control over exactly which script loads.
 
-> **Note:** This page is about the HTML snippet. If you install `posthog-js` from npm, your package manager lockfile controls the SDK version instead. See [Keeping SDKs current](/docs/sdk-doctor/keeping-sdks-current#npm-and-package-manager-lockfiles).
+> **Note:** This page is about the HTML snippet. If you install `posthog-js` from npm, your package manager lockfile controls the SDK version instead. See [Keeping SDKs current](/docs/health-checks/keeping-sdks-current#npm-and-package-manager-lockfiles).
 
 ## Supported pins
 
@@ -129,4 +129,4 @@ Avoid caching `/static/array.js` or `/static/1/array.js` for long periods if you
 | Tag manager installs do not update | Some tag manager templates pin their own `posthog-js` version. Update the tag manager template separately. |
 | You use npm, not the HTML snippet | Update `posthog-js` through your package manager instead; this snippet path does not affect bundled npm installs. |
 
-For broader causes of stale SDKs, see [Keeping SDKs current](/docs/sdk-doctor/keeping-sdks-current).
+For broader causes of stale SDKs, see [Keeping SDKs current](/docs/health-checks/keeping-sdks-current).

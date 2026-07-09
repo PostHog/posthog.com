@@ -9,7 +9,7 @@ availability:
 sourceId: Coda
 ---
 
-<CalloutBox icon="IconWarning" title="Alpha release" type="caution">
+<CalloutBox icon="IconFlask" title="Alpha release" type="action">
 
 The Coda source is currently in alpha. It has been tested against Coda's API documentation but not yet validated with live credentials. If you run into issues, please let us know.
 
@@ -29,6 +29,10 @@ Once the sync completes, you can start querying your Coda data in PostHog.
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />
 
 ## Available tables
 

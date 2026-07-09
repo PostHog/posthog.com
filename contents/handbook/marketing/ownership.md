@@ -12,21 +12,21 @@ If you need help with the website, go to `#posthogdotcom`.
 
 We generally only have product marketers on teams that _already_ have a product manager. Products without a product manager a) are usually too early for marketing to get involved, and b) distract engineers as they need to spend time briefing the product marketer, vs. shipping more stuff. [Product managers](/handbook/product/product-manager-role) help teams figure out what to build and how much to charge for it, product marketers then help you get as many users as possible. 
 
-| Product | PM | PMM | Blitzscale |
-|---|---|---|---|
-| *Data warehouse* | Anna | Lizzie | Raquel |
-| *PostHog AI* | Annika | Joe | James H |
-| *PostHog Code* | Annika | Cleo | James H |
-| *PostHog Slack* | Annika | Cleo | James H |
-| *AI Gateway* | Marco |  | Ben W |
-| *Inbox* | Annika | Sara | James H |
-| *Agents* |  | Joe | Ben W |
-| *MCP* | | Joe | |
+| Product             | PM     | PMM    | Blitzscale |
+| ------------------- | ------ | ------ | ---------- |
+| *Context warehouse* | Anna   | Lizzie | Raquel     |
+| *PostHog Desktop*   | Annika | Cleo   | James H    |
+| *PostHog Slack*     | Annika | Cleo   | James H    |
+| *PostHog Web*       | Annika | Sara   | James H    |
+| *PostHog Research*  | n/a    | Joe    | James H    |
+| *PostHog MCP*       | n/a    | Joe    | James      |
+| *AI Gateway*        | Marco  | n/a    | Ben W      |
+| *Agents*            | n/a    | Danilo | Ben W      |
 
 <details>
 <summary>I need a product marketer, but my team hasn't been assigned one</summary>
 
-Just ask in #group-marketing-and-content in Slack and tag the team lead. 
+Just ask in #team-marketing in Slack and tag <TeamMember name="Joe Martin" photo />. 
 </details>
 
 
@@ -45,9 +45,9 @@ Speak to <SmallTeam slug="marketing" /> and read about [product launches](/handb
 <details>
 <summary>I need help with documentation</summary>
 
-Your main contact is the <SmallTeam slug="docs-wizard" />, but please read the [docs ownership handbook](/handbook/docs-and-wizard/docs-ownership) to understand how best to work with them. 
+Your main contact is the <SmallTeam slug="wizard-and-docs" />, but please read the [docs ownership handbook](/handbook/wizard-and-docs/docs-ownership) to understand how best to work with them. 
 
-If you just need someone to review something, tag `Team Docs & Wizard` in GitHub.
+If you just need someone to review something, tag `Team Wizard & Docs` in GitHub.
 </details>
 
 <details>

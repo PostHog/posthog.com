@@ -9,7 +9,7 @@ availability:
 sourceId: Gladly
 ---
 
-<CalloutBox icon="IconInfo" title="Alpha release" type="fyi">
+<CalloutBox icon="IconFlask" title="Alpha release" type="action">
 
 This source is currently in **alpha**. The interface and available tables may change.
 
@@ -47,3 +47,7 @@ Gladly retains export job files for **14 days**. The initial sync imports all av
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

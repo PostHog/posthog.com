@@ -133,9 +133,20 @@ This option is enabled by default. Disable it to show the full data range includ
   alt="Total value"
 />
 
-Shows the total of events or data points during the given period. Tick the "Compared to previous period" option to add a percentage comparison.
+Shows a single value for the selected event or data point during the given period. Use the **Headline value** setting in display options to choose what value to show:
 
-This option is only available when there's just one series (or [formula](/docs/product-analytics/trends/formulas) and no breakdowns added to the insight.
+- **Total** - The sum of all values in the period (default)
+- **Average** - The mean of all values in the period
+- **Latest** - The most recent value in the period
+
+Enable **Compare to previous period** to show a percentage change pill. How the change is calculated depends on your headline value setting:
+
+- **Total** or **Average** - Compares against the previous period when "compare to previous" is enabled, otherwise shows the change from first to last point
+- **Latest** - Always shows the change from first to last point in the current period
+
+Hover over the sparkline to see individual data point values and point-to-point changes.
+
+This chart type is only available when there's a single series (or [formula](/docs/product-analytics/trends/formulas)) and no breakdowns added to the insight.
 
 ### Bar Chart
 

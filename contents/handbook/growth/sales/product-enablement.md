@@ -74,8 +74,8 @@ All content should include a "last updated" date so team members know they're wo
 | Product analytics | Ben Smith  | - |
 | Web/Customer analytics | Jon        | - |
 | Session replay | Dana        | - |
-| Feature flags | Sachin     | - |
-| Experiments | Sachin     | - |
+| Feature flags | Sachin, Seb Muriel    | - |
+| Experiments | Sachin, Seb Muriel     | - |
 | Error tracking | Sean M | - |
 | Enterprise & Platform | Leon        | - |
 | Data pipelines (batch and realtime) | Ryan       | - |
