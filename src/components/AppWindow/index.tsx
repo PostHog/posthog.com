@@ -6,7 +6,6 @@ import {
     IconMinus,
     IconX,
     IconCollapse45Chevrons,
-    IconExpand45Chevrons,
     IconSquare,
     IconArrowLeft,
     IconArrowRight,
@@ -787,7 +786,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                                     item.expanded ? (
                                                         <IconCollapse45Chevrons />
                                                     ) : (
-                                                        <IconExpand45Chevrons />
+                                                        <IconSquare className="scale-110" />
                                                     )
                                                 }
                                             />
