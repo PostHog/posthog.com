@@ -53,6 +53,11 @@ CSMs are responsible for ensuring that a larger book of existing customers - bot
   - If a customer churns during the quarter, their current ARR counts as $0 and they will be removed from your book the next quarter.
   - If a customer drops below the $20k threshold with no likelihood of growing, we don't adjust their ARR - it counts as-is, and they will be removed from your book the next quarter.
   - If we have to give a customer a big refund, we'll deal with your bonus on a case by case basis depending on what happened, but usually this will still be counted. 
+  - If we give a customer additional credits (goodwill, bug/incident compensation - not the credits they pre-purchase with a contract), the NRR treatment depends on why we gave them:
+    - Unintended usage spikes - a misconfiguration, SDK bug, or runaway loop inflates usage: we credit the customer and exclude the excess usage from NRR. Nobody's NRR should go up because of an accident. There are [eligibility criteria for credits](/handbook/growth/sales/refunds#eligibility-criteria) - check them before promising one.
+    - Goodwill credits - a bug hurt a paying customer's experience but their usage was real: the credit compensates them, and the usage counts as normal.
+    - Startup / YC credits - usage covered by these doesn't count toward NRR. If a customer isn't paying us real money, we don't count it. In practice the 3-paid-invoices rule above handles this.
+    - Comped usage on contract buy-outs / early renewals (e.g. comping 2 months of usage to move a customer onto a new contract early) - no blanket rule here, so flag it to your team lead and we'll handle it case by case.
  
 **Account allocation**
 - CSMs manage approximately $2.5M in ARR. Books are balanced by shape as well as total: a target number of accounts per ARR bucket, so a single large account doesn't dominate a book.
