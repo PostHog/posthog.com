@@ -17,16 +17,6 @@ export default function HTML(props: HTMLProps): JSX.Element {
                 <meta httpEquiv="x-ua-compatible" content="ie=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
                 <meta name="naver-site-verification" content="a58db4b98c2bf9e4b52a4aa0c20fcf1fcdab2793" />
-                {/* Sets data attrs before the page renders so CSS can hide elements
-                    that will be animated in — prevents them from flashing visible first.
-                    - data-intro: hides taskbar + homepage window until intro animation
-                      plays (first visit to / only, gated by localStorage) */}
-                <script
-                    dangerouslySetInnerHTML={{
-                        __html: `try{if(location.pathname==='/'&&!localStorage.getItem('intro-seen'))document.documentElement.dataset.intro=''}catch(e){}`,
-                    }}
-                />
-
                 <link
                     rel="preload"
                     as="font"

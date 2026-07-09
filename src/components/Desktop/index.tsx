@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Link from 'components/Link'
 import { useAppActions, useAppSettings, useAppUIState } from '../../context/App'
 import { GlassIcon, PricingIcon, DemoIcon } from 'components/OSIcons'
@@ -25,7 +25,7 @@ import { Screensaver } from '../Screensaver'
 import { useInactivityDetection } from '../../hooks/useInactivityDetection'
 import NotificationsPanel from 'components/NotificationsPanel'
 import Wallpapers, { getWallpaperGlow } from './Wallpapers'
-import { motion, useMotionValue, animate } from 'framer-motion'
+import { motion } from 'framer-motion'
 import HedgeHogModeEmbed from 'components/HedgehogMode'
 import ReactConfetti from 'react-confetti'
 import { useToast } from '../../context/Toast'
@@ -201,11 +201,6 @@ function Desktop() {
     const [rendered, setRendered] = useState(false)
     const [navVisible, setNavVisible] = useState(false)
     const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null)
-    const [fakeCursorActive, setFakeCursorActive] = useState(false)
-    const cursorX = useMotionValue(0)
-    const cursorY = useMotionValue(0)
-    const cursorScale = useMotionValue(1)
-    const cursorOpacity = useMotionValue(0)
     const { addToast } = useToast()
     function generateInitialPositions(columns = 2): IconPositions {
         const positions: IconPositions = {}
@@ -318,107 +313,6 @@ function Desktop() {
             }
         }
     }, [posthogInstance])
-
-    const runFakeCursorAnimation = useCallback(() => {
-        if (!rendered || window.location.pathname !== '/' || localStorage.getItem('intro-seen')) return
-
-        const startX = window.innerWidth * 0.85
-        const startY = window.innerHeight * 0.8
-
-        cursorX.set(startX)
-        cursorY.set(startY)
-        cursorScale.set(1)
-        cursorOpacity.set(0)
-
-        setFakeCursorActive(true)
-
-        const iconWidth = 112
-        const iconHeight = 84
-        const homePos = iconPositions['Home'] || { x: 0, y: 0 }
-        const container = constraintsRef.current
-        const containerRect = container?.getBoundingClientRect()
-        let targetX = startX
-        let targetY = startY
-        if (containerRect) {
-            targetX = containerRect.left + homePos.x + iconWidth / 2
-            targetY = containerRect.top + homePos.y + iconHeight / 2
-        }
-
-        const homeIconEl = document.querySelector<HTMLElement>('[data-icon-label="Home"]')
-        const zoomHoverEl = homeIconEl?.querySelector<HTMLElement>(':scope > div > div')
-
-        // Fade in → move to icon → hover → click → exit right
-        animate(cursorOpacity, 1, {
-            duration: 0.25,
-            onComplete: () => {
-                let movesDone = 0
-                const onMoveDone = () => {
-                    movesDone++
-                    if (movesDone < 2) return
-                    // Simulate hover
-                    if (zoomHoverEl) zoomHoverEl.style.top = '-0.5px'
-                    setTimeout(() => {
-                        // Click press
-                        if (zoomHoverEl) zoomHoverEl.style.top = '0.5px'
-                        animate(cursorScale, 0.8, {
-                            duration: 0.08,
-                            onComplete: () => {
-                                if (zoomHoverEl) zoomHoverEl.style.top = '-0.5px'
-                                animate(cursorScale, 1, {
-                                    duration: 0.1,
-                                    onComplete: () => {
-                                        if (zoomHoverEl) zoomHoverEl.style.top = ''
-
-                                        delete document.documentElement.dataset.intro
-                                        localStorage.setItem('intro-seen', '1')
-
-                                        // Brief pause then exit
-                                        setTimeout(() => {
-                                            animate(cursorX, window.innerWidth + 40, {
-                                                duration: 0.5,
-                                                ease: [0.4, 0, 1, 1],
-                                            })
-                                            animate(cursorOpacity, 0, {
-                                                duration: 0.3,
-                                                delay: 0.2,
-                                                onComplete: () => {
-                                                    setFakeCursorActive(false)
-                                                },
-                                            })
-                                        }, 300)
-                                    },
-                                })
-                            },
-                        })
-                    }, 350)
-                }
-                animate(cursorX, targetX, {
-                    duration: 1,
-                    ease: [0.5, 0, 0.3, 1],
-                    onComplete: onMoveDone,
-                })
-                animate(cursorY, targetY, {
-                    duration: 1,
-                    ease: [0.2, 0.8, 0.4, 1],
-                    onComplete: onMoveDone,
-                })
-            },
-        })
-    }, [rendered])
-
-    useEffect(() => {
-        if (rendered) {
-            const timeout = setTimeout(runFakeCursorAnimation, 500)
-            return () => clearTimeout(timeout)
-        }
-    }, [rendered, runFakeCursorAnimation])
-
-    useEffect(() => {
-        document.documentElement.style.cursor = fakeCursorActive ? 'none' : ''
-        return () => {
-            document.documentElement.style.cursor = ''
-        }
-    }, [fakeCursorActive])
 
     const handlePositionChange = (appLabel: string, position: IconPosition) => {
         const newPositions = { ...iconPositions, [appLabel]: position }
@@ -593,21 +487,6 @@ function Desktop() {
                         tweenDuration={1}
                     />
                 </div>
-            )}
-            {fakeCursorActive && (
-                <motion.img
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/james_cursor_default_d6f7983b0a.png"
-                    alt=""
-                    className="fixed top-0 left-0 h-8 pointer-events-none z-[99999]"
-                    style={{
-                        x: cursorX,
-                        y: cursorY,
-                        scale: cursorScale,
-                        opacity: cursorOpacity,
-                        translateX: '-25%',
-                        translateY: '-10%',
-                    }}
-                />
             )}
         </>
     )

@@ -1630,14 +1630,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }, [windowsInView])
     const stateWindows = element.props?.location?.state?.savedWindows
     const posthog = usePostHog()
-    const introSeen = () => {
-        if (isSSR) return true
-        try {
-            return !!localStorage.getItem('intro-seen')
-        } catch {
-            return true
-        }
-    }
 
     const [windows, setWindows] = useState<AppWindow[]>(() => {
         if (isSSR) {
@@ -2409,7 +2401,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         const urlObj = new URL(location.href)
         const queryString = urlObj?.search.substring(1)
         const parsed = qs.parse(queryString)
-        if ((location.pathname === '/' && !introSeen()) || parsed?.windows || location.state?.skipPageUpdate) {
+        if (parsed?.windows || location.state?.skipPageUpdate) {
             return
         }
         updatePages(element)

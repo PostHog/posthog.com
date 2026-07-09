@@ -4,28 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Hide taskbar + window during intro animation (prevents flash on first visit) */
-html[data-intro] #taskbar {
-    opacity: 0;
-    transform: perspective(1200px) rotateX(90deg);
-}
-
-html[data-intro] [data-app='AppWindow'] {
-    opacity: 0 !important;
-    animation: none !important;
-}
-
-@keyframes taskbar-enter {
-    from {
-        opacity: 0;
-        transform: perspective(1200px) rotateX(90deg);
-    }
-    to {
-        opacity: 1;
-        transform: perspective(1200px) rotateX(0deg);
-    }
-}
-
 @layer components {
     .markdown.prose {
         img {

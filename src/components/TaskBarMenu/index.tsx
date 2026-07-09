@@ -43,9 +43,6 @@ function TaskBarMenu() {
     } = useAppActions()
     const { posthogInstance } = useAppSettings()
     const [isAnimating, setIsAnimating] = useState(false)
-    const shouldAnimate = useRef(
-        typeof window !== 'undefined' && window.location.pathname === '/' && !localStorage.getItem('intro-seen')
-    )
 
     const { user, notifications, logout, isModerator } = useUser()
     const menuData = useMenuData()
@@ -80,15 +77,7 @@ function TaskBarMenu() {
                 const ref = taskbarRef as React.MutableRefObject<HTMLDivElement | null>
                 ref.current = node
             }
-            if (node && shouldAnimate.current) {
-                node.addEventListener(
-                    'animationend',
-                    () => {
-                        updateTaskbarHeight()
-                    },
-                    { once: true }
-                )
-            } else if (node) {
+            if (node) {
                 updateTaskbarHeight()
             }
         },
@@ -300,11 +289,6 @@ function TaskBarMenu() {
                         transformStyle: 'preserve-3d',
                         width: '100%',
                         boxSizing: 'border-box',
-                        ...(shouldAnimate.current
-                            ? {
-                                  animation: 'taskbar-enter 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s both',
-                              }
-                            : {}),
                     }}
                     className={`bg-primary/50 backdrop-blur-3xl will-change-[transform,backdrop-filter] transform-gpu skin-classic:bg-accent wallpaper-keyboard-garden:dark:bg-black/15 border-secondary rounded pl-0.5 pr-2 shadow-2xl ${
                         windows.some((w) => w.expanded && !w.minimized)
