@@ -104,7 +104,14 @@ As PostHog grows, it's increasingly important that all team leads help us keep t
 
 That form will be shared with the relevant team Blitzscale member, so they can help where necessary.
 
-The keeper test runs both ways. Direct reports are also asked to do a keeper test on their manager, sent through the same automated Deel form, so managers get honest feedback on how they're doing too. The format mirrors the above - 'if your manager was leaving, would you try to keep them?' - with the same digging into any 'no' to work out what it would take to turn it into a 'yes'.
+Feedback also flows the other way. Direct reports are periodically asked to give feedback on their manager through an automated form, so managers get honest feedback on how they're doing too. Management at PostHog is different from other companies - we expect managers to focus their management time on:
+
+1. Setting the right context for their direct reports to do their jobs
+2. Making sure their direct reports are happy and productive
+3. Acting as the hiring manager for new roles in their team
+4. Creating good plans for new person onboarding and small team offsites
+
+Reports rate their manager against this, from 'strong no' to 'strong yes', and explain why they gave that answer.
 
 > Side note: anyone can ask their manager 'how hard would you work to change my mind if I were thinking of leaving?'. It's a great way to solicit valuable feedback!
 
