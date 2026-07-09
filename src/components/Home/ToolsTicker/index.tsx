@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import Link from 'components/Link'
 import useProduct from 'hooks/useProduct'
+import ToolsTickerStrip from './ToolsTickerStrip'
 
 // Seconds each item takes to cross one loop; total duration scales with item count
 // so the apparent speed stays constant when handles are added or removed.
@@ -59,26 +59,6 @@ export default function ToolsTicker({
         return null
     }
 
-    // The list is rendered twice so the translateX(-50%) loop is seamless; the
-    // duplicate is hidden from screen readers and its links removed from tab order.
-    const strip = (ariaHidden: boolean) => (
-        <ul aria-hidden={ariaHidden || undefined} className="flex items-center gap-6 pr-6 m-0 p-0 list-none shrink-0">
-            {products.map((product: any) => (
-                <li key={product.handle} className="flex items-center gap-1.5 whitespace-nowrap">
-                    {product.Icon && <product.Icon className={`size-4 shrink-0 text-${product.color}`} />}
-                    <Link
-                        to={`/${product.slug}`}
-                        state={{ newWindow: true }}
-                        tabIndex={ariaHidden ? -1 : undefined}
-                        className="text-sm font-semibold"
-                    >
-                        {product.name}
-                    </Link>
-                </li>
-            ))}
-        </ul>
-    )
-
     return (
         <div className={`@container not-prose ${className}`}>
             <div className="flex flex-col @sm:flex-row @sm:items-center gap-1 @sm:gap-3">
@@ -97,8 +77,9 @@ export default function ToolsTicker({
                             animationPlayState: isPaused ? 'paused' : 'running',
                         }}
                     >
-                        {strip(false)}
-                        {strip(true)}
+                        {/* Rendered twice so translateX(-50%) loops seamlessly; duplicate is aria-hidden. */}
+                        <ToolsTickerStrip products={products} />
+                        <ToolsTickerStrip products={products} ariaHidden />
                     </div>
                 </div>
             </div>
