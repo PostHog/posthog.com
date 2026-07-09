@@ -1672,6 +1672,16 @@ export const handbookSidebar = [
                     },
                 ],
             },
+            {
+                name: 'GTM engineering',
+                url: '/teams/gtm-engineering',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/teams/gtm-engineering',
+                    },
+                ],
+            },
         ],
     },
     {
@@ -2159,11 +2169,19 @@ export const docsMenu = {
             color: 'red',
             url: '/docs/self-driving',
             description: 'Understand PostHog and get set up',
+            badge: {
+                title: 'Beta',
+                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+            },
             children: [
                 {
                     name: 'Overview',
                     url: '/docs/self-driving',
                     icon: 'IconHome',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'Get started',
@@ -2173,7 +2191,7 @@ export const docsMenu = {
                     url: '/docs/self-driving/setup',
                 },
                 {
-                    name: 'Surfaces',
+                    name: 'Products',
                 },
                 {
                     name: 'Slack',
@@ -2186,6 +2204,10 @@ export const docsMenu = {
                 {
                     name: 'MCP',
                     url: '/docs/model-context-protocol',
+                },
+                {
+                    name: 'CLI',
+                    url: '/docs/cli',
                 },
                 // TODO: add PostHog Code (Desktop) as a surface here once it's GA.
                 {
@@ -2950,6 +2972,10 @@ export const docsMenu = {
                             url: '/docs/ai-engineering/ai-wizard',
                         },
                         {
+                            name: 'Sign up with the wizard',
+                            url: '/docs/ai-engineering/wizard-signup',
+                        },
+                        {
                             name: 'Model Context Protocol (MCP)',
                             url: '/docs/model-context-protocol',
                             children: [
@@ -3333,6 +3359,10 @@ export const docsMenu = {
                         {
                             name: 'ID-JAG (XAA)',
                             url: '/docs/settings/id-jag',
+                        },
+                        {
+                            name: 'Agent discovery (auth.md)',
+                            url: '/docs/settings/agent-discovery',
                         },
                         {
                             name: 'Content Security Policy tracking',
@@ -4430,6 +4460,7 @@ export const docsMenu = {
                         { name: 'PHP', url: '/docs/feature-flags/installation/php' },
                         { name: 'Python', url: '/docs/feature-flags/installation/python' },
                         { name: 'OpenFeature (Python)', url: '/docs/feature-flags/installation/openfeature' },
+                        { name: 'OpenFeature (JavaScript)', url: '/docs/feature-flags/installation/openfeature-js' },
                         { name: 'React', url: '/docs/feature-flags/installation/react' },
                         { name: 'React Native', url: '/docs/feature-flags/installation/react-native' },
                         { name: 'React Router', url: '/docs/feature-flags/installation/react-router' },
@@ -6947,6 +6978,10 @@ export const docsMenu = {
             color: 'purple',
             url: '/docs/slack',
             description: 'Run PostHog from any Slack channel — agent tasks, analytics, and notifications.',
+            badge: {
+                title: 'Beta',
+                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+            },
             children: [
                 {
                     name: 'Slack app',
@@ -6956,6 +6991,10 @@ export const docsMenu = {
                     url: '/docs/slack',
                     icon: 'IconHome',
                     color: 'seagreen',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'Setup',

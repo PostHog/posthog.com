@@ -99,7 +99,7 @@ Environment variables:
 | --- | --- | --- |
 | `POSTHOG_PROJECT_TOKEN` | Yes | Your project token (`phc_`). Sends events and evaluates flags remotely. |
 | `POSTHOG_HOST` | No | Defaults to `https://us.i.posthog.com`. Use `https://eu.i.posthog.com` for EU Cloud or your self-hosted URL. |
-| `POSTHOG_PERSONAL_API_KEY` | No | A [secret API key](/docs/feature-flags/local-evaluation#step-1-get-a-secret-api-key) (`phs_`, recommended) or personal API key (`phx_`). Setting it enables local flag evaluation. |
+| `POSTHOG_PERSONAL_API_KEY` | No | A [feature flags secure API key](/docs/feature-flags/local-evaluation#step-1-find-your-feature-flags-secure-api-key) (`phs_`, recommended) or personal API key (`phx_`). Setting it enables local flag evaluation. |
 | `POSTHOG_FLAGS_POLLING_INTERVAL_SECONDS` | No | Cron interval for refreshing flag definitions. Defaults to `60`. Raise it on free-tier dev deployments to cut function-call usage. |
 
 ### 2. Set your PostHog credentials
@@ -109,10 +109,10 @@ npx convex env set POSTHOG_PROJECT_TOKEN <ph_project_token>
 npx convex env set POSTHOG_HOST <ph_client_api_host>
 ```
 
-For local feature flag evaluation (covered in step 5), also set a [secret API key](/docs/feature-flags/local-evaluation#step-1-get-a-secret-api-key):
+For local feature flag evaluation (covered in step 5), also set a [feature flags secure API key](/docs/feature-flags/local-evaluation#step-1-find-your-feature-flags-secure-api-key):
 
 ```sh
-npx convex env set POSTHOG_PERSONAL_API_KEY phs_your_secret_api_key
+npx convex env set POSTHOG_PERSONAL_API_KEY phs_your_feature_flags_secure_api_key
 ```
 
 Local evaluation kicks in on the next cron tick — no redeploy needed.

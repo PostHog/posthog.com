@@ -8,6 +8,13 @@ showTitle: true
 
 For customers who want to sign up for an annual (or longer) plan there is some additional paperwork needed to capture their contractual commitment to a minimum term, and likely custom pricing as well. At a minimum, they should sign an Order Form which references our standard [terms](/terms) and [privacy notice](/privacy). In addition, they may want a custom Master Services Agreement (MSA) or Data Processing Agreement (DPA).
 
+### Multi-year deals and credit allocation
+
+The credit term only extends beyond 12 months (e.g. to 24 months for a two-year deal) if the customer pays the full amount for the entire term upfront (e.g. the full two-year amount paid upfront). How the credits are allocated depends on how the customer pays:
+
+-   **Paying all upfront for the full term:** the customer gets the full credit amount added in bulk at the start, with an expiry set to the full length of the term (e.g. a two-year expiry for a two-year deal paid upfront).
+-   **Paying per year (or in tranches):** the extended term does not apply. Credits are granted in tranches allocated on each renewal date, each with a 12-month term. For example, a two-year deal split evenly grants half the credits in the first year and half on the renewal date at the start of the second.
+
 ### What about monthly customers?
 
 Anyone on a monthly plan simply agrees to our [terms](/terms) and [privacy policy](/privacy) when they sign up.

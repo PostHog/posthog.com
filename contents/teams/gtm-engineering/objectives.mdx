@@ -1,0 +1,22 @@
+### Q3 2026 Objectives
+
+### **Lead Gateway** - (Driver: <TeamMember name="Abhischek Thottakara" />)
+
+Build a single source for lead tasks that get routed to Sales Teams to consistently enrich and score product led signals in order to improve qualification and win rates.
+
+**What we'll ship:**
+
+* REST Webhook endpoint to receive product led / inbound signals
+* Set of temporal workflows to enrich the person and company consistently and persist the task in Salesforce
+* Scoring engine to rank Account potential and propensity for the lead
+* Migrate all existing lead triggers from Zapier, Default and Vitally into a set of SQL based trigger definitions
+* Implement CRON based revival of leads based on growth signals updated scores
+
+### **posthog-salesforce** - (Driver: <TeamMember name="Abhischek Thottakara" />)
+
+Deploy [posthog-salesforce](https://github.com/posthog/posthog-salesforce) and make it the source of truth for task routing, account and opportunity management to improve data quality and enablement for GTM Humans to propose changes.
+
+**What we'll ship:**
+
+* Deploy posthog-salesforce to production
+* Lock down Salesforce to avoid manual changes to production

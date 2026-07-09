@@ -53,6 +53,7 @@ composables
 config
 configs
 containerd
+coworking
 cron
 cronjob
 cronjobs

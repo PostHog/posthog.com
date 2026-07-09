@@ -56,6 +56,7 @@ import { langsmith } from '../../hooks/competitorData/langsmith'
 import { launchdarkly } from '../../hooks/competitorData/launchdarkly'
 import { logrocket } from '../../hooks/competitorData/logrocket'
 import { lucky_orange } from '../../hooks/competitorData/lucky_orange'
+import { lunary } from '../../hooks/competitorData/lunary'
 import { mailerlite } from 'hooks/competitorData/mailerlite'
 import { matomo } from '../../hooks/competitorData/matomo'
 import { mixpanel } from '../../hooks/competitorData/mixpanel'
@@ -659,6 +660,7 @@ export default function ProductComparisonTable({
         launchdarkly,
         logrocket,
         lucky_orange,
+        lunary,
         mailerlite,
         matomo,
         mixpanel,

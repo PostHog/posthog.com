@@ -210,6 +210,9 @@ If your customer must pay via credit card, you absolutely _need_ to let Mine (Si
 
 Sometimes customers will be locked into a contract with a competitor, but want to switch to PostHog when their contract is up. In this case, we are willing to let them use PostHog for free for up to 6 months. This is beneficial to PostHog as well, as we can get them set up and using PostHog sooner, capitalizing on the momentum of their interest today, and giving them more time to get comfortable with the platform.
 
+### The guiding principle: The buyout amount needs to make financial sense
+When considering a contract buyout, the goal is to pay a little up front to make more money over the long term. It doesn't make sense to buy out a contract for $60k if the customer is only planning on spending $20k annually with PostHog.
+
 Some rules:
 
 -   They need to share a copy of their current contract/pricing/bank statement as proof.

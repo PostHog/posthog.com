@@ -4,6 +4,8 @@ sidebar: Handbook
 showTitle: true
 ---
 
+*For the canonical frame everyone at PostHog uses – the self-driving story and standard description – see [Brand foundations](/handbook/brand/foundations#how-we-describe-posthog).*
+
 ## Elevator pitch
 
 PostHog Analytics covers funnels, retention, trends, user paths, correlation analysis, and SQL — with autocapture so you never miss the event that mattered. Every graph links directly to the session recordings and feature flag states behind it. And because analytics is built into the same platform as replay, flags, experiments, and the data warehouse, agents can query it mid-loop without switching tools.
