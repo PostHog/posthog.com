@@ -1,0 +1,144 @@
+import React from 'react'
+
+import OSButton from 'components/OSButton'
+import WizardCommand from 'components/WizardCommand'
+import ManualFallback from './ManualFallback'
+
+export type DropErrorCode =
+    | 'github_denied'
+    | 'github_auth'
+    | 'grant_exchange'
+    | 'grant_expired'
+    | 'resume_expired'
+    | 'install_timeout'
+    | 'no_repos'
+    | 'fetch_failed'
+    | 'consent_denied'
+    | 'consent_failed'
+    | 'provisioning_failed'
+    | 'rate_limited'
+    | 'unknown'
+
+type ErrorSpec = {
+    message: string
+    /** Restartable errors offer "Connect GitHub" again; terminal ones lead with the fallback. */
+    restartable: boolean
+}
+
+/**
+ * Mirrors the "Error handling on posthog.com" table in wizard-drop-rfc.md. Every code gets the
+ * manual-signup fallback; only restartable ones also get a fresh "Connect GitHub" action.
+ */
+const ERRORS: Record<DropErrorCode, ErrorSpec> = {
+    github_denied: { message: 'GitHub authorization was cancelled, so we stopped there.', restartable: true },
+    github_auth: { message: "We couldn't complete the GitHub connection.", restartable: true },
+    grant_exchange: { message: "We couldn't finish connecting your GitHub account.", restartable: true },
+    grant_expired: { message: 'Your GitHub connection expired. Reconnecting only takes a click.', restartable: true },
+    resume_expired: {
+        message: 'This session expired before we could finish. Reconnecting only takes a click.',
+        restartable: true,
+    },
+    install_timeout: {
+        message:
+            "We couldn't detect the GitHub App installation. If you finished installing it, reconnect and we'll pick it up.",
+        restartable: true,
+    },
+    no_repos: {
+        message:
+            "The installation doesn't grant access to any repositories. Re-install the app and select at least one repository.",
+        restartable: true,
+    },
+    fetch_failed: { message: "We couldn't load your repositories.", restartable: true },
+    consent_denied: {
+        message:
+            'No changes were made to your PostHog account. You can also log in and connect GitHub from onboarding.',
+        restartable: false,
+    },
+    consent_failed: {
+        message: "We couldn't complete authorization with your existing PostHog account. No changes were made.",
+        restartable: false,
+    },
+    provisioning_failed: { message: "We couldn't create your account automatically.", restartable: false },
+    rate_limited: { message: "We're getting a lot of requests right now.", restartable: false },
+    unknown: { message: 'Something went wrong.', restartable: false },
+}
+
+export function ErrorPanel({
+    code,
+    retryAfter,
+    onConnect,
+    onRetry,
+}: {
+    code: string
+    retryAfter?: number
+    onConnect: () => void
+    /** Inline retry for transient repo-list failures (doesn't restart the whole flow). */
+    onRetry?: () => void
+}): JSX.Element {
+    const spec = ERRORS[(code in ERRORS ? code : 'unknown') as DropErrorCode]
+    return (
+        <div>
+            <p className="font-semibold text-red mb-1">{spec.message}</p>
+            {code === 'rate_limited' && retryAfter ? (
+                <p className="text-sm opacity-70 mb-3">Try again in about {Math.ceil(retryAfter / 60)} minute(s).</p>
+            ) : null}
+            <div className="flex gap-2 items-center">
+                {code === 'fetch_failed' && onRetry ? (
+                    <OSButton variant="primary" size="md" onClick={onRetry}>
+                        Try again
+                    </OSButton>
+                ) : spec.restartable ? (
+                    <OSButton variant="primary" size="md" onClick={onConnect}>
+                        Connect GitHub
+                    </OSButton>
+                ) : null}
+            </div>
+            <ManualFallback prominent={!spec.restartable} />
+        </div>
+    )
+}
+
+export function SuccessPanel({ email }: { email?: string }): JSX.Element {
+    return (
+        <div>
+            <p className="font-semibold mb-1">🎉 You're all set — a pull request is on its way.</p>
+            <p className="text-sm mb-0">
+                We created your PostHog account and the wizard is instrumenting your repository in the background. A
+                pull request will appear on your repo shortly, and we've emailed
+                {email ? <strong> {email}</strong> : ' you'} a link to set your password.
+            </p>
+        </div>
+    )
+}
+
+/**
+ * The account exists but no wizard run does — deliberately NO signup link here (a fresh signup
+ * with the same email would bounce into the existing-user path).
+ */
+export function DegradedPanel(): JSX.Element {
+    return (
+        <div>
+            <p className="font-semibold mb-1">Your account is ready, but we couldn't open the pull request.</p>
+            <p className="text-sm mb-3">
+                Check your email for a link to access your new PostHog account (existing accounts: just log in), then
+                run the wizard locally to finish the setup:
+            </p>
+            <WizardCommand slim />
+        </div>
+    )
+}
+
+export function ExistingUserPanel({ onContinue }: { onContinue: () => void }): JSX.Element {
+    return (
+        <div>
+            <p className="font-semibold mb-1">Looks like you already have a PostHog account.</p>
+            <p className="text-sm mb-3">
+                We'll send you to PostHog to log in and approve connecting this repository to one of your projects.
+                Nothing changes until you approve.
+            </p>
+            <OSButton variant="primary" size="md" onClick={onContinue}>
+                Continue to PostHog
+            </OSButton>
+        </div>
+    )
+}
