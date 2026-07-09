@@ -173,6 +173,14 @@ Delays help you control the timing of your messages. There are 3 types of delays
 
 You can see an example of a delay in the [email drip campaign](/docs/workflows/email-drip-campaign) tutorial.
 
+<CalloutBox type="info" title="Duration validation">
+
+Duration values must be positive whole numbers followed by a unit — for example `1m`, `2h`, or `3d`. The minimum value is 1 for any unit. Decimal or fractional values like `1.5h` or `2.7d` are not accepted.
+
+You can save a draft workflow with an incomplete duration, but you must provide a valid duration for every delay and wait step before the workflow can be enabled.
+
+</CalloutBox>
+
 ### Waiting for events
 
 A **wait until condition** step can wait for one or more events instead of (or as well as) a property condition. The step resumes when the person in the workflow run sends a matching event - events from other people never resume it. If no matching event arrives before the step's maximum wait duration, the workflow continues down the timeout branch.
