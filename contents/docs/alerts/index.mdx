@@ -138,6 +138,8 @@ The [MCP server](/docs/model-context-protocol) is the most complete way to creat
 - "Notify our team in Slack when error rate increases by more than 25% week over week"
 - "Create a SQL alert if this query's result drops below 10000"
 - "Set up an anomaly detection alert on our signups trend using Z-score"
+- "Set up an ensemble alert using Z-score AND Isolation Forest on daily signups"
+- "Simulate a MAD detector on my revenue insight for the last 30 days"
 - "List all my alerts and their current state"
 - "Update my pageview alert threshold to 5000"
 - "Delete the old conversion alert"
@@ -302,14 +304,6 @@ The simulation shows:
 For ensemble detectors, the chart shows individual score lines for each sub-detector so you can see how they interact.
 
 Use the date range dropdown to test the detector over different time periods (e.g., last 24 hours, last 7 days, last 30 days).
-
-### Create anomaly detection alerts via MCP
-
-Use the [MCP server](/docs/model-context-protocol) from your AI coding agent to create or simulate a detector-based alert with natural language. PostHog AI can't create these yet. Example prompts:
-
-- "Create an anomaly detection alert on my pageviews insight using Z-score"
-- "Set up an ensemble alert using Z-score AND Isolation Forest on daily signups"
-- "Simulate a MAD detector on my revenue insight for the last 30 days"
 
 ### Tips
 
