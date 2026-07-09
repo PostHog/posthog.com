@@ -277,7 +277,7 @@ function TestHero(): JSX.Element {
                         </p>
                     </div>
 
-                    <div className="mt-6 flex flex-col items-center @xl:items-start">
+                    <div className="mt-6 flex flex-col items-center">
                         <PlatformInstall schema={wizardInstallSchema} selfDriving />
                         <SecondaryActions />
                     </div>

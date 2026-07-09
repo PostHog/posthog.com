@@ -713,6 +713,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                         }
                     }}
                     data-app="AppWindow"
+                    data-path={item.path || undefined}
                     data-fixed-size={item.appSettings?.size?.fixed || undefined}
                     data-expanded={item.expanded || undefined}
                     data-windowed={item.windowed || undefined}
