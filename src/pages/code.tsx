@@ -675,7 +675,7 @@ function HeroSection() {
                         </h1>
 
                         <div className="@4xl/editor:gap-8 flex flex-col @4xl/editor:flex-row items-start">
-                            <div className="@4xl/flex-[0_0_280px]">
+                            <div className="@4xl/editor:flex-[0_0_280px]">
                                 <p>
                                     PostHog Code is the only AI devtool that understands your <strong>product,</strong>{' '}
                                     not just your <strong>codebase</strong>.
@@ -713,7 +713,7 @@ function HeroSection() {
                                 </div>
                             </div>
 
-                            <div className="@4xl/flex-1">
+                            <div className="@4xl/editor:flex-1 w-full min-w-0">
                                 <div className="rounded-md overflow-hidden shadow-xl not-prose">
                                     <WistiaEmbed mediaId="vm9mn1m4dv" />
                                 </div>
