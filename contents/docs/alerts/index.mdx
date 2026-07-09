@@ -14,7 +14,7 @@ Alerts are supported on [trends](/docs/product-analytics/trends), [funnels](/doc
 
 ## Use cases
 
-Since alerts work on [trends](/docs/product-analytics/trends) and [SQL (HogQL)](/docs/sql) insights, you can monitor nearly any metric you track in PostHog. Common use cases include:
+Since alerts work on [trends](/docs/product-analytics/trends), [funnels](/docs/product-analytics/funnels), and [SQL (HogQL)](/docs/sql) insights, you can monitor nearly any metric you track in PostHog. Common use cases include:
 
 - **Monitor traffic spikes** – Get notified when pageviews or unique visitors exceed normal levels. Useful for catching viral content, measuring marketing campaign impact, or detecting unexpected load.
 
@@ -371,6 +371,22 @@ When you set an alert on a trend with a breakdown, the alert will be triggered w
   alt="alert on breakdown"
   classes="rounded"
 />
+
+## Alerts on funnels
+
+You can create alerts on [funnel insights](/docs/product-analytics/funnels) to monitor conversion rates. Funnel alerts track the overall conversion rate percentage and notify you when it crosses your defined thresholds.
+
+Funnel alerts work with:
+
+- **Steps view** — the standard funnel visualization showing conversion between steps
+- **Trends view** — funnel results displayed as a trend over time
+
+Funnel alerts are **not supported** for:
+
+- **Time-to-convert view** — measures duration rather than conversion rate
+- **Flow view** (sankey) — visualizes user paths without a single conversion rate metric
+
+When creating a funnel alert, the threshold values represent the conversion rate percentage. For example, setting a "less than 10" threshold triggers when the funnel's conversion rate drops below 10%.
 
 ## Automatically disabled alerts
 
