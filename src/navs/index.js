@@ -1672,6 +1672,16 @@ export const handbookSidebar = [
                     },
                 ],
             },
+            {
+                name: 'GTM engineering',
+                url: '/teams/gtm-engineering',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/teams/gtm-engineering',
+                    },
+                ],
+            },
         ],
     },
     {
@@ -2181,7 +2191,7 @@ export const docsMenu = {
                     url: '/docs/self-driving/setup',
                 },
                 {
-                    name: 'Surfaces',
+                    name: 'Products',
                 },
                 {
                     name: 'Slack',
@@ -2194,6 +2204,10 @@ export const docsMenu = {
                 {
                     name: 'MCP',
                     url: '/docs/model-context-protocol',
+                },
+                {
+                    name: 'CLI',
+                    url: '/docs/cli',
                 },
                 // TODO: add PostHog Code (Desktop) as a surface here once it's GA.
                 {
@@ -2958,6 +2972,10 @@ export const docsMenu = {
                             url: '/docs/ai-engineering/ai-wizard',
                         },
                         {
+                            name: 'Sign up with the wizard',
+                            url: '/docs/ai-engineering/wizard-signup',
+                        },
+                        {
                             name: 'Model Context Protocol (MCP)',
                             url: '/docs/model-context-protocol',
                             children: [
@@ -3341,6 +3359,10 @@ export const docsMenu = {
                         {
                             name: 'ID-JAG (XAA)',
                             url: '/docs/settings/id-jag',
+                        },
+                        {
+                            name: 'Agent discovery (auth.md)',
+                            url: '/docs/settings/agent-discovery',
                         },
                         {
                             name: 'Content Security Policy tracking',
@@ -4431,6 +4453,7 @@ export const docsMenu = {
                         { name: 'PHP', url: '/docs/feature-flags/installation/php' },
                         { name: 'Python', url: '/docs/feature-flags/installation/python' },
                         { name: 'OpenFeature (Python)', url: '/docs/feature-flags/installation/openfeature' },
+                        { name: 'OpenFeature (JavaScript)', url: '/docs/feature-flags/installation/openfeature-js' },
                         { name: 'React', url: '/docs/feature-flags/installation/react' },
                         { name: 'React Native', url: '/docs/feature-flags/installation/react-native' },
                         { name: 'React Router', url: '/docs/feature-flags/installation/react-router' },

@@ -25,6 +25,7 @@ import { motion } from 'framer-motion'
 import HeroCarousel from 'components/Home/HeroCarousel'
 import { buildTabs } from 'components/Home/HeroCarousel/tabs'
 import { TestRolloutSlide, DebugFixSlide, OnePlaceSlide, UnderstandUsageSlide } from '../HeroCarousel/slides'
+import ToolsTicker from 'components/Home/ToolsTicker'
 // NOTE: `components/PlatformInstall` (index/IconButton/schema/CopyableCommand), the new
 // `Logomark*` icons added to `components/OSIcons/Icons.tsx`, and the `canvas-confetti`
 // dependency are all VENDORED VERBATIM from the `9000` branch — kept byte-identical to that
@@ -283,7 +284,8 @@ function TestHero(): JSX.Element {
                 </div>
             </div>
 
-            <HeroCarousel tabs={buildTabs} className="mb-8" />
+            <HeroCarousel tabs={buildTabs} className="mb-4" />
+            <ToolsTicker className="mb-8" />
         </>
     )
 }
