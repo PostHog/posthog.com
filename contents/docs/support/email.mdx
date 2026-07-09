@@ -68,6 +68,18 @@ When you reply to an email ticket in PostHog:
 
 **Private notes** are never sent to the customer.
 
+### When replies can't be delivered
+
+The send button is disabled with an explanatory tooltip when an email reply can't be delivered:
+
+- **No connected email channel** – the project has no email address set up. Go to **Support > Settings > Email channel** to connect one.
+- **No customer email address** – the ticket doesn't have a customer email address, so there's nowhere to send the reply.
+- **Ticket not linked to an email channel** – the ticket isn't associated with any of your email channels. This is common for imported tickets (e.g. from Zendesk) that weren't matched to a channel during import.
+
+Private notes are still available in all of these cases.
+
+If a reply is sent but delivery fails downstream (for example, the sending domain isn't verified), a **Failed to send** badge appears on the message.
+
 ### Threading
 
 Email threads are tracked automatically. Replies from the customer land on the same ticket, and your replies appear in the customer's email thread. This works across email clients (Gmail, Outlook, Apple Mail, etc.).
