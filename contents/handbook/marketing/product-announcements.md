@@ -4,16 +4,16 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> **Have something you want to announce?** Let the Marketing team know! If it's an iterative update, you can also demo it in the all-hands, or post in the #tell-posthog-anything Slack channel. 
+> **Have something you want to announce?** Let the Marketing team know! If it's an iterative update, you can also demo it in the all-hands, or post in the #tell-posthog-anything Slack channel.
 
-Product marketers take responsibility for coordinating and publicizing news about PostHog, including product announcements. We also help with [incident](/handbook/engineering/operations/incidents) and [maintenance announcements](/handbook/marketing/product-announcements#announcing-scheduled-maintenance), if needed. 
+Product marketers take responsibility for coordinating and publicizing news about PostHog, including product announcements. We also help with [incident](/handbook/engineering/operations/incidents) and [maintenance announcements](/handbook/marketing/product-announcements#announcing-scheduled-maintenance), if needed.
 
 ## Types of announcement
 
 We classify announcements using the general guidelines below, with full discretion for doing something different.
 
 ### Minor announcements
-Minor announcements involve changes which have no noticeable impact on the experience of most users. They can involve small visual changes, such as UI tweaks, but are more often small bug fixes or back-end changes. They do not require action from users and pose no known risk. 
+Minor announcements involve changes which have no noticeable impact on the experience of most users. They can involve small visual changes, such as UI tweaks, but are more often small bug fixes or back-end changes. They do not require action from users and pose no known risk.
 
 We may typically support minor announcements by:
 
@@ -41,7 +41,7 @@ We might do anything and everything for a major announcement.
 Examples of major announcements include [the surveys beta](/changelog?id=1945) or [the analytics pricing change](/changelog?id=1907).
 
 ### New product announcements
-New product launches are major announcements. They have their own GitHub template: [Launch Plan](https://github.com/PostHog/meta/issues/new/choose). Product marketers should always create a launch plan for new product announcements. 
+New product launches are major announcements. They have their own GitHub template: [Launch Plan](https://github.com/PostHog/meta/issues/new/choose). Product marketers should always create a launch plan for new product announcements.
 
 For new product announcements we generally apply the following best practices:
 
@@ -60,30 +60,30 @@ Comms should also be aware of [the engineering best practices for product launch
 If the product is moving from free beta to paid general availability (GA) you might also want to choose a reward for beta users. Examples of this include giving PostHog AI beta users 30 extra days of unlimited free usage, or giving Workflows beta users a discount code for merch.
 
 ### PR announcements
-We do not typically do public relations for anything other than company-level news. We have separate [processes and guides for managing press announcements](/handbook/marketing/press). 
+We do not typically do public relations for anything other than company-level news. We have separate [processes and guides for managing press announcements](/handbook/marketing/press).
 
 ## Maintenance communications
 
-Occasionally, we have to conduct scheduled maintenance. When this happens, it's important that we tell users about it in advance if they would experience any disruption. 
+Occasionally, we have to conduct scheduled maintenance. When this happens, it's important that we tell users about it in advance if they would experience any disruption.
 
-> If you're aware of any upcoming maintenance which would cause disruption, please inform the Support, Marketing, and Customer Success teams as soon as possible. Marketing will ensure that users are notified as the work is planned and completed. Customer Success may wish to inform specific users at the time. 
+> If you're aware of any upcoming maintenance which would cause disruption, please inform the Support, Marketing, and Customer Success teams as soon as possible. Marketing will ensure that users are notified as the work is planned and completed. Customer Success may wish to inform specific users at the time.
 
-Typically, Product Marketers take responsibility for informing users about maintenance work beforehand by telling users who will be impacted through email and other channels. 
+Typically, Product Marketers take responsibility for informing users about maintenance work beforehand by telling users who will be impacted through email and other channels.
 
 When informing users about maintenance, it is important to answer all of the following points:
 
 - When will the maintenance occur?
 - How long will it take?
-- Who will be impacted? 
+- Who will be impacted?
 - Will any data be lost?
 - Do users need to take any sort of action?
 - How will feature flags and experiments be impacted?
 - What will the impact be? Will insights, etc., still function?
 - Why is the maintenance being done, and what benefit will there be for users?
 
-We typically notify users of upcoming maintenance by email, so the Marketing team will need a way to target the correct users before they can update them. For smaller maintenance updates which will not cause any user updates, engineering teams can also update our status page. 
+We typically notify users of upcoming maintenance by email, so the Marketing team will need a way to target the correct users before they can update them. For smaller maintenance updates which will not cause any user updates, engineering teams can also update our status page.
 
 ## Incidents communications
 
-When an [incident is declared](/handbook/engineering/operations/incidents) the Brand team should join the incident channel as observers, and monitor to make sure that customer comms are handled correctly. 
+When an [incident is declared](/handbook/engineering/operations/incidents) the Brand team should join the incident channel as observers, and monitor to make sure that customer comms are handled correctly.
 
