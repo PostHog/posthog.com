@@ -1674,11 +1674,11 @@ export const handbookSidebar = [
             },
             {
                 name: 'GTM engineering',
-                url: '',
+                url: '/teams/gtm-engineering',
                 children: [
                     {
                         name: 'Overview',
-                        url: '/handbook/growth/sales/gtm-engineering',
+                        url: '/teams/gtm-engineering',
                     },
                 ],
             },
