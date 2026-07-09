@@ -70,8 +70,8 @@ Since alerts work on [trends](/docs/product-analytics/trends), [funnels](/docs/p
    />
 
 6. Select the alert type:
-   - **has value** - checks the series against a specific value.
-   - **increases by**/**decreases by** - checks if the series has changed by a certain amount.
+   - **has value** – checks the series against a specific value.
+   - **increases by**/**decreases by** – checks if the series has changed by a certain amount.
 
    <ProductScreenshot
      imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/alert_type_picker_18909b0b33.png"
@@ -190,13 +190,13 @@ You can create alerts on [funnel insights](/docs/product-analytics/funnels) to m
 
 Funnel alerts work with:
 
-- **Steps view** — the standard funnel visualization showing conversion between steps
-- **Trends view** — funnel results displayed as a trend over time
+- **Steps view** – the standard funnel visualization showing conversion between steps
+- **Trends view** – funnel results displayed as a trend over time
 
 Funnel alerts are **not supported** for:
 
-- **Time-to-convert view** — measures duration rather than conversion rate
-- **Flow view** (sankey) — visualizes user paths without a single conversion rate metric
+- **Time-to-convert view** – measures duration rather than conversion rate
+- **Flow view** (sankey) – visualizes user paths without a single conversion rate metric
 
 When creating a funnel alert, the threshold values represent the conversion rate percentage. For example, setting a "less than 10" threshold triggers when the funnel's conversion rate drops below 10%.
 
@@ -301,11 +301,11 @@ Use the date range dropdown to test the detector over different time periods (e.
 
 ### Tips
 
-- **Start with Z-score or MAD** — they work well for most time series data and are easy to understand.
-- **Use the simulator** — always simulate before saving to see how the detector performs on your data.
-- **Set sensitivity to 0.95 for noisy metrics** — the default of 0.9 may produce too many alerts for high-variance data.
-- **Use ensemble AND to reduce false positives** — combining two detectors with AND logic means both must agree, which cuts down on noise.
-- **Differencing matters** — if your data has regular cycles (e.g., more traffic on weekdays), make sure differencing is enabled. Z-score and MAD enable it by default.
+- **Start with Z-score or MAD** – they work well for most time series data and are straightforward to interpret.
+- **Use the simulator** – always simulate before saving to see how the detector performs on your data.
+- **Set sensitivity to 0.95 for noisy metrics** – the default of 0.9 may produce too many alerts for high-variance data.
+- **Use ensemble AND to reduce false positives** – combining two detectors with AND logic means both must agree, which cuts down on noise.
+- **Differencing matters** – if your data has regular cycles (e.g., more traffic on weekdays), make sure differencing is enabled. Z-score and MAD enable it by default.
 
 ## Notifications
 
@@ -359,7 +359,7 @@ To enable quiet hours, check the **Quiet hours** checkbox in the alert form and 
 - You can add up to five time windows per alert
 - If a scheduled check falls during quiet hours, it runs when the window ends
 
-A preset for overnight hours (10 PM–7 AM) is available for quick setup.
+A preset for overnight hours (10 PM – 7 AM) is available for quick setup.
 
 ### Check ongoing period
 
