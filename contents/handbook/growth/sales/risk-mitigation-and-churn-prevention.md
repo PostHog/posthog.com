@@ -22,35 +22,20 @@ Risk mitigation is about building habits that surface problems before they becom
 
 Every AM Managed account should have an Account Plan note created in Vitally once per quarter. You should also review this regularly with your manager and updated it as needed.  This forces you to step back and evaluate the account holistically rather than just reacting to whatever's in front of you.
 
-The plan can be broken into two parts. Initial writeup and ongoing updates.
+The plan can be broken into two parts: the quarterly plan and ongoing updates.
 
-#### Initial Writeup
-This happens when you first onboard an account and will change less frequently (every 1 - 3 quarters) and can largely remain stable.
+#### Quarterly plan
 
 **Title format:** `Q[X] Account Plan - [Company Name]`
 
-Use the Account Plan template in Vitally, which auto-populates key fields from the account record. The template covers:
+Use the Account Plan template in Vitally, which auto-populates key fields from the account record. For each account, work through these six questions:
 
-**Account overview**
-
-- ARR, business description, website, HQ location
-- Business type (B2B SaaS, E-commerce, Marketplace, Developer Tools, Fintech, Healthcare, etc.)
-- Key metrics relevant to their business model
-- Business stage and funding
-
-**Business objectives**
-
-- What they're trying to achieve with PostHog (specific goals, not vague "analytics")
-- How PostHog connects to their larger business objectives
-- Whether value aligns with their expectations
-- Obstacles they're facing, both in using PostHog and in their broader goals
-- Upcoming constraints (budget freezes, code freezes, migrations, seasonality)
-- Future needs over 6-18 months
-
-**Stakeholders and users**
-
-- Key contacts with their priorities, goals, and preferred communication
-- Multithreading status: do we have two-way dialogue with technical stakeholders, budget holders, and end-users?
+1. **What type of opps are there this quarter?** Name each one — conversion (moving a free or trialing account onto a paid plan), renewal (securing an existing contract for another term), or cross-sell (getting them onto a product they aren't using yet) — so you're clear on what you're actually driving toward.
+2. **What's the desired outcome for the account by the end of the quarter?** State the concrete result you want (renewal signed, in with a new team, error tracking adopted) so success is measurable rather than vague.
+3. **Does the customer know about this plan?** Note whether you've aligned with them, because a plan they haven't bought into is just a guess.
+4. **Is it blocked on anything right now, and are there any other risks?** Call out current blockers and any other risks so you can get ahead of them before they derail the outcome.
+5. **Link to the SFDC opp.** Drop in the Salesforce opportunity link so anyone reviewing can jump straight to the deal.
+6. **Who are the key players?** List the stakeholders — champions, budget holders, technical evaluators, and end-users — and where you stand with each.
 
 #### Ongoing updates
 1. What did you do with them last week.
