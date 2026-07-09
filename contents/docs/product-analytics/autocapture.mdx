@@ -228,7 +228,16 @@ A rage click is captured when a user clicks three times in rapid succession in r
 
 The event is captured as a `$rageclick` event. You can use it to identify opportunities to improve your UI, as it often points to where users are frustrated with your product.
 
-> **Note:** Rage click detection is a proximity-and-timing heuristic – it doesn't know whether the clicks were productive, so legitimate patterns like double-click-to-select in a text field, rapid quantity steppers, or fast pagination can trip it once they hit the third click within the window. Newer SDK defaults filter out the most common culprits: with [`defaults`](/docs/libraries/js/config) set to `'2025-11-30'` or later, PostHog ignores navigation controls (`next`, `previous`, `>`, `<`) via `content_ignorelist`; with `'2026-05-30'` or later it also ignores quantity steppers (`+`, `-`) and repeated clicks on text-selection surfaces (inputs, textareas, and `contenteditable` elements). On older defaults none of this content filtering is applied. Regardless of your defaults, you can exclude specific elements with the `.ph-no-rageclick` class or a [`css_selector_ignorelist`](/docs/libraries/js/config#configuring-rageclick). We recommend confirming rage clicks against [session replays](/docs/session-replay) before treating them as a hard frustration signal.
+<details>
+<summary>Reducing false positives</summary>
+
+Rage click detection is a proximity-and-timing heuristic – it doesn't know whether the clicks were productive, so legitimate patterns like double-click-to-select in a text field, rapid quantity steppers, or fast pagination can trip it once they hit the third click within the window.
+
+With the latest SDK [`defaults`](/docs/libraries/js/config), PostHog automatically ignores the most common culprits: navigation controls (`next`, `previous`, `>`, `<`), quantity steppers (`+`, `-`), and repeated clicks on text-selection surfaces (inputs, textareas, and `contenteditable` elements). You can tune this with [`content_ignorelist` and `ignore_text_selection`](/docs/libraries/js/config#configuring-rageclick), or exclude specific elements with the `.ph-no-rageclick` class or a `css_selector_ignorelist`.
+
+We recommend confirming rage clicks against [session replays](/docs/session-replay) before treating them as a hard frustration signal.
+
+</details>
 
 </Tab.Panel>
 <Tab.Panel>
