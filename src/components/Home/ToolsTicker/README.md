@@ -25,7 +25,7 @@ Handles that don't resolve to a product with a `name` and `slug` are silently sk
 ## How the loop works
 
 - The item list is rendered **twice** inside a `flex w-max` track.
-- The `tools-ticker-marquee` keyframe (defined in `src/styles/global.css`, next to `hero-carousel-progress`) animates the track from `translateX(0)` to `translateX(-50%)` — exactly one copy's width — so the loop is seamless for any number of items.
+- The `tools-ticker-marquee` keyframe (defined in `src/styles/global.css`, next to `hero-carousel-progress`) animates the track from `translateX(0)` to `translateX(-50%)` – exactly one copy's width – so the loop is seamless for any number of items.
 - Each `<ul>` has `pr-6` matching its internal `gap-6`, so the seam between copies is invisible.
 - Duration is `items × 2.5s`, keeping the apparent speed constant when the list changes.
 
@@ -39,6 +39,6 @@ Handles that don't resolve to a product with a `name` and `slug` are silently sk
 ## Conventions
 
 - Links use `state={{ newWindow: true }}` so product pages open in a new OS-style window.
-- Icon colors use the dynamic `text-${product.color}` pattern — all colors used by the default handles are in `safelist.txt`. If you add a handle with a new color, confirm it's safelisted.
+- Icon colors use the dynamic `text-${product.color}` pattern – all colors used by the default handles are in `safelist.txt`. If you add a handle with a new color, confirm it's safelisted.
 - Layout uses container queries only (`@sm:`); the label stacks above the strip in narrow containers.
 - SSR-safe: data comes from `useProduct()` (Gatsby static query); no browser globals.
