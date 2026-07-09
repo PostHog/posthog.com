@@ -12,6 +12,8 @@ Alerts enable you to monitor your [insights](/product-analytics) and get notifie
 
 Alerts are supported on [trends](/docs/product-analytics/trends), [funnels](/docs/product-analytics/funnels) (steps and trends views only), and [SQL (HogQL)](/docs/sql) insights.
 
+Free tier organizations can create up to 5 alerts total. Paid plans raise or remove this limit.
+
 ## Use cases
 
 Since alerts work on [trends](/docs/product-analytics/trends), [funnels](/docs/product-analytics/funnels), and [SQL (HogQL)](/docs/sql) insights, you can monitor nearly any metric you track in PostHog. Common use cases include:
@@ -170,7 +172,7 @@ Percentage thresholds are only available for relative alerts (as you need to com
 
 ## Real-time alerts
 
-Most alert intervals (hourly, daily, weekly, monthly) check a cached result on a schedule. Real-time alerts skip the cache and query ClickHouse fresh on every check, so you're notified as close to the moment a threshold is breached as possible.
+Most alert intervals (hourly, daily, weekly, monthly) check a cached result on a schedule. Real-time alerts are re-evaluated roughly every 2 minutes and always query ClickHouse fresh rather than a cached result, so a notification reflects the most current data.
 
 Real time is best suited to metrics where minutes matter, such as error spikes, checkout failures, or sudden traffic drops. For most metrics, a less frequent interval is sufficient and reduces notification noise and query load.
 
@@ -222,7 +224,7 @@ Instead of setting a fixed threshold, anomaly detection uses statistical algorit
 
 ### Available detectors
 
-PostHog includes 13 anomaly detection algorithms. For most use cases, **Z-score** or **MAD** are good starting points.
+PostHog includes 13 anomaly detection algorithms (12 individual detectors plus the ensemble combiner below). For most use cases, **Z-score** or **MAD** are good starting points.
 
 #### Statistical detectors
 
@@ -231,6 +233,7 @@ PostHog includes 13 anomaly detection algorithms. For most use cases, **Z-score*
 | **Z-score**                         | General purpose      | Flags points that are many standard deviations from the rolling mean. Uses first-order differencing by default to handle cyclical data.   |
 | **MAD** (Median Absolute Deviation) | Data with outliers   | Similar to Z-score but uses median instead of mean, making it more robust to existing outliers. Uses first-order differencing by default. |
 | **IQR** (Interquartile Range)       | Skewed distributions | Flags values outside the interquartile range. Less sensitive to distribution shape than Z-score.                                          |
+| **Threshold**                       | Known fixed bounds    | Flags values outside a static bound you set, rather than one learned from historical data.                                                |
 
 #### Machine learning detectors
 
