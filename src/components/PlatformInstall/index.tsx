@@ -10,6 +10,7 @@ import { CopyableCommand } from './CopyableCommand'
 import { InlineCommand } from './InlineCommand'
 import { buildWizardCommand, buildSchemaCommand } from './buildCommand'
 import {
+    cliInstallSchema,
     mcpInstallSchema,
     wizardInstallSchema,
     type InstallMethod,
@@ -312,5 +313,5 @@ export default function PlatformInstall({
 }
 
 export { CopyableCommand } from './CopyableCommand'
-export { mcpInstallSchema, wizardInstallSchema }
+export { cliInstallSchema, mcpInstallSchema, wizardInstallSchema }
 export type { InstallSchema, Platform, PlatformOption, InstallMethod } from './schema'
