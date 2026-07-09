@@ -20,7 +20,7 @@ Risk mitigation is about building habits that surface problems before they becom
 
 ### Quarterly account planning
 
-Every managed account should have an Account Plan note created in PostHog customer analytics, on the account's profile, once per quarter. You should also review this regularly with your manager and update it as needed. This forces you to step back and evaluate the account holistically rather than just reacting to whatever's in front of you.
+Every managed account should have an Account Plan note created in PostHog Customer Analytics, on the account's profile, once per quarter. You should also review this regularly with your manager and update it as needed. This forces you to step back and evaluate the account holistically rather than just reacting to whatever's in front of you.
 
 The plan can be broken into two parts: the quarterly plan and ongoing updates.
 
@@ -28,14 +28,14 @@ The plan can be broken into two parts: the quarterly plan and ongoing updates.
 
 **Title format:** `Q[X] Account Plan - [Company Name]`
 
-Add the plan as an account note in PostHog customer analytics on the account's profile. For each account, work through these six questions:
+Add the plan as an account note in PostHog Customer Analytics on the account's profile. For each account, work through these six questions:
 
-1. **What type of opportunities (opps) are there this quarter?** Name each one — conversion (moving a pay-as-you-go plan onto a discounted credit plan), renewal (securing an existing contract for another term), or cross-sell (getting them onto a product they aren't using yet) — so you're clear on what you're actually driving toward.
-2. **What's the desired outcome for the account by the end of the quarter?** State the concrete result you want (renewal signed, in with a new team, error tracking adopted) so success is measurable rather than vague.
+1. **What type of opportunities (opps) are there this quarter?** Name each one – conversion (moving a pay-as-you-go plan onto a discounted credit plan), renewal (securing an existing contract for another term), or cross-sell (getting them onto a product they aren't using yet) – so you're clear on what you're actually driving toward.
+2. **What's the desired outcome for the account by the end of the quarter?** State the concrete result you want (renewal signed, in with a new team, Error Tracking adopted) so success is measurable rather than vague.
 3. **Does the customer know about this plan?** Note whether you've aligned with them, because a plan they haven't bought into is just a guess.
 4. **Is it blocked on anything right now, and are there any other risks?** Call out current blockers and any other risks so you can get ahead of them before they derail the outcome.
 5. **Link to the SFDC opp.** Drop in the Salesforce opportunity link so anyone reviewing can jump straight to the deal.
-6. **Who are the key players?** List the stakeholders — champions, budget holders, technical evaluators, and end-users — and where you stand with each.
+6. **Who are the key players?** List the stakeholders – champions, budget holders, technical evaluators, and end-users – and where you stand with each.
 
 #### Ongoing updates
 1. What did you do with them last week.
@@ -212,7 +212,7 @@ Not every at-risk account can be saved. When a customer churns, write a retro an
 
 | Activity | Cadence |
 |----------|---------|
-| Account Plan note in PostHog customer analytics | Quarterly |
+| Account Plan note in PostHog Customer Analytics | Quarterly |
 | Implementation health check | At onboarding + annually |
 | Early warning signal monitoring | Ongoing |
 | Behavioral product adoption push | Ongoing (especially for warehouse-heavy accounts) |
