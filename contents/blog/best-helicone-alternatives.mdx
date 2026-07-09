@@ -17,11 +17,9 @@ seo:
 
 If you're a Helicone user, you've probably seen the news: [Mintlify acquired it](https://www.helicone.ai/blog/joining-mintlify) in March 2026, and the platform is now in maintenance mode. It'll keep running, getting security updates and receiving new model support, but the roadmap is frozen.
 
-That's not an emergency – nothing is breaking tomorrow. But "no new features, ever" is a significant limitation in a space where the tools reinvent themselves every six months. 
+Nothing is breaking tomorrow, but "no new features, ever" is a significant limitation. The [AI observability](/ai-observability) space is still maturing. Tools and best practices are being reinvented every six months. Whether the next must-have is agent tracing, evals, OTel support or something else, Helicone won't have it.
 
-Agent tracing, evals, OTel support: whatever the next must-have is, Helicone won't have it.
-
-So whether you're planning a migration or just starting a new project, here are the best Helicone alternatives available today – what each does well, how it compares, and who it's actually for.
+So whether you're planning a migration or starting a new project, here are the best Helicone alternatives available today – what each does well, how it compares, and who it's actually for.
 
 <details>
 <summary>What does Helicone's maintenance mode mean for you?</summary>
@@ -57,15 +55,15 @@ That means a bit more setup, no gateway features like caching or rate limiting, 
 
 ### Key features
 
-- [**Generations**](docs/ai-observability/generations): Monitor model performance, token usage, costs, latency, and errors across your AI features from a single view.
+- [**Generations**](/docs/ai-observability/generations): Monitor model performance, token usage, costs, latency, and errors across your AI features from a single view.
 
-- [**Traces**](docs/ai-observability/traces): Follow AI workflows from start to finish to understand how requests move through prompts, tools, and model calls.
+- [**Traces**](/docs/ai-observability/traces): Follow AI workflows from start to finish to understand how requests move through prompts, tools, and model calls.
 
-- [**AI evals**](docs/ai-evals/evaluations): Automatically score model outputs using LLM-as-a-judge or code-based checks to track quality and identify regressions over time.
+- [**AI evals**](/docs/ai-evals/evaluations): Automatically score model outputs using LLM-as-a-judge or code-based checks to track quality and identify regressions over time.
 
-- [**Prompt management**](docs/prompt-management) *(beta):* Create, version, and update prompts without redeploying code. Compare versions and understand how prompt changes affect outputs.
+- [**Prompt management**](/docs/prompt-management) *(beta):* Create, version, and update prompts without redeploying code. Compare versions and understand how prompt changes affect outputs.
 
-- [**SQL access**](docs/sql): Query AI observability data with SQL and analyze it alongside product, user, and business data.
+- [**SQL access**](/docs/sql): Query AI observability data with SQL and analyze it alongside product, user, and business data.
 
 - [**Session replay**](/docs/ai-observability/link-session-replay): Watch recordings of users interacting with AI features and investigate issues alongside the actions that triggered them.
 
@@ -147,9 +145,7 @@ According to reviews on [G2](https://www.g2.com/products/posthog/reviews) and ot
 
 **Portkey** is an AI gateway and observability platform that helps teams build, manage, and monitor AI applications. It provides a single API for accessing multiple AI models and includes tools for routing, logging, cost tracking, tracing, and reliability. In 2026, it was acquired by Palo Alto Networks.
 
-Portkey is the closest architectural match to Helicone on this list. 
-
-Like Helicone, it sits between your application and your model providers: a single API for 250+ models, with routing, caching, retries, automatic fallbacks, and rate limiting handled at the gateway, plus logging, cost tracking, and tracing on everything that passes through.
+Portkey is the closest architectural match to Helicone on this list. Like Helicone, it sits between your application and your model providers: a single API for 3,000+ models, with routing, caching, retries, automatic fallbacks, and rate limiting handled at the gateway, plus logging, cost tracking, and tracing on everything that passes through.
 
 For most Helicone users, Portkey is the path of least resistance – migrating between two proxies is closer to swapping an endpoint than re-instrumenting an application. 
 
@@ -427,7 +423,7 @@ Based on user reviews on Gartner Peer Insights and Product Hunt, teams choose La
 
 Phoenix is one of the most genuinely OpenTelemetry-native tools in the space. It instruments via OpenInference, an OTel-based semantic layer, and works with LangChain, LlamaIndex, OpenAI, DSPy, Haystack, and anything else OTel-compatible. It ships with research-backed evaluators for hallucination, faithfulness, relevance, and toxicity out of the box – including retrieval and RAG evaluation – and runs locally, in a container, or as a hosted cloud service.
 
-For Helicone users, the appeal is data control and standards: Phoenix can run entirely on your infrastructure with nothing leaving it, and OTel instrumentation means your traces aren't locked into any vendor's format, including Phoenix's. The tradeoff is the opposite of Helicone's one-line proxy setup: OTel instrumentation is more work upfront, in exchange for portability.
+For Helicone users, the appeal is data control and standards: Phoenix can run entirely on your infrastructure, and OTel instrumentation means your traces aren't locked into any vendor's format. The tradeoff is the opposite of Helicone's one-line proxy setup: OTel instrumentation is more work upfront in exchange for portability.
 
 When teams need production monitoring at enterprise scale, Arize offers AX as the commercial upgrade path, with no instrumentation changes required.
 
@@ -613,7 +609,7 @@ Here's the (short) sales pitch.
 We're biased, obviously, but we think PostHog is the perfect Helicone replacement if:
 
 - You want AI observability connected to the rest of your product data, so you can tie a model's behavior to the user session, feature flag, or funnel it affected.
-- You value open source. PostHog's core is MIT licensed, with a public roadmap and self-hosting.
+- You value open source. PostHog's core is MIT licensed with a public roadmap.
 - You want to get started without a large upfront commitment. PostHog includes a [generous free tier](/pricing) with 100k AI observability events each month.
 
 It's completely free to get started – no credit card required. Our [setup wizard](/wizard) handles configuration in minutes, or you can check out [our docs](/docs) to do it yourself.
@@ -672,7 +668,7 @@ The best one depends on what you're looking for: **PostHog** combines observabil
 
 A proxy-based tool sits between your application and the model provider, so you can capture requests and responses by routing traffic through it. An SDK-based tool requires you to add instrumentation to your application code, but it can provide deeper visibility into workflows, tool calls, and application logic.
 
-**Helicone** and **Portkey** use a proxy-based approach. **PostHog**, **Langfuse**, **LangSmith**, **Arize Phoenix**, **Braintrust**, and **Weave** rely primarily on SDK-based instrumentation.
+**Helicone** and **Portkey** use a proxy-based approach. **PostHog**, **Langfuse**, **LangSmith**, **Arize Phoenix**, and **Braintrust** rely primarily on SDK-based instrumentation.
 
 </details>
 
@@ -683,7 +679,7 @@ Usually, yes. **Helicone** provides a data export tool that lets you export logs
 
 The migration process depends on the tool you're moving to. 
 
-Some platforms provide migration resources. For example, [**Helicone** integrates with **PostHog**](https://posthog.com/docs/ai-observability/integrations/helicone-posthog) to export events for analysis. For other tools, check the platform's migration and import documentation before making the switch.
+Some platforms provide migration resources. For example, [**Helicone** integrates with **PostHog**](/docs/ai-observability/integrations/helicone-posthog) to export events for analysis. For other tools, check the platform's migration and import documentation before making the switch.
 
 </details>
 
