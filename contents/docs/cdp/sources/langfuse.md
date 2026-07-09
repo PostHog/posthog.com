@@ -16,7 +16,7 @@ import AlphaRelease from "../_snippets/alpha-release.mdx"
 
 <AlphaRelease />
 
-The Langfuse connector syncs your LLM observability data — traces, observations, evaluation scores, sessions, prompts, models, and datasets — into PostHog, so you can analyze your AI application's behavior, cost, and quality alongside your product data.
+The Langfuse connector syncs your LLM observability data – traces, observations, evaluation scores, sessions, prompts, models, and datasets – into PostHog, so you can analyze your AI application's behavior, cost, and quality alongside your product data.
 It works with Langfuse Cloud (all regions) and self-hosted Langfuse instances.
 
 ## Prerequisites
@@ -51,7 +51,7 @@ Each incremental run re-reads a trailing one-hour window to pick up late-arrivin
 
 ## Troubleshooting
 
-- If you see an invalid key error, confirm the public/secret key pair in **Project settings > API keys** and make sure the host matches your project's region — keys only work against the region they were created in.
+- If you see an invalid key error, confirm the public/secret key pair in **Project settings > API keys** and make sure the host matches your project's region – keys only work against the region they were created in.
 - Langfuse rate limits its read APIs by plan (as low as 15 requests/minute on the Hobby plan). The connector backs off and retries automatically, but large first syncs on lower plans can take a while.
 - If the host is not allowed, use a publicly reachable host.
 
