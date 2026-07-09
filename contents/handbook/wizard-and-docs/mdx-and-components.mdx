@@ -308,7 +308,6 @@ Under the hood it builds a URL using the `#panel=max:` hash format, which you ca
 | URL | Behavior |
 |-----|----------|
 | `https://app.posthog.com/#panel=max:What%20changed%3F` | Opens the PostHog AI side panel with "What changed?" pre-loaded, so the user can edit it before sending |
-| `https://app.posthog.com/#panel=max:?What%20changed%3F` | Same as above - `?` is the explicit pre-load modifier |
 | `https://app.posthog.com/#panel=max:!What%20changed%3F` | Auto-runs "What changed?" immediately, without waiting for the user to press enter |
 
 Use the pre-load form when the reader should review or adapt the question first, and the auto-run (`!`) form for CTAs where the question is fully self-contained, like `<MaxCTA>` does. The prefix parsing lives in `parseCommandString` in [`maxLogic`](https://github.com/PostHog/posthog/blob/master/frontend/src/scenes/max/maxLogic.tsx) in the app repo.
