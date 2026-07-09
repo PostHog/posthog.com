@@ -19,8 +19,8 @@ import ExaLogo from 'components/CustomerLogos/ExaLogo'
 import GanksterLogo from '../components/CustomerLogos/GanksterLogo'
 import GrantableLogo from '../components/CustomerLogos/GrantableLogo'
 import GreptileLogo from '../components/CustomerLogos/GreptileLogo'
-import HasuraLogo from '../components/CustomerLogos/HasuraLogo'
 import HeadshotProLogo from '../components/CustomerLogos/HeadshotProLogo'
+import PromptQLLogo from '../components/CustomerLogos/PromptQLLogo'
 import HeygenLogo from '../components/CustomerLogos/HeygenLogo'
 import HostAILogo from '../components/CustomerLogos/HostAILogo'
 import CounterPressLogo from '../images/customers/counterpress-light.svg'
@@ -563,7 +563,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         industries: ['Devtool'],
         users: ['Engineering', 'User Experience', 'Marketing'],
         notes: 'Open source GraphQL engine',
-        logo: HasuraLogo,
+        logo: PromptQLLogo,
         featured: true,
         height: 10,
     },
