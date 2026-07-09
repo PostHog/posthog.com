@@ -53,7 +53,7 @@ You can also score outputs with [LLM-as-a-judge or code-based evals](/docs/ai-ev
 
 The architectural difference from Helicone is that PostHog instruments via SDK rather than sitting in your request path as a proxy. 
 
-That means a bit more setup, no gateway features like caching or rate limiting, but also no proxy between you and your LLM provider, and much deeper context on the other side. Because traces are stored as regular PostHog events, you can connect AI behavior to what users actually did: whether people who hit a slow generation churned, or whether a new prompt version improved activation.
+That means more setup (the [install wizard](/wizard) helps) and no gateway features like caching or rate limiting, but also no proxy between you and your LLM provider and much deeper context on the analysis side. Because traces are stored as regular PostHog events, you can connect AI behavior to what users actually did like whether people who hit a slow generation churned or a new prompt version improved activation.
 
 ### Key features
 
