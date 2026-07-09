@@ -1,5 +1,5 @@
 ---
-title: How to get a FDE involved
+title: How to get an FDE involved
 sidebar: Handbook
 showTitle: true
 ---
@@ -25,7 +25,7 @@ For the smaller questions that come up along the way, **PostHog AI** and the **P
 Before you route anything to us, run a quick self-check. It saves you a round-trip and saves us the context-switch:
 
 1. **Check it's FDE-shaped.** The [engagement types](/handbook/forward-deployed-engineering/how-we-work#engagement-types) section is the quickest way to tell FDE apart from ProServ, support, and pre-sales, and where each should route. If you can't name what compounds for future customers, it's probably not FDE.
-2. **Gather what we need to scope it.** Two things make discovery quick: the **wizard audit reports**, so we start from real evidence instead of a blank page, and a read on **what's actually blocking them**: engineering bandwidth, trust in the implementation, internal coordination, or simply "we want someone to do it for us." That's the signal that decides what kind of engagement this becomes. Alongside those, name the customer, the product area, a one-sentence description of the problem, what would exist at the end that future customers could reuse, what codebase or data access is available, and a rough size (a week, a month, longer).
+2. **Gather what we need to scope it.** Two things make discovery quick: the **wizard audit reports**, so we start from real evidence instead of a blank page, and a read on **what's actually blocking them**: engineering bandwidth, trust in the implementation, internal coordination, or "we want someone to do it for us." That's the signal that decides what kind of engagement this becomes. Alongside those, name the customer, the product area, a one-sentence description of the problem, what would exist at the end that future customers could reuse, what codebase or data access is available, and a rough size (a week, a month, longer).
 3. **Set rough expectations on price.** Use the shape, not an exact number; see [what it costs](/handbook/forward-deployed-engineering/how-we-work#what-it-costs). If the customer wants an exact figure, tell them you'll get a quote within a day and route it through the AE.
 
 With that in hand, you can run intake yourself using the **FDE vault skills** (intake, scoping, and quoting). Anyone at PostHog can run them, and they'll produce a calibrated scope, an hour estimate, and a proposal without needing an FDE in the loop. See the <PrivateLink url="https://github.com/PostHog/fde-vault/blob/main/teams/fde/operational/knowledge/skills/README.md">skills README</PrivateLink> in the <PrivateLink url="https://github.com/PostHog/fde-vault">fde-vault repo</PrivateLink>.

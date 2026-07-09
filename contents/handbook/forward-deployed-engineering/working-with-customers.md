@@ -37,7 +37,7 @@ When someone asks "can we just build the dashboard now?", the honest answer is "
 - **Weekly sync.** 30 minutes at the same time each week for in-flight engagements. If there's nothing to talk about, cancel; don't pad.
 - **Weekly async update.** A one-paragraph status note in the customer channel that frames the next week, so nobody's surprised on Monday.
 
-Internally, we split each day into **planned** work (the couple of things you chose to make progress on) and **adhoc** work (customer pings, escalations, quick questions that arrive during the day). Both count. If the week is mostly adhoc, you're firefighting, not executing. That's the signal to scope back or redistribute, and it's why we log even the small stuff. Invisible work can't be managed.
+Internally, we split each day into **planned** work (the couple of things you chose to make progress on) and **ad hoc** work (customer pings, escalations, quick questions that arrive during the day). Both count. If the week is mostly ad hoc, you're firefighting, not executing. That's the signal to scope back or redistribute, and it's why we log even the small stuff. Invisible work can't be managed.
 
 
 <!-- TODO: ONSITES document how FDEs run customer on-sites: when one is worth it, how to prepare, and what good looks like. Reference the sales team's customer on-sites guide (/handbook/growth/sales/customer-onsites) and engineering's visiting customers guide (/handbook/engineering/visiting-customers). -->

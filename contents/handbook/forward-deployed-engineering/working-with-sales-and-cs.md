@@ -16,7 +16,7 @@ We overlay the account rather than taking it over. When our engagement ends, the
 
 ## How FDE gets pulled in
 
-Sales or CS flag a technical blocker or opportunity, and we scope it. Before you route something to us, run the quick self-check (is it FDE-shaped, what context do we need to scope it, and what price shape to set with the customer) in [how to get a FDE involved](/handbook/forward-deployed-engineering/how-to-get-fde-involved). That page also covers the cases where a customer can self-serve without an engagement at all, which is often.
+Sales or CS flag a technical blocker or opportunity, and we scope it. Before you route something to us, run the quick self-check (is it FDE-shaped, what context do we need to scope it, and what price shape to set with the customer) in [how to get an FDE involved](/handbook/forward-deployed-engineering/how-to-get-fde-involved). That page also covers the cases where a customer can self-serve without an engagement at all, which is often.
 
 One thing worth naming from the sales and CS side: **an FDE ask usually surfaces mid-deal or mid-relationship**, so the person routing it already holds the commercial context we don't. Bring that with you, meaning where the account is in its lifecycle, what's actually at stake commercially, and how time-sensitive it is, so we scope against the real constraint rather than the technical problem in isolation. Then bring it to the <SmallTeam slug="forward-deployed-engineering" /> team.
 

@@ -949,7 +949,7 @@ export const handbookSidebar = [
                 url: '/handbook/forward-deployed-engineering/overview',
             },
             {
-                name: 'How to get a FDE involved',
+                name: 'How to get an FDE involved',
                 url: '/handbook/forward-deployed-engineering/how-to-get-fde-involved',
             },
             {

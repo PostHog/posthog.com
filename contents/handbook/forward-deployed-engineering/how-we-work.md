@@ -9,7 +9,7 @@ showTitle: true
 Every engagement moves through four phases. Reference this when you're unsure which phase you're in or what happens next.
 
 1. **Intake.** A colleague or customer raises a need. Capture enough to classify and route it: the customer, the product area, and a one-line ask.
-2. **Scope.** Classify the engagement type, estimate effort, and quote if the shape calls for it. The output is a short brief the customer can sanity-check before we commit. Detail below.
+2. **Scope.** Classify the engagement type, estimate effort, and quote if the shape calls for it. The output is a short brief the customer can check before we commit. Detail below.
 3. **Execute.** Do the hands-on work: instrumentation, data modeling, migrations, integrations, dashboards, reference implementations. Capture the durable artifacts as you go.
 4. **Wrap-up.** Confirm the deliverable shipped and was approved, hand the relationship back to [sales and CS](/handbook/forward-deployed-engineering/working-with-sales-and-cs), and write down anything that came up so the next customer hits an answer instead of a rediscovery.
 
@@ -18,7 +18,7 @@ Once an engagement is scoped, the day-to-day of delivering it (our cadence with 
 
 ## Scoping and engagement types
 
-Before delivery starts, every engagement needs a clear outcome, a rough timeline, and a shared definition of "done." We write this down as a short brief and send it to the customer to sanity-check before committing. Scope small: it's cheaper to expand a tight scope than to unwind a loose one.
+Before delivery starts, every engagement needs a clear outcome, a rough timeline, and a shared definition of "done." We write this down as a short brief and send it to the customer to check before committing. Scope small: it's cheaper to expand a tight scope than to unwind a loose one.
 
 The test while scoping: **would this output be useful to a different customer facing a similar problem?** If yes, it's compounding FDE work, so make sure the artifact lands somewhere reusable. If no, it's a scoped deliverable or a support answer. Being honest about this keeps the team's capacity pointed at work that compounds.
 
