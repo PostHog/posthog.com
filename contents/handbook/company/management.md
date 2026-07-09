@@ -104,6 +104,8 @@ As PostHog grows, it's increasingly important that all team leads help us keep t
 
 That form will be shared with the relevant team Blitzscale member, so they can help where necessary.
 
+The keeper test runs both ways. Direct reports are also asked to do a keeper test on their manager, sent through the same automated Deel form, so managers get honest feedback on how they're doing too. The format mirrors the above - 'if your manager was leaving, would you try to keep them?' - with the same digging into any 'no' to work out what it would take to turn it into a 'yes'.
+
 > Side note: anyone can ask their manager 'how hard would you work to change my mind if I were thinking of leaving?'. It's a great way to solicit valuable feedback!
 
 ### Weave
