@@ -12,6 +12,20 @@ Alerts enable you to monitor your [insights](/product-analytics) and get notifie
 
 Alerts are supported on [trends](/docs/product-analytics/trends), [funnels](/docs/product-analytics/funnels) (steps and trends views only), and [SQL (HogQL)](/docs/sql) insights.
 
+## Use cases
+
+Since alerts work on [trends](/docs/product-analytics/trends), [funnels](/docs/product-analytics/funnels), and [SQL (HogQL)](/docs/sql) insights, you can monitor nearly any metric you track in PostHog. Common use cases include:
+
+- **Monitor traffic spikes** – Get notified when pageviews or unique visitors exceed normal levels. Useful for catching viral content, measuring marketing campaign impact, or detecting unexpected load.
+
+- **Track errors and 404s** – Alert when error rates or 404 page visits spike above a baseline, indicating broken links, failed deployments, or degraded user experience.
+
+- **Detect missing critical events** – Alert when expected events like transactional emails, payment processing, or critical workflows drop below a threshold or stop entirely. Set a **has value** alert with a **less than** bound of 1 to catch these.
+
+- **Monitor conversion rate changes** – Track when signup, purchase, or other conversion rates shift significantly. Use a [formula-based trend](/docs/product-analytics/trends/formulas) with a **increases by** or **decreases by** alert and a percentage threshold.
+
+- **Watch for shifts in traffic sources** – Use a trend with a [breakdown](/docs/product-analytics/trends/breakdowns) on referral source, then set an alert to detect when any source increases or decreases by a set amount. See [alerts on breakdowns](#alerts-on-breakdowns) for details.
+
 ## How to create an alert
 
 <ProductVideo
