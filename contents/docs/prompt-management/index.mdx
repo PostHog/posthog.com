@@ -144,21 +144,23 @@ prompts = Prompts(
 )
 
 # Fetch the latest version of a prompt
-template = prompts.get(
+result = prompts.get(
     'support-system-prompt',
+    with_metadata=True,  # Returns a PromptResult with prompt, name, version, and source
     cache_ttl_seconds=600,  # Override default 5-minute cache
     fallback='You are a helpful assistant.'  # Used if fetch fails
 )
 
 # Or fetch a specific version
-template = prompts.get(
+result = prompts.get(
     'support-system-prompt',
+    with_metadata=True,
     version=2,
     fallback='You are a helpful assistant.'
 )
 
 # Compile with variables
-system_prompt = prompts.compile(template, {
+system_prompt = prompts.compile(result.prompt, {
     'company': 'Acme Corp',
     'tier': 'premium',
     'user_name': 'Alice'
@@ -190,19 +192,20 @@ const prompts = new Prompts({
 })
 
 // Fetch the latest version of a prompt
-const template = await prompts.get('support-system-prompt', {
+// Returns a PromptResult with prompt, name, version, and source
+const result = await prompts.get('support-system-prompt', {
   cacheTtlSeconds: 600,
   fallback: 'You are a helpful assistant.'
 })
 
 // Or fetch a specific version
-const template = await prompts.get('support-system-prompt', {
+const result = await prompts.get('support-system-prompt', {
   version: 2,
   fallback: 'You are a helpful assistant.'
 })
 
 // Compile with variables
-const systemPrompt = prompts.compile(template, {
+const systemPrompt = prompts.compile(result.prompt, {
   company: 'Acme Corp',
   tier: 'premium',
   userName: 'Alice'

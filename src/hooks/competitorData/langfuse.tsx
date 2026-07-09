@@ -52,7 +52,7 @@ prompt_management: {
         prompt_labels: true,
         prompt_playground: true,
         composable_prompts: true,
-        mcp_server_for_prompts: false,
+        mcp_server_for_prompts: true,
         ab_test_prompt_versions: false,
     },
 },
