@@ -230,7 +230,7 @@ PostHog AI went from a thing we'd been tinkering with to a thing customers actua
 
 ### June 2025: $70m Series D, led by Stripe
 
-$70m [Series D](/blog/series-d), led by Stripe. It started with a tweet – Patrick Collison said our website was "very well done" back and ~18 months later that turned into a round at a ~$920m valuation, with YC, GV and Formus joining. It roughly doubled everything we'd ever raised and roughly doubled our Series B valuation.
+$70m [Series D](/blog/series-d), led by Stripe. It started with a tweet – Patrick Collison said our website was "very well done" and ~18 months later that turned into a round at a ~$920m valuation, with YC, GV and Formus joining. This raise roughly doubles both our valuation and money raised. 
 
 Around here we stopped calling ourselves an analytics company. We're (almost) everything you need to build a successful product, with a plan to automate the whole stack with AI.
 
