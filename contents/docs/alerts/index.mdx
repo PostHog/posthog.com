@@ -172,7 +172,7 @@ Percentage thresholds are only available for relative alerts (as you need to com
 
 ## Real-time alerts
 
-- Skips the cache and queries ClickHouse fresh on every check, unlike other intervals (hourly, daily, weekly, monthly), which check a scheduled cached result.
+- Checks continuously instead of on a fixed schedule, so you're notified as close to the moment a threshold is breached as possible.
 - Best suited to metrics where minutes matter, such as error spikes, checkout failures, or sudden traffic drops. For most metrics, a less frequent interval is sufficient and reduces notification noise.
 - Requires a **Scale or Enterprise plan**. This is separate from the every-15-minutes interval, which is not real time and only needs a Boost, Scale, or Enterprise add-on.
 - Has its own limit on how many real-time alerts you can have enabled at once, separate from your overall alert limit. If you hit it, disable an existing real-time alert or switch it to a less frequent interval to free up a slot.
@@ -292,7 +292,7 @@ For ensemble detectors, the chart shows individual score lines for each sub-dete
 
 Use the date range dropdown to test the detector over different time periods (e.g., last 24 hours, last 7 days, last 30 days).
 
-### Create anomaly detection alerts via MCP
+### Create anomaly detection alerts with AI
 
 PostHog AI currently only creates threshold-based alerts. To create or simulate a detector-based alert with natural language, use the [MCP server](/docs/model-context-protocol) from your AI coding agent. Example prompts:
 
