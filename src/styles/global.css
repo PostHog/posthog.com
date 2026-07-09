@@ -2720,6 +2720,15 @@ div[data-radix-popper-content-wrapper] {
     }
 }
 
+@keyframes tools-ticker-marquee {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
 @keyframes hero-carousel-fade-in {
     from {
         opacity: 0;
