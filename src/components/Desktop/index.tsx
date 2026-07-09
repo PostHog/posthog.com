@@ -1,20 +1,21 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import Link from 'components/Link'
 import { useApp } from '../../context/App'
-import { IconDemoThumb, AppIcon } from 'components/OSIcons'
 import { AppItem } from 'components/OSIcons/AppIcon'
 import ContextMenu from 'components/RadixUI/ContextMenu'
 import CloudinaryImage from 'components/CloudinaryImage'
 import DraggableDesktopIcon from './DraggableDesktopIcon'
+import { useProductLinks, apps } from './appList'
 import { Screensaver } from '../Screensaver'
 import { useInactivityDetection } from '../../hooks/useInactivityDetection'
 import NotificationsPanel from 'components/NotificationsPanel'
 import useTheme from '../../hooks/useTheme'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import HedgeHogModeEmbed from 'components/HedgehogMode'
 import ReactConfetti from 'react-confetti'
 import { useToast } from '../../context/Toast'
 import usePostHog from '../../hooks/usePostHog'
+import { useTrashedIcons } from '../../hooks/useTrashedIcons'
 
 declare global {
     interface Window {
@@ -29,147 +30,10 @@ interface Product {
     color?: string
 }
 
-export const useProductLinks = () => {
-    const { posthogInstance, openNewChat, siteSettings, updateSiteSettings } = useApp()
-    const { addToast } = useToast()
-    const posthog = usePostHog()
-
-    return [
-        {
-            label: 'home.mdx',
-            Icon: <AppIcon name="doc" />,
-            url: '/',
-            source: 'desktop',
-        },
-        {
-            label: 'Products',
-            Icon: <AppIcon name="notebook" />,
-            url: '/products',
-            source: 'desktop',
-        },
-        {
-            label: 'Pricing',
-            Icon: <AppIcon name="pricing" />,
-            url: '/pricing',
-            source: 'desktop',
-        },
-        {
-            label: 'customers.mdx',
-            Icon: <AppIcon name="spreadsheet" />,
-            url: '/customers',
-            source: 'desktop',
-        },
-        {
-            label: 'demo.mov',
-            Icon: IconDemoThumb,
-            url: '/demo',
-            className: 'size-14 -my-1',
-            source: 'desktop',
-        },
-        {
-            label: 'Docs',
-            Icon: <AppIcon name="notebook" />,
-            url: '/docs',
-            source: 'desktop',
-        },
-        {
-            label: 'Talk to a human',
-            Icon: <AppIcon name="envelope" />,
-            url: '/talk-to-a-human',
-            source: 'desktop',
-        },
-        {
-            label: 'Ask a question',
-            Icon: <AppIcon name="forums" />,
-            onClick: () => openNewChat({ path: `ask-max` }),
-            source: 'desktop',
-        },
-        ...(posthogInstance
-            ? [
-                  {
-                      label: 'Open app ↗',
-                      Icon: <AppIcon name="computerCoffee" />,
-                      url: 'https://app.posthog.com',
-                      external: true,
-                      source: 'desktop',
-                  },
-              ]
-            : [
-                  {
-                      label: 'Sign up ↗',
-                      Icon: <AppIcon name="compass" />,
-                      url: 'https://app.posthog.com/signup',
-                      external: true,
-                      source: 'desktop',
-                  },
-              ]),
-        {
-            label: 'Switch to website mode',
-            Icon: <AppIcon name="switch" />,
-            onClick: () => {
-                updateSiteSettings({ ...siteSettings, experience: 'boring' })
-                posthog?.capture('switched site mode', {
-                    value: 'website',
-                    source: 'desktop',
-                })
-                addToast({
-                    title: 'Switched to website mode',
-                    description: 'Hover the logo to return to OS mode.',
-                    duration: 5000,
-                    onUndo: () => {
-                        updateSiteSettings({ ...siteSettings, experience: 'posthog' })
-                    },
-                })
-            },
-            source: 'desktop',
-        },
-    ]
-}
-
-export const apps: AppItem[] = [
-    {
-        label: 'Why PostHog?',
-        Icon: <AppIcon name="posthog" />,
-        url: '/about',
-        source: 'desktop',
-    },
-    {
-        label: 'Changelog',
-        Icon: <AppIcon name="invite" />,
-        url: '/changelog',
-        source: 'desktop',
-    },
-    // {
-    //     label: 'Cool tech events',
-    //     Icon: <AppIcon name="invite" />,
-    //     url: '/events',
-    //     source: 'desktop',
-    // },
-    {
-        label: 'Company handbook',
-        Icon: <AppIcon name="handbook" />,
-        url: '/handbook',
-        source: 'desktop',
-    },
-    {
-        label: 'Store',
-        Icon: <AppIcon name="shoppingBag" />,
-        url: '/merch',
-        source: 'desktop',
-    },
-    {
-        label: 'Work here',
-        Icon: <AppIcon name="typewriter" />,
-        url: '/careers',
-        source: 'desktop',
-    },
-    {
-        label: 'Trash',
-        Icon: <AppIcon name="trash" />,
-        url: '/trash',
-        source: 'desktop',
-    },
-]
+// Icon lists live in `./appList` so lightweight consumers (e.g. the /trash page)
+// can import them without pulling the whole Desktop chunk into their bundle.
+// Re-exported here for backwards compatibility.
+export { useProductLinks, apps }
 
 interface IconPosition {
     x: number
@@ -241,6 +105,25 @@ export default function Desktop() {
     const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null)
     const { getWallpaperClasses } = useTheme()
     const { addToast } = useToast()
+    const posthog = usePostHog()
+    const { trashedItems, trashItem, restoreItem, emptyTrash } = useTrashedIcons()
+    const trashRef = useRef<HTMLLIElement>(null)
+    const [isTrashHot, setIsTrashHot] = useState(false)
+
+    const getTrashRect = useCallback(() => trashRef.current?.getBoundingClientRect() ?? null, [])
+
+    const handleDropOnTrash = (app: AppItem) => {
+        setIsTrashHot(false)
+        trashItem(app.label)
+        posthog?.capture('desktop icon trashed', { label: app.label, source: 'desktop' })
+        addToast({
+            title: 'Moved to Trash',
+            description: `"${app.label}" was moved to the Trash.`,
+            duration: 5000,
+            onUndo: () => restoreItem(app.label),
+        })
+    }
+
     function generateInitialPositions(columns = 2): IconPositions {
         const positions: IconPositions = {}
 
@@ -382,6 +265,10 @@ export default function Desktop() {
 
     const allApps = [...productLinks, ...apps]
 
+    // Hide trashed icons, but never hide the Trash itself (even if storage is corrupted).
+    // Positions are intentionally kept intact so restoring returns an icon to its exact spot.
+    const visibleApps = allApps.filter((app) => app.label === 'Trash' || !trashedItems.includes(app.label))
+
     const handleScreensaverDismiss = () => {
         addToast({
             title: 'Screensaver dismissed',
@@ -453,6 +340,7 @@ export default function Desktop() {
                                 onClick={() => {
                                     localStorage.removeItem(STORAGE_KEY)
                                     setIconPositions(generateInitialPositions())
+                                    emptyTrash()
                                 }}
                             >
                                 Reset icons
@@ -645,20 +533,29 @@ export default function Desktop() {
                                 animate={{ opacity: rendered ? 1 : 0 }}
                                 className="list-none m-0 -mt-2 md:mt-0 p-0 grid sm:grid-cols-4 grid-cols-3 gap-2"
                             >
-                                {allApps.map((app) => {
-                                    const position = iconPositions[app.label] || { x: 0, y: 0 }
+                                <AnimatePresence>
+                                    {visibleApps.map((app) => {
+                                        const position = iconPositions[app.label] || { x: 0, y: 0 }
+                                        const isTrash = app.label === 'Trash'
 
-                                    return (
-                                        <DraggableDesktopIcon
-                                            key={app.label}
-                                            app={app}
-                                            initialPosition={position}
-                                            onPositionChange={(newPosition) =>
-                                                handlePositionChange(app.label, newPosition)
-                                            }
-                                        />
-                                    )
-                                })}
+                                        return (
+                                            <DraggableDesktopIcon
+                                                key={app.label}
+                                                app={app}
+                                                initialPosition={position}
+                                                onPositionChange={(newPosition) =>
+                                                    handlePositionChange(app.label, newPosition)
+                                                }
+                                                isTrash={isTrash}
+                                                innerRef={isTrash ? trashRef : undefined}
+                                                isDropActive={isTrash && isTrashHot}
+                                                getTrashRect={isTrash ? undefined : getTrashRect}
+                                                onTrashHoverChange={isTrash ? undefined : setIsTrashHot}
+                                                onDropOnTrash={isTrash ? undefined : handleDropOnTrash}
+                                            />
+                                        )
+                                    })}
+                                </AnimatePresence>
                             </motion.ul>
                         </nav>
                     )}

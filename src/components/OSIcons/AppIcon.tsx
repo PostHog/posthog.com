@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { BaseIcon, type IconProps } from './Icons'
 import Link from 'components/Link'
+import { ContextMenuItemProps } from 'components/RadixUI/ContextMenu'
 import { useRef } from 'react'
 import useTheme from '../../hooks/useTheme'
 import { useApp } from '../../context/App'
@@ -295,6 +296,7 @@ export interface AppItem {
     orientation?: 'row' | 'column'
     source?: string
     external?: boolean
+    customMenuItems?: ContextMenuItemProps[]
 }
 
 export const AppLink = ({
@@ -312,6 +314,7 @@ export const AppLink = ({
     orientation = 'column',
     source,
     external,
+    customMenuItems,
 }: AppItem) => {
     const posthog = usePostHog()
     const { posthogInstance } = useApp()
@@ -451,6 +454,7 @@ export const AppLink = ({
                     to={url}
                     {...(external ? { externalNoIcon: true } : { state: { newWindow: true } })}
                     className={`${commonClassName} ${orientationClassName}`}
+                    customMenuItems={customMenuItems}
                     onClick={(e) => {
                         if (hasDragged) {
                             e.preventDefault()

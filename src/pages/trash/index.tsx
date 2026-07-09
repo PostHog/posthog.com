@@ -1,7 +1,7 @@
 import React from 'react'
 import Explorer from 'components/Explorer'
 import SEO from 'components/seo'
-import { AppIcon, AppIconName, AppLink } from 'components/OSIcons/AppIcon'
+import { AppIcon, AppIconName, AppLink, AppItem } from 'components/OSIcons/AppIcon'
 import { Accordion } from 'components/RadixUI/Accordion'
 import ZoomHover from 'components/ZoomHover'
 import { explorerGridColumns } from '../../constants'
@@ -9,10 +9,26 @@ import { explorerLayoutOptions } from '../../constants/explorerLayoutOptions'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import { useExplorerLayout } from '../../hooks/useExplorerLayout'
 import { useMenuSelectOptions } from 'components/TaskBarMenu/menuData'
+import { useProductLinks, apps } from 'components/Desktop/appList'
+import { useTrashedIcons } from '../../hooks/useTrashedIcons'
 
 export default function Trash(): JSX.Element {
     const { isListLayout, setLayoutValue, currentLayout } = useExplorerLayout('grid')
     const selectOptions = useMenuSelectOptions()
+    const productLinks = useProductLinks()
+    const { trashedItems, restoreItem } = useTrashedIcons()
+
+    // Reconstruct trashed desktop icons from the canonical lists by label
+    // (labels are the identity; an AppItem itself isn't serializable). Stale
+    // labels resolve to nothing and are dropped.
+    const appsByLabel = React.useMemo(() => {
+        const map = new Map<string, AppItem>()
+        ;[...productLinks, ...apps].forEach((app) => map.set(app.label, app as AppItem))
+        return map
+    }, [productLinks])
+    const desktopItems = trashedItems
+        .map((label) => appsByLabel.get(label))
+        .filter((app): app is AppItem => Boolean(app))
 
     return (
         <>
@@ -151,6 +167,59 @@ export default function Trash(): JSX.Element {
 
                     return (
                         <div className="@container not-prose space-y-2">
+                            {desktopItems.length > 0 && (
+                                <Accordion
+                                    skin={false}
+                                    triggerClassName="flex-row-reverse [&>svg]:!-rotate-90 [&[data-state=open]>svg]:!rotate-0 [&>span]:relative [&>span]:after:absolute [&>span]:after:right-0 [&>span]:after:top-1/2 [&>span]:after:h-px [&>span]:after:w-full [&>span]:after:bg-border [&>span]:after:content-['']"
+                                    defaultValue="from_desktop"
+                                    items={[
+                                        {
+                                            value: 'from_desktop',
+                                            trigger: (
+                                                <span className="bg-primary pr-2 relative z-10">
+                                                    From your desktop ({desktopItems.length})
+                                                </span>
+                                            ),
+                                            content: (
+                                                <div
+                                                    className={`@md:pl-4 grid ${
+                                                        isListLayout
+                                                            ? '@lg:grid-cols-2 @3xl:grid-cols-3 gap-y-4'
+                                                            : explorerGridColumns +
+                                                              ' gap-y-4 items-start justify-items-center'
+                                                    } gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
+                                                >
+                                                    {desktopItems.map((item) => (
+                                                        <ZoomHover
+                                                            key={item.label}
+                                                            className={
+                                                                isListLayout
+                                                                    ? 'w-full justify-start'
+                                                                    : 'w-28 justify-center'
+                                                            }
+                                                        >
+                                                            {/* Click opens the item (its real url/onClick); right-click
+                                                                offers "Put back" alongside the standard link menu. */}
+                                                            <AppLink
+                                                                {...item}
+                                                                background="bg-primary"
+                                                                orientation={isListLayout ? 'row' : 'column'}
+                                                                customMenuItems={[
+                                                                    {
+                                                                        type: 'item',
+                                                                        label: 'Put back',
+                                                                        onClick: () => restoreItem(item.label),
+                                                                    },
+                                                                ]}
+                                                            />
+                                                        </ZoomHover>
+                                                    ))}
+                                                </div>
+                                            ),
+                                        },
+                                    ]}
+                                />
+                            )}
                             {categoryOrder.map((category) => {
                                 const items = trashData[category as keyof typeof trashData]
                                 if (!items || items.length === 0) return null
@@ -174,11 +243,12 @@ export default function Trash(): JSX.Element {
                                                 ),
                                                 content: (
                                                     <div
-                                                        className={`@md:pl-4 grid ${isListLayout
+                                                        className={`@md:pl-4 grid ${
+                                                            isListLayout
                                                                 ? '@lg:grid-cols-2 @3xl:grid-cols-3 gap-y-4'
                                                                 : explorerGridColumns +
-                                                                ' gap-y-4 items-start justify-items-center'
-                                                            } gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
+                                                                  ' gap-y-4 items-start justify-items-center'
+                                                        } gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
                                                     >
                                                         {items.map((item) => {
                                                             const appLink = (
