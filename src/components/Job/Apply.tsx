@@ -217,6 +217,14 @@ const Form = ({
     const { setConfetti } = useApp()
     const [error, setError] = useState<string | null>(null)
     const [loading, setLoading] = useState(false)
+    // Prevent Enter in single-line inputs from submitting the whole application mid-edit.
+    // Textareas keep their native newline behavior.
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
+        const target = e.target as HTMLElement
+        if (e.key === 'Enter' && target?.tagName !== 'TEXTAREA') {
+            e.preventDefault()
+        }
+    }
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         setLoading(true)
@@ -287,7 +295,7 @@ const Form = ({
                         </p>
                     </div>
                 )}
-                <form onSubmit={handleSubmit} className="p-4">
+                <form onSubmit={handleSubmit} onKeyDown={handleKeyDown} className="p-4">
                     <div className="grid grid-cols-2 gap-3">
                         {info?.applicationFormDefinition?.sections?.map(({ fields }: { fields: any[] }) => {
                             return fields.map(
