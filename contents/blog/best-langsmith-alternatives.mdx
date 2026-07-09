@@ -1,0 +1,696 @@
+---
+title: 'The best LangSmith alternatives & competitors, compared'
+date: 2026-07-08
+author:
+    - natalia-amorim
+    - temitope-oyedele
+rootpage: /blog
+featuredImage: >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hog_ql.png
+featuredImageType: full
+category: General
+tags:
+    - Comparisons
+seo:
+  metaTitle: 'The best LangSmith alternatives & competitors, compared'
+  metaDescription: 'Looking for a LangSmith alternative? Compare the best LLM observability tools, including PostHog, Langfuse, Helicone, and more.'
+
+---
+
+LangSmith is LangChain's platform for monitoring, debugging, and evaluating LLM applications. It's good at what it does, especially if you're deep in the LangChain ecosystem. 
+
+But maybe you're not. Or maybe you've seen the pricing page. Or you want [something open source](/blog/best-open-source-llm-observability-tools), or something that tells you whether your AI features actually work for users, not just whether they ran.
+
+Whatever brought you here, this guide compares the best LangSmith alternatives, including where each one beats LangSmith and where it doesn't.
+
+## 1. PostHog
+
+- **Founded:** 2020
+- **Similar to:** Langfuse, Braintrust
+- **Typical users:** Engineers and product teams building AI-powered products
+- **Typical customers:** Mid-size B2Bs and startups – customers include Supabase, Lovable, ElevenLabs, and more.
+
+![PostHog AI Observability](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2026_06_22_at_13_19_01_2x_acc4617c50.png)
+
+### What is PostHog?
+
+**[PostHog](/)** (that's us 👋) is the leading platform for self-driving products. You can use our desktop ([Code](/code)), [web](/ai), [Slack](/slack), and [MCP](/mcp) products to leverage tools like [AI observability](/ai-observability), [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [logs](/logs), and more.
+
+PostHog captures full traces of your LLM calls, so you can follow a request through every prompt, tool call, and model response. For each generation, it tracks token usage, cost, latency, and errors, and you can score outputs with LLM-as-a-judge or code-based evals to catch quality regressions over time.
+
+Because traces are stored as regular PostHog events, you can connect AI behavior to downstream product metrics – like whether users who hit a slow generation churn, or whether a new prompt version improves activation. 
+
+You can query trace data with SQL or through the [MCP server](/mcp) directly from your editor, and [manage and version prompts (beta)](/docs/prompt-management) without redeploying code. It [supports popular frameworks](/docs/ai-observability/installation), including OpenAI, Anthropic, LangChain, xAI, LlamaIndex, and the Vercel AI SDK.
+
+Engineers and product teams use PostHog to build AI-powered products. Customers include [Lovable](/customers/lovable), [Supabase](/customers/supabase), and [Arena](/customers/arena).
+
+### Key features
+
+- [**Generations**](/docs/ai-observability/generations): Monitor model performance, token usage, costs, latency, and errors across your AI features from a single view.
+
+- [**Traces**](/docs/ai-observability/traces): Follow AI workflows from start to finish to understand how requests move through prompts, tools, and model calls.
+
+- [**AI evals**](/docs/ai-evals/evaluations): Automatically score model outputs using LLM-as-a-judge or code-based checks to track quality and identify regressions over time.
+
+- [**Prompt management**](/docs/prompt-management) *(beta):* Create, version, and update prompts without redeploying code. Compare versions and understand how prompt changes affect outputs.
+
+- [**Session replay:**](/docs/session-replay) Watch [real user sessions alongside LLM traces](/docs/ai-observability/link-session-replay) to understand exactly what happened in context, including console logs and network activity.
+
+- [**Feature flags and experiments:**](/docs/feature-flags) Safely roll out AI features with multivariate flags and [run A/B tests on prompts](/docs/prompt-management/prompt-experiments), models, or AI features to measure real product impact.
+
+- [**Error tracking:**](/docs/error-tracking) Capture and triage errors with full [stack traces correlated with user sessions and LLM events](/docs/ai-observability/link-error-tracking) via error tracking.
+
+### How does PostHog compare to LangSmith?
+
+<p>
+<ProductComparisonTable
+    competitors={['posthog', 'langsmith']}
+    rows={[
+        'ai_observability.features.trace_visualization',
+        'ai_observability.features.cost_tracking',
+        'ai_observability.features.latency_tracking',
+        'ai_observability.features.error_tracking',
+        'ai_observability.features.sentiment_classification',
+        'ai_observability.features.trace_summarization',
+        'ai_observability.features.privacy_mode',
+        'ai_observability.features.agent_tracing',
+        'ai_observability.features.prompt_management',
+        'ai_observability.features.prompt_evaluations',
+        'ai_observability.features.evaluation_datasets',
+        'ai_observability.features.human_annotation',
+        'session_replay',
+        'product_analytics',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
+</p>
+
+<details>
+<summary>Main differences between PostHog and LangSmith</summary>
+
+- PostHog connects LLM traces to product analytics, session replay, flags, experiments, and more in one platform. LangSmith focuses on tracing and evaluating, and delivers deep debugging experience for LangChain and LangGraph workflows.
+- PostHog's [free tier](/pricing) includes 100K AI observability events, 1M product analytics events, and 5K session recordings per month. LangSmith's Developer plan includes 5K base traces and one seat.
+- PostHog has no per-seat pricing. LangSmith's free tier is limited to one seat – adding a second engineer means the Plus plan at $39/seat/month, before any trace overage.
+- LangSmith has more mature eval workflows with native LangGraph tracing and agent step visualization. PostHog's LLM observability is newer and still developing on that front.
+
+</details>
+
+<details>
+<summary>Main similarities between PostHog and LangSmith</summary>
+
+- Both track LLM traces, token costs, latency, and model performance.
+- Both offer prompt management, a prompt playground, and conversation tracking.
+- Both offer a free tier with no credit card required.
+- Both support framework-agnostic LLM provider integrations, including OpenAI and Anthropic.
+
+</details>
+
+### Why do companies use PostHog?
+
+According to [reviews on G2](https://www.g2.com/products/posthog/reviews), companies use PostHog because:
+
+- **It replaces multiple tools:** PostHog covers analytics, session replay, feature flags, A/B testing, LLM observability, and more in one platform, removing the need to stitch separate tools together.
+
+- **Pricing is transparent and scalable:** The [free tier](/pricing) gives you 100K AI observability events, 1M product analytics events, 5K session recordings, and 1M feature flag requests each month, all without needing a credit card. Startups can also apply for an extra [$50k in credits](/startups).
+
+- **It connects AI behavior to real product outcomes:** Teams use PostHog to understand not just what the model did, but whether it actually worked for the user.
+
+> #### Bottom line
+>
+> PostHog is the strongest LangSmith alternative for teams building user-facing AI products who want AI observability, analytics, experimentation, and more in one place.
+
+<WizardCTA />
+
+## 2. Langfuse
+
+- **Founded:** 2023
+- **Most similar to:** LangSmith
+- **Typical users:** Engineers and AI teams building and debugging LLM applications
+- **Typical customers:** Startups and mid-size companies shipping LLM features to production – customers include Juicebox.ai, Twilio, Circleback, and Canva
+
+![Langfuse](https://res.cloudinary.com/dmukukwp6/image/upload/langfuse_92ec8c1295.png)
+
+### What is Langfuse?
+
+[Langfuse](/blog/posthog-vs-langfuse) is an open source LLM engineering platform built for tracing, evaluating, and improving LLM applications in production. It combines tracing, prompt management, evaluations, and analytics dashboards in one platform.
+
+[Langfuse](/blog/best-langfuse-alternatives) captures detailed traces of LLM calls with spans, observations, and metrics across any framework or provider. Its SDK is built on the official OpenTelemetry client, so token usage, cost tracking, and prompt linking work with any OTel-compatible library out of the box. 
+
+On top of tracing, it layers prompt management with one-click rollbacks, evaluations via LLM-as-a-judge, heuristics, or human review, and dashboards for monitoring cost, latency, and quality trends.
+
+In January 2026, ClickHouse acquired Langfuse.
+
+### Key features
+
+- **LLM tracing:** Detailed production tracing with spans, observations, and metrics across any framework or provider.
+
+- **Prompt management:** Version control and deployment of prompts with integrated monitoring and one-click rollbacks.
+
+- **Evaluations:** LLM-as-a-judge, heuristic functions, and human review workflows. Run evaluators on production data or during experiments.
+
+- **OpenTelemetry support:** Langfuse SDK v4 is built on top of the official OpenTelemetry client, giving it first-class support for token usage, cost tracking, and prompt linking across any OTel-compatible framework or library.
+
+- **Analytics dashboards:** Monitor cost, latency, and quality trends across your LLM applications with built-in dashboards and automated alerts.
+
+### How does Langfuse compare to LangSmith?
+
+<p>
+<ProductComparisonTable
+    competitors={['langfuse', 'langsmith']}
+    rows={[
+        'ai_observability.features.trace_visualization',
+        'ai_observability.features.cost_tracking',
+        'ai_observability.features.latency_tracking',
+        'ai_observability.features.error_tracking',
+        'ai_observability.features.sentiment_classification',
+        'ai_observability.features.trace_summarization',
+        'ai_observability.features.privacy_mode',
+        'ai_observability.features.agent_tracing',
+        'ai_observability.features.prompt_management',
+        'ai_observability.features.prompt_evaluations',
+        'ai_observability.features.evaluation_datasets',
+        'ai_observability.features.human_annotation',
+        'session_replay',
+        'product_analytics',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
+</p>
+
+<details>
+<summary>Main differences between Langfuse and LangSmith</summary>
+
+- Langfuse is fully open source under MIT and self-hostable with no usage limits. LangSmith requires an Enterprise plan for self-hosting.
+- Langfuse is framework-agnostic with first-class OTel support built into its SDK. LangSmith supports non-LangChain stacks, but its native LangGraph tracing and agent step visualization are only available for LangChain-based applications.
+- Langfuse's Core plan starts at $29/month. LangSmith's Plus plan costs $39 per seat per month with trace overage on top.
+- Langfuse's prompt management includes one-click rollbacks and integrated monitoring per prompt version. LangSmith's prompt versioning is more basic and doesn't surface per-version performance metrics in the same way.
+
+</details>
+
+<details>
+<summary>Main similarities between Langfuse and LangSmith</summary>
+
+- Both offer LLM tracing, prompt management, and evaluation workflows.
+- Both support LangChain integration out of the box.
+- Both provide dashboards for monitoring cost, latency, and model performance.
+- Both offer a free tier with no credit card required.
+
+</details>
+
+### Why do companies use Langfuse?
+
+According to Langfuse customer stories, companies use Langfuse because:
+
+- **It improves visibility into LLM applications:** Merck uses Langfuse to track prompts, responses, costs, and latency in real time, helping turn "black-box models into auditable, optimizable assets."
+
+- **It helps teams iterate faster:** Cresta says Langfuse makes it easier to test, learn, and improve AI agents, speeding up iteration on LLM behavior.
+
+- **It can reduce operational costs:** SumUp reports saving 30% of external BPO (Business Process Outsourcing) costs by deflecting 50% of support conversations to AI.
+
+> #### Bottom line
+>
+> Langfuse is a strong alternative to LangSmith for teams that want open source, framework-agnostic platform with tracing, evaluations, and self-hosting support.
+
+## 3. Braintrust
+
+- **Founded:** 2023
+- **Most similar to:** LangSmith
+- **Typical users:** Engineers and AI teams running evaluation-heavy LLM workflows
+- **Typical customers:** Mid-size to enterprise companies shipping AI products – customers include Notion, Zapier, Stripe, Vercel, and Cloudflare
+
+![Braintrust Dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/Braintrust_dashboard_0b54958363.png)
+
+### What is Braintrust?
+
+**Braintrust** is an LLM observability and evaluation platform built for teams shipping AI products into production. 
+
+Evals are front and center in Braintrust's workflows. They capture traces with per-request cost breakdowns, then turn production failures into eval datasets with one click, score outputs with LLM-as-a-judge, code scorers, or human review, and gate releases in CI/CD based on eval scores.
+
+Brainstore, its purpose-built database, keeps trace queries fast even across millions of spans, and Loop (its AI assistant) generates datasets and scorers from natural language instructions.
+
+### Key features
+
+- **LLM tracing:** Real-time trace visualization across multi-step workflows with per-request cost breakdowns by user, feature, model, or environment.
+
+- **Evaluations:** LLM-as-a-judge, custom code scorers, and human review workflows. Convert production failures into eval datasets with one click.
+
+- **Dataset management:** Build, version, and curate evaluation datasets directly from production traces.
+
+- **AI proxy:** Route LLM API calls through Braintrust to capture logs automatically, enable caching, and implement fallbacks across providers.
+
+- **Loop:** AI assistant that analyzes production traces, generates eval datasets, and recommends custom scorers based on natural language instructions.
+
+### How does Braintrust compare to LangSmith?
+
+<p>
+<ProductComparisonTable
+    competitors={['braintrust', 'langsmith']}
+    rows={[
+        'ai_observability.features.trace_visualization',
+        'ai_observability.features.cost_tracking',
+        'ai_observability.features.latency_tracking',
+        'ai_observability.features.error_tracking',
+        'ai_observability.features.sentiment_classification',
+        'ai_observability.features.trace_summarization',
+        'ai_observability.features.privacy_mode',
+        'ai_observability.features.agent_tracing',
+        'ai_observability.features.prompt_management',
+        'ai_observability.features.prompt_evaluations',
+        'ai_observability.features.evaluation_datasets',
+        'ai_observability.features.human_annotation',
+        'session_replay',
+        'product_analytics',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
+</p>
+
+<details>
+<summary>Main differences between Braintrust and LangSmith</summary>
+
+- Braintrust's CI/CD integration works with any agent stack via a native GitHub Action that blocks merges based on eval scores. LangSmith's CI/CD quality gates are available but tied specifically to LangGraph and LangSmith Deployment infrastructure.
+- Braintrust has a more complete eval lifecycle – dataset curation, CI/CD-gated releases, and AI-assisted scorer generation via Loop. LangSmith's eval workflows are strong but do not include the same end-to-end automation from production trace to CI gate.
+- Braintrust's free tier includes 1 GB processed data. LangSmith's Developer plan includes 5K base traces per month.
+
+</details>
+
+<details>
+<summary>Main similarities between Braintrust and LangSmith</summary>
+
+- Both offer LLM tracing, prompt management, and evaluation workflows.
+- Both support LLM-as-a-judge and human review scoring.
+- Both provide dataset management for building and versioning eval datasets.
+- Neither is open source, and both require an Enterprise plan for self-hosting.
+- Both offer EU data residency at no extra cost.
+
+</details>
+
+### Why do companies use Braintrust?
+
+Based on usage across Notion, Zapier, Stripe, Vercel, and Cloudflare, teams choose Braintrust because:
+
+- **End-to-end eval workflow:** Tracing, dataset curation, prompt management, and CI/CD-gated releases in a single platform. The one-click trace-to-dataset workflow is consistently cited as a standout feature.
+
+- **Fast trace search:** Brainstore, Braintrust's AI-optimized database, handles queries faster than traditional databases, making it practical for millions of production traces.
+
+- **Robust eval infrastructure:** Teams running LLM-as-a-judge, human annotation, and automated CI/CD regression checks find Braintrust uniquely capable of handling high-volume workflows.
+
+> #### Bottom line
+>
+> Braintrust is a strong alternative to LangSmith for teams that focus on evaluation workflows. The main drawback is that it isn't open source or free to self-host.
+
+## 4. Arize Phoenix
+
+- **Founded:** 2020
+- **Most similar to:** LangSmith, Langfuse
+- **Typical users:** AI engineers and data scientists building and monitoring LLM applications
+- **Typical customers:** Enterprise engineering teams – customers include DoorDash, Instacart, Uber, and Booking.com
+
+![Arize Phoenix Dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/Arize_Phoenix_Dashboard_0c05ff7970.png)
+
+### What is Arize Phoenix?
+
+**Arize Phoenix** is the source-available observability and evaluation platform from Arize AI. It provides tracing, evaluations, and debugging for LLM applications using OpenTelemetry-based instrumentation.
+
+Phoenix is one of the most genuinely OpenTelemetry-native tools in this space. It instruments via OpenInference, an OTel-based semantic layer, and works with LangChain, LlamaIndex, OpenAI, DSPy, Haystack, and anything else OTel-compatible. 
+
+It ships with research-backed evaluators for hallucination, faithfulness, relevance, and toxicity out of the box, plus an embeddings visualizer for debugging retrieval quality. It also runs entirely locally or in a container, so no data leaves your infrastructure.
+
+Phoenix handles development and self-hosted use; when teams need production monitoring at enterprise scale, Arize offers AX as the commercial upgrade path.
+
+### Key features
+
+- **LLM tracing:** Span-level tracing with custom metadata tagging across LangChain, LlamaIndex, OpenAI, DSPy, Haystack, and other frameworks via OpenInference instrumentation.
+
+- **Evaluations:** Built-in research-backed evaluators for faithfulness, relevance, hallucination, and toxicity. Supports LLM-as-a-judge and custom evaluators.
+
+- **OpenTelemetry-native:** Uses OpenInference, an OpenTelemetry-based semantic layer, making it one of the most genuinely OTel-native tools in this space.
+
+- **Embeddings visualizer:** Examine embedding text used for retrieval, visualize clusters, and validate embedding strategies to surface data quality issues and prompt drift.
+
+### How does Arize Phoenix compare to LangSmith?
+
+<p>
+<ProductComparisonTable
+    competitors={['arize_phoenix', 'langsmith']}
+    rows={[
+        'ai_observability.features.trace_visualization',
+        'ai_observability.features.cost_tracking',
+        'ai_observability.features.latency_tracking',
+        'ai_observability.features.error_tracking',
+        'ai_observability.features.sentiment_classification',
+        'ai_observability.features.trace_summarization',
+        'ai_observability.features.privacy_mode',
+        'ai_observability.features.agent_tracing',
+        'ai_observability.features.prompt_management',
+        'ai_observability.features.prompt_evaluations',
+        'ai_observability.features.evaluation_datasets',
+        'ai_observability.features.human_annotation',
+        'session_replay',
+        'product_analytics',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
+</p>
+
+<details>
+<summary>Main differences between Arize Phoenix and LangSmith</summary>
+
+- Phoenix is licensed under Elastic License 2.0 and is free to self-host for internal use, but not OSI-approved open source. LangSmith is fully closed source with no self-hosting outside of Enterprise.
+- Arize offers two distinct products: Phoenix for development and self-hosted use, and AX for enterprise production monitoring. LangSmith has no equivalent two-tier offering.
+- Phoenix includes built-in research-backed evaluators for hallucination, faithfulness, relevance, and toxicity out of the box. LangSmith's eval setup requires more manual configuration.
+- LangSmith has a more polished debugging experience for LangChain-specific workflows. Phoenix's UX is optimized for technical operators and skews less toward cross-functional teams.
+
+</details>
+
+<details>
+<summary>Main similarities between Arize Phoenix and LangSmith</summary>
+
+- Both offer LLM tracing, prompt management, and evaluation workflows.
+- Both support LangChain integration.
+- Both cover RAG evaluation metrics, including context relevance and hallucination detection.
+- Both provide a free tier to get started without a credit card.
+
+</details>
+
+### Why do companies use Arize Phoenix?
+
+According to the Arize Phoenix page and community feedback, teams use it because:
+
+- **It removes the need to build custom instrumentation:** LlamaIndex's team describes Phoenix as something they "were wanting to build at some point" themselves – praising it for saving engineering time on observability infrastructure that would otherwise be built from scratch.
+
+- **It keeps data under your control:** Phoenix runs entirely locally or in a container with no data leaving your infrastructure, making it a strong fit for teams in regulated industries or with strict data privacy requirements.
+
+- **It provides a clear upgrade path for growing teams:** Phoenix users can move seamlessly to Arize AX when they need enterprise features like custom dashboards, dedicated support, or HIPAA compliance – without changing their instrumentation code.
+
+> #### Bottom line
+>
+> Arize Phoenix is a source-available observability and evaluation platform with some of the strongest OpenTelemetry support in the LLM tooling ecosystem. Its technical, engineering-focused experience is the main tradeoff compared with more collaborative platforms.
+
+## 5. Weights & Biases Weave
+
+- **Founded:** 2018
+- **Most similar to:** LangSmith, Arize Phoenix
+- **Typical users:** ML engineers and AI developers building and iterating on LLM applications
+- **Typical customers:** Research teams and companies running both ML and LLM workloads – customers include Canva, Toyota, Salesforce, and Shell
+
+![Weights & Biases Weave Dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/Weights_and_Biases_Weave_dashboard_ba22386509.png)
+
+### What is Weights & Biases Weave?
+
+**Weave** is the LLM observability and evaluation platform from Weights & Biases. It extends W&B's experiment tracking ecosystem with tracing, prompt monitoring, evaluations, and cost analysis for production LLM applications. 
+
+Its `@weave.op` decorator instruments LLM calls automatically, capturing inputs, outputs, costs, latency, and evaluation metrics without manual setup. It supports LLM-as-a-judge and custom scoring workflows, and Weave Guardrails detect hallucinations, PII, and toxicity in model outputs. Datasets, versioned runs, and model artifacts live in the same workspace as W&B's classic experiment tracking.
+
+In May 2025, CoreWeave acquired W&B, folding it into its AI cloud platform.
+
+### Key features
+
+- **LLM tracing:** Automatically tracks every LLM call using the `@weave.op` decorator, capturing inputs, outputs, costs, latency, and evaluation metrics without manual instrumentation.
+
+- **Evaluations:** Supports LLM-as-a-judge and custom scoring workflows. Weave Guardrails detect hallucinations, PII, and toxicity in model outputs.
+
+- **Experiment tracking:** Version-controlled runs, hyperparameter sweeps, artifact management, and model registry carried directly into LLM workflows.
+
+- **Dataset management:** Build, version, and manage evaluation datasets alongside model artifacts in the same W&B workspace.
+
+### How does Weave compare to LangSmith?
+
+<p>
+<ProductComparisonTable
+    competitors={['weave', 'langsmith']}
+    rows={[
+        'ai_observability.features.trace_visualization',
+        'ai_observability.features.cost_tracking',
+        'ai_observability.features.latency_tracking',
+        'ai_observability.features.error_tracking',
+        'ai_observability.features.sentiment_classification',
+        'ai_observability.features.trace_summarization',
+        'ai_observability.features.privacy_mode',
+        'ai_observability.features.agent_tracing',
+        'ai_observability.features.prompt_management',
+        'ai_observability.features.prompt_evaluations',
+        'ai_observability.features.evaluation_datasets',
+        'ai_observability.features.human_annotation',
+        'session_replay',
+        'product_analytics',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
+</p>
+
+<details>
+<summary>Main differences between W&B Weave and LangSmith</summary>
+
+- Weave is part of a full ML platform covering experiment tracking, model registry, hyperparameter sweeps, and artifact management. LangSmith focuses exclusively on LLM debugging and evaluation.
+- Weave's `@weave.op` decorator instruments LLM calls automatically without manual SDK configuration. LangSmith requires explicit tracing setup per framework.
+- Weave Guardrails detect hallucinations, PII, and toxicity in model outputs as part of the core platform. LangSmith has no equivalent built-in safety layer.
+- Weave is the stronger choice for teams running both traditional ML and LLM workloads in one platform. LangSmith is the stronger choice for teams focused exclusively on LLM applications.
+
+</details>
+
+<details>
+<summary>Main similarities between W&B Weave and LangSmith</summary>
+
+- Both offer LLM tracing, prompt management, and evaluation workflows.
+- Both support LLM-as-a-judge scoring and dataset management.
+- Both provide a free tier to get started without a credit card.
+- Both offer EU hosting and SOC 2 compliance for enterprise teams.
+
+</details>
+
+### Why do companies use W&B Weave?
+
+According to discussions on Reddit and the MLOps community, teams use Weave because:
+
+- **It makes tracing and evaluations easy to adopt:** Developers say Weave can be added with only a few lines of code, making it straightforward to start monitoring LLM applications and running evaluations.
+
+- **It works well for experimentation workflows:** Practitioners highlight Weave's combination of tracing, datasets, and evaluation tooling as useful for managing and comparing LLM experiments.
+
+- **It's particularly appealing for Python-based AI teams:** Some users note that Weave's tracing and evaluation experience feels strongest in Python-heavy environments, especially for agent and experimentation workflows.
+
+> #### Bottom line
+>
+> W&B Weave is a good choice if your team already uses Weights & Biases for model development and experiment tracking. If you only need LLM observability, you might find a more focused option better.
+
+## 6. Lunary
+
+- **Founded:** 2021
+- **Most similar to:** LangSmith, Langfuse
+- **Typical users:** Engineers building chatbots and RAG applications
+- **Typical customers:** Startups and enterprises – customers include IBM, DHL, Zurich, Netomi, and Close.com
+
+![Lunary](https://res.cloudinary.com/dmukukwp6/image/upload/lunary_f7cb225303.png)
+
+### What is Lunary?
+
+Lunary is an open-core LLM observability platform built specifically for chatbot and RAG architectures. It focuses on tracing the exact timeline of multi-turn user conversations rather than isolated, single-shot LLM calls.
+
+Beyond threading and replays, Lunary tracks requests, token usage, costs, and latency across OpenAI, Anthropic, LangChain, and other providers, and its topic classification automatically categorizes responses against custom criteria – useful for flagging edge cases without manually reviewing every conversation. 
+
+The core application is Apache 2.0 licensed and self-hostable, with a lightweight SDK for Python and JavaScript runtimes.
+
+### Key features
+
+- **LLM tracing:** Track requests, responses, token usage, costs, and latency across OpenAI, Anthropic, LangChain, and other providers.
+
+- **Conversation threading:** Follow multi-turn conversations across sessions with full context, making it easier to debug complex chatbot workflows.
+
+- **Topic classification:** Automatically categorize and filter LLM responses against custom criteria – useful for flagging edge cases and failure modes without manual review.
+
+- **Chat replays:** Replay full user conversation sessions to understand exactly how users interacted with your chatbot and where the experience broke down.
+
+### How does Lunary compare to LangSmith?
+
+<p>
+<ProductComparisonTable
+    competitors={['lunary', 'langsmith']}
+    rows={[
+        'ai_observability.features.trace_visualization',
+        'ai_observability.features.cost_tracking',
+        'ai_observability.features.latency_tracking',
+        'ai_observability.features.error_tracking',
+        'ai_observability.features.sentiment_classification',
+        'ai_observability.features.trace_summarization',
+        'ai_observability.features.privacy_mode',
+        'ai_observability.features.agent_tracing',
+        'ai_observability.features.prompt_management',
+        'ai_observability.features.prompt_evaluations',
+        'ai_observability.features.evaluation_datasets',
+        'ai_observability.features.human_annotation',
+        'session_replay',
+        'product_analytics',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
+</p>
+
+<details>
+<summary>Main differences between Lunary and LangSmith</summary>
+
+- Lunary is optimized for chatbot and RAG applications with built-in conversation threading and multi-turn session tracking. LangSmith works across frameworks but is optimized for LangChain chain and agent debugging.
+- Lunary's topic classification automatically categorizes and flags LLM responses against custom criteria. LangSmith has no equivalent automated response categorization feature.
+- LangSmith has significantly deeper eval workflows, including LangGraph-native debugging and dataset versioning. Lunary's eval features are more basic.
+- Lunary supports Python and JavaScript runtimes with a lightweight SDK. LangSmith's SDK coverage is broader but skewed toward Python and LangChain-native workflows.
+
+</details>
+
+<details>
+<summary>Main similarities between Lunary and LangSmith</summary>
+
+- Both offer LLM tracing, prompt management, and basic evaluation workflows.
+- Both support LangChain integration.
+- Both provide a free tier to get started without a credit card.
+- Both support multiple LLM providers, including OpenAI and Anthropic.
+
+</details>
+
+### Why do companies use Lunary?
+
+Based on customer testimonials on Lunary, teams use it because:
+
+- **Improves visibility into GenAI applications:** Teams track production workloads to see exactly how their chatbots handle multi-turn conversational edge cases.
+- **High-quality infrastructure support:** Thomas Steinacher, CTO of Close.com, explicitly praised Lunary's high-quality Kubernetes setup for making deployment straightforward.
+- **Ships product updates quickly:** Edvaldo Gjonikaj, CTO of TextYess, highlighted that the team incorporates user roadmap feedback and drops feature updates rapidly.
+
+> #### Bottom line
+>
+> Lunary is a lightweight, open-core alternative to LangSmith for teams building chatbot and RAG applications. Its focus on conversation tools sets it apart, but its evaluation features aren't as advanced as some competitors.
+
+## Which LangSmith alternative should you choose?
+
+- Want [AI observability](/ai-observability) alongside [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), and more in one platform? PostHog is the obvious choice.
+- Need the closest open-source alternative to LangSmith with strong evaluations, prompt management, and self-hosting? **Langfuse** is the go-to.
+- Building chatbots or RAG applications and want lightweight observability with conversation threading? **Lunary** is built for that.
+- Running evaluation-heavy AI workflows and need dataset curation, CI/CD-gated releases, and advanced eval tooling? **Braintrust** is the strongest option.
+- Want source-available, OTel-native observability with built-in evaluation metrics and full control over your data? **Arize Phoenix** fits.
+- Already using Weights & Biases for ML experiment tracking and don't want another vendor in your stack? **Weave** makes the most sense.
+
+## Is PostHog right for you?
+
+Here's the (short) sales pitch.
+
+We're biased, but we think PostHog is the perfect LangSmith alternative if:
+
+- You value transparency. We're open source and open core.
+- You want more than just LLM tracing. We connect [AI observability](/ai-observability) to a full suite of developer tools so you can see how model behavior affects real users.
+- You want to try before you buy. We're self-serve with a [generous free tier](/pricing).
+
+It's completely free to get started – no credit card required. Our [setup wizard](/wizard) handles configuration in minutes, or you can check out our [AI observability docs](/docs/ai-observability) to do it yourself.
+
+<WizardCTA />
+
+## Frequently asked questions
+
+<details>
+<summary>What is LangSmith used for?</summary>
+
+**LangSmith** is an observability and evaluation platform built by LangChain for debugging, testing, and monitoring LLM applications. It is primarily used for tracing LLM calls and chains, managing and versioning prompts, running evaluation workflows to score model outputs, and building datasets for testing. It is most commonly used by teams building applications on top of the LangChain framework.
+
+</details>
+
+<details>
+<summary>Do I need to use LangChain to use LangSmith?</summary>
+
+No. LangSmith works across frameworks and has customers who do not use LangChain at all. That said, it delivers its deepest debugging experience for LangChain and LangGraph applications – things like zero-config setup, node-by-node state diffs, and native LangGraph agent graph visualization are only available within that ecosystem. 
+
+If you want [open-source](/blog/best-open-source-llm-observability-tools), [lower-cost](/blog/cheapest-ai-observability-tools), or product analytics-connected observability, alternatives like **Langfuse**, **PostHog**, or **Arize Phoenix** may be a better fit.
+
+</details>
+
+<details>
+<summary>How does LangSmith pricing compare to PostHog at scale?</summary>
+
+The two bill differently: LangSmith charges per trace (one per user request, regardless of internal steps) plus $39 per seat on its Plus plan. PostHog charges per event – roughly 6 events per request for a typical multi-step app (each LLM call, span, and embedding is one event) – with no seat fees.
+
+Here's what monthly volumes cost, assuming a 5-person team (LangSmith Plus at $195/month in seats, 10K traces included, $2.50 per 1K base trace overage) versus PostHog ($6 per 100K events after 100K free):
+
+This table is great, but broken for me. You might need to use HTML components to get it working.  
+
+This table is great, but broken for me. You might need to use HTML components to get it working.  
+
+| Requests/month | LangSmith (5 seats, base retention) | PostHog (~6 events/request) |
+| --- | --- | --- |
+| 100K | ~$420 | ~$30 |
+| 500K | ~$1,420 | ~$174 |
+| 1M | ~$2,670 | ~$354 |
+| 5M | ~$12,670 | ~$1,794 |
+
+Three things drive the gap. LangSmith's per-request rate is higher ($2.50 per 1K traces versus roughly $0.36 per 1K requests' worth of PostHog events). Seats add a fixed floor that grows with your team – a 10-person team starts at $390/month before a single trace. And LangSmith's base rate only buys 14-day retention; extended retention (400 days) doubles the trace rate to $5 per 1K, while PostHog's free plan retains data for a year.
+
+The honest caveats: PostHog's event count scales with instrumentation depth, so a simple one-call-per-request app emits fewer events (cheaper), while a complex agent emits more (the gap narrows but doesn't close – even at 40 events per request, PostHog is ~$12K at 5M requests, comparable to LangSmith *before* extended retention or extra seats). And LangSmith's included traces (10K on Plus) matter at very low volumes, where both tools are effectively free.
+
+Pricing current as of July 2026. For other alternatives, see our guide to the [cheapest AI observability tools](/blog/cheapest-ai-observability-tools).
+
+</details>
+
+<details>
+<summary>Why look for a LangSmith alternative?</summary>
+
+The most common reasons teams look for a LangSmith alternative are pricing, scope, and open-source requirements. LangSmith can become expensive at scale, does not cover product analytics, session replay, or feature flags, and is closed source with self-hosting available on Enterprise plans only.
+
+</details>
+
+<details>
+<summary>Is there a free or open-source LangSmith alternative?</summary>
+
+Yes. **Langfuse** is MIT-licensed and fully open source. **Arize Phoenix** is source-available under Elastic License 2.0 and free to self-host for internal use. **Lunary** is Apache 2.0 licensed with a free Community Edition for self-hosting. PostHog is also open source under MIT and includes a generous free cloud tier for LLM observability. 
+
+For a deeper look at the open-source options specifically, see our guide to the [best open-source LLM observability tools](/blog/best-open-source-llm-observability-tools).
+
+</details>
+
+<details>
+<summary>Can PostHog replace LangSmith?</summary>
+
+Yes – if your primary goal is understanding how AI features perform in production rather than running sophisticated evaluation workflows.
+
+**PostHog** covers LLM tracing, cost monitoring, and prompt tracking, while also connecting that data to product analytics, session replay, feature flags, and experiments, error tracking, and more in one platform.
+
+LangSmith remains stronger for advanced eval pipelines and LangGraph-native debugging. Although [PostHog has evals](/docs/ai-evals), if they are your primary requirement, Langfuse or Braintrust are stronger fits. 
+
+If you want to connect LLM behavior to real user outcomes, PostHog is one of the strongest alternatives available.
+
+</details>
+
+<details>
+<summary>Which LangSmith alternative is best for teams not focused on LangChain or LangGraph?</summary>
+
+**Langfuse** is the most popular open-source alternative and works with OpenAI, Anthropic, LlamaIndex, LiteLLM, and any OTel-compatible framework. **Arize Phoenix** is the strongest option if you want genuinely OTel-native instrumentation with built-in eval metrics. **PostHog** is the best choice if you want LLM observability connected to user behavior data. **Braintrust** is the strongest pick if eval workflows are your primary concern.
+
+</details>
+
+<details>
+<summary>Which LangSmith alternative is best for evals specifically?</summary>
+
+**Braintrust** is the strongest evaluation-focused alternative to LangSmith, with dataset curation, human review workflows, and CI/CD-gated releases. Langfuse is another strong option if you want an open-source evaluation tooling.
+
+</details>
+
+<details>
+<summary>What's the cheapest LangSmith alternative?</summary>
+
+For self-hosted deployments, **Langfuse** is free to self-host under MIT with no usage limits. **Arize Phoenix** is free to self-host under Elastic License 2.0 for internal use, and **Lunary's** Community Edition is free to self-host.
+
+For managed cloud offerings, **PostHog** has one of the most generous free tiers available – 100K AI observability events per month with no seat limits, compared to LangSmith's 5K traces and single seat. 
+
+Since PostHog doesn't charge per seat, costs don't grow with your team the way LangSmith's $39/seat pricing does. 
+
+For a full breakdown of how free tiers and pricing models compare, see our guide to the [cheapest AI observability tools](/blog/cheapest-ai-observability-tools).
+
+</details>
+
+<details>
+<summary>Is OpenTelemetry-based observability a viable alternative to LangSmith?</summary>
+
+OpenTelemetry is a data standard, not a platform. However, using OTel-native tools like **Arize Phoenix** or **Langfuse** is a viable alternative to LangSmith's proprietary SDK format. Because **LangSmith** also includes an OTel backend, instrumenting your application with OpenTelemetry makes it incredibly easy to switch between any of these observability tools without rewriting a single line of application logic.
+
+</details>
+
+<NewsletterForm />

@@ -40,6 +40,35 @@ Once done, you can now [query](/docs/data-warehouse/query) your new table using 
   classes="rounded"
 />
 
+## Direct Snowflake connections
+
+Instead of syncing data on a schedule, you can query your Snowflake database directly from the [SQL editor](https://app.posthog.com/sql). Direct connections run queries against your live Snowflake instance in real time — no data is copied into PostHog.
+
+To set up a direct connection:
+
+1. Open the [SQL editor](https://app.posthog.com/sql).
+2. Click the connection picker in the toolbar and select **Add direct connection** > **Snowflake**.
+3. Enter your Snowflake credentials (account identifier, database, warehouse, user, password, and optionally a role and schema) — the same credentials used for scheduled syncs.
+4. Select the tables you want to make available, then click **Link**.
+
+Once connected, switch to your Snowflake connection in the SQL editor's connection picker and write queries against your live data.
+
+### When to use direct connections vs scheduled syncs
+
+- **Direct connections** are best for ad-hoc exploration, querying data that changes frequently, or when you don't want to duplicate data into PostHog.
+- **Scheduled syncs** are better when you need faster query performance, want to join external data with PostHog events in dashboards and insights, or need data available across all PostHog features.
+
+### Limitations
+
+Direct Snowflake queries are read-only. Some HogQL constructs are not supported and return a clear error if used:
+
+- `SAMPLE`
+- `PREWHERE`
+- `ARRAY JOIN`
+- `LIMIT BY`
+- Tuple expressions
+- Array slices
+
 ## Troubleshooting
 
 ### Network policy blocking connection

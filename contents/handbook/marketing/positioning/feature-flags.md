@@ -4,6 +4,8 @@ sidebar: Handbook
 showTitle: true
 ---
 
+*For the canonical frame everyone at PostHog uses – the self-driving story and standard description – see [Brand foundations](/handbook/brand/foundations#how-we-describe-posthog).*
+
 ## Elevator pitch
 
 PostHog Feature Flags support boolean flags, multivariate variants, JSON payloads for config changes without deploys, and local evaluation for <50ms latency. Every flag is queryable alongside your analytics and session replay — filter any insight by which flag variant a user saw. And every flag PostHog Code ships is automatically wired into the analytics that measures whether it worked.
