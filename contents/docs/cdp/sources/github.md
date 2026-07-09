@@ -9,9 +9,9 @@ availability:
 sourceId: Github
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The GitHub connector syncs your repository data – issues, pull requests, commits, and more – into PostHog, so you can analyze engineering activity alongside your product data.
 
@@ -45,6 +45,19 @@ The workflow runs and workflow jobs tables can be kept up to date in real time u
 5. Enter a **Secret** and add the same value to the **Signing secret** field in PostHog
 6. Under **Which events would you like to trigger this webhook?**, choose **Let me select individual events** and tick **Workflow jobs** and **Workflow runs**
 7. Click **Add webhook**
+
+## Organization tables
+
+The `teams` and `team_members` tables sync organization-level data, letting you see which users belong to which teams. These tables require additional permissions beyond the standard repository scope:
+
+- **GitHub App (OAuth):** The **Members: Read** organization permission
+- **Personal access token:** The `read:org` scope
+
+These tables are only available for organization-owned repositories. They won't return data for user-owned repositories.
+
+Both tables are **disabled by default** during source setup. If your connection has the required permissions, you can enable them in the schema picker. If the permissions are missing, the picker shows which grant is needed.
+
+Both tables use full-refresh sync — the complete list is fetched each sync rather than tracking changes incrementally. This is fast since most organizations have relatively few teams and memberships.
 
 ## Configuration
 
