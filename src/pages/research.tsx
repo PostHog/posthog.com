@@ -167,7 +167,7 @@ function HeroSection({ teamCrestUrl }: { teamCrestUrl?: string }) {
                         </p>
                         <p className="text-sm text-secondary m-0">
                             <IconShieldLock className="size-4 text-green inline-block align-text-bottom mr-1" />
-                            EU cloud opted out of training by default · data anonymized first · opt out anytime –{' '}
+                            EU cloud opted out by default · anonymized before training · opt out anytime –{' '}
                             <Link to="#faq" className="underline">
                                 details in the FAQ
                             </Link>
@@ -394,21 +394,21 @@ const ROADMAP_ITEMS: { title: string; description: string; outcome: string; stat
         title: 'Data labeling suite',
         description:
             'Tooling to label anonymized product data, so models learn what healthy and broken user sessions actually look like.',
-        outcome: 'Models that know a broken session when they see one',
+        outcome: 'Models that recognize broken sessions',
         status: 'in progress',
     },
     {
         title: 'Session replay text renderer',
         description:
             'Rendering the DOM data behind replays as text a model can read, making replay analysis tractable at scale.',
-        outcome: 'AI that can watch thousands of your replays for you',
+        outcome: 'AI that watches replays at scale',
         status: 'in progress',
     },
     {
         title: 'Write data prep pipeline',
         description:
             'Anonymizing and normalizing opted-in data before any of it reaches training. The least glamorous step, and the one we refuse to get wrong.',
-        outcome: 'Training that never sees identifiable data',
+        outcome: 'Training never sees identifiable data',
         status: 'in progress',
     },
     {
@@ -422,14 +422,14 @@ const ROADMAP_ITEMS: { title: string; description: string; outcome: string; stat
         title: 'Train the Replay encoder model',
         description:
             'A foundation model pretrained on the raw data behind session replay, using novel techniques like a multi-axis RoPE built on additive Euler angles.',
-        outcome: 'Replays triaged automatically, at any volume',
+        outcome: 'Replays triaged automatically',
         status: 'up next',
     },
     {
         title: 'Train the end-to-end agent',
         description:
             'Agents that predict and simulate user behavior, catch problems before you ship, and propose the fix rather than a dashboard.',
-        outcome: 'Problems caught before your users find them',
+        outcome: 'Problems caught before users find them',
         status: 'help wanted',
     },
     {
@@ -441,7 +441,7 @@ const ROADMAP_ITEMS: { title: string; description: string; outcome: string; stat
     {
         title: 'Build an eval dataset',
         description: 'A benchmark of real product problems, so progress is measurable across every model iteration.',
-        outcome: 'Provable accuracy before anything reaches you',
+        outcome: 'Provable accuracy before anything ships',
         status: 'in progress',
     },
 ]
@@ -543,8 +543,8 @@ function OpenProblemsSection() {
                 <div className="flex-1">
                     <p className="font-bold m-0 mb-1">Want to own one of these?</p>
                     <p className="text-sm text-secondary m-0">
-                        We're hiring researchers to take these problems from whiteboard to arXiv – with the dataset, the
-                        compute, and the freedom to publish what you find.
+                        We're hiring researchers to take these problems from whiteboard to arXiv, with the dataset,
+                        compute, and freedom to publish.
                     </p>
                 </div>
                 <div className="flex flex-col @md:flex-row gap-3 shrink-0">
@@ -1240,7 +1240,8 @@ export default function ResearchPage({
                 })}
             />
             <Editor slug="/research" maxWidth="100%" hasPadding={false} disableFormatting>
-                <div className="@container not-prose font-rounded">
+                {/* text-pretty inherits: prevents 1-2 word widow lines in all copy at any window width */}
+                <div className="@container not-prose font-rounded text-pretty">
                     <header className="relative mb-12">
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/texture_tan_9608fcca70.png"
