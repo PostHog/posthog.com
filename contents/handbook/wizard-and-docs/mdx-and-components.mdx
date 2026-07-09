@@ -295,6 +295,24 @@ Use `<AskAIInput>` for troubleshooting sections:
 <AskAIInput placeholder="Ask about error tracking..." />
 ```
 
+#### Linking to PostHog AI in the app
+
+The `<MaxCTA>` component renders a callout that sends readers into the PostHog app with a question for PostHog AI:
+
+```jsx
+<MaxCTA question="What changed across my product this week?" />
+```
+
+Under the hood it builds a URL using the `#panel=max:` hash format, which you can also use directly in any link. The question must be URL-encoded (`encodeURIComponent`), and an optional prefix before the question controls what happens when the panel opens:
+
+| URL | Behavior |
+|-----|----------|
+| `https://app.posthog.com/#panel=max:What%20changed%3F` | Opens the PostHog AI side panel with "What changed?" pre-loaded, so the user can edit it before sending |
+| `https://app.posthog.com/#panel=max:?What%20changed%3F` | Same as above - `?` is the explicit pre-load modifier |
+| `https://app.posthog.com/#panel=max:!What%20changed%3F` | Auto-runs "What changed?" immediately, without waiting for the user to press enter |
+
+Use the pre-load form when the reader should review or adapt the question first, and the auto-run (`!`) form for CTAs where the question is fully self-contained, like `<MaxCTA>` does. The prefix parsing lives in `parseCommandString` in [`maxLogic`](https://github.com/PostHog/posthog/blob/master/frontend/src/scenes/max/maxLogic.tsx) in the app repo.
+
 ## Platform logos
 
 All platform logos are centralized in `src/constants/logos.ts`. To add a new platform:
