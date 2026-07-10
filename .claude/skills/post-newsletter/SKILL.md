@@ -153,7 +153,27 @@ After writing the file, invoke the `/suggest-links` skill passing the path to th
 
 Apply all **High priority** forward link suggestions. Apply backlink suggestions to all 3 candidate files.
 
-## Step 4: Report to the user
+## Step 5: Verify against the source
+
+Before reporting to the user, spawn a subagent (via the Agent tool, `subagent_type: general-purpose`) to independently check the finished markdown file against the original newsletter — it should read both fresh rather than trust anything from this conversation.
+
+**Ground truth, in order of preference:**
+
+1. If the user provided a saved HTML export of the Substack page (rather than just the URL), use that as ground truth. It's large and mostly boilerplate — instruct the subagent to locate the article body (typically inside a `<div class="body markup">`-style container) and strip tags with a quick script rather than reading the whole file.
+2. Otherwise, have the subagent WebFetch the newsletter URL fresh. Note: WebFetch may refuse to reproduce full verbatim text for a copyrighted article and return only a summary with short quotes — if so, the subagent should say so explicitly and verify what it can (structure, links, image count and placement, footnote count) rather than silently downgrading to a shallow check.
+
+**Tell the subagent what's allowed to differ** so it doesn't flag intentional transformations as bugs:
+
+- Absolute `https://posthog.com/...` links relativized to `/...`, with UTM query params stripped from links to other posthog.com pages. External links must be byte-identical, query params included.
+- Image URLs re-hosted on Cloudinary (`res.cloudinary.com/dmukukwp6/...`) instead of the original Substack CDN — check position relative to surrounding text, not the URL itself.
+- Subtitle, byline, and related-reading/job-post sections intentionally absent (confirm they're gone, not missing content).
+- New forward/backlink markup added by `/suggest-links` wrapping existing text (not a wording change).
+
+**What must NOT differ:** wording of any sentence, paragraph, or footnote; link anchor text and destination for external links; code/prompt block contents (character-for-character); footnote numbering and citation text; image position relative to the same surrounding sentence/heading.
+
+Ask the subagent to go section by section and return a clear verdict (match / discrepancies found) with quotes proving any mismatch. If it finds real discrepancies, fix them and re-verify before moving on.
+
+## Step 6: Report to the user
 
 After all edits, report:
 
