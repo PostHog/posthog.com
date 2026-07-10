@@ -9,7 +9,7 @@ import { CallToAction } from 'components/CallToAction'
 
 <CalloutBox icon="IconFlask" title="Open beta" type="action">
 
-Self-driving is currently in open beta.
+Self-driving is in open beta. It's improving quickly – expect rough edges, and expect them to disappear fast.
 
 </CalloutBox>
 
@@ -42,6 +42,16 @@ When a scout emits a report, PostHog also captures a `$scout_report_emitted` eve
 
 Because it's a regular event in your stream, everything in PostHog can build on your scouts' output with nothing to wire up: query scout activity with [SQL](/docs/sql), chart it in an insight, set an [alert](/docs/alerts) on it, or point a [destination](/docs/cdp) at it – like forwarding every surfaced report to a [Slack channel](/docs/cdp/destinations/slack), templated from the event's title, summary, and link.
 
+Try it: this query lists your fleet's most recent findings.
+
+```sql
+SELECT properties.skill_name AS scout, properties.title, properties.priority, properties.report_url
+FROM events
+WHERE event = '$scout_report_emitted'
+ORDER BY timestamp DESC
+LIMIT 20
+```
+
 Scout report events are captured against a synthetic per-scout ID with person processing off, so they never create person profiles or mix into your user analytics.
 
 ## Built-in and custom scouts
@@ -56,8 +66,8 @@ The difference is how they look. A signal source watches a single stream in real
 
 ## Next step
 
-Whether a scout files a report directly or lets the pipeline do the grouping, every finding is built on signals. See what's in one.
+Meet the scouts PostHog ships with, and steal ideas for your own.
 
-<CallToAction type="primary" to="/docs/self-driving/signals">
-  Signals
+<CallToAction type="primary" to="/docs/self-driving/scout-examples">
+  Scout examples
 </CallToAction>

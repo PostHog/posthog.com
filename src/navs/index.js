@@ -2221,6 +2221,10 @@ export const docsMenu = {
                     url: '/docs/self-driving/self-improving-loop',
                 },
                 {
+                    name: 'Anatomy of a pull request',
+                    url: '/docs/self-driving/anatomy-of-a-pr',
+                },
+                {
                     name: 'Context',
                     url: '/docs/self-driving/context',
                 },
@@ -2278,6 +2282,10 @@ export const docsMenu = {
                 {
                     name: 'Pricing',
                     url: '/docs/self-driving/pricing',
+                },
+                {
+                    name: 'FAQ',
+                    url: '/docs/self-driving/faq',
                 },
             ],
         },
