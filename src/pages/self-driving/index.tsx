@@ -532,35 +532,6 @@ const humanRoles: { heading: string; copy: string; image: string; alt: string }[
     },
 ]
 
-// The self-driving manifesto – what we believe about where software is going.
-// Keep these aligned with the brand messaging framework in /handbook/brand/foundations.
-const manifesto: { title: string; copy: string }[] = [
-    {
-        title: "Data shouldn't sit in dashboards.",
-        copy: 'A dashboard is a to-do list nobody was assigned. If your product data knows something is broken, something should happen.',
-    },
-    {
-        title: 'A product should prompt itself.',
-        copy: 'The signals were always there – errors, replays, tickets. Waiting for a human to notice them was the bottleneck, not the intelligence.',
-    },
-    {
-        title: 'Robots do maintenance. Humans do creative work.',
-        copy: 'Bots are great at fixing bugs and tuning what exists. People are best at deciding what should exist. Self-driving frees you up for build mode.',
-    },
-    {
-        title: 'Nothing ships without you.',
-        copy: "Self-driving means autonomy from instruction, not from the engineer. Agents don't wait to be told every step – and they never touch the merge button.",
-    },
-    {
-        title: 'Pay for outcomes, not effort.',
-        copy: "No seats, no tokens, no metering anxiety. A flat price per pull request, and a refund if it wasn't worth paying for.",
-    },
-    {
-        title: 'No black boxes.',
-        copy: 'The scouts that watch your product are skills you can read, fork, and rewrite. Trust is easier when you can view source.',
-    },
-]
-
 const faqItems = [
     {
         trigger: 'What is a self-driving product?',
@@ -1000,31 +971,6 @@ export default function SelfDrivingPage(): JSX.Element {
                                             className="w-full !block"
                                             imgClassName="w-full !block"
                                         />
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-
-                        {/* The self-driving manifesto */}
-                        <h3>
-                            The self-driving <Highlight>manifesto</Highlight>
-                        </h3>
-                        <p>
-                            Six things we believe about where software is going. We built PostHog around them, and{' '}
-                            <Link to="/docs/self-driving" state={{ newWindow: true }}>
-                                the docs
-                            </Link>{' '}
-                            hold us to them.
-                        </p>
-                        <div className="not-prose my-6 grid grid-cols-1 gap-3 @md/reader-content:grid-cols-2">
-                            {manifesto.map(({ title, copy }, index) => (
-                                <div key={title} className="flex gap-3 rounded-md border border-primary bg-primary p-4">
-                                    <span className="text-2xl font-bold leading-none text-red dark:text-yellow">
-                                        {String(index + 1).padStart(2, '0')}
-                                    </span>
-                                    <div>
-                                        <p className="m-0 text-base font-bold text-primary">{title}</p>
-                                        <p className="m-0 mt-1 text-sm text-secondary">{copy}</p>
                                     </div>
                                 </div>
                             ))}
