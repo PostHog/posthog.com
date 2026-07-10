@@ -18,6 +18,7 @@ That means:
 - **Honest.** Including about limitations. Developers trust honesty more than polish.
 - **Conversational.** Contractions are fine. Starting a sentence with "But" or "And" is fine.
 - **No jargon for jargon's sake.** Technical precision when it helps. No buzzwords.
+- **No emojis.** Emojis come off as try-hard and cringe. Avoid them, and prioritize using plain English.
 
 If there's an industry-standard phrase, question if it's actually the best way to describe something – or if somebody came up with it once and then everyone else followed suit. Maybe it makes sense to stick with it, but we also have the unique opportunity to coin a new term if the juice is worth the squeeze.
 
@@ -39,7 +40,7 @@ These make copy feel weak and corporate. Cut them:
 | "best-in-class"         | show, don't claim                            |
 | "holistic"              | comprehensive, or just describe the parts    |
 | "seamless"              | describe *why* it's easy                     |
-| "synergy"               | C'mon, really... |
+| "synergy"               | C'mon, really...                             |
 
 ### Passive voice
 
@@ -94,3 +95,36 @@ On that last one: PostHog makes _your_ product self-driving. Keep the customer's
 | ✅ Do                                              | ❌ Don't                                                      |
 | ------------------------------------------------- | ------------------------------------------------------------ |
 | "You've been quiet for a bit. Here's what's new." | "We noticed you haven't engaged with our platform recently and wanted to reach out." |
+
+### Social Media  
+
+<table>
+  <colgroup>
+    <col style={{ width: '50%' }} />
+    <col style={{ width: '50%' }} />
+  </colgroup>
+  <thead>
+    <tr>
+      <th>✅ Do</th>
+      <th>❌ Don't</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>"We have a million products and never talk about most of them, so here's a full list"</td>
+      <td>"PostHog has more than two dozen varied products for your needs. They are:"</td>
+    </tr>
+    <tr>
+      <td>"Introducing PostHog Code, the product editor that:<br/>• Understands your product<br/>• Identifies usage patterns<br/>• Triages bugs and errors for you<br/>• Creates PRs to fix them<br/>• Continuously monitors and improves your product"</td>
+      <td>"PostHog Code is the product editor that understands your product, identifies usage patterns, triages bugs and errors for you, creates PRs to fix them, and continuously monitors and improves your product."</td>
+    </tr>
+    <tr>
+      <td>"Fable 5's in PostHog Code (again)"</td>
+      <td>"We're proud to announce that Fable 5 is now available in PostHog Code. Happy coding!"</td>
+    </tr>
+    <tr>
+      <td>(reply) "this is incredible"</td>
+      <td>(reply) "Nice work! We love it!" 😁</td>
+    </tr>
+  </tbody>
+</table>

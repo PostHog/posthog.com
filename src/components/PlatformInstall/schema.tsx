@@ -493,6 +493,21 @@ export const mcpInstallSchema: InstallSchema = {
     platforms: installPlatforms,
 }
 
+// Display shows a clean command; the copy pins `-y` (auto-confirm) and `@latest` (freshness).
+const { displayCommand: cliWizardCommand, copyCommand: cliWizardCommandCopy } = buildWizardCommand({
+    subcommand: 'cli add',
+})
+
+export const cliInstallSchema: InstallSchema = {
+    title: 'Install the PostHog CLI',
+    defaultCommand: cliWizardCommand,
+    defaultCopyCommand: cliWizardCommandCopy,
+    supports: <>Installs the CLI and adds instructions to your coding agent</>,
+    // No per-client picker: CLI install is the same global binary everywhere. The manual
+    // npm fallback and per-agent setup live in the surrounding docs.
+    platforms: [],
+}
+
 export const wizardInstallSchema: InstallSchema = {
     title: 'Get started',
     titleTooltip: (

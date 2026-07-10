@@ -56,6 +56,7 @@ import { langsmith } from '../../hooks/competitorData/langsmith'
 import { launchdarkly } from '../../hooks/competitorData/launchdarkly'
 import { logrocket } from '../../hooks/competitorData/logrocket'
 import { lucky_orange } from '../../hooks/competitorData/lucky_orange'
+import { lunary } from '../../hooks/competitorData/lunary'
 import { mailerlite } from 'hooks/competitorData/mailerlite'
 import { matomo } from '../../hooks/competitorData/matomo'
 import { mixpanel } from '../../hooks/competitorData/mixpanel'
@@ -71,6 +72,7 @@ import { pendo } from '../../hooks/competitorData/pendo'
 import { piwik_pro } from '../../hooks/competitorData/piwik_pro'
 import { plausible } from '../../hooks/competitorData/plausible'
 import { posthog } from '../../hooks/competitorData/posthog'
+import { portkey } from '../../hooks/competitorData/portkey'
 import { quantum_metric } from '../../hooks/competitorData/quantum_metric'
 import { raygun } from '../../hooks/competitorData/raygun'
 import { replay_io } from '../../hooks/competitorData/replay_io'
@@ -659,6 +661,7 @@ export default function ProductComparisonTable({
         launchdarkly,
         logrocket,
         lucky_orange,
+        lunary,
         mailerlite,
         matomo,
         mixpanel,
@@ -674,6 +677,7 @@ export default function ProductComparisonTable({
         piwik_pro,
         plausible,
         posthog,
+        portkey,
         quantum_metric,
         raygun,
         replay_io,

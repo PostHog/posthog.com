@@ -158,7 +158,7 @@ You can then just call the `"next"` URL to get the next set of results.
 PostHog partners with GitHub to automatically detect exposed API keys in public repositories. When GitHub detects a leaked key, we take immediate action:
 
 - **Personal API keys** (`phx_`): The key is automatically rolled and the user is notified via email.
-- **Project secret API keys and feature flags secure API keys** (`phs_`): Project admins and owners are notified via email so they can roll or rotate the key.
+- **Feature flags secure API keys** (`phs_`): Project admins and owners are notified via email so they can rotate the key.
 - **OAuth access tokens** (`pha_`): The key and its associated refresh token are automatically revoked and the user is notified via email.
 - **OAuth refresh tokens** (`phr_`): The key and its associated access token are automatically revoked and the user is notified via email.
 
