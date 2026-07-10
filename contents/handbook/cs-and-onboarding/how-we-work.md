@@ -82,19 +82,9 @@ You will run into questions that you don't know the answer to from time to time 
 
 Most of our customers use Slack, and it's a great way for us to be responsive to them. Everyone has the permission in Slack to create a Connect channel with a customer, and you should do this as early as possible in your relationship with them.
 
-When you've created the channel you should also add Pylon, which is used to sync Slack conversations with Zendesk so that our Support and Engineering teams can work on customer issues in a familiar context.
+When you've created the channel you should also add SupportHog, our own tool that syncs Slack conversations with PostHog so that our Support and Engineering teams can work on customer issues in a familiar context. Follow the [shared Slack channel setup steps](/handbook/growth/sales/slack-channels#setting-up-a-shared-slack-channel-via-slack-connect) to invite SupportHog and configure the channel.
 
-To add Pylon to your customer channel:
-
-1. In the Slack desktop app, click the channel name.
-2. On the Settings tab, click Add apps.
-3. Type Pylon and click Add.
-4. In the popup that appears in the Slack channel, select Customer Channel.
-5. Add yourself as the Account Owner.
-6. Click Enable.
-7. Add Tim, Charles, and Abigail to the channel.
-
-Once enabled, you can add the :ticket: emoji to a Slack thread to create a new Ticket in Zendesk.  Customers can also do this.  Make sure that a Group and Severity are selected or the ticket won't be routed properly.
+Once it's in the channel, you can add the :ticket: emoji to a Slack thread — or mention `@SupportHog` — to create a new ticket in Zendesk.  Customers can also do this.
 
 > It's your job to ensure your customer issues are resolved, make sure you follow up with Support and Engineering if you feel like the issue isn't getting the right level of attention.
 
@@ -105,11 +95,11 @@ We use Gmail for our email and the team uses many different clients from [Superh
 **Calendly:**
 We use Calendly for scheduling meetings. In order to schedule a meeting between a customer and multiple members on the PostHog team, click on "Event types" in the left hand navigation, then click "+ New Event Type" button in the top right, and select "Group" from the dropdown. This will allow you to create a group meeting and add multiple team members to the event and create a link you can share with the customer.
 
-**Gong**
-We use Gong for call recording and notetaking. You will need to integrate Gong with your calendar so it can automatically join your calls. You can request access via Zluri (type /zluri in any Slack channel), then follow the setup steps on the [Sales & CS Tools handbook page](/handbook/growth/sales/sales-and-cs-tools). Note that Gong requires a Zoom Pro account, and you will want the Gong Meeting Manager extension to trigger the consent page when joining calls.
-
-**BuildBetter:**
-We used BuildBetter for call recording and note-taking. Some recordings in BuildBetter are still used for training purposes.
-
 **Zoom:**
-We use Zoom for sales calls, and if you have Calendly properly integrated, calls that are booked through the tool will default to Zoom. You can find backgrounds to use for the calls here: [This is fine \(and other awesome PostHog wallpapers\)](/blog/posthog-wallpapers).
+We use Zoom for all customer and sales calls. If you have Calendly properly integrated, calls that are booked through the tool will default to Zoom. You can find backgrounds to use for the calls here: [This is fine \(and other awesome PostHog wallpapers\)](/blog/posthog-wallpapers).
+
+**Gong:**
+We use Gong to record calls. Once it's set up, Gong automatically joins your Zoom calls and saves the recording to a shared library the whole team can search and review. See [sales & CS tools](/handbook/growth/sales/sales-and-cs-tools#connecting-them-together) for how to connect Gong to your Zoom calls. [BuildBetter](https://app.buildbetter.app) is still where we store historical demos and meetings, and some teams continue to use it.
+
+**Granola:**
+We use Granola for transcripts and AI notes. It runs on your laptop and transcribes whatever call you're in, so you get a transcript without adding another bot to the meeting.
