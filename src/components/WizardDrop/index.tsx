@@ -52,13 +52,17 @@ export default function WizardDrop(): JSX.Element | null {
     const initialized = useRef(false)
     const wasAwaitingInstall = useRef(false)
 
-    // This is an A/B experiment (feature flag `wizard-drop`, control/test): only the `test`
-    // variant renders the drop; `control` and unflagged visitors get nothing. `flags` (from
-    // onFeatureFlags) is the reactive trigger — it flips non-null once flags resolve — while
-    // getFeatureFlag returns the assigned variant and emits the `$feature_flag_called` exposure.
-    // Fail-closed while flags load. To exercise locally, override the flag with PostHog:
-    // `posthog.featureFlags.override({ 'wizard-drop': 'test' })` or the toolbar.
-    const enabled = !!flags && posthog?.getFeatureFlag?.(FEATURE_FLAG) === 'test'
+    // Gated on the `wizard-drop` experiment: only the `test` variant renders the drop; `control`
+    // and unflagged visitors get nothing. `flags` (from onFeatureFlags) is the reactive trigger —
+    // it flips non-null once flags resolve — while getFeatureFlag returns the assigned variant and
+    // emits the `$feature_flag_called` exposure. Fail-closed while flags load.
+    //
+    // In local `gatsby develop`, posthog never loads (the custom `src/html.tsx` that injects it
+    // isn't applied in dev), so the flag can't resolve — always enable in development so the flow
+    // is testable locally. This branch is dead-code-eliminated from production builds, where the
+    // experiment variant is the only gate.
+    const enabled =
+        process.env.NODE_ENV === 'development' || (!!flags && posthog?.getFeatureFlag?.(FEATURE_FLAG) === 'test')
 
     const capture = useCallback(
         (event: string, properties?: Record<string, unknown>) => {
