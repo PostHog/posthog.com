@@ -25,7 +25,7 @@ localStorage.setItem('wizard-drop-preview', '1')
 ## State machine
 
 ```
-idle ── Connect GitHub ──▶ connecting ──(redirect)──▶ github-start → GitHub OAuth → github-callback
+idle ── Connect GitHub ──▶ connecting ──(redirect)──▶ github-start → GitHub OAuth → github/callback
                                                                         │ ?drop=connected
 loading ◀───────────────────────────────────────────────────────────────┘
    │ session → repos
@@ -83,17 +83,26 @@ Magic repositories drive every scenario (state resets when the dev server restar
 | `mock-dev/existing-user` | `requires_auth` → interstitial → local consent round trip → `?drop=done` |
 | `mock-dev/rate-limited` | 429 → rate-limit error panel |
 
-Also exercisable: the first two repo polls return "not installed" (awaiting-install state), the first grant exchange simulates the one-time CIMD `202 registering` delay, `/api/wizard/repos?mock_expire=1` force-expires the grant, `/api/wizard/github-callback?error=access_denied` renders the denial error, and each `/wizard?drop=error&code=…` URL renders its copy directly.
+Also exercisable: the first two repo polls return "not installed" (awaiting-install state), the first grant exchange simulates the one-time CIMD `202 registering` delay, `/api/wizard/repos?mock_expire=1` force-expires the grant, `/api/wizard/github/callback?error=access_denied` renders the denial error, and each `/wizard?drop=error&code=…` URL renders its copy directly.
 
-## Contract-reconciliation checklist (when the monorepo endpoints ship)
+The confirm step always shows an editable email field, defaulted from the GitHub-supplied address (empty when GitHub exposes none); the entered value is what `provision` sends to `account_requests`.
 
-The upstream endpoints are net-new per the RFC and all parsing lives in `src/lib/wizard-drop/provisioning.ts`. Verify against the real backend:
+## Contract-reconciliation checklist (against the shipped monorepo endpoints)
 
-- [ ] `POST /api/agentic/provisioning/github/grants` request/response field names (`grant_id`, `gh_login`, `email`)
-- [ ] `GET …/github/grants/{id}/repositories` shape (`installed`, `installation_id`, `repositories[].full_name`) and how grant-expiry is signaled (assumed: 404/410 or an error code containing "grant")
-- [ ] `configuration.wizard` block acceptance on `account_requests` + `wizard` result on the response (`{task_id, run_id}` / `{error}`)
-- [ ] Resource actions `POST …/resources/{team_id}/github_integration` and `…/wizard_runs` (envelope: flat vs `complete`)
-- [ ] `available_teams[0]` is the bootstrap/consented team on the token response
-- [ ] Real `202 registering` timing on first CIMD contact (retry budget: 2 × ≤5s)
-- [ ] CIMD registration with the real `phvt_` verification token in `static/.well-known/wizard-drop-client.json`
-- [ ] Provisioning scopes: `PROVISIONING_SCOPES` in `config.ts` must match `com.posthog.scopes` in the CIMD document
+All parsing lives in `src/lib/wizard-drop/provisioning.ts`. Reconciled against the monorepo implementation:
+
+- [x] `POST …/github/grants` returns `{grant_id, gh_login, email, expires_in: 3600}` — email fetched server-side (`/user/emails`), `email` is `string | null` (null = GitHub has no verified email; still a usable grant). The account email is collected **inline** in the confirm step (defaulted from this value when present), so `provision` sends the entered address to `account_requests`, not the grant's copy.
+- [x] `email_unavailable` is now a **502** meaning the GitHub App lacks the "Email addresses (read)" permission (PostHog-side misconfig) — handled as a **terminal** error + manual fallback (like `github_unavailable`), NOT the inline-email path. The no-verified-email case is the `email: null` success above, not this.
+- [x] `GET …/github/grants/{id}/repositories` returns `{gh_login, installations: [{id, account_login, repository_selection}], repositories: [{installation_id, full_name, default_branch, private}]}` — no `installed` flag (installed iff `installations` non-empty); repos capped at 300/installation (never treated as exhaustive); each repo carries its own `installation_id`. Any 404 → restart Phase A.
+- [x] `configuration.wizard` block `{grant_id, installation_id, repository, branch?}`; partial failure is **HTTP 200** with `wizard.error` alongside `oauth.code` — we branch on presence of `wizard.error`, not status.
+- [x] Retry path: exchange OAuth code → `github_integration` (idempotent) → `wizard_runs`. Wizard-run budget is 2/h, 5/day (shared with the bundled path) → exactly one retry, then degraded.
+- [x] `available_teams[0]` is the bootstrap/consented team on the token response.
+
+- [x] **redirect_uri** — this repo serves `/api/wizard/github/callback` (the function lives at `src/api/wizard/github/callback.ts`), matching the slash path registered in the GitHub App console. Byte-identical across the authorize URL, the `github/grants` body, and the console.
+- [x] `oauth-callback` redirect_uri — under CIMD there is **no** separate `OAuthApplication` registration; `redirect_uris` are declared in the metadata document (`static/.well-known/wizard-drop-client.json`). Nothing to register out-of-band. (The RFC's "register OAuthApplication redirect_uris" was from the pre-CIMD HMAC design.)
+
+Still open (ops / cross-repo coordination):
+
+- [ ] Repo-poll budget is 120/grant/rolling-hour; poll interval is 5s (≈60 calls over the 5-min timeout, within budget). A 429 mid-poll currently surfaces as `fetch_failed` and stops polling — it does not honor `Retry-After`.
+- [x] **CIMD verification token** — a real `phvt_` token (created in org settings → CIMD verification tokens) is set in `com.posthog.verification_token` in the metadata document. It links the app to the PostHog org and grants a **higher provisioning rate limit** + identity trail (vs. the default `github/grants` 10/h per partner). The token is embedded in the public CIMD doc by design; PostHog stores only a hash.
+- [x] **Provisioning scopes** — the drop's resource actions authorize by team-scoping + CIMD partner auth, not OAuth scopes, so no specific scope is required. We request a minimal `["organization:read", "project:read"]` (least privilege) in both `PROVISIONING_SCOPES` (`config.ts`) and `com.posthog.scopes` (CIMD doc); they must stay equal. Both are unprivileged/grantable, so CIMD registration accepts them and the token mints within the app ceiling.

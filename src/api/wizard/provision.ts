@@ -23,6 +23,9 @@ export type ResumeCookie = {
     branch?: string
 }
 
+/** Sanity check only; the provisioning API is the authoritative email validator. */
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
 /**
  * Phase C of the drop (RFC "End-to-end flow"): one confirm click provisions the account and
  * starts the wizard run via the bundled `configuration.wizard` block on account_requests.
@@ -53,8 +56,11 @@ const handler = async (req: GatsbyFunctionRequest, res: GatsbyFunctionResponse) 
     const installationId = Number(body.installation_id)
     const repository = typeof body.repository === 'string' ? body.repository : ''
     const branch = typeof body.branch === 'string' && body.branch ? body.branch : undefined
-    if (!Number.isInteger(installationId) || !repository) {
-        return res.status(400).json({ error: 'installation_id and repository are required' })
+    // Email is collected inline in the drop UI (defaulted from GitHub) and always sent explicitly,
+    // so it comes from the browser rather than the grant — the grant's copy may be absent.
+    const email = typeof body.email === 'string' ? body.email.trim() : ''
+    if (!Number.isInteger(installationId) || !repository || !EMAIL_RE.test(email)) {
+        return res.status(400).json({ error: 'installation_id, repository, and a valid email are required' })
     }
 
     const client = getProvisioningClient()
@@ -64,7 +70,7 @@ const handler = async (req: GatsbyFunctionRequest, res: GatsbyFunctionResponse) 
     try {
         account = await client.createAccountRequest({
             id: crypto.randomUUID(),
-            email: grant.email,
+            email,
             name: grant.gh_login,
             scopes: PROVISIONING_SCOPES,
             code_challenge: pkce.challenge,

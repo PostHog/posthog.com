@@ -27,11 +27,17 @@ export const config = {
 export const API_VERSION = '0.1d'
 
 /**
- * Scopes requested on account_requests. Empty for now — the provisioning scope set for drop
- * accounts is a monorepo-side decision; keep this and the CIMD document's `com.posthog.scopes`
- * in sync when it's settled.
+ * Scopes requested on account_requests → the scope of the minted partner token.
+ *
+ * The drop's team-scoped resource actions (`github_integration`, `wizard_runs`) and the
+ * `resources` create authorize by team-scoping (`team_id in scoped_teams`) + CIMD partner auth,
+ * NOT by OAuth scopes — so nothing in the flow enforces a specific scope. We still request a
+ * minimal read set for least privilege (the alternative, sending `[]`, defaults the token to the
+ * broad `StripeIntegration.SCOPES`, including writes it never uses). Both entries are unprivileged
+ * and grantable. Must stay in sync with `com.posthog.scopes` in the CIMD document (the app's scope
+ * ceiling) — a mismatch either fails token minting (`invalid_scope`) or over-grants.
  */
-export const PROVISIONING_SCOPES: string[] = []
+export const PROVISIONING_SCOPES: string[] = ['organization:read', 'project:read']
 
 export const COOKIES = {
     /** CSRF nonce for the GitHub OAuth leg. */

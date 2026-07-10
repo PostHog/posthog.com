@@ -4,10 +4,10 @@
  * Upstream (PostHog app) shapes come from two sources:
  * 1. Existing agentic provisioning endpoints (`account_requests`, `oauth/token`, `resources`) —
  *    transcribed from `ee/api/agentic_provisioning/views.py` in the monorepo.
- * 2. Net-new endpoints defined by the RFC (`wizard-drop-rfc.md` at the repo root) that the
- *    monorepo has not shipped yet: GitHub grants and the `configuration.wizard` block.
- *    Those shapes are this repo's best guess at the contract — reconcile them in
- *    `provisioning.ts` (the single parsing point) once the backend lands.
+ * 2. Net-new endpoints defined by the RFC (`wizard-drop-rfc.md` at the repo root): the GitHub
+ *    grant store and the `configuration.wizard` block. These are reconciled against the monorepo
+ *    implementation; all parsing lives in `provisioning.ts` (the single parsing point). See the
+ *    reconciliation checklist in `components/WizardDrop/README.md` for the open coordination items.
  */
 
 export type ProvisioningError = { code: string; message: string }
@@ -66,15 +66,35 @@ export type ResourceCreateResponse = {
     complete: { access_configuration: { api_key: string; host: string } }
 }
 
-// ---- Net-new endpoints (RFC contract; not shipped in the monorepo yet) ----
+// ---- Net-new endpoints (GitHub grant store; reconciled against the monorepo) ----
 
-export type GithubGrant = { grant_id: string; gh_login: string; email: string }
+// `email` is null when GitHub reports no verified email — still a fully usable grant (the drop
+// collects the address inline). It is NOT the App-permission-refusal case, which is a 502
+// `email_unavailable` handled as a terminal misconfiguration error.
+export type GithubGrant = { grant_id: string; gh_login: string; email: string | null; expires_in?: number }
 
-export type GrantRepository = { full_name: string; default_branch?: string }
+/**
+ * One repo the grant can open a PR against. `installation_id` is carried per-repo because a user
+ * can have the App installed on several accounts (orgs + personal) — the upstream listing returns
+ * a flat `repositories` array where each entry names its own installation, and the wizard block /
+ * github_integration action both need the installation that owns the *selected* repo.
+ */
+export type GrantRepository = {
+    full_name: string
+    default_branch?: string
+    installation_id: number
+    private?: boolean
+}
 
-export type GrantRepositoriesResponse =
-    | { installed: true; installation_id: number; repositories: GrantRepository[] }
-    | { installed: false }
+/**
+ * Normalized in `provisioning.ts` from the upstream
+ * `{gh_login, installations: [...], repositories: [...]}` shape. `installed: false` means no
+ * installation exists yet (empty `installations`); `installed: true` with an empty `repositories`
+ * is a real state (installation granted zero repos) handled as the `no_repos` terminal error.
+ * The list can be truncated (upstream caps at 300 repos/installation), so it is never treated as
+ * exhaustive.
+ */
+export type GrantRepositoriesResponse = { installed: true; repositories: GrantRepository[] } | { installed: false }
 
 export type WizardRunResponse = { task_id: string; run_id: string }
 
@@ -83,7 +103,7 @@ export type WizardRunResponse = { task_id: string; run_id: string }
 export type SessionResponse = { connected: boolean; gh_login?: string; email?: string }
 
 export type ReposApiResponse =
-    | { installed: true; installation_id: number; repositories: GrantRepository[] }
+    | { installed: true; repositories: GrantRepository[] }
     | { installed: false; install_url: string }
     | { error: 'not_connected' | 'grant_expired' | 'fetch_failed' }
 

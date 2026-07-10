@@ -8,6 +8,7 @@ export type DropErrorCode =
     | 'github_denied'
     | 'github_auth'
     | 'grant_exchange'
+    | 'email_unavailable'
     | 'grant_expired'
     | 'resume_expired'
     | 'install_timeout'
@@ -33,6 +34,13 @@ const ERRORS: Record<DropErrorCode, ErrorSpec> = {
     github_denied: { message: 'GitHub authorization was cancelled, so we stopped there.', restartable: true },
     github_auth: { message: "We couldn't complete the GitHub connection.", restartable: true },
     grant_exchange: { message: "We couldn't finish connecting your GitHub account.", restartable: true },
+    email_unavailable: {
+        // 502 from github/grants: the GitHub App is missing the email-read permission (our
+        // misconfiguration). Reconnecting won't help, so this is terminal + manual fallback.
+        message:
+            "Something went wrong on our end while connecting GitHub. Please use the manual setup below — we're on it.",
+        restartable: false,
+    },
     grant_expired: { message: 'Your GitHub connection expired. Reconnecting only takes a click.', restartable: true },
     resume_expired: {
         message: 'This session expired before we could finish. Reconnecting only takes a click.',

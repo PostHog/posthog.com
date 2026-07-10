@@ -1,9 +1,9 @@
 import { GatsbyFunctionRequest, GatsbyFunctionResponse } from 'gatsby'
 
-import { COOKIES, COOKIE_MAX_AGE, config } from '../../lib/wizard-drop/config'
-import { clearCookie, parseCookies, setCookie, sign, verify } from '../../lib/wizard-drop/cookies'
-import { redirectWithDrop, redirectWithError } from '../../lib/wizard-drop/http'
-import { getProvisioningClient } from '../../lib/wizard-drop/provisioning'
+import { COOKIES, COOKIE_MAX_AGE, config } from '../../../lib/wizard-drop/config'
+import { clearCookie, parseCookies, setCookie, sign, verify } from '../../../lib/wizard-drop/cookies'
+import { redirectWithDrop, redirectWithError } from '../../../lib/wizard-drop/http'
+import { ProvisioningRequestError, getProvisioningClient } from '../../../lib/wizard-drop/provisioning'
 
 /**
  * GitHub OAuth return leg. Verifies the CSRF state (signature + double-submit against the
@@ -30,7 +30,7 @@ const handler = async (req: GatsbyFunctionRequest, res: GatsbyFunctionResponse) 
 
         const grant = await getProvisioningClient().createGithubGrant({
             code,
-            redirect_uri: `${config.siteUrl}/api/wizard/github-callback`,
+            redirect_uri: `${config.siteUrl}/api/wizard/github/callback`,
         })
         setCookie(
             res,
@@ -40,7 +40,14 @@ const handler = async (req: GatsbyFunctionRequest, res: GatsbyFunctionResponse) 
         )
         return redirectWithDrop(res, 'connected')
     } catch (error) {
-        console.error('wizard drop: github-callback failed', error)
+        // `email_unavailable` (502) means the GitHub App is missing the "Email addresses (read)"
+        // permission — a PostHog-side misconfiguration, not the visitor's problem. (No verified
+        // email is NOT this: it returns a 200 grant with email: null and flows through the inline
+        // email field.) So this is a terminal error + manual fallback, like github_unavailable.
+        if (error instanceof ProvisioningRequestError && error.code === 'email_unavailable') {
+            return redirectWithError(res, 'email_unavailable')
+        }
+        console.error('wizard drop: github/callback failed', error)
         return redirectWithError(res, 'grant_exchange')
     }
 }
