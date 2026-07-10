@@ -13,7 +13,7 @@ Self-driving is in open beta. It's improving quickly – expect rough edges, and
 
 </CalloutBox>
 
-The rest of these docs describe the [self-improving loop](/docs/self-driving/self-improving-loop) in the abstract. This page follows one bug all the way through it, from the first signal to the measured fix. The product is a composite example, but every step is exactly what self-driving does.
+The concepts docs describe the [self-improving loop](/docs/self-driving/self-improving-loop) in the abstract. This page follows one bug all the way through it, from the first signal to the measured fix. The product is a composite example, but every step is exactly what self-driving does.
 
 ## 1. The signals arrive
 
@@ -52,7 +52,7 @@ An agent picks up the report and digs into both sides of the story:
 - **Your PostHog data** – when the error started, which release it correlates with, how many users and how much revenue sit behind it.
 - **Your codebase** – it pairs the stack trace with the code and finds the root cause: `applyDiscount()` returns `undefined` for carts using a legacy coupon format, and the confirm step reads `.total` off the result without checking.
 
-The verdict: the problem is real, the fix is concrete, and the report is **actionable**. If it had needed a product decision instead – say, two valid ways to handle legacy coupons – it would surface in your inbox marked **needs input** and wait for you, for free.
+The verdict: the problem is real, the fix is concrete, and the report is marked **actionable**. If it had needed a product decision instead – say, two valid ways to handle legacy coupons – it would surface in your inbox marked **needs input** and wait for you, for free.
 
 ## 4. The pull request
 
