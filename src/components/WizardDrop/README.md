@@ -16,11 +16,7 @@ It's registered as an MDX component on the `/wizard` page (`src/components/Wizar
 
 ## Gating
 
-Rendered only when the PostHog feature flag **`wizard-drop`** is enabled (fail-closed while flags load). For local dev/preview, bypass with:
-
-```js
-localStorage.setItem('wizard-drop-preview', '1')
-```
+Gated behind the `wizard-drop` feature flag: the component renders only when the flag resolves to `test` for the visitor, and fails closed while flags load (nothing renders by default). The flag's configuration lives in PostHog. For local testing, see the mock walkthrough below.
 
 ## State machine
 
@@ -69,8 +65,8 @@ None are `GATSBY_`-prefixed — they must never reach the client bundle.
 
 ```bash
 WIZARD_DROP_MOCK=1 pnpm start
-# in the browser console on localhost:8001/wizard:
-localStorage.setItem('wizard-drop-preview', '1')
+# in the browser console on localhost:8001/wizard, enable the flag for yourself:
+posthog.featureFlags.override({ 'wizard-drop': true })
 ```
 
 Magic repositories drive every scenario (state resets when the dev server restarts):
@@ -93,9 +89,9 @@ All parsing lives in `src/lib/wizard-drop/provisioning.ts`. Reconciled against t
 
 - [x] `POST …/github/grants` returns `{grant_id, gh_login, email, expires_in: 3600}` — email fetched server-side (`/user/emails`), `email` is `string | null` (null = GitHub has no verified email; still a usable grant). The account email is collected **inline** in the confirm step (defaulted from this value when present), so `provision` sends the entered address to `account_requests`, not the grant's copy.
 - [x] `email_unavailable` is now a **502** meaning the GitHub App lacks the "Email addresses (read)" permission (PostHog-side misconfig) — handled as a **terminal** error + manual fallback (like `github_unavailable`), NOT the inline-email path. The no-verified-email case is the `email: null` success above, not this.
-- [x] `GET …/github/grants/{id}/repositories` returns `{gh_login, installations: [{id, account_login, repository_selection}], repositories: [{installation_id, full_name, default_branch, private}]}` — no `installed` flag (installed iff `installations` non-empty); repos capped at 300/installation (never treated as exhaustive); each repo carries its own `installation_id`. Any 404 → restart Phase A.
-- [x] `configuration.wizard` block `{grant_id, installation_id, repository, branch?}`; partial failure is **HTTP 200** with `wizard.error` alongside `oauth.code` — we branch on presence of `wizard.error`, not status.
-- [x] Retry path: exchange OAuth code → `github_integration` (idempotent) → `wizard_runs`. Wizard-run budget is 2/h, 5/day (shared with the bundled path) → exactly one retry, then degraded.
+- [x] `GET …/github/grants/{id}/repositories` returns `{gh_login, installations: [{id, account_login, repository_selection}], repositories: [{installation_id, full_name, default_branch, private}]}` — no `installed` flag (installed iff `installations` non-empty); repos capped at 300/installation (never treated as exhaustive); each repo carries its own `installation_id`. **`installation_id` is a string** (upstream emits it as one) — kept as a string end-to-end, never parsed to a number. Any 404 → restart Phase A.
+- [x] `configuration.wizard` block `{grant_id, installation_id, repository, branch?}`; partial failure is **HTTP 200** with `wizard.error` (bundled-block failure code `run_creation_failed`) alongside `oauth.code` — we branch on presence of `wizard.error`, not status.
+- [x] Retry path: exchange OAuth code → `github_integration` (idempotent) → `wizard_runs`. The `wizard_runs` action returns `{status:"complete", id, wizard_run:{task_id, run_id, status}}` (run nested under `wizard_run`, not `complete`); `github_integration` returns `{status:"complete", id, github_integration:{…}}`. Wizard-run budget is 2/h, 5/day (shared with the bundled path) → exactly one retry, then degraded.
 - [x] `available_teams[0]` is the bootstrap/consented team on the token response.
 
 - [x] **redirect_uri** — this repo serves `/api/wizard/github/callback` (the function lives at `src/api/wizard/github/callback.ts`), matching the slash path registered in the GitHub App console. Byte-identical across the authorize URL, the `github/grants` body, and the console.
