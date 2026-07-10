@@ -5,11 +5,17 @@ import { ImageDW, TooltipDW } from 'components/Home/Decorations'
 
 export const DataStackSection = () => (
     <div id="customer-infrastructure">
-        <h2>The PostHog data stack: built for data teams, loved by product people</h2>
+        <h2>
+            The PostHog data stack: built for data teams,{' '}
+            <span className="bg-blue/10 dark:bg-blue/20 text-blue rounded-md px-1">loved by product people</span>
+        </h2>
 
-        <div className="@lg:float-right text-sm @lg:max-w-xs bg-accent p-4 rounded-sm @lg:ml-6 @lg:mb-2 relative pb-[120px] @md:pb-4 @md:pr-[220px] @lg:pr-6 @lg:pb-[120px]">
+        <div className="@lg:float-right text-sm @lg:max-w-xs bg-accent p-4 rounded-sm @lg:ml-6 @lg:mb-2 relative overflow-hidden">
             <p className="my-0 [&_p]:my-0">
-                <strong>Built-in, Product OS ships with:</strong>
+                <strong>
+                    Built-in, Product OS{' '}
+                    <span className="bg-blue/10 dark:bg-blue/20 text-blue rounded-md px-1">ships</span> with:
+                </strong>
             </p>
             <span className="[&_ul]:mb-0">
                 <ul>

@@ -2,6 +2,7 @@ import React from 'react'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { IconInfo } from '@posthog/icons'
+import { HedgehogSailorHog } from '@posthog/brand/hoggies'
 
 export const Image = ({ src, className = '', alt = '' }: { src: string; className?: string; alt?: string }) => (
     <CloudinaryImage src={src} alt={alt} className={className} />
@@ -16,16 +17,16 @@ export const HomeHappyHog = () => (
 )
 
 export const ImageDW = () => (
-    <Image
-        src="https://res.cloudinary.com/dmukukwp6/image/upload/data_warehouse_2c3928e9ad.png"
-        className="max-w-[213px] absolute bottom-[-4px] right-0 rounded-br-sm"
+    <HedgehogSailorHog
+        size={220}
+        className="relative -top-[12px] ml-auto @lg:-right-5 -mb-[85px] -scale-x-100 @lg:ml-12"
     />
 )
 
 export const ImageMoney = () => (
-    <Image
-        src="https://res.cloudinary.com/dmukukwp6/image/upload/dont_burn_money_28d5861fad.png"
-        className="float-right max-w-[120px] @sm:max-w-[200px] ml-2 @sm:ml-4 mb-2 @sm:-mt-4"
+    <CloudinaryImage
+        src="https://res.cloudinary.com/dmukukwp6/image/upload/hogmillionaire_6a6c2c958d.png"
+        className="float-right max-w-[120px] @sm:max-w-[280px] w-full @lg:ml-12 @sm:ml-4 mb-2 @sm:-mt-4"
     />
 )
 
