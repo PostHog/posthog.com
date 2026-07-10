@@ -6,7 +6,7 @@ showTitle: true
 
 ## Where we post
 
-PostHog has a presence on the following platforms: X, LinkedIn, YouTube, Instagram, Threads, and Bluesky. Day to day, this is managed by <TeamMember name="Liam Graham" photo />.
+PostHog has a presence on the following platforms: [X](https://x.com/posthog), [LinkedIn](https://www.linkedin.com/company/posthog), [YouTube](https://www.youtube.com/@posthog), [Instagram](https://www.instagram.com/teamposthog), [Threads](https://www.threads.com/@teamposthog), and [Bluesky](https://bsky.app/profile/posthog.com). Day to day, this is managed by <TeamMember name="Liam Graham" photo />.
 
 Our 'primary' platforms are X, LinkedIn, and YouTube. These are those which we optimize for. Content is posted on secondary platforms, but it's not worth the resources needed to tailor content for them.
 
