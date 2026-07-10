@@ -41,7 +41,7 @@ The key is that the agent that wrote the code can’t be the one that reviews it
 
 For the same reason, it’s better to have multiple agents with different instructions and goals to cover more gaps,[^2] as well as different models and providers for different reviewers.[^3]
 
-Here’s how one of our engineers, [Paul D’Ambra](/community/profiles/30173?utm_source=posthog-newsletter&utm_medium=post&utm_campaign=code-review), makes his own custom agent review system work:
+Here’s how one of our engineers, [Paul D’Ambra](/community/profiles/30173), makes his own custom agent review system work:
 
 ![qa-swarm review-triage agent pipeline diagram](https://res.cloudinary.com/dmukukwp6/image/upload/v1783662229/stop_being_the_code_review_bottleneck_1_qa_swarm_diagram_d728ab2551.png)
 
@@ -60,7 +60,7 @@ Here’s how one of our engineers, [Paul D’Ambra](/community/profiles/30173?ut
 
 From there, you can connect this to another loop that shepherds the PR until it’s ready to merge – more on that in the next section.
 
-> **The takeaway:** Save time reviewing code by making [agents](/newsletter/agent-first-product-engineering?utm_source=posthog-newsletter&utm_medium=post&utm_campaign=code-review) review each other. This knocks out easier reviews so that only the PRs that really need human attention get flagged.
+> **The takeaway:** Save time reviewing code by making [agents](/newsletter/agent-first-product-engineering) review each other. This knocks out easier reviews so that only the PRs that really need human attention get flagged.
 
 ### Steal this
 
@@ -88,13 +88,13 @@ The context switching that comes with agentic coding is exhausting. One easy way
 
 For example, babysitting a single PR can involve tedious tasks like monitoring CI, re-running flaky tests, checking notifications for comments, and keeping the branch up to date.
 
-Why waste your most precious resource – your energy – when you can just delegate all of it to a [loop](/newsletter/loops?utm_source=posthog-newsletter&utm_medium=post&utm_campaign=code-review)?
+Why waste your most precious resource – your energy – when you can just delegate all of it to a [loop](/newsletter/loops)?
 
 > **The takeaway:** Reduce context switching and fatigue by delegating simple tasks like PR babysitting to a loop.
 
 ### Steal this
 
-You can implement your own PR babysitter skill, based on [babysit-prs](https://github.com/haacked/dotfiles/blob/main/ai/skills/babysit-prs/SKILL.md) by [Phil Haack](/community/profiles/32501?utm_source=posthog-newsletter&utm_medium=post&utm_campaign=code-review) with the prompt below. (It works best if you run it after creating a review loop skill from the previous section.)
+You can implement your own PR babysitter skill, based on [babysit-prs](https://github.com/haacked/dotfiles/blob/main/ai/skills/babysit-prs/SKILL.md) by [Phil Haack](/community/profiles/32501) with the prompt below. (It works best if you run it after creating a review loop skill from the previous section.)
 
 ```llm
 Read https://github.com/haacked/dotfiles/blob/main/ai/skills/babysit-prs/SKILL.md and adapt it for me: same sweep/state design, but it dispatches my own single-PR review skill via a spawned agent per unreviewed PR. 
@@ -149,11 +149,11 @@ Leave the result as uncommitted files on my working tree.
 
 ## 4. Verify by observation, not reasoning
 
-[Agents](/newsletter/building-ai-agents?utm_source=posthog-newsletter&utm_medium=post&utm_campaign=code-review) are good at explaining why their code works. The explanation is often convincing... but also wrong.
+[Agents](/newsletter/building-ai-agents) are good at explaining why their code works. The explanation is often convincing... but also wrong.
 
 If you run the code end to end, you’ll frequently find errors the agent never reasoned about, or output that’s just slightly not what you asked for.
 
-That’s why [Daniel Visca](/community/profiles/43453?utm_source=posthog-newsletter&utm_medium=post&utm_campaign=code-review)‘s rule of thumb is observability over **reasoning**. Don’t accept an argument that the code works when you can *watch* it work.
+That’s why [Daniel Visca](/community/profiles/43453)‘s rule of thumb is observability over **reasoning**. Don’t accept an argument that the code works when you can *watch* it work.
 
 The gold standard is something you can observe directly, like sending a real API request and reading the response. If the behavior is in front of you, you don’t have to trust the agent’s rationale at all. But this has a scaling problem since a 3,000-line PR would be challenging to trust and observe.
 
@@ -181,7 +181,7 @@ Every PR must ship with its own tests and end with a way to observe it working d
 
 This approach is especially valuable for frontend work since deterministic tests don’t always capture the visual or behavioral functionality you’re looking for.
 
-[Pawel Cebula](/community/profiles/33209?utm_source=posthog-newsletter&utm_medium=post&utm_campaign=code-review) says it’s a huge timesaver to have an agent take screenshots and GIFs for each step, with something like this:
+[Pawel Cebula](/community/profiles/33209) says it’s a huge timesaver to have an agent take screenshots and GIFs for each step, with something like this:
 
 ```llm
 For each PR with frontend work, run the affected screens and capture evidence from the branch's final state: a screenshot of each relevant state (empty, loading, error, populated) and a GIF of the key interaction end to end. Where behavior changes, include before/after. 
