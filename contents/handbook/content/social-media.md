@@ -6,13 +6,13 @@ showTitle: true
 
 ## Where we post
 
-PostHog has a presence on the following platforms: X, LinkedIn, YouTube, Instagram, Threads, and BlueSky.
+PostHog has a presence on the following platforms: X, LinkedIn, YouTube, Instagram, Threads, and BlueSky. Day to day, this is managed by <TeamMember name="Liam Graham" photo />.
 
 Our 'primary' platforms are X, LinkedIn, and YouTube. These are those which we optimize for. Content is posted on secondary platforms, but it's not worth the resources needed to tailor content for them.
 
 ## What we post
 
-We post content that shows off our product, provides delight, and informs our audience as outlined [here](/handbook/content).
+We post content that shows off our product, provides delight, and informs our [audience](/handbook/content).
 
 When creating, evaluating, and putting out each post, we have to always ask the question "does this look like something another company would put out?"
 
@@ -66,7 +66,7 @@ The audience which sees our posts on LinkedIn is less interested in technical co
 
 Articles or posts are shared with a 4x5 graphic or photo and with the outbound link included at the foot of each post, only if required. This is an inexact science, as traditional advice is to never include outbound links or to bury it in the comments. However, LinkedIn-native articles have not performed especially well for us, so this is the logical best practice.
 
-For specific LinkedIn posting advice on personal channels, see the [LinkedIn posting page here](/handbook/content/linkedin).
+For specific LinkedIn posting advice on personal channels, see the [LinkedIn posting page](/handbook/content/linkedin).
 
 ### Posting on YouTube
 
