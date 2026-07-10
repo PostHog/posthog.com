@@ -1,4 +1,5 @@
 import React from 'react'
+import { graphql } from 'gatsby'
 import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -400,6 +401,118 @@ const SlackReportsRow = (): JSX.Element => {
     )
 }
 
+type SelfDrivingPR = {
+    prNumber: number
+    summary: string
+    type: string
+    scope: string
+    url: string
+    mergedAt: string
+}
+
+// Conventional-commit type -> accent color for the little tag on each ticker card.
+const PR_TYPE_COLOR: Record<string, string> = {
+    fix: 'text-red',
+    feat: 'text-green',
+    perf: 'text-blue',
+    refactor: 'text-purple',
+    chore: 'text-secondary',
+    docs: 'text-secondary',
+    test: 'text-secondary',
+    style: 'text-secondary',
+    build: 'text-secondary',
+    ci: 'text-secondary',
+}
+
+// Short, human "merged N ago" – computed in the browser so it stays fresh between rebuilds.
+const timeAgo = (iso: string): string => {
+    const then = new Date(iso).getTime()
+    if (Number.isNaN(then)) return ''
+    const seconds = Math.max(0, (Date.now() - then) / 1000)
+    const days = Math.floor(seconds / 86400)
+    if (days >= 7) return `${Math.floor(days / 7)}w ago`
+    if (days >= 1) return `${days}d ago`
+    const hours = Math.floor(seconds / 3600)
+    if (hours >= 1) return `${hours}h ago`
+    const minutes = Math.floor(seconds / 60)
+    return minutes >= 1 ? `${minutes}m ago` : 'just now'
+}
+
+// A continuously scrolling ticker of real, merged self-driving PRs from PostHog's own repo.
+// Pauses on hover/focus and stops entirely for reduced-motion users.
+const SelfDrivingTicker = ({ prs }: { prs: SelfDrivingPR[] }): JSX.Element | null => {
+    const railRef = React.useRef<HTMLDivElement>(null)
+    const pausedRef = React.useRef(false)
+
+    // Two copies of the list so scrollLeft can wrap seamlessly at the halfway point.
+    const loop = [...prs, ...prs]
+
+    React.useEffect(() => {
+        const rail = railRef.current
+        if (!rail || prs.length === 0) return
+        const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches
+        if (prefersReducedMotion) return
+
+        let frame = 0
+        const step = () => {
+            if (!pausedRef.current) {
+                rail.scrollLeft += 0.5
+                const half = rail.scrollWidth / 2
+                if (half > 0 && rail.scrollLeft >= half) rail.scrollLeft -= half
+            }
+            frame = requestAnimationFrame(step)
+        }
+        frame = requestAnimationFrame(step)
+        return () => cancelAnimationFrame(frame)
+    }, [prs.length])
+
+    if (prs.length === 0) return null
+
+    const pause = () => {
+        pausedRef.current = true
+    }
+    const resume = () => {
+        pausedRef.current = false
+    }
+
+    return (
+        <div
+            ref={railRef}
+            onMouseEnter={pause}
+            onMouseLeave={resume}
+            onFocusCapture={pause}
+            onBlurCapture={resume}
+            className="not-prose flex gap-3 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            style={{
+                maskImage: 'linear-gradient(to right, transparent, black 4%, black 96%, transparent)',
+                WebkitMaskImage: 'linear-gradient(to right, transparent, black 4%, black 96%, transparent)',
+            }}
+        >
+            {loop.map((pr, i) => (
+                <Link
+                    key={`${pr.prNumber}-${i}`}
+                    to={pr.url}
+                    external
+                    externalNoIcon
+                    className="group flex w-[280px] flex-shrink-0 items-start gap-2.5 rounded-md border border-primary bg-primary px-3.5 py-2.5 shadow-sm transition-colors hover:border-secondary hover:bg-accent"
+                >
+                    <IconPullRequest className="mt-0.5 size-4 shrink-0 text-green" />
+                    <div className="min-w-0 flex-1">
+                        <div className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wide">
+                            <span className={PR_TYPE_COLOR[pr.type] ?? 'text-primary'}>{pr.type || 'merged'}</span>
+                            {pr.scope && <span className="truncate normal-case text-secondary">{pr.scope}</span>}
+                        </div>
+                        <p className="m-0 truncate text-sm text-primary group-hover:underline">{pr.summary}</p>
+                        <p className="m-0 text-xs text-secondary">
+                            #{pr.prNumber} · merged {timeAgo(pr.mergedAt)}
+                        </p>
+                    </div>
+                </Link>
+            ))}
+        </div>
+    )
+}
+
 const workSurfaces: {
     icon: IconComponent
     iconColor: string
@@ -661,7 +774,12 @@ const faqItems = [
     },
 ]
 
-export default function SelfDrivingPage(): JSX.Element {
+export default function SelfDrivingPage({
+    data,
+}: {
+    data?: { allSelfDrivingPullRequest?: { nodes: SelfDrivingPR[] } }
+}): JSX.Element {
+    const selfDrivingPRs = data?.allSelfDrivingPullRequest?.nodes ?? []
     return (
         <>
             <SEO
@@ -732,6 +850,28 @@ export default function SelfDrivingPage(): JSX.Element {
                             imgClassName="min-w-[720px] @5xl:min-w-none @5xl:max-h-[250px] transition-all"
                         />
                     </div>
+
+                    {/* Live ticker: real self-driving PRs merged into PostHog's own repo */}
+                    {selfDrivingPRs.length > 0 && (
+                        <div className="not-prose -mx-4 @md/reader-content:-mx-6 @xl/reader-content:-mx-8 border-b border-primary bg-accent px-4 @md/reader-content:px-6 @xl/reader-content:px-8 py-4 mb-6">
+                            <div className="max-w-7xl mx-auto">
+                                <div className="mb-2 flex items-center justify-between gap-4">
+                                    <p className="m-0 text-[11px] font-bold uppercase tracking-wide text-secondary">
+                                        Fresh from the Inbox — real self-driving PRs, merged into PostHog
+                                    </p>
+                                    <Link
+                                        to="https://github.com/PostHog/posthog/pulls?q=is%3Apr+is%3Amerged+%22from+an+inbox+report%22"
+                                        external
+                                        externalNoIcon
+                                        className="whitespace-nowrap text-xs font-semibold text-red dark:text-yellow"
+                                    >
+                                        See them all →
+                                    </Link>
+                                </div>
+                                <SelfDrivingTicker prs={selfDrivingPRs} />
+                            </div>
+                        </div>
+                    )}
 
                     <div className="max-w-4xl @7xl:max-w-7xl mx-auto">
                         {/* How a product develops itself */}
@@ -1029,3 +1169,18 @@ export default function SelfDrivingPage(): JSX.Element {
         </>
     )
 }
+
+export const query = graphql`
+    query SelfDrivingPage {
+        allSelfDrivingPullRequest(sort: { fields: mergedAt, order: DESC }, limit: 24) {
+            nodes {
+                prNumber
+                summary
+                type
+                scope
+                url
+                mergedAt
+            }
+        }
+    }
+`

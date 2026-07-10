@@ -868,6 +868,54 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             createNode(node)
         })
 
+        // Self-driving PRs: real, merged pull requests that PostHog's self-driving system
+        // opened from an Inbox report. They're matched on the Inbox footer every such PR
+        // body carries ("...from an inbox report" + a posthog-code://inbox link).
+        const parseCommitTitle = (rawTitle: string) => {
+            const match = rawTitle.match(/^(\w+)(?:\(([^)]+)\))?!?:\s*(.+)$/)
+            if (match) {
+                return { type: match[1].toLowerCase(), scope: match[2] || '', summary: match[3].trim() }
+            }
+            return { type: '', scope: '', summary: rawTitle }
+        }
+
+        const selfDrivingResponse = await fetch(
+            `https://api.github.com/search/issues?${new URLSearchParams({
+                q: 'repo:PostHog/posthog is:pr is:merged "from an inbox report"',
+                sort: 'updated',
+                order: 'desc',
+                per_page: '30',
+            }).toString()}`,
+            { headers: githubHeaders }
+        ).then((res) => res.json())
+
+        const selfDrivingItems: any[] = Array.isArray(selfDrivingResponse?.items) ? selfDrivingResponse.items : []
+        selfDrivingItems
+            .filter((item) => typeof item.body === 'string' && item.body.includes('posthog-code://inbox'))
+            .forEach((item) => {
+                const { type, scope, summary } = parseCommitTitle(item.title || '')
+                const data = {
+                    prNumber: item.number,
+                    title: item.title,
+                    summary,
+                    type,
+                    scope,
+                    url: item.html_url,
+                    mergedAt: item.pull_request?.merged_at || item.closed_at,
+                }
+                const node = {
+                    id: createNodeId(`self-driving-pr-${item.number}`),
+                    parent: null,
+                    children: [],
+                    internal: {
+                        type: `SelfDrivingPullRequest`,
+                        contentDigest: createContentDigest(data),
+                    },
+                    ...data,
+                }
+                createNode(node)
+            })
+
         integrations.forEach((integration) => {
             const { name, url, ...other } = integration
             const node = {
