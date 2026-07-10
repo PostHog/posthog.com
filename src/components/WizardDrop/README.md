@@ -1,22 +1,26 @@
 # WizardDrop
 
-A "drop"-style flow on `/wizard`: a visitor connects GitHub, picks a repository, and PostHog provisions them an account in the background, runs the setup wizard in the cloud, and opens an instrumentation pull request on their repo. The full architecture (including the monorepo side) is documented in `wizard-drop-rfc.md` at the repo root.
+A "drop"-style flow that takes over the `/wizard` hero: a visitor connects GitHub, picks a repository, and PostHog provisions them an account in the background, runs the setup wizard in the cloud, and opens an instrumentation pull request on their repo. The full architecture (including the monorepo side) is documented in `wizard-drop-rfc.md` at the repo root.
 
 All server work happens in the `src/api/wizard/*` Gatsby Functions, which talk to the PostHog agentic provisioning API as a **CIMD partner** (client metadata document at `static/.well-known/wizard-drop-client.json`, PKCE auth, no secret). This component is a state machine over those functions' responses.
 
-## Usage
+## Placement
 
-```tsx
-import WizardDrop from 'components/WizardDrop'
+`WizardDrop` renders **inside the wizard hero**, not as a standalone box. `WizardHeader` (in `src/components/WizardPage/index.tsx`) owns the gate and, when enabled, leads the hero with the GitHub "drop" flow:
 
-<WizardDrop />
-```
+- **Idle** is the hero's primary CTA: a prominent **Connect GitHub** button sitting inline on the hero, with the `npx @posthog/wizard` command demoted to a muted "Prefer the terminal?" secondary (`<WizardCommand slim />`).
+- **Active steps** (install, repo picker, outcomes) render in a subtle inset `FlowPanel` so their form controls stay legible on the hero's textured background.
 
-It's registered as an MDX component on the `/wizard` page (`src/components/WizardPage/index.tsx` → `jsxComponentDescriptors`) and placed via `<WizardDrop />` in `contents/wizard.mdx`.
+It is no longer an MDX component (removed from `jsxComponentDescriptors` and `contents/wizard.mdx`); `WizardHeader` imports and renders it directly.
 
 ## Gating
 
-Gated behind the `wizard-drop` feature flag: the component renders only when the flag resolves to `test` for the visitor, and fails closed while flags load (nothing renders by default). The flag's configuration lives in PostHog. For local testing, see the mock walkthrough below.
+The `wizard-drop` experiment gate lives in **`useWizardDropEnabled()`**, called once by `WizardHeader` (single call site → single `$feature_flag_called` exposure). It returns `true` only for the `test` variant, and fails closed while flags load:
+
+- **enabled** → the hero renders the GitHub-first drop flow (`<WizardDrop />`) with a GitHub-focused subtitle.
+- **disabled / loading** → the classic terminal-first hero (`<WizardCommand slim />`).
+
+Because the hero mounts `<WizardDrop />` only when enabled, the component itself never self-hides. In local `gatsby develop` the hook always returns `true` (posthog never loads in dev), so the flow is testable locally (see the mock walkthrough below).
 
 ## State machine
 
