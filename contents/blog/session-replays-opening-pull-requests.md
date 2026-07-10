@@ -57,10 +57,6 @@ Both of the other PRs landed on the same surface – the taxonomic filter and pr
 
 ## You still decide what ships
 
-To be clear about what "opens a PR on its own" means: the pipeline opens drafts, not merges. A human reviews before anything ships – at the time of writing, one of these three PRs is already merged, the other two are waiting. But everything up to that point, like noticing the struggle, grouping it across sessions, finding the exact line of code, and writing the fix, happened without anyone asking.
-
-That's the part worth sitting with. Session replays don't throw errors, they don't page anyone, and they stack up faster than any team could ever watch them. It's the last source you'd expect to fix itself. And it's the one now opening PRs.
-
-The replays are already recording. Replay Vision just reads them and does something about what it finds.
+To be clear about what "opens a PR on its own" means: the pipeline opens drafts, not merges. A human reviews before anything ships – at the time of writing, one of these three PRs is already merged, the other two are waiting. But everything up to that point, like noticing the struggle, grouping it across sessions, finding the exact line of code, and writing the fix, happened without a human interfering.
 
 Replay Vision is currently in closed beta. Point a scanner at a flow you care about, and let it read the sessions you'd never have time to watch. Join the [Replay Vision waitlist](/replay-vision) and be among the first to know when it's out.
