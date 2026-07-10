@@ -139,13 +139,6 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 
 ### What is Langfuse?
 
-[Langfuse](/blog/posthog-vs-langfuse) is an open-source LLM engineering platform covering observability, prompt management, and evaluation. 
-
-Founded in Berlin in 2022 and acquired by ClickHouse in January 2026, it remains MIT-licensed with self-hosting as a first-class path. With 28,600+ GitHub stars and 300+ contributors, it's one of the most widely adopted open-source tools in the LLM observability space.
-
-
-### What is Langfuse?
-
 Founded in Berlin in 2022 and acquired by ClickHouse in January 2026, [Langfuse](/blog/posthog-vs-langfuse) is an open source LLM engineering platform covering observability, prompt management, and evaluation.
 
 [Langfuse](/blog/best-langfuse-alternatives) captures detailed traces of LLM calls with spans, observations, and metrics across any framework or provider. Its SDK is built on the official OpenTelemetry client, so token usage, cost tracking, and prompt linking work with any OTel-compatible library out of the box. 
@@ -183,7 +176,7 @@ Against Braintrust specifically, Langfuse is the mirror image on licensing: what
         {
             label: 'CI-integrated evals',
             description: 'Run evaluation suites in CI/CD before merging or deploying changes',
-            values: [false, true],
+            values: [true, true],
         },
         'ai_observability.features.trace_visualization',
         'ai_observability.features.agent_tracing',
@@ -283,7 +276,7 @@ The main structural difference from Braintrust is pricing: LangSmith charges $39
         {
             label: 'CI-integrated evals',
             description: 'Run evaluation suites in CI/CD before merging or deploying changes',
-            values: [false, true],
+            values: [true, true],
         },
         'ai_observability.features.trace_visualization',
         'ai_observability.features.agent_tracing',
@@ -347,7 +340,7 @@ According to [reviews on Gartner Peer Insights](https://www.gartner.com/reviews/
 
 ### What is Arize Phoenix?
 
-**Arize Phoenix** is an open-source LLM observability and evaluation platform built by Arize AI. Built on the OpenTelemetry and OpenInference open standards, traces are never locked into a proprietary format, and data can be routed to other backends such as Jaeger, Prometheus, or Grafana without switching tools.
+**Arize Phoenix** is a source-available LLM observability and evaluation platform built by Arize AI. Built on the OpenTelemetry and OpenInference open standards, traces are never locked into a proprietary format, and data can be routed to other backends such as Jaeger, Prometheus, or Grafana without switching tools.
 
 It ships research-backed evaluators for hallucination, faithfulness, relevance, and toxicity out of the box, plus dataset experiments, a prompt playground, and a versioned Evaluator Hub.
 
@@ -384,7 +377,7 @@ When teams need enterprise production monitoring – or traditional ML and LLM m
         {
             label: 'CI-integrated evals',
             description: 'Run evaluation suites in CI/CD before merging or deploying changes',
-            values: [false, true],
+            values: ['Partial', true],
         },
         'ai_observability.features.trace_visualization',
         'ai_observability.features.agent_tracing',
@@ -404,7 +397,7 @@ When teams need enterprise production monitoring – or traditional ML and LLM m
 <details>
 <summary>Main differences between Arize Phoenix and Braintrust</summary>
 
-- Phoenix is open-source and fully self-hostable with no feature limitations. Braintrust is closed-source, with self-hosting available on Enterprise only.
+- Phoenix is source-available under Elastic License 2.0 and free to self-host with no feature limitations. Braintrust is closed-source, with self-hosting available on Enterprise only.
 - Braintrust blocks deployments automatically when eval scores regress. Phoenix supports CI integration but does not offer deployment blocking.
 - Phoenix is built on OpenTelemetry open standards. Braintrust uses a proprietary trace format with Brainstore.
 - Arize AX adds traditional ML and computer vision monitoring. Braintrust is LLM-only.
@@ -434,7 +427,7 @@ According to customer stories on Arize, companies use Arize Phoenix because:
 
 > #### Bottom line
 >
-> Arize Phoenix is the strongest Braintrust alternative for teams that want open-source LLM observability built on OpenTelemetry standards, or when both traditional ML and LLM monitoring need to live on one platform.
+> Arize Phoenix is the strongest Braintrust alternative for teams that want source-available, OTel-native LLM observability, or when both traditional ML and LLM monitoring need to live on one platform.
 
 ## 5. Opik by Comet
 
@@ -447,7 +440,13 @@ According to customer stories on Arize, companies use Arize Phoenix because:
 
 ### What is Opik?
 
-**Opik** is an open-source LLM observability and evaluation platform built by Comet, a company with over a decade of experience in ML experiment tracking and model monitoring. It covers the complete LLM development lifecycle from local experimentation through to production monitoring, handling 40 million traces per day with near-instant trace ingestion at high volumes.
+**Opik** is an open-source LLM observability and evaluation platform built by Comet, a company with over a decade of ML experiment tracking behind it. It covers the full lifecycle from local experimentation to production monitoring at high trace volumes.
+
+Opik scores production traces in real time with built-in metrics for hallucination, relevance, and task completion, routes outputs to subject-matter experts via annotation queues, and ships guardrails that screen for PII and policy violations before responses reach users.
+
+Ollie, Opik's coding agent, analyzes traces and writes fixes directly to your codebase with a regression test for every fix. And their Agent Optimizer automates prompt tuning against your own eval data, instead of leaving it to manual trial and error.
+
+Against Braintrust, the comparison matches Langfuse's: Apache 2.0 and fully self-hostable versus closed source with hybrid Enterprise-only self-hosting. What Opik adds is automation: where Braintrust's Loop suggests scorers, Ollie ships code.
 
 ### Key features
 
@@ -478,7 +477,7 @@ According to customer stories on Arize, companies use Arize Phoenix because:
         {
             label: 'CI-integrated evals',
             description: 'Run evaluation suites in CI/CD before merging or deploying changes',
-            values: [false, true],
+            values: [true, true],
         },
         'ai_observability.features.trace_visualization',
         'ai_observability.features.agent_tracing',
@@ -498,11 +497,11 @@ According to customer stories on Arize, companies use Arize Phoenix because:
 <details>
 <summary>Main differences between Opik and Braintrust</summary>
 
-- Opik is Apache 2.0 open-source and fully self-hostable with no feature limitations. Braintrust is closed-source with self-hosting on Enterprise only.
 - Braintrust blocks deployments automatically when eval scores regress. Opik supports CI integration but does not offer deployment blocking.
 - Opik's Ollie coding agent analyzes traces and writes fixes directly to your codebase. Braintrust has no equivalent automated optimization feature.
-- Opik's free cloud tier includes 25K spans/month with unlimited team members. Braintrust's free tier includes 1M trace spans/month.
+- Opik's free cloud tier includes 25K spans/month with unlimited team members. Braintrust's free tier includes 1GB of processed data/month.
 - Opik is backed by Comet's MLOps platform for engineers running both ML experiments and LLM applications. Braintrust is LLM-only.
+- Opik is Apache 2.0 open-source and fully self-hostable with no feature limitations. Braintrust is closed-source with self-hosting on Enterprise only.
 
 </details>
 
@@ -519,10 +518,12 @@ According to customer stories on Arize, companies use Arize Phoenix because:
 
 ### Why do companies use Opik?
 
-According to [Opik customer stories](https://www.comet.com/site/customers/), companies use Opik because:
+According to Opik customer stories, companies use Opik because:
 
 1. **Agent debugging stops being a black box:** Zencoder's Engineering Manager noted: "We needed a solution that allowed us to see how our models behaved, and understand what went wrong, and share that with the team to debug and iterate faster."
+
 2. **Non-engineers can participate in evaluation:** Domain experts can review LLM outputs and provide feedback directly inside the platform, closing the loop between research and product.
+
 3. **Cost optimization becomes measurable:** Pattern's AI Ops team used Opik to run side-by-side model comparisons and identify a more cost-effective model without sacrificing performance.
 
 > #### Bottom line
@@ -536,47 +537,71 @@ According to [Opik customer stories](https://www.comet.com/site/customers/), com
 - **Typical users:** ML engineers and AI developers building and monitoring LLM applications
 - **Typical customers:** Enterprises with both ML and LLM workloads, including OpenAI, Meta, NVIDIA, and Microsoft
 
-![W&B Weave dashboard](wandb-weave-dashboard-llm-traces-evaluation-scores.png)
+![Weights & Biases Weave Dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/Weights_and_Biases_Weave_dashboard_ba22386509.png)
 
 ### What is W&B Weave?
 
-[W&B Weave](https://wandb.ai/site/weave/) is the LLM observability and evaluation product from [Weights & Biases](https://wandb.ai), the AI developer platform used by over one million developers worldwide. W&B [rebuilt Weave from the ground up in June 2026](https://wandb.ai/wandb_fc/product-announcements-fc/reports/New-in-W-B-Weave-Observability-and-continuous-improvement-for-production-agents--VmlldzoxNzAzMTcxNg) to focus specifically on production agent observability, with Weave sitting inside a broader ML development platform where model training, fine-tuning, and production LLM monitoring all connect.
+**W&B Weave** is the LLM observability and evaluation product from Weights & Biases, an AI developer platform used by over one million developers worldwide. 
+
+W&B rebuilt Weave from the ground up in June 2026 to focus specifically on production agent observability, with Weave sitting inside a broader ML development platform where model training, fine-tuning, and production LLM monitoring all connect.
+
+Weave also covers the standard eval workflow – LLM-as-a-judge, custom scorers, human feedback with automatic versioning across runs – plus evaluation workflows that can be wired into CI/CD, though release-blocking gates typically require custom workflow logic.
+
+The real difference from Braintrust is what surrounds Weave: model training, fine-tuning, experiment tracking, and LLM monitoring share one platform, so teams running both traditional ML and LLM workloads keep everything in one place. 
 
 ### Key features
 
 - **Agent tracing:** Automatically log every session, turn, step, and tool call with first-class agent semantics built into the data model.
+
 - **Production signals:** Built-in and custom signals automatically capture and classify agent interactions to surface failure modes without manual trace review.
+
 - **Evaluations:** Measure output quality through LLM-as-judge, custom scorers, or human feedback, with automatic versioning across runs.
+
 - **CI/CD integration:** Run evaluation suites on every pull request and block merges when quality metrics regress.
+
 - **Cost analytics:** Automatically calculate token usage and estimated spend using Weave's built-in LLM cost estimator.
+
 - **ML and LLM continuity:** W&B Models and Weave share the same platform, connecting model training, fine-tuning, and LLM application monitoring in one place.
 
 ### How does W&B Weave compare to Braintrust?
 
-W&B Weave and Braintrust both cover tracing, evals, and CI/CD integration, but serve different primary audiences. Braintrust is a standalone eval-first platform optimized for prompt iteration and quality gates. Weave is the LLM observability layer inside a broader ML development platform where model training and LLM application monitoring live in one place.
-
-| Feature | W&B Weave | Braintrust |
-|---|---|---|
-| LLM and agent tracing | ✓ | ✓ |
-| Cost analytics | ✓ | ✓ |
-| Evaluations / LLM-as-judge | ✓ | ✓ |
-| CI-integrated evals | ✓ | ✓ |
-| Dataset management | ✓ | ✓ |
-| Production failure signals | ✓ | ✗ |
-| ML experiment tracking | ✓ | ✗ |
-| Model training integration | ✓ | ✗ |
-| Open source | ✗ | ✗ |
-| Self-hostable | ✓ (Enterprise) | ✓ (Enterprise) |
-| Free tier | ✓ | ✓ |
+<p>
+<ProductComparisonTable
+    competitors={['weave', 'braintrust']}
+    rows={[
+        'ai_observability.features.prompt_evaluations',
+        'ai_observability.evaluations.features.llm_as_a_judge',
+        'ai_observability.evaluations.features.code_evaluators',
+        'ai_observability.features.evaluation_datasets',
+        'ai_observability.evaluations.features.experiment_runs',
+        'ai_observability.features.human_annotation',
+        {
+            label: 'CI-integrated evals',
+            description: 'Run evaluation suites in CI/CD before merging or deploying changes',
+            values: ['Partial', true],
+        },
+        'ai_observability.features.trace_visualization',
+        'ai_observability.features.agent_tracing',
+        'ai_observability.features.prompt_management',
+        'ai_observability.features.ai_gateway_proxy',
+        'ai_observability.features.cost_tracking',
+        'ai_observability.features.latency_tracking',
+        'ai_observability.features.error_tracking',
+        'ai_observability.features.session_replay',
+        'ai_observability.features.product_analytics',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
+</p>
 
 <details>
 <summary>Main differences between W&B Weave and Braintrust</summary>
 
-- W&B Weave is part of a broader ML development platform. Braintrust is a standalone LLM eval platform.
 - Weave connects LLM application monitoring directly to ML model training and experiment tracking. Braintrust is LLM-only.
 - Weave's built-in production signals automatically surface failure modes across millions of traces. Braintrust requires manual evaluation setup.
 - Braintrust's eval-first CI workflow and dataset management are more tightly integrated. Weave's eval framework is comprehensive but secondary to its observability focus.
-- Braintrust's free tier includes 1M trace spans/month. Weave's free tier is usage-based.
+- Braintrust's free tier includes 1GB of processed data/month. Weave's free tier is usage-based.
 
 </details>
 
@@ -593,10 +618,12 @@ W&B Weave and Braintrust both cover tracing, evals, and CI/CD integration, but s
 
 ### Why do companies use W&B Weave?
 
-According to [reviews on Reddit](https://www.reddit.com/r/mlops/comments/1i764f6/any_thoughts_on_weave_from_wandb/) and [Gartner Peer Insights](https://www.gartner.com/reviews/product/wandb-weave), companies use W&B Weave because:
+According to reviews on Reddit, companies use W&B Weave because:
 
 1. **Setup is genuinely frictionless:** A few lines of code and a decorator is all it takes to get LLM monitoring running. Evaluations and dataset management follow the same pattern.
+
 2. **It covers agent traceability without overcomplicating things:** Weave handles agent traceability well, and most users find it does exactly what it promises.
+
 3. **W&B delivers more than a product:** The platform goes beyond tooling, codifying an entire AI development strategy that connects model training, evaluation, and production monitoring end to end.
 
 > #### Bottom line
@@ -610,46 +637,70 @@ According to [reviews on Reddit](https://www.reddit.com/r/mlops/comments/1i764f6
 - **Typical users:** Engineering, QA, and product teams building and evaluating LLM applications
 - **Typical customers:** Mid-size and enterprise teams shipping AI features, including Panasonic, Toshiba, BCG, and CircleCI
 
-![Confident AI dashboard](confident-ai-dashboard-evaluation-scores-traces.png)
+![Confident AI dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/confident_ai_online_evaluations_metrics_collection_ec7b80ff46.png)
 
 ### What is Confident AI?
 
-[Confident AI](https://www.confident-ai.com/) is an LLM evaluation and observability platform built by the creators of [DeepEval](https://github.com/confident-ai/deepeval), the most widely used open-source LLM evaluation framework. Backed by Y Combinator and founded in 2024, every production trace is scored against 50+ research-backed metrics open-sourced through DeepEval, covering agents, chatbots, RAG pipelines, safety, and multi-turn conversations.
+**Confident AI** is an LLM evaluation and observability platform built by the creators of DeepEval, the most widely used open-source LLM evaluation framework. Backed by Y Combinator and founded in 2024, every production trace is scored against 50+ research-backed metrics open-sourced through DeepEval, covering agents, chatbots, RAG pipelines, safety, and multi-turn conversations.
+
+The distinctive design choice is who gets to run evals. Where most platforms assume an engineer is driving, Confident AI exposes evaluation workflows through an HTTP-based interface that PMs, QA, and domain experts can own directly – curating datasets from production traces, running experiments, and reviewing results without filing a ticket. 
+
+It also monitors continuously rather than on demand: every production trace gets scored, alerts fire when quality drops below thresholds (not just when latency spikes), and multi-turn simulation generates realistic conversations with tool use and branching paths for testing conversational AI before it ships.
+
+Against Braintrust, the two are the most eval-obsessed platforms on this list, but they're organized around different loops. Braintrust is built for the engineering loop: prompt iteration, CI gates, deploy blocking. Confident AI is built for the quality loop: continuous scoring in production, owned by whoever owns quality, which is sometimes not the person who owns the code.
 
 ### Key features
 
 - **50+ research-backed metrics:** Every production trace is scored against research-backed metrics covering faithfulness, hallucination, relevance, bias, toxicity, tool selection accuracy, and more.
+
 - **Cross-functional evaluation:** PMs, QA, and domain experts can own and run evaluation workflows directly through an HTTP-based interface.
+
 - **CI/CD regression testing:** Block deployments when evaluation scores fall below defined thresholds on every pull request.
+
 - **Production-to-eval pipelines:** Curate datasets directly from production traces and run experiments without manual setup.
+
 - **Quality-aware alerting:** Alerts trigger when evaluation scores drop below thresholds, not just when latency spikes, with integrations for PagerDuty, Slack, and Teams.
+
 - **Multi-turn simulation:** Generate realistic multi-turn conversations with tool use and branching paths for testing conversational AI.
 
 ### How does Confident AI compare to Braintrust?
 
-Confident AI and Braintrust are the two most eval-focused platforms in this list, but Braintrust is built around prompt iteration and CI-gated deploys, while Confident AI is built around continuous quality monitoring, with every production trace scored and evaluation workflows accessible to PMs and QA without engineering involvement.
-
-| Feature | Confident AI | Braintrust |
-|---|---|---|
-| LLM tracing | ✓ | ✓ |
-| Cost and token analytics | ✓ | ✓ |
-| Evaluations / LLM-as-judge | ✓ | ✓ |
-| CI-integrated evals | ✓ | ✓ |
-| Dataset management | ✓ | ✓ |
-| 50+ eval metrics | ✓ | ✗ |
-| Cross-functional eval workflows | ✓ | ✗ |
-| Quality-aware alerting | ✓ | ✗ |
-| Multi-turn simulation | ✓ | ✗ |
-| Open source (metrics) | ✓ (DeepEval) | ✗ |
-| Self-hostable | Enterprise only | Enterprise only |
-| Free tier | ✓ | ✓ |
+<p>
+<ProductComparisonTable
+    competitors={['confident_ai', 'braintrust']}
+    rows={[
+        'ai_observability.features.prompt_evaluations',
+        'ai_observability.evaluations.features.llm_as_a_judge',
+        'ai_observability.evaluations.features.code_evaluators',
+        'ai_observability.features.evaluation_datasets',
+        'ai_observability.evaluations.features.experiment_runs',
+        'ai_observability.features.human_annotation',
+        {
+            label: 'CI-integrated evals',
+            description: 'Run evaluation suites in CI/CD before merging or deploying changes',
+            values: [true, true],
+        },
+        'ai_observability.features.trace_visualization',
+        'ai_observability.features.agent_tracing',
+        'ai_observability.features.prompt_management',
+        'ai_observability.features.ai_gateway_proxy',
+        'ai_observability.features.cost_tracking',
+        'ai_observability.features.latency_tracking',
+        'ai_observability.features.error_tracking',
+        'ai_observability.features.session_replay',
+        'ai_observability.features.product_analytics',
+        'platform.deployment.open_source',
+        'platform.deployment.eu_hosting',
+    ]}
+/>
+</p>
 
 <details>
 <summary>Main differences between Confident AI and Braintrust</summary>
 
-- Confident AI scores every production trace with 50+ research-backed metrics. Braintrust requires a manual evaluation setup.
 - Confident AI enables PMs and QA to run evals independently via HTTP. Braintrust evaluation workflows require engineering involvement.
 - Braintrust's prompt iteration and CI-gated deploy workflow is more mature. Confident AI focuses on continuous quality monitoring.
+- Confident AI scores every production trace with research-backed metrics. Braintrust requires a manual evaluation setup.
 - Confident AI's tracing costs $1/GB-month. Braintrust's Pro plan costs $249/month with $3/GB overages.
 - Braintrust has Brainstore, a purpose-built trace database. Confident AI uses standard cloud infrastructure.
 
@@ -668,10 +719,12 @@ Confident AI and Braintrust are the two most eval-focused platforms in this list
 
 ### Why do companies use Confident AI?
 
-According to [reviews on Gartner Peer Insights](https://www.gartner.com/reviews/product/confident-ai-122691231) and [customer stories](https://www.confident-ai.com/pricing), companies use Confident AI because:
+According to reviews on Gartner Peer Insights and customer stories, companies use Confident AI because:
 
 1. **Evaluation cycles shrink from days to hours:** A single improvement cycle that previously took 10 days now takes three hours, with product managers running it themselves.
+
 2. **It saves hundreds of hours of manual evaluation:** Confident AI saves 480+ hours of manual AI evaluation every month, giving teams the data to defend every quality decision.
+
 3. **The dashboard is accessible to non-technical users:** The interface is clean, well-structured, and easy to navigate, with AI-driven analytics providing clear, data-backed recommendations.
 
 > #### Bottom line
@@ -680,7 +733,7 @@ According to [reviews on Gartner Peer Insights](https://www.gartner.com/reviews/
 
 ## Which Braintrust alternative should you choose?
 
-- **Want LLM observability connected to product analytics, session replay, and user behavior?** [PostHog](/ai-observability).
+- Want LLM observability connected to product analytics, session replay, and user behavior? [PostHog](/ai-observability).
 - Need open-source self-hosting with broad framework support and no licensing fees? **Langfuse**.
 - Building on LangChain or LangGraph? **LangSmith**.
 - Want OpenTelemetry-native tracing or need ML and LLM monitoring on one platform? **Arize Phoenix**.
@@ -694,99 +747,126 @@ Here's the (short) sales pitch.
 
 We're biased, obviously, but we think PostHog is the right Braintrust alternative if:
 
-- You want LLM observability connected to product analytics, session replay, feature flags, and experiments in one platform
+- You want AI observability connected to product analytics, session replay, feature flags, experiments, and more in one platform
 - You need to understand not just what your LLM is doing, but how users are interacting with your AI features and where they drop off
-- You want open-source, usage-based pricing with no per-seat charges and a generous free tier
+- You want open-source, usage-based pricing with no per-seat charges and a generous free tier.
 
 It's completely free to get started – no credit card required. Our [setup wizard](/wizard) handles configuration in minutes, or you can check out [our docs](/docs) to do it yourself.
 
 <WizardCTA />
 
+
 ## Frequently asked questions
+
+<details>
+<summary>What is the difference between AI observability and AI evals?</summary>
+
+[AI observability](/what-is-ai-observability) answers "what is my system doing in production?" capturing traces, latency, token counts, errors, costs, and user interactions. 
+
+AI evals answer "is my system producing good outputs?" scoring responses against defined quality criteria, running test datasets, tracking regressions, and blocking deploys. 
+
+The two are complementary. The best platforms connect both so observability data feeds evaluation.
+
+</details>
 
 <details>
 <summary>What is Braintrust used for?</summary>
 
-Braintrust is an AI evaluation and observability platform for teams shipping LLM features to production. Core use cases include logging production traces, running CI-integrated evaluations, managing prompts, and curating test datasets, all of which are stored in Brainstore, a purpose-built database designed for AI trace data. Customers include Notion, Vercel, Cloudflare, Ramp, and Dropbox.
+**Braintrust** is an AI evaluation and observability platform for teams shipping LLM features to production. 
+
+Core use cases include logging production traces, running CI-integrated evaluations, managing prompts, and curating test datasets, all of which are stored in Brainstore, a purpose-built database designed for AI trace data.
 
 </details>
 
 <details>
 <summary>Why look for a Braintrust alternative?</summary>
 
-The most common reasons are pricing, self-hosting, and scope. Braintrust's paid Pro plan jumps from a generous free tier straight to $249/month with no middle option. Self-hosting requires an enterprise contract. And if your primary need is LLM observability integrated with product analytics and user behavior, rather than a specialist eval platform, Braintrust's tight focus works against you.
+The most common reasons are pricing, self-hosting, and scope. 
+
+Braintrust's paid Pro plan jumps from a generous free tier straight to $249/month with no middle option. Self-hosting requires an enterprise contract. 
+
+And if your primary need is LLM observability integrated with product analytics and user behavior, rather than a specialist eval platform, Braintrust's tight focus works against you.
 
 </details>
 
 <details>
 <summary>Is there a free or open-source Braintrust alternative?</summary>
 
-Several. [Langfuse](https://langfuse.com) is MIT-licensed and fully self-hostable with no usage caps. [Arize Phoenix](https://arize.com/phoenix) is Apache 2.0 and runs locally with a single pip install. [Opik by Comet](https://www.comet.com/site/products/opik/) is Apache 2.0 with a free cloud tier of 25K spans/month. [PostHog](https://posthog.com) is MIT-licensed with 100k LLM observability events/month free. Braintrust itself is closed source. Self-hosting is only available on Enterprise as a hybrid model, in which the control plane remains on Braintrust's infrastructure.
+Several. 
+
+- **PostHog** is MIT-licensed with 100k LLM observability events/month free. 
+- **Langfuse** is MIT-licensed and fully self-hostable with no usage caps.
+**Arize Phoenix** is source-available under Elastic License 2.0 and free to self-host.
+- **Opik by Comet** is Apache 2.0 with a free cloud tier of 25K spans/month.
+
+For more alternatives, check out our guide to the [best open-source LLM observability tools](/blog/best-open-source-llm-observability-tools).
 
 </details>
 
 <details>
 <summary>Can PostHog replace Braintrust?</summary>
 
-PostHog can replace Braintrust for teams whose primary need is production LLM observability connected to product analytics, session replay, and user behavior. It cannot replace Braintrust's eval-first CI/CD workflow, dataset management depth, or deployment blocking due to score regression for teams that need systematic quality gates on every release. The two tools serve meaningfully different use cases.
+Yes, for most teams. If your primary need is production AI observability – traces, costs, [evals](/docs/ai-evals), prompt management – connected to product analytics, session replay, and user behavior, PostHog covers it, and adds a layer Braintrust doesn't have at all: measuring whether your AI features actually moved product metrics.
+
+Where PostHog can't replace Braintrust yet is the deep end of the eval workflow: CI-integrated quality gates, dataset curation, and deployment blocking on score regression – but PostHog ships fast and is actively working on closing the gap.
 
 </details>
 
 <details>
 <summary>Which Braintrust alternative is best for evals specifically?</summary>
 
-[LangSmith](https://smith.langchain.com) is the closest match for LangChain and LangGraph teams. [Confident AI](https://www.confident-ai.com) has the broadest eval metric coverage with 50+ research-backed metrics open-sourced through DeepEval. [Opik](https://www.comet.com/site/products/opik/) has a strong real-time online evaluation. For pure eval depth with CI-integrated quality gates, Braintrust itself remains the strongest option in the space.
+[LangSmith](/blog/best-langsmith-alternatives) is the closest match for LangChain and LangGraph teams. 
+
+**Confident AI** has the broadest eval metric coverage with 50+ research-backed metrics open-sourced through DeepEval. 
+
+**Opik** has a strong real-time online evaluation.  
+
+**PostHog** supports [LLM-as-a-judge and code-based evals](/docs/ai-evals) on production generations.
+
+For pure eval depth with CI-integrated quality gates, Braintrust itself remains the strongest option in the space.
 
 </details>
 
 <details>
 <summary>What is the cheapest Braintrust alternative?</summary>
 
-For self-hosted options, [Langfuse](https://langfuse.com), [Arize Phoenix](https://arize.com/phoenix), and [Opik](https://www.comet.com/site/products/opik/) are all free to run on your own infrastructure. For cloud paid tiers, [Opik](https://www.comet.com/site/products/opik/) starts at $19/month, [Langfuse Core](https://langfuse.com/pricing) at $29/month, and [Confident AI](https://www.confident-ai.com/pricing) at $19.99/seat/month. Braintrust's Pro plan starts at $249/month.
+For self-hosted options, [Langfuse](/blog/posthog-vs-langfuse), **Arize Phoenix**, and **Opik** are all free to run on your own infrastructure. 
 
-</details>
+For cloud options, **PostHog** is free up to 100K AI events per month with usage-based pricing after that – no monthly base fee, so low-volume months cost little or nothing. 
 
-<details>
-<summary>Which Braintrust alternative has the best CI/CD integration for evals?</summary>
+Among fixed paid tiers, **Opik** starts at $19/month, **Langfuse Core** at $29/month, and **Confident AI** at $19.99/seat/month. 
 
-[Braintrust](https://www.braintrust.dev) itself leads on this with native GitHub Actions that post eval results directly into PRs and block merges on score regression. [LangSmith](https://smith.langchain.com) is the closest match via GitHub Actions and pytest. [Langfuse](https://langfuse.com) launched CI/CD experiment actions in May 2026. [Confident AI](https://www.confident-ai.com) blocks deployments when eval scores fall below defined thresholds on every pull request.
+For a full breakdown of free tiers, billing models, and how costs compare at different volumes, see our guide to the [cheapest AI observability tools](/blog/cheapest-ai-observability-tools).
 
 </details>
 
 <details>
 <summary>Which Braintrust alternative is best for multi-step agent tracing?</summary>
 
-[LangSmith](https://smith.langchain.com) has the deepest agent tracing for LangGraph, including time-travel debugging and step-by-step execution trees. [W&B Weave](https://wandb.ai/site/weave/) rebuilt its agent tracing from the ground up in June 2026, adding first-class session, turn, and step semantics. [Arize Phoenix](https://arize.com/phoenix) is strong on multi-step agent tracing with OpenTelemetry-native span capture across tool calls, retrieval steps, and sub-agents.
+[LangSmith](/blog/best-langsmith-alternatives) has the deepest agent tracing for LangGraph, including time-travel debugging and step-by-step execution trees. 
+
+**W&B Weave** rebuilt its agent tracing from the ground up in June 2026, adding first-class session, turn, and step semantics. 
+
+**Arize Phoenix** is strong on multi-step agent tracing with OpenTelemetry-native span capture across tool calls, retrieval steps, and sub-agents.
 
 </details>
 
 <details>
 <summary>Is Braintrust worth the price?</summary>
 
-It depends on your use case. The $249/month Pro plan makes sense for teams with three or more engineers shipping LLM features where eval regressions are costly and systematic quality gates justify the investment. For teams whose primary need is pure observability rather than eval-first workflows, cheaper alternatives like Langfuse at $29/month or PostHog's free tier cover most of the same ground.
+It depends on your use case. The $249/month Pro plan makes sense for teams with three or more engineers shipping LLM features where eval regressions are costly and systematic quality gates justify the investment. 
 
-</details>
-
-<details>
-<summary>What is the difference between AI observability and AI evals?</summary>
-
-AI observability answers "what is my system doing in production?" capturing traces, latency, token counts, errors, costs, and user interactions. AI evals answer "is my system producing good outputs?" scoring responses against defined quality criteria, running test datasets, tracking regressions, and blocking deploys. The two are complementary. The best platforms connect both so observability data feeds evaluation.
-
-</details>
-
-<details>
-<summary>Which Braintrust alternative is best for LangChain users?</summary>
-
-[LangSmith](https://smith.langchain.com). One environment variable enables full instrumentation for LangChain and LangGraph, with native execution graph rendering, step-by-step debugging, dataset creation from production failures, and prompt version management. For non-LangChain stacks, [Langfuse](https://langfuse.com) has native integrations for more frameworks than any other tool in this list.
+For teams whose primary need is pure observability rather than eval-first workflows, cheaper alternatives like Langfuse at $29/month or PostHog's free tier cover most of the same ground.
 
 </details>
 
 <details>
 <summary>Is there a self-hosted Braintrust alternative?</summary>
 
-Several. [Langfuse](https://langfuse.com) self-hosts via Docker Compose or Helm under the MIT license. [Arize Phoenix](https://arize.com/phoenix) runs locally with a single pip install or via Kubernetes. [Opik](https://www.comet.com/site/products/opik/) self-hosts via Docker under Apache 2.0. [PostHog](https://posthog.com) is MIT-licensed and self-hostable on any infrastructure. Braintrust offers self-hosting only on Enterprise as a hybrid model. The data plane runs in your VPC but the control plane stays on Braintrust's infrastructure.
+Several. [Langfuse](/blog/best-langfuse-alternatives) self-hosts via Docker Compose or Helm under the MIT license. **Arize Phoenix** runs locally with a single pip install or via Kubernetes. **Opik** self-hosts via Docker under Apache 2.0. 
+
+For more alternatives check out our guide to the [best open-source LLM observability tools](/blog/best-open-source-llm-observability-tools).
 
 </details>
 
 <NewsletterForm />
-

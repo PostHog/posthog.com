@@ -23,6 +23,7 @@ import { chameleon } from '../../hooks/competitorData/chameleon'
 import { clarity } from '../../hooks/competitorData/clarity'
 import { clickhouse_cloud } from '../../hooks/competitorData/clickhouse_cloud'
 import { cloudflare } from '../../hooks/competitorData/cloudflare'
+import { confident_ai } from '../../hooks/competitorData/confident_ai'
 import { contentsquare } from '../../hooks/competitorData/contentsquare'
 import { counter } from 'hooks/competitorData/counter'
 import { crazy_egg } from '../../hooks/competitorData/crazy_egg'
@@ -628,6 +629,7 @@ export default function ProductComparisonTable({
         clarity,
         clickhouse_cloud,
         cloudflare,
+        confident_ai,
         contentsquare,
         counter,
         crazy_egg,
