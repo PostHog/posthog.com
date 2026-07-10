@@ -6,7 +6,7 @@ showTitle: true
 
 ## Where we post
 
-PostHog has a presence on the following platforms: X, LinkedIn, YouTube, Instagram, Threads, and BlueSky. Day to day, this is managed by <TeamMember name="Liam Graham" photo />.
+PostHog has a presence on the following platforms: X, LinkedIn, YouTube, Instagram, Threads, and Bluesky. Day to day, this is managed by <TeamMember name="Liam Graham" photo />.
 
 Our 'primary' platforms are X, LinkedIn, and YouTube. These are those which we optimize for. Content is posted on secondary platforms, but it's not worth the resources needed to tailor content for them.
 
@@ -72,7 +72,7 @@ For specific LinkedIn posting advice on personal channels, see the [LinkedIn pos
 
 See the [video](/handbook/marketing/video) page.
 
-### Posting on Threads, BlueSky
+### Posting on Threads & Bluesky
 
 Yeah, we're on 'em.
 
@@ -84,4 +84,4 @@ Because our offering is thinner on these two platforms, we can take more liberti
 
 Instagram's a platform we are actively trying to mature on. Our goal is to set a cadence of posting articles in carousel format, and our [first carousel](https://instagram.com/p/DZ_dGYGgQZK) has already gone out.
 
-Like Threads and BlueSky, we can take more liberties with the mentions and interactions we have, especially if someone tags us in an IG story when they're at a conference or event.
+Like Threads and Bluesky, we can take more liberties with the mentions and interactions we have, especially if someone tags us in an IG story when they're at a conference or event.
