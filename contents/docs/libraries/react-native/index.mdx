@@ -175,6 +175,49 @@ const IGNORED_SCREENS = new Set(['Splash', 'Debug'])
 
 Swap the check for an allowlist (`return TRACKED_SCREENS.has(screenName) ? event : null`) if you'd rather capture only a specific set of screens.
 
+## Common `before_send` patterns
+
+`before_send` accepts a single function or an array of functions that run in order, so you can compose several small hooks. Filtering screens is one use – here are a few others.
+
+**Sample a noisy event.** Send only a percentage of a high-volume event to control costs:
+
+```react-native
+const posthog = new PostHog('<ph_project_token>', {
+    before_send: (event) => {
+        if (event?.event === 'high_volume_event' && Math.random() > 0.1) {
+            return null // keep roughly 10%
+        }
+        return event
+    },
+})
+```
+
+**Log events instead of sending them.** Handy while debugging what would be captured:
+
+```react-native
+const posthog = new PostHog('<ph_project_token>', {
+    before_send: (event) => {
+        console.log('[PostHog] would send', event?.event, event?.properties)
+        return null // drop everything
+    },
+})
+```
+
+**Redact sensitive properties.** Strip a value before it leaves the device:
+
+```react-native
+const posthog = new PostHog('<ph_project_token>', {
+    before_send: (event) => {
+        if (event?.properties?.email) {
+            event.properties.email = '***'
+        }
+        return event
+    },
+})
+```
+
+For more examples, see the [JavaScript Web SDK docs](/docs/libraries/js/usage#amending-or-sampling-events).
+
 ## Identifying users
 
 > We highly recommend reading our section on [Identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
