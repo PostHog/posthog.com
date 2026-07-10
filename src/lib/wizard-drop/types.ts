@@ -30,7 +30,10 @@ export interface AccountRequestBody {
         /** Net-new bundled link + run block (RFC Phase C step 5). */
         wizard: {
             grant_id: string
-            installation_id: number
+            // GitHub installation id, carried as a string end-to-end: the upstream repositories
+            // listing emits it as a string and the wizard block / github_integration action both
+            // coerce with `str(...)`, so we never treat it as a number.
+            installation_id: string
             repository: string
             branch?: string
         }
@@ -82,7 +85,8 @@ export type GithubGrant = { grant_id: string; gh_login: string; email: string | 
 export type GrantRepository = {
     full_name: string
     default_branch?: string
-    installation_id: number
+    /** GitHub installation id as a string — the upstream listing emits it as a string. */
+    installation_id: string
     private?: boolean
 }
 

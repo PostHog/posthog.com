@@ -15,8 +15,6 @@ import RepoPicker from './RepoPicker'
 import { DegradedPanel, ErrorPanel, ExistingUserPanel, SuccessPanel } from './states'
 
 const FEATURE_FLAG = 'wizard-drop'
-/** Local/dev bypass for the flag gate: `localStorage.setItem('wizard-drop-preview', '1')`. */
-const PREVIEW_STORAGE_KEY = 'wizard-drop-preview'
 
 const INSTALL_POLL_INTERVAL_MS = 5000
 const INSTALL_POLL_TIMEOUT_MS = 5 * 60 * 1000
@@ -54,8 +52,13 @@ export default function WizardDrop(): JSX.Element | null {
     const initialized = useRef(false)
     const wasAwaitingInstall = useRef(false)
 
-    const preview = typeof window !== 'undefined' && window.localStorage?.getItem(PREVIEW_STORAGE_KEY) === '1'
-    const enabled = !!flags?.includes(FEATURE_FLAG) || preview
+    // This is an A/B experiment (feature flag `wizard-drop`, control/test): only the `test`
+    // variant renders the drop; `control` and unflagged visitors get nothing. `flags` (from
+    // onFeatureFlags) is the reactive trigger — it flips non-null once flags resolve — while
+    // getFeatureFlag returns the assigned variant and emits the `$feature_flag_called` exposure.
+    // Fail-closed while flags load. To exercise locally, override the flag with PostHog:
+    // `posthog.featureFlags.override({ 'wizard-drop': 'test' })` or the toolbar.
+    const enabled = !!flags && posthog?.getFeatureFlag?.(FEATURE_FLAG) === 'test'
 
     const capture = useCallback(
         (event: string, properties?: Record<string, unknown>) => {

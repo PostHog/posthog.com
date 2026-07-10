@@ -35,7 +35,8 @@ const GRANT_TTL_MS = 60 * 60 * 1000
 const INSTALL_POLLS_BEFORE_DETECTED = 2
 const STATE_FILE = path.join(os.tmpdir(), 'posthog-wizard-drop-mock-state.json')
 
-const MOCK_INSTALLATION_ID = 12345
+// String to match the real upstream repositories listing, which emits installation ids as strings.
+const MOCK_INSTALLATION_ID = '12345'
 const REPOSITORIES: GrantRepository[] = [
     { full_name: 'mock-dev/happy-path', default_branch: 'main', installation_id: MOCK_INSTALLATION_ID, private: true },
     {
@@ -146,7 +147,8 @@ export const mockClient: ProvisioningClient = {
                     id: body.id,
                     type: 'oauth',
                     oauth: { code: 'mock-oauth-code' },
-                    wizard: { error: { code: 'wizard_run_failed', message: 'Simulated bundled wizard failure' } },
+                    // Mirrors the backend's bundled-block failure code (`_process_wizard_block`).
+                    wizard: { error: { code: 'run_creation_failed', message: 'Simulated bundled wizard failure' } },
                 }
             default:
                 return {
@@ -187,7 +189,8 @@ export const mockClient: ProvisioningClient = {
     async createWizardRun(_bearer, _teamId, { repository }) {
         await sleep(300)
         if (repository === 'mock-dev/wizard-fails') {
-            throw new ProvisioningRequestError('wizard_run_failed', 'Simulated granular retry failure', 500)
+            // Mirrors the backend's wizard_runs failure code (`_create_wizard_run`).
+            throw new ProvisioningRequestError('run_creation_failed', 'Simulated granular retry failure', 500)
         }
         return { task_id: 'mock-task-2', run_id: 'mock-run-2' }
     },
