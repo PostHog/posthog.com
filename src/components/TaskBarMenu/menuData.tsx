@@ -253,6 +253,12 @@ const buildProductsMenuItems = (allProducts: any[]) => {
         },
         {
             type: 'item',
+            label: 'PostHog CLI',
+            link: '/docs/cli',
+            icon: <Icons.IconTerminal className="size-4 text-green" />,
+        },
+        {
+            type: 'item',
             label: 'PostHog Code',
             link: '/code',
             icon: <Icons.IconCoffee className="size-4 text-brown" />,

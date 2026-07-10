@@ -20,6 +20,7 @@ We generally only have product marketers on teams that _already_ have a product 
 | *PostHog Web*       | Annika | Sara   | James H    |
 | *PostHog Research*  | n/a    | Joe    | James H    |
 | *PostHog MCP*       | n/a    | Joe    | James      |
+| *PostHog CLI*       | Unassigned | Unassigned | Unassigned |
 | *AI Gateway*        | Marco  | n/a    | Ben W      |
 | *Agents*            | n/a    | Danilo | Ben W      |
 
