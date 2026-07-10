@@ -31,6 +31,7 @@ import {
     IconSparkles,
     IconStack,
     IconTarget,
+    IconTerminal,
     IconWarning,
 } from '@posthog/icons'
 import { IconMCP } from 'components/OSIcons/Icons'
@@ -419,26 +420,6 @@ const workSurfaces: {
         ),
     },
     {
-        icon: IconCoffee,
-        iconColor: 'text-brown dark:text-brown-dark',
-        label: (
-            <span className="inline-flex items-center gap-2">
-                <Link to="/code" state={{ newWindow: true }} className="font-bold text-primary">
-                    PostHog Code
-                </Link>
-                <span className="inline-flex items-center rounded-sm bg-yellow/15 px-1 py-0.5 text-xs font-bold text-yellow">
-                    Beta
-                </span>
-            </span>
-        ),
-        copy: 'A desktop app for driving parallel agents to edit your product. The same Inbox and reports live here.',
-        cta: (
-            <CallToAction to="/code" state={{ newWindow: true }} type="secondary" size="md">
-                Get the app
-            </CallToAction>
-        ),
-    },
-    {
         icon: IconAtSign,
         iconColor: 'text-sky-blue',
         label: (
@@ -465,6 +446,41 @@ const workSurfaces: {
         cta: (
             <CallToAction to="/mcp" state={{ newWindow: true }} type="secondary" size="md">
                 Hook it up
+            </CallToAction>
+        ),
+    },
+    {
+        icon: IconTerminal,
+        iconColor: 'text-green',
+        label: (
+            <Link to="/docs/cli" state={{ newWindow: true }} className="font-bold text-primary">
+                PostHog CLI
+            </Link>
+        ),
+        copy: 'Self-driving from your terminal. Query your data and drive agents right where you already work, and wire it into your scripts and CI.',
+        cta: (
+            <CallToAction to="/docs/cli" state={{ newWindow: true }} type="secondary" size="md">
+                Read the docs
+            </CallToAction>
+        ),
+    },
+    {
+        icon: IconCoffee,
+        iconColor: 'text-brown dark:text-brown-dark',
+        label: (
+            <span className="inline-flex items-center gap-2">
+                <Link to="/code" state={{ newWindow: true }} className="font-bold text-primary">
+                    PostHog Code
+                </Link>
+                <span className="inline-flex items-center rounded-sm bg-yellow/15 px-1 py-0.5 text-xs font-bold text-yellow">
+                    Beta
+                </span>
+            </span>
+        ),
+        copy: 'A desktop app for driving parallel agents to edit your product. The same Inbox and reports live here.',
+        cta: (
+            <CallToAction to="/code" state={{ newWindow: true }} type="secondary" size="md">
+                Get the app
             </CallToAction>
         ),
     },
@@ -858,7 +874,7 @@ export default function SelfDrivingPage(): JSX.Element {
                             Works in <Highlight>your workflow</Highlight>
                         </h3>
                         <p>
-                            The same Inbox and agents show up across four surfaces (everywhere you go, there's PostHog).
+                            The same Inbox and agents show up across five surfaces (everywhere you go, there's PostHog).
                         </p>
                         <div className="not-prose grid @md/reader-content:grid-cols-2 gap-x-6 gap-y-8 mt-6 mb-12">
                             {workSurfaces.map(({ icon: Icon, iconColor, label, copy, cta }, index) => (
