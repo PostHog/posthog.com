@@ -15,9 +15,9 @@ tags:
   - Engineering
 ---
 
-A few weeks ago, we wrote about the [product improvement pipeline](/blog/what-if-your-product-built-itself): signals come in, get grouped into problems, an agent researches each one, and if it's actionable, it opens a PR. Most of the examples were errors because errors are the easy case. They arrive with a stack trace that says exactly what broke and where.
+Errors are the easiest data to act on in our [product improvement pipeline](/blog/what-if-your-product-built-itself). They arrive with a stack trace that's groupable and says exactly what broke and where. This makes it easy for agents to research each one, and if it's actionable, open a PR to fix it. 
 
-This is about a trickier source: [session replays](/session-replay). Someone clicks a button that doesn't respond, clicks it three more times, and leaves. Typically, nothing lands in your logs for this type of error. The only evidence is a recording sitting in a pile nobody has time to watch. That's the most common kind of bug, and it's almost invisible to everything except a human watching the replay.
+[Session replays](/session-play) are a lot trickier. Someone clicks a button that doesn't respond, clicks it three more times, and leaves. Typically, nothing lands in your logs for this type of error. The only evidence is a recording nobody has time to watch. That's the most common kind of bug, and it's almost invisible to everything except a human watching the replay.
 
 So we pointed a scanner at the replays. [Replay Vision](/docs/replay-vision) is our AI layer over session replay. You set up a scanner, aim it at the sessions you care about, and it reads them for you – all of them, not a sample. Scanners come in a few shapes: summarizers write up what happened in a session, scorers put a number on something like frustration, and classifiers sort sessions into buckets. When a scanner spots something worth acting on, it raises a signal.
 
