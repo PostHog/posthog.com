@@ -26,6 +26,7 @@ export const langfuse = {
                 session_replay: false,
                 product_analytics: false,
                 feature_flags: false,
+                ai_gateway_proxy: false,
             },
 tracing: {
     features: {
