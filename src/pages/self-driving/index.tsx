@@ -901,35 +901,6 @@ export default function SelfDrivingPage({
                         />
                     </div>
 
-                    {/* Live ticker: real self-driving PRs merged into PostHog's own repo */}
-                    {selfDrivingPRs.length > 0 && (
-                        <div className="not-prose -mx-4 @md/reader-content:-mx-6 @xl/reader-content:-mx-8 border-b border-primary bg-accent px-4 @md/reader-content:px-6 @xl/reader-content:px-8 py-4 mb-6">
-                            <div className="max-w-7xl mx-auto">
-                                <div className="mb-3 flex items-center justify-between gap-4">
-                                    <div className="flex items-center gap-2">
-                                        {/* Pulsing "live" indicator */}
-                                        <span className="relative flex size-2 shrink-0">
-                                            <span className="absolute inline-flex size-full animate-pulse rounded-full bg-green opacity-75" />
-                                            <span className="relative inline-flex size-2 rounded-full bg-green" />
-                                        </span>
-                                        <p className="m-0 font-mono text-[11px] font-bold uppercase tracking-wider text-secondary">
-                                            Merged into PostHog by self-driving
-                                        </p>
-                                    </div>
-                                    <Link
-                                        to="https://github.com/PostHog/posthog/pulls?q=is%3Apr+is%3Amerged+%22from+an+inbox+report%22"
-                                        external
-                                        externalNoIcon
-                                        className="whitespace-nowrap text-xs font-semibold text-red dark:text-yellow"
-                                    >
-                                        See them all →
-                                    </Link>
-                                </div>
-                                <SelfDrivingTicker prs={selfDrivingPRs} />
-                            </div>
-                        </div>
-                    )}
-
                     <div className="max-w-4xl @7xl:max-w-7xl mx-auto">
                         {/* How a product develops itself */}
                         <p id="how" className="my-6 text-2xl font-bold @md/reader-content:text-3xl">
@@ -1037,6 +1008,33 @@ export default function SelfDrivingPage({
                             ]}
                         />
                         <div className="clear-both" />
+
+                        {/* Live ticker: real self-driving PRs merged into PostHog's own repo */}
+                        {selfDrivingPRs.length > 0 && (
+                            <div className="not-prose my-8 overflow-hidden rounded-md border border-primary bg-accent p-4 @md/reader-content:p-6">
+                                <div className="mb-3 flex items-center justify-between gap-4">
+                                    <div className="flex items-center gap-2">
+                                        {/* Pulsing "live" indicator */}
+                                        <span className="relative flex size-2 shrink-0">
+                                            <span className="absolute inline-flex size-full animate-pulse rounded-full bg-green opacity-75" />
+                                            <span className="relative inline-flex size-2 rounded-full bg-green" />
+                                        </span>
+                                        <p className="m-0 font-mono text-[11px] font-bold uppercase tracking-wider text-secondary">
+                                            Merged into PostHog by self-driving
+                                        </p>
+                                    </div>
+                                    <Link
+                                        to="https://github.com/PostHog/posthog/pulls?q=is%3Apr+is%3Amerged+%22from+an+inbox+report%22"
+                                        external
+                                        externalNoIcon
+                                        className="whitespace-nowrap text-xs font-semibold text-red dark:text-yellow"
+                                    >
+                                        See them all →
+                                    </Link>
+                                </div>
+                                <SelfDrivingTicker prs={selfDrivingPRs} />
+                            </div>
+                        )}
 
                         {/* It runs on the data you already have */}
                         <h3>
