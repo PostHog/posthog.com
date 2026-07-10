@@ -454,8 +454,8 @@ import FilterScreenEvents from '../_snippets/filter-screen-events-beforesend.mdx
 val ignoredScreens = setOf("Splash", "Debug")
 
 config.addBeforeSend { event ->
-    val screenName = event.properties?.get("\$screen_name") as? String
-    if (event.event == "\$screen" && screenName in ignoredScreens) {
+    val screenName = event.properties?.get("$screen_name") as? String
+    if (event.event == "$screen" && screenName in ignoredScreens) {
         null
     } else {
         event
