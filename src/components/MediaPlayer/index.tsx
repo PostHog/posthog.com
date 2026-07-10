@@ -19,9 +19,15 @@ interface MediaPlayerProps {
     videoId: string
     source?: 'youtube' | 'wistia'
     startTime?: number
+    borderRadius?: boolean
 }
 
-export default function MediaPlayer({ videoId, source = 'youtube', startTime = 0 }: MediaPlayerProps) {
+export default function MediaPlayer({
+    videoId,
+    source = 'youtube',
+    startTime = 0,
+    borderRadius = true,
+}: MediaPlayerProps) {
     const { websiteMode } = useApp()
     const [playerState, setPlayerState] = useState({
         isPlaying: true,
@@ -145,8 +151,14 @@ export default function MediaPlayer({ videoId, source = 'youtube', startTime = 0
                         smallPlayButton: false,
                         bigPlayButton: false,
                         playerColor: '000000',
+                        ...(borderRadius ? {} : { playerBorderRadius: 0, roundedPlayer: 0 }),
                     },
                     onReady: (video: any) => {
+                        if (!borderRadius) {
+                            video.setPlayerBorderRadius?.(0)
+                            video.setRoundedPlayer?.(0)
+                        }
+
                         setPlayerState((prev: any) => ({
                             ...prev,
                             player: video,
@@ -189,7 +201,7 @@ export default function MediaPlayer({ videoId, source = 'youtube', startTime = 0
                 initializeWistiaPlayer()
             }
         }
-    }, [videoId, source, startTime])
+    }, [videoId, source, startTime, borderRadius])
 
     const handlePlayPause = () => {
         if (playerState.player) {
@@ -346,7 +358,10 @@ export default function MediaPlayer({ videoId, source = 'youtube', startTime = 0
                             {source === 'youtube' ? (
                                 <div id={`video-player-iframe-${videoId}`} className="rounded w-full aspect-video" />
                             ) : (
-                                <div ref={containerRef} className="rounded w-full aspect-video" />
+                                <div
+                                    ref={containerRef}
+                                    className={`w-full aspect-video ${borderRadius ? 'rounded' : 'rounded-none'}`}
+                                />
                             )}
                         </div>
 

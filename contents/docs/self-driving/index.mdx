@@ -9,9 +9,14 @@ contentMaxWidthClass: max-w-5xl
 
 import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
 import OSButton from 'components/OSButton'
-import { IconMessage, IconLaptop, IconMagic } from '@posthog/icons'
+import WizardCommand from 'components/WizardCommand'
+import { IconMessage, IconLaptop, IconMagic, IconCode, IconTerminal } from '@posthog/icons'
 
-New to PostHog? Let's get you on the fast track to using it well: understand how it works, get set up, and start shipping.
+PostHog makes your product self-driving. It watches how people actually use your product, finds what's worth fixing, opens a pull request, and measures whether the change worked. You review and merge. Turning it on takes one command:
+
+<WizardCommand command="self-driving" />
+
+Here's the big idea, how to get set up, and what to expect once it's running.
 
 <QuestLog firstSpeechBubble="Vroom vroom!" lastSpeechBubble="Happy shipping!">
 
@@ -21,7 +26,7 @@ A self-driving product can prompt itself. PostHog turns your product data into s
 
 Instead of waiting for someone to notice a bug, file a ticket, and assign it, PostHog spots the pattern in your data, drafts a fix, and opens a pull request for you to review.
 
-It runs as a loop. Scouts and signal sources emit signals, signals group into reports, and an agent investigates each report. 
+It runs as a loop. Scouts and signal sources emit signals, signals group into reports, and an agent investigates each report.
 
 When a report is actionable, PostHog opens a pull request for you to review and merge; when it needs your input, it surfaces the report in your inbox instead. PostHog then checks whether the change worked and feeds the result back into the next pass.
 
@@ -49,9 +54,13 @@ flowchart LR
     class G outcome
 ```
 
-Self-driving works because the signals that drive the loop live in your product data, and that's exactly what PostHog has. 
+Self-driving works because the signals that drive the loop live in your product data, and that's exactly what PostHog has.
 
 A general-purpose coding agent has your code, but not your context. PostHog ties everything together into a [context warehouse](/docs/self-driving/context): your product usage data, your data warehouse, and the context your agents need, in one place. That's what helps your agents do their best work.
+
+We don't just sell this loop, we run it. A troop of 35 scouts watches the PostHog app, and reports about posthog.com become pull requests on [the public repo that builds it](https://github.com/PostHog/posthog.com/pulls). If self-driving ever stops being worth it, we'll be the first to know.
+
+To see the loop play out on a single bug, from first signal to measured fix, read the [anatomy of a pull request](/docs/self-driving/anatomy-of-a-pr).
 
 </QuestLogItem>
 
@@ -59,7 +68,7 @@ A general-purpose coding agent has your code, but not your context. PostHog ties
 
 Self-driving is only as good as the data feeding it. Run our self-driving wizard to get set up in one command. It installs PostHog if you haven't already, then turns on your signal sources and sets up your scouts. Add the [Slack app](/docs/slack) to bring your whole team in.
 
-Once data is flowing, PostHog will continuously monitor your product and reports begin landing in your inbox. Most teams are set up in a few minutes.
+Once data is flowing, PostHog continuously monitors your product and reports begin landing in your inbox. Most teams are set up in a few minutes.
 
 <OSButton variant="primary" asLink to="/docs/self-driving/setup">
     Set up self-driving
@@ -85,7 +94,7 @@ Put together, that's the self-improving loop: scouts and sources emit signals, s
 
 </QuestLogItem>
 
-<QuestLogItem title="Use PostHog from anywhere" subtitle="Slack, Web, and MCP" icon="IconLaptop">
+<QuestLogItem title="Use PostHog from anywhere" subtitle="Slack, Web, Code, MCP, and CLI" icon="IconLaptop">
 
 Self-driving meets you where you already work. Pick the surface that fits how you want to work.
 
@@ -97,22 +106,44 @@ Mention `@PostHog` in any channel to ask about your data or put an agent to work
 
 The full [PostHog app](https://app.posthog.com), in your browser. Explore your data, watch the signals feeding the loop, and review the work agents propose.
 
+### <IconCode className="text-green w-7 -mt-1 inline-block" /> Code
+
+[PostHog Code](/docs/posthog-code) is a desktop app for driving parallel agents that edit your product. The same inbox, reports, and scouts live there too.
+
 ### <IconMagic className="text-purple w-7 -mt-1 inline-block" /> MCP
 
-Bring PostHog's data and tools into Claude Code, Cursor, and other AI tools, so your own agent works with product context, not only code. See the [MCP docs](/docs/model-context-protocol) or [CLI docs](/docs/cli).
+Bring PostHog's data and tools into Claude Code, Cursor, and other AI tools, so your own agent works with product context, not only code. See the [MCP docs](/docs/model-context-protocol).
+
+### <IconTerminal className="text-orange w-7 -mt-1 inline-block" /> CLI
+
+PostHog from your terminal. See the [CLI docs](/docs/cli) to install it and see what it can do.
 
 </QuestLogItem>
 
 <QuestLogItem title="See it work" subtitle="Your day-to-day" icon="IconFlag">
 
-Once self-driving is running, you don't have to prompt it. Scouts keep watching your product, reports become pull requests, and they land in your [inbox](/docs/self-driving/inbox) ranked by priority. 
+Once self-driving is running, you don't have to prompt it. Scouts keep watching your product, reports become pull requests, and they land in your [inbox](/docs/self-driving/inbox) ranked by priority.
 
-The day-to-day is simple: open your inbox, review what's waiting, and merge the changes you're happy with, the same as any other pull request. 
+The day-to-day is simple: open your inbox, review what's waiting, and merge the changes you're happy with, the same as any other pull request.
 
 PostHog then checks whether each change moved the metric and feeds the result into the next pass.
 
 <OSButton variant="primary" asLink to="/docs/self-driving/inbox">
   Explore your inbox
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Know what it's good at (and what it isn't)" subtitle="Honest limits" icon="IconTarget">
+
+Self-driving is at its best in maintenance mode: bug fixes, broken flows, instrumentation gaps, and the steady optimization work that never makes it to the top of a sprint. Robots do the maintenance so humans can do the creative work.
+
+It won't invent your product vision. Deciding what to build next, designing a new feature, or making a judgment call between two valid futures is your job. Reports that need that kind of judgment land in your inbox marked **needs input** instead of becoming a pull request.
+
+We hold it to a simple standard: you pay a flat **$15 per pull request**, your first three each month are free, reports are always free, and [if a PR wasn't worth paying for, we refund it](/docs/self-driving/pricing#refunds). Work priced per outcome has to be worth the outcome.
+
+<OSButton variant="primary" asLink to="/docs/self-driving/pricing">
+  How pricing works
 </OSButton>
 
 </QuestLogItem>

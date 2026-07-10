@@ -45,7 +45,7 @@ The most basic is using something like Claude Code with a `while true` (aka [Ral
 
 Good examples of loops include:
 
-- **PR babysitter.** The goal is to get a pull request to pass tests and "get CI green." The context is the changes (diff) as well as the testing suite, and the evaluation is done by the CI.
+- **[PR babysitter](/newsletter/code-review-tips#2-delegate-pr-babysitting-to-loops).** The goal is to get a pull request to pass tests and "get CI green." The context is the changes (diff) as well as the testing suite, and the evaluation is done by the CI.
 
 - **Bug fixer.** The goal is to fix the bug. The context is the bug report and error trace. The evaluation is the test suite, snapshots, logs.
 
