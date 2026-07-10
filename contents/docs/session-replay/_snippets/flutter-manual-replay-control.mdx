@@ -11,3 +11,33 @@ You can manually control when to start and stop session recordings using the fol
   - Stops/pauses the current session recording.
 
 > **Note:** Calling these methods will have no effect if session recordings are disabled in your PostHog [Project Settings](https://app.posthog.com/project/settings). Manual starts still respect project ingestion controls, including sampling and event triggers.
+
+#### Record or ignore specific screens
+
+You can combine these methods with your navigation to record only certain screens, or to pause recording on sensitive ones. For example, using a `NavigatorObserver`, stop recording on a sensitive route and resume otherwise:
+
+```dart
+const ignoredScreens = {'Payment', 'Settings'};
+
+class RecordingByScreenObserver extends NavigatorObserver {
+  void _update(Route<dynamic>? route) {
+    final screenName = route?.settings.name;
+    if (screenName != null && ignoredScreens.contains(screenName)) {
+      Posthog().stopSessionRecording();
+    } else {
+      Posthog().startSessionRecording();
+    }
+  }
+
+  @override
+  void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) => _update(route);
+
+  @override
+  void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) => _update(previousRoute);
+}
+
+// Then register it on your MaterialApp:
+// navigatorObservers: [RecordingByScreenObserver()]
+```
+
+Invert the check (`startSessionRecording` only for screens in an allowlist, `stopSessionRecording` otherwise) if you'd rather record just a specific set of screens.
