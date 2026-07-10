@@ -47,8 +47,6 @@ The agent wrote the fix and, at 12:53, opened a draft PR: [#67394](https://githu
 
 ![PR report in PostHog Inbox](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_07_10_at_12_03_50_2x_933b3c7b5f.png)
 
-Over the next week, the report kept pulling in the same struggle from other projects and turned up a related glitch right next to it. That's the point of grouping: one frustrated session is noise, but the same struggle stacking up is a defect with a queue behind it.
-
 ## Two more, same corner of the app
 
 Both of the other PRs landed on the same surface – the taxonomic filter and property picker – which tells you something on its own about how fiddly that little popover is.
