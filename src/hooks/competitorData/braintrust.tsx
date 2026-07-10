@@ -26,6 +26,7 @@ export const braintrust = {
                 human_annotation: true,
                 session_replay: false,
                 product_analytics: false,
+                ai_gateway_proxy: true,
             },
         },
         session_replay: {

@@ -72,6 +72,7 @@ import { pendo } from '../../hooks/competitorData/pendo'
 import { piwik_pro } from '../../hooks/competitorData/piwik_pro'
 import { plausible } from '../../hooks/competitorData/plausible'
 import { posthog } from '../../hooks/competitorData/posthog'
+import { portkey } from '../../hooks/competitorData/portkey'
 import { quantum_metric } from '../../hooks/competitorData/quantum_metric'
 import { raygun } from '../../hooks/competitorData/raygun'
 import { replay_io } from '../../hooks/competitorData/replay_io'
@@ -676,6 +677,7 @@ export default function ProductComparisonTable({
         piwik_pro,
         plausible,
         posthog,
+        portkey,
         quantum_metric,
         raygun,
         replay_io,

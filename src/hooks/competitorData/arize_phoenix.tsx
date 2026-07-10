@@ -25,6 +25,7 @@ export const arize_phoenix = {
                 human_annotation: true,
                 session_replay: false,
                 product_analytics: false,
+                ai_gateway_proxy: false,
             },
         },
         session_replay: {
