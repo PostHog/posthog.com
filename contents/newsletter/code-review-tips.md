@@ -119,7 +119,7 @@ Now, most of those are done by our StampHog agent instead. And in just one quart
 Our engineers add a stamphog label on their PR in GitHub, and it runs a few safety checks based on:
 
 - **PR state.** No merge conflicts or changes requested
-- **Blast radius.** Deny list keywords (auth, secrets, billing, public APIs, etc.)
+- **Blast radius.** [Deny-list](https://github.com/PostHog/posthog/blob/master/tools/pr-approval-agent/README.md#t2--never-ai-approved) keywords (auth, secrets, billing, public APIs, etc.)
 - **Diff size.** Under 500 lines and 20 files
 - **A simple LLM check.** For basic showstoppers
 
