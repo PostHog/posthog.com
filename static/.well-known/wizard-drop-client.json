@@ -6,8 +6,8 @@
     "response_types": ["code"],
     "token_endpoint_auth_method": "none",
     "com.posthog": {
-        "verification_token": "phvt_PLACEHOLDER_REPLACE_BEFORE_LAUNCH",
-        "scopes": [],
+        "verification_token": "phvt_t7afwYsZyhYZv8oLZkbYisDkDHSo5JDE4WujpY7WMzVL",
+        "scopes": ["organization:read", "project:read"],
         "optional_scopes": []
     }
 }

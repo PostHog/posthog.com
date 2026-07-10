@@ -41,7 +41,6 @@ const handler = async (req: GatsbyFunctionRequest, res: GatsbyFunctionResponse) 
         }
         return respond({
             installed: true,
-            installation_id: result.installation_id,
             repositories: result.repositories,
         })
     } catch (error) {

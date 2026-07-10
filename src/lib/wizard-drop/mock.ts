@@ -4,7 +4,7 @@
  * endpoints existing.
  *
  * State lives in a JSON file under os.tmpdir() rather than module memory because Gatsby bundles
- * each function separately: the github-callback bundle (which creates grants) and the repos /
+ * each function separately: the github/callback bundle (which creates grants) and the repos /
  * provision bundles (which read them) each get their own module instance, so in-memory state
  * would not be shared. Delete the file (or reboot) to reset scenarios.
  *
@@ -35,12 +35,33 @@ const GRANT_TTL_MS = 60 * 60 * 1000
 const INSTALL_POLLS_BEFORE_DETECTED = 2
 const STATE_FILE = path.join(os.tmpdir(), 'posthog-wizard-drop-mock-state.json')
 
+const MOCK_INSTALLATION_ID = 12345
 const REPOSITORIES: GrantRepository[] = [
-    { full_name: 'mock-dev/happy-path', default_branch: 'main' },
-    { full_name: 'mock-dev/wizard-fails', default_branch: 'main' },
-    { full_name: 'mock-dev/wizard-retry-succeeds', default_branch: 'main' },
-    { full_name: 'mock-dev/existing-user', default_branch: 'main' },
-    { full_name: 'mock-dev/rate-limited', default_branch: 'main' },
+    { full_name: 'mock-dev/happy-path', default_branch: 'main', installation_id: MOCK_INSTALLATION_ID, private: true },
+    {
+        full_name: 'mock-dev/wizard-fails',
+        default_branch: 'main',
+        installation_id: MOCK_INSTALLATION_ID,
+        private: true,
+    },
+    {
+        full_name: 'mock-dev/wizard-retry-succeeds',
+        default_branch: 'main',
+        installation_id: MOCK_INSTALLATION_ID,
+        private: true,
+    },
+    {
+        full_name: 'mock-dev/existing-user',
+        default_branch: 'main',
+        installation_id: MOCK_INSTALLATION_ID,
+        private: true,
+    },
+    {
+        full_name: 'mock-dev/rate-limited',
+        default_branch: 'main',
+        installation_id: MOCK_INSTALLATION_ID,
+        private: true,
+    },
 ]
 
 type MockGrant = { createdAt: number; expired: boolean; repoPolls: number }
@@ -91,7 +112,7 @@ export const mockClient: ProvisioningClient = {
         const grantId = `mock-grant-${crypto.randomBytes(8).toString('hex')}`
         state.grants[grantId] = { createdAt: Date.now(), expired: false, repoPolls: 0 }
         writeState(state)
-        return { grant_id: grantId, gh_login: 'mock-dev', email: 'mock@example.com' }
+        return { grant_id: grantId, gh_login: 'mock-dev', email: 'mock@example.com', expires_in: 3600 }
     },
 
     async getGrantRepositories(grantId) {
@@ -103,7 +124,7 @@ export const mockClient: ProvisioningClient = {
             writeState(state)
             return { installed: false }
         }
-        return { installed: true, installation_id: 12345, repositories: REPOSITORIES }
+        return { installed: true, repositories: REPOSITORIES }
     },
 
     async createAccountRequest(body) {

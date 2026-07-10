@@ -20,7 +20,7 @@ const handler = async (req: GatsbyFunctionRequest, res: GatsbyFunctionResponse) 
         const state = sign({ nonce: generateNonce() })
         setCookie(res, COOKIES.state, state, COOKIE_MAX_AGE.state)
 
-        const redirectUri = `${config.siteUrl}/api/wizard/github-callback`
+        const redirectUri = `${config.siteUrl}/api/wizard/github/callback`
         if (config.mock) {
             return redirect(res, `${redirectUri}?code=mock&state=${encodeURIComponent(state)}`)
         }

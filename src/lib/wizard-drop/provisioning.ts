@@ -4,9 +4,9 @@
  *
  * ALL parsing of upstream responses lives in this file on purpose: the GitHub-grant endpoints,
  * the `configuration.wizard` block, and the `github_integration`/`wizard_runs` resource actions
- * are net-new per `wizard-drop-rfc.md` and have not shipped in the monorepo yet, so this is the
- * single file to reconcile when they land. `getProvisioningClient()` returns the in-memory mock
- * when `WIZARD_DROP_MOCK=1`.
+ * are net-new per `wizard-drop-rfc.md`, so this is the single file to reconcile with the monorepo
+ * contract (see `components/WizardDrop/README.md` for the reconciliation checklist).
+ * `getProvisioningClient()` returns the in-memory mock when `WIZARD_DROP_MOCK=1`.
  */
 import { API_VERSION, config } from './config'
 import type {
@@ -14,6 +14,7 @@ import type {
     AccountRequestResponse,
     GithubGrant,
     GrantRepositoriesResponse,
+    GrantRepository,
     ResourceCreateResponse,
     TokenResponse,
     WizardRunResponse,
@@ -135,7 +136,16 @@ const realClient: ProvisioningClient = {
         throwIfRateLimited(result)
         const { status, json } = result
         if (status >= 200 && status < 300 && json?.grant_id) {
-            return { grant_id: json.grant_id, gh_login: json.gh_login, email: json.email }
+            // The POST fetches /user/emails server-side and returns the verified email here — we
+            // never fetch it ourselves. `email` is null when GitHub has no verified email (still a
+            // usable grant; the drop collects one inline). `expires_in` (grant store TTL, 3600s) is
+            // surfaced so the cookie mirror can track the authoritative server-side expiry.
+            return {
+                grant_id: json.grant_id,
+                gh_login: json.gh_login,
+                email: typeof json.email === 'string' ? json.email : null,
+                expires_in: typeof json.expires_in === 'number' ? json.expires_in : undefined,
+            }
         }
         throw new ProvisioningRequestError(
             errorCode(json, 'grant_exchange_failed'),
@@ -154,10 +164,24 @@ const realClient: ProvisioningClient = {
         throwIfRateLimited(result)
         const { status, json } = result
         if (isGrantError(status, json)) throw new GrantExpiredError()
-        if (status >= 200 && status < 300 && typeof json?.installed === 'boolean') {
-            return json.installed
-                ? { installed: true, installation_id: json.installation_id, repositories: json.repositories ?? [] }
-                : { installed: false }
+        // Upstream shape: {gh_login, installations: [{id, account_login, repository_selection}],
+        // repositories: [{installation_id, full_name, default_branch, private}]}. No `installed`
+        // flag — the App is installed iff `installations` is non-empty. Each repo carries its own
+        // installation_id (a user may have installed on several accounts), so we normalize to a
+        // flat list keyed per-repo and let the picker choose which installation the run targets.
+        if (status >= 200 && status < 300 && Array.isArray(json?.installations)) {
+            if (json.installations.length === 0) {
+                return { installed: false }
+            }
+            const repositories: GrantRepository[] = (Array.isArray(json.repositories) ? json.repositories : [])
+                .filter((repo: any) => repo?.full_name && Number.isInteger(repo?.installation_id))
+                .map((repo: any) => ({
+                    full_name: repo.full_name,
+                    default_branch: repo.default_branch,
+                    installation_id: repo.installation_id,
+                    private: repo.private,
+                }))
+            return { installed: true, repositories }
         }
         throw new ProvisioningRequestError(
             errorCode(json, 'repositories_failed'),

@@ -21,13 +21,16 @@ const PREVIEW_STORAGE_KEY = 'wizard-drop-preview'
 const INSTALL_POLL_INTERVAL_MS = 5000
 const INSTALL_POLL_TIMEOUT_MS = 5 * 60 * 1000
 
+/** Lightweight client-side sanity check; the provisioning API is the authoritative validator. */
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
 type View =
     | { kind: 'loading' }
     | { kind: 'idle' }
     | { kind: 'connecting' }
     | { kind: 'awaiting_install'; installUrl: string }
-    | { kind: 'ready'; repositories: GrantRepository[]; installationId: number }
-    | { kind: 'provisioning'; repositories: GrantRepository[]; installationId: number }
+    | { kind: 'ready'; repositories: GrantRepository[] }
+    | { kind: 'provisioning'; repositories: GrantRepository[] }
     | { kind: 'existing_user'; url: string }
     | { kind: 'success' }
     | { kind: 'degraded' }
@@ -45,6 +48,9 @@ export default function WizardDrop(): JSX.Element | null {
     const [view, setView] = useState<View>({ kind: 'loading' })
     const [identity, setIdentity] = useState<{ ghLogin?: string; email?: string }>({})
     const [selectedRepo, setSelectedRepo] = useState<string | undefined>(undefined)
+    // Editable account email — always shown, defaulted to whatever GitHub gave us (may be empty
+    // if the GitHub account exposes no verified email). The provision call sends this value.
+    const [email, setEmail] = useState('')
     const initialized = useRef(false)
     const wasAwaitingInstall = useRef(false)
 
@@ -98,7 +104,7 @@ export default function WizardDrop(): JSX.Element | null {
             auto: data.repositories.length === 1,
         })
         setSelectedRepo(data.repositories.length === 1 ? data.repositories[0].full_name : undefined)
-        setView({ kind: 'ready', repositories: data.repositories, installationId: data.installation_id })
+        setView({ kind: 'ready', repositories: data.repositories })
     }, [capture, toError])
 
     const checkSession = useCallback(
@@ -154,6 +160,12 @@ export default function WizardDrop(): JSX.Element | null {
         }
     }, [enabled, capture, checkSession, toError])
 
+    // Default the editable email to GitHub's once it's known, without clobbering user edits.
+    // Intentionally keyed only on identity.email (re-running on `email` would fight user edits).
+    useEffect(() => {
+        if (identity.email && !email) setEmail(identity.email)
+    }, [identity.email])
+
     // Poll for the GitHub App installation while the user completes it in another tab.
     useEffect(() => {
         if (view.kind !== 'awaiting_install') return
@@ -183,11 +195,17 @@ export default function WizardDrop(): JSX.Element | null {
         }
         setIdentity({})
         setSelectedRepo(undefined)
+        setEmail('')
         setView({ kind: 'idle' })
     }, [])
 
+    const emailValid = EMAIL_RE.test(email.trim())
+
     const provision = useCallback(async () => {
-        if (view.kind !== 'ready' || !selectedRepo) return
+        if (view.kind !== 'ready' || !selectedRepo || !emailValid) return
+        // Each repo names its own installation; the run targets the one that owns the picked repo.
+        const repo = view.repositories.find((r) => r.full_name === selectedRepo)
+        if (!repo) return
         capture('wizard drop provision clicked', { repository: selectedRepo })
         setView({ ...view, kind: 'provisioning' })
         let data: ProvisionApiResponse
@@ -195,7 +213,11 @@ export default function WizardDrop(): JSX.Element | null {
             data = await fetch('/api/wizard/provision', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ installation_id: view.installationId, repository: selectedRepo }),
+                body: JSON.stringify({
+                    installation_id: repo.installation_id,
+                    repository: selectedRepo,
+                    email: email.trim(),
+                }),
             }).then((res) => res.json())
         } catch {
             toError('provisioning_failed')
@@ -212,7 +234,7 @@ export default function WizardDrop(): JSX.Element | null {
         } else {
             toError(data.code ?? 'provisioning_failed', 'retry_after' in data ? data.retry_after : undefined)
         }
-    }, [view, selectedRepo, capture, toError])
+    }, [view, selectedRepo, email, emailValid, capture, toError])
 
     const continueAsExistingUser = useCallback(() => {
         if (view.kind !== 'existing_user') return
@@ -271,12 +293,27 @@ export default function WizardDrop(): JSX.Element | null {
             ) : view.kind === 'ready' || view.kind === 'provisioning' ? (
                 <div>
                     <p className="mb-3">
-                        Connected as <strong>{identity.ghLogin}</strong>
-                        {identity.email ? <span className="opacity-70"> ({identity.email})</span> : null}.{' '}
+                        Connected as <strong>{identity.ghLogin}</strong>.{' '}
                         {view.repositories.length === 1
                             ? 'We found one repository:'
                             : 'Pick the repository to instrument:'}
                     </p>
+                    <label className="block text-sm mb-3">
+                        <span className="opacity-70">Email for your PostHog account</span>
+                        <input
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            disabled={view.kind === 'provisioning'}
+                            placeholder="you@company.com"
+                            className="mt-1 block w-full max-w-sm rounded border border-border bg-white px-2 py-1.5 text-sm dark:bg-accent-dark"
+                        />
+                        <span className="mt-1 block text-xs opacity-60">
+                            {identity.email
+                                ? "Pulled from GitHub — change it if you'd rather use a different address."
+                                : "GitHub didn't share a verified email, so enter the one you'd like to use."}
+                        </span>
+                    </label>
                     <div className="flex flex-col @md:flex-row @md:items-center gap-3">
                         {view.repositories.length === 1 ? (
                             <code className="text-sm">{view.repositories[0].full_name}</code>
@@ -292,7 +329,7 @@ export default function WizardDrop(): JSX.Element | null {
                             variant="primary"
                             size="md"
                             onClick={provision}
-                            disabled={!selectedRepo || view.kind === 'provisioning'}
+                            disabled={!selectedRepo || !emailValid || view.kind === 'provisioning'}
                         >
                             {view.kind === 'provisioning' ? (
                                 <>
@@ -314,7 +351,7 @@ export default function WizardDrop(): JSX.Element | null {
             ) : view.kind === 'existing_user' ? (
                 <ExistingUserPanel onContinue={continueAsExistingUser} />
             ) : view.kind === 'success' ? (
-                <SuccessPanel email={identity.email} />
+                <SuccessPanel email={email.trim() || identity.email} />
             ) : view.kind === 'degraded' ? (
                 <DegradedPanel />
             ) : (
