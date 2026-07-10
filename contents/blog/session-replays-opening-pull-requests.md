@@ -19,9 +19,11 @@ Errors are the easiest data to act on in our [product improvement pipeline](/blo
 
 [Session replays](/session-play) are a lot trickier. Someone clicks a button that doesn't respond, clicks it three more times, and leaves. Typically, nothing lands in your logs for this type of error. The only evidence is a recording nobody has time to watch. That's the most common kind of bug, and it's almost invisible to everything except a human watching the replay.
 
-So we pointed a scanner at the replays. [Replay Vision](/docs/replay-vision) is our AI layer over session replay. You set up a scanner, aim it at the sessions you care about, and it reads them for you – all of them, not a sample. Scanners come in a few shapes: summarizers write up what happened in a session, scorers put a number on something like frustration, and classifiers sort sessions into buckets. When a scanner spots something worth acting on, it raises a signal.
+[Replay Vision](/docs/replay-vision) is our solution to this. It is our AI layer over session replay. You set up a scanner, aim it at the sessions you care about, and it reads them for you – all of them, not a sample. Scanners come in a few shapes: summarizers write up what happened in a session, scorers put a number on something like frustration, and classifiers sort sessions into buckets. 
 
-The signals flow into the Inbox, the queue at the center of PostHog's [self-driving loop](/blog/self-driving-product), where signals from across your product are grouped into reports, researched by [scouts](/docs/self-driving/scouts), and turned into work. In the last week, PostHog turned three of them into pull requests, and all we (humans) had to do was merge.
+When a scanner spots something worth acting on, it raises a signal. These flow into the Inbox, the queue at the center of PostHog's [self-driving loop](/blog/self-driving-product), where signals from across your product are grouped into reports, researched by background agents, and turned into work. 
+
+To show you how this works, here's the details on three pull requests opened from replays. 
 
 ## The struggle scanner
 
