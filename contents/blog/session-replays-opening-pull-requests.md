@@ -21,15 +21,15 @@ Errors are the easiest data to act on in our [product improvement pipeline](/blo
 
 So we pointed a scanner at the replays. [Replay Vision](/docs/replay-vision) is our AI layer over session replay. You set up a scanner, aim it at the sessions you care about, and it reads them for you – all of them, not a sample. Scanners come in a few shapes: summarizers write up what happened in a session, scorers put a number on something like frustration, and classifiers sort sessions into buckets. When a scanner spots something worth acting on, it raises a signal.
 
-The signals flow into the Inbox, the queue at the center of PostHog's [self-driving loop](/blog/self-driving-product), where signals from across your product are grouped into reports, researched by background agents, and turned into work. In the last week, PostHog turned three of them into pull requests, and all we (humans) had to do was merge.
+The signals flow into the Inbox, the queue at the center of PostHog's [self-driving loop](/blog/self-driving-product), where signals from across your product are grouped into reports, researched by [scouts](/docs/self-driving/scouts), and turned into work. In the last week, PostHog turned three of them into pull requests, and all we (humans) had to do was merge.
 
-## The scanner
+## The struggle scanner
 
 The one doing the work here is a success/struggle classifier. It reads real user sessions across projects, works out whether the person actually did the thing they came to do, and tags each session `success` or `struggled`. When it tags a struggle, it drops a signal into the same pipeline our errors flow through.
 
 ![scanner behavior description](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_07_09_at_14_19_03_2x_7d96b9b4f4.png)
 
-So far, the scanner has read ~3,400 sessions and emitted ~1,850 signals in the first two weeks. Whether half is the right number is an open question, and we'll come back to it.
+In the first two weeks, the scanner has read ~3,400 sessions and emitted ~1,850 signals. Whether half is the right number is an open question, and we'll come back to it.
 
 Once a signal is in, it stops being a session replay problem and becomes a normal pipeline problem: cluster the related signals into a report, promote the report once it's heavy enough, hand it to a research agent, decide if it's actionable, and if so, write the fix.
 
