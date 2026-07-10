@@ -626,8 +626,18 @@ export const handbookSidebar = [
                 url: '/handbook/content/metadata',
             },
             {
-                name: 'LinkedIn',
-                url: '/handbook/content/linkedin',
+                name: 'Social media',
+                url: '/handbook/content/social-media',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/handbook/content/social-media',
+                    },
+                    {
+                        name: 'LinkedIn',
+                        url: '/handbook/content/linkedin',
+                    },
+                ],
             },
         ],
     },
