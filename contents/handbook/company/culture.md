@@ -41,6 +41,7 @@ We're an all-remote company that allows people to work from almost anywhere in t
 * We have an open core business model. This helps the community understand our decision-making.
 * It is usually clearer than a conversation, so everyone can row in the same direction.
 * It is very leveraged as we grow a large community and look to hire people around the world.
+* another edit for a test
 
 To accomplish this, we use [asynchronous communication](/handbook/company/communication) as a starting point and stay as open and transparent as we can by communicating through public issues, pull requests, and (minimally) Slack.
 
