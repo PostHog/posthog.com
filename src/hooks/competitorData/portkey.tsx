@@ -1,5 +1,5 @@
-export const helicone = {
-    name: 'Helicone',
+export const portkey = {
+    name: 'Portkey',
     products: {
         ai_observability: {
             available: true,
@@ -10,7 +10,7 @@ export const helicone = {
                 trace_visualization: true,
                 token_tracking: true,
                 prompt_playground: true,
-                prompt_evaluations: true,
+                prompt_evaluations: false,
                 alerting: true,
                 error_tracking: true,
                 system_prompts: true,
@@ -19,14 +19,15 @@ export const helicone = {
                 llm_translation: false,
                 sentiment_classification: false,
                 privacy_mode: true,
-                agent_tracing: 'Basic',
+                agent_tracing: true,
                 prompt_management: true,
-                evaluation_datasets: true,
+                evaluation_datasets: false,
                 human_annotation: false,
                 session_replay: false,
                 product_analytics: false,
+                feature_flags: false,
                 ai_gateway_proxy: true,
-             },
+            },
         },
         session_replay: {
             available: false,
@@ -43,7 +44,7 @@ export const helicone = {
     },
     platform: {
         deployment: {
-            open_source: true,
+            open_source: "Partial",
             eu_hosting: true,
         },
     },

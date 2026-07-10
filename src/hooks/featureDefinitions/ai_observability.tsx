@@ -90,6 +90,10 @@ export const aiObservabilityFeatures = {
             name: 'Product analytics',
             description: 'Analyze AI interactions alongside retention, funnels, and feature adoption',
         },
+        ai_gateway_proxy: {
+        name: 'AI gateway/proxy',
+        description: 'Route LLM requests through a gateway for caching, rate limits, fallbacks, and observability',
+        },
     },
     tracing: {
     description: 'Trace requests across prompts, model calls, tools, and workflows',

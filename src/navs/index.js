@@ -2209,7 +2209,10 @@ export const docsMenu = {
                     name: 'CLI',
                     url: '/docs/cli',
                 },
-                // TODO: add PostHog Code (Desktop) as a surface here once it's GA.
+                {
+                    name: 'Code',
+                    url: '/code',
+                },
                 {
                     name: 'Concepts',
                 },

@@ -132,6 +132,92 @@ If there are elements you don't want to be captured, you can add the `ph-no-capt
 <View ph-no-capture>Sensitive view here</View>
 ```
 
+### Capturing screen views
+
+With `captureScreens: true` (the default in `PostHogProvider`), PostHog captures a `$screen` event automatically when the user navigates, provided you're using `@react-navigation/native` (v6 or lower) or `react-native-navigation`.
+
+To manually send a screen capture event, use the `screen` method:
+
+```react-native
+posthog.screen('Dashboard', { fromIcon: 'bottom' })
+```
+
+> **React Navigation v7 users:** automatic screen tracking may throw errors if PostHog is initialized outside a screen context. For v7, disable automatic screen capture (`captureScreens: false`) and call `posthog.screen()` manually inside each screen component.
+
+#### Filtering autocaptured screens
+
+import FilterScreenEvents from '../_snippets/filter-screen-events-beforesend.mdx'
+
+<FilterScreenEvents />
+
+`before_send` is a client option, so pass it via the provider's `options` prop (or to `new PostHog(...)` if you create the client yourself):
+
+```react-native
+const IGNORED_SCREENS = new Set(['Splash', 'Debug'])
+
+<PostHogProvider
+    apiKey="<ph_project_token>"
+    autocapture={{ captureScreens: true }}
+    options={{
+        host: '<ph_client_api_host>',
+        before_send: (event) => {
+            if (event?.event === '$screen') {
+                const screenName = event.properties?.['$screen_name']
+                return IGNORED_SCREENS.has(screenName) ? null : event
+            }
+            return event
+        },
+    }}
+>
+    {/* app */}
+</PostHogProvider>
+```
+
+Swap the check for an allowlist (`return TRACKED_SCREENS.has(screenName) ? event : null`) if you'd rather capture only a specific set of screens.
+
+## Common `before_send` patterns
+
+`before_send` accepts a single function or an array of functions that run in order, so you can compose several small hooks. Filtering screens is one use – here are a few others.
+
+**Drop a specific event.** Stop an internal or debug event from ever being sent:
+
+```react-native
+const posthog = new PostHog('<ph_project_token>', {
+    before_send: (event) => {
+        if (event?.event === 'debug_only_event') {
+            return null // never send this event
+        }
+        return event
+    },
+})
+```
+
+**Log events instead of sending them.** Handy while debugging what would be captured:
+
+```react-native
+const posthog = new PostHog('<ph_project_token>', {
+    before_send: (event) => {
+        console.log('[PostHog] would send', event?.event, event?.properties)
+        return null // drop everything
+    },
+})
+```
+
+**Redact sensitive properties.** Strip a value before it leaves the device:
+
+```react-native
+const posthog = new PostHog('<ph_project_token>', {
+    before_send: (event) => {
+        if (event?.properties?.email) {
+            event.properties.email = '***'
+        }
+        return event
+    },
+})
+```
+
+For more examples, see the [JavaScript Web SDK docs](/docs/libraries/js/usage#amending-or-sampling-events).
+
 ## Identifying users
 
 > We highly recommend reading our section on [Identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.

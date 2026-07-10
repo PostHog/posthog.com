@@ -15,11 +15,12 @@ We generally only have product marketers on teams that _already_ have a product 
 | Product             | PM     | PMM    | Blitzscale |
 | ------------------- | ------ | ------ | ---------- |
 | *Context warehouse* | Anna   | Lizzie | Raquel     |
-| *PostHog Desktop*   | Annika | Cleo   | James H    |
-| *PostHog Slack*     | Annika | Cleo   | James H    |
-| *PostHog Web*       | Annika | Sara   | James H    |
+| *PostHog Desktop*   | Annika | Cleo   | Raquel    |
+| *PostHog Slack*     | Annika | Cleo   | Raquel    |
+| *PostHog Web*       | Annika | Sara   | Raquel    |
 | *PostHog Research*  | n/a    | Joe    | James H    |
-| *PostHog MCP*       | n/a    | Joe    | James      |
+| *PostHog MCP*       | n/a    | Joe    | Raquel      |
+| *PostHog CLI*       | Unassigned | Unassigned | Raquel |
 | *AI Gateway*        | Marco  | n/a    | Ben W      |
 | *Agents*            | n/a    | Danilo | Ben W      |
 
