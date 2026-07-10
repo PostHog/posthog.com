@@ -51,7 +51,7 @@ export interface ProvisioningClient {
     createGithubIntegration(
         bearer: string,
         teamId: number,
-        body: { grant_id: string; installation_id: number }
+        body: { grant_id: string; installation_id: string }
     ): Promise<void>
     createWizardRun(
         bearer: string,
@@ -169,16 +169,23 @@ const realClient: ProvisioningClient = {
         // flag — the App is installed iff `installations` is non-empty. Each repo carries its own
         // installation_id (a user may have installed on several accounts), so we normalize to a
         // flat list keyed per-repo and let the picker choose which installation the run targets.
+        // installation_id arrives as a string from GitHub; we keep it as one (never parse to a
+        // number) and only require it to be present.
         if (status >= 200 && status < 300 && Array.isArray(json?.installations)) {
             if (json.installations.length === 0) {
                 return { installed: false }
             }
             const repositories: GrantRepository[] = (Array.isArray(json.repositories) ? json.repositories : [])
-                .filter((repo: any) => repo?.full_name && Number.isInteger(repo?.installation_id))
+                .filter(
+                    (repo: any) =>
+                        repo?.full_name &&
+                        (typeof repo.installation_id === 'string' || typeof repo.installation_id === 'number') &&
+                        String(repo.installation_id).length > 0
+                )
                 .map((repo: any) => ({
                     full_name: repo.full_name,
                     default_branch: repo.default_branch,
-                    installation_id: repo.installation_id,
+                    installation_id: String(repo.installation_id),
                     private: repo.private,
                 }))
             return { installed: true, repositories }
@@ -263,8 +270,10 @@ const realClient: ProvisioningClient = {
         })
         throwIfRateLimited(result)
         const { status, json } = result
-        // Accept either a flat body or a resource-action `complete` envelope.
-        const payload = json?.complete ?? json
+        // The resource action wraps the run under `wizard_run` in a `{status:"complete", id,
+        // wizard_run:{task_id, run_id, status}}` envelope; also accept a `complete` envelope or a
+        // flat body defensively.
+        const payload = json?.wizard_run ?? json?.complete ?? json
         if (status >= 200 && status < 300 && payload?.task_id && payload?.run_id) {
             return { task_id: payload.task_id, run_id: payload.run_id }
         }

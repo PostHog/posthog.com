@@ -18,7 +18,7 @@ import type { GrantCookie } from './session'
 export type ResumeCookie = {
     code_verifier: string
     grant_id: string
-    installation_id: number
+    installation_id: string
     repository: string
     branch?: string
 }
@@ -53,13 +53,20 @@ const handler = async (req: GatsbyFunctionRequest, res: GatsbyFunctionResponse) 
     }
 
     const body = parseBody(req.body)
-    const installationId = Number(body.installation_id)
+    // installation_id is an opaque GitHub id kept as a string end-to-end (see types.ts); coerce a
+    // stray number defensively but never parse it into one.
+    const installationId =
+        typeof body.installation_id === 'string'
+            ? body.installation_id
+            : typeof body.installation_id === 'number'
+            ? String(body.installation_id)
+            : ''
     const repository = typeof body.repository === 'string' ? body.repository : ''
     const branch = typeof body.branch === 'string' && body.branch ? body.branch : undefined
     // Email is collected inline in the drop UI (defaulted from GitHub) and always sent explicitly,
     // so it comes from the browser rather than the grant — the grant's copy may be absent.
     const email = typeof body.email === 'string' ? body.email.trim() : ''
-    if (!Number.isInteger(installationId) || !repository || !EMAIL_RE.test(email)) {
+    if (!installationId || !repository || !EMAIL_RE.test(email)) {
         return res.status(400).json({ error: 'installation_id, repository, and a valid email are required' })
     }
 
