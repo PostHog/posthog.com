@@ -123,6 +123,10 @@ But if you need more control, we also provide a `rageclick` config that takes an
 |-----------|-------------|
 | `css_selector_ignorelist`<br/><br/>**Type:** Array of Strings<br/>**Default:** `undefined` | List of CSS selectors to ignore rage clicks on, e.g. `['.carousel-button', '.next-button']`. Elements matching these selectors (or their parents) won't trigger rage click events. An empty array disables rage click events all together. Providing any value overrides the defaults, so PostHog will *only* ignore the selectors you explicitly provide in the array. |
 | `content_ignorelist`<br/><br/>**Type:** Boolean or Array of Strings<br/>**Default:** `true` when `defaults: '2025-11-30'` or later | Excludes elements from rage click tracking based on their text content or aria-label. When `true`, uses default keywords ['next', 'previous', 'prev', '>', '<']. With `defaults: '2026-05-30'` or later, the default list also excludes `+`, `-`, `−`, and `–`, and text-selection surfaces are ignored. When set to an array of strings (max 10 items), uses custom keywords. Set to `false` to disable content-based exclusion. Useful for preventing false positives on navigation elements. |
+| `ignore_text_selection`<br/><br/>**Type:** Boolean<br/>**Default:** `false` (`true` when `defaults: '2026-05-30'` or later) | Excludes text-editing surfaces (textareas, text-like inputs, and `contenteditable` elements) from rage click detection, since rapid repeated clicks there are usually double- or triple-click text selection rather than rage. |
+| `threshold_px`<br/><br/>**Type:** Number<br/>**Default:** `30` | Maximum pixel distance between consecutive clicks for them to still count toward a rage click. |
+| `click_count`<br/><br/>**Type:** Number<br/>**Default:** `3` | Number of consecutive clicks within the timeout required to trigger a rage click. |
+| `timeout_ms`<br/><br/>**Type:** Number<br/>**Default:** `1000` | Maximum time (in milliseconds) allowed between consecutive clicks. |
 
 ## Configuring logs
 
