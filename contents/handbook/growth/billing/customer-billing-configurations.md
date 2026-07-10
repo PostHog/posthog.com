@@ -42,7 +42,7 @@ Below are the main configurations. Each outlines how the Stripe accounts are set
    - Credits reduce product charges on invoices.
    - Should be using default products/prices.
    - **Details:**
-     - mrr comes comes from the actual usage in that month (minus the credit-discount-percent on the customer)
+     - mrr comes from the actual usage in that month (minus the credit-discount-percent on the customer)
 
 #### Legacy configuration
-Note: this above list is focused about the creation of new customers going forward - there are many existing configurations not covered directly in this document.
+Note: this above list is focused about the creation of new customers going forward – there are many existing configurations not covered directly in this document.
