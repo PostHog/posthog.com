@@ -4,6 +4,8 @@ import InstallNodePackageManagers from "./install-node-package-managers.mdx"
 
 <InstallNodePackageManagers />
 
+> **Note:** `posthog-node` version 5 and above requires Node 20+, as it uses the runtime's native `fetch`. On older Node versions, either upgrade your runtime or pin the SDK to version 4 (`posthog-node@^4`).
+
 In your app, set your project token **before** making any calls.
 
 ```node
