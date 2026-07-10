@@ -467,7 +467,9 @@ const TickerCard = ({ pr }: { pr: SelfDrivingPR }): JSX.Element => {
                     </span>
                     <span className="font-mono">#{pr.prNumber}</span>
                     <span aria-hidden>·</span>
-                    <span>{timeAgo(pr.mergedAt)}</span>
+                    {/* Relative time is computed at render, so it differs between the SSR build and
+                        the client – suppress the expected hydration mismatch on this text node. */}
+                    <span suppressHydrationWarning>{timeAgo(pr.mergedAt)}</span>
                 </div>
             </div>
         </Link>
