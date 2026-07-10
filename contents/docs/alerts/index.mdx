@@ -92,7 +92,6 @@ Since alerts work on [trends](/docs/product-analytics/trends), [funnels](/docs/p
    />
 
 9. Select how often you want the alert to be checked:
-
    - **Real time** – has its own, stricter requirement, see [real-time alerts](#real-time-alerts) below
    - **Every 15 minutes** – requires a Boost plan or higher
    - **Hourly**
@@ -177,6 +176,8 @@ Percentage thresholds are only available for relative alerts (as you need to com
 
 ## Real-time alerts
 
+To create a real-time alert, follow the standard [alert creation steps](#how-to-create-an-alert) and select **Real time** from the check interval dropdown in step 9.
+
 - Checks continuously instead of on a fixed schedule, so you're notified as close to the moment a threshold is breached as possible.
 - Best suited to metrics where minutes matter, such as error spikes, checkout failures, or sudden traffic drops. For most metrics, a less frequent interval is sufficient and reduces notification noise.
 - Requires a **Scale or Enterprise plan**. This is separate from the every-15-minutes interval, which only needs a Boost, Scale, or Enterprise add-on.
@@ -236,7 +237,7 @@ PostHog includes 13 anomaly detection algorithms (12 individual detectors plus t
 | **Z-score**                         | General purpose      | Flags points that are many standard deviations from the rolling mean. Uses first-order differencing by default to handle cyclical data.   |
 | **MAD** (Median Absolute Deviation) | Data with outliers   | Similar to Z-score but uses median instead of mean, making it more robust to existing outliers. Uses first-order differencing by default. |
 | **IQR** (Interquartile Range)       | Skewed distributions | Flags values outside the interquartile range. Less sensitive to distribution shape than Z-score.                                          |
-| **Threshold**                       | Known fixed bounds    | Flags values outside a static bound you set, rather than one learned from historical data.                                                |
+| **Threshold**                       | Known fixed bounds   | Flags values outside a static bound you set, rather than one learned from historical data.                                                |
 
 #### Machine learning detectors
 
