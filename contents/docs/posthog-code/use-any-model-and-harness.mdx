@@ -8,10 +8,10 @@ PostHog Code is harness-agnostic. You can run tasks against [Claude Code](https:
 
 Choose a harness when you start a task. PostHog Code ships with two adapters today:
 
-| Harness | Default model | Best for |
-|---|---|---|
-| **Claude Code** | Claude Opus | General-purpose code generation, long-context refactors |
-| **Codex** | GPT‑5.x | Reasoning-heavy debugging, alternative second opinion |
+| Harness         | Default model | Best for                                                |
+| --------------- | ------------- | ------------------------------------------------------- |
+| **Claude Code** | Claude Opus   | General-purpose code generation, long-context refactors |
+| **Codex**       | GPT‑5.x       | Reasoning-heavy debugging, alternative second opinion   |
 
 More harnesses are on the roadmap – let us know on [Discord](https://discord.gg/posthog) which one you'd like next.
 
@@ -21,10 +21,10 @@ Each harness exposes its provider's model list. Open the model picker in the tas
 
 Both harnesses also expose a reasoning effort level, which trades latency for deeper reasoning. The available levels differ by harness:
 
-| Harness | Effort levels |
-|---|---|
+| Harness     | Effort levels                                                            |
+| ----------- | ------------------------------------------------------------------------ |
 | Claude Code | `low`, `medium`, `high`, plus `extra high` and `max` on supported models |
-| Codex | `low`, `medium`, `high` |
+| Codex       | `low`, `medium`, `high`, plus `extra high` on GPT‑5.5 and GPT‑5.6 models |
 
 ## Authentication
 
