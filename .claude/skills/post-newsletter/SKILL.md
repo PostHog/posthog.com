@@ -75,7 +75,7 @@ These are Substack-specific and should NOT appear in the posthog.com version:
 
 All inline links from the Substack source must be preserved exactly as-is in the output — both external URLs (e.g. GitHub links, third-party sites) and posthog.com links. "Verbatim" means links too. If the scraper returns link text and href, write it as `[text](href)` in the markdown.
 
-The only transformation allowed: convert absolute `https://posthog.com/...` links to relative `/...` links.
+The only transformations allowed: convert absolute `https://posthog.com/...` links to relative `/...` links, and strip any query string (e.g. `?utm_source=posthog-newsletter&utm_medium=post&utm_campaign=...`) from links pointing at another posthog.com page. Leave external links (GitHub, third-party sites, etc.) completely untouched, query strings included.
 
 ## Step 3: Upload images to Cloudinary
 
