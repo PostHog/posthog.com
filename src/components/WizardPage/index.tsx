@@ -14,8 +14,13 @@ import ProductList from 'components/ProductList'
 import { getLogo, getDarkClassForLogo } from '../../constants/logos'
 import WizardCommand from 'components/WizardCommand'
 import WizardDrop from 'components/WizardDrop'
+import { useWizardDropEnabled } from 'components/WizardDrop/useWizardDropEnabled'
 
 function WizardHeader(): JSX.Element {
+    // The `wizard-drop` experiment gate lives here (single call site → single exposure). When on,
+    // the hero leads with the GitHub "drop" flow and demotes the terminal command to a secondary
+    // path inside <WizardDrop />; when off, it's the classic terminal-first hero.
+    const dropEnabled = useWizardDropEnabled()
     return (
         <header
             className="relative -mt-4 mb-6 overflow-hidden rounded-t-sm"
@@ -38,9 +43,18 @@ function WizardHeader(): JSX.Element {
                 <div className="flex-1 text-center @lg:text-left">
                     <h1 className="text-2xl @sm:text-3xl font-bold !mb-0">Don't add PostHog to your codebase.</h1>
                     <p className="!mt-2 !mb-4 text-base">
-                        (Make AI do it for you – <em>with one swift terminal command</em>.)
+                        {dropEnabled ? (
+                            <>
+                                Connect GitHub and <em>let AI instrument your code</em>. We open a pull request you just
+                                review and merge.
+                            </>
+                        ) : (
+                            <>
+                                (Make AI do it for you – <em>with one swift terminal command</em>.)
+                            </>
+                        )}
                     </p>
-                    <WizardCommand slim />
+                    {dropEnabled ? <WizardDrop /> : <WizardCommand slim />}
                 </div>
                 <div className="shrink-0">
                     <img
@@ -250,12 +264,6 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         kind: 'flow',
         props: [],
         Editor: () => <WizardHeader />,
-    },
-    {
-        name: 'WizardDrop',
-        kind: 'flow',
-        props: [],
-        Editor: () => <WizardDrop />,
     },
     {
         name: 'DemoVideo',

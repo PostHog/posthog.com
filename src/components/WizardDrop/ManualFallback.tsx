@@ -6,7 +6,7 @@ import usePostHog from '../../hooks/usePostHog'
 /**
  * The universal escape hatch: manual signup + local wizard run. Region-aware like SignupLink
  * (the literal posthog.com/signup URL rewrites to /pricing, so we always link the cloud signup).
- * Never render this on the degraded panel — there the account already exists and "sign up"
+ * Never render this on the degraded panel, since there the account already exists and "sign up"
  * would be wrong advice.
  */
 export default function ManualFallback({ prominent = false }: { prominent?: boolean }): JSX.Element {

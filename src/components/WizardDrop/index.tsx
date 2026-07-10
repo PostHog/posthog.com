@@ -2,7 +2,8 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 
 import { IconSpinner } from '@posthog/icons'
 import OSButton from 'components/OSButton'
-import { useActiveFeatureFlags } from '../../hooks/useActiveFeatureFlags'
+import WizardCommand from 'components/WizardCommand'
+import { getLogo } from '../../constants/logos'
 import usePostHog from '../../hooks/usePostHog'
 import type {
     GrantRepository,
@@ -10,17 +11,51 @@ import type {
     ReposApiResponse,
     SessionResponse,
 } from '../../lib/wizard-drop/types'
-import ManualFallback from './ManualFallback'
 import RepoPicker from './RepoPicker'
 import { DegradedPanel, ErrorPanel, ExistingUserPanel, SuccessPanel } from './states'
-
-const FEATURE_FLAG = 'wizard-drop'
 
 const INSTALL_POLL_INTERVAL_MS = 5000
 const INSTALL_POLL_TIMEOUT_MS = 5 * 60 * 1000
 
 /** Lightweight client-side sanity check; the provisioning API is the authoritative validator. */
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+/** GitHub's mark: a black glyph that reads correctly on the orange primary button in both themes. */
+const GitHubMark = (): JSX.Element => (
+    <img src={getLogo('github')} alt="" aria-hidden="true" className="w-full h-full" />
+)
+
+/**
+ * The active-flow steps (install, repo picker, outcomes) render in this subtle inset panel so their
+ * form controls stay legible on the hero's textured background. The idle CTA deliberately sits
+ * inline on the hero instead, so the drop is part of the hero, not a box beneath it.
+ *
+ * The `tone` recolors the whole panel border so failure states read as failures at a glance rather
+ * than blending into the neutral panel: `error` (hard failure) and `warning` (degraded/partial
+ * success). The fill stays neutral (a colored wash clashes with the hero's tan texture); the framed
+ * border plus the badged icon/heading inside carry the signal. Red doesn't read well on dark, so we
+ * swap to yellow there, following the repo convention.
+ */
+function FlowPanel({
+    children,
+    tone = 'default',
+}: {
+    children: React.ReactNode
+    tone?: 'default' | 'error' | 'warning'
+}): JSX.Element {
+    const toneBorder = {
+        default: 'border-border',
+        error: 'border-red/40 dark:border-yellow/40',
+        warning: 'border-yellow/50',
+    }[tone]
+    return (
+        <div
+            className={`not-prose mt-4 rounded-md border ${toneBorder} bg-white/70 dark:bg-accent-dark/70 backdrop-blur-sm p-4 max-w-xl text-left mx-auto @lg:mx-0`}
+        >
+            {children}
+        </div>
+    )
+}
 
 type View =
     | { kind: 'loading' }
@@ -35,34 +70,24 @@ type View =
     | { kind: 'error'; code: string; retryAfter?: number }
 
 /**
- * The "drop" flow: connect GitHub → pick a repo → we provision a PostHog account and open an
- * instrumentation PR from a cloud wizard run. See README.md for the state diagram and
- * wizard-drop-rfc.md (repo root) for the architecture. All server work happens in the
- * /api/wizard/* Gatsby Functions; this component is a state machine over their responses.
+ * The "drop" flow, rendered inside the wizard hero: connect GitHub → pick a repo → we provision a
+ * PostHog account and open an instrumentation PR from a cloud wizard run. See README.md for the
+ * state diagram and wizard-drop-rfc.md (repo root) for the architecture. All server work happens in
+ * the /api/wizard/* Gatsby Functions; this component is a state machine over their responses.
+ *
+ * The `wizard-drop` experiment gate lives in the hero (`useWizardDropEnabled`), which mounts this
+ * component only for the `test` variant, so this component assumes it's enabled and never self-hides.
  */
-export default function WizardDrop(): JSX.Element | null {
+export default function WizardDrop(): JSX.Element {
     const posthog = usePostHog()
-    const flags = useActiveFeatureFlags()
     const [view, setView] = useState<View>({ kind: 'loading' })
     const [identity, setIdentity] = useState<{ ghLogin?: string; email?: string }>({})
     const [selectedRepo, setSelectedRepo] = useState<string | undefined>(undefined)
-    // Editable account email — always shown, defaulted to whatever GitHub gave us (may be empty
+    // Editable account email, always shown, defaulted to whatever GitHub gave us (may be empty
     // if the GitHub account exposes no verified email). The provision call sends this value.
     const [email, setEmail] = useState('')
     const initialized = useRef(false)
     const wasAwaitingInstall = useRef(false)
-
-    // Gated on the `wizard-drop` experiment: only the `test` variant renders the drop; `control`
-    // and unflagged visitors get nothing. `flags` (from onFeatureFlags) is the reactive trigger —
-    // it flips non-null once flags resolve — while getFeatureFlag returns the assigned variant and
-    // emits the `$feature_flag_called` exposure. Fail-closed while flags load.
-    //
-    // In local `gatsby develop`, posthog never loads (the custom `src/html.tsx` that injects it
-    // isn't applied in dev), so the flag can't resolve — always enable in development so the flow
-    // is testable locally. This branch is dead-code-eliminated from production builds, where the
-    // experiment variant is the only gate.
-    const enabled =
-        process.env.NODE_ENV === 'development' || (!!flags && posthog?.getFeatureFlag?.(FEATURE_FLAG) === 'test')
 
     const capture = useCallback(
         (event: string, properties?: Record<string, unknown>) => {
@@ -137,7 +162,7 @@ export default function WizardDrop(): JSX.Element | null {
 
     // Entry point: interpret redirect params from the API functions, then resume or start fresh.
     useEffect(() => {
-        if (!enabled || initialized.current) return
+        if (initialized.current) return
         initialized.current = true
         capture('wizard drop viewed')
 
@@ -165,7 +190,7 @@ export default function WizardDrop(): JSX.Element | null {
         } else {
             void checkSession(drop === 'connected')
         }
-    }, [enabled, capture, checkSession, toError])
+    }, [capture, checkSession, toError])
 
     // Default the editable email to GitHub's once it's known, without clobbering user edits.
     // Intentionally keyed only on identity.email (re-running on `email` would fight user edits).
@@ -249,42 +274,49 @@ export default function WizardDrop(): JSX.Element | null {
         window.location.assign(view.url)
     }, [view, capture])
 
-    if (!enabled) return null
+    // Idle/connecting is the hero's primary call to action: the GitHub button leads, with the
+    // terminal command demoted to a muted "prefer the terminal?" secondary. It sits inline on the
+    // hero (no panel) so the drop reads as part of the hero rather than a box beneath it.
+    if (view.kind === 'idle' || view.kind === 'connecting') {
+        const connecting = view.kind === 'connecting'
+        return (
+            <div className="not-prose">
+                <OSButton
+                    variant="primary"
+                    size="lg"
+                    icon={connecting ? <IconSpinner className="w-full h-full animate-spin" /> : <GitHubMark />}
+                    onClick={connect}
+                    disabled={connecting}
+                >
+                    {connecting ? 'Redirecting to GitHub…' : 'Connect GitHub'}
+                </OSButton>
+                <div className="mt-4 flex flex-wrap items-center justify-center @lg:justify-start gap-x-2 gap-y-1 text-sm">
+                    <span className="opacity-70 shrink-0">Prefer the terminal?</span>
+                    <WizardCommand slim />
+                </div>
+            </div>
+        )
+    }
+
+    const tone = view.kind === 'error' ? 'error' : view.kind === 'degraded' ? 'warning' : 'default'
 
     return (
-        <div className="not-prose border border-border rounded-md p-5 bg-accent/40 my-6">
-            <p className="text-sm font-semibold mb-2 opacity-70">New: skip the terminal</p>
-            {view.kind === 'idle' || view.kind === 'connecting' ? (
-                <div>
-                    <p className="mb-3">
-                        Don't even want to run one command? Connect GitHub, pick a repository, and we'll do the rest in
-                        the cloud: create your PostHog account, instrument your code, and open a pull request — you just
-                        review and merge.
-                    </p>
-                    <OSButton variant="primary" size="md" onClick={connect} disabled={view.kind === 'connecting'}>
-                        {view.kind === 'connecting' ? (
-                            <>
-                                <IconSpinner className="size-4 animate-spin" /> Redirecting to GitHub…
-                            </>
-                        ) : (
-                            'Connect GitHub'
-                        )}
-                    </OSButton>
-                </div>
-            ) : view.kind === 'loading' ? (
+        <FlowPanel tone={tone}>
+            {view.kind === 'loading' ? (
                 <p className="flex items-center gap-2 text-sm opacity-70 mb-0">
                     <IconSpinner className="size-4 animate-spin" /> Loading…
                 </p>
             ) : view.kind === 'awaiting_install' ? (
                 <div>
                     <p className="mb-3">
-                        Almost there — install the PostHog GitHub App and choose which repository we can open a pull
-                        request on. We'll pick it up here automatically.
+                        Almost there. Install the PostHog GitHub App and choose which repository we can open a pull
+                        request on, and we'll pick it up here automatically.
                     </p>
-                    <div className="flex items-center gap-3">
+                    <div className="flex flex-col @sm:flex-row @sm:items-center gap-3">
                         <OSButton
                             variant="primary"
                             size="md"
+                            icon={<GitHubMark />}
                             onClick={() => {
                                 capture('wizard drop install opened')
                                 window.open(view.installUrl, '_blank', 'noopener')
@@ -317,7 +349,7 @@ export default function WizardDrop(): JSX.Element | null {
                         />
                         <span className="mt-1 block text-xs opacity-60">
                             {identity.email
-                                ? "Pulled from GitHub — change it if you'd rather use a different address."
+                                ? "Pulled from GitHub. Change it if you'd rather use a different address."
                                 : "GitHub didn't share a verified email, so enter the one you'd like to use."}
                         </span>
                     </label>
@@ -372,7 +404,6 @@ export default function WizardDrop(): JSX.Element | null {
                     }}
                 />
             )}
-            {view.kind === 'idle' || view.kind === 'connecting' ? <ManualFallback /> : null}
-        </div>
+        </FlowPanel>
     )
 }
