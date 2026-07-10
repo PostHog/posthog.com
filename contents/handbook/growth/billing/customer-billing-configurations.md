@@ -7,7 +7,7 @@ showTitle: true
 This document outlines all possible billing configurations for customers at PostHog. The goal is to ensure the team is on the same page with the different configurations we support to ensure things move smoothly as we scale. We want to ensure they support the billing repo, dashboard, usage reports, revenue reporting, etc.
 
 
-Below are the main 5 configurations we support right now. Each outlines how the Stripe accounts are setup and billing and how we account for revenue on them. 
+Below are the main configurations. Configurations 1–4 are the ones we support for new customers going forward; configuration 5 (amortized credit payment) is **no longer offered for new contracts** and is retained here for legacy customers only. Each outlines how the Stripe accounts are setup and billing and how we account for revenue on them. 
 
 1. Free plan customers
    - We don't need to worry about these users because they aren't paying anything, even if they have a Stripe account.
@@ -46,8 +46,9 @@ Below are the main 5 configurations we support right now. Each outlines how the 
    - **Details:**
      - mrr comes from the credits payment - yearly upfront payment (we split these)
      - mrr per product comes from the actual usage in that month (minus the credit-discount-percent on the customer)
-5. Enterprise customers (amortized credit payment)
-   - Similar to above, where an enterprise customer is paying for credits. This is the case where they commit but pay monthly.
+5. Enterprise customers (amortized credit payment) — **legacy, not offered for new contracts**
+   - > **We no longer offer this configuration for new contracts.** Per our [contract rules](/handbook/growth/sales/contract-rules#discounts), we require upfront payment for all discounted contracts — quarterly, monthly, or otherwise split payment terms are not available, irrespective of commitment length. If a customer needs payment flexibility, adjust the credit amount and discount to fit their budget while keeping payment upfront. The details below are retained only to document existing legacy customers still on this setup.
+   - Similar to above, where an enterprise customer is paying for credits. This is the case where they commit but pay on a recurring cadence (e.g. monthly) rather than upfront.
    - That means they need two customers in Stripe - one for the credits and one for the usage.
    - Currently, this also means they have two customers in billing. See more below on "unsupported configurations" for how this will change. 
    - The credits are charged on a recurring cadence and tracked as MRR - cadence could be monthly, quarterly, semi-annually, during the fourth phase of the moon on the second sunday of the festival of Saturnalia, etc.
