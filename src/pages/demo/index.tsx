@@ -12,7 +12,7 @@ export default function Demo(): JSX.Element {
                 description="PostHog is the only developer platform built to natively work with Session Replay, Feature Flags, Experiments, and Surveys."
                 image={`/images/og/default.png`}
             />
-            <MediaPlayer videoId="nnp7k9r717" source="wistia" />
+            <MediaPlayer videoId="nnp7k9r717" source="wistia" borderRadius={false} />
         </>
     )
 }
