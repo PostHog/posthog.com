@@ -5,6 +5,8 @@ description: Convert a Substack newsletter post into a native posthog.com newsle
 
 # Post Newsletter Natively
 
+> **Model:** Sonnet is fine for this skill. The steps are fairly programmatic — copy verbatim, apply mechanical link/image transformations, run scripted uploads — and don't require the nuanced judgment that `/suggest-links` (invoked in Step 4) needs, which should still be run on Opus or higher.
+
 Convert a Substack newsletter post into a native posthog.com markdown file under `contents/newsletter/`.
 
 The user will provide a Substack URL: $ARGUMENTS
