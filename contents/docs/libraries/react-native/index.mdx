@@ -179,13 +179,13 @@ Swap the check for an allowlist (`return TRACKED_SCREENS.has(screenName) ? event
 
 `before_send` accepts a single function or an array of functions that run in order, so you can compose several small hooks. Filtering screens is one use – here are a few others.
 
-**Sample a noisy event.** Send only a percentage of a high-volume event to control costs:
+**Drop a specific event.** Stop an internal or debug event from ever being sent:
 
 ```react-native
 const posthog = new PostHog('<ph_project_token>', {
     before_send: (event) => {
-        if (event?.event === 'high_volume_event' && Math.random() > 0.1) {
-            return null // keep roughly 10%
+        if (event?.event === 'debug_only_event') {
+            return null // never send this event
         }
         return event
     },
