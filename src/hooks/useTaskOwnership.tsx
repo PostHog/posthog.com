@@ -45,7 +45,7 @@ const PEOPLE_TASK_DATA: Record<
             { task: 'Access & permissions governance', owner: ['Tara Alcantarilla-Howard'] },
             { task: 'Compliance correspondence', owner: ['Carol Donnelly'] },
             { task: 'Insurance & risk renewals', owner: ['Carol Donnelly'] },
-            { task: 'Vendor management', owner: ['Tara Alcantarilla-Howard'] },
+            { task: 'Vendor management – SaaS, IT & HR', owner: ['Tara Alcantarilla-Howard'] },
         ],
     },
     culture: {
@@ -59,7 +59,7 @@ const PEOPLE_TASK_DATA: Record<
             { task: 'Culture campaigns & recognition', owner: ['Kendal Ijeh'] },
             { task: 'Global offsites', owner: ['Kendal Ijeh'] },
             { task: 'Engagement surveys', owner: ['Kendal Ijeh'] },
-            { task: 'Vendor management', owner: ['Kendal Ijeh'] },
+            { task: 'Vendor management – facilities & events (London House, travel, merch)', owner: ['Kendal Ijeh'] },
             { task: 'Budget management', owner: ['Kendal Ijeh'] },
         ],
     },
@@ -77,6 +77,7 @@ const PEOPLE_TASK_DATA: Record<
             { task: 'Financial audit coordination', owner: ['Janani K'] },
             { task: 'Board reporting', owner: ['Fraser Hopper'] },
             { task: 'Chasing receipts & invoices', owner: ['Janani K'] },
+            { task: 'Vendor management – COGS, R&D & infra', owner: ['Janani K'] },
         ],
     },
     legal: {
