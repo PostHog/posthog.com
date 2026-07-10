@@ -281,3 +281,21 @@ Result paths let you extract specific data from a step's response. Use dot notat
 | `body.results[0].id` | A property from the first array item   |
 
 Leave the result path blank to store the entire step result.
+
+## Access control
+
+Workflows support PostHog's [access control](/docs/settings/access-control) system for managing who can view and edit workflows.
+
+You can set permissions at two levels:
+
+- **Resource level** - Control access to all workflows in a project
+- **Object level** - Control access to individual workflows
+
+The available access levels are:
+
+- **No access** - Cannot view or edit the workflow
+- **Viewer** - Can view but not modify the workflow
+- **Editor** - Can view and modify the workflow
+- **Manager** - Can change workflow settings including access controls
+
+To manage access for a workflow, click the **Access control** button in the sidebar when viewing a workflow.
