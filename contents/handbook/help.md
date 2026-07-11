@@ -34,7 +34,7 @@ If you've just joined us, there's a lot you probably don't know. That's okay! Ho
   - If it's in beta, it might be buggy or missing features. Definitely request/report them, but also figure out how to do your job with plan B and plan C if it won't be fixed quickly - this is what we generally call grit.
   - For engineers: try to figure something out by yourself for at least 1 hour, but don't remain totally stuck on something for more than 2 hours before asking for help. This time window should increase over time as you run into more questions that likely no one has the answer to, at which point it's time to dig in and figure it out.
 - If it's an external product:
-  - We expect you to read the docs
+  - We expect you to read the docs.
   - If it takes you more than 10 mins to figure it out, then ask someone internally.
 
 You can also try self-serving an answer in our <PrivateLink url="https://posthog.slack.com/archives/C07TQR0V16U">#ask-max Slack channel</PrivateLink>. It's trained on our handbook and documentation, so it's capable of answering both questions about internal processes and procedures, as well as product-related questions.
@@ -45,7 +45,7 @@ If you don't get the context you're looking for, try <PrivateLink url="https://p
 
 PostHog is a startup. As solid as our stack / product / CI / dev experience is for a company of our size (super solid, tbh), it might not be the extremely-well-oiled machine you had at BigCo. If something doesn't Just Work, follow the framework above to get help.
 
-We're all human - you shouldn't expect perfection for adhering to our [culture](/handbook/company/culture), either. But you should help others learn how to stick to our culture, especially new joiners. We're all prone to occasional lapses, and it takes everyone on the team nudging each other in the right direction to keep us all on track. If you notice something happening all the time, take it upon yourself to make it better - see the next section!. 
+We're all human - you shouldn't expect perfection for adhering to our [culture](/handbook/company/culture), either. But you should help others learn how to stick to our culture, especially new joiners. We're all prone to occasional lapses, and it takes everyone on the team nudging each other in the right direction to keep us all on track. If you notice something happening all the time, take it upon yourself to make it better - see the next section!
 
 ## Make it better
 
@@ -57,7 +57,7 @@ We encourage you to step on toes, but don't be a bull in a china shop. Context i
 
 ## Don't wait for someone else
 
-We expect you to be proactive about answering questions in your domain, even very early on after you are hired – e.g. after the first week. Look in the code. Read the docs. Find the answer. 
+We expect you to be proactive about answering questions in your domain, even very early on after you are hired – e.g., after the first week. Look in the code. Read the docs. Find the answer. 
 
 Being wrong is way better than being silent – if you are wrong, someone will correct you. If you are silent, you're not doing your job.
 
