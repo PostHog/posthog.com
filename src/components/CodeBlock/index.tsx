@@ -287,11 +287,15 @@ export const CodeBlock = ({
     }
 
     const generateSQLEditorLink = (code: string): string => {
-        // Takes an SQL string and returns a URL string in the PostHog SQL editor format
-        // We can't use app.posthog.com to redirect because it breaks newlines in the encoded URL
-
-        const query = encodeURIComponent(code.trim()).replace(/%20/g, '+').replace(/\(/g, '%28').replace(/\)/g, '%29')
-        return `https://${region}.posthog.com/sql?open_query=${query}`
+        // Takes an SQL string and returns a URL string in the PostHog SQL editor format.
+        // Target the user's real region (from the ph_current_instance cookie) rather than a
+        // feature-flag guess, so the link never triggers a cross-region redirect. A redirect
+        // strips the %0A newline escapes and collapses multi-line queries into one line.
+        // Pass the query in the hash fragment (parsed as hashParams.q by the editor) instead of a
+        // search param: the fragment is never sent to the server, so it survives any redirect intact.
+        const host = (removeQuotes(appHost) || 'https://us.posthog.com').replace(/\/$/, '')
+        const query = encodeURIComponent(code.trim())
+        return `${host}/sql#q=${query}`
     }
 
     return (
