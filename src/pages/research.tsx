@@ -24,17 +24,24 @@ import usePostHog from 'hooks/usePostHog'
 import {
     IconArrowRight,
     IconBrain,
-    IconCalendar,
     IconChevronLeft,
     IconChevronRight,
     IconFlask,
+    IconGlobe,
     IconMap,
     IconNewspaper,
+    IconPlayFilled,
     IconPullRequest,
     IconShieldLock,
 } from '@posthog/icons'
 import { useToast } from '../context/Toast'
+import { useApp } from '../context/App'
+import { useWindow } from '../context/Window'
+import MediaPlayer from 'components/MediaPlayer'
 import { useEvents, type Event } from './events'
+import { TeamMember } from 'components/People'
+
+const RESEARCH_CONTENT_WIDTH = 'max-w-3xl'
 
 // ─────────────────────────────────────────────
 // Section header (sticker + kicker + title + subtitle)
@@ -58,7 +65,7 @@ function SectionHeader({
                 <span className="text-xs font-semibold uppercase tracking-widest text-secondary">{kicker}</span>
             </div>
             <h2 className="text-2xl m-0 mb-2">{title}</h2>
-            {subtitle && <p className="text-secondary max-w-2xl m-0">{subtitle}</p>}
+            {subtitle && <p className="text-secondary m-0">{subtitle}</p>}
         </div>
     )
 }
@@ -100,8 +107,8 @@ function HeroSection({ teamCrestUrl }: { teamCrestUrl?: string }) {
     }, [posthog])
 
     return (
-        <section className="mt-2 mb-6 @4xl/editor:mb-10 tracking-[-0.0125em] max-w-5xl mx-auto w-full">
-            <div className="flex items-start gap-6">
+        <section className="mt-2 mb-6 @4xl/editor:mb-10 tracking-[-0.0125em] w-full">
+            <div className="flex items-end gap-6 mb-6">
                 <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-3 mb-4">
                         <IconBrain className="size-10 text-purple" />
@@ -110,76 +117,13 @@ function HeroSection({ teamCrestUrl }: { teamCrestUrl?: string }) {
                         </span>
                     </div>
 
-                    <h1 className="text-xl @xl:text-3xl font-bold leading-tight mb-4 !mt-0 max-w-3xl">
+                    <h1 className="text-xl @xl:text-3xl font-bold leading-tight !mt-0 m-0">
                         {variant === 'test' ? (
                             <ChoppyReveal wordDelay={45}>{H1_TEST}</ChoppyReveal>
                         ) : (
                             <ControlHeadline />
                         )}
                     </h1>
-
-                    <div className="inline-flex items-start gap-2 border border-primary rounded bg-accent px-3 py-2 mb-6 max-w-2xl">
-                        <IconFlask className="size-5 text-purple shrink-0 mt-0.5" />
-                        <p className="text-sm text-secondary m-0">
-                            This headline is a live A/B test – you're seeing variant{' '}
-                            <strong className="text-primary">{variant === 'control' ? 'A' : 'B'}</strong>, and half of
-                            visitors see the other one. We're running it with{' '}
-                            <Link to="/experiments" state={{ newWindow: true }} className="underline">
-                                PostHog Experiments
-                            </Link>{' '}
-                            on our own research page.
-                        </p>
-                    </div>
-
-                    <div className="max-w-2xl space-y-3">
-                        <p>
-                            PostHog holds one of the richest behavioral datasets anywhere: how real software actually
-                            gets used, across events, sessions, and replays.{' '}
-                            <RoughAnnotation
-                                type="highlight"
-                                color="rgba(48, 164, 108, 0.2)"
-                                strokeWidth={1}
-                                padding={2}
-                                delay={300}
-                            >
-                                Nobody has trained a foundation model on data like this.
-                            </RoughAnnotation>{' '}
-                            We're doing it – so PostHog can find and fix problems in your product while you sleep.
-                            <sup className="font-semibold text-secondary">[1]</sup>
-                        </p>
-                        <p>
-                            This isn't speculative: agents already create the majority of new dashboards in PostHog, and
-                            MCP usage roughly doubles every month.
-                            <sup className="font-semibold text-secondary">[1]</sup> The models come next.
-                        </p>
-                        <p>
-                            Useful research shouldn't happen behind closed doors: our code is open source where
-                            possible, we publish findings as we go, and the work is headed to arXiv and major ML
-                            conferences. Anything we release at a cost is based on our{' '}
-                            <Link
-                                to="/handbook/engineering/feature-pricing"
-                                state={{ newWindow: true }}
-                                className="underline"
-                            >
-                                pricing principles
-                            </Link>
-                            .
-                        </p>
-                        <p className="text-sm text-secondary m-0">
-                            <IconShieldLock className="size-4 text-green inline-block align-text-bottom mr-1" />
-                            EU cloud opted out by default · anonymized before training · opt out anytime –{' '}
-                            <Link to="#faq" className="underline">
-                                details in the FAQ
-                            </Link>
-                        </p>
-                        <p className="text-xs text-secondary font-mono border-t border-primary pt-2 mt-4 max-w-xl">
-                            [1] Hawkins, J. (2026).{' '}
-                            <Link to="/blog/posthogs-next-chapter" state={{ newWindow: true }} className="underline">
-                                "PostHog's next chapter."
-                            </Link>{' '}
-                            <em>posthog.com</em>, May 2026.
-                        </p>
-                    </div>
                 </div>
 
                 {teamCrestUrl && (
@@ -198,6 +142,65 @@ function HeroSection({ teamCrestUrl }: { teamCrestUrl?: string }) {
                         </span>
                     </Link>
                 )}
+            </div>
+
+            <div className="w-full space-y-3">
+                <div className="flex items-start gap-2 border border-primary rounded bg-accent px-3 py-2 mb-6">
+                    <IconFlask className="size-5 text-purple shrink-0 mt-0.5" />
+                    <p className="text-sm text-secondary m-0">
+                        This headline is a live A/B test – you're seeing variant{' '}
+                        <strong className="text-primary">{variant === 'control' ? 'A' : 'B'}</strong>, and half of
+                        visitors see the other one. We're running it with{' '}
+                        <Link to="/experiments" state={{ newWindow: true }} className="underline">
+                            PostHog Experiments
+                        </Link>{' '}
+                        on our own research page.
+                    </p>
+                </div>
+
+                <p>
+                    PostHog holds one of the richest behavioral datasets anywhere: how real software actually gets used,
+                    across events, sessions, and replays.{' '}
+                    <RoughAnnotation
+                        type="highlight"
+                        color="rgba(48, 164, 108, 0.2)"
+                        strokeWidth={1}
+                        padding={2}
+                        delay={300}
+                    >
+                        Nobody has trained a foundation model on data like this.
+                    </RoughAnnotation>{' '}
+                    We're doing it – so PostHog can find and fix problems in your product while you sleep.
+                    <sup className="font-semibold text-secondary">[1]</sup>
+                </p>
+                <p>
+                    This isn't speculative: agents already create the majority of new dashboards in PostHog, and MCP
+                    usage roughly doubles every month.
+                    <sup className="font-semibold text-secondary">[1]</sup> The models come next.
+                </p>
+                <p>
+                    Useful research shouldn't happen behind closed doors: our code is open source where possible, we
+                    publish findings as we go, and the work is headed to arXiv and major ML conferences. Anything we
+                    release at a cost is based on our{' '}
+                    <Link to="/handbook/engineering/feature-pricing" state={{ newWindow: true }} className="underline">
+                        pricing principles
+                    </Link>
+                    .
+                </p>
+                <p className="text-sm text-secondary m-0">
+                    <IconShieldLock className="size-4 text-green inline-block align-text-bottom mr-1" />
+                    EU cloud opted out by default · anonymized before training · opt out anytime –{' '}
+                    <Link to="#faq" className="underline">
+                        details in the FAQ
+                    </Link>
+                </p>
+                <p className="text-xs text-secondary font-mono border-t border-primary pt-2 mt-4">
+                    [1] Hawkins, J. (2026).{' '}
+                    <Link to="/blog/posthogs-next-chapter" state={{ newWindow: true }} className="underline">
+                        "PostHog's next chapter."
+                    </Link>{' '}
+                    <em>posthog.com</em>, May 2026.
+                </p>
             </div>
         </section>
     )
@@ -315,28 +318,49 @@ const usePublications = (): ResolvedPublication[] => {
 
 function PublicationCard({ paper, index }: { paper: ResolvedPublication; index: number }) {
     const { addToast } = useToast()
+    const [copied, setCopied] = useState(false)
 
     const copyCitation = () => {
         navigator.clipboard
             .writeText(toBibtex(paper))
-            .then(() => addToast({ title: 'Citation copied', description: 'BibTeX entry copied to your clipboard.' }))
+            .then(() => {
+                setCopied(true)
+                window.setTimeout(() => setCopied(false), 2000)
+            })
             .catch(() => addToast({ title: 'Copy failed', description: 'Select and copy manually.', error: true }))
     }
 
     return (
-        <div className="flex items-start gap-3 border border-primary rounded bg-accent p-4 transition-all duration-150 hover:border-purple hover:shadow-md">
-            <span className="font-mono text-sm text-secondary shrink-0 pt-0.5">[{index + 1}]</span>
-            <span className="min-w-0 flex-1">
-                <Link to={paper.url} external className="font-bold text-primary">
-                    {paper.title}
-                </Link>
-                <span className="block text-sm text-secondary font-mono mt-0.5">
-                    {[paper.authors, paper.venue, paper.year, paper.note].filter(Boolean).join(' · ')}
-                </span>
-            </span>
-            <OSButton size="sm" variant="secondary" onClick={copyCitation} tooltip="Copy BibTeX citation">
-                Cite
-            </OSButton>
+        <div className="flex items-start gap-3 border border-primary rounded bg-accent p-4 relative">
+            <div className="min-w-0 flex-1 space-y-0.5">
+                <div className="flex justify-between gap-3">
+                    <div className="flex items-baseline gap-3">
+                        <span className="font-mono text-base text-secondary shrink-0 tabular-nums relative bottom-[-1px]">
+                            [{index + 1}]
+                        </span>
+                        <Link to={paper.url} external className="font-bold text-primary min-w-0  ">
+                            {paper.title}
+                        </Link>
+                    </div>
+                    <OSButton
+                        size="sm"
+                        variant="default"
+                        hover="border"
+                        onClick={copyCitation}
+                        tooltip="Copy BibTeX citation"
+                    >
+                        {copied ? 'Copied' : 'Cite'}
+                    </OSButton>
+                </div>
+                <div className="flex gap-3">
+                    <span className="font-mono text-base shrink-0 invisible tabular-nums" aria-hidden>
+                        [{index + 1}]
+                    </span>
+                    <span className="text-sm text-secondary font-mono">
+                        {[paper.authors, paper.venue, paper.year, paper.note].filter(Boolean).join(' · ')}
+                    </span>
+                </div>
+            </div>
         </div>
     )
 }
@@ -354,7 +378,7 @@ function PublicationsSection() {
             />
 
             {publications.length > 0 ? (
-                <div className="max-w-3xl">
+                <div>
                     <div className="space-y-3">
                         {publications.map((paper, index) => (
                             <PublicationCard key={paper.url} paper={paper} index={index} />
@@ -365,7 +389,7 @@ function PublicationsSection() {
                     </p>
                 </div>
             ) : (
-                <div className="border border-primary rounded bg-accent p-6 max-w-3xl">
+                <div className="border border-primary rounded bg-accent p-6">
                     <p className="font-semibold m-0 mb-1">Our first paper is in progress</p>
                     <p className="text-sm text-secondary m-0">
                         Our first pretraining run is completing and the write-up is underway. Papers will be linked here
@@ -446,15 +470,15 @@ const ROADMAP_ITEMS: { title: string; description: string; outcome: string; stat
     },
 ]
 
-function StatusStamp({ status, rotate }: { status: RoadmapStatus; rotate: string }) {
-    const base = `absolute -top-2.5 right-3 ${rotate} border-2 rounded px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-widest bg-primary ${STATUS_STYLES[status]}`
+function StatusStamp({ status }: { status: RoadmapStatus }) {
+    const base = `inline-block shrink-0 whitespace-nowrap border-2 rounded px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest bg-accent ${STATUS_STYLES[status]}`
 
     if (status === 'help wanted') {
         return (
             <Link
                 to="/careers/ai-research-engineer"
                 state={{ newWindow: true }}
-                className={`${base} no-underline transition-transform duration-150 hover:scale-110 hover:rotate-0`}
+                className={`${base} no-underline transition-transform duration-150 hover:scale-110`}
                 title="We're hiring for this"
             >
                 Help wanted
@@ -473,28 +497,27 @@ function RoadmapSection() {
                 title="What we're researching right now"
                 subtitle="The team's current pipeline, in rough order. Each stage of pretraining breaks new ground, and each will produce papers and technical reports."
             />
-            <div className="grid @lg:grid-cols-2 gap-4">
+            <ul className="m-0 p-0 list-none divide-y divide-primary">
                 {ROADMAP_ITEMS.map((item, index) => (
-                    <div
-                        key={item.title}
-                        className="group relative border border-primary rounded bg-accent p-4 flex gap-4 transition-all duration-150 hover:border-purple hover:bg-primary hover:-translate-y-1 hover:shadow-lg"
-                    >
-                        <StatusStamp status={item.status} rotate={index % 2 === 0 ? 'rotate-2' : '-rotate-2'} />
-                        <span className="text-3xl font-bold text-muted tabular-nums leading-none pt-0.5 transition-colors duration-150 group-hover:text-purple">
-                            {String(index + 1).padStart(2, '0')}
-                        </span>
-                        <div>
-                            <h3 className="text-base font-bold m-0 mb-1">{item.title}</h3>
-                            <p className="text-sm text-secondary m-0 transition-colors duration-150 group-hover:text-primary">
-                                {item.description}
-                            </p>
-                            <p className="text-xs text-secondary m-0 mt-2">
-                                <span className="font-semibold text-green">In practice:</span> {item.outcome}
-                            </p>
+                    <li key={item.title} className="py-5">
+                        <div className="flex gap-4">
+                            <span className="text-3xl font-bold text-muted tabular-nums leading-none shrink-0 pt-0.5">
+                                {String(index + 1).padStart(2, '0')}
+                            </span>
+                            <div className="min-w-0 flex-1">
+                                <div className="grid grid-cols-[1fr_auto] items-start gap-x-3 mb-1">
+                                    <h3 className="text-base font-bold m-0">{item.title}</h3>
+                                    <StatusStamp status={item.status} />
+                                </div>
+                                <p className="text-sm text-secondary m-0 leading-relaxed">{item.description}</p>
+                                <p className="text-xs text-secondary m-0 mt-2">
+                                    <span className="font-semibold text-green">In practice:</span> {item.outcome}
+                                </p>
+                            </div>
                         </div>
-                    </div>
+                    </li>
                 ))}
-            </div>
+            </ul>
         </section>
     )
 }
@@ -527,17 +550,17 @@ function OpenProblemsSection() {
                 title="Problems we haven't solved yet"
                 subtitle="The hardest parts of the pipeline, stated plainly. If one of these nerd-snipes you, that's the idea."
             />
-            <div className="grid @lg:grid-cols-3 gap-4 mb-6">
-                {OPEN_PROBLEMS.map((problem) => (
-                    <div
-                        key={problem.title}
-                        className="border border-primary rounded bg-accent p-4 transition-all duration-150 hover:border-purple hover:-translate-y-0.5 hover:shadow-md"
+            <ul className="m-0 p-0 list-none divide-y divide-primary mb-6">
+                {OPEN_PROBLEMS.map(({ title, body }, index) => (
+                    <li
+                        key={title}
+                        className={index === 0 ? 'pb-4' : index === OPEN_PROBLEMS.length - 1 ? 'pt-4' : 'py-4'}
                     >
-                        <h3 className="text-base font-bold m-0 mb-2">{problem.title}</h3>
-                        <p className="text-sm text-secondary m-0">{problem.body}</p>
-                    </div>
+                        <h3 className="text-base font-bold m-0">{title}</h3>
+                        <p className="text-sm text-secondary m-0 mt-1 leading-relaxed">{body}</p>
+                    </li>
                 ))}
-            </div>
+            </ul>
 
             <div className="border border-primary rounded bg-accent p-5 flex flex-col @lg:flex-row @lg:items-center gap-4">
                 <div className="flex-1">
@@ -547,17 +570,27 @@ function OpenProblemsSection() {
                         compute, and freedom to publish.
                     </p>
                 </div>
-                <div className="flex flex-col @md:flex-row gap-3 shrink-0">
+                <div className="flex flex-col @md:flex-row gap-3 w-full @lg:w-auto shrink-0">
                     <OSButton
                         asLink
                         to="/careers/ai-research-engineer"
                         state={{ newWindow: true }}
                         variant="primary"
                         size="md"
+                        width="full"
+                        className="@md:w-auto @md:inline-flex"
                     >
                         AI research engineer role
                     </OSButton>
-                    <OSButton asLink to="/teams/ai-research" state={{ newWindow: true }} variant="secondary" size="md">
+                    <OSButton
+                        asLink
+                        to="/teams/ai-research"
+                        state={{ newWindow: true }}
+                        variant="secondary"
+                        size="md"
+                        width="full"
+                        className="@md:w-auto @md:inline-flex"
+                    >
                         Meet the team
                     </OSButton>
                 </div>
@@ -567,53 +600,25 @@ function OpenProblemsSection() {
 }
 
 // ─────────────────────────────────────────────
-// Fresh from the lab (merged PRs, live from GitHub)
+// Fresh from the lab (merged PRs, sourced at build time)
 // ─────────────────────────────────────────────
-
-const RESEARCHER_HANDLES = ['nicowaltz', 'robbie-c', 'joshsny', 'MarconLP', 'k11kirky', 'jamesefhawkins']
 
 type MergedPR = {
     title: string
     url: string
     repo: string
     author: string
-    mergedAt?: string
+    mergedAt?: string | null
 }
 
-function ShippedSection() {
-    const [prs, setPrs] = useState<MergedPR[] | null>(null)
-
-    useEffect(() => {
-        const query = `org:posthog is:pr is:merged -repo:posthog/posthog.com ${RESEARCHER_HANDLES.map(
-            (handle) => `author:${handle}`
-        ).join(' ')}`
-        fetch(`https://api.github.com/search/issues?q=${encodeURIComponent(query)}&sort=updated&order=desc&per_page=50`)
-            .then((response) => (response.ok ? response.json() : Promise.reject(new Error(response.statusText))))
-            .then((data) => {
-                const items = Array.isArray(data?.items) ? data.items : []
-                setPrs(
-                    items
-                        .filter((item: any) => /^(feat|epic)/i.test((item.title ?? '').trim()))
-                        .slice(0, 8)
-                        .map((item: any) => ({
-                            title: item.title,
-                            url: item.html_url,
-                            repo: item.repository_url?.split('/').pop() ?? 'posthog',
-                            author: item.user?.login ?? 'unknown',
-                            mergedAt: item.pull_request?.merged_at ?? item.closed_at,
-                        }))
-                )
-            })
-            .catch(() => setPrs([]))
-    }, [])
-
+function ShippedSection({ prs }: { prs: MergedPR[] }) {
     return (
         <section id="shipped" className="scroll-mt-16 mb-12 px-4 @xl:px-8">
             <SectionHeader
                 sticker={StickerTerminal}
-                kicker="Live from GitHub"
+                kicker="From GitHub"
                 title="Fresh from the lab"
-                subtitle="Feature work from the research team, pulled live from GitHub."
+                subtitle="Recently merged feature work from the research team."
             />
 
             <div className="border border-primary rounded overflow-hidden mb-6 shadow-lg">
@@ -622,19 +627,19 @@ function ShippedSection() {
                     <span className="size-2.5 rounded-full bg-yellow" />
                     <span className="size-2.5 rounded-full bg-green" />
                     <span className="ml-2 text-xs font-mono text-secondary truncate">
-                        ai-research – git log --merges --grep=feat
+                        gh search prs --merged -- org:posthog team:ai-research
                     </span>
                 </div>
-                {prs && prs.length > 0 ? (
+                {prs.length > 0 ? (
                     <div className="bg-primary">
                         {prs.map((pr) => (
                             <Link
                                 key={pr.url}
                                 to={pr.url}
                                 externalNoIcon
-                                className="group border-t border-primary first:border-t-0 px-4 py-2.5 flex flex-col @md:flex-row @md:items-center gap-1 @md:gap-3 no-underline text-primary transition-colors duration-150 hover:bg-accent"
+                                className="group border-t border-primary first:border-t-0 px-4 py-2.5 flex flex-col @md:flex-row @md:items-center gap-1 @md:gap-2 no-underline text-primary transition-colors duration-150 hover:bg-accent"
                             >
-                                <span className="inline-flex items-center gap-1.5 shrink-0 @md:w-36">
+                                <span className="inline-flex items-center gap-1.5 shrink-0">
                                     <IconPullRequest className="size-4 text-purple shrink-0" />
                                     <span className="text-xs font-mono text-secondary truncate">{pr.repo}</span>
                                 </span>
@@ -654,24 +659,13 @@ function ShippedSection() {
                 ) : (
                     <div className="bg-primary p-6 text-center">
                         <IconPullRequest className="size-8 text-muted mx-auto mb-2" />
-                        <p className="font-semibold font-mono text-sm m-0 mb-1">
-                            {prs === null
-                                ? '$ fetching merged PRs…'
-                                : '$ GitHub rate limit reached – try again shortly'}
-                        </p>
-                        <p className="text-sm text-secondary m-0">You can browse the work directly on GitHub.</p>
+                        <p className="font-semibold font-mono text-sm m-0 mb-1">$ no recent merged PRs to show</p>
+                        <p className="text-sm text-secondary m-0">Browse the team's work directly on GitHub.</p>
                     </div>
                 )}
             </div>
 
-            <OSButton
-                asLink
-                to="https://github.com/PostHog"
-                external
-                size="md"
-                icon={<IconArrowRight />}
-                iconPosition="right"
-            >
+            <OSButton asLink to="https://github.com/PostHog" external size="md">
                 Browse PostHog on GitHub
             </OSButton>
         </section>
@@ -682,12 +676,29 @@ function ShippedSection() {
 // Research blog posts (tagged "Research")
 // ─────────────────────────────────────────────
 
+type SqueakProfileFields = {
+    squeakId?: number
+    firstName?: string
+    lastName?: string
+    companyRole?: string
+    country?: string
+    location?: string
+    color?: string
+    biography?: string
+    pineappleOnPizza?: boolean
+    startDate?: string
+    avatar?: { url?: string }
+    teams?: { data?: { id: string; attributes?: { name?: string; slug?: string } }[] }
+    leadTeams?: { data?: { attributes?: { name?: string } }[] }
+}
+
 type PostAuthor = {
     name: string
     role?: string
     link_type?: string
     link_url?: string
-    profile?: { avatar?: { url?: string } }
+    profile_id?: number
+    profile?: SqueakProfileFields
 }
 
 type ResearchPost = {
@@ -714,7 +725,7 @@ function PostCard({ post }: { post: ResearchPost }) {
         <Link
             to={post.fields.slug}
             state={{ newWindow: true }}
-            className="group h-full border border-primary rounded bg-accent overflow-hidden flex flex-col no-underline text-primary transition-all duration-150 hover:border-purple hover:-translate-y-1 hover:shadow-lg"
+            className="group h-full border border-primary rounded bg-accent overflow-hidden flex flex-col no-underline text-primary hover:-translate-y-0.5 hover:shadow-md transition-all duration-150"
         >
             <div className="relative aspect-video shrink-0 bg-primary overflow-hidden">
                 {image ? (
@@ -722,13 +733,13 @@ function PostCard({ post }: { post: ResearchPost }) {
                         image={image}
                         alt={post.frontmatter.title}
                         className="!absolute inset-0 w-full h-full"
-                        imgClassName="object-cover"
+                        imgClassName="object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                 ) : post.frontmatter.featuredImage?.publicURL ? (
                     <img
                         src={post.frontmatter.featuredImage.publicURL}
                         alt={post.frontmatter.title}
-                        className="absolute inset-0 w-full h-full object-cover"
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                 ) : (
                     <div className="absolute inset-0 flex items-center justify-center">
@@ -771,22 +782,62 @@ const TALKS: { videoId: string; title: string; byline: string }[] = [
     },
 ]
 
+function ResearchTalkPlayer({
+    videoId,
+    title,
+}: {
+    videoId: string
+    title: string
+    newWindow?: boolean
+    location?: { pathname: string }
+    key?: string
+}) {
+    const { appWindow } = useWindow()
+    const { setWindowTitle } = useApp()
+
+    useEffect(() => {
+        if (!appWindow) return
+        setWindowTitle(appWindow, title)
+    }, [appWindow, setWindowTitle, title])
+
+    return <MediaPlayer videoId={videoId} source="youtube" />
+}
+
 function TalkCard({ talk }: { talk: (typeof TALKS)[number] }) {
-    return (
-        <div className="h-full border border-primary rounded bg-accent overflow-hidden flex flex-col">
-            <div className="relative aspect-video shrink-0 bg-primary">
-                <iframe
-                    src={`https://www.youtube-nocookie.com/embed/${talk.videoId}`}
+    const { addWindow } = useApp()
+
+    const openTalk = () => {
+        addWindow(
+            (
+                <ResearchTalkPlayer
+                    videoId={talk.videoId}
                     title={talk.title}
-                    className="absolute inset-0 w-full h-full"
-                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    loading="lazy"
-                    frameBorder="0"
+                    newWindow
+                    location={{ pathname: `research-talk-${talk.videoId}` }}
+                    key={`research-talk`}
                 />
+            ) as Parameters<typeof addWindow>[0]
+        )
+    }
+
+    return (
+        <button
+            type="button"
+            onClick={openTalk}
+            className="group h-full w-full border border-primary rounded bg-accent overflow-hidden flex flex-col text-left text-primary cursor-pointer hover:-translate-y-0.5 hover:shadow-md transition-all duration-150"
+        >
+            <div className="relative aspect-video shrink-0 bg-primary overflow-hidden">
+                <img
+                    src={`https://img.youtube.com/vi/${talk.videoId}/hqdefault.jpg`}
+                    alt=""
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                    <IconPlayFilled className="size-10 text-white drop-shadow-lg" />
+                </div>
             </div>
             <div className="p-4 flex flex-col flex-1">
-                <h3 className="text-base font-bold m-0 mb-2 leading-snug line-clamp-3 min-h-[4.125rem]">
+                <h3 className="text-base font-bold m-0 mb-2 leading-snug group-hover:underline line-clamp-3 min-h-[4.125rem]">
                     {talk.title}
                 </h3>
                 <div className="mt-auto flex items-center gap-2 text-sm text-secondary">
@@ -794,7 +845,7 @@ function TalkCard({ talk }: { talk: (typeof TALKS)[number] }) {
                     <span className="ml-auto shrink-0">Talk</span>
                 </div>
             </div>
-        </div>
+        </button>
     )
 }
 
@@ -849,7 +900,7 @@ function ResearchPostsSection({ posts }: { posts: ResearchPost[] }) {
                     <div
                         ref={scrollerRef}
                         onScroll={updateArrows}
-                        className="flex gap-4 snap-x overflow-x-auto overflow-y-hidden pb-2 -mx-4 px-4 @xl:-mx-8 @xl:px-8"
+                        className="flex gap-4 snap-x overflow-x-auto py-3 -my-3 px-0.5 -mx-0.5"
                     >
                         {feed.map((item) => (
                             <div key={item.key} className="w-72 @2xl:w-80 shrink-0 snap-start">
@@ -903,49 +954,28 @@ function ResearchPostsSection({ posts }: { posts: ResearchPost[] }) {
 // Who's doing research at PostHog?
 // ─────────────────────────────────────────────
 
-type TeamProfile = {
-    id: string
-    attributes?: {
-        firstName?: string
-        lastName?: string
-        companyRole?: string
-        avatar?: { data?: { attributes?: { url?: string } } }
-    }
-}
+function PeopleSection({ teamMembers, posts }: { teamMembers: SqueakProfileFields[]; posts: ResearchPost[] }) {
+    const seen = new Set(teamMembers.map((member) => member.squeakId).filter(Boolean))
+    const authorMembers: SqueakProfileFields[] = []
 
-type Researcher = {
-    name: string
-    role?: string
-    avatar?: string
-    link?: string
-    external?: boolean
-}
-
-function PeopleSection({ teamProfiles, posts }: { teamProfiles: TeamProfile[]; posts: ResearchPost[] }) {
-    const teamMembers: Researcher[] = teamProfiles.map((profile) => ({
-        name: [profile.attributes?.firstName, profile.attributes?.lastName].filter(Boolean).join(' '),
-        role: profile.attributes?.companyRole ?? 'AI Research',
-        avatar: profile.attributes?.avatar?.data?.attributes?.url,
-        link: `/community/profiles/${profile.id}`,
-    }))
-
-    const seen = new Set(teamMembers.map((member) => member.name.toLowerCase()))
-    const authors: Researcher[] = []
     posts.forEach((post) => {
         post.frontmatter.authors?.forEach((author) => {
-            if (!author.name || seen.has(author.name.toLowerCase())) return
-            seen.add(author.name.toLowerCase())
-            authors.push({
-                name: author.name,
-                role: author.role ?? 'Author',
-                avatar: author.profile?.avatar?.url,
-                link: author.link_url ?? undefined,
-                external: !!author.link_url && !author.link_url.startsWith('/'),
+            const squeakId = author.profile_id ?? author.profile?.squeakId
+            if (!squeakId || seen.has(squeakId) || !author.profile) return
+            seen.add(squeakId)
+
+            const [fallbackFirst, ...fallbackLast] = (author.name || '').split(' ')
+            authorMembers.push({
+                ...author.profile,
+                squeakId,
+                firstName: author.profile.firstName ?? fallbackFirst,
+                lastName: author.profile.lastName ?? fallbackLast.join(' '),
+                companyRole: author.profile.companyRole ?? author.role,
             })
         })
     })
 
-    const everyone = [...teamMembers, ...authors]
+    const everyone = [...teamMembers, ...authorMembers]
     if (everyone.length === 0) return null
 
     return (
@@ -956,46 +986,13 @@ function PeopleSection({ teamProfiles, posts }: { teamProfiles: TeamProfile[]; p
                 title="Who's doing research at PostHog?"
                 subtitle="The people doing the research, and the people writing about it."
             />
-            <div className="flex flex-wrap gap-3">
-                {everyone.map((person) => {
-                    const card = (
-                        <span className="flex items-center gap-2.5 border border-primary rounded bg-accent pl-2 pr-4 py-2 transition-all duration-150 group-hover:border-purple group-hover:-translate-y-0.5">
-                            {person.avatar ? (
-                                <img
-                                    src={person.avatar}
-                                    alt=""
-                                    className="size-10 rounded-full bg-primary object-cover"
-                                />
-                            ) : (
-                                <span className="size-10 rounded-full bg-primary flex items-center justify-center">
-                                    <IconBrain className="size-5 text-muted" />
-                                </span>
-                            )}
-                            <span className="flex flex-col">
-                                <span className="text-sm font-bold leading-tight">{person.name}</span>
-                                {person.role && (
-                                    <span className="text-xs text-secondary leading-tight">{person.role}</span>
-                                )}
-                            </span>
-                        </span>
-                    )
-
-                    return person.link ? (
-                        <Link
-                            key={person.name}
-                            to={person.link}
-                            className="group no-underline text-primary"
-                            {...(person.external ? { externalNoIcon: true } : { state: { newWindow: true } })}
-                        >
-                            {card}
-                        </Link>
-                    ) : (
-                        <span key={person.name} className="group text-primary">
-                            {card}
-                        </span>
-                    )
-                })}
-            </div>
+            <ul className="not-prose list-none mt-0 mx-0 p-0 flex flex-col @xs:grid grid-cols-2 @2xl:grid-cols-3 gap-4 @md:gap-x-6 gap-y-12 mt-14">
+                {everyone.map((member) => (
+                    <li key={member.squeakId}>
+                        <TeamMember {...member} isTeamLead={(member.leadTeams?.data?.length ?? 0) > 0} />
+                    </li>
+                ))}
+            </ul>
         </section>
     )
 }
@@ -1003,6 +1000,93 @@ function PeopleSection({ teamProfiles, posts }: { teamProfiles: TeamProfile[]; p
 // ─────────────────────────────────────────────
 // Events
 // ─────────────────────────────────────────────
+
+function EventDateBadge({ date }: { date: string }) {
+    const eventDate = dayjs(date)
+    const isSoon = eventDate.diff(dayjs(), 'day') <= 14
+
+    return (
+        <div
+            className={`flex flex-col items-center justify-center size-14 rounded border shrink-0 ${
+                isSoon ? 'border-orange bg-orange/10' : 'border-primary bg-primary'
+            }`}
+        >
+            <span
+                className={`text-[10px] font-bold uppercase tracking-widest leading-none ${
+                    isSoon ? 'text-orange' : 'text-secondary'
+                }`}
+            >
+                {eventDate.format('MMM')}
+            </span>
+            <span className="text-2xl font-bold leading-none tabular-nums mt-0.5">{eventDate.format('D')}</span>
+        </div>
+    )
+}
+
+function EventTalkRow({ event }: { event: Event }) {
+    const locationLabel = event.online ? 'Online' : event.location?.label
+    const photoUrl = event.photos?.[0]?.url
+    const eventDate = dayjs(event.date)
+    const isSoon = eventDate.diff(dayjs(), 'day') <= 14
+
+    return (
+        <Link
+            to={`/events/${event.id}`}
+            state={{ newWindow: true }}
+            contextMenu={false}
+            className="group flex items-center overflow-hidden border border-primary rounded bg-accent hover:-translate-y-0.5 hover:shadow-md transition-all duration-150 no-underline text-primary w-full"
+        >
+            {photoUrl ? (
+                <div className="flex items-center pl-4 shrink-0">
+                    <img
+                        src={photoUrl}
+                        alt=""
+                        className="size-14 @sm:size-16 rounded object-cover object-center border border-primary transition-transform duration-300 group-hover:scale-105"
+                    />
+                </div>
+            ) : (
+                <div className="flex items-center px-4 border-r border-primary bg-primary shrink-0">
+                    <EventDateBadge date={event.date} />
+                </div>
+            )}
+            <div className="flex flex-1 items-center gap-3 py-3.5 px-4 min-w-0">
+                <div className="min-w-0 flex-1 space-y-1">
+                    <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs">
+                        <span
+                            className={`font-semibold uppercase tracking-wide ${
+                                isSoon ? 'text-orange' : 'text-secondary'
+                            }`}
+                        >
+                            {eventDate.format('MMM D, YYYY')}
+                        </span>
+                        {locationLabel && (
+                            <span className="inline-flex items-center gap-1 text-secondary">
+                                {event.online ? (
+                                    <IconGlobe className="size-3 shrink-0" />
+                                ) : (
+                                    <IconMap className="size-3 shrink-0" />
+                                )}
+                                {locationLabel}
+                            </span>
+                        )}
+                    </div>
+                    <h3 className="text-base font-bold m-0 leading-snug group-hover:underline line-clamp-2">
+                        {event.name}
+                    </h3>
+                    {event.speakerTopic && (
+                        <p className="text-sm text-secondary m-0 line-clamp-1">{event.speakerTopic}</p>
+                    )}
+                    {event.speakers && event.speakers.length > 0 && (
+                        <p className="text-sm text-secondary m-0 line-clamp-1">
+                            Featuring <span className="font-semibold text-primary">{event.speakers.join(', ')}</span>
+                        </p>
+                    )}
+                </div>
+                <IconArrowRight className="size-4 text-muted shrink-0 transition-all duration-150 group-hover:text-secondary group-hover:translate-x-0.5" />
+            </div>
+        </Link>
+    )
+}
 
 function EventsSection() {
     const { events } = useEvents()
@@ -1028,34 +1112,13 @@ function EventsSection() {
             />
 
             {upcomingTalks.length > 0 ? (
-                <div className="space-y-3 mb-6">
+                <ul className="flex flex-col gap-3 mb-6 list-none m-0 p-0">
                     {upcomingTalks.map((event: Event) => (
-                        <Link
-                            key={event.id}
-                            to={`/events/${event.id}`}
-                            state={{ newWindow: true }}
-                            className="group border border-primary rounded bg-accent p-4 flex flex-col @md:flex-row @md:items-center gap-2 @md:gap-4 no-underline text-primary transition-all duration-150 hover:border-purple hover:-translate-y-0.5 hover:shadow-md"
-                        >
-                            <div className="flex items-center gap-2 text-sm text-secondary @md:w-40 shrink-0">
-                                <IconCalendar className="size-4 shrink-0" />
-                                {dayjs(event.date).format('MMM D, YYYY')}
-                            </div>
-                            <div className="flex-1">
-                                <span className="font-bold group-hover:underline">{event.name}</span>
-                                {event.speakerTopic && (
-                                    <p className="text-sm text-secondary m-0">{event.speakerTopic}</p>
-                                )}
-                                {event.speakers && event.speakers.length > 0 && (
-                                    <p className="text-sm text-secondary m-0">Featuring {event.speakers.join(', ')}</p>
-                                )}
-                            </div>
-                            <div className="flex items-center gap-2 text-sm text-secondary shrink-0">
-                                <IconMap className="size-4 shrink-0" />
-                                {event.online ? 'Online' : event.location?.label}
-                            </div>
-                        </Link>
+                        <li key={event.id}>
+                            <EventTalkRow event={event} />
+                        </li>
                     ))}
-                </div>
+                </ul>
             ) : (
                 <div className="border border-primary rounded bg-accent p-6 text-center mb-6">
                     <StickerZZZ className="size-12 mx-auto mb-2 -rotate-3" />
@@ -1147,7 +1210,7 @@ const FAQ_ITEMS = [
 
 function FAQSection() {
     return (
-        <section id="faq" className="scroll-mt-16 mb-12 px-4 @xl:px-8 max-w-2xl">
+        <section id="faq" className="scroll-mt-16 mb-12 px-4 @xl:px-8">
             <h2 className="text-2xl m-0 mb-6">Frequently asked questions</h2>
             <Accordion
                 type="multiple"
@@ -1179,7 +1242,7 @@ function CTASection() {
                 />
                 <div className="relative">
                     <h2 className="text-2xl m-0 mb-2">Put our research into practice</h2>
-                    <p className="text-secondary max-w-xl mx-auto mb-6">
+                    <p className="text-secondary mx-auto mb-6">
                         Most of what we're working on ships as public betas long before it's polished. Check what
                         feature previews are currently available to try in the app.
                     </p>
@@ -1212,14 +1275,15 @@ export default function ResearchPage({
 }: {
     data: {
         researchPosts: { nodes: ResearchPost[] }
+        researchMergedPRs: { nodes: MergedPR[] }
         aiResearchTeam?: {
             crest?: { data?: { attributes?: { url?: string } } }
-            profiles?: { data?: TeamProfile[] }
         }
+        researchTeamMembers?: { nodes: SqueakProfileFields[] }
     }
 }) {
     const teamCrestUrl = data.aiResearchTeam?.crest?.data?.attributes?.url
-    const teamProfiles = data.aiResearchTeam?.profiles?.data ?? []
+    const teamMembers = data.researchTeamMembers?.nodes ?? []
 
     return (
         <>
@@ -1253,23 +1317,23 @@ export default function ResearchPage({
                             className="hidden dark:block absolute inset-0"
                             imgClassName="h-full w-full"
                         />
-                        <div className="relative flex flex-col items-center w-full px-4 @xl:px-8 py-4">
+                        <div className={`relative ${RESEARCH_CONTENT_WIDTH} w-full mx-auto px-4 @xl:px-8 py-4`}>
                             <HeroSection teamCrestUrl={teamCrestUrl} />
                         </div>
                     </header>
 
-                    <div className="max-w-5xl mx-auto">
+                    <div className={`${RESEARCH_CONTENT_WIDTH} mx-auto`}>
                         <RoadmapSection />
 
                         <OpenProblemsSection />
 
                         <PublicationsSection />
 
-                        <ShippedSection />
+                        <ShippedSection prs={data.researchMergedPRs.nodes} />
 
                         <ResearchPostsSection posts={data.researchPosts.nodes} />
 
-                        <PeopleSection teamProfiles={teamProfiles} posts={data.researchPosts.nodes} />
+                        <PeopleSection teamMembers={teamMembers} posts={data.researchPosts.nodes} />
 
                         <EventsSection />
 
@@ -1291,6 +1355,48 @@ export const query = graphql`
         ) {
             nodes {
                 ...BlogFragment
+                frontmatter {
+                    authors: authorData {
+                        profile_id
+                        profile {
+                            squeakId
+                            firstName
+                            lastName
+                            companyRole
+                            country
+                            color
+                            location
+                            biography
+                            pineappleOnPizza
+                            startDate
+                            teams {
+                                data {
+                                    id
+                                    attributes {
+                                        name
+                                        slug
+                                    }
+                                }
+                            }
+                            leadTeams {
+                                data {
+                                    attributes {
+                                        name
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        researchMergedPRs: allResearchMergedPr(sort: { fields: mergedAt, order: DESC }) {
+            nodes {
+                title
+                url
+                repo
+                author
+                mergedAt
             }
         }
         aiResearchTeam: squeakTeam(slug: { eq: "ai-research" }) {
@@ -1301,19 +1407,38 @@ export const query = graphql`
                     }
                 }
             }
-            profiles {
-                data {
-                    id
-                    attributes {
-                        firstName
-                        lastName
-                        companyRole
-                        avatar {
-                            data {
-                                attributes {
-                                    url
-                                }
-                            }
+        }
+        researchTeamMembers: allSqueakProfile(
+            filter: { teams: { data: { elemMatch: { attributes: { slug: { eq: "ai-research" } } } } } }
+            sort: { fields: startDate, order: ASC }
+        ) {
+            nodes {
+                squeakId
+                avatar {
+                    url
+                }
+                biography
+                lastName
+                firstName
+                companyRole
+                country
+                color
+                location
+                pineappleOnPizza
+                startDate
+                teams {
+                    data {
+                        id
+                        attributes {
+                            name
+                            slug
+                        }
+                    }
+                }
+                leadTeams {
+                    data {
+                        attributes {
+                            name
                         }
                     }
                 }

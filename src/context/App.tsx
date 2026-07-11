@@ -926,6 +926,26 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    'research-talk': {
+        size: {
+            min: {
+                width: 960,
+                height: 682,
+            },
+            max: {
+                width: 960,
+                height: 682,
+            },
+            fixed: false,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+        modal: {
+            type: 'standard',
+        },
+    },
     '/demo': {
         size: {
             min: {

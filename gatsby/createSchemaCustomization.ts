@@ -226,6 +226,13 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       title: String
       number: Int
     }
+    type ResearchMergedPr implements Node {
+      title: String
+      url: String
+      repo: String
+      author: String
+      mergedAt: String
+    }
     type PostTagAttributes {
         label: String
         folder: String
