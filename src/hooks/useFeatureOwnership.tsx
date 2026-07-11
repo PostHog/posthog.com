@@ -172,6 +172,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'embedding-worker': {
         feature: 'Embedding worker',
         owner: ['self-driving'],
+        notes: (
+            <>
+                <TeamMember name="Oliver Browne" /> is the point owner.
+            </>
+        ),
         label: false,
     },
     'early-access-features': {
@@ -258,6 +263,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'mcp-server': {
         feature: 'MCP server',
         owner: ['self-driving'],
+        notes: (
+            <>
+                <TeamMember name="Georgiy Tarasov" /> is the point owner.
+            </>
+        ),
         label: 'feature/mcp',
     },
     notebooks: {
@@ -330,6 +340,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'posthog-ai': {
         feature: 'PostHog AI platform',
         owner: ['self-driving'],
+        notes: (
+            <>
+                <TeamMember name="Georgiy Tarasov" /> is the point owner.
+            </>
+        ),
         label: 'feature/posthog-ai',
     },
     'posthog-code': {
@@ -448,7 +463,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         label: 'feature/session-summaries',
     },
     signals: {
-        feature: 'Signals',
+        feature: 'Inbox',
         owner: ['self-driving'],
         label: 'feature/signals',
     },
@@ -460,6 +475,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'slack-app': {
         feature: 'Slack app',
         owner: ['self-driving'],
+        notes: (
+            <>
+                <TeamMember name="Vojta Bartoš" /> is the point owner.
+            </>
+        ),
         label: 'feature/slack-app',
     },
     settings: {
