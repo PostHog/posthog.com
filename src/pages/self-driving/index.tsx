@@ -31,6 +31,7 @@ import {
     IconSparkles,
     IconStack,
     IconTarget,
+    IconTerminal,
     IconWarning,
 } from '@posthog/icons'
 import { IconMCP } from 'components/OSIcons/Icons'
@@ -419,6 +420,51 @@ const workSurfaces: {
         ),
     },
     {
+        icon: IconAtSign,
+        iconColor: 'text-sky-blue',
+        label: (
+            <Link to="/slack" state={{ newWindow: true }} className="font-bold text-primary">
+                PostHog Slack app
+            </Link>
+        ),
+        copy: '@PostHog brings PostHog into Slack channels. Route reports to the ones each team already watches (hedgehog mode not included).',
+        cta: (
+            <CallToAction to="/slack" state={{ newWindow: true }} type="secondary" size="md">
+                Add to Slack
+            </CallToAction>
+        ),
+    },
+    {
+        icon: IconMCP,
+        iconColor: 'text-purple',
+        label: (
+            <Link to="/mcp" state={{ newWindow: true }} className="font-bold text-primary">
+                PostHog MCP
+            </Link>
+        ),
+        copy: 'Look ma, no hands! Pull self-driving context into other tools, and pull context from your other tools into self-driving.',
+        cta: (
+            <CallToAction to="/mcp" state={{ newWindow: true }} type="secondary" size="md">
+                Hook it up
+            </CallToAction>
+        ),
+    },
+    {
+        icon: IconTerminal,
+        iconColor: 'text-green',
+        label: (
+            <Link to="/docs/cli" state={{ newWindow: true }} className="font-bold text-primary">
+                PostHog CLI
+            </Link>
+        ),
+        copy: 'Self-driving from your terminal. Query your data and drive agents right where you already work, and wire it into your scripts and CI.',
+        cta: (
+            <CallToAction to="/docs/cli" state={{ newWindow: true }} type="secondary" size="md">
+                Read the docs
+            </CallToAction>
+        ),
+    },
+    {
         icon: IconCoffee,
         iconColor: 'text-brown dark:text-brown-dark',
         label: (
@@ -434,37 +480,7 @@ const workSurfaces: {
         copy: 'A desktop app for driving parallel agents to edit your product. The same Inbox and reports live here.',
         cta: (
             <CallToAction to="/code" state={{ newWindow: true }} type="secondary" size="md">
-                Learn more
-            </CallToAction>
-        ),
-    },
-    {
-        icon: IconAtSign,
-        iconColor: 'text-sky-blue',
-        label: (
-            <Link to="/slack" state={{ newWindow: true }} className="font-bold text-primary">
-                PostHog Slack app
-            </Link>
-        ),
-        copy: '@PostHog brings PostHog into Slack channels. Route reports to the ones each team already watches (hedgehog mode not included).',
-        cta: (
-            <CallToAction to="/slack" state={{ newWindow: true }} type="secondary" size="md">
-                Learn more
-            </CallToAction>
-        ),
-    },
-    {
-        icon: IconMCP,
-        iconColor: 'text-purple',
-        label: (
-            <Link to="/mcp" state={{ newWindow: true }} className="font-bold text-primary">
-                PostHog MCP
-            </Link>
-        ),
-        copy: 'Look ma, no hands! Pull self-driving context into other tools, and pull context from your other tools into self-driving.',
-        cta: (
-            <CallToAction to="/mcp" state={{ newWindow: true }} type="secondary" size="md">
-                Learn more
+                Get the app
             </CallToAction>
         ),
     },
@@ -858,7 +874,7 @@ export default function SelfDrivingPage(): JSX.Element {
                             Works in <Highlight>your workflow</Highlight>
                         </h3>
                         <p>
-                            The same Inbox and agents show up across four surfaces (everywhere you go, there's PostHog).
+                            The same Inbox and agents show up across five surfaces (everywhere you go, there's PostHog).
                         </p>
                         <div className="not-prose grid @md/reader-content:grid-cols-2 gap-x-6 gap-y-8 mt-6 mb-12">
                             {workSurfaces.map(({ icon: Icon, iconColor, label, copy, cta }, index) => (

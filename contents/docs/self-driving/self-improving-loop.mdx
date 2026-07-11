@@ -9,11 +9,11 @@ import { CallToAction } from 'components/CallToAction'
 
 <CalloutBox icon="IconFlask" title="Open beta" type="action">
 
-Self-driving is currently in open beta.
+Self-driving is in open beta. It's improving quickly – expect rough edges, and expect them to disappear fast.
 
 </CalloutBox>
 
-The self-improving loop is how PostHog turns product data into shipped changes, then checks whether they worked. The [overview](/docs/self-driving) has the loop at a glance. This page is how it works under the hood, stage by stage.
+The self-improving loop is how PostHog turns product data into shipped changes, then checks whether they worked. The [overview](/docs/self-driving) has the loop at a glance. This page is how it works under the hood, stage by stage. Prefer it concrete? [Anatomy of a pull request](/docs/self-driving/anatomy-of-a-pr) follows one bug through every stage below.
 
 ```mermaid
 %%{init: {'themeVariables': {'fontSize': '18px'}}}%%
@@ -70,8 +70,8 @@ Once a change ships, PostHog checks whether the metric it targeted actually move
 
 ## Next step
 
-Scouts are one of the two ways the loop picks up signals. See how they work.
+The loop is only as sharp as the context it runs on. See what feeds it.
 
-<CallToAction type="primary" to="/docs/self-driving/scouts">
-  Scouts
+<CallToAction type="primary" to="/docs/self-driving/context">
+  Context
 </CallToAction>

@@ -25,6 +25,7 @@ export const arize_phoenix = {
                 human_annotation: true,
                 session_replay: false,
                 product_analytics: false,
+                ai_gateway_proxy: false,
             },
         },
         session_replay: {
@@ -32,6 +33,12 @@ export const arize_phoenix = {
         },
         product_analytics: {
             available: false,
+        },
+    },
+            platform: {
+        deployment: {
+            eu_hosting: true,
+            open_source: true,
         },
     },
 }

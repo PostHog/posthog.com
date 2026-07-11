@@ -56,6 +56,7 @@
         { "source": "/posts/:path*", "destination": "/posts/[slug]/index.html" }
     ],
     "redirects": [
+        { "source": "/desktop", "destination": "/code" },
         { "source": "/teams/logs", "destination": "/teams/apm" },
         { "source": "/teams/query-performance", "destination": "/teams/analytics-platform" },
         {
@@ -334,7 +335,7 @@
         { "source": "/features", "destination": "/product" },
         { "source": "/docs/integrate/overview", "destination": "/docs/integrate" },
         { "source": "/docs/integrations", "destination": "/docs/integrate" },
-        { "source": "/signup", "destination": "/pricing" },
+        { "source": "/signup", "destination": "https://app.posthog.com/signup" },
         { "source": "/docs/tutorials/actions", "destination": "/docs/tutorials/event-tracking-guide" },
         { "source": "/docs/plugins/overview", "destination": "/docs/apps" },
         { "source": "/docs/api/overview", "destination": "/docs/api" },
