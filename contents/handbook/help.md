@@ -99,7 +99,7 @@ For discussions, public repos are the best place. Then private ones, then Slack 
 
 There are only a few exceptions to what we can't share publicly, for example if you are discussing security concerns, specific customers (for privacy reasons), revenue, or growth numbers (since these cause signalling issues with investors or competitors).
 
-Internally, _everything_ can be shared apart from people issues – such as HR / personal (i.e. recruitment or health data).
+Internally, _everything_ can be shared apart from people issues – such as HR / personal (i.e., recruitment or health data).
 
 ## Be proactive with community questions
 
