@@ -83,7 +83,7 @@ You can list and categorize issues. If you want someone to see an issue, @mentio
 
 ## Don't yolo merge
 
-Do not "yolo merge" – i.e.: force a change to our website or platform without someone else checking it. This should _only_ happen in emergencies, _even_ for simple changes. It is _so_ frequent that we find issues. If you have _any_ doubt, get someone else to look at it first.
+Do not "yolo merge" – e.g., force a change to our website or platform without someone else checking it. This should _only_ happen in emergencies, _even_ for simple changes. It is _so_ frequent that we find issues. If you have _any_ doubt, get someone else to look at it first.
 
 ## PRs > issues > Slack
 
