@@ -2221,6 +2221,10 @@ export const docsMenu = {
                     url: '/docs/self-driving/self-improving-loop',
                 },
                 {
+                    name: 'Anatomy of a pull request',
+                    url: '/docs/self-driving/anatomy-of-a-pr',
+                },
+                {
                     name: 'Context',
                     url: '/docs/self-driving/context',
                 },
@@ -2278,6 +2282,10 @@ export const docsMenu = {
                 {
                     name: 'Pricing',
                     url: '/docs/self-driving/pricing',
+                },
+                {
+                    name: 'FAQ',
+                    url: '/docs/self-driving/faq',
                 },
             ],
         },
@@ -7270,6 +7278,46 @@ export const docsMenu = {
                     name: 'Changelog',
                     url: '/docs/logs/changelog',
                     icon: 'IconRocket',
+                    color: 'purple',
+                },
+            ],
+        },
+        {
+            name: 'Metrics',
+            icon: 'IconTrends',
+            color: 'green',
+            url: '/docs/metrics',
+            description: 'Send OpenTelemetry metrics to PostHog and analyze them.',
+            children: [
+                {
+                    name: 'Metrics',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/metrics',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Getting started',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/metrics/start-here',
+                    icon: 'IconListCheck',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Why you need metrics',
+                    url: '/docs/metrics/basics',
+                    icon: 'IconBook',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'How metrics works',
+                    url: '/docs/metrics/architecture',
+                    icon: 'IconDatabase',
                     color: 'purple',
                 },
             ],
