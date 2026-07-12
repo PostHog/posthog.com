@@ -316,7 +316,7 @@ const usePublications = (): ResolvedPublication[] => {
     return publications
 }
 
-function PublicationCard({ paper, index }: { paper: ResolvedPublication; index: number }) {
+function PublicationCard({ paper }: { paper: ResolvedPublication }) {
     const { addToast } = useToast()
     const [copied, setCopied] = useState(false)
 
@@ -331,36 +331,25 @@ function PublicationCard({ paper, index }: { paper: ResolvedPublication; index: 
     }
 
     return (
-        <div className="flex items-start gap-3 border border-primary rounded bg-accent p-4 relative">
-            <div className="min-w-0 flex-1 space-y-0.5">
-                <div className="flex justify-between gap-3">
-                    <div className="flex items-baseline gap-3">
-                        <span className="font-mono text-base text-secondary shrink-0 tabular-nums relative bottom-[-1px]">
-                            [{index + 1}]
-                        </span>
-                        <Link to={paper.url} external className="font-bold text-primary min-w-0  ">
-                            {paper.title}
-                        </Link>
-                    </div>
-                    <OSButton
-                        size="sm"
-                        variant="default"
-                        hover="border"
-                        onClick={copyCitation}
-                        tooltip="Copy BibTeX citation"
-                    >
-                        {copied ? 'Copied' : 'Cite'}
-                    </OSButton>
-                </div>
-                <div className="flex gap-3">
-                    <span className="font-mono text-base shrink-0 invisible tabular-nums" aria-hidden>
-                        [{index + 1}]
-                    </span>
-                    <span className="text-sm text-secondary font-mono">
-                        {[paper.authors, paper.venue, paper.year, paper.note].filter(Boolean).join(' · ')}
-                    </span>
-                </div>
-            </div>
+        <div className="pl-4 border-l-2 border-primary space-y-1">
+            {(paper.authors || paper.year) && (
+                <p className="text-xs text-secondary m-0">{[paper.authors, paper.year].filter(Boolean).join(' · ')}</p>
+            )}
+            <Link to={paper.url} external className="text-base font-bold text-primary">
+                {paper.title}
+            </Link>
+            <p className="text-xs text-secondary m-0">
+                {[paper.venue, paper.note].filter(Boolean).join(' · ')}
+                {(paper.venue || paper.note) && ' · '}
+                <button
+                    type="button"
+                    onClick={copyCitation}
+                    title="Copy BibTeX citation"
+                    className="text-secondary hover:text-primary underline decoration-dotted underline-offset-2 bg-transparent border-0 p-0 font-inherit cursor-pointer"
+                >
+                    {copied ? 'Copied' : 'Cite'}
+                </button>
+            </p>
         </div>
     )
 }
@@ -379,12 +368,12 @@ function PublicationsSection() {
 
             {publications.length > 0 ? (
                 <div>
-                    <div className="space-y-3">
-                        {publications.map((paper, index) => (
-                            <PublicationCard key={paper.url} paper={paper} index={index} />
+                    <div className="space-y-5">
+                        {publications.map((paper) => (
+                            <PublicationCard key={paper.url} paper={paper} />
                         ))}
                     </div>
-                    <p className="text-sm text-secondary mt-3 mb-0">
+                    <p className="text-sm text-secondary mt-5 mb-0">
                         The first paper from our current research is in progress and will be linked here on release.
                     </p>
                 </div>
@@ -562,37 +551,29 @@ function OpenProblemsSection() {
                 ))}
             </ul>
 
-            <div className="border border-primary rounded bg-accent p-5 flex flex-col @lg:flex-row @lg:items-center gap-4">
-                <div className="flex-1">
-                    <p className="font-bold m-0 mb-1">Want to own one of these?</p>
-                    <p className="text-sm text-secondary m-0">
-                        We're hiring researchers to take these problems from whiteboard to arXiv, with the dataset,
-                        compute, and freedom to publish.
-                    </p>
-                </div>
-                <div className="flex flex-col @md:flex-row gap-3 w-full @lg:w-auto shrink-0">
+            <div className="border border-primary rounded bg-accent p-4">
+                <p className="font-semibold m-0 mb-1">Want to own one of these?</p>
+                <p className="text-sm text-secondary m-0 mb-3">
+                    We're hiring researchers to take these problems from whiteboard to arXiv, with the dataset, compute,
+                    and freedom to publish.
+                </p>
+                <div className="flex flex-wrap items-center gap-3">
                     <OSButton
                         asLink
                         to="/careers/ai-research-engineer"
                         state={{ newWindow: true }}
                         variant="primary"
                         size="md"
-                        width="full"
-                        className="@md:w-auto @md:inline-flex"
                     >
                         AI research engineer role
                     </OSButton>
-                    <OSButton
-                        asLink
+                    <Link
                         to="/teams/ai-research"
                         state={{ newWindow: true }}
-                        variant="secondary"
-                        size="md"
-                        width="full"
-                        className="@md:w-auto @md:inline-flex"
+                        className="text-sm font-semibold underline"
                     >
                         Meet the team
-                    </OSButton>
+                    </Link>
                 </div>
             </div>
         </section>
