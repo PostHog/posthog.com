@@ -8,7 +8,7 @@ blocked (common with ad blockers) or the player never reported ready.
 
 `MediaPlayer`, `WistiaVideo`, and `WistiaCustomPlayer` all embed Wistia videos
 by loading `E-v1.js` and waiting for the player to become ready. When that
-never happens there was previously no timeout, error state, or way to recover —
+never happens there was previously no timeout, error state, or way to recover –
 the container just spun forever. This component is the recoverable error state
 those players fall back to, paired with the [`useWistiaPlayer`](../../hooks/useWistiaPlayer.ts)
 hook which owns the loading/timeout/retry/telemetry logic.
@@ -44,6 +44,6 @@ absolutely-positioned overlay filling its container.
 
 | Prop        | Type         | Description                                                       |
 | ----------- | ------------ | ----------------------------------------------------------------- |
-| `videoId`   | `string`     | Wistia media id, used to build the "Watch the video" direct link. |
+| `videoId`   | `string`     | Wistia media ID, used to build the "Watch the video" direct link. |
 | `onRetry`   | `() => void` | Called when the user clicks "Try again" (wire to `retry`).        |
 | `className` | `string`     | Optional extra classes for the overlay.                           |
