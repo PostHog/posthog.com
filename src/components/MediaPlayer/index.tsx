@@ -2,16 +2,16 @@ import { IconFastForward, IconPauseFilled, IconPlayFilled } from '@posthog/icons
 import { IconFullScreen, IconPlayhead, IconVolumeFull, IconVolumeHalf, IconVolumeMuted } from 'components/OSIcons/Icons'
 import { Select } from 'components/RadixUI/Select'
 import ZoomHover from 'components/ZoomHover'
+import WistiaError from 'components/WistiaError'
+import useWistiaPlayer from 'hooks/useWistiaPlayer'
 import React, { useEffect, useRef, useState } from 'react'
 import { useApp } from '../../context/App'
 
-// Add types for YouTube and Wistia APIs to avoid TS errors
+// Add types for YouTube APIs to avoid TS errors (Wistia types live in useWistiaPlayer)
 declare global {
     interface Window {
         YT: any
         onYouTubeIframeAPIReady: (() => void) | null
-        Wistia: any
-        _wq: any[]
     }
 }
 
@@ -43,6 +43,18 @@ export default function MediaPlayer({
     const [isSeeking, setIsSeeking] = useState(false)
     const seekSuppressTimeout = useRef<NodeJS.Timeout | null>(null)
     const containerRef = React.useRef<HTMLDivElement>(null)
+
+    const {
+        status: wistiaStatus,
+        scriptLoaded: wistiaScriptLoaded,
+        attempt: wistiaAttempt,
+        markReady: markWistiaReady,
+        retry: retryWistia,
+    } = useWistiaPlayer({
+        videoId,
+        enabled: source === 'wistia',
+        component: 'MediaPlayer',
+    })
 
     useEffect(() => {
         let interval: NodeJS.Timeout | null = null
@@ -120,8 +132,10 @@ export default function MediaPlayer({
                 window.onYouTubeIframeAPIReady = null
             }
         } else if (source === 'wistia') {
-            // Wistia player initialization
-            if (typeof window === 'undefined' || !containerRef.current) return
+            // Wistia player initialization. Script loading, the ready timeout,
+            // and error/retry handling are owned by useWistiaPlayer; only run
+            // once the shared loader reports the script is ready.
+            if (!wistiaScriptLoaded || typeof window === 'undefined' || !containerRef.current) return
 
             const initializeWistiaPlayer = () => {
                 const embedDiv = document.createElement('div')
@@ -154,6 +168,8 @@ export default function MediaPlayer({
                         ...(borderRadius ? {} : { playerBorderRadius: 0, roundedPlayer: 0 }),
                     },
                     onReady: (video: any) => {
+                        markWistiaReady()
+
                         if (!borderRadius) {
                             video.setPlayerBorderRadius?.(0)
                             video.setRoundedPlayer?.(0)
@@ -191,17 +207,9 @@ export default function MediaPlayer({
                 })
             }
 
-            if (!window.Wistia) {
-                const script = document.createElement('script')
-                script.src = 'https://fast.wistia.com/assets/external/E-v1.js'
-                script.async = true
-                script.onload = initializeWistiaPlayer
-                document.head.appendChild(script)
-            } else {
-                initializeWistiaPlayer()
-            }
+            initializeWistiaPlayer()
         }
-    }, [videoId, source, startTime, borderRadius])
+    }, [videoId, source, startTime, borderRadius, wistiaScriptLoaded, wistiaAttempt, markWistiaReady])
 
     const handlePlayPause = () => {
         if (playerState.player) {
@@ -359,9 +367,15 @@ export default function MediaPlayer({
                                 <div id={`video-player-iframe-${videoId}`} className="rounded w-full aspect-video" />
                             ) : (
                                 <div
-                                    ref={containerRef}
-                                    className={`w-full aspect-video ${borderRadius ? 'rounded' : 'rounded-none'}`}
-                                />
+                                    className={`relative w-full aspect-video ${
+                                        borderRadius ? 'rounded overflow-hidden' : 'rounded-none'
+                                    }`}
+                                >
+                                    <div ref={containerRef} className="w-full h-full" />
+                                    {wistiaStatus === 'error' && (
+                                        <WistiaError videoId={videoId} onRetry={retryWistia} />
+                                    )}
+                                </div>
                             )}
                         </div>
 

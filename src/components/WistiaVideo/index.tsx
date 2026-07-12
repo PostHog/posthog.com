@@ -1,11 +1,6 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useRef } from 'react'
-
-declare global {
-    interface Window {
-        Wistia: any
-        _wq: any[]
-    }
-}
+import useWistiaPlayer from 'hooks/useWistiaPlayer'
+import WistiaError from 'components/WistiaError'
 
 interface WistiaVideoProps {
     videoId: string
@@ -31,6 +26,11 @@ const WistiaVideo = forwardRef<WistiaVideoRef, WistiaVideoProps>(
         const playerRef = useRef<any>(null)
         const endHandlerRef = useRef<(() => void) | null>(null)
 
+        const { status, scriptLoaded, attempt, markReady, retry } = useWistiaPlayer({
+            videoId,
+            component: 'WistiaVideo',
+        })
+
         useImperativeHandle(ref, () => ({
             play: () => playerRef.current?.play(),
             pause: () => playerRef.current?.pause(),
@@ -47,7 +47,7 @@ const WistiaVideo = forwardRef<WistiaVideoRef, WistiaVideoProps>(
         onEndRef.current = onEnd
 
         useEffect(() => {
-            if (typeof window === 'undefined' || !containerRef.current) return
+            if (!scriptLoaded || typeof window === 'undefined' || !containerRef.current) return
 
             let isMounted = true
 
@@ -69,75 +69,67 @@ const WistiaVideo = forwardRef<WistiaVideoRef, WistiaVideoProps>(
                 }
             }
 
-            const initializePlayer = () => {
-                if (!isMounted || !containerRef.current) return
-
-                // Create a fresh embed div
-                const embedDiv = document.createElement('div')
-                embedDiv.className = `wistia_embed wistia_async_${videoId} videoFoam=true ${
-                    hideInitialControls ? 'controlsVisibleOnLoad=false playButtonVisible=false' : ''
-                } ${hideAudioControls ? 'volumeControl=false' : ''}`
-                embedDiv.style.width = '100%'
-                embedDiv.style.height = '100%'
-                containerRef.current.appendChild(embedDiv)
-
-                // Wait for Wistia to initialize this embed
-                const checkForVideo = () => {
-                    if (!isMounted) return
-
-                    // Try to get the video from the embed div
-                    const video = window.Wistia?.api(embedDiv)
-                    if (video) {
-                        playerRef.current = video
-
-                        // Set options
-                        video.mute()
-
-                        // Create the end handler
-                        endHandlerRef.current = () => {
-                            if (isMounted) {
-                                onEndRef.current?.()
-                            }
-                        }
-                        video.bind('end', endHandlerRef.current)
-
-                        if (autoPlay) {
-                            video.play()
-                        }
-                    } else {
-                        // Video not ready yet, check again
-                        setTimeout(checkForVideo, 100)
-                    }
-                }
-
-                // Start checking for the video
-                setTimeout(checkForVideo, 100)
-            }
-
             // Clean up before initializing
             cleanup()
 
-            if (!window.Wistia) {
-                const script = document.createElement('script')
-                script.src = 'https://fast.wistia.com/assets/external/E-v1.js'
-                script.async = true
-                script.onload = () => {
-                    if (isMounted) {
-                        initializePlayer()
+            // Create a fresh embed div
+            const embedDiv = document.createElement('div')
+            embedDiv.className = `wistia_embed wistia_async_${videoId} videoFoam=true ${
+                hideInitialControls ? 'controlsVisibleOnLoad=false playButtonVisible=false' : ''
+            } ${hideAudioControls ? 'volumeControl=false' : ''}`
+            embedDiv.style.width = '100%'
+            embedDiv.style.height = '100%'
+            containerRef.current.appendChild(embedDiv)
+
+            // Wait for Wistia to initialize this embed. If it never does, the
+            // useWistiaPlayer timeout surfaces the error state, so bound the
+            // poll rather than looping forever.
+            let tries = 0
+            const maxTries = 120
+            const checkForVideo = () => {
+                if (!isMounted) return
+
+                const video = window.Wistia?.api(embedDiv)
+                if (video) {
+                    playerRef.current = video
+                    markReady()
+
+                    // Set options
+                    video.mute()
+
+                    // Create the end handler
+                    endHandlerRef.current = () => {
+                        if (isMounted) {
+                            onEndRef.current?.()
+                        }
                     }
+                    video.bind('end', endHandlerRef.current)
+
+                    if (autoPlay) {
+                        video.play()
+                    }
+                } else if (tries < maxTries) {
+                    // Video not ready yet, check again
+                    tries++
+                    setTimeout(checkForVideo, 100)
                 }
-                document.head.appendChild(script)
-            } else {
-                initializePlayer()
             }
+
+            // Start checking for the video
+            setTimeout(checkForVideo, 100)
 
             return () => {
                 isMounted = false
                 cleanup()
             }
-        }, [videoId, autoPlay])
+        }, [videoId, autoPlay, scriptLoaded, attempt, markReady])
 
-        return <div ref={containerRef} className={`aspect-square ${className}`} />
+        return (
+            <div className={`relative aspect-square ${className}`}>
+                <div ref={containerRef} className="w-full h-full" />
+                {status === 'error' && <WistiaError videoId={videoId} onRetry={retry} />}
+            </div>
+        )
     }
 )
 

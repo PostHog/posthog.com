@@ -10,7 +10,9 @@ import {
 import { Select } from 'components/RadixUI/Select'
 import Input from 'components/OSForm/input'
 import OSButton from 'components/OSButton'
+import WistiaError from 'components/WistiaError'
 import usePostHog from 'hooks/usePostHog'
+import useWistiaPlayer from 'hooks/useWistiaPlayer'
 
 interface WistiaCustomPlayerProps {
     mediaId: string
@@ -25,13 +27,6 @@ interface WistiaCustomPlayerProps {
     isPreview?: boolean // For thumbnail mode
     startTime?: number // Start playback at specific time
     onTimeUpdate?: (time: number) => void // Callback for time updates
-}
-
-declare global {
-    interface Window {
-        Wistia?: any
-        _wq?: any[]
-    }
 }
 
 const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
@@ -70,25 +65,41 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
         const [showCaptionSearch, setShowCaptionSearch] = useState(false)
         const [captionSearchQuery, setCaptionSearchQuery] = useState('')
         const [isReady, setIsReady] = useState(false)
+        const [initSkipped, setInitSkipped] = useState(false)
         const hasTrackedPlayRef = useRef(false)
         const posthog = usePostHog()
+
+        const {
+            status: wistiaStatus,
+            scriptLoaded: wistiaScriptLoaded,
+            attempt: wistiaAttempt,
+            markReady: markWistiaReady,
+            retry: retryWistia,
+        } = useWistiaPlayer({
+            videoId: mediaId,
+            enabled: !isPreview && !initSkipped,
+            component: 'WistiaCustomPlayer',
+        })
 
         // Store initial props in refs to use them without causing re-renders
         const autoPlayRef = useRef(autoPlay)
         const mutedRef = useRef(muted)
 
-        // Load Wistia scripts and initialize player
+        // Initialize player once the shared Wistia loader reports the script is
+        // ready. Script loading, the ready timeout, and error/retry handling
+        // live in useWistiaPlayer.
         useEffect(() => {
             // Don't initialize actual player in preview mode
             if (isPreview) return
 
-            if (typeof window === 'undefined' || !containerRef.current) return
+            if (!wistiaScriptLoaded || typeof window === 'undefined' || !containerRef.current) return
 
             // Check if we're inside a very small container (likely a thumbnail in a grid)
             // Allow mobile sizes (down to ~200px width) for legitimate video players
             const rect = containerRef.current.getBoundingClientRect()
             if (rect.width < 200 || rect.height < 100) {
                 console.log('Skipping video initialization - detected thumbnail size', rect.width, rect.height)
+                setInitSkipped(true)
                 return
             }
 
@@ -136,6 +147,7 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                         preload: 'auto', // Preload video metadata
                     },
                     onReady: (video: any) => {
+                        markWistiaReady()
                         playerRef.current = video
 
                         // Expose player instance to parent via ref
@@ -150,7 +162,9 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                                     }
                                 },
                                 play: () => {
-                                    const playPromise = playerRef.current?.play ? playerRef.current.play() : video?.play()
+                                    const playPromise = playerRef.current?.play
+                                        ? playerRef.current.play()
+                                        : video?.play()
                                     if (playPromise && typeof playPromise.catch === 'function') {
                                         playPromise.catch((error: any) => {
                                             console.warn('Play was prevented:', error)
@@ -517,21 +531,12 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                 }
             }
 
-            // Load Wistia script if not already loaded
-            if (!window.Wistia) {
-                const script = document.createElement('script')
-                script.src = 'https://fast.wistia.com/assets/external/E-v1.js'
-                script.async = true
-                script.onload = initializePlayer
-                document.head.appendChild(script)
-            } else {
-                initializePlayer()
-            }
+            initializePlayer()
 
             return () => {
                 if (cleanup) cleanup()
             }
-        }, [mediaId]) // Only re-init if mediaId changes
+        }, [mediaId, wistiaScriptLoaded, wistiaAttempt, isPreview, markWistiaReady]) // Re-init on mediaId change or retry
 
         // Update caption text based on current time
         useEffect(() => {
@@ -743,8 +748,8 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                                             theme === 'dark'
                                                 ? 'text-white'
                                                 : theme === 'light'
-                                                ? 'text-black'
-                                                : 'text-secondary'
+                                                  ? 'text-black'
+                                                  : 'text-secondary'
                                         }`}
                                     />
                                 </div>
@@ -757,8 +762,8 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                                 theme === 'dark'
                                     ? 'text-white/60'
                                     : theme === 'light'
-                                    ? 'text-black/60'
-                                    : 'text-secondary/60'
+                                      ? 'text-black/60'
+                                      : 'text-secondary/60'
                             } text-xs`}
                         >
                             Video Player Preview
@@ -778,6 +783,8 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                     <div className="absolute inset-0">
                         {/* Wistia player container */}
                         <div ref={containerRef} className="w-full h-full" />
+
+                        {wistiaStatus === 'error' && <WistiaError videoId={mediaId} onRetry={retryWistia} />}
 
                         {/* Custom seek bar overlay at bottom of video */}
                         <div
@@ -839,8 +846,8 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                                     theme === 'dark'
                                         ? '!text-white'
                                         : theme === 'light'
-                                        ? '!text-black'
-                                        : '!text-secondary'
+                                          ? '!text-black'
+                                          : '!text-secondary'
                                 } text-sm font-mono`}
                             >
                                 {formatTime(currentTime)} / {formatTime(duration)}
@@ -857,8 +864,8 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                                     theme === 'dark'
                                         ? '!bg-white !text-black'
                                         : theme === 'light'
-                                        ? '!bg-black/75 !text-white'
-                                        : '!bg-black/75 !text-white dark:!bg-white dark:!text-black'
+                                          ? '!bg-black/75 !text-white'
+                                          : '!bg-black/75 !text-white dark:!bg-white dark:!text-black'
                                 } rounded-full w-8 h-8`}
                                 zoomHover="lg"
                                 // tooltip={isPlaying ? 'Pause' : 'Play'}
@@ -878,8 +885,8 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                                         theme === 'dark'
                                             ? '!text-white bg-black/50'
                                             : theme === 'light'
-                                            ? '!text-black bg-white/50'
-                                            : '!text-secondary bg-black/50'
+                                              ? '!text-black bg-white/50'
+                                              : '!text-secondary bg-black/50'
                                     }`}
                                     dataScheme="tertiary"
                                 />
@@ -906,8 +913,8 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                                     theme === 'dark'
                                         ? '!text-white'
                                         : theme === 'light'
-                                        ? '!text-black'
-                                        : '!text-secondary'
+                                          ? '!text-black'
+                                          : '!text-secondary'
                                 } px-2 py-1 text-xs font-medium`}
                             >
                                 {playbackRate}x
@@ -923,8 +930,8 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                                     theme === 'dark'
                                         ? '!text-white'
                                         : theme === 'light'
-                                        ? '!text-black'
-                                        : '!text-secondary'
+                                          ? '!text-black'
+                                          : '!text-secondary'
                                 } p-1.5`}
                                 tooltip={showCaptions ? 'Hide captions' : 'Show captions'}
                             />
@@ -989,8 +996,8 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                                         theme === 'dark'
                                             ? '!text-white/30'
                                             : theme === 'light'
-                                            ? '!text-black/30'
-                                            : '!text-secondary/30'
+                                              ? '!text-black/30'
+                                              : '!text-secondary/30'
                                     } text-xs italic`}
                                 >
                                     {captions.length > 0 ? '' : 'No captions available'}
@@ -1017,8 +1024,8 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                                     theme === 'dark'
                                         ? 'text-white'
                                         : theme === 'light'
-                                        ? 'text-black'
-                                        : 'text-secondary'
+                                          ? 'text-black'
+                                          : 'text-secondary'
                                 }`}
                             />
                         </div>
