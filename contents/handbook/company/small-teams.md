@@ -203,7 +203,7 @@ The small team is responsible for creating roles for those that they need.
 
 We have a centralized team that will then help you hire.
 
-James and Tim used to interview every candidate because it's a standard startup failure for founders to get too removed from hiring. We've relaxed this so that someone Team Blitzscale always interviews candidates, normally whichever team member sponsors the team the candidate will be joining.
+James and Tim used to interview every candidate because it's a standard startup failure for founders to get too removed from hiring. We've relaxed this so that someone from Team Blitzscale always interviews candidates, normally whichever team member sponsors the team the candidate will be joining.
 
 Regardless of the team, we aim to retain a high bar for new hires. In the words of James Greenhill: "If it's not a hell yes, it's a hell no." See [how we hire](/handbook/people/hiring-process) for more on this. 
 
