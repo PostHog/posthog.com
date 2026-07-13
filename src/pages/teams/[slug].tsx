@@ -182,6 +182,9 @@ export default function TeamPage(props: TeamPageProps) {
                     fields {
                         slug
                     }
+                    frontmatter {
+                        goalsTitle
+                    }
                     body
                 }
             }
@@ -268,9 +271,11 @@ export default function TeamPage(props: TeamPageProps) {
     `)
 
     const body = data?.allTeams?.nodes?.find((node: any) => node?.fields?.slug === `/teams/${slug}`)?.body
-    const objectives = data?.allObjectives?.nodes?.find(
+    const objectivesNode = data?.allObjectives?.nodes?.find(
         (node: any) => node?.fields?.slug === `/teams/${slug}/objectives`
-    )?.body
+    )
+    const objectives = objectivesNode?.body
+    const objectivesTitle = objectivesNode?.frontmatter?.goalsTitle || 'Goals'
     const teamData = data?.allSqueakTeam?.nodes?.find((node: any) => node?.slug === slug)
     const { totalCount: totalSlackEmojis } = data?.allSlackEmoji || {}
     const allTeams = data?.allTeamsData || { nodes: [] }
@@ -875,7 +880,7 @@ export default function TeamPage(props: TeamPageProps) {
 
                 {objectives && (
                     <>
-                        <h2>Goals</h2>
+                        <h2>{objectivesTitle}</h2>
                         <MDXProvider components={{ TeamMember: TeamMemberComponent, FutureTeamMember, SmallTeam }}>
                             <MDXRenderer>{objectives}</MDXRenderer>
                         </MDXProvider>
