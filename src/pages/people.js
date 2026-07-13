@@ -5,6 +5,7 @@ import SEO from 'components/seo'
 import People from 'components/People'
 import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
 import { graphql, useStaticQuery } from 'gatsby'
+import { IconSearch, IconX } from '@posthog/icons'
 import { useApp } from '../context/App'
 
 const PeoplePage = () => {
@@ -19,6 +20,29 @@ const PeoplePage = () => {
         value: '/people',
         content: (
             <div className={` ${websiteMode && 'max-w-7xl mx-auto'}`}>
+                <div data-scheme="primary" className="bg-primary px-4 pt-4">
+                    <div className="relative max-w-xs">
+                        <IconSearch className="absolute left-2 top-1/2 -translate-y-1/2 size-4 text-secondary pointer-events-none" />
+                        <input
+                            type="search"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            placeholder="Search people…"
+                            aria-label="Search people"
+                            className="w-full py-1 pl-8 pr-8 rounded border border-input text-primary text-sm bg-light dark:bg-dark"
+                        />
+                        {searchTerm && (
+                            <button
+                                type="button"
+                                onClick={() => setSearchTerm('')}
+                                aria-label="Clear search"
+                                className="absolute right-2 top-1/2 -translate-y-1/2 text-secondary hover:text-primary"
+                            >
+                                <IconX className="size-4" />
+                            </button>
+                        )}
+                    </div>
+                </div>
                 <People searchTerm={searchTerm} filteredMembers={filteredPeople} />
             </div>
         ),
