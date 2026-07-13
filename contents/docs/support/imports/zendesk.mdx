@@ -30,13 +30,15 @@ The API token and agent email are encrypted and never shown again after submissi
 
 For each Zendesk ticket:
 
-- **Metadata** – subject, status, and priority (see mapping tables below)
-- **Tags** – Zendesk tags appear as Support tags. Names are normalized and truncated to 255 characters; empty tags are dropped. Re-import does not update tags on already-imported tickets
-- **Full message thread** – public replies and internal notes
-- **Attachments** – images embedded in the thread; other files linked. Files over 20 MiB are skipped.
-- **Customer identity** – requester name and email
-- **Original timestamps** – ticket and message `created_at` / `updated_at`
-- **Zendesk ticket ID** – stored on the ticket and shown in the sidebar
+| Item                | Details |
+| ------------------- | ------- |
+| Metadata            | subject, status, and priority (see mapping tables below) |
+| Tags                | Zendesk tags appear as Support tags. Names are normalized and truncated to 255 characters; empty tags are dropped. Re-import does not update tags on already-imported tickets |
+| Full message thread | public replies and internal notes |
+| Attachments         | images embedded in the thread; other files linked. Files over 20 MiB are skipped. |
+| Customer identity   | requester name and email |
+| Original timestamps | ticket and message `created_at` / `updated_at` |
+| Zendesk ticket ID   | stored on the ticket and shown in the sidebar |
 
 ### Status mapping
 
