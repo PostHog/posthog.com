@@ -32,7 +32,7 @@ With logs, you filter by that user's ID and see their request hits a cache miss,
 
 No errors fire. Your tests pass. But checkout completions drop 15% after a deploy.
 
-With logs, you see the payment gateway starts returning a new response format after their own update last night. Your code parses it without erroring, but silently drops the discount field, so users see full price and abandon cart.
+With logs, you see the payment gateway starts returning a new response format after their own update last night. Your code parses it without erroring, but silently drops the discount field, so users see full price and abandon the cart.
 
 ### Background jobs vanish into a black box
 
@@ -56,7 +56,7 @@ Logs also matter when your application *uses* AI. If you're building with LLMs, 
 
 ## What good logging looks like
 
-Most logging is bad. Not because people don't log enough, but because they log too much of the wrong things.
+Most logging is bad. Not because people don't log enough, but because they log too many of the wrong things.
 
 **Three principles that matter:**
 
