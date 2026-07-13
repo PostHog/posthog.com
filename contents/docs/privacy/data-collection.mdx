@@ -114,7 +114,7 @@ function onConsentChange(hasConsented) {
 
 Every CMP exposes some kind of callback or event that fires when consent changes (for example, OneTrust's `OptanonWrapper` / `OneTrustGroupsUpdated` event, or Cookiebot's `CookiebotOnAccept` / `CookiebotOnDecline` events). Call `opt_in_capturing()` and `opt_out_capturing()` from that callback.
 
-Alternatively, use [cookieless tracking](#cookieless-tracking) with `cookieless_mode: "on_reject"`. PostHog still loads and counts users with a privacy-preserving hash, and only starts storing cookies once the user opts in — without you needing to wire up the opt in and out calls yourself.
+Alternatively, use [cookieless tracking](#cookieless-tracking) with `cookieless_mode: "on_reject"`. PostHog still loads and counts users with a privacy-preserving hash, and only starts storing cookies once the user opts in – without you needing to wire up the opt in and out calls yourself.
 
 ## IP data capture
 
