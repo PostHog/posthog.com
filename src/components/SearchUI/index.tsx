@@ -11,6 +11,7 @@ import { capitalizeFirstLetter } from '../../utils'
 import { Hit } from 'instantsearch.js'
 import OSButton from 'components/OSButton'
 import Input from 'components/OSForm/input'
+import SpotlightSearch from 'components/SpotlightSearch'
 
 const searchClient = algoliasearch(
     process.env.GATSBY_ALGOLIA_APP_ID as string,
@@ -235,24 +236,7 @@ export const SearchUI = ({
 export const SearchOverlay = () => {
     const { searchOpen, setSearchOpen, searchInitialFilter } = useApp()
 
-    if (!searchOpen) {
-        return null
-    }
-
     const close = () => setSearchOpen(false)
 
-    return (
-        <div data-scheme="primary" className="fixed inset-0 z-[9999] flex items-start justify-center">
-            <div className="absolute inset-0 bg-black/50 animate-overlay-fade-in" onClick={close} />
-            <div className="relative w-[90vw] max-w-[600px] mt-[12vh]">
-                <SearchUI
-                    initialFilter={searchInitialFilter}
-                    autoFocus
-                    onChange={close}
-                    onEscape={close}
-                    className="p-2 rounded bg-primary shadow-2xl border border-primary"
-                />
-            </div>
-        </div>
-    )
+    return <SpotlightSearch open={searchOpen} onClose={close} initialFilter={searchInitialFilter || undefined} />
 }
