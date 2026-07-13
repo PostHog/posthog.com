@@ -302,7 +302,7 @@ const PeopleSearch = ({ value, onChange }: { value: string; onChange: (query: st
             <IconSearch className="absolute left-2 top-1/2 -translate-y-1/2 size-4 text-secondary pointer-events-none" />
             <input
                 ref={inputRef}
-                type="search"
+                type="text"
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
                 onKeyDown={(e) => {
