@@ -388,6 +388,30 @@ For production databases, we recommend enabling CDC on one or two representative
 
 Enable logical replication on the database and restart PostgreSQL. On RDS or Aurora PostgreSQL, set `rds.logical_replication = 1` in the parameter group and restart the instance.
 
+### `Failed to create replication slot` or `permission denied`
+
+This error occurs when the database user lacks permission to create logical replication slots, which is required for CDC.
+
+To fix this, either:
+
+1. **Grant replication permissions** to the PostHog database user:
+
+   For self-managed Postgres or most managed providers:
+
+   ```sql
+   ALTER USER "posthog" WITH REPLICATION;
+   ```
+
+   For AWS RDS:
+
+   ```sql
+   GRANT rds_replication TO "posthog";
+   ```
+
+2. **Switch to Incremental sync** instead of CDC. Incremental sync only requires `SELECT` permission and works well for tables with a reliable timestamp or incrementing ID column. Go to the Schemas tab in your source configuration and change the sync type from CDC to Incremental.
+
+See [Database user permissions](#database-user-permissions) for more details on required permissions.
+
 ### `No replication slot capacity available`
 
 Increase `max_replication_slots` or remove unused slots. Check existing slots with:
