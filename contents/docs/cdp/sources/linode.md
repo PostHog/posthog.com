@@ -34,7 +34,7 @@ When linking Linode, you'll need:
 
 <SyncModes />
 
-Account events sync in append-only mode (an immutable audit log; the Linode API only retains the last 90 days). Invoices sync incrementally by date. Infrastructure inventories (linodes, volumes, nodebalancers, LKE clusters, domains, users, payments) use full refresh.
+Account events sync in append-only mode (an immutable audit log; the Linode API only retains the last 90 days). Invoices sync incrementally by date. Infrastructure inventories (linodes, volumes, nodebalancers, LIKE clusters, domains, users, payments) use full refresh.
 
 ## Configuration
 
