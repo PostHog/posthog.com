@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Forward deployed engineering (FDE) works alongside the sales, customer success (CS), and onboarding teams. They own the commercial relationship; we own the technical outcome.
+Forward deployed engineering (FDE) works alongside the sales, customer success (CS), and onboarding teams. They own the commercial relationship and bring us in when they need scoped delivery of technical outcomes.
 
 ## Who owns what
 
@@ -12,7 +12,7 @@ Forward deployed engineering (FDE) works alongside the sales, customer success (
 - **CS / TAMs** own the ongoing customer relationship and health; see [customer success](/handbook/cs-and-onboarding/customer-success).
 - **FDE** owns scoped technical engagements that unblock adoption or expansion.
 
-We overlay the account rather than taking it over. When our engagement ends, the relationship goes back to CS. It never left them.
+We collaborate with these teams to provide focused, embedded technical work. The commercial relationship stays with the account owner throughout.
 
 ## How FDE gets pulled in
 
@@ -25,7 +25,7 @@ One thing worth naming from the sales and CS side: **an FDE ask usually surfaces
 - **Pre-sale:** helping a prospect prove PostHog will work for them through advisory reviews, proofs-of-concept, and architecture assessments, often alongside [trials](/handbook/growth/sales/running-trials). This work exists because a deal exists, and it's time-boxed to help close it. It runs inside the AE's deal.
 - **Post-sale:** implementation, migration, and expansion work for existing customers. This is where the bulk of FDE engagements live, and where the work is most likely to compound.
 
-FDE engagements begin where pre-sales ends. If a prospect needs deep, ongoing technical work to be convinced, that's a signal the engagement should be scoped (and likely paid) rather than absorbed as unbounded pre-sales effort.
+FDE engagements begin where pre-sales ends. If a prospect needs deep, ongoing technical work to be convinced, that's a signal the engagement should be scoped.
 
 ## Handoffs
 

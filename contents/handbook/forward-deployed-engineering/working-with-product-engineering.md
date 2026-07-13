@@ -8,25 +8,16 @@ Forward deployed engineers (FDEs) are one of the fastest feedback loops between 
 
 ## Feeding customer problems back
 
-FDEs see how PostHog behaves in real customer stacks before anyone else does. That vantage point is only useful if what we learn reaches the people who can act on it. So when an engagement surfaces a product gap, we hand the owning [small team](/handbook/company/small-teams) a concrete, reproducible write-up (what broke, who hit it, and what it blocked) rather than a Slack message that scrolls away.
-
-Fixing that gap is unbilled by design: it makes PostHog better for every future customer, not just the account in front of us, so the time is on us. (Billed, single-customer implementation is [professional services](/handbook/forward-deployed-engineering/how-we-work#engagement-types); the product investment around it is FDE.)
+FDEs see how PostHog behaves in real customer stacks before anyone else does. That vantage point is only useful if what we learn reaches the people who can act on it. When an engagement surfaces a product gap, we hand the owning [small team](/handbook/company/small-teams) a concrete, reproducible write-up including what broke, who hit it, and what it blocked, rather than a message that scrolls away.
 
 ## Escalations
-
-When a customer engagement is blocked by a confirmed bug or a missing capability only a product team can fix, escalate to the owning team. Keep the ladder short:
-
-1. The **FDE owner** handles it, and most things stop here.
-2. The **FDE team lead** steps in if it touches pricing, scope, or another team's product surface.
-3. **Product engineering** gets looped in for confirmed bugs that block customer work; see [bug prioritization](/handbook/engineering/bug-prioritization). Don't page a product team for one customer's preference.
-
-Escalating isn't a failure. Sitting on a stuck thread for a week is.
+When a customer engagement is blocked by something only a product team can fix, we hand off to the owning team. How that handoff works varies: some teams prefer async write-ups, others prefer you join their standup. Finding the best channel for each team is part of the job, the same way it is with customers. When something works well, share it with the team so others can use it.
 
 ## Contributing changes
 
-FDEs can often fix or extend things directly rather than waiting on a team, which is part of the value of being engineers embedded with customers. When we do, we follow the same [development process](/handbook/engineering/development-process) and [review standards](/handbook/engineering/how-we-review) as everyone else, and we work *with* the owning team rather than around them.
+We could shorten this to a single paragraph, removing the dichotomy here and focusing only on the cases when we do, for example:
 
-Where we reach for a fix ourselves: small, well-understood changes, and anything where a reference implementation is faster to write than to specify. Where we hand off: larger changes, anything that shifts a team's roadmap, and anything touching an area we don't have the context to own safely.
+FDEs can often fix or extend things directly rather than waiting on a team. When we do, we follow the same [development process](/handbook/engineering/development-process) and [review standards](/handbook/engineering/how-we-review) as everyone else, and we work with the owning team rather than around them.
 
 ## Respecting team ownership
 
