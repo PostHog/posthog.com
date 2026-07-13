@@ -9,35 +9,34 @@ availability:
 sourceId: SafetyCulture
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
+import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
+import SyncModes from "../_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import AlphaRelease from "../_snippets/alpha-release.mdx"
 
-This source is currently in **alpha**. The interface and available tables may change.
+<AlphaRelease />
 
-</CalloutBox>
+The SafetyCulture connector syncs your workplace-operations data – inspections and their answers, templates, corrective actions, issues, assets, users, groups, sites, and schedules – into the PostHog data warehouse, so you can analyze your safety and operations workflows alongside your product data.
 
-The SafetyCulture (formerly iAuditor) connector syncs your workplace operations data — inspections, audits, corrective actions, issues, assets, and more — into the PostHog data warehouse.
+## Prerequisites
 
-## Creating a SafetyCulture API token
+You need a SafetyCulture account on a **Premium or Enterprise plan** with permission to create an API token. Data feed access follows the token owner's permissions, so SafetyCulture recommends granting the **Data Access** permission for warehouse integrations.
 
-SafetyCulture uses Bearer token authentication with an API key. The key grants read access to your organization's data via the [Data Feeds API](https://developer.safetyculture.com/reference/data-feeds).
+## Adding a data source
 
-1. Log in to your SafetyCulture account.
-2. Navigate to your account settings and find the API section.
-3. Generate a new API key.
-4. Copy the key.
+<SourceSetupIntro />
 
-For more details, see [SafetyCulture's API documentation](https://developer.safetyculture.com).
+When linking SafetyCulture, you'll need:
 
-> **Note:** SafetyCulture API tokens expire after 30 days of inactivity. If your syncs start failing with authentication errors, generate a new token.
+- **API token** – generate one under **Account settings → Integrations → Manage API tokens** in [SafetyCulture](https://app.safetyculture.com).
 
-## Linking SafetyCulture
+API tokens expire after 30 days of inactivity, so SafetyCulture recommends a [service user](https://help.safetyculture.com/en-US/1064186-service-users) token for long-term integrations.
 
-1. Go to the [Data pipeline sources page](https://app.posthog.com/data-management/sources) in PostHog.
-2. Click **+ New source** and then click **Link** next to SafetyCulture.
-3. Paste your SafetyCulture **API key**.
-4. Click **Next**, choose the tables you want to sync, and then click **Import**.
+## Sync modes
 
-Once the sync completes, you can query your SafetyCulture data directly in PostHog.
+<SyncModes />
+
+Inspections, inspection items, templates, and actions support incremental sync on `modified_at` via SafetyCulture's server-side `modified_after` filter. The other tables are full refresh only.
 
 ## Configuration
 
@@ -47,28 +46,9 @@ Once the sync completes, you can query your SafetyCulture data directly in PostH
 
 <SourceTables />
 
-## Sync modes
+## Troubleshooting
 
-Four tables support **incremental** syncing using `modified_at` as the cursor — only new or updated records sync on each run:
+- If you see an authentication error, your API token is invalid or has expired – tokens expire after 30 days of inactivity. Generate a new token (ideally for a service user), then reconnect.
+- If you see a permissions error on a specific table, the token's user is missing access to that data feed. Grant the user the **Data Access** permission in SafetyCulture, then reconnect.
 
-- `inspections`
-- `inspection_items`
-- `templates`
-- `actions`
-
-The remaining six tables use **full refresh** — all data reloads on each sync. The SafetyCulture Data Feeds API doesn't support server-side `modified_after` filtering for these endpoints.
-
-## Available tables
-
-| Table              | Description                                                                                       | Sync method  |
-| ------------------ | ------------------------------------------------------------------------------------------------- | ------------ |
-| `inspections`      | Inspections (audits) conducted from templates, with scores, timings, and locations                | Incremental  |
-| `inspection_items` | Individual questions/items answered within inspections, with responses, scores, and media         | Incremental  |
-| `templates`        | Inspection templates that inspections are conducted from                                          | Incremental  |
-| `actions`          | Corrective actions raised against inspection items, with priority, status, and assignment context | Incremental  |
-| `issues`           | Issues reported in SafetyCulture, with category, priority, status, and linked inspection/site     | Full refresh |
-| `assets`           | Assets tracked in SafetyCulture, with type, custom fields, site, and state                        | Full refresh |
-| `users`            | Users in your SafetyCulture organization                                                          | Full refresh |
-| `groups`           | User groups in your SafetyCulture organization                                                    | Full refresh |
-| `sites`            | Sites (locations, areas, regions, states, or countries) in your SafetyCulture organization        | Full refresh |
-| `schedules`        | Recurring inspection schedules, with recurrence patterns, templates, and sites                    | Full refresh |
+<TroubleshootingLink />
