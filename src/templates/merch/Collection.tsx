@@ -23,6 +23,8 @@ import MobileDrawer from 'components/MobileDrawer'
 import Modal from 'components/RadixUI/Modal'
 import { useCartStore } from './store'
 import Link from 'components/Link'
+import MediaPlayer from 'components/MediaPlayer'
+import CloudinaryImage from 'components/CloudinaryImage'
 
 // Category configuration with icons and display order
 type CategoryKey = 'all' | 'Apparel' | 'Stickers' | 'Goods' | 'Novelty'
@@ -43,6 +45,33 @@ type CollectionProps = {
 // Helper function to get product by handle
 function getProductFromHandle(products: any[], handle: string) {
     return products.find((p) => p.handle === handle) || null
+}
+
+function filterProductsByCategory(products: any[] | undefined, category: string): any[] {
+    if (!products) return []
+    if (category === 'all') return products
+
+    return products.filter((product) => {
+        const metafieldCategory = getProductMetafieldByNamespace(product, 'product', 'category')
+        if (metafieldCategory && typeof metafieldCategory === 'string') {
+            return metafieldCategory === category
+        }
+
+        const directCategorySearch = product.metafields?.find((m: { key: string }) => m.key === 'category')
+        if (directCategorySearch && typeof directCategorySearch.value === 'string') {
+            return directCategorySearch.value === category
+        }
+
+        if (product.category?.name) {
+            return product.category.name === category
+        }
+
+        if (product.type) {
+            return product.type === category
+        }
+
+        return false
+    })
 }
 
 // Helper function to update URL without triggering navigation
@@ -191,6 +220,49 @@ const SidebarContent = ({ content }: { content: React.ReactNode | AccordionItem[
 
 const defaultAsideWidth = 396
 
+// Open the first product in the grid when the store loads in desktop OS mode only (skipped if URL params specify otherwise)
+const AUTO_OPEN_FIRST_PRODUCT = true
+
+const MERCH_VIDEO_ID = 'dibqzlkov4'
+const MERCH_VIDEO_THUMBNAIL =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/619447966_8a91ec84_e099_4891_96e9_7bf3790f635c_faaebbb0ed.png'
+const MERCH_VIDEO_ASPECT_RATIO = 960 / 402
+
+function MerchVideoPlayer({ aspectRatio }: { aspectRatio?: number } & Record<string, unknown>) {
+    return <MediaPlayer videoId={MERCH_VIDEO_ID} source="wistia" aspectRatio={aspectRatio} borderRadius={false} />
+}
+
+function MerchVideoThumbnail() {
+    const { addWindow } = useApp()
+
+    const handleClick = () => {
+        addWindow(
+            (
+                <MerchVideoPlayer
+                    aspectRatio={MERCH_VIDEO_ASPECT_RATIO}
+                    newWindow
+                    location={{ pathname: 'merch-video' }}
+                    key="merch-video"
+                />
+            ) as any
+        )
+    }
+
+    return (
+        <button
+            onClick={handleClick}
+            className="group w-full overflow-hidden not-prose mb-4 relative bg-accent p-2 @md:p-4 border-b border-primary cursor-pointer"
+        >
+            <CloudinaryImage
+                src={MERCH_VIDEO_THUMBNAIL}
+                alt="Merch store video"
+                className="w-full"
+                imgClassName="w-full h-full object-cover transition-all duration-100 group-active:scale-[0.995] rounded-md"
+            />
+        </button>
+    )
+}
+
 export default function Collection(props: CollectionProps): React.ReactElement {
     const { pageContext } = props
     const [selectedProduct, setSelectedProduct] = useState<any>(null)
@@ -233,12 +305,14 @@ export default function Collection(props: CollectionProps): React.ReactElement {
             const quantity = parseInt(urlParams.get('qty') || '1', 10) || 1
 
             // Handle category parameter
+            let initialCategory = 'all'
             if (category) {
                 // Find the category key that matches the slug
                 const properCategory = Object.entries(categoryConfig).find(
                     ([_, config]) => config.slug === category.toLowerCase()
                 )?.[0]
                 if (properCategory && categoryConfig[properCategory as CategoryKey]) {
+                    initialCategory = properCategory
                     setSelectedCategory(properCategory)
                 }
             }
@@ -283,11 +357,16 @@ export default function Collection(props: CollectionProps): React.ReactElement {
             } else if (state === 'cart') {
                 setCartIsOpen(true)
                 setSelectedProduct(null)
+            } else if (AUTO_OPEN_FIRST_PRODUCT && !websiteMode && !isMobile) {
+                const firstProduct = filterProductsByCategory(transformedProducts, initialCategory)?.[0]
+                if (firstProduct) {
+                    setSelectedProduct(firstProduct)
+                }
             }
 
             setHasInitialized(true)
         }
-    }, [transformedProducts, hasInitialized, addToCart])
+    }, [transformedProducts, hasInitialized, addToCart, websiteMode, isMobile])
 
     // Update URL when selectedProduct, cartIsOpen, or selectedCategory changes (only after initialization)
     useEffect(() => {
@@ -356,32 +435,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
 
     // Filter products based on selected category and search query
     const filteredProducts = useMemo(() => {
-        let products = transformedProducts
-
-        // First filter by category
-        if (selectedCategory !== 'all') {
-            products = products?.filter((product) => {
-                // Try metafield first (product namespace, category key)
-                const metafieldCategory = getProductMetafieldByNamespace(product, 'product', 'category')
-                if (metafieldCategory && typeof metafieldCategory === 'string') {
-                    return metafieldCategory === selectedCategory
-                }
-                // Try direct search for category key regardless of namespace
-                const directCategorySearch = product.metafields?.find((m) => m.key === 'category')
-                if (directCategorySearch && typeof directCategorySearch.value === 'string') {
-                    return directCategorySearch.value === selectedCategory
-                }
-                // Fall back to product.category.name
-                if (product.category?.name) {
-                    return product.category.name === selectedCategory
-                }
-                // Fall back to product.type
-                if (product.type) {
-                    return product.type === selectedCategory
-                }
-                return false
-            })
-        }
+        const products = filterProductsByCategory(transformedProducts, selectedCategory)
 
         if (searchQuery.trim() !== '' && products) {
             return fuse.search(searchQuery).map((result) => result.item)
@@ -615,6 +669,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                                 <SEO title="Merch - PostHog" image="/images/merch.png" />
                                 {/* <Nav currentCollectionHandle={pageContext.handle} /> */}
                                 {/* <ShippingBanner /> */}
+                                <MerchVideoThumbnail />
                                 <div className="flex gap-4">
                                     <div className="@container flex-1 not-prose">
                                         <ProductGrid
