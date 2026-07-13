@@ -8,7 +8,7 @@ availability:
     enterprise: full
 ---
 
-> Custom surveys is currently supported only with the [JavaScript Web SDK](/docs/libraries/js).
+> The `displaySurvey`, `renderSurvey`, `getSurveys`, and `getActiveMatchingSurveys` helper methods on this page are currently only available in the [JavaScript Web SDK](/docs/libraries/js). You don't need them to implement a custom survey, though. Because a survey is just a definition you fetch and a set of events you capture, you can run surveys **headlessly** on any platform (including a backend or other non-JavaScript environment) by [fetching the survey definition from the API](#fetching-surveys-headlessly) and [capturing responses](#capture-survey-responses) yourself.
 
 At its most basic level, a survey is a collection of response events. If you wanted to, you could capture events from anywhere, like in this example of a hardcoded Next.js feedback survey:
 
@@ -278,7 +278,7 @@ You can then style the survey by targeting the classes like `survey-box`, `surve
 
 ## Fetching surveys manually
 
-For more control over your surveys, you can use API surveys. When implementing an API survey, there are two options for fetching surveys from PostHog:
+For more control over your surveys, you can use API surveys. When implementing an API survey, the [JavaScript Web SDK](/docs/libraries/js) gives you two options for fetching surveys from PostHog:
 
 1. To get all surveys, call `getSurveys(callback, forceReload)`. This means you still need to handle display conditions yourself.
 
@@ -375,6 +375,40 @@ export default function Feedback() {
 > })
 > localStorage.setItem(`hasInteractedWithSurvey_${survey.id}`, 'true');
 > ```
+
+### Fetching surveys headlessly
+
+The methods above are convenience wrappers around PostHog's public surveys endpoint. Because fetching a survey is just an HTTP request, you don't need the JavaScript Web SDK (or even a browser) to do it. This is what lets you implement surveys **headlessly** from a backend, a mobile app, or any environment that can make HTTP requests and capture events.
+
+To fetch your survey definitions directly, make a `GET` request to the `/api/surveys` endpoint with your [project token](https://app.posthog.com/project/settings):
+
+```bash
+curl "<ph_client_api_host>/api/surveys/?token=<ph_project_token>"
+```
+
+The response contains the same survey objects shown above, nested under a `surveys` key:
+
+```json
+{
+  "surveys": [
+    {
+      "id": "your_survey_id",
+      "name": "Your survey name",
+      "type": "api",
+      // ...plus the other survey fields shown above
+      "questions": [
+        {
+          "type": "open_text",
+          "question": "What can we do to improve our product?",
+          "id": "cbeee176-54e0-4757-befd-f4e8fb33b9a9"
+        }
+      ]
+    }
+  ]
+}
+```
+
+Because nothing is rendered for you in a headless setup, display conditions and targeting aren't evaluated automatically. You decide which survey to show and when, then [capture the `survey shown`, `survey sent`, and `survey dismissed` events](#capture-survey-lifecycle-events) using whichever [PostHog SDK](/docs/libraries) or the [capture API](/docs/api/capture) fits your platform.
 
 ## Capture survey responses
 
