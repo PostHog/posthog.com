@@ -28,6 +28,36 @@ The data warehouse then starts syncing your Redshift data. You can see details a
 
 > **Permissions:** The Redshift source only requires read permissions on the schemas and tables you intend to sync.
 
+## Direct Redshift connections
+
+Instead of syncing data on a schedule, you can query your Redshift database directly from the [SQL editor](https://app.posthog.com/sql). Direct connections run queries against your live Redshift instance in real time — no data is copied into PostHog.
+
+To set up a direct connection:
+
+1. Open the [SQL editor](https://app.posthog.com/sql).
+2. Click the connection picker in the toolbar and select **Add direct connection** > **Redshift**.
+3. Enter your Redshift credentials (host, port, database, user, password, and optionally a schema) — the same credentials used for scheduled syncs.
+4. Select the tables you want to make available, then click **Link**.
+
+Once connected, switch to your Redshift connection in the SQL editor's connection picker and write queries against your live data.
+
+### When to use direct connections vs scheduled syncs
+
+- **Direct connections** are best for ad-hoc exploration, querying data that changes frequently, or when you don't want to duplicate data into PostHog.
+- **Scheduled syncs** are better when you need faster query performance, want to join external data with PostHog events in dashboards and insights, or need data available across all PostHog features.
+
+### Limitations
+
+Direct Redshift queries are read-only. Some HogQL constructs are not supported and return a clear error if used:
+
+- Arrays and array slices
+- Lambdas
+- Dicts
+- Single-element `ROW` tuples
+- `TRY_CAST`
+- `toStartOfISOYear`
+- `->` / `->>` JSON property access (use `JSONExtractString()` instead, which compiles to Redshift's `json_extract_path_text`)
+
 ## Configuration
 
 <SourceParameters />
