@@ -62,7 +62,7 @@ The main ingredients:
 | Catalog | DuckLake, which separates storage from compute. Your data lives in S3 independent of whatever's querying it – today that's DuckDB, but the catalog doesn't lock the warehouse into any single engine staying right forever. |
 | Compute | A fully single-tenant DuckDB instance per organization. Nobody's long-running query competes with anyone else's. |
 | Isolation | Each DuckDB instance runs in its own Firecracker MicroVM, the same technology AWS uses for Lambda. Fast to boot, properly isolated, resource-contained. |
-| Lifecycle | A lifecycle service sleeps instances when idle and wakes them when a query arrives, in under roughly 300ms. You're billed for use, not idle time. |
+| Lifecycle | A lifecycle service sleeps instances when idle and wakes them when a query arrives, in roughly 300ms. You're billed for use, not idle time. |
 | Orchestration | A Kubernetes operator manages the CRDs defining each organization's warehouse, with a proxy and queue layer routing queries and handling the handshake with the lifecycle service. |
 | Access | A Postgres wire protocol endpoint. Connect with psql, point a BI tool at it, or wire it into an agent over MCP – no proprietary connector to build against. |
 | Local iteration | DuckHog, a DuckDB extension that lets local compute pull subsets of warehouse data into pandas, polars, or DuckDB itself, iterate quickly, and write results back. For an agent that wants fast local loops instead of round-tripping every query to the cluster, this is the better pattern. |
