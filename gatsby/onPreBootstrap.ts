@@ -81,6 +81,32 @@ posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
     error_tracking: {
         __capturePostHogExceptions: true,
     },
+    // Some mobile browsers and in-app webviews inject their own JS bridge objects
+    // into the page and occasionally reference them before they're defined, throwing
+    // ReferenceErrors that have nothing to do with our code (e.g. Chrome-on-iOS's
+    // __gCrWeb). Drop this class of third-party noise before it's captured so it
+    // doesn't pollute error tracking with false-positive issues.
+    before_send: function (event) {
+        if (event && event.event === '$exception') {
+            var browserInjectionMarkers = [
+                '__gCrWeb', // Chrome on iOS JS bridge
+                '_AutofillCallbackHandler', // Android WebView autofill bridge
+                'instantSearchSDKJSBridgeClearHighlight', // Firefox on iOS bridge
+                'webkit.messageHandlers', // WKWebView message bridge
+            ]
+            var exceptions = (event.properties && event.properties.$exception_list) || []
+            var isBrowserInjectedNoise = exceptions.some(function (ex) {
+                var value = (ex && ex.value) || ''
+                return browserInjectionMarkers.some(function (marker) {
+                    return value.indexOf(marker) !== -1
+                })
+            })
+            if (isBrowserInjectedNoise) {
+                return null
+            }
+        }
+        return event
+    },
     person_profiles: 'identified_only',
     __preview_heatmaps: true,
     opt_in_site_apps: true,
