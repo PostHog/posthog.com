@@ -37,11 +37,11 @@ More sources will be added over time. Each source has its own credentials, field
 
 Regardless of source, historical imports share the same behavior:
 
-- **Silent import** – imported tickets do **not** trigger Support [workflows](/docs/support/workflows), analytics events, or outbound replies (email, Slack, etc.)
-- **Unified inbox** – imported tickets appear alongside native tickets. Agents can search, triage, and reply where an email channel is configured
-- **Unread badges** – only **new** and **open** imported tickets get unread counts
-- **Re-running** – safe to run again. Already-imported tickets are skipped (matched by source ticket ID). Re-running with a default inbox can backfill email channels on tickets that had none
-- **Concurrency** – only one import per project at a time
+- **Silent import**: imported tickets do **not** trigger Support [workflows](/docs/support/workflows), analytics events, or outbound replies (email, Slack, etc.)
+- **Unified inbox**: imported tickets appear alongside native tickets. Agents can search, triage, and reply where an email channel is configured
+- **Unread badges**: only **new** and **open** imported tickets get unread counts
+- **Re-running**: safe to run again. Already-imported tickets are skipped (matched by source ticket ID). Re-running with a default inbox can backfill email channels on tickets that had none
+- **Concurrency**: only one import per project at a time
 
 The import page shows live progress. When complete, you will see counts for imported, skipped, and failed tickets.
 
