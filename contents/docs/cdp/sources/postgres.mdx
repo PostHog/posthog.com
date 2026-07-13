@@ -73,7 +73,7 @@ PostgreSQL sources created after February 18, 2026 require SSL/TLS encryption fo
 
 <InboundIpAddresses />
 
-> **Note:** We currently don't support connections using IPv6, therefore, you may need to enable IPv4 connections to your database. This is required for Supabase, for example.
+> **Note:** PostHog egresses over IPv4 and does not support IPv6-only database hosts. If your database host only resolves to an IPv6 address, use a connection pooler or enable your provider's IPv4 add-on. See the [troubleshooting section](#network-is-unreachable-or-no-route-to-host) for details.
 
 ## Sync methods
 
@@ -464,16 +464,21 @@ Alternatively, remove the problematic view from your sync selection in PostHog.
 
 ### `Network is unreachable` or `No route to host`
 
-This error occurs when PostHog has no network route to your PostgreSQL host. The connection fails before reaching the database, typically because the host resolves to a private or non-routable address.
+This error occurs when PostHog cannot establish a network route to your PostgreSQL host. The most common cause is an **IPv6-only host** — PostHog egresses over IPv4, so connections to IPv6-only addresses fail.
 
 This is a non-retryable error — PostHog stops syncing until you fix the underlying issue and re-enable the sync or CDC.
 
 Common causes:
 
-- The hostname resolves to a private IP address (like `10.x.x.x`, `172.16.x.x`, or `192.168.x.x`) or an unreachable IPv6 address.
-- The hostname is misconfigured or doesn't resolve to a publicly accessible address.
-- Your database server's firewall blocks connections from PostHog's IP addresses.
+- **IPv6-only host** — Your database host only resolves to an IPv6 address, but PostHog egresses over IPv4.
+- **Firewall blocking PostHog's IPs** — Your database server's firewall blocks connections from PostHog's IP addresses.
+- **Private network** — The hostname resolves to a private IP address (like `10.x.x.x`, `172.16.x.x`, or `192.168.x.x`).
 
-To fix this, verify your PostgreSQL host resolves to a reachable IPv4 address, ensure your firewall allows inbound connections from PostHog's IP addresses, and if your database is on a private network, configure an SSH tunnel during source setup. PostHog doesn't support IPv6 connections, so if your host only resolves to an IPv6 address, configure it to be accessible via IPv4.
+Solutions:
+
+- **Use a connection pooler** — Configure a connection pooler (like PgBouncer, Supabase Supavisor, or Neon's pooler) that's reachable over IPv4, then point PostHog at the pooler's host and port.
+- **Enable IPv4 on your provider** — Many managed Postgres providers offer IPv4 add-ons or dual-stack endpoints (e.g., Supabase IPv4 add-on, Neon's shared pooler).
+- **Allowlist PostHog's IPs** — If your firewall is blocking connections, allowlist PostHog's IP addresses (see the [Inbound IP addresses](#inbound-ip-addresses) section above).
+- **Use an SSH tunnel** — If your database is on a private network, configure an SSH tunnel during source setup.
 
 > **Looking for an example of the Postgres source?** Check out our tutorial where we [connect and query Supabase data](/tutorials/supabase-query).
