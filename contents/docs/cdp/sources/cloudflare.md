@@ -27,11 +27,11 @@ Before linking Cloudflare, create an API token with the required permissions:
 4. Give your token a descriptive name (e.g. "PostHog Data Warehouse").
 5. Under **Permissions**, add the following with **Read** access:
 
-| Permissions Group | Permission       | Access |
-| ----------------- | ---------------- | ------ |
-| Account           | Account Settings | Read   |
-| Zone              | Zone             | Read   |
-| Zone              | DNS              | Read   |
+   | Permissions Group | Permission       | Access |
+   | ----------------- | ---------------- | ------ |
+   | Account           | Account Settings | Read   |
+   | Zone              | Zone             | Read   |
+   | Zone              | DNS              | Read   |
 
 6. Under **Account Resources**, select the accounts you want to sync.
 7. Under **Zone Resources**, select the zones you want to sync. Choose **All zones** to sync DNS records from every zone.
