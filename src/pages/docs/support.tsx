@@ -62,6 +62,14 @@ const Support: React.FC = () => {
                         type={undefined}
                     />
                     <ResourceItem
+                        title="Historical imports"
+                        description="Migrate historical tickets from other help desks into PostHog. Zendesk Support available now (beta); more sources coming."
+                        url="/docs/support/imports"
+                        Image={undefined}
+                        gatsbyImage={undefined}
+                        type={undefined}
+                    />
+                    <ResourceItem
                         title="Workflow automation"
                         description="Automate ticket management with workflows — set SLAs, auto-assign, tag, and route tickets."
                         url="/docs/support/workflows"

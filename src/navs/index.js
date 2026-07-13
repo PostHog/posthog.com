@@ -5651,6 +5651,21 @@ export const docsMenu = {
                     icon: 'IconDecisionTree',
                     color: 'green',
                 },
+                {
+                    name: 'Historical imports',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/support/imports',
+                    icon: 'IconUpload',
+                    color: 'blue',
+                },
+                {
+                    name: 'Import from Zendesk',
+                    url: '/docs/support/imports/zendesk',
+                    icon: 'IconLetter',
+                    color: 'blue',
+                },
             ],
         },
         ...[dataPipelines],
