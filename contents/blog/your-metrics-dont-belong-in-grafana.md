@@ -20,11 +20,11 @@ seo:
     metaDescription: "PostHog Metrics is in early access. Send application and infrastructure metrics over OpenTelemetry and get them next to your logs, traces, errors, and product data, so PostHog can alert you early and investigate incidents for you."
 ---
 
-Last Tuesday, our checkout latency started creeping up.
+Last Tuesday, ingestion lag on one of our pipelines started creeping up.
 
 Nobody noticed. No customer complained, no pager went off, and the graph was still green if you squinted. But PostHog noticed, and it dropped a message in our Slack.
 
-So I did the laziest thing I could think of. I replied in the thread: `@posthog what's going on with checkout?`
+So I did the laziest thing I could think of. I replied in the thread: `@posthog why is ingestion falling behind?`
 
 A few minutes later it came back with an incident report, a dashboard it had built on the spot, and a short list of suggested fixes ranked by how likely each was to be the cause. I picked one. The whole thing was over before it was ever really an incident.
 
@@ -48,13 +48,13 @@ CPU is up. Latency is up. Now what? You alt-tab to your logs tool, then your tra
 
 A metric is only as useful as the data sitting next to it. In Grafana, there's nothing next to it. It is a very good smoke alarm with no map of the house.
 
-That is the whole pitch for putting metrics in PostHog, and it is worth being blunt about it: the number is the least interesting part. What matters is that the number is one join away from the logs, the trace, the exception, and the session replay of the person who hit the slow request.
+That is the whole pitch for putting metrics in PostHog, and it is worth being blunt about it: the number is the least interesting part. What matters is that the number is one join away from the logs, the trace of the slow batch, the exception that fired, and the deploy that shipped right before it.
 
 ## The premortem
 
 The best incident is the one that never happens.
 
-Metrics are your leading indicators. The queue depth climbing, the p95 drifting, the error rate ticking up, all of it shows up in the numbers long before a customer feels anything. That is the window where an incident is still hypothetical, and it is the cheapest possible time to act.
+Metrics are your leading indicators. The consumer lag inching up, the batch time drifting, the error rate ticking up, all of it shows up in the numbers long before a customer feels anything. That is the window where an incident is still hypothetical, and it is the cheapest possible time to act.
 
 PostHog watches those trends and pages you on the drift, not the outage. This is the message that started last Tuesday for me:
 
@@ -70,9 +70,9 @@ When you do want to dig in, you don't open six tabs. You ask.
 I replied to the alert in Slack, and PostHog did the part I usually dread. It pulled the relevant metric, lined it up against our logs and traces for the same window, checked what errors fired and what changed, and wrote it up.
 
 <!-- TODO: replace with your Slack screenshot of @posthog investigating the incident. -->
-![Pinging @posthog in Slack to investigate the checkout latency incident](https://res.cloudinary.com/dmukukwp6/image/upload/PLACEHOLDER_posthog_investigating.png)
+![Pinging @posthog in Slack to investigate the ingestion lag](https://res.cloudinary.com/dmukukwp6/image/upload/PLACEHOLDER_posthog_investigating.png)
 
-It didn't stop at a paragraph. It built a dashboard for the incident, so I had the metric, the correlated logs, and the affected requests in one place without me touching a query.
+It didn't stop at a paragraph. It built a dashboard for the incident, so I had the lag metric, the correlated logs, and the affected batches in one place without me touching a query.
 
 <!-- TODO: replace with a screenshot (or short ProductVideo) of the dashboard PostHog created. -->
 ![The dashboard PostHog built automatically while investigating](https://res.cloudinary.com/dmukukwp6/image/upload/PLACEHOLDER_incident_dashboard.png)
@@ -87,7 +87,7 @@ You cannot bolt this onto a standalone metrics tool, and that is not a knock on 
 
 PostHog can do this because it is one dataset. Metrics, [logs](/docs/logs), [distributed tracing](/docs/distributed-tracing), [error tracking](/docs/error-tracking), [session replay](/session-replay), and [product analytics](/product-analytics) all land in the same warehouse, behind the same [SQL](/docs/sql), readable by the same AI. When you ask `@posthog` what happened, it isn't guessing from a graph. It is querying everything at once.
 
-Grafana can chart a metric beautifully. It cannot pull the session replay of the user who hit the slow request, or the exception that fired at the same second, or the feature flag that flipped in that release. PostHog can, because all of it is already sitting right there next to the number.
+Grafana can chart a metric beautifully. It cannot pull the trace of the slow batch, or the exception that fired at the same second, or the deploy that shipped in that release. PostHog can, because all of it is already sitting right there next to the number.
 
 That is the difference between a metric that tells you something is wrong and a metric that helps you fix it.
 
@@ -97,13 +97,13 @@ Metrics is in early access right now. If you already use PostHog, recording a me
 
 ```js
 // A counter for things that only go up
-posthog.metrics.count('checkout.completed')
+posthog.metrics.count('events.ingested')
 
 // A gauge for values that go up and down
-posthog.metrics.gauge('queue.depth', 17)
+posthog.metrics.gauge('ingestion.lag_seconds', 4.2)
 
 // A histogram for distributions like durations
-posthog.metrics.histogram('api.request.duration', 187, { unit: 'ms' })
+posthog.metrics.histogram('ingestion.batch_duration', 187, { unit: 'ms' })
 ```
 
 Not on our SDK, or sending from your backend and infrastructure? Point any OpenTelemetry exporter at PostHog's OTLP endpoint. No PostHog-specific packages, no extra agents.
