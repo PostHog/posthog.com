@@ -1415,6 +1415,10 @@ export const handbookSidebar = [
                 url: '',
                 children: [
                     {
+                        name: 'Designing events for per-entity metrics',
+                        url: '/handbook/cs-and-onboarding/shareable-guides/designing-events-for-per-entity-metrics',
+                    },
+                    {
                         name: 'LLM cost optimization',
                         url: '/handbook/cs-and-onboarding/shareable-guides/llm-cost-optimization',
                     },
