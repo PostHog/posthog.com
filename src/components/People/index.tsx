@@ -1,8 +1,9 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import { AVATAR_FALLBACK_URL } from 'constants/index'
 import { graphql, useStaticQuery } from 'gatsby'
-import React, { useState, useMemo, useCallback, useEffect } from 'react'
+import React, { useState, useMemo, useCallback, useEffect, useRef } from 'react'
 import Link from 'components/Link'
+import OSButton from 'components/OSButton'
 import { SEO } from '../seo'
 import ReactMarkdown from 'react-markdown'
 import ScrollArea from 'components/RadixUI/ScrollArea'
@@ -16,7 +17,7 @@ import Fuse from 'fuse.js'
 import debounce from 'lodash/debounce'
 import { useInView } from 'react-intersection-observer'
 import PeopleMap from 'components/HogMap/PeopleMap'
-import { IconMapPin, IconList } from '@posthog/icons'
+import { IconMapPin, IconList, IconSearch, IconX } from '@posthog/icons'
 
 export const TeamMember = (props: any) => {
     const {
@@ -280,12 +281,67 @@ export const TeamMember = (props: any) => {
     )
 }
 
+// Docs-style search: a magnifying glass that expands into an input, kept inline in the
+// page header so it adds no extra vertical space. Controlled by the parent page.
+const PeopleSearch = ({ value, onChange }: { value: string; onChange: (query: string) => void }) => {
+    const [expanded, setExpanded] = useState(Boolean(value))
+    const inputRef = useRef<HTMLInputElement>(null)
+
+    useEffect(() => {
+        if (expanded) {
+            inputRef.current?.focus()
+        }
+    }, [expanded])
+
+    if (!expanded) {
+        return <OSButton size="md" icon={<IconSearch />} onClick={() => setExpanded(true)} tooltip="Search people" />
+    }
+
+    return (
+        <div className="relative w-44 @md:w-56">
+            <IconSearch className="absolute left-2 top-1/2 -translate-y-1/2 size-4 text-secondary pointer-events-none" />
+            <input
+                ref={inputRef}
+                type="search"
+                value={value}
+                onChange={(e) => onChange(e.target.value)}
+                onKeyDown={(e) => {
+                    if (e.key === 'Escape') {
+                        onChange('')
+                        setExpanded(false)
+                    }
+                }}
+                onBlur={() => {
+                    if (!value) setExpanded(false)
+                }}
+                placeholder="Search people…"
+                aria-label="Search people"
+                className="w-full py-1 pl-8 pr-8 rounded border border-input text-primary text-sm bg-light dark:bg-dark"
+            />
+            <button
+                type="button"
+                onMouseDown={(e) => e.preventDefault()}
+                onClick={() => {
+                    onChange('')
+                    setExpanded(false)
+                }}
+                aria-label="Close search"
+                className="absolute right-2 top-1/2 -translate-y-1/2 text-secondary hover:text-primary"
+            >
+                <IconX className="size-4" />
+            </button>
+        </div>
+    )
+}
+
 interface PeopleProps {
     searchTerm?: string
+    onSearchChange?: (query: string) => void
+    showSearch?: boolean
     filteredMembers?: any[] | null
 }
 
-export default function People({ searchTerm, filteredMembers }: PeopleProps = {}) {
+export default function People({ searchTerm, onSearchChange, showSearch, filteredMembers }: PeopleProps = {}) {
     const [activeTab, setActiveTab] = useState<'list' | 'map'>('list')
 
     const {
@@ -374,34 +430,39 @@ export default function People({ searchTerm, filteredMembers }: PeopleProps = {}
     return (
         <div data-scheme="primary" className="@container bg-primary h-full">
             <SEO title="Team - PostHog" />
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between gap-2">
                 <h1>People</h1>
-                <ToggleGroup
-                    title=""
-                    hideTitle
-                    options={[
-                        {
-                            label: (
-                                <>
-                                    <IconList className="size-4 mr-1" />
-                                    List
-                                </>
-                            ),
-                            value: 'list',
-                        },
-                        {
-                            label: (
-                                <>
-                                    <IconMapPin className="size-4 mr-1" />
-                                    Map
-                                </>
-                            ),
-                            value: 'map',
-                        },
-                    ]}
-                    onValueChange={(value) => setActiveTab(value as 'list' | 'map')}
-                    value={activeTab}
-                />
+                <div className="flex items-center gap-2">
+                    {showSearch && onSearchChange && (
+                        <PeopleSearch value={searchTerm ?? ''} onChange={onSearchChange} />
+                    )}
+                    <ToggleGroup
+                        title=""
+                        hideTitle
+                        options={[
+                            {
+                                label: (
+                                    <>
+                                        <IconList className="size-4 mr-1" />
+                                        List
+                                    </>
+                                ),
+                                value: 'list',
+                            },
+                            {
+                                label: (
+                                    <>
+                                        <IconMapPin className="size-4 mr-1" />
+                                        Map
+                                    </>
+                                ),
+                                value: 'map',
+                            },
+                        ]}
+                        onValueChange={(value) => setActiveTab(value as 'list' | 'map')}
+                        value={activeTab}
+                    />
+                </div>
             </div>
             <ScrollArea className="h-full">
                 {activeTab === 'list' && (
