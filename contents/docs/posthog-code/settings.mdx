@@ -32,9 +32,9 @@ The **Self-driving** tab configures the same [self-driving](/docs/self-driving) 
 
 - Connect GitHub and toggle which [signal sources](/docs/self-driving/inbox/sources) feed your [inbox](/docs/self-driving/inbox). These are the same sources you'd configure in the web UI.
 - Set a priority threshold (P0 through P4) that controls when the agent auto-starts tasks assigned to you.
-- Choose where report notifications go:
-  - **Default notification channel** – where every report is posted for the whole team.
-  - **Notify me directly** – when you're a suggested reviewer, get pinged in your own channel instead of the team's default. Reviewers who set their own channel are notified there.
+- Choose where report notifications go. The Slack section has two cards:
+  - **Notify the whole team** – posts every actionable report to one team-wide channel, whether or not a reviewer is suggested. An enable toggle controls this; toggling it off clears the channel.
+  - **Notify me directly** – when you're a suggested reviewer, get pinged in your own channel. Reviewers who set their own channel are notified there instead of the team channel.
 
 You can configure the same signal sources from the **Agents** tab in PostHog Code (the same nav level as Command Center and your tasks) or from the [web app](/docs/self-driving/web). It's all one setup, so a change in any of these places applies everywhere.
 

@@ -16,13 +16,12 @@ import { DottedConnection } from 'components/Code/DottedConnection'
 import { StickerTombstone } from 'components/Stickers/Stickers'
 import { ZoomImage } from 'components/ZoomImage'
 import CloudinaryImage from 'components/CloudinaryImage'
+import WistiaEmbed from 'components/WistiaEmbed'
 import Link from 'components/Link'
 import { IconDiscord } from 'components/OSIcons/Icons'
 import { WaitlistForm } from 'components/WaitlistForm'
 import { DownloadContent } from 'components/Code/DownloadContent'
 import { usePrefersReducedMotion } from 'components/Code/usePrefersReducedMotion'
-import useProduct from 'hooks/useProduct'
-import { useApp } from '../context/App'
 
 // ─────────────────────────────────────────────
 // Section label ("The old way", "The PostHog way")
@@ -612,11 +611,6 @@ function HeroSection() {
     )
     const [contentVisible, setContentVisible] = useState(true)
     const prefersReducedMotion = usePrefersReducedMotion()
-    const allProducts = useProduct() as any[]
-    const product = Array.isArray(allProducts) ? allProducts.find((p: any) => p.handle === 'posthog_code') : undefined
-    const { siteSettings } = useApp()
-    const isDark = siteSettings.theme === 'dark'
-    const screenshot = product?.screenshots?.home
 
     const swapToDownload = () => {
         if (typeof window !== 'undefined') {
@@ -681,7 +675,7 @@ function HeroSection() {
                         </h1>
 
                         <div className="@4xl/editor:gap-8 flex flex-col @4xl/editor:flex-row items-start">
-                            <div className="@4xl/flex-[0_0_280px]">
+                            <div className="@4xl/editor:flex-[0_0_280px]">
                                 <p>
                                     PostHog Code is the only AI devtool that understands your <strong>product,</strong>{' '}
                                     not just your <strong>codebase</strong>.
@@ -719,20 +713,10 @@ function HeroSection() {
                                 </div>
                             </div>
 
-                            <div className="@4xl/flex-1">
-                                {screenshot && (
-                                    <ZoomImage>
-                                        <img
-                                            src={
-                                                (isDark && screenshot.srcDark
-                                                    ? screenshot.srcDark
-                                                    : screenshot.src) as string
-                                            }
-                                            alt={screenshot.alt}
-                                            className={screenshot.imgClasses}
-                                        />
-                                    </ZoomImage>
-                                )}
+                            <div className="@4xl/editor:flex-1 w-full min-w-0">
+                                <div className="rounded-md overflow-hidden shadow-xl not-prose">
+                                    <WistiaEmbed mediaId="vm9mn1m4dv" />
+                                </div>
                             </div>
                         </div>
                     </>
