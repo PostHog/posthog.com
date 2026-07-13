@@ -23,15 +23,15 @@ Before linking Cloudflare, create an API token with the required permissions:
 
 1. Go to the [Cloudflare dashboard API tokens page](https://dash.cloudflare.com/profile/api-tokens).
 2. Click **Create Token**.
-3. Click **Create Custom Token** > **Get started**.
+3. Click **Get started** in the **Custom token** section.
 4. Give your token a descriptive name (e.g. "PostHog Data Warehouse").
 5. Under **Permissions**, add the following with **Read** access:
 
-| Resource         | Permission |
-| ---------------- | ---------- |
-| Account Settings | Read       |
-| Zone             | Read       |
-| DNS              | Read       |
+| Permissions Group | Permission       | Access |
+| ----------------- | ---------------- | ------ |
+| Account           | Account Settings | Read   |
+| Zone              | Zone             | Read   |
+| Zone              | DNS              | Read   |
 
 6. Under **Account Resources**, select the accounts you want to sync.
 7. Under **Zone Resources**, select the zones you want to sync. Choose **All zones** to sync DNS records from every zone.
