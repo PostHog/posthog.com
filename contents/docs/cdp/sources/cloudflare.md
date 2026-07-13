@@ -34,9 +34,8 @@ Before linking Cloudflare, create an API token with the required permissions:
    | Zone              | DNS              | Read   |
 
 6. Under **Account Resources**, select the accounts you want to sync.
-7. Under **Zone Resources**, select the zones you want to sync. Choose **All zones** to sync DNS records from every zone.
-8. Click **Continue to summary**, then **Create Token**.
-9. Copy the token – you won't be able to see it again.
+7. Click **Continue to summary**, then **Create Token**.
+8. Copy the token – you won't be able to see it again.
 
 ## Linking Cloudflare
 
