@@ -6,9 +6,9 @@ showTitle: true
 
 ## Where we post
 
-PostHog has a presence on the following platforms: [X](https://x.com/posthog), [LinkedIn](https://www.linkedin.com/company/posthog), [YouTube](https://www.youtube.com/@posthog), [Instagram](https://www.instagram.com/teamposthog), [Threads](https://www.threads.com/@teamposthog), and [Bluesky](https://bsky.app/profile/posthog.com). Day to day, this is managed by <TeamMember name="Liam Graham" photo />.
+PostHog has a presence on [X](https://x.com/posthog), [LinkedIn](https://www.linkedin.com/company/posthog), [YouTube](https://www.youtube.com/@posthog), [Instagram](https://www.instagram.com/teamposthog), [Threads](https://www.threads.com/@teamposthog), and [Bluesky](https://bsky.app/profile/posthog.com). Day to day, this is managed by <TeamMember name="Liam Graham" photo />.
 
-Our 'primary' platforms are X, LinkedIn, and YouTube. These are those which we optimize for. Content is posted on secondary platforms, but it's not worth the resources needed to tailor content for them.
+Our primary platforms are X, LinkedIn, and YouTube. We optimize for them. Content is posted on secondary platforms, but it's not worth the resources needed to tailor content for them.
 
 ## What we post
 
@@ -30,7 +30,7 @@ Replies should be done in lowercase. This humanizes the brand slightly as it und
 
 ## What metrics we look at
 
-Not a lot. We are of the belief that [all social media metrics are bad](/blog/social-media-metrics-are-all-bad). That's not to mean that they are meaningless or are not worth drawing insights from. However, social media metrics can be very easily misconstrued to draw false conclusions, and often the performance of certain posts is to do with factors beyond the platform that they're on.
+Not a lot. We believe [all social media metrics are bad](/blog/social-media-metrics-are-all-bad). They aren't meaningless or not worth drawing insights from, but can be easily misconstrued to draw false conclusions. The performance of certain posts is to do with factors beyond the platform that they're on.
 
 Because of this, we take a more holistic view at social media performance: we prioritize creating content our ICP would like, and look at metrics at a high level. Have we seen that a few videos edited a certain way have got way more engagements than normal? That's good insight, and we will use that learning going forward. Have we seen one video perform well in isolation? That's not good insight: we need more information and context before changing anything.
 
@@ -48,7 +48,7 @@ We can think of content we put out on X in two silos: one is articles, and one i
 
 X articles have performed very well for us on the platform, unlike on LinkedIn, so any time a blog post or newsletter goes out, we are default yes on whether or not we should cross-post it to X. When sharing X articles:
 
-- Use aggressive header styling (the largest subheaders in a blog post should be H1 in X's article composer).
+- Use aggressive header styling (H2s in blog posts should be "Titles" in X's article composer).
 - Make sure all images are included (ask <TeamMember name="Liam Graham" photo /> for a Claude skill that can do this automatically).
 - Take advantage of the tools X's article composer has, namely the ability to create tables and insert code and quote blocks.
 - For the banner image, create a 2000x800 frame in Figma, and adjust your artwork in it. Include an author icon inside the design.
