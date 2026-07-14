@@ -44,10 +44,24 @@ You can connect the [PostHog MCP server](/docs/model-context-protocol) while log
    codex mcp add posthog --url https://mcp.posthog.com/mcp
    ```
 
-3. Disconnect any existing PostHog MCP session so the OAuth flow starts again. For Codex, run `codex mcp logout posthog`.
-4. Run `codex mcp login posthog` and complete the browser OAuth flow while you're still logged in as the customer. Only authorize the organization and project you need for the investigation.
+   For Claude Code, install the PostHog plugin:
+
+   ```bash
+   claude plugin install posthog@claude-plugins-official
+   ```
+
+3. Disconnect any existing PostHog MCP session so the OAuth flow starts again:
+   - For Codex, run `codex mcp logout posthog`.
+   - For Claude Code, run `/mcp`, find the `posthog` plugin, and select **Clear authentication**.
+4. Start a fresh OAuth flow while you're still logged in as the customer:
+   - For Codex, run `codex mcp login posthog`.
+   - For Claude Code, run `/mcp`, find the `posthog` plugin, and select **Authenticate**.
+
+   Only authorize the organization and project you need for the investigation.
 5. Work within the scope of the ticket. If you need to make changes, get the customer's permission first, upgrade the impersonation session to read-write, then log out and log in to the MCP server again so it gets the right scopes.
 6. Disconnect the MCP server, then log out of the impersonation session when you're done. OAuth tokens created while impersonating are short-lived and revoked when the impersonation session ends.
+
+If you use Claude Code for repeat customer audits, the [impersonation toolkit](https://github.com/PostHog/skills/tree/main/skills/team/customer-success/impersonation-toolkit) wraps this flow, copies safer permission rules into each customer folder, and disables the PostHog plugin when you exit.
 
 <CalloutBox icon="IconWarning" title="PostHog AI data processing is disabled" type="caution">
 
