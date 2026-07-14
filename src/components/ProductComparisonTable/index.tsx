@@ -23,6 +23,7 @@ import { chameleon } from '../../hooks/competitorData/chameleon'
 import { clarity } from '../../hooks/competitorData/clarity'
 import { clickhouse_cloud } from '../../hooks/competitorData/clickhouse_cloud'
 import { cloudflare } from '../../hooks/competitorData/cloudflare'
+import { confidentai } from '../../hooks/competitorData/confident_ai'
 import { contentsquare } from '../../hooks/competitorData/contentsquare'
 import { counter } from 'hooks/competitorData/counter'
 import { crazy_egg } from '../../hooks/competitorData/crazy_egg'
@@ -67,6 +68,7 @@ import { mutiny } from '../../hooks/competitorData/mutiny'
 import { newrelic } from '../../hooks/competitorData/newrelic'
 import { omnisend } from 'hooks/competitorData/omnisend'
 import { openreplay } from '../../hooks/competitorData/openreplay'
+import { opik } from '../../hooks/competitorData/opik'
 import { optimizely } from '../../hooks/competitorData/optimizely'
 import { pendo } from '../../hooks/competitorData/pendo'
 import { piwik_pro } from '../../hooks/competitorData/piwik_pro'
@@ -628,6 +630,7 @@ export default function ProductComparisonTable({
         clarity,
         clickhouse_cloud,
         cloudflare,
+        confidentai,
         contentsquare,
         counter,
         crazy_egg,
@@ -672,6 +675,7 @@ export default function ProductComparisonTable({
         newrelic,
         omnisend,
         openreplay,
+        opik,
         optimizely,
         pendo,
         piwik_pro,
