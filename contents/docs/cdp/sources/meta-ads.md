@@ -6,7 +6,6 @@ availability:
   free: full
   selfServe: full
   enterprise: full
-beta: true
 sourceId: MetaAds
 ---
 
@@ -46,3 +45,7 @@ Connect PostHog to your Meta Ads account using a Meta account. The Meta account 
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

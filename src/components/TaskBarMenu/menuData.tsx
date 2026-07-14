@@ -6,15 +6,6 @@ import { useSmallTeamsMenuItems } from './SmallTeamsMenuItems'
 import Logo from 'components/Logo'
 import { APP_COUNT } from '../../constants'
 import SearchableProductMenu from './SearchableProductMenu'
-import {
-    categoryOrder,
-    categoryDisplayNames,
-    categoryIcons,
-    buildCategoryMenuItems,
-    buildProductMenuItems,
-    popularProducts,
-    newestProducts,
-} from '../../constants/productNavigation'
 import useProduct from '../../hooks/useProduct'
 import {
     IconXNotTwitter,
@@ -28,6 +19,7 @@ import {
 } from 'components/OSIcons'
 import { useApp } from '../../context/App'
 import { IconChevronDown } from '@posthog/icons'
+import { useHedgehogMode } from 'components/HedgehogMode'
 import { navigate } from 'gatsby'
 import { useToast } from '../../context/Toast'
 import usePostHog from '../../hooks/usePostHog'
@@ -238,88 +230,64 @@ const processHandbookSidebar = (items: any[], isRoot = true): any[] => {
         })
 }
 
-// Build Product OS menu items with categories
-const buildProductOSMenuItems = (allProducts: any[]) => {
+// Build Products menu items
+const buildProductsMenuItems = (allProducts: any[]) => {
     const items: any[] = [
         {
             type: 'item',
-            label: `Browse all apps (${APP_COUNT})`,
+            label: 'PostHog Web',
+            link: '/products',
+            icon: <Icons.IconBolt className="size-4 text-red" />,
+        },
+        {
+            type: 'item',
+            label: 'PostHog Slack',
+            link: '/slack',
+            icon: <Icons.IconAtSign className="size-4 text-sky-blue" />,
+        },
+        {
+            type: 'item',
+            label: 'PostHog MCP',
+            link: '/mcp',
+            icon: <Icons.IconPlug className="size-4 text-gray" />,
+        },
+        {
+            type: 'item',
+            label: 'PostHog CLI',
+            link: '/docs/cli',
+            icon: <Icons.IconTerminal className="size-4 text-green" />,
+        },
+        {
+            type: 'item',
+            label: 'PostHog Code',
+            link: '/code',
+            icon: <Icons.IconCoffee className="size-4 text-brown" />,
+        },
+        {
+            type: 'item',
+            label: 'Context Warehouse',
+            link: '/data-stack',
+            icon: <Icons.IconDatabase className="size-4 text-blue" />,
+        },
+        {
+            type: 'separator',
+        },
+        {
+            type: 'item',
+            label: `Browse all tools (${APP_COUNT})`,
             link: '/products',
             icon: <Icons.IconApps className="size-4 text-red" />,
             mobileDestination: '/products',
         },
         {
-            type: 'separator',
-        },
-        {
             type: 'submenu' as const,
-            label: 'Search apps',
+            label: 'Search tools',
             link: '/products',
             items: <SearchableProductMenu products={allProducts} />,
             icon: <Icons.IconSearch className="size-4 text-gray" />,
-            mobileDestination: '/products',
-        },
-        {
-            type: 'submenu',
-            label: 'Popular products',
-            items: buildProductMenuItems(popularProducts, allProducts),
-            icon: <Icons.IconTrending className="size-4 text-green" />,
-            mobileDestination: '/products',
-        },
-        {
-            type: 'submenu',
-            label: 'New products',
-            items: buildProductMenuItems(newestProducts, allProducts),
-            icon: <Icons.IconPresent className="size-4 text-blue" />,
-            mobileDestination: '/products',
-        },
-        {
-            type: 'separator',
-        },
-        {
-            type: 'item',
-            label: 'Categories',
-            disabled: true,
+            mobileDestination: false, // Omit from mobile menu; desktop-only search
         },
     ]
-
-    // Add category submenus
-    categoryOrder.forEach((category) => {
-        const categoryProducts = allProducts.filter((product: any) => product.category === category)
-        if (categoryProducts.length === 0) return
-
-        const categoryItems = buildCategoryMenuItems(category, allProducts)
-        if (categoryItems.length > 0) {
-            // Get the icon for this category
-            let iconElement = null
-            const iconConfig = categoryIcons[category]
-            if (iconConfig) {
-                const IconComponent = Icons[iconConfig.icon as keyof typeof Icons]
-                if (IconComponent) {
-                    iconElement = React.createElement(IconComponent, {
-                        className: `size-4 text-${iconConfig.color}`,
-                    })
-                }
-            }
-
-            // Prepend MCP link as the first item in 'Utilities, add-ons, & packages'
-            if (category === 'product_os') {
-                categoryItems.unshift({
-                    type: 'item' as const,
-                    label: 'MCP',
-                    link: '/docs/model-context-protocol',
-                    icon: React.createElement(Icons.IconPlug, { className: 'size-4 text-gray' }),
-                })
-            }
-
-            items.push({
-                type: 'submenu',
-                label: categoryDisplayNames[category] || category,
-                icon: iconElement,
-                items: categoryItems,
-            })
-        }
-    })
 
     return items
 }
@@ -338,13 +306,13 @@ export function useMenuData(): MenuType[] {
     } = useApp()
     const { addToast } = useToast()
     const posthog = usePostHog()
+    const [hedgehogModeEnabled, setHedgehogModeEnabled] = useHedgehogMode()
 
     // Define main navigation items (excluding logo menu)
     const mainNavItems: MenuType[] = [
         {
-            trigger: 'Product OS',
-            items: buildProductOSMenuItems(allProducts),
-            mobileLink: '/products', // Direct link on mobile
+            trigger: 'Products',
+            items: buildProductsMenuItems(allProducts),
         },
         {
             trigger: 'Pricing',
@@ -654,6 +622,33 @@ export function useMenuData(): MenuType[] {
                     label: 'Things that spark joy',
                     icon: <IconSparksJoy className="size-4" />,
                     items: [
+                        {
+                            type: 'item',
+                            onClick: () => setHedgehogModeEnabled(!hedgehogModeEnabled),
+                            node: (
+                                <span className="px-2.5 flex w-full justify-between items-center gap-2">
+                                    <span>Hedgehog mode</span>
+                                    {/* Presentational toggle — the whole row is the clickable menu item */}
+                                    <span className="relative inline-flex items-center justify-center h-2 w-8 flex-shrink-0">
+                                        <span
+                                            aria-hidden
+                                            className="pointer-events-none absolute w-full h-full rounded-md bg-[#c4c4c4] dark:bg-[#5A5A5A]"
+                                        />
+                                        <span
+                                            aria-hidden
+                                            className={`pointer-events-none absolute left-0 inline-block h-4 w-4 rounded-full transition-transform ease-in-out duration-200 ${
+                                                hedgehogModeEnabled
+                                                    ? 'translate-x-5 bg-teal'
+                                                    : 'translate-x-0 bg-[#555] dark:bg-[#999]'
+                                            }`}
+                                        />
+                                    </span>
+                                </span>
+                            ),
+                        },
+                        {
+                            type: 'separator',
+                        },
                         {
                             type: 'item',
                             label: 'Browse all',
@@ -1020,6 +1015,12 @@ export const SparksJoyItems = {
         {
             label: 'BrickHog',
             link: '/sparks-joy/brickhog',
+            iconName: 'games' as AppIconName,
+            customIcon: null,
+        },
+        {
+            label: 'HogPatch: The Game',
+            link: '/sparks-joy/hogpatch',
             iconName: 'games' as AppIconName,
             customIcon: null,
         },

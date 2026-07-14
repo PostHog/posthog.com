@@ -42,7 +42,7 @@ export const useProductLinks = () => {
             source: 'desktop',
         },
         {
-            label: 'Product OS',
+            label: 'Products',
             Icon: <AppIcon name="notebook" />,
             url: '/products',
             source: 'desktop',

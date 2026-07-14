@@ -40,10 +40,14 @@ Every new joiner at PostHog has an onboarding buddy. If possible, a new joiner w
 -   Please make sure you spend at least 3 days together, working through the [first week onboarding list](/handbook/people/onboarding#during-their-first-week) and spending time working on any role-specific tasks that are outlined in the new joiner's personal onboarding issue.
     -   Make sure to add the details of the in-person onboarding to the [In-person Onboarding Calendar](https://calendar.google.com/calendar/u/0?cid=Y19lMzdjNjE0NzM0NDAyOGJlY2ZkMTc0Y2MxZjUxZjY5ZTkxMzY0NzVlNTFjMTE3MjA4OGM2NWQwNjE1YTczNmRlQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20) so that other PostHog team members can join, if possible. Simply create an event in your calendar and then invite the in-person onboarding calendar as a guest.
 -   You will remain the new joiner's main point of contact for the first few weeks, so please continue to check in with them at least once a week for the first month or so.
+-   As onboarding buddy, you are responsible for making sure the onboarding is fun and effective, so you should make sure there's a clear plan for work _and_ social time. Great in-person onboarding is crucial for getting someone started at PostHog.
+    -   The plan doesn't need to be minute-by-minute, but do have a rough shape for the days you're together so the new joiner isn't left wondering what's next once the initial intro conversations are done. A little structure goes a long way, and still leaves plenty of room to explore and learn by doing.
+-   Point the new joiner to the [handbook](/handbook) early and talk through why it matters – it's how we default to sharing context at PostHog, and knowing their way around it is one of the most useful things they can pick up in week one.
+-   **Not run an onboarding before?** That's completely fine – ask the People & Ops team or your team lead to pair you with someone who's done it before to support _you_. It's much easier to give someone a great start when you're not figuring out what "great" looks like at the same time.
 
 ## In-person onboarding
 
-Except under special circumstances, new joiners meet with members of their team in-person to go through the onboarding process. Upon acceptance of an offer, your Team Lead will notify the People & Operations team who will help you coordinate travel if necessary. We encourage team leads to consider the Hedgehouse as a location for in-person onboarding. Regardless of location, everyone should have their own bedroom.
+Except under special circumstances, new joiners meet with members of their team in-person to go through the onboarding process. Upon acceptance of an offer, your Team Lead will notify the People & Operations team who will help you coordinate travel if necessary. With very few exceptions (visa issues or excessive travel time), in-person onboarding should happen at [Hogpatch](/handbook/people/hogpatch-operations) in San Francisco or the [Hedge House](/handbook/company/offsites#hedge-house) in London. Both are set up for it, remove most of the planning friction, and you'll always be in the same space as other PostHog teams — which is way more fun, and means you'll meet more people. Regardless of location, everyone should have their own bedroom.
 
 In these cases, the process is:
 
@@ -155,7 +159,7 @@ We use a number of different tools to organise our work and communicate at PostH
 -   Fondo - US accounting
 -   Deel - international payroll and contracts management
 -   Ashby - recruitment
--   Micromerch - merch inventory management, [YC onboarding](/handbook/growth/sales/yc-onboarding) merch, and merch [drop-shipping for small events](https://github.com/PostHog/meta/issues/31)
+-   Micromerch - merch inventory management, [YC onboarding](/handbook/marketing/startups) merch, and merch [drop-shipping for small events](https://github.com/PostHog/meta/issues/31)
 
 ## Signatories
 
@@ -198,7 +202,7 @@ In this call the support engineer will be able to answer any questions, as well 
 
 -   [ ] [What the role of a support hero is](/handbook/support/customer-support#support-is-done-by-actual-engineers) and how they can expect to receive tickets/escalations
 -   [ ] [An overview of where tickets come from](/handbook/support/customer-support#its-easy-for-customers-to-reach-us) and how to differentiate between paying/free users
--   [ ] [How to create tickets from Slack threads](/handbook/engineering/support-hero#pylon-to-create-zendesk-tickets-from-slack-posts) and [reassign tickets to other teams](https://support.zendesk.com/hc/en-us/articles/4408887127450-Manually-assigning-a-ticket)
+-   [ ] [How to create tickets from Slack threads](/handbook/engineering/support-hero#creating-zendesk-tickets-from-slack-posts) and [reassign tickets to other teams](https://support.zendesk.com/hc/en-us/articles/4408887127450-Manually-assigning-a-ticket)
 -   [ ] [Advice on how to communicate with customers](/handbook/engineering/support-hero#how-do-i-communicate) and [prioritize tickets](/handbook/engineering/support-hero#how-do-i-prioritize)
 -   [ ] [How and when to mark tickets as 'On Hold' or 'Pending'](/handbook/engineering/support-hero#ticket-status)
 -   [ ] [What our SLAs](/handbook/support/customer-support#response-targets) are and [what ticket severity indicates](/docs/support-options#severity-levels)
@@ -211,25 +215,25 @@ It can be especially helpful for new hires if support engineers demonstrate how 
 
 ## 30/60/90 day check-ins
 
-Managers are responsible for helping their new members navigate the [first 3 months probationary period](/handbook/people/compensation#probation-period). There is a strong importance on 1) providing feedback to the new team member, and 2) communicating with execs about unresolved performance issues, so that there is enough time for action. Managers are, again, not responsible for hiring or firing, nor communicating these possibilities directly to teammates - this is handled by the exec team, and is frankly a very rare situation - the vast majority of people we hire do pass their probationary period!
+Team leads are responsible for helping their new members navigate the [first 3 months probationary period](/handbook/people/compensation#probation-period). There is a strong importance on 1) providing feedback to the new team member, and 2) communicating with Blitzscale about unresolved performance issues, so that there is enough time for action. Team leads are, again, not responsible for hiring or firing, nor communicating these possibilities directly to teammates - this is handled by the Blitzscale team, and is frankly a very rare situation - the vast majority of people we hire do pass their probationary period!
 
-As part of the onboarding checklist, the Ops team will schedule reminders for a new team member's manager at the 30, 60 & 90 day mark to serve as a reminder that these checkpoints have arrived and to make sure everything is on track for the probationary period to be passed.
+Team leads will receive an automated feedback form at the 30, 60, and 80 day marks. It's a reminder these checkpoints have arrived and a chance to provide feedback and make sure everything is on track for the probationary period to be passed.
 
 -   30-day checkin
-    -   Manager to provide initial feedback to the team member - especially if there is constructive feedback that needs to be given to ensure the person passes probation.
+    -   Team lead provides 30-day feedback to the team member - especially if there is constructive feedback that needs to be given to ensure the person passes probation.
     -   It's also a good time to reinforce the positive work that has been done by somebody on the right track.
 -   60-day checkin
-    -   Ops team will check in with the manager to see if things are on track.
-    -   Manager to provide another round of feedback to the team member.
-        -   If things are going well, the manager might want to give an indication of this as it can ease any fears the team member may have.
-    -   Exec team will get involved as necessary to provide an additional layer of feedback to the team member.
--   90-day checkin
-    -   We've made it! Congratulate the new team member on passing their probationary period.
-    -   Give any extra feedback as necessary, though things _should_ feel like they're humming at this point.
+    -   Team lead provides 60-day feedback to the team member - if things are going well, this is a good time to give an indication, which can ease any concerns the team member may have.
+    -   Blitzscale team will get involved as necessary to provide an additional layer of feedback to the team member.
+-   80-day checkin
+    -   Final feedback checkin before probation ends - provide any extra feedback, though things _should_ feel like they're humming at this point.
+    -   Any outstanding concerns should be raised with Blitzscale team 
+-   90-day 
+    -   We've made it! By default, there isn't a formal company side 'you passed' communication - by this point, the team member should already have a clear understanding through the prior checkins.
 
-Feedback is a really important part of the onboarding process and as a manager it's a good idea to ensure the new team member receives feedback from their peers - either from you collecting it or them receiving it directly from their peers. It won't always be possible or necessary to do a 360 feedback session within the first 3 months, so it's up to you as a manager how best to approach that. As a manager you can also have blind spots on performance, so checking in with their peers can be helpful and can be done during your normal 1-1s.
+Feedback is a really important part of the onboarding process and as a team lead it's a good idea to ensure the new team member receives feedback from their peers - either from you collecting it or them receiving it directly from their peers. It won't always be possible or necessary to do a 360 feedback session within the first 3 months, so it's up to you as a team lead how best to approach that. As a team lead you can also have blind spots on performance, so checking in with their peers can be helpful and can be done during your normal 1-1s.
 
-These check-ins are designed to ensure every new starter is set up for success. Every manager will deal with these slightly differently, but it will hopefully be clear to everybody by around the 60 day mark how things are going and what needs to be worked on, if anything. It is important for a manager to ensure that they do not wait for one of these check-ins to communicate with an exec team member that there could be issues with the team member passing probation. They should let them know immediately, so that a fair and reasonable plan can be put in action ASAP.
+These check-ins are designed to ensure every new starter is set up for success. Every team lead will deal with these slightly differently, but it will hopefully be clear to everybody by around the 60 day mark how things are going and what needs to be worked on, if anything. It is important for a team lead to ensure that they do not wait for one of these check-ins to communicate with a Blitzscale team member that there could be issues with the team member passing probation. They should let them know immediately, so that a fair and reasonable plan can be put in action ASAP.
 
 If you have any issues or any feedback on how to improve a specific intro just post in the #team-people-and-ops slack channel and tag the relevant people
 

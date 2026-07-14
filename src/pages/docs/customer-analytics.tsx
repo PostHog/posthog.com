@@ -43,10 +43,10 @@ const phFeatures = [
         url: '/docs/feature-flags',
     },
     {
-        title: 'LLM analytics',
+        title: 'AI Observability',
         description: 'See how your users are using your LLMs and if they are satisfied with the results.',
         icon: <IconLlmAnalytics className="text-[#681291]" />,
-        url: '/docs/llm-analytics',
+        url: '/docs/ai-observability',
     },
     {
         title: 'Data warehouse',
@@ -86,8 +86,7 @@ export const Content = ({ quickLinks = true }) => {
                 description="Understand your customers without building dashboards from scratch. Track active users, signups, conversions, and engagement."
                 buttonText="Setup guide"
                 buttonLink="/docs/customer-analytics/start-here"
-                imageClasses="max-h-48 md:max-h-64"
-                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/hog_crm_40195fd72f.png"
+                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/multiple_puzzle_teamwork_f73168bc7c.png"
             />
             <section className="mb-4">
                 <h2 className="mb-4">Overview</h2>

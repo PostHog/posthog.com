@@ -1,7 +1,7 @@
 ```react-native
 <PostHogProvider apiKey="<ph_project_token>" autocapture={{
-    captureTouches: true,
-    captureScreens: true,
+    captureTouches: true, // Disabled by default
+    captureScreens: true, // Enabled by default
     ignoreLabels: [], // Any labels here will be ignored from the stack in touch events
     customLabelProp: "ph-label",
     maxElementsCaptured: 20,

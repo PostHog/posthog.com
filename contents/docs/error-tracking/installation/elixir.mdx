@@ -101,7 +101,9 @@ defmodule MyRouter do
 end
 ```
 
-This automatically includes `$current_url`, `$host`, `$pathname`, and `$ip` on every error event that occurs during request processing.
+This automatically includes `$current_url`, `$host`, `$pathname`, and `$ip` on every error event that occurs during request processing. It also reads `X-PostHog-Distinct-Id` and `X-PostHog-Session-Id` tracing headers, so errors can link back to frontend users and sessions when your client SDK sends those headers.
+
+If you're using [PostHog JS](/docs/libraries/js) on the frontend, configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your Phoenix or Plug backend hostname. For more details, see the [Elixir request context docs](/docs/libraries/elixir#request-context).
 
 </Step>
 

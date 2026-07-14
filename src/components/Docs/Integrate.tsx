@@ -39,7 +39,7 @@ type LibraryFeatures = {
     sessionRecording: boolean
     userIdentification: boolean
     surveys: boolean
-    llmAnalytics: boolean
+    aiObservability: boolean
     errorTracking: boolean
 }
 
@@ -103,8 +103,10 @@ const query = graphql`
                             "/docs/libraries/python"
                             "/docs/libraries/react"
                             "/docs/libraries/react-native"
+                            "/docs/libraries/roblox"
                             "/docs/libraries/ruby"
                             "/docs/libraries/rust"
+                            "/docs/libraries/unity"
                         ]
                     }
                 }
@@ -188,7 +190,7 @@ const query = graphql`
                 featureFlags
                 groupAnalytics
                 surveys
-                llmAnalytics
+                aiObservability
                 errorTracking
             }
         }

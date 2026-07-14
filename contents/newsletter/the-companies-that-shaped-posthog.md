@@ -18,7 +18,7 @@ PostHog was not created in a vacuum. The companies we admire shaped PostHog as a
 
 To ensure we are heading in the right direction, our all-hands often include a reflection on these companies, the decisions they made, and why it matters to us. By sharing these with you, we hope it acts as inspiration to do things differently and reflect on the companies guiding you.
 
-> This post was first published in our Substack newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
+> This post was first published in our Substack newsletter, [build mode](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
 
 ## 1. GitLab: The open-core trailblazer 📖
 
@@ -104,7 +104,7 @@ On top of this, we try to maintain a strong financial position and [never need t
 
 Y Combinator helps create many successful startups. Core to doing this is a couple pieces of advice:
 
-- **Build people something want.** This requires talking to users and having them shape the roadmap, even when your intuition says otherwise.
+- **Build something people want.** This requires talking to users and having them shape the roadmap, even when your intuition says otherwise.
 
 - **Launch now.** Shipping fast enables you to [test in production](/product-engineers/testing-in-production) and get the most real feedback possible.
 

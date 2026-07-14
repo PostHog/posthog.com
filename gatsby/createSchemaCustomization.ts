@@ -77,7 +77,10 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       authorData: [AuthorsJson] @link(by: "handle", from: "author")
       badge: String
       seo: FrontmatterSEO
+      featureFlag: String
       hideFromIndex: Boolean
+      lang: String
+      translationOf: String
       price: String
       platformLogo: String
       platformIconName: String
@@ -223,6 +226,15 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       title: String
       number: Int
     }
+    type SelfDrivingPullRequest implements Node {
+      prNumber: Int
+      title: String
+      summary: String
+      type: String
+      scope: String
+      url: String
+      mergedAt: Date @dateformat
+    }
     type PostTagAttributes {
         label: String
         folder: String
@@ -346,6 +358,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       featured: Boolean
       caption: String
       sourceFields: [PostHogSourceField]
+      tables: [PostHogSourceTable]
       permissionsCaption: String
       featureFlag: String
     }
@@ -356,6 +369,14 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       required: Boolean
       placeholder: String
       caption: String
+    }
+    type PostHogSourceTable {
+      name: String
+      label: String
+      description: String
+      sync_methods: [String]
+      incremental_fields: [String]
+      primary_keys: [String]
     }
     type SdkReferences implements Node {
       info: SdkReferencesInfo
@@ -584,6 +605,21 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
 
     createTypes(
         `
+            type AchievementGroupIconAttributes {
+              url: String
+            }
+            type AchievementGroupIconData {
+              attributes: AchievementGroupIconAttributes
+            }
+            type AchievementGroupIcon {
+              data: AchievementGroupIconData
+            }
+            type AchievementGroup implements Node {
+              Title: String
+              description: String
+              tiered: Boolean
+              icon: AchievementGroupIcon
+            }
             type ShopifyCollection implements Node {
               handle: String!
               products: [ShopifyProduct!] @link(by: "shopifyId", from: "products.shopifyId")

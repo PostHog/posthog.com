@@ -85,7 +85,7 @@ The questions are based on the ones used by [Culture Amp](https://www.cultureamp
 
 Only the People & Ops and Exec teams have access to the full list of responses, which are not anonymous. 
 
-We follow a template to report a summary of the results in an Issue. [You can view the latest survey results here](https://github.com/PostHog/company-internal/issues/1390) - just copy the formatting ever.  
+We follow a template to report a summary of the results in an Issue. <PrivateLink url="https://github.com/PostHog/company-internal/issues/2965">You can view the latest survey results here</PrivateLink> - just copy the formatting every time.  
 
 ### Current list of questions
 
