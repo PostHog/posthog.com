@@ -11,6 +11,12 @@ We love contributions to PostHog, big or small. Here's what you need to know abo
 
 We have an awesome, diverse, and inclusive community. In order to maintain and grow this, all community members must adhere to our [Code of conduct](/docs/contribute/code-of-conduct).
 
+## Answer community questions
+
+One of the most helpful ways to contribute is by answering questions from other users in [our community forum](/questions). Sharing what you've learned helps others get unblocked faster and makes PostHog better for everyone, whether it's a quick tip, a workaround, or a detailed walkthrough.
+
+Not sure where to start? Our [guide to answering community questions](/handbook/community/questions) walks you through how to write helpful, accurate answers.
+
 ## Reporting bugs or issues
 
 Bug reports help us make PostHog better for everyone. When you [report a bug](https://github.com/PostHog/posthog/issues/new/choose), the description will automatically be filled with a template that makes it very clear what we'd like you to add.
