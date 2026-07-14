@@ -882,6 +882,7 @@ interface SidebarTabButtonProps {
 }
 
 const SidebarTabButton = ({ tab, active, showLabel, stacked, onClick }: SidebarTabButtonProps) => {
+    const { siteSettings } = useApp()
     // Manual FLIP for the icon: capture position on every commit, then on the
     // next commit — IF the structural layout changed (`layoutKey`) — animate
     // the icon from its old position to its new one. Click-only re-renders
@@ -931,7 +932,13 @@ const SidebarTabButton = ({ tab, active, showLabel, stacked, onClick }: SidebarT
                       // made the icon jut as the wrapper shrank during a
                       // hover→collapse transition.
                       `min-h-7 items-center justify-start ${showLabel ? 'gap-2' : ''} px-2 py-1`
-            } ${active ? 'text-primary' : 'text-secondary hover:text-primary hover:bg-accent/50'}`}
+            } ${
+                active
+                    ? 'text-primary'
+                    : `text-secondary hover:text-primary ${
+                          siteSettings.heaterMode ? 'hover:bg-dark/10 dark:hover:bg-light/10' : 'hover:bg-accent/50'
+                      }`
+            }`}
         >
             <AnimatePresence initial={false}>
                 {active && (
@@ -941,7 +948,9 @@ const SidebarTabButton = ({ tab, active, showLabel, stacked, onClick }: SidebarT
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.18 }}
-                        className="absolute inset-0 -z-10 rounded bg-accent"
+                        className={`absolute inset-0 -z-10 rounded ${
+                            siteSettings.heaterMode ? 'bg-dark/15 dark:bg-light/15' : 'bg-accent'
+                        }`}
                     />
                 )}
             </AnimatePresence>

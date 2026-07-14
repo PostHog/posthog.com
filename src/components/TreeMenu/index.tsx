@@ -7,6 +7,7 @@ import { replacePath } from '../../../gatsby/utils'
 import OSButton from 'components/OSButton'
 import Link from 'components/Link'
 import { useWindow } from '../../context/Window'
+import { useApp } from '../../context/App'
 
 interface MenuItem {
     name: string
@@ -32,8 +33,8 @@ type TreeMenuVariant = 'grouped' | 'listed'
 /**
  * `os` (default) renders links as `OSButton`s — the look used by every
  * existing TreeMenu (handbook, blog, data-stack, …). `sidebar` matches the
- * product Product/Pricing nav: text-only links with `text-secondary` →
- * `hover:text-primary hover:bg-accent` and muted section labels.
+ * product Product/Pricing nav: text-only links with a stronger selected state,
+ * lighter hover tint, and muted section labels.
  */
 type TreeMenuAppearance = 'os' | 'sidebar'
 
@@ -84,6 +85,7 @@ const TreeLink = ({
     activeItem: MenuItem | undefined
 }) => {
     const active = menuItem === activeItem
+    const { siteSettings } = useApp()
     const httpExternal = isHttpExternal(menuItem.url)
     const arrow = showsExternalArrow(menuItem)
 
@@ -97,7 +99,15 @@ const TreeLink = ({
             asLink
             to={menuItem.url}
             external={httpExternal}
-            className={index === 0 ? '' : `pl-${4 + index * 3}`}
+            className={`${index === 0 ? '' : `pl-${4 + index * 3}`} ${
+                siteSettings.heaterMode
+                    ? active
+                        ? '!bg-dark/15 dark:!bg-light/15 hover:!bg-dark/15 dark:hover:!bg-light/15'
+                        : 'hover:!bg-dark/10 dark:hover:!bg-light/10'
+                    : active
+                    ? '!bg-accent hover:!bg-accent'
+                    : 'hover:!bg-accent/50'
+            }`}
             onClick={() => onClick(menuItem)}
             icon={typeof menuItem.icon !== 'string' && menuItem.icon}
         >
@@ -193,6 +203,7 @@ const SidebarLink = ({
     activeItem: MenuItem | undefined
 }) => {
     const active = menuItem === activeItem
+    const { siteSettings } = useApp()
     const httpExternal = isHttpExternal(menuItem.url)
     const arrow = showsExternalArrow(menuItem)
     const [hovering, setHovering] = useState(false)
@@ -206,10 +217,16 @@ const SidebarLink = ({
             onClick={() => onClick(menuItem)}
             onMouseEnter={() => setHovering(true)}
             onMouseLeave={() => setHovering(false)}
-            // Hover matches the Product nav (`ProductNav`): instant `bg-accent`, no transition.
+            // Hover stays lighter than the selected state so the current page remains dominant.
             // `outline-offset-[-2px]`: keep the focus ring inside the link so the scroll container doesn't clip it.
             className={`flex items-center gap-1 w-full min-w-0 px-2 py-1 rounded text-sm !no-underline focus-visible:outline-offset-[-2px] ${
-                active ? 'bg-accent !text-primary font-semibold' : '!text-primary hover:bg-accent'
+                active
+                    ? `${
+                          siteSettings.heaterMode ? 'bg-dark/15 dark:bg-light/15' : 'bg-accent'
+                      } !text-primary font-semibold`
+                    : `!text-primary ${
+                          siteSettings.heaterMode ? 'hover:bg-dark/10 dark:hover:bg-light/10' : 'hover:bg-accent/50'
+                      }`
             }`}
             style={index > 0 ? { paddingLeft: 8 + index * 12 } : undefined}
         >
@@ -272,6 +289,7 @@ function SidebarCollapsibleItem({
     onClick: (item: MenuItem) => void
 }) {
     const active = item === activeItem
+    const { siteSettings } = useApp()
     // Only auto-expand when a child page is active (e.g. a specific language).
     // Clicking the parent's own page navigates without forcing the menu open.
     const childActive = sectionContainsActive(item.children || [], activeItem)
@@ -297,7 +315,15 @@ function SidebarCollapsibleItem({
                     // otherwise size to content in this flex row and prevent `flex-1` from filling.
                     contextMenu={false}
                     className={`flex items-center gap-1 flex-1 min-w-0 px-2 py-1 rounded text-sm !no-underline focus-visible:outline-offset-[-2px] ${
-                        active ? 'bg-accent !text-primary font-semibold' : '!text-primary hover:bg-accent'
+                        active
+                            ? `${
+                                  siteSettings.heaterMode ? 'bg-dark/15 dark:bg-light/15' : 'bg-accent'
+                              } !text-primary font-semibold`
+                            : `!text-primary ${
+                                  siteSettings.heaterMode
+                                      ? 'hover:bg-dark/10 dark:hover:bg-light/10'
+                                      : 'hover:bg-accent/50'
+                              }`
                     }`}
                     style={index > 0 ? { paddingLeft: 8 + index * 12 } : undefined}
                 >
@@ -598,6 +624,7 @@ function TreeMenuItem({
     onClick: (item: MenuItem) => void
 }) {
     const [open, setOpen] = useState(false)
+    const { siteSettings } = useApp()
     const hasChildren = item.children && item.children.length > 0
     const location = useLocation()
     const pathname = replacePath(location?.pathname)
@@ -618,7 +645,15 @@ function TreeMenuItem({
                 <OSButton
                     align="left"
                     width="full"
-                    className={index === 0 ? '' : `pl-${2 + index * 4}`}
+                    className={`${index === 0 ? '' : `pl-${2 + index * 4}`} ${
+                        siteSettings.heaterMode
+                            ? activeItem === item
+                                ? '!bg-dark/15 dark:!bg-light/15 hover:!bg-dark/15 dark:hover:!bg-light/15'
+                                : 'hover:!bg-dark/10 dark:hover:!bg-light/10'
+                            : activeItem === item
+                            ? '!bg-accent hover:!bg-accent'
+                            : 'hover:!bg-accent/50'
+                    }`}
                     active={activeItem === item}
                     to={item.url || item.children?.[0]?.url}
                     asLink
