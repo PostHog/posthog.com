@@ -22,7 +22,7 @@ import { IconRewindPlay, IconBolt, IconNotebook, IconPullRequest, IconCheckCircl
  *
  * Design notes:
  * - Static-first / SSR-safe: the full layout renders with no JS; the progress animation is
- *   progressive enhancement. Relative timestamps are computed client-side (fresh between deploys).
+ *   progressive enhancement.
  * - Stage colors are component-local constants (not project tokens); structural theming uses
  *   var-backed tokens that flip with the theme, so light and dark both work.
  * - Responsiveness uses @container queries, never media queries – the docs render in a resizable window.
@@ -67,22 +67,7 @@ type SelfDrivingPR = {
     mergedAt: string | null
 }
 
-// Short, human "N ago" – computed in the browser so it stays fresh between rebuilds.
-const timeAgo = (iso: string | null): string => {
-    if (!iso) return ''
-    const then = new Date(iso).getTime()
-    if (Number.isNaN(then)) return ''
-    const seconds = Math.max(0, (Date.now() - then) / 1000)
-    const days = Math.floor(seconds / 86400)
-    if (days >= 7) return `${Math.floor(days / 7)}w ago`
-    if (days >= 1) return `${days}d ago`
-    const hours = Math.floor(seconds / 3600)
-    if (hours >= 1) return `${hours}h ago`
-    const minutes = Math.floor(seconds / 60)
-    return minutes >= 1 ? `${minutes}m ago` : 'just now'
-}
-
-type Beat = { when: string; text: React.ReactNode }
+type Beat = { text: React.ReactNode }
 
 // Per-stage narration for the featured PR. The first three stages are generic (GitHub can't tell
 // us which signal fired or how it was grouped); the last three use the PR's real data. Falls back
@@ -92,7 +77,6 @@ const buildJourney = (hero: SelfDrivingPR | null): Beat[] => {
     const prTag = hero ? <b className="font-mono">#{hero.prNumber}</b> : <b>a pull request</b>
     return [
         {
-            when: 'continuously',
             text: (
                 <>
                     Signal sources and scouts watch your product around the clock – session replays, errors, health
@@ -101,7 +85,6 @@ const buildJourney = (hero: SelfDrivingPR | null): Beat[] => {
             ),
         },
         {
-            when: 'as they arrive',
             text: (
                 <>
                     The signals that matter are raised into the inbox, where PostHog deduplicates them and lines up the
@@ -110,7 +93,6 @@ const buildJourney = (hero: SelfDrivingPR | null): Beat[] => {
             ),
         },
         {
-            when: 'grouped & ranked',
             text: (
                 <>
                     Related signals cluster into a single <b>report</b>, ranked by how much impact fixing it would have.
@@ -118,7 +100,6 @@ const buildJourney = (hero: SelfDrivingPR | null): Beat[] => {
             ),
         },
         {
-            when: hero ? `opened ${timeAgo(hero.openedAt)}` : 'when actionable',
             text: hero ? (
                 <>
                     A research agent investigated the report and opened {prTag}: {hero.summary}
@@ -128,7 +109,6 @@ const buildJourney = (hero: SelfDrivingPR | null): Beat[] => {
             ),
         },
         {
-            when: merged ? `merged ${timeAgo(hero?.mergedAt ?? null)}` : 'awaiting review',
             text: merged ? (
                 <>
                     You reviewed {prTag} and merged it. <b>Nothing ships without you.</b>
@@ -140,7 +120,6 @@ const buildJourney = (hero: SelfDrivingPR | null): Beat[] => {
             ),
         },
         {
-            when: merged ? 'after merge' : 'after it ships',
             text: (
                 <>PostHog measures whether the change actually worked, and feeds the result back in as new signals.</>
             ),
@@ -332,25 +311,14 @@ const SelfDrivingLoop = (): JSX.Element => {
                 )}
 
                 {/* Narration for the active stage */}
-                <div
-                    className="mt-4 flex flex-col gap-1 rounded-xl bg-accent p-4 @[520px]:flex-row @[520px]:gap-4"
-                    style={{ boxShadow: `inset 3px 0 0 ${current.color}` }}
-                >
+                <div className="mt-4 rounded-xl bg-accent p-4" style={{ boxShadow: `inset 3px 0 0 ${current.color}` }}>
                     <span
-                        className="shrink-0 pt-px font-mono text-[11.5px] text-secondary @[520px]:min-w-[104px]"
-                        suppressHydrationWarning
+                        className="mb-0.5 block text-[11px] font-bold uppercase tracking-wide"
+                        style={{ color: current.color }}
                     >
-                        {journey[active].when}
+                        {current.label}
                     </span>
-                    <span className="text-sm leading-relaxed">
-                        <span
-                            className="mb-0.5 block text-[11px] font-bold uppercase tracking-wide"
-                            style={{ color: current.color }}
-                        >
-                            {current.label}
-                        </span>
-                        {journey[active].text}
-                    </span>
+                    <span className="text-sm leading-relaxed">{journey[active].text}</span>
                 </div>
             </div>
         </div>

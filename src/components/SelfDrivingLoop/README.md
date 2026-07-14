@@ -45,15 +45,13 @@ It takes no props.
 ## Data (build-time, no runtime calls)
 
 Reads the `SelfDrivingPullRequest` GraphQL nodes produced by `sourceSelfDrivingPRs()` in
-`gatsby/sourceNodes.ts` and features the **most recently opened** PR, so the diagram tracks the
-latest real work each time the site builds. Relative timestamps ("opened 3h ago") are computed
-in the browser so they stay fresh between deploys.
+`gatsby/sourceNodes.ts` and features the **most recently opened** PR (sorted by `openedAt`), so the
+diagram tracks the latest real work each time the site builds.
 
-Only three stages have real per-PR data from GitHub:
+Only two stages weave in real per-PR data from GitHub:
 
-- **Pull request** — the PR's number, title, and opened time.
-- **You review** — merged (with merge time) vs. an open draft awaiting review, from `state`.
-- **Measured** — generic (there's nothing to measure yet on a fresh PR).
+- **Pull request** — the PR's number and title.
+- **You review** — merged vs. an open draft awaiting review, from `state`.
 
 The **Signal source / Signals / Report** stages describe the loop generically. That provenance —
 which signal fired, how it was grouped into a report — isn't in GitHub's API (it lives in
