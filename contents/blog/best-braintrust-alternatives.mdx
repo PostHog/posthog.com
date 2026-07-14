@@ -15,7 +15,7 @@ seo:
   metaDescription: 'Looking for a Braintrust alternative? Compare the best AI observability and evals tools, including PostHog, Langfuse, LangSmith, and more.'
 ---
 
-**Braintrust** built an eval-first platform good enough that Notion, Vercel, and Cloudflare all use it, fast enough that it needed its own database, and funded well enough to keep going for a long time. If evals are your whole problem, you could do a lot worse.
+**Braintrust** built a fast, popular, and reliable eval-first platform good enough that Notion, Vercel, and Cloudflare all use it. If evals are your whole problem, you could do a lot worse.
 
 But evals usually aren't the whole problem. Maybe you hit the free tier's limit and discovered the next step is $249/month, no middle rung. Maybe you asked about self-hosting and got routed to Enterprise sales. Or maybe you realized "the eval passed" and "the user was happy" are two different metrics, and Braintrust only tracks one of them.
 
@@ -38,7 +38,7 @@ PostHog captures full traces of your LLM calls, so you can follow a request thro
 
 You can also [manage and version prompts (beta)](/docs/prompt-management) without redeploying code, and query trace data with SQL or through the [MCP server](/mcp) directly from your editor.
 
-The difference from Braintrust is what surrounds the traces. Braintrust is purpose-built for the eval loop. PostHog expands on the loop after that: the model shipped, so now what? 
+The difference from Braintrust is what surrounds the traces. Braintrust is laser focused on evals. PostHog expands on what comes after that: the model shipped, so now what? 
 
 Because traces are regular PostHog events, you can watch the [session replay](/session-replay) of a confused user's AI interaction, check whether people who hit slow generations churn, gate a new model behind a [feature flag](/feature-flags), and [A/B test](/experiments) whether the new prompt actually improved activation.
 
@@ -68,7 +68,6 @@ Because traces are regular PostHog events, you can watch the [session replay](/s
         'ai_observability.evaluations.features.llm_as_a_judge',
         'ai_observability.evaluations.features.code_evaluators',
         'ai_observability.features.evaluation_datasets',
-        'ai_observability.evaluations.features.experiment_runs',
         {
             label: 'CI-integrated evals',
             description: 'Run evaluation suites in CI/CD before merging or deploying changes',
@@ -144,7 +143,7 @@ Acquired by ClickHouse in January 2026, [Langfuse](/blog/posthog-vs-langfuse) is
 
 On top of tracing, it layers prompt management with one-click rollbacks, evaluations via LLM-as-a-judge, heuristics, or human review, and CI/CD experiment actions for catching quality regressions in your pipeline.
 
-Against Braintrust specifically, Langfuse is the mirror image on licensing: what Braintrust gates behind an Enterprise contract (self-hosting, full data control) is Langfuse's default. On the other hand, Braintrust's eval loop is more tightly integrated out of the box, while Langfuse's equivalent workflows take more configuration to assemble.
+Against Braintrust specifically, Langfuse takes a similar approach to licensing: what Braintrust gates behind an Enterprise contract (self-hosting, full data control) is Langfuse's default. On the other hand, Braintrust's eval loop is more tightly integrated out of the box, while Langfuse's equivalent workflows take more configuration to assemble.
 
 ### Key features
 
@@ -170,7 +169,6 @@ Against Braintrust specifically, Langfuse is the mirror image on licensing: what
         'ai_observability.evaluations.features.llm_as_a_judge',
         'ai_observability.evaluations.features.code_evaluators',
         'ai_observability.features.evaluation_datasets',
-        'ai_observability.evaluations.features.experiment_runs',
         {
             label: 'CI-integrated evals',
             description: 'Run evaluation suites in CI/CD before merging or deploying changes',
@@ -237,9 +235,9 @@ According to reviews on Product Hunt and Gartner Peer Insights, companies use La
 
 ### What is LangSmith?
 
-[LangSmith](/blog/best-langsmith-alternatives) is the observability and evaluation platform from the LangChain team, and the closest thing Braintrust has to a direct rival. 
+[LangSmith](/blog/best-langsmith-alternatives) is the observability and evaluation platform from the LangChain team.
 
-Both are closed-source, eval-focused platforms with CI-integrated quality gates; the difference is LangSmith is anchored to the LangChain ecosystem, enabling zero-config tracing, node-by-node state diffs, and native agent execution trees.
+Both LangSmith and Braintrust are closed-source platforms with CI-integrated quality gates; the difference is LangSmith is anchored to the LangChain ecosystem, enabling zero-config tracing, node-by-node state diffs, and native agent execution trees.
 
 LangSmith also covers the full eval workflow: LLM-as-a-judge and code-based scoring against production traces, annotation queues for human review, dataset management, and CI/CD regression testing via GitHub Actions. 
 
@@ -269,7 +267,6 @@ The main structural difference from Braintrust is pricing: LangSmith charges $39
         'ai_observability.evaluations.features.llm_as_a_judge',
         'ai_observability.evaluations.features.code_evaluators',
         'ai_observability.features.evaluation_datasets',
-        'ai_observability.evaluations.features.experiment_runs',
         {
             label: 'CI-integrated evals',
             description: 'Run evaluation suites in CI/CD before merging or deploying changes',
@@ -369,7 +366,6 @@ When teams need enterprise production monitoring – or traditional ML and LLM m
         'ai_observability.evaluations.features.llm_as_a_judge',
         'ai_observability.evaluations.features.code_evaluators',
         'ai_observability.features.evaluation_datasets',
-        'ai_observability.evaluations.features.experiment_runs',
         {
             label: 'CI-integrated evals',
             description: 'Run evaluation suites in CI/CD before merging or deploying changes',
@@ -468,7 +464,6 @@ Against Braintrust, the comparison matches Langfuse's: Apache 2.0 and fully self
         'ai_observability.evaluations.features.llm_as_a_judge',
         'ai_observability.evaluations.features.code_evaluators',
         'ai_observability.features.evaluation_datasets',
-        'ai_observability.evaluations.features.experiment_runs',
         {
             label: 'CI-integrated evals',
             description: 'Run evaluation suites in CI/CD before merging or deploying changes',
@@ -568,7 +563,6 @@ The real difference from Braintrust is what surrounds Weave: model training, fin
         'ai_observability.evaluations.features.llm_as_a_judge',
         'ai_observability.evaluations.features.code_evaluators',
         'ai_observability.features.evaluation_datasets',
-        'ai_observability.evaluations.features.experiment_runs',
         {
             label: 'CI-integrated evals',
             description: 'Run evaluation suites in CI/CD before merging or deploying changes',
@@ -595,7 +589,6 @@ The real difference from Braintrust is what surrounds Weave: model training, fin
 - Weave connects LLM application monitoring directly to ML model training and experiment tracking. Braintrust is LLM-only.
 - Weave's built-in production signals automatically surface failure modes across millions of traces. Braintrust requires manual evaluation setup.
 - Braintrust's eval-first CI workflow and dataset management are more tightly integrated. Weave's eval framework is comprehensive but secondary to its observability focus.
-- Braintrust's free tier includes 1GB of processed data/month. Weave's free tier is usage-based.
 
 </details>
 
@@ -605,7 +598,7 @@ The real difference from Braintrust is what surrounds Weave: model training, fin
 - Both offer LLM and agent tracing with inputs, outputs, token usage, cost, and latency.
 - Both support LLM-as-judge evaluation and dataset management.
 - Both have CI/CD integration for running evaluation suites.
-- Both have a free tier and support OpenAI, Anthropic, and other major providers.
+- Both have a free tier of 1 GB and support OpenAI, Anthropic, and other major providers.
 - Both support human feedback collection and annotation workflows.
 
 </details>
@@ -667,7 +660,6 @@ Against Braintrust, the two are the most eval-obsessed platforms on this list, b
         'ai_observability.evaluations.features.llm_as_a_judge',
         'ai_observability.evaluations.features.code_evaluators',
         'ai_observability.features.evaluation_datasets',
-        'ai_observability.evaluations.features.experiment_runs',
         {
             label: 'CI-integrated evals',
             description: 'Run evaluation suites in CI/CD before merging or deploying changes',
@@ -716,7 +708,7 @@ According to reviews on Gartner Peer Insights and customer stories, companies us
 
 1. **Evaluation cycles shrink from days to hours:** A single improvement cycle that previously took 10 days now takes three hours, with product managers running it themselves.
 
-2. **It saves hundreds of hours of manual evaluation:** Confident AI saves 480+ hours of manual AI evaluation every month, giving teams the data to defend every quality decision.
+2. **It saves hundreds of hours of manual evaluation:** Confident AI saves hours of manual AI evaluation every month, giving teams the data to defend every quality decision.
 
 3. **The dashboard is accessible to non-technical users:** The interface is clean, well-structured, and easy to navigate, with AI-driven analytics providing clear, data-backed recommendations.
 
@@ -726,13 +718,13 @@ According to reviews on Gartner Peer Insights and customer stories, companies us
 
 ## Which Braintrust alternative should you choose?
 
-- Want LLM observability connected to product analytics, session replay, and user behavior? [PostHog](/ai-observability).
-- Need open-source self-hosting with broad framework support and no licensing fees? **Langfuse**.
-- Building on LangChain or LangGraph? **LangSmith**.
-- Want OpenTelemetry-native tracing or need ML and LLM monitoring on one platform? **Arize Phoenix**.
-- Need open-source LLM observability with real-time evaluation and automated agent optimization? **Opik by Comet**.
-- Already using W&B for ML experiment tracking? **W&B Weave**.
-- Want every production trace scored and evaluation workflows accessible to PMs and QA? **Confident AI**.
+- Want LLM observability connected to product analytics, session replay, and user behavior? Choose [PostHog](/ai-observability).
+- Need open-source self-hosting with broad framework support and no licensing fees? Go with **Langfuse**.
+- Building on LangChain or LangGraph? **LangSmith** is the natural fit.
+- Want OpenTelemetry-native tracing, or ML and LLM monitoring on one platform? Pick **Arize Phoenix**.
+- Need open-source LLM observability with real-time evaluation and automated agent optimization? Try **Opik by Comet**.
+- Already using W&B for ML experiment tracking? Stick with **W&B Weave**.
+- Want every production trace scored, with eval workflows accessible to PMs and QA? **Confident AI** is built for that.
 
 ## Is PostHog right for you?
 
@@ -779,6 +771,24 @@ The most common reasons are pricing, self-hosting, and scope.
 Braintrust's paid Pro plan jumps from a generous free tier straight to $249/month with no middle option. Self-hosting requires an enterprise contract. 
 
 And if your primary need is LLM observability integrated with product analytics and user behavior, rather than a specialist eval platform, Braintrust's tight focus works against you.
+
+</details>
+
+<details>
+<summary>How do these tools charge?</summary>
+
+Every tool on this list bills differently, which makes price comparisons slippery. Here's the overview:
+
+| Tool | Bills by | Free tier | First paid step | Watch out for |
+| --- | --- | --- | --- | --- |
+| **Braintrust** | GB of processed data | 1 GB (~1M spans), 14-day retention | $249/month Pro (5 GB) | No middle tier between free and $249; $3/GB overages |
+| **PostHog** | Events | 100K AI events/month | Usage-based, no base fee ($6 per 100K) | Event count scales with instrumentation depth |
+| **Langfuse** | Units (traces + observations + scores) | 50K units/month, hard cap | $29/month Core + $8 per 100K units | Eval scores count as billable units |
+| **LangSmith** | Seats + traces | 5K traces, 1 seat | $39/seat/month + $2.50 per 1K traces | Costs grow with headcount; base retention is 14 days |
+| **Arize Phoenix** | Free self-host; cloud by spans | 25K spans/month (cloud) | Cloud paid tiers vary | Self-hosting is free but you run the infrastructure |
+| **Opik** | Spans | 25K spans/month, unlimited users | $19/month | Self-hosting is free with no caps |
+| **W&B Weave** | Usage-based | Usage-based free tier | Varies | Pricing tied to broader W&B platform plans |
+| **Confident AI** | Seats + data | Free tier available | $19.99/seat/month + $1/GB-month tracing | Per-seat pricing – a 5-person team is ~$100/month before data |
 
 </details>
 
