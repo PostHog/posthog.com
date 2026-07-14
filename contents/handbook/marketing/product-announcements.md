@@ -12,7 +12,7 @@ Product marketers take responsibility for coordinating and publicizing news abou
 
 The word "launch" gets used to mean a dozen different things, which creates confusion about who owns what. So we split shipping something new into two distinct moments, with two different owners:
 
-- **A release** gets a product or feature into the hands of our _existing_ users – hundreds of thousands of people who already use PostHog. This is the **product team's** responsibility. The PM or team lead drives it, using [their own release checklist](/handbook/product/releasing-new-products-and-features). They control the rollout, the pricing, and the flags. Marketing contributes – email, docs – but does not lead.
+-  **A release** is when a product or feature becomes available to existing users for the first time. This is the **product team’s** responsibility. The PM or team lead drives it, using [their own release checklist](/handbook/product/releasing-new-products-and-features). A release can be gradual, targeted, or fully open.
 
 - **A launch** gets a product in front of _new_ people – potentially millions who've never heard of us. This is **Marketing's** responsibility, with the **product marketer leading** and working from the launch checklist below.
 
