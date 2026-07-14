@@ -14,7 +14,7 @@ import AlphaRelease from "../_snippets/alpha-release.mdx"
 
 <AlphaRelease />
 
-[Aviator](https://www.aviator.co/) is a developer productivity suite built around a merge queue for GitHub. This connector pulls your Aviator data — repositories, daily merge-queue analytics, currently queued pull requests, live queue depth, and merge-queue config history — into the PostHog Data warehouse so you can join it with your product and engineering data.
+[Aviator](https://www.aviator.co/) is a developer productivity suite built around a merge queue for GitHub. This connector pulls your Aviator data – repositories, daily merge-queue analytics, currently queued pull requests, live queue depth, and merge-queue config history – into the PostHog Data Warehouse so you can join it with your product and engineering data.
 
 ## Prerequisites
 
@@ -30,7 +30,7 @@ Aviator authenticates with a user access token (it starts with `av_uat_`). Creat
 
 <SyncModes />
 
-Only **Merge queue analytics** supports incremental sync — it advances a UTC date window (`start`/`end`) and re-reads a short trailing window each run, because recent daily aggregates can be revised. The other tables are current-state snapshots or small lists with no server-side timestamp filter, so they sync as full refresh.
+Only **Merge queue analytics** supports incremental sync – it advances a UTC date window (`start`/`end`) and re-reads a short trailing window each run, because recent daily aggregates can be revised. The other tables are current-state snapshots or small lists with no server-side timestamp filter, so they sync as full refresh.
 
 ## Configuration
 
@@ -42,7 +42,7 @@ Only **Merge queue analytics** supports incremental sync — it advances a UTC d
 
 ## Troubleshooting
 
-- **401 Unauthorized** — the API token is invalid or has been revoked. Create a new user access token in your Aviator account settings and reconnect.
-- **403 Forbidden** — the token is valid but does not have access to a repository's data. Check the token's repository access in Aviator and reconnect.
+- **401 Unauthorized** – the API token is invalid or has been revoked. Create a new user access token in your Aviator account settings and reconnect.
+- **403 Forbidden** – the token is valid but does not have access to a repository's data. Check the token's repository access in Aviator and reconnect.
 
 <TroubleshootingLink />

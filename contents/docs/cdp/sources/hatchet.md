@@ -14,7 +14,7 @@ import AlphaRelease from "../_snippets/alpha-release.mdx"
 
 <AlphaRelease />
 
-[Hatchet](https://hatchet.run/) is a Postgres-backed task queue and durable workflow orchestrator, popular for AI agent and background-job workloads. This connector pulls your Hatchet execution history — workflow runs, individual task runs, ingested events, and event keys — into the PostHog Data warehouse so you can analyze job throughput, failure rates, and event volume alongside your product data.
+[Hatchet](https://hatchet.run/) is a Postgres-backed task queue and durable workflow orchestrator, popular for AI agent and background-job workloads. This connector pulls your Hatchet execution history – workflow runs, individual task runs, ingested events, and event keys – into the PostHog Data Warehouse so you can analyze job throughput, failure rates, and event volume alongside your product data.
 
 ## Prerequisites
 
@@ -34,7 +34,7 @@ When linking Hatchet, you'll need:
 
 <SyncModes />
 
-**Workflow runs**, **Tasks**, and **Events** support incremental sync — they advance a `created_at` cursor over the API's `since`/`until` window and re-read a short trailing window each run, because a run's status and output can change after it is created. **Event keys** is a small, timestamp-free reference list, so it syncs as full refresh.
+**Workflow runs**, **Tasks**, and **Events** support incremental sync – they advance a `created_at` cursor over the API's `since`/`until` window and re-read a short trailing window each run, because a run's status and output can change after it is created. **Event keys** is a small, timestamp-free reference list, so it syncs as full refresh.
 
 ## Configuration
 
@@ -46,8 +46,8 @@ When linking Hatchet, you'll need:
 
 ## Troubleshooting
 
-- **401 Unauthorized** — the API token is invalid or has expired. Create a new token in your Hatchet dashboard and reconnect.
-- **403 Forbidden** — the token is valid but does not have access to this tenant. Check the token's tenant scope and reconnect.
-- **The token can't be decoded** — enter the **Host** and **Tenant id** manually so the connection can reach your instance.
+- **401 Unauthorized** – the API token is invalid or has expired. Create a new token in your Hatchet dashboard and reconnect.
+- **403 Forbidden** – the token is valid but does not have access to this tenant. Check the token's tenant scope and reconnect.
+- **The token can't be decoded** – enter the **Host** and **Tenant id** manually so the connection can reach your instance.
 
 <TroubleshootingLink />
