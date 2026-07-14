@@ -117,16 +117,16 @@ function HeroSection({ teamCrestUrl }: { teamCrestUrl?: string }) {
 
             <div className="w-full space-y-3">
                 <p>
-                    PostHog holds one of the richest behavioral datasets anywhere: events, sessions, and replays of how
-                    real software actually gets used. Nobody has trained a foundation model on data like this. We are –
-                    starting with an encoder for the raw stream behind session replay, and building toward models that
-                    understand and predict user behavior.
+                    PostHog holds one of the richest behavioral datasets anywhere: events, and replays of how real
+                    software gets used. Nobody has trained a foundation model on data like this yet. We're the first.
                 </p>
                 <p>
-                    Some of this work is genuinely novel, extending earlier research with techniques like a multi-axis
-                    RoPE built on additive Euler angles. And when a stage of the work is done, we share it: final
-                    architectures go to public repos, weights get released, and papers on the training process and what
-                    we learned go to arXiv and major ML conferences.
+                    We're starting with an encoder for the raw stream behind session replay, and building toward models
+                    that understand and predict user behavior. From there, the work will only become more novel.
+                </p>
+                <p>
+                    We're committed to sharing our work as transparently as we can, through research papers,
+                    conferences, and by publishing our progress.
                 </p>
             </div>
         </section>
@@ -690,28 +690,25 @@ function ResearchPostsSection({ posts }: { posts: ResearchPost[] }) {
 // Who's doing research at PostHog?
 // ─────────────────────────────────────────────
 
+const isNico = (member: SqueakProfileFields) => member.firstName === 'Nicholas' && member.lastName === 'Waltz'
+
 function PeopleSection({ teamMembers, posts }: { teamMembers: SqueakProfileFields[]; posts: ResearchPost[] }) {
     const seen = new Set(teamMembers.map((member) => member.squeakId).filter(Boolean))
-    const authorMembers: SqueakProfileFields[] = []
 
+    // James isn't on the AI Research team in Strapi, but belongs here – pull his profile from post authorship
+    const james: SqueakProfileFields[] = []
     posts.forEach((post) => {
         post.frontmatter.authors?.forEach((author) => {
             const squeakId = author.profile_id ?? author.profile?.squeakId
             if (!squeakId || seen.has(squeakId) || !author.profile) return
+            if (author.name !== 'James Hawkins' && author.profile.firstName !== 'James') return
             seen.add(squeakId)
-
-            const [fallbackFirst, ...fallbackLast] = (author.name || '').split(' ')
-            authorMembers.push({
-                ...author.profile,
-                squeakId,
-                firstName: author.profile.firstName ?? fallbackFirst,
-                lastName: author.profile.lastName ?? fallbackLast.join(' '),
-                companyRole: author.profile.companyRole ?? author.role,
-            })
+            james.push({ ...author.profile, squeakId })
         })
     })
 
-    const everyone = [...teamMembers, ...authorMembers]
+    // Nico leads the team and lists first
+    const everyone = [...teamMembers].sort((a, b) => Number(isNico(b)) - Number(isNico(a))).concat(james)
     if (everyone.length === 0) return null
 
     return (
@@ -720,7 +717,7 @@ function PeopleSection({ teamMembers, posts }: { teamMembers: SqueakProfileField
                 sticker={StickerUsers}
                 kicker="The team"
                 title="Who's doing research at PostHog?"
-                subtitle="The people doing the research, and the people writing about it."
+                subtitle="The AI Research team, and the founder who can't stay away."
             />
             <ul className="not-prose list-none mt-0 mx-0 p-0 flex flex-col @xs:grid grid-cols-2 @2xl:grid-cols-3 gap-4 @md:gap-x-6 gap-y-12 mt-14">
                 {everyone.map((member) => (
@@ -728,7 +725,9 @@ function PeopleSection({ teamMembers, posts }: { teamMembers: SqueakProfileField
                         <TeamMember
                             {...member}
                             isTeamLead={
-                                member.leadTeams?.data?.some((team) => team.attributes?.name === 'AI Research') ?? false
+                                isNico(member) ||
+                                (member.leadTeams?.data?.some((team) => team.attributes?.name === 'AI Research') ??
+                                    false)
                             }
                         />
                     </li>
