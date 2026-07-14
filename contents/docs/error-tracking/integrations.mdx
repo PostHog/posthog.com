@@ -27,6 +27,14 @@ PostHog connects to GitHub by installing a GitHub application. PostHog needs the
 
 Once connected, create a [release](/docs/error-tracking/releases) to start using source linking.
 
+### Connecting multiple projects to the same GitHub org
+
+A GitHub App installs once per GitHub org. If another PostHog project in your organization has already connected the same GitHub org, GitHub won't let you install the app again.
+
+Instead, go to the [GitHub integration page](https://app.posthog.com/integrations/github) and click **Link existing installation**. This reuses the existing GitHub App installation without needing a new OAuth redirect from GitHub.
+
+Team admins can link the installation directly. Non-admins need to [connect their personal GitHub account](/docs/error-tracking/integrations#github-integration) first as an ownership proof.
+
 ## GitLab integration
 
 To set up the GitLab integration:
