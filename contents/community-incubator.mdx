@@ -1,5 +1,5 @@
 ---
-title: PostHog builder collective
+title: PostHog community incubator
 showTitle: false
 showSidebar: true
 width: lg
@@ -11,12 +11,21 @@ import CollectiveCarousel from 'components/BuilderCollective/CollectiveCarousel'
 export const fullBleed =
   'w-[calc(100%_+_2rem)] @md/reader-content-container:w-[calc(100%_+_3rem)] @lg/reader-content-container:w-[calc(100%_+_4rem)] -mx-4 @md/reader-content-container:-mx-6 @lg/reader-content-container:-mx-8'
 
+
+
+export const FactRow = ({ term, children }) => (
+  <div className="grid grid-cols-[6rem_1fr] gap-3 py-2 border-t border-primary/10 dark:border-primary-dark/10 first:border-t-0">
+    <dt className="text-xs font-bold uppercase tracking-wide text-secondary pt-0.5">{term}</dt>
+    <dd className="m-0">{children}</dd>
+  </div>
+)
+
 <div className="max-w-6xl -mt-12">
 
 <div>
   <img
     src="https://res.cloudinary.com/dmukukwp6/image/upload/f_webp,q_auto/builder_collective_banner_experiment_7d225ace04.png"
-    alt="Builder collectives"
+    alt="PostHog community incubator"
     className="w-full h-36 sm:h-52 md:h-64 object-cover object-center rounded-lg"
   />
 </div>
@@ -25,99 +34,243 @@ export const fullBleed =
   <div className="flex items-end justify-between gap-4 -mt-12 sm:-mt-16 mb-4">
     <img
       src="https://res.cloudinary.com/dmukukwp6/image/upload/hacker_0b39c191ae.svg"
-      alt="Builder collective"
+      alt="Community incubator"
       className="size-36 sm:size-48 rounded-full border-4 border-light dark:border-dark bg-accent object-contain p-2"
     />
     <CallToAction to="#apply" type="primary" className="mb-2">Apply here</CallToAction>
   </div>
 
-  <h1 className="text-3xl md:text-4xl font-bold !mb-1">Start a builder collective</h1>
-  <p className="text-secondary !mt-0 !mb-4">Get your builder crew together. We've got your back.</p>
+  <h1 className="text-3xl md:text-4xl font-bold !mb-1">PostHog community incubator</h1>
+  <p className="text-secondary !mt-0 !mb-4">Three tracks, one thesis: back builders who ship.</p>
 
   <p className="text-lg !mb-3 max-w-2xl">
-    Do you and your builder friends want support from PostHog? Round up a crew, pick a spot, and start building together. We'll back your collective with a cash grant, merch, and hands-on support. Already running in cities around the globe, from <Link to="https://github.com/PostHog/requests-for-comments-public/issues/508">Córdoba (Argentina)</Link> to <Link to="https://github.com/PostHog/requests-for-comments-public/issues/498">Austin (Texas)</Link> and <Link to="https://github.com/PostHog/requests-for-comments-public/issues/516">Lisbon (Portugal)</Link>.
+    Whether you're gathering local builders for the first time, running with a crew that already ships together, or ready to go full-time for a sprint, we'll back you with a cash grant, merch, and a spotlight. Already running in cities around the globe, from <Link to="https://github.com/PostHog/requests-for-comments-public/issues/508">Córdoba (Argentina)</Link> to <Link to="https://github.com/PostHog/requests-for-comments-public/issues/498">Austin (Texas)</Link>, from <Link to="https://github.com/PostHog/requests-for-comments-public/issues/516">Tel Aviv</Link> to <Link to="https://github.com/PostHog/requests-for-comments-public/issues/516">Toronto </Link>.
   </p>
 
   <div className="flex flex-wrap gap-x-6 gap-y-1 text-[15px]">
-    <span><span className="font-bold text-primary">12+</span> <span className="text-secondary">collectives</span></span>
+    <span><span className="font-bold text-primary">3</span> <span className="text-secondary">tracks</span></span>
+    <span><span className="font-bold text-primary">12+</span> <span className="text-secondary">communities</span></span>
     <span><span className="font-bold text-primary">100+</span> <span className="text-secondary">builders</span></span>
-    <span><span className="font-bold text-primary">100+</span> <span className="text-secondary">sessions hosted</span></span>
-    <span><span className="font-bold text-primary">$800</span> <span className="text-secondary">grant per collective</span></span>
+    <span><span className="font-bold text-primary">$800+</span> <span className="text-secondary">grants</span></span>
   </div>
 </div>
 
 </div>
 
+<section className={`${fullBleed} my-14 md:my-20`}>
+  <div className="bg-accent py-12 md:py-16 px-4 @md/reader-content-container:px-6 @lg/reader-content-container:px-8">
+    <div className="max-w-6xl mx-auto">
+      <h2 className="text-2xl md:text-3xl font-bold !mt-0 !mb-2">Pick a track</h2>
+      <p className="text-secondary !mt-0 !mb-8 max-w-2xl">Every track embodies the same DNA, just different intensity. Complete one level and the next one unlocks.</p>
+      <div className="grid @lg/reader-content-container:grid-cols-[1fr_2.5rem_1fr_2.5rem_1fr] gap-4 items-stretch">
+        <a href="#builder-groups" className="group relative flex flex-col bg-accent rounded-lg border border-primary p-6 hover:-top-0.5 active:top-[.5px] hover:transition-all hover:border-primary !no-underline">
+          <h3 className="text-xl font-bold !mt-0 !mb-1 text-primary">Builder groups</h3>
+          <p className="!mb-4 text-secondary flex-1">Career builders with day jobs, gathered by one organizer. Recurring co-working, nights and weekends.</p>
+          <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm border-t border-primary pt-3">
+            <span className="font-bold text-primary">$800 grant</span>
+            <span className="text-secondary">4 sessions</span>
+          </div>
+        </a>
+        <div className="hidden @lg/reader-content-container:flex items-center justify-center text-secondary" aria-hidden="true">
+          <span className="text-2xl font-black">→</span>
+        </div>
+        <div className="flex @lg/reader-content-container:hidden items-center justify-center text-secondary" aria-hidden="true">
+          <span className="text-2xl font-black">↓</span>
+        </div>
+        <a href="#builder-collectives" className="group relative flex flex-col bg-accent rounded-lg border border-primary p-6 hover:-top-0.5 active:top-[.5px] hover:transition-all hover:border-primary !no-underline">
+          <h3 className="text-xl font-bold !mt-0 !mb-1 text-primary">Builder collectives</h3>
+          <p className="!mb-4 text-secondary flex-1">A named crew that already ships together as a lifestyle, looking for backing. Building together is the point.</p>
+          <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm border-t border-primary pt-3">
+            <span className="font-bold text-primary">$1,000 grant</span>
+            <span className="text-secondary">1 quarter</span>
+          </div>
+        </a>
+        <div className="hidden @lg/reader-content-container:flex items-center justify-center text-secondary" aria-hidden="true">
+          <span className="text-2xl font-black">→</span>
+        </div>
+        <div className="flex @lg/reader-content-container:hidden items-center justify-center text-secondary" aria-hidden="true">
+          <span className="text-2xl font-black">↓</span>
+        </div>
+        <a href="#hacker-houses" className="group relative flex flex-col bg-accent rounded-lg border border-primary p-6 hover:-top-0.5 active:top-[.5px] hover:transition-all hover:border-primary !no-underline">
+          <h3 className="text-xl font-bold !mt-0 !mb-1 text-primary">Hacker houses</h3>
+          <p className="!mb-4 text-secondary flex-1">A proven crew goes full-time on building for a fixed sprint. Graduates of the first two tracks apply here.</p>
+          <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm border-t border-primary pt-3">
+            <span className="font-bold text-primary">$1,000/week</span>
+            <span className="text-secondary">5–14 days</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <div className="my-14 md:my-20">
-  <h2 className="text-2xl md:text-3xl font-bold !mb-2">This could be you</h2>
-  <p className="text-secondary !mt-0 !mb-6">Builders are already gathering around the world. You'd be in good company.</p>
+  <h2 className="text-2xl md:text-3xl font-bold !mb-2">Every track, same rules</h2>
+  <p className="text-secondary !mt-0 !mb-6 max-w-2xl">The format is always <strong>build and ship</strong>. No slides, no surface-level networking.</p>
+  <div className="grid @sm/reader-content-container:grid-cols-2 @lg/reader-content-container:grid-cols-3 gap-4">
+    <div className="bg-accent rounded-lg p-5">
+      <h3 className="text-base font-bold !mt-0 !mb-1">Grants are discretionary</h3>
+      <p className="!mb-0 text-secondary text-[15px]">We don't audit receipts. We review your output.</p>
+    </div>
+    <div className="bg-accent rounded-lg p-5">
+      <h3 className="text-base font-bold !mt-0 !mb-1">Apply with proof</h3>
+      <p className="!mb-0 text-secondary text-[15px]">Applications include your LinkedIn, GitHub handle, and URLs of things you've shipped.</p>
+    </div>
+    <div className="bg-accent rounded-lg p-5">
+      <h3 className="text-base font-bold !mt-0 !mb-1">One grant at a time</h3>
+      <p className="!mb-0 text-secondary text-[15px]">One active grant per organizer per track. Do it well, then do the next thing.</p>
+    </div>
+    <div className="bg-accent rounded-lg p-5">
+      <h3 className="text-base font-bold !mt-0 !mb-1">Keep us posted</h3>
+      <p className="!mb-0 text-secondary text-[15px]">Organizers and leads share progress with us on GitHub and Discord.</p>
+    </div>
+    <div className="bg-accent rounded-lg p-5">
+      <h3 className="text-base font-bold !mt-0 !mb-1">Graduation path</h3>
+      <p className="!mb-0 text-secondary text-[15px]">Complete a builder group or a collective (or both) and you can apply for a hacker house.</p>
+    </div>
+    <div className="bg-accent rounded-lg p-5">
+      <h3 className="text-base font-bold !mt-0 !mb-1">What's in it for PostHog?</h3>
+      <p className="!mb-0 text-secondary text-[15px]">Builder communities with ambassadors, stories worth sharing, and future founders who build the way we do. Using PostHog is <em>not</em> a requirement.</p>
+    </div>
+  </div>
+</div>
+
+<section id="builder-groups" className="my-14 md:my-20 scroll-mt-24">
+  <p className="text-secondary text-sm !mb-2">Our original program</p>
+  <h2 className="text-2xl md:text-3xl font-bold !mt-0 !mb-2">Builder groups</h2>
+  <p className="text-lg text-secondary !mt-0 !mb-8 max-w-2xl">One organizer recruits the room. Attendees mostly don't know each other yet, until they start shipping side by side.</p>
+
+  <div className="grid @lg/reader-content-container:grid-cols-2 gap-8 items-start mb-8">
+    <dl className="m-0 bg-accent rounded-lg p-6">
+      <FactRow term="Who">Career engineers, PMs, designers, and founders — people with day jobs who build on nights and weekends.</FactRow>
+      <FactRow term="Makeup">1 organizer, 6+ attendees per session.</FactRow>
+      <FactRow term="Commitment">4 sessions, evenings or weekends.</FactRow>
+      <FactRow term="Support"><strong>$800 grant</strong>, merch, help attracting attendees, and help finding a venue.</FactRow>
+    </dl>
+    <img src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/taj_phl_builder_group_f00b7c9abd.jpg" alt="Builder group co-working in Philadelphia" className="rounded-lg object-cover h-full min-h-48" />
+  </div>
+
+  <h3 className="text-lg font-bold !mb-3">Criteria to qualify</h3>
+  <ol className="list-none p-0 m-0 space-y-2 mb-8 max-w-3xl">
+    <li className="flex gap-3"><span className="text-red font-bold">1</span><span>The organizer applies with a clear local vision and a personal reason to run the group.</span></li>
+    <li className="flex gap-3"><span className="text-red font-bold">2</span><span>The city has a 500k+ population or a recognizable tech-forward university.</span></li>
+    <li className="flex gap-3"><span className="text-red font-bold">3</span><span>Build + demo: everyone works on something, and some people show it.</span></li>
+    <li className="flex gap-3"><span className="text-red font-bold">4</span><span>A consistent time and venue plan before the grant is paid.</span></li>
+    <li className="flex gap-3"><span className="text-red font-bold">5</span><span>A Luma event for each session.</span></li>
+  </ol>
+
+  <div className="grid @md/reader-content-container:grid-cols-2 gap-4">
+    <div className="bg-accent rounded-r-lg p-5">
+      <h4 className="text-base font-bold !mt-0 !mb-1">Success looks like</h4>
+      <p className="!mb-0 text-secondary text-[15px]">The group runs 5+ sessions without us asking, and we spotlight it. Some PostHog usage (<em>not</em> a requirement).</p>
+    </div>
+    <div className="border border-primary/10 dark:border-primary-dark/10 rounded-lg p-5">
+      <h4 className="text-base font-bold !mt-0 !mb-1 text-secondary">Not for you if…</h4>
+      <p className="!mb-0 text-secondary text-[15px]">You're not hands-on, you're building a recruiting funnel, you organize one-off hackathons, or you're a "community manager" with a weak builder track record.</p>
+    </div>
+  </div>
+</section>
+
+<section id="builder-collectives" className="my-14 md:my-20 scroll-mt-24">
+  <p className="text-secondary text-sm !mb-2">For crews that already exist</p>
+  <h2 className="text-2xl md:text-3xl font-bold !mt-0 !mb-2">Builder collectives</h2>
+  <p className="text-lg text-secondary !mt-0 !mb-8 max-w-2xl">A group is an organizer recruiting strangers. A collective is friends who already ship together and are looking for backing.</p>
+
+  <div className="grid @lg/reader-content-container:grid-cols-2 gap-8 items-start mb-8">
+    <img src="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/austin_texas_4368805f1b.jpeg" alt="Builder collective crew in Austin" className="rounded-lg object-cover h-full min-h-48 order-2 @lg/reader-content-container:order-1" />
+    <dl className="m-0 bg-accent rounded-lg p-6 order-1 @lg/reader-content-container:order-2">
+      <FactRow term="Who">Crews building together as a lifestyle — often students, early-career engineers, indie hackers, and technical founders. What matters is track record, not age: the crew exists <em>before</em> the application. You have a name, or you should get one.</FactRow>
+      <FactRow term="Makeup">4+ core members, each with at least one project that's shipping and verifiably evolving. Show us the URL.</FactRow>
+      <FactRow term="Commitment">One quarter. Weekly or biweekly sessions, plus a public footprint: build in public and make the work visible.</FactRow>
+      <FactRow term="Support"><strong>$1,000 grant</strong> + merch. We won't help you organize or find a venue, and no Luma is necessary.</FactRow>
+    </dl>
+  </div>
+
+  <h3 className="text-lg font-bold !mb-3">Criteria to qualify</h3>
+  <ol className="list-none p-0 m-0 space-y-2 mb-8 max-w-3xl">
+    <li className="flex gap-3"><span className="text-blue font-bold">1</span><span>A named crew with 4+ core members and a track record of shipping, individually or together — URLs for each project, plus GitHub and LinkedIn.</span></li>
+    <li className="flex gap-3"><span className="text-blue font-bold">2</span><span>A regular cadence that's already happening or about to start.</span></li>
+    <li className="flex gap-3"><span className="text-blue font-bold">3</span><span>A public presence: demos, hackathons, projects, or events hosted.</span></li>
+    <li className="flex gap-3"><span className="text-blue font-bold">4</span><span>At least one named lead who owns the relationship with us.</span></li>
+  </ol>
+
+  <div className="bg-blue/10 border border-blue/30 rounded-lg p-5 mb-8 max-w-3xl">
+    <h4 className="text-base font-bold !mt-0 !mb-1">Earn more backing</h4>
+    <p className="!mb-0 text-secondary text-[15px]">Host a PostHog-themed event — a meetup or demo night — and we'll add financial support for it, plus spotlights in PostHog community channels and social posts from the main account. Our ask in return: build live, share a quarterly recap, and host one demo night.</p>
+  </div>
+
+  <div className="grid @md/reader-content-container:grid-cols-2 gap-4">
+    <div className="bg-accent rounded-r-lg p-5">
+      <h4 className="text-base font-bold !mt-0 !mb-1">Success looks like</h4>
+      <p className="!mb-0 text-secondary text-[15px]">Growing visibility, shipped projects, a great demo night, other builders asking to join, and posts about the collective without us asking. Some PostHog usage (<em>not</em> a requirement).</p>
+    </div>
+    <div className="border border-primary/10 dark:border-primary-dark/10 rounded-lg p-5">
+      <h4 className="text-base font-bold !mt-0 !mb-1 text-secondary">Not for you if…</h4>
+      <p className="!mb-0 text-secondary text-[15px]">You're a brand-new crew with no shipping track record (start a builder group instead), an audience-first content farm, or a crew that's actually a startup or company together.</p>
+    </div>
+  </div>
+</section>
+
+<section id="hacker-houses" className="my-14 md:my-20 scroll-mt-24">
+  <p className="text-secondary text-sm !mb-2">Graduates only</p>
+  <h2 className="text-2xl md:text-3xl font-bold !mt-0 !mb-2">Hacker houses</h2>
+  <p className="text-lg text-secondary !mt-0 !mb-8 max-w-2xl">A curated cohort goes full-time on building for a fixed sprint. Builder groups and collectives graduate here.</p>
+
+  <div className="grid @lg/reader-content-container:grid-cols-2 gap-8 items-start mb-8">
+    <dl className="m-0 bg-accent rounded-lg p-6">
+      <FactRow term="Who">A proven crew, from a builder group or collective, going all-in for the duration.</FactRow>
+      <FactRow term="Makeup">4–10 builders, all 18+, with one named lead who is accountable for the house.</FactRow>
+      <FactRow term="Commitment">5–14 days. A defined start date, a defined end date, and a demo day at the end. Not a lease.</FactRow>
+      <FactRow term="Support"><strong>$1,000 per week</strong> for lodging and food — deliberately not enough to fund the whole experience, because builders with skin in the game would do it anyway. Plus generous merch for every participant (hoodies, backpacks), social promotion and spotlight, and — if geography allows — a visit from a PostHog team member, maybe a dinner or an office-hours session.</FactRow>
+    </dl>
+    <img src="https://res.cloudinary.com/dmukukwp6/image/upload/cambridge_9a4e27f42e.png" alt="Builders working together" className="rounded-lg object-cover h-full min-h-48" />
+  </div>
+
+  <h3 className="text-lg font-bold !mb-3">Criteria to qualify</h3>
+  <ol className="list-none p-0 m-0 space-y-2 mb-8 max-w-3xl">
+    <li className="flex gap-3"><span className="text-teal font-bold">1</span><span>The lead has already run a PostHog builder group or builder collective. No cold applications for vacations on our dime.</span></li>
+    <li className="flex gap-3"><span className="text-teal font-bold">2</span><span>Every participant submits a URL for their project.</span></li>
+    <li className="flex gap-3"><span className="text-teal font-bold">3</span><span>A locked roster before we approve. No open spots.</span></li>
+    <li className="flex gap-3"><span className="text-teal font-bold">4</span><span>Full-time commitment to the sprint as everyone's primary activity for its duration — not a co-working retreat with day jobs. Take PTO if you have one.</span></li>
+    <li className="flex gap-3"><span className="text-teal font-bold">5</span><span>A plan up front: the Airbnb, dates, a rough daily structure, and a demo day date.</span></li>
+    <li className="flex gap-3"><span className="text-teal font-bold">6</span><span>Output: a demo day that PostHog team members attend remotely.</span></li>
+  </ol>
+
+  <div className="border-2 border-teal rounded-lg p-6 mb-8 max-w-3xl">
+    <h4 className="text-base font-bold !mt-0 !mb-3 uppercase tracking-wide">House rules</h4>
+    <ul className="list-disc pl-5 m-0 space-y-2 text-[15px]">
+      <li><strong>18+, no exceptions.</strong></li>
+      <li>The Airbnb booking is in the organizer's name. PostHog only provides the grant and carries no liability during the hacker house.</li>
+      <li>A code of conduct applies for the full sprint, and the lead is accountable. Not a party house.</li>
+      <li>One hacker house per builder crew.</li>
+    </ul>
+  </div>
+
+  <div className="grid @md/reader-content-container:grid-cols-2 gap-4">
+    <div className="bg-accent rounded-lg p-5">
+      <h4 className="text-base font-bold !mt-0 !mb-1">Success looks like</h4>
+      <p className="!mb-0 text-secondary text-[15px]">Shipped products and consistent social posts. Some PostHog usage (<em>not</em> a requirement).</p>
+    </div>
+    <div className="border border-primary/10 dark:border-primary-dark/10 rounded-lg p-5">
+      <h4 className="text-base font-bold !mt-0 !mb-1 text-secondary">Not for you if…</h4>
+      <p className="!mb-0 text-secondary text-[15px]">It's a vacation with laptops, an existing company's offsite, or anything open-ended.</p>
+    </div>
+  </div>
+</section>
+
+<div className="my-14 md:my-20">
+  <h2 className="text-2xl md:text-3xl font-bold !mb-2">Already running around the world</h2>
+  <p className="text-secondary !mt-0 !mb-6">Builders are gathering in cities across the globe. You'd be in good company.</p>
   <div className="w-full">
     <CollectiveCarousel />
   </div>
 </div>
 
-<div id="how-it-works" className="my-14 md:my-20 scroll-mt-24">
-  <h2 className="text-2xl md:text-3xl font-bold !mb-6">What we'll back you with</h2>
-  <div className="grid sm:grid-cols-3 gap-4">
-    <div className="bg-accent rounded-lg p-6">
-      <h3 className="text-lg font-bold !mt-0 !mb-2">$800 cash grant</h3>
-      <p className="!mb-0 text-secondary">Yours to spend however you like. Food, coffee, or an activity to bring the crew together. We'll send merch too.</p>
-    </div>
-    <div className="bg-accent rounded-lg p-6">
-      <h3 className="text-lg font-bold !mt-0 !mb-2">Help growing the crew</h3>
-      <p className="!mb-0 text-secondary">The people you gather are the spark. We'll help you find more of the builders you'd be glad to ship alongside.</p>
-    </div>
-    <div className="bg-accent rounded-lg p-6">
-      <h3 className="text-lg font-bold !mt-0 !mb-2">Help finding a space</h3>
-      <p className="!mb-0 text-secondary">We've worked out of coffee shops and co-working spaces for years. We can help you find a spot for your group.</p>
-    </div>
-  </div>
-</div>
-
-<div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center my-14 md:my-20">
-  <div className="relative order-2 md:order-1">
-    <div className="border-8 border-white shadow-xl rounded overflow-hidden relative rotate-1">
-      <img
-        src="https://res.cloudinary.com/dmukukwp6/image/upload/cambridge_9a4e27f42e"
-        alt="A builder collective in action"
-        className="w-full"
-      />
-      <div className="absolute bottom-0 left-0 w-full text-white bg-gradient-to-b from-black/0 to-black/60 p-3 pt-10 text-sm">
-        This could be you, building alongside us
-      </div>
-    </div>
-  </div>
-  <div className="order-1 md:order-2">
-    <h2 className="text-2xl md:text-3xl font-bold !mb-6">How a collective works</h2>
-    <ul className="space-y-4 list-none p-0 m-0">
-      <li className="flex gap-3">
-        <span className="text-red font-bold leading-tight">01</span>
-        <span><strong>Round up your crew.</strong> Pull together at least 6 builders to co-work and ship across 4 sessions. We give the initial push; you take it from there.</span>
-      </li>
-      <li className="flex gap-3">
-        <span className="text-red font-bold leading-tight">02</span>
-        <span><strong>Find your rhythm.</strong> Pick a time that works for the crew, maybe evenings or weekends. For format, we suggest two key ingredients: build and demo.</span>
-      </li>
-      <li className="flex gap-3">
-        <span className="text-red font-bold leading-tight">03</span>
-        <span><strong>Keep us posted.</strong> Tell us how it's going along the way. As your collective grows, we'll put it in the spotlight.</span>
-      </li>
-    </ul>
-  </div>
-</div>
-
-<div className="my-14 md:my-20 max-w-3xl">
-  <h2 className="text-2xl md:text-3xl font-bold !mb-4">Who starts a collective</h2>
-  <p className="text-lg text-secondary !mb-0">
-    Collectives start with builders who'd rather make things together than alone. Founders, engineers, designers, product people. You don't need a big following or event experience, just a crew you'd want to build with and a bias for action. If this sounds like you, let's talk.
-  </p>
-</div>
-
 <section id="apply" className={`${fullBleed} my-14 md:my-20 scroll-mt-24`}>
   <div className="bg-accent py-12 md:py-16 px-4">
     <div className="max-w-screen-md mx-auto mb-8">
-      <h2 className="text-2xl md:text-3xl font-bold !mb-2">Start your collective</h2>
-      <p className="text-secondary !mb-0">Tell us about you and your city. What is the builder scene like?</p>
+      <h2 className="text-2xl md:text-3xl font-bold !mb-2">Apply to the incubator</h2>
+      <p className="text-secondary !mb-0">Pick your track and show us what you've shipped. We review output, not résumés.</p>
     </div>
     <div className="max-w-screen-md mx-auto px-4">
       <CommunityIncubatorForm />
@@ -131,13 +284,28 @@ export const fullBleed =
   <div className="space-y-1">
 
 <details>
-<summary>Who can start a collective?</summary>
-<p>Anyone who really wants to build alongside other people. You're plugged into your local scene and you operate with a bias for action.</p>
+<summary>Which track should I apply for?</summary>
+<p>If you have a day job and want to gather local builders who don't know each other yet, start a <strong>builder group</strong>. If you're part of a crew that already ships together, apply as a <strong>builder collective</strong>. If you've completed either of those and want to go full-time for a sprint, apply for a <strong>hacker house</strong>.</p>
 </details>
 
 <details>
-<summary>Who can join a collective?</summary>
-<p>Individuals or small teams who are already building products, or want to.</p>
+<summary>Can I run more than one at a time?</summary>
+<p>One active grant per organizer per track at a time. Finish what you start, then apply for the next thing.</p>
+</details>
+
+<details>
+<summary>How do I qualify for a hacker house?</summary>
+<p>Complete a builder group or a builder collective first. There are no cold applications for hacker houses — the lead needs a track record with us.</p>
+</details>
+
+<details>
+<summary>Do you audit how I spend the grant?</summary>
+<p>No. Grants are discretionary — spend on food, coffee, a venue, or whatever brings the crew together. We review your output, not your receipts.</p>
+</details>
+
+<details>
+<summary>Do I have to use PostHog?</summary>
+<p>No. We're excited about helping bootstrap builder communities around the world — that's what we're in it for. No one needs to use PostHog to be part of this.</p>
 </details>
 
 <details>
@@ -146,18 +314,8 @@ export const fullBleed =
 </details>
 
 <details>
-<summary>What happens after 4 sessions?</summary>
-<p>You've bootstrapped a collective, so keep it going. If it didn't get the traction to continue, let's learn what happened and iterate on the next one.</p>
-</details>
-
-<details>
-<summary>What level of support do I get?</summary>
-<p>We're looking for crews who can drive this with limited support from us. Space? Members? Promotion? That's up to you. Still, we'll be here to help along the way, and existing collectives can serve as inspiration.</p>
-</details>
-
-<details>
-<summary>What's in it for PostHog?</summary>
-<p>We're excited about helping bootstrap collectives of builders around the world. That's what we're in it for. No one needs to use PostHog to be part of this.</p>
+<summary>What happens when the sessions end?</summary>
+<p>Keep going — the grant is the initial push, not the ceiling. Groups that keep running get spotlighted, collectives that host demo nights get extra backing, and both become eligible to apply for a hacker house.</p>
 </details>
 
   </div>
