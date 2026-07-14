@@ -205,7 +205,12 @@ export interface WallpaperGlow {
 // listed here falls back to keyboard-garden (see getWallpaperGlow).
 export const WALLPAPER_GLOW: Record<string, WallpaperGlow> = {
     'keyboard-garden': { light: '#53FFCB', dark: '#49BAC5' },
-    'startup-monopoly': { light: '#f00', dark: '#00f' },
+    // Fire breath (light) / night-sky purple from the dark gradient (dark)
+    hogzilla: { light: '#FF9528', dark: '#9370F0' },
+    // Board green (light) / cool periwinkle from the dark scene (dark)
+    'startup-monopoly': { light: '#37B878', dark: '#96B4F0' },
+    // Warm carpet coral (light) / party purple from the dark carpet (dark)
+    'office-party': { light: '#FF6E54', dark: '#D084F8' },
 }
 
 export const DEFAULT_WALLPAPER_GLOW: WallpaperGlow = WALLPAPER_GLOW['keyboard-garden']

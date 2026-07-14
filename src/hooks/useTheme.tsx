@@ -32,6 +32,8 @@ export const themeOptions: ThemeOption[] = [
                 light: 'https://res.cloudinary.com/dmukukwp6/image/upload/hogzilla_light_1b27bcadcf.png',
                 dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/hogzilla_dark_7f240e0422.png',
             },
+            // Semi-transparent scrim behind labels — Hogzilla's busy artwork washes out plain white text.
+            classes: 'wallpaper-hogzilla:bg-black/50 dark:wallpaper-hogzilla:bg-black/60',
         },
     },
     {
@@ -42,7 +44,7 @@ export const themeOptions: ThemeOption[] = [
                 light: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_startup_monopoly_light_b38ca0c4e5.png',
                 dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_startup_monopoly_dark_699c375497.png',
             },
-            classes: 'wallpaper-startup-monopoly:bg-[#FEFCED] dark:wallpaper-startup-monopoly:bg-[#1d1f27]',
+            classes: 'wallpaper-startup-monopoly:bg-black/50 dark:wallpaper-startup-monopoly:bg-black/60',
         },
     },
     {
