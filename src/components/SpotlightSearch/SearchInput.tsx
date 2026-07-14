@@ -75,7 +75,7 @@ export default function SearchInput({
                 className="p-0 w-full text-lg bg-primary border-0 outline-none text-primary placeholder:text-secondary focus:ring-0"
             />
             {!value && !filterMenuOpen ? (
-                <KeyboardShortcut text="esc" size="xs" className="shrink-0" />
+                <KeyboardShortcut text="esc" size="xs" className="hidden shrink-0 @sm:inline" />
             ) : (
                 <button
                     onClick={onToggleFilterMenu}

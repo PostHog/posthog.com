@@ -59,6 +59,8 @@ The overlay exposes dialog and combobox semantics, keeps focus inside the open d
 ## Styling notes
 
 - The panel and its nested surfaces use opaque project color tokens that switch automatically with light and dark mode.
+- Selected rows use a subtle translucent yellow accent over the panel's opaque surface.
 - The panel is an `@container`; result URLs hide below `@md` as the window narrows.
+- Keyboard hints are hidden below `@sm` to keep the mobile layout uncluttered.
 - De-emphasized text uses `text-secondary` for consistent readable contrast in both color modes.
 - There is no backdrop dim, matching macOS Spotlight.
