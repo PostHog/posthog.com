@@ -9,30 +9,23 @@ import Link from 'components/Link'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { Accordion } from 'components/RadixUI/Accordion'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
-import { ChoppyReveal } from 'components/Code/ChoppyReveal'
 import {
     StickerBulb,
     StickerELearning,
     StickerMicroscope,
-    StickerMindMap,
     StickerRun,
-    StickerTerminal,
     StickerUsers,
     StickerZZZ,
 } from 'components/Stickers/Stickers'
-import usePostHog from 'hooks/usePostHog'
 import {
     IconArrowRight,
     IconBrain,
     IconChevronLeft,
     IconChevronRight,
-    IconFlask,
     IconGlobe,
     IconMap,
     IconNewspaper,
     IconPlayFilled,
-    IconPullRequest,
-    IconShieldLock,
 } from '@posthog/icons'
 import { useToast } from '../context/Toast'
 import { useApp } from '../context/App'
@@ -71,41 +64,10 @@ function SectionHeader({
 }
 
 // ─────────────────────────────────────────────
-// Hero (H1 is a live PostHog experiment: research-page-h1)
+// Hero
 // ─────────────────────────────────────────────
 
-const H1_TEST = "We're training models on product data to build software that fixes itself"
-
-function ControlHeadline() {
-    return (
-        <>
-            Our research is{' '}
-            <RoughAnnotation type="highlight" color="rgba(48, 164, 108, 0.2)" strokeWidth={1} padding={2} delay={300}>
-                open-source
-            </RoughAnnotation>
-            ,{' '}
-            <RoughAnnotation type="highlight" color="rgba(182, 42, 217, 0.15)" strokeWidth={1} padding={2} delay={700}>
-                responsible
-            </RoughAnnotation>
-            , and{' '}
-            <RoughAnnotation type="underline" color="#F54E00" strokeWidth={2} delay={1100} multiline>
-                helps you build better software
-            </RoughAnnotation>
-        </>
-    )
-}
-
 function HeroSection({ teamCrestUrl }: { teamCrestUrl?: string }) {
-    const posthog = usePostHog()
-    const [variant, setVariant] = useState<'control' | 'test'>('control')
-
-    useEffect(() => {
-        const ph = posthog as any
-        ph?.onFeatureFlags?.(() => {
-            setVariant(ph?.getFeatureFlag?.('research-page-h1') === 'test' ? 'test' : 'control')
-        })
-    }, [posthog])
-
     return (
         <section className="mt-2 mb-6 @4xl/editor:mb-10 tracking-[-0.0125em] w-full">
             <div className="flex items-end gap-6 mb-6">
@@ -118,11 +80,20 @@ function HeroSection({ teamCrestUrl }: { teamCrestUrl?: string }) {
                     </div>
 
                     <h1 className="text-xl @xl:text-3xl font-bold leading-tight !mt-0 m-0">
-                        {variant === 'test' ? (
-                            <ChoppyReveal wordDelay={45}>{H1_TEST}</ChoppyReveal>
-                        ) : (
-                            <ControlHeadline />
-                        )}
+                        Training{' '}
+                        <RoughAnnotation
+                            type="highlight"
+                            color="rgba(48, 164, 108, 0.2)"
+                            strokeWidth={1}
+                            padding={2}
+                            delay={300}
+                        >
+                            user behavior foundation models
+                        </RoughAnnotation>{' '}
+                        and{' '}
+                        <RoughAnnotation type="underline" color="#F54E00" strokeWidth={2} delay={800} multiline>
+                            transparently sharing the research we do
+                        </RoughAnnotation>
                     </h1>
                 </div>
 
@@ -145,61 +116,17 @@ function HeroSection({ teamCrestUrl }: { teamCrestUrl?: string }) {
             </div>
 
             <div className="w-full space-y-3">
-                <div className="flex items-start gap-2 border border-primary rounded bg-accent px-3 py-2 mb-6">
-                    <IconFlask className="size-5 text-purple shrink-0 mt-0.5" />
-                    <p className="text-sm text-secondary m-0">
-                        This headline is a live A/B test – you're seeing variant{' '}
-                        <strong className="text-primary">{variant === 'control' ? 'A' : 'B'}</strong>, and half of
-                        visitors see the other one. We're running it with{' '}
-                        <Link to="/experiments" state={{ newWindow: true }} className="underline">
-                            PostHog Experiments
-                        </Link>{' '}
-                        on our own research page.
-                    </p>
-                </div>
-
                 <p>
-                    PostHog holds one of the richest behavioral datasets anywhere: how real software actually gets used,
-                    across events, sessions, and replays.{' '}
-                    <RoughAnnotation
-                        type="highlight"
-                        color="rgba(48, 164, 108, 0.2)"
-                        strokeWidth={1}
-                        padding={2}
-                        delay={300}
-                    >
-                        Nobody has trained a foundation model on data like this.
-                    </RoughAnnotation>{' '}
-                    We're doing it – so PostHog can find and fix problems in your product while you sleep.
-                    <sup className="font-semibold text-secondary">[1]</sup>
+                    PostHog holds one of the richest behavioral datasets anywhere: events, sessions, and replays of how
+                    real software actually gets used. Nobody has trained a foundation model on data like this. We are –
+                    starting with an encoder for the raw stream behind session replay, and building toward models that
+                    understand and predict user behavior.
                 </p>
                 <p>
-                    This isn't speculative: agents already create the majority of new dashboards in PostHog, and MCP
-                    usage roughly doubles every month.
-                    <sup className="font-semibold text-secondary">[1]</sup> The models come next.
-                </p>
-                <p>
-                    Useful research shouldn't happen behind closed doors: our code is open source where possible, we
-                    publish findings as we go, and the work is headed to arXiv and major ML conferences. Anything we
-                    release at a cost is based on our{' '}
-                    <Link to="/handbook/engineering/feature-pricing" state={{ newWindow: true }} className="underline">
-                        pricing principles
-                    </Link>
-                    .
-                </p>
-                <p className="text-sm text-secondary m-0">
-                    <IconShieldLock className="size-4 text-green inline-block align-text-bottom mr-1" />
-                    EU cloud opted out by default · anonymized before training · opt out anytime –{' '}
-                    <Link to="#faq" className="underline">
-                        details in the FAQ
-                    </Link>
-                </p>
-                <p className="text-xs text-secondary font-mono border-t border-primary pt-2 mt-4">
-                    [1] Hawkins, J. (2026).{' '}
-                    <Link to="/blog/posthogs-next-chapter" state={{ newWindow: true }} className="underline">
-                        "PostHog's next chapter."
-                    </Link>{' '}
-                    <em>posthog.com</em>, May 2026.
+                    Some of this work is genuinely novel, extending earlier research with techniques like a multi-axis
+                    RoPE built on additive Euler angles. And when a stage of the work is done, we share it: final
+                    architectures go to public repos, weights get released, and papers on the training process and what
+                    we learned go to arXiv and major ML conferences.
                 </p>
             </div>
         </section>
@@ -394,87 +321,35 @@ function PublicationsSection() {
 // Research roadmap
 // ─────────────────────────────────────────────
 
-type RoadmapStatus = 'in progress' | 'up next' | 'help wanted'
-
-const STATUS_STYLES: Record<RoadmapStatus, string> = {
-    'in progress': 'border-green text-green',
-    'up next': 'border-primary text-secondary',
-    'help wanted': 'border-red text-red',
-}
-
-const ROADMAP_ITEMS: { title: string; description: string; outcome: string; status: RoadmapStatus }[] = [
+const ROADMAP_ITEMS: { title: string; description: string }[] = [
     {
-        title: 'Data labeling suite',
+        title: 'Training a Replay Encoder model',
         description:
-            'Tooling to label anonymized product data, so models learn what healthy and broken user sessions actually look like.',
-        outcome: 'Models that recognize broken sessions',
-        status: 'in progress',
+            'A foundation model pretrained on the raw event stream behind session replay, using novel techniques like a multi-axis RoPE built on additive Euler angles. The labeling suite, replay text renderer, and data prep and sampling pipelines are all components of this run.',
     },
     {
-        title: 'Session replay text renderer',
+        title: 'Training a replay vision agent',
         description:
-            'Rendering the DOM data behind replays as text a model can read, making replay analysis tractable at scale.',
-        outcome: 'AI that watches replays at scale',
-        status: 'in progress',
+            'An agent that reads a session the way a human watching the replay would – what the user saw, what they tried, and where it went wrong.',
     },
     {
-        title: 'Write data prep pipeline',
+        title: 'Training a predictive user behavior model',
         description:
-            'Anonymizing and normalizing opted-in data before any of it reaches training. The least glamorous step, and the one we refuse to get wrong.',
-        outcome: 'Training never sees identifiable data',
-        status: 'in progress',
+            'Modeling what users do next from behavioral sequences, so user behavior can be predicted and simulated rather than only observed.',
     },
     {
-        title: 'Build the sampling pipeline',
+        title: 'Tuning a self-driving model',
         description:
-            'Selecting sessions and events that reflect real product usage, so training data quality matches production reality.',
-        outcome: 'Models tuned to real usage, not noise',
-        status: 'up next',
-    },
-    {
-        title: 'Train the Replay encoder model',
-        description:
-            'A foundation model pretrained on the raw data behind session replay, using novel techniques like a multi-axis RoPE built on additive Euler angles.',
-        outcome: 'Replays triaged automatically',
-        status: 'up next',
-    },
-    {
-        title: 'Train the end-to-end agent',
-        description:
-            'Agents that predict and simulate user behavior, catch problems before you ship, and propose the fix rather than a dashboard.',
-        outcome: 'Problems caught before users find them',
-        status: 'help wanted',
-    },
-    {
-        title: 'Build the model observability suite',
-        description: 'Using our own LLM analytics to trace, evaluate, and debug every model we train.',
-        outcome: 'You can inspect how our models behave',
-        status: 'in progress',
-    },
-    {
-        title: 'Build an eval dataset',
-        description: 'A benchmark of real product problems, so progress is measurable across every model iteration.',
-        outcome: 'Provable accuracy before anything ships',
-        status: 'in progress',
+            'Tuning models to run the loop end to end: observe real product usage, diagnose what is broken, and act on it. Evaluated against a benchmark of real product problems.',
     },
 ]
 
-function StatusStamp({ status }: { status: RoadmapStatus }) {
-    const base = `inline-block shrink-0 whitespace-nowrap border-2 rounded px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest bg-accent ${STATUS_STYLES[status]}`
-
-    if (status === 'help wanted') {
-        return (
-            <Link
-                to="/careers/ai-research-engineer"
-                state={{ newWindow: true }}
-                className={`${base} no-underline transition-transform duration-150 hover:scale-110`}
-                title="We're hiring for this"
-            >
-                Help wanted
-            </Link>
-        )
-    }
-    return <span className={base}>{status}</span>
+function StatusStamp() {
+    return (
+        <span className="inline-block shrink-0 whitespace-nowrap border-2 border-green rounded px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest bg-accent text-green">
+            In progress
+        </span>
+    )
 }
 
 function RoadmapSection() {
@@ -482,11 +357,11 @@ function RoadmapSection() {
         <section id="pipeline" className="scroll-mt-16 mb-12 px-4 @xl:px-8">
             <SectionHeader
                 sticker={StickerMicroscope}
-                kicker="The pipeline"
+                kicker="The research"
                 title="What we're researching right now"
-                subtitle="The team's current pipeline, in rough order. Each stage of pretraining breaks new ground, and each will produce papers and technical reports."
+                subtitle="Exploring user behavior understanding models, in four tracks. Data labeling, prep, and sampling pipelines and eval datasets are components of these goals rather than separate tracks – and every stage will produce papers and technical reports."
             />
-            <ul className="m-0 p-0 list-none divide-y divide-primary">
+            <ul className="m-0 p-0 list-none divide-y divide-primary mb-6">
                 {ROADMAP_ITEMS.map((item, index) => (
                     <li key={item.title} className="py-5">
                         <div className="flex gap-4">
@@ -496,66 +371,19 @@ function RoadmapSection() {
                             <div className="min-w-0 flex-1">
                                 <div className="grid grid-cols-[1fr_auto] items-start gap-x-3 mb-1">
                                     <h3 className="text-base font-bold m-0">{item.title}</h3>
-                                    <StatusStamp status={item.status} />
+                                    <StatusStamp />
                                 </div>
                                 <p className="text-sm text-secondary m-0 leading-relaxed">{item.description}</p>
-                                <p className="text-xs text-secondary m-0 mt-2">
-                                    <span className="font-semibold text-green">In practice:</span> {item.outcome}
-                                </p>
                             </div>
                         </div>
                     </li>
                 ))}
             </ul>
-        </section>
-    )
-}
-
-// ─────────────────────────────────────────────
-// Open problems (technical depth + recruiting)
-// ─────────────────────────────────────────────
-
-const OPEN_PROBLEMS: { title: string; body: string }[] = [
-    {
-        title: 'Positional embeddings for session data',
-        body: 'Session data isn\'t a flat token sequence: it has time, DOM depth, and user-action order as separate axes, and standard rotary embeddings collapse them. We\'re extending RoPE to multiple axes using additive Euler angles, so the model keeps all three notions of "position" without blowing up the attention pattern.',
-    },
-    {
-        title: 'Making replays legible to models',
-        body: 'A session replay is a stream of DOM mutations – far too large and too structural to feed to a model directly. The open question is a rendering that preserves what matters (layout, interaction targets, state changes) at a token budget that makes training on millions of sessions economical.',
-    },
-    {
-        title: 'Evaluating agents that change what they measure',
-        body: "An agent that ships fixes alters the product it's being evaluated on, so static benchmarks go stale immediately. We're building an eval dataset from real product problems, and working out how to score models against a moving target without fooling ourselves.",
-    },
-]
-
-function OpenProblemsSection() {
-    return (
-        <section id="problems" className="scroll-mt-16 mb-12 px-4 @xl:px-8">
-            <SectionHeader
-                sticker={StickerMindMap}
-                kicker="Open problems"
-                title="Problems we haven't solved yet"
-                subtitle="The hardest parts of the pipeline, stated plainly. If one of these nerd-snipes you, that's the idea."
-            />
-            <ul className="m-0 p-0 list-none divide-y divide-primary mb-6">
-                {OPEN_PROBLEMS.map(({ title, body }, index) => (
-                    <li
-                        key={title}
-                        className={index === 0 ? 'pb-4' : index === OPEN_PROBLEMS.length - 1 ? 'pt-4' : 'py-4'}
-                    >
-                        <h3 className="text-base font-bold m-0">{title}</h3>
-                        <p className="text-sm text-secondary m-0 mt-1 leading-relaxed">{body}</p>
-                    </li>
-                ))}
-            </ul>
 
             <div className="border border-primary rounded bg-accent p-4">
-                <p className="font-semibold m-0 mb-1">Want to own one of these?</p>
+                <p className="font-semibold m-0 mb-1">We're hiring AI researchers to contribute to this work</p>
                 <p className="text-sm text-secondary m-0 mb-3">
-                    We're hiring researchers to take these problems from whiteboard to arXiv, with the dataset, compute,
-                    and freedom to publish.
+                    Take these models from whiteboard to arXiv, with the dataset, compute, and freedom to publish.
                 </p>
                 <div className="flex flex-wrap items-center gap-3">
                     <OSButton
@@ -576,79 +404,6 @@ function OpenProblemsSection() {
                     </Link>
                 </div>
             </div>
-        </section>
-    )
-}
-
-// ─────────────────────────────────────────────
-// Fresh from the lab (merged PRs, sourced at build time)
-// ─────────────────────────────────────────────
-
-type MergedPR = {
-    title: string
-    url: string
-    repo: string
-    author: string
-    mergedAt?: string | null
-}
-
-function ShippedSection({ prs }: { prs: MergedPR[] }) {
-    return (
-        <section id="shipped" className="scroll-mt-16 mb-12 px-4 @xl:px-8">
-            <SectionHeader
-                sticker={StickerTerminal}
-                kicker="From GitHub"
-                title="Fresh from the lab"
-                subtitle="Recently merged feature work from the research team."
-            />
-
-            <div className="border border-primary rounded overflow-hidden mb-6 shadow-lg">
-                <div className="flex items-center gap-1.5 px-3 py-2 bg-accent border-b border-primary">
-                    <span className="size-2.5 rounded-full bg-red" />
-                    <span className="size-2.5 rounded-full bg-yellow" />
-                    <span className="size-2.5 rounded-full bg-green" />
-                    <span className="ml-2 text-xs font-mono text-secondary truncate">
-                        gh search prs --merged -- org:posthog team:ai-research
-                    </span>
-                </div>
-                {prs.length > 0 ? (
-                    <div className="bg-primary">
-                        {prs.map((pr) => (
-                            <Link
-                                key={pr.url}
-                                to={pr.url}
-                                externalNoIcon
-                                className="group border-t border-primary first:border-t-0 px-4 py-2.5 flex flex-col @md:flex-row @md:items-center gap-1 @md:gap-2 no-underline text-primary transition-colors duration-150 hover:bg-accent"
-                            >
-                                <span className="inline-flex items-center gap-1.5 shrink-0">
-                                    <IconPullRequest className="size-4 text-purple shrink-0" />
-                                    <span className="text-xs font-mono text-secondary truncate">{pr.repo}</span>
-                                </span>
-                                <span className="flex-1 font-mono text-sm group-hover:underline truncate">
-                                    {pr.title}
-                                </span>
-                                <span className="text-xs font-mono text-secondary shrink-0">
-                                    @{pr.author}
-                                    {pr.mergedAt ? ` · ${dayjs(pr.mergedAt).format('MMM D')}` : ''}
-                                </span>
-                            </Link>
-                        ))}
-                        <div className="border-t border-primary px-4 py-2 text-xs font-mono text-secondary">
-                            <span className="animate-pulse">▋</span> agents still working…
-                        </div>
-                    </div>
-                ) : (
-                    <div className="bg-primary p-6 text-center">
-                        <IconPullRequest className="size-8 text-muted mx-auto mb-2" />
-                        <p className="font-semibold font-mono text-sm m-0 mb-1">$ no recent merged PRs to show</p>
-                        <p className="text-sm text-secondary m-0">Browse the team's work directly on GitHub.</p>
-                    </div>
-                )}
-            </div>
-
-            <OSButton asLink to="https://github.com/PostHog" external size="md">
-                Browse PostHog on GitHub
-            </OSButton>
         </section>
     )
 }
@@ -970,7 +725,12 @@ function PeopleSection({ teamMembers, posts }: { teamMembers: SqueakProfileField
             <ul className="not-prose list-none mt-0 mx-0 p-0 flex flex-col @xs:grid grid-cols-2 @2xl:grid-cols-3 gap-4 @md:gap-x-6 gap-y-12 mt-14">
                 {everyone.map((member) => (
                     <li key={member.squeakId}>
-                        <TeamMember {...member} isTeamLead={(member.leadTeams?.data?.length ?? 0) > 0} />
+                        <TeamMember
+                            {...member}
+                            isTeamLead={
+                                member.leadTeams?.data?.some((team) => team.attributes?.name === 'AI Research') ?? false
+                            }
+                        />
                     </li>
                 ))}
             </ul>
@@ -1130,48 +890,32 @@ function EventsSection() {
 
 const FAQ_ITEMS = [
     {
-        trigger: 'Do you train models and do research using my data?',
-        content: (
-            <div className="space-y-2">
-                <p>
-                    Only with the guardrails we published up front: users on our EU cloud are opted out of model
-                    training by default, as is anyone with an agreement that prevents training (BAA, MSA, or similar).
-                    Other US cloud users are opted in by default. Everything is anonymized before training, we train
-                    in-house, and nothing goes to third-party model providers.
-                </p>
-                <p>
-                    The full internet-friendly numbered list is in{' '}
-                    <Link to="/blog/training-ai-models" state={{ newWindow: true }} className="underline">
-                        Training our own AI models
-                    </Link>
-                    .
-                </p>
-            </div>
-        ),
-    },
-    {
-        trigger: 'Can I ask you not to train with my data?',
+        trigger: 'What will you publish, exactly?',
         content: (
             <p>
-                Yes, at any time, in your{' '}
-                <Link to="https://app.posthog.com/settings/organization-details" external className="underline">
-                    organization settings
-                </Link>{' '}
-                (admin access required).
+                Final architectures go to public repos, weights get released, and papers covering the training process
+                and what we learned go to arXiv, with submissions to major ML conferences. Each stage of pretraining
+                also gets a technical report.
             </p>
         ),
     },
     {
-        trigger: 'Will you sell my data, or models trained on it?',
-        content: <p>No.</p>,
-    },
-    {
-        trigger: 'Will you publish your research?',
+        trigger: "What's the first model?",
         content: (
             <p>
-                Yes. We plan to publish papers on arXiv and submit to major ML conferences, along with technical reports
-                for each stage of pretraining. The first paper is underway now that our first training run is
-                completing.
+                A Replay Encoder: a foundation model pretrained on the raw event stream behind session replay, using a
+                multi-axis RoPE built on additive Euler angles. The first training run is completing now and the
+                write-up is underway.
+            </p>
+        ),
+    },
+    {
+        trigger: 'Why is a product analytics company training foundation models?',
+        content: (
+            <p>
+                Because the dataset only exists here. Events, sessions, and replays of real software being used at scale
+                don't exist in any public corpus, and understanding user behavior at a model level is an open research
+                problem, not a feature request.
             </p>
         ),
     },
@@ -1183,7 +927,7 @@ const FAQ_ITEMS = [
                 <Link to="/careers/ai-research-engineer" state={{ newWindow: true }} className="underline">
                     AI research engineers
                 </Link>
-                , and nearly all our code is open source, so you can contribute directly.
+                , and published architectures live in public repos, so you can build on the work directly.
             </p>
         ),
     },
@@ -1256,7 +1000,6 @@ export default function ResearchPage({
 }: {
     data: {
         researchPosts: { nodes: ResearchPost[] }
-        researchMergedPRs: { nodes: MergedPR[] }
         aiResearchTeam?: {
             crest?: { data?: { attributes?: { url?: string } } }
         }
@@ -1270,7 +1013,7 @@ export default function ResearchPage({
         <>
             <SEO
                 title="PostHog Research"
-                description="AI research at PostHog: training foundation models on the data behind session replay, building agents that fix products autonomously, and publishing the results."
+                description="PostHog's AI research team is training user behavior foundation models and transparently sharing the research: architectures, weights, and papers."
                 structuredData={PUBLICATIONS.map((paper) => {
                     const resolved = resolvePublication(paper)
                     return {
@@ -1306,11 +1049,7 @@ export default function ResearchPage({
                     <div className={`${RESEARCH_CONTENT_WIDTH} mx-auto`}>
                         <RoadmapSection />
 
-                        <OpenProblemsSection />
-
                         <PublicationsSection />
-
-                        <ShippedSection prs={data.researchMergedPRs.nodes} />
 
                         <ResearchPostsSection posts={data.researchPosts.nodes} />
 
@@ -1369,15 +1108,6 @@ export const query = graphql`
                         }
                     }
                 }
-            }
-        }
-        researchMergedPRs: allResearchMergedPr(sort: { fields: mergedAt, order: DESC }) {
-            nodes {
-                title
-                url
-                repo
-                author
-                mergedAt
             }
         }
         aiResearchTeam: squeakTeam(slug: { eq: "ai-research" }) {
