@@ -47,6 +47,7 @@ function SpotlightSearchContent({
     const { openNewChat } = useApp()
     const posthog = usePostHog()
     const [query, setQuery] = useState('')
+    const [filterQuery, setFilterQuery] = useState('')
     const [activeFilter, setActiveFilter] = useState<string | null>(null)
     const [selectedIndex, setSelectedIndex] = useState(0)
     const [filterMenuOpen, setFilterMenuOpen] = useState(false)
@@ -54,9 +55,6 @@ function SpotlightSearchContent({
     const inputRef = useRef<HTMLInputElement>(null)
     const itemRefs = useRef<(HTMLLIElement | null)[]>([])
     const filterMenuItemRefs = useRef<(HTMLLIElement | null)[]>([])
-    // The search query is parked here while the filter picker is open (the
-    // input is repurposed for typing against category names) and restored on exit
-    const savedQueryRef = useRef('')
 
     // Measured height of the expanding section's content — the wrapper below
     // animates to it, so expand/collapse and content-size changes (skeletons →
@@ -92,11 +90,9 @@ function SpotlightSearchContent({
         [hits]
     )
 
-    // The filter picker borrows the input for filtering category names, so
-    // suspend the real search until the saved query is restored.
     useEffect(() => {
-        refine(filterMenuOpen ? '' : query)
-    }, [filterMenuOpen, query, refine])
+        refine(query)
+    }, [query, refine])
 
     const actions = useSpotlightActions()
     const matchedActions = matchActions(query, actions)
@@ -106,15 +102,14 @@ function SpotlightSearchContent({
     // Type-to-filter for the picker: typed text narrows the category list by
     // label or alias match
     const visibleFilterOptions = useMemo(() => {
-        const q = trimmedQuery.toLowerCase()
-        if (!filterMenuOpen || !q) return filterOptions
-        return filterOptions.filter((type) =>
-            type
-                ? configForType(type).label.toLowerCase().includes(q) ||
-                  configForType(type).aliases.some((alias) => alias.includes(q))
-                : 'all categories'.includes(q)
-        )
-    }, [filterMenuOpen, trimmedQuery])
+        const q = filterQuery.trim().toLowerCase()
+        if (!q) return filterOptions
+        return filterOptions.filter((type) => {
+            if (!type) return 'all categories'.includes(q)
+            const config = configForType(type)
+            return config.label.toLowerCase().includes(q) || config.aliases.some((alias) => alias.includes(q))
+        })
+    }, [filterQuery])
 
     // Group by category while preserving Algolia's ranked order. A category's
     // first hit determines where that category appears.
@@ -155,6 +150,7 @@ function SpotlightSearchContent({
 
     const close = () => {
         setQuery('')
+        setFilterQuery('')
         setActiveFilter(null)
         setFilterMenuOpen(false)
         onClose()
@@ -186,27 +182,26 @@ function SpotlightSearchContent({
     }
 
     const openFilterMenu = () => {
-        // Park the search query: the input becomes a type-to-filter box for
-        // category names until the picker closes
-        savedQueryRef.current = query
-        setQuery('')
-        setFilterMenuIndex(activeFilter ? filterOptions.indexOf(activeFilter) : 0)
+        setFilterQuery('')
+        setFilterMenuIndex(Math.max(0, activeFilter ? filterOptions.indexOf(activeFilter) : 0))
         setFilterMenuOpen(true)
         inputRef.current?.focus()
     }
 
     const closeFilterMenu = () => {
         setFilterMenuOpen(false)
-        setQuery(savedQueryRef.current)
+        setFilterQuery('')
         inputRef.current?.focus()
     }
 
     const selectFilterOption = (type: string | null) => {
         setFilterMenuOpen(false)
-        setQuery(savedQueryRef.current)
+        setFilterQuery('')
         setActiveFilter(type)
         inputRef.current?.focus()
     }
+
+    const toggleFilterMenu = () => (filterMenuOpen ? closeFilterMenu() : openFilterMenu())
 
     const askAI = () => {
         if (!query) return
@@ -280,7 +275,7 @@ function SpotlightSearchContent({
             // useless while the overlay is up anyway)
             if (e.key === 'f' && (e.metaKey || e.ctrlKey) && !e.shiftKey && !e.altKey) {
                 e.preventDefault()
-                filterMenuOpen ? closeFilterMenu() : openFilterMenu()
+                toggleFilterMenu()
             }
         }
         window.addEventListener('keydown', handler)
@@ -313,7 +308,7 @@ function SpotlightSearchContent({
             }
             // Backspace on empty filter text backs out of the picker — and out
             // of the active filter too, if there is one — returning to search
-            if (e.key === 'Backspace' && !query) {
+            if (e.key === 'Backspace' && !filterQuery) {
                 e.preventDefault()
                 setActiveFilter(null)
                 closeFilterMenu()
@@ -382,22 +377,21 @@ function SpotlightSearchContent({
                                     <RadixDialog.Title className="sr-only">Search PostHog.com</RadixDialog.Title>
                                     <SearchInput
                                         inputRef={inputRef}
-                                        loading={loading}
-                                        query={query}
+                                        loading={loading && !filterMenuOpen}
+                                        value={filterMenuOpen ? filterQuery : query}
                                         activeFilter={activeFilter}
                                         filterMenuOpen={filterMenuOpen}
-                                        onQueryChange={(nextQuery) => {
-                                            setQuery(nextQuery)
+                                        onValueChange={(value) => {
                                             if (filterMenuOpen) {
-                                                // Typing narrows the picker; keep the selection on the first match
+                                                setFilterQuery(value)
                                                 setFilterMenuIndex(0)
+                                            } else {
+                                                setQuery(value)
                                             }
                                         }}
                                         onKeyDown={handleInputKeyDown}
                                         onRemoveFilter={removeFilter}
-                                        onToggleFilterMenu={() =>
-                                            filterMenuOpen ? closeFilterMenu() : openFilterMenu()
-                                        }
+                                        onToggleFilterMenu={toggleFilterMenu}
                                         activeOptionId={
                                             expanded
                                                 ? filterMenuOpen
@@ -495,7 +489,17 @@ export default function SpotlightSearch(props: {
     open: boolean
     onClose: () => void
     initialFilter?: string
-}): JSX.Element {
+}): JSX.Element | null {
+    const [hasOpened, setHasOpened] = useState(props.open)
+
+    useEffect(() => {
+        if (props.open) setHasOpened(true)
+    }, [props.open])
+
+    // Keep the mounted instance after its first use so the close animation can
+    // finish, but avoid initializing InstantSearch on pages where Spotlight is never opened.
+    if (!props.open && !hasOpened) return null
+
     return (
         <InstantSearch searchClient={algoliaSearchClient} indexName={algoliaIndexName} stalledSearchDelay={750}>
             <SpotlightSearchContent {...props} />

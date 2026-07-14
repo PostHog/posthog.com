@@ -49,7 +49,7 @@ Queries of four or more words promote an Ask AI row. A settled query with no Alg
 - Selecting a category pins a filter token and scopes the Algolia request while preserving ranking within that category.
 - Clicking a group heading applies its category while preserving the query.
 - Backspace at the beginning of an empty input, Esc, or the filter token removes the filter.
-- `Cmd/Ctrl+F` opens the category picker. While open, the input filters category names and the Algolia query is temporarily cleared.
+- `Cmd/Ctrl+F` opens the category picker. While open, the input filters category names without changing the current Algolia query.
 - The category picker is intentionally curated: its array order controls which filters are promoted and how they are ordered, while unlisted Algolia types can still appear as ordinary results.
 
 ### Accessibility

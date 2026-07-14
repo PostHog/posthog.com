@@ -79,14 +79,13 @@ export default function ResultList({
                             {group.results.map((result) => {
                                 flatIndex++
                                 const index = flatIndex
-                                const selected = index === selectedIndex
                                 return (
                                     <SpotlightRow
                                         key={result.url}
                                         id={spotlightOptionId('result', index)}
                                         ref={(element) => (itemRefs.current[index] = element)}
-                                        selected={selected}
-                                        icon={configForType(result.type).icon}
+                                        selected={index === selectedIndex}
+                                        icon={groupConfig.icon}
                                         onActive={() => onSelectIndex(index)}
                                         onSelect={() => onOpenResult(result)}
                                         trailing={

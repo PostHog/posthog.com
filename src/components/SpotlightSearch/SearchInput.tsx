@@ -7,10 +7,10 @@ import { configForType } from './categories'
 type SearchInputProps = {
     inputRef: React.RefObject<HTMLInputElement>
     loading: boolean
-    query: string
+    value: string
     activeFilter: string | null
     filterMenuOpen: boolean
-    onQueryChange: (query: string) => void
+    onValueChange: (value: string) => void
     onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void
     onRemoveFilter: () => void
     onToggleFilterMenu: () => void
@@ -21,10 +21,10 @@ type SearchInputProps = {
 export default function SearchInput({
     inputRef,
     loading,
-    query,
+    value,
     activeFilter,
     filterMenuOpen,
-    onQueryChange,
+    onValueChange,
     onKeyDown,
     onRemoveFilter,
     onToggleFilterMenu,
@@ -35,7 +35,7 @@ export default function SearchInput({
 
     return (
         <div className="flex gap-3 items-center px-4 h-14 shrink-0">
-            {loading && query ? (
+            {loading && value ? (
                 <Spinner className="!h-5 !w-5 shrink-0 !text-secondary" />
             ) : (
                 <IconSearch className="size-5 shrink-0 text-secondary" />
@@ -54,8 +54,8 @@ export default function SearchInput({
             <input
                 ref={inputRef}
                 type="text"
-                value={query}
-                onChange={(event) => onQueryChange(event.target.value)}
+                value={value}
+                onChange={(event) => onValueChange(event.target.value)}
                 onKeyDown={onKeyDown}
                 placeholder={
                     filterMenuOpen
@@ -69,12 +69,12 @@ export default function SearchInput({
                 role="combobox"
                 aria-label="Search PostHog.com"
                 aria-autocomplete="list"
-                aria-expanded={Boolean(query || activeFilter || filterMenuOpen)}
+                aria-expanded={Boolean(value || activeFilter || filterMenuOpen)}
                 aria-controls={controlsId}
                 aria-activedescendant={activeOptionId}
                 className="p-0 w-full text-lg bg-transparent border-0 outline-none text-primary placeholder:text-secondary focus:ring-0"
             />
-            {!query && !filterMenuOpen ? (
+            {!value && !filterMenuOpen ? (
                 <KeyboardShortcut text="esc" size="xs" className="shrink-0" />
             ) : (
                 <button

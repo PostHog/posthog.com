@@ -19,6 +19,12 @@ type SuggestionListProps = {
 
 const hintClass = 'ml-auto hidden shrink-0 text-xs text-secondary @md:block'
 
+const SuggestionHint = ({ action }: { action: string }): JSX.Element => (
+    <span className={hintClass}>
+        <KeyboardShortcut text="↵" size="xs" /> to {action}
+    </span>
+)
+
 export default function SuggestionList({
     items,
     query,
@@ -35,9 +41,10 @@ export default function SuggestionList({
         <ul role="presentation" className="p-0 m-0 list-none">
             {items.map((item, index) => {
                 const rowProps = {
-                    id: spotlightOptionId('result' as const, index),
+                    id: spotlightOptionId('result', index),
                     ref: (element: HTMLLIElement | null) => (itemRefs.current[index] = element),
                     selected: selectedIndex === index,
+                    onActive: () => onSelectIndex(index),
                 }
 
                 if (item.kind === 'action') {
@@ -46,13 +53,8 @@ export default function SuggestionList({
                             key={item.action.id}
                             {...rowProps}
                             icon={item.action.icon}
-                            onActive={() => onSelectIndex(index)}
                             onSelect={() => onRunAction(item.action)}
-                            trailing={
-                                <span className={hintClass}>
-                                    <KeyboardShortcut text="↵" size="xs" /> to run
-                                </span>
-                            }
+                            trailing={<SuggestionHint action="run" />}
                         >
                             <p className="m-0 min-w-0 truncate text-[15px] text-primary">{item.action.label}</p>
                         </SpotlightRow>
@@ -65,13 +67,8 @@ export default function SuggestionList({
                             key="ask-ai"
                             {...rowProps}
                             icon={<IconSparkles />}
-                            onActive={() => onSelectIndex(index)}
                             onSelect={onAskAI}
-                            trailing={
-                                <span className={hintClass}>
-                                    <KeyboardShortcut text="↵" size="xs" /> to ask
-                                </span>
-                            }
+                            trailing={<SuggestionHint action="ask" />}
                         >
                             <p className="m-0 min-w-0 truncate text-[15px] text-primary">
                                 Ask AI: <span className="font-semibold">&ldquo;{query}&rdquo;</span>
@@ -86,13 +83,8 @@ export default function SuggestionList({
                         key="filter"
                         {...rowProps}
                         icon={<IconFilter />}
-                        onActive={() => onSelectIndex(index)}
                         onSelect={() => onApplyFilter(item.type)}
-                        trailing={
-                            <span className={hintClass}>
-                                <KeyboardShortcut text="↵" size="xs" /> to filter
-                            </span>
-                        }
+                        trailing={<SuggestionHint action="filter" />}
                     >
                         <p className="m-0 flex items-center gap-1.5 text-[15px] text-primary">
                             Filter by category:
