@@ -29,13 +29,13 @@ A fast way to confirm the scanner itself works: run it [on-demand](/docs/replay-
 
 Ineligibles don't cost you quota, but a high ineligibility rate usually means the scanner's filters aren't well-aligned with the kinds of sessions your project actually has. Each reason has a different fix:
 
-| Ineligible reason | Most likely fix |
-| --- | --- |
-| `no_recording` | The session ID exists but its replay data is missing or expired. Usually a sign you're scanning sessions older than your replay retention. |
-| `too_short` | Add a duration filter (e.g. `session_duration > 30`) so only sessions long enough to analyze are queued. |
-| `too_inactive` | Add an event-presence filter (e.g. require at least one `$pageview` or `$autocapture`) so silent sessions are skipped earlier. |
-| `too_long` | Add an upper duration filter. |
-| `no_events` | Same as `too_inactive` – require at least one event. |
+| Ineligible reason | Most likely fix                                                                                                                            |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `no_recording`    | The session ID exists but its replay data is missing or expired. Usually a sign you're scanning sessions older than your replay retention. |
+| `too_short`       | Add a duration filter (e.g. `session_duration > 30`) so only sessions long enough to analyze are queued.                                   |
+| `too_inactive`    | Add an event-presence filter (e.g. require at least one `$pageview` or `$autocapture`) so silent sessions are skipped earlier.             |
+| `too_long`        | Add an upper duration filter.                                                                                                              |
+| `no_events`       | Same as `too_inactive` – require at least one event.                                                                                       |
 
 Once you've added the filter, the ineligibility rate should drop. The Observations tab is the source of truth – check it after the next sweep.
 
@@ -66,11 +66,13 @@ Confidence is self-reported, so don't over-index on it as a metric. A scanner th
 
 Failed observations show an **error reason** on the detail page in the form `kind:human-readable message`.
 
+You can retry any failed observation using the **Retry** button, which appears on the observation row in the scanner's observations table, on the observation detail page, and in the replay player's observations dock. Retrying deletes the failed observation and queues a fresh scan for the same session. The new attempt counts against your monthly [quota](/docs/replay-vision/quota-and-limits). There is no bulk retry – each failed observation must be retried individually.
+
 ### `provider_transient`
 
 A transient Gemini error – network hiccup, rate limit, model overloaded.
 
-**What to do:** a single failure isn't actionable. If you're seeing a burst across many sessions, the upstream model is likely having availability issues – wait it out before triggering more on-demand work.
+**What to do:** retry the observation once the transient issue has passed. If you're seeing a burst of failures across many sessions, the upstream model is likely having availability issues – wait it out before retrying or triggering more on-demand work.
 
 ### `provider_rejected`
 

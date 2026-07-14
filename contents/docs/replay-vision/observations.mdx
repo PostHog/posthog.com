@@ -25,7 +25,7 @@ Observations move through a small state machine:
 `pending → running → succeeded | failed | ineligible`
 
 - **`succeeded`** – terminal. The structured result is saved and a [`$recording_observed` event](#querying-observations-as-events) is emitted.
-- **`failed`** – terminal. The detail view shows an error reason. See [troubleshooting](/docs/replay-vision/troubleshooting#failed-observations) for what each failure kind means.
+- **`failed`** – the detail view shows an error reason. Failed observations can be retried: click the **Retry** button on the observations table row, the observation detail page, or the replay dock. Retrying deletes the failed row and starts a fresh observation for the same session. The retry counts against your [quota](/docs/replay-vision/quota-and-limits). See [troubleshooting](/docs/replay-vision/troubleshooting#failed-observations) for what each failure kind means.
 - **`ineligible`** – terminal. The session can't be analyzed (no recording, too short, no events, etc.). Doesn't count against your quota. See [running scanners](/docs/replay-vision/running-scanners#ineligible-sessions).
 
 Succeeded, pending, and running observations count against your monthly [quota](/docs/replay-vision/quota-and-limits); failed and ineligible ones don't.
@@ -36,29 +36,29 @@ Every successful observation is captured as a `$recording_observed` event in you
 
 ### Event properties
 
-| Property | Description |
-| --- | --- |
-| `scanner_name` | Human-readable name of the scanner |
-| `scanner_id` | Scanner UUID |
-| `scanner_type` | `monitor`, `classifier`, `scorer`, or `summarizer` |
-| `scanner_version` | Version of the scanner config that produced this observation |
-| `session_id` | The recording that was observed |
-| `triggered_by` | `schedule` (background sweep) or `on_demand` |
-| `triggered_by_user_id` | The user who triggered an on-demand observation; null for background sweeps |
-| `model_used` | The model that produced the result |
-| `provider_used` | The LLM provider behind `model_used` |
-| `scanner_output_confidence` | The model's confidence (0.0 to 1.0) |
-| `scanner_output_reasoning` | **Monitor, classifier, and scorer** – the model's reasoning text, including any inline citations. Summarizers don't have a separate reasoning field |
-| `scanner_output_verdict` | **Monitor only** – `"yes"`, `"no"`, or `"inconclusive"` |
-| `scanner_output_tags` | **Classifier only** – the array of vocabulary tags assigned |
-| `scanner_output_tags_freeform` | **Classifier only** – tags outside the vocabulary, when the scanner allows them |
-| `scanner_output_score` | **Scorer only** – the numeric score |
-| `scanner_output_title` | **Summarizer only** – the generated one-line title |
-| `scanner_output_summary` | **Summarizer only** – the generated prose summary |
-| `scanner_output_intent` | **Summarizer only** – one sentence on what the user set out to do |
-| `scanner_output_outcome` | **Summarizer only** – one sentence on how the session ended |
-| `scanner_output_friction_points` | **Summarizer only** – array of named blockers or frustrations (empty if none) |
-| `scanner_output_keywords` | **Summarizer only** – array of lowercase keywords describing the session |
+| Property                         | Description                                                                                                                                         |
+| -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `scanner_name`                   | Human-readable name of the scanner                                                                                                                  |
+| `scanner_id`                     | Scanner UUID                                                                                                                                        |
+| `scanner_type`                   | `monitor`, `classifier`, `scorer`, or `summarizer`                                                                                                  |
+| `scanner_version`                | Version of the scanner config that produced this observation                                                                                        |
+| `session_id`                     | The recording that was observed                                                                                                                     |
+| `triggered_by`                   | `schedule` (background sweep) or `on_demand`                                                                                                        |
+| `triggered_by_user_id`           | The user who triggered an on-demand observation; null for background sweeps                                                                         |
+| `model_used`                     | The model that produced the result                                                                                                                  |
+| `provider_used`                  | The LLM provider behind `model_used`                                                                                                                |
+| `scanner_output_confidence`      | The model's confidence (0.0 to 1.0)                                                                                                                 |
+| `scanner_output_reasoning`       | **Monitor, classifier, and scorer** – the model's reasoning text, including any inline citations. Summarizers don't have a separate reasoning field |
+| `scanner_output_verdict`         | **Monitor only** – `"yes"`, `"no"`, or `"inconclusive"`                                                                                             |
+| `scanner_output_tags`            | **Classifier only** – the array of vocabulary tags assigned                                                                                         |
+| `scanner_output_tags_freeform`   | **Classifier only** – tags outside the vocabulary, when the scanner allows them                                                                     |
+| `scanner_output_score`           | **Scorer only** – the numeric score                                                                                                                 |
+| `scanner_output_title`           | **Summarizer only** – the generated one-line title                                                                                                  |
+| `scanner_output_summary`         | **Summarizer only** – the generated prose summary                                                                                                   |
+| `scanner_output_intent`          | **Summarizer only** – one sentence on what the user set out to do                                                                                   |
+| `scanner_output_outcome`         | **Summarizer only** – one sentence on how the session ended                                                                                         |
+| `scanner_output_friction_points` | **Summarizer only** – array of named blockers or frustrations (empty if none)                                                                       |
+| `scanner_output_keywords`        | **Summarizer only** – array of lowercase keywords describing the session                                                                            |
 
 The `timestamp` on the event is the moment the observation completed, not the moment the underlying recording was captured.
 
@@ -206,7 +206,7 @@ The recipes above all become [insights](/docs/product-analytics/insights) by sav
 
 ### Joining to other PostHog data
 
-Because `$recording_observed` events live alongside everything else in your project, you can join them to anything – pageviews, custom events, person properties, cohorts. A useful pattern: find the events the user fired *before* the moment a monitor flagged them, grouped by URL.
+Because `$recording_observed` events live alongside everything else in your project, you can join them to anything – pageviews, custom events, person properties, cohorts. A useful pattern: find the events the user fired _before_ the moment a monitor flagged them, grouped by URL.
 
 ```sql
 SELECT
