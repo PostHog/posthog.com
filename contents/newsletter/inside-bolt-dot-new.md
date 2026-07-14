@@ -11,7 +11,7 @@ tags:
   - Product-market fit
   - Engineering
 crosspost:
-  - Product for Engineers
+  - Product engineers
   - Founders
   - Blog
 ---

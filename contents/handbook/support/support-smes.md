@@ -21,6 +21,7 @@ The various PostHog products have been split into the following product groups:
 - Data (batch exports, data stack, ingestion, workflows)
 - Replay (replay)
 - Observability + AI & client libraries (error tracking, PostHog AI, AI Observability, SDK/Implementation, mobile)
+- Accounts & Billing (platform features, login/SSO, billing)
 
 **A note on these groupings**: These product groups are based on current ticket volumes. As products grow or new ones launch, we'll split or reorganize them. This structure will evolve with our needs.
 
@@ -46,6 +47,9 @@ Beyond that, we have SMEs who own specific product groups. For each product grou
 
 **Analytics**
 - EU: <TeamMember name="Xander Jones" photo />
+
+**Accounts & Billing**
+- EU: <TeamMember name="Eleftheria Trivyzaki" photo />
 
 
 ## What SMEs actually do

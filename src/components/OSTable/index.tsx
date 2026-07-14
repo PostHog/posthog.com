@@ -1,9 +1,7 @@
-import { linkPlugin, MDXEditor } from '@mdxeditor/editor'
 import { IconArrowLeft, IconArrowRight, IconSpinner } from '@posthog/icons'
 import React, { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { groupBy as _groupBy } from 'lodash'
-import { navigate } from 'gatsby'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { CallToAction } from 'components/CallToAction'
 import OSButton from 'components/OSButton'
@@ -132,30 +130,6 @@ const Pagination = ({
             <OSButton onClick={nextPage} disabled={!hasNextPage}>
                 <IconArrowRight className="size-4" />
             </OSButton>
-        </div>
-    )
-}
-
-const Editor = ({ markdown }: { markdown: string }) => {
-    const mdxEditorContainerRef = React.useRef<HTMLDivElement>(null)
-
-    const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-        const href = (event.target as HTMLElement).closest('a.mdx-editor-link')?.getAttribute('href')
-        if (href) {
-            navigate(href, { state: { newWindow: true } })
-        }
-    }
-
-    return (
-        <div onClick={handleClick} ref={mdxEditorContainerRef}>
-            <MDXEditor
-                lexicalTheme={{
-                    link: 'mdx-editor-link cursor-pointer',
-                }}
-                contentEditableClassName="[&_p]:m-0 min-w-[10px]"
-                markdown={markdown}
-                plugins={[linkPlugin()]}
-            />
         </div>
     )
 }

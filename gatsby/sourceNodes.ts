@@ -1205,6 +1205,71 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         }
     }
 
+    // Self-driving PRs: real, merged pull requests that PostHog's self-driving system
+    // opened from an Inbox report. They're matched on the Inbox footer every such PR
+    // body carries ("...from an inbox report" + a posthog-code://inbox link).
+    // Runs outside the GITHUB_API_KEY gate so preview and local builds get nodes too:
+    // the search API works unauthenticated, and a token (GITHUB_API_KEY, or the
+    // Actions-provided GITHUB_TOKEN in CI) just raises the rate limit. Fails soft —
+    // the /self-driving ticker hides itself when no nodes exist.
+    async function sourceSelfDrivingPRs() {
+        const token = process.env.GITHUB_API_KEY || process.env.GITHUB_TOKEN
+        const headers: HeadersInit = token ? { Authorization: `token ${token}` } : {}
+
+        const parseCommitTitle = (rawTitle: string) => {
+            const match = rawTitle.match(/^(\w+)(?:\(([^)]+)\))?!?:\s*(.+)$/)
+            if (match) {
+                return { type: match[1].toLowerCase(), scope: match[2] || '', summary: match[3].trim() }
+            }
+            return { type: '', scope: '', summary: rawTitle }
+        }
+
+        try {
+            const response = await fetch(
+                `https://api.github.com/search/issues?${new URLSearchParams({
+                    q: 'repo:PostHog/posthog is:pr is:merged "from an inbox report"',
+                    sort: 'updated',
+                    order: 'desc',
+                    per_page: '30',
+                }).toString()}`,
+                { headers }
+            ).then((res) => res.json())
+
+            if (!Array.isArray(response?.items)) {
+                console.warn('Self-driving PR sourcing returned no items:', response?.message || response)
+                return
+            }
+
+            response.items
+                .filter((item) => typeof item.body === 'string' && item.body.includes('posthog-code://inbox'))
+                .forEach((item) => {
+                    const { type, scope, summary } = parseCommitTitle(item.title || '')
+                    const data = {
+                        prNumber: item.number,
+                        title: item.title,
+                        summary,
+                        type,
+                        scope,
+                        url: item.html_url,
+                        mergedAt: item.pull_request?.merged_at || item.closed_at,
+                    }
+                    const node = {
+                        id: createNodeId(`self-driving-pr-${item.number}`),
+                        parent: null,
+                        children: [],
+                        internal: {
+                            type: `SelfDrivingPullRequest`,
+                            contentDigest: createContentDigest(data),
+                        },
+                        ...data,
+                    }
+                    createNode(node)
+                })
+        } catch (error) {
+            console.warn('Failed to source self-driving PRs:', error)
+        }
+    }
+
     await Promise.all([
         createProductDataNode(),
         createRoadmapItems(),
@@ -1215,6 +1280,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         sourceG2Reviews(),
         sourceCloudinaryImages(),
         sourceGithubNodes(),
+        sourceSelfDrivingPRs(),
         fetchWorkflowTemplates(),
         fetchReferences(),
         fetchEvents(),

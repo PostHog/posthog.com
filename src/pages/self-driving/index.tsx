@@ -1,4 +1,5 @@
 import React from 'react'
+import { graphql } from 'gatsby'
 import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -401,6 +402,152 @@ const SlackReportsRow = (): JSX.Element => {
     )
 }
 
+type SelfDrivingPR = {
+    prNumber: number
+    summary: string
+    type: string
+    scope: string
+    url: string
+    mergedAt: string
+}
+
+// Conventional-commit type -> tag text color + left accent-stripe color for each ticker card.
+const PR_TYPE_STYLES: Record<string, { label: string; accent: string }> = {
+    fix: { label: 'text-red', accent: 'bg-red' },
+    feat: { label: 'text-green', accent: 'bg-green' },
+    perf: { label: 'text-blue', accent: 'bg-blue' },
+    refactor: { label: 'text-purple', accent: 'bg-purple' },
+    chore: { label: 'text-secondary', accent: 'bg-orange' },
+    docs: { label: 'text-secondary', accent: 'bg-orange' },
+    test: { label: 'text-secondary', accent: 'bg-orange' },
+    style: { label: 'text-secondary', accent: 'bg-orange' },
+    build: { label: 'text-secondary', accent: 'bg-orange' },
+    ci: { label: 'text-secondary', accent: 'bg-orange' },
+}
+const prTypeStyle = (type: string) => PR_TYPE_STYLES[type] ?? { label: 'text-primary', accent: 'bg-orange' }
+
+// Soft fade on both edges so cards scroll in/out instead of hard-clipping.
+const TICKER_FADE = 'linear-gradient(to right, transparent, black 4%, black 96%, transparent)'
+
+// Short, human "merged N ago" – computed in the browser so it stays fresh between rebuilds.
+const timeAgo = (iso: string): string => {
+    const then = new Date(iso).getTime()
+    if (Number.isNaN(then)) return ''
+    const seconds = Math.max(0, (Date.now() - then) / 1000)
+    const days = Math.floor(seconds / 86400)
+    if (days >= 7) return `${Math.floor(days / 7)}w ago`
+    if (days >= 1) return `${days}d ago`
+    const hours = Math.floor(seconds / 3600)
+    if (hours >= 1) return `${hours}h ago`
+    const minutes = Math.floor(seconds / 60)
+    return minutes >= 1 ? `${minutes}m ago` : 'just now'
+}
+
+const TickerCard = ({ pr }: { pr: SelfDrivingPR }): JSX.Element => {
+    const style = prTypeStyle(pr.type)
+    return (
+        <Link
+            to={pr.url}
+            external
+            externalNoIcon
+            className="group relative flex w-[300px] flex-shrink-0 items-start gap-2.5 overflow-hidden rounded-md border border-primary bg-primary py-2.5 pl-4 pr-3.5 shadow-sm transition-all duration-150 hover:-translate-y-0.5 hover:border-secondary hover:shadow-md"
+        >
+            {/* Type-colored accent stripe down the left edge */}
+            <span className={`absolute inset-y-0 left-0 w-1 ${style.accent}`} aria-hidden />
+            <IconPullRequest className="mt-0.5 size-4 shrink-0 text-green" />
+            <div className="min-w-0 flex-1">
+                <div className="flex items-center gap-1.5 font-mono text-[11px] font-bold uppercase tracking-wide">
+                    <span className={style.label}>{pr.type || 'merged'}</span>
+                    {pr.scope && <span className="truncate normal-case text-secondary">{pr.scope}</span>}
+                </div>
+                <p className="m-0 truncate text-sm text-primary group-hover:underline">{pr.summary}</p>
+                <div className="mt-1 flex items-center gap-2 text-xs text-secondary">
+                    <span className="inline-flex items-center gap-1 rounded-full bg-green/10 px-1.5 py-px font-semibold text-green">
+                        <IconCheckCircle className="size-3" />
+                        merged
+                    </span>
+                    <span className="font-mono">#{pr.prNumber}</span>
+                    <span aria-hidden>·</span>
+                    {/* Relative time is computed at render, so it differs between the SSR build and
+                        the client – suppress the expected hydration mismatch on this text node. */}
+                    <span suppressHydrationWarning>{timeAgo(pr.mergedAt)}</span>
+                </div>
+            </div>
+        </Link>
+    )
+}
+
+// One continuously scrolling row. `direction` sets scroll direction (1 = left→right rail advance,
+// -1 = the reverse). Pauses on hover/focus and stops entirely for reduced-motion users.
+const TickerRow = ({ prs, direction }: { prs: SelfDrivingPR[]; direction: 1 | -1 }): JSX.Element => {
+    const railRef = React.useRef<HTMLDivElement>(null)
+    const pausedRef = React.useRef(false)
+
+    // Two copies of the list so scrollLeft can wrap seamlessly at either end.
+    const loop = [...prs, ...prs]
+
+    React.useEffect(() => {
+        const rail = railRef.current
+        if (!rail || prs.length === 0) return
+        if (window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches) return
+
+        let frame = 0
+        const step = () => {
+            if (!pausedRef.current) {
+                rail.scrollLeft += 0.5 * direction
+                const half = rail.scrollWidth / 2
+                if (half > 0) {
+                    if (rail.scrollLeft >= half) rail.scrollLeft -= half
+                    else if (rail.scrollLeft <= 0) rail.scrollLeft += half
+                }
+            }
+            frame = requestAnimationFrame(step)
+        }
+        frame = requestAnimationFrame(step)
+        return () => cancelAnimationFrame(frame)
+    }, [prs.length, direction])
+
+    const pause = () => {
+        pausedRef.current = true
+    }
+    const resume = () => {
+        pausedRef.current = false
+    }
+
+    return (
+        <div
+            ref={railRef}
+            onMouseEnter={pause}
+            onMouseLeave={resume}
+            onFocusCapture={pause}
+            onBlurCapture={resume}
+            className="flex gap-3 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            style={{ maskImage: TICKER_FADE, WebkitMaskImage: TICKER_FADE }}
+        >
+            {loop.map((pr, i) => (
+                <TickerCard key={`${pr.prNumber}-${i}`} pr={pr} />
+            ))}
+        </div>
+    )
+}
+
+// A "wall of merges": one row when there are only a few PRs, two rows scrolling in
+// opposite directions when there are enough to fill them.
+const SelfDrivingTicker = ({ prs }: { prs: SelfDrivingPR[] }): JSX.Element | null => {
+    if (prs.length === 0) return null
+    const twoRows = prs.length >= 6
+    const mid = Math.ceil(prs.length / 2)
+    const rowA = twoRows ? prs.slice(0, mid) : prs
+    const rowB = twoRows ? prs.slice(mid) : []
+
+    return (
+        <div className="not-prose flex flex-col gap-3">
+            <TickerRow prs={rowA} direction={1} />
+            {rowB.length > 0 && <TickerRow prs={rowB} direction={-1} />}
+        </div>
+    )
+}
+
 const workSurfaces: {
     icon: IconComponent
     iconColor: string
@@ -677,7 +824,12 @@ const faqItems = [
     },
 ]
 
-export default function SelfDrivingPage(): JSX.Element {
+export default function SelfDrivingPage({
+    data,
+}: {
+    data?: { allSelfDrivingPullRequest?: { nodes: SelfDrivingPR[] } }
+}): JSX.Element {
+    const selfDrivingPRs = data?.allSelfDrivingPullRequest?.nodes ?? []
     return (
         <>
             <SEO
@@ -856,6 +1008,33 @@ export default function SelfDrivingPage(): JSX.Element {
                             ]}
                         />
                         <div className="clear-both" />
+
+                        {/* Live ticker: real self-driving PRs merged into PostHog's own repo */}
+                        {selfDrivingPRs.length > 0 && (
+                            <div className="not-prose my-8 overflow-hidden rounded-md border border-primary bg-accent p-4 @md/reader-content:p-6">
+                                <div className="mb-3 flex items-center justify-between gap-4">
+                                    <div className="flex items-center gap-2">
+                                        {/* Pulsing "live" indicator */}
+                                        <span className="relative flex size-2 shrink-0">
+                                            <span className="absolute inline-flex size-full animate-pulse rounded-full bg-green opacity-75" />
+                                            <span className="relative inline-flex size-2 rounded-full bg-green" />
+                                        </span>
+                                        <p className="m-0 font-mono text-[11px] font-bold uppercase tracking-wider text-secondary">
+                                            Merged into PostHog by self-driving
+                                        </p>
+                                    </div>
+                                    <Link
+                                        to="https://github.com/PostHog/posthog/pulls?q=is%3Apr+is%3Amerged+%22from+an+inbox+report%22"
+                                        external
+                                        externalNoIcon
+                                        className="whitespace-nowrap text-xs font-semibold text-red dark:text-yellow"
+                                    >
+                                        See them all →
+                                    </Link>
+                                </div>
+                                <SelfDrivingTicker prs={selfDrivingPRs} />
+                            </div>
+                        )}
 
                         {/* It runs on the data you already have */}
                         <h3>
@@ -1045,3 +1224,18 @@ export default function SelfDrivingPage(): JSX.Element {
         </>
     )
 }
+
+export const query = graphql`
+    query SelfDrivingPage {
+        allSelfDrivingPullRequest(sort: { fields: mergedAt, order: DESC }, limit: 24) {
+            nodes {
+                prNumber
+                summary
+                type
+                scope
+                url
+                mergedAt
+            }
+        }
+    }
+`

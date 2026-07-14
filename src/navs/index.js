@@ -626,8 +626,18 @@ export const handbookSidebar = [
                 url: '/handbook/content/metadata',
             },
             {
-                name: 'LinkedIn',
-                url: '/handbook/content/linkedin',
+                name: 'Social media',
+                url: '/handbook/content/social-media',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/handbook/content/social-media',
+                    },
+                    {
+                        name: 'LinkedIn',
+                        url: '/handbook/content/linkedin',
+                    },
+                ],
             },
         ],
     },
@@ -5651,6 +5661,21 @@ export const docsMenu = {
                     icon: 'IconDecisionTree',
                     color: 'green',
                 },
+                {
+                    name: 'Historical imports',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/support/imports',
+                    icon: 'IconUpload',
+                    color: 'blue',
+                },
+                {
+                    name: 'Import from Zendesk',
+                    url: '/docs/support/imports/zendesk',
+                    icon: 'IconLetter',
+                    color: 'blue',
+                },
             ],
         },
         ...[dataPipelines],
@@ -7278,6 +7303,46 @@ export const docsMenu = {
                     name: 'Changelog',
                     url: '/docs/logs/changelog',
                     icon: 'IconRocket',
+                    color: 'purple',
+                },
+            ],
+        },
+        {
+            name: 'Metrics',
+            icon: 'IconTrends',
+            color: 'green',
+            url: '/docs/metrics',
+            description: 'Send OpenTelemetry metrics to PostHog and analyze them.',
+            children: [
+                {
+                    name: 'Metrics',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/metrics',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Getting started',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/metrics/start-here',
+                    icon: 'IconListCheck',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Why you need metrics',
+                    url: '/docs/metrics/basics',
+                    icon: 'IconBook',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'How metrics works',
+                    url: '/docs/metrics/architecture',
+                    icon: 'IconDatabase',
                     color: 'purple',
                 },
             ],

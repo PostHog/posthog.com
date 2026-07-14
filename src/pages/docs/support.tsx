@@ -3,20 +3,11 @@ import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
 import Intro from 'components/Docs/Intro'
 import ResourceItem from 'components/Docs/ResourceItem'
-import { CalloutBox } from 'components/Docs/CalloutBox'
 
 const Support: React.FC = () => {
     return (
         <ReaderView>
             <SEO title="Support - Docs - PostHog" />
-            <CalloutBox icon="IconFlask" title="Support is in beta" type="info">
-                <p>
-                    <strong>Note:</strong> Support is currently in{' '}
-                    <span className="rounded-sm bg-highlight py-0.5 px-1 text-xs font-bold text-red dark:text-yellow">
-                        Beta
-                    </span>
-                </p>
-            </CalloutBox>
             <Intro
                 subheader="Getting started"
                 title="Support"
@@ -66,6 +57,14 @@ const Support: React.FC = () => {
                         title="GitHub integration"
                         description="Connect GitHub repos for two-way sync — issues become tickets, replies sync back as comments."
                         url="/docs/support/github"
+                        Image={undefined}
+                        gatsbyImage={undefined}
+                        type={undefined}
+                    />
+                    <ResourceItem
+                        title="Historical imports"
+                        description="Migrate historical tickets from other help desks into PostHog. Zendesk Support available now (beta); more sources coming."
+                        url="/docs/support/imports"
                         Image={undefined}
                         gatsbyImage={undefined}
                         type={undefined}
