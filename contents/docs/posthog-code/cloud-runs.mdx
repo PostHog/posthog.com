@@ -22,6 +22,16 @@ Cloud runs use a [cloud environment](/docs/posthog-code/environments#cloud-envir
 - **Secrets and environment variables** injected into the cloud workspace
 - **Network access**, either an allowlist of trusted services, full internet access, or a custom set of domains
 
+## Canceling a cloud run
+
+You can stop a cloud run at any time. When you cancel:
+
+1. The agent is interrupted immediately.
+2. For interactive sessions, PostHog Code saves a snapshot so you can resume later.
+3. The sandbox is torn down and the run is marked as cancelled.
+
+Cancellation is idempotent — if the run has already finished, nothing changes. You can optionally provide a reason, which is recorded against the run.
+
 ## Handing off between cloud and local
 
 A task can move between local and cloud in either direction. When you hand off, PostHog Code transfers:
