@@ -14,7 +14,7 @@ import AlphaRelease from "../\_snippets/alpha-release.mdx"
 
 <AlphaRelease />
 
-[Vantage](https://www.vantage.sh) is a FinOps and cloud cost management platform that aggregates and analyzes spend across AWS, Azure, GCP, and other providers. This connector syncs your Vantage cost reports, budgets, dashboards, alerts, recommendations, and related configuration into the PostHog data warehouse so you can join cloud spend with your product and revenue data.
+[Vantage](https://www.vantage.sh) is a FinOps and cloud cost management platform that aggregates and analyzes spend across AWS, Azure, GCP, and other providers. This connector syncs your Vantage cost reports, budgets, dashboards, alerts, recommendations, and related configuration into PostHog so you can join cloud spend with your product and revenue data.
 
 ## Prerequisites
 
@@ -46,7 +46,7 @@ Vantage's configuration and report objects don't expose a server-side "updated a
 
 ## Troubleshooting
 
-- **Invalid or expired token** - if syncs fail with an authorization error, your token may have been revoked or lack the `read` scope. Create a new read-scoped token in your Vantage access tokens settings and reconnect the source.
-- **Rate limits** - Vantage enforces per-account and per-key rate limits (and stricter limits on cost data endpoints). PostHog automatically backs off and retries when it's throttled, so transient rate-limit errors resolve on their own.
+- **Invalid or expired token**: if syncs fail with an authorization error, your token may have been revoked or lack the `read` scope. Create a new read-scoped token in your Vantage access tokens settings and reconnect the source.
+- **Rate limits**: Vantage enforces per-account and per-key rate limits (and stricter limits on cost data requests). PostHog automatically backs off and retries when it's throttled, so transient rate-limit errors resolve on their own.
 
 <TroubleshootingLink />
