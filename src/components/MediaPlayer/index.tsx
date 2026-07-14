@@ -20,7 +20,6 @@ interface MediaPlayerProps {
     source?: 'youtube' | 'wistia'
     startTime?: number
     borderRadius?: boolean
-    aspectRatio?: number
 }
 
 export default function MediaPlayer({
@@ -28,7 +27,6 @@ export default function MediaPlayer({
     source = 'youtube',
     startTime = 0,
     borderRadius = true,
-    aspectRatio = 16 / 9,
 }: MediaPlayerProps) {
     const { websiteMode } = useApp()
     const [playerState, setPlayerState] = useState({
@@ -358,16 +356,11 @@ export default function MediaPlayer({
                         {/* Main video area */}
                         <div className="flex-1 flex flex-col justify-center items-center bg-primary mb-2">
                             {source === 'youtube' ? (
-                                <div
-                                    id={`video-player-iframe-${videoId}`}
-                                    className="rounded w-full"
-                                    style={{ aspectRatio }}
-                                />
+                                <div id={`video-player-iframe-${videoId}`} className="rounded w-full aspect-video" />
                             ) : (
                                 <div
                                     ref={containerRef}
-                                    className={`w-full ${borderRadius ? 'rounded' : 'rounded-none'}`}
-                                    style={{ aspectRatio }}
+                                    className={`w-full aspect-video ${borderRadius ? 'rounded' : 'rounded-none'}`}
                                 />
                             )}
                         </div>

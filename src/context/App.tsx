@@ -1384,26 +1384,6 @@ const appSettings: AppSettings = {
             fixed: true,
         },
     },
-    'merch-video': {
-        size: {
-            min: {
-                width: 960,
-                height: 544,
-            },
-            max: {
-                width: 960,
-                height: 544,
-            },
-            fixed: false,
-            autoHeight: true,
-        },
-        position: {
-            center: true,
-        },
-        modal: {
-            type: 'standard',
-        },
-    },
 } as const
 
 export interface SiteSettings {
