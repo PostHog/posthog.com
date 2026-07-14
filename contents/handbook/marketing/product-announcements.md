@@ -14,7 +14,7 @@ The word "launch" gets used to mean a dozen different things, which creates conf
 
 -  **A release** is when a product or feature becomes available to existing users for the first time. This is the **product team’s** responsibility. The PM or team lead drives it, using [their own release checklist](/handbook/product/releasing-new-products-and-features). A release can be gradual, targeted, or fully open.
 
-- **A launch** gets a product in front of _new_ people – potentially millions who've never heard of us. This is **Marketing's** responsibility, with the **product marketer leading** and working from the launch checklist below.
+-  **A launch** gets a product in front of _new_ people – potentially millions who've never heard of us. This is led by **marketing** with the product marketer working from the launch checklist below. If there is disagreement within a team about whether something is ready to launch, that team’s lead should make the decision - it’s either on or it’s off (“we want to launch, but not yet” is off). 
 
 Where we can, releases and launches should happen together, but they don't have to. If pricing, the feature set, or even the name is still moving right up until the day before release, it makes no sense to build and then rebuild the product page, the video, and the campaign around a moving target. In those cases it's completely fine for the launch to follow immediately after the release, once the details are locked. **Timing depends on how certain we are about what we're shipping.** The more settled it is, the tighter the two can be coupled.
 
