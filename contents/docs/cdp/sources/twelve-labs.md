@@ -16,7 +16,7 @@ import AlphaRelease from "../_snippets/alpha-release.mdx"
 
 <AlphaRelease />
 
-The Twelve Labs connector syncs your video understanding library into the PostHog Data warehouse: indexes, video indexing tasks, and the indexed videos themselves. Use it to analyze your indexing activity and video catalog alongside your product data.
+The Twelve Labs connector syncs your video understanding library into the PostHog Data Warehouse: indexes, video indexing tasks, and the indexed videos themselves. Use it to analyze your indexing activity and video catalog alongside your product data.
 
 ## Prerequisites
 
