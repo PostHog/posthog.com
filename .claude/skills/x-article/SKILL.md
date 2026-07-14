@@ -65,7 +65,7 @@ Run the downloads and verify each file is non-empty (a failed Cloudinary fetch r
 If — and only if — the source was a **newsletter**, append this to the very bottom of `article.md`:
 
 ```markdown
-> [Subscribe to Product for Engineers](https://newsletter.posthog.com/subscribe), our newsletter, to get more writing like this.
+> Subscribe to [build mode](https://newsletter.posthog.com/subscribe), our newsletter, to get more writing like this.
 ```
 
 ## Step 6: Report
