@@ -20,7 +20,7 @@ The Hyperspell connector pulls your app's AI memory layer into the PostHog data 
 
 ## Prerequisites
 
-You need a [Hyperspell](https://hyperspell.com/) account with an API key created in the [Hyperspell dashboard](https://dashboard.hyperspell.com/). API keys are region-specific, so note whether your Hyperspell app lives in the US or EU region.
+You need a [Hyperspell](https://hyperspell.com/) account with an API key created in the [Hyperspell dashboard](https://app.hyperspell.com/). API keys are region-specific, so note whether your Hyperspell app lives in the US or EU region.
 
 ## Adding a data source
 
@@ -28,7 +28,7 @@ You need a [Hyperspell](https://hyperspell.com/) account with an API key created
 
 The source needs:
 
-- **API key**: created in the [Hyperspell dashboard](https://dashboard.hyperspell.com/).
+- **API key**: created in the [Hyperspell dashboard](https://app.hyperspell.com/).
 - **Region**: the Hyperspell region your app lives in (US or EU). A key only works in the region it was created in.
 - **User IDs** (optional): memories, connections, vaults, and entities in Hyperspell are scoped to individual users of your app. To sync them, enter a comma-separated list of user IDs — each is fetched on Hyperspell's `X-As-User` header. Leaving this empty syncs app-level data only.
 
