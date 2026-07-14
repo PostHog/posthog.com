@@ -741,7 +741,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                         siteSettings.heaterMode
                             ? 'bg-primary/75 backdrop-blur-3xl will-change-[transform,backdrop-filter] transform-gpu'
                             : `bg-primary ${meshVariant}`
-                    } flex flex-col ${item.appSettings?.size?.fixed ? 'border' : 'border-t'} rounded-lg ${
+                    } flex flex-col border rounded-lg ${item.expanded ? 'shadow-none' : 'shadow-md'} ${
                         item.expanded
                             ? 'rounded-tr-none rounded-tl-none'
                             : item.snapped === 'left'
