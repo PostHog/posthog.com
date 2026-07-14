@@ -8,6 +8,7 @@ This page lists which teams each Blitzscale team member is responsible for.
 
 | Person | Teams |
 |------|-------|
+| James Hawkins | [Conversations](/teams/conversations), [Website](/teams/website)
 | Tim Glaser | [DevEx](/teams/developer-experience), [Growth](/teams/growth), [People & Ops](/teams/people), [Talent](/teams/talent), [Billing](/teams/billing), [Support](/teams/support) |
 | Paul D'Ambra | [Product Analytics](/teams/product-analytics), [Analytics Platform](/teams/analytics-platform), [Web Analytics](/teams/web-analytics), [Replay](/teams/replay), [Error Tracking](/teams/error-tracking), [APM](/teams/apm), [Client Libraries](/teams/client-libraries) |
 | Ben White | [Batch Exports](/teams/batch-exports), [Infrastructure](/teams/infrastructure), [Workflows](/teams/workflows), [Ingestion](/teams/ingestion), [ClickHouse](/teams/clickhouse), [Feature Flags](/teams/feature-flags), [Security](/teams/security), [AI Gateway](/teams/ai-gateway), [AI Observability](/teams/ai-observability) |
