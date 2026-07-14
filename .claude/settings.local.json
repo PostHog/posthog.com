@@ -1,1 +1,9 @@
-{}
+{
+  "permissions": {
+    "allow": [
+      "Bash(git push *)",
+      "Bash(gh pr create --base master --head docs/posthog-code-pricing-clean --title 'docs: add PostHog Code pricing page' --body ' *)",
+      "Bash(gh run *)"
+    ]
+  }
+}

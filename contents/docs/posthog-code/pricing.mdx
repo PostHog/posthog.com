@@ -4,31 +4,31 @@ title: PostHog Code pricing
 
 import { CalloutBox } from "components/Docs/CalloutBox";
 
-PostHog Code usage consumes **AI credits**. Each time you interact with PostHog Code, such as writing code, querying your PostHog data, or asking an ad-hoc question, credits are spent based on the resources required to complete your request.
-
-This means you only pay for what you use. There's no fixed subscription, and every organization gets a **$20 monthly free tier** to explore PostHog Code's features.
+PostHog Code usage consumes **AI credits**, with credit consumption anchored to underlying token costs. PostHog Code credits carry **no markup**: They reflect the underlying LLM provider's cost exactly, with nothing added on top.
 
 For reference, **100 AI credits = $1**.
 
-PostHog Code credits carry **no markup**: They reflect the underlying LLM provider's cost exactly, with nothing added on top.
+Each time you interact with PostHog Code, such as writing code, querying your PostHog data, or asking an ad-hoc question, credits are spent based on the resources required to complete your request.
 
-## Model pricing
+This means you only pay for what you use. There's no fixed subscription, and every organization gets a **$20 monthly free tier** to explore PostHog Code's features.
 
-For reference, the table below shows model costs **per 1M tokens**:
+## Available models & credit consumption
+
+The following table shows token costs per model and token type **per 1M tokens**:
 
 | Model | Input | Output |
 | --- | --- | --- |
-| gpt-5.6-sol | $5.00 | $30.00 |
-| gpt-5.6-terra | $2.50 | $15.00 |
-| gpt-5.6-luna | $1.00 | $6.00 |
-| gpt-5.5 | $5.00 | $30.00 |
-| gpt-5.4 | $2.50 | $15.00 |
-| Claude Sonnet 4.6 | $3.00 | $15.00 |
-| Claude Opus 4.7 | $5.00 | $25.00 |
-| Claude Opus 4.8 | $5.00 | $25.00 |
-| Claude Sonnet 5 | $2.00 | $10.00 |
-| Claude Fable 5 | $10.00 | $50.00 |
-| glm-5.2 | $1.40 | $4.40 |
+| gpt-5.6-sol | 500 credits ($5.00) | 3,000 credits ($30.00) |
+| gpt-5.6-terra | 250 credits ($2.50) | 1,500 credits ($15.00) |
+| gpt-5.6-luna | 100 credits ($1.00) | 600 credits ($6.00) |
+| gpt-5.5 | 500 credits ($5.00) | 3,000 credits ($30.00) |
+| gpt-5.4 | 250 credits ($2.50) | 1,500 credits ($15.00) |
+| Claude Sonnet 4.6 | 300 credits ($3.00) | 1,500 credits ($15.00) |
+| Claude Opus 4.7 | 500 credits ($5.00) | 2,500 credits ($25.00) |
+| Claude Opus 4.8 | 500 credits ($5.00) | 2,500 credits ($25.00) |
+| Claude Sonnet 5 | 200 credits ($2.00) | 1,000 credits ($10.00) |
+| Claude Fable 5 | 1,000 credits ($10.00) | 5,000 credits ($50.00) |
+| glm-5.2 | 140 credits ($1.40) | 440 credits ($4.40) |
 
 Prices are passed through from the underlying model providers at cost and may change as providers update their rates.
 
