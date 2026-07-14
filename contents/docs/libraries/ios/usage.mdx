@@ -149,6 +149,30 @@ import IOSFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/fe
 
 <IOSFeatureFlagsCode />
 
+### Bootstrapping flags
+
+import BootstrappingIntro from "../../feature-flags/snippets/bootstrapping-intro.mdx"
+
+<BootstrappingIntro />
+
+Set `config.bootstrap` before calling `setup()` to seed identity and flag values before the first `/flags` response:
+
+```swift
+let config = PostHogConfig(projectToken: "<ph_project_token>", host: "<ph_client_api_host>")
+config.bootstrap = PostHogBootstrapConfig(
+    distinctId: "distinct_id_of_your_user",
+    isIdentifiedId: true,
+    featureFlags: [
+        "flag-1": true,
+        "variant-flag": "control"
+    ],
+    featureFlagPayloads: nil
+)
+PostHogSDK.shared.setup(config)
+```
+
+Bootstrapped identity seeds the first launch only, and bootstrapped flags act as a base layer until the SDK fetches its own. For details, see the [bootstrapping guide](/docs/feature-flags/bootstrapping#behavior-on-mobile-sdks).
+
 ## Experiments (A/B tests)
 
 Since [experiments](/docs/experiments/start-here) use feature flags, the code for running an experiment is very similar to the feature flags code. See [adding experiment code](/docs/experiments/adding-experiment-code) for iOS examples.
