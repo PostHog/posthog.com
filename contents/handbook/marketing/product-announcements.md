@@ -12,19 +12,18 @@ Product marketers take responsibility for coordinating and publicizing news abou
 
 The word "launch" gets used to mean a dozen different things, which creates confusion about who owns what. So we split shipping something new into two distinct moments, with two different owners:
 
--  **A release** is when a product or feature becomes available to existing users for the first time. This is the **product team’s** responsibility. The PM or team lead drives it, using [their own release checklist](/handbook/product/releasing-new-products-and-features). A release can be gradual, targeted, or fully open.
+- **A release** is when a product or feature becomes available to existing users for the first time. This is the **product team’s** responsibility. The PM or team lead drives it, using [their own release checklist](/handbook/product/releasing-new-products-and-features). A release can be gradual, targeted, or fully open.
+- **A launch** gets a product in front of existing and new people – potentially millions who've never heard of us. This is led by **marketing** with the product marketer working from the launch checklist below. If there is disagreement within a team about whether something is ready to launch, that team’s lead should make the decision - it’s either on or it’s off (“we want to launch, but not yet” is off). 
 
--  **A launch** gets a product in front of _new_ people – potentially millions who've never heard of us. This is led by **marketing** with the product marketer working from the launch checklist below. If there is disagreement within a team about whether something is ready to launch, that team’s lead should make the decision - it’s either on or it’s off (“we want to launch, but not yet” is off). 
--   **Release** = product makes it available
--   **Launch** = marketing tells the world about it
 Where we can, releases and launches should happen together, but they don't have to. If pricing, the feature set, or even the name is still moving right up until the day before release, it makes no sense to build and then rebuild the product page, the video, and the campaign around a moving target. In those cases it's completely fine for the launch to follow immediately after the release, once the details are locked. **Timing depends on how certain we are about what we're shipping.** The more settled it is, the tighter the two can be coupled.
+
 ### People involved with releases & launches
 
 Releases and launches involve lots of moving pieces. It's helpful to be very specific about who is responsible for what, so you don't waste time figuring this stuff out:
 
--   Product team lead – product readiness for launch, flag setup, and stability.
--   PM – pricing and packaging readiness, building the target cohort.
--   PMM – go-to-market readiness, launch messaging, product page, and working with other teams on campaign assets (website, video, social, editorial, paid ads).
+- Product team lead – product readiness for launch, flag setup, and stability.
+- PM – pricing and packaging readiness, building the target cohort.
+- PMM – go-to-market readiness, launch messaging, product page, and working with other teams on campaign assets (website, video, social, editorial, paid ads).
     
 If you are one of these people, you can give feedback to each but you shouldn't block decisions not in your lane. For example, the team lead can say the product is not ready, but should not block a the content of an email. Similarly, marketing can decide what the product page says, but should not block a pricing decision. 
 
