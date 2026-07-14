@@ -1,5 +1,5 @@
-export const braintrust = {
-    name: 'Braintrust',
+export const confidentai = {
+    name: 'Confident AI',
     products: {
         ai_observability: {
             available: true,
@@ -13,12 +13,11 @@ export const braintrust = {
                 prompt_evaluations: true,
                 alerting: true,
                 error_tracking: true,
-                byok: true,
                 system_prompts: true,
-                clustering: false,
-                trace_summarization: true,
+                clustering: true,
+                trace_summarization: false,
                 llm_translation: false,
-                sentiment_classification: true,
+                sentiment_classification: false,
                 privacy_mode: true,
                 agent_tracing: true,
                 prompt_management: true,
@@ -26,7 +25,9 @@ export const braintrust = {
                 human_annotation: true,
                 session_replay: false,
                 product_analytics: false,
-                ai_gateway_proxy: true,
+                feature_flags: false,
+
+                ai_gateway_proxy: false,
             },
             evaluations: {
                 features: {
@@ -54,8 +55,8 @@ export const braintrust = {
     },
     platform: {
         deployment: {
-            eu_hosting: true,
             open_source: false,
+            eu_hosting: true,
         },
     },
 }
