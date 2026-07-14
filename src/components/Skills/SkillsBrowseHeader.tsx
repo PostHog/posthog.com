@@ -5,7 +5,7 @@ import { BrowseMode } from './types'
 
 const browseModeOptions: ToggleOption[] = [
     { label: 'Role', value: 'role' },
-    { label: 'Product', value: 'product' },
+    { label: 'Tools', value: 'product' },
 ]
 
 /**

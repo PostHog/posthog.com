@@ -86,17 +86,12 @@ export default function SkillsColumnView({
         />
     )
 
-    // Detail-pane links: jump the browse to a department (Role tab) or a product
-    // (Product tab). Clearing search first so the columns are visible again.
+    // Detail-pane links: jump the browse to a department (Role tab). Clearing
+    // search first so the columns are visible again.
     const navigateToDepartment = (tag: string) => {
         onSearchChange('')
         onBrowseModeChange('role')
         setSelectedDepartmentId(slugifySkillName(tag))
-    }
-    const navigateToProduct = (handle: string) => {
-        onSearchChange('')
-        onBrowseModeChange('product')
-        setSelectedProductHandle(handle)
     }
 
     useEffect(() => {
@@ -223,7 +218,6 @@ export default function SkillsColumnView({
                 allSkills={skills}
                 onSelectSkill={onSelectSkill}
                 onNavigateToDepartment={navigateToDepartment}
-                onNavigateToProduct={navigateToProduct}
             />
         </div>
     )

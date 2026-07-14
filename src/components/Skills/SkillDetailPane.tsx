@@ -1,18 +1,16 @@
 import React from 'react'
-import { IconCopy, IconExternal, IconArrowUpRight } from '@posthog/icons'
+import { IconCopy /* , IconExternal */ } from '@posthog/icons'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import Link from 'components/Link'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { useToast } from '../../context/Toast'
-import { Skill, getRelatedSkills, useResolveSkillResources } from 'hooks/skills'
-import FlowChips from './FlowChips'
+import { Skill, getRelatedSkills } from 'hooks/skills'
 
-const POSTHOG_APP_URL = 'https://app.posthog.com'
+// const POSTHOG_APP_URL = 'https://app.posthog.com'
 
 /** Opens PostHog and pre-fills the prompt into Max (the AI) via the side-panel hash. */
-function openInPostHogUrl(prompt: string): string {
-    return `${POSTHOG_APP_URL}/#panel=max:${encodeURIComponent(prompt)}`
-}
+// function openInPostHogUrl(prompt: string): string {
+//     return `${POSTHOG_APP_URL}/#panel=max:${encodeURIComponent(prompt)}`
+// }
 
 function PromptActions({ prompt }: { prompt: string }) {
     const { addToast } = useToast()
@@ -36,7 +34,7 @@ function PromptActions({ prompt }: { prompt: string }) {
             >
                 Copy prompt
             </Tooltip>
-            <Tooltip
+            {/* <Tooltip
                 delay={200}
                 trigger={
                     <a
@@ -51,7 +49,7 @@ function PromptActions({ prompt }: { prompt: string }) {
                 }
             >
                 Open in PostHog
-            </Tooltip>
+            </Tooltip> */}
         </div>
     )
 }
@@ -73,15 +71,12 @@ export default function SkillDetailPane({
     allSkills,
     onSelectSkill,
     onNavigateToDepartment,
-    onNavigateToProduct,
 }: {
     skill: Skill | null
     allSkills: Skill[]
     onSelectSkill: (skill: Skill) => void
     onNavigateToDepartment: (tag: string) => void
-    onNavigateToProduct: (handle: string) => void
 }) {
-    const resources = useResolveSkillResources(skill?.resources ?? [])
     const related = skill ? getRelatedSkills(skill, allSkills) : []
 
     if (!skill) {
@@ -90,7 +85,7 @@ export default function SkillDetailPane({
                 data-scheme="primary"
                 className="flex flex-1 min-h-0 self-stretch items-center justify-center p-8 text-secondary text-sm"
             >
-                Select a skill to see the workflow and products involved.
+                Select a skill to see details.
             </div>
         )
     }
@@ -130,50 +125,6 @@ export default function SkillDetailPane({
                         </ul>
                     </div>
                 )}
-
-                <div className="grid grid-cols-1 gap-x-8 gap-y-5 @md:grid-cols-2">
-                    {skill.flow.length > 0 && (
-                        <div>
-                            <h3 className="text-sm font-semibold m-0 mb-2">Recipe</h3>
-                            <FlowChips flow={skill.flow} />
-                        </div>
-                    )}
-
-                    {resources.length > 0 && (
-                        <div>
-                            <h3 className="text-sm font-semibold m-0 mb-2">Tools used</h3>
-                            <ul className="list-none m-0 p-0 space-y-1.5">
-                                {resources.map((resource) => (
-                                    <li
-                                        key={`${resource.handle}-${resource.name}`}
-                                        className="flex items-center flex-wrap gap-x-2 gap-y-0.5"
-                                    >
-                                        <resource.Icon className={`size-4 flex-shrink-0 text-${resource.color}`} />
-                                        {resource.href ? (
-                                            <Link
-                                                to={resource.href}
-                                                state={{ newWindow: true }}
-                                                className="text-sm font-semibold hover:underline"
-                                            >
-                                                {resource.name}
-                                            </Link>
-                                        ) : (
-                                            <span className="text-sm font-semibold">{resource.name}</span>
-                                        )}
-                                        <button
-                                            type="button"
-                                            onClick={() => onNavigateToProduct(resource.handle)}
-                                            className="inline-flex items-center gap-0.5 text-xs text-secondary hover:text-primary"
-                                        >
-                                            skills
-                                            <IconArrowUpRight className="size-3" />
-                                        </button>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    )}
-                </div>
 
                 {related.length > 0 && (
                     <div>
