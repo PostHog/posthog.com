@@ -116,10 +116,6 @@ If you want more precision when a single event type is inflated, use the 'Event 
 
 ## How to issue refunds or credits
 
-### Prerequisites
-
-You need Support specialist level access to Stripe, ask Simon for access.
-
 ### Issuing credits
 
 1. Go to [billing admin](https://billing.posthog.com/admin/)
