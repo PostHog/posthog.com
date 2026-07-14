@@ -9,7 +9,7 @@ export default function SearchFooter({
     activeFilter: string | null
 }): JSX.Element {
     return (
-        <div className="flex justify-between items-center px-4 py-2 text-xs border-t shrink-0 border-primary text-secondary">
+        <div className="flex justify-between items-center px-4 py-2 text-xs border-t shrink-0 border-primary bg-primary text-secondary">
             {filterMenuOpen ? (
                 <>
                     <div className="flex gap-3 items-center">

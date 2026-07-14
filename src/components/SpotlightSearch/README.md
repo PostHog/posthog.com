@@ -1,6 +1,6 @@
 # SpotlightSearch
 
-The site-wide search overlay, opened with `Cmd/Ctrl+K` or `/` through `openSearch()` in `src/context/App.tsx`. It presents the existing Algolia search as a macOS Spotlight-style glass panel and replaces the old global search overlay without changing embedded search surfaces.
+The site-wide search overlay, opened with `Cmd/Ctrl+K` or `/` through `openSearch()` in `src/context/App.tsx`. It presents the existing Algolia search as a Spotlight-style panel and replaces the old global search overlay without changing embedded search surfaces.
 
 ## Data
 
@@ -30,7 +30,7 @@ Keep search behavior and selection ordering in `index.tsx`. Extracted components
 - `openSearch(initialFilter?)` seeds the category filter.
 - `Cmd/Ctrl+K` toggles the overlay. `Esc` clears the query, clears the filter, and then closes it.
 - Arrow keys move the selection, Enter opens it, and Shift+Enter sends the query to Max chat.
-- An empty search is only the glass bar; results expand beneath it with a keyboard-hint footer.
+- An empty search is only the search bar; results expand beneath it with a keyboard-hint footer.
 - A `ResizeObserver` measures the expanding content so state changes animate smoothly.
 
 ### Actions
@@ -58,7 +58,7 @@ The overlay exposes dialog and combobox semantics, keeps focus inside the open d
 
 ## Styling notes
 
-- The panel uses project color tokens and translucent backgrounds so it adapts to light and dark mode.
+- The panel and its nested surfaces use opaque project color tokens that switch automatically with light and dark mode.
 - The panel is an `@container`; result URLs hide below `@md` as the window narrows.
-- De-emphasized text uses `text-secondary` for contrast against translucent wallpaper backgrounds.
+- De-emphasized text uses `text-secondary` for consistent readable contrast in both color modes.
 - There is no backdrop dim, matching macOS Spotlight.

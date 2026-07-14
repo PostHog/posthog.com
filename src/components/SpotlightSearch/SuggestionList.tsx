@@ -88,7 +88,7 @@ export default function SuggestionList({
                     >
                         <p className="m-0 flex items-center gap-1.5 text-[15px] text-primary">
                             Filter by category:
-                            <span className="flex items-center gap-1 rounded-md border border-primary bg-accent/80 px-1.5 py-0.5 text-sm font-semibold text-secondary [&_svg]:size-3.5">
+                            <span className="flex items-center gap-1 rounded-md border border-primary bg-accent px-1.5 py-0.5 text-sm font-semibold text-secondary [&_svg]:size-3.5">
                                 {config.icon}
                                 {config.label}
                             </span>

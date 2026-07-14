@@ -5,10 +5,10 @@ import SpotlightRow, { spotlightOptionId } from './SpotlightRow'
 
 const SkeletonRow = () => (
     <li aria-hidden className="flex items-center gap-3 rounded-lg px-2.5 py-2">
-        <div className="rounded-md animate-pulse size-8 shrink-0 bg-border/50" />
+        <div className="rounded-md animate-pulse size-8 shrink-0 bg-accent" />
         <div className="min-w-0 flex-1 space-y-1.5">
-            <div className="h-3.5 w-1/3 animate-pulse rounded bg-border/50" />
-            <div className="w-2/3 h-3 rounded animate-pulse bg-border/50" />
+            <div className="h-3.5 w-1/3 animate-pulse rounded bg-accent" />
+            <div className="w-2/3 h-3 rounded animate-pulse bg-accent" />
         </div>
     </li>
 )

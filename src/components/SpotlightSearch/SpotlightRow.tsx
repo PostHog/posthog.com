@@ -26,10 +26,13 @@ const SpotlightRow = forwardRef<HTMLLIElement, SpotlightRowProps>(function Spotl
             onMouseMove={onActive}
             onClick={onSelect}
             className={`flex cursor-pointer items-center gap-3 rounded-lg px-2.5 py-2 ${
-                selected ? 'bg-accent/60 ring-1 ring-inset ring-border/40' : ''
+                selected ? 'bg-accent ring-1 ring-inset ring-border' : 'bg-primary'
             }`}
         >
-            <div className="flex size-8 shrink-0 items-center justify-center rounded-md border border-primary bg-primary/50 text-secondary [&_svg]:size-4">
+            <div
+                data-scheme="secondary"
+                className="flex size-8 shrink-0 items-center justify-center rounded-md border border-primary bg-primary text-secondary [&_svg]:size-4"
+            >
                 {icon}
             </div>
             {children}

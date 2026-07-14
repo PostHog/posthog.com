@@ -34,7 +34,7 @@ export default function SearchInput({
     const activeConfig = activeFilter ? configForType(activeFilter) : null
 
     return (
-        <div className="flex gap-3 items-center px-4 h-14 shrink-0">
+        <div className="flex gap-3 items-center px-4 h-14 shrink-0 bg-primary">
             {loading && value ? (
                 <Spinner className="!h-5 !w-5 shrink-0 !text-secondary" />
             ) : (
@@ -44,7 +44,7 @@ export default function SearchInput({
                 <button
                     onClick={onRemoveFilter}
                     title="Remove filter"
-                    className="group flex shrink-0 items-center gap-1 rounded-md border border-primary bg-accent/80 px-1.5 py-1 text-sm font-semibold text-secondary hover:text-primary [&_svg]:size-3.5"
+                    className="group flex shrink-0 items-center gap-1 rounded-md border border-primary bg-accent px-1.5 py-1 text-sm font-semibold text-secondary hover:text-primary [&_svg]:size-3.5"
                 >
                     {activeConfig.icon}
                     {activeConfig.label}
@@ -72,7 +72,7 @@ export default function SearchInput({
                 aria-expanded={Boolean(value || activeFilter || filterMenuOpen)}
                 aria-controls={controlsId}
                 aria-activedescendant={activeOptionId}
-                className="p-0 w-full text-lg bg-transparent border-0 outline-none text-primary placeholder:text-secondary focus:ring-0"
+                className="p-0 w-full text-lg bg-primary border-0 outline-none text-primary placeholder:text-secondary focus:ring-0"
             />
             {!value && !filterMenuOpen ? (
                 <KeyboardShortcut text="esc" size="xs" className="shrink-0" />

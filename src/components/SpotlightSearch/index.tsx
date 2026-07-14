@@ -32,9 +32,6 @@ const matchActions = (query: string, actions: SpotlightAction[]): SpotlightActio
         .slice(0, 2)
 }
 
-// Note: this component uses text-secondary where opaque surfaces would use
-// text-muted — dark mode's muted (rgb(98 102 116)) was tuned for the solid
-// window background and vanishes against the translucent glass panel.
 function SpotlightSearchContent({
     open,
     onClose,
@@ -267,10 +264,6 @@ function SpotlightSearchContent({
                     close()
                 }
             }
-            if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
-                e.preventDefault()
-                close()
-            }
             // ⌘F/Ctrl+F toggles the category filter picker (find-in-page is
             // useless while the overlay is up anyway)
             if (e.key === 'f' && (e.metaKey || e.ctrlKey) && !e.shiftKey && !e.altKey) {
@@ -364,6 +357,17 @@ function SpotlightSearchContent({
                                 transition={{ duration: 0.1 }}
                                 className="fixed inset-0 z-[999998] flex justify-center px-4 pt-[18vh]"
                                 onMouseDown={close}
+                                onKeyDown={(event) => {
+                                    if (
+                                        event.key.toLowerCase() === 'k' &&
+                                        (event.metaKey || event.ctrlKey) &&
+                                        !event.shiftKey &&
+                                        !event.altKey
+                                    ) {
+                                        event.preventDefault()
+                                        close()
+                                    }
+                                }}
                             >
                                 <motion.div
                                     data-scheme="primary"
@@ -371,7 +375,7 @@ function SpotlightSearchContent({
                                     animate={{ scale: 1, y: 0 }}
                                     exit={{ scale: 0.97, y: -8 }}
                                     transition={{ duration: 0.12, ease: [0.2, 0.2, 0.8, 1] }}
-                                    className="@container flex h-fit w-full max-w-[680px] flex-col overflow-hidden rounded-2xl border border-primary bg-primary/60 shadow-2xl ring-1 ring-inset ring-border/10 backdrop-blur-2xl"
+                                    className="@container flex h-fit w-full max-w-[680px] flex-col overflow-hidden rounded-2xl border border-primary bg-primary shadow-2xl"
                                     onMouseDown={(e) => e.stopPropagation()}
                                 >
                                     <RadixDialog.Title className="sr-only">Search PostHog.com</RadixDialog.Title>
@@ -429,7 +433,7 @@ function SpotlightSearchContent({
                                                         aria-label={
                                                             filterMenuOpen ? 'Search categories' : 'Search results'
                                                         }
-                                                        className="max-h-[min(480px,50vh)] overflow-y-auto border-t border-primary p-2"
+                                                        className="max-h-[min(480px,50vh)] overflow-y-auto border-t border-primary bg-primary p-2"
                                                     >
                                                         {filterMenuOpen ? (
                                                             <FilterMenu
