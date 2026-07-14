@@ -70,6 +70,7 @@ export default function SkillsColumnView({
                     color: resolved?.color,
                 }
             })
+            .filter((entry) => entry.Icon)
             .sort((a, b) => a.name.localeCompare(b.name))
     }, [productTree, allProducts])
 
@@ -125,8 +126,10 @@ export default function SkillsColumnView({
     }, [browseMode, departments, selectedDepartmentId])
 
     useEffect(() => {
-        if (browseMode === 'product' && !selectedProductHandle && productEntries.length > 0) {
-            setSelectedProductHandle(productEntries[0].id)
+        if (browseMode === 'product' && productEntries.length > 0) {
+            if (!selectedProductHandle || !productEntries.some((p) => p.id === selectedProductHandle)) {
+                setSelectedProductHandle(productEntries[0].id)
+            }
         }
     }, [browseMode, productEntries, selectedProductHandle])
 
