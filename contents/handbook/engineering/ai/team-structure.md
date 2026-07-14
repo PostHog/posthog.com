@@ -12,11 +12,11 @@ This page explains how teams collaborate on AI features at PostHog. For a high-l
 
 <SmallTeam slug="posthog-ai" /> is responsible for the architecture, performance, and UX/UI of the AI platform. We build and maintain the core infrastructure – the MCP server, skills system, PostHog AI in the web, background sandboxed agents, and shared tooling (`search`, `read_data`, `read_taxonomy`, `enable_mode`). We're also proactive when we see big opportunities for PostHog or when new capabilities can be used across multiple products, like SQL generation or universal filtering.
 
-### The PostHog Code team
+### The PostHog Desktop team
 
 <SmallTeam slug="posthog-code" /> builds PostHog Code, an agent development environment for product engineers. Working with coding agents today is bottlenecked by messy workflows — switching between agents, branches, worktrees, and manually managing PRs across multiple applications. PostHog Code solves this by giving each task its own isolated workspace where an agent works, with everything related to a task in one place instead of scattered across your terminal, editor, and GitHub.
 
-The PostHog Code team owns the desktop app and the task execution pipeline.
+The PostHog Desktop team owns the desktop app and the task execution pipeline.
 
 ### The Self-driving team
 

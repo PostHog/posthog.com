@@ -1992,7 +1992,15 @@
         { "source": "/teams/max-ai", "destination": "/teams/self-driving" },
         {
             "source": "/teams/twig",
-            "destination": "/teams/posthog-code"
+            "destination": "/teams/posthog-desktop"
+        },
+        {
+            "source": "/teams/posthog-code",
+            "destination": "/teams/posthog-desktop"
+        },
+        {
+            "source": "/teams/posthog-code/:path*",
+            "destination": "/teams/posthog-desktop/:path*"
         },
         {
             "source": "/docs/max-ai",
