@@ -35,13 +35,13 @@ Missing capabilities are a failure mode. Say you ask an agent to set up an [A/B 
 
 ![Agent-first infrastructure](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Pasted_image_20260630115314_6ae3550668.png)
 
-This doesn't mean that tools are all you need. It won't be enough to just let Claude use your product on its own. Relying entirely on a model provider is too much risk. Building your own harness lets you guarantee quality, protect your brand, and make continuous improvements. Even [OpenAI has said](https://openai.com/index/harness-engineering/) that agents have struggled not because they are incapable, but because they lack "the tools, abstractions, and internal structure required to make progress toward high-level goals."
+This doesn't mean that tools are all you need. It won't be enough to just let Claude use your product on its own. Relying entirely on a model provider is too much risk. Building your own harness lets you guarantee quality, protect your brand, and make continuous improvements. Even [OpenAI notes](https://openai.com/index/harness-engineering/) that agents struggle not because they are incapable, but because they lack "the tools, abstractions, and internal structure required to make progress toward high-level goals."
 
 Finally, what makes your agent special is its context. The model is the same for everyone, your moat is the source code, usage data, customer data, and product skills you feed it. This means [context engineering](https://newsletter.posthog.com/p/we-used-ai-to-5x-conversion-and-2x), creating pipelines and flows to get fresh, valuable context to the agents when they need it.  
 
 ## Chat is the front door, generative UI inside
 
-People like to complain about chat as an interface, but we think it's a good one. There's a reason why it's still the primary interface to work with agents and companies are doubling down with products, like Slack apps – have you tried the [PostHog Slack app](/slack)) yet? Telling an agent what's needed and letting it go do it is a powerful interaction method.
+People like to complain about chat as an interface, but we think it's a good one. There's a reason why it's still the primary interface to work with agents and companies are doubling down with products, like Slack apps – have you tried the [PostHog Slack app](/slack) yet? Telling an agent what's needed and letting it go do it is a powerful interaction method.
 
 But chat isn't enough because sometimes reading a paragraph is worse than glancing at a chart or flicking a toggle. Text can be too low bandwidth as it's flexible but linear; a UI is legible but rigid. Generative UI is in between. 
 
@@ -73,7 +73,7 @@ The question to ask is: **is a human looking at this for trust and judgement, or
 
 Agents don't work like apps. They run on their own, often for a long time. Nobody should have to sit in a browser tab watching them. 2030 products come to their users, no matter if that means [desktop](/code), Slack, mobile, email, API, or voice. 
 
-These aren't separate products; they're a shared control plane between humans and agents. They're thin clients over a shared backend, so the experience is the same anywhere and the handoff between surfaces is seamless. 
+These aren't separate products; they're a shared control plane between humans and agents. Thin clients over a shared backend, so the experience is the same anywhere and the handoff between surfaces is seamless. 
 
 This pushes you towards cloud-first. The real bottleneck when working with agents is concurrency and babysitting. Builders want to run many agents at once, point them at a backlog, and refine the output from anywhere. On-device execution can't do that. 
 
