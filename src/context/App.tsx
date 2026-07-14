@@ -494,6 +494,7 @@ export interface AppSetting {
     modal?: {
         type: 'standard' | 'side' | 'floating'
     }
+    closeOnEscape?: boolean
     toolbar?: boolean
     hideTitle?: boolean
     mesh?: 'green' | 'red' | 'yellow' | 'blue' | 'purple'
@@ -906,6 +907,7 @@ const appSettings: AppSettings = {
         },
     },
     '/display-options': {
+        closeOnEscape: true,
         size: {
             min: {
                 width: 600,
@@ -984,6 +986,7 @@ const appSettings: AppSettings = {
         },
     },
     '/vibe-check': {
+        closeOnEscape: true,
         size: {
             min: {
                 width: 750,
@@ -1000,6 +1003,7 @@ const appSettings: AppSettings = {
         },
     },
     '/credits': {
+        closeOnEscape: true,
         size: {
             min: {
                 width: 300,
@@ -1016,6 +1020,7 @@ const appSettings: AppSettings = {
         },
     },
     '/kbd': {
+        closeOnEscape: true,
         size: {
             min: {
                 width: 600,

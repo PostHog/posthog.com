@@ -556,6 +556,21 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
         }
     }, [item.key])
 
+    useEffect(() => {
+        if (!item.appSettings?.closeOnEscape || focusedWindow !== item || closing) return
+
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key !== 'Escape' || event.defaultPrevented) return
+
+            event.preventDefault()
+            setClosing(true)
+        }
+
+        window.addEventListener('keydown', handleKeyDown)
+
+        return () => window.removeEventListener('keydown', handleKeyDown)
+    }, [closing, focusedWindow, item])
+
     const chatWindows = windows.filter((w) => w.key?.startsWith('ask-max'))
     const defaultPageOptions = useMemo(
         () => [
