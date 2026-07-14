@@ -13,7 +13,7 @@ import InboundIpAddresses from '../_snippets/inbound-ip-addresses.mdx'
 
 With batch exports, data can be exported to Azure Blob Storage.
 
-<CalloutBox icon="IconInfo" title="Azure Blob Storage destination is in beta" type="fyi">
+<CalloutBox icon="IconFlask" title="Azure Blob Storage destination is in beta" type="action">
 
 The Azure Blob Storage destination is currently in `beta`. This means the configuration and features are subject to change.
 

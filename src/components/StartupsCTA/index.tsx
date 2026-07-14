@@ -19,7 +19,7 @@ export default function StartupsCTA(): JSX.Element {
             </h3>
             <ul className="p-0 mb-6 grid @3xl:grid-cols-2 gap-2">
                 <Benefit>$50,000 in PostHog credits for 12 months</Benefit>
-                <Benefit>$1,500 of exclusive PostHog merch</Benefit>
+                <Benefit>$1,000 of exclusive PostHog merch</Benefit>
                 <Benefit>Partner perks worth $12,000+</Benefit>
                 <li className="list-none relative pl-7 flex items-center gap-2 text-sm">
                     <Check3 className="w-4 h-4 inline-block absolute left-1 top-0.5" />

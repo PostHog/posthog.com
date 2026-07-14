@@ -9,7 +9,7 @@ availability:
 sourceId: Coupa
 ---
 
-<CalloutBox icon="IconInfo" title="Alpha source" type="fyi">
+<CalloutBox icon="IconFlask" title="Alpha source" type="action">
 
 The Coupa source is currently in **alpha**. If you run into issues, please let us know.
 

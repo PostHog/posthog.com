@@ -108,12 +108,14 @@ To help the new owner of a customer hit the ground running, we should make sure 
 
 | Transition | Typical timing | Condition |
 |------------|----------------|-----------|
-| TAE → TAM | When onboarded, typically 3 months after initial credit purchase OR 12 months after initial credit pre-purchase if the account is retained by the TAE | Customer onboarded to 1-2 primary products |
-| TAE → CSM | When onboarded, typically 3 months after initial credit purchase OR 12 months after initial credit pre-purchase if the account is retained by the TAE | Customer onboarded to 3+ primary products |
-| TAM → CSM | After expansion completes | All 3 core products adopted, discount agreement in place, no remaining expansion levers |
+| TAE → TAM | When onboarded, typically 3 months after initial credit purchase OR 12 months after initial credit pre-purchase if the account is retained by the TAE | Customer onboarded to 1-2 primary products and has growth potential |
+| TAE → CSM | When onboarded, typically 3 months after initial credit purchase OR 12 months after initial credit pre-purchase if the account is retained by the TAE | Customer onboarded to 3+ primary products or does not have growth potential|
+| TAM → CSM | After expansion completes | All 3 core products adopted, discount agreement in place, no remaining expansion levers, no growth potential |
 | CSM → TAM | When expansion opportunity identified | Customer not fully expanded and has clear growth potential |
 
 > For accounts who will be landing at $100k+ a year or have high expansion potential after the initial deal, we should involve a TAM early in the process to ensure a smooth transition. See the section further down this page on how this works.
+- When determining whether an account is a growth account or not, reviewing the criteria set out in the [lead qualification page](handbook/growth/sales/product-led-lead-qualification) can be helpful
+- When in doubt, ask yourself: do I see this account growing in the next year? If not, it should not go to a TAM
 
 For handover to take place there should be an Account Plan (saved as a note on the account in Vitally) and the customer should have been onboarded properly to the products they are currently paying for.
 

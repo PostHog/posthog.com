@@ -111,6 +111,21 @@ If you see an error like "table not found or has no columns," the source table n
 - You're syncing a materialized view's internal `.inner_id.<uuid>` table, which changes whenever the view is recreated.
 
 **Solution:** Remove the missing table from your source configuration, or re-point it to the correct table. If you were syncing a materialized view, sync it by its own name rather than its internal `.inner_id.<uuid>` table.
+
+### Unsupported Arrow column type
+
+If your sync fails with an error containing "is not supported for conversion into Arrow data format," it means one of the selected columns has a type that ClickHouse can't serialize to Arrow format. This most commonly happens with `AggregateFunction(...)` state columns on aggregating materialized views.
+
+The full error looks like:
+
+```
+Code: 50. DB::Exception: The type 'AggregateFunction(...)' of a column '<name>'
+is not supported for conversion into Arrow data format: While executing Arrow. (UNKNOWN_TYPE)
+```
+
+This is a non-retryable error — PostHog stops the sync instead of retrying indefinitely because the column type is fixed.
+
+**Solution:** [Deselect the offending column](#selecting-columns) in the schema's column settings, or sync a view that finalizes the aggregate (for example, using `finalizeAggregation()`), then resync.
 import InboundIpAddresses from '../\_snippets/inbound-ip-addresses.mdx'
 
 <InboundIpAddresses />

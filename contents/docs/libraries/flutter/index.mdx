@@ -270,6 +270,26 @@ config.beforeSend = [
 ];
 ```
 
+### Filtering autocaptured screens
+
+import FilterScreenEvents from '../_snippets/filter-screen-events-beforesend.mdx'
+
+<FilterScreenEvents />
+
+```dart
+const ignoredScreens = {'Splash', 'Debug'};
+
+config.beforeSend = [
+  (event) {
+    final screenName = event.properties?['$screen_name'];
+    if (event.event == '$screen' && ignoredScreens.contains(screenName)) {
+      return null;
+    }
+    return event;
+  },
+];
+```
+
 ### Limitations
 
 The `beforeSend` callbacks only apply to events captured via Dart APIs:
