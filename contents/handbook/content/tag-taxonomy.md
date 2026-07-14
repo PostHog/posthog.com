@@ -4,9 +4,9 @@ sidebar: Handbook
 showTitle: true
 ---
 
-This is a working reference for cleaning up the tags used across our editorial content (blog, newsletter, founders, product engineers) and tutorials. Over time our `tags:` have drifted — the same concept exists under several spellings (`AI Observability` vs `ai-observability`), casings (`Growth engineering` vs `Growth Engineering`), and plurals (`session replay` vs `session replays`).
+This is a working reference for cleaning up the tags used across our editorial content (blog, newsletter, founders, product engineers) and tutorials. Over time our `tags:` have drifted – the same concept exists under several spellings (`AI Observability` vs `ai-observability`), casings (`Growth engineering` vs `Growth Engineering`), and plurals (`session replay` vs `session replays`).
 
-The goal here is to **agree on a canonical list** before we mass-edit post frontmatter. Nothing below has been applied yet — this is for review.
+The goal here is to **agree on a canonical list** before we mass-edit post front matter. Nothing below has been applied yet – this is for review.
 
 <CalloutBox icon="IconInfo" title="How to read this" type="fyi">
 The numbers in parentheses are how many posts currently use that exact tag string. They're a snapshot and will drift as new posts are published.
@@ -14,7 +14,7 @@ The numbers in parentheses are how many posts currently use that exact tag strin
 
 ## How tags work today
 
-Tags come from the `tags:` field in each post's frontmatter, e.g.:
+Tags come from the `tags:` field in each post's front matter, e.g.:
 
 ```yaml
 tags:
@@ -24,19 +24,19 @@ tags:
 
 There are **two separate tag namespaces**:
 
-- **Editorial** — `contents/blog`, `contents/newsletter`, `contents/founders`, `contents/product-engineers`. These share the same reader ("Edition") and one tag namespace. **65 distinct tags across ~836 uses.** Convention is roughly **sentence case** (`Session replay`, `Feature flags`).
-- **Tutorials** — `contents/tutorials`. A separate, **lowercase** taxonomy (`product analytics`, `feature flags`), partly enumerated in `src/components/Tutorials/constants/tags.tsx`. **46 distinct tags across ~381 uses.**
+- **Editorial** – `contents/blog`, `contents/newsletter`, `contents/founders`, `contents/product-engineers`. These share the same reader ("Edition") and one tag namespace. **65 distinct tags across ~836 uses.** Convention is roughly **sentence case** (`Session replay`, `Feature flags`).
+- **Tutorials** – `contents/tutorials`. A separate, **lowercase** taxonomy (`product analytics`, `feature flags`), partly enumerated in `src/components/Tutorials/constants/tags.tsx`. **46 distinct tags across ~381 uses.**
 
 Blog posts also have a separate `category:` field. That is a *different* taxonomy from `tags:` and is out of scope for this document.
 
 ## Proposed rules
 
 1. **One canonical string per concept.** Pick one spelling and merge the rest into it.
-2. **Sentence case for editorial tags**, matching our [style guide](/handbook/content/posthog-style-guide) — `AI observability`, not `AI Observability`. Proper nouns keep their casing (`ClickHouse`, `DuckDB`, `PostHog news`, `Y Combinator`).
-3. **Lowercase for tutorials tags** — keep the existing tutorials convention; just remove duplicates within it.
-4. **No plurals-vs-singular splits** — pick one (`Session replay`, not both).
+2. **Sentence case for editorial tags**, matching our [style guide](/handbook/content/posthog-style-guide) – `AI observability`, not `AI Observability`. Proper nouns keep their casing (`ClickHouse`, `DuckDB`, `PostHog news`, `Y Combinator`).
+3. **Lowercase for tutorials tags** – keep the existing tutorials convention; just remove duplicates within it.
+4. **No plurals-vs-singular splits** – pick one (`Session replay`, not both).
 
-## Editorial: proposed merges
+## Proposed editorial merges
 
 ### Unambiguous duplicates (casing / plural / format only)
 
@@ -62,12 +62,12 @@ Tags whose only issue is title-casing a non-proper-noun:
 
 ### Judgment calls (need a decision)
 
-These are defensible either way — flagged for discussion, not yet decided:
+These are defensible either way – flagged for discussion, not yet decided:
 
-- **`AI` (10) + `LLM` (5) + `AI observability` (4)** — keep all three, or fold `LLM` into `AI`?
-- **`Feature flags` (7) + `Feature management` (8)** — one concept or two?
-- **`Founders` (51) + `Being a founder` (14)** — merge or keep distinct?
-- **Low-value singletons** — likely retire or reassign: `Blog`, `Data`, `General`, `Support`, `Hardware`, `YouTube`, `Lifecycle messaging`.
+- **`AI` (10) + `LLM` (5) + `AI observability` (4)** – keep all three, or fold `LLM` into `AI`?
+- **`Feature flags` (7) + `Feature management` (8)** – one concept or two?
+- **`Founders` (51) + `Being a founder` (14)** – merge or keep distinct?
+- **Low-value singletons** – likely retire or reassign: `Blog`, `Data`, `General`, `Support`, `Hardware`, `YouTube`, `Lifecycle messaging`.
 
 ### Full current editorial tag list
 
@@ -94,7 +94,7 @@ Y Combinator 11       AI 10                   Infrastructure, Inside Posthog,
 Experiments 10        PostHog news 10         Lifecycle messaging, Ops, Support, YouTube
 ```
 
-## Tutorials: proposed merges
+## Proposed tutorials merges
 
 Keep the lowercase convention; fix duplicates within it.
 
@@ -125,10 +125,10 @@ web analytics 9        AI 2                DeskHog 2
 apps 8                 dashboards 2
 ```
 
-Note tutorials also mixes cases (`AI Observability`, `Workflows`, `Automation`, `Tutorials`, `DeskHog`, `MCP`) into an otherwise-lowercase set — a second-order cleanup once the canonical list is agreed.
+Note tutorials also mixes cases (`AI Observability`, `Workflows`, `Automation`, `Tutorials`, `DeskHog`, `MCP`) into an otherwise-lowercase set – a second-order cleanup once the canonical list is agreed.
 
 ## Next steps
 
 1. Agree on the canonical strings above (especially the judgment calls).
-2. Do a scripted find-and-replace across post frontmatter to apply the merges.
+2. Do a scripted find-and-replace across post front matter to apply the merges.
 3. For tutorials, reconcile the final list with `src/components/Tutorials/constants/tags.tsx`.
