@@ -6,7 +6,7 @@ export const langsmith = {
             features: {
                 generation_tracking: true,
                 latency_tracking: true,
-                cost_tracking: false,
+                cost_tracking: true,
                 trace_visualization: true,
                 token_tracking: true,
                 prompt_playground: true,
@@ -25,6 +25,7 @@ export const langsmith = {
                 human_annotation: true,
                 session_replay: false,
                 product_analytics: false,
+                ai_gateway_proxy: false,
             },
         },
         session_replay: {
@@ -32,6 +33,12 @@ export const langsmith = {
         },
         product_analytics: {
             available: false,
+        },
+    },
+        platform: {
+        deployment: {
+            eu_hosting: true,
+            open_source: false,
         },
     },
 }

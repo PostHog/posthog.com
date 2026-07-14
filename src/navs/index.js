@@ -626,8 +626,18 @@ export const handbookSidebar = [
                 url: '/handbook/content/metadata',
             },
             {
-                name: 'LinkedIn',
-                url: '/handbook/content/linkedin',
+                name: 'Social media',
+                url: '/handbook/content/social-media',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/handbook/content/social-media',
+                    },
+                    {
+                        name: 'LinkedIn',
+                        url: '/handbook/content/linkedin',
+                    },
+                ],
             },
         ],
     },
@@ -1672,6 +1682,16 @@ export const handbookSidebar = [
                     },
                 ],
             },
+            {
+                name: 'GTM engineering',
+                url: '/teams/gtm-engineering',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/teams/gtm-engineering',
+                    },
+                ],
+            },
         ],
     },
     {
@@ -2159,11 +2179,19 @@ export const docsMenu = {
             color: 'red',
             url: '/docs/self-driving',
             description: 'Understand PostHog and get set up',
+            badge: {
+                title: 'Beta',
+                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+            },
             children: [
                 {
                     name: 'Overview',
                     url: '/docs/self-driving',
                     icon: 'IconHome',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'Get started',
@@ -2173,7 +2201,7 @@ export const docsMenu = {
                     url: '/docs/self-driving/setup',
                 },
                 {
-                    name: 'Surfaces',
+                    name: 'Products',
                 },
                 {
                     name: 'Slack',
@@ -2187,13 +2215,24 @@ export const docsMenu = {
                     name: 'MCP',
                     url: '/docs/model-context-protocol',
                 },
-                // TODO: add PostHog Code (Desktop) as a surface here once it's GA.
+                {
+                    name: 'CLI',
+                    url: '/docs/cli',
+                },
+                {
+                    name: 'Code',
+                    url: '/code',
+                },
                 {
                     name: 'Concepts',
                 },
                 {
                     name: 'The self-improving loop',
                     url: '/docs/self-driving/self-improving-loop',
+                },
+                {
+                    name: 'Anatomy of a pull request',
+                    url: '/docs/self-driving/anatomy-of-a-pr',
                 },
                 {
                     name: 'Context',
@@ -2253,6 +2292,10 @@ export const docsMenu = {
                 {
                     name: 'Pricing',
                     url: '/docs/self-driving/pricing',
+                },
+                {
+                    name: 'FAQ',
+                    url: '/docs/self-driving/faq',
                 },
             ],
         },
@@ -2634,6 +2677,10 @@ export const docsMenu = {
                             url: '/docs/libraries/google-tag-manager',
                         },
                         {
+                            name: 'Grafana',
+                            url: '/docs/libraries/grafana',
+                        },
+                        {
                             name: 'MoEngage',
                             url: '/docs/libraries/moengage',
                         },
@@ -2944,6 +2991,10 @@ export const docsMenu = {
                         {
                             name: 'AI wizard',
                             url: '/docs/ai-engineering/ai-wizard',
+                        },
+                        {
+                            name: 'Sign up with the wizard',
+                            url: '/docs/ai-engineering/wizard-signup',
                         },
                         {
                             name: 'Model Context Protocol (MCP)',
@@ -3329,6 +3380,10 @@ export const docsMenu = {
                         {
                             name: 'ID-JAG (XAA)',
                             url: '/docs/settings/id-jag',
+                        },
+                        {
+                            name: 'Agent discovery (auth.md)',
+                            url: '/docs/settings/agent-discovery',
                         },
                         {
                             name: 'Content Security Policy tracking',
@@ -4426,6 +4481,7 @@ export const docsMenu = {
                         { name: 'PHP', url: '/docs/feature-flags/installation/php' },
                         { name: 'Python', url: '/docs/feature-flags/installation/python' },
                         { name: 'OpenFeature (Python)', url: '/docs/feature-flags/installation/openfeature' },
+                        { name: 'OpenFeature (JavaScript)', url: '/docs/feature-flags/installation/openfeature-js' },
                         { name: 'React', url: '/docs/feature-flags/installation/react' },
                         { name: 'React Native', url: '/docs/feature-flags/installation/react-native' },
                         { name: 'React Router', url: '/docs/feature-flags/installation/react-router' },
@@ -5604,6 +5660,21 @@ export const docsMenu = {
                     url: '/docs/support/workflows',
                     icon: 'IconDecisionTree',
                     color: 'green',
+                },
+                {
+                    name: 'Historical imports',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/support/imports',
+                    icon: 'IconUpload',
+                    color: 'blue',
+                },
+                {
+                    name: 'Import from Zendesk',
+                    url: '/docs/support/imports/zendesk',
+                    icon: 'IconLetter',
+                    color: 'blue',
                 },
             ],
         },
@@ -6943,6 +7014,10 @@ export const docsMenu = {
             color: 'purple',
             url: '/docs/slack',
             description: 'Run PostHog from any Slack channel — agent tasks, analytics, and notifications.',
+            badge: {
+                title: 'Beta',
+                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+            },
             children: [
                 {
                     name: 'Slack app',
@@ -6952,6 +7027,10 @@ export const docsMenu = {
                     url: '/docs/slack',
                     icon: 'IconHome',
                     color: 'seagreen',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'Setup',
@@ -7224,6 +7303,46 @@ export const docsMenu = {
                     name: 'Changelog',
                     url: '/docs/logs/changelog',
                     icon: 'IconRocket',
+                    color: 'purple',
+                },
+            ],
+        },
+        {
+            name: 'Metrics',
+            icon: 'IconTrends',
+            color: 'green',
+            url: '/docs/metrics',
+            description: 'Send OpenTelemetry metrics to PostHog and analyze them.',
+            children: [
+                {
+                    name: 'Metrics',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/metrics',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Getting started',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/metrics/start-here',
+                    icon: 'IconListCheck',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Why you need metrics',
+                    url: '/docs/metrics/basics',
+                    icon: 'IconBook',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'How metrics works',
+                    url: '/docs/metrics/architecture',
+                    icon: 'IconDatabase',
                     color: 'purple',
                 },
             ],

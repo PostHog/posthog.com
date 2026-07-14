@@ -129,6 +129,30 @@ config.setBeforeSend { event in
 
 </details>
 
+import FilterScreenEvents from '../_snippets/filter-screen-events-beforesend.mdx'
+
+<details>
+<summary>Filter autocaptured screen views</summary>
+
+<FilterScreenEvents />
+
+```swift
+let config = PostHogConfig(projectToken: "<ph_project_token>", host: "<ph_api_client_host>")
+
+let ignoredScreens: Set<String> = ["Splash", "Debug"]
+
+config.setBeforeSend { event in
+    if event.event == "$screen",
+       let screenName = event.properties["$screen_name"] as? String,
+       ignoredScreens.contains(screenName) {
+        return nil
+    }
+    return event
+}
+```
+
+</details>
+
 ### Sampling events
 
 Sampling lets you choose to send only a percentage of events to PostHog. It is a good way to control your costs without having to completely turn off features of the SDK.

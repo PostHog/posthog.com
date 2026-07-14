@@ -34,4 +34,10 @@ export const weave = {
             available: false,
         },
     },
+        platform: {
+        deployment: {
+            eu_hosting: true,
+            open_source: false,
+        },
+    },
 }
