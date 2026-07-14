@@ -13,9 +13,9 @@ We have an awesome, diverse, and inclusive community. In order to maintain and g
 
 ## Answer community questions
 
-One of the most helpful ways to contribute is by answering questions from other users in [our community forum](/questions). Sharing what you've learned helps others get unblocked faster and makes PostHog better for everyone, whether it's a quick tip, a workaround, or a detailed walkthrough.
+Every month there are hundreds of new questions from other users in [our community forum](/questions). Finding solutions and sharing what you've learned helps others get unblocked faster and makes PostHog better for everyone.
 
-Not sure where to start? Our [guide to answering community questions](/handbook/community/questions) walks you through how to write helpful, accurate answers.
+If you're not sure where to start, our [guide to answering community questions](/handbook/community/questions) walks through how to write helpful, accurate answers.
 
 ## Reporting bugs or issues
 
