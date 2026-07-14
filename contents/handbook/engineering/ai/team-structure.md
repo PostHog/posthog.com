@@ -14,7 +14,7 @@ This page explains how teams collaborate on AI features at PostHog. For a high-l
 
 ### The PostHog Desktop team
 
-<SmallTeam slug="posthog-code" /> builds PostHog Code, an agent development environment for product engineers. Working with coding agents today is bottlenecked by messy workflows — switching between agents, branches, worktrees, and manually managing PRs across multiple applications. PostHog Code solves this by giving each task its own isolated workspace where an agent works, with everything related to a task in one place instead of scattered across your terminal, editor, and GitHub.
+<SmallTeam slug="posthog-code" /> builds PostHog Desktop, an agent-powered product workspace — everything you and your team need to build and manage your self-driving product. It's not an undifferentiated orchestrator or a multiplayer coding product: coding is a feature, but it's not the thing. The product is organized around jobs to be done — taking action on things only a human can do, kicking off jobs for agents, reviewing agent work, and sharing what you find with your team — with PostHog's data and context informing all of them.
 
 The PostHog Desktop team owns the desktop app and the task execution pipeline.
 

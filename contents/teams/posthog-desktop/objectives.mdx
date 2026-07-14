@@ -1,47 +1,39 @@
 ## Q3 2026 goals
 
 <details>
-<summary>Objective 1: Get PostHog Desktop (incl. PostHog Code) into general availability (Peter)</summary>
+<summary>Objective 1: Get PostHog Desktop into general availability (Peter)</summary>
 
-- **Rationale:** We've been in a waitlisted beta since launch. Getting to GA unlocks the whole PostHog user base and forces us to finish the product rather than polish it forever.
-- **What we'll ship:** Channels, generative UI, and multiplayer as one unified product — no distinction between "Desktop" and "Code" features. Some newer features can still carry a beta label.
-- **We'll know we're successful when:** The waitlist is gone and any PostHog user can download and use PostHog Desktop.
+- **What we'll ship:** Channels, generative UI, and multiplayer as one unified product, with the waitlist removed so any PostHog user can use PostHog Desktop. Some newer features can still carry a beta label.
 
 </details>
 
 <details>
-<summary>Objective 2: Move to usage-based pricing (Annika)</summary>
+<summary>Objective 2: Move to usage-based pricing (Annika & Adam)</summary>
 
-- **Rationale:** Subscription pricing caps how much value power users can get (they hit daily limits fast) and blocks us from inviting more users. Usage-based pricing on token and compute costs unblocks GA.
-- **What we'll ship:** Usage-based billing, usage visibility, and cost controls with sensible defaults so users can understand and manage what they spend.
-- **We'll know we're successful when:** Pricing is no longer the reason we can't invite more users, and users can see and control their spend.
+- **What we'll ship:** Usage-based billing on token and compute costs, plus usage visibility and cost controls with sensible defaults so users can understand and manage what they spend.
 
 </details>
 
 <details>
 <summary>Objective 3: New features that differentiate us (Charles)</summary>
 
-- **Rationale:** In a year, users will spend most of their time reviewing work done by a fleet of agents rather than writing prompts and watching. We should build for that world now, leaning on PostHog's product data as our moat.
 - **What we'll ship:**
   - Loops and workflows, for coding and non-coding work
   - Data-driven plan mode / product harness, so plans are grounded in real product data from the start
   - More models, including open-source models for cheaper execution
   - Multi-repo support — users should talk in product scope, not repo scope ("fix the checkout flow" can span three repos)
-- **We'll know we're successful when:** Users run and review concurrent agent work instead of babysitting single tasks.
 
 </details>
 
 <details>
 <summary>Objective 4: Reliability, performance, and support (Alessandro)</summary>
 
-- **Rationale:** Users still hit churn-level reliability issues, and regressions eat the time we need to build what differentiates us.
 - **What we'll ship:**
   - Real end-to-end integration tests so changes stop causing regressions
   - First-principles rebuilds where we've been carrying inherited constraints and band-aid patches
   - Performance work: faster task creation and switching, app and agent boot times, and lower CPU/RAM usage
   - Really rock-solid cloud agents
   - A real process for the bug backlog and PR reviews
-- **We'll know we're successful when:** Firefighting is the exception rather than a weekly occurrence, and support and reviews don't pile up.
 
 </details>
 
