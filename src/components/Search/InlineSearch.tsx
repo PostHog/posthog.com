@@ -99,7 +99,10 @@ export const InlineSearch = ({
                 <OSButton
                     size="xs"
                     icon={<IconX />}
-                    onClick={handleClear}
+                    onClick={(event) => {
+                        handleClear()
+                        event.currentTarget.blur()
+                    }}
                     className="rounded-full !p-1.5"
                     data-sidebar-label
                 />
