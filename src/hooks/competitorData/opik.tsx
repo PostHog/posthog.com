@@ -57,7 +57,7 @@ export const opik = {
     platform: {
         deployment: {
             open_source: true,
-            eu_hosting: true,
+            eu_hosting: false,
         },
     },
 }
