@@ -6855,6 +6855,12 @@ export const docsMenu = {
                     name: 'Resources',
                 },
                 {
+                    name: 'Pricing',
+                    url: '/docs/posthog-code/pricing',
+                    icon: 'IconPiggyBank',
+                    color: 'green',
+                },
+                {
                     name: 'Open source',
                     url: '/docs/posthog-code/open-source',
                     icon: 'IconGithub',
