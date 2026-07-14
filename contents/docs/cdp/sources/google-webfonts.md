@@ -20,7 +20,7 @@ The Google Webfonts connector syncs the Google Fonts catalog into PostHog, so yo
 
 ## Prerequisites
 
-You need a Google API key with the **Web Fonts Developer API** enabled. No OAuth or scopes are required — the API is a public, read-only metadata catalog.
+You need a Google API key with the **Web Fonts Developer API** enabled. No OAuth or scopes are required – the API is a public, read-only metadata catalog.
 
 ## Adding a data source
 

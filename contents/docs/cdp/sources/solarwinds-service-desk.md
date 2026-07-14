@@ -29,7 +29,7 @@ You need a SolarWinds Service Desk account and a JSON web token generated for a 
 When linking SolarWinds Service Desk, you'll need:
 
 - **Region** – select the regional stack your account is on. SolarWinds Service Desk runs independent regional stacks that do not share data.
-- **JSON web token** – generate one under **Setup → Users & Access → Users**: open the user and use **Actions → Generate JSON Web Token**. The token inherits that user's role, so it needs read access to the records you want to sync, and requests stop working if that user is ever disabled.
+- **JSON web token** – generate one under **Setup → Users & Access → Users**: open the user and use **Actions → Generate JSON Web Token**. The token inherits the role of the account it's generated for, so that account needs read access to the records you want to sync, and requests stop working if that account is ever disabled.
 
 ## Sync modes
 
@@ -45,7 +45,7 @@ When linking SolarWinds Service Desk, you'll need:
 
 ## Troubleshooting
 
-- If requests stop working, confirm the user the token was generated for is still enabled and still has read access to the records you're syncing.
+- If requests stop working, confirm the account the token was generated for is still enabled and still has read access to the records you're syncing.
 - If you see no data, confirm you selected the region your account is on, since regional stacks do not share data.
 
 <TroubleshootingLink />

@@ -20,7 +20,7 @@ The Mixmax connector syncs your Mixmax data – sequences, messages, rules, snip
 
 ## Prerequisites
 
-You need a Mixmax account on a Growth+ or Enterprise plan with the API feature enabled on your workspace. The token is scoped to the user that creates it, so it can only sync data that user can access.
+You need a Mixmax account on a Growth+ or Enterprise plan with the API feature enabled on your workspace. The token is scoped to you as its creator, so it can only sync data you can access.
 
 ## Adding a data source
 
@@ -28,7 +28,7 @@ You need a Mixmax account on a Growth+ or Enterprise plan with the API feature e
 
 When linking Mixmax, you'll need:
 
-- **API token** – create one under **Settings ▸ Integrations ▸ API** in Mixmax. The token is scoped to the user that creates it, so it can only sync data that user can access.
+- **API token** – create one under **Settings ▸ Integrations ▸ API** in Mixmax. The token is scoped to you as its creator, so it can only sync data you can access.
 
 ## Sync modes
 
