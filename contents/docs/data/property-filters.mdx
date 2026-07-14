@@ -14,10 +14,10 @@ Property filters let you narrow down events, persons, groups, and feature flag t
 
 String operators work on text-based properties. These are the most common operators used in property filters.
 
-| Operator | Description |
-|----------|-------------|
-| `exact` / `is not` | Matches when the property value equals (or does not equal) any value in the list |
-| `contains` / `does not contain` | Matches when the property value contains (or does not contain) the substring |
+| Operator                                 | Description                                                                      |
+| ---------------------------------------- | -------------------------------------------------------------------------------- |
+| `exact` / `is not`                       | Matches when the property value equals (or does not equal) any value in the list |
+| `contains` / `does not contain`          | Matches when the property value contains (or does not contain) the substring     |
 | `matches regex` / `does not match regex` | Matches when the property value matches (or does not match) a regular expression |
 
 String properties also support [semver operators](#semver-operators) for comparing version strings like `1.2.3`. These appear alongside the regular string operators in the filter dropdown.
@@ -26,13 +26,13 @@ String properties also support [semver operators](#semver-operators) for compari
 
 Numeric operators work on number-based properties like counts, ages, or amounts.
 
-| Operator | Description |
-|----------|-------------|
-| `equals` / `does not equal` | Matches when the numeric value equals (or does not equal) the specified number |
-| `greater than` / `greater than or equal to` | Matches when the value is above (or at/above) the threshold |
-| `less than` / `less than or equal to` | Matches when the value is below (or at/below) the threshold |
-| `between` / `not between` | Matches when the value is (or is not) within the specified range |
-| `minimum` / `maximum` | Matches based on the minimum or maximum value |
+| Operator                                    | Description                                                                    |
+| ------------------------------------------- | ------------------------------------------------------------------------------ |
+| `equals` / `does not equal`                 | Matches when the numeric value equals (or does not equal) the specified number |
+| `greater than` / `greater than or equal to` | Matches when the value is above (or at/above) the threshold                    |
+| `less than` / `less than or equal to`       | Matches when the value is below (or at/below) the threshold                    |
+| `between` / `not between`                   | Matches when the value is (or is not) within the specified range               |
+| `minimum` / `maximum`                       | Matches based on the minimum or maximum value                                  |
 
 <CalloutBox icon="IconInfo" title="Feature flag limitations" type="fyi">
 
@@ -49,19 +49,19 @@ These limitations exist because the feature flag evaluation service uses a diffe
 
 Presence operators check whether a property exists on a person or event, regardless of its value.
 
-| Operator | Description |
-|----------|-------------|
-| `is set` | Matches when the property exists and has any value |
+| Operator     | Description                                              |
+| ------------ | -------------------------------------------------------- |
+| `is set`     | Matches when the property exists and has any value       |
 | `is not set` | Matches when the property does not exist or has no value |
 
 ## Date operators
 
 Date operators filter based on when something occurred relative to now or compared to a specific date.
 
-| Operator | Description |
-|----------|-------------|
+| Operator         | Description                                         |
+| ---------------- | --------------------------------------------------- |
 | `is date before` | Matches when the date is before the specified value |
-| `is date after` | Matches when the date is after the specified value |
+| `is date after`  | Matches when the date is after the specified value  |
 
 Date operators accept the following value formats:
 
@@ -77,19 +77,19 @@ Semver (semantic versioning) operators are additional operators available on str
 
 These are most useful with version-formatted properties like `$app_version` or `$lib_version`. Mobile SDKs automatically include `$app_version` in feature flag evaluation requests – see [property overrides](/docs/feature-flags/property-overrides#default-properties-in-mobile-sdks) for details.
 
-| Operator | Label in UI | Description | Example |
-|----------|-------------|-------------|---------|
-| `=` | equals (semver) | Matches versions exactly equal to the value | `= 1.2.0` matches `1.2.0` only |
-| `≠` | not equals (semver) | Matches versions not equal to the value | `≠ 1.2.0` matches any version except `1.2.0` |
-| `>` | greater than (semver) | Matches versions strictly greater than the value | `> 1.2.0` matches `1.3.0`, `2.0.0` |
-| `>=` | greater than or equal (semver) | Matches versions greater than or equal to the value | `>= 1.2.0` matches `1.2.0`, `1.3.0` |
-| `<` | less than (semver) | Matches versions strictly less than the value | `< 2.0.0` matches `1.9.9`, `1.0.0` |
-| `<=` | less than or equal (semver) | Matches versions less than or equal to the value | `<= 2.0.0` matches `2.0.0`, `1.5.0` |
-| `~` | tilde range (semver) | Matches versions compatible at the patch level | `~ 1.2.3` matches `>=1.2.3` and `<1.3.0` |
-| `^` | caret range (semver) | Matches versions compatible at the minor level | `^ 1.2.3` matches `>=1.2.3` and `<2.0.0` |
-| `*` | wildcard (semver) | Matches any version in the wildcard range | `1.2.*` matches `>=1.2.0` and `<1.3.0` |
+| Operator | Label in UI                    | Description                                         | Example                                      |
+| -------- | ------------------------------ | --------------------------------------------------- | -------------------------------------------- |
+| `=`      | equals (semver)                | Matches versions exactly equal to the value         | `= 1.2.0` matches `1.2.0` only               |
+| `≠`      | not equals (semver)            | Matches versions not equal to the value             | `≠ 1.2.0` matches any version except `1.2.0` |
+| `>`      | greater than (semver)          | Matches versions strictly greater than the value    | `> 1.2.0` matches `1.3.0`, `2.0.0`           |
+| `>=`     | greater than or equal (semver) | Matches versions greater than or equal to the value | `>= 1.2.0` matches `1.2.0`, `1.3.0`          |
+| `<`      | less than (semver)             | Matches versions strictly less than the value       | `< 2.0.0` matches `1.9.9`, `1.0.0`           |
+| `<=`     | less than or equal (semver)    | Matches versions less than or equal to the value    | `<= 2.0.0` matches `2.0.0`, `1.5.0`          |
+| `~`      | tilde range (semver)           | Matches versions compatible at the patch level      | `~ 1.2.3` matches `>=1.2.3` and `<1.3.0`     |
+| `^`      | caret range (semver)           | Matches versions compatible at the minor level      | `^ 1.2.3` matches `>=1.2.3` and `<2.0.0`     |
+| `*`      | wildcard (semver)              | Matches any version in the wildcard range           | `1.2.*` matches `>=1.2.0` and `<1.3.0`       |
 
-> **Note:** The property value should follow semver conventions (e.g., `1.2.3`) for accurate comparisons. Values that don't follow semver format may produce unexpected results.
+> **Note:** Standard semver format (e.g., `1.2.3`) works best. Two-component versions like `3.10` and zero-padded versions like `3.08` are also supported — they are automatically normalized (to `3.10.0` and `3.8.0` respectively) for feature flag evaluation. This is especially useful for `$app_version` values from mobile SDKs. Genuinely invalid strings (e.g., `not-a-version`) won't match any semver condition.
 
 ### Tilde, caret, and wildcard ranges
 
@@ -105,9 +105,9 @@ The tilde `~`, caret `^`, and wildcard `*` operators match a range of versions r
 
 Cohort operators are used exclusively with cohort properties to target users based on cohort membership. They cannot be used with person or group properties.
 
-| Operator | Description |
-|----------|-------------|
-| `in` | Matches when you are a member of the specified cohort |
+| Operator | Description                                               |
+| -------- | --------------------------------------------------------- |
+| `in`     | Matches when you are a member of the specified cohort     |
 | `not in` | Matches when you are not a member of the specified cohort |
 
 ## Where are property filters used?
