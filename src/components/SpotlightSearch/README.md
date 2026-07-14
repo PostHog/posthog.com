@@ -6,7 +6,23 @@ The site-wide search overlay, opened with `Cmd/Ctrl+K` or `/` through `openSearc
 
 Spotlight uses the same Algolia application, search key, index, and `react-instantsearch-hooks-web` integration as `components/SearchUI`. It does not call Inkeep or another vector-search service.
 
-Results use the existing Algolia fields: `title`, `excerpt`, `type`, and `fields.slug` (falling back to `slug`). They remain in Algolia rank order and are grouped by category for display. Clicking a result fires `web search result clicked` and opens the page in a new window.
+Results use the existing Algolia fields: `title`, `excerpt`, `type`, and `fields.slug` (falling back to `slug`). They remain in Algolia rank order and are grouped by category for display. Active category filters are sent to Algolia as facet filters, so filtering is applied before results are limited and returned. Clicking a result fires `web search result clicked` and opens the page in a new window.
+
+## Structure
+
+`index.tsx` is the search coordinator. It owns the Algolia hooks, query and filter state, keyboard navigation, analytics, actions, and the refs shared across selectable rows. The surrounding files keep configuration and rendering concerns separate without introducing another state layer:
+
+- `categories.tsx` contains the ordered category configuration, aliases, fallback presentation, and matching helpers.
+- `types.ts` defines raw Algolia hits, normalized results, groups, and navigation items.
+- `SearchInput.tsx` renders the query input and active-filter token.
+- `FilterMenu.tsx` renders the category picker.
+- `SuggestionList.tsx` renders matching actions, Ask AI, and category suggestions.
+- `ResultList.tsx` renders loading placeholders, grouped Algolia results, and the filtered empty state.
+- `SearchFooter.tsx` renders context-sensitive keyboard hints.
+- `SpotlightRow.tsx` provides shared option semantics, selection styling, and icon layout for every selectable row.
+- `actions.tsx` defines command-palette actions and connects them to app state.
+
+Keep search behavior and selection ordering in `index.tsx`. Extracted components should remain presentational and communicate through callbacks and refs supplied by the coordinator.
 
 ## Behavior
 
@@ -30,10 +46,15 @@ Queries of four or more words promote an Ask AI row. A settled query with no Alg
 ### Category filters
 
 - Category-like queries can surface a filter suggestion.
-- Selecting a category pins a filter token and scopes the already ranked Algolia results client-side.
+- Selecting a category pins a filter token and scopes the Algolia request while preserving ranking within that category.
 - Clicking a group heading applies its category while preserving the query.
 - Backspace at the beginning of an empty input, Esc, or the filter token removes the filter.
 - `Cmd/Ctrl+F` opens the category picker. While open, the input filters category names and the Algolia query is temporarily cleared.
+- The category picker is intentionally curated: its array order controls which filters are promoted and how they are ordered, while unlisted Algolia types can still appear as ordinary results.
+
+### Accessibility
+
+The overlay exposes dialog and combobox semantics, keeps focus inside the open dialog, restores focus to the previously active control when it closes, and connects keyboard selection to options with `aria-activedescendant`.
 
 ## Styling notes
 

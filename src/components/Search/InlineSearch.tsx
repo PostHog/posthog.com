@@ -5,12 +5,7 @@ import Link from 'components/Link'
 import { useSearch } from 'components/Editor/SearchProvider'
 import Mark from 'mark.js'
 import debounce from 'lodash/debounce'
-import algoliasearch from 'algoliasearch/lite'
-
-const algoliaSearchClient = algoliasearch(
-    process.env.GATSBY_ALGOLIA_APP_ID as string,
-    process.env.GATSBY_ALGOLIA_SEARCH_API_KEY as string
-)
+import { algoliaIndexName, algoliaSearchClient } from 'lib/algoliaSearch'
 
 export const InlineSearch = ({
     contentRef,
@@ -131,7 +126,7 @@ export const AlgoliaSearchResults = ({
 
         const doSearch = async () => {
             try {
-                const index = algoliaSearchClient.initIndex(process.env.GATSBY_ALGOLIA_INDEX_NAME as string)
+                const index = algoliaSearchClient.initIndex(algoliaIndexName)
                 const { hits } = await index.search(searchQuery, {
                     hitsPerPage: 8,
                     ...(facetFilters ? { facetFilters } : {}),

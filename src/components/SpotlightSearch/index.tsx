@@ -1,107 +1,21 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { Dialog as RadixDialog } from 'radix-ui'
 import { navigate } from 'gatsby'
-import algoliasearch from 'algoliasearch/lite'
-import { InstantSearch, useHits, useInstantSearch, useSearchBox } from 'react-instantsearch-hooks-web'
-import {
-    IconBook,
-    IconBrackets,
-    IconCheck,
-    IconCompass,
-    IconCopy,
-    IconFilter,
-    IconGraduationCap,
-    IconHeart,
-    IconNewspaper,
-    IconNotebook,
-    IconPeople,
-    IconPlug,
-    IconPuzzle,
-    IconSearch,
-    IconSparkles,
-    IconX,
-} from '@posthog/icons'
-import KeyboardShortcut from 'components/KeyboardShortcut'
-import Spinner from 'components/Spinner'
+import { InstantSearch, useConfigure, useHits, useInstantSearch, useSearchBox } from 'react-instantsearch-hooks-web'
 import usePostHog from 'hooks/usePostHog'
-import { capitalizeFirstLetter } from '../../utils'
+import { algoliaIndexName, algoliaSearchClient } from 'lib/algoliaSearch'
 import { useApp } from '../../context/App'
-import { useSpotlightActions, SpotlightAction } from './actions'
-
-const searchClient = algoliasearch(
-    process.env.GATSBY_ALGOLIA_APP_ID as string,
-    process.env.GATSBY_ALGOLIA_SEARCH_API_KEY as string
-)
-
-type AlgoliaRecord = {
-    excerpt?: string
-    fields?: { slug?: string }
-    slug: string
-    title: string
-    type: string
-}
-
-type SpotlightSearchResult = {
-    excerpt: string
-    title: string
-    type: string
-    url: string
-}
-
-// Labels and icons for the categories already present in the Algolia index.
-const typeConfig: Record<string, { label: string; icon: React.ReactNode }> = {
-    docs: { label: 'Docs', icon: <IconBook /> },
-    api: { label: 'API', icon: <IconBrackets /> },
-    apps: { label: 'Apps', icon: <IconPuzzle /> },
-    tutorial: { label: 'Tutorials', icon: <IconGraduationCap /> },
-    blog: { label: 'Blog', icon: <IconNewspaper /> },
-    post: { label: 'Posts', icon: <IconNotebook /> },
-    handbook: { label: 'Handbook', icon: <IconCompass /> },
-    customers: { label: 'Customers', icon: <IconHeart /> },
-    templates: { label: 'Templates', icon: <IconCopy /> },
-    community: { label: 'Community', icon: <IconPeople /> },
-    cdp: { label: 'CDP', icon: <IconPlug /> },
-}
-
-const typeOrder = Object.keys(typeConfig)
-
-const configForType = (type: string): { label: string; icon: React.ReactNode } =>
-    typeConfig[type] ?? { label: capitalizeFirstLetter(type), icon: <IconBook /> }
-
-// Aliases let short category-like queries surface the filter shortcut.
-const categoryAliases: Record<string, string[]> = {
-    docs: ['docs', 'documentation', 'reference', 'manual'],
-    api: ['api'],
-    apps: ['apps'],
-    tutorial: ['tutorials', 'guides', 'how-to', 'walkthrough'],
-    blog: ['blog', 'articles', 'news'],
-    post: ['posts'],
-    handbook: ['handbook', 'company', 'culture'],
-    customers: ['customers'],
-    templates: ['templates'],
-    community: ['questions', 'community', 'forum', 'answers'],
-    cdp: ['cdp', 'pipelines', 'destinations'],
-}
-
-const matchCategory = (query: string): string | null => {
-    const q = query.trim().toLowerCase()
-    if (q.length < 3) return null
-    for (const type of typeOrder) {
-        if (categoryAliases[type]?.some((alias) => alias.startsWith(q) || (q.length >= 4 && alias.includes(q)))) {
-            return type
-        }
-    }
-    return null
-}
-
-// The filter picker's options: null is "All categories" (clears the filter)
-const filterOptions: (string | null)[] = [null, ...typeOrder]
-
-type NavItem =
-    | { kind: 'action'; action: SpotlightAction }
-    | { kind: 'ask-ai' }
-    | { kind: 'filter'; type: string }
-    | { kind: 'result'; result: SpotlightSearchResult }
+import { useSpotlightActions } from './actions'
+import type { SpotlightAction } from './actions'
+import { configForType, filterOptions, matchCategory } from './categories'
+import FilterMenu from './FilterMenu'
+import ResultList from './ResultList'
+import SearchFooter from './SearchFooter'
+import SearchInput from './SearchInput'
+import { spotlightOptionId } from './SpotlightRow'
+import SuggestionList from './SuggestionList'
+import type { AlgoliaRecord, NavItem, SpotlightSearchResult, SuggestionItem } from './types'
 
 // Actions only make sense for short trigger-word queries ("dark mode",
 // "wallpaper") — long or question-shaped queries never surface them
@@ -117,16 +31,6 @@ const matchActions = (query: string, actions: SpotlightAction[]): SpotlightActio
         )
         .slice(0, 2)
 }
-
-const SkeletonRow = () => (
-    <li aria-hidden className="flex items-center gap-3 rounded-lg px-2.5 py-2">
-        <div className="rounded-md animate-pulse size-8 shrink-0 bg-border/50" />
-        <div className="min-w-0 flex-1 space-y-1.5">
-            <div className="h-3.5 w-1/3 animate-pulse rounded bg-border/50" />
-            <div className="w-2/3 h-3 rounded animate-pulse bg-border/50" />
-        </div>
-    </li>
-)
 
 // Note: this component uses text-secondary where opaque surfaces would use
 // text-muted — dark mode's muted (rgb(98 102 116)) was tuned for the solid
@@ -176,6 +80,7 @@ function SpotlightSearchContent({
     const { hits } = useHits<AlgoliaRecord>()
     const { status } = useInstantSearch()
     const loading = status === 'loading' || status === 'stalled'
+    useConfigure({ facetFilters: activeFilter ? [`type:${activeFilter}`] : [] })
     const results = useMemo(
         () =>
             hits.map((hit) => ({
@@ -206,7 +111,7 @@ function SpotlightSearchContent({
         return filterOptions.filter((type) =>
             type
                 ? configForType(type).label.toLowerCase().includes(q) ||
-                  (categoryAliases[type] ?? []).some((alias) => alias.includes(q))
+                  configForType(type).aliases.some((alias) => alias.includes(q))
                 : 'all categories'.includes(q)
         )
     }, [filterMenuOpen, trimmedQuery])
@@ -214,10 +119,14 @@ function SpotlightSearchContent({
     // Group by category while preserving Algolia's ranked order. A category's
     // first hit determines where that category appears.
     const groups = useMemo(() => {
-        const scoped = activeFilter ? results.filter((result) => result.type === activeFilter) : results
         const byType = new Map<string, SpotlightSearchResult[]>()
-        for (const result of scoped) {
-            byType.set(result.type, [...(byType.get(result.type) || []), result])
+        for (const result of results) {
+            const group = byType.get(result.type)
+            if (group) {
+                group.push(result)
+            } else {
+                byType.set(result.type, [result])
+            }
         }
         return Array.from(byType.entries()).map(([type, items]) => {
             // Cap per-category rows when browsing all categories; a filter shows everything
@@ -237,10 +146,12 @@ function SpotlightSearchContent({
         ...matchedActions.map((action) => ({ kind: 'action' as const, action })),
         ...(suggestAskAI ? [{ kind: 'ask-ai' as const }] : []),
         ...(suggestedFilter ? [{ kind: 'filter' as const, type: suggestedFilter }] : []),
-        ...groups.flatMap((group) => group.results.map((result) => ({ kind: 'result' as const, result }))),
+        ...(loading
+            ? []
+            : groups.flatMap((group) => group.results.map((result) => ({ kind: 'result' as const, result })))),
     ]
 
-    const suggestionRows = navItems.filter((item) => item.kind !== 'result')
+    const suggestionRows = navItems.filter((item): item is SuggestionItem => item.kind !== 'result')
 
     const close = () => {
         setQuery('')
@@ -436,348 +347,147 @@ function SpotlightSearchContent({
 
     const expanded = Boolean(query || activeFilter || filterMenuOpen)
     const resultIndexOffset = suggestionRows.length
-    let flatIndex = resultIndexOffset - 1
 
     return (
-        <AnimatePresence>
-            {open && (
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.1 }}
-                    className="fixed inset-0 z-[999998] flex justify-center px-4 pt-[18vh]"
-                    onMouseDown={close}
-                >
-                    <motion.div
-                        data-scheme="primary"
-                        initial={{ scale: 0.97, y: -8 }}
-                        animate={{ scale: 1, y: 0 }}
-                        exit={{ scale: 0.97, y: -8 }}
-                        transition={{ duration: 0.12, ease: [0.2, 0.2, 0.8, 1] }}
-                        className="@container flex h-fit w-full max-w-[680px] flex-col overflow-hidden rounded-2xl border border-primary bg-primary/60 shadow-2xl ring-1 ring-inset ring-white/10 backdrop-blur-2xl"
-                        onMouseDown={(e) => e.stopPropagation()}
-                    >
-                        <div className="flex gap-3 items-center px-4 h-14 shrink-0">
-                            {loading && query ? (
-                                <Spinner className="!h-5 !w-5 shrink-0 !text-secondary" />
-                            ) : (
-                                <IconSearch className="size-5 shrink-0 text-secondary" />
-                            )}
-                            {activeFilter && (
-                                <button
-                                    onClick={removeFilter}
-                                    title="Remove filter"
-                                    className="group flex shrink-0 items-center gap-1 rounded-md border border-primary bg-accent/80 px-1.5 py-1 text-sm font-semibold text-secondary hover:text-primary [&_svg]:size-3.5"
-                                >
-                                    {configForType(activeFilter).icon}
-                                    {configForType(activeFilter).label}
-                                    <IconX className="opacity-50 group-hover:opacity-100" />
-                                </button>
-                            )}
-                            <input
-                                ref={inputRef}
-                                type="text"
-                                value={query}
-                                onChange={(e) => {
-                                    setQuery(e.target.value)
-                                    if (filterMenuOpen) {
-                                        // Typing narrows the picker; keep the selection on the first match
-                                        setFilterMenuIndex(0)
-                                    }
-                                }}
-                                onKeyDown={handleInputKeyDown}
-                                placeholder={
-                                    filterMenuOpen
-                                        ? 'Filter by category...'
-                                        : activeFilter
-                                        ? `Search ${configForType(activeFilter).label.toLowerCase()}...`
-                                        : 'Search PostHog.com...'
-                                }
-                                autoFocus
-                                spellCheck={false}
-                                autoComplete="off"
-                                className="p-0 w-full text-lg bg-transparent border-0 outline-none text-primary placeholder:text-secondary focus:ring-0"
-                            />
-                            {!query && !filterMenuOpen ? (
-                                <KeyboardShortcut text="esc" size="xs" className="shrink-0" />
-                            ) : (
-                                <button
-                                    onClick={() => (filterMenuOpen ? closeFilterMenu() : openFilterMenu())}
-                                    title="Filter by category (⌘F)"
-                                    aria-label="Filter by category"
-                                    aria-expanded={filterMenuOpen}
-                                    className={`-m-1 shrink-0 rounded-md p-1 ${
-                                        filterMenuOpen ? 'text-primary' : 'text-secondary hover:text-primary'
-                                    }`}
-                                >
-                                    <IconFilter className="size-5" />
-                                </button>
-                            )}
-                        </div>
-
-                        <AnimatePresence initial={false}>
-                            {expanded && (
+        <RadixDialog.Root open={open} onOpenChange={(nextOpen) => !nextOpen && close()}>
+            <RadixDialog.Portal forceMount>
+                <AnimatePresence>
+                    {open && (
+                        <RadixDialog.Content
+                            asChild
+                            aria-describedby={undefined}
+                            onEscapeKeyDown={(event) => event.preventDefault()}
+                            onOpenAutoFocus={(event) => {
+                                event.preventDefault()
+                                inputRef.current?.focus()
+                            }}
+                        >
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.1 }}
+                                className="fixed inset-0 z-[999998] flex justify-center px-4 pt-[18vh]"
+                                onMouseDown={close}
+                            >
                                 <motion.div
-                                    key="panel"
-                                    initial={{ height: 0 }}
-                                    animate={{ height: contentHeight }}
-                                    exit={{ height: 0 }}
-                                    transition={{ duration: 0.18, ease: [0.2, 0.2, 0.8, 1] }}
-                                    className="overflow-hidden"
+                                    data-scheme="primary"
+                                    initial={{ scale: 0.97, y: -8 }}
+                                    animate={{ scale: 1, y: 0 }}
+                                    exit={{ scale: 0.97, y: -8 }}
+                                    transition={{ duration: 0.12, ease: [0.2, 0.2, 0.8, 1] }}
+                                    className="@container flex h-fit w-full max-w-[680px] flex-col overflow-hidden rounded-2xl border border-primary bg-primary/60 shadow-2xl ring-1 ring-inset ring-border/10 backdrop-blur-2xl"
+                                    onMouseDown={(e) => e.stopPropagation()}
                                 >
-                                    <div ref={measureContent}>
-                                        <div className="max-h-[min(480px,50vh)] overflow-y-auto border-t border-primary p-2">
-                                            {filterMenuOpen ? (
-                                                <ul className="p-0 m-0 list-none">
-                                                    {visibleFilterOptions.length === 0 && (
-                                                        <li className="px-2.5 py-4 text-center text-sm text-secondary">
-                                                            No matching categories
-                                                        </li>
-                                                    )}
-                                                    {visibleFilterOptions.map((type, index) => {
-                                                        const config = type
-                                                            ? configForType(type)
-                                                            : { label: 'All categories', icon: <IconSearch /> }
-                                                        return (
-                                                            <li
-                                                                key={type ?? 'all'}
-                                                                ref={(el) => (filterMenuItemRefs.current[index] = el)}
-                                                                onMouseMove={() => setFilterMenuIndex(index)}
-                                                                onClick={() => selectFilterOption(type)}
-                                                                className={`flex cursor-pointer items-center gap-3 rounded-lg px-2.5 py-2 ${
-                                                                    index === filterMenuIndex
-                                                                        ? 'bg-accent/60 ring-1 ring-inset ring-border/40'
-                                                                        : ''
-                                                                }`}
-                                                            >
-                                                                <div className="flex size-8 shrink-0 items-center justify-center rounded-md border border-primary bg-primary/50 text-secondary [&_svg]:size-4">
-                                                                    {config.icon}
-                                                                </div>
-                                                                <p className="m-0 text-[15px] text-primary">
-                                                                    {config.label}
-                                                                </p>
-                                                                {type === activeFilter && (
-                                                                    <IconCheck className="ml-auto size-4 shrink-0 text-secondary" />
-                                                                )}
-                                                            </li>
-                                                        )
-                                                    })}
-                                                </ul>
-                                            ) : (
-                                                <>
-                                                    {suggestionRows.length > 0 && (
-                                                        <ul className="p-0 m-0 list-none">
-                                                            {suggestionRows.map((item, index) => {
-                                                                const rowProps = {
-                                                                    ref: (el: HTMLLIElement | null) =>
-                                                                        (itemRefs.current[index] = el),
-                                                                    onMouseMove: () => setSelectedIndex(index),
-                                                                    className: `flex cursor-pointer items-center gap-3 rounded-lg px-2.5 py-2 ${
-                                                                        selectedIndex === index
-                                                                            ? 'bg-accent/60 ring-1 ring-inset ring-border/40'
-                                                                            : ''
-                                                                    }`,
-                                                                }
-                                                                const iconBoxClass =
-                                                                    'flex size-8 shrink-0 items-center justify-center rounded-md border border-primary bg-primary/50 text-secondary [&_svg]:size-4'
-                                                                const hintClass =
-                                                                    'ml-auto hidden shrink-0 text-xs text-secondary @md:block'
-                                                                if (item.kind === 'action') {
-                                                                    return (
-                                                                        <li
-                                                                            key={item.action.id}
-                                                                            {...rowProps}
-                                                                            onClick={() => runAction(item.action)}
-                                                                        >
-                                                                            <div className={iconBoxClass}>
-                                                                                {item.action.icon}
-                                                                            </div>
-                                                                            <p className="m-0 min-w-0 truncate text-[15px] text-primary">
-                                                                                {item.action.label}
-                                                                            </p>
-                                                                            <span className={hintClass}>
-                                                                                <KeyboardShortcut text="↵" size="xs" />{' '}
-                                                                                to run
-                                                                            </span>
-                                                                        </li>
-                                                                    )
-                                                                }
-                                                                if (item.kind === 'ask-ai') {
-                                                                    return (
-                                                                        <li key="ask-ai" {...rowProps} onClick={askAI}>
-                                                                            <div className={iconBoxClass}>
-                                                                                <IconSparkles />
-                                                                            </div>
-                                                                            <p className="m-0 min-w-0 truncate text-[15px] text-primary">
-                                                                                Ask AI:{' '}
-                                                                                <span className="font-semibold">
-                                                                                    &ldquo;{query}&rdquo;
-                                                                                </span>
-                                                                            </p>
-                                                                            <span className={hintClass}>
-                                                                                <KeyboardShortcut text="↵" size="xs" />{' '}
-                                                                                to ask
-                                                                            </span>
-                                                                        </li>
-                                                                    )
-                                                                }
-                                                                return (
-                                                                    <li
-                                                                        key="filter"
-                                                                        {...rowProps}
-                                                                        onClick={() => applyFilter(item.type)}
-                                                                    >
-                                                                        <div className={iconBoxClass}>
-                                                                            <IconFilter />
-                                                                        </div>
-                                                                        <p className="m-0 flex items-center gap-1.5 text-[15px] text-primary">
-                                                                            Filter by category:
-                                                                            <span className="flex items-center gap-1 rounded-md border border-primary bg-accent/80 px-1.5 py-0.5 text-sm font-semibold text-secondary [&_svg]:size-3.5">
-                                                                                {configForType(item.type).icon}
-                                                                                {configForType(item.type).label}
-                                                                            </span>
-                                                                        </p>
-                                                                        <span className={hintClass}>
-                                                                            <KeyboardShortcut text="↵" size="xs" /> to
-                                                                            filter
-                                                                        </span>
-                                                                    </li>
-                                                                )
-                                                            })}
-                                                        </ul>
-                                                    )}
-                                                    {loading && query ? (
-                                                        <ul className="p-0 m-0 list-none">
-                                                            <SkeletonRow />
-                                                            <SkeletonRow />
-                                                            <SkeletonRow />
-                                                        </ul>
-                                                    ) : hasResults ? (
-                                                        groups.map((group) => (
-                                                            <div key={group.type}>
-                                                                {!activeFilter && (
-                                                                    <h5 className="m-0 px-2.5 pb-1 pt-2 text-xs font-semibold uppercase tracking-wide text-secondary">
-                                                                        <button
-                                                                            onClick={() =>
-                                                                                applyFilter(group.type, {
-                                                                                    keepQuery: true,
-                                                                                })
-                                                                            }
-                                                                            title={`Only show ${configForType(
-                                                                                group.type
-                                                                            ).label.toLowerCase()}`}
-                                                                            className="tracking-wide uppercase hover:text-primary"
-                                                                        >
-                                                                            {configForType(group.type).label}
-                                                                        </button>
-                                                                    </h5>
-                                                                )}
-                                                                <ul className="p-0 m-0 list-none">
-                                                                    {group.results.map((result) => {
-                                                                        flatIndex++
-                                                                        const index = flatIndex
-                                                                        const selected = index === selectedIndex
-                                                                        return (
-                                                                            <li
-                                                                                key={result.url}
-                                                                                ref={(el) =>
-                                                                                    (itemRefs.current[index] = el)
-                                                                                }
-                                                                                onMouseMove={() =>
-                                                                                    setSelectedIndex(index)
-                                                                                }
-                                                                                onClick={() => openResult(result)}
-                                                                                className={`flex cursor-pointer items-center gap-3 rounded-lg px-2.5 py-2 ${
-                                                                                    selected
-                                                                                        ? 'bg-accent/60 ring-1 ring-inset ring-border/40'
-                                                                                        : ''
-                                                                                }`}
-                                                                            >
-                                                                                <div className="flex size-8 shrink-0 items-center justify-center rounded-md border border-primary bg-primary/50 text-secondary [&_svg]:size-4">
-                                                                                    {configForType(result.type).icon}
-                                                                                </div>
-                                                                                <div className="min-w-0">
-                                                                                    <p className="m-0 truncate text-[15px] font-semibold text-primary">
-                                                                                        {result.title}
-                                                                                    </p>
-                                                                                    <p className="m-0 text-sm truncate text-secondary">
-                                                                                        {result.excerpt}
-                                                                                    </p>
-                                                                                </div>
-                                                                                <span className="ml-auto hidden shrink-0 text-xs text-secondary @md:block">
-                                                                                    {result.url}
-                                                                                </span>
-                                                                            </li>
-                                                                        )
-                                                                    })}
-                                                                </ul>
-                                                            </div>
-                                                        ))
-                                                    ) : (
-                                                        !query &&
-                                                        activeFilter && (
-                                                            <p className="m-0 px-2.5 py-4 text-center text-sm text-secondary">
-                                                                Type to search{' '}
-                                                                {configForType(activeFilter).label.toLowerCase()}
-                                                                ...
-                                                            </p>
-                                                        )
-                                                    )}
-                                                </>
-                                            )}
-                                        </div>
+                                    <RadixDialog.Title className="sr-only">Search PostHog.com</RadixDialog.Title>
+                                    <SearchInput
+                                        inputRef={inputRef}
+                                        loading={loading}
+                                        query={query}
+                                        activeFilter={activeFilter}
+                                        filterMenuOpen={filterMenuOpen}
+                                        onQueryChange={(nextQuery) => {
+                                            setQuery(nextQuery)
+                                            if (filterMenuOpen) {
+                                                // Typing narrows the picker; keep the selection on the first match
+                                                setFilterMenuIndex(0)
+                                            }
+                                        }}
+                                        onKeyDown={handleInputKeyDown}
+                                        onRemoveFilter={removeFilter}
+                                        onToggleFilterMenu={() =>
+                                            filterMenuOpen ? closeFilterMenu() : openFilterMenu()
+                                        }
+                                        activeOptionId={
+                                            expanded
+                                                ? filterMenuOpen
+                                                    ? visibleFilterOptions.length
+                                                        ? spotlightOptionId('filter', filterMenuIndex)
+                                                        : undefined
+                                                    : navItems[selectedIndex]
+                                                    ? spotlightOptionId('result', selectedIndex)
+                                                    : undefined
+                                                : undefined
+                                        }
+                                        controlsId={
+                                            filterMenuOpen ? 'spotlight-filter-options' : 'spotlight-search-options'
+                                        }
+                                    />
 
-                                        <div className="flex justify-between items-center px-4 py-2 text-xs border-t shrink-0 border-primary text-secondary">
-                                            {filterMenuOpen ? (
-                                                <>
-                                                    <div className="flex gap-3 items-center">
-                                                        <span>
-                                                            <KeyboardShortcut text="↑" size="xs" />
-                                                            <KeyboardShortcut text="↓" size="xs" /> navigate
-                                                        </span>
-                                                        <span>
-                                                            <KeyboardShortcut text="↵" size="xs" /> apply filter
-                                                        </span>
-                                                    </div>
-                                                    <span>
-                                                        <KeyboardShortcut text="esc" size="xs" /> close
-                                                    </span>
-                                                </>
-                                            ) : (
-                                                <>
-                                                    <div className="flex gap-3 items-center">
-                                                        <span>
-                                                            <KeyboardShortcut text="↑" size="xs" />
-                                                            <KeyboardShortcut text="↓" size="xs" /> navigate
-                                                        </span>
-                                                        <span>
-                                                            <KeyboardShortcut text="↵" size="xs" /> open
-                                                        </span>
-                                                        <span className="hidden @md:inline">
-                                                            <KeyboardShortcut text="⌘F" size="xs" /> filter
-                                                        </span>
-                                                        {activeFilter && (
-                                                            <span>
-                                                                <KeyboardShortcut text="⌫" size="xs" /> remove filter
-                                                            </span>
+                                    <AnimatePresence initial={false}>
+                                        {expanded && (
+                                            <motion.div
+                                                key="panel"
+                                                initial={{ height: 0 }}
+                                                animate={{ height: contentHeight }}
+                                                exit={{ height: 0 }}
+                                                transition={{ duration: 0.18, ease: [0.2, 0.2, 0.8, 1] }}
+                                                className="overflow-hidden"
+                                            >
+                                                <div ref={measureContent}>
+                                                    <div
+                                                        id={
+                                                            filterMenuOpen
+                                                                ? 'spotlight-filter-options'
+                                                                : 'spotlight-search-options'
+                                                        }
+                                                        role="listbox"
+                                                        aria-label={
+                                                            filterMenuOpen ? 'Search categories' : 'Search results'
+                                                        }
+                                                        className="max-h-[min(480px,50vh)] overflow-y-auto border-t border-primary p-2"
+                                                    >
+                                                        {filterMenuOpen ? (
+                                                            <FilterMenu
+                                                                options={visibleFilterOptions}
+                                                                activeFilter={activeFilter}
+                                                                selectedIndex={filterMenuIndex}
+                                                                itemRefs={filterMenuItemRefs}
+                                                                onSelectIndex={setFilterMenuIndex}
+                                                                onSelect={selectFilterOption}
+                                                            />
+                                                        ) : (
+                                                            <>
+                                                                <SuggestionList
+                                                                    items={suggestionRows}
+                                                                    query={query}
+                                                                    selectedIndex={selectedIndex}
+                                                                    itemRefs={itemRefs}
+                                                                    onSelectIndex={setSelectedIndex}
+                                                                    onRunAction={runAction}
+                                                                    onAskAI={askAI}
+                                                                    onApplyFilter={applyFilter}
+                                                                />
+                                                                <ResultList
+                                                                    loading={loading}
+                                                                    query={query}
+                                                                    groups={groups}
+                                                                    activeFilter={activeFilter}
+                                                                    selectedIndex={selectedIndex}
+                                                                    indexOffset={resultIndexOffset}
+                                                                    itemRefs={itemRefs}
+                                                                    onSelectIndex={setSelectedIndex}
+                                                                    onApplyFilter={applyFilter}
+                                                                    onOpenResult={openResult}
+                                                                />
+                                                            </>
                                                         )}
                                                     </div>
-                                                    <span>
-                                                        <KeyboardShortcut text="⇧" size="xs" />
-                                                        <KeyboardShortcut text="↵" size="xs" /> talk to a robot
-                                                    </span>
-                                                </>
-                                            )}
-                                        </div>
-                                    </div>
+                                                    <SearchFooter
+                                                        filterMenuOpen={filterMenuOpen}
+                                                        activeFilter={activeFilter}
+                                                    />
+                                                </div>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
                                 </motion.div>
-                            )}
-                        </AnimatePresence>
-                    </motion.div>
-                </motion.div>
-            )}
-        </AnimatePresence>
+                            </motion.div>
+                        </RadixDialog.Content>
+                    )}
+                </AnimatePresence>
+            </RadixDialog.Portal>
+        </RadixDialog.Root>
     )
 }
 
@@ -787,11 +497,7 @@ export default function SpotlightSearch(props: {
     initialFilter?: string
 }): JSX.Element {
     return (
-        <InstantSearch
-            searchClient={searchClient}
-            indexName={process.env.GATSBY_ALGOLIA_INDEX_NAME as string}
-            stalledSearchDelay={750}
-        >
+        <InstantSearch searchClient={algoliaSearchClient} indexName={algoliaIndexName} stalledSearchDelay={750}>
             <SpotlightSearchContent {...props} />
         </InstantSearch>
     )

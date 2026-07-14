@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useWindow } from '../../context/Window'
 import { useApp } from '../../context/App'
-import algoliasearch from 'algoliasearch/lite'
 import { InstantSearch, useRefinementList } from 'react-instantsearch-hooks-web'
 import { useSearchBox, useHits } from 'react-instantsearch-hooks-web'
 import { Combobox } from '@headlessui/react'
@@ -12,11 +11,7 @@ import { Hit } from 'instantsearch.js'
 import OSButton from 'components/OSButton'
 import Input from 'components/OSForm/input'
 import SpotlightSearch from 'components/SpotlightSearch'
-
-const searchClient = algoliasearch(
-    process.env.GATSBY_ALGOLIA_APP_ID as string,
-    process.env.GATSBY_ALGOLIA_SEARCH_API_KEY as string
-)
+import { algoliaIndexName, algoliaSearchClient } from 'lib/algoliaSearch'
 
 const Filters = ({ isRefinedClassName = 'bg-primary' }: { isRefinedClassName?: string }) => {
     const { refine, items } = useRefinementList({ attribute: 'type', sortBy: ['name:asc'] })
@@ -213,11 +208,7 @@ export const SearchUI = ({
     onEscape?: () => void
 }) => {
     return (
-        <InstantSearch
-            searchClient={searchClient}
-            indexName={process.env.GATSBY_ALGOLIA_INDEX_NAME as string}
-            stalledSearchDelay={750}
-        >
+        <InstantSearch searchClient={algoliaSearchClient} indexName={algoliaIndexName} stalledSearchDelay={750}>
             <Search
                 initialFilter={initialFilter}
                 className={className}

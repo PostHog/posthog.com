@@ -2,9 +2,9 @@ import { Dialog, Transition } from '@headlessui/react'
 import React, { Fragment } from 'react'
 import SearchResults from './SearchResults'
 import { InstantSearch } from 'react-instantsearch-hooks-web'
-import algoliasearch from 'algoliasearch/lite'
 import usePostHog from '../../hooks/usePostHog'
 import { useChat } from 'hooks/useChat'
+import { algoliaIndexName, algoliaSearchClient } from 'lib/algoliaSearch'
 
 type SearchContextValue = {
     isVisible: boolean
@@ -23,11 +23,6 @@ export type SearchLocation =
     | 'mobile-header'
     | '404'
 export type SearchResultType = 'blog' | 'docs' | 'api' | 'question' | 'handbook' | 'apps'
-
-const searchClient = algoliasearch(
-    process.env.GATSBY_ALGOLIA_APP_ID as string,
-    process.env.GATSBY_ALGOLIA_SEARCH_API_KEY as string
-)
 
 const SearchContext = React.createContext<SearchContextValue>({
     isVisible: false,
@@ -118,8 +113,8 @@ export const SearchProvider: React.FC = ({ children }) => {
                             >
                                 <Dialog.Panel className="w-full max-w-4xl md:mx-4 h-[90vh] md:h-[600px] z-[999998]">
                                     <InstantSearch
-                                        searchClient={searchClient}
-                                        indexName={process.env.GATSBY_ALGOLIA_INDEX_NAME as string}
+                                        searchClient={algoliaSearchClient}
+                                        indexName={algoliaIndexName}
                                         stalledSearchDelay={750}
                                     >
                                         <SearchResults initialFilter={initialFilter} />
