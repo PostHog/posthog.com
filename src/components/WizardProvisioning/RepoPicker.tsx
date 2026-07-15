@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 
 import { Select } from 'components/RadixUI/Select'
-import type { GrantRepository } from '../../lib/wizard-drop/types'
+import type { GrantRepository } from '../../lib/wizard/types'
 
 /** Repository dropdown, grouped by GitHub org/user (the part before the slash). */
 export default function RepoPicker({

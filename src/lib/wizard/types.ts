@@ -1,13 +1,13 @@
 /**
- * TypeScript contract for the wizard "drop" flow.
+ * TypeScript contract for the wizard provisioning flow.
  *
  * Upstream (PostHog app) shapes come from two sources:
  * 1. Existing agentic provisioning endpoints (`account_requests`, `oauth/token`, `resources`) —
  *    transcribed from `ee/api/agentic_provisioning/views.py` in the monorepo.
- * 2. Net-new endpoints defined by the RFC (`wizard-drop-rfc.md` at the repo root): the GitHub
+ * 2. Net-new endpoints defined by the RFC (`wizard-provisioning-rfc.md` at the repo root): the GitHub
  *    grant store and the `configuration.wizard` block. These are reconciled against the monorepo
  *    implementation; all parsing lives in `provisioning.ts` (the single parsing point). See the
- *    reconciliation checklist in `components/WizardDrop/README.md` for the open coordination items.
+ *    reconciliation checklist in `components/WizardProvisioning/README.md` for the open coordination items.
  */
 
 export type ProvisioningError = { code: string; message: string }
@@ -71,8 +71,8 @@ export type ResourceCreateResponse = {
 
 // ---- Net-new endpoints (GitHub grant store; reconciled against the monorepo) ----
 
-// `email` is null when GitHub reports no verified email — still a fully usable grant (the drop
-// collects the address inline). It is NOT the App-permission-refusal case, which is a 502
+// `email` is null when GitHub reports no verified email — still a fully usable grant (the
+// provisioning flow collects the address inline). It is NOT the App-permission-refusal case, which is a 502
 // `email_unavailable` handled as a terminal misconfiguration error.
 export type GithubGrant = { grant_id: string; gh_login: string; email: string | null; expires_in?: number }
 

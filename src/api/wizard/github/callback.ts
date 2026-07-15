@@ -1,9 +1,9 @@
 import { GatsbyFunctionRequest, GatsbyFunctionResponse } from 'gatsby'
 
-import { COOKIES, COOKIE_MAX_AGE, config } from '../../../lib/wizard-drop/config'
-import { clearCookie, parseCookies, setCookie, sign, verify } from '../../../lib/wizard-drop/cookies'
-import { redirectWithDrop, redirectWithError } from '../../../lib/wizard-drop/http'
-import { ProvisioningRequestError, getProvisioningClient } from '../../../lib/wizard-drop/provisioning'
+import { COOKIES, COOKIE_MAX_AGE, config } from '../../../lib/wizard/config'
+import { clearCookie, parseCookies, setCookie, sign, verify } from '../../../lib/wizard/cookies'
+import { redirectWithStatus, redirectWithError } from '../../../lib/wizard/http'
+import { ProvisioningRequestError, getProvisioningClient } from '../../../lib/wizard/provisioning'
 
 /**
  * GitHub OAuth return leg. Verifies the CSRF state (signature + double-submit against the
@@ -38,7 +38,7 @@ const handler = async (req: GatsbyFunctionRequest, res: GatsbyFunctionResponse) 
             sign({ grant_id: grant.grant_id, gh_login: grant.gh_login, email: grant.email }),
             COOKIE_MAX_AGE.grant
         )
-        return redirectWithDrop(res, 'connected')
+        return redirectWithStatus(res, 'connected')
     } catch (error) {
         // `email_unavailable` (502) means the GitHub App is missing the "Email addresses (read)"
         // permission — a PostHog-side misconfiguration, not the visitor's problem. (No verified
@@ -47,7 +47,7 @@ const handler = async (req: GatsbyFunctionRequest, res: GatsbyFunctionResponse) 
         if (error instanceof ProvisioningRequestError && error.code === 'email_unavailable') {
             return redirectWithError(res, 'email_unavailable')
         }
-        console.error('wizard drop: github/callback failed', error)
+        console.error('wizard provisioning: github/callback failed', error)
         return redirectWithError(res, 'grant_exchange')
     }
 }

@@ -1,9 +1,9 @@
 import { GatsbyFunctionRequest, GatsbyFunctionResponse } from 'gatsby'
 
-import { COOKIES, COOKIE_MAX_AGE, config } from '../../lib/wizard-drop/config'
-import { clearCookie, parseCookies, verify } from '../../lib/wizard-drop/cookies'
-import { GrantExpiredError, getProvisioningClient } from '../../lib/wizard-drop/provisioning'
-import type { ReposApiResponse } from '../../lib/wizard-drop/types'
+import { COOKIES, COOKIE_MAX_AGE, config } from '../../lib/wizard/config'
+import { clearCookie, parseCookies, verify } from '../../lib/wizard/cookies'
+import { GrantExpiredError, getProvisioningClient } from '../../lib/wizard/provisioning'
+import type { ReposApiResponse } from '../../lib/wizard/types'
 import type { GrantCookie } from './session'
 
 /**
@@ -26,7 +26,7 @@ const handler = async (req: GatsbyFunctionRequest, res: GatsbyFunctionResponse) 
 
     if (config.mock && req.query.mock_expire === '1') {
         // eslint-disable-next-line @typescript-eslint/no-var-requires
-        require('../../lib/wizard-drop/mock').forceExpireGrant(grant.grant_id)
+        require('../../lib/wizard/mock').forceExpireGrant(grant.grant_id)
     }
 
     try {
@@ -48,7 +48,7 @@ const handler = async (req: GatsbyFunctionRequest, res: GatsbyFunctionResponse) 
             clearCookie(res, COOKIES.grant)
             return respond({ error: 'grant_expired' })
         }
-        console.error('wizard drop: repos failed', error)
+        console.error('wizard provisioning: repos failed', error)
         return respond({ error: 'fetch_failed' })
     }
 }

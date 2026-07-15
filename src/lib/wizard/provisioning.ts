@@ -4,9 +4,9 @@
  *
  * ALL parsing of upstream responses lives in this file on purpose: the GitHub-grant endpoints,
  * the `configuration.wizard` block, and the `github_integration`/`wizard_runs` resource actions
- * are net-new per `wizard-drop-rfc.md`, so this is the single file to reconcile with the monorepo
- * contract (see `components/WizardDrop/README.md` for the reconciliation checklist).
- * `getProvisioningClient()` returns the in-memory mock when `WIZARD_DROP_MOCK=1`.
+ * are net-new per `wizard-provisioning-rfc.md`, so this is the single file to reconcile with the monorepo
+ * contract (see `components/WizardProvisioning/README.md` for the reconciliation checklist).
+ * `getProvisioningClient()` returns the in-memory mock when `WIZARD_PROVISIONING_MOCK=1`.
  */
 import { API_VERSION, config } from './config'
 import type {
@@ -138,7 +138,7 @@ const realClient: ProvisioningClient = {
         if (status >= 200 && status < 300 && json?.grant_id) {
             // The POST fetches /user/emails server-side and returns the verified email here — we
             // never fetch it ourselves. `email` is null when GitHub has no verified email (still a
-            // usable grant; the drop collects one inline). `expires_in` (grant store TTL, 3600s) is
+            // usable grant; the provisioning flow collects one inline). `expires_in` (grant store TTL, 3600s) is
             // surfaced so the cookie mirror can track the authoritative server-side expiry.
             return {
                 grant_id: json.grant_id,

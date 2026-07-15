@@ -1,7 +1,7 @@
 /**
- * Signed-cookie helpers for the wizard drop Gatsby Functions.
+ * Signed-cookie helpers for the wizard Gatsby Functions.
  *
- * Format: `base64url(JSON payload) + "." + base64url(HMAC-SHA256(payload, WIZARD_DROP_STATE_SECRET))`.
+ * Format: `base64url(JSON payload) + "." + base64url(HMAC-SHA256(payload, WIZARD_PROVISIONING_STATE_SECRET))`.
  * Every payload gets an `iat` (unix seconds) stamped at signing time; `verify` enforces a max age.
  * Nothing sensitive beyond the opaque grant id ever goes in a cookie, so signing (not encryption)
  * is sufficient.
@@ -22,7 +22,7 @@ type ResLike = {
 
 const secret = (): string => {
     if (!config.stateSecret) {
-        throw new Error('WIZARD_DROP_STATE_SECRET is not configured')
+        throw new Error('WIZARD_PROVISIONING_STATE_SECRET is not configured')
     }
     return config.stateSecret
 }

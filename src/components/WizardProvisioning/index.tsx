@@ -5,12 +5,7 @@ import OSButton from 'components/OSButton'
 import WizardCommand from 'components/WizardCommand'
 import { getLogo } from '../../constants/logos'
 import usePostHog from '../../hooks/usePostHog'
-import type {
-    GrantRepository,
-    ProvisionApiResponse,
-    ReposApiResponse,
-    SessionResponse,
-} from '../../lib/wizard-drop/types'
+import type { GrantRepository, ProvisionApiResponse, ReposApiResponse, SessionResponse } from '../../lib/wizard/types'
 import RepoPicker from './RepoPicker'
 import { DegradedPanel, ErrorPanel, ExistingUserPanel, SuccessPanel } from './states'
 
@@ -28,7 +23,7 @@ const GitHubMark = (): JSX.Element => (
 /**
  * The active-flow steps (install, repo picker, outcomes) render in this subtle inset panel so their
  * form controls stay legible on the hero's textured background. The idle CTA deliberately sits
- * inline on the hero instead, so the drop is part of the hero, not a box beneath it.
+ * inline on the hero instead, so the provisioning flow is part of the hero, not a box beneath it.
  *
  * The `tone` recolors the whole panel border so failure states read as failures at a glance rather
  * than blending into the neutral panel: `error` (hard failure) and `warning` (degraded/partial
@@ -70,15 +65,15 @@ type View =
     | { kind: 'error'; code: string; retryAfter?: number }
 
 /**
- * The "drop" flow, rendered inside the wizard hero: connect GitHub → pick a repo → we provision a
+ * The provisioning flow, rendered inside the wizard hero: connect GitHub → pick a repo → we provision a
  * PostHog account and open an instrumentation PR from a cloud wizard run. See README.md for the
- * state diagram and wizard-drop-rfc.md (repo root) for the architecture. All server work happens in
+ * state diagram and wizard-provisioning-rfc.md (repo root) for the architecture. All server work happens in
  * the /api/wizard/* Gatsby Functions; this component is a state machine over their responses.
  *
- * The `wizard-drop` experiment gate lives in the hero (`useWizardDropEnabled`), which mounts this
+ * The `wizard-provisioning` experiment gate lives in the hero (`useWizardProvisioningEnabled`), which mounts this
  * component only for the `test` variant, so this component assumes it's enabled and never self-hides.
  */
-export default function WizardDrop(): JSX.Element {
+export default function WizardProvisioning(): JSX.Element {
     const posthog = usePostHog()
     const [view, setView] = useState<View>({ kind: 'loading' })
     const [identity, setIdentity] = useState<{ ghLogin?: string; email?: string }>({})
@@ -98,7 +93,7 @@ export default function WizardDrop(): JSX.Element {
 
     const toError = useCallback(
         (code: string, retryAfter?: number) => {
-            capture('wizard drop errored', { code })
+            capture('wizard errored', { code })
             setView({ kind: 'error', code, retryAfter })
         },
         [capture]
@@ -128,10 +123,10 @@ export default function WizardDrop(): JSX.Element {
             return
         }
         if (wasAwaitingInstall.current) {
-            capture('wizard drop install detected')
+            capture('wizard install detected')
             wasAwaitingInstall.current = false
         }
-        capture('wizard drop repo selected', {
+        capture('wizard repo selected', {
             repo_count: data.repositories.length,
             auto: data.repositories.length === 1,
         })
@@ -154,7 +149,7 @@ export default function WizardDrop(): JSX.Element {
                 return
             }
             setIdentity({ ghLogin: session.gh_login, email: session.email })
-            if (justConnected) capture('wizard drop github connected')
+            if (justConnected) capture('wizard github connected')
             await loadRepos()
         },
         [capture, loadRepos]
@@ -164,13 +159,13 @@ export default function WizardDrop(): JSX.Element {
     useEffect(() => {
         if (initialized.current) return
         initialized.current = true
-        capture('wizard drop viewed')
+        capture('wizard viewed')
 
         const params = new URLSearchParams(window.location.search)
-        const drop = params.get('drop')
+        const status = params.get('wizard')
         const code = params.get('code')
-        if (drop) {
-            params.delete('drop')
+        if (status) {
+            params.delete('wizard')
             params.delete('code')
             const query = params.toString()
             window.history.replaceState(
@@ -179,16 +174,16 @@ export default function WizardDrop(): JSX.Element {
                 window.location.pathname + (query ? `?${query}` : '') + window.location.hash
             )
         }
-        if (drop === 'done') {
-            capture('wizard drop provision succeeded', { via: 'consent' })
+        if (status === 'done') {
+            capture('wizard provision succeeded', { via: 'consent' })
             setView({ kind: 'success' })
-        } else if (drop === 'degraded') {
-            capture('wizard drop provision degraded', { via: 'consent' })
+        } else if (status === 'degraded') {
+            capture('wizard provision degraded', { via: 'consent' })
             setView({ kind: 'degraded' })
-        } else if (drop === 'error') {
+        } else if (status === 'error') {
             toError(code || 'unknown')
         } else {
-            void checkSession(drop === 'connected')
+            void checkSession(status === 'connected')
         }
     }, [capture, checkSession, toError])
 
@@ -214,7 +209,7 @@ export default function WizardDrop(): JSX.Element {
     }, [view.kind, loadRepos, toError])
 
     const connect = useCallback(() => {
-        capture('wizard drop github connect clicked')
+        capture('wizard github connect clicked')
         setView({ kind: 'connecting' })
         window.location.assign('/api/wizard/github-start')
     }, [capture])
@@ -238,7 +233,7 @@ export default function WizardDrop(): JSX.Element {
         // Each repo names its own installation; the run targets the one that owns the picked repo.
         const repo = view.repositories.find((r) => r.full_name === selectedRepo)
         if (!repo) return
-        capture('wizard drop provision clicked', { repository: selectedRepo })
+        capture('wizard provision clicked', { repository: selectedRepo })
         setView({ ...view, kind: 'provisioning' })
         let data: ProvisionApiResponse
         try {
@@ -256,10 +251,10 @@ export default function WizardDrop(): JSX.Element {
             return
         }
         if (data.status === 'success') {
-            capture('wizard drop provision succeeded')
+            capture('wizard provision succeeded')
             setView({ kind: 'success' })
         } else if (data.status === 'degraded') {
-            capture('wizard drop provision degraded')
+            capture('wizard provision degraded')
             setView({ kind: 'degraded' })
         } else if (data.status === 'requires_auth') {
             setView({ kind: 'existing_user', url: data.url })
@@ -270,13 +265,13 @@ export default function WizardDrop(): JSX.Element {
 
     const continueAsExistingUser = useCallback(() => {
         if (view.kind !== 'existing_user') return
-        capture('wizard drop existing user redirected')
+        capture('wizard existing user redirected')
         window.location.assign(view.url)
     }, [view, capture])
 
     // Idle/connecting is the hero's primary call to action: the GitHub button leads, with the
     // terminal command demoted to a muted "prefer the terminal?" secondary. It sits inline on the
-    // hero (no panel) so the drop reads as part of the hero rather than a box beneath it.
+    // hero (no panel) so the provisioning flow reads as part of the hero rather than a box beneath it.
     if (view.kind === 'idle' || view.kind === 'connecting') {
         const connecting = view.kind === 'connecting'
         return (
@@ -318,7 +313,7 @@ export default function WizardDrop(): JSX.Element {
                             size="md"
                             icon={<GitHubMark />}
                             onClick={() => {
-                                capture('wizard drop install opened')
+                                capture('wizard install opened')
                                 window.open(view.installUrl, '_blank', 'noopener')
                             }}
                         >

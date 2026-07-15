@@ -13,14 +13,14 @@ import Link from 'components/Link'
 import ProductList from 'components/ProductList'
 import { getLogo, getDarkClassForLogo } from '../../constants/logos'
 import WizardCommand from 'components/WizardCommand'
-import WizardDrop from 'components/WizardDrop'
-import { useWizardDropEnabled } from 'components/WizardDrop/useWizardDropEnabled'
+import WizardProvisioning from 'components/WizardProvisioning'
+import { useWizardProvisioningEnabled } from 'components/WizardProvisioning/useWizardProvisioningEnabled'
 
 function WizardHeader(): JSX.Element {
-    // The `wizard-drop` experiment gate lives here (single call site → single exposure). When on,
-    // the hero leads with the GitHub "drop" flow and demotes the terminal command to a secondary
-    // path inside <WizardDrop />; when off, it's the classic terminal-first hero.
-    const dropEnabled = useWizardDropEnabled()
+    // The `wizard-provisioning` experiment gate lives here (single call site → single exposure). When on,
+    // the hero leads with the GitHub provisioning flow and demotes the terminal command to a secondary
+    // path inside <WizardProvisioning />; when off, it's the classic terminal-first hero.
+    const provisioningEnabled = useWizardProvisioningEnabled()
     return (
         <header
             className="relative -mt-4 mb-6 overflow-hidden rounded-t-sm"
@@ -43,7 +43,7 @@ function WizardHeader(): JSX.Element {
                 <div className="flex-1 text-center @lg:text-left">
                     <h1 className="text-2xl @sm:text-3xl font-bold !mb-0">Don't add PostHog to your codebase.</h1>
                     <p className="!mt-2 !mb-4 text-base">
-                        {dropEnabled ? (
+                        {provisioningEnabled ? (
                             <>
                                 Connect GitHub and <em>let AI instrument your code</em>. We open a pull request you just
                                 review and merge.
@@ -54,7 +54,7 @@ function WizardHeader(): JSX.Element {
                             </>
                         )}
                     </p>
-                    {dropEnabled ? <WizardDrop /> : <WizardCommand slim />}
+                    {provisioningEnabled ? <WizardProvisioning /> : <WizardCommand slim />}
                 </div>
                 <div className="shrink-0">
                     <img

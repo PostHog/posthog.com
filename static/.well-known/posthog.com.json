@@ -1,6 +1,6 @@
 {
-    "client_id": "https://posthog.com/.well-known/wizard-drop-client.json",
-    "client_name": "Website wizard drop",
+    "client_id": "https://posthog.com/.well-known/posthog.com.json",
+    "client_name": "posthog.com",
     "redirect_uris": ["https://posthog.com/api/wizard/oauth-callback"],
     "grant_types": ["authorization_code"],
     "response_types": ["code"],
