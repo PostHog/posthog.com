@@ -210,6 +210,10 @@ Our website uses various APIs to pull in data from sites like GitHub (for contri
 
 If you need a specific environment development, ask in <PrivateLink url="https://posthog.slack.com/archives/C08UABF7PB7">#posthogdotcom</PrivateLink>.
 
+### Site-wide A/B experiments
+
+To A/B test two complete site builds at the same URL (for example, a large redesign branch vs. `master`), see [Site-wide A/B experiments](/handbook/engineering/posthog-com/site-experiments).
+
 ### Finding the content to edit
 
 Once you have cloned the repo, the `contents/` directory contains a few key areas:

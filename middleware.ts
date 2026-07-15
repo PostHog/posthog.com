@@ -8,6 +8,8 @@ import {
     shouldRunSiteExperiment,
 } from './src/lib/siteExperimentMiddleware'
 
+// Site-wide A/B experiments: /handbook/engineering/posthog-com/site-experiments
+
 export const config = {
     matcher: ['/((?!api/).*)'],
 }
@@ -32,24 +34,19 @@ export default async function middleware(request: Request): Promise<Response> {
     const url = new URL(request.url)
 
     if (!shouldRunSiteExperiment(url.pathname)) {
-        console.log('not running site experiment')
         return passThrough()
     }
 
     const experimentConfig = getSiteExperimentConfig()
     if (!experimentConfig?.enabled) {
-        console.log('not enabled')
         return passThrough()
     }
 
     if (isBot(request.headers.get('user-agent'))) {
-        console.log('is bot')
         return passThrough()
     }
 
     const assignment = await evaluateSiteExperimentVariant(request, experimentConfig)
-
-    console.log('assignment', assignment)
 
     if (!shouldRewriteToExperiment(assignment.variant)) {
         const response = passThrough()

@@ -23,23 +23,23 @@ interface PostHogFlagsResponse {
     quotaLimited?: string[]
 }
 
-const VARIANT_COOKIE = 'ph_site_experiment_variant'
 const BOT_USER_AGENT =
     /bot|crawler|spider|slurp|googlebot|bingbot|yandex|duckduckbot|baiduspider|facebookexternalhit|linkedinbot|twitterbot|discordbot|slackbot|applebot|semrush|ahref|headlesschrome|phantomjs/i
 
-const STICKY_MAX_AGE_SECONDS = 60 * 60 * 24 * 90
+const COOKIE_MAX_AGE_SECONDS = 60 * 60 * 24 * 90
 
 export function getSiteExperimentConfig(): SiteExperimentConfig | null {
     const projectToken = process.env.GATSBY_POSTHOG_API_KEY
     const deploymentUrl = process.env.SITE_EXPERIMENT_DEPLOYMENT_URL?.replace(/\/$/, '')
+    const flagKey = process.env.SITE_EXPERIMENT_FLAG_KEY
 
-    if (!projectToken || !deploymentUrl) {
+    if (!projectToken || !deploymentUrl || !flagKey) {
         return null
     }
 
     return {
         enabled: process.env.SITE_EXPERIMENT_ENABLED === 'true',
-        flagKey: process.env.SITE_EXPERIMENT_FLAG_KEY || 'new-site-redesign',
+        flagKey,
         deploymentUrl,
         projectToken,
         flagsApiHost: process.env.POSTHOG_FLAGS_API_HOST || 'https://us.i.posthog.com',
@@ -100,15 +100,6 @@ export function getDistinctId(request: Request, projectToken: string): string {
     return crypto.randomUUID()
 }
 
-export function getStickyVariant(request: Request): SiteExperimentVariant | null {
-    const value = getCookie(request, VARIANT_COOKIE)
-    if (value === 'control' || value === 'test') {
-        return value
-    }
-
-    return null
-}
-
 export function getBypassVariant(request: Request, config: SiteExperimentConfig): SiteExperimentVariant | null {
     const url = new URL(request.url)
     const variant = url.searchParams.get('ph_site_variant')
@@ -161,15 +152,9 @@ export async function evaluateSiteExperimentVariant(
 ): Promise<SiteExperimentAssignment> {
     const distinctId = getDistinctId(request, config.projectToken)
 
-    // Bypass runs before sticky so QA can force a variant after a normal visit.
     const bypassVariant = getBypassVariant(request, config)
     if (bypassVariant) {
         return { variant: bypassVariant, distinctId }
-    }
-
-    const stickyVariant = getStickyVariant(request)
-    if (stickyVariant) {
-        return { variant: stickyVariant, distinctId }
     }
 
     const headers = new Headers({
@@ -206,7 +191,6 @@ export async function evaluateSiteExperimentVariant(
         }
 
         const data = (await response.json()) as PostHogFlagsResponse
-        console.log('data', data)
         if (data.errorsWhileComputingFlags || data.quotaLimited?.includes('feature_flags')) {
             return { variant: 'control', distinctId }
         }
@@ -218,16 +202,6 @@ export async function evaluateSiteExperimentVariant(
     } catch {
         return { variant: 'control', distinctId }
     }
-}
-
-export function buildVariantCookie(variant: SiteExperimentVariant, secure: boolean): string {
-    const parts = [`${VARIANT_COOKIE}=${variant}`, 'Path=/', `Max-Age=${STICKY_MAX_AGE_SECONDS}`, 'SameSite=Lax']
-
-    if (secure) {
-        parts.push('Secure')
-    }
-
-    return parts.join('; ')
 }
 
 export function getRewriteUrl(request: Request, deploymentUrl: string): URL {
@@ -246,7 +220,7 @@ export function appendVariantCookies(
     assignment: SiteExperimentAssignment
 ): Response {
     const secure = new URL(request.url).protocol === 'https:'
-    const cookies = [buildVariantCookie(assignment.variant, secure)]
+    const cookies: string[] = []
 
     const posthogCookie = getCookie(request, getPostHogCookieKey(config.projectToken))
     if (!posthogCookie) {
@@ -259,7 +233,7 @@ export function appendVariantCookies(
         const parts = [
             `${getPostHogCookieKey(config.projectToken)}=${payload}`,
             'Path=/',
-            `Max-Age=${STICKY_MAX_AGE_SECONDS}`,
+            `Max-Age=${COOKIE_MAX_AGE_SECONDS}`,
             'SameSite=Lax',
         ]
         if (secure) {
