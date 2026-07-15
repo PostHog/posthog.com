@@ -33,6 +33,42 @@ Use our [docs](/docs), [troubleshooting tips](/handbook/support/troubleshooting-
 
 Keep the customer in the loop while you investigate — progress, blockers, next steps.
 
+### Using the MCP server while impersonating
+
+You can connect the [PostHog MCP server](/docs/model-context-protocol) while logged in as a customer. This is useful when you want to investigate their setup from Codex, Claude Code, Cursor, or another MCP client.
+
+1. Log in as the customer using the steps above. Leave **Read-only mode** selected unless the customer has explicitly agreed to you making changes.
+2. Add the PostHog MCP server to your client. For Codex, run:
+
+   ```bash
+   codex mcp add posthog --url https://mcp.posthog.com/mcp
+   ```
+
+   For Claude Code, install the PostHog plugin:
+
+   ```bash
+   claude plugin install posthog@claude-plugins-official
+   ```
+
+3. Disconnect any existing PostHog MCP session so the OAuth flow starts again:
+   - For Codex, run `codex mcp logout posthog`.
+   - For Claude Code, run `/mcp`, find the `posthog` plugin, and select **Clear authentication**.
+4. Start a fresh OAuth flow while you're still logged in as the customer:
+   - For Codex, run `codex mcp login posthog`.
+   - For Claude Code, run `/mcp`, find the `posthog` plugin, and select **Authenticate**.
+
+   Only authorize the organization and project you need for the investigation.
+5. Work within the scope of the ticket. If you need to make changes, get the customer's permission first, upgrade the impersonation session to read-write, then log out and log in to the MCP server again so it gets the right scopes.
+6. Disconnect the MCP server, then log out of the impersonation session when you're done. OAuth tokens created while impersonating are short-lived and revoked when the impersonation session ends.
+
+If you use Claude Code for repeat customer audits, the [impersonation toolkit](https://github.com/PostHog/skills/tree/main/skills/team/customer-success/impersonation-toolkit) wraps this flow, copies safer permission rules into each customer folder, and disables the PostHog plugin when you exit.
+
+<CalloutBox icon="IconWarning" title="PostHog AI data processing is disabled" type="caution">
+
+If the organization has disabled PostHog AI data processing, the OAuth flow will return a `403` and the MCP connection won't be authorized while you're impersonating them. This is intentional. Ask the customer to authorize the MCP connection themselves instead. Their connection will work, but MCP tools that use PostHog AI internally will stay unavailable while PostHog AI data processing is disabled. Don't enable PostHog AI on their behalf.
+
+</CalloutBox>
+
 ## Escalating tickets
 
 Escalate to support or the [relevant engineering team](/handbook/engineering/feature-ownership):

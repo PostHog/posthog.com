@@ -9,10 +9,10 @@ availability:
 sourceId: Langfuse
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
-import AlphaRelease from "../_snippets/alpha-release.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
+import AlphaRelease from "../\_snippets/alpha-release.mdx"
 
 <AlphaRelease />
 
@@ -38,7 +38,7 @@ When linking Langfuse, you'll need:
 
 <SyncModes />
 
-Traces, observations, scores, and sessions support incremental sync using Langfuse's creation/start-time filters.
+Traces, observations, scores, sessions, and prompts support incremental sync using Langfuse's creation/start-time filters.
 Each incremental run re-reads a trailing one-hour window to pick up late-arriving updates, such as traces whose aggregated metrics change as observations arrive.
 
 ## Configuration
