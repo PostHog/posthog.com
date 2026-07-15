@@ -16,16 +16,15 @@ We collaborate with these teams to provide focused, embedded technical work. The
 
 ## How FDE gets pulled in
 
-Sales or CS flag a technical blocker or opportunity, and we scope it. Before you route something to us, run the quick self-check (is it FDE-shaped, what context do we need to scope it, and what price shape to set with the customer) in [how to get an FDE involved](/handbook/forward-deployed-engineering/how-to-get-fde-involved). That page also covers the cases where a customer can self-serve without an engagement at all, which is often.
+Sales or CS flag a technical blocker or opportunity, and we scope it. Before you route something to us, run the quick self-check in [how to get an FDE involved](/handbook/forward-deployed-engineering/how-to-get-fde-involved). That page also covers the cases where a customer can self-serve without an engagement at all, which is often.
 
-One thing worth naming from the sales and CS side: **an FDE ask usually surfaces mid-deal or mid-relationship**, so the person routing it already holds the commercial context we don't. Bring that with you, meaning where the account is in its lifecycle, what's actually at stake commercially, and how time-sensitive it is, so we scope against the real constraint rather than the technical problem in isolation. Then bring it to the <SmallTeam slug="forward-deployed-engineering" /> team.
+One thing worth naming from the sales and CS side: **an FDE ask usually surfaces mid-deal or mid-relationship**, so the person routing it already holds the commercial context we don't. Bring that with you: where the account is in its lifecycle, what's actually at stake commercially, and how time-sensitive it is, so we scope against the real constraint rather than the technical problem in isolation. Then bring it to the <SmallTeam slug="forward-deployed-engineering" /> team.
 
 ## Pre-sale vs post-sale
-
-- **Pre-sale:** helping a prospect prove PostHog will work for them through advisory reviews, proofs-of-concept, and architecture assessments, often alongside [trials](/handbook/growth/sales/running-trials). This work exists because a deal exists, and it's time-boxed to help close it. It runs inside the AE's deal.
-- **Post-sale:** implementation, migration, and expansion work for existing customers. This is where the bulk of FDE engagements live, and where the work is most likely to compound.
-
 FDE engagements begin where pre-sales ends. If a prospect needs deep, ongoing technical work to be convinced, that's a signal the engagement should be scoped.
+
+- **Pre-sale:** helping a prospect prove PostHog will work for them through advisory reviews, proofs-of-concept, and architecture assessments, often alongside [trials](/handbook/growth/sales/running-trials). Currently FDEs don't do pre-sales work.
+- **Post-sale:** implementation, migration, and expansion work for existing customers. This is where the FDE engagements live, and where the work is most likely to compound.
 
 ## Handoffs
 

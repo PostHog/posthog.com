@@ -21,15 +21,14 @@ Write in the customer's vocabulary, not ours; their team has to live with the de
 
 ### Foundations before dashboards
 
-Most analytics engagements have a hidden trap: the dashboards are the visible deliverable, so there's pressure to build them first, but they're only as trustworthy as the data layer underneath. A dashboard built on a half-joined identity layer or a partially instrumented event stream doesn't fail; it renders a number that's plausible and wrong, which is worse than no dashboard, because the customer makes decisions on it.
+Most analytics engagements have a hidden trap: dashboards are the visible deliverable, so there's pressure to build them first, but they're only as trustworthy as the data layer underneath. Built on a half-joined identity layer or a partially instrumented event stream, a dashboard won't throw an error. It'll show a number that looks right and isn't, which is worse than no dashboard at all, because the customer will make real decisions on it.
 
 So we work in order:
 
 1. **Data layer.** Get the product, billing, and CRM sources cleanly joinable, taxonomy clean, and identify/group calls firing on time.
-2. **Dashboards and automations.** The daily tools the customer actually uses (churn triage, renewals, product health, alerts).
+2. **Dashboards and automations.** The stuff the customer opens every day: churn triage, renewals, product health, alerts.
 3. **Documentation and training.** Hand off to the customer's team so they own it after we leave.
 
-When someone asks "can we just build the dashboard now?", the honest answer is "we can, but it'll be silently wrong until the data lands."
 
 ## Rhythms
 
@@ -37,19 +36,16 @@ When someone asks "can we just build the dashboard now?", the honest answer is "
 - **Weekly sync.** 30 minutes at the same time each week for in-flight engagements. If there's nothing to talk about, cancel; don't pad.
 - **Weekly async update.** A one-paragraph status note in the customer channel that frames the next week, so nobody's surprised on Monday.
 
-Internally, we split each day into **planned** work (the couple of things you chose to make progress on) and **ad hoc** work (customer pings, escalations, quick questions that arrive during the day). Both count. If the week is mostly ad hoc, you're firefighting, not executing. That's the signal to scope back or redistribute, and it's why we log even the small stuff. Invisible work can't be managed.
-
-
 <!-- TODO: ONSITES document how FDEs run customer on-sites: when one is worth it, how to prepare, and what good looks like. Reference the sales team's customer on-sites guide (/handbook/growth/sales/customer-onsites) and engineering's visiting customers guide (/handbook/engineering/visiting-customers). -->
 
 ## Handover
 
-When the technical work is done, hand the relationship back to CS and write down what was built and why. A clean handover means:
+When the technical work is done, hand the relationship back to the account owner and write down what was built and why. A clean handover means:
 
 - The deliverable is shipped and approved by a named person on the customer side.
 - Any follow-on work is captured as explicit tasks, not left implicit in the prose.
 - Questions that came up during the engagement are answered in writing, so the next customer, or the CS owner, hits an answer instead of re-deriving it.
-- Anything that generalized has been graduated into shared team knowledge.
+- Anything that generalized has been graduated into shared <PrivateLink url="https://github.com/PostHog/fde-vault">fde-vault</PrivateLink>.
 
 ## Boundaries with support
 

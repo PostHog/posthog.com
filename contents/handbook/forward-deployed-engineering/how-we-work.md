@@ -6,42 +6,28 @@ showTitle: true
 
 ## The engagement lifecycle
 
-Every engagement moves through four phases. Reference this when you're unsure which phase you're in or what happens next.
+Every engagement moves through four phases:
 
 1. **Intake.** A colleague or customer raises a need. Capture enough to classify and route it: the customer, the product area, and a one-line ask.
-2. **Scope.** Classify the engagement type, estimate effort, and quote if the shape calls for it. The output is a short brief the customer can check before we commit. Detail below.
+2. **Scope.** Classify the engagement type, estimate effort, and quote if the shape calls for it. The output is a short brief the customer can check before we commit. Details below.
 3. **Execute.** Do the hands-on work: instrumentation, data modeling, migrations, integrations, dashboards, reference implementations. Capture the durable artifacts as you go.
-4. **Wrap-up.** Confirm the deliverable shipped and was approved, hand the relationship back to [sales and CS](/handbook/forward-deployed-engineering/working-with-sales-and-cs), and write down anything that came up so the next customer hits an answer instead of a rediscovery.
-
-Once an engagement is scoped, the day-to-day of delivering it (our cadence with the customer, how we write deliverables, and how we hand back) lives in [working with customers](/handbook/forward-deployed-engineering/working-with-customers).
-
+4. **Wrap-up.** Confirm the deliverable shipped and was approved, hand the relationship back to [sales and CS](/handbook/forward-deployed-engineering/working-with-sales-and-cs), and write down anything that came up so it can be preserved for the next customer.
 
 ## Scoping and engagement types
 
 Before delivery starts, every engagement needs a clear outcome, a rough timeline, and a shared definition of "done." We write this down as a short brief and send it to the customer to check before committing. Scope small: it's cheaper to expand a tight scope than to unwind a loose one.
 
-The test while scoping: **would this output be useful to a different customer facing a similar problem?** If yes, it's compounding FDE work, so make sure the artifact lands somewhere reusable. If no, it's a scoped deliverable or a support answer. Being honest about this keeps the team's capacity pointed at work that compounds.
-
-### Engagement types
-
-Every piece of work has a primary nature. Naming it honestly is the start of good scope discipline; lying to yourself about which one drove the work is the start of scope drift.
-
-- **FDE = work that compounds.** Produces reusable artifacts (docs, tooling, reference implementations, patterns) that benefit future customers, not just this one, and runs as an ongoing engagement with a cadence. You know it's FDE when something reusable exists at the end that wouldn't have otherwise.
-- **ProServ = scoped, billed, single-customer.** A defined start, end, and deliverable for one customer. Useful work, but it doesn't generalize: the result is named after the customer and would be wrong for anyone else.
-- **Support = reactive, one-off answers.** A question gets answered and nothing lasting is filed; the conversation is the artifact. It's the deep-context cousin of standard support: still reactive, but it needs FDE-level familiarity with the customer.
-- **Pre-sales = time-boxed conversion work.** Advisory reviews and proofs-of-concept that exist to help close a deal. If the deal disappears, the work stops.
-
-An engagement is often more than one of these. Pick the one that explains why the work was scheduled. And when work drifts, whether codebase access never came through, the customer went quiet, or scope shrank to one-off fixes, don't pretend it's still compounding. Reclassify it honestly and flag it, so capacity planning reflects reality. An FDE task that produces nothing reusable is just expensive support.
+Always ask yourself while scoping: **would this output be useful to a different customer facing a similar problem?** If yes, it's compounding FDE work, so make sure the artifact lands somewhere reusable. If no, it's a scoped deliverable or a support answer. Being honest about this keeps the team's capacity pointed at work that compounds.
 
 ## Principles
 
 These are the defaults we bring to every engagement. Each is a lever on the same goal: customer value that compounds.
 
 - **Solve the customer's actual problem**, not the one that's easiest to ticket. The strongest move is often to correct a customer's mental model rather than build exactly what they asked for. Before digging in, ask what decision actually depends on the answer, and what "good enough" looks like for it.
-- **MVP first, scope discipline always.** Name the minimum viable answer out loud before you start. A 20-line list delivered today usually beats a 200-line analysis delivered next week. Producing more than the question needed isn't thoroughness. Resist scope creep at every "should we also…" turn.
+- **Start with the MVP.** Say what the minimum answer is before you start. A short list today usually beats a long analysis next week. Building more than the question asked for isn't thoroughness, it's waste. Push back on every "should we also...".
 - **Reach for PostHog's own primitives first.** Prefer PostHog AI and the platform's built-in capabilities over bespoke engineering. The simplest path the product already supports is usually right, and it's the one the customer can maintain after we leave.
 - **Solve it once.** Anything you build for one customer should, where possible, become a reusable example, template, or product improvement.
-- **Lead with substance.** In customer communication, lead with what you found and what you'd do, never with the fact that an artifact exists. "The writeup is ready" reads as corporate filler; say what's in it.
+- **Lead with substance.** In customer communication, lead with what you found and what you'd do, never with the fact that an artifact exists. "The writeup is ready" reads as corporate filler. Say what's in it.
 - **Stay close to product engineering.** We're the fastest feedback loop between real customer usage and the roadmap, so [use it](/handbook/forward-deployed-engineering/working-with-product-engineering).
 
 ## Judgment over output
