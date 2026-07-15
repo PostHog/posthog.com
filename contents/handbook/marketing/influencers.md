@@ -26,7 +26,7 @@ Most of the value shows up later in this arc, not at the first collaboration, so
 
 ## Sourcing and evaluating influencers
 
-- You can find new influencers by looking at the creators engineers share or mention internally, searching for ones who have made relevant videos, looking at the recommendations of ones we've already sponsored, inbound, and [Kuli](https://kuli.one/#how-it-works).
+- You can find new influencers by looking at the creators engineers share or mention internally, searching for ones who have made relevant videos, looking at the recommendations of ones we've already sponsored, inbound, and [Kuli](https://kuli.one/#how-it-works) (AI-powered influener discovery tool).
 
 Don't limit yourself to individual creators. Great partnerships often come from other places too:
 
@@ -86,7 +86,7 @@ Treat agencies as an extension of the team, not a replacement for it.
 
 ## Working with PMMs
 
-Influencer marketing works best when we're involved early.
+Influencer marketing works best when involved early: i.e. if we have a big launch and we know exact dates, let #influence-wrangling channel in Slack know a month before (or just as soon as possible), this gives us time to prep the creators, make sure we fit in their schedules and have time to make a compelling story, naturally integrating new products into creators' content.
 
 For launches, we generally need:
 
@@ -96,8 +96,6 @@ For launches, we generally need:
 - visuals
 - launch timelines
 - someone available to answer technical questions
-
-The earlier we're involved, the more naturally creators can integrate new products into their content.
 
 ## What should the placement actually look like?
 
@@ -141,7 +139,7 @@ Consider both direct performance and longer-term strategic value when reviewing 
 
 ## Relationship management
 
-Creators are people, not inventory. The best partnerships are built over months or years, not a single sponsorship.
+We treat creators as people, not inventory. The best partnerships are built over months or years, not a single sponsorship.
 
 - Reply quickly.
 - Give thoughtful feedback.
@@ -153,7 +151,7 @@ The goal is for creators to think of PostHog first when they have a new idea and
 
 ## Events and conferences
 
-Conferences are rarely valuable because of the talks. They're valuable because of the people.
+Conferences are rarely valuable because of the talks, but they are really valuable because of the people that attend those. In the 2026 we've been to Stripe Sessions and VidCon - both of them provided us the opportunity to network with the right people and expand our creator roster.
 
 The biggest benefits usually come from:
 
@@ -170,8 +168,7 @@ If possible, prioritize speaking, hosting dinners, or organizing meetups over si
 We're constantly experimenting with new distribution channels. Current areas we're exploring include:
 
 - podcasts
-- TikTok creators
-- Instagram creators
+- Instagram & TikTok creators
 - startup founders as creators
 - agency partnerships
 - creator dinners and other IRL events
