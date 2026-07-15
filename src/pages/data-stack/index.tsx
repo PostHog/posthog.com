@@ -208,7 +208,7 @@ export default function CDP(): JSX.Element {
                     omniscient AI
                 </h3>
 
-                <CallToAction to="https://app.posthog.com/signup" size="sm">
+                <CallToAction to="https://app.posthog.com/signup" size="sm" className="max-w-[175px]">
                     Get started - free
                 </CallToAction>
                 <p>
