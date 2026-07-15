@@ -42,6 +42,31 @@ With it, you can interact with elements to [create actions](/tutorials/how-to-ca
     classes = {"rounded"}
 />
 
+### Launch the toolbar with a bookmarklet
+
+Instead of visiting the **Launch Toolbar** page each time, you can create a browser bookmarklet that opens the toolbar on whatever page you're currently viewing in one click. It works by reloading the current page through PostHog's `redirect_to_site` endpoint, which injects the toolbar.
+
+To set it up:
+
+1. Make sure you're logged into your PostHog account in the same browser, and that the page's URL is in your list of [authorized URLs](https://app.posthog.com/toolbar).
+2. Create a new bookmark in your browser (right-click the bookmarks bar → **Add page**, or press ⌘/Ctrl+D and edit it).
+3. Name it something like "Launch PostHog toolbar".
+4. Copy the snippet for your region below and paste it into the bookmark's **URL** field, then save.
+
+<MultiLanguage>
+
+```js file=US
+javascript:(function(){var u=location.href.split('#')[0];location.href='https://us.posthog.com/api/user/redirect_to_site/?appUrl='+encodeURIComponent(u);})();
+```
+
+```js file=EU
+javascript:(function(){var u=location.href.split('#')[0];location.href='https://eu.posthog.com/api/user/redirect_to_site/?appUrl='+encodeURIComponent(u);})();
+```
+
+</MultiLanguage>
+
+Now, on any authorized page, click the bookmark and the toolbar launches after a quick refresh.
+
 ## Creating actions using the toolbar
 
 The toolbar enables you to easily create [actions](/docs/data/actions) by clicking elements directly on your website.
