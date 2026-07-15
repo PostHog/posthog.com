@@ -16,17 +16,17 @@ import AlphaRelease from "../_snippets/alpha-release.mdx"
 
 <AlphaRelease />
 
-Sync your Flagsmith projects, environments, feature flags, flag states, segments, organisation members, and audit log into the PostHog data warehouse, so you can correlate rollouts with product metrics and track who changed what, when.
+Sync your Flagsmith projects, environments, feature flags, flag states, segments, organization members, and audit log into the PostHog data warehouse, so you can correlate rollouts with product metrics and track who changed what, when.
 
 ## Prerequisites
 
-You need an organisation API key for your Flagsmith organisation. Organisation API keys grant admin access to every project in the organisation, so store them carefully.
+You need an organization API key for your Flagsmith organization. Organization API keys grant admin access to every project in the organization, so store them carefully.
 
 ## Adding a data source
 
 <SourceSetupIntro />
 
-1. In Flagsmith, go to **Organisation Settings** and open the **API Keys** tab, then create an organisation API key and copy it.
+1. In Flagsmith, go to **Organisation Settings** (as labeled in the Flagsmith dashboard) and open the **API Keys** tab, then create an organization API key and copy it.
 2. Back in PostHog, enter the API key.
 3. If you self-host Flagsmith, set the API URL to your API host (for example `https://flagsmith.example.com`). Leave it blank to use Flagsmith SaaS.
 4. Click **Next**, select the tables you want to sync, set the sync method and frequency, then click **Import**.
@@ -47,8 +47,8 @@ Flagsmith's Admin API exposes no server-side timestamp filter on these resources
 
 ## Troubleshooting
 
-If a sync fails with an authentication error, the organisation API key was likely revoked or entered incorrectly. Create a new key under **Organisation Settings > API Keys** and reconnect the source.
+If a sync fails with an authentication error, the organization API key was likely revoked or entered incorrectly. Create a new key under **Organisation Settings > API Keys** and reconnect the source.
 
-Retention of the `audit_logs` table on Flagsmith SaaS depends on your plan, so it reflects the history Flagsmith currently retains for your organisation.
+Retention of the `audit_logs` table on Flagsmith SaaS depends on your plan, so it reflects the history Flagsmith currently retains for your organization.
 
 <TroubleshootingLink />
