@@ -35,6 +35,7 @@ List of ingestion warnings:
 - [Replay event timestamp is invalid](#replay-event-timestamp-is-invalid)
 - [Replay event timestamp was too far in the future](#replay-event-timestamp-was-too-far-in-the-future)
 - [$set or $set_once is ignored on exception events and should not be sent](#set-or-set_once-is-ignored-on-exception-events-and-should-not-be-sent)
+- [Invalid heatmap data](#invalid-heatmap-data)
 
 ## Refused to merge with an illegal distinct ID
 
@@ -85,3 +86,9 @@ The replay event timestamp is more than 7 days in the future and the session rep
 ## Invalid set operations on exception events
 
 The `$set` or `$set_once` properties are ignored on exception events and should not be sent.
+
+## Invalid heatmap data
+
+PostHog couldn't process the `$heatmap_data` attached to an event, so no [heatmap](/docs/toolbar/heatmaps) data was extracted from it. The event itself is still ingested as normal.
+
+This indicates the `$heatmap_data` property was malformed, which is usually a sign of an instrumentation bug. If you're capturing heatmap data with [posthog-js](/docs/libraries/js), make sure you're on a recent version of the SDK and aren't manually constructing or modifying `$heatmap_data` yourself.

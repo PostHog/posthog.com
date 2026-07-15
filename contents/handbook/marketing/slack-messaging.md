@@ -4,7 +4,9 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We share [Slack channels with many of our customers and partners](/handbook/growth/sales/slack-channels) via Slack Connect, managed through [Pylon](https://app.usepylon.com/). These channels are normally used for support and relationship building, but Pylon's **broadcast** functionality also lets us send a single message to every customer or partner Slack channel at once.
+> This page isn't accurate - we have deprecated Pylon and don't have a comparable broadcast capability in SupportHog or elsewhere.  In the meantime if you want to get a Slack message out to customers ask account owners to do it on your behalf in [#group-cs-sales-support](https://posthog.slack.com/archives/C090RCG671C)
+
+We share [Slack channels with many of our customers and partners](/handbook/growth/sales/slack-channels) via Slack Connect, managed through [Pylon](/handbook/growth/sales/slack-channels), our own tool. These channels are normally used for support and relationship building, but Pylon's **broadcast** functionality also lets us send a single message to every customer or partner Slack channel at once.
 
 This is a powerful way to amplify [product announcements](/handbook/marketing/product-announcements) and other comms directly to the people building on PostHog, alongside our usual [email](/handbook/marketing/email-comms) and [in-app](/handbook/marketing/in-app) channels.
 
@@ -43,8 +45,8 @@ Beyond accounts that sales or CS flags, scan the audience yourself for channels 
 
 ## How to send a broadcast in Pylon
 
-1. Log into the [Pylon admin](https://app.usepylon.com/) using SSO with your PostHog email address.
-2. Find the broadcasts feature in the Pylon UI and create a new broadcast.
+1. Log into Pylon using SSO with your PostHog email address.
+2. Find the broadcasts feature in Pylon and create a new broadcast.
 3. Select the audience – typically all customer and/or partner Slack channels. Double-check the audience before sending, as the message goes to live customer channels.
 4. Write your message. Keep it short, friendly, and link out to the [changelog](/changelog), blog post, or docs for the full detail.
 5. **Send the message as yourself, not as PostHog.** Pylon lets you choose the sender - sending from a real person feels more personal and gets a better response than a faceless company message.

@@ -30,6 +30,19 @@ The MCP server provides these tools for working with Product Analytics:
 | `insight-update`                     | Update a saved insight's name, description, or query.                                                                                         |
 | `insight-delete`                     | Delete a saved insight.                                                                                                                       |
 
+## Actors tools
+
+Actors tools let your agent drill into a specific data point from any insight and list the individual persons behind it – who converted, dropped off, retained, and so on.
+
+| Tool                      | Description                                                                                                                                                                                                                                                                                          |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `query-trends-actors`     | List persons behind a trends data point.                                                                                                                                                                                                                                                             |
+| `query-funnel-actors`     | List persons who converted through or dropped off at a funnel step. Supports two modes: **step mode** (positive `funnelStep` = converted, negative = dropped off, 1-based) and **trends-dropoff mode** (`funnelTrendsDropOff` + `funnelTrendsEntrancePeriodStart` for funnel-trends visualizations). |
+| `query-retention-actors`  | List persons in a retention cohort.                                                                                                                                                                                                                                                                  |
+| `query-paths-actors`      | List persons who followed a specific path.                                                                                                                                                                                                                                                           |
+| `query-stickiness-actors` | List persons at a stickiness level.                                                                                                                                                                                                                                                                  |
+| `query-lifecycle-actors`  | List persons in a lifecycle stage.                                                                                                                                                                                                                                                                   |
+
 ## Example prompts
 
 Try these with your MCP-enabled agent:

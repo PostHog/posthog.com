@@ -15,7 +15,7 @@ As a general principle, we try to make sure as much customer communication as po
 
 For existing customers, you'll sometimes send emails directly from <PrivateLink url="https://posthog.vitally-eu.io/">Vitally</PrivateLink>. To ensure these also make it to Salesforce, first look up your _Email to Salesforce Address_ from the [personal settings page](https://posthog.lightning.force.com/lightning/settings/personal/EmailToSalesforceUserSetup/home) in Salesforce, and then add it to your <PrivateLink url="https://posthog.vitally-eu.io/settings/profile/gmail">Vitally gmail settings</PrivateLink>.
 
-All Slack messages sync up with the corresponding account in Salesforce. We use [Pylon](https://app.usepylon.com) for this sync, so make sure Pylon is added to the customer Slack channel integrations and the channel is [linked to the Salesforce account](https://app.usepylon.com/integrations/salesforce?tab=account-mapping) properly for the sync to work smoothly.
+All Slack messages sync up with the corresponding account in Salesforce. We use [SupportHog](/handbook/growth/sales/slack-channels) for this sync, so make sure SupportHog is [added to the customer Slack channel](/handbook/growth/sales/slack-channels) and the channel's name is recorded on the relevant Salesforce account record for the sync to work smoothly.
 
 You are most likely to use the following regularly:
 

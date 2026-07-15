@@ -9,7 +9,7 @@ availability:
 sourceId: Gong
 ---
 
-<CalloutBox icon="IconInfo" title="Alpha release" type="fyi">
+<CalloutBox icon="IconFlask" title="Alpha release" type="action">
 
 This source is currently in **alpha**. The interface and available tables may change.
 
@@ -45,3 +45,7 @@ The `calls` table only syncs the last 365 days of data on the initial sync.
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

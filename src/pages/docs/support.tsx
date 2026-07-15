@@ -3,28 +3,18 @@ import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
 import Intro from 'components/Docs/Intro'
 import ResourceItem from 'components/Docs/ResourceItem'
-import { CalloutBox } from 'components/Docs/CalloutBox'
 
 const Support: React.FC = () => {
     return (
         <ReaderView>
             <SEO title="Support - Docs - PostHog" />
-            <CalloutBox icon="IconFlask" title="Support is in beta" type="info">
-                <p>
-                    <strong>Note:</strong> Support is currently in{' '}
-                    <span className="rounded-sm bg-highlight py-0.5 px-1 text-xs font-bold text-red dark:text-yellow">
-                        Beta
-                    </span>
-                </p>
-            </CalloutBox>
             <Intro
                 subheader="Getting started"
                 title="Support"
                 description="Built-in customer support with an embeddable chat widget and a unified inbox with session replays and user context."
                 buttonText="Get started"
                 buttonLink="/docs/support/start-here"
-                imageClasses="max-h-48 md:max-h-64"
-                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/hog_support_5b92c08b1a.png"
+                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/support_hog_f7ed8447c9.png"
             />
             <section className="mb-12">
                 <h3 className="m-0 text-xl">Everything you need to help your users</h3>
@@ -67,6 +57,14 @@ const Support: React.FC = () => {
                         title="GitHub integration"
                         description="Connect GitHub repos for two-way sync — issues become tickets, replies sync back as comments."
                         url="/docs/support/github"
+                        Image={undefined}
+                        gatsbyImage={undefined}
+                        type={undefined}
+                    />
+                    <ResourceItem
+                        title="Historical imports"
+                        description="Migrate historical tickets from other help desks into PostHog. Zendesk Support available now (beta); more sources coming."
+                        url="/docs/support/imports"
                         Image={undefined}
                         gatsbyImage={undefined}
                         type={undefined}

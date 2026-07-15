@@ -49,3 +49,7 @@ The following schemas are available:
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />
