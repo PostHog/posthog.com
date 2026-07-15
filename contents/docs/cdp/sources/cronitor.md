@@ -16,7 +16,7 @@ import AlphaRelease from "../_snippets/alpha-release.mdx"
 
 <AlphaRelease />
 
-The Cronitor connector syncs your monitors, their recent job invocations, and time-series reliability metrics into the PostHog Data warehouse, so you can analyze scheduled-job reliability, run durations, and failure trends alongside your product data.
+The Cronitor connector syncs your monitors, their recent job invocations, and time-series reliability metrics into the PostHog Data Warehouse, so you can analyze scheduled-job reliability, run durations, and failure trends alongside your product data.
 
 ## Prerequisites
 

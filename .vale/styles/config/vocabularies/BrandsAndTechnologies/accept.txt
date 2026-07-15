@@ -67,6 +67,7 @@ Coinbase
 Contentful
 [Cc]onvex
 Crazy Egg
+Cronitor
 Crossplane
 Crowdin
 [Cc]ursor
