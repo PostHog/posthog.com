@@ -45,7 +45,7 @@ If you don't get the context you're looking for, try <PrivateLink url="https://p
 
 PostHog is a startup. As solid as our stack / product / CI / dev experience is for a company of our size (super solid, tbh), it might not be the extremely-well-oiled machine you had at BigCo. If something doesn't Just Work, follow the framework above to get help.
 
-We're all human - you shouldn't expect perfection for adhering to our [culture](/handbook/company/culture), either. But you should help others learn how to stick to our culture, especially new joiners. We're all prone to occasional lapses, and it takes everyone on the team nudging each other in the right direction to keep us all on track. If you notice something happening all the time, take it upon yourself to make it better - see the next section!
+We're all human – you shouldn't expect perfection for adhering to our [culture](/handbook/company/culture), either. But you should help others learn how to stick to our culture, especially new joiners. We're all prone to occasional lapses, and it takes everyone on the team nudging each other in the right direction to keep us all on track. If you notice something happening all the time, take it upon yourself to make it better - see the next section!
 
 ## Make it better
 
@@ -61,7 +61,7 @@ We expect you to be proactive about answering questions in your domain, even ver
 
 Being wrong is way better than being silent – if you are wrong, someone will correct you. If you are silent, you're not doing your job.
 
-Similarly, if you need something to get done, you are responsible for making _sure_ it gets done. This is not your team lead's job or some other team's job - if you need it, you own it. _Most_ of the time this means doing it yourself (see section on helping yourself above); other times it means getting the right people together to understand the urgency and do it with you. But at the end of the day, the responsibility rests on you.
+Similarly, if you need something to get done, you are responsible for making _sure_ it gets done. This is not your team lead's job or some other team's job – if you need it, you own it. _Most_ of the time this means doing it yourself (see section on helping yourself above); other times it means getting the right people together to understand the urgency and do it with you. But at the end of the day, the responsibility rests on you.
 
 ## Have an opinion
 
