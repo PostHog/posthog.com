@@ -80,7 +80,7 @@ export const useProductLinks = () => {
             },
             {
                 // Not a glass glyph — a baked light/dark isometric image (see DemoIcon).
-                label: 'demo.mov',
+                label: 'Demo',
                 Icon: <DemoIcon />,
                 url: '/demo',
                 source: 'desktop',

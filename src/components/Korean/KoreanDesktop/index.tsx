@@ -46,7 +46,7 @@ export const useProductLinks = (): AppItem[] => {
             source: 'desktop',
         },
         {
-            label: 'demo.mov',
+            label: 'Demo',
             Icon: IconDemoThumb,
             url: '/demo',
             className: 'size-14 -my-1',
