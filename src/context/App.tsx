@@ -614,8 +614,8 @@ const appSettings: AppSettings = {
     '/skills': {
         size: {
             min: {
-                width: 900,
-                height: 560,
+                width: 320,
+                height: 480,
             },
             max: {
                 width: 1200,

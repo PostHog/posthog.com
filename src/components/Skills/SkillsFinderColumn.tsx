@@ -3,6 +3,9 @@ import * as ScrollArea from '@radix-ui/react-scroll-area'
 import * as RadioGroup from '@radix-ui/react-radio-group'
 import SkillsColumnRow from './SkillsColumnRow'
 import SkillsColumnShell from './SkillsColumnShell'
+import SkillsBrowseHeader from './SkillsBrowseHeader'
+import SkillsMobileNav from './SkillsMobileNav'
+import { SkillsBrowseHeaderProps, SkillsMobileNavProps } from './types'
 
 export default function SkillsFinderColumn<T extends { id: string; name: string }>({
     items,
@@ -12,7 +15,9 @@ export default function SkillsFinderColumn<T extends { id: string; name: string 
     isFolder = () => true,
     wrapLabels = false,
     widthClassName,
-    header,
+    showBorder = true,
+    browseHeader,
+    mobileNav,
     emptyLabel,
 }: {
     items: T[]
@@ -22,7 +27,9 @@ export default function SkillsFinderColumn<T extends { id: string; name: string 
     isFolder?: (item: T) => boolean
     wrapLabels?: boolean
     widthClassName?: string
-    header?: React.ReactNode
+    showBorder?: boolean
+    browseHeader?: SkillsBrowseHeaderProps
+    mobileNav?: SkillsMobileNavProps
     emptyLabel?: string
 }) {
     const reserveIconSpace = useMemo(
@@ -31,8 +38,9 @@ export default function SkillsFinderColumn<T extends { id: string; name: string 
     )
 
     return (
-        <SkillsColumnShell widthClassName={widthClassName}>
-            {header}
+        <SkillsColumnShell widthClassName={widthClassName} showBorder={showBorder}>
+            {browseHeader ? <SkillsBrowseHeader {...browseHeader} /> : null}
+            {mobileNav ? <SkillsMobileNav {...mobileNav} /> : null}
             <ScrollArea.Root className="flex-1 min-h-0 overflow-hidden">
                 <ScrollArea.Viewport className="h-full w-full p-1">
                     {items.length === 0 && emptyLabel ? (

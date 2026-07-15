@@ -1,7 +1,7 @@
 import React from 'react'
 import { IconSearch, IconX } from '@posthog/icons'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
-import { BrowseMode } from './types'
+import { BrowseMode, SkillsBrowseHeaderProps } from './types'
 
 const browseModeOptions: ToggleOption[] = [
     { label: 'Role', value: 'role' },
@@ -19,12 +19,7 @@ export default function SkillsBrowseHeader({
     onBrowseModeChange,
     searchQuery,
     onSearchChange,
-}: {
-    browseMode: BrowseMode
-    onBrowseModeChange: (mode: BrowseMode) => void
-    searchQuery: string
-    onSearchChange: (value: string) => void
-}) {
+}: SkillsBrowseHeaderProps) {
     const isSearchMode = searchQuery.trim() !== ''
 
     return (

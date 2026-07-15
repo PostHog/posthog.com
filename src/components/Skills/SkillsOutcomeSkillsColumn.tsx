@@ -4,18 +4,27 @@ import * as RadioGroup from '@radix-ui/react-radio-group'
 import { IconDocument } from '@posthog/icons'
 import { Skill, OutcomeTreeNode } from 'hooks/skills'
 import SkillsColumnShell from './SkillsColumnShell'
+import SkillsMobileNav from './SkillsMobileNav'
+import { SkillsMobileNavProps } from './types'
 
 export default function SkillsOutcomeSkillsColumn({
     categories,
     selectedSkillId,
     onSelectSkill,
+    mobileNav,
+    widthClassName = 'w-64 @md:w-72 @xl:w-80',
+    showBorder = true,
 }: {
     categories: OutcomeTreeNode[]
     selectedSkillId: string | null
     onSelectSkill: (skill: Skill) => void
+    mobileNav?: SkillsMobileNavProps
+    widthClassName?: string
+    showBorder?: boolean
 }) {
     return (
-        <SkillsColumnShell widthClassName="w-64 @md:w-72 @xl:w-80">
+        <SkillsColumnShell widthClassName={widthClassName} showBorder={showBorder}>
+            {mobileNav ? <SkillsMobileNav {...mobileNav} /> : null}
             <ScrollArea.Root className="flex-1 min-h-0 overflow-hidden">
                 <ScrollArea.Viewport className="h-full w-full p-1">
                     <RadioGroup.Root
