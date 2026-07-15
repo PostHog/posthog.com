@@ -85,6 +85,9 @@ jobs:
                   EMIT_WEBPACK_STATS: 'true'
                   CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
                   CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
+                  # Authenticated GitHub search for self-driving PR sourcing (gatsby/sourceNodes.ts).
+                  # Not GITHUB_API_KEY, which would turn on the full GitHub sourcing pipeline.
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
             # Bundle + eager-graph report. Runs off the build above, so it adds no build to
             # the PR. The master baseline (for deltas) is produced by bundle-baseline.yml and

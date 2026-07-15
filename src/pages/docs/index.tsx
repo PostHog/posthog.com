@@ -30,13 +30,6 @@ const pathCards = [
 // The surfaces you can use PostHog from
 const surfaces = [
     {
-        name: 'Slack',
-        url: '/docs/slack',
-        icon: 'IconMessage',
-        color: 'salmon',
-        description: 'Ask questions and ship work from a shared channel.',
-    },
-    {
         name: 'Web',
         url: '/docs/self-driving/web',
         icon: 'IconLaptop',
@@ -44,11 +37,25 @@ const surfaces = [
         description: 'The PostHog you know and love, in your browser.',
     },
     {
+        name: 'Slack',
+        url: '/docs/slack',
+        icon: 'IconMessage',
+        color: 'salmon',
+        description: 'Ask questions and ship work from a shared channel.',
+    },
+    {
         name: 'MCP',
         url: '/docs/model-context-protocol',
         icon: 'IconMagic',
         color: 'purple',
         description: 'Bring PostHog into Claude Code, Cursor, and more.',
+    },
+    {
+        name: 'CLI',
+        url: '/docs/cli',
+        icon: 'IconTerminal',
+        color: 'green',
+        description: 'Query your data and ship work from your terminal.',
     },
     // TODO: Desktop (PostHog Code) slots in here once GA
 ]

@@ -444,6 +444,25 @@ config.addBeforeSend { event ->
 }
 ```
 
+#### Filtering autocaptured screens
+
+import FilterScreenEvents from '../_snippets/filter-screen-events-beforesend.mdx'
+
+<FilterScreenEvents />
+
+```kotlin
+val ignoredScreens = setOf("Splash", "Debug")
+
+config.addBeforeSend { event ->
+    val screenName = event.properties?.get("$screen_name") as? String
+    if (event.event == "$screen" && screenName in ignoredScreens) {
+        null
+    } else {
+        event
+    }
+}
+```
+
 # FAQ
 
 ## What Android API level is required?
