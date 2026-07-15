@@ -150,7 +150,7 @@ config.bootstrap = PostHogBootstrapConfig(
 await Posthog().setup(config);
 ```
 
-The values are forwarded to the native iOS and Android SDKs: bootstrapped identity seeds the first launch only, and bootstrapped flags act as a base layer until the SDK fetches its own. On Flutter web, `bootstrap` is not applied — configure it in your `posthog.init({...})` snippet instead. For details, see the [bootstrapping guide](/docs/feature-flags/bootstrapping#behavior-on-mobile-sdks).
+The values are forwarded to the native iOS and Android SDKs: bootstrapped identity seeds the first launch only, only enabled flags are served (a `true` or a non-empty variant), and the first `/flags` response replaces them. On Flutter web, `bootstrap` is not applied, so configure it in your `posthog.init({...})` snippet instead. For details, see the [bootstrapping guide](/docs/feature-flags/bootstrapping#behavior-on-mobile-sdks).
 
 ### Setting properties for flag evaluation
 

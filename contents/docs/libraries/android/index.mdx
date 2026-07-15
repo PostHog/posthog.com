@@ -277,7 +277,7 @@ config.bootstrap = PostHogBootstrapConfig(
 PostHogAndroid.setup(this, config)
 ```
 
-Bootstrapped identity seeds the first launch only, and bootstrapped flags act as a base layer until the SDK fetches its own. For details, see the [bootstrapping guide](/docs/feature-flags/bootstrapping#behavior-on-mobile-sdks).
+Bootstrapped identity seeds the first launch only. Only enabled flags are served (a `true` or a non-empty variant), and the first `/flags` response replaces them. For details, see the [bootstrapping guide](/docs/feature-flags/bootstrapping#behavior-on-mobile-sdks).
 
 ## Experiments (A/B tests)
 
@@ -452,7 +452,7 @@ val config = PostHogAndroidConfig(
 | `errorTrackingConfig` | `PostHogErrorTrackingConfig()` | Configures error tracking. `autoCapture` defaults to `false`; set it to `true` to autocapture uncaught exceptions when project settings also enable error tracking. |
 | `surveys` | `false` | Internal/experimental native Android survey support. Native Android survey UI is not fully supported or documented yet. |
 | `surveysConfig` | `PostHogSurveysConfig()` | Internal/experimental survey display delegate configuration, primarily for hybrid SDKs. |
-| `bootstrap` | `null` | Seeds identity (`distinctId`, `isIdentifiedId`) and feature-flag state (`featureFlags`, `featureFlagPayloads`) before the first `/flags` response. Bootstrapped identity applies to the first session; flags act as a base layer until `/flags` loads. See [bootstrapping](/docs/feature-flags/bootstrapping#behavior-on-mobile-sdks). |
+| `bootstrap` | `null` | Seeds identity (`distinctId`, `isIdentifiedId`) and feature-flag state (`featureFlags`, `featureFlagPayloads`) before the first `/flags` response. Bootstrapped identity applies to the first session; only enabled flags are served, until the first `/flags` response replaces them. See [bootstrapping](/docs/feature-flags/bootstrapping#behavior-on-mobile-sdks). |
 
 ### Event filtering with `beforeSend`
 

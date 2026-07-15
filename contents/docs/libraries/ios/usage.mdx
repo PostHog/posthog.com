@@ -171,7 +171,7 @@ config.bootstrap = PostHogBootstrapConfig(
 PostHogSDK.shared.setup(config)
 ```
 
-Bootstrapped identity seeds the first launch only, and bootstrapped flags act as a base layer until the SDK fetches its own. For details, see the [bootstrapping guide](/docs/feature-flags/bootstrapping#behavior-on-mobile-sdks).
+Bootstrapped identity seeds the first launch only. Only enabled flags are served (a `true` or a non-empty variant), and the first `/flags` response replaces them. For details, see the [bootstrapping guide](/docs/feature-flags/bootstrapping#behavior-on-mobile-sdks).
 
 ## Experiments (A/B tests)
 

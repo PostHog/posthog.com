@@ -8,7 +8,7 @@ availability:
     enterprise: full
 ---
 
-> **Note:** Bootstrapping feature flags is available in our [JavaScript web](/docs/libraries/js), [React Native](/docs/libraries/react-native), [iOS](/docs/libraries/ios), [Android](/docs/libraries/android), and [Flutter](/docs/libraries/flutter) SDKs. Mobile SDKs persist state on-device, so bootstrapped identity applies on the first launch only — see [behavior on mobile SDKs](#behavior-on-mobile-sdks).
+> **Note:** Bootstrapping feature flags is available in our [JavaScript web](/docs/libraries/js), [React Native](/docs/libraries/react-native), [iOS](/docs/libraries/ios), [Android](/docs/libraries/android), and [Flutter](/docs/libraries/flutter) SDKs. Mobile SDKs persist state on-device, so bootstrapped identity applies on the first launch only. See [behavior on mobile SDKs](#behavior-on-mobile-sdks).
 
 import BootstrappingIntro from "./snippets/bootstrapping-intro.mdx"
 
@@ -227,10 +227,10 @@ The iOS, Android, and Flutter SDKs persist identity and flags on the device, so 
 
 - **Bootstrapped identity applies to the first session.** Setting it before `setup()` means events captured synchronously during initialization (like `Application Installed`) carry your distinct ID instead of the SDK-generated UUID.
   - An **anonymous** bootstrap (`isIdentifiedId: false`, the default) seeds the anonymous ID only when none is persisted yet. Once an anonymous ID exists on disk, or the user has been identified, it is ignored.
-  - An **identified** bootstrap (`isIdentifiedId: true`) is for a user you've already identified outside the SDK — for example, from a backend session token. On a fresh install it seeds the distinct ID and marks the user identified. On a returning install where an anonymous user already exists, it merges that user into the identified ID via `identify()` — which emits a `$identify` event during `setup()`. A *different*, already-identified user is left untouched. The identified ID never becomes the device ID.
-- **Bootstrapped flags are a base layer.** They're applied on every cold start until the first `/flags` response, which overlays them for overlapping keys while bootstrapped-only keys stay available. Use the separate `featureFlagPayloads` option to seed flag payloads. Flag values and payloads must be JSON-serializable — non-serializable entries are dropped. The base layer is cleared on `reset()`.
+  - An **identified** bootstrap (`isIdentifiedId: true`) is for a user you've already identified outside the SDK (for example, from a backend session token). On a fresh install it seeds the distinct ID and marks the user identified. On a returning install where an anonymous user already exists, it merges that user into the identified ID via `identify()`, which emits a `$identify` event during `setup()`. A *different*, already-identified user is left untouched. The identified ID never becomes the device ID.
+- **Bootstrapped flags are served until the first `/flags` response, then replaced.** A complete `/flags` response takes over entirely, so bootstrapped-only keys don't persist past it. Only *enabled* flags are seeded: a `true` boolean or a non-empty variant string. A `false` or empty value is dropped, matching posthog-js. Seed payloads with the separate `featureFlagPayloads` option. Flag values and payloads must be JSON-serializable, or they're dropped. Bootstrapped flags are cleared on `reset()`.
 
-Mobile SDKs don't support the `sessionID` bootstrap option.
+The feature-flags-loaded callback (`onFeatureFlags`) fires as soon as bootstrapped flags are applied, so startup logic can read them immediately. Mobile SDKs don't support the `sessionID` bootstrap option.
 
 > **Flutter web:** `bootstrap` is not applied on Flutter web because the web SDK hooks onto an already-initialized `posthog-js` instance. Configure `bootstrap` in your `posthog.init({...})` call instead.
 
