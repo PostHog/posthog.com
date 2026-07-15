@@ -8,7 +8,6 @@ featuredImage: >-
 featuredImageType: full
 tags:
   - Feature flags
-  - Feature management
   - Product engineers
 crosspost:
   - Blog

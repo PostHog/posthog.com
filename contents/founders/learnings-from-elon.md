@@ -7,7 +7,7 @@ featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/newsletter/beyond-10x-engineer/elon.jpg
 featuredImageType: full
 tags:
-  - Being a founder
+  - Founders
 crosspost:
   - Blog
   - Newsletter

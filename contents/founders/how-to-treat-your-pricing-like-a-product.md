@@ -11,7 +11,7 @@ tags:
   - Product engineers
   - Product
   - Revenue
-  - Growth Engineering
+  - Growth engineering
 crosspost:
   - Product engineers
   - Blog

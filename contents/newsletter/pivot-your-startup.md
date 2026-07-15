@@ -8,7 +8,7 @@ featuredImage: >-
 featuredImageType: full
 tags:
   - Product-market fit
-  - Being a founder
+  - Founders
 crosspost:
   - Founders
   - Blog

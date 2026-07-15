@@ -7,7 +7,7 @@ featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/newsletter-hog.png
 featuredImageType: full
 tags:
-  - Being a founder
+  - Founders
 crosspost:
   - Founders
   - Blog

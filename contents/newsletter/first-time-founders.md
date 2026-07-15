@@ -7,7 +7,7 @@ featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/v1713521535/posthog.com/contents/blog/evolution-of-founders.jpg
 featuredImageType: full
 tags:
-  - Being a founder
+  - Founders
   - Product-market fit
 crosspost:
   - Founders

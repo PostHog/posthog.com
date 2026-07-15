@@ -7,7 +7,7 @@ featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/james_and_tim_8d5006785b.png
 featuredImageType: full
 tags:
-  - Being a founder
+  - Founders
   - People
 crosspost:
   - Founders

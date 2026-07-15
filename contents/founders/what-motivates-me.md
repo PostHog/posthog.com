@@ -8,7 +8,6 @@ featuredImage: >-
 featuredImageType: full
 tags:
   - Founders
-  - Being a founder
 crosspost:
   - Blog
 ---

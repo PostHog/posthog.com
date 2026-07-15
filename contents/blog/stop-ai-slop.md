@@ -13,7 +13,7 @@ featuredImageType: full
 category: PostHog news
 tags:
   - Product updates
-  - AI Observability
+  - AI observability
 ---
 
 Every time your AI product generates text, code, or images, it's being judged.

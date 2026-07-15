@@ -8,7 +8,7 @@ featuredImage: >-
 category: Startups
 tags:
   - Guides
-  - Ops
+  - Ops & finance
   - AI
   - Culture
   - Hiring 

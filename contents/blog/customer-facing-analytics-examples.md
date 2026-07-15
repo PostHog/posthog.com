@@ -13,7 +13,7 @@ category: General
 tags:
     - Endpoints
     - Data
-    - Customer Analytics
+    - Customer analytics
 seo:
     metaTitle: "The 5 best customer-facing analytics examples (and what to steal from each)"
     metaDescription: '5 customer-facing analytics examples worth stealing, plus how to ship your own in PostHog without a data team or custom APIs.'

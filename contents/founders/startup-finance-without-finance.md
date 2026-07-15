@@ -8,8 +8,7 @@ featuredImage: >-
 featuredImageType: full
 tags:
   - Founders
-  - Finance & ops
-  - Being a founder
+  - Ops & finance
 crosspost:
   - Blog
 ---

@@ -12,7 +12,7 @@ featuredImage: >-
 category: Engineering
 tags:
   - Engineering
-  - AI Observability
+  - AI observability
 ---
 
 Software testing used to be relatively straightforward.

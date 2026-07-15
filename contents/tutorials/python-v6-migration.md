@@ -6,7 +6,7 @@ author:
 showTitle: true
 sidebar: Docs
 tags:
-  - product-os
+  - product os
 ---
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
