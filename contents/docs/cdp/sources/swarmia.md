@@ -16,11 +16,11 @@ import AlphaRelease from "../_snippets/alpha-release.mdx"
 
 <AlphaRelease />
 
-The Swarmia connector syncs your engineering effectiveness reports — pull request metrics, DORA metrics, investment balance, software capitalization, and effort reporting — into the PostHog Data warehouse, so you can blend engineering metrics with your product, finance, and headcount data.
+The Swarmia connector syncs your engineering effectiveness reports – pull request metrics, DORA metrics, investment balance, software capitalization, and effort reporting – into the PostHog Data Warehouse, so you can blend engineering metrics with your product, finance, and headcount data.
 
 ## Prerequisites
 
-You need a Swarmia account with permission to create API tokens. Some reports (investment balance, software capitalization, effort) map to Swarmia features that may not be enabled on every plan — tables your token can't access are flagged in the table picker.
+You need a Swarmia account with permission to create API tokens. Some reports (investment balance, software capitalization, effort) map to Swarmia features that may not be enabled on every plan – tables your token can't access are flagged in the table picker.
 
 ## Adding a data source
 

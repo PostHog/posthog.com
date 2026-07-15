@@ -250,6 +250,7 @@ Substack
 Supabase
 [Ss]uperhuman
 [Ss]uperset
+Swarmia
 Synthesia
 Tailscale
 Temporal\.io
