@@ -1,10 +1,8 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import Editor from 'components/Editor'
-import OSTabs from 'components/OSTabs'
 import OSTable from 'components/OSTable'
 import SEO from 'components/seo'
-import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import TeamMemberComponent, { FutureTeamMember } from 'components/TeamMember'
@@ -293,78 +291,61 @@ export default function WhatWereWorkingOn(): JSX.Element {
         [filteredTeams, expandedObjectives, quarter, year]
     )
 
-    const { tabs, handleTabChange, tabContainerClassName, className } = useCompanyNavigation({
-        value: '/wip',
-        content: (
-            <div className="p-4 @xl:p-8">
-                <div className="flex flex-wrap items-start justify-between gap-4 mb-0">
-                    <div>
-                        <h1 className="text-2xl @lg:text-3xl font-bold m-0">Work in progress</h1>
-                    </div>
-                    <div className="w-full @md:w-auto flex items-center gap-3">
-                        <button
-                            onClick={toggleAllObjectives}
-                            disabled={expandableTeamSlugs.length === 0}
-                            className="text-red dark:text-yellow underline underline-offset-2 font-semibold disabled:opacity-50 disabled:cursor-not-allowed text-sm"
-                        >
-                            {allExpandableTeamsExpanded ? 'Collapse all' : 'Expand all'}
-                        </button>
-                        <Select
-                            value={teamFilter}
-                            onValueChange={setTeamFilter}
-                            groups={[
-                                {
-                                    label: 'Teams',
-                                    items: [
-                                        { label: 'All teams', value: 'all' },
-                                        ...teams.map((team) => ({
-                                            label: team.name,
-                                            value: team.slug,
-                                        })),
-                                    ],
-                                },
-                            ]}
-                            placeholder="Filter by team"
-                        />
-                    </div>
-                </div>
-
-                <p className="mt-0 mb-6">
-                    Every quarter, each PostHog team sets goals using our{' '}
-                    <Link
-                        to="/handbook/company/goal-setting"
-                        state={{ newWindow: true }}
-                        className="font-semibold underline"
-                    >
-                        HOGS process
-                    </Link>
-                    . Goals are owned by team leads, reviewed in all-hands, and refreshed each quarter. Click any team
-                    below to see their current goals.
-                </p>
-
-                <OSTable columns={tableColumns} rows={tableRows} rowAlignment="top" width="full" />
-            </div>
-        ),
-    })
-
     return (
         <>
             <SEO
                 title="Work in progress - PostHog"
                 description={`Q${quarter} ${year} goals across all PostHog teams`}
             />
-            <Editor hasTabs type="what-were-working-on" proseSize="base" maxWidth="100%">
-                <OSTabs
-                    tabs={tabs}
-                    defaultValue="/wip"
-                    onValueChange={handleTabChange}
-                    padding
-                    contentPadding={false}
-                    tabContainerClassName={tabContainerClassName}
-                    className={className}
-                    triggerDataScheme="primary"
-                    centerTabs
-                />
+            <Editor type="what-were-working-on" proseSize="base" maxWidth="100%">
+                <div className="p-4 @xl:p-8">
+                    <div className="flex flex-wrap items-start justify-between gap-4 mb-0">
+                        <div>
+                            <h1 className="text-2xl @lg:text-3xl font-bold m-0">Work in progress</h1>
+                        </div>
+                        <div className="w-full @md:w-auto flex items-center gap-3">
+                            <button
+                                onClick={toggleAllObjectives}
+                                disabled={expandableTeamSlugs.length === 0}
+                                className="text-red dark:text-yellow underline underline-offset-2 font-semibold disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                            >
+                                {allExpandableTeamsExpanded ? 'Collapse all' : 'Expand all'}
+                            </button>
+                            <Select
+                                value={teamFilter}
+                                onValueChange={setTeamFilter}
+                                groups={[
+                                    {
+                                        label: 'Teams',
+                                        items: [
+                                            { label: 'All teams', value: 'all' },
+                                            ...teams.map((team) => ({
+                                                label: team.name,
+                                                value: team.slug,
+                                            })),
+                                        ],
+                                    },
+                                ]}
+                                placeholder="Filter by team"
+                            />
+                        </div>
+                    </div>
+
+                    <p className="mt-0 mb-6">
+                        Every quarter, each PostHog team sets goals using our{' '}
+                        <Link
+                            to="/handbook/company/goal-setting"
+                            state={{ newWindow: true }}
+                            className="font-semibold underline"
+                        >
+                            HOGS process
+                        </Link>
+                        . Goals are owned by team leads, reviewed in all-hands, and refreshed each quarter. Click any
+                        team below to see their current goals.
+                    </p>
+
+                    <OSTable columns={tableColumns} rows={tableRows} rowAlignment="top" width="full" />
+                </div>
             </Editor>
         </>
     )

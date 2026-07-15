@@ -1,9 +1,7 @@
 import React from 'react'
 import Editor from 'components/Editor'
-import OSTabs from 'components/OSTabs'
 import SEO from 'components/seo'
 import Roadmap from 'components/Roadmap'
-import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
 import { useApp } from '../../context/App'
 import { useUser } from 'hooks/useUser'
 import RoadmapWindow from 'components/Roadmap/RoadmapWindow'
@@ -16,16 +14,6 @@ const RoadmapPage = () => {
     const { addWindow } = useApp()
     const { user } = useUser()
     const isModerator = user?.role?.type === 'moderator'
-
-    const { tabs, handleTabChange, tabContainerClassName, className } = useCompanyNavigation({
-        value: '/roadmap',
-        content: (
-            <div className="p-4 @xl:p-8">
-                <h1>Roadmap</h1>
-                <Roadmap />
-            </div>
-        ),
-    })
 
     const { mutate } = useRoadmaps({
         params: {
@@ -63,7 +51,6 @@ const RoadmapPage = () => {
                 image={`/images/og/roadmap.jpg`}
             />
             <Editor
-                hasTabs
                 type="roadmap"
                 proseSize="base"
                 maxWidth="100%"
@@ -85,17 +72,10 @@ const RoadmapPage = () => {
                     ) : null
                 }
             >
-                <OSTabs
-                    tabs={tabs}
-                    defaultValue="/roadmap"
-                    onValueChange={handleTabChange}
-                    padding
-                    contentPadding={false}
-                    tabContainerClassName={tabContainerClassName}
-                    className={className}
-                    triggerDataScheme="primary"
-                    centerTabs
-                />
+                <div className="p-4 @xl:p-8">
+                    <h1>Roadmap</h1>
+                    <Roadmap />
+                </div>
             </Editor>
         </>
     )

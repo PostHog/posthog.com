@@ -512,7 +512,7 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: 'customers.mdx',
+                    label: 'Customers',
                     link: '/customers',
                 },
                 {
