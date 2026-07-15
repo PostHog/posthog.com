@@ -118,7 +118,7 @@ const IndexPage = () => {
                             </ul>
                         </Popover>
                     </div>
-                    <div className="max-w-7xl mx-auto">
+                    <div className="max-w-7xl mx-auto pt-8">
                         <div id="hero">
                             <CareersHero />
                             <JobListings />

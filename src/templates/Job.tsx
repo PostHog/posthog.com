@@ -648,7 +648,7 @@ export default function Job({
                                                                     className="flex space-x-3 items-center font-medium leading-tight text-[15px]"
                                                                 >
                                                                     <img
-                                                                        className="max-w-[30px]"
+                                                                        className="max-w-[30px] brightness-[0.45] dark:brightness-150"
                                                                         alt={title}
                                                                         src={image}
                                                                     />
