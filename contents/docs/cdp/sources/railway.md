@@ -7,7 +7,6 @@ availability:
   selfServe: full
   enterprise: full
 sourceId: Railway
-beta: true
 ---
 
 import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
