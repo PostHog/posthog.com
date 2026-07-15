@@ -1,0 +1,124 @@
+---
+title: Ruby on Rails logs installation
+platformLogo: rails
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import LogsNextSteps from './_snippets/logs-next-steps.mdx'
+
+`posthog-rails` forwards `Rails.logger` output to PostHog Logs over OpenTelemetry (OTLP), automatically correlated with each request's distinct ID and session ID. Requires Ruby 3.3+.
+
+<Steps>
+
+<Step title="Add the OpenTelemetry gems" badge="required">
+
+Add the following gems to your `Gemfile` with `require: false` — `posthog-rails` loads them only when log forwarding is enabled:
+
+```ruby file=Gemfile
+gem 'opentelemetry-sdk', require: false
+gem 'opentelemetry-logs-sdk', '>= 0.6.0', require: false
+gem 'opentelemetry-exporter-otlp-logs', require: false
+```
+
+Then run:
+
+```bash
+bundle install
+```
+
+`opentelemetry-logs-sdk` must be `>= 0.6.0`. The OTLP exporter requires `LogRecordData#event_name`, which only exists from that version onward.
+
+</Step>
+
+<Step title="Enable log forwarding" badge="required">
+
+In `config/initializers/posthog.rb`, enable log forwarding:
+
+```ruby file=config/initializers/posthog.rb
+PostHog::Rails.configure do |config|
+  config.logs_enabled = true
+end
+```
+
+Logs reuse the same project token (`api_key`) and host configured in `PostHog.init` — nothing extra to set. Records are sent to `<host>/i/v1/logs`.
+
+When the OpenTelemetry gems are absent, the integration logs a single warning and no-ops — it's safe to enable conditionally.
+
+</Step>
+
+<Step title="Optional configuration" badge="optional">
+
+**Filter by severity**
+
+`logs_level` controls which severity levels are forwarded. It never changes what your app logs locally:
+
+```ruby
+config.logs_level = :info  # :debug, :info, :warn, :error, :fatal, :unknown, or a Logger constant
+```
+
+**Rate limiting**
+
+Forwarding is capped at 6,000 records per minute by default. When the cap is reached, one warning record is emitted and further records are dropped for the remainder of that minute:
+
+```ruby
+config.logs_max_records_per_minute = 6_000  # nil, 0, or any negative value to disable
+```
+
+**Scrub PII**
+
+Set `logs_before_send` to a proc that receives each record and returns a modified hash to send or `nil` to drop it:
+
+```ruby
+config.logs_before_send = proc { |record|
+  next nil if record[:severity] == :debug
+
+  record[:body] = record[:body].gsub(/\b[\w.+-]+@[\w-]+\.[\w.]+\b/, '[redacted]')
+  record
+}
+```
+
+The record hash has keys `:timestamp`, `:severity` (a symbol such as `:warn`), `:body`, and `:attributes`. If the callback raises, the record is dropped.
+
+**Trace correlation**
+
+If your app uses OpenTelemetry tracing instrumentation gems (for example, `opentelemetry-instrumentation-rails` or `opentelemetry-instrumentation-rack`), log records emitted during a traced request automatically carry the active `trace_id` and `span_id` — no additional configuration needed.
+
+</Step>
+
+<Step title="Test your setup" badge="recommended">
+
+1. Start your Rails server and trigger a request that logs output.
+2. Check the [PostHog Logs interface](https://app.posthog.com/logs) for your log entries.
+3. If logs don't appear, check for a startup warning in your server output (a line starting with `[PostHog]` indicates a configuration issue such as missing gems or an unresolved project token).
+
+<CallToAction type="primary" to="https://app.posthog.com/logs">
+View your logs in PostHog
+</CallToAction>
+
+</Step>
+
+<LogsNextSteps />
+
+</Steps>
+
+## Configuration reference
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `logs_enabled` | Boolean | `false` | Master switch for log forwarding. Requires Ruby 3.3+ and the three OpenTelemetry gems above. |
+| `logs_forward_rails_logger` | Boolean | `true` | Broadcast `Rails.logger` into the PostHog Logs sink. Takes effect only when `logs_enabled` is true. |
+| `logs_level` | Symbol/Integer | `nil` | Minimum severity to forward (`:debug`, `:info`, `:warn`, `:error`, `:fatal`, `:unknown`, or a `Logger` constant). Inherits the Rails logger level when nil. |
+| `logs_max_records_per_minute` | Integer/String | `6000` | Records-per-minute cap. Numeric strings (e.g. from `ENV`) are coerced. Set to `nil`, `0`, or a negative value to disable. |
+| `logs_before_send` | Proc | `nil` | Called with each record hash (`:timestamp`, `:severity`, `:body`, `:attributes`) before sending. Return a modified hash to send or `nil` to drop. Records are dropped if the callback raises. |
+
+## Troubleshooting
+
+**Logs not appearing in PostHog**
+
+1. Check the OTel gems are installed: `bundle list | grep opentelemetry`. You should see `opentelemetry-sdk`, `opentelemetry-logs-sdk` (≥ 0.6.0), and `opentelemetry-exporter-otlp-logs`.
+2. Check for a startup warning — if the gems are missing or the project token can't be resolved, PostHog logs a warning to stderr at boot (look for a line starting with `[PostHog]`).
+3. Verify `logs_enabled = true` is set in your initializer and that the initializer runs before the railtie (it should if it lives in `config/initializers/`).
+4. Check test mode — `PostHog.init` with `test_mode: true` disables the logs pipeline entirely. Ensure test mode is only set in the test environment.
+
+For general Logs troubleshooting (authentication, connection issues, format problems), see the [Logs troubleshooting guide](/docs/logs/troubleshooting).

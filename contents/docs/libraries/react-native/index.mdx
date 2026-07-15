@@ -64,7 +64,7 @@ You can further customize how PostHog works through its configuration on initial
 | `enableSessionReplay`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                               | Enable Recording of Session replay for Android and iOS.                                                                                                                                                                                                                                                    |
 | `sessionReplayConfig`<br/><br/>**Type:** Object<br/>**Default:** `null`                                 | Session replay configuration. See the [replay install docs](/docs/session-replay/installation) for more details.                                                                                                                                                                                                       |
 | `enablePersistSessionIdAcrossRestart`<br/><br/>**Type:** Boolean<br/>**Default:** `false`               | When true, persists the `$session_id` across app restarts. If false, `$session_id` always resets on app restart.                                                                                                                                                                                           |
-| `evaluationContexts`<br/><br/>**Type:** Array of Strings<br/>**Default:** `undefined`               | Evaluation context tags that constrain which feature flags are evaluated. When set, only flags with matching evaluation context tags (or no evaluation context tags) will be returned. This helps reduce unnecessary flag evaluations and improves performance. See [evaluation contexts documentation](/docs/feature-flags/evaluation-contexts) for more details. Available in version 4.21.0+. The legacy parameter `evaluationEnvironments` (version 4.7.2+) is also supported for backward compatibility. |
+| `evaluationContexts`<br/><br/>**Type:** Array of Strings<br/>**Default:** `undefined`               | Evaluation context tags that constrain which feature flags are evaluated. When set, only flags with matching evaluation context tags (or no evaluation context tags) will be returned. This helps reduce unnecessary flag evaluations and improves performance. See [evaluation contexts documentation](/docs/feature-flags/evaluation-contexts) for more details. Available in version 4.21.0+. The legacy parameter `evaluationEnvironments` (version 4.10.0+) is also supported for backward compatibility. |
 | `addTracingHeaders`<br/><br/>**Type:** Array of Strings<br/>**Default:** `undefined`                 | Hostnames for which PostHog should add tracing headers to outgoing `fetch` requests. Matching requests include `X-POSTHOG-DISTINCT-ID` and `X-POSTHOG-SESSION-ID`, which lets backend events, errors, and LLM traces link back to frontend sessions and replays. Use hostnames only, without the protocol or path. |
 | `before_send`<br/><br/>**Type:** Function<br/>**Default:** `undefined`                              | A callback function that is called before each event is sent to PostHog. You can use it to modify, filter, or suppress events. Return `null` to drop the event, or return the modified event to send it. See [customizing exception capture](#customizing-exception-capture-with-before_send) for details. |
 
@@ -131,6 +131,92 @@ If there are elements you don't want to be captured, you can add the `ph-no-capt
 ```react-native
 <View ph-no-capture>Sensitive view here</View>
 ```
+
+### Capturing screen views
+
+With `captureScreens: true` (the default in `PostHogProvider`), PostHog captures a `$screen` event automatically when the user navigates, provided you're using `@react-navigation/native` (v6 or lower) or `react-native-navigation`.
+
+To manually send a screen capture event, use the `screen` method:
+
+```react-native
+posthog.screen('Dashboard', { fromIcon: 'bottom' })
+```
+
+> **React Navigation v7 users:** automatic screen tracking may throw errors if PostHog is initialized outside a screen context. For v7, disable automatic screen capture (`captureScreens: false`) and call `posthog.screen()` manually inside each screen component.
+
+#### Filtering autocaptured screens
+
+import FilterScreenEvents from '../_snippets/filter-screen-events-beforesend.mdx'
+
+<FilterScreenEvents />
+
+`before_send` is a client option, so pass it via the provider's `options` prop (or to `new PostHog(...)` if you create the client yourself):
+
+```react-native
+const IGNORED_SCREENS = new Set(['Splash', 'Debug'])
+
+<PostHogProvider
+    apiKey="<ph_project_token>"
+    autocapture={{ captureScreens: true }}
+    options={{
+        host: '<ph_client_api_host>',
+        before_send: (event) => {
+            if (event?.event === '$screen') {
+                const screenName = event.properties?.['$screen_name']
+                return IGNORED_SCREENS.has(screenName) ? null : event
+            }
+            return event
+        },
+    }}
+>
+    {/* app */}
+</PostHogProvider>
+```
+
+Swap the check for an allowlist (`return TRACKED_SCREENS.has(screenName) ? event : null`) if you'd rather capture only a specific set of screens.
+
+## Common `before_send` patterns
+
+`before_send` accepts a single function or an array of functions that run in order, so you can compose several small hooks. Filtering screens is one use – here are a few others.
+
+**Drop a specific event.** Stop an internal or debug event from ever being sent:
+
+```react-native
+const posthog = new PostHog('<ph_project_token>', {
+    before_send: (event) => {
+        if (event?.event === 'debug_only_event') {
+            return null // never send this event
+        }
+        return event
+    },
+})
+```
+
+**Log events instead of sending them.** Handy while debugging what would be captured:
+
+```react-native
+const posthog = new PostHog('<ph_project_token>', {
+    before_send: (event) => {
+        console.log('[PostHog] would send', event?.event, event?.properties)
+        return null // drop everything
+    },
+})
+```
+
+**Redact sensitive properties.** Strip a value before it leaves the device:
+
+```react-native
+const posthog = new PostHog('<ph_project_token>', {
+    before_send: (event) => {
+        if (event?.properties?.email) {
+            event.properties.email = '***'
+        }
+        return event
+    },
+})
+```
+
+For more examples, see the [JavaScript Web SDK docs](/docs/libraries/js/usage#amending-or-sampling-events).
 
 ## Identifying users
 
@@ -342,7 +428,7 @@ Group analytics allows you to associate the events for that person's session wit
 
 ## Error tracking
 
-To set up error tracking in your project, follow the [React Native installation guide](/docs/error-tracking/installation/react-native).
+To set up error tracking in your project, see the [error tracking docs](/docs/error-tracking).
 
 ### Native crash autocapture
 

@@ -18,7 +18,7 @@ PostHog was not created in a vacuum. The companies we admire shaped PostHog as a
 
 To ensure we are heading in the right direction, our all-hands often include a reflection on these companies, the decisions they made, and why it matters to us. By sharing these with you, we hope it acts as inspiration to do things differently and reflect on the companies guiding you.
 
-> This post was first published in our Substack newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
+> This post was first published in our Substack newsletter, [build mode](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
 
 ## 1. GitLab: The open-core trailblazer 📖
 

@@ -59,6 +59,7 @@ Cloudflare
 Cloudwatch
 Codecov
 CodeSandbox
+Coevera
 Cognito
 [Cc]ohere
 Coinbase
@@ -144,6 +145,7 @@ Knative
 [Kk]oala
 Kubernetes
 Kudosity
+Langfuse
 LaunchDarkly
 [Ll]aunchpad
 Lightdash
@@ -188,11 +190,13 @@ Opsgenie
 Optimizely
 OTel
 Outfunnel
+Pabbly
 Pendo
 [Pp]erplexity
 Phabricator
 Pinterest
 Pipedrive
+Pipeliner
 Pixar
 PlanetScale
 PlayerZero
@@ -368,6 +372,7 @@ MDX
 MLOps
 \.NET
 Next\.js
+nextjs
 Node\.js
 npm
 Nuxt
@@ -433,3 +438,15 @@ British
 [Ee]nglish
 European
 UK
+
+# Technology terms
+MCPcat
+[Nn]ullish
+[Ss]anitization
+[Ss]anitize[ds]?
+[Aa]llowlist
+[Pp]ageleave
+[Pp]roxied
+[Uu]nproxied
+[Uu]ndercount(s|ed|ing)?
+[Rr]esync(s|ed|ing)?

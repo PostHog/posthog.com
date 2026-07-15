@@ -22,6 +22,7 @@ import { useUser } from 'hooks/useUser'
 import MobileDrawer from 'components/MobileDrawer'
 import Modal from 'components/RadixUI/Modal'
 import { useCartStore } from './store'
+import Link from 'components/Link'
 
 // Category configuration with icons and display order
 type CategoryKey = 'all' | 'Apparel' | 'Stickers' | 'Goods' | 'Novelty'
@@ -114,14 +115,20 @@ const leftSidebarContent = [
         ),
     },
     {
-        title: 'Returns',
+        title: 'Returns & cancellations',
         content: (
             <>
                 <p>
                     Returns?? We've literally never had a return. Not sure if it's because our products are that awesome
                     or because we don't have an official return policy.
                 </p>
-                <p>Until then, just email merch@posthog.com if you have any issues and we'll get you squared away.</p>
+                <p>
+                    But if you need to cancel or return something, you can{' '}
+                    <Link to="/merch/orders" state={{ newWindow: true }} className="font-semibold underline">
+                        look up your order
+                    </Link>{' '}
+                    and handle it yourself.
+                </p>
             </>
         ),
     },

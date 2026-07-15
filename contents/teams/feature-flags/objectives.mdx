@@ -1,56 +1,56 @@
-### Q2 2026 Objectives
+### Q3 2026 Objectives
 
-#### AI-first flag management ONLY for PostHog employees (Driver: <TeamMember name="Phil Haack" />)
-
-We have loads of people who work with feature flags internally, so let's dogfood the shit out of this. The bet is that teams will manage their entire feature flag lifecycle (this includes both flag and cohort-based targeting) through AI coding agents without ever opening the PostHog UI (or exclusively through PostHog AI). If agents can create, modify, and reason about flags autonomously, we become the default flags tool in agentic workflows rather than losing to DIY implementations.
-
-**What we'll ship:**
-
-- MCP server with full CRUD for flags, rollout conditions, and overrides
-- Flag usage metrics & evaluation stats exposed via MCP
-- Proactive signals pushed to agents: rollout changes, stale flag detection, evaluation anomalies
-- Add MCP support for early access features
-
-#### Real-time cohorts (Driver: <TeamMember name="Gustavo Henrique Strassburger" />)
+#### Real-time cohorts  — <TeamMember name="Gustavo Henrique Strassburger" />
 
 This is our most-requested feature. Dynamic cohorts today are computed on a delay, which makes them useless for real-time targeting decisions like "user did X in the last 5 minutes." If we can make cohort membership evaluate in real-time at the point of flag evaluation, we collapse a whole category of custom targeting logic people currently build themselves.
 
 **What we'll ship:**
 
-- Real-time cohort evaluation at flag check time
-- Cohort membership change signals for MCP / webhooks
+- Real-time cohorts starting with person properties
+- Behavioral data as a follow-up
 - Migration path from existing dynamic cohorts
 
-#### Close the targeting functionality gap (Driver: <TeamMember name="Phil Haack" />)
+#### AI Native — <TeamMember name="Phil Haack" />
 
-User and group targeting in the same flag is the most requested targeting capability we don't fully support. Every time someone hits this wall, they either hack around it or leave. This is table-stakes work that unblocks expansion in accounts already using flags.
+Feature flags will feature heavily in self-driving products. We want first-time founders as well as experienced engineers to be able to use our product.
 
 **What we'll ship:**
 
-- API and UI support for BOTH user AND group target management
+- Signal (stale flags, proactive flags)
+- A complete MCP
+- Skills
 
-#### Short term reliability and performance — <TeamMember name="Matheus Batista" photo />
+#### Dedicated Persons Store — <TeamMember name="Matheus Batista" photo />
 
-**Goal: Reliable remote evaluation with stable, predictable performance.**
+In order to make pre-computed flags a reality (as well as to improve reliability and isolation of our service), we need a dedicated persons store.
 
-- **Define and stick to clear metrics** — p50/90/99 response time, error rate percentage, and availability SLA (e.g. 99.99% per month), equally defined for both remote and local evaluation
-- **Update flags HyperCache** — Pre-compute more operations to reduce memory and CPU during evaluation
-- **Load shedding and request hedging** — Graceful degradation under load
-- **Port local evaluation to Rust** — Move local evaluation to the new flag definitions service
-- **Customer-facing latency and uptime dashboard** — Make key performance metrics publicly visible
+**What we'll ship:**
 
-#### Move from read-heavy architecture to write-heavy — <TeamMember name="Phil Haack" photo />
+- A streaming dedicated persons store
 
-**Goal: Decouple flag evaluation from the Persons DB to contain blast radius.**
+#### Improved Customer Visibility — <TeamMember name="Patricio Tarantino" photo />
 
-- **Dedicated Persons Feature Flag Store** — A denormalized store purpose-built for flag evaluation, so we're not dependent on the shared Persons DB
-- **POC for pre-calculated flag evaluation store** — Explore pre-computing flag results so evaluation doesn't require live DB reads
+Customers don't have visibility into how their users are using flags, billing, what SDKs are making requests, how many `$feature_flag_called` events they raise.
 
-#### Improve deployment confidence and reduce foot guns — <TeamMember name="Patricio Tarantino" photo />
+**What we'll ship:**
 
-**Goal: Deploy changes safely with confidence, especially concurrency-sensitive changes.**
+- A breakdown of `/flags` requests by SDK and other parameters.
+- Public latency metrics
 
-- **Load tester** — Build a load testing framework for the flags service
-- **Improvements to "side" canary deploys** — Enhance the existing canary deployment approach
-- **Full canary deployment** — Graduate to a full canary deployment model
-- **Argo deployment pipeline** — Work with the ops team on a proper deployment pipeline
+#### Standardize on Infrastructure — <TeamMember name="Matheus Batista" photo />
+
+We are a special snowflake, but not that special. We should adopt company standards for infrastructure and ops and port any custom work over.
+
+**What we'll ship:**
+
+- Golden charts
+
+### Improved Experiments 
+
+Support the Experiments team's goals to make experiments built on flags more flexible and useful.
+
+**What we'll ship:**
+
+- Boolean flag experiments
+- Multiple experiments on a single flag
+- Dedicated exposure event
