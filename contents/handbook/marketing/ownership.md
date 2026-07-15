@@ -28,13 +28,13 @@ We only add a dedicated product marketer when it becomes painful not to have one
 
 **Cross-functional areas**
 
-These need coverage but don't have a dedicated person:
+These are some other areas that PMMs own outside of specific products. 
 
 - **Research** – Joe
-- **Incident comms** – distributed
-- **Lifecycle (i.e. email)**, and aligning with growth eng where needed – Joe
-- **Initial small launches for new tools** (e.g. Support) – Joe
-- **Startups / partnerships** – Joe
+- **Incident comms** – distributed, ask in `#team-marketing` if you need help
+- **Lifecycle (i.e. email) & aligning with growth eng** – Joe
+- **Initial small launches for new tools** – Joe
+- **Startups & partnerships** – Joe
 
 <details>
 <summary>I need a product marketer, but my team hasn't been assigned one</summary>
