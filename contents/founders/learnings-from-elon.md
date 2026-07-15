@@ -21,7 +21,7 @@ Despite his wild ambitions to colonize Mars and revolutionize the automotive ind
 
 **This week’s theme is:** Learning from Elon
 
-> This post was first published in our Substack newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
+> This post was first published in our Substack newsletter, [build mode](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
 
 ## 1. Be in the details, not the day-to-day
 Elon attends very detailed design review sessions for the major projects he cares about – e.g. sessions to design a robot’s hands. But he also has 30+ direct reports, way too many to be across the day-to-day of everything.

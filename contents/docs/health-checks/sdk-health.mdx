@@ -1,0 +1,122 @@
+---
+title: SDK health
+sidebar: Docs
+showTitle: true
+---
+
+The SDK health check watches the versions of the PostHog SDKs sending events to your project and flags any that have fallen significantly behind the latest release. It samples your recent events, compares each SDK against the latest published release, and surfaces anything that's meaningfully out of date so you can keep your integrations current.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_32_15_683_Z_4d40cced0b.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_32_20_176_Z_b58d6ca637.png"
+    alt="SDK health check in the Health checks section in the PostHog app"
+    classes="rounded"
+/>
+
+## What this check looks for
+
+Once a day, the check samples the SDK name (`$lib`) and version (`$lib_version`) from your recent events and, for each SDK, it:
+
+1. **Tracks versions in use** – identifies which SDK versions are sending events, so you can also spot version fragmentation (multiple versions of the same SDK active at once).
+2. **Compares against the latest releases** – checks versions and release dates against our GitHub repos.
+
+It deliberately avoids noise from frequent releases – a version is only flagged when it's meaningfully out of date.
+
+**Severity:** A single outdated SDK is a **warning**. When most of a project's SDKs are outdated, it escalates to **critical**.
+
+### How a version is evaluated
+
+The check tries to reduce noise from our frequent releases, but still lets you know when your SDK version is too outdated for comfort:
+
+- **Grace period**: Versions less than 7 days old are never flagged, even if a newer version exists.
+- **Major versions**: Always flagged if you're not on the current major version (e.g. you're still using v1.x when v2.x is available).
+- **Minor versions**: Flagged if 3+ minor versions behind, or more than 6 months old.
+- **Patch versions**: Never flagged.
+
+The check also notifies you if your SDK version isn't officially "outdated", but is old enough that an update is recommended. For mobile SDKs, you'll see a warning if the version is more than 6 months old. For all other SDKs, the threshold is 4 months. Mobile SDKs get a more lenient threshold on purpose, since your users control when they update their apps – so it's normal to see older versions in mobile event data well after you've released an update.
+
+### Status badges
+
+Each SDK is labelled with a badge so you can see its status at a glance:
+
+- 🟢 **Current**: SDK version is up to date.
+- 🟢 **Recent**: SDK version is slightly behind, but within acceptable thresholds.
+- 🔴 **Outdated**: SDK version is significantly behind and really should be updated.
+- **Unavailable**: SDK version information couldn't be retrieved from GitHub (check the provided link for available versions).
+
+## Supported SDKs
+
+The check currently monitors 12 PostHog SDKs:
+
+| Platform | Package name | Documentation link |
+|----------|--------------|-------------------|
+| **Web** | `posthog-js` | [JavaScript](/docs/libraries/js) |
+| **Python** | `posthog-python` | [Python](/docs/libraries/python) |
+| **Node.js** | `posthog-node` | [Node.js](/docs/libraries/node) |
+| **React Native** | `posthog-react-native` | [React Native](/docs/libraries/react-native) |
+| **Flutter** | `posthog-flutter` | [Flutter](/docs/libraries/flutter) |
+| **iOS** | `posthog-ios` | [iOS](/docs/libraries/ios) |
+| **Android** | `posthog-android` | [Android](/docs/libraries/android) |
+| **Go** | `posthog-go` | [Go](/docs/libraries/go) |
+| **PHP** | `posthog-php` | [PHP](/docs/libraries/php) |
+| **Ruby** | `posthog-ruby` | [Ruby](/docs/libraries/ruby) |
+| **Elixir** | `posthog-elixir` | [Elixir](/docs/libraries/elixir) |
+| **.NET** | `posthog-dotnet` | [.NET](/docs/libraries/dotnet) |
+
+## Why it matters
+
+Outdated SDKs miss bug fixes, performance improvements, and new features, and may carry known issues that have since been patched. Keeping current is the cheapest way to avoid problems you'd otherwise have to debug yourself.
+
+## Fix it manually
+
+1. Open the **SDK health** page (in the Health section of the app). It lists every SDK you're sending events from, the versions in use, the latest available version, and how far behind each one is.
+2. For each outdated SDK, bump the dependency in your package manager – `npm`/`yarn`/`pnpm`, `pip`/`poetry`, `gem`, `go get`, etc. – and redeploy.
+3. For browser-snippet installs, make sure you're loading the latest snippet.
+4. Check the SDK's changelog for any breaking changes before upgrading.
+
+See [keeping SDKs current](/docs/health-checks/keeping-sdks-current) for strategies to stay up to date automatically.
+
+### Investigating SDK events
+
+Click on any version number in the SDK health table to open a dropdown with two ways to view events from that SDK version:
+
+- **Events on Activity page** – Opens the [Activity page](/docs/data/events) with filters pre-configured for the SDK type, version, and events from the last 7 days. Useful if you prefer a visual interface over writing queries.
+- **SQL query** – Opens the [SQL editor](/docs/hogql) with a HogQL query showing events for that SDK version. Useful if you want to customize the query or export data.
+
+## Fix it automatically with the Inbox and PostHog Code
+
+If you've connected your repository to PostHog, enable health checks as a [signal source](/docs/self-driving/inbox/sources) and the agent will:
+
+- Read the issue to identify the affected SDK and its latest version.
+- Query your events to confirm which `$lib` / `$lib_version` values are still sending data.
+- Bump the PostHog SDK dependency in the right manifest (`package.json`, `requirements.txt` / `pyproject.toml`, `Gemfile`, `go.mod`, etc.), update the lockfile, and review the changelog for breaking changes.
+- Open a PR for you to review.
+
+The issue clears on the next check run once the upgraded SDK starts sending events.
+
+## Frequently asked questions
+
+### Why don't I see all my SDKs?
+
+The check only considers SDKs that have sent events in the last 7 days. If you've just installed an SDK or it's in a low-traffic environment, it may take time to appear.
+
+### How often does the check run?
+
+It samples your recent events once a day. Event samples and SDK versions are cached for 24 hours for your team.
+
+### Why am I seeing several versions for the same SDK?
+
+This means events have been detected from multiple SDK versions within the last 7 days. If you've recently upgraded your SDK, seeing multiple versions is expected and can be safely ignored. However, if it's been a while since your last upgrade, it could indicate that different versions of the SDK are still running at the same time. In that case, review your deployment to ensure older versions aren't still in use.
+
+### What happens when I update an SDK?
+
+Once you deploy an updated SDK and it starts sending events, the new version is detected within 24 hours and the issue clears on the next check run.
+
+### Does this check affect my event ingestion?
+
+No. It analyzes only events that have already been ingested.
+
+## Related
+
+- [Health checks overview](/docs/health-checks)
+- [Keeping SDKs current](/docs/health-checks/keeping-sdks-current)

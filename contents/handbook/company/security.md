@@ -22,20 +22,9 @@ Please set up passkeys for Google Workspace and GitHub at the very least. If you
 
 It is recommended to have most passkeys saved in 1Password itself, which will allow you to use them from your phone.
 
-### YubiKeys for infrastructure accounts
+### Yubikeys
 
-YubiKeys are required for certain infrastructure-specific accounts as determined by the security team. If your role requires access to these accounts you will be told by the team - if in doubt ask in #team-security.
-
-We recommend purchasing:
-
-- One [YubiKey 5C Nano](https://www.yubico.com/gb/product/yubikey-5-series/yubikey-5c-nano/) for use with the work computer (can be left plugged in most of the time)
-- One [YubiKey 5C NFC](https://www.yubico.com/gb/product/yubikey-5-series/yubikey-5c-nfc/) (or [YubiKey 5Ci](https://www.yubico.com/gb/product/yubikey-5-series/yubikey-5ci/) if you have an older iPhone model) for use with mobile devices, and as backup
-
-#### Setting up your YubiKeys
-
-1. **Register your YubiKeys** with each required service. The security team will let you know which accounts need YubiKey authentication.
-2. **Always register both keys** with every service so the second acts as a backup if you lose one.
-3. **Disable OTP mode** — avoid spamming OTPs if you accidentally touch your YubiKey by installing the [YubiKey Manager](https://www.yubico.com/support/download/yubikey-manager/) or by running `brew install ykman && ykman config usb --disable OTP`
+We previously required all employees to purchase and configure two Yubikeys. These have been replaced with passkeys, and Yubikeys are no longer required nor recommended.
 
 ## Mobile device management (MDM)
 
@@ -135,3 +124,7 @@ To provide a great customer experience, PostHog employees may occasionally need 
 
 4. **Use good judgment.**  
    If you’re unsure whether impersonation is justified, or if a customer might object, either seek their consent or find another way to get the information (for example, by checking our internal PostHog instance).
+
+### Impersonating users via MCP
+
+The same rules apply when you connect the PostHog MCP server while logged in as a customer. Treat the OAuth connection and every MCP tool call as actions taken while impersonating them. Use read-only mode unless the customer has explicitly agreed to changes, only authorize the organization and project you need, and log out when you're finished. See [handling customer issues](/handbook/cs-and-onboarding/handling-customer-issues#using-the-mcp-server-while-impersonating) for the steps.

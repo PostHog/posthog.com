@@ -22,7 +22,7 @@ export default function WizardCTA(): JSX.Element {
                         <p className="!mt-1 !mb-3 text-sm opacity-75">
                             Paste this into your terminal and make AI do all the work.
                         </p>
-                        <WizardCommand latest={false} />
+                        <WizardCommand />
                     </div>
                     <div className="shrink-0">
                         <img

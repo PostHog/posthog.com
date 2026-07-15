@@ -1,0 +1,80 @@
+---
+title: Self-driving FAQ
+sidebarTitle: FAQ
+sidebar: Docs
+showTitle: true
+---
+
+import WizardCommand from 'components/WizardCommand'
+
+<CalloutBox icon="IconFlask" title="Open beta" type="action">
+
+Self-driving is in open beta. It's improving quickly – expect rough edges, and expect them to disappear fast.
+
+</CalloutBox>
+
+Skeptical questions, answered straight. If yours isn't here, ask us via [in-app support](https://app.posthog.com/home#supportModal) or the [community](/questions).
+
+## Won't this fill my repo with AI slop?
+
+That's the failure mode, and the whole system is built to avoid it. Three things stand between a signal and your main branch:
+
+1. **Reports are investigated before anything is written.** An agent has to confirm the problem is real in your data and your code before a PR exists at all. Reports that don't clear the bar never become code.
+2. **Every change is a pull request a human reviews.** It arrives with your CI and review rules attached, and nothing merges itself.
+3. **You pay per PR, and [we refund PRs that miss the bar](/docs/self-driving/pricing#refunds).** A business model that charges for slop dies quickly. Ours only works if the PRs are worth merging.
+
+Self-driving also stays in its lane: maintenance, fixes, and optimization. It doesn't attempt speculative rewrites of your architecture.
+
+## Why can't I just point Claude Code or Cursor at my repo?
+
+You can, and you should – they're great at the coding half. But a coding agent starts from a prompt or a ticket and sees only your repo. It can't originate work from "users are rage-clicking the confirm button and revenue dipped," because those signals don't live in your code. They live in your product data, and that's what PostHog has.
+
+That's the honest difference: general-purpose agents are cruise control, keeping you moving in the lane you already picked. Self-driving finds the road. And if you want your own agent to have that context too, connect it via the [PostHog MCP](/docs/model-context-protocol).
+
+## What can the agents actually touch?
+
+Less than a contractor with repo access:
+
+- Work happens in an **isolated sandbox** in the cloud, on a clone of your repo, never on your machines or infrastructure.
+- Agents work on a **branch** and open a pull request. They follow your branch protections, CI, and review rules, and they can't merge.
+- Every action is **logged**. Open the agent log on any report to see exactly which files it read, which queries it ran, and how it reached its conclusion.
+
+Nothing reaches production without a human clicking merge.
+
+## Do you use this on PostHog itself?
+
+Yes, heavily. A troop of 35 scouts watches the PostHog app, and reports about posthog.com become pull requests on [the public repo that builds this site](https://github.com/PostHog/posthog.com/pulls), where you can read them. We're the first customer of every part of the loop, and the first to feel it when something's off.
+
+## What happens when it gets something wrong?
+
+It will sometimes; it's in open beta and we say so on every page. The system is designed so that being wrong is cheap:
+
+- A wrong report costs you nothing. Reports are free, and you can decline or snooze them.
+- A wrong PR costs you a review, and then nothing: [we refund PRs](/docs/self-driving/pricing#refunds) that misdiagnose the problem or don't fix what they claim to.
+- A wrong merged change gets caught by the loop itself. PostHog measures whether the targeted metric actually moved, and a validation scout re-checks fixes after a soak window.
+
+## Is my code or data used to train models?
+
+Your private repos stay private and your data stays in PostHog. We do [train our own models](/blog/training-ai-models), but not on your code. Self-driving relies on AI, so your organization needs [AI data processing turned on](/docs/posthog-ai/allow-access) – the setup wizard checks this for you.
+
+The scouts themselves aren't a black box either: every canonical scout is a readable skill [published in the PostHog repo](https://github.com/PostHog/posthog/tree/master/products/signals/skills).
+
+## How is this different from alerts and monitoring?
+
+Monitoring tells you something broke, then the work begins: triage the alert, reproduce the bug, find the owner, write the fix. Self-driving does that pipeline for you. A signal is investigated, grouped with related evidence, root-caused against your code, and handed to you as a reviewed-and-ready pull request. The [anatomy of a pull request](/docs/self-driving/anatomy-of-a-pr) walks through the difference on a single bug.
+
+## How do I control what it watches, and what it costs?
+
+Everything is a toggle, and every dollar has a ceiling:
+
+- Turn individual [signal sources](/docs/self-driving/inbox/sources) and [scouts](/docs/self-driving/scouts) on or off per project.
+- You pay a flat $15 per pull request. Reports are free, and your first three PRs each month are free.
+- A default $150 billing limit is set for you, and you can lower it. When you hit the limit, PR generation pauses until the next billing period.
+
+See [pricing](/docs/self-driving/pricing) for the full picture.
+
+## Convinced, or at least curious?
+
+Setup is one command, and most teams are done in a few minutes:
+
+<WizardCommand command="self-driving" />

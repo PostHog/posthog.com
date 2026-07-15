@@ -96,6 +96,7 @@ const titleMap: Record<string, string> = {
     datasets: 'Datasets',
     early_access_feature: 'Early access features',
     environments: 'Environments',
+    error_tracking: 'Error tracking',
     evaluation_runs: 'Evaluation runs',
     evaluations: 'Evaluations',
     event_definitions: 'Event definitions',
@@ -582,7 +583,8 @@ interface ApiEndpointData {
 export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.Element {
     const { allMdx } = data
     const name = data.data.name
-    const title = titleMap[name] || humanReadableName(name)
+    const baseName = name.replace(/-\d+$/, '')
+    const title = titleMap[baseName] || humanReadableName(baseName)
     const nextURL = data.data.nextURL
     const previousURL = data.data.previousURL
     const paths = {}

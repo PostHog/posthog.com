@@ -1,26 +1,94 @@
 ---
 title: How to set up MCP analytics and error tracking
-date: 2025-10-20
+date: 2026-07-07
 author:
   - arda-eren
+  - lucas-faria
 showTitle: true
 tags:
   - product analytics
-  - feature flags
   - MCP
 ---
 
+import { CalloutBox } from 'components/Docs/CalloutBox'
+import WizardCommand from 'components/WizardCommand'
+
+<CalloutBox type="fyi" title="New: instrument your MCP server in one command" icon="IconInfo">
+
+Since this tutorial was published, we've shipped [`@posthog/mcp`](/docs/mcp-analytics) – an official (beta) SDK that captures every tool call, error, and the agent's intent automatically. You can set it up with a single `instrument(server, posthog)` call, or let our wizard do it for you with one command. No wrapper code required. The manual approach below still works and is a great way to understand what's happening under the hood, but most servers should reach for the SDK first.
+
+</CalloutBox>
+
 MCP servers give LLMs powerful capabilities, but without analytics and error tracking you're flying blind with no visibility into usage or performance. Which tools get called? How often? Where are the bottlenecks? What's failing?
 
-This tutorial walks you through how to add product analytics and error tracking to any MCP server using a simple wrapper pattern. This implementation tracks every tool execution without touching core business logic. 
+There are two ways to add this to your MCP server:
+
+1. **The quick way** – install the official [`@posthog/mcp`](/docs/mcp-analytics) SDK and call `instrument()` once. This is the recommended path for most servers.
+2. **The manual way** – wrap each tool handler yourself with a small higher-order function. This takes more code, but it's a great way to understand the mechanics and gives you full control.
+
+We'll cover the SDK first, then walk through the manual pattern so you can see exactly what the SDK does for you.
+
+The full source code for the manual approach is available in this [GitHub repository](https://github.com/arda-e/mcp-posthog-analytics).
+
+## The quick way: the `@posthog/mcp` SDK
+
+[`@posthog/mcp`](/docs/mcp-analytics) wraps your MCP server and captures analytics automatically – no per-tool instrumentation. It supports any TypeScript MCP server built on `@modelcontextprotocol/sdk`.
+
+The fastest way to set it up is our wizard, which installs the package, adds your `posthog-node` client, and wires up the `instrument()` call for you (it also works with [LLM coding agents](/blog/envoy-wizard-llm-agent) like Cursor):
+
+<WizardCommand command="mcp-analytics" />
+
+Prefer to do it by hand, or want to see exactly what the wizard wires up? Install the SDK alongside the [PostHog Node.js SDK](/docs/libraries/node):
+
+```bash
+npm install @posthog/mcp posthog-node
+```
+
+Then call `instrument(server, posthog)` once at startup. You bring your own `posthog-node` client and pass it in as the second argument:
+
+```typescript
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
+import { PostHog } from "posthog-node"
+import { instrument } from "@posthog/mcp"
+
+const server = new McpServer({ name: "my-mcp-server", version: "1.0.0" })
+
+const posthog = new PostHog(process.env.POSTHOG_PROJECT_API_KEY, {
+  host: "https://us.i.posthog.com", // or https://eu.i.posthog.com
+})
+
+// Register your tools as usual – their handlers run untouched.
+instrument(server, posthog)
+```
+
+That's it. From the first tool call, the SDK emits PostHog events automatically, all prefixed with `$mcp_*` so they never collide with your other data and all sharing a `$session_id` derived from the MCP protocol session:
+
+- `$mcp_tool_call` for every tool invocation (with parameters, response, duration, and error status)
+- `$mcp_tools_list` for every `tools/list` response, so you can compare advertised vs. called tools
+- `$mcp_initialize` for every client handshake (including the MCP client name and version)
+- `$exception` whenever a tool throws or returns `isError: true`, wired into [error tracking](/docs/error-tracking)
+
+It also unlocks signals the manual approach can't easily capture, each a one-line option on `instrument()`:
+
+- **[Agent intent](/docs/mcp-analytics/intent)** – the *why* behind each call, captured as `$mcp_intent`
+- **[Identifying users](/docs/mcp-analytics/identifying-users)** – attribute calls to a real user behind the agent
+- **[Missing capabilities](/docs/mcp-analytics/missing-capability)** – a queryable feed of things agents wished your server supported
+
+Remember to drain queued events on shutdown by calling `posthog.shutdown()` (or `posthog.flush()`) from your `SIGTERM` handler, since you own the client's lifecycle.
+
+> **Note:** `@posthog/mcp` is in beta (pre-1.0). The API may still change – including breaking changes in minor `0.x` releases – so pin a specific version while we iterate. Running a custom dispatcher with no server object to wrap? See [Custom servers](/docs/mcp-analytics/custom-servers).
+
+To go deeper, see the [getting started guide](/docs/mcp-analytics/start-here), the [installation docs](/docs/mcp-analytics/installation), and the [event reference](/docs/mcp-analytics/events).
+
+## Building it yourself (how it works under the hood)
+
+Prefer full control, want to understand the mechanics, or building something the SDK doesn't cover yet? The rest of this tutorial walks through the manual wrapper pattern – essentially a hand-rolled version of what `instrument()` does for you. This implementation tracks every tool execution without touching core business logic.
 
 In the finished setup, the MCP server:
 
 - Tracks execution time for every tool call
 - Captures errors with context
 - Sends data to PostHog
-
-The full source code is available in this [GitHub repository](https://github.com/arda-e/mcp-posthog-analytics).
 
 ## Prerequisites
 
@@ -540,7 +608,9 @@ Tool call error tracking with stack traces
 
 ## Further reading
 
-- Complete code on [GitHub](https://github.com/arda-e/mcp-posthog-analytics)
+- [MCP analytics docs](/docs/mcp-analytics) – the official `@posthog/mcp` SDK
+- [Every event the SDK emits](/docs/mcp-analytics/events) and [copy-paste queries](/docs/mcp-analytics/queries)
+- Complete code for the manual approach on [GitHub](https://github.com/arda-e/mcp-posthog-analytics)
 - [MCP: machine copy/paste](/blog/machine-copy-paste-mcp-intro)
 - [What we've learned about AI-powered features](/newsletter/building-ai-features)
 - [Avoid these AI coding mistakes](/newsletter/ai-coding-mistakes)
