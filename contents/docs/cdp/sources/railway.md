@@ -29,7 +29,7 @@ You need a Railway account with access to the projects you want to sync, and per
 You need a Railway API token:
 
 1. Go to your [Railway account settings](https://railway.com/account/tokens).
-2. Create a new token. To sync a specific workspace's projects, select that workspace when creating the token. A token created without a workspace is an account token and syncs all projects your account can access.
+2. Create a new token. To sync projects from a specific workspace, select that workspace when creating the token. A token created without a workspace is an account token and syncs all projects your account can access.
 3. Back in PostHog, paste the token into the `API token` field and click **Next**.
 
 Project tokens are not supported. They are scoped to a single environment and can't list your projects.
@@ -40,7 +40,7 @@ Railway rate limits API requests per plan (as low as 100 requests/hour on the Fr
 
 <SyncModes />
 
-The `deployments` table supports incremental syncs: each run pulls deployments created since the last sync, plus a one-day lookback so recent status changes (for example a deployment moving from `DEPLOYING` to `SUCCESS`) are picked up. Status changes on older deployments are only reflected on a full refresh. All other tables are small and sync as full refreshes.
+The `deployments` table supports incremental syncs: each run pulls deployments created since the last sync, and also re-syncs the previous day of deployments so recent status changes (for example a deployment moving from `DEPLOYING` to `SUCCESS`) are picked up. Status changes on older deployments are only reflected on a full refresh. All other tables are small and sync as full refreshes.
 
 ## Configuration
 
