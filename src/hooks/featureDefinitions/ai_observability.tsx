@@ -76,7 +76,7 @@ export const aiObservabilityFeatures = {
         },
         evaluation_datasets: {
             name: 'Evaluation datasets',
-            description: 'Create datasets for testing and benchmarking outputs',
+            description: 'Create datasets for experimentation and benchmarking outputs',
         },
         human_annotation: {
             name: 'Human annotation/review',
