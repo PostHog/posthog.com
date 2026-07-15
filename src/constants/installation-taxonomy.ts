@@ -146,7 +146,6 @@ export const TAXONOMY: InstallCategory[] = [
                 librarySlug: 'kmp',
                 wizard: true,
                 wizardOrder: 25,
-                status: 'wip',
             },
         ],
     },
