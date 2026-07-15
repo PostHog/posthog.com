@@ -129,6 +129,7 @@ Hyperengage
 InKeep
 Inleads
 [Ii]nsider
+Instana
 [Ii]ntercom
 Istio
 [Ii]terable
