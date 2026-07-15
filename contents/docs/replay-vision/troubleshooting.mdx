@@ -44,12 +44,12 @@ Once you've added the filter, the ineligibility rate should drop. The Observatio
 
 Replay Vision runs entirely downstream of ingestion: scanners can only scan recordings PostHog actually received, and the model's event context comes from the events captured in those sessions. If either stops flowing, Vision goes quiet without erroring:
 
-- **No new recordings** – background sweeps find no matching sessions and produce nothing at all.
-- **Recordings but no events** – sessions arrive without event data and every scan is marked ineligible with `no_events`.
+- **No new recordings**: background sweeps find no matching sessions and produce nothing at all.
+- **Recordings but no events**: sessions arrive without event data and every scan is marked ineligible with `no_events`.
 
 Billing limits are one cause (see [usage limits stop scanning](#usage-limits-stop-scanning) below), but the same symptom appears whenever capture itself stops: session replay is disabled in project settings or in the SDK config, replay capture conditions (sampling, minimum duration) filter out every session, or the snippet/SDK stopped loading after a deploy. Work through the [session replay troubleshooting guide](/docs/session-replay/troubleshooting) to get recordings flowing again.
 
-Vision resumes automatically once new sessions arrive – but sessions that were never captured can't be scanned retroactively, so gaps in ingestion are permanent gaps in observations.
+Vision resumes automatically once new sessions arrive. Sessions that were never captured can't be scanned retroactively, so gaps in ingestion are permanent gaps in observations.
 
 ## Usage limits stop scanning
 
