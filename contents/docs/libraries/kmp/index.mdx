@@ -17,18 +17,15 @@ features:
   logs: false
 ---
 
-The PostHog Kotlin Multiplatform (KMP) SDK lets you capture analytics from shared Kotlin code that runs on Android, iOS, and the web (JS). It's a thin wrapper that delegates to the official native PostHog SDKs on each target — [posthog-android](/docs/libraries/android) on Android, [posthog-ios](/docs/libraries/ios) on iOS, and [posthog-js](/docs/libraries/js) on the web — so you get native batching, queueing, and session replay behind a single common API.
+The PostHog Kotlin Multiplatform (KMP) SDK lets you capture analytics from shared Kotlin code that runs on Android, iOS, and the web. It's a thin wrapper that delegates to the official native PostHog SDKs on each target – [Android](/docs/libraries/android), [iOS](/docs/libraries/ios), and [JavaScript](/docs/libraries/js) – so you get native batching, queueing, and session replay behind a single common API.
 
 > **Early access:** This SDK is currently in a `0.x` pre-release. The API may change between minor versions until it stabilizes. We'd love your feedback on [GitHub](https://github.com/PostHog/posthog-kmp/issues).
 
 ## Installation
 
-Add the dependency to your shared module's `commonMain` source set.
+Add the dependency to your shared module's `commonMain` source set:
 
-### Gradle (Kotlin DSL)
-
-```kotlin
-// shared/build.gradle.kts
+```kotlin file=shared/build.gradle.kts
 kotlin {
     sourceSets {
         commonMain.dependencies {
@@ -38,22 +35,11 @@ kotlin {
 }
 ```
 
-### Version catalog
-
-```toml
-# gradle/libs.versions.toml
-[versions]
-posthog-kmp = "<version>"
-
-[libraries]
-posthog-kmp = { group = "com.posthog", name = "posthog-kmp", version.ref = "posthog-kmp" }
-```
-
 You can find the latest version on [Maven Central](https://central.sonatype.com/artifact/com.posthog/posthog-kmp).
 
 ### Configure the SDK
 
-Initialize PostHog once, early in your app's lifecycle, by calling `PostHog.setup()` with a `PostHogConfig` and a platform `PostHogContext`.
+Initialize PostHog once, early in your app's lifecycle, by calling `PostHog.setup()` with a `PostHogConfig` and a platform `PostHogContext`:
 
 ```kotlin
 import com.posthog.kmp.PostHog
@@ -62,18 +48,18 @@ import com.posthog.kmp.PostHogContext
 
 PostHog.setup(
     config = PostHogConfig(
-        apiKey = "<ph_project_api_key>",
-        host = PostHogConfig.HOST_US, // or PostHogConfig.HOST_EU
+        apiKey = "<ph_project_token>",
+        host = "<ph_client_api_host>",
     ),
-    context = PostHogContext(), // platform-specific — see below
+    context = PostHogContext(), // platform-specific, see below
 )
 ```
 
-You can find your project API key and host in [your project settings](https://us.posthog.com/settings/project).
+You can find your project token and host in [your project settings](https://us.posthog.com/settings/project). For convenience, `PostHogConfig.HOST_US` and `PostHogConfig.HOST_EU` are provided as constants for the two PostHog Cloud hosts.
 
 ### Platform-specific setup
 
-The only platform difference is how you build `PostHogContext`. Everything else — event capture, feature flags, config — is shared code.
+The only platform difference is how you build `PostHogContext`. Everything else – event capture, feature flags, config – is shared code.
 
 #### Android
 
@@ -85,7 +71,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         PostHog.setup(
-            config = PostHogConfig(apiKey = "<ph_project_api_key>"),
+            config = PostHogConfig(apiKey = "<ph_project_token>"),
             context = PostHogContext(application),
         )
     }
@@ -101,7 +87,7 @@ On iOS, use the no-argument `PostHogContext()`:
 fun MainViewController() = ComposeUIViewController {
     LaunchedEffect(Unit) {
         PostHog.setup(
-            config = PostHogConfig(apiKey = "<ph_project_api_key>"),
+            config = PostHogConfig(apiKey = "<ph_project_token>"),
             context = PostHogContext(),
         )
     }
@@ -109,7 +95,7 @@ fun MainViewController() = ComposeUIViewController {
 }
 ```
 
-#### Web (JS)
+#### Web
 
 On the web, use the no-argument `PostHogContext()`:
 
@@ -117,7 +103,7 @@ On the web, use the no-argument `PostHogContext()`:
 // main.kt
 fun main() {
     PostHog.setup(
-        config = PostHogConfig(apiKey = "<ph_project_api_key>"),
+        config = PostHogConfig(apiKey = "<ph_project_token>"),
         context = PostHogContext(),
     )
 }
@@ -160,9 +146,11 @@ PostHog.capture(
 
 ## Identifying users
 
-> We highly recommend reading our section on [identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
+import IdentifyFrontendCallout from '../../_snippets/identify-frontend-callout.mdx'
 
-Use `identify` to associate events with a specific user and (optionally) set [person properties](/docs/data/user-properties):
+<IdentifyFrontendCallout />
+
+Use `identify` to associate events with a specific user and, optionally, set [person properties](/docs/data/user-properties):
 
 ```kotlin
 PostHog.identify(
@@ -186,9 +174,15 @@ PostHog.identify(
 )
 ```
 
+## Anonymous and identified events
+
+import IdentifiedVsAnonymousIntro from '../../product-analytics/_snippets/identified-vs-anonymous-intro.mdx'
+
+<IdentifiedVsAnonymousIntro />
+
 ## Get the current user's distinct ID
 
-You may find it helpful to get the current user's distinct ID — for example, to check whether you've already called `identify` for a user. Call `getDistinctId()`, which returns either the ID automatically generated by PostHog or the one passed to `identify()`.
+You may find it helpful to get the current user's distinct ID – for example, to check whether you've already called `identify` for a user. Call `getDistinctId()`, which returns either the ID automatically generated by PostHog or the one passed to `identify()`:
 
 ```kotlin
 val distinctId = PostHog.getDistinctId()
@@ -196,7 +190,7 @@ val distinctId = PostHog.getDistinctId()
 
 ## Alias
 
-Sometimes you want to assign multiple distinct IDs to a single user. This is helpful when your primary distinct ID is inaccessible — for example, if a distinct ID used on the frontend isn't available in your backend. Use `alias` to assign another distinct ID to the same user:
+Sometimes you want to assign multiple distinct IDs to a single user. This is helpful when your primary distinct ID is inaccessible – for example, if a distinct ID used on the frontend isn't available in your backend. Use `alias` to assign another distinct ID to the same user:
 
 ```kotlin
 PostHog.alias("distinct_id")
@@ -217,7 +211,7 @@ PostHog.setPersonProperties(
 
 ## Super properties
 
-Super properties are properties you set once and then send with every subsequent `capture` call. They're set with `PostHog.register`, which takes a key and value, and they persist across sessions.
+Super properties are properties you set once and then send with every subsequent `capture` call. They're set with `PostHog.register`, which takes a key and value, and they persist across sessions:
 
 ```kotlin
 PostHog.register("team_id", 22)
@@ -237,9 +231,11 @@ If you're doing this as part of a user logging out, you can instead call `PostHo
 
 ## Feature flags
 
-PostHog's [feature flags](/docs/feature-flags) let you safely deploy and roll back new features. By default, flags are preloaded on setup (`preloadFeatureFlags = true`).
+import FeatureFlagsLibsIntro from '../_snippets/feature-flags-libs-intro.mdx'
 
-Check whether a flag is enabled:
+<FeatureFlagsLibsIntro />
+
+By default, flags are preloaded on setup (`preloadFeatureFlags = true`). Check whether a flag is enabled:
 
 ```kotlin
 if (PostHog.isFeatureEnabled("new_dashboard")) {
@@ -277,7 +273,7 @@ Get every evaluated flag at once as a map of `FeatureFlagResult`:
 val allFlags = PostHog.getAllFeatureFlags()
 ```
 
-Feature flags are fetched on setup and cached. If a user's properties change (for example after `identify`), reload them so they reflect the latest state:
+Feature flags are fetched on setup and cached. If a user's properties change (for example, after `identify`), reload them so they reflect the latest state:
 
 ```kotlin
 PostHog.reloadFeatureFlags {
@@ -299,7 +295,7 @@ It's also possible to [run experiments without using feature flags](/docs/experi
 
 ## Group analytics
 
-Group analytics lets you associate a user's events with a group (e.g. a company, team, or organization). Read the [group analytics](/docs/product/group-analytics) guide for more information.
+Group analytics lets you associate a user's events with a group (for example, a company, team, or organization). Read the [group analytics](/docs/product/group-analytics) guide for more information.
 
 > **Note:** This is a paid feature and is not available on the free plan. Learn more on the [pricing page](/pricing).
 
@@ -371,7 +367,7 @@ import com.posthog.kmp.SessionRecordingConfig
 
 PostHog.setup(
     config = PostHogConfig(
-        apiKey = "<ph_project_api_key>",
+        apiKey = "<ph_project_token>",
         sessionRecording = SessionRecordingConfig(
             enabled = true,
             maskAllTextInputs = true, // mask sensitive text (default)
@@ -402,7 +398,7 @@ Opt users out by default by setting `optOut` to `true` in your config:
 
 ```kotlin
 PostHog.setup(
-    config = PostHogConfig(apiKey = "<ph_project_api_key>", optOut = true),
+    config = PostHogConfig(apiKey = "<ph_project_token>", optOut = true),
     context = PostHogContext(),
 )
 ```
@@ -434,15 +430,25 @@ val distinctId = PostHog.getDistinctId()
 
 ## Flush
 
-The SDK batches events and flushes them periodically (`flushAt` events or every `flushIntervalSeconds`). To send all queued events immediately — for example before the app shuts down — call `flush`:
+import FlushIntro from '../_snippets/flush-intro.mdx'
+
+<FlushIntro />
+
+import FlushManual from '../_snippets/flush-manual.mdx'
+
+<FlushManual />
 
 ```kotlin
 PostHog.flush()
 ```
 
+import FlushNotes from '../_snippets/flush-notes.mdx'
+
+<FlushNotes />
+
 ## Reset after logout
 
-To reset the user's ID and anonymous ID, call `reset`. Usually you'd do this right after the user logs out.
+To reset the user's ID and anonymous ID, call `reset`. Usually you'd do this right after the user logs out:
 
 ```kotlin
 PostHog.reset()
@@ -462,7 +468,7 @@ If you're not seeing the events, feature flags, or session replay behavior you e
 
 ```kotlin
 PostHog.setup(
-    config = PostHogConfig(apiKey = "<ph_project_api_key>", debug = true),
+    config = PostHogConfig(apiKey = "<ph_project_token>", debug = true),
     context = PostHogContext(),
 )
 
@@ -476,7 +482,7 @@ Pass these to `PostHogConfig` when calling `setup`.
 
 | Option | Type | Default | Description |
 | --- | --- | --- | --- |
-| `apiKey` | `String` | **Required** | Your PostHog project API key. |
+| `apiKey` | `String` | **Required** | Your PostHog project token. |
 | `host` | `String` | `HOST_US` | PostHog instance URL. Use `PostHogConfig.HOST_US` (`https://us.i.posthog.com`) or `PostHogConfig.HOST_EU` (`https://eu.i.posthog.com`). |
 | `debug` | `Boolean` | `false` | Enables verbose SDK logging. |
 | `captureApplicationLifecycleEvents` | `Boolean` | `true` | Captures app open/close lifecycle events (mobile). |
@@ -490,7 +496,7 @@ Pass these to `PostHogConfig` when calling `setup`.
 | `maxBatchSize` | `Int` | `50` | Maximum number of events sent in one batch. |
 | `optOut` | `Boolean` | `false` | Starts with analytics opted out. |
 | `personProfiles` | `PersonProfiles` | `IDENTIFIED_ONLY` | When person profiles are created: `IDENTIFIED_ONLY`, `ALWAYS`, or `NEVER`. |
-| `sessionRecording` | `SessionRecordingConfig?` | `null` | Enables and configures session replay (Android/iOS). |
+| `sessionRecording` | `SessionRecordingConfig?` | `null` | Enables and configures session replay (Android and iOS). |
 | `autocapture` | `Boolean` | `false` | Enables automatic event capture where the native platform supports it. |
 
 ### Session recording options
@@ -503,8 +509,8 @@ Pass a `SessionRecordingConfig` to `PostHogConfig.sessionRecording`. Defaults ma
 | `maskAllTextInputs` | `Boolean` | `true` | Masks all text input values. |
 | `maskAllImages` | `Boolean` | `true` | Masks all images. |
 | `captureNetworkTelemetry` | `Boolean` | `true` | Includes network requests in the recording. |
-| `captureLogs` | `Boolean` | `false` | Captures console/system logs (iOS/Web). |
-| `screenshot` | `Boolean` | `false` | Uses screenshots instead of wireframes (experimental, Android/iOS). |
+| `captureLogs` | `Boolean` | `false` | Captures console and system logs (iOS and web). |
+| `screenshot` | `Boolean` | `false` | Uses screenshots instead of wireframes (experimental, Android and iOS). |
 | `captureLogcat` | `Boolean` | `true` | Captures Android logcat output (Android only). |
 | `debouncerDelayMs` | `Long` | `1000` | Touch event debounce delay in milliseconds (Android only). |
 
@@ -512,22 +518,22 @@ Pass a `SessionRecordingConfig` to `PostHogConfig.sessionRecording`. Defaults ma
 
 | Platform | Status | Backed by |
 | --- | --- | --- |
-| Android | ✅ | [posthog-android](/docs/libraries/android) (native) |
-| iOS | ✅ | [posthog-ios](/docs/libraries/ios) (native, via a Swift bridge) |
-| Web (JS) | ✅ | [posthog-js](/docs/libraries/js) |
+| Android | ✅ | [PostHog Android](/docs/libraries/android) (native) |
+| iOS | ✅ | [PostHog iOS](/docs/libraries/ios) (native, via a Swift bridge) |
+| Web | ✅ | [PostHog.js](/docs/libraries/js) |
 
-Because the SDK delegates to the native library on each platform, feature availability and behavior follow the underlying SDK. Session replay is available on Android and iOS; the web target inherits posthog-js behavior.
+Because the SDK delegates to the native library on each platform, feature availability and behavior follow the underlying SDK. Session replay is available on Android and iOS; the web target inherits PostHog.js behavior.
 
-# FAQ
+## FAQ
 
-## Which platforms does the KMP SDK support?
+### Which platforms does the KMP SDK support?
 
-Android, iOS, and web (JS). The SDK is designed for Kotlin Multiplatform projects — including Compose Multiplatform — that share business logic across these targets.
+Android, iOS, and web. The SDK is designed for Kotlin Multiplatform projects – including Compose Multiplatform – that share business logic across these targets.
 
-## Is this different from the Android SDK?
+### Is this different from the Android SDK?
 
-Yes. The [Android SDK](/docs/libraries/android) is for native Android apps. The KMP SDK is for shared Kotlin code targeting multiple platforms, and it wraps the native Android, iOS, and JS SDKs so you can call one common API from `commonMain`.
+Yes. The [Android SDK](/docs/libraries/android) is for native Android apps. The KMP SDK is for shared Kotlin code targeting multiple platforms, and it wraps the native Android, iOS, and web SDKs so you can call one common API from `commonMain`.
 
-## Why don't I see surveys or logs?
+### Why don't I see surveys or logs?
 
 The KMP wrapper currently exposes event capture, identification, feature flags, group analytics, screen tracking, session replay, and error tracking. Surveys and logs aren't wrapped yet. Follow along or request them on [GitHub](https://github.com/PostHog/posthog-kmp/issues).
