@@ -101,6 +101,10 @@
         del {
             @apply text-muted;
         }
+
+        hr {
+            @apply border-t border-b-0 border-solid border-primary my-6 h-0;
+        }
     }
 }
 

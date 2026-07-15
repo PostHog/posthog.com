@@ -217,7 +217,7 @@ const SmallTeamsPage = () => {
                 }}
             >
                 <div className="mt-6 px-4 max-w-screen-lg mx-auto">
-                    <section data-scheme="primary" className="bg-primary">
+                    <section data-scheme="primary">
                         <div className="mb-8">
                             <h1>Small teams</h1>
                             <p className="mt-0">
@@ -244,7 +244,6 @@ const SmallTeamsPage = () => {
                             <OSTable
                                 columns={tableColumns}
                                 rows={tableRows}
-                                className="bg-primary"
                                 size="md"
                                 rowAlignment="center"
                                 width="full"

@@ -10,6 +10,7 @@ const PeoplePage = () => {
             <Editor
                 type="people"
                 maxWidth="100%"
+                hasPadding={false}
                 proseSize="base"
                 bookmark={{
                     title: 'People',

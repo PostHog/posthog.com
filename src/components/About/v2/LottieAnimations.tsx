@@ -43,7 +43,7 @@ export const LottieAnimation = ({ variant, className = '' }: LottieAnimationProp
             src: '/lotties/kendrick.lottie',
             caption: (
                 <>
-                    There are other dev tool companies, <br />
+                    There are other AI companies, <br />
                     but <em>they not like us</em> <IconMusicEighthNote className="inline-block size-4" />
                 </>
             ),

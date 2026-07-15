@@ -342,7 +342,7 @@ export default function People() {
     }
 
     return (
-        <div data-scheme="primary" className="@container bg-primary h-full">
+        <div data-scheme="primary" className="@container h-full pt-12 pb-4 @xl:pb-8 px-4 @xl:px-8 pr-14">
             <SEO title="Team - PostHog" />
             <div className="flex flex-wrap items-center gap-2 justify-between">
                 <h1 className="m-0">People</h1>

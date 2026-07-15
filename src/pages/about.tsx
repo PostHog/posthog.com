@@ -59,16 +59,19 @@ export default function About({ data }: AboutProps) {
             <SEO title="About PostHog" description="All about PostHog" image={`/images/og/default.png`} />
             <Editor
                 maxWidth="100%"
+                hasPadding={false}
                 proseSize="base"
                 bookmark={{
                     title: 'Company',
                     description: 'Learn about PostHog',
                 }}
             >
-                <div className="max-w-3xl mx-auto pb-12 px-4 @xl:px-8">
-                    <MDXProvider components={mdxComponents}>
-                        <MDXRenderer>{data.mdx.body}</MDXRenderer>
-                    </MDXProvider>
+                <div className="bg-primary min-h-full px-4 @xl:px-8 py-4">
+                    <div className="max-w-3xl mx-auto pb-12">
+                        <MDXProvider components={mdxComponents}>
+                            <MDXRenderer>{data.mdx.body}</MDXRenderer>
+                        </MDXProvider>
+                    </div>
                 </div>
             </Editor>
         </>

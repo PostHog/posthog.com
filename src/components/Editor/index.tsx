@@ -531,7 +531,7 @@ export function Editor({
                     <main
                         data-app="Editor"
                         data-scheme="primary"
-                        className="@container/editor flex-1 bg-primary relative h-full flex flex-col"
+                        className="@container/editor flex-1 relative h-full flex flex-col"
                     >
                         <SearchBar
                             visible={showSearch}
