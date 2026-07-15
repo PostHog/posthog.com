@@ -12,7 +12,7 @@ If you need help with the website, go to `#posthogdotcom`.
 
 We generally only have product marketers on teams that _already_ have a product manager. Products without a product manager a) are usually too early for marketing to get involved, and b) distract engineers as they need to spend time briefing the product marketer, vs. shipping more stuff. [Product managers](/handbook/product/product-manager-role) help teams figure out what to build and how much to charge for it, product marketers then help you get as many users as possible. 
 
-We only add a dedicated product marketer when it becomes painful not to have one. Until then, the existing team supports newer products on the side, so we don't hire ahead of need or bloat the team. Ongoing marketing for a tool beyond its initial launch is covered by the individual PMM in the context of their product — e.g. Joe covers how you can create experiments using the PostHog MCP.
+We only add a dedicated product marketer when it becomes painful not to have one. Until then, the existing team supports newer products on the side, so we don't hire ahead of need or bloat the team. Ongoing marketing for a tool beyond its initial launch is covered by the individual PMM in the context of their product – e.g. Joe covers how you can create Experiments using the PostHog MCP.
 
 | Product             | PM     | PMM    | Blitzscale |
 | ------------------- | ------ | ------ | ---------- |
@@ -30,11 +30,11 @@ We only add a dedicated product marketer when it becomes painful not to have one
 
 These need coverage but don't have a dedicated person:
 
-- **Research** — Joe
-- **Incident comms** — distributed
-- **Lifecycle (i.e. email)**, and aligning with growth eng where needed — Joe
-- **Initial small launches for new tools** (e.g. Support) — Joe
-- **Startups / partnerships** — Joe
+- **Research** – Joe
+- **Incident comms** – distributed
+- **Lifecycle (i.e. email)**, and aligning with growth eng where needed – Joe
+- **Initial small launches for new tools** (e.g. Support) – Joe
+- **Startups / partnerships** – Joe
 
 <details>
 <summary>I need a product marketer, but my team hasn't been assigned one</summary>
