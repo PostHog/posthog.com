@@ -69,12 +69,18 @@ const SecondaryActions = ({ justify = 'center' }: { className?: string; justify?
     </p>
 )
 
-// PostHog.com-side glue (see note above): the install UI + secondary links, used by the
+// PostHog.com-side glue (see note above): the install UI + optional secondary links, used by the
 // homepage hero (inlined) and the /products page (via this export).
-export const GetStarted = ({ selfDriving }: { selfDriving?: boolean }) => (
+export const GetStarted = ({
+    selfDriving,
+    showSecondaryActions = true,
+}: {
+    selfDriving?: boolean
+    showSecondaryActions?: boolean
+}) => (
     <div className="mt-6 flex flex-col items-center @xl:items-start">
         <PlatformInstall schema={wizardInstallSchema} selfDriving={selfDriving} />
-        <SecondaryActions />
+        {showSecondaryActions ? <SecondaryActions /> : null}
     </div>
 )
 
