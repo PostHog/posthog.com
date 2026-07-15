@@ -1,12 +1,12 @@
 import { useActiveFeatureFlags } from '../../hooks/useActiveFeatureFlags'
 import usePostHog from '../../hooks/usePostHog'
 
-export const WIZARD_PROVISIONING_FLAG = 'wizard-provisioning'
+export const WIZARD_PROVISIONING_FLAG = 'posthog-com-wizard-provisioning'
 
 /**
  * Whether the GitHub provisioning flow should take over the wizard hero.
  *
- * Gated on the `wizard-provisioning` experiment: only the `test` variant enables it; `control` and
+ * Gated on the `posthog-com-wizard-provisioning` experiment: only the `test` variant enables it; `control` and
  * unflagged visitors get the classic terminal-first hero. `flags` (from onFeatureFlags) is the
  * reactive trigger (it flips non-null once flags resolve), while getFeatureFlag returns the
  * assigned variant and emits the `$feature_flag_called` exposure. Fail-closed while flags load.

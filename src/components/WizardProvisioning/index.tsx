@@ -70,7 +70,7 @@ type View =
  * state diagram and wizard-provisioning-rfc.md (repo root) for the architecture. All server work happens in
  * the /api/wizard/* Gatsby Functions; this component is a state machine over their responses.
  *
- * The `wizard-provisioning` experiment gate lives in the hero (`useWizardProvisioningEnabled`), which mounts this
+ * The `posthog-com-wizard-provisioning` experiment gate lives in the hero (`useWizardProvisioningEnabled`), which mounts this
  * component only for the `test` variant, so this component assumes it's enabled and never self-hides.
  */
 export default function WizardProvisioning(): JSX.Element {

@@ -15,7 +15,7 @@ It is no longer an MDX component (removed from `jsxComponentDescriptors` and `co
 
 ## Gating
 
-The `wizard-provisioning` experiment gate lives in **`useWizardProvisioningEnabled()`**, called once by `WizardHeader` (single call site → single `$feature_flag_called` exposure). It returns `true` only for the `test` variant, and fails closed while flags load:
+The `posthog-com-wizard-provisioning` experiment gate lives in **`useWizardProvisioningEnabled()`**, called once by `WizardHeader` (single call site → single `$feature_flag_called` exposure). It returns `true` only for the `test` variant, and fails closed while flags load:
 
 - **enabled** → the hero renders the GitHub-first provisioning flow (`<WizardProvisioning />`) with a GitHub-focused subtitle.
 - **disabled / loading** → the classic terminal-first hero (`<WizardCommand slim />`).
@@ -70,7 +70,7 @@ None are `GATSBY_`-prefixed — they must never reach the client bundle.
 ```bash
 WIZARD_PROVISIONING_MOCK=1 pnpm start
 # in the browser console on localhost:8001/wizard, enable the flag for yourself:
-posthog.featureFlags.override({ 'wizard-provisioning': true })
+posthog.featureFlags.override({ 'posthog-com-wizard-provisioning': true })
 ```
 
 Magic repositories drive every scenario (state resets when the dev server restarts):

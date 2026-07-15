@@ -17,7 +17,7 @@ import WizardProvisioning from 'components/WizardProvisioning'
 import { useWizardProvisioningEnabled } from 'components/WizardProvisioning/useWizardProvisioningEnabled'
 
 function WizardHeader(): JSX.Element {
-    // The `wizard-provisioning` experiment gate lives here (single call site → single exposure). When on,
+    // The `posthog-com-wizard-provisioning` experiment gate lives here (single call site → single exposure). When on,
     // the hero leads with the GitHub provisioning flow and demotes the terminal command to a secondary
     // path inside <WizardProvisioning />; when off, it's the classic terminal-first hero.
     const provisioningEnabled = useWizardProvisioningEnabled()
