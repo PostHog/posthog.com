@@ -53,6 +53,31 @@ Ask data questions in plain English and get answers backed by a real PostHog que
   outcome="Runs a paths query with start and end points to surface the routes that actually convert."
 />
 
+### Manage path cleaning rules
+
+Path cleaning rules normalize dynamic URLs — like `/users/123` and `/users/456` — into consistent patterns like `/users/<id>` so they appear as a single row in your analytics. Manage rules directly from your agent instead of editing them by hand in project settings. See the [path cleaning docs](/docs/web-analytics/path-cleaning) for more on how rules work.
+
+<PromptExample
+  prompt="Show me the current path cleaning rules for this project."
+  outcome="Returns the full ordered list of regex and alias pairs configured in your project settings."
+/>
+<PromptExample
+  prompt="Add a path cleaning rule that collapses /users/123/profile into /users/<id>/profile and preview the result against some sample paths."
+  outcome="Appends the rule and returns a preview showing how sample paths would be rewritten — nothing is saved until you confirm."
+/>
+<PromptExample
+  prompt="Test my path cleaning rules against /product/blue-widget, /product/red-gadget, and /merchant/8421/dashboard."
+  outcome="Runs the current rule chain against each sample path and shows the cleaned output."
+/>
+<PromptExample
+  prompt="Replace the second path cleaning rule with a new regex that matches UUIDs instead of numeric IDs."
+  outcome="Swaps the rule at the specified position and previews the updated rule set."
+/>
+<PromptExample
+  prompt="Remove the path cleaning rule for locale prefixes and confirm the change."
+  outcome="Deletes the matching rule, renumbers the remaining rules, and saves the updated list."
+/>
+
 ### Manage feature flags and experiments
 
 Spin up flags, multivariate tests, and full A/B experiments without leaving your code. See the [feature flags guide](/docs/feature-flags/create-flags-mcp) and [experiments guide](/docs/experiments/create-experiments-mcp).
