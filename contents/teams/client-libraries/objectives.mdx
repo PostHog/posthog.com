@@ -1,97 +1,67 @@
-### Q2 2026 Objectives
+### Q3 2026 Objectives
 
-#### Goal 1: What makes PostHog more tailored to how you actually use it (Driver: <TeamMember name="Dustin Byrne" />)
+#### Goal 1: SDK harness and specs (Driver: <TeamMember name="Dustin Byrne" />)
 
-E.g. the default dashboard relies on `$pageview` events, which doesn’t work well for mobile or backend-only use cases.
-
-What we'll ship:
-
-* Discover where our SDKs and defaults fall short (via dogfooding and conversations with customers)
-  * We don't yet have a clear picture of the gaps, step one is understanding what they are and how big the work is, so we can decide whether to focus on them or pick them up incrementally
-
-* Proactive user research
-  * Conduct interviews with mobile-heavy and backend-heavy customers
-  * Don’t rely only on reactive feedback from unhappy users
-  * Run surveys targeting those customers
-
-#### Goal 2: Agent-friendly SDKs (Driver: <TeamMember name="Dustin Byrne" /> <TeamMember name="Manoel Aranda Neto" />)
-
-As more developers rely on AI agents to integrate PostHog products, our SDKs should be easy for agents to understand, configure, instrument, and extend correctly.
+Expand the SDK harness and specs into the shared contract for PostHog SDK behavior, compatibility, and regression testing, and start using them across SDK work.
 
 What we'll ship:
 
-* Use insights from the wizard team to understand what users and agents are asking SDKs to do
-* Make SDK setup, instrumentation, and extension smooth for AI-assisted workflows
-* Reduce the ambiguity in our SDK interfaces, docs, and examples so agents can produce correct implementations more reliably
+-   Expand the SDK harness coverage across SDKs
+-   Define clear specs for shared SDK behavior
+    -   Include an SDK parity table as part of the spec
+-   Use the harness in CI so SDK changes stay on contract
+-   Make it easier for SDK contributors and employees to validate changes before release
+-   Publish shared SDK skills that customers can install and use directly, using the SDK specs as the source of truth
+-   Explore a spec-driven "software factory" workflow where changes to SDK specs can drive agent-assisted updates across SDKs, with human review and approval
+-   Experiment with a GitHub Action that triages issues and opens PRs for straightforward fixes automatically, similar to [clawsweeper](https://github.com/openclaw/clawsweeper)
 
-#### Goal 3: PostHog libraries vNext (Driver: <TeamMember name="Ioannis Josephides" />)
+#### Goal 2: Mobile push notifications (Driver: <TeamMember name="Ioannis Josephides" />)
 
-What we'll ship:
-
-* Offline-first / async-first `posthog-js` (<TeamMember name="Dustin Byrne" />)
-  * https://github.com/PostHog/posthog-js/issues/2673  
-
-* Distributed tracking headers
-  * https://github.com/PostHog/posthog/issues/20026
-  * Ensure libraries are properly connected end-to-end
-  * Add remote config support for JS tracking headers
-  * Auto-integrate in backend SDKs (similar to Django wrapper)
-    * https://github.com/PostHog/posthog-python/blob/2cac15aa68c34c1fc8a6e436d76bd7c4f7ecca47/posthog/integrations/django.py#L28-L29
-
-* More framework-specific wrappers (<TeamMember name="Dustin Byrne" />)
-  * Expand support for popular frameworks (e.g. Angular, TBD)
-
-* Mobile session replay (<TeamMember name="Ioannis Josephides" />)
-  * https://github.com/PostHog/posthog/issues/30889
-  * Event-based triggers
-    * https://github.com/PostHog/posthog-android/issues/467
-    * React Native
-  * Minimum duration support
-    * https://github.com/PostHog/posthog-android/issues/189
-    * Android
-    * Flutter
-  * macOS support
-    * https://github.com/PostHog/posthog-ios/issues/200
-    * Ensure compatibility with Flutter and React Native on macOS
-  * iOS performance improvements
-    * https://github.com/PostHog/posthog-ios/issues/321
-
-* Mobile error tracking (<TeamMember name="Ioannis Josephides" />)
-  * https://github.com/PostHog/posthog/issues/43012
-  * Native support
-    * React Native
-      * Rename package (current one is session replay specific)
-    * iOS improvements
-      * Line numbers (likely server-side)
-      * Swift error messages (likely requires vendoring PLCrashReporter)
-        * https://github.com/PostHog/posthog-ios/issues/522
-  * Breadcrumbs
-    * Error tracking team to design the approach and coordinate with us on SDK implementation
-
-* Flutter desktop support (Windows/Linux) (<TeamMember name="Ioannis Josephides" />)
-  * https://github.com/PostHog/posthog-flutter/issues/51
-
-#### Goal 4: Maintaining the SDKs (Driver: <TeamMember name="Manoel Aranda Neto" />)
+Support native PostHog push notifications for Workflows. See [Posthog-Native Push notification support](https://github.com/PostHog/posthog/issues/44444) for the product context.
 
 What we'll ship:
 
-* Complete the SDK test harness and integrate it into CI to ensure consistency across SDKs
-  * https://github.com/PostHog/posthog-sdk-test-harness
-  * https://github.com/PostHog/posthog/issues/51493
-* Take ownership of the SDK rotation
-* Align and standardize SDK configuration naming (API token vs API key)
-  * https://github.com/PostHog/posthog/issues/48234
-* Support and contribute to the new ingestion rate limiting project
-  * https://github.com/PostHog/requests-for-comments-internal/pull/1036
-* Migrate and consolidate `/decide`, `/flags`, and `/static/array.js` into a unified remote config (`/static/token/config`)
-* Document SDK design guidelines and best practices under the [SDK handbook page](/handbook/engineering/sdks) to help contributors avoid common pitfalls
+-   Android and iOS support, which are nearly done
+-   Flutter and React Native support by reusing the native SDK implementations
 
-#### Goal 5: Logs for Mobile (Driver: <TeamMember name="Anna Garcia" />)
+#### Goal 3: SDK coverage and modernization (Driver: <TeamMember name="Manoel Aranda Neto" />)
+
+Expand and modernize SDK coverage so more products and platforms have reliable first-class SDK behavior. This is a dynamic list of ideas we will try to get through in Q3, but priorities may change mid-plan as customer needs and product priorities shift.
+
+What we'll try to ship:
+
+-   KMP SDK
+-   Flutter desktop SDK
+-   Session replay for macOS
+-   React Native Expo Router touch events
+-   Flutter SDK init bootstrapping for feature flags
+-   Framework-level SDK experiences and docs that feel native to the frameworks customers actually use
+-   CocoaPods sunset migration plan
+-   Rust SDK v1 GA
+-   iOS SDK next major version
+-   Async version of the Python SDK
+-   JS SDK v2, including the versioned script loader
+-   Port the new ingestion endpoint across SDKs using the Rust SDK as an example
+-   Triage and fix real and stale issues across SDKs during the SDK Support Hero rotation
+
+#### Goal 4: Tracing support (Driver: <TeamMember name="Anna Garcia" />)
+
+Add first-class SDK support for [distributed tracing](/docs/distributed-tracing/installation) so customers can connect client-side behavior with backend and product analytics data. Today, tracing depends on OpenTelemetry setup; we want PostHog's JS and Python SDKs to support tracing directly so we can dogfood our own product.
 
 What we'll ship:
 
-* [Add support for collecting and sending app-side logs](https://github.com/PostHog/posthog/issues/40528)
-  * Add support for collecting and sending app-side logs from Android
-  * Add support for collecting and sending app-side logs from iOS
-  * Add support for collecting and sending app-side logs from Flutter
-  * Add support for collecting and sending app-side logs from React Native
+-   Define the SDK tracing approach for first-class JS and Python support
+-   Add tracing support to the JS and Python SDKs
+-   Align tracing behavior with PostHog ingestion and analysis workflows
+-   Document how customers should configure and use tracing from PostHog SDKs
+
+#### Goal 5: SDK observability (Driver: <TeamMember name="Ioannis Josephides" />)
+
+Research SDK observability so we can understand what is feasible before committing to specific implementation work. The goal is to learn how we can better understand reliability, performance, and customer-impacting issues across client libraries.
+
+What we'll explore:
+
+-   Whether we can safely instrument SDK behavior that affects reliability and customer experience
+-   Visibility into SDK errors, delivery failures, and performance issues
+-   How SDK observability could improve support and debugging workflows
+-   How feasible learnings should feed back into SDK quality, release, and support processes

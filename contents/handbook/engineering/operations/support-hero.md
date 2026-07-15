@@ -204,8 +204,6 @@ As a business we need to ensure we are focusing support on our paying customers,
 
 \* Try to be especially responsive to any customers marked as `Sales/CS Top 20`. This set of customers is regularly reviewed by the sales team, and this priority is applied to those customers we'd like to have an especially fantastic support experience.
 
-\*\* Due to the way we're using Pylon, "new" tickets from high prio customer Slack channels only appear as `New` in Zendesk for a few seconds, then a webhook updates the ticket and quickly changes it to `Open`.
-
 ### What if I need to confirm priority by checking a customer's MRR?
 
 You've got a couple of options. By order of quickness:
@@ -267,7 +265,7 @@ We use [Zendesk Support](https://posthoghelp.zendesk.com) as our internal platfo
 
 Zendesk allows us to manage all our customer conversations in one place and reply through Slack or email.
 
-Zendesk is populated with new tickets when issues are sent via the in-app [Support panel](https://us.posthog.com/home#panel=support) (the `Help` tab in the righthand sidebar), from people outside the PostHog GitHub organization adding issues to the `posthog` and `posthog.com` repos, and new [community questions](/questions). High priority customers also have Slack channels they can post support questions in. We can [create Zendesk tickets from Slack questions via Pylon.](#pylon-to-create-zendesk-tickets-from-slack-posts)
+Zendesk is populated with new tickets when issues are sent via the in-app [Support panel](https://us.posthog.com/home#panel=support) (the `Help` tab in the righthand sidebar), from people outside the PostHog GitHub organization adding issues to the `posthog` and `posthog.com` repos, and new [community questions](/questions). High priority customers also have Slack channels they can post support questions in. We can [create Zendesk tickets from Slack questions via SupportHog.](#creating-zendesk-tickets-from-slack-posts)
 
 The Zendesk tickets will include links to the GitHub issue, Slack thread, or the community question so we can answer in the appropriate platform. After replying to a community question, make an `internal note` on the Zendesk ticket confirming that you've replied outside of Zendesk, and set the [ticket status](#ticket-status) accordingly when submitting the internal note.
 
@@ -340,11 +338,9 @@ This looks at the Content Warning field on the Zendesk Organization, and adds th
 
 If you do discover any potentially offensive content in a customer account then please update this field on the Zendesk Organization so that other team members are aware of the content.
 
-### Pylon to create Zendesk tickets from Slack posts
+### Creating Zendesk tickets from Slack posts
 
-We use [Pylon](https://usepylon.com/) to create Zendesk tickets from Slack posts. To do so, add the `:ticket:` (🎫) emoji reaction to the post that you want to create a Zendesk ticket from.
-
-Adding the `:ticket:` emoji reaction will cause Pylon to add a couple of replies in a thread under the post. The last of those replies includes options for the Zendesk ticket you're creating: Use the `Group` menu to send the ticket to the appropriate team, and the `Severity` menu to set the severity flag on the Zendesk ticket, then hit the `Submit` button.
+We use [SupportHog](/handbook/growth/sales/slack-channels), our own tool, to create PostHog Support tickets from Slack posts. To do so, add the `:ticket:` (🎫) emoji reaction to the post that you want to create a PostHog Support ticket from, or mention `@SupportHog` in the thread.
 
 Zendesk tickets created this way will normally be marked as high priority tickets. You can respond to them either in Zendesk or Slack, as there is a two-way sync.
 

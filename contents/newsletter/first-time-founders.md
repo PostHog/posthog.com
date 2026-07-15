@@ -24,7 +24,7 @@ Therefore, if you want to learn how first-time founders fail and avoid their mis
 
 So, I did. Here's what they said.
 
-> This article was first published in our newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. [Subscribe here](https://newsletter.posthog.com/subscribe).
+> This article was first published in our newsletter, [build mode](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. [Subscribe here](https://newsletter.posthog.com/subscribe).
 
 ## Paul Copplestone
 

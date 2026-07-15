@@ -1,6 +1,6 @@
 import React from 'react'
 import ReaderView from 'components/ReaderView'
-import SEO from 'components/seo'
+import SEO, { buildProductStructuredData } from 'components/seo'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { CallToAction } from 'components/CallToAction'
 import { TreeMenu } from 'components/TreeMenu'
@@ -9,6 +9,7 @@ import { Accordion } from 'components/RadixUI/Accordion'
 import TabbedCarousel from 'components/TabbedCarousel'
 import type { TabbedCarouselTab } from 'components/TabbedCarousel'
 import OSTable from 'components/OSTable'
+import WistiaEmbed from 'components/WistiaEmbed'
 import Link from 'components/Link'
 import {
     IconBell,
@@ -32,7 +33,7 @@ import {
     IconWrench,
 } from '@posthog/icons'
 
-const CONNECT_SLACK_URL = 'https://app.posthog.com/settings/project-integrations#integration-slack'
+const CONNECT_SLACK_URL = 'https://app.posthog.com/integrations/slack'
 
 type IconComponent = React.ComponentType<{ className?: string }>
 
@@ -686,6 +687,12 @@ export default function SlackAppPage(): JSX.Element {
                 title="PostHog Slack app"
                 description="Tag @PostHog in any Slack thread to ship a fix, answer a data question, or edit content – without leaving the conversation."
                 image="/images/og/default.png"
+                structuredData={buildProductStructuredData({
+                    name: 'PostHog Slack app',
+                    description:
+                        'Tag @PostHog in any Slack thread to ship a fix, answer a data question, or edit content – without leaving the conversation.',
+                    slug: 'slack-app',
+                })}
             />
             <ReaderView leftSidebar={<LeftSidebarContent />} title="posthog-slack-app.md" hideTitle={true}>
                 <div className="max-w-2xl mx-auto">
@@ -699,13 +706,10 @@ export default function SlackAppPage(): JSX.Element {
                         </p>
                     </div>
 
-                    <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/slack_app_update_docs_f0c917f70a.png"
-                        alt="@PostHog updating docs from a Slack thread"
-                        className="w-full !block m-0"
-                        imgClassName="w-full !block"
-                    />
-                    <hr className="border-t border-primary m-0 mb-6" />
+                    <div className="rounded overflow-hidden not-prose m-0">
+                        <WistiaEmbed mediaId="ifyltgbxid" />
+                    </div>
+                    <hr className="border-t border-primary m-0 mb-6 mt-6" />
 
                     <h3>
                         One hog, <Highlight>two jobs</Highlight>
@@ -841,6 +845,13 @@ export default function SlackAppPage(): JSX.Element {
                             }))}
                         />
                     </div>
+                    <p className="text-sm text-secondary">
+                        Steering an agent from Slack is one way work gets done.{' '}
+                        <Link to="/self-driving" state={{ newWindow: true }}>
+                            Self-driving
+                        </Link>{' '}
+                        is the bigger loop around it.
+                    </p>
                     <div
                         id="try"
                         className="not-prose bg-accent border border-primary rounded-md p-4 @md/reader-content:p-6 my-6"

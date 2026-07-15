@@ -1,0 +1,8 @@
+Each table can be synced in one of several modes, depending on what the source supports:
+
+- **Webhook** (when available) – the source pushes changes to PostHog in real time. Fastest freshness, lowest ongoing cost, and the only mode that reliably captures updates and deletes.
+- **Incremental** – only new or updated rows are synced on each run, using a cursor field (such as an `updated_at` timestamp). Cheaper than a full refresh, but deletes aren't captured.
+- **Append only** – new rows are appended using a cursor field; existing rows are never updated. Ideal for immutable, append-only tables like event logs.
+- **Full refresh** – the whole table is reloaded on every sync. Use it when a table has no reliable cursor or when you need deletions reflected.
+
+See [sync methods](/docs/cdp/sources#sync-methods) for a full explanation of how each mode works and how to choose between them.

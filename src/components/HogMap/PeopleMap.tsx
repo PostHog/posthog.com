@@ -1,11 +1,11 @@
 import { AVATAR_FALLBACK_URL } from 'constants/index'
 import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react'
 import { navigate, graphql, useStaticQuery } from 'gatsby'
-import 'mapbox-gl/dist/mapbox-gl.css'
 import { useUserLocation } from '../../hooks/useUserLocation'
 import {
     computeOffsets,
     getMapbox,
+    loadMapbox,
     ensureClusterSource,
     ensureClusterLayers,
     setClusterVisibility,
@@ -208,9 +208,18 @@ const useCoordsByQuery = (isClient: boolean, token: string | undefined, members:
 
 export default function PeopleMap({ members: membersProp }: { members?: any[] }): JSX.Element {
     const [isClient, setIsClient] = useState(false)
+    const [mapboxReady, setMapboxReady] = useState(false)
     const [showClusters, setShowClusters] = useState(true)
     const [badgeType, setBadgeType] = useState<BadgeType>('none')
     const { location: userLocation, isLoading: isLocationLoading } = useUserLocation()
+
+    useEffect(() => {
+        loadMapbox().then((m) => {
+            if (m) {
+                setMapboxReady(true)
+            }
+        })
+    }, [])
 
     // Fetch team mini crest data
     const { allSqueakTeam } = useStaticQuery(TEAM_MINI_CREST_QUERY)
@@ -523,7 +532,7 @@ export default function PeopleMap({ members: membersProp }: { members?: any[] })
                 mapRef.current = null
             }
         }
-    }, [isClient, token, styleUrl, isLocationLoading, userLocation])
+    }, [isClient, mapboxReady, token, styleUrl, isLocationLoading, userLocation])
 
     useEffect(() => {
         return setupMap()

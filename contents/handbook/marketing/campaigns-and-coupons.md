@@ -30,7 +30,7 @@ Note: Existing (already onboarded) users bypass this and go directly to `/coupon
 
 When launched, our partnership with Lenny's Newsletter offered their annual subscribers:
 - Free Scale package
-- 2x free tier limits on all usage-based products
+- 2x free tier limits on all usage-based tools
 - Valid for 12 months from redemption
 - Only for organizations with no paid invoices before December 1st 2025
 
