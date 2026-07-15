@@ -22,11 +22,11 @@ Edits propagate to running workers within about 30 seconds, so there's a brief w
 
 ## What happens for each type of edit
 
-The tables below break behaviour down by where a person is relative to the step you changed:
+The tables below break behavior down by where a person is relative to the step you changed:
 
-- **Before the step** - hasn't reached it yet
-- **Waiting at the step** - currently parked in a delay, time window, or wait condition
-- **Past the step** - already moved on
+- **Before the step:** hasn't reached it yet
+- **Waiting at the step:** currently parked in a delay, time window, or wait condition
+- **Past the step:** already moved on
 
 ### Timing edits
 
@@ -58,15 +58,15 @@ The tables below break behaviour down by where a person is relative to the step 
 
 <CalloutBox type="caution" title="Read before editing timing on a live workflow">
 
-- **Shortened delays take effect at the originally scheduled wake, not immediately.** If someone is 6 days into a 7-day delay and you shorten it to 3 days, they don't advance right away - they advance when their original 7-day timer fires. New entrants get the shorter delay.
+- **Shortened delays take effect at the originally scheduled wake, not immediately.** If someone is 6 days into a 7-day delay and you shorten it to 3 days, they don't advance right away. They advance when their original 7-day timer fires, and new entrants get the shorter delay.
 - **Deleting a step someone is waiting in exits them from the workflow.** They leave gracefully with the reason `exited_workflow_changed`. This is a deliberate exit, not a failure, so it doesn't count toward the workflow's error rate.
 - **Wait-condition and time-window timing changes can take up to ~10 minutes to be picked up** for people already waiting, because those steps re-evaluate on wake and on a polling backstop.
-- **A step that reads a variable set by a newly added upstream step sees it empty** for people who were already past that point when you published - the data was never captured for them.
+- **A step that reads a variable set by a newly added upstream step sees it empty** for people who were already past that point when you published, because the data was never captured for them.
 
 </CalloutBox>
 
 ## Related
 
-- [Workflow builder](/docs/workflows/workflow-builder#draft-and-enabled-workflows) - draft vs. enabled states and validation
-- [Best practices](/docs/workflows/best-practices) - planning, versioning, and testing changes safely
-- [Troubleshooting](/docs/workflows/troubleshooting) - debugging individual runs and their logs
+- [Workflow builder](/docs/workflows/workflow-builder#draft-and-enabled-workflows): draft vs. enabled states and validation
+- [Best practices](/docs/workflows/best-practices): planning, versioning, and testing changes safely
+- [Troubleshooting](/docs/workflows/troubleshooting): debugging individual runs and their logs
