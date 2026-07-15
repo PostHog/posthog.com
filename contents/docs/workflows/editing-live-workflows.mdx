@@ -1,0 +1,72 @@
+---
+title: Editing a live workflow
+sidebar: Docs
+showTitle: true
+---
+
+You can edit a workflow while it's enabled and people are moving through it. PostHog uses a **follow-live** model: every step of every run reads the current published configuration, so your edits reach people who are already mid-workflow, not just people who enter afterwards.
+
+This page explains exactly what happens to people already in a workflow when you change it, so you can edit live workflows with confidence.
+
+## The general model
+
+A few principles explain almost every case:
+
+- **Runs follow the published config.** There's no per-run snapshot of the old workflow. When someone's run reaches its next step, that step runs against whatever is published at that moment, so a fix you publish reaches people already in the workflow.
+- **Only a person's position is carried across an edit.** A run remembers which step it's on (or waiting in), not a copy of the workflow it started with.
+- **The past doesn't re-run.** Steps you add _behind_ where someone already is never execute for them. They only ever move forward.
+- **In-progress sends complete as prepared.** If a message has already been rendered and queued when you edit it, that copy still sends. The next person to reach that step gets the new version.
+- **Journeys are traceable, not versioned.** No single saved config describes what one person experienced. Instead, each run's [logs and results](/docs/workflows/troubleshooting) show exactly what that person got and when.
+
+Edits propagate to running workers within about 30 seconds, so there's a brief window after you publish where a step may still run against the previous configuration.
+
+## What happens for each type of edit
+
+The tables below break behaviour down by where a person is relative to the step you changed:
+
+- **Before the step** - hasn't reached it yet
+- **Waiting at the step** - currently parked in a delay, time window, or wait condition
+- **Past the step** - already moved on
+
+### Timing edits
+
+| Edit                          | People before the step                    | People waiting at the step                                                                 | People past the step |
+| ----------------------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------ | -------------------- |
+| **Shorten a delay**           | Wait the new, shorter delay when they arrive | Advance at the **originally scheduled wake time**, not immediately (see caveat below)       | Unaffected           |
+| **Lengthen a delay**          | Wait the new, longer delay when they arrive  | Re-park for the remaining time when their timer next fires                                  | Unaffected           |
+| **Change a time window**      | Use the new window when they arrive          | Re-evaluated against the new window on their next wake                                      | Unaffected           |
+| **Change a wait-until condition** | Use the new condition when they arrive   | Re-evaluated live against the new condition (see the ~10-minute bound below)                | Unaffected           |
+
+### Content and structure edits
+
+| Edit                                     | People before the step               | People waiting at the step                                              | People past the step                                    |
+| ---------------------------------------- | ------------------------------------ | ----------------------------------------------------------------------- | ------------------------------------------------------- |
+| **Edit message or action content**       | Get the new content when they arrive | Get the new content when they arrive                                    | Already-sent messages are never resent or updated. A message already rendered and queued sends with the old content |
+| **Add a step**                           | Execute the new step when they reach it | Execute it if it's ahead of where they're waiting; a step added _behind_ them never runs | A step added behind them never runs                     |
+| **Remove a step** (nobody waiting in it) | Skip straight past it                | Unaffected (they're waiting elsewhere)                                  | Unaffected                                              |
+| **Reroute an edge**                      | Follow the new path when they arrive | Follow the new path on their next move; messages already sent are never repeated | Unaffected                                              |
+| **Delete a step people are waiting in**  | Skip straight past it                | **Exit the workflow gracefully** (see below)                            | Unaffected                                              |
+
+### Variable edits
+
+| Edit                | Effect                                                                                                                             |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| **Add a variable**  | Available to steps that set and read it going forward. A run that never passed the step that sets it will see it empty            |
+| **Rename or delete a variable** | A step that references a variable a run never had renders it **empty**. This is logged as a warning on the run so you can spot it |
+
+## Caveats worth knowing
+
+<CalloutBox type="caution" title="Read before editing timing on a live workflow">
+
+- **Shortened delays take effect at the originally scheduled wake, not immediately.** If someone is 6 days into a 7-day delay and you shorten it to 3 days, they don't advance right away - they advance when their original 7-day timer fires. New entrants get the shorter delay.
+- **Deleting a step someone is waiting in exits them from the workflow.** They leave gracefully with the reason `exited_workflow_changed`. This is a deliberate exit, not a failure, so it doesn't count toward the workflow's error rate.
+- **Wait-condition and time-window timing changes can take up to ~10 minutes to be picked up** for people already waiting, because those steps re-evaluate on wake and on a polling backstop.
+- **A step that reads a variable set by a newly added upstream step sees it empty** for people who were already past that point when you published - the data was never captured for them.
+
+</CalloutBox>
+
+## Related
+
+- [Workflow builder](/docs/workflows/workflow-builder#draft-and-enabled-workflows) - draft vs. enabled states and validation
+- [Best practices](/docs/workflows/best-practices) - planning, versioning, and testing changes safely
+- [Troubleshooting](/docs/workflows/troubleshooting) - debugging individual runs and their logs

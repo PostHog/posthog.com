@@ -7028,6 +7028,12 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'Editing a live workflow',
+                    url: '/docs/workflows/editing-live-workflows',
+                    icon: 'IconPencil',
+                    color: 'orange',
+                },
+                {
                     name: 'Content library and message templates',
                     url: '/docs/workflows/library',
                     icon: 'IconDatabase',
