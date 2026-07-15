@@ -37,6 +37,8 @@ When a scanner runs against a recording, PostHog:
 
 Each observation snapshots the scanner's configuration at the time it ran, so editing a scanner later doesn't change past observations.
 
+Because Vision runs entirely on ingested data, it stops producing observations if events or recordings stop arriving. See [troubleshooting](/docs/replay-vision/troubleshooting#events-or-recordings-arent-coming-in) for what to check.
+
 ## What you can do with it
 
 A few examples of what teams use Replay Vision for:
