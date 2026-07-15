@@ -16,7 +16,7 @@ import AlphaRelease from "../_snippets/alpha-release.mdx"
 
 <AlphaRelease />
 
-The Customerly connector syncs your customer support and marketing data – users, leads, tags, and knowledge base content – into the PostHog Data warehouse, so you can analyze your contacts and help center alongside your product data.
+The Customerly connector syncs your customer support and marketing data – users, leads, tags, and knowledge base content – into the PostHog Data Warehouse, so you can analyze your contacts and help center alongside your product data.
 
 ## Prerequisites
 
