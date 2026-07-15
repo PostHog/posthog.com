@@ -1,5 +1,5 @@
 /**
- * File-backed mock ProvisioningClient (`WIZARD_DROP_MOCK=1`) so the entire drop flow — including
+ * File-backed mock ProvisioningClient (`WIZARD_PROVISIONING_MOCK=1`) so the entire provisioning flow — including
  * every failure branch in the RFC's error table — is walkable locally without the monorepo
  * endpoints existing.
  *
@@ -33,7 +33,7 @@ import type { GrantRepository } from './types'
 
 const GRANT_TTL_MS = 60 * 60 * 1000
 const INSTALL_POLLS_BEFORE_DETECTED = 2
-const STATE_FILE = path.join(os.tmpdir(), 'posthog-wizard-drop-mock-state.json')
+const STATE_FILE = path.join(os.tmpdir(), 'posthog-wizard-provisioning-mock-state.json')
 
 // String to match the real upstream repositories listing, which emits installation ids as strings.
 const MOCK_INSTALLATION_ID = '12345'

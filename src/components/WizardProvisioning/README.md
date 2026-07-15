@@ -1,12 +1,12 @@
-# WizardDrop
+# WizardProvisioning
 
-A "drop"-style flow that takes over the `/wizard` hero: a visitor connects GitHub, picks a repository, and PostHog provisions them an account in the background, runs the setup wizard in the cloud, and opens an instrumentation pull request on their repo. The full architecture (including the monorepo side) is documented in `wizard-drop-rfc.md` at the repo root.
+A provisioning flow that takes over the `/wizard` hero: a visitor connects GitHub, picks a repository, and PostHog provisions them an account in the background, runs the setup wizard in the cloud, and opens an instrumentation pull request on their repo. The full architecture (including the monorepo side) is documented in `wizard-provisioning-rfc.md` at the repo root.
 
-All server work happens in the `src/api/wizard/*` Gatsby Functions, which talk to the PostHog agentic provisioning API as a **CIMD partner** (client metadata document at `static/.well-known/wizard-drop-client.json`, PKCE auth, no secret). This component is a state machine over those functions' responses.
+All server work happens in the `src/api/wizard/*` Gatsby Functions, which talk to the PostHog agentic provisioning API as a **CIMD partner** (client metadata document at `static/.well-known/posthog.com.json`, PKCE auth, no secret). This component is a state machine over those functions' responses.
 
 ## Placement
 
-`WizardDrop` renders **inside the wizard hero**, not as a standalone box. `WizardHeader` (in `src/components/WizardPage/index.tsx`) owns the gate and, when enabled, leads the hero with the GitHub "drop" flow:
+`WizardProvisioning` renders **inside the wizard hero**, not as a standalone box. `WizardHeader` (in `src/components/WizardPage/index.tsx`) owns the gate and, when enabled, leads the hero with the GitHub provisioning flow:
 
 - **Idle** is the hero's primary CTA: a prominent **Connect GitHub** button sitting inline on the hero, with the `npx @posthog/wizard` command demoted to a muted "Prefer the terminal?" secondary (`<WizardCommand slim />`).
 - **Active steps** (install, repo picker, outcomes) render in a subtle inset `FlowPanel` so their form controls stay legible on the hero's textured background.
@@ -15,18 +15,18 @@ It is no longer an MDX component (removed from `jsxComponentDescriptors` and `co
 
 ## Gating
 
-The `wizard-drop` experiment gate lives in **`useWizardDropEnabled()`**, called once by `WizardHeader` (single call site → single `$feature_flag_called` exposure). It returns `true` only for the `test` variant, and fails closed while flags load:
+The `wizard-provisioning` experiment gate lives in **`useWizardProvisioningEnabled()`**, called once by `WizardHeader` (single call site → single `$feature_flag_called` exposure). It returns `true` only for the `test` variant, and fails closed while flags load:
 
-- **enabled** → the hero renders the GitHub-first drop flow (`<WizardDrop />`) with a GitHub-focused subtitle.
+- **enabled** → the hero renders the GitHub-first provisioning flow (`<WizardProvisioning />`) with a GitHub-focused subtitle.
 - **disabled / loading** → the classic terminal-first hero (`<WizardCommand slim />`).
 
-Because the hero mounts `<WizardDrop />` only when enabled, the component itself never self-hides. In local `gatsby develop` the hook always returns `true` (posthog never loads in dev), so the flow is testable locally (see the mock walkthrough below).
+Because the hero mounts `<WizardProvisioning />` only when enabled, the component itself never self-hides. In local `gatsby develop` the hook always returns `true` (posthog never loads in dev), so the flow is testable locally (see the mock walkthrough below).
 
 ## State machine
 
 ```
 idle ── Connect GitHub ──▶ connecting ──(redirect)──▶ github-start → GitHub OAuth → github/callback
-                                                                        │ ?drop=connected
+                                                                        │ ?wizard=connected
 loading ◀───────────────────────────────────────────────────────────────┘
    │ session → repos
    ├─ not connected ───────▶ idle
@@ -36,11 +36,11 @@ ready ── Set up PostHog ──▶ provisioning ── POST /api/wizard/provi
    ├─ success ─────────────▶ success        (account + wizard run created)
    ├─ degraded ────────────▶ degraded       (account exists, run failed — NO signup link)
    ├─ requires_auth ───────▶ existing_user  (interstitial → PostHog login + consent →
-   │                                          /api/wizard/oauth-callback → ?drop=done|degraded|error)
+   │                                          /api/wizard/oauth-callback → ?wizard=done|degraded|error)
    └─ error(code) ─────────▶ error          (copy + actions per code, manual fallback)
 ```
 
-Redirect legs land on `/wizard?drop=connected|done|degraded|error&code=…`; the component parses and strips those params on mount.
+Redirect legs land on `/wizard?wizard=connected|done|degraded|error&code=…`; the component parses and strips those params on mount.
 
 ## Error handling
 
@@ -52,25 +52,25 @@ Mirrors the "Error handling on posthog.com" table in the RFC:
 
 `ManualFallback` builds the signup URL region-aware (like `SignupLink`); never link literal `posthog.com/signup` — it rewrites to `/pricing`.
 
-## Env vars (server-only, read by `src/api/wizard/*` via `src/lib/wizard-drop/config.ts`)
+## Env vars (server-only, read by `src/api/wizard/*` via `src/lib/wizard/config.ts`)
 
 | Var | Purpose |
 |---|---|
-| `WIZARD_DROP_STATE_SECRET` | HMAC key for signed cookies + OAuth state (required) |
-| `WIZARD_DROP_POSTHOG_API_HOST` | Provisioning API host (default `https://us.posthog.com`) |
-| `WIZARD_DROP_CLIENT_ID` | CIMD document URL, byte-for-byte |
-| `WIZARD_DROP_SITE_URL` | Base for redirect URIs (prod: `https://posthog.com`) |
-| `WIZARD_DROP_GITHUB_APP_CLIENT_ID` / `_SLUG` | GitHub App OAuth client id + install URL slug |
-| `WIZARD_DROP_MOCK` | `1` → in-memory mock backend, skips github.com |
+| `WIZARD_PROVISIONING_STATE_SECRET` | HMAC key for signed cookies + OAuth state (required) |
+| `WIZARD_PROVISIONING_POSTHOG_API_HOST` | Provisioning API host (default `https://us.posthog.com`) |
+| `WIZARD_PROVISIONING_CLIENT_ID` | CIMD document URL, byte-for-byte |
+| `WIZARD_PROVISIONING_SITE_URL` | Base for redirect URIs (prod: `https://posthog.com`) |
+| `WIZARD_PROVISIONING_GITHUB_APP_CLIENT_ID` / `_SLUG` | GitHub App OAuth client id + install URL slug |
+| `WIZARD_PROVISIONING_MOCK` | `1` → in-memory mock backend, skips github.com |
 
 None are `GATSBY_`-prefixed — they must never reach the client bundle.
 
 ## Mock-mode walkthrough
 
 ```bash
-WIZARD_DROP_MOCK=1 pnpm start
+WIZARD_PROVISIONING_MOCK=1 pnpm start
 # in the browser console on localhost:8001/wizard, enable the flag for yourself:
-posthog.featureFlags.override({ 'wizard-drop': true })
+posthog.featureFlags.override({ 'wizard-provisioning': true })
 ```
 
 Magic repositories drive every scenario (state resets when the dev server restarts):
@@ -80,16 +80,16 @@ Magic repositories drive every scenario (state resets when the dev server restar
 | `mock-dev/happy-path` | Bundled provision succeeds → success panel |
 | `mock-dev/wizard-fails` | Bundled block errors AND granular retry fails → degraded panel |
 | `mock-dev/wizard-retry-succeeds` | Bundled block errors, granular retry succeeds → success |
-| `mock-dev/existing-user` | `requires_auth` → interstitial → local consent round trip → `?drop=done` |
+| `mock-dev/existing-user` | `requires_auth` → interstitial → local consent round trip → `?wizard=done` |
 | `mock-dev/rate-limited` | 429 → rate-limit error panel |
 
-Also exercisable: the first two repo polls return "not installed" (awaiting-install state), the first grant exchange simulates the one-time CIMD `202 registering` delay, `/api/wizard/repos?mock_expire=1` force-expires the grant, `/api/wizard/github/callback?error=access_denied` renders the denial error, and each `/wizard?drop=error&code=…` URL renders its copy directly.
+Also exercisable: the first two repo polls return "not installed" (awaiting-install state), the first grant exchange simulates the one-time CIMD `202 registering` delay, `/api/wizard/repos?mock_expire=1` force-expires the grant, `/api/wizard/github/callback?error=access_denied` renders the denial error, and each `/wizard?wizard=error&code=…` URL renders its copy directly.
 
 The confirm step always shows an editable email field, defaulted from the GitHub-supplied address (empty when GitHub exposes none); the entered value is what `provision` sends to `account_requests`.
 
 ## Contract-reconciliation checklist (against the shipped monorepo endpoints)
 
-All parsing lives in `src/lib/wizard-drop/provisioning.ts`. Reconciled against the monorepo implementation:
+All parsing lives in `src/lib/wizard/provisioning.ts`. Reconciled against the monorepo implementation:
 
 - [x] `POST …/github/grants` returns `{grant_id, gh_login, email, expires_in: 3600}` — email fetched server-side (`/user/emails`), `email` is `string | null` (null = GitHub has no verified email; still a usable grant). The account email is collected **inline** in the confirm step (defaulted from this value when present), so `provision` sends the entered address to `account_requests`, not the grant's copy.
 - [x] `email_unavailable` is now a **502** meaning the GitHub App lacks the "Email addresses (read)" permission (PostHog-side misconfig) — handled as a **terminal** error + manual fallback (like `github_unavailable`), NOT the inline-email path. The no-verified-email case is the `email: null` success above, not this.
@@ -99,10 +99,10 @@ All parsing lives in `src/lib/wizard-drop/provisioning.ts`. Reconciled against t
 - [x] `available_teams[0]` is the bootstrap/consented team on the token response.
 
 - [x] **redirect_uri** — this repo serves `/api/wizard/github/callback` (the function lives at `src/api/wizard/github/callback.ts`), matching the slash path registered in the GitHub App console. Byte-identical across the authorize URL, the `github/grants` body, and the console.
-- [x] `oauth-callback` redirect_uri — under CIMD there is **no** separate `OAuthApplication` registration; `redirect_uris` are declared in the metadata document (`static/.well-known/wizard-drop-client.json`). Nothing to register out-of-band. (The RFC's "register OAuthApplication redirect_uris" was from the pre-CIMD HMAC design.)
+- [x] `oauth-callback` redirect_uri — under CIMD there is **no** separate `OAuthApplication` registration; `redirect_uris` are declared in the metadata document (`static/.well-known/posthog.com.json`). Nothing to register out-of-band. (The RFC's "register OAuthApplication redirect_uris" was from the pre-CIMD HMAC design.)
 
 Still open (ops / cross-repo coordination):
 
 - [ ] Repo-poll budget is 120/grant/rolling-hour; poll interval is 5s (≈60 calls over the 5-min timeout, within budget). A 429 mid-poll currently surfaces as `fetch_failed` and stops polling — it does not honor `Retry-After`.
 - [x] **CIMD verification token** — a real `phvt_` token (created in org settings → CIMD verification tokens) is set in `com.posthog.verification_token` in the metadata document. It links the app to the PostHog org and grants a **higher provisioning rate limit** + identity trail (vs. the default `github/grants` 10/h per partner). The token is embedded in the public CIMD doc by design; PostHog stores only a hash.
-- [x] **Provisioning scopes** — the drop's resource actions authorize by team-scoping + CIMD partner auth, not OAuth scopes, so no specific scope is required. We request a minimal `["organization:read", "project:read"]` (least privilege) in both `PROVISIONING_SCOPES` (`config.ts`) and `com.posthog.scopes` (CIMD doc); they must stay equal. Both are unprivileged/grantable, so CIMD registration accepts them and the token mints within the app ceiling.
+- [x] **Provisioning scopes** — the provisioning flow's resource actions authorize by team-scoping + CIMD partner auth, not OAuth scopes, so no specific scope is required. We request a minimal `["organization:read", "project:read"]` (least privilege) in both `PROVISIONING_SCOPES` (`config.ts`) and `com.posthog.scopes` (CIMD doc); they must stay equal. Both are unprivileged/grantable, so CIMD registration accepts them and the token mints within the app ceiling.

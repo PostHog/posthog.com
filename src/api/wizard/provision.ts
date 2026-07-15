@@ -2,17 +2,17 @@ import crypto from 'crypto'
 
 import { GatsbyFunctionRequest, GatsbyFunctionResponse } from 'gatsby'
 
-import { COOKIES, COOKIE_MAX_AGE, PROVISIONING_SCOPES, config } from '../../lib/wizard-drop/config'
-import { clearCookie, parseCookies, setCookie, sign, verify } from '../../lib/wizard-drop/cookies'
-import { parseBody } from '../../lib/wizard-drop/http'
-import { generatePkcePair } from '../../lib/wizard-drop/pkce'
+import { COOKIES, COOKIE_MAX_AGE, PROVISIONING_SCOPES, config } from '../../lib/wizard/config'
+import { clearCookie, parseCookies, setCookie, sign, verify } from '../../lib/wizard/cookies'
+import { parseBody } from '../../lib/wizard/http'
+import { generatePkcePair } from '../../lib/wizard/pkce'
 import {
     GrantExpiredError,
     ProvisioningClient,
     RateLimitedError,
     getProvisioningClient,
-} from '../../lib/wizard-drop/provisioning'
-import type { AccountRequestResponse, ProvisionApiResponse, TokenResponse } from '../../lib/wizard-drop/types'
+} from '../../lib/wizard/provisioning'
+import type { AccountRequestResponse, ProvisionApiResponse, TokenResponse } from '../../lib/wizard/types'
 import type { GrantCookie } from './session'
 
 export type ResumeCookie = {
@@ -27,7 +27,7 @@ export type ResumeCookie = {
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 /**
- * Phase C of the drop (RFC "End-to-end flow"): one confirm click provisions the account and
+ * Phase C of the provisioning flow (RFC "End-to-end flow"): one confirm click provisions the account and
  * starts the wizard run via the bundled `configuration.wizard` block on account_requests.
  *
  * Response semantics mirror the RFC's error-handling table:
@@ -63,7 +63,7 @@ const handler = async (req: GatsbyFunctionRequest, res: GatsbyFunctionResponse) 
             : ''
     const repository = typeof body.repository === 'string' ? body.repository : ''
     const branch = typeof body.branch === 'string' && body.branch ? body.branch : undefined
-    // Email is collected inline in the drop UI (defaulted from GitHub) and always sent explicitly,
+    // Email is collected inline in the provisioning UI (defaulted from GitHub) and always sent explicitly,
     // so it comes from the browser rather than the grant — the grant's copy may be absent.
     const email = typeof body.email === 'string' ? body.email.trim() : ''
     if (!installationId || !repository || !EMAIL_RE.test(email)) {
@@ -98,7 +98,7 @@ const handler = async (req: GatsbyFunctionRequest, res: GatsbyFunctionResponse) 
         if (error instanceof RateLimitedError) {
             return respond({ status: 'error', code: 'rate_limited', retry_after: error.retryAfter }, 429)
         }
-        console.error('wizard drop: account_requests failed', error)
+        console.error('wizard provisioning: account_requests failed', error)
         return respond({ status: 'error', code: 'provisioning_failed' })
     }
 
@@ -135,7 +135,7 @@ const handler = async (req: GatsbyFunctionRequest, res: GatsbyFunctionResponse) 
         clearCookie(res, COOKIES.grant)
         return respond({ status: 'success', task_id: run.task_id, run_id: run.run_id })
     } catch (error) {
-        console.error('wizard drop: granular retry failed, responding degraded', error)
+        console.error('wizard provisioning: granular retry failed, responding degraded', error)
         clearCookie(res, COOKIES.grant)
         return respond({ status: 'degraded' })
     }
@@ -147,7 +147,7 @@ async function completeProvisioningTail(client: ProvisioningClient, code: string
         const token = await client.exchangeToken({ code, code_verifier: verifier })
         await client.createResource(token.access_token, { service_id: 'free' })
     } catch (error) {
-        console.error('wizard drop: non-fatal provisioning tail failed', error)
+        console.error('wizard provisioning: non-fatal provisioning tail failed', error)
     }
 }
 
@@ -174,7 +174,7 @@ async function retryWizardGranularly(
     try {
         await client.createResource(token.access_token, { service_id: 'free' })
     } catch (error) {
-        console.error('wizard drop: non-fatal resource create failed', error)
+        console.error('wizard provisioning: non-fatal resource create failed', error)
     }
     return run
 }

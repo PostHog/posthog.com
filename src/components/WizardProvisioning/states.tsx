@@ -5,7 +5,7 @@ import OSButton from 'components/OSButton'
 import WizardCommand from 'components/WizardCommand'
 import ManualFallback from './ManualFallback'
 
-export type DropErrorCode =
+export type ProvisioningErrorCode =
     | 'github_denied'
     | 'github_auth'
     | 'grant_exchange'
@@ -28,10 +28,10 @@ type ErrorSpec = {
 }
 
 /**
- * Mirrors the "Error handling on posthog.com" table in wizard-drop-rfc.md. Every code gets the
+ * Mirrors the "Error handling on posthog.com" table in wizard-provisioning-rfc.md. Every code gets the
  * manual-signup fallback; only restartable ones also get a fresh "Connect GitHub" action.
  */
-const ERRORS: Record<DropErrorCode, ErrorSpec> = {
+const ERRORS: Record<ProvisioningErrorCode, ErrorSpec> = {
     github_denied: { message: 'GitHub authorization was cancelled, so we stopped there.', restartable: true },
     github_auth: { message: "We couldn't complete the GitHub connection.", restartable: true },
     grant_exchange: { message: "We couldn't finish connecting your GitHub account.", restartable: true },
@@ -84,7 +84,7 @@ export function ErrorPanel({
     /** Inline retry for transient repo-list failures (doesn't restart the whole flow). */
     onRetry?: () => void
 }): JSX.Element {
-    const spec = ERRORS[(code in ERRORS ? code : 'unknown') as DropErrorCode]
+    const spec = ERRORS[(code in ERRORS ? code : 'unknown') as ProvisioningErrorCode]
     return (
         <div>
             <p className="flex items-center gap-2.5 font-semibold text-red dark:text-yellow mb-1">
@@ -189,11 +189,11 @@ export function ExistingUserPanel({ onContinue }: { onContinue: () => void }): J
         <div>
             <p className="font-semibold mb-1">Looks like you already have a PostHog account.</p>
             <p className="text-sm mb-3">
-                We'll send you to PostHog to log in and approve connecting this repository to one of your projects.
-                Nothing changes until you approve.
+                We'll open the PostHog app so you can log in and approve connecting this repository to one of your
+                projects. Nothing changes until you approve.
             </p>
             <OSButton variant="primary" size="md" onClick={onContinue}>
-                Continue to PostHog
+                Log in to PostHog
             </OSButton>
         </div>
     )

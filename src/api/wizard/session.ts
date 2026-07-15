@@ -1,13 +1,13 @@
 import { GatsbyFunctionRequest, GatsbyFunctionResponse } from 'gatsby'
 
-import { COOKIES, COOKIE_MAX_AGE, config } from '../../lib/wizard-drop/config'
-import { parseCookies, verify } from '../../lib/wizard-drop/cookies'
-import type { SessionResponse } from '../../lib/wizard-drop/types'
+import { COOKIES, COOKIE_MAX_AGE, config } from '../../lib/wizard/config'
+import { parseCookies, verify } from '../../lib/wizard/cookies'
+import type { SessionResponse } from '../../lib/wizard/types'
 
 export type GrantCookie = { grant_id: string; gh_login: string; email: string | null }
 
 /**
- * Tells the WizardDrop component whether the visitor has a live GitHub grant. The grant cookie
+ * Tells the WizardProvisioning component whether the visitor has a live GitHub grant. The grant cookie
  * is httpOnly (scoped to /api/wizard), so this endpoint is the only way the page learns the
  * connected state.
  */

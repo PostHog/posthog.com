@@ -1,9 +1,9 @@
 import { GatsbyFunctionRequest, GatsbyFunctionResponse } from 'gatsby'
 
-import { COOKIES, COOKIE_MAX_AGE, config } from '../../lib/wizard-drop/config'
-import { setCookie, sign } from '../../lib/wizard-drop/cookies'
-import { redirect, redirectWithError } from '../../lib/wizard-drop/http'
-import { generateNonce } from '../../lib/wizard-drop/pkce'
+import { COOKIES, COOKIE_MAX_AGE, config } from '../../lib/wizard/config'
+import { setCookie, sign } from '../../lib/wizard/cookies'
+import { redirect, redirectWithError } from '../../lib/wizard/http'
+import { generateNonce } from '../../lib/wizard/pkce'
 
 /**
  * Starts the GitHub OAuth leg: mints a signed CSRF `state`, double-submits it as an httpOnly
@@ -14,7 +14,7 @@ import { generateNonce } from '../../lib/wizard-drop/pkce'
 const handler = async (req: GatsbyFunctionRequest, res: GatsbyFunctionResponse) => {
     try {
         if (!config.stateSecret || (!config.mock && !config.githubClientId)) {
-            console.error('wizard drop: github-start missing configuration')
+            console.error('wizard provisioning: github-start missing configuration')
             return redirectWithError(res, 'github_auth')
         }
         const state = sign({ nonce: generateNonce() })
@@ -31,7 +31,7 @@ const handler = async (req: GatsbyFunctionRequest, res: GatsbyFunctionResponse) 
             `&state=${encodeURIComponent(state)}`
         return redirect(res, authorizeUrl)
     } catch (error) {
-        console.error('wizard drop: github-start failed', error)
+        console.error('wizard provisioning: github-start failed', error)
         return redirectWithError(res, 'github_auth')
     }
 }

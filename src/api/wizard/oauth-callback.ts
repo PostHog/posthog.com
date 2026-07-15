@@ -1,9 +1,9 @@
 import { GatsbyFunctionRequest, GatsbyFunctionResponse } from 'gatsby'
 
-import { COOKIES, COOKIE_MAX_AGE } from '../../lib/wizard-drop/config'
-import { clearCookie, parseCookies, verify } from '../../lib/wizard-drop/cookies'
-import { redirectWithDrop, redirectWithError } from '../../lib/wizard-drop/http'
-import { GrantExpiredError, getProvisioningClient } from '../../lib/wizard-drop/provisioning'
+import { COOKIES, COOKIE_MAX_AGE } from '../../lib/wizard/config'
+import { clearCookie, parseCookies, verify } from '../../lib/wizard/cookies'
+import { redirectWithStatus, redirectWithError } from '../../lib/wizard/http'
+import { GrantExpiredError, getProvisioningClient } from '../../lib/wizard/provisioning'
 import type { ResumeCookie } from './provision'
 
 /**
@@ -37,7 +37,7 @@ const handler = async (req: GatsbyFunctionRequest, res: GatsbyFunctionResponse) 
         teamId = token.account?.available_teams?.[0]?.id
         if (!teamId) throw new Error('No team available on the provisioning token')
     } catch (error) {
-        console.error('wizard drop: consent token exchange failed', error)
+        console.error('wizard provisioning: consent token exchange failed', error)
         clearCookie(res, COOKIES.resume)
         return redirectWithError(res, 'consent_failed')
     }
@@ -53,8 +53,8 @@ const handler = async (req: GatsbyFunctionRequest, res: GatsbyFunctionResponse) 
         if (error instanceof GrantExpiredError) {
             return redirectWithError(res, 'grant_expired')
         }
-        console.error('wizard drop: github integration failed after consent', error)
-        return redirectWithDrop(res, 'degraded')
+        console.error('wizard provisioning: github integration failed after consent', error)
+        return redirectWithStatus(res, 'degraded')
     }
 
     try {
@@ -63,16 +63,16 @@ const handler = async (req: GatsbyFunctionRequest, res: GatsbyFunctionResponse) 
             branch: resume.branch,
         })
     } catch (error) {
-        console.error('wizard drop: wizard run failed after consent', error)
-        return redirectWithDrop(res, 'degraded')
+        console.error('wizard provisioning: wizard run failed after consent', error)
+        return redirectWithStatus(res, 'degraded')
     }
 
     try {
         await client.createResource(accessToken, { service_id: 'free' })
     } catch (error) {
-        console.error('wizard drop: non-fatal resource create failed', error)
+        console.error('wizard provisioning: non-fatal resource create failed', error)
     }
-    return redirectWithDrop(res, 'done')
+    return redirectWithStatus(res, 'done')
 }
 
 export default handler
