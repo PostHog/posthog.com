@@ -135,6 +135,7 @@ Remember that not every collaboration should be judged purely on attributed sign
 - lead to future collaborations
 - generate clips that can be reused across channels
 - strengthen relationships with creators or platforms
+- are just really cool and worth doing for taste/vibes
 
 Consider both direct performance and longer-term strategic value when reviewing partnerships.
 
@@ -148,7 +149,7 @@ Creators are people, not inventory. The best partnerships are built over months 
 - Stay in touch between campaigns.
 - Meet creators in person when it makes sense.
 
-The goal is for creators to think of PostHog first when they have a new idea.
+The goal is for creators to think of PostHog first when they have a new idea and to bring weird ideas to us.
 
 ## Events and conferences
 
