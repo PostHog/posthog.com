@@ -26,7 +26,7 @@ You need an Airbrake account with a **user API key**. Every project your user ca
 
 <SourceSetupIntro />
 
-You need your Airbrake user API key. Find it in your Airbrake **User settings** (your profile menu in the Airbrake dashboard). Project API keys only allow error submission and won't work for syncing data.
+You need your Airbrake user API key. Find it in your Airbrake **User settings** (your profile menu in the Airbrake dashboard). Per-project keys in Airbrake only allow error submission and won't work for syncing data.
 
 ## Sync modes
 
