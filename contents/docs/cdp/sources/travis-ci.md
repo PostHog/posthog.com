@@ -16,7 +16,7 @@ import AlphaRelease from "../_snippets/alpha-release.mdx"
 
 <AlphaRelease />
 
-The Travis CI connector syncs your CI/CD data – repositories, builds, jobs, and branches – into the PostHog Data warehouse, so you can analyze build durations, failure rates, and delivery metrics alongside your product data.
+The Travis CI connector syncs your CI/CD data – repositories, builds, jobs, and branches – into the PostHog Data Warehouse, so you can analyze build durations, failure rates, and delivery metrics alongside your product data.
 
 ## Prerequisites
 
@@ -34,7 +34,7 @@ When linking Travis CI, you'll need:
 
 <SyncModes />
 
-Builds and jobs sync incrementally: each sync pages newest-first and stops at the last synced id. Builds or jobs that were still running when a sync last saw them keep the state from that sync – run a full refresh to re-pull final states. Repositories and branches are full refresh only.
+Builds and jobs sync incrementally: each sync pages newest-first and stops at the last synced ID. Builds or jobs that were still running when a sync last saw them keep the state from that sync – run a full refresh to re-pull final states. Repositories and branches are full refresh only.
 
 ## Configuration
 
