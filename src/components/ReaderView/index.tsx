@@ -35,7 +35,7 @@ import * as OSIcons from '../OSIcons/Icons'
 import { getLogo, getDarkClassForLogo } from '../../constants/logos'
 import SearchProvider, { useSearch } from 'components/Editor/SearchProvider'
 import { InlineSearch } from 'components/Search/InlineSearch'
-import algoliasearch from 'algoliasearch/lite'
+import { algoliaIndexName, algoliaSearchClient } from 'lib/algoliaSearch'
 import { useLocation } from '@reach/router'
 import { getProseClasses, isMarkdownContentPath } from '../../constants'
 import { useWindow } from '../../context/Window'
@@ -50,11 +50,6 @@ import AboutPostHog from 'components/AboutPostHog'
 import { Blockquote } from 'components/BlockQuote'
 
 dayjs.extend(relativeTime)
-
-const algoliaSearchClient = algoliasearch(
-    process.env.GATSBY_ALGOLIA_APP_ID as string,
-    process.env.GATSBY_ALGOLIA_SEARCH_API_KEY as string
-)
 
 // Frosted chrome applied to the sidebar / ToC when background/tocBackground is `true`.
 // The border is intentionally NOT included here — it always stays on the asides.
@@ -697,7 +692,7 @@ const SidebarSearchResults = ({
 
         const doSearch = async () => {
             try {
-                const index = algoliaSearchClient.initIndex(process.env.GATSBY_ALGOLIA_INDEX_NAME as string)
+                const index = algoliaSearchClient.initIndex(algoliaIndexName)
                 const { hits } = await index.search(searchQuery, { hitsPerPage: 8 })
                 if (!cancelled) {
                     const filtered = currentPath
