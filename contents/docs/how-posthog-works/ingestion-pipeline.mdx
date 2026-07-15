@@ -41,14 +41,14 @@ Events are written to the Kafka topics, which are then consumed by the CDP inges
 To keep ingestion fast and reliable for everyone, the capture service applies a protection when a single distinct ID sends an unusually high, sustained volume of events within one project.
 If a `(project, distinct ID)` stream exceeds roughly 5,000 events per minute sustained (measured over a rolling window), the capture service treats that stream specially for as long as the spike continues:
 
-- Its events are rerouted to the overflow lane and spread across partitions, so they no longer hold up a single partition. This relaxes the ordering guarantee for that distinct ID while the limit is active.
+- Its events are rerouted to our overflow processing pipeline, which relaxes processing order guarantees for that distinct ID while the limit is active.
 - [Person processing](#2-person-processing) is skipped for those events, so they do not create or update a person profile during the spike.
 
 Events are still ingested and stored. Nothing is dropped, and the capture API still returns a normal `200` response, so there is no rate-limit error to handle in your SDK or integration.
 
 This almost always affects distinct IDs that stand in for many users or machines rather than a single person, such as a shared server identifier (`backend`, `system`), an anonymous placeholder, or a bot.
 The [identity resolution](/docs/product-analytics/identity-resolution#catch-all-distinct-ids) guide explains how to avoid it: give each real user a stable, unique distinct ID, and send server or system events with [person processing disabled](/docs/product-analytics/capture-events#how-to-capture-anonymous-events).
-If you have a legitimate high-volume identifier that must keep strict ordering and person processing, [contact support](https://posthog.com/talk-to-a-human) and we can add an override for it.
+If you have a legitimate high-volume identifier that must keep strict ordering and person processing, [contact support](https://posthog.com/talk-to-a-human)
 
 ## CDP ingestion worker
 
