@@ -124,7 +124,7 @@ export const apps: AppItem[] = [
         source: 'desktop',
     },
     {
-        label: 'Work here',
+        label: 'Careers',
         Icon: <AppIcon name="typewriter" />,
         url: '/careers',
         source: 'desktop',

@@ -128,7 +128,7 @@ export const apps: AppItem[] = [
         source: 'desktop',
     },
     {
-        label: 'Work here',
+        label: 'Careers',
         Icon: <GlassIcon path={WORK_HERE_SILHOUETTE} />,
         url: '/careers',
         source: 'desktop',
