@@ -13,7 +13,7 @@ The Weights & Biases connector syncs your ML experiment tracking data into PostH
 
 <CalloutBox icon="IconFlask" title="Alpha release" type="action">
 
-The Weights & Biases source is currently in alpha. Per-step run metric history isn't synced — runs include their final summary metrics instead.
+The Weights & Biases source is currently in alpha. Per-step run metric history isn't synced – runs include their final summary metrics instead.
 
 </CalloutBox>
 
@@ -49,13 +49,13 @@ Once the sync completes, you can start querying your Weights & Biases data in Po
 
 ## Sync details
 
-- **Incremental sync** - The `runs` table supports incremental syncs on `createdAt` or `heartbeatAt`. PostHog filters server-side, so only matching runs are fetched on each sync. Pick `heartbeatAt` to also pick up state and summary metric changes on recently active runs; a `createdAt` cursor only fetches newly created runs. The other tables are full refresh.
-- **JSON columns** - Run `config`, `summaryMetrics`, and `systemMetrics` are JSON-encoded strings, matching what the W&B API returns. Parse them in queries with `JSONExtract` functions.
-- **Partitioning** - Data is partitioned by month on the `createdAt` field.
-- **Pagination** - Uses cursor pagination. If a sync is interrupted, it resumes from the last successfully synced page.
-- **Rate limits** - The W&B API allows roughly 50 requests per minute on free plans and 200 on paid plans. PostHog backs off and retries automatically, but very large entities can take a while to sync.
+- **Incremental sync** – The `runs` table supports incremental syncs on `createdAt` or `heartbeatAt`. PostHog filters server-side, so only matching runs are fetched on each sync. Pick `heartbeatAt` to also pick up state and summary metric changes on recently active runs; a `createdAt` cursor only fetches newly created runs. The other tables are full refresh.
+- **JSON columns** – Run `config`, `summaryMetrics`, and `systemMetrics` are JSON-encoded strings, matching what the W&B API returns. Parse them in queries with `JSONExtract` functions.
+- **Partitioning** – Data is partitioned by month on the `createdAt` field.
+- **Pagination** – Uses cursor pagination. If a sync is interrupted, it resumes from the last successfully synced page.
+- **Rate limits** – The W&B API allows roughly 50 requests per minute on free plans and 200 on paid plans. PostHog backs off and retries automatically, but very large entities can take a while to sync.
 
 ## Troubleshooting
 
-- **Invalid API key** - The key may have been revoked. Generate a new one at [wandb.ai/authorize](https://wandb.ai/authorize) and update the source credentials.
-- **Tables sync but are empty** - Check the entity name. It must match the username or team that owns your projects exactly.
+- **Invalid API key** – The key may have been revoked. Generate a new one at [wandb.ai/authorize](https://wandb.ai/authorize) and update the source credentials.
+- **Tables sync but are empty** – Check the entity name. It must match the username or team that owns your projects exactly.
