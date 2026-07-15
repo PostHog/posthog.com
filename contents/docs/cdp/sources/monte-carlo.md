@@ -16,7 +16,7 @@ import AlphaRelease from "../_snippets/alpha-release.mdx"
 
 <AlphaRelease />
 
-Connect your [Monte Carlo](https://www.montecarlodata.com/) account to pull your data observability history – alerts, monitors, observed tables, users, and warehouse connections – into the PostHog data warehouse. This is useful for building data quality scorecards and correlating data incidents with downstream product impact.
+Connect your [Monte Carlo](https://www.montecarlodata.com/) account to pull your data observability history – alerts, monitors, observed tables, users, and warehouse connections – into the PostHog Data Warehouse. This is useful for building data quality scorecards and correlating data incidents with downstream product impact.
 
 ## Prerequisites
 
