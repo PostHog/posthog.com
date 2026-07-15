@@ -31,6 +31,7 @@ Auth0
 Avo
 AWS
 [Aa]zure
+[Bb]abelforce
 Balsamiq
 [Bb]amboo
 Bazel
