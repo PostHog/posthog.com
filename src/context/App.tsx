@@ -1562,6 +1562,9 @@ const appSettings: AppSettings = {
     '/hog': {
         toolbar: true,
     },
+    '/changelog': {
+        toolbar: true,
+    },
 } as const
 
 export interface SiteSettings {

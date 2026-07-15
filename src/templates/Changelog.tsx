@@ -793,8 +793,7 @@ export default function Changelog({
         if (!id) return null
         return data.allRoadmap.nodes.find((roadmap: RoadmapNode) => roadmap.id === parseInt(id)) || null
     })
-    const { appWindow } = useWindow()
-    const { addWindow, updateWindow } = useApp()
+    const { addWindow } = useApp()
     const { isModerator } = useUser()
     const [windowX, setWindowX] = useState(0)
     const [percentageOfScrollInView, setPercentageOfScrollInView] = useState(0)
@@ -968,16 +967,6 @@ export default function Changelog({
     const handleRoadmapClick = (roadmap: RoadmapNode) => {
         setActiveRoadmap(roadmap)
     }
-
-    useEffect(() => {
-        if (isModerator) {
-            updateWindow(appWindow, {
-                appSettings: {
-                    toolbar: true,
-                },
-            })
-        }
-    }, [isModerator])
 
     return (
         <>
