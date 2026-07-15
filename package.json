@@ -20,6 +20,7 @@
         "build": "gatsby build",
         "build:minimal": "GATSBY_MINIMAL=true gatsby build",
         "start": "./bin/start",
+        "dev": "./bin/start",
         "serve": "gatsby serve",
         "format": "prettier --write \"**/*.{html,js,ts,tsx,json,yml,css,scss}\"",
         "clean": "gatsby clean",

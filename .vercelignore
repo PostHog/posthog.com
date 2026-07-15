@@ -1,3 +1,7 @@
 .git
 .cache
 .pnpm-store
+.vercel/cache
+public/page-data/**
+public/static/**
+public/webpack/**

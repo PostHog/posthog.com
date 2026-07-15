@@ -46,6 +46,15 @@ export const onCreatePage: GatsbyNode['onCreatePage'] = async ({ page, actions }
         })
     }
 
+    // Keep /api product page URL while avoiding src/pages/api/* (Vercel treats it as Next.js API routes)
+    if (page.path === '/product-api/') {
+        deletePage(page)
+        createPage({
+            ...page,
+            path: '/api/',
+        })
+    }
+
     if (page.path.match(/^\/community\/profiles/) && !page.path.match(/^\/community\/profiles\/me/)) {
         page.matchPath = '/community/profiles/*'
         createPage(page)

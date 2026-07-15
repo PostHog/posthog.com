@@ -5,6 +5,8 @@
             "*": false
         }
     },
+    "devCommand": "./bin/start",
+    "framework": "gatsby",
     "headers": [
         {
             "source": "/docs/:path*",
