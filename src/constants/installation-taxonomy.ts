@@ -140,6 +140,14 @@ export const TAXONOMY: InstallCategory[] = [
                 wizardOrder: 21,
                 status: 'wip',
             },
+            {
+                slug: 'kmp',
+                name: 'Kotlin Multiplatform',
+                librarySlug: 'kmp',
+                wizard: true,
+                wizardOrder: 22,
+                status: 'wip',
+            },
         ],
     },
     {
