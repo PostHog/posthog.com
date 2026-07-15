@@ -16,7 +16,7 @@ import AlphaRelease from "../_snippets/alpha-release.mdx"
 
 <AlphaRelease />
 
-The OpenAI connector syncs your organization's API usage, spend, and admin data into the PostHog Data warehouse, so you can analyze your AI usage and costs per project, model, user, and API key alongside your product data.
+The OpenAI connector syncs your organization's API usage, spend, and admin data into the PostHog Data Warehouse, so you can analyze your AI usage and costs per project, model, user, and API key alongside your product data.
 
 ## Prerequisites
 
