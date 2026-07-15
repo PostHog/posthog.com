@@ -194,7 +194,10 @@ function Desktop() {
     const leftApps = applyGlow(productLinks)
     const rightApps = applyGlow(apps)
 
-    const iconListClassName = 'list-none m-0 p-0 flex flex-col pointer-events-auto w-28'
+    // Mobile: one continuous wrapping grid (avoids a gap when left apps don't fill a row).
+    // sm+: classic left/right desktop columns.
+    const mobileIconListClassName = 'list-none m-0 p-0 flex flex-row flex-wrap pointer-events-auto w-full sm:hidden'
+    const desktopIconListClassName = 'list-none m-0 p-0 flex flex-col pointer-events-auto w-28'
 
     const handleScreensaverDismiss = () => {
         addToast({
@@ -271,20 +274,24 @@ function Desktop() {
                 >
                     <Wallpapers wallpaper={siteSettings.wallpaper} reduceMotion={siteSettings.performanceBoost} />
 
-                    <nav
-                        className="flex flex-col sm:flex-row sm:justify-between items-start px-1"
-                        style={{ paddingTop: taskbarHeight + 16 }}
-                    >
-                        <ul className={iconListClassName}>
-                            {leftApps.map((app) => (
+                    <nav className="px-1" style={{ paddingTop: taskbarHeight + 16 }}>
+                        <ul className={mobileIconListClassName}>
+                            {[...leftApps, ...rightApps].map((app) => (
                                 <DesktopIcon key={app.label} app={app} />
                             ))}
                         </ul>
-                        <ul className={iconListClassName}>
-                            {rightApps.map((app) => (
-                                <DesktopIcon key={app.label} app={app} />
-                            ))}
-                        </ul>
+                        <div className="hidden sm:flex sm:justify-between items-start">
+                            <ul className={desktopIconListClassName}>
+                                {leftApps.map((app) => (
+                                    <DesktopIcon key={app.label} app={app} />
+                                ))}
+                            </ul>
+                            <ul className={desktopIconListClassName}>
+                                {rightApps.map((app) => (
+                                    <DesktopIcon key={app.label} app={app} />
+                                ))}
+                            </ul>
+                        </div>
                     </nav>
                 </div>
                 {!compact && (
