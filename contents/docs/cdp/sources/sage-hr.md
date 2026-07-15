@@ -16,7 +16,7 @@ import AlphaRelease from "../_snippets/alpha-release.mdx"
 
 <AlphaRelease />
 
-[Sage HR](https://sage.hr) is an HR management platform. This connector syncs your HR data – employees, teams, positions, documents, leave requests and policies, and onboarding and offboarding data – into the PostHog data warehouse so you can analyze your people data alongside your product data.
+[Sage HR](https://sage.hr) is an HR management platform. This connector syncs your HR data – employees, teams, positions, documents, leave requests and policies, and onboarding and offboarding data – into the PostHog Data Warehouse so you can analyze your people data alongside your product data.
 
 ## Prerequisites
 

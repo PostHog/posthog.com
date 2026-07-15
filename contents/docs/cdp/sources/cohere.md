@@ -16,7 +16,7 @@ import AlphaRelease from "../_snippets/alpha-release.mdx"
 
 <AlphaRelease />
 
-[Cohere](https://cohere.com) is an enterprise LLM platform. This connector pulls your Cohere assets and job history – datasets, connectors, models, fine-tuned models, and embed jobs – into the PostHog data warehouse so you can analyze your AI workloads alongside your product data.
+[Cohere](https://cohere.com) is an enterprise LLM platform. This connector pulls your Cohere assets and job history – datasets, connectors, models, fine-tuned models, and embed jobs – into the PostHog Data Warehouse so you can analyze your AI workloads alongside your product data.
 
 ## Prerequisites
 

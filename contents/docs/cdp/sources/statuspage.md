@@ -16,7 +16,7 @@ import AlphaRelease from "../_snippets/alpha-release.mdx"
 
 <AlphaRelease />
 
-[Statuspage](https://www.atlassian.com/software/statuspage) is Atlassian's status page and incident communication platform. This connector syncs your Statuspage data – pages, components, incidents, subscribers, metrics, and access users and groups – into the PostHog data warehouse so you can analyze uptime and incident history alongside your product data.
+[Statuspage](https://www.atlassian.com/software/statuspage) is Atlassian's status page and incident communication platform. This connector syncs your Statuspage data – pages, components, incidents, subscribers, metrics, and access users and groups – into the PostHog Data Warehouse so you can analyze uptime and incident history alongside your product data.
 
 ## Prerequisites
 

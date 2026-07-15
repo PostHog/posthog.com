@@ -16,7 +16,7 @@ import AlphaRelease from "../_snippets/alpha-release.mdx"
 
 <AlphaRelease />
 
-[Buildkite](https://buildkite.com) is a CI/CD platform. This connector syncs your organizations, pipelines, builds, and agents into the PostHog data warehouse so you can analyze CI/CD performance alongside your product data.
+[Buildkite](https://buildkite.com) is a CI/CD platform. This connector syncs your organizations, pipelines, builds, and agents into the PostHog Data Warehouse so you can analyze CI/CD performance alongside your product data.
 
 ## Prerequisites
 

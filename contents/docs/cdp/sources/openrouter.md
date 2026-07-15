@@ -16,7 +16,7 @@ import AlphaRelease from "../_snippets/alpha-release.mdx"
 
 <AlphaRelease />
 
-[OpenRouter](https://openrouter.ai) is a unified API gateway for LLMs. This connector pulls your OpenRouter usage and account data – models, providers, activity, API keys, credits, organization members, and workspaces – into the PostHog data warehouse so you can analyze your LLM usage and spend alongside your product data.
+[OpenRouter](https://openrouter.ai) is a unified API gateway for LLMs. This connector pulls your OpenRouter usage and account data – models, providers, activity, API keys, credits, organization members, and workspaces – into the PostHog Data Warehouse so you can analyze your LLM usage and spend alongside your product data.
 
 ## Prerequisites
 

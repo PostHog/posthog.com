@@ -16,7 +16,7 @@ import AlphaRelease from "../_snippets/alpha-release.mdx"
 
 <AlphaRelease />
 
-[Hyperspell](https://hyperspell.com) is a memory layer for AI applications. This connector syncs your memories, connections, integrations, extracted entities, query logs, and context documents into the PostHog data warehouse so you can analyze your AI application's knowledge and retrieval alongside your product data.
+[Hyperspell](https://hyperspell.com) is a memory layer for AI applications. This connector syncs your memories, connections, integrations, extracted entities, query logs, and context documents into the PostHog Data Warehouse so you can analyze your AI application's knowledge and retrieval alongside your product data.
 
 ## Prerequisites
 

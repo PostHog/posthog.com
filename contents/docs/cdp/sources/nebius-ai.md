@@ -16,7 +16,7 @@ import AlphaRelease from "../_snippets/alpha-release.mdx"
 
 <AlphaRelease />
 
-[Nebius AI Studio](https://studio.nebius.com) (Token Factory) is an AI inference platform. This connector pulls your Nebius inference platform metadata – models, files, batches, and fine-tuning jobs – into the PostHog data warehouse so you can analyze your AI workloads alongside your product data.
+[Nebius AI Studio](https://studio.nebius.com) (Token Factory) is an AI inference platform. This connector pulls your Nebius inference platform metadata – models, files, batches, and fine-tuning jobs – into the PostHog Data Warehouse so you can analyze your AI workloads alongside your product data.
 
 ## Prerequisites
 
