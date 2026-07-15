@@ -42,3 +42,4 @@ __pycache__
 
 .env*.local
 /.claude/worktrees/
+.env*
