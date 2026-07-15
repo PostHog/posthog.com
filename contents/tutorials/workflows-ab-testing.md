@@ -10,7 +10,7 @@ author:
 category: Product
 tags:
     - Workflows
-    - A/B testing
+    - experimentation
 seo:
     {
         metaTitle: 'Run A/B tests inside your Workflows',
