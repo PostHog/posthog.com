@@ -16,7 +16,7 @@ import AlphaRelease from "../_snippets/alpha-release.mdx"
 
 <AlphaRelease />
 
-The Bitrise connector pulls your CI data — apps, builds, workflows, and build artifacts — into the PostHog data warehouse, so you can analyze build durations, failure rates, and release cadence alongside your product data.
+The Bitrise connector pulls your CI data into the PostHog data warehouse, including apps, builds, workflows, and build artifacts, so you can analyze build durations, failure rates, and release cadence alongside your product data.
 
 ## Prerequisites
 
