@@ -2,7 +2,7 @@
 title: Bot and traffic detection
 ---
 
-PostHog classifies traffic by user agent and IP address so you can tell humans apart from bots, crawlers, and automation directly in your queries. It categorizes each request – so you can welcome, measure, or exclude AI agents, search crawlers, and automation independently, rather than treating every bot the same. The classification runs in [SQL](/docs/sql), so it works anywhere HogQL does – the SQL editor, insights, trends, and Web Analytics breakdowns.
+PostHog classifies traffic by user agent so you can tell humans apart from bots, crawlers, and automation directly in your queries. For bots from operators that publish their crawler IP ranges (currently Google, OpenAI, Perplexity, Microsoft, Apple, and Ahrefs), classification also checks the client IP as a fallback when the user agent doesn't match a known pattern. It categorizes each request – so you can welcome, measure, or exclude AI agents, search crawlers, and automation independently, rather than treating every bot the same. The classification runs in [SQL](/docs/sql), so it works anywhere HogQL does – the SQL editor, insights, trends, and Web Analytics breakdowns.
 
 <CalloutBox icon="IconInfo" title="New feature" type="fyi">
 
@@ -50,7 +50,7 @@ How you set these depends on how you ingest. With the [capture API](/docs/api/ca
 
 ## Classification functions
 
-Each function takes a user agent string and returns its classification. They also accept an optional second `ip` argument – when the user agent doesn't match a known pattern, the IP is checked against published bot IP ranges. PostHog stores the user agent as `$raw_user_agent` (server-side capture and `$http_log` events) or `$user_agent` (the JavaScript SDK), so pass `coalesce(properties.$raw_user_agent, properties.$user_agent)` to cover both. To skip the fallback, use the [virtual properties](#virtual-properties) below, which read the user agent and IP for you.
+Each function takes a user agent string and returns its classification. They also accept an optional second `ip` argument – when the user agent doesn't match a known pattern, the IP is checked against published crawler IP ranges from major bot operators (currently Google, OpenAI, Perplexity, Microsoft, Apple, and Ahrefs). PostHog stores the user agent as `$raw_user_agent` (server-side capture and `$http_log` events) or `$user_agent` (the JavaScript SDK), so pass `coalesce(properties.$raw_user_agent, properties.$user_agent)` to cover both. To skip the fallback, use the [virtual properties](#virtual-properties) below, which read the user agent and IP for you.
 
 | Function                                | Returns                                                                                                                                                                                      | Example          |
 | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
@@ -166,7 +166,7 @@ Because the classification reads the raw user agent, this works for any event th
 
 ## How classification works
 
-Classification first matches the user agent against a maintained list of known bot, crawler, and automation patterns. When no user agent pattern matches, the client IP is checked against published bot IP ranges – currently [Google's verified crawler and fetcher ranges](https://developers.google.com/crawling/docs/verifying-google-crawlers). This catches bots like Google's mobile rendering service that send real browser user agents with no bot token. User agent classification takes precedence, so the IP lookup only runs for rows the UA check didn't already match.
+Classification first matches the user agent against a maintained list of known bot, crawler, and automation patterns. When no user agent pattern matches, the client IP is checked against published crawler IP ranges from operators that make their ranges available – currently Google, OpenAI, Perplexity, Microsoft (Bing), Apple, and Ahrefs. This catches bots like Google's mobile rendering service that send real browser user agents with no bot token. User agent classification takes precedence, so the IP lookup only runs for rows the UA check didn't already match.
 
 Both lists are open source and pull requests are welcome – you can find the [user agent patterns](https://github.com/PostHog/posthog/blob/master/products/web_analytics/backend/hogql_queries/bot_definitions.py) and [IP range definitions](https://github.com/PostHog/posthog/blob/master/products/web_analytics/backend/hogql_queries/bot_ip_definitions.py) in the PostHog repository.
 
@@ -176,4 +176,4 @@ Detection uses user agent patterns and IP range lookups, so a few cases are wort
 
 - **No user agent** – requests with an empty or missing user agent (server-to-server calls, misconfigured SDKs) can't be classified from the user agent alone. They're treated as `Automation` with the `no_user_agent` category, so `isLikelyBot` returns `true` for them.
 - **Spoofing** – some bots disguise themselves with regular browser user agents, and some legitimate tools use bot-like ones. IP-based detection helps catch bots that use real browser user agents but come from known bot IP ranges (like Google's mobile rendering service). However, detection is still a best-effort heuristic, not a guarantee, which is why the boolean function is named `isLikelyBot`.
-- **IP coverage** – IP range detection currently covers Google's published crawler ranges. Bots from operators that don't publish their IP ranges won't be caught by the IP check.
+- **IP coverage** – IP range detection currently covers published crawler ranges from Google, OpenAI, Perplexity, Microsoft (Bing), Apple, and Ahrefs. Bots from operators that don't publish their IP ranges won't be caught by the IP check.
