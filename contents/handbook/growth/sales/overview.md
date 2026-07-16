@@ -94,7 +94,7 @@ Our people are spread across the [teams above](#our-teams), each with its own sm
 
 Being a [power user of PostHog](#our-vision) means knowing what just shipped and what's about to land. Two internal Slack channels make this easy, and we recommend everyone on the Sales, CS & Onboarding teams joins both:
 
-- [`#changelog`](https://posthog.slack.com/archives/C099B0YCULT) – what's just shipped. Owned by the [Docs & Wizard team](/teams/docs-wizard) and updated constantly as PRs merge.
+- [`#changelog`](https://posthog.slack.com/archives/C099B0YCULT) – what's just shipped. Owned by the [Wizard & Docs team](/teams/wizard-and-docs) and updated constantly as PRs merge.
 - [`#coming-soon`](https://posthog.slack.com/archives/C0B5QBS29QU) – what's shipping soon. Owned by the [Marketing team](/teams/marketing) and posted as a daily digest.
 
-Both channels are populated by agentic workflows that scan merged PRs and feature flag changes and summarize them into the channel. Authors can also opt in or out using the *Publish to changelog?* and *Alert Sales and Marketing teams?* checkboxes on the `posthog/posthog` PR template, or via the `@posthog` Slack app. See [how to publish changelog](/handbook/docs-and-wizard/how-to-publish-changelog).
+Both channels are populated by agentic workflows that scan merged PRs and feature flag changes and summarize them into the channel. Authors can also opt in or out using the *Publish to changelog?* and *Alert Sales and Marketing teams?* checkboxes on the `posthog/posthog` PR template, or via the `@posthog` Slack app. See [how to publish changelog](/handbook/wizard-and-docs/how-to-publish-changelog).

@@ -3,6 +3,7 @@ title: AI Observability basics
 ---
 
 import OSButton from 'components/OSButton'
+import CalloutBox from 'components/Docs/CalloutBox'
 
 This page covers how your LLM calls become analytics in PostHog and defines key concepts for AI Observability.
 
@@ -74,3 +75,11 @@ Here's a breakdown of this hierarchy:
 | [Span](/docs/ai-observability/spans) | Tracks an operation within a trace | A retrieval step or function call |
 | [Generation](/docs/ai-observability/generations) | An LLM call, tracked as `$ai_generation` events | Sending a prompt to Claude |
 | [Embedding](/docs/ai-observability/embeddings) | Converts text into vectors | Vectorizing documents for RAG |
+
+<CalloutBox icon="IconInfo" title="A session here usually means a conversation" type="fyi">
+
+In AI Observability, a session (`$ai_session_id`) typically represents a single **conversation** – one thread of back-and-forth turns with your assistant. This is different from a standard PostHog [session](/docs/data/sessions) (`$session_id`), like the ones you see in [Session replay](/docs/session-replay), which represents one continuous visit to your app.
+
+A single PostHog session can contain multiple AI Observability sessions: a user might start several separate conversations during one visit. See [sessions](/docs/ai-observability/sessions#note-on-posthog-session-ids) for more on the distinction.
+
+</CalloutBox>

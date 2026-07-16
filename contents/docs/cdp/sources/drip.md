@@ -9,7 +9,7 @@ availability:
 sourceId: Drip
 ---
 
-<CalloutBox icon="IconInfo" title="Alpha release" type="fyi">
+<CalloutBox icon="IconFlask" title="Alpha release" type="action">
 
 This source is currently in **alpha**. The interface and available tables may change.
 
@@ -49,3 +49,7 @@ All Drip tables are full refresh only. Drip's only documented server-side timest
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

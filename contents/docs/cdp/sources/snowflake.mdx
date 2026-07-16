@@ -40,6 +40,52 @@ Once done, you can now [query](/docs/data-warehouse/query) your new table using 
   classes="rounded"
 />
 
+## Direct Snowflake connections
+
+Instead of syncing data on a schedule, you can query your Snowflake database directly from the [SQL editor](https://app.posthog.com/sql). Direct connections run queries against your live Snowflake instance in real time — no data is copied into PostHog.
+
+### Creating a direct-only connection
+
+To set up a direct connection:
+
+1. Open the [SQL editor](https://app.posthog.com/sql).
+2. Click the connection picker in the toolbar and select **Add direct connection** > **Snowflake**.
+3. Enter your Snowflake credentials (account identifier, database, warehouse, user, password, and optionally a role and schema) — the same credentials used for scheduled syncs.
+4. Select the tables you want to make available, then click **Link**.
+
+Once connected, switch to your Snowflake connection in the SQL editor's connection picker and write queries against your live data.
+
+### Enabling live queries on a synced source
+
+You can also enable live queries on a synced Snowflake source, giving you both scheduled syncs and the ability to query your live data from the same source.
+
+**When creating a new source:** In the source creation wizard, select **Sync and query live** to enable both scheduled syncs and live queries.
+
+**For an existing source:**
+
+1. Go to the [sources tab](https://app.posthog.com/data-management/sources) and click your Snowflake source.
+2. Open the **Configuration** tab.
+3. Enable the **Enable live queries** toggle.
+4. Click **Save changes**.
+
+Once enabled, click **Query directly** on the **Schemas** tab to open the SQL editor with your source preselected. In the SQL editor's connection picker, synced sources with live queries show a `· synced` label to distinguish them from direct-only connections.
+
+### When to use direct connections vs scheduled syncs
+
+- **Direct connections** are best for ad-hoc exploration, querying data that changes frequently, or when you don't want to duplicate data into PostHog.
+- **Scheduled syncs** are better when you need faster query performance, want to join external data with PostHog events in dashboards and insights, or need data available across all PostHog features.
+
+### Limitations
+
+Direct Snowflake queries are read-only. Some HogQL constructs are not supported and return a clear error if used:
+
+- `SAMPLE`
+- `PREWHERE`
+- `ARRAY JOIN`
+- `LIMIT BY`
+- Tuple expressions
+- Array slices
+
 ## Troubleshooting
 
 ### Network policy blocking connection
@@ -49,6 +95,30 @@ Once done, you can now [query](/docs/data-warehouse/query) your new table using 
 > Incoming request with IP/Token is not allowed to access Snowflake. Contact your account administrator.
 
 **Solution:** Your Snowflake account has a [network policy](https://docs.snowflake.com/en/user-guide/network-policies) (IP allowlist) that doesn't include PostHog's egress IP addresses. Ask your Snowflake administrator to add the IP addresses listed in the [Configuration](#configuration) section below to your network policy allowlist. Once updated, retry the sync.
+
+### Invalid JWT token with key-pair authentication
+
+**Problem:** Your Snowflake sync fails with an error like:
+
+> JWT token is invalid
+
+**Solution:** Snowflake rejected key-pair authentication because the private key you configured doesn't match the public key registered on the Snowflake user. This can happen when:
+
+- The public key was rotated or removed from the Snowflake user
+- You pasted the wrong private key
+- The private key belongs to a different Snowflake user
+
+To fix this, verify that the public key matching your private key is registered on your Snowflake user. See [Snowflake's key-pair authentication documentation](https://docs.snowflake.com/en/user-guide/key-pair-auth) for instructions. Either re-register the matching public key on the Snowflake user, or update your PostHog source configuration with the correct private key. Once corrected, resync your data.
+
+### Multi-factor authentication enrollment required
+
+**Problem:** Your Snowflake sync fails with an error like:
+
+> Multi-factor authentication is required for this account. Log in to Snowsight to enroll.
+
+**Solution:** The Snowflake account requires MFA enrollment, but the connecting user hasn't enrolled. PostHog runs unattended syncs that can't complete an MFA enrollment flow, so retrying never succeeds.
+
+To fix this, connect with a service user that uses [key-pair authentication](https://docs.snowflake.com/en/user-guide/key-pair-auth) (which bypasses MFA), or use a user account that is exempt from your account's MFA requirement. Once updated, resync your data.
 
 ## Configuration
 

@@ -1,53 +1,42 @@
-### Q2 2026 objectives
+### Q3 2026 objectives
 
-1. Make product analytics AI-ready
-   - Clean charts in the component library
-   - MCP works with insights
-   - Investigate metric skill
+1. MCP/Wizard improvements and Slack bot
+   - How it's displayed across harnesses and agents
+   - Make product analytics easier and more useful to access from Claude Code, Slack, etc.
+   - AI knows when to use a runner rather than one-shotting SQL every time
 
-2. Long lasting quality improvements (mostly UI, UX, bugs)
-
-3. Keep building the things people need
-   - Data warehouse in insights
-   - Period over period comparison in funnels
-   - Inline events in all charts
+2. Improvements and features for core product analytics
+   - Prioritized list in GitHub
+   - Papercuts
+   - Tech debt
 
 ### What we’ll ship
 
-#### <TeamMember name="Thomas Obermüller" />
-
-- Follow up work on data warehouse insights (#3)
-  - Desired outcome: Data warehouse events "just work" in insights; adopted by customers
-- MCP is a complete alternative to the UI
-  - Expose dashboard tiles in HogQL for MCP v2
-  - Fix schema drift of assistant queries
-  - Discover + fix gaps through manual exploration and MCP evals
-- Period over period comparison in funnels (#3)
-  - Desired outcome: Adopted by customers
-
-#### <TeamMember name="Georgis Andonis" />
-
-- Inline events adoption in retention, stickiness, and lifecycle (#3)
-  - Desired outcome: Establish a mature inline events feature across all insight types, enabling us to replace Actions and eliminate the back-and-forth associated with them. Support all common actions (rename, duplicate, in a separate popover menu)
-- Add missing MCP data retrieval queries: paths, lifecycle, stickiness, actors queriers, enterprise queriers (#1)
-  - Desired outcome: We want to enable other AI agents to interact with the above queries
-- Implement "Investigate metric" skill (#1)
-  - Desired outcome: Allow agents to analyze a metric and find the root cause behind it
-
 #### <TeamMember name="Sam Pennington" />
 
-- Create analytics components (charts, tooltips, etc.) in the UI library and use them (#2)
-  - Desired outcome: We have clearer boundaries between insight logic/UI code and less duplication. Makes things easier to reason with, more testable, reduces bugs/papercuts, and brings consistency across PostHog products
-- Add skills to product analytics: insight CRUD, autocapture events, persons... (#1)
-  - Desired outcome: An agent can reliably perform core product analytics tasks
-- Reduce complexity of insights UI (#2)
-  - Desired outcome: Increase conversion of insight created/saved, activation rate
+- Make creating insights and dashboards via MCP faster and better quality (#1)
+- Make charts great everywhere
+  - Make charts work in Slack (#1)
+  - ASCII charts for Claude Code and similar (#1)
+  - Roll out better-styled charts across all PostHog products (#2)
+- More options and flexibility with date queries (#2)
+  - Add quarterly and yearly intervals
+  - Add a "last X days" option
+  - Allow day-of-week filtering (replacing the existing weekend-filter post-processing)
 
-#### <TeamMember name="Mike Warren" />
+#### <TeamMember name="Thomas Obermüller" />
 
-- Improve our methodology for prioritizing feature requests/ideas and tracking outcomes (#3)
-  - Desired outcome: In next quarterly planning, our team has more metric-based outcomes in our "last quarter reflections" than we did this quarter. And the team feels like it's more clear what to work on next.
-- UI/UX review + improvements for the new insight page (including tab switching) (#2)
-  - Desired outcome: This should improve conversion rate of insight create -> insight save. It should also improve avg. # of insight views within 30 days after creating an insight
-- Fix our internal product analytics event tracking (N/A)
-  - Desired outcome: We have a comprehensive, accurate view of insight creates and saves across sources, and we can tie those to where they were created from
+- Dogfood MCP analytics so working with insights and dashboards doesn't feel sluggish (#1)
+  - Improve tool discovery
+  - Add missing capabilities and purpose-built tools
+- Dashboard filter overrides and chart color enhancements (#2)
+  - Override interval on dashboards
+  - Override test account filter on dashboards
+  - Exclude insights from dashboard filters
+  - Allow overriding chart colors (and maybe sort order, etc.) on a dashboard
+- Paths V2 (#2)
+  - Reuse funnel semantics (and maybe the funnel UDF) so zooming into a path produces the same results as a funnel
+  - Row and column layout instead of limiting by total number of paths
+  - Use the cleaned-up visualization
+  - Address open feature requests for paths where possible (path cleaning, etc.)
+- Remove legacy filters and legacy insights, and move code to the "product analytics" product (#2)
