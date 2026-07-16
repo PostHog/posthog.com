@@ -172,7 +172,7 @@ const Roadmap = ({
 }) => {
     const { appWindow } = useWindow()
     const { isModerator, getJwt } = useUser()
-    const { addWindow, websiteMode } = useApp()
+    const { addWindow } = useApp()
     const hasProfiles = (roadmap.profiles?.data?.length ?? 0) > 0
     const [width, setWidth] = useState(450)
     const [isResizing, setIsResizing] = useState(false)
@@ -223,9 +223,7 @@ const Roadmap = ({
 
     return (
         <motion.div
-            className={`border-l border-primary bg-white dark:bg-dark flex-shrink-0 relative overflow-hidden ${
-                websiteMode ? '' : 'shadow-2xl'
-            }`}
+            className="border-l border-primary bg-white dark:bg-dark flex-shrink-0 relative overflow-hidden shadow-2xl"
             initial={{ width: 0 }}
             animate={{ width: containerWidth }}
             exit={{ width: 0 }}
@@ -423,7 +421,7 @@ const RoadmapCards = ({
     initialActiveRoadmap,
     videos,
 }: RoadmapCardsProps) => {
-    const { addWindow, websiteMode } = useApp()
+    const { addWindow } = useApp()
     const width = 340
     const containerRef = useRef<HTMLDivElement>(null)
 
@@ -639,11 +637,7 @@ const RoadmapCards = ({
     }
 
     return (
-        <ScrollArea
-            className={`size-full [&>div>div]:size-full [&>div>div]:!flex ${
-                websiteMode ? '!h-[80vh] max-h-[900px]' : ''
-            }`}
-        >
+        <ScrollArea className="size-full [&>div>div]:size-full [&>div>div]:!flex">
             <div className="h-full px-4">
                 <div
                     ref={containerRef}
@@ -987,7 +981,10 @@ export default function Changelog({
                     description: 'Latest updates and releases',
                 }}
             >
-                <div data-scheme="secondary" className="bg-primary text-primary relative h-full flex">
+                <div
+                    data-scheme="secondary"
+                    className="bg-primary text-primary relative h-full flex border-t border-primary"
+                >
                     <div ref={resizeObserverRef} className="flex flex-col flex-1 min-w-0 h-full">
                         <div className="min-h-0 flex-shrink-0 flex justify-between items-center px-4 mt-2">
                             <Filters

@@ -1,7 +1,7 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import { AVATAR_FALLBACK_URL } from 'constants/index'
 import { graphql, useStaticQuery } from 'gatsby'
-import React, { useState, useMemo, useCallback, useEffect } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import Link from 'components/Link'
 import { SEO } from '../seo'
 import ReactMarkdown from 'react-markdown'
@@ -12,11 +12,10 @@ import ZoomHover from 'components/ZoomHover'
 import rehypeRaw from 'rehype-raw'
 import useTeamCrestMap from 'hooks/useTeamCrestMap'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
-import Fuse from 'fuse.js'
-import debounce from 'lodash/debounce'
 import { useInView } from 'react-intersection-observer'
 import PeopleMap from 'components/HogMap/PeopleMap'
 import { IconMapPin, IconList } from '@posthog/icons'
+import ViewerFilters from 'components/Viewer/ViewerFilters'
 
 export const TeamMember = (props: any) => {
     const {
@@ -280,13 +279,9 @@ export const TeamMember = (props: any) => {
     )
 }
 
-interface PeopleProps {
-    searchTerm?: string
-    filteredMembers?: any[] | null
-}
-
-export default function People({ searchTerm, filteredMembers }: PeopleProps = {}) {
+export default function People() {
     const [activeTab, setActiveTab] = useState<'list' | 'map'>('list')
+    const [filterBaseMembers, setFilterBaseMembers] = useState<any[] | null>(null)
 
     const {
         team: { teamMembers },
@@ -294,114 +289,96 @@ export default function People({ searchTerm, filteredMembers }: PeopleProps = {}
     } = useStaticQuery(teamQuery)
     const [filteredTeamMembers, setFilteredTeamMembers] = useState(teamMembers)
 
-    // Use filteredMembers from props if provided
-    const baseMembers = filteredMembers !== null && filteredMembers !== undefined ? filteredMembers : teamMembers
-
     const teamSize = teamMembers.length - 1
 
-    // Create a map of team names to crest data for quick lookup
     const teamCrestMap = allTeams.nodes.reduce((acc: any, team: any) => {
         acc[team.name] = team.crest?.data?.attributes?.url
         return acc
     }, {})
 
-    const fuse = useMemo(() => {
-        return new Fuse(baseMembers, {
-            keys: [
-                {
-                    name: 'fullName',
-                    getFn: (member: any) => `${member.firstName} ${member.lastName}`.trim(),
+    const availableFilters = useMemo(
+        () => [
+            {
+                label: 'People named',
+                operator: 'is',
+                options: [
+                    { label: 'Any', value: 'any' },
+                    { label: 'Ben', value: 'Ben' },
+                    { label: 'Daniel', value: 'Daniel' },
+                    { label: 'Alex', value: 'Alex' },
+                    { label: 'Pawel', value: 'Pawel' },
+                ],
+                filter: (person: any, value: string) => value === 'any' || person.firstName === value,
+            },
+            {
+                label: 'Pineapple on pizza',
+                operator: 'is',
+                options: [
+                    { label: 'All', value: 'all' },
+                    { label: 'True', value: 'true' },
+                    { label: 'False', value: 'false' },
+                    { label: 'Undecided', value: 'undecided' },
+                ],
+                filter: (person: any, value: string) => {
+                    if (value === 'all') return true
+                    if (value === 'true') return person.pineappleOnPizza
+                    if (value === 'false') return person.pineappleOnPizza === false
+                    if (value === 'undecided') {
+                        return person.pineappleOnPizza === null || person.pineappleOnPizza === undefined
+                    }
+                    return true
                 },
-                'teams.data.attributes.name',
-                'companyRole',
-                'location',
-                'country',
-            ],
-            threshold: 0.3,
-        })
-    }, [baseMembers])
-
-    const debouncedSearch = useCallback(
-        debounce((query: string) => {
-            if (!query.trim()) {
-                setFilteredTeamMembers(baseMembers)
-                return
-            }
-
-            const results = fuse.search(query)
-            const filtered = results.map((result) => result.item)
-            setFilteredTeamMembers(filtered)
-        }, 300),
-        [fuse, baseMembers]
+            },
+        ],
+        []
     )
 
-    // Effect to handle search term changes from prop
     useEffect(() => {
-        if (searchTerm !== undefined) {
-            debouncedSearch(searchTerm)
-        }
-    }, [searchTerm, debouncedSearch])
+        setFilteredTeamMembers(filterBaseMembers ?? teamMembers)
+    }, [filterBaseMembers, teamMembers])
 
-    // Effect to handle filtered members changes
-    useEffect(() => {
-        if (filteredMembers !== null && filteredMembers !== undefined) {
-            // If we have filtered members from props, apply search on those
-            if (searchTerm && searchTerm.trim()) {
-                const fuse = new Fuse(filteredMembers, {
-                    keys: [
-                        {
-                            name: 'fullName',
-                            getFn: (member: any) => `${member.firstName} ${member.lastName}`.trim(),
-                        },
-                        'teams.data.attributes.name',
-                        'companyRole',
-                        'location',
-                        'country',
-                    ],
-                    threshold: 0.3,
-                })
-                const results = fuse.search(searchTerm)
-                const filtered = results.map((result) => result.item)
-                setFilteredTeamMembers(filtered)
-            } else {
-                setFilteredTeamMembers(filteredMembers)
-            }
-        }
-    }, [filteredMembers, searchTerm])
-
-    // handleSearch removed since we use prop-based search
+    const handleFilterChange = (filteredData: any[]) => {
+        setFilterBaseMembers(filteredData)
+    }
 
     return (
-        <div data-scheme="primary" className="@container bg-primary h-full">
+        <div data-scheme="primary" className="@container h-full pt-12 pb-4 @xl:pb-8 px-4 @xl:px-8 pr-14">
             <SEO title="Team - PostHog" />
-            <div className="flex items-center justify-between">
-                <h1>People</h1>
-                <ToggleGroup
-                    title=""
-                    hideTitle
-                    options={[
-                        {
-                            label: (
-                                <>
-                                    <IconList className="size-4 mr-1" />
-                                    List
-                                </>
-                            ),
-                            value: 'list',
-                        },
-                        {
-                            label: (
-                                <>
-                                    <IconMapPin className="size-4 mr-1" />
-                                    Map
-                                </>
-                            ),
-                            value: 'map',
-                        },
-                    ]}
-                    onValueChange={(value) => setActiveTab(value as 'list' | 'map')}
-                    value={activeTab}
-                />
+            <div className="flex flex-wrap items-center gap-2 justify-between">
+                <h1 className="m-0">People</h1>
+                <div className="flex flex-wrap items-center gap-2">
+                    <ViewerFilters
+                        availableFilters={availableFilters}
+                        dataToFilter={teamMembers}
+                        onFilterChange={handleFilterChange}
+                    />
+                    <ToggleGroup
+                        title=""
+                        hideTitle
+                        options={[
+                            {
+                                label: (
+                                    <>
+                                        <IconList className="size-4 mr-1" />
+                                        List
+                                    </>
+                                ),
+                                value: 'list',
+                            },
+                            {
+                                label: (
+                                    <>
+                                        <IconMapPin className="size-4 mr-1" />
+                                        Map
+                                    </>
+                                ),
+                                value: 'map',
+                            },
+                        ]}
+                        onValueChange={(value) => setActiveTab(value as 'list' | 'map')}
+                        value={activeTab}
+                    />
+                </div>
             </div>
             <ScrollArea className="h-full">
                 {activeTab === 'list' && (

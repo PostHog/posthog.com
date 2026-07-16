@@ -33,6 +33,8 @@ Sessions are useful when you want to:
 
 Set the `$ai_session_id` property when capturing LLM events using the `posthogProperties` (JavaScript) or `posthog_properties` (Python) parameter in PostHog's AI Observability SDKs. Use any identifier that makes sense for grouping related traces in your application.
 
+The `$ai_session_id` value must contain only letters, numbers, and the special characters `-`, `_`, `~`, `.`, `@`, `(`, `)`, `!`, `'`, `:`, and `|`.
+
 ## Analyzing sessions
 
 Once you've set session IDs on your events, you can analyze them in several ways:

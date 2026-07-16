@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, useCallback } from 'react'
 import { INACTIVITY_TIMEOUTS } from '../constants'
-import { useApp } from '../context/App'
+import { useAppActions } from '../context/App'
 
 interface UseInactivityDetectionOptions {
     focusedTimeout?: number
@@ -13,14 +13,16 @@ export const useInactivityDetection = ({
     unfocusedTimeout = INACTIVITY_TIMEOUTS.UNFOCUSED,
     enabled = true,
 }: UseInactivityDetectionOptions = {}) => {
-    const { windowsInView } = useApp()
+    // Read windowsInView lazily via a stable ref so this hook doesn't subscribe to the
+    // volatile app context (which would re-render every host on every provider render).
+    const { windowsInViewRef } = useAppActions()
     const [isInactive, setIsInactive] = useState(false)
     const timeoutRef = useRef<NodeJS.Timeout>()
     const isWindowFocusedRef = useRef(true)
 
     const checkVideosInView = useCallback(() => {
         try {
-            return windowsInView.some((window) => {
+            return windowsInViewRef.current.some((window) => {
                 if (!window.ref?.current) return false
 
                 const hasActiveVideo = Array.from(window.ref.current.querySelectorAll('video')).some(
@@ -38,7 +40,7 @@ export const useInactivityDetection = ({
             console.error(error)
             return false
         }
-    }, [windowsInView])
+    }, [windowsInViewRef])
 
     const resetTimer = useCallback(() => {
         if (!enabled) return

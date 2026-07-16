@@ -1,30 +1,45 @@
-Use `getServerSidePostHog` inside `getServerSideProps` to capture events and evaluate feature flags for the current user:
+Create a shared PostHog module with `createPostHog()`, then call the returned `getPostHog` with the request context inside `getServerSideProps` to evaluate feature flags.
+
+```ts file=lib/posthog.ts
+import { createPostHog } from '@posthog/next/pages'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/lib/auth'
+
+export const { getPostHog } = createPostHog({
+    // Optional: resolve a trusted distinct ID from your auth session.
+    // The resolver receives the GetServerSidePropsContext.
+    getDistinctId: async (ctx) =>
+        (await getServerSession(ctx.req, ctx.res, authOptions))?.user?.id,
+})
+```
 
 ```tsx file=pages/dashboard.tsx
 import type { GetServerSideProps } from 'next'
-import { getServerSidePostHog } from '@posthog/next/pages'
+import { getPostHog } from '@/lib/posthog'
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-    const posthog = await getServerSidePostHog(ctx)
+    const posthog = await getPostHog(ctx)
 
-    const flags = await posthog.getAllFlags()
-    posthog.capture({ event: 'dashboard_viewed' })
+    const flags = await posthog.evaluateFlags({ flagKeys: ['new-dashboard'] })
+    const showNewDashboard = flags.isEnabled('new-dashboard')
 
-    return { props: { showNewDashboard: flags['new-dashboard'] ?? false } }
+    return { props: { showNewDashboard } }
 }
 ```
 
-To bootstrap feature flags and eliminate flicker on page load, pass the flag data through `pageProps`:
+Without `getDistinctId`, PostHog can use the identity cookie and tracing headers supplied by the client as request context. When you need a strict guarantee that analytics uses the identity from your authenticated session, pass an authoritative distinct ID directly when capturing events or evaluating feature flags. When the resolver returns an ID, PostHog uses it as the request default ahead of client-provided identity, while an ID passed directly to a capture or flag method still takes precedence. Session and device linkage can remain connected to the browser. The resolver runs once per `getPostHog(ctx)` call and is not called for users who opted out of capture.
+
+The Pages Router provider doesn't have the App Router's `bootstrapFlags` prop. For the same no-flicker behavior, evaluate flags in `getServerSideProps` and pass the result through `pageProps`:
 
 ```tsx file=pages/dashboard.tsx
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-    const posthog = await getServerSidePostHog(ctx)
-    const bootstrap = await posthog.getAllFlagsAndPayloads()
-    return { props: { posthogBootstrap: bootstrap } }
+    const posthog = await getPostHog(ctx)
+    const posthogBootstrap = await posthog.getAllFlagsAndPayloads()
+    return { props: { posthogBootstrap } }
 }
 ```
 
-**Event flushing:** On Vercel, `@posthog/next` auto-detects [`waitUntil`](https://vercel.com/docs/functions/functions-api-reference/vercel-functions-package#waituntil) from `@vercel/functions` so events are flushed after the response is sent without blocking it. No manual `shutdown()` call is needed. In other environments, you can pass a custom `waitUntil` via `serverOptions` on the `PostHogProvider`, or events will be batched and flushed normally.
+**Event flushing:** On Vercel, `@posthog/next` auto-detects [`waitUntil`](https://vercel.com/docs/functions/functions-api-reference/vercel-functions-package#waituntil) from `@vercel/functions` so events are flushed after the response is sent without blocking it. No manual `shutdown()` call is needed. In other environments, pass a custom `waitUntil` in the server client options with `createPostHog({ options: { waitUntil } })`, or events will be batched and flushed normally.
 
 Then wire the bootstrap data into the provider:
 
@@ -36,8 +51,10 @@ export default function App({ Component, pageProps }: AppProps) {
     return (
         <PostHogProvider
             apiKey={process.env.NEXT_PUBLIC_POSTHOG_KEY!}
-            clientOptions={{ api_host: '/ingest' }}
-            bootstrap={pageProps.posthogBootstrap}
+            clientOptions={{
+                api_host: '/ingest',
+                bootstrap: pageProps.posthogBootstrap,
+            }}
         >
             <PostHogPageView />
             <Component {...pageProps} />

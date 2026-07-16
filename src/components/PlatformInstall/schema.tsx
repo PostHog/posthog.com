@@ -50,6 +50,8 @@ export type Platform = PlatformOption & {
 
 export type InstallSchema = {
     title: string
+    /** Optional direct info link shown beside the title */
+    titleInfoAction?: { label: string; to: string; state?: Record<string, unknown> }
     /** Optional (?) tooltip shown next to the title */
     titleTooltip?: React.ReactNode
     /** Header link on the right (replaces the old hardcoded "Learn more") */
@@ -491,6 +493,21 @@ export const mcpInstallSchema: InstallSchema = {
     defaultCopyCommand: wizardCommandCopy,
     supports: supportsFrameworks,
     platforms: installPlatforms,
+}
+
+// Display shows a clean command; the copy pins `-y` (auto-confirm) and `@latest` (freshness).
+const { displayCommand: cliWizardCommand, copyCommand: cliWizardCommandCopy } = buildWizardCommand({
+    subcommand: 'cli add',
+})
+
+export const cliInstallSchema: InstallSchema = {
+    title: 'Install the PostHog CLI',
+    defaultCommand: cliWizardCommand,
+    defaultCopyCommand: cliWizardCommandCopy,
+    supports: <>Installs the CLI and adds instructions to your coding agent</>,
+    // No per-client picker: CLI install is the same global binary everywhere. The manual
+    // npm fallback and per-agent setup live in the surrounding docs.
+    platforms: [],
 }
 
 export const wizardInstallSchema: InstallSchema = {

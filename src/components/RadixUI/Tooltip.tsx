@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { Tooltip as RadixTooltip } from 'radix-ui'
-import { useApp } from '../../context/App'
 import { cn } from '../../utils'
 
 export interface TooltipProps {
@@ -27,14 +26,7 @@ const Tooltip = ({
     className = '',
     contentClassName = '',
 }: TooltipProps) => {
-    const { websiteMode } = useApp()
-    const [appContainer, setAppContainer] = React.useState<HTMLElement | null>(null)
-
-    React.useEffect(() => {
-        if (websiteMode) {
-            setAppContainer(document.getElementById('app-container'))
-        }
-    }, [websiteMode])
+    const appContainer: HTMLElement | null = null
 
     return (
         <RadixTooltip.Provider delayDuration={delay}>

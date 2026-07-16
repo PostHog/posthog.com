@@ -22,8 +22,6 @@ import uniqBy from 'lodash/uniqBy'
 import { NewsletterForm } from 'components/NewsletterForm'
 import CloudinaryImage from 'components/CloudinaryImage'
 import OSButton from 'components/OSButton'
-import { useApp } from '../context/App'
-
 const quote =
     // "Let your work shine as brightly as a hedgehog's quills, threading through life's challenges with perseverance."
     // 'Even the smallest hedgehog carries the wisdom of survival, showing us that even in a world full of thorns, one can embrace challenges with grace and courage.'
@@ -230,14 +228,13 @@ const Header = () => {
 }
 
 const Main = () => {
-    const { websiteMode } = useApp()
     const { fullWidthContent } = useLayoutData()
 
     return (
         <section
             className={`@container w-full px-7 @7xl:px-9 transition-all mx-auto ${
                 fullWidthContent ? '' : 'max-w-[1400px]'
-            } ${websiteMode ? '' : 'pb-8'}`}
+            } pb-8`}
         >
             <div className="grid @2xl:grid-cols-2 @5xl:grid-cols-[220px_1fr_260px] @7xl:grid-cols-[300px_1fr_300px] gap-6 @7xl:gap-8">
                 <aside className="@container order-3 col-span-full border-t border-primary @5xl:col-span-1 @5xl:border-t-0 pt-8 @5xl:pt-0 @5xl:order-none flex flex-col ">
