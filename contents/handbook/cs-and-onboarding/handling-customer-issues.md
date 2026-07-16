@@ -23,6 +23,10 @@ If you're working on a ticket the customer raised in Slack, assign yourself as t
 
 > Tip: Customer messages from SupportHog channels also go to [#support-managed-customers](https://posthog.slack.com/archives/C05MUMZLC13). Find the ticket there and follow the link to see the ticket in PostHog.
 
+### Tickets from email
+
+If a customer emails you directly and the conversation should live in support, [forward the email to one of our support addresses and cc the customer](/handbook/support/posthog-support#forwarding-customer-emails) — a ticket will be created and associated with them.
+
 ## Investigating issues
 
 Ask for specifics: links to the insight, feature flag, or dashboard; a screenshot or the exact error message.

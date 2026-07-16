@@ -38,6 +38,12 @@ A couple of things worth doing depending on where the issue came from:
 - If the user raised it somewhere public, like Twitter, it's a nice touch to let them know you've opened a ticket on their behalf.
 - If they were replying to an old, already-resolved ticket, mark that old ticket as resolved once you've moved the new issue into its own ticket.
 
+### Forwarding customer emails
+
+If a customer has emailed you directly and the conversation should live in support, you don't need to copy anything over manually — forward the email to one of the support addresses in our [email channel settings](https://us.posthog.com/project/2/support/settings#channel=email), and a ticket will be created.
+
+**Make sure the customer's email address is included as a cc on the forward.** This is how the ticket gets associated with the customer, so that they receive our replies and the right tags and SLAs are applied.
+
 ## Where do the tickets live?
 
 It depends on your role:
