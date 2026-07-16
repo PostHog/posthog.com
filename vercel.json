@@ -4848,12 +4848,12 @@
             "destination": "/services"
         },
         {
-            "source": "/posthug",
-            "destination": "/"
-        },
-        {
             "source": "/docs/session-replay/start-here",
             "destination": "/docs/session-replay"
+        },
+        {
+            "source": "/posthug",
+            "destination": "/"
         },
         {
             "source": "/handbook/strategy/brand",
