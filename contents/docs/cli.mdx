@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-import PlatformInstall, { cliInstallSchema } from "components/PlatformInstall"
+import PlatformInstall, { cliInstallSchema } from "components/PlatformInstall";
 
 The PostHog CLI lets you use PostHog from your terminal, your coding agents, local scripts, and CI/CD pipelines.
 
@@ -39,11 +39,11 @@ This opens a browser-based login flow, stores a personal API token locally, and 
 
 For CI/CD, headless environments, or agents running without a browser, set environment variables instead:
 
-| Environment variable | Description |
-| --- | --- |
-| `POSTHOG_CLI_HOST` | PostHog host to connect to. Defaults to `https://us.posthog.com`. Use `https://eu.posthog.com` for EU Cloud. |
+| Environment variable     | Description                                                                                                                 |
+| ------------------------ | --------------------------------------------------------------------------------------------------------------------------- |
+| `POSTHOG_CLI_HOST`       | PostHog host to connect to. Defaults to `https://us.posthog.com`. Use `https://eu.posthog.com` for EU Cloud.                |
 | `POSTHOG_CLI_PROJECT_ID` | Your PostHog project ID. This is the number in your project URL, such as `12345` in `https://us.posthog.com/project/12345`. |
-| `POSTHOG_CLI_API_KEY` | A personal API key with the scopes required for the commands you run. |
+| `POSTHOG_CLI_API_KEY`    | A personal API key with the scopes required for the commands you run.                                                       |
 
 `posthog-cli api` also accepts `POSTHOG_HOST`, `POSTHOG_PROJECT_ID`, and `POSTHOG_API_KEY` if you already use those names in your environment.
 
@@ -51,30 +51,30 @@ For broad agent workflows, create a [personal API key](https://app.posthog.com/s
 
 ## Command reference
 
-| Command | Description |
-| --- | --- |
-| `posthog-cli login` | Authenticate with PostHog and store a personal API token locally |
-| `posthog-cli api` | Use agent-first PostHog API tools |
-| `posthog-cli sourcemap` | Upload bundled JavaScript chunks and source maps to PostHog |
-| `posthog-cli dsym` | Upload Apple dSYM debug symbol files |
-| `posthog-cli hermes` | Upload Hermes source maps |
-| `posthog-cli proguard` | Upload ProGuard mapping files |
-| `posthog-cli symbol-sets` | Manage uploaded symbol sets |
-| `posthog-cli exp` | Run experimental commands |
-| `posthog-cli help` | Print CLI help or help for a subcommand |
+| Command                   | Description                                                      |
+| ------------------------- | ---------------------------------------------------------------- |
+| `posthog-cli login`       | Authenticate with PostHog and store a personal API token locally |
+| `posthog-cli api`         | Use agent-first PostHog API tools                                |
+| `posthog-cli sourcemap`   | Upload bundled JavaScript chunks and source maps to PostHog      |
+| `posthog-cli dsym`        | Upload Apple dSYM debug symbol files                             |
+| `posthog-cli hermes`      | Upload Hermes source maps                                        |
+| `posthog-cli proguard`    | Upload ProGuard mapping files                                    |
+| `posthog-cli symbol-sets` | Manage uploaded symbol sets                                      |
+| `posthog-cli exp`         | Run experimental commands                                        |
+| `posthog-cli help`        | Print CLI help or help for a subcommand                          |
 
 ## Global options
 
 These options apply to any command and go before the subcommand (for example, `posthog-cli --dry-run hermes upload ...`).
 
-| Option | Description |
-| --- | --- |
-| `--host <HOST>` | PostHog host to connect to. Defaults to `https://us.posthog.com`. |
-| `--no-fail` | Disable non-zero exit codes on errors. Use with caution. |
-| `--skip-ssl-verification` | Skip SSL certificate verification when talking to the PostHog API. Use only with self-signed certificates. |
-| `--rate-limit <RATE_LIMIT>` | Set the number of requests per minute for the PostHog API client. Also settable via `POSTHOG_CLIENT_RATE_LIMIT`. |
-| `--dotenv-file <PATH>` | Load PostHog credentials from a dotenv-style file when not present in the process environment. |
-| `--dry-run` | Skip artifact processing and upload (sourcemap, dSYM, hermes, proguard) without contacting PostHog or requiring credentials. Intended for CI gates, not release builds. Also settable via `POSTHOG_CLI_DRY_RUN`. |
+| Option                      | Description                                                                                                                                                                                                      |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--host <HOST>`             | PostHog host to connect to. Defaults to `https://us.posthog.com`.                                                                                                                                                |
+| `--no-fail`                 | Disable non-zero exit codes on errors. Use with caution.                                                                                                                                                         |
+| `--skip-ssl-verification`   | Skip SSL certificate verification when talking to the PostHog API. Use only with self-signed certificates.                                                                                                       |
+| `--rate-limit <RATE_LIMIT>` | Set the number of requests per minute for the PostHog API client. Also settable via `POSTHOG_CLIENT_RATE_LIMIT`.                                                                                                 |
+| `--dotenv-file <PATH>`      | Load PostHog credentials from a dotenv-style file when not present in the process environment. Also settable via `POSTHOG_CLI_DOTENV_FILE`.                                                                      |
+| `--dry-run`                 | Skip artifact processing and upload (sourcemap, dSYM, hermes, proguard) without contacting PostHog or requiring credentials. Intended for CI gates, not release builds. Also settable via `POSTHOG_CLI_DRY_RUN`. |
 
 ## Using the CLI with a coding agent
 
