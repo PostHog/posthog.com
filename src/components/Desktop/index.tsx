@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Link from 'components/Link'
-import { useApp, useAppActions, useAppSettings, useAppUIState } from '../../context/App'
+import { useAppActions, useAppSettings, useAppUIState } from '../../context/App'
 import { GlassIcon, PricingIcon, DemoIcon } from 'components/OSIcons'
 import {
     HOME_SILHOUETTE,
@@ -134,9 +134,14 @@ export const apps: AppItem[] = [
     },
 ]
 
+// Fixed offset for icon layout — avoids CLS from context taskbarHeight (59 → measured) on SSR hydrate.
+// #taskbar is 42px inside AppContainer's p-2 (8px) top padding.
+const APP_CONTAINER_TOP_PADDING = 8
+const TASKBAR_HEIGHT = 42
+const DESKTOP_TOP_OFFSET = APP_CONTAINER_TOP_PADDING + TASKBAR_HEIGHT
+
 function Desktop() {
     const productLinks = useProductLinks()
-    const { taskbarHeight } = useApp()
     const { setScreensaverPreviewActive, setConfetti, updateSiteSettings } = useAppActions()
     const { siteSettings, compact } = useAppSettings()
     const { screensaverPreviewActive, confetti } = useAppUIState()
@@ -193,10 +198,10 @@ function Desktop() {
     // so the primary column stays pinned to the screen edge.
     const mobileIconListClassName = 'list-none m-0 p-0 flex flex-row flex-wrap pointer-events-auto w-full sm:hidden'
     const desktopIconListClassName = 'list-none m-0 p-0 flex flex-col content-start pointer-events-auto'
-    // Top padding is taskbarHeight + 16; leave a matching bottom cushion so icons don't kiss the edge.
+    // Top padding is DESKTOP_TOP_OFFSET + 16; leave a matching bottom cushion so icons don't kiss the edge.
     const desktopIconListStyle = {
-        height: `calc(100vh - ${taskbarHeight + 32}px)`,
-        maxHeight: `calc(100vh - ${taskbarHeight + 32}px)`,
+        height: `calc(100vh - ${DESKTOP_TOP_OFFSET + 32}px)`,
+        maxHeight: `calc(100vh - ${DESKTOP_TOP_OFFSET + 32}px)`,
     } as const
 
     const handleScreensaverDismiss = () => {
@@ -274,7 +279,7 @@ function Desktop() {
                 >
                     <Wallpapers wallpaper={siteSettings.wallpaper} reduceMotion={siteSettings.performanceBoost} />
 
-                    <nav className="px-1" style={{ paddingTop: taskbarHeight + 16 }}>
+                    <nav className="px-1" style={{ paddingTop: DESKTOP_TOP_OFFSET + 16 }}>
                         <ul className={mobileIconListClassName}>
                             {[...leftApps, ...rightApps].map((app) => (
                                 <DesktopIcon key={app.label} app={app} />
