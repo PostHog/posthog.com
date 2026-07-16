@@ -47,8 +47,15 @@ import NextJSInstall from "../../integrate/_snippets/nextjs/install-nextjs.mdx"
 ## Identifying users
 
 import IdentifyFrontendCallout from '../../_snippets/identify-frontend-callout.mdx'
+import TracingHeaders from '../../_snippets/tracing-headers.mdx'
 
 <IdentifyFrontendCallout />
+
+### Linking client and server events
+
+Next.js apps usually capture on both sides. To keep them on the same person, use the same distinct ID in both, and let the browser tell your server which one that is.
+
+<TracingHeaders />
 
 <DetailSetUpReverseProxy />
 
@@ -76,6 +83,22 @@ You can also read [the full `posthog-js` documentation](/docs/libraries/js/featu
 import NextJSInstallServer from "../../integrate/_snippets/nextjs/install-nextjs-server.mdx"
 
 <NextJSInstallServer />
+
+### Flushing events in serverless functions
+
+Server-side functions in Next.js are short-lived, and can shut down before queued events are sent. On platforms that expose a `waitUntil` API, pass it to the client and PostHog extends the invocation until the flush finishes, so you don't have to block the response on `shutdown()`:
+
+```ts
+import { waitUntil } from '@vercel/functions'
+import { PostHog } from 'posthog-node'
+
+const posthog = new PostHog(process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN, {
+  host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+  waitUntil,
+})
+```
+
+> **Note:** `waitUntil` is experimental and may change in a minor release. Without it, set `flushAt` to `1` and `flushInterval` to `0`, and `await posthog.shutdown()` before the function returns.
 
 ### Server-side configuration
 

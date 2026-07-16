@@ -43,9 +43,14 @@ export async function getServerSideProps(ctx) {
       }
     )
 
-    flags = await client.getAllFlags(session.user.email);
+    // Use the same stable user ID your frontend passes to posthog.identify().
+    // Avoid emails and other personal data as a distinct ID — send them as
+    // person properties instead.
+    const distinctId = session.user.id
+
+    flags = await client.getAllFlags(distinctId);
     client.capture({
-      distinctId: session.user.email,
+      distinctId,
       event: 'loaded blog article',
       properties: {
         $current_url: ctx.req.url,

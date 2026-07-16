@@ -476,7 +476,22 @@ client.on("error", (err) => {
 
 The Node SDK is designed to queue and batch requests in the background to optimize API calls and network time. As serverless environments like AWS Lambda or [Vercel Functions](/docs/libraries/vercel) are short-lived, we provide a few options to ensure all events are captured.
 
-First, we recommend using the `captureImmediate` method instead of `capture` to ensure the event is captured before the function shuts down. It guarantees the HTTP request finishes before your function continues (or shuts down).
+If your platform exposes a `waitUntil` API, pass it when you create the client. PostHog then extends the invocation until the flush completes, so events survive the function shutting down without you blocking the response:
+
+```node
+import { waitUntil } from '@vercel/functions'
+
+const client = new PostHog('<ph_project_token>', {
+  host: '<ph_client_api_host>',
+  waitUntil,
+})
+```
+
+You can tune the debounce with `waitUntilDebounceMs` (default `50`), which is how long the SDK waits after the last event before flushing, and `waitUntilMaxWaitMs` (default `500`), which caps that wait so rapid captures can't starve the flush.
+
+> **Note:** `waitUntil`, `waitUntilDebounceMs`, and `waitUntilMaxWaitMs` are experimental and subject to change in a minor release.
+
+Otherwise, we recommend using the `captureImmediate` method instead of `capture` to ensure the event is captured before the function shuts down. It guarantees the HTTP request finishes before your function continues (or shuts down).
 
 Second, we recommend setting `flushAt` to `1` and `flushInterval` to `0` to ensure the events are sent immediately. These set the queue to flush immediately, both in terms of events and time.
 
