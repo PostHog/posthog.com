@@ -67,8 +67,7 @@ export default function WhatIsPostHog(): JSX.Element {
 
                 <h2>Tooling examples</h2>
                 <p>
-                    Check out our <a href="/products">full product suite</a> and our{' '}
-                    <a href="/skills">skills library</a>, but here's a gist of what we do:
+                    Check out our <a href="/products">full product suite</a>, but here's a gist of what we do:
                 </p>
                 <ul>
                     <li>

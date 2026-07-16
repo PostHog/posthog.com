@@ -5,7 +5,6 @@ import { GlassIcon, PricingIcon, DemoIcon } from 'components/OSIcons'
 import {
     HOME_SILHOUETTE,
     SELF_DRIVING_SILHOUETTE,
-    SKILLS_SILHOUETTE,
     DOWNLOAD_SILHOUETTE,
     DOCS_SILHOUETTE,
     TALK_TO_A_HUMAN_SILHOUETTE,
@@ -52,12 +51,6 @@ export const useProductLinks = () => {
                 label: 'Self-driving products',
                 Icon: <GlassIcon path={SELF_DRIVING_SILHOUETTE} />,
                 url: '/self-driving',
-                source: 'desktop',
-            },
-            {
-                label: 'Agent skills',
-                Icon: <GlassIcon path={SKILLS_SILHOUETTE} fillRule="evenodd" />,
-                url: '/skills',
                 source: 'desktop',
             },
             {
