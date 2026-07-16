@@ -47,7 +47,7 @@ By default, PostHog only syncs **completed** Typeform responses. You can change 
 
 The "All responses" mode uses full refresh because partial and started responses have no `submitted_at` timestamp, and Typeform's API doesn't provide a cursor that works across all three response types. This means incremental sync isn't possible when including partial responses.
 
-> **Note:** After changing this setting, resync the `responses` table for the new setting to take effect.
+> **Note:** To apply this change to an existing source, use **Delete table and resync** on the `responses` table. **Sync now** alone won't backfill the responses you're adding.
 
 ## Supported API base URLs
 
