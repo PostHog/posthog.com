@@ -195,9 +195,16 @@ function Desktop() {
     const rightApps = applyGlow(apps)
 
     // Mobile: one continuous wrapping grid (avoids a gap when left apps don't fill a row).
-    // sm+: classic left/right desktop columns.
+    // sm+: classic left/right desktop columns that wrap into extra columns when short on height.
+    // Left uses wrap (new columns grow right); right uses wrap-reverse (new columns grow left)
+    // so the primary column stays pinned to the screen edge.
     const mobileIconListClassName = 'list-none m-0 p-0 flex flex-row flex-wrap pointer-events-auto w-full sm:hidden'
-    const desktopIconListClassName = 'list-none m-0 p-0 flex flex-col pointer-events-auto w-28'
+    const desktopIconListClassName = 'list-none m-0 p-0 flex flex-col content-start pointer-events-auto'
+    // Top padding is taskbarHeight + 16; leave a matching bottom cushion so icons don't kiss the edge.
+    const desktopIconListStyle = {
+        height: `calc(100vh - ${taskbarHeight + 32}px)`,
+        maxHeight: `calc(100vh - ${taskbarHeight + 32}px)`,
+    } as const
 
     const handleScreensaverDismiss = () => {
         addToast({
@@ -281,12 +288,15 @@ function Desktop() {
                             ))}
                         </ul>
                         <div className="hidden sm:flex sm:justify-between items-start">
-                            <ul className={desktopIconListClassName}>
+                            <ul className={`${desktopIconListClassName} flex-wrap`} style={desktopIconListStyle}>
                                 {leftApps.map((app) => (
                                     <DesktopIcon key={app.label} app={app} />
                                 ))}
                             </ul>
-                            <ul className={desktopIconListClassName}>
+                            <ul
+                                className={`${desktopIconListClassName} flex-wrap-reverse`}
+                                style={desktopIconListStyle}
+                            >
                                 {rightApps.map((app) => (
                                     <DesktopIcon key={app.label} app={app} />
                                 ))}
