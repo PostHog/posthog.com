@@ -94,6 +94,9 @@ export default function ElementScrollLink({ id, label, element, className = '', 
         const targetElement = element.current.querySelector(`#${CSS.escape(id)}`)
         if (!targetElement) return
 
+        // Update URL hash without triggering native scroll
+        window.history.pushState(null, '', `#${id}`)
+
         // Check for Radix ScrollArea container
         const scrollViewport = element.current.closest('[data-radix-scroll-area-viewport]') as HTMLElement | null
         // Only use viewport scrolling if it exists AND is actually scrollable

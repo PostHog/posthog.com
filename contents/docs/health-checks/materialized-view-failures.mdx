@@ -1,0 +1,49 @@
+---
+title: Materialized view failures
+sidebar: Docs
+showTitle: true
+---
+
+The materialized view failures check fires when a [materialized view](/docs/data-warehouse/views) in your Data Warehouse fails to refresh, which leaves anything that reads from it serving stale data.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_59_34_953_Z_fcf2cbacd9.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_59_39_618_Z_108a9e2e6e.png"
+    alt="Materialized view failures check in the Health checks section in the PostHog app"
+    classes="rounded"
+/>
+
+## What this check looks for
+
+Once a day, the check looks at your Data Warehouse saved queries and raises a **warning** for any materialized view whose latest materialization failed (or that recorded an error and isn't currently running). The issue includes the view name and the error from the failed run.
+
+## Why it matters
+
+Queries and insights that read from the view serve stale data until it refreshes successfully. Common causes are:
+
+- A query that no longer compiles – a renamed column or table it depends on.
+- An upstream source that's itself failing.
+- A timeout or resource limit on a heavy query.
+
+## Fix it manually
+
+1. Open **Data modeling** (the Data Warehouse / data modeling section).
+2. Find the failing view, open its latest materialization run, and read the error.
+3. Fix the view's SQL or the upstream dependency.
+4. Re-run the materialization and confirm it succeeds.
+
+## Fix it automatically with the Inbox and PostHog Code
+
+With the [Inbox](/docs/self-driving) and health checks enabled as a [signal source](/docs/self-driving/inbox/sources), the agent will:
+
+- Read the view name and error from the issue.
+- Inspect your warehouse schema and run the view's query (or its upstream tables) to pinpoint what broke.
+- Propose the corrected query and have it re-run.
+
+The view's SQL is stored in PostHog data modeling rather than your codebase, so the fix is applied there via the MCP tools. The check clears once a materialization succeeds.
+
+## Related
+
+- [Health checks overview](/docs/health-checks)
+- [Materialized views](/docs/data-warehouse/views)
+- [External data sync failures](/docs/health-checks/external-data-sync-failures)

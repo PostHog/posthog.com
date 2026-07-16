@@ -33,8 +33,8 @@ export const Handbook: React.FC = () => {
                         <div className="md:flex-1">
                             <h1>Company handbook</h1>
                             <p className="text-secondary">
-                                This handbook simply explains how we work. It is one of the most important things we've ever
-                                made.
+                                This handbook simply explains how we work. It is one of the most important things we've
+                                ever made.
                             </p>
                         </div>
                     </div>
@@ -49,7 +49,7 @@ export const Handbook: React.FC = () => {
                                             <li key={link.to} className="list-none">
                                                 <Link
                                                     to={link.to}
-                                                    className="flex justify-between baseline relative bg-bullet-light dark:bg-bullet-dark bg-repeat-x bg-center bg-[length:8px_8px] text-primary hover:text-primary dark:text-primary-dark hover:dark:text-primary-dark rounded border border-b-3 border-transparent hover:border hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all min-h-[34px] py-2"
+                                                    className="flex justify-between baseline relative bg-bullet-light dark:bg-bullet-dark bg-repeat-x bg-center bg-[length:8px_8px] text-primary hover:text-primary dark:text-primary-dark hover:dark:text-primary-dark rounded border border-b-3 border-transparent hover:border-primary hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all min-h-[34px] py-2"
                                                 >
                                                     <span className="relative inline-block pl-3 pr-2 bg-light dark:bg-dark">
                                                         {link.name}

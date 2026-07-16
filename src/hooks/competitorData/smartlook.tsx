@@ -12,6 +12,7 @@ export const smartlook = {
                 cohorts: true,
                 custom_events: true,
                 custom_properties: true,
+                conditional_recording: false,
                 insights: {
                     available: true,
                     features: {
@@ -102,6 +103,10 @@ export const smartlook = {
             available: false,
             features: {
                 issue_management: false,
+                stack_tracing: 'Mobile only', // https://www.smartlook.com/blog/introducing-crash-reports/ it has stack traces for mobile app crashes (Android/iOS) with linked session replays
+            },
+            monitoring: {
+                performance_monitoring: false,
             },
         },
         dashboards: {
@@ -138,6 +143,9 @@ export const smartlook = {
             saml_sso: true,
             two_factor_auth: true,
             user_privacy_options: true,
+        },
+        tools: {
+            ai_assistant: false,
         },
     },
     pricing: {
