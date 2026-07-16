@@ -5,18 +5,23 @@ import {
     IconArrowUpRight,
     IconBolt,
     IconCheck,
+    IconCode,
     IconCursor,
     IconDatabase,
     IconFlask,
     IconStack,
     IconGraph,
+    IconHandMoney,
     IconLaptop,
+    IconMessage,
     IconPieChart,
     IconRewindPlay,
     IconTerminal,
     IconToggle,
     IconWarning,
 } from '@posthog/icons'
+import { motion } from 'framer-motion'
+import { useInView } from 'react-intersection-observer'
 import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
 import Editor from 'components/Editor'
@@ -55,7 +60,7 @@ function Q({ text }: { text?: React.ReactNode }): JSX.Element {
 function MCPHeader(): JSX.Element {
     return (
         <header className="relative not-prose mb-8">
-            <div className="relative flex flex-col-reverse @lg:flex-row items-center px-5 pt-8 pb-12 max-w-[900px] mx-auto gap-4 @lg:gap-2">
+            <div className="relative flex flex-col-reverse @lg:flex-row items-center pt-8 max-w-[900px] mx-auto gap-4 @lg:gap-2">
                 <div className="flex-1 text-center @lg:text-left">
                     <h1 className="text-3xl @sm:text-4xl @lg:text-5xl font-bold !leading-[1.12] !mb-3 !mt-0 tracking-tight">
                         Ask questions.
@@ -114,6 +119,8 @@ function ExplainerVideo(): JSX.Element {
 }
 
 function DemoVideo(): JSX.Element {
+    const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: true })
+
     return (
         <div className="not-prose my-6">
             <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-6">
@@ -121,8 +128,15 @@ function DemoVideo(): JSX.Element {
                     schema={mcpPageInstallSchema}
                     className="relative z-20 w-full flex-[1_1_24rem] !mb-4"
                 />
-                <div className="relative h-36 @sm:h-48 min-w-0 flex-[1_1_18rem]">
-                    <HedgehogPartyHog className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-96 h-auto" />
+                <div ref={ref} className="relative h-36 @sm:h-48 min-w-0 flex-[1_1_18rem]">
+                    <motion.div
+                        className="absolute top-0 left-1/2 w-full max-w-96"
+                        initial={{ opacity: 0, y: '100%', x: '-50%' }}
+                        animate={inView ? { opacity: 1, y: 0, x: '-50%' } : { opacity: 0, y: '100%', x: '-50%' }}
+                        transition={{ delay: 0.2 }}
+                    >
+                        <HedgehogPartyHog className="pointer-events-none w-full h-auto" />
+                    </motion.div>
                 </div>
             </div>
             <div className="relative z-10 rounded-md overflow-hidden border border-primary shadow-md">
@@ -144,6 +158,8 @@ function DemoVideo(): JSX.Element {
 interface SubfeatureItem {
     title: string
     description: string
+    icon: React.ReactNode
+    color: string
 }
 
 function Subfeatures(): JSX.Element {
@@ -151,25 +167,36 @@ function Subfeatures(): JSX.Element {
         {
             title: 'Lives in your editor',
             description: 'Cursor, Claude, Codex, Zed, VS Code, PostHog Code. Wherever you already work.',
+            icon: <IconCode />,
+            color: 'blue',
         },
         {
             title: 'Speaks plain English',
             description: 'You ask the question. The MCP figures out the query and answers it.',
+            icon: <IconMessage />,
+            color: 'purple',
         },
         {
             title: 'Costs nothing to use',
             description: "It doesn't show up on your PostHog bill. Not even on the free plan.",
+            icon: <IconHandMoney />,
+            color: 'seagreen',
         },
     ]
     return (
-        <ul className="list-none p-0 my-8 grid grid-cols-1 @sm:grid-cols-3 gap-4 @lg:gap-6 not-prose">
+        <ul className="list-none p-0 my-6 grid grid-cols-1 @lg:grid-cols-3 gap-3 not-prose">
             {items.map((item) => (
                 <li
                     key={item.title}
-                    className="bg-primary dark:bg-accent-dark border border-primary rounded-md px-5 py-5 shadow-sm"
+                    className="bg-accent dark:bg-accent-dark border border-border dark:border-border-dark rounded-md p-3"
                 >
-                    <h5 className="m-0 text-center text-lg font-bold leading-tight">{item.title}</h5>
-                    <p className="mt-4 mb-0 text-base leading-relaxed">{item.description}</p>
+                    <div className="flex items-center gap-2">
+                        <span className={`inline-flex items-center justify-center rounded text-${item.color}`}>
+                            <span className="w-5 h-5">{item.icon}</span>
+                        </span>
+                        <h5 className="text-lg font-bold leading-tight">{item.title}</h5>
+                    </div>
+                    <p className="text-sm m-0">{item.description}</p>
                 </li>
             ))}
         </ul>
@@ -496,18 +523,18 @@ const complaintList: SocialCardProps[] = [
         avatarColor: 'red',
     },
     {
+        username: 'Dan',
+        handle: 'toomanymenus',
+        quote: 'The PostHog UI has, conservatively, 14,000 menus.',
+        platform: 'reddit',
+        avatarColor: 'blue',
+    },
+    {
         username: 'Sam',
         handle: 'phdrequired',
         quote: 'PostHog is great if you have 6 hours and a PhD in product analytics.',
         platform: 'twitter',
         avatarColor: 'orange',
-    },
-    {
-        username: 'Dan',
-        handle: 'dashboardregret',
-        quote: 'The PostHog UI has, conservatively, 14,000 menus.',
-        platform: 'reddit',
-        avatarColor: 'blue',
     },
     {
         username: 'Jess',
@@ -518,9 +545,11 @@ const complaintList: SocialCardProps[] = [
     },
 ]
 
-function ComplaintCard({ c }: { c: SocialCardProps }): JSX.Element {
+function ComplaintCard({ c, rotation }: { c: SocialCardProps; rotation: string }): JSX.Element {
     return (
-        <div className="h-full bg-white dark:bg-accent-dark border border-primary rounded-md p-3 flex flex-col gap-2">
+        <div
+            className={`bg-white dark:bg-accent-dark border border-primary rounded-md p-3 flex flex-col gap-2 ${rotation}`}
+        >
             <div className="flex items-center gap-2">
                 <div
                     className={`size-7 rounded-full bg-${c.avatarColor} flex items-center justify-center text-white font-bold text-xs shrink-0`}
@@ -533,10 +562,17 @@ function ComplaintCard({ c }: { c: SocialCardProps }): JSX.Element {
                         {c.platform === 'twitter' ? `@${c.handle}` : `u/${c.handle}`}
                     </p>
                 </div>
+                <span
+                    className={`ml-auto ${
+                        c.platform === 'twitter' ? 'text-base' : 'text-[10px]'
+                    } text-secondary opacity-60 uppercase tracking-wider self-start`}
+                >
+                    {c.platform === 'twitter' ? '𝕏' : 'Reddit'}
+                </span>
             </div>
             <p className="text-[13px] m-0 leading-snug flex-1">"{c.quote}"</p>
-            <div className="mt-1">
-                <span className="flex w-full items-center justify-center gap-1 bg-yellow text-primary text-[9px] font-bold uppercase px-1.5 py-0.5 rounded-sm tracking-wider">
+            <div className="flex items-center gap-1.5 mt-1">
+                <span className="inline-flex items-center gap-1 bg-yellow text-primary text-[9px] font-bold uppercase px-1.5 py-0.5 rounded-sm tracking-wider">
                     <IconCheck className="size-2.5" />
                     Should've used MCP
                 </span>
@@ -546,19 +582,10 @@ function ComplaintCard({ c }: { c: SocialCardProps }): JSX.Element {
 }
 
 function FutureNoUI(): JSX.Element {
+    const rotations = ['-rotate-1', 'rotate-1', '-rotate-[0.5deg]', 'rotate-[0.5deg]']
     return (
-        <div className="not-prose my-6 grid grid-cols-1 @lg:grid-cols-[minmax(0,1fr)_16rem] gap-6 @lg:gap-12 items-stretch">
-            <div className="prose dark:prose-invert max-w-none text-[15px] leading-relaxed flex flex-col">
-                <Q
-                    text={
-                        <>
-                            You don&apos;t need to use PostHog to{' '}
-                            <span className="bg-blue/10 dark:bg-blue/20 text-blue rounded-md px-1 whitespace-nowrap">
-                                use PostHog
-                            </span>
-                        </>
-                    }
-                />
+        <div className="not-prose my-6 grid grid-cols-1 @lg:grid-cols-[1fr,1fr] gap-6 @lg:gap-8 items-start">
+            <div className="prose dark:prose-invert max-w-none text-[15px] leading-relaxed">
                 <p>
                     PostHog has a lot of tools. We know &mdash; we built them. We also kept hearing the same thing: the
                     UI is overwhelming, and most people only use a fraction of what's actually there.
@@ -579,7 +606,7 @@ function FutureNoUI(): JSX.Element {
                     every week. We did neither, because we don&apos;t think the future has a UI at all.
                 </p>
                 <p className="font-semibold">That&apos;s where the MCP comes in.</p>
-                <div className="mt-auto bg-accent dark:bg-accent-dark border border-primary rounded-md p-4">
+                <div className="mt-5 bg-accent dark:bg-accent-dark border border-primary rounded-md p-4">
                     <p className="font-bold text-[15px] m-0 mb-1">
                         &ldquo;But I <span className="bg-green/20 text-green rounded-sm px-0.5">like</span> the PostHog
                         UI&rdquo;
@@ -590,9 +617,9 @@ function FutureNoUI(): JSX.Element {
                     </p>
                 </div>
             </div>
-            <div className="grid grid-cols-1 @sm:grid-cols-2 @lg:grid-cols-1 @lg:grid-rows-4 gap-3 self-stretch">
-                {complaintList.map((c) => (
-                    <ComplaintCard key={c.handle} c={c} />
+            <div className="grid grid-cols-1 @sm:grid-cols-2 gap-3">
+                {complaintList.map((c, idx) => (
+                    <ComplaintCard key={c.handle} c={c} rotation={rotations[idx % rotations.length]} />
                 ))}
             </div>
         </div>
@@ -605,14 +632,14 @@ function FutureNoUI(): JSX.Element {
 function MCPCTA(): JSX.Element {
     return (
         <div className="not-prose my-6 mt-12">
-            <div className="grid grid-cols-1 @md:grid-cols-[10rem,1fr] gap-5 @md:gap-6 items-center bg-accent dark:bg-accent-dark border border-primary rounded p-4 @md:ml-5">
-                <div className="relative order-2 @md:order-1 flex justify-center shrink-0 @md:self-stretch">
+            <div className="grid grid-cols-1 @lg:grid-cols-[10rem,1fr] gap-5 @lg:gap-6 items-center bg-accent dark:bg-accent-dark border border-primary rounded p-4 @lg:ml-5">
+                <div className="relative order-2 @lg:order-1 flex justify-center shrink-0 @lg:self-stretch">
                     <HedgehogBasketballCoach
                         title="PostHog basketball coach hedgehog"
-                        className="w-36 h-auto translate-y-2 scale-x-[-1] @md:absolute @md:w-52 @md:-left-10 @md:-bottom-10"
+                        className="w-36 h-auto translate-y-2 scale-x-[-1] @lg:absolute @lg:w-52 @lg:-left-10 @lg:-bottom-10"
                     />
                 </div>
-                <div className="order-1 @md:order-2">
+                <div className="order-1 @lg:order-2">
                     <p className="text-xl @sm:text-2xl font-bold m-0 mb-1">
                         Install the{' '}
                         <span className="bg-blue/10 dark:bg-blue/20 text-blue rounded-md px-1 whitespace-nowrap">
@@ -705,6 +732,16 @@ export default function MCPPage(): JSX.Element {
 
                     <Capabilities />
 
+                    <Q
+                        text={
+                            <>
+                                You don&apos;t need to use PostHog to{' '}
+                                <span className="bg-blue/10 dark:bg-blue/20 text-blue rounded-md px-1 whitespace-nowrap">
+                                    use PostHog
+                                </span>
+                            </>
+                        }
+                    />
                     <FutureNoUI />
 
                     <Q text="Where does the MCP run?" />
