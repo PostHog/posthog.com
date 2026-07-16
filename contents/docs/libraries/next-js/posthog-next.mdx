@@ -313,7 +313,7 @@ You can also limit the flags evaluated and provide properties used for evaluatio
 </PostHogProvider>
 ```
 
-Enabling `bootstrapFlags` calls `cookies()` internally, which opts the route into dynamic rendering. In the Pages Router, evaluate feature flags inside `getServerSideProps` and pass the result through `clientOptions.bootstrap` as shown in the server setup above.
+Enabling `bootstrapFlags` calls `cookies()` internally, which opts every page route rendered through that provider into dynamic rendering. If the provider is in your root layout, this includes every page in your app. To preserve static rendering elsewhere, enable `bootstrapFlags` in the narrowest layout that needs server-evaluated flags. In the Pages Router, evaluate feature flags inside `getServerSideProps` and pass the result through `clientOptions.bootstrap` as shown in the server setup above.
 
 ### Tracing headers
 
