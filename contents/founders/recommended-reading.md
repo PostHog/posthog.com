@@ -15,7 +15,7 @@ crosspost:
 
 There are thousands of books which will tell you how to build a product and launch a new startup, but it can be hard to know which are actually worth reading and which are full of generic advice (or written by AI). If you’re looking for inspiration, where should you turn?
 
-The PostHog team includes a number of voracious readers — we even have [our own book club](/handbook/people/training)! — so here’s a collection of the books our teams recommend.
+The PostHog team includes a number of voracious readers - we even have [our own book club](/handbook/people/training)! - so here’s a collection of the books our teams recommend.
 
 If you're looking for more startup advice or support, don't forget to check out [PostHog for Startups](/startups), our program for helping early-stage teams get to product market fit. Our startup program includes $50,000 in PostHog credit, exclusive events and promotional opportunities, and is available to any company less than 2 years old and with less than $5M in funding. 
 ![Ask Iwata](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tracks/ask-iwata.jpg)
@@ -35,7 +35,7 @@ Former games journalist Joe has repeatedly recommended this collection of essays
 ## [From Switzerland by Counterprint](https://www.goodreads.com/book/show/60695040-from-switzerland)
 **Recommended by [Lottie Coxon, Graphic Designer](/lottie)**
 
-Lottie claims she doesn’t read very much, but when pressed for recommendations offered up From Switzerland as a representative of the entire Counterprint collection. Each book in the series collects work from some of the best agencies, designers and artists in each country — Switzerland, in this case.
+Lottie claims she doesn’t read very much, but when pressed for recommendations offered up From Switzerland as a representative of the entire Counterprint collection. Each book in the series collects work from some of the best agencies, designers and artists in each country - Switzerland, in this case.
 
 **Lottie's take:** “This whole series is a good reset button for any designer stuck for inspiration. It has a heavy focus on typographical print case studies, with experimental use of layout, negative space and color.
 
@@ -50,9 +50,9 @@ Lottie claims she doesn’t read very much, but when pressed for recommendations
 
 James reads a lot and could likely recommend enough books to fill an article all on his own but, when we asked for recommendations for first-time founders, this was one of the first books that came to mind. It focuses on explaining how startups operate from a VC’s perspective.
 
-**James' review:** “Sand Hill Road was helpful for me when we started PostHog because we didn’t have any Silicon Valley insiders in our network. It taught me that all the returns in venture are based on just a tiny handful of companies — they simply can’t make their model work from companies that don’t totally smash it. 
+**James' review:** “Sand Hill Road was helpful for me when we started PostHog because we didn’t have any Silicon Valley insiders in our network. It taught me that all the returns in venture are based on just a tiny handful of companies - they simply can’t make their model work from companies that don’t totally smash it. 
 
-“If you’re thinking about how to finance a business, it helps to be naturally aligned with this — which we are, it turns out!”
+“If you’re thinking about how to finance a business, it helps to be naturally aligned with this - which we are, it turns out!”
 
 > **Putting it into practice:** Understanding how VCs think about startup has helped us raise funding, even when [we’ve decided to do it ahead of schedule](/blog/why-we-raised-a-15m-series-b-ahead-of-schedule)!
 
@@ -61,7 +61,7 @@ James reads a lot and could likely recommend enough books to fill an article all
 ## [The Messy Middle by Scott Belsky](https://www.goodreads.com/book/show/40179007-the-messy-middle)
 **Recommended by [Charles Cook, Operations & Marketing](/charles)**
 
-If there’s one person whose book recommendations are really worth listening to, then it’s Charles. Not only is he the leader of both our Operations and Marketing teams — he’s _also_ the founder of our internal book club.
+If there’s one person whose book recommendations are really worth listening to, then it’s Charles. Not only is he the leader of both our Operations and Marketing teams - he’s _also_ the founder of our internal book club.
 
 **Charles' review:** “I like The Messy Middle because, as the title suggests, it covers the really important interim period for startups that are starting to scale. Most startup type books cover either the very beginning when you’re [validating your idea](/newsletter/validating-product-ideas), or the later stages when you are 50+ people. This book is full of specific, actionable advice for the time in between those stages.”
 
@@ -87,14 +87,14 @@ When it came to envisioning the sort of culture he wanted to build at PostHog, n
 
 **James' review:** “No Rules Rules clarified how we should totally trust each person here. It also helped us realize just how much a smaller, stronger, and better paid group of people can accomplish... It’s just so counter to the way that other companies operate, where they focus on the whole function.”
 
-> **Putting it into practice:** We validated a lot of Netflix’s rules when [hiring our first five employees](/blog/posthog-first-five) — and we’ve rolled them into [our overall culture](/about).
+> **Putting it into practice:** We validated a lot of Netflix’s rules when [hiring our first five employees](/blog/posthog-first-five) - and we’ve rolled them into [our overall culture](/about).
 
 
 ![getting real](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tracks/getting-real.jpg)
 ## [Getting Real by Basecamp](https://basecamp.com/gettingreal)
 **Recommended by [David Newell, Software Engineer](/david)**
 
-Basecamp’s online manifesto about how they build products echoes a lot of the same principles we believe in, from the importance of iterative development to the focus on user feedback. David, who built several successful products before joining PostHog, thinks it’s a resource everyone can benefit from — not just engineers. 
+Basecamp’s online manifesto about how they build products echoes a lot of the same principles we believe in, from the importance of iterative development to the focus on user feedback. David, who built several successful products before joining PostHog, thinks it’s a resource everyone can benefit from - not just engineers. 
 
 David's review: “It very simply talks about avoiding ‘work work’. The focus on getting your product in front of customers as early as possible so that you avoid a bunch of implicit assumptions and sunk costs is particularly resonant.” 
 
@@ -122,7 +122,7 @@ James recommends it in his guide to [finding product-market fit](/blog/product-m
 
 “The Mom Test is just a classic. Honestly, I recommend it for anyone who ever has to talk to users.” 
 
-> **Putting it into practice:** Getting to product-market fit is a vital step for every startup — [including us!](/blog/product-market-fit-game)
+> **Putting it into practice:** Getting to product-market fit is a vital step for every startup - [including us!](/blog/product-market-fit-game)
 
 ![founding sales](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tracks/founding-sales.jpg)
 
@@ -144,15 +144,15 @@ The SaaS Playbook isn’t your normal startup how-to guide, according to Lior. I
 
 **Lior's review:** “It’s a very alternative guide to building a startup. While most books center around hyper growth and fundraising, the SaaS Playbook teaches you how to achieve financial independence to build a sustainable and bootstrapped business.”
 
-> **Putting it into practice:** Product launches are a perpetual activity at PostHog, so our marketing team is always working in bootstrap mode — with help from [their favourite tool](/blog/posthog-marketing).
+> **Putting it into practice:** Product launches are a perpetual activity at PostHog, so our marketing team is always working in bootstrap mode - with help from [their favourite tool](/blog/posthog-marketing).
 
 
 ## [The Innovator’s Dilemma by Clayton Christensen](https://www.goodreads.com/book/show/2615.The_Innovator_s_Dilemma)
 **Recommended by [Raquel Smith, Engineering exec](/raquel)**
 
-Raquel has done a bit of everything — customer success, growth engineering, [product engineering](/blog/why-product-engineering-is-so-fun) — and now looks after many of PostHog’s product teams. Her recommendation is the book that coined the term “disruptive innovation”, and it explains why market leaders keep losing to smaller companies with cheaper, simpler products.
+Raquel has done a bit of everything - customer success, growth engineering, [product engineering](/blog/why-product-engineering-is-so-fun) - and now looks after many of PostHog’s product teams. Her recommendation is the book that coined the term “disruptive innovation”, and it explains why market leaders keep losing to smaller companies with cheaper, simpler products.
 
-**Raquel's review:** “It explains why big companies with all the money and all the customers still lose to startups. Serving your best customers pulls you upmarket, and someone cheaper and simpler picks up everyone you left behind. Once you’ve read it, you’ll spot the pattern in every market — including ours.”
+**Raquel's review:** “It explains why big companies with all the money and all the customers still lose to startups. Serving your best customers pulls you upmarket, and someone cheaper and simpler picks up everyone you left behind. Once you’ve read it, you’ll spot the pattern in every market - including ours.”
 
 > **Putting it into practice:** It’s why we aim to [get in first](/handbook/which-products) with products for early-stage teams, and why we [keep prices low](/handbook/low-prices) as we grow.
 
@@ -164,6 +164,6 @@ Paul looks after a whole fleet of PostHog’s engineering teams, which means ple
 
 **Paul's review:** “I became an engineer because I’m pathologically lazy. Leading others by actively giving orders wasn’t going to work for me anyway... and this book helped me see that leaning into that was more effective. Delegating authority means better decisions are made and I have more time for choosing the perfect reacji.”
 
-> **Putting it into practice:** Managers at PostHog [don’t assign tasks](/handbook/company/management) — they set context, and our [small teams](/handbook/company/small-teams) decide what to do with it.
+> **Putting it into practice:** Managers at PostHog [don’t assign tasks](/handbook/company/management) - they set context, and our [small teams](/handbook/company/small-teams) decide what to do with it.
 
 <NewsletterForm />

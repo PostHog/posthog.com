@@ -302,7 +302,7 @@ export default function ProductsTest(): JSX.Element {
     return (
         <>
             <SEO
-                title="Product OS – PostHog"
+                title="Products – PostHog"
                 description="PostHog is the cracked technical co-founder that handles all the stuff you used to worry about."
                 image="/images/og/default.png"
             />

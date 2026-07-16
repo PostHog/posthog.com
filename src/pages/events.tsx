@@ -70,7 +70,7 @@ export const transformStrapiEvent = (strapiEvent: any): Event => {
     }
 }
 
-const useEvents = (): { events: Event[]; refreshEvents: () => void; deleteEvent: (eventId: number) => void } => {
+export const useEvents = (): { events: Event[]; refreshEvents: () => void; deleteEvent: (eventId: number) => void } => {
     const { getJwt } = useUser()
     const { addToast } = useToast()
     const [events, setEvents] = useState<Event[]>([])

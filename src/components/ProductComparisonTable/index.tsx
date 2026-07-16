@@ -23,6 +23,7 @@ import { chameleon } from '../../hooks/competitorData/chameleon'
 import { clarity } from '../../hooks/competitorData/clarity'
 import { clickhouse_cloud } from '../../hooks/competitorData/clickhouse_cloud'
 import { cloudflare } from '../../hooks/competitorData/cloudflare'
+import { confidentai } from '../../hooks/competitorData/confident_ai'
 import { contentsquare } from '../../hooks/competitorData/contentsquare'
 import { counter } from 'hooks/competitorData/counter'
 import { crazy_egg } from '../../hooks/competitorData/crazy_egg'
@@ -56,6 +57,7 @@ import { langsmith } from '../../hooks/competitorData/langsmith'
 import { launchdarkly } from '../../hooks/competitorData/launchdarkly'
 import { logrocket } from '../../hooks/competitorData/logrocket'
 import { lucky_orange } from '../../hooks/competitorData/lucky_orange'
+import { lunary } from '../../hooks/competitorData/lunary'
 import { mailerlite } from 'hooks/competitorData/mailerlite'
 import { matomo } from '../../hooks/competitorData/matomo'
 import { mixpanel } from '../../hooks/competitorData/mixpanel'
@@ -66,11 +68,13 @@ import { mutiny } from '../../hooks/competitorData/mutiny'
 import { newrelic } from '../../hooks/competitorData/newrelic'
 import { omnisend } from 'hooks/competitorData/omnisend'
 import { openreplay } from '../../hooks/competitorData/openreplay'
+import { opik } from '../../hooks/competitorData/opik'
 import { optimizely } from '../../hooks/competitorData/optimizely'
 import { pendo } from '../../hooks/competitorData/pendo'
 import { piwik_pro } from '../../hooks/competitorData/piwik_pro'
 import { plausible } from '../../hooks/competitorData/plausible'
 import { posthog } from '../../hooks/competitorData/posthog'
+import { portkey } from '../../hooks/competitorData/portkey'
 import { quantum_metric } from '../../hooks/competitorData/quantum_metric'
 import { raygun } from '../../hooks/competitorData/raygun'
 import { replay_io } from '../../hooks/competitorData/replay_io'
@@ -626,6 +630,7 @@ export default function ProductComparisonTable({
         clarity,
         clickhouse_cloud,
         cloudflare,
+        confidentai,
         contentsquare,
         counter,
         crazy_egg,
@@ -659,6 +664,7 @@ export default function ProductComparisonTable({
         launchdarkly,
         logrocket,
         lucky_orange,
+        lunary,
         mailerlite,
         matomo,
         mixpanel,
@@ -669,11 +675,13 @@ export default function ProductComparisonTable({
         newrelic,
         omnisend,
         openreplay,
+        opik,
         optimizely,
         pendo,
         piwik_pro,
         plausible,
         posthog,
+        portkey,
         quantum_metric,
         raygun,
         replay_io,

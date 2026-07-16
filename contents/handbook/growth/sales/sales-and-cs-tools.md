@@ -33,7 +33,6 @@ The three tools layer on top of each other: Zoom hosts the call, Gong records it
 - Metabase [US](https://metabase.prod-us.posthog.dev/) and [EU](https://metabase.prod-eu.posthog.dev/)
 - PostHog [US](https://us.posthog.com/) and [EU](https://eu.posthog.com/) instances. Login to both as this is needed for admin access
   - [PostHog App + Website](https://us.posthog.com/project/2) reference within PostHog US instance
-- [Pylon](https://usepylon.com/) - use Slack SSO
 - [QuoteHog](https://quote.posthog.net/)
 - [Salesforce](https://posthog.lightning.force.com/)
 - [Vitally](https://posthog.vitally-eu.io/) - once you've logged in once with Google ask your Team Lead to upgrade your role to Team Member
@@ -83,3 +82,6 @@ Unless otherwise indicated, you can self-serve access requests to the following 
 - <PrivateLink url='https://posthog.slack.com/archives/C09HKF565MZ'>#customer-churn</PrivateLink> - discussion of potential and actual customer churn.
 - <PrivateLink url='https://posthog.slack.com/archives/C09HKF565MZ'>#changelog</PrivateLink> - product launches.
 - <PrivateLink url='https://posthog.slack.com/archives/C0975UEGHT5'>#today-i-learned</PrivateLink> - where we share our learnings.
+- <PrivateLink url='https://posthog.slack.com/archives/C07TQR0V16U'>#ask-max</PrivateLink> - bot focused on internal processes and questions.
+- <PrivateLink url='https://posthog.slack.com/archives/C0AP5NXF8D7'>#demo-posthog-anything</PrivateLink> - show off something cool or see how others are demoing things.
+- <PrivateLink url='https://posthog.slack.com/archives/C0B5QBS29QU'>#coming-soon</PrivateLink> - see what's coming soon - a schedule of upcoming product launches.

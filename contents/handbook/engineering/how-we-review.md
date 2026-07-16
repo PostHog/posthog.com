@@ -14,7 +14,7 @@ PRs can be written by humans or by agents (like PostHog Code). See [Creating PRs
 
 Who should review depends on who wrote the code:
 
-- **Human-authored PRs** can be reviewed by a team member or by Stamphog, our AI approval agent. Stamphog runs deterministic checks first (size, file ownership, tier) and then does an LLM review for approval eligibility and suggestions. Stamphog is the only AI approval agent whose approval can satisfy the review requirement, and only for eligible human-authored PRs, so a team member can merge.
+- **Human-authored PRs** can be reviewed by a team member or by [Stamphog, our AI approval agent](/newsletter/code-review-tips#3-add-a-pr-auto-stamper). Stamphog runs deterministic checks first (size, file ownership, tier) and then does an LLM review for approval eligibility and suggestions. Stamphog is the only AI approval agent whose approval can satisfy the review requirement, and only for eligible human-authored PRs, so a team member can merge.
 - **Agent-authored PRs** always require a human review since we want at least one human in the loop. A team member must review the PR and approve it before merging.
 
 We encourage the use of AI review agents (Codex, Copilot, Greptile, etc.) on PRs. Run them when they're useful, whether before opening a PR, while iterating, or before requesting a human review, and respond to or resolve meaningful comments. Other AI review agent comments and suggestions do not count as approval, but they catch things humans miss and speed up the review process. Avoid adding more agent reviews when the PR already has automated feedback. Three agents arguing with each other is noisy, unless the extra agent has a niche focus like security.

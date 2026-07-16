@@ -4,6 +4,8 @@ description: Suggest internal links for a blog post, newsletter, or other conten
 
 # Suggest Internal Links
 
+> **Model:** Run this with Opus or higher. Matching a candidate sentence's topic to a new post's section (and judging whether an anchor phrase reads naturally) requires more nuanced language understanding than this skill's mechanical steps suggest — weaker models tend to force keyword matches that don't actually fit. If you're on Sonnet or below, tell the user to switch models before running this skill.
+
 Analyze a piece of content and suggest specific internal links based on PostHog's internal linking resource. The user will provide a file path: $ARGUMENTS
 
 ## Core constraint: link existing text only

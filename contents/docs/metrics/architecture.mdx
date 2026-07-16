@@ -1,0 +1,60 @@
+---
+title: How metrics works
+---
+
+> **Note:** Metrics is in alpha. The details on this page describe current behavior and may change before general availability.
+
+This page explains what happens to a metric between your application and a chart: how ingestion works, what a series is, how aggregations are computed, and where the data lives. You don't need any of this to use metrics, but it helps when you're deciding what to instrument or debugging why a chart looks the way it does.
+
+## Ingestion
+
+Metrics arrive over the OpenTelemetry Protocol (OTLP) via HTTP at `/i/v1/metrics`, as JSON or protobuf, authenticated with your project token. PostHog accepts the standard OTLP metrics model, so anything that can export OTLP (an OpenTelemetry SDK, a Collector, or the `posthog.metrics` API in posthog-js, which speaks OTLP under the hood) can send metrics without PostHog specific packages.
+
+Each incoming data point carries a metric name, a metric type, a value (or histogram buckets), a timestamp, resource attributes describing the sender (service name, host), and data point attributes describing the measurement (route, status). Ingestion validates the payload, applies your project's quota, and writes data points to a columnar time series store.
+
+## The series model
+
+A **series** is one stream of values identified by the combination of:
+
+- the metric name
+- the metric type (`gauge`, `sum`, `histogram`, `exponential_histogram`, or `summary`)
+- the service name
+- the full set of attribute key/value pairs
+
+Record `http.requests.total` with `route=/api/checkout` and `status=200`, then again with `status=500`, and you have two series. Group a chart by `status` and each series becomes its own line.
+
+This is why attribute cardinality matters. Ten routes times five status codes is fifty series: cheap, useful, chartable. A user ID attribute with a million values is a million series: expensive, and no chart with a million lines answers a question. Keep attributes to dimensions with a bounded set of values, and reach for [logs](/docs/logs) or [traces](/docs/distributed-tracing) when you need per user or per request detail.
+
+## Metric types and temporality
+
+Counters are where most charting mistakes happen, so PostHog handles their sharp edges for you:
+
+- **Cumulative counters** (the OpenTelemetry default) report an ever growing total since process start. The absolute value is meaningless for charting; what matters is how much it grew in each time bucket. The `rate` and `increase` aggregations compute per series differences, so a counter reported by twenty processes is twenty series diffed independently and then summed.
+- **Counter resets** happen when a process restarts and its total drops back toward zero. `rate` and `increase` detect resets the same way Prometheus does, so a restart never shows up as a huge negative spike.
+- **Delta counters** report only what happened since the last export. PostHog reads the temporality that your SDK declares and sums deltas as they are, without differencing.
+- **Histograms** arrive as bucket counts with bucket boundaries. Percentile aggregations combine the buckets across the query window and interpolate the requested quantile, which is how `p95` works without storing every raw observation.
+- **Gauges** are stored as reported and aggregate naturally with `avg`, `sum`, or percentiles.
+
+If an aggregate overflows what a float can represent, the affected time bucket is returned as an explicit null gap rather than an infinity or a silently wrong number.
+
+## Querying
+
+Queries resolve over a shared time grid. PostHog picks a bucket size automatically so a chart has roughly sixty points across the selected range, from one second buckets for short windows up to daily and weekly buckets for long ones, and you can pin the interval explicitly through the API. Every series in a response shares the same grid, which is what makes cross series math line up.
+
+Filters match attribute values with equality, negation, or regular expressions, and can target resource attributes, data point attributes, or both. Group by splits the result into one series per attribute value, keeping the largest series when there are too many to chart.
+
+Through the query API you can also combine multiple metrics with a formula, for example an error ratio computed as `errors / requests`, evaluated server side on the shared grid.
+
+## Storage and SQL access
+
+Metrics are stored in a columnar time series table and exposed to SQL as `posthog.metrics`, scoped to your project like every other PostHog table. The SQL tab in the metrics viewer is a full escape hatch: anything the chart controls can't express, you can write directly, and join against the rest of your PostHog data.
+
+## What alpha means here
+
+While metrics is in alpha, ingestion details and limits may still change, and retention policy is not final. The OTLP endpoint, the series model, and the aggregation semantics described above are the stable core the product is built on.
+
+## Next steps
+
+- [Get started with metrics](/docs/metrics/start-here)
+- [Why you need metrics](/docs/metrics/basics)
+- [Set up and send metrics](/docs/metrics)
