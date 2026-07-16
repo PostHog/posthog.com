@@ -40,7 +40,7 @@ const LOOP_SCOUTS_IMAGE: CloudinarySrc = 'https://res.cloudinary.com/dmukukwp6/i
 const LOOP_INBOX_IMAGE: CloudinarySrc =
     'https://res.cloudinary.com/dmukukwp6/image/upload/inbox_prs_cloud_f44f8ba69b.png'
 const LOOP_MERGE_IMAGE: CloudinarySrc = 'https://res.cloudinary.com/dmukukwp6/image/upload/4_merge_ffb549df4a.png'
-const sectionHeadingClassName = 'my-6 text-2xl font-bold @md/reader-content:text-3xl'
+const sectionHeadingClassName = 'my-6 mt-12 text-2xl font-bold @md/reader-content:text-3xl'
 
 const Highlight = ({ children }: { children: React.ReactNode }) => (
     <span className="bg-highlight p-0.5 font-bold text-red dark:text-yellow">{children}</span>
@@ -68,7 +68,7 @@ const FlowingGradientHighlight = ({
     palette?: keyof typeof flowingGradientClasses
 }) => (
     <em
-        className={`inline-block rounded-md bg-gradient-to-r ${flowingGradientClasses[palette]} bg-[length:200%_200%] px-1 not-italic text-[#fff] animate-gradient-rotate motion-reduce:animate-none`}
+        className={`inline bg-gradient-to-r ${flowingGradientClasses[palette]} bg-[length:200%_200%] bg-clip-text not-italic text-transparent animate-gradient-rotate motion-reduce:animate-none`}
         style={{ animationDuration: '12s' }}
     >
         {children}
@@ -764,29 +764,26 @@ export default function SelfDrivingPage(): JSX.Element {
                 <div className="relative z-10">
                     <div className="not-prose mb-8 pt-2 @lg/reader-content:pt-6 @3xl:mb-12">
                         <section className="relative mx-auto max-w-5xl overflow-hidden rounded-md border border-primary bg-primary shadow-2xl">
-                            <div className="relative z-20 grid gap-6 p-5 pb-6 @md/reader-content:p-7 @xl/reader-content:p-10 @2xl/reader-content:grid-cols-[minmax(0,1fr)_auto] @2xl/reader-content:gap-8">
-                                <div>
-                                    <h1 className="m-0 mb-5 text-3xl !leading-[1.2] @md/reader-content:text-4xl @3xl/reader-content:text-5xl">
-                                        Shift your product into <Highlight>self-driving</Highlight> mode
-                                    </h1>
-                                    <p className="m-0 text-[15px] text-secondary @xl/reader-content:text-[17px]">
-                                        <strong className="text-primary">
-                                            You have a new pull request ready for review.
-                                        </strong>{' '}
-                                        <em>(Yep, really.)</em>
-                                    </p>
-                                    <p className="mb-0 mt-6 max-w-3xl text-[15px] text-secondary @xl/reader-content:text-[17px]">
-                                        While you slept, PostHog dug through your product data, found what was worth
-                                        fixing, and had agents do the work.{' '}
-                                        <Highlight>All you need to do is hit merge.</Highlight>
-                                    </p>
-                                    <p className="mb-0 mt-6 text-sm text-secondary">
-                                        <span className="inline-block">Unlimited reports.</span>{' '}
-                                        <span className="inline-block">Priced by pull request.</span>{' '}
-                                        <span className="inline-block">3 free each month.</span>
-                                    </p>
-                                </div>
-                                <div className="flex flex-col items-start gap-3 @sm/reader-content:flex-row @sm/reader-content:items-center @2xl/reader-content:flex-col @2xl/reader-content:items-end">
+                            <div className="relative z-20 p-5 pb-6 @md/reader-content:p-7 @xl/reader-content:p-10">
+                                <h1 className="m-0 mb-5 text-3xl !leading-[1.2] @md/reader-content:text-4xl @3xl/reader-content:text-5xl">
+                                    Shift your product into <Highlight>self-driving</Highlight> mode
+                                </h1>
+                                <p className="m-0 text-[15px] text-secondary @xl/reader-content:text-[17px]">
+                                    <strong className="text-primary">
+                                        You have a new pull request ready for review.
+                                    </strong>{' '}
+                                    <em>(Yep, really.)</em>
+                                </p>
+                                <p className="mb-0 mt-6 max-w-3xl text-[15px] text-secondary @xl/reader-content:text-[17px]">
+                                    While you slept, PostHog dug through your product data, found what was worth fixing,
+                                    and had agents do the work. <Highlight>All you need to do is hit merge.</Highlight>
+                                </p>
+                                <p className="mb-0 mt-6 text-sm text-secondary">
+                                    <span className="inline-block">Unlimited reports.</span>{' '}
+                                    <span className="inline-block">Priced by pull request.</span>{' '}
+                                    <span className="inline-block">3 free each month.</span>
+                                </p>
+                                <div className="mt-6 flex flex-col items-start gap-3 @sm/reader-content:flex-row @sm/reader-content:items-center">
                                     <CallToAction to="/docs/self-driving/inbox" state={{ newWindow: true }} size="md">
                                         Learn about inbox
                                     </CallToAction>
@@ -852,7 +849,7 @@ export default function SelfDrivingPage(): JSX.Element {
                             </div>
                             <div className="col-start-1 row-start-1 flex justify-center @2xl/reader-content:col-start-2 @2xl/reader-content:justify-end">
                                 <CloudinaryImage
-                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/loop_hog_9822b11db8.png"
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/Group_144036_1_9ce78ec4c5.svg"
                                     alt="A hedgehog illustrating the self-improving product loop"
                                     imgClassName="block w-full max-w-[230px] @2xl/reader-content:max-w-[270px]"
                                 />
@@ -989,7 +986,7 @@ export default function SelfDrivingPage(): JSX.Element {
                             className="w-full !block m-0"
                             imgClassName="w-full !block"
                         />
-                        <hr className="border-t border-primary m-0 mb-6" />
+
                         <h3 className={sectionHeadingClassName}>
                             Build in public (with <Highlight>the whole team</Highlight>)
                         </h3>
@@ -1029,10 +1026,36 @@ export default function SelfDrivingPage(): JSX.Element {
                         <div className="not-prose my-6">
                             <div className="mb-4 grid grid-cols-[auto_minmax(1rem,1fr)_auto] items-center gap-2 text-xs font-semibold @sm/reader-content:gap-3 @sm/reader-content:text-sm">
                                 <span className="whitespace-nowrap text-red-2">Building with AI</span>
-                                <span className="flex min-w-0 items-center" aria-hidden>
-                                    <span className="h-0.5 min-w-4 flex-1 rounded-l-full bg-gradient-to-r from-red-2 via-purple/70 to-blue-2" />
-                                    <IconArrowRight className="-ml-1 size-5 shrink-0 text-blue-2" />
-                                </span>
+                                <svg
+                                    className="h-2.5 w-full"
+                                    viewBox="0 0 632 10"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    preserveAspectRatio="none"
+                                    aria-hidden
+                                >
+                                    <path
+                                        d="M0.75 4.91612H630.637M625.224 9.11279L630.637 4.91612L625.224 0.750034"
+                                        stroke="url(#self-driving-building-arrow-grad)"
+                                        strokeWidth="1.5"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        vectorEffect="non-scaling-stroke"
+                                    />
+                                    <defs>
+                                        <linearGradient
+                                            id="self-driving-building-arrow-grad"
+                                            x1="0%"
+                                            y1="0%"
+                                            x2="100%"
+                                            y2="0%"
+                                        >
+                                            <stop stopColor="#FF5C1C" />
+                                            <stop offset="0.504808" stopColor="#A737D2" />
+                                            <stop offset="1" stopColor="#007CF2" />
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
                                 <span className="whitespace-nowrap text-blue-2">
                                     Building <em className="italic underline underline-offset-2">with</em> AI
                                 </span>
