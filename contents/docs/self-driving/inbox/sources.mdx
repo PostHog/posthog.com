@@ -91,7 +91,9 @@ External sources pull issue context into the same inbox queue as your product si
 
 ## What happens next
 
-When a signal arrives, the inbox creates a [report](/docs/self-driving/reports) and starts research if the source is enabled. The research agent connects the signal to your codebase, checks user impact, and marks the report as **Actionable** when a code fix is possible.
+Related signals don't each become their own task. As signals arrive, the inbox deduplicates them and groups related ones, so a signal from a support conversation, a matching error-tracking issue, and a session-replay pattern collapse into a single [report](/docs/self-driving/reports) rather than three. That way you deal with one customer-facing problem, not scattered noise.
+
+Once a report exists, research starts if the source is enabled. The research agent connects it to your codebase, checks user impact, and marks the report as **Actionable** when a code fix is possible.
 
 From there, you can review the report, ask for more research, let an implementation agent open a pull request, or audit the agent log to see exactly what it read and why.
 
