@@ -131,6 +131,14 @@ All free credits associated with startup plan roll-offs are one-time only, and s
 
 For contracting purposes, these free credits should either be applied before the contract term or included in the 12 month credit amount. If they are being applied before the contract term, adjust the contract date to start 2 months later and the one-time credits can be applied to cover the 2 invoices before the contract start date. In this case, the credits do not need to be called out in the contract, and the opportunity owner can add these credits as a one time credit in billing admin.
 
+#### How to structure free credits in special terms
+
+There are two ways we structure free credits, and it's important to be clear which one applies, because they're added at different times and treated differently at contract start:
+
+1. **Fixed amount included in the 12 month term.** The free credits are part of the contract term and are added to the customer's balance alongside the purchased (prepaid) credits at contract start. Use this when a specific dollar amount of free credit is explicitly called out under Special Terms as part of the term.
+
+2. **Coverage for a specific number of months.** The free credits are *not* part of the contract term. We add enough free credits to cover the promised period (for example, up to the contract start date), top up if the customer comes up short before then, and add the prepaid credits only when the contract actually starts. Any free-credit balance still remaining at contract start is removed at that point. These credits can be added via billing admin as a one time credit and don't need to be called out as part of the term.
+
 ### Margin negative deals
 
 In exceptional circumstances, we may explore providing additional discounts which eat into our operating margin for the following cases:
