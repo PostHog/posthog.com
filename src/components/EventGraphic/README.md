@@ -1,6 +1,6 @@
 # EventGraphic
 
-A brand-templated promotional graphic for events on `/events`. It renders a square (1:1) poster in the style of PostHog's event signage and is used as the **default photo for an event whenever no photos have been uploaded** — in the events list, the event detail panel, and the live preview inside the event creation/edit form.
+A brand-templated promotional graphic for events on `/events`. It renders a square (1:1) poster in the style of PostHog's event signage and is used as the **default photo for an event whenever no photos have been uploaded** – in the events list, the event detail panel, and the live preview inside the event creation/edit form.
 
 ## Design
 
@@ -14,7 +14,7 @@ The template follows the [visual identity guidelines](/handbook/brand/visual-ide
 
 ## Sizing and export
 
-The component is sized entirely with container-query units (`cqw`), so it renders correctly at any width — from the 80px thumbnail in the events list to the form preview. Pass sizing/rounding via `className` (applied to the `@container` wrapper).
+The component is sized entirely with container-query units (`cqw`), so it renders correctly at any width – from the 80px thumbnail in the events list to the form preview. Pass sizing/rounding via `className` (applied to the `@container` wrapper).
 
 To export a 1080×1080 PNG, forward a `ref` (attached to the inner square canvas) and use `html-to-image`:
 
