@@ -1546,13 +1546,17 @@ const FAQ_ITEMS = [
         content: (
             <div className="space-y-3">
                 <p>
-                    PostHog Code is a monthly seat-based subscription. If you've participated in previous betas with
-                    PostHog, you might be surprised to hear that we are charging for this one.
+                    PostHog Code is usage-based – there's no fixed subscription. You spend AI credits as you go (100
+                    credits = $1), and credits reflect the underlying model's cost exactly, with no markup on top.
                 </p>
                 <p>
-                    Every user gets a free tier with enough credits for roughly 10 tasks. If you want to use it for
-                    meaningful engineering work (and cancel your Codex and Claude Code subscriptions in the process),
-                    the Pro plan comes with a very generous credit limit.
+                    Every organization gets a $20/month free tier to explore, plus a default $50 billing limit so you
+                    don't rack up costs by accident (customize it anytime). Simple tasks use very few credits; larger,
+                    multi-file work uses more. See the{' '}
+                    <a href="/docs/posthog-code/pricing" className="underline">
+                        pricing docs
+                    </a>{' '}
+                    for the full breakdown.
                 </p>
             </div>
         ),

@@ -235,6 +235,12 @@ const buildProductsMenuItems = (allProducts: any[]) => {
     const items: any[] = [
         {
             type: 'item',
+            label: 'PostHog Code',
+            link: '/code',
+            icon: <Icons.IconCoffee className="size-4 text-brown" />,
+        },
+        {
+            type: 'item',
             label: 'PostHog Web',
             link: '/products',
             icon: <Icons.IconBolt className="size-4 text-red" />,
@@ -259,15 +265,18 @@ const buildProductsMenuItems = (allProducts: any[]) => {
         },
         {
             type: 'item',
-            label: 'PostHog Code',
-            link: '/code',
-            icon: <Icons.IconCoffee className="size-4 text-brown" />,
-        },
-        {
-            type: 'item',
             label: 'Context Warehouse',
             link: '/data-stack',
             icon: <Icons.IconDatabase className="size-4 text-blue" />,
+        },
+        {
+            type: 'separator',
+        },
+        {
+            type: 'item',
+            label: 'PostHog Research',
+            link: '/research',
+            icon: <Icons.IconBrain className="size-4 text-purple" />,
         },
         {
             type: 'separator',

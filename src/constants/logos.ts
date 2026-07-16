@@ -66,6 +66,7 @@ export const LOGOS = {
     java: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/java.svg',
     javascript: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/js.svg',
     klaviyo: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_02_02_T12_13_09_301_Z_1c73fd1ac6.png',
+    kmp: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/kmp.svg',
     kubernetes: 'https://res.cloudinary.com/dmukukwp6/image/upload/kubernetes_svgrepo_com_b9716be409.svg',
     langgraph: 'https://res.cloudinary.com/dmukukwp6/image/upload/langgraph_e5fee77551.svg',
     linear: 'https://res.cloudinary.com/dmukukwp6/image/upload/linear_c186e02f3c.png',

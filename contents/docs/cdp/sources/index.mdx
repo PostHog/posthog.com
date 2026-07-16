@@ -142,6 +142,12 @@ Bulk enable is not available – you must enable schemas individually since each
 
 CDC (Change Data Capture) schemas support sync frequencies as low as every 1 minute. All other sync methods (Incremental, Full table, Append only) have a minimum sync frequency of 5 minutes. This restriction is enforced in both the UI and the API.
 
+### Anchor time
+
+Anchor time pins the sync schedule so runs start at a predictable time each day. This is useful for coordinating syncs with downstream jobs or reports. Anchor time only applies to sync intervals longer than one hour.
+
+The anchor time is stored in UTC. When your project timezone is something other than UTC, a toggle lets you view and set the anchor time in either UTC or your project timezone.
+
 ### Managing webhook tables
 
 Webhook-synced tables have special behavior when enabling or disabling them:

@@ -507,6 +507,22 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    '/research': {
+        size: {
+            min: {
+                width: 700,
+                height: 500,
+            },
+            max: {
+                width: 900,
+                height: 1000,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
     '/replay-vision': {
         size: {
             min: {
@@ -908,6 +924,26 @@ const appSettings: AppSettings = {
         },
         position: {
             center: true,
+        },
+    },
+    'research-talk': {
+        size: {
+            min: {
+                width: 960,
+                height: 682,
+            },
+            max: {
+                width: 960,
+                height: 682,
+            },
+            fixed: false,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+        modal: {
+            type: 'standard',
         },
     },
     '/demo': {
