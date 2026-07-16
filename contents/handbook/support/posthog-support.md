@@ -130,7 +130,7 @@ On some tickets you may see a private note from `PostHog Assistant`. This is an 
 
 **Never copy and paste these responses** — especially without checking them. AI can make mistakes, and it's your job to verify anything it says before it goes anywhere near a customer. By all means review these notes and rate them — it helps the <SmallTeam slug="conversations" /> improve them.
 
-The direction for our support team is set out in [Stop adding AI between you and your customers](/blog/future-of-support-is-human) — support at PostHog stays human.
+The direction for support at PostHog is set out in [Stop adding AI between you and your customers](/blog/future-of-support-is-human) — support at PostHog stays human.
 
 ## Private notes
 
