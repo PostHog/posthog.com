@@ -8,12 +8,16 @@ import Editor from 'components/Editor'
 import WizardCommand from 'components/WizardCommand'
 import Link from 'components/Link'
 import CloudinaryImage from 'components/CloudinaryImage'
-import { CTAs } from 'components/Home/Test'
+import { CTAs, GetStarted } from 'components/Home/Test'
+import HeroCarousel from 'components/Home/HeroCarousel'
+import { productUsageTabs } from 'components/Home/HeroCarousel/tabs'
 import Tooltip from 'components/RadixUI/Tooltip'
 import WistiaVideo, { WistiaVideoRef } from 'components/WistiaVideo'
 import TVScreen from 'components/Home/Test/TV'
 import { Accordion } from 'components/RadixUI/Accordion'
 import OSButton from 'components/OSButton'
+import { RenderInClient } from 'components/RenderInClient'
+import usePostHog from 'hooks/usePostHog'
 
 const statusDotColor: Record<string, string> = {
     beta: 'bg-yellow',
@@ -70,7 +74,7 @@ const sections = [
                 columns: [
                     ['web_analytics', 'product_analytics', 'trends'],
                     ['funnels', 'user_paths', 'lifecycle', 'heatmaps'],
-                    ['llm_traces', 'llm_generations', 'llm_evals', 'activity'],
+                    ['ai_observability', 'llm_evals', 'activity'],
                 ],
             },
             {
@@ -284,6 +288,7 @@ const ProductRow = ({ product }: { product: any }) => {
 }
 
 export default function ProductsTest(): JSX.Element {
+    const posthog = usePostHog()
     const allProducts = useProduct() as any[]
 
     const productsByHandle = useMemo(() => {
@@ -297,7 +302,7 @@ export default function ProductsTest(): JSX.Element {
     return (
         <>
             <SEO
-                title="Product OS – PostHog"
+                title="Products – PostHog"
                 description="PostHog is the cracked technical co-founder that handles all the stuff you used to worry about."
                 image="/images/og/default.png"
             />
@@ -310,16 +315,37 @@ export default function ProductsTest(): JSX.Element {
                             imgClassName="@xl:float-right @xl:!ml-4 w-60 @xl:w-48 @3xl:w-60 @xl:mt-4 @3xl:!ml-8 @3xl:!-mr-4"
                         />
                         <h1 className="text-2xl @lg:text-3xl font-bold leading-tight">
-                            Devtools and product data infrastructure for building successful products
+                            Devtools and product data infrastructure
+                            {/* Test appends "for building self-driving products"; control keeps it generic. */}
+                            <RenderInClient
+                                placeholder={null}
+                                render={() =>
+                                    posthog?.getFeatureFlag?.('self-driving-mode-test', { fresh: true }) === 'test' ? (
+                                        <>{' for building self-driving products'}</>
+                                    ) : (
+                                        <></>
+                                    )
+                                }
+                            />
                         </h1>
                         <p className="text-lg leading-relaxed">
                             Humans and AI agents build with PostHog because everything you need to collect and analyze
                             product usage data – and build and ship new features – lives in one place.
                         </p>
 
-                        <CTAs />
+                        {/* Test installs with the self-driving subcommand; control stays generic. */}
+                        <RenderInClient
+                            placeholder={<GetStarted />}
+                            render={() =>
+                                posthog?.getFeatureFlag?.('self-driving-mode-test', { fresh: true }) === 'test' ? (
+                                    <GetStarted selfDriving />
+                                ) : (
+                                    <GetStarted />
+                                )
+                            }
+                        />
 
-                        {/* 
+                        {/*
                         <div className="flex flex-wrap items-center gap-3 not-prose">
                             <Link
                                 to="/download"
@@ -352,6 +378,19 @@ export default function ProductsTest(): JSX.Element {
                         </div>
                          */}
                     </header>
+
+                    <RenderInClient
+                        placeholder={<></>}
+                        render={() =>
+                            posthog?.getFeatureFlag?.('self-driving-mode-test', { fresh: true }) === 'test' ? (
+                                <HeroCarousel tabs={productUsageTabs} />
+                            ) : (
+                                <></>
+                            )
+                        }
+                    />
+
+                    <hr />
 
                     {/* Sections */}
                     {sections.map((section) => (

@@ -22,7 +22,7 @@ Whatever the reasons, these are some of the most common complaints we hear and h
 
 **This week’s theme is:** Getting over your fear of data.
 
-> This article was first published in our newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. [Subscribe here](https://newsletter.posthog.com/subscribe).
+> This article was first published in our newsletter, [build mode](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. [Subscribe here](https://newsletter.posthog.com/subscribe).
 
 ## 1. “It’s too early for analytics”
 

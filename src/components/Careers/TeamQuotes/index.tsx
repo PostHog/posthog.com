@@ -148,7 +148,6 @@ const TeamQuotes: React.FC = () => {
                 <TeamMember name="Paul D'Ambra" />
                 <TeamMember name="Raquel Smith" />
                 <TeamMember name="Charles Cook" />
-                <TeamMember name="Cory Watilo" />
                 <TeamMember name="Ian Vanagas" />
             </Masonry>
         </section>

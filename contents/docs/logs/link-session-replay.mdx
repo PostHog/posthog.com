@@ -40,7 +40,7 @@ In your frontend code, retrieve the current session ID and send it with your API
 import posthog from 'posthog-js'
 
 // Get the current session ID
-const sessionId = posthog.getSessionId()
+const sessionId = posthog.get_session_id()
 
 // Send it with your API request
 const response = await fetch('/api/chat', {
@@ -57,7 +57,7 @@ const response = await fetch('/api/chat', {
 import { posthog } from './posthog'
 
 // Get the current session ID
-const sessionId = posthog.getSessionId()
+const sessionId = posthog.get_session_id()
 
 // Send it with your API request
 const response = await fetch('https://api.example.com/chat', {
@@ -155,6 +155,7 @@ If no session ID is found in the log entry, the tab displays a message prompting
 
 ## See also
 
+- [Link logs to a person](/docs/logs/link-person): same `posthogDistinctId` attribute, surfaced on the person profile's Logs tab.
 - [Session replay installation](/docs/session-replay/installation)
 - [Logs installation](/docs/logs/installation)
 - [Search logs](/docs/logs/search)

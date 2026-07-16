@@ -244,7 +244,7 @@ Remember to update the Subscription in the Billing Admin Portal
 
 ## YC Program
 
-This process is documented in the [YC Onboarding](/handbook/growth/sales/yc-onboarding) section of the handbook.
+This process is documented on the [YC Onboarding](/handbook/marketing/startups) page.
 
 ## PostHog for Startups
 

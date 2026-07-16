@@ -385,7 +385,7 @@ const products: Product[] = [
         colorDark: '[#C170E8]',
         Icon: IconLlmAnalytics,
         description: 'Build AI features with full visibility – both in development and production',
-        pricingKey: 'llm_analytics',
+        pricingKey: 'ai_observability',
         types: ['AI'],
         features: [
             { title: 'LLM traces', Icon: IconDecisionTree },
@@ -407,7 +407,7 @@ const products: Product[] = [
         status: 'Production',
         pricing: {
             cta: {
-                url: '/llm-analytics',
+                url: '/ai-observability',
                 text: 'Learn more',
             },
         },
@@ -438,6 +438,26 @@ const products: Product[] = [
             cta: {
                 url: '/docs/model-context-protocol',
                 text: 'Get started',
+            },
+        },
+    },
+    {
+        name: 'MCP analytics',
+        color: '[#8B0DC8]',
+        Icon: IconLlmAnalytics,
+        description: 'Product analytics for your MCP servers — see how agents use your tools.',
+        types: ['AI'],
+        features: [
+            { title: 'MCP tool usage and errors', Icon: IconLlmAnalytics },
+            { title: 'Agent intent clustering', Icon: IconDecisionTree },
+            { title: 'Latency and quality metrics', Icon: IconTrends },
+        ],
+        status: 'WIP',
+        badge: 'BETA',
+        pricing: {
+            cta: {
+                url: '/teams/mcp-analytics',
+                text: 'Learn more',
             },
         },
     },

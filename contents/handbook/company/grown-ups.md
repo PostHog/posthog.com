@@ -40,5 +40,6 @@ We care about doing what works for PostHog’s culture, rather than worrying too
 - Making PostHog’s culture the responsibility of the people or an ‘HR’ team - culture starts with the founders and executive team. Otherwise you end up with policies and actual behavior starting to diverge.
 - Advertise on external job boards. We used to do this (and get 1000s more applications), but found we virtually never hired anyone who didn’t apply directly to posthog.com or through referrals.
 - We don’t [avoid doing business](/handbook/growth/sales/who-we-do-business-with) with certain customers except under very strictly defined exceptional circumstances. We allow the government to determine what is acceptable instead of getting into discussions about who we should deal with for each of our 100,000+ customers.
+- Tell grown-ups how to behave. We expect kindness and we expect direct feedback when something lands badly. Beyond that, judgment beats rules. Overly codifying conduct in the handbook substitutes rule-following for judgment and turns optional guidance into de facto policy. Stuff between people is handled between people. If not, we have a [greivance process](https://posthog.com/handbook/people/grievances#grievance-process)
 
 Are you a potential candidate reading this? Excited to join a grown up company? [Get in touch!](/careers)

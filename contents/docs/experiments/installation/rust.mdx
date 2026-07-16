@@ -30,7 +30,7 @@ For this tutorial, let's report a conversion event when a user clicks a CTA. In 
 use posthog_rs::Event;
 
 let event = Event::new("cta clicked", "user_distinct_id");
-client.capture(event).await.unwrap();
+client.capture(event);
 ```
 
 </Step>

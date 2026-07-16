@@ -42,7 +42,7 @@ Sales at PostHog isn't like most other software companies! These are some of the
 
  - Ask team members in your region to be invited to some customer calls so you can gain an understanding of how we work with customers.
  - Check out some Buildbetter calls and add yourself to a bunch of Slack channels - get immersed in what our customers are saying.
- - Learn and practise a [demo](https://youtu.be/2jQco8hEvTI) of PostHog.
+ - Learn and practise a [demo](https://youtu.be/1FZji2L-LmM) of PostHog.
  - Read all of the Sales section in the Handbook, and update it as you learn more.
  - Meet with [Ben](/community/profiles/30205), the lead responsible for Sales, CS, and Onboarding.
  - Meet with [Simon](/community/profiles/28895), Sales Lead
@@ -109,7 +109,7 @@ By the end of month 3:
 
  - Ask team members in your region to be invited to some customer calls so you can gain an understanding of how we work with customers.
  - Check out some Buildbetter calls and add yourself to a bunch of Slack channels - get immersed in what our customers are saying.
- - Learn and practise a [demo](https://youtu.be/2jQco8hEvTI) of PostHog.
+ - Learn and practise a [demo](https://youtu.be/1FZji2L-LmM) of PostHog.
  - Read all of the Sales section in the Handbook, and update it as you learn more.
  - Meet with [Ben](/community/profiles/30205), the lead responsible for Sales, CS, and Onboarding.
  - Meet with [Simon](/community/profiles/28895), Sales Lead
@@ -200,6 +200,7 @@ Your first three months of commission are paid at 100% fixed OTE. This will be c
 ### Can I login as a customer?
 
 - Visit the /admin/ endpoint on the cloud they are on.  You can then search for them via email and log in.  Be careful clicking around here as you can accidentally delete a person/organization! You need to get their permission first unless it's an emergency, i.e. to resolve an incident.
+- If you need to connect the PostHog MCP server while logged in as them, follow the [MCP impersonation steps](/handbook/cs-and-onboarding/handling-customer-issues#using-the-mcp-server-while-impersonating). See our [impersonation policy](/handbook/company/security#impersonating-users) for the thorough version.
 
 ### Are there any influential folks in our space I should read/listen to?
 

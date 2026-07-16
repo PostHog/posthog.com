@@ -12,37 +12,34 @@ If you need help with the website, go to `#posthogdotcom`.
 
 We generally only have product marketers on teams that _already_ have a product manager. Products without a product manager a) are usually too early for marketing to get involved, and b) distract engineers as they need to spend time briefing the product marketer, vs. shipping more stuff. [Product managers](/handbook/product/product-manager-role) help teams figure out what to build and how much to charge for it, product marketers then help you get as many users as possible. 
 
-| Product | PM | PMM | Blitzscale |
-|---|---|---|---|
-| *Error Tracking* | Cory S | Sara | Paul D'A |
-| *Logs* | Abe | Sara | Ben W |
-| *Workflows* | Abe | Sara | Ben W |
-| *Endpoints* | Anna | Lizzie | Raquel |
-| *Data stack (all teams)* | Anna | Lizzie | Raquel |
-| *PostHog AI* | Annika | Cleo | James H |
-| *PostHog Code* | Annika | Cleo | James H |
-| *Replay* | Cory S | Sara* | Paul D'A |
-| *Surveys* | Cory S | | Surveys |
-| *LLM Analytics* | Marco (new) | To be hired | James H |
-| *LLM Gateway* | Marco (new) | | Ben W |
-| *Product Analytics* | Mike W | To be hired | Paul D'A |
-| *Web Analytics* | Mike W | To be hired | Paul D'A |
-| *Conversations* | | Too early | James H |
-| *Platform features* | | To be hired (sales-focused PMM) | Raquel |
-| *Experiments* | Ruby | | Raquel |
-| *Feature Flags* | Ruby | | Ben W |
-| *MCP* | | Joe** | |
-| *Integrations* | | Joe** | |
+We only add a dedicated product marketer when it becomes painful not to have one. Until then, the existing team supports newer products on the side, so we don't hire ahead of need or bloat the team. Ongoing marketing for a tool beyond its initial launch is covered by the individual PMM in the context of their product – e.g. Joe covers how you can create Experiments using the PostHog MCP.
 
-*AI summaries specifically
-**Not a 'product' team at PostHog, but we think they're worth specific marketing focus
+| Product             | PM     | PMM    | Blitzscale |
+| ------------------- | ------ | ------ | ---------- |
+| *Context warehouse* | Anna   | Lizzie | Raquel     |
+| *PostHog Desktop*   | Annika | Cleo   | Raquel    |
+| *PostHog Slack*     | Annika | Cleo → new hire | Raquel    |
+| *PostHog Web*       | Annika | Sara   | Raquel    |
+| *PostHog Research*  | n/a    | Joe    | James H    |
+| *PostHog MCP*       | n/a    | Joe    | Raquel      |
+| *PostHog CLI*       | Unassigned | Unassigned | Raquel |
+| *AI Gateway*        | Marco  | n/a    | Ben W      |
+| *Agents*            | n/a    | Danilo | Ben W      |
 
-Even if a product already has a product manager, a team is only ready for a product marketer when a proper launch needs preparing for, usually beta or GA. Before that, product teams are responsible for launching their own products, but can ask for help with ad hoc things - see below. It is also fine for a product to have a product manager but not product marketer - we generally focus on heavily investing in 2-3 product areas at a time, so we can do a good job at a handful of things, instead of an average job at many. 
+**Cross-functional areas**
+
+These are some other areas that PMMs own outside of specific products. 
+
+- **Research** – Joe
+- **Incident comms** – distributed, ask in `#team-marketing` if you need help
+- **Lifecycle (i.e. email) & aligning with eng** – Joe
+- **Initial small launches for new tools** – Joe
+- **Startups & partnerships** – Joe
 
 <details>
 <summary>I need a product marketer, but my team hasn't been assigned one</summary>
 
-Just ask in #group-marketing-and-content in Slack and tag the team lead. 
+Just ask in #team-marketing in Slack and tag <TeamMember name="Joe Martin" photo />. 
 </details>
 
 
@@ -61,9 +58,9 @@ Speak to <SmallTeam slug="marketing" /> and read about [product launches](/handb
 <details>
 <summary>I need help with documentation</summary>
 
-Your main contact is the <SmallTeam slug="docs-wizard" />, but please read the [docs ownership handbook](/handbook/docs-and-wizard/docs-ownership) to understand how best to work with them. 
+Your main contact is the <SmallTeam slug="wizard-and-docs" />, but please read the [docs ownership handbook](/handbook/wizard-and-docs/docs-ownership) to understand how best to work with them. 
 
-If you just need someone to review something, tag `Team Docs & Wizard` in GitHub.
+If you just need someone to review something, tag `Team Wizard & Docs` in GitHub.
 </details>
 
 <details>
@@ -137,5 +134,5 @@ See [Logos, brand, hedgehogs](/handbook/company/brand-assets)
 <details>
 <summary>A journalist has contacted me</summary>
 
-Direct them to press@posthog.com, where one of Joe, James, Charles, or Tim can respond. They're the only people who should speak to press. See: [Press & PR](/handbook/brand/press)
+Direct them to press@posthog.com, where one of Joe, James, Charles, or Tim can respond. They're the only people who should speak to press. See: [Press & PR](/handbook/marketing/press)
 </details>
