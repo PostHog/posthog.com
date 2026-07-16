@@ -128,6 +128,35 @@ import FlutterFeatureFlagsCode from '../../integrate/feature-flags-code/_snippet
 
 <FlutterFeatureFlagsCode />
 
+### Bootstrapping flags
+
+import BootstrappingIntro from "../../feature-flags/snippets/bootstrapping-intro.mdx"
+import MobileBootstrapBehavior from "../../feature-flags/snippets/mobile-bootstrap-behavior.mdx"
+
+<BootstrappingIntro />
+
+Set `config.bootstrap` before calling `setup()` to seed identity and flag values before the first `/flags` response (requires the Flutter SDK `5.31.0`+):
+
+```dart
+final config = PostHogConfig('<ph_project_token>');
+config.host = '<ph_client_api_host>';
+config.bootstrap = PostHogBootstrapConfig(
+  distinctId: 'distinct_id_of_your_user',
+  isIdentifiedId: true,
+  featureFlags: {
+    'flag-1': true,
+    'variant-flag': 'control',
+  },
+);
+await Posthog().setup(config);
+```
+
+The values are forwarded to the native iOS and Android SDKs:
+
+<MobileBootstrapBehavior />
+
+On Flutter web, `bootstrap` is not applied, so configure it in your `posthog.init({...})` snippet instead. See the [bootstrapping guide](/docs/feature-flags/bootstrapping) for the cross-SDK overview.
+
 ### Setting properties for flag evaluation
 
 If a flag targets person or group properties, you can send those properties inline with the next flag evaluation request instead of waiting for a `$set` event to be ingested. This avoids the race where a flag returns a stale value right after you set a property.

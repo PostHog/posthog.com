@@ -226,6 +226,13 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       title: String
       number: Int
     }
+    type ResearchMergedPr implements Node {
+      title: String
+      url: String
+      repo: String
+      author: String
+      mergedAt: String
+    }
     type SelfDrivingPullRequest implements Node {
       prNumber: Int
       title: String
@@ -233,6 +240,8 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       type: String
       scope: String
       url: String
+      state: String
+      openedAt: Date @dateformat
       mergedAt: Date @dateformat
     }
     type PostTagAttributes {

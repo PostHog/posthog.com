@@ -117,6 +117,26 @@ POSTHOG_INCLUDE_SOURCE=1 ${PODS_ROOT}/PostHog/build-tools/upload-symbols.sh
 
 </Step>
 
+<Step title="Optional: Skip conflicting uploads" badge="optional">
+
+If PostHog already has a dSYM with the same UUID but different content, the upload fails with `content_hash_mismatch` and stops your build. To skip these conflicting uploads and keep the existing symbols instead, set the `POSTHOG_SKIP_ON_CONFLICT` environment variable when calling the upload script:
+
+<MultiLanguage>
+
+```bash file=Swift Package Manager
+POSTHOG_SKIP_ON_CONFLICT=1 ${BUILD_DIR%/Build/*}/SourcePackages/checkouts/posthog-ios/build-tools/upload-symbols.sh
+```
+
+```bash file=CocoaPods
+POSTHOG_SKIP_ON_CONFLICT=1 ${PODS_ROOT}/PostHog/build-tools/upload-symbols.sh
+```
+
+</MultiLanguage>
+
+Requires posthog-ios 3.64.7 or later and posthog-cli 0.7.12 or later.
+
+</Step>
+
 <Step title="Build and verify" badge="required">
 
 Build your app in Xcode. The dSYM upload script will automatically run and upload symbols to PostHog.

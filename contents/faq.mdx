@@ -8,13 +8,15 @@ showTitle: true
 
 ### What is PostHog?
 
-PostHog is an all-in-one developer platform for building successful products. We provide [product analytics](/product-analytics), [web analytics](/web-analytics), [session replay](/session-replay), [error tracking](/error-tracking), [feature flags](/feature-flags), [experiments](/experiments), [surveys](/surveys), [LLM observability](/llm-analytics), [data warehouse](/data-stack), [CDP](/cdp), [workflows](/workflows), [logs](/logs), and an [AI product assistant](/ai) to help debug your code, ship features faster, and keep all your usage and customer data in one stack.
+PostHog is the leading platform for building self-driving products. With a full suite of developer tools – [AI observability](/ai-observability), [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [logs](/logs), [surveys](/surveys), and more – PostHog captures all the context agents need to diagnose problems, uncover opportunities, and ship fixes. 
+
+A [data warehouse](/data-stack) and [CDP](/cdp) tie it all together, unifying that context into one source agents can read across. You can steer it all from [Slack](/slack), [the web app](/ai), the desktop ([PostHog Code](/code)), or your own editor via [the MCP](/mcp).
 
 PostHog is free to start with a [generous free tier](/pricing) and fully self-serve. Engineers can sign up and capture their first event in under five minutes.
 
 ### What does PostHog do?
 
-PostHog helps developers understand how users use their product, figure out ways to improve it, and ship new features faster. It does this through features like:
+PostHog helps developers understand how users use their product, figure out ways to improve it, and ship fixes and features faster – increasingly without being asked. It does this through tools like:
 
 - Anonymous and identified [event capture](/docs/data/events), supports both [autocapture](/docs/product-analytics/autocapture) and custom events
 - [Frontend, backend, and mobile SDKs](/docs/libraries)
@@ -29,24 +31,42 @@ PostHog helps developers understand how users use their product, figure out ways
 - [Error tracking](/docs/error-tracking) to capture and debug exceptions with full stack traces and session context
 - [Logs](/docs/logs) to ingest, search, and analyze log data alongside your product data
 - [Workflows](/docs/workflows) to automate actions based on events, like sending messages to your users
-- [LLM observability](/docs/ai-observability) to monitor, debug, and optimize AI features with trace inspection and cost tracking
+- [AI observability](/docs/ai-observability) to monitor, debug, and optimize AI features with trace inspection and cost tracking
+- [Self-driving mode](/docs/self-driving) to turn signals in your product data (errors, rage clicks, failed queries, and more) into researched reports and pull requests you review and merge
 - A [data warehouse](/docs/data-warehouse) to import and query data from external sources alongside PostHog
 - [Batch exports](/docs/cdp/batch-exports) to popular warehouse destinations
 - Combine events into actions, anonymous and identified users, cohorts, and groups for analysis
 
-TLDR; All the tools you need to build a successful product.
+You can work with all of it through four products: the [Slack app](/slack) (mention @PostHog in any channel), the [web app](/ai), [PostHog Code](/code) (a desktop app for driving parallel agents on top of your product data), and [the MCP](/mcp), which brings PostHog into Claude Code, Cursor, or whatever agent you already use.
+
+TLDR; It provides everything you need to build a self-driving product.
+
+### What is a self-driving product?
+
+A self-driving product can prompt itself. Instead of an engineer spotting a problem on a dashboard, filing a ticket, and writing a fix days later, the product's own data kicks off the work.
+
+It runs on a loop: signals from your product data get grouped into reports, a background agent researches the problem and writes the code, and a pull request lands in your inbox. You review and merge – nothing ships on autopilot. 
+
+Once a change ships, PostHog measures whether the metric actually moved, and the result feeds back in as a new signal. That feedback is what makes it a loop rather than a one-shot – each pass works from better data than the last.
+
+The "self" in self-driving isn't autonomy from the engineer. It's autonomy from user instruction as the starting point. Self-driving handles the maintenance work (bug fixes, broken flows, paper cuts, conversion tweaks) so you can spend your time on the creative work only you can do.
+
+This works because the signals that drive the loop live in your product data, and that's exactly what PostHog has. A general-purpose coding agent has your code, but not your context. 
+
+See the [self-driving docs](/docs/self-driving) for how it works under the hood.
 
 ### How much does PostHog cost?
 
 PostHog offers a generous free tier with no credit card required:
 
+- **Self-driving**: reports are free, and your first 3 pull requests each month are free ($15 per PR after that, refunded if it wasn't worth paying for)
 - **Product Analytics and Web Analytics**: 1 million events/month
 - **Session Replay**: 5,000 recordings/month
 - **Feature Flags**: 1 million requests/month
 - **Surveys**: 1,500 responses/month
 - **Data warehouse**: 1 million synced rows/month + free historical syncs for the first 7 days for each new source
 - **Error tracking**: 100 thousand exceptions/month
-- **LLM observability**: 100 thousand events/month
+- **AI observability**: 100 thousand events/month
 - **Logs**: 50GB ingested/month
 - **Workflows**: 10,000 messages per channel/month
 - **PostHog AI**: 500 credits/month
@@ -57,13 +77,14 @@ See [our pricing page](/pricing) for more details.
 
 ### Does PostHog work with my stack?
 
-Yes. PostHog can be in a range of languages and frameworks across web, backend, and mobile. You can use it through:
+Yes. PostHog can be used in a range of languages and frameworks across web, backend, and mobile. You can use it through:
 
+- [The MCP](/mcp), which works with Claude Code, Cursor, and any MCP-compatible agent
 - An [HTML snippet](/docs/libraries/js) that goes inside your `<head>` tags.
 - One of our [15+ libraries](/docs/libraries) covering the main programming languages and frameworks
 - Our [API](/docs/api)
 
-This means that it doesn't matter what your stack is - you can use PostHog with it.
+This means that it doesn't matter what your stack is – you can use PostHog with it.
 
 ### Does PostHog support mobile apps? 
 
@@ -85,13 +106,18 @@ Find out more on [the pricing page](/pricing) or [get in touch](/talk-to-a-human
 
 PostHog stands apart in several key ways:
 
-- **All-in-one platform** – Instead of stitching together separate tools for analytics, session replay, feature flags, and experimentation, PostHog provides everything in one place. This means shared data, no integration headaches, and lower total cost.
-- **Built for engineers** – PostHog is designed with developers in mind. It offers SDKs in every major language, a powerful API, SQL access to raw data, and transparent documentation. Engineers can self-serve without waiting on analytics teams.
-- **Open source** – PostHog's core is open source with thousands of GitHub stars. This means transparency into how the product works, the ability to contribute, and community-driven development.
+- **Self-driving** – Other tools stop at showing you a dashboard. PostHog closes the loop: it uses your product data to find problems, ship fixes as pull requests, and measure whether they worked. No other platform runs this loop end to end because no other platform holds all the context agents need like PostHog does.
+- **All-in-one platform** – Instead of stitching together separate tools for analytics, session replay, feature flags, and experimentation, PostHog provides everything in one place. This means shared data, no integration headaches, and lower total cost – for you and your agents.
+- **Built for AI engineers** – PostHog is designed with developers in mind. It offers SDKs in every major language, a powerful API, SQL access to raw data, and transparent documentation. Engineers can self-serve without waiting on analytics teams – and so can their agents, via the MCP.
+- **Open source** – PostHog's core is open source with thousands of GitHub stars. This meanstransparency into how the product works, the ability to contribute, and community-driven development.
 - **Privacy-conscious** – PostHog offers EU-based hosting for organizations with data residency requirements, ensuring data never leaves European servers. The platform supports a fully cookieless tracking mode, eliminating the need for cookie consent banners while still capturing accurate analytics. Even in standard mode, PostHog doesn't rely on third-party cookies and offers more complete data compared to tools like Google Analytics.
 - **Transparent pricing** – No hidden fees, no sales calls required, no per-seat charges. Pricing is public and usage-based.
 
 There are many specific differences. Check out our blog for [comparisons](/posts). 
+
+### Can I use PostHog with Claude Code or Cursor?
+
+Yes. The [PostHog MCP](/mcp) brings your product data and tools into Claude Code, Cursor, and any other MCP-compatible agent. Your agent can query analytics, debug errors, build dashboards, measure the impact of changes without you leaving your editor, and a lot more.
 
 ### Are you hiring?
 
@@ -101,7 +127,7 @@ Yes, come help us make PostHog even better. We would love to have you [join us](
 
 ### Is PostHog updated regularly?
 
-Yes. We release continually and have a world-class team working daily on making the product better.
+Yes. We release continually and have a world-class team working daily on making the product better. Some of those pull requests are opened by PostHog itself – we run the [self-driving loop](/docs/self-driving) on our own product.
 
 Check out our [changelog](/changelog) to see what's new.
 
