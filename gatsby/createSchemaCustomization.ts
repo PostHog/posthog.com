@@ -143,6 +143,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       stage: String,
       documentationUrl: String,
       flagKey: String,
+      featureId: String,
       payload: JSON,
     }
     type Plugin implements Node {

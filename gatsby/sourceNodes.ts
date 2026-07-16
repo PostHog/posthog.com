@@ -1265,6 +1265,9 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                         stage: feature.stage,
                         documentationUrl: feature.documentationUrl,
                         flagKey: feature.flagKey,
+                        // The EAF id is a UUIDv7; the roadmap derives a "created" date from it
+                        // (see useEarlyAccessFeatures) to flag/sort recently added features.
+                        featureId: feature.id,
                         payload,
                     })
                 })

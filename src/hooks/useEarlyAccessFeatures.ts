@@ -10,6 +10,8 @@ export interface EarlyAccessFeature {
     stage: EarlyAccessFeatureStage
     documentationUrl: string
     flagKey: string
+    /** Epoch ms the feature was created, derived from its UUIDv7 id. Undefined if unavailable. */
+    createdAt?: number
     /**
      * Arbitrary JSON set on the Early Access Feature in PostHog and served by the public
      * EAF endpoint. For Coming Soon items this carries the linked waitlist survey:
@@ -17,6 +19,25 @@ export interface EarlyAccessFeature {
      * passes it through at runtime — see PostHog/posthog-js#2642.)
      */
     payload?: Record<string, any>
+}
+
+/**
+ * Early Access Feature ids are UUIDv7, whose first 48 bits are the creation time in epoch ms.
+ * The public EAF endpoint exposes no explicit timestamp, so we derive one from the id to flag
+ * and sort recently added features. Returns undefined for anything that isn't a plausible
+ * UUIDv7 (guarding against non-v7 ids that would decode to a nonsensical date).
+ */
+const createdAtFromId = (id?: string): number | undefined => {
+    if (!id) {
+        return undefined
+    }
+    const hex = id.replace(/-/g, '').slice(0, 12)
+    if (hex.length < 12) {
+        return undefined
+    }
+    const ms = parseInt(hex, 16)
+    // Sanity window: after 2020-01-01 and not in the far future.
+    return Number.isFinite(ms) && ms > 1577836800000 && ms < 4102444800000 ? ms : undefined
 }
 
 export interface GroupedEarlyAccessFeatures {
@@ -73,12 +94,18 @@ export function useEarlyAccessFeatures(options: UseEarlyAccessFeaturesOptions = 
                     stage
                     documentationUrl
                     flagKey
+                    featureId
                     payload
                 }
             }
         }
     `)
-    const staticFeatures: EarlyAccessFeature[] = staticData?.allEarlyAccessFeature?.nodes || []
+    const staticFeatures: EarlyAccessFeature[] = (staticData?.allEarlyAccessFeature?.nodes || []).map(
+        (node: EarlyAccessFeature & { featureId?: string }) => ({
+            ...node,
+            createdAt: createdAtFromId(node.featureId),
+        })
+    )
 
     const [features, setFeatures] = useState<EarlyAccessFeature[]>(staticFeatures)
     const [loading, setLoading] = useState(staticFeatures.length === 0)
@@ -105,8 +132,11 @@ export function useEarlyAccessFeatures(options: UseEarlyAccessFeaturesOptions = 
                 setFeatures(features)
                 setLoading(false)
             }
+            // The public EAF result carries a UUIDv7 `id` at runtime; derive createdAt from it.
+            const withCreatedAt = (features: EarlyAccessFeature[]): EarlyAccessFeature[] =>
+                features.map((feature) => ({ ...feature, createdAt: createdAtFromId((feature as { id?: string }).id) }))
             if (typeof posthog.getSurveys !== 'function') {
-                finish(result)
+                finish(withCreatedAt(result))
                 return
             }
             posthog.getSurveys((surveys: any[]) => {
@@ -122,7 +152,7 @@ export function useEarlyAccessFeatures(options: UseEarlyAccessFeaturesOptions = 
                         })
                 }
                 finish(
-                    result.map((feature) => ({
+                    withCreatedAt(result).map((feature) => ({
                         ...feature,
                         payload: { ...waitlistSurveyByFlagKey[feature.flagKey], ...(feature.payload || {}) },
                     }))
