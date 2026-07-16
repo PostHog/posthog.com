@@ -223,14 +223,13 @@ await Posthog().setup(config);
 
 ## Behavior on mobile SDKs
 
-The iOS, Android, and Flutter SDKs persist identity and flags on the device, so bootstrapping behaves slightly differently than on the web. Assign `config.bootstrap = PostHogBootstrapConfig(...)` before calling `setup()`. Bootstrapping requires iOS SDK `3.66.0`+, Android SDK `3.55.0`+, or Flutter SDK `5.31.0`+.
+The iOS, Android, and Flutter SDKs bootstrap through `PostHogBootstrapConfig` and persist identity and flags on the device, so bootstrapping behaves slightly differently than on the web. Assign `config.bootstrap = PostHogBootstrapConfig(...)` before calling `setup()`. Bootstrapping requires iOS SDK `3.66.0`+, Android SDK `3.55.0`+, or Flutter SDK `5.31.0`+.
 
-- **Bootstrapped identity applies to the first session.** Setting it before `setup()` means events captured synchronously during initialization (like `Application Installed`) carry your distinct ID instead of the SDK-generated UUID.
-  - An **anonymous** bootstrap (`isIdentifiedId: false`, the default) seeds the anonymous ID only when none is persisted yet. Once an anonymous ID exists on disk, or the user has been identified, it is ignored.
-  - An **identified** bootstrap (`isIdentifiedId: true`) is for a user you've already identified outside the SDK (for example, from a backend session token). On a fresh install it seeds the distinct ID and marks the user identified. On a returning install where an anonymous user already exists, it merges that user into the identified ID via `identify()`, which emits a `$identify` event during `setup()`. A *different*, already-identified user is left untouched. The identified ID never becomes the device ID.
-- **Bootstrapped flags are served until the first `/flags` response, then replaced.** A complete `/flags` response takes over entirely, so bootstrapped-only keys don't persist past it. Only *enabled* flags are seeded: a `true` boolean or a non-empty variant string. A `false` or empty value is dropped, matching posthog-js. Seed payloads with the separate `featureFlagPayloads` option. Flag values and payloads must be JSON-serializable, or they're dropped. Bootstrapped flags are cleared on `reset()`.
+> **React Native** is also a mobile SDK, but it uses the posthog-js-style `bootstrap` option shown in the examples above (not `PostHogBootstrapConfig`) and follows the [standard behavior](#bootstrapping-with-a-distinct-id).
 
-The feature-flags-loaded signal fires as soon as bootstrapped flags are applied, so startup logic can read them immediately — via `config.onFeatureFlags` on Android, or the `PostHogDidReceiveFeatureFlags` notification on iOS. Mobile SDKs don't support the `sessionID` bootstrap option.
+import MobileBootstrapBehavior from "./snippets/mobile-bootstrap-behavior.mdx"
+
+<MobileBootstrapBehavior />
 
 > **Flutter web:** `bootstrap` is not applied on Flutter web because the web SDK hooks onto an already-initialized `posthog-js` instance. Configure `bootstrap` in your `posthog.init({...})` call instead.
 

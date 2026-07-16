@@ -257,10 +257,11 @@ import AndroidFeatureFlagsCode from '../../integrate/feature-flags-code/_snippet
 ### Bootstrapping flags
 
 import BootstrappingIntro from "../../feature-flags/snippets/bootstrapping-intro.mdx"
+import MobileBootstrapBehavior from "../../feature-flags/snippets/mobile-bootstrap-behavior.mdx"
 
 <BootstrappingIntro />
 
-Set `config.bootstrap` before calling `setup()` to seed identity and flag values before the first `/flags` response:
+Set `config.bootstrap` before calling `setup()` to seed identity and flag values before the first `/flags` response (requires Android SDK `3.55.0`+):
 
 ```kotlin
 import com.posthog.PostHogBootstrapConfig
@@ -277,7 +278,9 @@ config.bootstrap = PostHogBootstrapConfig(
 PostHogAndroid.setup(this, config)
 ```
 
-Bootstrapped identity seeds the first launch only. Only enabled flags are served (a `true` or a non-empty variant), and the first `/flags` response replaces them. For details, see the [bootstrapping guide](/docs/feature-flags/bootstrapping#behavior-on-mobile-sdks).
+<MobileBootstrapBehavior />
+
+See the [bootstrapping guide](/docs/feature-flags/bootstrapping) for the cross-SDK overview.
 
 ## Experiments (A/B tests)
 

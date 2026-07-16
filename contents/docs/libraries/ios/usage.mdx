@@ -152,10 +152,11 @@ import IOSFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/fe
 ### Bootstrapping flags
 
 import BootstrappingIntro from "../../feature-flags/snippets/bootstrapping-intro.mdx"
+import MobileBootstrapBehavior from "../../feature-flags/snippets/mobile-bootstrap-behavior.mdx"
 
 <BootstrappingIntro />
 
-Set `config.bootstrap` before calling `setup()` to seed identity and flag values before the first `/flags` response:
+Set `config.bootstrap` before calling `setup()` to seed identity and flag values before the first `/flags` response (requires iOS SDK `3.66.0`+):
 
 ```swift
 let config = PostHogConfig(projectToken: "<ph_project_token>", host: "<ph_client_api_host>")
@@ -171,7 +172,9 @@ config.bootstrap = PostHogBootstrapConfig(
 PostHogSDK.shared.setup(config)
 ```
 
-Bootstrapped identity seeds the first launch only. Only enabled flags are served (a `true` or a non-empty variant), and the first `/flags` response replaces them. For details, see the [bootstrapping guide](/docs/feature-flags/bootstrapping#behavior-on-mobile-sdks).
+<MobileBootstrapBehavior />
+
+See the [bootstrapping guide](/docs/feature-flags/bootstrapping) for the cross-SDK overview.
 
 ## Experiments (A/B tests)
 

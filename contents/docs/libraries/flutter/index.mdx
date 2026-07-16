@@ -131,10 +131,11 @@ import FlutterFeatureFlagsCode from '../../integrate/feature-flags-code/_snippet
 ### Bootstrapping flags
 
 import BootstrappingIntro from "../../feature-flags/snippets/bootstrapping-intro.mdx"
+import MobileBootstrapBehavior from "../../feature-flags/snippets/mobile-bootstrap-behavior.mdx"
 
 <BootstrappingIntro />
 
-Set `config.bootstrap` before calling `setup()` to seed identity and flag values before the first `/flags` response:
+Set `config.bootstrap` before calling `setup()` to seed identity and flag values before the first `/flags` response (requires the Flutter SDK `5.31.0`+):
 
 ```dart
 final config = PostHogConfig('<ph_project_token>');
@@ -150,7 +151,11 @@ config.bootstrap = PostHogBootstrapConfig(
 await Posthog().setup(config);
 ```
 
-The values are forwarded to the native iOS and Android SDKs: bootstrapped identity seeds the first launch only, only enabled flags are served (a `true` or a non-empty variant), and the first `/flags` response replaces them. On Flutter web, `bootstrap` is not applied, so configure it in your `posthog.init({...})` snippet instead. For details, see the [bootstrapping guide](/docs/feature-flags/bootstrapping#behavior-on-mobile-sdks).
+The values are forwarded to the native iOS and Android SDKs:
+
+<MobileBootstrapBehavior />
+
+On Flutter web, `bootstrap` is not applied, so configure it in your `posthog.init({...})` snippet instead. See the [bootstrapping guide](/docs/feature-flags/bootstrapping) for the cross-SDK overview.
 
 ### Setting properties for flag evaluation
 
