@@ -15,18 +15,15 @@ type EventPageContext = {
 }
 
 const getOgImage = (event: EventType | null) => {
-    if (!event?.photos || event.photos.length === 0) {
+    if (!event?.photos?.[0]?.url) {
         return `/images/og/default.png`
     }
-    const photoUrl = event.photos[0]?.url
-    if (!photoUrl) {
-        return `/images/og/default.png`
-    }
-    if (photoUrl.startsWith('http://') || photoUrl.startsWith('https://')) {
-        return photoUrl
-    }
-    const host = process.env.GATSBY_SQUEAK_API_HOST
-    return host ? `${host}${photoUrl}` : photoUrl
+
+    const photoUrl = event.photos[0].url
+    const fullUrl = photoUrl.startsWith('http') ? photoUrl : `${process.env.GATSBY_SQUEAK_API_HOST || ''}${photoUrl}`
+
+    // Resize the square image to fit by height and pad the width with a light PostHog background
+    return fullUrl.replace('/upload/', '/upload/c_lpad,w_1200,h_630,b_rgb:EEEFE9/')
 }
 
 const EventTemplate = ({ data, pageContext }: PageProps<EventPageData, EventPageContext>) => {

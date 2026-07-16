@@ -1,0 +1,51 @@
+---
+title: Why you need metrics
+---
+
+Metrics are numbers about your system measured over time: how many requests you served, how long they took, how deep the job queue is, how much memory a process is using. Where [logs](/docs/logs) record individual events and [traces](/docs/distributed-tracing) follow individual requests, metrics summarize everything. They answer "how is the system doing?" at a glance, cheaply, all the time.
+
+## What is a metric?
+
+A metric is a named time series. You pick a name like `http.server.duration`, record values against it, and PostHog turns those values into points on a chart. Three shapes cover almost everything:
+
+- A **counter** counts things that only accumulate: requests handled, jobs completed, errors raised. You never care about a counter's absolute value, only how fast it grows. That's why counters are charted as a `rate` (per second) or an `increase` (per time bucket).
+- A **gauge** is a value that goes up and down: queue depth, open connections, temperature, memory. The current value is the interesting part, so gauges are charted with `avg` or the latest reading.
+- A **histogram** records a distribution: every request duration, every payload size. Histograms let you ask for percentiles, so instead of an average that hides your slowest users, you see the `p95` or `p99` they actually experience.
+
+Attributes add dimensions to a metric. Record `http.server.duration` with a `route` and `status` attribute and you can later split one chart into a line per route, or filter to only the 5xx responses.
+
+## What metrics show you that nothing else does
+
+Logs and traces are records of individual things that happened. They're the right tool when you need to know what happened to one request. But they're expensive to keep at full volume and slow to aggregate across millions of events.
+
+Metrics are pre-aggregated by design. A burst of a million requests becomes a handful of data points per series, which means you can afford to measure everything, keep it always on, and chart a month of history instantly. That makes metrics the right tool for:
+
+- **Trends**: is latency creeping up week over week? Is the queue draining slower than it fills?
+- **Capacity**: how close to saturation are your workers, connections, and disks?
+- **Health at a glance**: one dashboard that tells you in five seconds whether production is fine.
+- **Alerting ground truth**: the numbers you page on need to be cheap, fast, and reliable to compute.
+
+## When metrics save you
+
+A queue that grows by 2% an hour never shows up in logs. Every individual job is processed fine, every trace looks healthy, and three weeks later the backlog takes the system down. A gauge on queue depth makes that failure visible on day one as a line that isn't flat.
+
+The same goes for error budgets and latency. A `rate` on an error counter divided by a rate on a request counter is your error ratio, and a `p95` on a duration histogram is what your slowest users feel. Watching those two numbers per service catches most production regressions before your customers report them.
+
+## What good metrics look like
+
+- **Stable names.** Pick a convention and keep it. OpenTelemetry style dotted names like `http.server.duration` and Prometheus style names like `jobs_processed_total` both work; mixing conventions inside one system makes metrics hard to find.
+- **The right type.** Counting things? Counter. Measuring a level? Gauge. Measuring durations or sizes? Histogram.
+- **Low cardinality attributes.** Attach dimensions with a bounded set of values (route, status, plan). Never attach user IDs or request IDs; each unique value becomes its own series.
+- **Units in the name or metadata.** `duration_ms` or a `unit` field saves everyone from guessing.
+
+## How PostHog makes metrics useful
+
+Most teams keep metrics in a separate system from everything else, so answering "did that latency spike affect signups?" means tab switching and timestamp matching. In PostHog, metrics live alongside your [logs](/docs/logs), [traces](/docs/distributed-tracing), product analytics, and session replays, in the same project with the same query language.
+
+Everything is queryable as SQL through the `posthog.metrics` table, and the [PostHog MCP server](/docs/model-context-protocol) exposes metrics to AI agents, so your tools can chart, compare, and investigate metrics for you.
+
+## Next steps
+
+- [Get started with metrics](/docs/metrics/start-here)
+- [Set up and send metrics](/docs/metrics)
+- [How metrics works under the hood](/docs/metrics/architecture)

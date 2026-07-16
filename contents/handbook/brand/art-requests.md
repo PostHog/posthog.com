@@ -7,7 +7,7 @@ hideAnchor: false
 
 > 🎨 **Need artwork or merch?** Please request it using the [request templates](https://github.com/PostHog/posthog.com/issues/new/choose). Do not request art or merch over Slack or email.
 
-All artwork and merch requests are handled by <TeamMember name="Lottie Coxon" />, <TeamMember name="Heidi Berton" />, and <TeamMember name="Daniel Hawkins" /> on the <SmallTeam slug="marketing" /> team.
+All artwork and merch requests are handled by <TeamMember name="Lottie Coxon" />, <TeamMember name="Heidi Berton" />, and <TeamMember name="Daniel Hawkins" /> on the Graphics team.
 
 They can help you with things like:
 
@@ -37,7 +37,7 @@ The Art & Brand Planning board uses GitHub Actions to keep work moving:
 
 To establish a clear connection between the task and the working file, designers will create a frame containing a link to the task. They should then add a link to that frame within the task for easy reference.
 
-Lottie and Daniel usually ask for two weeks minimum notice, but can often work faster on things if needed. If your request is genuinely urgent, please share your request issue in [#team-marketing channel](https://posthog.slack.com/archives/C08CG24E3SR) and mention Lottie, Daniel, and/or [Cory](https://posthog.com/community/profiles/30200).
+Lottie and Daniel usually ask for two weeks minimum notice, but can often work faster on things if needed. If your request is genuinely urgent, please share your request issue in [#team-graphics channel](https://posthog.slack.com/archives/C0AU440KS6P) and mention Lottie, Daniel, and/or [Cory](https://posthog.com/community/profiles/30200).
 
 ## Hedgehog library
 

@@ -17,6 +17,7 @@ import {
     IconShieldLock,
     IconThumbsDown,
     IconThumbsDownFilled,
+    IconSpinner,
     IconThumbsUp,
     IconThumbsUpFilled,
     IconTrash,
@@ -28,6 +29,7 @@ import EditWrapper from './EditWrapper'
 import { useApp } from '../../../context/App'
 import ReportSpamButton from './ReportSpamButton'
 import OSButton from 'components/OSButton'
+import LevelBadge from './LevelBadge'
 import { useToast } from '../../../context/Toast'
 
 type ReplyProps = {
@@ -201,32 +203,16 @@ const AIDisclaimer = ({ replyID, mutate, topic, confidence, resolvable }) => {
     )
 }
 
-const VoteButton = ({
-    id,
-    type,
-    voted,
-    votes,
-    onVote,
-}: {
-    id: number
-    type: 'up' | 'down'
-    voted: boolean
-    votes: number
-    onVote: () => void
-}) => {
-    const { voteReply, user } = useUser()
+const VoteButton = ({ id, type, voted, votes }: { id: number; type: 'up' | 'down'; voted: boolean; votes: number }) => {
+    const { user } = useUser()
+    const { voteReply } = useContext(CurrentQuestionContext)
     const { openSignIn } = useApp()
-
-    const vote = async () => {
-        await voteReply(id, type, user)
-        onVote?.()
-    }
 
     const handleClick = () => {
         if (!user) {
             openSignIn()
         } else {
-            vote()
+            voteReply(id, type)
         }
     }
 
@@ -278,6 +264,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
 
     const [pendingDelete, setPendingDelete] = useState(false)
     const [isEditingReply, setIsEditingReply] = useState(false)
+    const [resolving, setResolving] = useState(false)
     const deleteTimeoutRef = useRef<NodeJS.Timeout | null>(null)
     const toastCreatedAtRef = useRef<number | null>(null)
     const { addToast, removeToast } = useToast()
@@ -423,6 +410,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                         {pronouns && <span className="text-xs opacity-70 ml-1">({pronouns})</span>}
                     </Link>
                 )}
+                {!isMax && <LevelBadge points={profile?.data?.attributes?.reputation} />}
                 {badgeText && (
                     <span className="border border-primary dark: text-xs py-0.5 px-1 rounded-sm">{badgeText}</span>
                 )}
@@ -539,23 +527,25 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                         <div className="space-y-1 mt-2">
                             {(isModerator || resolvable) && !(resolved && resolvedBy?.data?.id === id) && (
                                 <OSButton
-                                    onClick={() => handleResolve(true, id)}
+                                    onClick={async () => {
+                                        setResolving(true)
+                                        try {
+                                            await handleResolve(true, id)
+                                        } finally {
+                                            setResolving(false)
+                                        }
+                                    }}
                                     variant="secondary"
                                     size="md"
-                                    icon={<IconCheck />}
+                                    icon={resolving ? <IconSpinner className="animate-spin" /> : <IconCheck />}
+                                    disabled={resolving}
                                 >
                                     Mark as solution
                                 </OSButton>
                             )}
                             <div className="flex items-center gap-1">
-                                <VoteButton id={id} type="up" voted={upvoted} votes={upvotes} onVote={() => mutate()} />
-                                <VoteButton
-                                    id={id}
-                                    type="down"
-                                    voted={downvoted}
-                                    votes={downvotes}
-                                    onVote={() => mutate()}
-                                />
+                                <VoteButton id={id} type="up" voted={upvoted} votes={upvotes} />
+                                <VoteButton id={id} type="down" voted={downvoted} votes={downvotes} />
                             </div>
                         </div>
                     </>

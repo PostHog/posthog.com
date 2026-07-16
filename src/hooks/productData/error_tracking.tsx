@@ -1,4 +1,6 @@
+import React from 'react'
 import { IconWarning } from '@posthog/icons'
+import MCPInstall from 'components/Products/MCPInstall'
 
 export const errorTracking = {
     Icon: IconWarning,
@@ -10,14 +12,17 @@ export const errorTracking = {
     colorSecondary: 'red',
     category: 'product_engineering',
     wizardSupport: true,
+    shortDescription: 'Catch and fix issues with full context',
     seo: {
         title: 'Error Tracking – Catch and fix issues faster with PostHog',
         description:
             'Capture, monitor, and resolve exceptions with error tracking. Connect Product Analytics and Session Replay to ship confidently with full context.',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/error_tracking_ae1263a1b8.jpg',
     },
     overview: {
         title: 'Track errors and resolve issues',
-        description: 'Take your product from exception to exceptional 🥁',
+        description:
+            'Error tracking is one of the tools that makes your product self-driving: every exception is tied to the user who hit it, so agents have the context to ship the fix.',
         textColor: 'text-black', // tw
     },
     screenshots: {
@@ -148,7 +153,8 @@ export const errorTracking = {
         {
             title: 'Investigate and resolve',
             headline: 'Investigate and resolve',
-            description: 'Use PostHog session replay to investigate and resolve issues with complete customer context',
+            description:
+                'Use PostHog session replay to investigate and resolve issues with the complete customer context an agent needs to ship the fix',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/error_tracking_session_replay_investigate_da4ee40642.gif',
@@ -170,6 +176,33 @@ export const errorTracking = {
                     shadow: true,
                 },
             ],
+        },
+        {
+            title: 'MCP',
+            headline: 'Debug errors from your editor',
+            description:
+                'Triage issues, inspect stack traces, and generate fixes from Cursor, Claude Code, VS Code, or any MCP-compatible agent.',
+            features: [
+                {
+                    title: 'Inspect error details',
+                    description: 'Give your agent access to full stack traces, error messages, and relevant metadata.',
+                },
+                {
+                    title: 'Reproduce errors',
+                    description:
+                        'Identify failure points and perform root cause analysis using the captured stack trace context.',
+                },
+                {
+                    title: 'Debug and create fixes',
+                    description: 'Prompt your agent to generate code fixes based on the error details.',
+                },
+                {
+                    title: 'Update issue status',
+                    description:
+                        'Mark issues as resolved, archived, suppressed, or pending release directly from your code editor.',
+                },
+            ],
+            children: <MCPInstall />,
         },
     ],
     questions: [
@@ -215,7 +248,10 @@ export const errorTracking = {
             ],
             us: [
                 {
-                    title: 'Integration with other PostHog products',
+                    title: 'Agents can act on every error and the user who hit it – the context that powers self-driving',
+                },
+                {
+                    title: 'Integration with other PostHog tools',
                 },
                 {
                     title: 'Feature flags for error recovery',
@@ -305,6 +341,21 @@ export const errorTracking = {
             description: 'Roll back features that cause errors, or test fixes with slow rollouts',
         },
     ],
+    ai: {
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/ERROR_TRACKING_2f807c123b.png',
+        imageAlt: 'PostHog AI and error tracking',
+        description: 'investigate the exception and ship the fix',
+        skills: [
+            'Finds specific errors and affected users with natural language',
+            'Summarizes stack traces, explains likely causes (and likely fixes)',
+            'Surfaces exceptions worth prioritizing based on impact and downstream metrics',
+        ],
+        prompts: [
+            'Find the most common frontend errors this week',
+            'Which errors impact user sign-ups the most?',
+            'Summarize new issues introduced after the latest release',
+        ],
+    },
     presenterNotes: {
         // TODO: hopefully we have issue autofix and revenue analytics ordering by time this launches
         overview:
@@ -321,7 +372,7 @@ export const errorTracking = {
         pricing:
             "Log up to 100k errors without even entering a credit card. You also get the monthly free tier even if you <em>have</em> added a card. Beyond that, it's simple, usage-based pricing. Compare that to Sentry who charges per seat <em>plus</em> usage. No surprise bills when you add developers, and you can set a billing limit so you never pay more than expected.",
         'comparison-summary':
-            "Sentry is the 800-pound gorilla. They're <em>exception</em>ally good at pure error tracking. But errors don't happen in isolation. PostHog gives you the full context – what the user did, which flags were on, and the related session recording. For mobile-heavy apps, Sentry's still better (though we're actively working on that). For everything else, context wins.",
+            "Sentry is the 800-pound gorilla. They're <em>exception</em>ally good at pure error tracking. But errors don't happen in isolation. PostHog gives you the full context – what the user did, which flags were on, and the related session recording. Because it's all one system, agents can act on that context directly – it's what makes your product self-driving, not just another dashboard. For mobile-heavy apps, Sentry's still better (though we're actively working on that). For everything else, context wins.",
         'feature-comparison':
             "We have the core features. For now, we're missing a few things like uptime monitoring, advanced alert rules, and our mobile SDKs are in active development. But what we uniquely have: deep integration with analytics, replays, and feature flags. Choose according to your stage of growth, and keep in mind PostHog is designed to grow <em>with</em> you, so even if we don't have all the features you need, we likely will soon!",
         docs: 'Setup guides for all major languages and frameworks. Source map upload instructions. Common patterns like error boundaries and custom grouping. Written by engineers who actually built (and use) this stuff themselves!',
@@ -329,5 +380,6 @@ export const errorTracking = {
             "Error happens → watch the replay → see the user's journey → check their feature flags → roll back if needed. This workflow is impossible with standalone tools. Everything connects because it's all in one platform.",
         'getting-started':
             'Add our SDK(s) and errors start flowing immediately. Set up Slack alerts for critical errors and start identifying core problems faster – and at a fraction of the cost vs. the big players!',
+        ai: "The PostHog MCP server exposes function calling tools to any MCP client, enabling AI agents to interact with PostHog's API via the MCP protocol. When combining our MCP server with Error Tracking, your AI agents can take actions based on PostHog data which unlocks powerful, autonomous debugging capabilities.",
     },
 }

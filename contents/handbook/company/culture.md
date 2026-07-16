@@ -17,7 +17,7 @@ Being all remote has a bunch of advantages:
 * It creates space for lots of uninterrupted work.
 * We judge performance based on real outcomes, not hours spent in an office.
 
-In addition to all the equipment you'll need, we provide [a budget to help you find coworking space](/handbook/people/spending-money#work-space), or to cover coffee shop expenses. Everyone also has a [$1,500 quarterly travel budget](/handbook/people/spending-money#budget-for-working-togethersocializing) for ad-hoc meetups.
+In addition to all the equipment you'll need, we provide [a budget to help you find coworking space](/handbook/people/spending-money#how-it-works), or to cover coffee shop expenses. There's no fixed travel budget, but you can [use your monthly budget](/handbook/people/spending-money#hub-travel-budget) for ad-hoc meetups.
 
 ## We're extremely welcoming
 
@@ -63,7 +63,7 @@ Default to _not_ asking for permission to do something if you are acting in the 
 
 ## We're on the maker's schedule
 
-We're big believers in the importance of the [maker's schedule](http://www.paulgraham.com/makersschedule.html). If we have meetings at all, we'll cluster them around any stand-ups, so our day doesn't get split up.
+We're big believers in the importance of the [maker's schedule](https://www.paulgraham.com/makersschedule.html). If we have meetings at all, we'll cluster them around any stand-ups, so our day doesn't get split up.
 
 ![Screenshot of an engineer's calendar at PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/a0d634a2_bd3e_4229_ae8f_f98269a6c4f7_2268x1473_06595e2e80.jpg)
 
@@ -73,7 +73,7 @@ On Tuesdays and Thursdays, we don't have internal meetings at all. Occasionally 
 
 Hiring high-performing and self-sufficient team members means we don't need the typical corporate processes that are designed to slow teams down. Instead, we're organized into [small teams](/handbook/team-structure), which prioritize speed by delegating decision-making autonomy as much as possible. 
 
-Our [management approach](/handbook/company/management) is super simple - small teams report to their team leader, and each of the team leaders reports to one of our four execs. We don't want to create a fancy hierarchy of titles, as we believe this can lead, consciously or not, to people feeling less empowered to make changes and step on toes, especially if they are not in a 'senior' role. 
+Our [management approach](/handbook/company/management) is super simple – small teams report to their team leader, and each of the team leaders reports to one of our execs. We don't want to create a fancy hierarchy of titles, as we believe this can lead, whether consciously or not, to people feeling less empowered to make changes and step on toes, especially if they are not in a 'senior' role. 
 
 It's up to you how to get things done. If you want to make a change, feel free to just create the pull request. If you want to discuss something more widely for a bigger piece of work, it might make sense to [use an RFC](/handbook/company/communication#requests-for-comment-rfcs) for a change inside your team. 
 

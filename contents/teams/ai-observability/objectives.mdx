@@ -1,0 +1,44 @@
+### Q3 2026 objectives
+
+#### Objective 1: Self-driving proactiveness
+
+**Motivation:** AI Observability should not be a place users only visit after something goes wrong. It should proactively detect problems, surface the right signals in Slack and PostHog, and help teams improve their AI products before users complain.
+
+**What we'll ship:**
+- **Daily digest in Slack** - a daily summary of the most important AIO changes, regressions, and failures
+- **Easy anomaly detection alerts in Slack** - a simple way to set up alerts for cost, latency, error, volume, sentiment, and evaluation regressions
+- **More AI Observability signals** - emit useful signals from more places in the product so the Self-Driving inbox has concrete issues to work on
+- **Suggested online evals** - automatically suggest online evaluations when problems are detected
+- **PostHog AI products dogfooding** - use our online evaluations to effectively improve PostHog's AI products
+
+#### Objective 2: Multimodal + large context ingestion
+
+**Motivation:** Teams are building AI products that contain images/audio/video/documents messages, as well as large text context. AI Observability needs to capture and display that content.
+
+**What we'll ship:**
+- **Multimodal and large context event ingestion** - a way to ingest multimodal and large text content inputs and outputs on AIO events
+- **Multimodal and large context in trace views** - display captured multimodal and large text content in traces
+
+#### Objective 3: UI simplification
+
+**Motivation:** The current navigation and trace experience make basic conversation review harder than it should be.
+
+**What we'll ship:**
+- **Simple conversation view** - redesign the single trace view so users can read a conversation without unnecessary metadata, nesting, or visual noise
+- **Trace detail redesign** - keep advanced trace, span, generation, tool, cost, latency, and metadata details available without making them the default reading experience
+- **Navigation simplification** - review whether Traces, Generations, Sessions, Sentiment, and Evals need separate top-level tabs, and merge or rename concepts where that makes the product easier to understand
+
+#### Objective 4: Offline evals and datasets
+
+**Motivation:** Teams need a way to inspect offline evaluation experiments and manage the production examples they use for evaluations.
+
+**What we'll ship:**
+- **Offline eval experiment dashboard** - a dashboard to view offline evaluation experiments
+- **Dataset manager** - a focused interface for creating, updating, and organizing datasets from traces and sessions
+- **Programmatic dataset access** - APIs or SDK helpers to fetch and update datasets made from traces and sessions
+
+#### What we're not shipping
+
+- Running evals on multimodal content
+- Executing offline evals in our infrastructure
+- An SDK for defining offline evaluators; we want to stay agnostic and let users use any open source evaluation library

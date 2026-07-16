@@ -1,11 +1,19 @@
 ---
 title: Vue.js
 platformLogo: vue
+features:
+  eventCapture: true
+  userIdentification: true
+  autoCapture: true
+  sessionRecording: true
+  featureFlags: true
+  groupAnalytics: true
+  errorTracking: true
 ---
 
-import DetailSetUpReverseProxy from "../../integrate/_snippets/details/set-up-reverse-proxy.mdx"
-import DetailGroupProductsInOneProject from "../../integrate/_snippets/details/group-products-in-one-project.mdx"
-import DetailPostHogIPs from "../../integrate/_snippets/details/posthog-ips.mdx"
+import DetailSetUpReverseProxy from "../../integrate/_snippets/details/set-up-reverse-proxy.mdx";
+import DetailGroupProductsInOneProject from "../../integrate/_snippets/details/group-products-in-one-project.mdx";
+import DetailPostHogIPs from "../../integrate/_snippets/details/posthog-ips.mdx";
 
 PostHog makes it easy to get data about usage of your [Vue.js](https://vuejs.org/) app. Integrating PostHog into your app enables analytics about user behavior, custom events capture, session replays, feature flags, and more.
 
@@ -22,13 +30,13 @@ To follow this guide along, you need:
 
 ## Setting up PostHog
 
-import VueSetup from "../../integrate/_snippets/vuejs/vue-setup.mdx"
+import VueSetup from "../../integrate/_snippets/vuejs/vue-setup.mdx";
 
 <VueSetup />
 
 ## Identifying users
 
-import IdentifyFrontendCallout from '../../_snippets/identify-frontend-callout.mdx'
+import IdentifyFrontendCallout from "../../_snippets/identify-frontend-callout.mdx";
 
 <IdentifyFrontendCallout />
 
@@ -36,25 +44,23 @@ import IdentifyFrontendCallout from '../../_snippets/identify-frontend-callout.m
 
 Once you have PostHog initialized, there is a lot more you can do with it beyond autocapture, pageviews, and pageleaves. You can find the full details in our [JavaScript SDK docs](/docs/libraries/js/features), but we'll cover a few examples here.
 
-import Tab from "components/Tab"
-import CompositionEvents from "./_snippets/composition-events.mdx"
-import PluginEvents from "./_snippets/plugin-events.mdx"
+import Tab from "components/Tab";
+import CompositionEvents from "./_snippets/composition-events.mdx";
+import PluginEvents from "./_snippets/plugin-events.mdx";
 
-<Tab.Group tabs={[
-    'Vue 3: Composition API', 
-    'Vue 2: Plugins']}>
-    <Tab.List>
-        <Tab>Vue 3: Composition API</Tab>
-        <Tab>Vue 2: Plugins</Tab>
-    </Tab.List>
-    <Tab.Panels>
-        <Tab.Panel>
-            <CompositionEvents />
-        </Tab.Panel>
-        <Tab.Panel>
-            <PluginEvents />
-        </Tab.Panel>
-    </Tab.Panels>
+<Tab.Group tabs={["Vue 3: Composition API", "Vue 2: Plugins"]}>
+  <Tab.List>
+    <Tab>Vue 3: Composition API</Tab>
+    <Tab>Vue 2: Plugins</Tab>
+  </Tab.List>
+  <Tab.Panels>
+    <Tab.Panel>
+      <CompositionEvents />
+    </Tab.Panel>
+    <Tab.Panel>
+      <PluginEvents />
+    </Tab.Panel>
+  </Tab.Panels>
 </Tab.Group>
 
 <DetailSetUpReverseProxy />

@@ -32,11 +32,26 @@ them that they can save by removing the Group Analytics add-on from the billing 
 
 If they aren't benefitting from Autocapture you should reach out to let them know how best to use it. Alternatively, they can tune or turn it off by following the [Autocapture configuration docs](/docs/product-analytics/autocapture#configuring-autocapture).
 
+### Legacy Teams package
+
+Customers on the legacy "Teams" package ($450/month) can save $200 by switching to the [Boost package](/platform-packages) ($250/month) if they don't need SAML SSO. The Teams package has been split into:
+
+- [Boost package](/platform-packages) ($250/month)
+- [Scale package](/platform-packages) ($750/month)
+
 ### Session replay targeting
 
 When Session replay is enabled it will capture all sessions by default.  As every session is counted for billing purposes, customers may end up with a bunch of low value short recordings and still be paying for them.
 
 If a customer has Session replay enabled, log in as them and look at their session replay [settings](/docs/session-replay/how-to-control-which-sessions-you-record).  At a minimum we recommend setting the minimum duration to 2 seconds or more but there are other tuning options which they may also benefit from.
+
+## Are they running up-to-date SDKs?
+
+Outdated SDKs miss out on bug fixes, performance improvements, and new features. A customer using a three-year-old SDK will hit issues we've already solved, which can silently erode trust over time.
+
+Check SDK versions using the [SDK health check](/docs/health-checks/sdk-health) or in Metabase via the `Library version audit` table. At minimum, the SDK sending the bulk of their event volume shouldn't be more than 3 months behind the latest. Monthly updates are the best-practice habit to encourage. Some SDKs have breaking changes between versions, and if so, make sure you make the customer aware about the breaking change.
+
+A light nudge on this also doubles as a natural re-engagement touchpoint for customers you haven't spoken to in a while.
 
 ## Have they implemented tracking incorrectly?
 
@@ -105,9 +120,44 @@ Cookieless mode can help them have more accurate tracking totals because when us
 ## Are feature flags resilient?
 
 ### Falling back to working code
-It is important that hitting the flags endpoint does not block an application from otherwise functioning correctly. If the flag fails to load or returns an unexpected value for any reason, such as `None`, `(empty string)`, or `false` you should [always fall back to working code.](/docs/feature-flags/best-practices#9-fallback-to-working-code)
+It is important that hitting the flags endpoint does not block an application from otherwise functioning correctly. If the flag fails to load or returns an unexpected value for any reason, such as `None`, `(empty string)`, or `false` you should [always fall back to working code.](/docs/feature-flags/best-practices#undefined-is-not-flag-is-off-nor-false)
 
 ### Server side local evaluation
 Implementing [Server-side local evaluation](/docs/feature-flags/local-evaluation) will ensure that flags continue to return values regardless of the network status of the flags endpoint. By default, PostHog will attempt to evaluate the flag locally using definitions it loads on initialization and at the `poll interval`. If this fails, PostHog then makes a server request to fetch the flag value.
 
 As a note, server side local evaluation is [billed differently](/docs/feature-flags/local-evaluation#step-2-initialize-posthog-with-your-feature-flags-secure-api-key) than other flag requests.
+
+## Do they have a custom implementation that's causing issues?
+
+Some customers build layers in between their app and PostHog, oftentimes as a precautionary measure or to accommodate a highly specific use case. While these custom configurations are mostly innocuous, sometimes they outlive the problem they were solving or create net new reliability issues. From the customer's POV, it can be difficult to discern the root cause of those issues, and it's on us to create clarity for them (even if those issues are self-inflicted). The last thing we want is for them to doubt PostHog's reliability when their custom implementation is the culprit. 
+
+In this process of creating clarity for them, we should never cast blame or get defensive. Our goal is to diagnose the root cause of recently reported issues with a clear intention to help them understand what went wrong and how they can fix it. The evidence of self-inflicted issues is enough to push them towards a fix. More importantly, however, our respectful presentation of that evidence shows a good faith effort to help without the need to be right. 
+
+### Creating a reliability audit
+
+**Things you'll need:**
+- Written history of past issues (tickets, Slack threads)
+- Up to date documentation from the customer explaining their custom integrations
+- Clarity on *when* those custom implementations were deployed to production
+- Exa MCP (for reading through PostHog docs)
+- Slack MCP (for reading through past threads)
+- PostHog MCP
+- Local clone of PostHog's product repo on your machine 
+
+These will serve as context layers for your coding agent to help research and collate our own product's behavior and map it against their custom implementation. 
+
+To get started, just ask your coding agent:
+
+>/reliability-audit for {Customer} - here's their org ID: [xxx], Slack channel: [xxx], custom implementation documentation: [paste the full doc or link to it]. 
+
+The `/reliability-audit` skill is available <PrivateLink url="https://us.posthog.com/project/2/skills/reliability-audit">here</PrivateLink>.
+
+One helpful way to frame your audit is to organize it into these dimensions: issue, date, root cause, verdict, resolution, link to the original Slack thread / ticket. The idea of "verdict" is to give yourself a clear space to articulate whether the issue was due to their custom implementation or PostHog. 
+
+While the format of what you deliver to the customer is entirely up to you, a Slack Canvas with a clear table and some descriptions can go a long way. <PrivateLink url="https://posthog.slack.com/docs/TSS5W8YQZ/F0B585Y1N9Y">Here's an example</PrivateLink>.
+
+Your audit should push your customer to take action, so it may be helpful to include a clear articulation of what to keep versus change about their custom implementation. Make it easy for them to decide which parts of your audit they want to act on.
+
+### Why it's worth doing this
+
+Aside from restoring their confidence in PostHog's data integrity and reliability, it's radically hospitable. Even if the customer has expressed misplaced frustration at PostHog, you're still demonstrating a good faith effort to help them win by doing this audit. At the minimum, it unlocks goodwill and deepens their trust in you as their advocate at PostHog. 

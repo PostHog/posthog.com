@@ -1,0 +1,61 @@
+---
+title: Create customer journeys
+sidebar: Docs
+showTitle: true
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+import CustomerAnalyticsBetaWarning from './_snippets/customer-analytics-beta-warning.mdx'
+
+<CustomerAnalyticsBetaWarning />
+
+To create a new journey, go to [**Customer analytics → Journeys**](https://app.posthog.com/customer_analytics/journeys) and click **New journey**. You have three options:
+
+### Use a template
+
+PostHog provides pre-built journey templates to help you get started quickly:
+
+- **Signup conversion** – Tracks the path from a user's first pageview to signing up.
+- **Free-to-paid conversion** – Tracks the path from signing up to completing a payment.
+
+Select a template and PostHog creates the journey with pre-configured funnel steps. You can then customize the steps as needed.
+
+These templates are based on the funnel insights shown in the [customer analytics dashboard](/docs/customer-analytics/configure-your-dashboard). They reuse the same events you've configured for your dashboard as a starting point.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_03_24_T17_21_52_803_Z_7f5d2ceb32.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_03_24_T17_21_20_586_Z_ef4deff2e3.png"
+    alt="Journey template selection screen showing Signup conversion and Free-to-paid conversion templates"
+    classes="rounded"
+/>
+
+### Use an existing funnel
+
+If you already have a saved [funnel insight](/docs/product-analytics/funnels), you can import it as a customer journey:
+
+1. Click **New journey**.
+2. Select **Start from an existing insight**.
+3. Choose a saved funnel insight from the list.
+
+PostHog converts your funnel steps into a journey flow graph.
+
+
+<CalloutBox icon="IconInfo" title="Good to know" type="fyi">
+Changes to the original funnel insight will not be reflected in the journey. Once created, you can only edit the journey from the journey UI.
+</CalloutBox>
+
+### Build from scratch
+
+To build a journey manually:
+
+1. Click **New journey**, then select **Start from scratch**.
+2. Add funnel steps by selecting events (e.g., `$pageview`, `sign_up`, `purchase`).
+3. Configure each step as **required** or **optional**.
+4. Save your journey.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_03_24_T17_22_42_709_Z_86410a4243.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_03_24_T17_23_18_757_Z_3a97342e4b.png"
+    alt="Journey builder interface showing how to add and configure funnel steps"
+    classes="rounded"
+/>

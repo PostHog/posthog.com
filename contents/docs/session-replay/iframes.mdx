@@ -10,7 +10,7 @@ PostHog **can** record iframes embedded in your website as long as:
 
 PostHog **cannot** record iframes embedded in your website if:
 
-* ❌ The embedded iframe is from a domain that is not under your control (e.g. `https://posthog.com` embeds `https://google.com/iframe`)
+* ❌ The embedded iframe is from a domain that is not under your control (e.g. `https://posthog.com` embeds `https://google.com/iframe`). This includes third-party embeds like Typeform, YouTube, Stripe Checkout, Calendly, Google Maps, and similar widgets. See [third-party embeds](#third-party-embeds-typeform-youtube-stripe-etc) below.
 
 ## Recording same-origin iframes
 
@@ -39,3 +39,16 @@ posthog.init('<ph_project_token>', {
 
 With this setting enabled, the child iframe will post events to the parent instead, resulting in a single replayable recording. If the parent page does not have this enabled, then the content of the embedded iframe will not be captured at all.
 
+## Third-party embeds (Typeform, YouTube, Stripe, etc.)
+
+A common question is whether PostHog can record interactions inside a third-party embed such as a Typeform survey, a YouTube player, a Stripe Checkout frame, or a Calendly widget. **It cannot**, and this is a browser security limitation rather than a PostHog bug.
+
+These embeds are served from a domain you don't control. Recording a cross-origin iframe requires `posthog-js` to be running *inside* the iframe and forwarding events to the parent page via `postMessage` (this is what `recordCrossOriginIframes: true` enables). Because you can't install PostHog on a third party's domain, and the browser's [same-origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy) blocks the parent page from reading the iframe's DOM, there's nothing for PostHog to capture. The iframe is recorded as an empty placeholder element.
+
+A few clarifications that come up often:
+
+- **`recordCrossOriginIframes: true` does not help here.** It only works when you control *both* the parent page and the iframe content (for example, your app embedding your own widget hosted on a different subdomain). It is not a way to opt third-party content into recording.
+- **There is no per-domain allowlist for iframe recording.** PostHog does not have a setting to allowlist specific third-party iframes (e.g. "record Typeform but nothing else"). Cross-origin iframe recording is an all-or-nothing config option that still requires PostHog to be installed inside the iframe.
+- **You can still see the surrounding session.** Clicks, navigation, and other interactions on *your* page are recorded as normal – only the content rendered inside the third-party iframe is missing from the replay.
+
+If you need visibility into what users do inside a third-party tool like Typeform, use that tool's own analytics or send its results into PostHog via [events](/docs/product-analytics/capture-events) or an [integration](/docs/cdp).

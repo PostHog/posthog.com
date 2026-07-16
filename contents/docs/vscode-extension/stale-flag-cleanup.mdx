@@ -1,0 +1,73 @@
+---
+title: Stale flag cleanup
+sidebar: Docs
+showTitle: true
+---
+
+Over time, feature flags accumulate in codebases. Flags that were fully rolled out, linked to completed experiments, or simply forgotten can clutter your code and make it harder to reason about. The VS Code extension uses **AST-based scanning** (via tree-sitter) to find stale flag references across your project and help you remove them safely.
+
+## Running a scan
+
+Open the command palette and run **PostHog: Scan for Stale Flags**. The extension scans all JavaScript and TypeScript files in your workspace, building a tree of every feature flag reference it finds.
+
+Results appear in the **stale flags tree view** in the sidebar, grouped by staleness reason.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/pasted_image_2026_04_07_T23_59_44_160_Z_2f6cd5b6cf.png"
+  alt="PostHog VS Code extension stale flags tree view in the sidebar"
+  classes="rounded"
+/>
+
+### Configuration
+
+Two settings control how the scan behaves:
+
+- **`posthog.staleFlagAgeDays`** (default: `30`) — The minimum number of days a flag must have been fully rolled out before it's considered stale. Lower this if you want to catch flags sooner.
+- **`posthog.staleFlagExcludePatterns`** — Glob patterns for files or directories to skip during scanning (e.g., `["**/test/**", "**/migrations/**"]`). The extension already excludes `node_modules` and common build output directories.
+
+## Staleness categories
+
+The scan classifies each flag into one of four categories:
+
+### Fully rolled out
+
+The flag is set to **100% rollout** for all users. The code path gated by this flag is always taken, so the flag check can be removed and the code kept.
+
+### Inactive
+
+The flag has **not been evaluated** in the time period defined by `posthog.staleFlagAgeDays`. This suggests it's no longer being used in production.
+
+### Experiment complete
+
+The flag is linked to an **experiment that has concluded**. The experiment results are in, and the flag check can be replaced with the winning variant's code path.
+
+### Not in PostHog
+
+The flag key exists in your code but **doesn't exist in your PostHog project**. This could mean the flag was deleted from PostHog, was created in a different project, or is a typo.
+
+## Navigating stale flags
+
+Click on any flag in the stale flags tree view to **jump to its location** in your codebase. If a flag is referenced in multiple files, the tree view shows each reference as a child node you can click individually.
+
+## Cleaning up a flag
+
+To remove a single flag check:
+
+1. Click the flag in the tree view (or place your cursor on the flag call in code)
+2. Run **PostHog: Clean Up Stale Flag** from the command palette or context menu
+3. The extension uses **AST-based refactoring** to:
+   - Remove the `isFeatureEnabled()` or `getFeatureFlag()` check
+   - Keep the code from the correct branch (the "enabled" path for fully rolled out flags, or the winning variant path for completed experiments)
+   - Clean up any unused `else` branches or variable declarations
+
+This is safer than a manual find-and-replace because the extension understands the code structure and preserves the correct code paths.
+
+## Batch cleanup
+
+To clean up multiple stale flags at once:
+
+1. Select multiple flags in the stale flags tree view
+2. Run the cleanup action
+3. Review the proposed changes before applying
+
+This is useful when you have a large number of stale flags to remove after a cleanup sprint.
