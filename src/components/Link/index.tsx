@@ -9,21 +9,32 @@ import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
 
 // Helper function to create standard context menu items
-const createStandardMenuItems = (url: string, state?: any, isExternal = false): ContextMenuItemProps[] => {
+const createStandardMenuItems = (
+    url: string,
+    state?: any,
+    isExternal = false,
+    websiteMode = false
+): ContextMenuItemProps[] => {
     const fullUrl = url?.startsWith('/') ? `https://posthog.com${url}` : url
 
     return [
-        {
-            type: 'item',
-            disabled: isExternal,
-            children: isExternal ? (
-                <span>Open in new PostHog window</span>
-            ) : (
-                <Link to={url} state={{ ...state, newWindow: true }} contextMenu={false}>
-                    Open in new PostHog window
-                </Link>
-            ),
-        },
+        // "Open in new PostHog window" only makes sense in OS mode. In website mode there's a single
+        // window, so opening a "new" window just replaces the current one — hide it to avoid confusion.
+        ...(websiteMode
+            ? []
+            : [
+                  {
+                      type: 'item' as const,
+                      disabled: isExternal,
+                      children: isExternal ? (
+                          <span>Open in new PostHog window</span>
+                      ) : (
+                          <Link to={url} state={{ ...state, newWindow: true }} contextMenu={false}>
+                              Open in new PostHog window
+                          </Link>
+                      ),
+                  },
+              ]),
         {
             type: 'item',
             children: (
@@ -75,9 +86,25 @@ const MenuWrapper = ({
     )
 }
 
+// Matches the marketing site's own origin (posthog.com / www.posthog.com), but not the
+// app subdomains (app/eu/us.posthog.com), which are a separate app and stay external.
+const sameSiteOriginRegex = /^https?:\/\/(www\.)?posthog\.com(?=\/|$)/i
+const mdRegex = /\.(md|mdx)(?=$|[?#])/
+
 function resolveRelativeLink(url?: string, href?: string) {
-    if (!url || !href) return url
-    const mdRegex = /\.(md|mdx)(?=$|[?#])/
+    if (!url) return url
+
+    // Absolute same-site links (https://posthog.com/foo) are internal pages. Normalize them to a
+    // root-relative path so the rest of the component treats them as internal for rendering, the
+    // context menu, and navigation. This doesn't depend on `href`, so resolve it before that guard
+    // to avoid a flicker while the page's location loads. Raw-markdown URLs (…/foo.md) are excluded
+    // because they're served as files, not SPA routes.
+    if (sameSiteOriginRegex.test(url) && !mdRegex.test(url)) {
+        const path = url.replace(sameSiteOriginRegex, '')
+        return path.startsWith('/') ? path : `/${path}`
+    }
+
+    if (!href) return url
     const relativeRegex = /^\.\.?\//
     const isMarkdownLink = relativeRegex.test(url) && mdRegex.test(url)
     if (isMarkdownLink) {
@@ -111,7 +138,7 @@ export default function Link({
     ...other
 }: Props): JSX.Element {
     const { appWindow } = useWindow()
-    const { posthogInstance, compact } = useApp()
+    const { posthogInstance, compact, websiteMode } = useApp()
     const posthog = usePostHog()
     const locationHref = appWindow?.element?.props?.location?.href
     const initialUrl = to || href
@@ -167,7 +194,7 @@ export default function Link({
     const menuItems =
         contextMenu && url
             ? [
-                  ...createStandardMenuItems(url, state, isExternal),
+                  ...createStandardMenuItems(url, state, isExternal, websiteMode),
                   ...(customMenuItems.length > 0 ? [{ type: 'separator' as const }, ...customMenuItems] : []),
               ]
             : []
