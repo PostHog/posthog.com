@@ -10,6 +10,9 @@ import {
 
 // Site-wide A/B experiments: /handbook/engineering/posthog-com/site-experiments
 
+// Runs on all paths except /api/* — static assets must pass through so test
+// users rewrite to the experimental deployment (hashed filenames differ per build).
+// A short-TTL routing cookie avoids a /flags call on every sub-resource.
 export const config = {
     matcher: ['/((?!api/).*)'],
 }

@@ -29,6 +29,9 @@ const BOT_USER_AGENT =
 const COOKIE_MAX_AGE_SECONDS = 60 * 60 * 24 * 90
 const BYPASS_VARIANT_COOKIE = 'ph_site_variant_bypass'
 const BYPASS_COOKIE_MAX_AGE_SECONDS = 60 * 60 * 4
+// Short-lived routing cache so static assets skip /flags but still rewrite to the correct deployment.
+const ROUTING_VARIANT_COOKIE = 'ph_site_variant_route'
+const ROUTING_COOKIE_MAX_AGE_SECONDS = 60
 
 export function getSiteExperimentConfig(): SiteExperimentConfig | null {
     const projectToken = process.env.GATSBY_POSTHOG_API_KEY
@@ -170,6 +173,40 @@ function buildBypassVariantCookie(variant: SiteExperimentVariant, secure: boolea
     return parts.join('; ')
 }
 
+function getRoutingVariantFromCookie(request: Request): SiteExperimentVariant | null {
+    const value = getCookie(request, ROUTING_VARIANT_COOKIE)
+    if (value === 'control' || value === 'test') {
+        return value
+    }
+
+    return null
+}
+
+function clearRoutingVariantCookie(secure: boolean): string {
+    const parts = [`${ROUTING_VARIANT_COOKIE}=`, 'Path=/', 'Max-Age=0', 'SameSite=Lax']
+
+    if (secure) {
+        parts.push('Secure')
+    }
+
+    return parts.join('; ')
+}
+
+function buildRoutingVariantCookie(variant: SiteExperimentVariant, secure: boolean): string {
+    const parts = [
+        `${ROUTING_VARIANT_COOKIE}=${variant}`,
+        'Path=/',
+        `Max-Age=${ROUTING_COOKIE_MAX_AGE_SECONDS}`,
+        'SameSite=Lax',
+    ]
+
+    if (secure) {
+        parts.push('Secure')
+    }
+
+    return parts.join('; ')
+}
+
 export function normalizeFlagVariant(
     flag: PostHogFlagEvaluation | undefined,
     config: SiteExperimentConfig
@@ -208,6 +245,11 @@ export async function evaluateSiteExperimentVariant(
     const bypassVariant = getBypassVariant(request, config)
     if (bypassVariant) {
         return { variant: bypassVariant, distinctId }
+    }
+
+    const cachedVariant = getRoutingVariantFromCookie(request)
+    if (cachedVariant) {
+        return { variant: cachedVariant, distinctId }
     }
 
     const headers = new Headers({
@@ -277,11 +319,14 @@ export function appendVariantCookies(
 
     if (shouldClearBypassCookie(request)) {
         cookies.push(clearBypassVariantCookie(secure))
+        cookies.push(clearRoutingVariantCookie(secure))
     } else {
         const urlBypass = getBypassVariantFromUrl(request, config)
         if (urlBypass) {
             cookies.push(buildBypassVariantCookie(urlBypass, secure))
         }
+
+        cookies.push(buildRoutingVariantCookie(assignment.variant, secure))
     }
 
     const posthogCookie = getCookie(request, getPostHogCookieKey(config.projectToken))

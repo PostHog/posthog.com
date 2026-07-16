@@ -17,21 +17,27 @@ flowchart TD
     Enabled -->|no| Prod[Serve master build]
     Enabled -->|yes| Bot{Bot?}
     Bot -->|yes| Prod
-    Bot -->|no| Assign[Assign variant]
-    Assign --> Variant{variant = test?}
+    Bot -->|no| Bypass{QA bypass cookie?}
+    Bypass -->|yes| Variant{variant = test?}
+    Bypass -->|no| RouteCookie{ph_site_variant_route valid?}
+    RouteCookie -->|yes| Variant
+    RouteCookie -->|no| Flags[Call PostHog /flags]
+    Flags --> Variant
     Variant -->|yes| Rewrite[Rewrite to experimental deployment]
     Variant -->|no| Prod
-    Rewrite --> Headers[Set response headers]
+    Rewrite --> Headers[Set cookies + response headers]
     Prod --> Headers
 ```
 
 **Routing** is handled by middleware. **Analytics** are handled by the normal PostHog JS SDK on the client. Both should use the same `distinct_id` when the PostHog cookie is present.
 
+Test traffic is rewritten to a **separate Vercel deployment**. Gatsby builds on different branches produce different hashed filenames for JS, CSS, and `page-data/` JSON. Middleware must run on static asset requests too so test users load assets from the experimental deployment, not production.
+
 ## Files
 
 | File | Purpose |
 |------|---------|
-| `middleware.ts` | Vercel edge entry point. Runs on all paths except `/api/*`. |
+| `middleware.ts` | Vercel edge entry point. Runs on all paths except `/api/*`, including static assets. |
 | `src/lib/siteExperimentMiddleware.ts` | Flag evaluation, cookies, rewrite URL building. |
 | `gatsby/onPreBootstrap.ts` | Generates `posthog-init.js` with client-side experiment exposure. |
 
@@ -39,9 +45,15 @@ Middleware lives on **`master` only**. The experimental branch is a normal stati
 
 ## Variant assignment
 
-On each request, middleware calls **PostHog `/flags?v=2`** with the visitor's `distinct_id`.
+Middleware resolves the routing variant in this order:
 
-PostHog handles variant stickiness per `distinct_id`. Middleware does not cache assignments in a cookie, so rollout changes in PostHog take effect on the next request.
+1. **QA bypass** (`ph_site_variant_bypass` cookie or `?ph_site_variant=` URL param) — skips PostHog entirely.
+2. **Routing cache** (`ph_site_variant_route` cookie, 60s TTL) — skips PostHog `/flags` for sub-resource requests on the same page load.
+3. **PostHog `/flags?v=2`** — called when no valid routing cache exists (typically once per page view).
+
+PostHog handles variant stickiness per `distinct_id`. The routing cookie is a short-lived performance cache only; it does not replace PostHog assignment. Rollout changes in PostHog can take up to **60 seconds** to affect routing for an active session (for example, static assets still loading after a document response). PostHog stickiness is unchanged.
+
+A single page view can trigger dozens of same-origin requests (`page-data/sq/d/*.json`, JS chunks, etc.). Without the routing cookie, middleware would call `/flags` on every one of them.
 
 If the PostHog flags API fails, middleware **fails open to `control`** (current production site).
 
@@ -51,9 +63,11 @@ Bots (Googlebot, etc.) always receive **control** and are not bucketed.
 
 ## Cookies
 
-| Cookie | Set by | Purpose |
-|--------|--------|---------|
-| `ph_<token>_posthog` | Middleware (new visitors only) | Seeds `distinct_id` when no PostHog cookie exists yet. |
+| Cookie | TTL | Set by | Purpose |
+|--------|-----|--------|---------|
+| `ph_<token>_posthog` | 90 days | Middleware (new visitors only) | Seeds `distinct_id` when no PostHog cookie exists yet. |
+| `ph_site_variant_route` | 60 seconds | Middleware (every routed response) | Caches the evaluated routing variant so static assets skip `/flags` but still rewrite to the correct deployment. Refreshed on each middleware response. |
+| `ph_site_variant_bypass` | 4 hours | Middleware (QA URL param only) | Forces a variant for dogfooding. Separate from the routing cache. Cleared with `?ph_site_clear_bypass=1`. |
 
 ## Environment variables
 
@@ -123,7 +137,7 @@ Verify in DevTools → Network → document response headers:
 
 - `x-ph-site-variant: test` or `control`
 
-Every page load calls PostHog `/flags` for routing. Expect a small latency cost per request.
+Expect **one** PostHog `/flags` call per page view (plus zero for sub-resources while `ph_site_variant_route` is valid). The document request sets the routing cookie; subsequent `page-data/`, `static/`, and `webpack/` requests should reuse it.
 
 ## Production rollout checklist
 
@@ -145,8 +159,13 @@ Set `SITE_EXPERIMENT_ENABLED=false` in Vercel. Middleware passes all traffic thr
 - The client SDK records exposure via `getFeatureFlag()` in `posthog-init.js` when `SITE_EXPERIMENT_ENABLED=true` at build time. That sends `$feature_flag_called` for the experiment. Toggling the env var requires a redeploy to update the generated script.
 - Assignment should match when the same `distinct_id` is used on both sides. Middleware reads the PostHog cookie; the client uses `localStorage+cookie`. A rare split can occur if `localStorage` has a stale ID but the cookie is missing.
 - `/api/*` routes always hit production serverless functions and are not rewritten.
+- The routing cookie can briefly serve a stale variant after rollout changes or when ending an experiment (up to 60s). This affects which HTML/assets load, not PostHog analytics stickiness.
 
 ## What is excluded
 
 - `/api/*`: Vercel serverless functions (HubSpot, contact forms, etc.)
 - Bots: always control, for SEO stability
+
+## What is not excluded
+
+Static assets (`/static/`, `/page-data/`, `/webpack/`, and other same-origin sub-resources) **must** pass through middleware. Unlike Next.js `_next/static`, Vercel does not skip middleware for static files automatically. Excluding them would send test users HTML from the experimental deployment but load hashed assets from production, causing 404s when branch builds differ.
