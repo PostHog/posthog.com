@@ -653,21 +653,6 @@ const workSurfaces: {
         ),
     },
     {
-        Icon: IconCoffee,
-        iconColor: 'text-brown dark:text-brown-dark',
-        label: (
-            <Link to="/code" state={{ newWindow: true }} className="font-bold text-primary">
-                PostHog Code
-            </Link>
-        ),
-        copy: 'A desktop app for driving parallel agents to edit your product. The same Inbox and reports live here.',
-        cta: (
-            <CallToAction to="/code" state={{ newWindow: true }} type="secondary" size="md">
-                Get the app
-            </CallToAction>
-        ),
-    },
-    {
         Icon: IconAtSign,
         iconColor: 'text-sky-blue',
         label: (
@@ -698,7 +683,7 @@ const workSurfaces: {
         ),
     },
     {
-        icon: IconTerminal,
+        Icon: IconTerminal,
         iconColor: 'text-green',
         label: (
             <Link to="/docs/cli" state={{ newWindow: true }} className="font-bold text-primary">
@@ -713,7 +698,7 @@ const workSurfaces: {
         ),
     },
     {
-        icon: IconCoffee,
+        Icon: IconCoffee,
         iconColor: 'text-brown dark:text-brown-dark',
         label: (
             <span className="inline-flex items-center gap-2">
