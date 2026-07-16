@@ -136,12 +136,14 @@ import GoOverrideServerProperties from './override-server-properties/go.mdx'
 You can configure the `FeatureFlagRequestTimeout` parameter when initializing your PostHog client to set a flag request timeout. This helps prevent your code from being blocked if PostHog's servers are too slow to respond. By default, this is set to 3 seconds.
 
 ```go
+// import "time"
+
 client, _ := posthog.NewWithConfig(
     os.Getenv("<ph_project_token>"),
     posthog.Config{
         PersonalApiKey:            "your personal API key", // Optional, but much more performant. If this token is not supplied, then fetching feature flag values will be slower.
         Endpoint:                  "<ph_client_api_host>",
-        FeatureFlagRequestTimeout: 3, // Time in seconds. Defaults to 3.
+        FeatureFlagRequestTimeout: 3 * time.Second, // Defaults to 3 seconds.
     },
 )
 ```

@@ -25,7 +25,7 @@ export default function WizardFrameworksTeaser({ className }: { className?: stri
 
     const [tooltipOpen, setTooltipOpen] = useState(false)
 
-    const rootClass = className ? `text-xs text-secondary m-0 ${className}` : 'text-xs text-secondary m-0'
+    const rootClass = className ? `!text-[13px] text-secondary m-0 ${className}` : '!text-[13px] text-secondary m-0'
 
     return (
         <p className={rootClass}>

@@ -104,3 +104,46 @@ await posthog.flush()
 // or keep the runtime alive until the flush completes
 ctx.waitUntil(posthog.flush())
 ```
+
+## Python
+
+The Python SDK ships the same custom-dispatcher path as `PostHogMCP`, a subclass of the [`posthog`](/docs/libraries/python) client. Method names are snake_case and arguments are keyword args rather than an options object:
+
+```python
+from posthog.mcp import PostHogMCP, get_more_tools_result
+
+posthog = PostHogMCP("phc_your_project_api_key", host="https://us.i.posthog.com")
+
+# Decorate your tools/list response so agents state their intent (and, optionally,
+# advertise the get_more_tools virtual tool):
+tools = posthog.prepare_tool_list(my_tools, report_missing=True)
+
+# On an inbound tools/call, pull the intent and strip the injected `context`:
+prepared = posthog.prepare_tool_call(name, arguments)
+if prepared.is_missing_capability:
+    posthog.capture_missing_capability(context=prepared.intent, distinct_id=user_id)
+    return get_more_tools_result()
+
+result = run_tool(name, prepared.args)
+
+# Capture the call (fire-and-forget, like posthog.capture):
+posthog.capture_tool_call(
+    name,
+    intent=prepared.intent,
+    intent_source=prepared.intent_source,
+    parameters=arguments,
+    response=result,
+    duration_ms=elapsed_ms,
+    is_error=False,
+    distinct_id=user_id,
+    session_id=mcp_session_id,
+    groups={"organization": org_id},
+)
+
+# On the handshake:
+posthog.capture_initialize(client_name="claude-code", client_version="1.2.3", distinct_id=user_id)
+
+posthog.flush()  # PostHogMCP is a posthog client — flush/shutdown it yourself
+```
+
+`PostHogMCP(api_key, missing_capability_tool_name="get_more_tools", mcp_exception_autocapture=True, **posthog_kwargs)` accepts the standard `posthog` client kwargs (e.g. `host`). Set `mcp_exception_autocapture=False` to stop a failed tool call from emitting a `$exception` sibling. As in TypeScript, the wrapping-path hooks (`identify`, `context`, `intent_fallback`, `event_properties`) don't apply here — pass identity and properties on each `capture_*` call.

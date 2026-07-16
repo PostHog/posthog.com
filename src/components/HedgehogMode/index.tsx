@@ -50,8 +50,8 @@ export default function HedgeHogModeEmbed(): JSX.Element | null {
         const hedgehogModeForceValue = window.location.search.includes('hedgehog_mode=true')
             ? true
             : window.location.search.includes('hedgehog_mode=false')
-              ? false
-              : undefined
+            ? false
+            : undefined
 
         if (hedgehogModeForceValue !== undefined && hedgehogModeForceValue !== hedgehogModeEnabled) {
             setHedgehogModeEnabled(hedgehogModeForceValue)

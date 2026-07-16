@@ -24,6 +24,7 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import OSTabs from 'components/OSTabs'
 import { TeamMember } from 'components/People'
+import { PROFILE_COLORS } from 'constants/profileColors'
 import {
     IconThumbsUpFilled,
     IconThumbsDownFilled,
@@ -379,20 +380,7 @@ const AvatarBlock = ({
                     <div>
                         <label className="text-[15px]">Favorite color</label>
                         <ul className="list-none m-0 p-0 flex space-x-1 mt-1">
-                            {[
-                                'lime-green',
-                                'blue',
-                                'orange',
-                                'teal',
-                                'purple',
-                                'seagreen',
-                                'salmon',
-                                'yellow',
-                                'red',
-                                'green',
-                                'lilac',
-                                'sky-blue',
-                            ].map((color) => {
+                            {PROFILE_COLORS.map((color) => {
                                 const active = values.color === color
                                 return (
                                     <li key={color} onClick={() => setFieldValue('color', color)}>

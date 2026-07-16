@@ -82,6 +82,44 @@ To fix this, you make sure flags are immediately available on a page load. There
 1. [Wait for feature flags to load](/docs/feature-flags/adding-feature-flag-code#ensuring-flags-are-loaded-before-usage) before showing the page (low engineering effort, but slows page down by ~200ms).
 2. Use [client-side bootstrapping](/docs/feature-flags/bootstrapping) (high engineering effort, but keeps the page blazing fast).
 
+## My exposure event has the wrong variant because the flag wasn't ready when it fired
+
+This is the most damaging version of the problem above, and it often goes unnoticed because the experiment still produces results, they're just biased.
+
+It happens when the variant on your exposure event is decided before the data needed to evaluate the flag is available. The exposure event then carries `false` or `None` instead of `control` or `test`, and PostHog only counts users whose exposure event has a valid variant. Those incorrectly evaluated users are silently dropped from the experiment. If the dropped users aren't random, and they usually aren't, your results are skewed, not just smaller.
+
+This is about the variant value on the **exposure event** specifically. Metric events don't carry a variant and aren't affected, see [metric events don't need a variant property](/docs/experiments/exposures#metric-events-dont-need-a-variant-property).
+
+A common version of this is a client that evaluates a flag whose release conditions depend on person properties your server sets. The client can fire its exposure event before those properties have been ingested, so the flag can't be evaluated yet and the variant comes back wrong:
+
+```mermaid
+sequenceDiagram
+    participant Client as Your client
+    participant Server as Your server
+    participant PH as PostHog
+    Server->>PH: Set person properties (signup_date, app_version)
+    Note over Server,PH: Sent asynchronously, ingested with a delay
+    Client->>PH: Reload flags + fire exposure event
+    Note over Client,PH: Properties not ingested yet,<br/>flag can't be evaluated
+    PH-->>Client: Variant is None / false
+    Note over Client: Exposure event recorded with the wrong variant,<br/>user dropped from the experiment
+```
+
+Common ways this happens:
+
+- **A client evaluates a flag that depends on server-set person properties.** If your flag's release conditions filter on properties your backend sets (for example `signup_date` or `app_version`), a client that evaluates before those properties are ingested can't determine the variant. With [local evaluation](/docs/feature-flags/local-evaluation), the flag is omitted and the exposure event shows `None` (see [`None` vs `false`](#my-feature-flag-called-events-dont-show-my-variant-names) above). This is most likely for **new users in onboarding**, exactly where many high-stakes experiments run.
+- **A flag is evaluated long before the change is reached.** For example, a screen fetches data ahead of time on app launch, so the exposure fires before the relevant person properties are set.
+- **A flag is evaluated in parallel with another gate.** For example, an app version or capability check, so the variant on the event can disagree with what was actually shown.
+
+To detect it, break down an insight of your exposure event by `$feature/<flag-key>` (or break down `$feature_flag_called` by `$feature_flag_response`) and look for a `false`, `None`, or `(empty string)` cohort. A large or variant-imbalanced missing cohort is the signature, and it often shows up as [sample ratio mismatch](#diagnosing-sample-ratio-mismatch-srm).
+
+To fix it, in rough order of preference:
+
+1. **Fire the exposure event from the surface that knows the correct variant.** If a flag depends on server-set person properties, evaluate it and emit exposure server-side, where those properties are available synchronously.
+2. **Stamp the correct variant onto the exposure event explicitly.** Have your server provide the resolved `$feature/<flag-key>` value and set it on your [custom exposure event](/docs/experiments/exposures#custom-exposure-events), rather than relying on a separate client evaluation.
+3. **Make the flag's inputs available before it's evaluated.** [Wait for flags to load](/docs/feature-flags/adding-feature-flag-code#ensuring-flags-are-loaded-before-usage), [bootstrap](/docs/feature-flags/bootstrapping) the client with known values, or set the properties the flag depends on locally.
+4. **Avoid release conditions that depend on data unavailable at evaluation time.** If a flag enrolls new users only, make sure the property encoding "new user" is reliably present wherever the flag is evaluated.
+
 ## Why am I seeing unexpected results in my A/A test?
 
 If you're [running an A/A test](/tutorials/aa-testing) (where both variants are identical) and seeing significant differences between variants, there are a few things to check:

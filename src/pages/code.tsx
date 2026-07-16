@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import SEO from 'components/seo'
+import SEO, { buildProductStructuredData } from 'components/seo'
 import Editor from 'components/Editor'
 import { IconArrowUpRight, IconCheck, IconFlask, IconToggle, IconTrends, IconWarning } from '@posthog/icons'
 import OSButton from 'components/OSButton'
@@ -16,13 +16,12 @@ import { DottedConnection } from 'components/Code/DottedConnection'
 import { StickerTombstone } from 'components/Stickers/Stickers'
 import { ZoomImage } from 'components/ZoomImage'
 import CloudinaryImage from 'components/CloudinaryImage'
+import WistiaEmbed from 'components/WistiaEmbed'
 import Link from 'components/Link'
 import { IconDiscord } from 'components/OSIcons/Icons'
 import { WaitlistForm } from 'components/WaitlistForm'
 import { DownloadContent } from 'components/Code/DownloadContent'
 import { usePrefersReducedMotion } from 'components/Code/usePrefersReducedMotion'
-import useProduct from 'hooks/useProduct'
-import { useApp } from '../context/App'
 
 // ─────────────────────────────────────────────
 // Section label ("The old way", "The PostHog way")
@@ -612,11 +611,6 @@ function HeroSection() {
     )
     const [contentVisible, setContentVisible] = useState(true)
     const prefersReducedMotion = usePrefersReducedMotion()
-    const allProducts = useProduct() as any[]
-    const product = Array.isArray(allProducts) ? allProducts.find((p: any) => p.handle === 'posthog_code') : undefined
-    const { siteSettings } = useApp()
-    const isDark = siteSettings.theme === 'dark'
-    const screenshot = product?.screenshots?.home
 
     const swapToDownload = () => {
         if (typeof window !== 'undefined') {
@@ -681,7 +675,7 @@ function HeroSection() {
                         </h1>
 
                         <div className="@4xl/editor:gap-8 flex flex-col @4xl/editor:flex-row items-start">
-                            <div className="@4xl/flex-[0_0_280px]">
+                            <div className="@4xl/editor:flex-[0_0_280px]">
                                 <p>
                                     PostHog Code is the only AI devtool that understands your <strong>product,</strong>{' '}
                                     not just your <strong>codebase</strong>.
@@ -719,20 +713,10 @@ function HeroSection() {
                                 </div>
                             </div>
 
-                            <div className="@4xl/flex-1">
-                                {screenshot && (
-                                    <ZoomImage>
-                                        <img
-                                            src={
-                                                (isDark && screenshot.srcDark
-                                                    ? screenshot.srcDark
-                                                    : screenshot.src) as string
-                                            }
-                                            alt={screenshot.alt}
-                                            className={screenshot.imgClasses}
-                                        />
-                                    </ZoomImage>
-                                )}
+                            <div className="@4xl/editor:flex-1 w-full min-w-0">
+                                <div className="rounded-md overflow-hidden shadow-xl not-prose">
+                                    <WistiaEmbed mediaId="vm9mn1m4dv" />
+                                </div>
                             </div>
                         </div>
                     </>
@@ -1457,16 +1441,16 @@ const FAQ_ITEMS = [
             <div className="space-y-3">
                 <p>
                     PostHog Code's{' '}
-                    <a href="/docs/posthog-code/inbox" className="underline">
+                    <a href="/docs/self-driving/inbox" className="underline">
                         Inbox
                     </a>{' '}
                     connects to{' '}
-                    <a href="/docs/posthog-code/inbox/sources" className="underline">
+                    <a href="/docs/self-driving/inbox/sources" className="underline">
                         signal sources
                     </a>{' '}
                     you choose – Error Tracking, support tickets, Session Replay, GitHub Issues, Linear, and Zendesk –
                     and{' '}
-                    <a href="/docs/posthog-code/inbox/research" className="underline">
+                    <a href="/docs/self-driving/inbox/research" className="underline">
                         ranks issues
                     </a>{' '}
                     by code importance (hot paths like checkout or billing), user impact (how many users are affected,
@@ -1562,13 +1546,17 @@ const FAQ_ITEMS = [
         content: (
             <div className="space-y-3">
                 <p>
-                    PostHog Code is a monthly seat-based subscription. If you've participated in previous betas with
-                    PostHog, you might be surprised to hear that we are charging for this one.
+                    PostHog Code is usage-based – there's no fixed subscription. You spend AI credits as you go (100
+                    credits = $1), and credits reflect the underlying model's cost exactly, with no markup on top.
                 </p>
                 <p>
-                    Every user gets a free tier with enough credits for roughly 10 tasks. If you want to use it for
-                    meaningful engineering work (and cancel your Codex and Claude Code subscriptions in the process),
-                    the Pro plan comes with a very generous credit limit.
+                    Every organization gets a $20/month free tier to explore, plus a default $50 billing limit so you
+                    don't rack up costs by accident (customize it anytime). Simple tasks use very few credits; larger,
+                    multi-file work uses more. See the{' '}
+                    <a href="/docs/posthog-code/pricing" className="underline">
+                        pricing docs
+                    </a>{' '}
+                    for the full breakdown.
                 </p>
             </div>
         ),
@@ -1626,6 +1614,13 @@ export default function CodePage() {
             <SEO
                 title="PostHog Code"
                 description="PostHog Code uses signals from production data to diagnose issues and generate pull requests – before you even know there's a problem."
+                structuredData={buildProductStructuredData({
+                    name: 'PostHog Code',
+                    description:
+                        "PostHog Code uses signals from production data to diagnose issues and generate pull requests – before you even know there's a problem.",
+                    slug: 'code',
+                    operatingSystem: 'macOS, Windows, Linux',
+                })}
             />
             <Editor slug="/code" maxWidth="100%" hasPadding={false} disableFormatting>
                 <div className="@container not-prose font-rounded">

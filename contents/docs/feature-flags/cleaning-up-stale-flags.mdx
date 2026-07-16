@@ -116,7 +116,7 @@ Search your codebase for the flag key as a string. Common SDK patterns:
 | Python | `posthog.evaluate_flags(...)` followed by `flags.is_enabled('key')` or `flags.get_flag('key')`, plus older `posthog.feature_enabled('key')` and `posthog.get_feature_flag('key')` calls |
 | Node | `evaluateFlags(...)` followed by `flags.isEnabled('key')` or `flags.getFlag('key')`, plus older `isFeatureEnabled('key')` and `getFeatureFlag('key')` calls |
 | Ruby | `evaluate_flags(...)` followed by `flags.enabled?('key')` or `flags.get_flag('key')`, plus older `is_feature_enabled('key')` and `get_feature_flag('key')` calls |
-| Go | `EvaluateFlags(...)` followed by `flags.IsEnabled("key")` or `flags.GetFlag("key")`, plus older `IsFeatureEnabled("key")` and `GetFeatureFlag("key")` calls |
+| Go | `EvaluateFlags(...)` followed by `flags.IsEnabled("key")` or `flags.GetFlag("key")`, plus older `IsFeatureEnabled(...)` and `GetFeatureFlag(...)` calls |
 | Java | `evaluateFlags(...)` followed by `flags.isEnabled("key")` or `flags.getFlag("key")`, plus older `isFeatureEnabled("key")` and `getFeatureFlag("key")` calls |
 | .NET | `EvaluateFlagsAsync(...)` followed by `flags.IsEnabled("key")` or `flags.GetFlag("key")`, plus older `IsFeatureEnabledAsync("key")` and `GetFeatureFlagAsync("key")` calls |
 | Rust | `evaluate_flags(...)` followed by `flags.is_enabled("key")` or `flags.get_flag("key")`, plus older `is_feature_enabled("key")` and `get_feature_flag("key")` calls |

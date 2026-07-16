@@ -141,7 +141,7 @@ export default function Explorer({
 
     return (
         <div className="@container w-full h-full flex flex-col min-h-1">
-            {(!fullScreen || !websiteMode) && (
+            {!fullScreen && (
                 <>
                     <HeaderBar
                         {...getHeaderBarProps()}

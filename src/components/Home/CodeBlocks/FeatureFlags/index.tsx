@@ -8,7 +8,7 @@ function Payloads() {
                 <strong>
                     Turn <em>"this"</em> into <em>"that".</em>
                 </strong>{' '}
-                Test changes on your site without hard-coding the changes with <code>getFeatureFlagPayload()</code>.
+                Test changes on your site without hard-coding the changes with <code>getFeatureFlagResult()</code>.
             </p>
             <div className="flex flex-col lg:flex-row gap-x-6">
                 <div className="flex-1">
@@ -26,7 +26,7 @@ function Payloads() {
                     <CodeBlock
                         code={`posthog.onFeatureFlags(function () {
   if (posthog.isFeatureEnabled('headline-change')) {
-    const swapText = posthog.getFeatureFlagPayload('headline-change');
+    const swapText = posthog.getFeatureFlagResult('headline-change')?.payload;
     document.querySelector('h1').textContent = swapText.title;
     document.querySelector('h2').textContent = swapText.subtitle;
   }
@@ -116,7 +116,7 @@ export default [
         title: 'Payloads',
         body: Payloads,
         bodyType: 'component',
-        code: ['getFeatureFlagPayload()'],
+        code: ['getFeatureFlagResult()'],
     },
     {
         title: 'Bootstrapping',
