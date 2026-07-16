@@ -201,6 +201,7 @@ If you're a support hero, there are a few things to make sure are in place so th
 - The [feature ownership page](/handbook/engineering/feature-ownership) is up to date with the features and products your team owns.
 - You have a Slack channel named `#teams-<team-name>`, in exactly the same format as your team name on the teams page.
 - You have a Slack channel named `#support-<team-name>`, in exactly the same format as your team name on the teams page.
+- The PostHog Slack app is in your `#support-<team-name>` channel (invite it with `/invite @PostHog`) — without it, ticket notifications can't be posted there.
 - Support hero notifications are configured. Call `/support-hero <incident_io_schedule_id> [optional_hero_nickname]` in your team's Slack channel to activate or reconfigure at any time. Call `/support-hero` with no arguments to find out who's currently handling tickets.
 
 A couple more things to make sure of (these may happen magically in future):
