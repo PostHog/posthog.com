@@ -51,6 +51,6 @@ Request and response bodies above Helicone's size limits are offloaded to storag
 
 ## Troubleshooting
 
-If credential validation fails, check that the key was created in the same Helicone region you selected — a US key won't authenticate against the EU host, and vice versa.
+If credential validation fails, check that the key was created in the same Helicone region you selected – a US key won't authenticate against the EU host, and vice versa.
 
 <TroubleshootingLink />
