@@ -9,30 +9,31 @@ availability:
 sourceId: Hubspot
 ---
 
-The HubSpot connector can link contacts, companies, deals, emails, meetings, quotes, and tickets to PostHog.
+import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
+import SyncModes from "../_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
-To link Hubspot:
+The HubSpot connector syncs your CRM data – contacts, companies, deals, tickets, quotes, emails, and meetings – into PostHog, so you can analyze your sales and marketing data alongside your product data.
 
-1. Go to the [Data pipeline page](https://app.posthog.com/data-management/sources) and the sources tab in PostHog
-2. Click **New source** and select Hubspot
-3. Select the Hubspot account you want to link and click **Connect app**
-4. _Optional:_ Add a prefix to your table names
-5. Select the tables you want to import
-6. Click **Import**
+## Prerequisites
+
+You need a HubSpot account that you can authorize PostHog to access. The connection uses OAuth, so you don't need to manually create an API key – you'll sign in to HubSpot and grant access during setup.
+
+## Adding a data source
+
+<SourceSetupIntro />
+
+When linking HubSpot, select an existing HubSpot account to link to PostHog or create a new connection:
+
+- **Hubspot account** – Select the HubSpot account you want to link, then follow the prompts to authorize PostHog. This handles authentication via OAuth.
+
+You can optionally enable **Customize synced properties** to control which properties are synced for each schema. See [Configuration](#configuration) below for details.
 
 ## Sync modes
 
-HubSpot tables support both full refresh and incremental syncing:
+<SyncModes />
 
-- **Full refresh** – Re-imports all records from HubSpot on every sync
-- **Incremental** – Only imports records modified since the last sync
-
-When you enable incremental sync for a table:
-
-1. The first sync performs a full import to establish a baseline.
-2. Subsequent syncs only fetch records modified since the last sync, using the `hs_lastmodifieddate` property (or `lastmodifieddate` for contacts).
-
-Incremental syncing is more efficient for large HubSpot portals, reducing sync time and API usage. If a sync is interrupted, it resumes from where it left off.
+HubSpot tables support both full refresh and incremental syncing. With incremental sync, the first sync performs a full import to establish a baseline, then subsequent syncs only fetch records modified since the last sync (using the `hs_lastmodifieddate` property, or `lastmodifieddate` for contacts). Incremental syncing is more efficient for large HubSpot portals, and interrupted syncs resume from where they left off.
 
 ## Configuration
 
@@ -60,4 +61,10 @@ Changing the synced properties after the initial import requires a full resync o
 
 </CalloutBox>
 
-The data warehouse then starts syncing your Hubspot data. You can see details, progress, and rows synced in the [data pipeline sources tab](https://app.posthog.com/data-management/sources).
+## Supported tables
+
+<SourceTables />
+
+## Troubleshooting
+
+<TroubleshootingLink />

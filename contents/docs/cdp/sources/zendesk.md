@@ -9,19 +9,38 @@ availability:
 sourceId: Zendesk
 ---
 
-The Zendesk connector can link brands, groups, organizations, tickets, users, and sla policies.
+import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
+import SyncModes from "../_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
-To link Zendesk:
+The Zendesk connector syncs your customer support data – tickets, users, organizations, groups, brands, and SLA policies – into PostHog, so you can analyze support activity alongside your product data.
 
-1. Go to the [Data pipeline page](https://app.posthog.com/data-management/sources) and the sources tab in PostHog
-2. Click **New source** and select Zendesk
-3. Provide the subdomain of your zendesk account (`https://posthoghelp.zendesk.com/` -> "posthoghelp" is the subdomain)
-4. Provide the [API token](https://support.zendesk.com/hc/en-us/articles/4408889192858-Managing-access-to-the-Zendesk-API#topic_bsw_lfg_mmb) and email associated with it
-5. *Optional:* Add a prefix to your table names
-6. Click **Next**
+## Prerequisites
 
-The data warehouse then starts syncing your Zendesk data. You can see details and progress in the [data pipeline sources tab](https://app.posthog.com/data-management/sources).
+You need a Zendesk account with access to the [Zendesk API](https://support.zendesk.com/hc/en-us/articles/4408889192858-Managing-access-to-the-Zendesk-API). Token access must be enabled in your Zendesk admin settings, and you'll need an API token plus the email address it belongs to.
+
+## Adding a data source
+
+<SourceSetupIntro />
+
+When linking Zendesk, you'll need:
+
+- **Subdomain** – the subdomain of your Zendesk account. For `https://posthoghelp.zendesk.com/`, the subdomain is `posthoghelp`.
+- **API token** – create one under **Admin Center → Apps and integrations → Zendesk API → Add API token**.
+- **Email** – the email address of the account the API token belongs to.
+
+## Sync modes
+
+<SyncModes />
 
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />
+
+## Troubleshooting
+
+<TroubleshootingLink />

@@ -297,7 +297,7 @@ function DpaGenerator() {
                         </Link>
                     </div>
 
-                    <div className="bg-yellow/25 py-3 px-4 text-sm -mx-4 @3xl:-mx-8 mt-0 border-b border-light dark:text-black">
+                    <div className="bg-yellow/25 py-3 px-4 text-sm text-center -mx-4 @3xl:-mx-8 mt-0 border-b border-light dark:text-black">
                         <strong>Heads up:</strong> This is a preview. To get a countersigned, valid DPA, generate it
                         inside your PostHog organization at{' '}
                         <a

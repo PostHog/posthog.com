@@ -9,7 +9,7 @@ availability:
 sourceId: Ramp
 ---
 
-<CalloutBox icon="IconInfo" title="Alpha release" type="fyi">
+<CalloutBox icon="IconFlask" title="Alpha release" type="action">
 
 The Ramp source is currently in alpha. It has been tested against Ramp's developer API documentation but not yet battle-tested with live production workloads. If you run into issues, please let us know.
 
@@ -60,6 +60,10 @@ Ramp locks scopes when the developer app is created. You can't add scopes later 
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />
 
 ## Sync modes
 

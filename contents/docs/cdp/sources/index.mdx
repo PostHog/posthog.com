@@ -84,13 +84,15 @@ PostHog displays a warning if your selected primary key columns are nullable, si
 
 #### Lookback window
 
-Incremental syncs only re-read rows whose incremental field is greater than the last synced value (the watermark). Rows that land at or below the watermark on a later sync are never picked up. This can happen with backdated edits, clock skew, late-committing transactions, or bulk updates that stamp many rows with the same timestamp, and it causes your incremental table to drift from the source over time.
+For timestamp or date incremental fields, you can configure a lookback window to re-read recent data on each sync. This catches late-arriving or backdated rows that would otherwise be missed because the watermark has already advanced past them.
 
-To catch these rows, set an optional lookback window. On each sync, PostHog re-reads rows from the lookback window before the last synced value, so it re-checks a rolling overlap window every run. Because incremental syncs merge on the primary key, re-reading rows is idempotent and doesn't create duplicates. PostHog doesn't change the stored sync position, so you can adjust or remove the window at any time without resyncing.
+The lookback subtracts time from the stored watermark when querying the source, creating a rolling overlap window. For example, with an 8-day lookback, each sync re-reads the last 8 days of data. The stored watermark continues advancing normally, so you don't lose your place. Incremental sync's merge-by-primary-key makes the re-read idempotent – duplicate rows are deduplicated automatically.
 
-The lookback window is only available for incremental syncs on a timestamp or date incremental field. It isn't available for append only syncs, which don't merge rows. For a date field, a lookback shorter than a day has no effect, since date fields only count whole days.
+To configure a lookback window, enter a duration (in minutes, hours, or days) when selecting the incremental sync method during source setup or in the schema settings. The maximum lookback is 60 days.
 
-You can set the lookback window when choosing the sync method during source setup, or later from the schema's configuration.
+Lookback windows are only available for incremental sync, not append-only sync. They only apply to `datetime`, `date`, and `timestamp` incremental fields – integer or numeric fields aren't supported.
+
+> **Note:** For `date` incremental fields, sub-day lookback values have no effect since date arithmetic only counts whole days.
 
 ### Append only
 
@@ -105,6 +107,18 @@ As with incremental syncing, selecting a nullable field as the cursor skips any 
 ### Full table
 
 This reloads the whole table on every sync. This is great for tables with common data deletions or ones without an incrementing field (such as a `updated_at` timestamp).
+
+### xmin (Postgres only)
+
+xmin sync uses PostgreSQL's hidden `xmin` system column as an incremental cursor. Use it when your table has no reliable `updated_at` or incremental field and you want incremental syncing without setting up CDC.
+
+Requirements:
+
+- PostgreSQL 13 or newer
+- Table must have a primary key
+- Only regular tables and materialized views (not views, foreign tables, or partitioned parents)
+
+xmin does not capture deletes. If you need delete tracking, use CDC instead. See the [Postgres source documentation](/docs/cdp/sources/postgres#sync-methods) for more details.
 
 ## Syncing
 
@@ -129,7 +143,7 @@ The schemas table supports filtering and sorting to help you find specific schem
 You can filter schemas by:
 
 - **Status** - Running, Completed, Error, etc.
-- **Sync method** - Incremental, Full table, CDC, or schemas not yet set up
+- **Sync method** - Incremental, Full table, xmin (Postgres only), CDC, or schemas not yet set up
 - **Frequency** - Filter by a specific sync interval
 
 You can also use the name search and the **Show enabled only** toggle to narrow results further.
@@ -151,6 +165,12 @@ Bulk enable is not available – you must enable schemas individually since each
 ### Sync frequency
 
 CDC (Change Data Capture) schemas support sync frequencies as low as every 1 minute. All other sync methods (Incremental, Full table, Append only) have a minimum sync frequency of 5 minutes. This restriction is enforced in both the UI and the API.
+
+### Anchor time
+
+Anchor time pins the sync schedule so runs start at a predictable time each day. This is useful for coordinating syncs with downstream jobs or reports. Anchor time only applies to sync intervals longer than one hour.
+
+The anchor time is stored in UTC. When your project timezone is something other than UTC, a toggle lets you view and set the anchor time in either UTC or your project timezone.
 
 ### Managing webhook tables
 

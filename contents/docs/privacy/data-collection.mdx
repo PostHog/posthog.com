@@ -12,6 +12,7 @@ You should consider the following tools to help you manage data collection:
 | Feature | Description |
 |---------|-------------|
 | [Asking for opt out](#asking-for-opt-out) | A top-level opt out of all data collection |
+| [Using a consent management platform](#using-posthog-with-a-consent-management-platform-cmp) | Integrate PostHog with a CMP like OneTrust or Cookiebot |
 | [IP data capture](#ip-data-capture) | Control whether client IP addresses are captured or discarded |
 | [Autocapture behavior](#autocapture) | Configure what elements and interactions are automatically captured |
 | [Masking sensitive information](#masking-sensitive-information) | Prevent specific sensitive data from being collected |
@@ -73,6 +74,47 @@ To opt users out by default, set `opt_out_capturing_by_default` to `true` in the
 import OptOutDefault from '../product-analytics/_snippets/multilanguage/opt-out-default.mdx'
 
 <OptOutDefault />
+
+### Using PostHog with a consent management platform (CMP)
+
+If you use a consent management platform (such as OneTrust, Cookiebot, Osano, Usercentrics, or a home-grown banner), integrate it with PostHog's opt in and out controls rather than the loader snippet.
+
+<CalloutBox type="warning" title="Don't gate the snippet behind consent">
+
+A common mistake is wrapping the PostHog snippet (or `<script>` tag) so that it only runs after consent is given. Many CMPs make this easy by letting you tag scripts as a specific cookie category and blocking them until the user accepts.
+
+The problem: if the SDK never loads, it can't count the visitors who ignore or dismiss the banner, and it can't respect a consent choice made later in the session. This is a frequent cause of sudden, large drops in event volume.
+
+**Always load posthog-js.** Control whether it captures data using the opt in and out APIs below.
+
+</CalloutBox>
+
+The recommended pattern is to load PostHog opted out by default, then opt the user in once they consent:
+
+1. Initialize PostHog with `opt_out_capturing_by_default: true` (see [opting out by default](#opting-out-by-default)) so nothing is captured until the user consents.
+2. When the user grants consent, call `posthog.opt_in_capturing()`.
+3. When the user withdraws or denies consent, call `posthog.opt_out_capturing()`.
+
+```js-web
+posthog.init('<ph_project_token>', {
+    api_host: '<ph_client_api_host>',
+    defaults: '<ph_posthog_js_defaults>',
+    opt_out_capturing_by_default: true,
+})
+
+// Wire these into your CMP's consent-change callback
+function onConsentChange(hasConsented) {
+    if (hasConsented) {
+        posthog.opt_in_capturing()
+    } else {
+        posthog.opt_out_capturing()
+    }
+}
+```
+
+Every CMP (OneTrust, Cookiebot, and others) exposes some kind of callback or event that fires when consent changes. Call `opt_in_capturing()` and `opt_out_capturing()` from that callback, using whatever consent-change hook your CMP provides.
+
+Alternatively, use [cookieless tracking](#cookieless-tracking) with `cookieless_mode: "on_reject"`. PostHog still loads and counts users with a privacy-preserving hash, and only starts storing cookies once the user opts in – without you needing to wire up the opt in and out calls yourself.
 
 ## IP data capture
 

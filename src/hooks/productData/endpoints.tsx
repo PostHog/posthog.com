@@ -37,11 +37,12 @@ export const endpoints = {
     seo: {
         title: 'Endpoints – Custom API endpoints powered by your PostHog data',
         description:
-            'Create custom API endpoints powered by your PostHog data. Use them to build embedded analytics, data feeds, and more.',
+            'Custom API endpoints powered by your PostHog data – the context agents need to build embedded analytics, data feeds, and make your product self-driving.',
     },
     overview: {
         title: 'Custom API endpoints powered by your PostHog data',
-        description: 'Use them to build embedded analytics, data feeds, and more – no backend required.',
+        description:
+            'Use them to build embedded analytics, data feeds, and more – no backend required. Endpoints are how your product’s context flows out to the agents and tools that make it self-driving.',
         textColor: 'text-black',
         layout: 'overlay',
     },
@@ -252,6 +253,9 @@ export const endpoints = {
             ],
             us: [
                 {
+                    title: 'Agents and tools can pull your product’s context through a stable API – the data that powers self-driving',
+                },
+                {
                     title: 'Reuse existing insights or SQL queries already in PostHog',
                 },
                 {
@@ -312,7 +316,7 @@ export const endpoints = {
         playground:
             "Pick a scenario from the dropdown, see the SQL query that powers it, and preview the API URL you'd call. This is great for demos and for getting a feel for how the whole flow works – from defining the query to seeing the response format. In the actual product, every endpoint has its own playground tab where you can test with different variable values and see the exact response structure, including columns and result format. It removes the guesswork from integration.",
         'comparison-summary':
-            "<strong>TL;DR:</strong> If you're already using PostHog and need to get your analytics data into an application, endpoints are the simplest path. You're reusing queries you've already built – insights or SQL – and exposing them as stable, optimized APIs. The alternative is building your own analytics backend on top of something like Tinybird or ClickHouse Cloud, which makes sense if you're working with raw event data outside of PostHog or need a standalone analytics API. But if your data is already in PostHog and you want to avoid duplicating logic, endpoints save you a lot of plumbing.",
+            "<strong>TL;DR:</strong> If you're already using PostHog and need to get your analytics data into an application, endpoints are the simplest path. You're reusing queries you've already built – insights or SQL – and exposing them as stable, optimized APIs. The alternative is building your own analytics backend on top of something like Tinybird or ClickHouse Cloud, which makes sense if you're working with raw event data outside of PostHog or need a standalone analytics API. But if your data is already in PostHog and you want to avoid duplicating logic, endpoints save you a lot of plumbing. They're also how your product's context flows out to the agents and tools that act on it – the API layer behind a self-driving product.",
         'feature-comparison':
             "This comparison focuses on the differences between using PostHog Endpoints versus building your own analytics API layer on tools like Tinybird or ClickHouse Cloud. The main advantage of endpoints is that they sit directly on top of PostHog's data and query engine – no ETL, no syncing, no separate infrastructure. You get materialization, caching, versioning, and OpenAPI specs as built-in features rather than things you have to build yourself. The trade-off is that endpoints are scoped to PostHog data, so if you need to query data that lives entirely outside PostHog, a standalone tool may be a better fit.",
         docs: "The endpoints documentation covers everything from the initial setup to advanced topics like materialization, variables, versioning, and the CLI. We've included step-by-step guides for common patterns – customer-facing analytics, internal tools with Retool, breakdown variables, and SQL variables with filtering. There are code examples in cURL, Python, Node.js, TypeScript, and Go, plus a guide on generating typed SDKs from the OpenAPI spec. If you're evaluating whether to use endpoints or the Query API, there's a dedicated comparison page that lays out the trade-offs.",

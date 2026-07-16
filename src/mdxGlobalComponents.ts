@@ -1,4 +1,5 @@
 import { RainbowText } from 'components/RainbowText'
+import AboutPostHog from './components/AboutPostHog'
 import CountriesWeHireIn from './components/AMCharts/CountriesWeHireIn'
 import { ArrayCTA } from './components/ArrayCTA'
 import AskMax from './components/AskMax'
@@ -35,9 +36,11 @@ import TeamMember from './components/TeamMember'
 import WistiaEmbed from './components/WistiaEmbed'
 import WizardCommand from './components/WizardCommand'
 import WizardCTA from './components/WizardCTA'
+import PlatformInstall from './components/PlatformInstall'
 
 // Global MDX components
 export const shortcodes = {
+    AboutPostHog,
     ArrayCTA,
     BasicHedgehogImage,
     BorderWrapper,
@@ -76,4 +79,5 @@ export const shortcodes = {
     WistiaEmbed,
     WizardCommand,
     WizardCTA,
+    PlatformInstall,
 }

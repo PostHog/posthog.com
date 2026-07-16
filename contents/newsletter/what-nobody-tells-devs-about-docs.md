@@ -66,7 +66,7 @@ This iteration is guided by feedback. For us, this means reviewing:
 
 <Caption>Our most unhelpful docs 🙈</Caption>
 
-We take time every week to review these and make improvements to docs. We also benefit from a huge amount of small fixes from [our community](/blog/github-cms).
+We take time every week to review these and make improvements to docs. We also benefit from a huge amount of small fixes from [our community](/blog/github-cms). 
 
 It is the repeated little improvements that creates a coveted polished docs experience.
 
@@ -150,7 +150,7 @@ This means ideas that apply to building a great product also apply to writing gr
 
 3. **Invest in design and development.** The structure and navigability of your docs helps people find what they need. We're lucky to have <SmallTeam slug="website" /> to help us with this. They make the pages and components within those pages look good and work towards our goal.
 
-4. **They require ownership.** You can’t expect something to improve if it’s no one’s responsibility to improve it. Product teams are required to contribute, but we also [keep a list](/handbook/docs-and-wizard/docs-ownership) of the docs team members are responsible for.
+4. **They require ownership.** You can’t expect something to improve if it’s no one’s responsibility to improve it. Product teams are required to contribute, but we also [keep a list](/handbook/wizard-and-docs/docs-ownership) of the docs team members are responsible for.
 
 5. **Culture makes a big difference.** Your product is a product of your culture and so is your docs. [Our values](/handbook/values) of being open source, everybody codes, trust and feedback over process, and biasing for action play a big role in how we write docs.
 

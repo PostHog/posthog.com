@@ -22,6 +22,7 @@ We aim to be significantly cheaper than our competitors. Below are tips to reduc
 - **Use structured JSON logs.** Easier to query, so you log less "just in case." ([Structured logging](/docs/logs/best-practices#use-structured-logging))
 - **Get log levels right.** Keep INFO for outcomes, push verbose detail to DEBUG (off by default). ([Log levels](/docs/logs/best-practices#use-log-levels-correctly))
 - **Filter noisy endpoints.** Drop or downsample health checks and load balancer pings. ([What not to log](/docs/logs/best-practices#what-not-to-log))
+- **Drop or rate-limit logs in PostHog.** Remove or cap noisy services during ingestion, no code change required. ([Drop rules](/docs/logs/best-practices#drop-and-rate-limit-logs-in-posthog))
 - **Sample successful traffic.** Keep 100% of errors/slow requests; sample the boring stuff. ([Sampling](/docs/logs/best-practices#sample-strategically))
 - **Don't log payloads.** Skip request/response bodies and large objects — log metadata instead. ([What not to log](/docs/logs/best-practices#what-not-to-log), [Context bloat](/docs/logs/best-practices#build-events-throughout-the-request-lifecycle))
 - **Avoid duplicate logging across services.** Log the outcome once; don't replay the same event everywhere. ([What not to log](/docs/logs/best-practices#what-not-to-log))

@@ -59,8 +59,7 @@ const DataWarehouse: React.FC = () => {
                 buttonText="Link your first source"
                 buttonLink="/docs/cdp/sources"
                 imageColumnClasses="mt-4 md:-mt-8"
-                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png"
-                imageClasses="max-h-48 md:max-h-64"
+                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/data_warehouse_8e163dfe7f.png"
             />
 
             <AskMax

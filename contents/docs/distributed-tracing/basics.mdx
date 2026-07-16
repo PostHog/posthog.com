@@ -23,12 +23,12 @@ Because every span in a request shares the same `trace_id`, you can reconstruct 
 
 Each PostHog product answers a different question about your application:
 
-| Product | What it tells you | Example |
-|---------|-------------------|---------|
-| **[Product Analytics](/docs/product-analytics)** | What users did | "User clicked checkout" |
-| **[Logs](/docs/logs)** | What happened at each point | "Inventory service returned 200 with 0 items" |
-| **[Error Tracking](/docs/error-tracking)** | What broke | "TypeError: cannot read property 'price' of undefined" |
-| **Distributed tracing** | How the request flowed and where time went | "Checkout took 3.2s, and 2.8s of it was spent waiting on the inventory service" |
+| Product                                          | What it tells you                          | Example                                                                         |
+| ------------------------------------------------ | ------------------------------------------ | ------------------------------------------------------------------------------- |
+| **[Product Analytics](/docs/product-analytics)** | What users did                             | "User clicked checkout"                                                         |
+| **[Logs](/docs/logs)**                           | What happened at each point                | "Inventory service returned 200 with 0 items"                                   |
+| **[Error Tracking](/docs/error-tracking)**       | What broke                                 | "TypeError: cannot read property 'price' of undefined"                          |
+| **Distributed tracing**                          | How the request flowed and where time went | "Checkout took 3.2s, and 2.8s of it was spent waiting on the inventory service" |
 
 Errors tell you something broke. Logs tell you what happened at one point. Tracing tells you **how the pieces connected, and where the time and failures actually came from** – across every service a request touched.
 
@@ -68,15 +68,15 @@ Useful tracing is about instrumenting the right boundaries, not every line of co
 
 2. **Give spans descriptive names** – `GET /api/checkout` and `db.query load_cart` tell you what ran at a glance. `handler` and `query` don't.
 
-3. **Add business context as attributes** – Attach the user ID, the plan, and the [Feature Flag](/docs/feature-flags) variant. When a trace is slow, you want to know *who* it was slow for.
+3. **Add business context as attributes** – Attach the user ID, the plan, and the [Feature Flag](/docs/feature-flags) variant. When a trace is slow, you want to know _who_ it was slow for.
 
-4. **Propagate context across services** – Pass trace context with every outgoing call so spans from different services join the same trace. This is what makes tracing *distributed*.
+4. **Propagate context across services** – Pass trace context with every outgoing call so spans from different services join the same trace. This is what makes tracing _distributed_.
 
 ## How PostHog makes tracing useful
 
 **No vendor lock-in** - PostHog ingests traces over [OpenTelemetry (OTLP)](/docs/distributed-tracing/start-here). Use standard OTel libraries in any language, with no proprietary SDK. If you already export traces, point them at PostHog and you're done.
 
-**Built on the same pipeline as Logs** - Tracing uses the same OpenTelemetry-based ingestion as [Logs](/docs/logs), so a single OTel setup covers both.
+**Built on the same pipeline as Logs** - Tracing uses the same OpenTelemetry-based ingestion as [Logs](/docs/logs), so a single OTel setup covers both. When inspecting a span, the **Logs** tab shows correlated logs scoped to that span or the whole trace, and you can deep-link into the full Logs product with filters pre-applied.
 
 **One platform, not another vendor** - Your traces live in the same PostHog project as [Session Replay](/docs/session-replay), [Error Tracking](/docs/error-tracking), and [Product Analytics](/docs/product-analytics), so you have one less observability tool to run and pay for.
 
