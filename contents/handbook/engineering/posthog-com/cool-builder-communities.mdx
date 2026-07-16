@@ -1,0 +1,40 @@
+---
+title: Managing builder communities
+---
+
+[/cool-builder-communities](/cool-builder-communities) is a directory of builder groups, hacker houses, and builder collectives around the world. It exists to help people discover and join communities of builders. It features [PostHog community incubator](/community-incubator) chapters, but like [cool tech jobs](/cool-tech-jobs), it's meant to highlight all builder groups — not just the ones we sponsor.
+
+## How it works (v1)
+
+The directory is a static, curated data file in the posthog.com repo: `src/data/builderCommunities.ts`. There is no backend — the page renders the list and a Mapbox map directly from that file.
+
+Each entry has:
+
+- `name` – the group's name
+- `location` – a display label (e.g. "Dublin, Ireland") plus `lat`/`lng` for the map pin
+- `url` – website or community link
+- `status` – `active`, `inactive-seeking-support` (shown as "Seeking organizers"), or `inactive`
+- `type` – `builder-group`, `hacker-house`, or `builder-collective`
+- `organizers` – names with optional links
+- `logo` – optional image URL
+- `nextSession` – optional date and/or link (Luma, Meetup, etc.)
+- `posthogIncubator` – set to `true` for [community incubator](/community-incubator) chapters, which get a "PostHog incubator" badge
+
+### Adding or editing a community
+
+Edit `src/data/builderCommunities.ts` and open a PR — a template entry with instructions is in the comment at the top of the file. Anyone (including external contributors) can PR a community. Remember to look up the lat/lng for the location (right-click the spot in Google Maps to copy the coordinates), otherwise the community appears in the list but not on the map.
+
+### Submissions
+
+The "Submit a community" button on the page opens a form that fires a `builder_community_submission` event in PostHog with the group's details (see `src/components/BuilderCommunityForm/README.md`). There's no moderation queue — someone on the team reviews the event, verifies the group, and adds it to the data file.
+
+## Aspirations for v2
+
+Things we'd like to add if the directory gets traction:
+
+- **Self-serve submissions with a moderation queue** – move the data into the Squeak (Strapi) backend with `communities` and `pending-communities` collections, mirroring the cool tech jobs pattern, so submissions publish without a code change
+- **Search** – free-text search once the list is too long to scan
+- **Per-community permalinks** – dedicated pages (like `/events/:id`) instead of the current `#communityId=` hash
+- **Automatic next-session data** – pull upcoming sessions from Luma/Meetup instead of hand-maintaining dates
+- **Photos and richer profiles** – session photos, member counts, and vibe, like the events page
+- **Custom OG image** – a dedicated `/images/og/cool-builder-communities.png`

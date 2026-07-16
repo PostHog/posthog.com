@@ -1199,6 +1199,21 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    'cool-builder-communities-add-a-community': {
+        size: {
+            min: {
+                width: 600,
+                height: 400,
+            },
+            max: {
+                width: 600,
+                height: 700,
+            },
+        },
+        position: {
+            center: true,
+        },
+    },
     'signup-embed': {
         size: {
             min: {

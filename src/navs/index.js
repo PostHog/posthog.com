@@ -1769,6 +1769,10 @@ export const handbookSidebar = [
                 url: '/handbook/engineering/posthog-com/cool-tech-jobs',
             },
             {
+                name: 'Managing builder communities',
+                url: '/handbook/engineering/posthog-com/cool-builder-communities',
+            },
+            {
                 name: 'Managing small teams',
                 url: '/handbook/engineering/posthog-com/small-teams',
             },
@@ -2062,6 +2066,12 @@ export const communityMenu = {
             icon: 'IconLaptop',
             color: 'purple',
             url: '/cool-tech-jobs',
+        },
+        {
+            name: 'Cool builder communities',
+            icon: 'IconPeople',
+            color: 'seagreen',
+            url: '/cool-builder-communities',
         },
         {
             name: 'Newsletter',

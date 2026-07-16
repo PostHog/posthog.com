@@ -443,6 +443,12 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
+                    label: 'Cool builder communities',
+                    link: '/cool-builder-communities',
+                    icon: <Icons.IconPeople className="size-4 text-seagreen" />,
+                },
+                {
+                    type: 'item',
                     label: 'Places',
                     link: '/places',
                     icon: <Icons.IconMap className="size-4 text-red" />,

@@ -213,6 +213,10 @@ const linklist: IProps[] = [
                 title: 'Cool tech jobs',
                 url: '/cool-tech-jobs',
             },
+            {
+                title: 'Cool builder communities',
+                url: '/cool-builder-communities',
+            },
         ],
     },
     {
