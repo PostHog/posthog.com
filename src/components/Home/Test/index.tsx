@@ -1,8 +1,5 @@
-'use client'
-
 import React, { useEffect, useState } from 'react'
 import ReaderView from 'components/ReaderView'
-import SEO from 'components/seo'
 import { useApp } from '../../../context/App'
 import { useWindow } from '../../../context/Window'
 import DataStackSection from 'components/Home/Sections/DataStackSection'
@@ -18,8 +15,6 @@ import Logo from 'components/Logo'
 import { CallToAction } from 'components/CallToAction'
 import IntegrationPrompt from 'components/IntegrationPrompt'
 import { motion } from 'framer-motion'
-import HeroCarousel from 'components/Home/HeroCarousel'
-import { buildTabs } from 'components/Home/HeroCarousel/tabs'
 import ToolsTicker from 'components/Home/ToolsTicker'
 // NOTE: `components/PlatformInstall` (index/IconButton/schema/CopyableCommand), the new
 // `Logomark*` icons added to `components/OSIcons/Icons.tsx`, and the `canvas-confetti`
@@ -31,6 +26,25 @@ import ToolsTicker from 'components/Home/ToolsTicker'
 import PlatformInstall, { wizardInstallSchema } from 'components/PlatformInstall'
 import Customers from '../Customers'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
+
+/** Loads HeroCarousel + Typecaast slides only in the browser so SSR/Helmet aren't affected. */
+function LazyHeroCarousel({ className }: { className?: string }) {
+    const [Content, setContent] = useState<React.ComponentType<{ className?: string }> | null>(null)
+
+    useEffect(() => {
+        Promise.all([import('components/Home/HeroCarousel'), import('components/Home/HeroCarousel/tabs')]).then(
+            ([{ default: HeroCarousel }, { buildTabs }]) => {
+                setContent(() => (props: { className?: string }) => <HeroCarousel tabs={buildTabs} {...props} />)
+            }
+        )
+    }, [])
+
+    if (!Content) {
+        return <div className={`@container ${className} min-h-[300px] @[820px]:min-h-[400px]`} aria-hidden />
+    }
+
+    return <Content className={className} />
+}
 
 const SecondaryActions = ({ justify = 'center' }: { className?: string; justify?: 'center' | 'start' }) => (
     <p
@@ -197,7 +211,7 @@ function Hero(): JSX.Element {
                 </div>
             </div>
 
-            <HeroCarousel tabs={buildTabs} className="mb-4" />
+            <LazyHeroCarousel className="mb-4" />
             <ToolsTicker className="mb-8" />
         </>
     )
@@ -214,30 +228,17 @@ export default function HomeTest() {
     }, [])
 
     return (
-        <>
-            <SEO
-                title="PostHog – We make your product self-driving"
-                updateWindowTitle={false}
-                description="All your developer tools in one place. PostHog gives engineers everything to build, test, measure, and ship successful products faster. Get started free."
-                image="/images/og/default.png"
-                languageAlternates={[
-                    { hrefLang: 'en', href: '/' },
-                    { hrefLang: 'ko', href: '/ko' },
-                    { hrefLang: 'x-default', href: '/' },
-                ]}
-            />
-            <ReaderView proseSize="lg" hideLeftSidebar showQuestions={false}>
-                <div className="space-y-12">
-                    <Hero />
-                    <Customers />
-                    <DataStackSection />
-                    <PricingSection />
-                    <WhyPostHogSection />
-                    <BedtimeReadingSection />
-                    <ShamelessCTASection />
-                    <HitCounter />
-                </div>
-            </ReaderView>
-        </>
+        <ReaderView proseSize="lg" hideLeftSidebar showQuestions={false}>
+            <div className="space-y-12">
+                <Hero />
+                <Customers />
+                <DataStackSection />
+                <PricingSection />
+                <WhyPostHogSection />
+                <BedtimeReadingSection />
+                <ShamelessCTASection />
+                <HitCounter />
+            </div>
+        </ReaderView>
     )
 }
