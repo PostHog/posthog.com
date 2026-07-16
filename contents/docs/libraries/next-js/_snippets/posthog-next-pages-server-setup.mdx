@@ -1,4 +1,4 @@
-Create a shared PostHog module with `createPostHog()`, then call the returned `getPostHog` with the request context inside `getServerSideProps` to capture events and evaluate feature flags.
+Create a shared PostHog module with `createPostHog()`, then call the returned `getPostHog` with the request context inside `getServerSideProps` to evaluate feature flags.
 
 ```ts file=lib/posthog.ts
 import { createPostHog } from '@posthog/next/pages'
@@ -22,7 +22,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
     const flags = await posthog.evaluateFlags({ flagKeys: ['new-dashboard'] })
     const showNewDashboard = flags.isEnabled('new-dashboard')
-    posthog.capture({ event: 'dashboard_viewed', flags })
 
     return { props: { showNewDashboard } }
 }
@@ -30,13 +29,13 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
 Without `getDistinctId`, PostHog can use the identity cookie and tracing headers supplied by the client as request context. When you need a strict guarantee that analytics uses the identity from your authenticated session, pass an authoritative distinct ID directly when capturing events or evaluating feature flags. When the resolver returns an ID, PostHog uses it as the request default ahead of client-provided identity, while an ID passed directly to a capture or flag method still takes precedence. Session and device linkage can remain connected to the browser. The resolver runs once per `getPostHog(ctx)` call and is not called for users who opted out of capture.
 
-To bootstrap feature flags and eliminate flicker on page load, pass the flag data through `pageProps`:
+The Pages Router provider doesn't have the App Router's `bootstrapFlags` prop. For the same no-flicker behavior, evaluate flags in `getServerSideProps` and pass the result through `pageProps`:
 
 ```tsx file=pages/dashboard.tsx
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const posthog = await getPostHog(ctx)
-    const bootstrap = await posthog.getAllFlagsAndPayloads()
-    return { props: { posthogBootstrap: bootstrap } }
+    const posthogBootstrap = await posthog.getAllFlagsAndPayloads()
+    return { props: { posthogBootstrap } }
 }
 ```
 

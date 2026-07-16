@@ -1,4 +1,4 @@
-Create a shared PostHog module with `createPostHog()`, then use the returned `getPostHog` in Server Components, Route Handlers, and Server Actions to capture events and evaluate feature flags.
+Create a shared PostHog module with `createPostHog()`. Use the returned `getPostHog` to evaluate feature flags in Server Components and capture events from request or action handlers.
 
 ```ts file=lib/posthog.ts
 import 'server-only'
@@ -19,7 +19,6 @@ export default async function DashboardPage() {
     const posthog = await getPostHog()
 
     const flags = await posthog.getAllFlags()
-    posthog.capture({ event: 'dashboard_viewed' })
 
     return (
         <div>{flags['new-dashboard'] ? <NewDashboard /> : <OldDashboard />}</div>

@@ -270,6 +270,10 @@ For server-side events and feature flag evaluations, PostHog can use the client-
     </Tab.Panels>
 </Tab.Group>
 
+> **Note:** Avoid capturing page views or other navigation events while rendering a Server Component or running `getServerSideProps`. Rendering doesn't prove that a navigation completed. The App Router can execute render code while [prefetching](https://nextjs.org/docs/app/guides/prefetching), and Next.js can retry renders. Use `PostHogPageView` for page views, and capture server-side events from handlers invoked for the action you want to measure.
+>
+> Dynamic rendering keeps personalized flag decisions out of Next.js's shared Full Route Cache. The App Router can still reuse a React Server Component payload from its client Router Cache. After an authentication or identity change, use [`router.refresh()`](https://nextjs.org/docs/app/api-reference/functions/use-router#userouter) when the current route's server-rendered flag decisions must be evaluated again.
+
 </Step>
 
 <Step title="Capture server-side request errors" badge="recommended">
