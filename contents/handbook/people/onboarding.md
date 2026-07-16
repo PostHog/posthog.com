@@ -206,7 +206,7 @@ In this call the support engineer will be able to answer any questions, as well 
 -   [ ] [Advice on how to communicate with customers](/handbook/engineering/support-hero#how-do-i-communicate) and [prioritize tickets](/handbook/support/posthog-support#prioritizing-tickets)
 -   [ ] [How and when to mark tickets as 'On hold' or 'Pending'](/handbook/support/posthog-support#ticket-statuses)
 -   [ ] [What our SLAs](/handbook/support/customer-support#response-targets) are and [what ticket severity indicates](/docs/support-options#severity-levels)
--   [ ] How to deal with [bug reports and feature requests](/handbook/support/customer-support#how-do-i-handle-a-bug-report-or-feature-request), and how to [merch customers](/handbook/company/merch-store#how-do-we-give-away-merch-for-free)
+-   [ ] How to deal with [bug reports and feature requests](/handbook/support/customer-support#how-do-i-handle-a-bug-report-or-feature-request), and how to [merch customers](/handbook/company/merch-store#merch-giveaways)
 -   [ ] How to avoid duplication of effort by [assigning tickets when you start work](/handbook/support/posthog-support#working-on-a-ticket)
 -   [ ] [Where your tickets live](/handbook/support/posthog-support#where-do-the-tickets-live)
 -   [ ] When to use [private notes](/handbook/support/posthog-support#private-notes), and raising internal questions about a ticket in Slack

@@ -146,7 +146,7 @@ For minor incidents, we can usually just respond ourselves. Keep it straightforw
 
 For major incidents, Sales/CS teams may want to handle communication with their customers directly. Check #group-cs-sales-support to see if they're coordinating a response plan. If you're unsure whether to respond to a particular customer:
 - Check #group-cs-sales-support to see if there's discussion about the incident
-- Message #cs-sales-support and ask if they'd prefer to handle the communication with this customer. Attach a private note to the ticket with a link to the conversation.
+- Message #group-cs-sales-support and ask if they'd prefer to handle the communication with this customer. Attach a private note to the ticket with a link to the conversation.
 - If nobody responds and the customer is waiting, respond yourself - it's better than leaving them hanging
 
 Remember that TAMs and CSMs work in specific timezones. If an enterprise customer reaches out when their TAM/CSM is offline or on holiday, don't leave them waiting. Respond to their question. You can loop in their TAM/CSM as a heads-up, but the customer should get an answer from someone.

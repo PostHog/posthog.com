@@ -12,7 +12,7 @@ One of the many awesome things about PostHog is that support is dealt with by en
 
 You'll see some teams using a term of endearment for Support Hero, examples being "Infra Hero" or… "Luigi". Don't ask – we don't know.
 
-Our Support Engineers, in the <SmallTeam slug="support" /> triage tickets for [most teams](/handbook/support/customer-support#what-do-support-engineers-do). They will resolve tickets if possible, and escalate to the engineering team responsible if they need further help.
+Our support engineers, in the <SmallTeam slug="support" />, triage tickets for [most teams](/handbook/support/customer-support#what-do-support-engineers-do). They will resolve tickets if possible, and escalate to the engineering team responsible if they need further help.
 
 ## When is my turn?
 

@@ -27,7 +27,7 @@ For example, we should [refund](/handbook/growth/sales/refunds) customers when t
 
 ## Pavlovian merch response
 
-[Give it out](/handbook/company/merch-store#how-do-we-give-away-merch-for-free) to people who say nice things about us. That'll create an army of developer warriors fighting for PostHog on the internet!
+[Give it out](/handbook/company/merch-store#merch-giveaways) to people who say nice things about us. That'll create an army of developer warriors fighting for PostHog on the internet!
 
 ## Breaking bad news
 

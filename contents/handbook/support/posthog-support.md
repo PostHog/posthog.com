@@ -134,7 +134,7 @@ The direction for our support team is set out in [Stop adding AI between you and
 
 ## Private notes
 
-Attach private notes as you investigate. Future travellers will thank you: notes help the next person understand your thought process, they help engineers if you need to escalate, and they make it far easier for a teammate to pick up the ticket if you're on holiday or off sick.
+Attach private notes as you investigate. Future travelers will thank you: notes help the next person understand your thought process, they help engineers if you need to escalate, and they make it far easier for a teammate to pick up the ticket if you're on holiday or off sick.
 
 Don't use private notes to communicate internally about a ticket — it's far too easy to miss them. If you need to ask something internally, **raise it in Slack** and then attach a private note with a link to the Slack thread. If you start any Slack conversation about a ticket, always leave a private note linking to it.
 
@@ -164,7 +164,7 @@ If you're ever unsure how a ticket ended up in a particular state, or where a ce
 
 ## Automations and workflows
 
-A lot of the ticket flow runs automatically through PostHog workflows and realtime destinations — classification, tagging, SLA deadlines, notifications, CSAT, and more. You don't need to memorise all of this, but it's useful to know what's happening behind the scenes so you understand how a ticket got into a particular state (and where to look if something isn't behaving as expected).
+A lot of the ticket flow runs automatically through PostHog workflows and realtime destinations — classification, tagging, SLA deadlines, notifications, CSAT, and more. You don't need to memorize all of this, but it's useful to know what's happening behind the scenes so you understand how a ticket got into a particular state (and where to look if something isn't behaving as expected).
 
 ### Categorization
 
