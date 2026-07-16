@@ -2521,20 +2521,35 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }, [websiteMode])
 
     const convertWindowsToPixels = (windows: any[]) => {
+        // A malformed or truncated share link can produce a non-array `windows` value,
+        // or entries missing `size`/`position`. Guard against both so a bad URL can't
+        // crash the whole page render.
+        if (!Array.isArray(windows)) return []
+
         const innerWidth = window.innerWidth
         const innerHeight = window.innerHeight
 
-        return windows.map((win) => ({
-            ...win,
-            size: {
-                width: (parseFloat(win.size.width) / 100) * innerWidth,
-                height: (parseFloat(win.size.height) / 100) * innerHeight,
-            },
-            position: {
-                x: (parseFloat(win.position.x) / 100) * innerWidth,
-                y: (parseFloat(win.position.y) / 100) * (innerHeight - taskbarHeight),
-            },
-        }))
+        const toPixels = (value: any, total: number) => {
+            const parsed = parseFloat(value)
+            return Number.isFinite(parsed) ? (parsed / 100) * total : undefined
+        }
+
+        return windows
+            .filter((win) => win && typeof win.path === 'string' && win.path.startsWith('/'))
+            .map((win) => {
+                const width = toPixels(win.size?.width, innerWidth)
+                const height = toPixels(win.size?.height, innerHeight)
+                const x = toPixels(win.position?.x, innerWidth)
+                const y = toPixels(win.position?.y, innerHeight - taskbarHeight)
+
+                return {
+                    ...win,
+                    // Only set size/position when fully valid; otherwise leave them undefined
+                    // so createNewWindow falls back to its sensible defaults.
+                    size: width !== undefined && height !== undefined ? { width, height } : undefined,
+                    position: x !== undefined && y !== undefined ? { x, y } : undefined,
+                }
+            })
     }
 
     useEffect(() => {
@@ -2543,20 +2558,26 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         if (paramsWindows) {
             const [initialWindow, ...rest] = convertWindowsToPixels(parsed.windows)
 
-            // Preserve non-windows query parameters when navigating
-            const nonWindowsParams = { ...parsed }
-            delete nonWindowsParams.windows
-            const queryString =
-                Object.keys(nonWindowsParams).length > 0 ? `?${qs.stringify(nonWindowsParams, { encode: false })}` : ''
+            // A malformed share link can leave us with no usable window to open;
+            // bail rather than dereferencing an undefined initialWindow.
+            if (initialWindow) {
+                // Preserve non-windows query parameters when navigating
+                const nonWindowsParams = { ...parsed }
+                delete nonWindowsParams.windows
+                const queryString =
+                    Object.keys(nonWindowsParams).length > 0
+                        ? `?${qs.stringify(nonWindowsParams, { encode: false })}`
+                        : ''
 
-            navigate(`${initialWindow.path}${queryString}`, {
-                state: {
-                    newWindow: true,
-                    size: initialWindow.size,
-                    position: initialWindow.position,
-                    savedWindows: rest,
-                },
-            })
+                navigate(`${initialWindow.path}${queryString}`, {
+                    state: {
+                        newWindow: true,
+                        size: initialWindow.size,
+                        position: initialWindow.position,
+                        savedWindows: rest,
+                    },
+                })
+            }
         }
 
         if (stateWindows) {
