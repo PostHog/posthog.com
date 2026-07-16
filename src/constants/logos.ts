@@ -14,6 +14,7 @@ export const LOGOS = {
     astro: 'https://res.cloudinary.com/dmukukwp6/image/upload/astro_icon_dark_23a13977ad.svg',
     attio: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_02_02_T13_32_15_602_Z_3d36e826ca.png',
     autogen: 'https://res.cloudinary.com/dmukukwp6/image/upload/autogen_7747bfd3ae.svg',
+    awsBedrock: 'https://res.cloudinary.com/dmukukwp6/image/upload/bedrock_5c06698148.png',
     azureBlob: 'https://res.cloudinary.com/dmukukwp6/image/upload/azure_blob_storage_a5110351f6.svg',
     azureOpenAI: 'https://res.cloudinary.com/dmukukwp6/image/upload/azure_openai_884ba0124a.svg',
     azureSql: 'https://res.cloudinary.com/dmukukwp6/image/upload/sql_database_generic_8f6b358019.svg',
@@ -28,9 +29,11 @@ export const LOGOS = {
     clerk: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_02_02_T12_36_01_806_Z_30c81aea20.png',
     cloudflare: 'https://res.cloudinary.com/dmukukwp6/image/upload/cloudflare_icon_ef34353f85.svg',
     cohere: 'https://res.cloudinary.com/dmukukwp6/image/upload/cohere_0ddf02d545.svg',
+    convex: 'https://res.cloudinary.com/dmukukwp6/image/upload/convex_d8dcddcd63.svg',
     crewai: 'https://res.cloudinary.com/dmukukwp6/image/upload/crewai_67ee9f5eb6.svg',
     cloudflareR2: 'https://res.cloudinary.com/dmukukwp6/image/upload/r2_0d79d88d1f.svg',
     cloudfront: 'https://res.cloudinary.com/dmukukwp6/image/upload/Cloud_Front_76c0f62ab5.svg',
+    dedalus: 'https://res.cloudinary.com/dmukukwp6/image/upload/dedalus_labs_logo_e03bb97137.svg',
     deepseek: 'https://res.cloudinary.com/dmukukwp6/image/upload/deepseek_df02608124.svg',
     django: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/integrate/frameworks/django.svg',
     docusaurus:
@@ -46,6 +49,8 @@ export const LOGOS = {
     gatsby: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/gatsby.svg',
     github: 'https://res.cloudinary.com/dmukukwp6/image/upload/github_mark_903e35d471.svg',
     go: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/go.svg',
+    grafana: 'https://res.cloudinary.com/dmukukwp6/image/upload/Grafana_logo_b2df48fb94.svg',
+    granola: 'https://www.google.com/s2/favicons?domain=granola.ai&sz=64',
     googleAds: 'https://res.cloudinary.com/dmukukwp6/image/upload/Google_Ads_logo_b59e784792.svg',
     groq: 'https://res.cloudinary.com/dmukukwp6/image/upload/groq_a0ed539e47.png',
     googleCloud: 'https://res.cloudinary.com/dmukukwp6/image/upload/Google_Cloud_14ebf7693d.svg',
@@ -61,6 +66,7 @@ export const LOGOS = {
     java: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/java.svg',
     javascript: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/js.svg',
     klaviyo: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_02_02_T12_13_09_301_Z_1c73fd1ac6.png',
+    kmp: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/kmp.svg',
     kubernetes: 'https://res.cloudinary.com/dmukukwp6/image/upload/kubernetes_svgrepo_com_b9716be409.svg',
     langgraph: 'https://res.cloudinary.com/dmukukwp6/image/upload/langgraph_e5fee77551.svg',
     linear: 'https://res.cloudinary.com/dmukukwp6/image/upload/linear_c186e02f3c.png',
@@ -77,6 +83,7 @@ export const LOGOS = {
     mistral: 'https://res.cloudinary.com/dmukukwp6/image/upload/mistral_551c75e2dd.svg',
     moengage: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_200,c_limit,q_auto,f_auto/1_95b73543_367f4ea0bc.png',
     mongodb: 'https://res.cloudinary.com/dmukukwp6/image/upload/Mongo_DB_Logo_f095b5aca0.svg',
+    mollie: 'https://res.cloudinary.com/dmukukwp6/image/upload/mollie_logo_f3e47c8d2a.svg',
     mysql: 'https://res.cloudinary.com/dmukukwp6/image/upload/mysql_logo_0ce3cfe493.svg',
     n8n: 'https://res.cloudinary.com/dmukukwp6/image/upload/n8n_color_ce6a4e9c92.svg',
     nestjs: 'https://res.cloudinary.com/dmukukwp6/image/upload/nestjs_logo_034b054f38.svg',
@@ -86,6 +93,7 @@ export const LOGOS = {
     nodejs: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/nodejs.svg',
     nuxt: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/nuxt.svg',
     ollama: 'https://res.cloudinary.com/dmukukwp6/image/upload/ollama_a058ab8f46.svg',
+    opentelemetry: 'https://res.cloudinary.com/dmukukwp6/image/upload/opentelemetry_afb29df5ab.svg',
     phoenix: 'https://res.cloudinary.com/dmukukwp6/image/upload/Phoenix_Framework_81f5da0296.svg',
     perplexity: 'https://res.cloudinary.com/dmukukwp6/image/upload/perplexity_1_cb4f143ce1.svg',
     php: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/php.svg',
@@ -108,6 +116,7 @@ export const LOGOS = {
         'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/rudderstack.svg',
     pinterestAds: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pinterest_ads_563b842dc5.png',
     revenuecat: 'https://res.cloudinary.com/dmukukwp6/image/upload/logomark_red_background_9ea591e17a.svg',
+    roblox: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Roblox_Corporation_2025_logo_svg_301751b47c.png',
     rollup: 'https://res.cloudinary.com/dmukukwp6/image/upload/Rollup_js_c306a2fde3.svg',
     ruby: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/ruby.svg',
     rust: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/rust.svg',
@@ -129,6 +138,7 @@ export const LOGOS = {
     svelte: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/integrate/frameworks/svelte.svg',
     tanstack: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/logo_color_600_391d28faae.png',
     temporal: 'https://res.cloudinary.com/dmukukwp6/image/upload/Temporal_Symbol_dark_66b0582c1b.svg',
+    typeform: 'https://res.cloudinary.com/dmukukwp6/image/upload/typeform_a12822b2db.png',
     tiktokAds: 'https://res.cloudinary.com/dmukukwp6/image/upload/tiktok_svgrepo_com_9315a2fa30.svg',
     togetherAI: 'https://res.cloudinary.com/dmukukwp6/image/upload/together_ai_cdee2c04f2.svg',
     unity: 'https://res.cloudinary.com/dmukukwp6/image/upload/unity_9f9c332941.svg',
@@ -149,4 +159,18 @@ export type LogoKey = keyof typeof LOGOS
 
 export function getLogo(key: string): string | undefined {
     return LOGOS[key as LogoKey]
+}
+
+// Logos whose source SVGs have hardcoded dark fills/strokes and render poorly on dark backgrounds.
+// `dark:invert` flips pure-black artwork to white; `dark:hue-rotate-180` preserves the original
+// hue of color elements after inversion (used for logos that mix color with black).
+const LOGO_DARK_CLASS_BY_URL: Record<string, string> = {
+    [LOGOS.ios]: 'dark:invert',
+    [LOGOS.rust]: 'dark:invert',
+    [LOGOS.reactRouter]: 'dark:invert dark:hue-rotate-180',
+}
+
+export function getDarkClassForLogo(url?: string): string {
+    if (!url) return ''
+    return LOGO_DARK_CLASS_BY_URL[url] ?? ''
 }

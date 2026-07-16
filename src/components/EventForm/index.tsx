@@ -10,6 +10,8 @@ import { IconSpinner } from '@posthog/icons'
 import Toggle from 'components/Toggle'
 import ImageDrop, { type Image as UploadImage } from 'components/ImageDrop'
 import uploadImage from 'components/Squeak/util/uploadImage'
+import { toBlob, toPng } from 'html-to-image'
+import EventGraphic, { type EventGraphicSpeaker } from 'components/EventGraphic'
 import { useToast } from '../../context/Toast'
 import { Event } from '../../pages/events'
 import CreatableMultiSelect from 'components/CreatableMultiSelect'
@@ -28,6 +30,7 @@ type EventFormValues = {
     audience: string[]
     speakers: string[]
     private: boolean
+    online: boolean
     speakerTopic?: string
     partners: Array<{ name: string; url?: string }>
     attendees?: number
@@ -43,12 +46,17 @@ type SelectOption = {
 }
 
 const validationSchema = Yup.object().shape({
-    name: Yup.string().required('Name is required'),
+    name: Yup.string().max(60, 'Max 60 characters').required('Name is required'),
     date: Yup.string().required('Date is required'),
     startTime: Yup.string().optional(),
     description: Yup.string().optional(),
     link: Yup.string().url('Enter a valid URL').optional(),
-    locationLabel: Yup.string().required('Location is required'),
+    online: Yup.boolean().optional(),
+    locationLabel: Yup.string().when('online', {
+        is: true,
+        then: (schema) => schema.optional(),
+        otherwise: (schema) => schema.required('Location is required'),
+    }),
     format: Yup.array().of(Yup.string()).min(1, 'Select at least one format'),
     audience: Yup.array().of(Yup.string()).min(1, 'Select at least one audience'),
     speakers: Yup.array().of(Yup.string()).optional(),
@@ -58,6 +66,9 @@ const validationSchema = Yup.object().shape({
     video: Yup.string().url('Enter a valid URL').optional(),
     presentation: Yup.string().url('Enter a valid URL').optional(),
 })
+
+const graphicFileName = (eventName?: string): string =>
+    `${(eventName || 'posthog-event').toLowerCase().replace(/[^a-z0-9]+/g, '-')}.png`
 
 const transformEventToFormValues = (event: Event, speakerOptions?: SelectOption[]): EventFormValues => {
     const parsed = dayjs(event?.date)
@@ -83,6 +94,7 @@ const transformEventToFormValues = (event: Event, speakerOptions?: SelectOption[
         audience: event?.audience || [],
         speakers: speakersValues,
         private: Boolean(event?.private),
+        online: Boolean(event?.online),
         speakerTopic: event?.speakerTopic || '',
         partners: (event?.partners && event.partners.length > 0
             ? event.partners.map((p) => ({ name: p.name, url: p.url || '' }))
@@ -99,6 +111,8 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
     const { getJwt } = useUser()
     const { addToast } = useToast()
     const [submitting, setSubmitting] = React.useState<boolean>(false)
+    const [downloadingGraphic, setDownloadingGraphic] = React.useState<boolean>(false)
+    const graphicRef = React.useRef<HTMLDivElement>(null)
     const data = useStaticQuery(graphql`
         query {
             allEvent {
@@ -117,6 +131,11 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
                     squeakId
                     firstName
                     lastName
+                    companyRole
+                    color
+                    avatar {
+                        url
+                    }
                 }
             }
         }
@@ -156,6 +175,7 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
                   audience: [],
                   speakers: [],
                   private: false,
+                  online: false,
                   speakerTopic: '',
                   partners: [{ name: '', url: '' }],
                   attendees: undefined,
@@ -179,12 +199,39 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
                             return await uploadImage(img.file, jwt)
                         })
                 )
+                let photoIds = [
+                    ...uploadedPhotos.map((photo) => photo.id),
+                    ...values.photosLocal.filter((image) => 'id' in image && image.id).map((image) => image.id),
+                ]
+                // No photos provided — upload the generated graphic so the event has art everywhere
+                if (photoIds.length === 0 && graphicRef.current) {
+                    try {
+                        const blob = await toBlob(graphicRef.current, {
+                            canvasWidth: 1080,
+                            canvasHeight: 1080,
+                            pixelRatio: 1,
+                        })
+                        if (blob) {
+                            const graphic = await uploadImage(
+                                new File([blob], graphicFileName(values.name), { type: 'image/png' }),
+                                jwt
+                            )
+                            if (graphic?.id) {
+                                photoIds = [graphic.id]
+                            }
+                        }
+                    } catch (error) {
+                        // Don't block event creation if the graphic can't be generated
+                        console.error('Error uploading event graphic:', error)
+                    }
+                }
                 const dateTime = dayjs(`${values.date} ${values.startTime || '00:00'}`).toISOString()
                 const eventPayload: any = {
                     name: values.name,
                     description: values.description || undefined,
                     date: dateTime,
                     private: values.private || false,
+                    online: values.online || false,
                     format: values.format,
                     audience: values.audience,
                     speakerTopic: values.speakerTopic || undefined,
@@ -198,17 +245,14 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
                     video: values.video || undefined,
                     presentation: values.presentation || undefined,
                     link: values.link || undefined,
-                    speakers: { connect: values.speakers },
+                    speakers: { set: values.speakers },
                     location: {
                         label: values.locationLabel,
                         lat: values.locationLat ? Number(values.locationLat) : undefined,
                         lng: values.locationLng ? Number(values.locationLng) : undefined,
                         venue: values.venueName ? { name: values.venueName } : undefined,
                     },
-                    photos: [
-                        ...uploadedPhotos.map((photo) => photo.id),
-                        ...values.photosLocal.filter((image) => 'id' in image && image.id).map((image) => image.id),
-                    ],
+                    photos: photoIds,
                 }
                 if (event) {
                     await updateEvent(event.id, eventPayload)
@@ -285,6 +329,41 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
         []
     )
 
+    const firstSpeakerProfile: EventGraphicSpeaker | undefined = React.useMemo(() => {
+        const squeakId = formik.values.speakers[0]
+        if (!squeakId) return undefined
+        const profile = data.allSqueakProfile.nodes.find((node: { squeakId: string }) => node.squeakId === squeakId)
+        if (!profile) return undefined
+        return {
+            name: [profile.firstName, profile.lastName].filter(Boolean).join(' '),
+            color: profile.color || undefined,
+            avatarUrl: profile.avatar?.url || undefined,
+            companyRole: profile.companyRole || undefined,
+        }
+    }, [formik.values.speakers, data.allSqueakProfile.nodes])
+
+    const handleDownloadGraphic = async () => {
+        if (!graphicRef.current) return
+        setDownloadingGraphic(true)
+        try {
+            const dataUrl = await toPng(graphicRef.current, {
+                canvasWidth: 1080,
+                canvasHeight: 1080,
+                pixelRatio: 1,
+            })
+            const link = document.createElement('a')
+            link.download = graphicFileName(formik.values.name)
+            link.href = dataUrl
+            link.click()
+            link.remove()
+        } catch (error) {
+            console.error('Error generating event graphic:', error)
+            addToast({ description: 'Failed to generate the event graphic' })
+        } finally {
+            setDownloadingGraphic(false)
+        }
+    }
+
     return (
         <div>
             <h2 className="text-xl font-bold mb-1">Add a new event</h2>
@@ -316,37 +395,57 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
                         {...formik.getFieldProps('startTime')}
                     />
                 </div>
-                <OSInput
-                    label="Location"
-                    required
-                    direction="column"
-                    placeholder="e.g. Dublin, Ireland"
-                    touched={formik.touched.locationLabel}
-                    error={formik.errors.locationLabel}
-                    {...formik.getFieldProps('locationLabel')}
-                />
-                <div className="grid grid-cols-2 gap-3">
-                    <OSInput
-                        label="Latitude"
-                        type="number"
-                        direction="column"
-                        placeholder="e.g. 39.0968"
-                        {...formik.getFieldProps('locationLat')}
-                    />
-                    <OSInput
-                        label="Longitude"
-                        type="number"
-                        direction="column"
-                        placeholder="e.g. 120.0324"
-                        {...formik.getFieldProps('locationLng')}
+                <div className="flex items-center gap-3">
+                    <Toggle
+                        checked={formik.values.online}
+                        onChange={(checked) => {
+                            formik.setFieldValue('online', checked)
+                            if (checked) {
+                                formik.setFieldValue('locationLabel', '')
+                                formik.setFieldValue('locationLat', undefined)
+                                formik.setFieldValue('locationLng', undefined)
+                                formik.setFieldValue('venueName', '')
+                            }
+                        }}
+                        label="Online only"
+                        position="left"
                     />
                 </div>
-                <OSInput
-                    label="Venue name"
-                    direction="column"
-                    placeholder="e.g. Madison Square Garden"
-                    {...formik.getFieldProps('venueName')}
-                />
+                {!formik.values.online && (
+                    <>
+                        <OSInput
+                            label="Location"
+                            required
+                            direction="column"
+                            placeholder="e.g. Dublin, Ireland"
+                            touched={formik.touched.locationLabel}
+                            error={formik.errors.locationLabel}
+                            {...formik.getFieldProps('locationLabel')}
+                        />
+                        <div className="grid grid-cols-2 gap-3">
+                            <OSInput
+                                label="Latitude"
+                                type="number"
+                                direction="column"
+                                placeholder="e.g. 39.0968"
+                                {...formik.getFieldProps('locationLat')}
+                            />
+                            <OSInput
+                                label="Longitude"
+                                type="number"
+                                direction="column"
+                                placeholder="e.g. 120.0324"
+                                {...formik.getFieldProps('locationLng')}
+                            />
+                        </div>
+                        <OSInput
+                            label="Venue name"
+                            direction="column"
+                            placeholder="e.g. Madison Square Garden"
+                            {...formik.getFieldProps('venueName')}
+                        />
+                    </>
+                )}
                 <CreatableMultiSelect
                     label="Format"
                     options={baseOptions.format}
@@ -480,6 +579,39 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
                             onRemove={() => null}
                             className="!h-auto aspect-square overflow-hidden"
                         />
+                    </div>
+                </div>
+                <div>
+                    <label className="text-[15px] block mb-1">Default event graphic</label>
+                    <p className="text-sm text-secondary mb-2">
+                        This graphic is generated from the details above. If you don't upload a photo, it's saved
+                        automatically and used as the event's photo everywhere on the site. The background comes from
+                        the first speaker's favorite color on their community profile.
+                    </p>
+                    <EventGraphic
+                        ref={graphicRef}
+                        title={formik.values.name || 'Your event name'}
+                        date={formik.values.date}
+                        location={formik.values.locationLabel}
+                        online={formik.values.online}
+                        speaker={firstSpeakerProfile}
+                        partners={formik.values.partners.filter((partner) => partner.name)}
+                        className="rounded border border-primary"
+                    />
+                    <div className="mt-2">
+                        <OSButton
+                            size="sm"
+                            variant="secondary"
+                            type="button"
+                            disabled={downloadingGraphic}
+                            onClick={handleDownloadGraphic}
+                        >
+                            {downloadingGraphic ? (
+                                <IconSpinner className="animate-spin size-4" />
+                            ) : (
+                                'Download graphic (1080×1080)'
+                            )}
+                        </OSButton>
                     </div>
                 </div>
                 <OSTextarea

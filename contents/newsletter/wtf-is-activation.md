@@ -14,7 +14,7 @@ crosspost:
   - Blog
 ---
 
-Improving activation is one of the most impactful things a [product engineer](/blog/what-is-a-product-engineer) can do, but it’s also weirdly hard to define.
+Improving activation is one of the most impactful things a [product engineer](/product-engineer/what-is-a-product-engineer) can do, but it’s also weirdly hard to define.
 
 People often call it your product’s "aha" moment – i.e. when a user experiences your product's value for the first time – but this is vague and subjective.
 

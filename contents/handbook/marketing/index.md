@@ -6,7 +6,25 @@ showTitle: true
 
 ## How marketing works
 
-Marketing at PostHog is a collaborative effort across several teams. It is also specifically a multi-disciplinary creative team in it's own right. If that's confusing, you can check [Who can help me?](/handbook/marketing/ownership) for more on who to talk to.
+Marketing at PostHog is a collaborative effort across several teams. There are six distinct teams that handle different aspects of marketing:
+
+- <SmallTeam slug="graphics" /> – Leads all art, design, illustration, and brand work for PostHog
+- <SmallTeam slug="website" /> – Leads all matters related to posthog.com and handles some product design aspects
+- <SmallTeam slug="marketing" /> – A multidisciplinary team that handles Product Marketing, Influencers & Partnerships, and other unowned marketing tasks
+- <SmallTeam slug="editorial" /> – Leads content, newsletters, and social
+- <SmallTeam slug="youtube" /> – Leads video
+- <SmallTeam slug="wizard-and-docs" /> – Leads on documentation and the wizard
+
+If you're not sure who to talk to, check [Who can help me?](/handbook/marketing/ownership).
+
+## Slack channels to know
+
+To keep up with what's shipped and what's about to ship across the company, join:
+
+- [`#changelog`](https://posthog.slack.com/archives/C099B0YCULT) – what's just shipped. Owned by the [Wizard & Docs team](/teams/wizard-and-docs) and updated constantly as PRs merge.
+- [`#coming-soon`](https://posthog.slack.com/archives/C0B5QBS29QU) – what's shipping soon. **Owned by the Marketing team** and posted as a daily digest.
+
+Both channels are populated by agentic workflows that scan merged PRs and feature flag changes in the `posthog/posthog` repo and summarize them into the relevant channel. Engineers can also opt their PR in (or out) manually via the *Publish to changelog?* and *Alert Sales and Marketing teams?* checkboxes on the PR template, or via the `@posthog` Slack app. See [how to publish changelog](/handbook/wizard-and-docs/how-to-publish-changelog) for the full flow.
 
 ## Marketing values
 
@@ -16,14 +34,12 @@ Marketing at PostHog is a collaborative effort across several teams. It is also 
 
 ### 1. Be opinionated
 
-PostHog was created because we believed that product analytics was broken, and we had a vision of how it could be much better. We're more than just product analytics now, but the principles are the same.
+PostHog makes your product self-driving – that's the vision our marketing and content needs to reflect, and not dilute it with boring corporate-speak. (For the canonical positioning, see [Brand foundations](/handbook/brand/foundations#how-we-describe-posthog).)
 
-We need to reflect this vision in our marketing and content, and not dilute it with boring corporate-speak. When we write content, we take a firm stance on what we believe is right. We would rather have 50% of people love us and 50% hate us than 80% mildly agree with us. 
- 
-We communicate clearly, directly, and honestly.
- 
-It's ok to have a sense of humor. We are more likely to die because we are forgettable, not because we made a lame joke once. We have a very distinctive and weird company culture, and we should share that with customers instead of putting on a fake corporate persona when we talk to them. PostHog should not look like a generic software company.
- 
+When we write content, we take a firm stance on what we believe is right. We would rather have 50% of people love us and 50% hate us than 80% mildly agree with us.
+
+How we say it – clear, direct, honest, and with room for genuine humor – lives in the [voice & tone guide](/handbook/brand/tone). The short version: we have a distinctive, weird company culture and we share it with customers rather than putting on a fake corporate persona. PostHog should not look like a generic software company.
+
 (Sometimes we use terminology like 'value propositions' because that is the standard marketing term for a well-understood concept. That's allowed.)
 
 ### 2. Pull, don't push
@@ -64,7 +80,7 @@ For these reasons, we:
  
 - Don't pretend our customers are different from us – i.e. more gullible, more susceptible to marketing. We are an engineering-led team building products for other engineers. If you wouldn't like it, assume our customers wouldn't either. 
 
-- Don't do cold email marketing to acquire new customers. When was the last time you read the 8th email a company sent you and thought 'ok yes, I now want to use this product'?
+- When doing cold outbound, do it tastefully. When was the last time you read the 8th email a company sent you and thought 'ok yes, I now want to use this product'? Keep it low-volume, thoughtful, and relevant.
 
 ## Marketing vision
 
@@ -83,8 +99,6 @@ Beyond PostHog's company [mission and strategy](/handbook/why-does-posthog-exist
 - **Supporting YC founders:** Lots of PostHog's DNA comes from Y Combinator. Their companies and founders are our ideal customers. We've done a great job being valuable to them (50%+ of batches using us) and want to continue to do so.
 
 - **Merch:** We make the coolest tech company merch. Let's keep it this way. 
- 
-### Things we want to be good at
 
 - **Events:** We have been involved in some events, but we are still figuring out "the PostHog way" to do them. We don't just want to be a name on the sponsor list. We want to create superfans. 
 
@@ -98,14 +112,6 @@ Beyond PostHog's company [mission and strategy](/handbook/why-does-posthog-exist
 
 - **Billboards:** Billboards are a way to get our brand in front of a lot of people.
 
-- **Doing sales without salespeople:** Rather than care a lot about "capturing every lead" or "marketing qualified leads," we'd rather work with sales to create content that helps potential customers, ideally without a salesperson.
-
-### Things we might want to be good at but haven't tested yet
-
-- **Broader partnerships:** PostHog is a complement to a bunch of types of companies, from vibe coding tools to infrastructure platforms. Our data warehouse and CDP are built to enable integrations. How can we leverage this?
-
-- **Video essays:** Video essay style content is a natural extension of what we are doing in our newsletter. When done well, it is what "great video content" looks like.
- 
 ### Things we don't want to spend time on
 
 - **Optimizing marketing spend:** We're more concerned about growing fast than being the most efficient marketing team. Go fast, run experiments, look for upside.

@@ -1,46 +1,42 @@
-### Q1 2026 objectives
+### Q3 2026 objectives
 
-#### <TeamMember name="Thomas Obermüller" />
+1. MCP/Wizard improvements and Slack bot
+   - How it's displayed across harnesses and agents
+   - Make product analytics easier and more useful to access from Claude Code, Slack, etc.
+   - AI knows when to use a runner rather than one-shotting SQL every time
 
-- [Data warehouse support in all insights](https://github.com/PostHog/posthog/issues/24065)
-- [Funnel aggregation on a per step basis (might be necessary for supporting common DHW use cases)](https://github.com/PostHog/posthog/issues/37252)
-- [Allow multiple conversions per user in a funnel insight](https://github.com/PostHog/posthog/issues/27988)
+2. Improvements and features for core product analytics
+   - Prioritized list in GitHub
+   - Papercuts
+   - Tech debt
 
-#### <TeamMember name="Anirudh Pillai" />
-
-- AI analysis 2.0
-  - Costing
-  - Rolled out for everyone
-  - For dashboards and important insights, show things like what has changed since last viewed
-  - Improve prompts, suggestions, and context
-  - Metrics on usage and relevancy, with ability to provide feedback
-  - On click interactions from the UI (for example clicking into insights improves suggestions by narrowing down)
-  - Fallback non AI insight suggestions for non scale add on users
-- Organising dashboards and insights with tags and improvements for the all insights and all dashboards page [1](https://github.com/PostHog/posthog/issues/24210)
-- [Behavioral segments in Insights](https://github.com/PostHog/posthog/issues/2594)
-- Retention property aggregation (e.g. revenue retention)
-
-#### <TeamMember name="Georgis Andonis" />
-
-- Autoname dashboards and insights using AI
-- Dashboard filtering enhancements
-  - Favourite filters (support saving and applying filters) [1](https://github.com/PostHog/posthog/issues/2895) [2](https://github.com/PostHog/posthog/issues/20314)
-  - [Pinned filters and properties](https://github.com/PostHog/posthog/issues/34958)
-  - Most used filters
-- Reduce noise in retention charts
-  - Plot multiple intervals (for example only Week 1 and Week 2)
-  - [Plot multiple cohorts](https://github.com/PostHog/posthog/issues/39227)
-- Inline events for funnels
+### What we’ll ship
 
 #### <TeamMember name="Sam Pennington" />
 
+- Make creating insights and dashboards via MCP faster and better quality (#1)
+- Make charts great everywhere
+  - Make charts work in Slack (#1)
+  - ASCII charts for Claude Code and similar (#1)
+  - Roll out better-styled charts across all PostHog products (#2)
+- More options and flexibility with date queries (#2)
+  - Add quarterly and yearly intervals
+  - Add a "last X days" option
+  - Allow day-of-week filtering (replacing the existing weekend-filter post-processing)
 
-- Improve quality, reduce frequency of regressions:
-  - e2e tests for all core product analytics user flows
-  - Resolve all small to medium sized improvements identified from [historic bug analysis](https://docs.google.com/spreadsheets/d/1hrtT5Yl7B3Yb22GbXW32lpLzctJ6h9vfVo8z8mFHX6k/edit?gid=1380838612#gid=1380838612)
-- Make dashboards less cluttered, overwhelming and easier to edit
+#### <TeamMember name="Thomas Obermüller" />
 
-#### <TeamMember name="Mike Warren" />
-
-- Get started with growth reviews
-- Explore PostHog user personalization (vs. global favorites/pins/projects etc.)
+- Dogfood MCP analytics so working with insights and dashboards doesn't feel sluggish (#1)
+  - Improve tool discovery
+  - Add missing capabilities and purpose-built tools
+- Dashboard filter overrides and chart color enhancements (#2)
+  - Override interval on dashboards
+  - Override test account filter on dashboards
+  - Exclude insights from dashboard filters
+  - Allow overriding chart colors (and maybe sort order, etc.) on a dashboard
+- Paths V2 (#2)
+  - Reuse funnel semantics (and maybe the funnel UDF) so zooming into a path produces the same results as a funnel
+  - Row and column layout instead of limiting by total number of paths
+  - Use the cleaned-up visualization
+  - Address open feature requests for paths where possible (path cleaning, etc.)
+- Remove legacy filters and legacy insights, and move code to the "product analytics" product (#2)

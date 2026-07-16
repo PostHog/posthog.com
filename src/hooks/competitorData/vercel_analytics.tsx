@@ -36,7 +36,7 @@ export const vercel_analytics = {
             available: false,
         },
         feature_flags: {
-            available: "Via integrations",
+            available: 'Via integrations',
         },
         experiments: {
             available: false,

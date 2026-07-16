@@ -6,7 +6,7 @@ title: Manage Feature Flags with PostHog AI
 
 ## How it works
 
-When you ask PostHog AI to create a flag, it creates it with your specified key and rollout percentage, configures targeting rules based on user properties, cohorts, or groups, and sets up variants and payloads for multivariate flags. It can also search your existing flags, identify stale flags not modified recently, and help you plan flag cleanup.
+When you ask PostHog AI to create a flag, it creates it with your specified key and rollout percentage, configures targeting rules based on user properties, cohorts, or groups, and sets up variants and payloads for multivariate flags. It can also search your existing flags, identify stale flags not modified recently, and help you plan [flag cleanup](/docs/feature-flags/cleaning-up-stale-flags).
 
 ## Manage existing flags
 
@@ -14,7 +14,7 @@ PostHog AI also helps you manage existing flags:
 
 - **Find stale flags** – Ask "which flags not evaluated in 90 days?" to identify flags you should remove
 - **Audit flag usage** – Ask "how many users are seeing the new-checkout flag?" to check rollout status
-- **Generate cleanup prompts** – PostHog AI can generate code search prompts for removing flag references from your codebase
+- **Generate cleanup prompts** – PostHog AI can generate code search prompts for removing flag references from your codebase. See [cleaning up stale flags](/docs/feature-flags/cleaning-up-stale-flags) for the full workflow.
 - **Modify existing flags** – "Roll out `dark-mode` to 50%" or "add the enterprise cohort to the `beta-features` flag"
 
 ## Try it

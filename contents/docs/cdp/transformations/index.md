@@ -20,6 +20,12 @@ Need more flexibility? Our [custom transformations](/docs/cdp/transformations/cu
 
 **Note**: Transformations don't apply to exceptions we capture as part of error tracking. If you need to run transformation against your exception data, please [let us know in-app](https://us.posthog.com#panel=support%3Afeedback%3Aerror_tracking%3Alow%3Atrue).
 
+## Available globals
+
+Transformations run during ingestion, _before_ events are fully ingested and processed. As a result, they only receive the `event` and `project` globals. They do **not** have access to the `person` or `groups` globals that [realtime destinations](/docs/cdp/destinations) can use, since person profiles and group associations haven't been resolved yet at the point a transformation executes.
+
+If your logic depends on person properties or group data, use a [realtime destination](/docs/cdp/destinations) instead.
+
 ## Filtering
 
 Filters enable you to target your transformations, affecting only the kinds of events you chose. Filter by event type, properties, or any SQL statement you can come up with.
@@ -42,7 +48,7 @@ Once your transformation is up and running, the **metrics** and **logs** tabs wi
 
 ## History
 
-For projects with the **[teams add-on](https://posthog.com/addons#teams)**, each transformation has a history tab that shows you a complete audit trail of changes. You can see who modified the transformation, what changes were made, and when they occurred.
+For projects on a **[platform package](/platform-packages)**, each transformation has a history tab that shows you a complete audit trail of changes. You can see who modified the transformation, what changes were made, and when they occurred.
 
 ![Transformation history](https://res.cloudinary.com/dmukukwp6/image/upload/history_e0873f6741.png)
 

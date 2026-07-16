@@ -23,6 +23,10 @@ export const sessionReplayFeatures = {
             name: 'Crash reports',
             description: 'Learn what happens before a crash without complex debugging or reproduction',
         },
+        conditional_recording: {
+            name: 'Conditional recording',
+            description: 'Only capture the sessions you want based on conditions',
+        },
         event_timeline: {
             name: 'Event timeline',
             description: 'See events triggered during recordings',
@@ -39,6 +43,10 @@ export const sessionReplayFeatures = {
             name: 'Minimum duration',
             description: 'Only record sessions longer than the minimum duration',
         },
+        privacy_masking: {
+            name: 'Privacy masking for sensitive content',
+            description: 'Automatic and manual masking of sensitive user data',
+        },
         screenshot_mode: {
             name: 'Screenshot mode',
             description: 'Mobile session reconstructions using app screenshots',
@@ -50,6 +58,10 @@ export const sessionReplayFeatures = {
         wireframe_mode: {
             name: 'Wireframe mode',
             description: 'Low performance impact mobile recordings using wireframes',
+        },
+        ai_summaries: {
+            name: 'AI summaries',
+            description: 'AI-generated summaries of session recordings',
         },
     },
     platform_support: {
@@ -118,10 +130,6 @@ export const sessionReplayFeatures = {
     targeting: {
         description: 'Control what gets recorded and how to find it later',
         features: {
-            conditional_recording: {
-                name: 'Conditional recording',
-                description: 'Only capture the sessions you want based on conditions',
-            },
             filter_by_user_or_event: {
                 name: 'Filter recordings by user or event',
                 description: 'Find specific recordings by filtering for users or events',

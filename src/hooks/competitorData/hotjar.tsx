@@ -75,6 +75,7 @@ export const hotjar = {
                 free_tier: true,
             },
             features: {
+                ai_summaries: true,
                 canvas_recording: false,
                 chat_with_recordings: false,
                 clickmaps: false,
@@ -123,12 +124,6 @@ export const hotjar = {
                     performance_monitoring: false,
                     network_monitor: false,
                     dom_explorer: false,
-                },
-            },
-            ai: {
-                features: {
-                    // https://www.hotjar.com/product/recordings/ "Sense"
-                    ai_summaries: true,
                 },
             },
         },
@@ -214,6 +209,10 @@ export const hotjar = {
             available: false,
             features: {
                 issue_management: false,
+                stack_tracing: false,
+            },
+            monitoring: {
+                performance_monitoring: false,
             },
         },
         dashboards: {
@@ -265,6 +264,7 @@ export const hotjar = {
             cms: '',
             notebooks: false,
             project_management_tools: '',
+            ai_assistant: true,
         },
         security: {
             ccpa_ready: true,

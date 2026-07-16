@@ -21,7 +21,7 @@ If you wish to avoid doing this, an alternative is to send users directly to our
 You can still track how campaigns on Substack by using this loophole <TeamMember name="Ian Vanagas" photo /> found:
 
 1. Sign up for Substack with another email (lior+refer@substack.com or something, can create multiple).
-2. Subscribe to Product for Engineers.
+2. Subscribe to build mode.
 3. Go to https://newsletter.posthog.com/leaderboard and get your ref code/link. You can add the `?r=1tb4kk` bit to any newsletter link and it will track who signs up using it.
 4. See results <PrivateLink url="https://newsletter.posthog.com/publish/stats/reader-sharing">here</PrivateLink>.
 
@@ -78,12 +78,12 @@ Smaller newsletters that we also have supported:
 
 Titles that work well include:
 
-- Product for Engineers: A newsletter helping flex your product muscles
-- Product for Engineers: The first newsletter dedicated to product engineers
+- build mode: tools, tactics, and taste for product builders
+- build mode: the first newsletter dedicated to product engineers
 
 The main copy is some variation of:
 
-> Product for Engineers is PostHog's newsletter dedicated to helping engineers improve their product skills. Learn how to talk to users, build new features users love, and find product market fit. Subscribe for free to get curated advice on building great products, lessons (and mistakes) from building PostHog, and deep dives into the strategies of top startups.
+> build mode is PostHog's newsletter dedicated to helping engineers improve their product skills. Learn how to talk to users, build new features users love, and find product market fit. Subscribe for free to get curated advice on building great products, lessons (and mistakes) from building PostHog, and deep dives into the strategies of top startups.
 
 We have also found that linking to an article directly converts better than just a generic "subscribe to our newsletter" link.
 
