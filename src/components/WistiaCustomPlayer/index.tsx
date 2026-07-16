@@ -716,7 +716,7 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
         // If in preview mode, show a static thumbnail
         if (isPreview) {
             return (
-                <div className={`flex flex-col overflow-hidden ${className}`}>
+                <div className={`flex flex-col overflow-hidden ph-no-deadclick ${className}`}>
                     <div
                         className={`relative ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}
                         style={{ paddingTop: `${(1 / aspectRatio) * 100}%` }}
@@ -769,7 +769,8 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
         }
 
         return (
-            <div className={`flex flex-col ${className}`}>
+            // ph-no-deadclick: player control clicks are false-positive dead clicks (see WistiaEmbed).
+            <div className={`flex flex-col ph-no-deadclick ${className}`}>
                 {/* Video container */}
                 <div
                     className={`relative ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}

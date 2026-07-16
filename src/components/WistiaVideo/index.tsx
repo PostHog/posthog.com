@@ -137,7 +137,8 @@ const WistiaVideo = forwardRef<WistiaVideoRef, WistiaVideoProps>(
             }
         }, [videoId, autoPlay])
 
-        return <div ref={containerRef} className={`aspect-square ${className}`} />
+        // ph-no-deadclick: player control clicks are false-positive dead clicks (see WistiaEmbed).
+        return <div ref={containerRef} className={`aspect-square ph-no-deadclick ${className}`} />
     }
 )
 

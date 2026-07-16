@@ -55,8 +55,10 @@ export default function WistiaEmbed({
             aspect={aspectRatio}
             autoplay={autoPlay}
             muted={muted}
-            className={className}
             controlsVisibleOnLoad={controlsVisibleOnLoad}
+            // ph-no-deadclick: play/pause/scrub clicks change playback without a DOM mutation, so
+            // the dead-click heuristic captures them as false positives.
+            className={`${className} ph-no-deadclick`.trim()}
             roundedPlayer={roundedPlayer}
             onApiReady={shouldConfigureBorderRadius ? handleApiReady : undefined}
         />
