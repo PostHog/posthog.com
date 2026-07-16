@@ -34,16 +34,32 @@ Typical agenda:
 
 ## Small team offsites
 
-We want to try to encourage small teams to get together once each year. These are more focused on work and on creating strong bonds within teams. Ideally they are spaced appropriately through the year in relation to the all-company offsite.
+We want to try to encourage small teams to get together once each year. Ideally they are spaced appropriately through the year in relation to the all-company offsite.
+
+We want team offsites to be social events and encourage you to optimize offsites for meeting as many colleagues as is reasonably possible, even if it means spending more money or travelling further. [Hogpatch](/handbook/people/hogpatch-operations) in San Francisco or the [Hedge House](#hedge-house) in London should be the default choice, because:
+
+- They're places where there are already a lot of PostHog people that you can hang out with. If most teams do their offsites there, you're much more likely to run into even more people
+  - The more we have random cross-pollination, the more ambitious ideas we'll come up with and the more successful we'll be.
+  - These hubs are places where you can get to know people outside your current team, which means you'll be more effective at getting stuff done.
+- SF has the benefit of being the epicenter of everything happening in tech, and we have lots of YC founders working out of Hogpatch who you can meet and learn from. It's good to get exposure to this, especially if you don't live in SF or haven't been recently.
+
+
+Traveling to new places is a perk for PostHog employees. At the same time, going to the hubs, especially for newer joiners, can be beneficial to you as an employee and to the company as a whole. We trust you to make the right decision here, balancing personal preference with what's best for the company. 
+
+If you do decide to do a small team offsite somewhere outside of these two hubs, let Kendal know why. That way we can figure out how to make going to the hubs more appealing, or perhaps open new hubs.
 
 Planning a small team offsite? Kendal’s got you covered.
 Here’s how it works:
 
-- The team lead should message Kendal with their proposed dates and location.
-- Kendal will then go away and find suitable accommodation for the group.
-- Once that’s sorted, she’ll:
-  - Create a Slack channel for the offsite (use `#offsite-[team]-[month]-[year]-[where]`) and add everyone who’s going.
-  - Set up the offsite budget in Brex.
+- The team lead should request an offsite through slack using the '/offsite' command. They will need to input:
+  - Team name
+  - Location
+  - Dates
+  - Attendees
+  - Number of attendees
+This will automatically create a Slack channel and Brex budget for all attendees. If the offsite is happening in London or San Francisco, it will also post an announcement in those channels so people can come and say hi 
+
+- Kendal will then:
   - Update the team’s Canvas with:
     - Accommodation details and a handy map
     - A flight tracker
@@ -55,13 +71,13 @@ Each team member is still responsible for booking their own flights.
 
 Some guidelines:
 
+- We prefer AirBnBs over hotels, to give your team even more time to hang out, but this is not mandatory.
 - Quarterly planning is a great focal point for team offsites – it's worth scheduling your meetup for the week of planning.
 - Outside of your small team, you should only invite people who actually need to attend to make the offsite a success - if it would be 'nice to have' them attend, they shouldn't be going.
 - It can be useful to combine offsites but beware if you add too many people everything gets harder to arrange. There's no hard and fast rule here but the more people that are attending the more concrete you need to be on who is organising and why people are attending. It will be more work and you should be purposeful about it.
 - If the number of attendees is >10 actively consider if Kendal should be attending so there is a person attending whose only focus is making sure it goes well and everyone else can focus on the work of the offsite.
 - Specify offsite start and end times down to the hour, for clarity and efficient use of everyone's time.
 - These offsites don't happen very often and involve a lot of travel, so make sure you make the most out of it by having an agenda and an idea of what you want to achieve _before_ the start of the trip. Also, it's a good idea to have an expectation-setting session (can be async in a Figjam) to ensure everyone is on the same page about what the outcome/output of the offsite should be.
-- Choose a location that minimises layovers for attendees.
 - Make it very clear who is participating in each session. Sessions / activities require full participation from attendees, especially for the likes of a hackathon given it runs over multiple days. Ideally one person should be responsible for the agenda and run a kick-off at the start of the hackathon.
 - You should do a [360 degree feedback session](/handbook/people/feedback#ground-rules). It can feel uncomfortable doing these, but almost everyone who's done one at PostHog has come out feeling better and with a whole host of things they can improve. These are best in person.
     - This can work better over a shared cooked meal or takeaway in the accommodation rather than a noisy restaurant, particularly for people who might be anxious about the format or the feedback.
@@ -89,15 +105,13 @@ You should assign someone on the small team to be responsible for planning the o
 
 ## Hedge House
 
-PostHog runs two Hedge Houses in the UK - a small one in Cambridge and a larger one in London. They are actual houses (yes, with a few bedrooms attached!) designed for small teams to run their offsites, host in-person onboardings, or come together for larger internal events like hackathons. Anyone at PostHog is welcome to use them as much as they like. We'd recommend using the Hedge House for small team offsites if you are in Europe as it removes a lot of the friction of finding somewhere new, and they're genuinely great places to get work done at a very high standard.
+PostHog runs two Hedge Houses in the UK - a small one in Cambridge and a larger one in London. They are actual houses (yes, with a few bedrooms attached!) designed for small teams to run their offsites, host in-person onboardings, or come together for larger internal events like hackathons. Anyone at PostHog is welcome to use them as much as they like — alongside [Hogpatch](/handbook/people/hogpatch-operations) in San Francisco, these are where you should default to doing team offsites and in-person onboarding.
 
 ### Cambridge
 Message <TeamMember name="Kendal Ijeh" photo /> to check availability or make a booking at the Cambridge Hedge House.
 
 ### London
 Our light-filled, studious office is a reliable homebase between Farringdon and Barbican. It’s entirely ours, open 24/7 and the perfect place to stay if you're visiting from abroad.  Use the [Hedge House London](https://posthog.slack.com/archives/D0AAA9M06R2) slack tool to see the full address, book a room and/or desk, plus see who else will be there during the week you visit. This means you can easily self-serve, but ask <TeamMember name="Kendal Ijeh" photo /> with any questions.
-
-> If you're planning an offsite or onboarding in San Francisco, [Hogpatch](https://posthog.com/handbook/people/hogpatch-operations) is the perfect spot to focus, talk to users and get product feedback.
 
 ## London hotel recommendations
 
@@ -249,30 +263,6 @@ Below is a rough timeline for planning your next offsite, as well as links to te
 **1 week after**
 - [ ] Collect post-mortem feedback from the team
   - We generally do this as an [open GitHub issue](https://github.com/PostHog/company-internal/issues/new?assignees=&labels=&projects=&template=small-team-offsite-retro.md&title=%5BRETRO%5D+%7Bteam_name%7D+%7Byear%7D+%7Blocation%7D+offsite), but you can also create a Google form to facilitate this
-
-
-## All company offsite hackathon
-
-The hackathon is always a highlight of the offsite. We tend to run them like this:
-
-**Session 1: ideation dinner**
-The day before the start of the hackathon we do a casual 'ideation' dinner where we encourage people to chat about ideas
-
-**Session 2: hackathon kick-off**
-The hackathon kick off is 1.5 hours at the end of the day. Ideally we do this in a conference room with beers and wine.
-
-- Everyone writes down their ideas on multiple post-it notes in about 10 minutes.
-- People come up to the front one-by-one, and they get 30 seconds to pitch all their ideas.
-- Everyone gets three votes to put on whichever ideas they like most. Just do this as a tally. You can't vote on your own idea
-- We dismiss all ideas with zero votes, and sort all the other ideas from top to bottom based on the number of votes.
-- Everyone writes their name on the other side of the sticky bit of a small piece of post-it note, then add their name to the idea they want to work on. Every group should have at least two people in it, and ideally 3.
-- Once groups are formed, everyone can go off and ideate or hack.
-
-**Session 3: presentations**
-
-This should be the last work related session of the offsite. Again ideally in a conference center with beer and wine provided.
-
-Each group gets 5 minutes to demo and present their idea.
 
 
 **2 weeks after**

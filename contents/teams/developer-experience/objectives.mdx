@@ -1,0 +1,19 @@
+## Q3 2026 Objectives
+
+**North star: make shipping 10,000 PRs a month easy.** Agents will write most of the code, so the quarter is about hardening the loop that makes that volume work: write → verify → review/merge → measure.
+
+### Write: local dev loop (<TeamMember name="Raúl Negrón-Otero" photo />)
+
+Shorten the inner loop and let agents run the stack and tests locally, with devboxes as a favored way to spin up a full stack. Local agent steering (skills, contexts) is part of this.
+
+### Verify: CI loop we trust (<TeamMember name="Julian Bez" photo />, <TeamMember name="Georges-Antoine Assi" photo />, <TeamMember name="Raúl Negrón-Otero" photo />)
+
+Fast, cheap, low-flake CI that people actually believe. Keep sharding optimal against a wall-clock target, move preview and end-to-end onto sandboxes, and drive flakiness down.
+
+### Review & merge: agents gating agents (everyone)
+
+As agents author most PRs, no one reviews every diff by hand. Route PRs by blast radius, let independent reviewer agents gate rather than just comment, and lean on deploy and rollback as the safety valve.
+
+### Measure: how do we know it's getting better? (everyone)
+
+Every loop above gets a metric: PR-to-merge time, flakiness, CI run times, and per-product attribution so teams own their own cost. Non-goal: measuring individual engineering productivity.

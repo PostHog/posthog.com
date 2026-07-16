@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useMemo } from 'react'
+import React, { useEffect, useRef, useState, useMemo, lazy, Suspense } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useQuestions } from 'hooks/useQuestions'
 import HeaderBar from 'components/OSChrome/HeaderBar'
@@ -24,7 +24,6 @@ import { useToast } from '../../context/Toast'
 import { QuestionData, StrapiRecord } from 'lib/strapi'
 import { useUser } from 'hooks/useUser'
 import { navigate } from 'gatsby'
-import Lottie from 'lottie-react'
 import hourglassAnimation from 'images/icons8-hourglass.json'
 import hourglassAnimationWhite from 'images/icons8-hourglass-white.json'
 import { useInView } from 'react-intersection-observer'
@@ -40,6 +39,9 @@ import Link from 'components/Link'
 import { Select } from 'components/RadixUI/Select'
 import SEO from 'components/seo'
 dayjs.extend(relativeTime)
+
+// lottie-react bundles lottie-web (~600 KiB); load it on demand instead of on every page.
+const Lottie = typeof window !== 'undefined' ? lazy(() => import('lottie-react')) : () => null
 
 const Menu = ({ onValueChange }: { onValueChange: (value: string) => void }) => {
     const { user } = useUser()
@@ -123,7 +125,9 @@ const QuestionRow = ({
     pinned = false,
 }: QuestionRowProps) => {
     const { subject, numReplies, activeAt, replies, profile, permalink, resolved } = question
-    const latestAuthor = replies?.data?.[replies.data.length - 1]?.profile || profile
+    const replyList = Array.isArray(replies?.data) ? replies.data : Object.values(replies ?? {})
+    const lastReply = replyList[replyList.length - 1]
+    const latestAuthor = lastReply?.profile || lastReply?.attributes?.profile || profile
     const active = `/questions/${permalink}` === appWindowPath
 
     return (
@@ -221,22 +225,14 @@ const AskAQuestion = ({ onSubmit }: { onSubmit: () => void }) => {
                 showTopicSelector
                 onSubmit={(_values, _type, data) => {
                     onSubmit()
-                    addToast({
-                        title: 'Question posted',
-                        description: (
-                            <>
-                                Your question has been posted.
-                                <br />
-                                <Link
-                                    className="text-red dark:text-yellow font-semibold"
-                                    to={`/questions/${data.attributes.permalink}`}
-                                >
-                                    View it here
-                                </Link>
-                            </>
-                        ),
-                    })
                     closeWindow(appWindow)
+                    if (data?.attributes?.permalink) {
+                        setTimeout(() => {
+                            navigate(`/questions/${data.attributes.permalink}`, {
+                                state: { askMax: true },
+                            })
+                        }, 0)
+                    }
                 }}
                 initialView="question-form"
                 slug="/questions"
@@ -408,7 +404,7 @@ export default function Inbox(props) {
                         showForward={!websiteMode}
                         showSearch
                         showCustomLeft={websiteMode ? <h2 className="text-primary">Forums</h2> : undefined}
-                        className={websiteMode ? 'border-b border-primary sticky top-[49px] z-20 bg-primary' : ''}
+                        className={websiteMode ? 'border-b border-primary @2xl:sticky top-[49px] z-20 bg-primary' : ''}
                         rightActionButtons={
                             <div className="flex items-center gap-2 flex-wrap">
                                 <OSButton icon={<IconSearch />} onClick={() => openSearch('question')} />
@@ -452,7 +448,7 @@ export default function Inbox(props) {
                             data-scheme="secondary"
                             className={`w-full @2xl:w-64 bg-primary flex-shrink-0 ${
                                 websiteMode
-                                    ? 'h-[calc(100vh-91px)] sticky top-[101px]'
+                                    ? '@2xl:h-[calc(100vh-91px)] @2xl:sticky top-[101px] border-b border-primary @2xl:border-b-0'
                                     : '@2xl:border-r border-primary @2xl:h-full'
                             }`}
                         >
@@ -528,16 +524,18 @@ export default function Inbox(props) {
                                                 )}
                                                 {isLoading && (
                                                     <div className="flex items-center justify-center py-8 h-full">
-                                                        <Lottie
-                                                            animationData={hourglassAnimation}
-                                                            className="size-6 opacity-75 dark:hidden"
-                                                            title="Loading questions..."
-                                                        />
-                                                        <Lottie
-                                                            animationData={hourglassAnimationWhite}
-                                                            className="size-6 opacity-75 hidden dark:block"
-                                                            title="Loading questions..."
-                                                        />
+                                                        <Suspense fallback={null}>
+                                                            <Lottie
+                                                                animationData={hourglassAnimation}
+                                                                className="size-6 opacity-75 dark:hidden"
+                                                                title="Loading questions..."
+                                                            />
+                                                            <Lottie
+                                                                animationData={hourglassAnimationWhite}
+                                                                className="size-6 opacity-75 hidden dark:block"
+                                                                title="Loading questions..."
+                                                            />
+                                                        </Suspense>
                                                     </div>
                                                 )}
                                             </div>

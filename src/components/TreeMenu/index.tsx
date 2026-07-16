@@ -12,12 +12,22 @@ interface MenuItem {
     url?: string
     children?: MenuItem[]
     icon?: React.ReactNode
+    badge?: {
+        title: string
+        className?: string
+    }
 }
+
+const badgeClasses = 'bg-accent text-secondary text-xs font-medium rounded-sm px-1 py-0.5 inline-block leading-none'
+
+const Badge = ({ badge }: { badge?: MenuItem['badge'] }) =>
+    badge?.title ? <span className={`${badgeClasses} ${badge.className || ''}`}>{badge.title}</span> : null
 
 interface TreeMenuProps {
     items: MenuItem[]
     activeItem?: MenuItem
     watchPath?: boolean
+    activeUrl?: string
 }
 
 const TreeLink = ({
@@ -46,10 +56,18 @@ const TreeLink = ({
             onClick={() => onClick(menuItem)}
             icon={typeof menuItem.icon !== 'string' && menuItem.icon}
         >
-            {menuItem.name}
+            <span className={`inline-flex items-center gap-1.5${menuItem.badge?.title ? ' pr-1' : ''}`}>
+                <span>{menuItem.name}</span>
+                <Badge badge={menuItem.badge} />
+            </span>
         </OSButton>
     ) : (
-        <div className={`text-muted text-sm py-0.5 !mt-2 ml-${2 + index} pl-${index * 4}`}>{menuItem.name}</div>
+        <div className={`text-muted text-sm py-0.5 !mt-2 ml-${2 + index} pl-${index * 4}`}>
+            <span className="inline-flex items-center gap-1.5">
+                <span>{menuItem.name}</span>
+                <Badge badge={menuItem.badge} />
+            </span>
+        </div>
     )
 }
 
@@ -70,11 +88,11 @@ const getActiveItem = (items: MenuItem[], currentUrl: string): MenuItem | undefi
 }
 
 export function TreeMenu(props: TreeMenuProps) {
-    const { watchPath = true } = props
+    const { watchPath = true, activeUrl } = props
     const { appWindow } = useWindow()
     const { pathname } = useLocation()
     const [activeItem, setActiveItem] = useState<MenuItem | undefined>(
-        props.activeItem || getActiveItem(props.items || [], pathname)
+        props.activeItem || getActiveItem(props.items || [], activeUrl ?? pathname)
     )
 
     const handleClick = (item: MenuItem) => {
@@ -85,9 +103,9 @@ export function TreeMenu(props: TreeMenuProps) {
 
     useEffect(() => {
         if (watchPath) {
-            setActiveItem(getActiveItem(items || [], appWindow?.path || pathname))
+            setActiveItem(getActiveItem(items || [], activeUrl ?? appWindow?.path ?? pathname))
         }
-    }, [appWindow?.path])
+    }, [appWindow?.path, activeUrl])
 
     return (
         <div className="not-prose space-y-px">
@@ -163,7 +181,10 @@ function TreeMenuItem({
                             <IconChevronRight className="size-4" />
                         </motion.div>
                     )}
-                    <span className={`${open ? 'font-semibold' : ''}`}>{item.name}</span>
+                    <span className={`inline-flex items-center gap-1.5 ${open ? 'font-semibold' : ''}`}>
+                        <span>{item.name}</span>
+                        <Badge badge={item.badge} />
+                    </span>
                 </OSButton>
             </Collapsible.Trigger>
 

@@ -77,12 +77,16 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       authorData: [AuthorsJson] @link(by: "handle", from: "author")
       badge: String
       seo: FrontmatterSEO
+      featureFlag: String
       hideFromIndex: Boolean
+      lang: String
+      translationOf: String
       price: String
       platformLogo: String
       platformIconName: String
       platformSourceType: String
       featuredImageCaption: String
+      sourceId: String
     }
     type TeamData {
       name: String
@@ -222,6 +226,24 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       title: String
       number: Int
     }
+    type ResearchMergedPr implements Node {
+      title: String
+      url: String
+      repo: String
+      author: String
+      mergedAt: String
+    }
+    type SelfDrivingPullRequest implements Node {
+      prNumber: Int
+      title: String
+      summary: String
+      type: String
+      scope: String
+      url: String
+      state: String
+      openedAt: Date @dateformat
+      mergedAt: Date @dateformat
+    }
     type PostTagAttributes {
         label: String
         folder: String
@@ -332,6 +354,38 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       secret: Boolean
       required: Boolean
       description: String
+    }
+    type PostHogSource implements Node @dontInfer {
+      mdx: Mdx @link(by: "frontmatter.sourceId", from: "sourceId")
+      sourceId: String
+      name: String
+      slug: String
+      icon_url: String
+      docsUrl: String
+      unreleased: Boolean
+      beta: Boolean
+      featured: Boolean
+      caption: String
+      sourceFields: [PostHogSourceField]
+      tables: [PostHogSourceTable]
+      permissionsCaption: String
+      featureFlag: String
+    }
+    type PostHogSourceField {
+      name: String
+      label: String
+      type: String
+      required: Boolean
+      placeholder: String
+      caption: String
+    }
+    type PostHogSourceTable {
+      name: String
+      label: String
+      description: String
+      sync_methods: [String]
+      incremental_fields: [String]
+      primary_keys: [String]
     }
     type SdkReferences implements Node {
       info: SdkReferencesInfo
@@ -529,10 +583,52 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
                 },
             },
         }),
+        schema.buildObjectType({
+            name: 'SqueakTeam',
+            interfaces: ['Node'],
+            fields: {
+                objectives: {
+                    type: 'Mdx',
+                    resolve: async (source, _args, context) => {
+                        if (!source?.slug) {
+                            return null
+                        }
+
+                        return context.nodeModel.findOne({
+                            type: 'Mdx',
+                            query: {
+                                filter: {
+                                    fields: {
+                                        slug: {
+                                            eq: `/teams/${source.slug}/objectives`,
+                                        },
+                                    },
+                                },
+                            },
+                        })
+                    },
+                },
+            },
+        }),
     ])
 
     createTypes(
         `
+            type AchievementGroupIconAttributes {
+              url: String
+            }
+            type AchievementGroupIconData {
+              attributes: AchievementGroupIconAttributes
+            }
+            type AchievementGroupIcon {
+              data: AchievementGroupIconData
+            }
+            type AchievementGroup implements Node {
+              Title: String
+              description: String
+              tiered: Boolean
+              icon: AchievementGroupIcon
+            }
             type ShopifyCollection implements Node {
               handle: String!
               products: [ShopifyProduct!] @link(by: "shopifyId", from: "products.shopifyId")

@@ -113,7 +113,7 @@ When an incident is declared, the person who raised the incident is the incident
 
 - Make sure the right people join the call. This includes the current on-call person (@on-call-global in Slack) and the team responsible for the alert (we have a [workflow](https://app.incident.io/posthog/settings/workflows/01K7PVWXBB1EWRJB24BBEHYA51) which will try to add these people automatically). Optionally, add people from Infra and [the feature owner](/handbook/engineering/feature-ownership) and Support. Product Marketers can assist in running communications if required.
 - Take notes in the incident channel. This should include timestamps, and is a brain dump of everything that we know, and everything that we are or have tried. This will give us much more of an opportunity to learn from the incident afterwards.
-- Update the [status page](https://status.posthog.com/). If the incident happens during business hours, the incident should have a <SmallTeam slug="support" /> [watcher](https://posthog.com/handbook/support/support-incident-response#when-an-incident-is-declared). If needed, ask the support team for help managing the status page so you can focus on the technical management of the incident. The status page can be updated from:
+- Update the [status page](#the-posthog-status-page). If the incident happens during business hours, the incident should have a <SmallTeam slug="support" /> [watcher](https://posthog.com/handbook/support/support-incident-response#when-an-incident-is-declared). Support can help review the messaging for clarity. The status page can be updated from:
     - (recommended) the incident Slack channel using `/incident statuspage` (`/inc sp`)
     - the [status page area](https://app.incident.io/posthog/status-pages/01K71VKZT2KS9HHRMKVX7X1ZP4/overview/now) of the incident.io dashboard (only recommended for corrections/modifications - Slack tooling provides better context)
 
@@ -123,9 +123,19 @@ Sometimes, customer communication is required. In this case, the incident lead c
 
 [You can find further production runbooks + specific strategies for debugging outages here (internal)](https://runbooks.posthog.com)
 
+### Force-merging a fix
+
+Occasionally the fastest way to stop the bleeding is to ship a fix that can't wait for the normal review and CI gating. The **Force-merge a PR** Slack app is the sanctioned break-glass way to do this — it merges a PR even when branch protection would otherwise block it.
+
+This is for **exceptional cases only**. Take great care, and only reach for it when a fix is genuinely time-critical and waiting on required reviews or checks would prolong customer impact. Any PostHog employee can use it.
+
+To force-merge, open the shortcuts menu in **#dev** (or start typing `/force-`) and pick **Force-merge a PR**, then enter the repo, the PR number or URL, and a reason. Every force-merge is fully audited — it posts to Slack, comments on the PR with who triggered it and why, and is recorded in a tamper-proof log — so be ready to account for it in the [post-mortem](/handbook/engineering/operations/post-mortems).
+
+For the full list of guardrails and what the app will refuse to merge, see [Break-glass: force-merge a PR](/handbook/engineering/development-process#break-glass-force-merge-a-pr).
+
 ### The PostHog status page
 
-Our [status page](https://status.posthog.com/) is the central hub for all incident communication. You can update it easily using the `/incident statuspage` (`/inc sp`) Slack command.
+Our [status page](https://status.posthog.com/) is the central hub for all incident communication. The Incident Lead owns creating status page updates unless they explicitly hand this over to a Comms Lead. You can update it easily using the `/incident statuspage` (`/inc sp`) Slack command.
 
 When updating the status page, make sure to mark the affected component appropriately (for example during an ingestion delay, setting `US Cloud 🇺🇸` / `Event and Data Ingestion` to `Degraded Performance`). This allows PostHog's UI to gently surface incidents with a "System status" warning on the right. Only users in the affected region will see the warning:
 

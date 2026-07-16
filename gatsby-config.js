@@ -1,4 +1,3 @@
-const fetch = require(`node-fetch`)
 const algoliaConfig = require('./gatsby/algoliaConfig')
 const qs = require('qs')
 
