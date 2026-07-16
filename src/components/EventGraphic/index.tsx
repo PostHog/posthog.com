@@ -1,0 +1,136 @@
+import React, { forwardRef } from 'react'
+import dayjs from 'dayjs'
+import Logo from 'components/Logo'
+
+export type EventGraphicSpeaker = {
+    name: string
+    color?: string
+    avatarUrl?: string
+    companyRole?: string
+}
+
+export type EventGraphicProps = {
+    title: string
+    date?: string
+    location?: string
+    online?: boolean
+    speaker?: EventGraphicSpeaker
+    partners?: Array<{ name: string }>
+    className?: string
+}
+
+// The community profile favorite color options — all safelisted as bg-{color} in safelist.txt.
+// Anything else from the API falls back to the default so the graphic never loses its background.
+const PROFILE_COLORS = [
+    'lime-green',
+    'blue',
+    'orange',
+    'teal',
+    'purple',
+    'seagreen',
+    'salmon',
+    'yellow',
+    'red',
+    'green',
+    'lilac',
+    'sky-blue',
+]
+
+// Profile colors light enough to need dark text — the rest get white
+const LIGHT_BACKGROUNDS = ['lime-green', 'teal', 'yellow', 'orange']
+
+const DEFAULT_BACKGROUND = 'yellow'
+
+// Same fallback hedgehog used for profiles without an avatar (see TeamMember)
+const DEFAULT_HEDGEHOG =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/hog-9.png'
+
+const Arrow = ({ className }: { className?: string }) => (
+    <svg viewBox="0 0 62 44" fill="none" aria-hidden="true" className={className}>
+        <path d="M2 40 C 18 44, 40 34, 55 11" stroke="currentColor" strokeWidth="5" strokeLinecap="round" fill="none" />
+        <path
+            d="M43 7 L56 10 L52 23"
+            stroke="currentColor"
+            strokeWidth="5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            fill="none"
+        />
+    </svg>
+)
+
+const EventGraphic = forwardRef<HTMLDivElement, EventGraphicProps>(function EventGraphic(
+    { title, date, location, online, speaker, partners, className = '' },
+    ref
+) {
+    const color = speaker?.color && PROFILE_COLORS.includes(speaker.color) ? speaker.color : DEFAULT_BACKGROUND
+    const darkText = LIGHT_BACKGROUNDS.includes(color)
+    const parsedDate = date ? dayjs(date) : null
+    const partnerNames = (partners || []).map((partner) => partner.name).filter(Boolean)
+    const locationLine = online ? 'Online' : location
+
+    return (
+        <div className={`@container overflow-hidden ${className}`}>
+            <div
+                ref={ref}
+                className={`relative aspect-square w-full overflow-hidden bg-${color} ${
+                    darkText ? 'text-black' : 'text-white'
+                }`}
+            >
+                <div className="absolute right-[6%] top-[24%] aspect-square w-[46%] overflow-hidden rounded-full border-[0.75cqw] border-white bg-tan shadow-xl">
+                    <img
+                        src={speaker?.avatarUrl || DEFAULT_HEDGEHOG}
+                        alt={speaker?.name || 'Max the hedgehog'}
+                        crossOrigin="anonymous"
+                        className="absolute inset-0 size-full object-cover object-top"
+                    />
+                </div>
+                <div className="absolute inset-0 flex flex-col p-[6%]">
+                    <h3
+                        className={`m-0 w-[56%] break-words font-squeak font-bold uppercase leading-[0.95] ${
+                            title.length > 32 ? 'text-[7.5cqw]' : 'text-[10cqw]'
+                        }`}
+                    >
+                        {title}
+                    </h3>
+                    <div className="mt-[3%] w-[46%] font-rounded text-[3.75cqw] font-bold uppercase leading-snug">
+                        {parsedDate?.isValid() && <div>{parsedDate.format('dddd, MMMM D')}</div>}
+                        {locationLine && <div>{locationLine}</div>}
+                    </div>
+                    {speaker && (
+                        <div className="relative mb-[2%] mt-auto w-[52%]">
+                            <div className="break-words font-squeak text-[5.5cqw] font-bold uppercase leading-none">
+                                {speaker.name}
+                            </div>
+                            {speaker.companyRole && (
+                                <div className="mt-[1.5%] font-rounded text-[2.75cqw] font-semibold uppercase leading-none">
+                                    {speaker.companyRole}
+                                </div>
+                            )}
+                            <Arrow className="absolute -right-[6%] bottom-[10%] w-[15cqw]" />
+                        </div>
+                    )}
+                    <div
+                        className={`flex items-center justify-center gap-[2.5cqw] rounded-[2cqw] bg-white px-[4%] py-[2.5%] text-black ${
+                            speaker ? '' : 'mt-auto'
+                        }`}
+                    >
+                        <Logo className="h-[5cqw] w-auto shrink-0" />
+                        {partnerNames.length > 0 && (
+                            <>
+                                <span className="font-rounded text-[3cqw] font-semibold uppercase leading-none">
+                                    with
+                                </span>
+                                <span className="truncate font-squeak text-[4.5cqw] font-bold uppercase leading-none">
+                                    {partnerNames.join(' & ')}
+                                </span>
+                            </>
+                        )}
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+})
+
+export default EventGraphic

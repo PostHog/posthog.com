@@ -10,6 +10,8 @@ import { IconSpinner } from '@posthog/icons'
 import Toggle from 'components/Toggle'
 import ImageDrop, { type Image as UploadImage } from 'components/ImageDrop'
 import uploadImage from 'components/Squeak/util/uploadImage'
+import { toPng } from 'html-to-image'
+import EventGraphic, { type EventGraphicSpeaker } from 'components/EventGraphic'
 import { useToast } from '../../context/Toast'
 import { Event } from '../../pages/events'
 import CreatableMultiSelect from 'components/CreatableMultiSelect'
@@ -106,6 +108,8 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
     const { getJwt } = useUser()
     const { addToast } = useToast()
     const [submitting, setSubmitting] = React.useState<boolean>(false)
+    const [downloadingGraphic, setDownloadingGraphic] = React.useState<boolean>(false)
+    const graphicRef = React.useRef<HTMLDivElement>(null)
     const data = useStaticQuery(graphql`
         query {
             allEvent {
@@ -124,6 +128,11 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
                     squeakId
                     firstName
                     lastName
+                    companyRole
+                    color
+                    avatar {
+                        url
+                    }
                 }
             }
         }
@@ -293,6 +302,41 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
         }),
         []
     )
+
+    const firstSpeakerProfile: EventGraphicSpeaker | undefined = React.useMemo(() => {
+        const squeakId = formik.values.speakers[0]
+        if (!squeakId) return undefined
+        const profile = data.allSqueakProfile.nodes.find((node: { squeakId: string }) => node.squeakId === squeakId)
+        if (!profile) return undefined
+        return {
+            name: [profile.firstName, profile.lastName].filter(Boolean).join(' '),
+            color: profile.color || undefined,
+            avatarUrl: profile.avatar?.url || undefined,
+            companyRole: profile.companyRole || undefined,
+        }
+    }, [formik.values.speakers, data.allSqueakProfile.nodes])
+
+    const handleDownloadGraphic = async () => {
+        if (!graphicRef.current) return
+        setDownloadingGraphic(true)
+        try {
+            const dataUrl = await toPng(graphicRef.current, {
+                canvasWidth: 1080,
+                canvasHeight: 1080,
+                pixelRatio: 1,
+            })
+            const link = document.createElement('a')
+            link.download = `${(formik.values.name || 'posthog-event').toLowerCase().replace(/[^a-z0-9]+/g, '-')}.png`
+            link.href = dataUrl
+            link.click()
+            link.remove()
+        } catch (error) {
+            console.error('Error generating event graphic:', error)
+            addToast({ description: 'Failed to generate the event graphic' })
+        } finally {
+            setDownloadingGraphic(false)
+        }
+    }
 
     return (
         <div>
@@ -509,6 +553,39 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
                             onRemove={() => null}
                             className="!h-auto aspect-square overflow-hidden"
                         />
+                    </div>
+                </div>
+                <div>
+                    <label className="text-[15px] block mb-1">Default event graphic</label>
+                    <p className="text-sm text-secondary mb-2">
+                        This graphic is generated from the details above and used as the event's photo everywhere on the
+                        site unless a photo is uploaded. The background comes from the first speaker's favorite color on
+                        their community profile.
+                    </p>
+                    <EventGraphic
+                        ref={graphicRef}
+                        title={formik.values.speakerTopic || formik.values.name || 'Your event name'}
+                        date={formik.values.date}
+                        location={formik.values.locationLabel}
+                        online={formik.values.online}
+                        speaker={firstSpeakerProfile}
+                        partners={formik.values.partners.filter((partner) => partner.name)}
+                        className="rounded border border-primary"
+                    />
+                    <div className="mt-2">
+                        <OSButton
+                            size="sm"
+                            variant="secondary"
+                            type="button"
+                            disabled={downloadingGraphic}
+                            onClick={handleDownloadGraphic}
+                        >
+                            {downloadingGraphic ? (
+                                <IconSpinner className="animate-spin size-4" />
+                            ) : (
+                                'Download graphic (1080×1080)'
+                            )}
+                        </OSButton>
                     </div>
                 </div>
                 <OSTextarea
