@@ -40,7 +40,7 @@ A couple of things worth doing depending on where the issue came from:
 
 ### Forwarding customer emails
 
-If a customer has emailed you directly and the conversation should live in support, you don't need to copy anything over manually — forward the email to one of the support addresses in our [email channel settings](https://us.posthog.com/project/2/support/settings#channel=email), and a ticket will be created.
+If a customer has emailed you directly and the conversation should live in support, you don't need to copy anything over manually — forward the email to one of the support addresses in our [email channel settings](https://us.posthog.com/project/2/support/settings#channel=email) and a ticket will be created. Default to the address set as **primary** unless you have a reason to use another.
 
 **Make sure the customer's email address is included as a cc on the forward.** This is how the ticket gets associated with the customer, so that they receive our replies and the right tags and SLAs are applied.
 
