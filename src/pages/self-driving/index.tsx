@@ -431,8 +431,10 @@ const TICKER_FADE = 'linear-gradient(to right, transparent, black 4%, black 96%,
 
 // Short, human "merged N ago" – computed in the browser so it stays fresh between rebuilds.
 const timeAgo = (iso: string): string => {
+    if (!iso) return ''
     const then = new Date(iso).getTime()
-    if (Number.isNaN(then)) return ''
+    // Guard against missing/epoch dates (e.g. a PR with no merge date) rendering as "2949w ago".
+    if (Number.isNaN(then) || then <= 0) return ''
     const seconds = Math.max(0, (Date.now() - then) / 1000)
     const days = Math.floor(seconds / 86400)
     if (days >= 7) return `${Math.floor(days / 7)}w ago`
@@ -1227,7 +1229,11 @@ export default function SelfDrivingPage({
 
 export const query = graphql`
     query SelfDrivingPage {
-        allSelfDrivingPullRequest(sort: { fields: mergedAt, order: DESC }, limit: 24) {
+        allSelfDrivingPullRequest(
+            filter: { state: { eq: "merged" } }
+            sort: { fields: mergedAt, order: DESC }
+            limit: 24
+        ) {
             nodes {
                 prNumber
                 summary
