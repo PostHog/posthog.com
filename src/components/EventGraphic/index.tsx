@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react'
 import dayjs from 'dayjs'
 import Logo from 'components/Logo'
+import { PROFILE_COLORS } from 'constants/profileColors'
 
 export type EventGraphicSpeaker = {
     name: string
@@ -18,23 +19,6 @@ export type EventGraphicProps = {
     partners?: Array<{ name: string }>
     className?: string
 }
-
-// The community profile favorite color options — all safelisted as bg-{color} in safelist.txt.
-// Anything else from the API falls back to the default so the graphic never loses its background.
-const PROFILE_COLORS = [
-    'lime-green',
-    'blue',
-    'orange',
-    'teal',
-    'purple',
-    'seagreen',
-    'salmon',
-    'yellow',
-    'red',
-    'green',
-    'lilac',
-    'sky-blue',
-]
 
 // Profile colors light enough to need dark text — the rest get white
 const LIGHT_BACKGROUNDS = ['lime-green', 'teal', 'yellow', 'orange']

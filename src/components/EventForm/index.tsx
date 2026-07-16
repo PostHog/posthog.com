@@ -10,7 +10,7 @@ import { IconSpinner } from '@posthog/icons'
 import Toggle from 'components/Toggle'
 import ImageDrop, { type Image as UploadImage } from 'components/ImageDrop'
 import uploadImage from 'components/Squeak/util/uploadImage'
-import { toPng } from 'html-to-image'
+import { toBlob, toPng } from 'html-to-image'
 import EventGraphic, { type EventGraphicSpeaker } from 'components/EventGraphic'
 import { useToast } from '../../context/Toast'
 import { Event } from '../../pages/events'
@@ -46,7 +46,7 @@ type SelectOption = {
 }
 
 const validationSchema = Yup.object().shape({
-    name: Yup.string().required('Name is required'),
+    name: Yup.string().max(60, 'Max 60 characters').required('Name is required'),
     date: Yup.string().required('Date is required'),
     startTime: Yup.string().optional(),
     description: Yup.string().optional(),
@@ -66,6 +66,9 @@ const validationSchema = Yup.object().shape({
     video: Yup.string().url('Enter a valid URL').optional(),
     presentation: Yup.string().url('Enter a valid URL').optional(),
 })
+
+const graphicFileName = (eventName?: string): string =>
+    `${(eventName || 'posthog-event').toLowerCase().replace(/[^a-z0-9]+/g, '-')}.png`
 
 const transformEventToFormValues = (event: Event, speakerOptions?: SelectOption[]): EventFormValues => {
     const parsed = dayjs(event?.date)
@@ -196,6 +199,32 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
                             return await uploadImage(img.file, jwt)
                         })
                 )
+                let photoIds = [
+                    ...uploadedPhotos.map((photo) => photo.id),
+                    ...values.photosLocal.filter((image) => 'id' in image && image.id).map((image) => image.id),
+                ]
+                // No photos provided — upload the generated graphic so the event has art everywhere
+                if (photoIds.length === 0 && graphicRef.current) {
+                    try {
+                        const blob = await toBlob(graphicRef.current, {
+                            canvasWidth: 1080,
+                            canvasHeight: 1080,
+                            pixelRatio: 1,
+                        })
+                        if (blob) {
+                            const graphic = await uploadImage(
+                                new File([blob], graphicFileName(values.name), { type: 'image/png' }),
+                                jwt
+                            )
+                            if (graphic?.id) {
+                                photoIds = [graphic.id]
+                            }
+                        }
+                    } catch (error) {
+                        // Don't block event creation if the graphic can't be generated
+                        console.error('Error uploading event graphic:', error)
+                    }
+                }
                 const dateTime = dayjs(`${values.date} ${values.startTime || '00:00'}`).toISOString()
                 const eventPayload: any = {
                     name: values.name,
@@ -223,10 +252,7 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
                         lng: values.locationLng ? Number(values.locationLng) : undefined,
                         venue: values.venueName ? { name: values.venueName } : undefined,
                     },
-                    photos: [
-                        ...uploadedPhotos.map((photo) => photo.id),
-                        ...values.photosLocal.filter((image) => 'id' in image && image.id).map((image) => image.id),
-                    ],
+                    photos: photoIds,
                 }
                 if (event) {
                     await updateEvent(event.id, eventPayload)
@@ -326,7 +352,7 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
                 pixelRatio: 1,
             })
             const link = document.createElement('a')
-            link.download = `${(formik.values.name || 'posthog-event').toLowerCase().replace(/[^a-z0-9]+/g, '-')}.png`
+            link.download = graphicFileName(formik.values.name)
             link.href = dataUrl
             link.click()
             link.remove()
@@ -558,9 +584,9 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
                 <div>
                     <label className="text-[15px] block mb-1">Default event graphic</label>
                     <p className="text-sm text-secondary mb-2">
-                        This graphic is generated from the details above and used as the event's photo everywhere on the
-                        site unless a photo is uploaded. The background comes from the first speaker's favorite color on
-                        their community profile.
+                        This graphic is generated from the details above. If you don't upload a photo, it's saved
+                        automatically and used as the event's photo everywhere on the site. The background comes from
+                        the first speaker's favorite color on their community profile.
                     </p>
                     <EventGraphic
                         ref={graphicRef}
