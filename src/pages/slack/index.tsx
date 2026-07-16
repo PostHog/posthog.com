@@ -493,7 +493,7 @@ const faqItems = [
         trigger: 'Do I need PostHog Code to use the PostHog Slack app?',
         content: (
             <p>
-                No. The Slack app isn't gated on a{' '}
+                No. The Slack app isn't gated behind{' '}
                 <Link
                     to="/code"
                     state={{ newWindow: true }}
@@ -501,7 +501,7 @@ const faqItems = [
                 >
                     PostHog Code
                 </Link>{' '}
-                subscription. They share the same coding agent under the hood – the Slack app is just the front door if
+                usage. They share the same coding agent under the hood – the Slack app is just the front door if
                 you'd rather work from a thread than a desktop app.
             </p>
         ),

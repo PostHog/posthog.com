@@ -105,6 +105,7 @@
         }
     ],
     "redirects": [
+        { "source": "/papers", "destination": "/research#papers" },
         { "source": "/desktop", "destination": "/code" },
         { "source": "/teams/logs", "destination": "/teams/apm" },
         { "source": "/teams/query-performance", "destination": "/teams/analytics-platform" },

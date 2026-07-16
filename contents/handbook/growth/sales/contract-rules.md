@@ -262,7 +262,11 @@ For any of the above scenarios you should use our [discounting principles](contr
 
 ### When they will end the contract term with credit remaining
 
-We can roll up to half the amount of credit from the original order form to a new contract term, provided that the customer signs a renewal contract of equal or higher annual spend than the original contract.
+If a customer ends a term with unused credits and signs a renewal of equal or higher spend, we roll over part of their _remaining_ (unused) credits into the new term. The [pre-paid plans doc](/docs/billing/pre-paid-plans) is the source of truth for the exact amount and the customer-facing wording, so keep the mechanic there and link to it rather than restating it here (this is where these two pages had drifted).
+
+We scale the rollover to _remaining_ credits rather than the original order form amount. For a customer who underused and renews at equal spend, rolling a share of the original on top of the renewal stacks up more credits than they were ever going to use, which rewards a mis-sized deal with a bigger pile and makes the account harder to expand later. Scaling to what they actually didn't use keeps the balance proportionate.
+
+Where the underuse was outside the customer's control (a PostHog-side incident, a data issue on our side, or a documented disruption on theirs), we can roll over more than the standard amount, up to the full remaining balance, or extend the window to use existing credits. We handle these case by case based on what was logged at the time, so flag it early.
 
 ### When a customer doesn't renew their credit purchase
 When a customer chooses not to renew a prepaid credit contract we automatically remove any remaining credits on the expiry date. Their account will then roll onto our standard monthly plan and they'll be charged for usage. It's the customer's responsibility to stop sending us events or cancel their subscription and downgrade to the free tier if they don't want to keep paying.

@@ -867,6 +867,54 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         })
     }
 
+    const RESEARCHER_GITHUB_HANDLES = ['nicowaltz', 'robbie-c', 'joshsny', 'MarconLP', 'k11kirky', 'jamesefhawkins']
+
+    async function sourceResearchMergedPRs() {
+        const query = `org:posthog is:pr is:merged -repo:posthog/posthog.com ${RESEARCHER_GITHUB_HANDLES.map(
+            (handle) => `author:${handle}`
+        ).join(' ')}`
+
+        const response = await fetch(
+            `https://api.github.com/search/issues?q=${encodeURIComponent(query)}&sort=updated&order=desc&per_page=50`
+        )
+
+        if (!response.ok) {
+            console.warn(`Failed to fetch research merged PRs: ${response.statusText}`)
+            return
+        }
+
+        const data = await response.json()
+        const items = Array.isArray(data?.items) ? data.items : []
+
+        items
+            .filter((item) => /^(feat|epic)/i.test((item.title ?? '').trim()))
+            .map((item) => ({
+                title: item.title,
+                url: item.html_url,
+                repo: item.repository_url?.split('/').pop() ?? 'posthog',
+                author: item.user?.login ?? 'unknown',
+                mergedAt: item.pull_request?.merged_at ?? item.closed_at ?? null,
+            }))
+            .sort((a, b) => {
+                const aTime = a.mergedAt ? Date.parse(a.mergedAt) : 0
+                const bTime = b.mergedAt ? Date.parse(b.mergedAt) : 0
+                return bTime - aTime
+            })
+            .slice(0, 8)
+            .forEach((pr) => {
+                createNode({
+                    id: createNodeId(`research-merged-pr-${pr.url}`),
+                    parent: null,
+                    children: [],
+                    internal: {
+                        type: `ResearchMergedPr`,
+                        contentDigest: createContentDigest(pr),
+                    },
+                    ...pr,
+                })
+            })
+    }
+
     async function sourceGithubNodes() {
         if (!process.env.GITHUB_API_KEY) return
 
@@ -1442,6 +1490,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         sourceG2Reviews(),
         sourceCloudinaryImages(),
         sourceGithubNodes(),
+        sourceResearchMergedPRs(),
         sourceSelfDrivingPRs(),
         fetchWorkflowTemplates(),
         fetchReferences(),
