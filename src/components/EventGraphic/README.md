@@ -9,7 +9,7 @@ The template follows the [visual identity guidelines](/handbook/brand/visual-ide
 - **Headline** – the event name set in **Squeak**, bold, uppercase (Squeak's only permitted usage). Long titles automatically step down a size.
 - **Supporting text** – date ("Tuesday, March 17") and city/country (or "Online") set in **Open Runde** (`font-rounded`).
 - **Background** – a solid fill using the **first speaker's favorite color** from their community profile (one of the 12 safelisted profile color tokens). Falls back to `yellow`. Text automatically switches between black and white based on the background's lightness (`LIGHT_BACKGROUNDS`).
-- **Headshot** – the first speaker's community profile avatar (the hand-drawn portrait) in a white-ringed circle, with their name in Squeak, their role in Open Runde, and a hand-drawn-style arrow pointing at the portrait. Events without speakers get the default hedgehog artwork instead.
+- **Headshot** – the first speaker's community profile avatar (the hand-drawn portrait) in a white-ringed circle, with a "Featuring:" label, their name in Squeak, their role in Open Runde, and a hand-drawn-style arrow pointing at the portrait. Events without speakers get the default hedgehog artwork instead.
 - **Footer bar** – white pill with the PostHog logo, plus "with {partner}" when the event has partners.
 
 ## Sizing and export

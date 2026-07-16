@@ -46,9 +46,9 @@ const DEFAULT_HEDGEHOG = 'https://res.cloudinary.com/dmukukwp6/image/upload/q_au
 
 const Arrow = ({ className }: { className?: string }) => (
     <svg viewBox="0 0 62 44" fill="none" aria-hidden="true" className={className}>
-        <path d="M2 40 C 18 44, 40 34, 55 11" stroke="currentColor" strokeWidth="5" strokeLinecap="round" fill="none" />
+        <path d="M2 40 C 18 44, 38 30, 55 11" stroke="currentColor" strokeWidth="5" strokeLinecap="round" fill="none" />
         <path
-            d="M43 7 L56 10 L52 23"
+            d="M52 25 L55 11 L42 15"
             stroke="currentColor"
             strokeWidth="5"
             strokeLinecap="round"
@@ -98,6 +98,9 @@ const EventGraphic = forwardRef<HTMLDivElement, EventGraphicProps>(function Even
                     </div>
                     {speaker && (
                         <div className="relative mb-[2%] mt-auto w-[52%]">
+                            <div className="mb-[1.5%] font-rounded text-[2.75cqw] font-semibold uppercase leading-none">
+                                Featuring:
+                            </div>
                             <div className="break-words font-squeak text-[5.5cqw] font-bold uppercase leading-none">
                                 {speaker.name}
                             </div>
