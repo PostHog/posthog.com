@@ -280,6 +280,7 @@ const SocialSharing = ({ values, setFieldValue }) => {
                 quality: 1,
                 canvasWidth: 1200,
                 canvasHeight: 1200,
+                skipFonts: true,
             })
             const link = document.createElement('a')
             link.download = `${socialValues.title}.jpeg`

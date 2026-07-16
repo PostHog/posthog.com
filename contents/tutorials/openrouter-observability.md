@@ -4,8 +4,16 @@ date: 2025-02-20
 author:
  - ian-vanagas
 tags:
- - LLM analytics
+ - AI Observability
 ---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox type="fyi" title="New: Simpler options available" icon="IconInfo">
+
+Since publishing this post, we've integrated further with OpenRouter. You can enable the PostHog integration directly through **OpenRouter Broadcast** – no SDK instrumentation required. All your LLM calls will then be tracked automatically in PostHog's AI Observability. See the [OpenRouter installation docs](/docs/ai-observability/installation/openrouter) for details.
+
+</CalloutBox>
 
 OpenRouter makes it easy to use a range of different LLMs. No matter which you use, understanding API usage, costs, and latency is crucial for understanding how users interact with your AI features. In this tutorial, we'll show you how to monitor important metrics such as:
 
@@ -124,7 +132,7 @@ import { OpenAI } from '@posthog/ai'
 import { PostHog } from 'posthog-node'
 
 const phClient = new PostHog(
-  '<ph_project_api_key>',
+  '<ph_project_token>',
   { host: '<ph_api_client_host>' }
 )
 
@@ -169,7 +177,7 @@ Now, when you run `npm run dev` again, you can choose your model, enter your mes
 
 ## 3. Viewing generations in PostHog
 
-After generating a few responses with different models, go to PostHog to access the [LLM analytics dashboard](https://app.posthog.com/llm-analytics) to see:
+After generating a few responses with different models, go to PostHog to access the [AI Observability dashboard](https://app.posthog.com/ai-observability) to see:
 
 - Overview of all AI interactions
 - Cost breakdowns by model
@@ -184,7 +192,7 @@ After generating a few responses with different models, go to PostHog to access 
   classes="rounded"
 />
 
-Head to the [generations tab](https://app.posthog.com/llm-analytics/generations) to get details on each generation as well as model, cost, token usage, latency, and more. You can even see the conversation input and output.
+Head to the [generations tab](https://app.posthog.com/ai-observability/generations) to get details on each generation as well as model, cost, token usage, latency, and more. You can even see the conversation input and output.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_02_20_at_14_47_59_2x_d4196d55f8.png"
@@ -196,5 +204,5 @@ Head to the [generations tab](https://app.posthog.com/llm-analytics/generations)
 ## Further reading
 
 - [How to set up OpenAI observability](/tutorials/openai-observability)
-- [How to set up LLM analytics for Anthropic's Claude](/tutorials/anthropic-analytics)
+- [How to set up AI Observability for Anthropic's Claude](/tutorials/anthropic-analytics)
 - [Product metrics to track for LLM apps](/product-engineers/llm-product-metrics)

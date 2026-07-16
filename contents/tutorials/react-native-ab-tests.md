@@ -152,7 +152,7 @@ import { PostHogProvider } from 'posthog-react-native'
 export default function App() {
   return (
     <NavigationContainer>
-      <PostHogProvider apiKey="<ph_project_api_key>" options={{
+      <PostHogProvider apiKey="<ph_project_token>" options={{
         host: "<ph_client_api_host>", // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
       }}>
         <AppNavigator />
@@ -162,7 +162,7 @@ export default function App() {
 }
 ```
 
-You can find your project API key and instance address in [your project settings](https://us.posthog.com/project/settings).
+You can find your project token and instance address in [your project settings](https://us.posthog.com/project/settings).
 
 Finally, we [capture a custom event](/docs/libraries/react-native#capturing-events) when the button on `SecondScreen` is clicked. We'll use this event as our goal metric in our A/B test.
 

@@ -7,6 +7,7 @@ import CodeBlock from 'components/Home/CodeBlock'
 import CloudinaryImage from 'components/CloudinaryImage'
 import SnippetRenderer from 'components/SnippetRenderer'
 import { True } from 'components/ComparisonTable/row'
+import MCPInstall from 'components/Products/MCPInstall'
 
 export const sessionReplay = {
     Icon: IconRewindPlay,
@@ -17,17 +18,18 @@ export const sessionReplay = {
     color: 'yellow',
     colorSecondary: '[#B56C00]',
     category: 'product_engineering',
+    wizardSupport: true,
     includeAddonRates: true,
     shortDescription: 'Watch people use your product',
     seo: {
         title: 'Session Replay – Debug and analyze sessions with PostHog',
         description:
-            'See how users interact with your product with Session Replay. Inspect sessions, diagnose issues, debug errors, and understand user behavior.',
+            'Watch exactly why something happened so the fix is obvious – the session context agents use to debug and ship. One of the tools that makes your product self-driving.',
     },
     overview: {
         title: 'Watch people use your product',
         description:
-            'Play back sessions to diagnose UI issues, improve support, and get context on nuanced user behavior in your product, website, or mobile app.',
+            'Session Replay is one of the tools that makes your product self-driving: play back sessions to see exactly why something happened so the fix is obvious. The context agents use to debug UI issues and nuanced user behavior in your product, website, or mobile app.',
         textColor: 'text-black', // tw
     },
     videos: {
@@ -120,7 +122,7 @@ export const sessionReplay = {
                         <div className="shrink">
                             <h4 className="text-lg">Your code</h4>
                             <CodeBlock
-                                code={`posthog.init('<ph_project_api_key>', {
+                                code={`posthog.init('<ph_project_token>', {
   api_host: '<ph_client_api_host>',
   defaults: '<ph_posthog_js_defaults>',
   enable_recording_console_log: true,
@@ -249,7 +251,7 @@ export const sessionReplay = {
                 <div>
                     <h4 className="text-lg">Manually enable recording when a visitor is enrolled in a feature flag</h4>
                     <CodeBlock
-                        code={`posthog.init('<ph_project_api_key>', {
+                        code={`posthog.init('<ph_project_token>', {
   api_host: '<ph_client_api_host>',
   defaults: '<ph_posthog_js_defaults>',
   disable_session_recording: true,
@@ -403,6 +405,32 @@ window.posthog.onFeatureFlags(function () {
                 },
             ],
         },
+        {
+            title: 'MCP',
+            headline: 'Search replays from your editor',
+            description:
+                'Find session recordings from Cursor, Claude Code, VS Code, or any MCP-compatible agent. Filter by events, user properties, and frustration signals.',
+            features: [
+                {
+                    title: 'Investigate bug reports',
+                    description: 'Find session replays where users encountered errors to feed your agent with context.',
+                },
+                {
+                    title: 'Research before coding',
+                    description: 'Summarize current user behavior before making code changes.',
+                },
+                {
+                    title: 'Validate after deploying',
+                    description: 'Monitor how users interact with newly deployed updates.',
+                },
+                {
+                    title: 'Search session replays',
+                    description:
+                        'Filter recordings by events, user properties, time ranges, and specific user behaviors.',
+                },
+            ],
+            children: <MCPInstall />,
+        },
     ],
     postHogOnPostHog: {
         title: 'How PostHog uses Session Replay',
@@ -490,6 +518,9 @@ window.posthog.onFeatureFlags(function () {
             ],
             us: [
                 {
+                    title: 'Agents can search replays and act on what they see – the context that powers self-driving',
+                },
+                {
                     title: 'Interlinking with feature flags and insights',
                     subtitle: 'Jump between them easily',
                 },
@@ -554,11 +585,27 @@ window.posthog.onFeatureFlags(function () {
                 'Generate a playlist of recordings limited to an A/B test or specific group within a multivariate experiment.',
         },
     ],
+    ai: {
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/SESSION_REPLAY_a3ca565731.png',
+        imageAlt: 'PostHog AI and session replay',
+        description: 'find the recording, see why it broke, and ship the fix',
+        skills: [
+            'Finds recordings through natural language prompts – describe the behavior you want instead of setting filters',
+            'Reads the event stream from a recording and produces a summary',
+            'Clusters similar sessions and surfaces representative examples from thousands',
+        ],
+        prompts: [
+            'Find sessions where users dropped off during checkout',
+            'Find sessions with rage clicks on the pricing page',
+            'Show recordings from enterprise users in the last 24 hours',
+        ],
+    },
     presenterNotes: {
         overview:
             "<strong>Presenter notes:</strong> Session Replay lets you see exactly how users interact with your app. You're watching their real session – what they clicked, where they got stuck, what broke. This isn't just for debugging; it's for building empathy. You can see what's intuitive and what isn't, and how it feels to actually use your product. It's often the fastest way to uncover small issues that analytics alone won't catch. Everything is captured automatically—no manual tagging needed.",
         customers:
             "Companies like Hasura, Netdata, and ElevenLabs are already using it to make real improvements. Hasura saw a measurable bump in conversion once they started watching user sessions. Netdata uses it to cut down on back-and-forth with their support team. And ElevenLabs watches replays while testing new ideas to quickly figure out what's working. This is the kind of feedback loop that helps teams move faster without relying only on instinct.",
+        ai: 'MCP hands the same session replay capabilities to your coding agent. Investigate user-reported bugs, understand how users interact with features, and find specific sessions – without switching to the PostHog app.',
         features:
             "<strong>Event timeline:</strong> The timeline brings together everything from DOM load timing and API calls to console logs and user actions. It gives you full visibility into what happened, when it happened, and what else was going on at the time. You're not flipping between separate tools to reconstruct a bug. It's one unified view, scoped to the exact user session. For teams who care about real- world performance, this is a fast way to correlate frontend behavior with actual user impact. <br /><br /><strong>Console logs:</strong>  One of the most useful parts of replay is being able to see console logs alongside the session. You get full visibility into warnings and errors as they happen. If you're using Sentry, those errors are linked—so you can jump from an exception to a full session replay showing exactly how the error occurred. This shortens the loop between support, product, and engineering. You're not asking users what browser they were using or what they clicked. You just watch it. <br /><br /><strong>Network monitor:</strong> Network requests are captured as part of the session and shown with timing, method, and status code. You can see how slow requests affected load time, whether a backend error disrupted the experience, or which endpoints were called at each step. It's especially helpful when tracking down flakiness that only happens in edge cases or under real - world latency. <br /><br /><strong>Autocapture:</strong> PostHog automatically tracks clicks, form interactions, page views, and other key events without requiring manual instrumentation. You can get up and running quickly and still have meaningful data to explore. When you need more control, you can layer in custom events or define your own capture rules. The point is: you don't have to do everything upfront to start getting value. <br /><br /><strong>Capture form inputs:</strong> Form input capture is turned off by default, but you can opt in to capture specific fields—useful when diagnosing friction in onboarding flows or payment forms. It's granular, so you're not logging everything—only what's needed. And since it integrates with our privacy masking features, sensitive fields can be excluded with a simple config update. <br /><br /><strong>DOM explorer:</strong> During a replay, you can inspect the live DOM snapshot at any point in the session. This helps validate that what the user saw matches your expectations, especially in dynamic apps where the UI may shift based on state or timing. It's helpful for spotting layout shifts, broken styles, or elements that weren't visible when they should've been. <br /><br /><strong>Record by feature flag:</strong> You can choose to only record sessions from users who have a specific feature flag enabled. This is useful for rollout testing, debugging experiments, or validating behavior changes in staging versus production environments. It gives your team a way to focus on just the relevant slice of users without recording everyone. <br /><br /><strong>Supported platforms:</strong> Session replay works across web, iOS, Android, React Native, and Flutter. And we don't treat mobile support as an afterthought—it includes gesture tracking, scrolls, taps, and replay stability that's ready for production. All SDKs are open source, and setup is consistent across environments. This means you can build a single mental model that works whether your app is on the web or mobile. <br /><br /><strong>More features:</strong> <br /><br /><strong>Filter by event:</strong> Narrow down recordings to sessions where specific events or actions were triggered. This is helpful for tracking down bugs related to a new feature or analyzing how people interact with a particular UI element. <br /><br /><strong>Filter by people:</strong> Filter sessions by person properties—country, browser, custom property, even specific users. This becomes really useful when debugging reports from a single customer or testing behavior across user segments. <br /><br /><strong>Block sensitive data:</strong> Sensitive data capture is opt -in and customizable. You can redact fields using simple HTML attributes or define masking rules at the app level. This is especially useful in production environments where you want to balance visibility with privacy. <br /><br /><strong>Minimum duration filter:</strong> You can ignore very short sessions—like bounces or accidental visits—by setting a minimum duration threshold. This keeps your recordings useful and your volume under control. <br /><br /><strong>Sample recorded sessions:</strong> Reduce the percentage of sessions being recorded without losing signal. This is one of the most effective ways to manage costs while still catching meaningful patterns. <br /><br /><strong>Share & embed:</strong> You can share a replay via URL or embed it directly into a support ticket, Slack thread, or internal dashboard.This makes collaboration between support and engineering much faster—especially when you're working across time zones.",
         answers:
@@ -566,7 +613,7 @@ window.posthog.onFeatureFlags(function () {
         pricing:
             "You get 5,000 recordings per month for free – this is <em>significantly</em> more than other replay products. After that, it's metered by usage. No lock-ins, no guessing what tier you need. You pay only for what you record. The more you use, the cheaper it gets. And unlike some other tools, you're not paying for seats or stuck in an enterprise contract just to unlock basic features. This lets both small teams and large ones get the same level of insight, with pricing that's scalable. And you can also control which sessions you want to keep costs down and set billing limits so you never end up with a surprise bill.<br /><br />There's also that time <a href='/blog/session-replay-pricing'>we reduced pricing for everyone across the board</a>, and we're planning on doing it again soon.",
         'comparison-summary':
-            "<strong>TL;DR:</strong> If you want a replay product that deeply integrates with other analytics tools, use PostHog. We're always shipping code to get to feature parity with any competing product, so even if we don't have what you need yet, there's a good chance we'll have it soon. Plus you can follow along with this product's roadmap and see what the Replay Team is shipping next.",
+            "<strong>TL;DR:</strong> If you want a replay product that deeply integrates with other analytics tools, use PostHog. Because it's one system, agents can search recordings and act on what they see – it's not just playback, it's the context that makes your product self-driving. We're always shipping code to get to feature parity with any competing product, so even if we don't have what you need yet, there's a good chance we'll have it soon. Plus you can follow along with this product's roadmap and see what the Replay Team is shipping next.",
         'feature-comparison':
             "We don't have it all (yet) but we're working on it. We hope this comparison chart adds some Clarity for you.",
         docs: "We put a lot of effort into our documentation because we know that for most teams, this is your first real experience using PostHog. And we don't outsource it. The people writing the docs are the same engineers building the product. That means what you're reading is usually up to date, technically accurate, and written by someone who knows what it's like to implement this stuff in production.<br /><br />We treat the docs like a product of their own. Our team actively monitors GitHub issues, community Slack, forums, and feedback that comes through the site. So if something's unclear, we try to fix it quickly.<br /><br />We also understand that getting things configured properly is only part of the job. If your team is concerned about session replay costs, sampling strategy, just reach out – we're happy to suggest optimizations and help you get the right setup for your use case, even if it means we make less money. We want you to get the most out of PostHog without surprises.",

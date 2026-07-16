@@ -32,7 +32,7 @@ When you start `posthog-js`, we can add code once the library is loaded to watch
 Here we'll wait until a recording has been idle for 5 minutes, but you might wait for some time after starting or use the `onCapture` hook to send a Slack message when a user experiences a `$exception` event.
 
 ```js
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     api_host: '<ph_client_api_host>',
     defaults: '<ph_posthog_js_defaults>',
     loaded: (ph) => {

@@ -28,7 +28,7 @@ These exports come in the form of multiple tables including ones for users, page
 
 ## 2. Converting and capturing event data
 
-The schema of Heap's exported event data is similar to PostHog's schema, but it does require conversion to work with the rest of PostHog's data. You can see details on Heap's schema in [their docs](https://help.heap.io/heap-connect/heap-connect-guide/data-schema/ #schema) and events and properties PostHog autocaptures in [our docs](/docs/product-analytics/autocapture#autocaptured-events).
+The schema of Heap's exported event data is similar to PostHog's schema, but it does require conversion to work with the rest of PostHog's data. You can see details on Heap's schema in [their docs](https://help.heap.io/heap-connect/heap-connect-guide/data-schema/#schema) and events and properties PostHog autocaptures in [our docs](/docs/product-analytics/autocapture#autocaptured-events).
 
 To start, you need to query each of the production event tables because the `all_events` table doesn't contain any properties. For example, if you have a project named **My Cool App** and labeled an event **My Cool Event**, you query the `my_cool_app.heap_main_production.my_cool_event` table.
 
@@ -38,7 +38,7 @@ With this event data, you can then go through each row and convert it to PostHog
 - Properties like `landing_page` to `$current_url`
 - Event `time` to an ISO 8601 timestamp
 
-Once done, you can capture the data into PostHog using the [Python SDK](/docs/libraries/python #historical-migrations) or the [event capture API endpoint](/docs/api/capture) with `historical_migration` set to `true`.
+Once done, you can capture the data into PostHog using the [Python SDK](/docs/libraries/python#historical-migrations) or the [event capture API endpoint](/docs/api/capture) with `historical_migration` set to `true`.
 
 Here's an example version of a Python script assuming the data is in `.csv` file:
 
@@ -48,7 +48,7 @@ from datetime import datetime
 import pandas as pd
 
 posthog = Posthog(
-'<ph_project_api_key>',
+'<ph_project_token>',
 host='<ph_client_api_host>',
 debug=True,
 historical_migration=True
@@ -119,7 +119,7 @@ timestamp=ph_timestamp,
 
 Heap's user data is stored in the `users` table and connected to events using the `user_id` column. Some of these users have an `identity` column with a value we can use as a `distinct_id`.
 
-Converting and capturing this data requires a similar process to the event data. The big difference is the need to call [`posthog.alias()`](/docs/product-analytics/identify #alias-assigning-multiple-distinct-ids-to-the-same-user) with the `user_id` and `identity` values so we can query events from either as the same person.
+Converting and capturing this data requires a similar process to the event data. The big difference is the need to call [`posthog.alias()`](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) with the `user_id` and `identity` values so we can query events from either as the same person.
 
 Once we convert the properties to PostHog's schema, we can use the `$set` and `$set_once` to set the [person's properties](/docs/product-analytics/person-properties).
 
@@ -131,7 +131,7 @@ from datetime import datetime
 import pandas as pd
 
 posthog = Posthog(
-'<ph_project_api_key>',
+'<ph_project_token>',
 host='<ph_client_api_host>',
 debug=True,
 historical_migration=True

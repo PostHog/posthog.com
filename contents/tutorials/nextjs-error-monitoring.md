@@ -80,7 +80,7 @@ npm i posthog-js posthog-node
 
 ### Frontend setup
 
-We'll set up PostHog in the frontend first. This starts by creating a `providers.js` file in the `app` directory. In it, we initialize PostHog with your project API key and host from [your project settings](https://us.posthog.com/settings/project) and pass it to a `PostHogProvider`.
+We'll set up PostHog in the frontend first. This starts by creating a `providers.js` file in the `app` directory. In it, we initialize PostHog with your project token and host from [your project settings](https://us.posthog.com/settings/project) and pass it to a `PostHogProvider`.
 
 ```js
 // app/providers.js
@@ -92,7 +92,7 @@ import { useEffect } from 'react'
 
 export function PostHogProvider({ children }) {
   useEffect(() => {
-    posthog.init('<ph_project_api_key>', {
+    posthog.init('<ph_project_token>', {
       api_host: '<ph_client_api_host>',
       defaults: '<ph_posthog_js_defaults>',
     })
@@ -137,7 +137,7 @@ PostHog then begins to autocapture events and frontend errors. If you go back to
 
 ### Backend setup
 
-For the backend, we can create a `posthog-server.js` file in the `app` directory. In it, initialize PostHog from `posthog-node` as a singleton with your project API key and host from [your project settings](https://us.posthog.com/settings/project). This looks like this:
+For the backend, we can create a `posthog-server.js` file in the `app` directory. In it, initialize PostHog from `posthog-node` as a singleton with your project token and host from [your project settings](https://us.posthog.com/settings/project). This looks like this:
 
 ```js
 // app/posthog-server.js
@@ -148,7 +148,7 @@ let posthogInstance = null
 export function getPostHogServer() {
   if (!posthogInstance) {
     posthogInstance = new PostHog(
-      '<ph_project_api_key>',
+      '<ph_project_token>',
       {
         host: '<ph_client_api_host>',
         flushAt: 1,
@@ -164,7 +164,7 @@ We can then import this singleton wherever we need it in the backend. Unfortunat
 
 ## 3. Capturing errors
 
-With both front and backend initializations set up, capturing errors with PostHog is as simple as calling `captureException` or capturing an `$exception` event.
+With both front and backend initializations set up, capturing errors with PostHog is as simple as calling `captureException`.
 
 <MultiLanguage>
 
@@ -240,15 +240,15 @@ You can also create a similar `global-error.jsx` file to capture errors affectin
 
 Because backend requests in Next.js vary between server-side rendering, short-lived processes and more, we can't rely on exception autocapture.
 
-The context of a user and their session lives on the frontend. As such it is necessary to pass this data to your backend when making requests. We recommend configuring PostHog to send this data on every request by specifying the domains you wish to patch with the session and user distinct ID.
+The context of a user and their session lives on the frontend. As such it is necessary to pass this data to your backend when making requests. We recommend configuring PostHog to send this data to your backend by specifying the hostnames you wish to patch with the session and user distinct ID.
 
 ```js
-posthog.init('<ph_project_api_key>', {
-    __add_tracing_headers: ['your-backend-domain.com'] // +
+posthog.init('<ph_project_token>', {
+    tracing_headers: ['your-backend-domain.com'] // +
 })
 ```
 
-Alternatively, you can manually set the `X-POSTHOG-SESSION-ID` and `X-POSTHOG-DISTINCT-ID`, which can be fetched using the `posthog.get_session_id()` and `posthog.get_distinct_id()` methods respectively.
+Use hostnames only, without the protocol or path. Alternatively, you can manually set the `X-POSTHOG-SESSION-ID` and `X-POSTHOG-DISTINCT-ID`, which can be fetched using the `posthog.get_session_id()` and `posthog.get_distinct_id()` methods respectively.
 
 On the backend create a [`instrumentation.js`](https://nextjs.org/docs/app/building-your-application/optimizing/instrumentation) file at the root of our project and set up an `onRequestError` handler there. Importantly, we check the request is running in the `nodejs` runtime to ensure PostHog works. We get the `session_id` and `distinct_id` from request headers to add to the captured exception.
 

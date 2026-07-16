@@ -67,7 +67,7 @@ To start, install [PostHog’s Node library](/docs/libraries/node):
 npm install posthog-node
 ```
 
-Next, we initialize our PostHog client in `server.js` using our project API key and instance address. You can find these in [your project settings](https://us.posthog.com/settings/project).
+Next, we initialize our PostHog client in `server.js` using our project token and instance address. You can find these in [your project settings](https://us.posthog.com/settings/project).
 
 ```js file=server.js
 const express = require('express');
@@ -75,7 +75,7 @@ const app = express();
 const port = 3000;
 const { PostHog } = require('posthog-node');
 
-const posthogClient = new PostHog('<ph_project_api_key>', {
+const posthogClient = new PostHog('<ph_project_token>', {
   host: '<ph_client_api_host>',
 });
 

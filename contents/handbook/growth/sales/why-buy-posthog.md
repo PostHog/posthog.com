@@ -56,9 +56,7 @@ By deploying our simple JavaScript snippet on your website you’ll capture all 
 - [Replace Google Analytics](/web-analytics) to get a view on your marketing data which is familiar to experienced marketers.  Recent updates to GA4 have not sat well with that persona so folks are looking for something more familiar.
 - [Define conversion funnels](/funnels) to understand which content drives your users to sign up to your product.  
 - [View aggregated page engagement](/heatmaps) with heatmaps and scroll depth tracking understanding what’s popular in your content.
-- [Easily connect revenue data](/revenue-analytics) with a few clicks to get a deeper understanding of which marketing efforts drive the most revenue.
 - [Ad platform connection](/docs/cdp/destinations/google-ads) provides pre-built insights to help you understand your campaign performance and associated costs.
-
 
 ## Data Engineers
 
@@ -81,3 +79,11 @@ Using PostHog's [CDP](/cdp) lets you aggregate data from multiple technologies a
 - Analytics is an after-the-fact passive activity, but your events in PostHog can be so much more than that. You can use PostHog events to react to customer behaviors, without investing engineering time to make those workflows.
 - Our [usage-based pricing](/handbook/how-we-make-money) means that you’ll only pay for what you use and have full control of those costs, unlike opaque software contracts, where the prices go up every year with zero innovation attached.  
 - Plus, [the way we do sales is different](/sales).
+
+## Per-product sales enablement
+
+The product marketing team has created sales enablement materials, covering some product information and general objection handling for specific products. These exist as Google Docs as they are living documents, but are listed below. 
+
+- [Managed data warehouse (DuckDB)](https://docs.google.com/document/d/19P0SajrkCf7IS0jJEh08y5kqKANEGPq5S6ZqTpyFKts/edit?usp=sharing)
+
+If there are additional products you'd like to see this sort of material for, let the team know in the **#team-marketing** Slack channel.  

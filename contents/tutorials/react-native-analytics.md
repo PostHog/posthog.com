@@ -194,7 +194,7 @@ To get analytics, user identification, feature flags, and all the other features
 npx expo install posthog-react-native expo-file-system expo-application expo-device expo-localization
 ```
 
-Next, import `PostHogProvider` into `App.js` and add it between `NavigationContainer` and `Stack.Navigator` with your project API key and instance address (found in your project settings). This enables PostHog data and methods usage throughout the app. 
+Next, import `PostHogProvider` into `App.js` and add it between `NavigationContainer` and `Stack.Navigator` with your project token and instance address (found in your project settings). This enables PostHog data and methods usage throughout the app. 
 
 ```js
 import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
@@ -209,7 +209,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <PostHogProvider 
-        apiKey="<ph_project_api_key>"
+        apiKey="<ph_project_token>"
         options={{
           host: "<ph_client_api_host>",
         }}

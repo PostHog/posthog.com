@@ -31,19 +31,21 @@ Outbound is helpful because it is a good way to generate more leads in a semi-pr
 
 > None of these people are currently talking to us - that's why they are under the umbrella of 'outbound'.
 
-We’ll call 1-3 ‘warm’ outbound and 4-6 ‘cold’ outbound. Technical Account Managers are responsible for managing leads from warm outbound, in addition to their book of business. Technical Account Executives are responsible for managing leads from cold outbound, in addition to inbound leads (which comprise 90% of leads today).
-
-We are building a BDR function that will generate leads, mainly focused on cold outbound to start. (A BDR, or business development rep, is someone who gets leads for sales by doing outbound activities.)
+We’ll call 1-3 ‘warm’ outbound and 4-6 ‘cold’ outbound. 
 
 ## What we're doing today
 
-Our focus today is on three categories: inbound leads, getting much better at warm outbound (we have a huge number of leads that we could be converting better), and experimenting with colder outbound. <TeamMember name="Dmytro Sitalo" /> is leading our experiments today with the <SmallTeam slug="sales-cs" />.
+Our model is:
 
-Check out the [leads page](/handbook/growth/sales/lead-scoring) for more detail on lead types and where they go.
+- TAMs do warm outbound to group 1-2
+- BDRs (<TeamMember name="Lorena Viana" />, <TeamMember name="Andreas Ford" />, and <TeamMember name="Melad Khajepour" />) do warmish outbound to groups 3-5
+- TAEs do cold outbound to a top 10 list in groups 5-6
 
-## What will we do on our calls? A simple outbound sales process
+Our focus today is on inbound leads, getting much better at warm outbound (we have a huge number of leads that we could be converting better), and experimenting with colder outbound. <TeamMember name="Lorena Viana" /> is leading our experiments today with the <SmallTeam slug="demand-gen" />.
 
-As we begin to run outbound sales meetings set via <TeamMember name="Dmytro Sitalo" />’s efforts and our own, we need a lightweight, human-first approach to managing outbound conversations.
+Check out the [leads page](/handbook/growth/sales/lead-scoring) for more detail on lead types, where they go, and the specific outbound campaigns we're running. These are changing very frequently as we figure out what does and doesn't work. 
+
+## How TAEs talk to outbounded prospects
 
 Remember, *we* contacted *them* — be transparent about our process and who we build for. How [well we do discovery in our initial conversations](/handbook/growth/sales/how-to-do-discovery) will dictate how well (or poorly) we position PostHog.
 
@@ -73,8 +75,8 @@ Do basic account research:
     * What's their tech stack? (Job postings, BuiltWith/Wappalyzer, 1Password)  
     * Recent company news (funding, launches, hiring)  
     * Their role + tenure (LinkedIn, their website)  
-* Why did they agree to this meeting? (Read <TeamMember name="Dmytro Sitalo" />’s notes in the New Business Slack)  
-* What problem or pain did <TeamMember name="Dmytro Sitalo" /> flag?
+* Why did they agree to this meeting? (Read the sourcing BDR’s notes in the New Business Slack)  
+* What problem or pain did the BDR flag?
 
 Use this to form a call hypothesis.
 
@@ -82,13 +84,13 @@ Use this to form a call hypothesis.
 
 *We* contacted *them*. This call only makes sense if we can solve a real problem for them. Start with:
 
-    *"Hey [name], thanks for making the time. I know this was a cold outreach from [Dmytro/our team], so I really appreciate you giving me 30 minutes."*
+    *"Hey [name], thanks for making the time. I know this was a cold outreach from our team, so I really appreciate you giving me 30 minutes."*
 
     *"Before we dive in, I'm curious - what made you decide to take this call?*
 
 Often this is enough. If they’re vague or skeptical, get specific with your pre-prepared hypothesis:
 
-    *"[Dmytro mentioned/I saw] that [specific trigger - e.g. you're growing team/launching new product/scaling analytics]. We work with companies at your stage who struggle with [specific pain - e.g. fragmented analytics tools/poor data quality/lack of actionable insights]. I wanted to understand if that's actually a problem you're facing."*
+    *"[Our BDR mentioned/I saw] that [specific trigger - e.g. you're growing team/launching new product/scaling analytics]. We work with companies at your stage who struggle with [specific pain - e.g. fragmented analytics tools/poor data quality/lack of actionable insights]. I wanted to understand if that's actually a problem you're facing."*
 
     *"If it is, I can share how other companies like yours have solved it. If it's not a problem, I'll tell you honestly (or you can tell me) and we'll keep this short. Will that work for you?"*
 
@@ -187,8 +189,7 @@ This is internal hygiene. Track tasks to reflect the opportunity:
 
 - If qualified + next step, create an opportunity in `Problem Agreement` and use stage exit criteria  
 - If marginal/no next step, switch task from `In progress` to `Nurturing` and progress them toward an opportunity  
-- If not qualified, disqualify with reason and share feedback with <TeamMember name="Dmytro Sitalo" /> in Slack  
-
+- If not qualified, disqualify with reason and share feedback with the sourcing BDR in Slack  
 ### 9. Rinse, lather, and repeat
 
 You should always aim to get them into a shared Slack channel or establish a regular communication cadence with them (call/email). Nothing will happen if we aren't talking.
@@ -208,3 +209,118 @@ Otherwise, you can:
 - Ship them merch
 
 What won’t change: qualify each step, solve a real problem, and don’t assume interest just because a task became an opportunity. Stay focused on their pain and you’ll earn the right to keep moving.
+
+## How TAEs accept and work BDR opportunities
+
+Whether a BDR-sourced meeting becomes an opportunity is dependent on a set of fixed criteria to ensure the consistent and smooth handoff of qualified pipeline vs. simply converting oops based on vibes. 
+
+### When a BDR meeting becomes an opp
+
+Create an opportunity in `Problem Agreement` only when all of the following are true:
+
+- **The meeting was held** - No-shows are not qualified. If rescheduled, fantastic - the meeting must happen before opportunity creation. 
+- **ICP fit is confirmed** — the account matches [who we build for](/handbook/who-we-build-for) or the "fit" for PostHog is otherwise undeniable.
+- **A specific pain is identified** — there is a concrete problem PostHog addresses.
+- **The prospect agrees the problem is worth exploring** -- as we're reaching out to these folks, they need to tell us it's a big enough problem to solve. 
+- **There's a known timeline** — they intend to do something about it inside a defined window (roughly the next two quarters).
+- **You have access to authority** — you're talking to, or have a confirmed path to, whoever decides or could champion PostHog internally. 
+- **A mutually-agreed next step** is on the calendar — demo, trial kickoff, technical eval, with a date. Ideally, we secure a verbal commitment on the call, and this is an emphasis point for TAEs. No committed next step, no opp.
+
+## How our outbound data pipelines work
+
+So far we run three automated pipelines that enrich accounts, surface timely signals, and qualify targets. <TeamMember name="Abhischek Thottakara" /> manages these. 
+
+### Salesforce enrichment (weekly)
+
+Every week, we pull all Salesforce Accounts and enrich them via the Harmonic API with company info like funding history, headcount, and traction metrics. Our SSoT of Accounts (Single Source of Truth) is the Salesforce Accounts table.
+
+Before enriching, we filter out personal email domains (Gmail, Yahoo, etc.) and normalize website domains so matching is consistent.
+
+### Job switchers → Clay (daily)
+
+A daily query (Clickhouse + Customer.io) detects [job-change signals](https://us.posthog.com/project/2/insights/AJnFRfBD) — someone who was at a company using PostHog just moved to a new role. Only changed or new records are sent to a Clay webhook so we stay within Clay's submission limits.
+
+Why this matters: when someone who already knows PostHog changes jobs, that's a timely outreach moment. They're evaluating tools at their new company and already have context on what we do.
+
+### Product-led outbound → Clay (daily)
+
+First, a daily [Warmbound query](https://us.posthog.com/project/2/insights/2bYedblE) pulls a base set of target accounts filtered by revenue band (MRR $100–$499), company size (50+ employees), and company type. 
+
+Then a second qualification step filters those accounts against product signals. Only accounts that pass both steps *and* have changed since the last sync are sent to Clay.
+
+An account passes the second step if it shows buying intent through signals like:
+
+- Using two or more PostHog products
+- High event volume
+- Two or more new team members in the last 30 days
+- Adopting new products they weren't using before
+
+This focuses outbound on accounts that are already engaged with the product (i.e warmbound), not just random companies that match a firmographic profile.
+
+### Where data lives and flows
+
+```mermaid
+graph LR
+    SF[Salesforce Accounts - SSoT]
+    H[Harmonic API]
+    PG[Postgres]
+    CH[ClickHouse]
+    Q[Qualification]
+    CL[Clay]
+    LL[Lemlist]
+
+    H -- "enrichment (weekly)" --> SF
+    SF -- "accounts" --> Q
+    PG -- "billing data" --> CH
+    CH -- "usage & signals" --> Q
+    Q -- "qualified targets (daily)" --> CL
+    CL -- "selected accounts" --> LL
+```
+
+| System | Role | How often updated |
+|---|---|---|
+| Salesforce | Account records, opportunity tracking, enriched fields | Weekly (enrichment), real-time (sales activity) |
+| Harmonic | Company enrichment data (funding, headcount, traction) | Weekly via enrichment pipeline |
+| ClickHouse | Product usage data, job-change signals, ICP scoring | Daily via pipeline queries |
+| Postgres | Organization and billing data | Continuous |
+| Clay | Outbound qualification and personalization | Daily via webhook syncs |
+| Lemlist | Email sequencing and outreach delivery | Via Clay |
+
+### Appendix: full GTM data flow
+
+This is the broader picture of how data moves across all our GTM systems, not just the outbound pipelines above.
+
+```mermaid
+graph TD
+    subgraph PostHog
+        PH[New signup in PostHog]
+        CDP[CDP Destinations - Events, Person Info, Org Info]
+        CF[Contact Form]
+        BILLING[New customer in billing]
+    end
+
+    subgraph Enrichment
+        HARMONIC[Harmonic]
+        CLEARBIT[Clearbit]
+        CLAY[Clay]
+    end
+
+    PH -- "PH destination" --> SF
+    PH -- "new org" --> BILLING
+    CDP --> DEFAULT[Default app]
+    CF --> DEFAULT
+    DEFAULT --> SF
+
+    SF[Salesforce - Contacts + Accounts]
+
+    SF <--> HARMONIC
+    SF <--> CLEARBIT
+    SF <--> CLAY
+    BILLING --> SF
+
+    SF --> VITALLY[Vitally]
+    CIO[Customer.io] --> VITALLY
+    ZENDESK[Zendesk] --> VITALLY
+    GMAIL[Gmail] --> VITALLY
+    STRIPE[Stripe] --> VITALLY
+```

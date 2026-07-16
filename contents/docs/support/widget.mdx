@@ -4,10 +4,6 @@ sidebar: Docs
 showTitle: true
 ---
 
-import Alpha from './_snippets/alpha.mdx'
-
-<Alpha />
-
 The Support widget is a chat interface that appears on your website, allowing users to start conversations with your team. It loads automatically when enabled and captures session context for each ticket.
 
 ## Enabling the widget
@@ -18,18 +14,32 @@ The Support widget is a chat interface that appears on your website, allowing us
 4. Configure your settings (see below)
 5. Save
 
-The widget appears as a floating button in the bottom-right corner of your site.
+The widget appears as a floating button on your site. By default it appears in the bottom-right corner, but you can customize its position in the settings.
 
 ## Widget configuration
 
 These settings are configured in the **In-app widget** section of Support settings.
 
+| Setting | Description | Options | Default |
+|---------|-------------|---------|--------|
+| **Enable widget** | Show the chat widget on your site | `true`, `false` | `false` |
+| **Button color** | Primary color for the widget (hex) | Any hex color | `#5375ff` |
+| **Widget position** | Position of the widget on screen | `bottom_right`, `bottom_left`, `top_right`, `top_left` | `bottom_right` |
+| **Greeting message** | Welcome text shown when widget opens | Any string | `"Hi! How can we help?"` |
+| **Allowed domains** | Restrict which domains can show the widget | Array of domain strings | `[]` (all domains) |
+
+## Identification form
+
+You can optionally require users to identify themselves before starting a conversation:
+
 | Setting | Description | Default |
 |---------|-------------|---------|
-| **Enable widget** | Show the chat widget on your site | `false` |
-| **Button color** | Primary color for the widget (hex) | `#5375ff` |
-| **Greeting message** | Welcome text shown when widget opens | `"Hi! How can we help?"` |
-| **Allowed domains** | Restrict which domains can show the widget | `[]` (all domains) |
+| **Require email** | Users must enter their email to start chatting | `false` |
+| **Collect name** | Additionally collect a name | `false` |
+| **Form title** | Heading shown on the identification form | `"Before we start..."` |
+| **Form description** | Subtext shown below the title | `"Please provide your details so we can help you better."` |
+
+When enabled, the form appears before they can send their first message. The collected information is used to link the ticket to a person in PostHog.
 
 ## Domain restrictions
 
@@ -71,12 +81,159 @@ This is useful for:
 You can disable conversations entirely via the PostHog init config:
 
 ```javascript
-posthog.init('YOUR_API_KEY', {
+posthog.init('<ph_project_token>', {
   disable_conversations: true  // Prevents loading the conversations module
 })
 ```
 
 This is different from hiding the widget – it completely disables the feature.
+
+## Recover tickets across browsers
+
+Support tickets are tied to the browser session by default. If a user switches browsers or clears their storage, they won't see their previous tickets. The widget includes a **Recover your tickets** link to handle this.
+
+### How recovery works
+
+1. Click **Recover your tickets** in the ticket list
+2. Enter the email address used in previous conversations
+3. A recovery link is sent to that email (expires in one hour)
+4. Click the link to open the widget and restore tickets in the new browser
+
+If the page URL contains a `ph_conv_restore` query parameter (from clicking the recovery link), tickets are automatically restored on page load. The parameter is removed from the URL after processing.
+
+## Identity verification
+
+If your app has logged-in users, identity verification works better than email-based recovery. You sign the user's distinct ID on your server, and tickets persist across browsers and devices automatically – no user action required.
+
+<CalloutBox icon="IconInfo" title="setIdentity vs identify" type="info">
+
+`posthog.setIdentity()` and `posthog.identify()` are different methods:
+
+- **`identify()`** links events to a user for analytics. It creates person profiles and merges anonymous events with identified ones. See [identifying users](/docs/product-analytics/identify).
+- **`setIdentity()`** verifies ticket ownership for Support. It uses HMAC signing to prove the user is who they claim to be, enabling cross-browser ticket access.
+
+You typically call both: `identify()` for analytics tracking, and `setIdentity()` for secure ticket access.
+
+</CalloutBox>
+
+### How it works
+
+1. Your server computes an HMAC-SHA256 hash of the user's `distinct_id` using your team's `secret_api_token`
+2. You pass this hash along with the `distinct_id` to the widget
+3. The widget API verifies the signature and uses the `distinct_id` for ticket lookup instead of the browser session
+
+With identity verification enabled, users see all their tickets on any browser or device.
+
+### Server-side implementation
+
+Generate the identity hash on your backend. Never expose your `secret_api_token` in client-side code.
+
+<MultiLanguage>
+
+```python
+import hmac
+import hashlib
+
+def compute_identity_hash(distinct_id: str, secret_api_token: str) -> str:
+    return hmac.new(
+        secret_api_token.encode(),
+        distinct_id.encode(),
+        hashlib.sha256,
+    ).hexdigest()
+```
+
+```node
+const crypto = require('crypto');
+
+function computeIdentityHash(distinctId, secretApiToken) {
+  return crypto
+    .createHmac('sha256', secretApiToken)
+    .update(distinctId)
+    .digest('hex');
+}
+```
+
+```ruby
+require 'openssl'
+
+def compute_identity_hash(distinct_id, secret_api_token)
+  OpenSSL::HMAC.hexdigest('sha256', secret_api_token, distinct_id)
+end
+```
+
+```go
+import (
+    "crypto/hmac"
+    "crypto/sha256"
+    "encoding/hex"
+)
+
+func ComputeIdentityHash(distinctID, secretAPIToken string) string {
+    h := hmac.New(sha256.New, []byte(secretAPIToken))
+    h.Write([]byte(distinctID))
+    return hex.EncodeToString(h.Sum(nil))
+}
+```
+
+```php
+function computeIdentityHash(string $distinctId, string $secretApiToken): string {
+    return hash_hmac('sha256', $distinctId, $secretApiToken);
+}
+```
+
+</MultiLanguage>
+
+### Passing identity to the widget
+
+Once you've computed the hash on your server, pass it to your frontend and set it on the PostHog SDK.
+
+**Option 1: Set identity at initialization**
+
+If you know the user's identity when PostHog initializes (like on a server-rendered page), pass it in the init config:
+
+```javascript
+posthog.init('<ph_project_api_key>', {
+  api_host: '<ph_client_api_host>',
+  identity_distinct_id: 'user_123',       // From your auth system
+  identity_hash: 'a1b2c3d4e5f6...',       // HMAC hash from your server
+})
+```
+
+**Option 2: Set identity after login**
+
+For single-page apps — or when the user logs in after page load — call `setIdentity()`:
+
+```javascript
+// After user logs in, your server returns the hash
+const identityHash = await fetchIdentityHashFromServer(userId)
+
+// Pass it to the SDK
+posthog.setIdentity('user_123', identityHash)
+```
+
+**Clear identity on logout**
+
+When a user logs out, clear their identity so the widget falls back to session-based access:
+
+```javascript
+posthog.clearIdentity()
+```
+
+<CalloutBox icon="IconWarning" title="Keep your secret API token secure" type="caution">
+
+Your `secret_api_token` must never be exposed in client-side code. Always compute the identity hash on your server and pass only the hash to the frontend.
+
+</CalloutBox>
+
+### When to use identity verification
+
+| Scenario | Recommended approach |
+|----------|---------------------|
+| **Logged-in users** | Use identity verification for seamless cross-device access |
+| **Anonymous visitors** | Use the default widget session (no setup required) |
+| **Mixed audience** | Use identity verification when users are logged in, fall back to widget session for anonymous users |
+
+If your team doesn't have a `secret_api_token` configured, identity verification is ignored and the widget falls back to session-based access control.
 
 ## Email notifications
 
@@ -96,6 +253,21 @@ Configure your team to receive email alerts when new tickets arrive.
 - Direct link to the ticket
 
 Recipients must have access to the team to receive notifications.
+
+<CalloutBox icon="IconLightBulb" title="Use workflows for advanced notifications" type="info">
+
+For more control over notifications – like sending alerts only for high-priority tickets, routing to specific Slack channels, or notifying different teams based on tags – use [workflow automation](/docs/support/workflows). Workflows let you trigger Slack messages, webhooks, and more based on any ticket event.
+
+</CalloutBox>
+
+## Browser notifications
+
+Individual team members can enable browser notifications for new ticket activity.
+
+1. Go to **Support** in PostHog
+2. Enable **Browser notifications** in the notification settings
+
+When enabled, a desktop notification appears when the unread ticket count increases. This works independently of email notifications – you can use one or both.
 
 ## Public token
 

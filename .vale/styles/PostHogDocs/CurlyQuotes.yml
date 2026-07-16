@@ -1,0 +1,10 @@
+extends: existence
+message: 'Use straight quotes and apostrophes, not curly ones.'
+link: https://posthog.com/handbook/wizard-and-docs/docs-style-guide
+level: error
+nonword: true
+tokens:
+    - ‘
+    - ’
+    - “
+    - ”

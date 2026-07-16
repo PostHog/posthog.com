@@ -34,7 +34,7 @@ const Context = () => {
 
 export default function Chat(): JSX.Element | null {
     const { conversationHistory, resetConversationHistory, context, setContext, firstResponse, codeSnippet } = useChat()
-    const { setWindowTitle, openNewChat } = useApp()
+    const { setWindowTitle, openNewChat, websiteMode } = useApp()
     const { appWindow, setPageOptions } = useWindow()
     const [showCodeSnippet, setShowCodeSnippet] = useState(true)
     const [codeExpanded, setCodeExpanded] = useState(false)
@@ -69,7 +69,7 @@ ${codeSnippet.code}
                                           label: conversation.question,
                                           onClick: () => {
                                               openNewChat({
-                                                  path: `ask-max-${conversation.id}`,
+                                                  path: `ask-max${websiteMode ? '' : `-${conversation.id}`}`,
                                                   chatId: conversation.id,
                                                   date: conversation.date,
                                               })

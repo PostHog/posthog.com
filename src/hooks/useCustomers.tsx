@@ -7,16 +7,24 @@ import ArenaLogo from '../components/CustomerLogos/ArenaLogo'
 import AssemblyAILogo from '../components/CustomerLogos/AssemblyAILogo'
 import BrainboardLogo from '../components/CustomerLogos/BrainboardLogo'
 import CarVerticalLogo from '../components/CustomerLogos/CarVerticalLogo'
+import ClerkLogo from '../components/CustomerLogos/ClerkLogo'
+import CloudPeekLogo from '../images/customers/CloudPeek_Final_Logo_Transparent.png'
+import CloudPeekLogoDark from '../images/customers/CloudPeek_Full_Logo_-_White_Transparent.png'
 import ContraLogo from '../components/CustomerLogos/ContraLogo'
 import CreatifyLogo from '../images/customers/creatify-light.png'
 import CreatifyLogoDark from '../images/customers/creatify-dark.png'
+import ConvexLogo from '../components/CustomerLogos/ConvexLogo'
 import ElevenLabsLogo from '../components/CustomerLogos/ElevenLabsLogo'
+import ExaLogo from 'components/CustomerLogos/ExaLogo'
 import GanksterLogo from '../components/CustomerLogos/GanksterLogo'
 import GrantableLogo from '../components/CustomerLogos/GrantableLogo'
+import GreptileLogo from '../components/CustomerLogos/GreptileLogo'
 import HasuraLogo from '../components/CustomerLogos/HasuraLogo'
 import HeadshotProLogo from '../components/CustomerLogos/HeadshotProLogo'
 import HeygenLogo from '../components/CustomerLogos/HeygenLogo'
 import HostAILogo from '../components/CustomerLogos/HostAILogo'
+import CounterPressLogo from '../images/customers/counterpress-light.svg'
+import CounterPressLogoDark from '../images/customers/counterpress-dark.svg'
 import CroissantLogo from '../images/customers/croissant-light.png'
 import CroissantLogoDark from '../images/customers/croissant-dark.png'
 import JuiceboxLogo from '../components/CustomerLogos/JuiceboxLogo'
@@ -24,8 +32,10 @@ import LovableLogo from 'components/CustomerLogos/LovableLogo'
 import MentionMeLogo from '../components/CustomerLogos/MentionMeLogo'
 import MistralAILogo from '../components/CustomerLogos/MistralAILogo'
 import MintlifyLogo from '../components/CustomerLogos/MintlifyLogo'
+import NationalDesignStudioLogo from '../components/CustomerLogos/NationalDesignStudioLogo'
 import NetdataLogo from '../components/CustomerLogos/NetdataLogo'
 import OpenSaucedLogo from '../components/CustomerLogos/OpenSaucedLogo'
+import PaperLogo from '../components/CustomerLogos/PaperLogo'
 import PhantomLogo from '../components/CustomerLogos/PhantomLogo'
 import PostHogLogo from '../components/CustomerLogos/PostHogLogo'
 import PryLogo from '../components/CustomerLogos/PryLogo'
@@ -36,20 +46,25 @@ import RayfitLogoDark from '../images/customers/rayfitLogodark.png'
 import RayfitLogoLight from '../images/customers/rayfitLogolight.png'
 import RebtelLogo from '../components/CustomerLogos/RebtelLogo'
 import ResearchGateLogo from '../components/CustomerLogos/ResearchGateLogo'
+import ResendLogo from '../components/CustomerLogos/ResendLogo'
 import SignificaLogo from '../components/CustomerLogos/SignificaLogo'
+import SupedLogo from '../images/customers/suped-light.png'
+import SupedLogoDark from '../images/customers/suped-dark.png'
 import SpeakeasyLogo from '../components/CustomerLogos/SpeakeasyLogo'
 import SquadSVenturesLogo from '../components/CustomerLogos/SquadSVenturesLogo'
 import StartEngineLogo from '../components/CustomerLogos/StartEngineLogo'
 import SupabaseLogo from '../components/CustomerLogos/SupabaseLogo'
 import TrustWalletLogo from '../components/CustomerLogos/TrustWalletLogo'
+import UKGovtLogo from '../components/CustomerLogos/UKGovtLogo'
 import VendastaLogo from '../components/CustomerLogos/VendastaLogo'
 import WebshareLogo from '../components/CustomerLogos/WebshareLogo'
+import WisprFlowLogo from 'components/CustomerLogos/WisprFlow'
 import WittyWorksLogo from '../components/CustomerLogos/WittyWorksLogo'
 import YCombinatorLogo from '../components/CustomerLogos/YCombinatorLogo'
 import ZealotLogo from '../images/customers/zealot-light.png'
 import ZealotLogoDark from '../images/customers/zealot-dark.png'
 import useProducts from './useProducts'
-import ExaLogo from 'components/CustomerLogos/ExaLogo'
+import JaxxonLogo from 'components/CustomerLogos/JaxxonLogo'
 
 export interface Customer {
     slug: string
@@ -132,7 +147,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     '11x': {
         name: '11x',
-        toolsUsed: ['experiments', 'product_analytics', 'llm_analytics', 'cdp'],
+        toolsUsed: ['experiments', 'product_analytics', 'ai_observability', 'cdp'],
         industries: ['AI'],
         users: ['Marketing', 'Leadership', 'Founders', 'Engineering'],
         notes: 'AI SDR',
@@ -161,7 +176,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         // users: [], // TODO: Add users
         notes: 'They make airplanes',
         logo: AirbusLogo,
-        height: 9,
+        height: 8,
         featured: true,
     },
     assemblyai: {
@@ -237,6 +252,44 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         featured: false,
         height: 10,
     },
+    clerk: {
+        name: 'Clerk',
+        toolsUsed: ['feature_flags', 'session_replay', 'product_analytics', 'cdp', 'data_warehouse', 'posthog_ai'],
+        industries: ['SaaS'],
+        // users: ['Product', 'Engineering'],
+        notes: 'Identity and access management',
+        logo: ClerkLogo,
+        featured: true,
+        height: 9,
+    },
+    cloudpeek: {
+        name: 'CloudPeek',
+        toolsUsed: ['logs', 'error_tracking', 'ai_observability'],
+        industries: ['Cybersecurity'],
+        users: ['Engineering'],
+        notes: 'Agentic AI platform for cybersecurity',
+        featured: false,
+        logo: {
+            light: CloudPeekLogo,
+            dark: CloudPeekLogoDark,
+        },
+        height: 10,
+        quotes: {
+            craig_hollington: {
+                name: 'Craig Hollington',
+                role: 'CTO',
+                image: {
+                    thumb: '/images/customers/craig-hollington.png',
+                },
+                quotes: [
+                    "We're probably five to ten times faster at debugging now, and it's enabled us to collaboratively work on issues as a team in a way we just couldn't before.",
+                    'We spot an exception in Error Tracking and pivot straight into Logs to understand the full context of what went wrong. That link between the two is huge for us.',
+                    "We used to get exception logs come through on PostHog, and then I'd have to log onto the server manually and search our log files which were written locally.",
+                    "We automatically get AI to write triage scripts and fire them to see what works, and then from there we review the log files to see what it did and what it didn't do.",
+                ],
+            },
+        },
+    },
     contra: {
         name: 'Contra',
         toolsUsed: ['feature_flags', 'session_replay', 'product_analytics'],
@@ -245,6 +298,16 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'Creative freelance marketplace',
         logo: ContraLogo,
         featured: false,
+        height: 8,
+    },
+    convex: {
+        name: 'Convex',
+        toolsUsed: [],
+        industries: ['SaaS'],
+        users: [],
+        notes: 'Backend web app platform',
+        logo: ConvexLogo,
+        featured: true,
         height: 8,
     },
     creatify: {
@@ -260,9 +323,64 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         height: 12,
         featured: false,
     },
+    croissant: {
+        name: 'Croissant',
+        toolsUsed: ['workflows_emails', 'product_analytics', 'surveys', 'web_analytics'],
+        industries: ['SaaS'],
+        users: ['Growth', 'Product', 'Marketing'],
+        notes: 'Workspace finder',
+        featured: false,
+        logo: {
+            light: CroissantLogo,
+            dark: CroissantLogoDark,
+        },
+        height: 6,
+        quotes: {
+            jorge_lopez: {
+                name: 'Jorge López',
+                role: 'Growth',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/jorge_lopez_sarry_a9197f790d.jpeg',
+                },
+                products: {
+                    workflows:
+                        'Even at this early stage, Workflows is better for us than Zapier. It’s simpler, and it lets us move faster without adding another vendor to manage.',
+                },
+            },
+        },
+    },
+    counterpress: {
+        name: 'CounterPress',
+        toolsUsed: ['endpoints', 'product_analytics'],
+        industries: ['SaaS', 'Publishing'],
+        users: ['Engineering', 'Product'],
+        notes: 'Publishing platform for sports journalism',
+        featured: false,
+        logo: {
+            light: CounterPressLogoDark,
+            dark: CounterPressLogo,
+        },
+        height: 6,
+        quotes: {
+            jay_collett: {
+                name: 'Jay Collett',
+                role: 'Founder & CTO',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/jay_collett_b9f458e7f0.jpeg',
+                },
+                products: {
+                    endpoints:
+                        'The endpoints API has given us a simple and efficient solution to the complicated and daunting prospect of building a platform to consume data and create endpoints.',
+                },
+                quotes: [
+                    'Endpoints has effectively given us the power to keep up with them without spending a penny on analytics.',
+                ],
+            },
+        },
+    },
     elevenlabs: {
         name: 'ElevenLabs',
-        toolsUsed: ['feature_flags', 'product_analytics', 'surveys'],
+        toolsUsed: ['feature_flags', 'product_analytics', 'session_replay', 'surveys'],
         industries: ['AI'],
         users: ['Marketing', 'Growth', 'Engineering'],
         notes: 'AI voice generator',
@@ -277,8 +395,35 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         users: ['Engineering', 'Product'],
         notes: 'Search API for AI products',
         logo: ExaLogo,
-        height: 10,
+        height: 9,
         featured: true,
+    },
+    fastr: {
+        name: 'Fastr',
+        toolsUsed: ['endpoints', 'feature_flags', 'session_replay', 'surveys'],
+        industries: ['E-commerce, MarTech'],
+        users: ['Product', 'Marketing'],
+        notes: 'A conversion rate optimization platform',
+        featured: false,
+        logo: {
+            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/FASTR_Logo_full_color_a8db0d8cb5.png',
+            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/FASTR_Logo_white_3c093b166c.png',
+        },
+        height: 8,
+        quotes: {
+            ryan_breen: {
+                name: 'Ryan Breen',
+                role: 'CTO',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/Ryan_Breen_456ba746db.jpg',
+                },
+                quotes: [
+                    "We love that you're nerd-friendly. You love being a kind of white-labeled substrate, just a fantastic platform for us to build on top of.",
+                    "The reason Fastr can stamp out a custom dashboard for every customer is their agentic pipeline. Fastr's engineers don't click around the PostHog UI. They write Claude skills that go figure out the current PostHog API, generate the endpoints and materialized views a feature needs, and deploy them.",
+                    "That's what shapes the Fastr UI. Instead of a chart library, Fastr drops customers into an AI conversation. They describe the question and the system pulls the answer out of the PostHog data Fastr has wired up for them.",
+                ],
+            },
+        },
     },
     gankster: {
         name: 'Gankster',
@@ -311,7 +456,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             'product_analytics',
             'surveys',
             'error_tracking',
-            'llm_analytics',
+            'ai_observability',
             'data_warehouse',
         ],
         industries: ['SaaS'],
@@ -334,32 +479,6 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             },
         },
     },
-    croissant: {
-        name: 'Croissant',
-        toolsUsed: ['workflows_emails', 'product_analytics', 'surveys', 'web_analytics'],
-        industries: ['SaaS'],
-        users: ['Growth', 'Product', 'Marketing'],
-        notes: 'Workspace finder',
-        featured: false,
-        logo: {
-            light: CroissantLogo,
-            dark: CroissantLogoDark,
-        },
-        height: 6,
-        quotes: {
-            jorge_lopez: {
-                name: 'Jorge López',
-                role: 'Growth',
-                image: {
-                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/jorge_lopez_sarry_a9197f790d.jpeg',
-                },
-                products: {
-                    workflows:
-                        'Even at this early stage, Workflows is better for us than Zapier. It’s simpler, and it lets us move faster without adding another vendor to manage.',
-                },
-            },
-        },
-    },
     kilocode: {
         name: 'KiloCode',
         toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'experiments', 'cdp'],
@@ -367,9 +486,10 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         users: ['Engineering', 'Product', 'Growth', 'Marketing'],
         featured: false,
         logo: {
-            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/kilocode_logo_c58c88f029.webp',
-            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/kilocode_logo_c58c88f029.webp',
+            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/e_trim,q_auto,f_auto/kilocodelogo_93f0668287.png',
+            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/e_trim,q_auto,f_auto/kilocodelogo_93f0668287.png',
         },
+        height: 14,
         quotes: {
             job_rietbergen: {
                 // This is the author handle used in OSQuote
@@ -386,6 +506,43 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                 ],
             },
         },
+    },
+    'legit-media': {
+        name: 'Legit Media',
+        toolsUsed: ['endpoints', 'product_analytics', 'session_replay', 'feature_flags'],
+        industries: ['News and Media'],
+        users: ['Engineering', 'Marketing'],
+        notes: 'Network of news websites across Africa',
+        featured: false,
+        logo: {
+            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/legit_logo_ad1569a0cd.png',
+            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/legit_logo_ad1569a0cd.png',
+        },
+        height: 8,
+        quotes: {
+            andrey_tovstonog: {
+                name: 'Andrey Tovstonog',
+                role: 'CTO',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/andrey_headshot_b9a99442ec.png',
+                },
+                quotes: [
+                    "About 1 out of 7 requests was successful. Before switching to Endpoints, during the last few weeks we weren't able to get any reports at all — the API was constantly responding that it was too busy and couldn't process our requests.",
+                    "The requests started to be processed much faster, and the response stability improved significantly.",
+                    "Previously, marketers had to manually gather all this information from different PostHog dashboards. After automation, everything is now consolidated and available in a single place, and they spend their time analyzing the results instead of searching for the right data.",
+                ],
+            },
+        },
+    },
+    greptile: {
+        name: 'Greptile',
+        // toolsUsed: ['product_analytics'],
+        industries: ['SaaS'],
+        // users: ['Engineering', 'Product'],
+        notes: 'AI code reviewer',
+        logo: GreptileLogo,
+        featured: true,
+        height: 10,
     },
     groove: {
         name: 'Groove',
@@ -425,14 +582,14 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         toolsUsed: [], // TODO: Add toolsUsed
         // industries: [], // TODO: Add industries
         // users: [], // TODO: Add users
-        notes: 'AI video editor',
+        notes: 'AI video generator',
         logo: HeygenLogo,
         featured: true,
-        height: 8,
+        height: 12,
     },
     hostai: {
         name: 'HostAI',
-        toolsUsed: ['feature_flags', 'product_analytics', 'llm_analytics'],
+        toolsUsed: ['feature_flags', 'product_analytics', 'ai_observability'],
         industries: ['AI'],
         users: ['Engineering', 'Leadership', 'Founders'],
         notes: 'AI for vacation rentals managers',
@@ -442,7 +599,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     lovable: {
         name: 'Lovable',
-        toolsUsed: ['llm_analytics', 'experiments', 'feature_flags'],
+        toolsUsed: ['ai_observability', 'experiments', 'feature_flags'],
         industries: ['Devtool'],
         users: ['Engineering'],
         notes: 'AI app & website builder',
@@ -462,9 +619,19 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             },
         },
     },
+    jaxxon: {
+        name: 'Jaxxon',
+        // toolsUsed: ['feature_flags', 'product_analytics', 'ai_observability'],
+        industries: ['Fashion'],
+        // users: ['Engineering', 'Leadership', 'Founders'],
+        notes: "Men's chains & accessories",
+        featured: true,
+        logo: JaxxonLogo,
+        height: 12,
+    },
     juicebox: {
         name: 'Juicebox',
-        toolsUsed: ['feature_flags', 'product_analytics', 'session_replay', 'llm_analytics'],
+        toolsUsed: ['feature_flags', 'product_analytics', 'session_replay', 'ai_observability'],
         industries: ['AI'],
         users: ['Engineering', 'Leadership', 'Founders'],
         notes: 'AI recruitment platform',
@@ -502,6 +669,16 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         height: 12,
         featured: true,
     },
+    nationaldesignstudio: {
+        name: 'National Design Studio',
+        toolsUsed: [], // TODO: Add toolsUsed
+        // industries: [], // TODO: Add industries
+        // users: [], // TODO: Add users
+        notes: 'Design studio of the US Government',
+        logo: NationalDesignStudioLogo,
+        featured: true,
+        height: 11,
+    },
     netdata: {
         name: 'Netdata',
         toolsUsed: ['session_replay', 'product_analytics'],
@@ -532,6 +709,16 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: OpenSaucedLogo,
         featured: false,
         height: 10,
+    },
+    paper: {
+        name: 'Paper',
+        toolsUsed: ['session_replay'],
+        industries: ['SaaS'],
+        users: ['Leadership', 'Product', 'Engineering'],
+        notes: 'Design tool',
+        logo: PaperLogo,
+        featured: true,
+        height: 11,
     },
     phantom: {
         name: 'Phantom',
@@ -617,6 +804,40 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             },
         },
     },
+    qubs: {
+        name: 'Qubs',
+        toolsUsed: [
+            'endpoints',
+            'error_tracking',
+            'feature_flags',
+            'product_analytics',
+            'session_replay',
+            'surveys',
+            'ai_observability',
+            'warehouse_sources',
+        ],
+        industries: ['Ad Tech', 'Hospitality', 'Digital Signage'],
+        users: ['Engineering'],
+        notes: 'A digital menu platform with its own ad network',
+        featured: false,
+        logo: {
+            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/qubs_logo_black_2x_c4ca11cba9.png',
+            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/qubs_logo_white_outline_2x_5430c8f472.png',
+        },
+        height: 10,
+        quotes: {
+            gheorghe_avram: {
+                name: 'Gheorghe Avram',
+                role: 'CTO',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/Gheorghe_headshot_96a950e3d6.png',
+                },
+                quotes: [
+                    'This is the true power of PostHog, they give us the freedom to use our data wherever we want to, without the complexity of managing the infrastructure.',
+                ],
+            },
+        },
+    },
     raycast: {
         name: 'Raycast',
         toolsUsed: [], // TODO: Add toolsUsed
@@ -625,7 +846,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'The MacOS Spotlight that Apple should have built',
         logo: RaycastLogo,
         featured: true,
-        height: 12,
+        height: 11,
     },
     rayfit: {
         name: 'RayFit',
@@ -670,6 +891,14 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: ResearchGateLogo,
         height: 8,
         featured: true,
+    },
+    resend: {
+        name: 'Resend',
+        // toolsUsed: ['product_analytics', 'experiments'],
+        notes: 'Email delivery service',
+        logo: ResendLogo,
+        featured: true,
+        height: 7,
     },
     significa: {
         name: 'Significa',
@@ -737,6 +966,32 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         featured: true,
         height: 10,
     },
+    suped: {
+        name: 'Suped',
+        toolsUsed: ['workflows', 'product_analytics', 'session_replay'],
+        industries: ['SaaS'],
+        users: ['Leadership', 'Product', 'Engineering'],
+        notes: 'Email authentication and deliverability platform',
+        featured: false,
+        logo: {
+            light: SupedLogo,
+            dark: SupedLogoDark,
+        },
+        height: 6,
+        quotes: {
+            michael_ko: {
+                name: 'Michael Ko',
+                role: 'Co-founder & CEO',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/michael_suped_7544dceb29.jpeg',
+                },
+                quotes: [
+                    "Product data was in PostHog, and messaging logic was somewhere else. Every time we wanted to use a new event or property in a campaign, we had to make sure it was synced properly. It's manageable, but it's extra coordination that doesn't really add value.",
+                    "The biggest win is that the data's already there. All our events, all our user properties – we don't have to push them anywhere. We're building automation directly on top of the same events we use for analytics. There's no translation layer.",
+                ],
+            },
+        },
+    },
     startengine: {
         name: 'StartEngine',
         toolsUsed: [], // TODO: Add toolsUsed
@@ -757,6 +1012,16 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         featured: true,
         height: 10,
     },
+    ukgovt: {
+        name: 'UK Government',
+        toolsUsed: [], // TODO: Add toolsUsed
+        // industries: [], // TODO: Add industries
+        // users: [], // TODO: Add users
+        notes: 'Most popular country with a King',
+        logo: UKGovtLogo,
+        featured: true,
+        height: 9,
+    },
     vendasta: {
         name: 'Vendasta',
         toolsUsed: ['experiments', 'cdp'],
@@ -776,6 +1041,16 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: WebshareLogo,
         featured: false,
         height: 10,
+    },
+    wisprflow: {
+        name: 'WisprFlow',
+        //toolsUsed: [''],
+        //industries: ['Devtool'],
+        // users: ['Marketing', 'Leadership', 'Customer Success'],
+        notes: 'AI voice dictation',
+        logo: WisprFlowLogo,
+        featured: true,
+        height: 9,
     },
     wittyworks: {
         name: 'Witty Works',
@@ -799,7 +1074,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     zealot: {
         name: 'Zealot',
-        toolsUsed: ['llm_analytics', 'session_replay', 'error_tracking', 'product_analytics'],
+        toolsUsed: ['ai_observability', 'session_replay', 'error_tracking', 'product_analytics'],
         industries: ['Recruitment'],
         users: ['Engineering', 'Leadership', 'Founders'],
         notes: 'AI customer activation platform',
@@ -847,7 +1122,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     // },
     // wowzer: {
     //     name: 'Wowzer',
-    //     toolsUsed: ['experiments', 'product_analytics', 'surveys', 'llm_analytics'],
+    //     toolsUsed: ['experiments', 'product_analytics', 'surveys', 'ai_observability'],
     //     industries: ['AI'],
     //     users: ['Growth', 'Engineering', 'Product'],
     //     notes: 'AI-powered platform',

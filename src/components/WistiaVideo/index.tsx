@@ -13,6 +13,7 @@ interface WistiaVideoProps {
     onEnd?: () => void
     hideInitialControls?: boolean
     hideAudioControls?: boolean
+    autoPlay?: boolean
 }
 
 export interface WistiaVideoRef {
@@ -22,7 +23,10 @@ export interface WistiaVideoRef {
 }
 
 const WistiaVideo = forwardRef<WistiaVideoRef, WistiaVideoProps>(
-    ({ videoId, className = '', onEnd, hideInitialControls = false, hideAudioControls = false }, ref) => {
+    (
+        { videoId, className = '', onEnd, hideInitialControls = false, hideAudioControls = false, autoPlay = true },
+        ref
+    ) => {
         const containerRef = useRef<HTMLDivElement>(null)
         const playerRef = useRef<any>(null)
         const endHandlerRef = useRef<(() => void) | null>(null)
@@ -97,8 +101,9 @@ const WistiaVideo = forwardRef<WistiaVideoRef, WistiaVideoProps>(
                         }
                         video.bind('end', endHandlerRef.current)
 
-                        // Auto play
-                        video.play()
+                        if (autoPlay) {
+                            video.play()
+                        }
                     } else {
                         // Video not ready yet, check again
                         setTimeout(checkForVideo, 100)
@@ -130,7 +135,7 @@ const WistiaVideo = forwardRef<WistiaVideoRef, WistiaVideoProps>(
                 isMounted = false
                 cleanup()
             }
-        }, [videoId])
+        }, [videoId, autoPlay])
 
         return <div ref={containerRef} className={`aspect-square ${className}`} />
     }

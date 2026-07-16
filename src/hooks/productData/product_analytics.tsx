@@ -10,9 +10,11 @@ import {
     IconStickiness,
     IconDatabase,
     IconPeople,
+    IconPlug,
 } from '@posthog/icons'
 import { FIFTY_MILLION, MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
 import Link from 'components/Link'
+import MCPInstall from 'components/Products/MCPInstall'
 
 export const productAnalytics = {
     Icon: IconGraph,
@@ -23,15 +25,17 @@ export const productAnalytics = {
     color: 'blue',
     colorSecondary: 'sky-blue',
     category: 'analytics',
+    wizardSupport: true,
     seo: {
         title: 'Product Analytics – Understand your product with PostHog',
         description:
             'Track usage, retention, and feature adoption with Product Analaytics. PostHog connects recordings, experiments, feature flags, and more for full product insight.',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/product_analytics_d5ab5a02cb.jpg',
     },
     overview: {
         title: 'Product analytics with autocapture',
         description:
-            'PostHog is the only developer platform built to natively work with session replay, feature flags, experiments, and surveys.',
+            'Product Analytics is one of the tools that makes your product self-driving: the measurement agents use to see what works. Built to natively work with session replay, feature flags, experiments, and surveys.',
         textColor: 'text-white', // tw
     },
     screenshots: {
@@ -387,21 +391,49 @@ export const productAnalytics = {
                 },
             ],
         },
+        {
+            title: 'MCP',
+            headline: 'Analyze product usage from your editor',
+            description:
+                'Query trends, funnels, retention, and usage metrics from Cursor, Claude Code, VS Code, or any MCP-compatible agent.',
+            icon: <IconPlug />,
+            color: 'blue',
+            features: [
+                {
+                    title: 'Query any metric from your editor',
+                    description:
+                        'Pull trends, funnels, retention, paths, or custom SQL without switching to a dashboard.',
+                },
+                {
+                    title: 'Investigate metric changes',
+                    description: 'Connect drops or spikes in user behavior to recent code changes.',
+                },
+                {
+                    title: 'Save and share what you find',
+                    description: 'Turn a query into a saved insight and add it to a PostHog dashboard.',
+                },
+                {
+                    title: 'Ship with more context',
+                    description: 'Ground your next PR in actual usage data instead of assumptions.',
+                },
+            ],
+            children: <MCPInstall />,
+        },
     ],
     ai: {
         // title: '',
-        description: 'answer product questions faster',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/PRODUCT_ANALYTICS_hog_23b2808c18.png',
+        imageAlt: 'PostHog AI and product analytics',
+        description: 'answer product questions and ship the fix',
         skills: [
-            'Creates insights and applies filters using natural language',
-            'Creates dashboards',
-            'Searches insights',
-            'Researches complex questions with Deep Research mode',
+            'Builds dashboards and insights based on what you want visualized',
+            'Edits filters, sets breakdowns, builds retention curves (and more) with simple prompts',
+            "Writes and edits SQL queries (and debugs them if they don't work)",
         ],
         prompts: [
-            "What's my churn rate?",
-            'Show me user retention by country',
-            'How many people signed up last month?',
-            "What's my most popular feature?",
+            "What's our most popular feature?",
+            'Which events have the highest drop-off rate in the past 7 days?',
+            'Build a retention curve to track user retention over time',
         ],
     },
     questions: [
@@ -471,6 +503,9 @@ export const productAnalytics = {
                 },
             ],
             us: [
+                {
+                    title: 'Agents can query your analytics and act on it – the context that powers self-driving',
+                },
                 {
                     title: 'Linking between analytics and other features, so you can jump from a graph to a relevant recording',
                 },
@@ -576,7 +611,7 @@ export const productAnalytics = {
         pricing:
             "1 million events free every month. Forever. Then it's pay-as-you-go, and the price goes down as you use more. No seat limits - everyone on your team can use it. Anonymous events cost way less than identified ones. Set billing limits so there's no surprises. You see usage in real-time. No annual contracts required.",
         'comparison-summary':
-            "Other companies buy tools and try to glue them together. We built everything from scratch to work as one system. We're also open source, so you can self-host if you want. Our pricing actually makes sense at scale. Basically, we're built by engineers for engineers.",
+            "Other companies buy tools and try to glue them together. We built everything from scratch to work as one system. Because it's one system, agents can act on your analytics directly – it's not just a dashboard, it's the context that makes your product self-driving. We're also open source, so you can self-host if you want. Our pricing actually makes sense at scale. Basically, we're built by engineers for engineers.",
         'feature-comparison':
             "We don't have everything. No predictive analytics (yet). But what we do have goes deeper than anyone else. Our funnels have correlation analysis. Our paths support regex. These details matter when you're trying to actually understand your data, not just make pretty charts.",
         docs: "Engineers write our docs. Not marketing, not technical writers - the people who built the features. So they're actually accurate and cover the weird edge cases you'll hit. We update them constantly based on user questions. Over 100k people read them every month because they're genuinely helpful.",
@@ -584,5 +619,6 @@ export const productAnalytics = {
             "This is where it gets good. See a drop in your funnel? Click to watch those exact users' sessions. Running an A/B test? All your analytics automatically filter by variant. Same user IDs, same properties, same everything. No CSV exports or data matching required.",
         'getting-started':
             "Add one line of code. You're now tracking everything - clicks, pageviews, the works. See data in minutes. As you grow, add custom events or whatever else you need. The whole thing scales with you. And since it's open source, you own your data forever.",
+        ai: 'The PostHog MCP server gives your AI coding agent direct access to PostHog analytics. Query trends, funnels, retention, and custom HogQL – all from your code editor.',
     },
 }

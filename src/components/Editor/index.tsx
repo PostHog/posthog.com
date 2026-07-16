@@ -38,6 +38,8 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import { Popover } from 'components/RadixUI/Popover'
 import Slider from 'components/RadixUI/Slider'
+import { WEBSITE_MODE_CLASSES } from '../../constants'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 interface EditorProps {
     slug?: string
@@ -46,6 +48,7 @@ interface EditorProps {
     maxWidth?: number | string
     children?: React.ReactNode
     hasTabs?: boolean
+    hasPadding?: boolean
     availableFilters?: {
         label: string
         value?: any
@@ -90,6 +93,8 @@ interface EditorProps {
     extraMenuOptions?: React.ReactNode
     articleRef?: React.RefObject<HTMLDivElement>
     hideToolbar?: boolean
+    /** Grey out the text-formatting buttons (undo/redo/bold/italic/strikethrough/align) for read-only content */
+    disableFormatting?: boolean
     scrollable?: boolean
 }
 
@@ -213,7 +218,7 @@ export function Editor({
     hasTabs = false,
     children,
     availableFilters,
-    maxWidth: initialMaxWidth = 768,
+    maxWidth: initialMaxWidth,
     onSearchChange,
     showFilters: initialShowFilters = false,
     disableFilterChange = false,
@@ -226,11 +231,13 @@ export function Editor({
     onSortChange,
     defaultSortValue,
     proseSize = 'sm',
+    hasPadding = true,
     cta,
     bookmark,
     extraMenuOptions,
     articleRef,
     hideToolbar = false,
+    disableFormatting = false,
     scrollable = true,
     ...other
 }: EditorProps) {
@@ -240,17 +247,17 @@ export function Editor({
     const [filters, setFilters] = useState({})
     const [isModifierKeyPressed, setIsModifierKeyPressed] = useState(false)
     const [isHovering, setIsHovering] = useState(false)
-    const [maxWidth, setMaxWidth] = useState(initialMaxWidth)
-    const fullWidthContent = typeof maxWidth === 'string' && maxWidth === '100%'
     const products = useProduct() as { slug: string; name: string; type: string }[]
     // take the product name passed in and check the useProduct hook to get the product's display name
     const getProductName = (type: string) => products.find((p) => p.type === type)?.name || type
     // if we're filtering to a product, show the filter button in an active/open state
     const searchContentRef = useRef(null)
     const { search } = useLocation()
-    const { addWindow, focusedWindow } = useApp()
+    const { addWindow, focusedWindow, websiteMode } = useApp()
     const hasShareButton = !cta?.url || !cta?.label
     const { appWindow } = useWindow()
+    const [maxWidth, setMaxWidth] = useState(initialMaxWidth ?? 768)
+    const fullWidthContent = typeof maxWidth === 'string' && maxWidth === '100%'
 
     const toggleSearch = () => {
         setShowSearch(!showSearch)
@@ -268,7 +275,7 @@ export function Editor({
             hideLabel: true,
             onClick: actionButtons?.undo?.onClick,
             active: actionButtons?.undo?.active,
-            disabled: actionButtons?.undo?.disabled,
+            disabled: disableFormatting || actionButtons?.undo?.disabled,
         },
         {
             type: 'button',
@@ -277,7 +284,7 @@ export function Editor({
             hideLabel: true,
             onClick: actionButtons?.redo?.onClick,
             active: actionButtons?.redo?.active,
-            disabled: actionButtons?.redo?.disabled,
+            disabled: disableFormatting || actionButtons?.redo?.disabled,
         },
         { type: 'separator', className: 'hidden @2xl:block' },
         {
@@ -306,7 +313,7 @@ export function Editor({
             hideLabel: true,
             onClick: actionButtons?.bold?.onClick,
             active: actionButtons?.bold?.active,
-            disabled: actionButtons?.bold?.disabled,
+            disabled: disableFormatting || actionButtons?.bold?.disabled,
         },
         {
             type: 'button',
@@ -315,7 +322,7 @@ export function Editor({
             hideLabel: true,
             onClick: actionButtons?.italic?.onClick,
             active: actionButtons?.italic?.active,
-            disabled: actionButtons?.italic?.disabled,
+            disabled: disableFormatting || actionButtons?.italic?.disabled,
         },
         {
             type: 'button',
@@ -324,7 +331,7 @@ export function Editor({
             hideLabel: true,
             onClick: actionButtons?.strikethrough?.onClick,
             active: actionButtons?.strikethrough?.active,
-            disabled: actionButtons?.strikethrough?.disabled,
+            disabled: disableFormatting || actionButtons?.strikethrough?.disabled,
             className: 'hidden @md:inline-flex',
         },
         { type: 'separator', className: 'hidden @3xl:block' },
@@ -352,7 +359,7 @@ export function Editor({
             onClick: actionButtons?.leftAlign?.onClick,
             active: actionButtons?.leftAlign?.active,
             hideLabel: true,
-            disabled: actionButtons?.leftAlign?.disabled,
+            disabled: disableFormatting || actionButtons?.leftAlign?.disabled,
             className: 'hidden @lg:inline-flex',
         },
         {
@@ -362,7 +369,7 @@ export function Editor({
             onClick: actionButtons?.centerAlign?.onClick,
             active: actionButtons?.centerAlign?.active,
             hideLabel: true,
-            disabled: actionButtons?.centerAlign?.disabled,
+            disabled: disableFormatting || actionButtons?.centerAlign?.disabled,
             className: 'hidden @lg:inline-flex',
         },
         {
@@ -372,7 +379,7 @@ export function Editor({
             onClick: actionButtons?.rightAlign?.onClick,
             active: actionButtons?.rightAlign?.active,
             hideLabel: true,
-            disabled: actionButtons?.rightAlign?.disabled,
+            disabled: disableFormatting || actionButtons?.rightAlign?.disabled,
             className: 'hidden @lg:inline-flex',
         },
 
@@ -537,6 +544,15 @@ export function Editor({
     // Add Shift+F keyboard shortcut for search
     useEffect(() => {
         const handleSearchKeyDown = (e: KeyboardEvent) => {
+            const target = e.target as HTMLElement
+            if (
+                target.tagName === 'INPUT' ||
+                target.tagName === 'TEXTAREA' ||
+                target.shadowRoot ||
+                (target instanceof HTMLElement && target.closest('.mdxeditor'))
+            ) {
+                return
+            }
             // Only handle Shift+F if this window is the focused/active window
             if (e.key === 'F' && e.shiftKey && focusedWindow === appWindow) {
                 e.preventDefault()
@@ -557,16 +573,18 @@ export function Editor({
     return (
         <SearchProvider onSearchChange={onSearchChange}>
             <div className="@container w-full h-full flex flex-col min-h-1">
-                {hideToolbar ? null : (
-                    <aside data-scheme="secondary" className="bg-primary p-2 border-b border-primary">
-                        <Toolbar elements={toolbarElements} />
-                    </aside>
-                )}
+                {hideToolbar
+                    ? null
+                    : !websiteMode && (
+                          <aside data-scheme="secondary" className="bg-primary p-2 border-b border-primary">
+                              <Toolbar elements={toolbarElements} />
+                          </aside>
+                      )}
                 <div className="flex flex-col flex-grow min-h-0">
                     <main
                         data-app="Editor"
                         data-scheme="primary"
-                        className="@container flex-1 bg-primary relative h-full flex flex-col"
+                        className="@container/editor flex-1 bg-primary relative h-full flex flex-col"
                     >
                         <SearchBar
                             visible={showSearch}
@@ -578,93 +596,97 @@ export function Editor({
                         />
 
                         {showFilters && availableFilters && availableFilters.length > 0 && (
-                            <div className="bg-accent p-2 text-sm border-b border-primary text-primary flex gap-1 sticky top-0 z-40 flex-wrap">
-                                {availableFilters?.map((filter, index) => {
-                                    return (
-                                        <div key={filter.label} className="flex items-center gap-1">
-                                            <span>{index === 0 ? 'where' : 'and'}</span>
-                                            <span className="text-sm font-bold">{filter.label}</span>
-                                            <span className="italic">{filter.operator}</span>
+                            <div className="bg-accent p-2 text-sm border-b border-primary text-primary gap-1 sticky top-0 z-20 ">
+                                <div className={`flex flex-wrap ${websiteMode && WEBSITE_MODE_CLASSES}`}>
+                                    {availableFilters?.map((filter, index) => {
+                                        return (
+                                            <div key={filter.label} className="flex items-center gap-1">
+                                                <span>{index === 0 ? 'where' : 'and'}</span>
+                                                <span className="text-sm font-bold">{filter.label}</span>
+                                                <span className="italic">{filter.operator}</span>
+                                                <Select
+                                                    key={`${Object.keys(filters).length}-${filter.label}`}
+                                                    disabled={disableFilterChange}
+                                                    placeholder={filter.label}
+                                                    defaultValue={
+                                                        filter.initialValue === null
+                                                            ? null
+                                                            : filter.initialValue ??
+                                                              filters[filter.value ?? filter.label]?.value ??
+                                                              filter.options[0].value
+                                                    }
+                                                    groups={[
+                                                        {
+                                                            label: '',
+                                                            items: filter.options.map((option) => ({
+                                                                label: option.label,
+                                                                value: option.value,
+                                                            })),
+                                                        },
+                                                    ]}
+                                                    onValueChange={(value) =>
+                                                        handleFilterChange(
+                                                            filter.value ?? filter.label,
+                                                            value,
+                                                            filter.filter
+                                                        )
+                                                    }
+                                                />
+                                            </div>
+                                        )
+                                    })}
+                                    {availableGroups && availableGroups.length > 0 && (
+                                        <div className="@xl:ml-auto flex items-center space-x-1">
+                                            <span className="text-sm font-bold">Group by</span>
                                             <Select
-                                                key={`${Object.keys(filters).length}-${filter.label}`}
-                                                disabled={disableFilterChange}
-                                                placeholder={filter.label}
-                                                defaultValue={
-                                                    filter.initialValue === null
-                                                        ? null
-                                                        : filter.initialValue ??
-                                                          filters[filter.value ?? filter.label]?.value ??
-                                                          filter.options[0].value
-                                                }
+                                                placeholder="Group by"
+                                                defaultValue="none"
                                                 groups={[
                                                     {
                                                         label: '',
-                                                        items: filter.options.map((option) => ({
+                                                        items: [
+                                                            { label: 'None', value: 'none' },
+                                                            ...availableGroups.map((group) => ({
+                                                                label: group.label,
+                                                                value: group.value,
+                                                            })),
+                                                        ],
+                                                    },
+                                                ]}
+                                                onValueChange={(value) => onGroupChange?.(value)}
+                                            />
+                                        </div>
+                                    )}
+                                    {sortOptions && sortOptions.length > 0 && (
+                                        <div className="ml-auto flex items-center space-x-2">
+                                            <span className="text-sm font-bold">Sort by:</span>
+                                            <Select
+                                                placeholder="Sort by"
+                                                defaultValue={defaultSortValue}
+                                                groups={[
+                                                    {
+                                                        label: '',
+                                                        items: sortOptions.map((option) => ({
                                                             label: option.label,
                                                             value: option.value,
                                                         })),
                                                     },
                                                 ]}
-                                                onValueChange={(value) =>
-                                                    handleFilterChange(
-                                                        filter.value ?? filter.label,
-                                                        value,
-                                                        filter.filter
-                                                    )
-                                                }
+                                                onValueChange={(value) => onSortChange?.(value)}
                                             />
                                         </div>
-                                    )
-                                })}
-                                {availableGroups && availableGroups.length > 0 && (
-                                    <div className="@xl:ml-auto flex items-center space-x-1">
-                                        <span className="text-sm font-bold">Group by</span>
-                                        <Select
-                                            placeholder="Group by"
-                                            defaultValue="none"
-                                            groups={[
-                                                {
-                                                    label: '',
-                                                    items: [
-                                                        { label: 'None', value: 'none' },
-                                                        ...availableGroups.map((group) => ({
-                                                            label: group.label,
-                                                            value: group.value,
-                                                        })),
-                                                    ],
-                                                },
-                                            ]}
-                                            onValueChange={(value) => onGroupChange?.(value)}
-                                        />
-                                    </div>
-                                )}
-                                {sortOptions && sortOptions.length > 0 && (
-                                    <div className="ml-auto flex items-center space-x-2">
-                                        <span className="text-sm font-bold">Sort by:</span>
-                                        <Select
-                                            placeholder="Sort by"
-                                            defaultValue={defaultSortValue}
-                                            groups={[
-                                                {
-                                                    label: '',
-                                                    items: sortOptions.map((option) => ({
-                                                        label: option.label,
-                                                        value: option.value,
-                                                    })),
-                                                },
-                                            ]}
-                                            onValueChange={(value) => onSortChange?.(value)}
-                                        />
-                                    </div>
-                                )}
+                                    )}
+                                </div>
                             </div>
                         )}
+
                         {hasTabs ? (
                             <div data-scheme="primary" className="bg-accent h-full">
                                 <article
                                     data-scheme="primary"
-                                    style={{ maxWidth: fullWidthContent ? '100%' : maxWidth }}
-                                    className={`${getProseClasses(proseSize)} h-full mx-auto transition-all`}
+                                    className={`${getProseClasses(proseSize)} h-full mx-auto transition-all ${
+                                        fullWidthContent || websiteMode ? 'max-w-full' : 'max-w-4xl'
+                                    }`}
                                 >
                                     {title && (
                                         <h1 className="text-2xl font-bold">
@@ -681,10 +703,11 @@ export function Editor({
                             <ScrollWrapper scrollable={scrollable}>
                                 <article
                                     ref={articleRef ?? undefined}
-                                    style={{ maxWidth: fullWidthContent ? '100%' : maxWidth }}
-                                    className={`${getProseClasses(
-                                        proseSize
-                                    )} py-4 px-4 @xl:px-8 mx-auto transition-all`}
+                                    className={`${getProseClasses(proseSize)} ${
+                                        hasPadding ? 'py-4 px-4 @xl:px-8' : ''
+                                    } mx-auto transition-all ${
+                                        fullWidthContent || websiteMode ? 'max-w-full' : 'max-w-4xl'
+                                    }`}
                                 >
                                     {title && (
                                         <h1 className="text-2xl font-bold">

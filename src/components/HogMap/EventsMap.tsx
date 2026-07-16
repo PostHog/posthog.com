@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react'
 import { useEventsMapData } from './EventsLayer'
 import { useUserLocation } from '../../hooks/useUserLocation'
-import 'mapbox-gl/dist/mapbox-gl.css'
 type EventItem = {
     id: number
     date?: string
@@ -12,6 +11,7 @@ type EventItem = {
 import {
     computeOffsets,
     getMapbox,
+    loadMapbox,
     ensureClusterSource,
     ensureClusterLayers,
     setClusterVisibility,
@@ -64,10 +64,19 @@ export default function EventsMap({
     selectedEventId?: number | null
 }): JSX.Element {
     const [isClient, setIsClient] = useState(false)
+    const [mapboxReady, setMapboxReady] = useState(false)
     const { location: userLocation, isLoading: isLocationLoading } = useUserLocation()
 
     useEffect(() => {
         setIsClient(true)
+    }, [])
+
+    useEffect(() => {
+        loadMapbox().then((m) => {
+            if (m) {
+                setMapboxReady(true)
+            }
+        })
     }, [])
 
     const mapContainerRef = useRef<HTMLDivElement | null>(null)
@@ -249,7 +258,7 @@ export default function EventsMap({
                               year: 'numeric',
                           })
                         : ''
-                    const href = ev.link || ''
+                    const href = ev.id ? `/events/${ev.id}` : ev.link || ''
                     const name = ev.name || 'Event'
                     const desc = (ev as any).description || ''
                     const label = (ev as any)?.location?.label || 'Event'
@@ -306,7 +315,7 @@ export default function EventsMap({
                               year: 'numeric',
                           })
                         : ''
-                    const href = ev.link || ''
+                    const href = ev.id ? `/events/${ev.id}` : ev.link || ''
                     const name = ev.name || 'Event'
                     const desc = (ev as any).description || ''
                     const label = (ev as any)?.location?.label || 'Event'
@@ -408,7 +417,7 @@ export default function EventsMap({
                 mapRef.current = null
             }
         }
-    }, [isClient, token, styleUrl, isLocationLoading, userLocation])
+    }, [isClient, mapboxReady, token, styleUrl, isLocationLoading, userLocation])
 
     useEffect(() => {
         return setupMap()

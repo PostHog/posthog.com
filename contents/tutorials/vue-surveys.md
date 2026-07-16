@@ -82,7 +82,7 @@ import posthog from "posthog-js";
 export default {
   install(app) {
     app.config.globalProperties.$posthog = posthog.init(
-      "<ph_project_api_key>",
+      "<ph_project_token>",
       {
         api_host: "<ph_client_api_host>",
       }
@@ -91,7 +91,7 @@ export default {
 };
 ```
 
-Replace `<ph_project_api_key>` and `<ph_client_api_host>` with your your PostHog API key and host. You can find these in your [project settings](https://us.posthog.com/settings/project).
+Replace `<ph_project_token>` and `<ph_client_api_host>` with your your PostHog API key and host. You can find these in your [project settings](https://us.posthog.com/settings/project).
 
 Finally, activate your plugin in `main.js`:
 
@@ -511,7 +511,7 @@ export default {
       localStorage.setItem(`hasInteractedWithSurvey_${this.surveyID}`, 'true');
       this.$posthog.capture("survey sent", {
         $survey_id: this.surveyID, // required
-        $survey_response_a3071551-d599-4eeb-9ffe-69e93dc647b6: value, // required
+        $survey_response: value, // required
         $survey_questions: [
           {
             id: "a3071551-d599-4eeb-9ffe-69e93dc647b6",
@@ -593,7 +593,7 @@ export default {
       localStorage.setItem(`hasInteractedWithSurvey_${this.surveyID}`, 'true');
       this.$posthog.capture("survey sent", {
         $survey_id: this.surveyID, // required
-        $survey_response_a3071551-d599-4eeb-9ffe-69e93dc647b6: value, // required
+        $survey_response: value, // required
         $survey_questions: [
           {
             id: "a3071551-d599-4eeb-9ffe-69e93dc647b6",

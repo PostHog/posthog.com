@@ -106,13 +106,15 @@ Joining an offsite? _Only use the offsite budget_, not your User Limit - it help
     - [Attaching receipts for multiple expenses](https://www.brex.com/support/receipts-for-expenses#attaching-receipts-to-multiple-expenses)
 - What do I do if I have a new tool/enterprise software subscription for the team to use?
   - Add [Janani](https://posthog.com/community/profiles/34497) as the Billing Admin to manage payments.
-- If I'm asked for a billing email for bill payments, what do I use?
+- If I'm asked for a billing email – for bill payments or when signing a vendor contract – what do I use?
   - Use finance@posthog.com
 - What if I'm driving for work-related purposes?
   - You can claim a mileage reimbursement through Brex. **Do not** separately expense fuel.
 - What if I accidentally used the company card for a personal expense?
-  - Login to Brex > find the charge > click on 'Repay'
-  - For Revolut charges, ping [Janani](https://posthog.com/community/profiles/34497) in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ)
+  - Login to Brex > find the charge > click on 'Repay'.
+    - **US and Canada:** Brex's auto repay function works, so it'll pull the money from your connected bank account for you.
+    - **International:** auto repay isn't available, so the 'Repay' button only tracks the expense. You need to manually transfer the amount **from your personal bank account to PostHog's bank account**, using the details provided in [our banking runbook](https://github.com/PostHog/company-internal/blob/37179f74a66e8b779f8e6f116172511709646157/finance/banking.md).
+  - For Revolut charges, repay to the bank account details provided in [our banking runbook](https://github.com/PostHog/company-internal/blob/37179f74a66e8b779f8e6f116172511709646157/finance/banking.md#repayments-to-revolut)
 - How do I get access to WeWork?
   - We have a company All Access account - ask [Kendal](https://posthog.com/community/profiles/28628) in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ).
 - What if I've received a bill I need Finance to pay?
@@ -140,12 +142,12 @@ If the inappropriate spend was due to a misunderstanding, e.g. you genuinely tho
 Talk to [Tara](https://posthog.com/community/profiles/34526) who handles most Macbook and Apple Studio Display purchases - ping her on [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ).
   - Having equipment purchases centralized helps ensure accurate accounting and tracking of fixed assets for the audit.
   - We expect you to ship the Macbook and Apple Studio Display back when you leave PostHog.
-  - Apple Studio Displays are only for Product Engineers (high density screen) and Sales/CS/Onboarding teams (built-in high quality webcam and microphone). If this isn't you, we recommend [this screen](https://www.amazon.co.uk/LG-UltraFine-Monitor-27U730A-B-Built/dp/B0F7M27H6F/ref=asc_df_B0F7M27H6F?mcid=d91fd0cc5e06349887121f1ba2c4d6b6&tag=googshopuk-21&linkCode=df0&hvadid=696386561242&hvpos=&hvnetw=g&hvrand=11057029523976072922&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9045888&hvtargid=pla-2442615442699&psc=1&hvocijid=11057029523976072922-B0F7M27H6F-&hvexpln=0&gad_source=1) from LG as a high quality but reasonably-priced alternative. 
+  - Apple Studio Displays are only for Product Engineers (high density screen) and Sales/CS/Onboarding teams (built-in high quality webcam and microphone). For all other teams that feel they could benefit from an enhanced monitor, there are some really great competitors to the Studio Display at a fraction of the price - like the [Clarity Pro 27"](https://alogic.co.uk/products/clarity-pro-27-uhd-4k-monitor-with-65w-pd-and-webcam) or another solid option is this [LG screen](https://www.amazon.co.uk/LG-UltraFine-Monitor-27U730A-B-Built/dp/B0F7M27H6F/ref=asc_df_B0F7M27H6F?mcid=d91fd0cc5e06349887121f1ba2c4d6b6&tag=googshopuk-21&linkCode=df0&hvadid=696386561242&hvpos=&hvnetw=g&hvrand=11057029523976072922&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9045888&hvtargid=pla-2442615442699&psc=1&hvocijid=11057029523976072922-B0F7M27H6F-&hvexpln=0&gad_source=1)  You can purchase these using your personal limit.
     - If you order a Studio Display during your probation period but end up leaving PostHog, we can recover the cost of the display and you won't need to return it.
   - Laptop guidelines
-    - For engineering roles (product, platform, & support), we recommend a Macbook Pro 14-inch M4 Pro, with the 12-core CPU, 16-core GPU upgrade and 48GB of RAM. We recommend the 1TB SSD drive in order to make sure you have enough space to run the full stack locally.
-    - For sales & CS roles, we recommend a Macbook Pro 14-inch M4, with 10-core GPU, 16-core and the 32GB RAM upgrade. Again, grab the smallest SSD (512gb)
-    - All other roles, we currently recommend a Macbook Air with the latest Apple Silicon processor and 16GB of RAM.
+    - For engineering roles (product, platform, & support), we recommend a Macbook Pro 14-inch M5 Pro, with the 18-core CPU, 20-core GPU upgrade and 64GB of RAM.
+    - For sales & CS roles, we buy the Macbook Pro 14-inch M5, with 10-core GPU, 16-core and the 32GB RAM upgrade.
+    - All other roles, we issue Macbook Pros. Wherever possible we will redistribute engineering models (Macbook Pros) no longer in use to allow you to have a more powerful machine for running PostHog Code.
     - Apple offers multiple screen sizes. The larger screen sizes (15 inches +), are disproportionately more expensive. If you are realistically going to do most of your work at home, it is more rational to pick a smaller laptop size, and to get a large monitor.
     - We only purchase laptops with an English keyboard configuration (US, International or British is fine) - this enables us to easily pass your laptop on to someone else if you upgrade or leave.
     - In the unlikely case that you need to purchase your own laptop:
@@ -153,15 +155,19 @@ Talk to [Tara](https://posthog.com/community/profiles/34526) who handles most Ma
       - US only: use your Brex since we earn cashback
       - UK only: use your Revolut since we claim back the VAT
       - Do not get AppleCare since it doesn't have great value for money
-    - You can request a new laptop in `#team-people-and-ops` if it is over 4 years old or significantly impacting your productivity. We do ask that you do some diligence to make sure it's not a setup issue though - i.e. other applications aren't hogging the memory, etc.
+    - You can request a new laptop in `#team-people-and-ops` if it is over 4 years old, (for engineering machines) has less than 48GB of RAM, or is significantly impacting your productivity. We do ask that you do some diligence to make sure it's not a setup issue though - i.e. other applications aren't hogging the memory, etc.
     - Part of `#team-client-libraries` and need to purchase a phone for testing? Talk to [Tara](https://posthog.com/community/profiles/34526) in `#team-people-and-ops`.
-
-#### Yubikey
-We enforce the use of hardware security keys wherever we can. Every team member needs two Yubikeys. You can find them on Amazon, and can read more about how to get set up [on the MFA page](https://posthog.com/handbook/company/security#multi-factor-authentication).
 
 #### Other equipment
 - Keyboard/mouse/laptop stand: Check Amazon and Apple for discounts. Refurbished items usually work just fine. [Nextstand](https://www.amazon.co.uk/NEXSTAND-K2-Adjustable-Foldable-Portable/dp/B01HHYQBB8) make great value laptop stands that are portable.
-- Desk & chair - again, refurbished is usually. If you live in the UK, [Office Resale](https://www.officeresale.co.uk/) offer a range of like-new refurbished designer furniture.
+- Desk & chair - again, refurbished is a great way to get high quality for less. If you live in the UK, [Office Resale](https://www.officeresale.co.uk/) offer a range of like-new refurbished designer furniture.
+
+As a guide, here's what we'd consider reasonable spend:
+- Desk - up to $500
+- Chair - up to $500
+- Keyboard - up to $250
+
+If you want something more expensive, you can pay personally and submit a reimbursement request on Brex for up to the amount above.
 
 ### Software
 We are _strongly opposed_ to introducing new software that is designed for collaboration by default. There needs to be a very significant upside to introducing a new piece of software to outweigh its cost.
@@ -170,9 +176,12 @@ The cost of introducing new collaborative software is that it creates another pl
 
 Individual software is down to your personal preference, and we encourage you to share cool software.
 - There are some tools used by team members individually - if they become more widely adopted, it makes sense to have a company account. Talk to [Tara](https://posthog.com/community/profiles/34526) on [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ)
-- Ask for access in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ) to get access to:
-  - [Loom](https://www.loom.com): you'll be added as a _Creator Lite_ which allows you to record 25 videos/mo at up to 5 minutes in length. If you need a full Creator account (unlimited videos, advanced features), ask [Simon](https://posthog.com/community/profiles/28895).
-  - [Zoom](https://www.zoom.us): we use Google Meet by default, but you can use Zoom for free (up to 40-minute calls). Should you need longer meetings, ask [Simon](https://posthog.com/community/profiles/28895). (But does anyone _really_ need longer meetings?)
+
+You can ask for access to team/company tools by submitted a request in Slack. Find the Zluri app in Slack. type: /accessrequest and press enter. You'll get a pop up that allows you to search for the app you'd like access to. Add any specific information about license level/type if necessary. The request will then be sent to the team member who owns/manages access to the plaftorm. Once they have provided access to the platform, they'll confirm via the Zluri task and you'll also receive confirmation. You should then receive an email invite, or be able to login via SSO depending on the tool. If you do not see a tool in the app that you believe is centrally managed, drop a line in the [#team-people-and-ops] channel
+
+- Some tools that you might find useful to know about:
+  - [Loom](https://www.loom.com): you'll be added as a _Creator Lite_ which allows you to record 25 videos/mo at up to 5 minutes in length. If you need a full Creator account (unlimited videos, advanced features), specify in your Zluri access request
+  - [Zoom](https://www.zoom.us): we use Google Meet by default, but you can use Zoom for free (up to 40-minute calls). Should you need longer meetings, please specify in your Zluri access request (But does anyone _really_ need longer meetings?)
   - [Superhuman](https://superhuman.com): everyone has their own favorite email app, but Superhuman users will make sure you don’t forget theirs. We have a team plan to keep those folks happy with inbox zero and inner peace.
   - [Granola](https://granola.ai): It’s absolutely okay to use AI note-takers so you can stay engaged in meetings without writing everything down. Feel free to choose your own but please be aware of who the sub-processors are to ensure they do not use a competitor for analytics.
 - IDEs: Visual Studio, VIM and PyCharm are the most popular within our team. IDEs range widely in cost; best in class IDE suites can cost up to $700, which is not a great value proposition for most engineers.
@@ -188,9 +197,18 @@ Individual software is down to your personal preference, and we encourage you to
 - It's fine to book your outbound / return flights for a different day to when you are required to be there as long as the flight is a similar price or less.
  - Any other costs outside of the days you are required to be at an event are of course _not_ covered.
 > If you find yourself needing to do extra travel outside of the regular things listed above, e.g. you've been asked to take a last minute trip to work on an emergency project, we may pay for a nicer seat here, especially if you are traveling at very short notice or long haul. Ask on [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ) if you think this may apply to you. This is intended for genuine one-offs, not where you've decided you'd like to come along to an extra offsite!
-- We strongly encourage team members to try and work together in person when practical. This isn't limited to just working with people in your team, but we expect that you have a reasonable reason you need to work together.
+- We strongly encourage team members to try and work together in person when practical. This isn't limited to just working with people in your team, but we expect that you have a reasonable reason you need to work together. You should default to doing this in SF/London, so you'll run into other PostHog people too.
 - If you're in the same place as other team members, even if you aren't directly working together, PostHog will cover the cost of a dinner or a fun activity
-- If you are meeting a user for an interview or a potential customer, we would encourage you to pick up the bill. At PostHog's current stage, a fancy coffee shop is encouraged. A fancy lunch or dinner is not.
+- When visiting customers (or potential customers), we should look for opportunities to connect with them over a meal. These don't need to be extravagant, but they should be appropriate to the size and expectations of the customer. If you would be comfortable justifying the spend publicly in All Hands, you're probably fine.
+  - For a normal customer visit (yourself or a couple of people), just use your personal budget and request an increase through Brex if you need more. If the visit grows into something offsite-like (the whole team, multiple days, etc.), post in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ) and tag Kendal so she can create a separate budget for it.
+
+#### Hub travel budget
+
+We encourage people to visit our hubs in SF (Hogpatch) and London (Hedgehouse). These places generally have a high density of PostHog employees around, so you'll get to meet people from other teams, which makes cross-team work much easier and more successful. SF also has the benefit of being the epicenter of everything happening in tech, and we have lots of YC founders working out of Hogpatch who you can meet and learn from. It's good to get exposure to this, especially if you don't live in SF or haven't been recently.
+
+There is no specific travel budget, this can come out of your general employee budget. We strongly encourage you to use your budget for this reason!
+
+If you do decide to come, we ask that you make the trip worthwhile - attend a conference, speak at an event, gather a few colleagues to come with you at the same time and work on something specific together. Don't just pop in and put your headphones in while there - make it worth your while.
 
 ### Sponsorships
-If you believe an open-source project is fundamentally important to the success of PostHog then we should set up a recurring sponsorship. In this case, see the [open-source sponsorship Marketing initiative](/handbook/growth/marketing/open-source-sponsorship).
+If you believe an open-source project is fundamentally important to the success of PostHog then we should set up a recurring sponsorship. In this case, see the [open-source sponsorship Marketing initiative](/handbook/marketing/open-source-sponsorship).

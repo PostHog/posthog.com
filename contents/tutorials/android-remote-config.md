@@ -31,7 +31,7 @@ dependencies {
 }
 ```
 
-Next, in your project's package directory (`PostHogRemoteConfig/app/src/main/java/com/example/posthogremoteconfig`), create a new Kotlin class file called `MyApplication.kt`. This is where we initialize PostHog using your project API key and instance address, both of which you can find in [your project settings](https://us.posthog.com/settings/project).
+Next, in your project's package directory (`PostHogRemoteConfig/app/src/main/java/com/example/posthogremoteconfig`), create a new Kotlin class file called `MyApplication.kt`. This is where we initialize PostHog using your project token and instance address, both of which you can find in [your project settings](https://us.posthog.com/settings/project).
 
 ```kotlin
 package com.example.posthogremoteconfig
@@ -45,7 +45,7 @@ class MyApplication : Application() {
         super.onCreate()
 
         val config = PostHogAndroidConfig(
-            apiKey = "<ph_project_api_key>",
+            apiKey = "<ph_project_token>",
             host = "<ph_client_api_host>"
         )
         PostHogAndroid.setup(this, config)
@@ -72,7 +72,7 @@ With the integration set up, let's create a remote config flags to control our a
 1. Go to the [feature flags tab](https://us.posthog.com/feature_flags) in PostHog and click **New feature flag**
 2. Enter `welcome-message` as the key
 3. Under **Served value**, select **Remote config (single payload)**
-4. Set the payload to a string. We'll use `"Welcome to our awesome Android app!"`
+4. Set the payload to a JSON object: `{"message": "Welcome to our awesome Android app!"}`
 5. Click **Save**
 
 <ProductScreenshot
@@ -158,8 +158,10 @@ fun RemoteConfigDemo() {
 }
 
 private fun loadMessage(onMessageLoaded: (String) -> Unit) {
-    val message = PostHog.getFeatureFlagPayload("welcome-message")
-    onMessageLoaded(message?.toString() ?: "Welcome to the app!")
+    val result = PostHog.getFeatureFlagResult("welcome-message")
+    val payload = result?.payload as? Map<String, Any>
+    val message = payload?.get("message")?.toString()
+    onMessageLoaded(message ?: "Welcome to the app!")
 }
 
 ```

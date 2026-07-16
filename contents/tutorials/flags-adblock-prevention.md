@@ -41,7 +41,7 @@ First, [set up reverse proxies](/docs/advanced/proxy) for PostHog. You have two 
 Then configure the PostHog client to use your proxies:
 
 ```js
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     api_host: 'https://posthog.yourdomain.com',     // Proxy for events and recordings
     flags_api_host: 'https://flags.yourdomain.com', // Proxy for feature flags only
     ui_host: 'https://us.posthog.com',              // PostHog dashboard URL (for viewing data in the UI)

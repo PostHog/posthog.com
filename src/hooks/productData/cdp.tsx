@@ -6,30 +6,36 @@ import { IconPlug } from '@posthog/icons'
 export const cdp = {
     parentIcon: 'spreadsheetSearch',
     Icon: IconPlug,
-    name: 'CDP', // Integrations library (145+)
+    name: 'CDP',
     description: 'Get data into PostHog and send it where it needs to go.',
-    handle: 'cdp',
-    type: 'cdp',
+    handle: 'cdp', // integrations
+    type: 'cdp', // integrations
     slug: 'cdp',
     color: 'sky-blue',
     colorSecondary: 'blue',
-    // category: 'data',
+    category: 'data',
     hideFromPricingTableAndCalculator: true,
     seo: {
-        title: 'CDP sources & destinations - PostHog',
-        description: 'Get all your data into PostHog with 60+ sources & destinations',
+        title: 'Ingest, transform, and send data between hundreds of tools',
+        description:
+            'Import data from a warehouse, sync with event data, and move it across 50+ destinations – the context agents act on to make your product self-driving.',
     },
     answersDescription: 'Ingest, transform, and send data between 145+ tools',
     overview: {
         title: 'Ingest, transform, and send data between 145+ tools',
         description:
-            "PostHog's customer data platform (CDP) makes it easy to import data from a warehouse, sync with event data, and export to other products in your stack.",
+            'The CDP is one of the tools that make your product self-driving: it moves your data wherever agents need to act on it. Import from a warehouse, sync with event data, and send it across 50+ destinations in your stack.',
         textColor: 'text-white', // tw
     },
     screenshots: {
         overview: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/screenshot-cdp.png',
             alt: "Screenshot of PostHog's CDP",
+            classes: '',
+        },
+        library: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/pasted_image_2025_09_03_T13_24_20_613_Z_5ce971dd31.png',
+            alt: 'CDP integrations library',
             classes: '',
         },
         home: {

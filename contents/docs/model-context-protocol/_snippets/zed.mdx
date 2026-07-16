@@ -1,8 +1,24 @@
 import { MCPConfigSnippet } from '../../../../src/components/Product/MCP/MCPConfig'
 
-1. Open [Zed](https://zed.dev) and update `settings.json` with the following configuration:
+> **Note:** Zed doesn't support OAuth for MCP servers, so you'll need to authenticate using a personal API key.
 
-<MCPConfigSnippet variant="zed" />
+1. Create a [personal API key](https://app.posthog.com/settings/user-api-keys?preset=mcp_server) using the **MCP Server** preset
+2. Open `settings.json` in Zed with the following configuration:
 
-2. **Save** the configuration file
-3. The PostHog MCP server will be available
+```json
+{
+  "context_servers": {
+    "posthog": {
+      "enabled": true,
+      "url": "https://mcp.posthog.com/mcp",
+      "headers": {
+        "Authorization": "Bearer phx_your_api_key_here"
+      }
+    }
+  }
+}
+```
+
+3. Replace `phx_your_api_key_here` with your personal API key
+4. **Save** the configuration file
+5. The PostHog MCP server will be available

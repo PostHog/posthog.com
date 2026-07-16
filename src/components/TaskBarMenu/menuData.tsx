@@ -6,15 +6,6 @@ import { useSmallTeamsMenuItems } from './SmallTeamsMenuItems'
 import Logo from 'components/Logo'
 import { APP_COUNT } from '../../constants'
 import SearchableProductMenu from './SearchableProductMenu'
-import {
-    categoryOrder,
-    categoryDisplayNames,
-    categoryIcons,
-    buildCategoryMenuItems,
-    buildProductMenuItems,
-    popularProducts,
-    newestProducts,
-} from '../../constants/productNavigation'
 import useProduct from '../../hooks/useProduct'
 import {
     IconXNotTwitter,
@@ -28,7 +19,10 @@ import {
 } from 'components/OSIcons'
 import { useApp } from '../../context/App'
 import { IconChevronDown } from '@posthog/icons'
+import { useHedgehogMode } from 'components/HedgehogMode'
 import { navigate } from 'gatsby'
+import { useToast } from '../../context/Toast'
+import usePostHog from '../../hooks/usePostHog'
 
 interface DocsMenuItem {
     name: string
@@ -236,78 +230,73 @@ const processHandbookSidebar = (items: any[], isRoot = true): any[] => {
         })
 }
 
-// Build Product OS menu items with categories
-const buildProductOSMenuItems = (allProducts: any[]) => {
+// Build Products menu items
+const buildProductsMenuItems = (allProducts: any[]) => {
     const items: any[] = [
         {
             type: 'item',
-            label: `Browse all apps (${APP_COUNT})`,
+            label: 'PostHog Code',
+            link: '/code',
+            icon: <Icons.IconCoffee className="size-4 text-brown" />,
+        },
+        {
+            type: 'item',
+            label: 'PostHog Web',
+            link: '/products',
+            icon: <Icons.IconBolt className="size-4 text-red" />,
+        },
+        {
+            type: 'item',
+            label: 'PostHog Slack',
+            link: '/slack',
+            icon: <Icons.IconAtSign className="size-4 text-sky-blue" />,
+        },
+        {
+            type: 'item',
+            label: 'PostHog MCP',
+            link: '/mcp',
+            icon: <Icons.IconPlug className="size-4 text-gray" />,
+        },
+        {
+            type: 'item',
+            label: 'PostHog CLI',
+            link: '/docs/cli',
+            icon: <Icons.IconTerminal className="size-4 text-green" />,
+        },
+        {
+            type: 'item',
+            label: 'Context Warehouse',
+            link: '/data-stack',
+            icon: <Icons.IconDatabase className="size-4 text-blue" />,
+        },
+        {
+            type: 'separator',
+        },
+        {
+            type: 'item',
+            label: 'PostHog Research',
+            link: '/research',
+            icon: <Icons.IconBrain className="size-4 text-purple" />,
+        },
+        {
+            type: 'separator',
+        },
+        {
+            type: 'item',
+            label: `Browse all tools (${APP_COUNT})`,
             link: '/products',
             icon: <Icons.IconApps className="size-4 text-red" />,
             mobileDestination: '/products',
         },
         {
-            type: 'separator',
-        },
-        {
             type: 'submenu' as const,
-            label: 'Search apps',
+            label: 'Search tools',
             link: '/products',
             items: <SearchableProductMenu products={allProducts} />,
             icon: <Icons.IconSearch className="size-4 text-gray" />,
-            mobileDestination: '/products',
-        },
-        {
-            type: 'submenu',
-            label: 'Popular products',
-            items: buildProductMenuItems(popularProducts, allProducts),
-            icon: <Icons.IconTrending className="size-4 text-green" />,
-            mobileDestination: '/products',
-        },
-        {
-            type: 'submenu',
-            label: 'New products',
-            items: buildProductMenuItems(newestProducts, allProducts),
-            icon: <Icons.IconPresent className="size-4 text-blue" />,
-            mobileDestination: '/products',
-        },
-        {
-            type: 'separator',
-        },
-        {
-            type: 'item',
-            label: 'Categories',
-            disabled: true,
+            mobileDestination: false, // Omit from mobile menu; desktop-only search
         },
     ]
-
-    // Add category submenus
-    categoryOrder.forEach((category) => {
-        const categoryProducts = allProducts.filter((product: any) => product.category === category)
-        if (categoryProducts.length === 0) return
-
-        const categoryItems = buildCategoryMenuItems(category, allProducts)
-        if (categoryItems.length > 0) {
-            // Get the icon for this category
-            let iconElement = null
-            const iconConfig = categoryIcons[category]
-            if (iconConfig) {
-                const IconComponent = Icons[iconConfig.icon as keyof typeof Icons]
-                if (IconComponent) {
-                    iconElement = React.createElement(IconComponent, {
-                        className: `size-4 text-${iconConfig.color}`,
-                    })
-                }
-            }
-
-            items.push({
-                type: 'submenu',
-                label: categoryDisplayNames[category] || category,
-                icon: iconElement,
-                items: categoryItems,
-            })
-        }
-    })
 
     return items
 }
@@ -315,14 +304,24 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
 export function useMenuData(): MenuType[] {
     const smallTeamsMenuItems = useSmallTeamsMenuItems()
     const allProducts = useProduct() as any[]
-    const { animateClosingAllWindows, windows, setScreensaverPreviewActive, isMobile } = useApp()
+    const {
+        animateClosingAllWindows,
+        windows,
+        setScreensaverPreviewActive,
+        isMobile,
+        websiteMode,
+        siteSettings,
+        updateSiteSettings,
+    } = useApp()
+    const { addToast } = useToast()
+    const posthog = usePostHog()
+    const [hedgehogModeEnabled, setHedgehogModeEnabled] = useHedgehogMode()
 
     // Define main navigation items (excluding logo menu)
     const mainNavItems: MenuType[] = [
         {
-            trigger: 'Product OS',
-            items: buildProductOSMenuItems(allProducts),
-            mobileLink: '/products', // Direct link on mobile
+            trigger: 'Products',
+            items: buildProductsMenuItems(allProducts),
         },
         {
             trigger: 'Pricing',
@@ -477,6 +476,11 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
+                    label: 'Product Engineer Handbook',
+                    link: '/product-engineer',
+                },
+                {
+                    type: 'item',
                     label: 'Product engineers hub',
                     link: '/product-engineers',
                 },
@@ -519,6 +523,11 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
+                    label: 'WIP',
+                    link: '/wip',
+                },
+                {
+                    type: 'item',
                     label: 'Changelog',
                     link: '/changelog',
                 },
@@ -544,6 +553,11 @@ export function useMenuData(): MenuType[] {
                     type: 'item',
                     label: 'Careers',
                     link: '/careers',
+                },
+                {
+                    type: 'item',
+                    label: 'Partnerships',
+                    link: '/partnerships',
                 },
                 {
                     type: 'separator',
@@ -619,6 +633,33 @@ export function useMenuData(): MenuType[] {
                     items: [
                         {
                             type: 'item',
+                            onClick: () => setHedgehogModeEnabled(!hedgehogModeEnabled),
+                            node: (
+                                <span className="px-2.5 flex w-full justify-between items-center gap-2">
+                                    <span>Hedgehog mode</span>
+                                    {/* Presentational toggle — the whole row is the clickable menu item */}
+                                    <span className="relative inline-flex items-center justify-center h-2 w-8 flex-shrink-0">
+                                        <span
+                                            aria-hidden
+                                            className="pointer-events-none absolute w-full h-full rounded-md bg-[#c4c4c4] dark:bg-[#5A5A5A]"
+                                        />
+                                        <span
+                                            aria-hidden
+                                            className={`pointer-events-none absolute left-0 inline-block h-4 w-4 rounded-full transition-transform ease-in-out duration-200 ${
+                                                hedgehogModeEnabled
+                                                    ? 'translate-x-5 bg-teal'
+                                                    : 'translate-x-0 bg-[#555] dark:bg-[#999]'
+                                            }`}
+                                        />
+                                    </span>
+                                </span>
+                            ),
+                        },
+                        {
+                            type: 'separator',
+                        },
+                        {
+                            type: 'item',
                             label: 'Browse all',
                             link: '/sparks-joy',
                         },
@@ -690,6 +731,11 @@ export function useMenuData(): MenuType[] {
                             label: 'HIPAA',
                             link: '/docs/privacy/hipaa-compliance',
                         },
+                        {
+                            type: 'item',
+                            label: 'Subprocessors',
+                            link: '/subprocessors',
+                        },
                     ],
                 },
                 {
@@ -739,6 +785,36 @@ export function useMenuData(): MenuType[] {
             },
             shortcut: [','],
         },
+        ...(isMobile
+            ? []
+            : [
+                  {
+                      type: 'item' as const,
+                      label: websiteMode ? 'Switch to OS mode' : 'Switch to website mode',
+                      onClick: () => {
+                          const newExperience = websiteMode ? 'posthog' : 'boring'
+                          updateSiteSettings({ ...siteSettings, experience: newExperience })
+                          posthog?.capture('switched site mode', {
+                              value: newExperience === 'posthog' ? 'os' : 'website',
+                              source: 'menu',
+                          })
+                          addToast({
+                              title: `Switched to ${websiteMode ? 'OS mode' : 'website mode'}`,
+                              description: `${websiteMode ? 'Click' : 'Hover'} the logo to return to ${
+                                  websiteMode ? 'website mode' : 'OS mode'
+                              }.`,
+                              duration: 5000,
+                              onUndo: () => {
+                                  updateSiteSettings({
+                                      ...siteSettings,
+                                      experience: websiteMode ? 'posthog' : 'boring',
+                                  })
+                              },
+                          })
+                      },
+                      shortcut: ['Shift', 'M'],
+                  },
+              ]),
     ]
 
     // Process main nav items for mobile menu
@@ -835,24 +911,28 @@ export function useMenuData(): MenuType[] {
         : [
               // Desktop: only show system items
               ...baseLogoMenuItems,
-              { type: 'separator' as const },
-              {
-                  type: 'item' as const,
-                  label: 'Start screensaver',
-                  onClick: () => {
-                      setScreensaverPreviewActive(true)
-                  },
-                  shortcut: ['Shift', 'Z'],
-              },
-              {
-                  type: 'item' as const,
-                  label: 'Close all windows',
-                  disabled: windows.length < 1,
-                  onClick: () => {
-                      animateClosingAllWindows()
-                  },
-                  shortcut: ['Shift', 'X'],
-              },
+              ...(!websiteMode
+                  ? [
+                        { type: 'separator' as const },
+                        {
+                            type: 'item' as const,
+                            label: 'Start screensaver',
+                            onClick: () => {
+                                setScreensaverPreviewActive(true)
+                            },
+                            shortcut: ['Shift', 'Z'],
+                        },
+                        {
+                            type: 'item' as const,
+                            label: 'Close all windows',
+                            disabled: windows.length < 1,
+                            onClick: () => {
+                                animateClosingAllWindows()
+                            },
+                            shortcut: ['Shift', 'X'],
+                        },
+                    ]
+                  : []),
           ]
 
     return [
@@ -860,13 +940,24 @@ export function useMenuData(): MenuType[] {
             trigger: (
                 <>
                     <div className="flex items-center">
-                        <Logo noText className="size-8 2xs:hidden md:block md:size-6" fill="primary" classic />
-                        <Logo className="hidden 2xs:flex md:hidden h-5 w-auto" fill="primary" classic />
+                        <Logo
+                            noText
+                            className={`2xs:hidden md:block ${websiteMode ? 'size-10' : 'size-8 md:size-6'}`}
+                            fill="primary"
+                            classic
+                        />
+                        <Logo
+                            className={`hidden 2xs:flex md:hidden w-auto ${websiteMode ? 'h-7' : ' h-5'} `}
+                            fill="primary"
+                            classic
+                        />
                         <IconChevronDown className="size-6 inline-block md:hidden text-muted" />
                     </div>
                 </>
             ),
             items: logoMenuItems,
+            mobileLink: websiteMode ? '/' : undefined,
+            hideChevron: true,
         },
         // On desktop, show main navigation items
         ...(!isMobile ? mainNavItems : []),
@@ -929,6 +1020,18 @@ export const SparksJoyItems = {
             link: '/sparks-joy/dictator-or-tech-bro',
             iconName: null,
             customIcon: <IconDictator />,
+        },
+        {
+            label: 'BrickHog',
+            link: '/sparks-joy/brickhog',
+            iconName: 'games' as AppIconName,
+            customIcon: null,
+        },
+        {
+            label: 'HogPatch: The Game',
+            link: '/sparks-joy/hogpatch',
+            iconName: 'games' as AppIconName,
+            customIcon: null,
         },
     ],
     notGames: [

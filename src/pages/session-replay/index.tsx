@@ -62,7 +62,6 @@ export default function SessionReplay(): JSX.Element {
     // Optional: Customize slides
     // See /components/Products/Slides/README.md for more details
     const slides = createSlideConfig({
-        // order: ['overview', 'pricing', 'features'],
         templates: {
             overview: 'columns', // Use the horizontal split layout
         },
@@ -70,12 +69,6 @@ export default function SessionReplay(): JSX.Element {
         content: {
             answersDescription:
                 'Understand user behavior, identify friction points, and improve your product experience',
-            featuresBackgroundImage: {
-                url: 'https://res.cloudinary.com/dmukukwp6/image/upload/bg_replay_5775c24ad4.jpg',
-                opacity: 0.2,
-                position: 'center',
-                size: 'cover',
-            },
         },
     })
 

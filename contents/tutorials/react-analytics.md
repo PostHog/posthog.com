@@ -96,7 +96,7 @@ The basic setup is now complete. Run `npm run dev` to see your app in action.
 
 ## Adding PostHog
 
-With our app set up, it's time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup). 
+With our app set up, it's time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://app.posthog.com/signup). 
 
 First install `posthog-js` and `@posthog/react`:
 
@@ -104,7 +104,7 @@ First install `posthog-js` and `@posthog/react`:
 npm install posthog-js @posthog/react
 ```
 
-Next, import PostHog into `src/main.jsx` and set up it up using your project API key and host from [your project settings](https://us.posthog.com/settings/project). Then we wrap our app with `PostHogProvider` to access PostHog in any component.
+Next, import PostHog into `src/main.jsx` and set up it up using your project token and host from [your project settings](https://app.posthog.com/settings/project). Then we wrap our app with `PostHogProvider` to access PostHog in any component.
 
 ```jsx file=src/main.jsx
 import React from 'react'
@@ -114,7 +114,7 @@ import App from './App.jsx'
 import posthog from 'posthog-js'
 import { PostHogProvider } from '@posthog/react'
 
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: '<ph_client_api_host>',
   defaults: '<ph_posthog_js_defaults>',
 })
@@ -128,7 +128,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 )
 ```
 
-Once you've done this, reload your app and click the links a few times. You should see pageviews and events appearing in PostHog's [activity tab](https://us.posthog.com/activity/explore).
+Once you've done this, reload your app and click the links a few times. You should see pageviews and events appearing in PostHog's [activity tab](https://app.posthog.com/activity/explore).
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_22_at_12_52_46_2x_7224c6ef4d.png" 

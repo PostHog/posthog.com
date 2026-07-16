@@ -79,7 +79,7 @@ We sometimes make business decisions based on who we are, and what we want to do
 
 We chose this path because there was less competition for a self-hosted product. We could build a refined point solution that anyone could self-host, and not worry about competing with cloud-based competitors with over $100m in annual revenue.
 
-But we soon realized we just love shipping new features. After our first hackathon, we wound up with session replay – i.e. a new feature big enough to be its own product. It took off and this resulted in our current multi-product approach.
+But we soon realized we just love shipping new features. After our first [hackathon](/newsletter/hackathons), we wound up with session replay – i.e. a new feature big enough to be its own product. It took off and this resulted in our current multi-product approach.
 
 Eventually, we removed our paid, self-hosted offering entirely, and went all in on multi-product in cloud, and "getting in first" with early-stage companies, not enterprises.
 
@@ -104,7 +104,7 @@ It's how your company is experienced by others. Your company is the product and:
 - [How you decide what to build](https://newsletter.posthog.com/p/how-we-decide-what-to-build). Do you ship features early, or do you focus on meeting the needs of your largest customer with every new thing?
 - The degree to which you’re led by design, engineering product, sales, or marketing. How many people are in each function, but also your processes for deciding what to work on.
 - The frequency and style with which you [email your customers](/blog/how-we-built-email-onboarding), for marketing, product updates or your [activation](/product-engineers/activation-metrics) flow.
-- The kind of people you hire into customer success or sales.
+- The kind of people you hire into [customer success](/blog/customer-success-at-posthog) or sales.
 - The background and experience of those in your marketing team.
 - The tone of voice on your website.
 - Who is on your board.

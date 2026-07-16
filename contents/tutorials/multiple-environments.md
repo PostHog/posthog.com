@@ -34,7 +34,7 @@ To create a new project, in your [PostHog instance](https://us.posthog.com/), cl
 />
 
 
-This takes you through the project setup flow again and gives you a new project API key. You can keep your old key for production, and add the new one in the relevant environment. You'll likely need [environment variables](https://medium.com/chingu/an-introduction-to-environment-variables-and-how-to-use-them-f602f66d15fa) for this (like a `.env` file) if you haven't set those up. Initializing PostHog with a different key in each environment connects them to a different project.
+This takes you through the project setup flow again and gives you a new project token. You can keep your old token for production, and add the new one in the relevant environment. You'll likely need [environment variables](https://medium.com/chingu/an-introduction-to-environment-variables-and-how-to-use-them-f602f66d15fa) for this (like a `.env` file) if you haven't set those up. Initializing PostHog with a different key in each environment connects them to a different project.
 
 The downside of using multiple projects is that you cannot directly copy actions, dashboards, insights, experiments, and other data created in PostHog between them. This means you must manually recreate them in each project if needed. However, it is possible to [copy feature flags across projects](/docs/feature-flags/multi-project-feature-flags).
 
@@ -47,7 +47,7 @@ To copy or update a flag in another project:
 1. Navigate to the [feature flag](https://us.posthog.com/feature_flags) you want to copy.
 2. Select the `Projects` tab.
 3. Select the project you want to copy the flag to.
-4. Click `Copy` or `Update` - this depends on whether the flag already exists in the target project.
+4. Click `Copy` or `Update` – this depends on whether the flag already exists in the target project.
 5. View the table at the bottom to see the newly created or updated flag.
 
 <ProductScreenshot
@@ -89,7 +89,7 @@ Another popular option is checking if the URL includes `localhost` or `127.0.0.1
 ```html
 <script>
 	  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-	  posthog.init('<ph_project_api_key>',{api_host:'<ph_client_api_host>', defaults:'<ph_posthog_js_defaults>'})
+	  posthog.init('<ph_project_token>',{api_host:'<ph_client_api_host>', defaults:'<ph_posthog_js_defaults>'})
 	  if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
 	    posthog.opt_out_capturing()
 	  }
@@ -102,7 +102,7 @@ Setting this up correctly prevents capturing non-production event data. It enabl
 
 The previous options capture data to separate projects or don’t capture data at all, but there is another option. This is to capture data normally and filter internal users from your analysis.
 
-PostHog provides a toggle to filter internal users (as defined by you) from your analysis and visualization. To set this up, go to [Project Settings](https://us.posthog.com/settings/project#internal-user-filtering) and scroll down to **Filter out internal and test users**. Here you can add filters to identify your internal users and events so that they can be removed from insights. This could include filters like: 
+PostHog provides a toggle to filter internal users (as defined by you) from your analysis and visualization. To set this up, go to your project's [Product Analytics settings](https://us.posthog.com/settings/project-product-analytics#internal-user-filtering) and scroll down to **Filter out internal and test users**. Here you can add filters to identify your internal users and events so that they can be removed from insights. This could include filters like: 
 
 - `distinct ID does not contain your domain`
 - `host is not localhost`

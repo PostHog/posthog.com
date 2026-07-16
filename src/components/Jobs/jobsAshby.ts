@@ -1,5 +1,3 @@
-import fetch from 'node-fetch'
-
 export async function findNewAshbyJobs() {
     const apiKey = process.env.GATSBY_SCRAPING_BEE_API_KEY
     const searchQuery = 'site:jobs.ashbyhq.com/* "product engineer"'

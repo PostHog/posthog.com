@@ -56,8 +56,18 @@ posthog.getFeatureFlag('key-for-your-boolean-flag')
 // Multivariant feature flags are returned as a string
 posthog.getFeatureFlag('key-for-your-multivariate-flag')
 
-// Optional fetch the payload returns 'JsonType' or undefined if not loaded yet or if there was a problem loading
-posthog.getFeatureFlagPayload('key-for-your-multivariate-flag')
+// Optional: fetch the payload (returns 'JsonType' or undefined if not loaded yet or if there was a problem loading)
+posthog.getFeatureFlagResult('key-for-your-multivariate-flag')?.payload
+```
+
+### Inspecting all feature flags
+
+You can inspect all currently loaded feature flags with `getAllFeatureFlags()`. It returns each flag's `key`, `enabled` state, `variant`, and `payload`, and does not send a `$feature_flag_called` event, so calling it won't affect your experiment results or flag usage analytics:
+
+```react-native
+for (const flag of posthog.getAllFeatureFlags()) {
+    console.log(flag.key, flag.enabled, flag.variant, flag.payload)
+}
 ```
 
 ### Ensuring flags are loaded before usage
@@ -119,7 +129,7 @@ if (lastActiveDate < migrationDate) {
 You can configure the `featureFlagsRequestTimeoutMs` parameter when initializing your PostHog client to set a flag request timeout. This helps prevent your code from being blocked in the case when PostHog's servers are too slow to respond. By default, this is set at 10 seconds.
 
 ```react-native
-export const posthog = new PostHog('<ph_project_api_key>', {
+export const posthog = new PostHog('<ph_project_token>', {
   // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'  
   host: '<ph_client_api_host>',
   featureFlagsRequestTimeoutMs: 10000 // Time in milliseconds. Default is 10000 (10 seconds).

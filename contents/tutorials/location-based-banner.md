@@ -26,7 +26,7 @@ cd banner
 npm i posthog-js
 ```
 
-After installing PostHog, create a `providers.js` file in the `app` folder which contains the PostHog initialization with your project API key and instance address (you can get both in [your project settings](https://app.posthog.com/project/settings))
+After installing PostHog, create a `providers.js` file in the `app` folder which contains the PostHog initialization with your project token and instance address (you can get both in [your project settings](https://app.posthog.com/project/settings))
 
 ```js
 // app/providers.js
@@ -37,7 +37,7 @@ import { useEffect } from 'react'
 
 export default function PHProvider({ children }) {
   useEffect(() => {
-    posthog.init('<ph_project_api_key>', {
+    posthog.init('<ph_project_token>', {
       api_host: '<ph_client_api_host>',
       defaults: '<ph_posthog_js_defaults>',
     })

@@ -41,7 +41,7 @@ It should be the same as [who we are building for](/handbook/who-we-are-building
 
 ## What kind of content do we produce?
 
-1. **Opinionated advice:** Articles where we offer a strong point of view on a topic that impacts our audience. Examples include [The Product-Market Fit Game](/founders/product-market-fit-game), [Burning money on paid ads for a dev tool](/founders/dev-marketing-paid-ads), and [How to design your company for speed](https://newsletter.posthog.com/p/how-to-design-your-company-for-speed) 
+1. **Opinionated advice:** Articles where we offer a strong point of view on a topic that impacts our audience. Examples include [The Product-Market Fit Game](/founders/product-market-fit-game), [Burning money on paid ads for a dev tool](/founders/dev-marketing-paid-ads), and [How to design your company for speed](https://newsletter.posthog.com/p/how-to-design-your-company-for-speed).
 
 2. **High intent SEO comparisons:** Articles for people actively considering PostHog, or searching for a product like ours. Examples include comparisons between [PostHog and competing products](/blog/tags/comparisons), guides on the [best alternatives to popular tools](/blog/best-heap-alternatives), and guides to [most popular tools in our segments](/blog/best-open-source-ab-testing-tools).
 
@@ -49,7 +49,7 @@ It should be the same as [who we are building for](/handbook/who-we-are-building
 
 4. **Engineering tutorials:** Guides on how to do specific things in PostHog. These can be for existing PostHog users, or aimed at potential users who are trying to solve a specific problem. Some, like [How to set up Python A/B testing](/tutorials/python-ab-testing) are SEO focused. Others focus on specific PostHog user pain points.
 
-5. **Newsletters:** Our [newsletter](/handbook/content/newsletter), [Product for Engineers](https://newsletter.posthog.com), is both a distribution channel and its own content category. Issues often curate or summarize our existing content, or that of others, into an easy-to-digest, snackable format.
+5. **Newsletters:** Our [newsletter](/handbook/content/newsletter), [build mode](https://newsletter.posthog.com), is both a distribution channel and its own content category. Issues often curate or summarize our existing content, or that of others, into an easy-to-digest, snackable format.
 
 ## How we work
 
@@ -80,32 +80,30 @@ Follow our [SEO best practices guide](/handbook/content/seo-guide) for more on s
 
 ### 2. LinkedIn
 
-Share a post using either your own account or the company account, but note that the company account will have dramatically less reach than your personal one. To post using the company account, use [Buffer](https://buffer.com/) (ask <TeamMember name="Andy Vandervell" /> to add you to it if you don't have access).
+Share a post using either your own account or the company account, but note that the company account will have dramatically less reach than your personal one. If you feel something needs to go out on from company account, tag <TeamMember name="Liam Graham" /> in `#team-editorial`.
 
 See our [LinkedIn posting advice](/handbook/content/linkedin) for more.
 
 ### 3. Twitter / X
 
-Again, use Buffer to post from the company account.
-
 Tips for writing a good post:
 
 - Write a brief summary of the post while sharing as much content as possible in it. [Good example](https://x.com/posthog/status/1851571551314825375).
 
-- Attach an image to the post (don't rely on the link's social graph preview). Again, you can use **Add entry** in the [changelog](/changelog/) to create a nice image.
+- Attach an image to the post (don't rely on the link's social graph preview). Again, you can use **Add entry** in the [changelog](/changelog) to create a nice image.
 
 - Do your best not to sound "corporate" or serious. Authenticity is appreciated on Twitter. Have fun with it!
 
 ### 4. Share internally
 
-Internal teams, especially sales, CS, and the relevant product team, can often make use of the content you write if they know about it. They can share it with customers and use the ideas and examples in their conversations. 
+Internal teams, especially sales, CS, and the relevant product team, can often make use of the content you write if they know about it. They can share it with customers and use the ideas and examples in their conversations.
 
 It's worth sharing in their Slack channels directly as they don't see everything we publish. Asking them to smash the like button, subscribe, and share with their friends and family is a good tactic too.
 
 ### 5. Paid ads + newsletters
 
-You can promote your post by buying sponsored slots in newsletters. <TeamMember name="Ian Vanagas" /> has a list of newsletters and booked slots we can use to promote content. See [sponsorships](/handbook/growth/marketing/open-source-sponsorship) for more.
+You can promote your post by buying sponsored slots in newsletters. <TeamMember name="Ian Vanagas" /> has a list of newsletters and booked slots we can use to promote content. See [sponsorships](/handbook/marketing/open-source-sponsorship) for more.
 
-If you want to run a paid ad campaign on Reddit, Google, or Twitter, see the [paid ads page](/handbook/growth/marketing/paid-ads).
+If you want to run a paid ad campaign on Reddit, Google, or Twitter, see the [paid ads page](/handbook/marketing/paid).
 
 It's a good idea to create an issue highlighting what you'd like to achieve in your campaign. Here's an [example](https://github.com/PostHog/posthog.com/issues/9646).

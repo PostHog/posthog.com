@@ -1,8 +1,3 @@
-import React from 'react'
-import { IconPiggyBank } from '@posthog/icons'
-import OSButton from 'components/OSButton'
-import Link from 'components/Link'
-
 export const posthog = {
     name: 'PostHog',
     key: 'posthog',
@@ -40,13 +35,13 @@ export const posthog = {
                 mobile_sdk_coverage: true,
                 profiling: false,
                 source_map_support: true,
-                stack_tracing: false,
+                stack_tracing: true,
                 user_device_context: true,
             },
             monitoring: {
                 features: {
                     cron_monitoring: false,
-                    distributed_tracing: false,
+                    distributed_tracing: 'Alpha',
                     release_tracking: true,
                     performance_monitoring: true,
                 },
@@ -65,6 +60,7 @@ export const posthog = {
                 free_tier: '5,000 web recordings, 2,500 mobile recordings',
             },
             features: {
+                ai_summaries: 'Beta',
                 canvas_recording: true,
                 chat_with_recordings: true,
                 conditional_recording: true,
@@ -115,11 +111,7 @@ export const posthog = {
                     performance_monitoring: true,
                     network_monitor: true,
                     dom_explorer: true,
-                },
-            },
-            ai: {
-                features: {
-                    ai_summaries: 'Beta',
+                    heatmaps: true,
                 },
             },
         },
@@ -150,8 +142,9 @@ export const posthog = {
             observability: {
                 features: {
                     metrics: false,
-                    traces: false,
+                    traces: 'Alpha',
                     infra_monitoring: false,
+                    alerting: false,
                 },
             },
             pricing: {
@@ -170,7 +163,7 @@ export const posthog = {
             features: {
                 actions: true,
                 advertising_analytics: 'Beta',
-                ai_analysis: false,
+                ai_analysis: true,
                 alerts: true,
                 anomaly_detection: true,
                 any_step_order: true,
@@ -192,15 +185,7 @@ export const posthog = {
                 historical_trends: true,
                 include_and_exclude_wildcards: true,
                 max_number_of_steps: '20',
-                monetization_analytics: (
-                    <>
-                        Via{' '}
-                        <Link to="/revenue-analytics" className="group !no-underline" state={{ newWindow: true }}>
-                            <IconPiggyBank className="size-4 inline-block text-green" />{' '}
-                            <span className="group-hover:!underline">Revenue Analytics</span>
-                        </Link>
-                    </>
-                ),
+                monetization_analytics: true,
                 predictive_insights: false,
                 private_insights: true,
                 project_level_permissions: true,
@@ -283,7 +268,7 @@ export const posthog = {
             },
         },
         product_tours: {
-            available: 'Private alpha',
+            available: false,
         },
         feature_flags: {
             available: true,
@@ -459,7 +444,7 @@ export const posthog = {
                 popover: true,
                 rating: true,
                 sdk_support: true,
-                sentiment_analysis: false,
+                sentiment_analysis: true,
                 slack_integration: true,
                 survey_templates: true,
                 target_by_feature_flag: true,
@@ -524,27 +509,89 @@ export const posthog = {
                 built_in_analytics: true,
             },
         },
-        llm_analytics: {
-            available: true,
-            features: {
-                alerting: true,
-                cost_tracking: true,
-                generation_tracking: true,
-                latency_tracking: true,
-                prompt_evaluations: true,
-                prompt_playground: true,
-                token_tracking: true,
-                trace_visualization: true,
-                error_tracking: true,
-                clustering: true,
-                system_prompts: true,
-                trace_summarization: true,
-                llm_translation: true,
-            },
+ai_observability: {
+    available: true,
+    features: {
+        alerting: true,
+        cost_tracking: true,
+        generation_tracking: true,
+        latency_tracking: true,
+        prompt_evaluations: true,
+        prompt_playground: true,
+        token_tracking: true,
+        trace_visualization: true,
+        error_tracking: true,
+        clustering: true,
+        system_prompts: true,
+        trace_summarization: true,
+        llm_translation: true,
+        sentiment_classification: 'Beta',
+        privacy_mode: true,
+        agent_tracing: 'Basic',
+        prompt_management: 'Beta',
+        evaluation_datasets: false,
+        human_annotation: false,
+        session_replay: true,
+        product_analytics: true,
+        ai_gateway_proxy: false,
+    },
+    tracing: {
+        features: {
+            hierarchical_traces: true,
+            custom_spans: true,
+            tool_call_tracking: true,
+            rag_retrieval_tracking: true,
+            session_grouping: true,
+            opentelemetry_support: true,
+            async_ingestion: true,
+            multi_model_support: true,
+            session_replay_link: true,
+            user_profile_context: true,
+            sql_queries_on_traces: true,
+            trace_explorer_ui: 'Basic',
+        },
+    },
+    prompt_management: {
+        features: {
+            prompt_versioning: 'Beta',
+            template_variables: 'Beta',
+            prompt_deployment_api: 'Beta',
+            version_comparison: 'Beta',
+            prompt_labels: false,
+            prompt_playground: true,
+            composable_prompts: false,
+            mcp_server_for_prompts: 'Beta',
+            ab_test_prompt_versions: 'Beta',
+        },
+    },
+    evaluations: {
+        features: {
+            llm_as_a_judge: true,
+            code_evaluators: true,
+            annotation_queues: false,
+            datasets: false,
+            experiment_runs: false,
+            ab_experiments_on_product_metrics: true,
+        },
+    },
+    costs: {
+        features: {
+            token_counting: true,
+            cost_calculation: true,
+            cost_by_model: true,
+            cost_trends: true,
+            cost_by_user: true,
+            cost_by_feature: true,
+            cost_by_cohort: true,
+        },
+    },
         },
         workflows: {
             available: true,
             features: {
+                visual_builder: true,
+                ai_assistant: false,
+                campaign_tracking: true,
                 real_time_triggers: true,
                 email_editor: true,
                 cohort_targeting: true,
@@ -557,6 +604,15 @@ export const posthog = {
                 experiment_triggers: true,
                 webhook_actions: true,
                 run_based_pricing: true,
+            },
+            channels: {
+                features: {
+                    email: true,
+                    sms: true,
+                    push: false,
+                    webhooks: true,
+                    whatsapp: false,
+                },
             },
         },
         data_warehouse: {
@@ -615,11 +671,30 @@ export const posthog = {
                 web_vitals_reporting: false,
             },
         },
+        endpoints: {
+            available: true,
+            features: {
+                data_source: 'PostHog product analytics data',
+                predefined_queries: true,
+                apis_from_product_insights: true,
+                sql_based_query_support: true,
+                materialized_queries: true,
+                stable_named_api_endpoints: true,
+                built_in_caching: true,
+                higher_limits_predefined_queries: true,
+                embedded_analytics: true,
+                product_analytics_context: true,
+                real_time_analytics: false,
+                general_purpose_analytics_db: false,
+                no_separate_ingestion: true,
+            },
+        },
     },
     platform: {
         deployment: {
             eu_hosting: true,
             open_source: true,
+            open_core: true,
             reverse_proxy: true,
             managed_reverse_proxy: 'Scale',
             self_host: true,
@@ -704,6 +779,7 @@ export const posthog = {
             cms: false,
             notebooks: true,
             project_management_tools: false,
+            ai_assistant: true,
         },
         security: {
             bot_blocking: true,
@@ -717,6 +793,7 @@ export const posthog = {
             history_audit_logs: 'Scale',
             role_based_access_control: 'Enterprise',
             saml_sso: 'Scale',
+            siem: false,
             soc2_certified: true,
             security_certification: 'SOC 2 Type II',
             two_factor_auth: true,
@@ -726,4 +803,4 @@ export const posthog = {
     pricing: {
         model: 'Usage-based',
     },
-}
+    }

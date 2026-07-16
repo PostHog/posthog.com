@@ -46,6 +46,7 @@ export default function PostHogOnPostHogSlide({ productData }: PostHogOnPostHogS
     const [isThumbnail, setIsThumbnail] = useState(false)
     const [currentTime, setCurrentTime] = useState(0)
     const mainPlayerRef = useRef<any>(null)
+    const rootRef = useRef<HTMLDivElement>(null)
     const [isPortraitMode, setIsPortraitMode] = useState(false)
 
     // Add context access
@@ -94,8 +95,7 @@ export default function PostHogOnPostHogSlide({ productData }: PostHogOnPostHogS
     useEffect(() => {
         const checkThumbnailMode = () => {
             // Get the root element of this component using the ID we set
-            const rootElement = document.getElementById(`posthog-slide-${productData.videos?.overview?.wistia}`)
-
+            const rootElement = rootRef.current
             if (rootElement) {
                 const rect = rootElement.getBoundingClientRect()
 
@@ -240,7 +240,7 @@ export default function PostHogOnPostHogSlide({ productData }: PostHogOnPostHogS
     }
 
     return (
-        <div className="h-full relative" id={`posthog-slide-${productData.videos?.overview?.wistia}`}>
+        <div className="h-full relative" ref={rootRef}>
             {/* Regular content */}
             <div className="h-full bg-gradient-to-b from-[#08080A] to-[#737385] text-white">
                 <div className="mb-8 pt-8 px-8">
