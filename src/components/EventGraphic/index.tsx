@@ -46,13 +46,17 @@ const EventGraphic = forwardRef<HTMLDivElement, EventGraphicProps>(function Even
                     darkText ? 'text-black' : 'text-white'
                 }`}
             >
-                <div className="absolute right-[6%] top-[31%] aspect-square w-[46%] overflow-hidden rounded-full border-[0.75cqw] border-white bg-tan shadow-xl">
-                    <img
-                        src={speaker?.avatarUrl || DEFAULT_HEDGEHOG}
-                        alt={speaker?.name || 'Max the hedgehog'}
-                        crossOrigin="anonymous"
-                        className="absolute inset-0 size-full object-cover object-top"
-                    />
+                <div className="absolute right-[6%] top-[31%] aspect-square w-[46%]">
+                    <div className="absolute inset-0 rounded-full border-[0.75cqw] border-white bg-tan shadow-xl" />
+                    {/* Clip only below the circle's midline so illustrations break out of the top instead of being cropped */}
+                    <div className="absolute inset-x-0 -top-[18%] bottom-0 overflow-hidden rounded-b-full">
+                        <img
+                            src={speaker?.avatarUrl || DEFAULT_HEDGEHOG}
+                            alt={speaker?.name || 'Max the hedgehog'}
+                            crossOrigin="anonymous"
+                            className="absolute bottom-0 left-1/2 w-[108%] max-w-none -translate-x-1/2"
+                        />
+                    </div>
                 </div>
                 <div className="absolute inset-0 flex flex-col p-[6%]">
                     <h3
