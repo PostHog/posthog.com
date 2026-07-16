@@ -46,6 +46,29 @@ For example:
 - If you choose **sum of revenue**, we calculate total revenue per user, then take the mean across users.
 - If you select **average revenue**, we first compute each user's average (total revenue / number of events), then average those values across users.
 
+#### Threshold
+
+You can set an optional threshold on a mean metric to convert it into a binary "reached or didn't reach" outcome. When a threshold is set, PostHog reports the percentage of exposed users whose per-user value reaches or exceeds the threshold, rather than the average value across users.
+
+Thresholds are available for **sum** and **count (total)** math types, where the per-user value is an accumulation.
+
+How it works:
+
+1. Each user's accumulated value (sum or count) is compared against the threshold.
+2. Users who reach or exceed the threshold are marked as 1 (success), others as 0.
+3. The metric is analyzed as a proportion using the same statistical methods as funnel metrics.
+
+This is useful for measuring activation and usage milestones, such as:
+
+- **Activation threshold** - What percentage of users reached 100 words dictated
+- **Usage milestone** - What percentage of users fired 2,000 events
+- **Spend threshold** - What percentage of users reached a cumulative spend of $50
+
+<CalloutBox icon="IconInfo" title="Threshold limitations" type="fyi">
+
+Thresholds can't be combined with [outlier handling](#outlier-handling) (Winsorization), since the value is already binary. [CUPED](/docs/experiments/cuped) variance reduction is also automatically disabled for threshold metrics.
+
+</CalloutBox>
 ### Ratio
 
 Use ratio metrics to calculate the relationship between two different metrics. This is useful when you want to measure metrics like revenue per user, items per order, or conversion rate with a custom denominator (different from the users exposed to the experiment).
@@ -98,6 +121,12 @@ Common use cases:
 You can limit the impact of extreme values by clamping metric data at specified percentile thresholds using configurable lower and upper bounds. Values below the lower bound are replaced with the lower bound value, and values above the upper bound are replaced with the upper bound value. No data is excluded, and all users remain in the calculation.
 
 This technique is commonly known as **Winsorization** and is especially useful for metrics with highly skewed distributions, such as revenue or total event counts, where a small subset of users can produce unusually high values that distort overall results.
+
+<CalloutBox icon="IconInfo" title="Not available with thresholds" type="fyi">
+
+Outlier handling can't be used on mean metrics that have a [threshold](#threshold) set. Thresholds collapse per-user values into a binary outcome (0 or 1), so clamping percentiles has no effect.
+
+</CalloutBox>
 
 ### Ignoring zeros in percentile calculations
 
