@@ -27,6 +27,8 @@ const BOT_USER_AGENT =
     /bot|crawler|spider|slurp|googlebot|bingbot|yandex|duckduckbot|baiduspider|facebookexternalhit|linkedinbot|twitterbot|discordbot|slackbot|applebot|semrush|ahref|headlesschrome|phantomjs/i
 
 const COOKIE_MAX_AGE_SECONDS = 60 * 60 * 24 * 90
+const BYPASS_VARIANT_COOKIE = 'ph_site_variant_bypass'
+const BYPASS_COOKIE_MAX_AGE_SECONDS = 60 * 60 * 4
 
 export function getSiteExperimentConfig(): SiteExperimentConfig | null {
     const projectToken = process.env.GATSBY_POSTHOG_API_KEY
@@ -100,7 +102,11 @@ export function getDistinctId(request: Request, projectToken: string): string {
     return crypto.randomUUID()
 }
 
-export function getBypassVariant(request: Request, config: SiteExperimentConfig): SiteExperimentVariant | null {
+function shouldClearBypassCookie(request: Request): boolean {
+    return new URL(request.url).searchParams.has('ph_site_clear_bypass')
+}
+
+function getBypassVariantFromUrl(request: Request, config: SiteExperimentConfig): SiteExperimentVariant | null {
     const url = new URL(request.url)
     const variant = url.searchParams.get('ph_site_variant')
     if (variant !== 'control' && variant !== 'test') {
@@ -115,6 +121,53 @@ export function getBypassVariant(request: Request, config: SiteExperimentConfig)
     }
 
     return variant
+}
+
+function getBypassVariantFromCookie(request: Request): SiteExperimentVariant | null {
+    const value = getCookie(request, BYPASS_VARIANT_COOKIE)
+    if (value === 'control' || value === 'test') {
+        return value
+    }
+
+    return null
+}
+
+export function getBypassVariant(request: Request, config: SiteExperimentConfig): SiteExperimentVariant | null {
+    if (shouldClearBypassCookie(request)) {
+        return null
+    }
+
+    const urlBypass = getBypassVariantFromUrl(request, config)
+    if (urlBypass) {
+        return urlBypass
+    }
+
+    return getBypassVariantFromCookie(request)
+}
+
+function clearBypassVariantCookie(secure: boolean): string {
+    const parts = [`${BYPASS_VARIANT_COOKIE}=`, 'Path=/', 'Max-Age=0', 'SameSite=Lax']
+
+    if (secure) {
+        parts.push('Secure')
+    }
+
+    return parts.join('; ')
+}
+
+function buildBypassVariantCookie(variant: SiteExperimentVariant, secure: boolean): string {
+    const parts = [
+        `${BYPASS_VARIANT_COOKIE}=${variant}`,
+        'Path=/',
+        `Max-Age=${BYPASS_COOKIE_MAX_AGE_SECONDS}`,
+        'SameSite=Lax',
+    ]
+
+    if (secure) {
+        parts.push('Secure')
+    }
+
+    return parts.join('; ')
 }
 
 export function normalizeFlagVariant(
@@ -221,6 +274,15 @@ export function appendVariantCookies(
 ): Response {
     const secure = new URL(request.url).protocol === 'https:'
     const cookies: string[] = []
+
+    if (shouldClearBypassCookie(request)) {
+        cookies.push(clearBypassVariantCookie(secure))
+    } else {
+        const urlBypass = getBypassVariantFromUrl(request, config)
+        if (urlBypass) {
+            cookies.push(buildBypassVariantCookie(urlBypass, secure))
+        }
+    }
 
     const posthogCookie = getCookie(request, getPostHogCookieKey(config.projectToken))
     if (!posthogCookie) {
