@@ -41,9 +41,8 @@ const LIGHT_BACKGROUNDS = ['lime-green', 'teal', 'yellow', 'orange']
 
 const DEFAULT_BACKGROUND = 'yellow'
 
-// Same fallback hedgehog used for profiles without an avatar (see TeamMember)
-const DEFAULT_HEDGEHOG =
-    'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/hog-9.png'
+// Fallback artwork for events without a speaker (or speakers without an avatar)
+const DEFAULT_HEDGEHOG = 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/hogzilla_73b822a689.png'
 
 const Arrow = ({ className }: { className?: string }) => (
     <svg viewBox="0 0 62 44" fill="none" aria-hidden="true" className={className}>

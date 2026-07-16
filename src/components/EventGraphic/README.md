@@ -6,7 +6,7 @@ A brand-templated promotional graphic for events on `/events`. It renders a squa
 
 The template follows the [visual identity guidelines](/handbook/brand/visual-identity):
 
-- **Headline** – the event's speaker topic (or the event name) set in **Squeak**, bold, uppercase (Squeak's only permitted usage). Long titles automatically step down a size.
+- **Headline** – the event name set in **Squeak**, bold, uppercase (Squeak's only permitted usage). Long titles automatically step down a size.
 - **Supporting text** – date ("Tuesday, March 17") and city/country (or "Online") set in **Open Runde** (`font-rounded`).
 - **Background** – a solid fill using the **first speaker's favorite color** from their community profile (one of the 12 safelisted profile color tokens). Falls back to `yellow`. Text automatically switches between black and white based on the background's lightness (`LIGHT_BACKGROUNDS`).
 - **Headshot** – the first speaker's community profile avatar (the hand-drawn portrait) in a white-ringed circle, with their name in Squeak, their role in Open Runde, and a hand-drawn-style arrow pointing at the portrait. Events without speakers get the default hedgehog artwork instead.
@@ -36,7 +36,7 @@ Text and the inline SVG logo stay crisp at any export size because `html-to-imag
 
 | Prop        | Type                                                                | Description                                                             |
 | ----------- | ------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| `title`     | `string`                                                             | Headline. Use the speaker topic when set, otherwise the event name.     |
+| `title`     | `string`                                                             | Headline. Use the event name.                                           |
 | `date`      | `string?`                                                            | Event date (`YYYY-MM-DD` or ISO datetime).                              |
 | `location`  | `string?`                                                            | City/country label, e.g. "Dublin, Ireland".                            |
 | `online`    | `boolean?`                                                           | When true, shows "Online" instead of `location`.                       |

@@ -564,7 +564,7 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
                     </p>
                     <EventGraphic
                         ref={graphicRef}
-                        title={formik.values.speakerTopic || formik.values.name || 'Your event name'}
+                        title={formik.values.name || 'Your event name'}
                         date={formik.values.date}
                         location={formik.values.locationLabel}
                         online={formik.values.online}

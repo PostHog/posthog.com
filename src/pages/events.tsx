@@ -81,7 +81,7 @@ export const transformStrapiEvent = (strapiEvent: any): Event => {
 
 // The generated graphic stands in as the event's photo wherever none has been uploaded
 const eventGraphicProps = (event: Event): EventGraphicProps => ({
-    title: event.speakerTopic || event.name,
+    title: event.name,
     date: event.date,
     location: event.location?.label,
     online: event.online,
