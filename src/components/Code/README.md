@@ -38,6 +38,9 @@ Five-step "old way" flow diagram (Analyze usage -> Decide what to build -> Promp
 ### `DottedConnection`
 SVG dotted curved line connecting two elements (used between the "signals" word and the SignalsCallout box). Recalculates on resize. Desktop only (`@2xl`).
 
+### `SteerQueueDemo`
+Interactive "steer vs. queue" explainer. A mode toggle (Steer / Queue) switches between the two ways of directing a running agent, rendered inside a full-width recreation of the PostHog Code task chat window (message stack + composer) — showing how a message either interrupts the running agent (steer) or stacks up to run after it (queue). Self-contained state, no props.
+
 ## Dependencies
 - `rough-notation` (npm package)
 - `@posthog/icons`

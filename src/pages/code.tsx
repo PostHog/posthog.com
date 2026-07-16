@@ -1,33 +1,41 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import SEO, { buildProductStructuredData } from 'components/seo'
 import Editor from 'components/Editor'
 import {
+    IconAI,
     IconArrowUpRight,
+    IconBrackets,
     IconBrowser,
     IconCheck,
     IconColumns,
     IconDashboard,
+    IconDocument,
     IconFlask,
+    IconGitBranch,
     IconGraph,
     IconList,
+    IconMessage,
+    IconRewindPlay,
     IconToggle,
     IconTrends,
     IconWarning,
 } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import { Accordion } from 'components/RadixUI/Accordion'
+import Modal from 'components/RadixUI/Modal'
+import Tooltip from 'components/RadixUI/Tooltip'
+import SlotMachineText from 'components/SlotMachineText'
+import posthogIcon from '../images/posthog-icon-white.svg'
 import { LOGOS, type LogoKey } from 'constants/logos'
 import TabbedCarousel from 'components/TabbedCarousel'
-import OSTabs from 'components/OSTabs'
 import type { TabbedCarouselTab } from 'components/TabbedCarousel'
 import { ChoppyReveal } from 'components/Code/ChoppyReveal'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import { IconPop } from 'components/Code/IconPop'
 import { SignalsCallout } from 'components/Code/SignalsCallout'
-import { FlowDiagram } from 'components/Code/FlowDiagram'
+import { SteerQueueDemo } from 'components/Code/SteerQueueDemo'
 import { DottedConnection } from 'components/Code/DottedConnection'
-import { StickerTombstone } from 'components/Stickers/Stickers'
-import { ZoomImage } from 'components/ZoomImage'
+import { StickerTombstone, StickerCoffee, StickerPullRequest } from 'components/Stickers/Stickers'
 import CloudinaryImage from 'components/CloudinaryImage'
 import WistiaEmbed from 'components/WistiaEmbed'
 import Link from 'components/Link'
@@ -79,296 +87,23 @@ function KeyBadge({ children }: { children: React.ReactNode }) {
     )
 }
 
-// ─────────────────────────────────────────────
-// AI Model badge with connection point
-// ─────────────────────────────────────────────
-
-function AIModelBadge({ innerRef }: { innerRef: React.RefObject<HTMLSpanElement> }) {
+// "Let [icon] PostHog {analyze|debug|…|code}" — the animated wordmark, reused as the
+// header brand and as the punch line at the end of the opening narrative.
+function LetPostHogScroller({ className = 'text-2xl @xl:text-3xl font-bold tracking-tight' }: { className?: string }) {
     return (
-        <span
-            ref={innerRef}
-            className="inline-flex items-center gap-1.5 border border-primary rounded px-2 py-1 text-xs bg-accent align-middle ml-6 mt-0 mb-2"
-        >
-            <span className="font-semibold">Supports</span>
-            <span className="text-secondary">Fable, Haiku, Opus, Sonnet, GPT 5.4, GPT 5.5</span>
-        </span>
-    )
-}
-
-function PostHogCodeLogo() {
-    return (
-        <>
-            <svg viewBox="0 0 229 28" fill="none" xmlns="http://www.w3.org/2000/svg" className="dark:hidden h-6">
-                <g clipPath="url(#clip0_216_389)">
-                    <path
-                        d="M50.01 23.3376L49.6723 23.2968C48.6653 23.1688 47.7281 22.7031 47.0179 21.9696L33.2856 7.74258V28.0004H48.9971C50.4757 28.0004 51.669 26.8012 51.669 25.3284V25.2237C51.669 24.2632 50.953 23.454 50.0041 23.3376H50.01ZM39.2 23.5471C38.2162 23.5471 37.4187 22.7496 37.4187 21.7659C37.4187 20.7821 38.2162 19.9846 39.2 19.9846C40.1838 19.9846 40.9813 20.7821 40.9813 21.7659C40.9813 22.7496 40.1838 23.5471 39.2 23.5471Z"
-                        fill="#111111"
-                    />
-                    <path d="M21.9692 28.0003H31.0154L21.9692 18.6922V28.0003Z" fill="url(#paint0_linear_216_389)" />
-                    <path
-                        d="M21.9692 7.64934V18.6922L31.0154 28.0003H33.2915V19.29L21.9692 7.64934Z"
-                        fill="url(#paint1_linear_216_389)"
-                    />
-                    <path
-                        d="M33.2915 19.2975V7.74242L26.5563 0.81519C24.8857 -0.907887 21.9692 0.279639 21.9692 2.67798V7.65L33.2915 19.2917V19.2975Z"
-                        fill="url(#paint2_linear_216_389)"
-                    />
-                    <path d="M10.7402 28.0003H19.6001L10.7402 18.733V28.0003Z" fill="url(#paint3_linear_216_389)" />
-                    <path
-                        d="M10.7402 7.14297V18.733L19.6001 28.0004H21.9693V18.6922L10.7402 7.14297Z"
-                        fill="url(#paint4_linear_216_389)"
-                    />
-                    <path
-                        d="M21.9693 7.64929L15.3273 0.81519C13.6567 -0.907887 10.7402 0.279639 10.7402 2.67798V7.15L21.9693 18.6921V7.64929Z"
-                        fill="url(#paint5_linear_216_389)"
-                    />
-                    <path
-                        d="M0 25.4097C0 26.8403 1.15978 28.0001 2.59044 28.0001H8.94531L0 18.18V25.4097Z"
-                        fill="url(#paint6_linear_216_389)"
-                    />
-                    <path
-                        d="M10.74 18.725V28.0001H8.94141L0 18.1836V7.50948L10.74 18.725Z"
-                        fill="url(#paint7_linear_216_389)"
-                    />
-                    <path
-                        d="M10.7401 7.14294L4.58711 0.815289C2.91642 -0.907788 0 0.279738 0 2.67808V7.50968L10.7401 18.733V7.14294Z"
-                        fill="url(#paint8_linear_216_389)"
-                    />
-                </g>
-                <path
-                    d="M64.9072 22.8764C64.2266 22.8764 63.6748 22.3246 63.6748 21.644V5.23239C63.6748 4.55176 64.2266 4 64.9072 4H71.495C75.4051 4 77.913 6.3191 77.913 9.90562C77.913 13.4921 75.4051 15.8112 71.495 15.8112H67.9355V21.644C67.9355 22.3246 67.3837 22.8764 66.7031 22.8764H64.9072ZM67.9355 10.9384C67.9355 11.619 68.4872 12.1708 69.1679 12.1708H71.0636C72.6815 12.1708 73.6523 11.3079 73.6523 9.90562C73.6523 8.50337 72.6815 7.64045 71.0636 7.64045H69.1679C68.4872 7.64045 67.9355 8.19221 67.9355 8.87284V10.9384Z"
-                    fill="#111111"
-                />
-                <path
-                    d="M84.8122 23.0921C80.6054 23.0921 77.6391 20.1258 77.6391 16.0809C77.6391 12.036 80.6054 9.06966 84.8122 9.06966C88.965 9.06966 91.9852 12.036 91.9852 16.0809C91.9852 20.1258 88.965 23.0921 84.8122 23.0921ZM81.5762 16.0809C81.5762 18.2382 82.8706 19.7213 84.8122 19.7213C86.7268 19.7213 88.0212 18.2382 88.0212 16.0809C88.0212 13.9236 86.7268 12.4404 84.8122 12.4404C82.8706 12.4404 81.5762 13.9236 81.5762 16.0809Z"
-                    fill="#111111"
-                />
-                <path
-                    d="M97.9945 23.0921C95.2621 23.0921 93.3898 21.7197 92.4229 20.0903C92.0858 19.5223 92.4126 18.831 93.0279 18.5911L93.8118 18.2855C94.5013 18.0167 95.2589 18.4413 95.7228 19.0179C96.243 19.6646 97.0241 20.0989 97.9945 20.0989C99.0462 20.0989 99.7473 19.5865 99.7473 18.8315C99.7473 16.7011 92.5473 18.1303 92.5473 12.9798C92.5473 10.8494 94.408 9.06966 97.4012 9.06966C99.6737 9.06966 101.621 9.97222 102.594 11.3786C102.957 11.9037 102.639 12.5743 102.049 12.8191L101.19 13.1758C100.509 13.4589 99.7411 13.0353 99.1924 12.5414C98.7094 12.1067 98.0884 11.9011 97.536 11.9011C96.6462 11.9011 96.0259 12.2787 96.0259 12.8719C96.0259 15.0292 103.334 13.2494 103.334 18.7506C103.334 21.0966 101.176 23.0921 97.9945 23.0921Z"
-                    fill="#111111"
-                />
-                <path
-                    d="M112.699 21.7805C112.744 22.3451 112.399 22.8782 111.841 22.9786C111.438 23.0513 111.009 23.0921 110.564 23.0921C107.624 23.0921 105.386 21.5281 105.386 18.2382V12.5753H104.461C103.78 12.5753 103.229 12.0235 103.229 11.3429V10.5178C103.229 9.83715 103.78 9.28539 104.461 9.28539H105.386V6.5807C105.386 5.90007 105.938 5.34832 106.618 5.34832H108.118C108.798 5.34832 109.35 5.90007 109.35 6.5807V9.28539H111.408C112.088 9.28539 112.64 9.83715 112.64 10.5178V11.3429C112.64 12.0235 112.088 12.5753 111.408 12.5753H109.35V17.7258C109.35 18.9393 109.997 19.6405 110.968 19.6405C111.717 19.6405 112.571 20.1504 112.63 20.8973L112.699 21.7805Z"
-                    fill="#111111"
-                />
-                <path
-                    d="M125.787 5.23239C125.787 4.55176 126.339 4 127.019 4H128.842C129.523 4 130.074 4.55176 130.074 5.23239V21.644C130.074 22.3246 129.523 22.8764 128.842 22.8764H127.019C126.339 22.8764 125.787 22.3246 125.787 21.644V16.2077C125.787 15.527 125.235 14.9753 124.554 14.9753H119.523C118.842 14.9753 118.29 15.527 118.29 16.2077V21.644C118.29 22.3246 117.738 22.8764 117.058 22.8764H115.262C114.581 22.8764 114.03 22.3246 114.03 21.644V5.23239C114.03 4.55176 114.581 4 115.262 4H117.058C117.738 4 118.29 4.55176 118.29 5.23239V10.1024C118.29 10.7831 118.842 11.3348 119.523 11.3348H124.554C125.235 11.3348 125.787 10.7831 125.787 10.1024V5.23239Z"
-                    fill="#111111"
-                />
-                <path
-                    d="M138.723 23.0921C134.516 23.0921 131.55 20.1258 131.55 16.0809C131.55 12.036 134.516 9.06966 138.723 9.06966C142.875 9.06966 145.896 12.036 145.896 16.0809C145.896 20.1258 142.875 23.0921 138.723 23.0921ZM135.487 16.0809C135.487 18.2382 136.781 19.7213 138.723 19.7213C140.637 19.7213 141.932 18.2382 141.932 16.0809C141.932 13.9236 140.637 12.4404 138.723 12.4404C136.781 12.4404 135.487 13.9236 135.487 16.0809Z"
-                    fill="#111111"
-                />
-                <path
-                    d="M152.738 22.4449C148.882 22.4449 146.509 19.8562 146.509 15.7573C146.509 11.6584 148.882 9.06966 152.657 9.06966C154.248 9.06966 155.488 9.60899 156.216 10.4449C156.216 9.80454 156.736 9.28539 157.376 9.28539H158.894C159.575 9.28539 160.126 9.83715 160.126 10.5178V21.9056C160.126 25.5461 157.349 28 153.169 28C150.514 28 148.254 26.7986 147.296 24.9126C146.98 24.292 147.455 23.6231 148.143 23.5154L149.298 23.3343C149.964 23.2299 150.583 23.7336 151.081 24.1882C151.583 24.6467 152.344 24.8989 153.169 24.8989C155.03 24.8989 156.243 23.8472 156.243 22.3371V21.0427C155.542 21.9326 154.221 22.4449 152.738 22.4449ZM150.365 15.7573C150.365 17.7798 151.551 19.0742 153.385 19.0742C155.246 19.0742 156.432 17.7798 156.432 15.7573C156.432 13.7348 155.246 12.4404 153.385 12.4404C151.551 12.4404 150.365 13.7348 150.365 15.7573Z"
-                    fill="#111111"
-                />
-                <path
-                    d="M215.662 16.5474C215.662 13.3467 217.608 9.88989 222.064 9.88989C226.724 9.88989 228.695 13.3467 228.695 16.2145C228.695 16.4485 228.69 16.7038 228.682 16.9391C228.668 17.3267 228.347 17.6228 227.959 17.6228H220.313C219.832 17.6228 219.469 18.0766 219.684 18.5067C220.195 19.5304 221.134 20.0809 222.396 20.0809C223.372 20.0809 224.154 19.739 224.596 19.1003C224.833 18.7583 225.233 18.5042 225.634 18.6119L227.682 19.161C228.095 19.2716 228.337 19.7077 228.15 20.0916C227.182 22.0751 225.046 23.2048 222.294 23.2048C217.839 23.2048 215.662 19.7481 215.662 16.5474ZM219.744 14.0682C219.525 14.4999 219.891 14.9598 220.375 14.9598H223.848C224.291 14.9598 224.65 14.5694 224.49 14.1563C224.148 13.2743 223.363 12.6809 222.064 12.6809C221.006 12.6809 220.213 13.1474 219.744 14.0682Z"
-                    fill="black"
-                />
-                <path
-                    d="M206.433 23.2049C202.644 23.2049 200.365 20.5931 200.365 16.5474C200.365 12.5017 202.644 9.88992 206.382 9.88992C207.039 9.88992 207.632 9.98956 208.153 10.1698C208.818 10.4 209.864 9.93698 209.864 9.23333V5.62122C209.864 5.207 210.2 4.87122 210.614 4.87122H212.878C213.293 4.87122 213.628 5.207 213.628 5.62122V22.25C213.628 22.6642 213.293 23 212.878 23H210.177C210.004 23 209.864 22.8599 209.864 22.6872C209.864 22.3837 209.424 22.2183 209.178 22.3959C208.467 22.9092 207.491 23.2049 206.433 23.2049ZM204.026 16.5474C204.026 18.6214 205.255 20.0041 207.048 20.0041C208.891 20.0041 210.095 18.6214 210.095 16.5474C210.095 14.4733 208.891 13.0906 207.048 13.0906C205.255 13.0906 204.026 14.4733 204.026 16.5474Z"
-                    fill="black"
-                />
-                <path
-                    d="M192.204 23.2048C188.209 23.2048 185.393 20.3882 185.393 16.5474C185.393 12.7065 188.209 9.88989 192.204 9.88989C196.147 9.88989 199.015 12.7065 199.015 16.5474C199.015 20.3882 196.147 23.2048 192.204 23.2048ZM189.131 16.5474C189.131 18.5958 190.36 20.0041 192.204 20.0041C194.022 20.0041 195.251 18.5958 195.251 16.5474C195.251 14.4989 194.022 13.0906 192.204 13.0906C190.36 13.0906 189.131 14.4989 189.131 16.5474Z"
-                    fill="black"
-                />
-                <path
-                    d="M175.783 23.2049C170.918 23.2049 166.77 20.081 166.77 14.038C166.77 7.9951 170.995 4.87122 175.783 4.87122C179.981 4.87122 182.988 6.98386 183.772 10.3037C183.863 10.687 183.601 11.0538 183.216 11.1348L180.628 11.6787C180.217 11.7651 179.822 11.494 179.681 11.0984C179.072 9.37953 177.583 8.32798 175.758 8.32798C173.043 8.32798 170.841 10.2996 170.841 14.038C170.841 17.7765 173.018 19.7225 175.758 19.7225C177.578 19.7225 178.956 18.8174 179.557 17.3246C179.713 16.937 180.111 16.674 180.518 16.7663L183.11 17.353C183.517 17.4452 183.774 17.8539 183.639 18.2489C182.577 21.3676 179.711 23.2049 175.783 23.2049Z"
-                    fill="black"
-                />
-                <defs>
-                    <linearGradient
-                        id="paint0_linear_216_389"
-                        x1="22.0706"
-                        y1="18.9105"
-                        x2="30.9817"
-                        y2="27.977"
-                        gradientUnits="userSpaceOnUse"
-                    >
-                        <stop stopColor="#FF9500" />
-                        <stop offset="1" stopColor="#F8AA00" />
-                    </linearGradient>
-                    <linearGradient
-                        id="paint1_linear_216_389"
-                        x1="21.9176"
-                        y1="7.96688"
-                        x2="33.3267"
-                        y2="27.9328"
-                        gradientUnits="userSpaceOnUse"
-                    >
-                        <stop stopColor="#FFB700" />
-                        <stop offset="1" stopColor="#F9AA01" />
-                    </linearGradient>
-                    <linearGradient
-                        id="paint2_linear_216_389"
-                        x1="21.9176"
-                        y1="1.96209"
-                        x2="33.3267"
-                        y2="18.7755"
-                        gradientUnits="userSpaceOnUse"
-                    >
-                        <stop stopColor="#FFD849" />
-                        <stop offset="0.955762" stopColor="#FBAE01" />
-                    </linearGradient>
-                    <linearGradient
-                        id="paint3_linear_216_389"
-                        x1="10.3585"
-                        y1="19.6762"
-                        x2="16.6306"
-                        y2="27.9771"
-                        gradientUnits="userSpaceOnUse"
-                    >
-                        <stop stopColor="#C42C00" />
-                        <stop offset="1" stopColor="#D63600" />
-                    </linearGradient>
-                    <linearGradient
-                        id="paint4_linear_216_389"
-                        x1="10.6587"
-                        y1="7.36639"
-                        x2="22.6683"
-                        y2="28.233"
-                        gradientUnits="userSpaceOnUse"
-                    >
-                        <stop stopColor="#EF3C00" />
-                        <stop offset="1" stopColor="#D63601" />
-                    </linearGradient>
-                    <linearGradient
-                        id="paint5_linear_216_389"
-                        x1="10.7763"
-                        y1="7.25343"
-                        x2="21.9669"
-                        y2="18.6514"
-                        gradientUnits="userSpaceOnUse"
-                    >
-                        <stop stopColor="#FF651E" />
-                        <stop offset="1" stopColor="#E4400A" />
-                    </linearGradient>
-                    <linearGradient
-                        id="paint6_linear_216_389"
-                        x1="8.85508e-07"
-                        y1="18.94"
-                        x2="9.22196"
-                        y2="28.2656"
-                        gradientUnits="userSpaceOnUse"
-                    >
-                        <stop stopColor="#0041C6" />
-                        <stop offset="1" stopColor="#0045D0" />
-                    </linearGradient>
-                    <linearGradient
-                        id="paint7_linear_216_389"
-                        x1="-4.65371"
-                        y1="13.8113"
-                        x2="8.85929"
-                        y2="27.977"
-                        gradientUnits="userSpaceOnUse"
-                    >
-                        <stop stopColor="#0255FF" />
-                        <stop offset="1" stopColor="#0145D2" />
-                    </linearGradient>
-                    <linearGradient
-                        id="paint8_linear_216_389"
-                        x1="-5.10406"
-                        y1="1.80181"
-                        x2="10.8086"
-                        y2="19.5159"
-                        gradientUnits="userSpaceOnUse"
-                    >
-                        <stop stopColor="#3F80FF" />
-                        <stop offset="1" stopColor="#084FE0" />
-                    </linearGradient>
-                    <clipPath id="clip0_216_389">
-                        <rect width="51.6748" height="28" fill="white" />
-                    </clipPath>
-                </defs>
-            </svg>
-            <svg
-                width="229"
-                height="28"
-                viewBox="0 0 229 28"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="hidden dark:inline-block"
-            >
-                <g clipPath="url(#clip0_216_389)">
-                    <path
-                        d="M50.0159 23.3375L49.6783 23.2967C48.6712 23.1687 47.734 22.703 47.0238 21.9695L35.5777 10.111C35.2654 9.7874 34.7179 10.0086 34.718 10.4583L34.7205 27.5003C34.7205 27.7764 34.9444 28.0003 35.2205 28.0003H49.003C50.4816 28.0003 51.6749 26.8011 51.6749 25.3283V25.2235C51.6749 24.263 50.9589 23.4539 50.0101 23.3375H50.0159ZM39.2059 23.547C38.2221 23.547 37.4246 22.7495 37.4246 21.7657C37.4246 20.782 38.2221 19.9845 39.2059 19.9845C40.1897 19.9845 40.9872 20.782 40.9872 21.7657C40.9872 22.7495 40.1897 23.547 39.2059 23.547Z"
-                        fill="#FAFAFA"
-                    />
-                    <path
-                        d="M0 25.4097C0 26.8403 1.15978 28.0001 2.59044 28.0001H7.81351C8.24782 28.0001 8.47561 27.4845 8.18314 27.1634L0.869635 19.1347C0.562039 18.797 0 19.0146 0 19.4714V25.4097Z"
-                        fill="#FAFAFA"
-                    />
-                    <path
-                        d="M18.8112 27.1542C19.1156 27.4722 18.8903 28 18.45 28H11.3645C11.2207 28 11.0838 27.9381 10.9889 27.83L8.94141 25.5L0.130295 15.8231C0.046462 15.731 0 15.611 0 15.4865V8.75485C0 8.30416 0.549419 8.08352 0.861129 8.40904L18.8112 27.1542Z"
-                        fill="#FAFAFA"
-                    />
-                    <path
-                        d="M0 2.67782C3.31006e-05 0.279516 2.91624 -0.907543 4.58691 0.815519L30.1907 27.1515C30.4988 27.4684 30.2743 28 29.8322 28L22.0671 28.0001C21.9251 28.0001 21.7898 27.9397 21.695 27.8341L19.5996 25.5L0.277366 5.29996C0.0993537 5.11386 0 4.86626 0 4.60873V2.67782Z"
-                        fill="#FAFAFA"
-                    />
-                    <path
-                        d="M10.7402 2.678C10.7402 0.279791 13.6564 -0.907946 15.3271 0.814714L32.5044 18.4803L33 18.99V19.29V26.2862C33 26.7326 32.4595 26.9552 32.1451 26.6383L31.0156 25.5L11.3064 5.23222C10.9434 4.85888 10.7402 4.35865 10.7402 3.8379V2.678Z"
-                        fill="#FAFAFA"
-                    />
-                    <path
-                        d="M33.0078 7.45703V15.2687C33.0078 15.7176 32.4623 15.9391 32.1493 15.6173L22.5355 5.73223C22.1724 5.35888 21.9692 4.85862 21.9692 4.33782V2.67798C21.9692 0.279639 24.8857 -0.907887 26.5563 0.81519L33.0078 7.45703Z"
-                        fill="#FAFAFA"
-                    />
-                </g>
-                <path
-                    d="M64.9072 22.8764C64.2266 22.8764 63.6748 22.3246 63.6748 21.644V5.23239C63.6748 4.55176 64.2266 4 64.9072 4H71.4584C75.3502 4 77.8463 6.3191 77.8463 9.90562C77.8463 13.4921 75.3502 15.8112 71.4584 15.8112H67.9155V21.644C67.9155 22.3246 67.3638 22.8764 66.6831 22.8764H64.9072ZM67.9155 10.9384C67.9155 11.619 68.4673 12.1708 69.1479 12.1708H71.029C72.6394 12.1708 73.6056 11.3079 73.6056 9.90562C73.6056 8.50337 72.6394 7.64045 71.029 7.64045H69.1479C68.4673 7.64045 67.9155 8.19221 67.9155 8.87284V10.9384Z"
-                    fill="#FAFAFA"
-                />
-                <path
-                    d="M84.7132 23.0921C80.5261 23.0921 77.5737 20.1258 77.5737 16.0809C77.5737 12.036 80.5261 9.06966 84.7132 9.06966C88.8465 9.06966 91.8526 12.036 91.8526 16.0809C91.8526 20.1258 88.8465 23.0921 84.7132 23.0921ZM81.4924 16.0809C81.4924 18.2382 82.7807 19.7213 84.7132 19.7213C86.6188 19.7213 87.9071 18.2382 87.9071 16.0809C87.9071 13.9236 86.6188 12.4404 84.7132 12.4404C82.7807 12.4404 81.4924 13.9236 81.4924 16.0809Z"
-                    fill="#FAFAFA"
-                />
-                <path
-                    d="M97.8338 23.0921C95.113 23.0921 93.249 21.7184 92.2869 20.088C91.952 19.5205 92.278 18.831 92.8916 18.5906L93.6619 18.2889C94.3521 18.0186 95.1116 18.444 95.5759 19.0219C96.0937 19.6664 96.8699 20.0989 97.8338 20.0989C98.8805 20.0989 99.5784 19.5865 99.5784 18.8315C99.5784 16.7011 92.4121 18.1303 92.4121 12.9798C92.4121 10.8494 94.264 9.06966 97.2433 9.06966C99.5061 9.06966 101.445 9.97305 102.413 11.3805C102.774 11.9054 102.457 12.5743 101.869 12.8195L101.024 13.1721C100.341 13.4569 99.5715 13.0322 99.0217 12.5375C98.5416 12.1054 97.9256 11.9011 97.3775 11.9011C96.4918 11.9011 95.8744 12.2787 95.8744 12.8719C95.8744 15.0292 103.148 13.2494 103.148 18.7506C103.148 21.0966 101.001 23.0921 97.8338 23.0921Z"
-                    fill="#FAFAFA"
-                />
-                <path
-                    d="M112.47 21.7823C112.514 22.3461 112.17 22.8785 111.613 22.979C111.212 23.0515 110.786 23.0921 110.344 23.0921C107.418 23.0921 105.191 21.5281 105.191 18.2382V12.5753H104.276C103.595 12.5753 103.043 12.0235 103.043 11.3429V10.5178C103.043 9.83715 103.595 9.28539 104.276 9.28539H105.191V6.5807C105.191 5.90007 105.742 5.34832 106.423 5.34832H107.904C108.584 5.34832 109.136 5.90007 109.136 6.5807V9.28539H111.178C111.859 9.28539 112.411 9.83715 112.411 10.5178V11.3429C112.411 12.0235 111.859 12.5753 111.178 12.5753H109.136V17.7258C109.136 18.9393 109.78 19.6405 110.747 19.6405C111.492 19.6405 112.342 20.1476 112.4 20.8904L112.47 21.7823Z"
-                    fill="#FAFAFA"
-                />
-                <path
-                    d="M125.496 5.23239C125.496 4.55176 126.048 4 126.728 4H128.531C129.212 4 129.764 4.55176 129.764 5.23239V21.644C129.764 22.3246 129.212 22.8764 128.531 22.8764H126.728C126.048 22.8764 125.496 22.3246 125.496 21.644V16.2077C125.496 15.527 124.944 14.9753 124.264 14.9753H119.267C118.586 14.9753 118.034 15.527 118.034 16.2077V21.644C118.034 22.3246 117.483 22.8764 116.802 22.8764H115.026C114.345 22.8764 113.794 22.3246 113.794 21.644V5.23239C113.794 4.55176 114.345 4 115.026 4H116.802C117.483 4 118.034 4.55176 118.034 5.23239V10.1024C118.034 10.7831 118.586 11.3348 119.267 11.3348H124.264C124.944 11.3348 125.496 10.7831 125.496 10.1024V5.23239Z"
-                    fill="#FAFAFA"
-                />
-                <path
-                    d="M138.371 23.0921C134.184 23.0921 131.232 20.1258 131.232 16.0809C131.232 12.036 134.184 9.06966 138.371 9.06966C142.505 9.06966 145.511 12.036 145.511 16.0809C145.511 20.1258 142.505 23.0921 138.371 23.0921ZM135.15 16.0809C135.15 18.2382 136.439 19.7213 138.371 19.7213C140.277 19.7213 141.565 18.2382 141.565 16.0809C141.565 13.9236 140.277 12.4404 138.371 12.4404C136.439 12.4404 135.15 13.9236 135.15 16.0809Z"
-                    fill="#FAFAFA"
-                />
-                <path
-                    d="M152.321 22.4449C148.483 22.4449 146.121 19.8562 146.121 15.7573C146.121 11.6584 148.483 9.06966 152.24 9.06966C153.824 9.06966 155.058 9.60899 155.783 10.4449C155.783 9.80454 156.302 9.28539 156.943 9.28539H158.442C159.123 9.28539 159.675 9.83715 159.675 10.5178V21.9056C159.675 25.5461 156.91 28 152.75 28C150.107 28 147.857 26.7981 146.903 24.9114C146.59 24.2908 147.064 23.6229 147.751 23.5148L148.89 23.3354C149.557 23.2305 150.176 23.7349 150.674 24.1904C151.173 24.6475 151.93 24.8989 152.75 24.8989C154.602 24.8989 155.81 23.8472 155.81 22.3371V21.0427C155.112 21.9326 153.797 22.4449 152.321 22.4449ZM149.959 15.7573C149.959 17.7798 151.14 19.0742 152.965 19.0742C154.817 19.0742 155.998 17.7798 155.998 15.7573C155.998 13.7348 154.817 12.4404 152.965 12.4404C151.14 12.4404 149.959 13.7348 149.959 15.7573Z"
-                    fill="#FAFAFA"
-                />
-                <path
-                    d="M215.662 16.5474C215.662 13.3467 217.608 9.88989 222.064 9.88989C226.724 9.88989 228.695 13.3467 228.695 16.2145C228.695 16.4485 228.69 16.7038 228.682 16.9391C228.668 17.3267 228.347 17.6228 227.959 17.6228H220.313C219.832 17.6228 219.469 18.0766 219.684 18.5067C220.195 19.5304 221.134 20.0809 222.396 20.0809C223.372 20.0809 224.154 19.739 224.596 19.1003C224.833 18.7583 225.233 18.5042 225.634 18.6119L227.682 19.161C228.095 19.2716 228.337 19.7077 228.15 20.0916C227.182 22.0751 225.046 23.2048 222.294 23.2048C217.839 23.2048 215.662 19.7481 215.662 16.5474ZM219.744 14.0682C219.525 14.4999 219.891 14.9598 220.375 14.9598H223.848C224.291 14.9598 224.65 14.5694 224.49 14.1563C224.148 13.2743 223.363 12.6809 222.064 12.6809C221.006 12.6809 220.213 13.1474 219.744 14.0682Z"
-                    fill="#FAFAFA"
-                />
-                <path
-                    d="M206.433 23.2049C202.644 23.2049 200.365 20.5931 200.365 16.5474C200.365 12.5017 202.644 9.88992 206.382 9.88992C207.039 9.88992 207.632 9.98956 208.153 10.1698C208.818 10.4 209.864 9.93698 209.864 9.23333V5.62122C209.864 5.207 210.2 4.87122 210.614 4.87122H212.878C213.293 4.87122 213.628 5.207 213.628 5.62122V22.25C213.628 22.6642 213.293 23 212.878 23H210.177C210.004 23 209.864 22.8599 209.864 22.6872C209.864 22.3837 209.424 22.2183 209.178 22.3959C208.467 22.9092 207.491 23.2049 206.433 23.2049ZM204.026 16.5474C204.026 18.6214 205.255 20.0041 207.048 20.0041C208.891 20.0041 210.095 18.6214 210.095 16.5474C210.095 14.4733 208.891 13.0906 207.048 13.0906C205.255 13.0906 204.026 14.4733 204.026 16.5474Z"
-                    fill="#FAFAFA"
-                />
-                <path
-                    d="M192.204 23.2048C188.209 23.2048 185.393 20.3882 185.393 16.5474C185.393 12.7065 188.209 9.88989 192.204 9.88989C196.147 9.88989 199.015 12.7065 199.015 16.5474C199.015 20.3882 196.147 23.2048 192.204 23.2048ZM189.131 16.5474C189.131 18.5958 190.36 20.0041 192.204 20.0041C194.022 20.0041 195.251 18.5958 195.251 16.5474C195.251 14.4989 194.022 13.0906 192.204 13.0906C190.36 13.0906 189.131 14.4989 189.131 16.5474Z"
-                    fill="#FAFAFA"
-                />
-                <path
-                    d="M175.783 23.2049C170.918 23.2049 166.77 20.081 166.77 14.038C166.77 7.9951 170.995 4.87122 175.783 4.87122C179.981 4.87122 182.988 6.98386 183.772 10.3037C183.863 10.687 183.601 11.0538 183.216 11.1348L180.628 11.6787C180.217 11.7651 179.822 11.494 179.681 11.0984C179.072 9.37953 177.583 8.32798 175.758 8.32798C173.043 8.32798 170.841 10.2996 170.841 14.038C170.841 17.7765 173.018 19.7225 175.758 19.7225C177.578 19.7225 178.956 18.8174 179.557 17.3246C179.713 16.937 180.111 16.674 180.518 16.7663L183.11 17.353C183.517 17.4452 183.774 17.8539 183.639 18.2489C182.577 21.3676 179.711 23.2049 175.783 23.2049Z"
-                    fill="#FAFAFA"
-                />
-                <defs>
-                    <clipPath id="clip0_216_389">
-                        <rect width="51.6748" height="28" fill="white" />
-                    </clipPath>
-                </defs>
-            </svg>
-        </>
+        <SlotMachineText
+            className={className}
+            words={['analyze', 'debug', 'instrument', 'ship', 'experiment', 'query', 'flag', 'code']}
+            holdDuration={4000}
+            wordClassName="text-red dark:text-yellow"
+            prefix={
+                <span className="inline-flex items-center gap-2">
+                    <span>Let</span>
+                    <img src={posthogIcon} alt="" aria-hidden className="size-6 rounded-md @xl:size-7" />
+                    <span>PostHog</span>
+                </span>
+            }
+        />
     )
 }
 
@@ -623,10 +358,10 @@ function HeroSection() {
     }
 
     return (
-        <section className="my-6 @4xl/editor:mb-16 tracking-[-0.0125em] max-w-5xl mx-auto w-full">
+        <section className="my-6 @4xl/editor:mb-16 tracking-[-0.0125em] max-w-4xl mx-auto w-full">
             <div className="flex items-center justify-between mb-8">
                 <div>
-                    <PostHogCodeLogo />
+                    <LetPostHogScroller className="text-xl @xl:text-2xl font-bold tracking-tight" />
                 </div>
                 <div>
                     <Link
@@ -728,7 +463,7 @@ function OldWaySection() {
     const [p1Done, setP1Done] = useState(false)
 
     return (
-        <section className="relative mb-8 @xl:mb-24 px-4 @xl:px-8">
+        <section className="relative mb-8 @xl:mb-12 px-4 @xl:px-8">
             <SectionLabel>
                 The{' '}
                 <InlineIcon icon={StickerTombstone} className="!size-10 !top-3 -rotate-1">
@@ -737,7 +472,12 @@ function OldWaySection() {
                 to build with AI
             </SectionLabel>
 
-            <FlowDiagram className="mb-5 hidden @xl:block float-right ml-8 w-[350px]" />
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/plague_doctor_beach_11580558c0.png"
+                alt="A plague doctor relaxing on a beach"
+                className="mb-5 hidden @xl:block float-right ml-8 w-44"
+                imgClassName="w-full"
+            />
 
             <p className="text-base leading-loose mb-5">
                 <ChoppyReveal wordDelay={40} onComplete={() => setP1Done(true)}>
@@ -754,7 +494,12 @@ function OldWaySection() {
                 </ChoppyReveal>
             </p>
 
-            <FlowDiagram className="mb-5 @xl:hidden" />
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/plague_doctor_beach_11580558c0.png"
+                alt="A plague doctor relaxing on a beach"
+                className="mb-5 @xl:hidden mx-auto w-40"
+                imgClassName="w-full"
+            />
 
             <p className="text-base leading-loose">
                 <ChoppyReveal wordDelay={40} initialDelay={p1Done ? 0 : 999999}>
@@ -783,12 +528,10 @@ function PostHogWaySection({ onComplete }: { onComplete?: () => void }) {
     const [p2Done, setP2Done] = useState(false)
     const signalsWordRef = useRef<HTMLSpanElement>(null)
     const signalsBoxRef = useRef<HTMLDivElement>(null)
-    const aiModelRef = useRef<HTMLSpanElement>(null)
-    const aiModelBadgeRef = useRef<HTMLSpanElement>(null)
     const sectionRef = useRef<HTMLDivElement>(null)
 
     return (
-        <section ref={sectionRef} className="relative mb-8 @xl:mb-20 px-4 @xl:px-8">
+        <section ref={sectionRef} className="relative mb-8 @xl:mb-12 px-4 @xl:px-8">
             <SectionLabel>
                 The <PostHogCodeLogomark className="-rotate-2 w-12 relative -top-0.5" /> PostHog way
             </SectionLabel>
@@ -828,23 +571,18 @@ function PostHogWaySection({ onComplete }: { onComplete?: () => void }) {
                     </p>
                 </div>
 
-                <p className="text-base leading-loose mb-2">
+                <p className="text-base leading-loose mb-5">
                     <ChoppyReveal wordDelay={25} initialDelay={p1Done ? 0 : 999999} onComplete={() => setP2Done(true)}>
-                        {'Run it '}
-                        <strong>locally</strong>
-                        {' or in the '}
-                        <strong>cloud</strong>
-                        {' – either way, it automatically uses the right '}
-                        <span ref={aiModelRef}>
-                            <RoughAnnotation type="box" color="currentColor" strokeWidth={1} padding={2}>
-                                <strong className="inline-block">AI model</strong>
-                            </RoughAnnotation>
-                        </span>
-                        {' for the job.'}
+                        {'Run '}
+                        <RoughAnnotation type="box" color="currentColor" strokeWidth={1} padding={2}>
+                            <strong className="inline-block">a fleet of agents</strong>
+                        </RoughAnnotation>
+                        {' on your machine or in an isolated '}
+                        <strong>cloud sandbox</strong>
+                        {' – '}
+                        <strong>steer</strong> or <strong>queue</strong> them as they work.
                     </ChoppyReveal>
                 </p>
-
-                {p2Done && <AIModelBadge innerRef={aiModelBadgeRef} />}
 
                 <p className="text-base leading-loose mb-5">
                     <ChoppyReveal wordDelay={25} initialDelay={p2Done ? 0 : 999999} onComplete={() => onComplete?.()}>
@@ -859,293 +597,223 @@ function PostHogWaySection({ onComplete }: { onComplete?: () => void }) {
                 {/* Clear float */}
                 <div className="clear-both" />
 
-                {/* Dotted connection lines */}
+                {/* Dotted connection line */}
                 <DottedConnection
                     sourceRef={signalsWordRef}
                     targetRef={signalsBoxRef}
                     containerRef={sectionRef}
                     desktopOnly
                 />
-                {p2Done && (
-                    <DottedConnection sourceRef={aiModelRef} targetRef={aiModelBadgeRef} containerRef={sectionRef} />
-                )}
             </div>
         </section>
     )
 }
 
-const featureTabs: TabbedCarouselTab[] = [
-    {
-        value: 'command-center',
-        label: 'Command center',
-        color: 'bg-blue',
-        activeText: 'text-white',
-        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
-        content: (
-            <div className="p-4 @xl:p-8">
-                <h3 className="text-2xl font-bold mb-2">Manage multiple coding agents in parallel</h3>
-                <>
-                    <p>Split screen presets let you monitor agents side-by-side or in a 2x2 or 3x3 grid.</p>
-                </>
-                <ZoomImage>
-                    <img
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/command_center_light_096957d499.png"
-                        alt="Manage multiple coding agents in parallel"
-                        className="w-full rounded-md shadow-2xl border border-primary dark:hidden"
-                    />
-                    <img
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/command_center_dark_3712be03b1.png"
-                        alt="Manage multiple coding agents in parallel"
-                        className="w-full rounded-md shadow-2xl border border-primary hidden dark:block"
-                    />
-                </ZoomImage>
-            </div>
-        ),
-    },
-    {
-        value: 'plan',
-        label: 'Plan mode',
-        color: 'bg-green',
-        activeText: 'text-white',
-        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
-        content: (
-            <div className="p-4 @xl:p-8">
-                <h3 className="text-2xl font-bold mb-2">Agree on the plan before any code</h3>
-                <>
-                    <p>
-                        Tasks can start in Plan mode: the agent explores your codebase and asks clarifying questions –
-                        multiple choice or freeform – then writes an implementation plan you approve. Tweak it, send it
-                        back with notes, or say go. Nothing gets written until you're happy.
-                    </p>
-                </>
-                <ZoomImage>
-                    <img
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/plan_light_b34b9ad492.png"
-                        alt="Plan mode: clarifying questions and an implementation plan to approve"
-                        className="w-full rounded-md shadow-xl border border-primary dark:hidden"
-                    />
-                    <img
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/plan_dark_d27c25debd.png"
-                        alt="Plan mode: clarifying questions and an implementation plan to approve"
-                        className="w-full rounded-md shadow-xl border border-primary hidden dark:block"
-                    />
-                </ZoomImage>
-            </div>
-        ),
-    },
-    {
-        value: 'steer',
-        label: 'Steer mid-run',
-        color: 'bg-purple',
-        activeText: 'text-white',
-        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
-        content: (
-            <div className="p-4 @xl:p-8">
-                <h3 className="text-2xl font-bold mb-2">Steer or queue, while it runs</h3>
-                <>
-                    <p>
-                        Inject a message mid-turn at the next tool boundary to nudge an agent back on track – or queue
-                        it to send the moment the current turn ends. No stopping, no starting over.
-                    </p>
-                </>
-                {/* TODO: replace with real Steer/Queue screenshot */}
-                <ZoomImage>
-                    <img
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/command_center_light_096957d499.png"
-                        alt="Steer or queue messages while an agent runs"
-                        className="w-full rounded-md shadow-xl border border-primary dark:hidden"
-                    />
-                    <img
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/command_center_dark_3712be03b1.png"
-                        alt="Steer or queue messages while an agent runs"
-                        className="w-full rounded-md shadow-xl border border-primary hidden dark:block"
-                    />
-                </ZoomImage>
-            </div>
-        ),
-    },
-    {
-        value: 'channels',
-        label: 'Channels & canvases',
-        color: 'bg-yellow',
-        activeText: 'text-black',
-        progressBar: 'bg-black/70 shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
-        content: (
-            <div className="p-4 @xl:p-8">
-                <h3 className="text-2xl font-bold mb-2">Channels &amp; canvases</h3>
-                <>
-                    <p>
-                        Group work into channels with shared context, and let agents build live canvases – single-file
-                        apps and dashboards that render your real product data, shareable with a link.
-                    </p>
-                </>
-                {/* TODO: replace with real Channels & canvases screenshot */}
-                <ZoomImage>
-                    <img
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/code_screenshot_light_d0c42a8067.png"
-                        alt="Channels and agent-built canvases"
-                        className="w-full rounded-md shadow-xl border border-primary dark:hidden"
-                    />
-                    <img
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/code_screenshot_dark_b2a90f3c71.png"
-                        alt="Channels and agent-built canvases"
-                        className="w-full rounded-md shadow-xl border border-primary hidden dark:block"
-                    />
-                </ZoomImage>
-            </div>
-        ),
-    },
-    {
-        value: 'skills',
-        label: 'Skills',
-        color: 'bg-red',
-        activeText: 'text-white',
-        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
-        content: (
-            <div className="p-4 @xl:p-8">
-                <h3 className="text-2xl font-bold mb-2">Built-in skills library</h3>
-                <>
-                    <p>
-                        The built-in skills library gives your agents access to a wide range of tools and functions to
-                        help them complete tasks, with the ability to accomplish most PostHog tasks around querying and
-                        analyzing data <em>and</em> instrumentation of PostHog features.
-                    </p>
-                </>
-                <ZoomImage>
-                    <img
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/skills_light_703a30655e.png"
-                        alt="Built-in skills library"
-                        className="w-full rounded-md shadow-xl border border-primary dark:hidden"
-                    />
-                    <img
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/skills_dark_f09c7fff17.png"
-                        alt="Built-in skills library"
-                        className="w-full rounded-md shadow-xl border border-primary hidden dark:block"
-                    />
-                </ZoomImage>
-            </div>
-        ),
-    },
-]
+// ─────────────────────────────────────────────
+// "2026-shaped products" Section — table stakes,
+// rendered as a $0.00 grocery receipt punchline.
+// ─────────────────────────────────────────────
 
-const Features = () => {
+// Deliberate skeuomorphic object: fixed paper/ink colors (like KeyBadge) so the
+// receipt reads as a physical receipt in both light and dark mode.
+const RECEIPT_PAPER = '#f7f4ee'
+
+// A torn/zigzag paper edge. Flush along the top, sawtooth teeth pointing down.
+// preserveAspectRatio="none" stretches a fixed tooth count across the receipt width.
+function TornEdge({ className = '' }: { className?: string }) {
+    const width = 200
+    const height = 12
+    const teeth = 20
+    const step = width / teeth
+    let d = `M0 0 H${width}`
+    for (let i = 0; i <= teeth; i++) {
+        const x = (width - i * step).toFixed(1)
+        const y = i % 2 === 0 ? height : 0
+        d += ` L${x} ${y}`
+    }
+    d += ' Z'
     return (
-        <section className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
-            <div className="px-4 @xl:px-8">
-                <div className="max-w-[654px] mx-auto relative">
-                    <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/code_screenshot_light_d0c42a8067.png"
-                        className="dark:hidden"
-                        imgClassName="w-full rounded border border-secondary"
-                    />
-                    <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/code_screenshot_dark_b2a90f3c71.png"
-                        className="hidden dark:block"
-                        imgClassName="w-full rounded border border-secondary"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-b from-light/0 via-light/25 to-light dark:from-dark/0 dark:via-dark/25 dark:to-dark"></div>
+        <svg
+            className={className}
+            viewBox={`0 0 ${width} ${height}`}
+            preserveAspectRatio="none"
+            aria-hidden
+            focusable="false"
+        >
+            <path d={d} fill={RECEIPT_PAPER} />
+        </svg>
+    )
+}
+
+function ReceiptRow({ label, price = '$0.00' }: { label: string; price?: string }) {
+    return (
+        <div className="flex items-baseline justify-between gap-4">
+            <span>{label}</span>
+            <span>{price}</span>
+        </div>
+    )
+}
+
+function AgentMartReceipt() {
+    return (
+        <div className="mx-auto w-full max-w-xs rotate-1">
+            <div
+                className="font-code text-sm leading-relaxed shadow-2xl px-6 pt-6 pb-5 text-[#2b2b2b]"
+                style={{ backgroundColor: RECEIPT_PAPER }}
+            >
+                <p className="m-0 mb-4 text-center font-bold tracking-widest">2026 AGENT MART</p>
+
+                <div className="space-y-1">
+                    <ReceiptRow label="parallel agents" />
+                    <ReceiptRow label="isolated worktrees" />
+                    <ReceiptRow label="diff review" />
+                    <ReceiptRow label="checkpoints" />
+                    <ReceiptRow label="MCP both ways" />
+                    <ReceiptRow label="cmd palette" />
                 </div>
 
-                <h2 className="text-2xl font-bold mb-2 text-center -mt-10 pb-12 relative">
-                    Everything you'd expect in an AI coding tool,{' '}
-                    <span className="block">
-                        but <em className="text-gradient">way more...</em>
-                    </span>
-                </h2>
+                <div className="my-3 border-t border-dashed border-[#c9c2b4]" />
+
+                <div className="flex items-baseline justify-between gap-4 font-bold">
+                    <span>TOTAL</span>
+                    <span>$0.00</span>
+                </div>
+
+                <p className="m-0 mt-4 text-center text-xs text-[#8a8272]">thank you for shopping at 2026</p>
             </div>
-
-            <TabbedCarousel tabs={featureTabs} />
-        </section>
-    )
-}
-
-const homeViews = [
-    {
-        value: 'list',
-        icon: IconList,
-        color: 'text-yellow',
-        title: 'List',
-        description:
-            'Triage what needs you. Two simple lanes – Needs attention and In progress – so you always know what to pick up next.',
-        // TODO: replace with real Home List view screenshot
-        imgLight: 'https://res.cloudinary.com/dmukukwp6/image/upload/plan_light_b34b9ad492.png',
-        imgDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/plan_dark_d27c25debd.png',
-    },
-    {
-        value: 'board',
-        icon: IconColumns,
-        color: 'text-blue',
-        title: 'Board',
-        description:
-            'A kanban of everything in flight, with columns for Working, In review, CI failing, Changes requested, Comments waiting, and Ready to merge.',
-        // TODO: replace with real Home Board view screenshot
-        imgLight: 'https://res.cloudinary.com/dmukukwp6/image/upload/command_center_light_096957d499.png',
-        imgDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/command_center_dark_3712be03b1.png',
-    },
-    {
-        value: 'config',
-        icon: IconGraph,
-        color: 'text-purple',
-        title: 'Config',
-        description:
-            'A visual workflow map. Bind an agent action to each stage – like Fix CI or Address comments – so the right next step is one click away.',
-        // TODO: replace with real Home Config (workflow map) screenshot
-        imgLight: 'https://res.cloudinary.com/dmukukwp6/image/upload/code_screenshot_light_d0c42a8067.png',
-        imgDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/code_screenshot_dark_b2a90f3c71.png',
-    },
-]
-
-const homeViewTabs = homeViews.map(({ value, icon: Icon, color, title, description, imgLight, imgDark }) => ({
-    value,
-    label: (
-        <span className="inline-flex items-center gap-1.5">
-            <Icon className={`size-4 ${color}`} />
-            {title}
-        </span>
-    ),
-    content: (
-        <div className="pt-4">
-            <p className="text-sm text-secondary max-w-2xl mb-3">{description}</p>
-            <ZoomImage>
-                <img
-                    src={imgLight}
-                    alt={`Home ${title} view`}
-                    className="w-full rounded-md shadow-2xl border border-primary dark:hidden"
-                />
-                <img
-                    src={imgDark}
-                    alt={`Home ${title} view`}
-                    className="w-full rounded-md shadow-2xl border border-primary hidden dark:block"
-                />
-            </ZoomImage>
+            <TornEdge className="w-full h-3" />
         </div>
-    ),
-}))
+    )
+}
 
-const HomeSection = () => {
+function TableStakesSection() {
+    const items = [
+        'Parallel agents in isolated worktrees',
+        'Checkpoints and rollback',
+        'MCP in both directions',
+        'Permission modes',
+        'Fast model switching',
+        'A command center to micro manage your agents',
+    ]
+
     return (
-        <section className="relative mb-12 @2xl:mb-20 px-4 @xl:px-8">
-            <SectionLabel>
-                <span className="inline-flex items-center gap-2">
-                    Stay in flow with Home
-                    <span className="text-xs font-semibold uppercase tracking-wide rounded-full border border-primary bg-accent px-2 py-0.5 text-secondary">
-                        Alpha
-                    </span>
-                </span>
-            </SectionLabel>
-            <p className="max-w-2xl">
-                Stop bouncing between GitHub, CI, and review tabs. Home pulls everything that needs you – PR feedback,
-                failing checks, review requests, stale branches – into one place, so you stay in flow and keep shipping.
-            </p>
+        <section className="relative mb-8 @xl:mb-24 px-4 @xl:px-8">
+            <SectionLabel>Yes, it does all the stuff</SectionLabel>
 
-            <p className="mt-8 mb-2 text-sm font-semibold uppercase tracking-wide text-secondary">
-                Three views of the same work
-            </p>
-            <OSTabs tabs={homeViewTabs} defaultValue="list" border={false} contentPadding={false} scrollable={false} />
+            <div className="grid @2xl:grid-cols-2 gap-8 @2xl:gap-12 items-center">
+                <div>
+                    <p className="text-base leading-loose mb-5">
+                        Every <em>2026-shaped</em> coding agent ships the same starter pack. So does PostHog Code – it's
+                        table stakes, not the point.
+                    </p>
+                    <ul className="m-0 list-none p-0 space-y-2.5">
+                        {items.map((item) => (
+                            <li key={item} className="flex items-start gap-2.5">
+                                <IconCheck className="size-5 shrink-0 relative top-0.5 text-green" />
+                                <span className="text-base">{item}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+
+                <div className="@2xl:pl-4">
+                    <AgentMartReceipt />
+                </div>
+            </div>
         </section>
     )
 }
 
+// ─────────────────────────────────────────────
+// "meep.mov" desktop notification → video popup
+// A macOS-style notification toast (see reference). Clicking it opens the
+// video in a modal, the same way demo.mov plays on the homepage.
+// ─────────────────────────────────────────────
+
+// The "meep" video – https://posthog.wistia.com/medias/v7t0y7ynmn
+const MEEP_VIDEO_ID = 'v7t0y7ynmn'
+
+// Notification copy — mimics a macOS "task finished" toast (see reference screenshot).
+const MEEP_NOTIFICATION = {
+    app: 'PostHog Code',
+    body: 'meep.mov needs your input',
+}
+
+function MeepNotification({ className = 'my-10 flex justify-center px-4 @xl:px-8' }: { className?: string }) {
+    const ref = useRef<HTMLDivElement>(null)
+    const [inView, setInView] = useState(false)
+    const prefersReducedMotion = usePrefersReducedMotion()
+
+    // Play the entry animation only once the toast scrolls into view (it lives far down the page).
+    useEffect(() => {
+        if (typeof IntersectionObserver === 'undefined' || !ref.current) {
+            setInView(true)
+            return
+        }
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setInView(true)
+                    observer.disconnect()
+                }
+            },
+            { threshold: 0.4 }
+        )
+        observer.observe(ref.current)
+        return () => observer.disconnect()
+    }, [])
+
+    const animate = inView && !prefersReducedMotion
+
+    return (
+        <div className={className}>
+            <div
+                ref={ref}
+                className="w-full max-w-sm"
+                style={{
+                    opacity: prefersReducedMotion ? 1 : animate ? undefined : 0,
+                    animation: animate ? 'meep-attention 0.6s ease-out both' : undefined,
+                }}
+            >
+                <Modal
+                    maxWidth={900}
+                    autoHeight
+                    trigger={
+                        <button
+                            type="button"
+                            aria-label={`${MEEP_NOTIFICATION.app}: ${MEEP_NOTIFICATION.body} – play video`}
+                            className="group block w-full cursor-pointer rounded-2xl border border-white/40 bg-white/80 p-3.5 text-left shadow-2xl backdrop-blur-xl transition hover:-translate-y-0.5 active:translate-y-0 dark:border-white/10 dark:bg-black/50"
+                        >
+                            <div className="flex items-center gap-3">
+                                <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-white shadow-sm dark:bg-[#1d1f27]">
+                                    <PostHogCodeLogomark className="w-7" />
+                                </span>
+                                <div className="min-w-0">
+                                    <p className="m-0 font-bold leading-tight text-primary">{MEEP_NOTIFICATION.app}</p>
+                                    <p className="m-0 truncate leading-tight text-secondary">
+                                        {MEEP_NOTIFICATION.body}
+                                    </p>
+                                </div>
+                            </div>
+                        </button>
+                    }
+                >
+                    <div className="bg-primary p-2">
+                        <WistiaEmbed mediaId={MEEP_VIDEO_ID} autoPlay />
+                    </div>
+                </Modal>
+            </div>
+            <style>{`
+                @keyframes meep-attention {
+                    0%   { opacity: 0; transform: translateY(-8px); }
+                    100% { opacity: 1; transform: translateY(0); }
+                }
+            `}</style>
+        </div>
+    )
+}
+
+// Shown on the "Instrumentation" carousel slide: what PostHog Code wires up as it builds.
 const instrumentationItems = [
     {
         icon: IconTrends,
@@ -1189,24 +857,535 @@ const instrumentationItems = [
     },
 ]
 
-const Instrumentation = () => {
+// Carousel slide panel, à la the /slack and /self-driving carousels: title + body on
+// a bg-primary card, with the screenshot bleeding flush to the card's bottom edge.
+const FeaturePanel = ({
+    title,
+    imageLight,
+    imageDark,
+    imageAlt,
+    children,
+}: {
+    title: string
+    imageLight?: string
+    imageDark?: string
+    imageAlt?: string
+    children: React.ReactNode
+}) => (
+    <div className="flex h-full flex-col rounded bg-primary p-4 @xl:p-6">
+        <h3 className="mt-0 mb-2 text-2xl font-bold">{title}</h3>
+        <div className="flex-1 text-[15px] text-secondary">{children}</div>
+        {imageLight && imageDark && (
+            <div className="-mx-4 -mb-4 mt-4 overflow-hidden rounded-b leading-[0] @xl:-mx-6 @xl:-mb-6">
+                <CloudinaryImage
+                    src={imageLight}
+                    alt={imageAlt || title}
+                    className="dark:hidden"
+                    imgClassName="w-full block"
+                />
+                <CloudinaryImage
+                    src={imageDark}
+                    alt={imageAlt || title}
+                    className="hidden dark:block"
+                    imgClassName="w-full block"
+                />
+            </div>
+        )}
+    </div>
+)
+
+// Compact icon + label chips used to add substance to a carousel slide's copy.
+const FeatureChips = ({
+    items,
+}: {
+    items: { Icon: React.ComponentType<{ className?: string }>; color: string; label: string }[]
+}) => (
+    <div className="mt-5 grid grid-cols-2 gap-x-4 gap-y-2.5 @sm:grid-cols-3">
+        {items.map(({ Icon, color, label }) => (
+            <span key={label} className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
+                <Icon className={`size-4 shrink-0 ${color}`} />
+                {label}
+            </span>
+        ))}
+    </div>
+)
+
+const featureTabs: TabbedCarouselTab[] = [
+    {
+        value: 'command-center',
+        label: 'Command center',
+        color: 'bg-blue',
+        activeText: 'text-white',
+        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
+        content: (
+            <FeaturePanel
+                title="Manage multiple coding agents in parallel"
+                imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/command_center_dark_1_4295f77be1.png"
+                imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/command_center_dark_358aba9c5b.png"
+                imageAlt="Manage multiple coding agents in parallel"
+            >
+                <p className="m-0">
+                    Run a whole fleet at once. Split-screen presets let you watch agents side-by-side or in a 2x2 or 3x3
+                    grid, each in its own isolated worktree – so nothing steps on anything else.
+                </p>
+                <FeatureChips
+                    items={[
+                        { Icon: IconColumns, color: 'text-blue', label: 'Split-screen presets' },
+                        { Icon: IconGitBranch, color: 'text-green', label: 'Isolated worktrees' },
+                        { Icon: IconRewindPlay, color: 'text-orange', label: 'Checkpoints & rollback' },
+                        { Icon: IconBrackets, color: 'text-purple', label: 'Live diff review' },
+                    ]}
+                />
+            </FeaturePanel>
+        ),
+    },
+    {
+        value: 'plan',
+        label: 'Plan mode',
+        color: 'bg-green',
+        activeText: 'text-white',
+        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
+        content: (
+            <FeaturePanel
+                title="Agree on the plan before any code"
+                imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/plan_light_b34b9ad492.png"
+                imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/plan_dark_d27c25debd.png"
+                imageAlt="Plan mode: clarifying questions and an implementation plan to approve"
+            >
+                <p className="m-0">
+                    Tasks can start in Plan mode: the agent explores your codebase and asks clarifying questions –
+                    multiple choice or freeform – then writes an implementation plan you approve. Tweak it, send it back
+                    with notes, or say go. Nothing gets written until you're happy.
+                </p>
+                <div className="mt-5 flex flex-wrap items-center gap-x-1.5 gap-y-2 text-sm font-semibold">
+                    {['Explore', 'Ask', 'Plan', 'Approve'].map((step, i) => (
+                        <React.Fragment key={step}>
+                            {i > 0 && <span className="text-secondary">→</span>}
+                            <span className="rounded bg-accent px-2 py-1 text-primary">{step}</span>
+                        </React.Fragment>
+                    ))}
+                </div>
+            </FeaturePanel>
+        ),
+    },
+    {
+        value: 'tasks',
+        label: 'Steer & queue',
+        color: 'bg-yellow',
+        activeText: 'text-black',
+        progressBar: 'bg-black/70 shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
+        content: (
+            <div className="flex h-full flex-col rounded bg-primary p-4 @xl:p-6">
+                <h3 className="mt-0 mb-2 text-2xl font-bold">Steer it, or queue it up</h3>
+                <p className="m-0 text-[15px] text-secondary">
+                    An agent's already running – you don't have to wait. Jump in to{' '}
+                    <strong className="text-primary">steer</strong> it mid-task, or{' '}
+                    <strong className="text-primary">queue</strong> up what's next and walk away.
+                </p>
+                <div className="mt-6">
+                    <SteerQueueDemo />
+                </div>
+            </div>
+        ),
+    },
+    {
+        value: 'instrument',
+        label: 'Instrumentation',
+        color: 'bg-purple',
+        activeText: 'text-white',
+        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
+        content: (
+            <FeaturePanel title="It edits your product, not just your code">
+                <p className="m-0">
+                    As PostHog Code builds, it wires up the right PostHog instrumentation and configuration – so you can
+                    progressively roll out changes and measure their impact without a second pass.
+                </p>
+                <ul className="mt-6 grid list-none grid-cols-1 gap-x-8 gap-y-4 p-0 @sm:grid-cols-2">
+                    {instrumentationItems.map(({ icon: Icon, color, title, description }) => (
+                        <li key={title} className="relative pl-8">
+                            <Icon className={`absolute left-0 top-0.5 size-6 ${color}`} />
+                            <h4 className="mb-0 text-base font-bold text-primary">{title}</h4>
+                            <p className="mb-0 mt-1 text-sm text-secondary">{description}</p>
+                        </li>
+                    ))}
+                </ul>
+            </FeaturePanel>
+        ),
+    },
+    {
+        value: 'skills',
+        label: 'Skills',
+        color: 'bg-red',
+        activeText: 'text-white',
+        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
+        content: (
+            <FeaturePanel
+                title="Built-in skills library"
+                imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/skills_light_sidepanel_bae81ae8d5.png"
+                imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/skills_dark_sidepanel_8e104c098d.png"
+                imageAlt="Built-in skills library"
+            >
+                <p className="m-0">
+                    A library of built-in skills lets your agents do real PostHog work – not just write code, but query
+                    your data and wire up the product features that measure it.
+                </p>
+                <FeatureChips
+                    items={[
+                        { Icon: IconGraph, color: 'text-blue', label: 'Query data' },
+                        { Icon: IconTrends, color: 'text-red', label: 'Instrument events' },
+                        { Icon: IconToggle, color: 'text-seagreen', label: 'Feature flags' },
+                        { Icon: IconFlask, color: 'text-purple', label: 'Experiments' },
+                        { Icon: IconRewindPlay, color: 'text-orange', label: 'Session replays' },
+                        { Icon: IconDashboard, color: 'text-yellow', label: 'Dashboards' },
+                    ]}
+                />
+            </FeaturePanel>
+        ),
+    },
+]
+
+const Features = () => {
     return (
-        <section className="relative mb-12 @2xl:mb-20 px-4 @xl:px-8">
-            <SectionLabel>It edits your product, not just your code</SectionLabel>
-            <p>
-                As PostHog Code builds, it wires up the right PostHog instrumentation and configuration – so you can
-                progressively roll out changes and measure their impact without a second pass.
+        <section className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
+            <div className="px-4 @xl:px-8">
+                <h2 className="text-2xl font-bold mb-2 text-center pb-12 relative">
+                    Everything you'd expect in an AI coding tool,{' '}
+                    <span className="block">
+                        but <em className="text-gradient">way more...</em>
+                    </span>
+                </h2>
+            </div>
+
+            <TabbedCarousel tabs={featureTabs} />
+        </section>
+    )
+}
+
+// Small "Alpha" pill – marks the still-cooking features inside the (beta) product.
+// Matches the inline beta tag used across the site (self-driving, slack pages).
+const AlphaBadge = () => (
+    <span className="shrink-0 rounded-sm bg-highlight px-1 py-0.5 text-xs font-bold text-red dark:text-yellow">
+        Alpha
+    </span>
+)
+
+// Highlighter span, same treatment as the self-driving page.
+const Highlight = ({ children }: { children: React.ReactNode }) => (
+    <span className="bg-highlight px-0.5 font-bold text-red dark:text-yellow">{children}</span>
+)
+
+// Shared card shell for the workspace section – coloured accent bar per card.
+const WORKSPACE_CARD = 'relative flex flex-col overflow-hidden rounded-md border border-primary bg-accent'
+
+// Traffic-light dots for the little window mockups.
+const WindowDots = () => (
+    <span className="flex gap-1.5" aria-hidden>
+        <span className="size-2.5 rounded-full bg-red" />
+        <span className="size-2.5 rounded-full bg-yellow" />
+        <span className="size-2.5 rounded-full bg-green" />
+    </span>
+)
+
+// Overlapping avatar stack: humans (initials) + agents (hedgehog), with a live "typing…" line.
+const workspaceMembers: { kind: 'human' | 'agent'; label?: string; color: string }[] = [
+    { kind: 'human', label: 'CL', color: 'bg-blue' },
+    { kind: 'human', label: 'AB', color: 'bg-purple' },
+    { kind: 'agent', color: 'bg-red' },
+    { kind: 'agent', color: 'bg-green' },
+]
+
+const MultiplayerAvatars = () => (
+    <div className="flex items-center gap-3">
+        <div className="flex -space-x-2">
+            {workspaceMembers.map((m, i) => (
+                <span
+                    key={i}
+                    className={`flex size-9 items-center justify-center rounded-full border-2 border-accent text-xs font-bold text-white ${m.color}`}
+                >
+                    {m.kind === 'human' ? m.label : <IconAI className="size-5" />}
+                </span>
+            ))}
+        </div>
+        <span className="inline-flex items-center gap-1.5 text-sm text-secondary">
+            <span className="font-semibold text-primary">agent-2</span> is typing
+            <span className="inline-flex gap-0.5">
+                {[0, 1, 2].map((d) => (
+                    <span
+                        key={d}
+                        className="size-1 rounded-full bg-secondary"
+                        style={{ animation: 'meep-typing 1s ease-in-out infinite', animationDelay: `${d * 0.15}s` }}
+                    />
+                ))}
+            </span>
+        </span>
+    </div>
+)
+
+// What every channel keeps – the "memory" that chat windows lack.
+const channelKeeps = [
+    {
+        Icon: IconDocument,
+        color: 'text-blue',
+        name: 'context.md',
+        desc: 'The living brief. Agents read it, you edit it. It’s a file, because it should be.',
+    },
+    { Icon: IconAI, color: 'text-purple', name: 'Memory', desc: 'Decisions, past PRs, what got rejected and why.' },
+    {
+        Icon: IconList,
+        color: 'text-green',
+        name: 'To-do list',
+        desc: 'Out-of-scope work lands here instead of evaporating.',
+    },
+    {
+        Icon: IconMessage,
+        color: 'text-red',
+        name: 'Inbox',
+        desc: 'Only this channel’s signals, not the company firehose.',
+    },
+]
+
+// Oversized easter-egg sticker. On hover the kaiju hedgehog rampages.
+const MiniHogzilla = ({ className = '' }: { className?: string }) => (
+    <div className={`group pointer-events-auto ${className}`}>
+        <img
+            src="https://res.cloudinary.com/dmukukwp6/image/upload/min_hogzilla_sticker_456e11eede.png"
+            alt="Hogzilla, PostHog's mascot as a city-stomping kaiju"
+            className="w-full origin-bottom transition-transform duration-300 group-hover:motion-safe:animate-[hogzilla-rampage_0.6s_ease-in-out_infinite]"
+        />
+    </div>
+)
+
+// The three views of Home – click a chip to swap the screenshot.
+const homeViews = [
+    {
+        key: 'list',
+        Icon: IconList,
+        color: 'text-yellow',
+        label: 'List',
+        desc: 'triage what needs you',
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Home_list_e43dd0c2b5.png',
+    },
+    {
+        key: 'board',
+        Icon: IconColumns,
+        color: 'text-blue',
+        label: 'Board',
+        desc: 'everything in flight',
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Home_board_e9d7302c9e.png',
+    },
+    {
+        key: 'config',
+        Icon: IconGraph,
+        color: 'text-purple',
+        label: 'Config',
+        desc: 'a visual workflow map',
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Home_config_af49aa4881.png',
+    },
+]
+
+const HomeViews = () => {
+    const [active, setActive] = useState('list')
+    const current = homeViews.find((v) => v.key === active) ?? homeViews[0]
+    return (
+        <div className="mt-auto">
+            <div className="flex flex-wrap gap-2 px-6 @xl:px-8" role="tablist" aria-label="Home views">
+                {homeViews.map(({ key, Icon, color, label, desc }) => {
+                    const selected = key === active
+                    return (
+                        <button
+                            key={key}
+                            type="button"
+                            role="tab"
+                            aria-selected={selected}
+                            onClick={() => setActive(key)}
+                            className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-semibold transition-colors ${
+                                selected
+                                    ? 'border-primary bg-primary text-primary'
+                                    : 'border-transparent bg-primary/50 text-secondary hover:text-primary'
+                            }`}
+                        >
+                            <Icon className={`size-4 shrink-0 ${color}`} />
+                            {label}
+                            <span className="hidden font-normal text-secondary @sm:inline">– {desc}</span>
+                        </button>
+                    )
+                })}
+            </div>
+            <div className="mt-5 overflow-hidden border-t border-primary leading-[0]">
+                <CloudinaryImage
+                    key={current.key}
+                    src={current.src}
+                    alt={`Home ${current.label} view`}
+                    imgClassName="w-full block"
+                />
+            </div>
+        </div>
+    )
+}
+
+// "Alphas within the beta" – the shared, still-cooking workspace (channels, multiplayer, canvases, Home).
+const AgenticWorkspaceSection = () => {
+    return (
+        <section className="relative mb-12 px-4 @xl:px-8">
+            <SectionLabel>
+                <span className="inline-flex flex-wrap items-center gap-2">
+                    Alphas{' '}
+                    <InlineIcon icon={StickerCoffee} className="!size-9 !top-2.5 -rotate-2">
+                        within
+                    </InlineIcon>{' '}
+                    the beta
+                </span>
+            </SectionLabel>
+            <p className="mb-8 max-w-3xl">
+                PostHog Code is in beta. These bits are still <em>alpha inside it</em> – rough, changing weekly, and the
+                most fun. It's where coding stops being a solo tool: your team and your agents share{' '}
+                <RoughAnnotation type="underline" color="#F54E00" strokeWidth={2}>
+                    one workspace
+                </RoughAnnotation>
+                .
             </p>
 
-            <ul className="grid @xl:grid-cols-2 gap-x-8 gap-y-4 pt-8">
-                {instrumentationItems.map(({ icon: Icon, color, title, description }) => (
-                    <li key={title} className="pl-8 relative">
-                        <Icon className={`size-6 absolute top-0.5 left-0 ${color}`} />
-                        <h3 className="text-lg font-bold mb-0">{title}</h3>
-                        <p className="mt-1">{description}</p>
-                    </li>
-                ))}
-            </ul>
+            <div className="grid gap-6 @2xl:grid-cols-2">
+                {/* Channels that remember – spans both columns */}
+                <div className={`@2xl:col-span-2 ${WORKSPACE_CARD}`}>
+                    <span aria-hidden className="absolute inset-x-0 top-0 z-10 h-1 bg-blue" />
+                    <div className="p-6 @xl:p-8">
+                        <h3 className="m-0 mb-4 flex items-center gap-2 text-xl font-bold">
+                            Channels that remember <AlphaBadge />
+                        </h3>
+                        <p className="m-0 mb-6 max-w-2xl text-[15px] text-secondary">
+                            Chat windows have amnesia. Channels don't – each one keeps its own working memory, so
+                            kicking off a task means the agent already knows the history.{' '}
+                            <Highlight>No re-briefing a goldfish.</Highlight>
+                        </p>
+                        {/* Channel window mockup */}
+                        <div className="overflow-hidden rounded-md border border-primary">
+                            <div className="flex items-center gap-2 border-b border-primary bg-primary px-3 py-2">
+                                <WindowDots />
+                                <code className="text-sm font-bold text-primary">#billing-service</code>
+                                <span className="ml-auto inline-flex items-center gap-1 text-xs text-secondary">
+                                    <IconMessage className="size-3.5" />
+                                    remembers everything
+                                </span>
+                            </div>
+                            <div className="grid gap-3 bg-primary p-3 @md:grid-cols-2">
+                                {channelKeeps.map(({ Icon, color, name, desc }) => (
+                                    <div
+                                        key={name}
+                                        className="flex items-start gap-3 rounded border border-primary bg-accent p-3"
+                                    >
+                                        <Icon className={`mt-0.5 size-5 shrink-0 ${color}`} />
+                                        <div className="min-w-0">
+                                            <code className="text-sm font-bold text-primary">{name}</code>
+                                            <p className="m-0 mt-0.5 text-sm text-secondary">{desc}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Multiplayer */}
+                <div className={WORKSPACE_CARD}>
+                    <span aria-hidden className="absolute inset-x-0 top-0 z-10 h-1 bg-purple" />
+                    <div className="flex flex-1 flex-col p-6 @xl:p-8">
+                        <h3 className="m-0 mb-4 flex items-center gap-2 text-xl font-bold">
+                            Multiplayer, like work actually is <AlphaBadge />
+                        </h3>
+                        <p className="m-0 mb-6 text-[15px] text-secondary">
+                            Agents are <Highlight>teammates with names.</Highlight> Your people and your agents work the
+                            same threads, hand off tasks, and see the same context – in real time.
+                        </p>
+                        <div className="mt-auto rounded-md border border-primary bg-primary p-4">
+                            <MultiplayerAvatars />
+                        </div>
+                    </div>
+                </div>
+
+                {/* Canvases */}
+                <div className={WORKSPACE_CARD}>
+                    <span aria-hidden className="absolute inset-x-0 top-0 z-10 h-1 bg-orange" />
+                    <div className="flex flex-1 flex-col p-6 @xl:p-8">
+                        <h3 className="m-0 mb-4 flex items-center gap-2 text-xl font-bold">
+                            Describe the tool. Get the tool. <AlphaBadge />
+                        </h3>
+                        <p className="m-0 mb-4 text-[15px] text-secondary">
+                            Ask a channel for a report, a dashboard, or that internal refunds tool nobody ever builds –
+                            and get a <Highlight>canvas</Highlight>: generative UI on PostHog's actual data model.
+                        </p>
+                        <div className="mt-auto">
+                            <div className="mb-3 flex flex-wrap gap-2">
+                                {['Build our internal refunds tool', 'Weekly revenue dashboard'].map((prompt) => (
+                                    <span
+                                        key={prompt}
+                                        className="inline-flex items-center gap-1.5 rounded-full border border-primary bg-primary px-3 py-1 text-xs font-medium text-primary"
+                                    >
+                                        <span className="text-orange">›</span>
+                                        {prompt}
+                                    </span>
+                                ))}
+                            </div>
+                            {/* Generated canvas mockup */}
+                            <div className="overflow-hidden rounded-md border border-primary bg-primary">
+                                <div className="flex items-center gap-2 border-b border-primary px-3 py-2">
+                                    <WindowDots />
+                                    <span className="text-xs text-secondary">refunds-tool</span>
+                                    <span className="ml-auto inline-flex items-center gap-1 rounded-sm bg-highlight px-1 py-0.5 text-[10px] font-bold text-red dark:text-yellow">
+                                        <IconAI className="size-3" />
+                                        canvas
+                                    </span>
+                                </div>
+                                <div className="space-y-2.5 p-3">
+                                    <div className="flex gap-2">
+                                        <div className="h-7 flex-1 rounded border border-primary bg-accent" />
+                                        <div className="h-7 w-16 rounded bg-orange" />
+                                    </div>
+                                    {[0, 1, 2].map((row) => (
+                                        <div key={row} className="flex items-center gap-2">
+                                            <div className="h-3 flex-1 rounded bg-accent" />
+                                            <div className="h-3 w-14 rounded bg-accent" />
+                                            <div className="h-5 w-12 rounded bg-green/30" />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Home – moved in below the workspace features */}
+                <div className={`@2xl:col-span-2 ${WORKSPACE_CARD}`}>
+                    <span aria-hidden className="absolute inset-x-0 top-0 z-10 h-1 bg-green" />
+                    <div className="p-6 pb-0 @xl:p-8 @xl:pb-0">
+                        <h3 className="m-0 mb-4 flex items-center gap-2 text-xl font-bold">
+                            Stay in flow with Home <AlphaBadge />
+                        </h3>
+                        <p className="m-0 mb-5 max-w-2xl text-[15px] text-secondary">
+                            Stop bouncing between GitHub, CI, and review tabs. Home pulls everything that needs you – PR
+                            feedback, failing checks, review requests, stale branches – into one place, in three views
+                            of the same work.
+                        </p>
+                    </div>
+                    <HomeViews />
+                </div>
+            </div>
+
+            {/* Kaiju hedgehog peeking in from the corner – hover to make it rampage */}
+            <MiniHogzilla className="absolute -top-6 right-2 z-10 hidden w-24 @md:block @xl:right-6 @xl:w-32" />
+
+            <style>{`
+                @keyframes meep-typing {
+                    0%, 100% { opacity: 0.25; transform: translateY(0); }
+                    50% { opacity: 1; transform: translateY(-2px); }
+                }
+                @keyframes hogzilla-rampage {
+                    0%, 100% { transform: scale(1.12) rotate(-4deg); }
+                    25% { transform: scale(1.16) rotate(3deg); }
+                    50% { transform: scale(1.12) rotate(-3deg); }
+                    75% { transform: scale(1.16) rotate(2deg); }
+                }
+            `}</style>
         </section>
     )
 }
@@ -1264,73 +1443,171 @@ const mcpServers: MCPServer[] = [
 const mcpServerIcon = (server: MCPServer): string =>
     server.logoKey ? LOGOS[server.logoKey] : `https://www.google.com/s2/favicons?domain=${server.domain}&sz=64`
 
-const TableStakes = () => {
+const SupportedLLMs = () => {
     return (
         <section className="relative mb-12 px-4 @xl:px-8">
-            <div className="grid @2xl:grid-cols-2 gap-8">
-                <div className="@container">
-                    <SectionLabel>Supported LLMs</SectionLabel>
-                    <p>PostHog Code runs on the same models you already use – no markup.</p>
-
-                    <div className="mt-4 grid @xs:grid-cols-2 gap-4 @xs:gap-8 mb-8">
-                        <div>
-                            <p className="m-0 text-xs font-semibold uppercase text-secondary tracking-wide">OpenAI</p>
-                            <ul className="m-0 mt-1 list-none p-0 space-y-2">
-                                <li className="text-sm font-bold text-primary">
-                                    <code>GPT-5.5</code>
-                                </li>
-                                <li className="text-sm font-bold text-primary">
-                                    <code>GPT-5.4</code>
-                                </li>
-                            </ul>
-                        </div>
-                        <div>
-                            <p className="m-0 text-xs font-semibold uppercase text-secondary tracking-wide">
-                                Anthropic
-                            </p>
-                            <ul className="m-0 mt-1 list-none p-0 space-y-2">
-                                <li className="text-sm font-bold text-primary">
-                                    <code>Claude Fable 5</code>
-                                </li>
-                                <li className="text-sm font-bold text-primary">
-                                    <code>Claude Sonnet 4.6</code>
-                                </li>
-                                <li className="text-sm font-bold text-primary">
-                                    <code>Claude Opus 4.8</code>
-                                </li>
-                                <li className="text-sm font-bold text-primary">
-                                    <code>Claude Opus 4.7</code>
-                                </li>
-                                <li className="text-sm font-bold text-primary">
-                                    <code>Claude Haiku 4.5</code>
-                                </li>
-                            </ul>
+            {/* One combined layout: supported-model chips under the title (left),
+                the open-source story + cost annotation in the other column (right).
+                Both headings live inside the grid so they sit in the same row. */}
+            <div className="grid items-start gap-10 @xl:grid-cols-2 @xl:gap-12">
+                {/* Left: supported models as compact chip rows, under the main title */}
+                <div className="space-y-4">
+                    <h2 className="text-2xl mb-3">Supported LLMs</h2>
+                    <div>
+                        <p className="m-0 mb-1.5 text-xs font-semibold uppercase tracking-wide text-secondary">
+                            OpenAI
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                            <code className="text-sm font-bold text-primary">GPT-5.5</code>
+                            <code className="text-sm font-bold text-primary">GPT-5.4</code>
                         </div>
                     </div>
+                    <div>
+                        <p className="m-0 mb-1.5 text-xs font-semibold uppercase tracking-wide text-secondary">
+                            Anthropic
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                            <code className="text-sm font-bold text-primary">Claude Fable 5</code>
+                            <code className="text-sm font-bold text-primary">Claude Sonnet 4.6</code>
+                            <code className="text-sm font-bold text-primary">Claude Opus 4.8</code>
+                            <code className="text-sm font-bold text-primary">Claude Opus 4.7</code>
+                            <code className="text-sm font-bold text-primary">Claude Haiku 4.5</code>
+                        </div>
+                    </div>
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog_fable_task_light_80d657b9d6.png"
+                        alt="Picking a model for a task in PostHog Code"
+                        className="dark:hidden pt-2"
+                        imgClassName="w-full rounded border border-primary shadow-xl"
+                    />
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog_fable_task_dark_e30ddc1938.png"
+                        alt="Picking a model for a task in PostHog Code"
+                        className="hidden dark:block pt-2"
+                        imgClassName="w-full rounded border border-primary shadow-xl"
+                    />
                 </div>
+
+                {/* Right: subheading (the open-source one), copy, and the hand-drawn cost stat */}
                 <div>
-                    <SectionLabel>MCP marketplace</SectionLabel>
-                    <p>
-                        Browse a marketplace of {mcpServers.length}+ MCP servers – including newly added{' '}
-                        <strong>Granola</strong> and <strong>Mem0</strong> – across six categories. Connect any of them
-                        in a click to extend your agents.
+                    <h3 className="text-xl mb-3">Open-source models got good? (awkward)</h3>
+                    <p className="m-0 mb-1.5 text-xs font-semibold uppercase tracking-wide text-secondary">
+                        We support
+                    </p>
+                    <div className="mb-4 flex flex-wrap items-baseline gap-2">
+                        <code className="text-sm font-bold text-primary">GLM-5.2</code>
+                        <span className="text-sm font-medium italic text-secondary">
+                            …and more, if you have{' '}
+                            <Link
+                                to="https://discord.com/invite/E9xV2WnR98"
+                                externalNoIcon
+                                className="font-bold not-italic text-red dark:text-yellow"
+                            >
+                                requests
+                                <IconArrowUpRight className="inline-block size-4 align-text-bottom" />
+                            </Link>
+                        </span>
+                    </div>
+                    <p className="mb-3 leading-relaxed">
+                        The gap between open and frontier models went from “lol” to “wait…” real quick. For a big slice
+                        of real coding work, open models now do the same job for a tenth of the price.
+                    </p>
+                    <p className="mb-6 leading-relaxed">
+                        PostHog Code runs both. Pay token cost (with no markup) on the best tool for the job.
                     </p>
 
-                    <div className="grid grid-cols-2 @lg:grid-cols-3 gap-x-4 gap-y-2.5 mt-4">
-                        {mcpServers.map((server) => (
-                            <div key={server.name} className="flex min-w-0 items-center gap-2">
-                                <img
-                                    src={mcpServerIcon(server)}
-                                    alt=""
-                                    className="size-5 shrink-0 rounded object-contain"
-                                    loading="lazy"
-                                    aria-hidden
-                                />
-                                <p className="m-0 truncate text-sm font-semibold text-primary">{server.name}</p>
-                            </div>
-                        ))}
+                    <div className="leading-none">
+                        <p className="m-0 text-3xl font-bold">
+                            <RoughAnnotation
+                                type="circle"
+                                color="#F54E00"
+                                strokeWidth={3}
+                                padding={[10, 18]}
+                                iterations={3}
+                                delay={200}
+                            >
+                                1/10th
+                            </RoughAnnotation>
+                        </p>
+                        <p className="m-0 mt-1 text-2xl font-bold">
+                            the price
+                            <Tooltip
+                                delay={0}
+                                trigger={
+                                    <sup className="ml-1 cursor-help text-base text-secondary hover:text-primary">
+                                        *
+                                    </sup>
+                                }
+                            >
+                                Probably. You can run the numbers.
+                            </Tooltip>
+                        </p>
+                        <p className="m-0 mt-3 text-xs font-semibold uppercase tracking-wide text-secondary">
+                            For a lot of coding work
+                        </p>
                     </div>
                 </div>
+            </div>
+        </section>
+    )
+}
+
+const MCPMarketplace = () => {
+    return (
+        <section className="relative mb-12 px-4 @xl:px-8">
+            <SectionLabel>MCP marketplace</SectionLabel>
+            <p>Extend your agents with tools, data, and integrations.</p>
+
+            {/* Cap the height and fade the bottom into the page bg so the list reads as "and more" */}
+            <div className="relative mt-4 max-h-64 overflow-hidden">
+                <div className="grid grid-cols-2 gap-x-4 gap-y-2.5 @sm:grid-cols-3 @lg:grid-cols-4 @2xl:grid-cols-6">
+                    {mcpServers.map((server) => (
+                        <div key={server.name} className="flex min-w-0 items-center gap-2">
+                            <img
+                                src={mcpServerIcon(server)}
+                                alt=""
+                                className="size-5 shrink-0 rounded object-contain"
+                                loading="lazy"
+                                aria-hidden
+                            />
+                            <p className="m-0 truncate text-sm font-semibold text-primary">{server.name}</p>
+                        </div>
+                    ))}
+                </div>
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-[rgb(var(--bg)/0)] to-[rgb(var(--bg))]" />
+            </div>
+        </section>
+    )
+}
+
+// Third beat of the opening narrative (old way → PostHog way → this): the job abstracting up.
+const BiggerPictureSection = () => {
+    return (
+        <section className="relative mb-8 @xl:mb-12 px-4 @xl:px-8">
+            <SectionLabel>
+                <InlineIcon icon={StickerCoffee} className="!size-10 !top-3 -rotate-1">
+                    Congratulations
+                </InlineIcon>{' '}
+                on your promotion
+            </SectionLabel>
+
+            <p className="text-base leading-loose">
+                <ChoppyReveal wordDelay={40}>
+                    {'You used to write code. Then you '}
+                    <em>prompted outputs</em>
+                    {
+                        ". Now you orchestrate outcomes. PostHog Code is built for the abstraction level you're moving to next – and the work that "
+                    }
+                    <RoughAnnotation type="underline" color="#F54E00" strokeWidth={2}>
+                        <em>isn't quite possible yet</em>
+                    </RoughAnnotation>
+                    {", but you'll probably be doing soon."}
+                </ChoppyReveal>
+            </p>
+
+            {/* The punch line at the end of the narrative */}
+            <div className="mt-8 flex justify-center @xl:justify-start">
+                <LetPostHogScroller />
             </div>
         </section>
     )
@@ -1338,69 +1615,78 @@ const TableStakes = () => {
 
 const InboxCallout = () => {
     return (
-        <section className="relative mb-12 @2xl:mb-20 px-4 @xl:px-8">
-            <div className="border border-primary rounded-md bg-accent p-6 @2xl:p-8">
-                <p className="text-sm font-semibold uppercase tracking-wide text-secondary mb-2">
-                    Part of the self-driving loop
-                </p>
-                <h2 className="text-2xl font-bold mb-2">Your Inbox lives in Code</h2>
-                <p className="mb-4 max-w-2xl">
-                    PostHog watches your product and files what needs doing – errors, support tickets, replay trends –
-                    as ranked reports. They land in your Inbox inside Code, where you turn any of them into a task in a
-                    click. Code is where you action the self-driving loop.
-                </p>
-                <OSButton asLink to="/self-driving" state={{ newWindow: true }} variant="primary" size="md">
-                    How self-driving works
-                </OSButton>
-            </div>
-        </section>
-    )
-}
-
-const SlackAppCallout = () => {
-    return (
-        <section className="relative mb-12 @2xl:mb-20 px-4 @xl:px-8">
-            <div className="border border-primary rounded-md bg-accent overflow-hidden">
-                <div className="p-6 @2xl:p-8 grid @2xl:grid-cols-2 gap-6 @2xl:gap-10">
+        <section className="relative mb-6 @2xl:mb-8 px-4 @xl:px-8">
+            <div className="relative overflow-hidden rounded-md border border-primary bg-accent">
+                <div className="grid gap-6 p-6 @2xl:grid-cols-2 @2xl:items-center @2xl:gap-10 @2xl:p-8">
                     <div>
-                        <p className="text-sm font-semibold uppercase tracking-wide text-secondary mb-2">
-                            While you wait...
-                        </p>
-                        <h2 className="text-2xl font-bold mb-2">PostHog Code in Slack</h2>
-                        <p className="mb-4">
-                            Answer data questions, fix bugs, and kick off PRs by mentioning <code>@PostHog</code>.
-                        </p>
-                        <OSButton asLink to="/slack" state={{ newWindow: true }} variant="primary" size="md">
-                            About the Slack app
+                        <div className="mb-4 flex items-center gap-2">
+                            <StickerPullRequest className="size-8 -rotate-3" />
+                            <h2 className="m-0 text-2xl">Part of the self-driving loop</h2>
+                        </div>
+                        <ul className="m-0 mb-6 list-none space-y-3 p-0">
+                            <li>
+                                <strong>Desktop</strong> is where you do the work – run and steer agents, solo or with
+                                your team.
+                            </li>
+                            <li>
+                                <Link
+                                    to="/slack"
+                                    state={{ newWindow: true }}
+                                    className="font-bold text-red dark:text-yellow"
+                                >
+                                    Slack
+                                </Link>{' '}
+                                is where you talk it through – tag <code>@PostHog</code> to ship without leaving the
+                                thread.
+                            </li>
+                            <li>
+                                <Link
+                                    to="/products"
+                                    state={{ newWindow: true }}
+                                    className="font-bold text-red dark:text-yellow"
+                                >
+                                    Web
+                                </Link>{' '}
+                                and{' '}
+                                <Link
+                                    to="/mcp"
+                                    state={{ newWindow: true }}
+                                    className="font-bold text-red dark:text-yellow"
+                                >
+                                    MCP
+                                </Link>{' '}
+                                are where you dig into what happened – analytics, replays, flags, queried however you
+                                like.
+                            </li>
+                        </ul>
+                        <OSButton asLink to="/self-driving" state={{ newWindow: true }} variant="primary" size="md">
+                            How self-driving works
                         </OSButton>
                     </div>
-                    <ul className="space-y-2">
-                        <li className="relative pl-5">
-                            <IconCheck className="size-4 text-green absolute left-0 top-1" />
-                            Ship a fix from a bug report
-                        </li>
-                        <li className="relative pl-5">
-                            <IconCheck className="size-4 text-green absolute left-0 top-1" />
-                            Diagnose and fix failing CI
-                        </li>
-                        <li className="relative pl-5">
-                            <IconCheck className="size-4 text-green absolute left-0 top-1" />
-                            Rip out a feature flag after rollout
-                        </li>
-                        <li className="relative pl-5">
-                            <IconCheck className="size-4 text-green absolute left-0 top-1" />
-                            Fix typos and update content
-                        </li>
-                        <li className="relative pl-5">
-                            <IconCheck className="size-4 text-green absolute left-0 top-1" />
-                            Work across repos
-                        </li>
-                    </ul>
+
+                    <div className="relative">
+                        <p className="mb-5 text-center text-sm text-muted">
+                            Waking up to three PRs for papercuts that would have derailed your day? Ah, that's bliss.
+                        </p>
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/inbox_light_9aa9eed335.png"
+                            alt="The Inbox surfacing reports and pull requests in PostHog Code"
+                            className="dark:hidden w-full rounded border border-primary shadow-2xl"
+                        />
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/inbox_dark_216a157762.png"
+                            alt="The Inbox surfacing reports and pull requests in PostHog Code"
+                            className="hidden dark:block w-full rounded border border-primary shadow-2xl"
+                        />
+                    </div>
                 </div>
-                <img
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/slack_app_update_docs_f0c917f70a.png"
-                    alt="PostHog Slack app screenshot"
-                    className="w-full block"
+
+                {/* Hogzilla banner anchored to the bottom-right of the box, on top of everything */}
+                <CloudinaryImage
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/self_driving_banner_fde531c7fb.png"
+                    alt=""
+                    className="absolute bottom-0 right-0 z-20 w-72 @lg:w-96 @2xl:w-[32rem]"
+                    imgClassName="w-full"
                 />
             </div>
         </section>
@@ -1411,9 +1697,20 @@ const TLDR = () => {
     return (
         <section className="relative mb-8 @2xl:mb-12 px-4 @xl:px-8">
             <h2 className="text-2xl font-bold mb-2">Try it</h2>
-            <p>PostHog Code is launching in Spring 2026. Join the waitlist to be the first to try it.</p>
-            <div className="max-w-lg @container bg-blue/10 border border-blue rounded-md px-8 py-6 shadow-xl">
-                <WaitlistForm />
+            <p className="m-0">PostHog Code is launching in Summer 2026.</p>
+            <div className="mt-2 grid items-center gap-8 @2xl:grid-cols-2 @2xl:gap-12">
+                <div className="@container bg-blue/10 border border-blue rounded-md px-8 py-6 shadow-xl">
+                    <WaitlistForm />
+                </div>
+                <div>
+                    <MeepNotification className="mb-5 flex justify-center @2xl:justify-start" />
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/evolution_of_build_mode_0bdd109b00.png"
+                        alt="The evolution of build mode"
+                        className="w-full"
+                        imgClassName="w-full"
+                    />
+                </div>
             </div>
         </section>
     )
@@ -1650,6 +1947,9 @@ const FAQ_ITEMS = [
                     </a>{' '}
                     for the full breakdown.
                 </p>
+                <p>
+                    If your agents did nothing this month, you pay nothing this month. (Imagine Anthropic saying that.)
+                </p>
             </div>
         ),
     },
@@ -1673,8 +1973,8 @@ const FAQ_ITEMS = [
 
 function FAQ() {
     return (
-        <section className="mb-8 max-w-2xl px-4 @xl:px-8">
-            <h2 className="text-2xl m-0 mb-6">FAQ</h2>
+        <section className="mb-8 px-4 @xl:px-8">
+            <h2 className="text-2xl m-0 mb-6">Frequently asked questions</h2>
 
             <Accordion
                 type="multiple"
@@ -1715,40 +2015,32 @@ export default function CodePage() {
             />
             <Editor slug="/code" maxWidth="100%" hasPadding={false} disableFormatting>
                 <div className="@container not-prose font-rounded">
-                    <header className="relative mb-12">
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/texture_tan_9608fcca70.png"
-                            className="dark:hidden absolute inset-0"
-                            imgClassName="h-full w-full"
-                        />
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/texture_tan_dark_a92b0e022d.png"
-                            className="hidden dark:block absolute inset-0"
-                            imgClassName="h-full w-full"
-                        />
-                        <div className="relative flex flex-col items-center w-full px-4 @xl:px-8 py-4">
+                    <header className="relative mb-12 border-b border-primary bg-primary shadow-xl">
+                        <div className="relative flex flex-col items-center w-full px-4 @xl:px-8 py-6 @xl:py-8">
                             <HeroSection />
                         </div>
                     </header>
 
-                    <div className="max-w-5xl mx-auto">
+                    <div className="max-w-4xl mx-auto">
                         <OldWaySection />
 
                         <PostHogWaySection onComplete={() => setPostHogWayDone(true)} />
 
+                        <BiggerPictureSection />
+
+                        <TableStakesSection />
+
                         <Features />
 
-                        <HomeSection />
+                        <AgenticWorkspaceSection />
 
-                        <Instrumentation />
+                        <SupportedLLMs />
 
-                        <TableStakes />
+                        <MCPMarketplace />
 
                         <InboxCallout />
 
                         <TLDR ready={postHogWayDone} />
-
-                        <SlackAppCallout />
 
                         <FAQ />
                     </div>
