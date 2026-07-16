@@ -1123,6 +1123,7 @@ const appSettings: AppSettings = {
         position: {
             center: true,
         },
+        toolbar: true,
     },
     cher: {
         size: {
@@ -1563,6 +1564,9 @@ const appSettings: AppSettings = {
         toolbar: true,
     },
     '/changelog': {
+        toolbar: true,
+    },
+    '/feet-pics': {
         toolbar: true,
     },
 } as const

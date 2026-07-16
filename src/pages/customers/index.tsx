@@ -46,7 +46,7 @@ const CustomerLink = ({
         <Link
             to={customer.slug === 'posthog' ? '/blog/posthog-marketing' : `/customers/${customer.slug}`}
             state={{ newWindow: true }}
-            className="group"
+            className="group inline-flex h-full items-center"
         >
             {children}
         </Link>
@@ -55,8 +55,9 @@ const CustomerLink = ({
     )
 }
 
+const LOGO_CLASS = 'h-8 w-auto max-w-[180px] object-contain fill-current'
+
 const Customer = ({ number, customer, hasCaseStudy }: CustomerProps) => {
-    // Determine logo rendering logic - same as CustomersSlide.tsx
     const renderLogo = () => {
         if (!customer.logo) {
             return <span>{customer.name}</span>
@@ -65,31 +66,19 @@ const Customer = ({ number, customer, hasCaseStudy }: CustomerProps) => {
         // Check if logo is a React component (single SVG format)
         if (typeof customer.logo === 'function') {
             const LogoComponent = customer.logo
-            const heightClass = customer.height ? `h-${customer.height}` : ''
-            const className = `w-full fill-current object-contain ${heightClass}`.trim()
 
             return (
                 <CustomerLink customer={customer} hasCaseStudy={hasCaseStudy}>
-                    <LogoComponent className={className} />
+                    <LogoComponent className={LOGO_CLASS} />
                 </CustomerLink>
             )
         }
 
         // Otherwise, it's the existing light/dark object format
-        const heightClass = customer.height ? `max-h-${customer.height}` : 'max-h-10'
-
         return (
             <CustomerLink customer={customer} hasCaseStudy={hasCaseStudy}>
-                <img
-                    src={customer.logo.light}
-                    alt={customer.name}
-                    className={`w-auto object-contain dark:hidden ${heightClass}`}
-                />
-                <img
-                    src={customer.logo.dark}
-                    alt={customer.name}
-                    className={`w-auto object-contain hidden dark:block ${heightClass}`}
-                />
+                <img src={customer.logo.light} alt={customer.name} className={`${LOGO_CLASS} dark:hidden`} />
+                <img src={customer.logo.dark} alt={customer.name} className={`${LOGO_CLASS} hidden dark:block`} />
             </CustomerLink>
         )
     }
@@ -99,7 +88,7 @@ const Customer = ({ number, customer, hasCaseStudy }: CustomerProps) => {
         cells: [
             { content: number },
             {
-                content: renderLogo(),
+                content: <div className="flex h-8 items-center">{renderLogo()}</div>,
                 className: '!p-4',
             },
             { content: customer.toolsUsed?.join(', '), className: 'text-sm' },
@@ -129,7 +118,7 @@ const sortCustomers = (customers: CustomerType[]) => {
 
 const columns = [
     { name: '', width: 'auto', align: 'center' as const },
-    { name: 'Company name', width: 'minmax(150px,1fr)', align: 'center' as const },
+    { name: 'Company name', width: 'minmax(150px,1fr)', align: 'left' as const },
     { name: 'Product(s) used', width: 'minmax(auto,250px)', align: 'left' },
     { name: 'Case study', width: 'minmax(auto,100px)', align: 'center' as const },
     { name: 'Notes', width: 'minmax(auto,180px)', align: 'left' as const },

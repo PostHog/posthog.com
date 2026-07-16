@@ -4851,10 +4851,6 @@
             "destination": "/"
         },
         {
-            "source": "/mcp",
-            "destination": "/docs/model-context-protocol"
-        },
-        {
             "source": "/docs/session-replay/start-here",
             "destination": "/docs/session-replay"
         },

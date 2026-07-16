@@ -66,6 +66,7 @@ export default function FeetPics(): JSX.Element {
                         ),
                     },
                 ]}
+                className="border-t border-primary"
             >
                 <div
                     className={`@md:pl-4 grid ${

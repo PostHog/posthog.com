@@ -1305,7 +1305,7 @@ const TLDR = () => {
     return (
         <section className="relative mb-8 @2xl:mb-12 px-4 @xl:px-8">
             <h2 className="text-2xl font-bold mb-2">Try it</h2>
-            <p>PostHog Code is launching in Spring 2026. Join the waitlist to be the first to try it.</p>
+            <p>PostHog Code is launching soon. Join the waitlist to be the first to try it.</p>
             <div className="max-w-lg @container bg-blue/10 border border-blue rounded-md px-8 py-6 shadow-xl">
                 <WaitlistForm />
             </div>

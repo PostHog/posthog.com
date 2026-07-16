@@ -6,8 +6,8 @@ import { ImageDW, TooltipDW } from 'components/Home/Decorations'
 export const DataStackSection = () => (
     <div id="customer-infrastructure">
         <h2>
-            The PostHog data stack: built for data teams,{' '}
-            <span className="bg-blue/10 dark:bg-blue/20 text-blue rounded-md px-1">loved by product people</span>
+            The PostHog Context Warehouse: Built for data teams,{' '}
+            <span className="bg-blue/10 dark:bg-blue/20 text-blue rounded-md px-1">loved by engineers</span>
         </h2>
 
         <div className="@lg:float-right text-sm @lg:max-w-xs bg-accent p-4 rounded-sm @lg:ml-6 @lg:mb-2 relative overflow-hidden">
@@ -31,17 +31,17 @@ export const DataStackSection = () => (
             <ImageDW />
         </div>
 
-        <Markdown className="[&_li]:marker:text-primary/50">{`When you're analyzing how customers use your product, you should be operating from *the full set of data*.
+        <Markdown className="[&_li]:marker:text-primary/50">{`Whether you're analyzing customer usage or directing an AI, you should be operating with the *full context*.
 
-This includes customer information that happens *outside your product*:
+This includes things that happen outside your product:
 
 - payments from Stripe
-- exceptions in an error tracking tool
-- tickets in your support platform
+- enrichment from Clay
+- tickets in Zendesk
 
-Having all the data in one place means you can make more informed decisions about what to build next.
+Our context warehouse integrates with 120+ other tools and can push and pull data from our managed data warehouse.
 
-PostHog's Product OS isn't just analytics – it's the entire suite of tools built to give you a single source of truth about your customers.`}</Markdown>
+Combine it with all the other tools and PostHog isn't just a single source of truth. It's a single source of *everything*.`}</Markdown>
 
         <Link to="/data-stack" state={{ newWindow: true }}>
             README: PostHog data stack.md

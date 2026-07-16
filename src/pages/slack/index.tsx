@@ -695,7 +695,7 @@ export default function SlackAppPage(): JSX.Element {
                 })}
             />
             <ReaderView leftSidebar={<LeftSidebarContent />} title="posthog-slack-app.md" hideTitle={true}>
-                <div className="max-w-2xl mx-auto">
+                <div>
                     <div className="text-center mb-4">
                         <h1 className="text-3xl @md/reader-content-container:text-4xl font-bold m-0 mb-2">
                             Don't @ <em>me,</em> <Highlight>@PostHog</Highlight>
@@ -820,6 +820,7 @@ export default function SlackAppPage(): JSX.Element {
                     <div className="not-prose my-6">
                         <OSTable
                             size="sm"
+                            width="full"
                             rowAlignment="top"
                             className="text-sm"
                             columns={[

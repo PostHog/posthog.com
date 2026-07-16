@@ -26,7 +26,6 @@ export default function MediaPlayer({
     startTime = 0,
     borderRadius = true,
 }: MediaPlayerProps) {
-    const { websiteMode } = useApp()
     const [playerState, setPlayerState] = useState({
         isPlaying: true,
         player: null as any,

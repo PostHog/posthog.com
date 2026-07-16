@@ -196,10 +196,10 @@ export default function Credits({ pageContext }: { pageContext?: { buildTime?: s
                             <div className="flex flex-col items-center w-full">
                                 <figure
                                     data-skin="secondary"
-                                    className="aspect-[600/315] bg-primary w-full border border-primary flex justify-center items-center mb-4 rounded max-w-md"
+                                    className="bg-primary w-full border border-primary flex justify-center items-center mb-4 rounded max-w-md"
                                 >
                                     <CloudinaryImage
-                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/default_a3b46f408e.png"
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_07_16_T16_36_40_770_Z_3668ebd882.png"
                                         className="w-full"
                                     />
                                 </figure>
