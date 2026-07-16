@@ -3,12 +3,12 @@ title: Upload source maps with CLI
 showStepsToc: true
 ---
 
-import CLIDownload from "../_snippets/cli/download.mdx"
-import CLIAuthenticate from "../_snippets/cli/authenticate.mdx"
-import CLIInject from "../_snippets/cli/inject.mdx"
-import CLIUpload from "../_snippets/cli/upload.mdx"
-import StepVerifySymbolSetsUpload from '../_snippets/StepVerifySymbolSetsUpload'
-import WizardSection from './_snippets/wizard-section.mdx'
+import CLIDownload from "../_snippets/cli/download.mdx";
+import CLIAuthenticate from "../_snippets/cli/authenticate.mdx";
+import CLIInject from "../_snippets/cli/inject.mdx";
+import CLIUpload from "../_snippets/cli/upload.mdx";
+import StepVerifySymbolSetsUpload from "../_snippets/StepVerifySymbolSetsUpload";
+import WizardSection from "./_snippets/wizard-section.mdx";
 
 <WizardSection />
 
@@ -18,35 +18,37 @@ import WizardSection from './_snippets/wizard-section.mdx'
 
 <Step title="Download CLI" badge="required">
 
-  <CLIDownload/>
+<CLIDownload />
 
 </Step>
 
 <Step title="Authenticate" badge="required">
 
-  <CLIAuthenticate />
+<CLIAuthenticate />
 
-  If you already keep your project's configuration in a dotenv-style file, you can load these variables from it with the `--dotenv-file` option instead of exporting them:
+If you already keep your project's configuration in a dotenv-style file, you can load these variables from it with the `--dotenv-file` option instead of exporting them:
 
-  ```bash
-  posthog-cli --dotenv-file .env sourcemap upload --directory ./path/to/assets
-  ```
+```bash
+posthog-cli --dotenv-file .env sourcemap upload --directory ./path/to/assets
+```
+
+Alternatively, set the `POSTHOG_CLI_DOTENV_FILE` environment variable to the path of your dotenv file. This is useful in environments where you control the environment but not the command line, such as an Xcode build phase.
 
 </Step>
 
 <Step title="Inject" badge="required">
 
-  Once you've built your application and have bundled assets, inject the context required by PostHog to associate the maps with the served code.
+Once you've built your application and have bundled assets, inject the context required by PostHog to associate the maps with the served code.
 
-  <CLIInject />
+<CLIInject />
 
-  You can verify that the metadata has been injected by checking for the `//# chunkId=...` comment in the minified code.
+You can verify that the metadata has been injected by checking for the `//# chunkId=...` comment in the minified code.
 
 </Step>
 
 <Step title="Upload" badge="required">
 
-  You will then need to upload the modified assets to PostHog.
+You will then need to upload the modified assets to PostHog.
 
 <CLIUpload path="./path/to/assets" />
 
@@ -54,9 +56,9 @@ import WizardSection from './_snippets/wizard-section.mdx'
 
 <Step title="Serve injected assets" badge="required">
 
-  You *must* serve the injected assets in deployed production app. The injected metadata is used during error capture to identify the correct source map to use.
+You _must_ serve the injected assets in deployed production app. The injected metadata is used during error capture to identify the correct source map to use.
 
-  If you serve a copy of the bundled assets as they were prior to running `posthog-cli sourcemap inject`, we won't be able to use the uploaded sourcemap to unminify or demangle your stack traces.
+If you serve a copy of the bundled assets as they were prior to running `posthog-cli sourcemap inject`, we won't be able to use the uploaded sourcemap to unminify or demangle your stack traces.
 
 </Step>
 
