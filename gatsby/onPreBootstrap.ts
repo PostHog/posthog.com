@@ -63,7 +63,15 @@ export const onPreBootstrap: GatsbyNode['onPreBootstrap'] = async ({ cache }) =>
         const assetHostConfig = assetHost
             ? `asset_host: "${assetHost}",\n    strict_script_versioning: true,\n    `
             : ''
+        // Skip initialization on local dev hosts so localhost sessions (e.g. a
+        // developer running this site with the prod key set) don't send events,
+        // recordings, or exceptions to the production project.
+        const localHostGuard = `var posthogHost = window.location.hostname;
+if (posthogHost === "localhost" || posthogHost === "127.0.0.1" || posthogHost === "0.0.0.0" || posthogHost === "::1" || posthogHost === "[::1]" || posthogHost.endsWith(".local")) {
+    console.info("PostHog disabled on local host " + posthogHost);
+} else {`
         const posthogScript = `!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src="${arrayRoute}",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+${localHostGuard}
 posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
     api_host: "${process.env.GATSBY_POSTHOG_API_HOST}",
     ui_host: "${process.env.GATSBY_POSTHOG_UI_HOST}",
@@ -96,7 +104,8 @@ posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
         click_count: 4,
         timeout_ms: 750,
     },
-})`
+})
+}`
         const scriptsDir = path.resolve(__dirname, '../static/scripts')
         fs.writeFileSync(path.join(scriptsDir, 'posthog-init.js'), posthogScript)
     }
