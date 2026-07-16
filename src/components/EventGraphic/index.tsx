@@ -46,7 +46,7 @@ const EventGraphic = forwardRef<HTMLDivElement, EventGraphicProps>(function Even
                     darkText ? 'text-black' : 'text-white'
                 }`}
             >
-                <div className="absolute right-[6%] top-[24%] aspect-square w-[46%] overflow-hidden rounded-full border-[0.75cqw] border-white bg-tan shadow-xl">
+                <div className="absolute right-[6%] top-[31%] aspect-square w-[46%] overflow-hidden rounded-full border-[0.75cqw] border-white bg-tan shadow-xl">
                     <img
                         src={speaker?.avatarUrl || DEFAULT_HEDGEHOG}
                         alt={speaker?.name || 'Max the hedgehog'}
@@ -56,8 +56,8 @@ const EventGraphic = forwardRef<HTMLDivElement, EventGraphicProps>(function Even
                 </div>
                 <div className="absolute inset-0 flex flex-col p-[6%]">
                     <h3
-                        className={`m-0 w-[56%] break-words font-squeak font-bold uppercase leading-[0.95] ${
-                            title.length > 32 ? 'text-[7.5cqw]' : 'text-[10cqw]'
+                        className={`m-0 w-full break-words font-squeak font-bold uppercase leading-[0.95] ${
+                            title.length > 40 ? 'text-[7.5cqw]' : title.length > 22 ? 'text-[9.5cqw]' : 'text-[12cqw]'
                         }`}
                     >
                         {title}
@@ -67,7 +67,7 @@ const EventGraphic = forwardRef<HTMLDivElement, EventGraphicProps>(function Even
                         {locationLine && <div>{locationLine}</div>}
                     </div>
                     {speaker && (
-                        <div className="mb-[2%] mt-auto w-[52%]">
+                        <div className="mb-[6%] mt-auto w-[52%]">
                             <div className="mb-[1.5%] font-rounded text-[2.75cqw] font-semibold uppercase leading-none">
                                 Featuring:
                             </div>
