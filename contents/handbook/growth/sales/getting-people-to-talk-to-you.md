@@ -96,3 +96,12 @@ That last line is very important because it gives them a safe option to say "no"
 2. If there's no response again after another week, change the subject again to "Did I lose you?"
 
 Leave the body empty. This will pick up about 80% of people who go dark. If not, close out the opportunity 3 days after this final message.
+
+## LinkedIn Sales Nav
+To get notified about new hires and other changes to the accounts you manage, you can set up lists of accounts to track in LinkedIn Sales Nav.
+
+1. Search for an account you want and click on their profile.
+2. Click the star icon on the left, and then choose a list to add them to.
+3. Optional, tailor the notifications you get [in LinkedIn](https://www.linkedin.com/sales/settings/app-notifications)
+
+You will now be notified any time a senior hire joins your account, which will be helpful for tracking folks to reach out to and give advanced signals around potential data science hires.

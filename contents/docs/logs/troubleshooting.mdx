@@ -14,13 +14,13 @@ This page covers troubleshooting for Logs. For setup, see the [installation guid
 
 **Solutions**:
 - Verify you're using the correct project token from [Project Settings](https://app.posthog.com/settings/project)
-- Check the Authorization header format: `Bearer {your-project-api-key}`
-- If using query parameter, verify the format: `?token={your-project-api-key}`
+- Check the Authorization header format: `Bearer <ph_project_token>`
+- If using query parameter, verify the format: `?token=<ph_project_token>`
 - Ensure your project token hasn't been rotated or revoked
 
 ## Connection issues
 
-**Problem**: Cannot connect to the PostHog logs endpoint.
+**Problem**: Cannot connect to the PostHog Logs endpoint.
 
 **Solutions**:
 - Verify the endpoint URL: `https://us.i.posthog.com/i/v1/logs` 
@@ -58,9 +58,19 @@ This page covers troubleshooting for Logs. For setup, see the [installation guid
 - Check that log attributes are properly structured
 - Use the OpenTelemetry logging APIs instead of raw log libraries
 
-## API key authentication issues
+## Logs not appearing on a person's profile
 
-**Problem**: Confused about which API key to use or how to authenticate.
+**Problem**: Logs are searchable in the **Logs** view, but the person profile's **Logs** tab is empty (or missing logs you expected to see).
+
+**Solutions**:
+- Confirm each log record carries the attribute `posthogDistinctId` (camelCase, lowercase `p`) — see [Link logs to a person](/docs/logs/link-person). `distinct_id`, `posthog_distinct_id`, and `user_id` are **not** equivalent unless you've explicitly configured one as the [custom attribute key](/docs/logs/link-person#customizing-the-attribute-key).
+- The value of the attribute must equal one of the person's `distinct_id`s exactly — partial or prefixed matches are not picked up.
+- If your team has customized the attribute key (via the `logs_config` endpoint), the person profile's Logs tab shows a hint above the chart indicating which key is being used. Make sure your pipeline emits logs under that exact key.
+- Date range: the person Logs tab respects the same date range picker as the main Logs view. Expand the range if the logs are older than the default window.
+
+## Project token authentication issues
+
+**Problem**: Confused about which key to use or how to authenticate.
 
 **Solutions**:
 - Use your **project token** (the same one you use for capturing events)

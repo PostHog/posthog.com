@@ -389,7 +389,7 @@ if (typeof window !== 'undefined') {
     parsedBootstrapData = JSON.parse(flags)
   }
 
-  posthog.init("<ph_posthog_project_api_key", {
+  posthog.init("<ph_project_token>", {
     api_host: "<ph_client_api_host>",
     bootstrap: parsedBootstrapData
   })

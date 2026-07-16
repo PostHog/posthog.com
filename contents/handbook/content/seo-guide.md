@@ -71,7 +71,7 @@ A more dialog-like tone can also help capture featured snippets or *People Also 
 
 > **Good Q&A example**  
 > - **Heading**: How do we reduce churn?   
-> - **Body copy**: Start by identifying where customers are dropping off – look at cancellation reasons, churn cohorts, and [feedback surveys](https://posthog.com/surveys). Then tackle the biggest issues first, like onboarding problems or missing features. Even small fixes (e.g. a clearer onboarding flow) can reduce churn quickly. Follow-up questions we could answer: What’s a “good” churn rate for SaaS? What metrics should we track to spot churn early? How do we measure if our retention efforts are working? How can we build a feedback survey? 
+> - **Body copy**: Start by identifying where customers are dropping off – look at cancellation reasons, churn cohorts, and [feedback surveys](/surveys). Then tackle the biggest issues first, like onboarding problems or missing features. Even small fixes (e.g. a clearer onboarding flow) can reduce churn quickly. Follow-up questions we could answer: What’s a “good” churn rate for SaaS? What metrics should we track to spot churn early? How do we measure if our retention efforts are working? How can we build a feedback survey? 
 
 ### 6. Don’t put all our eggs in one keyword basket
 
@@ -125,7 +125,7 @@ Here are some best practices for internal linking:
 
 ### 10. Optimize for LLMs
 
-We’re no longer just writing for Google – we’re writing for the answer engines too. ChatGPT, Perplexity, Claude, and Google’s AI Overviews are pulling from our content to build answers. To win those spots, we need to make our pages easy to retrieve, easy to quote, and obviously authoritative.
+We’re no longer just writing for Google – [we’re writing for the answer engines too](/handbook/aeo-advice). ChatGPT, Perplexity, Claude, and Google’s AI Overviews are pulling from our content to build answers. To win those spots, we need to make our pages easy to retrieve, easy to quote, and obviously authoritative.
 
 The goal is to make our content the easiest, clearest, most trustworthy answer in the room, for both humans and machines. How we do that:
 

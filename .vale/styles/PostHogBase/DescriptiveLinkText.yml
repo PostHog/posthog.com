@@ -1,6 +1,6 @@
 extends: existence
 message: "Use descriptive link text instead of '%s'."
-link: https://posthog.com/handbook/docs-and-wizard/docs-style-guide
+link: https://posthog.com/handbook/wizard-and-docs/docs-style-guide
 level: warning
 scope: raw
 nonword: true

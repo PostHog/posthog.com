@@ -1,0 +1,47 @@
+---
+title: CUPED variance reduction
+---
+
+CUPED (Controlled-experiment Using Pre-Experiment Data) is an optional variance reduction method for experiment metrics. It uses participants' behavior before exposure to reduce noise in their post-exposure metric values.
+
+It doesn't change randomization, who is included, or which post-exposure events count. The stats engine adjusts the metric values before estimating the treatment effect, so the analysis can be more precise.
+
+## Configure CUPED
+
+Set a project-level default, then override it on individual Experiments when needed.
+
+The project-level setting controls the default for all Experiments in the project. When enabled there, CUPED applies unless an Experiment overrides it.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/experiment_settings_cuped_light_60bccd8bc2.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/experiment_settings_cuped_dark_80467ec9e5.png"
+  classes="rounded"
+  alt="Project settings showing the default CUPED variance reduction configuration"
+/>
+
+To configure CUPED for a single Experiment, open its **Settings** tab. You can use the project default or override it for that Experiment.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/experiment_tab_settings_cuped_light_d39f7abf94.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/experiment_tab_settings_cuped_dark_afb5d7b87f.png"
+  classes="rounded"
+  alt="Experiment settings tab showing CUPED variance reduction configuration"
+/>
+
+## Why enable CUPED
+
+Enable CUPED when pre-exposure behavior is likely to predict the metric you're testing, such as revenue, usage volume, or activity counts. Stronger correlation means more variance reduction.
+
+When that prediction is useful, CUPED narrows confidence or credible intervals. This can help you detect smaller effects, or reach the same decision with less traffic.
+
+For example, if revenue is the metric, two participants can have the same post-exposure revenue but different baselines. The participant who was low-revenue before exposure gets a higher adjusted metric than the participant who was already high-revenue before exposure. CUPED uses that baseline signal across randomized groups, so predictable differences between participants add less noise to the treatment estimate.
+
+CUPED is less useful when participants have little history or when past behavior doesn't predict the metric.
+
+If there isn't useful pre-exposure data, enabling CUPED usually has little or no effect on the result. The stats engine estimates that relationship; when it's weak, the adjustment is small. CUPED still compares the same randomized groups.
+
+## Performance cost
+
+CUPED scans data from the experiment period and the pre-exposure window. This means it has a performance cost compared to analyzing the same metric without CUPED.
+
+Large tests or long look-back windows can take longer to analyze. Use the look-back window setting to control how much pre-exposure data PostHog scans.

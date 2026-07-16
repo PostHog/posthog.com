@@ -1,0 +1,119 @@
+---
+title: Node.js tracing installation
+platformLogo: nodejs
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import TracingNextSteps from './_snippets/tracing-next-steps.mdx'
+
+<Steps>
+
+<Step title="Install OpenTelemetry packages" badge="required">
+
+For the complete SDK reference, see the [OpenTelemetry JavaScript docs](https://opentelemetry.io/docs/languages/js/).
+
+```bash
+npm install @opentelemetry/api @opentelemetry/sdk-trace-node @opentelemetry/sdk-trace-base @opentelemetry/resources @opentelemetry/semantic-conventions @opentelemetry/exporter-trace-otlp-proto
+```
+
+`@opentelemetry/exporter-trace-otlp-proto` is the OTLP HTTP/protobuf trace exporter. The similarly named `-otlp-http` package sends HTTP/JSON and `-otlp-grpc` sends gRPC, so pick `-proto` to match this guide.
+
+</Step>
+
+<Step title="Get your project token" badge="required">
+
+You'll need your PostHog project token to authenticate trace requests. This is the same token you use for capturing events with the PostHog SDK.
+
+> **Important:** Use your **project token** which starts with `phc_`. Do **not** use a personal API key (which starts with `phx_`).
+
+You can find your project token in [Project settings](https://app.posthog.com/settings).
+
+</Step>
+
+<Step title="Configure the SDK" badge="required">
+
+Set up the OpenTelemetry SDK to export spans to PostHog over OTLP HTTP.
+
+```javascript
+import { NodeTracerProvider } from '@opentelemetry/sdk-trace-node'
+import { BatchSpanProcessor } from '@opentelemetry/sdk-trace-base'
+import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-proto'
+import { resourceFromAttributes } from '@opentelemetry/resources'
+import { ATTR_SERVICE_NAME } from '@opentelemetry/semantic-conventions'
+
+const exporter = new OTLPTraceExporter({
+  url: '<ph_client_api_host>/i/v1/traces',
+  headers: {
+    Authorization: 'Bearer <ph_project_token>',
+  },
+})
+
+const provider = new NodeTracerProvider({
+  resource: resourceFromAttributes({
+    [ATTR_SERVICE_NAME]: 'my-service',
+  }),
+  spanProcessors: [new BatchSpanProcessor(exporter)],
+})
+
+provider.register()
+```
+
+Alternatively, configure the exporter with environment variables:
+
+```bash
+OTEL_EXPORTER_OTLP_TRACES_ENDPOINT="<ph_client_api_host>/i/v1/traces"
+OTEL_EXPORTER_OTLP_TRACES_HEADERS="Authorization=Bearer <ph_project_token>"
+OTEL_EXPORTER_OTLP_TRACES_PROTOCOL="http/protobuf"
+OTEL_SERVICE_NAME="my-service"
+```
+
+> **Note:** Pass the full `/i/v1/traces` path to the traces endpoint. Don't use the base `OTEL_EXPORTER_OTLP_ENDPOINT` variable, which appends its own `/v1/traces`.
+
+</Step>
+
+<Step title="Create spans" badge="required">
+
+Wrap the operations you want to measure in spans, and attach attributes for context.
+
+```javascript
+import { trace, SpanStatusCode } from '@opentelemetry/api'
+
+const tracer = trace.getTracer('my-service')
+
+function chargeCustomer(customerId) {
+  return tracer.startActiveSpan('charge-customer', (span) => {
+    try {
+      span.setAttribute('customer.id', customerId)
+      // ... do work ...
+      span.setStatus({ code: SpanStatusCode.OK })
+    } catch (err) {
+      span.recordException(err)
+      span.setStatus({ code: SpanStatusCode.ERROR })
+      throw err
+    } finally {
+      span.end()
+    }
+  })
+}
+```
+
+</Step>
+
+<Step title="Test your setup" badge="recommended">
+
+Once everything is configured, confirm spans are reaching PostHog:
+
+1. Run your application and trigger the instrumented code
+2. Open the PostHog Tracing interface
+3. Confirm your spans and traces appear
+
+<CallToAction type="primary" to="https://app.posthog.com/traces">
+View your traces in PostHog
+</CallToAction>
+
+</Step>
+
+<TracingNextSteps />
+
+</Steps>

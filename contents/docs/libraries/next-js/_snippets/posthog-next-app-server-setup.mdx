@@ -1,0 +1,20 @@
+Use `getPostHog()` in server components, route handlers, and server actions to capture events and evaluate feature flags. The client is automatically scoped to the current user via the identity cookie set by the middleware.
+
+```tsx
+import { getPostHog } from '@posthog/next'
+
+export default async function DashboardPage() {
+    const posthog = await getPostHog()
+
+    const flags = await posthog.getAllFlags()
+    posthog.capture({ event: 'dashboard_viewed' })
+
+    return (
+        <div>{flags['new-dashboard'] ? <NewDashboard /> : <OldDashboard />}</div>
+    )
+}
+```
+
+> **Note:** `getPostHog()` calls `cookies()` internally, which opts the route into dynamic rendering. Pages using it cannot be statically generated.
+
+**Event flushing:** On Vercel, `@posthog/next` auto-detects [`waitUntil`](https://vercel.com/docs/functions/functions-api-reference/vercel-functions-package#waituntil) from `@vercel/functions` so events are flushed after the response is sent without blocking it. No manual `shutdown()` call is needed. In other environments, you can pass a custom `waitUntil` via `serverOptions` on the `PostHogProvider`, or events will be batched and flushed normally.

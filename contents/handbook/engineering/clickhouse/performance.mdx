@@ -122,6 +122,14 @@ sudo sh -c "/usr/bin/echo 3 > /proc/sys/vm/drop_caches"
 
 For completely clean benchmarking, you might also want to drop [ClickHouse's internal mark cache](https://clickhouse.com/docs/en/sql-reference/statements/system#drop-mark-cache).
 
+You can also use the [`min_bytes_to_use_direct_io`](https://clickhouse.com/docs/en/operations/settings/settings#min_bytes_to_use_direct_io) setting to bypass the page cache at the query level.
+
+When set to a value greater than 0, ClickHouse will use `O_DIRECT` for disk reads whenever the total data to be read exceeds the threshold (in bytes). 
+
+```sql
+SETTINGS min_bytes_to_use_direct_io = 1;
+```
+
 ## Join algorithms
 
 JOINs are expensive in ClickHouse, so any opportunities to speed them up are welcome.

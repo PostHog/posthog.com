@@ -265,8 +265,8 @@ export const ProductOS = () => {
                             </p>
 
                             <p>
-                                Since you can toggle site apps on from within PostHog, deploying a new site app doesn't
-                                require a code deployment.
+                                Since you can toggle JS snippets on from within PostHog, deploying a new JS snippet
+                                doesn't require a code deployment.
                             </p>
 
                             <p>

@@ -82,8 +82,8 @@ const linklist: IProps[] = [
         ],
     },
     {
-        title: 'Product OS',
-        url: '/docs/product-os',
+        title: 'Platform',
+        url: '/docs/data',
         items: [
             {
                 title: 'New? Start here.',
@@ -253,7 +253,7 @@ const linklist: IProps[] = [
             },
             {
                 title: 'Marketing',
-                url: '/handbook/growth/marketing',
+                url: '/handbook/marketing',
             },
         ],
     },

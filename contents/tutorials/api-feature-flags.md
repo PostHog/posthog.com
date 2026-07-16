@@ -273,7 +273,7 @@ First, we get our evaluation request and variables sorted.
 ```python
 USER_EMAIL = "ian@posthog.com"
 POSTHOG_PERSONAL_API_KEY = "<POSTHOG_PERSONAL_API_KEY>"
-PROJECT_API_KEY = '<ph_project_token>'
+PROJECT_TOKEN = '<ph_project_token>'
 FLAG_KEY = 'request-test'
 POSTHOG_PROJECT_ID = <POSTHOG_PROJECT_ID>
 
@@ -286,7 +286,7 @@ auth_header = {
 }
 
 body = {
-  "api_key": PROJECT_API_KEY,
+  "api_key": PROJECT_TOKEN,
   "distinct_id": USER_EMAIL
 }
 

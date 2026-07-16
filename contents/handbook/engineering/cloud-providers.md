@@ -14,8 +14,16 @@ To give someone access
 1. Add the new user to the cloud infra repo (see link above)
 2. Use their email address as their username
 3. Add them to the "Developers" and "DevelopersRO" groups (just use `groups = local.default_groups`)
-4. Add team infra as reviewer. 
+4. Add team infra as reviewer.
 5. Once this is merged, tell them to use http://go/aws to log in
+
+### Elevating permissions via `#aws-access`
+
+To access the dev AWS environment, use the `/awsaccess` slash command in the `#aws-access` Slack channel and fill out the form that appears. Make sure to set up your AWS config file as described in our <PrivateLink url="https://github.com/PostHog/posthog-cloud-infra/blob/main/docs/ACCESS.md">docs</PrivateLink>.
+
+A dedicated `secrets-editor` role is available for managing secrets. Use this role across all AWS environments.
+
+EKS access via `#aws-access` is currently in development. In the near future, expect all AWS access to be managed through the `#aws-access` channel.
 
 ### Permissions errors using AWS CLI
 
@@ -50,7 +58,7 @@ See the [AWS self-host deployment guide](/docs/self-host/deploy/aws).
 
 ### How do I get access?
 
-Ask in the `#team-infrastructure` Slack channel for someone to add you.
+Ask in the `#support-infrastructure` Slack channel for someone to add you.
 
 To give someone access: Navigate to [PostHog project IAM](https://console.cloud.google.com/iam-admin/iam?project=posthog-301601&supportedpurview=project) and use the `+Add` button at the top to add their PostHog email address and toggle `Basic` -> `Editor` role.
 
@@ -63,7 +71,7 @@ See the [GCP self-host deployment guide](/docs/self-host/deploy/gcp).
 
 ### How do I get access?
 
-Ask in the `#team-infrastructure` Slack channel for someone to add you.
+Ask in the `#support-infrastructure` Slack channel for someone to add you.
 
 To give someone access: navigate to [PostHog team settings page](https://cloud.digitalocean.com/account/team?i=7cfa7c) and use the `Invite Members` button to add their PostHog email address.
 

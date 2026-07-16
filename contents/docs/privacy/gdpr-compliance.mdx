@@ -128,6 +128,22 @@ PostHog provides tools to control what data is [collected](/docs/privacy/data-co
 
 If you are self-hosting PostHog outside the EU, or are using PostHog Cloud US, and are capturing EU users' data, you should use the before storage [realtime transformations](/docs/privacy/data-storage#processing-data-before-storage) to anonymize user data.
 
+#### IP data capture configuration
+
+IP addresses can be considered personal data under GDPR. You can control IP data capture at both the organization and project levels to help maintain compliance.
+
+**Organization-level defaults:**
+
+For organizations using PostHog Cloud EU, IP data capture is automatically disabled by default for all new projects. This ensures that client IP addresses are not collected unless explicitly enabled, helping maintain GDPR compliance across all environments.
+
+You can configure this default setting at the organization level in **Settings** > **Organization** > **General** under the **IP data capture default** setting. This allows you to ensure consistent privacy controls across all new projects without requiring manual configuration for each environment.
+
+For organizations using PostHog Cloud US or self-hosted instances, you can manually configure this setting to disable IP data capture by default for enhanced privacy compliance.
+
+**Project-level configuration:**
+
+Individual projects can also configure their own IP data capture setting, which overrides the organization default if needed. To configure at the project level, go to **Settings** > **Project** > **General** and find the **IP data capture configuration** setting.
+
 ### Step 6: Complying with 'right to be forgotten' requests
 
 A user must be able to request that their data be removed from PostHog. How you facilitate that request is up to you. For example, you could accept requests via email or form submission.

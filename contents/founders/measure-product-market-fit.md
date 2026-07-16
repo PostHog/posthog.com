@@ -225,7 +225,7 @@ Here's PostHog's first ICP:
 
 _How much_ your ICP customers are paying is less important than _how many_ ICP customers you have, and if they're growing in number. Can you onboard 5 paying ICP customers, then 10, 20, 50, and so on?
 
-Consistent growth in ICP customers who pay is a strong sign of product-market fit. It means you have a product they want, and you can acquire similar customers with ease.
+[Consistent growth in ICP customers](/founders/growth-metrics-for-startups) who pay is a strong sign of product-market fit. It means you have a product they want, and you can acquire similar customers with ease.
 
 Flat growth suggests you don't have strong product-market fit for your ICP. Lots of growth from customers not in your ICP suggests you either:
 
