@@ -181,7 +181,7 @@ export default function CDP(): JSX.Element {
                         </div>
                     </Fieldset>
                 </div> */}
-                <div className="not-prose mb-8 max-w-xl">
+                <div className="not-prose mb-4 w-full">
                     <h1 className="m-0 text-3xl font-bold !leading-[1.12] tracking-tight @md/reader-content:text-4xl @3xl/reader-content:text-5xl">
                         Your modern data stack on <span className="line-through decoration-4">quack</span>{' '}
                         <span className="rounded-md bg-red/10 px-1 text-red dark:bg-yellow/20 dark:text-yellow">
@@ -190,7 +190,7 @@ export default function CDP(): JSX.Element {
                         , fully wired with PostHog AI
                     </h1>
 
-                    <p className="mb-0 mt-6 text-base font-semibold leading-relaxed text-primary">
+                    <p className="mb-0 mt-4 text-base font-semibold leading-relaxed text-primary">
                         The most flexible modern data stack – built on DuckDB, designed to scale, and wired up with our
                         omniscient AI
                     </p>
@@ -199,7 +199,7 @@ export default function CDP(): JSX.Element {
                 <CallToAction to="https://app.posthog.com/signup" size="sm" className="max-w-[175px]">
                     Get started free
                 </CallToAction>
-                <p>
+                <p className="mt-8">
                     Your data needs flexibility, tooling, and actually-useful AI that's not stuck in a silo. We provide
                     it all in a seamless data stack.
                 </p>
