@@ -82,7 +82,7 @@ export const InlineSearch = ({
                 <input
                     type="text"
                     placeholder={placeholder}
-                    className={`w-full pr-2 py-1 border-x-0 border-t-0 border-b border-input text-primary text-sm bg-transparent rounded-none focus:outline-none focus:ring-0 focus:border-input ${
+                    className={`w-full pr-2 py-1 rounded border-input border-input text-primary text-sm bg-light dark:bg-dark focus:outline-none focus:ring-0 focus:border-primary ${
                         icon ? 'pl-7' : ''
                     }`}
                     value={inputValue}
