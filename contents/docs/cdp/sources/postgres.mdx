@@ -75,6 +75,41 @@ PostgreSQL sources created after February 18, 2026 require SSL/TLS encryption fo
 
 > **Note:** PostHog egresses over IPv4 and does not support IPv6-only database hosts. If your database host only resolves to an IPv6 address, use a connection pooler or enable your provider's IPv4 add-on. See the [troubleshooting section](#network-is-unreachable-or-no-route-to-host) for details.
 
+## Live queries
+
+In addition to syncing data on a schedule, you can enable live queries on a synced Postgres source. This lets you query your Postgres database directly from the [SQL editor](https://app.posthog.com/sql) — queries run against your live database in real time without duplicating data into PostHog.
+
+### Enabling live queries on a new source
+
+When creating a new Postgres source, the source wizard offers three query modes:
+
+- **Sync to PostHog** — Sync selected tables on a schedule. This is the default.
+- **Query live only** — Run queries directly against your database without syncing any data.
+- **Sync and query live** — Sync tables into PostHog and also run live queries against the database from the SQL editor.
+
+Select **Sync and query live** to enable both scheduled syncs and live queries on the same source.
+
+### Enabling live queries on an existing source
+
+1. Go to the [sources tab](https://app.posthog.com/data-management/sources) and click your Postgres source.
+2. Open the **Configuration** tab.
+3. Toggle **Enable live queries** on.
+4. Click **Save** to apply.
+
+Once enabled, you can query your Postgres source directly from the SQL editor.
+
+### Querying a live source
+
+There are two ways to start a live query:
+
+- **From the source page:** Go to the **Schemas** tab on your source and click **Query directly**. This opens the SQL editor with your source connection preselected.
+- **From the SQL editor:** Open the [SQL editor](https://app.posthog.com/sql), click the connection picker in the toolbar, and select your Postgres source. Synced sources with live queries enabled are labeled with `· synced` (e.g., `my_source (Postgres · synced)`) to distinguish them from direct-only connections.
+
+### When to use live queries vs scheduled syncs only
+
+- **Live queries** are best for ad-hoc exploration, querying data that changes frequently, or when you want to query your database without waiting for a sync.
+- **Scheduled syncs only** are better when you need faster query performance, want to join external data with PostHog events in dashboards and insights, or need data available across all PostHog features.
+
 ## Sync methods
 
 Postgres tables support full table, incremental, append-only, and CDC sync methods.
