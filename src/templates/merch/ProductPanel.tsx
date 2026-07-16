@@ -258,17 +258,19 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                         You may have spotted these other fine PostHog products in the photos above.
                     </p>
                     <ul className="list-none m-0 p-0 grid grid-cols-2 gap-x-2">
-                        {product.imageProducts?.map((product) => {
-                            const { handle } = product
-                            const featuredImage = (product as any).featuredImage
-                            return (
-                                <li key={handle}>
-                                    <Link to={`?product=${handle}`}>
-                                        <Image alt={handle} image={featuredImage} />
-                                    </Link>
-                                </li>
-                            )
-                        })}
+                        {product.imageProducts
+                            ?.filter((imageProduct) => (imageProduct as any).featuredImage)
+                            .map((imageProduct) => {
+                                const { handle } = imageProduct
+                                const featuredImage = (imageProduct as any).featuredImage
+                                return (
+                                    <li key={handle}>
+                                        <Link to={`?product=${handle}`}>
+                                            <Image alt={handle} image={featuredImage} />
+                                        </Link>
+                                    </li>
+                                )
+                            })}
                     </ul>
                 </div>
             )}
