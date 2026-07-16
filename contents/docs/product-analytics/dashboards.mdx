@@ -145,6 +145,8 @@ Once in edit mode, press 'E' again to save your changes and exit edit mode, or p
 
 Tapping 'F' enables full-screen mode.
 
+While in edit mode, you can click **Collapse view** to zoom out and see all tiles at a smaller size. This makes it easier to drag and rearrange items on large dashboards without excessive scrolling. You can also tap 'Z' to toggle collapsed view. When collapsed, you can drag tiles to rearrange them, but resizing is disabled. Click **Expand view** (or tap 'Z' again) to return to the normal size.
+
 > **Note:** On smaller screens, dashboard tiles are automatically stacked in a single column based on the desktop layout order. Layout editing (drag and resize) is only available on wider viewports.
 
 ### Insight card options
@@ -354,6 +356,18 @@ By clicking 'Share' in the top right corner you can:
 
 - Create a link to share your dashboard publicly, or embed your dashboard on a website. Read more about this in our [sharing and embedding docs](/docs/product-analytics/sharing).
 
+### Copy to another project
+
+You can copy a dashboard and its dependencies to another project within your organization.
+
+1. Click on the '...' menu at the top of the dashboard.
+2. Select **Copy to another project**.
+3. Choose the destination project.
+4. For each dependency (like insights), choose whether to create a new copy or link to an existing resource in the destination project.
+5. Click **Copy**.
+
+The original dashboard is not modified. If a resource was previously copied to the destination project, PostHog suggests linking to the existing copy rather than creating a duplicate.
+
 ### Refreshing individual tiles
 
 You can refresh a single insight tile without refreshing the entire dashboard. Hover over the tile header to reveal a refresh icon. Click it to recompute just that tile.
@@ -361,6 +375,8 @@ You can refresh a single insight tile without refreshing the entire dashboard. H
 The tooltip on the refresh icon shows when the tile's data was last computed. If the tile is rate-limited, the icon is disabled and the tooltip explains when the next refresh is available.
 
 The refresh icon is hidden while the tile is actively refreshing and isn't available on shared or public dashboards. You can also refresh a tile from the **⋯** menu by selecting **Refresh data**, which is useful for touch and keyboard users.
+
+-   Choose a theme (light, dark, or system) for shared and embedded dashboards.
 
 ### Auto refresh
 

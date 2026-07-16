@@ -200,6 +200,7 @@ Your first three months of commission are paid at 100% fixed OTE. This will be c
 ### Can I login as a customer?
 
 - Visit the /admin/ endpoint on the cloud they are on.  You can then search for them via email and log in.  Be careful clicking around here as you can accidentally delete a person/organization! You need to get their permission first unless it's an emergency, i.e. to resolve an incident.
+- If you need to connect the PostHog MCP server while logged in as them, follow the [MCP impersonation steps](/handbook/cs-and-onboarding/handling-customer-issues#using-the-mcp-server-while-impersonating). See our [impersonation policy](/handbook/company/security#impersonating-users) for the thorough version.
 
 ### Are there any influential folks in our space I should read/listen to?
 
