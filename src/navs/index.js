@@ -1415,6 +1415,10 @@ export const handbookSidebar = [
                 url: '',
                 children: [
                     {
+                        name: 'Designing events for per-entity metrics',
+                        url: '/handbook/cs-and-onboarding/shareable-guides/designing-events-for-per-entity-metrics',
+                    },
+                    {
                         name: 'LLM cost optimization',
                         url: '/handbook/cs-and-onboarding/shareable-guides/llm-cost-optimization',
                     },
@@ -2439,6 +2443,14 @@ export const docsMenu = {
                         {
                             name: 'Java',
                             url: '/docs/libraries/java',
+                            badge: {
+                                title: 'Beta',
+                                className: '!bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50',
+                            },
+                        },
+                        {
+                            name: 'Kotlin Multiplatform',
+                            url: '/docs/libraries/kmp',
                             badge: {
                                 title: 'Beta',
                                 className: '!bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50',
@@ -6993,6 +7005,12 @@ export const docsMenu = {
                 },
                 {
                     name: 'Resources',
+                },
+                {
+                    name: 'Pricing',
+                    url: '/docs/posthog-code/pricing',
+                    icon: 'IconPiggyBank',
+                    color: 'green',
                 },
                 {
                     name: 'Open source',

@@ -20,8 +20,9 @@ Check, in order:
 2. **Are the filters too narrow?** Try removing all filters and see whether observations start showing up. If they do, re-add filters one at a time to find the culprit.
 3. **Is the sampling rate 0%?** A common oversight – 0% means every matching session gets skipped.
 4. **Is the quota exhausted?** Check the usage meter in the Replay Vision header. A scanner whose background sweep is silenced by the cap will silently produce nothing until quota frees up. See [quota and limits](/docs/replay-vision/quota-and-limits).
-5. **Is your project recording sessions at all?** Replay Vision only sees sessions [Session Replay](/docs/session-replay) has captured. No recordings, no observations.
-6. **Are all the matched sessions ineligible?** If your filters happen to match only very short or no-event sessions, the scanner will produce ineligible observations but no successful ones. See [running scanners – ineligible sessions](/docs/replay-vision/running-scanners#ineligible-sessions).
+5. **Is your project recording sessions at all?** Replay Vision only sees sessions [Session Replay](/docs/session-replay) has captured. No recordings, no observations. See [events or recordings aren't coming in](#events-or-recordings-arent-coming-in).
+6. **Is your organization over a usage limit?** If Product analytics or Session replay is over its billing limit, new events or recordings are dropped at ingestion and scanners have nothing usable to scan. See [usage limits stop scanning](#usage-limits-stop-scanning).
+7. **Are all the matched sessions ineligible?** If your filters happen to match only very short or no-event sessions, the scanner will produce ineligible observations but no successful ones. See [running scanners – ineligible sessions](/docs/replay-vision/running-scanners#ineligible-sessions).
 
 A fast way to confirm the scanner itself works: run it [on-demand](/docs/replay-vision/running-scanners#on-demand-on-recordings-you-pick) against a recording you know is eligible. If that produces a result, the issue is in the filters, the sampling rate, or the quota – not the scanner config.
 
@@ -35,9 +36,31 @@ Ineligibles don't cost you quota, but a high ineligibility rate usually means th
 | `too_short` | Add a duration filter (e.g. `session_duration > 30`) so only sessions long enough to analyze are queued. |
 | `too_inactive` | Add an event-presence filter (e.g. require at least one `$pageview` or `$autocapture`) so silent sessions are skipped earlier. |
 | `too_long` | Add an upper duration filter. |
-| `no_events` | Same as `too_inactive` – require at least one event. |
+| `no_events` | Require at least one event, as with `too_inactive`. If nearly every recent scan is `no_events`, check whether your organization is over its Product analytics limit – see [usage limits stop scanning](#usage-limits-stop-scanning). |
 
 Once you've added the filter, the ineligibility rate should drop. The Observations tab is the source of truth – check it after the next sweep.
+
+## Events or recordings aren't coming in
+
+Replay Vision runs entirely downstream of ingestion: scanners can only scan recordings PostHog actually received, and the model's event context comes from the events captured in those sessions. If either stops flowing, Vision goes quiet without erroring:
+
+- **No new recordings**: background sweeps find no matching sessions and produce nothing at all.
+- **Recordings but no events**: sessions arrive without event data and every scan is marked ineligible with `no_events`.
+
+Billing limits are one cause (see [usage limits stop scanning](#usage-limits-stop-scanning) below), but the same symptom appears whenever capture itself stops: session replay is disabled in project settings or in the SDK config, replay capture conditions (sampling, minimum duration) filter out every session, or the snippet/SDK stopped loading after a deploy. Work through the [session replay troubleshooting guide](/docs/session-replay/troubleshooting) to get recordings flowing again.
+
+Vision resumes automatically once new sessions arrive. Sessions that were never captured can't be scanned retroactively, so gaps in ingestion are permanent gaps in observations.
+
+## Usage limits stop scanning
+
+Replay Vision depends on two other products' data, so their billing limits affect it even when your Vision quota is fine:
+
+- **Over the Product analytics limit**: new events are dropped at ingestion. Sessions still get recorded, but they arrive with no event data, so every scan of them is marked ineligible with `no_events`. A sudden wall of `no_events` ineligibles is the classic symptom.
+- **Over the Session replay limit**: new recordings aren't captured at all, so scanners find nothing new to scan and go quiet.
+
+When either limit is exceeded, a banner appears on the Replay Vision pages linking to your billing settings. Raising the limit (or waiting for the billing period to reset) resumes scanning automatically – no scanner changes needed.
+
+One caveat: sessions from the over-limit window are permanently unscannable. Dropped events and recordings are not retroactively recovered, so those ineligible observations won't succeed later. Scanning picks up with new sessions once ingestion does.
 
 ## The model is making bad calls
 
