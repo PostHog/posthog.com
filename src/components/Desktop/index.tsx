@@ -48,7 +48,7 @@ export const useProductLinks = () => {
                 source: 'desktop',
             },
             {
-                label: 'Self-driving products',
+                label: 'Self-driving product',
                 Icon: <GlassIcon path={SELF_DRIVING_SILHOUETTE} />,
                 url: '/self-driving',
                 source: 'desktop',
