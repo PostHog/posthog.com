@@ -626,8 +626,18 @@ export const handbookSidebar = [
                 url: '/handbook/content/metadata',
             },
             {
-                name: 'LinkedIn',
-                url: '/handbook/content/linkedin',
+                name: 'Social media',
+                url: '/handbook/content/social-media',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/handbook/content/social-media',
+                    },
+                    {
+                        name: 'LinkedIn',
+                        url: '/handbook/content/linkedin',
+                    },
+                ],
             },
         ],
     },
@@ -1404,6 +1414,10 @@ export const handbookSidebar = [
                 name: 'Shareable guides',
                 url: '',
                 children: [
+                    {
+                        name: 'Designing events for per-entity metrics',
+                        url: '/handbook/cs-and-onboarding/shareable-guides/designing-events-for-per-entity-metrics',
+                    },
                     {
                         name: 'LLM cost optimization',
                         url: '/handbook/cs-and-onboarding/shareable-guides/llm-cost-optimization',
@@ -2429,6 +2443,14 @@ export const docsMenu = {
                         {
                             name: 'Java',
                             url: '/docs/libraries/java',
+                            badge: {
+                                title: 'Beta',
+                                className: '!bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50',
+                            },
+                        },
+                        {
+                            name: 'Kotlin Multiplatform',
+                            url: '/docs/libraries/kmp',
                             badge: {
                                 title: 'Beta',
                                 className: '!bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50',
@@ -5651,6 +5673,21 @@ export const docsMenu = {
                     icon: 'IconDecisionTree',
                     color: 'green',
                 },
+                {
+                    name: 'Historical imports',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/support/imports',
+                    icon: 'IconUpload',
+                    color: 'blue',
+                },
+                {
+                    name: 'Import from Zendesk',
+                    url: '/docs/support/imports/zendesk',
+                    icon: 'IconLetter',
+                    color: 'blue',
+                },
             ],
         },
         ...[dataPipelines],
@@ -6968,6 +7005,12 @@ export const docsMenu = {
                 },
                 {
                     name: 'Resources',
+                },
+                {
+                    name: 'Pricing',
+                    url: '/docs/posthog-code/pricing',
+                    icon: 'IconPiggyBank',
+                    color: 'green',
                 },
                 {
                     name: 'Open source',

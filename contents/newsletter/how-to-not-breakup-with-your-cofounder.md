@@ -14,7 +14,7 @@ crosspost:
   - Blog
 ---
 
-_In this issue of Product for Engineers, James Hawkins shares how he and [PostHog](https://posthog.com/) cofounder Tim Glaser keep their relationship healthy._
+_In this issue of build mode, James Hawkins shares how he and [PostHog](https://posthog.com/) cofounder Tim Glaser keep their relationship healthy._
 
 * * *
 
