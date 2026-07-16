@@ -4,8 +4,6 @@ import OSButton from 'components/OSButton'
 import {
     IconPencil,
     IconPullRequest,
-    IconSearch,
-    IconX,
     IconTextWidth,
     IconGear,
     IconClockRewind,
@@ -115,11 +113,6 @@ interface ReaderViewProps {
     children?: React.ReactNode
     leftSidebar?: React.ReactNode
     hideLeftSidebar?: boolean
-    /**
-     * When the left sidebar is hidden, a floating search cluster is rendered in
-     * its place. Set this to true to suppress that floating search as well.
-     */
-    hideFloatingSearch?: boolean
     hideRightSidebar?: boolean
     contentMaxWidthClass?: string
     padding?: boolean
@@ -457,7 +450,6 @@ export default function ReaderView({
     children,
     leftSidebar,
     hideLeftSidebar = false,
-    hideFloatingSearch = false,
     hideRightSidebar = false,
     contentMaxWidthClass,
     padding = true,
@@ -493,7 +485,6 @@ export default function ReaderView({
                 filePath={filePath}
                 leftSidebar={leftSidebar}
                 hideLeftSidebar={hideLeftSidebar}
-                hideFloatingSearch={hideFloatingSearch}
                 hideRightSidebar={hideRightSidebar}
                 contentMaxWidthClass={contentMaxWidthClass}
                 padding={padding}
@@ -1343,152 +1334,6 @@ const LeftSidebar = ({
     )
 }
 
-const FloatingSearch = ({
-    contentRef,
-    onSearch,
-    currentPath,
-}: {
-    contentRef?: React.RefObject<HTMLElement>
-    onSearch?: (query: string) => void
-    currentPath?: string
-}) => {
-    const [open, setOpen] = useState(false)
-    const panelRef = useRef<HTMLDivElement>(null)
-    const { searchQuery } = useSearch()
-    const { appWindow } = useWindow()
-    const hasQuery = searchQuery.trim().length >= 2
-    const showResults = open && hasQuery
-
-    useEffect(() => {
-        if (!open) return
-        const handleKey = (e: KeyboardEvent) => {
-            if (e.key === 'Escape') setOpen(false)
-        }
-        const handleClick = (e: MouseEvent) => {
-            if (panelRef.current && !panelRef.current.contains(e.target as Node)) {
-                setOpen(false)
-            }
-        }
-        document.addEventListener('keydown', handleKey)
-        document.addEventListener('mousedown', handleClick)
-        return () => {
-            document.removeEventListener('keydown', handleKey)
-            document.removeEventListener('mousedown', handleClick)
-        }
-    }, [open])
-
-    useEffect(() => {
-        if (open) {
-            panelRef.current?.querySelector('input')?.focus()
-        }
-    }, [open])
-
-    return (
-        <div
-            ref={panelRef}
-            data-scheme="secondary"
-            className={`absolute top-0 left-0 flex z-10 max-w-[450px] w-full ${appWindow?.windowed ? 'p-3' : 'p-1'}`}
-        >
-            <div className={`relative space-y-2 transition-[width] duration-300 ease-out ${open ? 'w-full' : 'w-9'}`}>
-                <motion.div
-                    initial={false}
-                    animate={{
-                        borderTopLeftRadius: 18,
-                        borderTopRightRadius: 18,
-                        borderBottomLeftRadius: showResults ? 8 : 18,
-                        borderBottomRightRadius: showResults ? 8 : 18,
-                    }}
-                    transition={{ duration: 0.2, ease: 'easeInOut' }}
-                    className={`relative h-9 overflow-hidden border border-primary shadow-lg focus-within:ring-1 focus-within:ring-primary ${FROSTED_BG} ${
-                        open ? '' : 'hover:bg-accent'
-                    }`}
-                >
-                    <span className="pointer-events-none absolute left-2.5 top-1/2 z-10 inline-flex -translate-y-1/2 text-secondary">
-                        <IconSearch className="size-4" />
-                    </span>
-                    <AnimatePresence initial={false}>
-                        {open && (
-                            <motion.div
-                                key="expanded-search"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0, transition: { duration: 0.08 } }}
-                                transition={{ duration: 0.12, delay: 0.04 }}
-                                className="absolute inset-0 flex items-center gap-1 p-1"
-                            >
-                                <InlineSearch
-                                    contentRef={onSearch ? undefined : contentRef}
-                                    onSearch={onSearch}
-                                    placeholder="Search..."
-                                    className="flex-1 min-w-0 [&_input]:!border-0 [&_input]:!bg-transparent [&_input]:!pl-7 [&_input]:focus:!ring-0"
-                                    clearable={false}
-                                    icon={false}
-                                />
-                                <OSButton
-                                    size="md"
-                                    className="rounded-full size-7 flex-shrink-0"
-                                    icon={<IconX className="size-full" />}
-                                    onClick={() => setOpen(false)}
-                                />
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
-                    {!open && (
-                        <button
-                            type="button"
-                            aria-label="Search"
-                            onClick={() => setOpen(true)}
-                            className="absolute inset-0"
-                        />
-                    )}
-                </motion.div>
-                <AnimatePresence initial={false}>
-                    {showResults && (
-                        <motion.div
-                            initial={{
-                                height: 0,
-                                opacity: 0,
-                                borderTopLeftRadius: 18,
-                                borderTopRightRadius: 18,
-                                borderBottomLeftRadius: 18,
-                                borderBottomRightRadius: 18,
-                            }}
-                            animate={{
-                                height: 'auto',
-                                opacity: 1,
-                                borderTopLeftRadius: 8,
-                                borderTopRightRadius: 8,
-                                borderBottomLeftRadius: 18,
-                                borderBottomRightRadius: 18,
-                            }}
-                            exit={{
-                                height: 0,
-                                opacity: 0,
-                                borderTopLeftRadius: 18,
-                                borderTopRightRadius: 18,
-                                borderBottomLeftRadius: 18,
-                                borderBottomRightRadius: 18,
-                            }}
-                            transition={{ duration: 0.2, ease: 'easeInOut' }}
-                            className={`overflow-hidden border border-primary shadow-lg ${FROSTED_BG}`}
-                        >
-                            <ScrollArea className="!m-0 [mask-image:linear-gradient(to_bottom,black_calc(100%_-_1.5rem),transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_calc(100%_-_1.5rem),transparent_100%)]">
-                                <div className="max-h-[300px]">
-                                    <SidebarSearchResults
-                                        contentRef={contentRef}
-                                        currentPath={currentPath}
-                                        onResultClick={() => setOpen(false)}
-                                    />
-                                </div>
-                            </ScrollArea>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-            </div>
-        </div>
-    )
-}
-
 interface FloatingTOCProps {
     isTocVisible: boolean
     toggleToc: () => void
@@ -1553,7 +1398,6 @@ function ReaderViewContent({
     children,
     leftSidebar,
     hideLeftSidebar = false,
-    hideFloatingSearch = false,
     hideRightSidebar = false,
     contentMaxWidthClass,
     padding = true,
@@ -1720,13 +1564,6 @@ function ReaderViewContent({
                             : undefined
                     }
                 >
-                    {hideLeftSidebar && !hideFloatingSearch && !compact && (
-                        <FloatingSearch
-                            contentRef={onSearch ? undefined : contentRef}
-                            onSearch={onSearch}
-                            currentPath={appWindow?.path}
-                        />
-                    )}
                     {showMobileNav && (
                         <button
                             type="button"
