@@ -1,5 +1,4 @@
 import CloudinaryImage from 'components/CloudinaryImage'
-import { LazyHog } from 'components/About/AboutHero'
 import { CallToAction } from 'components/CallToAction'
 import { StaticImage } from 'gatsby-plugin-image'
 import React, { useEffect, useState } from 'react'

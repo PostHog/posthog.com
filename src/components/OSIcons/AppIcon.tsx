@@ -3,7 +3,7 @@ import { BaseIcon, type IconProps } from './Icons'
 import Link from 'components/Link'
 import { useRef } from 'react'
 import useTheme from '../../hooks/useTheme'
-import { useApp } from '../../context/App'
+import { useAppSettings } from '../../context/App'
 import usePostHog from 'hooks/usePostHog'
 
 // App icon mapping for different skins
@@ -314,7 +314,7 @@ export const AppLink = ({
     external,
 }: AppItem) => {
     const posthog = usePostHog()
-    const { posthogInstance } = useApp()
+    const { posthogInstance } = useAppSettings()
     const ref = useRef<HTMLSpanElement>(null)
     const { getThemeSpecificBackgroundColors } = useTheme()
 
@@ -369,8 +369,9 @@ export const AppLink = ({
         }
 
         if (React.isValidElement(iconToRender)) {
+            const existingClassName = (iconToRender as React.ReactElement<any>).props.className || ''
             return React.cloneElement(iconToRender as React.ReactElement<any>, {
-                className: `${parentIcon ? '' : `text-${color}`} ${className}`,
+                className: `${existingClassName} ${parentIcon ? '' : `text-${color}`} ${className || ''}`.trim(),
             })
         }
 
@@ -401,10 +402,7 @@ export const AppLink = ({
     }
 
     const baseBackgroundColors = `
-        bg-[rgba(238,239,233,0.75)] 
-        group-hover:bg-[rgba(238,239,233,1)] 
-        dark:bg-[rgba(1,1,1,0.75)] 
-        dark:group-hover:bg-[rgba(1,1,1,1)]
+        
     `
 
     const themeSpecificColors = getThemeSpecificBackgroundColors()
@@ -422,12 +420,14 @@ export const AppLink = ({
             </span>
             <figcaption
                 className={`text-[13px] font-medium leading-tight ${
-                    orientation === 'row' ? 'text-left' : 'text-center text-balance'
-                }`}
+                    source === 'desktop' ? 'text-white' : 'text-primary'
+                } ${orientation === 'row' ? 'text-left' : 'text-center text-balance'}`}
             >
-                <span className={`inline-block leading-snug`}>
+                <span className={`inline-block leading-tight`}>
                     <span
-                        className={`skin-classic:underline decoration-dotted decoration-primary underline-offset-[3px] wallpaper-parade:bg-white dark:wallpaper-parade:bg-black wallpaper-coding-at-night:text-white ${finalBackground}  rounded-[2px] px-0.5 py-0`}
+                        className={`skin-classic:underline decoration-dotted decoration-primary underline-offset-[3px] ${finalBackground}  rounded-[2px] px-0.5 py-0 ${
+                            source === 'desktop' ? 'text-shadow-desktop' : ''
+                        } font-medium`}
                     >
                         {label}
                         {extension && <span className="opacity-75">.{extension}</span>}
@@ -437,12 +437,14 @@ export const AppLink = ({
         </>
     )
 
-    const commonClassName = 'group items-center select-none text-primary'
+    const commonClassName = 'group items-center select-none text-white font-medium'
 
     const orientationClassName =
         orientation === 'row'
             ? 'flex w-full gap-2'
             : 'inline-flex flex-col justify-center w-auto space-y-0.5 max-w-28 text-center'
+
+    const shadowClassName = source === 'desktop' ? 'drop-shadow-lg' : ''
 
     return (
         <figure ref={ref}>
@@ -450,7 +452,7 @@ export const AppLink = ({
                 <Link
                     to={url}
                     {...(external ? { externalNoIcon: true } : { state: { newWindow: true } })}
-                    className={`${commonClassName} ${orientationClassName}`}
+                    className={`${commonClassName} ${orientationClassName} ${shadowClassName}`}
                     onClick={(e) => {
                         if (hasDragged) {
                             e.preventDefault()
@@ -470,7 +472,7 @@ export const AppLink = ({
                             onClick()
                         }
                     }}
-                    className={`${commonClassName} ${orientationClassName}`}
+                    className={`${commonClassName} ${orientationClassName} ${shadowClassName}`}
                 >
                     {content}
                 </button>

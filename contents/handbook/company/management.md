@@ -104,6 +104,8 @@ As PostHog grows, it's increasingly important that all team leads help us keep t
 
 That form will be shared with the relevant team Blitzscale member, so they can help where necessary.
 
+Feedback also flows the other way. Direct reports are periodically asked to give feedback on their manager through an automated form, rating them against what we expect managers to focus on and explaining why. This keeps the bar for managers high too, and gives them honest signal on how they're doing.
+
 > Side note: anyone can ask their manager 'how hard would you work to change my mind if I were thinking of leaving?'. It's a great way to solicit valuable feedback!
 
 ### Weave

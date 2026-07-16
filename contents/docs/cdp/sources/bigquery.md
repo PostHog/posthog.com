@@ -33,18 +33,18 @@ To securely connect your BigQuery account to PostHog, create a dedicated service
 - For simplicity, you can assign the **BigQuery Data Editor**, **BigQuery Job User**, and **BigQuery Read Session User** roles if it meets your security requirements.
 - Alternatively, create a custom role that includes only these permissions:
 
-    ```
-    bigquery.readsessions.create
-    bigquery.readsessions.getData
-    bigquery.datasets.get
-    bigquery.jobs.create
-    bigquery.tables.get
-    bigquery.tables.list
-    bigquery.tables.getData
-    bigquery.tables.create
-    bigquery.tables.updateData
-    bigquery.tables.delete
-    ```
+  ```
+  bigquery.readsessions.create
+  bigquery.readsessions.getData
+  bigquery.datasets.get
+  bigquery.jobs.create
+  bigquery.tables.get
+  bigquery.tables.list
+  bigquery.tables.getData
+  bigquery.tables.create
+  bigquery.tables.updateData
+  bigquery.tables.delete
+  ```
 
 3. **Generate and download the service account key:**
 
@@ -71,6 +71,10 @@ To securely connect your BigQuery account to PostHog, create a dedicated service
 
 <SourceParameters />
 
+## Supported tables
+
+<SourceTables />
+
 ## How it works
 
 PostHog creates and deletes [temporary tables](https://cloud.google.com/bigquery/docs/writing-results#temporary_and_permanent_tables) when querying your data. This is necessary for handling large BigQuery tables. Temporary tables help break down large data processing tasks into manageable chunks. However, they incur storage and query costs in BigQuery while they exist. We delete them as soon as the job is done.
@@ -85,3 +89,18 @@ After selecting the primary key, PostHog will query the table to see if the colu
 ### Costs
 
 We minimize BigQuery costs by keeping queries to a minimum and deleting temporary tables immediately after use. Although the connector automates temporary table management, check [BigQuery’s pricing](https://cloud.google.com/bigquery/pricing) for details on storage and query costs.
+
+## Troubleshooting
+
+### Invalid Project ID or Dataset ID
+
+If you see an error like:
+
+> `Your BigQuery Project ID or Dataset ID contains characters BigQuery doesn't allow.`
+
+This means the Project ID or Dataset ID you entered contains characters that BigQuery doesn't accept. BigQuery has strict naming rules:
+
+- **Project IDs** can only contain lowercase letters, digits, and hyphens.
+- **Dataset IDs** can only contain letters, digits, and underscores (no hyphens).
+
+A common mistake is copying identifiers with extra characters like parentheses or spaces. Verify your Project ID and Dataset ID in the [Google Cloud Console](https://console.cloud.google.com/) and update your source configuration in PostHog.

@@ -226,6 +226,24 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       title: String
       number: Int
     }
+    type ResearchMergedPr implements Node {
+      title: String
+      url: String
+      repo: String
+      author: String
+      mergedAt: String
+    }
+    type SelfDrivingPullRequest implements Node {
+      prNumber: Int
+      title: String
+      summary: String
+      type: String
+      scope: String
+      url: String
+      state: String
+      openedAt: Date @dateformat
+      mergedAt: Date @dateformat
+    }
     type PostTagAttributes {
         label: String
         folder: String
@@ -243,6 +261,15 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     }
     type PostCategory implements Node {
       attributes: PostCategoryAttributes
+    }
+    type CommunityStats implements Node {
+      topicId: Int
+      topicSlug: String
+      topicLabel: String
+      questions: Int
+      resolved: Int
+      replies: Int
+      helpful: Int
     }
     type ProductSectionsSectionsFeatures {
       title: String
@@ -285,9 +312,22 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       html_url: String
       type: String
     }
+    type ProductDataProductsPlansTiers {
+      current_amount_usd: String
+      current_usage: Float
+      flat_amount_usd: String
+      unit_amount_usd: String
+      up_to: Float
+    }
     type ProductDataProductsPlans {
       contact_support: Boolean
       unit_amount_usd: Float
+      tiers: [ProductDataProductsPlansTiers]
+    }
+    type ProductDataProductsAddonsPlans {
+      contact_support: Boolean
+      unit_amount_usd: String
+      tiers: [ProductDataProductsPlansTiers]
     }
     type SlackEmoji implements Node {
       name: String
@@ -337,6 +377,13 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       required: Boolean
       description: String
     }
+    type AgentSkill implements Node @dontInfer {
+      product: String
+      name: String
+      description: String
+      sourcePath: String
+      mcpTools: [String]
+    }
     type PostHogSource implements Node @dontInfer {
       mdx: Mdx @link(by: "frontmatter.sourceId", from: "sourceId")
       sourceId: String
@@ -349,6 +396,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       featured: Boolean
       caption: String
       sourceFields: [PostHogSourceField]
+      tables: [PostHogSourceTable]
       permissionsCaption: String
       featureFlag: String
     }
@@ -359,6 +407,14 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       required: Boolean
       placeholder: String
       caption: String
+    }
+    type PostHogSourceTable {
+      name: String
+      label: String
+      description: String
+      sync_methods: [String]
+      incremental_fields: [String]
+      primary_keys: [String]
     }
     type SdkReferences implements Node {
       info: SdkReferencesInfo
@@ -543,6 +599,11 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         created_at: Date
         created_by: PostHogWorkflowTemplateCreatedBy
         fields: PostHogWorkflowTemplateFields
+    }
+    type ProductUsageStats implements Node {
+        product: String
+        unique_users: Int
+        unique_orgs: Int
     }
   `)
     createTypes([

@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { HedgehogBasketballCoach, HedgehogCowboyLasso, HedgehogPartyHog } from '@posthog/brand/hoggies'
 import {
     IconAI,
     IconArrowUpRight,
@@ -14,17 +15,17 @@ import {
     IconLaptop,
     IconMessage,
     IconPieChart,
-    IconPlug,
     IconRewindPlay,
     IconTerminal,
     IconToggle,
     IconWarning,
 } from '@posthog/icons'
+import { motion } from 'framer-motion'
+import { useInView } from 'react-intersection-observer'
 import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
 import Editor from 'components/Editor'
 import SEO from 'components/seo'
-import CloudinaryImage from 'components/CloudinaryImage'
 import Link from 'components/Link'
 import WizardCommand from 'components/WizardCommand'
 import WistiaVideo from 'components/WistiaVideo'
@@ -32,47 +33,46 @@ import TeamMember from 'components/TeamMember'
 import { Bang } from 'components/Icons'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { IconPostHog } from 'components/OSIcons'
-import PlatformInstall from 'components/PlatformInstall'
+import PlatformInstall, { mcpInstallSchema } from 'components/PlatformInstall'
+import type { InstallSchema } from 'components/PlatformInstall'
 
-function Q({ text }: { text?: string }): JSX.Element {
+const mcpPageInstallSchema: InstallSchema = {
+    ...mcpInstallSchema,
+    title: 'Get started',
+    titleInfoAction: {
+        label: 'Learn more about the PostHog MCP',
+        to: '/docs/model-context-protocol',
+        state: { newWindow: true },
+    },
+    secondaryAction: {
+        label: 'Sign up via web',
+        to: 'https://app.posthog.com/signup',
+        state: { newWindow: true, initialTab: 'signup' },
+        icon: <IconArrowUpRight className="size-4 text-secondary" />,
+    },
+}
+
+function Q({ text }: { text?: React.ReactNode }): JSX.Element {
     const heading = text || ''
-    return <h2 className="!mt-12 !mb-4 first:!mt-6">{heading}</h2>
+    return <h2 className="!text-3xl !mt-12 !mb-4 first:!mt-6">{heading}</h2>
 }
 
 function MCPHeader(): JSX.Element {
     return (
-        <header
-            className="relative not-prose mb-8 overflow-hidden rounded-t-sm"
-            style={{
-                width: '100cqw',
-                marginLeft: 'calc(50% - 50cqw)',
-            }}
-        >
-            <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/texture_tan_9608fcca70.png"
-                className="dark:hidden absolute inset-0"
-                imgClassName="h-full w-full"
-            />
-            <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/texture_tan_dark_a92b0e022d.png"
-                className="hidden dark:block absolute inset-0"
-                imgClassName="h-full w-full"
-            />
-            <div className="relative flex flex-col-reverse @lg:flex-row items-center px-5 pt-6 pb-12 max-w-[900px] mx-auto gap-4 @lg:gap-2">
+        <header className="relative not-prose mb-8">
+            <div className="relative flex flex-col-reverse @lg:flex-row items-center pt-8 max-w-[900px] mx-auto gap-4 @lg:gap-2">
                 <div className="flex-1 text-center @lg:text-left">
-                    <div className="flex gap-1.5 justify-center @lg:justify-start items-center mb-3">
-                        <span className="w-4 h-4 text-purple">
-                            <IconPlug />
-                        </span>
-                        <span className="text-[12px] font-semibold uppercase tracking-wider opacity-60">MCP</span>
-                    </div>
-                    <h1 className="text-3xl @sm:text-4xl @lg:text-5xl font-bold !leading-[1.05] !mb-3 !mt-0 tracking-tight">
+                    <h1 className="text-3xl @sm:text-4xl @lg:text-5xl font-bold !leading-[1.12] !mb-3 !mt-0 tracking-tight">
                         Ask questions.
                         <br />
-                        <span className="text-red dark:text-yellow">Get answers.</span>
+                        <span className="bg-red/10 dark:bg-yellow/20 text-red dark:text-yellow rounded-md px-1 whitespace-nowrap">
+                            Get answers.
+                        </span>
                     </h1>
-                    <p className="!mt-0 !mb-5 text-base @sm:text-lg italic opacity-80">
-                        We don't think the future has a UI. So we built one without one.
+                    <p className="!mt-0 !mb-5 text-base @sm:text-lg opacity-80">
+                        We don't think the future has a UI.
+                        <br />
+                        So we built one without one.
                     </p>
                     <WizardCommand command="mcp add" slim />
                     <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 justify-center @lg:justify-start text-[13px] font-medium opacity-70">
@@ -90,11 +90,10 @@ function MCPHeader(): JSX.Element {
                         </span>
                     </div>
                 </div>
-                <div className="shrink-0">
-                    <img
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/mcp_hog_05867b6214.png"
-                        alt="PostHog hedgehog with a wand"
-                        className="w-36 @lg:w-52"
+                <div className="shrink-0 flex justify-center">
+                    <HedgehogCowboyLasso
+                        title="PostHog hedgehog cowboy swinging a lasso"
+                        className="h-auto w-52 @lg:w-72 scale-x-[-1]"
                     />
                 </div>
             </div>
@@ -105,8 +104,11 @@ function MCPHeader(): JSX.Element {
 function ExplainerVideo(): JSX.Element {
     return (
         <div className="not-prose my-6">
-            <p className="text-sm text-secondary mb-3">
+            <p className="text-base @sm:text-lg text-primary mb-1">
                 Here&apos;s <TeamMember name="Matt Brooker" photo /> explaining the PostHog MCP server.
+            </p>
+            <p className="text-base @sm:text-lg italic font-light text-secondary mt-0 mb-5">
+                Yes, he&apos;s holding a chicken.
             </p>
 
             <div className="aspect-video">
@@ -117,9 +119,27 @@ function ExplainerVideo(): JSX.Element {
 }
 
 function DemoVideo(): JSX.Element {
+    const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: true })
+
     return (
         <div className="not-prose my-6">
-            <div className="rounded-md overflow-hidden border border-primary shadow-md">
+            <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-6">
+                <PlatformInstall
+                    schema={mcpPageInstallSchema}
+                    className="relative z-20 w-full flex-[1_1_24rem] !mb-4"
+                />
+                <div ref={ref} className="relative h-36 @sm:h-48 min-w-0 flex-[1_1_18rem]">
+                    <motion.div
+                        className="absolute top-0 left-1/2 w-full max-w-96"
+                        initial={{ opacity: 0, y: '100%', x: '-50%' }}
+                        animate={inView ? { opacity: 1, y: 0, x: '-50%' } : { opacity: 0, y: '100%', x: '-50%' }}
+                        transition={{ delay: 0.2 }}
+                    >
+                        <HedgehogPartyHog className="pointer-events-none w-full h-auto" />
+                    </motion.div>
+                </div>
+            </div>
+            <div className="relative z-10 rounded-md overflow-hidden border border-primary shadow-md">
                 <div className="aspect-video bg-black">
                     <video
                         src="https://res.cloudinary.com/dmukukwp6/video/upload/mcp_error_tracking_debugging30_6e25828d88.mp4"
@@ -131,9 +151,6 @@ function DemoVideo(): JSX.Element {
                     />
                 </div>
             </div>
-            <p className="text-center text-xs opacity-60 mt-2 mb-0 italic">
-                Paste the error. Type `debug`. That&apos;s it.
-            </p>
         </div>
     )
 }
@@ -167,7 +184,7 @@ function Subfeatures(): JSX.Element {
         },
     ]
     return (
-        <ul className="list-none p-0 my-6 grid grid-cols-1 @sm:grid-cols-3 gap-3 not-prose">
+        <ul className="list-none p-0 my-6 grid grid-cols-1 @lg:grid-cols-3 gap-3 not-prose">
             {items.map((item) => (
                 <li
                     key={item.title}
@@ -507,7 +524,7 @@ const complaintList: SocialCardProps[] = [
     },
     {
         username: 'Dan',
-        handle: 'dashboardregret',
+        handle: 'toomanymenus',
         quote: 'The PostHog UI has, conservatively, 14,000 menus.',
         platform: 'reddit',
         avatarColor: 'blue',
@@ -548,7 +565,7 @@ function ComplaintCard({ c, rotation }: { c: SocialCardProps; rotation: string }
                 <span
                     className={`ml-auto ${
                         c.platform === 'twitter' ? 'text-base' : 'text-[10px]'
-                    } text-secondary opacity-60 uppercase tracking-wider`}
+                    } text-secondary opacity-60 uppercase tracking-wider self-start`}
                 >
                     {c.platform === 'twitter' ? '𝕏' : 'Reddit'}
                 </span>
@@ -575,7 +592,11 @@ function FutureNoUI(): JSX.Element {
                 </p>
                 <p>
                     Even our own marketing team can&apos;t{' '}
-                    <Link to="/newsletter/hidden-danger-of-shipping-fast" state={{ newWindow: true }}>
+                    <Link
+                        to="/newsletter/hidden-danger-of-shipping-fast"
+                        state={{ newWindow: true }}
+                        className="underline"
+                    >
                         keep up with how fast we ship
                     </Link>
                     .
@@ -586,7 +607,10 @@ function FutureNoUI(): JSX.Element {
                 </p>
                 <p className="font-semibold">That&apos;s where the MCP comes in.</p>
                 <div className="mt-5 bg-accent dark:bg-accent-dark border border-primary rounded-md p-4">
-                    <p className="font-bold text-[15px] m-0 mb-1">"But I like the PostHog UI."</p>
+                    <p className="font-bold text-[15px] m-0 mb-1">
+                        &ldquo;But I <span className="bg-green/20 text-green rounded-sm px-0.5">like</span> the PostHog
+                        UI&rdquo;
+                    </p>
                     <p className="text-[13px] m-0 text-secondary leading-snug">
                         Then carry on. It&apos;s not going anywhere. And while you&apos;re in there, tell{' '}
                         <TeamMember name="Adam Leith" photo /> &mdash; he&apos;ll be thrilled.
@@ -608,16 +632,20 @@ function FutureNoUI(): JSX.Element {
 function MCPCTA(): JSX.Element {
     return (
         <div className="not-prose my-6 mt-12">
-            <div className="grid grid-cols-1 @sm:grid-cols-[auto,1fr] gap-5 @sm:gap-6 items-center bg-accent dark:bg-accent-dark border border-primary rounded p-4">
-                <div className="relative flex justify-center shrink-0">
-                    <img
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/mcp_hog_05867b6214.png"
-                        alt="PostHog hedgehog"
-                        className="w-32 @sm:w-40"
+            <div className="grid grid-cols-1 @lg:grid-cols-[10rem,1fr] gap-5 @lg:gap-6 items-center bg-accent dark:bg-accent-dark border border-primary rounded p-4 @lg:ml-5">
+                <div className="relative order-2 @lg:order-1 flex justify-center shrink-0 @lg:self-stretch">
+                    <HedgehogBasketballCoach
+                        title="PostHog basketball coach hedgehog"
+                        className="w-36 h-auto translate-y-2 scale-x-[-1] @lg:absolute @lg:w-52 @lg:-left-10 @lg:-bottom-10"
                     />
                 </div>
-                <div>
-                    <p className="text-xl @sm:text-2xl font-bold m-0 mb-1">Install the MCP</p>
+                <div className="order-1 @lg:order-2">
+                    <p className="text-xl @sm:text-2xl font-bold m-0 mb-1">
+                        Install the{' '}
+                        <span className="bg-blue/10 dark:bg-blue/20 text-blue rounded-md px-1 whitespace-nowrap">
+                            MCP
+                        </span>
+                    </p>
                     <p className="text-secondary m-0 mb-4 text-[13px]">
                         One command. Thirty seconds. Works in Cursor, Claude, Codex, PostHog Code, and friends.
                     </p>
@@ -668,7 +696,7 @@ export default function MCPPage(): JSX.Element {
                 description="The PostHog Model Context Protocol lets your coding agent query your real product data in plain English. No SQL, no dashboards, no tabs. Free forever."
                 image="/images/og/default.png"
             />
-            <Editor type="mdx" hasPadding={false}>
+            <Editor type="mdx" hasPadding={false} className="[&_article]:!max-w-none">
                 <div className="px-4 @xl:px-8 pb-4 max-w-[900px] mx-auto">
                     <MCPHeader />
 
@@ -695,7 +723,7 @@ export default function MCPPage(): JSX.Element {
                     <Subfeatures />
 
                     <Q text="What does the MCP actually do?" />
-                    <p>
+                    <p className="max-w-xl">
                         Your agent picks the right tool from more than 50 available options, and runs it. You don't even
                         need to know what's setup; the MCP does it for you (and asks for help if needed).
                     </p>
@@ -704,7 +732,16 @@ export default function MCPPage(): JSX.Element {
 
                     <Capabilities />
 
-                    <Q text="You don't need to use PostHog to use PostHog" />
+                    <Q
+                        text={
+                            <>
+                                You don&apos;t need to use PostHog to{' '}
+                                <span className="bg-blue/10 dark:bg-blue/20 text-blue rounded-md px-1 whitespace-nowrap">
+                                    use PostHog
+                                </span>
+                            </>
+                        }
+                    />
                     <FutureNoUI />
 
                     <Q text="Where does the MCP run?" />
@@ -716,7 +753,6 @@ export default function MCPPage(): JSX.Element {
                         , but the MCP is flexible to most common tools.
                     </p>
 
-                    <PlatformInstall />
                     <DemoVideo />
 
                     <MCPCTA />

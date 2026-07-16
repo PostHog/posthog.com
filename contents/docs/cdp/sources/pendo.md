@@ -9,40 +9,42 @@ availability:
 sourceId: Pendo
 ---
 
-<CalloutBox icon="IconInfo" title="Alpha release" type="fyi">
+import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
+import SyncModes from "../_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import AlphaRelease from "../_snippets/alpha-release.mdx"
 
-This source is currently in **alpha**. The interface and available tables may change.
+<AlphaRelease />
 
-</CalloutBox>
+The Pendo connector syncs your Pendo product data – features, pages, guides, visitors, and accounts – into PostHog, so you can analyze product engagement alongside your other data.
 
-Enter your Pendo integration key to pull your Pendo data into the PostHog data warehouse.
+## Prerequisites
+
+You need a Pendo integration key, which only Pendo admins can create and view. You'll also need to know which data region your subscription uses (US, US1, EU, Japan, or Australia), since the key is specific to that region.
 
 ## Adding a data source
 
-1. Go to the [sources tab](https://app.posthog.com/data-management/sources) of the data pipeline section in PostHog.
-2. Click **+ New source** and then click **Link** next to Pendo.
-3. Create an integration key in Pendo under **Settings > Integrations > Integration Keys** (only Pendo admins can view these). The key is specific to your subscription's data region, so note which region you log in with (US, US1, EU, Japan, or Australia).
-4. Back in PostHog, enter the integration key, select the matching data region, and click **Next**.
-5. Select the tables you want to sync, set the sync method and frequency, then click **Import**.
+<SourceSetupIntro />
 
-Once the syncs are complete, you can start using Pendo data in PostHog.
+When linking Pendo, you'll need:
 
-## Available tables
+- **Integration key** – create one in Pendo under **Settings > Integrations > Integration Keys**. Only Pendo admins can view these.
+- **Data region** – select the region that matches the domain you log in with (US, US1, EU, Japan, or Australia). The integration key is scoped to a single region.
 
-| Table | Description | Sync method |
-| ----- | ----------- | ----------- |
-| `features` | Tagged features | Full refresh |
-| `pages` | Tagged pages | Full refresh |
-| `guides` | Guides | Full refresh |
-| `visitors` | Visitor metadata, via the aggregation API | Full refresh |
-| `accounts` | Account metadata, via the aggregation API | Full refresh |
+## Sync modes
 
-**Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
+<SyncModes />
 
-## Sync limitations
-
-Every table is full refresh only. Pendo's list endpoints expose no server-side timestamp filter, and the aggregation endpoint's time filters apply only to event sources, not the visitor and account metadata this source pulls.
+Every Pendo table is full refresh only. Pendo's list endpoints expose no server-side timestamp filter, and the aggregation endpoint's time filters apply only to event sources, not the visitor and account metadata this source pulls.
 
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />
+
+## Troubleshooting
+
+<TroubleshootingLink />

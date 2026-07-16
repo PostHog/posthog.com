@@ -2,14 +2,6 @@
 title: Set up log alerts
 ---
 
-import CalloutBox from "components/Docs/CalloutBox";
-
-<CalloutBox icon="IconInfo" title="Log alerts are coming soon" type="action">
-
-Log alerts aren't available yet. The documentation below describes how alerts will work once released.
-
-</CalloutBox>
-
 Log alerts notify you when the volume of logs matching specific filters crosses a threshold. Use them to catch spikes in errors, drops in expected traffic, or unusual patterns across your services.
 
 Alerts are checked every 5 minutes and can be configured with noise-reduction settings to avoid false positives from brief, one-off spikes.
@@ -60,9 +52,9 @@ An alert without a destination has nowhere to send notifications. Add at least o
 
 Destinations are delivered through hog functions under the hood, so they reuse the same infrastructure as other PostHog destinations. The **Notifications** column in the alert list shows a struck-through bell when no destinations are configured.
 
-## Signals for PostHog Code Inbox
+## Signals for the self-driving inbox
 
-When an alert enters the **Firing** or **Broken** state, it automatically emits a signal to [PostHog Code Inbox](/docs/posthog-code/inbox/sources). The signal includes the alert name, threshold, observed count, window, filters, and a direct link to the matching logs. This enables the Inbox research agent to correlate the alert with your codebase and investigate the root cause.
+When an alert enters the **Firing** or **Broken** state, it automatically emits a signal to the [self-driving inbox](/docs/self-driving/inbox/sources). The signal includes the alert name, threshold, observed count, window, filters, and a direct link to the matching logs. This enables the inbox research agent to correlate the alert with your codebase and investigate the root cause.
 
 Only **Firing** and **Broken** state changes emit signals. **Resolving** and **Errored** states don't generate signals.
 

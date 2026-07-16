@@ -32,9 +32,9 @@ import PythonInstall from '../../integrate/_snippets/install-python.mdx'
 
 ## Identifying users
 
-import IdentifyBackendCallout from '../../_snippets/identify-backend-callout.mdx'
+import IdentifyBackendCalloutPython from '../../_snippets/identify-backend-callout-python.mdx'
 
-<IdentifyBackendCallout />
+<IdentifyBackendCalloutPython />
 
 ## Capturing events
 
@@ -305,7 +305,7 @@ def scrub_pii(event: dict[str, Any]) -> dict[str, Any] | None:
 
 
 client = posthog.Client(
-    api_key="<ph_project_api_key>",
+    "<ph_project_api_key>",
     before_send=scrub_pii,
 )
 ```

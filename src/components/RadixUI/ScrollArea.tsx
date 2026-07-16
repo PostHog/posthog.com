@@ -1,6 +1,4 @@
 import * as React from 'react'
-import { ScrollArea as ScrollAreaPrimitive } from 'radix-ui'
-import { useApp } from '../../context/App'
 
 interface ScrollAreaProps {
     children: React.ReactNode
@@ -10,6 +8,8 @@ interface ScrollAreaProps {
     style?: React.CSSProperties
     fullWidth?: boolean
     viewportClasses?: string
+    /** Ref to the scrolling viewport node — e.g. to persist/restore scroll position. */
+    viewportRef?: React.Ref<HTMLDivElement>
 }
 
 const ScrollArea = ({
@@ -20,43 +20,40 @@ const ScrollArea = ({
     style,
     fullWidth = false,
     viewportClasses = '',
+    viewportRef,
 }: ScrollAreaProps) => {
     const fadeHeight = fadeOverflow === true ? 8 : fadeOverflow || 0
-    const { websiteMode } = useApp()
     return (
-        <ScrollAreaPrimitive.Root
+        <div
             data-scheme={dataScheme}
-            className={`relative overflow-hidden h-full flex-1 [&>div>div]:!block ${
-                fullWidth ? 'max-w-screen' : ''
-            } ${className}`}
+            className={`relative overflow-hidden h-full flex-1 ${fullWidth ? 'max-w-screen' : ''} ${className}`}
             style={style}
         >
-            <ScrollAreaPrimitive.Viewport
-                className={`size-full ${viewportClasses} ${fadeHeight ? `pb-${fadeHeight}` : ''}`}
+            <div
+                ref={viewportRef}
+                // Kept for backwards-compatibility: many components locate the
+                // scrolling viewport via `.closest('[data-radix-scroll-area-viewport]')`
+                // (virtualization, scroll restoration, scroll-to-element, IO roots).
+                // This is now a native scroller, but the contract is preserved.
+                data-radix-scroll-area-viewport=""
+                className={`app-scroll-viewport size-full overflow-auto ${viewportClasses} ${
+                    fadeHeight ? `pb-${fadeHeight}` : ''
+                }`}
             >
-                {fullWidth ? <div className="">{children}</div> : children}
-            </ScrollAreaPrimitive.Viewport>
-            <ScrollAreaPrimitive.Scrollbar
-                className="flex touch-none select-none p-0.5 transition-colors duration-[160ms] ease-out hover:bg-accent-2 dark:hover:bg-accent-dark data-[orientation=horizontal]:h-2.5 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col"
-                orientation="vertical"
-            >
-                <ScrollAreaPrimitive.Thumb className="relative flex-1 rounded-[10px] bg-black/25 hover:bg-black/50 before:absolute before:left-1/2 before:top-1/2 before:size-full before:min-h-11 before:min-w-11 before:-translate-x-1/2 before:-translate-y-1/2" />
-            </ScrollAreaPrimitive.Scrollbar>
-            <ScrollAreaPrimitive.Scrollbar
-                className="flex touch-none select-none p-0.5 transition-colors duration-[160ms] ease-out hover:bg-accent-2 dark:hover:bg-accent-dark data-[orientation=horizontal]:h-2.5 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col"
-                orientation="horizontal"
-            >
-                <ScrollAreaPrimitive.Thumb className="relative flex-1 rounded-[10px] bg-black/25 hover:bg-black/50 before:absolute before:left-1/2 before:top-1/2 before:size-full before:min-h-[44px] before:min-w-[44px] before:-translate-x-1/2 before:-translate-y-1/2" />
-            </ScrollAreaPrimitive.Scrollbar>
-            <ScrollAreaPrimitive.Corner className="bg-black/25" />
-            {fadeHeight > 0 && !websiteMode && (
-                <>
+                {/* Inner wrapper mirrors the extra node Radix's Viewport used to
+                    render (min-width: 100%, block). Callers target it via
+                    descendant selectors like `[&>div>div]`, so the DOM nesting
+                    (wrapper → viewport → content) must be preserved. */}
+                <div className="block min-w-full">{children}</div>
+            </div>
+            {fadeHeight > 0 && (
+                <div className="block pointer-events-none">
                     <div
                         className={`scrollarea-fade absolute bottom-0 left-0 right-0 h-${fadeHeight} bg-gradient-to-b from-[color-mix(in_srgb,rgb(var(--bg))_0%,transparent)] via-[color-mix(in_srgb,rgb(var(--bg))_75%,transparent)] to-[rgb(var(--bg))]`}
                     />
-                </>
+                </div>
             )}
-        </ScrollAreaPrimitive.Root>
+        </div>
     )
 }
 

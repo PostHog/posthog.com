@@ -442,6 +442,26 @@ const products: Product[] = [
         },
     },
     {
+        name: 'MCP analytics',
+        color: '[#8B0DC8]',
+        Icon: IconLlmAnalytics,
+        description: 'Product analytics for your MCP servers — see how agents use your tools.',
+        types: ['AI'],
+        features: [
+            { title: 'MCP tool usage and errors', Icon: IconLlmAnalytics },
+            { title: 'Agent intent clustering', Icon: IconDecisionTree },
+            { title: 'Latency and quality metrics', Icon: IconTrends },
+        ],
+        status: 'WIP',
+        badge: 'BETA',
+        pricing: {
+            cta: {
+                url: '/teams/mcp-analytics',
+                text: 'Learn more',
+            },
+        },
+    },
+    {
         name: 'Embedded analytics',
         color: '[#36C46F]',
         Icon: IconCodeInsert,

@@ -64,7 +64,7 @@ This helps us keep things consistent and protects everyone’s privacy.
 
 If a team lead has resigned, the Blitzscale team should figure out who will take on the team lead responsibilities and have that prepared to let the team know just before the resignation is announced or as part of the announcement.
 
-For involuntary leavers, we will schedule a call. During the call, someone on the ops team needs to complete the [offboarding checklist](#offboarding-checklist).
+For involuntary leavers, we will schedule a call. During the call, someone on the ops team will be on hand to deprovisioning accounts. This is run through our access management tool Zluri. For any steps that require manual completion, team members will received a slack message from Zluri to complete the step and confirm when it has been done. 
 
 We will then send over an email covering the following points with the team member:
 

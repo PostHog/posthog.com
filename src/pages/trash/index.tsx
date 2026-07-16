@@ -22,6 +22,7 @@ export default function Trash(): JSX.Element {
                 image={`/images/og/default.png`}
             />
             <Explorer
+                className="border-t border-primary"
                 template="generic"
                 slug="trash"
                 title="Trash"
@@ -159,7 +160,6 @@ export default function Trash(): JSX.Element {
 
                                 return (
                                     <Accordion
-                                        skin={false}
                                         key={category}
                                         triggerClassName="flex-row-reverse [&>svg]:!-rotate-90 [&[data-state=open]>svg]:!rotate-0 [&>span]:relative [&>span]:after:absolute [&>span]:after:right-0 [&>span]:after:top-1/2 [&>span]:after:h-px [&>span]:after:w-full [&>span]:after:bg-border [&>span]:after:content-['']"
                                         items={[
@@ -174,11 +174,12 @@ export default function Trash(): JSX.Element {
                                                 ),
                                                 content: (
                                                     <div
-                                                        className={`@md:pl-4 grid ${isListLayout
+                                                        className={`@md:pl-4 grid ${
+                                                            isListLayout
                                                                 ? '@lg:grid-cols-2 @3xl:grid-cols-3 gap-y-4'
                                                                 : explorerGridColumns +
-                                                                ' gap-y-4 items-start justify-items-center'
-                                                            } gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
+                                                                  ' gap-y-4 items-start justify-items-center'
+                                                        } gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
                                                     >
                                                         {items.map((item) => {
                                                             const appLink = (
