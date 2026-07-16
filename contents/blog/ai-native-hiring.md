@@ -11,7 +11,6 @@ tags:
   - Ops & finance
   - AI
   - Culture
-  - Hiring 
 ---
 
 In Q2 2026, our [Ops & Finance team](/teams/people) caved and said what we'd been thinking for a while: when it comes to hiring, AI-native beats experience.

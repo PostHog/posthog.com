@@ -6,7 +6,6 @@ author:
 tags:
  - configuration
  - persons
- - sessions
  - product analytics
 ---
 

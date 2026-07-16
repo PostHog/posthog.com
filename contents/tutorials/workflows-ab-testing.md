@@ -9,7 +9,7 @@ author:
     - sara-miteva
 category: Product
 tags:
-    - Workflows
+    - workflows
     - experimentation
 seo:
     {

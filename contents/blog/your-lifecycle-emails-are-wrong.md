@@ -14,7 +14,6 @@ category: General
 tags:
     - Workflows
     - Growth
-    - Lifecycle messaging
 seo:
     metaTitle: "You're doing lifecycle emails wrong"
     metaDescription: 'High open rates can hide a deeper problem: your messaging tool may be working from outdated user data. Here is how data gets in, where it breaks, and how to audit it.'

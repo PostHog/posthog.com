@@ -12,7 +12,6 @@ featuredImage: >-
 featuredImageType: full
 category: PostHog news
 tags:
-  - Launch week
   - Product updates
 ---
 

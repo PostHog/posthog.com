@@ -8,8 +8,6 @@ author:
   - joe-martin
 tags:
   - apps
-  - zapier
-  - subscriptions
   - cdp
   - product os
 ---

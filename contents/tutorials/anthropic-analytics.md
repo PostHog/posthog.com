@@ -5,7 +5,7 @@ author:
   - lior-neu-ner
 tags:
   - product analytics
-  - AI Observability
+  - ai observability
 ---
 
 Tracking your Claude usage, costs, and latency is crucial to understanding how your users are interacting with your AI and LLM-powered features.

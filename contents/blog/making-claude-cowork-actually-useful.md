@@ -12,7 +12,6 @@ featuredImage: >-
 featuredImageType: full
 category: Blog
 tags:
-- General
 - Startups
 - People
 ---

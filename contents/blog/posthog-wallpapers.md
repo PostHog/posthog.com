@@ -7,7 +7,7 @@ featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/wallpapers_87c9b50065.png
 featuredImageType: full
 tags:
-- General
+- Culture
 ---
 
 Love PostHog?

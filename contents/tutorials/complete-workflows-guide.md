@@ -11,9 +11,7 @@ featuredImage: >-
 featuredImageType: full
 category: Product
 tags:
-    - Workflows
-    - Automation
-    - Tutorials
+    - workflows
 seo:
     {
         metaTitle: 'A complete guide to Workflows: Emails, i18n, push notifications, webhooks, and more',

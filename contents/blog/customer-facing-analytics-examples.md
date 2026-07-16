@@ -12,7 +12,6 @@ featuredImage: >-
 category: General
 tags:
     - Endpoints
-    - Data
     - Customer analytics
 seo:
     metaTitle: "The 5 best customer-facing analytics examples (and what to steal from each)"
