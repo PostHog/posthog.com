@@ -226,6 +226,17 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       title: String
       number: Int
     }
+    type SelfDrivingPullRequest implements Node {
+      prNumber: Int
+      title: String
+      summary: String
+      type: String
+      scope: String
+      url: String
+      state: String
+      openedAt: Date @dateformat
+      mergedAt: Date @dateformat
+    }
     type PostTagAttributes {
         label: String
         folder: String

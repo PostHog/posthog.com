@@ -2,9 +2,9 @@ import { Drawer } from 'components/Drawer'
 import React, { useState } from 'react'
 import { cn } from '../../utils'
 import { ProductCard } from './ProductCard'
+import MerchVideoCard from './MerchVideoCard'
 import { ProductPanels } from './ProductPanels'
 import { ShopifyProduct } from './types'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 type ProductGridProps = {
     className?: string
@@ -50,6 +50,7 @@ export default function ProductGrid(props: ProductGridProps): React.ReactElement
     return (
         <>
             <div className={classes}>
+                <MerchVideoCard />
                 {products.map((product: ShopifyProduct, index) => {
                     /**
                      * We want every other two cards to be large and take up 2 rows and 2 cols

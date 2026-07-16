@@ -9,6 +9,7 @@ import { Accordion } from 'components/RadixUI/Accordion'
 import TabbedCarousel from 'components/TabbedCarousel'
 import type { TabbedCarouselTab } from 'components/TabbedCarousel'
 import OSTable from 'components/OSTable'
+import WistiaEmbed from 'components/WistiaEmbed'
 import Link from 'components/Link'
 import {
     IconBell,
@@ -705,13 +706,10 @@ export default function SlackAppPage(): JSX.Element {
                         </p>
                     </div>
 
-                    <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/slack_app_update_docs_f0c917f70a.png"
-                        alt="@PostHog updating docs from a Slack thread"
-                        className="w-full !block m-0"
-                        imgClassName="w-full !block"
-                    />
-                    <hr className="border-t border-primary m-0 mb-6" />
+                    <div className="rounded overflow-hidden not-prose m-0">
+                        <WistiaEmbed mediaId="ifyltgbxid" />
+                    </div>
+                    <hr className="border-t border-primary m-0 mb-6 mt-6" />
 
                     <h3>
                         One hog, <Highlight>two jobs</Highlight>
