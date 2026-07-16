@@ -43,9 +43,8 @@ export async function getServerSideProps(ctx) {
       }
     )
 
-    // Use the same stable user ID your frontend passes to posthog.identify().
-    // Avoid emails and other personal data as a distinct ID — send them as
-    // person properties instead.
+    // Use the distinct ID passed from your frontend application
+    // to attribute events consistently across the session.
     const distinctId = session.user.id
 
     flags = await client.getAllFlags(distinctId);
