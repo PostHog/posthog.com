@@ -2,8 +2,9 @@ import React, { useEffect, useMemo, useState } from 'react'
 import SEO from 'components/seo'
 import Explorer from 'components/Explorer'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import { Select } from 'components/RadixUI/Select'
+import Tooltip from 'components/RadixUI/Tooltip'
+import { ZoomImage } from 'components/ZoomImage'
 import OSButton from 'components/OSButton'
 import Link from 'components/Link'
 import dayjs from 'dayjs'
@@ -25,7 +26,14 @@ import {
 const statusDotColors: Record<CommunityStatus, string> = {
     active: 'bg-green',
     'inactive-seeking-support': 'bg-yellow',
-    inactive: 'bg-gray',
+    inactive: 'bg-red',
+}
+
+// Less active groups sink to the bottom of the list (they still show on the map)
+const statusSortOrder: Record<CommunityStatus, number> = {
+    active: 0,
+    'inactive-seeking-support': 1,
+    inactive: 2,
 }
 
 const Badge = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
@@ -99,32 +107,16 @@ const AddACommunityWindow = () => {
 
 const CoolBuilderCommunitiesPage = () => {
     const { websiteMode, addWindow } = useApp()
-    const [statusFilter, setStatusFilter] = useState<'all' | CommunityStatus>('all')
     const [typeFilter, setTypeFilter] = useState<'all' | CommunityType>('all')
     const [selectedCommunity, setSelectedCommunity] = useState<BuilderCommunity | null>(null)
 
     const filteredCommunities = useMemo(
         () =>
-            builderCommunities.filter(
-                (community) =>
-                    (statusFilter === 'all' || community.status === statusFilter) &&
-                    (typeFilter === 'all' || community.type === typeFilter)
-            ),
-        [statusFilter, typeFilter]
+            builderCommunities
+                .filter((community) => typeFilter === 'all' || community.type === typeFilter)
+                .sort((a, b) => statusSortOrder[a.status] - statusSortOrder[b.status]),
+        [typeFilter]
     )
-
-    const statusCounts = useMemo(() => {
-        const counts: Record<'all' | CommunityStatus, number> = {
-            all: builderCommunities.length,
-            active: 0,
-            'inactive-seeking-support': 0,
-            inactive: 0,
-        }
-        builderCommunities.forEach((community) => {
-            counts[community.status]++
-        })
-        return counts
-    }, [])
 
     const handleCommunityClick = (community: BuilderCommunity, updateUrl = true) => {
         setSelectedCommunity(community)
@@ -210,20 +202,6 @@ const CoolBuilderCommunitiesPage = () => {
                         <OSButton variant="primary" width="full" size="md" onClick={openAddACommunityWindow}>
                             Submit a community
                         </OSButton>
-                        <ToggleGroup
-                            title=""
-                            hideTitle
-                            options={[
-                                { label: `All (${statusCounts.all})`, value: 'all' },
-                                { label: `Active (${statusCounts.active})`, value: 'active' },
-                                {
-                                    label: `Seeking organizers (${statusCounts['inactive-seeking-support']})`,
-                                    value: 'inactive-seeking-support',
-                                },
-                            ]}
-                            onValueChange={(value) => setStatusFilter(value as 'all' | CommunityStatus)}
-                            value={statusFilter}
-                        />
                         <Select
                             value={typeFilter}
                             onValueChange={(value) => setTypeFilter(value as 'all' | CommunityType)}
@@ -249,7 +227,7 @@ const CoolBuilderCommunitiesPage = () => {
                             <div className="space-y-3">
                                 {filteredCommunities.length === 0 && (
                                     <p className="text-[13px] text-secondary m-0">
-                                        No communities match these filters (yet). Know one that should be here?
+                                        No communities match this filter (yet). Know one that should be here?
                                     </p>
                                 )}
                                 {filteredCommunities.map((community) => (
@@ -267,13 +245,28 @@ const CoolBuilderCommunitiesPage = () => {
                                         }`}
                                     >
                                         <div className="w-full">
+                                            {community.logo && (
+                                                <div className="float-right ml-2 max-w-20">
+                                                    <img
+                                                        src={community.logo}
+                                                        alt={`${community.name} logo`}
+                                                        className="w-20 max-h-20 object-contain rounded"
+                                                    />
+                                                </div>
+                                            )}
                                             <div className="flex items-center gap-1.5">
-                                                <span
-                                                    className={`size-2 shrink-0 rounded-full ${
-                                                        statusDotColors[community.status]
-                                                    }`}
-                                                    title={communityStatusLabels[community.status]}
-                                                />
+                                                <Tooltip
+                                                    trigger={
+                                                        <span
+                                                            className={`block size-2 shrink-0 rounded-full ${
+                                                                statusDotColors[community.status]
+                                                            }`}
+                                                        />
+                                                    }
+                                                    delay={0}
+                                                >
+                                                    {communityStatusLabels[community.status]}
+                                                </Tooltip>
                                                 <span className="font-semibold text-sm line-clamp-2">
                                                     {community.name}
                                                 </span>
@@ -292,6 +285,16 @@ const CoolBuilderCommunitiesPage = () => {
                                         </div>
                                     </OSButton>
                                 ))}
+                                <div className="pt-2 text-center">
+                                    <img
+                                        src="/images/coworking-hogs.png"
+                                        alt="Hedgehogs coworking on laptops"
+                                        className="max-w-48 mx-auto"
+                                    />
+                                    <p className="text-[13px] text-secondary m-0 mt-1">
+                                        Your builder community could be here.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </ScrollArea>
@@ -395,6 +398,23 @@ const CoolBuilderCommunitiesPage = () => {
                                                     )}
                                                 </div>
                                             )}
+
+                                        {selectedCommunity.photos && selectedCommunity.photos.length > 0 && (
+                                            <div>
+                                                <div className="text-secondary text-[13px] mb-1">Photos</div>
+                                                <div className="grid grid-cols-2 gap-2">
+                                                    {selectedCommunity.photos.map((photo, i) => (
+                                                        <ZoomImage key={i}>
+                                                            <img
+                                                                src={photo}
+                                                                alt={`${selectedCommunity.name} photo ${i + 1}`}
+                                                                className="w-full h-32 object-cover rounded"
+                                                            />
+                                                        </ZoomImage>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
 
                                         {selectedCommunity.posthogIncubator && (
                                             <div>

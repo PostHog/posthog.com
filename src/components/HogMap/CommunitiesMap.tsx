@@ -193,7 +193,11 @@ export default function CommunitiesMap({
                     'w-5',
                     'h-5',
                     'rounded-full',
-                    community.status === 'active' ? 'bg-yellow' : 'bg-gray',
+                    community.status === 'active'
+                        ? 'bg-green'
+                        : community.status === 'inactive-seeking-support'
+                        ? 'bg-yellow'
+                        : 'bg-red',
                     'border-2',
                     'border-white',
                     'shadow'
@@ -399,6 +403,24 @@ export default function CommunitiesMap({
     useEffect(() => {
         handleExternalSelection()
     }, [handleExternalSelection])
+
+    if (isClient && !token) {
+        // Without a Mapbox token (e.g. local dev without GATSBY_MAPBOX_TOKEN) the map can't render —
+        // show a friendly placeholder instead of an empty pane
+        return (
+            <div className="box-border w-full h-full rounded border border-primary overflow-hidden relative flex flex-col items-center justify-center gap-2 p-4 text-center">
+                <img
+                    src="/images/coworking-hogs.png"
+                    alt="Hedgehogs coworking on laptops"
+                    className="max-w-64 w-full"
+                />
+                <div className="text-primary text-sm">The map is unavailable right now.</div>
+                <div className="text-secondary text-[13px]">
+                    Running locally? Set <code>GATSBY_MAPBOX_TOKEN</code> in your <code>.env.development</code>.
+                </div>
+            </div>
+        )
+    }
 
     return (
         <div className="box-border w-full h-full rounded border border-primary overflow-hidden relative">

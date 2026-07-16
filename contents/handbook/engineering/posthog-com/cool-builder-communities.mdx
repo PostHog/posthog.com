@@ -16,7 +16,8 @@ Each entry has:
 - `status` – `active`, `inactive-seeking-support` (shown as "Seeking organizers"), or `inactive`
 - `type` – `builder-group`, `hacker-house`, or `builder-collective`
 - `organizers` – names with optional links
-- `logo` – optional image URL
+- `logo` – optional image URL, shown in the list and detail panel
+- `photos` – optional image URLs, shown in the detail panel
 - `nextSession` – optional date and/or link (Luma, Meetup, etc.)
 - `posthogIncubator` – set to `true` for [community incubator](/community-incubator) chapters, which get a "PostHog incubator" badge
 
@@ -26,7 +27,7 @@ Edit `src/data/builderCommunities.ts` and open a PR — a template entry with in
 
 ### Submissions
 
-The "Submit a community" button on the page opens a form that fires a `builder_community_submission` event in PostHog with the group's details (see `src/components/BuilderCommunityForm/README.md`). There's no moderation queue — someone on the team reviews the event, verifies the group, and adds it to the data file.
+The "Submit a community" button on the page opens a form that fires a `builder_community_submission` event in PostHog with the group's details (see `src/components/BuilderCommunityForm/README.md`). There's no moderation queue — someone on the team reviews the event, verifies the group, and adds it to the data file. We don't approve everyone: we look for active, established, curated groups.
 
 ## Aspirations for v2
 
@@ -36,5 +37,5 @@ Things we'd like to add if the directory gets traction:
 - **Search** – free-text search once the list is too long to scan
 - **Per-community permalinks** – dedicated pages (like `/events/:id`) instead of the current `#communityId=` hash
 - **Automatic next-session data** – pull upcoming sessions from Luma/Meetup instead of hand-maintaining dates
-- **Photos and richer profiles** – session photos, member counts, and vibe, like the events page
+- **Richer profiles** – member counts, session recaps, and vibe, like the events page
 - **Custom OG image** – a dedicated `/images/og/cool-builder-communities.png`

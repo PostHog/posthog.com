@@ -58,7 +58,7 @@ export default function BuilderCommunityForm(): JSX.Element {
         <form ref={formRef} onSubmit={handleSubmit} className="space-y-3">
             <p className="text-sm text-secondary mb-2">
                 Know a builder group, hacker house, or builder collective that should be on this list? Tell us about it
-                and we'll add it after a quick review.
+                and we'll consider adding it after a quick review. We look for active, established, curated groups.
             </p>
             <Field label="Community name *">
                 <input name="communityName" type="text" placeholder="Give(a)Go" className={inputClasses} required />

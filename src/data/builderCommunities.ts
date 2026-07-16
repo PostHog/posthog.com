@@ -11,7 +11,8 @@
         status: 'active', // 'active' | 'inactive-seeking-support' | 'inactive'
         type: 'builder-group', // 'builder-group' | 'hacker-house' | 'builder-collective'
         organizers: [{ name: 'Organizer name', url: 'https://linkedin.com/in/...' }],
-        logo: 'https://res.cloudinary.com/...', // optional
+        logo: 'https://res.cloudinary.com/...', // optional, shown in the list and detail panel
+        photos: ['https://res.cloudinary.com/...'], // optional, shown in the detail panel
         nextSession: { date: 'YYYY-MM-DD', url: 'https://lu.ma/...' }, // optional
         posthogIncubator: true, // only for PostHog community incubator chapters
     }
@@ -35,6 +36,7 @@ export interface BuilderCommunity {
     type: CommunityType
     organizers?: { name: string; url?: string }[]
     logo?: string
+    photos?: string[]
     nextSession?: { date?: string; url?: string }
     posthogIncubator?: boolean
 }
