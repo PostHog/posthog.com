@@ -233,6 +233,8 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       type: String
       scope: String
       url: String
+      state: String
+      openedAt: Date @dateformat
       mergedAt: Date @dateformat
     }
     type PostTagAttributes {
