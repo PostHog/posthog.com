@@ -84,22 +84,6 @@ import NextJSInstallServer from "../../integrate/_snippets/nextjs/install-nextjs
 
 <NextJSInstallServer />
 
-### Flushing events in serverless functions
-
-Server-side functions in Next.js are short-lived, and can shut down before queued events are sent. On platforms that expose a `waitUntil` API, pass it to the client and PostHog extends the invocation until the flush finishes, so you don't have to block the response on `shutdown()`:
-
-```ts
-import { waitUntil } from '@vercel/functions'
-import { PostHog } from 'posthog-node'
-
-const posthog = new PostHog(process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN, {
-  host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-  waitUntil,
-})
-```
-
-> **Note:** `waitUntil` is experimental and may change in a minor release. Without it, set `flushAt` to `1` and `flushInterval` to `0`, and `await posthog.shutdown()` before the function returns.
-
 ### Server-side configuration
 
 Next.js overrides the default `fetch` behavior on the server to introduce their own cache. PostHog ignores that cache by default, as this is Next.js's default behavior for any fetch call.
