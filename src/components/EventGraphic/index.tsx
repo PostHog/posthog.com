@@ -44,20 +44,6 @@ const DEFAULT_BACKGROUND = 'yellow'
 // Fallback artwork for events without a speaker (or speakers without an avatar)
 const DEFAULT_HEDGEHOG = 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/hogzilla_73b822a689.png'
 
-const Arrow = ({ className }: { className?: string }) => (
-    <svg viewBox="0 0 62 44" fill="none" aria-hidden="true" className={className}>
-        <path d="M2 40 C 18 44, 38 30, 55 11" stroke="currentColor" strokeWidth="5" strokeLinecap="round" fill="none" />
-        <path
-            d="M52 25 L55 11 L42 15"
-            stroke="currentColor"
-            strokeWidth="5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            fill="none"
-        />
-    </svg>
-)
-
 const EventGraphic = forwardRef<HTMLDivElement, EventGraphicProps>(function EventGraphic(
     { title, date, location, online, speaker, partners, className = '' },
     ref
@@ -97,7 +83,7 @@ const EventGraphic = forwardRef<HTMLDivElement, EventGraphicProps>(function Even
                         {locationLine && <div>{locationLine}</div>}
                     </div>
                     {speaker && (
-                        <div className="relative mb-[2%] mt-auto w-[52%]">
+                        <div className="mb-[2%] mt-auto w-[52%]">
                             <div className="mb-[1.5%] font-rounded text-[2.75cqw] font-semibold uppercase leading-none">
                                 Featuring:
                             </div>
@@ -109,7 +95,6 @@ const EventGraphic = forwardRef<HTMLDivElement, EventGraphicProps>(function Even
                                     {speaker.companyRole}
                                 </div>
                             )}
-                            <Arrow className="absolute -right-[6%] bottom-[10%] w-[15cqw]" />
                         </div>
                     )}
                     <div
