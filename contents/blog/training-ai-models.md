@@ -11,6 +11,7 @@ featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/ai_models_blog_
 featuredImageType: full
 tags:
  - CEO diaries
+ - Research
 ---
 
 I really think we're on the verge of some of our best work through the next six months.

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'components/Link'
-import { IconHeadset, IconPlayFilled } from '@posthog/icons'
+import Tooltip from 'components/RadixUI/Tooltip'
+import { IconArrowUpRight, IconHeadset, IconPlayFilled } from '@posthog/icons'
 import {
     Digit0,
     Digit1,
@@ -26,28 +27,101 @@ import usePostHog from 'hooks/usePostHog'
 import { APP_COUNT } from '../../../constants'
 import { CallToAction } from 'components/CallToAction'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
-import CloudinaryImage from 'components/CloudinaryImage'
 import IntegrationPrompt from 'components/IntegrationPrompt'
 import { motion } from 'framer-motion'
 import HeroCarousel from 'components/Home/HeroCarousel'
+import { buildTabs } from 'components/Home/HeroCarousel/tabs'
+import ToolsTicker from 'components/Home/ToolsTicker'
+// NOTE: `components/PlatformInstall` (index/IconButton/schema/CopyableCommand), the new
+// `Logomark*` icons added to `components/OSIcons/Icons.tsx`, and the `canvas-confetti`
+// dependency are all VENDORED VERBATIM from the `9000` branch — kept byte-identical to that
+// branch on purpose. When 9000 lands, the additions will be identical on both sides and 3-way
+// merge cleanly (no conflicts). Do NOT edit the vendored files here to avoid diverging from
+// 9000; tweak the install UI via the schema prop instead. This homepage integration (Tagline,
+// GetStarted, the carousel) is the only PostHog.com-side glue and is not present on 9000.
+import PlatformInstall, { wizardInstallSchema } from 'components/PlatformInstall'
 import { Customers, getSharedDescriptors } from '../shared'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import { RenderInClient } from 'components/RenderInClient'
+import { Tagline as ControlTagline, CTAs as ControlCTAs, HeroImage as ControlHeroImage } from '../Control'
+import { TestRolloutSlide, DebugFixSlide, OnePlaceSlide, UnderstandUsageSlide } from '../HeroCarousel/slides'
+import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 
 const AppCount = () => <span className="text-xs font-normal">{APP_COUNT} apps</span>
 
-const Tagline = () => (
-    <>
-        <h1 className="!text-2xl pt-4">The new way to build products</h1>
-        <p className="text-balance @xl:text-wrap">
-            Product development used to mean manually writing code, running analysis, diagnosing bugs, and rolling out
-            changes using dozens of tools.
-        </p>
+// @PostHog styled as a Slack-style mention chip, with a tooltip explaining the Slackbot.
+const PostHogMention = () => {
+    const [open, setOpen] = useState(false)
+    return (
+        <Tooltip
+            delay={0}
+            open={open}
+            onOpenChange={setOpen}
+            trigger={
+                <span className="bg-blue/10 dark:bg-blue/20 text-blue rounded-md px-1 font-bold whitespace-nowrap cursor-help">
+                    @PostHog
+                </span>
+            }
+        >
+            {/* Dismiss when the link inside is clicked */}
+            <div
+                data-scheme="primary"
+                className="text-primary [&_*]:text-primary max-w-xs text-sm leading-normal font-normal prose"
+                onClick={() => setOpen(false)}
+            >
+                <h3>How it works</h3>
+                <ol>
+                    <li>Add PostHog to your app</li>
+                    <li>
+                        <Link
+                            to="https://posthog.slack.com/marketplace/A03M3FN0RSQ-posthog"
+                            externalNoIcon
+                            className="group underline font-semibold"
+                        >
+                            Install PostHog Slackbot{' '}
+                            <IconArrowUpRight className="size-4 inline-block text-secondary group-hover:text-primary" />
+                        </Link>
+                    </li>
+                    <li>
+                        Tag <code>@PostHog</code> in any Slack thread to ship a fix, ask a data question, or edit
+                        content – without leaving the conversation.
+                    </li>
+                </ol>
+            </div>
+        </Tooltip>
+    )
+}
 
-        <p className="text-balance @xl:text-wrap">
-            PostHog is the only platform that acts like a co-pilot for you (and your AI agents) to do it all –{' '}
-            <em>autonomously</em>.
-        </p>
-    </>
+const SecondaryActions = () => (
+    <p className="!text-sm flex flex-wrap items-center gap-2 justify-center @xl:min-w-96 @xl:max-w-md">
+        <Link
+            to="/docs/model-context-protocol"
+            state={{ newWindow: true }}
+            className="text-secondary hover:text-primary"
+        >
+            <IconMCP className="size-4 mr-1 inline-block relative -top-px" />
+            <span className="underline font-semibold">MCP</span>
+        </Link>
+        <span className="text-secondary">•</span>
+        <Link to="/demo" state={{ newWindow: true }} className="text-secondary hover:text-primary">
+            <IconPlayFilled className="size-4 mr-1 inline-block relative -top-px" />
+            <span className="underline font-semibold">Watch a demo</span>
+        </Link>
+        <span className="text-secondary">•</span>
+        <Link to="/talk-to-a-human" state={{ newWindow: true }} className="text-secondary hover:text-primary">
+            <IconHeadset className="size-4 mr-1 inline-block relative -top-px" />
+            <span className="underline font-semibold">Talk to a human</span>
+        </Link>
+    </p>
+)
+
+// PostHog.com-side glue (see note above): the install UI + secondary links, used by the
+// homepage hero (inlined) and the /products page (via this export).
+export const GetStarted = ({ selfDriving }: { selfDriving?: boolean }) => (
+    <div className="mt-6 flex flex-col items-center @xl:items-start">
+        <PlatformInstall schema={wizardInstallSchema} selfDriving={selfDriving} />
+        <SecondaryActions />
+    </div>
 )
 
 export const CTAs = () => {
@@ -86,7 +160,7 @@ export const CTAs = () => {
             Existing test CTA row retained for reference:
             <div className="flex gap-2 items-center">
                 <div className="flex items-center gap-1">
-                    <WizardCommand latest={false} slim className="border border-primary" />
+                    <WizardCommand slim className="border border-primary" />
                     <Tooltip trigger={<IconInfo className="size-4 text-primary inline-block" />}>
                         <div className="max-w-sm">
                             <p className="text-sm mb-1">
@@ -113,26 +187,9 @@ export const CTAs = () => {
                 </CallToAction>
             </div>
             */}
-            <p className="!text-sm flex items-center gap-2 mt-4 justify-center @xl:justify-start">
-                <Link
-                    to="/docs/model-context-protocol"
-                    state={{ newWindow: true }}
-                    className="text-secondary hover:text-primary"
-                >
-                    <IconMCP className="size-4 mr-1 inline-block relative -top-px" />
-                    <span className="underline font-semibold">MCP</span>
-                </Link>
-                <span className="text-secondary">•</span>
-                <Link to="/demo" state={{ newWindow: true }} className="text-secondary hover:text-primary">
-                    <IconPlayFilled className="size-4 mr-1 inline-block relative -top-px" />
-                    <span className="underline font-semibold">Watch a demo</span>
-                </Link>
-                <span className="text-secondary">•</span>
-                <Link to="/talk-to-a-human" state={{ newWindow: true }} className="text-secondary hover:text-primary">
-                    <IconHeadset className="size-4 mr-1 inline-block relative -top-px" />
-                    <span className="underline font-semibold">Talk to a human</span>
-                </Link>
-            </p>
+            <div className="mt-4">
+                <SecondaryActions />
+            </div>
         </div>
     )
 }
@@ -264,21 +321,176 @@ const CompanyStageTabs = () => {
     )
 }
 
-function HeroImage(): JSX.Element {
+function TestHero(): JSX.Element {
     return (
-        <CloudinaryImage
-            src="https://res.cloudinary.com/dmukukwp6/image/upload/lazy_a2afd552f7.png"
-            className="w-64 @xl:w-48 @xl:float-right @xl:ml-4 @2xl:w-56 @3xl:w-64 @2xl:float-right -scale-x-100 @xl:mt-16 @3xl:mt-8"
+        <>
+            <div className="mb-12">
+                <h1 className="[&_p]:m-0 flex gap-1 flex-wrap !text-2xl !mb-4 pt-2">
+                    <div className="dark:hidden">
+                        <Logo />
+                    </div>
+                    <div className="hidden dark:block">
+                        <Logo fill="white" />
+                    </div>
+                </h1>
+
+                <h1 className="!text-3xl @xl:!text-4xl pt-4">
+                    Shift your product into{' '}
+                    <span className="bg-blue/10 dark:bg-blue/20 text-blue rounded-md px-1 whitespace-nowrap">
+                        self-driving mode
+                    </span>
+                </h1>
+
+                <div className="grid @xl:grid-cols-2 @xl:gap-8">
+                    <div>
+                        <p className="text-balance @xl:text-wrap text-[17px]">
+                            PostHog already knows your customers, which features they use, and the issues they have.
+                        </p>
+                        <p className="text-balance @xl:text-wrap text-[17px]">
+                            Now, PostHog automatically{' '}
+                            <RoughAnnotation
+                                type="highlight"
+                                color="rgba(247, 165, 1, 0.15)"
+                                strokeWidth={1}
+                                padding={2}
+                                delay={0}
+                                multiline
+                            >
+                                diagnoses problems
+                            </RoughAnnotation>
+                            ,{' '}
+                            <RoughAnnotation
+                                type="highlight"
+                                color="rgba(247, 165, 1, 0.15)"
+                                strokeWidth={1}
+                                padding={2}
+                                delay={500}
+                                multiline
+                            >
+                                fixes bugs
+                            </RoughAnnotation>
+                            , and{' '}
+                            <RoughAnnotation
+                                type="highlight"
+                                color="rgba(247, 165, 1, 0.15)"
+                                strokeWidth={1}
+                                padding={2}
+                                delay={900}
+                                multiline
+                            >
+                                generates pull requests
+                            </RoughAnnotation>
+                            {' – all '}
+                            <RoughAnnotation
+                                type="underline"
+                                color="currentColor"
+                                strokeWidth={1}
+                                delay={1800}
+                                multiline
+                                className="text-secondary"
+                            >
+                                without you having to prompt it.
+                            </RoughAnnotation>
+                        </p>
+                        <p className="text-balance @xl:text-wrap text-secondary">
+                            Join 500,000+ teams already shipping with PostHog.
+                        </p>
+                    </div>
+
+                    <div className="mt-6 flex flex-col items-center @xl:items-start">
+                        <PlatformInstall schema={wizardInstallSchema} selfDriving />
+                        <SecondaryActions />
+                    </div>
+                </div>
+            </div>
+
+            <HeroCarousel tabs={buildTabs} className="mb-4" />
+            <ToolsTicker className="mb-8" />
+        </>
+    )
+}
+
+function ControlHero(): JSX.Element {
+    return (
+        <>
+            <div className="text-center @xl:text-left mb-12">
+                <ControlHeroImage />
+
+                <h1 className="[&_p]:m-0 flex gap-1 flex-wrap justify-center @xl:justify-start !text-2xl mb-8 pt-2">
+                    <div className="dark:hidden">
+                        <Logo />
+                    </div>
+                    <div className="hidden dark:block">
+                        <Logo fill="white" />
+                    </div>
+                </h1>
+
+                <ControlTagline />
+
+                <ControlCTAs />
+            </div>
+
+            <HeroCarousel
+                tabs={[
+                    {
+                        value: 'understand-usage',
+                        label: 'Understand product usage',
+                        content: <UnderstandUsageSlide />,
+                        color: 'bg-blue',
+                        activeText: 'text-white',
+                        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
+                    },
+                    {
+                        value: 'one-place',
+                        label: 'One place for product data',
+                        content: <OnePlaceSlide />,
+                        color: 'bg-teal',
+                        activeText: 'text-black',
+                        progressBar: 'bg-black/70 shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
+                    },
+                    {
+                        value: 'debug-fix',
+                        label: 'Debug & fix issues',
+                        content: <DebugFixSlide />,
+                        color: 'bg-salmon',
+                        activeText: 'text-white',
+                        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
+                    },
+                    {
+                        value: 'test-rollout',
+                        label: 'Test & roll out changes',
+                        content: <TestRolloutSlide />,
+                        color: 'bg-purple',
+                        activeText: 'text-white',
+                        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
+                    },
+                ]}
+            />
+        </>
+    )
+}
+
+function Hero(): JSX.Element {
+    const posthog = usePostHog()
+    return (
+        <RenderInClient
+            placeholder={<></>}
+            render={() =>
+                posthog?.getFeatureFlag?.('self-driving-mode-test', { fresh: true }) === 'test' ? (
+                    <TestHero />
+                ) : (
+                    <ControlHero />
+                )
+            }
         />
     )
 }
 
 const jsxComponentDescriptors: JsxComponentDescriptor[] = [
-    { name: 'Tagline', kind: 'flow', props: [], Editor: () => <Tagline /> },
     { name: 'AppCount', kind: 'flow', props: [], Editor: () => <AppCount /> },
     { name: 'CompanyStageTabs', kind: 'flow', props: [], Editor: () => <CompanyStageTabs /> },
     { name: 'CTAs', kind: 'flow', props: [], Editor: () => <CTAs /> },
-    { name: 'HeroCarousel', kind: 'flow', props: [], Editor: () => <HeroCarousel /> },
+    { name: 'HeroCarousel', kind: 'flow', props: [], Editor: () => <HeroCarousel tabs={buildTabs} /> },
     { name: 'HomeHitCounter', kind: 'flow', props: [], Editor: () => <HomeHitCounter /> },
     { name: 'Customers', kind: 'flow', props: [], Editor: () => <Customers tableClassName="bg-white dark:bg-dark" /> },
     {
@@ -295,12 +507,6 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         },
     },
     {
-        name: 'HeroImage',
-        kind: 'flow',
-        props: [],
-        Editor: () => <HeroImage />,
-    },
-    {
         name: 'ButtonDataStack',
         kind: 'flow',
         props: [],
@@ -309,6 +515,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     { name: 'ButtonPricing', kind: 'flow', props: [], Editor: () => <Button url="/pricing">Explore pricing</Button> },
     { name: 'ButtonAI', kind: 'flow', props: [], Editor: () => <Button url="/ai">Learn about PostHog AI</Button> },
     { name: 'ButtonAbout', kind: 'flow', props: [], Editor: () => <Button url="/about">Read more about us</Button> },
+    { name: 'Hero', kind: 'flow', props: [], Editor: () => <Hero /> },
     ...getSharedDescriptors(),
 ]
 
@@ -340,12 +547,19 @@ export default function HomeTest() {
                 updateWindowTitle={false}
                 description="All your developer tools in one place. PostHog gives engineers everything to build, test, measure, and ship successful products faster. Get started free."
                 image="/images/og/default.png"
+                languageAlternates={[
+                    { hrefLang: 'en', href: '/' },
+                    { hrefLang: 'ko', href: '/ko' },
+                    { hrefLang: 'x-default', href: '/' },
+                ]}
             />
             <MDXEditor
                 jsxComponentDescriptors={jsxComponentDescriptors}
                 body={rawBody}
                 mdxBody={mdxBody}
                 maxWidth={900}
+                readOnly
+                contentClassName="font-rounded"
                 cta={{
                     url: `https://${
                         posthog?.isFeatureEnabled?.('direct-to-eu-cloud') ? 'eu' : 'app'

@@ -11,6 +11,10 @@ sourceId: Stripe
 
 The Stripe connector syncs your Stripe data into PostHog, including charges, customers, invoices, products, subscriptions, and more.
 
+## Prerequisites
+
+You need a Stripe account and either a restricted API key or an OAuth connection. For the best experience, create a restricted API key with **Write** access to **Webhooks** so PostHog can set up real-time webhook syncing for you.
+
 ## Choosing a sync mode
 
 Stripe tables can be synced in one of three modes, and the one you pick has a big impact on cost, freshness, and correctness. We **strongly recommend using webhook syncs** for any Stripe source you care about keeping accurate:
@@ -65,6 +69,10 @@ The data warehouse then starts syncing your Stripe data. You can see details and
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />
 
 ## Setting up webhooks for real-time syncing
 
@@ -149,3 +157,11 @@ If you created the webhook manually or your API key lacks **Write** permission o
 The `stripe_subscription` table includes a `discounts` JSON column. When synced via the API, this column contains full Discount objects with embedded Coupon details (`amount_off`, `percent_off`, `duration`, `duration_in_months`). Under webhook-only mode, it contains an array of discount IDs (`di_*`) instead – join to the `stripe_discount` table for full details.
 
 If you have existing subscription data that was synced before this feature was available, re-sync (or reset your pipeline) to get the expanded discount objects.
+
+## Troubleshooting
+
+### Sync failing with "does not have access to account"
+
+If your Stripe sync fails with an account access error, your API key isn't authorized for the configured account or your OAuth access has been revoked. Check the **Account id** in your source settings – it's only needed for Stripe Connect platform accounts. If you connected via OAuth, try reconnecting your Stripe account.
+
+For more help, see the [Data Warehouse troubleshooting guide](/docs/data-warehouse/troubleshooting).

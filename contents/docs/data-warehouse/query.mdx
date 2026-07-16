@@ -8,17 +8,17 @@ availability:
   enterprise: full
 ---
 
-import { ProductScreenshot } from 'components/ProductScreenshot'
-import { CalloutBox } from 'components/Docs/CalloutBox'
+import { ProductScreenshot } from "components/ProductScreenshot";
+import { CalloutBox } from "components/Docs/CalloutBox";
 
 PostHog provides the full flexibility of SQL to query your data warehouse using the [SQL editor](/docs/data-warehouse/sql).
 
 To create a query, go to the [SQL editor](https://us.posthog.com/sql). Here you can see and search the schema of all available sources and [PostHog tables](/docs/data-warehouse/sources/posthog) as well as saved views.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_07_22_2x_f4bfc84ae3.png" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_07_22_2x_f4bfc84ae3.png"
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_07_45_2x_751fc31300.png"
-  alt="SQL editor" 
+  alt="SQL editor"
   classes="rounded"
 />
 
@@ -29,9 +29,9 @@ Here you can:
 3. Modify your query using [SQL commands](/docs/data-warehouse/sql) and [functions](/docs/data-warehouse/sql/useful-functions) as needed to get the data you want like `select amount / 100 as dollar_charge, status from stripe.prod.charge`.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_19_11_2x_b1d7ce399f.png" 
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_18_51_2x_e62db75b67.png" 
-  alt="Querying a source in PostHog" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_19_11_2x_b1d7ce399f.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_18_51_2x_e62db75b67.png"
+  alt="Querying a source in PostHog"
   classes="rounded"
 />
 
@@ -41,9 +41,39 @@ Here you can:
 
 <CalloutBox icon="IconInfo" title="Having trouble writing SQL?" type="fyi">
 
-  [PostHog AI](/docs/posthog-ai) can help write SQL for you. Just click the icon in the corner of your screen and ask it to write or tweak your query for you.
+[PostHog AI](/docs/posthog-ai) can help write SQL for you. Just click the icon in the corner of your screen and ask it to write or tweak your query for you.
 
 </CalloutBox>
+
+## Working with multiple queries
+
+The SQL editor supports writing multiple queries in a single tab, separated by semicolons. When you click **Run** or press <kbd>Cmd</kbd>+<kbd>Enter</kbd> (Mac) / <kbd>Ctrl</kbd>+<kbd>Enter</kbd> (Windows/Linux), only the query under your cursor executes. The active query is highlighted with a blue background so you can see which one runs next.
+
+For example, if your editor contains:
+
+```sql
+SELECT * FROM events LIMIT 10;
+SELECT count(*) FROM persons;
+SELECT distinct event FROM events;
+```
+
+Placing your cursor on the second line and clicking **Run** executes only `SELECT count(*) FROM persons`.
+
+If you manually select text in the editor, pressing <kbd>Cmd</kbd>+<kbd>Enter</kbd> runs the selected text instead.
+
+### Running subqueries
+
+Press <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>Enter</kbd> (Mac) / <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Enter</kbd> (Windows/Linux) to run the innermost subquery at your cursor position. This is useful for testing nested queries independently.
+
+For example, with the query:
+
+```sql
+SELECT * FROM (SELECT id, event FROM events WHERE event = 'pageview') LIMIT 10
+```
+
+Placing your cursor inside the inner `SELECT` and pressing <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>Enter</kbd> runs only `SELECT id, event FROM events WHERE event = 'pageview'`.
+
+Subqueries that may fail when run standalone — such as those referencing CTEs defined elsewhere — show a wavy yellow underline with a tooltip explaining the issue on hover.
 
 ## SQL visualizations
 
@@ -70,17 +100,17 @@ You can also set a prefix, suffix, and decimal places for each series.
 For example, with tables, you can add conditional formatting rules. These enable you to highlight cells based on their value and are set up in the **Conditional formatting** tab.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_01_at_13_01_00_2x_181ae75d28.png" 
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_01_at_13_02_28_2x_b3ba2d2d8a.png" 
-  alt="Customizing a SQL visualization" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_01_at_13_01_00_2x_181ae75d28.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_01_at_13_02_28_2x_b3ba2d2d8a.png"
+  alt="Customizing a SQL visualization"
   classes="rounded"
 />
 
 ## Querying multiple sources together
 
-Much of the power of the data warehouse comes from combining multiple sources, like your Stripe or Hubspot data with your product analytics data. Two of the easiest ways of doing this are `WHERE IN` and `JOIN` SQL commands. 
+Much of the power of the data warehouse comes from combining multiple sources, like your Stripe or Hubspot data with your product analytics data. Two of the easiest ways of doing this are `WHERE IN` and `JOIN` SQL commands.
 
-import QueryJoinExample from './_snippets/query-join-example.mdx'
+import QueryJoinExample from "./_snippets/query-join-example.mdx";
 
 <QueryJoinExample />
 
@@ -106,6 +136,6 @@ These metrics are helpful for optimizing queries, especially when working with l
 
 ## Optimizing queries
 
-import OptimalQueries from '../_snippets/optimal-queries.mdx'
+import OptimalQueries from "../_snippets/optimal-queries.mdx";
 
 <OptimalQueries />

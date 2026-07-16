@@ -12,14 +12,14 @@ You can also provide a URL as inspiration – PostHog AI reads the page content 
 
 ## Email types PostHog AI can create
 
-| Type | Goal | Example prompt |
-|------|------|----------------|
-| **Welcome** | Introduce new users to your product | "Create a welcome email for new signups" |
-| **Onboarding** | Guide users through setup steps | "Create an onboarding drip series for trial users" |
-| **Re-engagement** | Bring back inactive users | "Write an email for users who haven't logged in for 30 days" |
-| **Feature announcement** | Promote new features | "Announce our new dashboard builder" |
-| **Upgrade** | Convert free users to paid | "Write an upgrade email highlighting pro features" |
-| **Churn prevention** | Retain users showing churn signals | "Email users whose usage dropped 50% this month" |
+| Type                     | Goal                                | Example prompt                                               |
+| ------------------------ | ----------------------------------- | ------------------------------------------------------------ |
+| **Welcome**              | Introduce new users to your product | "Create a welcome email for new signups"                     |
+| **Onboarding**           | Guide users through setup steps     | "Create an onboarding drip series for trial users"           |
+| **Re-engagement**        | Bring back inactive users           | "Write an email for users who haven't logged in for 30 days" |
+| **Feature announcement** | Promote new features                | "Announce our new dashboard builder"                         |
+| **Upgrade**              | Convert free users to paid          | "Write an upgrade email highlighting pro features"           |
+| **Churn prevention**     | Retain users showing churn signals  | "Email users whose usage dropped 50% this month"             |
 
 ## Personalization with user properties
 
@@ -45,6 +45,24 @@ Select a prompt to try it out in the PostHog app:
 - **Include personalization hints** – "mention their plan name and usage" tells PostHog AI which user properties to include
 - **Provide a reference** – Sharing a URL or describing an existing email helps PostHog AI match the style and tone
 - **Ask for a series** – "Create a 3-email onboarding drip" generates multiple emails with a logical progression
+
+## Create templates with MCP
+
+If you use an AI coding assistant like Cursor or Claude, you can create email templates directly from your editor using the [PostHog MCP server](/docs/model-context-protocol).
+
+Unlike the natural language approach above, MCP tools give your AI assistant direct control over the template's design structure. Templates are authored using the same design format as PostHog's visual editor, so you can:
+
+- Create templates programmatically from your IDE
+- Edit templates created by your assistant in the visual builder
+- Round-trip between AI authoring and manual editing
+
+Example prompts:
+
+- "Create a welcome email template with a hero image, greeting with the user's name, and a CTA button"
+- "Update the onboarding template to include their company name in the subject"
+- "Show me the current welcome email template"
+
+See the [MCP use cases](/docs/model-context-protocol/use-cases) for more examples, or the [tools reference](/docs/model-context-protocol/tools) for the full list of email template tools.
 
 ## Get started
 

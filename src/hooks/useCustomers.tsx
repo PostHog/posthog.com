@@ -398,6 +398,33 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         height: 9,
         featured: true,
     },
+    fastr: {
+        name: 'Fastr',
+        toolsUsed: ['endpoints', 'feature_flags', 'session_replay', 'surveys'],
+        industries: ['E-commerce, MarTech'],
+        users: ['Product', 'Marketing'],
+        notes: 'A conversion rate optimization platform',
+        featured: false,
+        logo: {
+            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/FASTR_Logo_full_color_a8db0d8cb5.png',
+            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/FASTR_Logo_white_3c093b166c.png',
+        },
+        height: 8,
+        quotes: {
+            ryan_breen: {
+                name: 'Ryan Breen',
+                role: 'CTO',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/Ryan_Breen_456ba746db.jpg',
+                },
+                quotes: [
+                    "We love that you're nerd-friendly. You love being a kind of white-labeled substrate, just a fantastic platform for us to build on top of.",
+                    "The reason Fastr can stamp out a custom dashboard for every customer is their agentic pipeline. Fastr's engineers don't click around the PostHog UI. They write Claude skills that go figure out the current PostHog API, generate the endpoints and materialized views a feature needs, and deploy them.",
+                    "That's what shapes the Fastr UI. Instead of a chart library, Fastr drops customers into an AI conversation. They describe the question and the system pulls the answer out of the PostHog data Fastr has wired up for them.",
+                ],
+            },
+        },
+    },
     gankster: {
         name: 'Gankster',
         toolsUsed: ['posthog_ai', 'session_replay', 'product_analytics'],
@@ -459,9 +486,10 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         users: ['Engineering', 'Product', 'Growth', 'Marketing'],
         featured: false,
         logo: {
-            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/kilocode_logo_c58c88f029.webp',
-            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/kilocode_logo_c58c88f029.webp',
+            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/e_trim,q_auto,f_auto/kilocodelogo_93f0668287.png',
+            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/e_trim,q_auto,f_auto/kilocodelogo_93f0668287.png',
         },
+        height: 14,
         quotes: {
             job_rietbergen: {
                 // This is the author handle used in OSQuote
@@ -475,6 +503,33 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                     "In other setups, you end up with four different tools–analytics, experiments, recordings,and they don't really talk to each other. With PostHog, you can actually see the full picture.",
                     "PostHog is really the connective tissue behind a lot of what we're doing. So many things depend on it, and it adapts as fast as the product does.",
                     "Everything we do is about speed. PostHog helps us move fast without losing visibility into what's actually happening.",
+                ],
+            },
+        },
+    },
+    'legit-media': {
+        name: 'Legit Media',
+        toolsUsed: ['endpoints', 'product_analytics', 'session_replay', 'feature_flags'],
+        industries: ['News and Media'],
+        users: ['Engineering', 'Marketing'],
+        notes: 'Network of news websites across Africa',
+        featured: false,
+        logo: {
+            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/legit_logo_ad1569a0cd.png',
+            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/legit_logo_ad1569a0cd.png',
+        },
+        height: 8,
+        quotes: {
+            andrey_tovstonog: {
+                name: 'Andrey Tovstonog',
+                role: 'CTO',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/andrey_headshot_b9a99442ec.png',
+                },
+                quotes: [
+                    "About 1 out of 7 requests was successful. Before switching to Endpoints, during the last few weeks we weren't able to get any reports at all — the API was constantly responding that it was too busy and couldn't process our requests.",
+                    "The requests started to be processed much faster, and the response stability improved significantly.",
+                    "Previously, marketers had to manually gather all this information from different PostHog dashboards. After automation, everything is now consolidated and available in a single place, and they spend their time analyzing the results instead of searching for the right data.",
                 ],
             },
         },
@@ -766,8 +821,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'A digital menu platform with its own ad network',
         featured: false,
         logo: {
-            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/qubs_logo_white_outline_2x_5430c8f472.png',
-            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/qubs_logo_black_2x_c4ca11cba9.png',
+            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/qubs_logo_black_2x_c4ca11cba9.png',
+            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/qubs_logo_white_outline_2x_5430c8f472.png',
         },
         height: 10,
         quotes: {

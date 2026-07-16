@@ -19,7 +19,7 @@ For the underlying email infrastructure (Customer.io tags, categories, unsubscri
 
 If you write or coordinate customer comms, join these two internal Slack channels — they're the lowest-friction way to know what's just shipped and what's about to land:
 
-- [`#changelog`](https://posthog.slack.com/archives/C099B0YCULT) – what's just shipped. Owned by the [Docs & Wizard team](/teams/docs-wizard) and updated constantly as PRs merge.
+- [`#changelog`](https://posthog.slack.com/archives/C099B0YCULT) – what's just shipped. Owned by the [Wizard & Docs team](/teams/wizard-and-docs) and updated constantly as PRs merge.
 - [`#coming-soon`](https://posthog.slack.com/archives/C0B5QBS29QU) – what's shipping soon. Owned by the [Marketing team](/teams/marketing) and posted as a daily digest.
 
-Both channels are populated by agentic workflows that scan merged PRs and feature flag changes in `posthog/posthog` and summarize them into the channel. You can opt a PR in or out via the *Publish to changelog?* and *Alert Sales and Marketing teams?* checkboxes on the PR template, or via the `@posthog` Slack app. See [how to publish changelog](/handbook/docs-and-wizard/how-to-publish-changelog) for the full flow.
+Both channels are populated by agentic workflows that scan merged PRs and feature flag changes in `posthog/posthog` and summarize them into the channel. You can opt a PR in or out via the *Publish to changelog?* and *Alert Sales and Marketing teams?* checkboxes on the PR template, or via the `@posthog` Slack app. See [how to publish changelog](/handbook/wizard-and-docs/how-to-publish-changelog) for the full flow.

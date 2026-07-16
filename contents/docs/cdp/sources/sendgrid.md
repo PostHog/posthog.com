@@ -9,7 +9,7 @@ availability:
 sourceId: SendGrid
 ---
 
-<CalloutBox icon="IconInfo" title="Alpha release" type="fyi">
+<CalloutBox icon="IconFlask" title="Alpha release" type="action">
 
 This source is currently in **alpha**. The interface and available tables may change.
 
@@ -48,3 +48,7 @@ Once the syncs are complete, you can start using SendGrid data in PostHog.
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

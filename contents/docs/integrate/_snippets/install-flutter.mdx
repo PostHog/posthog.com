@@ -2,7 +2,7 @@ PostHog is available for install via [Pub](https://pub.dev/packages/posthog_flut
 
 ### Configuration
 
-Set your PostHog project token and change the automatic event tracking on if you wish the library to take care of it for you.
+Set your PostHog project token and enable automatic event tracking if you want the library to capture lifecycle events for you.
 
 Remember that the application lifecycle events won't have any special context set for you by the time it is initialized. If you are using a self-hosted instance of PostHog you will need to have the public hostname or IP for your instance as well.
 
@@ -14,14 +14,14 @@ To start, add `posthog_flutter` to your `pubspec.yaml`:
 dependencies:
   flutter:
     sdk: flutter
-  posthog_flutter: ^5.24.0
+  posthog_flutter: ^5.26.0
 
 # rest of your code
 ```
 
-Then complete the set up for each platform:
+Then complete the setup for each platform:
 
-> For Session replay and Surveys you must setup the SDK manually by disabling the `com.posthog.posthog.AUTO_INIT` mode.
+> For Session Replay and Surveys, you must set up the SDK manually by disabling the `com.posthog.posthog.AUTO_INIT` mode.
 
 #### Android setup
 
@@ -116,14 +116,14 @@ In both cases, you'll need to set the minimum platform version to iOS 13.0 in yo
 
 ```yaml file=ios/Podfile
 platform :ios, '13.0'
-
 # rest of your config
 ```
 
 #### Dart setup (For manual step only)
-If you followed the automatic SDK setup, then there's no more configuration needed in Dart. 
 
-If you followed the manual SDK setup: 
+If you followed the automatic SDK setup, then there's no more configuration needed in Dart.
+
+If you followed the manual SDK setup:
 
 ```dart
 import 'package:flutter/material.dart';
@@ -149,23 +149,61 @@ For Web, add your `Web snippet` (which you can find in [your project settings](h
 ```html file=web/index.html
 <!DOCTYPE html>
 <html>
+  <head>
+    <!-- ... other head elements ... -->
 
-<head>
-  <!-- ... other head elements ... -->
+    <script async>
+      !(function (t, e) {
+        var o, n, p, r;
+        e.__SV ||
+          ((window.posthog = e),
+          (e._i = []),
+          (e.init = function (i, s, a) {
+            function g(t, e) {
+              var o = e.split(".");
+              (2 == o.length && ((t = t[o[0]]), (e = o[1])),
+                (t[e] = function () {
+                  t.push([e].concat(Array.prototype.slice.call(arguments, 0)));
+                }));
+            }
+            (((p = t.createElement("script")).type = "text/javascript"),
+              (p.crossOrigin = "anonymous"),
+              (p.async = !0),
+              (p.src = s.api_host + "/static/array.js"),
+              (r = t.getElementsByTagName("script")[0]).parentNode.insertBefore(p, r));
+            var u = e;
+            for (
+              void 0 !== a ? (u = e[a] = []) : (a = "posthog"),
+                u.people = u.people || [],
+                u.toString = function (t) {
+                  var e = "posthog";
+                  return ("posthog" !== a && (e += "." + a), t || (e += " (stub)"), e);
+                },
+                u.people.toString = function () {
+                  return u.toString(1) + ".people (stub)";
+                },
+                o =
+                  "capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagResult reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(
+                    " ",
+                  ),
+                n = 0;
+              n < o.length;
+              n++
+            )
+              g(u, o[n]);
+            e._i.push([i, s, a]);
+          }),
+          (e.__SV = 1));
+      })(document, window.posthog || []);
+      posthog.init("<ph_project_token>", {
+        api_host: "<ph_client_api_host>", // 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
+        defaults: "<ph_posthog_js_defaults>",
+      });
+    </script>
+  </head>
 
-  <script async>
-    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-    posthog.init('<ph_project_token>', {
-      api_host:'<ph_client_api_host>', // 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
-      defaults: '<ph_posthog_js_defaults>',
-    })
-  </script>
-</head>
-
-<!-- other elements -->
-
+  <!-- other elements -->
 </html>
-
 ```
 
 For more information please check: /docs/libraries/js

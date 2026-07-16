@@ -70,7 +70,7 @@ export const aiObservability = {
     overview: {
         title: 'Observe and debug AI in production',
         description:
-            'Product analytics for LLMs. Inspect traces, spans, latency, usage, and per-user costs for AI-powered features.',
+            'Product analytics for LLMs. Inspect traces, spans, latency, usage, and per-user costs for AI-powered features – the context agents use to fix LLM behavior.',
         textColor: 'text-white',
         layout: 'overlay',
     },
@@ -103,10 +103,10 @@ export const aiObservability = {
     //   classes: 'absolute bottom-0 right-4 max-w-lg',
     // },
     customers: {
-        elevenlabs: {
-            headline: 'uses AI Observability with session replays (and everything else)',
+        kilocode: {
+            headline: 'keeps visibility into what its AI coding platform is actually doing',
             description:
-                'PostHog is amazing. It reins in the chaos to have everything in one place. Otherwise it’s quite overwhelming to try and understand what’s working and what’s not.',
+                'Everything we do is about speed. PostHog helps us move fast without losing visibility into what’s actually happening.',
         },
         lovable: {
             headline: 'compared us to every other observability tool, just to be sure',
@@ -314,7 +314,7 @@ export const aiObservability = {
             color: 'yellow',
             headline: 'Errors',
             description:
-                'Debug failed LLM calls and monitor exception rates with the full story: prompt, response, parameters, and metadata.',
+                'Debug failed LLM calls and monitor exception rates with the full story: prompt, response, parameters, and metadata – the context agents use to fix what broke.',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/errors_screenshot_e413f3f20b.png',
@@ -602,6 +602,9 @@ export const aiObservability = {
                 },
             ],
             us: [
+                {
+                    title: 'Agents can act on your LLM traces, costs, and errors – the context that makes your product self-driving',
+                },
                 {
                     title: 'You want to understand LLM costs on a per user basis',
                     subtitle: 'in addition to other axes',

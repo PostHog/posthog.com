@@ -4,13 +4,13 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Our documentation is a critical piece of PostHog's **context flywheel** – a system that connects our codebase to our docs, which then feeds into our AI agents, the [Wizard](/handbook/docs-and-wizard/developing-the-wizard), and PostHog Code. When documentation is outdated, the agents that help customers integrate PostHog become outdated too.
+Our documentation is a critical piece of PostHog's **context flywheel** – a system that connects our codebase to our docs, which then feeds into our AI agents, the [Wizard](/handbook/wizard-and-docs/developing-the-wizard), and PostHog Code. When documentation is outdated, the agents that help customers integrate PostHog become outdated too.
 
 This means your knowledge directly powers our AI tools. When you write down what you know, it doesn't just help humans – it helps robots help customers faster.
 
 ## Why your contributions matter
 
-The <SmallTeam slug="docs-wizard" /> team has automated writing documentation from PR merges using InKeep, which indexes our codebase and docs to create first-pass drafts. But there's knowledge that only comes from working directly with customers:
+The <SmallTeam slug="wizard-and-docs" /> team has automated writing documentation from PR merges using InKeep, which indexes our codebase and docs to create first-pass drafts. But there's knowledge that only comes from working directly with customers:
 
 - Common integration patterns and gotchas
 - Real-world use cases and configurations
@@ -33,7 +33,7 @@ Good things to document:
 
 ### 2. Make it actionable
 
-The [context mill](/handbook/docs-and-wizard/context-mill) transforms handbook content into skills for the AI Wizard. To make your content skill-ready:
+The [context mill](/handbook/wizard-and-docs/context-mill) transforms handbook content into skills for the AI Wizard. To make your content skill-ready:
 
 - **Be specific**: Include actual steps, not just concepts
 - **Show examples**: Real code snippets and configurations help
@@ -50,7 +50,7 @@ For example, if you write a playbook for gathering a customer dossier, that coul
 
 ## What gets turned into skills?
 
-Skills are defined using a YAML specification that allows for different variants based on app detection and context. The <SmallTeam slug="docs-wizard" /> team currently has over 60 skills the Wizard can use.
+Skills are defined using a YAML specification that allows for different variants based on app detection and context. The <SmallTeam slug="wizard-and-docs" /> team currently has over 60 skills the Wizard can use.
 
 Your handbook contributions can become skills that:
 - Help customers integrate specific products
@@ -108,7 +108,7 @@ The Wizard helps you get past the blank page. It's much easier to iterate from t
 1. **Identify something you repeat**: What do you explain to customers often?
 2. **Write it down**: Create a handbook page or add to an existing one
 3. **Make it specific**: Include actual steps, code, or configurations
-4. **Let the <SmallTeam slug="docs-wizard" /> team know**: Share in Slack that you've added something that might make a good skill
+4. **Let the <SmallTeam slug="wizard-and-docs" /> team know**: Share in Slack that you've added something that might make a good skill
 
 The written-down knowledge also enables automation beyond the Wizard – like having agents gather customer dossiers based on your specifications or analyze competitor implementations before a call.
 

@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> **Owner:** Replay team
+*For the canonical frame everyone at PostHog uses – the self-driving story and standard description – see [Brand foundations](/handbook/brand/foundations#how-we-describe-posthog).*
 
 ## Elevator pitch
 

@@ -7,17 +7,23 @@ availability:
   selfServe: full
   enterprise: full
 ---
-import { ProductScreenshot } from 'components/ProductScreenshot'
-import { ProductVideo } from 'components/ProductVideo'
-export const surveyInsightsLight = "https://res.cloudinary.com/dmukukwp6/video/upload/custom_insights_survey_97b472d02f.mp4"
-export const surveyInsightsDark = "https://res.cloudinary.com/dmukukwp6/video/upload/custom_insights_survey_dark_mode_d8610d52a0.mp4"
-export const surveyResultsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/surveys/survey-results-sample-light-mode.png"
-export const surveyResultsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/surveys/survey-results-sample-dark-mode.png"
 
-Survey results can be viewed in two places:
+import { ProductScreenshot } from "components/ProductScreenshot";
+import { ProductVideo } from "components/ProductVideo";
+export const surveyInsightsLight =
+  "https://res.cloudinary.com/dmukukwp6/video/upload/custom_insights_survey_97b472d02f.mp4";
+export const surveyInsightsDark =
+  "https://res.cloudinary.com/dmukukwp6/video/upload/custom_insights_survey_dark_mode_d8610d52a0.mp4";
+export const surveyResultsLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/surveys/survey-results-sample-light-mode.png";
+export const surveyResultsDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/surveys/survey-results-sample-dark-mode.png";
+
+Survey results can be viewed in three places:
 
 1. On the survey page, in the "Results" tab.
-2. By creating your own [insights](/docs/product-analytics/insights).
+2. On a [dashboard](/docs/product-analytics/dashboards) using the Survey Results widget.
+3. By creating your own [insights](/docs/product-analytics/insights).
 
 ## 1. On the survey page
 
@@ -36,10 +42,10 @@ For rating questions (including NPS), the trend charts include an **Open as new 
 Each question card also includes a **Copy response key** button. This copies the question's response key (e.g., `$survey_response_{question_id}`) to your clipboard. You can use this key when building custom [insights](/docs/product-analytics/insights) or setting up [destinations](/docs/surveys/destinations) like Slack notifications.
 
 <ProductScreenshot
-    imageLight={surveyResultsLight}
-    imageDark={surveyResultsDark}
-    alt="Sample survey results"
-    classes="rounded"
+  imageLight={surveyResultsLight}
+  imageDark={surveyResultsDark}
+  alt="Sample survey results"
+  classes="rounded"
 />
 
 ### Filtering results
@@ -51,7 +57,26 @@ You can filter survey results to focus on specific responses or user segments:
 - **Property filters** - Add filters for event properties, person properties, feature flags, cohorts, or HogQL expressions.
 - **Show archived** - Toggle **Show archived** to include or exclude archived responses.
 
-## 2. Creating your own insights
+## 2. On a dashboard
+
+You can add a Survey Results widget to any [dashboard](/docs/product-analytics/dashboards) to track survey performance alongside other metrics.
+
+The widget shows:
+
+- Survey name and current status (active, draft, ended, or archived)
+- Performance summary (times shown, responses received, and conversion rate)
+- A stacked bar showing submitted, dismissed, and unanswered counts
+- A list of recent responses with respondent names and submission times
+
+To add a Survey Results widget:
+
+1. Open a dashboard and click the **Add...** dropdown button.
+2. Select **Survey results** under the **Surveys** group.
+3. Pick the survey you want to display from the dropdown in the tile's quick-filter bar.
+
+You can configure the date range and limit how many responses are shown in the tile settings.
+
+## 3. Creating your own insights
 
 To create insights from survey results, navigate to the [insights tab](https://app.posthog.com/insights) and click on `New insights` button.
 
@@ -73,8 +98,8 @@ Depending on your [question type](/docs/surveys/creating-surveys#question-type),
 - `is_multiple_choice` is a boolean that is `true` if the question is a multiple choice question, and `false` otherwise. Optional, only needed for multiple choice questions.
 
 <ProductVideo
-    videoLight={surveyInsightsLight}
-    videoDark={surveyInsightsDark}
-    alt="How to create insights from surveys"
-    classes="rounded"
+  videoLight={surveyInsightsLight}
+  videoDark={surveyInsightsDark}
+  alt="How to create insights from surveys"
+  classes="rounded"
 />
