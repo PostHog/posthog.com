@@ -101,11 +101,14 @@ export default function SkillsColumnView({
         }
     }, [selectedSkill?.id, browseMode, isSearchMode])
 
+    // Only pick an alphabetical first department when nothing is selected yet.
+    // If a skill is already chosen (deep link or page default), the effect above
+    // syncs the department from that skill's tags instead.
     useEffect(() => {
-        if (browseMode === 'role' && !selectedDepartmentId && departments.length > 0) {
+        if (browseMode === 'role' && !selectedDepartmentId && !selectedSkill && departments.length > 0) {
             setSelectedDepartmentId(departments[0].id)
         }
-    }, [browseMode, departments, selectedDepartmentId])
+    }, [browseMode, departments, selectedDepartmentId, selectedSkill])
 
     useEffect(() => {
         if (browseMode === 'product' && productEntries.length > 0) {

@@ -4,10 +4,17 @@ import SEO from 'components/seo'
 import HeaderBar from 'components/OSChrome/HeaderBar'
 import SkillsColumnView from 'components/Skills/SkillsColumnView'
 import { BrowseMode } from 'components/Skills/types'
-import { Skill, skillSearchBlob, useSkills } from 'hooks/skills'
+import { Skill, skillSearchBlob, skills, useSkills } from 'hooks/skills'
 import useProduct from 'hooks/useProduct'
 import { useLocation } from '@reach/router'
 import { navigate } from 'gatsby'
+
+/** Prefer a common getting-started skill over alphabetical first (e.g. billing). */
+const DEFAULT_SKILL_ID = 'make-a-first-dashboard-for-a-new-product'
+
+function getDefaultSkill(): Skill | null {
+    return skills.find((s) => s.id === DEFAULT_SKILL_ID) ?? null
+}
 
 export default function SkillsPage(): JSX.Element {
     const allSkills = useSkills()
@@ -16,7 +23,7 @@ export default function SkillsPage(): JSX.Element {
 
     const [searchQuery, setSearchQuery] = useState('')
     const [browseMode, setBrowseMode] = useState<BrowseMode>('role')
-    const [selectedSkill, setSelectedSkill] = useState<Skill | null>(null)
+    const [selectedSkill, setSelectedSkill] = useState<Skill | null>(getDefaultSkill)
 
     const searchableSkills = useMemo(
         () =>
@@ -51,6 +58,11 @@ export default function SkillsPage(): JSX.Element {
         if (skillId) {
             const found = allSkills.find((s) => s.id === skillId)
             if (found) setSelectedSkill(found)
+            return
+        }
+        const fallback = getDefaultSkill()
+        if (fallback) {
+            navigate(`/skills?skill=${fallback.id}`, { replace: true })
         }
     }, [location.search, allSkills])
 
