@@ -15,9 +15,6 @@ import Tooltip from 'components/RadixUI/Tooltip'
 import WistiaVideo, { WistiaVideoRef } from 'components/WistiaVideo'
 import { Accordion } from 'components/RadixUI/Accordion'
 import OSButton from 'components/OSButton'
-import { RenderInClient } from 'components/RenderInClient'
-import usePostHog from 'hooks/usePostHog'
-
 const statusDotColor: Record<string, string> = {
     beta: 'bg-yellow',
     alpha: 'bg-orange',
@@ -308,7 +305,6 @@ const ProductRow = ({ product }: { product: any }) => {
 }
 
 export default function ProductsTest(): JSX.Element {
-    const posthog = usePostHog()
     const allProducts = useProduct() as any[]
 
     const productsByHandle = useMemo(() => {
@@ -338,41 +334,17 @@ export default function ProductsTest(): JSX.Element {
                         </div>
                         <div className="order-2 space-y-4 @3xl:order-1">
                             <h1 className="text-2xl @lg:text-3xl font-bold leading-tight">
-                                Devtools and product data infrastructure
-                                {/* Test appends "for building self-driving products"; control keeps it generic. */}
-                                <RenderInClient
-                                    placeholder={null}
-                                    render={() =>
-                                        posthog?.getFeatureFlag?.('self-driving-mode-test', { fresh: true }) ===
-                                        'test' ? (
-                                            <>
-                                                {' for building '}
-                                                <span className="bg-blue/10 dark:bg-blue/20 text-blue rounded-md px-1 whitespace-nowrap">
-                                                    self-driving products
-                                                </span>
-                                            </>
-                                        ) : (
-                                            <></>
-                                        )
-                                    }
-                                />
+                                Devtools and product data infrastructure for building{' '}
+                                <span className="bg-blue/10 dark:bg-blue/20 text-blue rounded-md px-1 whitespace-nowrap">
+                                    self-driving products
+                                </span>
                             </h1>
                             <p className="text-lg leading-relaxed">
                                 Humans and AI agents build with PostHog because everything you need to collect and
                                 analyze product usage data – and build and ship new features – lives in one place.
                             </p>
 
-                            {/* Test installs with the self-driving subcommand; control stays generic. */}
-                            <RenderInClient
-                                placeholder={<GetStarted showSecondaryActions={false} />}
-                                render={() =>
-                                    posthog?.getFeatureFlag?.('self-driving-mode-test', { fresh: true }) === 'test' ? (
-                                        <GetStarted selfDriving showSecondaryActions={false} />
-                                    ) : (
-                                        <GetStarted showSecondaryActions={false} />
-                                    )
-                                }
-                            />
+                            <GetStarted selfDriving showSecondaryActions={false} />
 
                             {/*
                         <div className="flex flex-wrap items-center gap-3 not-prose">
@@ -409,16 +381,7 @@ export default function ProductsTest(): JSX.Element {
                         </div>
                     </header>
 
-                    <RenderInClient
-                        placeholder={<></>}
-                        render={() =>
-                            posthog?.getFeatureFlag?.('self-driving-mode-test', { fresh: true }) === 'test' ? (
-                                <HeroCarousel tabs={productUsageTabs} />
-                            ) : (
-                                <></>
-                            )
-                        }
-                    />
+                    <HeroCarousel tabs={productUsageTabs} />
 
                     <hr />
 

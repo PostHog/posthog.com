@@ -12,19 +12,14 @@ import BedtimeReadingSection from 'components/Home/Sections/BedtimeReadingSectio
 import ShamelessCTASection from 'components/Home/Sections/ShamelessCTASection'
 import HitCounter from 'components/Home/HitCounter'
 import Link from 'components/Link'
-import Tooltip from 'components/RadixUI/Tooltip'
-import { IconArrowUpRight, IconHeadset, IconPlayFilled } from '@posthog/icons'
+import { IconHeadset, IconPlayFilled } from '@posthog/icons'
 import { IconMCP } from 'components/OSIcons'
 import Logo from 'components/Logo'
-import usePostHog from 'hooks/usePostHog'
-import { APP_COUNT } from '../../../constants'
 import { CallToAction } from 'components/CallToAction'
-import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import IntegrationPrompt from 'components/IntegrationPrompt'
 import { motion } from 'framer-motion'
 import HeroCarousel from 'components/Home/HeroCarousel'
 import { buildTabs } from 'components/Home/HeroCarousel/tabs'
-import { TestRolloutSlide, DebugFixSlide, OnePlaceSlide, UnderstandUsageSlide } from '../HeroCarousel/slides'
 import ToolsTicker from 'components/Home/ToolsTicker'
 // NOTE: `components/PlatformInstall` (index/IconButton/schema/CopyableCommand), the new
 // `Logomark*` icons added to `components/OSIcons/Icons.tsx`, and the `canvas-confetti`
@@ -34,13 +29,8 @@ import ToolsTicker from 'components/Home/ToolsTicker'
 // 9000; tweak the install UI via the schema prop instead. This homepage integration (Tagline,
 // GetStarted, the carousel) is the only PostHog.com-side glue and is not present on 9000.
 import PlatformInstall, { wizardInstallSchema } from 'components/PlatformInstall'
-import { RenderInClient } from 'components/RenderInClient'
 import Customers from '../Customers'
-import { Typecaast } from '@typecaast/react'
-import configSlack from './typecaast-slack.json'
-import configCursor from './typecaast-cursor.json'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
-import { Tagline as ControlTagline, CTAs as ControlCTAs, HeroImage as ControlHeroImage } from '../Control'
 
 const SecondaryActions = ({ justify = 'center' }: { className?: string; justify?: 'center' | 'start' }) => (
     <p
@@ -116,37 +106,6 @@ export const CTAs = () => {
                     <IntegrationPrompt />
                 </div>
             </motion.div>
-            {/* @TODO(data-positioning): Restore the original test CTA row below once this experiment no longer needs control-matching primary buttons.
-            Existing test CTA row retained for reference:
-            <div className="flex gap-2 items-center">
-                <div className="flex items-center gap-1">
-                    <WizardCommand slim className="border border-primary" />
-                    <Tooltip trigger={<IconInfo className="size-4 text-primary inline-block" />}>
-                        <div className="max-w-sm">
-                            <p className="text-sm mb-1">
-                                <strong className="block mb-1">Add PostHog to your project in ~8 minutes.</strong>
-                            </p>
-                            <p className="text-sm mb-0">
-                                <Link to="/wizard" state={{ newWindow: true }}>
-                                    <span className="underline font-bold">Learn more</span>{' '}
-                                    <IconArrowUpRight className="size-4 inline-block" />
-                                </Link>
-                            </p>
-                        </div>
-                    </Tooltip>
-                </div>
-                <span className="text-sm">or </span>
-                <CallToAction
-                    to="https://app.posthog.com/signup"
-                    size="sm"
-                    state={{ newWindow: true, initialTab: 'signup' }}
-                    type="plain"
-                    className=""
-                >
-                    signup with email
-                </CallToAction>
-            </div>
-            */}
             <div className="mt-4">
                 <SecondaryActions justify="start" />
             </div>
@@ -154,59 +113,7 @@ export const CTAs = () => {
     )
 }
 
-const heroImageTabs: ToggleOption[] = [
-    { label: 'Slack', value: 'slack', default: true },
-    { label: 'Cursor', value: 'cursor' },
-]
-
-function HeroImage(): JSX.Element {
-    const { siteSettings } = useApp()
-    const isDark = siteSettings.theme === 'dark'
-    const [activeTab, setActiveTab] = useState('slack')
-
-    return (
-        <div className="max-w-[400px] mx-auto mt-4 @xl:mx-0 @2xl:float-right @2xl:ml-4 @2xl:ml-8 @2xl:w-72 @3xl:w-80 @4xl:w-96 @2xl:-mt-20 transition-all">
-            <ToggleGroup
-                title="View"
-                hideTitle
-                options={heroImageTabs}
-                value={activeTab}
-                onValueChange={(value) => value && setActiveTab(value)}
-                className="mb-2 w-max mx-auto"
-            />
-            <aside className="h-[420px] border border-primary rounded shadow-xl overflow-hidden leading-[0]">
-                <motion.div
-                    key={activeTab}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.2 }}
-                    className="h-full"
-                >
-                    {activeTab === 'slack' ? (
-                        <Typecaast
-                            config={configSlack}
-                            autoplay
-                            isolate
-                            theme={isDark ? 'dark' : 'light'}
-                            className="overflow-hidden rounded"
-                        />
-                    ) : null}
-                    {activeTab === 'cursor' ? (
-                        <Typecaast
-                            config={configCursor}
-                            autoplay
-                            isolate
-                            theme={isDark ? 'dark' : 'light'}
-                            className="overflow-hidden rounded"
-                        />
-                    ) : null}
-                </motion.div>
-            </aside>
-        </div>
-    )
-}
-
-function TestHero(): JSX.Element {
+function Hero(): JSX.Element {
     const { siteSettings } = useApp()
     const isDark = siteSettings.theme === 'dark'
     return (
@@ -293,83 +200,6 @@ function TestHero(): JSX.Element {
             <HeroCarousel tabs={buildTabs} className="mb-4" />
             <ToolsTicker className="mb-8" />
         </>
-    )
-}
-
-function ControlHero(): JSX.Element {
-    const { siteSettings } = useApp()
-    const isDark = siteSettings.theme === 'dark'
-    return (
-        <>
-            <div className="text-center @xl:text-left mb-12">
-                <ControlHeroImage />
-
-                <h1 className="[&_p]:m-0 flex gap-1 flex-wrap justify-center @xl:justify-start !text-2xl mb-8 pt-2">
-                    <Logo
-                        className="h-9 w-auto"
-                        variant={isDark ? 'mono' : 'gradient'}
-                        color={isDark ? 'white' : undefined}
-                    />
-                </h1>
-
-                <ControlTagline />
-
-                <ControlCTAs />
-            </div>
-
-            <HeroCarousel
-                tabs={[
-                    {
-                        value: 'understand-usage',
-                        label: 'Understand product usage',
-                        content: <UnderstandUsageSlide />,
-                        color: 'bg-blue',
-                        activeText: 'text-white',
-                        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
-                    },
-                    {
-                        value: 'one-place',
-                        label: 'One place for product data',
-                        content: <OnePlaceSlide />,
-                        color: 'bg-teal',
-                        activeText: 'text-black',
-                        progressBar: 'bg-black/70 shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
-                    },
-                    {
-                        value: 'debug-fix',
-                        label: 'Debug & fix issues',
-                        content: <DebugFixSlide />,
-                        color: 'bg-salmon',
-                        activeText: 'text-white',
-                        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
-                    },
-                    {
-                        value: 'test-rollout',
-                        label: 'Test & roll out changes',
-                        content: <TestRolloutSlide />,
-                        color: 'bg-purple',
-                        activeText: 'text-white',
-                        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
-                    },
-                ]}
-            />
-        </>
-    )
-}
-
-function Hero(): JSX.Element {
-    const posthog = usePostHog()
-    return (
-        <RenderInClient
-            placeholder={<></>}
-            render={() =>
-                posthog?.getFeatureFlag?.('self-driving-mode-test', { fresh: true }) === 'test' ? (
-                    <TestHero />
-                ) : (
-                    <ControlHero />
-                )
-            }
-        />
     )
 }
 
