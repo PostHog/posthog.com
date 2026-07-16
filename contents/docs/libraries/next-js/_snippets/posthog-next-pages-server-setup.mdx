@@ -9,7 +9,7 @@ export const { getPostHog } = createPostHog({
     // Optional: resolve a trusted distinct ID from your auth session.
     // The resolver receives the GetServerSidePropsContext.
     getDistinctId: async (ctx) =>
-        ctx ? (await getServerSession(ctx.req, ctx.res, authOptions))?.user?.id : undefined,
+        (await getServerSession(ctx.req, ctx.res, authOptions))?.user?.id,
 })
 ```
 
