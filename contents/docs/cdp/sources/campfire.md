@@ -17,7 +17,7 @@ import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
 <AlphaRelease />
 
-The Campfire connector syncs your accounting data from [Campfire](https://www.meetcampfire.com/) into PostHog: general ledger transactions, journal entries, invoices, bills, payments, bank activity, revenue recognition contracts, and company objects like vendors and the chart of accounts. This lets you analyze financials alongside your product data.
+The Campfire connector syncs your accounting data from [Campfire](https://www.meetcampfire.com/) into PostHog: general ledger transactions, journal entries, invoices, bills, payments, bank activity, revenue recognition contracts, and company objects like vendors and the chart of accounts. This lets you analyze your financial data alongside your product data.
 
 ## Prerequisites
 
@@ -31,7 +31,7 @@ When linking Campfire, you'll need an API key:
 
 1. In Campfire, go to the [API keys page](https://app.meetcampfire.com/v2/settings/api-keys) (**Settings > API keys**).
 2. Click **Create User** to create a dedicated API user. A `view only` role is enough, since PostHog only reads data.
-3. Click **Create API Key** on the user and copy the key. It's only shown once.
+3. Click **Create API Key** on the new API user and copy the key. It's only shown once.
 
 ## Sync modes
 
