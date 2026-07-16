@@ -19,7 +19,7 @@ We have therefore introduced small teams. These are designed to each operate lik
 
 -   The overall goal for a small team is to own an area of the product/company and be as close to its own startup as possible, with only a handful of centralized processes.
 -   A small team should _strictly_ be between 2-6 people.
--   A small team has a team lead responsible for its performance - whoever is most appropriate depending on what the team is working on. This does _not_ mean the most experienced person on the team.
+-   A small team has a team lead responsible for its performance – whoever is most appropriate depending on what the team is working on. This does _not_ mean the most experienced person on the team.
 -   A small team must have a customer (internal or external).
 -   There may be certain functions where at our current stage we don't need a small team yet.
 -   Each small team runs its own retrospective + sprint every week. This must be done transparently.
@@ -189,7 +189,7 @@ There are two scenarios that will trigger a move:
 -   The small team may realize they no longer need someone, or that they could really do with someone currently in another small team internally.
 -   An individual team member may wish to move in order to develop their skills or experience.
 
-It is **very important** to raise any desire for a team change with your relevant [teams/blitzscale](Blitzscale team) member early. Any changes are at their discretion, as their job is to ensure that our small teams continue to function and that any moves fit into our current hiring plans. They will also have the best context about which teams you may be a good fit for, based on your skillset but also each team's needs. Please don't go talking to other teams directly first, as it makes it harder to manage everyone's expectations. 
+It is **very important** to raise any desire for a team change with your relevant [Blitzscale team](/teams/blitzscale) member early. Any changes are at their discretion, as their job is to ensure that our small teams continue to function and that any moves fit into our current hiring plans. They will also have the best context about which teams you may be a good fit for, based on your skillset but also each team's needs. Please don't go talking to other teams directly first, as it makes it harder to manage everyone's expectations. 
 
 ### Aren't most small teams way too small?
 
@@ -203,7 +203,7 @@ The small team is responsible for creating roles for those that they need.
 
 We have a centralized team that will then help you hire.
 
-James and Tim used to interview every candidate because it's a standard startup failure for founders to get too removed from hiring. We've relaxed this so that someone Team Blitzscale always interviews candidates, normally whichever team member sponsors the team the candidate will be joining.
+James and Tim used to interview every candidate because it's a standard startup failure for founders to get too removed from hiring. We've relaxed this so that someone from Team Blitzscale always interviews candidates, normally whichever team member sponsors the team the candidate will be joining.
 
 Regardless of the team, we aim to retain a high bar for new hires. In the words of James Greenhill: "If it's not a hell yes, it's a hell no." See [how we hire](/handbook/people/hiring-process) for more on this. 
 

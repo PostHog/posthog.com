@@ -103,7 +103,7 @@ With the Analytics.js source, you can use `analytics.track('Event Name')` to sen
 ```js
 analytics.track("user signed up", {
   plan: "Pro Annual",
-  accountType: "Premium"
+  accountType: "Premium",
   $set: {
     paid: true
   }

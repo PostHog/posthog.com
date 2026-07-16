@@ -56,10 +56,14 @@
         { "source": "/posts/:path*", "destination": "/posts/[slug]/index.html" }
     ],
     "redirects": [
+        { "source": "/papers", "destination": "/research#papers" },
+        { "source": "/desktop", "destination": "/code" },
         { "source": "/teams/logs", "destination": "/teams/apm" },
         { "source": "/teams/query-performance", "destination": "/teams/analytics-platform" },
-        { "source": "/teams/query-performance/:path*", "destination": "/teams/analytics-platform/:path*" },
-        { "source": "/self-driving", "destination": "/docs/self-driving", "statusCode": 302 },
+        {
+            "source": "/teams/query-performance/:path*",
+            "destination": "/teams/analytics-platform/:path*"
+        },
         {
             "source": "/docs/sdk-doctor/keeping-sdks-current",
             "destination": "/docs/health-checks/keeping-sdks-current",
@@ -145,6 +149,13 @@
         { "source": "/teams/words-and-pictures", "destination": "/teams/website" },
         { "source": "/teams/words-pictures", "destination": "/teams/website" },
         { "source": "/teams/brand-vibes", "destination": "/teams/website" },
+        { "source": "/teams/docs-wizard", "destination": "/teams/wizard-and-docs" },
+        { "source": "/handbook/docs-and-wizard", "destination": "/handbook/wizard-and-docs", "statusCode": 301 },
+        {
+            "source": "/handbook/docs-and-wizard/:path*",
+            "destination": "/handbook/wizard-and-docs/:path*",
+            "statusCode": 301
+        },
         { "source": "/teams/llm-gateway", "destination": "/teams/ai-gateway" },
         { "source": "/teams/llm-analytics", "destination": "/teams/ai-observability" },
         { "source": "/aio", "destination": "/ai-observability" },
@@ -325,7 +336,7 @@
         { "source": "/features", "destination": "/product" },
         { "source": "/docs/integrate/overview", "destination": "/docs/integrate" },
         { "source": "/docs/integrations", "destination": "/docs/integrate" },
-        { "source": "/signup", "destination": "/pricing" },
+        { "source": "/signup", "destination": "https://app.posthog.com/signup" },
         { "source": "/docs/tutorials/actions", "destination": "/docs/tutorials/event-tracking-guide" },
         { "source": "/docs/plugins/overview", "destination": "/docs/apps" },
         { "source": "/docs/api/overview", "destination": "/docs/api" },
@@ -917,6 +928,7 @@
         { "source": "/manual/utm-segmentation", "destination": "/docs/data/utm-segmentation" },
         { "source": "/manual/sso", "destination": "/docs/settings/sso" },
         { "source": "/manual/support", "destination": "/docs/support-options" },
+        { "source": "/docs/support/zendesk-import", "destination": "/docs/support/imports/zendesk", "statusCode": 301 },
         { "source": "/manual/glossary", "destination": "/docs/glossary" },
         { "source": "/docs/integrate/browser-extension", "destination": "/docs/advanced/browser-extension" },
         { "source": "/docs/integrate/cdp", "destination": "/docs/advanced/cdp" },

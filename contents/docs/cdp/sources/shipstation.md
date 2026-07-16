@@ -9,7 +9,7 @@ availability:
 sourceId: ShipStation
 ---
 
-<CalloutBox icon="IconInfo" title="Alpha release" type="fyi">
+<CalloutBox icon="IconFlask" title="Alpha release" type="action">
 
 The ShipStation source is currently in **alpha**. The core sync logic is stable, but the connector hasn't been battle-tested at scale yet. If you run into issues, please let us know.
 

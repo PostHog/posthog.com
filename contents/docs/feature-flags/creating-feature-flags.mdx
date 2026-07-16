@@ -163,7 +163,7 @@ To use semver targeting:
 
 This is especially useful for mobile apps where you want to roll out features to users on specific version ranges, like enabling a feature for everyone on version `>= 2.0.0` or targeting a bug fix at versions `< 1.5.0`.
 
-> **Note:** Semver operators work on any string property, but they are most useful with version-formatted values. The property value should follow semver conventions (e.g., `1.2.3`) for accurate comparisons. Mobile SDKs automatically include `$app_version` – see [property overrides](/docs/feature-flags/property-overrides#default-properties-in-mobile-sdks) for details.
+> **Note:** Semver operators work on any string property, but they are most useful with version-formatted values. Common mobile version formats are supported during server-side (remote) flag evaluation: two-component versions like `3.10` are automatically normalized to `3.10.0`, and zero-padded versions like `3.08` are normalized to `3.8.0`. Pre-release and build suffixes (e.g., `-alpha.1`, `+build.7`) are preserved in the value, though build metadata doesn't affect matching. Mobile SDKs automatically include `$app_version` – see [property overrides](/docs/feature-flags/property-overrides#default-properties-in-mobile-sdks) for details.
 
 #### Advanced release conditions
 

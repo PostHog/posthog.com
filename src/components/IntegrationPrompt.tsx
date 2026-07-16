@@ -18,7 +18,7 @@ export default function IntegrationPrompt() {
         <>
             <h3>Install with AI in a single prompt</h3>
             <p className="text-[15px]">Paste into your terminal or code editor and make AI do the work.</p>
-            <WizardCommand latest={false} />
+            <WizardCommand />
         </>
     )
 }

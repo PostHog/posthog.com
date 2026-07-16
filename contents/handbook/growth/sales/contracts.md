@@ -8,6 +8,13 @@ showTitle: true
 
 For customers who want to sign up for an annual (or longer) plan there is some additional paperwork needed to capture their contractual commitment to a minimum term, and likely custom pricing as well. At a minimum, they should sign an Order Form which references our standard [terms](/terms) and [privacy notice](/privacy). In addition, they may want a custom Master Services Agreement (MSA) or Data Processing Agreement (DPA).
 
+### Multi-year deals and credit allocation
+
+The credit term only extends beyond 12 months (e.g. to 24 months for a two-year deal) if the customer pays the full amount for the entire term upfront (e.g. the full two-year amount paid upfront). How the credits are allocated depends on how the customer pays:
+
+-   **Paying all upfront for the full term:** the customer gets the full credit amount added in bulk at the start, with an expiry set to the full length of the term (e.g. a two-year expiry for a two-year deal paid upfront).
+-   **Paying per year (or in tranches):** the extended term does not apply. Credits are granted in tranches allocated on each renewal date, each with a 12-month term. For example, a two-year deal split evenly grants half the credits in the first year and half on the renewal date at the start of the second.
+
 ### What about monthly customers?
 
 Anyone on a monthly plan simply agrees to our [terms](/terms) and [privacy policy](/privacy) when they sign up.
@@ -77,6 +84,8 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
                 - If a customer wants to start using credits immediately for the October cycle, your contract start date should be October 1.
                 - If a customer wants to start using credits starting the next billing cycle, your contract start date should be November 1.
                 - If you set the start date correctly, our Zapier automation flow will create the invoices with correct dates so our revenue calculations are not affected from the transition.
+            - **Do not backdate beyond the current billing period.** You can only set the start date as far back as the beginning of the *current, not-yet-invoiced* billing period (Immediate Activation above). Never set it into a period we have already issued an invoice for. Doing so rewrites an issued invoice and breaks revenue recognition, which is not something we support.
+            - **Renewals:** Salesforce auto-populates the renewal opportunity with the anniversary date (the day the previous term ends), but don't assume that's the correct `Contract.EffectiveDate`. The same rule applies as above: the start date must match the beginning of the billing period the new credits need to cover. If the customer has run out of credits on their existing plan and there's an open billing period the renewal credits should cover, backdate the start date to the beginning of that period — which may be up to a month before the anniversary date — so the new credits map to that invoice. Only start the renewal on the anniversary date itself if the customer's existing credits carry them cleanly through to it.
         - **Note:** Pay-as-you-go products are charged after the end of the period, while flat-rate subscriptions are charged at the beginning of the period. As a result the first two payments on a monthly schedule may occur within the same billing period as part of the transition. Make sure to send a note to the customer to ensure they're fully informed!
         - **Startup credits** - If the customer [qualifies for the 2 free months](/handbook/growth/sales/contract-rules#startup-plan-discounts) set the start date of the contract for 2 months in the future, to account for the two free months ahead of the contract.
 
@@ -127,7 +136,7 @@ We prefer to keep all signatures in PandaDoc, but sometimes clients may prefer t
 Once you the signed form in PandaDoc is marked as complete and the Salesforce opportunity status is set to Closed Won, the RevOps team will get a notification and handle setting up the subscription and invoicing. See the [Billing](/handbook/growth/sales/billing) page for steps on how the billing setup works for more information.
 
 ### Using prepaid credits to cover an existing pay-as-you-go invoice
-When a pay as you go customer wants to sign a prepaid contract and use their new credits to cover an invoice that is about to be issued, timing is important. Credits can only be applied cleanly to an invoice _before_ that invoice is finalized. Getting it wrong means the credits don't apply cleanly and RevOps has to do a manual override.
+When a pay as you go customer wants to sign a prepaid contract and use their new credits to cover an invoice that is about to be issued, timing is important. Credits can only be applied cleanly to an invoice _before_ that invoice is finalized. 
 
 #### Flag insufficient credits before the invoice is issued
 
@@ -141,16 +150,9 @@ If they won't have enough credits to cover an invoice, and won't sign before the
 
 For newly purchased credits to cover the intended invoice automatically, both of these must be true:
 - Contract start date must match the first billing period the customer wants to cover. For an existing customer this usually means backdating the Contract.EffectiveDate to the start of the current billing period (see Immediate Activation above). If the start date doesn't line up with the period being covered, the credits won't map to that invoice.
-- Contract must be signed before the period_end date of the invoice they want to cover. If it's signed after the period closes and the invoice has been issued, the automated flow can no longer apply the credits and an override is required.
+- Contract must be signed before the period_end date of the invoice they want to cover. If it's signed after the period closes and the invoice has been issued, the automated flow can no longer apply the credits.
+- You can only backdate to the start of the current, open billing period, never to a period that has already been invoiced. 
 
-If either condition can't be met, you'll need an override.
-
-#### Overrides
-An override is the manual process RevOps uses when credits couldn't be applied before an invoice was finalized. For example, the customer paid part of an invoice with credits, or signed after the invoice was already issued. Overrides are more complex than the standard flow: they can involve pausing or crediting the issued invoice, refunding card payments, and re applying credits in the right order.
-
-The refund itself can be done self serve through billing admin. But in an override scenario a refund is not a clean solution. It's tied to metadata override and reapplying credits. So don't process an override refund in isolation: coordinate with the billing team so revenue recognition stays accurate. And don't refund a card payment until the replacement credits are confirmed.
-
-If you're unsure whether a situation needs an override, ask the billing team in #team-billing before taking any action. Don't roll back charges, void invoices, or refund payments on your own.
 
 ## Master Services Agreement (MSA)
 
