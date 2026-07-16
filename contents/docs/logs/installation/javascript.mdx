@@ -56,7 +56,7 @@ See the [web SDK config reference](/docs/libraries/js/config#configuring-logs) f
 
 <Step title="Send structured logs with posthog.logger" badge="recommended">
 
-`posthog.logger` is the declarative path. Each call produces an OTLP log record with a severity level and typed attributes you can filter and query on in the Logs product.
+`posthog.logger` is the declarative path. Each call produces an OTLP log record with a severity level and typed attributes you can filter and query in the Logs product.
 
 ```js-web
 posthog.logger.info('checkout completed', { order_id: 'ord_789', total_cents: 4200 })

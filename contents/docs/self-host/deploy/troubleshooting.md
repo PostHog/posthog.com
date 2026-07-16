@@ -18,7 +18,7 @@ First, check that DNS is set up properly:
 nslookup <your-hostname> 1.1.1.1
 ```
 
-Note that when using a browser there are various layers of caching and other logic that could make the resolution work (temporarily) even if its not correctly set up.
+Note that when using a browser there are various layers of caching and other logic that could make the resolution work (temporarily) even if it's not correctly set up.
 
 ## FAQ
 
