@@ -26,7 +26,7 @@ When creating a new SDK, or migrating an existing one to the new workflow, follo
 
 <CalloutBox title="GitHub administrator privileges required" type="fyi">
 
-Most of these steps require super administrator privileges on GitHub. Make sure you have the appropriate permissions to work on this.
+Most of these steps require super administrator privileges on GitHub. Organization-level access is temporarily required to complete the setup — request it before you start, and it can be revoked once the release infrastructure is in place.
 
 </CalloutBox>
 
@@ -65,7 +65,7 @@ In your SDK repository settings:
 1. Verify that both `@PostHog/client-libraries-approvers` and `@PostHog/team-client-libraries` teams have at least read access to the repository. This is required for them to be able to approve release workflows.
 2. Access "Collaborators and teams"
 3. Make sure both teams are added as collaborators with at least write access
-4. For new repositories, make sure **Enable release immutability** is enabled in the repository settings
+4. For new repositories, make sure **Enable release immutability** is enabled in the repository settings — you'll find it under **Settings** → **General**
 
 ### 3. Create a release environment
 
@@ -76,13 +76,14 @@ In your SDK repository settings:
    - **Required reviewers:** Add `PostHog/client-libraries-approvers` and `PostHog/team-client-libraries` as the only teams allowed to approve this release
    - **Prevent self-review:** **Check** this box
    - **Allow administrators to bypass:** **Uncheck** this box
+3. Click **Save protection rules** to enforce them **before** configuring deployment branches — the deployment branches and tags settings below save on their own, and clicking "Save protection rules" afterwards resets them
+4. Configure deployment branches and tags:
    - **Deployment branches and tags:** Select **Selected branches and tags** and add `main` as the only selected branch or tag
       - If the package manager requires publishing from tags, such as pub.dev, also add `[0-9]*.[0-9]*.[0-9]*` as an allowed deployment branch or tag pattern
 
 ![Protection rules]([https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2025_12_29_T17_26_43_879_Z_cee626f86a.png](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_02_18_T18_21_01_089_Z_2dd8982a33.png))
 
-3. Remember to click "Save protection rules" to enforce them
-4. Add environment secrets:
+5. Add environment secrets:
    - `GH_APP_POSTHOG_<SDK_NAME>_RELEASER_APP_ID` — Copy the App ID from your GitHub App settings
    - `GH_APP_POSTHOG_<SDK_NAME>_RELEASER_PRIVATE_KEY` — Paste the private key you downloaded, include the trailing newline
       - Easiest way to get the private key value with the correct formatting is via `cat ~/Downloads/release-posthog-<sdk_name>-private-key.pem | pbcopy` on Mac or `type release-posthog-<sdk_name>-private-key.pem | pbcopy`

@@ -16,7 +16,7 @@ We want to be the first tool that technical founders go to when they start build
 
 | &nbsp; | AI-pilled software teams |
 | --- | --- |
-| **Description** | Ambitious (ie they want to grow a lot) software teams that either just getting started or already have product-market fit and are quickly scaling up with new customers, hiring, and adding more revenue. They believe in an AI-first approach to building and are already familiar with the standard AI tools. |
+| **Description** | Ambitious (i.e., they want to grow a lot) software teams that are either just getting started or already have product-market fit and are quickly scaling up with new customers, hiring, and adding more revenue. They believe in an AI-first approach to building and are already familiar with the standard AI tools. |
 | **Criteria** | - They have 1 to 500 potential PostHog users, but the company itself could be anything from one employee to thousands<br />- Has lots of revenue or aims to raise or has raised from leading investors<br />- Not hobbyists or cost-conscious bootstrappers, basically|
 | **Why they matter?** | - We believe AI-pilled companies will outperform non-AI-pilled companies <br />- We're able to efficiently monetize them<br />- Very quick sales cycle<br />- They act as key opinion leaders for earlier-stage startups and slower-moving companies<br />- They have strong opinions on what they need, which helps us build a better product |
 | **Examples** | PostHog any time from during YC to IPO, Supabase, ElevenLabs |

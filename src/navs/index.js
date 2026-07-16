@@ -2449,6 +2449,14 @@ export const docsMenu = {
                             },
                         },
                         {
+                            name: 'Kotlin Multiplatform',
+                            url: '/docs/libraries/kmp',
+                            badge: {
+                                title: 'Beta',
+                                className: '!bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50',
+                            },
+                        },
+                        {
                             name: 'Node.js',
                             url: '/docs/libraries/node',
                             children: [
