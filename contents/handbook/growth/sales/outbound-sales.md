@@ -320,7 +320,7 @@ graph TD
 
     SF --> VITALLY[Vitally]
     CIO[Customer.io] --> VITALLY
-    ZENDESK[Zendesk] --> VITALLY
+    SUPPORT[PostHog Support] --> VITALLY
     GMAIL[Gmail] --> VITALLY
     STRIPE[Stripe] --> VITALLY
 ```

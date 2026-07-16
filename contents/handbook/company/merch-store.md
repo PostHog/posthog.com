@@ -45,7 +45,7 @@ When creating the discount, select "amount off products" then choose if it is a 
 
 For feedback or general rewards we typically give users $30, which is enough for a t-shirt. For code contributions we tend to do $50, which is enough for a bigger selection of things. We don't put expiration dates on the codes, typically.
 
-If you need any help just send a message to the <PrivateLink url="https://posthog.slack.com/archives/C04DWKH7DM3">#merch</PrivateLink> channel and somebody will be happy to help. Merch codes can also be generated directly from within Zendesk.
+If you need any help just send a message to the <PrivateLink url="https://posthog.slack.com/archives/C04DWKH7DM3">#merch</PrivateLink> channel and somebody will be happy to help.
 
 If you want to send physical merch to a customer instead of a merch code, this can be done in Shopify by creating an order, selecting the chosen merch and applying a discount for the whole price of the item (don't forget to do this step otherwise it'll try and charge the customer!)
 

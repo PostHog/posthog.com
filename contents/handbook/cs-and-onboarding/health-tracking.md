@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We use Vitally as a customer success platform.  You can log in via Google SSO to view customer data but will need [Mine](/community/profiles/29862) or [Simon](/community/profiles/28895) to grant you admin access to let you manage your accounts. It integrates with our other systems such as PostHog, Salesforce and Zendesk to give you a complete view of what's going on with your customers.
+We use Vitally as a customer success platform.  You can log in via Google SSO to view customer data but will need [Mine](/community/profiles/29862) or [Simon](/community/profiles/28895) to grant you admin access to let you manage your accounts. It integrates with our other systems such as PostHog, PostHog Support, and Salesforce to give you a complete view of what's going on with your customers.
 
 ## Health scoring
 

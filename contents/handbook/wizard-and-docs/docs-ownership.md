@@ -46,7 +46,6 @@ There are lots of places you can go to find inspiration for what to work on duri
 - #docs-feedback
 - #content-docs-ideas
 - #ask-max for questions missing content
-- <PrivateLink url="https://posthoghelp.zendesk.com/agent/filters/33465387985947">Zendesk tickets where root cause is documentation unclear</PrivateLink>
 - <PrivateLink url="https://portal.inkeep.com/posthog/projects/clz7fyu8i001bomqpr7t8lds8/chat/chat-sessions?filters={%22isOnTopic%22:%22yes%22,%22isClear%22:%22yes%22,%22firstMessageTime%22:%2230d%22,%22isDocumented%22:%22no%22}">Inkeep chat sessions</PrivateLink> where there is a documentation gap
 - <PrivateLink url="https://us.posthog.com/project/2/insights/jNpQrgjg">Most unhelpful docs</PrivateLink>
 - <PrivateLink url="https://us.posthog.com/project/2/insights/nfKr7JOs">Most popular docs</PrivateLink>

@@ -146,13 +146,13 @@ You will run into questions that you don't know the answer to from time to time 
 
 - Try to solve your own problems. Deep dive the docs, ask PostHog AI, ask the rest of the sales team first - a bit of digging is a valuable opportunity for you to learn.
 - Similar to the above, don't just copy and paste questions from Slack with no context. Add some commentary - 'they have asked X, their use case is generally Y, I think the answer might be Z - is that right?'. Do some of the lifting here, rather than putting all the mental load on an engineering team.
-- If you open a ticket in Zendesk and know which team the ticket needs to go to, make sure to select "escalated" on the ticket so that it will bypass support and go straight to that team.
+- If you open a ticket in PostHog Support and know which team the ticket needs to go to, [assign the ticket to that team](/handbook/support/posthog-support#escalating-a-ticket) so that it bypasses support and go straight to that team.
 
 ## Working with customers in Slack
 
 Most of our customers use Slack, and it's a great way for us to be responsive to them. Qualifying customers and prospects can get a [shared Slack channel](/handbook/growth/sales/slack-channels), and you should set one up as early as it makes sense in your relationship with them.
 
-We share channels via [Slack Connect](https://slack.com/resources/using-slack/getting-started-with-slack-connect) and add SupportHog so that both PostHog and the customer can raise support tickets directly from a Slack thread — react with the :ticket: emoji or mention `@SupportHog`. This syncs the conversation into Zendesk so our Support and Engineering teams can work on customer issues in a familiar context.
+We share channels via [Slack Connect](https://slack.com/resources/using-slack/getting-started-with-slack-connect) and add SupportHog so that both PostHog and the customer can raise support tickets directly from a Slack thread — react with the :ticket: emoji or mention `@SupportHog`. This syncs the conversation into [PostHog Support](/handbook/support/posthog-support) so our Support and Engineering teams can work on customer issues in a familiar context.
 
 See [Shared Slack channels with customers](/handbook/growth/sales/slack-channels) for the full setup steps, including channel naming, who to invite, and how to support customers who use MS Teams instead.
 
