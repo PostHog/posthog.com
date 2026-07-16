@@ -11,7 +11,9 @@ This guide walks you through integrating PostHog into your Flask app using the [
 
 To start, run `pip install posthog` to install PostHog’s Python SDK.
 
-> **Note:** These docs cover version `7.x` of the PostHog Python SDK, which requires Python 3.10 or higher. On Python 3.9, pin to `posthog<7` — `6.9.3` is the last 6.x release, and everything on this page works the same way there.
+import PythonSdkVersionNote from '../_snippets/python-sdk-version-note.mdx'
+
+<PythonSdkVersionNote />
 
 Then, initialize PostHog where you'd like to use it. For example, here's how to capture an event in a simple route:
 
