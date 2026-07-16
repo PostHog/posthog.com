@@ -1,39 +1,32 @@
-### Q1 2026 objectives
+### Q3 2026 objectives
 
 - Yasen
-    - Approvals GA
-    - Activity logs -> Posthog AI
-    - In-app notifications
-    - Email MFA improve UX
-
-- Alex
-    - Roll out SCIM to all Enterprise customers and improve the docs
-    - Make event definitions available to everyone, ship image previews for custom events
-    - Finish PostHog AI access control
-    - Run an email upsell growth experiment
+    - Multi-project dashboards
+    - Activity logs -> SIEM
+    - Billing activity logs
+    - Auth flows for MCP (e.g. MFA trips users up, so we need to move to code-based verifications)
+    - Access control scope expansion
+    - Fix the broken US/EU redirects
+    - Support Grow plan launch
+    - Build a fallback mechanism for emails (c.io -> smtp)
 
 - Reece
-    - Passkeys
-    - Project to project resource transfers (haha jk..unless... 😳)
-    - RBAC UI redesign
-    - Platform packages revenue optimization
+    - Multi-domain SAML/SCIM support
+    - Redesign the org domain and IdP config settings UI
+    - OIDC
+    - Access control all the things
+        - Event access controls for HogQL
+        - Cover all products with resource access controls
+        - Resource <-> HogQL parity
+        - Fully remove the access control settings UI v1
+    - Update the docs for SAML, SCIM, and access control for the new PostHog and Okta UIs, with demo videos showing how to set it up
 
-
-### Q4 2025 objectives
-
--   Yasen
-    -   Approvals
-        -   Feature flags edits coverage only
-        -   Simple approver policy (quorum)
-    -   Finish up environments beta rolloff
-    -   Activity logs extension/improvement
-    -   Onboard Reece
-
--   Alex
-    -   Add-on growth experiments - paygates, upgrade flow, upsell emails
-    -   Finish plan switch
-    -   SCIM provisioning
-    -   Access controls for PostHog AI
-
--   TBD
-    -   ~~Data access controls - RFC + proof of concept~~ (deprioritized)
+- Alex
+    - RBAC v2 - always apply the more specific rule
+    - Guest mode (aka the contractor use case) - share a specific object or resource without giving access to everything else in the project
+    - MCP read/write tools for access controls
+    - Access controls for tasks (sharing conversations with a team)
+    - Figure out how access controls should work for the Slack bot and Inbox
+    - Simplify activity logs tools (Claude struggles to use them)
+    - Reverse proxy troubleshooting skill
+    - Write 2 blog posts about collaborative notebooks and the upselling workflow

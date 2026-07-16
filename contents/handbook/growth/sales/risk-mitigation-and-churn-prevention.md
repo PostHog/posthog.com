@@ -20,54 +20,31 @@ Risk mitigation is about building habits that surface problems before they becom
 
 ### Quarterly account planning
 
-Every AM Managed account should have an Account Plan note created in Vitally once per quarter. You should also review this weekly with your manager.  This forces you to step back and evaluate the account holistically rather than just reacting to whatever's in front of you.
+Every managed account should have an Account Plan note created in PostHog Customer Analytics, on the account's profile, once per quarter. You should also review this regularly with your manager and update it as needed. This forces you to step back and evaluate the account holistically rather than just reacting to whatever's in front of you.
+
+The plan can be broken into two parts: the quarterly plan and ongoing updates.
+
+#### Quarterly plan
 
 **Title format:** `Q[X] Account Plan - [Company Name]`
 
-Use the Account Plan template in Vitally, which auto-populates key fields from the account record. The template covers:
+Add the plan as an account note in PostHog Customer Analytics on the account's profile. For each account, work through these seven questions:
 
-**Account overview**
+1. **What type of opportunities (opps) are there this quarter?** Name each one – conversion (moving a pay-as-you-go plan onto a discounted credit plan), renewal (securing an existing contract for another term), or cross-sell (getting them onto a product they aren't using yet) – so you're clear on what you're actually driving toward.
+2. **What are the customer's business objectives?** Capture what they're trying to achieve with PostHog and how it connects to their broader goals so it's clear what they are – and if you don't know, say so, so the gap is visible.
+3. **What's the desired outcome for the account by the end of the quarter?** State the concrete result you want (renewal signed, in with a new team, Error Tracking adopted) so success is measurable rather than vague.
+4. **Does the customer know about this plan?** Note whether you've aligned with them, because a plan they haven't bought into is just a guess.
+5. **Is it blocked on anything right now, and are there any other risks?** Call out current blockers and any other risks so you can get ahead of them before they derail the outcome.
+6. **Link to the SFDC opp.** Drop in the Salesforce opportunity link so anyone reviewing can jump straight to the deal.
+7. **Who are the key players?** List the stakeholders – champions, budget holders, technical evaluators, and end-users – and where you stand with each.
 
-- ARR, business description, website, HQ location
-- Business type (B2B SaaS, E-commerce, Marketplace, Developer Tools, Fintech, Healthcare, etc.)
-- Key metrics relevant to their business model
-- Business stage and funding
+#### Ongoing updates
+1. What did you do with them last week.
+2. Any risks to flag or opportunities you are working
+3. Who are you talking to
+4. What are you working on with them this week
 
-**Business objectives**
-
-- What they're trying to achieve with PostHog (specific goals, not vague "analytics")
-- How PostHog connects to their larger business objectives
-- Whether value aligns with their expectations
-- Obstacles they're facing, both in using PostHog and in their broader goals
-- Upcoming constraints (budget freezes, code freezes, migrations, seasonality)
-- Future needs over 6-18 months
-
-**Stakeholders and users**
-
-- Admin emails and total user count
-- Percentage of active users (30 days)
-- Key contacts with their priorities, goals, and preferred communication
-- Multithreading status: do we have two-way dialogue with technical stakeholders, budget holders, and end-users?
-- Record of multithreading attempts and progress
-
-**Current usage and cross-sell**
-
-- Products adopted (Product Analytics, Feature Flags, Group Analytics, Error Tracking, Session Replay, Surveys, Data Warehouse)
-- Usage notes on how they're actually using each product
-- Cross-sell opportunities with specific use cases, next steps, and relevant content to share
-- Optimization opportunities for existing products (underused features, configuration improvements)
-
-**Risks**
-
-- Document each risk with: the challenge, what's at stake, plan of action, and next key date
-
-**Action items**
-
-- Multithreading: who, why, progress, anyone at PostHog who can help
-- Finding new opportunity: what are you doing to find new revenue?
-- Mitigating risk: what are you doing to uncover and mitigate risk?
-
-If you can't fill out most of this template, that's a signal you need to dig deeper into the account. An incomplete account plan usually means incomplete understanding of the customer.
+This can largely mirror what goes in our sprint planning, and shouldn't be duplicate work.
 
 ### Early warning signals
 
@@ -133,7 +110,7 @@ Proactively check for common implementation issues, especially for newer account
 
 **Feature flag resilience:**
 
-- **No fallback code.** If flags fail to load, the app should still work. Check that they're [falling back to working code](/docs/feature-flags/best-practices#9-fallback-to-working-code) when flags return unexpected values.
+- **No fallback code.** If flags fail to load, the app should still work. Check that they're [falling back to working code](/docs/feature-flags/best-practices#undefined-is-not-flag-is-off-nor-false) when flags return unexpected values.
 - **No local evaluation (server-side).** [Server-side local evaluation](/docs/feature-flags/local-evaluation) ensures flags work regardless of network status. Important for reliability.
 
 When you find implementation issues, don't just tell them what's wrong. Help them fix it. A customer who had a billing problem you solved is more loyal than one who never had a problem at all.
@@ -151,7 +128,7 @@ Most churn follows predictable patterns. See [common churn reasons](/handbook/cs
 | **Customer can't extract value** | Offer workshops, training, or hands-on help building specific insights. Don't wait for them to ask. |
 | **Missing critical feature** | Loop in the relevant PM and engineering team. Be transparent about what we can and can't do. Make sure the request is also [tracked in Vitally](/handbook/cs-and-onboarding/feature-requests) |
 | **PostHog isn't trusted as source of truth** | Dig into data discrepancies. Often an implementation issue. If they're exporting everything to another tool, they're one step from leaving. |
-| **Privacy/compliance concerns** | Help them understand [data controls](/docs/privacy/data-collection), [masking](/docs/cdp/transformations/template-url-masking), [privacy controls](/docs/session-replay/privacy), [cookieless tracking](/tutorials/cookieless-tracking), and [data deletion](/docs/privacy/data-storage#data-deletion) options. Often they assume they can't use features when they actually can. |
+| **Privacy/compliance concerns** | Help them understand [data controls](/docs/privacy/data-collection), [masking](https://posthog.com/docs/cdp/transformations/template-url-masking), [privacy controls](/docs/session-replay/privacy), [cookieless tracking](/tutorials/cookieless-tracking), and [data deletion](/docs/privacy/data-storage#data-deletion) options. Often they assume they can't use features when they actually can. |
 
 For scenarios outside our control (acquisition, company shuts down, not ICP fit), document what happened and share learnings with the team. There's usually something we can learn even when we couldn't have changed the outcome.
 
@@ -206,7 +183,7 @@ Escalation means getting support at a higher level, not handing off the account.
 
 - **Engineering involvement:** If there's a technical issue, bug, or feature gap that's driving the churn risk, loop in the relevant engineering team directly. Tag them in Slack, share context, and ask for their help.
 - **Product involvement:** If the customer needs a feature we don't have or is struggling with product limitations, bring in the relevant PM. They may want to join a call to understand the use case.
-- **Leadership involvement:** For strategic accounts or situations that need executive attention (pricing negotiations, product commitments, relationship rescue at the exec level), loop in your team lead. For accounts >$50k ARR at serious risk, involve Charles or Simon to get their perspective and support.
+- **Leadership involvement:** For strategic accounts or situations that need executive attention (pricing negotiations, product commitments, relationship rescue at the exec level), loop in your team lead. For accounts >$50k ARR at serious risk, involve Ben or Simon to get their perspective and support.
 
 The goal of escalation is to get the right people involved to help you save the account, not to pass the problem to someone else. You're still driving the relationship and the recovery plan.
 
@@ -236,7 +213,7 @@ Not every at-risk account can be saved. When a customer churns, write a retro an
 
 | Activity | Cadence |
 |----------|---------|
-| Account Plan note in Vitally | Quarterly |
+| Account Plan note in PostHog Customer Analytics | Quarterly |
 | Implementation health check | At onboarding + annually |
 | Early warning signal monitoring | Ongoing |
 | Behavioral product adoption push | Ongoing (especially for warehouse-heavy accounts) |

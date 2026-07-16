@@ -1,33 +1,49 @@
-### Q1 2026 Objectives
+### Q3 2026 Objectives
 
-#### **Alerting** - Spikes & Digest (Driver: <TeamMember name="Aleksander Błaszkiewicz" />)
-* Define how we calculate a spike and what are the controls
-* Add 'Issue Spiked' trigger in alerting
-* Add ability to snooze issues from alerting
-* Create weekly digest (warnings, resolved, recommendations, priorities...)
-* Stretch: correlate with event traffic to understand the context of a “spike”
+### **Onboarding** - Setup & configuration - (Driver: <TeamMember name="Aleksander Błaszkiewicz" />)
+Error Tracking is only useful when it is configured correctly. We want the Wizard to become the guided setup path that makes onboarding simpler, faster, and harder to get wrong.
+**What we'll ship:**
+* Wizard-guided symbolset uploads for native SDKs
+* Wizard-guided symbolset uploads for mobile SDKs
+* Wizard-guided alerting setup
+* Wizard-guided assignment rules setup
+* Common suppression rules
+* Wizard-guided Error Tracking setup across supported platforms
 
-#### **Engagement** - Search & Speed (Driver: <TeamMember name="Aleksander Błaszkiewicz" />)
-* Move issues to CH to avoid dual DB query
-* Stretch: Improve loading speed on search results
+### **Native alerting** - Stateful notifications - (Driver: <TeamMember name="Catalin Irimie" />)
+Alerting should reflect the full issue lifecycle, not just fire-and-forget notifications. We want alerts that can update users as issues are created, spike, get analyzed, are fixed, or are resolved.
+**What we'll ship:**
+* Thread-like notifications when possible (Slack, Discord)
+* Natural language alert setup
+* Email notifications
 
-#### **Grouping** - Fingerprint & Sourcemaps (Driver: <TeamMember name="Hugues Pouillot" />)
-* Iterate on fingerprint algorithm and compare with existing approach using rand index
-* Stretch: Add bundler plugins to make sourcemap uploads easier
-* Stretch: Explore embedding based grouping
+### **Release management** - Codebase context - (Driver: <TeamMember name="Aleksander Błaszkiewicz" />)
+Error Tracking should connect runtime exceptions back to the code that caused them. We want to make it easier to find the original source file, understand when an error was introduced, and assign issues to the right code owners.
+**What we'll ship:**
+* Stable JavaScript chunk IDs to avoid unnecessary reuploads
+* Unified release, app name, and app version properties
+* Better GitHub integration to link stack frames to source code
+* Pull request and author attribution for newly introduced errors
+* Stretch: Source code context for stack frames from GitHub / GitLab
 
-#### **Collection** - Cymbal refactoring & Mobile support (Driver: <TeamMember name="Hugues Pouillot" />)
-* Expose frame resolution and issue processing as endpoints
-* Coordinate with Ingestion team to move cymbal processing into plugin server
-* Make CLI compatible with stable chunk ids to:
-    * be compatible with debug id specification and reuse current tooling.
-    * avoid rebuilding application
-    * speed up ingestion by reducing symbol set downloads
-    * reduce symbol set uploads
-* Add debug symbol upload command to CLI
-* Support debug symbols with cymbal
+### **Issue enrichment** - PostHog context - (Driver: <TeamMember name="Hugues Pouillot" />)
+Error Tracking is most powerful when it includes context from the rest of PostHog. We want to bring more product, user, log, and AI context into each issue so users and agents can debug faster.
+**What we'll ship:**
+* Signal reports attached to issues
+* Add error tracking measures on Experiments
+* Logs context on issues
+* LLM analytics context on issues
 
-#### **Monitoring** - Acquisition & KPIs (Driver: <TeamMember name="Cory Slater" />)
-* Define KPIs for tracking collection, grouping, alerting, engagement
-* Deep dive into acquisition metrics
-* Case study around successful migration
+### **User interface** - Issue details & filtering - (Driver: <TeamMember name="Hugues Pouillot" />)
+The issue list and issue details pages should make triage and debugging easier. We want a clearer, more flexible interface that works well across screen sizes.
+**What we'll ship:**
+* A more extensible issue details layout that supports reports, tasks, and mobile views
+* Improved issue list filtering
+
+### **SDK feature parity** - Cross-SDK consistency - (Driver: <TeamMember name="Catalin Irimie" />)
+Error Tracking capabilities should be consistent across SDKs. We want users to get reliable behavior for rate limiting, suppression rules, exception steps, source context, and remote config no matter which supported SDK they use.
+**What we'll ship:**
+* Error Tracking support for the Java SDK
+* Normalized frame and exception ordering
+* Source context for native SDKs
+* Stretch: Standardized rate limiting

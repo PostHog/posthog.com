@@ -45,11 +45,12 @@ Each engineering team has its own list of tickets in Zendesk:
 
 Your job is simple: ship features and fixes, resolve ticket after ticket from your team's list, and respond to open-source PRs assigned to your team.
 
-There are three sources of tickets:
+There are four sources of tickets:
 
 1. In-app bug reports/feedback/support tickets sent from the [Support panel](https://us.posthog.com/home#panel=support) (The `Help` tab in the righthand sidebar.) They include a bunch of useful links, e.g. to the admin panel and to the relevant session recording.
 1. Community questions asked on PostHog.com.
 1. Slack threads that have been marked with the 🎫 reaction in customer support channels.
+1. Reports in the `#papercuts` Slack channel that relate to your team's area.
 
 ### Shipping features
 
@@ -64,6 +65,16 @@ Others tickets report bugs or suspected bugs. Get to the bottom of each one - yo
 If not much is happening, feel free to do feature work – but in the case of a backlog in Zendesk, drop other things and roll up your sleeves. When you're Support Hero, supporting users comes first.
 
 It might be an intense week, but you're also going to solve so many real problems, and that feels great.
+
+### Papercuts
+
+Check the `#papercuts` Slack channel during your rotation and pick up any reports that relate to your team's area. For each one, pick one of the following:
+
+- **Reply** to the reporter acknowledging the papercut, then either get a fix shipped or open a GitHub issue to track it if it needs more scoping. How you get the fix out is up to you – prompting PostHog Code is often the fastest path, but feel free to fix it however you like.
+- **React with ❌** to reject the papercut (for example, if the behavior is intentional). A brief reply explaining why is appreciated.
+- **React with ✅** once you've shipped a fix or improvement.
+
+Papercuts are also routed to the Signals inbox, so before you start work, check whether an auto-generated PR is already waiting – it may save you most of the effort.
 
 ### Responding to external PRs
 
@@ -131,9 +142,9 @@ If you find yourself overwhelmed, remember:
 
 The key principle: We want to be responsive to our open-source community when we can, but not at the cost of our primary support responsibilities or team sustainability.
 
-## What do I do as a SDK Support Hero?
+## What about SDK support?
 
-See the dedicated [SDK support rotation](/handbook/engineering/sdks/support-rotation) page for details on the (optional) SDK Support Hero rotation, including how to prioritize your time and handle mobile SDK issues.
+The SDK Support Hero rotation is owned by the <SmallTeam slug="client-libraries" />. See the dedicated [SDK support rotation](/handbook/engineering/sdks/support-rotation) page for details on how the rotation works, including how to prioritize time and handle mobile SDK issues.
 
 ## Don't ask users to do work that you can do!
 
@@ -192,8 +203,6 @@ As a business we need to ensure we are focusing support on our paying customers,
 6. `Open` Zendesk tickets for your team that have low priority.
 
 \* Try to be especially responsive to any customers marked as `Sales/CS Top 20`. This set of customers is regularly reviewed by the sales team, and this priority is applied to those customers we'd like to have an especially fantastic support experience.
-
-\*\* Due to the way we're using Pylon, "new" tickets from high prio customer Slack channels only appear as `New` in Zendesk for a few seconds, then a webhook updates the ticket and quickly changes it to `Open`.
 
 ### What if I need to confirm priority by checking a customer's MRR?
 
@@ -256,7 +265,7 @@ We use [Zendesk Support](https://posthoghelp.zendesk.com) as our internal platfo
 
 Zendesk allows us to manage all our customer conversations in one place and reply through Slack or email.
 
-Zendesk is populated with new tickets when issues are sent via the in-app [Support panel](https://us.posthog.com/home#panel=support) (the `Help` tab in the righthand sidebar), from people outside the PostHog GitHub organization adding issues to the `posthog` and `posthog.com` repos, and new [community questions](/questions). High priority customers also have Slack channels they can post support questions in. We can [create Zendesk tickets from Slack questions via Pylon.](#pylon-to-create-zendesk-tickets-from-slack-posts)
+Zendesk is populated with new tickets when issues are sent via the in-app [Support panel](https://us.posthog.com/home#panel=support) (the `Help` tab in the righthand sidebar), from people outside the PostHog GitHub organization adding issues to the `posthog` and `posthog.com` repos, and new [community questions](/questions). High priority customers also have Slack channels they can post support questions in. We can [create Zendesk tickets from Slack questions via SupportHog.](#creating-zendesk-tickets-from-slack-posts)
 
 The Zendesk tickets will include links to the GitHub issue, Slack thread, or the community question so we can answer in the appropriate platform. After replying to a community question, make an `internal note` on the Zendesk ticket confirming that you've replied outside of Zendesk, and set the [ticket status](#ticket-status) accordingly when submitting the internal note.
 
@@ -329,11 +338,9 @@ This looks at the Content Warning field on the Zendesk Organization, and adds th
 
 If you do discover any potentially offensive content in a customer account then please update this field on the Zendesk Organization so that other team members are aware of the content.
 
-### Pylon to create Zendesk tickets from Slack posts
+### Creating Zendesk tickets from Slack posts
 
-We use [Pylon](https://usepylon.com/) to create Zendesk tickets from Slack posts. To do so, add the `:ticket:` (🎫) emoji reaction to the post that you want to create a Zendesk ticket from.
-
-Adding the `:ticket:` emoji reaction will cause Pylon to add a couple of replies in a thread under the post. The last of those replies includes options for the Zendesk ticket you're creating: Use the `Group` menu to send the ticket to the appropriate team, and the `Severity` menu to set the severity flag on the Zendesk ticket, then hit the `Submit` button.
+We use [SupportHog](/handbook/growth/sales/slack-channels), our own tool, to create PostHog Support tickets from Slack posts. To do so, add the `:ticket:` (🎫) emoji reaction to the post that you want to create a PostHog Support ticket from, or mention `@SupportHog` in the thread.
 
 Zendesk tickets created this way will normally be marked as high priority tickets. You can respond to them either in Zendesk or Slack, as there is a two-way sync.
 

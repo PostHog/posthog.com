@@ -34,9 +34,9 @@ Suddenly, all those data problems were solved, Thanos-snapped from existence. He
 
 If you’ve ever taken a databases 101 course, you’ve likely heard lectures on row-based relational databases. Good chance, the professor referred to them as simply *relational databases* or even *normal databases*. 
 
-The majority of popular solutions — MySQL, Postgres, SQLite — are all row-based. In each of these, data / objects are stored as rows, like a phone book. 
+The majority of popular solutions – MySQL, [Postgres](/blog/duckdb-vs-postgres), [SQLite](/blog/duckdb-vs-sqlite) – are all row-based. In each of these, data / objects are stored as rows, like a phone book. 
 
-In contrast, ClickHouse is a *columnar* database. ClickHouse tables in memory are inverted — data is ingested as a column, meaning you’ve a large number of columns and a sizable set of rows.
+In contrast, ClickHouse is a *columnar* database. ClickHouse tables in memory are inverted – data is ingested as a column, meaning you’ve a large number of columns and a sizable set of rows.
 
 Here's what that looks like...
 
@@ -52,7 +52,7 @@ It’s important to realize that ClickHouse is rarely used alone. Because ClickH
 
 One previously-used [analogy](https://www.youtube.com/watch?v=aRT8E0nD_LE) to compare OLTP databases (Postgres) with OLAP databases (ClickHouse) is Teachers vs Principals. A teacher (akin to Postgres) would be able to efficiently answer the question “How is Johnny, the 4th grader, doing in Math?”. A principal (akin to Clickhouse) wouldn’t know who Johnny is, but would be able to quickly provide the student body’s national exam pass rate.
 
-> 📖 **Further reading:** ClickHouse is just one of many OLAP databases on the market. Read our [ClickHouse and Druid comparison](/blog/clickhouse-vs-druid) for an in-depth look at how they solve the same problem in two contrasting ways.
+> 📖 **Further reading:** ClickHouse is just one of many OLAP databases on the market. Read our [ClickHouse and Druid comparison](/blog/clickhouse-vs-druid) for an in-depth look at how they solve the same problem in two contrasting ways or our [ClickHouse and DuckDB comparison](/blog/duckdb-vs-clickhouse) on why we run both at PostHog.
 
 ### Simple Cases
  

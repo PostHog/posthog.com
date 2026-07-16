@@ -1,60 +1,39 @@
 import React from 'react'
-import { IconCopy, IconChevronRight, IconCheck, IconArrowUpRight } from '@posthog/icons'
-import useCloud from 'hooks/useCloud'
-import { useToast } from '../../context/Toast'
-import Link from 'components/Link'
-import ZoomHover from 'components/ZoomHover'
+import PlatformInstall from 'components/PlatformInstall'
 
+/**
+ * Thin backward-compatible alias for the inline PlatformInstall command.
+ *
+ * WizardCommand was the original install-command component; PlatformInstall is now the single source
+ * of truth for both rendering and command-building. This wrapper is kept so the existing
+ * `<WizardCommand>` call sites (many in MDX prose, plus the global shortcode) render the consolidated
+ * component with zero changes — it owns no logic, it just maps the old prop names onto
+ * `<PlatformInstall variant="inline" />`.
+ */
 export default function WizardCommand({
     className = '',
-    latest = true,
+    command = '',
+    selfDriving = false,
     slim = false,
+    variant = 'default',
+    onCopy,
 }: {
     className?: string
-    latest?: boolean
+    command?: string
+    selfDriving?: boolean
     slim?: boolean
+    variant?: 'default' | 'bordered'
+    onCopy?: () => void
 }): JSX.Element {
-    const cloud = useCloud()
-    const { addToast } = useToast()
-    const code = `npx @posthog/wizard${latest ? '@latest' : ''}${cloud ? ` --region ${cloud}` : ''}`
-
-    const handleCopy = () => {
-        navigator.clipboard.writeText(code)
-        addToast({
-            description: (
-                <span className="inline-flex items-center gap-1.5">
-                    <IconCheck className="size-4 text-green" />
-                    Copied to clipboard
-                </span>
-            ),
-            duration: 2000,
-        })
-    }
-
     return (
-        <div className="inline-flex flex-col not-prose">
-            <ZoomHover size="lg">
-                <button
-                    onClick={handleCopy}
-                    className={`group inline-flex items-center gap-2 bg-dark text-white font-mono text-sm pl-3 pr-3 py-2.5 rounded-md cursor-pointer border-0 dark:border border-secondary ${
-                        !slim ? 'relative z-10' : ''
-                    } ${className}`}
-                >
-                    <IconChevronRight className="size-4 opacity-50" />
-                    <code className="!bg-transparent !p-0 !border-0 mr-1 text-white dark:text-yellow">{code}</code>
-                    <IconCopy className="size-4 opacity-60 group-hover:opacity-80" />
-                </button>
-            </ZoomHover>
-            {!slim && (
-                <Link
-                    to="/wizard"
-                    state={{ newWindow: true }}
-                    className="group relative -top-2 flex gap-px justify-center items-center pt-3 pr-2 pl-5 pb-1 text-xs text-secondary hover:text-primary mx-1.5 border-b border-x border-primary bg-accent/50 hover:bg-hover/100 rounded-b-md text-center"
-                >
-                    Learn more
-                    <IconArrowUpRight className="invisible group-hover:visible inline-block size-3 opacity-75 relative" />
-                </Link>
-            )}
-        </div>
+        <PlatformInstall
+            variant="inline"
+            command={command}
+            selfDriving={selfDriving}
+            slim={slim}
+            bordered={variant === 'bordered'}
+            className={className}
+            onCopy={onCopy}
+        />
     )
 }

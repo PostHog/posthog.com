@@ -129,6 +129,15 @@ export const ga4 = {
         dashboards: {
             available: true,
         },
+        error_tracking: {
+            available: false,
+        },
+        workflows: {
+            available: false,
+        },
+        logs: {
+            available: false,
+        },
     },
     platform: {
         analytics_integration: {

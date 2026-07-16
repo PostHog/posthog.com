@@ -28,6 +28,9 @@
  * MDX frontmatter format:
  * - platformLogo: Key from `src/constants/logos.ts` (e.g., "stripe", "react", "nodejs")
  * - platformIconName: Icon like "IconCode" (fallback if no logo)
+ * - platformLabel: Optional explicit card label. Overrides the suffix-stripped
+ *   title — use when the auto-derived label is wrong (e.g. provider name
+ *   contains the suffix, like "Fireworks AI" + "AI Observability installation").
  *
  * Usage:
  * const platforms = usePlatformList('docs/error-tracking/installation', 'error tracking installation')
@@ -98,6 +101,7 @@ function getSidebarSection(sidebarPath: string): SidebarSection | null {
 
 interface UsePlatformListOptions {
     platformSourceType?: 'managed' | 'self-hosted'
+    sortAlpha?: boolean
 }
 
 export default function usePlatformList(
@@ -112,6 +116,7 @@ export default function usePlatformList(
                     slug
                     frontmatter {
                         title
+                        platformLabel
                         platformLogo
                         platformIconName
                         platformSourceType
@@ -132,9 +137,12 @@ export default function usePlatformList(
             return true
         })
         .map((node: any) => {
-            let label = node.frontmatter.title
+            // Prefer an explicit `platformLabel` when set — the strip-suffix
+            // fallback breaks when provider names overlap the suffix (e.g.
+            // "Fireworks AI Observability installation" stripping to "Fireworks").
+            let label = node.frontmatter.platformLabel || node.frontmatter.title
 
-            if (titleSuffix) {
+            if (!node.frontmatter.platformLabel && titleSuffix) {
                 // Extract versioning content in title (ex: "(v3.6 and below)")
                 const parenMatch = label.match(/\(([^)]+)\)/)
                 const versionInfo = parenMatch ? ` ${parenMatch[0]}` : ''
@@ -177,12 +185,14 @@ export default function usePlatformList(
             )
         }
 
-        // Filter to only include items that are in the sidebar, then sort alphabetically if configured
+        // Default: follow the sidebar source order from navs/index.js. When `sortAlpha` is passed, sort by label instead.
         const filtered = result.filter((platform: Platform) => section.urls.includes(platform.url))
-        return section.sortChildrenAlpha
-            ? filtered.sort((a: Platform, b: Platform) => a.label.localeCompare(b.label))
-            : filtered
+        if (options?.sortAlpha) {
+            return filtered.sort((a: Platform, b: Platform) => a.label.localeCompare(b.label))
+        }
+        const urlOrder = new Map(section.urls.map((url, index) => [url, index]))
+        return filtered.sort((a: Platform, b: Platform) => (urlOrder.get(a.url) ?? 0) - (urlOrder.get(b.url) ?? 0))
     }
 
-    return result
+    return options?.sortAlpha ? result.sort((a: Platform, b: Platform) => a.label.localeCompare(b.label)) : result
 }

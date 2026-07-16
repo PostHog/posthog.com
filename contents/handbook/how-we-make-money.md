@@ -28,7 +28,7 @@ Beyond which products we use, we look for other ways to give users control, such
 
 These principles mean that they will spend less than they otherwise would have, _but_ it means they'll stick around. We don't want users to churn if they are unhappy with what they're spending; we want them to better manage how they use the platform.
 
-## Be the cheapest for each individual product
+## Match the cheapest for each individual product
 
 We can make it up by selling other products to the customer over time. This way, it's always a no-brainer to pick PostHog, we get as much word-of-mouth growth as possible, _and_ our single product competitors can't compete since they have nowhere to go.
 

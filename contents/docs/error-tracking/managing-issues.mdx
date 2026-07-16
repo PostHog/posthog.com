@@ -8,16 +8,17 @@ Error tracking gives you multiple ways to help you manage issues and work toward
 
 You can update the status of an issue from the issue page under **Status** or issue list. 
 
-All issues are marked **Active** by default, you can mark them as **Resolved** or **Suppressed** to reflect the current state of the issue. These labels are mainly used to communicate amongst your team. 
+All issues are marked **Active** by default. You can update the status to reflect the current state of the issue:
 
-- Resolve issues that are fixed, if they reoccur, the issue is reopened.
-- Suppress issues that you choose not to action. Typically, this is used for issues that are deemed noisy or not helpful.
+- **Active** - The default status for new issues. Use this for issues that need attention.
+- **Resolved** - Mark issues that are fixed. If the issue reoccurs, it's automatically reopened.
+- **Suppressed** - Mark issues you choose not to action. Typically used for noisy or unhelpful issues. Note that suppressing an issue will drop any associated exceptions.
 
 You can also filter issues by status in the issue list:
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/filter_by_status_light_1f57d7d0b1.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/filter_by_status_dark_f48d183989.png"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_06_24_at_12_12_40_08c408cfcf.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_06_24_T10_13_42_436_Z_32bc2cd7a7.png"
   alt="Error tracking filter by issue status"
   classes="rounded"
 />
@@ -31,8 +32,8 @@ Each issue contains detailed information about the exceptions that triggered it.
 Click the **Stacktrace** tab to see exactly where the error occurred. [Stack traces](/docs/error-tracking/stack-traces) help you pinpoint the line of code and the sequence of function calls leading up to the exception.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/issues_stacktrace_light_8e0c699ca2.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/issues_stacktrace_dark_0b00f2d4fd.png"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_06_24_T13_47_28_844_Z_8a75213053.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_06_24_T13_47_08_882_Z_f36311b3dd.png"
   alt="Error tracking stack traces"
   classes="rounded"
 />
@@ -40,8 +41,8 @@ Click the **Stacktrace** tab to see exactly where the error occurred. [Stack tra
 Under the **Properties** tab, you can view additional metadata about the exception event.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/issues_properties_light_6fa900f42e.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/issues_properties_dark_e973d3dfb2.png"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_06_24_T10_15_53_931_Z_0424a1259b.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_06_24_T10_15_19_470_Z_6b73aaefb2.png"
   alt="Error tracking event properties"
   classes="rounded"
 />
@@ -55,8 +56,8 @@ You can view a session replay for an exception by:
 - Clicking the **View recording** button besides each exception.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/session_replay_error_light_5f25f72344.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/issue_exception_with_filter_dark_bf74dca1d9.png"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_06_24_T10_17_21_796_Z_ff4419d72b.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_06_24_T10_17_42_884_Z_87172c13ca.png"
   alt="An issue's session replay"
   classes="rounded"
 />
@@ -65,6 +66,17 @@ You can view a session replay for an exception by:
 
 Error tracking issues can also be discovered from the [Logs](https://app.posthog.com/logs) viewer. When [logs are linked to sessions](/docs/logs/link-session-replay), related errors can be viewed in the **Related errors** tab of any log entry. This is useful for investigating backend issues where both logs and errors were captured during the same session.
 
+
+## Bulk actions
+
+Select multiple issues using the checkboxes in the issue list to perform bulk actions. A bulk action bar appears at the top of the list with the following options:
+
+- **Open all** - Opens each selected issue in a new tab
+- **Merge** - Merges two or more selected issues into one
+- **Mark as** - Change the status of all selected issues to active, resolved, or suppressed
+- **Assign** - Assign all selected issues to a teammate
+- **Unassign** - Remove assignees from all selected issues (only appears when at least one selected issue has an assignee)
+- **Hide from search** - Exclude selected issues from the current view
 
 ## Assign issues to teammates
 

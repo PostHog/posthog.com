@@ -1,4 +1,4 @@
-import type { PostHog } from '@posthog/types'
+import type { PostHog } from './types/posthog'
 
 declare module '*.svg' {
     const content: React.HTMLImageElement

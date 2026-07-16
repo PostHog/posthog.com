@@ -1,0 +1,95 @@
+---
+title: PostHog Code pricing
+---
+
+import { CalloutBox } from "components/Docs/CalloutBox";
+
+PostHog Code usage consumes **AI credits**, with credit consumption anchored to underlying token costs. PostHog Code credits carry **no markup**: They reflect the underlying LLM provider's cost exactly, with nothing added on top.
+
+For reference, **100 AI credits = $1**.
+
+Each time you interact with PostHog Code, such as writing code, querying your PostHog data, or asking an ad-hoc question, credits are spent based on the resources required to complete your request.
+
+This means you only pay for what you use. There's no fixed subscription, and every organization gets a **$20 monthly free tier** to explore PostHog Code's features.
+
+## Available models & credit consumption
+
+The following table shows token costs per model and token type **per 1M tokens**:
+
+| Model | Input | Output |
+| --- | --- | --- |
+| Claude Fable 5 | 1,000 credits | 5,000 credits |
+| Claude Opus 4.7 | 500 credits | 2,500 credits |
+| Claude Opus 4.8 | 500 credits | 2,500 credits |
+| Claude Sonnet 4.6 | 300 credits | 1,500 credits |
+| Claude Sonnet 5 | 200 credits | 1,000 credits |
+| glm-5.2 | 140 credits | 440 credits |
+| gpt-5.4 | 250 credits | 1,500 credits |
+| gpt-5.5 | 500 credits | 3,000 credits |
+| gpt-5.6-luna | 100 credits | 600 credits |
+| gpt-5.6-sol | 500 credits | 3,000 credits |
+| gpt-5.6-terra | 250 credits | 1,500 credits |
+
+Prices are passed through from the underlying model providers at cost and may change as providers update their rates.
+
+## What consumes AI credits
+
+Every interaction with PostHog Code consumes AI credits. This includes:
+
+- Writing or editing code
+- Querying your PostHog data
+- Any ad-hoc question you ask
+
+All usage is charged as credits, after your $20 monthly free tier.
+
+## How AI credit usage works
+
+AI credits are based on the **underlying token costs**, which reflect the effort required to complete your request.
+
+- Simple, short tasks use very few tokens, and therefore very few credits.
+- More complex tasks that span many files or multiple iterations use more tokens and consume more credits.
+- Because we charge no markup, your credits reflect exactly what the underlying model costs.
+- You can pick [any model and any harness](/docs/posthog-code/use-any-model-and-harness), so you're free to choose a cheaper model for simpler tasks.
+
+While exact usage varies, credit consumption usually scales with complexity. You’ll always see **real-time cost information** while using PostHog Code.
+
+## Track your AI credit usage
+
+Stay on top of your AI credit spend in real time:
+
+1. Open the **Plan & usage** tab in the PostHog Code app to see your real-time spend, broken down by day and by model
+2. Check the [billing overview](https://app.posthog.com/organization/billing/overview) and [billing usage](https://app.posthog.com/organization/billing/usage) pages to view your total monthly consumption
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/code_cost_over_time_light_d6c7d839e6.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/code_cost_over_time_dark_7483f921bc.png"
+    alt="PostHog Code spend over time, broken down by day"
+    classes="rounded"
+/>
+
+<Caption>Track your PostHog Code spend over time in the Plan &amp; usage tab</Caption>
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/code_cost_by_model_light_4b7f1ed6ad.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/code_cost_by_model_dark_d3d95f7976.png"
+    alt="PostHog Code spend broken down by model"
+    classes="rounded"
+/>
+
+<Caption>See which models are driving your spend</Caption>
+
+<CalloutBox icon="IconInfo" title="Important" type="fyi">
+
+The **Plan & usage** tab in the app shows your spend in real time. The in-app billing overview and billing usage pages can be delayed by up to 24 hours, so use the Plan & usage tab for the most up-to-date view.
+
+</CalloutBox>
+
+## Control your AI credit spend
+
+You’re always in control of your AI credit usage:
+
+- **Real-time tracking:** See costs as you go
+- **Default & custom billing limit:** PostHog sets a default **$50 billing limit** so you don't accidentally rack up costs without a ceiling. You can customize your billing limit at any time.
+- **Usage alerts:** Get notified when you hit key thresholds through automated billing emails
+
+When you reach your billing limit, you won't be able to send messages until you raise it. Increase your billing limit to continue using PostHog Code.

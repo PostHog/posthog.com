@@ -18,7 +18,7 @@ The main folders are:
 - `/contents/blog` - A catch-all posts section. Company announcements, technical deep dives, SEO-focused comparisons, and more.
 - `/contents/founders` - Posts written for founders.
 - `/contents/product-engineers` - Posts written for product engineers.
-- `/contents/newsletter` - Newsletters republished from Product for Engineers.
+- `/contents/newsletter` - Newsletters republished from build mode.
 - `/contents/tutorials` - Tutorials
 - `/contents/customers` - Customer stories
 - `/contents/spotlight` - Startup spotlight
@@ -118,7 +118,7 @@ You can use tags from the Founder's hub in product engineer posts, and vice vers
 - experimentation (labeled A/B testing on website)
 - surveys
 - cdp
-- LLM analytics
+- AI Observability
 
 Note, there are other tags we've used in the past here, but they're largely optional.
 

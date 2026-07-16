@@ -1,34 +1,48 @@
-## Q1 2026 objectives
+## Q3 2026 objectives
 
-Data modeling
+### Objective 1: Semantic layer (owner: Thiago)
 
-### Objective 1
-- Data modeling as a first-class citizen in app
-  - Lineage view 
-  - DAG execution + matviews are STABLE with better error surfacing, logging, and alerting
+**Motivation:** We are increasingly hearing about inconsistency issues when an agent writes a query or an insight based on its assumptions around a definition. Same problem of "what's the source of truth?" like we humans have, but agent-amplified.
 
-### Objective 2
-- Highest priority modeling features shipped
-  - Run all downstream models, run all upstream, etc.
-  - Model tests
-  - Models backed by Git and syncable with GitHub
+**What we'll ship:**
+- A central semantic layer for all metrics and definitions parts of PostHog that need to do analysis or generate queries on top of a user's shared business understanding
 
-### Objective 3
-- Differentiators against competitors
-  - Field level lineage that feels nice
-  - Custom PostHog node types (e.g. models as workflow triggers)
+### Objective 2: Integration with Managed warehouse (owner: Jovan)
 
-Endpoints
+**Motivation:** We need to move workloads away from ClickHouse and onto the managed warehouse — modeling and endpoints included.
 
-### Objective 1
-- Endpoints GA
-  - Pricing finalized and rolled out
+**What we'll ship:**
+- Endpoints execution running solely on the managed warehouse with appropriate compute control
+- Move materialization jobs to the managed warehouse, and limit usage on CH
+- Support pricing and billing instrumentation
 
-### Objective 2
-- Endpoints integrate with managed warehouse
-  - Materialized endpoint execution goes through managed warehouse compute
+### Objective 3: Version control (owner: Jovan)
 
-### Objective 3
-- Flexible endpoint materialization
-  - Materialize endpoints even with variables
-  - One common, simple API for HogQL and insight endpoints regardless of materialization status
+**Motivation:** While data modeling can happen inside PostHog, lack of version control makes it difficult to collaborate and safely make changes.
+
+**What we'll ship:**
+- An easy way for agents and humans to interact with their git-based data modeling project
+- And enable a development workflow that doesn't impact the production models
+
+### Objective 4: Testing (owner: Thiago)
+
+**Motivation:** Our agent's SQL writing has significantly improved, but we still have the verifiability gap where the users do not have a way of checking whether the models they build act as intended.
+
+**What we'll ship:**
+- Schema and data tests for data models
+- That are integrated into the version control workflow
+- And easily used by agents
+
+### Side quest 1 (owner: Anna)
+
+**Motivation:** Not every customer has custom and complex data modeling needs. Some are very standard and can be templated into models that take a customer from 0 to 1 in modeling their revenue / active users / attribution.
+
+**What we'll ship:**
+- A set of skills that provide all the context to an agent around what data models it needs to create in PostHog and how to verify them
+
+### Side quest 2 (owner: Anna)
+
+**Motivation:** We need to stay on top of the data space and how it's evolving. A lot has happened recently, and we want to make sure that what we're building is aligned with the field.
+
+**What we'll do:**
+- Introduce recurring data space wrap-up research automation

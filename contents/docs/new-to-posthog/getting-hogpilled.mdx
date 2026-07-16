@@ -123,6 +123,13 @@ This data collection will help you understand how users interact with your produ
 
 See the detailed docs on [sending events](/docs/getting-started/send-events) for more integration guidance.
 
+
+<CalloutBox icon="IconRocket" title="Prioritize your growth events" type="action">
+
+The most important custom event to capture is your signup event (e.g. `user_signed_up`). Autocapture tracks clicks and page views, but it won't reliably track signups across UI changes. Explicitly capturing this event first gives you the foundation to build funnels, measure [activation](/docs/new-to-posthog/activation), and calculate [retention](/docs/new-to-posthog/retention).
+
+</CalloutBox>
+
 <CalloutBox icon="IconWarning" title="Avoid event pitfalls" type="caution">
 
 Ideal event names are self-explanatory and avoid strange abbreviations or codes. Don't stuff data into event names – they should be **comparable across all users** of your product. Instead, we want to tuck additional data into [properties](/docs/data/events#event-properties) *on* events.

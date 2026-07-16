@@ -13,7 +13,7 @@ features:
   featureFlags: true
   groupAnalytics: true
   surveys: true
-  llmAnalytics: false
+  aiObservability: false
   errorTracking: true
 ---
 
@@ -59,6 +59,11 @@ import ReactInstall from '../../integrate/_snippets/install-react.mdx'
 
 <ReactInstall />
 
+## Identifying users
+
+import IdentifyFrontendCallout from '../../_snippets/identify-frontend-callout.mdx'
+
+<IdentifyFrontendCallout />
 
 ## Usage
 
@@ -73,9 +78,11 @@ The provider takes an initialized and configured client instance like this:
 import posthog from 'posthog-js';
 import { PostHogProvider} from '@posthog/react'
 
-posthog.init(process.env.REACT_APP_PUBLIC_POSTHOG_TOKEN, {
+posthog.init(process.env.REACT_APP_PUBLIC_POSTHOG_PROJECT_TOKEN, {
   api_host: process.env.REACT_APP_PUBLIC_POSTHOG_HOST,
   defaults: '<ph_posthog_js_defaults>',
+  // Optional: send PostHog session/user context to your backend
+  tracing_headers: ['api.example.com'],
 });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -101,6 +108,8 @@ To call PostHog methods for actions like identifying users, capturing events, us
 </CalloutBox>
 
 All the methods of the library are available and can be used as described in the [posthog-js documentation](/docs/libraries/js).
+
+If your React app calls your own backend, `tracing_headers` adds `X-POSTHOG-DISTINCT-ID` and `X-POSTHOG-SESSION-ID` to matching `fetch` and `XMLHttpRequest` requests. This lets server-side SDKs link backend events, errors, and LLM traces back to frontend sessions and replays. Use hostnames only, without protocols or paths.
 
 ```react
 import { usePostHog } from '@posthog/react'
@@ -255,7 +264,7 @@ For details on how to implement bootstrapping, see our [bootstrapping guide](/do
 
 ## Experiments (A/B tests)
 
-Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
+Since [experiments](/docs/experiments/start-here) use feature flags, the code for running an experiment is very similar to the feature flags code:
 
 ```react
 // You can either use the `useFeatureFlagVariantKey` hook,
@@ -287,4 +296,5 @@ function App() {
 ```
 
 It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
+
 

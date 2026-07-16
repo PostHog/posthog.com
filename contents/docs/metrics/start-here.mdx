@@ -1,0 +1,112 @@
+---
+title: Getting started with metrics
+hideRightSidebar: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import { QuestLog, QuestLogItem } from "components/Docs/QuestLog";
+
+> **Note:** Metrics is in alpha. Setup details, including the ingestion endpoint, may change before general availability.
+
+<QuestLog firstSpeechBubble="Let's set up metrics!" lastSpeechBubble="Time to chart your metrics!">
+
+<QuestLogItem
+    title="Send your first metrics"
+    subtitle="Required"
+    icon="IconCode"
+>
+
+There are two ways to get metrics into PostHog, and both take a few minutes.
+
+If [posthog-js](/docs/libraries/js) is already running on your site, record metrics directly with the `posthog.metrics` API. No new packages, no extra authentication:
+
+```js
+posthog.metrics.count('checkout.completed')
+posthog.metrics.gauge('cart.items', 3)
+posthog.metrics.histogram('api.request.duration', 187, { unit: 'ms' })
+```
+
+If you use OpenTelemetry anywhere else (backend services, infrastructure, an existing Collector), point your OTLP metrics exporter at PostHog. No PostHog packages are required:
+
+```bash
+OTEL_EXPORTER_OTLP_METRICS_ENDPOINT="<ph_client_api_host>/i/v1/metrics"
+OTEL_EXPORTER_OTLP_METRICS_HEADERS="Authorization=Bearer <ph_project_token>"
+OTEL_SERVICE_NAME="my-app"
+```
+
+`<ph_client_api_host>` and `<ph_project_token>` are filled in with your project's values when you're logged in. Use your **project token** (the same one you use for capturing events), not a [personal API key](/docs/api#authentication).
+
+For full setup details, including Python and Node.js code samples and Collector configuration, see the [metrics overview](/docs/metrics).
+
+</QuestLogItem>
+
+<QuestLogItem
+    title="Pick the right metric type"
+    subtitle="Required"
+    icon="IconStack"
+>
+
+Metrics come in three shapes, and picking the right one determines which aggregations make sense later:
+
+- **Counters** only go up: requests handled, jobs processed, errors raised. Chart them with `rate` or `increase`.
+- **Gauges** go up and down: queue depth, active connections, memory in use. Chart them with `avg`.
+- **Histograms** record distributions: request durations, payload sizes. Chart them with percentiles like `p95`.
+
+Give each metric a stable, descriptive name (`http.server.duration`, `jobs.processed.total`) and set a service name so metrics from different systems stay easy to tell apart.
+
+</QuestLogItem>
+
+<QuestLogItem
+    title="Add attributes, carefully"
+    subtitle="Required"
+    icon="IconListTree"
+>
+
+Attributes let you slice a metric by dimension: route, status code, plan, region. Every unique combination of attribute values creates a new series, so attach dimensions with a small, bounded set of values.
+
+Good attributes: `route`, `status`, `plan`, `queue`. Bad attributes: user IDs, session IDs, request IDs, timestamps. Each of those would create a series per user or per request, which makes charts unreadable and ingestion expensive.
+
+If you need to know what happened for one specific user or request, that's a job for [logs](/docs/logs) or [traces](/docs/distributed-tracing), not metrics.
+
+</QuestLogItem>
+
+<QuestLogItem
+    title="Verify metrics are arriving"
+    subtitle="Required"
+    icon="IconSearch"
+>
+
+Open **Metrics** in the PostHog sidebar. Pick your metric from the name picker and you should see data points within a minute of sending. The viewer recommends an aggregation based on the metric's type, so a counter defaults to `increase` and a gauge to `avg`.
+
+If nothing shows up, check that the endpoint ends in `/i/v1/metrics`, that the token starts with `phc_`, and see the [troubleshooting section](/docs/metrics#troubleshooting).
+
+</QuestLogItem>
+
+<QuestLogItem
+    title="Chart what matters"
+    subtitle="Recommended"
+    icon="IconTrends"
+>
+
+Once data flows, build the views you'll actually watch:
+
+- **Group by** an attribute to get one line per value, for example request rate per route or queue depth per worker.
+- **Filter** with `key=value` chips to focus on one service, environment, or status.
+- Switch to **stat mode** for a single headline number with an automatic comparison against the baseline.
+- Turn on **live** to refresh the chart every few seconds while you watch a deploy or an incident.
+
+</QuestLogItem>
+
+<QuestLogItem
+    title="Query with SQL or ask AI"
+    subtitle="Optional"
+    icon="IconDatabase"
+>
+
+Every metric lands in the `posthog.metrics` table, so the SQL tab in the metrics viewer gives you full query access for anything the chart controls don't cover.
+
+If you use the [PostHog MCP server](/docs/model-context-protocol), your AI tools can query metrics directly: ask your agent to chart a metric, compare error rates between services, or characterize an anomaly, all without leaving your editor.
+
+</QuestLogItem>
+
+</QuestLog>

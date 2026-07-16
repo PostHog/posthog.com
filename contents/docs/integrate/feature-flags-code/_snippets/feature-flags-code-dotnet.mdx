@@ -1,115 +1,129 @@
-There are 2 steps to implement feature flags in .NET:
+There are two steps to implement feature flags in .NET:
 
-### Step 1: Evaluate the feature flag value
+### Step 1: Evaluate flags once
+
+Call `EvaluateFlagsAsync()` once for the user, then read values from the returned snapshot.
 
 #### Boolean feature flags
 
 ```csharp
-if (await posthog.IsFeatureEnabledAsync(
-    "flag-key",
-    "distinct_id_of_your_user"))
+var flags = await posthog.EvaluateFlagsAsync("distinct_id_of_your_user");
+
+if (flags.IsEnabled("flag-key"))
 {
-    // Feature is enabled
-}
-else
-{
-    // Feature is disabled
+    // Do something differently for this user
+    // Optional: fetch the payload
+    var matchedPayload = flags.GetFlagPayload("flag-key");
 }
 ```
 
 #### Multivariate feature flags
 
 ```csharp
-var flag = await posthog.GetFeatureFlagAsync(
-    "flag-key",
-    "distinct_id_of_your_user"
-);
+var flags = await posthog.EvaluateFlagsAsync("distinct_id_of_your_user");
 
-// replace "variant-key" with the key of your variant
-if (flag is { VariantKey: "variant-key"} ) {
-    // Do something differently for this user
-    // Optional: fetch the payload
-    var matchedPayload = flag.Payload;
-}
-```
+var enabledVariant = flags.GetFlag("flag-key")?.VariantKey;
 
-> **Note:** The `GetFeatureFlagAsync` method returns a nullable `FeatureFlag` object. If the flag is not found or evaluating it is inconclusive, it returns `null`. However, there is an implicit conversion to bool to make comparisons easier.
-
-
-```csharp
-if (await posthog.GetFeatureFlagAsync(
-    "flag-key",
-    "distinct_id_of_your_user")
-)
+if (enabledVariant == "variant-key") // replace "variant-key" with the key of your variant
 {
     // Do something differently for this user
+    // Optional: fetch the payload
+    var matchedPayload = flags.GetFlagPayload("flag-key");
 }
 ```
 
-import IncludePropertyInEvents from "./include-feature-flag-property-in-backend-events.mdx" 
+`flags.GetFlag()` returns a nullable `FeatureFlag` object. Check `VariantKey` for multivariate flags and `IsEnabled` for boolean flags. It returns `null` when the flag wasn't returned by the evaluation.
+
+> **Note:** `posthog.IsFeatureEnabledAsync()`, `posthog.GetFeatureFlagAsync()`, and `Capture(..., sendFeatureFlags: true, ...)` still work during the migration period, but they're deprecated. Prefer `EvaluateFlagsAsync()` for new code.
+
+import IncludePropertyInEvents from "./include-feature-flag-property-in-backend-events.mdx"
 
 <IncludePropertyInEvents />
 
 There are two methods you can use to include feature flag information in your events:
 
-#### Method 1: Include the `$feature/feature_flag_name` property
+#### Method 1: Pass the evaluated flags snapshot to `Capture()`
 
- In the event properties, include `$feature/feature_flag_name: variant_key`:
+Pass the same `flags` object that you used for branching. This attaches the exact flag values from that evaluation and doesn't make another `/flags` request.
+
+```csharp
+var flags = await posthog.EvaluateFlagsAsync("distinct_id_of_your_user");
+
+if (flags.IsEnabled("flag-key"))
+{
+    // Do something differently for this user
+}
+
+posthog.Capture(
+    "distinct_id_of_your_user",
+    "event_name",
+    properties: null,
+    groups: null,
+    flags: flags
+);
+```
+
+By default, this attaches every flag in the snapshot using `$feature/<flag-key>` properties and `$active_feature_flags`.
+
+To reduce event property bloat, pass a filtered snapshot:
+
+```csharp
+// Attach only flags accessed with IsEnabled() or GetFlag() before this call
+posthog.Capture(
+    "distinct_id_of_your_user",
+    "event_name",
+    properties: null,
+    groups: null,
+    flags: flags.OnlyAccessed()
+);
+
+// Attach only specific flags
+posthog.Capture(
+    "distinct_id_of_your_user",
+    "event_name",
+    properties: null,
+    groups: null,
+    flags: flags.Only("checkout-flow", "new-dashboard")
+);
+```
+
+#### Method 2: Include the `$feature/feature_flag_name` property manually
+
+In the event properties, include `$feature/feature_flag_name: variant_key`:
 
 ```csharp
 posthog.Capture(
     "distinct_id_of_your_user",
     "event_name",
-    properties: new() {
-        // replace feature-flag-key with your flag key.
-        // Replace "variant-key" with the key of your variant
-        ["$feature/feature-flag-key"] = "variant-key"
+    properties: new()
+    {
+        // Replace feature-flag-key with your flag key and "variant-key" with the key of your variant
+        ["$feature/feature-flag-key"] = "variant-key",
     }
 );
 ```
 
-#### Method 2: Set `send_feature_flags` to `true`
+### Evaluating only specific flags
 
-import DotNetSetSendFeatureFlagsTrue from "./feature-flags-code-dotnet-set-send-feature-flags-to-true.mdx" 
+By default, `EvaluateFlagsAsync()` evaluates every flag for the user. If you only need a few flags, pass `FlagKeysToEvaluate` to request only those flags:
 
-<DotNetSetSendFeatureFlagsTrue />
-
-### Fetching all flags for a user
-
-You can fetch all flag values for a single user by calling `GetAllFeatureFlagsAsync()`.
-
-This is useful when you need to fetch multiple flag values and don't want to make multiple requests.
-
-```csharp  
-var flags = await posthog.GetAllFeatureFlagsAsync(
-    "distinct_id_of_your_user"
+```csharp
+var flags = await posthog.EvaluateFlagsAsync(
+    "distinct_id_of_your_user",
+    options: new AllFeatureFlagsOptions
+    {
+        FlagKeysToEvaluate = new[] { "checkout-flow", "new-dashboard" },
+    }
 );
 ```
 
 ### Sending `$feature_flag_called` events
 
-Capturing `$feature_flag_called` events enable PostHog to know when a flag was accessed by a user and thus provide [analytics and insights](/docs/product-analytics/insights) on the flag. By default, we send a these event when:
+Capturing `$feature_flag_called` events enables PostHog to know when a flag was accessed by a user and provide [analytics and insights](/docs/product-analytics/insights) on the flag. With `EvaluateFlagsAsync()`, the SDK sends this event when you call `flags.IsEnabled()` or `flags.GetFlag()` for a flag.
 
-1. You call `posthog.GetFeatureFlagAsync()` or `posthog.IsFeatureEnabledAsync()`, AND 
-2. It's a new user, or the value of the flag has changed. 
+The SDK deduplicates these events per `(distinct_id, flag, value)` in a local cache. If you reinitialize the PostHog client, the cache resets and `$feature_flag_called` events may be sent again. PostHog handles duplicates, so duplicate `$feature_flag_called` events don't affect your analytics.
 
-> *Note:* Tracking whether it's a new user or if a flag value has changed happens in a local cache. This means that if you reinitialize the PostHog client, the cache resets as well – causing `$feature_flag_called` events to be sent again when calling `GetFeatureFlagAsync` or `IsFeatureEnabledAsync`. PostHog is built to handle this, and so duplicate `$feature_flag_called` events won't affect your analytics.
-
-You can disable automatically the additional request to capture `$feature_flag_called` events. For example, when you don't need the analytics, or it's being called at such a high volume that sending events slows things down.
-
-To disable it, set the `sendFeatureFlagsEvent` option in your function call, like so:
-
-```csharp
-var isMyFlagEnabled = await posthog.IsFeatureEnabledAsync(
-    "flag-key", 
-    "distinct_id_of_your_user",
-    options: new FeatureFlagOptions
-    {
-        SendFeatureFlagEvents = true
-    }
-);
-// will not send `$feature_flag_called` events
-```
+`flags.GetFlagPayload()` doesn't send `$feature_flag_called` events and doesn't count as an access for `OnlyAccessed()`.
 
 import DotNetOverrideServerProperties from './override-server-properties/dotnet.mdx'
 
