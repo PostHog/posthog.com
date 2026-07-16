@@ -19,23 +19,27 @@ seo:
     metaDescription: 'PostHog Traces is now in beta. Point your existing OpenTelemetry exporter at PostHog and get distributed tracing alongside your replays, errors, logs, and user data.'
 ---
 
-Traces is now in beta. If you've been using [PostHog Logs](/logs), you probably saw this coming.
+[Traces](/docs/distributed-tracing) is now in beta. If you've been using [PostHog Logs](/logs), you probably saw this coming.
 
 PostHog starts with your user data and provides you with all the tools you need to build successful products, so debugging is an obvious must-have to keep your products working as expected.
 
-We have [Error tracking](/error-tracking), [Session replay](/session-replay), and [Logs](/logs) in the PostHog debugging stack, so Traces was a logical addition to give you more of the context you need to resolve issues quickly.
+We have [Error tracking](/error-tracking), [Session replay](/session-replay), and [Logs](/logs) in the PostHog debugging stack, so Traces was a logical addition to give you more of the context you need to resolve issues quickly, and more fuel for the agents doing it for you. 
 
-## Why we built it this way (spoiler alert: not just another tracing tool)
+## More fuel for your agents
 
-Every observability tool we've used makes the same assumption: a trace is something an SRE looks at on a dashboard. Spans, services, latency, hosts. The user who hit the bug is somewhere else, in your analytics, your session replay, your customer support tool. This means you have to juggle all these tools to find the user context.
+Most observability tools assume a trace is something an SRE stares at on a dashboard: spans, services, latency, hosts. The user who hit the bug lives somewhere else, in your analytics, your replay, your support tool, so you end up juggling tools to work out who was actually affected. 
 
-We built observability _on top of_ analytics instead. So when a span lands in PostHog, it lands in the same project as your replays, your errors, your logs, and the user who triggered it. Same identity, same session, same event stream. Every span has a face.
+We built observability on top of all our existing data instead. When a span lands in PostHog, it lands in the same project as your replays, your errors, your logs, and the user who triggered it. 
 
-That shared foundation is live in the beta. The workflows that pay it off: click a span and watch the replay, pivot from a slow request to the customer it cost you, are what's next on the roadmap, not in the box today. We wanted to ship the honest version first.
+That shared foundation is also what makes traces so useful to a self-driving product. Errors, replays, and funnels tell an agent that something's wrong. A trace tells it where and why: "checkout took 3.2s, and 2.8s of it was waiting on an N+1 query in the inventory service." 
+
+![report investigate mock](https://res.cloudinary.com/dmukukwp6/image/upload/Report_Investigate_Mock_2_76290ef07e.png) 
+
+So a scout can catch the regression, an agent can trace it to the exact line, open a PR with the fix, and drop it in your [Inbox](https://app.posthog.com/inbox). You hit merge. That's the whole job.
 
 ## What's in the beta
 
-Point your existing OpenTelemetry exporter at PostHog's OTLP/HTTP endpoint, drop in a bearer token, and you're sending traces. No new SDK, no agent on the box, no rewrite of the instrumentation you already have.
+Point your existing OpenTelemetry exporter at PostHog's OTLP/HTTP endpoint, drop in a bearer token, and you're sending traces. There's no need for a new SDK or rewriting the instrumentation you already have.
 
 ```bash
 OTEL_EXPORTER_OTLP_TRACES_ENDPOINT="<your-posthog-host>/i/v1/traces"
@@ -43,19 +47,30 @@ OTEL_EXPORTER_OTLP_TRACES_HEADERS="Authorization=Bearer <your-project-api-key>"
 OTEL_SERVICE_NAME="my-app"
 ```
 
-
 Inside PostHog, you get a volume sparkline for traffic at a glance, a filterable table of root spans (slice by service, name, kind, status, duration, trace or span ID, or any attribute on the span), and a flamegraph for any trace you click into. All of it lives on the same ClickHouse fleet as your PostHog Logs, so the same query layer runs both.
 
-It's the boring, working version of distributed tracing, already sitting next to the rest of your PostHog data.
+![traces screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/Group_144143_b7a6b4aa06.png)
 
 ## Debugging with PostHog
 
 Say a user complains your checkout is slow. Because their `user_id` is on both your OTel spans and your PostHog events, you can pull up every span they triggered in the last hour and find the four-second wait on a downstream payment provider. From there, opening their session replay in another tab shows exactly what they were staring at while the request hung: same person, same session, all in the project you're already in.
 
-That's a workflow you can run on day one. What we haven't built yet is the connective tissue that makes it feel native: clicking a slow span and having the replay open beside it, or clicking an error and watching the trace it caused appear in line. The shared identity layer is what makes those jumps possible, and it's already there. The UI to skip the tab-juggling is next on the roadmap.
+![debugging with traces and session replay](https://res.cloudinary.com/dmukukwp6/image/upload/traces_blog_illo_a355e7cfa8.jpg)
 
-Once those links are wired, you can use PostHog AI to answer questions like *"show me the slowest spans this week for users on the Pro plan who hit feature flag X"* with one prompt instead of cobbling together four queries across four tools.
+Whether you chase it down yourself or let a scout do it, it's the same context underneath. Once those links are wired, you could also use PostHogAI to answer questions like: 
+
+```
+Show me the slowest spans this week for users on the Pro plan who hit feature flag X.
+```
+
+[Try it with PostHogAI](https://app.posthog.com/#panel=max:Show%20me%20the%20slowest%20spans%20this%20week%20for%20users%20on%20the%20Pro%20plan%20who%20hit%20feature%20flag%20X.)
 
 ## Try it
 
-Traces is rolling out as a beta now. Enable it in your project settings, point your OTel exporter at the endpoint, and you're tracing in minutes. [Docs are here](/docs/tracing). Found something rough? [Tell us](mailto:sara@posthog.com).
+Traces is in beta now. The fastest way to get to it in is the wizard, which sets up self-driving and points your traces at PostHog for you:
+
+```bash
+npx @posthog/wizard@latest self-driving
+```
+
+Already instrumented? Point your existing OTel exporter at the endpoint and open [the PostHog app](app.posthog.com/tracing) to watch the spans land. 
