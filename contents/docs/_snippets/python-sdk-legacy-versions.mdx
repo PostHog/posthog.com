@@ -1,0 +1,21 @@
+## For Python versions 3.9 and older
+
+<details>
+
+<summary>
+    <b>Using the SDK on Python 3.9 and older</b>
+</summary>
+
+<br />
+
+Version `7.0.0` dropped support for Python 3.9. If you're on 3.9 or older, pin to the 6.x line — `6.9.3` is its final release:
+
+```bash
+pip install 'posthog<7'
+```
+
+Everything on this page works the same way there. Event capture, the context API (`new_context`, `identify_context`, `set_context_session`), and `PosthogContextMiddleware` are unchanged between `6.9.3` and `7.x` — including the middleware identifying the request context from the `X-POSTHOG-DISTINCT-ID` header, falling back to the authenticated user.
+
+`7.0.0` itself only dropped Python 3.9 and bumped the optional LLM provider SDKs (`openai`, `anthropic`, `langchain`, and friends). Later `7.x` releases add things the 6.x line does not receive, such as the Celery integration and tracing header sanitization.
+
+</details>
