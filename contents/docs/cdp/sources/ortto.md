@@ -49,3 +49,7 @@ Custom fields for people and accounts are automatically discovered at runtime. T
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

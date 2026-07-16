@@ -18,7 +18,7 @@
     width: calc(100% - 14px);
 }
 
-@media screen and (max-width: 1076px) {
+/* @media screen and (max-width: 1076px) {
     .rc-slider {
         max-width: 100%;
     }
@@ -32,7 +32,7 @@
     .rc-slider-mark-text:first-child {
         transform: none;
     }
-}
+} */
 
 .rc-slider-mark .rc-slider-mark-text:last-child {
     left: initial !important;

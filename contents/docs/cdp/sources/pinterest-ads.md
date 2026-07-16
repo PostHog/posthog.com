@@ -40,3 +40,7 @@ Connect PostHog to your Pinterest Ads account. The Pinterest account must have p
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

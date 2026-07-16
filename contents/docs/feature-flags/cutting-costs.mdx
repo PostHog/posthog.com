@@ -189,10 +189,9 @@ if isTestEnv {
 
 PostHogSDK.shared.setup(config)
 
-// Override flags locally if needed
-if isTestEnv {
-    PostHogSDK.shared.overrideFeatureFlag("your-flag", value: true)
-}
+// The iOS SDK doesn't support local feature flag overrides.
+// If tests need deterministic values, wrap your own flag reads in test code
+// or use a separate PostHog project/environment with fixed flag rules.
 ```
 
 ```dart
@@ -218,10 +217,12 @@ await Posthog().setup(config);
 ```
 
 ```react-native
+import PostHog from 'posthog-react-native'
+
 // Detect test/CI environment
 const isTestEnv = process.env.NODE_ENV === 'test' || process.env.CI === 'true'
 
-const posthog = await Posthog.initAsync('<ph_project_token>', {
+const posthog = new PostHog('<ph_project_token>', {
     host: '<ph_client_api_host>',
     ...(isTestEnv && {
         preloadFeatureFlags: false,
@@ -233,7 +234,7 @@ const posthog = await Posthog.initAsync('<ph_project_token>', {
 
 // Override flags locally if needed
 if (isTestEnv) {
-    posthog.overrideFeatureFlag('your-flag', true)
+    posthog.updateFlags({ 'your-flag': true })
 }
 ```
 

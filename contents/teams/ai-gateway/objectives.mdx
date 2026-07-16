@@ -1,55 +1,28 @@
-### Q2 2026 objectives
+### Q3 2026 objectives
 
-#### Goal 1: Rebuild the gateway
+#### Goal 1: General availability
 
-*Description*: Replace today's single-process gateway with a horizontally scalable service that internal PostHog teams can rely on for AI traffic.
-
-*What we will ship*:
-- **Horizontally scalable service** - capacity adds by replica count
-- **True-proxy per provider shape** - native OpenAI and Anthropic shapes, no cross-shape translation
-- **Core modules** - auth, rate limiting, routing, cost, quota, dispatch, and the post-call recording path into AI Observability
-- **Load characterization** - so we can size the fleet from observed throughput
-
-#### Goal 2: Spending controls
-
-*Description*: Make sure a runaway caller can't quietly run up provider cost.
+*Description*: Carry all of PostHog's internal AI traffic on the gateway, and go live with the first paying customers.
 
 *What we will ship*:
-- **Pre-call spending guardrails** - decide whether a request is admitted before it reaches the provider
-- **Runaway-cost protection** - cap how much damage a misbehaving caller can do
+- **100% internal traffic** – route <SmallTeam slug="posthog-ai" />, <SmallTeam slug="posthog-code" />, <SmallTeam slug="agents" />, and the <SmallTeam slug="ai-observability" /> Playground through the gateway and switch off the old one
+- **Alpha/beta paying customers** – get the first external orgs live and billed
+- **Accurate, secure billing** – track usage, spend, and balances correctly and securely before we charge real money
 
-#### Goal 3: Provider coverage and failover
+#### Goal 2: $1M ARR
 
-*Description*: Cover the providers PostHog's internal AI features need, with automatic failover when a primary has an incident.
-
-*What we will ship*:
-- **OpenAI and Anthropic at launch** - chat, responses, and messages routes
-- **Failover to a hosted equivalent** - Anthropic to Bedrock, OpenAI to Azure
-- **Best-effort model resolution** - so clients we don't control work without custom config
-
-#### Goal 4: Land gateway calls in AI Observability
-
-*Description*: Every gateway call lands in the existing `$ai_generation` pipeline so traces, evals, and cost analytics work on gateway traffic.
+*Description*: Show people will pay for the gateway, and build the pricing and monetization behind it.
 
 *What we will ship*:
-- **No schema change** - same event surface, dashboards keep working
-- **Normalized cached vs billable input split** - one shape across providers
-- **Single cost-calculation path** - converge the two we have today
+- **Pricing and monetization** – build a pricing and monetization strategy that scales and supports the features we want
+- **Billing integration** – wire it into PostHog's billing stack with reconciliation and overspend handling
+- **BYOK** – evaluate bring-your-own-key for enterprises and customers with their own provider discounts
 
-#### Goal 5: Take ownership of the AI Observability Playground
+#### Goal 3: Auth and attribution
 
-*Description*: Pick up the [AI Observability Playground](/docs/ai-observability/playground) from <SmallTeam slug="ai-observability" /> and keep it moving as gateway capabilities grow.
-
-*What we will ship*:
-- **Clean handover** - clear ownership, on-call, and triage path for Playground bugs and requests
-- **Gateway-aligned model coverage** - Playground keeps pace with the providers and models the gateway supports
-
-#### Goal 6: Migration off the current gateway
-
-*Description*: Cut traffic over from the existing gateway gradually, starting with internal callers, so we shake out failure modes before more services depend on it.
+*Description*: Generalize our authentication and attribution solutions for <SmallTeam slug="posthog-code" />, <SmallTeam slug="agents" />, and external customers.
 
 *What we will ship*:
-- **Per-team feature flag at ingress** - one-flag rollback per team
-- **Phased rollout** - start with PostHog AI and PostHog Code, then bring more PostHog services on
-- **Production readiness** - observability, admin surfaces, and graceful shutdown for in-flight streams
-- **Retire the original gateway** - once the new one carries all traffic
+- **Per-user spend controls** – enforce rate limits, spend caps, overspend, and sub-wallets per user
+- **Free and paid usage** – meter free and paid usage separately
+- **PostHog Code and Agent Platform on it** – get both consuming it in production

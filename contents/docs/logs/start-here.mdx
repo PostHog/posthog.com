@@ -4,9 +4,16 @@ hideRightSidebar: true
 contentMaxWidthClass: max-w-5xl
 ---
 
-import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
-import { IconCode, IconSearch, IconSettings, IconRewindPlay, IconWarning, IconGraph } from '@posthog/icons'
-import LogsInstallationPlatforms from './installation/_snippets/installation-platforms'
+import { QuestLog, QuestLogItem } from "components/Docs/QuestLog";
+import {
+  IconCode,
+  IconSearch,
+  IconSettings,
+  IconRewindPlay,
+  IconWarning,
+  IconGraph,
+} from "@posthog/icons";
+import LogsInstallationPlatforms from "./installation/_snippets/installation-platforms";
 
 <QuestLog firstSpeechBubble="Let's get started with logs!" lastSpeechBubble="Time to search through your logs!">
 
@@ -18,7 +25,7 @@ import LogsInstallationPlatforms from './installation/_snippets/installation-pla
 
 PostHog Logs works with any OpenTelemetry client. No PostHog-specific packages required. Use the OTel SDKs you already have, point them at PostHog's HTTP endpoint, and drop in your project token.
 
-On the frontend, our [JavaScript web SDK](/docs/logs/installation/javascript), [React Native SDK](/docs/logs/installation/react-native), [iOS SDK](/docs/logs/installation/ios), and [Android SDK](/docs/logs/installation/android) include first-class logging support. 
+On the frontend, our [JavaScript web SDK](/docs/logs/installation/javascript), [React Native SDK](/docs/logs/installation/react-native), [iOS SDK](/docs/logs/installation/ios), and [Android SDK](/docs/logs/installation/android) include first-class logging support.
 
 Follow the guides below to set up your logging client:
 
@@ -53,6 +60,7 @@ logger.info("User action", extra={"userId": "123", "action": "login"})
 logger.warning("Deprecated API used", extra={"endpoint": "/old-api"})
 logger.error("Database connection failed", extra={"error": "Connection timeout"})
 ```
+
 <CallToAction type="primary" to="/docs/logs/best-practices">
   Learn best practices
 </CallToAction>
@@ -112,15 +120,15 @@ Configure alerting rules in your project settings to stay on top of issues as th
   icon="IconSparkles"
 >
 
-Connect the PostHog MCP server and your AI agent can query logs directly. Use Cursor, Claude Code, or any MCP-compatible tool. 
+Connect the PostHog MCP server and your AI agent can query logs directly. Use Cursor, Claude Code, or any MCP-compatible tool.
 
 Your coding agent pulls the relevant logs it needs to debug and build faster without switching workflows.
 
 <ProductVideo
-    videoLight= "https://res.cloudinary.com/dmukukwp6/video/upload/logs_mcp_1080_5a4c635638.mp4" 
-    alt="Use PostHog MCP to fetch logs" 
-    classes="rounded"
-    autoPlay={false}
+  videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/logs_mcp_1080_5a4c635638.mp4"
+  alt="Use PostHog MCP to fetch logs"
+  classes="rounded"
+  autoPlay={false}
 />
 
 You can also ask [PostHog AI](/docs/posthog-ai) to search and analyze your logs.
@@ -140,7 +148,7 @@ Try out these prompts:
 - [`Show logs from the payment service around 2pm yesterday`](https://app.posthog.com/#panel=max:Show%20logs%20from%20the%20payment%20service%20around%202pm%20yesterday)
 
 <CallToAction type="primary" to="/docs/logs/debug-logs-mcp">
-  Explore logs with AI 
+  Explore logs with AI
 </CallToAction>
 
 </QuestLogItem>
@@ -151,11 +159,11 @@ Try out these prompts:
   icon="IconLogomark"
 >
 
-With PostHog, your logs live alongside your [Product Analytics](/docs/product-analytics), [Session Replays](/docs/session-replay), and [Error Tracking](/docs/error-tracking), so you can go from a log line to a user's session to the flag variant they were on without switching tools.
+With PostHog, your logs live alongside your [Product Analytics](/docs/product-analytics), [Session Replays](/docs/session-replay), [Error Tracking](/docs/error-tracking), and [Dashboards](/docs/product-analytics/dashboards), so you can go from a log line to a user's session to the flag variant they were on without switching tools.
 
 ### <IconRewindPlay className="text-yellow w-7 -mt-1 inline-block"/> Session Replay
 
-Log events in PostHog can be connected to the session and user who triggered them. Jump from a log line to a session replay in one click. 
+Log events in PostHog can be connected to the session and user who triggered them. Jump from a log line to a session replay in one click.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/SCR_20260427_tlab_c79adf4315.png"
@@ -189,6 +197,9 @@ Logs with `$exception` events become issues you can assign, resolve, and alert o
   classes="rounded"
 />
 
+### <IconGraph className="text-purple w-7 -mt-1 inline-block"/> Dashboards
+
+Add a Recent logs [widget](/docs/product-analytics/dashboards#adding-widgets) to any dashboard to monitor log entries alongside your other metrics and insights. Filter by severity level and service, and click a row to jump to that log on the Logs page.
 
 </QuestLogItem>
 
@@ -204,12 +215,12 @@ PostHog's Logs is built to be cost-effective by default, with a generous free ti
 
 - No credit card required to start
 - First 10 GB of ingested logs per month are free
-- Above 10 GB we have usage-based pricing at $0.25/GB with discounts 
+- Above 10 GB we have usage-based pricing at $0.25/GB with discounts
 - All logs are retained 14 days by default, and we also offer 30-day or 90-day retention options for an additional storage charge – see [pricing](/pricing) for more details
 - Set billing limits to avoid surprise charges
 - See our [pricing page](/docs/logs/pricing) for more up-to-date details
 
---- 
+---
 
 That's it! You're ready to start integrating.
 
@@ -218,6 +229,5 @@ That's it! You're ready to start integrating.
 </CallToAction>
 
 </QuestLogItem>
-
 
 </QuestLog>

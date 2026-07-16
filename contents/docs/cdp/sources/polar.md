@@ -39,3 +39,7 @@ Once the syncs are complete, you can start using Polar data in PostHog.
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

@@ -17,7 +17,7 @@ Qubs, a self-funded startup based in Romania, with a 1.5-person engineering team
 <OSQuote
   customer="qubs"
   author="gheorghe_avram"
-  quote={1}
+  quote={0}
 />
 
 From beta to production

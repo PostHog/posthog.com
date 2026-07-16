@@ -6,15 +6,6 @@ import { useSmallTeamsMenuItems } from './SmallTeamsMenuItems'
 import Logo from 'components/Logo'
 import { APP_COUNT } from '../../constants'
 import SearchableProductMenu from './SearchableProductMenu'
-import {
-    categoryOrder,
-    categoryDisplayNames,
-    categoryIcons,
-    buildCategoryMenuItems,
-    buildProductMenuItems,
-    popularProducts,
-    newestProducts,
-} from '../../constants/productNavigation'
 import useProduct from '../../hooks/useProduct'
 import {
     IconXNotTwitter,
@@ -26,12 +17,10 @@ import {
     IconDictator,
     IconSparksJoy,
 } from 'components/OSIcons'
-import { useApp } from '../../context/App'
+import { useAppSettings } from '../../context/App'
 import { IconChevronDown } from '@posthog/icons'
 import { useHedgehogMode } from 'components/HedgehogMode'
 import { navigate } from 'gatsby'
-import { useToast } from '../../context/Toast'
-import usePostHog from '../../hooks/usePostHog'
 
 interface DocsMenuItem {
     name: string
@@ -239,88 +228,73 @@ const processHandbookSidebar = (items: any[], isRoot = true): any[] => {
         })
 }
 
-// Build Product OS menu items with categories
-const buildProductOSMenuItems = (allProducts: any[]) => {
+// Build Products menu items
+const buildProductsMenuItems = (allProducts: any[]) => {
     const items: any[] = [
         {
             type: 'item',
-            label: `Browse all apps (${APP_COUNT})`,
+            label: 'PostHog Code',
+            link: '/code',
+            icon: <Icons.IconCoffee className="size-4 text-brown" />,
+        },
+        {
+            type: 'item',
+            label: 'PostHog Web',
+            link: '/products',
+            icon: <Icons.IconBolt className="size-4 text-red" />,
+        },
+        {
+            type: 'item',
+            label: 'PostHog Slack',
+            link: '/slack',
+            icon: <Icons.IconAtSign className="size-4 text-sky-blue" />,
+        },
+        {
+            type: 'item',
+            label: 'PostHog MCP',
+            link: '/mcp',
+            icon: <Icons.IconPlug className="size-4 text-gray" />,
+        },
+        {
+            type: 'item',
+            label: 'PostHog CLI',
+            link: '/docs/cli',
+            icon: <Icons.IconTerminal className="size-4 text-green" />,
+        },
+        {
+            type: 'item',
+            label: 'Context Warehouse',
+            link: '/data-stack',
+            icon: <Icons.IconDatabase className="size-4 text-blue" />,
+        },
+        {
+            type: 'separator',
+        },
+        {
+            type: 'item',
+            label: 'PostHog Research',
+            link: '/research',
+            icon: <Icons.IconBrain className="size-4 text-purple" />,
+        },
+        {
+            type: 'separator',
+        },
+        {
+            type: 'item',
+            label: `Browse all tools (${APP_COUNT})`,
             link: '/products',
             icon: <Icons.IconApps className="size-4 text-red" />,
             mobileDestination: '/products',
         },
         {
-            type: 'separator',
-        },
-        {
             type: 'submenu' as const,
-            label: 'Search apps',
+            label: 'Search tools',
             link: '/products',
             items: <SearchableProductMenu products={allProducts} />,
             icon: <Icons.IconSearch className="size-4 text-gray" />,
-            mobileDestination: '/products',
-        },
-        {
-            type: 'submenu',
-            label: 'Popular products',
-            items: buildProductMenuItems(popularProducts, allProducts),
-            icon: <Icons.IconTrending className="size-4 text-green" />,
-            mobileDestination: '/products',
-        },
-        {
-            type: 'submenu',
-            label: 'New products',
-            items: buildProductMenuItems(newestProducts, allProducts),
-            icon: <Icons.IconPresent className="size-4 text-blue" />,
-            mobileDestination: '/products',
-        },
-        {
-            type: 'separator',
-        },
-        {
-            type: 'item',
-            label: 'Categories',
-            disabled: true,
+            mobileDestination: false, // Omit from mobile menu; desktop-only search
         },
     ]
-
-    // Add category submenus
-    categoryOrder.forEach((category) => {
-        const categoryProducts = allProducts.filter((product: any) => product.category === category)
-        if (categoryProducts.length === 0) return
-
-        const categoryItems = buildCategoryMenuItems(category, allProducts)
-        if (categoryItems.length > 0) {
-            // Get the icon for this category
-            let iconElement = null
-            const iconConfig = categoryIcons[category]
-            if (iconConfig) {
-                const IconComponent = Icons[iconConfig.icon as keyof typeof Icons]
-                if (IconComponent) {
-                    iconElement = React.createElement(IconComponent, {
-                        className: `size-4 text-${iconConfig.color}`,
-                    })
-                }
-            }
-
-            // Prepend MCP link as the first item in 'Utilities, add-ons, & packages'
-            if (category === 'product_os') {
-                categoryItems.unshift({
-                    type: 'item' as const,
-                    label: 'MCP',
-                    link: '/mcp',
-                    icon: React.createElement(Icons.IconPlug, { className: 'size-4 text-gray' }),
-                })
-            }
-
-            items.push({
-                type: 'submenu',
-                label: categoryDisplayNames[category] || category,
-                icon: iconElement,
-                items: categoryItems,
-            })
-        }
-    })
 
     return items
 }
@@ -328,25 +302,14 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
 export function useMenuData(): MenuType[] {
     const smallTeamsMenuItems = useSmallTeamsMenuItems()
     const allProducts = useProduct() as any[]
-    const {
-        animateClosingAllWindows,
-        windows,
-        setScreensaverPreviewActive,
-        isMobile,
-        websiteMode,
-        siteSettings,
-        updateSiteSettings,
-    } = useApp()
-    const { addToast } = useToast()
-    const posthog = usePostHog()
+    const { isMobile } = useAppSettings()
     const [hedgehogModeEnabled, setHedgehogModeEnabled] = useHedgehogMode()
 
     // Define main navigation items (excluding logo menu)
     const mainNavItems: MenuType[] = [
         {
-            trigger: 'Product OS',
-            items: buildProductOSMenuItems(allProducts),
-            mobileLink: '/products', // Direct link on mobile
+            trigger: 'Products',
+            items: buildProductsMenuItems(allProducts),
         },
         {
             trigger: 'Pricing',
@@ -526,7 +489,7 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: 'customers.mdx',
+                    label: 'Customers',
                     link: '/customers',
                 },
                 {
@@ -810,36 +773,6 @@ export function useMenuData(): MenuType[] {
             },
             shortcut: [','],
         },
-        ...(isMobile
-            ? []
-            : [
-                  {
-                      type: 'item' as const,
-                      label: websiteMode ? 'Switch to OS mode' : 'Switch to website mode',
-                      onClick: () => {
-                          const newExperience = websiteMode ? 'posthog' : 'boring'
-                          updateSiteSettings({ ...siteSettings, experience: newExperience })
-                          posthog?.capture('switched site mode', {
-                              value: newExperience === 'posthog' ? 'os' : 'website',
-                              source: 'menu',
-                          })
-                          addToast({
-                              title: `Switched to ${websiteMode ? 'OS mode' : 'website mode'}`,
-                              description: `${websiteMode ? 'Click' : 'Hover'} the logo to return to ${
-                                  websiteMode ? 'website mode' : 'OS mode'
-                              }.`,
-                              duration: 5000,
-                              onUndo: () => {
-                                  updateSiteSettings({
-                                      ...siteSettings,
-                                      experience: websiteMode ? 'posthog' : 'boring',
-                                  })
-                              },
-                          })
-                      },
-                      shortcut: ['Shift', 'M'],
-                  },
-              ]),
     ]
 
     // Process main nav items for mobile menu
@@ -934,30 +867,13 @@ export function useMenuData(): MenuType[] {
               ...baseLogoMenuItems,
           ]
         : [
+              {
+                  type: 'item' as const,
+                  label: 'Home',
+                  link: '/',
+              },
               // Desktop: only show system items
               ...baseLogoMenuItems,
-              ...(!websiteMode
-                  ? [
-                        { type: 'separator' as const },
-                        {
-                            type: 'item' as const,
-                            label: 'Start screensaver',
-                            onClick: () => {
-                                setScreensaverPreviewActive(true)
-                            },
-                            shortcut: ['Shift', 'Z'],
-                        },
-                        {
-                            type: 'item' as const,
-                            label: 'Close all windows',
-                            disabled: windows.length < 1,
-                            onClick: () => {
-                                animateClosingAllWindows()
-                            },
-                            shortcut: ['Shift', 'X'],
-                        },
-                    ]
-                  : []),
           ]
 
     return [
@@ -966,22 +882,18 @@ export function useMenuData(): MenuType[] {
                 <>
                     <div className="flex items-center">
                         <Logo
-                            noText
-                            className={`2xs:hidden md:block ${websiteMode ? 'size-10' : 'size-8 md:size-6'}`}
-                            fill="primary"
-                            classic
+                            wordmark={false}
+                            variant="mono"
+                            color="primary"
+                            className="2xs:hidden md:block size-8 md:size-6"
                         />
-                        <Logo
-                            className={`hidden 2xs:flex md:hidden w-auto ${websiteMode ? 'h-7' : ' h-5'} `}
-                            fill="primary"
-                            classic
-                        />
+                        <Logo variant="mono" color="primary" className="hidden 2xs:flex md:hidden w-auto h-5" />
                         <IconChevronDown className="size-6 inline-block md:hidden text-muted" />
                     </div>
                 </>
             ),
             items: logoMenuItems,
-            mobileLink: websiteMode ? '/' : undefined,
+            mobileLink: undefined,
             hideChevron: true,
         },
         // On desktop, show main navigation items

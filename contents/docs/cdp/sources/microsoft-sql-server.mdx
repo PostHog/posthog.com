@@ -46,6 +46,12 @@ Numeric, decimal, and money columns with values exceeding a precision of 76 or s
 
 </CalloutBox>
 
+<CalloutBox icon="IconWarning" title="Invalid object name errors" type="caution">
+
+If your sync fails with "Invalid object name," the database couldn't find a table or view you're syncing. Common causes include dropped or renamed objects, views referencing missing tables, or cross-database permission issues. Check that all synced objects exist and that the connection user has SELECT permissions on them and their dependencies.
+
+</CalloutBox>
+
 import InboundIpAddresses from "../_snippets/inbound-ip-addresses.mdx";
 
 <InboundIpAddresses />

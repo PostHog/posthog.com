@@ -27,6 +27,10 @@ Once the syncs are complete, you can start using Temporal.io data in PostHog.
 
 <SourceParameters />
 
+## Supported tables
+
+<SourceTables />
+
 ## Troubleshooting
 
 If your Temporal.io client certificate is expired, revoked, or no longer trusted by your namespace, syncs pause automatically and display an error message. Here are common TLS certificate errors and how to fix them:

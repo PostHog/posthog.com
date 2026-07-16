@@ -139,9 +139,9 @@ PostHog.CaptureException(
 
 ## Add exception steps
 
-> Available in `posthog-js` 1.370.0 and later.
+> Available in `posthog-js` 1.370.0+, `posthog-react-native` 4.50.0+, `posthog-ios` 3.61.0+, `posthog-android` 3.51.0+, and `posthog_flutter` 5.28.0+.
 
-Exception steps are lightweight breadcrumbs you attach to an exception before calling `captureException(...)`. They are buffered in memory, added to the next exception as `$exception_steps`, and shown in the session timeline.
+Exception steps are lightweight breadcrumbs you attach to an exception with `addExceptionStep(...)`. They are buffered in memory, added to the next exception as `$exception_steps`, and shown in the session timeline.
 
 Use them for high-signal checkpoints like:
 
@@ -159,7 +159,9 @@ Use them for high-signal checkpoints like:
 
 ### Example
 
-```javascript
+<MultiLanguage>
+
+```js file=Web
 posthog.addExceptionStep('checkout_started', {
   cart_total: 12900,
   item_count: 3,
@@ -178,11 +180,93 @@ try {
 }
 ```
 
+```react-native file=React Native
+posthog.addExceptionStep('checkout_started', {
+  cart_total: 12900,
+  item_count: 3,
+})
+
+posthog.addExceptionStep('payment_attempted', {
+  provider: 'stripe',
+})
+
+try {
+  await confirmCardPayment(clientSecret)
+} catch (error) {
+  posthog.captureException(error, {
+    checkout_id: 'chk_123',
+  })
+}
+```
+
+```swift file=iOS
+PostHogSDK.shared.addExceptionStep("checkout_started", properties: [
+    "cart_total": 12900,
+    "item_count": 3,
+])
+
+PostHogSDK.shared.addExceptionStep("payment_attempted", properties: [
+    "provider": "stripe",
+])
+
+do {
+    try confirmCardPayment(clientSecret)
+} catch {
+    PostHogSDK.shared.captureException(error, properties: [
+        "checkout_id": "chk_123",
+    ])
+}
+```
+
+```kotlin file=Android
+PostHog.addExceptionStep("checkout_started", mapOf(
+    "cart_total" to 12900,
+    "item_count" to 3,
+))
+
+PostHog.addExceptionStep("payment_attempted", mapOf(
+    "provider" to "stripe",
+))
+
+try {
+    confirmCardPayment(clientSecret)
+} catch (e: Exception) {
+    PostHog.captureException(e, mapOf(
+        "checkout_id" to "chk_123",
+    ))
+}
+```
+
+```dart file=Flutter
+await Posthog().addExceptionStep('checkout_started', properties: {
+  'cart_total': 12900,
+  'item_count': 3,
+});
+
+await Posthog().addExceptionStep('payment_attempted', properties: {
+  'provider': 'stripe',
+});
+
+try {
+  await confirmCardPayment(clientSecret);
+} catch (error, stackTrace) {
+  await Posthog().captureException(
+    error: error,
+    stackTrace: stackTrace,
+    properties: {'checkout_id': 'chk_123'},
+  );
+}
+```
+
+</MultiLanguage>
+
 ### Configure limits
 
 The buffer is byte-aware: when the budget is exceeded, the oldest steps are evicted. The default is 32KB.
 
-```javascript
+<MultiLanguage>
+
+```js file=Web
 posthog.init('<ph_project_token>', {
   api_host: '<ph_api_client_host>',
   defaults: '<ph_posthog_js_defaults>',
@@ -195,12 +279,47 @@ posthog.init('<ph_project_token>', {
 })
 ```
 
+```react-native file=React Native
+const posthog = new PostHog('<ph_project_token>', {
+  host: '<ph_client_api_host>',
+  errorTracking: {
+    exceptionSteps: {
+      enabled: true,
+      maxBytes: 32768,
+    },
+  },
+})
+```
+
+```swift file=iOS
+let config = PostHogConfig(projectToken: "<ph_project_token>", host: "<ph_client_api_host>")
+config.errorTrackingConfig.exceptionSteps.enabled = true
+config.errorTrackingConfig.exceptionSteps.maxBytes = 32768
+PostHogSDK.shared.setup(config)
+```
+
+```kotlin file=Android
+val config = PostHogAndroidConfig(apiKey = "<ph_project_token>", host = "<ph_client_api_host>").apply {
+    errorTrackingConfig.exceptionSteps.enabled = true
+    errorTrackingConfig.exceptionSteps.maxBytes = 32768
+}
+PostHogAndroid.setup(this, config)
+```
+
+```dart file=Flutter
+final config = PostHogConfig('<ph_project_token>');
+config.errorTrackingConfig.exceptionSteps.enabled = true;
+config.errorTrackingConfig.exceptionSteps.maxBytes = 32768;
+```
+
+</MultiLanguage>
+
 ### Best practices
 
 - Use short step names that describe a checkpoint or action.
 - Keep payloads small and focused.
 - Avoid sensitive data, raw request bodies, and large nested objects.
-- Use the `before_send` callback to redact exception steps before they are sent.
+- Use a `before_send` / `beforeSend` callback to redact exception steps before they are sent.
 - Add steps before the risky operation runs.
 
 ### Troubleshooting missing steps
@@ -208,7 +327,7 @@ posthog.init('<ph_project_token>', {
 If an exception appears in error tracking but not in the timeline with steps:
 
 - Make sure you called `addExceptionStep(...)` before the failure.
-- Use `captureException(...)` or autocapture, not `posthog.capture('$exception', ...)`.
+- Use `captureException(...)` or autocapture, not a manual `$exception` capture.
 - Reduce step payload size if the final event is too large.
 
 ### Error boundaries

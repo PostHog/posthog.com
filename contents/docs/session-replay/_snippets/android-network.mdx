@@ -16,21 +16,4 @@ private val client = OkHttpClient.Builder()
 
 ## Add tracing headers
 
-The same interceptor can also add PostHog tracing headers to specific hosts. Configure exact hostnames with `tracingHeaders`, then add `PostHogOkHttpInterceptor` to the `OkHttpClient` used for those requests.
-
-```android_kotlin
-import com.posthog.PostHogOkHttpInterceptor
-import com.posthog.android.PostHogAndroidConfig
-import okhttp3.OkHttpClient
-
-val config = PostHogAndroidConfig(apiKey = "<ph_project_token>").apply {
-    // Exact hostnames only: no protocol, port, path, or wildcard.
-    tracingHeaders = listOf("api.example.com")
-}
-
-private val client = OkHttpClient.Builder()
-    .addInterceptor(PostHogOkHttpInterceptor(captureNetworkTelemetry = true))
-    .build()
-```
-
-When the request hostname matches, the interceptor adds `X-POSTHOG-DISTINCT-ID` and `X-POSTHOG-SESSION-ID` when those values are available.
+The same interceptor can also add PostHog tracing headers to matching hosts. See the [Android tracing headers docs](/docs/libraries/android#tracing-headers) for setup.

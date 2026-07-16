@@ -73,7 +73,42 @@ PostgreSQL sources created after February 18, 2026 require SSL/TLS encryption fo
 
 <InboundIpAddresses />
 
-> **Note:** We currently don't support connections using IPv6, therefore, you may need to enable IPv4 connections to your database. This is required for Supabase, for example.
+> **Note:** PostHog egresses over IPv4 and does not support IPv6-only database hosts. If your database host only resolves to an IPv6 address, use a connection pooler or enable your provider's IPv4 add-on. See the [troubleshooting section](#network-is-unreachable-or-no-route-to-host) for details.
+
+## Live queries
+
+In addition to syncing data on a schedule, you can enable live queries on a synced Postgres source. This lets you query your Postgres database directly from the [SQL editor](https://app.posthog.com/sql) — queries run against your live database in real time without duplicating data into PostHog.
+
+### Enabling live queries on a new source
+
+When creating a new Postgres source, the source wizard offers three query modes:
+
+- **Sync to PostHog** — Sync selected tables on a schedule. This is the default.
+- **Query live only** — Run queries directly against your database without syncing any data.
+- **Sync and query live** — Sync tables into PostHog and also run live queries against the database from the SQL editor.
+
+Select **Sync and query live** to enable both scheduled syncs and live queries on the same source.
+
+### Enabling live queries on an existing source
+
+1. Go to the [sources tab](https://app.posthog.com/data-management/sources) and click your Postgres source.
+2. Open the **Configuration** tab.
+3. Toggle **Enable live queries** on.
+4. Click **Save** to apply.
+
+Once enabled, you can query your Postgres source directly from the SQL editor.
+
+### Querying a live source
+
+There are two ways to start a live query:
+
+- **From the source page:** Go to the **Schemas** tab on your source and click **Query directly**. This opens the SQL editor with your source connection preselected.
+- **From the SQL editor:** Open the [SQL editor](https://app.posthog.com/sql), click the connection picker in the toolbar, and select your Postgres source. Synced sources with live queries enabled are labeled with `· synced` (e.g., `my_source (Postgres · synced)`) to distinguish them from direct-only connections.
+
+### When to use live queries vs scheduled syncs only
+
+- **Live queries** are best for ad-hoc exploration, querying data that changes frequently, or when you want to query your database without waiting for a sync.
+- **Scheduled syncs only** are better when you need faster query performance, want to join external data with PostHog events in dashboards and insights, or need data available across all PostHog features.
 
 ## Sync methods
 
@@ -388,6 +423,30 @@ For production databases, we recommend enabling CDC on one or two representative
 
 Enable logical replication on the database and restart PostgreSQL. On RDS or Aurora PostgreSQL, set `rds.logical_replication = 1` in the parameter group and restart the instance.
 
+### `Failed to create replication slot` or `permission denied`
+
+This error occurs when the database user lacks permission to create logical replication slots, which is required for CDC.
+
+To fix this, either:
+
+1. **Grant replication permissions** to the PostHog database user:
+
+   For self-managed Postgres or most managed providers:
+
+   ```sql
+   ALTER USER "posthog" WITH REPLICATION;
+   ```
+
+   For AWS RDS:
+
+   ```sql
+   GRANT rds_replication TO "posthog";
+   ```
+
+2. **Switch to Incremental sync** instead of CDC. Incremental sync only requires `SELECT` permission and works well for tables with a reliable timestamp or incrementing ID column. Go to the Schemas tab in your source configuration and change the sync type from CDC to Incremental.
+
+See [Database user permissions](#database-user-permissions) for more details on required permissions.
+
 ### `No replication slot capacity available`
 
 Increase `max_replication_slots` or remove unused slots. Check existing slots with:
@@ -404,5 +463,57 @@ This happens in self-managed mode when PostHog can't find the publication name y
 ### Source is errored because of WAL lag
 
 Check the slot lag query above. If PostHog-managed slot protection dropped the slot, [disable and re-enable CDC](#managing-cdc-after-source-creation) or run a full resync after fixing the underlying issue. If you're in self-managed mode, your DBA must decide whether to keep, advance, or drop the slot.
+
+### `materialized view has not been populated`
+
+This error occurs when you try to sync a materialized view that was created with `WITH NO DATA` and has never been refreshed. PostgreSQL can't read from an unpopulated materialized view.
+
+To fix this, run the following command in your PostgreSQL database:
+
+```sql
+REFRESH MATERIALIZED VIEW "your_view_name";
+```
+
+After refreshing, re-enable the sync in PostHog.
+
+### `exceeded the compute time quota`
+
+This error occurs with serverless Postgres providers like Neon when the account or project has exceeded its compute-time quota. The provider suspends the database until the quota resets at the next billing period or the plan is upgraded.
+
+To fix this, upgrade your provider's plan or wait for the quota to reset, then re-enable the sync in PostHog.
+
+### `cannot call jsonb_each on a non-object`
+
+This error occurs when syncing a view or materialized view whose definition calls `jsonb_each()` or `jsonb_each_text()` on a JSONB column that contains non-object values (such as arrays, scalars, or `null`) for at least one row. PostgreSQL evaluates the view at fetch time, and the `jsonb_each()` function fails on non-object values.
+
+To fix this, update the view definition in your database to guard the `jsonb_each()` call:
+
+```sql
+-- Only process rows where the column is a JSON object
+SELECT key, value
+FROM jsonb_each(your_column)
+WHERE jsonb_typeof(your_column) = 'object'
+```
+
+Alternatively, remove the problematic view from your sync selection in PostHog.
+
+### `Network is unreachable` or `No route to host`
+
+This error occurs when PostHog cannot establish a network route to your PostgreSQL host. The most common cause is an **IPv6-only host** — PostHog egresses over IPv4, so connections to IPv6-only addresses fail.
+
+This is a non-retryable error — PostHog stops syncing until you fix the underlying issue and re-enable the sync or CDC.
+
+Common causes:
+
+- **IPv6-only host** — Your database host only resolves to an IPv6 address, but PostHog egresses over IPv4.
+- **Firewall blocking PostHog's IPs** — Your database server's firewall blocks connections from PostHog's IP addresses.
+- **Private network** — The hostname resolves to a private IP address (like `10.x.x.x`, `172.16.x.x`, or `192.168.x.x`).
+
+Solutions:
+
+- **Use a connection pooler** — Configure a connection pooler (like PgBouncer, Supabase Supavisor, or Neon's pooler) that's reachable over IPv4, then point PostHog at the pooler's host and port.
+- **Enable IPv4 on your provider** — Many managed Postgres providers offer IPv4 add-ons or dual-stack endpoints (e.g., Supabase IPv4 add-on, Neon's shared pooler).
+- **Allowlist PostHog's IPs** — If your firewall is blocking connections, allowlist PostHog's IP addresses (see the [Inbound IP addresses](#inbound-ip-addresses) section above).
+- **Use an SSH tunnel** — If your database is on a private network, configure an SSH tunnel during source setup.
 
 > **Looking for an example of the Postgres source?** Check out our tutorial where we [connect and query Supabase data](/tutorials/supabase-query).
