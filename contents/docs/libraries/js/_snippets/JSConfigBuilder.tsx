@@ -14,7 +14,7 @@ const generateCode = (config: ConfigState): string => {
     if (checkboxes.spaMode) configLines.push(`    capture_pageview: 'history_change',`)
     if (!checkboxes.enableSessionRecording) configLines.push(`    disable_session_recording: true,`)
     if (checkboxes.recordConsoleLogs) configLines.push(`    enable_recording_console_log: true,`)
-    if (checkboxes.enableHeatmaps) configLines.push(`    enable_heatmaps: true,`)
+    if (checkboxes.enableHeatmaps) configLines.push(`    capture_heatmaps: true,`)
     if (!checkboxes.enableSurveys) configLines.push(`    disable_surveys: true,`)
     if (checkboxes.disableFeatureFlags) configLines.push(`    advanced_disable_feature_flags: true,`)
     if (checkboxes.maskAllText) configLines.push(`    mask_all_text: true,`)
