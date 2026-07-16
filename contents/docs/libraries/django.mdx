@@ -15,7 +15,7 @@ This guide walks you through integrating PostHog into your Django app using the 
 
 To start, run `pip install posthog` to install PostHog’s Python SDK.
 
-> **Note:** These docs cover version `7.x` of the PostHog Python SDK, which requires Python 3.10 or higher. On Python 3.9 or older, see [For Python versions 3.9 and older](#for-python-versions-39-and-older).
+> **Note:** These docs cover version `7.x` of the PostHog Python SDK, which requires Python 3.10 or higher. On Python 3.9, pin to `posthog<7` — `6.9.3` is the last 6.x release, and everything on this page works the same way there.
 
 Then, configure PostHog in your app config so it's initialized when Django starts:
 
@@ -80,7 +80,3 @@ Alternatively, the following tutorials can help you get started:
 
 - [Setting up Django analytics, feature flags, and more](/tutorials/django-analytics)
 - [How to set up A/B tests in Django](/tutorials/django-ab-tests)
-
-import PythonSdkLegacyVersions from '../_snippets/python-sdk-legacy-versions.mdx'
-
-<PythonSdkLegacyVersions />

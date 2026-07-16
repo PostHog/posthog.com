@@ -17,7 +17,7 @@ features:
 
 The Python SDK makes it easy to capture events, evaluate feature flags, track errors, and more in your Python apps.
 
-> These docs cover version `7.x` of the PostHog Python SDK, which requires Python 3.10 or higher. On Python 3.9 or older, see [For Python versions 3.9 and older](#for-python-versions-39-and-older).
+> These docs cover version `7.x` of the PostHog Python SDK, which requires Python 3.10 or higher. On Python 3.9, pin to `posthog<7` — `6.9.3` is the last 6.x release, and everything on this page works the same way there.
 
 
 ## Installation
@@ -330,10 +330,6 @@ See our [Django docs](/docs/libraries/django) for how to set up PostHog in Djang
 ## Alternative name
 
 As our open source project [PostHog](https://github.com/PostHog/posthog) shares the same module name, we created a special `posthoganalytics` package, mostly for internal use to avoid module collision. It is the exact same.
-
-import PythonSdkLegacyVersions from '../../_snippets/python-sdk-legacy-versions.mdx'
-
-<PythonSdkLegacyVersions />
 
 ## Thank you
 
