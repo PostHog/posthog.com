@@ -9,7 +9,7 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 ID-JAG (Identity Assertion JWT Authorization Grant, also called [XAA](https://xaa.dev)) lets your organization's identity provider (IdP) — like Okta, Microsoft Entra ID, or any OIDC-compliant SSO — issue short-lived tokens that grant programmatic access to PostHog. Instead of each user creating a [personal API key](/docs/api#authentication) or running an [OAuth](/docs/api/oauth) flow, your IdP issues an **ID-JAG** that's exchanged with PostHog for a short-lived access token. Access is granted, scoped, and revoked centrally in your IdP.
 
-<CalloutBox icon="IconInfo" title="ID-JAG/XAA is in beta" type="fyi">
+<CalloutBox icon="IconFlask" title="ID-JAG/XAA is in beta" type="action">
 
 ID-JAG/XAA is currently in `beta`. This means the flow and configuration are subject to change, and the underlying ID-JAG spec is still evolving.
 

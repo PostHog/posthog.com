@@ -28,6 +28,10 @@ Once the syncs are complete, you can start using MongoDB data in PostHog.
 
 <SourceParameters />
 
+## Supported tables
+
+<SourceTables />
+
 ### Incremental and append-only syncing
 
 MongoDB supports incremental and append-only sync methods. For a field to be available for these sync methods, it must:
@@ -40,6 +44,18 @@ MongoDB supports incremental and append-only sync methods. For a field to be ava
    - `objectId` (only for the `_id` field)
 
 PostHog infers field types from the first 10,000 documents in the collection, so fields with mixed types may resolve to an unsupported type.
+
+## Troubleshooting
+
+### No collections found
+
+PostHog connected to MongoDB but reports no collections in the selected database. This usually means one of the following:
+
+- **Wrong database in connection string** – A connection string ending in `/admin` or `/test` connects to an empty system database. Update it to point to the database that holds your data.
+
+- **Database name not specified** – Atlas `mongodb+srv://` strings often omit the database name. Set the **Database name** field in PostHog to the correct database.
+
+- **Missing read permissions** – Collection listing is filtered by authorization. Ensure your database user has a read role (such as `read` or `readAnyDatabase`) on the target database.
 
 import InboundIpAddresses from '../\_snippets/inbound-ip-addresses.mdx'
 

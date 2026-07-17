@@ -53,3 +53,7 @@ Connect PostHog to your Snapchat Ads account using a Snapchat account. The Snapc
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

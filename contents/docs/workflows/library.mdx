@@ -106,6 +106,18 @@ You can type Liquid syntax directly into your email template. We also provide a 
 
 If you type Liquid syntax directly and the Liquid doesn't compile correctly, the email won't be sent. Always verify your Liquid syntax is valid before starting a workflow.
 
+### Disabling link click tracking
+
+PostHog automatically rewrites every link in an email to route through a click-tracking redirect, which powers the `$workflows_email_link_clicked` [engagement event](/docs/workflows/engagement-events).
+
+If you need a link to reach its destination exactly as written, add an HTML block and mark the anchor with either `clicktracking="off"` or `data-ph-no-track`:
+
+```html
+<a href="https://example.com/your-link" data-ph-no-track>Open link</a>
+```
+
+The attribute must be on the `<a>` tag itself, not a child element. Links marked this way won't produce click events.
+
 ### Testing templates
 
 It's best practice to test a message in a workflow before starting the workflow. This helps ensure your template displays correctly with real user data and that all Liquid variables resolve properly.

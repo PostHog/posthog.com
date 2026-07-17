@@ -43,6 +43,10 @@ Once the syncs are complete, you can start using Google Sheets data in PostHog.
 
 <SourceParameters />
 
+## Supported tables
+
+<SourceTables />
+
 ## Incremental and append only syncs
 
 To enable incremental or append only syncs of your spreadsheet, we require a numerical `id` column with auto-incrementing values. This can be achieved by using the formula `=ROW()` in a column with the column header (row 1) being set to `id`. This will then sync only newly added rows to PostHog

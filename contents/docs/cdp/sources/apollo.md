@@ -19,7 +19,7 @@ The Apollo connector syncs your Apollo CRM data to PostHog. The following object
 
 Contacts and accounts support incremental sync using the `updated_at` field, so only new or changed records are fetched after the first sync. Opportunities always perform a full refresh because Apollo doesn't support sorting on this endpoint.
 
-<CalloutBox icon="IconWarning" title="Alpha release" type="caution">
+<CalloutBox icon="IconFlask" title="Alpha release" type="action">
 
 The Apollo source is in alpha. It has been tested against Apollo's API documentation but not yet validated with live credentials. If you run into issues, please report them.
 
@@ -50,3 +50,7 @@ If the cap is reached during a sync, PostHog logs an error so the truncation is 
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

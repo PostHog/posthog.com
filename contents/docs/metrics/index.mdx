@@ -1,0 +1,230 @@
+---
+title: Metrics
+---
+
+> **Note:** Metrics is in alpha. Setup details, including the ingestion endpoint, may change before general availability.
+
+PostHog Metrics lets you send application and infrastructure metrics (request counts, latencies, queue depths, resource usage) to PostHog and analyze them alongside your [logs](/docs/logs), [traces](/docs/distributed-tracing), and product data.
+
+There are two ways to send metrics:
+
+1. **Already have PostHog installed?** Record metrics directly with the [`posthog.metrics` API](#already-have-posthog-installed-use-posthogmetrics) built into the PostHog SDK, with no extra packages.
+2. **Using OpenTelemetry?** Point any standard OpenTelemetry library or Collector at [PostHog's OTLP endpoint](#set-up-metrics-with-opentelemetry), with no PostHog-specific packages.
+
+## Already have PostHog installed? Use posthog.metrics
+
+If [posthog-js](/docs/libraries/js) is already running on your site, you can record metrics immediately: no OpenTelemetry setup, no new dependencies, and no extra authentication beyond the project API key you already configured:
+
+```js
+// A counter for things that only go up
+posthog.metrics.count('checkout.completed')
+
+// A gauge for values that go up and down
+posthog.metrics.gauge('cart.items', 3)
+
+// A histogram for distributions like durations
+posthog.metrics.histogram('api.request.duration', 187, { unit: 'ms' })
+```
+
+Add attributes to slice a metric by dimension, and set a service name so your metrics are easy to find and filter:
+
+```js
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    metrics: {
+        serviceName: 'storefront-web',
+        environment: 'production',
+    },
+})
+
+posthog.metrics.count('checkout.completed', 1, { attributes: { plan: 'pro' } })
+posthog.metrics.histogram('api.request.duration', 187, {
+    unit: 'ms',
+    attributes: { route: '/api/checkout', status: '200' },
+})
+```
+
+Metrics are safe to record from hot paths. Samples are aggregated in memory and sent as one data point per series every 10 seconds, so a burst of 10,000 `count()` calls costs one data point on the wire. Pending metrics are flushed automatically when the page is hidden or closed, and you can force a flush with `posthog.metrics.flush()`.
+
+The `metrics` config also accepts `flushIntervalMs`, `maxSeriesPerFlush` (a cardinality guardrail, default 1000 series per window), `resourceAttributes`, and a `beforeSend` hook to filter or modify metrics before they're aggregated.
+
+Metrics deliberately carry no user or session context: every distinct attribute value creates a new series, so attach low-cardinality dimensions like plan, route, or status. Never attach user IDs.
+
+> **Note:** `posthog.metrics` is currently available in posthog-js (web). Support in posthog-node and other SDKs is coming. If you're on another SDK, or not using PostHog SDKs at all, use the OpenTelemetry setup below.
+
+## Set up metrics with OpenTelemetry
+
+### 1. Get your project token
+
+You'll need your PostHog project token to authenticate metric requests. This is the same token you use for capturing events with the PostHog SDK.
+
+> **Important:** Use your **project token**, which starts with `phc_`. Do **not** use a personal API key (which starts with `phx_`).
+
+You can find your project token in [Project Settings](https://app.posthog.com/settings).
+
+### 2. Point your OTLP metrics exporter at PostHog
+
+Metrics are ingested over the OpenTelemetry Protocol (OTLP) via HTTP. Configure your OpenTelemetry SDK with these environment variables:
+
+```bash
+OTEL_EXPORTER_OTLP_METRICS_ENDPOINT="<ph_client_api_host>/i/v1/metrics"
+OTEL_EXPORTER_OTLP_METRICS_HEADERS="Authorization=Bearer <ph_project_token>"
+OTEL_SERVICE_NAME="my-app"
+```
+
+Alternatively, you can pass the token as a query parameter instead of a header:
+
+```bash
+OTEL_EXPORTER_OTLP_METRICS_ENDPOINT="<ph_client_api_host>/i/v1/metrics?token=<ph_project_token>"
+```
+
+### 3. Record metrics from your code
+
+If you'd rather configure the exporter in code, here's a complete setup.
+
+#### Python
+
+```bash
+pip install opentelemetry-api opentelemetry-sdk opentelemetry-exporter-otlp
+```
+
+```python
+from opentelemetry import metrics
+from opentelemetry.sdk.metrics import MeterProvider
+from opentelemetry.sdk.metrics.export import PeriodicExportingMetricReader
+from opentelemetry.exporter.otlp.proto.http.metric_exporter import OTLPMetricExporter
+
+exporter = OTLPMetricExporter(
+    endpoint="<ph_client_api_host>/i/v1/metrics",
+    headers={"Authorization": "Bearer <ph_project_token>"},
+)
+reader = PeriodicExportingMetricReader(exporter, export_interval_millis=15000)
+metrics.set_meter_provider(MeterProvider(metric_readers=[reader]))
+
+meter = metrics.get_meter("my-app")
+
+# A counter for things that only go up
+checkouts = meter.create_counter("checkouts", description="Completed checkouts")
+checkouts.add(1, {"plan": "pro"})
+
+# A histogram for distributions like durations
+request_duration = meter.create_histogram("http.request.duration", unit="ms")
+request_duration.record(42.5, {"route": "/api/checkout", "status": "200"})
+```
+
+#### Node.js
+
+```bash
+npm install @opentelemetry/api @opentelemetry/sdk-metrics @opentelemetry/exporter-metrics-otlp-http
+```
+
+```typescript
+import { metrics } from '@opentelemetry/api'
+import { OTLPMetricExporter } from '@opentelemetry/exporter-metrics-otlp-http'
+import { MeterProvider, PeriodicExportingMetricReader } from '@opentelemetry/sdk-metrics'
+
+const exporter = new OTLPMetricExporter({
+    url: '<ph_client_api_host>/i/v1/metrics',
+    headers: { Authorization: 'Bearer <ph_project_token>' },
+})
+
+const meterProvider = new MeterProvider({
+    readers: [new PeriodicExportingMetricReader({ exporter, exportIntervalMillis: 15000 })],
+})
+metrics.setGlobalMeterProvider(meterProvider)
+
+const meter = metrics.getMeter('my-app')
+
+// A counter for things that only go up
+const checkouts = meter.createCounter('checkouts', { description: 'Completed checkouts' })
+checkouts.add(1, { plan: 'pro' })
+
+// A gauge for values that go up and down
+const queueDepth = meter.createGauge('queue.depth')
+queueDepth.record(17, { queue: 'emails' })
+```
+
+> **Note:** If your language isn't listed, any OpenTelemetry SDK works. Check the [OpenTelemetry documentation](https://opentelemetry.io/docs/languages/) for your language and point its OTLP metrics exporter at PostHog.
+
+### Already running an OpenTelemetry Collector?
+
+If your services already ship metrics to an [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/), add PostHog as an exporter, with no application changes needed:
+
+```yaml
+exporters:
+  otlphttp/posthog:
+    metrics_endpoint: "<ph_client_api_host>/i/v1/metrics"
+    headers:
+      Authorization: "Bearer <ph_project_token>"
+
+service:
+  pipelines:
+    metrics:
+      receivers: [otlp]
+      exporters: [otlphttp/posthog]
+```
+
+## Supported metric types
+
+PostHog ingests all OTLP metric types:
+
+| Type | What it's for | Example |
+|------|---------------|---------|
+| **Counter (sum)** | Values that only go up | Requests served, checkouts completed |
+| **Gauge** | Values that go up and down | Queue depth, memory in use, active connections |
+| **Histogram** | Distributions | Request duration, payload size |
+| **Exponential histogram** | Distributions with automatic bucketing | Same as histogram, with better resolution across wide ranges |
+| **Summary** | Pre-computed quantiles | Latency percentiles from legacy clients |
+
+A metric's identity is its **name, type, and attributes** together. `http.requests` with `{route: "/home"}` and `http.requests` with `{route: "/checkout"}` are separate series, so keep attribute values low-cardinality. Attach things like route, status, or plan, not user IDs or request IDs.
+
+### Naming and units
+
+Give metrics descriptive, dot-separated names like `checkout.failed`, `email.sent`, or `queue.depth`, not vague ones like `metric1` or `counter`. Set an explicit unit on histograms (`ms`, `bytes`) so charts are unambiguous. Use one name per metric type: recording `queue.depth` as both a gauge and a counter blends both series in charts.
+
+### What to instrument
+
+Good starting points:
+
+- **Critical operations**: count successes and failures of the flows that matter: checkouts, signups, imports
+- **Service boundaries**: time external API calls and database queries with histograms
+- **Business events**: counters for orders, upgrades, or invites, sliced by plan or region
+- **Resource usage**: gauge queue depths, connection pools, and cache sizes
+
+## Use your metrics
+
+Once metrics are flowing, open [Metrics](https://app.posthog.com/metrics) in PostHog.
+
+### Chart metrics in the viewer
+
+The **Viewer** tab lets you explore metrics without writing any queries:
+
+- **Pick a metric** by name to chart it over time
+- **Choose an aggregation**: sum, average, count, p95, rate, or increase. The viewer recommends one based on the metric's type: increase for counters, average for gauges, p95 for histograms
+- **Group by attributes** to break a metric down into one line per value, like per route or per status code
+- **Filter** to the series you care about, and adjust the date range
+
+### Query metrics with SQL
+
+The **SQL** tab gives you direct access to your metrics with [SQL](/docs/sql):
+
+```sql
+SELECT * FROM posthog.metrics LIMIT 10
+```
+
+Use it for anything the viewer doesn't cover, joining metrics against each other, custom math, or ad-hoc exploration of raw data points.
+
+## Troubleshooting
+
+**No metrics showing up?**
+
+1. Check you're using your **project token** (`phc_...`), not a personal API key (`phx_...`)
+2. Check the endpoint path is exactly `/i/v1/metrics`, requests without a token return `401 Unauthorized`
+3. OTLP SDKs export on an interval (60 seconds by default), lower `export_interval_millis` while testing, and in short-lived scripts flush before exit (`meterProvider.forceFlush()` / `shutdown()`), or your metrics may never be sent
+4. Using `posthog.metrics`? The SDK flushes every 10 seconds, call `posthog.metrics.flush()` to send immediately while testing, and check you're not opted out of capturing
+
+## Next steps
+
+- **[Logs](/docs/logs)**: capture what happened at each point, using the same OpenTelemetry setup
+- **[Distributed tracing](/docs/distributed-tracing)**: follow requests across your services
+- **[Error tracking](/docs/error-tracking)**: turn failures into issues you can assign and resolve

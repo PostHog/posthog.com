@@ -7,7 +7,7 @@ import EarlyAccessOptIn from 'components/EarlyAccessOptIn'
 // Product configuration - change this to adapt for different products
 const PRODUCT_HANDLE = 'mcp_analytics'
 
-// MCP analytics is gated behind the `mcp-analytics` early access feature in the app. Logins
+// MCP Analytics is gated behind the `mcp-analytics` early access feature in the app. Logins
 // aren't shared between posthog.com and the app, so we can't enroll the visitor's website
 // identity here — instead the opt-in links to the app, where the signed-in user can join the
 // beta. See src/components/EarlyAccessOptIn/README.md.
@@ -74,7 +74,7 @@ export default function MCPAnalytics(): JSX.Element {
     const slides = createSlideConfig({
         include: ['overview', 'features', 'answers', 'docs', 'pairs-with'],
         templates: {
-            overview: 'columns',
+            overview: 'stacked',
         },
     })
 

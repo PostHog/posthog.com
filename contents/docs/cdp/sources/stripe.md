@@ -11,6 +11,10 @@ sourceId: Stripe
 
 The Stripe connector syncs your Stripe data into PostHog, including charges, customers, invoices, products, subscriptions, and more.
 
+## Prerequisites
+
+You need a Stripe account and either a restricted API key or an OAuth connection. For the best experience, create a restricted API key with **Write** access to **Webhooks** so PostHog can set up real-time webhook syncing for you.
+
 ## Choosing a sync mode
 
 Stripe tables can be synced in one of three modes, and the one you pick has a big impact on cost, freshness, and correctness. We **strongly recommend using webhook syncs** for any Stripe source you care about keeping accurate:
@@ -65,6 +69,10 @@ The data warehouse then starts syncing your Stripe data. You can see details and
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />
 
 ## Setting up webhooks for real-time syncing
 

@@ -9,6 +9,7 @@ import List from 'components/List'
 import Link from 'components/Link'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { SingleCodeBlock } from 'components/CodeBlock'
+import PlatformInstall from 'components/PlatformInstall'
 import WizardCTA from 'components/WizardCTA'
 import WistiaEmbed from 'components/WistiaEmbed'
 import usePlatformList from 'hooks/docs/usePlatformList'
@@ -233,9 +234,7 @@ export default function ProductAnalyticsLanding(): JSX.Element {
 
                             <h3>Install in 30 seconds</h3>
 
-                            <SingleCodeBlock language="bash" showAskAI={false}>
-                                npx @posthog/wizard mcp add
-                            </SingleCodeBlock>
+                            <PlatformInstall variant="inline" command="mcp add" slim />
 
                             <h3>Try prompts like</h3>
 

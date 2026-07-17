@@ -21,6 +21,7 @@ import { OverflowXSection } from 'components/OverflowXSection'
 import APIExamples from 'components/Product/Pipelines/APIExamples'
 import Configuration from 'components/Product/Pipelines/Configuration'
 import SourceConfiguration from 'components/Product/Sources/Configuration'
+import SourceTables from 'components/Product/Sources/Tables'
 import Link from 'components/Link'
 import SEO from 'components/seo'
 import { IconWarning, IconCheck, IconX } from '@posthog/icons'
@@ -35,6 +36,8 @@ import { useState } from 'react'
 import SidebarSection from 'components/PostLayout/SidebarSection'
 import Contributor from 'components/Docs/Contributors'
 import { useProductInterestFromPathname } from 'hooks/useProductInterest'
+import useProduct from 'hooks/useProduct'
+import { buildProductMenuTabs, ProductSwitcher } from 'components/Products/ReaderViewProduct'
 import slugify from 'slugify'
 import usePostHog from 'hooks/usePostHog'
 import { RenderInClient } from 'components/RenderInClient'
@@ -307,6 +310,24 @@ export const SourceParametersFactory: (params: SourceParametersProps) => React.F
     return SourceParameters
 }
 
+type SourceTablesProps = {
+    tables:
+        | {
+              name?: string | null
+              label?: string | null
+              description?: string | null
+              sync_methods?: (string | null)[] | null
+              incremental_fields?: (string | null)[] | null
+              primary_keys?: (string | null)[] | null
+          }[]
+        | null
+}
+
+export const SourceTablesFactory: (params: SourceTablesProps) => React.FC = ({ tables }) => {
+    const SourceTablesComponent = () => <SourceTables tables={tables} />
+    return SourceTablesComponent
+}
+
 const A = (props) => <Link {...props} />
 
 export default function Handbook({ data: { post, postHogSource }, pageContext: { breadcrumbBase, tableOfContents } }) {
@@ -330,10 +351,30 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
     } = post
 
     const sourceFields = postHogSource?.sourceFields ?? null
+    const sourceTables = postHogSource?.tables ?? null
     const posthog = usePostHog()
 
     // Track product interest for cross-subdomain cookie
     useProductInterestFromPathname(slug)
+
+    // When a docs page lives under `/docs/<product-slug>/...` and that product
+    // has opted in to ReaderViewProduct (i.e. defines `productMenu`), render
+    // the same Product/Pricing/Docs tab strip + product switcher as the
+    // dedicated `pages/docs/<product-slug>.tsx` and `pages/<product-slug>` so
+    // the sidebar feels continuous when navigating into individual docs pages.
+    const allProducts = useProduct() as any[]
+    const docsProductSlug = typeof slug === 'string' && slug.startsWith('/docs/') ? slug.split('/')[2] : null
+    const productSurfaceData = docsProductSlug
+        ? allProducts.find((p: any) => {
+              const lastSegment = p.slug?.split('/').pop()
+              return lastSegment === docsProductSlug
+          })
+        : null
+    const isProductDocsPage = !!productSurfaceData?.productMenu?.length
+    const productMenuTabs = isProductDocsPage
+        ? buildProductMenuTabs({ productData: productSurfaceData, activeSurface: 'docs' })
+        : undefined
+    const productSelect = isProductDocsPage ? <ProductSwitcher activeHandle={productSurfaceData.handle} /> : undefined
 
     const components = {
         Team,
@@ -353,6 +394,7 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
         AppParameters: AppParametersFactory({ config: appConfig }),
         TemplateParameters: TemplateParametersFactory(templateConfigs),
         SourceParameters: SourceParametersFactory({ sourceFields }),
+        SourceTables: SourceTablesFactory({ tables: sourceTables }),
         TeamRoadmap: (props) => TeamRoadmap({ team: title?.replace(/team/gi, '').trim(), ...props }),
         TeamMembers: (props) => TeamMembers({ team: title?.replace(/team/gi, '').trim(), ...props }),
         CategoryData,
@@ -399,12 +441,12 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
             mdxComponents={components}
             commits={commits}
             filePath={post.parent?.relativePath}
-            homeURL={breadcrumbBase.url}
-            description={seo?.metaDescription || excerpt}
             showSurvey
             hideRightSidebar={hideRightSidebar}
             contentMaxWidthClass={contentMaxWidthClass}
             sourceInstanceName={post.parent?.sourceInstanceName}
+            menuTabs={productMenuTabs}
+            productSelect={productSelect}
         />
     )
 
@@ -444,6 +486,14 @@ export const query = graphql`
                 required
                 placeholder
                 caption
+            }
+            tables {
+                name
+                label
+                description
+                sync_methods
+                incremental_fields
+                primary_keys
             }
         }
         glossary: allMdx(filter: { fields: { slug: { in: $links } } }) {
