@@ -6,6 +6,7 @@ import { IconCheckCircle } from '@posthog/icons'
 import { IconDiscord } from 'components/OSIcons/Icons'
 import { useApp } from '../../context/App'
 import usePostHog from '../../hooks/usePostHog'
+import usePrimeEarlyAccessFeatures from '../../hooks/usePrimeEarlyAccessFeatures'
 
 interface SurveySignupProps {
     /** PostHog Survey id to record the response against. If omitted, no survey event fires. */
@@ -63,6 +64,10 @@ export function SurveySignup({
     const [email, setEmail] = useState('')
     const [submitted, setSubmitted] = useState(false)
     const [error, setError] = useState('')
+
+    // Load the EAF list before submit so the enrollment event carries $early_access_feature_name —
+    // the Customer.io waitlist flow's trigger requires it.
+    usePrimeEarlyAccessFeatures(flagKey)
 
     // Remember sign-ups locally so returning visitors see their "on the list" state
     // instead of being asked again. Best-effort — localStorage can be unavailable.

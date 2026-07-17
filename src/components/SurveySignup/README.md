@@ -16,12 +16,15 @@ can then notify everyone when the feature ships (handled separately).
 
 When `flagKey` is set, a successful submit also mirrors the in-app coming-soon waitlist by
 calling `posthog.updateEarlyAccessFeatureEnrollment(flagKey, true, 'concept')`, which fires
-`$feature_enrollment_update` with `$feature_flag`, `$feature_enrollment: true`, and
-`$feature_enrollment_stage: 'concept'`, and sets the `$feature_enrollment/<flagKey>: true`
-person property. Every submit also sets the `email` person property so downstream flows
-(e.g. Customer.io triggered by the enrollment event) can reach the person. Note: the SDK
-call also overrides the flag to `true` in the visitor's local persistence — harmless on
-posthog.com, which doesn't gate anything on these app flags.
+`$feature_enrollment_update` with `$feature_flag`, `$feature_enrollment: true`,
+`$feature_enrollment_stage: 'concept'`, and `$early_access_feature_name`, and sets the
+`$feature_enrollment/<flagKey>: true` person property. The form pre-loads the EAF list via
+`usePrimeEarlyAccessFeatures` — posthog-js only attaches the feature name when the list is
+in local persistence, and the Customer.io "Waitlist, Alpha, Beta onboarding" flow triggers
+only when both the name and stage properties are present. Every submit also sets the
+`email` person property so downstream flows can reach the person. Note: the SDK call also
+overrides the flag to `true` in the visitor's local persistence — harmless on posthog.com,
+which doesn't gate anything on these app flags.
 
 ## Props
 
