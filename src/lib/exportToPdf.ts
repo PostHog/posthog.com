@@ -1,6 +1,3 @@
-import { toJpeg } from 'html-to-image'
-import jsPDF from 'jspdf'
-
 interface ExportToPdfOptions {
     slideId?: string
     filename?: string
@@ -13,6 +10,10 @@ const formatProductName = (handle: string): string => {
 
 export const exportToPdf = async ({ slideId, filename }: ExportToPdfOptions = {}) => {
     try {
+        // jspdf (~330 KiB) and html-to-image are only needed for this export, so load them
+        // on demand to keep them out of the always-loaded bundle.
+        const [{ default: jsPDF }, { toJpeg }] = await Promise.all([import('jspdf'), import('html-to-image')])
+
         let finalFilename = filename
         if (!finalFilename && slideId) {
             const productName = formatProductName(slideId)
@@ -70,6 +71,7 @@ export const exportToPdf = async ({ slideId, filename }: ExportToPdfOptions = {}
                     quality: 0.8, // Reduced quality for compression
                     pixelRatio: 1.5, // Reduced from 2 to 1.5
                     backgroundColor: '#ffffff',
+                    skipFonts: true,
                 })
 
                 // Add new page for each slide (except the first one)

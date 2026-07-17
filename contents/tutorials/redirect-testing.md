@@ -35,7 +35,7 @@ cd redirect-test
 npm i posthog-js
 ```
 
-Next, in the `redirect-test/app` folder, create a `providers.js` file and set up a component that returns an initialized `PostHogProvider`. You can get the project API key and instance address you need for initialization from [your project settings](https://app.posthog.com/project/settings).
+Next, in the `redirect-test/app` folder, create a `providers.js` file and set up a component that returns an initialized `PostHogProvider`. You can get the project token and instance address you need for initialization from [your project settings](https://app.posthog.com/project/settings).
 
 ```js
 // app/providers.js
@@ -44,7 +44,7 @@ import posthog from 'posthog-js'
 import { PostHogProvider } from '@posthog/react'
 
 if (typeof window !== 'undefined') {
-  posthog.init("<ph_project_api_key>", {
+  posthog.init("<ph_project_token>", {
     api_host: "<ph_client_api_host>"
   })
 }
@@ -169,14 +169,14 @@ To do this, we need to:
 1. Check if a `distinct_id` exists in the PostHog cookie, and use it if so.
 2. Create a `distinct_id` if not.
 
-This requires using your project API key to get the cookies, parsing them as JSON, and potentially creating a distinct ID using `crypto.randomUUID()`. Altogether, this looks like this:
+This requires using your project token to get the cookies, parsing them as JSON, and potentially creating a distinct ID using `crypto.randomUUID()`. Altogether, this looks like this:
 
 ```js
 import { NextResponse } from 'next/server'
 
 export async function middleware(request) {
-  const ph_project_api_key = '<ph_project_api_key>'
-  const ph_cookie_key = `ph_${ph_project_api_key}_posthog`
+  const ph_project_token = '<ph_project_token>'
+  const ph_cookie_key = `ph_${ph_project_token}_posthog`
   const cookie = request.cookies.get(ph_cookie_key);
 
   let distinct_id;
@@ -194,7 +194,7 @@ export async function middleware(request) {
 
 With our distinct ID, we use the PostHog API to check the value of the `main-redirect` feature flag for a user (because [we can’t use PostHog SDKs in Next.js middleware](https://vercel.com/docs/functions/edge-functions/edge-runtime#supported-apis)). This is known as evaluating the feature flag.
 
-Specifically, we evaluate the flag by making a POST request to the [flags](/docs/api/flags) route with your project API key and user distinct ID. From the response, we get the value of the `main-redirect` feature flag and use it to redirect to the right page. Altogether, it looks like this:
+Specifically, we evaluate the flag by making a POST request to the [flags](/docs/api/flags) route with your project token and user distinct ID. From the response, we get the value of the `main-redirect` feature flag and use it to redirect to the right page. Altogether, it looks like this:
 
 ```js
 // redirect-test/middleware.js
@@ -206,7 +206,7 @@ Specifically, we evaluate the flag by making a POST request to the [flags](/docs
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      api_key: ph_project_api_key,
+      token: ph_project_token,
       distinct_id: distinct_id
     })
   };
@@ -247,7 +247,7 @@ const eventOptions = {
     'Content-Type': 'application/json'
   },
   body: JSON.stringify({
-    api_key: ph_project_api_key,
+    api_key: ph_project_token,
     distinct_id: distinct_id,
     properties: {
       "$feature_flag": 'main-redirect',
@@ -280,8 +280,8 @@ When put together with everything else, our final `middleware.js` file looks lik
 import { NextResponse } from 'next/server'
 
 export async function middleware(request) {
-  const ph_project_api_key = '<ph_project_api_key>'
-  const ph_cookie_key = `ph_${ph_project_api_key}_posthog`
+  const ph_project_token = '<ph_project_token>'
+  const ph_cookie_key = `ph_${ph_project_token}_posthog`
   const cookie = request.cookies.get(ph_cookie_key);
   const bootstrapCookie = request.cookies.get('bootstrapData');
 
@@ -301,7 +301,7 @@ export async function middleware(request) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      api_key: ph_project_api_key,
+      api_key: ph_project_token,
       distinct_id: distinct_id
     })
   };
@@ -321,7 +321,7 @@ export async function middleware(request) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      api_key: ph_project_api_key,
+      api_key: ph_project_token,
       distinct_id: distinct_id,
       properties: {
         "$feature_flag": 'main-redirect',
@@ -389,7 +389,7 @@ if (typeof window !== 'undefined') {
     parsedBootstrapData = JSON.parse(flags)
   }
 
-  posthog.init("<ph_posthog_project_api_key", {
+  posthog.init("<ph_project_token>", {
     api_host: "<ph_client_api_host>",
     bootstrap: parsedBootstrapData
   })

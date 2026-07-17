@@ -2,7 +2,7 @@ import Link from 'components/Link'
 import { getStatusColor, getStatusDescription, useAppStatus } from 'hooks/useAppStatus'
 import React from 'react'
 
-export default function AppStatus() {
+export default function AppStatus({ textClassName = '' }: { textClassName?: string }) {
     const { loading, status: appStatus } = useAppStatus()
 
     return loading ? null : (
@@ -12,7 +12,7 @@ export default function AppStatus() {
             externalNoIcon
         >
             <span className={`text-2xl -mt-1 ${getStatusColor(appStatus)}`}>&bull;</span>
-            <span className="text-sm group-hover:underline">{getStatusDescription(appStatus)}</span>
+            <span className={`text-sm group-hover:underline ${textClassName}`}>{getStatusDescription(appStatus)}</span>
         </Link>
     )
 }

@@ -65,7 +65,7 @@ It also enables engineers to be more confident in continuously deploying it. Thi
 
 Large feature branches can often have hundreds or thousands of lines of changes. Developers dread massive pull requests (PRs AKA merge requests) for a reason. Reviewing these requires a significant amount of overhead to get up to speed with the code.
 
-The smaller branches of trunk-based development create more reviewable pull requests. They require less overhead for someone to review. Merging regularly also creates opportunities for teams to collaborate. Every PR is a chance to interact with each other, get feedback earlier, and see what others are working on. 
+The smaller branches of trunk-based development create [more reviewable pull requests](/newsletter/code-review-tips#4-verify-by-observation-not-reasoning). They require less overhead for someone to review. Merging regularly also creates opportunities for teams to collaborate. Every PR is a chance to interact with each other, get feedback earlier, and see what others are working on. 
 
 ## The philosophy behind trunk-based development at PostHog
 

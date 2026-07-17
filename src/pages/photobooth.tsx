@@ -801,6 +801,7 @@ const FinalPhotoStrip = ({
         const dataURL = await toJpeg(ref.current, {
             quality: 1,
             backgroundColor: 'white',
+            skipFonts: true,
         })
         const link = document.createElement('a')
         link.download = `posthog_photobooth.jpeg`
@@ -830,6 +831,7 @@ const FinalPhotoStrip = ({
                         toJpeg(ref.current, {
                             quality: 1,
                             backgroundColor: 'white',
+                            skipFonts: true,
                         }).then((dataURL) => {
                             onImageReady(dataURL)
                         })
@@ -892,6 +894,7 @@ const Card = ({
         const dataURL = await toJpeg(cardRef.current, {
             quality: 1,
             backgroundColor: 'white',
+            skipFonts: true,
         })
         const link = document.createElement('a')
         link.download = `${name}.jpeg`

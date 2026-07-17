@@ -180,7 +180,7 @@ const PricingHero = ({ activePlan, setActivePlan }: PricingHeroProps): JSX.Eleme
                             className={`w-full flex flex-col py-2 px-4 rounded-md border-2 items-start @md:min-w-56 ${
                                 activePlan === 'free'
                                     ? 'border-yellow bg-white dark:bg-white/5'
-                                    : 'border-primary bg-transparent'
+                                    : 'border-primary bg-accent hover:bg-primary'
                             }`}
                         >
                             <strong className="whitespace-nowrap">Free</strong>
@@ -192,7 +192,7 @@ const PricingHero = ({ activePlan, setActivePlan }: PricingHeroProps): JSX.Eleme
                             onClick={handlePaidPlanClick}
                             className={`w-full flex flex-col py-2 px-4 rounded-md border-2 items-start @md:min-w-56 ${
                                 activePlan === 'free'
-                                    ? 'border-primary bg-transparent'
+                                    ? 'border-primary bg-accent hover:bg-primary'
                                     : 'border-yellow bg-white dark:bg-white/5'
                             }`}
                         >

@@ -33,7 +33,7 @@ How nooby? Well, here’s our team and their marketing “credentials”:
 
 So, yeah. Here’s what we’ve learned about marketing for startups, specifically for a B2B startup for developers. Let us know where we’re wrong!
 
-> This post was first published in our Substack newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
+> This post was first published in our Substack newsletter, [build mode](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
 
 ## 1. Prioritize what you care about ✅
 
@@ -48,7 +48,7 @@ To avoid this, we break our work down by:
 
 Optimizing paid ads, for example, sounds like a good use of time. Who wants to waste money, right? But is getting them from 7/10 to 10/10 going to move the dial for us? We don’t think so, so we’re happy to get them to 7/10.
 
-We cover what we care about in more detail in the [marketing section of our handbook](https://posthog.com/handbook/growth/marketing). Your things may be different to ours, but we typically prioritize more leveraged, long-term activity (e.g. SEO, word-of-mouth, etc.) over high-effort campaigns (e.g. ProductHunt launches).
+We cover what we care about in more detail in the [marketing section of our handbook](https://posthog.com/handbook/marketing). Your things may be different to ours, but we typically prioritize more leveraged, long-term activity (e.g. SEO, word-of-mouth, etc.) over high-effort campaigns (e.g. ProductHunt launches).
 
 Above all, don’t get distracted by rivals doing something better than you. Stick to what you want to be great at.
 
@@ -62,11 +62,13 @@ Trying to go head-to-head with much larger competitors on content output is a lo
 
 High quality articles perform better in the long run, especially SEO ones. Treat your SEO portfolio like a VC treats their investments – invest time updating your content, don’t publish and forget.
 
+*For a look at how this plays out in a startup’s very earliest days — before you even have a strategy — see [the stuff nobody tells you about startup marketing](/newsletter/the-stuff-nobody-tells-you-about-startup-marketing).*
+
 ## 3. Build a channel you truly own 💌
 
 Being really good at Twitter/X, LinkedIn, or writing blog posts for HackerNews is worthwhile, but the engagement you get is transient and often subject to the whims of opaque algorithms.
 
-It’s one of the key reasons we launched this newsletter. With the slight exception of Gmail’s “helpful” sorting features, no one other than you decides whether you see our latest issue. And we can be confident the time we invest building *Product for Engineers* won’t be blown to bits by factors outside our control.
+It’s one of the key reasons we launched this newsletter. With the slight exception of Gmail’s “helpful” sorting features, no one other than you decides whether you see our latest issue. And we can be confident the time we invest growing *build mode* won’t be blown to bits by factors outside our control.
 
 Other options include:
 
@@ -75,7 +77,7 @@ Other options include:
 - A community on your website (we’re building it)
 - A podcast (good ones take way more effort than you think)
 
-Why do this? FWIW, a single *Product for Engineers* newsletter drives more clicks to our website than a $5,000 newsletter sponsorship we ran recently.
+Why do this? FWIW, a single *build mode* newsletter drives more clicks to our website than a $5,000 newsletter sponsorship we ran recently.
 
 ## 4. Make your website genuinely different 🙃
 This means:

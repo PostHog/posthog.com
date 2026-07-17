@@ -25,7 +25,7 @@ This exports events, features, guides, pages, and more in a `.avro` format which
 
 ## 2. Convert Pendo data and capture it in PostHog
 
-The schema of Pendo's exported event data is similar to PostHog's schema, but it requires converting to work with the rest of PostHog's data. You can see details on Pendo's schema in [their docs](https://support.pendo.io/hc/en-us/articles/14121317891355-Data-Sync-schema-definitions) and events and properties PostHog autocaptures in [our docs](/docs/product-analytics/autocapture #autocaptured-events).
+The schema of Pendo's exported event data is similar to PostHog's schema, but it requires converting to work with the rest of PostHog's data. You can see details on Pendo's schema in [their docs](https://support.pendo.io/hc/en-us/articles/14121317891355-Data-Sync-schema-definitions) and events and properties PostHog autocaptures in [our docs](/docs/product-analytics/autocapture#autocaptured-events).
 
 If you have done one single historical export, you can query the `allevents.avro` table to get the event data. With it, you can then go through each row and convert it to PostHog's schema. This requires converting:
 
@@ -33,7 +33,7 @@ If you have done one single historical export, you can query the `allevents.avro
 - Properties like `url` to `$current_url`
 - Event `browserTimestamp` to an ISO 8601 timestamp
 
-Once this is done, you can capture the data into PostHog using the [Python SDK](/docs/libraries/python #historical-migrations) or the [event capture API endpoint](/docs/api/capture) with `historical_migration` set to `true`.
+Once this is done, you can capture the data into PostHog using the [Python SDK](/docs/libraries/python#historical-migrations) or the [event capture API endpoint](/docs/api/capture) with `historical_migration` set to `true`.
 
 Here's an example version of a Python script reading from an `allevents.avro` file:
 
@@ -46,7 +46,7 @@ from avro.datafile import DataFileReader
 from avro.io import DatumReader
 
 posthog = Posthog(
-'<ph_project_api_key>',
+'<ph_project_token>',
 host='<ph_client_api_host>',
 debug=True,
 historical_migration=True

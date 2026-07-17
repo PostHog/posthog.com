@@ -1,6 +1,7 @@
 import React from 'react'
 import { IconPieChart } from '@posthog/icons'
 import Link from 'components/Link'
+import MCPInstall from 'components/Products/MCPInstall'
 
 export const webAnalytics = {
     Icon: IconPieChart,
@@ -11,16 +12,17 @@ export const webAnalytics = {
     color: 'green-2',
     colorSecondary: '[#37945D]',
     category: 'analytics',
+    wizardSupport: true,
     billedWith: 'Product analytics',
     seo: {
         title: 'Web Analytics – Track and measure traffic with PostHog',
         description:
-            'Track traffic and performance with Web Analytics. Get privacy-friendly insights, a pre-built dashboard, real-time data, and no sampling.',
+            'Track traffic and performance with Web Analytics – the lightweight measurement layer that feeds your agents the context to make your product self-driving.',
     },
     overview: {
         title: 'Privacy-focused web analytics',
         description:
-            'Track visitors, pageviews, and conversions with a pre-built dashboard. No cookies required, no complex setup, real-time data, and privacy-focused. Built for people who really liked GA3...',
+            'Web analytics is one of the tools that makes your product self-driving: the lightweight measurement layer that feeds agents traffic context. Track visitors, pageviews, and conversions with a pre-built dashboard. No cookies required, no complex setup, real-time data, and privacy-focused. Built for people who really liked GA3...',
         textColor: 'text-[#063619]', // tw
     },
     videos: {
@@ -257,7 +259,8 @@ export const webAnalytics = {
         {
             title: 'Works with product analytics',
             headline: 'More than just web analytics',
-            description: 'Seamlessly switch between web and product analytics, all in one platform.',
+            description:
+                'Switch between web and product analytics on the same events – the shared context agents act on to make your product self-driving.',
             features: [
                 {
                     title: 'Unified platform',
@@ -280,6 +283,33 @@ export const webAnalytics = {
                     description: 'No additional cost beyond event usage',
                 },
             ],
+        },
+        {
+            title: 'MCP',
+            headline: 'Query traffic from your editor',
+            description:
+                'Check traffic, investigate anomalies, and build traffic dashboards from Cursor, Claude Code, VS Code, or any MCP-compatible agent.',
+            features: [
+                {
+                    title: 'Validate deploys',
+                    description: 'Check whether traffic to specific pages changed after an update.',
+                },
+                {
+                    title: 'Diagnose anomalies',
+                    description: 'Investigate sudden drops in pageviews or sessions as context for your coding agent.',
+                },
+                {
+                    title: 'Analyze traffic sources',
+                    description:
+                        'Break down which referrers, UTMs, or channels are driving visits to prioritize what to build next.',
+                },
+                {
+                    title: 'Monitor page performance',
+                    description:
+                        'Track bounce rates, session durations, and page-level trends to catch regressions early.',
+                },
+            ],
+            children: <MCPInstall />,
         },
     ],
     postHogOnPostHog: {
@@ -369,6 +399,9 @@ export const webAnalytics = {
             ],
             us: [
                 {
+                    title: 'Agents can query your traffic and act on it – the context that powers self-driving',
+                },
+                {
                     title: 'You want to do more than just web analytics',
                     subtitle: 'Web Analytics integrates with the entire Product OS ecosystem.',
                 },
@@ -438,7 +471,7 @@ export const webAnalytics = {
             </>
         ),
         'comparison-summary':
-            "GA4 is free but also really hard to use. Matomo is privacy-focused but limited. We're privacy-focused AND powerful. Plus we're not just web analytics - it's integrated with everything else. If you liked GA3, you'll love this. If you like GA4, please seek medical attention immediately. (But spoiler: doctors orders will likely be to try PostHog Web Analytics.)",
+            "GA4 is free but also really hard to use. Matomo is privacy-focused but limited. We're privacy-focused AND powerful. Plus we're not just web analytics – it's integrated with everything else, so agents can act on your traffic context directly rather than just reading a dashboard. That's what makes your product self-driving. If you liked GA3, you'll love this. If you like GA4, please seek medical attention immediately. (But spoiler: doctors orders will likely be to try PostHog Web Analytics.)",
         'feature-comparison':
             "We have mostly everything the others have plus: scroll depth, custom channels, no sampling, ad blocker resilience, and integrated product analytics. You're welcome.",
         docs: "Setup takes minutes. Add our snippet, see data. We document every metric clearly. Common questions like 'unique vs returning visitors' explained simply. Migration guides from GA4 and others included.",
@@ -446,5 +479,22 @@ export const webAnalytics = {
             "See traffic spike? Click through to session replays of those visitors. Run surveys on specific traffic sources. Build custom analytics beyond the dashboard. It all connects because it's one platform.",
         'getting-started':
             "Add our snippet. Data flows immediately. The pre-built dashboard has everything most people need. Later, customize with product analytics if you want deeper insights. But if you're just looking for a web analytics, the defaults are probably enough.",
+        ai: 'The PostHog MCP server lets your AI coding agent query web analytics data directly from your code editor. Check traffic trends, investigate anomalies, and build dashboards – without switching to the PostHog app.',
+    },
+    ai: {
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_92791a9d9b.png',
+        imageAlt: 'PostHog AI and web analytics',
+        imageClasses: 'w-96',
+        description: 'find out why traffic changed and act on what is converting',
+        skills: [
+            'Filters web traffic by path, geography, device, or referrer',
+            'Investigates traffic spikes, dips, and other anomalies',
+            'Analyzes Core Web Vitals to identify performance bottlenecks',
+        ],
+        prompts: [
+            'Create a dashboard showing web traffic by source and campaign',
+            'Which landing pages have the highest bounce rate this month?',
+            'There was an odd traffic spike yesterday – find the root cause',
+        ],
     },
 }

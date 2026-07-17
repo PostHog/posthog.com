@@ -7,3 +7,4 @@
 | └─ `mechanism` | Object | If the stacktrace is handled and if it's synthetic |
 | `$exception_fingerprint` | String | A fingerprint of the exception |
 | `$exception_level` | String | The level of the severity of the error |
+| `$exception_steps` | List | Breadcrumb-style steps recorded via [`addExceptionStep`](/docs/error-tracking/capture#add-exception-steps) before the exception, each with a `$message`, `$timestamp`, and any custom properties |

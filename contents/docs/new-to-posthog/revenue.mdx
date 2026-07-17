@@ -50,7 +50,7 @@ Even at the earliest stages of a business, data can be scattered between multipl
 
 Instead of setting up complex event-sending pipelines, you can bring the data directly into PostHog's data warehouse and analyze it all from there.
 
-PostHog's **data warehouse** solves this problem by aggregating multiple data sources. You can then access our [revenue analytics](/docs/revenue-analytics) dashboard to see what your revenue looks like across time and across your events/sources! You can also build custom insights that traverse both.
+PostHog's **data warehouse** solves this problem by aggregating multiple data sources. You can then build custom insights that traverse your events and external sources together.
 
 You can query *anything* from your app database with [data warehouse](/docs/data-warehouse/query). Data warehouse also provides quick setup for ongoing capture of revenue events from [Stripe](/docs/cdp/sources/stripe) and [Chargebee](/docs/cdp/sources/chargebee). 
 
@@ -69,20 +69,7 @@ Which events are revenue-generating? Are they already tracked, or do you need to
 
 ## Revenue reporting
 
-With revenue logged, you need a way to see it. There are two options here.
-
-### Revenue analytics dashboard
-
-Revenue analytics is now in beta! It enables easy reporting of revenue generated over time. You'll also get new insights for revenue growth and lifetime customer value.
-
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_04_22_at_15_18_52_079665efa3.png" 
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_04_22_at_15_18_35_71ced993e5.png"
-    alt="Revenue analytics dashboard"
-    classes="rounded"
-/>
-
-Revenue analytics is a work-in-progress, so stay tuned for additional insights.
+With revenue logged, you need a way to see it.
 
 ### Build a custom trend insight
 

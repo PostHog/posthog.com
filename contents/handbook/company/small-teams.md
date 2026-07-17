@@ -19,7 +19,7 @@ We have therefore introduced small teams. These are designed to each operate lik
 
 -   The overall goal for a small team is to own an area of the product/company and be as close to its own startup as possible, with only a handful of centralized processes.
 -   A small team should _strictly_ be between 2-6 people.
--   A small team has a team lead responsible for its performance - whoever is most appropriate depending on what the team is working on. This does _not_ mean the most experienced person on the team.
+-   A small team has a team lead responsible for its performance – whoever is most appropriate depending on what the team is working on. This does _not_ mean the most experienced person on the team.
 -   A small team must have a customer (internal or external).
 -   There may be certain functions where at our current stage we don't need a small team yet.
 -   Each small team runs its own retrospective + sprint every week. This must be done transparently.
@@ -57,7 +57,7 @@ Overall, the team lead is responsible for ensuring the above happens. They shoul
 
 Team leads do not necessarily = managers. Read more about [how we think about management](/handbook/company/management).
 
-Once a new team lead is appointed, or a small team is created, team leaders take on additional responsibilities that are defined in [the new small team template within the new org change issue](https://github.com/PostHog/company-internal/issues), along with a checklist of actions. The dropdown of actions appears when you create a new issue and select the "org change" template and you simply delete the non-relevant sections of the checklist.
+Once a new team lead is appointed, or a small team is created, team leaders take on additional responsibilities, along with a checklist of actions. To kick off the process, run `/org-change` in Slack and select the relevant change type – it'll create a tracked issue in company-internal with the right checklist.
 
 Team leads also take on a range of broader responsibilities that revolve around releasing new features and communicating with other teams. Some helpful guidelines on what team leads should be taking responsibility for are listed below.
 
@@ -67,7 +67,7 @@ Setting up support processes is a team lead responsibility, but if you need any 
 
 Team leads are responsible for creating Slack channels for their support function and ensuring integration with Zendesk, so that the team can be alerted to support issues. Once the support process is set up, team leads are responsible for ensuring a sustainable and fair support rotation and setting up SLA and support hero notifications.
 
-Further details on how to do this are available in [the new org change template](https://github.com/PostHog/company-internal/blob/master/.github/ISSUE_TEMPLATE/org-change.yml).
+To kick off any org change, run `/org-change` in Slack.
 
 ### Launching new products and features
 
@@ -94,6 +94,10 @@ Some guidelines on how to do this are below, but if in doubt team leads should a
 
 -   [ ] [Create a new launch plan issue](https://github.com/PostHog/meta/issues/new?template=launch-plan-.md)
 -   [ ] Continue to communicate timelines / updates in the Slack channel created
+
+## Leading quarterly goal setting
+
+Team leads are responsible for organizing [quarterly goal setting](/handbook/company/goal-setting) within their team, leading the goal-setting session, and documenting the goals on their team page. 
 
 ## How do small teams and product managers work together?
 
@@ -137,7 +141,7 @@ We have a defined [process for proposing changes to teams](/handbook/company/tea
 Once a decision is made, the following happens:
 
 -   [ ] Ops team updates the [Org Chart](https://app.deel.com/organization-chart/organization/834ac289-7c04-4d93-91f0-8922c5664b77?groupBy=group-by-report) in Deel.
--   [ ] Ops creates an issue with [the new org change template](https://github.com/PostHog/company-internal/blob/master/.github/ISSUE_TEMPLATE/org-change.yml) and assigns the team lead
+-   [ ] The team lead runs `/org-change` in Slack to kick off the tracking issue. Ops will be notified and picks up execution from there.
 -   [ ] Exec informs everyone else in the company in the next all hands session.
 
 The small teams template contains a list of tasks for the Ops team and the team lead. 
@@ -185,7 +189,7 @@ There are two scenarios that will trigger a move:
 -   The small team may realize they no longer need someone, or that they could really do with someone currently in another small team internally.
 -   An individual team member may wish to move in order to develop their skills or experience.
 
-It is **very important** to raise any desire for a team change with your relevant [teams/blitzscale](Blitzscale team) member early. Any changes are at their discretion, as their job is to ensure that our small teams continue to function and that any moves fit into our current hiring plans. They will also have the best context about which teams you may be a good fit for, based on your skillset but also each team's needs. Please don't go talking to other teams directly first, as it makes it harder to manage everyone's expectations. 
+It is **very important** to raise any desire for a team change with your relevant [Blitzscale team](/teams/blitzscale) member early. Any changes are at their discretion, as their job is to ensure that our small teams continue to function and that any moves fit into our current hiring plans. They will also have the best context about which teams you may be a good fit for, based on your skillset but also each team's needs. Please don't go talking to other teams directly first, as it makes it harder to manage everyone's expectations. 
 
 ### Aren't most small teams way too small?
 
@@ -199,7 +203,7 @@ The small team is responsible for creating roles for those that they need.
 
 We have a centralized team that will then help you hire.
 
-James and Tim used to interview every candidate because it's a standard startup failure for founders to get too removed from hiring. We've relaxed this so that someone Team Blitzscale always interviews candidates, normally whichever team member sponsors the team the candidate will be joining.
+James and Tim used to interview every candidate because it's a standard startup failure for founders to get too removed from hiring. We've relaxed this so that someone from Team Blitzscale always interviews candidates, normally whichever team member sponsors the team the candidate will be joining.
 
 Regardless of the team, we aim to retain a high bar for new hires. In the words of James Greenhill: "If it's not a hell yes, it's a hell no." See [how we hire](/handbook/people/hiring-process) for more on this. 
 

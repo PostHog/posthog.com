@@ -10,7 +10,6 @@ import { Accordion } from '../RadixUI/Accordion'
 import { useWindow } from '../../context/Window'
 import { getProseClasses } from '../../constants'
 import AddressBar from 'components/OSChrome/AddressBar'
-
 interface AccordionItem {
     title: string
     content: React.ReactNode
@@ -38,6 +37,8 @@ interface ExplorerProps {
     rightActionButtons?: React.ReactNode
     onSearch?: (query: string) => void
     viewportClasses?: string
+    showAddressBar?: boolean
+    className?: string
 }
 
 const SidebarContent = ({ content }: { content: React.ReactNode | AccordionItem[] }): JSX.Element | null => {
@@ -91,6 +92,8 @@ export default function Explorer({
     rightActionButtons,
     onSearch,
     viewportClasses = '',
+    showAddressBar = true,
+    className = '',
 }: ExplorerProps) {
     const { appWindow } = useWindow()
     const currentPath = appWindow?.path?.replace(/^\//, '') || '' // Remove leading slash, default to empty string
@@ -136,23 +139,24 @@ export default function Explorer({
     }, [windowWidth, viewportClasses])
 
     return (
-        <div className="@container w-full h-full flex flex-col min-h-1">
-            {!fullScreen && (
-                <>
-                    <HeaderBar
-                        {...getHeaderBarProps()}
-                        searchContentRef={searchContainerRef}
-                        rightActionButtons={rightActionButtons}
-                        onSearch={onSearch}
-                    />
+        <div className={`@container w-full h-full flex flex-col min-h-1 ${className}`}>
+            <>
+                <HeaderBar
+                    {...getHeaderBarProps()}
+                    searchContentRef={searchContainerRef}
+                    rightActionButtons={rightActionButtons}
+                    onSearch={onSearch}
+                    className={!showAddressBar ? 'border-b border-primary' : ''}
+                />
+                {showAddressBar && (
                     <AddressBar
                         selectOptions={selectOptions}
                         currentPath={currentPath}
                         handleValueChange={handleValueChange}
                         selectedCategory={selectedCategory}
                     />
-                </>
-            )}
+                )}
+            </>
             <ContentWrapper>
                 <div
                     data-scheme="secondary"
@@ -230,7 +234,7 @@ export default function Explorer({
                     {leftSidebarContent && (
                         <aside
                             data-scheme="secondary"
-                            className="@3xl:w-64 bg-primary border-t @md:border-t-0 @md:border-r border-primary h-full prose prose-sm dark:prose-invert"
+                            className="@3xl:w-64 bg-primary border-t @3xl:border-t-0 @3xl:border-r border-primary prose prose-sm dark:prose-invert h-full"
                         >
                             <ScrollArea className="p-2">
                                 <div className="space-y-3">

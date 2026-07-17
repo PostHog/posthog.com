@@ -3,29 +3,18 @@ import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
 import Intro from 'components/Docs/Intro'
 import ResourceItem from 'components/Docs/ResourceItem'
-import { CalloutBox } from 'components/Docs/CalloutBox'
 
 const Support: React.FC = () => {
     return (
         <ReaderView>
             <SEO title="Support - Docs - PostHog" />
-            <CalloutBox icon="IconFlask" title="Support is in private alpha" type="info">
-                <p>
-                    Support is currently in private alpha.{' '}
-                    <a href="https://us.posthog.com/settings/user-feature-previews#in-app-messenger">
-                        Request early access
-                    </a>{' '}
-                    and we'll invite you when ready.
-                </p>
-            </CalloutBox>
             <Intro
                 subheader="Getting started"
                 title="Support"
                 description="Built-in customer support with an embeddable chat widget and a unified inbox with session replays and user context."
                 buttonText="Get started"
                 buttonLink="/docs/support/start-here"
-                imageClasses="max-h-48 md:max-h-64"
-                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/hog_support_5b92c08b1a.png"
+                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/support_hog_f7ed8447c9.png"
             />
             <section className="mb-12">
                 <h3 className="m-0 text-xl">Everything you need to help your users</h3>
@@ -52,6 +41,38 @@ const Support: React.FC = () => {
                         title="Unified inbox"
                         description="View and respond to tickets with full context: session replays, events, exceptions, and user history."
                         url="/docs/support/inbox"
+                        Image={undefined}
+                        gatsbyImage={undefined}
+                        type={undefined}
+                    />
+                    <ResourceItem
+                        title="Slack integration"
+                        description="Connect Slack for two-way sync — messages become tickets, replies sync back to threads."
+                        url="/docs/support/slack"
+                        Image={undefined}
+                        gatsbyImage={undefined}
+                        type={undefined}
+                    />
+                    <ResourceItem
+                        title="GitHub integration"
+                        description="Connect GitHub repos for two-way sync — issues become tickets, replies sync back as comments."
+                        url="/docs/support/github"
+                        Image={undefined}
+                        gatsbyImage={undefined}
+                        type={undefined}
+                    />
+                    <ResourceItem
+                        title="Historical imports"
+                        description="Migrate historical tickets from other help desks into PostHog. Zendesk Support available now (beta); more sources coming."
+                        url="/docs/support/imports"
+                        Image={undefined}
+                        gatsbyImage={undefined}
+                        type={undefined}
+                    />
+                    <ResourceItem
+                        title="Workflow automation"
+                        description="Automate ticket management with workflows — set SLAs, auto-assign, tag, and route tickets."
+                        url="/docs/support/workflows"
                         Image={undefined}
                         gatsbyImage={undefined}
                         type={undefined}

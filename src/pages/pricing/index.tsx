@@ -17,7 +17,6 @@ import ReaderView from 'components/ReaderView'
 import PurchasedWith from 'components/Pricing/Test/PurchasedWith'
 import { SectionLayout } from 'components/Pricing/Test/Sections'
 import { scrollToElement } from 'components/ScrollToElement'
-
 export default function Pricing() {
     const [activePlan, setActivePlan] = useState('free')
     const [animateFreeTiers, setAnimateFreeTiers] = useState(false)
@@ -187,17 +186,18 @@ export default function Pricing() {
             {/* <Reviews /> */}
 
             <SectionLayout id="faq" className="mb-12">
-                <h2 className="text-2xl m-0 mb-6 pb-6 border-b border-primary">Pricing FAQ</h2>
+                <h2 className="text-2xl m-0 mb-0 pb-6 border-b border-primary">Pricing FAQ</h2>
                 <FAQs />
-                <p className="my-6 pt-6 relative before:w-48 before:absolute before:top-0 before:left-0 before:border-t before:border-light before:dark:border-dark before:h-px">
+                <p className="my-6 relative">
                     Have another pricing-related question?{' '}
                     <Link to="/questions/topic/pricing" state={{ newWindow: true }}>
                         Ask in our community forum.
                     </Link>
                 </p>
             </SectionLayout>
-
-            <CTA />
+            <div className="@lg:overflow-x-visible overflow-x-hidden">
+                <CTA />
+            </div>
         </ReaderView>
     )
 }
