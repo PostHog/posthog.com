@@ -14,6 +14,7 @@ Prompt management lets you create and update LLM prompts directly in PostHog. Wh
 - **Non-engineers can iterate** – Product and content teams can tweak prompts without touching code
 - **Track prompt usage** – Link prompts to generations to see which prompts drive which outputs
 - **Versioning** – Every change creates an immutable version you can view, compare, or restore
+- **Labels** – Point a label like `production` at a version and fetch by label, so saving a prompt and releasing it are separate steps
 - **[A/B testing](/docs/prompt-management/prompt-experiments)** – Compare prompt versions on cost, latency, and eval pass rate using PostHog Experiments
 
 ## Creating prompts
@@ -40,14 +41,16 @@ When viewing a prompt, markdown rendering is enabled by default, formatting your
 
 You can also manage prompts through the [PostHog MCP server](/docs/model-context-protocol) using AI agents like Claude Code, Cursor, or any MCP-connected tool.
 
-The MCP server provides four prompt management tools:
+The MCP server provides six prompt management tools:
 
 | Tool | Description |
 |------|-------------|
 | `prompt-list` | List all team prompts with optional name filtering |
-| `prompt-get` | Get a prompt by name, including full content |
+| `prompt-get` | Get a prompt by name, including full content, optionally by version or label |
 | `prompt-create` | Create a new prompt with a unique name and content |
 | `prompt-update` | Publish a new version of a prompt by name, optionally with a note describing the change |
+| `prompt-label-set` | Point a label at a version, creating the label or moving it from another version |
+| `prompt-label-delete` | Remove a label from a prompt |
 
 This enables teams to manage prompts programmatically from agent workflows without using the web UI.
 
@@ -109,7 +112,46 @@ Unchanged regions are automatically collapsed in the diff view. Click **Compare 
 
 ### Archive a prompt
 
-Click **Archive** to remove a prompt from active use. This archives all versions of the prompt. Any code fetching the prompt by name stops resolving it.
+Click **Archive** to remove a prompt from active use. This archives all versions of the prompt. Any code fetching the prompt by name stops resolving it. Archiving also removes the prompt's labels.
+
+## Labels
+
+A label is a movable pointer to exactly one version of a prompt. Fetching by a label like `production` returns whatever version the label points to right now.
+
+Labels separate saving a prompt from releasing it. Without labels, code either fetches the latest version (so every save immediately changes what your app uses) or pins a version number (so every release needs a code change). With a label, you edit and publish versions freely, then move the label when a version is ready:
+
+- **Release** a version by pointing `production` at it
+- **Roll back** by pointing `production` at an earlier version
+- Your code just fetches by label and never changes
+
+One version can hold several labels (for example `production` and `staging` on the same version), but a label always points to exactly one version. Setting a label that already exists on another version moves it there.
+
+### Label naming rules
+
+- Lowercase letters, numbers, dots, hyphens, and underscores; must start and end with a letter or number
+- Maximum 128 characters
+- `latest` is reserved (it always means the newest version)
+- Numbers-only names are not allowed, to avoid confusion with version numbers
+- Up to 50 labels per prompt
+
+### Managing labels
+
+Set or move a label via the API:
+
+```bash
+curl -X PUT "https://us.posthog.com/api/environments/:project_id/llm_prompts/name/:prompt_name/labels/production/" \
+    -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+    -H "Content-Type: application/json" \
+    -d '{"version": 3}'
+```
+
+Remove a label with a `DELETE` request to the same URL. You can also manage labels through the MCP tools (`prompt-label-set`, `prompt-label-delete`).
+
+### How label changes propagate
+
+Moving a label takes effect on the PostHog API within seconds. SDK consumers pick it up when their client-side cache expires, so a moved label is fully live within the SDK cache TTL (5 minutes by default, configurable per fetch).
+
+If your PostHog instance predates prompt labels (self-hosted), the API ignores the `label` parameter and returns the latest version; the SDKs log a warning when this happens.
 
 ## Using prompts in code
 
@@ -149,6 +191,14 @@ result = prompts.get(
     with_metadata=True,  # Returns a PromptResult with prompt, name, version, and source
     cache_ttl_seconds=600,  # Override default 5-minute cache
     fallback='You are a helpful assistant.'  # Used if fetch fails
+)
+
+# Fetch the version a label points to (recommended for production apps)
+result = prompts.get(
+    'support-system-prompt',
+    with_metadata=True,
+    label='production',
+    fallback='You are a helpful assistant.'
 )
 
 # Or fetch a specific version
@@ -198,6 +248,12 @@ const result = await prompts.get('support-system-prompt', {
   fallback: 'You are a helpful assistant.'
 })
 
+// Fetch the version a label points to (recommended for production apps)
+const result = await prompts.get('support-system-prompt', {
+  label: 'production',
+  fallback: 'You are a helpful assistant.'
+})
+
 // Or fetch a specific version
 const result = await prompts.get('support-system-prompt', {
   version: 2,
@@ -223,6 +279,7 @@ Prompts are cached on the SDK side to minimize latency and API calls:
 - **Configurable per-request**: Override with `cache_ttl_seconds` (Python) or `cacheTtlSeconds` (JS)
 - **Stale-while-revalidate**: If a fetch fails, the cached value is used (even if expired)
 - **Fallback support**: Provide a fallback value that's used when both fetch and cache fail
+- **Separate entries per fetch type**: Latest, pinned-version, and labeled fetches of the same prompt are cached independently. Label moves reach your app when the labeled entry's TTL expires
 
 ## Linking prompts to traces
 
