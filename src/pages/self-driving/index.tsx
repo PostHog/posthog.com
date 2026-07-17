@@ -563,16 +563,10 @@ const TickerCard = ({ pr }: { pr: SelfDrivingPR }): JSX.Element => {
     )
 }
 
-// Marquee scroll speed in pixels per second (matches the old ~0.5px/frame at 60fps).
-const TICKER_SPEED = 30
+const TICKER_SPEED = 30 // px per second
 
 // One continuously scrolling row. `direction` sets scroll direction (1 = content drifts left,
 // -1 = the reverse). Pauses on hover/focus and stops entirely for reduced-motion users.
-//
-// The motion is a `transform: translate3d(...)` on an inner track rather than a per-frame
-// `scrollLeft` write: transforms are composited on the GPU (no layout/reflow each frame), and
-// the offset advances by elapsed time so speed stays constant across refresh rates and throttled
-// tabs instead of stuttering.
 const TickerRow = ({ prs, direction }: { prs: SelfDrivingPR[]; direction: 1 | -1 }): JSX.Element => {
     const trackRef = React.useRef<HTMLDivElement>(null)
     const pausedRef = React.useRef(false)
@@ -592,11 +586,9 @@ const TickerRow = ({ prs, direction }: { prs: SelfDrivingPR[]; direction: 1 | -1
             const dt = last === 0 ? 0 : (now - last) / 1000
             last = now
             if (!pausedRef.current && dt > 0) {
-                // Half the track holds one full copy of the list; wrapping within it keeps the loop seamless.
                 const half = track.scrollWidth / 2
                 if (half > 0) {
                     offset -= TICKER_SPEED * direction * dt
-                    // Normalize into (-half, 0] so the transform never drifts unbounded, even after a long stall.
                     offset %= half
                     if (offset > 0) offset -= half
                     track.style.transform = `translate3d(${offset}px, 0, 0)`
