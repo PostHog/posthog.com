@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import {
     IconSearch,
     IconChatHelp,
@@ -15,8 +14,9 @@ import {
     IconPlay,
     IconPencil,
     IconPeople,
+    IconPinFilled,
 } from '@posthog/icons'
-import { useApp } from '../../context/App'
+import { useAppActions, useAppSettings } from '../../context/App'
 
 import MenuBar, { MenuType } from 'components/RadixUI/MenuBar'
 import ActiveWindowsPanel from 'components/ActiveWindowsPanel'
@@ -28,28 +28,20 @@ import { useMenuData } from './menuData'
 import CloudinaryImage from 'components/CloudinaryImage'
 import MediaUploadModal from 'components/MediaUploadModal'
 import KeyboardShortcut from 'components/KeyboardShortcut'
-import { Popover } from 'components/RadixUI/Popover'
-import { SearchUI } from 'components/SearchUI'
 
-export default function TaskBarMenu() {
+function TaskBarMenu() {
     const {
-        windows,
         openSearch,
         openSignIn,
-        siteSettings,
         openNewChat,
         setIsNotificationsPanelOpen,
         setIsActiveWindowsPanelOpen,
         addWindow,
         taskbarRef,
-        posthogInstance,
-        websiteMode,
-        searchOpen,
-        setSearchOpen,
-    } = useApp()
+        updateTaskbarHeight,
+    } = useAppActions()
+    const { posthogInstance } = useAppSettings()
     const [isAnimating, setIsAnimating] = useState(false)
-    const [rendered, setRendered] = useState(false)
-    const totalWindows = windows.length
 
     const { user, notifications, logout, isModerator } = useUser()
     const menuData = useMenuData()
@@ -78,9 +70,18 @@ export default function TaskBarMenu() {
         }
     }, [])
 
-    useEffect(() => {
-        setRendered(true)
-    }, [])
+    const handleTaskbarRef = useCallback(
+        (node: HTMLDivElement | null) => {
+            if (taskbarRef) {
+                const ref = taskbarRef as React.MutableRefObject<HTMLDivElement | null>
+                ref.current = node
+            }
+            if (node) {
+                updateTaskbarHeight()
+            }
+        },
+        [taskbarRef, updateTaskbarHeight]
+    )
 
     const handleActiveWindowsClick = () => {
         setIsActiveWindowsPanelOpen(true)
@@ -92,14 +93,6 @@ export default function TaskBarMenu() {
             document.activeElement.blur()
         }
         openSignIn()
-    }
-
-    const handleSearchOpenChange = (open: boolean) => {
-        if (websiteMode) {
-            setSearchOpen(open)
-        } else {
-            openSearch()
-        }
     }
 
     const avatarURL = getAvatarURL(user?.profile)
@@ -234,6 +227,12 @@ export default function TaskBarMenu() {
                                     link: '/hogwatch',
                                     icon: <IconPlay className="opacity-50 group-hover/item:opacity-75 size-4" />,
                                 },
+                                {
+                                    type: 'item' as const,
+                                    label: 'Image annotation',
+                                    link: '/image-annotator',
+                                    icon: <IconPinFilled className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                                },
                             ]
                           : []),
                       {
@@ -278,27 +277,46 @@ export default function TaskBarMenu() {
 
     return (
         <>
-            <div
-                ref={taskbarRef}
-                id="taskbar"
-                data-scheme="primary"
-                data-menu-container
-                className={`w-full bg-accent/75 skin-classic:bg-accent wallpaper-keyboard-garden:dark:bg-black/15 backdrop-blur border-b border-primary top-0 pl-0.5 pr-2 ${
-                    websiteMode ? 'sticky top-0 z-40' : 'bg-accent/75 z-50'
-                } ${rendered ? 'block' : 'hidden'}`}
-            >
+            <div className="z-50">
                 <div
-                    className={`mx-auto transition-all duration-300 flex justify-between items-center w-full ${
-                        websiteMode ? 'max-w-7xl' : 'max-w-full'
-                    }`}
+                    ref={handleTaskbarRef}
+                    id="taskbar"
+                    data-scheme="primary"
+                    data-menu-container
+                    style={{
+                        transformOrigin: '50% 50%',
+                        transformStyle: 'preserve-3d',
+                        width: '100%',
+                        boxSizing: 'border-box',
+                    }}
+                    className="bg-primary/50 backdrop-blur-3xl will-change-[transform,backdrop-filter] transform-gpu skin-classic:bg-accent wallpaper-keyboard-garden:dark:bg-black/15 border-secondary rounded pl-0.5 pr-2 shadow-2xl"
                 >
-                    <MenuBar
-                        showChevronDown={websiteMode}
-                        menus={menuData}
-                        className="[&_button]:px-2 [&_button:not(:first-child)]:hidden md:[&_button:not(:first-child)]:flex"
+                    {/* Top and bottom edges of the 3D box — visible during rotation */}
+                    <div
+                        aria-hidden="true"
+                        className="absolute top-0 left-0 right-0 bg-accent pointer-events-none"
+                        style={{
+                            height: '20px',
+                            transform: 'rotateX(-90deg)',
+                            transformOrigin: '50% 0%',
+                        }}
                     />
-                    <aside data-scheme="secondary" className="flex items-center gap-0.5 py-1">
-                        {/* <MenuBar
+                    <div
+                        aria-hidden="true"
+                        className="absolute bottom-0 left-0 right-0 bg-accent pointer-events-none"
+                        style={{
+                            height: '20px',
+                            transform: 'rotateX(90deg)',
+                            transformOrigin: '50% 100%',
+                        }}
+                    />
+                    <div className="mx-auto transition-all duration-300 flex justify-between items-center w-full max-w-full">
+                        <MenuBar
+                            menus={menuData}
+                            className="[&_button]:px-2 [&_button:not(:first-child)]:hidden md:[&_button:not(:first-child)]:flex"
+                        />
+                        <aside data-scheme="secondary" className="flex items-center gap-0.5 py-1">
+                            {/* <MenuBar
                         menus={[
                             {
                                 trigger: <span className="text-red font-semibold">Get started - free</span>,
@@ -329,167 +347,62 @@ export default function TaskBarMenu() {
                         ]}
                         className="[&_button]:px-2"
                     /> */}
-                        <div className="relative mr-1">
-                            <OSButton
-                                variant="primary"
-                                size="md"
-                                asLink
-                                to={
-                                    posthogInstance
-                                        ? posthogInstance.replace(/"/g, '')
-                                        : 'https://app.posthog.com/signup'
-                                }
-                                className=""
-                            >
-                                {posthogInstance ? 'Dashboard' : 'Get started – free'}
-                            </OSButton>
-                        </div>
-                        <Popover
-                            open={searchOpen}
-                            dataScheme="primary"
-                            onOpenChange={handleSearchOpenChange}
-                            trigger={
-                                <span>
-                                    <Tooltip
-                                        trigger={
-                                            <span>
-                                                <OSButton
-                                                    size="sm"
-                                                    className={`relative top-px ${
-                                                        websiteMode && searchOpen
-                                                            ? 'border border-primary !bg-accent'
-                                                            : ''
-                                                    }`}
-                                                >
-                                                    <IconSearch className="size-5" />
-                                                </OSButton>
-                                            </span>
-                                        }
-                                    >
-                                        <div className="flex flex-col items-center gap-1">
-                                            <p className="text-sm mb-0">Search</p>
-                                            <KeyboardShortcut text="/" size="sm" />
-                                        </div>
-                                    </Tooltip>
-                                </span>
-                            }
-                            contentClassName="w-[450px] border border-primary rounded !p-0 overflow-hidden"
-                        >
-                            <SearchUI />
-                        </Popover>
-                        <Tooltip
-                            trigger={
+                            <div className="relative mr-1">
                                 <OSButton
-                                    onClick={() => openNewChat({ path: `ask-max` })}
-                                    size="sm"
-                                    className="relative top-px"
-                                >
-                                    <IconChatHelp className="size-5" />
-                                </OSButton>
-                            }
-                        >
-                            <div className="flex flex-col items-center gap-1">
-                                <p className="text-sm mb-0">Ask Max</p>
-                                <div className="flex items-center gap-1">
-                                    <KeyboardShortcut text="Shift" size="sm" />
-                                    <KeyboardShortcut text="?" size="sm" />
-                                </div>
-                            </div>
-                        </Tooltip>
-                        {siteSettings.experience === 'posthog' && (
-                            <motion.div
-                                animate={
-                                    isAnimating
-                                        ? {
-                                              scale: [1, 1.2, 1],
-                                              rotate: [0, -5, 5, -5, 5, 0],
-                                          }
-                                        : {}
-                                }
-                                transition={{
-                                    duration: 0.5,
-                                    ease: 'easeInOut',
-                                    times: [0, 0.2, 0.4, 0.6, 0.8, 1],
-                                }}
-                            >
-                                {totalWindows <= 0 ? (
-                                    <Tooltip
-                                        trigger={
-                                            <button
-                                                onClick={handleActiveWindowsClick}
-                                                disabled={totalWindows <= 0}
-                                                data-scheme="primary"
-                                                data-active-windows
-                                                className={`min-w-6 h-5 px-1.5 ml-1 py-1 inline-flex justify-center items-center rounded
-                                            border-[1.5px] 
-                                            border-t-4 
-                                            
-                                             
-                                            dark:hover:bg-dark 
-                                            hover:bg-light
-
-                                            text-secondary
-                                            dark:text-primary
-                                            hover:text-primary
-
-                                            ${
-                                                totalWindows > 1
-                                                    ? 'bg-light dark:bg-dark border-[#4d4f46] dark:border-[#eaecf6]'
-                                                    : 'bg-accent border-primary dark:border-[#eaecf6]'
-                                            }
-                                        `}
-                                            >
-                                                <span className="text-[13px] font-semibold relative -top-px">
-                                                    {totalWindows}
-                                                </span>
-                                            </button>
-                                        }
-                                        delay={0}
-                                    >
-                                        <div className="max-w-48 text-center">
-                                            <p className="text-sm mb-0">You have no open windows</p>
-                                            <p className="text-[13px] text-secondary mb-0 leading-normal text-balance">
-                                                (But if you did, you could manage them here!)
-                                            </p>
-                                        </div>
-                                    </Tooltip>
-                                ) : (
-                                    <button
-                                        onClick={handleActiveWindowsClick}
-                                        disabled={totalWindows <= 0}
-                                        data-scheme="primary"
-                                        data-active-windows
-                                        className={`min-w-6 h-5 px-1.5 ml-1 py-1 inline-flex justify-center items-center rounded
-                                    border-[1.5px] 
-                                    border-t-4 
-                                    
-                                     
-                                    dark:hover:bg-dark 
-                                    hover:bg-light
-
-                                    text-secondary
-                                    dark:text-primary
-                                    hover:text-primary
-
-                                    ${
-                                        totalWindows > 1
-                                            ? 'bg-light dark:bg-dark border-[#4d4f46] dark:border-[#eaecf6]'
-                                            : 'bg-accent border-primary dark:border-[#eaecf6]'
+                                    variant="primary"
+                                    size="md"
+                                    asLink
+                                    to={
+                                        posthogInstance
+                                            ? posthogInstance.replace(/"/g, '')
+                                            : 'https://app.posthog.com/signup'
                                     }
-                                `}
+                                    className=""
+                                >
+                                    {posthogInstance ? 'Dashboard' : 'Get started – free'}
+                                </OSButton>
+                            </div>
+                            <Tooltip
+                                trigger={
+                                    <OSButton onClick={() => openSearch()} size="sm" className="relative top-px">
+                                        <IconSearch className="size-5" />
+                                    </OSButton>
+                                }
+                            >
+                                <div className="flex flex-col items-center gap-1">
+                                    <p className="text-sm mb-0">Search</p>
+                                    <KeyboardShortcut text="/" size="sm" />
+                                </div>
+                            </Tooltip>
+                            <Tooltip
+                                trigger={
+                                    <OSButton
+                                        onClick={() => openNewChat({ path: `ask-max` })}
+                                        size="sm"
+                                        className="relative top-px"
                                     >
-                                        <span className="text-[13px] font-semibold relative -top-px">
-                                            {totalWindows}
-                                        </span>
-                                    </button>
-                                )}
-                            </motion.div>
-                        )}
-                        <MenuBar menus={accountMenu} className="[&_button]:px-2" />
-                    </aside>
+                                        <IconChatHelp className="size-5" />
+                                    </OSButton>
+                                }
+                            >
+                                <div className="flex flex-col items-center gap-1">
+                                    <p className="text-sm mb-0">Ask Max</p>
+                                    <div className="flex items-center gap-1">
+                                        <KeyboardShortcut text="Shift" size="sm" />
+                                        <KeyboardShortcut text="?" size="sm" />
+                                    </div>
+                                </div>
+                            </Tooltip>
+                            <MenuBar menus={accountMenu} className="[&_button]:px-2" />
+                        </aside>
+                    </div>
                 </div>
             </div>
             <ActiveWindowsPanel />
         </>
     )
 }
+
+// Memoized so it survives Wrapper re-renders (e.g. the navigate() on window
+// open/close); it still updates when it reads changed context.
+export default React.memo(TaskBarMenu)
