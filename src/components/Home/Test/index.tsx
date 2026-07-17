@@ -132,7 +132,10 @@ function Hero(): JSX.Element {
     const isDark = siteSettings.theme === 'dark'
     return (
         <>
-            <div className="text-center @xl:text-left mb-24">
+            {/* relative + overflow-x-clip: rough-notation injects an absolutely-positioned, overflow:visible
+                SVG for each highlight; on WebKit/Safari its ink overflow can push the page wider. Make the
+                hero the SVGs' containing block and clip horizontal overspill (leaving the y-axis visible). */}
+            <div className="relative overflow-x-clip text-center @xl:text-left mb-24">
                 <h1 className="[&_p]:m-0 flex gap-1 flex-wrap justify-center @xl:justify-start !text-2xl mb-8 pt-2">
                     <Logo
                         className="max-w-[157px]"
