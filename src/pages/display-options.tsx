@@ -5,12 +5,11 @@ import { Fieldset } from 'components/OSFieldset'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import { Popover } from 'components/RadixUI/Popover'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import { IconDay, IconInfo, IconLaptop, IconNight } from '@posthog/icons'
+import { IconDay, IconLaptop, IconNight } from '@posthog/icons'
 import { SEO } from 'components/seo'
 import { useApp } from '../context/App'
 import type { SiteSettings } from '../context/App'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
-import Tooltip from 'components/RadixUI/Tooltip'
 import { Screensaver } from '../components/Screensaver'
 import useTheme, { type ThemeOption } from '../hooks/useTheme'
 import KeyboardShortcut from 'components/KeyboardShortcut'
@@ -254,31 +253,6 @@ export default function DisplayOptions() {
                                 updateSiteSettings({ ...siteSettings, screensaverDisabled: value === 'true' })
                             }}
                             value={siteSettings.screensaverDisabled ? 'true' : 'false'}
-                        />
-                    </div>
-                </div>
-                <div className="bg-primary grid grid-cols-2 gap-2">
-                    <div className="flex items-center gap-1 mb-1">
-                        <span className="text-sm">Heater mode</span>
-                        <Tooltip trigger={<IconInfo className="size-4 inline-block relative -top-px" />} delay={0}>
-                            <p className="max-w-sm my-0 leading-snug">
-                                A visual enhancement that uses partially transparent backgrounds in app windows for a
-                                nice diffused glass effect. Will absolutely destroy your battery and possibly cause
-                                third degree burns.
-                            </p>
-                        </Tooltip>
-                    </div>
-                    <div>
-                        <ToggleGroup
-                            title=""
-                            options={[
-                                { label: 'Disabled', value: 'false' },
-                                { label: 'Enabled', value: 'true' },
-                            ]}
-                            onValueChange={(value) => {
-                                updateSiteSettings({ ...siteSettings, heaterMode: value === 'true' })
-                            }}
-                            value={siteSettings.heaterMode ? 'true' : 'false'}
                         />
                     </div>
                 </div>

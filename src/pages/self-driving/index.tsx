@@ -12,7 +12,7 @@ import type { TabbedCarouselTab } from 'components/TabbedCarousel'
 import Link from 'components/Link'
 import WizardCommand from 'components/WizardCommand'
 import { SignalsCallout } from 'components/Code/SignalsCallout'
-import { useAppSettings } from '../../context/App'
+import { FROSTED_WINDOW_BG } from '../../constants/frostedSurfaces'
 import {
     IconArrowRight,
     IconAtSign,
@@ -922,12 +922,8 @@ export default function SelfDrivingPage({
 }: {
     data?: { allSelfDrivingPullRequest?: { nodes: SelfDrivingPR[] } }
 }): JSX.Element {
-    const { siteSettings } = useAppSettings()
-
     const selfDrivingPRs = data?.allSelfDrivingPullRequest?.nodes ?? []
-    const humanRoleCardBackground = siteSettings.heaterMode
-        ? 'bg-primary/75 backdrop-blur-3xl will-change-[transform,backdrop-filter] transform-gpu'
-        : 'bg-primary bg-mesh-green-light dark:bg-mesh-green-dark'
+    const humanRoleCardBackground = FROSTED_WINDOW_BG
     return (
         <>
             <SEO
