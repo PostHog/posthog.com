@@ -9,7 +9,6 @@ import {
     IconBrowser,
     IconCheck,
     IconColumns,
-    IconCompass,
     IconDashboard,
     IconDocument,
     IconFlask,
@@ -866,13 +865,14 @@ const instrumentationItems = [
 
 // Colour-chip emphasis for part of a carousel slide's title, à la the self-driving carousel
 // (TabPanel's highlightedTitle) – ties the highlighted phrase to the tab's own accent colour.
-type FeaturePanelHighlightColor = 'blue' | 'green' | 'yellow' | 'red' | 'purple'
+type FeaturePanelHighlightColor = 'blue' | 'green' | 'yellow' | 'red' | 'purple' | 'fuchsia'
 const featurePanelHighlightClasses: Record<FeaturePanelHighlightColor, string> = {
     blue: 'bg-blue/10 text-blue dark:bg-blue/20',
     green: 'bg-green/10 text-green dark:bg-green/20',
     yellow: 'bg-yellow/15 text-yellow dark:bg-yellow/20',
     red: 'bg-red/10 text-red dark:bg-red/20',
     purple: 'bg-purple/10 text-purple dark:bg-purple/20',
+    fuchsia: 'bg-fuchsia/10 text-fuchsia dark:bg-fuchsia/20',
 }
 
 // Carousel slide panel, à la the /slack and /self-driving carousels: title + body on
@@ -882,6 +882,7 @@ const FeaturePanel = ({
     highlightedTitle,
     titleSuffix,
     highlightColor = 'blue',
+    alpha = false,
     imageLight,
     imageDark,
     imageAlt,
@@ -891,26 +892,37 @@ const FeaturePanel = ({
     highlightedTitle?: string
     titleSuffix?: string
     highlightColor?: FeaturePanelHighlightColor
+    alpha?: boolean
     imageLight?: string
     imageDark?: string
     imageAlt?: string
     children: React.ReactNode
 }) => {
     const fullTitle = [title, highlightedTitle, titleSuffix].filter(Boolean).join(' ')
+    const heading = (
+        <h3 className={`m-0 text-2xl font-bold ${alpha ? '' : 'mt-0 mb-2'}`}>
+            {title}
+            {highlightedTitle && (
+                <>
+                    {' '}
+                    <span className={`rounded-sm px-0.5 ${featurePanelHighlightClasses[highlightColor]}`}>
+                        {highlightedTitle}
+                    </span>
+                    {titleSuffix ? ` ${titleSuffix}` : null}
+                </>
+            )}
+        </h3>
+    )
     return (
         <div className="flex h-full flex-col rounded bg-primary p-4 @xl:p-6">
-            <h3 className="mt-0 mb-2 text-2xl font-bold">
-                {title}
-                {highlightedTitle && (
-                    <>
-                        {' '}
-                        <span className={`rounded-sm px-0.5 ${featurePanelHighlightClasses[highlightColor]}`}>
-                            {highlightedTitle}
-                        </span>
-                        {titleSuffix ? ` ${titleSuffix}` : null}
-                    </>
-                )}
-            </h3>
+            {alpha ? (
+                <div className="mb-2 flex items-center gap-2">
+                    {heading}
+                    <AlphaBadge />
+                </div>
+            ) : (
+                heading
+            )}
             <div className="flex-1 text-[15px] text-secondary">{children}</div>
             {imageLight && imageDark && (
                 <div className="-mx-4 -mb-4 mt-4 overflow-hidden rounded-b leading-[0] @xl:-mx-6 @xl:-mb-6">
@@ -958,6 +970,34 @@ const ModelChip = ({ children }: { children: React.ReactNode }) => (
     <code className="inline-block rounded-sm border border-blue bg-blue/10 px-1 font-mono font-bold leading-normal not-italic">
         {children}
     </code>
+)
+
+// Titled columns of icon + example items, à la the self-driving "scouts" tab: a short group title
+// and description, with a few concrete examples listed underneath each.
+type IconGroup = {
+    title: string
+    description: string
+    items: { Icon: React.ComponentType<{ className?: string }>; color: string; name: string }[]
+}
+const IconGroupColumns = ({ groups }: { groups: IconGroup[] }) => (
+    <div className="mt-4 grid grid-cols-1 gap-6 @sm:grid-cols-2">
+        {groups.map((group) => (
+            <div key={group.title} className="@container flex flex-col gap-2">
+                <div>
+                    <p className="m-0 text-base font-bold text-primary">{group.title}</p>
+                    <p className="m-0 text-sm text-secondary">{group.description}</p>
+                </div>
+                <div className="grid grid-cols-1 gap-x-4 gap-y-1.5 @xs:grid-cols-2">
+                    {group.items.map(({ Icon, color, name }) => (
+                        <span key={name} className="flex items-start gap-1.5 text-sm text-primary">
+                            <Icon className={`mt-0.5 size-5 shrink-0 ${color}`} />
+                            {name}
+                        </span>
+                    ))}
+                </div>
+            </div>
+        ))}
+    </div>
 )
 
 const featureTabs: TabbedCarouselTab[] = [
@@ -1022,42 +1062,37 @@ const featureTabs: TabbedCarouselTab[] = [
         progressBar: 'bg-black/70 shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
         content: (
             <FeaturePanel
-                title="Steer it,"
-                highlightedTitle="or queue it up"
+                title="Describe the work,"
+                highlightedTitle="not the diff"
                 highlightColor="yellow"
                 imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/prompt_task_light_ad118d1efc.png"
                 imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/prompt_task_dark_6cb8a38596.png"
                 imageAlt="Prompting a task in PostHog Code"
             >
-                <p className="m-0">An agent's already running – you don't have to wait for it to finish.</p>
-                <div className="mt-5 grid grid-cols-1 gap-3 @sm:grid-cols-2">
-                    <div className="flex flex-col rounded-md border border-blue/30 bg-blue/5 p-3.5">
-                        <div className="mb-2 flex items-center gap-2">
-                            <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-blue/15 text-blue">
-                                <IconCompass className="size-4" />
-                            </span>
-                            <p className="m-0 text-base font-bold text-primary">Steer</p>
-                        </div>
-                        <p className="m-0 text-sm text-secondary">"Wait, one more thing" – "wait, actually…"</p>
-                        <p className="m-0 mt-3 border-t border-blue/20 pt-3 text-sm text-secondary">
-                            <strong className="text-primary">Injects your message mid-turn</strong> at the next tool
-                            boundary.
-                        </p>
-                    </div>
-                    <div className="flex flex-col rounded-md border border-purple/30 bg-purple/5 p-3.5">
-                        <div className="mb-2 flex items-center gap-2">
-                            <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-purple/15 text-purple">
-                                <IconStack className="size-4" />
-                            </span>
-                            <p className="m-0 text-base font-bold text-primary">Queue</p>
-                        </div>
-                        <p className="m-0 text-sm text-secondary">Stack up what's next and step away.</p>
-                        <p className="m-0 mt-3 border-t border-purple/20 pt-3 text-sm text-secondary">
-                            <strong className="text-primary">Holds your message</strong> until the current agent turn
-                            ends.
-                        </p>
-                    </div>
-                </div>
+                <p className="m-0">
+                    Tell it what you want built, like you would a teammate. It plans the approach, writes the code, and
+                    opens the PR – and you can still jump in while it works.
+                </p>
+                <IconGroupColumns
+                    groups={[
+                        {
+                            title: 'Steer',
+                            description: 'Redirect it mid-task, right now.',
+                            items: [
+                                { Icon: IconBolt, color: 'text-orange', name: '"Wait, that\'s out of scope"' },
+                                { Icon: IconBolt, color: 'text-orange', name: '"No, edit the API route, not the UI"' },
+                            ],
+                        },
+                        {
+                            title: 'Queue',
+                            description: "Line up what's next, then step away.",
+                            items: [
+                                { Icon: IconStack, color: 'text-purple', name: 'Three tickets before you leave' },
+                                { Icon: IconStack, color: 'text-purple', name: 'This PR, then the next one' },
+                            ],
+                        },
+                    ]}
+                />
             </FeaturePanel>
         ),
     },
@@ -1099,7 +1134,7 @@ const featureTabs: TabbedCarouselTab[] = [
         activeText: 'text-white',
         progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
         content: (
-            <FeaturePanel title="Ship the change." highlightedTitle="Measure what happened." highlightColor="purple">
+            <FeaturePanel title="Ship the change," highlightedTitle="measure what happened" highlightColor="purple">
                 <p className="m-0">
                     Code that ships without instrumentation is a guess wearing a lab coat. PostHog Code wires up the
                     measurement in the same breath as the feature, so "did it work?" has an answer the moment it's live.
@@ -1139,13 +1174,14 @@ const featureTabs: TabbedCarouselTab[] = [
                     A library of built-in skills lets your agents do real PostHog work – not just write code, but query
                     your data and wire up the product features that measure it.
                 </p>
-                <FeatureChips
-                    items={[
-                        { Icon: IconSparkles, color: 'text-purple', label: 'Personal skills' },
-                        { Icon: IconSparkles, color: 'text-purple', label: 'Team skills' },
-                        { Icon: IconSparkles, color: 'text-purple', label: 'Skills marketplace' },
-                    ]}
-                />
+                <div className="mt-5 grid grid-cols-1 gap-3 @sm:grid-cols-3">
+                    {['Personal skills', 'Team skills', 'Skills marketplace'].map((label) => (
+                        <div key={label} className="flex items-center gap-1.5">
+                            <IconSparkles className="size-5 shrink-0 text-purple" />
+                            <span className="text-base font-bold text-primary">{label}</span>
+                        </div>
+                    ))}
+                </div>
                 <SlideCallout>
                     <strong className="text-primary">Bring your own.</strong> Drop a <code>SKILL.md</code> in your repo
                     and every agent picks it up, so your team's know-how ships with the code.
@@ -1281,28 +1317,33 @@ const HomeSlide = () => {
                 failing checks, review requests, stale branches – into one place, in three views of the same work.
             </p>
 
-            {/* View toggles + the line that changes with the image (no box, under the description) */}
-            <div className="mt-4 flex flex-wrap gap-2" role="tablist" aria-label="Home views">
-                {homeViews.map(({ key, Icon, color, label }) => {
-                    const selected = key === active
-                    return (
-                        <button
-                            key={key}
-                            type="button"
-                            role="tab"
-                            aria-selected={selected}
-                            onClick={() => setActive(key)}
-                            className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-semibold transition-colors ${
-                                selected ? 'bg-accent text-primary' : 'text-secondary hover:text-primary'
-                            }`}
-                        >
-                            <Icon className={`size-4 shrink-0 ${color}`} />
-                            {label}
-                        </button>
-                    )
-                })}
+            {/* View tabs (underline style, not pills, so it's unmistakably a tab bar) + the
+                changing description sitting on the same row instead of below */}
+            <div className="mt-4 flex flex-col gap-2 @sm:flex-row @sm:items-end @sm:justify-between">
+                <div className="flex gap-5 border-b border-primary" role="tablist" aria-label="Home views">
+                    {homeViews.map(({ key, Icon, color, label }) => {
+                        const selected = key === active
+                        return (
+                            <button
+                                key={key}
+                                type="button"
+                                role="tab"
+                                aria-selected={selected}
+                                onClick={() => setActive(key)}
+                                className={`-mb-px flex items-center gap-1.5 border-b-2 pb-2 text-sm font-semibold transition-colors ${
+                                    selected
+                                        ? 'border-primary text-primary'
+                                        : 'border-transparent text-secondary hover:border-primary/30 hover:text-primary'
+                                }`}
+                            >
+                                <Icon className={`size-4 shrink-0 ${color}`} />
+                                {label}
+                            </button>
+                        )
+                    })}
+                </div>
+                <p className="m-0 text-sm text-secondary @sm:text-right">{current.desc}</p>
             </div>
-            <p className="m-0 mt-2 text-sm text-secondary">{current.desc}</p>
 
             <div className="-mx-4 -mb-4 mt-4 overflow-hidden rounded-b leading-[0] @xl:-mx-6 @xl:-mb-6">
                 <CloudinaryImage
@@ -1399,27 +1440,6 @@ const canvasExampleGroups = [
     },
 ]
 
-const CanvasExamples = () => (
-    <div className="mt-4 grid grid-cols-1 gap-6 @sm:grid-cols-2">
-        {canvasExampleGroups.map((group) => (
-            <div key={group.title} className="@container flex flex-col gap-2">
-                <div>
-                    <p className="m-0 text-sm font-bold text-primary">{group.title}</p>
-                    <p className="m-0 text-sm text-secondary">{group.description}</p>
-                </div>
-                <div className="grid grid-cols-1 gap-x-4 gap-y-1.5 @xs:grid-cols-2">
-                    {group.items.map(({ Icon, color, name }) => (
-                        <span key={name} className="flex items-start gap-1.5 text-sm text-primary">
-                            <Icon className={`mt-0.5 size-5 shrink-0 ${color}`} />
-                            {name}
-                        </span>
-                    ))}
-                </div>
-            </div>
-        ))}
-    </div>
-)
-
 const alphaTabs: TabbedCarouselTab[] = [
     {
         value: 'collaboration',
@@ -1479,7 +1499,7 @@ const alphaTabs: TabbedCarouselTab[] = [
                         alt="A generated canvas: a weekly active users report built on your PostHog data"
                     />
                 }
-                extra={<CanvasExamples />}
+                extra={<IconGroupColumns groups={canvasExampleGroups} />}
             >
                 Ask a context for a report, a dashboard, or that internal refunds tool nobody ever builds – and get a{' '}
                 <strong className="text-primary">canvas</strong>: generative UI on PostHog's actual data model.
@@ -1501,23 +1521,41 @@ const alphaTabs: TabbedCarouselTab[] = [
         activeText: 'text-white',
         progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
         content: (
-            <FeaturePanel title="It does the research before it builds">
+            <FeaturePanel
+                title="Run a"
+                highlightedTitle="bounded experiment loop"
+                titleSuffix="inside your task"
+                highlightColor="fuchsia"
+                alpha
+                imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/autoresearch_prompt_light_73dcb825bf.png"
+                imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/autoresearch_prompt_dark_ed1e639863.png"
+                imageAlt="Prompting an autoresearch task in PostHog Code"
+            >
                 <p className="m-0">
-                    Point an agent at a fuzzy problem and it goes digging first – across your codebase, your docs, your
-                    live PostHog data, and the web – then comes back with what it found and a recommendation, before it
-                    touches a line of code. You review the reasoning, not just the diff.
+                    Point it at a metric and it optimizes on its own – measure a baseline, try a change, measure again,
+                    and repeat until it hits the target or runs out of attempts.
                 </p>
-                <FeatureChips
-                    items={[
-                        { Icon: IconGitBranch, color: 'text-green', label: 'Reads your codebase' },
-                        { Icon: IconBrowser, color: 'text-blue', label: 'Searches docs & the web' },
-                        { Icon: IconGraph, color: 'text-purple', label: 'Queries your product data' },
-                        { Icon: IconDocument, color: 'text-orange', label: 'Cites its sources' },
-                    ]}
-                />
+                <div className="not-prose mt-4 grid grid-cols-1 gap-4 @sm:grid-cols-3">
+                    {[
+                        { step: 'Measure a baseline', desc: 'Run the measurement from your prompt.' },
+                        { step: 'Try an improvement', desc: 'Change the code and measure again.' },
+                        { step: 'Repeat until it stops', desc: 'Stop at the attempt limit or target value.' },
+                    ].map(({ step, desc }, i) => (
+                        <div key={step}>
+                            <div className="flex items-center gap-1.5">
+                                <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-fuchsia/15 text-xs font-bold text-fuchsia">
+                                    {i + 1}
+                                </span>
+                                <span className="text-base font-bold text-primary">{step}</span>
+                            </div>
+                            <p className="m-0 mt-1 text-sm leading-snug text-secondary">{desc}</p>
+                        </div>
+                    ))}
+                </div>
                 <SlideCallout>
-                    <strong className="text-primary">No guessing.</strong> It reads your real code and data before it
-                    proposes anything, and shows its sources so you can check the work.
+                    <strong className="text-primary">Needs a metric, a measurement command, and constraints</strong> in
+                    your prompt. It doesn't invent or independently verify the metric – it just follows what you tell
+                    it.
                 </SlideCallout>
             </FeaturePanel>
         ),
