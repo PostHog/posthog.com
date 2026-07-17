@@ -121,8 +121,13 @@ module.exports = {
             options: {
                 shouldBlockNodeFromTransformation: (node) =>
                     node.internal.type === 'File' &&
-                    node.url &&
-                    new URL(node.url).hostname === 'raw.githubusercontent.com',
+                    // Ingested agent-skill files (products/*/skills/*/SKILL.md) are parsed
+                    // into AgentSkill nodes in onCreateNode — never turn them into Mdx nodes
+                    // (and thus pages).
+                    ((node.sourceInstanceName === 'posthog-main-repo' &&
+                        node.name === 'SKILL' &&
+                        (node.relativeDirectory || '').includes('/skills/')) ||
+                        (node.url && new URL(node.url).hostname === 'raw.githubusercontent.com')),
                 extensions: ['.mdx', '.md'],
                 gatsbyRemarkPlugins: [
                     { resolve: 'gatsby-remark-autolink-headers', options: { icon: false } },
@@ -395,7 +400,12 @@ module.exports = {
                 name: `posthog-main-repo`,
                 remote: `https://github.com/posthog/posthog.git`,
                 branch: process.env.GATSBY_POSTHOG_BRANCH || 'master',
-                patterns: ['docs/published/**', 'docs/onboarding/**'],
+                // Canonical agent-skill definitions (products/*/skills/*/SKILL.md) are
+                // ingested for the /skills page. Reuses this clone rather than a second
+                // full clone of the monorepo. Tight glob excludes bundled references,
+                // scripts, and unrelated frontend/skills code paths. They never become
+                // pages — see shouldBlockNodeFromTransformation above and onCreateNode.
+                patterns: ['docs/published/**', 'docs/onboarding/**', 'products/*/skills/*/SKILL.md'],
             },
         },
         // {

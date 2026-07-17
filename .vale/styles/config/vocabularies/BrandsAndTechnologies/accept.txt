@@ -31,6 +31,7 @@ Auth0
 Avo
 AWS
 [Aa]zure
+[Bb]abelforce
 Balsamiq
 [Bb]amboo
 Bazel
@@ -67,10 +68,12 @@ Coinbase
 Contentful
 [Cc]onvex
 Crazy Egg
+Cronitor
 Crossplane
 Crowdin
 [Cc]ursor
 Customer\.io
+Customerly
 Databricks
 Datadog
 DBeaver
@@ -129,6 +132,7 @@ Hyperengage
 InKeep
 Inleads
 [Ii]nsider
+Instana
 [Ii]ntercom
 Istio
 [Ii]terable
@@ -250,6 +254,7 @@ Substack
 Supabase
 [Ss]uperhuman
 [Ss]uperset
+Swarmia
 Synthesia
 Tailscale
 Temporal\.io

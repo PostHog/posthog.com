@@ -1,35 +1,132 @@
 import React from 'react'
-import { IconRewindPlay } from '@posthog/icons'
-import { IconJavaScript, IconApple, IconAndroid, IconFlutter, IconReactNative } from 'components/OSIcons/Icons'
-import OSButton from 'components/OSButton'
-import Link from 'components/Link'
-import CodeBlock from 'components/Home/CodeBlock'
-import CloudinaryImage from 'components/CloudinaryImage'
-import SnippetRenderer from 'components/SnippetRenderer'
-import { True } from 'components/ComparisonTable/row'
-import MCPInstall from 'components/Products/MCPInstall'
+import {
+    IconRewindPlay,
+    IconEye,
+    IconSparkles,
+    IconList,
+    IconGraph,
+    IconConfetti,
+    IconRocket,
+    IconPieChart,
+    IconCheckCircle,
+    IconPeople,
+    IconInfo,
+    IconPlay,
+    IconCursorClick,
+    IconMagic,
+    IconChat,
+    IconCode,
+    IconMap,
+    IconMessage,
+    IconNewspaper,
+    IconShieldPeople,
+} from '@posthog/icons'
+import { features } from './session_replay/features'
+import { applications, topFeatures } from './session_replay/slides'
 
 export const sessionReplay = {
     Icon: IconRewindPlay,
     name: 'Session Replay',
+    label: 'Web recordings',
     handle: 'session_replay',
     type: 'session_replay',
     slug: 'session-replay',
+    teamSlug: 'replay',
+    forumTopicId: 377,
     color: 'yellow',
     colorSecondary: '[#B56C00]',
     category: 'product_engineering',
     wizardSupport: true,
     includeAddonRates: true,
     shortDescription: 'Watch people use your product',
+    pricingDescription:
+        'Web session recordings capture clicks, scrolls, console logs, and network calls so you can replay exactly what users did in your product.',
     seo: {
         title: 'Session Replay – Debug and analyze sessions with PostHog',
         description:
             'Watch exactly why something happened so the fix is obvious – the session context agents use to debug and ship. One of the tools that makes your product self-driving.',
     },
+    /**
+     * Sections rendered on the Product surface (`/session-replay`). Each entry
+     * resolves to a section template via `templateRegistry[item.template ?? item.slug]`,
+     * so the slug doubles as the lookup key when no explicit `template` is set.
+     * `props` is passed straight to the resolved section component (used here to
+     * feed the carousel templates their slide arrays).
+     */
+    productMenu: [
+        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'customers',
+            name: 'Who uses it?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconPeople className="size-4" />,
+        },
+        {
+            slug: 'eli5',
+            name: 'What does it do?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconInfo className="size-4" />,
+        },
+        {
+            slug: 'use-cases',
+            name: 'Who is it for?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconMagic className="size-4" />,
+        },
+        { slug: 'demo', name: 'Demo', group: 'divided', icon: <IconPlay className="size-4" /> },
+        {
+            slug: 'applications',
+            name: 'How do I use it?',
+            group: 'divided',
+            icon: <IconCursorClick className="size-4" />,
+            props: { slides: applications },
+        },
+        {
+            slug: 'top-features',
+            name: 'Top features',
+            group: 'divided',
+            icon: <IconSparkles className="size-4" />,
+            props: { slides: topFeatures },
+        },
+        {
+            slug: 'ask-anything',
+            name: 'AI prompts',
+            group: 'divided',
+            icon: <IconChat className="size-4" />,
+        },
+        { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
+        { slug: 'roadmap', name: 'Roadmap', group: 'divided', icon: <IconMap className="size-4" /> },
+        { slug: 'changelog', name: 'Changelog', group: 'divided', icon: <IconNewspaper className="size-4" /> },
+        { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
+        { slug: 'team', name: 'Team', group: 'divided', icon: <IconShieldPeople className="size-4" /> },
+        {
+            slug: 'installation',
+            name: 'Install',
+            group: 'divided',
+            icon: <IconCode className="size-4" />,
+        },
+        { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
+    ],
+    /**
+     * Sections rendered on the Pricing surface (`/session-replay/pricing`).
+     * Same shape as `productMenu`.
+     */
+    pricingMenu: [
+        { slug: 'plans', name: 'Plans', icon: <IconCheckCircle className="size-4" /> },
+        { slug: 'calculator', name: 'Pricing calculator', icon: <IconPieChart className="size-4" /> },
+        { slug: 'comparison-summary', name: 'PostHog vs...', icon: <IconList className="size-4" /> },
+        { slug: 'feature-comparison', name: 'Feature comparison', icon: <IconGraph className="size-4" /> },
+        // Hidden footer CTA rendered at the bottom of the Pricing surface.
+        { slug: 'pricing-cta', name: 'Get started', hideFromNav: true },
+    ],
     overview: {
-        title: 'Watch people use your product',
+        title: 'See how people use your product',
         description:
             'Session Replay is one of the tools that makes your product self-driving: play back sessions to see exactly why something happened so the fix is obvious. The context agents use to debug UI issues and nuanced user behavior in your product, website, or mobile app.',
+        eli5: "Session Replay records what happens in a user's session — clicks, scrolls, form inputs, page views, network requests, console logs — and plays it back like video. It's like watching a user's screen over their shoulder – it gives the nuance context you only get when you're actually watching them experience your product.",
         textColor: 'text-black', // tw
     },
     videos: {
@@ -43,6 +140,25 @@ export const sessionReplay = {
             alt: 'Session replay screenshot',
             imgClasses:
                 'absolute bottom-0 left-0 max-w-[95%] @2xl:max-w-[525px] rounded-tr-md overflow-hidden shadow-2xl',
+            // Named annotation sets for <ImageAnnotations.FromProduct />. Coordinates are
+            // percentages, authored via the internal tool at /image-annotator.
+            annotations: {
+                'dev-tools': {
+                    type: 'numbered',
+                    items: [
+                        { x: 27.2, y: 9.8, title: 'Debug views' },
+                        { x: 48.9, y: 7.8, title: 'DevTools' },
+                        { x: 32.6, y: 21.6, title: 'Event timeline' },
+                        {
+                            x: 33.7,
+                            y: 41,
+                            title: 'Timeline entries',
+                            description:
+                                'Custom events, DOM autocapture, network calls, console logs, web vitals, errors, PostHog activity',
+                        },
+                    ],
+                },
+            },
         },
         home: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_replay_timeline_light_9225f869dc.jpg',
@@ -50,12 +166,97 @@ export const sessionReplay = {
             alt: 'Session replay screenshot',
             classes: 'justify-start items-end pr-4 @lg:pr-6',
             imgClasses: 'rounded-tr-md shadow-2xl',
+            playlist: {
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/recording_list_light_5919aed63e.png',
+                srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/recording_list_dark_169d60d6fb.png',
+                annotations: {
+                    playlist: {
+                        type: 'numbered',
+                        items: [
+                            {
+                                x: 3.7,
+                                y: 2.6,
+                                title: 'Filter panel',
+                                description: 'Open the filter panel to find more recordings',
+                            },
+                            {
+                                x: 76.8,
+                                y: 2.6,
+                                title: 'Ask PostHog AI',
+                                description: "Find the recordings you're looking for",
+                            },
+                            {
+                                x: 5.7,
+                                y: 12.7,
+                                title: 'Limit recordings',
+                                description:
+                                    'Choose whether to see all recordings, or to hide ones you or other people have watched',
+                            },
+                            {
+                                x: 71.5,
+                                y: 12.7,
+                                title: 'Timestamp display',
+                                description:
+                                    'Switch time display between "relative" (seconds in recording), UTC, or project timezone',
+                            },
+                            {
+                                x: 31.3,
+                                y: 19.2,
+                                title: 'Sorting',
+                                description: 'Order recordings by timestamp, activity, errors, and more',
+                            },
+                            {
+                                x: 67.5,
+                                y: 19.1,
+                                title: 'Autoplay',
+                                description:
+                                    'Change the autoplay mode for the playlist. Switch it off, or automatically play the next newest or oldest recording.',
+                            },
+                            {
+                                x: 64.5,
+                                y: 29.2,
+                                title: 'Recording details',
+                                description: 'User, browser and OS details, click and keystroke count, initial URL',
+                            },
+                        ],
+                    },
+                },
+            },
+        },
+        filters: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/filters_light_020d186555.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/filters_dark_6f3e65501b.png',
+        },
+        'technical-context': {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/technical_content_desktop_light_a9c7516f43.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/technical_content_desktop_dark_67abc27556.png',
+            srcMobile:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/technical_content_mobile_light_bcf6de0102.png',
+            srcMobileDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/technical_content_mobile_dark_12b7c6f51b.png',
+            alt: 'Technical context in session replay',
+        },
+        chat: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/chat_light_9efd89f586.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/chat_dark_ecac24fa87.png',
+        },
+        recordings: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/recordings_light_90e389a4fa.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/recordings_dark_6a8ebd989f.png',
         },
     },
     hog: {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_hog_20fc000c14.png',
         alt: 'A hedgehog watching some session recordings',
         classes: 'absolute bottom-0 right-0 max-w-[698px]',
+    },
+    hogs: {
+        default: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_hog_20fc000c14.png',
+        },
+        mobileHog: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/replay_mobile_hog_03d948364a.png',
+        },
     },
     slider: {
         marks: [5000, 25000, 120000, 500000],
@@ -66,7 +267,9 @@ export const sessionReplay = {
     addonSliders: [
         {
             key: 'mobile_replay',
-            label: 'Mobile replay',
+            label: 'Mobile recordings',
+            pricingDescription:
+                'Replay native iOS, Android, React Native, and Flutter sessions. Billed separately from web recordings with its own free tier.',
             sliderConfig: {
                 marks: [2500, 10000, 50000, 150000, 500000],
                 min: 2500,
@@ -94,344 +297,30 @@ export const sessionReplay = {
             description: "We've improved our whole onboarding flow by about 5% too, which is great.",
         },
     },
-    features: [
-        {
-            title: 'Event timeline',
-            headline: 'Event timeline',
-            description:
-                "See the history of everything that happened in a user's session, including clicks, scrolls, and more.",
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/timeline.png',
-                    alt: 'Timeline',
-                },
-            ],
-        },
-        {
-            title: 'Console logs',
-            headline: 'Console logs',
-            description: (
-                <>
-                    Console logs are useful for debugging and can be enabled by passing{' '}
-                    <code>enable_recording_console_logs: true</code> or in your project's settings.
-                </>
-            ),
-            children: (
-                <>
-                    <div className="flex @lg:flex-row @lg:gap-x-6 flex-col">
-                        <div className="shrink">
-                            <h4 className="text-lg">Your code</h4>
-                            <CodeBlock
-                                code={`posthog.init('<ph_project_token>', {
-  api_host: '<ph_client_api_host>',
-  defaults: '<ph_posthog_js_defaults>',
-  enable_recording_console_log: true,
-});`}
-                                language="js"
-                            />
-                        </div>
-                        <div className="flex-1">
-                            <h4 className="text-lg">Console logs in a session replay</h4>
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/CodeBlocks/SessionReplay/console-logs.png"
-                                alt="Console logs in PostHog"
-                                placeholder="blurred"
-                            />
-                        </div>
-                    </div>
-                </>
-            ),
-        },
-        {
-            title: 'Network monitor',
-            headline: 'Network monitor',
-            description: 'Analyze performance and network calls',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/network.png',
-                    alt: 'Network monitor',
-                    stylize: true,
-                    shadow: true,
-                },
-            ],
-        },
-        {
-            title: 'Autocapture',
-            headline: 'Autocapture',
-            description:
-                "Capture sessions without extra code. If you're already using PostHog.js for analytics, there's nothing else to install.",
-            children: <SnippetRenderer />,
-        },
-        {
-            title: 'Capture form data',
-            headline: 'Capture form data',
-            description: (
-                <>
-                    HTML <code>input</code> fields are masked by default. But if you'd like to see what users are typing
-                    into a form, set <code>maskAllInputs</code> to <code>false</code>. (Password fields will still
-                    remain masked.)
-                </>
-            ),
-            children: (
-                <>
-                    <div className="flex flex-col md:flex-row gap-x-6">
-                        <div className="shrink">
-                            <h4 className="text-lg">Your code</h4>
-                            <CodeBlock
-                                code={`posthog.init('<YourPostHogKey>', {
-    session_recording: {
-        maskAllInputs: false
-    }
-})`}
-                                language="js"
-                            />
-                            <div className="pt-4">
-                                <CodeBlock
-                                    code={`<label>Name</label>
-<input type="text" />
-
-<label>Email</label>
-<input type="email" />
-
-<label>Password</label>
-<input type="password" />`}
-                                    language="html"
-                                />
-                            </div>
-                        </div>
-                        <div className="flex-1">
-                            <h4 className="text-lg">Session replay</h4>
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/CodeBlocks/SessionReplay/session-replay.png"
-                                alt="A screenshot of a session replay"
-                                placeholder="blurred"
-                            />
-                        </div>
-                    </div>
-                </>
-            ),
-        },
-        // {
-        //     title: 'Canvas recording',
-        //     headline: 'Canvas recording',
-        //     description:
-        //         "Capture canvas elements from your application. It works in both 2D and WebGL environments.",
-        //     children: <OSButton asLink to="/docs/session-replay/canvas-recording" state={{ newWindow: true }}>Read the docs</OSButton>,
-        // },
-        // {
-        //     title: 'Collections',
-        //     headline: 'Collections',
-        //     description:
-        //         'Create a dynamic playlist of sessions to watch based on visitor activity, user properties, or cohort',
-        //     images: [
-        //         {
-        //             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/network.png',
-        //             alt: 'Playlist',
-        //         },
-        //     ],
-        // },
-        {
-            title: 'DOM explorer',
-            headline: 'DOM explorer',
-            description:
-                "Inspect the DOM of the user's browser at any moment in the recording. This lets you see the exact HTML and CSS that was rendered at that point in time – useful for debugging.",
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/inspect_dom_e9376c469a.png',
-                    alt: 'DOM explorer',
-                },
-            ],
-        },
-        {
-            title: 'Recording rules',
-            headline: 'Recording rules',
-            description:
-                'You can limit the sessions that are recorded to a percentage of randomized traffic, or based on triggered events, user properties, or browsing behavior. You can also manually enable recording in your code when a user is opted in to a feature flag.',
-            children: (
-                <div>
-                    <h4 className="text-lg">Manually enable recording when a visitor is enrolled in a feature flag</h4>
-                    <CodeBlock
-                        code={`posthog.init('<ph_project_token>', {
-  api_host: '<ph_client_api_host>',
-  defaults: '<ph_posthog_js_defaults>',
-  disable_session_recording: true,
-});
-window.posthog.onFeatureFlags(function () {
-  if (window.posthog.isFeatureEnabled('your-feature-flag')) {
-    window.posthog.startSessionRecording();
-  }
-});
-`}
-                        language="js"
-                    />
-                </div>
-            ),
-        },
-        {
-            title: 'Supported platforms',
-            headline: 'Supported platforms',
-            description:
-                "Works with PostHog.js on the web. If you're already using product analytics, there's no separate installation.",
-            children: (
-                <div className="max-w-xl mx-auto">
-                    <fieldset className="bg-primary">
-                        <legend className="text-lg font-semibold">Web</legend>
-                        <OSButton
-                            asLink
-                            icon={<IconJavaScript />}
-                            iconClassName="size-8 relative -top-px"
-                            size="xl"
-                            className="!text-xl mr-1"
-                            to="/docs/libraries/js"
-                            state={{
-                                newWindow: true,
-                            }}
-                        >
-                            <span>JavaScript</span>
-                        </OSButton>
-                    </fieldset>
-                    <fieldset className="bg-primary">
-                        <legend className="text-lg font-semibold">Mobile*</legend>
-                        <OSButton
-                            asLink
-                            icon={<IconApple />}
-                            iconClassName="size-8 relative -top-px"
-                            size="xl"
-                            className="!text-xl mr-1"
-                            to="/docs/libraries/ios"
-                            state={{
-                                newWindow: true,
-                            }}
-                        >
-                            <span>iOS</span>
-                        </OSButton>
-                        <OSButton
-                            asLink
-                            icon={<IconAndroid />}
-                            iconClassName="size-8 relative -top-px"
-                            size="xl"
-                            className="!text-xl mr-1"
-                            to="/docs/libraries/android"
-                            state={{
-                                newWindow: true,
-                            }}
-                        >
-                            <span>Android</span>
-                        </OSButton>
-                    </fieldset>
-                    <fieldset className="bg-primary">
-                        <legend className="text-lg font-semibold">Cross-platform*</legend>
-                        <OSButton
-                            asLink
-                            icon={<IconReactNative />}
-                            iconClassName="size-8 relative -top-px"
-                            size="xl"
-                            className="!text-xl mr-1"
-                            to="/docs/libraries/react-native"
-                            state={{
-                                newWindow: true,
-                            }}
-                        >
-                            <span>React Native</span>
-                        </OSButton>
-                        <OSButton
-                            asLink
-                            icon={<IconFlutter />}
-                            iconClassName="size-8 relative -top-px"
-                            size="xl"
-                            className="!text-xl mr-1"
-                            to="/docs/libraries/flutter"
-                            state={{
-                                newWindow: true,
-                            }}
-                        >
-                            <span>Flutter</span>
-                        </OSButton>
-                    </fieldset>
-                    <p className="">
-                        *Mobile and cross-platform libraries available as an{' '}
-                        <Link to="/addons" state={{ newWindow: true }}>
-                            add-on
-                        </Link>
-                        .
-                    </p>
-                </div>
-            ),
-        },
-        {
-            title: 'More features',
-            headline: 'More features',
-            features: [
-                {
-                    title: 'Canvas recording',
-                    description:
-                        'Capture canvas elements from your application. It works in both 2D and WebGL environments.',
-                },
-                {
-                    title: 'Filter by event',
-                    description: 'Limit to recordings where users performed a specific event or action',
-                },
-                {
-                    title: 'Filter by people',
-                    description:
-                        'Use person properties (like country, custom property, or even email address) to quickly find relevant recordings',
-                },
-                {
-                    title: 'Saved filters',
-                    description: 'Find important recordings faster with saved filters',
-                },
-                {
-                    title: 'Collections',
-                    description:
-                        'Create a dynamic playlist of sessions to watch based on visitor activity, user properties, or cohort',
-                },
-                {
-                    title: 'Block sensitive data',
-                    description:
-                        'Limit the data you capture from the DOM with HTML attributes or a customizable config within the PostHog app',
-                },
-                {
-                    title: 'Share & embed',
-                    description: 'Share recordings directly by URL or embed via iframe',
-                },
-                {
-                    title: 'Minimum duration filter',
-                    description: 'Only record sessions longer than a specified duration',
-                },
-                {
-                    title: 'Sample recorded sessions',
-                    description:
-                        'Restrict the percentage of sessions that will be recorded to reduce data collection or cost',
-                },
-            ],
-        },
-        {
-            title: 'MCP',
-            headline: 'Search replays from your editor',
-            description:
-                'Find session recordings from Cursor, Claude Code, VS Code, or any MCP-compatible agent. Filter by events, user properties, and frustration signals.',
-            features: [
-                {
-                    title: 'Investigate bug reports',
-                    description: 'Find session replays where users encountered errors to feed your agent with context.',
-                },
-                {
-                    title: 'Research before coding',
-                    description: 'Summarize current user behavior before making code changes.',
-                },
-                {
-                    title: 'Validate after deploying',
-                    description: 'Monitor how users interact with newly deployed updates.',
-                },
-                {
-                    title: 'Search session replays',
-                    description:
-                        'Filter recordings by events, user properties, time ranges, and specific user behaviors.',
-                },
-            ],
-            children: <MCPInstall />,
-        },
-    ],
+    useCases: {
+        intro: 'Session Replay is used across teams depending on your role.',
+        rows: [
+            ['Product Engineers', "Debug production issues that can't be reproduced locally"],
+            ['Support', 'Pinpoint the source of issues with visual verification and console logs'],
+            ['PMs & Designers', 'Spot friction, dead ends, and rage clicks'],
+            ['Growth', 'Investigate funnel drop-off and onboarding bleed'],
+            ['QA', 'Validating releases by watching real users instead of staged flows'],
+        ],
+    },
+    features,
+    mcp: {
+        title: 'MCP',
+        headline: 'Search replays from your editor',
+        description:
+            'Find session recordings from Cursor, Claude Code, VS Code, or any MCP-compatible agent. Filter by events, user properties, and frustration signals.',
+    },
+    installation: {
+        title: 'Install',
+        headline: 'Install',
+        description: "No matter how you build, we've probably got a way to install it.",
+        productSlug: 'session-replay',
+        categories: ['web', 'mobile', 'no-code'],
+    },
     postHogOnPostHog: {
         title: 'How PostHog uses Session Replay',
         benefits: [
@@ -588,16 +477,56 @@ window.posthog.onFeatureFlags(function () {
     ai: {
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/SESSION_REPLAY_a3ca565731.png',
         imageAlt: 'PostHog AI and session replay',
-        description: 'find the recording, see why it broke, and ship the fix',
-        skills: [
-            'Finds recordings through natural language prompts – describe the behavior you want instead of setting filters',
-            'Reads the event stream from a recording and produces a summary',
-            'Clusters similar sessions and surfaces representative examples from thousands',
-        ],
-        prompts: [
-            'Find sessions where users dropped off during checkout',
-            'Find sessions with rage clicks on the pricing page',
-            'Show recordings from enterprise users in the last 24 hours',
+        intro: 'Ask PostHog AI to find a specific session or summarize a group of them. Works in PostHog AI (in-app chat), PostHog Code (our AI code editor), and in your product editor (using the MCP).',
+        groups: [
+            {
+                title: 'Find',
+                tool: 'query-session-recordings-list',
+                prompts: [
+                    'Find sessions where users dropped off during checkout',
+                    'Show me sessions from yesterday with rage clicks on /pricing',
+                    'Find replays where the signup form was abandoned',
+                    'Show enterprise users who hit a 500 error in the last 24 hours',
+                    'Find mobile sessions longer than 5 minutes from this week',
+                    "Pull replays where users clicked the upgrade button but didn't convert",
+                ],
+            },
+            {
+                title: 'Summarize',
+                tool: 'session-recording-summarize',
+                prompts: [
+                    'Summarize what this user did in their last session',
+                    'What happened in the session for ticket #4821?',
+                    'Walk me through what tina@acme.com did before opening this support ticket',
+                    'Tell me where users typically get stuck in onboarding',
+                ],
+            },
+            {
+                title: 'Cluster + investigate',
+                prompts: [
+                    "What's the most common reason users rage click on /settings?",
+                    "Cluster yesterday's checkout drop-offs and tell me what they have in common",
+                    'What are the top 3 patterns in sessions that ended on the pricing page?',
+                    'Find the funniest thing a user did this week',
+                ],
+            },
+            {
+                title: 'Build a playlist',
+                tool: 'session-recording-playlist-create',
+                prompts: [
+                    'Make a playlist of every session where someone hit our new pricing page',
+                    'Save a playlist of replays from users in the experiment B variant',
+                    'Create a playlist of sessions where users abandoned the signup flow',
+                ],
+            },
+            {
+                title: 'Debug a specific user',
+                prompts: [
+                    'Show me what acme.com users did this week',
+                    'Pull every replay from user_id 12345 in the last 7 days',
+                    'Find sessions where this user hit a JS error',
+                ],
+            },
         ],
     },
     presenterNotes: {

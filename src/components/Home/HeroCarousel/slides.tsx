@@ -1,8 +1,9 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
-import { IconSparkles } from '@posthog/icons'
+import { IconFlag, IconLightBulb, IconRocket, IconSearch, IconSparkles } from '@posthog/icons'
 import Link from 'components/Link'
 import Tooltip from 'components/RadixUI/Tooltip'
+import Logo from 'components/Logo'
 import { getLogo } from 'constants/logos'
 import useSourcePlatforms from 'hooks/useSourcePlatforms'
 import { SELF_HOSTED_SOURCES } from 'constants/sources'
@@ -133,20 +134,23 @@ export const OnePlaceSlide = () => {
     const manageProducts = manageQueryHandles.map((h) => allProducts.find((p: any) => p.handle === h))
     return (
         <div className="rounded p-4 flex flex-col h-full">
-            <div className="mb-6">
+            <div className="relative mb-6 @3xl:mb-0 @3xl:min-h-[184px]">
                 <CloudinaryImage
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/event_pipelines_be7e71e65e.png"
-                    className="@lg:float-right @lg:ml-8 mb-4 @lg:mb-0 w-60"
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/construction_hog_80a362973d.png"
+                    alt="A construction hedgehog carrying a pipe"
+                    imgClassName="mx-auto mb-4 w-48 @lg:float-right @lg:mb-0 @lg:ml-6 @3xl:absolute @3xl:right-0 @3xl:top-0 @3xl:z-0 @3xl:m-0 @3xl:w-64 @4xl:w-72"
                 />
-                <h2 className="mt-0 mb-2">Build better products with better data</h2>
-                <p className="text-secondary text-[15px]">
-                    Not your mama's data integrations. Third party data is imported into PostHog's CDP and warehouse and
-                    lives as a first-class citizen. This means you can query third party data <em>and</em> product usage
-                    data, leading to more informed decisions.
-                </p>
+                <div className="relative z-10 @3xl:max-w-[65%]">
+                    <h2 className="mt-0 mb-2 text-xl @2xl:text-2xl">Build better products with better data</h2>
+                    <p className="text-secondary text-[15px]">
+                        Not your mama's data integrations. Third party data is imported into PostHog's CDP and warehouse
+                        and lives as a first-class citizen. This means you can query third party data <em>and</em>{' '}
+                        product usage data, leading to more informed decisions.
+                    </p>
+                </div>
             </div>
 
-            <div className="grid grid-cols-1 @lg:grid-cols-2 @2xl:grid-cols-3 gap-8 @2xl:gap-6 @3xl:gap-8 flex-1">
+            <div className="relative z-10 grid flex-1 clear-both grid-cols-1 gap-8 bg-primary @lg:grid-cols-2 @2xl:grid-cols-3 @2xl:gap-6 @3xl:rounded @3xl:border @3xl:border-primary @3xl:p-4 @4xl:gap-8">
                 {/* Data sources & import */}
                 <div className="flex flex-col gap-3 order-1">
                     <div className="@lg:text-center text-secondary text-sm border-b border-secondary pb-1">
@@ -390,13 +394,53 @@ const ArcProducts = ({ products }: { products: any[] }) => {
     )
 }
 
+const emptyStateActions = [
+    { label: 'Learn', Icon: IconLightBulb },
+    { label: 'Build', Icon: IconRocket },
+    { label: 'Signals', Icon: IconFlag },
+]
+
+const PostHogAIEmptyState = () => (
+    <div className="@container flex min-h-[242px] w-full flex-col items-center overflow-hidden rounded bg-[#F3F4F0] px-2 pt-5 text-center dark:bg-[#131316] @sm:px-3">
+        <Logo wordmark={false} className="h-7 w-[52px] dark:hidden" />
+        <Logo wordmark={false} variant="mono" color="white" className="hidden h-7 w-[52px] dark:block" />
+
+        <h3 className="mb-0 mt-5 text-lg font-bold leading-tight @sm:text-xl">Hello, builder!</h3>
+
+        <div className="mt-7 w-full">
+            <div className="relative z-10 flex h-11 items-center gap-2 rounded-xl border-2 border-primary bg-light px-3 shadow-[0_0_0_3px_rgba(83,88,75,0.12)] dark:bg-[#222328]">
+                <IconSearch className="size-5 shrink-0 text-primary" />
+                <span className="min-w-0 flex-1 text-left text-base text-secondary">What can I help you with?</span>
+            </div>
+            <div className="mx-4 -mt-px flex h-8 items-center gap-1.5 rounded-b-xl border border-primary bg-accent/40 px-2 text-left text-sm text-secondary">
+                <kbd className="flex size-5 items-center justify-center rounded border border-primary bg-light font-mono text-sm text-primary shadow-sm dark:bg-dark">
+                    /
+                </kbd>
+                <span>For commands</span>
+            </div>
+        </div>
+
+        <div className="mt-3 flex flex-wrap justify-center gap-2">
+            {emptyStateActions.map(({ label, Icon }) => (
+                <span
+                    key={label}
+                    className="inline-flex h-8 items-center gap-1.5 rounded-md border border-primary bg-transparent px-2.5 text-sm font-medium text-primary shadow-sm"
+                >
+                    <Icon className="size-4" />
+                    {label}
+                </span>
+            ))}
+        </div>
+    </div>
+)
+
 export const UnderstandUsageSlide = () => {
     const allProducts = useProduct() as any[]
     const products = analyticsHandles.map((h) => allProducts.find((p: any) => p.handle === h)).filter(Boolean)
 
     return (
         <div className="rounded p-4 relative h-full flex flex-col bg-[#F3F4F0] dark:bg-[#131316]">
-            <h2 className="my-0">Understand what users are doing</h2>
+            <h2 className="my-0 text-xl @2xl:text-2xl">Understand what users are doing</h2>
             <div className="grid grid-cols-1 @lg:grid-cols-2 gap-x-8 gap-y-4 mb-2">
                 <div>
                     <p className="text-secondary text-sm">
@@ -422,14 +466,7 @@ export const UnderstandUsageSlide = () => {
             <div className="relative mt-auto flex-1 min-h-[160px]">
                 <ArcProducts products={products} />
                 <div className="text-center max-w-[496px] mx-auto relative">
-                    <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog_ai_light_8daa46cb81.png"
-                        className="dark:hidden"
-                    />
-                    <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog_ai_dark_512e216c3a.png"
-                        className="hidden dark:block"
-                    />
+                    <PostHogAIEmptyState />
                 </div>
             </div>
         </div>
@@ -442,7 +479,7 @@ export const DebugFixSlide = () => {
 
     return (
         <div className="rounded pt-4 px-4 bg-primary">
-            <h2 className="mt-0 mb-2">Triage issues, fix them automatically</h2>
+            <h2 className="mt-0 mb-2  text-xl @2xl:text-2xl">Triage issues, fix them automatically</h2>
             <p className="text-secondary text-sm">
                 Use PostHog's debugging tools to quickly find issues and get the context to fix them.
             </p>
@@ -504,10 +541,10 @@ export const TestRolloutSlide = () => {
     return (
         <div className="rounded p-4 pb-6">
             <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/e_trim/w_500,c_limit,q_auto,f_auto/generated_1772230552078_80c991e813.png"
-                imgClassName="@lg:float-right mb-4 @lg:!ml-2 @lg:!mt-4 @lg:!mr-0 @lg:mb-0 w-48 -scale-x-100"
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/coastal_hog_79dc4dff47.png"
+                imgClassName="@lg:float-right mb-4 @lg:!ml-2 @lg:!mt-4 @lg:!mr-0 @lg:mb-0 w-48"
             />
-            <h2 className="mt-0">Ship features safely & get feedback</h2>
+            <h2 className="mt-0 text-xl @2xl:text-2xl">Ship features safely & get feedback</h2>
             <p className="text-secondary text-sm">
                 Now that you know what's happening, you can make informed decisions about what to build.
             </p>

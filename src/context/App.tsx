@@ -1,13 +1,20 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import React, { createContext, useContext, useEffect, useMemo, useState, useCallback, useRef } from 'react'
+import React, {
+    createContext,
+    useContext,
+    useEffect,
+    useLayoutEffect,
+    useMemo,
+    useState,
+    useCallback,
+    useRef,
+} from 'react'
 import { AppWindow } from './Window'
-import { WindowSearchUI } from 'components/SearchUI'
 import { navigate } from 'gatsby'
 import SignIn from 'components/Squeak/components/Classic/SignIn'
 import Register from 'components/Squeak/components/Classic/Register'
 import ForgotPassword from 'components/Squeak/components/Classic/ForgotPassword'
 import { User } from 'hooks/useUser'
-import { ChatProvider } from 'hooks/useChat'
 import Start from 'components/Start'
 import useDataPipelinesNav from '../navs/useDataPipelinesNav'
 import useSourcesNav from '../navs/useSourcesNav'
@@ -48,6 +55,16 @@ interface ChatContext {
     value: { path: string; label: string }
 }
 
+export interface ChatParams {
+    path: string
+    context?: ChatContext[]
+    quickQuestions?: string[]
+    chatId?: string
+    date?: string
+    initialQuestion?: string
+    codeSnippet?: { code: string; language: string; sourceUrl: string }
+}
+
 type WindowElement = React.ReactNode & {
     key: string
     props: {
@@ -82,6 +99,9 @@ interface AppContextType {
             previousPosition?: { x?: number; y?: number }
             previousSize?: { width?: number; height?: number }
             element?: any
+            expanded?: boolean
+            windowed?: boolean
+            snapped?: 'left' | 'right' | false
         }
     ) => void
     getPositionDefaults: (
@@ -94,29 +114,14 @@ interface AppContextType {
     handleSnapToSide: (side: 'left' | 'right') => void
     constraintsRef: React.RefObject<HTMLDivElement>
     taskbarRef: React.RefObject<HTMLDivElement>
-    expandWindow: () => void
+    expandWindow: (target?: AppWindow) => void
+    getExpandedDimensions: () => { position: { x: number; y: number }; size: { width: number; height: number } }
     openSignIn: (onSuccess?: (user: User) => void) => void
     openRegister: () => void
     openForgotPassword: () => void
     siteSettings: SiteSettings
     updateSiteSettings: (settings: SiteSettings) => void
-    openNewChat: ({
-        path,
-        context,
-        quickQuestions,
-        chatId,
-        date,
-        initialQuestion,
-        codeSnippet,
-    }: {
-        path: string
-        context?: ChatContext[]
-        quickQuestions?: string[]
-        chatId?: string
-        date?: string
-        initialQuestion?: string
-        codeSnippet?: { code: string; language: string; sourceUrl: string }
-    }) => void
+    openNewChat: (params: ChatParams) => void
     isNotificationsPanelOpen: boolean
     setIsNotificationsPanelOpen: (isOpen: boolean) => void
     isActiveWindowsPanelOpen: boolean
@@ -134,7 +139,6 @@ interface AppContextType {
     setConfetti: (isActive: boolean) => void
     confetti: boolean
     posthogInstance?: string
-    websiteMode: boolean
     desktopParams?: string
     copyDesktopParams: () => void
     desktopCopied: boolean
@@ -142,7 +146,84 @@ interface AppContextType {
     windowsInView: AppWindow[]
     searchOpen: boolean
     setSearchOpen: (isOpen: boolean) => void
+    searchInitialFilter: string
+    chatOpen: boolean
+    setChatOpen: (isOpen: boolean) => void
+    chatParams: ChatParams | null
+    updateTaskbarHeight: () => void
 }
+
+// Keys whose identities are stable for the provider's lifetime (callbacks, state
+// setters, refs). Split into their own context so consumers that only dispatch
+// actions don't re-render when volatile window state changes. See `useAppActions`.
+type AppActionKeys =
+    | 'closeWindow'
+    | 'bringToFront'
+    | 'setWindowTitle'
+    | 'minimizeWindow'
+    | 'addWindow'
+    | 'updateWindowRef'
+    | 'updateWindow'
+    | 'getPositionDefaults'
+    | 'getDesktopCenterPosition'
+    | 'openSearch'
+    | 'handleSnapToSide'
+    | 'constraintsRef'
+    | 'taskbarRef'
+    | 'expandWindow'
+    | 'getExpandedDimensions'
+    | 'openSignIn'
+    | 'openRegister'
+    | 'openForgotPassword'
+    | 'updateSiteSettings'
+    | 'openNewChat'
+    | 'setIsNotificationsPanelOpen'
+    | 'setIsActiveWindowsPanelOpen'
+    | 'openStart'
+    | 'animateClosingAllWindows'
+    | 'closeAllWindows'
+    | 'setClosingAllWindowsAnimation'
+    | 'setScreensaverPreviewActive'
+    | 'setConfetti'
+    | 'copyDesktopParams'
+    | 'setSearchOpen'
+    | 'setChatOpen'
+    | 'updateTaskbarHeight'
+
+export type AppActionsContextType = Pick<AppContextType, AppActionKeys> & {
+    // A stable ref to the latest windowsInView, for consumers that need the value
+    // lazily without subscribing to re-renders.
+    windowsInViewRef: React.MutableRefObject<AppWindow[]>
+}
+
+// Rarely-changing global state (display settings, environment flags, nav menu).
+// Split out so consumers reading only these don't re-render when volatile window
+// state (windows, focusedWindow, panels, etc.) changes. See `useAppSettings`.
+type AppSettingsKeys = 'siteSettings' | 'compact' | 'isMobile' | 'posthogInstance' | 'menu'
+
+export type AppSettingsContextType = Pick<AppContextType, AppSettingsKeys>
+
+// Transient global UI flags that toggle independently of window state. Split out so
+// consumers reading these (e.g. the desktop) don't re-render when windows change.
+// See `useAppUIState`.
+type AppUIStateKeys =
+    | 'isNotificationsPanelOpen'
+    | 'isActiveWindowsPanelOpen'
+    | 'closingAllWindowsAnimation'
+    | 'screensaverPreviewActive'
+    | 'confetti'
+    | 'searchOpen'
+    | 'chatOpen'
+    | 'chatParams'
+
+export type AppUIStateContextType = Pick<AppContextType, AppUIStateKeys>
+
+// The volatile window list, isolated into its own context so consumers that only need
+// `windows` (e.g. the taskbar, the window list) re-render only when windows actually
+// change — not on every unrelated AppProvider render. See `useAppWindows`.
+type AppWindowsKeys = 'windows'
+
+export type AppWindowsContextType = Pick<AppContextType, AppWindowsKeys>
 
 interface AppProviderProps {
     children: React.ReactNode
@@ -264,17 +345,18 @@ export const Context = createContext<AppContextType>({
     constraintsRef: { current: null },
     taskbarRef: { current: null },
     expandWindow: () => {},
+    getExpandedDimensions: () => ({ position: { x: 0, y: 0 }, size: { width: 0, height: 0 } }),
     openSignIn: () => null,
     openRegister: () => {},
     openForgotPassword: () => {},
     siteSettings: {
         theme: 'light',
-        experience: 'posthog',
         colorMode: 'light',
         skinMode: 'modern',
         cursor: 'default',
         wallpaper: 'keyboard-garden',
         screensaverDisabled: true,
+        heaterMode: false,
         clickBehavior: 'double',
         performanceBoost: false,
     },
@@ -297,7 +379,6 @@ export const Context = createContext<AppContextType>({
     setConfetti: () => {},
     confetti: false,
     posthogInstance: undefined,
-    websiteMode: false,
     desktopParams: undefined,
     copyDesktopParams: () => {},
     desktopCopied: false,
@@ -305,6 +386,89 @@ export const Context = createContext<AppContextType>({
     windowsInView: [],
     searchOpen: false,
     setSearchOpen: () => {},
+    searchInitialFilter: '',
+    chatOpen: false,
+    setChatOpen: () => {},
+    chatParams: null,
+    updateTaskbarHeight: () => {},
+})
+
+// Stable-identity actions context. Consumers that only dispatch actions (open/close
+// windows, toggle panels, etc.) should read from `useAppActions()` so they don't
+// re-render when volatile app state changes.
+export const ActionsContext = createContext<AppActionsContextType>({
+    closeWindow: () => {},
+    bringToFront: () => {},
+    setWindowTitle: () => null,
+    minimizeWindow: () => {},
+    addWindow: () => {},
+    updateWindowRef: () => {},
+    updateWindow: () => {},
+    getPositionDefaults: () => ({ x: 0, y: 0 }),
+    getDesktopCenterPosition: () => ({ x: 0, y: 0 }),
+    openSearch: () => {},
+    handleSnapToSide: () => {},
+    constraintsRef: { current: null },
+    taskbarRef: { current: null },
+    expandWindow: () => {},
+    getExpandedDimensions: () => ({ position: { x: 0, y: 0 }, size: { width: 0, height: 0 } }),
+    openSignIn: () => null,
+    openRegister: () => {},
+    openForgotPassword: () => {},
+    updateSiteSettings: () => {},
+    openNewChat: () => {},
+    setIsNotificationsPanelOpen: () => {},
+    setIsActiveWindowsPanelOpen: () => {},
+    openStart: () => {},
+    animateClosingAllWindows: () => {},
+    closeAllWindows: () => {},
+    setClosingAllWindowsAnimation: () => {},
+    setScreensaverPreviewActive: () => {},
+    setConfetti: () => {},
+    copyDesktopParams: () => {},
+    setSearchOpen: () => {},
+    setChatOpen: () => {},
+    updateTaskbarHeight: () => {},
+    windowsInViewRef: { current: [] },
+})
+
+// Rarely-changing settings context. Consumers that only read display settings /
+// environment flags / the nav menu should read from `useAppSettings()` so they
+// don't re-render when volatile window state changes.
+export const SettingsContext = createContext<AppSettingsContextType>({
+    siteSettings: {
+        theme: 'light',
+        colorMode: 'light',
+        skinMode: 'modern',
+        cursor: 'default',
+        wallpaper: 'keyboard-garden',
+        screensaverDisabled: true,
+        heaterMode: false,
+        clickBehavior: 'double',
+        performanceBoost: false,
+    },
+    compact: false,
+    isMobile: false,
+    posthogInstance: undefined,
+    menu: [],
+})
+
+// Transient UI-flags context. Consumers reading only these (panels, confetti,
+// screensaver, search) should read from `useAppUIState()` so they don't re-render
+// when volatile window state changes.
+export const UIStateContext = createContext<AppUIStateContextType>({
+    isNotificationsPanelOpen: false,
+    isActiveWindowsPanelOpen: false,
+    closingAllWindowsAnimation: false,
+    screensaverPreviewActive: false,
+    confetti: false,
+    searchOpen: false,
+    chatOpen: false,
+    chatParams: null,
+})
+
+export const WindowsContext = createContext<AppWindowsContextType>({
+    windows: [],
 })
 
 export interface AppSetting {
@@ -312,7 +476,7 @@ export interface AppSetting {
         variant: 'control' | 'test'
         flag: string
     }
-    size: {
+    size?: {
         min: { width: number; height: number }
         max: { width: number; height: number }
         fixed?: boolean
@@ -330,6 +494,10 @@ export interface AppSetting {
     modal?: {
         type: 'standard' | 'side' | 'floating'
     }
+    closeOnEscape?: boolean
+    toolbar?: boolean
+    hideTitle?: boolean
+    mesh?: 'green' | 'red' | 'yellow' | 'blue' | 'purple'
 }
 
 export interface AppSettings {
@@ -348,8 +516,8 @@ const appSettings: AppSettings = {
                 height: 500,
             },
             max: {
-                width: 960,
-                height: 1000,
+                width: 1200,
+                height: 1500,
             },
             fixed: false,
         },
@@ -442,6 +610,9 @@ const appSettings: AppSettings = {
                 return { x, y }
             },
         },
+    },
+    '/session-replay': {
+        mesh: 'yellow',
     },
     '/wizard': {
         size: {
@@ -611,22 +782,6 @@ const appSettings: AppSettings = {
             },
         },
     },
-    '/product-toolkit': {
-        size: {
-            min: {
-                width: 700,
-                height: 500,
-            },
-            max: {
-                width: 800,
-                height: 1000,
-            },
-            fixed: false,
-        },
-        position: {
-            center: true,
-        },
-    },
     '/paint': {
         size: {
             min: {
@@ -650,7 +805,7 @@ const appSettings: AppSettings = {
                 width: 700,
                 height: 552,
             },
-            fixed: false,
+            fixed: true,
             autoHeight: true,
         },
         position: {
@@ -687,40 +842,6 @@ const appSettings: AppSettings = {
                 width: 850,
                 height: 1000,
             },
-        },
-    },
-    start: {
-        size: {
-            min: {
-                width: 850,
-                height: 580,
-            },
-            max: {
-                width: 850,
-                height: 580,
-            },
-            autoHeight: true,
-            fixed: true,
-        },
-        position: {
-            center: true,
-        },
-    },
-    '/start': {
-        size: {
-            min: {
-                width: 850,
-                height: 580,
-            },
-            max: {
-                width: 850,
-                height: 580,
-            },
-            autoHeight: true,
-            fixed: true,
-        },
-        position: {
-            center: true,
         },
     },
     '/about': {
@@ -785,6 +906,7 @@ const appSettings: AppSettings = {
         },
     },
     '/display-options': {
+        closeOnEscape: true,
         size: {
             min: {
                 width: 600,
@@ -800,22 +922,7 @@ const appSettings: AppSettings = {
         position: {
             center: true,
         },
-    },
-    '/why': {
-        size: {
-            min: {
-                width: 750,
-                height: 575,
-            },
-            max: {
-                width: 750,
-                height: 575,
-            },
-            fixed: true,
-        },
-        position: {
-            center: true,
-        },
+        toolbar: true,
     },
     '/terms': {
         size: {
@@ -878,6 +985,7 @@ const appSettings: AppSettings = {
         },
     },
     '/vibe-check': {
+        closeOnEscape: true,
         size: {
             min: {
                 width: 750,
@@ -894,6 +1002,7 @@ const appSettings: AppSettings = {
         },
     },
     '/credits': {
+        closeOnEscape: true,
         size: {
             min: {
                 width: 300,
@@ -910,6 +1019,7 @@ const appSettings: AppSettings = {
         },
     },
     '/kbd': {
+        closeOnEscape: true,
         size: {
             min: {
                 width: 600,
@@ -947,6 +1057,7 @@ const appSettings: AppSettings = {
         },
     },
     '/demo': {
+        toolbar: true,
         size: {
             min: {
                 width: 960,
@@ -956,7 +1067,7 @@ const appSettings: AppSettings = {
                 width: 960,
                 height: 682,
             },
-            fixed: false,
+            fixed: true,
             autoHeight: true,
         },
         position: {
@@ -1031,6 +1142,7 @@ const appSettings: AppSettings = {
         position: {
             center: true,
         },
+        toolbar: true,
     },
     cher: {
         size: {
@@ -1183,6 +1295,7 @@ const appSettings: AppSettings = {
         modal: {
             type: 'standard',
         },
+        toolbar: true,
     },
     'hedgehog-generator': {
         size: {
@@ -1420,33 +1533,81 @@ const appSettings: AppSettings = {
             fixed: true,
         },
     },
+    '/docs': {
+        toolbar: true,
+    },
+    '/merch': {
+        toolbar: true,
+        hideTitle: true,
+    },
+    '/trash': {
+        toolbar: true,
+    },
+    '/product-analytics': {
+        toolbar: true,
+    },
+    '/web-analytics': {
+        toolbar: true,
+    },
+    '/feature-flags': {
+        toolbar: true,
+    },
+    '/experiments': {
+        toolbar: true,
+    },
+    '/surveys': {
+        toolbar: true,
+    },
+    '/error-tracking': {
+        toolbar: true,
+    },
+    '/logs': {
+        toolbar: true,
+    },
+    '/workflows': {
+        toolbar: true,
+    },
+    '/endpoints': {
+        toolbar: true,
+    },
+    '/ai': {
+        toolbar: true,
+    },
+    '/ai-observability': {
+        toolbar: true,
+    },
+    '/mcp-analytics': {
+        toolbar: true,
+    },
+    '/hog': {
+        toolbar: true,
+    },
+    '/changelog': {
+        toolbar: true,
+    },
+    '/feet-pics': {
+        toolbar: true,
+    },
 } as const
 
 export interface SiteSettings {
-    experience: 'posthog' | 'boring'
     colorMode: 'light' | 'dark' | 'system'
     theme: 'light' | 'dark'
     skinMode: 'modern' | 'classic'
     cursor: 'default' | 'xl' | 'james'
-    wallpaper:
-        | 'keyboard-garden'
-        | 'hogzilla'
-        | 'startup-monopoly'
-        | 'office-party'
-        | '2001-bliss'
-        | 'parade'
-        | 'coding-at-night'
+    wallpaper: 'keyboard-garden' | 'hogzilla' | 'startup-monopoly' | 'office-party'
     screensaverDisabled?: boolean
+    heaterMode?: boolean
     clickBehavior?: 'single' | 'double'
     performanceBoost?: boolean
 }
 
 const isLabel = (item: any) => !item?.url && item?.name
 
-const getInitialSiteSettings = (isMobile: boolean, compact: boolean) => {
-    const lastReset = typeof window !== 'undefined' ? localStorage.getItem('lastReset') : null
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
+
+const getInitialSiteSettings = () => {
     const siteSettings = {
-        experience: 'posthog',
         colorMode: (typeof window !== 'undefined' && (window as any).__theme) || 'light',
         theme: (typeof window !== 'undefined' && (window as any).__theme) || 'light',
         skinMode: 'modern',
@@ -1455,45 +1616,62 @@ const getInitialSiteSettings = (isMobile: boolean, compact: boolean) => {
         clickBehavior: 'double',
         performanceBoost: false,
         screensaverDisabled: true,
+        heaterMode: false,
         ...(typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('siteSettings') || '{}') : {}),
-        ...(!lastReset ? { experience: 'posthog' } : {}),
     }
 
-    if (isMobile || compact) {
-        siteSettings.experience = 'boring'
-    }
-
-    if (siteSettings.wallpaper === 'action-figure') {
+    const retiredWallpapers = ['action-figure', '2001-bliss', 'parade', 'coding-at-night']
+    if (retiredWallpapers.includes(siteSettings.wallpaper)) {
         siteSettings.wallpaper = 'keyboard-garden'
     }
+
+    // The classic skin has been retired; force anyone with it saved back to modern
+    siteSettings.skinMode = 'modern'
 
     return siteSettings
 }
 
 export const Provider = ({ children, element, location }: AppProviderProps) => {
     const isSSR = typeof window === 'undefined'
-    const compact = typeof window !== 'undefined' && window !== window.parent
+    const [compact, setCompact] = useState(false)
     const constraintsRef = useRef<HTMLDivElement>(null)
     const taskbarRef = useRef<HTMLDivElement>(null)
-    const [isMobile, setIsMobile] = useState(!isSSR && window.innerWidth < 768)
-    const [siteSettings, setSiteSettings] = useState<SiteSettings>(getInitialSiteSettings(isMobile, compact))
-    const websiteMode = siteSettings.experience === 'boring'
-    const [taskbarHeight, setTaskbarHeight] = useState(38)
+    const [isMobile, setIsMobile] = useState(false)
+    const [siteSettings, setSiteSettings] = useState<SiteSettings>({
+        colorMode: 'light',
+        theme: 'light',
+        skinMode: 'modern',
+        cursor: 'default',
+        wallpaper: 'keyboard-garden',
+        clickBehavior: 'double',
+        performanceBoost: false,
+        screensaverDisabled: true,
+        heaterMode: false,
+    })
+    const [taskbarHeight, setTaskbarHeight] = useState(59)
     const [lastClickedElementRect, setLastClickedElementRect] = useState<{ x: number; y: number } | null>(null)
     const [desktopCopied, setDesktopCopied] = useState(false)
     const [windowsInView, setWindowsInView] = useState<AppWindow[]>([])
-    const urlObj = isSSR ? null : new URL(location.href)
-    const queryString = isSSR ? '' : urlObj?.search.substring(1)
-    const parsed = isSSR ? {} : qs.parse(queryString)
-    const paramsWindows = parsed?.windows
+    // Stable ref mirror of windowsInView so consumers that only need the latest value
+    // lazily (e.g. useInactivityDetection inside a timeout) can read it without
+    // subscribing to the volatile context and re-rendering on every provider render.
+    const windowsInViewRef = useRef(windowsInView)
+    useEffect(() => {
+        windowsInViewRef.current = windowsInView
+    }, [windowsInView])
     const stateWindows = element.props?.location?.state?.savedWindows
     const posthog = usePostHog()
 
-    const [windows, setWindows] = useState<AppWindow[]>(
-        (location.key === 'initial' && location.pathname === '/' && isMobile) || !!paramsWindows
-            ? []
-            : getInitialWindows(element)
-    )
+    const [windows, setWindows] = useState<AppWindow[]>(() => {
+        if (isSSR) {
+            return [createNewWindow(element, [], location, true, taskbarHeight)]
+        }
+        const urlObj = new URL(location.href)
+        const queryString = urlObj?.search.substring(1)
+        const parsed = qs.parse(queryString)
+        if (parsed?.windows) return []
+        return getInitialWindows(element)
+    })
     const windowsRef = useRef(windows)
     useEffect(() => {
         windowsRef.current = windows
@@ -1511,7 +1689,19 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const [confetti, setConfetti] = useState(false)
     const [posthogInstance, setPosthogInstance] = useState<string>()
     const [searchOpen, setSearchOpen] = useState<boolean>(false)
+    const [searchInitialFilter, setSearchInitialFilter] = useState<string>('')
+    const [chatOpen, setChatOpen] = useState<boolean>(false)
+    const [chatParams, setChatParams] = useState<ChatParams | null>(null)
     const { addToast } = useToast()
+
+    // Hydrate client-only state before first paint to avoid layout flash
+    useIsomorphicLayoutEffect(() => {
+        const compactValue = window !== window.parent
+        const isMobileValue = window.innerWidth < 768
+        setCompact(compactValue)
+        setIsMobile(isMobileValue)
+        setSiteSettings(getInitialSiteSettings())
+    }, [])
 
     const destinationNav = useDataPipelinesNav({ type: 'destination' })
     const transformationNav = useDataPipelinesNav({ type: 'transformation' })
@@ -1531,8 +1721,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     )
 
     const desktopParams = useMemo(() => {
-        const innerWidth = isSSR ? 0 : window.innerWidth
-        const innerHeight = isSSR ? 0 : window.innerHeight
+        if (isSSR) return undefined
+        const innerWidth = window.innerWidth
+        const innerHeight = window.innerHeight
 
         const savedWindows = [...windows]
             .filter((win) => !win.minimized && win.path.startsWith('/'))
@@ -1553,7 +1744,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         if (savedWindows.length === 0) return undefined
 
         // Preserve existing query parameters from the current URL
-        const currentParams = isSSR ? {} : qs.parse(location.search.substring(1))
+        const currentParams = qs.parse(location.search.substring(1))
         const allParams = {
             ...currentParams,
             windows: savedWindows,
@@ -1563,9 +1754,10 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }, [windows, taskbarHeight, location, isSSR])
 
     const shareableDesktopURL = useMemo(() => {
+        if (isSSR || !desktopParams) return ''
         const url = `${location.origin}${desktopParams}`
         return url
-    }, [location, desktopParams])
+    }, [location, desktopParams, isSSR])
 
     const injectDynamicChildren = useCallback((menu: Menu) => {
         return menu?.map((item) => {
@@ -1607,7 +1799,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         })
     }, [])
 
-    const menu = injectDynamicChildren(initialMenu)
+    // Stabilize identity so the settings context (and `menu` consumers) don't churn
+    // on every provider render. `injectDynamicChildren` is referentially stable.
+    const menu = useMemo(() => injectDynamicChildren(initialMenu), [injectDynamicChildren])
 
     const closeWindow = useCallback((item: AppWindow) => {
         setTimeout(() => {
@@ -1626,31 +1820,42 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             } else {
                 navigate('/', { state: { skipPageUpdate: true } })
             }
-            setWindows(windowsFiltered)
+            setWindows(windowsFiltered.map((w) => (w.appSettings?.size?.fixed ? w : { ...w, snapped: false })))
         }, 0)
     }, [])
 
-    const bringToFront = useCallback((item: AppWindow, location?: Location, position?: { x: number; y: number }) => {
-        setWindows((windows) =>
-            windows.map((el) => ({
-                ...el,
-                zIndex: el === item ? windows.length : el.zIndex < item.zIndex ? el.zIndex : el.zIndex - 1,
-                minimized: item === el ? false : el.minimized,
-                location: item === el ? location || el.location : el.location,
-                position: item === el ? position || el.position : el.position,
-            }))
-        )
-    }, [])
+    const bringToFront = useCallback(
+        (
+            item: AppWindow,
+            location?: Location,
+            additional: {
+                expanded?: boolean
+                windowed?: boolean
+                snapped?: 'left' | 'right' | false
+                size?: { width: number; height: number }
+                position?: { x: number; y: number }
+            } = {}
+        ) => {
+            setWindows((windows) =>
+                windows.map((el) => ({
+                    ...el,
+                    zIndex: el === item ? windows.length : el.zIndex < item.zIndex ? el.zIndex : el.zIndex - 1,
+                    minimized: item === el ? false : el.minimized,
+                    location: item === el ? location || el.location : el.location,
+                    ...(el === item ? additional : {}),
+                }))
+            )
+        },
+        []
+    )
 
     const replaceFocusedWindow = useCallback(
         (newWindow: AppWindow) => {
-            // Find the highest zIndex window, excluding floating modals in websiteMode
-            const windowToReplace = windows
-                .filter((w) => !websiteMode || w.appSettings?.modal?.type !== 'floating')
-                .reduce<AppWindow | undefined>(
-                    (highest, current) => (current.zIndex > (highest?.zIndex ?? -1) ? current : highest),
-                    undefined
-                )
+            // Find the highest zIndex window
+            const windowToReplace = windows.reduce<AppWindow | undefined>(
+                (highest, current) => (current.zIndex > (highest?.zIndex ?? -1) ? current : highest),
+                undefined
+            )
 
             if (windowToReplace) {
                 setWindows((windows) =>
@@ -1663,7 +1868,12 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                                   fromHistory: newWindow.fromHistory,
                                   props: newWindow.props,
                                   location: newWindow.location,
+                                  appSettings: newWindow.appSettings,
+                                  expanded: newWindow.expanded,
+                                  snapped: newWindow.snapped,
                                   size: newWindow.size,
+                                  position: newWindow.position,
+                                  windowed: newWindow.windowed,
                               }
                             : w
                     )
@@ -1672,7 +1882,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 setWindows((windows) => [...windows, newWindow])
             }
         },
-        [windows, websiteMode]
+        [windows]
     )
 
     const setWindowTitle = useCallback((appWindow: AppWindow, title: string) => {
@@ -1755,8 +1965,12 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }
 
     function getInitialSize(key: string) {
+        const settings = appSettings[key]
+        if (settings?.size?.fixed) {
+            return settings.size.min
+        }
         const defaultSize =
-            appSettings[key]?.size?.max ||
+            settings?.size?.max ||
             (key?.startsWith('ask-max')
                 ? appSettings['ask-max']?.size?.max
                 : {
@@ -1774,7 +1988,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }
 
     function getInitialWindows(element: any) {
-        if (isSSR) return [createNewWindow(element, [], location, isSSR, taskbarHeight)]
+        if (isSSR) {
+            return [createNewWindow(element, [], location, isSSR, taskbarHeight)]
+        }
         const urlObj = new URL(location.href)
         const contact = urlObj.searchParams.get('contact')
         if (contact) {
@@ -1846,6 +2062,26 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         const settings = appSettings[keyToUse]
         const lastClickedElementRect = getLastClickedElementRect()
 
+        // Windowed (centered, 85%×95%) is the default for regular pages. Fixed,
+        // modal, minimal, and ask-max windows manage their own sizing, and mobile
+        // falls back to full-screen since a centered window reads poorly on narrow
+        // viewports.
+        const canWindow = isSSR || window.innerWidth >= 768
+        const isWindowed =
+            element.props.location.state?.windowed ??
+            (canWindow &&
+                !keyToUse?.startsWith('ask-max') &&
+                !settings?.size?.fixed &&
+                !element.props.minimal &&
+                !settings?.modal)
+        const shouldExpand =
+            element.props.location.state?.expanded ??
+            (!keyToUse?.startsWith('ask-max') &&
+                !settings?.size?.fixed &&
+                !element.props.minimal &&
+                !settings?.modal &&
+                !isWindowed)
+
         const newWindow: AppWindow = {
             element,
             zIndex: windows.length + 1,
@@ -1864,33 +2100,37 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             previousSize: size,
             position,
             previousPosition: position,
-            sizeConstraints: settings?.size?.fixed
-                ? { min: settings.size.min, max: settings.size.max }
-                : getWindowBasedSizeConstraints(),
-            fixedSize: settings?.size.fixed || false,
-            fromOrigin: lastClickedElementRect
-                ? {
-                      x: lastClickedElementRect.x - size.width / 2,
-                      y: lastClickedElementRect.y - size.height / 2,
-                  }
-                : undefined,
+            sizeConstraints:
+                settings?.size?.fixed && settings.size
+                    ? { min: settings.size.min, max: settings.size.max }
+                    : getWindowBasedSizeConstraints(),
+            fixedSize: settings?.size?.fixed || false,
+            fromOrigin:
+                element.props.location.state?.fromOrigin ||
+                (lastClickedElementRect
+                    ? {
+                          x: lastClickedElementRect.x - size.width / 2,
+                          y: lastClickedElementRect.y - size.height / 2,
+                      }
+                    : undefined),
             minimal: element.props.minimal ?? false,
             appSettings: appSettings[keyToUse],
             location,
+            expanded: shouldExpand,
+            snapped: element.props.location.state?.snapped || false,
+            windowed: isWindowed,
         }
 
-        // Adjust width if window extends beyond right edge
-        if (newWindow.position.x + newWindow.size.width > (isSSR ? 0 : window.innerWidth) - 20) {
-            newWindow.size.width = isSSR ? 0 : window.innerWidth - newWindow.position.x - 20
-        }
+        if (!newWindow.expanded) {
+            // Adjust width if window extends beyond right edge
+            if (newWindow.position.x + newWindow.size.width > (isSSR ? 0 : window.innerWidth) - 20) {
+                newWindow.size.width = isSSR ? 0 : window.innerWidth - newWindow.position.x - 20
+            }
 
-        // Adjust height if window extends beyond bottom edge
-        if (newWindow.position.y + newWindow.size.height > (isSSR ? 0 : window.innerHeight) - taskbarHeight - 20) {
-            newWindow.size.height = isSSR ? 0 : window.innerHeight - newWindow.position.y - taskbarHeight - 20
-        }
-
-        if (websiteMode && (newWindow.appSettings?.size.fixed || newWindow.appSettings?.modal)) {
-            newWindow.modal = { type: 'standard' as const, ...newWindow.appSettings?.modal }
+            // Adjust height if window extends beyond bottom edge
+            if (newWindow.position.y + newWindow.size.height > (isSSR ? 0 : window.innerHeight) - taskbarHeight - 20) {
+                newWindow.size.height = isSSR ? 0 : window.innerHeight - newWindow.position.y - taskbarHeight - 20
+            }
         }
 
         return { ...newWindow, ...options }
@@ -1899,21 +2139,64 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const updatePages = (element: WindowElement) => {
         const existingWindow = windows.find((w) => w.path === element.props.location.pathname)
         const newWindow = createNewWindow(element, windows, location, isSSR, taskbarHeight)
-        if (siteSettings.experience === 'boring') {
-            if (!newWindow.appSettings?.size.fixed && !newWindow.appSettings?.modal) {
-                return replaceFocusedWindow(newWindow)
-            } else {
-                return setWindows([...windows?.filter((w) => w.key !== newWindow.key), newWindow])
+        const isSideBySide = location?.state?.sideBySide && focusedWindow && !isSSR
+
+        if (isSideBySide) {
+            const sideSnap = getSnapDimensions(location?.state?.sideBySide)
+            newWindow.size = sideSnap.size
+            newWindow.position = sideSnap.position
+            newWindow.snapped = location?.state?.sideBySide
+            newWindow.expanded = false
+            // Snapped windows render full-bleed so the flex container can split
+            // them 50/50; a windowed (85%) width would break the side-by-side layout.
+            newWindow.windowed = false
+        }
+
+        if (newWindow.key !== '/' && !isSideBySide && !newWindow.appSettings?.size?.fixed) {
+            if (focusedWindow?.snapped) {
+                const sideSnap = getSnapDimensions(focusedWindow.snapped)
+                newWindow.size = sideSnap.size
+                newWindow.position = sideSnap.position
+                newWindow.snapped = focusedWindow.snapped
+                newWindow.expanded = false
+                newWindow.windowed = false
+            } else if (focusedWindow) {
+                // Navigating in place: keep the focused window's current display mode
+                // (windowed vs. expanded) so pages don't jump between sizes.
+                newWindow.expanded = focusedWindow.expanded ?? false
+                newWindow.windowed = focusedWindow.expanded ? false : focusedWindow.windowed ?? newWindow.windowed
+                newWindow.snapped = false
             }
         }
 
         if (existingWindow) {
-            bringToFront(existingWindow, element.props.location)
-        } else if (
-            (element.props.newWindow || location?.state?.newWindow) &&
-            !windows.some((w) => w.key === newWindow.key)
-        ) {
-            setWindows([...windows, newWindow])
+            if (existingWindow.snapped && !isSideBySide) {
+                bringToFront(existingWindow, element.props.location)
+            } else {
+                bringToFront(existingWindow, element.props.location, {
+                    expanded: newWindow.expanded,
+                    windowed: newWindow.windowed,
+                    snapped: newWindow.snapped,
+                    size: newWindow.size,
+                    position: newWindow.position,
+                })
+            }
+        } else if (isSideBySide && !windows.some((w) => w.key === newWindow.key)) {
+            const focusedSide = location?.state?.sideBySide === 'left' ? 'right' : 'left'
+            const sideSnap = getSnapDimensions(focusedSide)
+            const snappedFocused = {
+                ...focusedWindow,
+                previousSize: focusedWindow.size,
+                previousPosition: focusedWindow.position,
+                size: sideSnap.size,
+                position: sideSnap.position,
+                snapped: focusedSide as const,
+                expanded: false,
+                windowed: false,
+            }
+            setWindows([...windows.map((w) => (w === focusedWindow ? snappedFocused : w)), newWindow])
+        } else if (newWindow.appSettings?.size?.fixed) {
+            setWindows([...windows.filter((w) => !w.appSettings?.size?.fixed), newWindow])
         } else {
             replaceFocusedWindow(newWindow)
         }
@@ -1935,6 +2218,10 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             previousPosition?: { x?: number; y?: number }
             previousSize?: { width?: number; height?: number }
             element?: any
+            expanded?: boolean
+            windowed?: boolean
+            snapped?: 'left' | 'right' | false
+            appSettings?: AppSetting
         }
     ) => {
         const newAppWindow = {
@@ -1956,25 +2243,18 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 ...(updates.previousSize || {}),
             },
             ...(updates.element ? { element: updates.element } : {}),
+            ...(updates.expanded !== undefined ? { expanded: updates.expanded } : {}),
+            ...(updates.windowed !== undefined ? { windowed: updates.windowed } : {}),
+            ...(updates.snapped !== undefined ? { snapped: updates.snapped } : {}),
+            ...(updates.appSettings ? { appSettings: { ...appWindow.appSettings, ...updates.appSettings } } : {}),
         }
         setWindows((windows) => windows.map((w) => (w === appWindow ? newAppWindow : w)))
         return newAppWindow
     }
 
     const openSearch = (initialFilter?: string) => {
-        if (websiteMode) {
-            setSearchOpen((prev) => !prev)
-            return
-        }
-        addWindow(
-            <WindowSearchUI
-                location={{ pathname: `search` }}
-                key={`search`}
-                newWindow
-                minimal
-                initialFilter={initialFilter}
-            />
-        )
+        setSearchInitialFilter(initialFilter || '')
+        setSearchOpen(true)
     }
 
     const openSignIn = (onSuccess?: (user: User) => void) => {
@@ -2016,76 +2296,99 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         )
     }
 
-    const openNewChat = ({
-        path,
-        context,
-        quickQuestions,
-        chatId,
-        date,
-        initialQuestion,
-        codeSnippet,
-    }: {
-        path: string
-        context?: ChatContext[]
-        quickQuestions?: string[]
-        chatId?: string
-        date?: string
-        initialQuestion?: string
-        codeSnippet?: { code: string; language: string; sourceUrl: string }
-    }) => {
-        addWindow(
-            <ChatProvider
-                location={{
-                    pathname: path,
-                }}
-                key={path}
-                newWindow
-                context={context}
-                quickQuestions={quickQuestions}
-                chatId={chatId}
-                date={date}
-                initialQuestion={initialQuestion}
-                codeSnippet={codeSnippet}
-            />
-        )
+    // The chat UI is rendered once as a global overlay (see `ChatOverlay`) rather
+    // than as a managed window. Opening a chat just stores its params and flips the
+    // `chatOpen` flag; a fresh set of params remounts the overlay's `ChatProvider`.
+    const openNewChat = (params: ChatParams) => {
+        setChatParams(params)
+        setChatOpen(true)
+    }
+
+    function getSnapDimensions(side: 'left' | 'right') {
+        const taskbarRect = isSSR ? null : document.querySelector('#taskbar')?.getBoundingClientRect()
+        const left = taskbarRect?.left ?? 0
+        const top = taskbarRect?.top ?? 0
+        const availableWidth = isSSR ? 0 : window.innerWidth - left * 2
+        const availableHeight = isSSR ? 0 : window.innerHeight - taskbarHeight - top
+        const finalWidth = availableWidth / 2
+        return {
+            size: { width: finalWidth, height: availableHeight },
+            position: { x: side === 'left' ? left : left + finalWidth, y: 0 },
+        }
     }
 
     const handleSnapToSide = (side: 'left' | 'right') => {
         if (!constraintsRef.current || !focusedWindow) return
 
-        const bounds = constraintsRef.current.getBoundingClientRect()
-        const x = side === 'left' ? 0 : bounds.width / 2
-        const finalWidth = bounds.width / 2
-        const size = { width: finalWidth, height: bounds.height }
-        const position = { x, y: 0 }
+        const { size, position } = getSnapDimensions(side)
+
+        let prevSize = focusedWindow.size
+        let prevPos = focusedWindow.position
+        if (focusedWindow.expanded) {
+            const cr = constraintsRef.current.getBoundingClientRect()
+            prevSize = { width: cr.width - 16, height: cr.height - 8 }
+            prevPos = { x: 8, y: 0 }
+        }
 
         updateWindow(focusedWindow, {
             position,
             size,
+            previousSize: prevSize,
+            previousPosition: prevPos,
+            snapped: side,
+            expanded: false,
+            windowed: false,
         })
     }
 
-    const expandWindow = () => {
-        if (!focusedWindow) return
-        updateWindow(focusedWindow, {
-            position: { x: 0, y: 0 },
-            size: { width: isSSR ? 0 : window.innerWidth, height: isSSR ? 0 : window.innerHeight - taskbarHeight },
-            previousSize: focusedWindow.size,
-            previousPosition: focusedWindow.position,
-        })
+    function getExpandedDimensions() {
+        const taskbarRect = isSSR ? null : document.querySelector('#taskbar')?.getBoundingClientRect()
+        return {
+            position: { x: taskbarRect?.left || 8, y: 0 },
+            size: {
+                width: isSSR ? 0 : window.innerWidth - (taskbarRect?.left || 8) * 2,
+                height: isSSR ? 0 : window.innerHeight - taskbarHeight - (taskbarRect?.top || 0),
+            },
+        }
+    }
+
+    const expandWindow = (target?: AppWindow) => {
+        const windowToExpand = target ?? focusedWindow
+        if (!windowToExpand) return
+        // When expanding a side-by-side (snapped) window, drop the other snapped
+        // window(s) so the one being expanded takes over the whole screen. Sync the
+        // URL to it without re-running the page/window setup (skipPageUpdate).
+        const dropSnappedSiblings = !!windowToExpand.snapped
+        if (dropSnappedSiblings && windowToExpand.path.startsWith('/')) {
+            navigate(`${windowToExpand.path}${windowToExpand.location?.search || ''}`, {
+                state: { skipPageUpdate: true },
+            })
+        }
+        setWindows((windows) =>
+            windows
+                .filter(
+                    (w) => !(dropSnappedSiblings && w !== windowToExpand && w.snapped && !w.appSettings?.size?.fixed)
+                )
+                .map((w) =>
+                    w === windowToExpand
+                        ? {
+                              ...w,
+                              previousSize: w.size,
+                              previousPosition: w.position,
+                              expanded: true,
+                              windowed: false,
+                              snapped: false,
+                              zIndex: windows.length,
+                          }
+                        : w
+                )
+        )
     }
 
     const updateSiteSettings = (settings: SiteSettings) => {
         try {
             setSiteSettings(settings)
-            const savedSettings = JSON.parse(localStorage.getItem('siteSettings') || '{}')
-            localStorage.setItem(
-                'siteSettings',
-                JSON.stringify({
-                    ...settings,
-                    experience: compact ? savedSettings.experience || 'posthog' : settings.experience || 'posthog',
-                })
-            )
+            localStorage.setItem('siteSettings', JSON.stringify(settings))
         } catch (error) {
             console.error('Failed to update site settings:', error)
         }
@@ -2117,25 +2420,25 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         }
     }
 
+    const updateTaskbarHeight = () => {
+        if (isSSR) return
+        const rect = document.querySelector('#taskbar')?.getBoundingClientRect()
+        if (rect && rect.height > 0) {
+            setTaskbarHeight(rect.top + rect.height)
+        }
+    }
+
     useEffect(() => {
-        if (
-            (location.key === 'initial' && location.pathname === '/' && isMobile) ||
-            paramsWindows ||
-            location.state?.skipPageUpdate
-        ) {
+        const urlObj = new URL(location.href)
+        const queryString = urlObj?.search.substring(1)
+        const parsed = qs.parse(queryString)
+        if (parsed?.windows || location.state?.skipPageUpdate) {
             return
         }
         updatePages(element)
     }, [element])
 
     useEffect(() => {
-        const updateTaskbarHeight = () => {
-            const height = document.querySelector('#taskbar')?.getBoundingClientRect().height || 0
-            if (height > 0) {
-                setTaskbarHeight(height)
-            }
-        }
-
         updateTaskbarHeight()
 
         if (!isSSR) {
@@ -2201,8 +2504,8 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 navigate('/kbd', { state: { newWindow: true } })
             }
 
-            // Theme toggle with \ key (without Shift)
-            if (e.key === '\\' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !e.altKey) {
+            // Theme toggle with m key
+            if (e.key === 'm' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !e.altKey) {
                 e.preventDefault()
                 e.stopPropagation()
 
@@ -2251,8 +2554,8 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 }
             }
 
-            // Wallpaper cycle with | key (which is Shift + \ on most keyboards)
-            if (e.key === '|') {
+            // Wallpaper cycle with \ key (without Shift)
+            if (e.key === '\\' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !e.altKey) {
                 e.preventDefault()
                 e.stopPropagation()
 
@@ -2282,7 +2585,11 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 handleSnapToSide('right')
             }
             if (e.shiftKey && e.key === 'ArrowUp') {
-                expandWindow()
+                if (focusedWindow?.expanded) {
+                    updateWindow(focusedWindow, { expanded: false, windowed: true, snapped: false })
+                } else {
+                    expandWindow()
+                }
             }
             if (e.shiftKey && e.key === 'ArrowDown') {
                 e.preventDefault()
@@ -2330,26 +2637,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                         bringToFront(nextWindow)
                     }
                 }
-            }
-            if (e.shiftKey && e.key.toLowerCase() === 'm') {
-                e.preventDefault()
-                // Toggle between OS mode and website mode
-                const newExperience = siteSettings.experience === 'posthog' ? 'boring' : 'posthog'
-                updateSiteSettings({
-                    ...siteSettings,
-                    experience: newExperience,
-                })
-
-                posthog?.capture('switched site mode', {
-                    value: newExperience === 'posthog' ? 'os' : 'website',
-                    source: 'keyboard',
-                })
-
-                // Add toast notification
-                addToast({
-                    description: `Switched to ${newExperience === 'posthog' ? 'OS mode' : 'website mode'}`,
-                    duration: 2000,
-                })
             }
             if (e.shiftKey && e.key === 'C') {
                 e.preventDefault()
@@ -2401,43 +2688,13 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
     useEffect(() => {
         const handleResize = () => {
-            setIsMobile(typeof window !== 'undefined' && window.innerWidth < 768)
+            setIsMobile(window.innerWidth < 768)
         }
 
         window.addEventListener('resize', handleResize)
 
         return () => window.removeEventListener('resize', handleResize)
     }, [])
-
-    // In website mode, sync window sizes to browser viewport on resize
-    useEffect(() => {
-        if (!websiteMode || isSSR) return
-
-        const handleResize = () => {
-            const newWidth = window.innerWidth
-            const newHeight = window.innerHeight - taskbarHeight
-
-            setWindows((currentWindows) =>
-                currentWindows.map((w) => ({
-                    ...w,
-                    ...(w.appSettings?.size?.fixed || w.appSettings?.modal
-                        ? {}
-                        : {
-                              size: {
-                                  width: newWidth,
-                                  height: newHeight,
-                              },
-                          }),
-                }))
-            )
-        }
-
-        // Set initial size
-        handleResize()
-
-        window.addEventListener('resize', handleResize)
-        return () => window.removeEventListener('resize', handleResize)
-    }, [websiteMode, taskbarHeight, isSSR])
 
     useEffect(() => {
         if (compact) {
@@ -2503,22 +2760,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }, [])
 
     useEffect(() => {
-        if (websiteMode) {
-            const windowsSortedByZIndex = windows.sort((a, b) => b.zIndex - a.zIndex)
-            const currentWindow = windowsSortedByZIndex.find((w) => !w.appSettings?.size.fixed)
-            const modalWindow = windowsSortedByZIndex.find((w) => w.appSettings?.size.fixed || w.appSettings?.modal)
-            const newWindows = [
-                ...(currentWindow ? [currentWindow] : []),
-                ...(modalWindow
-                    ? [{ ...modalWindow, modal: { type: 'standard' as const, ...modalWindow.appSettings?.modal } }]
-                    : []),
-            ]
-            setWindows(newWindows)
-        } else {
-            const newWindows = windows.map((w) => ({ ...w, modal: undefined }))
-            setWindows(newWindows)
-        }
-    }, [websiteMode])
+        const newWindows = windows.map((w) => ({ ...w, modal: undefined }))
+        setWindows(newWindows)
+    }, [])
 
     const convertWindowsToPixels = (windows: any[]) => {
         const innerWidth = window.innerWidth
@@ -2540,16 +2784,21 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     useEffect(() => {
         if (isSSR) return
 
+        const urlObj = new URL(location.href)
+        const queryString = urlObj?.search.substring(1)
+        const parsed = qs.parse(queryString)
+        const paramsWindows = parsed?.windows
+
         if (paramsWindows) {
             const [initialWindow, ...rest] = convertWindowsToPixels(parsed.windows)
 
             // Preserve non-windows query parameters when navigating
             const nonWindowsParams = { ...parsed }
             delete nonWindowsParams.windows
-            const queryString =
+            const nonWindowsQueryString =
                 Object.keys(nonWindowsParams).length > 0 ? `?${qs.stringify(nonWindowsParams, { encode: false })}` : ''
 
-            navigate(`${initialWindow.path}${queryString}`, {
+            navigate(`${initialWindow.path}${nonWindowsQueryString}`, {
                 state: {
                     newWindow: true,
                     size: initialWindow.size,
@@ -2566,10 +2815,10 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             // Preserve query parameters from current URL when navigating to next window
             const currentParams = qs.parse(location.search.substring(1))
             delete currentParams.windows
-            const queryString =
+            const currentQueryString =
                 Object.keys(currentParams).length > 0 ? `?${qs.stringify(currentParams, { encode: false })}` : ''
 
-            navigate(`${nextWindow.path}${queryString}`, {
+            navigate(`${nextWindow.path}${currentQueryString}`, {
                 state: {
                     newWindow: true,
                     size: nextWindow.size,
@@ -2581,22 +2830,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }, [stateWindows])
 
     useEffect(() => {
-        try {
-            const lastReset = localStorage.getItem('lastReset')
-            if (!lastReset) {
-                const currentSiteSettings = JSON.parse(localStorage.getItem('siteSettings') || '{}')
-                currentSiteSettings.experience = 'posthog'
-                localStorage.setItem('lastReset', new Date().toISOString())
-                localStorage.setItem('siteSettings', JSON.stringify(currentSiteSettings))
-            }
-        } catch (error) {
-            console.error('Failed to reset site settings:', error)
-        }
-    }, [])
-
-    useEffect(() => {
         const visibleWindows = windows.filter((window) => {
             if (window.minimized) return false
+            if (window.expanded) return true
 
             const windowsAbove = windows.filter((w) => w !== window && w.zIndex > window.zIndex && !w.minimized)
 
@@ -2627,68 +2863,193 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         setWindowsInView(visibleWindows)
     }, [windows])
 
-    useEffect(() => {
-        if (websiteMode && windows.length <= 0) {
-            navigate('/')
-        }
-    }, [windows])
+    // Keep the latest implementations in a ref so the stable wrappers below always
+    // call the freshest closures (no stale state) while keeping a constant identity.
+    const latestActionsRef = useRef<AppActionsContextType>()
+    latestActionsRef.current = {
+        closeWindow,
+        bringToFront,
+        setWindowTitle,
+        minimizeWindow,
+        addWindow,
+        updateWindowRef,
+        updateWindow,
+        getPositionDefaults,
+        getDesktopCenterPosition,
+        openSearch,
+        handleSnapToSide,
+        constraintsRef,
+        taskbarRef,
+        expandWindow,
+        getExpandedDimensions,
+        openSignIn,
+        openRegister,
+        openForgotPassword,
+        updateSiteSettings,
+        openNewChat,
+        setIsNotificationsPanelOpen,
+        setIsActiveWindowsPanelOpen,
+        openStart,
+        animateClosingAllWindows,
+        closeAllWindows,
+        setClosingAllWindowsAnimation,
+        setScreensaverPreviewActive,
+        setConfetti,
+        copyDesktopParams,
+        setSearchOpen,
+        setChatOpen,
+        updateTaskbarHeight,
+        windowsInViewRef,
+    }
+
+    // Stable-identity actions object. Refs and state setters are already stable and
+    // pass through directly; callbacks forward to the latest implementation. This
+    // object never changes identity, so `useAppActions()` consumers don't re-render
+    // when volatile app state changes.
+    const actions = useMemo<AppActionsContextType>(
+        () => ({
+            closeWindow: (...args) => latestActionsRef.current!.closeWindow(...args),
+            bringToFront: (...args) => latestActionsRef.current!.bringToFront(...args),
+            setWindowTitle: (...args) => latestActionsRef.current!.setWindowTitle(...args),
+            minimizeWindow: (...args) => latestActionsRef.current!.minimizeWindow(...args),
+            addWindow: (...args) => latestActionsRef.current!.addWindow(...args),
+            updateWindowRef: (...args) => latestActionsRef.current!.updateWindowRef(...args),
+            updateWindow: (...args) => latestActionsRef.current!.updateWindow(...args),
+            getPositionDefaults: (...args) => latestActionsRef.current!.getPositionDefaults(...args),
+            getDesktopCenterPosition: (...args) => latestActionsRef.current!.getDesktopCenterPosition(...args),
+            openSearch: (...args) => latestActionsRef.current!.openSearch(...args),
+            handleSnapToSide: (...args) => latestActionsRef.current!.handleSnapToSide(...args),
+            expandWindow: (...args) => latestActionsRef.current!.expandWindow(...args),
+            getExpandedDimensions: (...args) => latestActionsRef.current!.getExpandedDimensions(...args),
+            openSignIn: (...args) => latestActionsRef.current!.openSignIn(...args),
+            openRegister: (...args) => latestActionsRef.current!.openRegister(...args),
+            openForgotPassword: (...args) => latestActionsRef.current!.openForgotPassword(...args),
+            updateSiteSettings: (...args) => latestActionsRef.current!.updateSiteSettings(...args),
+            openNewChat: (...args) => latestActionsRef.current!.openNewChat(...args),
+            openStart: (...args) => latestActionsRef.current!.openStart(...args),
+            animateClosingAllWindows: (...args) => latestActionsRef.current!.animateClosingAllWindows(...args),
+            closeAllWindows: (...args) => latestActionsRef.current!.closeAllWindows(...args),
+            copyDesktopParams: (...args) => latestActionsRef.current!.copyDesktopParams(...args),
+            updateTaskbarHeight: (...args) => latestActionsRef.current!.updateTaskbarHeight(...args),
+            setIsNotificationsPanelOpen,
+            setIsActiveWindowsPanelOpen,
+            setClosingAllWindowsAnimation,
+            setScreensaverPreviewActive,
+            setConfetti,
+            setSearchOpen,
+            setChatOpen,
+            constraintsRef,
+            taskbarRef,
+            windowsInViewRef,
+        }),
+        []
+    )
+
+    const settings = useMemo<AppSettingsContextType>(
+        () => ({
+            siteSettings,
+            compact,
+            isMobile,
+            posthogInstance,
+            menu,
+        }),
+        [siteSettings, compact, isMobile, posthogInstance, menu]
+    )
+
+    const uiState = useMemo<AppUIStateContextType>(
+        () => ({
+            isNotificationsPanelOpen,
+            isActiveWindowsPanelOpen,
+            closingAllWindowsAnimation,
+            screensaverPreviewActive,
+            confetti,
+            searchOpen,
+            chatOpen,
+            chatParams,
+        }),
+        [
+            isNotificationsPanelOpen,
+            isActiveWindowsPanelOpen,
+            closingAllWindowsAnimation,
+            screensaverPreviewActive,
+            confetti,
+            searchOpen,
+            chatOpen,
+            chatParams,
+        ]
+    )
+
+    const windowsValue = useMemo<AppWindowsContextType>(() => ({ windows }), [windows])
 
     return (
-        <Context.Provider
-            value={{
-                windows,
-                closeWindow,
-                bringToFront,
-                setWindowTitle,
-                focusedWindow,
-                location,
-                minimizeWindow,
-                taskbarHeight,
-                addWindow,
-                updateWindowRef,
-                getPositionDefaults,
-                updateWindow,
-                getDesktopCenterPosition,
-                openSearch,
-                handleSnapToSide,
-                constraintsRef,
-                taskbarRef,
-                expandWindow,
-                openSignIn,
-                openRegister,
-                openForgotPassword,
-                siteSettings,
-                updateSiteSettings,
-                openNewChat,
-                isNotificationsPanelOpen,
-                setIsNotificationsPanelOpen,
-                isActiveWindowsPanelOpen,
-                setIsActiveWindowsPanelOpen,
-                isMobile,
-                compact,
-                menu,
-                openStart,
-                animateClosingAllWindows,
-                closingAllWindowsAnimation,
-                setClosingAllWindowsAnimation,
-                closeAllWindows,
-                screensaverPreviewActive,
-                setScreensaverPreviewActive,
-                setConfetti,
-                confetti,
-                posthogInstance,
-                websiteMode,
-                desktopParams,
-                copyDesktopParams,
-                desktopCopied,
-                shareableDesktopURL,
-                windowsInView,
-                searchOpen,
-                setSearchOpen,
-            }}
-        >
-            {children}
-        </Context.Provider>
+        <ActionsContext.Provider value={actions}>
+            <SettingsContext.Provider value={settings}>
+                <UIStateContext.Provider value={uiState}>
+                    <WindowsContext.Provider value={windowsValue}>
+                        <Context.Provider
+                            value={{
+                                windows,
+                                closeWindow,
+                                bringToFront,
+                                setWindowTitle,
+                                focusedWindow,
+                                location,
+                                minimizeWindow,
+                                taskbarHeight,
+                                addWindow,
+                                updateWindowRef,
+                                getPositionDefaults,
+                                updateWindow,
+                                getDesktopCenterPosition,
+                                openSearch,
+                                handleSnapToSide,
+                                constraintsRef,
+                                taskbarRef,
+                                expandWindow,
+                                getExpandedDimensions,
+                                openSignIn,
+                                openRegister,
+                                openForgotPassword,
+                                siteSettings,
+                                updateSiteSettings,
+                                openNewChat,
+                                isNotificationsPanelOpen,
+                                setIsNotificationsPanelOpen,
+                                isActiveWindowsPanelOpen,
+                                setIsActiveWindowsPanelOpen,
+                                isMobile,
+                                compact,
+                                menu,
+                                openStart,
+                                animateClosingAllWindows,
+                                closingAllWindowsAnimation,
+                                setClosingAllWindowsAnimation,
+                                closeAllWindows,
+                                screensaverPreviewActive,
+                                setScreensaverPreviewActive,
+                                setConfetti,
+                                confetti,
+                                posthogInstance,
+                                desktopParams,
+                                copyDesktopParams,
+                                desktopCopied,
+                                shareableDesktopURL,
+                                windowsInView,
+                                searchOpen,
+                                setSearchOpen,
+                                searchInitialFilter,
+                                chatOpen,
+                                setChatOpen,
+                                chatParams,
+                                updateTaskbarHeight,
+                            }}
+                        >
+                            {children}
+                        </Context.Provider>
+                    </WindowsContext.Provider>
+                </UIStateContext.Provider>
+            </SettingsContext.Provider>
+        </ActionsContext.Provider>
     )
 }
 
@@ -2700,4 +3061,32 @@ export const useApp = (): AppContextType => {
     }
 
     return context
+}
+
+// Subscribe only to the stable actions (callbacks, setters, refs) without
+// re-rendering when volatile app state changes. Prefer this over `useApp()` in
+// components that only dispatch actions and don't read state.
+export const useAppActions = (): AppActionsContextType => {
+    return useContext(ActionsContext)
+}
+
+// Subscribe only to rarely-changing settings (display settings, environment flags,
+// nav menu) without re-rendering when volatile window state changes. Prefer this
+// over `useApp()` in components that only read these values.
+export const useAppSettings = (): AppSettingsContextType => {
+    return useContext(SettingsContext)
+}
+
+// Subscribe only to transient UI flags (panels, confetti, screensaver, search)
+// without re-rendering when volatile window state changes. Prefer this over
+// `useApp()` in components that only read these flags.
+export const useAppUIState = (): AppUIStateContextType => {
+    return useContext(UIStateContext)
+}
+
+// Subscribe only to the window list. Re-renders when windows change but not on
+// unrelated AppProvider renders. Prefer this over `useApp()` in components that
+// only need `windows` (e.g. taskbar, window list).
+export const useAppWindows = (): AppWindowsContextType => {
+    return useContext(WindowsContext)
 }

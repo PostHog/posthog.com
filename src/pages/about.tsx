@@ -1,7 +1,6 @@
-import { graphql, navigate } from 'gatsby'
+import { graphql } from 'gatsby'
 import React from 'react'
 import Editor from 'components/Editor'
-import OSTabs from 'components/OSTabs'
 import { YC } from 'components/About/v2/YC'
 import { TLDR } from 'components/About/v2/TLDR'
 import { LottieAnimation } from 'components/About/v2/LottieAnimations'
@@ -11,7 +10,6 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import { PRODUCT_COUNT, CUSTOMER_COUNT } from '../constants/index'
 import { James, Plus, Tim } from 'components/Signatures'
 import SEO from 'components/seo'
-import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
 import { shortcodes } from '../mdxGlobalComponents'
@@ -19,8 +17,6 @@ import Link from 'components/Link'
 import { IconXNotTwitter } from 'components/OSIcons'
 import { DifferentHighlights } from 'components/About/v2/DifferentHighlights'
 import OSButton from 'components/OSButton'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
-
 const ProductCount = () => <span>{PRODUCT_COUNT}+</span>
 const CustomerCount = () => <span>{CUSTOMER_COUNT}+</span>
 
@@ -43,7 +39,7 @@ const mdxComponents = {
     DifferentHighlights,
     HappyHog,
     Letterhead,
-    Logo: () => <Logo noText className="inline-block" />,
+    Logo: () => <Logo wordmark={false} className="inline-block" />,
     CloudinaryImage,
     ProductCount,
     CustomerCount,
@@ -58,42 +54,25 @@ interface AboutProps {
 }
 
 export default function About({ data }: AboutProps) {
-    const { tabs, handleTabChange, tabContainerClassName, className } = useCompanyNavigation({
-        value: '/about',
-        content: (
-            <div className="max-w-3xl mx-auto pb-12">
-                <MDXProvider components={mdxComponents}>
-                    <MDXRenderer>{data.mdx.body}</MDXRenderer>
-                </MDXProvider>
-            </div>
-        ),
-    })
-
     return (
         <>
             <SEO title="About PostHog" description="All about PostHog" image={`/images/og/default.png`} />
             <Editor
                 maxWidth="100%"
-                // title="Company"
-                // type="about"
+                hasPadding={false}
                 proseSize="base"
                 bookmark={{
                     title: 'Company',
                     description: 'Learn about PostHog',
                 }}
-                hasTabs
             >
-                <OSTabs
-                    tabs={tabs}
-                    defaultValue="/about"
-                    onValueChange={handleTabChange}
-                    padding
-                    tabContainerClassName={tabContainerClassName}
-                    tabContentClassName="px-4 @xl:px-8"
-                    className={className}
-                    triggerDataScheme="primary"
-                    centerTabs
-                />
+                <div className="bg-primary min-h-full px-4 @xl:px-8 py-4">
+                    <div className="max-w-3xl mx-auto pb-12">
+                        <MDXProvider components={mdxComponents}>
+                            <MDXRenderer>{data.mdx.body}</MDXRenderer>
+                        </MDXProvider>
+                    </div>
+                </div>
             </Editor>
         </>
     )

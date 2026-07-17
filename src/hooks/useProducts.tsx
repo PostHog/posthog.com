@@ -48,55 +48,52 @@ export default function useProducts() {
         },
     } = useStaticQuery(allProductsData)
 
-    const [products, setProducts] = useState(
-        initialProducts.map((product) => {
-            // Products are joined to live billing data by type. A product can override
-            // the key the billing service uses via `billingType` (e.g. AI Observability
-            // is still `llm_analytics` upstream); otherwise the handle is the key.
-            const billingType = (product as { billingType?: string }).billingType || product.handle
-            const billingData =
-                product.billingData ||
-                billingProducts.find((billingProduct: any) => billingProduct.type === billingType)
-            const paidPlan = billingData?.plans.find((plan: any) => plan.tiers)
-            const startsAt = paidPlan?.tiers?.find((tier: any) => tier.unit_amount_usd !== '0')?.unit_amount_usd
-            const freeLimit = paidPlan?.tiers?.find((tier: any) => tier.unit_amount_usd === '0')?.up_to
-            const unit = billingData?.unit
-            return {
-                ...product,
-                cost: 0,
-                billingData,
-                costByTier: paidPlan?.tiers
-                    ? calculatePrice((product as any).volume || 0, paidPlan.tiers).costByTier
-                    : [],
-                freeLimit,
-                startsAt: startsAt && startsAt.length <= 3 ? Number(startsAt).toFixed(2) : startsAt,
-                unit,
-            }
-        })
+    const baseProducts = useMemo(
+        () =>
+            initialProducts.map((product) => {
+                const billingData =
+                    product.billingData ||
+                    billingProducts.find((billingProduct: any) => billingProduct.type === product.handle)
+                const paidPlan = billingData?.plans.find((plan: any) => plan.tiers)
+                const startsAt = paidPlan?.tiers?.find((tier: any) => tier.unit_amount_usd !== '0')?.unit_amount_usd
+                const freeLimit = paidPlan?.tiers?.find((tier: any) => tier.unit_amount_usd === '0')?.up_to
+                const unit = billingData?.unit
+                return {
+                    ...product,
+                    cost: 0,
+                    billingData,
+                    costByTier: paidPlan?.tiers
+                        ? calculatePrice((product as any).volume || 0, paidPlan.tiers).costByTier
+                        : [],
+                    freeLimit,
+                    startsAt: startsAt && startsAt.length <= 3 ? Number(startsAt).toFixed(2) : startsAt,
+                    unit,
+                }
+            }),
+        [billingProducts]
     )
 
-    const monthlyTotal = useMemo(() => products.reduce((acc, product) => acc + product.cost, 0), [products])
+    const [overrides, setOverrides] = useState<Record<string, Record<string, any>>>({})
+
+    const products = useMemo(
+        () => baseProducts.map((product) => ({ ...product, ...(overrides[product.handle] || {}) })),
+        [baseProducts, overrides]
+    )
+
+    const monthlyTotal = useMemo(() => products.reduce((acc, product) => acc + (product.cost || 0), 0), [products])
 
     const setProduct = (handle: string, data: any) => {
-        setProducts((products) =>
-            products.map((product) => {
-                if (product.handle === handle && !(product as any).billedWith) {
-                    return {
-                        ...product,
-                        ...data,
-                    }
-                }
-                return product
-            })
-        )
+        const target = baseProducts.find((product) => product.handle === handle)
+        if (!target || (target as any).billedWith) return
+        setOverrides((prev) => ({ ...prev, [handle]: { ...(prev[handle] || {}), ...data } }))
     }
 
     const setVolume = (handle: string, volume: number) => {
         const rounded = Math.round(volume)
-        const product = products.find((product) => product.handle === handle)
+        const product = baseProducts.find((product) => product.handle === handle)
         const { total, costByTier } = calculatePrice(
             rounded,
-            product?.billingData.plans.find((plan: any) => plan.tiers)?.tiers
+            product?.billingData?.plans.find((plan: any) => plan.tiers)?.tiers
         )
         setProduct(handle, {
             volume: rounded,

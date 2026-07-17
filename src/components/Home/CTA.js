@@ -44,7 +44,7 @@ const SignupEmbed = () => {
     )
 }
 
-export default function CTA({ headline = true }) {
+export default function CTA({ headline = true, card = false }) {
     const { addWindow } = useApp()
     const posthog = usePostHog()
     const [version, setVersion] = useState('us')
@@ -61,9 +61,152 @@ export default function CTA({ headline = true }) {
             .catch((err) => console.error(err))
     }, [])
 
+    const content = (
+        <>
+            <div className={card ? '@xl:hidden pb-12 @xl:pb-0' : '@xl:hidden py-12'}>
+                <ProductDetails />
+            </div>
+
+            <div className={`@xl:grid grid-cols-2 gap-16 @xl:pt-16 max-w-5xl mx-auto ${card ? '@xl:-mt-14' : ''}`}>
+                <div className="relative text-right">
+                    <div className="mb-2">
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/cloud-cd.jpg"
+                            alt="PostHog Cloud"
+                            className="max-w-[443px]"
+                        />
+                    </div>
+                    <div className="absolute -left-4 bottom-12 @xl:left-[-8px] @xl:bottom-24">
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/g2-badge.png"
+                            alt="People on G2 think we're great"
+                            className="w-[90px]"
+                        />
+                    </div>
+
+                    {inView && (
+                        <motion.div
+                            transition={{ duration: 1, type: 'tween' }}
+                            initial={{ translateX: '-100vw' }}
+                            animate={{ translateX: 0 }}
+                            className="bg-blue text-left leading-none px-4 py-2 absolute -top-12 left-4 right-4 @xl:-left-4 @xl:right-auto rounded @xl:rounded-none"
+                        >
+                            <span className="text-sm font-bold text-white">
+                                3 people <span className="text-xs text-normal">(would have)</span> added PostHog to
+                                their cart*
+                            </span>
+                            <br />
+                            <span className="text-xs text-white">*if this were a real cart</span>
+                        </motion.div>
+                    )}
+                    <div className="absolute top-4 -right-12">
+                        <div className="relative">
+                            <Bang className="w-[189px] animate-grow" />
+                            <p className="px-8 text-center m-0 absolute top-0 left-0 right-0 bottom-0 flex flex-col items-center justify-center text-black uppercase leading-none font-bold text-lg rotate-6">
+                                <span className="text-xs">Not</span>
+                                endorsed <br />
+                                by Kim K
+                            </p>
+                        </div>
+                    </div>
+                    <p className="text-xs opacity-60 text-right">
+                        *PostHog is a web product and cannot be installed by CD.
+                        <br />
+                        We <em>did</em> once send some customers a floppy disk but it was a Rickroll.
+                    </p>
+                </div>
+                <div>
+                    <div className="hidden @xl:block">
+                        <ProductDetails />
+                    </div>
+
+                    <ul className="p-0 m-0 space-y-5">
+                        <li className="list-none">
+                            <strong className="text-lg block pb-1">Select your cloud</strong>
+                            <ul className="flex gap-2 p-0 list-none">
+                                <li>
+                                    <button
+                                        onClick={() => setVersion('us')}
+                                        className={`py-2 px-3 font-bold border ${
+                                            version === 'us'
+                                                ? 'border-black dark:border-white'
+                                                : 'border-transparent dark:border-transparent'
+                                        }  hover:border-black dark:hover:border-white`}
+                                    >
+                                        US (Virginia)
+                                    </button>
+                                </li>
+                                <li>
+                                    <button
+                                        onClick={() => setVersion('eu')}
+                                        className={`py-2 px-3 font-bold border ${
+                                            version === 'eu'
+                                                ? 'border-black dark:border-white'
+                                                : 'border-transparent dark:border-transparent'
+                                        }  hover:border-black dark:hover:border-white`}
+                                    >
+                                        EU (Frankfurt)
+                                    </button>
+                                </li>
+                            </ul>
+                        </li>
+                        <li className="list-none">
+                            <strong className="text-lg block">Starts at:</strong>
+                            <div className="flex items-baseline gap-1">
+                                <s className="font-bold text-xl">$0</s>
+                                <span className="font-bold text-red text-xl uppercase">Free</span>
+                                <span className="text-xs opacity-50">
+                                    &gt;<span className="text-sm">1 left at this price!!</span>
+                                </span>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div className="py-6">
+                        <CallToAction
+                            type="primary"
+                            size="absurd"
+                            width="64"
+                            to={`https://${version === 'us' ? 'app' : 'eu'}.posthog.com/signup`}
+                            className="animate-grow-sm"
+                            state={{ initialTab: 'signup' }}
+                        >
+                            Get started
+                        </CallToAction>
+                    </div>
+
+                    <div className="flex items-center gap-3">
+                        <span className="bg-accent rounded h-8 w-8 p-1">
+                            <TrendUp className="opacity-75" />
+                        </span>
+                        <p className="text-sm text-secondary leading-tight mb-0">
+                            <strong>Hurry:</strong> {signupCountToday || 'Tons of '} companies signed up{' '}
+                            <button
+                                onClick={() =>
+                                    addWindow(
+                                        <SignupEmbed
+                                            location={{ pathname: 'signup-embed' }}
+                                            key="signup-embed"
+                                            newWindow
+                                        />
+                                    )
+                                }
+                                className="font-bold dark:text-yellow text-red"
+                            >
+                                today
+                            </button>
+                            . <br className="hidden sm:block" />
+                            Act now and get $0 off your first order.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </>
+    )
+
     return (
         <>
-            <section id="cta" ref={ref} className="pt-8 @xl:pt-0 px-5 lg:px-0">
+            <section id="cta" ref={ref} className="pt-8 @xl:pt-0">
                 {headline && (
                     <>
                         <h2 className={heading('lg')}>
@@ -75,144 +218,13 @@ export default function CTA({ headline = true }) {
                     </>
                 )}
 
-                <div className="@xl:hidden py-12">
-                    <ProductDetails />
-                </div>
-
-                <div className="@xl:grid grid-cols-2 gap-16 @xl:pt-16 max-w-5xl mx-auto">
-                    <div className="relative text-right">
-                        <div className="mb-2">
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/cloud-cd.jpg"
-                                alt="PostHog Cloud"
-                                className="max-w-[443px]"
-                            />
-                        </div>
-                        <div className="absolute -left-4 bottom-12 @xl:left-[-8px] @xl:bottom-24">
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/g2-badge.png"
-                                alt="People on G2 think we're great"
-                                className="w-[90px]"
-                            />
-                        </div>
-
-                        {inView && (
-                            <motion.div
-                                transition={{ duration: 1, type: 'tween' }}
-                                initial={{ translateX: '-100vw' }}
-                                animate={{ translateX: 0 }}
-                                className="bg-blue text-left leading-none px-4 py-2 absolute -top-12 left-4 right-4 @xl:-left-4 @xl:right-auto rounded @xl:rounded-none"
-                            >
-                                <span className="text-sm font-bold text-white">
-                                    3 people <span className="text-xs text-normal">(would have)</span> added PostHog to
-                                    their cart*
-                                </span>
-                                <br />
-                                <span className="text-xs text-white">*if this were a real cart</span>
-                            </motion.div>
-                        )}
-                        <div className="absolute top-4 -right-12">
-                            <div className="relative">
-                                <Bang className="w-[189px] animate-grow" />
-                                <p className="px-8 text-center m-0 absolute top-0 left-0 right-0 bottom-0 flex flex-col items-center justify-center text-black uppercase leading-none font-bold text-lg rotate-6">
-                                    <span className="text-xs">Not</span>
-                                    endorsed <br />
-                                    by Kim K
-                                </p>
-                            </div>
-                        </div>
-                        <p className="text-xs opacity-60 text-right">
-                            *PostHog is a web product and cannot be installed by CD.
-                            <br />
-                            We <em>did</em> once send some customers a floppy disk but it was a Rickroll.
-                        </p>
+                {card ? (
+                    <div className="p-6 @xl:p-8 border border-primary bg-accent rounded-md max-w-5xl mx-auto overflow-visible">
+                        {content}
                     </div>
-                    <div>
-                        <div className="hidden @xl:block">
-                            <ProductDetails />
-                        </div>
-
-                        <ul className="p-0 m-0 space-y-5">
-                            <li className="list-none">
-                                <strong className="text-lg block pb-1">Select your cloud</strong>
-                                <ul className="flex gap-2 p-0 list-none">
-                                    <li>
-                                        <button
-                                            onClick={() => setVersion('us')}
-                                            className={`py-2 px-3 font-bold border ${
-                                                version === 'us'
-                                                    ? 'border-black dark:border-white'
-                                                    : 'border-transparent dark:border-transparent'
-                                            }  hover:border-black dark:hover:border-white`}
-                                        >
-                                            US (Virginia)
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button
-                                            onClick={() => setVersion('eu')}
-                                            className={`py-2 px-3 font-bold border ${
-                                                version === 'eu'
-                                                    ? 'border-black dark:border-white'
-                                                    : 'border-transparent dark:border-transparent'
-                                            }  hover:border-black dark:hover:border-white`}
-                                        >
-                                            EU (Frankfurt)
-                                        </button>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li className="list-none">
-                                <strong className="text-lg block">Starts at:</strong>
-                                <div className="flex items-baseline gap-1">
-                                    <s className="font-bold text-xl">$0</s>
-                                    <span className="font-bold text-red text-xl uppercase">Free</span>
-                                    <span className="text-xs opacity-50">
-                                        &gt;<span className="text-sm">1 left at this price!!</span>
-                                    </span>
-                                </div>
-                            </li>
-                        </ul>
-
-                        <div className="py-6">
-                            <CallToAction
-                                type="primary"
-                                size="absurd"
-                                width="64"
-                                to={`https://${version === 'us' ? 'app' : 'eu'}.posthog.com/signup`}
-                                className="animate-grow-sm"
-                                state={{ initialTab: 'signup' }}
-                            >
-                                Get started
-                            </CallToAction>
-                        </div>
-
-                        <div className="flex items-center gap-3">
-                            <span className="bg-accent rounded h-8 w-8 p-1">
-                                <TrendUp className="opacity-75" />
-                            </span>
-                            <p className="text-sm text-secondary leading-tight mb-0">
-                                <strong>Hurry:</strong> {signupCountToday || 'Tons of '} companies signed up{' '}
-                                <button
-                                    onClick={() =>
-                                        addWindow(
-                                            <SignupEmbed
-                                                location={{ pathname: 'signup-embed' }}
-                                                key="signup-embed"
-                                                newWindow
-                                            />
-                                        )
-                                    }
-                                    className="font-bold dark:text-yellow text-red"
-                                >
-                                    today
-                                </button>
-                                . <br className="hidden sm:block" />
-                                Act now and get $0 off your first order.
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                ) : (
+                    content
+                )}
             </section>
         </>
     )

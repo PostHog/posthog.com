@@ -254,6 +254,34 @@ import AndroidFeatureFlagsCode from '../../integrate/feature-flags-code/_snippet
 
 <AndroidFeatureFlagsCode />
 
+### Bootstrapping flags
+
+import BootstrappingIntro from "../../feature-flags/snippets/bootstrapping-intro.mdx"
+import MobileBootstrapBehavior from "../../feature-flags/snippets/mobile-bootstrap-behavior.mdx"
+
+<BootstrappingIntro />
+
+Set `config.bootstrap` before calling `setup()` to seed identity and flag values before the first `/flags` response (requires Android SDK `3.55.0`+):
+
+```kotlin
+import com.posthog.PostHogBootstrapConfig
+
+val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST)
+config.bootstrap = PostHogBootstrapConfig(
+    distinctId = "distinct_id_of_your_user",
+    isIdentifiedId = true,
+    featureFlags = mapOf(
+        "flag-1" to true,
+        "variant-flag" to "control"
+    )
+)
+PostHogAndroid.setup(this, config)
+```
+
+<MobileBootstrapBehavior />
+
+See the [bootstrapping guide](/docs/feature-flags/bootstrapping) for the cross-SDK overview.
+
 ## Experiments (A/B tests)
 
 Since [experiments](/docs/experiments/start-here) use feature flags, the code for running an experiment is very similar to the feature flags code:
@@ -427,6 +455,7 @@ val config = PostHogAndroidConfig(
 | `errorTrackingConfig` | `PostHogErrorTrackingConfig()` | Configures error tracking. `autoCapture` defaults to `false`; set it to `true` to autocapture uncaught exceptions when project settings also enable error tracking. |
 | `surveys` | `false` | Internal/experimental native Android survey support. Native Android survey UI is not fully supported or documented yet. |
 | `surveysConfig` | `PostHogSurveysConfig()` | Internal/experimental survey display delegate configuration, primarily for hybrid SDKs. |
+| `bootstrap` | `null` | Seeds identity (`distinctId`, `isIdentifiedId`) and feature-flag state (`featureFlags`, `featureFlagPayloads`) before the first `/flags` response. Bootstrapped identity applies to the first session; only enabled flags are served, until the first `/flags` response replaces them. See [bootstrapping](/docs/feature-flags/bootstrapping#behavior-on-mobile-sdks). |
 
 ### Event filtering with `beforeSend`
 
