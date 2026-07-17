@@ -68,8 +68,14 @@ export default function About({ data }: AboutProps) {
             >
                 <div className="min-h-full px-4 @xl:px-8 py-4">
                     <div className="max-w-3xl mx-auto pb-12">
-                        <MDXProvider components={mdxComponents}>
-                            {data.mdx.frontmatter?.title && <h1>{data.mdx.frontmatter.title}</h1>}
+                        <MDXProvider
+                            components={{
+                                ...mdxComponents,
+                                Letterhead: (props: any) => (
+                                    <Letterhead {...props} title={data.mdx.frontmatter?.title} />
+                                ),
+                            }}
+                        >
                             <MDXRenderer>{data.mdx.body}</MDXRenderer>
                         </MDXProvider>
                     </div>

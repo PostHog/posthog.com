@@ -6,17 +6,18 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import { useApp } from '../../../context/App'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
-export const Letterhead = () => {
+export const Letterhead = ({ title }: { title?: string }) => {
     const { siteSettings } = useApp()
 
     return (
         <div className="not-prose border-b border-primary py-4 flex flex-col gap-2 @sm:flex-row items-center justify-between">
-            <div>
+            <div className="flex flex-col gap-1 text-center @sm:text-left">
                 <Logo
                     className="inline-block"
                     variant={siteSettings.theme === 'dark' ? 'mono' : 'gradient'}
                     color={siteSettings.theme === 'dark' ? 'white' : undefined}
                 />
+                {title && <h1 className="text-xl @md:text-2xl font-bold m-0 mt-1">{title}</h1>}
             </div>
             <div className="@sm:hidden uppercase text-xs tracking-wider text-center text-muted pt-2">
                 From the desk of
