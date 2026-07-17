@@ -10,6 +10,7 @@ import Link from 'components/Link'
 import dayjs from 'dayjs'
 import { AnimatePresence, motion } from 'framer-motion'
 import CommunitiesMap from 'components/HogMap/CommunitiesMap'
+import EventGraphic, { type EventGraphicProps } from 'components/EventGraphic'
 import BuilderCommunityForm from 'components/BuilderCommunityForm'
 import MobileDrawer from 'components/MobileDrawer'
 import { useApp } from '../context/App'
@@ -35,6 +36,12 @@ const statusSortOrder: Record<CommunityStatus, number> = {
     'inactive-seeking-support': 1,
     inactive: 2,
 }
+
+// The generated brand graphic stands in wherever a community has no logo/photos, same as /events
+const communityGraphicProps = (community: BuilderCommunity): EventGraphicProps => ({
+    title: community.name,
+    location: community.location.label,
+})
 
 const Badge = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
     <span className={`inline-block text-[11px] leading-tight border rounded px-1 py-0.5 ${className}`}>{children}</span>
@@ -82,7 +89,7 @@ const CommunityCard = ({
 }
 
 const AddACommunityWindow = () => {
-    const { setWindowTitle, siteSettings } = useApp()
+    const { setWindowTitle } = useApp()
     const { appWindow } = useWindow()
 
     useEffect(() => {
@@ -91,12 +98,7 @@ const AddACommunityWindow = () => {
 
     return (
         <ScrollArea className="min-h-0 h-full [&>div>div]:h-full">
-            <div
-                data-scheme="secondary"
-                className={`bg-primary text-primary ${
-                    siteSettings.experience === 'boring' ? 'size-full' : 'min-h-full'
-                }`}
-            >
+            <div data-scheme="secondary" className="bg-primary text-primary min-h-full">
                 <div className="p-4">
                     <BuilderCommunityForm />
                 </div>
@@ -106,7 +108,7 @@ const AddACommunityWindow = () => {
 }
 
 const CoolBuilderCommunitiesPage = () => {
-    const { websiteMode, addWindow } = useApp()
+    const { addWindow } = useApp()
     const [typeFilter, setTypeFilter] = useState<'all' | CommunityType>('all')
     const [selectedCommunity, setSelectedCommunity] = useState<BuilderCommunity | null>(null)
 
@@ -176,19 +178,15 @@ const CoolBuilderCommunitiesPage = () => {
             template="generic"
             slug="cool-builder-communities"
             title="Cool builder communities"
+            headerBarOptions={['showBack', 'showForward']}
             fullScreen
             viewportClasses="[&>div>div]:h-full"
             showAddressBar={false}
         >
-            <div
-                data-scheme="primary"
-                className={`flex flex-col @xl:flex-row text-primary ${websiteMode ? 'h-[calc(100vh-48px)]' : 'h-full'}`}
-            >
+            <div data-scheme="primary" className="flex flex-col @xl:flex-row text-primary h-full">
                 <aside
                     data-scheme="secondary"
-                    className={`basis-3/5 @xl:basis-80 bg-primary @xl:border-r border-primary flex flex-col ${
-                        websiteMode ? 'h-[calc(100vh-48px)]' : 'h-full'
-                    }`}
+                    className="basis-3/5 @xl:basis-80 bg-primary @xl:border-r border-primary flex flex-col h-full"
                 >
                     <div className="border-b border-primary px-4 pt-4 pb-4 space-y-3">
                         <p className="text-[13px] text-secondary m-0">
@@ -245,15 +243,20 @@ const CoolBuilderCommunitiesPage = () => {
                                         }`}
                                     >
                                         <div className="w-full">
-                                            {community.logo && (
-                                                <div className="float-right ml-2 max-w-20">
+                                            <div className="float-right ml-2 max-w-20">
+                                                {community.logo ? (
                                                     <img
                                                         src={community.logo}
                                                         alt={`${community.name} logo`}
                                                         className="w-20 max-h-20 object-contain rounded"
                                                     />
-                                                </div>
-                                            )}
+                                                ) : (
+                                                    <EventGraphic
+                                                        {...communityGraphicProps(community)}
+                                                        className="w-20 rounded"
+                                                    />
+                                                )}
+                                            </div>
                                             <div className="flex items-center gap-1.5">
                                                 <Tooltip
                                                     trigger={
@@ -399,7 +402,7 @@ const CoolBuilderCommunitiesPage = () => {
                                                 </div>
                                             )}
 
-                                        {selectedCommunity.photos && selectedCommunity.photos.length > 0 && (
+                                        {selectedCommunity.photos && selectedCommunity.photos.length > 0 ? (
                                             <div>
                                                 <div className="text-secondary text-[13px] mb-1">Photos</div>
                                                 <div className="grid grid-cols-2 gap-2">
@@ -413,6 +416,13 @@ const CoolBuilderCommunitiesPage = () => {
                                                         </ZoomImage>
                                                     ))}
                                                 </div>
+                                            </div>
+                                        ) : (
+                                            <div>
+                                                <EventGraphic
+                                                    {...communityGraphicProps(selectedCommunity)}
+                                                    className="rounded border border-primary"
+                                                />
                                             </div>
                                         )}
 
