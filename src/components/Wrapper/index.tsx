@@ -28,7 +28,7 @@ export default function Wrapper() {
     const { compact } = useAppSettings()
 
     return (
-        <AppContainer className="h-screen flex flex-col p-2">
+        <AppContainer className="h-dvh flex flex-col p-2">
             {!compact && <TaskBarMenu />}
             <div ref={constraintsRef} className={`flex-grow relative min-h-0 overflow-clip`}>
                 <Desktop />
