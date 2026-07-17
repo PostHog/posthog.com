@@ -12,6 +12,8 @@ You can find the snippet pre-filled with this data in [your project settings](ht
 
 <Snippet />
 
+> **If your site sets a Content-Security-Policy**, the snippet needs it to allow PostHog: `script-src` (or `default-src`) must permit the assets host and `connect-src` the ingestion host — see [CSP support](/docs/advanced/content-security-policy) for the exact directives, or use a [reverse proxy](/docs/advanced/proxy) so everything is first-party. This failure is silent: the snippet's stub keeps queueing `capture` and `identify` calls that never send, so the integration looks complete while zero events arrive. Remember `connect-src` falls back to `default-src`, so `default-src 'self'` blocks event delivery even when the script itself is bundled.
+
 Once the snippet is added, PostHog automatically captures `$pageview` and [other events](/docs/data/autocapture) like button clicks. You can then enable other products, such as session replays, within [your project settings](https://app.posthog.com/settings). 
 
 <br />
