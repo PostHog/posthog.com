@@ -1,8 +1,8 @@
 diff --git a/node_modules/gatsby-plugin-mdx/utils/gen-mdx.js b/node_modules/gatsby-plugin-mdx/utils/gen-mdx.js
-index e55874597..7e45bbcb2 100644
+index e55874597..3edf39790 100644
 --- a/node_modules/gatsby-plugin-mdx/utils/gen-mdx.js
 +++ b/node_modules/gatsby-plugin-mdx/utils/gen-mdx.js
-@@ -2,6 +2,77 @@ const babel = require(`@babel/core`)
+@@ -2,6 +2,85 @@ const babel = require(`@babel/core`)
  const grayMatter = require(`gray-matter`)
  const mdx = require(`@mdx-js/mdx`)
  const objRestSpread = require(`@babel/plugin-proposal-object-rest-spread`)
@@ -21,13 +21,21 @@ index e55874597..7e45bbcb2 100644
 +let persistFingerprint = null
 +function getPersistFingerprint(options) {
 +  if (persistFingerprint) return persistFingerprint
-+  const parts = [`ph-mdx-persist-1`, require(`../package.json`).version]
++  const parts = [`ph-mdx-persist-2`, require(`../package.json`).version]
 +  for (const plugin of options.gatsbyRemarkPlugins || []) {
 +    const resolve = typeof plugin === `string` ? plugin : plugin.resolve || ``
 +    parts.push(resolve)
-+    parts.push(JSON.stringify((plugin && plugin.options) || null))
++    // Normalized sub-plugin entries carry the runtime options as `pluginOptions`
++    // (see get-source-plugins-as-remark-plugins.js); `options` is the raw config
++    // shape. Hash both so an options-only change always rotates the fingerprint.
++    parts.push(
++      JSON.stringify(
++        (plugin && (plugin.pluginOptions || plugin.options)) || null
++      )
++    )
 +    try {
-+      const entry = require.resolve(resolve)
++      const entry =
++        (plugin && plugin.modulePath) || require.resolve(resolve)
 +      parts.push(
 +        crypto.createHash(`sha1`).update(fs.readFileSync(entry)).digest(`hex`)
 +      )
@@ -80,7 +88,7 @@ index e55874597..7e45bbcb2 100644
  
  const debug = require(`debug`)(`gatsby-plugin-mdx:gen-mdx`)
  
-@@ -65,6 +136,13 @@ async function genMDX(
+@@ -65,6 +144,13 @@ async function genMDX(
      if (cachedPayload) {
        return cachedPayload
      }
@@ -94,7 +102,7 @@ index e55874597..7e45bbcb2 100644
    }
  
    const results = {
-@@ -195,6 +273,11 @@ ${code}`
+@@ -195,6 +281,11 @@ ${code}`
     * ); */
    if (!forceDisableCache) {
      await cache.set(payloadCacheKey(node), results)
@@ -106,7 +114,7 @@ index e55874597..7e45bbcb2 100644
    }
    return results
  }
-@@ -294,6 +377,20 @@ async function findImportsExports({
+@@ -294,6 +385,20 @@ async function findImportsExports({
  }) {
    const { data: frontmatter, content } = grayMatter(rawInput, options)
  
@@ -128,10 +136,10 @@ index e55874597..7e45bbcb2 100644
      await getSourcePluginsAsRemarkPlugins({
        gatsbyRemarkPlugins: options.gatsbyRemarkPlugins,
 diff --git a/node_modules/gatsby-plugin-mdx/utils/render-html.js b/node_modules/gatsby-plugin-mdx/utils/render-html.js
-index ab390241b..7972d9bc0 100644
+index ab390241b..676f62049 100644
 --- a/node_modules/gatsby-plugin-mdx/utils/render-html.js
 +++ b/node_modules/gatsby-plugin-mdx/utils/render-html.js
-@@ -22,64 +22,107 @@ queue.on(`active`, () => {
+@@ -22,64 +22,120 @@ queue.on(`active`, () => {
    )
  })
  
@@ -168,7 +176,16 @@ index ab390241b..7972d9bc0 100644
 +        // inheriting the build stage's: the entry (every MDX scope file plus the
 +        // renderer wrapper) is a near-full app compile, and webpack revalidates all
 +        // entries against module contents, so a warm cache is byte-identical and a
-+        // stale one degrades to a miss.
++        // stale one degrades to a miss. Gatsby's stage buildDependencies (its webpack
++        // config plus every plugin's gatsby-node closure, which covers site
++        // onCreateWebpackConfig changes like aliases/loaders) are preserved so config
++        // changes still invalidate; this file is added on top.
++        const inheritedCache =
++          webpackConfig.cache && typeof webpackConfig.cache === `object`
++            ? webpackConfig.cache
++            : undefined
++        const inheritedBuildDependencies =
++          (inheritedCache && inheritedCache.buildDependencies) || {}
 +        webpackConfig.cache = {
 +          type: `filesystem`,
 +          name: `mdx-html-renderer`,
@@ -180,7 +197,11 @@ index ab390241b..7972d9bc0 100644
 +            `mdx-html-renderer`
 +          ),
 +          buildDependencies: {
-+            config: [__filename],
++            ...inheritedBuildDependencies,
++            config: [
++              ...((inheritedBuildDependencies && inheritedBuildDependencies.config) || []),
++              __filename,
++            ],
 +          },
 +        }
 +        const compiler = webpack(webpackConfig)
