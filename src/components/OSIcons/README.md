@@ -54,7 +54,7 @@ Paths live in `glyphs.ts`. Author glyphs in the 36-unit design canvas (the defau
 
 ## PricingIcon
 
-A compound glass icon (a stack of dollar bills with a `$`) that doesn't reduce to a single fill path, so it's a one-off rather than a `GlassIcon`. The SVG lives in `svgs/pricing.svg` (imported as a component via `gatsby-plugin-react-svg`), with its shadows recoloured to the system dark-green (`#033003`). `PricingIcon` wraps it at the same `size-9` / hover treatment as the glass icons. Use this pattern for any future multi-layer icon.
+A currency-aware `GlassIcon` showing an angled rear banknote behind a straight front banknote. Each note uses the original export's outer sheet and inset cash-face geometry, restoring the layered corner details without its independent filters. It selects a dollar, pound, or euro cut-out from the `pricing-currency` feature flag, defaulting to dollar; each glyph is enlarged 20% for clarity. Only the exposed portion of the rear note is rendered, so the currency symbol remains transparent through the whole icon. All four silhouette layers share the standard glass fill, bevels, unified shadow, frost, and hover treatment.
 
 ## AppIcon
 
