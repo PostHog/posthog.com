@@ -1584,7 +1584,7 @@ function ReaderViewContent({
                             <article
                                 className={`reader-view-content-container @container/reader-content-container ${getProseClasses(
                                     proseSize
-                                )} max-w-none relative flex-1 min-w-0`}
+                                )} max-w-none relative flex-1 min-w-0 overflow-x-hidden`}
                             >
                                 {header && (
                                     <header className="relative">
