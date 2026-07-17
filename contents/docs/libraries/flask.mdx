@@ -49,7 +49,7 @@ import IdentifyBackendCalloutPython from '../_snippets/identify-backend-callout-
 
 Use [contexts](/docs/libraries/python#contexts) to share identity, session IDs, and tags across multiple captures during a request.
 
-If you're using [PostHog JS](/docs/libraries/js) on the frontend, configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your Flask backend hostname so browser requests include the session and distinct ID headers.
+If you're using [PostHog JavaScript Web](/docs/libraries/js) on the frontend, configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your Flask backend hostname so browser requests include the session and distinct ID headers.
 
 Then read the incoming headers in your Flask request handler. Tracing headers are client-controlled analytics context, not authentication or authorization, so prefer your authenticated user ID when one is available:
 

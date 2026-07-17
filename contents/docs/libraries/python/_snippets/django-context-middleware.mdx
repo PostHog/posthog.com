@@ -47,7 +47,7 @@ def identify_posthog_user(sender, request, user, **kwargs):
 
 Every capture later in that request is then attributed to the user who just logged in. Requests made after login don't need this. The middleware sees the authenticated user from the start.
 
-If you're using [PostHog JS](/docs/libraries/js) on the frontend, configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your Django backend hostname so browser requests include the session and distinct ID headers.
+If you're using [PostHog JavaScript Web](/docs/libraries/js) on the frontend, configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your Django backend hostname so browser requests include the session and distinct ID headers.
 
 ### Exception capture
 
