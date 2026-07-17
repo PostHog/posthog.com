@@ -356,7 +356,7 @@ export const Context = createContext<AppContextType>({
         cursor: 'default',
         wallpaper: 'keyboard-garden',
         screensaverDisabled: true,
-        heaterMode: false,
+        heaterMode: true,
         clickBehavior: 'double',
         performanceBoost: false,
     },
@@ -443,7 +443,7 @@ export const SettingsContext = createContext<AppSettingsContextType>({
         cursor: 'default',
         wallpaper: 'keyboard-garden',
         screensaverDisabled: true,
-        heaterMode: false,
+        heaterMode: true,
         clickBehavior: 'double',
         performanceBoost: false,
     },
@@ -1612,7 +1612,7 @@ const getInitialSiteSettings = () => {
         clickBehavior: 'double',
         performanceBoost: false,
         screensaverDisabled: true,
-        heaterMode: false,
+        heaterMode: true,
         ...(typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('siteSettings') || '{}') : {}),
     }
 
@@ -1642,7 +1642,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         clickBehavior: 'double',
         performanceBoost: false,
         screensaverDisabled: true,
-        heaterMode: false,
+        heaterMode: true,
     })
     const [taskbarHeight, setTaskbarHeight] = useState(59)
     const [lastClickedElementRect, setLastClickedElementRect] = useState<{ x: number; y: number } | null>(null)

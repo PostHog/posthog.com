@@ -1,5 +1,5 @@
 // OS window chrome — full literal strings so Tailwind JIT picks up every class.
-// Default: solid bg-primary (no blur). Heater mode: frosted glass with blur.
+// Default (heaterMode): frosted glass with blur. Reduce transparency: solid bg-primary, no blur.
 // `reduce-transparency:` is a custom variant for prefers-reduced-transparency (macOS).
 
 /** Default — opaque, no blur */
@@ -10,7 +10,7 @@ export const PANEL_BG = 'bg-primary transform-gpu reduce-transparency:!bg-primar
 export const TASKBAR_BG =
     'bg-primary/50 backdrop-blur-3xl transform-gpu reduce-transparency:!bg-primary reduce-transparency:backdrop-blur-none'
 
-/** Heater mode — frosted glass (windows + sidebar overlays only) */
+/** Frosted glass (windows + sidebar overlays) — default when reduce transparency is off */
 export const HEATER_WINDOW_BG =
     'bg-primary/75 backdrop-blur-xl transform-gpu reduce-transparency:!bg-primary reduce-transparency:backdrop-blur-none'
 export const HEATER_PANEL_BG =

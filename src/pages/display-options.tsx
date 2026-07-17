@@ -259,12 +259,10 @@ export default function DisplayOptions() {
                 </div>
                 <div className="bg-primary grid grid-cols-2 gap-2">
                     <div className="flex items-center gap-1 mb-1">
-                        <span className="text-sm">Heater mode</span>
+                        <span className="text-sm">Reduce transparency</span>
                         <Tooltip trigger={<IconInfo className="size-4 inline-block relative -top-px" />} delay={0}>
                             <p className="max-w-sm my-0 leading-snug">
-                                A visual enhancement that uses partially transparent, blurred backgrounds in app windows
-                                for a nice diffused glass effect. Will absolutely destroy your battery and possibly
-                                cause third degree burns.
+                                Solid, opaque backgrounds for windows and sidebars instead of frosted blur.
                             </p>
                         </Tooltip>
                     </div>
@@ -276,9 +274,9 @@ export default function DisplayOptions() {
                                 { label: 'Enabled', value: 'true' },
                             ]}
                             onValueChange={(value) => {
-                                updateSiteSettings({ ...siteSettings, heaterMode: value === 'true' })
+                                updateSiteSettings({ ...siteSettings, heaterMode: value !== 'true' })
                             }}
-                            value={siteSettings.heaterMode ? 'true' : 'false'}
+                            value={siteSettings.heaterMode ? 'false' : 'true'}
                         />
                     </div>
                 </div>
