@@ -12,9 +12,9 @@ export const TASKBAR_BG =
 
 /** Frosted glass (windows + sidebar overlays) — default when reduce transparency is off */
 export const HEATER_WINDOW_BG =
-    'bg-primary/75 backdrop-blur-xl transform-gpu reduce-transparency:!bg-primary reduce-transparency:backdrop-blur-none'
+    'bg-primary/75 backdrop-blur-3xl transform-gpu reduce-transparency:!bg-primary reduce-transparency:backdrop-blur-none'
 export const HEATER_PANEL_BG =
-    'bg-primary/75 dark:bg-primary backdrop-blur-xl transform-gpu reduce-transparency:!bg-primary reduce-transparency:backdrop-blur-none'
+    'bg-primary/75 dark:bg-primary backdrop-blur-3xl transform-gpu reduce-transparency:!bg-primary reduce-transparency:backdrop-blur-none'
 
 /** Promote compositor layers while a surface is moving */
 export const MOTION_LAYER = 'will-change-transform'
