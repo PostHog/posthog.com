@@ -28,14 +28,18 @@ Drag on empty desktop space to select icons, like a real OS. **Visual-only v1**:
 
 Behavior:
 
-- Primary-button drag (mouse/pen; touch ignored) draws a rectangle after a 4px threshold. Icons intersecting it highlight live.
+- Primary-button **mouse** drag draws a rectangle after a 4px threshold. Icons intersecting it highlight live. Touch and pen are ignored: touch keeps native scrolling, and pen press-and-hold is Radix's context-menu long-press gesture (Radix treats pen like touch), which must not also start a marquee.
 - Shift at drag start adds to the existing selection; a plain drag replaces it.
-- Clears on: plain click on empty desktop, Escape, or pressing an icon (the icon still opens its app as usual — `AppLink` is untouched).
+- Clears on: plain click on empty desktop, Escape, or pressing an icon (the icon still opens its app as usual — `AppLink` is untouched). Escape handlers call `preventDefault` when they act, so a window's `closeOnEscape` and the selection never both consume one press.
 - Right-click is ignored by the marquee, so the context menu works as before.
 
 Implementation notes:
 
 - Pointer listeners are window-level and capture-phase for the duration of a drag, so it survives sweeping over open windows and releases outside the viewport (`e.buttons === 0` guard in pointermove).
 - Icon rects are snapshotted once per drag from `li[data-icon-label]`, **filtering zero-size rects**: the `sm:hidden` mobile icon list duplicates every label at 0×0, which would otherwise false-select on marquees touching the top-left corner. The same filter makes narrow-viewport mouse selection work against the mobile grid.
-- The rectangle's geometry is ref-driven (direct style writes); the only React state is the `ReadonlySet<string>` of selected labels, updated only when membership actually changes.
+- The rectangle's geometry is ref-driven (direct style writes); the only React state is the `ReadonlySet<string>` of selected labels, updated only when membership actually changes. `DesktopIcon` is memoized (with referentially-stable `app` objects from the memoized glow mapping), so only icons whose `selected` flag flips re-render.
 - Selection state is local to the desktop — nothing in `context/App.tsx` is involved.
+
+### Theming
+
+The selection color is the project `blue` token — the same idiom as the window snap indicator — deliberately independent of light/dark mode, skin, and wallpaper; the translucency keeps it legible everywhere. It is intentionally *not* wired to the semantic scheme variables (`--accent` etc.), which restyle app chrome, not OS selection. If a future skin needs a different selection color, `MARQUEE_BOX_CLASSES` and `SELECTED_ICON_CLASSES` in `useMarqueeSelection.ts` are the single knob.

@@ -7,7 +7,9 @@ import React, { useEffect, useRef, useState } from 'react'
  * rectangle on a real OS desktop. Visual-only: selection highlights icons and
  * persists until dismissed; it doesn't (yet) enable dragging or opening them.
  *
- * - A drag starting on empty desktop space (primary button, mouse/pen only)
+ * - A drag starting on empty desktop space (primary mouse button only; touch
+ *   and pen keep their native behavior — pen press-and-hold is the Radix
+ *   context-menu long-press gesture, so it must not double as a marquee)
  *   draws a rectangle once it passes a small movement threshold; below the
  *   threshold it's treated as a plain click, which clears the selection.
  * - Icons whose bounding boxes intersect the rectangle are selected live.
@@ -27,6 +29,14 @@ import React, { useEffect, useRef, useState } from 'react'
 
 const DRAG_THRESHOLD_PX = 4
 const EMPTY_SET: ReadonlySet<string> = new Set()
+
+// Selection color is the project `blue` token, matching the window snap
+// indicator (AppWindow) — deliberately independent of light/dark, skin, and
+// wallpaper; the translucency is what keeps it legible everywhere. If a future
+// skin ever needs a different selection color, these two constants are the
+// single knob (full class strings so Tailwind's JIT scanner can see them).
+export const MARQUEE_BOX_CLASSES = 'border border-blue bg-blue/20'
+export const SELECTED_ICON_CLASSES = 'rounded-md bg-blue/20 ring-1 ring-inset ring-blue/40'
 
 interface DragState {
     originX: number
@@ -129,7 +139,10 @@ const createMarqueeController = (
     const handleWindowBlur = () => endDrag()
 
     const handleDragKeyDown = (e: KeyboardEvent) => {
-        if (e.key === 'Escape') {
+        if (e.key === 'Escape' && !e.defaultPrevented) {
+            // Claim the Escape so window-level handlers (e.g. AppWindow's
+            // closeOnEscape) don't also act on the same press
+            e.preventDefault()
             endDrag()
             clearSelection()
         }
@@ -162,10 +175,12 @@ const createMarqueeController = (
     }
 
     const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
-        // Touch gets the mobile layout and native scrolling; right/middle
-        // click must stay free for the context menu. No preventDefault here —
-        // it would interfere with Radix's contextmenu handling.
-        if (e.button !== 0 || e.pointerType === 'touch' || drag) return
+        // Mouse only: touch keeps native scrolling, and pen press-and-hold is
+        // Radix's context-menu long-press gesture (it treats pen like touch),
+        // which must not also start a marquee. Right/middle click stay free
+        // for the context menu. No preventDefault here — it would interfere
+        // with Radix's contextmenu handling.
+        if (e.button !== 0 || e.pointerType !== 'mouse' || drag) return
         if ((e.target as Element).closest('[data-icon-label]')) {
             // Pressing an icon clears the selection; the icon's own click
             // proceeds and opens its app as usual
@@ -183,14 +198,10 @@ const createMarqueeController = (
         attachDragListeners()
     }
 
-    return { onPointerDown, clearSelection, destroy: endDrag }
+    return { onPointerDown, clearSelection, endDrag }
 }
 
-export default function useMarqueeSelection(): {
-    selectedLabels: ReadonlySet<string>
-    marqueeRef: React.RefObject<HTMLDivElement>
-    onDesktopPointerDown: (e: React.PointerEvent<HTMLDivElement>) => void
-} {
+export default function useMarqueeSelection() {
     const [selectedLabels, setSelectedLabels] = useState<ReadonlySet<string>>(EMPTY_SET)
     const marqueeRef = useRef<HTMLDivElement>(null)
 
@@ -207,14 +218,19 @@ export default function useMarqueeSelection(): {
     useEffect(() => {
         if (!hasSelection) return
         const handleKeyDown = (e: KeyboardEvent) => {
-            if (e.key === 'Escape' && !e.defaultPrevented) controller.clearSelection()
+            if (e.key === 'Escape' && !e.defaultPrevented) {
+                // Claim the Escape so a focused closeOnEscape window doesn't
+                // also close on the same press (it guards on defaultPrevented)
+                e.preventDefault()
+                controller.clearSelection()
+            }
         }
         window.addEventListener('keydown', handleKeyDown)
         return () => window.removeEventListener('keydown', handleKeyDown)
     }, [hasSelection])
 
     // Detach any in-flight drag listeners if the desktop ever unmounts
-    useEffect(() => () => controller.destroy(), [])
+    useEffect(() => () => controller.endDrag(), [])
 
     return { selectedLabels, marqueeRef, onDesktopPointerDown: controller.onPointerDown }
 }

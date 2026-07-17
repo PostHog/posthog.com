@@ -20,7 +20,7 @@ import { AppItem } from 'components/OSIcons/AppIcon'
 import ContextMenu from 'components/RadixUI/ContextMenu'
 import CloudinaryImage from 'components/CloudinaryImage'
 import DesktopIcon from './DesktopIcon'
-import useMarqueeSelection from './useMarqueeSelection'
+import useMarqueeSelection, { MARQUEE_BOX_CLASSES } from './useMarqueeSelection'
 import { Screensaver } from '../Screensaver'
 import { useInactivityDetection } from '../../hooks/useInactivityDetection'
 import NotificationsPanel from 'components/NotificationsPanel'
@@ -141,6 +141,22 @@ const APP_CONTAINER_TOP_PADDING = 8
 const TASKBAR_HEIGHT = 42
 const DESKTOP_TOP_OFFSET = APP_CONTAINER_TOP_PADDING + TASKBAR_HEIGHT
 
+// Drive the desktop icons' hover-glow color from the active wallpaper (light + dark).
+// Module-scope so the result can be memoized: DesktopIcon is React.memo'd, which
+// only pays off if the `app` object identities are stable across renders.
+const applyGlow = (items: AppItem[], glow: { light: string; dark: string }) =>
+    items.map((app) =>
+        React.isValidElement(app.Icon) && app.Icon.type === GlassIcon
+            ? {
+                  ...app,
+                  Icon: React.cloneElement(app.Icon as React.ReactElement, {
+                      glowColor: glow.light,
+                      glowColorDark: glow.dark,
+                  }),
+              }
+            : app
+    )
+
 function Desktop() {
     const productLinks = useProductLinks()
     const { setScreensaverPreviewActive, setConfetti, updateSiteSettings } = useAppActions()
@@ -177,22 +193,12 @@ function Desktop() {
         }, 2000)
     }
 
-    // Drive the desktop icons' hover-glow color from the active wallpaper (light + dark).
+    // getWallpaperGlow returns stable references from a module-level map, so
+    // these lists only rebuild when the wallpaper actually changes — not on
+    // every selection change during a marquee drag.
     const glow = getWallpaperGlow(siteSettings.wallpaper)
-    const applyGlow = (items: AppItem[]) =>
-        items.map((app) =>
-            React.isValidElement(app.Icon) && app.Icon.type === GlassIcon
-                ? {
-                      ...app,
-                      Icon: React.cloneElement(app.Icon as React.ReactElement, {
-                          glowColor: glow.light,
-                          glowColorDark: glow.dark,
-                      }),
-                  }
-                : app
-        )
-    const leftApps = applyGlow(productLinks)
-    const rightApps = applyGlow(apps)
+    const leftApps = React.useMemo(() => applyGlow(productLinks, glow), [productLinks, glow])
+    const rightApps = React.useMemo(() => applyGlow(apps, glow), [glow])
 
     // Mobile: one continuous wrapping grid (avoids a gap when left apps don't fill a row).
     // sm+: classic left/right desktop columns that wrap into extra columns when short on height.
@@ -318,7 +324,7 @@ function Desktop() {
                         ref={marqueeRef}
                         data-marquee
                         aria-hidden
-                        className="absolute hidden pointer-events-none border border-blue bg-blue/20"
+                        className={`absolute hidden pointer-events-none ${MARQUEE_BOX_CLASSES}`}
                     />
                 </div>
                 {!compact && (
