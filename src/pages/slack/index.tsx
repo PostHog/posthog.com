@@ -470,7 +470,7 @@ const compareRows: CompareRow[] = [
     },
     {
         label: 'Where it runs',
-        ai: "None – it's a panel in PostHog Cloud.",
+        ai: "None – it's a panel in PostHog Web.",
         slack: 'PostHog-managed cloud sandbox.',
         code: 'Local, an isolated worktree, or a PostHog-managed cloud sandbox.',
     },

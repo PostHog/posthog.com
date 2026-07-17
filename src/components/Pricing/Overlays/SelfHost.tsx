@@ -8,7 +8,7 @@ const features = [
         description: 'Self-hosting PostHog makes it much easier to meet HIPAA, GDPR, and SOC 2 requirements.',
     },
     {
-        title: 'Capture up to 30% more events than PostHog Cloud',
+        title: 'Capture up to 30% more events than PostHog Web',
         description: 'First-party cookie means privacy trackers don’t block PostHog like a third-party script.',
     },
     {

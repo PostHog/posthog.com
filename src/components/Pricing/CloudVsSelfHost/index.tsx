@@ -12,7 +12,7 @@ export const CloudVsSelfHost = ({ className = '' }) => {
                     <span className="flex-grow-0">
                         <Logo wordmark={false} />
                     </span>
-                    <span className="flex-grow-1">PostHog Cloud</span>
+                    <span className="flex-grow-1">PostHog Web</span>
                 </h3>
                 <ul className="list-none m-0 p-0">
                     <li className="py-4 sm:text-lg md:text-xl">Hosted & managed by PostHog</li>
