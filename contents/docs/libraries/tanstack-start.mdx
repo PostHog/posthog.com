@@ -30,7 +30,11 @@ import IdentifyFrontendCallout from '../_snippets/identify-frontend-callout.mdx'
 
 Wrap your app with `PostHogProvider` in your root route with your project token, host, and other options. 
 
-```tsx file=src/routes/__root.tsx
+```
+
+import CspAllowancesCallout from "../_snippets/csp-allowances-callout.mdx"
+
+<CspAllowancesCallout />tsx file=src/routes/__root.tsx
 // src/routes/__root.tsx
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
 import { PostHogProvider } from '@posthog/react'
