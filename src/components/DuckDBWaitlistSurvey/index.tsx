@@ -42,6 +42,10 @@ export default function DuckDBWaitlistSurvey(): JSX.Element {
                 email: email,
                 duckdb_waitlist: true,
             })
+
+            // Mirror the in-app coming-soon waitlist: fire $feature_enrollment_update with
+            // $feature_enrollment_stage 'concept' for the Managed DuckDB Data Warehouse EAF.
+            posthog.updateEarlyAccessFeatureEnrollment?.('managed-duckdb-data-warehouse', true, 'concept')
         }
 
         setSubmitted(true)
