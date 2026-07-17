@@ -375,6 +375,11 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
+                    label: 'Time Machine',
+                    link: '/time-machine',
+                },
+                {
+                    type: 'item',
                     label: "Don't get discount bamboozled",
                     link: '/discounts',
                 },
