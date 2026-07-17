@@ -74,8 +74,8 @@ Connect PostHog to your Bing Ads account using a Microsoft account. The Microsof
 
 ## Troubleshooting
 
-### Can't connect an account that signs in with Google
+### Can't connect if you sign in with Google
 
-PostHog authenticates through the Microsoft Advertising API, which only accepts a Microsoft account. If you sign in to Microsoft Advertising with a **Google account**, the connection can't complete — this is a Microsoft limitation, not specific to PostHog.
+PostHog authenticates through the Microsoft Advertising API, which only accepts a Microsoft account. If you sign in to Microsoft Advertising with a **Google account**, the connection can't complete. This is a Microsoft limitation, not specific to PostHog.
 
 To fix it, sign in with a Microsoft account that has administrator or standard access to your Bing Ads account, then link the source again.
