@@ -62,7 +62,7 @@ const subfeatures = [
     },
 ]
 
-// Custom ProductOS Benefits slide
+// Custom "Better together" slide
 const ProductOSBenefitsSlide = () => {
     return (
         <div
@@ -146,7 +146,7 @@ export default function ErrorTracking(): JSX.Element {
         custom: [
             {
                 slug: 'product-os-benefits',
-                name: 'Product OS Benefits',
+                name: 'Better together',
                 component: ProductOSBenefitsSlide,
             },
         ],

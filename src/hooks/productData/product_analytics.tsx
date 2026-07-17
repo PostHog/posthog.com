@@ -199,7 +199,7 @@ export const productAnalytics = {
                 {
                     title: 'Integration',
                     description:
-                        'Works with cohorts, feature flags, and other Product OS features and tools for comprehensive analysis',
+                        'Works with cohorts, feature flags, and other PostHog tools for comprehensive analysis',
                 },
             ],
         },

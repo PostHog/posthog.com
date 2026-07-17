@@ -1033,11 +1033,11 @@ export function useMenuSelectOptions() {
     // Build the select groups
     const selectGroups = [
         {
-            label: 'Product OS',
+            label: 'Context warehouse',
             items: [
                 {
                     value: 'products',
-                    label: 'Product OS',
+                    label: 'Context warehouse',
                     icon: <Icons.IconApps className="size-4 text-red" />,
                 },
             ],
