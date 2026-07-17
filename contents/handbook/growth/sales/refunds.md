@@ -116,10 +116,6 @@ If you want more precision when a single event type is inflated, use the 'Event 
 
 ## How to issue refunds or credits
 
-### Prerequisites
-
-You need Support specialist level access to Stripe, ask Simon for access.
-
 ### Issuing credits
 
 1. Go to [billing admin](https://billing.posthog.com/admin/)
@@ -130,7 +126,7 @@ You need Support specialist level access to Stripe, ask Simon for access.
 6. Add an optional note in the 'Notes' field
 7. Include an optional link in the 'Reference link' field, e.g. Zendesk ticket, Slack message link, etc.
 8. Click 'Save and view'
-9. Confirm that the credits were successfully added to the customer's balance in Stripe under 'Customer invoice balance'
+9. After saving, you'll land on the customer view in Billing Admin — confirm the credit now appears on the customer's balance there. You don't need to check Stripe.
 
 ### Issuing a refund
 Refunds are now initiated through Billing Admin and finalized in Stripe via a credit note. 

@@ -80,6 +80,7 @@ Create a JSON file at a stable HTTPS URL, for example `https://yourapp.com/.well
 ```
 
 Requirements:
+
 - **`client_id`** must exactly match the URL where this document is hosted.
 - **`redirect_uris`** is required and must contain at least one HTTPS URI. This is where PostHog redirects existing users during the consent flow.
 - **`logo_uri`** (optional) must be HTTPS if provided.
@@ -98,7 +99,7 @@ By default, a CIMD partner app is unverified and capped at 10 account requests p
 You can link the app to a PostHog organization with a verification token to raise that to 100/hour and surface the partner integration to that org's admins.
 
 1. In PostHog, go to **Organization settings → CIMD verification tokens** and click **Create token**. Copy the `phvt_…` value – it's only shown once.
-2. Add a `posthog_verification_token` field to your CIMD metadata document:
+2. Add the token inside a `com.posthog` namespace in your CIMD metadata document:
 
    ```json
    {
@@ -109,7 +110,9 @@ You can link the app to a PostHog organization with a verification token to rais
      "token_endpoint_auth_method": "none",
      "grant_types": ["authorization_code"],
      "response_types": ["code"],
-     "posthog_verification_token": "phvt_..."
+     "com.posthog": {
+       "verification_token": "phvt_..."
+     }
    }
    ```
 
@@ -118,6 +121,33 @@ You can link the app to a PostHog organization with a verification token to rais
 The token is only used to prove ownership of the partner app – it isn't sent on API requests.
 You can rotate or revoke a token at any time from the same settings page.
 Revocation clears the link on the next metadata refresh, so a leaked or stale token can't keep an app linked to your org.
+
+> **Note:** The legacy top-level `posthog_verification_token` field is still supported as a fallback. PostHog reads `com.posthog.verification_token` first and falls back to the top-level field if the nested one is absent or unrecognized. New integrations should use the `com.posthog` namespace.
+
+### Declare OAuth scopes for your app (optional)
+
+You can declare which OAuth scopes your partner app needs by adding a `scopes` field inside the `com.posthog` namespace. This sets a scope ceiling – tokens issued to your app are limited to these scopes.
+
+```json
+{
+  "client_id": "https://yourapp.com/.well-known/posthog-client.json",
+  "client_name": "Your App Name",
+  "redirect_uris": ["https://yourapp.com/callbacks/posthog"],
+  "token_endpoint_auth_method": "none",
+  "grant_types": ["authorization_code"],
+  "response_types": ["code"],
+  "com.posthog": {
+    "verification_token": "phvt_...",
+    "scopes": ["insight:read", "project:read", "person:read"]
+  }
+}
+```
+
+Only scopes a user can grant on the consent screen are accepted – see [available scopes](#available-scopes) for the full list. Any scope PostHog reserves for internal use, or doesn't recognize, is dropped. If every scope you declare is dropped (none are grantable), registration is rejected rather than falling back to an empty ceiling, so make sure at least one declared scope is on the available list.
+
+If `com.posthog.scopes` is omitted, your app can request any scope a user can grant. When present, the declared scopes are applied on both initial registration and every subsequent metadata refresh. A scope ceiling is a cap, not a grant – each scope still requires user consent at the authorization step.
+
+CIMD app scopes are managed via the metadata document and are read-only in the PostHog admin UI.
 
 ## API reference
 
@@ -162,17 +192,17 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/account_requests \
 
 **Request fields:**
 
-| Field | Type | Required | Description |
-|---|---|---|---|
-| `id` | string | Yes | Your unique request ID (for idempotency) |
-| `email` | string | Yes | User's email address |
-| `name` | string | No | User's full name |
-| `client_id` | string | Yes | Your CIMD metadata URL |
-| `code_challenge` | string | Yes | Base64url-encoded SHA-256 hash of your code verifier (43-128 chars) |
-| `code_challenge_method` | string | Yes | Must be `"S256"` |
-| `scopes` | list | No | OAuth scopes to request for the access token. See [available scopes](#available-scopes). |
-| `configuration.region` | string | No | `"US"` (default) or `"EU"` |
-| `configuration.organization_name` | string | No | Organization name (defaults to `"Partner (email)"`) |
+| Field                             | Type   | Required | Description                                                                              |
+| --------------------------------- | ------ | -------- | ---------------------------------------------------------------------------------------- |
+| `id`                              | string | Yes      | Your unique request ID (for idempotency)                                                 |
+| `email`                           | string | Yes      | User's email address                                                                     |
+| `name`                            | string | No       | User's full name                                                                         |
+| `client_id`                       | string | Yes      | Your CIMD metadata URL                                                                   |
+| `code_challenge`                  | string | Yes      | Base64url-encoded SHA-256 hash of your code verifier (43-128 chars)                      |
+| `code_challenge_method`           | string | Yes      | Must be `"S256"`                                                                         |
+| `scopes`                          | list   | No       | OAuth scopes to request for the access token. See [available scopes](#available-scopes). |
+| `configuration.region`            | string | No       | `"US"` (default) or `"EU"`                                                               |
+| `configuration.organization_name` | string | No       | Organization name (defaults to `"Partner (email)"`)                                      |
 
 **New user response** (HTTP 200):
 
@@ -235,11 +265,11 @@ curl -X POST https://us.posthog.com/api/agentic/oauth/token \
 
 **Request fields:**
 
-| Field | Type | Required | Description |
-|---|---|---|---|
-| `grant_type` | string | Yes | Must be `"authorization_code"` |
-| `code` | string | Yes | The authorization code from step 1 |
-| `code_verifier` | string | Yes | The original PKCE code verifier (must match the challenge from step 1) |
+| Field           | Type   | Required | Description                                                            |
+| --------------- | ------ | -------- | ---------------------------------------------------------------------- |
+| `grant_type`    | string | Yes      | Must be `"authorization_code"`                                         |
+| `code`          | string | Yes      | The authorization code from step 1                                     |
+| `code_verifier` | string | Yes      | The original PKCE code verifier (must match the challenge from step 1) |
 
 **Response** (HTTP 200):
 
@@ -490,12 +520,14 @@ Common error codes:
 All provisioning endpoints are rate limited.
 
 **CIMD registration** (first request from a new `client_id`):
+
 - 5 requests per minute per IP (burst)
 - 10 requests per hour per IP (sustained)
 - 100 new client registrations per hour globally
 - 5 new client registrations per domain per hour
 
 **Account requests** (per partner, per hour):
+
 - 10/hour for unverified CIMD partners
 - 100/hour for partners linked to a PostHog organization via a [verification token](#link-your-partner-app-to-a-posthog-organization-optional)
 
@@ -506,67 +538,61 @@ Email [team-growth@posthog.com](mailto:team-growth@posthog.com) if you need a hi
 Here's a complete example in Node.js:
 
 ```javascript
-import crypto from 'node:crypto';
+import crypto from "node:crypto";
 
-const CLIENT_ID = 'https://yourapp.com/.well-known/posthog-client.json';
-const BASE_URL = 'https://us.posthog.com';
+const CLIENT_ID = "https://yourapp.com/.well-known/posthog-client.json";
+const BASE_URL = "https://us.posthog.com";
 
 async function provisionPostHogAccount(email, name) {
   // Generate PKCE values
-  const codeVerifier = crypto.randomBytes(32).toString('base64url');
-  const codeChallenge = crypto
-    .createHash('sha256')
-    .update(codeVerifier)
-    .digest('base64url');
+  const codeVerifier = crypto.randomBytes(32).toString("base64url");
+  const codeChallenge = crypto.createHash("sha256").update(codeVerifier).digest("base64url");
 
   // Step 1: Create account
-  const accountRes = await fetch(
-    `${BASE_URL}/api/agentic/provisioning/account_requests`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'API-Version': '0.1d',
-      },
-      body: JSON.stringify({
-        id: crypto.randomUUID(),
-        email,
-        name,
-        client_id: CLIENT_ID,
-        code_challenge: codeChallenge,
-        code_challenge_method: 'S256',
-        configuration: { region: 'US' },
-      }),
-    }
-  );
+  const accountRes = await fetch(`${BASE_URL}/api/agentic/provisioning/account_requests`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "API-Version": "0.1d",
+    },
+    body: JSON.stringify({
+      id: crypto.randomUUID(),
+      email,
+      name,
+      client_id: CLIENT_ID,
+      code_challenge: codeChallenge,
+      code_challenge_method: "S256",
+      configuration: { region: "US" },
+    }),
+  });
 
   if (!accountRes.ok) {
     const err = await accountRes.json();
     throw new Error(
-      `Account request failed (${accountRes.status}): ${err.error?.message || JSON.stringify(err)}`
+      `Account request failed (${accountRes.status}): ${err.error?.message || JSON.stringify(err)}`,
     );
   }
 
   const account = await accountRes.json();
 
-  if (account.type === 'requires_auth') {
+  if (account.type === "requires_auth") {
     // Existing user - redirect them to account.requires_auth.url
-    return { type: 'requires_auth', url: account.requires_auth.url };
+    return { type: "requires_auth", url: account.requires_auth.url };
   }
 
-  if (account.type !== 'oauth') {
-    throw new Error(account.error?.message || 'Unexpected response type');
+  if (account.type !== "oauth") {
+    throw new Error(account.error?.message || "Unexpected response type");
   }
 
   // Step 2: Exchange code for tokens
   const tokenRes = await fetch(`${BASE_URL}/api/agentic/oauth/token`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'API-Version': '0.1d',
+      "Content-Type": "application/x-www-form-urlencoded",
+      "API-Version": "0.1d",
     },
     body: new URLSearchParams({
-      grant_type: 'authorization_code',
+      grant_type: "authorization_code",
       code: account.oauth.code,
       code_verifier: codeVerifier,
     }),
@@ -575,41 +601,38 @@ async function provisionPostHogAccount(email, name) {
   if (!tokenRes.ok) {
     const err = await tokenRes.json();
     throw new Error(
-      `Token exchange failed (${tokenRes.status}): ${err.error_description || JSON.stringify(err)}`
+      `Token exchange failed (${tokenRes.status}): ${err.error_description || JSON.stringify(err)}`,
     );
   }
 
   const tokens = await tokenRes.json();
 
   // Step 3: Provision a project
-  const resourceRes = await fetch(
-    `${BASE_URL}/api/agentic/provisioning/resources`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${tokens.access_token}`,
-        'API-Version': '0.1d',
-      },
-      body: JSON.stringify({
-        service_id: 'analytics',
-        label_prefix: 'Acme Co',
-        configuration: { project_name: 'Production' },
-      }),
-    }
-  );
+  const resourceRes = await fetch(`${BASE_URL}/api/agentic/provisioning/resources`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${tokens.access_token}`,
+      "API-Version": "0.1d",
+    },
+    body: JSON.stringify({
+      service_id: "analytics",
+      label_prefix: "Acme Co",
+      configuration: { project_name: "Production" },
+    }),
+  });
 
   if (!resourceRes.ok) {
     const err = await resourceRes.json();
     throw new Error(
-      `Resource provisioning failed (${resourceRes.status}): ${err.error?.message || JSON.stringify(err)}`
+      `Resource provisioning failed (${resourceRes.status}): ${err.error?.message || JSON.stringify(err)}`,
     );
   }
 
   const resource = await resourceRes.json();
 
   return {
-    type: 'provisioned',
+    type: "provisioned",
     apiKey: resource.complete.access_configuration.api_key,
     host: resource.complete.access_configuration.host,
     projectId: resource.id,
@@ -639,7 +662,7 @@ async function getDeepLinkUrl(accessToken, path) {
   if (!res.ok) {
     const err = await res.json();
     throw new Error(
-      `Deep link request failed (${res.status}): ${err.error?.message || JSON.stringify(err)}`
+      `Deep link request failed (${res.status}): ${err.error?.message || JSON.stringify(err)}`,
     );
   }
 

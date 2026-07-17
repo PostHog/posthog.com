@@ -13,6 +13,7 @@ import { airbrake } from '../../hooks/competitorData/airbrake'
 import { amplitude } from '../../hooks/competitorData/amplitude'
 import { appcues } from '../../hooks/competitorData/appcues'
 import { appsignal } from '../../hooks/competitorData/appsignal'
+import { arize_phoenix } from '../../hooks/competitorData/arize_phoenix'
 import { baremetrics } from '../../hooks/competitorData/baremetrics'
 import { better_stack } from '../../hooks/competitorData/better_stack'
 import { braintrust } from '../../hooks/competitorData/braintrust'
@@ -22,6 +23,7 @@ import { chameleon } from '../../hooks/competitorData/chameleon'
 import { clarity } from '../../hooks/competitorData/clarity'
 import { clickhouse_cloud } from '../../hooks/competitorData/clickhouse_cloud'
 import { cloudflare } from '../../hooks/competitorData/cloudflare'
+import { confidentai } from '../../hooks/competitorData/confident_ai'
 import { contentsquare } from '../../hooks/competitorData/contentsquare'
 import { counter } from 'hooks/competitorData/counter'
 import { crazy_egg } from '../../hooks/competitorData/crazy_egg'
@@ -55,6 +57,7 @@ import { langsmith } from '../../hooks/competitorData/langsmith'
 import { launchdarkly } from '../../hooks/competitorData/launchdarkly'
 import { logrocket } from '../../hooks/competitorData/logrocket'
 import { lucky_orange } from '../../hooks/competitorData/lucky_orange'
+import { lunary } from '../../hooks/competitorData/lunary'
 import { mailerlite } from 'hooks/competitorData/mailerlite'
 import { matomo } from '../../hooks/competitorData/matomo'
 import { mixpanel } from '../../hooks/competitorData/mixpanel'
@@ -65,11 +68,13 @@ import { mutiny } from '../../hooks/competitorData/mutiny'
 import { newrelic } from '../../hooks/competitorData/newrelic'
 import { omnisend } from 'hooks/competitorData/omnisend'
 import { openreplay } from '../../hooks/competitorData/openreplay'
+import { opik } from '../../hooks/competitorData/opik'
 import { optimizely } from '../../hooks/competitorData/optimizely'
 import { pendo } from '../../hooks/competitorData/pendo'
 import { piwik_pro } from '../../hooks/competitorData/piwik_pro'
 import { plausible } from '../../hooks/competitorData/plausible'
 import { posthog } from '../../hooks/competitorData/posthog'
+import { portkey } from '../../hooks/competitorData/portkey'
 import { quantum_metric } from '../../hooks/competitorData/quantum_metric'
 import { raygun } from '../../hooks/competitorData/raygun'
 import { replay_io } from '../../hooks/competitorData/replay_io'
@@ -97,6 +102,7 @@ import { vercel_analytics } from 'hooks/competitorData/vercel_analytics'
 import { vwo } from '../../hooks/competitorData/vwo'
 import { walkme } from '../../hooks/competitorData/walkme'
 import { whatfix } from '../../hooks/competitorData/whatfix'
+import { weave } from '../../hooks/competitorData/weave'
 import { zapier } from '../../hooks/competitorData/zapier'
 import { make } from '../../hooks/competitorData/make'
 import { customer_io } from '../../hooks/competitorData/customer_io'
@@ -614,6 +620,7 @@ export default function ProductComparisonTable({
         amplitude,
         appcues,
         appsignal,
+        arize_phoenix,
         baremetrics,
         better_stack,
         braintrust,
@@ -623,6 +630,7 @@ export default function ProductComparisonTable({
         clarity,
         clickhouse_cloud,
         cloudflare,
+        confidentai,
         contentsquare,
         counter,
         crazy_egg,
@@ -656,6 +664,7 @@ export default function ProductComparisonTable({
         launchdarkly,
         logrocket,
         lucky_orange,
+        lunary,
         mailerlite,
         matomo,
         mixpanel,
@@ -666,11 +675,13 @@ export default function ProductComparisonTable({
         newrelic,
         omnisend,
         openreplay,
+        opik,
         optimizely,
         pendo,
         piwik_pro,
         plausible,
         posthog,
+        portkey,
         quantum_metric,
         raygun,
         replay_io,
@@ -698,6 +709,7 @@ export default function ProductComparisonTable({
         vwo,
         walkme,
         whatfix,
+        weave,
         zapier,
         make,
         customer_io,
@@ -986,12 +998,10 @@ export default function ProductComparisonTable({
         return null
     }
 
-    const { siteSettings } = useApp()
+    const { siteSettings, location: appLocation } = useApp()
     const isDark = siteSettings.theme === 'dark'
 
-    // Get current pathname - safely handle SSR
-    const currentPathname = typeof window !== 'undefined' ? window.location.pathname : ''
-
+    const currentPathname = appLocation?.pathname || ''
     // Build columns
     const columns = [
         { name: '', width: 'auto', align: 'left' as const },
@@ -1003,7 +1013,11 @@ export default function ProductComparisonTable({
                 name: (
                     <>
                         {key === 'posthog' ? (
-                            <Logo className="h-5 mx-auto w-auto max-w-full" fill={isDark ? 'white' : ''} />
+                            <Logo
+                                className="h-5 mx-auto w-auto max-w-full"
+                                variant={isDark ? 'mono' : 'gradient'}
+                                color={isDark ? 'white' : undefined}
+                            />
                         ) : competitorData[key]?.name ? (
                             competitorData[key].name
                         ) : (
@@ -1120,5 +1134,9 @@ export default function ProductComparisonTable({
         return false
     })
 
-    return <OSTable columns={columns} rows={tableRows} width={width} />
+    return (
+        <div>
+            <OSTable columns={columns} rows={tableRows} width={width} />
+        </div>
+    )
 }

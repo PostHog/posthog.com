@@ -1,0 +1,118 @@
+---
+title: OpenFeature (JavaScript)
+sidebar: Docs
+showTitle: true
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
+---
+
+PostHog provides official [OpenFeature](https://openfeature.dev) providers for JavaScript, so you can evaluate PostHog feature flags through the standard OpenFeature API. There are two packages, matching OpenFeature's split between the server and web (client) SDKs:
+
+- **`@posthog/openfeature-node-provider`** – for server/Node.js apps, backed by [`posthog-node`](/docs/libraries/node) and the [OpenFeature server SDK](https://openfeature.dev/docs/reference/technologies/server/javascript).
+- **`@posthog/openfeature-web-provider`** – for browser apps, backed by [`posthog-js`](/docs/libraries/js) and the [OpenFeature web SDK](https://openfeature.dev/docs/reference/technologies/client/web).
+
+## Server (Node.js)
+
+### Installation
+
+```bash
+npm install @posthog/openfeature-node-provider @openfeature/server-sdk posthog-node
+```
+
+### Usage
+
+The server model is asynchronous and multi-user: the distinct ID arrives per evaluation from the context's `targetingKey`, and resolution returns a promise. Construct and configure a PostHog client, register the provider, then evaluate flags:
+
+```ts
+import { OpenFeature } from '@openfeature/server-sdk'
+import { PostHogServerProvider } from '@posthog/openfeature-node-provider'
+import { PostHog } from 'posthog-node'
+
+const posthog = new PostHog('<ph_project_api_key>', {
+    host: '<ph_client_api_host>',
+    // personalApiKey: '<ph_personal_api_key>', // Enables local evaluation
+})
+await OpenFeature.setProviderAndWait(new PostHogServerProvider(posthog))
+const client = OpenFeature.getClient()
+
+const isEnabled = await client.getBooleanValue('my-flag', false, { targetingKey: 'user_distinct_id' })
+```
+
+You own the PostHog client lifecycle — call `posthog.shutdown()` when your app exits.
+
+### Options
+
+`new PostHogServerProvider(client, options?)`
+
+- `defaultDistinctId` — distinct ID used when the context has no `targetingKey`. Defaults to unset, in which case an evaluation without a `targetingKey` returns your default value with `error_code = TARGETING_KEY_MISSING`.
+- `sendFeatureFlagEvents` — whether to emit `$feature_flag_called` events on each evaluation. Defaults to `true`.
+
+## Browser (web)
+
+### Installation
+
+```bash
+npm install @posthog/openfeature-web-provider @openfeature/web-sdk posthog-js
+```
+
+### Usage
+
+The browser model is single-user and synchronous: `posthog-js` owns the user identity and keeps flags in memory, so evaluation is synchronous. The provider reconciles the static evaluation context into the SDK whenever it changes (the OpenFeature `onContextChange` contract), then reloads flags.
+
+```ts
+import { OpenFeature } from '@openfeature/web-sdk'
+import { PostHogWebProvider } from '@posthog/openfeature-web-provider'
+import posthog from 'posthog-js'
+
+posthog.init('<ph_project_api_key>', { api_host: '<ph_client_api_host>' })
+
+await OpenFeature.setProviderAndWait(new PostHogWebProvider(posthog))
+const client = OpenFeature.getClient()
+
+const isEnabled = client.getBooleanValue('my-flag', false)
+```
+
+Manage the user identity through `posthog-js` as usual (`posthog.identify(...)`). The web provider never calls `identify()`, so `targetingKey` is not used to switch users.
+
+### Options
+
+`new PostHogWebProvider(client, options?)`
+
+- `sendFeatureFlagEvents` — whether to emit `$feature_flag_called` events on each evaluation. Defaults to `true`.
+- `reloadTimeoutMs` — the maximum time `initialize`/`onContextChange` waits for `posthog-js` to (re)load flags before becoming ready anyway, so the OpenFeature client can't get stuck in `NOT_READY` if the SDK never delivers its flags callback. Defaults to `5000`.
+
+## Evaluation context
+
+The OpenFeature evaluation context maps to PostHog's flag evaluation inputs.
+
+For the **server** provider:
+
+| OpenFeature context | PostHog |
+| --- | --- |
+| `targetingKey` | `distinctId` (required unless `defaultDistinctId` is set) |
+| `groups` attribute | groups |
+| `groupProperties` attribute | group properties |
+| any other attribute | person properties |
+
+For the **web** provider, `posthog-js` owns the user identity, so there is no `targetingKey` mapping:
+
+| OpenFeature context | PostHog |
+| --- | --- |
+| `groups` attribute | `posthog.group(type, key)` |
+| `groupProperties` attribute | `posthog.group(type, key, properties)` |
+| any other attribute | `posthog.setPersonPropertiesForFlags(...)` |
+
+## Supported flag types
+
+Both providers resolve flag types through PostHog's `getFeatureFlagResult`:
+
+| OpenFeature method | Resolves to |
+| --- | --- |
+| `getBooleanValue` | whether the flag is enabled |
+| `getStringValue` | the multivariate variant key |
+| `getNumberValue` | the variant parsed as a number |
+| `getObjectValue` | the flag's JSON payload |
+
+A non-existent flag returns your default value with `error_code = FLAG_NOT_FOUND`. Calling a typed getter on an incompatible flag (for example `getStringValue` on a boolean flag) returns your default value with `error_code = TYPE_MISMATCH`, per the OpenFeature spec.

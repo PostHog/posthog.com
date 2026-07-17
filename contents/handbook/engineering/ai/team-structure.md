@@ -18,9 +18,9 @@ This page explains how teams collaborate on AI features at PostHog. For a high-l
 
 The PostHog Code team owns the desktop app and the task execution pipeline.
 
-### The Signals team
+### The Self-driving team
 
-<SmallTeam slug="signals" /> turns PostHog data into tasks that coding agents can work on — suggested improvements from session replays, fixes for errors from error tracking, new experiments based on product analytics data. Signals surfaces something useful, creates a task with context, and the cloud agent works on it.
+<SmallTeam slug="self-driving" /> turns PostHog data into tasks that coding agents can work on — suggested improvements from session replays, fixes for errors from error tracking, new experiments based on product analytics data. Signals surfaces something useful, creates a task with context, and the cloud agent works on it.
 
 ### Product teams
 

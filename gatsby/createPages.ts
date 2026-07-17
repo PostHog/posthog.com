@@ -1,5 +1,5 @@
 import { GatsbyNode } from 'gatsby'
-import fetch from 'node-fetch'
+
 import path from 'path'
 import slugify from 'slugify'
 import menu from '../src/navs/index'

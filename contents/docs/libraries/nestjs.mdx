@@ -71,18 +71,11 @@ It also automatically captures request metadata as properties:
 - `$user_agent` – the user agent string
 - `$ip` – the client IP (parsed from `x-forwarded-for` if behind a proxy)
 
+Tracing headers are client-controlled analytics context, not authentication or authorization. Pass an authenticated `distinctId` explicitly for security-sensitive server-side decisions.
+
 ### Send headers from the client
 
-If you're using [PostHog JS](/docs/libraries/js) on the frontend, configure `tracing_headers` to automatically inject session and identity headers on requests to your NestJS backend:
-
-```js
-posthog.init('<ph_project_token>', {
-    api_host: '<ph_client_api_host>',
-    tracing_headers: ['your-nestjs-backend.com'] // +
-})
-```
-
-Use hostnames only, without the protocol or path. This automatically adds `X-POSTHOG-SESSION-ID` and `X-POSTHOG-DISTINCT-ID` headers to `fetch` and `XMLHttpRequest` calls to the specified hostnames. The `PostHogInterceptor` reads these headers automatically.
+If you're using [PostHog JS](/docs/libraries/js) on the frontend, configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your NestJS backend hostname so browser requests include `X-POSTHOG-SESSION-ID` and `X-POSTHOG-DISTINCT-ID`, which the `PostHogInterceptor` reads automatically.
 
 ### Capturing events in controllers
 

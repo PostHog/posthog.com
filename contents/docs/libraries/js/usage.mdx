@@ -84,6 +84,8 @@ posthog.setPersonProperties(
 
 This creates a special `$set` event that is sent to PostHog. For more details on the difference between `$set` and `$set_once`, see our [person properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
 
+To remove person properties, use `unsetPersonProperties()`. See [person properties](/docs/product-analytics/person-properties#how-to-remove-person-properties) for examples.
+
 ## Resetting a user
 
 If a user logs out or switches accounts, you should call `reset` to unlink any future events made on that device with that user. This prevents multiple users from being grouped together due to shared cookies between sessions. **We recommend you call `reset` on logout even if you don't expect users to share a computer.**
@@ -193,6 +195,37 @@ import BootstrappingIntro from "../../feature-flags/snippets/bootstrapping-intro
 
 For details on how to implement bootstrapping, see our [bootstrapping guide](/docs/feature-flags/bootstrapping).
 
+### Supplying flags from your own backend
+
+If you evaluate feature flags outside the SDK – for example on your own server with [`posthog-node` local evaluation](/docs/feature-flags/local-evaluation), then pass the results to the browser – you can have the SDK use those values instead of requesting flags itself.
+
+Set `advanced_disable_feature_flags: true` so PostHog stops evaluating feature flags (the reloads triggered by `identify()`, `group()`, and `setPersonProperties()` no longer fetch flags), then push your evaluated flags at runtime with `updateFlags(flags, payloads?, { merge })`:
+
+```js-web
+posthog.init('<ph_project_token>', {
+    // Don't evaluate flags in the browser – we supply them ourselves.
+    advanced_disable_feature_flags: true,
+    // Optional: values that must be available on load, before updateFlags() runs.
+    bootstrap: {
+        featureFlags: { 'my-flag': true },
+        featureFlagPayloads: { 'my-flag': { color: 'blue' } },
+    },
+})
+
+// Later – e.g. after login, once your backend has evaluated flags for this user:
+posthog.updateFlags(
+    { 'my-flag': true, 'my-variant-flag': 'test' },
+    { 'my-flag': { color: 'blue' } }
+)
+
+posthog.getFeatureFlag('my-variant-flag') // 'test'
+posthog.getFeatureFlagResult('my-flag')?.payload // { color: 'blue' }
+```
+
+`updateFlags` replaces the stored flags by default; pass `{ merge: true }` to merge into the existing set instead. Use `bootstrap` for any flag values that must be available on first load, before `updateFlags()` runs.
+
+Note that surveys rely on feature flags internally, so `advanced_disable_feature_flags` also disables surveys. If you use surveys, set `advanced_only_evaluate_survey_feature_flags: true` instead to keep only survey-related flags evaluated.
+
 ### Enriched flag analytics
 
 You can send enriched analytics data for feature flags to help uncover replays where people interact with a flag, target people who've interacted with a feature, or build cohorts of people who've viewed a feature.
@@ -256,7 +289,7 @@ posthog.getEarlyAccessFeatures((previewItemData) => {
 ```
 
 ```js-web
-posthog.updateEarlyAccessFeatureEnrollment(flagKey, 'true')
+posthog.updateEarlyAccessFeatureEnrollment(flagKey, true)
 ```
 
 ## Surveys

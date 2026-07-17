@@ -1,4 +1,3 @@
-const fetch = require('node-fetch')
 const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
 const files = {}
 

@@ -2,7 +2,7 @@
 title: Run SQL, manage views, and sync sources with MCP
 ---
 
-The [PostHog MCP server](/docs/model-context-protocol) lets your AI coding agent run [HogQL](/docs/hogql) queries, manage [Data Warehouse](/docs/data-warehouse) views, sync import sources, and explore your schema directly from your code editor. Query events, create and materialize views, configure Postgres/Stripe/HubSpot imports, and work with warehouse tables – without switching to the PostHog app.
+The [PostHog MCP server](/docs/model-context-protocol) lets your AI coding agent run [HogQL](/docs/hogql) queries, manage [Data Warehouse](/docs/data-warehouse) views, sync import sources, annotate tables and columns, and explore your schema directly from your code editor. Query events, create and materialize views, configure Postgres/Stripe/HubSpot imports, add semantic descriptions to your data, and work with warehouse tables – without switching to the PostHog app.
 
 This works in any MCP client – Cursor, Codex, Claude Code, Windsurf, VS Code, and others.
 
@@ -16,6 +16,7 @@ With MCP, your coding agent can:
 - **Query across sources** – Join PostHog events with Stripe, HubSpot, or any linked warehouse table
 - **Manage views** – Create, update, materialize, and delete saved views in your Data Warehouse programmatically
 - **Manage import sources** – Create, configure, and sync data warehouse sources like Postgres, Stripe, and HubSpot
+- **Annotate tables and columns** – Add semantic descriptions to views and warehouse tables so PostHog AI understands your data
 
 ## SQL tools
 
@@ -32,17 +33,17 @@ The MCP server provides these tools for running SQL:
 
 The MCP server also provides tools for managing [Data Warehouse views](/docs/data-warehouse/views):
 
-| Tool                 | Description                                                                                                |
-| -------------------- | ---------------------------------------------------------------------------------------------------------- |
-| `view-list`          | List all saved views in your project with their materialization status, sync frequency, and column schema. |
-| `view-get`           | Get full details of a specific view by ID, including its HogQL query and run history.                      |
-| `view-create`        | Create a new view from a HogQL query. Upserts by name if a view with the same name exists.                 |
-| `view-update`        | Update a view's name, HogQL query, or sync frequency.                                                      |
-| `view-delete`        | Delete a view (soft delete).                                                                               |
-| `view-materialize`   | Enable materialization for a view with a 24-hour refresh schedule.                                         |
-| `view-unmaterialize` | Revert a materialized view back to a virtual query.                                                        |
-| `view-run`           | Trigger a manual refresh of a materialized view.                                                           |
-| `view-run-history`   | Get the last 5 materialization run statuses for a view.                                                    |
+| Tool                 | Description                                                                                                              |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `view-list`          | List all saved views in your project with their materialization status, sync frequency, column schema, and descriptions. |
+| `view-get`           | Get full details of a specific view by ID, including its HogQL query, run history, and descriptions.                     |
+| `view-create`        | Create a new view from a HogQL query with an optional description. Upserts by name if a view with the same name exists.  |
+| `view-update`        | Update a view's name, HogQL query, sync frequency, or description.                                                       |
+| `view-delete`        | Delete a view (soft delete).                                                                                             |
+| `view-materialize`   | Enable materialization for a view with a 24-hour refresh schedule.                                                       |
+| `view-unmaterialize` | Revert a materialized view back to a virtual query.                                                                      |
+| `view-run`           | Trigger a manual refresh of a materialized view.                                                                         |
+| `view-run-history`   | Get the last 5 materialization run statuses for a view.                                                                  |
 
 ## Source management tools
 
@@ -73,6 +74,20 @@ These tools manage individual table schemas within a data warehouse source:
 | `external-data-schemas-cancel`         | Cancel a currently running sync job for a table.                                     |
 | `external-data-schemas-delete-data`    | Delete synced table data from PostHog but keep the schema entry for re-syncing.      |
 
+## Column annotation tools
+
+These tools add semantic descriptions to your tables, views, and columns, helping PostHog AI understand your data:
+
+| Tool                                          | Description                                                                                                                               |
+| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `saved-query-column-annotations-create`       | Add or replace a description for a view (saved query) or one of its columns. Use for views (`table_type = 'view'` in information_schema). |
+| `saved-query-column-annotations-list`         | List descriptions for views and their columns. Filter by `?saved_query_id=<uuid>` to scope to one view.                                   |
+| `warehouse-column-annotations-create`         | Add or replace a description for an imported warehouse table or column. Use for physical tables (`table_type = 'data_warehouse'`).        |
+| `warehouse-column-annotations-list`           | List descriptions for warehouse tables and columns. Filter by `?table_id=<uuid>` to scope to one table.                                   |
+| `warehouse-column-annotations-partial-update` | Edit an existing warehouse table or column description by annotation ID.                                                                  |
+
+> **Note:** Core PostHog tables (events, persons, groups, sessions) cannot be annotated – they have built-in descriptions.
+
 ## Example prompts
 
 Try these with your MCP-enabled agent:
@@ -84,11 +99,24 @@ Try these with your MCP-enabled agent:
 - `Show me 5 sample rows from the hubspot_contacts table.`
 - `What properties are available on the purchase_completed event?`
 
+For schema discovery:
+
+- `Query system.information_schema.tables to list all available tables with their descriptions.`
+- `What columns does the events table have? Use system.information_schema.columns.`
+- `Show me all relationships from the events table using system.information_schema.relationships.`
+- `List all HogQL data types from system.information_schema.data_types.`
+
 For querying alerts:
 
 - `Query system.alerts to find all enabled alerts in the project.`
 - `Show me alerts that check hourly and their last check results.`
 - `Write a HogQL query to find alerts that fired in the last week.`
+
+For schema discovery using [`system.information_schema`](/docs/data-warehouse/sources/posthog#schema-discovery-with-information_schema):
+
+- `Query system.information_schema.columns to find all columns in the events table with their types and descriptions.`
+- `Use system.information_schema.relationships to show me how the events table joins to other tables.`
+- `Search system.information_schema.tables for any table related to subscriptions.`
 
 For view management:
 
@@ -97,6 +125,7 @@ For view management:
 - `Materialize my 'revenue_summary' view for faster queries.`
 - `Trigger a refresh of my 'user_metrics' materialized view.`
 - `Show me the run history for my 'sales_data' view.`
+- `Set the description for my 'daily_active_users' view to explain what it calculates.`
 
 For source management:
 
@@ -105,6 +134,13 @@ For source management:
 - `Trigger a sync for my Postgres source.`
 - `Show me the sync status for all my import schemas.`
 - `Cancel the running sync on the hubspot_contacts table.`
+
+For column annotations:
+
+- `Add a description to my 'revenue_summary' view explaining it calculates monthly recurring revenue.`
+- `Describe the 'amount' column in my stripe_charges table as 'Transaction amount in cents'.`
+- `List all column descriptions for my user_metrics view.`
+- `What descriptions exist for my imported Stripe tables?`
 
 ## Install the MCP server
 
