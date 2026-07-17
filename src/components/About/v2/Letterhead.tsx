@@ -11,7 +11,7 @@ export const Letterhead = ({ title }: { title?: string }) => {
 
     return (
         <div className="not-prose border-b border-primary py-4 flex flex-col gap-2 @sm:flex-row items-center justify-between">
-            <div className="flex flex-col gap-1 text-center @sm:text-left max-w-md">
+            <div className="text-center @sm:text-left max-w-md">
                 <Logo
                     className="inline-block"
                     variant={siteSettings.theme === 'dark' ? 'mono' : 'gradient'}
