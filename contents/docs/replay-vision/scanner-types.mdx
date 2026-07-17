@@ -14,12 +14,12 @@ The scanner type determines the shape of the structured output the model returns
 
 There are four types:
 
-| Type | What it produces | Use it for |
-| --- | --- | --- |
-| [**Monitor**](#monitor) | A `yes` / `no` verdict, with reasoning | Flagging whether a specific condition occurred |
-| [**Classifier**](#classifier) | One or more tags from a vocabulary you define | Bucketing sessions along a dimension |
-| [**Scorer**](#scorer) | A numeric score on a scale you define | Rating sessions on a dimension |
-| [**Summarizer**](#summarizer) | A title and prose summary | Generating a short narrative of what happened |
+| Type                          | What it produces                              | Use it for                                     |
+| ----------------------------- | --------------------------------------------- | ---------------------------------------------- |
+| [**Monitor**](#monitor)       | A `yes` / `no` verdict, with reasoning        | Flagging whether a specific condition occurred |
+| [**Classifier**](#classifier) | One or more tags from a vocabulary you define | Bucketing sessions along a dimension           |
+| [**Scorer**](#scorer)         | A numeric score on a scale you define         | Rating sessions on a dimension                 |
+| [**Summarizer**](#summarizer) | A title and prose summary                     | Generating a short narrative of what happened  |
 
 Every type also returns:
 
@@ -33,21 +33,24 @@ The reasoning and citations are the most powerful debugging tool you have for tu
 A monitor returns a yes/no verdict for whether the condition in your prompt occurred in the session.
 
 **Output**
+
 - `verdict` – `yes` or `no` (or `inconclusive` if you opt the scanner into it)
 - `reasoning` – plain-language explanation, with inline citations
 - `confidence` – how sure the model is
 
 **Type-specific config**
+
 - **Allow inconclusive** – whether the model can return `inconclusive` when it genuinely can't tell from the recording. Off by default; turn it on if you'd rather have an explicit "don't know" than push the model into a forced yes/no.
 
 **When to use it**
+
 - "Did the user appear stuck on a page?"
 - "Did the user trigger a billing-related error?"
 - "Did the user complete the onboarding flow?"
 
 **Example prompt**
 
-> *Answer yes if the user appears stuck on a page: scrolling without engaging, hovering over elements with no clear CTA, or abandoning the session shortly after arriving. Otherwise answer no.*
+> _Answer yes if the user appears stuck on a page: scrolling without engaging, hovering over elements with no clear CTA, or abandoning the session shortly after arriving. Otherwise answer no._
 
 **On `$recording_observed`** – `scanner_output_verdict` is the string `"yes"`, `"no"`, or `"inconclusive"`. See [observations](/docs/replay-vision/observations#querying-observations-as-events).
 
@@ -57,28 +60,38 @@ A monitor returns a yes/no verdict for whether the condition in your prompt occu
   classes="rounded"
 />
 
+### Impact and cohorts
+
+Monitors track how many sessions and users matched the verdict-yes condition over a trailing window (default 30 days). The scanner overview shows these impact counts, and you can save the affected users as a static [cohort](/docs/data/cohorts) with one click.
+
+The cohort is a snapshot at creation time and doesn't live-update. Use it anywhere cohorts work: funnel breakdowns, retention analysis, survey targeting, or experiment exclusion.
+
 ## Classifier
 
 A classifier assigns one or more **tags** from a vocabulary you define. You can also allow the model to invent new tags if your vocabulary is incomplete.
 
 **Output**
+
 - `tags` – array of tag strings the model picked
 - `reasoning` – why these tags
 - `confidence` – how sure the model is
 
 **Type-specific config**
+
 - **Tag vocabulary** – the set of allowed tag names. The vocabulary itself is just names – put a short definition of each tag in the prompt so the model knows what it means (see the example below).
 - **Allow multiple tags** – whether the model can pick more than one per session.
 - **Allow freeform tags** – whether the model can invent new tags outside the vocabulary.
 
 **When to use it**
+
 - User intent: `browsing`, `purchasing`, `support_seeking`
 - Session outcome: `task_completed`, `task_abandoned`, `blocked_by_error`
 - Page archetype: `landing`, `product_detail`, `checkout`, `account`
 
 **Example prompt + vocabulary**
 
-> *Tag this session with the user's intent. Pick the single best fit from the vocabulary. Don't speculate – if you can't tell, pick `unclear`.*
+> _Tag this session with the user's intent. Pick the single best fit from the vocabulary. Don't speculate – if you can't tell, pick `unclear`._
+>
 > - `browsing` – exploring without a specific goal
 > - `purchasing` – actively trying to buy something
 > - `support_seeking` – looking for help, docs, or a contact channel
@@ -92,27 +105,36 @@ A classifier assigns one or more **tags** from a vocabulary you define. You can 
   classes="rounded"
 />
 
+### Impact and cohorts
+
+Classifiers track impact per tag: how many sessions and users were assigned each tag in the trailing window. Each tag panel in the scanner overview has a button to save that tag's affected users as a static [cohort](/docs/data/cohorts).
+
+The cohort is a snapshot at creation time and doesn't live-update. Use it anywhere cohorts work: funnel breakdowns, retention analysis, survey targeting, or experiment exclusion.
+
 ## Scorer
 
 A scorer assigns a **numeric score** on a scale you define – e.g. 0 to 10 for frustration, or 1 to 5 for clarity. Use it when "how much" matters and a yes/no verdict would lose information.
 
 **Output**
+
 - `score` – numeric value on the scale you defined
 - `reasoning` – why this score
 - `confidence` – how sure the model is
 
 **Type-specific config**
+
 - **Scale** – minimum and maximum values (integers).
 - **Scale label** – optional short description of what the scale represents (e.g. "0 = no friction, 10 = severe friction").
 
 **When to use it**
+
 - Frustration / friction level
 - Likelihood of completing a goal
 - Severity of an error encountered
 
 **Example prompt**
 
-> *Score this session 0 to 10 for how frustrated the user appeared, based on signals like rage clicks, repeated retries of the same action, hovering with no progress, and time spent on dead-end pages. 0 means no visible frustration, 10 means severe and sustained frustration.*
+> _Score this session 0 to 10 for how frustrated the user appeared, based on signals like rage clicks, repeated retries of the same action, hovering with no progress, and time spent on dead-end pages. 0 means no visible frustration, 10 means severe and sustained frustration._
 
 **On `$recording_observed`** – `scanner_output_score` is the numeric score. Histograms and percentiles over this field tend to be the most useful insights.
 
@@ -122,11 +144,14 @@ A scorer assigns a **numeric score** on a scale you define – e.g. 0 to 10 for 
   classes="rounded"
 />
 
+> **Note:** Impact tracking for scorers is not yet available in the UI. The API supports querying affected sessions by score threshold via `min_score` and `max_score` parameters.
+
 ## Summarizer
 
 A summarizer produces a short prose summary of what happened in the session, plus a title. Think of it as a TL;DR you can drop into a dashboard or feed to another tool.
 
 **Output**
+
 - `title` – one-line summary
 - `summary` – longer narrative summary, with inline citations
 - `intent` – one sentence on what the user set out to do
@@ -136,16 +161,18 @@ A summarizer produces a short prose summary of what happened in the session, plu
 - `confidence` – how sure the model is
 
 **Type-specific config**
+
 - **Summary length** – short, medium, or long. Controls roughly how many sentences the model writes.
 
 **When to use it**
+
 - Daily digest of high-signal sessions
 - Triage queues where humans need a one-line preview before clicking in
 - Feeding into a downstream analytics or retrieval pipeline
 
 **Example prompt**
 
-> *Summarize what the user did in this session: which pages they visited, what they tried to accomplish, and any notable moments like errors, confusion, or successful completions. Be concrete and don't speculate.*
+> _Summarize what the user did in this session: which pages they visited, what they tried to accomplish, and any notable moments like errors, confusion, or successful completions. Be concrete and don't speculate._
 
 **On `$recording_observed`** – `scanner_output_title` and `scanner_output_summary` carry the title and summary; the facets land as `scanner_output_intent`, `scanner_output_outcome`, `scanner_output_friction_points`, and `scanner_output_keywords`. See [observations](/docs/replay-vision/observations#querying-observations-as-events).
 
@@ -154,6 +181,8 @@ A summarizer produces a short prose summary of what happened in the session, plu
   alt="An observation detail page for a summarizer scanner: the generated title and prose summary with inline citations"
   classes="rounded"
 />
+
+> **Note:** Summarizers don't support impact tracking or cohort creation since they produce narrative summaries rather than categorical findings.
 
 ## Picking a type
 
@@ -170,4 +199,4 @@ If you find yourself encoding a number range as classifier tags ("low / medium /
 
 Confidence is the model's self-reported certainty. It's useful as a filter (e.g. "only alert when confidence > 0.7") but not as ground truth – treat it as a signal, not a guarantee.
 
-Citations are emitted inline in the model's free-text output (the `reasoning` field for monitors, classifiers, and scorers; the `summary` field for summarizers) and rendered as clickable links in the observation detail view. They jump the embedded player to the timestamp the model points at. They're the single best tool for understanding *why* a model returned what it did.
+Citations are emitted inline in the model's free-text output (the `reasoning` field for monitors, classifiers, and scorers; the `summary` field for summarizers) and rendered as clickable links in the observation detail view. They jump the embedded player to the timestamp the model points at. They're the single best tool for understanding _why_ a model returned what it did.
