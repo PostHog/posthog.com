@@ -57,11 +57,9 @@ If the submission is clearly a support or billing request, you don’t need to r
 - This automatically creates a Zendesk ticket for the correct team.
 - No manual outreach is needed; automation handles it.
 
-### Zendesk Integration
+### Leads from support tickets
 
-If you add "sf-lead" tag to a ticket in Zendesk, a new lead will be automatically created in Salesforce. This helps streamline the process of converting support questions or tickets into potential sales opportunities directly from Zendesk.
-
-If you see "Zendesk" as the lead source, please review the ticket under the Zendesk widget in Salesforce which allows you to view the full context within salesforce. It will also appear in sales_form_message field for quick review of last request before the Zendesk ticket is converted to a lead.
+If the support team spots a sales opportunity in a support ticket, they post it in #group-cs-sales-support for sales/CS to pick up (see [handling sales leads](/handbook/support/customer-support#handling-sales-leads)). If you pick one up, add it to Salesforce as described in [manual entry](#manual-entry).
 
 ### Forwarding sales opportunities
 
