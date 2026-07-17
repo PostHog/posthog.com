@@ -12,3 +12,5 @@
 >         capture("foo_viewed")
 >     return {"status": "ok"}
 > ```
+>
+> With many instrumented routes, centralize this instead: write a small middleware that resolves your authenticated user, opens a context around the request, and identifies it. Every plain `capture()` downstream is then attributed automatically — this is exactly what the SDK's Django middleware does, for frameworks that don't ship one.
