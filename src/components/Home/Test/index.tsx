@@ -132,10 +132,7 @@ function Hero(): JSX.Element {
     const isDark = siteSettings.theme === 'dark'
     return (
         <>
-            {/* relative + overflow-x-clip: rough-notation injects an absolutely-positioned, overflow:visible
-                SVG for each highlight; on WebKit/Safari its ink overflow can push the page wider. Make the
-                hero the SVGs' containing block and clip horizontal overspill (leaving the y-axis visible). */}
-            <div className="relative overflow-x-clip text-center @xl:text-left mb-24">
+            <div className="text-center @xl:text-left mb-24">
                 <h1 className="[&_p]:m-0 flex gap-1 flex-wrap justify-center @xl:justify-start !text-2xl mb-8 pt-2">
                     <Logo
                         className="max-w-[157px]"
@@ -151,8 +148,8 @@ function Hero(): JSX.Element {
                     </span>
                 </h1>
 
-                <div className="grid grid-cols-1 @xl:grid-cols-2 @xl:gap-8">
-                    <div className="min-w-0">
+                <div className="grid @xl:grid-cols-2 @xl:gap-8">
+                    <div>
                         <p className="text-balance @xl:text-wrap text-[17px]">
                             PostHog already knows your customers, which features they use, and the issues they have.
                         </p>
@@ -207,7 +204,7 @@ function Hero(): JSX.Element {
                         </p>
                     </div>
 
-                    <div className="mt-6 flex flex-col items-center min-w-0">
+                    <div className="mt-6 flex flex-col items-center">
                         <PlatformInstall schema={wizardInstallSchema} selfDriving />
                         <SecondaryActions />
                     </div>
@@ -232,7 +229,7 @@ export default function HomeTest() {
 
     return (
         <ReaderView proseSize="lg" hideLeftSidebar showQuestions={false}>
-            <div className="space-y-12">
+            <div className="space-y-12 overflow-x-hidden">
                 <Hero />
                 <Customers />
                 <DataStackSection />

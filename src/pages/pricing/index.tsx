@@ -195,8 +195,9 @@ export default function Pricing() {
                     </Link>
                 </p>
             </SectionLayout>
-
-            <CTA />
+            <div className="@lg:overflow-x-visible overflow-x-hidden">
+                <CTA />
+            </div>
         </ReaderView>
     )
 }
