@@ -743,6 +743,7 @@ export function useMenuData(): MenuType[] {
                     },
                     icon: <Icons.IconBrightness className="size-4 text-yellow" />,
                     shortcut: [','],
+                    mobileDestination: false, // Already exposed as a system item in the mobile logo menu
                 },
                 {
                     type: 'item',
