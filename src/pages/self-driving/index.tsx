@@ -563,28 +563,43 @@ const TickerCard = ({ pr }: { pr: SelfDrivingPR }): JSX.Element => {
     )
 }
 
-// One continuously scrolling row. `direction` sets scroll direction (1 = left→right rail advance,
+// Marquee scroll speed in pixels per second (matches the old ~0.5px/frame at 60fps).
+const TICKER_SPEED = 30
+
+// One continuously scrolling row. `direction` sets scroll direction (1 = content drifts left,
 // -1 = the reverse). Pauses on hover/focus and stops entirely for reduced-motion users.
+//
+// The motion is a `transform: translate3d(...)` on an inner track rather than a per-frame
+// `scrollLeft` write: transforms are composited on the GPU (no layout/reflow each frame), and
+// the offset advances by elapsed time so speed stays constant across refresh rates and throttled
+// tabs instead of stuttering.
 const TickerRow = ({ prs, direction }: { prs: SelfDrivingPR[]; direction: 1 | -1 }): JSX.Element => {
-    const railRef = React.useRef<HTMLDivElement>(null)
+    const trackRef = React.useRef<HTMLDivElement>(null)
     const pausedRef = React.useRef(false)
 
-    // Two copies of the list so scrollLeft can wrap seamlessly at either end.
+    // Two copies of the list so the transform can wrap seamlessly at either end.
     const loop = [...prs, ...prs]
 
     React.useEffect(() => {
-        const rail = railRef.current
-        if (!rail || prs.length === 0) return
+        const track = trackRef.current
+        if (!track || prs.length === 0) return
         if (window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches) return
 
+        let offset = 0
+        let last = 0
         let frame = 0
-        const step = () => {
-            if (!pausedRef.current) {
-                rail.scrollLeft += 0.5 * direction
-                const half = rail.scrollWidth / 2
+        const step = (now: number) => {
+            const dt = last === 0 ? 0 : (now - last) / 1000
+            last = now
+            if (!pausedRef.current && dt > 0) {
+                // Half the track holds one full copy of the list; wrapping within it keeps the loop seamless.
+                const half = track.scrollWidth / 2
                 if (half > 0) {
-                    if (rail.scrollLeft >= half) rail.scrollLeft -= half
-                    else if (rail.scrollLeft <= 0) rail.scrollLeft += half
+                    offset -= TICKER_SPEED * direction * dt
+                    // Normalize into (-half, 0] so the transform never drifts unbounded, even after a long stall.
+                    offset %= half
+                    if (offset > 0) offset -= half
+                    track.style.transform = `translate3d(${offset}px, 0, 0)`
                 }
             }
             frame = requestAnimationFrame(step)
@@ -602,17 +617,18 @@ const TickerRow = ({ prs, direction }: { prs: SelfDrivingPR[]; direction: 1 | -1
 
     return (
         <div
-            ref={railRef}
             onMouseEnter={pause}
             onMouseLeave={resume}
             onFocusCapture={pause}
             onBlurCapture={resume}
-            className="flex gap-3 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="overflow-hidden pb-1"
             style={{ maskImage: TICKER_FADE, WebkitMaskImage: TICKER_FADE }}
         >
-            {loop.map((pr, i) => (
-                <TickerCard key={`${pr.prNumber}-${i}`} pr={pr} />
-            ))}
+            <div ref={trackRef} className="flex w-max gap-3 will-change-transform">
+                {loop.map((pr, i) => (
+                    <TickerCard key={`${pr.prNumber}-${i}`} pr={pr} />
+                ))}
+            </div>
         </div>
     )
 }
