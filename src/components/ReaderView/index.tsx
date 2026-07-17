@@ -1697,7 +1697,7 @@ function ReaderViewContent({
                                             className={getVideoClasses(fullWidthContent)}
                                         />
                                     )}
-                                    <div className="reader-content-container">
+                                    <div className="reader-content-container overflow-x-hidden">
                                         {body?.type === 'mdx' ? (
                                             <div
                                                 className={`@container [&>*:not(.OSTable):not(.Table)]:mx-auto [&>*:not(.OSTable):not(.Table)]:transition-all [&>span:not(.OSTable):not(.Table)]:block ${

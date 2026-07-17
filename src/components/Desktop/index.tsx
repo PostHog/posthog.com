@@ -200,8 +200,8 @@ function Desktop() {
     const desktopIconListClassName = 'list-none m-0 p-0 flex flex-col content-start pointer-events-auto'
     // Top padding is DESKTOP_TOP_OFFSET + 16; leave a matching bottom cushion so icons don't kiss the edge.
     const desktopIconListStyle = {
-        height: `calc(100vh - ${DESKTOP_TOP_OFFSET + 32}px)`,
-        maxHeight: `calc(100vh - ${DESKTOP_TOP_OFFSET + 32}px)`,
+        height: `calc(100dvh - ${DESKTOP_TOP_OFFSET + 32}px)`,
+        maxHeight: `calc(100dvh - ${DESKTOP_TOP_OFFSET + 32}px)`,
     } as const
 
     const handleScreensaverDismiss = () => {
