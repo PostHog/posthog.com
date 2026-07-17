@@ -75,6 +75,18 @@ export const onCreateBabelConfig: GatsbyNode['onCreateBabelConfig'] = ({ actions
 }
 
 export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ stage, actions }) => {
+    // Gatsby keeps webpack's persistent cache in .cache/webpack, which `gatsby clean`
+    // deletes — every post-clean build re-bundles from scratch (~200s across the
+    // build-javascript and build-html stages). Relocating the cache outside .cache/
+    // preserves it across cleans; webpack revalidates every entry against module
+    // contents and build dependencies (config + plugin gatsby-node files), so stale
+    // entries miss and output is identical to an uncached build. Mirrors the stage
+    // condition Gatsby itself uses when enabling the filesystem cache.
+    const persistentCacheLocation =
+        stage === 'build-javascript' || stage === 'build-html'
+            ? path.resolve(__dirname, 'node_modules', '.cache', 'gatsby-persistent-webpack', `stage-${stage}`)
+            : undefined
+
     actions.setWebpackConfig({
         ...(process.env.GATSBY_MINIMAL === 'true'
             ? {
@@ -83,6 +95,7 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ sta
             : null),
         cache: process.env.NODE_ENV === 'development' || {
             compression: 'gzip',
+            ...(persistentCacheLocation ? { cacheLocation: persistentCacheLocation } : null),
         },
         resolve: {
             extensions: ['.js', '.ts', '.tsx'],
