@@ -4,80 +4,59 @@ sidebar: Handbook
 showTitle: true
 ---
 
-This page defines the stages a customer moves through with PostHog, from first signup to steady state, and which role covers them at each stage. The purpose is account allocation. When you know a customer's stage and ARR band, you know who should be touching the account, full stop. For the operational process (book planning, allocation cadence, handover mechanics), see [Account allocation and handover](/handbook/growth/sales/account-allocation).
-
-Two rules underpin everything here:
-
-1. **Stages describe the customer. Lanes describe who covers them.** Nothing changes hands when a customer changes stage. Ownership only changes when a coverage lane is added or removed.
-2. **Every stage transition must be observable in data**, not self-reported and not vibes. If a transition can't be detected from usage, billing, or a logged sales event, it doesn't belong in this model.
+This is a rough articulation of the stages a paid and "sales sized" customer moves through PostHog, from first signup to steady state, and which role covers them at each stage. The purpose of mapping this out is creating a shared understanding so we can better standardize how we think of and approach accounts, as well as account allocation. When you know a customer's stage and ARR band, you know who should be working with the account. For the operational process (book planning, allocation cadence, handover mechanics), see [Account allocation and handover](/handbook/growth/sales/account-allocation), which holds the allocation rules.
 
 ## The stages
 
 ### Presales
 
-| Stage | Definition | Entry signal |
-| --- | --- | --- |
-| **Exploring** | Signed up, sending events, free tier or trivial spend. No buying signal. | Signup + first events |
-| **Evaluating** | Actively comparing us against alternatives or against not buying. | Multiple users invited, docs and pricing traffic, inbound question |
-| **Proving** | Running a structured POC with success criteria, ours or theirs. | Prod-adjacent volume, security or procurement review started, POC scoped with sales |
-| **Buying** | Commercial negotiation. Quote out, annual terms in discussion. | Quote sent or contract in redlines |
+| Stage          | Definition                                                               |
+| -------------- | ------------------------------------------------------------------------ |
+| **Exploring**  | Signed up, sending events, free tier or trivial spend. No buying signal. |
+| **Evaluating** | Actively comparing us against alternatives or against not buying.        |
+| **Proving**    | Running a structured POC with success criteria, ours or theirs.          |
+| **Buying**     | Commercial negotiation. Quote out, annual terms in discussion.           |
 
-> In a PLG motion most customers move through the presales stages invisibly. Exploring, Evaluating, and Proving are inferred from product signals unless sales is engaged. That's expected. The presales stages only need to be as granular as the routing decision they drive, which is binary: automation, or a human from new biz.
+> In a PLG motion most customers move through the presales stages invisibly and without contact. Our process and system should be able to capture and identify the right accounts to work with at the right time based on signals and stages. Exploring, Evaluating, and Proving are inferred from product signals unless sales is engaged. The presales stages only need to be as granular as the routing decision they drive, which is binary: automation, or a human from new biz.
 
 ### Postsales
 
-| Stage | Definition | Entry signal |
-| --- | --- | --- |
-| **Implementing** | Delivering a closed deal. Workload instrumentation, success plan, stakeholder map. | Sales-assisted close, or crossing $20k ARR _with_ a deal to deliver |
-| **Ramping** | Usage growing, account below full TAM threshold or still climbing toward committed volume. | Sustained MoM usage growth post-implementation |
-| **Expanding** | A clear expansion, cross-sell, or save opportunity exists and is being worked. | Named opp in SFDC, or expansion signal fired (billing limit, new team, funding) |
-| **Steady state** | Levers exhausted. Core products adopted, healthy engagement, no viable expansion play. | TAM releases the account, or no expansion signal for a defined window |
+| Stage            | Definition                                                                                                                                                                                                          |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Implementing** | Delivering a closed deal. Posthog instrumentation, onboarding and success plan, stakeholder map.                                                                                                                    |
+| **Ramping**      | Usage growing, account below full TAM threshold or still climbing toward committed volume or otherwise just not at fully implemented production volume. Generally takes longer for larger or more traditional orgs. |
+| **Expanding**    | A clear expansion, cross-sell, or save opportunity exists and is being worked.                                                                                                                                      |
+| **Steady state** | Growth and expansion exhausted. Core products adopted, saturated across the organization, healthy engagement, no viable expansion play.                                                                             |
 
-> Edge case worth writing down: a pure self-serve account that crosses $20k ARR with no deal skips Implementing entirely. There is nothing to implement, they are already live. They enter at whatever their usage state says, usually Ramping or Expanding. Do not run a 30-day success plan for an account that has been in prod for two years.
+> Edge case worth noting: a pure self-serve account that crosses $20k ARR with no sales involvement skips Implementing entirely.  They enter at whatever their adoption or usage indicates, usually Ramping or Expanding. This is important, though, because an account that's been self-serve and steady state in prod for 2 years doesn't need the same tactic and approach as a sales-driven "implementation" account, and our process shouldn't treat them the same.
 
-### At risk (overlay, not a stage)
+### At risk is a status, not a stage
 
-An account in any postsales stage can be at risk. At risk does not change the stage or reassign the account. The current owner runs the save play. If no human owner exists (sub-$20k automation territory), the risk signal routes to the pooled Growth TAM queue or the churn channel.
+An account in any postsales stage can be at risk. At risk does not change the stage or reassign the account. The current owner runs the churn save. 
 
 ## Coverage map
 
-Who covers the account at each stage. A checkmark means the lane is active. Parentheses mean conditionally active.
+Who covers the account at each stage. 
 
-| Coverage lane | Exploring | Evaluating | Proving | Buying | Implementing | Ramping | Expanding | Steady |
-| --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **New biz (AE/TAE)**, if ICP qualified | | ✓ | ✓ | ✓ | | | | |
-| **CSM base layer**, all accounts >$20k ARR | | | | | ✓ | ✓ | ✓ | ✓ |
-| **TAM overlay**, >$20k, only while an opp exists | | | | | (✓) | ✓ | ✓ | |
-| **Growth TAM**, pooled, $500 to $1,667 MRR | | | | | (✓) | ✓ | ✓ | |
-| **Automation**, no human owner | ✓ | (✓) | (✓) | (✓) | (✓) | (✓) | (✓) | (✓) |
-| **Onboarding team** (motion, see below) | (✓) | (✓) | (✓) | (✓) | (✓) | (✓) | | |
-| **At-risk overlay** | | | | | ✓ | ✓ | ✓ | ✓ |
+| Ownership                                                 | Exploring | Evaluating | Proving | Buying | Implementing | Ramping | Expanding | Steady |
+| --------------------------------------------------------- | :-------: | :--------: | :-----: | :----: | :----------: | :-----: | :-------: | :----: |
+| **New biz (TAE)**, if ICP qualified                       |           |     ✓      |    ✓    |   ✓    |              |         |           |        |
+| **CSM base layer**, all accounts >$20k ARR                |           |            |         |  (✓)   |      ✓       |    ✓    |     ✓     |   ✓    |
+| **TAM overlay**, >$20k, while there's expansion to be had |           |            |         |        |     (✓)      |    ✓    |     ✓     |        |
+| **Growth TAM**, pooled, $500 to $1,667 MRR                |           |            |         |        |     (✓)      |    ✓    |     ✓     |        |
+| **Onboarding team**                                       |    (✓)    |    (✓)     |   (✓)   |  (✓)   |     (✓)      |   (✓)   |           |        |
 
-How to read the conditionals:
+Notes:
 
-- Automation is the floor everywhere a human lane isn't active. Sub-$500 MRR accounts and sub-$20k steady-state accounts have no human owner by design.
-- The TAM overlay can start during Implementing when a deal closed with a known expansion path.
+- Automation is the base level everywhere a direct human coverage isn't needed. Below-$500 MRR accounts and sub-$20k steady-state accounts have no human owner by design.
+-  TAM allocation can start during Implementing when a deal closed with a known expansion path.
 - Growth TAM pickup can happen during Implementing for a fast-ramping sub-$20k account.
 - The onboarding team's lane is wide because its trigger is first payment, which can land anywhere from Exploring through Ramping.
 
 ## Ownership rules
 
-**CSM is the base layer, unconditionally.** Every account above $20k ARR has a CSM from day one postsale. The CSM never leaves. Steady state is not a handoff event, it just means the overlays have been removed.
+**CSM is the base layer, unconditionally.** Every account above $20k ARR has a CSM from day one post-sale. The CSM never leaves. Steady state is not a handoff event, it just means the TAM/TAE overlay has been removed.
 
-**TAM coverage is the exception, not the default.** A TAM is added to an account only when a clear expansion, cross-sell, or save opportunity justifies it, and released when the opportunity is exhausted. "Move to CSM" and "remove the TAM layer" are the same action.
+**TAM coverage is the exception, not the default.** A TAM is added to an account only when a clear expansion or cross-sell opportunity justifies it, and released when the opportunity is exhausted. 
 
-**TAE handoff goes to CSM, always** (above threshold). Optionally the TAE also hands to a TAM, but only when the handoff doc names the specific opportunity that justifies the layer. "Still ramping" is not a justification. If every new close gets a TAM by default, the base-layer model is dead.
-
-**Sub-$20k closes get no standing human owner.** Growth TAM coverage is signal-driven pickup, not handoff. A TAE close under $20k enters the pooled queue and gets human attention when a scout signal fires, not before.
-
-**Only one human lane per account per band.** When lanes could collide (the Ramping column is the busiest), the ARR band decides: >$20k gets TAM or CSM, $500 to $1,667 MRR gets Growth TAM, below that gets automation.
-
-## Two things called onboarding
-
-These are different and the words matter.
-
-**Product onboarding** is a _motion_ run by the onboarding team. It fires once, at first payment, for every paid PLG account regardless of size or sales involvement. Its goal is product activation. It does not change ownership or stage. It can fire while the account is presales relative to any deal.
-
-**Implementing** is the _lifecycle stage_. It starts at a sales-assisted close, it's about delivering the deal, and it's CSM-led with the onboarding team assisting rather than owning.
-
-Do not use the word "onboarding" for the stage. That word belongs to the team and their motion.
+**TAE handoff goes to CSM, always** (above threshold). Optionally the TAE also hands to a TAM, but only when the handoff doc names the specific opportunity that justifies the layer. "Still ramping" is not a justification. 
