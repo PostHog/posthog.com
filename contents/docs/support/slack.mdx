@@ -1,5 +1,5 @@
 ---
-title: Slack integration
+title: Connect Slack
 sidebar: Docs
 showTitle: true
 ---
@@ -13,7 +13,7 @@ This is separate from PostHog's main Slack integration (used for alerts and dash
 
 ## Connecting Slack
 
-1. Go to **Support > Settings** in PostHog
+1. Go to **Support** > **Settings** in PostHog
 2. Click **Add SupportHog to Slack**
 3. Authorize the app in your Slack workspace
 4. Select a **support channel** – messages posted there automatically become tickets
@@ -27,7 +27,7 @@ Each PostHog project can connect to one Slack workspace. If the workspace is alr
 
 ## Configuration
 
-After connecting, configure the integration in **Support > Settings**:
+After connecting, configure the integration in **Support** > **Settings**:
 
 | Setting             | Description                                                                                                                                        | Default    |
 | ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
@@ -58,7 +58,7 @@ React with the configured emoji (default `:ticket:`) on any message to create a 
 
 ### 4. Ticket nudges
 
-When someone posts a top-level message in a channel the bot is in that **isn't** a configured support channel, SupportHog replies in-thread asking whether to open a support ticket. The prompt includes **Open ticket** and **No thanks** buttons.
+When someone posts a top-level message in a channel the bot is in that isn't a configured support channel, SupportHog replies in-thread asking whether to open a support ticket. The prompt includes **Open ticket** and **No thanks** buttons.
 
 - **Open ticket** – creates a ticket from the original message, backfills any thread replies posted while the prompt was pending, and replaces the prompt with a ticket confirmation.
 - **No thanks** – deletes the prompt and suppresses further nudges for that user in that channel for 3 hours.
@@ -72,7 +72,7 @@ To reduce noise, SupportHog skips the nudge for:
 - Messages that `@mention` the bot (these create tickets directly)
 - Users who were already nudged in the last 5 minutes
 
-Ticket nudges are **on by default**. You can disable them in **Conversations > Settings** by unchecking **Nudge users to open tickets**.
+Ticket nudges are on by default. You can disable them in **Conversations** > **Settings** by unchecking **Nudge users to open tickets**.
 
 All four methods:
 
@@ -112,7 +112,7 @@ You can filter the ticket list by channel source to see only Slack tickets.
 
 To remove the Slack integration:
 
-1. Go to **Support > Settings**
+1. Go to **Support** > **Settings**
 2. Click **Disconnect** in the Slack section
 
 Existing tickets created from Slack are not affected – they remain in your inbox but will no longer sync new messages.

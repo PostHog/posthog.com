@@ -2,6 +2,75 @@
 title: Support and self-driving
 sidebar: Docs
 showTitle: true
+contentMaxWidthClass: max-w-5xl
 ---
 
-_This page is a work in progress._
+import { IconMessage, IconMagic } from '@posthog/icons'
+
+Your support conversations are one of the richest signals about what's broken in your product. Self-driving reads them: a recurring complaint becomes a report, and when there's a code fix, a pull request you review and merge. This page is how the two connect, and where you work each side.
+
+<CalloutBox icon="IconInfo" title="Coming soon: the reply-drafting agent" type="fyi">
+
+An AI agent that drafts replies *to your customers* is coming soon. It's separate from the self-driving agent described here, which writes *code fixes*, not customer replies. Today you still write the replies yourself in the [inbox](/docs/support/inbox).
+
+</CalloutBox>
+
+## Two inboxes, two jobs
+
+The most important thing to know: there are two different inboxes, and they don't do the same thing.
+
+<div className="not-prose grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+
+  <div className="bg-accent border border-primary rounded p-4">
+    <div className="flex items-center gap-2 mb-1"><IconMessage className="size-5 text-red shrink-0" /><span className="font-bold text-primary">Support inbox</span></div>
+    <p className="m-0 text-sm text-secondary">Where you <strong>read and reply to customers</strong>. Every ticket carries the sender's replay, events, and errors. This is the human side, and it lives in the web app.</p>
+    <a href="/docs/support/inbox" className="inline-flex items-center gap-1 mt-2 text-sm font-semibold text-red">Support inbox →</a>
+  </div>
+
+  <div className="bg-accent border border-primary rounded p-4">
+    <div className="flex items-center gap-2 mb-1"><IconMagic className="size-5 text-purple shrink-0" /><span className="font-bold text-primary">Self-driving inbox</span></div>
+    <p className="m-0 text-sm text-secondary">Where you <strong>review the reports and pull requests</strong> self-driving builds from those tickets (plus errors and replays). You steer, approve, and merge here.</p>
+    <a href="/docs/self-driving/inbox" className="inline-flex items-center gap-1 mt-2 text-sm font-semibold text-red">Self-driving inbox →</a>
+  </div>
+
+</div>
+
+## How support feeds the loop
+
+Support is a first-class [signal source](/docs/self-driving/inbox/sources) for self-driving. It watches your conversations and turns actionable items into signals. Those signals don't each become their own task: they're deduplicated and grouped with related error-tracking and session-replay signals, so one customer-facing problem shows up as **one report**, not a scattered stream.
+
+<div className="not-prose grid grid-cols-2 md:grid-cols-5 gap-2 my-6">
+  <div className="bg-accent border border-primary rounded p-3"><div className="text-2xs font-bold uppercase tracking-wide text-red mb-1">Conversations</div><div className="text-[13px] text-secondary">Tickets from every channel, plus external help desks.</div></div>
+  <div className="bg-accent border border-primary rounded p-3"><div className="text-2xs font-bold uppercase tracking-wide text-red mb-1">Signals</div><div className="text-[13px] text-secondary">Actionable items extracted from conversations.</div></div>
+  <div className="bg-accent border border-primary rounded p-3"><div className="text-2xs font-bold uppercase tracking-wide text-red mb-1">One report</div><div className="text-[13px] text-secondary">Grouped with related errors and replays.</div></div>
+  <div className="bg-accent border border-primary rounded p-3"><div className="text-2xs font-bold uppercase tracking-wide text-red mb-1">Draft PR</div><div className="text-[13px] text-secondary">When a code fix is possible.</div></div>
+  <div className="bg-accent border border-primary rounded p-3"><div className="text-2xs font-bold uppercase tracking-wide text-red mb-1">You merge</div><div className="text-[13px] text-secondary">Nothing ships without a human.</div></div>
+</div>
+
+External help desks feed the loop too: [Zendesk](/docs/support/imports/zendesk), Jira, GitHub Issues, and Linear are all signal sources, so tickets living outside PostHog still count. You enable or disable Support as a source in the self-driving inbox settings.
+
+## Where you work each side
+
+Replying to customers happens in one place. Reviewing the self-driving work happens in several. Here's the split.
+
+| Capability | Web app | PostHog Code | Slack (`@PostHog`) | MCP |
+| --- | --- | --- | --- | --- |
+| Reply to customer tickets | ✅ | – | via SupportHog only | list / update tickets |
+| Configure Support as a signal source | ✅ | ✅ connect sources | – | – |
+| Review self-driving reports and evidence | ✅ full depth | ✅ | ✅ | reports via API |
+| Approve, steer, or decline | ✅ | ✅ | ✅ | state changes via API |
+| Open, iterate, and merge PRs | ✅ merge | ✅ research → PR → merge | ✅ draft PR + steer | – |
+| Collaborative, multi-person steering | – | – | ✅ | – |
+
+A few things the matrix flattens:
+
+- **Web app** is home base. It's the only place you reply to customers, and the only place with full-depth review of a report's evidence before you approve or merge.
+- **PostHog Code** is the desktop surface for deep, multi-repo agent work: connect sources, review researched reports, and merge. You don't reply to customer tickets here.
+- **Slack** is for summoning and steering in the flow of your day. Mention `@PostHog` and it plans a fix, runs checks, and opens a draft PR in-thread, where anyone can steer it. A task started in Slack also shows up in PostHog Code so you can take it over on desktop.
+- **CLI** isn't a working surface. It only turns self-driving on: `npx @posthog/wizard self-driving`.
+
+## Cost and betas
+
+Draft pull requests are billed at **$15 each**, with your first three per month free, and [refunded if a PR wasn't worth it](/docs/self-driving/pricing#refunds). Reports are free, and nothing merges without a human.
+
+Both the `@PostHog` Slack app and self-driving overall are in beta, so some behaviors (for example, exactly which review actions render in Slack versus the web app) may still shift.
