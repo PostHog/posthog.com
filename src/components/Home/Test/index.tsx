@@ -132,7 +132,7 @@ function Hero(): JSX.Element {
     const isDark = siteSettings.theme === 'dark'
     return (
         <>
-            <div className="text-center @xl:text-left mb-24 overflow-x-hidden min-w-0">
+            <div className="text-center @xl:text-left mb-24 min-w-0">
                 <h1 className="[&_p]:m-0 flex gap-1 flex-wrap justify-center @xl:justify-start !text-2xl mb-8 pt-2">
                     <Logo
                         className="max-w-[157px]"
@@ -229,7 +229,7 @@ export default function HomeTest() {
 
     return (
         <ReaderView proseSize="lg" hideLeftSidebar showQuestions={false}>
-            <div className="space-y-12 overflow-x-hidden">
+            <div className="space-y-12">
                 <Hero />
                 <Customers />
                 <DataStackSection />
