@@ -27,7 +27,7 @@ export const sfBenchmark: Record<string, number> = {
     'People Operations Manager': 153311,
     'Performance Marketer': 160680,
     'Product Designer': 186000,
-    'Product Manager': 254000,
+    'Product Manager': 250000,
     'Product Marketer': 218000,
     'Revenue Ops Manager': 192000,
     'Site Reliability Engineer': 285000,
