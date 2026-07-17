@@ -85,6 +85,10 @@ jobs:
                   EMIT_WEBPACK_STATS: 'true'
                   CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
                   CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
+                  # Mapbox public token (pk.*, already shipped in the client bundle on prod) so
+                  # map pages (/events, /people, /cool-builder-communities) render on previews.
+                  # No-op until the GATSBY_MAPBOX_TOKEN repo secret is added.
+                  GATSBY_MAPBOX_TOKEN: ${{ secrets.GATSBY_MAPBOX_TOKEN }}
                   # Authenticated GitHub search for self-driving PR sourcing (gatsby/sourceNodes.ts).
                   # Not GITHUB_API_KEY, which would turn on the full GitHub sourcing pipeline.
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
