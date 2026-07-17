@@ -24,7 +24,7 @@ const comparison = [
         products: {
             'Product analytics': true,
             'Web analytics': false,
-            'LLM analytics': false,
+            'AI Observability': false,
             'Session replay': true,
             'Feature flags': false,
             Experiments: true,
@@ -46,7 +46,7 @@ const comparison = [
         products: {
             'Product analytics': true,
             'Web analytics': false,
-            'LLM analytics': false,
+            'AI Observability': false,
             'Session replay': true,
             'Feature flags': false,
             Experiments: false,
@@ -67,7 +67,7 @@ const comparison = [
         products: {
             'Product analytics': true,
             'Web analytics': false,
-            'LLM analytics': false,
+            'AI Observability': false,
             'Session replay': true,
             'Feature flags': false,
             Experiments: false,
@@ -89,7 +89,7 @@ const comparison = [
         products: {
             'Product analytics': true,
             'Web analytics': false,
-            'LLM analytics': false,
+            'AI Observability': false,
             'Session replay': true,
             'Feature flags': false,
             Experiments: false,
@@ -111,7 +111,7 @@ const comparison = [
         products: {
             'Product analytics': true,
             'Web analytics': false,
-            'LLM analytics': false,
+            'AI Observability': false,
             'Session replay': true,
             'Feature flags': false,
             Experiments: false,
@@ -123,13 +123,13 @@ const comparison = [
         name: 'PostHog',
         logo: (
             <div className="">
-                <Logo noText className="h-6 mx-auto" />
+                <Logo wordmark={false} className="h-6 mx-auto" />
             </div>
         ),
         products: {
             'Product analytics': true,
             'Web analytics': true,
-            'LLM analytics': true,
+            'AI Observability': true,
             'Session replay': true,
             'Feature flags': true,
             Experiments: true,

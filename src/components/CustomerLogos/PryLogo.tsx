@@ -7,7 +7,7 @@ interface PryLogoProps {
 export default function PryLogo({ className = '' }: PryLogoProps) {
     return (
         <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 79 32" fill="none">
-            <g clipPath="url(#clip0)">
+            <g clipPath="url(#clip0_pry_logo)">
                 <path
                     className="dark:fill-white fill-[#F4C222]"
                     d="M6.712 13.5119C8.04245 13.5132 9.34311 13.1181 10.448 12.3769C11.5552 11.6339 12.4175 10.5796 12.926 9.34694C13.435 8.11264 13.5689 6.75566 13.3108 5.4457C13.0527 4.13573 12.4142 2.93092 11.475 1.98194C10.5387 1.03611 9.34153 0.391162 8.03662 0.129645C6.7317 -0.131873 5.37843 0.00193387 4.15 0.51394C2.91981 1.0261 1.86942 1.89203 1.132 3.00194C0.268078 4.30205 -0.120917 5.86037 0.0306539 7.41397C0.182225 8.96757 0.865081 10.4213 1.964 11.5299C2.58572 12.1567 3.32513 12.6544 4.13977 12.9945C4.9544 13.3347 5.82821 13.5105 6.711 13.5119H6.712Z"
@@ -24,7 +24,7 @@ export default function PryLogo({ className = '' }: PryLogoProps) {
                 />
             </g>
             <defs>
-                <clipPath id="clip0">
+                <clipPath id="clip0_pry_logo">
                     <rect width="79" height="32" fill="white" />
                 </clipPath>
             </defs>

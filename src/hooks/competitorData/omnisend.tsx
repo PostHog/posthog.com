@@ -16,7 +16,7 @@ export const omnisend = {
                 features: {
                     email: true,
                     sms: true,
-                    push: "Web only",
+                    push: 'Web only',
                     webhooks: true,
                     whatsapp: false,
                 },

@@ -6,11 +6,12 @@ import {
     IconMinus,
     IconX,
     IconCollapse45Chevrons,
-    IconExpand45Chevrons,
     IconSquare,
     IconArrowLeft,
     IconArrowRight,
     IconTerminal,
+    IconSearch,
+    IconDrag,
 } from '@posthog/icons'
 import { Menu, MenuItem, useApp } from '../../context/App'
 import { Provider as WindowProvider, AppWindow as AppWindowType, useWindow } from '../../context/Window'
@@ -58,6 +59,18 @@ const recursiveSearch = (array: MenuItem[] | undefined, value: string): boolean 
 
 const snapThreshold = -50
 
+// Light/dark mesh-gradient class pairs (defined in tailwind.config.js).
+// Each value must be a full literal string so Tailwind's JIT picks it up.
+export const MESH_VARIANTS = {
+    green: 'bg-mesh-green-light dark:bg-mesh-green-dark',
+    red: 'bg-mesh-red-light dark:bg-mesh-red-dark',
+    yellow: 'bg-mesh-yellow-light dark:bg-mesh-yellow-dark',
+    blue: 'bg-mesh-blue-light dark:bg-mesh-blue-dark',
+    purple: 'bg-mesh-purple-light dark:bg-mesh-purple-dark',
+} as const
+
+export type MeshColor = keyof typeof MESH_VARIANTS
+
 const PageModal = ({ children }: { children: React.ReactNode }) => {
     const [open, setOpen] = useState(true)
     const { appWindow } = useWindow()
@@ -77,25 +90,8 @@ const PageModal = ({ children }: { children: React.ReactNode }) => {
 }
 
 const Router = (props) => {
-    const { minimizeWindow, closeWindow } = useApp()
     const { appWindow } = useWindow()
-    const { children, path, minimizing, onExit } = props
-
-    useEffect(() => {
-        if (minimizing) {
-            minimizeWindow(appWindow)
-            // Trigger the animation in the TaskBarMenu
-            const taskbarMenu = document.querySelector('#taskbar')
-            if (taskbarMenu) {
-                const event = new CustomEvent('windowMinimized')
-                taskbarMenu.dispatchEvent(event)
-            }
-        }
-
-        return () => {
-            onExit?.()
-        }
-    }, [minimizing])
+    const { children, path } = props
 
     if (/^\/questions/.test(path)) {
         return <Inbox {...props} />
@@ -138,7 +134,34 @@ const WindowContainer = ({ children, closing }: { children: React.ReactNode; clo
     )
 }
 
+function SnapIndicator({ side }: { side: 'left' | 'right' }) {
+    const { taskbarRef, taskbarHeight } = useApp()
+    const taskbarRect = taskbarRef.current?.getBoundingClientRect()
+    const left = taskbarRect?.left ?? 0
+    const top = taskbarRect?.top ?? 0
+    const availableWidth = window.innerWidth - left * 2
+    const halfWidth = availableWidth / 2
+
+    return (
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.3 }}
+            exit={{ opacity: 0 }}
+            className={`fixed border-2 border-blue bg-blue/40 pointer-events-none ${
+                side === 'left' ? 'rounded-bl-lg' : 'rounded-br-lg'
+            }`}
+            style={{
+                left: side === 'left' ? left : left + halfWidth,
+                width: halfWidth,
+                top: taskbarHeight,
+                height: window.innerHeight - taskbarHeight - (taskbarRect?.top ?? 0),
+            }}
+        />
+    )
+}
+
 export default function AppWindow({ item, chrome = true }: { item: AppWindowType; chrome?: boolean }) {
+    const meshVariant = MESH_VARIANTS[item.appSettings?.mesh ?? 'green']
     const { addToast, toasts } = useToast()
     const {
         minimizeWindow,
@@ -158,7 +181,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
         compact,
         menu: appMenu,
         taskbarRef,
-        websiteMode,
+        closeWindow,
     } = useApp()
     const isSSR = typeof window === 'undefined'
     const controls = useDragControls()
@@ -181,12 +204,21 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     const [closing, setClosing] = useState(false)
     const [closed, setClosed] = useState(false)
     const [minimizing, setMinimizing] = useState(false)
-    const [animating, setAnimating] = useState(true)
+    // The open animation should only play once, on mount. `playOpenAnimation` is
+    // decided from mount-time props and cleared when the animation finishes, so
+    // later state changes (expand/collapse) never replay the pop-in.
+    const [playOpenAnimation, setPlayOpenAnimation] = useState(!!item.fromOrigin)
+    const skipsOpenAnimation = !playOpenAnimation
+    const [animating, setAnimating] = useState(playOpenAnimation)
     const animationStartTimeRef = useRef<number | null>(null)
     const posthog = usePostHog()
     const [view, setView] = useState<'marketing' | 'developer'>('marketing')
     const [hasDeveloperMode, setHasDeveloperMode] = useState(false)
+    const hasToolbar = item.appSettings?.toolbar
+    const hideTitle = item.appSettings?.hideTitle
     const inView = useMemo(() => {
+        if (item.expanded) return true
+
         const windowsAbove = windows.filter(
             (window) => window !== item && window.zIndex > item.zIndex && !window.minimized
         )
@@ -237,6 +269,13 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
         }
     }, [windowRef.current])
 
+    const isMaximized = () => {
+        if (item.expanded) return true
+        const taskbarRect = taskbarRef.current?.getBoundingClientRect()
+        const expandedWidth = window.innerWidth - (taskbarRect?.left ?? 0) * 2
+        return size.width >= expandedWidth
+    }
+
     const beyondViewport = (windowSize: { width: number; height: number }) => {
         const rightEdge = position.x + windowSize.width
         const bottomEdge = position.y + windowSize.height
@@ -254,6 +293,24 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
         info: PanInfo,
         change: { x: boolean } | { y: boolean } | { x: boolean; y: boolean }
     ) => {
+        if (item.expanded && windowRef.current) {
+            const rect = windowRef.current.getBoundingClientRect()
+            const containerRect = constraintsRef.current?.getBoundingClientRect()
+            const measuredPos = {
+                x: rect.left - (containerRect?.left ?? 0),
+                y: rect.top - (containerRect?.top ?? 0),
+            }
+            const measuredSize = { width: rect.width, height: rect.height }
+            updateWindow(item, {
+                position: measuredPos,
+                size: measuredSize,
+                previousSize: measuredSize,
+                previousPosition: measuredPos,
+                expanded: false,
+                snapped: false,
+            })
+            return
+        }
         const update: { size?: { height?: number; width?: number }; position?: { x: number } } = {}
         if ('y' in change) update.size = { height: Math.max(size.height + info.delta.y, sizeConstraints.min.height) }
         if ('x' in change) {
@@ -275,6 +332,29 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
         })
     }
 
+    const toggleMaximize = () => {
+        if (item.fixedSize) return
+        if (isMaximized()) {
+            collapseWindow()
+        } else {
+            expandWindow()
+        }
+    }
+
+    const toggleExpanded = () => {
+        if (item.fixedSize) return
+        if (item.expanded) {
+            updateWindow(item, {
+                expanded: false,
+                windowed: true,
+                snapped: false,
+            })
+        } else {
+            // Expanding a side-by-side window drops the other and takes over the screen.
+            expandWindow(item)
+        }
+    }
+
     const collapseWindow = () => {
         const isBeyondViewport = beyondViewport(previousSize)
         const newSize = isBeyondViewport
@@ -283,6 +363,8 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
         updateWindow(item, {
             size: newSize,
             position: isBeyondViewport ? getDesktopCenterPosition(newSize) : previousPosition,
+            expanded: false,
+            snapped: false,
         })
     }
 
@@ -301,6 +383,29 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     }
 
     const handleDrag = (_event: any, info: any) => {
+        if (item.expanded && windowRef.current) {
+            const rect = windowRef.current.getBoundingClientRect()
+            const containerRect = constraintsRef.current?.getBoundingClientRect()
+            const measuredPos = {
+                x: rect.left - (containerRect?.left ?? 0),
+                y: rect.top - (containerRect?.top ?? 0),
+            }
+            const measuredSize = { width: rect.width, height: rect.height }
+            updateWindow(item, {
+                position: measuredPos,
+                size: measuredSize,
+                previousSize: measuredSize,
+                previousPosition: measuredPos,
+                expanded: false,
+                snapped: false,
+            })
+            if (!dragging) setDragging(true)
+            return
+        }
+        updateWindow(item, {
+            expanded: false,
+            snapped: false,
+        })
         if (!dragging) setDragging(true)
         if (item.fixedSize) return
         if (!constraintsRef.current) return
@@ -376,7 +481,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
         setActiveInternalMenu(getActiveInternalMenu())
     }, [item?.path])
 
-    const goBack = () => {
+    const goBack = useCallback(() => {
         if (canGoBack) {
             setActiveHistoryIndex(activeHistoryIndex - 1)
             navigate(history[activeHistoryIndex - 1], {
@@ -385,9 +490,9 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                 },
             })
         }
-    }
+    }, [canGoBack, activeHistoryIndex, history])
 
-    const goForward = () => {
+    const goForward = useCallback(() => {
         if (canGoForward) {
             setActiveHistoryIndex(activeHistoryIndex + 1)
             navigate(history[activeHistoryIndex + 1], {
@@ -396,7 +501,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                 },
             })
         }
-    }
+    }, [canGoForward, activeHistoryIndex, history])
 
     const handleMouseDown = () => {
         if (focusedWindow === item) return
@@ -409,6 +514,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
 
     useEffect(() => {
         const handleResize = () => {
+            if (item.expanded) return
             if (beyondViewport(size)) {
                 const newSize = {
                     width: Math.min(size.width, window.innerWidth),
@@ -449,6 +555,21 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
             document.removeEventListener('windowClose', handleWindowClose as EventListener)
         }
     }, [item.key])
+
+    useEffect(() => {
+        if (!item.appSettings?.closeOnEscape || focusedWindow !== item || closing) return
+
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key !== 'Escape' || event.defaultPrevented) return
+
+            event.preventDefault()
+            setClosing(true)
+        }
+
+        window.addEventListener('keydown', handleKeyDown)
+
+        return () => window.removeEventListener('keydown', handleKeyDown)
+    }, [closing, focusedWindow, item])
 
     const chatWindows = windows.filter((w) => w.key?.startsWith('ask-max'))
     const defaultPageOptions = useMemo(
@@ -507,11 +628,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     )
 
     const handleClose = () => {
-        setAnimating(true)
         setClosing(true)
-        setTimeout(() => {
-            setClosed(true)
-        }, 0)
     }
 
     const onAnimationStart = () => {
@@ -519,6 +636,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     }
     const onAnimationComplete = () => {
         setAnimating(false)
+        setPlayOpenAnimation(false)
         const endTime = performance.now()
         const startTime = animationStartTimeRef.current || 0
         const duration = endTime - startTime
@@ -581,453 +699,168 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
             setView={setView}
             hasDeveloperMode={hasDeveloperMode}
             setHasDeveloperMode={setHasDeveloperMode}
+            animating={animating}
         >
-            {websiteMode ? (
-                <div className="relative">
-                    <Router {...item.props}>{item.element}</Router>
-                </div>
-            ) : (
-                <WindowContainer closing={closing}>
-                    {!item.minimized && !closed && (
-                        <>
-                            {snapIndicator && (
-                                <motion.div
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 0.3 }}
-                                    exit={{ opacity: 0 }}
-                                    className="fixed inset-4 border-2 border-blue bg-blue/40 pointer-events-none rounded-md"
-                                    style={{
-                                        left: snapIndicator === 'left' ? 0 : '50%',
-                                        width: '50%',
-                                        top: taskbarHeight,
-                                        height: `calc(100% - ${taskbarHeight}px)`,
-                                    }}
-                                />
-                            )}
-                            <motion.div
-                                ref={windowRef}
-                                data-app="AppWindow"
-                                data-scheme="tertiary"
-                                suppressHydrationWarning
-                                className={`@container absolute !select-auto flex flex-col ${
-                                    item.appSettings?.size?.fixed ? 'bg-transparent' : 'bg-transparent'
-                                } ${
-                                    siteSettings.experience === 'boring' && !item.appSettings?.size?.fixed
-                                        ? 'border-b border-primary'
-                                        : `${
-                                              focusedWindow === item
-                                                  ? 'shadow-2xl border-primary'
-                                                  : 'shadow-lg border-input'
-                                          } ${dragging ? '[&_*]:select-none' : ''} ${
-                                              item.minimal
-                                                  ? '!shadow-none'
-                                                  : `flex flex-col ${
-                                                        siteSettings.experience === 'boring' ? '' : 'border rounded'
-                                                    }`
-                                          }`
-                                } ${chrome ? 'overflow-hidden' : ''}`}
-                                style={{
-                                    zIndex: item.zIndex,
-                                }}
-                                initial={{
-                                    scale: 0.08,
-                                    x: rendered
-                                        ? siteSettings.experience === 'boring' || !windowPosition
-                                            ? 0
-                                            : windowPosition.x
-                                        : item.fromOrigin?.x || windowPosition?.x || Math.round(position.x),
-                                    y: rendered
-                                        ? siteSettings.experience === 'boring' || !windowPosition
-                                            ? 0
-                                            : windowPosition.y
-                                        : item.fromOrigin?.y || windowPosition?.y || Math.round(position.y),
-                                    width: siteSettings.experience === 'boring' ? '100%' : size.width,
-                                    height:
-                                        siteSettings.experience === 'boring'
-                                            ? '100%'
-                                            : item.appSettings?.size?.autoHeight
-                                            ? 'auto'
-                                            : size.height,
-                                }}
-                                animate={{
-                                    scale: 1,
-                                    x: siteSettings.experience === 'boring' ? 0 : Math.round(position.x),
-                                    y: siteSettings.experience === 'boring' ? 0 : Math.round(position.y),
-                                    width: siteSettings.experience === 'boring' ? '100%' : size.width,
-                                    height:
-                                        siteSettings.experience === 'boring'
-                                            ? '100%'
-                                            : item.appSettings?.size?.autoHeight
-                                            ? 'auto'
-                                            : size.height,
-                                    transition: {
-                                        duration:
-                                            siteSettings.experience === 'boring' ||
-                                            siteSettings.performanceBoost ||
-                                            leftDragResizing
-                                                ? 0
-                                                : 0.2,
-                                        scale: {
-                                            duration:
-                                                siteSettings.experience === 'boring' ||
-                                                siteSettings.performanceBoost ||
-                                                !windowPosition
-                                                    ? 0
-                                                    : 0.2,
-                                            delay:
-                                                siteSettings.experience === 'boring' ||
-                                                siteSettings.performanceBoost ||
-                                                !windowPosition
-                                                    ? 0
-                                                    : 0.2,
-                                            ease: [0.2, 0.2, 0.8, 1],
-                                        },
-                                        width: {
-                                            duration: 0,
-                                        },
-                                        height: {
-                                            duration: 0,
-                                        },
-                                    },
-                                }}
-                                exit={{
-                                    scale: 0.005,
-                                    ...(closing || !windowPosition ? {} : { x: windowPosition.x, y: windowPosition.y }),
-                                    transition: {
-                                        scale: {
-                                            duration:
-                                                siteSettings.experience === 'boring' || siteSettings.performanceBoost
-                                                    ? 0
-                                                    : 0.23,
-                                            ease: [0.2, 0.2, 0.8, 1],
-                                        },
-                                        x: {
-                                            duration: 0.23,
-                                            ease: [0.2, 0.2, 0.8, 1],
-                                        },
-                                        y: {
-                                            duration: 0.23,
-                                            ease: [0.2, 0.2, 0.8, 1],
-                                        },
-                                    },
-                                }}
-                                drag={siteSettings.experience === 'posthog'}
-                                dragControls={controls}
-                                dragListener={false}
-                                dragMomentum={false}
-                                dragConstraints={constraintsRef}
-                                onDrag={handleDrag}
-                                onDragEnd={handleDragEnd}
-                                onDragTransitionEnd={handleDragTransitionEnd}
-                                onMouseDown={handleMouseDown}
-                                onAnimationStart={onAnimationStart}
-                                onAnimationComplete={onAnimationComplete}
-                            >
-                                {!item.minimal && !compact && siteSettings.experience !== 'boring' && (
-                                    <div
-                                        data-scheme="tertiary"
-                                        onDoubleClick={handleDoubleClick}
-                                        className={`flex-shrink-0 w-full flex @md:grid grid-cols-[minmax(100px,auto)_1fr_minmax(100px,auto)] gap-1 items-center py-0.5 pl-1.5 pr-0.5 bg-primary/50 backdrop-blur-3xl skin-classic:bg-primary border-b border-input ${
-                                            siteSettings.experience === 'boring' ? '' : 'cursor-move'
-                                        }`}
-                                        onPointerDown={(e) => controls.start(e)}
+            <WindowContainer closing={closing}>
+                {item.appSettings?.size?.fixed && (
+                    <div
+                        onClick={handleClose}
+                        className={`fixed inset-0 z-50 bg-black/50 ${
+                            closing ? 'animate-overlay-fade-out' : !skipsOpenAnimation ? 'animate-overlay-fade-in' : ''
+                        }`}
+                    />
+                )}
+                <div
+                    onMouseDown={handleMouseDown}
+                    onAnimationEnd={(e) => {
+                        if (e.currentTarget !== e.target) return
+                        if (closing) {
+                            closeWindow(item)
+                        } else {
+                            onAnimationComplete()
+                        }
+                    }}
+                    ref={(el) => {
+                        const mutableRef = windowRef as React.MutableRefObject<HTMLDivElement | null>
+                        mutableRef.current = el
+                        if (el && !skipsOpenAnimation) {
+                            onAnimationStart()
+                        }
+                    }}
+                    data-app="AppWindow"
+                    data-path={item.path || undefined}
+                    data-fixed-size={item.appSettings?.size?.fixed || undefined}
+                    data-expanded={item.expanded || undefined}
+                    data-windowed={item.windowed || undefined}
+                    data-snapped={item.snapped || undefined}
+                    data-scheme="tertiary"
+                    className={`@container relative overflow-hidden ${
+                        item.appSettings?.size?.fixed
+                            ? closing
+                                ? 'animate-window-slide-up'
+                                : !skipsOpenAnimation
+                                ? 'animate-window-slide-down'
+                                : ''
+                            : closing
+                            ? 'animate-window-pop-out'
+                            : !skipsOpenAnimation
+                            ? 'animate-window-pop-in'
+                            : ''
+                    } ${
+                        item.appSettings?.size?.fixed
+                            ? '!absolute top-2 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1rem)]'
+                            : item.windowed
+                            ? 'h-[95%] w-[80%]'
+                            : 'size-full'
+                    } !select-auto flex flex-col border-primary ${
+                        siteSettings.heaterMode
+                            ? 'bg-primary/75 backdrop-blur-3xl will-change-[transform,backdrop-filter] transform-gpu'
+                            : `bg-primary ${meshVariant}`
+                    } flex flex-col rounded-lg ${
+                        item.appSettings?.size?.fixed ? 'border' : item.expanded ? 'border-t' : ''
+                    } ${item.expanded ? 'shadow-none' : 'shadow-md'} ${
+                        item.expanded
+                            ? 'rounded-tr-none rounded-tl-none'
+                            : item.snapped === 'left'
+                            ? 'rounded-tl-none rounded-tr-none rounded-br-none border-r'
+                            : item.snapped === 'right'
+                            ? 'rounded-tl-none rounded-tr-none rounded-bl-none'
+                            : ''
+                    }`}
+                    style={
+                        item.appSettings?.size?.fixed
+                            ? {
+                                  maxWidth: item.sizeConstraints.min.width,
+                                  maxHeight: item.appSettings.size.autoHeight
+                                      ? undefined
+                                      : item.sizeConstraints.min.height,
+                              }
+                            : undefined
+                    }
+                >
+                    <div className={`${hasToolbar ? 'bg-primary flex items-center py-0.5 px-1' : ''}`}>
+                        {hasToolbar && (
+                            <>
+                                {!hideTitle && (
+                                    <p className="text-primary text-left text-sm font-semibold ml-1.5 my-0 line-clamp-1">
+                                        {item.meta?.title?.replace(/ - PostHog$/, '')}
+                                    </p>
+                                )}
+                                <div className="flex-1" />
+                            </>
+                        )}
+                        <div
+                            data-scheme="tertiary"
+                            onDoubleClick={handleDoubleClick}
+                            className={`inline-flex gap-1 items-center py-0.5 pl-1.5 pr-0.5 skin-classic:bg-primary opacity-40 hover:opacity-75 transition-opacity duration-100 ${
+                                hasToolbar ? 'flex-1 justify-end' : 'absolute z-20 right-1 top-1'
+                            }`}
+                        >
+                            {!item.fixedSize && (
+                                <div className="window-expand-control flex justify-end">
+                                    <Tooltip
+                                        trigger={
+                                            <OSButton
+                                                windowButton
+                                                size="md"
+                                                onClick={toggleExpanded}
+                                                icon={
+                                                    item.expanded ? (
+                                                        <IconCollapse45Chevrons />
+                                                    ) : (
+                                                        <IconSquare className="scale-110" />
+                                                    )
+                                                }
+                                            />
+                                        }
                                     >
-                                        <MenuBar
-                                            menus={[
-                                                {
-                                                    trigger: (
-                                                        <>
-                                                            <IconDocument className="size-5" />
-                                                            <IconChevronDown className="size-6 -mx-1.5 text-muted group-hover:text-primary data-[state=open]:text-primary" />
-                                                        </>
-                                                    ),
-                                                    items: [
-                                                        ...(pageOptions || defaultPageOptions),
-                                                        {
-                                                            type: 'item',
-                                                            label: 'Close',
-                                                            onClick: handleClose,
-                                                            shortcut: ['Shift', 'W'],
-                                                        },
-                                                    ],
-                                                },
-                                            ]}
-                                        />
-
-                                        <div className="flex-1 truncate flex items-center justify-start @md:justify-center">
-                                            {hasDeveloperMode ? (
-                                                <ToggleGroup
-                                                    title="View mode"
-                                                    hideTitle
-                                                    options={[
-                                                        {
-                                                            label: 'Slides',
-                                                            value: 'marketing',
-                                                        },
-                                                        {
-                                                            label: 'Dev mode',
-                                                            value: 'developer',
-                                                        },
-                                                    ]}
-                                                    value={view}
-                                                    onValueChange={(value) =>
-                                                        setView(value as 'marketing' | 'developer')
-                                                    }
-                                                />
-                                            ) : menu && menu.length > 0 ? (
-                                                <Popover
-                                                    trigger={
-                                                        <button className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark text-left items-center justify-center text-sm font-semibold flex select-none">
-                                                            {(item.meta?.title && item.meta.title) ||
-                                                                activeInternalMenu?.name}
-                                                            <IconChevronDown className="size-6 -m-1" />
-                                                        </button>
-                                                    }
-                                                    dataScheme="primary"
-                                                    contentClassName="w-auto p-0 border border-primary"
-                                                    header={false}
-                                                >
-                                                    <FileMenu menu={menu} />
-                                                </Popover>
-                                            ) : (
-                                                <div className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark text-left items-center justify-center text-sm font-semibold flex select-none">
-                                                    {item.meta?.title && item.meta.title}
-                                                </div>
-                                            )}
+                                        <div className="flex flex-col items-center gap-2">
+                                            <span>{item.expanded ? 'Restore window' : 'Expand window'}</span>
+                                            <div>
+                                                <KeyboardShortcut text="Shift" size="xs" />
+                                                &nbsp;
+                                                <KeyboardShortcut text="↑" size="xs" />
+                                            </div>
                                         </div>
-                                        <div className="flex justify-end">
-                                            {siteSettings.experience !== 'boring' && (
-                                                <>
-                                                    <OSButton size="xs" onClick={handleMinimize} className="">
-                                                        <IconMinus className="size-4 relative top-1" />
-                                                    </OSButton>
-
-                                                    <ContextMenu.Root
-                                                        onOpenChange={() => setWindowOptionsTooltipVisible(false)}
-                                                    >
-                                                        <ContextMenu.Trigger
-                                                            className="data-[highlighted]:bg-accent data-[state=open]:bg-accent"
-                                                            asChild
-                                                        >
-                                                            {!item.fixedSize && (
-                                                                <OSButton
-                                                                    size="xs"
-                                                                    onClick={() => {
-                                                                        setWindowOptionsTooltipVisible(false)
-                                                                        if (size.width >= window?.innerWidth) {
-                                                                            collapseWindow()
-                                                                        } else {
-                                                                            expandWindow()
-                                                                        }
-                                                                    }}
-                                                                    onMouseEnter={() => {
-                                                                        setWindowOptionsTooltipVisible(true)
-                                                                    }}
-                                                                    onMouseLeave={() => {
-                                                                        setWindowOptionsTooltipVisible(false)
-                                                                    }}
-                                                                    className=" group"
-                                                                >
-                                                                    <Tooltip
-                                                                        trigger={
-                                                                            <span>
-                                                                                <IconSquare className="size-5 group-hover:hidden" />
-                                                                                {!isSSR &&
-                                                                                size.width >= window?.innerWidth ? (
-                                                                                    <IconCollapse45Chevrons className="size-6 -m-0.5 hidden group-hover:block" />
-                                                                                ) : (
-                                                                                    <IconExpand45Chevrons className="size-6 -m-0.5 hidden group-hover:block" />
-                                                                                )}
-                                                                            </span>
-                                                                        }
-                                                                        open={windowOptionsTooltipVisible}
-                                                                    >
-                                                                        Right click for more options
-                                                                    </Tooltip>
-                                                                </OSButton>
-                                                            )}
-                                                        </ContextMenu.Trigger>
-                                                        <ContextMenu.Portal>
-                                                            <ContextMenu.Content
-                                                                className="min-w-[220px] rounded-md bg-white dark:bg-accent-dark p-1 shadow-xl"
-                                                                data-scheme="primary"
-                                                            >
-                                                                <ContextMenu.Label className="px-2.5 text-[13px] leading-[25px] text-muted">
-                                                                    Snap to...
-                                                                </ContextMenu.Label>
-                                                                <ContextMenu.Item
-                                                                    className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-accent outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
-                                                                    onClick={() => handleSnapToSide('left')}
-                                                                >
-                                                                    Left half
-                                                                    <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
-                                                                        <KeyboardShortcut text="Shift" size="xs" />
-                                                                        <KeyboardShortcut
-                                                                            text={
-                                                                                <IconArrowLeft className="size-3 inline-block" />
-                                                                            }
-                                                                            size="xs"
-                                                                        />
-                                                                    </div>
-                                                                </ContextMenu.Item>
-                                                                <ContextMenu.Item
-                                                                    className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-accent outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
-                                                                    onClick={() => handleSnapToSide('right')}
-                                                                >
-                                                                    Right half
-                                                                    <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
-                                                                        <KeyboardShortcut text="Shift" size="xs" />
-                                                                        <KeyboardShortcut
-                                                                            text={
-                                                                                <IconArrowRight className="size-3 inline-block" />
-                                                                            }
-                                                                            size="xs"
-                                                                        />
-                                                                    </div>
-                                                                </ContextMenu.Item>
-                                                                <ContextMenu.Separator className="m-[5px] h-px bg-border" />
-                                                                <ContextMenu.Label className="px-2.5 text-[13px] leading-[25px] text-muted">
-                                                                    Resize
-                                                                </ContextMenu.Label>
-                                                                <ContextMenu.Item
-                                                                    disabled={
-                                                                        size.width === (isSSR ? 0 : window?.innerWidth)
-                                                                    }
-                                                                    className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-accent outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
-                                                                    onClick={expandWindow}
-                                                                >
-                                                                    Maximize
-                                                                    <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
-                                                                        <KeyboardShortcut text="Shift" size="xs" />
-                                                                        <KeyboardShortcut
-                                                                            text={
-                                                                                <IconArrowRight className="size-3 inline-block -rotate-90" />
-                                                                            }
-                                                                            size="xs"
-                                                                        />
-                                                                    </div>
-                                                                </ContextMenu.Item>
-                                                            </ContextMenu.Content>
-                                                        </ContextMenu.Portal>
-                                                    </ContextMenu.Root>
-                                                </>
-                                            )}
-                                            <Tooltip
-                                                trigger={<OSButton size="md" onClick={handleClose} icon={<IconX />} />}
-                                            >
-                                                <div className="flex flex-col items-center gap-2">
-                                                    <span>Close window</span>
-                                                    <div>
-                                                        <KeyboardShortcut text="Shift" size="xs" />
-                                                        &nbsp;
-                                                        <KeyboardShortcut text="W" size="xs" />
-                                                    </div>
-                                                </div>
-                                            </Tooltip>
+                                    </Tooltip>
+                                </div>
+                            )}
+                            <div className="flex justify-end">
+                                <Tooltip
+                                    trigger={<OSButton windowButton size="md" onClick={handleClose} icon={<IconX />} />}
+                                >
+                                    <div className="flex flex-col items-center gap-2">
+                                        <span>Close window</span>
+                                        <div>
+                                            <KeyboardShortcut text="Shift" size="xs" />
+                                            &nbsp;
+                                            <KeyboardShortcut text="W" size="xs" />
                                         </div>
                                     </div>
-                                )}
-                                <div
-                                    ref={contentRef}
-                                    className={`size-full flex-grow ${
-                                        chrome ? 'bg-light dark:bg-dark overflow-hidden' : ''
-                                    }`}
-                                >
-                                    {(!animating || isSSR || item.appSettings?.size?.autoHeight) && (
-                                        <Router
-                                            minimizing={minimizing}
-                                            onExit={() => {
-                                                if (minimizing) {
-                                                    setMinimizing(false)
-                                                    if (siteSettings.experience === 'posthog') {
-                                                        setAnimating(true)
-                                                    }
-                                                }
-                                            }}
-                                            {...item.props}
-                                        >
-                                            {item.element}
-                                        </Router>
-                                    )}
-                                </div>
-                                {!item.fixedSize && !item.minimal && (
-                                    <>
-                                        <motion.div
-                                            data-scheme="tertiary"
-                                            className="group absolute right-0 top-0 w-1.5 bottom-6 cursor-ew-resize !transform-none"
-                                            drag="x"
-                                            dragMomentum={false}
-                                            dragConstraints={{ left: 0, right: 0 }}
-                                            onDrag={(_event, info) => handleDragResize(item, info, { x: true })}
-                                        >
-                                            <div className="relative w-full h-full">
-                                                <div className="hidden group-hover:block absolute inset-y-0 right-0 w-[2px] bg-light-8" />
-                                                <div className="hidden group-hover:block absolute -bottom-6 h-6 right-0 w-[2px] bg-light-8" />
-                                            </div>
-                                        </motion.div>
-                                        <motion.div
-                                            data-scheme="tertiary"
-                                            className="group absolute left-0 top-0 w-1.5 bottom-6 cursor-ew-resize !transform-none"
-                                            drag="x"
-                                            dragMomentum={false}
-                                            dragConstraints={{ left: 0, right: 0 }}
-                                            onDragStart={() => setLeftDragResizing(true)}
-                                            onDrag={(_event, info) => handleDragResize(item, info, { x: true })}
-                                            onDragEnd={() => setLeftDragResizing(false)}
-                                        >
-                                            <div className="relative w-full h-full">
-                                                <div className="hidden group-hover:block absolute inset-y-0 left-0 w-[2px] bg-light-8" />
-                                                <div className="hidden group-hover:block absolute -bottom-6 h-6 left-0 w-[2px] bg-light-8" />
-                                            </div>
-                                        </motion.div>
-                                        <motion.div
-                                            data-scheme="tertiary"
-                                            className="group absolute bottom-0 left-0 right-6 h-1.5 cursor-ns-resize !transform-none"
-                                            drag="y"
-                                            dragMomentum={false}
-                                            dragConstraints={{ top: 0, bottom: 0 }}
-                                            onDrag={(_event, info) => handleDragResize(item, info, { y: true })}
-                                        >
-                                            <div className="relative w-full h-full">
-                                                <div className="hidden group-hover:block absolute inset-x-0 bottom-0 h-[2px] bg-light-8" />
-                                                <div className="hidden group-hover:block absolute bottom-0 -right-6 w-6 h-[2px] bg-light-8" />
-                                            </div>
-                                        </motion.div>
-                                        <motion.div
-                                            className="group absolute bottom-0 right-0 w-6 h-6 cursor-se-resize flex items-center justify-center !transform-none"
-                                            drag
-                                            dragMomentum={false}
-                                            dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
-                                            onDrag={(_event, info) =>
-                                                handleDragResize(item, info, { x: true, y: true })
-                                            }
-                                        >
-                                            <div className="hidden group-hover:block relative w-full h-full border-b border-r border-transparent overflow-hidden rounded-bl">
-                                                <div className="absolute -bottom-10 -right-10 group-hover:-bottom-5 group-hover:-right-5 transition-all h-8 w-8 bg-accent-2 border-t border-light-8 -rotate-45" />
-                                            </div>
-                                        </motion.div>
-                                        <motion.div
-                                            className="group absolute bottom-0 left-0 w-6 h-6 cursor-sw-resize flex items-center justify-center !transform-none"
-                                            drag
-                                            dragMomentum={false}
-                                            dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
-                                            onDragStart={() => setLeftDragResizing(true)}
-                                            onDrag={(_event, info) =>
-                                                handleDragResize(item, info, { x: true, y: true })
-                                            }
-                                            onDragEnd={() => setLeftDragResizing(false)}
-                                        >
-                                            <div className="hidden group-hover:block relative w-full h-full border-b border-r border-transparent overflow-hidden rounded-bl">
-                                                <div className="absolute -bottom-10 -left-10 group-hover:-bottom-5 group-hover:-left-5 transition-all h-8 w-8 bg-accent-2 border-t border-light-8 rotate-45" />
-                                            </div>
-                                        </motion.div>
-                                    </>
-                                )}
-                            </motion.div>
-                        </>
-                    )}
-                </WindowContainer>
-            )}
+                                </Tooltip>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        ref={contentRef}
+                        className={`size-full flex-grow ${
+                            chrome
+                                ? `overflow-hidden rounded-lg ${hasToolbar ? 'rounded-t-none' : ''} ${
+                                      item.expanded
+                                          ? 'rounded-tr-none rounded-tl-none'
+                                          : item.snapped === 'left'
+                                          ? 'rounded-tl-none rounded-tr-none rounded-br-none'
+                                          : item.snapped === 'right'
+                                          ? 'rounded-tl-none rounded-tr-none rounded-bl-none'
+                                          : ''
+                                  }`
+                                : ''
+                        }`}
+                    >
+                        <Router {...item.props}>{item.element}</Router>
+                    </div>
+                </div>
+            </WindowContainer>
         </WindowProvider>
     )
 }

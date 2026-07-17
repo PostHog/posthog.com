@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import {
     IconThoughtBubble,
+    IconCoffee,
     IconDashboard,
     IconDownload,
     IconNotebook,
@@ -13,27 +14,26 @@ import {
     IconClock,
     IconPeople,
     IconTerminal,
-    IconGraph,
     IconFunnels,
     IconUserPaths,
     IconCorrelationAnalysis,
     IconRetention,
     IconStickiness,
-    IconHogQL,
-    IconDatabaseBolt,
     IconAsterisk,
     IconAI,
     IconSupport,
-    IconCode,
-    IconSpotlight,
-    IconMessage,
     IconTestTube,
-    IconListTreeConnected,
-    IconSparkles,
     IconTarget,
     IconArrowUpRight,
+    IconTrends,
+    IconCursorClick,
+    IconChat,
+    IconAtSign,
+    IconLlmPromptEvaluation,
 } from '@posthog/icons'
 import useProducts from './useProducts'
+import { mcpAnalytics } from './productData/mcp_analytics'
+import { traces } from './productData/traces'
 
 const dedupe = (products) => {
     const deduped = {}
@@ -59,6 +59,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         //     name: 'Product analytics',
         //     slug: 'product-analytics',
         // },
+        traces,
         {
             name: 'User interviews',
             Icon: IconThoughtBubble,
@@ -80,64 +81,71 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             colorSecondary: 'blue',
             category: 'communication',
             slug: 'docs/support',
-            status: 'WIP',
         },
         {
-            name: 'Coding agent (PostHog Code)',
-            Icon: IconCode,
-            description: 'AI coding agent that understands your product analytics.',
+            name: 'PostHog Code',
+            Icon: IconCoffee,
+            description: 'AI code editor that knows how people use your product',
             handle: 'posthog_code',
             color: 'brown',
             colorSecondary: 'brown',
             category: 'automation',
-            // slug: 'posthog-code',
-            status: 'WIP',
-        },
-        {
-            name: 'Product tours',
-            Icon: IconSpotlight,
-            description: 'Guide users through your product with interactive tours and announcements.',
-            handle: 'product_tours',
-            color: 'salmon',
-            colorSecondary: 'salmon',
-            category: 'product_engineering',
-            slug: 'docs/product-tours',
-            status: 'WIP',
-        },
-        {
-            name: 'Traces',
-            Icon: IconListTreeConnected,
-            description: 'Debug entire AI conversations with full trace visibility.',
-            handle: 'llm_traces',
-            color: 'seagreen',
-            colorSecondary: 'seagreen',
-            category: 'ai',
-            slug: 'llm-analytics',
-        },
-        {
-            name: 'Generations',
-            Icon: IconSparkles,
-            description: 'Inspect every LLM call with full input/output visibility.',
-            handle: 'llm_generations',
-            color: 'yellow',
-            colorSecondary: 'yellow',
-            category: 'ai',
-            slug: 'llm-analytics',
+            slug: 'code',
             status: 'beta',
+            screenshots: {
+                home: {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/signals_light_4b3440dc2b.png',
+                    srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/signals_dark_b29e5ed8f9.png',
+                    alt: 'PostHog Code screenshot',
+                    imgClasses: 'w-full rounded shadow-xl border border-primary',
+                },
+            },
         },
         {
-            name: 'Evals',
+            name: 'PostHog Slack app',
+            Icon: IconAtSign,
+            description:
+                'Tag @PostHog in any Slack thread to ship a fix, answer a data question, or edit content – without leaving the conversation.',
+            handle: 'posthog_slack',
+            color: 'sky-blue',
+            colorSecondary: 'sky-blue',
+            category: 'product_os',
+            slug: 'slack',
+            status: 'beta',
+            screenshots: {
+                home: {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/slack_light_15ad69ec86.png',
+                    srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/slack_dark_fc660ed74e.png',
+                    alt: 'PostHog Slack inbox screenshot',
+                    imgClasses: 'w-full rounded shadow-xl border border-primary',
+                },
+                inbox: {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/inbox_light_a328873cdd.png',
+                    srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/inbox_dark_ac23465bf6.png',
+                    alt: 'PostHog Slack inbox screenshot',
+                    imgClasses: 'w-full rounded shadow-xl border border-primary',
+                },
+                insight: {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/slack_insight_light_61f37a2fc9.png',
+                    srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/slack_insight_dark_e0f978e190.png',
+                    alt: 'PostHog Slack insight screenshot',
+                    imgClasses: 'w-full rounded shadow-xl border border-primary',
+                },
+            },
+        },
+        {
+            name: 'AI Evals',
             Icon: IconTarget,
             description: 'Run LLM-as-a-judge evaluations to catch regressions.',
             handle: 'llm_evals',
             color: 'blue',
             colorSecondary: 'blue',
             category: 'ai',
-            slug: 'llm-analytics',
+            slug: 'ai-observability',
             status: 'beta',
         },
         {
-            name: 'No-code A/B testing',
+            name: 'No-code A/B Testing',
             Icon: IconTestTube,
             description: 'Run A/B tests without writing code.',
             handle: 'no_code_ab_testing',
@@ -202,9 +210,9 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             slug: 'platform-packages',
         },
         {
-            name: 'User profiles',
+            name: 'Activity timeline',
             Icon: IconPeople,
-            description: 'Analyze multi-seat accounts and other groups.',
+            description: 'Full event history for individuals and multi-seat accounts',
             handle: 'profiles',
             color: 'blue',
             colorSecondary: 'purple',
@@ -601,7 +609,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         },
         {
             name: 'Graphs & trends',
-            Icon: IconGraph,
+            Icon: IconTrends,
             handle: 'trends',
             color: 'yellow',
             colorSecondary: 'lilac',
@@ -1491,7 +1499,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                     title: 'User opt-in experience',
                     headline: 'Beautiful opt-in UI out of the box',
                     description:
-                        'Pre-built site app or custom implementation for users to discover and control their beta features.',
+                        'Pre-built JS snippet or custom implementation for users to discover and control their beta features.',
                     images: [
                         {
                             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/feature-flags/early-access-feature-demo.png',
@@ -1583,7 +1591,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                     features: [
                         {
                             title: 'One-line setup',
-                            description: 'Enable site app with just opt_in_site_apps: true',
+                            description: 'Enable JS snippet with just opt_in_site_apps: true',
                         },
                         {
                             title: 'Custom API',
@@ -1746,6 +1754,18 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             ],
             worksWith: ['feature_flags', 'surveys', 'product_analytics', 'session_replay'],
         },
+        {
+            name: 'Replay Vision',
+            Icon: IconLlmPromptEvaluation,
+            description: 'AI-powered session replay analysis that watches recordings for you',
+            handle: 'replay_vision',
+            color: 'yellow',
+            colorSecondary: 'yellow',
+            category: 'product_engineering',
+            slug: 'replay-vision',
+            status: 'beta',
+        },
+        mcpAnalytics,
         {
             name: 'API',
             Icon: IconTerminal,
@@ -2090,7 +2110,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         },
         {
             name: 'Heatmaps',
-            Icon: IconClockRewind,
+            Icon: IconCursorClick,
             description: 'See where users click, scroll, and move on your site',
             handle: 'heatmaps',
             color: 'green',
@@ -2630,7 +2650,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             seo: {
                 title: 'PostHog AI - PostHog data stack',
                 description:
-                    "Omnicient AI for your business. Generate SQL queries, model your data, and get insights about your users' behavior all using PostHog AI to work faster than ever before.",
+                    "Omniscient AI for your business. Generate SQL queries, model your data, and get insights about your users' behavior all using PostHog AI to work faster than ever before.",
             },
         },
         {

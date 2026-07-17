@@ -170,7 +170,7 @@ Some features coming in PostHog 1.34.0 (releasing on Thursday) which affect perf
 
 ## What’s next?
 
-Performance work is never complete and PostHog has a lot of work ahead of us to make answering questions about your product fast, no matter your scale.
+Performance work is [never complete](/blog/autoresearch-found-a-3-year-old-clickhouse-bug) and PostHog has a lot of work ahead of us to make answering questions about your product fast, no matter your scale.
 
 Some projects currently in the pipeline are:
 

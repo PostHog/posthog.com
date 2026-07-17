@@ -16,4 +16,4 @@ export TAILWIND_MODE=watch
 # Ensure .cache directory exists (Gatsby expects it before onPreBootstrap runs)
 mkdir -p .cache
 
-gatsby develop -H 0.0.0.0 -p 8001
+gatsby develop -H 0.0.0.0 -p "${PORT:-8001}"

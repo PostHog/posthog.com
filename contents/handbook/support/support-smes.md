@@ -20,20 +20,21 @@ The various PostHog products have been split into the following product groups:
 - Flags (experiments, feature flags, surveys)
 - Data (batch exports, data stack, ingestion, workflows)
 - Replay (replay)
-- Observability + AI & SDK/Implementation (error tracking, PostHog AI, LLM analytics, SDK/Implementation, mobile)
+- Observability + AI & client libraries (error tracking, PostHog AI, AI Observability, SDK/Implementation, mobile)
+- Accounts & Billing (platform features, login/SSO, billing)
 
 **A note on these groupings**: These product groups are based on current ticket volumes. As products grow or new ones launch, we'll split or reorganize them. This structure will evolve with our needs.
 
 ### SME ownership
 
-All technical support engineers share responsibility for:
-- **Analytics products** - this product group is shared as they represent the highest proportion of our tickets.
+All technical support engineers, regardless of SME ownership, work on:
+- **Analytics products** - work for this product group is shared as it represents the highest proportion of our tickets.
 - **Unclassified tickets** - where possible, these tickets should be updated with the correct product group.
 
 Beyond that, we have SMEs who own specific product groups. For each product group, we select one person from EU and one from NA to maintain timezone coverage:
 
 **Flags**
-- EU: <TeamMember name="Ben Lea" photo />, NA: <TeamMember name="Joshua Ordehi" photo />
+- EU: <TeamMember name="Ben Lea" photo />, NA: <TeamMember name="Phillip Ramirez" photo />
 
 **Data**
 - EU: <TeamMember name="Luke Belton" photo />, NA: <TeamMember name="Kyle Swank" photo />
@@ -41,13 +42,19 @@ Beyond that, we have SMEs who own specific product groups. For each product grou
 **Replay**
 - EU: <TeamMember name="Christian Rafferty" photo />, NA: <TeamMember name="Ben Haynes" photo />
 
-**Observability + AI & SDK/Implementation**
+**Observability + AI & client libraries**
 - EU: <TeamMember name="Christiaan Hendriksen" photo />, NA: <TeamMember name="Steven Shults" photo />
+
+**Analytics**
+- EU: <TeamMember name="Xander Jones" photo />
+
+**Accounts & Billing**
+- EU: <TeamMember name="Eleftheria Trivyzaki" photo />
 
 
 ## What SMEs actually do
 
-Being an SME means you're the go-to person for your product group. This breaks down into two key aspects:
+Being an SME means you're the go-to person for your product group. This breaks down into three key aspects:
 
 ### Own the customer perspective
 - Maintain oversight of all tickets in your product group
@@ -61,6 +68,11 @@ Being an SME means you're the go-to person for your product group. This breaks d
 - Keep an eye on their Slack channels to know what's recently shipped and what's being worked on
 - Understand what's on their roadmap
 - Bring customer context to help with their quarterly planning - what bugs are most prominent, what features users want most
+
+### Improve support
+- Look to improve the support experience within your product group
+- Identify ways we can proactively help customers and prevent tickets (e.g. docs, in-app prompts, automatic checks)
+- Look for ways to streamline support operations for your product group (i.e. identify most common investigation steps that could be surfaced onto tickets automatically)
 
 ## How to work as an SME
 
@@ -90,4 +102,18 @@ You and your SME counterpart in the other timezone should work together to:
 - Communicate in #team-support about coverage gaps or when you need backup
 
 As we grow, we'll need less manual coordination. For now, always consider coverage and communicate proactively.
+
+### Attending product team offsites
+
+You work closely with the engineering teams behind your products, so when one of them runs an offsite, it's natural to want to be there. Time in person with your product team can be genuinely valuable. A few things to make it work:
+
+- **Give <TeamMember name="Abigail Richardson" photo /> a shout early.** The moment it's on your radar, flag it, so we can sort coverage together. Every now and then we might have to say no if support's stretched thin - and that's better to hear before you've booked flights.
+
+- **Have a reason, or make it easy.** You likely partner with a few different teams, and you can't be at every one of their offsites — nor should you try to be. Joining makes most sense when there's something specific you'll get out of being there in person, or the offsite is local enough that turning up is cheap and easy.
+
+- **You're still on support.** It's their offsite, not yours — so keep up with your normal tickets while you're there. Soak up the context and dip into their agenda, just don't vanish from the queue.
+
+- **Don't leave customers hanging.** We won't post customer notices for these trips, so from a user's side nothing should feel different. People shouldn't be waiting around just because you're away — stay as responsive as you'd be any other week.
+
+None of this is meant to put you off. Loop us in early, keep customers the priority, and these trips are a great thing to do.
 

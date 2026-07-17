@@ -26,7 +26,7 @@ We use third-party providers to power PostHog AI, so messages and all data acces
 
 Our list of data subprocessors includes:
 
-- OpenAI and Anthropic – responsible for the core of PostHog AI's functionality, have access to user messages and all data types.
+- Anthropic, OpenAI, and Alphabet – responsible for the core of PostHog AI's functionality, have access to user messages and all data types.
 - Azure – responsible for semantic search across PostHog, has access to actions and cohorts (including their filters)
 
 ## How can I disable PostHog AI?
@@ -43,16 +43,14 @@ When disabled, PostHog AI won't be available and no data will be shared with AI 
 
 There currently isn't a toggle to _hide_ AI features altogether. However, in any case, only org admins can approve AI features in the organization – so there's no risk of data being sent to any AI provider without explicit consent.
 
-## Is my chat history retained if I disable and re-enable PostHog AI? 
+## Is my chat history retained if I disable and re-enable PostHog AI?
 
 Yes, PostHog AI retains your chat history.
 
 ## Can I self-host PostHog AI and use my own models?
 
-No, PostHog AI is only available in the cloud-hosted [PostHog app](https://app.posthog.com), which uses third-party LLM providers. PostHog automatically selects the most efficient model for each AI feature. 
+No, PostHog AI is only available in the cloud-hosted [PostHog app](https://app.posthog.com), which uses third-party LLM providers. PostHog automatically selects the most efficient model for each AI feature.
 
 ## Solved community questions
 
-<SolvedQuestions
-    topicLabel="PostHog AI"
-/>
+<SolvedQuestions topicLabel="PostHog AI" />

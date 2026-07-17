@@ -74,10 +74,11 @@ export const logrocket = {
                 free_tier: true,
             },
             features: {
+                ai_summaries: true,
                 canvas_recording: true,
                 chat_with_recordings: false,
                 clickmaps: true,
-                conditional_recording: true,
+                conditional_recording: 'Add-on',
                 crash_reports: true,
                 event_timeline: true,
                 // https://docs.logrocket.com/docs/streaming-data-export
@@ -119,11 +120,6 @@ export const logrocket = {
                     performance_monitoring: true,
                     network_monitor: true,
                     dom_explorer: true,
-                },
-            },
-            ai: {
-                features: {
-                    ai_summaries: true,
                 },
             },
         },

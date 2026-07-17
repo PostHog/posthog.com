@@ -59,7 +59,7 @@ Every small improvement inches your product towards greatness.
 
 ### Encouraging full cycle ownership
 
-[Engineers at PostHog](/blog/what-is-a-product-engineer) own the entire product development cycle – ideation, implementation, and ongoing maintenance. Doing support acts as both input and feedback on this and helps them do it better. For example:
+[Engineers at PostHog](/product-engineer/what-is-a-product-engineer) own the entire product development cycle – ideation, implementation, and ongoing maintenance. Doing support acts as both input and feedback on this and helps them do it better. For example:
 
 - When ideating and validating, engineers can draw on real customer behavior and pain points. Product decisions are backed by support issues they dealt with and requests from large customers.
 
@@ -165,5 +165,6 @@ To replace it, we built a [community forum](/community) on our website. It's the
 - [Serving 250k Developers with One Support Engineer](https://blog.railway.app/p/scaling-railway-automating-support)
 - [Seven steps to remarkable customer service](https://www.joelonsoftware.com/2007/02/19/seven-steps-to-remarkable-customer-service/)
 - [33 tips for giving great technical support at a small software company without being swamped](https://successfulsoftware.net/2012/08/21/tips-for-great-software-technical-support/)
+- [Stop adding AI between you and your customers](/blog/future-of-support-is-human)
 
 <NewsletterForm />

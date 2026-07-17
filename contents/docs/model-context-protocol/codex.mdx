@@ -1,0 +1,46 @@
+---
+title: PostHog MCP for Codex
+sidebarTitle: Codex
+---
+
+import { MCPConfigSnippet } from '../../../src/components/Product/MCP/MCPConfig'
+import SharedContent from "./_snippets/shared.mdx"
+
+The PostHog [MCP server](https://modelcontextprotocol.io/introduction) enables Codex to directly interact with your PostHog data – managing feature flags, querying analytics, investigating errors, and more.
+
+## Server URL
+
+`https://mcp.posthog.com/mcp`
+
+The PostHog authentication server automatically routes you to the correct data region (US or EU) based on the account you log in with.
+
+## Quick install
+
+The [PostHog Wizard](https://github.com/PostHog/wizard) can install the MCP server directly into Codex:
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+## Codex plugin
+
+You can also install PostHog as a [Codex plugin](https://github.com/PostHog/ai-plugin):
+
+```bash
+codex plugin marketplace add PostHog/ai-plugin
+```
+
+After adding the plugin, run `codex` in your terminal and select **PostHog** from the `/plugins` menu to install and enable. 
+
+```bash
+codex
+# Then run /plugins, select PostHog, and install
+```
+
+## Manual MCP setup
+
+Run the following command in your shell. [Codex](https://openai.com/index/introducing-codex/) supports native OAuth, so you'll be prompted to log in to PostHog when you first use the MCP.
+
+<MCPConfigSnippet variant="codex" />
+
+<SharedContent />

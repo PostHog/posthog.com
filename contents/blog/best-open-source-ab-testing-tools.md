@@ -250,7 +250,9 @@ Yes, with caveats. GrowthBook's self-hosted open-source version (MIT license) is
 <details>
   <summary>Can you do A/B testing without code?</summary>
 
-Some tools on this list offer visual editors that let you set up web experiments without writing code. **GrowthBook** includes a visual A/B test editor on its Pro plan. For fully no-code A/B testing, you'll likely want a marketing-focused tool like [VWO](//blog/best-vwo-alternatives) or [Optimizely](/blog/best-optimizely-alternatives) instead, though these are neither free nor open source.
+Some tools on this list offer visual editors that let you set up web experiments without writing code. **GrowthBook** includes a visual A/B test editor on its Pro plan. For fully no-code A/B testing, you'll likely want a marketing-focused tool like [VWO](/blog/best-vwo-alternatives) or [Optimizely](/blog/best-optimizely-alternatives) instead, though these are neither free nor open source.
+
+You can also use a [combination of an AI agent and MCP to help you do this](/blog/ai-is-killing-no-code-experiments).
 
 </details>
 

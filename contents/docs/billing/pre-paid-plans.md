@@ -19,6 +19,7 @@ With a pre-paid plan you'll:
 * We'll ask you to sign an order form which captures the credit amount, term, discount percentage and payment terms (Net 30 by default). We use PandaDoc for e-signatures here.
 * The order form will also specify that you can buy additional credit at the same discount level in the first 6 months, meaning that you aren't penalised for underestimating your usage across the term.
 * If you don't use all of your credits by the end of the contract term, you can roll over half of your remaining credits to the new contract, provided that you sign a renewal contract of equal or higher spend than the original contract.
+* If a significant part of your unused credits is due to circumstances outside your control (for example a PostHog-side incident or a data issue on our side), talk to your account contact at renewal. We can roll over more than half, up to your full remaining balance, or extend the window to use your existing credits. We decide this case by case based on what happened at the time, so flag it early.
 * You can then subscribe to any of our [pay-as-you-go plans](/pricing) and track your credit usage on the [billing page](https://app.posthog.com/organization/billing)
 * We'll also monitor your usage in the first few months and proactively reach out so that you can take advantage of the pre-agreed discount if it looks like you might go over your credit allocation by the end of the contract term.
 
