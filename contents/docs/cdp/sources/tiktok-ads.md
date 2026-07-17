@@ -43,3 +43,19 @@ Connect PostHog to your TikTok Ads account. The TikTok account must have permiss
 ## Supported tables
 
 <SourceTables />
+
+## Troubleshooting
+
+### Finding your account ID manually
+
+If the advertiser account dropdown in step 5 doesn't load, you can find your account ID manually in TikTok Ads Manager:
+
+1. Go to the [TikTok Ads Manager dashboard](https://ads.tiktok.com/i18n/dashboard).
+2. Click your account name in the top right and open the dropdown.
+3. Find your ad account ID, or check the dashboard URL, e.g. `https://ads.tiktok.com/i18n/dashboard?aadvid=ID_HERE`
+
+<ProductScreenshot
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/Screenshot_2025_09_30_at_11_25_16_AM_ab70c4f7c4.png"
+    classes="rounded"
+    alt="TikTok account ID"
+/>
