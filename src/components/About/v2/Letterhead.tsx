@@ -1,25 +1,14 @@
 import React from 'react'
 import Link from 'components/Link'
 import { IconXNotTwitter } from 'components/OSIcons'
-import Logo from 'components/Logo'
 import CloudinaryImage from 'components/CloudinaryImage'
-import { useApp } from '../../../context/App'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 export const Letterhead = ({ title }: { title?: string }) => {
-    const { siteSettings } = useApp()
-
     return (
         <div className="not-prose border-b border-primary py-4 flex flex-col gap-2 @sm:flex-row items-center justify-between">
             <div className="text-center @sm:text-left max-w-md">
-                <Logo
-                    className="inline-block"
-                    variant={siteSettings.theme === 'dark' ? 'mono' : 'gradient'}
-                    color={siteSettings.theme === 'dark' ? 'white' : undefined}
-                />
-                {title && (
-                    <h1 className="text-xl @md:text-2xl font-bold m-0 mt-1 leading-tight text-balance">{title}</h1>
-                )}
+                {title && <h1 className="text-xl @md:text-2xl font-bold m-0 leading-tight text-balance">{title}</h1>}
             </div>
             <div className="@sm:hidden uppercase text-xs tracking-wider text-center text-muted pt-2">
                 From the desk of
