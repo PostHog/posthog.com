@@ -110,7 +110,7 @@ From the [handbook page on product launches](/handbook/marketing/product-announc
 
 > A **release** is when a product or feature becomes available to existing users for the first time. This is the product team's responsibility. The PM or team lead drives it, using their own release checklist. A release can be gradual, targeted, or fully open.
 >
-> A **launch** gets a product in front of existing and new people – potentially millions who've never heard of us. This is led by marketing with the product marketer working from the launch checklist. If there is disagreement within a team about whether something is ready to launch, that team's lead should make the decision - it's either on or it's off ("we want to launch, but not yet" is off)
+> A **launch** gets a product in front of existing and new people – potentially millions who've never heard of us. This is led by marketing with the product marketer working from the launch checklist. If there is disagreement within a team about whether something is ready to launch, that team's lead should make the decision - it's either on or it's off ("we want to launch, but not yet" is off).
 
 ### Releases
 
