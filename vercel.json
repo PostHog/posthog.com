@@ -106,6 +106,28 @@
             "destination": "/blog/:path*.md"
         },
         {
+            "source": "/newsletter/:path*/",
+            "has": [
+                {
+                    "type": "header",
+                    "key": "accept",
+                    "value": "(?:.*text/markdown.*)"
+                }
+            ],
+            "destination": "/newsletter/:path*.md"
+        },
+        {
+            "source": "/newsletter/:path*",
+            "has": [
+                {
+                    "type": "header",
+                    "key": "accept",
+                    "value": "(?:.*text/markdown.*)"
+                }
+            ],
+            "destination": "/newsletter/:path*.md"
+        },
+        {
             "source": "/community/profiles/:path*",
             "destination": "/community/profiles/[id]/index.html"
         },
