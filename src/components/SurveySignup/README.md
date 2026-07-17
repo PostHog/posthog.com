@@ -14,12 +14,22 @@ Because every surface fires `survey sent` against the same survey, all sign-ups 
 feature — site or in-app — land in one place: that survey's responses. A PostHog Workflow
 can then notify everyone when the feature ships (handled separately).
 
+When `flagKey` is set, a successful submit also mirrors the in-app coming-soon waitlist by
+calling `posthog.updateEarlyAccessFeatureEnrollment(flagKey, true, 'concept')`, which fires
+`$feature_enrollment_update` with `$feature_flag`, `$feature_enrollment: true`, and
+`$feature_enrollment_stage: 'concept'`, and sets the `$feature_enrollment/<flagKey>: true`
+person property. Every submit also sets the `email` person property so downstream flows
+(e.g. Customer.io triggered by the enrollment event) can reach the person. Note: the SDK
+call also overrides the flag to `true` in the visitor's local persistence — harmless on
+posthog.com, which doesn't gate anything on these app flags.
+
 ## Props
 
 | Prop               | Type                       | Default                  | Notes |
 | ------------------ | -------------------------- | ------------------------ | ----- |
 | `surveyId`         | `string`                   | —                        | Survey to record against. If omitted, no survey event fires (form still calls `onSuccess`). |
 | `surveyQuestionId` | `string`                   | —                        | When set, also sends ID-based `$survey_response_{id}`; otherwise legacy `$survey_response`. |
+| `flagKey`          | `string`                   | —                        | Concept-stage Early Access Feature flag key. When set, submit also fires `$feature_enrollment_update` (stage `concept`). Only pass for concept-stage features — not alphas/betas. |
 | `productName`      | `string`                   | —                        | Used in success copy. |
 | `title`            | `React.ReactNode`          | —                        | Optional heading above the form (hidden once submitted). |
 | `buttonLabel`      | `string`                   | `'Notify me at launch'`  | |
@@ -31,11 +41,12 @@ can then notify everyone when the feature ships (handled separately).
 | `onSuccess`        | `(email: string) => void`  | —                        | Fires after a successful submit — e.g. to capture an extra analytics event. |
 | `className`        | `string`                   | `''`                     | |
 
-## No login / no person profile
+## No login, but a person profile is created
 
-It only captures the `survey sent` event (the email is the survey response). It does not
-identify the visitor or create a person profile, matching the other survey-based waitlist
-forms on the site.
+There's no login — the email is captured as the survey response. Submitting does, however,
+set person properties (`email`, and `$feature_enrollment/<flagKey>` when `flagKey` is set),
+which creates a person profile for otherwise-anonymous visitors. That's intentional: it's
+what lets enrollment-triggered email flows reach the person.
 
 ## Example (roadmap Coming Soon card)
 
@@ -43,6 +54,7 @@ forms on the site.
 <SurveySignup
     surveyId={feature.payload?.survey_id}
     surveyQuestionId={feature.payload?.survey_question_id}
+    flagKey={feature.stage === 'concept' ? feature.flagKey : undefined}
     productName={feature.name}
 />
 ```

@@ -189,6 +189,9 @@ const ComingSoonCard = ({
                 <SurveySignup
                     surveyId={surveyId}
                     surveyQuestionId={surveyQuestionId}
+                    // Only concept-stage joins fire the $feature_enrollment_update event —
+                    // alpha items also live in "coming soon" but aren't waitlist enrollments.
+                    flagKey={feature.stage === 'concept' ? feature.flagKey : undefined}
                     productName={feature.name}
                     autoFocus
                     confetti={false}

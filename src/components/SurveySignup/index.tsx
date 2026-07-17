@@ -12,6 +12,13 @@ interface SurveySignupProps {
     surveyId?: string
     /** Question id for ID-based responses (`$survey_response_{id}`). Falls back to legacy `$survey_response`. */
     surveyQuestionId?: string
+    /**
+     * Feature flag key of the concept-stage Early Access Feature this waitlist belongs to.
+     * When set, a successful submit also fires `$feature_enrollment_update` with
+     * `$feature_enrollment_stage: 'concept'` (mirroring the in-app coming-soon waitlist) and
+     * sets the `$feature_enrollment/<flagKey>` + `email` person properties.
+     */
+    flagKey?: string
     /** Used in success/placeholder copy. */
     productName?: string
     /** Optional heading rendered above the form (hidden in the success state). */
@@ -33,11 +40,13 @@ const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/
  * A no-login email form that records a sign-up as a PostHog Survey response
  * (`survey sent`). This is the single waitlist mechanism on the site — used by the
  * /roadmap Coming Soon cards, the /code waitlist, and the managed-warehouse waitlist —
- * so every sign-up lands in one place: the survey's responses.
+ * so every sign-up lands in one place: the survey's responses. When `flagKey` is set it
+ * also fires `$feature_enrollment_update` (stage `concept`), matching the in-app waitlist.
  */
 export function SurveySignup({
     surveyId,
     surveyQuestionId,
+    flagKey,
     productName,
     title,
     buttonLabel = 'Notify me at launch',
@@ -86,6 +95,15 @@ export function SurveySignup({
                 // Ignore storage access errors
             }
         }
+        if (flagKey) {
+            // Mirror the in-app coming-soon waitlist: fire $feature_enrollment_update with
+            // $feature_enrollment_stage 'concept' and set $feature_enrollment/<flag> on the person.
+            // Optional call — the snippet stub may not expose this method before array.js loads.
+            posthog?.updateEarlyAccessFeatureEnrollment?.(flagKey, true, 'concept')
+        }
+        // Set email on the person so downstream flows triggered by the enrollment event can
+        // reach them. This creates a person profile for otherwise-anonymous visitors.
+        posthog?.setPersonProperties?.({ email })
         if (confetti) {
             setConfetti(true)
         }

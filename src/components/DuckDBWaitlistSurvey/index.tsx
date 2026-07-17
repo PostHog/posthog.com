@@ -8,6 +8,7 @@ import SurveySignup from 'components/SurveySignup'
 // collect into the same survey.
 const SURVEY_ID = '019b05b2-973f-0000-8f68-f8326c077146'
 const SURVEY_QUESTION_ID = '3f087a80-6c74-49b4-a615-588f50fa34d3'
+const FLAG_KEY = 'managed-duckdb-data-warehouse'
 
 export default function DuckDBWaitlistSurvey(): JSX.Element {
     const [showForm, setShowForm] = useState(false)
@@ -34,6 +35,7 @@ export default function DuckDBWaitlistSurvey(): JSX.Element {
             <SurveySignup
                 surveyId={SURVEY_ID}
                 surveyQuestionId={SURVEY_QUESTION_ID}
+                flagKey={FLAG_KEY}
                 productName="Managed warehouse"
                 buttonLabel="Submit"
                 autoFocus
