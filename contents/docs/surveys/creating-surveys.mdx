@@ -351,14 +351,7 @@ A few things to keep in mind:
 - **Dismissing counts as answering.** A user who dismisses the survey won't see it again until the next iteration, same as a user who submitted a response.
 - **Iteration boundaries are approximate.** PostHog processes iteration changes a few times per day, so a new iteration can begin a few hours after its scheduled start.
 - **Users must still match your display conditions** each time the survey becomes eligible to show again.
-- **The survey stops automatically when the last iteration ends.** A recurring survey is not open-ended. It runs for exactly the number of repetitions multiplied by the cycle length, counted from its launch date, and then PostHog sets an end date on it and stops showing it. In the example above, the survey runs for 90 days (3 iterations of 30 days) and then closes on its own.
-
-To keep collecting responses after the schedule has completed, you have two options:
-
-- **Add more repetitions.** Increasing "Show up to N times total" extends the schedule with more iterations. Because the schedule is anchored to the original launch date rather than to today, add enough repetitions for the final iteration's window to end in the future. Otherwise the newly added iterations are already in the past and the survey stays closed.
-- **Switch to a non-recurring survey.** Turn off "Repeat on a schedule" (or use [Every time the display conditions are met](#every-time-the-display-conditions-are-met)) to run the survey continuously with no automatic end date.
-
-> **Note:** Manually removing the end date on a survey whose schedule has already finished won't restart it. PostHog re-checks recurring schedules a few times a day, finds the schedule has elapsed, and sets the end date again within a few hours. Extend the schedule or make the survey non-recurring instead.
+- **The survey stops automatically when the last iteration ends.** A recurring survey isn't open-ended: it runs for the number of repetitions times the cycle length, counted from the launch date, then PostHog sets an end date and stops showing it. In the example above, it runs for 90 days (3 iterations of 30 days) and closes on its own. To keep collecting responses, either increase "Show up to N times total" (adding enough repetitions that the final iteration ends in the future, since the schedule stays anchored to the original launch date) or turn off "Repeat on a schedule" to run it continuously. Clearing the end date by hand won't restart a completed schedule — PostHog re-applies it within a few hours.
 
 If you want per-user spacing instead, like "don't show this user a survey more than once every 30 days, no matter the calendar," use [Every time the display conditions are met](#every-time-the-display-conditions-are-met) combined with the **Wait period** display condition. Note that the wait period applies across all your surveys: it hides the survey from users who have seen _any_ survey within that period, not just this one.
 
