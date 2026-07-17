@@ -1,5 +1,5 @@
 export const langsmith = {
-    name: 'Langsmith',
+    name: 'LangSmith',
     products: {
         ai_observability: {
             available: true,
@@ -27,6 +27,16 @@ export const langsmith = {
                 product_analytics: false,
                 ai_gateway_proxy: false,
             },
+            evaluations: {
+                features: {
+                    llm_as_a_judge: true,
+                    code_evaluators: true,
+                    annotation_queues: true,
+                    datasets: true,
+                    experiment_runs: true,
+                    ab_experiments_on_product_metrics: false,
+                },
+            },
         },
         session_replay: {
             available: false,
@@ -34,8 +44,14 @@ export const langsmith = {
         product_analytics: {
             available: false,
         },
+        feature_flags: {
+            available: false,
+        },
+        experiments: {
+            available: false,
+        },
     },
-        platform: {
+    platform: {
         deployment: {
             eu_hosting: true,
             open_source: false,

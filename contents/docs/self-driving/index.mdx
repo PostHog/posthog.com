@@ -10,6 +10,7 @@ contentMaxWidthClass: max-w-5xl
 import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
 import OSButton from 'components/OSButton'
 import WizardCommand from 'components/WizardCommand'
+import SelfDrivingLoop from 'components/SelfDrivingLoop'
 import { IconMessage, IconLaptop, IconMagic, IconCode, IconTerminal } from '@posthog/icons'
 
 PostHog makes your product self-driving. It watches how people actually use your product, finds what's worth fixing, opens a pull request, and measures whether the change worked. You review and merge. Turning it on takes one command:
@@ -30,29 +31,7 @@ It runs as a loop. Scouts and signal sources emit signals, signals group into re
 
 When a report is actionable, PostHog opens a pull request for you to review and merge; when it needs your input, it surfaces the report in your inbox instead. PostHog then checks whether the change worked and feeds the result back into the next pass.
 
-```mermaid
-%%{init: {'themeVariables': {'fontSize': '18px'}}}%%
-flowchart LR
-    A["Signal sources"] --> C["Signals"]
-    B["Scouts"] --> C
-    C -->|grouped| D["Reports"]
-    D --> E["PostHog opens<br/>a pull request"]
-    E --> F["You review<br/>and merge"]
-    F --> G["PostHog measures<br/>the result"]
-    G -. "new signals" .-> C
-
-    classDef source fill:#1490E8,color:#ffffff,stroke-width:0px
-    classDef data fill:#FFA81C,color:#3d2b00,stroke-width:0px
-    classDef agent fill:#A737D2,color:#ffffff,stroke-width:0px
-    classDef human fill:#47C861,color:#0c3d20,stroke-width:0px
-    classDef outcome fill:#FF474D,color:#ffffff,stroke-width:0px
-
-    class A,B source
-    class C,D data
-    class E agent
-    class F human
-    class G outcome
-```
+<SelfDrivingLoop />
 
 Self-driving works because the signals that drive the loop live in your product data, and that's exactly what PostHog has.
 

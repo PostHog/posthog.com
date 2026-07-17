@@ -1,4 +1,3 @@
-import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
@@ -116,69 +115,6 @@ export const Content = ({ quickLinks = false }) => {
                     width="[calc(100%_+_3px)]"
                 >
                     Explore guides
-                </CallToAction>
-            </section>
-
-            <section>
-                <h3 className="mb-1 text-xl">Dashboard templates</h3>
-                <p className="text-[15px]">Choose from a variety of pre-built templates for your stage of growth.</p>
-
-                <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid md:grid-cols-2 xl:grid-cols-3">
-                    <ResourceItem
-                        title="Product analytics"
-                        description="Active users, feature flags, growth accounting, traffic sources"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                className="h-full"
-                                placeholder="none"
-                                objectFit="contain"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages/docs/images/template-product-analytics.png"
-                            />
-                        }
-                        url="/templates/product-analytics"
-                    />
-                    <ResourceItem
-                        title="Website traffic"
-                        description="User, sessions, content performance"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                className="h-full"
-                                placeholder="none"
-                                objectFit="contain"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages/docs/images/template-website-traffic.png"
-                            />
-                        }
-                        url="/templates/website-dashboard"
-                    />
-                    <ResourceItem
-                        title="Realtime analytics"
-                        description="Live users, sessions, traffic, sources"
-                        Image={
-                            <CloudinaryImage
-                                alt=""
-                                className="h-full"
-                                placeholder="none"
-                                objectFit="contain"
-                                quality={100}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages/docs/images/template-realtime-analytics.png"
-                            />
-                        }
-                        url="/templates/real-time-dashboard"
-                    />
-                </ul>
-                <CallToAction
-                    to="/templates"
-                    type="custom"
-                    size="md"
-                    className="group !bg-accent dark:!bg-accent-dark !border-light dark:!border-dark"
-                    childClassName="text-secondary group-hover:text-primary !bg-white dark:!bg-dark !border-light dark:!border-dark"
-                    width="[calc(100%_+_3px)]"
-                >
-                    Browse templates
                 </CallToAction>
             </section>
         </>

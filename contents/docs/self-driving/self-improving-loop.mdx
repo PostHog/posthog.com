@@ -6,6 +6,7 @@ showTitle: true
 ---
 
 import { CallToAction } from 'components/CallToAction'
+import SelfDrivingLoop from 'components/SelfDrivingLoop'
 
 <CalloutBox icon="IconFlask" title="Open beta" type="action">
 
@@ -15,29 +16,7 @@ Self-driving is in open beta. It's improving quickly – expect rough edges, and
 
 The self-improving loop is how PostHog turns product data into shipped changes, then checks whether they worked. The [overview](/docs/self-driving) has the loop at a glance. This page is how it works under the hood, stage by stage. Prefer it concrete? [Anatomy of a pull request](/docs/self-driving/anatomy-of-a-pr) follows one bug through every stage below.
 
-```mermaid
-%%{init: {'themeVariables': {'fontSize': '18px'}}}%%
-flowchart LR
-    A["Signal sources"] --> C["Signals"]
-    B["Scouts"] --> C
-    C -->|grouped| D["Reports"]
-    D --> E["PostHog opens<br/>a pull request"]
-    E --> F["You review<br/>and merge"]
-    F --> G["PostHog measures<br/>the result"]
-    G -. "new signals" .-> C
-
-    classDef source fill:#1490E8,color:#ffffff,stroke-width:0px
-    classDef data fill:#FFA81C,color:#3d2b00,stroke-width:0px
-    classDef agent fill:#A737D2,color:#ffffff,stroke-width:0px
-    classDef human fill:#47C861,color:#0c3d20,stroke-width:0px
-    classDef outcome fill:#FF474D,color:#ffffff,stroke-width:0px
-
-    class A,B source
-    class C,D data
-    class E agent
-    class F human
-    class G outcome
-```
+<SelfDrivingLoop />
 
 ## Collect signals
 
