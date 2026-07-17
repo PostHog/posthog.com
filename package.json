@@ -16,8 +16,8 @@
     ],
     "private": true,
     "scripts": {
-        "build-move": "gatsby build && bash ./src/scripts/move-index.sh",
-        "build": "gatsby build",
+        "build-move": "node scripts/prefetch-api-spec.mjs & gatsby build && bash ./src/scripts/move-index.sh",
+        "build": "node scripts/prefetch-api-spec.mjs & gatsby build",
         "build:minimal": "GATSBY_MINIMAL=true gatsby build",
         "start": "./bin/start",
         "serve": "gatsby serve",

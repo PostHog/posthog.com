@@ -1,0 +1,25 @@
+diff --git a/node_modules/gatsby-plugin-mdx/utils/gen-mdx.js b/node_modules/gatsby-plugin-mdx/utils/gen-mdx.js
+index e55874597..a7029fce3 100644
+--- a/node_modules/gatsby-plugin-mdx/utils/gen-mdx.js
++++ b/node_modules/gatsby-plugin-mdx/utils/gen-mdx.js
+@@ -294,6 +294,20 @@ async function findImportsExports({
+ }) {
+   const { data: frontmatter, content } = grayMatter(rawInput, options)
+ 
++  // Fast path: MDX v1 imports/exports are root-level statements, so content with no
++  // line starting with `import`/`export` (markdown allows up to 3 leading spaces)
++  // cannot contain any. Skip the remark parse and return exactly what the full parse
++  // produces for such files. Lines that merely look like statements (e.g. inside
++  // fenced code) only cause a harmless fall-through to the full parse below.
++  if (!/^ {0,3}(import|export)\b/m.test(content)) {
++    return {
++      frontmatter,
++      scopeImports: [`import * as React from 'react'`],
++      scopeExports: [],
++      scopeIdentifiers: [`React`],
++    }
++  }
++
+   const gatsbyRemarkPluginsAsRemarkPlugins =
+     await getSourcePluginsAsRemarkPlugins({
+       gatsbyRemarkPlugins: options.gatsbyRemarkPlugins,
