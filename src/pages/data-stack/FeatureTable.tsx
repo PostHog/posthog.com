@@ -15,7 +15,7 @@ export default function FeatureTable({ features }: FeatureTableProps): JSX.Eleme
     const columns = [
         { name: 'Feature', width: 'minmax(150px, 1fr)', align: 'left' as const },
         { name: 'Description', width: 'minmax(300px, 2fr)', align: 'left' as const },
-        { name: '', width: '60px', align: 'center' as const },
+        { name: 'Status', width: 'minmax(110px, auto)', align: 'center' as const },
     ]
 
     const featureRows = features?.map((feature) => ({
@@ -25,7 +25,7 @@ export default function FeatureTable({ features }: FeatureTableProps): JSX.Eleme
             {
                 content:
                     feature.status === 'coming_soon' ? (
-                        <span className="rounded-sm bg-highlight py-0.5 px-1 text-xs font-bold text-red dark:text-yellow">
+                        <span className="inline-block whitespace-nowrap rounded-sm bg-highlight py-0.5 px-1 text-xs font-bold text-red dark:text-yellow">
                             Coming soon
                         </span>
                     ) : (
