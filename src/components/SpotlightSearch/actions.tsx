@@ -1,5 +1,6 @@
 import React from 'react'
 import {
+    IconBolt,
     IconClockRewind,
     IconConfetti,
     IconCursor,
@@ -140,6 +141,23 @@ export const useSpotlightActions = (): SpotlightAction[] => {
                     ...siteSettings,
                     skinMode: siteSettings.skinMode === 'classic' ? 'modern' : 'classic',
                 }),
+        },
+        {
+            id: 'heater-mode',
+            label: siteSettings.heaterMode ? 'Turn off heater mode' : 'Turn on heater mode',
+            icon: <IconBolt />,
+            keywords: ['heater', 'heat', 'warm', 'toasty'],
+            keepOpen: true,
+            perform: () => {
+                const next = !siteSettings.heaterMode
+                updateSiteSettings({ ...siteSettings, heaterMode: next })
+                if (next) {
+                    toast(
+                        <IconBolt className="size-5 inline-block mr-1" />,
+                        'Heater mode on — windows now warm your laptop'
+                    )
+                }
+            },
         },
         {
             id: 'performance-boost',

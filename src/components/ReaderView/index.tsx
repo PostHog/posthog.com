@@ -36,6 +36,8 @@ import { InlineSearch } from 'components/Search/InlineSearch'
 import { algoliaIndexName, algoliaSearchClient } from 'lib/algoliaSearch'
 import { useLocation } from '@reach/router'
 import { getProseClasses, isMarkdownContentPath } from '../../constants'
+import { getPanelSurfaceBg } from '../../constants/frostedSurfaces'
+import { useAppSettings } from '../../context/App'
 import { useWindow } from '../../context/Window'
 import { MenuItem, useApp } from '../../context/App'
 import { useActiveFeatureFlags, filterMenuByFlags } from '../../hooks/useActiveFeatureFlags'
@@ -48,13 +50,6 @@ import AboutPostHog from 'components/AboutPostHog'
 import { Blockquote } from 'components/BlockQuote'
 
 dayjs.extend(relativeTime)
-
-// Frosted chrome applied to the sidebar / ToC when background/tocBackground is `true`.
-// The border is intentionally NOT included here — it always stays on the asides.
-const FROSTED_BG = 'bg-primary/75 dark:bg-primary backdrop-blur'
-
-const resolveBackground = (value?: boolean | string): string =>
-    value === true ? FROSTED_BG : typeof value === 'string' ? value : ''
 
 // Wrapper component that conditionally renders CopyMarkdownActionsDropdown based on whether the markdown URL exists
 const ConditionalMarkdownDropdown = ({ pageUrl }: { pageUrl: string | undefined }) => {
@@ -146,18 +141,6 @@ interface ReaderViewProps {
      */
     productSelect?: React.ReactNode
     hideMenu?: boolean
-    /**
-     * Background for the LeftSidebar panel. Defaults to transparent (no bg) so the
-     * desktop wallpaper shows through. Pass `true` for the frosted default
-     * (`bg-primary/75 dark:bg-primary backdrop-blur`), or a string of custom classes
-     * (e.g. `"bg-accent/50"`). The border always stays regardless.
-     */
-    background?: boolean | string
-    /**
-     * Background for the FloatingTOC column. Same shape as `background`, controlled
-     * separately. Defaults to transparent.
-     */
-    tocBackground?: boolean | string
     className?: string
 }
 
@@ -469,8 +452,6 @@ export default function ReaderView({
     menuTabs,
     productSelect,
     hideMenu = false,
-    background = false,
-    tocBackground = false,
     className = '',
 }: ReaderViewProps) {
     return (
@@ -504,8 +485,6 @@ export default function ReaderView({
                 menuTabs={menuTabs}
                 productSelect={productSelect}
                 hideMenu={hideMenu}
-                background={background}
-                tocBackground={tocBackground}
                 className={className}
             >
                 {children}
@@ -839,7 +818,6 @@ interface LeftSidebarProps {
     contentRef?: React.RefObject<HTMLElement>
     currentPath?: string
     isMdx?: boolean
-    background?: boolean | string
     /** On narrow windows the sidebar renders as an off-canvas drawer instead
      *  of an inline column, driven by the props below. */
     mobile?: boolean
@@ -994,11 +972,12 @@ const LeftSidebar = ({
     contentRef,
     currentPath,
     isMdx = false,
-    background = false,
     mobile = false,
     mobileOpen = false,
     onMobileClose,
 }: LeftSidebarProps) => {
+    const { siteSettings } = useAppSettings()
+    const panelBg = getPanelSurfaceBg(siteSettings.heaterMode)
     const { searchQuery } = useSearch()
     const { hasMounted } = useReaderView()
     const hasActiveSearch = !!searchQuery && searchQuery.length >= 2
@@ -1137,20 +1116,14 @@ const LeftSidebar = ({
                             : SIDEBAR_CSS_TRANSITION
                         : 'none',
                 }}
-                className={`absolute inset-y-0 left-0 flex flex-col min-h-0 overflow-hidden border-r border-primary will-change-[transform,backdrop-filter] transform-gpu ${
+                className={`absolute inset-y-0 left-0 flex flex-col min-h-0 overflow-hidden border-r border-primary transform-gpu ${
                     // On mobile the panel is always an overlay drawer above the
                     // content; it just slides off-screen when closed.
                     mobile
-                        ? `z-50 shadow-2xl ${resolveBackground(background) || FROSTED_BG} ${
-                              mobileOpen ? '' : 'pointer-events-none'
-                          }`
-                        : // When collapsed and hover-expanded, the panel floats as an
-                        // overlay above the content — it always needs an opaque
-                        // background so the menu is readable, even when the caller
-                        // didn't pass one. Otherwise fall back to the caller's value.
-                        !isPinned && expanded
-                        ? `z-50 shadow-2xl ${resolveBackground(background) || FROSTED_BG}`
-                        : `z-30 ${resolveBackground(background)}`
+                        ? `z-50 shadow-2xl ${panelBg} ${mobileOpen ? '' : 'pointer-events-none'}`
+                        : !isPinned && expanded
+                        ? `z-50 shadow-2xl ${panelBg}`
+                        : 'z-30'
                 }`}
             >
                 {/* Middle content — always rendered so the bottom row stays
@@ -1333,7 +1306,6 @@ interface FloatingTOCProps {
     toggleToc: () => void
     tableOfContents: any
     contentRef: React.RefObject<HTMLDivElement>
-    background?: boolean | string
 }
 
 /**
@@ -1343,20 +1315,14 @@ interface FloatingTOCProps {
  * scroll viewport so the TOC never extends past the visible area; an inner
  * ScrollArea handles overflow within that height.
  */
-const FloatingTOC = ({
-    isTocVisible,
-    toggleToc,
-    tableOfContents,
-    contentRef,
-    background = false,
-}: FloatingTOCProps) => {
+const FloatingTOC = ({ isTocVisible, toggleToc, tableOfContents, contentRef }: FloatingTOCProps) => {
     const { hasMounted } = useReaderView()
     return (
         <aside
             data-scheme="secondary"
             className={`flex-shrink-0 hidden @4xl/app-reader:flex flex-col border-l border-primary ${
                 hasMounted ? 'transition-[width] duration-300' : ''
-            } overflow-hidden ${resolveBackground(background)} ${isTocVisible ? 'w-[250px]' : 'w-12'} `}
+            } overflow-hidden ${isTocVisible ? 'w-[250px]' : 'w-12'} `}
         >
             <div className="flex-1 min-h-0 flex flex-col w-[250px]">
                 {isTocVisible && (
@@ -1409,11 +1375,11 @@ function ReaderViewContent({
     menuTabs,
     productSelect,
     hideMenu = false,
-    background = false,
-    tocBackground = false,
     className = '',
 }: ReaderViewProps) {
     const { compact } = useApp()
+    const { siteSettings } = useAppSettings()
+    const panelBg = getPanelSurfaceBg(siteSettings.heaterMode)
     const { appWindow, activeInternalMenu } = useWindow()
     const { hash } = useLocation()
     const contentRef = useRef<HTMLDivElement>(null)
@@ -1528,7 +1494,6 @@ function ReaderViewContent({
                         contentRef={onSearch ? undefined : contentRef}
                         currentPath={appWindow?.path}
                         isMdx={body?.type === 'mdx'}
-                        background={background}
                     >
                         {leftSidebar || (!hideMenu && <Menu parent={parent as MenuItem} />)}
                     </LeftSidebar>
@@ -1564,7 +1529,7 @@ function ReaderViewContent({
                             type="button"
                             aria-label="Open navigation"
                             onClick={() => setMobileNavOpen(true)}
-                            className={`absolute bottom-4 right-4 z-30 flex size-11 items-center justify-center rounded-full border border-primary text-primary shadow-lg transition-opacity duration-200 hover:bg-accent ${FROSTED_BG} ${
+                            className={`absolute bottom-4 right-4 z-30 flex size-11 items-center justify-center rounded-full border border-primary text-primary shadow-lg transition-opacity duration-200 hover:bg-accent ${panelBg} ${
                                 mobileNavOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'
                             }`}
                         >
@@ -1782,7 +1747,6 @@ function ReaderViewContent({
                                 toggleToc={toggleToc}
                                 tableOfContents={tableOfContents}
                                 contentRef={contentRef}
-                                background={tocBackground}
                             />
                         )}
                     </div>
