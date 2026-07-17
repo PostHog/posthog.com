@@ -122,9 +122,11 @@ xmin does not capture deletes. If you need delete tracking, use CDC instead. See
 
 ## Filtering rows
 
-SQL sources (Postgres, MySQL, MSSQL, Snowflake, BigQuery, and Redshift) support row filters. Row filters let you control which rows sync from a source table by specifying conditions like `created_at > '2024-01-01'`. This reduces sync time and storage costs by syncing only the data you need.
+SQL sources (Postgres, MySQL, MSSQL, Snowflake, BigQuery, and Redshift) and ClickHouse support row filters. Row filters let you control which rows sync from a source table by specifying conditions like `created_at > '2024-01-01'`. This reduces sync time and storage costs by syncing only the data you need.
 
-Row filters are not available for tables using [CDC sync](/docs/cdp/sources/postgres#how-posthog-cdc-works).
+Filters are applied as a `WHERE` clause on the source query, so only matching rows are fetched and synced. Row filters are not available for tables using [CDC sync](/docs/cdp/sources/postgres#how-posthog-cdc-works).
+
+> **Note:** Row filters are only available for SQL sources and ClickHouse. API sources (Stripe, HubSpot, Zendesk, Paddle, etc.) do not support row filtering.
 
 ### Configuring row filters
 
