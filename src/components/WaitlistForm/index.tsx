@@ -3,6 +3,7 @@ import Input from 'components/OSForm/input'
 import OSButton from 'components/OSButton'
 import usePostHog from '../../hooks/usePostHog'
 import useProduct from '../../hooks/useProduct'
+import usePrimeEarlyAccessFeatures from '../../hooks/usePrimeEarlyAccessFeatures'
 import { useApp } from '../../context/App'
 import Link from 'components/Link'
 import { IconDiscord } from 'components/OSIcons/Icons'
@@ -45,6 +46,10 @@ export function WaitlistForm({
     // Only default the PostHog Code flag when we're actually collecting for PostHog Code —
     // callers with their own productHandle (e.g. Replay Vision) must pass flagKey explicitly.
     const effectiveFlagKey = flagKey ?? (productHandle === 'posthog_code' ? POSTHOG_CODE_FLAG_KEY : undefined)
+
+    // Load the EAF list before submit so the enrollment event carries $early_access_feature_name —
+    // the Customer.io waitlist flow's trigger requires it.
+    usePrimeEarlyAccessFeatures(effectiveFlagKey)
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
