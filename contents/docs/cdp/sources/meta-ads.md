@@ -24,6 +24,8 @@ Additional reports will be added based on user feedback we receive via our [in-a
 
 - A Meta Ads account with permission to access data from accounts you want to sync.
 
+> **Tip:** If you need to find your account ID manually, go to [Ads Manager](https://adsmanager.facebook.com/) > Menu > Campaigns. You'll see a dropdown next to the title where you can find the ID, or check the URL: `https://adsmanager.facebook.com/adsmanager/manage/campaigns?act=YOUR_ID`
+
 ## Configuring PostHog
 
 Connect PostHog to your Meta Ads account using a Meta account. The Meta account must have permission to access data.
@@ -32,7 +34,7 @@ Connect PostHog to your Meta Ads account using a Meta account. The Meta account 
 2. Open the **+ New** drop-down menu in the top-right and select **Source**.
 3. Find Meta Ads in the sources list and click **Link**.
 4. Select an existing Meta Ads integration, or create a new one by clicking **Connect**.
-5. Select the **Account ID** of the Meta Ads account you want to sync from the dropdown. Each account displays its status (Active, Disabled, or Closed).
+5. Select the **Account ID** of the Meta Ads account you want to sync from the dropdown. Each account displays its status (Active, Disabled, or Closed). If your account doesn't appear, you can enter the account ID manually.
 6. (Optional) Add a prefix for the table name.
 
 ## Configuration
