@@ -58,6 +58,11 @@ For one scanner (across sessions):
 
 ### Impact and cohorts
 
+- `vision-scanners-impact-retrieve` – get affected sessions and users for a scanner over a trailing window. Monitors count verdict-yes observations. Classifiers require a `tag` parameter. Scorers require `min_score` and/or `max_score`.
+- `vision-scanners-affected-cohort-create` – save the affected users as a static cohort. Same qualifiers as the impact endpoint. The cohort is a dated snapshot and doesn't live-update.
+
+### Impact and cohorts
+
 - `vision-scanners-impact-retrieve` – get how many sessions and users a scanner's findings affected over a trailing window.
 - `vision-scanners-affected-cohort-create` – save those affected users as a static cohort, usable in funnels, surveys, experiments, and more.
 
@@ -65,6 +70,8 @@ For one scanner (across sessions):
 
 Try these with your MCP-enabled agent:
 
+- `How many users were affected by my "Dead-end pages" monitor in the last 30 days?`
+- `Create a cohort from the users my "User intent" classifier tagged as support_seeking.`
 - `Create a Replay Vision scanner that flags sessions where users get stuck on the /checkout page, narrow to enterprise customers, and start at 25% sampling. Estimate the cost first.`
 - `Scan session abc123 with the "Dead-end pages" scanner and tell me what it found, including the reasoning.`
 - `List the last 20 observations from my "Frustration score" scanner and summarize what's driving high scores.`
