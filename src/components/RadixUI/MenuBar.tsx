@@ -194,11 +194,11 @@ const MenuItem: React.FC<{
                     <RadixMenubar.Portal container={portalContainer || undefined}>
                         <RadixMenubar.SubContent
                             collisionBoundary={appContainer}
-                            className={ContentClasses}
+                            className={`${ContentClasses} max-h-[var(--radix-menubar-content-available-height)] overflow-hidden flex flex-col`}
                             alignOffset={-5}
                             data-scheme="primary"
                         >
-                            <ScrollArea className="max-h-screen !overflow-y-auto">
+                            <ScrollArea className="min-h-0 !overflow-y-auto overscroll-contain">
                                 {item.items.map((subItem, subIndex) => (
                                     <MenuItem
                                         key={`${subItem.link}-${subIndex}`}
