@@ -359,7 +359,7 @@ function TaskBarMenu() {
                                     }
                                     className=""
                                 >
-                                    {posthogInstance ? 'Dashboard' : 'Get started – free'}
+                                    {posthogInstance ? 'Open PostHog' : 'Get started – free'}
                                 </OSButton>
                             </div>
                             <Tooltip

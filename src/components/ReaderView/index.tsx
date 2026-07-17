@@ -158,6 +158,7 @@ interface ReaderViewProps {
      * separately. Defaults to transparent.
      */
     tocBackground?: boolean | string
+    className?: string
 }
 
 interface BackgroundImageOption {
@@ -470,6 +471,7 @@ export default function ReaderView({
     hideMenu = false,
     background = false,
     tocBackground = false,
+    className = '',
 }: ReaderViewProps) {
     return (
         <ReaderViewProvider defaultNavVisible={defaultNavVisible}>
@@ -504,6 +506,7 @@ export default function ReaderView({
                 hideMenu={hideMenu}
                 background={background}
                 tocBackground={tocBackground}
+                className={className}
             >
                 {children}
             </ReaderViewContent>
@@ -1417,6 +1420,7 @@ function ReaderViewContent({
     hideMenu = false,
     background = false,
     tocBackground = false,
+    className = '',
 }: ReaderViewProps) {
     const { compact } = useApp()
     const { appWindow, activeInternalMenu } = useWindow()
@@ -1509,7 +1513,7 @@ function ReaderViewContent({
             <div
                 data-scheme="secondary"
                 data-app="ReaderView"
-                className="@container/app-reader relative w-full h-full flex min-h-0 max-w-full"
+                className={`@container/app-reader relative w-full h-full flex min-h-0 max-w-full ${className}`}
             >
                 {renderLeftSidebar && (
                     <LeftSidebar
@@ -1697,7 +1701,7 @@ function ReaderViewContent({
                                             className={getVideoClasses(fullWidthContent)}
                                         />
                                     )}
-                                    <div className="reader-content-container overflow-x-hidden">
+                                    <div className="reader-content-container">
                                         {body?.type === 'mdx' ? (
                                             <div
                                                 className={`@container [&>*:not(.OSTable):not(.Table)]:mx-auto [&>*:not(.OSTable):not(.Table)]:transition-all [&>span:not(.OSTable):not(.Table)]:block ${
@@ -1751,7 +1755,7 @@ function ReaderViewContent({
                                                 fullWidthContent || body?.type !== 'mdx'
                                                     ? 'max-w-full'
                                                     : contentMaxWidthClass || 'max-w-2xl'
-                                            }`}
+                                            } overflow-x-hidden`}
                                         >
                                             <h3 id="squeak-questions" className="mb-4">
                                                 Community questions

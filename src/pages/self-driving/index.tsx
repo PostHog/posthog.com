@@ -935,7 +935,12 @@ export default function SelfDrivingPage({
                 description="PostHog watches your product, finds what's worth fixing, writes the code, and opens the pull request. You review and merge. A product that develops itself – now in open beta."
                 image="/images/og/default.png"
             />
-            <ReaderView leftSidebar={<LeftSidebarContent />} title="self-driving.md" hideTitle>
+            <ReaderView
+                leftSidebar={<LeftSidebarContent />}
+                title="self-driving.md"
+                hideTitle
+                className="overflow-x-hidden"
+            >
                 <div className="relative z-10">
                     <div className="not-prose mb-8 pt-2 @lg/reader-content:pt-6 @3xl:mb-12">
                         <section className="relative mx-auto max-w-5xl overflow-hidden rounded-md border border-primary bg-primary shadow-2xl">

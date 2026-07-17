@@ -75,6 +75,25 @@ To securely connect your BigQuery account to PostHog, create a dedicated service
 
 <SourceTables />
 
+## Selecting columns
+
+By default, PostHog syncs all columns from each table. To sync only specific columns:
+
+1. During source setup, click **Columns** next to any table in the table picker.
+2. Uncheck columns you don't want to sync.
+3. Primary key columns and the incremental sync field (if configured) are always synced and cannot be disabled.
+
+You can also change column selection after setup:
+
+1. Go to the [sources tab](https://app.posthog.com/data-management/sources) and click your BigQuery source.
+2. Click **Configure** next to any schema.
+3. Under **Columns**, select which columns to sync.
+
+> **Adding columns to existing syncs:** When you add columns to a schema using incremental or append sync, PostHog prompts you to choose:
+>
+> - **Sync forward only** - New columns are populated only for future data. Existing rows show `NULL` for the new columns.
+> - **Full resync** - Triggers a complete resync to backfill the new columns for all rows.
+
 ## How it works
 
 PostHog creates and deletes [temporary tables](https://cloud.google.com/bigquery/docs/writing-results#temporary_and_permanent_tables) when querying your data. This is necessary for handling large BigQuery tables. Temporary tables help break down large data processing tasks into manageable chunks. However, they incur storage and query costs in BigQuery while they exist. We delete them as soon as the job is done.
