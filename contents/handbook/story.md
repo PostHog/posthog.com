@@ -219,3 +219,27 @@ Revenue growth is fast enough and we're getting so many unprompted offers for in
 Our marketing is getting weirder. It's more and more fun. We've commissioned a puppet, coming in January. Watch this space. Our newsletter, [Product for Engineers](/newsletter), now has 20,000 subscribers and it's growing fast.
 
 We're realizing that the more ambitious we are, the easier it gets – customers get excited, investors get excited, employees get excited. We can now see a real path to being a $100bn+ company and changing how software teams work industry-wide.
+
+### December 2024: Cashflow positive
+
+We ended the year cashflow positive, which we mostly didn't plan for. The [all-in-one](/products) thing just kept compounding – people show up for one product and end up using four. ~80 people, ~12 products, and still no real desire to hire our way out of problems. Still default alive by a comfortable margin.
+
+### February 2025: PostHog AI, and AI observability is born
+
+PostHog AI went from a thing we'd been tinkering with to a thing customers actually use every day. We were the first heavy users ourselves, which is also why we built [AI observability](/llm-analytics) – we needed to watch what PostHog AI was costing and how people were using it, and we realized every other AI team had the same problem, so we shipped it as a product!
+
+### June 2025: $70m Series D, led by Stripe
+
+$70m [Series D](/blog/series-d), led by Stripe. It started with a tweet – Patrick Collison said our website was "very well done" and ~18 months later that turned into a round at a ~$920m valuation, with YC, GV and Formus joining. This raise roughly doubles both our valuation and money raised. 
+
+Around here we stopped calling ourselves an analytics company. We're (almost) everything you need to build a successful product, with a plan to automate the whole stack with AI.
+
+### October 2025: $75m Series E
+
+We raised again – a $75m Series E led by Peak XV at a ~$1.4bn valuation. That technically makes us a unicorn. Total raised since 2020 is ~$194m, and we're ~140 people now. We also offered employees secondary, which we [wrote about](/blog/how-secondaries-actually-work).
+
+### Early 2026: PostHog Code
+
+~200 people and a product list too long to keep reciting! [PostHog Code](/code) was probably our biggest launch yet.
+
+Our vision is now to make your product [self-driving](/self-driving). 

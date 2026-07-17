@@ -9,7 +9,7 @@ import { CallToAction } from 'components/CallToAction'
 
 <CalloutBox icon="IconFlask" title="Open beta" type="action">
 
-Self-driving is currently in open beta.
+Self-driving is in open beta. It's improving quickly – expect rough edges, and expect them to disappear fast.
 
 </CalloutBox>
 
@@ -42,11 +42,31 @@ When a scout emits a report, PostHog also captures a `$scout_report_emitted` eve
 
 Because it's a regular event in your stream, everything in PostHog can build on your scouts' output with nothing to wire up: query scout activity with [SQL](/docs/sql), chart it in an insight, set an [alert](/docs/alerts) on it, or point a [destination](/docs/cdp) at it – like forwarding every surfaced report to a [Slack channel](/docs/cdp/destinations/slack), templated from the event's title, summary, and link.
 
+Try it: this query lists your fleet's most recent findings.
+
+```sql
+SELECT properties.skill_name AS scout, properties.title, properties.priority, properties.report_url
+FROM events
+WHERE event = '$scout_report_emitted'
+ORDER BY timestamp DESC
+LIMIT 20
+```
+
 Scout report events are captured against a synthetic per-scout ID with person processing off, so they never create person profiles or mix into your user analytics.
 
 ## Built-in and custom scouts
 
 PostHog ships with a set of scouts that watch common patterns out of the box. You can turn each on or off per project, and teams can add their own scouts for the patterns specific to their product. See [scout examples](/docs/self-driving/scout-examples) for the scouts PostHog ships with and ideas for your own.
+
+## Custom scouts suggest improvements to themselves
+
+A custom scout doesn't just report on your product – it also reports on itself. Its instructions were authored by your team, and the scout is the only one that sees where those instructions steer a real run wrong. When a run produces concrete evidence that its instructions misdirected it – they pointed at an event or table that doesn't exist in your project, set a default threshold it had to correct again, or missed a pitfall it keeps hitting – the scout records the specific change it would suggest in its durable memory, with the evidence from that run attached.
+
+When a suggestion re-confirms across runs, or a single failure was material – it burned most of the run's budget, or steered the scout into a wrong finding – the scout escalates it to your [inbox](/docs/self-driving/inbox) as a report titled `Scout self-improvement: <scout-name> – <topic>`, carrying the suggested change and the evidence behind it. Self-improvement reports are always marked as requiring human input: applying one is an edit to instructions your team owns, so the scout proposes and you decide. (A custom scout that only emits signals keeps its suggestions in its memory instead, where they surface when you next review or edit the scout.)
+
+The bar is deliberately high – a suggestion needs a concrete failure or wasted budget observed on a real run, not generic polish. And like any other scout report, a self-improvement report fires a `$scout_report_emitted` event, with `report_kind` set to `self_improvement`, so you can track how often your fleet is asking for tune-ups.
+
+Built-in scouts don't do this. Their instructions are maintained by PostHog and kept current automatically, so feedback about them routes to PostHog instead. The moment you edit a built-in scout to make it your own, it starts self-reporting like any custom scout.
 
 ## Scouts and signal sources
 
@@ -56,8 +76,8 @@ The difference is how they look. A signal source watches a single stream in real
 
 ## Next step
 
-Whether a scout files a report directly or lets the pipeline do the grouping, every finding is built on signals. See what's in one.
+Meet the scouts PostHog ships with, and steal ideas for your own.
 
-<CallToAction type="primary" to="/docs/self-driving/signals">
-  Signals
+<CallToAction type="primary" to="/docs/self-driving/scout-examples">
+  Scout examples
 </CallToAction>

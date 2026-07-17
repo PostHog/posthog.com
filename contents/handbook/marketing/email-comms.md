@@ -6,7 +6,7 @@ showTitle: true
 
 Our email communications can be broadly divided into broadcasts (one-off emails to specific lists, like a newsletter), campaigns (repeatable workflows which users move through dynamically), and API triggered emails (self-explanatory).
 
-This page doesn't deal with [our Product for Engineers newsletter](https://newsletter.posthog.com/), which is sent through Substack and managed by the Content & Docs team. 
+This page doesn't deal with [our build mode newsletter](https://newsletter.posthog.com/), which is sent through Substack and managed by the Content & Docs team. 
 
 ## Linking to the PostHog app or PostHog AI
 

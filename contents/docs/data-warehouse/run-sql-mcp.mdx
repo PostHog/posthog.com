@@ -2,7 +2,7 @@
 title: Run SQL, manage views, and sync sources with MCP
 ---
 
-The [PostHog MCP server](/docs/model-context-protocol) lets your AI coding agent run [HogQL](/docs/hogql) queries, manage [Data Warehouse](/docs/data-warehouse) views, sync import sources, and explore your schema directly from your code editor. Query events, create and materialize views, configure Postgres/Stripe/HubSpot imports, and work with warehouse tables – without switching to the PostHog app.
+The [PostHog MCP server](/docs/model-context-protocol) lets your AI coding agent run [HogQL](/docs/hogql) queries, manage [Data Warehouse](/docs/data-warehouse) views, sync import sources, annotate tables and columns, and explore your schema directly from your code editor. Query events, create and materialize views, configure Postgres/Stripe/HubSpot imports, add semantic descriptions to your data, and work with warehouse tables – without switching to the PostHog app.
 
 This works in any MCP client – Cursor, Codex, Claude Code, Windsurf, VS Code, and others.
 
@@ -16,6 +16,7 @@ With MCP, your coding agent can:
 - **Query across sources** – Join PostHog events with Stripe, HubSpot, or any linked warehouse table
 - **Manage views** – Create, update, materialize, and delete saved views in your Data Warehouse programmatically
 - **Manage import sources** – Create, configure, and sync data warehouse sources like Postgres, Stripe, and HubSpot
+- **Annotate tables and columns** – Add semantic descriptions to views and warehouse tables so PostHog AI understands your data
 
 ## SQL tools
 
@@ -73,6 +74,20 @@ These tools manage individual table schemas within a data warehouse source:
 | `external-data-schemas-cancel`         | Cancel a currently running sync job for a table.                                     |
 | `external-data-schemas-delete-data`    | Delete synced table data from PostHog but keep the schema entry for re-syncing.      |
 
+## Column annotation tools
+
+These tools add semantic descriptions to your tables, views, and columns, helping PostHog AI understand your data:
+
+| Tool                                          | Description                                                                                                                               |
+| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `saved-query-column-annotations-create`       | Add or replace a description for a view (saved query) or one of its columns. Use for views (`table_type = 'view'` in information_schema). |
+| `saved-query-column-annotations-list`         | List descriptions for views and their columns. Filter by `?saved_query_id=<uuid>` to scope to one view.                                   |
+| `warehouse-column-annotations-create`         | Add or replace a description for an imported warehouse table or column. Use for physical tables (`table_type = 'data_warehouse'`).        |
+| `warehouse-column-annotations-list`           | List descriptions for warehouse tables and columns. Filter by `?table_id=<uuid>` to scope to one table.                                   |
+| `warehouse-column-annotations-partial-update` | Edit an existing warehouse table or column description by annotation ID.                                                                  |
+
+> **Note:** Core PostHog tables (events, persons, groups, sessions) cannot be annotated – they have built-in descriptions.
+
 ## Example prompts
 
 Try these with your MCP-enabled agent:
@@ -119,6 +134,13 @@ For source management:
 - `Trigger a sync for my Postgres source.`
 - `Show me the sync status for all my import schemas.`
 - `Cancel the running sync on the hubspot_contacts table.`
+
+For column annotations:
+
+- `Add a description to my 'revenue_summary' view explaining it calculates monthly recurring revenue.`
+- `Describe the 'amount' column in my stripe_charges table as 'Transaction amount in cents'.`
+- `List all column descriptions for my user_metrics view.`
+- `What descriptions exist for my imported Stripe tables?`
 
 ## Install the MCP server
 

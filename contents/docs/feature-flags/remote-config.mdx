@@ -14,19 +14,19 @@ Remote config flags enable you to configure a simple flag that always returns th
 
 There are 3 steps to start using remote config flags:
 
-## Step 1: Get a secret API key
+## Step 1: Find your feature flags secure API key
 
 import ObtainFeatureFlagsSecureAPIKey from "../integrate/_snippets/obtain-flags-secure-key.mdx"
 
 <ObtainFeatureFlagsSecureAPIKey />
 
-## Step 2: Initialize PostHog with your secret API key in options
+## Step 2: Initialize PostHog with your feature flags secure API key in options
 
 import ConfigureFlagsSecureKey from "../integrate/_snippets/configure-flags-secure-key.mdx"
 
 <ConfigureFlagsSecureKey />
 
-> **Note:** By default, initializing PostHog with your secret API key enables local evaluation, but this can be disabled in `posthog-node` by setting `enableLocalEvaluation: false` in your config.
+> **Note:** By default, initializing PostHog with your feature flags secure API key enables local evaluation, but this can be disabled in `posthog-node` by setting `enableLocalEvaluation: false` in your config.
 
 
 ## Step 3: Use remote config flags
