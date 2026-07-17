@@ -9,7 +9,7 @@ availability:
 sourceId: Braze
 ---
 
-<CalloutBox icon="IconInfo" title="Alpha release" type="fyi">
+<CalloutBox icon="IconFlask" title="Alpha release" type="action">
 
 This source is currently in **alpha**. The interface and available tables may change.
 
@@ -47,3 +47,7 @@ Only the email templates and content blocks tables support incremental sync, usi
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

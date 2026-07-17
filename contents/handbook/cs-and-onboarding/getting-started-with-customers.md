@@ -162,7 +162,7 @@ Prioritize potential churn risks, low engagement, and accounts where something i
 A lot of valuable context lives in past conversations:
 
 - **BuildBetter** — recordings of customer success, sales, and onboarding calls. Use <PrivateLink url="https://app.buildbetter.app/people">People</PrivateLink> to search companies or contacts and see call history, or use direct search / AI chat.
-- **Pylon** — Slack channel history. The <PrivateLink url="https://app.usepylon.com/accounts">account</PrivateLink> page is linked to Salesforce accounts that have a Slack channel. Filter by Owner (mapped to the account owner in Salesforce) to view all Slack/Teams interactions for your accounts.
+- **[SupportHog](/handbook/growth/sales/slack-channels)** — Slack channel history. Our own tool links [shared Slack (and MS Teams) channels](/handbook/growth/sales/slack-channels) to Salesforce accounts so you can view Slack/Teams interactions for your accounts.
 - **Vitally** — Zendesk and email conversations under <PrivateLink url="https://posthog.vitally-eu.io/conversations/active/">Active Conversations</PrivateLink>. See who the key contacts have been, who's supported them in the past, and how frequently they raise tickets.
 
 ### Product usage analysis

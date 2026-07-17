@@ -1,0 +1,14 @@
+> **Identifying users is required.** Backend events need a `distinct_id` to associate events with the correct user.
+>
+> In Python, you can do this through a context. All event captures in the same context will be tagged automatically with the correct `distinct_id`. Typically, you would set a fresh context and identify at the top of each route.
+>
+> ```python
+> from posthog import new_context, identify_context, capture
+>
+> @app.get("/foo")
+> def foo(current_user: User = Depends(get_current_user)):
+>     with new_context(): # Set context at the top of a route
+>         identify_context(current_user.id)
+>         capture("foo_viewed")
+>     return {"status": "ok"}
+> ```

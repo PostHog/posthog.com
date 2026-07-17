@@ -9,7 +9,7 @@ availability:
 sourceId: Omnisend
 ---
 
-<CalloutBox icon="IconInfo" title="Alpha release" type="fyi">
+<CalloutBox icon="IconFlask" title="Alpha release" type="action">
 
 This source is currently in **alpha**. The interface and available tables may change.
 
@@ -43,3 +43,7 @@ All tables use **full refresh**, which reloads all data on each sync.
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

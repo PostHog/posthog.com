@@ -93,7 +93,7 @@ const response = await fetch('/api/chat', {
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
     message: userInput,
-    sessionId: posthog.getSessionId()
+    sessionId: posthog.get_session_id()
   })
 })
 ```

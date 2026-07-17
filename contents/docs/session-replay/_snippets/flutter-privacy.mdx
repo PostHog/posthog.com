@@ -23,4 +23,36 @@ config.sessionReplayConfig.maskAllImages = false;
 ...
 ```
 
+### Masking platform views
+
+Platform views (such as `WebView`, Google Maps, or other natively-rendered widgets) are composited outside the Flutter layer tree. To avoid accidentally recording sensitive content, PostHog **masks every platform view with a black box by default**.
+
+To reveal all platform views globally, set `maskAllPlatformViews` to `false`:
+
+```dart
+final config = PostHogConfig('<ph_project_token>');
+config.sessionReplay = true;
+/// Mask all platform views (WebView, Maps, etc.) in session replay.
+/// Default: true.
+config.sessionReplayConfig.maskAllPlatformViews = false;
+```
+
+For per-view control, wrap an individual platform view with the `PostHogPlatformView` widget. This overrides the global `maskAllPlatformViews` setting for that view (and every platform view nested inside it):
+
+```dart
+// Reveal this view even when maskAllPlatformViews is true
+PostHogPlatformView(
+  privacy: PostHogPlatformViewPrivacy.capture,
+  child: WebViewWidget(controller: _controller),
+)
+
+// Mask this view even when maskAllPlatformViews is false
+PostHogPlatformView(
+  privacy: PostHogPlatformViewPrivacy.mask,
+  child: WebViewWidget(controller: _controller),
+)
+```
+
+> **Platform support:** On iOS, only `WKWebView`-backed platform views (for example `webview_flutter` in its default mode) are captured. Other platform view types (Google Maps, camera previews, and so on) are always masked, because the iOS compositor cannot safely snapshot arbitrary native views without risking leaking unmasked content.
+
 <SensitiveThirdPartyScreens />

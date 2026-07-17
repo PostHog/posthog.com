@@ -45,3 +45,7 @@ Connect PostHog to your Reddit Ads account using a Reddit account. The Reddit ac
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

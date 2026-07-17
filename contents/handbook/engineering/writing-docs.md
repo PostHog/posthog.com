@@ -14,9 +14,9 @@ Docs are extra important in the age of AI. All of our docs eventually make their
 
 AI search is our fastest-growing channel for user signups [by far](https://posthog.slack.com/archives/C08CG24E3SR/p1769807915847219). So remember to update your docs and keep them up to date.
 
-## What about the so-called Docs & Wizard team?
+## What about the so-called Wizard & Docs team?
 
-The <SmallTeam slug="docs-wizard" /> can help you, but they can't write docs for everyone. They are responsible for improving the docs as a knowledge base. This means:
+The <SmallTeam slug="wizard-and-docs" /> can help you, but they can't write docs for everyone. They are responsible for improving the docs as a knowledge base. This means:
 
 - Reviewing and improving docs PRs created by product teams
 - Shipping docs content based on prioritized feedback and emerging use cases
@@ -24,9 +24,9 @@ The <SmallTeam slug="docs-wizard" /> can help you, but they can't write docs for
 - Creating context services that power agents like the AI wizard
 - Working on large scale docs projects
 
-If you want their input, hit them up in `#team-docs-and-wizard` or tag `@team-docs-wizard` in GitHub. 
+If you want their input, hit them up in `#team-wizard-and-docs` or tag `@team-wizard-and-docs` in GitHub. 
 
-They've also created a comprehensive self-serve guide on [how to write product docs](/handbook/docs-and-wizard/writing-product-docs) for you to use.
+They've also created a comprehensive self-serve guide on [how to write product docs](/handbook/wizard-and-docs/writing-product-docs) for you to use.
 
 ## When should I start writing product docs?
 
@@ -54,7 +54,7 @@ Docs should help people:
 
 Write the docs you would want to read if you were a user. 
 
-The <SmallTeam slug="docs-wizard" /> has created a guide on [how to write product docs](/handbook/docs-and-wizard/writing-product-docs) for you to follow. It walks through how to structure and write your product docs in detail. Start there.
+The <SmallTeam slug="wizard-and-docs" /> has created a guide on [how to write product docs](/handbook/wizard-and-docs/writing-product-docs) for you to follow. It walks through how to structure and write your product docs in detail. Start there.
 
 ## Where do docs live?
 
@@ -62,7 +62,7 @@ Nearly all our docs live on `posthog.com/docs`. You can find the repo to add and
 
 Most docs should go somewhere in your product's section. Product docs usually have sections on installation, basic set up, key features, troubleshooting, common questions, and more. Docs for platform features like [SDKs](/docs/libraries), [data types](/docs/new-to-posthog/understand-posthog), and [PostHog AI](/docs/posthog-ai) live in the [Product OS](/docs) section.
 
-> **Don't know where a doc or feature should go?** Ask in <PrivateLink url="https://posthog.slack.com/archives/C09GTQY5RLZ">`#team-docs-and-wizard`</PrivateLink>.
+> **Don't know where a doc or feature should go?** Ask in <PrivateLink url="https://posthog.slack.com/archives/C09GTQY5RLZ">`#team-wizard-and-docs`</PrivateLink>.
 
 ## What about internal docs?
 
@@ -86,8 +86,8 @@ For an example, see the [PostHog AI `README`](https://github.com/PostHog/posthog
 
 ## Further reading
 
-- [How to use the content writer agent](/handbook/docs-and-wizard/content-writer-agent)
+- [How to use the content writer agent](/handbook/wizard-and-docs/content-writer-agent)
 - [What nobody tells developers about documentation](/newsletter/what-nobody-tells-devs-about-docs)
-- [Docs style guide](/handbook/docs-and-wizard/docs-style-guide)
+- [Docs style guide](/handbook/wizard-and-docs/docs-style-guide)
 - [PostHog style guide](/handbook/content/posthog-style-guide)
 - [Writing blogs as an engineer](/handbook/engineering/writing-blogs)

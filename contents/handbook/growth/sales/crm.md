@@ -15,7 +15,7 @@ As a general principle, we try to make sure as much customer communication as po
 
 For existing customers, you'll sometimes send emails directly from <PrivateLink url="https://posthog.vitally-eu.io/">Vitally</PrivateLink>. To ensure these also make it to Salesforce, first look up your _Email to Salesforce Address_ from the [personal settings page](https://posthog.lightning.force.com/lightning/settings/personal/EmailToSalesforceUserSetup/home) in Salesforce, and then add it to your <PrivateLink url="https://posthog.vitally-eu.io/settings/profile/gmail">Vitally gmail settings</PrivateLink>.
 
-All Slack messages sync up with the corresponding account in Salesforce. We use [Pylon](https://app.usepylon.com) for this sync, so make sure Pylon is added to the customer Slack channel integrations and the channel is [linked to the Salesforce account](https://app.usepylon.com/integrations/salesforce?tab=account-mapping) properly for the sync to work smoothly.
+All Slack messages sync up with the corresponding account in Salesforce. We use [SupportHog](/handbook/growth/sales/slack-channels) for this sync, so make sure SupportHog is [added to the customer Slack channel](/handbook/growth/sales/slack-channels) and the channel's name is recorded on the relevant Salesforce account record for the sync to work smoothly.
 
 You are most likely to use the following regularly:
 
@@ -290,6 +290,8 @@ Exit criteria:
 
 6. Closed Won (100%) - They have signed the contract and are officially a PostHog customer.
 7. Closed Lost (0%) - At some point in the pipeline they decided not to use us. The Loss Reason field is required for any opportunity to be marked as Closed lost.
+
+> **Duplicate opportunities should be deleted, not marked as Closed Lost.** A duplicate isn't a real loss, so marking it Closed Lost pollutes our loss data and skews win/loss reporting. Delete the duplicate record instead. Only use Closed Lost when a genuine opportunity didn't work out.
 
 Bolded exit criteria indicate the minimum standard for the opportunity to advance stages (for typically smaller, more transational deals). More detail is available on the stages and the exit criteria for each state <PrivateLink url='https://docs.google.com/spreadsheets/d/1BpLMHZ52iE1Ni0-Hf0Y68RSq0ohNNnJv7Jd90lgSI6s/edit?usp=sharing'>in this spreadsheet</PrivateLink>
 

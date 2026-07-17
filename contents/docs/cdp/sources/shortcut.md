@@ -9,7 +9,7 @@ availability:
 sourceId: Shortcut
 ---
 
-<CalloutBox icon="IconInfo" title="Alpha release" type="fyi">
+<CalloutBox icon="IconFlask" title="Alpha release" type="action">
 
 This source is currently in **alpha**. The interface and available tables may change.
 
@@ -56,3 +56,7 @@ Only the `stories` table supports incremental sync (via the `created_at` or `upd
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />
