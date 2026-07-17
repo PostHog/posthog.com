@@ -3,6 +3,8 @@ title: Angular
 platformLogo: angular
 ---
 
+import TracingHeaders from '../_snippets/tracing-headers.mdx'
+
 import DetailSetUpReverseProxy from "../integrate/_snippets/details/set-up-reverse-proxy.mdx"
 import DetailGroupProductsInOneProject from "../integrate/_snippets/details/group-products-in-one-project.mdx"
 import InstallNodePackageManagers from "../integrate/_snippets/install-node-package-managers.mdx"
@@ -23,6 +25,8 @@ import AngularInstall from "../integrate/_snippets/install-angular.mdx"
 import IdentifyFrontendCallout from '../_snippets/identify-frontend-callout.mdx'
 
 <IdentifyFrontendCallout />
+
+<TracingHeaders />
 
 > **Note:** If you're using Typescript, you might have some trouble getting your types to compile because we depend on `rrweb` but don't ship all of their types. To accommodate that, you'll need to add `@rrweb/types@2.0.0-alpha.17` and `rrweb-snapshot@2.0.0-alpha.17` as a dependency if you want your Angular compiler to typecheck correctly.
 >

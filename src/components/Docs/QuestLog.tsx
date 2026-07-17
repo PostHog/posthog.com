@@ -438,7 +438,7 @@ export const QuestLog: React.FC<{
                     </div>
 
                     {/* Quest List - Sticky Container */}
-                    <div className="quest-sidebar z-30 bg-primary">
+                    <div className="quest-sidebar z-30">
                         {/* Progress Indicator */}
                         <div className="mt-3 mb-3 px-1">
                             <div className="flex justify-start text-xs md:text-sm text-primary/40 dark:text-primary-dark/40 mb-2">

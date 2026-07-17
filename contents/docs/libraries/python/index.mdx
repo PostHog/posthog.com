@@ -15,14 +15,11 @@ features:
   errorTracking: true
 ---
 
+import PythonSdkVersionNote from '../../_snippets/python-sdk-version-note.mdx'
+
 The Python SDK makes it easy to capture events, evaluate feature flags, track errors, and more in your Python apps.
 
-<CalloutBox icon="IconInfo" title="Python 3.9 and lower" type="fyi">
-
-Python 3.9 is no longer supported for PostHog Python SDK versions `7.x.x` and higher.
-
-</CalloutBox>
-
+> These docs cover version `7.x` of the Python SDK, which requires Python 3.10 or higher. On Python 3.9? See [supported versions](#supported-versions).
 
 ## Installation
 
@@ -338,3 +335,7 @@ As our open source project [PostHog](https://github.com/PostHog/posthog) shares 
 ## Thank you
 
 This library is largely based on the `analytics-python` package.
+
+## Supported versions
+
+<PythonSdkVersionNote />
