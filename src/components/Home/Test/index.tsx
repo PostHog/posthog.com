@@ -148,8 +148,8 @@ function Hero(): JSX.Element {
                     </span>
                 </h1>
 
-                <div className="grid @xl:grid-cols-2 @xl:gap-8">
-                    <div>
+                <div className="grid grid-cols-1 @xl:grid-cols-2 @xl:gap-8">
+                    <div className="min-w-0">
                         <p className="text-balance @xl:text-wrap text-[17px]">
                             PostHog already knows your customers, which features they use, and the issues they have.
                         </p>
@@ -204,7 +204,7 @@ function Hero(): JSX.Element {
                         </p>
                     </div>
 
-                    <div className="mt-6 flex flex-col items-center">
+                    <div className="mt-6 flex flex-col items-center min-w-0">
                         <PlatformInstall schema={wizardInstallSchema} selfDriving />
                         <SecondaryActions />
                     </div>
