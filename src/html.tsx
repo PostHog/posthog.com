@@ -17,7 +17,6 @@ export default function HTML(props: HTMLProps): JSX.Element {
                 <meta httpEquiv="x-ua-compatible" content="ie=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
                 <meta name="naver-site-verification" content="a58db4b98c2bf9e4b52a4aa0c20fcf1fcdab2793" />
-
                 <link
                     rel="preload"
                     as="font"

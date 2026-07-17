@@ -131,6 +131,14 @@ All free credits associated with startup plan roll-offs are one-time only, and s
 
 For contracting purposes, these free credits should either be applied before the contract term or included in the 12 month credit amount. If they are being applied before the contract term, adjust the contract date to start 2 months later and the one-time credits can be applied to cover the 2 invoices before the contract start date. In this case, the credits do not need to be called out in the contract, and the opportunity owner can add these credits as a one time credit in billing admin.
 
+#### How to structure free credits in special terms
+
+There are two ways we structure free credits, and it's important to be clear which one applies, because they're added at different times and treated differently at contract start:
+
+1. **Fixed amount included in the 12 month term.** The free credits are part of the contract term and are added to the customer's balance alongside the purchased (prepaid) credits at contract start. Use this when a specific dollar amount of free credit is explicitly called out under Special Terms as part of the term.
+
+2. **Coverage for a specific number of months.** The free credits are *not* part of the contract term. We add enough free credits to cover the promised period (for example, up to the contract start date), top up if the customer comes up short before then, and add the prepaid credits only when the contract actually starts. Any free-credit balance still remaining at contract start is removed at that point. These credits can be added via billing admin as a one time credit and don't need to be called out as part of the term.
+
 ### Margin negative deals
 
 In exceptional circumstances, we may explore providing additional discounts which eat into our operating margin for the following cases:
@@ -254,7 +262,11 @@ For any of the above scenarios you should use our [discounting principles](contr
 
 ### When they will end the contract term with credit remaining
 
-We can roll up to half the amount of credit from the original order form to a new contract term, provided that the customer signs a renewal contract of equal or higher annual spend than the original contract.
+If a customer ends a term with unused credits and signs a renewal of equal or higher spend, we roll over part of their _remaining_ (unused) credits into the new term. The [pre-paid plans doc](/docs/billing/pre-paid-plans) is the source of truth for the exact amount and the customer-facing wording, so keep the mechanic there and link to it rather than restating it here (this is where these two pages had drifted).
+
+We scale the rollover to _remaining_ credits rather than the original order form amount. For a customer who underused and renews at equal spend, rolling a share of the original on top of the renewal stacks up more credits than they were ever going to use, which rewards a mis-sized deal with a bigger pile and makes the account harder to expand later. Scaling to what they actually didn't use keeps the balance proportionate.
+
+Where the underuse was outside the customer's control (a PostHog-side incident, a data issue on our side, or a documented disruption on theirs), we can roll over more than the standard amount, up to the full remaining balance, or extend the window to use existing credits. We handle these case by case based on what was logged at the time, so flag it early.
 
 ### When a customer doesn't renew their credit purchase
 When a customer chooses not to renew a prepaid credit contract we automatically remove any remaining credits on the expiry date. Their account will then roll onto our standard monthly plan and they'll be charged for usage. It's the customer's responsibility to stop sending us events or cancel their subscription and downgrade to the free tier if they don't want to keep paying.

@@ -132,7 +132,7 @@ const AppCount = () => {
     return <>{APP_COUNT}</>
 }
 
-const CTAs = () => {
+export const CTAs = () => {
     const [showInstall, setShowInstall] = useState(false)
     return (
         <div className="mb-4">
@@ -666,7 +666,7 @@ const Customers = () => {
             </div>
 
             <OSButton asLink to="/customers" variant="secondary" size="md" className="mt-4" state={{ newWindow: true }}>
-                Open customers.mdx
+                Open Customers
             </OSButton>
         </>
     )
@@ -735,7 +735,13 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         props: [],
         Editor: () => {
             const { siteSettings } = useApp()
-            return <Logo className="inline-block" fill={siteSettings.theme === 'dark' ? 'white' : undefined} />
+            return (
+                <Logo
+                    className="inline-block"
+                    variant={siteSettings.theme === 'dark' ? 'mono' : 'gradient'}
+                    color={siteSettings.theme === 'dark' ? 'white' : undefined}
+                />
+            )
         },
     },
     {
@@ -886,18 +892,6 @@ export default function Home2() {
         setIsPlaying(true)
     }, [activePromptIndex])
 
-    // GraphQL query for MDX content
-    const {
-        mdx: { rawBody, mdxBody },
-    } = useStaticQuery(graphql`
-        query {
-            mdx(slug: { eq: "home" }) {
-                rawBody
-                mdxBody: body
-            }
-        }
-    `)
-
     // Derived state
     const currentPrompt = PROMPTS[activePromptIndex]
     const activeAccordion = currentPrompt.slide
@@ -996,7 +990,6 @@ export default function Home2() {
                         <div className="@2xl:max-w-lg mb-6">
                             <Accordion
                                 key={activeAccordion}
-                                // skin={false}
                                 items={accordionItems}
                                 defaultValue={activeAccordion}
                                 onValueChange={handleAccordionChange}

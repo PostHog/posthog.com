@@ -257,6 +257,12 @@ posthog.init('<ph_project_token>', {
 
 PostHog can be configured to do cookieless tracking by setting `cookieless_mode` to `always` or `on_reject`.
 
+<CalloutBox type="info" title="Cookieless server hash mode">
+
+Before configuring cookieless tracking, you need to enable "Cookieless server hash mode" in your PostHog project settings under **Project Settings** > **Web analytics**.
+
+</CalloutBox>
+
 First is `cookieless_mode: "always"`:
 - Doesn't require a cookie banner (unless something else on your website uses cookies)
 - Never stores PostHog data in cookies or local/session storage
@@ -269,7 +275,7 @@ Second is `cookieless_mode: "on_reject"`:
 - **No events are captured** until after consent is either given or denied
 - If consent is denied, still counts those users, using a privacy-preserving hash calculated on PostHog's servers
 
-<CalloutBox type="info" title="Cookieless tracking">
+<CalloutBox type="info" title="More to do">
 
 Using `cookieless_mode` helps comply with cookie and consent requirements. You still need to configure data collection and [storage](/docs/privacy/data-storage) separately to comply with relevant regulations.
 

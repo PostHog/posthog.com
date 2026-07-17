@@ -18,7 +18,6 @@ import {
 import { customerDataInfrastructureNav } from '../../hooks/useCustomerDataInfrastructureNavigation'
 import { TreeMenu } from 'components/TreeMenu'
 import { useApp } from '../../context/App'
-import CloudinaryImage from 'components/CloudinaryImage'
 import { useWindow } from '../../context/Window'
 import TeamMember from 'components/TeamMember'
 import WistiaCustomPlayer from 'components/WistiaCustomPlayer'
@@ -140,28 +139,7 @@ export default function CDP(): JSX.Element {
                 image="https://res.cloudinary.com/dmukukwp6/image/upload/opengraph_3_cf73189604.png"
                 imageType="absolute"
             />
-            <ReaderView
-                leftSidebar={<LeftSidebarContent />}
-                title="posthog-data-stack.md"
-                hideTitle={true}
-                {...({
-                    header: (
-                        <>
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/data_factory_aed2d31fbf.png"
-                                alt="Hedgehogs taking data to the data factory"
-                                className="mt-4 px-4"
-                                imgClassName="max-w-[542px] w-full mx-auto"
-                            />
-                            <h2 className="text-xl @md/reader-content-container:text-2xl font-bold m-4 text-center pb-4">
-                                Your modern data stack on <span className="line-through">quack</span> DuckDB,
-                                <br />
-                                fully wired with PostHog AI
-                            </h2>
-                        </>
-                    ),
-                } as { header?: React.ReactNode })}
-            >
+            <ReaderView leftSidebar={<LeftSidebarContent />} title="posthog-data-stack.md" hideTitle={true}>
                 {/* 
                 
                 TODO: Re-add this product grid later? I like it but don't have time to make it show the correct things right now.
@@ -203,22 +181,32 @@ export default function CDP(): JSX.Element {
                         </div>
                     </Fieldset>
                 </div> */}
-                <h3>
-                    The most flexible modern data stack – built on DuckDB, designed to scale, and wired up with our
-                    omniscient AI
-                </h3>
+                <div className="not-prose mb-4 w-full">
+                    <h1 className="m-0 text-3xl font-bold !leading-[1.12] tracking-tight @md/reader-content:text-4xl @3xl/reader-content:text-5xl">
+                        Your modern data stack on <span className="line-through decoration-4">quack</span>{' '}
+                        <span className="rounded-md bg-red/10 px-1 text-red dark:bg-yellow/20 dark:text-yellow">
+                            DuckDB
+                        </span>
+                        , fully wired with PostHog AI
+                    </h1>
 
-                <CallToAction to="https://app.posthog.com/signup" size="sm">
-                    Get started - free
+                    <p className="mb-0 mt-4 text-base font-semibold leading-relaxed text-primary">
+                        The most flexible modern data stack – built on DuckDB, designed to scale, and wired up with our
+                        omniscient AI
+                    </p>
+                </div>
+
+                <CallToAction to="https://app.posthog.com/signup" size="sm" className="max-w-[175px]">
+                    Get started free
                 </CallToAction>
-                <p>
+                <p className="mt-8">
                     Your data needs flexibility, tooling, and actually-useful AI that's not stuck in a silo. We provide
                     it all in a seamless data stack.
                 </p>
                 <p>
-                    <span className="font-bold">Bring your own tools</span> like dbt and Hex to customize your
-                    experience, or <span className="font-bold">use our built-in tooling</span> to get started quickly.
-                    Anything that connects to Postgres can connect to your PostHog DuckDB warehouse using our{' '}
+                    Bring your own tools like dbt and Hex to customize your experience, or use our built-in tooling to
+                    get started quickly. Anything that connects to Postgres can connect to your PostHog DuckDB warehouse
+                    using our{' '}
                     <Link to="https://github.com/posthog/duckgres" external>
                         Duckgres wrapper
                     </Link>

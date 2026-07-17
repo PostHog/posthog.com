@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { usePost } from './hooks'
 import { animateScroll as scroll, Link as ScrollLink } from 'react-scroll'
 import { defaultMenuWidth } from './context'
-import SidebarSearchBox from 'components/Search/SidebarSearchBox'
 import TableOfContents from './TableOfContents'
 import ShareLinks from './ShareLinks'
 import Survey from './Survey'
@@ -29,11 +28,9 @@ export default function Post({ children }: { children: React.ReactNode }) {
         hideSidebar,
         nextPost,
         hideSurvey,
-        hideSearch,
         mobileMenu,
         contentContainerClasses,
         stickySidebar,
-        searchFilter,
         fullWidthContent,
         askMax,
     } = usePost()
@@ -64,17 +61,8 @@ export default function Post({ children }: { children: React.ReactNode }) {
                         <aside
                             className={`md:sticky md:top-0 ${
                                 internalMenu ? 'reasonable:top-[108px]' : 'reasonable:top-[56px]'
-                            } max-h-screen reasonable:h-[calc(100vh_-_108px)] flex-shrink-0 w-full justify-self-end px-4 md:box-border my-10 md:my-0 mr-auto overflow-y-auto pt-6 pb-10 bg-light dark:bg-dark border-r border-primary ${
-                                hideSearch ? 'pt-5' : ''
-                            }`}
+                            } max-h-screen reasonable:h-[calc(100vh_-_108px)] flex-shrink-0 w-full justify-self-end px-4 md:box-border my-10 md:my-0 mr-auto overflow-y-auto pt-6 pb-10 bg-light dark:bg-dark border-r border-primary`}
                         >
-                            {/*
-                            {!hideSearch && (
-                                <div className="lg:sticky top-0 z-20 pt-4 -mx-2 px-1 relative">
-                                    <SidebarSearchBox filter={searchFilter} />
-                                </div>
-                            )}
-                            */}
                             <TableOfContents />
                         </aside>
                     </div>

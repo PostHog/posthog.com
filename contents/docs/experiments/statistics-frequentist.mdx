@@ -56,7 +56,7 @@ These sufficient statistics contain all the information needed to calculate mean
 
 #### Outlier handling (winsorization)
 
-For mean metrics, extreme outliers can skew results. PostHog optionally applies winsorization by clamping values to percentile-based bounds. Values below the lower percentile (e.g., 1st percentile) are replaced with the lower bound, and values above the upper percentile (e.g., 99th percentile) are replaced with the upper bound. No data is excluded; all users remain in the calculation. This makes results more robust to data entry errors or extreme edge cases. The percentile bounds are configured per metric when setting up the experiment.
+For mean and ratio metrics, extreme outliers can skew results. PostHog optionally applies winsorization by clamping values to percentile-based bounds. Values below the lower percentile (e.g., 1st percentile) are replaced with the lower bound, and values above the upper percentile (e.g., 99th percentile) are replaced with the upper bound. No data is excluded; all users remain in the calculation. For ratio metrics, the numerator and denominator are capped independently, each with its own percentile bounds. This makes results more robust to data entry errors or extreme edge cases. The percentile bounds are configured per metric when setting up the experiment.
 
 You can also enable [CUPED variance reduction](/docs/experiments/cuped) to reduce noise by accounting for pre-exposure behavior.
 

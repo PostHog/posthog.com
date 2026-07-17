@@ -54,9 +54,11 @@ interface OSButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElemen
     state?: any
     zoomHover?: boolean | 'xs' | 'sm' | 'md' | 'lg'
     hover?: 'border' | 'background'
+    windowButton?: boolean
 }
 
 export default function OSButton({
+    windowButton = false,
     children,
     variant = 'default',
     size = 'lg',
@@ -83,8 +85,9 @@ export default function OSButton({
     hover = 'border',
     ...props
 }: OSButtonProps) {
-    const baseClasses =
-        'relative items-center rounded border text-primary transition-colors transition-[font-size,line-height,padding] transition-50 hover:transition-none disabled:text-muted disabled:cursor-not-allowed'
+    const baseClasses = `relative items-center rounded ${
+        windowButton ? 'rounded-full' : 'rounded'
+    } border text-primary transition-colors transition-[font-size,line-height,padding] transition-50 hover:transition-none disabled:text-muted disabled:cursor-not-allowed`
 
     const parentSizeClasses = {
         xs: 'border-px top-[0px] rounded-[5px]',
@@ -95,11 +98,21 @@ export default function OSButton({
     }
 
     const childSizeClasses = {
-        xs: 'px-1.5 py-0.5 text-[11px] gap-0.5 rounded-[5px] translate-y-[-1px] hover:translate-y-[-2px] active:-translate-y-px border-[1.5px] -mx-px group-disabled:hover:!translate-y-[-1px]',
-        sm: 'px-2 py-0.5 text-xs gap-1 rounded-[5px] translate-y-[-2px] hover:translate-y-[-3px] active:translate-y-[-1.5px] border-[1.5px] mx-[-1.5px] group-disabled:hover:!translate-y-[-2px]',
-        md: 'px-2.5 py-1 gap-1 rounded-[6px] text-[13px] translate-y-[-2px] hover:translate-y-[-3px] active:translate-y-[-1.5px] border-[1.5px] mx-[-1.5px] group-disabled:hover:!translate-y-[-2px]',
-        lg: 'px-3 py-1.5 text-[15px] gap-1 rounded-[6px] translate-y-[-2px] hover:translate-y-[-4px] active:translate-y-[-1px] border-[1.5px] mx-[-1.5px] group-disabled:hover:!translate-y-[-2px]',
-        xl: 'px-4 py-2 text-base gap-1.5 rounded-[6px] translate-y-[-2px] hover:translate-y-[-4px] active:translate-y-[-1px] border-[1.5px] mx-[-1.5px] group-disabled:hover:!translate-y-[-2px]',
+        xs: `${
+            windowButton ? 'p-0.5' : 'px-1.5 py-0.5'
+        } text-[11px] gap-0.5 rounded-[5px] translate-y-[-1px] hover:translate-y-[-2px] active:-translate-y-px border-[1.5px] -mx-px group-disabled:hover:!translate-y-[-1px]`,
+        sm: `${
+            windowButton ? 'p-0.5' : 'px-2 py-0.5'
+        } text-xs gap-1 rounded-[5px] translate-y-[-2px] hover:translate-y-[-3px] active:translate-y-[-1.5px] border-[1.5px] mx-[-1.5px] group-disabled:hover:!translate-y-[-2px]`,
+        md: `${
+            windowButton ? 'p-1' : 'px-2.5 py-1'
+        } gap-1 rounded-[6px] text-[13px] translate-y-[-2px] hover:translate-y-[-3px] active:translate-y-[-1.5px] border-[1.5px] mx-[-1.5px] group-disabled:hover:!translate-y-[-2px]`,
+        lg: `${
+            windowButton ? 'p-1.5' : 'px-3 py-1.5'
+        } text-[15px] gap-1 rounded-[6px] translate-y-[-2px] hover:translate-y-[-4px] active:translate-y-[-1px] border-[1.5px] mx-[-1.5px] group-disabled:hover:!translate-y-[-2px]`,
+        xl: `${
+            windowButton ? 'p-2' : 'px-4 py-2'
+        } text-base gap-1.5 rounded-[6px] translate-y-[-2px] hover:translate-y-[-4px] active:translate-y-[-1px] border-[1.5px] mx-[-1.5px] group-disabled:hover:!translate-y-[-2px]`,
     }
 
     // Extra adjustments for full-width primary/secondary buttons
@@ -113,11 +126,11 @@ export default function OSButton({
 
     // Size classes for non-primary/secondary buttons (without the translate effects and negative margins)
     const simpleSizeClasses = {
-        xs: 'px-1 py-0.5 text-xs gap-0.5 rounded',
-        sm: 'px-1 py-0.5 text-[13px] gap-1 rounded',
-        md: 'px-1.5 py-1 gap-1 rounded text-sm',
-        lg: 'px-2 py-1.5 text-[15px] gap-1 rounded-[6px]',
-        xl: 'px-2.5 py-2 text-base gap-1.5 rounded-[6px]',
+        xs: `${windowButton ? 'p-0.5' : 'px-1 py-0.5'} text-xs gap-0.5 rounded`,
+        sm: `${windowButton ? 'p-0.5' : 'px-1 py-0.5'} text-[13px] gap-1 rounded`,
+        md: `${windowButton ? 'p-1' : 'px-1.5 py-1'} gap-1 rounded text-sm`,
+        lg: `${windowButton ? 'p-1.5' : 'px-2 py-1.5'} text-[15px] gap-1 rounded-[6px]`,
+        xl: `${windowButton ? 'p-2' : 'px-2.5 py-2'} text-base gap-1.5 rounded-[6px]`,
     }
 
     const iconSizeClasses = {

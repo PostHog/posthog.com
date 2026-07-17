@@ -1,11 +1,9 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import SEO from 'components/seo'
 import Link from 'components/Link'
-import Editor from 'components/Editor'
-import { useValues } from 'kea'
-import { layoutLogic } from 'logic/layoutLogic'
+import ReaderView from 'components/ReaderView'
+import ViewerFilters from 'components/Viewer/ViewerFilters'
 import OSTable from 'components/OSTable'
-import ScrollArea from 'components/RadixUI/ScrollArea'
 import { useCustomers, Customer as CustomerType } from 'hooks/useCustomers'
 import { IconArrowUpRight } from '@posthog/icons'
 
@@ -48,7 +46,7 @@ const CustomerLink = ({
         <Link
             to={customer.slug === 'posthog' ? '/blog/posthog-marketing' : `/customers/${customer.slug}`}
             state={{ newWindow: true }}
-            className="group"
+            className="group inline-flex h-full items-center"
         >
             {children}
         </Link>
@@ -57,8 +55,9 @@ const CustomerLink = ({
     )
 }
 
+const LOGO_CLASS = 'h-8 w-auto max-w-[180px] object-contain fill-current'
+
 const Customer = ({ number, customer, hasCaseStudy }: CustomerProps) => {
-    // Determine logo rendering logic - same as CustomersSlide.tsx
     const renderLogo = () => {
         if (!customer.logo) {
             return <span>{customer.name}</span>
@@ -67,31 +66,19 @@ const Customer = ({ number, customer, hasCaseStudy }: CustomerProps) => {
         // Check if logo is a React component (single SVG format)
         if (typeof customer.logo === 'function') {
             const LogoComponent = customer.logo
-            const heightClass = customer.height ? `h-${customer.height}` : ''
-            const className = `w-full fill-current object-contain ${heightClass}`.trim()
 
             return (
                 <CustomerLink customer={customer} hasCaseStudy={hasCaseStudy}>
-                    <LogoComponent className={className} />
+                    <LogoComponent className={LOGO_CLASS} />
                 </CustomerLink>
             )
         }
 
         // Otherwise, it's the existing light/dark object format
-        const heightClass = customer.height ? `max-h-${customer.height}` : 'max-h-10'
-
         return (
             <CustomerLink customer={customer} hasCaseStudy={hasCaseStudy}>
-                <img
-                    src={customer.logo.light}
-                    alt={customer.name}
-                    className={`w-auto object-contain dark:hidden ${heightClass}`}
-                />
-                <img
-                    src={customer.logo.dark}
-                    alt={customer.name}
-                    className={`w-auto object-contain hidden dark:block ${heightClass}`}
-                />
+                <img src={customer.logo.light} alt={customer.name} className={`${LOGO_CLASS} dark:hidden`} />
+                <img src={customer.logo.dark} alt={customer.name} className={`${LOGO_CLASS} hidden dark:block`} />
             </CustomerLink>
         )
     }
@@ -101,7 +88,7 @@ const Customer = ({ number, customer, hasCaseStudy }: CustomerProps) => {
         cells: [
             { content: number },
             {
-                content: renderLogo(),
+                content: <div className="flex h-8 items-center">{renderLogo()}</div>,
                 className: '!p-4',
             },
             { content: customer.toolsUsed?.join(', '), className: 'text-sm' },
@@ -131,7 +118,7 @@ const sortCustomers = (customers: CustomerType[]) => {
 
 const columns = [
     { name: '', width: 'auto', align: 'center' as const },
-    { name: 'Company name', width: 'minmax(150px,1fr)', align: 'center' as const },
+    { name: 'Company name', width: 'minmax(150px,1fr)', align: 'left' as const },
     { name: 'Product(s) used', width: 'minmax(auto,250px)', align: 'left' },
     { name: 'Case study', width: 'minmax(auto,100px)', align: 'center' as const },
     { name: 'Notes', width: 'minmax(auto,180px)', align: 'left' as const },
@@ -148,73 +135,79 @@ export default function Customers(): JSX.Element {
 
     return (
         <>
-            <SEO title="customers.mdx – PostHog" description="" image={`/images/og/customers.jpg`} />
-            <Editor
-                showFilters
-                title="customers"
-                type="mdx"
-                slug="/customers"
-                bookmark={{
-                    title: 'Customers',
-                    description: 'Customers who use PostHog',
-                }}
-                availableFilters={[
-                    {
-                        label: 'product(s) used',
-                        options: [
-                            { label: 'Any', value: null },
-                            ...Array.from(
-                                new Set(
-                                    customers
-                                        .filter((customer) => customer.toolsUsed?.length)
-                                        .flatMap((customer) => customer.toolsUsed || [])
-                                )
-                            ).map((tool) => ({
-                                label: tool,
-                                value: tool,
-                            })),
-                        ],
-                        filter: (obj, value) => obj['toolsUsed']?.includes(value),
-                        operator: 'includes',
-                    },
-                    {
-                        label: 'case study',
-                        options: [
-                            { label: 'Any', value: null },
-                            { label: 'TRUE', value: true },
-                            { label: 'FALSE', value: false },
-                        ],
-                        filter: (obj, value) => (value ? hasCaseStudy(obj.slug) : !hasCaseStudy(obj.slug)),
-                        operator: 'equals',
-                    },
-                    {
-                        label: 'featured',
-                        options: [
-                            { label: 'Any', value: null },
-                            { label: 'TRUE', value: true },
-                            { label: 'FALSE', value: false },
-                        ],
-                        filter: (obj, value) => (value ? isFeatured(obj.slug) : !isFeatured(obj.slug)),
-                        operator: 'equals',
-                        initialValue: true,
-                    },
-                ]}
-                dataToFilter={customers}
-                onFilterChange={handleFilterChange}
+            <SEO title="Customers – PostHog" description="" image={`/images/og/customers.jpg`} />
+            <ReaderView
+                hideTitle
+                proseSize="lg"
+                showQuestions={false}
+                hideRightSidebar
+                hideLeftSidebar
+                hideMenu
+                defaultNavVisible={false}
             >
-                <p className="!mt-0 mb-2">Here are some customers who use PostHog.</p>
-                <p className="!mt-0">You can use the filters (above) to read how they use different products.</p>
-                <OSTable
-                    columns={columns}
-                    rows={(filteredCustomers || customers).map((customer: any, index: number) => {
-                        return Customer({
-                            number: index + 1,
-                            customer,
-                            hasCaseStudy,
-                        })
-                    })}
-                />
-            </Editor>
+                <div className="w-full max-w-5xl mx-auto">
+                    <h1 className="text-2xl font-bold">Customers</h1>
+                    <p className="!mt-0 mb-2">Here are some customers who use PostHog.</p>
+                    <p className="!mt-0">You can use the filters below to read how they use different products.</p>
+                    <ViewerFilters
+                        availableFilters={[
+                            {
+                                label: 'Product',
+                                options: [
+                                    { label: 'Any', value: undefined },
+                                    ...Array.from(
+                                        new Set(
+                                            customers
+                                                .filter((customer) => customer.toolsUsed?.length)
+                                                .flatMap((customer) => customer.toolsUsed || [])
+                                        )
+                                    ).map((tool) => ({
+                                        label: tool,
+                                        value: tool,
+                                    })),
+                                ],
+                                filter: (obj, value) => obj['toolsUsed']?.includes(value),
+                                operator: 'includes',
+                            },
+                            {
+                                label: 'Case study',
+                                options: [
+                                    { label: 'Any', value: undefined },
+                                    { label: 'Yes', value: true },
+                                    { label: 'No', value: false },
+                                ],
+                                filter: (obj, value) => (value ? hasCaseStudy(obj.slug) : !hasCaseStudy(obj.slug)),
+                                operator: 'equals',
+                            },
+                            {
+                                label: 'Featured',
+                                options: [
+                                    { label: 'Any', value: undefined },
+                                    { label: 'Yes', value: true },
+                                    { label: 'No', value: false },
+                                ],
+                                filter: (obj, value) => (value ? isFeatured(obj.slug) : !isFeatured(obj.slug)),
+                                operator: 'equals',
+                                initialValue: true,
+                            },
+                        ]}
+                        dataToFilter={customers}
+                        onFilterChange={handleFilterChange}
+                    />
+                    <OSTable
+                        className="mt-2"
+                        columns={columns}
+                        width="full"
+                        rows={(filteredCustomers || customers).map((customer: any, index: number) => {
+                            return Customer({
+                                number: index + 1,
+                                customer,
+                                hasCaseStudy,
+                            })
+                        })}
+                    />
+                </div>
+            </ReaderView>
         </>
     )
 }

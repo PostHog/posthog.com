@@ -1,23 +1,13 @@
 import React, { useEffect, useRef, useState, useMemo, lazy, Suspense } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useQuestions } from 'hooks/useQuestions'
-import HeaderBar from 'components/OSChrome/HeaderBar'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { TreeMenu } from 'components/TreeMenu'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { Question, QuestionForm } from 'components/Squeak'
 import OSButton from 'components/OSButton'
-import {
-    IconSidePanel,
-    IconBottomPanel,
-    IconChevronDown,
-    IconNotification,
-    IconSearch,
-    IconPin,
-    IconCheck,
-    IconChevronLeft,
-} from '@posthog/icons'
+import { IconSidePanel, IconBottomPanel, IconChevronDown, IconNotification, IconPin, IconCheck } from '@posthog/icons'
 import Switch from 'components/RadixUI/Switch'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import { useToast } from '../../context/Toast'
@@ -33,11 +23,12 @@ import Tooltip from 'components/RadixUI/Tooltip'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import { useSubscribedQuestions } from 'hooks/useSubscribedQuestions'
 import { flattenStrapiResponse } from '../../utils'
-import { CallToAction } from 'components/CallToAction'
 import { useApp } from '../../context/App'
 import Link from 'components/Link'
 import { Select } from 'components/RadixUI/Select'
 import SEO from 'components/seo'
+import SearchProvider, { useSearch } from 'components/Editor/SearchProvider'
+import { InlineSearch, AlgoliaSearchResults } from 'components/Search/InlineSearch'
 dayjs.extend(relativeTime)
 
 // lottie-react bundles lottie-web (~600 KiB); load it on demand instead of on every page.
@@ -100,6 +91,57 @@ const Menu = ({ onValueChange }: { onValueChange: (value: string) => void }) => 
                 </ScrollArea>
             </div>
         </>
+    )
+}
+
+const SidebarContent = ({
+    onMenuValueChange,
+    onSubmitQuestion,
+}: {
+    onMenuValueChange: (value: string) => void
+    onSubmitQuestion: () => void
+}) => {
+    const { addWindow } = useApp()
+    const { searchQuery } = useSearch()
+    const isSearching = searchQuery.length >= 2
+
+    return (
+        <div className="flex flex-col h-full">
+            <div className="border-b border-primary">
+                <div className="px-2 mt-2 pb-2">
+                    <OSButton
+                        variant="primary"
+                        size="md"
+                        width="full"
+                        onClick={() =>
+                            addWindow(
+                                <AskAQuestion
+                                    newWindow
+                                    location={{ pathname: `ask-a-question` }}
+                                    key={`ask-a-question`}
+                                    onSubmit={onSubmitQuestion}
+                                />
+                            )
+                        }
+                    >
+                        Ask a question
+                    </OSButton>
+                </div>
+            </div>
+            <ScrollArea className="h-full">
+                <InlineSearch
+                    placeholder="Search questions..."
+                    className="p-2 @2xl:pb-0 @2xl:border-b-0 border-b border-primary"
+                />
+                {isSearching ? (
+                    <div className="p-2">
+                        <AlgoliaSearchResults facetFilters={['type:question']} />
+                    </div>
+                ) : (
+                    <Menu onValueChange={onMenuValueChange} />
+                )}
+            </ScrollArea>
+        </div>
     )
 }
 
@@ -201,14 +243,148 @@ const layoutOptions = [
     {
         label: 'Stacked view',
         value: 'stacked',
-        icon: <IconBottomPanel className="size-5" />,
+        icon: <IconBottomPanel className="size-4" />,
     },
     {
         label: 'Side-by-side view',
         value: 'side-by-side',
-        icon: <IconSidePanel className="size-5" />,
+        icon: <IconSidePanel className="size-4" />,
     },
 ]
+
+interface QuestionToolbarProps {
+    containerRef: React.RefObject<HTMLDivElement>
+    bottomContainerRef: React.RefObject<HTMLDivElement>
+    setBottomHeight: (height: number) => void
+    question: StrapiRecord<QuestionData> | undefined
+    user: any
+    notificationsEnabled: boolean
+    setNotificationsEnabled: (enabled: boolean) => void
+    setSubscription: (params: { contentType: 'topic' | 'question'; id: string | number; subscribe: boolean }) => void
+    addToast: (toast: any) => void
+    sideBySide: boolean
+    handleSideBySide: (sideBySide: boolean) => void
+    expandable: boolean
+    expandOrCollapse: (expandable: boolean) => void
+    isMobile: boolean
+    menuValue: string
+}
+
+const QuestionToolbar = ({
+    containerRef,
+    bottomContainerRef,
+    setBottomHeight,
+    question,
+    user,
+    notificationsEnabled,
+    setNotificationsEnabled,
+    setSubscription,
+    addToast,
+    sideBySide,
+    handleSideBySide,
+    expandable,
+    expandOrCollapse,
+    isMobile,
+    menuValue,
+}: QuestionToolbarProps) => {
+    return (
+        <div className="bg-accent border-t border-primary px-4 py-2 flex gap-2 items-center sticky bottom-0 z-10">
+            <OSButton
+                variant="secondary"
+                size="xs"
+                onClick={() => {
+                    if (!containerRef.current) return
+                    const containerHeight = containerRef.current.getBoundingClientRect().height
+                    setBottomHeight(containerHeight)
+                    document.getElementById('question-form-button')?.click()
+                    setTimeout(() => {
+                        const viewport = bottomContainerRef.current?.querySelector('[data-radix-scroll-area-viewport]')
+                        viewport?.scrollTo({
+                            top: viewport.scrollHeight,
+                            behavior: 'smooth',
+                        })
+                    }, 300)
+                }}
+            >
+                Reply
+            </OSButton>
+            <div className="ml-auto flex space-x-2">
+                {question?.id && user && (
+                    <Switch
+                        checked={notificationsEnabled}
+                        onChange={(checked) => {
+                            setNotificationsEnabled(checked)
+                            setSubscription({
+                                contentType: 'question',
+                                id: question.id,
+                                subscribe: checked,
+                            })
+                            addToast({
+                                description: checked
+                                    ? "You'll be notified of replies by email."
+                                    : "You won't receive notifications for this thread.",
+                                title: checked ? 'Thread notifications enabled' : 'Thread notifications disabled',
+                                onUndo: () => {
+                                    setNotificationsEnabled(!checked)
+                                    setSubscription({
+                                        contentType: 'question',
+                                        id: question.id,
+                                        subscribe: !checked,
+                                    })
+                                },
+                            })
+                        }}
+                        label="Thread notifications"
+                    />
+                )}
+
+                <div className="ml-2 pl-2 border-l border-primary flex items-center gap-1">
+                    <ToggleGroup
+                        title="Layout"
+                        hideTitle={true}
+                        options={layoutOptions}
+                        onValueChange={(value) => handleSideBySide(value === 'side-by-side')}
+                        value={sideBySide ? 'side-by-side' : 'stacked'}
+                        size="sm"
+                    />
+                    <Tooltip
+                        trigger={
+                            <span>
+                                <OSButton
+                                    size="sm"
+                                    className="relative"
+                                    style={{ width: 26, height: 26 }}
+                                    icon={
+                                        <IconChevronDown
+                                            className={`w-6 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 ${
+                                                sideBySide
+                                                    ? expandable
+                                                        ? 'rotate-90'
+                                                        : '-rotate-90'
+                                                    : expandable
+                                                    ? 'rotate-180'
+                                                    : ''
+                                            }`}
+                                        />
+                                    }
+                                    onClick={() => {
+                                        if (isMobile && sideBySide) {
+                                            navigate(menuValue)
+                                        } else {
+                                            expandOrCollapse(expandable)
+                                        }
+                                    }}
+                                />
+                            </span>
+                        }
+                    >
+                        {expandable ? 'Expand' : 'Collapse'}
+                    </Tooltip>
+                </div>
+            </div>
+        </div>
+    )
+}
 
 const AskAQuestion = ({ onSubmit }: { onSubmit: () => void }) => {
     const { addToast } = useToast()
@@ -265,7 +441,6 @@ export default function Inbox(props) {
         sortBy: 'activity',
         filters,
     })
-    const { addWindow, openSearch, websiteMode } = useApp()
     const { appWindow } = useWindow()
     const bottomHeightDefault = useMemo(() => ((appWindow?.size.height || 0) * 3) / 5, [appWindow?.size.height])
     const [bottomHeight, setBottomHeight] = useState(bottomHeightDefault)
@@ -326,12 +501,6 @@ export default function Inbox(props) {
         setSideWidth(newSideWidth)
     }
 
-    const handleBack = () => {
-        if (websiteMode) {
-            navigate(-1)
-        }
-    }
-
     useEffect(() => {
         if (inView && hasMore) {
             fetchMore()
@@ -366,13 +535,9 @@ export default function Inbox(props) {
     }, [isValidating, props.path])
 
     useEffect(() => {
-        if (websiteMode) {
-            setSideBySide(true)
-        } else {
-            const sideBySide = localStorage.getItem('sideBySide')
-            if (sideBySide) {
-                setSideBySide(sideBySide === 'true')
-            }
+        const sideBySide = localStorage.getItem('sideBySide')
+        if (sideBySide) {
+            setSideBySide(sideBySide === 'true')
         }
     }, [])
 
@@ -388,184 +553,128 @@ export default function Inbox(props) {
     }, [sideBySide])
 
     useEffect(() => {
-        if (websiteMode || (isMobile && sideBySide && containerRef.current)) {
+        if (isMobile && sideBySide && containerRef.current) {
             setSideWidth(containerRef.current.getBoundingClientRect().width)
         }
-    }, [isMobile, sideBySide, containerRef.current, appWindow?.size.width, websiteMode])
+    }, [isMobile, sideBySide, containerRef.current, appWindow?.size.width])
 
     return (
         <>
             <SEO title={(permalink && question?.attributes.subject) || data?.topic?.label || 'Forums'} />
             {ready ? (
                 <div className="@container w-full h-full flex flex-col">
-                    <HeaderBar
-                        homeURL={websiteMode ? undefined : '/questions'}
-                        showBack={!websiteMode}
-                        showForward={!websiteMode}
-                        showSearch
-                        showCustomLeft={websiteMode ? <h2 className="text-primary">Forums</h2> : undefined}
-                        className={websiteMode ? 'border-b border-primary @2xl:sticky top-[49px] z-20 bg-primary' : ''}
-                        rightActionButtons={
-                            <div className="flex items-center gap-2 flex-wrap">
-                                <OSButton icon={<IconSearch />} onClick={() => openSearch('question')} />
-                                <CallToAction
-                                    size="sm"
-                                    type={websiteMode ? 'secondary' : 'primary'}
-                                    onClick={() =>
-                                        addWindow(
-                                            <AskAQuestion
-                                                newWindow
-                                                location={{ pathname: `ask-a-question` }}
-                                                key={`ask-a-question`}
-                                                onSubmit={refresh}
-                                            />
-                                        )
-                                    }
-                                >
-                                    Ask a question
-                                </CallToAction>
-                                {permalink && !websiteMode ? (
-                                    <ToggleGroup
-                                        title="Layout"
-                                        hideTitle={true}
-                                        options={layoutOptions}
-                                        onValueChange={(value) => handleSideBySide(value === 'side-by-side')}
-                                        value={sideBySide ? 'side-by-side' : 'stacked'}
-                                        className="-my-1"
-                                    />
-                                ) : null}
-                            </div>
-                        }
-                    />
-
-                    <div
-                        data-scheme="secondary"
-                        className={`flex @2xl:flex-row flex-col flex-grow min-h-0 ${
-                            websiteMode ? '' : 'border-t border-primary'
-                        }`}
-                    >
+                    <div data-scheme="secondary" className={`flex @2xl:flex-row flex-col flex-grow min-h-0`}>
                         <aside
                             data-scheme="secondary"
-                            className={`w-full @2xl:w-64 bg-primary flex-shrink-0 ${
-                                websiteMode
-                                    ? '@2xl:h-[calc(100vh-91px)] @2xl:sticky top-[101px] border-b border-primary @2xl:border-b-0'
-                                    : '@2xl:border-r border-primary @2xl:h-full'
-                            }`}
+                            className="w-full @2xl:w-64 bg-primary flex-shrink-0 @2xl:border-r border-primary @2xl:h-full"
                         >
-                            <ScrollArea className="h-full">
-                                <Menu onValueChange={setMenuValue} />
-                            </ScrollArea>
+                            <SearchProvider>
+                                <SidebarContent onMenuValueChange={setMenuValue} onSubmitQuestion={refresh} />
+                            </SearchProvider>
                         </aside>
                         <main
                             data-scheme="primary"
-                            className={`flex-1 bg-primary overflow-hidden border-primary ${
-                                websiteMode ? 'border-l' : '@2xl:border-none border-t'
-                            }`}
+                            className="flex-1 bg-primary overflow-hidden border-primary @2xl:border-none border-t"
                         >
                             <div
                                 ref={containerRef}
                                 className={`flex flex-row h-full ${sideBySide ? 'flex-row' : 'flex-col'}`}
                             >
-                                {permalink && websiteMode ? null : (
-                                    <div
-                                        className={`@container flex-1 min-h-0 text-sm ${sideBySide ? 'w-0' : 'w-full'}`}
-                                    >
-                                        <ScrollArea className="h-full">
-                                            <div className="flex items-center pl-2.5 pr-4 py-2 border-b border-primary font-medium bg-accent text-sm bg-accent-2 sticky top-0 text-primary z-10 whitespace-nowrap">
-                                                <div className="w-8 shrink-0 @3xl:block hidden" />
-                                                <div className="hidden @3xl:block w-48">Author</div>
-                                                <div className="flex-1">
-                                                    <span className="@3xl:hidden">Author / Replies</span>
-                                                    <span className="hidden @3xl:block">Subject</span>
+                                <div className={`@container flex-1 min-h-0 text-sm ${sideBySide ? 'w-0' : 'w-full'}`}>
+                                    <ScrollArea className="h-full">
+                                        <div className="flex items-center pl-2.5 pr-4 py-2 border-b border-primary font-medium bg-accent text-sm bg-accent-2 sticky top-0 text-primary z-10 whitespace-nowrap">
+                                            <div className="w-8 shrink-0 @3xl:block hidden" />
+                                            <div className="hidden @3xl:block w-48">Author</div>
+                                            <div className="flex-1">
+                                                <span className="@3xl:hidden">Author / Replies</span>
+                                                <span className="hidden @3xl:block">Subject</span>
+                                            </div>
+                                            <div className="hidden @3xl:block w-24 text-center">Replies</div>
+                                            <div className="w-60 text-right @3xl:text-left">Last activity</div>
+                                        </div>
+                                        <div className="px-1 py-1 space-y-px">
+                                            {pinnedQuestions?.map((question) => (
+                                                <QuestionRow
+                                                    key={question.id}
+                                                    question={question}
+                                                    lastQuestionRef={lastQuestionRef}
+                                                    appWindowPath={appWindow?.path}
+                                                    bottomHeight={bottomHeight}
+                                                    setBottomHeight={setBottomHeight}
+                                                    containerRef={containerRef}
+                                                    pinned
+                                                />
+                                            ))}
+                                            {(showSubscribedQuestions
+                                                ? subscribedQuestions
+                                                : flattenStrapiResponse(questions.data)?.filter(
+                                                      (question) => !question?.pinnedTopics?.[0]
+                                                  )
+                                            )?.map((question) => (
+                                                <QuestionRow
+                                                    key={question.id}
+                                                    question={question}
+                                                    lastQuestionRef={lastQuestionRef}
+                                                    appWindowPath={appWindow?.path}
+                                                    bottomHeight={bottomHeight}
+                                                    setBottomHeight={setBottomHeight}
+                                                    containerRef={containerRef}
+                                                />
+                                            ))}
+                                            {!isLoading && (!questions.data || questions.data.length === 0) && (
+                                                <div className="flex flex-col items-center justify-center py-12 px-4 text-center text-primary">
+                                                    <div className="text-lg mb-2 font-semibold">No questions found</div>
+                                                    <div className="text-secondary text-sm">
+                                                        {props.path === '/questions/subscriptions'
+                                                            ? "You haven't subscribed to any questions yet."
+                                                            : 'There are no questions in this topic yet.'}
+                                                    </div>
                                                 </div>
-                                                <div className="hidden @3xl:block w-24 text-center">Replies</div>
-                                                <div className="w-60 text-right @3xl:text-left">Last activity</div>
-                                            </div>
-                                            <div className="px-1 py-1 space-y-px">
-                                                {pinnedQuestions?.map((question) => (
-                                                    <QuestionRow
-                                                        key={question.id}
-                                                        question={question}
-                                                        lastQuestionRef={lastQuestionRef}
-                                                        appWindowPath={appWindow?.path}
-                                                        bottomHeight={bottomHeight}
-                                                        setBottomHeight={setBottomHeight}
-                                                        containerRef={containerRef}
-                                                        pinned
-                                                    />
-                                                ))}
-                                                {(showSubscribedQuestions
-                                                    ? subscribedQuestions
-                                                    : flattenStrapiResponse(questions.data)?.filter(
-                                                          (question) => !question?.pinnedTopics?.[0]
-                                                      )
-                                                )?.map((question) => (
-                                                    <QuestionRow
-                                                        key={question.id}
-                                                        question={question}
-                                                        lastQuestionRef={lastQuestionRef}
-                                                        appWindowPath={appWindow?.path}
-                                                        bottomHeight={bottomHeight}
-                                                        setBottomHeight={setBottomHeight}
-                                                        containerRef={containerRef}
-                                                    />
-                                                ))}
-                                                {!isLoading && (!questions.data || questions.data.length === 0) && (
-                                                    <div className="flex flex-col items-center justify-center py-12 px-4 text-center text-primary">
-                                                        <div className="text-lg mb-2 font-semibold">
-                                                            No questions found
-                                                        </div>
-                                                        <div className="text-secondary text-sm">
-                                                            {props.path === '/questions/subscriptions'
-                                                                ? "You haven't subscribed to any questions yet."
-                                                                : 'There are no questions in this topic yet.'}
-                                                        </div>
-                                                    </div>
-                                                )}
-                                                {isLoading && (
-                                                    <div className="flex items-center justify-center py-8 h-full">
-                                                        <Suspense fallback={null}>
-                                                            <Lottie
-                                                                animationData={hourglassAnimation}
-                                                                className="size-6 opacity-75 dark:hidden"
-                                                                title="Loading questions..."
-                                                            />
-                                                            <Lottie
-                                                                animationData={hourglassAnimationWhite}
-                                                                className="size-6 opacity-75 hidden dark:block"
-                                                                title="Loading questions..."
-                                                            />
-                                                        </Suspense>
-                                                    </div>
-                                                )}
-                                            </div>
-                                        </ScrollArea>
-                                    </div>
-                                )}
+                                            )}
+                                            {isLoading && (
+                                                <div className="flex items-center justify-center py-8 h-full">
+                                                    <Suspense fallback={null}>
+                                                        <Lottie
+                                                            animationData={hourglassAnimation}
+                                                            className="size-6 opacity-75 dark:hidden"
+                                                            title="Loading questions..."
+                                                        />
+                                                        <Lottie
+                                                            animationData={hourglassAnimationWhite}
+                                                            className="size-6 opacity-75 hidden dark:block"
+                                                            title="Loading questions..."
+                                                        />
+                                                    </Suspense>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </ScrollArea>
+                                </div>
                                 <AnimatePresence>
                                     {permalink && (
                                         <motion.div
                                             ref={bottomContainerRef}
                                             className={`flex-none relative min-h-0 min-w-0 ${
                                                 !isDragging ? 'transition-all duration-200 ease-out' : ''
-                                            } ${sideBySide && !websiteMode ? '@4xl:border-l border-primary' : ''}`}
+                                            } ${
+                                                sideBySide ? '@4xl:border-l border-primary' : 'border-t border-primary'
+                                            }`}
                                             initial={{
-                                                width: websiteMode ? '100%' : 0,
+                                                width: 0,
                                             }}
                                             animate={{
                                                 height: sideBySide ? '100%' : bottomHeight,
-                                                width: sideBySide && !websiteMode ? sideWidth : '100%',
+                                                width: sideBySide ? sideWidth : '100%',
                                             }}
                                             exit={{
-                                                width: websiteMode ? '100%' : 0,
+                                                width: 0,
                                             }}
                                             transition={{
                                                 type: 'tween',
-                                                ...(websiteMode ? { duration: 0 } : {}),
                                                 ...(isDragging ? { duration: 0 } : {}),
                                             }}
                                         >
-                                            {websiteMode ? null : sideBySide ? (
+                                            {sideBySide ? (
                                                 <motion.div
                                                     data-scheme="tertiary"
                                                     className="w-1.5 cursor-ew-resize top-0 left-0 !transform-none absolute z-20 h-full hover:bg-accent active:bg-accent @4xl:block hidden"
@@ -597,111 +706,6 @@ export default function Inbox(props) {
                                                 />
                                             )}
 
-                                            <div
-                                                className={`bg-accent border-y border-primary px-4 py-2 flex gap-2 items-center sticky top-0 z-10 ${
-                                                    sideBySide ? 'border-t-0' : ''
-                                                }`}
-                                            >
-                                                {websiteMode && (
-                                                    <OSButton
-                                                        size="md"
-                                                        onClick={handleBack}
-                                                        icon={<IconChevronLeft />}
-                                                    />
-                                                )}
-                                                <OSButton
-                                                    variant="secondary"
-                                                    size="xs"
-                                                    onClick={() => {
-                                                        if (!containerRef.current) return
-                                                        const containerHeight =
-                                                            containerRef.current.getBoundingClientRect().height
-                                                        setBottomHeight(containerHeight)
-                                                        document.getElementById('question-form-button')?.click()
-                                                        setTimeout(() => {
-                                                            const viewport = bottomContainerRef.current?.querySelector(
-                                                                '[data-radix-scroll-area-viewport]'
-                                                            )
-                                                            viewport?.scrollTo({
-                                                                top: viewport.scrollHeight,
-                                                                behavior: 'smooth',
-                                                            })
-                                                        }, 300)
-                                                    }}
-                                                >
-                                                    Reply
-                                                </OSButton>
-                                                <div className="ml-auto flex space-x-4">
-                                                    {question?.id && user && (
-                                                        <Switch
-                                                            checked={notificationsEnabled}
-                                                            onChange={(checked) => {
-                                                                setNotificationsEnabled(checked)
-                                                                setSubscription({
-                                                                    contentType: 'question',
-                                                                    id: question.id,
-                                                                    subscribe: checked,
-                                                                })
-                                                                addToast({
-                                                                    description: checked
-                                                                        ? "You'll be notified of replies by email."
-                                                                        : "You won't receive notifications for this thread.",
-                                                                    title: checked
-                                                                        ? 'Thread notifications enabled'
-                                                                        : 'Thread notifications disabled',
-                                                                    onUndo: () => {
-                                                                        setNotificationsEnabled(!checked)
-                                                                        setSubscription({
-                                                                            contentType: 'question',
-                                                                            id: question.id,
-                                                                            subscribe: !checked,
-                                                                        })
-                                                                    },
-                                                                })
-                                                            }}
-                                                            label="Thread notifications"
-                                                        />
-                                                    )}
-
-                                                    {!websiteMode && (
-                                                        <div className="ml-1 pl-1 border-l border-primary">
-                                                            <Tooltip
-                                                                trigger={
-                                                                    <span>
-                                                                        <OSButton
-                                                                            size="sm"
-                                                                            className="relative"
-                                                                            style={{ width: 26, height: 26 }}
-                                                                            icon={
-                                                                                <IconChevronDown
-                                                                                    className={`w-6 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 ${
-                                                                                        sideBySide
-                                                                                            ? expandable
-                                                                                                ? 'rotate-90'
-                                                                                                : '-rotate-90'
-                                                                                            : expandable
-                                                                                            ? 'rotate-180'
-                                                                                            : ''
-                                                                                    }`}
-                                                                                />
-                                                                            }
-                                                                            onClick={() => {
-                                                                                if (isMobile && sideBySide) {
-                                                                                    navigate(menuValue)
-                                                                                } else {
-                                                                                    expandOrCollapse(expandable)
-                                                                                }
-                                                                            }}
-                                                                        />
-                                                                    </span>
-                                                                }
-                                                            >
-                                                                {expandable ? 'Expand' : 'Collapse'}
-                                                            </Tooltip>
-                                                        </div>
-                                                    )}
-                                                </div>
-                                            </div>
                                             <ScrollArea>
                                                 <div className="pb-[64px]">
                                                     <Question
@@ -715,6 +719,23 @@ export default function Inbox(props) {
                                                     />
                                                 </div>
                                             </ScrollArea>
+                                            <QuestionToolbar
+                                                containerRef={containerRef}
+                                                bottomContainerRef={bottomContainerRef}
+                                                setBottomHeight={setBottomHeight}
+                                                question={question}
+                                                user={user}
+                                                notificationsEnabled={notificationsEnabled}
+                                                setNotificationsEnabled={setNotificationsEnabled}
+                                                setSubscription={setSubscription}
+                                                addToast={addToast}
+                                                sideBySide={sideBySide}
+                                                handleSideBySide={handleSideBySide}
+                                                expandable={expandable}
+                                                expandOrCollapse={expandOrCollapse}
+                                                isMobile={isMobile}
+                                                menuValue={menuValue}
+                                            />
                                         </motion.div>
                                     )}
                                 </AnimatePresence>

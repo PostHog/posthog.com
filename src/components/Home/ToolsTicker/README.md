@@ -2,7 +2,7 @@
 
 A one-line, infinitely rolling marquee of PostHog products: a static label ("Built-in tools for your agents:") followed by a horizontally scrolling strip of product icons + names, each linking to its product page.
 
-Currently rendered in `TestHero` (`src/components/Home/Test/index.tsx`), directly under the tabbed `HeroCarousel`, so it only appears in the `test` variant of the `self-driving-mode-test` homepage experiment.
+Currently rendered in the homepage hero (`src/components/Home/Test/index.tsx`), directly under the tabbed `HeroCarousel`.
 
 ## Usage
 

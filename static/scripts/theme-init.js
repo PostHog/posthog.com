@@ -29,8 +29,8 @@
 
     // Set initial skin value
     try {
-        const savedSkin = JSON.parse(localStorage.getItem('siteSettings') || '{}').skinMode || 'modern'
-        document.body.setAttribute('data-skin', savedSkin)
+        // The classic skin has been retired; always render the modern skin
+        document.body.setAttribute('data-skin', 'modern')
         const savedWallpaper = JSON.parse(localStorage.getItem('siteSettings') || '{}').wallpaper || 'keyboard-garden'
         document.body.setAttribute('data-wallpaper', savedWallpaper)
     } catch (err) {}

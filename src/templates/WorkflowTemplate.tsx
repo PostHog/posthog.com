@@ -71,7 +71,6 @@ export default function WorkflowTemplate({ data }) {
                     type: 'plain',
                 }}
                 title={name}
-                homeURL="/templates"
                 leftSidebar={<TreeMenu items={templatesMenu} />}
                 hideRightSidebar
                 hideTitle
