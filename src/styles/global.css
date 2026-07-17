@@ -101,6 +101,10 @@
         del {
             @apply text-muted;
         }
+
+        hr {
+            @apply border-t border-b-0 border-solid border-primary my-6 h-0;
+        }
     }
 }
 
@@ -138,7 +142,7 @@
         --input-bg-hover: 238 239 233;
         --input-border: 210 211 204;
         --input-border-hover: 210 211 204;
-        --text-primary: 77 79 70;
+        --text-primary: 17 17 17;
         --text-secondary: 101 103 94;
         --text-muted: 158 160 150;
         --tw-shadow-color: 77 79 70;
@@ -186,6 +190,27 @@
 
     mark {
         @apply inline;
+    }
+
+    mark[data-markjs='true'] {
+        @apply bg-yellow/40 dark:bg-yellow/30 text-inherit rounded-sm;
+    }
+
+    .search-scroll-target {
+        @apply outline-2 outline-yellow outline-offset-2 rounded-sm;
+        animation: search-scroll-fade 2s ease-out forwards;
+    }
+
+    @keyframes search-scroll-fade {
+        0% {
+            outline-color: var(--yellow);
+        }
+        70% {
+            outline-color: var(--yellow);
+        }
+        100% {
+            outline-color: transparent;
+        }
     }
 
     .prose a > code,
@@ -292,7 +317,7 @@
         --input-bg-hover: 34 35 32;
         --input-border: 50 52 63;
         --input-border-hover: 176 180 196;
-        --text-primary: 234 236 246;
+        --text-primary: 250 250 250;
         --text-secondary: 174 179 194;
         --text-muted: 98 102 116;
         --tw-shadow-color: 176 180 196;
@@ -479,11 +504,8 @@
 }
 
 body {
-    font-family: 'IBM Plex Sans Variable', 'IBM Plex Sans', '-apple-system', 'BlinkMacSystemFont', 'avenir next',
-        'avenir', 'segoe ui', 'helvetica neue', 'helvetica', 'Ubuntu', 'roboto', 'noto', 'arial', 'sans-serif' !important;
-    overflow-x: hidden;
+    @apply font-rounded overflow-x-hidden m-0;
     word-wrap: break-word;
-    margin: 0;
 }
 body.light {
     background-color: #eeefe9;
@@ -497,7 +519,7 @@ p {
 }
 
 code {
-    @apply font-code font-medium text-sm border border-primary bg-accent rounded-sm px-1 py-0.5;
+    @apply font-code font-medium text-[13px] border border-primary bg-accent rounded-sm px-1 py-0.5 inline-block;
     /* Double-clicking inline code selects its full contents instead of bleeding into surrounding text */
     user-select: all;
 }
@@ -551,6 +573,16 @@ hr {
     &:hover {
         @apply bg-black/30 dark:bg-white/30;
     }
+}
+
+/* App window scroll viewports — native scrolling with a thicker, themed thumb
+   and no track channel (replaces Radix ScrollArea's JS-driven scrollbar). */
+.app-scroll-viewport {
+    scrollbar-width: thin;
+}
+
+.app-scroll-viewport::-webkit-scrollbar-track {
+    @apply bg-transparent shadow-none;
 }
 
 /* links and text */
@@ -2070,6 +2102,93 @@ li.squeak-left-border {
     animation: fadeIn 0.3s ease-out;
 }
 
+@keyframes overlayFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@keyframes overlayFadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+.animate-overlay-fade-in {
+    animation: overlayFadeIn 0.2s ease-out forwards;
+}
+.animate-overlay-fade-out {
+    animation: overlayFadeOut 0.15s ease-in forwards;
+}
+
+@keyframes windowPopIn {
+    from {
+        opacity: 0;
+        transform: scale(0.92);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+.animate-window-pop-in {
+    animation: windowPopIn 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes windowSlideDown {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-100%);
+    }
+    40% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+.animate-window-slide-down {
+    animation: windowSlideDown 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.15) both;
+}
+
+@keyframes windowSlideUp {
+    0% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+    60% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-100%);
+    }
+}
+.animate-window-slide-up {
+    animation: windowSlideUp 0.25s cubic-bezier(0.6, -0.28, 0.735, 0.045) both;
+    pointer-events: none;
+}
+
+@keyframes windowPopOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.92);
+    }
+}
+.animate-window-pop-out {
+    animation: windowPopOut 0.15s cubic-bezier(0.55, 0, 1, 0.45) both;
+    pointer-events: none;
+}
+
 .side-modal {
     h2 {
         @apply text-xl;
@@ -2646,6 +2765,63 @@ article.reader-view-content-container:has(.quest-sidebar) {
     }
 }
 
+/* On mobile, always present AppWindows as expanded (full-screen) regardless of SSR windowed state. */
+@media (max-width: 767px) {
+    #app-container div[data-app='AppWindow']:not([data-fixed-size]) {
+        @apply size-full rounded-tr-none rounded-tl-none;
+    }
+
+    #app-container div[data-app='AppWindow']:not([data-fixed-size]) > .size-full.flex-grow {
+        @apply rounded-tr-none rounded-tl-none;
+    }
+
+    #app-container div[data-app='AppWindow']:not([data-fixed-size]) .window-expand-control {
+        @apply hidden;
+    }
+
+    #app-container #taskbar {
+        @apply rounded-bl-none rounded-br-none;
+    }
+}
+
+#app-container[data-window-expanded] #taskbar {
+    @apply rounded-bl-none rounded-br-none;
+}
+
+#app-container[data-window-snapped-left]:not([data-window-expanded]) #taskbar {
+    @apply rounded-bl-none;
+}
+
+#app-container[data-window-snapped-right]:not([data-window-expanded]) #taskbar {
+    @apply rounded-br-none;
+}
+
+#app-container[data-window-expanded] div[data-app='AppWindow'][data-expanded]:not([data-fixed-size]) {
+    @apply size-full rounded-tr-none rounded-tl-none;
+}
+
+#app-container[data-window-expanded]
+    div[data-app='AppWindow'][data-expanded]:not([data-fixed-size])
+    > .size-full.flex-grow {
+    @apply rounded-tr-none rounded-tl-none;
+}
+
+#app-container[data-window-snapped-left] div[data-app='AppWindow'][data-snapped='left']:not([data-fixed-size]) {
+    @apply rounded-tl-none rounded-tr-none rounded-br-none;
+}
+
+#app-container[data-window-snapped-right] div[data-app='AppWindow'][data-snapped='right']:not([data-fixed-size]) {
+    @apply rounded-tl-none rounded-tr-none rounded-bl-none;
+}
+
+/* Per-page windowed width overrides (desktop only; mobile stays full-screen above). */
+@media (min-width: 768px) {
+    #app-container:not([data-window-expanded])
+        div[data-app='AppWindow'][data-windowed][data-path='/']:not([data-fixed-size]) {
+        max-width: 1200px;
+    }
+}
+
 .reader-content-container {
     iframe {
         @apply w-full aspect-video; /* attempt to make youtube videos full width with hopefully no negative consequences... */
@@ -2653,7 +2829,7 @@ article.reader-view-content-container:has(.quest-sidebar) {
 }
 
 div[data-radix-popper-content-wrapper] {
-    @apply !z-50; /* layer website mode menu over menubar for y-overflowing menus */
+    @apply !z-[9999]; /* layer website mode menu over menubar for y-overflowing menus */
 }
 
 .product-description {
@@ -2711,7 +2887,7 @@ div[data-radix-popper-content-wrapper] {
     border-left-color: rgb(30 31 35) !important;
 }
 
-@keyframes hero-carousel-progress {
+@keyframes carousel-progress {
     from {
         width: 0%;
     }
@@ -2726,6 +2902,15 @@ div[data-radix-popper-content-wrapper] {
     }
     to {
         transform: translateX(-50%);
+    }
+}
+
+@keyframes carousel-fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
     }
 }
 

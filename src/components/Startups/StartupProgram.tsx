@@ -401,19 +401,24 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                 template="generic"
                 slug="startups"
                 title="PostHog startup program"
+                headerBarOptions={['showBack', 'showForward']}
                 selectOptions={selectOptions}
                 selectedCategory="startups"
                 leftSidebarContent={
-                    <>
+                    <div className="p-2">
                         <Accordion
                             data-scheme="primary"
-                            className=""
-                            defaultValue="item-0"
+                            type="multiple"
+                            className="[&>*:first-child_button]:!pt-0"
+                            triggerClassName="!text-sm !font-semibold"
+                            contentClassName="!text-sm [&_p]:!text-sm [&_li]:!text-sm"
+                            defaultValue={['item-0']}
                             items={[
                                 {
+                                    value: 'item-0',
                                     trigger: (
                                         <>
-                                            <IconQuestion className={`text-green size-5 inline-block`} />
+                                            <IconQuestion className="text-green size-5 shrink-0" />
                                             <span className="flex-1">What is this?</span>
                                         </>
                                     ),
@@ -425,90 +430,66 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                                         </p>
                                     ),
                                 },
-                            ]}
-                        />
-                        <Accordion
-                            data-scheme="primary"
-                            className=""
-                            defaultValue="item-0"
-                            items={[
                                 {
+                                    value: 'item-1',
                                     trigger: (
                                         <>
-                                            <IconCheck className={`text-green size-5 inline-block`} />
+                                            <IconCheck className="text-green size-5 shrink-0" />
                                             <span className="flex-1">How to apply</span>
                                         </>
                                     ),
                                     content: (
-                                        <>
-                                            <ol className="m-0">
-                                                <li>Create a PostHog account and add a credit card</li>
-                                                <li>
-                                                    After onboarding,{' '}
-                                                    <Link to={applyUrl} external className="underline font-semibold">
-                                                        complete this form
-                                                    </Link>
-                                                </li>
-                                                <li>
-                                                    If accepted into the PostHog startup program, you'll be notified by
-                                                    email
-                                                </li>
-                                            </ol>
-                                        </>
+                                        <ol className="m-0">
+                                            <li>Create a PostHog account and add a credit card</li>
+                                            <li>
+                                                After onboarding,{' '}
+                                                <Link to={applyUrl} external className="underline font-semibold">
+                                                    complete this form
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                If accepted into the PostHog startup program, you'll be notified by
+                                                email
+                                            </li>
+                                        </ol>
                                     ),
                                 },
-                            ]}
-                        />
-                        <Accordion
-                            data-scheme="primary"
-                            className=""
-                            defaultValue="item-0"
-                            items={[
                                 {
+                                    value: 'item-2',
                                     trigger: (
                                         <>
-                                            <IconCheck className={`text-green size-5 inline-block`} />
+                                            <IconCheck className="text-green size-5 shrink-0" />
                                             <span className="flex-1">Who is eligible?</span>
                                         </>
                                     ),
                                     content: (
-                                        <>
-                                            <ul className="m-0">
-                                                <li>Startup under 2 years old</li>
-                                                <li>Less than $5 million in funding</li>
-                                            </ul>
-                                        </>
+                                        <ul className="m-0">
+                                            <li>Startup under 2 years old</li>
+                                            <li>Less than $5 million in funding</li>
+                                        </ul>
                                     ),
                                 },
-                            ]}
-                        />
-                        <Accordion
-                            data-scheme="primary"
-                            className=""
-                            defaultValue="item-0"
-                            items={[
                                 {
+                                    value: 'item-3',
                                     trigger: (
                                         <>
-                                            <IconCheck className={`text-green size-5 inline-block`} />
+                                            <IconCheck className="text-green size-5 shrink-0" />
                                             <span className="flex-1">Fine print</span>
                                         </>
                                     ),
                                     content: (
-                                        <>
-                                            <ul className="m-0">
-                                                <li>Credits expire after 12 months</li>
-                                                <li>This deal is not valid with other discounts or offers</li>
-                                                <li>
-                                                    Companies on our startups plan are not eligible for priority support
-                                                </li>
-                                            </ul>
-                                        </>
+                                        <ul className="m-0">
+                                            <li>Credits expire after 12 months</li>
+                                            <li>This deal is not valid with other discounts or offers</li>
+                                            <li>
+                                                Companies on our startups plan are not eligible for priority support
+                                            </li>
+                                        </ul>
                                     ),
                                 },
                             ]}
                         />
-                    </>
+                    </div>
                 }
                 showTitle={false}
                 padding={false}
@@ -522,12 +503,12 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                             {/* Partner variants show the "PostHog X Partner" co-brand lockup above the heading. */}
                             {partnerConfig ? (
                                 <div className="flex items-center gap-2.5 mb-3">
-                                    <Logo noText className="h-8 relative -top-px" fill="white" />
+                                    <Logo wordmark={false} className="h-8 relative -top-px" color="white" />
                                     {partnerConfig.title}
                                 </div>
                             ) : (
                                 <h1 className="flex items-center gap-2.5 mb-0 text-2xl @md:text-3xl">
-                                    <Logo noText className="h-8 relative -top-px" fill="white" />
+                                    <Logo wordmark={false} className="h-8 relative -top-px" color="white" />
                                     <span>
                                         PostHog <span className="text-yellow">for startups</span>
                                     </span>

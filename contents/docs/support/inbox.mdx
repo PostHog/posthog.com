@@ -14,16 +14,15 @@ Go to **Support** in the main PostHog navigation to access your inbox.
 
 Each ticket has the following properties:
 
-| Property              | Description                                                         |
-| --------------------- | ------------------------------------------------------------------- |
-| **Ticket number**     | Auto-incremented unique number (e.g., #1, #2, #3)                   |
-| **Status**            | `new`, `open`, `pending`, `on_hold`, `resolved`                     |
-| **Priority**          | `low`, `medium`, `high` (optional)                                  |
-| **Channel**           | Where the ticket came from: `widget`, `slack`, `email`, or `github` |
-| **Assignee**          | User or role responsible for the ticket                             |
-| **Session ID**        | The PostHog session for events and exceptions                       |
-| **Session Replay ID** | The session recording (if replay is enabled)                        |
-| **Distinct ID**       | PostHog distinct_id for person linking                              |
+| Property          | Description                                                                   |
+| ----------------- | ----------------------------------------------------------------------------- |
+| **Ticket number** | Auto-incremented unique number (e.g., #1, #2, #3)                             |
+| **Status**        | `new`, `open`, `pending`, `on_hold`, `resolved`                               |
+| **Priority**      | `low`, `medium`, `high` (optional — unset by default)                         |
+| **Channel**       | Where the ticket came from: `widget`, `slack`, `email`, `teams`, or `github`  |
+| **Assignee**      | User or role responsible for the ticket                                       |
+| **Session ID**    | The PostHog session for events and exceptions                                 |
+| **Distinct ID**   | PostHog distinct_id for person linking                                        |
 
 ## Status workflow
 
@@ -35,32 +34,39 @@ Each ticket has the following properties:
 | `on_hold`  | Paused for external reason           |
 | `resolved` | Issue resolved, conversation closed  |
 
+Tickets can also be **snoozed** until a specific time. Snoozing a ticket automatically sets its status to `on_hold`, and it reopens to `open` when the snooze expires.
+
 ## Filtering and search
 
 The ticket inbox supports filtering by:
 
-- **Status** – Filter by ticket status
-- **Priority** – Filter by priority level
-- **Channel** – Filter by source: widget, Slack, email, or GitHub
-- **SLA state** – On track, at risk, or breached
-- **Tags** – Filter by tags attached to tickets
-- **Assignee** – Unassigned, specific user, or specific role
-- **Date range** – Filter by creation date
-- **Search** – Search by ticket number, customer name, or email
+- **Status**: Filter by ticket status
+- **Priority**: Filter by priority level
+- **Channel**: Filter by source: widget, Slack, email, Teams, or GitHub
+- **SLA state**: On track, at risk, or breached
+- **Tags**: Filter by tags (supports any-match, all-match, and exclude modes)
+- **Assignee**: Unassigned, specific user, or specific role
+- **AI triage**: Filter by AI triage result (when AI suggestions are enabled)
+- **Date range**: Filter by last updated date (defaults to last 7 days)
+- **Search**: Search by ticket number, customer name, email, or message content
+- **Sort**: Sort by last updated, SLA deadline, creation date, or ticket number
+
+You can save filter combinations as **saved views** for quick access.
 
 ## Ticket assignment
 
 Tickets can be assigned to:
 
-1. **Individual users** – A specific team member
-2. **Roles** – A group of users. Assigns to the role, not individual members.
+1. **Individual users**: A specific team member
+2. **Roles**: A group of users. Assigns to the role, not individual members.
 
 ### How to assign a support ticket
 
 1. Open a ticket
 2. Click the **Assignee** dropdown in the sidebar
 3. Search for and select a user or role
-4. Click **Save changes**
+
+Assignment saves immediately on selection.
 
 <CalloutBox icon="IconInfo" title="How assignment works" type="fyi">
 
@@ -72,9 +78,9 @@ Assignment is manual with no automatic routing. Each ticket supports one assigne
 
 In the ticket list, use the assignee filter:
 
-- **Unassigned** – Show tickets with no assignment
-- **User: [name]** – Show tickets assigned to a specific user
-- **Role: [name]** – Show tickets assigned to a specific role
+- **Unassigned**: Show tickets with no assignment
+- **User: [name]**: Show tickets assigned to a specific user
+- **Role: [name]**: Show tickets assigned to a specific role
 
 ## SLAs
 
@@ -96,9 +102,10 @@ See [workflow automation](/docs/support/workflows) for examples of setting SLAs 
 
 Tickets support free-form tags for categorization and filtering.
 
-- Tags are shared across the project – any tag used on one ticket is available on all tickets
+- Tags are shared across the project — any tag used on one ticket is available on all tickets
 - Add or remove tags from the ticket detail sidebar
-- Filter the ticket list by tags
+- Filter the ticket list by tags using any-match, all-match, or exclude modes
+- Bulk add, remove, or set tags across multiple tickets
 
 Tags can also be set automatically via [workflow automation](/docs/support/workflows#8-auto-tag-tickets-by-customer-email-domain).
 
@@ -106,22 +113,34 @@ Tags can also be set automatically via [workflow automation](/docs/support/workf
 
 ### Author types
 
-| Author type  | Description                                  |
-| ------------ | -------------------------------------------- |
-| **Customer** | Messages sent by the end user via the widget |
-| **Support**  | Messages sent by your team from PostHog      |
-| **AI**       | Messages from AI (reserved for future use)   |
+| Author type  | Description                                                                                                                      |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------- |
+| **Customer** | Messages sent by the end user via the widget, email, Slack, Teams, or GitHub                                                     |
+| **Support**  | Messages sent by your team from PostHog                                                                                          |
+| **AI**       | Messages generated by AI. Can be configured as private notes (visible only to your team) or public bot replies per channel.       |
 
 ### Message status
 
-Messages you send to customers display delivery status indicators:
+#### Widget tickets
+
+Messages you send to widget customers display delivery status indicators:
 
 | Status   | Meaning                                    |
 | -------- | ------------------------------------------ |
 | **Sent** | Message has been delivered to the customer |
 | **Read** | Customer has viewed the message            |
 
-Status indicators appear on messages sent by your team. They help you understand whether customers have seen your responses.
+These are inferred from the ticket's unread counter and only appear on widget-channel tickets.
+
+#### Email tickets
+
+Email replies show delivery status:
+
+| Status      | Meaning                            |
+| ----------- | ---------------------------------- |
+| **Sending** | Email is being dispatched          |
+| **Sent**    | Email was delivered successfully   |
+| **Failed**  | Email delivery failed              |
 
 ### Private notes
 
@@ -129,16 +148,17 @@ Messages can be marked as private notes, which are:
 
 - Only visible to your team in PostHog
 - Hidden from customers in the widget
+- Not counted toward the customer's unread messages
 - Useful for internal notes or handoff context
 
-To send a private note, toggle the **Private** option before sending.
+To send a private note, check **Attach as private note** before sending.
 
 ### Unread tracking
 
 The system tracks unread messages separately for:
 
-- **Customer** – Messages the customer hasn't seen (from your team)
-- **Team** – Messages your team hasn't seen (from the customer)
+- **Customer** — Messages the customer hasn't seen (from your team)
+- **Team** — Messages your team hasn't seen (from the customer)
 
 Unread counts reset when:
 
@@ -151,15 +171,15 @@ When you open a ticket, you'll see several panels with context:
 
 ### Chat thread
 
-The main conversation with the customer. Send replies here – they'll appear in the customer's widget.
+The main conversation with the customer. Send replies here — they'll appear in the customer's widget, email, Slack, Teams, or GitHub thread depending on the channel.
 
 ### Session recording panel
 
-If Session Replay is enabled, you can watch their session directly in the ticket view. This shows what they were doing before and when they reached out.
+*Widget tickets only.* If Session Replay is enabled, you can watch their session directly in the ticket view. This shows what they were doing before and when they reached out.
 
 ### Recent events panel
 
-Events from ±5 minutes around when the ticket was created. This helps you understand:
+*Widget tickets only.* Events from ±5 minutes around when the ticket was created. This helps you understand:
 
 - What actions led to the support request
 - What they were trying to accomplish
@@ -167,7 +187,7 @@ Events from ±5 minutes around when the ticket was created. This helps you under
 
 ### Exceptions panel
 
-Any errors or exceptions from their session. If they encountered a bug, you'll see the stack trace here.
+*Widget tickets only.* Any errors or exceptions from their session. If they encountered a bug, you'll see the stack trace here.
 
 ### Previous tickets panel
 
@@ -179,7 +199,7 @@ Other tickets from the same person. Useful for:
 
 ### Activity log
 
-A history of all changes made to the ticket – status changes, assignment updates, priority changes, and more. This helps you understand the full timeline of a ticket's lifecycle.
+A history of all changes made to the ticket — status changes, assignment updates, priority changes, and more. This helps you understand the full timeline of a ticket's lifecycle.
 
 ## Tips for efficient support
 
@@ -188,3 +208,5 @@ A history of all changes made to the ticket – status changes, assignment updat
 3. **Look at exceptions** to quickly identify bugs
 4. **Review previous tickets** to avoid asking repeat questions
 5. **Set status to pending** after you respond to track who's waiting for a reply
+6. **Use saved views** to quickly switch between common filter combinations
+7. **Snooze tickets** when you're waiting on something external instead of leaving them open

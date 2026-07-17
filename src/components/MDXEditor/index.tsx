@@ -34,7 +34,6 @@ import { mergeRegister } from '@lexical/utils'
 import { navigate } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
-import { useApp } from '../../context/App'
 import Link from 'components/Link'
 
 export default function MDXEditor({
@@ -69,7 +68,6 @@ export default function MDXEditor({
     const [canUndo, setCanUndo] = React.useState(false)
     const [canRedo, setCanRedo] = React.useState(false)
     const mdxEditorContainerRef = React.useRef<HTMLDivElement>(null)
-    const { websiteMode } = useApp()
 
     const mdxComponents = useMemo(() => {
         return jsxComponentDescriptors.reduce((acc, descriptor) => {
@@ -145,13 +143,13 @@ export default function MDXEditor({
             className={contentClassName}
             style={maxWidth ? { maxWidth, margin: '0 auto' } : undefined}
         >
-            {(isSSR && mdxBody) || websiteMode || readOnly ? (
+            {(isSSR && mdxBody) || readOnly ? (
                 <MDXProvider components={{ a: Link, ...mdxComponents }}>
                     <MDXRenderer>{mdxBody}</MDXRenderer>
                 </MDXProvider>
             ) : (
                 <MDXEditorComponent
-                    readOnly={websiteMode}
+                    readOnly={false}
                     contentEditableClassName="outline-none"
                     markdown={body}
                     lexicalTheme={{

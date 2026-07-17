@@ -30,8 +30,6 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import IntegrationPrompt from 'components/IntegrationPrompt'
 import { motion } from 'framer-motion'
 import HeroCarousel from 'components/Home/HeroCarousel'
-import { Customers, getSharedDescriptors } from '../shared'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 const AppCount = () => <span className="text-xs font-normal">{APP_COUNT} apps</span>
 
@@ -278,7 +276,6 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     { name: 'CTAs', kind: 'flow', props: [], Editor: () => <CTAs /> },
     { name: 'HeroCarousel', kind: 'flow', props: [], Editor: () => <HeroCarousel /> },
     { name: 'HomeHitCounter', kind: 'flow', props: [], Editor: () => <HomeHitCounter /> },
-    { name: 'Customers', kind: 'flow', props: [], Editor: () => <Customers tableClassName="bg-white dark:bg-dark" /> },
     {
         name: 'Logo',
         kind: 'flow',
@@ -307,7 +304,6 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     { name: 'ButtonPricing', kind: 'flow', props: [], Editor: () => <Button url="/pricing">Explore pricing</Button> },
     { name: 'ButtonAI', kind: 'flow', props: [], Editor: () => <Button url="/ai">Learn about PostHog AI</Button> },
     { name: 'ButtonAbout', kind: 'flow', props: [], Editor: () => <Button url="/about">Read more about us</Button> },
-    ...getSharedDescriptors(),
 ]
 
 export default function HomeTest() {

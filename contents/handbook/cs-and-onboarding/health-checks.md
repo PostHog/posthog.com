@@ -126,3 +126,38 @@ It is important that hitting the flags endpoint does not block an application fr
 Implementing [Server-side local evaluation](/docs/feature-flags/local-evaluation) will ensure that flags continue to return values regardless of the network status of the flags endpoint. By default, PostHog will attempt to evaluate the flag locally using definitions it loads on initialization and at the `poll interval`. If this fails, PostHog then makes a server request to fetch the flag value.
 
 As a note, server side local evaluation is [billed differently](/docs/feature-flags/local-evaluation#step-2-initialize-posthog-with-your-feature-flags-secure-api-key) than other flag requests.
+
+## Do they have a custom implementation that's causing issues?
+
+Some customers build layers in between their app and PostHog, oftentimes as a precautionary measure or to accommodate a highly specific use case. While these custom configurations are mostly innocuous, sometimes they outlive the problem they were solving or create net new reliability issues. From the customer's POV, it can be difficult to discern the root cause of those issues, and it's on us to create clarity for them (even if those issues are self-inflicted). The last thing we want is for them to doubt PostHog's reliability when their custom implementation is the culprit. 
+
+In this process of creating clarity for them, we should never cast blame or get defensive. Our goal is to diagnose the root cause of recently reported issues with a clear intention to help them understand what went wrong and how they can fix it. The evidence of self-inflicted issues is enough to push them towards a fix. More importantly, however, our respectful presentation of that evidence shows a good faith effort to help without the need to be right. 
+
+### Creating a reliability audit
+
+**Things you'll need:**
+- Written history of past issues (tickets, Slack threads)
+- Up to date documentation from the customer explaining their custom integrations
+- Clarity on *when* those custom implementations were deployed to production
+- Exa MCP (for reading through PostHog docs)
+- Slack MCP (for reading through past threads)
+- PostHog MCP
+- Local clone of PostHog's product repo on your machine 
+
+These will serve as context layers for your coding agent to help research and collate our own product's behavior and map it against their custom implementation. 
+
+To get started, just ask your coding agent:
+
+>/reliability-audit for {Customer} - here's their org ID: [xxx], Slack channel: [xxx], custom implementation documentation: [paste the full doc or link to it]. 
+
+The `/reliability-audit` skill is available <PrivateLink url="https://us.posthog.com/project/2/skills/reliability-audit">here</PrivateLink>.
+
+One helpful way to frame your audit is to organize it into these dimensions: issue, date, root cause, verdict, resolution, link to the original Slack thread / ticket. The idea of "verdict" is to give yourself a clear space to articulate whether the issue was due to their custom implementation or PostHog. 
+
+While the format of what you deliver to the customer is entirely up to you, a Slack Canvas with a clear table and some descriptions can go a long way. <PrivateLink url="https://posthog.slack.com/docs/TSS5W8YQZ/F0B585Y1N9Y">Here's an example</PrivateLink>.
+
+Your audit should push your customer to take action, so it may be helpful to include a clear articulation of what to keep versus change about their custom implementation. Make it easy for them to decide which parts of your audit they want to act on.
+
+### Why it's worth doing this
+
+Aside from restoring their confidence in PostHog's data integrity and reliability, it's radically hospitable. Even if the customer has expressed misplaced frustration at PostHog, you're still demonstrating a good faith effort to help them win by doing this audit. At the minimum, it unlocks goodwill and deepens their trust in you as their advocate at PostHog. 

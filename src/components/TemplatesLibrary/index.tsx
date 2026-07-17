@@ -236,20 +236,15 @@ export default function TemplatesLibrary(): JSX.Element {
 
     const allTemplates: UnifiedTemplate[] = [...mdxTemplates, ...workflowTemplates]
 
-    const getInitialFilterValues = () => {
-        if (typeof window === 'undefined') return { category: null }
+    const [categoryFilter, setCategoryFilter] = useState<string | null>(null)
 
+    // Hydrate category filter from URL on mount
+    useEffect(() => {
         const params = new URLSearchParams(window.location.search)
         const category = params.get('category')
-
         const validCategory = category && categories.includes(category) ? category : null
-
-        return { category: validCategory }
-    }
-
-    const initialFilters = getInitialFilterValues()
-
-    const [categoryFilter, setCategoryFilter] = useState<string | null>(initialFilters.category)
+        if (validCategory) setCategoryFilter(validCategory)
+    }, [])
 
     useEffect(() => {
         if (typeof window === 'undefined') return
