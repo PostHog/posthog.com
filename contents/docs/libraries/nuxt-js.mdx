@@ -6,6 +6,7 @@ platformLogo: nuxt
 import DetailSetUpReverseProxy from "../integrate/_snippets/details/set-up-reverse-proxy.mdx"
 import DetailGroupProductsInOneProject from "../integrate/_snippets/details/group-products-in-one-project.mdx"
 import DetailPostHogIPs from "../integrate/_snippets/details/posthog-ips.mdx"
+import NuxtApiKeysSecurity from "../integrate/_snippets/nuxt-api-keys-security.mdx"
 
 PostHog makes it easy to get data about usage of your [Nuxt.js](https://nuxt.com/) app. Integrating PostHog into your app enables analytics about user behavior, custom events capture, session replays, feature flags, and more.
 
@@ -54,20 +55,29 @@ import IdentifyFrontendCallout from '../_snippets/identify-frontend-callout.mdx'
 
 ## Configuration
 
-Add the module to your `nuxt.config.ts` file:
+Store your PostHog keys in environment variables rather than hard-coding them. Add them to a `.env` file (and to your hosting provider). You can find these values in [your project settings](https://us.posthog.com/settings/project).
+
+```shell file=.env
+NUXT_PUBLIC_POSTHOG_KEY=<ph_project_token>
+NUXT_PUBLIC_POSTHOG_HOST=<ph_client_api_host>
+```
+
+Then reference them when you add the module to your `nuxt.config.ts` file:
 
 ```typescript file=nuxt.config.ts
 export default defineNuxtConfig({
   modules: ['@posthog/nuxt'],
   posthogConfig: {
-    publicKey: '<ph_project_token>', // Find it in project settings https://app.posthog.com/settings/project
-    host: '<ph_client_api_host>', // Optional: defaults to https://us.i.posthog.com. Use https://eu.i.posthog.com for EU region
+    publicKey: process.env.NUXT_PUBLIC_POSTHOG_KEY, // Find it in project settings https://app.posthog.com/settings/project
+    host: process.env.NUXT_PUBLIC_POSTHOG_HOST, // Optional: defaults to https://us.i.posthog.com. Use https://eu.i.posthog.com for EU region
     clientConfig: {
       // Optional: PostHog client configuration options
     },
   },
 })
 ```
+
+<NuxtApiKeysSecurity />
 
 ## Usage on the client side
 

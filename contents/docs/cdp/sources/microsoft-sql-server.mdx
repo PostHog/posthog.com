@@ -27,7 +27,7 @@ To link Azure SQL Server:
    - **Database:** The name of the database you want like `analytics_db`.
    - **User:** The username with the necessary permissions to access the database.
    - **Password:** The password for the user.
-   - **Schema:** The schema for your database where your tables are located. The default is `dbo`.
+   - **Schema:** (Optional) The schema for your database. Leave blank to browse and sync tables from all schemas, or specify one to limit the selection. The default is `dbo`.
 4. Click **Link**
 
 The data warehouse then starts syncing your Azure SQL Server data. You can see details and progress in the [sources tab](https://app.posthog.com/data-management/sources).
@@ -67,6 +67,26 @@ Numeric, decimal, and money columns with values exceeding a precision of 76 or s
 - Round the values at the source
 
 </CalloutBox>
+
+<CalloutBox icon="IconWarning" title="Invalid object name errors" type="caution">
+
+If your sync fails with "Invalid object name," the database couldn't find a table or view you're syncing. Common causes include dropped or renamed objects, views referencing missing tables, or cross-database permission issues. Check that all synced objects exist and that the connection user has SELECT permissions on them and their dependencies.
+
+</CalloutBox>
+
+## Troubleshooting
+
+### Firewall blocking PostHog
+
+This error occurs when your SQL Server's firewall blocks connections from PostHog's IP addresses. Azure SQL error 40615 shows a message containing "is not allowed to access the server."
+
+To fix this:
+
+1. Add PostHog's IP addresses to your server's firewall rules. On Azure SQL, do this through the Azure portal under **Networking** > **Firewall rules**, or by running `sp_set_firewall_rule`.
+2. Wait a few minutes for the new rules to take effect.
+3. Re-enable the sync in PostHog.
+
+See the [Inbound IP addresses](#inbound-ip-addresses) section below for the IP addresses to allowlist.
 
 import InboundIpAddresses from "../_snippets/inbound-ip-addresses.mdx";
 

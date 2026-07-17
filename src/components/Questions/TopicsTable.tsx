@@ -74,6 +74,7 @@ export const topicIcons = {
     'identify users': DataManagement, // to be replaced or removed
     '#introductions': IconHandwave,
     kubernetes: DataWarehouse, // to be replaced or removed
+    'ai observability': IconLlmAnalytics,
     'llm analytics': IconLlmAnalytics,
     'posthog ai': IconSparkles,
     'migrating to posthog': DataManagement, // to be replaced or removed

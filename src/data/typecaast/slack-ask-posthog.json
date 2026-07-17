@@ -1,0 +1,141 @@
+{
+    "version": 1,
+    "meta": {
+        "canvas": {
+            "width": 480,
+            "height": 720
+        },
+        "fps": 30,
+        "fit": "reflow",
+        "theme": "auto",
+        "skin": {
+            "id": "slack",
+            "options": {
+                "channel": "#growth"
+            }
+        },
+        "composer": "always",
+        "seed": 42,
+        "background": "transparent",
+        "assets": "url"
+    },
+    "participants": [
+        {
+            "id": "paul",
+            "name": "Paul D'Ambra",
+            "color": "#5b3a8e",
+            "avatar": "https://res.cloudinary.com/dmukukwp6/image/upload/avatar_paul_03bae10f76.png"
+        },
+        {
+            "id": "posthog",
+            "name": "PostHog",
+            "kind": "app",
+            "avatar": "https://res.cloudinary.com/dmukukwp6/image/upload/avatar_posthog_f85279a2ad.png"
+        }
+    ],
+    "timeline": [
+        {
+            "type": "message",
+            "from": "paul",
+            "instant": true,
+            "text": "<@posthog> is there a difference in retention of users or orgs that are using insight or dashboard subscriptions. are they more likely to visit posthog or to create further insights or try other products"
+        },
+        {
+            "type": "reaction",
+            "target": "$prev",
+            "emoji": "👀",
+            "shortcode": "eyes",
+            "from": "posthog"
+        },
+        {
+            "type": "delay",
+            "duration": 2000
+        },
+        {
+            "type": "message",
+            "from": "posthog",
+            "instant": true,
+            "content": [
+                {
+                    "type": "section",
+                    "spans": [
+                        {
+                            "type": "text",
+                            "value": "Subscription orgs are ~"
+                        },
+                        {
+                            "type": "bold",
+                            "value": "1.5× more likely to return"
+                        },
+                        {
+                            "type": "text",
+                            "value": ", stay active ~"
+                        },
+                        {
+                            "type": "bold",
+                            "value": "2.5× as many weeks"
+                        },
+                        {
+                            "type": "text",
+                            "value": ", create ~"
+                        },
+                        {
+                            "type": "bold",
+                            "value": "3× more often / ~11× the volume of insights"
+                        },
+                        {
+                            "type": "text",
+                            "value": ", and touch ~"
+                        },
+                        {
+                            "type": "bold",
+                            "value": "3× as many products"
+                        },
+                        {
+                            "type": "text",
+                            "value": "."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "delay",
+            "duration": 1500
+        },
+        {
+            "type": "message",
+            "from": "posthog",
+            "instant": true,
+            "content": [
+                {
+                    "type": "section",
+                    "text": "*Setup*"
+                },
+                {
+                    "type": "section",
+                    "text": "I looked at all orgs active on PostHog in *March 2026* (≥1 app pageview, ~118.7k orgs), split by whether they'd created an *insight or dashboard subscription* by then (2,162 orgs had; 116,527 hadn't), then measured their behavior over the *following 8 weeks (Apr–May 2026)*. Unit = organization."
+                }
+            ]
+        },
+        {
+            "type": "delay",
+            "duration": 1500
+        },
+        {
+            "type": "message",
+            "from": "posthog",
+            "instant": true,
+            "content": [
+                {
+                    "type": "section",
+                    "text": "*Headline comparison (Apr–May behavior)*"
+                },
+                {
+                    "type": "codeblock",
+                    "text": "Has subscription?            Yes |  No\n--------------------------------------\nCame back at all             96% | 64%\nActive weeks (of ~8)         7.2 | 2.9\nCreated ≥1 new insight       67% | 20%\nAvg insights created        51.8 | 4.7\nOther products used          1.9 | 0.6"
+                }
+            ]
+        }
+    ]
+}

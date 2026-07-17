@@ -29,8 +29,7 @@ export const Content = ({ quickLinks = true }) => {
                 description="Track and analyze your revenue metrics to understand your business performance and growth."
                 buttonText="Setup guide"
                 buttonLink="/docs/revenue-analytics/start-here"
-                imageClasses="max-h-48 md:max-h-64"
-                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/hog_coin_a6fb991e80.png"
+                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/money_dollars_rich_5a7f1bf7ce.png"
             />
 
             <CalloutBox icon="IconWarning" title="Revenue analytics is being deprecated" type="caution">

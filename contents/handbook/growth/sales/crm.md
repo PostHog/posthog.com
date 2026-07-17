@@ -15,7 +15,7 @@ As a general principle, we try to make sure as much customer communication as po
 
 For existing customers, you'll sometimes send emails directly from <PrivateLink url="https://posthog.vitally-eu.io/">Vitally</PrivateLink>. To ensure these also make it to Salesforce, first look up your _Email to Salesforce Address_ from the [personal settings page](https://posthog.lightning.force.com/lightning/settings/personal/EmailToSalesforceUserSetup/home) in Salesforce, and then add it to your <PrivateLink url="https://posthog.vitally-eu.io/settings/profile/gmail">Vitally gmail settings</PrivateLink>.
 
-All Slack messages sync up with the corresponding account in Salesforce. We use [Pylon](https://app.usepylon.com) for this sync, so make sure Pylon is added to the customer Slack channel integrations and the channel is [linked to the Salesforce account](https://app.usepylon.com/integrations/salesforce?tab=account-mapping) properly for the sync to work smoothly.
+All Slack messages sync up with the corresponding account in Salesforce. We use [SupportHog](/handbook/growth/sales/slack-channels) for this sync, so make sure SupportHog is [added to the customer Slack channel](/handbook/growth/sales/slack-channels) and the channel's name is recorded on the relevant Salesforce account record for the sync to work smoothly.
 
 You are most likely to use the following regularly:
 
@@ -157,6 +157,20 @@ If you meet a potential customer elsewhere (e.g., events, introductions, referra
 
 For support or billing questions submitted via the sales channel, disqualify with **Support Request** or **Billing Support Request** as in [Completed contact form](#completed-contact-form) (Zendesk ticket automation). If you still see legacy lead records from older flows, the same reasons apply; ticket creation may use [this Zapier path](https://zapier.com/editor/274433115/published) for some automations.
 
+#### Billing vs. finance: who owns what
+
+Billing and finance questions look similar but go to different teams. Route by what the customer is actually asking for:
+
+- **Invoices → billing team** Questions about what an invoice says or what information goes on it — line items, amounts, dates, the entity we bill under, or adding a PO number to an invoice. The <SmallTeam slug="billing" /> owns the invoice itself.
+
+- **Collections → finance team** Anything about getting paid or where an invoice needs to go — requests to upload an invoice to a customer's payment portal (e.g. Zip, Coupa, Ariba), supplier-onboarding or vendor-setup forms, requests for extra documentation or information from us, and chasing overdue payments.
+
+A quick test: if the question can be answered by reading or correcting the invoice, it's **billing**. If it asks us to send the invoice somewhere specific, complete a form, or provide extra information, it's **finance**.
+
+Tax is owned by finance, who handle tax determination and compliance via Anrok. Billing only gets involved when a specific tax amount has to appear as an explicit line item on an invoice. For anything about tax rates, treatment, or whether tax applies, ask finance.
+
+This comes up most with managed customers, where POs and payment notices sit at the intersection of sales, billing, and finance. These often arrive via the sales channel (the contact form or sales@) even though they belong to billing or finance — disqualify and re-route them using the split above rather than working them as leads.
+
 ### Below Threshold – Auto (Customer.io)
 
 When you should route someone to self-serve onboarding instead of hands-on sales, mark the task **Below Threshold – Auto**. That triggers the automated onboarding flow in <PrivateLink url="https://fly.customer.io/workspaces/127208/journeys/campaigns/109/overview">customer.io</PrivateLink>, which guides them without manual outreach. Manual TAE judgment under the sales-assist threshold uses **Below Sales Assist Threshold – Pass** or **Below Sales Assist Threshold – Prospect** (see splits above), not this auto reason.
@@ -276,6 +290,8 @@ Exit criteria:
 
 6. Closed Won (100%) - They have signed the contract and are officially a PostHog customer.
 7. Closed Lost (0%) - At some point in the pipeline they decided not to use us. The Loss Reason field is required for any opportunity to be marked as Closed lost.
+
+> **Duplicate opportunities should be deleted, not marked as Closed Lost.** A duplicate isn't a real loss, so marking it Closed Lost pollutes our loss data and skews win/loss reporting. Delete the duplicate record instead. Only use Closed Lost when a genuine opportunity didn't work out.
 
 Bolded exit criteria indicate the minimum standard for the opportunity to advance stages (for typically smaller, more transational deals). More detail is available on the stages and the exit criteria for each state <PrivateLink url='https://docs.google.com/spreadsheets/d/1BpLMHZ52iE1Ni0-Hf0Y68RSq0ohNNnJv7Jd90lgSI6s/edit?usp=sharing'>in this spreadsheet</PrivateLink>
 

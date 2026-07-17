@@ -24,7 +24,7 @@ To link Redshift:
    - **Database:** The name of the database you want like `analytics_db`.
    - **User:** The username with the necessary permissions to access the database.
    - **Password:** The password for the user.
-   - **Schema:** The schema for your database where your tables are located. The default is `public`.
+   - **Schema:** (Optional) The schema for your database. Leave blank to browse and sync tables from all schemas, or specify one to limit the selection. The default is `public`.
 4. Click **Next**
 
 The data warehouse then starts syncing your Redshift data. You can see details and progress in the [sources tab](https://app.posthog.com/data-management/sources).
@@ -57,5 +57,7 @@ When you add columns to a schema using incremental or append sync, PostHog promp
 - **Full resync** - Triggers a complete resync to backfill the new columns for all rows.
 
 </CalloutBox>
+
+import InboundIpAddresses from "../_snippets/inbound-ip-addresses.mdx";
 
 <InboundIpAddresses />

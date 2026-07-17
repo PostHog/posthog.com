@@ -104,7 +104,7 @@ It's how your company is experienced by others. Your company is the product and:
 - [How you decide what to build](https://newsletter.posthog.com/p/how-we-decide-what-to-build). Do you ship features early, or do you focus on meeting the needs of your largest customer with every new thing?
 - The degree to which you’re led by design, engineering product, sales, or marketing. How many people are in each function, but also your processes for deciding what to work on.
 - The frequency and style with which you [email your customers](/blog/how-we-built-email-onboarding), for marketing, product updates or your [activation](/product-engineers/activation-metrics) flow.
-- The kind of people you hire into customer success or sales.
+- The kind of people you hire into [customer success](/blog/customer-success-at-posthog) or sales.
 - The background and experience of those in your marketing team.
 - The tone of voice on your website.
 - Who is on your board.

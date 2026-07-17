@@ -6,7 +6,6 @@ availability:
   free: full
   selfServe: full
   enterprise: full
-beta: true
 sourceId: RedditAds
 ---
 
@@ -46,3 +45,7 @@ Connect PostHog to your Reddit Ads account using a Reddit account. The Reddit ac
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

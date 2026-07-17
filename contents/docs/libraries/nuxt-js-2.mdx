@@ -3,6 +3,8 @@ title: Nuxt.js (v2.16 and below)
 platformLogo: nuxt
 ---
 
+import NuxtApiKeysSecurity from "../integrate/_snippets/nuxt-api-keys-security.mdx"
+
 PostHog makes it easy to get data about usage of your [Nuxt.js](https://nuxt.com/) app. Integrating PostHog into your app enables analytics about user behavior, custom events capture, session replays, feature flags, and more.
 
 These docs are for Nuxt v2.16 and below.
@@ -50,6 +52,8 @@ export default function({ app: { router } }, inject) {
 }
 
 ```
+
+<NuxtApiKeysSecurity />
 
 Finally, we need to activate it on the client side in our `nuxt.config.js`
 

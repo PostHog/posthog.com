@@ -48,7 +48,7 @@ export const Content = ({ quickLinks = false }) => {
                 buttonText="Installation guide"
                 buttonLink="/docs/product-analytics/installation"
                 imageColumnClasses="max-w-96"
-                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
+                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/PRODUCT_ANALYTICS_hog_23b2808c18.png"
             />
 
             <AskMax

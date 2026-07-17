@@ -83,7 +83,7 @@ It's now easier than ever to find the event, user, or cohort definitions you're 
 
 ### ClickHouse is now free to use!
 
-A few months after PostHog we started hitting limitations on some operations running on Postgres. We then decided to develop full support for a <a rel="noreferrer noopener" target="_blank" href="https://clickhouse.tech/">ClickHouse</a> backend. ClickHouse is a very powerful OLAP database that works specially well at computing analytics for huge volumes of data. At first this ClickHouse backend was launched as a premium feature requiring an Enterprise license. Some weeks ago we decided to offer a free version with a restriction of 3 team members to serve as trial for the feature.
+A few months after PostHog we started hitting limitations on some operations running on Postgres. We then decided to develop full support for a <a rel="noreferrer noopener" target="_blank" href="https://clickhouse.com/">ClickHouse</a> backend. ClickHouse is a very powerful OLAP database that works specially well at computing analytics for huge volumes of data. At first this ClickHouse backend was launched as a premium feature requiring an Enterprise license. Some weeks ago we decided to offer a free version with a restriction of 3 team members to serve as trial for the feature.
 
 Since then, we have ironed out all the details and have now decided to make this feature **fully free** now, no longer requiring a license nor having any additional restrictions. This comes from our commitment to supporting teams and companies of any size, so you can continue using PostHog for free even if your event volume increases significantly.
 

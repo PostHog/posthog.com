@@ -99,7 +99,7 @@ Environment variables:
 | --- | --- | --- |
 | `POSTHOG_PROJECT_TOKEN` | Yes | Your project token (`phc_`). Sends events and evaluates flags remotely. |
 | `POSTHOG_HOST` | No | Defaults to `https://us.i.posthog.com`. Use `https://eu.i.posthog.com` for EU Cloud or your self-hosted URL. |
-| `POSTHOG_PERSONAL_API_KEY` | No | A [feature flags secure API key](/docs/feature-flags/local-evaluation#step-1-find-your-feature-flags-secure-api-key) (`phs_`, recommended) or personal API key (`phx_`). Setting it enables local flag evaluation and starts the refresh cron. |
+| `POSTHOG_PERSONAL_API_KEY` | No | A [feature flags secure API key](/docs/feature-flags/local-evaluation#step-1-find-your-feature-flags-secure-api-key) (`phs_`, recommended) or personal API key (`phx_`). Setting it enables local flag evaluation. |
 | `POSTHOG_FLAGS_POLLING_INTERVAL_SECONDS` | No | Cron interval for refreshing flag definitions. Defaults to `60`. Raise it on free-tier dev deployments to cut function-call usage. |
 
 ### 2. Set your PostHog credentials
@@ -115,11 +115,7 @@ For local feature flag evaluation (covered in step 5), also set a [feature flags
 npx convex env set POSTHOG_PERSONAL_API_KEY phs_your_feature_flags_secure_api_key
 ```
 
-<CalloutBox icon="IconInfo" title="Setting the personal API key starts the cron" type="fyi">
-
-`POSTHOG_PERSONAL_API_KEY` is checked at deploy time, so after setting it in production you need to redeploy for the cron to register. To skip the cron entirely (e.g. on a free-tier dev deployment), leave the var unset.
-
-</CalloutBox>
+Local evaluation kicks in on the next cron tick — no redeploy needed.
 
 ### 3. Initialize the client
 
@@ -175,7 +171,7 @@ Use the same Convex user ID as the `distinctId` everywhere so PostHog can stitch
 - **Local** (`getFeatureFlag`, `isFeatureEnabled`, `getFeatureFlagPayload`, `getAllFlags`) runs against flag definitions cached on your Convex deployment. Works in queries, mutations, and actions. No per-call network request, and a query re-runs automatically when cached definitions refresh. Requires `POSTHOG_PERSONAL_API_KEY`. Use this when you can.
 - **Remote** (`evaluateFlag`, `evaluateFlagPayload`, `evaluateAllFlags`) hits PostHog's `/flags` endpoint on every call. Action-only. Handles every flag, including the ones local can't, and needs no personal API key.
 
-Local evaluation runs automatically once `POSTHOG_PERSONAL_API_KEY` is set. The component registers its own cron at deploy time and refreshes flag definitions every minute, so you don't write your own. Tune the cadence with `POSTHOG_FLAGS_POLLING_INTERVAL_SECONDS`. If you call a local-eval method without the key configured, the client throws and points you at the remote `evaluate*` methods.
+Local evaluation runs automatically once `POSTHOG_PERSONAL_API_KEY` is set. The component runs its own cron that refreshes flag definitions every minute, so you don't write your own. Tune the cadence with `POSTHOG_FLAGS_POLLING_INTERVAL_SECONDS`. If you call a local-eval method without the key configured, the client throws and points you at the remote `evaluate*` methods.
 
 Read a flag from a query:
 
@@ -287,8 +283,8 @@ import posthog from "posthog-js"
 import { PostHogProvider } from "@posthog/react"
 import App from "./App"
 
-posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_PROJECT_TOKEN, {
-    api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
+posthog.init(import.meta.env.VITE_POSTHOG_PROJECT_TOKEN, {
+    api_host: import.meta.env.VITE_POSTHOG_HOST,
 })
 
 createRoot(document.getElementById("root")!).render(
@@ -332,8 +328,8 @@ Mount `<AuthSync />` once near the root of your app, inside the `<PostHogProvide
 Remember you'll also need to configure the environment variables on the frontend to point to your PostHog instance.
 
 ```sh
-npx convex env set VITE_PUBLIC_POSTHOG_PROJECT_TOKEN <ph_project_token>
-npx convex env set VITE_PUBLIC_POSTHOG_HOST <ph_client_api_host>
+npx convex env set VITE_POSTHOG_PROJECT_TOKEN <ph_project_token>
+npx convex env set VITE_POSTHOG_HOST <ph_client_api_host>
 ```
 
 </CalloutBox>

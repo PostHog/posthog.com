@@ -100,7 +100,7 @@ export const CTAs = ({ t = identity }: { t?: TranslateFn }): JSX.Element => {
             Existing test CTA row retained for reference:
             <div className="flex gap-2 items-center">
                 <div className="flex items-center gap-1">
-                    <WizardCommand latest={false} slim className="border border-primary" />
+                    <WizardCommand slim className="border border-primary" />
                     <Tooltip trigger={<IconInfo className="size-4 text-primary inline-block" />}>
                         <div className="max-w-sm">
                             <p className="text-sm mb-1">
@@ -232,7 +232,7 @@ const CompanyStageTabs = ({ t = identity }: { t?: TranslateFn }) => {
                 { handle: 'data_warehouse', text: 'for centralizing data' },
                 { handle: 'error_tracking', text: 'for catching bugs fast' },
                 { handle: 'cdp', text: 'for syncing data everywhere' },
-                { handle: 'llm_analytics', text: 'for monitoring AI features' },
+                { handle: 'ai_observability', text: 'for monitoring AI features' },
             ],
         },
         {

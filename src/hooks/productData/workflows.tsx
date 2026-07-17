@@ -47,11 +47,13 @@ export const workflows = {
     ],
     seo: {
         title: 'Workflows – Automate workflows with product data',
-        description: 'Trigger Slack messages, emails, or events based on live user behavior.',
+        description:
+            'Automations that act on live user behavior – send Slack messages, emails, or events. The actions agents take to close the loop and make your product self-driving.',
     },
     overview: {
         title: 'Automate workflows with product data',
-        description: 'Trigger Slack messages, emails, or events based on live user behavior.',
+        description:
+            'Workflows is one of the tools that makes your product self-driving: the actions agents take to close the loop. Trigger Slack messages, emails, or events based on live user behavior.',
         textColor: 'text-black',
         layout: 'overlay',
     },
@@ -287,6 +289,9 @@ export const workflows = {
             ],
             us: [
                 {
+                    title: 'Agents can build automations that act on your product data – the actions that close the self-driving loop',
+                },
+                {
                     title: 'You want automations that run on top of your live product data',
                 },
                 {
@@ -330,7 +335,7 @@ export const workflows = {
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_hog_791169c2d0.png',
         imageAlt: 'A hedgehog automating workflows',
         imageClasses: 'max-w-[360px]',
-        description: 'build automations based on events and user behavior',
+        description: 'build the automation and ship it on your behalf',
         skills: [
             'Generates email templates for your content library',
             'Sets up multi-step workflows from the triggers, conditions, and actions you describe',
