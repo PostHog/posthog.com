@@ -126,7 +126,7 @@ export function KoreanCustomers({
     translate?: TranslateFn
 }): JSX.Element {
     const { getCustomers, hasCaseStudy } = useCustomers()
-    const [currentBreakdown, setCurrentBreakdown] = React.useState('VCsLoveThem')
+    const [currentBreakdown, setCurrentBreakdown] = React.useState('colorful')
     const [isAnimating, setIsAnimating] = React.useState(false)
     const logoRefs = React.useRef<Record<string, HTMLElement>>({})
 

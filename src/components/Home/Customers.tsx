@@ -34,7 +34,6 @@ export const COL2 = [
 ]
 
 export const companyBreakdowns = {
-    VCsLoveThem: { col1: 'VCs love them', col2: 'Product engineers love them' },
     colorful: { col1: 'Colorful logos', col2: '"Sleek" logos' },
     hardware: { col1: 'Hardware companies', col2: 'Not hardware companies' },
     planes: { col1: 'Builds planes', col2: "Doesn't build planes (yet)" },
@@ -56,17 +55,6 @@ export const companyBreakdowns = {
 }
 
 export const companyAttributes: Record<string, string[]> = {
-    VCsLoveThem: [
-        'ycombinator',
-        'airbus',
-        'nationaldesignstudio',
-        'ukgovt',
-        'trust',
-        'lovable',
-        'startengine',
-        'researchgate',
-        'heygen',
-    ],
     colorful: [
         'ycombinator',
         'convex',
@@ -226,7 +214,7 @@ export const companyAttributes: Record<string, string[]> = {
 
 export const Customers = ({ tableClassName = '' }: { tableClassName?: string }) => {
     const { getCustomers, hasCaseStudy } = useCustomers()
-    const [currentBreakdown, setCurrentBreakdown] = useState('VCsLoveThem')
+    const [currentBreakdown, setCurrentBreakdown] = useState('colorful')
     const [isAnimating, setIsAnimating] = useState(false)
     const logoRefs = React.useRef<Record<string, HTMLElement>>({})
 
