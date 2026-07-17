@@ -118,25 +118,9 @@ export default function MSPaint({
     const containerRef = useRef<HTMLDivElement>(null)
     const fileInputRef = useRef<HTMLInputElement>(null)
 
-    // Calculate initial canvas size based on whether it should be responsive
+    // Calculate initial canvas size - measured in effect for responsive sizing
     const getInitialCanvasSize = () => {
         if (!initialCanvasSize) return { width: 640, height: 480 }
-
-        // Check if we should use responsive sizing
-        if (initialCanvasSize.width >= 1000 && initialCanvasSize.height >= 500 && typeof window !== 'undefined') {
-            // Try to get container dimensions if available
-            const container = document.querySelector('.flex-1.bg-\\[\\#808080\\]')
-            if (container) {
-                const rect = container.getBoundingClientRect()
-                if (rect.width > 0 && rect.height > 0) {
-                    return {
-                        width: Math.floor(rect.width - 8), // Account for padding and borders
-                        height: Math.floor(rect.height - 8),
-                    }
-                }
-            }
-        }
-
         return initialCanvasSize
     }
 

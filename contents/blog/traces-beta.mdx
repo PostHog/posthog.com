@@ -1,0 +1,72 @@
+---
+title: 'The clues were there all along. Tracing is now in beta'
+date: 2026-07-16
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+author:
+    - sara-miteva
+featuredImage: >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/Untitled_January_9_2026_15_26_39_copy_2_7_1_f2bff5a46d.png
+featuredImageType: full
+category: PostHog news
+tags:
+    - Product updates
+    - Tracing
+seo:
+    metaTitle: 'Tracing is now in beta'
+    metaDescription: 'PostHog distributed tracing is now in beta. Point your existing OpenTelemetry exporter at PostHog and get distributed tracing alongside your replays, errors, logs, and user data.'
+---
+
+[Distributed tracing](/docs/distributed-tracing) is now in beta. If you've been using [PostHog Logs](/logs), you probably saw this coming.
+
+PostHog starts with your user data and provides you with all the tools you need to build successful products, so debugging is an obvious must-have to keep your products working as expected. We have [Error Tracking](/error-tracking), [Session Replay](/session-replay), and [Logs](/logs) in the PostHog debugging stack, so tracing will complement nicely to give you more of the context you need to resolve issues quickly, and more fuel for the agents doing it for you. 
+
+[A trace](/tracing) is the full journey of a single request through your system, from the first incoming call to every service, queue, database, and third-party API it touches along the way. Each step is a span, stamped with how long it took and whether it succeeded, and they nest into a waterfall you can read top to bottom. Where a log tells you what happened at one point and an error tells you something broke, a trace shows you the whole path: what called what, in what order, and exactly where the time went.
+
+## What's in the beta
+
+Point your existing OpenTelemetry exporter at PostHog's OTLP/HTTP endpoint, drop in a bearer token, and you're sending traces. There's no need for a new SDK or rewriting the instrumentation you already have.
+
+```bash
+OTEL_EXPORTER_OTLP_TRACES_ENDPOINT="<ph_client_api_host>/i/v1/traces"
+OTEL_EXPORTER_OTLP_TRACES_HEADERS="Authorization=Bearer <ph_project_token>"
+OTEL_SERVICE_NAME="my-app"
+```
+
+Inside PostHog, you get a volume sparkline for traffic at a glance, a filterable table of root spans (slice by service, name, kind, status, duration, trace or span ID, or any attribute on the span), and a flamegraph for any trace you click into. All of it lives on the same warehouse as your PostHog Logs, so the same query can run across both.
+
+![traces screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/Group_144143_b7a6b4aa06.png)
+
+## More fuel for your agents
+
+Most observability tools assume a trace is something a site reliability engineer stares at on a dashboard: spans, services, latency, hosts. The user who hit the bug lives somewhere else, in your analytics, your replay, your support tool, so you end up juggling tools to work out who was actually affected. 
+
+We built observability on top of all our existing data instead. When a span lands in PostHog, it lands in the same project as your replays, your errors, your logs, and the user who triggered it. 
+
+That shared foundation is also what makes traces so useful to a self-driving product. Errors, replays, and funnels tell an agent that something's wrong. A trace tells it where and why: "checkout took 3.2s, and 2.8s of it was waiting on an N+1 query in the inventory service." 
+
+![report investigate mock](https://res.cloudinary.com/dmukukwp6/image/upload/Report_Investigate_Mock_2_76290ef07e.png) 
+
+So a scout can catch the regression, an agent can trace it to the exact line, open a PR with the fix, and drop it in your [Inbox](https://app.posthog.com/inbox). You hit merge. That's the whole job.
+
+## Debugging with PostHog
+
+Say a user complains your checkout is slow. Because their `user_id` is on both your OTel spans and your PostHog events, you can pull up every span they triggered in the last hour and find the four-second wait on a downstream payment provider. From there, opening their session replay in another tab shows exactly what they were staring at while the request hung: same person, same session, all in the project you're already in.
+
+![debugging with traces and session replay](https://res.cloudinary.com/dmukukwp6/image/upload/traces_blog_illo_a355e7cfa8.jpg)
+
+Whether you chase it down yourself or let a [scout](/docs/self-driving/scouts) do it, it's the same context underneath. Once those links are wired, you could also use [PostHog AI](/ai) or our [MCP](/mcp) to answer questions like: 
+
+Show me the slowest spans this week for users on the Pro plan who hit feature flag X.
+```
+
+
+## Try it
+
+Tracing is in beta now. The fastest way to get to it in is the wizard, which sets up self-driving and points your traces at PostHog for you:
+
+<WizardCommand command="self-driving" />
+
+Already instrumented? Point your existing OTel exporter at the endpoint and open [the PostHog app](app.posthog.com/tracing) to watch the spans land. 

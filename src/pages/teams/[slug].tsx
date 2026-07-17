@@ -610,10 +610,9 @@ export default function TeamPage(props: TeamPageProps) {
                         <TreeMenu items={teamsNavigation} />
                     </div>
                 }
-                homeURL="/teams"
-                description={`Learn about the ${(team as any)?.name || slug} team at PostHog`}
                 proseSize="sm"
                 rightActionButtons={editing ? editActions : editButton}
+                hideAppOptions
                 showQuestions={false}
                 {...({
                     header: (

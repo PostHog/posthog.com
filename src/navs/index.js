@@ -626,8 +626,18 @@ export const handbookSidebar = [
                 url: '/handbook/content/metadata',
             },
             {
-                name: 'LinkedIn',
-                url: '/handbook/content/linkedin',
+                name: 'Social media',
+                url: '/handbook/content/social-media',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/handbook/content/social-media',
+                    },
+                    {
+                        name: 'LinkedIn',
+                        url: '/handbook/content/linkedin',
+                    },
+                ],
             },
         ],
     },
@@ -1405,6 +1415,10 @@ export const handbookSidebar = [
                 url: '',
                 children: [
                     {
+                        name: 'Designing events for per-entity metrics',
+                        url: '/handbook/cs-and-onboarding/shareable-guides/designing-events-for-per-entity-metrics',
+                    },
+                    {
                         name: 'LLM cost optimization',
                         url: '/handbook/cs-and-onboarding/shareable-guides/llm-cost-optimization',
                     },
@@ -1669,6 +1683,16 @@ export const handbookSidebar = [
                     {
                         name: 'Chrome extension billing case study',
                         url: '/handbook/onboarding/chrome-extension-billing-case-study-wildfire',
+                    },
+                ],
+            },
+            {
+                name: 'GTM engineering',
+                url: '/teams/gtm-engineering',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/teams/gtm-engineering',
                     },
                 ],
             },
@@ -2159,11 +2183,19 @@ export const docsMenu = {
             color: 'red',
             url: '/docs/self-driving',
             description: 'Understand PostHog and get set up',
+            badge: {
+                title: 'Beta',
+                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+            },
             children: [
                 {
                     name: 'Overview',
                     url: '/docs/self-driving',
                     icon: 'IconHome',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'Get started',
@@ -2173,7 +2205,7 @@ export const docsMenu = {
                     url: '/docs/self-driving/setup',
                 },
                 {
-                    name: 'Surfaces',
+                    name: 'Products',
                 },
                 {
                     name: 'Slack',
@@ -2187,13 +2219,24 @@ export const docsMenu = {
                     name: 'MCP',
                     url: '/docs/model-context-protocol',
                 },
-                // TODO: add PostHog Code (Desktop) as a surface here once it's GA.
+                {
+                    name: 'CLI',
+                    url: '/docs/cli',
+                },
+                {
+                    name: 'Code',
+                    url: '/code',
+                },
                 {
                     name: 'Concepts',
                 },
                 {
                     name: 'The self-improving loop',
                     url: '/docs/self-driving/self-improving-loop',
+                },
+                {
+                    name: 'Anatomy of a pull request',
+                    url: '/docs/self-driving/anatomy-of-a-pr',
                 },
                 {
                     name: 'Context',
@@ -2253,6 +2296,10 @@ export const docsMenu = {
                 {
                     name: 'Pricing',
                     url: '/docs/self-driving/pricing',
+                },
+                {
+                    name: 'FAQ',
+                    url: '/docs/self-driving/faq',
                 },
             ],
         },
@@ -2396,6 +2443,14 @@ export const docsMenu = {
                         {
                             name: 'Java',
                             url: '/docs/libraries/java',
+                            badge: {
+                                title: 'Beta',
+                                className: '!bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50',
+                            },
+                        },
+                        {
+                            name: 'Kotlin Multiplatform',
+                            url: '/docs/libraries/kmp',
                             badge: {
                                 title: 'Beta',
                                 className: '!bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50',
@@ -2632,6 +2687,10 @@ export const docsMenu = {
                         {
                             name: 'Google Tag Manager',
                             url: '/docs/libraries/google-tag-manager',
+                        },
+                        {
+                            name: 'Grafana',
+                            url: '/docs/libraries/grafana',
                         },
                         {
                             name: 'MoEngage',
@@ -2944,6 +3003,10 @@ export const docsMenu = {
                         {
                             name: 'AI wizard',
                             url: '/docs/ai-engineering/ai-wizard',
+                        },
+                        {
+                            name: 'Sign up with the wizard',
+                            url: '/docs/ai-engineering/wizard-signup',
                         },
                         {
                             name: 'Model Context Protocol (MCP)',
@@ -3329,6 +3392,10 @@ export const docsMenu = {
                         {
                             name: 'ID-JAG (XAA)',
                             url: '/docs/settings/id-jag',
+                        },
+                        {
+                            name: 'Agent discovery (auth.md)',
+                            url: '/docs/settings/agent-discovery',
                         },
                         {
                             name: 'Content Security Policy tracking',
@@ -4147,107 +4214,46 @@ export const docsMenu = {
             color: 'yellow',
             icon: 'IconRewindPlay',
             description: 'Watch how users interact with your app in a DVR-like playback experience',
+            // Docs sidebar layout for this product: 'listed' (flat) or 'grouped' (collapsible sections).
+            navStyle: 'listed',
             children: [
                 {
-                    name: 'Session Replay',
-                },
-                {
-                    name: 'Overview',
-                    url: '/docs/session-replay',
-                    icon: 'IconHome',
-                    color: 'seagreen',
-                },
-                {
-                    name: 'Getting started',
+                    name: 'Session Replay 101',
                 },
                 {
                     name: 'Start here',
-                    url: '/docs/session-replay/start-here',
-                    icon: 'IconListCheck',
+                    url: '/docs/session-replay',
+                    icon: 'IconHome',
+                    color: 'seagreen',
                     featured: true,
-                    color: 'orange',
                 },
                 {
-                    name: 'Installation',
+                    name: 'Integration with PostHog products',
+                    url: '/docs/session-replay/integrations',
+                    icon: 'IconPuzzle',
+                    color: 'blue',
+                },
+                {
+                    name: 'Install & configure',
+                },
+                {
+                    name: 'Install',
                     url: '/docs/session-replay/installation',
                     icon: 'IconBook',
                     color: 'blue',
                     featured: true,
-                    sortChildrenAlpha: true,
-                    children: [
-                        { name: 'Overview', url: '/docs/session-replay/installation' },
-                        { name: 'React Native', url: '/docs/session-replay/installation/react-native' },
-                        { name: 'iOS', url: '/docs/session-replay/installation/ios' },
-                        { name: 'Android', url: '/docs/session-replay/installation/android' },
-                        { name: 'Web', url: '/docs/session-replay/installation/web' },
-                        { name: 'React', url: '/docs/session-replay/installation/react' },
-                        { name: 'React Router', url: '/docs/session-replay/installation/react-router' },
-                        { name: 'Next.js', url: '/docs/session-replay/installation/nextjs' },
-                        { name: 'Flutter', url: '/docs/session-replay/installation/flutter' },
-                        { name: 'Vue', url: '/docs/session-replay/installation/vue' },
-                        { name: 'HTML snippet', url: '/docs/session-replay/installation/html-snippet' },
-                        { name: 'Angular', url: '/docs/session-replay/installation/angular' },
-                        { name: 'Astro', url: '/docs/session-replay/installation/astro' },
-                        { name: 'Nuxt', url: '/docs/session-replay/installation/nuxt' },
-                        { name: 'Remix', url: '/docs/session-replay/installation/remix' },
-                        { name: 'Svelte', url: '/docs/session-replay/installation/svelte' },
-                        { name: 'Unity', url: '/docs/session-replay/installation/unity' },
-                        { name: 'Webflow', url: '/docs/session-replay/installation/webflow' },
-                        { name: 'Framer', url: '/docs/session-replay/installation/framer' },
-                        { name: 'Bubble', url: '/docs/session-replay/installation/bubble' },
-                    ],
                 },
                 {
-                    name: 'Watching recordings',
-                    url: '/docs/session-replay/how-to-watch-recordings',
-                    icon: 'IconApp',
-                    color: 'orange',
-                    featured: true,
-                },
-                {
-                    name: 'Controlling which sessions you record',
+                    name: 'Recording rules',
                     url: '/docs/session-replay/how-to-control-which-sessions-you-record',
                     icon: 'IconToggle',
                     color: 'red',
-                },
-                {
-                    name: 'Mobile Session Replay',
-                    url: '/docs/session-replay/mobile',
-                    icon: 'IconPhone',
-                    color: 'blue',
-                },
-                {
-                    name: 'Concepts',
                 },
                 {
                     name: 'Network performance',
                     url: '/docs/session-replay/network-recording',
                     icon: 'IconDashboard',
                     color: 'seagreen',
-                },
-                {
-                    name: 'Privacy controls',
-                    url: '/docs/session-replay/privacy',
-                    icon: 'IconShield',
-                    color: 'orange',
-                },
-                {
-                    name: 'Sharing & embedding',
-                    url: '/docs/session-replay/sharing',
-                    icon: 'IconShare',
-                    color: 'purple',
-                },
-                {
-                    name: 'Data retention',
-                    url: '/docs/session-replay/recording-retention',
-                    icon: 'IconCalendar',
-                    color: 'seagreen',
-                },
-                {
-                    name: 'Iframe recording',
-                    url: '/docs/session-replay/iframes',
-                    icon: 'IconCode',
-                    color: 'salmon',
                 },
                 {
                     name: 'Console log recording',
@@ -4262,35 +4268,69 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
-                    name: 'PostHog AI',
+                    name: 'iframe recording',
+                    url: '/docs/session-replay/iframes',
+                    icon: 'IconCode',
+                    color: 'salmon',
                 },
                 {
-                    name: 'Summarize sessions with PostHog AI',
+                    name: 'Data retention',
+                    url: '/docs/session-replay/recording-retention',
+                    icon: 'IconCalendar',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'AI features',
+                },
+                {
+                    name: 'MCP tools',
+                    url: '/docs/session-replay/search-replays-mcp',
+                    icon: 'IconLlmPromptEvaluation',
+                    color: 'green',
+                },
+                {
+                    name: 'Session Replay in PostHog AI',
+                    url: '/docs/session-replay/find-replays-ai',
+                    icon: 'IconSparkles',
+                    color: 'purple',
+                },
+                {
+                    name: 'Summarize sessions',
                     url: '/docs/session-replay/session-summaries-ai',
                     icon: 'IconSparkles',
                     color: 'purple',
                     featured: true,
                 },
                 {
-                    name: 'Find replays with PostHog AI',
-                    url: '/docs/session-replay/find-replays-ai',
-                    icon: 'IconSparkles',
+                    name: 'Product manual',
+                },
+                {
+                    name: 'Watch recordings',
+                    url: '/docs/session-replay/how-to-watch-recordings',
+                    icon: 'IconApp',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Sharing & embedding',
+                    url: '/docs/session-replay/sharing',
+                    icon: 'IconShare',
                     color: 'purple',
                 },
                 {
-                    name: 'Search replays with MCP',
-                    url: '/docs/session-replay/search-replays-mcp',
-                    icon: 'IconLlmPromptEvaluation',
-                    color: 'green',
+                    name: 'Mobile recording modes',
+                    url: '/docs/session-replay/mobile',
+                    icon: 'IconPhone',
+                    color: 'blue',
                 },
                 {
-                    name: 'Resources',
+                    name: 'Privacy controls',
+                    url: '/docs/session-replay/privacy',
+                    icon: 'IconShield',
+                    color: 'orange',
                 },
                 {
-                    name: 'Pricing',
-                    url: '/docs/session-replay/pricing',
-                    icon: 'IconPiggyBank',
-                    color: 'purple',
+                    name: 'Helpful links',
                 },
                 {
                     name: 'Tutorials and guides',
@@ -4306,10 +4346,30 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
+                    name: 'Pricing',
+                    url: '/session-replay/pricing',
+                    icon: 'IconPiggyBank',
+                    color: 'purple',
+                },
+                {
+                    name: 'API docs',
+                    url: '/docs/api/session-recordings',
+                    icon: 'IconServer',
+                    color: 'seagreen',
+                    external: true,
+                },
+                {
                     name: 'Changelog',
                     url: '/docs/session-replay/changelog',
                     icon: 'IconRocket',
                     color: 'purple',
+                },
+                {
+                    name: 'Community questions',
+                    url: '/questions/topic/session-replay',
+                    icon: 'IconMessage',
+                    color: 'blue',
+                    external: true,
                 },
             ],
         },
@@ -4425,6 +4485,8 @@ export const docsMenu = {
                         { name: 'Node.js', url: '/docs/feature-flags/installation/nodejs' },
                         { name: 'PHP', url: '/docs/feature-flags/installation/php' },
                         { name: 'Python', url: '/docs/feature-flags/installation/python' },
+                        { name: 'OpenFeature (Python)', url: '/docs/feature-flags/installation/openfeature' },
+                        { name: 'OpenFeature (JavaScript)', url: '/docs/feature-flags/installation/openfeature-js' },
                         { name: 'React', url: '/docs/feature-flags/installation/react' },
                         { name: 'React Native', url: '/docs/feature-flags/installation/react-native' },
                         { name: 'React Router', url: '/docs/feature-flags/installation/react-router' },
@@ -5604,6 +5666,21 @@ export const docsMenu = {
                     icon: 'IconDecisionTree',
                     color: 'green',
                 },
+                {
+                    name: 'Historical imports',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/support/imports',
+                    icon: 'IconUpload',
+                    color: 'blue',
+                },
+                {
+                    name: 'Import from Zendesk',
+                    url: '/docs/support/imports/zendesk',
+                    icon: 'IconLetter',
+                    color: 'blue',
+                },
             ],
         },
         ...[dataPipelines],
@@ -6328,7 +6405,7 @@ export const docsMenu = {
             icon: 'IconPlug',
             description: 'Analytics for the MCP servers you ship to AI agents',
             badge: {
-                title: 'Alpha',
+                title: 'Beta',
                 className: 'uppercase !bg-yellow/10 !text-yellow !dark:text-white !dark:bg-yellow/50',
             },
             children: [
@@ -6923,6 +7000,12 @@ export const docsMenu = {
                     name: 'Resources',
                 },
                 {
+                    name: 'Pricing',
+                    url: '/docs/posthog-code/pricing',
+                    icon: 'IconPiggyBank',
+                    color: 'green',
+                },
+                {
                     name: 'Open source',
                     url: '/docs/posthog-code/open-source',
                     icon: 'IconGithub',
@@ -6942,6 +7025,10 @@ export const docsMenu = {
             color: 'purple',
             url: '/docs/slack',
             description: 'Run PostHog from any Slack channel — agent tasks, analytics, and notifications.',
+            badge: {
+                title: 'Beta',
+                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+            },
             children: [
                 {
                     name: 'Slack app',
@@ -6951,6 +7038,10 @@ export const docsMenu = {
                     url: '/docs/slack',
                     icon: 'IconHome',
                     color: 'seagreen',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'Setup',
@@ -7165,6 +7256,12 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'PII scrubbing',
+                    url: '/docs/logs/pii-scrubbing',
+                    icon: 'IconSearch',
+                    color: 'blue',
+                },
+                {
                     name: 'Link Session Replay',
                     url: '/docs/logs/link-session-replay',
                     icon: 'IconRewindPlay',
@@ -7217,6 +7314,46 @@ export const docsMenu = {
                     name: 'Changelog',
                     url: '/docs/logs/changelog',
                     icon: 'IconRocket',
+                    color: 'purple',
+                },
+            ],
+        },
+        {
+            name: 'Metrics',
+            icon: 'IconTrends',
+            color: 'green',
+            url: '/docs/metrics',
+            description: 'Send OpenTelemetry metrics to PostHog and analyze them.',
+            children: [
+                {
+                    name: 'Metrics',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/metrics',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Getting started',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/metrics/start-here',
+                    icon: 'IconListCheck',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Why you need metrics',
+                    url: '/docs/metrics/basics',
+                    icon: 'IconBook',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'How metrics works',
+                    url: '/docs/metrics/architecture',
+                    icon: 'IconDatabase',
                     color: 'purple',
                 },
             ],

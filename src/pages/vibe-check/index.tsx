@@ -102,7 +102,7 @@ export default function Ick() {
                     {!isFinalSlide && (
                         <header className="pb-4">
                             <h1 className="text-2xl flex items-center justify-center gap-2">
-                                You'll hate <Logo className="relative -top-px" /> if...
+                                You'll hate <Logo className="relative -top-px h-6 w-auto" /> if...
                             </h1>
                         </header>
                     )}

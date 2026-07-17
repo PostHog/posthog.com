@@ -18,7 +18,6 @@ const koTranslations: Record<string, string> = {
     'Why PostHog?': 'PostHog만의 장점',
     Changelog: '변경로그',
     'Company handbook': '회사 핸드북',
-    'Work here': '채용 정보',
     Store: '스토어',
     Trash: '휴지통',
     Dashboard: '대시보드',

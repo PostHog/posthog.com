@@ -129,6 +129,30 @@ config.setBeforeSend { event in
 
 </details>
 
+import FilterScreenEvents from '../_snippets/filter-screen-events-beforesend.mdx'
+
+<details>
+<summary>Filter autocaptured screen views</summary>
+
+<FilterScreenEvents />
+
+```swift
+let config = PostHogConfig(projectToken: "<ph_project_token>", host: "<ph_api_client_host>")
+
+let ignoredScreens: Set<String> = ["Splash", "Debug"]
+
+config.setBeforeSend { event in
+    if event.event == "$screen",
+       let screenName = event.properties["$screen_name"] as? String,
+       ignoredScreens.contains(screenName) {
+        return nil
+    }
+    return event
+}
+```
+
+</details>
+
 ### Sampling events
 
 Sampling lets you choose to send only a percentage of events to PostHog. It is a good way to control your costs without having to completely turn off features of the SDK.
@@ -270,3 +294,4 @@ The [`PostHogConfig` object](https://github.com/PostHog/posthog-ios/blob/main/Po
 | `reuseAnonymousId`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Whether the SDK should reuse the anonymous Id between user changes. When enabled, a single Id will be used for all anonymous users on this device. |
 | `surveys`<br/><br/>**Type:** Boolean<br/>**Default:** `true` | Enable Surveys. |
 | `setBeforeSend`<br/><br/>**Type:** Function<br/>**Default:** `undefined` | Hook that allows for amending, sampling, or dropping events before they are sent to PostHog. |
+| `bootstrap`<br/><br/>**Type:** `PostHogBootstrapConfig`<br/>**Default:** `nil` | Seeds identity (`distinctId`, `isIdentifiedId`) and feature-flag state (`featureFlags`, `featureFlagPayloads`) before the first `/flags` response. Bootstrapped identity applies to the first session; only enabled flags are served, until the first `/flags` response replaces them. See [bootstrapping](/docs/feature-flags/bootstrapping#behavior-on-mobile-sdks). |

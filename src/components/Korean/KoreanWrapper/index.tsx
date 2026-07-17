@@ -4,9 +4,11 @@ import AppWindow from 'components/AppWindow'
 import { AnimatePresence, motion } from 'framer-motion'
 import CookieBannerToast from 'components/CookieBanner/ToastVersion'
 import { DotLottiePlayer, PlayerEvents } from '@dotlottie/react-player'
-import WebsiteFooter from 'components/WebsiteFooter'
 import KoreanDesktop from '../KoreanDesktop'
 import KoreanTaskBarMenu from '../KoreanTaskBarMenu'
+import { SearchOverlay } from 'components/SearchUI'
+import { ChatOverlay } from 'hooks/useChat'
+import AppContainer from 'components/AppContainer'
 
 export default function KoreanWrapper() {
     const {
@@ -16,8 +18,6 @@ export default function KoreanWrapper() {
         closingAllWindowsAnimation,
         setClosingAllWindowsAnimation,
         closeAllWindows,
-        websiteMode,
-        searchOpen,
     } = useApp()
     const [shakeReady, setShakeReady] = useState(false)
     const dotLottieRef = useRef<any>(null)
@@ -29,15 +29,7 @@ export default function KoreanWrapper() {
     }, [closingAllWindowsAnimation])
 
     return (
-        <div
-            data-scheme="primary"
-            className={`${
-                websiteMode
-                    ? 'max-w-7xl mx-auto border-x border-primary bg-primary shadow-xl min-h-screen'
-                    : 'fixed inset-0 size-full'
-            } flex flex-col`}
-            id="app-container"
-        >
+        <AppContainer className="fixed inset-0 size-full flex flex-col">
             {!compact && <KoreanTaskBarMenu />}
             <div ref={constraintsRef} className={`flex-grow relative`}>
                 <KoreanDesktop />
@@ -67,16 +59,17 @@ export default function KoreanWrapper() {
                                     },
                                 }}
                             >
-                                <AppWindow item={item} key={item.key} chrome={item.key !== 'search'} />
+                                <AppWindow item={item} key={item.key} />
                             </motion.div>
                         )
                     })}
                 </AnimatePresence>
             </div>
-            <WebsiteFooter />
             {/*
             {!compact && <Dock />}
             */}
+            <SearchOverlay />
+            <ChatOverlay />
             <CookieBannerToast />
             <AnimatePresence>
                 <motion.div
@@ -105,6 +98,6 @@ export default function KoreanWrapper() {
                     />
                 </motion.div>
             </AnimatePresence>
-        </div>
+        </AppContainer>
     )
 }

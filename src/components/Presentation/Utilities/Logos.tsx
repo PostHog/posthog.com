@@ -16,8 +16,9 @@ export default function Logos({
     return (
         <div className="flex items-center gap-4">
             <Logo
-                noText
-                fill={color === 'text-white' ? 'white' : ''}
+                wordmark={false}
+                variant={color === 'text-white' ? 'mono' : 'gradient'}
+                color={color === 'text-white' ? 'white' : undefined}
                 className={`${size === 'sm' ? 'size-12' : 'size-20'}`}
             />
             {companyLogo && (

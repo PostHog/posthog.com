@@ -158,12 +158,6 @@ Talk to [Tara](https://posthog.com/community/profiles/34526) who handles most Ma
     - You can request a new laptop in `#team-people-and-ops` if it is over 4 years old, (for engineering machines) has less than 48GB of RAM, or is significantly impacting your productivity. We do ask that you do some diligence to make sure it's not a setup issue though - i.e. other applications aren't hogging the memory, etc.
     - Part of `#team-client-libraries` and need to purchase a phone for testing? Talk to [Tara](https://posthog.com/community/profiles/34526) in `#team-people-and-ops`.
 
-#### Yubikey (for specific roles only)
-
-Passkeys are the preferred way of securing accounts. In some cases Passkeys aren't supported by the service provider.
-
-If you find yourself in a team requiring access to these kinds of tools where a Yubikey is required then you should purchase them as recommended on the [on the MFA page](https://posthog.com/handbook/company/security#multi-factor-authentication) using your Brex card. If you aren't sure if you need one then you probably don't and should instead be using Passkeys
-
 #### Other equipment
 - Keyboard/mouse/laptop stand: Check Amazon and Apple for discounts. Refurbished items usually work just fine. [Nextstand](https://www.amazon.co.uk/NEXSTAND-K2-Adjustable-Foldable-Portable/dp/B01HHYQBB8) make great value laptop stands that are portable.
 - Desk & chair - again, refurbished is a great way to get high quality for less. If you live in the UK, [Office Resale](https://www.officeresale.co.uk/) offer a range of like-new refurbished designer furniture.
@@ -206,6 +200,7 @@ You can ask for access to team/company tools by submitted a request in Slack. Fi
 - We strongly encourage team members to try and work together in person when practical. This isn't limited to just working with people in your team, but we expect that you have a reasonable reason you need to work together. You should default to doing this in SF/London, so you'll run into other PostHog people too.
 - If you're in the same place as other team members, even if you aren't directly working together, PostHog will cover the cost of a dinner or a fun activity
 - When visiting customers (or potential customers), we should look for opportunities to connect with them over a meal. These don't need to be extravagant, but they should be appropriate to the size and expectations of the customer. If you would be comfortable justifying the spend publicly in All Hands, you're probably fine.
+  - For a normal customer visit (yourself or a couple of people), just use your personal budget and request an increase through Brex if you need more. If the visit grows into something offsite-like (the whole team, multiple days, etc.), post in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ) and tag Kendal so she can create a separate budget for it.
 
 #### Hub travel budget
 

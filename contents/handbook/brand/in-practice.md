@@ -106,7 +106,7 @@ Print requires additional consideration because you can't iterate after it's shi
 
 ### Approval:
 
-All print materials should be reviewed by in `#design-review` before going to print. Mistakes in print are expensive. [Submit a request](/handbook/brand/art-requests) early.
+All print materials should be reviewed in `#design-review` before going to print. Mistakes in print are expensive. [Submit a request](/handbook/brand/art-requests) early.
 
 ## Merch & swag
 

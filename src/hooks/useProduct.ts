@@ -33,6 +33,7 @@ import {
 } from '@posthog/icons'
 import useProducts from './useProducts'
 import { mcpAnalytics } from './productData/mcp_analytics'
+import { traces } from './productData/traces'
 
 const dedupe = (products) => {
     const deduped = {}
@@ -58,6 +59,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         //     name: 'Product analytics',
         //     slug: 'product-analytics',
         // },
+        traces,
         {
             name: 'User interviews',
             Icon: IconThoughtBubble,
@@ -79,7 +81,6 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             colorSecondary: 'blue',
             category: 'communication',
             slug: 'docs/support',
-            status: 'beta',
         },
         {
             name: 'PostHog Code',

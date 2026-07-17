@@ -9,19 +9,23 @@ featuredImageType: full
 category: General
 tags:
   - Inside PostHog
+  - Guides
+seo:
+    metaTitle: "What does a customer success manager actually do all day?"
+    metaDescription: "Inside what customer success managers and technical account managers do all day at PostHog: debug code, cut bills 20%, ship fixes in 24 hours."
 ---
 
 Despite their name, customer success managers at many SaaS companies don’t actually help their customers succeed. They send quarterly business reviews nobody reads, gatekeep engineering access, forward support tickets and call it "advocacy," have titles like "Strategic Customer Success Partner," and LinkedIn bios that say "passionate about driving outcomes."  
 
 Besides doing none of these things at PostHog, customer success managers (and technical account managers) also crochet hedgehogs, hand-deliver donuts to customers around the world, build customer and PostHog emoji mashups, and ship product PRs to fix complaints themselves. 
 
-We believe being genuine and being effective aren’t at odds, and our workdays reflect that. Here’s what one looks like:
+We believe being genuine and being effective aren’t at odds, and our workdays reflect that. Here’s what a day in the life of a PostHog customer success manager (CSM) – and our technical account managers (TAMs) – actually looks like:
 
 ## 7:30 AM: Fire alarm
 
 I open my laptop and the first thing I see is a message from one of our EU teammates saying one of his accounts is flagged in our system as “Churned.” This is a surprise as we have churn warnings. [Churn events](/product-engineers/churn-rate-vs-retention-rate) from our managed accounts are incredibly rare.
 
-![Churn alert](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2026_06_08_at_14_18_33_2x_adf2a96fde.png)
+![Customer success manager reviewing a churn alert in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2026_06_08_at_14_18_33_2x_adf2a96fde.png)
 
 It turns out to be a false alarm from a Stripe mapping bug. The customer had two subscriptions, one got cancelled, and our system tracked the wrong one. This was diagnosed in about four minutes. 
 
@@ -31,7 +35,7 @@ His response wasn't to wait for someone to fix the data. His unhinged response w
 
 With the fake crisis averted, it’s time to look over some data to start the day. We usually start in PostHog, very meta.
 
-I query our [data warehouse](/data-stack) to check how accounts are doing. Event volumes, product adoption, SDK usage, power users. We wrote Claude skills for the [PostHog MCP](/docs/model-context-protocol) that assist with most of this: I can ask "explore [account name]" and get a snapshot of their health, spend trajectory, product adoption matrix, and a list of their most active users with LinkedIn profiles attached. It’s not unusual to discover new contacts and create new champions starting with this workflow.
+I query our [data warehouse](/data-stack) to [check how accounts are doing](/blog/analytics-tips-for-customer-success-teams). Event volumes, product adoption, SDK usage, power users. We wrote Claude skills for the [PostHog MCP](/docs/model-context-protocol) that assist with most of this: I can ask "explore [account name]" and get a snapshot of their health, spend trajectory, product adoption matrix, and a list of their most active users with LinkedIn profiles attached. It’s not unusual to discover new contacts and create new champions starting with this workflow.
 
 <details>
   <summary>What the Account Explorer skill looks like</summary>
@@ -50,10 +54,10 @@ Grab the essentials in one query: account info, current revenue, health score, c
 Render a compact scorecard, not a wall of text:
 
 - **Header:** account name, health score, archetype/stage, contract type.
-- **Key metrics:** current revenue, forecasted revenue (+ gap), annual run-rate, and either credit runway or days-to-renewal — whichever is more relevant.
+- **Key metrics:** current revenue, forecasted revenue (+ gap), annual run-rate, and either credit runway or days-to-renewal – whichever is more relevant.
 - **Products in use:** what they're actually paying for, sorted by spend.
 - **Products being trialed:** anything with real usage but little or no spend yet.
-- **One headline signal:** the single thing worth reacting to — color-coded as warning / good / risk / neutral.
+- **One headline signal:** the single thing worth reacting to – color-coded as warning / good / risk / neutral.
 
 > One trap worth calling out: being *enrolled* in a product means nothing. Only show a product if there's real spend **or** real usage behind it.
 
@@ -69,7 +73,7 @@ Pick the 1–2 highest-leverage paths and state them as a one-line headline with
 - All activity tracing to one person → Broaden the relationship
 - Low health score or no recent activity → Reconnect first, analyze second
 
-If nothing stands out, say so plainly: *"No standout signal — pick a path below."*
+If nothing stands out, say so plainly: *"No standout signal – pick a path below."*
 
 ## 4. Present the menu
 
@@ -97,7 +101,7 @@ After the recommendation, offer the full set so the user can reply with a code (
 - D1. Annual conversion fit
 - D2. Credit runway / burn rate
 - D3. Health score drivers (what's pulling it down)
-- D4. Recent calls / notes — "where we left off"
+- D4. Recent calls / notes – "where we left off"
 
 ### E. Action
 - E1. Next-step recommendation
@@ -114,7 +118,7 @@ After the recommendation, offer the full set so the user can reply with a code (
 
 This is the part that confuses people from other SaaS companies.
 
-The logic: if we optimize a customer implementation and reduce spend in areas that don't provide real value, they'll spend more over the long haul, adopt more products, and be stickier. 
+The logic: if we optimize a customer implementation and reduce spend in areas that don't provide real value, they'll spend more over the long haul, adopt more products, and [be stickier](/product-engineers/customer-retention-metrics). 
 
 I helped an account cut about 20% of their bill by removing [autocapture noise](/docs/product-analytics/autocapture) and tuning their [session replay](/docs/session-replay/how-to-control-which-sessions-you-record) sampling. They were skeptical of us at the time, honestly. They’ve now onboarded three new teams, adopted four more products, and burned through their annual credit commitment eight months early. We re-signed them at roughly double the original contract value, and the conversation was easy because they trusted us. That trust started with "hey, you're overpaying."
 
@@ -126,7 +130,7 @@ A customer's engineering team pings the shared channel: their experiment results
 
 This is not unusual. Most product-led customers (the ones our CSMs and TAMs inherit) self-serve their implementation.  
 
-So we spend an hour on a call walking their engineers through it. It's not glamorous work. But this is also a good chunk of what a PostHog TAM or CSM actually does: getting into the technical weeds of someone else's codebase and making sure PostHog is implemented correctly. 
+So we spend an hour on a call walking their engineers through it. It's not glamorous work. But this is also a good chunk of what a PostHog customer success account manager or TAM actually does: getting into the technical weeds of someone else's codebase and making sure PostHog is implemented correctly. 
 
 ## 11:00 AM: The donut run
 
@@ -150,7 +154,7 @@ Another CSM got mistaken for a product engineer by one of his customers because 
 
 We have a [hogmoji builder](https://hogmoji.fun/) (a tool that lets you create custom PostHog hedgehog emoji) and made one with a customer's logo mashed into the hedgehog face. He dropped it in their Slack Connect channel as a friendly hello.
 
-![Hogmoji](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2026_06_08_at_14_07_08_2x_40d88e7075.png)
+![Custom hogmoji built from a customer's logo](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2026_06_08_at_14_07_08_2x_40d88e7075.png)
 
 Another TAM, meanwhile, was experimenting with using emoji reactions to get a customer to engage on priorities and it worked. Turns out emoji-based priority voting is an effective customer engagement strategy.
 
@@ -168,7 +172,7 @@ Half our team has gotten into building Claude skills and automation. One CSM bui
 
 A technical account executive built the quoting and pricing tool we use for generating all customer pricing quotes, called QuoteHog.
 
-![QuoteHog](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2026_06_08_at_14_10_57_2x_1ee3c5fca5.png)
+![QuoteHog, the customer pricing quote tool built by PostHog's customer success team](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2026_06_08_at_14_10_57_2x_1ee3c5fca5.png)
 
 ## 4:00 PM: PostHog AI goes rogue (in a good way)
 

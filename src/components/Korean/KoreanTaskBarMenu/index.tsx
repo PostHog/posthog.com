@@ -27,8 +27,6 @@ import { useMenuData } from './menuData'
 import CloudinaryImage from 'components/CloudinaryImage'
 import MediaUploadModal from 'components/MediaUploadModal'
 import KeyboardShortcut from 'components/KeyboardShortcut'
-import { Popover } from 'components/RadixUI/Popover'
-import { SearchUI } from 'components/SearchUI'
 import { translateKo } from '../../../pages/ko/_translations'
 
 const translateMenuItem = (item: any): any => {
@@ -58,16 +56,12 @@ export default function TaskBarMenu() {
         windows,
         openSearch,
         openSignIn,
-        siteSettings,
         openNewChat,
         setIsNotificationsPanelOpen,
         setIsActiveWindowsPanelOpen,
         addWindow,
         taskbarRef,
         posthogInstance,
-        websiteMode,
-        searchOpen,
-        setSearchOpen,
     } = useApp()
     const [isAnimating, setIsAnimating] = useState(false)
     const [rendered, setRendered] = useState(false)
@@ -114,14 +108,6 @@ export default function TaskBarMenu() {
             document.activeElement.blur()
         }
         openSignIn()
-    }
-
-    const handleSearchOpenChange = (open: boolean) => {
-        if (websiteMode) {
-            setSearchOpen(open)
-        } else {
-            openSearch()
-        }
     }
 
     const avatarURL = getAvatarURL(user?.profile)
@@ -299,17 +285,12 @@ export default function TaskBarMenu() {
                 id="taskbar"
                 data-scheme="primary"
                 data-menu-container
-                className={`w-full bg-accent/75 skin-classic:bg-accent wallpaper-keyboard-garden:dark:bg-black/15 backdrop-blur border-b border-primary top-0 pl-0.5 pr-2 ${
-                    websiteMode ? 'sticky top-0 z-40' : 'bg-accent/75 z-50'
-                } ${rendered ? 'block' : 'hidden'}`}
+                className={`w-full bg-accent/75 skin-classic:bg-accent wallpaper-keyboard-garden:dark:bg-black/15 backdrop-blur border-b border-primary top-0 pl-0.5 pr-2 bg-accent/75 z-50 ${
+                    rendered ? 'block' : 'hidden'
+                }`}
             >
-                <div
-                    className={`mx-auto transition-all duration-300 flex justify-between items-center w-full ${
-                        websiteMode ? 'max-w-7xl' : 'max-w-full'
-                    }`}
-                >
+                <div className="mx-auto transition-all duration-300 flex justify-between items-center w-full max-w-full">
                     <MenuBar
-                        showChevronDown={websiteMode}
                         menus={menuData}
                         className="[&_button]:px-2 [&_button:not(:first-child)]:hidden md:[&_button:not(:first-child)]:flex"
                     />
@@ -360,39 +341,18 @@ export default function TaskBarMenu() {
                                 {posthogInstance ? translateKo('Dashboard') : translateKo('Get started – free')}
                             </OSButton>
                         </div>
-                        <Popover
-                            open={searchOpen}
-                            dataScheme="primary"
-                            onOpenChange={handleSearchOpenChange}
+                        <Tooltip
                             trigger={
-                                <span>
-                                    <Tooltip
-                                        trigger={
-                                            <span>
-                                                <OSButton
-                                                    size="sm"
-                                                    className={`relative top-px ${
-                                                        websiteMode && searchOpen
-                                                            ? 'border border-primary !bg-accent'
-                                                            : ''
-                                                    }`}
-                                                >
-                                                    <IconSearch className="size-5" />
-                                                </OSButton>
-                                            </span>
-                                        }
-                                    >
-                                        <div className="flex flex-col items-center gap-1">
-                                            <p className="text-sm mb-0">{translateKo('Search')}</p>
-                                            <KeyboardShortcut text="/" size="sm" />
-                                        </div>
-                                    </Tooltip>
-                                </span>
+                                <OSButton onClick={() => openSearch()} size="sm" className="relative top-px">
+                                    <IconSearch className="size-5" />
+                                </OSButton>
                             }
-                            contentClassName="w-[450px] border border-primary rounded !p-0 overflow-hidden"
                         >
-                            <SearchUI />
-                        </Popover>
+                            <div className="flex flex-col items-center gap-1">
+                                <p className="text-sm mb-0">{translateKo('Search')}</p>
+                                <KeyboardShortcut text="/" size="sm" />
+                            </div>
+                        </Tooltip>
                         <Tooltip
                             trigger={
                                 <OSButton
@@ -412,31 +372,30 @@ export default function TaskBarMenu() {
                                 </div>
                             </div>
                         </Tooltip>
-                        {siteSettings.experience === 'posthog' && (
-                            <motion.div
-                                animate={
-                                    isAnimating
-                                        ? {
-                                              scale: [1, 1.2, 1],
-                                              rotate: [0, -5, 5, -5, 5, 0],
-                                          }
-                                        : {}
-                                }
-                                transition={{
-                                    duration: 0.5,
-                                    ease: 'easeInOut',
-                                    times: [0, 0.2, 0.4, 0.6, 0.8, 1],
-                                }}
-                            >
-                                {totalWindows <= 0 ? (
-                                    <Tooltip
-                                        trigger={
-                                            <button
-                                                onClick={handleActiveWindowsClick}
-                                                disabled={totalWindows <= 0}
-                                                data-scheme="primary"
-                                                data-active-windows
-                                                className={`min-w-6 h-5 px-1.5 ml-1 py-1 inline-flex justify-center items-center rounded
+                        <motion.div
+                            animate={
+                                isAnimating
+                                    ? {
+                                          scale: [1, 1.2, 1],
+                                          rotate: [0, -5, 5, -5, 5, 0],
+                                      }
+                                    : {}
+                            }
+                            transition={{
+                                duration: 0.5,
+                                ease: 'easeInOut',
+                                times: [0, 0.2, 0.4, 0.6, 0.8, 1],
+                            }}
+                        >
+                            {totalWindows <= 0 ? (
+                                <Tooltip
+                                    trigger={
+                                        <button
+                                            onClick={handleActiveWindowsClick}
+                                            disabled={totalWindows <= 0}
+                                            data-scheme="primary"
+                                            data-active-windows
+                                            className={`min-w-6 h-5 px-1.5 ml-1 py-1 inline-flex justify-center items-center rounded
                                             border-[1.5px] 
                                             border-t-4 
                                             
@@ -454,28 +413,28 @@ export default function TaskBarMenu() {
                                                     : 'bg-accent border-primary dark:border-[#eaecf6]'
                                             }
                                         `}
-                                            >
-                                                <span className="text-[13px] font-semibold relative -top-px">
-                                                    {totalWindows}
-                                                </span>
-                                            </button>
-                                        }
-                                        delay={0}
-                                    >
-                                        <div className="max-w-48 text-center">
-                                            <p className="text-sm mb-0">{translateKo('You have no open windows')}</p>
-                                            <p className="text-[13px] text-secondary mb-0 leading-normal text-balance">
-                                                {translateKo('(But if you did, you could manage them here!)')}
-                                            </p>
-                                        </div>
-                                    </Tooltip>
-                                ) : (
-                                    <button
-                                        onClick={handleActiveWindowsClick}
-                                        disabled={totalWindows <= 0}
-                                        data-scheme="primary"
-                                        data-active-windows
-                                        className={`min-w-6 h-5 px-1.5 ml-1 py-1 inline-flex justify-center items-center rounded
+                                        >
+                                            <span className="text-[13px] font-semibold relative -top-px">
+                                                {totalWindows}
+                                            </span>
+                                        </button>
+                                    }
+                                    delay={0}
+                                >
+                                    <div className="max-w-48 text-center">
+                                        <p className="text-sm mb-0">{translateKo('You have no open windows')}</p>
+                                        <p className="text-[13px] text-secondary mb-0 leading-normal text-balance">
+                                            {translateKo('(But if you did, you could manage them here!)')}
+                                        </p>
+                                    </div>
+                                </Tooltip>
+                            ) : (
+                                <button
+                                    onClick={handleActiveWindowsClick}
+                                    disabled={totalWindows <= 0}
+                                    data-scheme="primary"
+                                    data-active-windows
+                                    className={`min-w-6 h-5 px-1.5 ml-1 py-1 inline-flex justify-center items-center rounded
                                     border-[1.5px] 
                                     border-t-4 
                                     
@@ -493,14 +452,11 @@ export default function TaskBarMenu() {
                                             : 'bg-accent border-primary dark:border-[#eaecf6]'
                                     }
                                 `}
-                                    >
-                                        <span className="text-[13px] font-semibold relative -top-px">
-                                            {totalWindows}
-                                        </span>
-                                    </button>
-                                )}
-                            </motion.div>
-                        )}
+                                >
+                                    <span className="text-[13px] font-semibold relative -top-px">{totalWindows}</span>
+                                </button>
+                            )}
+                        </motion.div>
                         <MenuBar menus={accountMenu} className="[&_button]:px-2" />
                     </aside>
                 </div>

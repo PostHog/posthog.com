@@ -19,7 +19,7 @@ seo:
         metaDescription: 'Logs is now generally available. Debug from the same place where you identify your errors. Watch replays directly tied to the logs.',
     }
 ---
-**[Logs](https://app.posthog.com/logs)** is where debugging actually ends. You might start with an alert, an error, or a user report. You might open a session replay or trace a request across services. But when you need to understand what really happened, what the system did, in what order, and why, you end up going through your logs. 
+**[Logs](https://app.posthog.com/logs)** is where debugging actually ends. You might start with an alert, an error, or a user report. You might open a session replay or [trace a request across services](/blog/traces-beta). But when you need to understand what really happened, what the system did, in what order, and why, you end up going through your logs. 
 
 PostHog is now the final destination for your logs. Logs is generally available, and it lives in the same place as your errors, session replays, and product data. The place where an investigation begins is now also where it ends.
 

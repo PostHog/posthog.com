@@ -19,12 +19,13 @@ export const surveys = {
     seo: {
         title: 'Surveys – Collect product feedback with PostHog',
         description:
-            'No-code surveys on web and mobile with templates for NPS, CSAT, and more – the qualitative signal agents use to learn what users say and self-drive your product.',
+            'Collect and analyze product feedback with Surveys. Launch customizable no-code surveys fast on web and mobile with templates for NPS, CSAT, user interviews, and more.',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/surveys_b918a1f9e9.jpg',
     },
     overview: {
         title: 'Ask anything with no-code surveys',
         description:
-            'Surveys is one of the tools that makes your product self-driving: the qualitative signal in the loop – what users say, not just what they do. Build in-app or on-page popups with freeform text responses, multiple choice, NPS, ratings, and emoji reactions, or use the API for a headless implementation.',
+            'Build in-app or on-page popups with freeform text responses, multiple choice, NPS, ratings, and emoji reactions. Or use the API for a headless implementation.',
         textColor: 'text-white', // tw
     },
     videos: {
