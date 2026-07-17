@@ -64,16 +64,18 @@ To give customers a minimum amount of information and usability, set up the earl
 
 Titles, descriptions, and links are all set on the early access feature in [Early Access Management](https://us.posthog.com/early_access_features). Product teams are responsible for [writing documentation](/handbook/engineering/writing-docs), but the <SmallTeam slug="content" /> can help, if needed.
 
-<CloudinaryImage
-  src="https://res.cloudinary.com/dmukukwp6/image/upload/goodbeta_daa2ddca2a.png"
-  alt="An example of a good beta"
-  className="dark:hidden"
-/>
-<CloudinaryImage
-  src="https://res.cloudinary.com/dmukukwp6/image/upload/goodbeta_dark_1dd8b2e833.png"
-  alt="An example of a good beta"
-  className="hidden dark:block"
-/>
+<div className="flex justify-center">
+  <CloudinaryImage
+    src="https://res.cloudinary.com/dmukukwp6/image/upload/goodbeta_daa2ddca2a.png"
+    alt="An example of a good beta"
+    className="dark:hidden"
+  />
+  <CloudinaryImage
+    src="https://res.cloudinary.com/dmukukwp6/image/upload/goodbeta_dark_1dd8b2e833.png"
+    alt="An example of a good beta"
+    className="hidden dark:block"
+  />
+</div>
 <Caption>Betas should include a title, description, feedback button, payload with `product_key` and link to basic docs</Caption>
 
 ### Beta requirements
