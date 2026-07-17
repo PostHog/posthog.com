@@ -1584,7 +1584,7 @@ function ReaderViewContent({
                             <article
                                 className={`reader-view-content-container @container/reader-content-container ${getProseClasses(
                                     proseSize
-                                )} max-w-none relative flex-1 min-w-0 overflow-x-hidden`}
+                                )} max-w-none relative flex-1 min-w-0`}
                             >
                                 {header && (
                                     <header className="relative">
@@ -1697,7 +1697,7 @@ function ReaderViewContent({
                                             className={getVideoClasses(fullWidthContent)}
                                         />
                                     )}
-                                    <div className="reader-content-container">
+                                    <div className="reader-content-container overflow-x-hidden">
                                         {body?.type === 'mdx' ? (
                                             <div
                                                 className={`@container [&>*:not(.OSTable):not(.Table)]:mx-auto [&>*:not(.OSTable):not(.Table)]:transition-all [&>span:not(.OSTable):not(.Table)]:block ${
