@@ -490,8 +490,31 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
 }
 
 export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter }) => {
+    // Generate raw markdown (.md) versions of pages under MARKDOWN_CONTENT_PATHS
+    // (docs, handbook, blog) by converting the built HTML with turndown.
+    // Runs in GATSBY_MINIMAL (deploy preview) builds too, so .md URLs can be
+    // verified in previews — everything below is skipped in minimal builds.
+    // Build regex from MARKDOWN_CONTENT_PATHS constant (e.g., "/^/(docs|handbook|blog)/")
+    const markdownPathsRegex = `/^/(${MARKDOWN_CONTENT_PATHS.map((p) => p.replace('/', '')).join('|')})/`
+    const docsQuery = (await graphql(`
+        query {
+            allMdx(filter: { fields: { slug: { regex: "${markdownPathsRegex}" } } }) {
+                nodes {
+                    fields {
+                        slug
+                    }
+                    frontmatter {
+                        title
+                    }
+                }
+            }
+        }
+    `)) as { data: { allMdx: { nodes: Array<{ fields: { slug: string }; frontmatter: { title: string } }> } } }
+
+    const filteredPages = await generateRawMarkdownPages(docsQuery.data.allMdx.nodes)
+
     if (process.env.GATSBY_MINIMAL === 'true') return
-    // Generate API spec markdown files first
+    // Generate API spec markdown files
     try {
         const openApiSpecUrl = process.env.POSTHOG_OPEN_API_SPEC_URL || 'https://app.posthog.com/api/schema/'
         const spec = await fetch(openApiSpecUrl, {
@@ -574,27 +597,8 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter
         console.error('Failed to generate pricing.md:', error)
     }
 
-    // Generate markdown files for llms.txt file and LLM ingestion (after pages are built)
-    // Convert HTML files to markdown using turndown
-    // Build regex from MARKDOWN_CONTENT_PATHS constant (e.g., "/^/(docs|handbook)/")
-    const markdownPathsRegex = `/^/(${MARKDOWN_CONTENT_PATHS.map((p) => p.replace('/', '')).join('|')})/`
-    const docsQuery = (await graphql(`
-        query {
-            allMdx(filter: { fields: { slug: { regex: "${markdownPathsRegex}" } } }) {
-                nodes {
-                    fields {
-                        slug
-                    }
-                    frontmatter {
-                        title
-                    }
-                }
-            }
-        }
-    `)) as { data: { allMdx: { nodes: Array<{ fields: { slug: string }; frontmatter: { title: string } }> } } }
-
-    const filteredPages = await generateRawMarkdownPages(docsQuery.data.allMdx.nodes)
-    // Only include docs pages in llms.txt (not handbook)
+    // Generate llms.txt from the raw markdown pages created above.
+    // Only include docs pages in llms.txt (not handbook or blog)
     const docsPages = filteredPages.filter((page) => page.fields.slug.startsWith('/docs'))
     generateLlmsTxt(docsPages)
 
