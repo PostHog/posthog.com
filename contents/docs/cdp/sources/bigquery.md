@@ -104,3 +104,62 @@ This means the Project ID or Dataset ID you entered contains characters that Big
 - **Dataset IDs** can only contain letters, digits, and underscores (no hyphens).
 
 A common mistake is copying identifiers with extra characters like parentheses or spaces. Verify your Project ID and Dataset ID in the [Google Cloud Console](https://console.cloud.google.com/) and update your source configuration in PostHog.
+
+### Missing required fields in key file
+
+If you see an error like:
+
+> `Your Google Cloud JSON key file is missing required fields.`
+
+This means the uploaded JSON key file doesn't contain all the fields PostHog needs. The key file must include `project_id`, `private_key`, `private_key_id`, `client_email`, and `token_uri`.
+
+To fix this, download the full service account key from the [Google Cloud Console](https://console.cloud.google.com/) under **IAM & Admin > Service Accounts > [Your Account] > Keys** and re-upload it.
+
+### Corrupted or invalid private key
+
+If you see an error like:
+
+> `We couldn't read the private key in your Google Cloud JSON key file — it appears truncated or corrupted.`
+
+This means the `private_key` field in your JSON key file is damaged, truncated, or was modified incorrectly. This can happen if the key file was partially copied or edited.
+
+To fix this, download a fresh service account key from the [Google Cloud Console](https://console.cloud.google.com/) under **IAM & Admin > Service Accounts > [Your Account] > Keys** and re-upload the complete JSON file.
+
+### Service account credentials rejected
+
+If you see an error like:
+
+> `Your BigQuery service account credentials were rejected by Google.`
+
+This means Google's authentication endpoint rejected your service account credentials. This happens when:
+
+- **The private key was rotated or revoked** — Someone generated a new key for this service account, invalidating the old one.
+- **The service account was deleted** — The service account no longer exists in Google Cloud.
+
+To fix this, generate a new JSON key file in the [Google Cloud Console](https://console.cloud.google.com/) under **IAM & Admin > Service Accounts** and upload it to PostHog.
+
+### Dataset not found or wrong region
+
+If you see an error like:
+
+> `BigQuery couldn't find the configured dataset or table.`
+
+This means the dataset or table you specified doesn't exist or isn't accessible from the region PostHog is querying. This can happen when:
+
+- **The dataset was deleted or renamed** — Verify the dataset exists in your [BigQuery console](https://console.cloud.google.com/bigquery).
+- **The dataset is in a non-US region** — Toggle **Manually specify your dataset region** in your source settings and enter the correct region (e.g., `us-east1`, `europe-west1`).
+- **Typo in dataset or table name** — Double-check the spelling in your source configuration.
+
+### Permission denied
+
+If you see an error like:
+
+> `BigQuery denied access to the configured dataset or tables.`
+
+This means your service account doesn't have the necessary permissions to read the dataset. To fix this:
+
+1. In the [Google Cloud Console](https://console.cloud.google.com/), go to **IAM & Admin > IAM**.
+2. Find your service account and ensure it has at least the **BigQuery Data Viewer** role on the dataset you're syncing.
+3. Alternatively, grant the specific `bigquery.tables.getData` permission at the dataset level.
+
+See the [Configuring BigQuery](#configuring-bigquery) section for the full list of required permissions.
