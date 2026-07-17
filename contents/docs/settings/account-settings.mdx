@@ -16,6 +16,7 @@ In your [Account settings](https://app.posthog.com/settings/user-api-keys#person
 - [Reminders](#reminders)
 - [Notifications](#notifications)
 - [Theming options](#theming-and-customization)
+- [Session security](#session-security)
 
 ## Updating name and email
 
@@ -29,9 +30,13 @@ When you verify your new email address, all linked social auth methods (Google, 
 
 </CalloutBox>
 
+Changing your email signs you out of all other devices. See [Session security](#session-security) for details.
+
 ## Updating password
 
 You can update your password in [your account settings](https://app.posthog.com/settings/user#change-password) under the **Change password** section.
+
+Changing your password signs you out of all other devices. See [Session security](#session-security) for details.
 
 ## Password requirements
 
@@ -48,6 +53,26 @@ PostHog enforces the following password requirements for users:
 You can require two-factor authentication (2FA) to boost your account security.
 
 To enable 2FA, go to [your account settings](https://app.posthog.com/settings/user#2fa). Under the **Two-factor authentication** section, click **Set up 2FA**. Click **View backup codes** and save them in a secure place in case you can't reach your 2FA device.
+
+Enabling 2FA signs you out of all other devices. See [Session security](#session-security) for details.
+
+## Session security
+
+PostHog automatically signs you out of other devices when you make security-critical account changes. This protects your account if your credentials were compromised.
+
+Actions that sign you out of other sessions:
+
+- Changing your password
+- Completing a password reset (forgot-password flow)
+- Changing your email
+- Enabling 2FA
+- Enabling passkeys for 2FA
+- Adding your first passkey
+- Resetting 2FA (account recovery)
+
+Your current session remains active. Disabling 2FA does not sign you out of other sessions.
+
+If your account is deactivated, all of your sessions are revoked.
 
 ## Connected applications
 

@@ -44,6 +44,8 @@ Once done, you can now [query](/docs/data-warehouse/query) your new table using 
 
 Instead of syncing data on a schedule, you can query your Snowflake database directly from the [SQL editor](https://app.posthog.com/sql). Direct connections run queries against your live Snowflake instance in real time — no data is copied into PostHog.
 
+### Creating a direct-only connection
+
 To set up a direct connection:
 
 1. Open the [SQL editor](https://app.posthog.com/sql).
@@ -52,6 +54,21 @@ To set up a direct connection:
 4. Select the tables you want to make available, then click **Link**.
 
 Once connected, switch to your Snowflake connection in the SQL editor's connection picker and write queries against your live data.
+
+### Enabling live queries on a synced source
+
+You can also enable live queries on a synced Snowflake source, giving you both scheduled syncs and the ability to query your live data from the same source.
+
+**When creating a new source:** In the source creation wizard, select **Sync and query live** to enable both scheduled syncs and live queries.
+
+**For an existing source:**
+
+1. Go to the [sources tab](https://app.posthog.com/data-management/sources) and click your Snowflake source.
+2. Open the **Configuration** tab.
+3. Enable the **Enable live queries** toggle.
+4. Click **Save changes**.
+
+Once enabled, click **Query directly** on the **Schemas** tab to open the SQL editor with your source preselected. In the SQL editor's connection picker, synced sources with live queries show a `· synced` label to distinguish them from direct-only connections.
 
 ### When to use direct connections vs scheduled syncs
 

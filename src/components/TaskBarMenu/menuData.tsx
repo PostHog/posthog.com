@@ -17,12 +17,10 @@ import {
     IconDictator,
     IconSparksJoy,
 } from 'components/OSIcons'
-import { useApp } from '../../context/App'
+import { useAppSettings } from '../../context/App'
 import { IconChevronDown } from '@posthog/icons'
 import { useHedgehogMode } from 'components/HedgehogMode'
 import { navigate } from 'gatsby'
-import { useToast } from '../../context/Toast'
-import usePostHog from '../../hooks/usePostHog'
 
 interface DocsMenuItem {
     name: string
@@ -304,17 +302,7 @@ const buildProductsMenuItems = (allProducts: any[]) => {
 export function useMenuData(): MenuType[] {
     const smallTeamsMenuItems = useSmallTeamsMenuItems()
     const allProducts = useProduct() as any[]
-    const {
-        animateClosingAllWindows,
-        windows,
-        setScreensaverPreviewActive,
-        isMobile,
-        websiteMode,
-        siteSettings,
-        updateSiteSettings,
-    } = useApp()
-    const { addToast } = useToast()
-    const posthog = usePostHog()
+    const { isMobile } = useAppSettings()
     const [hedgehogModeEnabled, setHedgehogModeEnabled] = useHedgehogMode()
 
     // Define main navigation items (excluding logo menu)
@@ -501,7 +489,7 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: 'customers.mdx',
+                    label: 'Customers',
                     link: '/customers',
                 },
                 {
@@ -785,36 +773,6 @@ export function useMenuData(): MenuType[] {
             },
             shortcut: [','],
         },
-        ...(isMobile
-            ? []
-            : [
-                  {
-                      type: 'item' as const,
-                      label: websiteMode ? 'Switch to OS mode' : 'Switch to website mode',
-                      onClick: () => {
-                          const newExperience = websiteMode ? 'posthog' : 'boring'
-                          updateSiteSettings({ ...siteSettings, experience: newExperience })
-                          posthog?.capture('switched site mode', {
-                              value: newExperience === 'posthog' ? 'os' : 'website',
-                              source: 'menu',
-                          })
-                          addToast({
-                              title: `Switched to ${websiteMode ? 'OS mode' : 'website mode'}`,
-                              description: `${websiteMode ? 'Click' : 'Hover'} the logo to return to ${
-                                  websiteMode ? 'website mode' : 'OS mode'
-                              }.`,
-                              duration: 5000,
-                              onUndo: () => {
-                                  updateSiteSettings({
-                                      ...siteSettings,
-                                      experience: websiteMode ? 'posthog' : 'boring',
-                                  })
-                              },
-                          })
-                      },
-                      shortcut: ['Shift', 'M'],
-                  },
-              ]),
     ]
 
     // Process main nav items for mobile menu
@@ -909,30 +867,13 @@ export function useMenuData(): MenuType[] {
               ...baseLogoMenuItems,
           ]
         : [
+              {
+                  type: 'item' as const,
+                  label: 'Home',
+                  link: '/',
+              },
               // Desktop: only show system items
               ...baseLogoMenuItems,
-              ...(!websiteMode
-                  ? [
-                        { type: 'separator' as const },
-                        {
-                            type: 'item' as const,
-                            label: 'Start screensaver',
-                            onClick: () => {
-                                setScreensaverPreviewActive(true)
-                            },
-                            shortcut: ['Shift', 'Z'],
-                        },
-                        {
-                            type: 'item' as const,
-                            label: 'Close all windows',
-                            disabled: windows.length < 1,
-                            onClick: () => {
-                                animateClosingAllWindows()
-                            },
-                            shortcut: ['Shift', 'X'],
-                        },
-                    ]
-                  : []),
           ]
 
     return [
@@ -941,22 +882,18 @@ export function useMenuData(): MenuType[] {
                 <>
                     <div className="flex items-center">
                         <Logo
-                            noText
-                            className={`2xs:hidden md:block ${websiteMode ? 'size-10' : 'size-8 md:size-6'}`}
-                            fill="primary"
-                            classic
+                            wordmark={false}
+                            variant="mono"
+                            color="primary"
+                            className="2xs:hidden md:block size-8 md:size-6"
                         />
-                        <Logo
-                            className={`hidden 2xs:flex md:hidden w-auto ${websiteMode ? 'h-7' : ' h-5'} `}
-                            fill="primary"
-                            classic
-                        />
+                        <Logo variant="mono" color="primary" className="hidden 2xs:flex md:hidden w-auto h-5" />
                         <IconChevronDown className="size-6 inline-block md:hidden text-muted" />
                     </div>
                 </>
             ),
             items: logoMenuItems,
-            mobileLink: websiteMode ? '/' : undefined,
+            mobileLink: undefined,
             hideChevron: true,
         },
         // On desktop, show main navigation items

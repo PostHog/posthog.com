@@ -98,6 +98,7 @@ const query = graphql`
                             "/docs/libraries/go"
                             "/docs/libraries/ios"
                             "/docs/libraries/java"
+                            "/docs/libraries/kmp"
                             "/docs/libraries/node"
                             "/docs/libraries/php"
                             "/docs/libraries/python"

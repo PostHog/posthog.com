@@ -3,8 +3,6 @@ import { IconFullScreen, IconPlayhead, IconVolumeFull, IconVolumeHalf, IconVolum
 import { Select } from 'components/RadixUI/Select'
 import ZoomHover from 'components/ZoomHover'
 import React, { useEffect, useRef, useState } from 'react'
-import { useApp } from '../../context/App'
-
 // Add types for YouTube and Wistia APIs to avoid TS errors
 declare global {
     interface Window {
@@ -28,7 +26,6 @@ export default function MediaPlayer({
     startTime = 0,
     borderRadius = true,
 }: MediaPlayerProps) {
-    const { websiteMode } = useApp()
     const [playerState, setPlayerState] = useState({
         isPlaying: true,
         player: null as any,
@@ -350,7 +347,7 @@ export default function MediaPlayer({
                 <main
                     data-app="MediaPlayer"
                     data-scheme="primary"
-                    className={`@container flex-1 bg-primary relative h-full ${websiteMode && 'max-w-7xl mx-auto'}`}
+                    className="@container flex-1 bg-primary relative h-full"
                 >
                     <section className="bg-accent px-2 pb-2">
                         {/* Main video area */}

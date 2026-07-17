@@ -92,6 +92,19 @@ The facet search:
 - Persists in the URL so you can bookmark or share your filtered view
 - Clears when you remove the search text
 
+## Pivot from patterns to matching logs
+
+The Patterns view mines your logs into recurring message templates. When you expand a pattern, click **View matching logs** to pivot to the Logs view filtered to lines matching that pattern.
+
+The pivot applies a message filter based on the pattern's template:
+
+- **Regex filter** – when the pattern has a validated regex, it lands as a `matches regex` message filter. The regex is compiled from the template's structure and validated against the pattern's own examples before it ships.
+- **Contains filter** – when the regex can't be validated (e.g. examples diverge from the template), the pivot falls back to a `contains` filter using the pattern's longest literal text.
+
+The applied filter appears in the filter bar as a visible, removable chip — it behaves like any filter you'd add manually. Your existing date range, service, and severity selections are preserved so the pivot stays inside your investigation context.
+
+When the pattern's sample is unambiguous (a single service or severity), the pivot also scopes by those values to narrow the scan.
+
 ## Tips
 
 - **Stack filters to narrow down.** Every filter you add is ANDed together — combine a `service.name` filter with a Message contains to scope full-text search to one service.

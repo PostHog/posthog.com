@@ -131,19 +131,20 @@ Filters can be accessed in SQL insights through the [`filters` variable](/docs/d
 
 ### Editing the layout
 
-You can move and resize all the insights on a dashboard by entering the 'Edit layout' mode.
+If you have edit access to a dashboard, you can resize tiles directly without entering edit mode. Hover near any edge or corner of a tile to reveal resize handles, then drag to resize. Grabbing a handle automatically enters edit mode so the resize takes effect immediately. Corner handles support diagonal resizing.
 
-You can do this in five ways:
+For moving tiles and other layout changes, enter 'Edit layout' mode. You can do this in several ways:
 
 - Tap 'E' on your keyboard
 - Click on the '...' icon at the top of the dashboard and click 'Edit layout'
 - Click on the '...' icon on any insight card and click 'Edit layout'
-- Hover near the edge of any insight card and click when the resize cursor appears
 - Click or start dragging on any insight card, text card, or button tile (outside the interactive chart area)
 
 Once in edit mode, press 'E' again to save your changes and exit edit mode, or press 'Escape' to discard changes and exit.
 
 Tapping 'F' enables full-screen mode.
+
+While in edit mode, you can click **Collapse view** to zoom out and see all tiles at a smaller size. This makes it easier to drag and rearrange items on large dashboards without excessive scrolling. You can also tap 'Z' to toggle collapsed view. When collapsed, you can drag tiles to rearrange them, but resizing is disabled. Click **Expand view** (or tap 'Z' again) to return to the normal size.
 
 > **Note:** On smaller screens, dashboard tiles are automatically stacked in a single column based on the desktop layout order. Layout editing (drag and resize) is only available on wider viewports.
 
@@ -181,7 +182,7 @@ When you copy an insight, it's the same underlying insight appearing on multiple
 
 Click the dropdown on the **Add...** button and select **Text card** to add a text card to your dashboard.
 
-Text cards support Markdown formatting for text. You can also drag and drop images.
+Text cards include a rich text editor with a formatting toolbar. You can apply bold, italic, underline, headings, bullet and numbered lists, blockquotes, inline code, code blocks, and links directly from the toolbar. You can also drag and drop images and resize them within the editor.
 
 You can use text cards to annotate your dashboard – useful for adding context for other users of the dashboard. For more in-depth analysis, however, we recommend [creating a notebook](/docs/notebooks).
 
@@ -373,6 +374,8 @@ You can refresh a single insight tile without refreshing the entire dashboard. H
 The tooltip on the refresh icon shows when the tile's data was last computed. If the tile is rate-limited, the icon is disabled and the tooltip explains when the next refresh is available.
 
 The refresh icon is hidden while the tile is actively refreshing and isn't available on shared or public dashboards. You can also refresh a tile from the **⋯** menu by selecting **Refresh data**, which is useful for touch and keyboard users.
+
+-   Choose a theme (light, dark, or system) for shared and embedded dashboards.
 
 ### Auto refresh
 

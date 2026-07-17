@@ -235,7 +235,7 @@ export const getSortOption = (root?: string) =>
 
 const Filters = ({ tag, setTag, sort, setSort, activeMenu }) => {
     return activeMenu?.children?.length > 0 ? (
-        <div className="mb-1 flex items-center justify-between sticky top-0 bg-primary z-10 pl-1.5">
+        <div className="mb-1 flex items-center justify-between sticky top-0 z-10 pl-1.5">
             <h5 className="m-0 text-sm font-semibold">{activeMenu?.name}</h5>
             <div className="flex items-center">
                 <MenuBar
@@ -406,7 +406,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
             <ReaderView
                 showAbout
                 leftSidebar={
-                    <>
+                    <div data-sidebar-label>
                         <Filters tag={tag} setTag={setTag} sort={sort} setSort={setSort} activeMenu={activeMenu} />
                         {isLoading ? (
                             <div className="space-y-2">
@@ -441,7 +441,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                                 {isValidating ? <IconSpinner className="size-5 mx-auto animate-spin" /> : 'Load more'}
                             </CallToAction>
                         )}
-                    </>
+                    </div>
                 }
                 body={{
                     type: 'mdx',

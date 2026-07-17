@@ -31,7 +31,7 @@ const mySchema: InstallSchema = {
 
 ## Layout
 
-1. Header row — `title` (left) + `Learn more` link (right, opens `learnMoreHref` in a new window).
+1. Header row — `title` with an optional `titleInfoAction` or `titleTooltip` (left) + optional `secondaryAction` (right).
 2. Always-visible `defaultCommand` snippet with copy-to-clipboard + toast.
 3. Icon row split with `justify-between`: `editors` group on the left, `platforms` group on the right. Each icon is a button wrapped in `<ZoomHover size="sm">` and a Radix tooltip showing the platform label.
 4. Clicking an icon selects it and reveals an expanded section. Clicking the same icon again closes the section. Selected platforms reveal their label inline with a quick width/opacity transition.
@@ -67,7 +67,9 @@ type Platform = PlatformOption & {
 
 type InstallSchema = {
     title: string
-    learnMoreHref: string
+    titleInfoAction?: { label: string; to: string; state?: Record<string, unknown> }
+    titleTooltip?: React.ReactNode
+    secondaryAction?: { label: string; to: string; state?: Record<string, unknown>; icon?: React.ReactNode }
     defaultCommand: string
     platforms: Platform[]
 }

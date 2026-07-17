@@ -123,7 +123,7 @@ const comparison = [
         name: 'PostHog',
         logo: (
             <div className="">
-                <Logo noText className="h-6 mx-auto" />
+                <Logo wordmark={false} className="h-6 mx-auto" />
             </div>
         ),
         products: {
