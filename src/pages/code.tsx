@@ -19,6 +19,7 @@ import {
     IconToggle,
     IconTrends,
     IconWarning,
+    IconX,
 } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import { Accordion } from 'components/RadixUI/Accordion'
@@ -35,7 +36,7 @@ import { IconPop } from 'components/Code/IconPop'
 import { SignalsCallout } from 'components/Code/SignalsCallout'
 import { SteerQueueDemo } from 'components/Code/SteerQueueDemo'
 import { DottedConnection } from 'components/Code/DottedConnection'
-import { StickerTombstone, StickerCoffee, StickerPullRequest } from 'components/Stickers/Stickers'
+import { StickerTombstone, StickerCoffee, StickerPullRequest, StickerMicroscope } from 'components/Stickers/Stickers'
 import CloudinaryImage from 'components/CloudinaryImage'
 import WistiaEmbed from 'components/WistiaEmbed'
 import Link from 'components/Link'
@@ -49,7 +50,7 @@ import { usePrefersReducedMotion } from 'components/Code/usePrefersReducedMotion
 // ─────────────────────────────────────────────
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
-    return <h2 className="text-2xl mb-4">{children}</h2>
+    return <h2 className="text-2xl font-bold mb-4">{children}</h2>
 }
 
 // ─────────────────────────────────────────────
@@ -335,11 +336,14 @@ function PostHogCodeLogomark({ className }) {
 // ─────────────────────────────────────────────
 
 function HeroSection() {
-    const [showDownload, setShowDownload] = useState(
-        () => typeof window !== 'undefined' && window.location.hash === '#download'
-    )
+    const [showDownload, setShowDownload] = useState(false)
     const [contentVisible, setContentVisible] = useState(true)
     const prefersReducedMotion = usePrefersReducedMotion()
+
+    // Read the #download hash after mount so SSR and first client render agree (no hydration mismatch).
+    useEffect(() => {
+        if (window.location.hash === '#download') setShowDownload(true)
+    }, [])
 
     const swapToDownload = () => {
         if (typeof window !== 'undefined') {
@@ -358,22 +362,19 @@ function HeroSection() {
     }
 
     return (
-        <section className="my-6 @4xl/editor:mb-16 tracking-[-0.0125em] max-w-4xl mx-auto w-full">
-            <div className="flex items-center justify-between mb-8">
-                <div>
-                    <LetPostHogScroller className="text-xl @xl:text-2xl font-bold tracking-tight" />
-                </div>
-                <div>
-                    <Link
-                        className="group flex items-center gap-1 text-sm font-semibold -mr-4 text-secondary hover:text-primary"
-                        to="https://discord.com/invite/E9xV2WnR98"
-                        externalNoIcon
-                    >
-                        <IconDiscord className="size-6 text-secondary group-hover:text-primary" />
-                        <span className="group-hover:underline">Discord</span>
-                        <IconArrowUpRight className="size-4 inline-block text-secondary invisible group-hover:visible" />
-                    </Link>
-                </div>
+        <section className="w-full tracking-[-0.0125em]">
+            {/* Top header bar: the page's own title strip (scroller + Discord) with a divider line */}
+            <div className="mb-8 flex items-center justify-between gap-4 border-b border-primary pb-3">
+                <LetPostHogScroller className="text-xl @xl:text-2xl font-bold tracking-tight" />
+                <Link
+                    className="group flex shrink-0 items-center gap-1 text-sm font-semibold text-secondary hover:text-primary"
+                    to="https://discord.com/invite/E9xV2WnR98"
+                    externalNoIcon
+                >
+                    <IconDiscord className="size-6 text-secondary group-hover:text-primary" />
+                    <span className="group-hover:underline">Discord</span>
+                    <IconArrowUpRight className="size-4 inline-block text-secondary invisible group-hover:visible" />
+                </Link>
             </div>
 
             <div
@@ -386,7 +387,7 @@ function HeroSection() {
                     <DownloadContent className="w-full mx-auto py-8 text-center" />
                 ) : (
                     <>
-                        <h1 className="text-xl @xl:text-3xl font-bold leading-tight mb-4 @xl:mb-8 !mt-0">
+                        <h1 className="!mt-0 mb-4 text-xl font-bold leading-tight @xl:mb-8 @xl:text-3xl">
                             Not just a code editor.{' '}
                             <RoughAnnotation
                                 type="highlight"
@@ -403,30 +404,28 @@ function HeroSection() {
                             </RoughAnnotation>
                         </h1>
 
-                        <div className="@4xl/editor:gap-8 flex flex-col @4xl/editor:flex-row items-start">
+                        <div className="flex flex-col items-start @4xl/editor:flex-row @4xl/editor:gap-8">
                             <div className="@4xl/editor:flex-[0_0_280px]">
                                 <p>
                                     PostHog Code is the desktop app for <strong>steering coding agents</strong> – and it
                                     edits your <strong>product</strong>, not just your <strong>codebase</strong>.
                                 </p>
-                                <ul className="list-none p-0 mb-4 text-[15px] space-y-0.5">
-                                    <li className="relative pl-5">
-                                        <IconCheck className="size-4 text-green absolute left-0 top-1" />
-                                        Run and steer a fleet of agents
-                                    </li>
-                                    <li className="relative pl-5">
-                                        <IconCheck className="size-4 text-green absolute left-0 top-1" />
-                                        Instruments and configures PostHog as it builds
-                                    </li>
-                                    <li className="relative pl-5">
-                                        <IconCheck className="size-4 text-green absolute left-0 top-1" />
-                                        Ships pull requests you review
-                                    </li>
+                                <ul className="mb-4 list-none space-y-0.5 p-0 text-[15px]">
+                                    {[
+                                        'Run and steer a fleet of agents',
+                                        'Instruments and configures PostHog as it builds',
+                                        'Ships pull requests you review',
+                                    ].map((item) => (
+                                        <li key={item} className="relative pl-5">
+                                            <IconCheck className="absolute left-0 top-1 size-4 text-green" />
+                                            {item}
+                                        </li>
+                                    ))}
                                 </ul>
 
                                 <div className="@container max-w-sm">
                                     <WaitlistForm />
-                                    <p className="text-sm text-secondary mt-4">
+                                    <p className="mt-4 text-sm text-secondary">
                                         Have an invite code?{' '}
                                         <Link
                                             to="/code#download"
@@ -442,8 +441,8 @@ function HeroSection() {
                                 </div>
                             </div>
 
-                            <div className="@4xl/editor:flex-1 w-full min-w-0">
-                                <div className="rounded-md overflow-hidden shadow-xl not-prose">
+                            <div className="w-full min-w-0 @4xl/editor:flex-1">
+                                <div className="overflow-hidden rounded-md shadow-xl not-prose">
                                     <WistiaEmbed mediaId="vm9mn1m4dv" />
                                 </div>
                             </div>
@@ -461,9 +460,16 @@ function HeroSection() {
 
 function OldWaySection() {
     const [p1Done, setP1Done] = useState(false)
+    const tableStakes = [
+        { text: "You're using Claude Code, Codex, or another agent to prompt real engineering work", checked: true },
+        { text: "You've got the PostHog MCP wired into your editor, terminal, maybe your CI", checked: true },
+        { text: "Running a handful of agents in parallel doesn't even feel like a flex anymore", checked: true },
+        { text: 'Every session starts cold, no memory of the last decision or PR', checked: false },
+        { text: "You're still the one watching the rollout and catching regressions", checked: false },
+    ]
 
     return (
-        <section className="relative mb-8 @xl:mb-12 px-4 @xl:px-8">
+        <section className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
             <SectionLabel>
                 The{' '}
                 <InlineIcon icon={StickerTombstone} className="!size-10 !top-3 -rotate-1">
@@ -475,7 +481,7 @@ function OldWaySection() {
             <CloudinaryImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/plague_doctor_beach_11580558c0.png"
                 alt="A plague doctor relaxing on a beach"
-                className="mb-5 hidden @xl:block float-right ml-8 w-44"
+                className="-mt-14 mb-5 hidden w-44 float-right ml-8 @xl:block"
                 imgClassName="w-full"
             />
 
@@ -515,6 +521,46 @@ function OldWaySection() {
                     {'.'}
                 </ChoppyReveal>
             </p>
+
+            {/* Table stakes + receipt: the standard starter pack every AI tool ships (also the "old way") */}
+            <div className="clear-both mt-10 grid items-start gap-8 @2xl:grid-cols-2 @2xl:gap-12">
+                <div>
+                    <h3 className="mb-3 text-xl font-bold">Sound familiar?</h3>
+                    <ul className="m-0 list-none space-y-2.5 p-0">
+                        {tableStakes.map(({ text, checked }) => (
+                            <li key={text} className="flex items-start gap-2.5">
+                                {checked ? (
+                                    <IconCheck className="relative top-0.5 size-5 shrink-0 text-green" />
+                                ) : (
+                                    <IconX className="relative top-0.5 size-5 shrink-0 text-red" />
+                                )}
+                                <span className="text-base">{text}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+
+                <div className="@2xl:pl-4">
+                    <div className="relative mx-auto w-full max-w-xs">
+                        {/* Lemon hog tucked behind the receipt's upper-right corner, peeking out */}
+                        <img
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/lemon_9cb7b3a156.png"
+                            alt=""
+                            aria-hidden
+                            className="pointer-events-none absolute -right-20 top-8 z-0 w-28 rotate-12 @xl:w-32"
+                        />
+                        <div className="relative z-10">
+                            <AgentMartReceipt />
+                        </div>
+                        {/* Banana hog lounging on top of the receipt's bottom-left */}
+                        <img
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/banana_relax_83149feac6.png"
+                            alt="A hedgehog relaxing with a banana"
+                            className="pointer-events-none absolute -bottom-10 -left-14 z-20 w-32 @xl:w-36"
+                        />
+                    </div>
+                </div>
+            </div>
         </section>
     )
 }
@@ -531,7 +577,7 @@ function PostHogWaySection({ onComplete }: { onComplete?: () => void }) {
     const sectionRef = useRef<HTMLDivElement>(null)
 
     return (
-        <section ref={sectionRef} className="relative mb-8 @xl:mb-12 px-4 @xl:px-8">
+        <section ref={sectionRef} className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
             <SectionLabel>
                 The <PostHogCodeLogomark className="-rotate-2 w-12 relative -top-0.5" /> PostHog way
             </SectionLabel>
@@ -661,15 +707,16 @@ function AgentMartReceipt() {
                 className="font-code text-sm leading-relaxed shadow-2xl px-6 pt-6 pb-5 text-[#2b2b2b]"
                 style={{ backgroundColor: RECEIPT_PAPER }}
             >
-                <p className="m-0 mb-4 text-center font-bold tracking-widest">2026 AGENT MART</p>
+                <p className="m-0 text-center font-bold tracking-widest">2026 AGENT MART</p>
+                <p className="m-0 mb-4 text-center text-xs italic text-[#8a8272]">(yep, PostHog has that)</p>
 
                 <div className="space-y-1">
                     <ReceiptRow label="parallel agents" />
-                    <ReceiptRow label="isolated worktrees" />
+                    <ReceiptRow label="multi model" />
+                    <ReceiptRow label="MCP support" />
                     <ReceiptRow label="diff review" />
-                    <ReceiptRow label="checkpoints" />
-                    <ReceiptRow label="MCP both ways" />
-                    <ReceiptRow label="cmd palette" />
+                    <ReceiptRow label="checkpoints & rollback" />
+                    <ReceiptRow label="isolated worktrees" />
                 </div>
 
                 <div className="my-3 border-t border-dashed border-[#c9c2b4]" />
@@ -683,44 +730,6 @@ function AgentMartReceipt() {
             </div>
             <TornEdge className="w-full h-3" />
         </div>
-    )
-}
-
-function TableStakesSection() {
-    const items = [
-        'Parallel agents in isolated worktrees',
-        'Checkpoints and rollback',
-        'MCP in both directions',
-        'Permission modes',
-        'Fast model switching',
-        'A command center to micro manage your agents',
-    ]
-
-    return (
-        <section className="relative mb-8 @xl:mb-24 px-4 @xl:px-8">
-            <SectionLabel>Yes, it does all the stuff</SectionLabel>
-
-            <div className="grid @2xl:grid-cols-2 gap-8 @2xl:gap-12 items-center">
-                <div>
-                    <p className="text-base leading-loose mb-5">
-                        Every <em>2026-shaped</em> coding agent ships the same starter pack. So does PostHog Code – it's
-                        table stakes, not the point.
-                    </p>
-                    <ul className="m-0 list-none p-0 space-y-2.5">
-                        {items.map((item) => (
-                            <li key={item} className="flex items-start gap-2.5">
-                                <IconCheck className="size-5 shrink-0 relative top-0.5 text-green" />
-                                <span className="text-base">{item}</span>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-
-                <div className="@2xl:pl-4">
-                    <AgentMartReceipt />
-                </div>
-            </div>
-        </section>
     )
 }
 
@@ -816,44 +825,40 @@ function MeepNotification({ className = 'my-10 flex justify-center px-4 @xl:px-8
 // Shown on the "Instrumentation" carousel slide: what PostHog Code wires up as it builds.
 const instrumentationItems = [
     {
-        icon: IconTrends,
+        icon: IconList,
         color: 'text-blue',
-        title: 'Event instrumentation',
-        description: "Tracks new features and changes to existing features as they're built",
-    },
-    {
-        icon: IconWarning,
-        color: 'text-yellow',
-        title: 'Error tracking',
-        description: 'Configures exception capture so new code surfaces in PostHog with stack traces',
-    },
-    {
-        icon: IconToggle,
-        color: 'text-seagreen',
-        title: 'Feature flags & rollout conditions',
-        description: (
-            <>
-                Creates the flag, implements <code>isFeatureEnabled</code>, and configures staged rollout conditions
-            </>
-        ),
+        title: 'Capture logs',
+        description: 'Adds structured logging as it writes the code, so you can see what actually ran in production.',
     },
     {
         icon: IconFlask,
         color: 'text-purple',
-        title: 'Experiments',
-        description: 'Scaffolds variants, split, and goal metrics',
+        title: 'Run an experiment',
+        description: 'Scaffolds an A/B test with variants and a goal metric, then reads the result once data lands.',
     },
     {
-        icon: IconDashboard,
-        color: 'text-red',
-        title: 'Dashboards & actions',
-        description: 'Builds dashboards to track impact and defines actions – every write gated by your approval',
-    },
-    {
-        icon: IconBrowser,
+        icon: IconTrends,
         color: 'text-orange',
-        title: 'Live canvases',
-        description: 'Spins up canvases – single-file apps and dashboards that render your real product data',
+        title: 'Track events',
+        description: 'Instruments the events for anything new it builds, so usage shows up in PostHog on its own.',
+    },
+    {
+        icon: IconWarning,
+        color: 'text-red',
+        title: 'Track errors',
+        description: 'Turns on exception capture so new code reports errors with full stack traces.',
+    },
+    {
+        icon: IconAI,
+        color: 'text-seagreen',
+        title: 'Trace LLM calls',
+        description: 'Wraps your AI features so every model call is traced with cost, latency, and output.',
+    },
+    {
+        icon: IconToggle,
+        color: 'text-yellow',
+        title: 'Add a feature flag',
+        description: 'Ships the change behind a flag so you can roll it out slowly and kill it fast if needed.',
     },
 ]
 
@@ -910,7 +915,61 @@ const FeatureChips = ({
     </div>
 )
 
+// Highlighted callout inside a carousel slide, à la the Slack app page carousel.
+const SlideCallout = ({ children }: { children: React.ReactNode }) => (
+    <div className="mt-5 rounded border border-yellow bg-yellow/10 px-3 py-2.5 text-sm text-secondary">{children}</div>
+)
+
 const featureTabs: TabbedCarouselTab[] = [
+    {
+        value: 'tasks',
+        label: 'Tasks',
+        color: 'bg-yellow',
+        activeText: 'text-black',
+        progressBar: 'bg-black/70 shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
+        content: (
+            <div className="flex h-full flex-col rounded bg-primary p-4 @xl:p-6">
+                <h3 className="mt-0 mb-2 text-2xl font-bold">Steer it, or queue it up</h3>
+                <p className="m-0 text-[15px] text-secondary">
+                    An agent's already running – you don't have to wait. Jump in to{' '}
+                    <strong className="text-primary">steer</strong> it mid-task, or{' '}
+                    <strong className="text-primary">queue</strong> up what's next and walk away.
+                </p>
+                <div className="mt-6">
+                    <SteerQueueDemo />
+                </div>
+            </div>
+        ),
+    },
+    {
+        value: 'plan',
+        label: 'Modes',
+        color: 'bg-green',
+        activeText: 'text-white',
+        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
+        content: (
+            <FeaturePanel
+                title="Agree on the plan before any code"
+                imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/plan_light_b34b9ad492.png"
+                imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/plan_dark_d27c25debd.png"
+                imageAlt="Plan mode: clarifying questions and an implementation plan to approve"
+            >
+                <p className="m-0">
+                    Tasks can start in Plan mode: the agent explores your codebase and asks clarifying questions –
+                    multiple choice or freeform – then writes an implementation plan you approve. Tweak it, send it back
+                    with notes, or say go. Nothing gets written until you're happy.
+                </p>
+                <div className="mt-5 flex flex-wrap items-center gap-x-1.5 gap-y-2 text-sm font-semibold">
+                    {['Explore', 'Ask', 'Plan', 'Approve'].map((step, i) => (
+                        <React.Fragment key={step}>
+                            {i > 0 && <span className="text-secondary">→</span>}
+                            <span className="rounded bg-accent px-2 py-1 text-primary">{step}</span>
+                        </React.Fragment>
+                    ))}
+                </div>
+            </FeaturePanel>
+        ),
+    },
     {
         value: 'command-center',
         label: 'Command center',
@@ -940,55 +999,6 @@ const featureTabs: TabbedCarouselTab[] = [
         ),
     },
     {
-        value: 'plan',
-        label: 'Plan mode',
-        color: 'bg-green',
-        activeText: 'text-white',
-        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
-        content: (
-            <FeaturePanel
-                title="Agree on the plan before any code"
-                imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/plan_light_b34b9ad492.png"
-                imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/plan_dark_d27c25debd.png"
-                imageAlt="Plan mode: clarifying questions and an implementation plan to approve"
-            >
-                <p className="m-0">
-                    Tasks can start in Plan mode: the agent explores your codebase and asks clarifying questions –
-                    multiple choice or freeform – then writes an implementation plan you approve. Tweak it, send it back
-                    with notes, or say go. Nothing gets written until you're happy.
-                </p>
-                <div className="mt-5 flex flex-wrap items-center gap-x-1.5 gap-y-2 text-sm font-semibold">
-                    {['Explore', 'Ask', 'Plan', 'Approve'].map((step, i) => (
-                        <React.Fragment key={step}>
-                            {i > 0 && <span className="text-secondary">→</span>}
-                            <span className="rounded bg-accent px-2 py-1 text-primary">{step}</span>
-                        </React.Fragment>
-                    ))}
-                </div>
-            </FeaturePanel>
-        ),
-    },
-    {
-        value: 'tasks',
-        label: 'Steer & queue',
-        color: 'bg-yellow',
-        activeText: 'text-black',
-        progressBar: 'bg-black/70 shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
-        content: (
-            <div className="flex h-full flex-col rounded bg-primary p-4 @xl:p-6">
-                <h3 className="mt-0 mb-2 text-2xl font-bold">Steer it, or queue it up</h3>
-                <p className="m-0 text-[15px] text-secondary">
-                    An agent's already running – you don't have to wait. Jump in to{' '}
-                    <strong className="text-primary">steer</strong> it mid-task, or{' '}
-                    <strong className="text-primary">queue</strong> up what's next and walk away.
-                </p>
-                <div className="mt-6">
-                    <SteerQueueDemo />
-                </div>
-            </div>
-        ),
-    },
-    {
         value: 'instrument',
         label: 'Instrumentation',
         color: 'bg-purple',
@@ -997,8 +1007,8 @@ const featureTabs: TabbedCarouselTab[] = [
         content: (
             <FeaturePanel title="It edits your product, not just your code">
                 <p className="m-0">
-                    As PostHog Code builds, it wires up the right PostHog instrumentation and configuration – so you can
-                    progressively roll out changes and measure their impact without a second pass.
+                    Ask once and PostHog Code sets up the measurement as it builds. Ship a change, roll it out safely,
+                    and see exactly what happened, all in the same loop.
                 </p>
                 <ul className="mt-6 grid list-none grid-cols-1 gap-x-8 gap-y-4 p-0 @sm:grid-cols-2">
                     {instrumentationItems.map(({ icon: Icon, color, title, description }) => (
@@ -1009,6 +1019,10 @@ const featureTabs: TabbedCarouselTab[] = [
                         </li>
                     ))}
                 </ul>
+                <SlideCallout>
+                    <strong className="text-primary">One command.</strong> It wires all of this up as it builds, so
+                    shipping and measuring stay in the same loop instead of a second pass later.
+                </SlideCallout>
             </FeaturePanel>
         ),
     },
@@ -1039,6 +1053,10 @@ const featureTabs: TabbedCarouselTab[] = [
                         { Icon: IconDashboard, color: 'text-yellow', label: 'Dashboards' },
                     ]}
                 />
+                <SlideCallout>
+                    <strong className="text-primary">Bring your own.</strong> Drop a <code>SKILL.md</code> in your repo
+                    and every agent picks it up, so your team's know-how ships with the code.
+                </SlideCallout>
             </FeaturePanel>
         ),
     },
@@ -1047,14 +1065,12 @@ const featureTabs: TabbedCarouselTab[] = [
 const Features = () => {
     return (
         <section className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
-            <div className="px-4 @xl:px-8">
-                <h2 className="text-2xl font-bold mb-2 text-center pb-12 relative">
-                    Everything you'd expect in an AI coding tool,{' '}
-                    <span className="block">
-                        but <em className="text-gradient">way more...</em>
-                    </span>
-                </h2>
-            </div>
+            <h2 className="mb-4 text-2xl font-bold">
+                Everything you'd expect in an AI coding tool,{' '}
+                <span className="block">
+                    but <em className="text-gradient not-italic">way more...</em>
+                </span>
+            </h2>
 
             <TabbedCarousel tabs={featureTabs} />
         </section>
@@ -1074,9 +1090,6 @@ const Highlight = ({ children }: { children: React.ReactNode }) => (
     <span className="bg-highlight px-0.5 font-bold text-red dark:text-yellow">{children}</span>
 )
 
-// Shared card shell for the workspace section – coloured accent bar per card.
-const WORKSPACE_CARD = 'relative flex flex-col overflow-hidden rounded-md border border-primary bg-accent'
-
 // Traffic-light dots for the little window mockups.
 const WindowDots = () => (
     <span className="flex gap-1.5" aria-hidden>
@@ -1084,41 +1097,6 @@ const WindowDots = () => (
         <span className="size-2.5 rounded-full bg-yellow" />
         <span className="size-2.5 rounded-full bg-green" />
     </span>
-)
-
-// Overlapping avatar stack: humans (initials) + agents (hedgehog), with a live "typing…" line.
-const workspaceMembers: { kind: 'human' | 'agent'; label?: string; color: string }[] = [
-    { kind: 'human', label: 'CL', color: 'bg-blue' },
-    { kind: 'human', label: 'AB', color: 'bg-purple' },
-    { kind: 'agent', color: 'bg-red' },
-    { kind: 'agent', color: 'bg-green' },
-]
-
-const MultiplayerAvatars = () => (
-    <div className="flex items-center gap-3">
-        <div className="flex -space-x-2">
-            {workspaceMembers.map((m, i) => (
-                <span
-                    key={i}
-                    className={`flex size-9 items-center justify-center rounded-full border-2 border-accent text-xs font-bold text-white ${m.color}`}
-                >
-                    {m.kind === 'human' ? m.label : <IconAI className="size-5" />}
-                </span>
-            ))}
-        </div>
-        <span className="inline-flex items-center gap-1.5 text-sm text-secondary">
-            <span className="font-semibold text-primary">agent-2</span> is typing
-            <span className="inline-flex gap-0.5">
-                {[0, 1, 2].map((d) => (
-                    <span
-                        key={d}
-                        className="size-1 rounded-full bg-secondary"
-                        style={{ animation: 'meep-typing 1s ease-in-out infinite', animationDelay: `${d * 0.15}s` }}
-                    />
-                ))}
-            </span>
-        </span>
-    </div>
 )
 
 // What every channel keeps – the "memory" that chat windows lack.
@@ -1183,13 +1161,25 @@ const homeViews = [
     },
 ]
 
-const HomeViews = () => {
+// Home slide: standard layout – copy + view toggles on top, the selected screenshot bleeding to the
+// bottom edge. Clicking a toggle swaps the image and the line beneath the toggles.
+const HomeSlide = () => {
     const [active, setActive] = useState('list')
     const current = homeViews.find((v) => v.key === active) ?? homeViews[0]
     return (
-        <div className="mt-auto">
-            <div className="flex flex-wrap gap-2 px-6 @xl:px-8" role="tablist" aria-label="Home views">
-                {homeViews.map(({ key, Icon, color, label, desc }) => {
+        <div className="flex h-full flex-col rounded bg-primary p-4 @xl:p-6">
+            <div className="mb-2 flex items-center gap-2">
+                <h3 className="m-0 text-2xl font-bold">Stay in flow</h3>
+                <AlphaBadge />
+            </div>
+            <p className="m-0 text-[15px] text-secondary">
+                Stop bouncing between GitHub, CI, and review tabs. Home pulls everything that needs you – PR feedback,
+                failing checks, review requests, stale branches – into one place, in three views of the same work.
+            </p>
+
+            {/* View toggles + the line that changes with the image (no box, under the description) */}
+            <div className="mt-4 flex flex-wrap gap-2" role="tablist" aria-label="Home views">
+                {homeViews.map(({ key, Icon, color, label }) => {
                     const selected = key === active
                     return (
                         <button
@@ -1198,45 +1188,192 @@ const HomeViews = () => {
                             role="tab"
                             aria-selected={selected}
                             onClick={() => setActive(key)}
-                            className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-semibold transition-colors ${
-                                selected
-                                    ? 'border-primary bg-primary text-primary'
-                                    : 'border-transparent bg-primary/50 text-secondary hover:text-primary'
+                            className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-semibold transition-colors ${
+                                selected ? 'bg-accent text-primary' : 'text-secondary hover:text-primary'
                             }`}
                         >
                             <Icon className={`size-4 shrink-0 ${color}`} />
                             {label}
-                            <span className="hidden font-normal text-secondary @sm:inline">– {desc}</span>
                         </button>
                     )
                 })}
             </div>
-            <div className="mt-5 overflow-hidden border-t border-primary leading-[0]">
+            <p className="m-0 mt-2 text-sm text-secondary">{current.desc}</p>
+
+            <div className="-mx-4 -mb-4 mt-4 overflow-hidden rounded-b leading-[0] @xl:-mx-6 @xl:-mb-6">
                 <CloudinaryImage
                     key={current.key}
                     src={current.src}
                     alt={`Home ${current.label} view`}
-                    imgClassName="w-full block"
+                    imgClassName="block w-full"
                 />
             </div>
         </div>
     )
 }
 
-// "Alphas within the beta" – the shared, still-cooking workspace (channels, multiplayer, canvases, Home).
+// Channel window mockup used as the Channels slide visual.
+const ChannelMockup = () => (
+    <div className="bg-primary">
+        <div className="flex items-center gap-2 border-b border-primary px-4 py-2.5">
+            <WindowDots />
+            <code className="text-sm font-bold text-primary">#billing-service</code>
+            <span className="ml-auto hidden items-center gap-1 text-xs text-secondary @sm:inline-flex">
+                <IconMessage className="size-3.5" />
+                remembers everything
+            </span>
+        </div>
+        <div className="grid gap-3 p-4 @sm:grid-cols-2">
+            {channelKeeps.map(({ Icon, color, name, desc }) => (
+                <div key={name} className="flex items-start gap-3 rounded-md border border-primary bg-accent p-3">
+                    <Icon className={`mt-0.5 size-5 shrink-0 ${color}`} />
+                    <div className="min-w-0">
+                        <code className="text-sm font-bold text-primary">{name}</code>
+                        <p className="m-0 mt-0.5 text-sm text-secondary">{desc}</p>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </div>
+)
+
+// Light/dark image pair used as a slide visual.
+const SlideImage = ({ light, dark, alt }: { light: string; dark: string; alt: string }) => (
+    <>
+        <CloudinaryImage src={light} alt={alt} className="dark:hidden" imgClassName="block w-full" />
+        <CloudinaryImage src={dark} alt={alt} className="hidden dark:block" imgClassName="block w-full" />
+    </>
+)
+
+// A single alpha carousel slide: standard layout – copy on top, visual bleeding to the bottom edge.
+const AlphaSlide = ({
+    title,
+    visual,
+    children,
+}: {
+    title: string
+    visual: React.ReactNode
+    children: React.ReactNode
+}) => (
+    <div className="flex h-full flex-col rounded bg-primary p-4 @xl:p-6">
+        <div className="mb-2 flex items-center gap-2">
+            <h3 className="m-0 text-2xl font-bold">{title}</h3>
+            <AlphaBadge />
+        </div>
+        <p className="m-0 flex-1 text-[15px] text-secondary">{children}</p>
+        <div className="-mx-4 -mb-4 mt-4 overflow-hidden rounded-b @xl:-mx-6 @xl:-mb-6">{visual}</div>
+    </div>
+)
+
+const alphaTabs: TabbedCarouselTab[] = [
+    {
+        value: 'multiplayer',
+        label: 'Multiplayer',
+        color: 'bg-lilac',
+        activeText: 'text-white',
+        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
+        content: (
+            <AlphaSlide
+                title="Like work actually is"
+                visual={
+                    <SlideImage
+                        light="https://res.cloudinary.com/dmukukwp6/image/upload/multiplayer_light_a9500a4335.png"
+                        dark="https://res.cloudinary.com/dmukukwp6/image/upload/multiplayer_dark_ea8e2e039e.png"
+                        alt="Teammates and agents working the same threads in PostHog Code"
+                    />
+                }
+            >
+                Agents are <strong className="text-primary">teammates with names.</strong> Your people and your agents
+                work the same threads, hand off tasks, and see the same context – in real time.
+            </AlphaSlide>
+        ),
+    },
+    {
+        value: 'channels',
+        label: 'Channels',
+        color: 'bg-teal',
+        activeText: 'text-black',
+        progressBar: 'bg-black/70 shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
+        content: (
+            <AlphaSlide title="Remembers everything" visual={<ChannelMockup />}>
+                Chat windows have amnesia. Channels don't – each one keeps its own working memory, so kicking off a task
+                means the agent already knows the history.{' '}
+                <strong className="text-primary">No re-briefing a goldfish.</strong>
+            </AlphaSlide>
+        ),
+    },
+    {
+        value: 'canvases',
+        label: 'Canvases',
+        color: 'bg-salmon',
+        activeText: 'text-white',
+        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
+        content: (
+            <AlphaSlide
+                title="Describe the tool, get the tool"
+                visual={
+                    <SlideImage
+                        light="https://res.cloudinary.com/dmukukwp6/image/upload/cavas_wau_dark_1_413aba435a.png"
+                        dark="https://res.cloudinary.com/dmukukwp6/image/upload/cavas_wau_dark_8f7776e12b.png"
+                        alt="A generated canvas: a weekly active users report built on your PostHog data"
+                    />
+                }
+            >
+                Ask a channel for a report, a dashboard, or that internal refunds tool nobody ever builds – and get a{' '}
+                <strong className="text-primary">canvas</strong>: generative UI on PostHog's actual data model.
+            </AlphaSlide>
+        ),
+    },
+    {
+        value: 'home',
+        label: 'Home',
+        color: 'bg-seagreen',
+        activeText: 'text-white',
+        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
+        content: <HomeSlide />,
+    },
+    {
+        value: 'autoresearch',
+        label: 'Autoresearch',
+        color: 'bg-fuchsia',
+        activeText: 'text-white',
+        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
+        content: (
+            <FeaturePanel title="It does the research before it builds">
+                <p className="m-0">
+                    Point an agent at a fuzzy problem and it goes digging first – across your codebase, your docs, your
+                    live PostHog data, and the web – then comes back with what it found and a recommendation, before it
+                    touches a line of code. You review the reasoning, not just the diff.
+                </p>
+                <FeatureChips
+                    items={[
+                        { Icon: IconGitBranch, color: 'text-green', label: 'Reads your codebase' },
+                        { Icon: IconBrowser, color: 'text-blue', label: 'Searches docs & the web' },
+                        { Icon: IconGraph, color: 'text-purple', label: 'Queries your product data' },
+                        { Icon: IconDocument, color: 'text-orange', label: 'Cites its sources' },
+                    ]}
+                />
+                <SlideCallout>
+                    <strong className="text-primary">No guessing.</strong> It reads your real code and data before it
+                    proposes anything, and shows its sources so you can check the work.
+                </SlideCallout>
+            </FeaturePanel>
+        ),
+    },
+]
+
+// "Alphas within the beta" – the shared, still-cooking workspace, shown as a hero-style carousel
+// (visually differentiated from the flat Features carousel above).
 const AgenticWorkspaceSection = () => {
     return (
-        <section className="relative mb-12 px-4 @xl:px-8">
+        <section className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
             <SectionLabel>
-                <span className="inline-flex flex-wrap items-center gap-2">
-                    Alphas{' '}
-                    <InlineIcon icon={StickerCoffee} className="!size-9 !top-2.5 -rotate-2">
-                        within
-                    </InlineIcon>{' '}
-                    the beta
+                <span className="inline-flex items-center gap-2.5">
+                    <StickerMicroscope className="size-8 shrink-0 -rotate-3" />
+                    Alphas within the beta
                 </span>
             </SectionLabel>
-            <p className="mb-8 max-w-3xl">
+            <p className="mb-6 max-w-3xl">
                 PostHog Code is in beta. These bits are still <em>alpha inside it</em> – rough, changing weekly, and the
                 most fun. It's where coding stops being a solo tool: your team and your agents share{' '}
                 <RoughAnnotation type="underline" color="#F54E00" strokeWidth={2}>
@@ -1245,147 +1382,7 @@ const AgenticWorkspaceSection = () => {
                 .
             </p>
 
-            <div className="grid gap-6 @2xl:grid-cols-2">
-                {/* Channels that remember – spans both columns */}
-                <div className={`@2xl:col-span-2 ${WORKSPACE_CARD}`}>
-                    <span aria-hidden className="absolute inset-x-0 top-0 z-10 h-1 bg-blue" />
-                    <div className="p-6 @xl:p-8">
-                        <h3 className="m-0 mb-4 flex items-center gap-2 text-xl font-bold">
-                            Channels that remember <AlphaBadge />
-                        </h3>
-                        <p className="m-0 mb-6 max-w-2xl text-[15px] text-secondary">
-                            Chat windows have amnesia. Channels don't – each one keeps its own working memory, so
-                            kicking off a task means the agent already knows the history.{' '}
-                            <Highlight>No re-briefing a goldfish.</Highlight>
-                        </p>
-                        {/* Channel window mockup */}
-                        <div className="overflow-hidden rounded-md border border-primary">
-                            <div className="flex items-center gap-2 border-b border-primary bg-primary px-3 py-2">
-                                <WindowDots />
-                                <code className="text-sm font-bold text-primary">#billing-service</code>
-                                <span className="ml-auto inline-flex items-center gap-1 text-xs text-secondary">
-                                    <IconMessage className="size-3.5" />
-                                    remembers everything
-                                </span>
-                            </div>
-                            <div className="grid gap-3 bg-primary p-3 @md:grid-cols-2">
-                                {channelKeeps.map(({ Icon, color, name, desc }) => (
-                                    <div
-                                        key={name}
-                                        className="flex items-start gap-3 rounded border border-primary bg-accent p-3"
-                                    >
-                                        <Icon className={`mt-0.5 size-5 shrink-0 ${color}`} />
-                                        <div className="min-w-0">
-                                            <code className="text-sm font-bold text-primary">{name}</code>
-                                            <p className="m-0 mt-0.5 text-sm text-secondary">{desc}</p>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Multiplayer */}
-                <div className={WORKSPACE_CARD}>
-                    <span aria-hidden className="absolute inset-x-0 top-0 z-10 h-1 bg-purple" />
-                    <div className="flex flex-1 flex-col p-6 @xl:p-8">
-                        <h3 className="m-0 mb-4 flex items-center gap-2 text-xl font-bold">
-                            Multiplayer, like work actually is <AlphaBadge />
-                        </h3>
-                        <p className="m-0 mb-6 text-[15px] text-secondary">
-                            Agents are <Highlight>teammates with names.</Highlight> Your people and your agents work the
-                            same threads, hand off tasks, and see the same context – in real time.
-                        </p>
-                        <div className="mt-auto rounded-md border border-primary bg-primary p-4">
-                            <MultiplayerAvatars />
-                        </div>
-                    </div>
-                </div>
-
-                {/* Canvases */}
-                <div className={WORKSPACE_CARD}>
-                    <span aria-hidden className="absolute inset-x-0 top-0 z-10 h-1 bg-orange" />
-                    <div className="flex flex-1 flex-col p-6 @xl:p-8">
-                        <h3 className="m-0 mb-4 flex items-center gap-2 text-xl font-bold">
-                            Describe the tool. Get the tool. <AlphaBadge />
-                        </h3>
-                        <p className="m-0 mb-4 text-[15px] text-secondary">
-                            Ask a channel for a report, a dashboard, or that internal refunds tool nobody ever builds –
-                            and get a <Highlight>canvas</Highlight>: generative UI on PostHog's actual data model.
-                        </p>
-                        <div className="mt-auto">
-                            <div className="mb-3 flex flex-wrap gap-2">
-                                {['Build our internal refunds tool', 'Weekly revenue dashboard'].map((prompt) => (
-                                    <span
-                                        key={prompt}
-                                        className="inline-flex items-center gap-1.5 rounded-full border border-primary bg-primary px-3 py-1 text-xs font-medium text-primary"
-                                    >
-                                        <span className="text-orange">›</span>
-                                        {prompt}
-                                    </span>
-                                ))}
-                            </div>
-                            {/* Generated canvas mockup */}
-                            <div className="overflow-hidden rounded-md border border-primary bg-primary">
-                                <div className="flex items-center gap-2 border-b border-primary px-3 py-2">
-                                    <WindowDots />
-                                    <span className="text-xs text-secondary">refunds-tool</span>
-                                    <span className="ml-auto inline-flex items-center gap-1 rounded-sm bg-highlight px-1 py-0.5 text-[10px] font-bold text-red dark:text-yellow">
-                                        <IconAI className="size-3" />
-                                        canvas
-                                    </span>
-                                </div>
-                                <div className="space-y-2.5 p-3">
-                                    <div className="flex gap-2">
-                                        <div className="h-7 flex-1 rounded border border-primary bg-accent" />
-                                        <div className="h-7 w-16 rounded bg-orange" />
-                                    </div>
-                                    {[0, 1, 2].map((row) => (
-                                        <div key={row} className="flex items-center gap-2">
-                                            <div className="h-3 flex-1 rounded bg-accent" />
-                                            <div className="h-3 w-14 rounded bg-accent" />
-                                            <div className="h-5 w-12 rounded bg-green/30" />
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Home – moved in below the workspace features */}
-                <div className={`@2xl:col-span-2 ${WORKSPACE_CARD}`}>
-                    <span aria-hidden className="absolute inset-x-0 top-0 z-10 h-1 bg-green" />
-                    <div className="p-6 pb-0 @xl:p-8 @xl:pb-0">
-                        <h3 className="m-0 mb-4 flex items-center gap-2 text-xl font-bold">
-                            Stay in flow with Home <AlphaBadge />
-                        </h3>
-                        <p className="m-0 mb-5 max-w-2xl text-[15px] text-secondary">
-                            Stop bouncing between GitHub, CI, and review tabs. Home pulls everything that needs you – PR
-                            feedback, failing checks, review requests, stale branches – into one place, in three views
-                            of the same work.
-                        </p>
-                    </div>
-                    <HomeViews />
-                </div>
-            </div>
-
-            {/* Kaiju hedgehog peeking in from the corner – hover to make it rampage */}
-            <MiniHogzilla className="absolute -top-6 right-2 z-10 hidden w-24 @md:block @xl:right-6 @xl:w-32" />
-
-            <style>{`
-                @keyframes meep-typing {
-                    0%, 100% { opacity: 0.25; transform: translateY(0); }
-                    50% { opacity: 1; transform: translateY(-2px); }
-                }
-                @keyframes hogzilla-rampage {
-                    0%, 100% { transform: scale(1.12) rotate(-4deg); }
-                    25% { transform: scale(1.16) rotate(3deg); }
-                    50% { transform: scale(1.12) rotate(-3deg); }
-                    75% { transform: scale(1.16) rotate(2deg); }
-                }
-            `}</style>
+            <TabbedCarousel tabs={alphaTabs} />
         </section>
     )
 }
@@ -1445,14 +1442,14 @@ const mcpServerIcon = (server: MCPServer): string =>
 
 const SupportedLLMs = () => {
     return (
-        <section className="relative mb-12 px-4 @xl:px-8">
+        <section className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
             {/* One combined layout: supported-model chips under the title (left),
                 the open-source story + cost annotation in the other column (right).
                 Both headings live inside the grid so they sit in the same row. */}
             <div className="grid items-start gap-10 @xl:grid-cols-2 @xl:gap-12">
                 {/* Left: supported models as compact chip rows, under the main title */}
                 <div className="space-y-4">
-                    <h2 className="text-2xl mb-3">Supported LLMs</h2>
+                    <h2 className="text-2xl font-bold mb-4">Supported LLMs</h2>
                     <div>
                         <p className="m-0 mb-1.5 text-xs font-semibold uppercase tracking-wide text-secondary">
                             OpenAI
@@ -1490,7 +1487,7 @@ const SupportedLLMs = () => {
 
                 {/* Right: subheading (the open-source one), copy, and the hand-drawn cost stat */}
                 <div>
-                    <h3 className="text-xl mb-3">Open-source models got good? (awkward)</h3>
+                    <h3 className="text-xl font-bold mb-3">Open-source models got good? (awkward)</h3>
                     <p className="m-0 mb-1.5 text-xs font-semibold uppercase tracking-wide text-secondary">
                         We support
                     </p>
@@ -1516,50 +1513,65 @@ const SupportedLLMs = () => {
                         PostHog Code runs both. Pay token cost (with no markup) on the best tool for the job.
                     </p>
 
-                    <div className="leading-none">
-                        <p className="m-0 text-3xl font-bold">
-                            <RoughAnnotation
-                                type="circle"
-                                color="#F54E00"
-                                strokeWidth={3}
-                                padding={[10, 18]}
-                                iterations={3}
-                                delay={200}
-                            >
-                                1/10th
-                            </RoughAnnotation>
-                        </p>
-                        <p className="m-0 mt-1 text-2xl font-bold">
-                            the price
-                            <Tooltip
-                                delay={0}
-                                trigger={
-                                    <sup className="ml-1 cursor-help text-base text-secondary hover:text-primary">
-                                        *
-                                    </sup>
-                                }
-                            >
-                                Probably. You can run the numbers.
-                            </Tooltip>
-                        </p>
-                        <p className="m-0 mt-3 text-xs font-semibold uppercase tracking-wide text-secondary">
-                            For a lot of coding work
-                        </p>
+                    <div className="flex items-end justify-between gap-4">
+                        <div className="leading-none">
+                            <p className="m-0 text-3xl font-bold">
+                                <RoughAnnotation
+                                    type="circle"
+                                    color="#F54E00"
+                                    strokeWidth={3}
+                                    padding={[10, 18]}
+                                    iterations={3}
+                                    delay={200}
+                                >
+                                    1/10th
+                                </RoughAnnotation>
+                            </p>
+                            <p className="m-0 mt-1 text-2xl font-bold">
+                                the price
+                                <Tooltip
+                                    delay={0}
+                                    trigger={
+                                        <sup className="ml-1 cursor-help text-base text-secondary hover:text-primary">
+                                            *
+                                        </sup>
+                                    }
+                                >
+                                    Probably. You can run the numbers.
+                                </Tooltip>
+                            </p>
+                            <p className="m-0 mt-3 text-xs font-semibold uppercase tracking-wide text-secondary">
+                                For a lot of coding work
+                            </p>
+                        </div>
+                        {/* Kaiju hedgehog fills the empty space beside the cost stat – hover to rampage */}
+                        <MiniHogzilla className="hidden w-24 shrink-0 self-end @sm:block @xl:w-28" />
                     </div>
                 </div>
             </div>
+
+            <style>{`
+                @keyframes hogzilla-rampage {
+                    0%, 100% { transform: scale(1.12) rotate(-4deg); }
+                    25% { transform: scale(1.16) rotate(3deg); }
+                    50% { transform: scale(1.12) rotate(-3deg); }
+                    75% { transform: scale(1.16) rotate(2deg); }
+                }
+            `}</style>
         </section>
     )
 }
 
 const MCPMarketplace = () => {
     return (
-        <section className="relative mb-12 px-4 @xl:px-8">
+        <section className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
             <SectionLabel>MCP marketplace</SectionLabel>
             <p>Extend your agents with tools, data, and integrations.</p>
 
-            {/* Cap the height and fade the bottom into the page bg so the list reads as "and more" */}
-            <div className="relative mt-4 max-h-64 overflow-hidden">
+            {/* Cap the height and fade the bottom out with a mask so the list reads as "and more".
+                A mask (not a bg-gradient overlay) fades the content itself to transparent, so it works
+                over the translucent window background instead of painting a solid rectangle on top. */}
+            <div className="mt-4 max-h-64 overflow-hidden [mask-image:linear-gradient(to_bottom,black_0%,black_calc(100%-6rem),transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_calc(100%-6rem),transparent_100%)]">
                 <div className="grid grid-cols-2 gap-x-4 gap-y-2.5 @sm:grid-cols-3 @lg:grid-cols-4 @2xl:grid-cols-6">
                     {mcpServers.map((server) => (
                         <div key={server.name} className="flex min-w-0 items-center gap-2">
@@ -1574,7 +1586,6 @@ const MCPMarketplace = () => {
                         </div>
                     ))}
                 </div>
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-[rgb(var(--bg)/0)] to-[rgb(var(--bg))]" />
             </div>
         </section>
     )
@@ -1583,7 +1594,7 @@ const MCPMarketplace = () => {
 // Third beat of the opening narrative (old way → PostHog way → this): the job abstracting up.
 const BiggerPictureSection = () => {
     return (
-        <section className="relative mb-8 @xl:mb-12 px-4 @xl:px-8">
+        <section className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
             <SectionLabel>
                 <InlineIcon icon={StickerCoffee} className="!size-10 !top-3 -rotate-1">
                     Congratulations
@@ -1593,35 +1604,28 @@ const BiggerPictureSection = () => {
 
             <p className="text-base leading-loose">
                 <ChoppyReveal wordDelay={40}>
-                    {'You used to write code. Then you '}
-                    <em>prompted outputs</em>
-                    {
-                        ". Now you orchestrate outcomes. PostHog Code is built for the abstraction level you're moving to next – and the work that "
-                    }
+                    {'You used to write code. Then you prompted outputs. Now you orchestrate '}
+                    <Highlight>outcomes</Highlight>
+                    {". PostHog Code is built for the abstraction level you're moving to next – and the work that "}
                     <RoughAnnotation type="underline" color="#F54E00" strokeWidth={2}>
                         <em>isn't quite possible yet</em>
                     </RoughAnnotation>
-                    {", but you'll probably be doing soon."}
+                    {" (but you'll probably be doing soon)."}
                 </ChoppyReveal>
             </p>
-
-            {/* The punch line at the end of the narrative */}
-            <div className="mt-8 flex justify-center @xl:justify-start">
-                <LetPostHogScroller />
-            </div>
         </section>
     )
 }
 
 const InboxCallout = () => {
     return (
-        <section className="relative mb-6 @2xl:mb-8 px-4 @xl:px-8">
-            <div className="relative overflow-hidden rounded-md border border-primary bg-accent">
+        <section className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
+            <div className="relative overflow-hidden rounded-md border border-blue bg-blue/10 shadow-xl">
                 <div className="grid gap-6 p-6 @2xl:grid-cols-2 @2xl:items-center @2xl:gap-10 @2xl:p-8">
                     <div>
                         <div className="mb-4 flex items-center gap-2">
                             <StickerPullRequest className="size-8 -rotate-3" />
-                            <h2 className="m-0 text-2xl">Part of the self-driving loop</h2>
+                            <h2 className="m-0 text-2xl font-bold">Part of the self-driving loop</h2>
                         </div>
                         <ul className="m-0 mb-6 list-none space-y-3 p-0">
                             <li>
@@ -1665,7 +1669,7 @@ const InboxCallout = () => {
                     </div>
 
                     <div className="relative">
-                        <p className="mb-5 text-center text-sm text-muted">
+                        <p className="mb-5 text-center text-sm text-secondary">
                             Waking up to three PRs for papercuts that would have derailed your day? Ah, that's bliss.
                         </p>
                         <CloudinaryImage
@@ -1695,7 +1699,7 @@ const InboxCallout = () => {
 
 const TLDR = () => {
     return (
-        <section className="relative mb-8 @2xl:mb-12 px-4 @xl:px-8">
+        <section className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
             <h2 className="text-2xl font-bold mb-2">Try it</h2>
             <p className="m-0">PostHog Code is launching in Summer 2026.</p>
             <div className="mt-2 grid items-center gap-8 @2xl:grid-cols-2 @2xl:gap-12">
@@ -1973,8 +1977,8 @@ const FAQ_ITEMS = [
 
 function FAQ() {
     return (
-        <section className="mb-8 px-4 @xl:px-8">
-            <h2 className="text-2xl m-0 mb-6">Frequently asked questions</h2>
+        <section className="mb-12 @xl:mb-16 px-4 @xl:px-8">
+            <h2 className="text-2xl font-bold m-0 mb-6">Frequently asked questions</h2>
 
             <Accordion
                 type="multiple"
@@ -2015,8 +2019,8 @@ export default function CodePage() {
             />
             <Editor slug="/code" maxWidth="100%" hasPadding={false} disableFormatting>
                 <div className="@container not-prose font-rounded">
-                    <header className="relative mb-12 border-b border-primary bg-primary shadow-xl">
-                        <div className="relative flex flex-col items-center w-full px-4 @xl:px-8 py-6 @xl:py-8">
+                    <header className="relative mb-8 border-b border-primary">
+                        <div className="max-w-4xl mx-auto px-4 @xl:px-8 pt-6 @xl:pt-8 pb-8">
                             <HeroSection />
                         </div>
                     </header>
@@ -2026,19 +2030,19 @@ export default function CodePage() {
 
                         <PostHogWaySection onComplete={() => setPostHogWayDone(true)} />
 
-                        <BiggerPictureSection />
-
-                        <TableStakesSection />
-
                         <Features />
-
-                        <AgenticWorkspaceSection />
 
                         <SupportedLLMs />
 
                         <MCPMarketplace />
 
+                        {/* Self-driving loop box sits just above the alphas carousel */}
                         <InboxCallout />
+
+                        <AgenticWorkspaceSection />
+
+                        {/* The "promotion" narrative beat lands just before the closing CTA */}
+                        <BiggerPictureSection />
 
                         <TLDR ready={postHogWayDone} />
 
