@@ -56,6 +56,11 @@ For one scanner (across sessions):
 - `vision-scanners-observations-list` – paginated list of a scanner's observations.
 - `vision-scanners-observations-get` – fetch one of that scanner's observations by ID.
 
+### Impact and cohorts
+
+- `vision-scanners-impact-retrieve` – get how many sessions and users a scanner's findings affected over a trailing window.
+- `vision-scanners-affected-cohort-create` – save those affected users as a static cohort, usable in funnels, surveys, experiments, and more.
+
 ## Example prompts
 
 Try these with your MCP-enabled agent:
@@ -65,5 +70,6 @@ Try these with your MCP-enabled agent:
 - `List the last 20 observations from my "Frustration score" scanner and summarize what's driving high scores.`
 - `Find every Replay Vision observation for session abc123 and give me a one-line summary of each.`
 - `How much Replay Vision quota do we have left this month?`
+- `How many users did my "Dead-end pages" monitor affect in the last 14 days? Save them as a cohort.`
 
 See the [MCP server docs](/docs/model-context-protocol) for client setup, and the [Replay Vision overview](/docs/replay-vision) for product concepts.
