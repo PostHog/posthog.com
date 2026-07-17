@@ -116,8 +116,20 @@ const Achievement = ({ date, title, points, onItemClick, onDismiss }: Achievemen
 
 export default function NotificationsPanel() {
     const { notifications, setNotifications } = useUser()
-    const { isNotificationsPanelOpen, setIsNotificationsPanelOpen } = useApp()
+    const { isNotificationsPanelOpen, setIsNotificationsPanelOpen, taskbarHeight, taskbarRef } = useApp()
     const panelRef = useRef<HTMLDivElement>(null)
+
+    // Match the app-container padding (`p-2`) and taskbar offset used by app windows
+    const taskbarRect = taskbarRef.current?.getBoundingClientRect()
+    const padding = taskbarRect?.left ?? 8
+    const panelStyle =
+        typeof window === 'undefined'
+            ? undefined
+            : {
+                  top: padding,
+                  right: padding,
+                  height: window.innerHeight - padding - (taskbarRect?.top ?? padding),
+              }
 
     const closeNotificationsPanel = () => {
         setIsNotificationsPanelOpen(false)
@@ -162,7 +174,8 @@ export default function NotificationsPanel() {
                             translateX: '100%',
                         }}
                         transition={{ duration: 0.3, type: 'tween' }}
-                        className={`fixed top-[calc(37px+1rem)] right-4 h-[calc(100vh-2rem-37px)] w-96 bg-primary border border-primary rounded shadow-xl z-50 text-primary`}
+                        style={panelStyle}
+                        className={`fixed w-96 max-w-[calc(100vw-1rem)] bg-primary border border-primary rounded shadow-xl z-50 text-primary`}
                     >
                         <div className="h-full flex flex-col">
                             <div className="flex items-center justify-between px-4 py-2 border-b border-primary">

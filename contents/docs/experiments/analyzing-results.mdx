@@ -8,20 +8,32 @@ availability:
   enterprise: full
 ---
 
-import {ProductScreenshot} from 'components/ProductScreenshot'
+import { ProductScreenshot } from "components/ProductScreenshot";
 
-export const ExposuresPanelLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/exposures_light_04d3ee6606.png"
-export const ExposuresPanelDark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/exposures_dark_6cf47da9eb.png"
-export const DeltaChartLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/delta_chart_light_3010641eff.png"
-export const DeltaChartDark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/delta_chart_dark_82a4470a98.png"
-export const DeltaChartHoverLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/popup_light_8fe379428f.png"
-export const DeltaChartHoverDark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/popup_dark_cd122710e7.png"
-export const FunnelBreakdownLight = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/funnel_light_e933e07d24.png"
-export const FunnelBreakdownDark = "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/funnel_dark_c6a7c3e830.png"
-export const TimeSeriesLight = "https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/timeseries_light_137450ab36.png"
-export const TimeSeriesDark = "https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/timeseries_dark_4cc2e5b46c.png"
-export const ClickIntervalLight = "https://res.cloudinary.com/dmukukwp6/image/upload/2025_12_01_10_51_27_cfce49599a.gif"
-export const ClickIntervalDark = "https://res.cloudinary.com/dmukukwp6/image/upload/2025_12_01_10_53_24_df61be48b8.gif"
+export const ExposuresPanelLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/exposures_light_04d3ee6606.png";
+export const ExposuresPanelDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/exposures_dark_6cf47da9eb.png";
+export const DeltaChartLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/delta_chart_light_3010641eff.png";
+export const DeltaChartDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/delta_chart_dark_82a4470a98.png";
+export const DeltaChartHoverLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/popup_light_8fe379428f.png";
+export const DeltaChartHoverDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/popup_dark_cd122710e7.png";
+export const FunnelBreakdownLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/funnel_light_e933e07d24.png";
+export const FunnelBreakdownDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/funnel_dark_c6a7c3e830.png";
+export const TimeSeriesLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/timeseries_light_137450ab36.png";
+export const TimeSeriesDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/timeseries_dark_4cc2e5b46c.png";
+export const ClickIntervalLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/2025_12_01_10_51_27_cfce49599a.gif";
+export const ClickIntervalDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/2025_12_01_10_53_24_df61be48b8.gif";
 
 After your experiment runs and collects data, you'll want to analyze the results to determine if your changes had a statistically significant impact. This guide shows you how to understand and interpret your experiment results in PostHog.
 
@@ -30,30 +42,32 @@ After your experiment runs and collects data, you'll want to analyze the results
 The exposures panel shows you how many users have been exposed to each variant of your experiment:
 
 <ProductScreenshot
-    imageLight={ExposuresPanelLight} 
-    imageDark={ExposuresPanelDark}
-    alt="Experiment exposures panel showing user distribution across variants" 
-    classes="rounded"
+  imageLight={ExposuresPanelLight}
+  imageDark={ExposuresPanelDark}
+  alt="Experiment exposures panel showing user distribution across variants"
+  classes="rounded"
 />
 
 This collapsible panel displays:
+
 - **Exposure count**: The total number of unique users who have seen each variant
 - **Percentage distribution**: How users are split between variants (typically 50/50 for two variants)
 
 The exposure numbers help you verify that:
+
 1. Your experiment is running and users are being assigned to variants
 2. The split between variants matches your expected allocation
 3. You have sufficient sample size for meaningful results
 
 ## Metric results and determining significance
 
-For each metric you're tracking, PostHog displays a delta chart showing the performance of each variant compared to the control:
+For each metric you're tracking, PostHog displays a delta chart showing the performance of each variant compared to the baseline (which defaults to `control`):
 
 <ProductScreenshot
-    imageLight={DeltaChartLight} 
-    imageDark={DeltaChartDark}
-    alt="Delta chart showing experiment results with confidence intervals" 
-    classes="rounded"
+  imageLight={DeltaChartLight}
+  imageDark={DeltaChartDark}
+  alt="Delta chart showing experiment results with confidence intervals"
+  classes="rounded"
 />
 
 ### How to determine if a variant is significant
@@ -66,7 +80,7 @@ Look for these clear visual indicators in the delta chart:
    - **Green**: The variant is winning (achieving the desired change)
    - **Red**: The variant is losing (moving opposite to the desired direction)
    - **No color**: The result is not statistically significant
-   
+
    When significant, an arrow (↑ or ↓) indicates whether the metric increased or decreased
 
 2. **Confidence/Credible intervals**: The horizontal bars show the 95% confidence interval (frequentist) or credible interval (Bayesian):
@@ -76,19 +90,26 @@ Look for these clear visual indicators in the delta chart:
 3. **Hover details**: When you hover over a variant in the delta chart, you'll see detailed statistics:
 
 <ProductScreenshot
-    imageLight={DeltaChartHoverLight} 
-    imageDark={DeltaChartHoverDark}
-    alt="Detailed statistics shown when hovering over a variant" 
-    classes="rounded"
+  imageLight={DeltaChartHoverLight}
+  imageDark={DeltaChartHoverDark}
+  alt="Detailed statistics shown when hovering over a variant"
+  classes="rounded"
 />
 
 The hover popup shows:
+
 - **Significance status**: States if the variant "won", "lost", or is "not significant"
 - **Total value**: The actual measured value for this metric (e.g., mean for trends, conversion rate for funnels)
 - **Exposures**: Number of users exposed to this variant (matches the exposures panel)
 - **Chance to win** (Bayesian) or **p-value** (Frequentist): Statistical confidence measure
-- **Delta**: Percentage change compared to the control variant
+- **Delta**: Percentage change compared to the baseline variant
 - **Confidence/Credible interval**: The range within which the true effect likely falls
+
+### Changing the baseline variant
+
+By default, all variants are compared to the `control` variant. You can change this by going to your experiment's **Settings** tab and selecting a different **Baseline variant**.
+
+When you change the baseline, all statistical comparisons – delta, confidence intervals, and significance – are recalculated relative to the new baseline variant. The baseline variant itself shows no delta since it's the reference point.
 
 ### Viewing detailed results and recordings
 
@@ -105,26 +126,26 @@ The time series chart shows how your experiment results change over time, helpin
 To view the time series chart, click on any confidence interval bar in the delta chart:
 
 <ProductScreenshot
-    imageLight={ClickIntervalLight}
-    imageDark={ClickIntervalDark}
-    alt="Click on confidence interval bar to show time series chart"
-    classes="rounded"
+  imageLight={ClickIntervalLight}
+  imageDark={ClickIntervalDark}
+  alt="Click on confidence interval bar to show time series chart"
+  classes="rounded"
 />
 
 This opens the time series view:
 
 <ProductScreenshot
-    imageLight={TimeSeriesLight}
-    imageDark={TimeSeriesDark}
-    alt="Time series chart showing experiment results over time with confidence intervals"
-    classes="rounded"
+  imageLight={TimeSeriesLight}
+  imageDark={TimeSeriesDark}
+  alt="Time series chart showing experiment results over time with confidence intervals"
+  classes="rounded"
 />
 
 How the chart works:
 
 - **Center line**: Shows the percentage change between your variants day by day
 - **Shaded bounds**: The confidence interval that gets narrower as you collect more data
-- **Colored areas**: 
+- **Colored areas**:
   - Green means the variant is winning with statistical significance
   - Red means the variant is losing with statistical significance
   - No color means the results aren't significant yet
@@ -141,6 +162,7 @@ Use this chart to:
 ### Clear winner
 
 When all your primary metrics show green (positive) significance for a variant:
+
 - You have strong evidence that the variant improves your key metrics
 - Consider the magnitude of improvement. Even statistically significant changes might not be practically significant
 - Review secondary metrics to ensure no unexpected negative impacts
@@ -165,24 +187,24 @@ At the default 95% confidence level, any single metric has a 5% chance of showin
 
 **Metrics that support each other.** You're testing a new onboarding flow:
 
-| Metric | Result |
-| --- | --- |
-| Onboarding completion rate (primary) | Significant increase ↑ |
-| Time to first key action | Significant decrease ↓ |
-| 7-day retention | Slight increase, not significant |
-| Support tickets in first week | Flat, not significant |
+| Metric                               | Result                           |
+| ------------------------------------ | -------------------------------- |
+| Onboarding completion rate (primary) | Significant increase ↑           |
+| Time to first key action             | Significant decrease ↓           |
+| 7-day retention                      | Slight increase, not significant |
+| Support tickets in first week        | Flat, not significant            |
 
 This is a coherent story. Users are completing onboarding faster and sticking around. You can trust the primary result because the surrounding metrics all point the same direction.
 
 **Metrics that can't help you.** Same experiment, but your metrics are:
 
-| Metric | Result |
-| --- | --- |
+| Metric                               | Result                 |
+| ------------------------------------ | ---------------------- |
 | Onboarding completion rate (primary) | Significant increase ↑ |
-| Total pageviews | Not significant |
-| Pricing page visits | Not significant |
-| Blog bounce rate | Significant decrease ↓ |
-| API calls made | Not significant |
+| Total pageviews                      | Not significant        |
+| Pricing page visits                  | Not significant        |
+| Blog bounce rate                     | Significant decrease ↓ |
+| API calls made                       | Not significant        |
 
 Completion rate is significantly up, but the other four metrics have nothing to do with onboarding. They can't confirm or contradict the primary result. If completion rate lit up by chance, you'd have no way to tell. And if blog bounce rate also happens to show significance, that's almost certainly noise, but it might look tempting to claim your onboarding change also "improved content engagement."
 
@@ -191,6 +213,7 @@ Completion rate is significantly up, but the other four metrics have nothing to 
 ### No significant results
 
 If your experiment shows no significant differences:
+
 - **Check sample size**: You might need more data. Use the sample size calculator to estimate required duration
 - **Verify implementation**: Ensure the variants are actually different and the tracking is working correctly
 - **Consider effect size**: The actual difference might be too small to detect with your current sample size
@@ -201,16 +224,16 @@ If your experiment shows no significant differences:
 For funnel metrics, PostHog provides additional breakdown visualization:
 
 <ProductScreenshot
-    imageLight={FunnelBreakdownLight} 
-    imageDark={FunnelBreakdownDark}
-    alt="Funnel breakdown showing conversion at each step" 
-    classes="rounded"
+  imageLight={FunnelBreakdownLight}
+  imageDark={FunnelBreakdownDark}
+  alt="Funnel breakdown showing conversion at each step"
+  classes="rounded"
 />
 
 The funnel breakdown shows conversion rates at each step, helping you identify:
+
 - Where users drop off in each variant
 - Which steps are most affected by your changes
 - Unexpected impacts on parts of the funnel you didn't intend to change
 
 > **Important**: Statistical significance for funnels is always calculated between the first step (exposure event) and the final step. Intermediate steps are shown for analysis but don't affect the significance calculation.
-

@@ -1614,7 +1614,7 @@ const AddAJobWindow = ({
     onSuccess?: () => void
     onClose?: () => void
 }) => {
-    const { setWindowTitle, siteSettings } = useApp()
+    const { setWindowTitle } = useApp()
     const { appWindow } = useWindow()
 
     useEffect(() => {
@@ -1627,12 +1627,7 @@ const AddAJobWindow = ({
 
     return (
         <ScrollArea className="min-h-0 h-full [&>div>div]:h-full">
-            <div
-                data-scheme="secondary"
-                className={`bg-primary text-primary ${
-                    siteSettings.experience === 'boring' ? 'size-full' : 'min-h-full'
-                }`}
-            >
+            <div data-scheme="secondary" className="bg-primary text-primary min-h-full">
                 <div className="p-4">
                     <CompanyForm companyId={companyId} onSuccess={onSuccess} />
                 </div>

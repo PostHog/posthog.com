@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Tabs } from 'radix-ui'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { useLocation } from '@reach/router'
-import { useApp } from '../../context/App'
+import { useWindow } from '../../context/Window'
 
 interface TabItem {
     value: string
@@ -68,7 +68,7 @@ export default function OSTabs({
         orientation === 'horizontal' ? (initialOrderedTabs?.length > 0 ? initialOrderedTabs : [tabs]) : [tabs]
     )
     const ref = useRef<HTMLDivElement>(null)
-    const { websiteMode } = useApp()
+    const { animating } = useWindow()
 
     const calculateTabRows = useCallback(
         (activeTabValue?: string) => {
@@ -145,17 +145,14 @@ export default function OSTabs({
     )
 
     useEffect(() => {
-        // Only run tab row calculation for horizontal orientation (when tabs might wrap)
-        if (orientation === 'vertical' || !ref.current) return
+        if (orientation === 'vertical' || !ref.current || animating) return
 
-        setTimeout(() => {
-            calculateTabRows()
-        }, 300)
+        calculateTabRows()
 
         const resizeObserver = new ResizeObserver(() => calculateTabRows())
         resizeObserver.observe(ref.current)
         return () => resizeObserver.disconnect()
-    }, [calculateTabRows, orientation])
+    }, [calculateTabRows, orientation, animating])
 
     const TabContentContainer = useMemo(() => (scrollable ? ScrollArea : 'div'), [scrollable])
 
@@ -197,7 +194,7 @@ export default function OSTabs({
                 defaultValue={defaultValue || tabs[0]?.value}
                 value={value || controlledValue}
                 className={`relative flex ${orientation === 'horizontal' ? 'flex-col' : 'flex-row'} ${
-                    padding && !websiteMode ? 'pt-1  px-2 pb-2' : ''
+                    padding ? 'pt-1  px-2 pb-2' : ''
                 } min-h-0 bg-primary ${className}`}
             >
                 <div className={tabContainerClassName}>

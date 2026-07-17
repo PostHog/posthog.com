@@ -25,6 +25,118 @@ Optionally pass `zoom={false}` if you don't want the image to be zoomable, other
 
 _Note: If you don't have a dark image, just leave out the `imageDark` prop and the light screenshot will be used for both color modes._
 
+### Annotated product screenshots
+
+The `<ImageAnnotations />` component overlays interactive callouts on top of an image. Instead of baking dots or numbers into the image file, the markers are live DOM positioned with **percentage coordinates**, so they stay anchored and scale when the image resizes (and they theme correctly in light/dark mode).
+
+There are two styles:
+
+- **`numbered`** — numbered badges paired with a "key" legend. Hovering a key row grows the matching marker, and vice versa.
+- **`dots`** — pulsing, clickable dots that open a popover with the callout's title and description.
+
+#### The builder
+
+Don't hand-write coordinates. Moderators can open the visual builder at [`/image-annotator`](/image-annotator) (also under the account menu → **Moderator tools → Image annotation**). Pick a product screenshot (or paste a Cloudinary URL), click to drop markers, label them, then copy paste-ready code. It outputs code for both destinations below.
+
+#### `<ImageAnnotations.FromProduct />` (recommended)
+
+The simplest entry point. It resolves the image (light + dark) and an optional named annotation set straight from a product hook, so the image stays in sync if it's ever updated. Because the API is namespaced (`ImageAnnotations.FromProduct`), import it once at the top of your `.mdx` file — same as `Tab`:
+
+<!-- prettier-ignore -->
+```tsx
+import ImageAnnotations from 'components/ImageAnnotations'
+```
+
+import ImageAnnotations from 'components/ImageAnnotations'
+
+<ImageAnnotations.FromProduct product="session_replay" screenshot="overview" set="dev-tools" />
+
+<!-- prettier-ignore -->
+```tsx
+<ImageAnnotations.FromProduct product="session_replay" screenshot="overview" set="dev-tools" />
+```
+
+| Prop | Type | Description |
+| --- | --- | --- |
+| `product` | `string` | Product handle, e.g. `"session_replay"`. |
+| `screenshot` | `string` | Key in that product's `screenshots` object, e.g. `"overview"`. |
+| `title` | `ReactNode` | Section heading. In `split` it sits in the left column next to the image. |
+| `set` | `string` | Name of an annotation set stored on the screenshot (`screenshots[screenshot].annotations[set]`). |
+| `annotations` | `Annotation[]` | Inline annotations — overrides `set`. |
+| `type` | `'dots' \| 'numbered'` | Overrides the set's type (defaults to the set's type, then `numbered`). |
+| `showKey` | `boolean` | Force the key on/off (defaults to on for `numbered`). |
+| `layout` | `'stacked' \| 'split'` | `stacked` (default) puts the image above the key. `split` is a responsive two-column layout. |
+| `children` | `ReactNode` | Left-column content (your prose) when `layout="split"`. |
+| `alt`, `imgClassName`, `className`, `keyTitle` | `string` | Presentation overrides. |
+
+**Split layout:** pass `layout="split"` and put your description as children to get a responsive two-column section (uses `@container/reader-content` queries). It stacks as description → image → key on mobile, and becomes description top-left / key bottom-left / image right on wider screens.
+
+<!-- prettier-ignore -->
+```tsx
+<ImageAnnotations.FromProduct product="session_replay" screenshot="overview" set="dev-tools" layout="split">
+
+Every session replay comes with a browser-like DevTools suite synced to the timeline.
+
+<OSButton variant="primary" asLink to="/docs/session-replay/how-to-watch-recordings">Watch session replays</OSButton>
+
+</ImageAnnotations.FromProduct>
+```
+
+**Storing annotation sets in a hook:** add an `annotations` map to a screenshot in `src/hooks/productData/<product>.tsx`. Multiple named sets are supported, since the same image may be annotated differently in different places. Coordinates are percentages (0–100) — copy them from the builder.
+
+<!-- prettier-ignore -->
+```tsx
+screenshots: {
+overview: {
+src: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_screenshot.jpg',
+// srcDark: '…', // optional — falls back to src when omitted
+alt: 'Session replay screenshot',
+annotations: {
+'dev-tools': {
+type: 'numbered',
+items: [
+{ x: 27.2, y: 9.8, title: 'Debug views' },
+{ x: 48.9, y: 7.8, title: 'DevTools' },
+],
+},
+},
+},
+}
+```
+
+#### Inline in MDX
+
+If the image isn't in a hook (or you want a one-off), define the annotations inline. MDX only allows ESM, so use **`export const`** — a bare `const` won't work. For the image, you can still reference a hook via `product` + `screenshot` (keeps it in sync), or pass a literal `src`/`srcDark`.
+
+<!-- prettier-ignore -->
+```tsx
+import ImageAnnotations from 'components/ImageAnnotations'
+
+export const annotations = [
+{ x: 27.2, y: 9.8, title: 'Debug views' },
+{ x: 48.9, y: 7.8, title: 'DevTools', description: 'Console, network, and errors synced to the timeline' },
+]
+
+<ImageAnnotations annotations={annotations} type="dots">
+<ImageAnnotations.Image product="session_replay" screenshot="overview" imgClassName="rounded-lg shadow-2xl" />
+</ImageAnnotations>
+```
+
+**Splitting the image and key:** because `<ImageAnnotations.Image />` and `<ImageAnnotations.Key />` read from the wrapping `<ImageAnnotations>` provider, you can render them in different spots with other content in between.
+
+<!-- prettier-ignore -->
+```tsx
+<ImageAnnotations annotations={annotations} type="numbered">
+<ImageAnnotations.Image product="session_replay" screenshot="overview" imgClassName="rounded-lg shadow-2xl" />
+
+Any markdown or other components can go in between…
+
+<ImageAnnotations.Key />
+</ImageAnnotations>
+```
+
+_Note: `srcDark` is optional everywhere — if a dark variant isn't provided, the regular `src` is shown in both color modes._
+
 ### Image slider
 
 You can create a slider or carousel of images by wrapping them in the `<ImageSlider>` component like this:

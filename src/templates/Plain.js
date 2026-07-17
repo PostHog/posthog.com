@@ -14,18 +14,16 @@ import TutorialsSlider from 'components/TutorialsSlider'
 import TutorialsList from 'components/TutorialsList'
 import { graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { MdxCodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
 import { OverflowXSection } from '../components/OverflowXSection'
 import { Tweet } from 'components/Tweet'
 import ReaderView from 'components/ReaderView'
-import { useApp } from '../context/App'
 
 const A = (props) => <Link {...props} />
 
 export default function Plain({ data }) {
-    const { updateSiteSettings, siteSettings } = useApp()
     const { pageData } = data
     const { body, excerpt } = pageData
     const { title, featuredImage, showTitle, width = 'sm', noindex, images, isInFrame, seo } = pageData?.frontmatter
@@ -46,15 +44,6 @@ export default function Plain({ data }) {
         ImageSlider,
         ...shortcodes,
     }
-
-    useEffect(() => {
-        if (isInFrame) {
-            updateSiteSettings({
-                ...siteSettings,
-                experience: 'boring',
-            })
-        }
-    }, [])
 
     return (
         <ReaderView hideLeftSidebar showQuestions={!isInFrame}>

@@ -15,8 +15,6 @@ export const Handbook: React.FC = () => {
                 title="Company Handbook"
                 hideTitle={true}
                 leftSidebar={<TreeMenu items={handbookSidebar} />}
-                homeURL="/handbook"
-                description="Learn how PostHog works"
                 proseSize="base"
             >
                 <section className="max-w-4xl">
@@ -43,18 +41,17 @@ export const Handbook: React.FC = () => {
                         return (
                             <div key={category.name} className="mb-16">
                                 <h4 className="text-base font-normal opacity-60">{category.name}</h4>
-                                <ol className="p-0 -ml-3 -mr-2 space-y-0.5">
+                                <ol className="p-0 -ml-3 -mr-2 space-y-0.5 not-prose">
                                     {category.links.map((link) => {
                                         return (
                                             <li key={link.to} className="list-none">
                                                 <Link
                                                     to={link.to}
-                                                    className="flex justify-between baseline relative bg-bullet-light dark:bg-bullet-dark bg-repeat-x bg-center bg-[length:8px_8px] text-primary hover:text-primary dark:text-primary-dark hover:dark:text-primary-dark rounded border border-b-3 border-transparent hover:border-primary hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all min-h-[34px] py-2"
+                                                    className="flex justify-between baseline relative text-primary hover:text-primary dark:text-primary-dark hover:dark:text-primary-dark rounded border border-b-3 border-transparent hover:border-primary hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all min-h-[34px] py-2"
                                                 >
-                                                    <span className="relative inline-block pl-3 pr-2 bg-light dark:bg-dark">
-                                                        {link.name}
-                                                    </span>
-                                                    <span className="relative pr-2 bg-light dark:bg-dark w-10 text-center text-sm">
+                                                    <span className="relative inline-block pl-3 pr-2">{link.name}</span>
+                                                    <span className="flex-1 bg-repeat-x bg-center bg-[length:8px_8px] bg-bullet-light" />
+                                                    <span className="relative pr-2 w-10 text-center text-sm">
                                                         {link.order}
                                                     </span>
                                                 </Link>

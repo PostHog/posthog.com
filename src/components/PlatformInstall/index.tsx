@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { IconQuestion } from '@posthog/icons'
+import { IconInfo, IconQuestion } from '@posthog/icons'
 import Link from 'components/Link'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { cn } from '../../utils'
@@ -223,7 +223,16 @@ export default function PlatformInstall({
                 <div className="flex items-start justify-between gap-2">
                     <div className="flex items-center gap-1.5">
                         <h3 className="!text-base font-bold text-primary m-0">{schema.title}</h3>
-                        {schema.titleTooltip ? (
+                        {schema.titleInfoAction ? (
+                            <Link
+                                to={schema.titleInfoAction.to}
+                                state={schema.titleInfoAction.state}
+                                aria-label={schema.titleInfoAction.label}
+                                className="inline-flex text-secondary hover:text-primary"
+                            >
+                                <IconInfo className="size-4" />
+                            </Link>
+                        ) : schema.titleTooltip ? (
                             <Tooltip
                                 delay={0}
                                 open={titleTooltipOpen}

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import SEO, { buildProductStructuredData } from 'components/seo'
 import Editor from 'components/Editor'
 import { IconArrowUpRight, IconCheck, IconFlask, IconToggle, IconTrends, IconWarning } from '@posthog/icons'
@@ -606,11 +606,13 @@ function PostHogCodeLogomark({ className }) {
 // ─────────────────────────────────────────────
 
 function HeroSection() {
-    const [showDownload, setShowDownload] = useState(
-        () => typeof window !== 'undefined' && window.location.hash === '#download'
-    )
+    const [showDownload, setShowDownload] = useState(false)
     const [contentVisible, setContentVisible] = useState(true)
     const prefersReducedMotion = usePrefersReducedMotion()
+
+    useEffect(() => {
+        if (window.location.hash === '#download') setShowDownload(true)
+    }, [])
 
     const swapToDownload = () => {
         if (typeof window !== 'undefined') {
@@ -1030,9 +1032,9 @@ const Features = () => {
     return (
         <section className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
             <div className="px-4 @xl:px-8">
-                <div className="max-w-[654px] mx-auto relative">
+                <div className="max-w-[654px] mx-auto [mask-image:linear-gradient(to_bottom,black_0%,black_calc(100%-6rem),transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_calc(100%-6rem),transparent_100%)]">
                     <CloudinaryImage
-                        src="/>https://res.cloudinary.com/dmukukwp6/image/upload/code_screenshot_light_d0c42a8067.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/code_screenshot_light_d0c42a8067.png"
                         className="dark:hidden"
                         imgClassName="w-full rounded border border-secondary"
                     />
@@ -1041,7 +1043,6 @@ const Features = () => {
                         className="hidden dark:block"
                         imgClassName="w-full rounded border border-secondary"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-b from-light/0 via-light/25 to-light dark:from-dark/0 dark:via-dark/25 dark:to-dark"></div>
                 </div>
 
                 <h2 className="text-2xl font-bold mb-2 text-center -mt-10 pb-12 relative">
@@ -1198,27 +1199,20 @@ const TableStakes = () => {
 
                     <SectionLabel>Integrations</SectionLabel>
 
-                    <div className="relative -mt-2">
-                        <div className="divide-y divide-primary">
-                            {integrationRows.map((row, i) => (
-                                <div
-                                    key={row.logoKey}
-                                    className={`flex min-h-0 flex-1 items-center gap-3 py-2
-                                    }`}
-                                >
-                                    <img
-                                        src={LOGOS[row.logoKey]}
-                                        alt=""
-                                        className={`size-7 shrink-0 object-contain ${getDarkClassForLogo(
-                                            LOGOS[row.logoKey]
-                                        )}`}
-                                        aria-hidden
-                                    />
-                                    <p className="m-0 text-base font-bold text-primary">{row.name}</p>
-                                </div>
-                            ))}
-                        </div>
-                        <div className="absolute inset-0 bg-gradient-to-b from-light/0 via-light/25 to-light dark:from-dark/0 dark:via-dark/25 dark:to-dark"></div>
+                    <div className="-mt-2 divide-y divide-primary [mask-image:linear-gradient(to_bottom,black_0%,black_calc(100%-4rem),transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_calc(100%-4rem),transparent_100%)]">
+                        {integrationRows.map((row) => (
+                            <div key={row.logoKey} className="flex min-h-0 flex-1 items-center gap-3 py-2">
+                                <img
+                                    src={LOGOS[row.logoKey]}
+                                    alt=""
+                                    className={`size-7 shrink-0 object-contain ${getDarkClassForLogo(
+                                        LOGOS[row.logoKey]
+                                    )}`}
+                                    aria-hidden
+                                />
+                                <p className="m-0 text-base font-bold text-primary">{row.name}</p>
+                            </div>
+                        ))}
                     </div>
                 </div>
                 <div>
@@ -1228,7 +1222,7 @@ const TableStakes = () => {
                         capabilities.
                     </p>
 
-                    <div className="relative">
+                    <div className="[mask-image:linear-gradient(to_bottom,black_0%,black_calc(100%-4rem),transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_calc(100%-4rem),transparent_100%)]">
                         {mcpServerRows.map((row, i) => (
                             <div
                                 key={row.logoKey}
@@ -1250,8 +1244,6 @@ const TableStakes = () => {
                                 </div>
                             </div>
                         ))}
-
-                        <div className="absolute inset-0 bg-gradient-to-b from-light/0 via-light/25 to-light dark:from-dark/0 dark:via-dark/25 dark:to-dark"></div>
                     </div>
                 </div>
             </div>
@@ -1313,7 +1305,7 @@ const TLDR = () => {
     return (
         <section className="relative mb-8 @2xl:mb-12 px-4 @xl:px-8">
             <h2 className="text-2xl font-bold mb-2">Try it</h2>
-            <p>PostHog Code is launching in Spring 2026. Join the waitlist to be the first to try it.</p>
+            <p>PostHog Code is launching soon. Join the waitlist to be the first to try it.</p>
             <div className="max-w-lg @container bg-blue/10 border border-blue rounded-md px-8 py-6 shadow-xl">
                 <WaitlistForm />
             </div>
