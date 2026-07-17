@@ -47,6 +47,8 @@ Before the quarter starts, review each account and remove those that meet any of
 
 If criteria is met, let the customer know their slack channel will be archived, and direct them to the typical support paths. A warm transition call for more engaged customers is likely preferred. Internally, create a [handover note](https://github.com/PostHog/skills/tree/main/skills/team/product-led-sales/account-handover) against the customer in Vitally with all relevant information, for future team members to pick the account back up if needed. If the customer was previously above $20k and decreased usage significantly, include details on what went wrong (similar to a churn retro).
 
+Team leads should populate the `previous owner` trait in Vitally with the current owner's email.
+
 ### What is NOT a valid reason to hand off
 
 Low engagement or an account being "difficult to work with" is not a reason to pass them off. That's literally your job. Specifically:
