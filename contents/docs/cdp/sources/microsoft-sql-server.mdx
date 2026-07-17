@@ -52,6 +52,20 @@ If your sync fails with "Invalid object name," the database couldn't find a tabl
 
 </CalloutBox>
 
+## Troubleshooting
+
+### Firewall blocking PostHog
+
+This error occurs when your SQL Server's firewall blocks connections from PostHog's IP addresses. Azure SQL error 40615 shows a message containing "is not allowed to access the server."
+
+To fix this:
+
+1. Add PostHog's IP addresses to your server's firewall rules. On Azure SQL, do this through the Azure portal under **Networking** > **Firewall rules**, or by running `sp_set_firewall_rule`.
+2. Wait a few minutes for the new rules to take effect.
+3. Re-enable the sync in PostHog.
+
+See the [Inbound IP addresses](#inbound-ip-addresses) section below for the IP addresses to allowlist.
+
 import InboundIpAddresses from "../_snippets/inbound-ip-addresses.mdx";
 
 <InboundIpAddresses />

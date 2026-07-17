@@ -998,12 +998,10 @@ export default function ProductComparisonTable({
         return null
     }
 
-    const { siteSettings } = useApp()
+    const { siteSettings, location: appLocation } = useApp()
     const isDark = siteSettings.theme === 'dark'
 
-    // Get current pathname - safely handle SSR
-    const currentPathname = typeof window !== 'undefined' ? window.location.pathname : ''
-
+    const currentPathname = appLocation?.pathname || ''
     // Build columns
     const columns = [
         { name: '', width: 'auto', align: 'left' as const },
@@ -1015,7 +1013,11 @@ export default function ProductComparisonTable({
                 name: (
                     <>
                         {key === 'posthog' ? (
-                            <Logo className="h-5 mx-auto w-auto max-w-full" fill={isDark ? 'white' : ''} />
+                            <Logo
+                                className="h-5 mx-auto w-auto max-w-full"
+                                variant={isDark ? 'mono' : 'gradient'}
+                                color={isDark ? 'white' : undefined}
+                            />
                         ) : competitorData[key]?.name ? (
                             competitorData[key].name
                         ) : (
@@ -1132,5 +1134,9 @@ export default function ProductComparisonTable({
         return false
     })
 
-    return <OSTable columns={columns} rows={tableRows} width={width} />
+    return (
+        <div>
+            <OSTable columns={columns} rows={tableRows} width={width} />
+        </div>
+    )
 }

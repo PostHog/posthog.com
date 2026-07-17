@@ -197,13 +197,6 @@ const getTeamLeadInfo = (team: any) => {
     return `${firstName} joined in ${formatDate(startDate)} and lives in ${location}, ${country}.`
 }
 
-const getQueryString = (): string => {
-    if (typeof window !== 'undefined' && window.location.search) {
-        return window.location.search
-    }
-    return ''
-}
-
 export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
     const {
         allAshbyJobPosting: { departments, jobs: originalJobs },
@@ -211,12 +204,17 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
     } = useStaticQuery(query)
 
     const { appWindow } = useWindow()
+    const [queryString, setQueryString] = useState('')
     const [searchQuery, setSearchQuery] = useState('')
     const [leftColHeight, setLeftColHeight] = useState<string | number>('auto')
     const jobListRef = useRef<HTMLDivElement>(null)
     const markedRef = useRef<Mark | null>(null)
     const leftColRef = useRef<HTMLDivElement>(null)
     const rightColRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        if (window.location.search) setQueryString(window.location.search)
+    }, [])
     const jobGroups = useMemo(() => {
         // Group jobs by "Role grouping" custom field
         const groups: { [key: string]: any[] } = {}
@@ -456,7 +454,10 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                 style={{ height: leftColHeight }}
                 className="w-full @2xl:w-1/3 @3xl:w-1/4 flex flex-col h-full"
             >
-                <ScrollArea fadeOverflow={16} viewportClasses="role-search !pb-0 @2xl:!pb-16">
+                <ScrollArea
+                    viewportClasses="role-search !pb-0 @2xl:!pb-16"
+                    className="@2xl:[mask-image:linear-gradient(to_bottom,black_0%,black_calc(100%-4rem),transparent_100%)] @2xl:[-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_calc(100%-4rem),transparent_100%)]"
+                >
                     <div>
                         <label htmlFor="job-select" className="block @2xl:hidden font-bold mb-1 text-center">
                             Select a role
@@ -653,7 +654,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                     </div>
                 </ScrollArea>
             </div>
-            <div ref={rightColRef} className="flex-1 bg-primary flex flex-col">
+            <div ref={rightColRef} className="flex-1 flex flex-col">
                 <div className="flex-1">
                     <h2 className="hidden @2xl:block -mt-1 mb-2">{selectedJob.fields.title}</h2>
 
@@ -717,7 +718,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                         ) : (
                                             <div
                                                 dangerouslySetInnerHTML={{ __html: processedHtml }}
-                                                className="[&_details]:!border-transparent [&_details_ul]:!pl-4 [&_details_ul]:!pr-0 [&_details]:!p-0 [&_details_p]:!px-0 [&_summary]:hidden [&_p]:text-[15px] [&_p]:mb-2 [&_ul_p]:pb-0 [&_ul_p]:mb-0 relative max-h-full overflow-hidden after:absolute after:inset-x-0 after:bottom-0 after:h-24 after:bg-gradient-to-b after:from-white/0 after:via-white/75 after:to-white dark:after:from-accent-dark/0 dark:after:via-accent-dark/75 dark:after:to-accent-dark"
+                                                className="[&_details]:!bg-transparent [&_details]:!border-transparent [&_details_ul]:!pl-4 [&_details_ul]:!pr-0 [&_details]:!p-0 [&_details_p]:!px-0 [&_summary]:hidden [&_p]:text-[15px] [&_p]:mb-2 [&_ul_p]:pb-0 [&_ul_p]:mb-0 relative max-h-full overflow-hidden [mask-image:linear-gradient(to_bottom,black_0%,black_calc(100%-6rem),transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_calc(100%-6rem),transparent_100%)]"
                                             />
                                         )}
                                         {selectedJob.fields.title == 'Speculative application' && (
@@ -738,7 +739,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                 )}
                                 <OSButton
                                     asLink
-                                    to={`${selectedJob.fields.slug}${getQueryString()}`}
+                                    to={`${selectedJob.fields.slug}${queryString}`}
                                     size="md"
                                     variant="primary"
                                     state={{ newWindow: true }}

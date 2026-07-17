@@ -291,6 +291,8 @@ Exit criteria:
 6. Closed Won (100%) - They have signed the contract and are officially a PostHog customer.
 7. Closed Lost (0%) - At some point in the pipeline they decided not to use us. The Loss Reason field is required for any opportunity to be marked as Closed lost.
 
+> **Duplicate opportunities should be deleted, not marked as Closed Lost.** A duplicate isn't a real loss, so marking it Closed Lost pollutes our loss data and skews win/loss reporting. Delete the duplicate record instead. Only use Closed Lost when a genuine opportunity didn't work out.
+
 Bolded exit criteria indicate the minimum standard for the opportunity to advance stages (for typically smaller, more transational deals). More detail is available on the stages and the exit criteria for each state <PrivateLink url='https://docs.google.com/spreadsheets/d/1BpLMHZ52iE1Ni0-Hf0Y68RSq0ohNNnJv7Jd90lgSI6s/edit?usp=sharing'>in this spreadsheet</PrivateLink>
 
 ### Forecast categories

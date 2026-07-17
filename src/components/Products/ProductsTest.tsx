@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { navigate } from 'gatsby'
 import SEO from 'components/seo'
 import useProduct from '../../hooks/useProduct'
-import { IconArrowRight, IconArrowUpRight } from '@posthog/icons'
+import { IconArrowRight, IconArrowUpRight, IconFastForward, IconPauseFilled, IconPlayFilled } from '@posthog/icons'
 import { IconApple } from 'components/OSIcons'
 import Editor from 'components/Editor'
 import WizardCommand from 'components/WizardCommand'
@@ -13,12 +13,8 @@ import HeroCarousel from 'components/Home/HeroCarousel'
 import { productUsageTabs } from 'components/Home/HeroCarousel/tabs'
 import Tooltip from 'components/RadixUI/Tooltip'
 import WistiaVideo, { WistiaVideoRef } from 'components/WistiaVideo'
-import TVScreen from 'components/Home/Test/TV'
 import { Accordion } from 'components/RadixUI/Accordion'
 import OSButton from 'components/OSButton'
-import { RenderInClient } from 'components/RenderInClient'
-import usePostHog from 'hooks/usePostHog'
-
 const statusDotColor: Record<string, string> = {
     beta: 'bg-yellow',
     alpha: 'bg-orange',
@@ -103,6 +99,9 @@ const PROMPTS = [
     { slide: 'data-warehouse', text: 'Write a SQL query', videoId: 'lw11gbdm03' },
 ]
 
+const VIDEO_CONTROL_CLASS =
+    'inline-flex size-9 cursor-pointer items-center justify-center rounded-md border border-primary bg-primary text-secondary shadow-md transition-colors hover:bg-accent hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue'
+
 function ProductTrigger({ handle }: { handle: string }) {
     const product = useProduct({ handle }) as
         | { Icon?: React.ComponentType<{ className?: string }>; color?: string; name?: string }
@@ -118,14 +117,14 @@ function ProductTrigger({ handle }: { handle: string }) {
 
 const AIDemos = () => {
     const videoRef = useRef<WistiaVideoRef>(null)
-    const tvScreenRef = useRef<HTMLDivElement>(null)
+    const videoPanelRef = useRef<HTMLDivElement>(null)
     const [activePromptIndex, setActivePromptIndex] = useState(0)
     const [isPlaying, setIsPlaying] = useState(true)
 
     const scrollToVideo = () => {
-        if (tvScreenRef.current) {
+        if (videoPanelRef.current) {
             setTimeout(() => {
-                tvScreenRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+                videoPanelRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
             }, 100)
         }
     }
@@ -228,25 +227,43 @@ const AIDemos = () => {
                         />
                     </div>
                 </div>
-                <div ref={tvScreenRef} className=" flex-1 flex flex-col items-center">
-                    <TVScreen
-                        className="relative w-full"
-                        title={currentPrompt.text}
-                        isPlaying={isPlaying}
-                        videoNumber={activePromptIndex + 1}
-                        onPrev={handlePrev}
-                        onPlayPause={handlePlayPause}
-                        onNext={handleNext}
-                    >
+                <div ref={videoPanelRef} className="min-w-0 flex-1 flex flex-col items-center">
+                    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-md border border-primary bg-primary shadow-2xl">
                         <WistiaVideo
                             ref={videoRef}
                             videoId={currentPrompt.videoId}
                             onEnd={handleVideoEnd}
-                            className="absolute inset-0 [&_.w-chrome]:!rounded-none [&_video]:m-0 [&_.w-vulcan-v2]:!rounded-none [&_.w-chrome]:![clip-path:none]"
+                            className="absolute inset-0 !aspect-auto [&_.w-chrome]:!rounded-md [&_video]:m-0 [&_.w-vulcan-v2]:!rounded-md [&_.w-chrome]:![clip-path:none]"
                             hideInitialControls
                             hideAudioControls
                         />
-                    </TVScreen>
+                    </div>
+                    <div className="mt-4 flex items-center justify-center gap-2">
+                        <button
+                            type="button"
+                            className={VIDEO_CONTROL_CLASS}
+                            aria-label="Previous demo"
+                            onClick={handlePrev}
+                        >
+                            <IconFastForward className="size-4 scale-x-[-1]" />
+                        </button>
+                        <button
+                            type="button"
+                            className={VIDEO_CONTROL_CLASS}
+                            aria-label={isPlaying ? 'Pause demo' : 'Play demo'}
+                            onClick={handlePlayPause}
+                        >
+                            {isPlaying ? <IconPauseFilled className="size-4" /> : <IconPlayFilled className="size-4" />}
+                        </button>
+                        <button
+                            type="button"
+                            className={VIDEO_CONTROL_CLASS}
+                            aria-label="Next demo"
+                            onClick={handleNext}
+                        >
+                            <IconFastForward className="size-4" />
+                        </button>
+                    </div>
                 </div>
             </div>
         </>
@@ -288,7 +305,6 @@ const ProductRow = ({ product }: { product: any }) => {
 }
 
 export default function ProductsTest(): JSX.Element {
-    const posthog = usePostHog()
     const allProducts = useProduct() as any[]
 
     const productsByHandle = useMemo(() => {
@@ -309,43 +325,28 @@ export default function ProductsTest(): JSX.Element {
             <Editor maxWidth={900}>
                 <div className="space-y-10 [&_p]:text-base [&_li]:text-base">
                     {/* Hero */}
-                    <header className="space-y-4 text-center @xl:text-left">
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/e_trim,w_500,c_limit,q_auto,f_auto/deskhog_a3e8841e35.png"
-                            imgClassName="@xl:float-right @xl:!ml-4 w-60 @xl:w-48 @3xl:w-60 @xl:mt-4 @3xl:!ml-8 @3xl:!-mr-4"
-                        />
-                        <h1 className="text-2xl @lg:text-3xl font-bold leading-tight">
-                            Devtools and product data infrastructure
-                            {/* Test appends "for building self-driving products"; control keeps it generic. */}
-                            <RenderInClient
-                                placeholder={null}
-                                render={() =>
-                                    posthog?.getFeatureFlag?.('self-driving-mode-test', { fresh: true }) === 'test' ? (
-                                        <>{' for building self-driving products'}</>
-                                    ) : (
-                                        <></>
-                                    )
-                                }
+                    <header className="grid gap-4 py-8 text-center @xl:text-left @3xl:grid-cols-[minmax(0,1.25fr)_minmax(15rem,1fr)] @3xl:items-center @3xl:gap-8">
+                        <div className="order-1 flex justify-center @3xl:order-2">
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/hogzilla_self_driving_486ef58706.png"
+                                imgClassName="w-72 max-w-full @xl:w-56 @3xl:w-80"
                             />
-                        </h1>
-                        <p className="text-lg leading-relaxed">
-                            Humans and AI agents build with PostHog because everything you need to collect and analyze
-                            product usage data – and build and ship new features – lives in one place.
-                        </p>
+                        </div>
+                        <div className="order-2 space-y-4 @3xl:order-1">
+                            <h1 className="text-2xl @lg:text-3xl font-bold leading-tight">
+                                Devtools and product data infrastructure for building{' '}
+                                <span className="bg-blue/10 dark:bg-blue/20 text-blue rounded-md px-1 whitespace-nowrap">
+                                    self-driving products
+                                </span>
+                            </h1>
+                            <p className="text-lg leading-relaxed">
+                                Humans and AI agents build with PostHog because everything you need to collect and
+                                analyze product usage data – and build and ship new features – lives in one place.
+                            </p>
 
-                        {/* Test installs with the self-driving subcommand; control stays generic. */}
-                        <RenderInClient
-                            placeholder={<GetStarted />}
-                            render={() =>
-                                posthog?.getFeatureFlag?.('self-driving-mode-test', { fresh: true }) === 'test' ? (
-                                    <GetStarted selfDriving />
-                                ) : (
-                                    <GetStarted />
-                                )
-                            }
-                        />
+                            <GetStarted selfDriving showSecondaryActions={false} />
 
-                        {/*
+                            {/*
                         <div className="flex flex-wrap items-center gap-3 not-prose">
                             <Link
                                 to="/download"
@@ -376,19 +377,11 @@ export default function ProductsTest(): JSX.Element {
                                 Try the MCP
                             </Link>
                         </div>
-                         */}
+                             */}
+                        </div>
                     </header>
 
-                    <RenderInClient
-                        placeholder={<></>}
-                        render={() =>
-                            posthog?.getFeatureFlag?.('self-driving-mode-test', { fresh: true }) === 'test' ? (
-                                <HeroCarousel tabs={productUsageTabs} />
-                            ) : (
-                                <></>
-                            )
-                        }
-                    />
+                    <HeroCarousel tabs={productUsageTabs} />
 
                     <hr />
 
