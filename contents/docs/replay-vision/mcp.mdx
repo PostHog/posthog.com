@@ -61,11 +61,6 @@ For one scanner (across sessions):
 - `vision-scanners-impact-retrieve` – get affected sessions and users for a scanner over a trailing window. Monitors count verdict-yes observations. Classifiers require a `tag` parameter. Scorers require `min_score` and/or `max_score`.
 - `vision-scanners-affected-cohort-create` – save the affected users as a static cohort. Same qualifiers as the impact endpoint. The cohort is a dated snapshot and doesn't live-update.
 
-### Impact and cohorts
-
-- `vision-scanners-impact-retrieve` – get how many sessions and users a scanner's findings affected over a trailing window.
-- `vision-scanners-affected-cohort-create` – save those affected users as a static cohort, usable in funnels, surveys, experiments, and more.
-
 ## Example prompts
 
 Try these with your MCP-enabled agent:
