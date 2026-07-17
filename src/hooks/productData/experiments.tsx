@@ -24,8 +24,8 @@ export const experiments = {
         title: 'Test changes with statistical significance',
         description: (
             <>
-                Experiments is one of the tools that makes your product self-driving: the evaluation that proves a change
-                actually worked. Run statistically rigorous tests, use precise targeting and exclusion rules, and
+                Experiments is one of the tools that makes your product self-driving: the evaluation that proves a
+                change actually worked. Run statistically rigorous tests, use precise targeting and exclusion rules, and
                 analyze your groups with{' '}
                 <Link to="/session-replay" className="font-bold underline" state={{ newWindow: true }}>
                     Session Replay

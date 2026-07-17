@@ -4,18 +4,18 @@
 Large customers can break smaller ones, the blast radius is huge, and changes are hard to test. Splitting things up and isolating them lets us manage all of this far better.
 
 **What we'll ship:**
-* A team 2 cell, set up together with the Query Performance team
+* A team 2 cell, set up together with the Platform Analytics Team
 * Tooling to manage the different backends and migrate data between cells
 
 ### 📦 JSON datatype in the app - (Driver: <TeamMember name="Rory Shanks" />)
 We have a lot of duplicated data sitting in the cluster eating disk. Newer storage formats give us more efficient disk usage, and therefore better performance.
 
 **What we'll ship:**
-* The app can use the JSON datatype natively (with Query Performance)
+* The app can use the JSON datatype natively (with the Platform Analytics Team)
 * A rebuilt events table using the JSON datatype
 * The app switched over to the new table
 
-### 🔐 ClickHouse is up to date and secure - (Driver: <TeamMember name="Thomas Gilmore" />)
+### 🔐 ClickHouse is up to date and secure - (Driver: <TeamMember name="Tommy Gilmore" />)
 New ClickHouse versions bring big wins, so we should be able to upgrade faster. And secrets rotation shouldn't be a painful, high-risk process that can take down the app or silently break a team - secrets need to be swappable at any time with no real risk.
 
 **What we'll ship:**
@@ -25,7 +25,7 @@ New ClickHouse versions bring big wins, so we should be able to upgrade faster. 
 * Failing that: consolidated secret sources and an automated, zero-downtime way to rotate them
 * An end to our reliance on the default user
 
-### 🚚 ClickHouse migration system - (Driver: <TeamMember name="Paweł Szczur" />)
+### 🚚 ClickHouse migration system - (Driver: <TeamMember name="Pawel Szczur" />)
 Our ClickHouse migrations suck and our topology is very complex. We should figure out a good way of doing this.
 
 **What we'll ship:**
@@ -33,20 +33,13 @@ Our ClickHouse migrations suck and our topology is very complex. We should figur
 * Good reporting and good workflows
 * Automatic schema drift detection that proposes queries to fix it
 
-### 🗑️ Data lifecycle management - (Driver: <TeamMember name="Paweł Szczur" />)
+### 🗑️ Data lifecycle management - (Driver: <TeamMember name="Pawel Szczur" />)
 We need to delete data all the time, and our systems for it need to be top-notch.
 
 **What we'll ship:**
 * Self-driving DataDeletionRequests, with minimal human intervention
 * Person and team deletion mapped across systems and topologies
 * Per-team retention periods
-
-### 🚦 Query proxy for ClickHouse - (Driver: <TeamMember name="Matt Field" />)
-We want more control over the queries hitting ClickHouse - resource usage, queueing, load shedding, routing, and adherence to the tagging schema.
-
-**What we'll ship:**
-* A ClickHouse query proxy
-* The PostHog app talking to ClickHouse through the proxy
 
 ### 🤖 Self-driving operations - (Driver: <TeamMember name="Bryan Ciaraldi" />)
 Interrupt-driven ops has the biggest impact on the team's ability to ship: operational toil, alert noise, and "fear of breaking ClickHouse" all track to it. We make routine operations self-driving so we're only interrupted when judgment is actually required.

@@ -8,10 +8,11 @@ import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
 import { IconGraph, IconWarning, IconAIText, IconWrench, IconPlug } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import CalloutBox from 'components/Docs/CalloutBox'
+import WizardCommand from 'components/WizardCommand'
 
-<CalloutBox icon="IconFlask" title="MCP Analytics is in alpha" type="action">
+<CalloutBox icon="IconFlask" title="MCP Analytics is in beta" type="action">
 
-`@posthog/mcp` is published as a `0.1.x` release on npm. We're building it in public – the event shape, options, and tracing behavior may still change before `1.0`. Pin a specific version and don't depend on it for production reporting yet. A Python SDK and a `npx @posthog/wizard mcp-analytics add` installer are on the roadmap.
+`@posthog/mcp` is published as a `0.1.x` release on npm. We're building it in public – the event shape, options, and tracing behavior may still change before `1.0`. Pin a specific version and don't depend on it for production reporting yet.
 
 </CalloutBox>
 
@@ -32,7 +33,11 @@ MCP Analytics gives you visibility into how AI agents actually use the MCP serve
 - 🧵 The full session, end to end
 - 🚧 Capabilities the agent wished existed (with `reportMissing`)
 
-The SDK supports any TypeScript MCP server built on `@modelcontextprotocol/sdk`. Install it from npm and call `instrument()` once at startup. You pass your `posthog-node` client as the required second argument:
+The SDK supports any TypeScript MCP server built on `@modelcontextprotocol/sdk`. The fastest way to get set up is our wizard, which installs the package and wires up `instrument()` for you (it also works for [LLM coding agents](/blog/envoy-wizard-llm-agent) like Cursor and Bolt):
+
+<WizardCommand command="mcp-analytics" />
+
+Prefer to do it by hand? Install it from npm and call `instrument()` once at startup. You pass your `posthog-node` client as the required second argument:
 
 ```bash
 npm install @posthog/mcp posthog-node
@@ -120,7 +125,7 @@ Learn about intent capture
     icon="IconLineGraph"
 >
 
-Every event is a normal PostHog event, so insights, dashboards, alerts, and SQL all work without further setup – and the preview [MCP Analytics view](/docs/mcp-analytics) gives you the most useful cuts out of the box. The four queries we suggest building (or reading straight from the dashboard) first:
+Every event is a normal PostHog event, so insights, dashboards, alerts, and SQL all work without further setup – and the [MCP Analytics view](/docs/mcp-analytics) (in beta – [enable the feature preview](https://app.posthog.com/settings/user-feature-previews#mcp-analytics)) gives you the most useful cuts out of the box. The four queries we suggest building (or reading straight from the dashboard) first:
 
 - ### <IconGraph className="text-blue w-7 -mt-1 inline-block"/> Top tools per server
   Where is your agent traffic concentrated? Which tools earn their keep?
@@ -230,7 +235,7 @@ Privacy & redaction
 
 ---
 
-That's it. You're ready to ship `@posthog/mcp` to production agents – within the alpha caveats above.
+That's it. You're ready to ship `@posthog/mcp` to production agents – within the beta caveats above.
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/installation">
 Install MCP Analytics

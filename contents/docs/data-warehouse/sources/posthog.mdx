@@ -270,6 +270,27 @@ The `system.cohort_calculation_history` table tracks cohort calculation runs, us
 | `finished_at` | When the calculation finished                   |
 | `error_code`  | Error code if the calculation failed            |
 
+### `system.dashboard_tiles`
+
+The `system.dashboard_tiles` table contains dashboard tile layout information from your project. Each tile represents a placed element on a dashboard (insight, text, or button).
+
+| Column                   | Description                                               |
+| ------------------------ | --------------------------------------------------------- |
+| `id`                     | Unique identifier for the dashboard tile                  |
+| `team_id`                | Team ID the tile belongs to                               |
+| `dashboard_id`           | ID of the parent dashboard                                |
+| `insight_id`             | ID of the linked insight (if applicable)                  |
+| `text_id`                | ID of the linked text tile (if applicable)                |
+| `button_tile_id`         | ID of the linked button tile (if applicable)              |
+| `layouts`                | JSON containing tile layout and positioning configuration |
+| `color`                  | Color of the tile                                         |
+| `show_description`       | Whether to show the description                           |
+| `transparent_background` | Whether the tile has a transparent background             |
+| `filters_overrides`      | JSON containing filter overrides for the tile             |
+| `deleted`                | Whether the tile is deleted (1 = yes, 0 = no)             |
+
+> **Note:** This table inherits dashboard RBAC permissions. You can only query tiles for dashboards you have access to.
+
 ### `system.data_warehouse_tables`
 
 The `system.data_warehouse_tables` table contains metadata about data warehouse tables in your project.
@@ -335,6 +356,44 @@ The `system.early_access_features` table contains early access feature definitio
 | `stage`             | Current stage (`draft`, `alpha`, `beta`, `general-availability`, `archived`) |
 | `documentation_url` | URL to documentation                                                         |
 | `created_at`        | When the feature was created                                                 |
+
+
+### `system.data_modeling_views`
+
+The `system.data_modeling_views` table contains metadata about data modeling views (saved queries) in your project. These are the views you can [materialize](/docs/data-warehouse/views/materialize) in the data warehouse.
+
+| Column           | Description                                          |
+|------------------|------------------------------------------------------|
+| `id`             | Unique identifier for the view                       |
+| `team_id`        | Team ID the view belongs to                          |
+| `name`           | Name of the data modeling view                       |
+| `status`         | Current status of the view                           |
+| `columns`        | JSON containing column definitions                   |
+| `query`          | JSON containing the view's query definition          |
+| `last_run_at`    | When the view was last run                           |
+| `is_materialized`| Whether the view is materialized (1 = yes, 0 = no)  |
+| `deleted`        | Whether the view is deleted (1 = yes, 0 = no)        |
+| `deleted_at`     | When the view was deleted                            |
+| `created_at`     | When the view was created                            |
+| `updated_at`     | When the view was last updated                       |
+
+### `system.data_modeling_jobs`
+
+The `system.data_modeling_jobs` table tracks data modeling job runs, useful for monitoring materialization status and debugging.
+
+| Column                 | Description                                               |
+|------------------------|-----------------------------------------------------------|
+| `id`                   | Unique identifier for the job                             |
+| `team_id`              | Team ID the job belongs to                                |
+| `data_modeling_view_id`| ID of the data modeling view being materialized           |
+| `status`               | Current status of the job                                 |
+| `rows_materialized`    | Number of rows materialized                               |
+| `rows_expected`        | Number of rows expected to be materialized                |
+| `error`                | Error message if the job failed                           |
+| `storage_delta_mib`    | Change in storage size in MiB                             |
+| `last_run_at`          | When the job was last run                                 |
+| `created_at`           | When the job was created                                  |
+| `updated_at`           | When the job was last updated                             |
 
 ### `system.error_tracking_issues`
 
@@ -513,17 +572,20 @@ FROM system.information_schema.columns
 WHERE table_name = 'events'
 ```
 
-| Column             | Description                                               |
-| ------------------ | --------------------------------------------------------- |
-| `table_schema`     | Schema the table belongs to                               |
-| `table_name`       | Table the column belongs to                               |
-| `column_name`      | Name of the column                                        |
-| `ordinal_position` | Column position within the table                          |
-| `data_type`        | HogQL type (e.g. `String`, `DateTime`, `Integer`, `JSON`) |
-| `is_nullable`      | Whether the column can be null                            |
-| `is_array`         | Whether the column is an array type                       |
-| `field_kind`       | One of `column`, `expression`, or `virtual_table`         |
-| `description`      | Human-readable description of the column (if available)   |
+| Column             | Description                                                                 |
+| ------------------ | --------------------------------------------------------------------------- |
+| `table_schema`     | Schema the table belongs to                                                 |
+| `table_name`       | Table the column belongs to                                                 |
+| `column_name`      | Name of the column                                                          |
+| `ordinal_position` | Column position within the table                                            |
+| `data_type`        | HogQL type (e.g. `String`, `DateTime`, `Integer`, `JSON`)                   |
+| `is_nullable`      | Whether the column can be null                                              |
+| `is_array`         | Whether the column is an array type                                         |
+| `field_kind`       | One of `column`, `expression`, or `virtual_table`                           |
+| `description`      | Human-readable description of the column (if available)                     |
+| `null_fraction`    | Fraction of NULL values in the column, 0.0–1.0 (data warehouse tables only) |
+| `min_value`        | Minimum observed value from Delta-log stats (data warehouse tables only)    |
+| `max_value`        | Maximum observed value from Delta-log stats (data warehouse tables only)    |
 
 ### `system.information_schema.relationships`
 
@@ -588,17 +650,20 @@ FROM system.information_schema.tables
 
 Lists columns for each table with their types and descriptions.
 
-| Column             | Description                                                    |
-| ------------------ | -------------------------------------------------------------- |
-| `table_schema`     | Schema the table belongs to                                    |
-| `table_name`       | Name of the table the column belongs to                        |
-| `column_name`      | Name of the column                                             |
-| `ordinal_position` | Position of the column within the table (1-indexed)            |
-| `data_type`        | HogQL data type (e.g. `String`, `Integer`, `DateTime`, `JSON`) |
-| `is_nullable`      | Whether the column accepts null values                         |
-| `is_array`         | Whether the column is an array type                            |
-| `field_kind`       | Kind of field: `column`, `expression`, or `virtual_table`      |
-| `description`      | Human-readable description of the column (nullable)            |
+| Column             | Description                                                                 |
+| ------------------ | --------------------------------------------------------------------------- |
+| `table_schema`     | Schema the table belongs to                                                 |
+| `table_name`       | Name of the table the column belongs to                                     |
+| `column_name`      | Name of the column                                                          |
+| `ordinal_position` | Position of the column within the table (1-indexed)                         |
+| `data_type`        | HogQL data type (e.g. `String`, `Integer`, `DateTime`, `JSON`)              |
+| `is_nullable`      | Whether the column accepts null values                                      |
+| `is_array`         | Whether the column is an array type                                         |
+| `field_kind`       | Kind of field: `column`, `expression`, or `virtual_table`                   |
+| `description`      | Human-readable description of the column (nullable)                         |
+| `null_fraction`    | Fraction of NULL values in the column, 0.0–1.0 (data warehouse tables only) |
+| `min_value`        | Minimum observed value from Delta-log stats (data warehouse tables only)    |
+| `max_value`        | Maximum observed value from Delta-log stats (data warehouse tables only)    |
 
 ```sql
 SELECT column_name, data_type, is_nullable, description

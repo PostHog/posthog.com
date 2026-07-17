@@ -311,6 +311,7 @@ export const QuestionForm = ({
     ...other
 }: QuestionFormProps) => {
     const { user, getJwt, logout } = useUser()
+    const posthog = usePostHog()
     const [formValues, setFormValues] = useState<QuestionFormValues | null>(null)
     const [view, setView] = useState<string | null>(initialView || null)
     const [loading, setLoading] = useState(false)
@@ -377,6 +378,18 @@ export const QuestionForm = ({
                 data,
             }),
         }).then((res) => res.json())
+
+        // Fires only for new questions (replies use a separate `reply()` path), and only
+        // after the API confirms creation — a reliable count of new questions asked.
+        if (questionData?.id) {
+            posthog?.capture('squeak question created', {
+                questionId: questionData.id,
+                topicId: topicID,
+                slug,
+                subject,
+            })
+        }
+
         return questionData
     }
 

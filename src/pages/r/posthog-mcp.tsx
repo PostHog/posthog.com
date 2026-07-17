@@ -7,7 +7,7 @@ import { ProductScreenshot } from 'components/ProductScreenshot'
 import { ProductVideo } from 'components/ProductVideo'
 import Link from 'components/Link'
 import CloudinaryImage from 'components/CloudinaryImage'
-import { SingleCodeBlock } from 'components/CodeBlock'
+import PlatformInstall from 'components/PlatformInstall'
 import ProductList from 'components/ProductList'
 import WizardCTA from 'components/WizardCTA'
 import ElevenLabsLogo from 'components/CustomerLogos/ElevenLabsLogo'
@@ -46,7 +46,7 @@ export default function PostHogMCPLanding(): JSX.Element {
         <>
             <SEO
                 title="PostHog MCP - A product analyst that lives in your editor"
-                description="PostHog MCP brings self-driving into your editor: your AI agents grab session replays, build funnels, and turn bug reports into PRs from Claude Code, Cursor, Zed, or Windsurf. No per-seat pricing, no credit card."
+                description="With PostHog MCP, your AI agents can grab session replays, summarize user behavior, build funnels, and turn bug reports into PRs, all from Claude Code, Cursor, Zed, or Windsurf. No per-seat pricing, no credit card."
                 noindex
             />
             <ReaderView
@@ -61,7 +61,7 @@ export default function PostHogMCPLanding(): JSX.Element {
                     <div>
                         <h1 className="text-3xl md:text-5xl !mb-4">PostHog MCP</h1>
                         <p className="text-lg md:text-xl mb-6 text-secondary">
-                            Self-driving, in your editor – a product analyst that lives where you code. Ask anything.
+                            A product analyst that lives in your editor. Ask anything.
                         </p>
                         <div className="flex flex-wrap gap-2 mb-6">
                             <CallToAction type="primary" size="md" to="https://app.posthog.com/signup">
@@ -151,9 +151,7 @@ export default function PostHogMCPLanding(): JSX.Element {
                                 <strong>Already using PostHog and just want to add the MCP?</strong>
                             </p>
 
-                            <SingleCodeBlock language="bash" showAskAI={false}>
-                                npx @posthog/wizard mcp add
-                            </SingleCodeBlock>
+                            <PlatformInstall variant="inline" command="mcp add" slim />
 
                             <div className="mt-4">
                                 <CallToAction

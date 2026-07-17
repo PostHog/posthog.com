@@ -65,12 +65,12 @@ export const aiObservability = {
     seo: {
         title: 'AI Observability – Observe and optimize AI products in PostHog',
         description:
-            'Track traces, costs, latency, and errors across your AI features, giving agents the context to fix LLM behavior and make your product self-driving.',
+            'Monitor and optimize AI products with AI Observability. Get full observability across every conversation. See model performance, cost, and errors.',
     },
     overview: {
         title: 'Observe and debug AI in production',
         description:
-            'AI observability is one of the tools that makes your product self-driving: inspect traces, spans, latency, usage, and per-user costs for your AI features – the context agents use to fix LLM behavior.',
+            'Product analytics for LLMs. Inspect traces, spans, latency, usage, and per-user costs for AI-powered features – the context agents use to fix LLM behavior.',
         textColor: 'text-white',
         layout: 'overlay',
     },

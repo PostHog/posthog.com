@@ -24,7 +24,7 @@ To sync Shopify data:
 7. Give your app a name and click **Create**.
 8. You will be redirected to a screen for releasing a new version of your app. Here, you need to:
 9. Set the app URL. Use the default value `https://shopify.dev/apps/default-app-home`.
-10. Choose the app scopes. We recommend that you select all read options for the simplest setup.
+10. Choose the app scopes. We recommend selecting all read options for the simplest setup, but only `read_orders` is required to sync core order data. See [scope requirements](#scope-requirements) for details.
 11. Click **Release** and fill in the optional release details.
 12. Go to **Home** in the Dev Dashboard and click **Install app** to install the app in your store.
 13. Go to **Settings** in the Dev Dashboard and note your `Client ID` and `Secret` for later.
@@ -48,6 +48,17 @@ You can see details and progress in the data pipelines [sources tab](https://app
 ## Configuration
 
 <SourceParameters />
+
+## Scope requirements
+
+The `read_orders` scope is sufficient to sync core order data. However, some fields in the orders table require additional scopes:
+
+| Field               | Required scope (any one)                                                                                                 |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `fulfillmentOrders` | `read_merchant_managed_fulfillment_orders`, `read_third_party_fulfillment_orders`, or `read_assigned_fulfillment_orders` |
+| `paymentTerms`      | `read_payment_terms`                                                                                                     |
+
+> **Note:** If your token doesn't have these additional scopes, the orders sync still succeeds — those fields are simply omitted from the synced data. You don't need to grant extra permissions for data you don't need.
 
 ## Supported tables
 

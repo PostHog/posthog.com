@@ -1,4 +1,5 @@
 import React from 'react'
+import { graphql } from 'gatsby'
 import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -11,11 +12,11 @@ import type { TabbedCarouselTab } from 'components/TabbedCarousel'
 import Link from 'components/Link'
 import WizardCommand from 'components/WizardCommand'
 import { SignalsCallout } from 'components/Code/SignalsCallout'
+import { useAppSettings } from '../../context/App'
 import {
     IconArrowRight,
     IconAtSign,
     IconBolt,
-    IconBrowser,
     IconCheckCircle,
     IconCode,
     IconCoffee,
@@ -24,16 +25,15 @@ import {
     IconPeople,
     IconPlug,
     IconPullRequest,
-    IconRefresh,
     IconRewindPlay,
     IconSearch,
     IconShieldLock,
     IconSparkles,
     IconStack,
     IconTarget,
+    IconTerminal,
     IconWarning,
 } from '@posthog/icons'
-import { IconMCP } from 'components/OSIcons/Icons'
 
 type IconComponent = React.ComponentType<{ className?: string }>
 type CloudinarySrc = `https://res.cloudinary.com/${string}`
@@ -42,9 +42,39 @@ const LOOP_SCOUTS_IMAGE: CloudinarySrc = 'https://res.cloudinary.com/dmukukwp6/i
 const LOOP_INBOX_IMAGE: CloudinarySrc =
     'https://res.cloudinary.com/dmukukwp6/image/upload/inbox_prs_cloud_f44f8ba69b.png'
 const LOOP_MERGE_IMAGE: CloudinarySrc = 'https://res.cloudinary.com/dmukukwp6/image/upload/4_merge_ffb549df4a.png'
+const sectionHeadingClassName = 'my-6 mt-12 text-2xl font-bold @md/reader-content:text-3xl'
 
 const Highlight = ({ children }: { children: React.ReactNode }) => (
     <span className="bg-highlight p-0.5 font-bold text-red dark:text-yellow">{children}</span>
+)
+
+const coloredHighlightClasses = {
+    blue: 'bg-blue/10 text-blue dark:bg-blue/20',
+    purple: 'bg-purple/10 text-purple dark:bg-purple/20',
+}
+
+const ColoredHighlight = ({ children, color }: { children: React.ReactNode; color: 'blue' | 'purple' }) => (
+    <span className={`rounded-sm px-0.5 ${coloredHighlightClasses[color]}`}>{children}</span>
+)
+
+const flowingGradientClasses = {
+    default: 'from-yellow via-green to-blue',
+    chill: 'from-red-2 via-purple/70 to-blue-2',
+}
+
+const FlowingGradientHighlight = ({
+    children,
+    palette = 'default',
+}: {
+    children: React.ReactNode
+    palette?: keyof typeof flowingGradientClasses
+}) => (
+    <em
+        className={`inline bg-gradient-to-r ${flowingGradientClasses[palette]} bg-[length:200%_200%] bg-clip-text not-italic text-transparent animate-gradient-rotate motion-reduce:animate-none`}
+        style={{ animationDuration: '12s' }}
+    >
+        {children}
+    </em>
 )
 
 const Badge = ({ children }: { children: React.ReactNode }) => (
@@ -95,16 +125,54 @@ const IconGroupColumns = ({ groups }: { groups: IconGroup[] }) => (
     </div>
 )
 
-const TabPanel = ({ title, children, image }: { title: string; children: React.ReactNode; image: CloudinarySrc }) => (
-    <div className="rounded bg-primary p-4 @xl:p-6">
-        <h2 className="mt-0 mb-2 text-2xl font-bold">{title}</h2>
-        {/* text-[15px] matches the page body copy – the codebase defines .prose-sm as text-[15px] */}
-        <div className="text-secondary text-[15px]">{children}</div>
-        <div className="-mx-4 -mb-4 mt-4 overflow-hidden rounded-b leading-[0] @xl:-mx-6 @xl:-mb-6">
-            <CloudinaryImage src={image} alt={title} imgClassName="w-full block" />
+type TabPanelHighlightColor = 'blue' | 'red' | 'yellow' | 'green'
+
+const tabPanelHighlightClasses: Record<TabPanelHighlightColor, string> = {
+    blue: 'bg-blue/10 text-blue dark:bg-blue/20',
+    red: 'bg-red/10 text-red dark:bg-red/20',
+    yellow: 'bg-yellow/15 text-yellow dark:bg-yellow/20',
+    green: 'bg-green/10 text-green dark:bg-green/20',
+}
+
+const TabPanel = ({
+    title,
+    highlightedTitle,
+    titleSuffix,
+    highlightColor = 'blue',
+    children,
+    image,
+}: {
+    title: string
+    highlightedTitle?: string
+    titleSuffix?: string
+    highlightColor?: TabPanelHighlightColor
+    children: React.ReactNode
+    image: CloudinarySrc
+}) => {
+    const fullTitle = [title, highlightedTitle, titleSuffix].filter(Boolean).join(' ')
+
+    return (
+        <div className="rounded bg-primary p-4 @xl:p-6">
+            <h2 className="mt-0 mb-2 text-2xl font-bold">
+                {title}
+                {highlightedTitle ? (
+                    <>
+                        {' '}
+                        <span className={`rounded-sm px-0.5 ${tabPanelHighlightClasses[highlightColor]}`}>
+                            {highlightedTitle}
+                        </span>
+                        {titleSuffix ? ` ${titleSuffix}` : null}
+                    </>
+                ) : null}
+            </h2>
+            {/* text-[15px] matches the page body copy – the codebase defines .prose-sm as text-[15px] */}
+            <div className="text-secondary text-[15px]">{children}</div>
+            <div className="-mx-4 -mb-4 mt-4 overflow-hidden rounded-b leading-[0] @xl:-mx-6 @xl:-mb-6">
+                <CloudinaryImage src={image} alt={fullTitle} imgClassName="w-full block" />
+            </div>
         </div>
-    </div>
-)
+    )
+}
 
 // Signal sources shown on the carousel's first slide, à la the homepage "debug and fix" slide.
 const signalSources: { Icon: IconComponent; color: string; name: string; description: string }[] = [
@@ -162,12 +230,13 @@ const loopTabs: TabbedCarouselTab[] = [
     {
         value: 'signals',
         label: 'Signals',
-        color: 'bg-red',
+        color: 'bg-blue',
         activeText: 'text-white',
         progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
         content: (
             <TabPanel
-                title="Notable things happening in your product"
+                title="Notable things"
+                highlightedTitle="happening in your product"
                 image="https://res.cloudinary.com/dmukukwp6/image/upload/report_177cacd2dd.png"
             >
                 <p className="m-0">
@@ -201,11 +270,17 @@ const loopTabs: TabbedCarouselTab[] = [
     {
         value: 'scouts',
         label: 'Scouts',
-        color: 'bg-blue',
+        color: 'bg-red',
         activeText: 'text-white',
         progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
         content: (
-            <TabPanel title="Specialist agents that go deep on one surface" image={LOOP_SCOUTS_IMAGE}>
+            <TabPanel
+                title="Specialist agents that"
+                highlightedTitle="go deep"
+                titleSuffix="on one surface"
+                highlightColor="red"
+                image={LOOP_SCOUTS_IMAGE}
+            >
                 <p className="m-0">
                     Scouts <Badge>Beta</Badge> run on a schedule and build durable memory of what they've seen.
                 </p>
@@ -221,7 +296,13 @@ const loopTabs: TabbedCarouselTab[] = [
         activeText: 'text-black',
         progressBar: 'bg-black/70 shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
         content: (
-            <TabPanel title="One prioritized list of work to review" image={LOOP_INBOX_IMAGE}>
+            <TabPanel
+                title="One"
+                highlightedTitle="prioritized list"
+                titleSuffix="of work to review"
+                highlightColor="yellow"
+                image={LOOP_INBOX_IMAGE}
+            >
                 <p className="m-0">
                     The Inbox <Badge>Beta</Badge> clusters related findings into researched reports, ranked by priority.
                     Reviewers are suggested from git blame (whoever last touched that bit of code) – add your own if
@@ -266,7 +347,12 @@ const loopTabs: TabbedCarouselTab[] = [
         activeText: 'text-white',
         progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
         content: (
-            <TabPanel title="Actionable reports, opened as pull requests" image={LOOP_MERGE_IMAGE}>
+            <TabPanel
+                title="Actionable reports, opened as"
+                highlightedTitle="pull requests"
+                highlightColor="green"
+                image={LOOP_MERGE_IMAGE}
+            >
                 <p className="m-0">
                     When something needs a code change, an agent clones your repo into a sandbox, traces the root cause,
                     writes the code, and opens a pull request. If a report <em>isn't</em> actionable, it triggers a
@@ -400,26 +486,219 @@ const SlackReportsRow = (): JSX.Element => {
     )
 }
 
+type SelfDrivingPR = {
+    prNumber: number
+    summary: string
+    type: string
+    scope: string
+    url: string
+    mergedAt: string
+}
+
+// Conventional-commit type -> tag text color + left accent-stripe color for each ticker card.
+const PR_TYPE_STYLES: Record<string, { label: string; accent: string }> = {
+    fix: { label: 'text-red', accent: 'bg-red' },
+    feat: { label: 'text-green', accent: 'bg-green' },
+    perf: { label: 'text-blue', accent: 'bg-blue' },
+    refactor: { label: 'text-purple', accent: 'bg-purple' },
+    chore: { label: 'text-secondary', accent: 'bg-orange' },
+    docs: { label: 'text-secondary', accent: 'bg-orange' },
+    test: { label: 'text-secondary', accent: 'bg-orange' },
+    style: { label: 'text-secondary', accent: 'bg-orange' },
+    build: { label: 'text-secondary', accent: 'bg-orange' },
+    ci: { label: 'text-secondary', accent: 'bg-orange' },
+}
+const prTypeStyle = (type: string) => PR_TYPE_STYLES[type] ?? { label: 'text-primary', accent: 'bg-orange' }
+
+// Soft fade on both edges so cards scroll in/out instead of hard-clipping.
+const TICKER_FADE = 'linear-gradient(to right, transparent, black 4%, black 96%, transparent)'
+
+// Short, human "merged N ago" – computed in the browser so it stays fresh between rebuilds.
+const timeAgo = (iso: string): string => {
+    if (!iso) return ''
+    const then = new Date(iso).getTime()
+    // Guard against missing/epoch dates (e.g. a PR with no merge date) rendering as "2949w ago".
+    if (Number.isNaN(then) || then <= 0) return ''
+    const seconds = Math.max(0, (Date.now() - then) / 1000)
+    const days = Math.floor(seconds / 86400)
+    if (days >= 7) return `${Math.floor(days / 7)}w ago`
+    if (days >= 1) return `${days}d ago`
+    const hours = Math.floor(seconds / 3600)
+    if (hours >= 1) return `${hours}h ago`
+    const minutes = Math.floor(seconds / 60)
+    return minutes >= 1 ? `${minutes}m ago` : 'just now'
+}
+
+const TickerCard = ({ pr }: { pr: SelfDrivingPR }): JSX.Element => {
+    const style = prTypeStyle(pr.type)
+    return (
+        <Link
+            to={pr.url}
+            external
+            externalNoIcon
+            className="group relative flex w-[300px] flex-shrink-0 items-start gap-2.5 overflow-hidden rounded-md border border-primary bg-primary py-2.5 pl-4 pr-3.5 shadow-sm transition-all duration-150 hover:-translate-y-0.5 hover:border-secondary hover:shadow-md"
+        >
+            {/* Type-colored accent stripe down the left edge */}
+            <span className={`absolute inset-y-0 left-0 w-1 ${style.accent}`} aria-hidden />
+            <IconPullRequest className="mt-0.5 size-4 shrink-0 text-green" />
+            <div className="min-w-0 flex-1">
+                <div className="flex items-center gap-1.5 font-mono text-[11px] font-bold uppercase tracking-wide">
+                    <span className={style.label}>{pr.type || 'merged'}</span>
+                    {pr.scope && <span className="truncate normal-case text-secondary">{pr.scope}</span>}
+                </div>
+                <p className="m-0 truncate text-sm text-primary group-hover:underline">{pr.summary}</p>
+                <div className="mt-1 flex items-center gap-2 text-xs text-secondary">
+                    <span className="inline-flex items-center gap-1 rounded-full bg-green/10 px-1.5 py-px font-semibold text-green">
+                        <IconCheckCircle className="size-3" />
+                        merged
+                    </span>
+                    <span className="font-mono">#{pr.prNumber}</span>
+                    <span aria-hidden>·</span>
+                    {/* Relative time is computed at render, so it differs between the SSR build and
+                        the client – suppress the expected hydration mismatch on this text node. */}
+                    <span suppressHydrationWarning>{timeAgo(pr.mergedAt)}</span>
+                </div>
+            </div>
+        </Link>
+    )
+}
+
+// One continuously scrolling row. `direction` sets scroll direction (1 = left→right rail advance,
+// -1 = the reverse). Pauses on hover/focus and stops entirely for reduced-motion users.
+const TickerRow = ({ prs, direction }: { prs: SelfDrivingPR[]; direction: 1 | -1 }): JSX.Element => {
+    const railRef = React.useRef<HTMLDivElement>(null)
+    const pausedRef = React.useRef(false)
+
+    // Two copies of the list so scrollLeft can wrap seamlessly at either end.
+    const loop = [...prs, ...prs]
+
+    React.useEffect(() => {
+        const rail = railRef.current
+        if (!rail || prs.length === 0) return
+        if (window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches) return
+
+        let frame = 0
+        const step = () => {
+            if (!pausedRef.current) {
+                rail.scrollLeft += 0.5 * direction
+                const half = rail.scrollWidth / 2
+                if (half > 0) {
+                    if (rail.scrollLeft >= half) rail.scrollLeft -= half
+                    else if (rail.scrollLeft <= 0) rail.scrollLeft += half
+                }
+            }
+            frame = requestAnimationFrame(step)
+        }
+        frame = requestAnimationFrame(step)
+        return () => cancelAnimationFrame(frame)
+    }, [prs.length, direction])
+
+    const pause = () => {
+        pausedRef.current = true
+    }
+    const resume = () => {
+        pausedRef.current = false
+    }
+
+    return (
+        <div
+            ref={railRef}
+            onMouseEnter={pause}
+            onMouseLeave={resume}
+            onFocusCapture={pause}
+            onBlurCapture={resume}
+            className="flex gap-3 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            style={{ maskImage: TICKER_FADE, WebkitMaskImage: TICKER_FADE }}
+        >
+            {loop.map((pr, i) => (
+                <TickerCard key={`${pr.prNumber}-${i}`} pr={pr} />
+            ))}
+        </div>
+    )
+}
+
+// A "wall of merges": one row when there are only a few PRs, two rows scrolling in
+// opposite directions when there are enough to fill them.
+const SelfDrivingTicker = ({ prs }: { prs: SelfDrivingPR[] }): JSX.Element | null => {
+    if (prs.length === 0) return null
+    const twoRows = prs.length >= 6
+    const mid = Math.ceil(prs.length / 2)
+    const rowA = twoRows ? prs.slice(0, mid) : prs
+    const rowB = twoRows ? prs.slice(mid) : []
+
+    return (
+        <div className="not-prose flex flex-col gap-3">
+            <TickerRow prs={rowA} direction={1} />
+            {rowB.length > 0 && <TickerRow prs={rowB} direction={-1} />}
+        </div>
+    )
+}
+
 const workSurfaces: {
-    icon: IconComponent
+    Icon: IconComponent
     iconColor: string
     label: React.ReactNode
     copy: React.ReactNode
     cta?: React.ReactNode
 }[] = [
     {
-        icon: IconBrowser,
-        iconColor: 'text-blue',
+        Icon: IconBolt,
+        iconColor: 'text-red',
         label: <span className="font-bold text-primary">PostHog web app</span>,
         copy: 'The full product in your browser. Explore your data, review proposed work, and dig into the evidence.',
         cta: (
             <CallToAction to="https://app.posthog.com/signup" externalNoIcon type="primary" size="md">
-                Sign up free
+                Sign up for free
             </CallToAction>
         ),
     },
     {
-        icon: IconCoffee,
+        Icon: IconAtSign,
+        iconColor: 'text-sky-blue',
+        label: (
+            <Link to="/slack" state={{ newWindow: true }} className="font-bold text-primary">
+                PostHog Slack app
+            </Link>
+        ),
+        copy: '@PostHog brings PostHog into Slack channels. Route reports to the ones each team already watches (hedgehog mode not included).',
+        cta: (
+            <CallToAction to="/slack" state={{ newWindow: true }} type="secondary" size="md">
+                Add to Slack
+            </CallToAction>
+        ),
+    },
+    {
+        Icon: IconPlug,
+        iconColor: 'text-gray',
+        label: (
+            <Link to="/mcp" state={{ newWindow: true }} className="font-bold text-primary">
+                PostHog MCP
+            </Link>
+        ),
+        copy: 'Look ma, no hands! Pull self-driving context into other tools, and pull context from your other tools into self-driving.',
+        cta: (
+            <CallToAction to="/mcp" state={{ newWindow: true }} type="secondary" size="md">
+                Hook it up
+            </CallToAction>
+        ),
+    },
+    {
+        Icon: IconTerminal,
+        iconColor: 'text-green',
+        label: (
+            <Link to="/docs/cli" state={{ newWindow: true }} className="font-bold text-primary">
+                PostHog CLI
+            </Link>
+        ),
+        copy: 'Self-driving from your terminal. Query your data and drive agents right where you already work, and wire it into your scripts and CI.',
+        cta: (
+            <CallToAction to="/docs/cli" state={{ newWindow: true }} type="secondary" size="md">
+                Read the docs
+            </CallToAction>
+        ),
+    },
+    {
+        Icon: IconCoffee,
         iconColor: 'text-brown dark:text-brown-dark',
         label: (
             <span className="inline-flex items-center gap-2">
@@ -434,29 +713,9 @@ const workSurfaces: {
         copy: 'A desktop app for driving parallel agents to edit your product. The same Inbox and reports live here.',
         cta: (
             <CallToAction to="/code" state={{ newWindow: true }} type="secondary" size="md">
-                Learn more
+                Get the app
             </CallToAction>
         ),
-    },
-    {
-        icon: IconAtSign,
-        iconColor: 'text-sky-blue',
-        label: (
-            <Link to="/slack" state={{ newWindow: true }} className="font-bold text-primary">
-                PostHog Slack app
-            </Link>
-        ),
-        copy: '@PostHog brings PostHog into Slack channels. Route reports to the ones each team already watches (hedgehog mode not included).',
-    },
-    {
-        icon: IconMCP,
-        iconColor: 'text-purple',
-        label: (
-            <Link to="/mcp" state={{ newWindow: true }} className="font-bold text-primary">
-                PostHog MCP
-            </Link>
-        ),
-        copy: 'Look ma, no hands! Pull self-driving context into other tools, and pull context from your other tools into self-driving.',
     },
 ]
 
@@ -481,7 +740,7 @@ const workModes: WorkMode[] = [
     },
     {
         tag: 'Reactive',
-        tagClass: 'bg-yellow/15 text-yellow',
+        tagClass: 'bg-purple/15 text-purple',
         title: 'It acts on your data',
         copy: 'This is what the Inbox is for. It watches the data you already have in PostHog and turns anything worth acting on into a researched report, often with a fix attached.',
         guard: {
@@ -501,12 +760,19 @@ const workModes: WorkMode[] = [
     },
 ]
 
-const humanRoles: { heading: string; copy: string; image: string; alt: string }[] = [
+type HumanRole = {
+    heading: string
+    copy: string
+    image: CloudinarySrc
+    alt: string
+}
+
+const humanRoles: HumanRole[] = [
     {
         heading: "You're (still) the driver",
         copy: "Like a Waymo, a self-driving product doesn't decide where you're going (it just makes getting there easier). You choose where the product goes next.",
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/hog_head_point_b6a2ffb400.png',
-        alt: 'A hedgehog gesturing toward the work',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/hog_head_point_b6a2ffb400.png',
+        alt: 'A hedgehog pointing to the side',
     },
     {
         heading: 'Skip to the good part',
@@ -651,7 +917,17 @@ const faqItems = [
     },
 ]
 
-export default function SelfDrivingPage(): JSX.Element {
+export default function SelfDrivingPage({
+    data,
+}: {
+    data?: { allSelfDrivingPullRequest?: { nodes: SelfDrivingPR[] } }
+}): JSX.Element {
+    const { siteSettings } = useAppSettings()
+
+    const selfDrivingPRs = data?.allSelfDrivingPullRequest?.nodes ?? []
+    const humanRoleCardBackground = siteSettings.heaterMode
+        ? 'bg-primary/75 backdrop-blur-3xl will-change-[transform,backdrop-filter] transform-gpu'
+        : 'bg-primary bg-mesh-green-light dark:bg-mesh-green-dark'
     return (
         <>
             <SEO
@@ -661,72 +937,67 @@ export default function SelfDrivingPage(): JSX.Element {
             />
             <ReaderView leftSidebar={<LeftSidebarContent />} title="self-driving.md" hideTitle>
                 <div className="relative z-10">
-                    {/* Hero: heading sits on the left; the flaming-car banner backdrop fills the
-                        bottom-right of the window behind it */}
-                    <div className="not-prose mb-6 @3xl:mb-10 pt-1 @md/reader-content:pt-2 @lg/reader-content:pt-4 @4xl:pb-6 relative border-b border-primary shadow-xl -mx-4 @md/reader-content:-mx-6 @xl/reader-content:-mx-8 px-4 @md/reader-content:px-6 @xl/reader-content:px-8">
-                        <div className="grid @3xl:grid-cols-5 gap-4 @3xl:gap-8 max-w-7xl mx-auto">
-                            <div className="@3xl:col-span-2">
-                                <h1 className="@md/reader-content:text-3xl @xl/reader-content:text-4xl mb-2 @3xl:mb-4">
+                    <div className="not-prose mb-8 pt-2 @lg/reader-content:pt-6 @3xl:mb-12">
+                        <section className="relative mx-auto max-w-5xl overflow-hidden rounded-md border border-primary bg-primary shadow-2xl">
+                            <div className="relative z-20 p-5 pb-6 @md/reader-content:p-7 @xl/reader-content:p-10">
+                                <h1 className="m-0 mb-5 text-3xl !leading-[1.2] @md/reader-content:text-4xl @3xl/reader-content:text-5xl">
                                     Shift your product into <Highlight>self-driving</Highlight> mode
                                 </h1>
-                                <p className="@xl:text-[17px]">
-                                    <strong>You have a new pull request ready for review.</strong> (Yep, really.)
+                                <p className="m-0 text-[15px] text-secondary @xl/reader-content:text-[17px]">
+                                    <strong className="text-primary">
+                                        You have a new pull request ready for review.
+                                    </strong>{' '}
+                                    <em>(Yep, really.)</em>
                                 </p>
-                                <p className="@xl:text-[17px]">
+                                <p className="mb-0 mt-6 max-w-3xl text-[15px] text-secondary @xl/reader-content:text-[17px]">
                                     While you slept, PostHog dug through your product data, found what was worth fixing,
                                     and had agents do the work. <Highlight>All you need to do is hit merge.</Highlight>
                                 </p>
-                                <div className="@container relative z-10">
-                                    <div className="flex flex-col @[22rem]:flex-row @[22rem]:items-center gap-4 mb-4 mt-2">
-                                        <CallToAction
-                                            to="/docs/self-driving/inbox"
-                                            state={{ newWindow: true }}
-                                            size="sm"
-                                        >
-                                            Learn about Inbox
-                                        </CallToAction>
-                                        <span className="text-sm text-secondary">
-                                            New to PostHog?{' '}
-                                            <Link to="https://app.posthog.com/signup" external>
-                                                Sign up
-                                            </Link>
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <p className="text-sm text-secondary">
+                                <p className="mb-0 mt-6 text-sm text-secondary">
                                     <span className="inline-block">Unlimited reports.</span>{' '}
                                     <span className="inline-block">Priced by pull request.</span>{' '}
                                     <span className="inline-block">3 free each month.</span>
                                 </p>
+                                <div className="mt-6 flex flex-col items-start gap-3 @sm/reader-content:flex-row @sm/reader-content:items-center">
+                                    <CallToAction to="/docs/self-driving/inbox" state={{ newWindow: true }} size="md">
+                                        Learn about inbox
+                                    </CallToAction>
+                                    <span className="whitespace-nowrap text-[13px] text-secondary">
+                                        New to PostHog?{' '}
+                                        <Link to="https://app.posthog.com/signup" external>
+                                            Sign up
+                                        </Link>
+                                    </span>
+                                </div>
                             </div>
-                            <aside className="@3xl:col-span-3">
-                                {/* Lead: your product just opened a pull request */}
+
+                            <div className="relative z-10 mx-4 h-64 overflow-hidden rounded-t border border-b-0 border-primary bg-accent @sm/reader-content:h-72 @md/reader-content:mx-7 @xl/reader-content:mx-10 @xl/reader-content:h-80">
                                 <CloudinaryImage
                                     src="https://res.cloudinary.com/dmukukwp6/image/upload/inbox_light_9aa9eed335.png"
                                     alt="The Inbox surfacing reports and pull requests across PostHog Code and the cloud"
-                                    className="dark:hidden w-full border border-primary rounded shadow-2xl overflow-hidden"
+                                    className="dark:hidden w-full"
+                                    imgClassName="block w-full"
                                 />
                                 <CloudinaryImage
                                     src="https://res.cloudinary.com/dmukukwp6/image/upload/inbox_dark_216a157762.png"
                                     alt="The Inbox surfacing reports and pull requests across PostHog Code and the cloud"
-                                    className="hidden dark:block w-full border border-primary rounded shadow-2xl overflow-hidden"
+                                    className="hidden dark:block w-full"
+                                    imgClassName="block w-full"
                                 />
-                            </aside>
-                        </div>
-
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/self_driving_banner_fde531c7fb.png"
-                            alt=""
-                            className="absolute bottom-0 right-0 w-full max-w-none flex justify-end"
-                            imgClassName="min-w-[720px] @5xl:min-w-none @5xl:max-h-[250px] transition-all"
-                        />
+                            </div>
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/self_driving_with_road_3ff29b8dc3.png"
+                                alt=""
+                                aria-hidden
+                                imgClassName="pointer-events-none absolute inset-x-0 bottom-0 z-30 block w-full max-w-none"
+                            />
+                        </section>
                     </div>
 
                     <div className="max-w-4xl @7xl:max-w-7xl mx-auto">
                         {/* How a product develops itself */}
-                        <p id="how" className="my-6 text-2xl font-bold @md/reader-content:text-3xl">
-                            How a product <em className="text-gradient not-italic">improves itself</em>
+                        <p id="how" className={sectionHeadingClassName}>
+                            How a product <FlowingGradientHighlight>improves itself</FlowingGradientHighlight>
                         </p>
                         <div className="not-prose my-6">
                             <TabbedCarousel tabs={loopTabs} />
@@ -735,32 +1006,48 @@ export default function SelfDrivingPage(): JSX.Element {
                         {/* …then it loops */}
                         <div
                             data-scheme="secondary"
-                            className="not-prose my-8 rounded-md border border-primary bg-primary p-4 @md/reader-content:p-6"
+                            className="not-prose my-8 grid grid-cols-1 items-center gap-5 rounded-md border border-primary bg-primary p-4 @md/reader-content:p-6 @2xl/reader-content:grid-cols-[minmax(0,1fr)_minmax(12rem,17rem)] @2xl/reader-content:gap-8"
                         >
-                            <div className="flex items-center gap-2 mb-2">
-                                <IconRefresh className="size-4 shrink-0 text-purple" />
-                                <h3 className="m-0 text-base font-bold text-primary">…then it loops</h3>
+                            <div className="col-start-1 row-start-2 @2xl/reader-content:row-start-1">
+                                <h3 className="m-0 mb-3 text-2xl font-bold text-primary @md/reader-content:text-3xl">
+                                    …then it{' '}
+                                    <span className="rounded-sm bg-purple/10 px-0.5 text-purple dark:bg-purple/20">
+                                        loops
+                                    </span>
+                                </h3>
+                                <p className="m-0 text-sm text-secondary">
+                                    Every change ships with the instrumentation to measure it – the agent adds the
+                                    events, feature flags, and experiments as it goes. After it merges, PostHog checks
+                                    whether the metric actually moved. If it didn't, that's a new signal (and the change
+                                    can be rolled back).
+                                </p>
                             </div>
-                            <p className="m-0 text-sm text-secondary">
-                                Every change ships with the instrumentation to measure it – the agent adds the events,
-                                feature flags, and experiments as it goes. After it merges, PostHog checks whether the
-                                metric actually moved. If it didn't, that's a new signal (and the change can be rolled
-                                back).
-                            </p>
-                            <Link
-                                to="/docs/self-driving/self-improving-loop"
-                                state={{ newWindow: true }}
-                                className="mt-4 inline-flex flex-wrap items-center gap-x-2 gap-y-1 text-sm font-semibold"
+                            <div className="col-start-1 row-start-1 flex justify-center @2xl/reader-content:col-start-2 @2xl/reader-content:justify-end">
+                                <CloudinaryImage
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/Group_144036_1_9ce78ec4c5.svg"
+                                    alt="A hedgehog illustrating the self-improving product loop"
+                                    imgClassName="block w-full max-w-[230px] @2xl/reader-content:max-w-[270px]"
+                                />
+                            </div>
+                            <div
+                                className="col-start-1 row-start-3 w-full pt-2 @2xl/reader-content:row-start-2 @2xl/reader-content:pt-0"
+                                style={{ gridColumn: '1 / -1' }}
                             >
-                                {['Signal', 'Research', 'Report', 'PR', 'Ship', 'Measure'].map((step, i) => (
-                                    <React.Fragment key={step}>
-                                        {i > 0 && <IconArrowRight className="size-4 shrink-0 text-secondary" />}
-                                        <span className="text-primary">{step}</span>
-                                    </React.Fragment>
-                                ))}
-                                <IconArrowRight className="size-4 shrink-0 text-secondary" />
-                                <span className="text-red underline dark:text-yellow">The self-improving loop</span>
-                            </Link>
+                                <Link
+                                    to="/docs/self-driving/self-improving-loop"
+                                    state={{ newWindow: true }}
+                                    className="flex w-full flex-wrap items-center justify-center gap-x-2 gap-y-1 text-sm font-semibold"
+                                >
+                                    {['Signal', 'Research', 'Report', 'PR', 'Ship', 'Measure'].map((step, i) => (
+                                        <React.Fragment key={step}>
+                                            {i > 0 && <IconArrowRight className="size-4 shrink-0 text-secondary" />}
+                                            <span className="text-primary">{step}</span>
+                                        </React.Fragment>
+                                    ))}
+                                    <IconArrowRight className="size-4 shrink-0 text-secondary" />
+                                    <span className="text-red underline dark:text-yellow">The self-improving loop</span>
+                                </Link>
+                            </div>
                         </div>
 
                         {/* PostHog agents run on their own, but don't run wild */}
@@ -770,7 +1057,7 @@ export default function SelfDrivingPage(): JSX.Element {
                             className="@lg/reader-content:float-right @lg/reader-content:max-w-[220px] @lg/reader-content:ml-6 mb-4 mt-2"
                             imgClassName="w-full"
                         />
-                        <h3>
+                        <h3 className={sectionHeadingClassName}>
                             PostHog agents run on their own, but <Highlight>don't run wild</Highlight>
                         </h3>
                         <p>
@@ -831,9 +1118,36 @@ export default function SelfDrivingPage(): JSX.Element {
                         />
                         <div className="clear-both" />
 
+                        {/* Live ticker: real self-driving PRs merged into PostHog's own repo */}
+                        {selfDrivingPRs.length > 0 && (
+                            <div className="not-prose my-8 overflow-hidden rounded-md border border-primary bg-accent p-4 @md/reader-content:p-6">
+                                <div className="mb-3 flex items-center justify-between gap-4">
+                                    <div className="flex items-center gap-2">
+                                        {/* Pulsing "live" indicator */}
+                                        <span className="relative flex size-2 shrink-0">
+                                            <span className="absolute inline-flex size-full animate-pulse rounded-full bg-green opacity-75" />
+                                            <span className="relative inline-flex size-2 rounded-full bg-green" />
+                                        </span>
+                                        <p className="m-0 font-mono text-[11px] font-bold uppercase tracking-wider text-secondary">
+                                            Merged into PostHog by self-driving
+                                        </p>
+                                    </div>
+                                    <Link
+                                        to="https://github.com/PostHog/posthog/pulls?q=is%3Apr+is%3Amerged+%22from+an+inbox+report%22"
+                                        external
+                                        externalNoIcon
+                                        className="whitespace-nowrap text-xs font-semibold text-red dark:text-yellow"
+                                    >
+                                        See them all →
+                                    </Link>
+                                </div>
+                                <SelfDrivingTicker prs={selfDrivingPRs} />
+                            </div>
+                        )}
+
                         {/* It runs on the data you already have */}
-                        <h3>
-                            It runs on the data you <Highlight>already have</Highlight>
+                        <h3 className={sectionHeadingClassName}>
+                            It runs on the data you <ColoredHighlight color="blue">already have</ColoredHighlight>
                         </h3>
                         <p>
                             Your product is a context goldmine. Self-driving puts that data to work. The more sources
@@ -844,21 +1158,25 @@ export default function SelfDrivingPage(): JSX.Element {
                         </div>
 
                         {/* Works in your workflow */}
-                        <h3>
-                            Works in <Highlight>your workflow</Highlight>
+                        <h3 className={sectionHeadingClassName}>
+                            Works in <ColoredHighlight color="purple">your workflow</ColoredHighlight>
                         </h3>
-                        <p>
-                            The same Inbox and agents show up across four surfaces (everywhere you go, there's PostHog).
+                        <p className="mb-0">
+                            <span className="block">The same Inbox and agents show up across five surfaces</span>
+                            <em className="mt-1 block">(everywhere you go, there's PostHog).</em>
                         </p>
-                        <div className="not-prose grid @md/reader-content:grid-cols-2 gap-x-6 gap-y-4 my-6">
-                            {workSurfaces.map(({ icon: Icon, iconColor, label, copy, cta }, index) => (
-                                <div key={index}>
-                                    <p className="m-0 inline-flex items-center gap-2 font-bold text-base">
+                        <div className="not-prose mt-8 mb-12 grid gap-4 @md/reader-content:grid-cols-2">
+                            {workSurfaces.map(({ Icon, iconColor, label, copy, cta }, index) => (
+                                <div
+                                    key={index}
+                                    className="flex min-h-full flex-col rounded-md border border-primary bg-primary p-5 shadow-sm @lg/reader-content:p-6"
+                                >
+                                    <p className="m-0 flex items-center gap-2 text-lg font-bold text-primary">
                                         <Icon className={`size-5 shrink-0 ${iconColor}`} />
                                         {label}
                                     </p>
-                                    <p className="m-0 mt-1 text-sm text-secondary">{copy}</p>
-                                    {cta && <p className="m-0 mt-1.5 text-sm">{cta}</p>}
+                                    <p className="m-0 mt-3 text-sm text-secondary">{copy}</p>
+                                    {cta && <div className="mt-auto flex justify-start pt-5">{cta}</div>}
                                 </div>
                             ))}
                         </div>
@@ -870,8 +1188,8 @@ export default function SelfDrivingPage(): JSX.Element {
                             className="w-full !block m-0"
                             imgClassName="w-full !block"
                         />
-                        <hr className="border-t border-primary m-0 mb-6" />
-                        <h3>
+
+                        <h3 className={sectionHeadingClassName}>
                             Build in public (with <Highlight>the whole team</Highlight>)
                         </h3>
                         <p>
@@ -901,19 +1219,49 @@ export default function SelfDrivingPage(): JSX.Element {
                             </div>
                         </div>
                         <SlackReportsRow />
-                        <p className="my-6 text-center text-2xl font-bold @md/reader-content:text-3xl">
-                            <em className="text-gradient not-italic">Suspiciously chill</em> for how much it's doing
+                        <p className={sectionHeadingClassName}>
+                            <FlowingGradientHighlight palette="chill">Suspiciously chill</FlowingGradientHighlight> for
+                            how much it's doing
                         </p>
 
                         {/* You prompt it → it works on its own */}
                         <div className="not-prose my-6">
-                            <div className="mb-2 flex items-center justify-between text-[11px] font-bold uppercase tracking-wide text-secondary">
-                                <span>building with AI</span>
-                                <span>
-                                    building <em>with</em> AI
+                            <div className="mb-4 grid grid-cols-[auto_minmax(1rem,1fr)_auto] items-center gap-2 text-xs font-semibold @sm/reader-content:gap-3 @sm/reader-content:text-sm">
+                                <span className="whitespace-nowrap text-red-2">Building with AI</span>
+                                <svg
+                                    className="h-2.5 w-full"
+                                    viewBox="0 0 632 10"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    preserveAspectRatio="none"
+                                    aria-hidden
+                                >
+                                    <path
+                                        d="M0.75 4.91612H630.637M625.224 9.11279L630.637 4.91612L625.224 0.750034"
+                                        stroke="url(#self-driving-building-arrow-grad)"
+                                        strokeWidth="1.5"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        vectorEffect="non-scaling-stroke"
+                                    />
+                                    <defs>
+                                        <linearGradient
+                                            id="self-driving-building-arrow-grad"
+                                            x1="0%"
+                                            y1="0%"
+                                            x2="100%"
+                                            y2="0%"
+                                        >
+                                            <stop stopColor="#FF5C1C" />
+                                            <stop offset="0.504808" stopColor="#A737D2" />
+                                            <stop offset="1" stopColor="#007CF2" />
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                                <span className="whitespace-nowrap text-blue-2">
+                                    Building <em className="italic underline underline-offset-2">with</em> AI
                                 </span>
                             </div>
-                            <div className="mb-4 h-1 rounded-full bg-gradient-to-r from-red via-yellow to-blue" />
                             <div className="grid gap-3 @md/reader-content:grid-cols-3">
                                 {workModes.map((mode) => (
                                     <div
@@ -937,18 +1285,18 @@ export default function SelfDrivingPage(): JSX.Element {
                         </div>
 
                         {/* So, what's left for you? */}
-                        <h3>
+                        <h3 className={sectionHeadingClassName}>
                             So, what's <Highlight>left for you?</Highlight>
                         </h3>
-                        <p>
+                        <p className="max-w-xl">
                             Work lands while you sleep. You wake up to diffs and reports waiting for review.{' '}
-                            <em>Then</em> what?
+                            <em>Then what?</em>
                         </p>
                         <div className="not-prose grid grid-cols-1 @md/reader-content:grid-cols-3 gap-3 my-6">
                             {humanRoles.map(({ heading, copy, image, alt }) => (
                                 <div
                                     key={heading}
-                                    className="flex flex-col overflow-hidden rounded-md border border-primary bg-primary"
+                                    className={`flex flex-col overflow-hidden rounded-md border border-primary ${humanRoleCardBackground}`}
                                 >
                                     <div className="p-4">
                                         <p className="m-0 text-base font-bold text-primary">{heading}</p>
@@ -1019,3 +1367,22 @@ export default function SelfDrivingPage(): JSX.Element {
         </>
     )
 }
+
+export const query = graphql`
+    query SelfDrivingPage {
+        allSelfDrivingPullRequest(
+            filter: { state: { eq: "merged" } }
+            sort: { fields: mergedAt, order: DESC }
+            limit: 24
+        ) {
+            nodes {
+                prNumber
+                summary
+                type
+                scope
+                url
+                mergedAt
+            }
+        }
+    }
+`

@@ -39,7 +39,7 @@ function WizardHeader(): JSX.Element {
                     <p className="!mt-2 !mb-4 text-base">
                         (Make AI do it for you – <em>with one swift terminal command</em>.)
                     </p>
-                    <WizardCommand latest={false} slim />
+                    <WizardCommand slim />
                 </div>
                 <div className="shrink-0">
                     <img
@@ -197,7 +197,7 @@ function GetStarted(): JSX.Element {
                 </ExtLink>
                 .
             </p>
-            <WizardCommand latest={false} slim />
+            <WizardCommand slim />
         </div>
     )
 }
@@ -218,7 +218,7 @@ function SelfDriving(): JSX.Element {
                 The self-driving setup enables your signal sources, sets up your scouts, and hands you a link to your
                 inbox, where reports land ranked by priority with a pull request ready to review.
             </p>
-            <WizardCommand command="self-driving" latest={false} slim />
+            <WizardCommand command="self-driving" slim />
         </div>
     )
 }

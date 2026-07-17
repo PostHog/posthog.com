@@ -1,27 +1,44 @@
-### Q2 2026 objectives
+### Q3 2026 objectives
 
-#### [Dashboard stability and enhancements](https://github.com/PostHog/posthog/issues/51815) <TeamMember name="Matt Pua" photo />
+#### Improve how AI writes HogQL <TeamMember name="Andy Zhao" photo />
 
-Improve stability of a core product and ensure customers have a good first experience.
+- Measure how performant and correct AI queries are
+- Improve the AI context when writing HogQL
 
-- New and expanded tests to prevent unexpected failures
-- Collection of UI/UX changes that make working with dashboards a smoother experience
-- Better controls and components beyond showing just graphs
+#### Monitor query regressions across internal teams <TeamMember name="Andy Zhao" photo /> <TeamMember name="Vasco de Krijger" photo />
 
-#### [Improve platform stability and reliability](https://github.com/PostHog/posthog/issues/51810) <TeamMember name="Vasco de Krijger" photo />
+- Set up automation that monitors PRs into the PostHog repo, flagging any suboptimal queries
+- Set up automatic auto research
 
-Improve the reliability of our system to leave a better experience for our customers.
+#### Improve the DevEx of making HogQL changes <TeamMember name="Sandy Spicer" photo />
 
-- A clear definition of "success" for alert checks, subscriptions, exports, and query service
-- Stability improvements to better deal with degraded infrastructure
-- A 99.95% success rate for our background jobs over the last 28 days rolling
-- Anomaly detection to proactively spot regressions
+- PR gate on having an experiment log on the test cluster
+- Think about how we can be more confident in HogQL transformations
 
-#### [AI-first support for our owned components](https://github.com/PostHog/posthog/issues/51814) <TeamMember name="Vasco de Krijger" photo />
+#### Protect against small customers using a significant % of our ClickHouse compute <TeamMember name="Mike Warren" photo /> <TeamMember name="Andy Zhao" photo />
 
-Move along with the market to increase AI adoption and support.
+- What should the limits be? Part of packages? <TeamMember name="Mike Warren" photo />
+- Rate limiting based on cost of queries rather than number of queries, scaled for bigger customers <TeamMember name="Andy Zhao" photo />
 
-- Signal integration for specific alerts
-- AI suggestions during creation
-- Improved AI onboarding
-- Investigate ways to deal with adjusted usage patterns from AI
+#### Make PostHog proactive for analytics users <TeamMember name="Vasco de Krijger" photo />
+
+- Help users to figure out what is relevant to them at a glance / help users to figure out what to best build next
+- Forecast alerts
+- Further enhance prompt subscriptions
+- Allow pre-prompted code agents / tasks to fire as a result of an alert trigger
+- Further build out the brainstormed ideas from the product analytics team regarding proactive scouts
+
+#### Cross product integration <TeamMember name="Matt Pua" photo />
+
+- Automatically create a dashboard with the relevant metrics about your feature when developing with PHCode (or sell this as a GH action, which uses the MCP under the hood with widgets?)
+- Increase number of widgets available to cover most product areas
+- Help increase number of products activated per org
+
+#### Signal + PHC integration: first class citizens | subs + alerts <TeamMember name="Matt Pua" photo />
+
+- Integrate alerts + subscription as signal sources
+
+#### Shared team objective: support team ClickHouse in their endeavours
+
+- Deleting the legacy ClickHouse non-HogQL endpoints, or redirect to HogQL <TeamMember name="Sandy Spicer" photo />
+- Help ship the JSON column <TeamMember name="Sandy Spicer" photo />

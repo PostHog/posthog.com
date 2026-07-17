@@ -1,17 +1,12 @@
 import React, { useState, useMemo } from 'react'
 import Editor from 'components/Editor'
-import OSTabs from 'components/OSTabs'
 import SEO from 'components/seo'
-import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
 import Link from 'components/Link'
 import { graphql, useStaticQuery } from 'gatsby'
 import OSButton from 'components/OSButton'
 import OSTable from 'components/OSTable'
-import { useApp } from '../context/App'
-
 const SmallTeamsPage = () => {
     const [searchTerm, setSearchTerm] = useState('')
-    const { websiteMode } = useApp()
 
     const { allTeams } = useStaticQuery(graphql`
         {
@@ -204,57 +199,6 @@ const SmallTeamsPage = () => {
         }
     })
 
-    const { handleTabChange, tabs, tabContainerClassName, className } = useCompanyNavigation({
-        value: '/small-teams',
-        content: (
-            <div className={`mt-6 px-4 ${websiteMode ? '' : 'max-w-screen-lg mx-auto'}`}>
-                <section data-scheme="primary" className="bg-primary">
-                    <div className="mb-8">
-                        <h1>Small teams</h1>
-                        <p className="mt-0">
-                            We've organized the company into small teams that are multi-disciplinary and as
-                            self-sufficient as possible.
-                        </p>
-                        <div className="flex gap-2">
-                            <OSButton asLink to="/teams" variant="primary" size="md" state={{ newWindow: true }}>
-                                Explore our teams ({allTeams.nodes.length})
-                            </OSButton>
-                            <OSButton
-                                asLink
-                                to="/handbook/company/small-teams"
-                                variant="secondary"
-                                size="md"
-                                state={{ newWindow: true }}
-                            >
-                                Learn about small teams
-                            </OSButton>
-                        </div>
-                    </div>
-
-                    <div className="mt-8">
-                        <OSTable
-                            columns={tableColumns}
-                            rows={tableRows}
-                            className="bg-primary"
-                            size="md"
-                            rowAlignment="center"
-                            width="full"
-                        />
-                    </div>
-
-                    {filteredTeams.length === 0 && searchTerm && (
-                        <div className="text-center py-12">
-                            <p className="text-lg text-secondary">No teams found matching "{searchTerm}"</p>
-                            <button onClick={() => setSearchTerm('')} className="mt-4 text-blue hover:underline">
-                                Clear search
-                            </button>
-                        </div>
-                    )}
-                </section>
-            </div>
-        ),
-    })
-
     return (
         <>
             <SEO
@@ -263,7 +207,6 @@ const SmallTeamsPage = () => {
                 image={`/images/og/teams.jpg`}
             />
             <Editor
-                hasTabs
                 type="teams"
                 maxWidth="100%"
                 proseSize="base"
@@ -273,17 +216,50 @@ const SmallTeamsPage = () => {
                     description: 'PostHog teams and their missions',
                 }}
             >
-                <OSTabs
-                    tabs={tabs}
-                    defaultValue="/small-teams"
-                    onValueChange={handleTabChange}
-                    padding
-                    contentPadding={false}
-                    tabContainerClassName={tabContainerClassName}
-                    className={className}
-                    triggerDataScheme="primary"
-                    centerTabs
-                />
+                <div className="mt-6 px-4 max-w-screen-lg mx-auto">
+                    <section data-scheme="primary">
+                        <div className="mb-8">
+                            <h1>Small teams</h1>
+                            <p className="mt-0">
+                                We've organized the company into small teams that are multi-disciplinary and as
+                                self-sufficient as possible.
+                            </p>
+                            <div className="flex gap-2">
+                                <OSButton asLink to="/teams" variant="primary" size="md" state={{ newWindow: true }}>
+                                    Explore our teams ({allTeams.nodes.length})
+                                </OSButton>
+                                <OSButton
+                                    asLink
+                                    to="/handbook/company/small-teams"
+                                    variant="secondary"
+                                    size="md"
+                                    state={{ newWindow: true }}
+                                >
+                                    Learn about small teams
+                                </OSButton>
+                            </div>
+                        </div>
+
+                        <div className="mt-8">
+                            <OSTable
+                                columns={tableColumns}
+                                rows={tableRows}
+                                size="md"
+                                rowAlignment="center"
+                                width="full"
+                            />
+                        </div>
+
+                        {filteredTeams.length === 0 && searchTerm && (
+                            <div className="text-center py-12">
+                                <p className="text-lg text-secondary">No teams found matching "{searchTerm}"</p>
+                                <button onClick={() => setSearchTerm('')} className="mt-4 text-blue hover:underline">
+                                    Clear search
+                                </button>
+                            </div>
+                        )}
+                    </section>
+                </div>
             </Editor>
         </>
     )
