@@ -20,6 +20,7 @@ import { AppItem } from 'components/OSIcons/AppIcon'
 import ContextMenu from 'components/RadixUI/ContextMenu'
 import CloudinaryImage from 'components/CloudinaryImage'
 import DesktopIcon from './DesktopIcon'
+import useMarqueeSelection from './useMarqueeSelection'
 import { Screensaver } from '../Screensaver'
 import { useInactivityDetection } from '../../hooks/useInactivityDetection'
 import NotificationsPanel from 'components/NotificationsPanel'
@@ -152,6 +153,7 @@ function Desktop() {
     const [navVisible, setNavVisible] = useState(false)
     const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null)
     const { addToast } = useToast()
+    const { selectedLabels, marqueeRef, onDesktopPointerDown } = useMarqueeSelection()
 
     useEffect(() => {
         return () => {
@@ -276,19 +278,28 @@ function Desktop() {
                     className="fixed inset-0 pointer-events-none"
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
+                    onPointerDown={onDesktopPointerDown}
                 >
                     <Wallpapers wallpaper={siteSettings.wallpaper} reduceMotion={siteSettings.performanceBoost} />
 
-                    <nav className="px-1" style={{ paddingTop: DESKTOP_TOP_OFFSET + 16 }}>
+                    {/* Pointer target for empty desktop space (marquee selection + right-click menu).
+                        Sits below the taskbar strip; the nav is `relative` so icons hit-test above it. */}
+                    <div
+                        aria-hidden
+                        className="absolute inset-x-0 bottom-0 pointer-events-auto select-none"
+                        style={{ top: DESKTOP_TOP_OFFSET }}
+                    />
+
+                    <nav className="relative px-1" style={{ paddingTop: DESKTOP_TOP_OFFSET + 16 }}>
                         <ul className={mobileIconListClassName}>
                             {[...leftApps, ...rightApps].map((app) => (
-                                <DesktopIcon key={app.label} app={app} />
+                                <DesktopIcon key={app.label} app={app} selected={selectedLabels.has(app.label)} />
                             ))}
                         </ul>
                         <div className="hidden sm:flex sm:justify-between items-start">
                             <ul className={`${desktopIconListClassName} flex-wrap`} style={desktopIconListStyle}>
                                 {leftApps.map((app) => (
-                                    <DesktopIcon key={app.label} app={app} />
+                                    <DesktopIcon key={app.label} app={app} selected={selectedLabels.has(app.label)} />
                                 ))}
                             </ul>
                             <ul
@@ -296,11 +307,19 @@ function Desktop() {
                                 style={desktopIconListStyle}
                             >
                                 {rightApps.map((app) => (
-                                    <DesktopIcon key={app.label} app={app} />
+                                    <DesktopIcon key={app.label} app={app} selected={selectedLabels.has(app.label)} />
                                 ))}
                             </ul>
                         </div>
                     </nav>
+
+                    {/* Marquee rectangle: geometry is written imperatively during a drag (see useMarqueeSelection) */}
+                    <div
+                        ref={marqueeRef}
+                        data-marquee
+                        aria-hidden
+                        className="absolute hidden pointer-events-none border border-blue bg-blue/20"
+                    />
                 </div>
                 {!compact && (
                     <Screensaver
