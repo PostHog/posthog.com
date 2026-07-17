@@ -415,9 +415,11 @@ export default function CommunitiesMap({
                     className="max-w-64 w-full"
                 />
                 <div className="text-primary text-sm">The map is unavailable right now.</div>
-                <div className="text-secondary text-[13px]">
-                    Running locally? Set <code>GATSBY_MAPBOX_TOKEN</code> in your <code>.env.development</code>.
-                </div>
+                {process.env.NODE_ENV === 'development' && (
+                    <div className="text-secondary text-[13px]">
+                        Running locally? Set <code>GATSBY_MAPBOX_TOKEN</code> in your <code>.env.development</code>.
+                    </div>
+                )}
             </div>
         )
     }

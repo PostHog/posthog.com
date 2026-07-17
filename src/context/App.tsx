@@ -1349,6 +1349,7 @@ const appSettings: AppSettings = {
         },
     },
     'cool-builder-communities-add-a-community': {
+        closeOnEscape: true,
         size: {
             min: {
                 width: 600,
@@ -1358,10 +1359,13 @@ const appSettings: AppSettings = {
                 width: 600,
                 height: 700,
             },
+            fixed: true,
+            autoHeight: true,
         },
         position: {
             center: true,
         },
+        toolbar: true,
     },
     'signup-embed': {
         size: {
