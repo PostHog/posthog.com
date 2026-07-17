@@ -8,21 +8,23 @@ import path from 'path'
 
 const OUT = path.resolve(process.cwd(), '.api-spec-prefetch.json')
 const PENDING = `${OUT}.pending`
+const url = process.env.POSTHOG_OPEN_API_SPEC_URL || 'https://app.posthog.com/api/schema/'
 
 try {
     fs.rmSync(OUT, { force: true })
-    fs.writeFileSync(PENDING, String(process.pid))
+    fs.writeFileSync(PENDING, JSON.stringify({ pid: process.pid, url }))
 } catch {
     // If we can't even write the marker, the build just fetches inline.
 }
 
 try {
-    const url = process.env.POSTHOG_OPEN_API_SPEC_URL || 'https://app.posthog.com/api/schema/'
     const res = await fetch(url, { headers: { Accept: 'application/json' } })
     if (!res.ok) throw new Error(`status ${res.status}`)
     const text = await res.text()
     JSON.parse(text) // validate before publishing the file
-    fs.writeFileSync(`${OUT}.tmp`, text)
+    // The envelope records which URL the spec came from, so a build configured with a
+    // different POSTHOG_OPEN_API_SPEC_URL never consumes a leftover file from this run.
+    fs.writeFileSync(`${OUT}.tmp`, `{"url":${JSON.stringify(url)},"spec":${text}}`)
     fs.renameSync(`${OUT}.tmp`, OUT)
     console.log('[prefetch-api-spec] done')
 } catch (e) {

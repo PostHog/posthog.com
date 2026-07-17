@@ -165,11 +165,17 @@ const API_SPEC_PREFETCH_PENDING = `${API_SPEC_PREFETCH_FILE}.pending`
 // Anything older belongs to a previous (crashed) run — ignore it and fetch inline.
 const API_SPEC_PREFETCH_MAX_AGE_MS = 5 * 60 * 1000
 
-const readFreshPrefetchedSpec = (): any | null => {
+const readFreshPrefetchedSpec = (expectedUrl: string): any | null => {
     try {
         const stat = fs.statSync(API_SPEC_PREFETCH_FILE)
         if (Date.now() - stat.mtimeMs < API_SPEC_PREFETCH_MAX_AGE_MS) {
-            return JSON.parse(fs.readFileSync(API_SPEC_PREFETCH_FILE, 'utf-8'))
+            const envelope = JSON.parse(fs.readFileSync(API_SPEC_PREFETCH_FILE, 'utf-8'))
+            // Only trust a prefetch fetched from the URL this build is configured for — a
+            // leftover from a run against a different POSTHOG_OPEN_API_SPEC_URL (or the
+            // pre-envelope file format) must not leak into this build's api_endpoint nodes.
+            if (envelope?.url === expectedUrl && envelope.spec) {
+                return envelope.spec
+            }
         }
     } catch {
         // Missing or unreadable — caller falls back.
@@ -177,27 +183,33 @@ const readFreshPrefetchedSpec = (): any | null => {
     return null
 }
 
-const isPrefetchInFlight = (): boolean => {
+const isPrefetchInFlight = (expectedUrl: string): boolean => {
     try {
-        return Date.now() - fs.statSync(API_SPEC_PREFETCH_PENDING).mtimeMs < API_SPEC_PREFETCH_MAX_AGE_MS
+        const stat = fs.statSync(API_SPEC_PREFETCH_PENDING)
+        if (Date.now() - stat.mtimeMs >= API_SPEC_PREFETCH_MAX_AGE_MS) {
+            return false
+        }
+        const marker = JSON.parse(fs.readFileSync(API_SPEC_PREFETCH_PENDING, 'utf-8'))
+        return marker?.url === expectedUrl
     } catch {
         return false
     }
 }
 
 async function loadApiSpec(): Promise<any> {
-    const prefetched = readFreshPrefetchedSpec()
+    const openApiSpecUrl = process.env.POSTHOG_OPEN_API_SPEC_URL || 'https://app.posthog.com/api/schema/'
+
+    const prefetched = readFreshPrefetchedSpec(openApiSpecUrl)
     if (prefetched) return prefetched
 
-    // A prefetch started alongside this build may still be in flight — give it a
-    // bounded window to land before fetching inline.
-    for (let waited = 0; isPrefetchInFlight() && waited < 20000; waited += 250) {
+    // A prefetch for this same URL started alongside this build may still be in
+    // flight — give it a bounded window to land before fetching inline.
+    for (let waited = 0; isPrefetchInFlight(openApiSpecUrl) && waited < 20000; waited += 250) {
         await new Promise((resolve) => setTimeout(resolve, 250))
-        const spec = readFreshPrefetchedSpec()
+        const spec = readFreshPrefetchedSpec(openApiSpecUrl)
         if (spec) return spec
     }
 
-    const openApiSpecUrl = process.env.POSTHOG_OPEN_API_SPEC_URL || 'https://app.posthog.com/api/schema/'
     return fetch(openApiSpecUrl, {
         headers: {
             Accept: 'application/json',
