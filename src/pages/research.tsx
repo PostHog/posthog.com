@@ -80,17 +80,7 @@ function HeroSection({ teamCrestUrl }: { teamCrestUrl?: string }) {
                     </div>
 
                     <h1 className="text-xl @xl:text-3xl font-bold leading-tight !mt-0 m-0">
-                        Training{' '}
-                        <RoughAnnotation
-                            type="highlight"
-                            color="rgba(48, 164, 108, 0.2)"
-                            strokeWidth={1}
-                            padding={2}
-                            delay={300}
-                        >
-                            user behavior foundation models
-                        </RoughAnnotation>{' '}
-                        and{' '}
+                        Training user behavior foundation models and{' '}
                         <RoughAnnotation type="underline" color="#F54E00" strokeWidth={2} delay={800} multiline>
                             transparently sharing the research we do
                         </RoughAnnotation>
