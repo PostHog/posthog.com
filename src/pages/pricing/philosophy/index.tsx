@@ -14,7 +14,7 @@ const PricingPhilosophy = (): JSX.Element => {
         <>
             <section
                 id="philosophy"
-                className="bg-light dark:bg-dark text-primary shadow-xl rounded pt-6 pb-2 @xl:md:py-8 px-4 @xl:px-8 @2xl:px-12 md:mx-auto mt-12 mb-20 w-[calc(100%_-_3rem)] @xl:w-full max-w-3xl border border-primary"
+                className="bg-accent text-primary shadow-xl rounded pt-6 pb-2 @xl:md:py-8 px-4 @xl:px-8 @2xl:px-12 mx-auto mt-12 mb-20 w-full max-w-3xl border border-primary"
             >
                 <SectionHeader>
                     <p className="opacity-60 text-[15px] mb-2">A note from our co-founder</p>

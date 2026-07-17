@@ -196,7 +196,7 @@ export default function Pricing() {
                 </p>
             </SectionLayout>
 
-            <CTA />
+            <CTA card />
         </ReaderView>
     )
 }
