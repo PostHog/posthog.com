@@ -43,6 +43,50 @@ function parseTimestamp(ts) {
     return { iso, label }
 }
 
+// The Internet Archive throttles anonymous cloud egress hard, and a request with
+// no descriptive User-Agent frequently comes back as an empty `[]` (HTTP 200) or a
+// 429/403. A real UA + a short retry makes the CDX call reliable from serverless.
+async function fetchCdxRows(url, attempt = 1) {
+    const MAX_ATTEMPTS = 3
+    const controller = new AbortController()
+    const timeout = setTimeout(() => controller.abort(), 12000)
+    try {
+        const res = await fetch(url, {
+            signal: controller.signal,
+            headers: {
+                'User-Agent': 'PostHog-TimeMachine/1.0 (+https://posthog.com/time-machine)',
+                Accept: 'application/json',
+            },
+        })
+        if (!res.ok) {
+            throw new Error(`CDX API responded ${res.status}`)
+        }
+        // CDX sometimes returns an empty body or plain text when throttled.
+        const text = await res.text()
+        const trimmed = text.trim()
+        if (!trimmed) return []
+        let rows
+        try {
+            rows = JSON.parse(trimmed)
+        } catch {
+            throw new Error('CDX API returned a non-JSON response (likely throttled)')
+        }
+        // A successful-but-empty array from a throttled edge node — retry.
+        if (Array.isArray(rows) && rows.length <= 1 && attempt < MAX_ATTEMPTS) {
+            throw new Error('CDX API returned no rows')
+        }
+        return rows
+    } catch (err) {
+        if (attempt < MAX_ATTEMPTS) {
+            await new Promise((r) => setTimeout(r, 500 * attempt))
+            return fetchCdxRows(url, attempt + 1)
+        }
+        throw err
+    } finally {
+        clearTimeout(timeout)
+    }
+}
+
 const handler = async (req, res) => {
     if (req.method !== 'GET') {
         res.setHeader('Allow', 'GET')
@@ -62,12 +106,7 @@ const handler = async (req, res) => {
             limit: '500',
         })
 
-        const cdxRes = await fetch(`${CDX_BASE}?${params}`)
-        if (!cdxRes.ok) {
-            throw new Error(`CDX API responded ${cdxRes.status}`)
-        }
-
-        const rows = await cdxRes.json()
+        const rows = await fetchCdxRows(`${CDX_BASE}?${params}`)
         // First row is the header (["timestamp","statuscode"]).
         const dataRows = Array.isArray(rows) ? rows.slice(1) : []
 
