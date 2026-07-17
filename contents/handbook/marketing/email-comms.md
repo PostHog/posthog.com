@@ -98,7 +98,7 @@ The goal of this flow is to set expectations for what the self-hosted experience
 Our open source onboarding email is essentially identical to the self-hosted onboarding flow, but excludes information about the sunsetting of the self-hosted product. 
 
 #### Waitlist, alpha, and beta onboarding emails
-When a user joins a waitlist or opts in to a feature preview — via [the feature preview menu](https://app.posthog.com/settings/user-feature-previews) or a waitlist form on posthog.com — a `$feature_enrollment_update` event is sent to Customer.io through a data pipeline and enters them into the Waitlist, Alpha, Beta onboarding flow. The flow immediately segments on the `$feature_enrollment_stage` property:
+When a user joins a waitlist or opts in to a feature preview — via [the feature preview menu](https://app.posthog.com/settings/user-feature-previews) or a waitlist form on either a product or [the roadmap](/roadmap) page — a `$feature_enrollment_update` event is sent to Customer.io through a data pipeline and enters them into the Waitlist, Alpha, Beta onboarding flow. The flow immediately segments on the `$feature_enrollment_stage` property:
 
 - **Concept:** an immediate, simple confirmation that they're on the waitlist.
 - **Alpha:** an immediate email warning of rough edges and asking for feedback.
@@ -106,11 +106,11 @@ When a user joins a waitlist or opts in to a feature preview — via [the featur
 
 When a feature moves from concept to alpha or beta, users who registered interest are automatically opted in to the new stage and a `user moved feature preview stage` event fires — we then email them to let them know the feature is enabled and now available, and ask for feedback.
 
-All beta feedback is centralized to the `beta-feedback@posthog.com` Google Group, and replies are relayed into the [#posthog-feedback Slack channel](https://posthog.slack.com/archives/C011L071P8U) for everyone to see. PMs and team leads are encouraged to respond to and action this feedback for their alpha and beta releases, and to reward users with merch credits as thanks where appropriate.
+All beta feedback is centralized to the `beta-feedback@posthog.com` Google Group, and replies are relayed into the [#posthog-feedback Slack channel](https://posthog.slack.com/archives/C011L071P8U) for everyone to see. PMs and team leads are encouraged to respond to and action this feedback for their alpha and beta releases, and to reward users with merch credits as thanks where appropriate. Bug reports are directed to the Support modal.
 
 See [onboarding and lifecycle emails](/handbook/marketing/onboarding-and-lifecycle-emails) for how this flow fits into the wider system.
 
-> **Launching a beta?** It helps to let the Brand team know in [the team Slack](https://posthog.slack.com/archives/C083V7C6GKE). The team can then add your beta to the beta onboarding flow, and plan ahead for marketing announcements as needed. 
+> **Launching a beta?** It helps to let the marketing teams know in [the group Slack](https://posthog.slack.com/archives/C0ALU3889A6) so they can publicise it too!
 
 #### Onboarding - new hires
 This is an internal email flow for new hires, which triggers whenever a new user signs up with a PostHog email address. We currently exclude most old-time hires from this flow, to avoid blocking their inboxes. 

@@ -66,7 +66,7 @@ All beta feedback is centralized to the `beta-feedback@posthog.com` Google Group
 
 ## The personalized "next steps" block
 
-Inside the onboarding emails is a block that recommends each person's best next product, based on what they've already activated and shown intent in. One quirk shapes how it's built: **Customer.io's Liquid can't read segments or event history** — inside an email you only get the person's profile attributes. So we copy segment membership onto attributes first:
+Inside the onboarding emails is an email with a block that recommends each person's best next product, based on what they've already activated and shown intent in. One quirk shapes how it's built: **Customer.io's Liquid can't read segments or event history** — inside an email you only get the person's profile attributes. So we copy segment membership onto attributes first:
 
 > **Segments → "Attr sync" campaigns → attributes → email content.** For each Activated/Intent segment, a tiny `seg_attr` campaign fires when someone *enters* it and runs one **Update attributes** action — no email, it just writes data. They share an `Attr sync` name prefix so they group together.
 
