@@ -18,8 +18,6 @@ import { Pizza } from 'components/Careers/Pizza'
 import FunStuff from 'components/Careers/FunStuff'
 import { JobListings } from 'components/Careers/JobListings'
 import Editor from 'components/Editor'
-import OSTabs from 'components/OSTabs'
-import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import OSButton from 'components/OSButton'
 import { IconList } from '@posthog/icons'
@@ -50,112 +48,6 @@ const IndexPage = () => {
     const latestJobCreatedAt = latestJob && new Date(latestJob['publishedDate'])
     const [showTableOfContents, setShowTableOfContents] = useState(false)
 
-    const { handleTabChange, tabs, tabContainerClassName, className } = useCompanyNavigation({
-        value: '/careers',
-        content: (
-            <ScrollArea className="h-full max-w-screen-xl mx-auto">
-                <div ref={ref} className="fixed bottom-4 right-4 z-20">
-                    <Popover
-                        trigger={
-                            <span className="[&>span>div]:rounded-full">
-                                <Tooltip
-                                    trigger={
-                                        <OSButton
-                                            icon={<IconList />}
-                                            size="lg"
-                                            className="size-10 p-1 rounded-full border shadow-lg bg-primary border-primary hover:bg-accent active:bg-accent hover:border-input"
-                                        ></OSButton>
-                                    }
-                                    delay={0}
-                                    sideOffset={12}
-                                >
-                                    Table of contents
-                                </Tooltip>
-                            </span>
-                        }
-                        dataScheme="primary"
-                        contentClassName="w-64"
-                        sideOffset={10}
-                        open={showTableOfContents}
-                        onOpenChange={setShowTableOfContents}
-                    >
-                        <ul className="not-prose grid list-none m-0 p-0">
-                            {careersTableOfContents.map((item) => (
-                                <li key={item.url}>
-                                    <button
-                                        className="font-semibold text-sm hover:underline block p-1"
-                                        onClick={() => {
-                                            setShowTableOfContents(false)
-                                            const container = ref.current
-                                                ?.closest('[data-radix-scroll-area-viewport]')
-                                                ?.parentElement?.closest('[data-radix-scroll-area-viewport]')
-                                            const el = container?.querySelector(item.url)
-                                            if (!el) return
-                                            container?.scrollTo({
-                                                top: el.offsetTop,
-                                                behavior: 'smooth',
-                                            })
-                                        }}
-                                    >
-                                        {item.value}
-                                    </button>
-                                </li>
-                            ))}
-                        </ul>
-                    </Popover>
-                </div>
-                <div className="max-w-7xl mx-auto">
-                    <div id="hero">
-                        <CareersHero />
-                        <JobListings />
-                    </div>
-                    <div id="small-teams">
-                        <SmallTeams />
-                    </div>
-                    <div id="pizza">
-                        <Pizza />
-                    </div>
-                    <div id="compensation">
-                        <Compensation />
-                    </div>
-                    <div id="interview-process">
-                        <InterviewProcessOverview />
-                    </div>
-                    <div id="note">
-                        <FounderNote />
-                    </div>
-                    <div id="quote">
-                        <MegaQuote />
-                    </div>
-                    <div id="handbook">
-                        <CompanyHandbook />
-                    </div>
-                    <div id="iep">
-                        <IdealEmployeeProfile />
-                    </div>
-                    <div id="unexpected-benefits">
-                        <BenefitsUnexpected />
-                    </div>
-                    <div>
-                        <BenefitsUsual />
-                    </div>
-                    <div id="transparency">
-                        <Transparency />
-                    </div>
-                    <div id="fun-stuff">
-                        <FunStuff />
-                    </div>
-                    <div id="team-quotes">
-                        <TeamQuotes />
-                    </div>
-                    <div id="open-roles">
-                        <OpenRoles />
-                    </div>
-                </div>
-            </ScrollArea>
-        ),
-    })
-
     return (
         <>
             <SEO
@@ -167,7 +59,6 @@ const IndexPage = () => {
                 imageType="absolute"
             />
             <Editor
-                hasTabs
                 type="careers"
                 maxWidth="100%"
                 proseSize="base"
@@ -176,16 +67,106 @@ const IndexPage = () => {
                     description: 'Join the PostHog team',
                 }}
             >
-                <OSTabs
-                    tabs={tabs}
-                    defaultValue="/careers"
-                    onValueChange={handleTabChange}
-                    padding
-                    tabContainerClassName={tabContainerClassName}
-                    className={className}
-                    triggerDataScheme="primary"
-                    centerTabs
-                />
+                <ScrollArea className="h-full max-w-screen-xl mx-auto">
+                    <div ref={ref} className="fixed bottom-4 right-4 z-20">
+                        <Popover
+                            trigger={
+                                <span className="[&>span>div]:rounded-full">
+                                    <Tooltip
+                                        trigger={
+                                            <OSButton
+                                                icon={<IconList />}
+                                                size="lg"
+                                                className="size-10 p-1 rounded-full border shadow-lg bg-primary border-primary hover:bg-accent active:bg-accent hover:border-input"
+                                            ></OSButton>
+                                        }
+                                        delay={0}
+                                        sideOffset={12}
+                                    >
+                                        Table of contents
+                                    </Tooltip>
+                                </span>
+                            }
+                            dataScheme="primary"
+                            contentClassName="w-64"
+                            sideOffset={10}
+                            open={showTableOfContents}
+                            onOpenChange={setShowTableOfContents}
+                        >
+                            <ul className="not-prose grid list-none m-0 p-0">
+                                {careersTableOfContents.map((item) => (
+                                    <li key={item.url}>
+                                        <button
+                                            className="font-semibold text-sm hover:underline block p-1"
+                                            onClick={() => {
+                                                setShowTableOfContents(false)
+                                                const container = ref.current
+                                                    ?.closest('[data-radix-scroll-area-viewport]')
+                                                    ?.parentElement?.closest('[data-radix-scroll-area-viewport]')
+                                                const el = container?.querySelector(item.url)
+                                                if (!el) return
+                                                container?.scrollTo({
+                                                    top: el.offsetTop,
+                                                    behavior: 'smooth',
+                                                })
+                                            }}
+                                        >
+                                            {item.value}
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
+                        </Popover>
+                    </div>
+                    <div className="max-w-7xl mx-auto pt-8">
+                        <div id="hero">
+                            <CareersHero />
+                            <JobListings />
+                        </div>
+                        <div id="small-teams">
+                            <SmallTeams />
+                        </div>
+                        <div id="pizza">
+                            <Pizza />
+                        </div>
+                        <div id="compensation">
+                            <Compensation />
+                        </div>
+                        <div id="interview-process">
+                            <InterviewProcessOverview />
+                        </div>
+                        <div id="note">
+                            <FounderNote />
+                        </div>
+                        <div id="quote">
+                            <MegaQuote />
+                        </div>
+                        <div id="handbook">
+                            <CompanyHandbook />
+                        </div>
+                        <div id="iep">
+                            <IdealEmployeeProfile />
+                        </div>
+                        <div id="unexpected-benefits">
+                            <BenefitsUnexpected />
+                        </div>
+                        <div>
+                            <BenefitsUsual />
+                        </div>
+                        <div id="transparency">
+                            <Transparency />
+                        </div>
+                        <div id="fun-stuff">
+                            <FunStuff />
+                        </div>
+                        <div id="team-quotes">
+                            <TeamQuotes />
+                        </div>
+                        <div id="open-roles">
+                            <OpenRoles />
+                        </div>
+                    </div>
+                </ScrollArea>
             </Editor>
         </>
     )

@@ -34,6 +34,7 @@ PostHog ships a fleet of canonical scouts out of the box, each watching a common
 | [General](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-general/SKILL.md) | Cross-product correlations and any surface no specialist covers |
 | [Health checks](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-health-checks/SKILL.md) | Setup health issues – no live events, outdated SDKs, missing reverse proxy, failing warehouse models |
 | [Inbox validation](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-inbox-validation/SKILL.md) | Whether a merged fix actually held, re-measured after a deployment soak window |
+| [Ingestion warnings](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-ingestion-warnings/SKILL.md) | Data that was dropped, mangled, or partially rejected during ingestion, including new warning types and broad error-severity clusters |
 | [Insight alerts](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-insight-alerts/SKILL.md) | Alert firings a human likely missed, especially ones the normal notification path stayed silent on |
 | [Logs](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-logs/SKILL.md) | Volume bursts, severity-distribution shifts, service silence, and new error message patterns |
 | [MCP tool calls](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-mcp-tool-calls/SKILL.md) | MCP tools that need improvement – broad failure rates, retry hammering, and slow or context-bloating responses |
@@ -42,8 +43,10 @@ PostHog ships a fleet of canonical scouts out of the box, each watching a common
 | [Replay Vision](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-replay-vision/SKILL.md) | Whether Replay Vision scanners are still observing, and what their observations surface |
 | [Revenue analytics](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-revenue-analytics/SKILL.md) | MRR and churn shifts, broken Stripe syncs, and revenue config drift |
 | [Session replay](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-session-replay/SKILL.md) | Recording capture integrity, plus rage-click and dead-click friction clusters |
+| [Skills store](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-skills-store/SKILL.md) | Static, verifiable skill-authoring problems such as vague descriptions, stale file links, bloated bodies, and committed secrets |
 | [Surveys](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-surveys/SKILL.md) | NPS and CSAT regressions, plus recurring themes in open-text responses |
 | [Web analytics](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-web-analytics/SKILL.md) | Acquisition channels diverging, attribution breakage, and 404 spikes |
+| [Web vitals](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-web-vitals/SKILL.md) | Core Web Vitals regressions and other recent performance shifts in web traffic |
 
 Most are specialists that watch one surface in depth; the [general](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-general/SKILL.md) scout is the exception – it watches the seams between surfaces, like a deploy, then an error burst, then a conversion dip, that no single specialist would catch on its own. Browse them all in the [`products/signals/skills`](https://github.com/PostHog/posthog/tree/master/products/signals/skills) directory.
 

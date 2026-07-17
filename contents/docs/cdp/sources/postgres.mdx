@@ -75,9 +75,44 @@ PostgreSQL sources created after February 18, 2026 require SSL/TLS encryption fo
 
 > **Note:** PostHog egresses over IPv4 and does not support IPv6-only database hosts. If your database host only resolves to an IPv6 address, use a connection pooler or enable your provider's IPv4 add-on. See the [troubleshooting section](#network-is-unreachable-or-no-route-to-host) for details.
 
+## Live queries
+
+In addition to syncing data on a schedule, you can enable live queries on a synced Postgres source. This lets you query your Postgres database directly from the [SQL editor](https://app.posthog.com/sql) — queries run against your live database in real time without duplicating data into PostHog.
+
+### Enabling live queries on a new source
+
+When creating a new Postgres source, the source wizard offers three query modes:
+
+- **Sync to PostHog** — Sync selected tables on a schedule. This is the default.
+- **Query live only** — Run queries directly against your database without syncing any data.
+- **Sync and query live** — Sync tables into PostHog and also run live queries against the database from the SQL editor.
+
+Select **Sync and query live** to enable both scheduled syncs and live queries on the same source.
+
+### Enabling live queries on an existing source
+
+1. Go to the [sources tab](https://app.posthog.com/data-management/sources) and click your Postgres source.
+2. Open the **Configuration** tab.
+3. Toggle **Enable live queries** on.
+4. Click **Save** to apply.
+
+Once enabled, you can query your Postgres source directly from the SQL editor.
+
+### Querying a live source
+
+There are two ways to start a live query:
+
+- **From the source page:** Go to the **Schemas** tab on your source and click **Query directly**. This opens the SQL editor with your source connection preselected.
+- **From the SQL editor:** Open the [SQL editor](https://app.posthog.com/sql), click the connection picker in the toolbar, and select your Postgres source. Synced sources with live queries enabled are labeled with `· synced` (e.g., `my_source (Postgres · synced)`) to distinguish them from direct-only connections.
+
+### When to use live queries vs scheduled syncs only
+
+- **Live queries** are best for ad-hoc exploration, querying data that changes frequently, or when you want to query your database without waiting for a sync.
+- **Scheduled syncs only** are better when you need faster query performance, want to join external data with PostHog events in dashboards and insights, or need data available across all PostHog features.
+
 ## Sync methods
 
-Postgres tables support full table, incremental, append-only, and CDC sync methods.
+Postgres tables support full table, incremental, append-only, xmin, and CDC sync methods.
 
 Use CDC when you need PostHog to stay close to your source database and you care about deletes. It is especially useful when:
 
@@ -87,6 +122,22 @@ Use CDC when you need PostHog to stay close to your source database and you care
 - You want an optional change-history table for audit or lifecycle analysis.
 
 Use incremental or append-only sync instead when your table is append-heavy, has a reliable non-null cursor field, or you don't want to manage logical replication.
+
+Use xmin sync when your table has no reliable incremental cursor field like `updated_at` and you want incremental syncing without setting up CDC. xmin uses PostgreSQL's hidden `xmin` system column (the transaction ID that last modified each row) as a cursor. It's a middle ground between full table refresh and CDC:
+
+- Captures inserts and updates incrementally without requiring you to add a cursor column
+- Lighter than CDC since it doesn't require logical replication or a replication slot
+- Does not capture deletes (use CDC if you need delete tracking)
+
+xmin sync requires:
+
+- PostgreSQL 13 or newer
+- Table must have a primary key
+- Only works on regular (heap) tables and materialized views (not partitioned parents, views, or foreign tables)
+
+Because the `xmin` column is not indexed, syncs scan the entire table to find changed rows. For large tables with frequent syncs, this can be slower than indexed incremental sync. PostHog displays a warning when you select xmin sync to flag the unindexed scan.
+
+A `_ph_xmin` column is added to the synced table in PostHog containing the transaction ID for each row.
 
 <CalloutBox icon="IconWarning" title="CDC is an advanced feature" type="caution">
 
@@ -294,7 +345,7 @@ Avoid putting unrelated tables in the publication. PostHog filters out changes f
 
 ## Managing CDC after source creation
 
-You can enable, disable, or adjust CDC settings on an existing Postgres source from the **Configuration** tab without recreating the source.
+You can enable, disable, repair, or adjust CDC settings on an existing Postgres source from the **Configuration** tab without recreating the source.
 
 ### Enabling CDC on an existing source
 
@@ -332,13 +383,33 @@ Changes that occur while CDC is disabled are not captured. If you re-enable CDC 
 
 </CalloutBox>
 
+### Repairing CDC
+
+If a CDC source loses its replication slot — either because [WAL lag protection](#wal-lag-protection) dropped it or because it was removed on the source database — CDC syncs stop and PostHog marks the source as broken.
+
+Instead of disabling and re-enabling CDC (which resets every schema's sync type and requires you to reconfigure each one), you can use **Repair CDC** to recover in place:
+
+1. Go to the [sources tab](https://app.posthog.com/data-management/sources) and click your Postgres source.
+2. Open the **Configuration** tab. A banner indicates that the replication slot or publication is missing.
+3. Click **Repair CDC** and confirm the action.
+
+Repair recreates the replication slot and publication on your source database, resets every active CDC schema to snapshot mode for a full re-sync, clears the broken markers, and resumes the paused schedules. Changes that occurred between the slot being lost and the repair completing cannot be recovered — tables will match the current source state once the re-sync finishes.
+
+The action is idempotent. If a repair fails partway through (for example, due to a connection error), you can safely retry it.
+
+<CalloutBox icon="IconWarning" title="Repair triggers a full re-sync" type="caution">
+
+Repairing CDC forces every active CDC schema to re-snapshot from the current source state. WAL changes since the old slot was lost are unrecoverable, so a fresh snapshot is the only correct baseline. History rows in any `_cdc` companion tables for the gap period will be missing.
+
+</CalloutBox>
+
 ### Updating CDC settings
 
 While CDC is enabled, you can edit the following settings from the Configuration tab without disabling CDC:
 
 - **Automatic slot protection** - Toggle whether PostHog drops the replication slot when WAL lag exceeds the critical threshold.
-- **WAL lag warning threshold** - The lag level (in MB) that triggers a warning. Default is `1024 MB`.
-- **WAL lag critical threshold** - The lag level (in MB) that triggers slot protection. Default is `10240 MB`. Must be greater than the warning threshold.
+- **WAL lag warning threshold** - The lag level (in MB) that triggers a warning. Default is `512 MB`.
+- **WAL lag critical threshold** - The lag level (in MB) that triggers slot protection. Default is `2048 MB`. Must be greater than the warning threshold.
 
 To change the management mode (PostHog-managed vs. self-managed) or slot/publication names, disable CDC and re-enable it with the new settings.
 
@@ -348,12 +419,26 @@ Replication slots retain WAL until the consumer advances the slot. If PostHog st
 
 PostHog stores two lag thresholds on CDC sources:
 
-- Warning threshold: `1024 MB` by default
-- Critical threshold: `10240 MB` by default
+- Warning threshold: `512 MB` by default
+- Critical threshold: `2048 MB` by default
 
-For PostHog-managed sources, **automatic slot protection** is enabled by default. If lag exceeds the critical threshold, PostHog attempts to drop the replication slot and publication, then marks the source as errored. This protects your source database from unbounded WAL growth, but it means you must re-enable CDC or resync after fixing the issue. You can [adjust both thresholds](#updating-cdc-settings) from the Configuration tab.
+For PostHog-managed sources, **automatic slot protection** is enabled by default. If lag exceeds the critical threshold, PostHog attempts to drop the replication slot and publication, then marks the source as broken. This protects your source database from unbounded WAL growth, but it means you must [repair CDC](#repairing-cdc) or resync after fixing the issue. You can [adjust both thresholds](#updating-cdc-settings) from the Configuration tab.
 
 For self-managed sources, PostHog does not drop the slot or publication. It marks the source as errored at the critical threshold, but you remain responsible for cleanup.
+
+PostHog also detects when PostgreSQL has invalidated a slot due to `max_slot_wal_keep_size`. When this happens, PostHog automatically recreates the replication slot (and publication, if PostHog-managed and missing), resets all CDC schemas to snapshot mode, and resumes streaming. Tables re-sync from their current state without manual intervention.
+
+<CalloutBox icon="IconInfo" title="Proactive slot protection" type="fyi">
+
+The hourly slot sweeper reads your database's `max_slot_wal_keep_size` setting and clamps the critical threshold to 80% of that value. This means PostHog drops and recovers the slot before PostgreSQL invalidates it, when possible.
+
+</CalloutBox>
+
+<CalloutBox icon="IconWarning" title="Data gap during auto-recovery" type="caution">
+
+When a slot is invalidated and recreated, changes between the last confirmed LSN and the new slot's consistent point are unrecoverable. The re-snapshot restores current row state, but the `_cdc` history table has a gap for that window.
+
+</CalloutBox>
 
 You can monitor a Postgres slot yourself:
 
@@ -379,6 +464,7 @@ CDC is powerful, but it changes how your production database retains WAL. Keep t
 - Disabling a table removes it from the publication in PostHog-managed mode. Changes made while disabled are not recoverable from the slot. [Disabling CDC entirely](#disabling-cdc) drops the slot and requires a full resync if re-enabled.
 - If a publication does not include a selected table, PostHog won't receive changes for that table.
 - If a table is truncated, PostHog triggers a new snapshot instead of replaying the truncate as individual deletes.
+- If PostHog stops consuming changes long enough for PostgreSQL to invalidate the slot (via `max_slot_wal_keep_size`), PostHog auto-recovers by recreating the slot and re-syncing tables. The `_cdc` history has a gap for changes during the outage.
 
 For production databases, we recommend enabling CDC on one or two representative tables first so your team can validate database permissions, WAL settings, monitoring, and internal rollout steps before adding more tables.
 
@@ -427,7 +513,13 @@ This happens in self-managed mode when PostHog can't find the publication name y
 
 ### Source is errored because of WAL lag
 
-Check the slot lag query above. If PostHog-managed slot protection dropped the slot, [disable and re-enable CDC](#managing-cdc-after-source-creation) or run a full resync after fixing the underlying issue. If you're in self-managed mode, your DBA must decide whether to keep, advance, or drop the slot.
+Check the slot lag query above. If PostHog-managed slot protection dropped the slot, use [Repair CDC](#repairing-cdc) to recreate it and re-sync. If you're in self-managed mode, your DBA must decide whether to keep, advance, or drop the slot.
+
+### Replication slot or publication is missing
+
+This happens when the replication slot is dropped — either by [WAL lag protection](#wal-lag-protection), manually on the source database, or by the database itself (for example, when `max_slot_wal_keep_size` is exceeded). PostHog marks the CDC source as broken and pauses its schedules.
+
+To recover, use [Repair CDC](#repairing-cdc) from the **Configuration** tab. Repair recreates the slot and publication, then re-syncs every CDC schema from a fresh snapshot. WAL changes since the slot was lost cannot be recovered.
 
 ### `materialized view has not been populated`
 
@@ -480,5 +572,11 @@ Solutions:
 - **Enable IPv4 on your provider** — Many managed Postgres providers offer IPv4 add-ons or dual-stack endpoints (e.g., Supabase IPv4 add-on, Neon's shared pooler).
 - **Allowlist PostHog's IPs** — If your firewall is blocking connections, allowlist PostHog's IP addresses (see the [Inbound IP addresses](#inbound-ip-addresses) section above).
 - **Use an SSH tunnel** — If your database is on a private network, configure an SSH tunnel during source setup.
+
+### Slot invalidated by `max_slot_wal_keep_size`
+
+When PostgreSQL invalidates a replication slot due to `max_slot_wal_keep_size`, PostHog automatically recovers by recreating the slot and triggering a full re-sync of all CDC tables. You'll see an error message explaining that the slot was invalidated and CDC will resume automatically.
+
+No manual intervention is required. Tables re-sync from their current state and streaming resumes once the snapshot completes. The `_cdc` history table has a gap for the window between the last confirmed position and the new slot.
 
 > **Looking for an example of the Postgres source?** Check out our tutorial where we [connect and query Supabase data](/tutorials/supabase-query).
