@@ -559,7 +559,7 @@ hr {
     }
 }
 
-::-webkit-scrollbar {
+*:not([data-app='AppWindow'], [data-app='AppWindow'] *)::-webkit-scrollbar {
     @apply h-2.5 w-2.5;
 }
 
@@ -575,12 +575,9 @@ hr {
     }
 }
 
-/* App window scrollbars — keep native scrolling while visually floating the
-   thumb inside a transparent rail, clear of the window's rounded corners. */
-[data-app='AppWindow'] *::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-}
+/* App window scrollbars — leave rail sizing to the browser so overlay
+   scrollbars can follow the OS visibility preference, while visually floating
+   the thumb clear of the window's rounded corners. */
 
 [data-app='AppWindow'] *::-webkit-scrollbar-track {
     @apply bg-transparent shadow-none;
