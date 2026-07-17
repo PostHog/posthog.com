@@ -23,6 +23,13 @@ Additional reports will be added based on user feedback we receive via our [in-a
 ## Requirements
 
 - A Reddit Ads account with permission to access data from accounts you want to sync.
+- Your account ID (optional, but useful for reference). You can find it in the [business manager app](https://ads.reddit.com/business/) > Menu > Assets > Ad Accounts > get the ID
+
+<ProductScreenshot
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_11_at_7_01_43_PM_c31b74db4c.png"
+    classes="rounded"
+    alt="Reddit account ID"
+/>
 
 ## Configuring PostHog
 
