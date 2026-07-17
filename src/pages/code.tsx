@@ -4,18 +4,24 @@ import Editor from 'components/Editor'
 import {
     IconAI,
     IconArrowUpRight,
+    IconBolt,
     IconBrackets,
     IconBrowser,
     IconCheck,
     IconColumns,
+    IconCompass,
     IconDashboard,
     IconDocument,
     IconFlask,
     IconGitBranch,
     IconGraph,
     IconList,
+    IconLive,
     IconMessage,
+    IconPulse,
     IconRewindPlay,
+    IconSparkles,
+    IconStack,
     IconToggle,
     IconTrends,
     IconWarning,
@@ -34,9 +40,8 @@ import { ChoppyReveal } from 'components/Code/ChoppyReveal'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import { IconPop } from 'components/Code/IconPop'
 import { SignalsCallout } from 'components/Code/SignalsCallout'
-import { SteerQueueDemo } from 'components/Code/SteerQueueDemo'
 import { DottedConnection } from 'components/Code/DottedConnection'
-import { StickerTombstone, StickerCoffee, StickerPullRequest, StickerMicroscope } from 'components/Stickers/Stickers'
+import { StickerTombstone, StickerMayor, StickerPullRequest, StickerAi } from 'components/Stickers/Stickers'
 import CloudinaryImage from 'components/CloudinaryImage'
 import WistiaEmbed from 'components/WistiaEmbed'
 import Link from 'components/Link'
@@ -463,7 +468,7 @@ function OldWaySection() {
     const tableStakes = [
         { text: "You're using Claude Code, Codex, or another agent to prompt real engineering work", checked: true },
         { text: "You've got the PostHog MCP wired into your editor, terminal, maybe your CI", checked: true },
-        { text: "Running a handful of agents in parallel doesn't even feel like a flex anymore", checked: true },
+        { text: "Running a handful of agents in parallel doesn't even feel like a flex anymore", checked: false },
         { text: 'Every session starts cold, no memory of the last decision or PR', checked: false },
         { text: "You're still the one watching the rollout and catching regressions", checked: false },
     ]
@@ -610,33 +615,30 @@ function PostHogWaySection({ onComplete }: { onComplete?: () => void }) {
                                 </RoughAnnotation>
                             </span>
                             {' from '}
-                            <span className="text-green text-sm">&#9679;</span> <strong>production data</strong> so it
-                            builds the right thing – and edits your <strong>product</strong>, not just your{' '}
-                            <strong>code</strong>.
+                            <span className="text-green text-sm">&#9679;</span> <strong>production data</strong> and
+                            ships improvements while you sleep.
                         </ChoppyReveal>
                     </p>
                 </div>
 
                 <p className="text-base leading-loose mb-5">
                     <ChoppyReveal wordDelay={25} initialDelay={p1Done ? 0 : 999999} onComplete={() => setP2Done(true)}>
-                        {'Run '}
+                        {'Bring the big idea. Run '}
                         <RoughAnnotation type="box" color="currentColor" strokeWidth={1} padding={2}>
                             <strong className="inline-block">a fleet of agents</strong>
                         </RoughAnnotation>
-                        {' on your machine or in an isolated '}
-                        <strong>cloud sandbox</strong>
-                        {' – '}
-                        <strong>steer</strong> or <strong>queue</strong> them as they work.
+                        {'. Watch your product thinking become shaped, shippable work.'}
                     </ChoppyReveal>
                 </p>
 
                 <p className="text-base leading-loose mb-5">
                     <ChoppyReveal wordDelay={25} initialDelay={p2Done ? 0 : 999999} onComplete={() => onComplete?.()}>
-                        <strong>TL;DR:</strong> Plenty of AI tools edit your code, but{' '}
+                        <strong>TL;DR:</strong> Other AI tools edit your code.{' '}
                         <RoughAnnotation type="underline" color="currentColor" strokeWidth={1.5} delay={400}>
-                            <span className="inline-block">only one understands – and edits – your product</span>
-                        </RoughAnnotation>{' '}
-                        like <strong>PostHog Code</strong>.
+                            <span className="inline-block">
+                                <strong>PostHog Code</strong> edits your product.
+                            </span>
+                        </RoughAnnotation>
                     </ChoppyReveal>
                 </p>
 
@@ -825,10 +827,34 @@ function MeepNotification({ className = 'my-10 flex justify-center px-4 @xl:px-8
 // Shown on the "Instrumentation" carousel slide: what PostHog Code wires up as it builds.
 const instrumentationItems = [
     {
-        icon: IconList,
-        color: 'text-blue',
+        icon: IconPulse,
+        color: 'text-pink',
         title: 'Capture logs',
         description: 'Adds structured logging as it writes the code, so you can see what actually ran in production.',
+    },
+    {
+        icon: IconGraph,
+        color: 'text-blue',
+        title: 'Track events',
+        description: 'Instruments the events for anything new it builds, so usage shows up in PostHog on its own.',
+    },
+    {
+        icon: IconWarning,
+        color: 'text-yellow',
+        title: 'Track errors',
+        description: 'Turns on exception capture so new code reports errors with full stack traces.',
+    },
+    {
+        icon: IconLive,
+        color: 'text-purple',
+        title: 'Trace LLM calls',
+        description: 'Wraps your AI features so every model call is traced with cost, latency, and output.',
+    },
+    {
+        icon: IconToggle,
+        color: 'text-teal',
+        title: 'Add a feature flag',
+        description: 'Ships the change behind a flag so you can roll it out slowly and kill it fast if needed.',
     },
     {
         icon: IconFlask,
@@ -836,68 +862,75 @@ const instrumentationItems = [
         title: 'Run an experiment',
         description: 'Scaffolds an A/B test with variants and a goal metric, then reads the result once data lands.',
     },
-    {
-        icon: IconTrends,
-        color: 'text-orange',
-        title: 'Track events',
-        description: 'Instruments the events for anything new it builds, so usage shows up in PostHog on its own.',
-    },
-    {
-        icon: IconWarning,
-        color: 'text-red',
-        title: 'Track errors',
-        description: 'Turns on exception capture so new code reports errors with full stack traces.',
-    },
-    {
-        icon: IconAI,
-        color: 'text-seagreen',
-        title: 'Trace LLM calls',
-        description: 'Wraps your AI features so every model call is traced with cost, latency, and output.',
-    },
-    {
-        icon: IconToggle,
-        color: 'text-yellow',
-        title: 'Add a feature flag',
-        description: 'Ships the change behind a flag so you can roll it out slowly and kill it fast if needed.',
-    },
 ]
+
+// Colour-chip emphasis for part of a carousel slide's title, à la the self-driving carousel
+// (TabPanel's highlightedTitle) – ties the highlighted phrase to the tab's own accent colour.
+type FeaturePanelHighlightColor = 'blue' | 'green' | 'yellow' | 'red' | 'purple'
+const featurePanelHighlightClasses: Record<FeaturePanelHighlightColor, string> = {
+    blue: 'bg-blue/10 text-blue dark:bg-blue/20',
+    green: 'bg-green/10 text-green dark:bg-green/20',
+    yellow: 'bg-yellow/15 text-yellow dark:bg-yellow/20',
+    red: 'bg-red/10 text-red dark:bg-red/20',
+    purple: 'bg-purple/10 text-purple dark:bg-purple/20',
+}
 
 // Carousel slide panel, à la the /slack and /self-driving carousels: title + body on
 // a bg-primary card, with the screenshot bleeding flush to the card's bottom edge.
 const FeaturePanel = ({
     title,
+    highlightedTitle,
+    titleSuffix,
+    highlightColor = 'blue',
     imageLight,
     imageDark,
     imageAlt,
     children,
 }: {
     title: string
+    highlightedTitle?: string
+    titleSuffix?: string
+    highlightColor?: FeaturePanelHighlightColor
     imageLight?: string
     imageDark?: string
     imageAlt?: string
     children: React.ReactNode
-}) => (
-    <div className="flex h-full flex-col rounded bg-primary p-4 @xl:p-6">
-        <h3 className="mt-0 mb-2 text-2xl font-bold">{title}</h3>
-        <div className="flex-1 text-[15px] text-secondary">{children}</div>
-        {imageLight && imageDark && (
-            <div className="-mx-4 -mb-4 mt-4 overflow-hidden rounded-b leading-[0] @xl:-mx-6 @xl:-mb-6">
-                <CloudinaryImage
-                    src={imageLight}
-                    alt={imageAlt || title}
-                    className="dark:hidden"
-                    imgClassName="w-full block"
-                />
-                <CloudinaryImage
-                    src={imageDark}
-                    alt={imageAlt || title}
-                    className="hidden dark:block"
-                    imgClassName="w-full block"
-                />
-            </div>
-        )}
-    </div>
-)
+}) => {
+    const fullTitle = [title, highlightedTitle, titleSuffix].filter(Boolean).join(' ')
+    return (
+        <div className="flex h-full flex-col rounded bg-primary p-4 @xl:p-6">
+            <h3 className="mt-0 mb-2 text-2xl font-bold">
+                {title}
+                {highlightedTitle && (
+                    <>
+                        {' '}
+                        <span className={`rounded-sm px-0.5 ${featurePanelHighlightClasses[highlightColor]}`}>
+                            {highlightedTitle}
+                        </span>
+                        {titleSuffix ? ` ${titleSuffix}` : null}
+                    </>
+                )}
+            </h3>
+            <div className="flex-1 text-[15px] text-secondary">{children}</div>
+            {imageLight && imageDark && (
+                <div className="-mx-4 -mb-4 mt-4 overflow-hidden rounded-b leading-[0] @xl:-mx-6 @xl:-mb-6">
+                    <CloudinaryImage
+                        src={imageLight}
+                        alt={imageAlt || fullTitle}
+                        className="dark:hidden"
+                        imgClassName="w-full block"
+                    />
+                    <CloudinaryImage
+                        src={imageDark}
+                        alt={imageAlt || fullTitle}
+                        className="hidden dark:block"
+                        imgClassName="w-full block"
+                    />
+                </div>
+            )}
+        </div>
+    )
+}
 
 // Compact icon + label chips used to add substance to a carousel slide's copy.
 const FeatureChips = ({
@@ -920,38 +953,28 @@ const SlideCallout = ({ children }: { children: React.ReactNode }) => (
     <div className="mt-5 rounded border border-yellow bg-yellow/10 px-3 py-2.5 text-sm text-secondary">{children}</div>
 )
 
+// Model name pill – same treatment as the <codebase /> tag in "The old way" section.
+const ModelChip = ({ children }: { children: React.ReactNode }) => (
+    <code className="inline-block rounded-sm border border-blue bg-blue/10 px-1 font-mono font-bold leading-normal not-italic">
+        {children}
+    </code>
+)
+
 const featureTabs: TabbedCarouselTab[] = [
     {
-        value: 'tasks',
-        label: 'Tasks',
-        color: 'bg-yellow',
-        activeText: 'text-black',
-        progressBar: 'bg-black/70 shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
-        content: (
-            <div className="flex h-full flex-col rounded bg-primary p-4 @xl:p-6">
-                <h3 className="mt-0 mb-2 text-2xl font-bold">Steer it, or queue it up</h3>
-                <p className="m-0 text-[15px] text-secondary">
-                    An agent's already running – you don't have to wait. Jump in to{' '}
-                    <strong className="text-primary">steer</strong> it mid-task, or{' '}
-                    <strong className="text-primary">queue</strong> up what's next and walk away.
-                </p>
-                <div className="mt-6">
-                    <SteerQueueDemo />
-                </div>
-            </div>
-        ),
-    },
-    {
         value: 'plan',
-        label: 'Modes',
+        label: 'Plan',
         color: 'bg-green',
         activeText: 'text-white',
         progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
         content: (
             <FeaturePanel
-                title="Agree on the plan before any code"
-                imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/plan_light_b34b9ad492.png"
-                imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/plan_dark_d27c25debd.png"
+                title="Agree on the"
+                highlightedTitle="plan"
+                titleSuffix="before any code"
+                highlightColor="green"
+                imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/plan_mode_light_f271562e0c.png"
+                imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/plan_mode_dark_e8253c4a4e.png"
                 imageAlt="Plan mode: clarifying questions and an implementation plan to approve"
             >
                 <p className="m-0">
@@ -959,33 +982,104 @@ const featureTabs: TabbedCarouselTab[] = [
                     multiple choice or freeform – then writes an implementation plan you approve. Tweak it, send it back
                     with notes, or say go. Nothing gets written until you're happy.
                 </p>
-                <div className="mt-5 flex flex-wrap items-center gap-x-1.5 gap-y-2 text-sm font-semibold">
-                    {['Explore', 'Ask', 'Plan', 'Approve'].map((step, i) => (
-                        <React.Fragment key={step}>
-                            {i > 0 && <span className="text-secondary">→</span>}
-                            <span className="rounded bg-accent px-2 py-1 text-primary">{step}</span>
-                        </React.Fragment>
-                    ))}
+                <div className="not-prose mt-4 grid grid-cols-1 gap-4 @sm:grid-cols-3">
+                    <div>
+                        <div className="flex items-center gap-1.5">
+                            <IconToggle className="size-5 shrink-0 text-green" />
+                            <span className="text-base font-bold text-primary">Mode</span>
+                        </div>
+                        <p className="m-0 mt-1 text-sm leading-snug text-secondary">
+                            Default, Accept Edits, Plan, or Auto – switch anytime, mid-task.
+                        </p>
+                    </div>
+                    <div>
+                        <div className="flex items-center gap-1.5">
+                            <IconAI className="size-5 shrink-0 text-purple" />
+                            <span className="text-base font-bold text-primary">Model</span>
+                        </div>
+                        <p className="m-0 mt-1 text-sm leading-snug text-secondary">
+                            Claude, GPT, or an open model like GLM – pick per task.
+                        </p>
+                    </div>
+                    <div>
+                        <div className="flex items-center gap-1.5">
+                            <IconBolt className="size-5 shrink-0 text-orange" />
+                            <span className="text-base font-bold text-primary">Effort level</span>
+                        </div>
+                        <p className="m-0 mt-1 text-sm leading-snug text-secondary">
+                            Low for quick edits, high when it actually needs to think.
+                        </p>
+                    </div>
+                </div>
+            </FeaturePanel>
+        ),
+    },
+    {
+        value: 'tasks',
+        label: 'Prompt',
+        color: 'bg-yellow',
+        activeText: 'text-black',
+        progressBar: 'bg-black/70 shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
+        content: (
+            <FeaturePanel
+                title="Steer it,"
+                highlightedTitle="or queue it up"
+                highlightColor="yellow"
+                imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/prompt_task_light_ad118d1efc.png"
+                imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/prompt_task_dark_6cb8a38596.png"
+                imageAlt="Prompting a task in PostHog Code"
+            >
+                <p className="m-0">An agent's already running – you don't have to wait for it to finish.</p>
+                <div className="mt-5 grid grid-cols-1 gap-3 @sm:grid-cols-2">
+                    <div className="flex flex-col rounded-md border border-blue/30 bg-blue/5 p-3.5">
+                        <div className="mb-2 flex items-center gap-2">
+                            <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-blue/15 text-blue">
+                                <IconCompass className="size-4" />
+                            </span>
+                            <p className="m-0 text-base font-bold text-primary">Steer</p>
+                        </div>
+                        <p className="m-0 text-sm text-secondary">"Wait, one more thing" – "wait, actually…"</p>
+                        <p className="m-0 mt-3 border-t border-blue/20 pt-3 text-sm text-secondary">
+                            <strong className="text-primary">Injects your message mid-turn</strong> at the next tool
+                            boundary.
+                        </p>
+                    </div>
+                    <div className="flex flex-col rounded-md border border-purple/30 bg-purple/5 p-3.5">
+                        <div className="mb-2 flex items-center gap-2">
+                            <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-purple/15 text-purple">
+                                <IconStack className="size-4" />
+                            </span>
+                            <p className="m-0 text-base font-bold text-primary">Queue</p>
+                        </div>
+                        <p className="m-0 text-sm text-secondary">Stack up what's next and step away.</p>
+                        <p className="m-0 mt-3 border-t border-purple/20 pt-3 text-sm text-secondary">
+                            <strong className="text-primary">Holds your message</strong> until the current agent turn
+                            ends.
+                        </p>
+                    </div>
                 </div>
             </FeaturePanel>
         ),
     },
     {
         value: 'command-center',
-        label: 'Command center',
+        label: 'Orchestrate',
         color: 'bg-blue',
         activeText: 'text-white',
         progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
         content: (
             <FeaturePanel
-                title="Manage multiple coding agents in parallel"
+                title="Manage multiple coding agents"
+                highlightedTitle="in parallel"
+                highlightColor="blue"
                 imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/command_center_dark_1_4295f77be1.png"
                 imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/command_center_dark_358aba9c5b.png"
                 imageAlt="Manage multiple coding agents in parallel"
             >
                 <p className="m-0">
-                    Run a whole fleet at once. Split-screen presets let you watch agents side-by-side or in a 2x2 or 3x3
-                    grid, each in its own isolated worktree – so nothing steps on anything else.
+                    Run a whole fleet at once from the command center. Split-screen presets let you watch agents
+                    side-by-side or in a 2x2 or 3x3 grid, each in its own isolated worktree – so nothing steps on
+                    anything else.
                 </p>
                 <FeatureChips
                     items={[
@@ -1000,17 +1094,21 @@ const featureTabs: TabbedCarouselTab[] = [
     },
     {
         value: 'instrument',
-        label: 'Instrumentation',
+        label: 'Instrument',
         color: 'bg-purple',
         activeText: 'text-white',
         progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
         content: (
-            <FeaturePanel title="It edits your product, not just your code">
+            <FeaturePanel title="Ship the change." highlightedTitle="Measure what happened." highlightColor="purple">
                 <p className="m-0">
-                    Ask once and PostHog Code sets up the measurement as it builds. Ship a change, roll it out safely,
-                    and see exactly what happened, all in the same loop.
+                    Code that ships without instrumentation is a guess wearing a lab coat. PostHog Code wires up the
+                    measurement in the same breath as the feature, so "did it work?" has an answer the moment it's live.
                 </p>
-                <ul className="mt-6 grid list-none grid-cols-1 gap-x-8 gap-y-4 p-0 @sm:grid-cols-2">
+                <SlideCallout>
+                    <strong className="text-primary">"We'll add tracking later" is a lie you tell yourself.</strong>{' '}
+                    PostHog Code just does it now, so there's no later to never get around to.
+                </SlideCallout>
+                <ul className="mt-5 grid list-none grid-cols-1 gap-x-8 gap-y-4 p-0 @sm:grid-cols-2">
                     {instrumentationItems.map(({ icon: Icon, color, title, description }) => (
                         <li key={title} className="relative pl-8">
                             <Icon className={`absolute left-0 top-0.5 size-6 ${color}`} />
@@ -1019,10 +1117,6 @@ const featureTabs: TabbedCarouselTab[] = [
                         </li>
                     ))}
                 </ul>
-                <SlideCallout>
-                    <strong className="text-primary">One command.</strong> It wires all of this up as it builds, so
-                    shipping and measuring stay in the same loop instead of a second pass later.
-                </SlideCallout>
             </FeaturePanel>
         ),
     },
@@ -1034,7 +1128,9 @@ const featureTabs: TabbedCarouselTab[] = [
         progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
         content: (
             <FeaturePanel
-                title="Built-in skills library"
+                title="Built-in"
+                highlightedTitle="skills library"
+                highlightColor="red"
                 imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/skills_light_sidepanel_bae81ae8d5.png"
                 imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/skills_dark_sidepanel_8e104c098d.png"
                 imageAlt="Built-in skills library"
@@ -1045,12 +1141,9 @@ const featureTabs: TabbedCarouselTab[] = [
                 </p>
                 <FeatureChips
                     items={[
-                        { Icon: IconGraph, color: 'text-blue', label: 'Query data' },
-                        { Icon: IconTrends, color: 'text-red', label: 'Instrument events' },
-                        { Icon: IconToggle, color: 'text-seagreen', label: 'Feature flags' },
-                        { Icon: IconFlask, color: 'text-purple', label: 'Experiments' },
-                        { Icon: IconRewindPlay, color: 'text-orange', label: 'Session replays' },
-                        { Icon: IconDashboard, color: 'text-yellow', label: 'Dashboards' },
+                        { Icon: IconSparkles, color: 'text-purple', label: 'Personal skills' },
+                        { Icon: IconSparkles, color: 'text-purple', label: 'Team skills' },
+                        { Icon: IconSparkles, color: 'text-purple', label: 'Skills marketplace' },
                     ]}
                 />
                 <SlideCallout>
@@ -1062,13 +1155,24 @@ const featureTabs: TabbedCarouselTab[] = [
     },
 ]
 
+// Animated, moving gradient text – same treatment as the self-driving carousel's heading
+// ("How a product improves itself").
+const FlowingGradientHighlight = ({ children }: { children: React.ReactNode }) => (
+    <em
+        className="inline animate-gradient-rotate bg-gradient-to-r from-yellow via-green to-blue bg-[length:200%_200%] bg-clip-text not-italic text-transparent motion-reduce:animate-none"
+        style={{ animationDuration: '12s' }}
+    >
+        {children}
+    </em>
+)
+
 const Features = () => {
     return (
         <section className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
             <h2 className="mb-4 text-2xl font-bold">
                 Everything you'd expect in an AI coding tool,{' '}
                 <span className="block">
-                    but <em className="text-gradient not-italic">way more...</em>
+                    but <FlowingGradientHighlight>way more...</FlowingGradientHighlight>
                 </span>
             </h2>
 
@@ -1245,42 +1349,99 @@ const SlideImage = ({ light, dark, alt }: { light: string; dark: string; alt: st
     </>
 )
 
-// A single alpha carousel slide: standard layout – copy on top, visual bleeding to the bottom edge.
+// A single alpha carousel slide: standard layout – copy (plus optional block content) on top,
+// visual bleeding to the bottom edge.
 const AlphaSlide = ({
     title,
     visual,
     children,
+    extra,
 }: {
     title: string
     visual: React.ReactNode
     children: React.ReactNode
+    extra?: React.ReactNode
 }) => (
     <div className="flex h-full flex-col rounded bg-primary p-4 @xl:p-6">
         <div className="mb-2 flex items-center gap-2">
             <h3 className="m-0 text-2xl font-bold">{title}</h3>
             <AlphaBadge />
         </div>
-        <p className="m-0 flex-1 text-[15px] text-secondary">{children}</p>
-        <div className="-mx-4 -mb-4 mt-4 overflow-hidden rounded-b @xl:-mx-6 @xl:-mb-6">{visual}</div>
+        <div className="flex-1">
+            <p className="m-0 text-[15px] text-secondary">{children}</p>
+            {extra}
+        </div>
+        <div className="-mx-4 -mb-4 mt-4 overflow-hidden rounded-b leading-[0] @xl:-mx-6 @xl:-mb-6">{visual}</div>
+    </div>
+)
+
+// Example canvases, grouped into two titled columns – mirrors the self-driving "scouts" tab.
+const canvasExampleGroups = [
+    {
+        title: 'Dashboards & reports',
+        description: 'Answer a question, no query required.',
+        items: [
+            { Icon: IconGraph, color: 'text-blue', name: 'Weekly active users' },
+            { Icon: IconTrends, color: 'text-green', name: 'Revenue by plan' },
+            { Icon: IconColumns, color: 'text-purple', name: 'Churn cohorts' },
+            { Icon: IconDashboard, color: 'text-orange', name: 'Funnel drop-off' },
+        ],
+    },
+    {
+        title: 'Internal tools',
+        description: 'The apps nobody ever gets around to building.',
+        items: [
+            { Icon: IconList, color: 'text-red', name: 'Refunds tool' },
+            { Icon: IconToggle, color: 'text-seagreen', name: 'Feature-flag toggler' },
+            { Icon: IconBrowser, color: 'text-blue', name: 'User lookup' },
+            { Icon: IconMessage, color: 'text-yellow', name: 'Support triage' },
+        ],
+    },
+]
+
+const CanvasExamples = () => (
+    <div className="mt-4 grid grid-cols-1 gap-6 @sm:grid-cols-2">
+        {canvasExampleGroups.map((group) => (
+            <div key={group.title} className="@container flex flex-col gap-2">
+                <div>
+                    <p className="m-0 text-sm font-bold text-primary">{group.title}</p>
+                    <p className="m-0 text-sm text-secondary">{group.description}</p>
+                </div>
+                <div className="grid grid-cols-1 gap-x-4 gap-y-1.5 @xs:grid-cols-2">
+                    {group.items.map(({ Icon, color, name }) => (
+                        <span key={name} className="flex items-start gap-1.5 text-sm text-primary">
+                            <Icon className={`mt-0.5 size-5 shrink-0 ${color}`} />
+                            {name}
+                        </span>
+                    ))}
+                </div>
+            </div>
+        ))}
     </div>
 )
 
 const alphaTabs: TabbedCarouselTab[] = [
     {
-        value: 'multiplayer',
-        label: 'Multiplayer',
+        value: 'collaboration',
+        label: 'Collaboration',
         color: 'bg-lilac',
         activeText: 'text-white',
         progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
         content: (
             <AlphaSlide
-                title="Like work actually is"
+                title="Multiplayer (like work actually is)"
                 visual={
                     <SlideImage
-                        light="https://res.cloudinary.com/dmukukwp6/image/upload/multiplayer_light_a9500a4335.png"
-                        dark="https://res.cloudinary.com/dmukukwp6/image/upload/multiplayer_dark_ea8e2e039e.png"
+                        light="https://res.cloudinary.com/dmukukwp6/image/upload/contexts_dark_1_c98fa79b8e.png"
+                        dark="https://res.cloudinary.com/dmukukwp6/image/upload/contexts_dark_f006575ea6.png"
                         alt="Teammates and agents working the same threads in PostHog Code"
                     />
+                }
+                extra={
+                    <SlideCallout>
+                        <strong className="text-primary">Discuss tasks with your team.</strong> Messages stay between
+                        humans unless the task author tags in the agent.
+                    </SlideCallout>
                 }
             >
                 Agents are <strong className="text-primary">teammates with names.</strong> Your people and your agents
@@ -1289,14 +1450,14 @@ const alphaTabs: TabbedCarouselTab[] = [
         ),
     },
     {
-        value: 'channels',
-        label: 'Channels',
+        value: 'contexts',
+        label: 'Contexts',
         color: 'bg-teal',
         activeText: 'text-black',
         progressBar: 'bg-black/70 shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
         content: (
             <AlphaSlide title="Remembers everything" visual={<ChannelMockup />}>
-                Chat windows have amnesia. Channels don't – each one keeps its own working memory, so kicking off a task
+                Chat windows have amnesia. Contexts don't – each one keeps its own working memory, so kicking off a task
                 means the agent already knows the history.{' '}
                 <strong className="text-primary">No re-briefing a goldfish.</strong>
             </AlphaSlide>
@@ -1318,8 +1479,9 @@ const alphaTabs: TabbedCarouselTab[] = [
                         alt="A generated canvas: a weekly active users report built on your PostHog data"
                     />
                 }
+                extra={<CanvasExamples />}
             >
-                Ask a channel for a report, a dashboard, or that internal refunds tool nobody ever builds – and get a{' '}
+                Ask a context for a report, a dashboard, or that internal refunds tool nobody ever builds – and get a{' '}
                 <strong className="text-primary">canvas</strong>: generative UI on PostHog's actual data model.
             </AlphaSlide>
         ),
@@ -1369,7 +1531,7 @@ const AgenticWorkspaceSection = () => {
         <section className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
             <SectionLabel>
                 <span className="inline-flex items-center gap-2.5">
-                    <StickerMicroscope className="size-8 shrink-0 -rotate-3" />
+                    <StickerAi className="size-8 shrink-0 -rotate-3" />
                     Alphas within the beta
                 </span>
             </SectionLabel>
@@ -1455,8 +1617,8 @@ const SupportedLLMs = () => {
                             OpenAI
                         </p>
                         <div className="flex flex-wrap gap-2">
-                            <code className="text-sm font-bold text-primary">GPT-5.5</code>
-                            <code className="text-sm font-bold text-primary">GPT-5.4</code>
+                            <ModelChip>GPT-5.5</ModelChip>
+                            <ModelChip>GPT-5.4</ModelChip>
                         </div>
                     </div>
                     <div>
@@ -1464,11 +1626,11 @@ const SupportedLLMs = () => {
                             Anthropic
                         </p>
                         <div className="flex flex-wrap gap-2">
-                            <code className="text-sm font-bold text-primary">Claude Fable 5</code>
-                            <code className="text-sm font-bold text-primary">Claude Sonnet 4.6</code>
-                            <code className="text-sm font-bold text-primary">Claude Opus 4.8</code>
-                            <code className="text-sm font-bold text-primary">Claude Opus 4.7</code>
-                            <code className="text-sm font-bold text-primary">Claude Haiku 4.5</code>
+                            <ModelChip>Claude Fable 5</ModelChip>
+                            <ModelChip>Claude Sonnet 4.6</ModelChip>
+                            <ModelChip>Claude Opus 4.8</ModelChip>
+                            <ModelChip>Claude Opus 4.7</ModelChip>
+                            <ModelChip>Claude Haiku 4.5</ModelChip>
                         </div>
                     </div>
                     <CloudinaryImage
@@ -1492,7 +1654,7 @@ const SupportedLLMs = () => {
                         We support
                     </p>
                     <div className="mb-4 flex flex-wrap items-baseline gap-2">
-                        <code className="text-sm font-bold text-primary">GLM-5.2</code>
+                        <ModelChip>GLM-5.2</ModelChip>
                         <span className="text-sm font-medium italic text-secondary">
                             …and more, if you have{' '}
                             <Link
@@ -1596,7 +1758,7 @@ const BiggerPictureSection = () => {
     return (
         <section className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
             <SectionLabel>
-                <InlineIcon icon={StickerCoffee} className="!size-10 !top-3 -rotate-1">
+                <InlineIcon icon={StickerMayor} className="!size-10 !top-3 -rotate-1">
                     Congratulations
                 </InlineIcon>{' '}
                 on your promotion
