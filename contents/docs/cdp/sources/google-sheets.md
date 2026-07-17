@@ -19,6 +19,8 @@ Each Google Sheets source in PostHog is a single spreadsheet where each workshee
 
 The first row of the spreadsheet is treated as the column names for the table.
 
+> Column headers are normalized when creating table columns — casing, spaces, and punctuation are ignored. Headers that look different in the sheet (e.g., `Task ID` and `task_id`) may collapse to the same column name. If this happens, the sync fails with an error identifying the conflicting headers. Rename one of the colliding headers in your sheet and resync.
+
 ### Configure Google Sheets
 
 To connect to your Google Sheet, PostHog uses a Google Cloud service account. Thus, you must grant this service account access to your Google Sheet by following these steps:

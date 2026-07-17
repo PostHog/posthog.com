@@ -729,6 +729,16 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
+                    label: 'Display options',
+                    onClick: () => {
+                        navigate('/display-options', { state: { newWindow: true } })
+                    },
+                    icon: <Icons.IconBrightness className="size-4 text-yellow" />,
+                    shortcut: [','],
+                    mobileDestination: false, // Already exposed as a system item in the mobile logo menu
+                },
+                {
+                    type: 'item',
                     label: 'Keyboard shortcuts',
                     link: '/kbd',
                     icon: <Icons.IconKeyboard className="size-4 text-primary" />,
