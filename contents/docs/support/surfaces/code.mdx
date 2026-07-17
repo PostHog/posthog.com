@@ -4,15 +4,25 @@ sidebar: Docs
 showTitle: true
 ---
 
-[PostHog Code](/docs/posthog-code) is the desktop app for driving parallel agents that edit your product. For Support, it's where you review and merge the [self-driving](/docs/support/self-driving) work your tickets generate. You don't reply to customer tickets here, that happens in the [web app](/docs/support/inbox).
+<CalloutBox icon="IconFlask" title="Open beta" type="action">
 
-PostHog Code is in beta.
+PostHog Code is in beta, so some behaviors may still change.
 
-## What you can do
+</CalloutBox>
 
-- Connect signal sources, including your support conversations, so they feed the self-driving loop.
-- Review researched reports, prioritized by user impact, and merge the pull requests when a fix is ready.
-- Take over a task locally for deeper, multi-repo agent work.
+[PostHog Code](/docs/posthog-code) is the desktop app for driving parallel agents that improve your product. For Support, it's where you review and merge the [self-driving](/docs/self-driving) work your tickets generate. You don't reply to customer tickets here – that happens in the [web app](/docs/support/inbox).
+
+## Review the fixes your tickets generated
+
+Recurring issues in your support conversations become [self-driving reports](/docs/self-driving/reports), each with the evidence behind it and, when there's a code fix, a drafted pull request. PostHog Code is where you connect those conversations as a signal source and work through the reports they generate.
+
+Say a handful of reports landed overnight from your support queue. In PostHog Code you can:
+
+- Open a report to see the tickets it groups, the session replays and events behind them, and the proposed fix
+- Merge the pull request when the fix holds up, or steer the agent when it needs more context
+- Take a multi-repo fix over locally and keep going with a full agent
+
+Because the reports come straight from your tickets, you're reviewing fixes for problems your customers actually hit, ranked by how many of them hit it.
 
 ## How it connects to Slack
 

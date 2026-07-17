@@ -5,10 +5,11 @@ showTitle: true
 contentMaxWidthClass: max-w-5xl
 ---
 
-import { IconLaptop, IconMessage, IconMagic, IconCode, IconBrackets, IconChat, IconAtSign, IconGithub } from '@posthog/icons'
+import { IconLaptop, IconMessage, IconMagic, IconCode, IconBrackets, IconChat, IconAtSign, IconGithub, IconBolt, IconNotebook, IconPullRequest, IconCheckCircle } from '@posthog/icons'
 import OSButton from 'components/OSButton'
+import CustomSelfDrivingLoop from 'components/CustomSelfDrivingLoop'
 
-Support gives you one inbox for every customer conversation, whether it arrives from your app, your email, or a GitHub issue. Because PostHog already knows what's happening in your product, each ticket comes with the sender's [session replay](/docs/session-replay), events, and errors attached, so you can see what went wrong instead of trying to reproduce it. Those same conversations feed [self-driving](/docs/support/self-driving), which groups recurring issues into pull requests you review and merge.
+Support gives you one inbox for every customer conversation, whether it arrives from your app, your email, or a GitHub issue. Because PostHog already knows what's happening in your product, each ticket comes with the sender's [session replay](/docs/session-replay), events, and errors attached, so you can see what went wrong instead of trying to reproduce it. Those same conversations feed [self-driving](/docs/self-driving), which groups recurring issues into pull requests you review and merge.
 
 <OSButton variant="primary" asLink to="/docs/support/start-here">Get started</OSButton>
 
@@ -32,7 +33,7 @@ Support does different things depending on where you work. You read and reply to
     <div>
       <p className="m-0 font-bold text-primary">Slack</p>
       <p className="m-0 mt-0.5 text-sm text-secondary">Ask <code>@PostHog</code> about your support data and review self-driving reports built from your tickets.</p>
-      <a href="/docs/support/self-driving" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">See the Slack app →</a>
+      <a href="/docs/support/surfaces/slack" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">See the Slack app →</a>
     </div>
   </div>
 
@@ -65,7 +66,7 @@ Support does different things depending on where you work. You read and reply to
 
 </div>
 
-## Channels
+## Where support data comes from
 
 Tickets reach your inbox through four [channels](/docs/support/concepts/channels). Each one syncs both ways, so you answer from a single place no matter where the conversation started.
 
@@ -108,3 +109,19 @@ Tickets reach your inbox through four [channels](/docs/support/concepts/channels
   </div>
 
 </div>
+
+## How Support works with self-driving
+
+Your support conversations are a [signal source](/docs/self-driving/inbox/sources) for [self-driving](/docs/self-driving): recurring issues become reports, and when there's a code fix, a pull request you review and merge.
+
+<CustomSelfDrivingLoop
+  stages={[
+    { label: 'Support conversations', icon: IconMessage, color: '#F54E00', description: 'Tickets from every channel, plus external help desks' },
+    { label: 'Signals', icon: IconBolt, color: '#FFA81C', description: 'Actionable items extracted from conversations' },
+    { label: 'One report', icon: IconNotebook, color: '#29DBBB', description: 'Grouped with related errors and replays' },
+    { label: 'Draft PR', icon: IconPullRequest, color: '#A737D2', description: 'When a code fix is possible' },
+    { label: 'You merge', icon: IconCheckCircle, color: '#47C861', description: 'Nothing ships without a human' },
+  ]}
+/>
+
+You read and reply to customers in the [Support inbox](/docs/support/inbox), and review and merge the self-driving work in the [self-driving inbox](/docs/self-driving/inbox). See the [self-driving docs](/docs/self-driving) for the full picture.

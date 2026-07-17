@@ -5661,16 +5661,10 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
-                    name: 'Support and self-driving',
-                    url: '/docs/support/self-driving',
-                    icon: 'IconMagic',
-                    color: 'purple',
-                },
-                {
-                    name: 'Context',
-                },
-                {
                     name: 'Channels',
+                },
+                {
+                    name: 'How channels work',
                     url: '/docs/support/concepts/channels',
                     icon: 'IconMessage',
                     color: 'blue',
@@ -5682,7 +5676,7 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
-                    name: 'Slack (SupportHog)',
+                    name: 'Slack',
                     url: '/docs/support/slack',
                     icon: 'IconChat',
                     color: 'purple',
@@ -5694,13 +5688,16 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Import historical tickets',
+                    name: 'Imports',
+                },
+                {
+                    name: 'How imports work',
                     url: '/docs/support/imports',
                     icon: 'IconUpload',
                     color: 'blue',
                 },
                 {
-                    name: 'Import from Zendesk',
+                    name: 'Zendesk',
                     url: '/docs/support/imports/zendesk',
                     icon: 'IconLetter',
                     color: 'blue',

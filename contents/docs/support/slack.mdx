@@ -61,16 +61,16 @@ React with the configured emoji (default `:ticket:`) on any message to create a 
 When someone posts a top-level message in a channel the bot is in that isn't a configured support channel, SupportHog replies in-thread asking whether to open a support ticket. The prompt includes **Open ticket** and **No thanks** buttons.
 
 - **Open ticket** – creates a ticket from the original message, backfills any thread replies posted while the prompt was pending, and replaces the prompt with a ticket confirmation.
-- **No thanks** – deletes the prompt and suppresses further nudges for that user in that channel for 3 hours.
+- **No thanks** – deletes the prompt and suppresses further nudges for that user in that channel for three hours.
 
 The prompt also mentions the emoji reaction and `@SupportHog` mention as alternative ways to open a ticket.
 
 To reduce noise, SupportHog skips the nudge for:
 
-- Trivial messages (3 words or fewer, or emoji-only)
+- Trivial messages (three words or fewer, or emoji-only)
 - Messages from internal teammates
 - Messages that `@mention` the bot (these create tickets directly)
-- Users who were already nudged in the last 5 minutes
+- Users who were already nudged in the last five minutes
 
 Ticket nudges are on by default. You can disable them in **Conversations** > **Settings** by unchecking **Nudge users to open tickets**.
 
@@ -115,4 +115,4 @@ To remove the Slack integration:
 1. Go to **Support** > **Settings**
 2. Click **Disconnect** in the Slack section
 
-Existing tickets created from Slack are not affected – they remain in your inbox but will no longer sync new messages.
+Existing tickets created from Slack are not affected – they remain in your inbox but no longer sync new messages.
