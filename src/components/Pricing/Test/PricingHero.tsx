@@ -1,19 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { PRODUCT_COUNT } from '../../../constants'
-import { section, SectionLayout, SectionHeader, SectionColumns, SectionMainCol, SectionSidebar } from './Sections'
 import Header from '../Test/Header'
-import { graphql, useStaticQuery } from 'gatsby'
-import { Link as ScrollLink } from 'react-scroll'
 import PlanContent from './PlanContent'
-import Tooltip from 'components/Tooltip'
-import FreeTier from './FreeTier'
 
 interface PricingHeroProps {
     activePlan: string
     setActivePlan: (plan: string) => void
+    onFreeTierClick: () => void
 }
 
-const PricingHero = ({ activePlan, setActivePlan }: PricingHeroProps): JSX.Element => {
+const PricingHero = ({ activePlan, setActivePlan, onFreeTierClick }: PricingHeroProps): JSX.Element => {
     const handleFreePlanClick = () => {
         setActivePlan('free')
         window.history.pushState(null, '', '?plan=free')
@@ -23,103 +19,6 @@ const PricingHero = ({ activePlan, setActivePlan }: PricingHeroProps): JSX.Eleme
         setActivePlan('paid')
         window.history.pushState(null, '', '?plan=paid')
     }
-    const [animateFreeTiers, setAnimateFreeTiers] = useState(false)
-    const [currentModal, setCurrentModal] = useState<string | boolean>(false)
-    const {
-        allProductData: {
-            nodes: [{ products: billingProducts }],
-        },
-    } = useStaticQuery(graphql`
-        query {
-            allProductData {
-                nodes {
-                    products {
-                        description
-                        docs_url
-                        image_url
-                        icon_key
-                        inclusion_only
-                        contact_support
-                        addons {
-                            contact_support
-                            description
-                            docs_url
-                            image_url
-                            icon_key
-                            inclusion_only
-                            name
-                            type
-                            unit
-                            plans {
-                                description
-                                docs_url
-                                image_url
-                                name
-                                plan_key
-                                product_key
-                                unit
-                                flat_rate
-                                unit_amount_usd
-                                features {
-                                    key
-                                    name
-                                    description
-                                    category
-                                    limit
-                                    note
-                                    entitlement_only
-                                    is_plan_default
-                                    unit
-                                }
-                                tiers {
-                                    current_amount_usd
-                                    current_usage
-                                    flat_amount_usd
-                                    unit_amount_usd
-                                    up_to
-                                }
-                            }
-                        }
-                        name
-                        type
-                        unit
-                        usage_key
-                        plans {
-                            description
-                            docs_url
-                            features {
-                                key
-                                name
-                                description
-                                category
-                                limit
-                                note
-                                entitlement_only
-                                is_plan_default
-                                unit
-                            }
-                            free_allocation
-                            image_url
-                            included_if
-                            name
-                            plan_key
-                            product_key
-                            contact_support
-                            unit_amount_usd
-                            tiers {
-                                current_amount_usd
-                                current_usage
-                                flat_amount_usd
-                                unit_amount_usd
-                                up_to
-                            }
-                            unit
-                        }
-                    }
-                }
-            }
-        }
-    `)
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search)
@@ -203,28 +102,8 @@ const PricingHero = ({ activePlan, setActivePlan }: PricingHeroProps): JSX.Eleme
                 </ul>
             </div>
 
-            <div className="@5xl/reader-content:hidden not-prose border border-primary rounded-md p-4 mb-4 bg-light dark:bg-accent">
-                <PlanContent activePlan={activePlan} onFreeTierClick={() => setAnimateFreeTiers(true)} isMainColumn />
-            </div>
-
-            <div className="hidden @5xl/reader-content:block border-t border-primary pt-4 h-px"></div>
-
-            <div
-                className={`not-prose @container transition-all rounded-md border ${
-                    animateFreeTiers
-                        ? 'animate-flash bg-[#FAE9CE] dark:bg-[#463B2A] border-yellow -mx-2 -mt-1 px-2 pt-1'
-                        : 'bg-transparent border-transparent'
-                }`}
-                onAnimationEnd={() => setAnimateFreeTiers(false)}
-            >
-                <div className="flex items-baseline gap-1 mb-3">
-                    <h4 className="mb-0 text-lg">Free tier on all plans</h4>
-                    <span className="opacity-75 text-sm">(resets monthly)</span>
-                </div>
-
-                <div className={`grid grid-cols-3 @lg:grid-cols-4 @xl:grid-cols-5 mb-2 gap-4 @lg:gap-x-2 @lg:gap-y-2`}>
-                    <FreeTier />
-                </div>
+            <div className="@5xl/reader-content:hidden not-prose border border-primary rounded-md p-4 bg-light dark:bg-accent">
+                <PlanContent activePlan={activePlan} onFreeTierClick={onFreeTierClick} isMainColumn />
             </div>
         </>
     )
