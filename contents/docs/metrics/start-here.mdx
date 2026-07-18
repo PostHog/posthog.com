@@ -21,9 +21,9 @@ There are two ways to get metrics into PostHog, and both take a few minutes.
 If [posthog-js](/docs/libraries/js) is already running on your site, record metrics directly with the `posthog.metrics` API. No new packages, no extra authentication:
 
 ```js
-posthog.metrics.count('checkout.completed')
-posthog.metrics.gauge('cart.items', 3)
-posthog.metrics.histogram('api.request.duration', 187, { unit: 'ms' })
+posthog.metrics.count("checkout.completed");
+posthog.metrics.gauge("cart.items", 3);
+posthog.metrics.histogram("api.request.duration", 187, { unit: "ms" });
 ```
 
 If you use OpenTelemetry anywhere else (backend services, infrastructure, an existing Collector), point your OTLP metrics exporter at PostHog. No PostHog packages are required:
@@ -94,6 +94,7 @@ Once data flows, build the views you'll actually watch:
 - **Filter** with `key=value` chips to focus on one service, environment, or status.
 - Switch to **stat mode** for a single headline number with an automatic comparison against the baseline.
 - Turn on **live** to refresh the chart every few seconds while you watch a deploy or an incident.
+- If your metrics carry **trace context**, look for dots along the chart bottom — clicking one opens the linked [trace](/docs/distributed-tracing).
 
 </QuestLogItem>
 
