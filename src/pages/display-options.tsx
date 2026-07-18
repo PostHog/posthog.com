@@ -274,9 +274,9 @@ export default function DisplayOptions() {
                                 { label: 'Enabled', value: 'true' },
                             ]}
                             onValueChange={(value) => {
-                                updateSiteSettings({ ...siteSettings, heaterMode: value !== 'true' })
+                                updateSiteSettings({ ...siteSettings, reduceTransparency: value === 'true' })
                             }}
-                            value={siteSettings.heaterMode ? 'false' : 'true'}
+                            value={siteSettings.reduceTransparency ? 'true' : 'false'}
                         />
                     </div>
                 </div>

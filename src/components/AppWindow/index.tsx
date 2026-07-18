@@ -744,8 +744,8 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                             ? 'h-[95%] w-[80%]'
                             : 'size-full'
                     } !select-auto flex flex-col border-primary ${getWindowSurfaceBg(
-                        siteSettings.heaterMode
-                    )} ${getSurfaceMotionLayer(siteSettings.heaterMode, isCompositorActive)} rounded-lg ${
+                        siteSettings.reduceTransparency
+                    )} ${getSurfaceMotionLayer(siteSettings.reduceTransparency, isCompositorActive)} rounded-lg ${
                         item.appSettings?.size?.fixed ? 'border' : item.expanded ? 'border-t' : ''
                     } ${item.expanded ? 'shadow-none' : 'shadow-md'} ${
                         item.expanded

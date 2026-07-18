@@ -1,8 +1,8 @@
 // OS window chrome — full literal strings so Tailwind JIT picks up every class.
-// Default (heaterMode): frosted glass with blur. Reduce transparency: solid bg-primary, no blur.
+// Default: frosted glass with blur. Reduce transparency (opt-in): solid bg-primary, no blur.
 // `reduce-transparency:` is a custom variant for prefers-reduced-transparency (macOS).
 
-/** Default — opaque, no blur */
+/** Reduce-transparency — opaque, no blur */
 export const WINDOW_BG = 'bg-primary transform-gpu reduce-transparency:!bg-primary'
 export const PANEL_BG = 'bg-primary transform-gpu reduce-transparency:!bg-primary'
 
@@ -20,11 +20,11 @@ export const HEATER_PANEL_BG =
 export const MOTION_LAYER = 'will-change-transform'
 export const HEATER_MOTION_LAYER = 'will-change-[transform,backdrop-filter]'
 
-export const getWindowSurfaceBg = (heaterMode?: boolean) => (heaterMode ? HEATER_WINDOW_BG : WINDOW_BG)
+export const getWindowSurfaceBg = (reduceTransparency?: boolean) => (reduceTransparency ? WINDOW_BG : HEATER_WINDOW_BG)
 export const getTaskbarSurfaceBg = () => TASKBAR_BG
-export const getPanelSurfaceBg = (heaterMode?: boolean) => (heaterMode ? HEATER_PANEL_BG : PANEL_BG)
-export const getSurfaceMotionLayer = (heaterMode?: boolean, active?: boolean) =>
-    active ? (heaterMode ? HEATER_MOTION_LAYER : MOTION_LAYER) : ''
+export const getPanelSurfaceBg = (reduceTransparency?: boolean) => (reduceTransparency ? PANEL_BG : HEATER_PANEL_BG)
+export const getSurfaceMotionLayer = (reduceTransparency?: boolean, active?: boolean) =>
+    active ? (reduceTransparency ? MOTION_LAYER : HEATER_MOTION_LAYER) : ''
 /** Taskbar always blurs — promote backdrop-filter while animating. */
 export const getTaskbarMotionLayer = (active?: boolean) => (active ? HEATER_MOTION_LAYER : '')
 

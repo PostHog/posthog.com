@@ -976,7 +976,7 @@ const LeftSidebar = ({
     onMobileClose,
 }: LeftSidebarProps) => {
     const { siteSettings } = useAppSettings()
-    const panelBg = getPanelSurfaceBg(siteSettings.heaterMode)
+    const panelBg = getPanelSurfaceBg(siteSettings.reduceTransparency)
     const { searchQuery } = useSearch()
     const { hasMounted } = useReaderView()
     const hasActiveSearch = !!searchQuery && searchQuery.length >= 2
@@ -1378,7 +1378,7 @@ function ReaderViewContent({
 }: ReaderViewProps) {
     const { compact } = useApp()
     const { siteSettings } = useAppSettings()
-    const panelBg = getPanelSurfaceBg(siteSettings.heaterMode)
+    const panelBg = getPanelSurfaceBg(siteSettings.reduceTransparency)
     const { appWindow, activeInternalMenu } = useWindow()
     const { hash } = useLocation()
     const contentRef = useRef<HTMLDivElement>(null)
