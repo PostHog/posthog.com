@@ -10,9 +10,8 @@ export const WINDOW_BG =
 export const PANEL_BG =
     'bg-primary/75 dark:bg-primary backdrop-blur-3xl transform-gpu reduce-transparency:!bg-primary reduce-transparency:backdrop-blur-none'
 
-/** Taskbar — always blurred (still respects OS/site reduce transparency) */
-export const TASKBAR_BG =
-    'bg-primary/50 backdrop-blur-3xl transform-gpu reduce-transparency:!bg-primary reduce-transparency:backdrop-blur-none'
+/** Taskbar — always frosted; not tied to reduce transparency */
+export const TASKBAR_BG = 'bg-primary/50 backdrop-blur-3xl transform-gpu'
 
 /** Promote compositor layers while a surface is moving */
 export const MOTION_LAYER = 'will-change-[transform,backdrop-filter] reduce-transparency:will-change-transform'
