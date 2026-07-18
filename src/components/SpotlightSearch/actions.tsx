@@ -154,7 +154,7 @@ export const useSpotlightActions = (): SpotlightAction[] => {
                 if (next) {
                     toast(
                         <IconBolt className="size-5 inline-block mr-1" />,
-                        'Reduce transparency on – solid panels, less GPU'
+                        'Reduce transparency on - solid window backgrounds'
                     )
                 }
             },

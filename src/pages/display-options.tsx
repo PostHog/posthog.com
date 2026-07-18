@@ -262,7 +262,7 @@ export default function DisplayOptions() {
                         <span className="text-sm">Reduce transparency</span>
                         <Tooltip trigger={<IconInfo className="size-4 inline-block relative -top-px" />} delay={0}>
                             <p className="max-w-sm my-0 leading-snug">
-                                Solid, opaque backgrounds for windows and sidebars instead of frosted blur.
+                                Solid, opaque backgrounds for windows and sidebars instead of blurred transparency.
                             </p>
                         </Tooltip>
                     </div>
