@@ -139,9 +139,9 @@ const WallpaperSelect = ({ value, onValueChange, title }: WallpaperSelectProps) 
                 open={isOpen}
                 onOpenChange={setIsOpen}
             >
-                <ScrollArea>
+                <ScrollArea className="min-h-0 !overflow-y-auto overscroll-contain max-h-[calc(var(--radix-popover-content-available-height)-0.75rem)]">
                     <div className="@container">
-                        <div className="grid md:@xl:grid-cols-2 md:@2xl:grid-cols-3 md:@xl:gap-2 p-2 min-h-[200px] h-[400px]">
+                        <div className="grid md:@xl:grid-cols-2 md:@2xl:grid-cols-3 md:@xl:gap-2 p-2">
                             {themeOptions.map((option) => {
                                 const optionThumb = isDark
                                     ? option.background?.thumb?.dark
