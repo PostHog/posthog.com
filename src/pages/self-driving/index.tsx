@@ -926,7 +926,7 @@ export default function SelfDrivingPage({
     const { siteSettings } = useAppSettings()
 
     const selfDrivingPRs = data?.allSelfDrivingPullRequest?.nodes ?? []
-    const humanRoleCardBackground = getWindowSurfaceBg(siteSettings.heaterMode)
+    const humanRoleCardBackground = getWindowSurfaceBg(siteSettings.reduceTransparency)
     return (
         <>
             <SEO
