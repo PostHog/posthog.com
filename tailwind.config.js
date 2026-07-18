@@ -525,7 +525,11 @@ module.exports = {
             addVariant('wallpaper-hogzilla', 'body[data-wallpaper="hogzilla"] &')
             addVariant('wallpaper-office-party', 'body[data-wallpaper="office-party"] &')
             addVariant('wallpaper-startup-monopoly', 'body[data-wallpaper="startup-monopoly"] &')
-            addVariant('reduce-transparency', '@media (prefers-reduced-transparency: reduce)')
+            // Site toggle (data attr, set early in theme-init) + OS prefers-reduced-transparency
+            addVariant('reduce-transparency', [
+                'body[data-reduce-transparency="true"] &',
+                '@media (prefers-reduced-transparency: reduce)',
+            ])
         },
     ],
 }
