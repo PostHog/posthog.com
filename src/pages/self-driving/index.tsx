@@ -12,7 +12,7 @@ import type { TabbedCarouselTab } from 'components/TabbedCarousel'
 import Link from 'components/Link'
 import WizardCommand from 'components/WizardCommand'
 import { SignalsCallout } from 'components/Code/SignalsCallout'
-import { useAppSettings } from '../../context/App'
+import { WINDOW_BG } from '../../constants/frostedSurfaces'
 import {
     IconArrowRight,
     IconAtSign,
@@ -922,12 +922,8 @@ export default function SelfDrivingPage({
 }: {
     data?: { allSelfDrivingPullRequest?: { nodes: SelfDrivingPR[] } }
 }): JSX.Element {
-    const { siteSettings } = useAppSettings()
-
     const selfDrivingPRs = data?.allSelfDrivingPullRequest?.nodes ?? []
-    const humanRoleCardBackground = siteSettings.heaterMode
-        ? 'bg-primary/75 backdrop-blur-3xl will-change-[transform,backdrop-filter] transform-gpu'
-        : 'bg-primary bg-mesh-green-light dark:bg-mesh-green-dark'
+    const humanRoleCardBackground = WINDOW_BG
     return (
         <>
             <SEO
@@ -935,7 +931,12 @@ export default function SelfDrivingPage({
                 description="PostHog watches your product, finds what's worth fixing, writes the code, and opens the pull request. You review and merge. A product that develops itself – now in open beta."
                 image="/images/og/default.png"
             />
-            <ReaderView leftSidebar={<LeftSidebarContent />} title="self-driving.md" hideTitle>
+            <ReaderView
+                leftSidebar={<LeftSidebarContent />}
+                title="self-driving.md"
+                hideTitle
+                className="overflow-x-hidden"
+            >
                 <div className="relative z-10">
                     <div className="not-prose mb-8 pt-2 @lg/reader-content:pt-6 @3xl:mb-12">
                         <section className="relative mx-auto max-w-5xl overflow-hidden rounded-md border border-primary bg-primary shadow-2xl">
