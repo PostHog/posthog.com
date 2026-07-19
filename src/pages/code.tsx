@@ -1350,7 +1350,7 @@ const FAQ_ITEMS = [
         content: (
             <div className="space-y-3">
                 <p>
-                    PostHog AI is the product assistant built into PostHog Cloud. It's deeply integrated with your data
+                    PostHog AI is the product assistant built into PostHog Web. It's deeply integrated with your data
                     and helps with things like writing SQL and analyzing user behavior through natural-language prompts.
                 </p>
                 <p>

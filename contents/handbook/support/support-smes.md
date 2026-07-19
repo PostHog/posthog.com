@@ -20,7 +20,7 @@ The various PostHog products have been split into the following product groups:
 - Flags (experiments, feature flags, surveys)
 - Data (batch exports, data stack, ingestion, workflows)
 - Replay (replay)
-- Observability + AI & client libraries (error tracking, PostHog AI, AI Observability, SDK/Implementation, mobile)
+- Observability + AI & client libraries (AI observability, error tracking, logs, mobile, PostHog AI, self-driving, SDKs/implementation)
 - Accounts & Billing (platform features, login/SSO, billing)
 
 **A note on these groupings**: These product groups are based on current ticket volumes. As products grow or new ones launch, we'll split or reorganize them. This structure will evolve with our needs.
