@@ -4,7 +4,12 @@ import React from 'react'
 import { useUser } from 'hooks/useUser'
 import { IconSparkles, IconClock } from '@posthog/icons'
 
-const navSorted = ['Products', 'Data', 'Product OS', 'Self-hosting', 'Off-topic', 'Other']
+const navSorted = ['Off-topic', 'Products', 'Data', 'Product OS', 'Self-hosting', 'Other']
+
+// The community boards (#introductions, #where-in-the-world, #devrel) live in the
+// Strapi group labelled "Off-topic". Lead with it and surface it as "Community"
+// in the nav, without renaming the CMS group. Sorting still keys off the raw label.
+const groupLabelOverrides = { 'Off-topic': 'Community' }
 
 export default function useTopicsNav() {
     const { topicGroups } = useStaticQuery(graphql`
@@ -29,7 +34,7 @@ export default function useTopicsNav() {
         .sort((a, b) => navSorted.indexOf(a.label) - navSorted.indexOf(b.label))
         .forEach(({ label, topics }) => {
             nav.push({
-                name: label,
+                name: groupLabelOverrides[label] ?? label,
             })
             topics.forEach(({ label, slug }) => {
                 const Icon = topicIcons[label.toLowerCase()]
