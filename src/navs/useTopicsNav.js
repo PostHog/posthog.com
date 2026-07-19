@@ -7,7 +7,7 @@ import { IconSparkles, IconClock } from '@posthog/icons'
 const navSorted = ['Off-topic', 'Products', 'Data', 'Product OS', 'Self-hosting', 'Other']
 
 // The community boards (#introductions, #where-in-the-world, #devrel) live in the
-// Strapi group labelled "Off-topic". Lead with it and surface it as "Community"
+// Strapi group labeled "Off-topic". Lead with it and surface it as "Community"
 // in the nav, without renaming the CMS group. Sorting still keys off the raw label.
 const groupLabelOverrides = { 'Off-topic': 'Community' }
 
