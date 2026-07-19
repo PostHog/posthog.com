@@ -561,7 +561,7 @@ export default function Inbox(props) {
 
     return (
         <>
-            <SEO title={(permalink && question?.attributes.subject) || data?.topic?.label || 'Forums'} />
+            <SEO title={(permalink && question?.attributes.subject) || data?.topic?.label || 'Community discussions'} />
             {ready ? (
                 <div className="@container w-full h-full flex flex-col">
                     <div data-scheme="secondary" className={`flex @2xl:flex-row flex-col flex-grow min-h-0`}>
