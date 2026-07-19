@@ -124,7 +124,7 @@ const SidebarContent = ({
                             )
                         }
                     >
-                        Ask a question
+                        Start a discussion
                     </OSButton>
                 </div>
             </div>
@@ -392,13 +392,14 @@ const AskAQuestion = ({ onSubmit }: { onSubmit: () => void }) => {
     const { closeWindow, setWindowTitle } = useApp()
 
     useEffect(() => {
-        setWindowTitle(appWindow, 'Ask a question')
+        setWindowTitle(appWindow, 'Start a discussion')
     }, [])
 
     return (
         <div data-scheme="secondary" className="bg-primary size-full p-4">
             <QuestionForm
                 showTopicSelector
+                buttonText={<span className="font-bold">Start a discussion</span>}
                 onSubmit={(_values, _type, data) => {
                     onSubmit()
                     closeWindow(appWindow)
