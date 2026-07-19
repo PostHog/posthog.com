@@ -141,6 +141,15 @@ const SidebarContent = ({
                     <Menu onValueChange={onMenuValueChange} />
                 )}
             </ScrollArea>
+            <div className="border-t border-primary p-2 text-sm text-secondary">
+                <p className="m-0">
+                    Bug blocking you? Chatting it through here is welcome. If you just need it fixed,{' '}
+                    <Link to="/talk-to-a-human">talk to a human</Link>.
+                </p>
+                <p className="m-0 mt-1">
+                    A lot of questions already have answers, so a quick search up top may beat a new post.
+                </p>
+            </div>
         </div>
     )
 }
