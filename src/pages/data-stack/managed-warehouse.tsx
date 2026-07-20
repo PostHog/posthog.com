@@ -196,7 +196,7 @@ export default function ManagedWarehouse(): JSX.Element {
                     picture.
                 </p>
                 <p>
-                    The Managed Warehouse is your <strong>context layer</strong> for AI-driven product development. It's not just storage. It's what all of your PostHog tools run on, so you're not left wondering, "why did this funnel drop", but knowing "this funnel dropped, here's the revenue impact, here are the cohorts affected, here's what those users have in common, and here's a PR already open to fix the issue.
+                    The Managed Warehouse is your <strong>context layer</strong> for AI-driven product development. It's a lot more than just storage - it's what all of your PostHog tools run on. This means you're not left wondering "why did conversion drop?", but knowing "conversion in this funnel dropped, here's the revenue impact, the cohorts affected, and what those users have in common - _and_ here's a PR already open to fix the issue."
                 </p>
                 <ProductScreenshot
                     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/dw_temp_528efa76a2.png"
