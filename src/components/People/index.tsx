@@ -5,6 +5,7 @@ import React, { useState, useMemo } from 'react'
 import Link from 'components/Link'
 import { SEO } from '../seo'
 import ReactMarkdown from 'react-markdown'
+import { getTeamDisplayName, getTeamSlug } from 'lib/teamNames'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import Stickers from 'components/Stickers/Index'
 import Tooltip from 'components/RadixUI/Tooltip'
@@ -71,7 +72,14 @@ export const TeamMember = (props: any) => {
     }
 
     // Extract team data
-    const teamData = teams?.data || []
+    const teamData = (teams?.data || []).map((team: any) => ({
+        ...team,
+        attributes: {
+            ...team.attributes,
+            name: getTeamDisplayName(team.attributes.name),
+            slug: getTeamSlug(team.attributes.slug),
+        },
+    }))
 
     // Determine length category for CSS scaling
     const getTextLength = (text: string, usage: 'name' | 'companyRole' | 'teamText') => {

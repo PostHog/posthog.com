@@ -11,6 +11,7 @@ import RoadmapSelect from 'components/RoadmapSelect'
 import qs from 'qs'
 import TeamSelect from 'components/TeamSelect'
 import * as Yup from 'yup'
+import { getTeamCmsName } from 'lib/teamNames'
 
 const ValidationSchema = Yup.object().shape({
     team: Yup.mixed().required('Please select a team'),
@@ -117,7 +118,7 @@ export default function TeamUpdate({
                     populate: ['profiles', 'leadProfiles'],
                     filters: {
                         name: {
-                            $eqi: teamName,
+                            $eqi: getTeamCmsName(teamName),
                         },
                     },
                 },

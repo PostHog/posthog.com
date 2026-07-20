@@ -63,7 +63,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'background-agents': {
         feature: 'Cloud agents',
-        owner: ['posthog-code'],
+        owner: ['posthog-desktop'],
         label: 'feature/background-agents',
     },
     'api-structure': {
@@ -334,7 +334,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'posthog-code': {
         feature: 'PostHog Code',
-        owner: ['posthog-code'],
+        owner: ['posthog-desktop'],
         label: 'feature/posthog-code',
     },
     'project-homepage': {

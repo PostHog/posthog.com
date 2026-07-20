@@ -11,6 +11,7 @@ import { IconPencil, IconPlus, IconShieldLock } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import Tooltip from 'components/RadixUI/Tooltip'
 import RoadmapWindow from 'components/Roadmap/RoadmapWindow'
+import { getTeamDisplayName } from 'lib/teamNames'
 
 type ProductConfig = {
     topic?: string // Filter by product tag/label (topic.label)
@@ -131,6 +132,7 @@ export const ProductChangelog = ({ product }: { product: string }) => {
                     const { title, squeakId, dateCompleted, description, teams, githubPRMetadata } =
                         roadmap?.attributes || {}
                     const teamName = teams?.data?.[0]?.attributes?.name
+                    const displayTeamName = teamName ? getTeamDisplayName(teamName) : undefined
 
                     return (
                         <div
@@ -156,7 +158,7 @@ export const ProductChangelog = ({ product }: { product: string }) => {
                                 )}
                             </div>
                             <p className="m-0 mt-1 text-sm text-secondary">
-                                {dateCompleted && dayjs(dateCompleted).format('MMM D, YYYY')} | {teamName} Team
+                                {dateCompleted && dayjs(dateCompleted).format('MMM D, YYYY')} | {displayTeamName} Team
                             </p>
 
                             {description && (

@@ -7,25 +7,31 @@ import Team from 'components/Team'
 
 export default function TeamPage({
     data: {
-        mdx: { body },
-        team: { name, roadmaps, ...other },
+        mdx: {
+            body,
+            frontmatter: { title },
+        },
+        teams: { nodes },
         objectives,
     },
     pageContext: { slug },
 }) {
+    const team = nodes.find(({ name }) => name === title) || nodes[0]
+    const { roadmaps, ...other } = team
+
     return (
         <Layout
             parent={companyMenu}
             activeInternalMenu={companyMenu.children.find((menu) => menu.name.toLowerCase() === 'teams')}
         >
             <SEO
-                title={`${name} - PostHog`}
+                title={`${title} - PostHog`}
                 description="We're organized into multi-disciplinary small teams."
                 image={`/images/small-teams.png`}
             />
             <Team
                 body={body}
-                name={name}
+                name={title}
                 slug={slug.split('/').pop()}
                 roadmaps={roadmaps}
                 objectives={objectives}
@@ -43,67 +49,69 @@ export const query = graphql`
             }
             body
         }
-        team: squeakTeam(name: { eq: $teamName }) {
-            name
-            description
-            tagline
-            emojis {
+        teams: allSqueakTeam(filter: { name: { in: [$teamName, "PostHog Code"] } }) {
+            nodes {
                 name
-                localFile {
-                    publicURL
-                }
-            }
-            crest {
-                data {
-                    attributes {
-                        url
+                description
+                tagline
+                emojis {
+                    name
+                    localFile {
+                        publicURL
                     }
                 }
-            }
-            crestOptions {
-                textColor
-                textShadow
-                fontSize
-                frame
-                frameColor
-                plaque
-                plaqueColor
-                imageScale
-                imageXOffset
-                imageYOffset
-            }
-            roadmaps {
-                squeakId
-                betaAvailable
-                complete
-                dateCompleted
-                title
-                description
-                media {
-                    gatsbyImageData
-                    publicId
+                crest {
                     data {
                         attributes {
-                            mime
+                            url
                         }
                     }
                 }
-                githubPages {
-                    title
-                    html_url
-                    number
-                    closed_at
-                    reactions {
-                        hooray
-                        heart
-                        eyes
-                        plus1
-                    }
+                crestOptions {
+                    textColor
+                    textShadow
+                    fontSize
+                    frame
+                    frameColor
+                    plaque
+                    plaqueColor
+                    imageScale
+                    imageXOffset
+                    imageYOffset
                 }
-                projectedCompletion
-                cta {
-                    label
-                    url
+                roadmaps {
+                    squeakId
+                    betaAvailable
+                    complete
+                    dateCompleted
+                    title
+                    description
+                    media {
+                        gatsbyImageData
+                        publicId
+                        data {
+                            attributes {
+                                mime
+                            }
+                        }
+                    }
+                    githubPages {
+                        title
+                        html_url
+                        number
+                        closed_at
+                        reactions {
+                            hooray
+                            heart
+                            eyes
+                            plus1
+                        }
+                    }
+                    projectedCompletion
+                    cta {
+                        label
+                        url
+                    }
                 }
             }
         }

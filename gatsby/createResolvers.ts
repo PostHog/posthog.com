@@ -1,4 +1,5 @@
 import { GatsbyNode } from 'gatsby'
+import { getTeamDisplayName, getTeamSlug } from '../src/lib/teamNames'
 
 export const createResolvers: GatsbyNode['createResolvers'] = ({ createResolvers, getNodeAndSavePathDependency }) => {
     const resolvers = {
@@ -31,6 +32,14 @@ export const createResolvers: GatsbyNode['createResolvers'] = ({ createResolvers
                     const category = (folder.charAt(0).toUpperCase() + folder.slice(1)).replaceAll('-', ' ')
                     return category
                 },
+            },
+        },
+        SqueakTeam: {
+            name: {
+                resolve: (source) => getTeamDisplayName(source.name),
+            },
+            slug: {
+                resolve: (source) => getTeamSlug(source.slug),
             },
         },
         ShopifyProduct: {

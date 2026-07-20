@@ -31,6 +31,7 @@ import Fuse from 'fuse.js'
 import Tooltip from 'components/RadixUI/Tooltip'
 import Spinner from 'components/Spinner'
 import { slugifyTeamName } from 'lib/utils'
+import { getTeamDisplayName } from 'lib/teamNames'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import OSTable from 'components/OSTable'
 import { Select } from 'components/RadixUI/Select'
@@ -121,6 +122,7 @@ export const Feature = ({ id, title, teams, description, likeCount, onLike, onUp
     const { search } = useLocation()
     const [loading, setLoading] = useState(false)
     const teamName = teams?.data?.[0]?.attributes?.name
+    const displayTeamName = teamName ? getTeamDisplayName(teamName) : undefined
     const liked = user?.profile?.roadmapLikes?.some(({ id: roadmapID }) => roadmapID === id)
 
     useEffect(() => {
@@ -153,12 +155,12 @@ export const Feature = ({ id, title, teams, description, likeCount, onLike, onUp
                     <VoteBox likeCount={likeCount} liked={liked} />
                     <div>
                         <h3 className="text-lg m-0 leading-tight">{title}</h3>
-                        {teamName && (
+                        {displayTeamName && (
                             <Link
                                 to={`/teams/${slugifyTeamName(teamName)}`}
                                 className="text-sm opacity-70 text-inherit hover:opacity-100 hover:text-red dark:hover:text-yellow mt-0.5"
                             >
-                                {teamName} Team
+                                {displayTeamName} Team
                             </Link>
                         )}
                         <div className="mt-1 text-[15px] community-post-markdown">
@@ -471,6 +473,7 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
             const subscriberCount = roadmap.attributes.subscribers?.data?.length || 0
             const likeCount = roadmap.attributes.likes?.data?.length || 0
             const teamName = roadmap.attributes.teams?.data?.[0]?.attributes?.name
+            const displayTeamName = teamName ? getTeamDisplayName(teamName) : undefined
             const liked = user?.profile?.roadmapLikes?.some(({ id: roadmapID }) => roadmapID === roadmap.id)
 
             // Format date if available
@@ -533,13 +536,13 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
                       ]
                     : []),
                 {
-                    content: teamName ? (
+                    content: displayTeamName ? (
                         <Link
                             to={`/teams/${slugifyTeamName(teamName)}`}
                             className="text-sm"
                             state={{ newWindow: true }}
                         >
-                            {teamName}
+                            {displayTeamName}
                         </Link>
                     ) : (
                         <em className="text-secondary text-sm">Not assigned</em>
@@ -666,12 +669,13 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
         const grouped: Record<string, any[]> = {}
         sortedRows.forEach((row) => {
             const roadmap = roadmapsToUse.find((r) => r.id === row.roadmapId)
-            const teamName = roadmap?.attributes?.teams?.data?.[0]?.attributes?.name || 'Not assigned'
+            const teamName = roadmap?.attributes?.teams?.data?.[0]?.attributes?.name
+            const displayTeamName = teamName ? getTeamDisplayName(teamName) : 'Not assigned'
 
-            if (!grouped[teamName]) {
-                grouped[teamName] = []
+            if (!grouped[displayTeamName]) {
+                grouped[displayTeamName] = []
             }
-            grouped[teamName].push(row)
+            grouped[displayTeamName].push(row)
         })
 
         return grouped
@@ -698,11 +702,11 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
                                             options: [
                                                 { label: 'All', value: undefined },
                                                 ...Object.keys(
-                                                    groupBy(
-                                                        initialRoadmaps,
-                                                        (roadmap) =>
+                                                    groupBy(initialRoadmaps, (roadmap) =>
+                                                        getTeamDisplayName(
                                                             roadmap.attributes?.teams?.data?.[0]?.attributes?.name ||
-                                                            'Not assigned'
+                                                                'Not assigned'
+                                                        )
                                                     )
                                                 )
                                                     .sort()
@@ -718,7 +722,7 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
                                                 if (value === 'Not assigned') {
                                                     return !teamName
                                                 }
-                                                return teamName === value
+                                                return getTeamDisplayName(teamName) === value
                                             },
                                         },
                                     ]}

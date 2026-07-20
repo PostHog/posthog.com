@@ -8,16 +8,18 @@ import Stickers from 'components/ProfileStickers'
 import useTeam from 'hooks/useTeam'
 import { IconCake } from '@posthog/icons'
 import dayjs from 'dayjs'
-import slugify from 'slugify'
 import Link from 'components/Link'
+import { getTeamDisplayName } from 'lib/teamNames'
+import { slugifyTeamName } from 'lib/utils'
 
 const TeamMemberLink = (person) => {
     const { firstName, lastName, country, startDate, pineappleOnPizza, squeakId, avatar, teams, leadTeams, color } =
         person ?? {}
 
     const teamName = teams?.data?.[0]?.attributes?.name
+    const displayTeamName = teamName ? getTeamDisplayName(teamName) : undefined
     const isTeamLead = leadTeams.data.length > 0
-    const teamURL = teamName ? `/teams/${slugify(teamName, { lower: true })}` : undefined
+    const teamURL = teamName ? `/teams/${slugifyTeamName(teamName)}` : undefined
 
     return (
         <div className="relative inline-block border-t @3xl:border-t-0 @3xl:border-r border-primary px-4 @3xl:pr-12 pt-8 lg:pt-0">
@@ -49,11 +51,11 @@ const TeamMemberLink = (person) => {
 
             <div className="text-sm">
                 <div>{person.companyRole && `${person.companyRole}`}</div>
-                {teamName && (
+                {displayTeamName && (
                     <div className="text-[13px]">
                         <span className="opacity-75">{isTeamLead ? 'Team lead, ' : ''}</span>
                         <Link to={teamURL} state={{ newWindow: true }} className="font-semibold underline">
-                            {teamName} Team
+                            {displayTeamName} Team
                         </Link>
                     </div>
                 )}

@@ -2,7 +2,8 @@ import React from 'react'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { graphql, useStaticQuery } from 'gatsby'
 import Link from 'components/Link'
-import slugify from 'slugify'
+import { getTeamDisplayName } from 'lib/teamNames'
+import { slugifyTeamName } from 'lib/utils'
 
 interface PostQuoteProps {
     title?: string
@@ -66,8 +67,9 @@ const PostQuote: React.FC<PostQuoteProps> = ({
 
     const { firstName, lastName, country, startDate, squeakId, avatar, teams, leadTeams, color } = person
     const teamName = teams?.data?.[0]?.attributes?.name
+    const displayTeamName = getTeamDisplayName(teamName)
     const isTeamLead = leadTeams.data.length > 0
-    const teamURL = `/teams/${slugify(teamName, { lower: true })}`
+    const teamURL = `/teams/${slugifyTeamName(teamName)}`
 
     return (
         <div className="px-4 xl:px-8 mb-8">
@@ -106,7 +108,7 @@ const PostQuote: React.FC<PostQuoteProps> = ({
                             <div>{person.companyRole && `${person.companyRole}`}</div>
                             <div className="text-[13px]">
                                 <span className="opacity-75">{isTeamLead ? 'Team lead, ' : ''}</span>
-                                <Link to={teamURL}>{teamName} Team</Link>
+                                <Link to={teamURL}>{displayTeamName} Team</Link>
                             </div>
                         </div>
 
