@@ -21,6 +21,7 @@ const koTranslations: Record<string, string> = {
     Store: '스토어',
     Trash: '휴지통',
     Dashboard: '대시보드',
+    'Open PostHog': 'PostHog 열기',
     'Get started – free': '무료로 시작하기',
     'Get started - free': '무료로 시작하기',
     'Install with AI': 'AI로 설치하기',
@@ -315,8 +316,6 @@ const koTranslations: Record<string, string> = {
     'for deep cohort analysis': '심층 코호트 분석을 위해',
     'for multi-channel attribution': '멀티 채널 어트리뷰션을 위해',
 
-    'VCs love them': 'VC들이 선호하는 회사',
-    'Product engineers love them': '프로덕트 엔지니어들이 선호하는 회사',
     'Colorful logos': '컬러풀한 로고',
     '"Sleek" logos': '"세련된" 로고',
     'Hardware companies': '하드웨어 회사',

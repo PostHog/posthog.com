@@ -425,7 +425,6 @@ const COL1 = ['ycombinator', 'airbus', 'trust', 'lovable', 'startengine', 'resea
 const COL2 = ['supabase', 'mistralai', 'elevenlabs', 'hasura', 'raycast', 'posthog']
 
 const companyBreakdowns = {
-    VCsLoveThem: { col1: 'VCs love them', col2: 'Product engineers love them' },
     colorful: { col1: 'Colorful logos', col2: '"Sleek" logos' },
     hardware: { col1: 'Hardware companies', col2: 'Not hardware companies' },
     planes: { col1: 'Builds planes', col2: "Doesn't build planes (yet)" },
@@ -444,7 +443,6 @@ const companyBreakdowns = {
 }
 
 const companyAttributes = {
-    VCsLoveThem: ['ycombinator', 'airbus', 'trust', 'lovable', 'startengine', 'researchgate', 'exa', 'heygen'],
     colorful: ['ycombinator', 'trust', 'lovable', 'supabase', 'startengine', 'mistralai', 'raycast', 'posthog'],
     hardware: ['airbus', 'posthog'],
     planes: ['airbus'],
@@ -461,7 +459,7 @@ const companyAttributes = {
 
 const Customers = () => {
     const { getCustomers, hasCaseStudy } = useCustomers()
-    const [currentBreakdown, setCurrentBreakdown] = React.useState('VCsLoveThem')
+    const [currentBreakdown, setCurrentBreakdown] = React.useState('colorful')
     const [isAnimating, setIsAnimating] = React.useState(false)
     const logoRefs = React.useRef<Record<string, HTMLElement>>({})
 

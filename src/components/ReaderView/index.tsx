@@ -36,6 +36,7 @@ import { InlineSearch } from 'components/Search/InlineSearch'
 import { algoliaIndexName, algoliaSearchClient } from 'lib/algoliaSearch'
 import { useLocation } from '@reach/router'
 import { getProseClasses, isMarkdownContentPath } from '../../constants'
+import { PANEL_BG } from '../../constants/frostedSurfaces'
 import { useWindow } from '../../context/Window'
 import { MenuItem, useApp } from '../../context/App'
 import { useActiveFeatureFlags, filterMenuByFlags } from '../../hooks/useActiveFeatureFlags'
@@ -45,16 +46,8 @@ import CopyMarkdownActionsDropdown, { useMarkdownUrlExists } from 'components/Ma
 import CustomerMetadata from './CustomerMetadata'
 import { getVideoClasses } from '../../constants'
 import AboutPostHog from 'components/AboutPostHog'
-import { Blockquote } from 'components/BlockQuote'
 
 dayjs.extend(relativeTime)
-
-// Frosted chrome applied to the sidebar / ToC when background/tocBackground is `true`.
-// The border is intentionally NOT included here — it always stays on the asides.
-const FROSTED_BG = 'bg-primary/75 dark:bg-primary backdrop-blur'
-
-const resolveBackground = (value?: boolean | string): string =>
-    value === true ? FROSTED_BG : typeof value === 'string' ? value : ''
 
 // Wrapper component that conditionally renders CopyMarkdownActionsDropdown based on whether the markdown URL exists
 const ConditionalMarkdownDropdown = ({ pageUrl }: { pageUrl: string | undefined }) => {
@@ -146,18 +139,7 @@ interface ReaderViewProps {
      */
     productSelect?: React.ReactNode
     hideMenu?: boolean
-    /**
-     * Background for the LeftSidebar panel. Defaults to transparent (no bg) so the
-     * desktop wallpaper shows through. Pass `true` for the frosted default
-     * (`bg-primary/75 dark:bg-primary backdrop-blur`), or a string of custom classes
-     * (e.g. `"bg-accent/50"`). The border always stays regardless.
-     */
-    background?: boolean | string
-    /**
-     * Background for the FloatingTOC column. Same shape as `background`, controlled
-     * separately. Defaults to transparent.
-     */
-    tocBackground?: boolean | string
+    className?: string
 }
 
 interface BackgroundImageOption {
@@ -468,8 +450,7 @@ export default function ReaderView({
     menuTabs,
     productSelect,
     hideMenu = false,
-    background = false,
-    tocBackground = false,
+    className = '',
 }: ReaderViewProps) {
     return (
         <ReaderViewProvider defaultNavVisible={defaultNavVisible}>
@@ -502,8 +483,7 @@ export default function ReaderView({
                 menuTabs={menuTabs}
                 productSelect={productSelect}
                 hideMenu={hideMenu}
-                background={background}
-                tocBackground={tocBackground}
+                className={className}
             >
                 {children}
             </ReaderViewContent>
@@ -836,7 +816,6 @@ interface LeftSidebarProps {
     contentRef?: React.RefObject<HTMLElement>
     currentPath?: string
     isMdx?: boolean
-    background?: boolean | string
     /** On narrow windows the sidebar renders as an off-canvas drawer instead
      *  of an inline column, driven by the props below. */
     mobile?: boolean
@@ -868,7 +847,6 @@ interface SidebarTabButtonProps {
 }
 
 const SidebarTabButton = ({ tab, active, showLabel, stacked, onClick }: SidebarTabButtonProps) => {
-    const { siteSettings } = useApp()
     // Manual FLIP for the icon: capture position on every commit, then on the
     // next commit — IF the structural layout changed (`layoutKey`) — animate
     // the icon from its old position to its new one. Click-only re-renders
@@ -918,13 +896,7 @@ const SidebarTabButton = ({ tab, active, showLabel, stacked, onClick }: SidebarT
                       // made the icon jut as the wrapper shrank during a
                       // hover→collapse transition.
                       `min-h-7 items-center justify-start ${showLabel ? 'gap-2' : ''} px-2 py-1`
-            } ${
-                active
-                    ? 'text-primary'
-                    : `text-secondary hover:text-primary ${
-                          siteSettings.heaterMode ? 'hover:bg-dark/10 dark:hover:bg-light/10' : 'hover:bg-accent/50'
-                      }`
-            }`}
+            } ${active ? 'text-primary' : `text-secondary hover:text-primary hover:bg-dark/10 dark:hover:bg-light/10`}`}
         >
             <AnimatePresence initial={false}>
                 {active && (
@@ -934,9 +906,7 @@ const SidebarTabButton = ({ tab, active, showLabel, stacked, onClick }: SidebarT
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.18 }}
-                        className={`absolute inset-0 -z-10 rounded ${
-                            siteSettings.heaterMode ? 'bg-dark/15 dark:bg-light/15' : 'bg-accent'
-                        }`}
+                        className="absolute inset-0 -z-10 rounded bg-dark/15 dark:bg-light/15"
                     />
                 )}
             </AnimatePresence>
@@ -1000,7 +970,6 @@ const LeftSidebar = ({
     contentRef,
     currentPath,
     isMdx = false,
-    background = false,
     mobile = false,
     mobileOpen = false,
     onMobileClose,
@@ -1143,20 +1112,14 @@ const LeftSidebar = ({
                             : SIDEBAR_CSS_TRANSITION
                         : 'none',
                 }}
-                className={`absolute inset-y-0 left-0 flex flex-col min-h-0 overflow-hidden border-r border-primary will-change-[transform,backdrop-filter] transform-gpu ${
+                className={`absolute inset-y-0 left-0 flex flex-col min-h-0 overflow-hidden border-r border-primary transform-gpu ${
                     // On mobile the panel is always an overlay drawer above the
                     // content; it just slides off-screen when closed.
                     mobile
-                        ? `z-50 shadow-2xl ${resolveBackground(background) || FROSTED_BG} ${
-                              mobileOpen ? '' : 'pointer-events-none'
-                          }`
-                        : // When collapsed and hover-expanded, the panel floats as an
-                        // overlay above the content — it always needs an opaque
-                        // background so the menu is readable, even when the caller
-                        // didn't pass one. Otherwise fall back to the caller's value.
-                        !isPinned && expanded
-                        ? `z-50 shadow-2xl ${resolveBackground(background) || FROSTED_BG}`
-                        : `z-30 ${resolveBackground(background)}`
+                        ? `z-50 shadow-2xl ${PANEL_BG} ${mobileOpen ? '' : 'pointer-events-none'}`
+                        : !isPinned && expanded
+                        ? `z-50 shadow-2xl ${PANEL_BG}`
+                        : 'z-30'
                 }`}
             >
                 {/* Middle content — always rendered so the bottom row stays
@@ -1339,7 +1302,6 @@ interface FloatingTOCProps {
     toggleToc: () => void
     tableOfContents: any
     contentRef: React.RefObject<HTMLDivElement>
-    background?: boolean | string
 }
 
 /**
@@ -1349,20 +1311,14 @@ interface FloatingTOCProps {
  * scroll viewport so the TOC never extends past the visible area; an inner
  * ScrollArea handles overflow within that height.
  */
-const FloatingTOC = ({
-    isTocVisible,
-    toggleToc,
-    tableOfContents,
-    contentRef,
-    background = false,
-}: FloatingTOCProps) => {
+const FloatingTOC = ({ isTocVisible, toggleToc, tableOfContents, contentRef }: FloatingTOCProps) => {
     const { hasMounted } = useReaderView()
     return (
         <aside
             data-scheme="secondary"
             className={`flex-shrink-0 hidden @4xl/app-reader:flex flex-col border-l border-primary ${
                 hasMounted ? 'transition-[width] duration-300' : ''
-            } overflow-hidden ${resolveBackground(background)} ${isTocVisible ? 'w-[250px]' : 'w-12'} `}
+            } overflow-hidden ${isTocVisible ? 'w-[250px]' : 'w-12'} `}
         >
             <div className="flex-1 min-h-0 flex flex-col w-[250px]">
                 {isTocVisible && (
@@ -1415,8 +1371,7 @@ function ReaderViewContent({
     menuTabs,
     productSelect,
     hideMenu = false,
-    background = false,
-    tocBackground = false,
+    className = '',
 }: ReaderViewProps) {
     const { compact } = useApp()
     const { appWindow, activeInternalMenu } = useWindow()
@@ -1509,7 +1464,7 @@ function ReaderViewContent({
             <div
                 data-scheme="secondary"
                 data-app="ReaderView"
-                className="@container/app-reader relative w-full h-full flex min-h-0 max-w-full"
+                className={`@container/app-reader relative w-full h-full flex min-h-0 max-w-full ${className}`}
             >
                 {renderLeftSidebar && (
                     <LeftSidebar
@@ -1533,7 +1488,6 @@ function ReaderViewContent({
                         contentRef={onSearch ? undefined : contentRef}
                         currentPath={appWindow?.path}
                         isMdx={body?.type === 'mdx'}
-                        background={background}
                     >
                         {leftSidebar || (!hideMenu && <Menu parent={parent as MenuItem} />)}
                     </LeftSidebar>
@@ -1569,7 +1523,7 @@ function ReaderViewContent({
                             type="button"
                             aria-label="Open navigation"
                             onClick={() => setMobileNavOpen(true)}
-                            className={`absolute bottom-4 right-4 z-30 flex size-11 items-center justify-center rounded-full border border-primary text-primary shadow-lg transition-opacity duration-200 hover:bg-accent ${FROSTED_BG} ${
+                            className={`absolute bottom-4 right-4 z-30 flex size-11 items-center justify-center rounded-full border border-primary text-primary shadow-lg transition-opacity duration-200 hover:bg-accent ${PANEL_BG} ${
                                 mobileNavOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'
                             }`}
                         >
@@ -1727,22 +1681,7 @@ function ReaderViewContent({
                                                     : contentMaxWidthClass || 'max-w-2xl'
                                             }`}
                                         >
-                                            <Blockquote>
-                                                PostHog is an all-in-one developer platform for building successful
-                                                products. We provide <a href="/product-analytics">product analytics</a>,{' '}
-                                                <a href="/web-analytics">web analytics</a>,{' '}
-                                                <a href="/session-replay">session replay</a>,{' '}
-                                                <a href="/error-tracking">error tracking</a>,{' '}
-                                                <a href="/feature-flags">feature flags</a>,{' '}
-                                                <a href="/experiments">experiments</a>, <a href="/surveys">surveys</a>,{' '}
-                                                <a href="/ai-observability">AI Observability</a>,{' '}
-                                                <a href="/logs">logs</a>, <a href="/workflows">workflows</a>,{' '}
-                                                <a href="/endpoints">endpoints</a>,{' '}
-                                                <a href="/data-warehouse">data warehouse</a>, <a href="/cdp">CDP</a>,
-                                                and an <a href="/ai">AI product assistant</a> to help debug your code,
-                                                ship features faster, and keep all your usage and customer data in one
-                                                stack.
-                                            </Blockquote>
+                                            <AboutPostHog />
                                         </div>
                                     )}
                                     {showQuestions && (
@@ -1751,7 +1690,7 @@ function ReaderViewContent({
                                                 fullWidthContent || body?.type !== 'mdx'
                                                     ? 'max-w-full'
                                                     : contentMaxWidthClass || 'max-w-2xl'
-                                            }`}
+                                            } overflow-x-hidden`}
                                         >
                                             <h3 id="squeak-questions" className="mb-4">
                                                 Community questions
@@ -1787,7 +1726,6 @@ function ReaderViewContent({
                                 toggleToc={toggleToc}
                                 tableOfContents={tableOfContents}
                                 contentRef={contentRef}
-                                background={tocBackground}
                             />
                         )}
                     </div>
