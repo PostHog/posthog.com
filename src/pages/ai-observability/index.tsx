@@ -411,7 +411,7 @@ export default function aiObservability(): JSX.Element {
             },
             {
                 slug: 'product-os-benefits',
-                name: 'Better together',
+                name: 'Context warehouse benefits',
                 component: ProductOSBenefitsSlide,
             },
         ],
