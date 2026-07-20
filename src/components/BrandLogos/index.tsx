@@ -39,6 +39,13 @@ const LOCKUPS: Lockup[] = [
         previewWidth: 180,
     },
     {
+        slug: 'posthog-logo-4-color',
+        name: 'Print (4-color)',
+        logo: { layout: 'landscape', variant: 'print' },
+        background: '#EEEFE9',
+        previewWidth: 180,
+    },
+    {
         slug: 'posthog-logomark',
         name: 'Logomark',
         logo: { layout: 'logomark', variant: 'gradient' },

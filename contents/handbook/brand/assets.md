@@ -40,9 +40,18 @@ Each logo below is rendered live from our [`@posthog/brand`](https://github.com/
 
 <BrandLogos />
 
-The padded PNGs are useful when uploading the logo to a third-party service where there is limited control over padding/margin around the logo, and the @2x versions are for [hi-dpi (or "Retina") screens](https://en.wikipedia.org/wiki/Retina_display).
+### When to use each logo
 
-When using the logo on a dark background, use the white-only version of the logo. _Never_ modify the colors in the logomark (like changing the hedgehog's face color to white when using on a dark background). When a third-party service supports uploading both standard and hi-dpi versions, include the @2x logo too — it appears crisper on newer devices.
+-   **Full-color** is the primary logo — use it by default.
+-   On **dark backgrounds, always use the white logo** — never the full-color version.
+-   On **light backgrounds, prefer the full-color logo**, and only reach for the black logo when a single-color mark is required.
+-   Use the **print (4-color)** version only for print or other limited-palette contexts where the gradient can't be reproduced.
+-   Use the **logomark** on its own only at small sizes — favicons, app icons — where the full lockup won't fit and the overlapping gradients would get too busy.
+-   The **stacked** lockup is for portrait or square placements where the landscape lockup is too wide.
+
+_Never_ modify the colors in the logomark (for example, don't recolor the hedgehog's face white on a dark background — use the white logo instead).
+
+The padded PNGs help when uploading to a third-party service with no control over margin around the logo, and the @2x versions are for [hi-dpi (or "Retina") screens](https://en.wikipedia.org/wiki/Retina_display) — include them when a service accepts both.
 
 > **Using an older version?** These logos come straight from the [`@posthog/brand`](https://github.com/PostHog/brand) library, so this page always reflects the current mark. If you have an older PostHog logo saved locally (e.g. a square font or sharp-edged logomark), please replace it with the current version from this page.
 
