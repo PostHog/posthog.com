@@ -84,6 +84,50 @@
             "destination": "/handbook/:path*.md"
         },
         {
+            "source": "/blog/:path*/",
+            "has": [
+                {
+                    "type": "header",
+                    "key": "accept",
+                    "value": "(?:.*text/markdown.*)"
+                }
+            ],
+            "destination": "/blog/:path*.md"
+        },
+        {
+            "source": "/blog/:path*",
+            "has": [
+                {
+                    "type": "header",
+                    "key": "accept",
+                    "value": "(?:.*text/markdown.*)"
+                }
+            ],
+            "destination": "/blog/:path*.md"
+        },
+        {
+            "source": "/newsletter/:path*/",
+            "has": [
+                {
+                    "type": "header",
+                    "key": "accept",
+                    "value": "(?:.*text/markdown.*)"
+                }
+            ],
+            "destination": "/newsletter/:path*.md"
+        },
+        {
+            "source": "/newsletter/:path*",
+            "has": [
+                {
+                    "type": "header",
+                    "key": "accept",
+                    "value": "(?:.*text/markdown.*)"
+                }
+            ],
+            "destination": "/newsletter/:path*.md"
+        },
+        {
             "source": "/community/profiles/:path*",
             "destination": "/community/profiles/[id]/index.html"
         },
@@ -4734,7 +4778,15 @@
         },
         {
             "source": "/teams/twig",
-            "destination": "/teams/posthog-code"
+            "destination": "/teams/posthog-desktop"
+        },
+        {
+            "source": "/teams/posthog-code",
+            "destination": "/teams/posthog-desktop"
+        },
+        {
+            "source": "/teams/posthog-code/:path*",
+            "destination": "/teams/posthog-desktop/:path*"
         },
         {
             "source": "/docs/max-ai",

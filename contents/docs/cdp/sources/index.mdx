@@ -120,6 +120,64 @@ Requirements:
 
 xmin does not capture deletes. If you need delete tracking, use CDC instead. See the [Postgres source documentation](/docs/cdp/sources/postgres#sync-methods) for more details.
 
+## Filtering rows
+
+SQL sources (Postgres, MySQL, MSSQL, Snowflake, BigQuery, and Redshift) and ClickHouse support row filters. Row filters let you control which rows sync from a source table by specifying conditions like `created_at > '2024-01-01'`. This reduces sync time and storage costs by syncing only the data you need.
+
+Filters are applied as a `WHERE` clause on the source query, so only matching rows are fetched and synced. Row filters are not available for tables using [CDC sync](/docs/cdp/sources/postgres#how-posthog-cdc-works).
+
+> **Note:** Row filters are only available for SQL sources and ClickHouse. API sources (Stripe, HubSpot, Zendesk, Paddle, etc.) do not support row filtering.
+
+### Configuring row filters
+
+To add row filters during source setup:
+
+1. In the table picker, click **Columns** next to any table.
+2. Under **Row filters**, click **Add filter** and configure:
+   - **Column** - Select the column to filter on
+   - **Operator** - Choose a comparison operator
+   - **Value** - Enter the filter value
+3. Add more filters as needed (up to 20 per table). Multiple filters are ANDed together.
+
+You can also add or change row filters after setup:
+
+1. Go to the [sources tab](https://app.posthog.com/data-management/sources) and click your source.
+2. Click **Configure** next to any schema.
+3. Under **Row filters**, add, edit, or remove filters.
+4. Click **Save**.
+
+### Supported operators
+
+| Operator | Description                                            |
+| -------- | ------------------------------------------------------ |
+| `>`      | Greater than                                           |
+| `>=`     | Greater than or equal                                  |
+| `<`      | Less than                                              |
+| `<=`     | Less than or equal                                     |
+| `=`      | Equals                                                 |
+| `!=`     | Not equal                                              |
+| `IN`     | Matches one of a comma-separated list of values        |
+| `NOT IN` | Does not match any of a comma-separated list of values |
+
+### Supported column types
+
+Row filters validate values against the column's data type. Columns with unsupported types (like `json` or `jsonb`) are not filterable.
+
+| Type category | Example types                 | Value format                 |
+| ------------- | ----------------------------- | ---------------------------- |
+| Integer       | `int`, `bigint`, `smallint`   | Whole numbers like `100`     |
+| Numeric       | `decimal`, `numeric`, `float` | Decimal numbers like `99.99` |
+| String        | `varchar`, `text`, `char`     | Text like `active`           |
+| Boolean       | `boolean`, `bool`             | `true` or `false`            |
+| Date          | `date`                        | `2024-01-15`                 |
+| Timestamp     | `datetime`, `timestamp`       | `2024-01-15T10:30:00`        |
+
+### How row filters work
+
+- Filters apply on the next sync — they don't remove rows that have already been synced.
+- If a filter references a column that no longer exists or has a type mismatch, the sync fails with an error message. Fix or remove the filter to resume syncing.
+- Sampling and row count estimates remain unfiltered.
+
 ## Syncing
 
 Once you add a source, you can see its status, sync frequency, and last successful run in the [sources page](https://app.posthog.com/data-management/sources). You can also reload or delete sources here.

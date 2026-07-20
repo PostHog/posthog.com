@@ -65,6 +65,50 @@ When you add columns to a schema using incremental, append, or CDC sync, PostHog
 
 </CalloutBox>
 
+## Filtering rows
+
+You can filter which rows sync from each table by adding row filter predicates. Each filter is a `{column, operator, value}` condition that is ANDed onto the source query's `WHERE` clause, so only matching rows sync. This reduces sync time and storage costs by scoping large tables down to the data you need.
+
+### Adding row filters
+
+During source setup:
+
+1. Click **Columns** next to any table in the table picker.
+2. Click **Add filter** to add a row filter condition:
+   - **Column** - Select a column from the table
+   - **Operator** - Choose a comparison operator (`>`, `>=`, `<`, `<=`, `=`, `!=`, `IN`, or `NOT IN`)
+   - **Value** - Enter a value that matches the column's type
+3. Add up to 20 filters per table. Multiple filters are ANDed together.
+
+You can also add or edit row filters after setup:
+
+1. Go to the [sources tab](https://app.posthog.com/data-management/sources) and click your Postgres source.
+2. Click **Configure** next to any schema.
+3. Under **Row filters**, add, edit, or remove filters, then click **Save**.
+
+### Supported column types
+
+Row filters validate the value you enter against the column's data type. Columns with unsupported types (like `json` or `jsonb`) are not filterable.
+
+| Type category | Example Postgres types                           | Value format          |
+| ------------- | ------------------------------------------------ | --------------------- |
+| Integer       | `integer`, `bigint`, `smallint`, `serial`        | `100`                 |
+| Numeric       | `decimal`, `numeric`, `real`, `double precision` | `99.99`               |
+| String        | `varchar`, `text`, `char`, `uuid`                | `active`              |
+| Boolean       | `boolean`                                        | `true` or `false`     |
+| Date          | `date`                                           | `2024-01-15`          |
+| Timestamp     | `timestamp`, `timestamptz`                       | `2024-01-15T10:30:00` |
+
+For `IN` and `NOT IN` operators, enter a comma-separated list of values (e.g. `1, 2, 3` or `'active', 'pending'`).
+
+<CalloutBox icon="IconInfo" title="Row filters and existing data" type="fyi">
+
+Row filters apply on the next sync — they don't remove rows that have already been synced. To apply filters retroactively, delete the synced data and resync.
+
+Row filters are not supported for CDC schemas or direct Postgres sources. They only apply to snapshot-style syncs (incremental, append, or full table).
+
+</CalloutBox>
+
 <CalloutBox icon="IconWarning" title="SSL/TLS required for new sources" type="caution">
 
 PostgreSQL sources created after February 18, 2026 require SSL/TLS encryption for database connections. Ensure your PostgreSQL database supports SSL/TLS connections before linking. Existing sources created before this date are not affected. If you're connecting through an SSH tunnel, you can optionally disable TLS using the **Require TLS through tunnel?** toggle since the tunnel already encrypts the connection.
@@ -345,7 +389,7 @@ Avoid putting unrelated tables in the publication. PostHog filters out changes f
 
 ## Managing CDC after source creation
 
-You can enable, disable, repair, or adjust CDC settings on an existing Postgres source from the **Configuration** tab without recreating the source.
+You can enable, disable, resume, repair, or adjust CDC settings on an existing Postgres source from the **Configuration** tab without recreating the source.
 
 ### Enabling CDC on an existing source
 
@@ -403,6 +447,27 @@ Repairing CDC forces every active CDC schema to re-snapshot from the current sou
 
 </CalloutBox>
 
+### Resuming CDC
+
+If a CDC source is paused due to a non-retryable failure that left the replication slot intact — such as bad credentials, an SSL requirement, or an unreachable host — you can resume it without a full re-sync once the underlying issue is fixed.
+
+To resume CDC:
+
+1. Go to the [sources tab](https://app.posthog.com/data-management/sources) and click your Postgres source.
+2. Open the **Configuration** tab. A banner indicates that the CDC extraction schedule is paused.
+3. Fix the underlying issue (for example, correct the credentials or network settings).
+4. Click **Resume CDC**.
+
+PostHog re-probes the source database to confirm the connection now succeeds and that the replication slot and publication still exist. If validation passes, the extraction schedule is unpaused and streaming resumes from where it left off — no re-snapshot required.
+
+<CalloutBox icon="IconInfo" title="Resume vs Repair" type="fyi">
+
+- Use **Resume** when the extraction schedule is paused but the slot and publication are intact. This is the cheap path — no data is re-synced.
+- Use **Repair** when the slot or publication is missing. Repair recreates them but requires a full re-sync of all CDC schemas.
+
+If PostHog detects that the slot or publication is actually gone (or if the connection still fails), Resume is refused and you're directed to use [Repair CDC](#repairing-cdc) instead.
+
+</CalloutBox>
 ### Updating CDC settings
 
 While CDC is enabled, you can edit the following settings from the Configuration tab without disabling CDC:
@@ -520,6 +585,18 @@ Check the slot lag query above. If PostHog-managed slot protection dropped the s
 This happens when the replication slot is dropped — either by [WAL lag protection](#wal-lag-protection), manually on the source database, or by the database itself (for example, when `max_slot_wal_keep_size` is exceeded). PostHog marks the CDC source as broken and pauses its schedules.
 
 To recover, use [Repair CDC](#repairing-cdc) from the **Configuration** tab. Repair recreates the slot and publication, then re-syncs every CDC schema from a fresh snapshot. WAL changes since the slot was lost cannot be recovered.
+
+### CDC extraction schedule is paused
+
+This happens when a CDC source hits a non-retryable failure — such as bad credentials, an SSL requirement, or an unreachable host — that leaves the replication slot intact. PostHog pauses the extraction schedule to prevent the same failure from repeating.
+
+To recover:
+
+1. Fix the underlying issue (for example, correct the database password, enable SSL, or fix network connectivity).
+2. Go to the **Configuration** tab for your Postgres source.
+3. Click **Resume CDC** to re-validate the connection and unpause the schedule.
+
+If the slot or publication was lost during the outage, Resume is refused and you'll need to use [Repair CDC](#repairing-cdc) instead, which triggers a full re-sync.
 
 ### `materialized view has not been populated`
 

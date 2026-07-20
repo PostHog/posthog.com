@@ -1411,6 +1411,36 @@ export const handbookSidebar = [
                 ],
             },
             {
+                name: 'Forward deployed engineering',
+                url: '',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/handbook/forward-deployed-engineering/overview',
+                    },
+                    {
+                        name: 'How to get an FDE involved',
+                        url: '/handbook/forward-deployed-engineering/how-to-get-fde-involved',
+                    },
+                    {
+                        name: 'How we work',
+                        url: '/handbook/forward-deployed-engineering/how-we-work',
+                    },
+                    {
+                        name: 'Working with customers',
+                        url: '/handbook/forward-deployed-engineering/working-with-customers',
+                    },
+                    {
+                        name: 'Working with sales and CS',
+                        url: '/handbook/forward-deployed-engineering/working-with-sales-and-cs',
+                    },
+                    {
+                        name: 'Working with product engineering',
+                        url: '/handbook/forward-deployed-engineering/working-with-product-engineering',
+                    },
+                ],
+            },
+            {
                 name: 'Shareable guides',
                 url: '',
                 children: [
@@ -1518,6 +1548,10 @@ export const handbookSidebar = [
                 name: 'Account management',
                 url: '',
                 children: [
+                    {
+                        name: 'Customer journey and coverage model',
+                        url: '/handbook/growth/sales/customer-journey',
+                    },
                     {
                         name: 'Allocating accounts',
                         url: '/handbook/growth/sales/account-allocation',
@@ -1719,11 +1753,15 @@ export const handbookSidebar = [
                 url: '',
                 children: [
                     {
+                        name: 'Working in PostHog Support',
+                        url: '/handbook/support/posthog-support',
+                    },
+                    {
                         name: 'Technical support SMEs',
                         url: '/handbook/support/support-smes',
                     },
                     {
-                        name: 'Support zero weeks',
+                        name: 'Support zero time',
                         url: '/handbook/support/support-zero',
                     },
                 ],
@@ -7373,6 +7411,20 @@ export const docsMenu = {
                     icon: 'IconListCheck',
                     color: 'orange',
                     featured: true,
+                },
+                {
+                    name: 'Install metrics',
+                    url: '/docs/metrics/installation',
+                    icon: 'IconCode',
+                    color: 'blue',
+                    featured: true,
+                    children: [
+                        { name: 'Overview', url: '/docs/metrics/installation' },
+                        { name: 'JavaScript (web)', url: '/docs/metrics/installation/javascript' },
+                        { name: 'Node.js', url: '/docs/metrics/installation/nodejs' },
+                        { name: 'Python', url: '/docs/metrics/installation/python' },
+                        { name: 'Other languages', url: '/docs/metrics/installation/other' },
+                    ],
                 },
                 {
                     name: 'Why you need metrics',
