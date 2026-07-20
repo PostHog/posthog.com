@@ -315,7 +315,7 @@ const CustomerLogo = ({ customer, className = 'h-8' }: { customer: Customer; cla
     return null
 }
 
-// Custom "Better together" slide
+// Custom "Context warehouse benefits" slide
 const ProductOSBenefitsSlide = () => {
     return (
         <div
