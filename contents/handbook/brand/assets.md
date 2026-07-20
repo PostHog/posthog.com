@@ -42,14 +42,14 @@ Each logo below is rendered live from our [`@posthog/brand`](https://github.com/
 
 ### When to use each logo
 
--   **Full-color** is the primary logo — use it by default.
--   On **dark backgrounds, always use the white logo** — never the full-color version.
--   On **light backgrounds, prefer the full-color logo**, and only reach for the black logo when a single-color mark is required.
--   Use the **print (4-color)** version only for print or other limited-palette contexts where the gradient can't be reproduced.
+-   The **standard logo** — the full-color one, with gradients — is the primary logo. Use it by default.
+-   On **dark backgrounds, always use the light logo** (the white version) — never the standard/full-color one.
+-   On **light backgrounds, prefer the standard logo**, and only reach for the **dark logo** (solid black) when a single-color mark is required.
+-   Use the **print (4-color)** version only for print or other limited-palette contexts where the gradients can't be reproduced.
 -   Use the **logomark** on its own only at small sizes — favicons, app icons — where the full lockup won't fit and the overlapping gradients would get too busy.
--   The **stacked** lockup is for portrait or square placements where the landscape lockup is too wide.
+-   Use the **stacked** logo for portrait or square placements where the standard (landscape) lockup is too wide.
 
-_Never_ modify the colors in the logomark (for example, don't recolor the hedgehog's face white on a dark background — use the white logo instead).
+_Never_ modify the colors in the logomark (for example, don't recolor the hedgehog's face white on a dark background — use the light logo instead).
 
 The padded PNGs help when uploading to a third-party service with no control over margin around the logo, and the @2x versions are for [hi-dpi (or "Retina") screens](https://en.wikipedia.org/wiki/Retina_display) — include them when a service accepts both.
 
