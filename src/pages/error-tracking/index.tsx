@@ -146,7 +146,7 @@ export default function ErrorTracking(): JSX.Element {
         custom: [
             {
                 slug: 'product-os-benefits',
-                name: 'Better together',
+                name: 'Context warehouse benefits',
                 component: ProductOSBenefitsSlide,
             },
         ],
