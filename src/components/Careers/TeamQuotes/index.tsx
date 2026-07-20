@@ -24,7 +24,7 @@ const TeamMemberLink = (person) => {
 
     const teamName = teams?.data?.[0]?.attributes?.name
     const isTeamLead = leadTeams.data.length > 0
-    const teamURL = `/teams/${slugify(teamName, { lower: true })}`
+    const teamURL = teamName ? `/teams/${slugify(teamName, { lower: true })}` : undefined
 
     return (
         <div className="flex flex-col items-center mb-8 xl:mb-12">
@@ -148,7 +148,6 @@ const TeamQuotes: React.FC = () => {
                 <TeamMember name="Paul D'Ambra" />
                 <TeamMember name="Raquel Smith" />
                 <TeamMember name="Charles Cook" />
-                <TeamMember name="Cory Watilo" />
                 <TeamMember name="Ian Vanagas" />
             </Masonry>
         </section>

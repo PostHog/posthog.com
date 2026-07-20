@@ -77,7 +77,7 @@ To set this up:
 ### Batch triggers
 
 Batch triggers let you run a workflow for each person in an audience you define, optionally on a recurring schedule.
-When the batch runs, PostHog evaluates your audience filters and executes the workflow once per matching person.
+When the batch runs, PostHog evaluates your audience filters and executes the workflow once per matching person. If the workflow contains an [email dispatch](#dispatches), PostHog automatically deduplicates recipients by email address so each unique address receives only one email.
 
 A batch trigger combines two things:
 
@@ -89,6 +89,14 @@ A batch trigger combines two things:
 You define the audience using person properties, cohorts, or distinct IDs. Multiple conditions are combined with **OR** logic, so a person matches if they meet any of them.
 
 The trigger shows a real-time estimate of how many persons will be affected (e.g. "approximately 1,200 of 50,000 persons") before you enable the workflow. If the audience is too large, you'll see a warning prompting you to add filters to narrow it down.
+
+#### Email deduplication
+
+When a batch workflow includes an email dispatch step, PostHog deduplicates recipients by email address. Multiple persons sharing the same email address (after lowercasing and trimming whitespace) are collapsed into a single send, so each unique email address receives the email only once. Persons without an email address are unaffected and processed individually.
+
+The audience preview estimate reflects this deduplication, showing the number of emails that will be sent rather than the total number of matching persons.
+
+Deduplication applies when each email action in the workflow sends to the default recipient (`{{ person.properties.email }}`). Workflows using a custom recipient address or workflows without an email step are not deduplicated.
 
 #### Recurring schedule
 
@@ -172,6 +180,15 @@ Delays help you control the timing of your messages. There are 3 types of delays
 | Wait until time window | Wait until a specific time window (e.g. only send on weekdays 9-5).                      |
 
 You can see an example of a delay in the [email drip campaign](/docs/workflows/email-drip-campaign) tutorial.
+
+### Waiting for events
+
+A **wait until condition** step can wait for one or more events instead of (or as well as) a property condition. The step resumes when the person in the workflow run sends a matching event - events from other people never resume it. If no matching event arrives before the step's maximum wait duration, the workflow continues down the timeout branch.
+
+A couple of things to keep in mind:
+
+- **Event filters use fixed values.** Filter values are set when you save the workflow and can't reference the trigger event's properties. For example, you can wait for any `order_shipped` event from the person, but you can't wait for an `order_shipped` event whose `order_id` matches the `order_id` on the event that triggered the workflow. Template syntax like `{{event.properties.order_id}}` in a filter value is compared as a literal string, so it will never match.
+- **Each run waits independently.** If the same person triggers the workflow more than once, each run has its own wait step, and a single matching event resumes all of them. If your trigger can fire multiple times per person concurrently, design the workflow so that any matching event is a valid reason to continue.
 
 ## Audience splits
 

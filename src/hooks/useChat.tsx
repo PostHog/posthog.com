@@ -1,9 +1,8 @@
 import React, { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react'
 import { navigate } from 'gatsby'
 import useInkeepSettings, { defaultQuickQuestions } from './useInkeepSettings'
-import Chat from 'components/Chat'
+import { ChatFrame } from 'components/Chat'
 import { useApp } from '../context/App'
-import { useWindow } from '../context/Window'
 
 interface ChatContextType {
     hasUnread: boolean
@@ -41,8 +40,6 @@ export function ChatProvider({
     initialQuestion?: string
     codeSnippet?: { code: string; language: string; sourceUrl: string }
 }): JSX.Element {
-    const { windows, setWindowTitle } = useApp()
-    const { appWindow } = useWindow()
     const { baseSettings, aiChatSettings, setBaseSettings, setAiChatSettings } = useInkeepSettings()
     const [hasUnread, setHasUnread] = useState(false)
     const [loading, setLoading] = useState(true)
@@ -208,13 +205,6 @@ export function ChatProvider({
         }
     }, [initialContext])
 
-    useEffect(() => {
-        const chatWindows = windows.filter((w) => w.key?.startsWith('ask-max'))
-        if (appWindow && chatWindows.length > 0) {
-            setWindowTitle(appWindow, `Chat ${chatWindows.length}`)
-        }
-    }, [])
-
     return (
         <ChatContext.Provider
             value={{
@@ -236,8 +226,32 @@ export function ChatProvider({
                 codeSnippet,
             }}
         >
-            <Chat />
+            <ChatFrame />
         </ChatContext.Provider>
+    )
+}
+
+// Global chat overlay. Rendered once (in the desktop wrapper) and toggled via the
+// app-level `chatOpen` flag instead of being managed as a draggable window. A fresh
+// set of `chatParams` remounts the provider (keyed by chat id / path) so switching
+// conversations reinitializes the embedded chat.
+export function ChatOverlay(): JSX.Element | null {
+    const { chatOpen, chatParams } = useApp()
+
+    if (!chatOpen || !chatParams) {
+        return null
+    }
+
+    return (
+        <ChatProvider
+            key={chatParams.chatId || chatParams.path}
+            context={chatParams.context}
+            quickQuestions={chatParams.quickQuestions}
+            chatId={chatParams.chatId}
+            date={chatParams.date}
+            initialQuestion={chatParams.initialQuestion}
+            codeSnippet={chatParams.codeSnippet}
+        />
     )
 }
 

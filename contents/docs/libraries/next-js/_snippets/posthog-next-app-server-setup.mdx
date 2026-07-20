@@ -1,13 +1,24 @@
-Use `getPostHog()` in server components, route handlers, and server actions to capture events and evaluate feature flags. The client is automatically scoped to the current user via the identity cookie set by the middleware.
+Create a shared PostHog module with `createPostHog()`. Use the returned `getPostHog` to evaluate feature flags in Server Components and capture events from request or action handlers.
 
-```tsx
-import { getPostHog } from '@posthog/next'
+```ts file=lib/posthog.ts
+import 'server-only'
+import { createPostHog } from '@posthog/next'
+import { auth } from '@/auth'
+
+export const { getPostHog } = createPostHog({
+    // Optional: resolve a trusted distinct ID from your auth session.
+    // Return null or undefined to fall back to the client identity.
+    getDistinctId: async () => (await auth())?.user?.id,
+})
+```
+
+```tsx file=app/dashboard/page.tsx
+import { getPostHog } from '@/lib/posthog'
 
 export default async function DashboardPage() {
     const posthog = await getPostHog()
 
     const flags = await posthog.getAllFlags()
-    posthog.capture({ event: 'dashboard_viewed' })
 
     return (
         <div>{flags['new-dashboard'] ? <NewDashboard /> : <OldDashboard />}</div>
@@ -15,6 +26,8 @@ export default async function DashboardPage() {
 }
 ```
 
-> **Note:** `getPostHog()` calls `cookies()` internally, which opts the route into dynamic rendering. Pages using it cannot be statically generated.
+Without `getDistinctId`, PostHog can use the identity cookie and tracing headers supplied by the client as request context. When you need a strict guarantee that analytics uses the identity from your authenticated session, pass an authoritative distinct ID directly when capturing events or evaluating feature flags. When the resolver returns an ID, PostHog uses it as the request default ahead of client-provided identity, while an ID passed directly to a capture or flag method still takes precedence. Session and device linkage can remain connected to the browser. The resolver runs at most once per request and is not called for users who opted out of capture.
 
-**Event flushing:** On Vercel, `@posthog/next` auto-detects [`waitUntil`](https://vercel.com/docs/functions/functions-api-reference/vercel-functions-package#waituntil) from `@vercel/functions` so events are flushed after the response is sent without blocking it. No manual `shutdown()` call is needed. In other environments, you can pass a custom `waitUntil` via `serverOptions` on the `PostHogProvider`, or events will be batched and flushed normally.
+> **Note:** `getPostHog()` calls `cookies()` and `headers()` internally, which opts the route into dynamic rendering. Pages using it cannot be statically generated. Keep `import 'server-only'` in the shared module so accidental imports from Client Components fail at build time.
+
+**Event flushing:** On Vercel, `@posthog/next` auto-detects [`waitUntil`](https://vercel.com/docs/functions/functions-api-reference/vercel-functions-package#waituntil) from `@vercel/functions` so events are flushed after the response is sent without blocking it. No manual `shutdown()` call is needed. In other environments, pass a custom `waitUntil` in the server client options with `createPostHog({ options: { waitUntil } })`, or events will be batched and flushed normally.

@@ -533,6 +533,7 @@ ai_observability: {
         human_annotation: false,
         session_replay: true,
         product_analytics: true,
+        ai_gateway_proxy: false,
     },
     tracing: {
         features: {

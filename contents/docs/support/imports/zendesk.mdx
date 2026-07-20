@@ -1,0 +1,74 @@
+---
+title: Import from Zendesk
+sidebar: Docs
+showTitle: true
+---
+
+> Zendesk import is in **beta**. Shared prerequisites and import behavior are covered in [Import historical tickets](/docs/support/imports).
+
+You can migrate your existing Zendesk Support history to PostHog. By migrating, you can access your original ZenDesk conversation threads, tags, attachments, and timestamps.
+
+## Zendesk credentials
+
+In addition to the [shared import prerequisites](/docs/support/imports#prerequisites), you need:
+
+- **Subdomain** – e.g. `acme` from `acme.zendesk.com` (full URLs are accepted)
+- **Agent email** – the email address tied to the API token
+- **API token** – with ticket read access
+
+## How to run an import
+
+1. Go to **Project settings → Support → Imports**
+2. Select **Zendesk**
+3. Enter your subdomain, agent email, and API token
+4. Optionally select a [default inbox](/docs/support/imports#prerequisites)
+5. Click **Start import**
+
+The API token and agent email are encrypted and never shown again after submission. To start a new import you must re-enter them. The subdomain is shown so you know which Zendesk account was used.
+
+## What gets imported
+
+For each Zendesk ticket:
+
+| Item                | Details |
+| ------------------- | ------- |
+| Metadata            | subject, status, and priority (see mapping tables below) |
+| Tags                | Zendesk tags appear as Support tags. Names are normalized and truncated to 255 characters; empty tags are dropped. Re-import does not update tags on already-imported tickets |
+| Full message thread | public replies and internal notes |
+| Attachments         | images embedded in the thread; other files linked. Files over 20 MiB are skipped. |
+| Customer identity   | requester name and email |
+| Original timestamps | ticket and message `created_at` / `updated_at` |
+| Zendesk ticket ID   | stored on the ticket and shown in the sidebar |
+
+### Status mapping
+
+| Zendesk | PostHog Support |
+| ------- | --------------- |
+| new | New |
+| open | Open |
+| pending | Pending |
+| hold | On hold |
+| solved, closed | Resolved |
+
+### Priority mapping
+
+| Zendesk | PostHog Support |
+| ------- | --------------- |
+| low | Low |
+| normal | Medium |
+| high, urgent | High |
+
+### Inbox routing
+
+Tickets route to the email channel matching the original Zendesk recipient address. Unmatched tickets use the default inbox selected at import time.
+
+## What does not get imported
+
+- Assignees, groups, or Zendesk organizations
+- Custom fields or CSAT scores
+
+## Limitations
+
+**Ticket counts:** The imported total may be lower than Zendesk's latest ticket number. Zendesk numbers include deleted tickets and gaps; the export API only returns tickets Zendesk still exposes. Permanently deleted tickets (past retention), archived tickets, and some AI agent tickets may be omitted.
+
+**Attachments:** Oversized files are skipped; the message is still imported.

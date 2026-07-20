@@ -219,6 +219,34 @@ To add a table:
 
 When you click inside a table, a menu appears to add or delete rows and columns.
 
+### Mermaid diagrams
+
+Sometimes your analysis needs boxes and arrows. Notebooks render [Mermaid](https://mermaid.js.org/) diagrams, so you can sketch a user flow or decision tree right next to the insights that prove (or disprove) it.
+
+To add one, create a fenced code block with the `mermaid` language identifier:
+
+````
+```mermaid
+flowchart LR
+    A[Visitor lands on Hogflix] --> B{Starts free trial?}
+    B -->|Yes| C[Binges Hedgehog Day]
+    B -->|No| D[Investigate with session replay]
+```
+````
+
+which renders as:
+
+```mermaid
+flowchart LR
+    A[Visitor lands on Hogflix] --> B{Starts free trial?}
+    B -->|Yes| C[Binges Hedgehog Day]
+    B -->|No| D[Investigate with session replay]
+```
+
+Flowcharts, sequence diagrams, class diagrams, and [anything else Mermaid supports](https://mermaid.js.org/intro/) all work.
+
+Diagrams render in view mode. In edit mode you see the raw source and can edit it directly. If your syntax is invalid, you get the source back with an error message instead of a diagram.
+
 ## Canvas
 
 A canvas is like a Notebook whose entire contents is persisted in the URL so that it can be easily shared with members of your organisation. Canvases support all the same content types as Notebooks but do not get persisted to the database or come with any form of history tracking. They are a great way of doing some quick explorations that you may want to share with a colleague but don't necessarily need to save for future use. The shareable link changes as you make edits, so updates to you notebook will require a new link to be shared.

@@ -15,6 +15,7 @@ tags:
   - Engineering
   - AI
   - Inside PostHog
+  - Research
 ---
 
 A few weeks ago at a team offsite in Lisbon, we pointed an AI agent at our query engine, fed it slow queries from production, and let it run overnight.

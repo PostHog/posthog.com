@@ -9,7 +9,7 @@ import { CallToAction } from 'components/CallToAction'
 
 <CalloutBox icon="IconFlask" title="Open beta" type="action">
 
-Self-driving is currently in open beta.
+Self-driving is in open beta. It's improving quickly – expect rough edges, and expect them to disappear fast.
 
 </CalloutBox>
 
@@ -19,7 +19,7 @@ Context helps your agents do their best work.
 
 ## What is context?
 
-Context is every piece of knowledge an agent needs to understand your product and act on it. It's more than the data stored in a warehouse, and it comes from two places.
+Context is every piece of knowledge an agent needs to understand your product and act on it. It's more than the data stored in a warehouse, and it comes from three places.
 
 ### Product usage data
 
@@ -40,6 +40,14 @@ Tied together, these give an agent the full picture of your product and business
 Self-driving can't be reproduced by pointing a general-purpose coding agent at your repo. That agent has your code, but not your context. The signals that drive the loop live in your product data, and PostHog is where that data, and the meaning around it, already lives.
 
 The richer your context, the better self-driving performs. Every product you turn on and every source you connect gives your agents more to work with.
+
+Not sure where your gaps are? Paste this prompt into [PostHog AI](/docs/posthog-ai) or any agent connected to the [PostHog MCP](/docs/model-context-protocol):
+
+```text
+Audit my PostHog instrumentation. What events, signal sources, and warehouse
+tables does my project have, which key flows aren't instrumented, and what
+missing context would most improve agent-written pull requests?
+```
 
 ## Next step
 

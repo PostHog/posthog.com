@@ -16,7 +16,7 @@ We've repositioned around self-driving. That only works if we all use the same w
 
 ### Use these words
 
-- **"Products"** for Web / Slack / MCP / Code (and Mobile in future)
+- **"Products"** for Web / Slack / MCP / CLI / Code (and Mobile in future)
 - **"Tools"** for analytics / replay / flags / error tracking, etc.
 - **"Context"** for events / recordings / logs / business data, etc.
 - **"Context warehouse"** for the data warehouse plus ingestion pipeline

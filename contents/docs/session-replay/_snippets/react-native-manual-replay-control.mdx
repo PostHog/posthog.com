@@ -22,3 +22,31 @@ await posthog.stopSessionRecording()
 ```
 
 > **Note:** Calling these methods will have no effect if session recordings are disabled in your PostHog [Project Settings](https://app.posthog.com/project/settings).
+
+#### Record or ignore specific screens
+
+You can combine these methods with your navigation to record only certain screens, or to pause recording on sensitive ones. For example, using `@react-navigation/native`, stop recording when a sensitive screen is focused and resume when the user leaves:
+
+```typescript
+import { useNavigationContainerRef } from '@react-navigation/native'
+import { usePostHog } from 'posthog-react-native'
+
+const IGNORED_SCREENS = ['Payment', 'Settings']
+
+function useRecordingByScreen(navigationRef: ReturnType<typeof useNavigationContainerRef>) {
+    const posthog = usePostHog()
+
+    useEffect(() => {
+        return navigationRef.addListener('state', () => {
+            const routeName = navigationRef.getCurrentRoute()?.name
+            if (routeName && IGNORED_SCREENS.includes(routeName)) {
+                void posthog.stopSessionRecording()
+            } else {
+                void posthog.startSessionRecording()
+            }
+        })
+    }, [navigationRef, posthog])
+}
+```
+
+Invert the check (`startSessionRecording` only for screens in an allowlist, `stopSessionRecording` otherwise) if you'd rather record just a specific set of screens.
