@@ -196,9 +196,7 @@ export default function ManagedWarehouse(): JSX.Element {
                     picture.
                 </p>
                 <p>
-                    The Managed Warehouse is your <strong>context layer</strong>. It's what makes it possible for
-                    PostHog to know not just that something happened, but why, and to who, and what it's worth. And
-                    improve itself.
+                    The Managed Warehouse is your <strong>context layer</strong> for AI-driven product development. It's not just storage. It's what all of your PostHog tools run on, so you're not left wondering, "why did this funnel drop", but knowing "this funnel dropped, here's the revenue impact, here are the cohorts affected, here's what those users have in common, and here's a PR already open to fix the issue.
                 </p>
                 <ProductScreenshot
                     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/dw_temp_528efa76a2.png"
@@ -247,14 +245,13 @@ export default function ManagedWarehouse(): JSX.Element {
                 </div>
 
                 <h2 className="!mt-10 @2xl/reader-content-container:!mt-12">
-                    Built on DuckDB. Enterprise-ready on top of it.
+                    Built on DuckDB. Enterprise-ready on top.
                 </h2>
                 <p>
                     <Link to="https://duckdb.org/" external={true}>
                         DuckDB
                     </Link>{' '}
-                    is fast and purpose-built for analytical queries. It's a good foundation. Here's what we built on
-                    top of it:
+                    runs analytical queries fast, on hardware most teams already have. Here's what we built on top of it to get it ready for production:
                 </p>
                 <ul className="not-prose my-4 list-none space-y-4 pl-0">
                     {techFeatures.map(({ Icon, color, title, description }) => (
