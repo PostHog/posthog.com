@@ -25,6 +25,8 @@ Additional reports will be added based on user feedback we receive via our [in-a
 
 - A Pinterest Ads account with permission to access data from the accounts you want to sync.
 
+> **Tip:** If you need to find your Ad Account ID manually, go to [Pinterest Business](https://business.pinterest.com/) > Ads > select your account. The ID is in the URL or account settings.
+
 ## Configuring PostHog
 
 Connect PostHog to your Pinterest Ads account using a Pinterest account. The Pinterest account must have permission to access the ad account data.
