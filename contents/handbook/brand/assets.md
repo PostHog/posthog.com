@@ -36,7 +36,7 @@ Avoid pairing the logomark with the "PostHog" wordmark in regular text that isn'
 
 If you're looking for the PostHog logo, you came to the right place. Please keep the logo intact. SVG is always preferred as it will infinitely scale with no quality loss.
 
-Each logo below is rendered live from our [`@posthog/brand`](https://github.com/PostHog/brand) library — the single source of truth for the mark — so it always matches the current logo. Click any format to download it (logos are transparent; the previews sit on a solid background color). If you're building a PostHog UI, import the parametric `<Logo>` component from `@posthog/brand` directly rather than downloading a file, and browse every lockup at [brand.posthog.com](https://brand.posthog.com). A flat 4-color/CMYK (`print`) variant is also available from the library for print vendors.
+Each logo below is rendered live from our [`@posthog/brand`](https://github.com/PostHog/brand) library — the single source of truth for the mark — so it always matches the current logo. Click any format to download it (logos are transparent; the previews sit on a solid background color). If you're building a PostHog UI, import the parametric `<Logo>` component from `@posthog/brand` directly rather than downloading a file. A flat 4-color/CMYK (`print`) variant is also available from the library for print vendors.
 
 <BrandLogos />
 
