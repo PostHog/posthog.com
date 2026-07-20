@@ -36,6 +36,8 @@ Avoid pairing the logomark with the "PostHog" wordmark in regular text that isn'
 
 If you're looking for the PostHog logo, you came to the right place. Please keep the logo intact. SVG is always preferred as it will infinitely scale with no quality loss.
 
+These files are generated straight from our [`@posthog/brand`](https://github.com/PostHog/brand) library — the single source of truth for the logo — so they always match the current mark. If you're building a PostHog UI, import the parametric `<Logo>` component from `@posthog/brand` instead of hard-coding these files, and browse every lockup live at [brand.posthog.com](https://brand.posthog.com). A flat 4-color/CMYK (`print`) variant is also available from the library for print vendors.
+
 (Images shown below have transparent backgrounds but appear here with a solid background color.)
 
 | Preview                                                                                                                             | Name           | Vector                                                     | PNG                                                                                                                             | PNG w/ padding\*                                                                                                                              |
@@ -52,9 +54,7 @@ When using the logo on a dark background, use the white-only version of the logo
 
 The @2x version of PNGs are designed for [hi-dpi (or "Retina") screens](https://en.wikipedia.org/wiki/Retina_display). When using the logo in third party services that support uploading multiple versions (standard and hi-dpi), please be sure to include the @2x logo as it will appear crisper on newer devices, tablets, and high resolution mobile devices.
 
-> **Important:** We updated our logo in 2021. (Note the square font and sharp edges on the logomark in the old version.) Please be sure to use the _correct_ version. 👇🏼
-
-![Logo usage examples](/brand/logo-usage.png)
+> **Using an older version?** These logo files are generated from the [`@posthog/brand`](https://github.com/PostHog/brand) library and kept current here. If you have an older PostHog logo saved locally (e.g. a square font or sharp-edged logomark), please replace it with the current version from this page.
 
 ### Squeak
 
