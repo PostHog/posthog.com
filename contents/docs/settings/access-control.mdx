@@ -124,6 +124,8 @@ Resource access controls limit access to resources in the PostHog UI and API, bu
 
 Data-level access control support is planned and actively being worked on.
 
+**Exception:** [Public sharing](/docs/product-analytics/sharing) is gated by access controls. When you enable sharing on an insight, dashboard, or notebook, PostHog checks that you have access to every warehouse table its queries use. The same check runs when you edit an already-shared artifact – you can't add a query over a table you're denied access to.
+
 </CalloutBox>
 
 Resource access controls have four possible access levels:
