@@ -46,11 +46,7 @@ export const preprocessHtmlForTabs = (html: string): string => {
         }
     })
 
-    const result = doc.documentElement.outerHTML
-    // Release JSDOM resources promptly — this runs once per page across
-    // thousands of pages, and unclosed windows pile up on the build heap
-    dom.window.close()
-    return result
+    return doc.documentElement.outerHTML
 }
 
 export const extractTitleFromHtml = (html: string): string => {
