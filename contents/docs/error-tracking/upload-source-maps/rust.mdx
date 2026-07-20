@@ -57,10 +57,10 @@ readelf -n target/release/my-app | grep "Build ID"
 
 Replace `my-app` with your binary's name.
 
-If nothing shows up, tell the linker to add one in `.cargo/config.toml`:
+If nothing shows up, tell the linker to add one in `.cargo/config.toml`, scoped to Linux builds (Apple's linker embeds a UUID on its own and rejects this flag):
 
 ```toml
-[build]
+[target.'cfg(target_os = "linux")']
 rustflags = ["-C", "link-arg=-Wl,--build-id=sha1"]
 ```
 
@@ -75,7 +75,7 @@ cargo build --release
 posthog-cli symbol-sets upload --directory target/release
 ```
 
-The CLI scans the directory and uploads every executable and shared library that carries debug info and a build ID, skipping everything else. On macOS it also uploads `.dSYM` bundles (this needs `dwarfdump`, which ships with Xcode). The upload is associated with a [release](/docs/error-tracking/releases) automatically when the build directory is inside a git checkout.
+The CLI scans the directory and uploads every executable and shared library that carries debug info and a build ID, skipping everything else. On macOS it also uploads `.dSYM` bundles (this needs `dwarfdump`, which ships with Xcode). Windows binaries (PDB debug info) are not supported yet. The upload is associated with a [release](/docs/error-tracking/releases) automatically when the build directory is inside a git checkout.
 
 Run this as part of the same pipeline that produces your production binary. Each build has its own build ID, so symbols must be re-uploaded for every build you deploy.
 
