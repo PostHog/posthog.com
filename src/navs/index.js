@@ -7383,6 +7383,20 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Install metrics',
+                    url: '/docs/metrics/installation',
+                    icon: 'IconCode',
+                    color: 'blue',
+                    featured: true,
+                    children: [
+                        { name: 'Overview', url: '/docs/metrics/installation' },
+                        { name: 'JavaScript (web)', url: '/docs/metrics/installation/javascript' },
+                        { name: 'Node.js', url: '/docs/metrics/installation/nodejs' },
+                        { name: 'Python', url: '/docs/metrics/installation/python' },
+                        { name: 'Other languages', url: '/docs/metrics/installation/other' },
+                    ],
+                },
+                {
                     name: 'Why you need metrics',
                     url: '/docs/metrics/basics',
                     icon: 'IconBook',
