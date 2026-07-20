@@ -21,6 +21,7 @@ import {
     IconPeople,
     IconGlobe,
     IconTarget,
+    IconMegaphone,
 } from '@posthog/icons'
 
 type IconComponent = React.ComponentType<{ className?: string }>
@@ -63,6 +64,12 @@ const questionExamples: { Icon: IconComponent; color: string; question: string; 
         color: 'text-orange',
         question: 'Where does your funnel leak?',
         answer: 'Query across signup events, CRM deal stage, and feature adoption in a single SQL statement. Get a precise answer, not a hypothesis about which step loses people and why.',
+    },
+    {
+        Icon: IconMegaphone,
+        color: 'text-yellow',
+        question: 'Which ad campaigns are driving retention, not just signups?',
+        answer: "Join your ad platform data with PostHog activation and retention events. Find out which campaigns bring users who stick around, and stop optimising for the conversion metric that doesn't predict revenue.",
     },
 ]
 
@@ -207,6 +214,7 @@ export default function ManagedWarehouse(): JSX.Element {
                 />
 
                 <h2 className="!mt-10 @2xl/reader-content-container:!mt-12">Questions worth asking</h2>
+                <p>Ask in the SQL editor, or in plain English using Slack, our MCP, or PostHog AI.</p>
                 <div className="not-prose grid grid-cols-1 @xl/reader-content-container:grid-cols-2 @4xl/reader-content-container:grid-cols-3 gap-3 mt-4 mb-4">
                     {questionExamples.map(({ Icon, color, question, answer }) => (
                         <div
