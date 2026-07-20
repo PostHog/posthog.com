@@ -24,9 +24,28 @@ You can connect up to 10 email addresses per project (e.g. `support@`, `billing@
 
 <CalloutBox icon="IconInfo" title="Multiple addresses share one inbox" type="fyi">
 
-All connected email addresses feed into the same Support inbox. Use the sender address shown on each ticket to tell which address the customer contacted.
+All connected email addresses feed into the same Support inbox. Use the sender address shown on each ticket to tell which address the customer contacted. One address is always designated as the [primary email address](#primary-email-address) for outgoing widget tickets.
 
 </CalloutBox>
+
+## Primary email address
+
+When you connect multiple email addresses, one is designated as the **primary**. The primary address is used as the send-from identity for tickets opened from the [widget](/docs/support/widget) when no specific channel is chosen.
+
+The first email address you connect automatically becomes primary. The current primary shows a **Primary** badge in your email settings.
+
+### Change the primary address
+
+To set a different email as primary:
+
+1. Go to **Support > Settings > Email channel**
+2. Find the email address you want and click **Set as primary**
+
+Changing the primary address requires admin permissions.
+
+### Automatic promotion
+
+If you disconnect the primary email address, PostHog automatically promotes another connected channel to primary – preferring a verified channel, then the oldest.
 
 ## Domain verification
 
@@ -94,4 +113,4 @@ To remove a connected email address:
 1. Go to **Support > Settings > Email channel**
 2. Click **Disconnect** on the email address you want to remove
 
-Existing tickets from that address are not affected – they remain in your inbox.
+Existing tickets from that address are not affected – they remain in your inbox. If you disconnect the [primary email address](#primary-email-address), another connected channel is automatically promoted to primary.
