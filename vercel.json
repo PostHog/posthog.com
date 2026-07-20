@@ -106,7 +106,7 @@
     ],
     "redirects": [
         { "source": "/papers", "destination": "/research#papers" },
-        { "source": "/desktop", "destination": "/code" },
+        { "source": "/code", "destination": "/desktop" },
         { "source": "/teams/logs", "destination": "/teams/apm" },
         { "source": "/teams/query-performance", "destination": "/teams/analytics-platform" },
         {
@@ -128,8 +128,8 @@
         },
         { "source": "/docs/site-apps", "destination": "/docs/js-snippets" },
         { "source": "/docs/site-apps/:path*", "destination": "/docs/js-snippets/:path*" },
-        { "source": "/code/download", "destination": "/code#download" },
-        { "source": "/code/download/", "destination": "/code#download" },
+        { "source": "/code/download", "destination": "/desktop#download" },
+        { "source": "/code/download/", "destination": "/desktop#download" },
         {
             "source": "/slack-app",
             "destination": "/slack"

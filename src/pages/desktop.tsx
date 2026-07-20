@@ -411,7 +411,7 @@ function HeroSection() {
                         <div className="flex flex-col items-start @4xl/editor:flex-row @4xl/editor:gap-8">
                             <div className="@4xl/editor:flex-[0_0_280px]">
                                 <p>
-                                    PostHog Code is the desktop app for <strong>steering coding agents</strong> – and it
+                                    PostHog Desktop is the app for <strong>steering coding agents</strong> – and it
                                     edits your <strong>product</strong>, not just your <strong>codebase</strong>.
                                 </p>
                                 <ul className="mb-4 list-none space-y-0.5 p-0 text-[15px]">
@@ -432,7 +432,7 @@ function HeroSection() {
                                     <p className="mt-4 text-sm text-secondary">
                                         Have an invite code?{' '}
                                         <Link
-                                            to="/code#download"
+                                            to="/desktop#download"
                                             className="font-bold underline"
                                             onClick={(e) => {
                                                 e.preventDefault()
@@ -600,7 +600,7 @@ function PostHogWaySection({ onComplete }: { onComplete?: () => void }) {
 
                     <p className="text-base leading-loose mb-5 order-1">
                         <ChoppyReveal wordDelay={40} onComplete={() => setP1Done(true)}>
-                            <strong>{' PostHog Code'}</strong>
+                            <strong>{' PostHog Desktop'}</strong>
                             {' reads '}
                             <span ref={signalsWordRef}>
                                 <RoughAnnotation
@@ -635,7 +635,7 @@ function PostHogWaySection({ onComplete }: { onComplete?: () => void }) {
                         <strong>TL;DR:</strong> Other AI tools edit your code.{' '}
                         <RoughAnnotation type="underline" color="currentColor" strokeWidth={1.5} delay={400}>
                             <span className="inline-block">
-                                <strong>PostHog Code</strong> edits your product.
+                                <strong>PostHog Desktop</strong> edits your product.
                             </span>
                         </RoughAnnotation>
                     </ChoppyReveal>
@@ -745,7 +745,7 @@ const MEEP_VIDEO_ID = 'v7t0y7ynmn'
 
 // Notification copy — mimics a macOS "task finished" toast (see reference screenshot).
 const MEEP_NOTIFICATION = {
-    app: 'PostHog Code',
+    app: 'PostHog Desktop',
     body: 'meep.mov needs your input',
 }
 
@@ -823,7 +823,7 @@ function MeepNotification({ className = 'my-10 flex justify-center px-4 @xl:px-8
     )
 }
 
-// Shown on the "Instrumentation" carousel slide: what PostHog Code wires up as it builds.
+// Shown on the "Instrumentation" carousel slide: what PostHog Desktop wires up as it builds.
 const instrumentationItems = [
     {
         icon: IconPulse,
@@ -1018,9 +1018,9 @@ const featureTabs: TabbedCarouselTab[] = [
                 imageAlt="Plan mode: clarifying questions and an implementation plan to approve"
             >
                 <p className="m-0">
-                    Tasks can start in Plan mode: the agent explores your codebase and asks clarifying questions –
-                    multiple choice or freeform – then writes an implementation plan you approve. Tweak it, send it back
-                    with notes, or say go. Nothing gets written until you're happy.
+                    If dangerously skipping permissions isn't always your thing, coding tasks can start in Plan mode.
+                    The agent explores your repo and product data, asks clarifying questions, then writes an
+                    implementation plan you approve.
                 </p>
                 <div className="not-prose mt-4 grid grid-cols-1 gap-4 @sm:grid-cols-3">
                     <div>
@@ -1029,7 +1029,7 @@ const featureTabs: TabbedCarouselTab[] = [
                             <span className="text-base font-bold text-primary">Mode</span>
                         </div>
                         <p className="m-0 mt-1 text-sm leading-snug text-secondary">
-                            Default, Accept Edits, Plan, or Auto – switch anytime, mid-task.
+                            Accept Edits, Plan Mode, or Auto Mode (switch anytime, even mid-task)
                         </p>
                     </div>
                     <div>
@@ -1038,7 +1038,7 @@ const featureTabs: TabbedCarouselTab[] = [
                             <span className="text-base font-bold text-primary">Model</span>
                         </div>
                         <p className="m-0 mt-1 text-sm leading-snug text-secondary">
-                            Claude, GPT, or an open model like GLM – pick per task.
+                            The latest models from Anthropic and OpenAI, plus open source models like GLM
                         </p>
                     </div>
                     <div>
@@ -1067,7 +1067,7 @@ const featureTabs: TabbedCarouselTab[] = [
                 highlightColor="yellow"
                 imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/prompt_task_light_ad118d1efc.png"
                 imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/prompt_task_dark_6cb8a38596.png"
-                imageAlt="Prompting a task in PostHog Code"
+                imageAlt="Prompting a task in PostHog Desktop"
             >
                 <p className="m-0">
                     Tell it what you want built, like you would a teammate. It plans the approach, writes the code, and
@@ -1136,12 +1136,12 @@ const featureTabs: TabbedCarouselTab[] = [
         content: (
             <FeaturePanel title="Ship the change," highlightedTitle="measure what happened" highlightColor="purple">
                 <p className="m-0">
-                    Code that ships without instrumentation is a guess wearing a lab coat. PostHog Code wires up the
+                    Code that ships without instrumentation is a guess wearing a lab coat. PostHog Desktop wires up the
                     measurement in the same breath as the feature, so "did it work?" has an answer the moment it's live.
                 </p>
                 <SlideCallout>
                     <strong className="text-primary">"We'll add tracking later" is a lie you tell yourself.</strong>{' '}
-                    PostHog Code just does it now, so there's no later to never get around to.
+                    PostHog Desktop just does it now, so there's no later to never get around to.
                 </SlideCallout>
                 <ul className="mt-5 grid list-none grid-cols-1 gap-x-8 gap-y-4 p-0 @sm:grid-cols-2">
                     {instrumentationItems.map(({ icon: Icon, color, title, description }) => (
@@ -1454,7 +1454,7 @@ const alphaTabs: TabbedCarouselTab[] = [
                     <SlideImage
                         light="https://res.cloudinary.com/dmukukwp6/image/upload/contexts_dark_1_c98fa79b8e.png"
                         dark="https://res.cloudinary.com/dmukukwp6/image/upload/contexts_dark_f006575ea6.png"
-                        alt="Teammates and agents working the same threads in PostHog Code"
+                        alt="Teammates and agents working the same threads in PostHog Desktop"
                     />
                 }
                 extra={
@@ -1529,7 +1529,7 @@ const alphaTabs: TabbedCarouselTab[] = [
                 alpha
                 imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/autoresearch_prompt_light_73dcb825bf.png"
                 imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/autoresearch_prompt_dark_ed1e639863.png"
-                imageAlt="Prompting an autoresearch task in PostHog Code"
+                imageAlt="Prompting an autoresearch task in PostHog Desktop"
             >
                 <p className="m-0">
                     Point it at a metric and it optimizes on its own – measure a baseline, try a change, measure again,
@@ -1574,8 +1574,8 @@ const AgenticWorkspaceSection = () => {
                 </span>
             </SectionLabel>
             <p className="mb-6 max-w-3xl">
-                PostHog Code is in beta. These bits are still <em>alpha inside it</em> – rough, changing weekly, and the
-                most fun. It's where coding stops being a solo tool: your team and your agents share{' '}
+                PostHog Desktop is in beta. These bits are still <em>alpha inside it</em> – rough, changing weekly, and
+                the most fun. It's where coding stops being a solo tool: your team and your agents share{' '}
                 <RoughAnnotation type="underline" color="#F54E00" strokeWidth={2}>
                     one workspace
                 </RoughAnnotation>
@@ -1673,13 +1673,13 @@ const SupportedLLMs = () => {
                     </div>
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog_fable_task_light_80d657b9d6.png"
-                        alt="Picking a model for a task in PostHog Code"
+                        alt="Picking a model for a task in PostHog Desktop"
                         className="dark:hidden pt-2"
                         imgClassName="w-full rounded border border-primary shadow-xl"
                     />
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog_fable_task_dark_e30ddc1938.png"
-                        alt="Picking a model for a task in PostHog Code"
+                        alt="Picking a model for a task in PostHog Desktop"
                         className="hidden dark:block pt-2"
                         imgClassName="w-full rounded border border-primary shadow-xl"
                     />
@@ -1710,7 +1710,7 @@ const SupportedLLMs = () => {
                         of real coding work, open models now do the same job for a tenth of the price.
                     </p>
                     <p className="mb-6 leading-relaxed">
-                        PostHog Code runs both. Pay token cost (with no markup) on the best tool for the job.
+                        PostHog Desktop runs both. Pay token cost (with no markup) on the best tool for the job.
                     </p>
 
                     <div className="flex items-end justify-between gap-4">
@@ -1806,7 +1806,7 @@ const BiggerPictureSection = () => {
                 <ChoppyReveal wordDelay={40}>
                     {'You used to write code. Then you prompted outputs. Now you orchestrate '}
                     <Highlight>outcomes</Highlight>
-                    {". PostHog Code is built for the abstraction level you're moving to next – and the work that "}
+                    {". PostHog Desktop is built for the abstraction level you're moving to next – and the work that "}
                     <RoughAnnotation type="underline" color="#F54E00" strokeWidth={2}>
                         <em>isn't quite possible yet</em>
                     </RoughAnnotation>
@@ -1874,12 +1874,12 @@ const InboxCallout = () => {
                         </p>
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/inbox_light_9aa9eed335.png"
-                            alt="The Inbox surfacing reports and pull requests in PostHog Code"
+                            alt="The Inbox surfacing reports and pull requests in PostHog Desktop"
                             className="dark:hidden w-full rounded border border-primary shadow-2xl"
                         />
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/inbox_dark_216a157762.png"
-                            alt="The Inbox surfacing reports and pull requests in PostHog Code"
+                            alt="The Inbox surfacing reports and pull requests in PostHog Desktop"
                             className="hidden dark:block w-full rounded border border-primary shadow-2xl"
                         />
                     </div>
@@ -1901,7 +1901,7 @@ const TLDR = () => {
     return (
         <section className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
             <h2 className="text-2xl font-bold mb-2">Try it</h2>
-            <p className="m-0">PostHog Code is launching in Summer 2026.</p>
+            <p className="m-0">PostHog Desktop is launching in Summer 2026.</p>
             <div className="mt-2 grid items-center gap-8 @2xl:grid-cols-2 @2xl:gap-12">
                 <div className="@container bg-blue/10 border border-blue rounded-md px-8 py-6 shadow-xl">
                     <WaitlistForm />
@@ -1922,11 +1922,11 @@ const TLDR = () => {
 
 const FAQ_ITEMS = [
     {
-        trigger: 'What is PostHog Code?',
+        trigger: 'What is PostHog Desktop?',
         content: (
             <div className="space-y-3">
                 <p>
-                    PostHog Code is a{' '}
+                    PostHog Desktop is a{' '}
                     <a href="/docs/posthog-code" className="underline">
                         desktop coding agent
                     </a>{' '}
@@ -1953,7 +1953,22 @@ const FAQ_ITEMS = [
         ),
     },
     {
-        trigger: "What's the difference between PostHog AI and PostHog Code?",
+        trigger: "Wait, wasn't this called PostHog Code?",
+        content: (
+            <div className="space-y-3">
+                <p>
+                    Yep, we renamed it. Writing code turned out to be just one part of building a product – so we added
+                    things like canvases and multiplayer to make room for the rest of the work.
+                </p>
+                <p>
+                    It's less "AI coding tool" now and more a workspace for agentic product builders – so we gave it a
+                    name that fits.
+                </p>
+            </div>
+        ),
+    },
+    {
+        trigger: "What's the difference between PostHog AI and PostHog Desktop?",
         content: (
             <div className="space-y-3">
                 <p>
@@ -1961,13 +1976,13 @@ const FAQ_ITEMS = [
                     and helps with things like writing SQL and analyzing user behavior through natural-language prompts.
                 </p>
                 <p>
-                    PostHog Code is a desktop application focused on shipping code. It orchestrates multiple coding
-                    agents from different providers (Anthropic, OpenAI) and turns product signals – errors, support
-                    tickets, session replay trends – into PRs.
+                    PostHog Desktop is a desktop app focused on shipping code. It orchestrates multiple coding agents
+                    from different providers (Anthropic, OpenAI) and turns product signals – errors, support tickets,
+                    session replay trends – into PRs.
                 </p>
                 <p>
                     In a nutshell:{' '}
-                    <strong>PostHog AI helps you understand your product. PostHog Code helps you build it.</strong>
+                    <strong>PostHog AI helps you understand your product. PostHog Desktop helps you build it.</strong>
                 </p>
             </div>
         ),
@@ -1993,8 +2008,8 @@ const FAQ_ITEMS = [
         content: (
             <div className="space-y-3">
                 <p>
-                    Yep! PostHog Code is a full desktop coding agent – not just a plugin for another editor – so you can
-                    use it as your primary tool for generating code.
+                    Yep! PostHog Desktop is a full coding agent – not just a plugin for another editor – so you can use
+                    it as your primary tool for generating code.
                 </p>
                 <p>
                     If you'd rather keep your existing editor, you can still get the product-data layer: the PostHog MCP
@@ -2008,7 +2023,7 @@ const FAQ_ITEMS = [
         content: (
             <div className="space-y-3">
                 <p>
-                    PostHog Code is built on top of two{' '}
+                    PostHog Desktop is built on top of two{' '}
                     <a href="/docs/posthog-code/use-any-model-and-harness" className="underline">
                         harnesses
                     </a>
@@ -2025,7 +2040,7 @@ const FAQ_ITEMS = [
         trigger: "What if I don't use PostHog yet?",
         content: (
             <p>
-                PostHog Code runs on top of PostHog, so you'll need to be on PostHog first. The good news: PostHog is
+                PostHog Desktop runs on top of PostHog, so you'll need to be on PostHog first. The good news: PostHog is
                 free up to{' '}
                 <a href="/pricing" className="underline">
                     generous limits
@@ -2090,7 +2105,7 @@ const FAQ_ITEMS = [
         content: (
             <div className="space-y-3">
                 <p>
-                    Your code stays in GitHub. PostHog Code agents access your repo to open PRs, much like any CI/CD
+                    Your code stays in GitHub. PostHog Desktop agents access your repo to open PRs, much like any CI/CD
                     integration.
                 </p>
                 <p>
@@ -2113,9 +2128,9 @@ const FAQ_ITEMS = [
         trigger: 'Is my PostHog data safe?',
         content: (
             <p>
-                Yes. PostHog Code queries your data through the PostHog API using your personal API key. Data is never
-                stored, cached, or sent anywhere other than to PostHog&apos;s servers, and you control exactly what the
-                agent can access through your API key&apos;s permissions.
+                Yes. PostHog Desktop queries your data through the PostHog API using your personal API key. Data is
+                never stored, cached, or sent anywhere other than to PostHog&apos;s servers, and you control exactly
+                what the agent can access through your API key&apos;s permissions.
             </p>
         ),
     },
@@ -2124,8 +2139,8 @@ const FAQ_ITEMS = [
         content: (
             <div className="space-y-3">
                 <p>
-                    Yes – PostHog Code can both read and write to PostHog, depending on your API key permissions. It can
-                    create feature flags, set up experiments, build dashboards, and define actions.
+                    Yes – PostHog Desktop can both read and write to PostHog, depending on your API key permissions. It
+                    can create feature flags, set up experiments, build dashboards, and define actions.
                 </p>
                 <p>
                     Every write operation requires explicit approval from the agent's permission system – nothing
@@ -2139,7 +2154,7 @@ const FAQ_ITEMS = [
         content: (
             <div className="space-y-3">
                 <p>
-                    PostHog Code is usage-based – there's no fixed subscription. You spend AI credits as you go (100
+                    PostHog Desktop is usage-based – there's no fixed subscription. You spend AI credits as you go (100
                     credits = $1), and credits reflect the underlying model's cost exactly, with no markup on top.
                 </p>
                 <p>
@@ -2208,16 +2223,16 @@ export default function CodePage() {
     return (
         <>
             <SEO
-                title="PostHog Code"
+                title="PostHog Desktop"
                 description="A desktop app for steering coding agents and editing your product"
                 structuredData={buildProductStructuredData({
-                    name: 'PostHog Code',
+                    name: 'PostHog Desktop',
                     description: 'A desktop app for steering coding agents and editing your product',
-                    slug: 'code',
+                    slug: 'desktop',
                     operatingSystem: 'macOS, Windows, Linux',
                 })}
             />
-            <Editor slug="/code" maxWidth="100%" hasPadding={false} disableFormatting>
+            <Editor slug="/desktop" maxWidth="100%" hasPadding={false} disableFormatting>
                 <div className="@container not-prose font-rounded">
                     <header className="relative mb-8 border-b border-primary">
                         <div className="max-w-4xl mx-auto px-4 @xl:px-8 pt-6 @xl:pt-8 pb-8">
