@@ -7,7 +7,6 @@ import { Close, Plus } from 'components/Icons'
 import { Combobox } from '@headlessui/react'
 import { Skeleton } from 'components/Questions/QuestionsTable'
 import { CallToAction } from 'components/CallToAction'
-import { getTeamCmsName } from 'lib/teamNames'
 
 const teamQuery = (name: string) =>
     qs.stringify(
@@ -132,7 +131,7 @@ export default function TeamMembers({ team: teamName }: { team: string }) {
     const [loading, setLoading] = useState(true)
 
     const fetchTeamMembers = () => {
-        return fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/teams?${teamQuery(getTeamCmsName(teamName))}`)
+        return fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/teams?${teamQuery(teamName)}`)
             .then((res) => res.json())
             .then(({ data }) => {
                 setTeam(data?.[0] ?? [])

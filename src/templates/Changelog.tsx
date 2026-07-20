@@ -30,7 +30,6 @@ import slugify from 'slugify'
 import { Video } from 'cloudinary-react'
 import { useLocation } from '@reach/router'
 import MediaPlayer from 'components/MediaPlayer'
-import { getTeamDisplayName } from 'lib/teamNames'
 
 dayjs.extend(utc)
 
@@ -123,14 +122,12 @@ type ChangelogVideo = {
 }
 
 export const Change = ({ title, teamName, media, description, cta }) => {
-    const displayTeamName = teamName ? getTeamDisplayName(teamName) : undefined
-
     return (
         <>
             <Heading as="h3" id={slugify(title, { lower: true })} className="m-0">
                 {title}
             </Heading>
-            {displayTeamName && <p className="m-0 text-sm opacity-60 font-semibold">{displayTeamName} Team</p>}
+            {teamName && <p className="m-0 text-sm opacity-60 font-semibold">{teamName} Team</p>}
             {media?.data?.attributes?.mime === 'video/mp4' ? (
                 <div className="my-4">
                     <ZoomImage>
@@ -716,9 +713,6 @@ const RoadmapCards = ({
                                                 weekData.roadmaps.map((roadmap) => {
                                                     const active = activeRoadmap?.id === roadmap.id
                                                     const teamName = roadmap.teams?.data?.[0]?.attributes?.name
-                                                    const displayTeamName = teamName
-                                                        ? getTeamDisplayName(teamName)
-                                                        : undefined
                                                     const crestUrl =
                                                         roadmap.teams?.data?.[0]?.attributes?.miniCrest?.data
                                                             ?.attributes?.url
@@ -743,9 +737,9 @@ const RoadmapCards = ({
                                                                     >
                                                                         {roadmap.title}
                                                                     </h5>
-                                                                    {displayTeamName && (
+                                                                    {teamName && (
                                                                         <p className="!m-0 text-[13px] text-secondary">
-                                                                            {displayTeamName} Team
+                                                                            {teamName} Team
                                                                         </p>
                                                                     )}
                                                                 </div>

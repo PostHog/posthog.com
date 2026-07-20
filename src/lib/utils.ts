@@ -1,7 +1,6 @@
 import { IMenu } from 'components/PostLayout/types'
 import slugify from 'slugify'
 import { LibraryPluginType } from 'types'
-import { getTeamDisplayName } from './teamNames'
 
 export const classNames = (...classes: (string | null | undefined | false)[]): string => {
     return classes.filter(Boolean).join(' ')
@@ -110,7 +109,7 @@ export const groupMenuItems = (items: IMenu[]): Record<string, IMenu[]> => {
 }
 
 export const slugifyTeamName = (name: string): string => {
-    return slugify(getTeamDisplayName(name).toLowerCase().replace('ops', ''), {
+    return slugify(name.toLowerCase().replace('ops', ''), {
         lower: true,
         remove: /and/,
     })

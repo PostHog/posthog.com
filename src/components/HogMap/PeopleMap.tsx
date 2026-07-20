@@ -15,7 +15,6 @@ import {
 } from './hogMapUtils'
 import Toggle from 'components/Toggle'
 import { IconPineapple, IconPeople, IconDecisionTree } from '@posthog/icons'
-import { getTeamDisplayName } from 'lib/teamNames'
 
 type BadgeType = 'none' | 'pineapple' | 'team'
 
@@ -47,15 +46,14 @@ const createBadgeElement = (
         }
     } else if (badgeType === 'team') {
         const teamName = profile.teams?.data?.[0]?.attributes?.name
-        const displayTeamName = teamName ? getTeamDisplayName(teamName) : undefined
-        const miniCrestUrl = displayTeamName ? teamMiniCrestMap[displayTeamName] : null
+        const miniCrestUrl = teamName ? teamMiniCrestMap[teamName] : null
 
         if (miniCrestUrl) {
             badge.style.backgroundColor = '#ffffff'
-            badge.title = `${displayTeamName} Team`
+            badge.title = `${teamName} Team`
             const img = document.createElement('img')
             img.src = miniCrestUrl
-            img.alt = `${displayTeamName} Team`
+            img.alt = `${teamName} Team`
             img.className = 'w-full h-full object-contain'
             badge.appendChild(img)
         } else {

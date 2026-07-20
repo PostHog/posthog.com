@@ -1,5 +1,4 @@
 import { GatsbyNode } from 'gatsby'
-import { getTeamSlug } from '../src/lib/teamNames'
 
 export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] = async ({ actions, schema }) => {
     const { createTypes } = actions
@@ -635,7 +634,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
                                 filter: {
                                     fields: {
                                         slug: {
-                                            eq: `/teams/${getTeamSlug(source.slug)}/objectives`,
+                                            eq: `/teams/${source.slug}/objectives`,
                                         },
                                     },
                                 },

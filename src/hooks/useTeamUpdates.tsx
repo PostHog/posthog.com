@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import qs from 'qs'
-import { getTeamCmsName } from 'lib/teamNames'
 
 export type Update = {
     thingOfTheWeek: boolean
@@ -20,7 +19,7 @@ export default function useTeamUpdates({ teamName, filters }: { teamName: string
                 {
                     filters: {
                         name: {
-                            $eqi: getTeamCmsName(teamName),
+                            $eqi: teamName,
                         },
                     },
                 },
