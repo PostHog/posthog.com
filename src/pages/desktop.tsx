@@ -4,23 +4,28 @@ import Editor from 'components/Editor'
 import {
     IconAI,
     IconArrowUpRight,
-    IconBolt,
-    IconBrackets,
+    IconBatteryCharge,
+    IconBrain,
     IconBrowser,
     IconCheck,
     IconColumns,
+    IconCrown,
     IconDashboard,
     IconDocument,
     IconFlask,
-    IconGitBranch,
     IconGraph,
+    IconHandMoney,
     IconList,
+    IconListCheck,
     IconLive,
+    IconMemory,
     IconMessage,
+    IconPlus,
+    IconPullRequest,
     IconPulse,
-    IconRewindPlay,
     IconSparkles,
     IconStack,
+    IconTerminal,
     IconToggle,
     IconTrends,
     IconWarning,
@@ -40,7 +45,13 @@ import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import { IconPop } from 'components/Code/IconPop'
 import { SignalsCallout } from 'components/Code/SignalsCallout'
 import { DottedConnection } from 'components/Code/DottedConnection'
-import { StickerTombstone, StickerMayor, StickerPullRequest, StickerAi } from 'components/Stickers/Stickers'
+import {
+    StickerTombstone,
+    StickerMayor,
+    StickerPullRequest,
+    StickerAi,
+    StickerRobot,
+} from 'components/Stickers/Stickers'
 import CloudinaryImage from 'components/CloudinaryImage'
 import WistiaEmbed from 'components/WistiaEmbed'
 import Link from 'components/Link'
@@ -392,7 +403,7 @@ function HeroSection() {
                 ) : (
                     <>
                         <h1 className="!mt-0 mb-4 text-xl font-bold leading-tight @xl:mb-8 @xl:text-3xl">
-                            Not just a code editor.{' '}
+                            The{' '}
                             <RoughAnnotation
                                 type="highlight"
                                 color="rgba(48, 164, 108, 0.2)"
@@ -400,25 +411,25 @@ function HeroSection() {
                                 padding={2}
                                 delay={300}
                             >
-                                A product editor
+                                agentic workspace
                             </RoughAnnotation>
                             {' for '}
                             <RoughAnnotation type="underline" color="#F54E00" strokeWidth={2} delay={600}>
-                                <span className="font-bold">your product</span>
+                                <span className="font-bold">product builders</span>
                             </RoughAnnotation>
                         </h1>
 
                         <div className="flex flex-col items-start @4xl/editor:flex-row @4xl/editor:gap-8">
                             <div className="@4xl/editor:flex-[0_0_280px]">
                                 <p>
-                                    PostHog Desktop is the app for <strong>steering coding agents</strong> – and it
-                                    edits your <strong>product</strong>, not just your <strong>codebase</strong>.
+                                    All the PostHog you already use, plus a coding agent that can act on it. Shared
+                                    context and product data are the fuel to ship absurdly good products.
                                 </p>
                                 <ul className="mb-4 list-none space-y-0.5 p-0 text-[15px]">
                                     {[
-                                        'Run and steer a fleet of agents',
-                                        'Instruments and configures PostHog as it builds',
-                                        'Ships pull requests you review',
+                                        'Build and edit your product',
+                                        'Run a fleet of agents',
+                                        'Turn product signals into PRs',
                                     ].map((item) => (
                                         <li key={item} className="relative pl-5">
                                             <IconCheck className="absolute left-0 top-1 size-4 text-green" />
@@ -485,7 +496,7 @@ function OldWaySection() {
             <CloudinaryImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/plague_doctor_beach_11580558c0.png"
                 alt="A plague doctor relaxing on a beach"
-                className="-mt-14 mb-5 hidden w-44 float-right ml-8 @xl:block"
+                className="-mt-14 mb-5 hidden w-44 float-right ml-8 @3xl:block"
                 imgClassName="w-full"
             />
 
@@ -503,13 +514,6 @@ function OldWaySection() {
                     {'.'}
                 </ChoppyReveal>
             </p>
-
-            <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/plague_doctor_beach_11580558c0.png"
-                alt="A plague doctor relaxing on a beach"
-                className="mb-5 @xl:hidden mx-auto w-40"
-                imgClassName="w-full"
-            />
 
             <p className="text-base leading-loose">
                 <ChoppyReveal wordDelay={40} initialDelay={p1Done ? 0 : 999999}>
@@ -542,6 +546,7 @@ function OldWaySection() {
                             </li>
                         ))}
                     </ul>
+                    <p className="m-0 mt-3 text-sm italic text-secondary">Instead...</p>
                 </div>
 
                 <div className="@2xl:pl-4">
@@ -714,10 +719,10 @@ function AgentMartReceipt() {
                 <div className="space-y-1">
                     <ReceiptRow label="parallel agents" />
                     <ReceiptRow label="multi model" />
-                    <ReceiptRow label="MCP support" />
-                    <ReceiptRow label="diff review" />
-                    <ReceiptRow label="checkpoints & rollback" />
-                    <ReceiptRow label="isolated worktrees" />
+                    <ReceiptRow label="MCP servers" />
+                    <ReceiptRow label="code diffs" />
+                    <ReceiptRow label="cloud sandboxes" />
+                    <ReceiptRow label="AI sparkles" />
                 </div>
 
                 <div className="my-3 border-t border-dashed border-[#c9c2b4]" />
@@ -829,37 +834,37 @@ const instrumentationItems = [
         icon: IconPulse,
         color: 'text-pink',
         title: 'Capture logs',
-        description: 'Adds structured logging as it writes the code, so you can see what actually ran in production.',
+        description: 'Capture structured application logs for inspection and debugging.',
     },
     {
         icon: IconGraph,
         color: 'text-blue',
         title: 'Track events',
-        description: 'Instruments the events for anything new it builds, so usage shows up in PostHog on its own.',
+        description: 'Instruments events so you can measure changes in production.',
     },
     {
         icon: IconWarning,
         color: 'text-yellow',
         title: 'Track errors',
-        description: 'Turns on exception capture so new code reports errors with full stack traces.',
+        description: 'Capture exceptions with full stack traces so new issues surface quickly.',
     },
     {
         icon: IconLive,
         color: 'text-purple',
         title: 'Trace LLM calls',
-        description: 'Wraps your AI features so every model call is traced with cost, latency, and output.',
+        description: 'Inspect traces, spans, latency, usage, and per-user costs for AI-powered features.',
     },
     {
         icon: IconToggle,
         color: 'text-teal',
         title: 'Add a feature flag',
-        description: 'Ships the change behind a flag so you can roll it out slowly and kill it fast if needed.',
+        description: 'Ship changes behind a flag to control the rollout (and kill it fast).',
     },
     {
         icon: IconFlask,
         color: 'text-purple',
         title: 'Run an experiment',
-        description: 'Scaffolds an A/B test with variants and a goal metric, then reads the result once data lands.',
+        description: 'Scaffolds A/B tests with control and test variants tied to a primary metric.',
     },
 ]
 
@@ -944,22 +949,6 @@ const FeaturePanel = ({
     )
 }
 
-// Compact icon + label chips used to add substance to a carousel slide's copy.
-const FeatureChips = ({
-    items,
-}: {
-    items: { Icon: React.ComponentType<{ className?: string }>; color: string; label: string }[]
-}) => (
-    <div className="mt-5 grid grid-cols-2 gap-x-4 gap-y-2.5 @sm:grid-cols-3">
-        {items.map(({ Icon, color, label }) => (
-            <span key={label} className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
-                <Icon className={`size-4 shrink-0 ${color}`} />
-                {label}
-            </span>
-        ))}
-    </div>
-)
-
 // Highlighted callout inside a carousel slide, à la the Slack app page carousel.
 const SlideCallout = ({ children }: { children: React.ReactNode }) => (
     <div className="mt-5 rounded border border-yellow bg-yellow/10 px-3 py-2.5 text-sm text-secondary">{children}</div>
@@ -967,7 +956,7 @@ const SlideCallout = ({ children }: { children: React.ReactNode }) => (
 
 // Model name pill – same treatment as the <codebase /> tag in "The old way" section.
 const ModelChip = ({ children }: { children: React.ReactNode }) => (
-    <code className="inline-block rounded-sm border border-blue bg-blue/10 px-1 font-mono font-bold leading-normal not-italic">
+    <code className="inline-flex items-center rounded-sm border border-blue bg-blue/10 px-1.5 py-1 font-mono font-bold leading-none not-italic">
         {children}
     </code>
 )
@@ -976,7 +965,7 @@ const ModelChip = ({ children }: { children: React.ReactNode }) => (
 // and description, with a few concrete examples listed underneath each.
 type IconGroup = {
     title: string
-    description: string
+    description?: string
     items: { Icon: React.ComponentType<{ className?: string }>; color: string; name: string }[]
 }
 const IconGroupColumns = ({ groups }: { groups: IconGroup[] }) => (
@@ -985,7 +974,7 @@ const IconGroupColumns = ({ groups }: { groups: IconGroup[] }) => (
             <div key={group.title} className="@container flex flex-col gap-2">
                 <div>
                     <p className="m-0 text-base font-bold text-primary">{group.title}</p>
-                    <p className="m-0 text-sm text-secondary">{group.description}</p>
+                    {group.description && <p className="m-0 text-sm text-secondary">{group.description}</p>}
                 </div>
                 <div className="grid grid-cols-1 gap-x-4 gap-y-1.5 @xs:grid-cols-2">
                     {group.items.map(({ Icon, color, name }) => (
@@ -1018,38 +1007,50 @@ const featureTabs: TabbedCarouselTab[] = [
                 imageAlt="Plan mode: clarifying questions and an implementation plan to approve"
             >
                 <p className="m-0">
-                    If dangerously skipping permissions isn't always your thing, coding tasks can start in Plan mode.
-                    The agent explores your repo and product data, asks clarifying questions, then writes an
-                    implementation plan you approve.
+                    If <em>dangerously skipping permissions</em> isn't your thing, coding tasks can start in Plan mode.
+                    The agent explores your data, asks clarifying questions, then writes an implementation plan for you
+                    to approve.
                 </p>
                 <div className="not-prose mt-4 grid grid-cols-1 gap-4 @sm:grid-cols-3">
-                    <div>
-                        <div className="flex items-center gap-1.5">
-                            <IconToggle className="size-5 shrink-0 text-green" />
-                            <span className="text-base font-bold text-primary">Mode</span>
+                    {[
+                        {
+                            Icon: IconToggle,
+                            color: 'text-green',
+                            title: 'Mode',
+                            tagline: 'Switch anytime, even mid-task',
+                            items: ['Accept Edits', 'Plan Mode', 'Auto Mode'],
+                        },
+                        {
+                            Icon: IconAI,
+                            color: 'text-purple',
+                            title: 'Model',
+                            tagline: 'Choose your weapon',
+                            items: ['Claude', 'Codex', 'Open source'],
+                        },
+                        {
+                            Icon: IconBrain,
+                            color: 'text-orange',
+                            title: 'Effort level',
+                            tagline: 'Still effortless for you',
+                            items: ['Low–medium', 'High–extra high', 'Max'],
+                        },
+                    ].map(({ Icon, color, title, tagline, items }) => (
+                        <div key={title}>
+                            <div className="flex items-center gap-1.5">
+                                <Icon className={`size-5 shrink-0 ${color}`} />
+                                <span className="text-base font-bold text-primary">{title}</span>
+                            </div>
+                            <p className="m-0 mt-1 text-sm leading-snug text-secondary">{tagline}</p>
+                            <div className="mt-2 flex flex-col gap-1">
+                                {items.map((item) => (
+                                    <span key={item} className="flex items-center gap-2 text-sm text-secondary">
+                                        <span className="size-1.5 shrink-0 rounded-full bg-border" />
+                                        {item}
+                                    </span>
+                                ))}
+                            </div>
                         </div>
-                        <p className="m-0 mt-1 text-sm leading-snug text-secondary">
-                            Accept Edits, Plan Mode, or Auto Mode (switch anytime, even mid-task)
-                        </p>
-                    </div>
-                    <div>
-                        <div className="flex items-center gap-1.5">
-                            <IconAI className="size-5 shrink-0 text-purple" />
-                            <span className="text-base font-bold text-primary">Model</span>
-                        </div>
-                        <p className="m-0 mt-1 text-sm leading-snug text-secondary">
-                            The latest models from Anthropic and OpenAI, plus open source models like GLM
-                        </p>
-                    </div>
-                    <div>
-                        <div className="flex items-center gap-1.5">
-                            <IconBolt className="size-5 shrink-0 text-orange" />
-                            <span className="text-base font-bold text-primary">Effort level</span>
-                        </div>
-                        <p className="m-0 mt-1 text-sm leading-snug text-secondary">
-                            Low for quick edits, high when it actually needs to think.
-                        </p>
-                    </div>
+                    ))}
                 </div>
             </FeaturePanel>
         ),
@@ -1062,37 +1063,52 @@ const featureTabs: TabbedCarouselTab[] = [
         progressBar: 'bg-black/70 shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
         content: (
             <FeaturePanel
-                title="Describe the work,"
-                highlightedTitle="not the diff"
+                title="Ship code by"
+                highlightedTitle="describing it"
                 highlightColor="yellow"
                 imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/prompt_task_light_ad118d1efc.png"
                 imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/prompt_task_dark_6cb8a38596.png"
                 imageAlt="Prompting a task in PostHog Desktop"
             >
                 <p className="m-0">
-                    Tell it what you want built, like you would a teammate. It plans the approach, writes the code, and
-                    opens the PR – and you can still jump in while it works.
+                    A <strong className="text-primary">task</strong> is the unit of work in PostHog Desktop. Prompt code
+                    changes locally, or in the cloud.
                 </p>
-                <IconGroupColumns
-                    groups={[
-                        {
-                            title: 'Steer',
-                            description: 'Redirect it mid-task, right now.',
-                            items: [
-                                { Icon: IconBolt, color: 'text-orange', name: '"Wait, that\'s out of scope"' },
-                                { Icon: IconBolt, color: 'text-orange', name: '"No, edit the API route, not the UI"' },
-                            ],
-                        },
-                        {
-                            title: 'Queue',
-                            description: "Line up what's next, then step away.",
-                            items: [
-                                { Icon: IconStack, color: 'text-purple', name: 'Three tickets before you leave' },
-                                { Icon: IconStack, color: 'text-purple', name: 'This PR, then the next one' },
-                            ],
-                        },
-                    ]}
-                />
+                <SlideCallout>
+                    <strong className="text-primary">Steer</strong> injects your message at the next tool boundary.{' '}
+                    <strong className="text-primary">Queue</strong> holds the message until the current turn ends.
+                </SlideCallout>
+                <div className="not-prose mt-4 grid grid-cols-1 gap-4 @sm:grid-cols-3">
+                    <div>
+                        <div className="flex items-center gap-1.5">
+                            <IconBatteryCharge className="size-5 shrink-0 text-green" />
+                            <span className="text-base font-bold text-primary">Context</span>
+                        </div>
+                        <p className="m-0 mt-1 text-sm leading-snug text-secondary">
+                            A 1M-token window, with a live meter as you chat. Run <code>/compact</code> any time to
+                            summarize.
+                        </p>
+                    </div>
+                    <div>
+                        <div className="flex items-center gap-1.5">
+                            <IconHandMoney className="size-5 shrink-0 text-orange" />
+                            <span className="text-base font-bold text-primary">Cost</span>
+                        </div>
+                        <p className="m-0 mt-1 text-sm leading-snug text-secondary">
+                            It's usage-based, so switching models per task pays off (no need for a bazooka to swat a
+                            fly).
+                        </p>
+                    </div>
+                    <div>
+                        <div className="flex items-center gap-1.5">
+                            <IconTerminal className="size-5 shrink-0 text-blue" />
+                            <span className="text-base font-bold text-primary">Do it here</span>
+                        </div>
+                        <p className="m-0 mt-1 text-sm leading-snug text-secondary">
+                            Prompt changes, attach a screenshot, use a slash command, review the diff, open a terminal.
+                        </p>
+                    </div>
+                </div>
             </FeaturePanel>
         ),
     },
@@ -1111,19 +1127,19 @@ const featureTabs: TabbedCarouselTab[] = [
                 imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/command_center_dark_358aba9c5b.png"
                 imageAlt="Manage multiple coding agents in parallel"
             >
-                <p className="m-0">
-                    Run a whole fleet at once from the command center. Split-screen presets let you watch agents
-                    side-by-side or in a 2x2 or 3x3 grid, each in its own isolated worktree – so nothing steps on
-                    anything else.
-                </p>
-                <FeatureChips
-                    items={[
-                        { Icon: IconColumns, color: 'text-blue', label: 'Split-screen presets' },
-                        { Icon: IconGitBranch, color: 'text-green', label: 'Isolated worktrees' },
-                        { Icon: IconRewindPlay, color: 'text-orange', label: 'Checkpoints & rollback' },
-                        { Icon: IconBrackets, color: 'text-purple', label: 'Live diff review' },
-                    ]}
+                <CloudinaryImage
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/coastal_hog_79dc4dff47.png"
+                    alt="A hedgehog relaxing on a pool float with a laptop"
+                    imgClassName="float-right ml-4 mb-2 w-32 @sm:w-40"
                 />
+                <p className="m-0">
+                    Open the Command Center and run up to nine agents at once, mixing local and cloud tasks in the same
+                    grid. Each cell shows its own status, environment, and repo (stop one without touching the rest).
+                </p>
+                <SlideCallout>
+                    A full 3x3 grid of agents lit up and running? We call that{' '}
+                    <strong className="text-primary">dopamine mode</strong>.
+                </SlideCallout>
             </FeaturePanel>
         ),
     },
@@ -1134,58 +1150,32 @@ const featureTabs: TabbedCarouselTab[] = [
         activeText: 'text-white',
         progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
         content: (
-            <FeaturePanel title="Ship the change," highlightedTitle="measure what happened" highlightColor="purple">
+            <FeaturePanel title="Control the change," highlightedTitle="measure what happened" highlightColor="purple">
                 <p className="m-0">
-                    Code that ships without instrumentation is a guess wearing a lab coat. PostHog Desktop wires up the
-                    measurement in the same breath as the feature, so "did it work?" has an answer the moment it's live.
+                    Shipping without instrumentation? Oh, you mean guessing whether it worked. PostHog helps you roll
+                    out features to specific users or groups, then test and validate ideas before you ship them to
+                    everyone.
                 </p>
-                <SlideCallout>
-                    <strong className="text-primary">"We'll add tracking later" is a lie you tell yourself.</strong>{' '}
-                    PostHog Desktop just does it now, so there's no later to never get around to.
-                </SlideCallout>
-                <ul className="mt-5 grid list-none grid-cols-1 gap-x-8 gap-y-4 p-0 @sm:grid-cols-2">
+                <p className="m-0 mt-3">
+                    Control the blast radius, ship with confidence (and roll things back when they don't work out).
+                </p>
+                <ul className="not-prose mt-5 grid list-none grid-cols-1 gap-x-8 gap-y-4 p-0 @sm:grid-cols-2">
                     {instrumentationItems.map(({ icon: Icon, color, title, description }) => (
-                        <li key={title} className="relative pl-8">
-                            <Icon className={`absolute left-0 top-0.5 size-6 ${color}`} />
-                            <h4 className="mb-0 text-base font-bold text-primary">{title}</h4>
-                            <p className="mb-0 mt-1 text-sm text-secondary">{description}</p>
+                        <li key={title}>
+                            <div className="flex items-center gap-1.5">
+                                <Icon className={`size-5 shrink-0 ${color}`} />
+                                <span className="text-base font-bold text-primary">{title}</span>
+                            </div>
+                            <p className="m-0 mt-1 text-sm leading-snug text-secondary">{description}</p>
                         </li>
                     ))}
                 </ul>
-            </FeaturePanel>
-        ),
-    },
-    {
-        value: 'skills',
-        label: 'Skills',
-        color: 'bg-red',
-        activeText: 'text-white',
-        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
-        content: (
-            <FeaturePanel
-                title="Built-in"
-                highlightedTitle="skills library"
-                highlightColor="red"
-                imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/skills_light_sidepanel_bae81ae8d5.png"
-                imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/skills_dark_sidepanel_8e104c098d.png"
-                imageAlt="Built-in skills library"
-            >
-                <p className="m-0">
-                    A library of built-in skills lets your agents do real PostHog work – not just write code, but query
-                    your data and wire up the product features that measure it.
-                </p>
-                <div className="mt-5 grid grid-cols-1 gap-3 @sm:grid-cols-3">
-                    {['Personal skills', 'Team skills', 'Skills marketplace'].map((label) => (
-                        <div key={label} className="flex items-center gap-1.5">
-                            <IconSparkles className="size-5 shrink-0 text-purple" />
-                            <span className="text-base font-bold text-primary">{label}</span>
-                        </div>
-                    ))}
+                <div className="hidden @2xl:block">
+                    <SlideCallout>
+                        Agents ship code faster than any human can review it. Instrumentation is how you know what
+                        shipped is actually working – not just that it compiled and passed CI.
+                    </SlideCallout>
                 </div>
-                <SlideCallout>
-                    <strong className="text-primary">Bring your own.</strong> Drop a <code>SKILL.md</code> in your repo
-                    and every agent picks it up, so your team's know-how ships with the code.
-                </SlideCallout>
             </FeaturePanel>
         ),
     },
@@ -1230,35 +1220,83 @@ const Highlight = ({ children }: { children: React.ReactNode }) => (
     <span className="bg-highlight px-0.5 font-bold text-red dark:text-yellow">{children}</span>
 )
 
-// Traffic-light dots for the little window mockups.
-const WindowDots = () => (
-    <span className="flex gap-1.5" aria-hidden>
-        <span className="size-2.5 rounded-full bg-red" />
-        <span className="size-2.5 rounded-full bg-yellow" />
-        <span className="size-2.5 rounded-full bg-green" />
-    </span>
-)
-
-// What every channel keeps – the "memory" that chat windows lack.
-const channelKeeps = [
-    {
-        Icon: IconDocument,
-        color: 'text-blue',
-        name: 'context.md',
-        desc: 'The living brief. Agents read it, you edit it. It’s a file, because it should be.',
-    },
-    { Icon: IconAI, color: 'text-purple', name: 'Memory', desc: 'Decisions, past PRs, what got rejected and why.' },
-    {
-        Icon: IconList,
-        color: 'text-green',
-        name: 'To-do list',
-        desc: 'Out-of-scope work lands here instead of evaporating.',
-    },
+// What connects into a channel to make it a hub of work – floated in an arc around the
+// channel window, à la the "understand product usage" arc on the homepage carousel.
+// Each entry carries [x%, y%] positions at two @container breakpoints (see ArcProducts
+// in HeroCarousel/slides.tsx for the coordinate system). Below @2xl these fall back to a grid.
+const channelArtifacts: {
+    Icon: React.ComponentType<{ className?: string }>
+    color: string
+    name: string
+    href?: string
+    '@2xl': [number, number]
+    '@3xl': [number, number]
+}[] = [
+    { Icon: IconDocument, color: 'text-blue', name: 'context.md', '@2xl': [12, 8], '@3xl': [10, 8] },
+    { Icon: IconMemory, color: 'text-purple', name: 'Memory', '@2xl': [10, 42], '@3xl': [8, 42] },
+    { Icon: IconStack, color: 'text-orange', name: 'Artifacts', '@2xl': [12, 76], '@3xl': [10, 76] },
     {
         Icon: IconMessage,
-        color: 'text-red',
+        color: 'text-yellow',
         name: 'Inbox',
-        desc: 'Only this channel’s signals, not the company firehose.',
+        href: '/docs/self-driving/inbox',
+        '@2xl': [88, 8],
+        '@3xl': [90, 8],
+    },
+    { Icon: IconListCheck, color: 'text-green', name: 'To-do list', '@2xl': [90, 42], '@3xl': [92, 42] },
+    { Icon: IconPullRequest, color: 'text-red', name: 'PR #4821', '@2xl': [88, 76], '@3xl': [90, 76] },
+]
+
+// A floating artifact chip – a small bordered pill so it reads over the tinted slide bg.
+// When `href` is set, the chip is a link (used for the Inbox → docs).
+const ChannelArtifactChip = ({
+    Icon,
+    color,
+    name,
+    href,
+}: {
+    Icon: any
+    color: string
+    name: string
+    href?: string
+}) => {
+    const inner = (
+        <>
+            <Icon className={`size-4 shrink-0 ${color}`} />
+            {name}
+        </>
+    )
+    const classes =
+        'inline-flex items-center gap-1.5 whitespace-nowrap rounded-md border border-primary bg-light px-2.5 py-1.5 text-sm font-semibold text-primary shadow-sm dark:bg-[#222328]'
+    return href ? (
+        <Link to={href} state={{ newWindow: true }} className={`${classes} no-underline hover:border-secondary`}>
+            {inner}
+        </Link>
+    ) : (
+        <span className={classes}>{inner}</span>
+    )
+}
+
+// The chat rows inside the channel hub – a Slack-style thread that makes clear who kicked off
+// which agent. `agent` rows get the PostHog bot avatar + Agent badge; people get initials.
+const channelHistory: {
+    agent?: boolean
+    avatar?: string
+    avatarTone?: string
+    name: string
+    time: string
+    mention?: string
+    action: string
+    task?: { label: string; status: string; tone: string }
+}[] = [
+    { avatar: 'AL', avatarTone: 'bg-blue text-white', name: 'Adam', time: '1w', action: 'joined the channel' },
+    {
+        agent: true,
+        name: 'PostHog',
+        time: '2h',
+        mention: '@Peter',
+        action: 'started a new task',
+        task: { label: 'Add role-based permissions', status: 'PR ready', tone: 'bg-green/15 text-green' },
     },
 ]
 
@@ -1278,7 +1316,8 @@ const homeViews = [
     {
         key: 'list',
         Icon: IconList,
-        color: 'text-yellow',
+        color: 'text-red',
+        activeClasses: 'border-red bg-red/10',
         label: 'List',
         desc: 'triage what needs you',
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Home_list_e43dd0c2b5.png',
@@ -1287,6 +1326,7 @@ const homeViews = [
         key: 'board',
         Icon: IconColumns,
         color: 'text-blue',
+        activeClasses: 'border-blue bg-blue/10',
         label: 'Board',
         desc: 'everything in flight',
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Home_board_e9d7302c9e.png',
@@ -1295,6 +1335,7 @@ const homeViews = [
         key: 'config',
         Icon: IconGraph,
         color: 'text-purple',
+        activeClasses: 'border-purple bg-purple/10',
         label: 'Config',
         desc: 'a visual workflow map',
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Home_config_af49aa4881.png',
@@ -1313,15 +1354,16 @@ const HomeSlide = () => {
                 <AlphaBadge />
             </div>
             <p className="m-0 text-[15px] text-secondary">
-                Stop bouncing between GitHub, CI, and review tabs. Home pulls everything that needs you – PR feedback,
-                failing checks, review requests, stale branches – into one place, in three views of the same work.
+                The <strong className="text-primary">Home</strong> tab gives you a high-level view of all your work. It
+                pulls PR feedback, failing checks, review requests, stale branches (and everything else that needs your
+                attention) into one place. Stop bouncing between apps, stay in flow with your whole workflow.
             </p>
 
-            {/* View tabs (underline style, not pills, so it's unmistakably a tab bar) + the
-                changing description sitting on the same row instead of below */}
+            {/* View tabs as a pill segmented control – background + border color makes the
+                selected view unambiguous, not just a subtle underline. */}
             <div className="mt-4 flex flex-col gap-2 @sm:flex-row @sm:items-end @sm:justify-between">
-                <div className="flex gap-5 border-b border-primary" role="tablist" aria-label="Home views">
-                    {homeViews.map(({ key, Icon, color, label }) => {
+                <div className="flex gap-2" role="tablist" aria-label="Home views">
+                    {homeViews.map(({ key, Icon, color, activeClasses, label }) => {
                         const selected = key === active
                         return (
                             <button
@@ -1330,13 +1372,13 @@ const HomeSlide = () => {
                                 role="tab"
                                 aria-selected={selected}
                                 onClick={() => setActive(key)}
-                                className={`-mb-px flex items-center gap-1.5 border-b-2 pb-2 text-sm font-semibold transition-colors ${
+                                className={`flex items-center gap-1.5 rounded-md border px-2.5 py-1.5 text-sm font-semibold transition-colors ${
                                     selected
-                                        ? 'border-primary text-primary'
-                                        : 'border-transparent text-secondary hover:border-primary/30 hover:text-primary'
+                                        ? `${activeClasses} text-primary`
+                                        : 'border-transparent text-secondary hover:bg-accent'
                                 }`}
                             >
-                                <Icon className={`size-4 shrink-0 ${color}`} />
+                                <Icon className={`size-4 shrink-0 ${selected ? color : 'text-secondary'}`} />
                                 {label}
                             </button>
                         )
@@ -1357,27 +1399,146 @@ const HomeSlide = () => {
     )
 }
 
-// Channel window mockup used as the Channels slide visual.
-const ChannelMockup = () => (
-    <div className="bg-primary">
-        <div className="flex items-center gap-2 border-b border-primary px-4 py-2.5">
-            <WindowDots />
-            <code className="text-sm font-bold text-primary">#billing-service</code>
-            <span className="ml-auto hidden items-center gap-1 text-xs text-secondary @sm:inline-flex">
-                <IconMessage className="size-3.5" />
-                remembers everything
+// Orange @mention, matching the channel screenshot.
+const Mention = ({ children }: { children: React.ReactNode }) => (
+    <span className="font-semibold text-red dark:text-yellow">{children}</span>
+)
+
+// The prompt composer at the bottom of the channel – "what do you want to ship?".
+const ChannelComposer = () => (
+    <div className="rounded-md border border-primary bg-light px-3 pb-2 pt-2.5 shadow-sm dark:bg-[#222328]">
+        <p className="m-0 text-sm text-secondary">
+            What do you want to ship? <span className="text-muted">/ for skills</span>
+        </p>
+        <div className="mt-2.5 flex items-center gap-2">
+            <IconPlus className="size-4 shrink-0 text-secondary" />
+            <span className="ml-auto flex size-6 shrink-0 items-center justify-center rounded-md bg-salmon text-white">
+                <IconArrowUpRight className="size-3.5" />
             </span>
         </div>
-        <div className="grid gap-3 p-4 @sm:grid-cols-2">
-            {channelKeeps.map(({ Icon, color, name, desc }) => (
-                <div key={name} className="flex items-start gap-3 rounded-md border border-primary bg-accent p-3">
-                    <Icon className={`mt-0.5 size-5 shrink-0 ${color}`} />
-                    <div className="min-w-0">
-                        <code className="text-sm font-bold text-primary">{name}</code>
-                        <p className="m-0 mt-0.5 text-sm text-secondary">{desc}</p>
+    </div>
+)
+
+// The channel window at the center of the hub: a Slack-style thread with clear attribution.
+const ChannelHub = () => (
+    <div className="mx-auto w-full max-w-[400px] overflow-hidden rounded-lg border border-primary bg-light text-left shadow-xl dark:bg-[#1d1e22]">
+        <div className="border-b border-primary px-4 py-3">
+            <h4 className="m-0 text-base font-bold text-primary">access-control</h4>
+            <p className="m-0 mt-0.5 text-xs leading-snug text-secondary">
+                <Mention>@Peter</Mention> created this channel. It remembers everything.
+            </p>
+        </div>
+        <div className="flex flex-col gap-3 px-4 py-3">
+            {channelHistory.map(({ agent, avatar, avatarTone, name, time, mention, action, task }, i) => (
+                <div key={i} className="flex gap-2.5">
+                    {agent ? (
+                        <span className="flex size-7 shrink-0 items-center justify-center rounded-md border border-primary bg-accent/40">
+                            <IconAI className="size-4 text-primary" />
+                        </span>
+                    ) : (
+                        <span
+                            className={`flex size-7 shrink-0 items-center justify-center rounded-md text-[11px] font-bold ${avatarTone}`}
+                        >
+                            {avatar}
+                        </span>
+                    )}
+                    <div className="min-w-0 flex-1">
+                        <div className="flex items-center gap-1.5">
+                            <span className="text-sm font-bold text-primary">{name}</span>
+                            {agent && (
+                                <span className="rounded bg-blue/10 px-1 py-px text-[10px] font-semibold text-blue dark:bg-blue/20">
+                                    Agent
+                                </span>
+                            )}
+                            <span className="text-xs text-secondary">{time}</span>
+                        </div>
+                        <p className="m-0 text-sm leading-snug text-secondary">
+                            {mention && <Mention>{mention} </Mention>}
+                            {action}
+                        </p>
+                        {task && (
+                            <div className="mt-1.5 flex items-center gap-2 rounded-md border border-primary bg-light px-2.5 py-1.5 dark:bg-[#222328]">
+                                <span className="size-2.5 shrink-0 rounded-full bg-green" />
+                                <span className="min-w-0 flex-1 truncate text-sm font-medium text-primary">
+                                    {task.label}
+                                </span>
+                                <span
+                                    className={`shrink-0 rounded-full px-2 py-0.5 text-xs font-semibold ${task.tone}`}
+                                >
+                                    {task.status}
+                                </span>
+                            </div>
+                        )}
                     </div>
                 </div>
             ))}
+            <ChannelComposer />
+        </div>
+    </div>
+)
+
+// The connected artifacts floating in an arc around the channel hub.
+const ChannelArtifacts = () => {
+    const renderSlots = (breakpoint: '@2xl' | '@3xl') =>
+        channelArtifacts.map(({ name, Icon, color, href, ...pos }, i) => {
+            const [x, y] = pos[breakpoint]
+            const duration = 4 + (i % 4) * 0.9
+            const delay = -(i * 1.3)
+            return (
+                <div
+                    key={name}
+                    className="absolute animate-[scattered-float_ease-in-out_infinite]"
+                    style={{
+                        left: `${x}%`,
+                        top: `${y}%`,
+                        transform: 'translate(-50%, -50%)',
+                        animationDuration: `${duration}s`,
+                        animationDelay: `${delay}s`,
+                    }}
+                >
+                    <ChannelArtifactChip Icon={Icon} color={color} name={name} href={href} />
+                </div>
+            )
+        })
+
+    return (
+        <>
+            {/* Below @2xl (not enough gutter for the arc): simple grid above the hub */}
+            <div className="z-10 mb-4 flex flex-wrap justify-center gap-2 @2xl:hidden">
+                {channelArtifacts.map(({ name, Icon, color, href }) => (
+                    <ChannelArtifactChip key={name} Icon={Icon} color={color} name={name} href={href} />
+                ))}
+            </div>
+            <div className="absolute inset-0 z-10 hidden @2xl:block @3xl:hidden">{renderSlots('@2xl')}</div>
+            <div className="absolute inset-0 z-10 hidden @3xl:block">{renderSlots('@3xl')}</div>
+        </>
+    )
+}
+
+// Channels slide – mirrors the homepage "understand product usage" arc: connected artifacts
+// (context.md, memory, inbox, to-do) float around the channel window at the center.
+const ChannelsSlide = () => (
+    <div className="@container relative flex h-full flex-col rounded bg-[#F3F4F0] p-4 dark:bg-[#131316] @xl:p-6">
+        <div className="mb-2 flex items-center gap-2">
+            <h3 className="m-0 text-2xl font-bold">Multiplayer (like work actually is)</h3>
+            <AlphaBadge />
+        </div>
+        <div className="grid grid-cols-1 gap-x-8 gap-y-2 @lg:grid-cols-2">
+            <p className="m-0 text-[15px] text-secondary">
+                A channel is a group of tasks related to a specific topic or project. Each one keeps its own working
+                memory, so kicking off a task doesn't require you to re-brief a goldfish.
+            </p>
+            <p className="m-0 text-[15px] text-secondary">
+                <code className="text-sm font-bold text-primary">CONTEXT.md</code> tells agents the specific details
+                they need to know when working in access-control – conventions, gotchas, key files, and anything else
+                that isn't obvious from the code.
+            </p>
+        </div>
+        <div className="relative mt-4 flex flex-1 flex-col justify-center @2xl:mt-2 @2xl:min-h-[300px]">
+            <ChannelArtifacts />
+            <div className="relative mx-auto w-full">
+                <ChannelHub />
+            </div>
         </div>
     </div>
 )
@@ -1420,7 +1581,6 @@ const AlphaSlide = ({
 const canvasExampleGroups = [
     {
         title: 'Dashboards & reports',
-        description: 'Answer a question, no query required.',
         items: [
             { Icon: IconGraph, color: 'text-blue', name: 'Weekly active users' },
             { Icon: IconTrends, color: 'text-green', name: 'Revenue by plan' },
@@ -1430,60 +1590,23 @@ const canvasExampleGroups = [
     },
     {
         title: 'Internal tools',
-        description: 'The apps nobody ever gets around to building.',
         items: [
-            { Icon: IconList, color: 'text-red', name: 'Refunds tool' },
-            { Icon: IconToggle, color: 'text-seagreen', name: 'Feature-flag toggler' },
-            { Icon: IconBrowser, color: 'text-blue', name: 'User lookup' },
+            { Icon: IconHandMoney, color: 'text-green', name: 'Refund tool' },
             { Icon: IconMessage, color: 'text-yellow', name: 'Support triage' },
+            { Icon: IconBrowser, color: 'text-blue', name: 'Customer lookup' },
+            { Icon: IconCrown, color: 'text-purple', name: 'AI leaderboard' },
         ],
     },
 ]
 
 const alphaTabs: TabbedCarouselTab[] = [
     {
-        value: 'collaboration',
-        label: 'Collaboration',
-        color: 'bg-lilac',
-        activeText: 'text-white',
-        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
-        content: (
-            <AlphaSlide
-                title="Multiplayer (like work actually is)"
-                visual={
-                    <SlideImage
-                        light="https://res.cloudinary.com/dmukukwp6/image/upload/contexts_dark_1_c98fa79b8e.png"
-                        dark="https://res.cloudinary.com/dmukukwp6/image/upload/contexts_dark_f006575ea6.png"
-                        alt="Teammates and agents working the same threads in PostHog Desktop"
-                    />
-                }
-                extra={
-                    <SlideCallout>
-                        <strong className="text-primary">Discuss tasks with your team.</strong> Messages stay between
-                        humans unless the task author tags in the agent.
-                    </SlideCallout>
-                }
-            >
-                Agents are <strong className="text-primary">teammates with names.</strong> Your people and your agents
-                work the same threads, hand off tasks, and see the same context – in real time. No "let me share my
-                screen" or "let me pull the latest changes" – you're already in the workspace, agents and people
-                building the same product, with your product data as the fuel.
-            </AlphaSlide>
-        ),
-    },
-    {
         value: 'contexts',
-        label: 'Contexts',
+        label: 'Channels',
         color: 'bg-teal',
         activeText: 'text-black',
         progressBar: 'bg-black/70 shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
-        content: (
-            <AlphaSlide title="Remembers everything" visual={<ChannelMockup />}>
-                Chat windows have amnesia. Contexts don't – each one keeps its own working memory, so kicking off a task
-                means the agent already knows the history.{' '}
-                <strong className="text-primary">No re-briefing a goldfish.</strong>
-            </AlphaSlide>
-        ),
+        content: <ChannelsSlide />,
     },
     {
         value: 'canvases',
@@ -1503,8 +1626,9 @@ const alphaTabs: TabbedCarouselTab[] = [
                 }
                 extra={<IconGroupColumns groups={canvasExampleGroups} />}
             >
-                Ask a context for a report, a dashboard, or that internal refunds tool nobody ever builds – and get a{' '}
-                <strong className="text-primary">canvas</strong>: generative UI on PostHog's actual data model.
+                Ask for a report, a dashboard, or random internal tool, get exactly what you want in a{' '}
+                <strong className="text-primary">canvas</strong> built with generative UI on PostHog's actual data
+                model.
             </AlphaSlide>
         ),
     },
@@ -1524,9 +1648,9 @@ const alphaTabs: TabbedCarouselTab[] = [
         progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
         content: (
             <FeaturePanel
-                title="Run a"
-                highlightedTitle="bounded experiment loop"
-                titleSuffix="inside your task"
+                title="Run a bounded"
+                highlightedTitle="experiment loop"
+                titleSuffix="inside any task"
                 highlightColor="fuchsia"
                 alpha
                 imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/autoresearch_prompt_light_73dcb825bf.png"
@@ -1534,31 +1658,28 @@ const alphaTabs: TabbedCarouselTab[] = [
                 imageAlt="Prompting an autoresearch task in PostHog Desktop"
             >
                 <p className="m-0">
-                    Point it at a metric and it optimizes on its own – measure a baseline, try a change, measure again,
-                    and repeat until it hits the target or runs out of attempts.
+                    <strong className="text-primary">Autoresearch</strong> iteratively modifies your codebase and
+                    evaluates against a prompt. Define the metric to optimize, the command or steps to measure it, and
+                    the constraints the agent must preserve.
                 </p>
+                <SlideCallout>
+                    It doesn't invent or independently verify the metric – it just follows what you tell it (this is
+                    that{' '}
+                    <Link to="/newsletter/loops" state={{ newWindow: true }} className="font-semibold underline">
+                        agent loops
+                    </Link>{' '}
+                    thing everyone keeps talking about).
+                </SlideCallout>
                 <div className="not-prose mt-4 grid grid-cols-1 gap-4 @sm:grid-cols-3">
-                    {[
-                        { step: 'Measure a baseline', desc: 'Run the measurement from your prompt.' },
-                        { step: 'Try an improvement', desc: 'Change the code and measure again.' },
-                        { step: 'Repeat until it stops', desc: 'Stop at the attempt limit or target value.' },
-                    ].map(({ step, desc }, i) => (
-                        <div key={step}>
-                            <div className="flex items-center gap-1.5">
-                                <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-fuchsia/15 text-xs font-bold text-fuchsia">
-                                    {i + 1}
-                                </span>
-                                <span className="text-base font-bold text-primary">{step}</span>
-                            </div>
-                            <p className="m-0 mt-1 text-sm leading-snug text-secondary">{desc}</p>
+                    {['Measure a baseline', 'Try an improvement', 'Repeat until it stops'].map((step, i) => (
+                        <div key={step} className="flex items-center gap-1.5">
+                            <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-fuchsia/15 text-xs font-bold text-fuchsia">
+                                {i + 1}
+                            </span>
+                            <span className="text-base font-bold text-primary">{step}</span>
                         </div>
                     ))}
                 </div>
-                <SlideCallout>
-                    <strong className="text-primary">Needs a metric, a measurement command, and constraints</strong> in
-                    your prompt. It doesn't invent or independently verify the metric – it just follows what you tell
-                    it.
-                </SlideCallout>
             </FeaturePanel>
         ),
     },
@@ -1576,8 +1697,8 @@ const AgenticWorkspaceSection = () => {
                 </span>
             </SectionLabel>
             <p className="mb-6 max-w-3xl">
-                PostHog Desktop is in beta. These bits are still <em>alpha inside it</em> – rough, changing weekly, and
-                the most fun. It's where coding stops being a solo tool: your team and your agents share{' '}
+                PostHog Desktop is in beta. These bits are still <em>alpha inside it</em> (rough, changing weekly, and
+                the most fun). It's where coding stops being a single player, and your team and agents share{' '}
                 <RoughAnnotation type="underline" color="#F54E00" strokeWidth={2}>
                     one workspace
                 </RoughAnnotation>
@@ -1689,7 +1810,7 @@ const SupportedLLMs = () => {
 
                 {/* Right: subheading (the open-source one), copy, and the hand-drawn cost stat */}
                 <div>
-                    <h3 className="text-xl font-bold mb-3">Open-source models got good? (awkward)</h3>
+                    <h3 className="text-xl font-bold mb-3">Open source models got good? (awkward)</h3>
                     <p className="m-0 mb-1.5 text-xs font-semibold uppercase tracking-wide text-secondary">
                         We support
                     </p>
@@ -1708,8 +1829,8 @@ const SupportedLLMs = () => {
                         </span>
                     </div>
                     <p className="mb-3 leading-relaxed">
-                        The gap between open and frontier models went from “lol” to “wait…” real quick. For a big slice
-                        of real coding work, open models now do the same job for a tenth of the price.
+                        The gap between free and frontier went from “lol” to “wait…” real quick. For a big slice of
+                        coding work, open source models now perform the same for a tenth of the price.
                     </p>
                     <p className="mb-6 leading-relaxed">
                         PostHog Desktop runs both. Pay token cost (with no markup) on the best tool for the job.
@@ -1793,6 +1914,41 @@ const MCPMarketplace = () => {
     )
 }
 
+const skillsCalloutItems = [
+    { label: 'Personal skills', desc: 'Your party tricks (nobody else needs to know).' },
+    { label: 'Team skills', desc: '"How do we do X here", with version history.' },
+    { label: 'Skills marketplace', desc: 'Someone already solved this. Take the win.' },
+]
+
+// Skills callout: BYOS, or steal ours. Sits right under the MCP marketplace list.
+const SkillsCallout = () => {
+    return (
+        <section className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
+            <div className="rounded-md border border-purple bg-purple/10 p-6 shadow-xl @xl:p-8">
+                <div className="mb-3 flex items-center gap-2">
+                    <StickerRobot className="size-8 -rotate-3" />
+                    <h2 className="m-0 text-2xl font-bold">Dang, PostHog's got skills</h2>
+                </div>
+                <p className="m-0 text-secondary">
+                    A <code className="border-purple bg-purple/20">SKILL.md</code> makes wiring up PostHog stupid easy,
+                    and turns company knowledge into a playbook everyone can run with.
+                </p>
+                <div className="mt-5 grid grid-cols-1 gap-4 @sm:grid-cols-3">
+                    {skillsCalloutItems.map(({ label, desc }) => (
+                        <div key={label}>
+                            <div className="flex items-center gap-1.5">
+                                <IconSparkles className="size-5 shrink-0 text-purple" />
+                                <span className="text-base font-bold text-primary">{label}</span>
+                            </div>
+                            <p className="m-0 mt-1 text-sm leading-snug text-secondary">{desc}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    )
+}
+
 // Third beat of the opening narrative (old way → PostHog way → this): the job abstracting up.
 const BiggerPictureSection = () => {
     return (
@@ -1822,7 +1978,7 @@ const BiggerPictureSection = () => {
 const InboxCallout = () => {
     return (
         <section className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
-            <div className="relative overflow-hidden rounded-md border border-blue bg-blue/10 shadow-xl">
+            <div className="relative overflow-hidden rounded-md border border-yellow bg-gradient-to-br from-yellow/25 via-yellow/10 to-orange/10 shadow-xl">
                 <div className="grid gap-6 p-6 @2xl:grid-cols-2 @2xl:items-center @2xl:gap-10 @2xl:p-8">
                     <div>
                         <div className="mb-4 flex items-center gap-2">
@@ -1831,8 +1987,8 @@ const InboxCallout = () => {
                         </div>
                         <ul className="m-0 mb-6 list-none space-y-3 p-0">
                             <li>
-                                <strong>Desktop</strong> is where you do the work – run and steer agents, solo or with
-                                your team.
+                                <strong>PostHog Desktop</strong> is where you do the work – run and steer agents, solo
+                                or with your team.
                             </li>
                             <li>
                                 <Link
@@ -1842,7 +1998,8 @@ const InboxCallout = () => {
                                 >
                                     Slack
                                 </Link>{' '}
-                                is where you talk it through – tag <code>@PostHog</code> to ship without leaving the
+                                is where you talk it through – tag{' '}
+                                <code className="border-blue bg-blue/10">@PostHog</code> to ship without leaving the
                                 thread.
                             </li>
                             <li>
@@ -1861,8 +2018,8 @@ const InboxCallout = () => {
                                 >
                                     MCP
                                 </Link>{' '}
-                                are where you dig into what happened – analytics, replays, flags, queried however you
-                                like.
+                                are how you ship from anywhere – clicky dashboards for humans, an agent-native surface
+                                for everything else. PostHog can ship without you too (that's the self-driving part).
                             </li>
                         </ul>
                         <OSButton asLink to="/self-driving" state={{ newWindow: true }} variant="primary" size="md">
@@ -1872,7 +2029,15 @@ const InboxCallout = () => {
 
                     <div className="relative">
                         <p className="mb-5 text-center text-sm text-secondary">
-                            Waking up to three PRs for papercuts that would have derailed your day? Ah, that's bliss.
+                            Finally, an{' '}
+                            <Link
+                                to="/docs/self-driving/inbox"
+                                state={{ newWindow: true }}
+                                className="font-bold text-primary underline"
+                            >
+                                inbox
+                            </Link>{' '}
+                            you look forward to opening. Product signals go in, PRs come out.
                         </p>
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/inbox_light_9aa9eed335.png"
@@ -1961,10 +2126,6 @@ const FAQ_ITEMS = [
                 <p>
                     Yep, we renamed it. Writing code turned out to be just one part of building a product – so we added
                     things like canvases and multiplayer to make room for the rest of the work.
-                </p>
-                <p>
-                    It's less "AI coding tool" now and more a workspace for agentic product builders – so we gave it a
-                    name that fits.
                 </p>
             </div>
         ),
@@ -2226,7 +2387,7 @@ export default function CodePage() {
         <>
             <SEO
                 title="PostHog Desktop"
-                description="A desktop app for steering coding agents and editing your product"
+                description="An agentic workspace for product builders – run a fleet of agents that build your product, not just your code"
                 structuredData={buildProductStructuredData({
                     name: 'PostHog Desktop',
                     description: 'A desktop app for steering coding agents and editing your product',
@@ -2248,6 +2409,8 @@ export default function CodePage() {
                         <PostHogWaySection onComplete={() => setPostHogWayDone(true)} />
 
                         <Features />
+
+                        <SkillsCallout />
 
                         <SupportedLLMs />
 
