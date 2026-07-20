@@ -43,7 +43,7 @@ debug = "line-tables-only"
 
 On macOS, also set `split-debuginfo = "packed"` in the same profile. Cargo's macOS default (`unpacked`) leaves debug info in intermediate object files instead of producing the `.dSYM` bundle the CLI uploads.
 
-Watch out for stripping: Cargo only strips release binaries by default when no debug info is requested, but if your profile sets `strip` explicitly, set it to `"none"` — or strip only after the upload runs. Debug info split into separate files also works: the CLI picks up `objcopy --only-keep-debug` companion files alongside the binaries.
+Watch out for stripping: if your profile sets `strip` explicitly, set it to `"none"` — or strip only after the upload runs. Debug info split into separate files also works: the CLI picks up `objcopy --only-keep-debug` companion files alongside the binaries.
 
 </Step>
 
@@ -52,8 +52,10 @@ Watch out for stripping: Cargo only strips release binaries by default when no d
 PostHog matches stack frames to uploaded symbols by the binary's unique build ID: a GNU build ID on Linux, or the Mach-O UUID on macOS. macOS binaries always carry a UUID, and most Linux toolchains emit a GNU build ID by default. Confirm yours does:
 
 ```bash
-readelf -n target/release/<your-binary> | grep "Build ID"
+readelf -n target/release/my-app | grep "Build ID"
 ```
+
+Replace `my-app` with your binary's name.
 
 If nothing shows up, tell the linker to add one in `.cargo/config.toml`:
 
@@ -99,7 +101,7 @@ In CI, authenticate with environment variables instead of `posthog-cli login`. F
 - name: Build and upload debug symbols
   run: |
     cargo build --release
-    posthog-cli symbol-sets upload --directory target/release --include-source
+    posthog-cli symbol-sets upload --directory target/release
   env:
     POSTHOG_CLI_API_KEY: ${{ secrets.POSTHOG_CLI_API_KEY }}
     POSTHOG_CLI_PROJECT_ID: ${{ secrets.POSTHOG_CLI_PROJECT_ID }}
