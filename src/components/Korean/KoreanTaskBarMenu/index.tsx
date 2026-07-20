@@ -338,7 +338,7 @@ export default function TaskBarMenu() {
                                 }
                                 className=""
                             >
-                                {posthogInstance ? translateKo('Dashboard') : translateKo('Get started – free')}
+                                {posthogInstance ? translateKo('Open PostHog') : translateKo('Get started – free')}
                             </OSButton>
                         </div>
                         <Tooltip

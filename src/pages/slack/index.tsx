@@ -470,7 +470,7 @@ const compareRows: CompareRow[] = [
     },
     {
         label: 'Where it runs',
-        ai: "None – it's a panel in PostHog Cloud.",
+        ai: "None – it's a panel in PostHog Web.",
         slack: 'PostHog-managed cloud sandbox.',
         code: 'Local, an isolated worktree, or a PostHog-managed cloud sandbox.',
     },
@@ -501,8 +501,8 @@ const faqItems = [
                 >
                     PostHog Code
                 </Link>{' '}
-                usage. They share the same coding agent under the hood – the Slack app is just the front door if
-                you'd rather work from a thread than a desktop app.
+                usage. They share the same coding agent under the hood – the Slack app is just the front door if you'd
+                rather work from a thread than a desktop app.
             </p>
         ),
     },

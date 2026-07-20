@@ -176,6 +176,18 @@ To fix this:
 1. Log into your [Shopify admin](https://admin.shopify.com/) and settle any outstanding balance to unfreeze your store.
 2. Once your store is active again, re-run the sync from [**Data pipelines > Sources**](https://app.posthog.com/data-management/sources) in PostHog.
 
+## Why is my Google Sheets sync failing with "collapse to the same column name"?
+
+This error occurs when two column headers in your Google Sheet look different but normalize to the same column name. PostHog ignores case, spaces, and punctuation when converting headers to column names — so headers like `Task ID` and `task_id` both become `task_id`.
+
+The error message names the two colliding headers and the column name they collapse to. This is a non-retryable error – PostHog stops the sync instead of retrying indefinitely because renaming the header is the only fix.
+
+To fix this:
+
+1. Open your Google Sheet and find the column headers mentioned in the error message.
+2. Rename one of the colliding headers so that it stays unique after normalization (case, spaces, and punctuation are ignored).
+3. Re-run the sync from [**Data pipelines > Sources**](https://app.posthog.com/data-management/sources) in PostHog.
+
 ## How do I speed up my SQL queries?
 
 1. Reduce the date range you're querying.
