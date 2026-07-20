@@ -49,7 +49,7 @@ Watch out for stripping: if your profile sets `strip` explicitly, set it to `"no
 
 <Step title="Check for a build ID" badge="required">
 
-PostHog matches stack frames to uploaded symbols by the binary's unique build ID: a GNU build ID on Linux, or the Mach-O UUID on macOS. macOS binaries always carry a UUID, and most Linux toolchains emit a GNU build ID by default. Confirm yours does:
+PostHog matches stack frames to uploaded symbols by the binary's unique build ID: a GNU build ID on Linux, or the Mach-O UUID on macOS. macOS binaries always carry a UUID, so there is nothing to check there. Most Linux toolchains emit a GNU build ID by default — confirm yours does:
 
 ```bash
 readelf -n target/release/my-app | grep "Build ID"
