@@ -9,6 +9,7 @@ import SmallTeam from 'components/SmallTeam'
 import SurveySignup from 'components/SurveySignup'
 import { useFeatureOwnership } from 'hooks/useFeatureOwnership'
 import useEarlyAccessFeatures, { EarlyAccessFeature } from 'hooks/useEarlyAccessFeatures'
+import { ROADMAP_TEAM_OVERRIDES } from './roadmapTeamOverrides'
 
 // The in-app feature previews page supports deep links: /settings/user-feature-previews#<flagKey>
 // scrolls to (and highlights) that feature's toggle, so each beta card links straight to it.
@@ -17,6 +18,14 @@ const featurePreviewUrl = (flagKey: string): string =>
 
 // Only surface the search + filter controls once the list is long enough to need them.
 const CONTROLS_THRESHOLD = 8
+
+// Frosted in-window surfaces, matching the site redesign (see src/constants/frostedSurfaces.ts
+// for the window chrome equivalents and the pricing cards for this in-window idiom). Solid
+// fallback when the user has reduce-transparency on.
+const FROSTED_CARD =
+    'bg-primary/80 backdrop-blur-sm shadow-sm reduce-transparency:!bg-primary reduce-transparency:backdrop-blur-none'
+const FROSTED_TOOLBAR =
+    'bg-primary/80 backdrop-blur-md shadow-sm reduce-transparency:!bg-primary reduce-transparency:backdrop-blur-none'
 
 // Features created within this window are flagged "New" (and lead the "Newest" sort).
 const NEW_WINDOW_MS = 30 * 24 * 60 * 60 * 1000
@@ -118,7 +127,7 @@ const FeatureCard = ({
     <div
         data-scheme="secondary"
         id={feature.flagKey}
-        className="@container bg-primary border border-primary rounded-md p-3 flex flex-col gap-1.5 h-full scroll-mt-24 transition-colors hover:border-secondary target:border-red dark:target:border-yellow"
+        className={`@container ${FROSTED_CARD} border border-primary rounded-lg p-3 flex flex-col gap-1.5 h-full scroll-mt-24 transition-colors hover:border-secondary target:border-red dark:target:border-yellow`}
     >
         {/* The owning team's crest anchors the card visually and reinforces the team filter. */}
         {teamSlug && (
@@ -291,8 +300,11 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
         })
         return map
     }, [ownedFeatures])
+    // Roadmap-specific overrides win (curated per flag key), then the shared ownership map.
     const teamForFeature = (feature: EarlyAccessFeature): string | undefined =>
-        teamByFeatureSlug[feature.flagKey] || teamByFeatureSlug[slugify(feature.name)]
+        ROADMAP_TEAM_OVERRIDES[feature.flagKey] ||
+        teamByFeatureSlug[feature.flagKey] ||
+        teamByFeatureSlug[slugify(feature.name)]
 
     const totalBeta = grouped.beta.length
     const totalComing = grouped.comingSoon.length
@@ -305,7 +317,10 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
         const counts: Record<string, number> = {}
         let unassigned = 0
         ;[...grouped.beta, ...grouped.comingSoon].forEach((feature) => {
-            const slug = teamByFeatureSlug[feature.flagKey] || teamByFeatureSlug[slugify(feature.name)]
+            const slug =
+                ROADMAP_TEAM_OVERRIDES[feature.flagKey] ||
+                teamByFeatureSlug[feature.flagKey] ||
+                teamByFeatureSlug[slugify(feature.name)]
             if (slug) {
                 counts[slug] = (counts[slug] || 0) + 1
             } else {
@@ -422,7 +437,9 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
             </p>
 
             {showControls && (
-                <div className="sticky top-0 z-20 bg-primary border-b border-primary pt-1 pb-3 mb-6">
+                <div
+                    className={`sticky top-2 z-20 ${FROSTED_TOOLBAR} border border-primary rounded-lg px-3 py-2.5 mb-6`}
+                >
                     <div className="flex flex-col @md:flex-row @md:flex-wrap @md:items-center gap-2 @md:gap-3">
                         <Input
                             label="Search features"
