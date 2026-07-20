@@ -33,7 +33,7 @@ npm install @posthog/mcp posthog-node
 # or yarn add @posthog/mcp posthog-node
 ```
 
-You bring your own [`posthog-node`](/docs/libraries/node) client (the same pattern as [`@posthog/ai`](/docs/ai-engineering)) and pass it to `instrument()` as the required second argument. You own its lifecycle — call `posthog.shutdown()` or `posthog.flush()` yourself.
+You bring your own [`posthog-node`](/docs/libraries/node) client (the same pattern as [`@posthog/ai`](/docs/ai-engineering)) and pass it to `instrument()` as the required second argument. You own its lifecycle — call `posthog.shutdown()` or `posthog.flush()` yourself. For convenience, `@posthog/mcp` re-exports the `PostHog` class, so a single import covers both — but `posthog-node` still needs to be installed, since it's a peer dependency.
 
 ## Wrap your server
 
@@ -45,8 +45,7 @@ If you registered your tools against the raw protocol `Server` from `@modelconte
 
 ```ts
 import { Server } from "@modelcontextprotocol/sdk/server/index.js"
-import { PostHog } from "posthog-node"
-import { instrument } from "@posthog/mcp"
+import { PostHog, instrument } from "@posthog/mcp"
 
 const server = new Server({ name: "my-mcp-server", version: "1.0.0" })
 
@@ -65,8 +64,7 @@ If you use the typed `McpServer` wrapper from `@modelcontextprotocol/sdk/server/
 
 ```ts
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
-import { PostHog } from "posthog-node"
-import { instrument } from "@posthog/mcp"
+import { PostHog, instrument } from "@posthog/mcp"
 
 const server = new McpServer({ name: "my-mcp-server", version: "1.0.0" })
 
@@ -277,8 +275,7 @@ The `posthog` client is passed as the required second positional argument — no
 The `posthog-node` client queues and batches events asynchronously, and you own its lifecycle. Call `posthog.shutdown()` from your `SIGTERM` / `beforeExit` handler so in-flight events aren't dropped:
 
 ```ts
-import { PostHog } from "posthog-node"
-import { instrument } from "@posthog/mcp"
+import { PostHog, instrument } from "@posthog/mcp"
 
 const posthog = new PostHog(process.env.POSTHOG_PROJECT_API_KEY)
 instrument(server, posthog)

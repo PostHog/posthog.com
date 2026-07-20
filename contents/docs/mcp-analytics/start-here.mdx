@@ -45,8 +45,7 @@ npm install @posthog/mcp posthog-node
 
 ```ts
 import { Server } from "@modelcontextprotocol/sdk/server/index.js"
-import { PostHog } from "posthog-node"
-import { instrument } from "@posthog/mcp"
+import { PostHog, instrument } from "@posthog/mcp"
 
 const server = new Server({ name: "my-mcp-server", version: "1.0.0" })
 
