@@ -65,8 +65,29 @@ When you reply to an email ticket in PostHog:
 - The email uses your configured display name and sending address
 - Standard email threading headers are set, so the reply appears in the same thread in the customer's inbox
 - Rich text formatting (bold, links, images, etc.) is preserved in the email
+- Delivery status is shown on your message ("Sending…", "Sent", or "Failed to send")
 
 **Private notes** are never sent to the customer.
+
+### Delivery status
+
+Email replies show delivery status indicators in the ticket UI:
+
+| Status             | Meaning                          |
+| ------------------ | -------------------------------- |
+| **Sending…**       | Reply is queued or being retried |
+| **Sent**           | Reply was delivered successfully |
+| **Failed to send** | Delivery failed permanently      |
+
+If your email provider is temporarily unavailable, replies stay in "Sending…" and are automatically retried with increasing delays. PostHog retries for up to 5 days before marking the message as permanently failed.
+
+A "Failed to send" status typically means:
+
+- Invalid recipient email address
+- Domain DNS records are misconfigured
+- Email channel settings are incomplete
+
+Check your [email channel settings](#connecting-an-email-address) and verify your domain if you see persistent failures.
 
 ### Threading
 
