@@ -126,7 +126,7 @@ For error tracking, these questions are helpful to start the conversation:
   - Lightweight SDK that's tightly integrated with other products.
 - How do you decide which errors to fix first?
   - Prioritizing by gut feeling or frequency, not business impact.
-  - Error Tracking + Product & Revenue Analytics can show which errors have the greatest impact.
+  - Error Tracking + Product Analytics can show which errors have the greatest impact.
 
 If you’re not sure who the persona should be, ask the product team! 
 
@@ -157,5 +157,5 @@ You can also help create dashboards to help your customer understand the value o
 
 - Error tracking for the web is significantly less useful without proper sourcemaps. You can see under "Symbol sets" in the configuration menu if the required files are being uploaded correctly.
 - Encourage customers to set up roles so that issues can be assigned internally to the right people.
-- Use the SDK Doctor to make sure they're on the latest SDK versions.
+- Use the SDK health check to make sure they're on the latest SDK versions.
 

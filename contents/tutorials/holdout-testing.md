@@ -20,7 +20,7 @@ In this tutorial, we show you how to set up a holdout test in PostHog.
 
 ## Creating an experiment
 
-To create a holdout test, first, [create an experiment](/docs/experiments/manual#how-to-create-an-experiment-in-posthog):
+To create a holdout test, first, [create an experiment](/docs/experiments/creating-an-experiment):
 
 1. Go to the [experiments tab](https://app.posthog.com/experiments) in PostHog and click "New experiment." 
 2. Name your experiment, set a key, and add a description. Your name and description should make it clear this is a holdout test for future reference. 

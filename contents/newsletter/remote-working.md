@@ -19,7 +19,7 @@ In March, it [announced](https://www.businessinsider.com/dell-remote-workers-pro
 
 It doesn’t have to be this way. The best remote teams are brimming with energy, are super productive, and do incredible work. So whether you’re part of a remote team, leading one, or want to go remote, here’s how the best of the best make it work, with some tips on how you can up your game, too.
 
-> This post was first published in our newsletter, [_Product for Engineers_](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. Subscribe via the [Product for Engineers signup page](https://newsletter.posthog.com/).
+> This post was first published in our newsletter, [_build mode_](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. Subscribe via the [build mode signup page](https://newsletter.posthog.com/).
 
 ### 1. They write everything down
 
@@ -89,7 +89,7 @@ At **PostHog**, we achieve this in a bunch of different ways:
 
 * **Annual company offsites.** The typical agenda includes a couple of big social events, team dinners, a hackathon, all-hands strategy sessions, company culture exercises, and downtime to socialize and explore.
 
-* **Frequent small team offsites.** In addition to our all-company offsite, all our [small teams](/handbook/team-structure) run at least one annual offsite to focus on specific team goals and intense, in-person collaboration. They often include a hackathon, too, but this varies.
+* **Frequent small team offsites.** In addition to our all-company offsite, all our [small teams](/handbook/team-structure) run at least one annual offsite to focus on specific team goals and intense, in-person collaboration. They often include a [hackathon](/newsletter/hackathons), too, but this varies.
 
 Our goal with all of this is to make our in-person time as intentional as possible. To work on big, specific problems, build bonds that create trust, and make asynchronous work more creative and collaborative.
 

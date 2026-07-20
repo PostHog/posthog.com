@@ -1,0 +1,97 @@
+---
+date: 2026-06-02
+title: 'In-depth: DuckDB vs SQLite'
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+author:
+  - mathew-pregasen
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-engineering-blog.png
+featuredImageType: full
+category: Engineering
+tags:
+  - Explainers
+  - DuckDB
+description: >-
+  DuckDB and SQLite are both lightweight, embedded, single-file, in-process databases, but built for completely different use cases. This article compares them head-to-head as well as their positioning within their respective database classes.
+---
+
+DuckDB has often been called the "SQLite of OLAP". Is it an apt comparison? 
+
+DuckDB and SQLite are databases with similar design principles. Both are lightweight, embedded, single-file, in-process databases that blur the line between database and library you link in. Both are also limited at distributing data over multiple nodes. The similarities end there. DuckDB and SQLite are built for completely different use cases. 
+
+SQLite is a transactional OLTP database. It lives in the same class as products like MySQL, [Postgres](/blog/duckdb-vs-postgres), or MariaDB. Conversely, DuckDB is an analytical OLAP database. It competes with products like [ClickHouse](/blog/duckdb-vs-clickhouse) or [Apache Druid](/blog/clickhouse-vs-druid). 
+
+In this article, we'll compare SQLite and DuckDB to each other as well as how they differ within their database classes, testing the "SQLite of OLAP" label. 
+
+## What is SQLite?
+
+SQLite is a self-contained, serverless, zero-configuration SQL database engine. That might sound like a lot of buzzwords, but it's a fancy way of saying that SQLite has as much in common with Microsoft Excel as it does with Postgres. It's entirely written in C and is one of the most thoroughly tested codebases in history. 
+
+A SQLite database lives on a file (e.g. `database.sqlite`) on disk. It runs as an in-process database, using a simple host application instead of client-server infrastructure. This differentiates it from MySQL and Postgres: with no client-server layer, SQLite is incredibly lightweight. It's just a utility. It's *very* small, living at just 750 kB compiled. 
+
+It is not designed to be a distributed database. Theoretically, it can scale to hundreds of terabytes on a single machine, but cannot be horizontally scaled like most transactional databases. Concurrency is limited, too: SQLite only supports one writer at a time. 
+
+The project is one of the most deployed databases in the world. It's used by applications that need transactional local storage. This includes mobile apps, browsers, coding language libraries, desktop applications, and insulated environments like aircraft operating systems. It's not just the fact that it's local that makes it attractive (after all, Postgres *can* run locally with a local host and clients); it's that SQLite is local *and* lightweight. Even with limited hardware, SQLite runs great with no set-up required! 
+
+SQLite implements most of the SQL standard, including transactions (ACID-compliant), views, triggers, foreign keys, full-text search, JSON functions, and window functions. It has limitations on views (e.g. no view writes) and no GRANTs given no users, but is otherwise mostly complete. 
+
+## What is DuckDB?
+
+DuckDB is an OLAP database, an analytical database that uses columnar storage to optimize for analytical queries. Just like SQLite, DuckDB forgoes the host-client structure in favor of an embedded, in-process query engine, distinguishing it from other OLAP heavyweights like ClickHouse or [Snowflake](/blog/clickhouse-vs-snowflake).
+
+Like SQLite, DuckDB uses a file to persist (e.g. `database.duckdb`). It's incredibly lightweight, available as a 20MB binary. It is also extremely fast at medium-size data sets (e.g. 5M-50M rows), beating heavyweight tools like ClickHouse on many performance metrics out-of-the-box. However, DuckDB isn't as versatile as client-server distributed OLAP databases and requires data to be colocated and immediately available. It's also not as fast as fully tuned OLAP databases that have been optimized for repeat queries. 
+
+What makes DuckDB so appetizing is that it provides incredible analytical performance with no set-up work. It's just attached to a data file (e.g. a Parquet or CSV file) and … works. However, unlike SQLite, DuckDB's primary advantage isn't its "local-ness": it's often analyzing massive data files served over network (in fact, that's how we use it at PostHog for [our data warehouse](/data-stack)). Rather, DuckDB is portable. You have lots and lots of data, you initialize DuckDB, and you can query analytics. It doesn't even need to be a persistent database as it can be used as an ephemeral analytical process (i.e. a data engine). 
+
+![DuckDB query interface](https://res.cloudinary.com/dmukukwp6/image/upload/Frame_143762_980111f164.png)
+
+## Architecture matchup: SQLite vs DuckDB
+
+Let's talk architecture. Despite both being single-file and embedded, SQLite and DuckDB have different architectures. To [use a familiar analogy](/blog/clickhouse-vs-postgres), they're as different as grapes and grapefruits. 
+
+The biggest difference is orientation. Like many OLTP databases, SQLite is row-oriented, keeping each row's fields together. So pulling one field or every field of a single row (e.g. a user's name, birthday, and bio) costs about the same. Conversely, like many OLAP databases, DuckDB is columnar, keeping each column's values together. That makes it efficient at aggregate questions like the user base's average age, since it can read just the age column without scanning the rest. 
+
+Another major difference is their query optimization. SQLite is heavily rule-based. It's conservative at optimizing queries without explicit user instructions. It's designed to be stable. In fact, the U.S. Library of Congress even recommends SQLite for long-term storage. 
+
+DuckDB meanwhile has a built-in cost-based optimizer with join reordering, filter pushdown, and parallelism. Its job is to answer analytical questions quickly without forcing the user to learn the underlying algorithmic science. Those might sound like similar things, but SQLite's query optimization is more predictable, while DuckDB's pursues greedier algorithms that work most of the time, but might degrade unpredictably. 
+
+## Performance matchup: SQLite vs DuckDB
+
+Moving beyond architecture, how do SQLite and DuckDB actually compare when it comes to head-to-head performance? Given they have minimal overlap here, let's understand what tasks would seamlessly work under one and buckle under the other. 
+
+SQLite is efficient and durable at anything transactional. Updating single or a small number of rows is significantly easier for SQLite's row-based infrastructure. As is deleting rows. SQLite can handle high-rate small transactions that would clog the queue under DuckDB. Additionally, because of SQLite's light overhead, it is fantastic for tiny datasets. 
+
+DuckDB, meanwhile, is good for anything analytical or aggregative. DuckDB can aggregate an entire table faster than SQLite ever could. It's great at wide scans with filters. It can join multiple tables on millions to billions of rows. This is made possible by DuckDB's vectorized execution, where 2,048 values are processed at the same time. It's great at grouping, even with extremely high cardinality. DuckDB is built for massive data sets and can process them without having to ingest them. 
+
+In both of their respective categories, DuckDB and SQLite will outperform each other  significantly. Where things get more similar is concurrency. 
+
+## Concurrency performance: SQLite vs DuckDB
+
+SQLite has a WAL mode, where a single writer is supported alongside concurrent readers. It's made safe through filesystem locks. On a per connection basis, SQLite is single-threaded, so additional CPUs will not expedite a single query provided that SQLite has unblocked access to the CPU. 
+
+DuckDB is similar. It follows a MVCC design – where row versioning is used to avoid conflicting reads and writes – and can support a single writer with multiple concurrent readers. It is multi-threaded, parallelizing scans, joins, and aggregations across multiple CPU cores. 
+
+Being single writer might sound limiting, but SQLite and DuckDB are non-distributed databases. Because both run as a single process on a single machine, they aren't designed to be scaled across writers. Reads, in general, tend to outnumber writes anyway. 
+
+## SQLite vs DuckDB placement within their niches
+
+While DuckDB's "SQLite of OLAP" analogy is broadly true, what makes DuckDB and SQLite unique against their peers is a smidge different. 
+
+SQLite's defining trait within OLTP is that it isn't a bulky client-server database. The OLTP category – defined by Postgres, MySQL, Oracle, SQL Server – is built around a separate server process that applications talk to over a network protocol, with its own user model, connection pool, and storage layer it manages exclusively. SQLite throws that whole architecture out. It's a library you link into your application, the database is a single file on disk, and there's no daemon, network, or users. What makes SQLite so powerful is its ability to provide a fully-transactional database while remaining networkless, local, and tiny. 
+
+DuckDB's positioning within OLAP is similar but plays out against a different metric. The OLAP category – defined by Snowflake, [BigQuery](/blog/clickhouse-vs-bigquery), [Redshift](/blog/clickhouse-vs-redshift), ClickHouse, Spark – is built around distributed, server-based, typically cloud-native systems designed to chew through terabytes to petabytes across many machines. They are ingestion-heavy: you load data into the warehouse's managed distributed storage, and queries run against that. DuckDB is, meanwhile, a library you link in. It is single node, in-process, no server. However, you're still likely interfacing with your DuckDB-running node over a network (and DuckDB is likely interfacing with a data file over a network). It's not as local as SQLite, nor as lightweight, but it wins on its minimal setup required for otherwise complex, tuning-required queries. 
+
+This contrast can also be felt in the tradeoffs. SQLite forgoes concurrency with its single writer architecture, while databases like Postgres or MySQL can handle thousands of concurrent writers. Meanwhile, DuckDB has a similar analytical punch of many OLAP databases, including vectorized execution, columnar storage, a modern query optimizer, and parallel query execution. It just cannot horizontally scale. 
+
+## So is DuckDB really the SQLite of OLAP?
+
+Mostly yes … but with the caveat that DuckDB's defining trait isn't local-ness; it's portability with serious analytical horsepower. 
+
+Overall, the two databases share a philosophy more than a use case. SQLite gives you transactional storage wherever a process can run. DuckDB gives you analytical compute wherever your data lives. 
+
+At PostHog, we lean heavily on DuckDB for our [new managed data warehouse](/data-stack/managed-warehouse). The warehouse sports a DuckDB query layer, with DuckLake (DuckDB's semi-native data lakehouse) handling durable storage and [Duckgres](https://github.com/PostHog/duckgres) – our open-source wrapper – exposing it all over the Postgres wire protocol so any [BI tool](/data-stack/business-intelligence), [dbt project](/data-stack/data-modeling), or Postgres client can talk to it. It's a stack that wouldn't have been feasible a few years ago, and it works precisely because DuckDB inherited SQLite's "just a library you link in" ethos.
+
+<NewsletterForm />

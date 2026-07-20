@@ -4,32 +4,55 @@ sidebar: Handbook
 showTitle: true
 ---
 
-### Renewal principals
-Being on a prepaid credit plan - usually annual - is a win-win solution for both PostHog and the customer. Customers get discounts on the credits they purchase and PostHog gets confirmed revenue.
+## Renewal principles
 
-When estimating renewal amount, we want to make sure we accurately determine the amount of credits the customer will need in the next 12 months (or equivalent period, e.g. if they prepaid for 6 months). This is not an opportunity to upsell - do that later by encouraging product usage. 
+Prepaid credit plans (usually annual) work for both sides. Customers get a discount, and we get confirmed revenue.
 
-This page walks through recommendations for approaching and handling renewals. [Contract rules](/handbook/growth/sales/contract-rules) and [how to create contracts](/handbook/growth/sales/contracts) are covered in relevant pages under our shared processes. 
+When estimating the renewal amount, accurately project how many credits the customer will need over the next 12 months (or whatever period applies — e.g. 6 months if they prepaid for 6). This isn't the time to upsell. Drive that later through product usage.
+
+For mechanics, see [Contract rules](/handbook/growth/sales/contract-rules) and [How to create contracts](/handbook/growth/sales/contracts).
 
 ## When to start
-Start renewal conversations at least 2 months before the contract renewal date for customers you are already in frequent contact with. For customers who are quiet, start renewal discussions 3 months out to allow more time for re-engagement.
 
-Vitally and Slack will keep you on track with automated reminders. When a customer hits the 2-month mark, they'll automatically enter the `Upcoming renewal` segment, you'll get a task assigned to you in Vitally, and Slack will send a notification.
+- **Active accounts:** start renewal conversations 2 months before the renewal date.
+- **Quiet accounts:** start 3 months out, to allow time for re-engagement.
 
-Start by sending a message in the shared Slack channel. Things will change in a year – the person you worked with previously may not be the right person this time. Mention when the customer is set to renew and ask if they have any preferred next steps.
+Vitally and Slack remind you automatically. At the 2-month mark, the customer moves into the `Upcoming renewal` segment, a Vitally task is assigned to you, and Slack pings you.
 
-As you make progress in the renewal discussions, [update the renewal opportunity](/handbook/growth/sales/crm#renewal-pipeline) in Salesforce. 
+Start with a message in the shared Slack channel — the person you worked with last time might not be the right contact now. Flag the renewal date and ask about preferred next steps.
 
-#### Customers who are projected to run out of credit before renewal
-You will get notified by credit bot in Slack if a customer is set to run out of credits before their renewal date. This is considered an early renewal and follow the same process. If the customer will likely run out of credits before renewal is done, make sure they have a credit card on their account so any overage bills will be paid.
+As things progress, [update the renewal opportunity](/handbook/growth/sales/crm#renewal-pipeline) in Salesforce.
+
+## Unique renewal cases
+
+### Customers running out of credit early
+
+Credit bot will ping you in Slack if a customer is set to run out of credits before their renewal date. Treat this as an early renewal — same process applies. Make sure the customer has a credit card on file so any overage bills get paid.
+
+### Customers with credits expiring at end of contract
+
+If a customer has a balance when their contract ends, the credits expire and they move to monthly payments. We have [rules](/handbook/growth/sales/contract-rules#when-they-will-end-the-contract-term-with-credit-remaining) to let customers carry over credits on a flat renewal or higher.
+
+If you spot a customer trending this way, reach out early to explain the credit expiry and the options. Use the call to explore projected growth and other use cases. Start the renewal conversation 3 months out so you have time to explore new features and figure out if the carry-over is worth it for them.
+
+### Customers with irregular contracts
+
+Many customers are on legacy contracts that don't follow our [contract rules](/handbook/growth/sales/contract-rules) — non-Net 30 payment terms, unique discounts, legacy pricing, monthly or quarterly payments.
+
+Prioritize migrating these customers to standard pricing and discounts. The conversations may be difficult, but stick to handbook pricing whenever reasonable — and share the handbook directly to back up your point. Use your judgment on when an irregular term is a deal-breaker worth keeping.
 
 ## Renewal discussions
-Renewal conversations are best done on a call. There can be a lot of moving parts so talking through it is usually a good idea. 
 
-Before the call, review your customer's usage and start a quote in <PrivateLink url="https://quote.posthog.com/"> Quotehog </PrivateLink>. If you need to look at data beyond the last 6 months, you can use <PrivateLink url="https://us.posthog.com/project/2/dashboard/374922"> this PostHog dashboard </PrivateLink> and edit the variables. Check if your customer is on any legacy pricing tiers – either talk to them about moving to standard pricing, or take it into account when building a quote. 
+Do these on a call. There are a lot of moving parts and talking through it works best.
 
-This call can be an opportunity to explore your customer's PostHog experience so far and upcoming initiatives that you can build on in the future. It's also a good idea to explain how contracts, credits, and discounts work at PostHog – our [pricing philosophy](/pricing/philosophy) and [contract rules](/handbook/growth/sales/contract-rules) are handy pages to bring up.
+Before the call:
 
-When you walk through the quote, start by looking at their past usage – try to anchor to the main products they're using as there can be a lot of numbers to look at. Explain how you estimated the usage for each product to arrive at the final number. Check-in with your customer throughout to sense check you're on the right track.
+- Review the customer's usage and start a quote in <PrivateLink url="https://quote.posthog.com/">Quotehog</PrivateLink>.
+- For usage data beyond the last 6 months, use <PrivateLink url="https://us.posthog.com/project/2/dashboard/374922">this PostHog dashboard</PrivateLink> and edit the variables.
+- Check if they're on a legacy pricing tier — either move them to standard pricing or factor it into your quote.
 
-After the call - share the public quote link with your customer along with any usage information you shared on the call. 
+Use the call to learn about their PostHog experience so far and what's coming up next. It's also a good chance to explain how contracts, credits, and discounts work — our [pricing philosophy](/pricing/philosophy) and [contract rules](/handbook/growth/sales/contract-rules) pages are useful references.
+
+When walking through the quote, start with past usage and anchor to their main products (there can be a lot of numbers). Explain how you projected each product's usage. Check in throughout to make sure your assumptions still hold.
+
+After the call, share the public quote link with the customer along with any usage info you discussed.

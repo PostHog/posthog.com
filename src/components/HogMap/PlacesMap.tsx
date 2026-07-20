@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react'
-import 'mapbox-gl/dist/mapbox-gl.css'
 import { PlaceType, PlaceItem } from './types'
 import { useUser } from '../../hooks/useUser'
 import { useUserLocation } from '../../hooks/useUserLocation'
@@ -10,6 +9,7 @@ import { IconBuilding, IconBed, IconBurger, IconCoffee, IconLaptop, IconTelescop
 import {
     computeOffsets,
     getMapbox,
+    loadMapbox,
     ensureClusterSource,
     ensureClusterLayers,
     setClusterVisibility,
@@ -61,11 +61,20 @@ export default function PlacesMap({
     onPlacesLoaded?: (places: PlaceItem[]) => void
 }): JSX.Element {
     const [isClient, setIsClient] = useState(false)
+    const [mapboxReady, setMapboxReady] = useState(false)
     const { isModerator, getJwt } = useUser()
     const { location: userLocation, isLoading: isLocationLoading } = useUserLocation()
 
     useEffect(() => {
         setIsClient(true)
+    }, [])
+
+    useEffect(() => {
+        loadMapbox().then((m) => {
+            if (m) {
+                setMapboxReady(true)
+            }
+        })
     }, [])
 
     const mapContainerRef = useRef<HTMLDivElement | null>(null)
@@ -315,7 +324,7 @@ export default function PlacesMap({
                 mapRef.current = null
             }
         }
-    }, [isClient, token, styleUrl, isLocationLoading, userLocation])
+    }, [isClient, mapboxReady, token, styleUrl, isLocationLoading, userLocation])
 
     useEffect(() => {
         return setupMap()

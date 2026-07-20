@@ -16,7 +16,7 @@ projects:
 > **How art requests work**
 > By default, Lottie, Heidi & Daniel should be assigned to all art requests and the request will be added to [the art project board](https://github.com/orgs/PostHog/projects/65). They will decide who will work on this brief and reassign as needed. You can check the project board for updates if needed. 
 >
-> If your request is genuinely urgent, please share in [#team-marketing channel](https://posthog.slack.com/archives/C08CG24E3SR) and mention Lottie, Heidi, Daniel, and/or Cory.
+> If your request is genuinely urgent, please share in [#team-graphics channel](https://posthog.slack.com/archives/C0AU440KS6P) and mention Lottie, Heidi, Daniel, and/or Cory.
 
 ## Outline
 _Avoid being overly prescriptive and instead provide context about what you're trying to convey - i.e. a feeling, reaction, or narrative._

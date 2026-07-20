@@ -13,13 +13,13 @@ featuredImageType: full
 category: PostHog news
 tags:
     - Product updates
-    - LLM analytics
+    - AI Observability
 ---
 
 
 Traditional clickstream product analytics (like button clicks and page views) is one of the most important datasets for anyone trying to build a successful product. Backend observability data – metrics, logs, traces – are operational, but equally essential.
 
-In the age of AI, though, we have a different kind of data that mashes aspects of both together. I'm talking about the LLM [traces](/docs/llm-analytics/traces) and [generations](/docs/llm-analytics/generations) your AI agent or agentic workflows produce as they get stuff done.
+In the age of AI, though, we have a different kind of data that mashes aspects of both together. I'm talking about the LLM [traces](/docs/ai-observability/traces) and [generations](/docs/ai-observability/generations) your AI agent or agentic workflows produce as they get stuff done.
 
 This data is crucial for seeing whether your agent is [actually doing its job](/blog/stop-ai-slop). It's also rich with insights about how your users are using AI features, what they're trying to do, and even how they feel about the whole interaction.
 
@@ -54,15 +54,15 @@ Before diving into the steps, here are the main considerations we kept coming ba
 - **Huge traces** - Some traces are enormous and can't just be thrown at an LLM. Our answer: the uniform downsampling described below in [step 1](#step-1-from-json-blobs-to-readable-text). We iteratively drop lines while preserving the overall structure, so even massive traces fit within context limits, although this is at the cost of some accuracy/quality.
 - **Keeping costs sane** - Running LLM summarization on every single trace would cost a _lot_. So we sample a small random subset each hour, use GPT-4.1 nano for summarization (fast and cheap), and are planning to move to the OpenAI Batch API to optimize further, as well as some BYOK approaches for "on demand" steering and triggering of the whole pipeline.
 - **One-size-fits-all vs. custom summaries** - It's hard to have a single general summary schema that works perfectly for every type of trace we might see. Ideally, users could steer or bring their own prompts and structured outputs. For now, we started with a general-purpose prompt and summary schema that works well across most use cases, but enabling user-defined summarization is a potential future improvement.
-- **No existing embeddings to lean on** - PostHog doesn't already have a RAG system or embeddings index over all LLM analytics events. Rather than building that infrastructure first, we took a shortcut: convert traces to text, summarize them with an LLM, then embed the summaries. This gives us high-quality, semantically rich vectors without needing a full RAG pipeline - and the summaries are useful on their own as a feature.
-- **Zero-config by default, customizable when you need it** - The Temporal workflows just run in the background. As you send traces to LLM Analytics, clustering will just work once there's enough data to sample from. No setup needed — but if you want more control, you can now create [clustering jobs](/docs/llm-analytics/clusters#managing-clustering-jobs) to steer what gets clustered (more on this below).
-- **User steering** - We recently shipped [clustering jobs](/docs/llm-analytics/clusters#managing-clustering-jobs), which let you define up to five independent clustering configurations per project. Each job can target a specific analysis level (traces or generations) and apply event filters to scope which data gets included — for example, you could create a job that only clusters traces from a specific model or a particular user segment. Jobs run automatically during the next scheduled cycle.
+- **No existing embeddings to lean on** - PostHog doesn't already have a RAG system or embeddings index over all AI Observability events. Rather than building that infrastructure first, we took a shortcut: convert traces to text, summarize them with an LLM, then embed the summaries. This gives us high-quality, semantically rich vectors without needing a full RAG pipeline - and the summaries are useful on their own as a feature.
+- **Zero-config by default, customizable when you need it** - The Temporal workflows just run in the background. As you send traces to AI Observability, clustering will just work once there's enough data to sample from. No setup needed — but if you want more control, you can now create [clustering jobs](/docs/ai-observability/clusters#managing-clustering-jobs) to steer what gets clustered (more on this below).
+- **User steering** - We recently shipped [clustering jobs](/docs/ai-observability/clusters#managing-clustering-jobs), which let you define up to five independent clustering configurations per project. Each job can target a specific analysis level (traces or generations) and apply event filters to scope which data gets included — for example, you could create a job that only clusters traces from a specific model or a particular user segment. Jobs run automatically during the next scheduled cycle.
 
 ## Step 1: From JSON blobs to readable text
 
-Traces are ingested into [LLM Analytics](/docs/llm-analytics) as normal PostHog events. They have their own loose schema around special [`$ai_*` properties](/docs/llm-analytics/basics) – covering everything from [generations](/docs/llm-analytics/generations) and [spans](/docs/llm-analytics/spans) to [sessions](/docs/llm-analytics/sessions) – but also the flexibility of general PostHog events, which means they generally work with any other PostHog feature out of the box.
+Traces are ingested into [AI Observability](/docs/ai-observability) as normal PostHog events. They have their own loose schema around special [`$ai_*` properties](/docs/ai-observability/basics) – covering everything from [generations](/docs/ai-observability/generations) and [spans](/docs/ai-observability/spans) to [sessions](/docs/ai-observability/sessions) – but also the flexibility of general PostHog events, which means they generally work with any other PostHog feature out of the box.
 
-This gives us a blob of JSON with some expected `$ai_` properties, and even within each property, the structure and format can vary wildly depending on the LLM provider, framework, or how users have [instrumented their own agents](/docs/llm-analytics/installation).
+This gives us a blob of JSON with some expected `$ai_` properties, and even within each property, the structure and format can vary wildly depending on the LLM provider, framework, or how users have [instrumented their own agents](/docs/ai-observability/installation).
 
 So we need to figure out how to get from this bag of JSON to something a clustering algorithm can work with – we need numbers. And whenever you need numbers with LLMs, it often means you need embeddings. Our task is to figure out what embeddings to generate that will be useful downstream.
 
@@ -143,9 +143,9 @@ class SummaryBullet(BaseModel):
 
 > See the full summarization schema in <a href="https://github.com/PostHog/posthog/blob/master/products/llm_analytics/backend/summarization/llm/schema.py" target="_blank" rel="noopener noreferrer"><code>schema.py</code></a>
 
-We use GPT-4.1 nano for this – it's fast, cheap, and the structured output mode means we get reliable, parseable results every time. The line references back to the text representation are particularly useful: they let the summary stay grounded in the actual trace data rather than hallucinating. You can read the actual prompts we use in <a href="https://github.com/PostHog/posthog/blob/master/products/llm_analytics/backend/summarization/prompts/system_detailed.djt" target="_blank" rel="noopener noreferrer"><code>system_detailed.djt</code></a> and <a href="https://github.com/PostHog/posthog/blob/master/products/llm_analytics/backend/summarization/prompts/user.djt" target="_blank" rel="noopener noreferrer"><code>user.djt</code></a>. If you have sensitive data in your traces, we made sure clustering works with [privacy mode](/docs/llm-analytics/privacy-mode) which controls what gets sent.
+We use GPT-4.1 nano for this – it's fast, cheap, and the structured output mode means we get reliable, parseable results every time. The line references back to the text representation are particularly useful: they let the summary stay grounded in the actual trace data rather than hallucinating. You can read the actual prompts we use in <a href="https://github.com/PostHog/posthog/blob/master/products/llm_analytics/backend/summarization/prompts/system_detailed.djt" target="_blank" rel="noopener noreferrer"><code>system_detailed.djt</code></a> and <a href="https://github.com/PostHog/posthog/blob/master/products/llm_analytics/backend/summarization/prompts/user.djt" target="_blank" rel="noopener noreferrer"><code>user.djt</code></a>. If you have sensitive data in your traces, we made sure clustering works with [privacy mode](/docs/ai-observability/privacy-mode) which controls what gets sent.
 
-These summaries appear as `$ai_trace_summary` and `$ai_generation_summary` events in your project every hour. They also power the on-demand [trace summarization](/docs/llm-analytics/summarization) feature you can use to quickly understand any individual trace or generation without reading through the full conversation.
+These summaries appear as `$ai_trace_summary` and `$ai_generation_summary` events in your project every hour. They also power the on-demand [trace summarization](/docs/ai-observability/summarization) feature you can use to quickly understand any individual trace or generation without reading through the full conversation.
 
 Ideally we would enable users the ability to steer and customize this part of the flow – maybe you want a different summary schema, or you want to add specific questions for the LLM to answer in the summary. We're considering this for the future, but for now we started with a general-purpose schema that works decently across most use cases.
 
@@ -157,9 +157,9 @@ Structured output is better than a raw summary for one critical reason: downstre
 
 ## Step 3: Embedding
 
-Once we have summaries, we <a href="https://github.com/PostHog/posthog/blob/master/ee/hogai/llm_traces_summaries/tools/embed_summaries.py" target="_blank" rel="noopener noreferrer">format them back into plain text</a> – title, flow diagram, bullets, and notes concatenated together, with line numbers stripped to reduce noise – and [embed](/docs/llm-analytics/embeddings) them using OpenAI's `text-embedding-3-large` model, giving us a 3,072-dimensional vector for each summary.
+Once we have summaries, we <a href="https://github.com/PostHog/posthog/blob/master/ee/hogai/llm_traces_summaries/tools/embed_summaries.py" target="_blank" rel="noopener noreferrer">format them back into plain text</a> – title, flow diagram, bullets, and notes concatenated together, with line numbers stripped to reduce noise – and [embed](/docs/ai-observability/embeddings) them using OpenAI's `text-embedding-3-large` model, giving us a 3,072-dimensional vector for each summary.
 
-Why embed the enriched summary instead of the raw trace? Because the summary lives in a higher-level semantic space. Raw traces contain a lot of noise – [token counts, model versions](/docs/llm-analytics/calculating-costs), repeated system prompts. The summary captures the _intent_ and _flow_, which is exactly what we want our [clusters](/docs/llm-analytics/clusters) to be organized around.
+Why embed the enriched summary instead of the raw trace? Because the summary lives in a higher-level semantic space. Raw traces contain a lot of noise – [token counts, model versions](/docs/ai-observability/calculating-costs), repeated system prompts. The summary captures the _intent_ and _flow_, which is exactly what we want our [clusters](/docs/ai-observability/clusters) to be organized around.
 
 So now, for each trace or generation, we have 3,072 numbers. Time for the fun part.
 
@@ -282,7 +282,7 @@ A daily coordinator workflow discovers eligible teams (those with enough recent 
 
 > See the orchestration workflow in <a href="https://github.com/PostHog/posthog/blob/master/posthog/temporal/llm_analytics/trace_clustering/coordinator.py" target="_blank" rel="noopener noreferrer"><code>coordinator.py</code></a>
 
-The output of each child workflow is a set of `$ai_trace_clusters` and `$ai_generation_clusters` events. These are standard PostHog events, which means the [clusters tab](/docs/llm-analytics/clusters) in the UI is just querying events like everything else in PostHog.
+The output of each child workflow is a set of `$ai_trace_clusters` and `$ai_generation_clusters` events. These are standard PostHog events, which means the [clusters tab](/docs/ai-observability/clusters) in the UI is just querying events like everything else in PostHog.
 
 ## A concrete example
 
@@ -290,7 +290,7 @@ The output of each child workflow is a set of `$ai_trace_clusters` and `$ai_gene
     width="560"
     height="315"
     src="https://www.youtube-nocookie.com/embed/OlOMc70-k8A"
-    title="LLM Analytics clusters demo"
+    title="AI Observability clusters demo"
     frameborder="0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
     allowfullscreen
@@ -302,32 +302,32 @@ Here's what you're seeing in the demo:
 - **Cluster distribution** - A bar chart showing how many traces landed in each cluster, with the agent-generated labels. This gives you a quick sense of what your users are actually doing.
 - **Drill-down** - Click into any cluster to see the individual traces, their summaries, and the full details. This is where you find the patterns - maybe 40% of your traces are "user asking for refund status" and you didn't even know.
 
-The noise cluster (labeled "Outliers") often contains the most interesting one-off traces – edge cases, unusual workflows, or bugs that don't fit any pattern. Pair this with [evaluations](/docs/llm-analytics/evaluations) (our LLM-as-a-judge feature) to automatically score the quality of generations within each cluster.
+The noise cluster (labeled "Outliers") often contains the most interesting one-off traces – edge cases, unusual workflows, or bugs that don't fit any pattern. Pair this with [evaluations](/docs/ai-evals) (our LLM-as-a-judge feature) to automatically score the quality of generations within each cluster.
 
 ## Steering with clustering jobs
 
-Since launching this pipeline, we've added [clustering jobs](/docs/llm-analytics/clusters#managing-clustering-jobs) — a way to create independent clustering configurations so you can steer what gets analyzed. Instead of one big clustering run across all your data, you can define up to five jobs per project, each with its own analysis level (traces or generations) and event filters.
+Since launching this pipeline, we've added [clustering jobs](/docs/ai-observability/clusters#managing-clustering-jobs) — a way to create independent clustering configurations so you can steer what gets analyzed. Instead of one big clustering run across all your data, you can define up to five jobs per project, each with its own analysis level (traces or generations) and event filters.
 
 For example, you might create separate jobs for:
 - Traces from your production GPT-4o agent
 - Generations from your RAG pipeline
 - Only traces where a specific custom property matches (e.g., `$ai_model = "claude-sonnet-4-20250514"`)
 
-Each job runs automatically during the next scheduled cycle, and the run selector on the Clusters page shows which job produced each run. See the [clustering jobs docs](/docs/llm-analytics/clusters#managing-clustering-jobs) for the full setup guide.
+Each job runs automatically during the next scheduled cycle, and the run selector on the Clusters page shows which job produced each run. See the [clustering jobs docs](/docs/ai-observability/clusters#managing-clustering-jobs) for the full setup guide.
 
 ## Try it now
 
-If you're already using [LLM Analytics](/llm-analytics) in PostHog, clustering runs automatically – no configuration needed. Want more control? Set up [clustering jobs](/docs/llm-analytics/clusters#managing-clustering-jobs) to define exactly what gets clustered. If you're not using LLM Analytics yet, you can [get started in minutes](/docs/llm-analytics/start-here) with SDKs for [OpenAI](/docs/llm-analytics/installation/openai), [Anthropic](/docs/llm-analytics/installation/anthropic), [LangChain](/docs/llm-analytics/installation/langchain), [Vercel AI](/docs/llm-analytics/installation/vercel-ai), and [many more](/docs/llm-analytics/installation).
+If you're already using [AI Observability](/llm-analytics) in PostHog, clustering runs automatically – no configuration needed. Want more control? Set up [clustering jobs](/docs/ai-observability/clusters#managing-clustering-jobs) to define exactly what gets clustered. If you're not using AI Observability yet, you can [get started in minutes](/docs/ai-observability/start-here) with SDKs for [OpenAI](/docs/ai-observability/installation/openai), [Anthropic](/docs/ai-observability/installation/anthropic), [LangChain](/docs/ai-observability/installation/langchain), [Vercel AI](/docs/ai-observability/installation/vercel-ai), and [many more](/docs/ai-observability/installation).
 
 <p>
-	<CallToAction to="https://app.posthog.com/llm-analytics/clusters">
+	<CallToAction to="https://app.posthog.com/ai-observability/clusters">
 		Try clusters in PostHog
 	</CallToAction>
 </p>
 
 ## Further reading
 
-- **[Clusters documentation](/docs/llm-analytics/clusters)** - Setup guide and feature overview
-- **[Custom properties](/docs/llm-analytics/custom-properties)** - Attach your own metadata to traces for richer clustering
-- **[Privacy mode](/docs/llm-analytics/privacy-mode)** - Control what trace data gets sent to PostHog
-- **Feedback** - Leave feedback directly on the [clusters docs page](/docs/llm-analytics/clusters), email us at team-llm-analytics@posthog.com, or start a thread in the [community](/community)
+- **[Clusters documentation](/docs/ai-observability/clusters)** - Setup guide and feature overview
+- **[Custom properties](/docs/ai-observability/custom-properties)** - Attach your own metadata to traces for richer clustering
+- **[Privacy mode](/docs/ai-observability/privacy-mode)** - Control what trace data gets sent to PostHog
+- **Feedback** - Leave feedback directly on the [clusters docs page](/docs/ai-observability/clusters), email us at team-llm-analytics@posthog.com, or start a thread in the [community](/community)

@@ -4,8 +4,7 @@ import { IconChevronDown, IconChevronRight } from '@posthog/icons'
 import Link from 'components/Link'
 import ScrollArea from './ScrollArea'
 import KeyboardShortcut from 'components/KeyboardShortcut'
-import { useApp } from '../../context/App'
-import { navigate } from 'gatsby'
+import { useAppSettings } from '../../context/App'
 
 // Types
 export type MenuItemType = {
@@ -28,11 +27,9 @@ export type MenuType = {
     bold?: boolean
     items: MenuItemType[]
     mobileLink?: string // Direct link for the menu trigger on mobile
-    hideChevron?: boolean // Hide the chevron down icon for this menu (when showChevronDown is enabled)
+    hideChevron?: boolean // Hide the chevron down icon for this menu in website mode
 }
 
-// const { websiteMode } = useApp()
-// websiteMode ? 'text-base' : 'text-[13px]'
 const RootClasses = 'flex gap-px py-0.5 h-full'
 const TriggerClasses = `group flex select-none items-center justify-between gap-0.5 rounded px-1.5 py-0.5 text-[13px] leading-none text-primary outline-none data-[highlighted]:bg-accent hover:bg-accent-2 data-[state=open]:bg-accent`
 const ItemClasses =
@@ -197,11 +194,11 @@ const MenuItem: React.FC<{
                     <RadixMenubar.Portal container={portalContainer || undefined}>
                         <RadixMenubar.SubContent
                             collisionBoundary={appContainer}
-                            className={ContentClasses}
+                            className={`${ContentClasses} max-h-[calc(var(--radix-menubar-content-available-height)-0.75rem)] overflow-hidden flex flex-col`}
                             alignOffset={-5}
                             data-scheme="primary"
                         >
-                            <ScrollArea className="max-h-screen !overflow-y-auto">
+                            <ScrollArea className="min-h-0 !overflow-y-auto overscroll-contain">
                                 {item.items.map((subItem, subIndex) => (
                                     <MenuItem
                                         key={`${subItem.link}-${subIndex}`}
@@ -311,31 +308,19 @@ export interface MenuBarProps {
     className?: string
     customTriggerClasses?: string
     triggerAsChild?: boolean
-    showChevronDown?: boolean
 }
 
-const MenuBar: React.FC<MenuBarProps> = ({
-    menus,
-    className,
-    triggerAsChild,
-    customTriggerClasses,
-    showChevronDown,
-}) => {
-    const { isMobile, websiteMode } = useApp()
+const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, customTriggerClasses }) => {
+    const { isMobile } = useAppSettings()
 
     const [openMenuIndex, setOpenMenuIndex] = React.useState<number | null>(null)
     const rootRef = React.useRef<HTMLDivElement | null>(null)
     const [portalContainer, setPortalContainer] = React.useState<HTMLElement | null>(null)
-    const [appContainer, setAppContainer] = React.useState<HTMLElement | null>(null)
-
-    React.useEffect(() => {
-        if (websiteMode) {
-            setAppContainer(document.getElementById('app-container'))
-        }
-    }, [websiteMode])
+    const appContainer: HTMLElement | null = null
 
     React.useEffect(() => {
         if (!rootRef.current) {
+            setPortalContainer(null)
             return
         }
         const container = rootRef.current.closest('[data-menu-container]')
@@ -373,7 +358,7 @@ const MenuBar: React.FC<MenuBarProps> = ({
         >
             {processedMenus.map((menu, menuIndex) => {
                 // On mobile, if menu has mobileLink, make it a direct link
-                if (isMobile && !websiteMode && menu.mobileLink) {
+                if (isMobile && menu.mobileLink) {
                     return (
                         <Link
                             key={menuIndex}
@@ -384,9 +369,7 @@ const MenuBar: React.FC<MenuBarProps> = ({
                             }`}
                         >
                             {menu.trigger}
-                            {showChevronDown && !menu.hideChevron && (
-                                <IconChevronDown className="size-5 opacity-60 -mr-2" />
-                            )}
+                            {!menu.hideChevron && <IconChevronDown className="size-5 opacity-60 -mr-2 hidden" />}
                         </Link>
                     )
                 }
@@ -397,52 +380,32 @@ const MenuBar: React.FC<MenuBarProps> = ({
                             asChild={triggerAsChild}
                             className={`${triggerAsChild ? '' : TriggerClasses} ${
                                 menu.bold ? 'font-bold' : 'font-medium'
-                            } ${customTriggerClasses} ${
-                                websiteMode ? (openMenuIndex === menuIndex ? '!bg-accent' : '!bg-transparent') : ''
-                            }`}
-                            onMouseEnter={
-                                websiteMode
-                                    ? () => {
-                                          setOpenMenuIndex(menuIndex)
-                                      }
-                                    : undefined
-                            }
-                            onClick={
-                                websiteMode
-                                    ? () => {
-                                          const url = menu.mobileLink || menu.items.find((item) => item.link)?.link
-                                          if (url) {
-                                              navigate(url, { state: { newWindow: true } })
-                                          }
-                                      }
-                                    : undefined
-                            }
+                            } ${customTriggerClasses}`}
                         >
                             {menu.trigger}
-                            {showChevronDown && !menu.hideChevron && (
-                                <IconChevronDown className="size-5 opacity-60 -mr-2" />
-                            )}
+                            {!menu.hideChevron && <IconChevronDown className="size-5 opacity-60 -mr-2 hidden" />}
                         </RadixMenubar.Trigger>
                         <RadixMenubar.Portal container={portalContainer || undefined}>
                             <RadixMenubar.Content
                                 collisionBoundary={appContainer}
-                                className={ContentClasses}
+                                className={`${ContentClasses} max-h-[calc(var(--radix-menubar-content-available-height)-0.75rem)] overflow-hidden flex flex-col`}
                                 align="start"
                                 sideOffset={5}
                                 alignOffset={-3}
                                 data-scheme="primary"
-                                onMouseLeave={websiteMode ? closeMenu : undefined}
                             >
-                                {menu.items.map((item, itemIndex) => (
-                                    <MenuItem
-                                        key={`${menuIndex}-${itemIndex}`}
-                                        item={item}
-                                        menuIndex={menuIndex}
-                                        portalContainer={portalContainer}
-                                        appContainer={appContainer}
-                                        onCloseMenu={closeMenu}
-                                    />
-                                ))}
+                                <ScrollArea className="min-h-0 !overflow-y-auto overscroll-contain">
+                                    {menu.items.map((item, itemIndex) => (
+                                        <MenuItem
+                                            key={`${menuIndex}-${itemIndex}`}
+                                            item={item}
+                                            menuIndex={menuIndex}
+                                            portalContainer={portalContainer}
+                                            appContainer={appContainer}
+                                            onCloseMenu={closeMenu}
+                                        />
+                                    ))}
+                                </ScrollArea>
                             </RadixMenubar.Content>
                         </RadixMenubar.Portal>
                     </RadixMenubar.Menu>
