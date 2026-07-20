@@ -19,8 +19,6 @@ We understand organizing travel can be a challenge when you have personal/family
 > - **2021** [We shot this video at our Portugal offsite](https://www.youtube.com/watch?v=WOBH1Qy0xhA)
 > - **2023** [What we built at our sun-kissed Aruba hackathon](https://posthog.com/blog/aruba-hackathon)
 > - **2024** [What we built at our windswept Mykonos hackathon](https://posthog.com/blog/mykonos-hackathon)
-> - **2026** Barbados
-> - **2027**
 
 Once a year, the entire company will get together somewhere in the world for a week. Usually we'll all fly on Sunday, have an opening dinner, spend the week doing a mix of hard work, strategy, culture and fun activities and we then all fly back home on Friday. Our past offsites have been in Italy, Portugal and Iceland. We try to ensure that everyone has their own bedroom.
 
