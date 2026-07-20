@@ -702,8 +702,8 @@ const workSurfaces: {
         iconColor: 'text-brown dark:text-brown-dark',
         label: (
             <span className="inline-flex items-center gap-2">
-                <Link to="/code" state={{ newWindow: true }} className="font-bold text-primary">
-                    PostHog Code
+                <Link to="/desktop" state={{ newWindow: true }} className="font-bold text-primary">
+                    PostHog Desktop
                 </Link>
                 <span className="inline-flex items-center rounded-sm bg-yellow/15 px-1 py-0.5 text-xs font-bold text-yellow">
                     Beta
@@ -712,7 +712,7 @@ const workSurfaces: {
         ),
         copy: 'A desktop app for driving parallel agents to edit your product. The same Inbox and reports live here.',
         cta: (
-            <CallToAction to="/code" state={{ newWindow: true }} type="secondary" size="md">
+            <CallToAction to="/desktop" state={{ newWindow: true }} type="secondary" size="md">
                 Get the app
             </CallToAction>
         ),
@@ -732,7 +732,7 @@ const workModes: WorkMode[] = [
         tag: 'Prompted',
         tagClass: 'bg-red/15 text-red',
         title: 'It builds what you spec',
-        copy: "This is what you're used to (you set the spec and the agents do the work). Prompt a task from PostHog AI, PostHog Code, or the Slack app, and agents build it.",
+        copy: "This is what you're used to (you set the spec and the agents do the work). Prompt a task from PostHog AI, PostHog Desktop, or the Slack app, and agents build it.",
         guard: {
             label: 'Full product context',
             copy: "Understands your users, not just the diff it's editing.",
@@ -834,7 +834,7 @@ const faqItems = [
         ),
     },
     {
-        trigger: 'How is this different from PostHog Code and PostHog AI?',
+        trigger: 'How is this different from PostHog Desktop and PostHog AI?',
         content: (
             <p>
                 Same brain, different doors.{' '}
@@ -842,8 +842,8 @@ const faqItems = [
                     PostHog AI
                 </Link>{' '}
                 answers data questions inside the app.{' '}
-                <Link to="/code" state={{ newWindow: true }} className="text-red dark:text-yellow font-semibold">
-                    PostHog Code
+                <Link to="/desktop" state={{ newWindow: true }} className="text-red dark:text-yellow font-semibold">
+                    PostHog Desktop
                 </Link>{' '}
                 is the desktop coding agent you edit your product with. Self-driving is what happens when you point that
                 agent at your product data and let it work on its own.
@@ -975,13 +975,13 @@ export default function SelfDrivingPage({
                             <div className="relative z-10 mx-4 h-64 overflow-hidden rounded-t border border-b-0 border-primary bg-accent @sm/reader-content:h-72 @md/reader-content:mx-7 @xl/reader-content:mx-10 @xl/reader-content:h-80">
                                 <CloudinaryImage
                                     src="https://res.cloudinary.com/dmukukwp6/image/upload/inbox_light_9aa9eed335.png"
-                                    alt="The Inbox surfacing reports and pull requests across PostHog Code and the cloud"
+                                    alt="The Inbox surfacing reports and pull requests across PostHog Desktop and the cloud"
                                     className="dark:hidden w-full"
                                     imgClassName="block w-full"
                                 />
                                 <CloudinaryImage
                                     src="https://res.cloudinary.com/dmukukwp6/image/upload/inbox_dark_216a157762.png"
-                                    alt="The Inbox surfacing reports and pull requests across PostHog Code and the cloud"
+                                    alt="The Inbox surfacing reports and pull requests across PostHog Desktop and the cloud"
                                     className="hidden dark:block w-full"
                                     imgClassName="block w-full"
                                 />

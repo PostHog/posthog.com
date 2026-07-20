@@ -1465,7 +1465,9 @@ const alphaTabs: TabbedCarouselTab[] = [
                 }
             >
                 Agents are <strong className="text-primary">teammates with names.</strong> Your people and your agents
-                work the same threads, hand off tasks, and see the same context – in real time.
+                work the same threads, hand off tasks, and see the same context – in real time. No "let me share my
+                screen" or "let me pull the latest changes" – you're already in the workspace, agents and people
+                building the same product, with your product data as the fuel.
             </AlphaSlide>
         ),
     },

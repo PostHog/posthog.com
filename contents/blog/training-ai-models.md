@@ -20,7 +20,7 @@ Over the past year, we've started building more AI-powered features into PostHog
 
 [PostHog's next chapter](/blog/posthogs-next-chapter) is about building more proactive, self-driving products. Products that surface answers and solutions for you, act on them, and improve over time. 
 
-This is the vision for [PostHog Code](/code), which is now in beta. To enable this and more products like it, we want to try something new. 
+This is the vision for [PostHog Code](/desktop), which is now in beta. To enable this and more products like it, we want to try something new. 
 
 We want to train models on data in PostHog.
 
@@ -45,7 +45,7 @@ We've spent a lot of time thinking about this from a user perspective, especiall
 
 The upside is the kinds of improvements described above.
 
-Most tools are focused on providing you with the best code; we want to focus our energy into making your product the best it can be. This is why we describe [PostHog Code](/code) as a product editor.
+Most tools are focused on providing you with the best code; we want to focus our energy into making your product the best it can be. This is why we describe [PostHog Code](/desktop) as a product editor.
 
 The downside is that this involves using data in PostHog to train models.
 

@@ -126,7 +126,7 @@ const setupSteps: {
         badge: 'bg-red/10 text-red dark:bg-yellow/10 dark:text-yellow',
         title: 'Query everything, or let PostHog do it',
         description:
-            "Ask a question in plain English using Slack, PostHog Code or the MCP and get the answer you're looking for. Or, let PostHog's AI features use the warehouse as context when they're deciding what to surface or fix.",
+            "Ask a question in plain English using Slack, PostHog Desktop or the MCP and get the answer you're looking for. Or, let PostHog's AI features use the warehouse as context when they're deciding what to surface or fix.",
     },
 ]
 

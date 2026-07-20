@@ -2229,7 +2229,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Code',
-                    url: '/code',
+                    url: '/desktop',
                 },
                 {
                     name: 'Concepts',
@@ -6902,7 +6902,7 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'PostHog Code',
+            name: 'PostHog Desktop',
             icon: 'IconCoffee',
             color: 'yellow',
             url: '/docs/posthog-code',

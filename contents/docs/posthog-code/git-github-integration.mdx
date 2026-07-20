@@ -2,11 +2,11 @@
 title: PostHog Git + GitHub integration
 ---
 
-PostHog Code has Git and GitHub support built directly into the UI, so you can perform common operations like committing, pushing, and opening a PR without using the agent.
+PostHog Desktop has Git and GitHub support built directly into the UI, so you can perform common operations like committing, pushing, and opening a PR without using the agent.
 
 ## Setup
 
-PostHog Code uses the [GitHub CLI](https://cli.github.com) (`gh`) for all GitHub operations. To use PR features, install `gh` and authenticate:
+PostHog Desktop uses the [GitHub CLI](https://cli.github.com) (`gh`) for all GitHub operations. To use PR features, install `gh` and authenticate:
 
 ```bash
 gh auth login
@@ -41,7 +41,7 @@ You can do all of the following without handing control to the agent.
 
 ## Creating a PR
 
-Click **Create PR** and PostHog Code runs the whole sequence in order:
+Click **Create PR** and PostHog Desktop runs the whole sequence in order:
 
 1. Creates a new branch if you're still on main
 2. Generates a commit message (if you left it blank)
@@ -56,7 +56,7 @@ Tick **Draft** in the create-PR dialog to open the PR in draft state.
 
 ### Auto-generated messages and PR bodies
 
-When you leave the commit message, PR title, or PR body empty, PostHog Code fills them in for you based on:
+When you leave the commit message, PR title, or PR body empty, PostHog Desktop fills them in for you based on:
 
 - The actual diff of your changes
 - Your repo's commit conventions, e.g. conventional commits if detected
@@ -68,7 +68,7 @@ You can always edit the generated text before submitting.
 
 ## Cloud tasks
 
-When a cloud task opens a PR, PostHog Code auto-detects the URL from the agent's output and attaches it to the task. The PR status appears in the task header with the same action menu as a local PR, plus a **Continue locally** button to hand the branch off to your machine.
+When a cloud task opens a PR, PostHog Desktop auto-detects the URL from the agent's output and attaches it to the task. The PR status appears in the task header with the same action menu as a local PR, plus a **Continue locally** button to hand the branch off to your machine.
 
 ## Troubleshooting
 
@@ -82,8 +82,8 @@ Auto-generated commit messages, PR titles, and PR bodies require network access.
 
 ### PR template is not used
 
-PostHog Code looks for templates in standard GitHub locations like `.github/PULL_REQUEST_TEMPLATE.md`. Templates in non-standard paths won't be picked up.
+PostHog Desktop looks for templates in standard GitHub locations like `.github/PULL_REQUEST_TEMPLATE.md`. Templates in non-standard paths won't be picked up.
 
 ### Cloud task did not link its PR
 
-PostHog Code extracts the link from the PR URL in the agent's tool output. If the agent opened the PR through a path that hides the URL, the link may not be attached automatically, but the PR still exists on GitHub.
+PostHog Desktop extracts the link from the PR URL in the agent's tool output. If the agent opened the PR through a path that hides the URL, the link may not be attached automatically, but the PR still exists on GitHub.
