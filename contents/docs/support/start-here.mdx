@@ -12,7 +12,7 @@ import { IconChat, IconAtSign, IconMessage, IconGithub, IconMagic } from '@posth
 
 <QuestLogItem title="Enable Support and add the widget" subtitle="Where tickets begin" icon="IconToggle">
 
-The first step is to enable Support and drop the in-app widget onto your site, so customer conversations start arriving as tickets. Every widget ticket automatically carries the sender's session replay, events, and identity, so you always have the full story.
+The first step is to enable Support and add the in-app widget to your site, so customer conversations start arriving as tickets. Every widget ticket automatically attaches the sender's [session replay](/session-replay), [events](/docs/product-analytics/capture-events), and [identity](/docs/product-analytics/identify), so you always have the full story.
 
 Building your own interface instead? The [JavaScript API](/docs/support/javascript-api) gives you the same backend without the default widget.
 
@@ -94,18 +94,18 @@ Let rules handle the repetitive parts. [Workflows](/docs/support/workflows) are 
 Support isn't just an inbox – it's a signal source. Recurring issues in your conversations become [Self-driving](/docs/self-driving) reports, and when there's a code fix, a pull request you review and merge. Answering customers still happens in the Support inbox; you review these fixes in the Self-driving inbox.
 
 <div className="not-prose flex flex-wrap items-center gap-x-3 gap-y-2 my-4">
-  <span className="flex items-center gap-1.5 text-sm font-semibold text-primary">
-    <IconMessage className="size-5 shrink-0 text-red" />
+  <span className="flex items-center gap-1.5 text-sm text-secondary">
+    <IconMessage className="size-5 shrink-0" />
     Tickets
   </span>
-  <span className="text-secondary" aria-hidden="true">→</span>
-  <span className="flex items-center gap-1.5 text-sm font-semibold text-primary">
-    <IconMagic className="size-5 shrink-0 text-purple" />
+  <span className="text-muted" aria-hidden="true">→</span>
+  <span className="flex items-center gap-1.5 text-sm text-secondary">
+    <IconMagic className="size-5 shrink-0" />
     Self-driving report
   </span>
-  <span className="text-secondary" aria-hidden="true">→</span>
-  <span className="flex items-center gap-1.5 text-sm font-semibold text-primary">
-    <IconGithub className="size-5 shrink-0 text-primary" />
+  <span className="text-muted" aria-hidden="true">→</span>
+  <span className="flex items-center gap-1.5 text-sm text-secondary">
+    <IconGithub className="size-5 shrink-0" />
     Pull request
   </span>
 </div>
