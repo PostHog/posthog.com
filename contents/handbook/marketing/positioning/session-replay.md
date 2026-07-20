@@ -4,6 +4,8 @@ sidebar: Handbook
 showTitle: true
 ---
 
+*For the canonical frame everyone at PostHog uses – the self-driving story and standard description – see [Brand foundations](/handbook/brand/foundations#how-we-describe-posthog).*
+
 ## Elevator pitch
 
 PostHog Session Replay records every user session across web and mobile. From any analytics insight, jump to the sessions behind it. From any error in Error Tracking, watch exactly what the user was doing when it happened. From any rage click pattern, let PostHog Code Inbox research and open a fix PR.

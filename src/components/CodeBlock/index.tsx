@@ -12,7 +12,7 @@ import { layoutLogic } from 'logic/layoutLogic'
 import Mermaid from 'components/Mermaid'
 import Tooltip from 'components/Tooltip'
 import usePostHog from 'hooks/usePostHog'
-import { useApp } from '../../context/App'
+import { useAppSettings, useAppActions } from '../../context/App'
 import { useWindow } from '../../context/Window'
 import { IconArrowUpRight, IconSparkles } from '@posthog/icons'
 import { useLocation } from '@reach/router'
@@ -193,7 +193,8 @@ export const CodeBlock = ({
     }
 
     const codeBlockId = generateRandomHtmlId()
-    const { siteSettings, openNewChat } = useApp()
+    const { siteSettings } = useAppSettings()
+    const { openNewChat } = useAppActions()
     const { appWindow } = useWindow()
     const location = useLocation()
     const [tooltipVisible, setTooltipVisible] = React.useState(false)
@@ -496,7 +497,7 @@ export const CodeBlock = ({
                                     }`}
                                 >
                                     <ScrollArea>
-                                        <div className="flex whitespace-pre min-w-fit relative pb-2" id={languageId}>
+                                        <div className="flex whitespace-pre min-w-fit relative" id={languageId}>
                                             {showLineNumbers && (
                                                 <pre className="m-0 py-4 pr-3 pl-5 inline-block font-code font-medium text-sm bg-accent">
                                                     <span
@@ -577,7 +578,14 @@ export const CodeBlock = ({
                                                     ) {
                                                         return
                                                     }
-                                                    const { className, ...props } = getLineProps({ line, key: i })
+                                                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                                                    const {
+                                                        key: _lineKey,
+                                                        className,
+                                                        ...props
+                                                    } = getLineProps({
+                                                        line,
+                                                    }) as any
                                                     const tooltipContent =
                                                         tooltips?.find(
                                                             (tooltip) => tooltip.lineNumber === i + lineNumberStart
@@ -621,11 +629,13 @@ export const CodeBlock = ({
                                                                     (token) => !token.content.startsWith(tooltipKey)
                                                                 )
                                                                 .map((token, key) => {
-                                                                    const { className, children, ...props } =
-                                                                        getTokenProps({
-                                                                            token,
-                                                                            key,
-                                                                        })
+                                                                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                                                                    const {
+                                                                        key: _tokenKey,
+                                                                        className,
+                                                                        children,
+                                                                        ...props
+                                                                    } = getTokenProps({ token }) as any
                                                                     return (
                                                                         <span className="relative" key={key}>
                                                                             {firstContentIndex === key &&

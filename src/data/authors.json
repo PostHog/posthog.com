@@ -685,11 +685,11 @@
     },
     {
         "handle": "rohit-rajpal",
-        "name": "Rohit Rajpal ",
+        "name": "Rohit Rajpal",
         "role": "Freelance Technical Writer",
         "link_type": "github",
-        "link_url": "https://github.com/ioannisj",
-        "profile_id": 31730
+        "link_url": "https://github.com/rajpalrohit04",
+        "profile_id": 46025
     },
     {
         "handle": "nyior-clement",
@@ -698,5 +698,37 @@
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/nyior/",
         "profile_id": 46202
+    },
+    {
+        "handle": "temitope-oyedele",
+        "name": "Temitope Oyedele",
+        "role": "Freelance Technical Writer",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/temitope-oyedele-57b772163/",
+        "profile_id": 46527
+    },
+    {
+        "handle": "tanaaz-khan",
+        "name": "Tanaaz Khan",
+        "role": "Freelance Technical Writer",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/tanaaz-khan/",
+        "profile_id": 46489
+    },
+    {
+        "handle": "chosen-vincent",
+        "name": "Chosen Vincent",
+        "role": "Freelance Technical Writer",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/chosenvincent1/",
+        "profile_id": 46591
+    },
+    {
+        "handle": "oyedele-tioluwani",
+        "name": "Oyedele Tioluwani",
+        "role": "Freelance Technical Writer",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/oyedele-tioluwani-ba5a65247/",
+        "profile_id": 46686
     }
 ]

@@ -276,7 +276,7 @@ You can display your survey to specific users based on:
 
 -   **Selector matches:** Whether a specific element exists or appears on the page with the specified class name or ID. For example, you can display a survey with `#my-button` or `.my-button` selector. This is useful for showing a survey after a user action.
 
--   **Wait period**: Hide surveys from users who have seen any survey in the last X days. A user who completes a survey are never shown the same survey again, even if no wait period is set ([but there are exceptions to this rule](#repeating-surveys)).
+-   **Wait period**: Hide surveys from users who have seen any survey in the last X days. A user who completes a survey is never shown the same survey again, even if no wait period is set ([but there are exceptions to this rule](#repeating-surveys)).
 
 -   **Person and group properties:** If you are capturing identified events, you can display a survey to users who have specific [person](/docs/product-analytics/person-properties) or [group properties](/docs/product-analytics/group-analytics#how-to-set-group-properties). For example, you can target a survey to users who have a property `is_paying=true`. This also includes a percentage rollout option. The person and group properties are evaluated with internal feature flags.
 
@@ -310,16 +310,18 @@ If you want to trigger a survey on a specific event, but only show it once per u
     classes="rounded"
 />
 
-### Complete conditions
+### Completion conditions
 
-Under complete conditions, there's two options that can be configured so the survey is shown again:
+Under completion conditions, there are two scheduling options that make a survey show again after a user has already answered or dismissed it:
 
 -   `Repeat on a schedule`
 -   `Every time the display conditions are met`
 
 #### Repeat on a schedule
 
-You can also configure in-app surveys to repeat at specific intervals, which is useful for gathering feedback from users on a regular basis.
+Repeating on a schedule is useful for collecting feedback from the same users on a regular basis, like a quarterly NPS survey or a monthly satisfaction check-in. You configure it with two values: how many times to show the survey, and how many days each cycle lasts. For example, **show up to `3` times total, once every `30` days**.
+
+In the guided survey creation flow, this is the "How often should this survey show?" step: picking **Every month**, **Every 3 months**, or **Every year** sets the cycle length to 30, 90, or 365 days, and "Show up to N times in total" sets the number of repetitions. The full editor lets you set a custom number of days.
 
 <ProductScreenshot
     imageLight={repeatingSurveyLight}
@@ -328,24 +330,29 @@ You can also configure in-app surveys to repeat at specific intervals, which is 
     classes="rounded"
 />
 
-For example, you can configure settings like:
+When you launch the survey, PostHog splits its lifetime into back-to-back windows called **iterations**, counted from the survey's launch date. In the example above, that's 3 iterations of 30 days each. Every user shares the same iteration calendar:
 
--   **Repeat this survey `3` times, once every `30` days**: The survey will be shown to a user up to 3 times total, with a 30-day gap between each showing.
+- Within an iteration, eligible users keep seeing the survey until they submit or dismiss it. After that, they aren't shown it again during that iteration.
+- When the next iteration starts, everyone becomes eligible again, including users who responded in the previous one. Each user can respond at most once per iteration.
 
-| Date          | Event                                  | Explanation                                                               |
-| ------------- | -------------------------------------- | ------------------------------------------------------------------------- |
-| Jan 1         | Survey shown and completed             | First showing of the survey. User completes it, starting the 30-day timer |
-| Jan 2-30      | No survey shown                        | Within 30-day waiting period after first completion                       |
-| Jan 31        | Survey becomes eligible                | 30 days have passed since first completion                                |
-| Feb 15        | Survey shown and completed             | User visits site and completes survey for the second time                 |
-| Feb 16-Mar 16 | No survey shown                        | Within 30-day waiting period after second completion                      |
-| Mar 17        | Survey becomes eligible                | 30 days have passed since second completion                               |
-| Apr 1         | Survey shown and completed             | User completes survey for the third and final time                        |
-| After Apr 1   | Survey never shown again for this user | Maximum number of repetitions (3) reached                                 |
+For example, a survey launched on January 1st, set to show up to 3 times, once every 30 days:
 
-A survey is considered "shown" when a user either completes or dismisses it. The repeat interval timer starts from that moment. For example, if you set a survey to repeat every 90 days and a user completes it on January 1st, they won't see it again until April 1st, regardless of how many times they visit your site in between.
+| Iteration | Window (approximate) | What happens                                                                                 |
+| --------- | -------------------- | -------------------------------------------------------------------------------------------- |
+| 1         | Jan 1 to Jan 30      | All targeted users are eligible. Once a user submits or dismisses, they're done for this iteration |
+| 2         | Jan 31 to Mar 1      | Everyone becomes eligible again, including users who responded in iteration 1                 |
+| 3         | Mar 2 to Mar 31      | Everyone becomes eligible again. This is the last iteration                                   |
 
-> **Note:** Users must still match any display conditions you've set each time the survey becomes eligible to show again.
+Each response includes the `$survey_iteration` and `$survey_iteration_start_date` properties, so you can filter or break down results by iteration. This is handy for tracking how scores change over time, like comparing this quarter's NPS to last quarter's.
+
+A few things to keep in mind:
+
+- **The schedule is anchored to the survey's launch date, not to each user's last response.** All users move to the next iteration at the same time. This means the gap an individual user experiences between showings can be much shorter than the repeat interval: a user who responds near the end of an iteration becomes eligible again as soon as the next one starts. In the example above, a user who responds on January 29 can see the survey again on January 31, just two days later.
+- **Dismissing counts as answering.** A user who dismisses the survey won't see it again until the next iteration, same as a user who submitted a response.
+- **Iteration boundaries are approximate.** PostHog processes iteration changes a few times per day, so a new iteration can begin a few hours after its scheduled start.
+- **Users must still match your display conditions** each time the survey becomes eligible to show again.
+
+If you want per-user spacing instead, like "don't show this user a survey more than once every 30 days, no matter the calendar," use [Every time the display conditions are met](#every-time-the-display-conditions-are-met) combined with the **Wait period** display condition. Note that the wait period applies across all your surveys: it hides the survey from users who have seen _any_ survey within that period, not just this one.
 
 #### Every time the display conditions are met
 
@@ -353,7 +360,7 @@ For this option, the survey is shown again every time the display conditions are
 
 The main use case for this is for `Feedback button` surveys. This enables the survey to show up every time the user clicks the feedback button.
 
-This can also be combined with the `Wait time` option. If you select this option and set a `Wait time` of 30 days, the survey is only shown again if they haven't seen any surveys in the last 30 days. This is useful for getting regular feature feedback or asking about an error.
+This can also be combined with the **Wait period** display condition. If you select this option and set a wait period of 30 days, the survey is only shown again if the user hasn't seen any surveys in the last 30 days. This is useful for getting regular feature feedback on a per-user cadence.
 
 ## Launching your survey
 

@@ -4,6 +4,7 @@ platformLogo: nuxt
 ---
 
 import DetailSetUpReverseProxy from "../integrate/_snippets/details/set-up-reverse-proxy.mdx"
+import TracingHeaders from "../_snippets/tracing-headers.mdx"
 import DetailGroupProductsInOneProject from "../integrate/_snippets/details/group-products-in-one-project.mdx"
 import DetailPostHogIPs from "../integrate/_snippets/details/posthog-ips.mdx"
 
@@ -32,6 +33,8 @@ PostHog can then be accessed throughout your Nuxt.js using the provider accessor
 See the [JavaScript SDK docs](/docs/libraries/js/features) for all usable functions, such as:
 - [Capture custom event capture, identify users, and more.](/docs/libraries/js/features#capturing-events)
 - [Feature flags including variants and payloads.](/docs/libraries/js/features#feature-flags)
+
+<TracingHeaders />
 
 <DetailSetUpReverseProxy />
 
