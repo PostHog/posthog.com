@@ -791,6 +791,7 @@ function MeepNotification({ className = 'my-10 flex justify-center px-4 @xl:px-8
                 }}
             >
                 <Modal
+                    title="meep.mov"
                     maxWidth={900}
                     autoHeight
                     trigger={
