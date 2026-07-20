@@ -7,7 +7,7 @@ import CLIDownload from "../_snippets/cli/download.mdx"
 import CLIAuthenticate from "../_snippets/cli/authenticate.mdx"
 import StepVerifySymbolSetsUpload from "../_snippets/StepVerifySymbolSetsUpload"
 
-The [Rust SDK](/docs/error-tracking/installation/rust) resolves stack traces in-process, so captured exceptions include function names, file names, and line numbers without any uploads. Uploading debug symbols improves on that: PostHog symbolicates frames server-side from the exact build that crashed, resolves inlined frames, and can display the source code around each frame.
+The [Rust SDK](/docs/error-tracking/installation/rust) resolves stack traces in-process from whatever debug info the running binary carries — which works well in development, but release builds omit that debug info by default. Uploading debug symbols gives you fully resolved production stack traces: PostHog symbolicates frames server-side from the exact build that crashed, resolves inlined frames, and can display the source code around each frame.
 
 <CalloutBox icon="IconInfo" title="Version requirements" type="action">
 

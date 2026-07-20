@@ -26,7 +26,7 @@ posthog-rs = { version = "*", default-features = false, features = ["error-track
 
 <CalloutBox icon="IconInfo" title="Debug symbol uploads" type="fyi">
 
-The Rust SDK resolves stack traces in-process, so captured frames include file names, line numbers, and function names without any symbol uploads. For server-side symbolication of your exact production build, inlined frame resolution, and source context (the surrounding lines of code in the error tracking UI), [upload debug symbols](/docs/error-tracking/upload-source-maps/rust).
+The Rust SDK resolves stack traces in-process, so when the running binary carries debug info (as development builds do), captured frames include file names, line numbers, and function names without any symbol uploads. For resolved stack traces from release builds — which omit debug info by default — plus inlined frame resolution and source context (the surrounding lines of code in the error tracking UI), [upload debug symbols](/docs/error-tracking/upload-source-maps/rust).
 
 </CalloutBox>
 
