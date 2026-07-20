@@ -98,14 +98,17 @@ This bundles the project source files referenced by the debug info into the uplo
 In CI, authenticate with environment variables instead of `posthog-cli login`. For GitHub Actions:
 
 ```yaml
-- name: Build and upload debug symbols
-  run: |
-    cargo build --release
-    posthog-cli symbol-sets upload --directory target/release
+- name: Build release binary
+  run: cargo build --release
+
+- name: Upload debug symbols
+  run: posthog-cli symbol-sets upload --directory target/release
   env:
     POSTHOG_CLI_API_KEY: ${{ secrets.POSTHOG_CLI_API_KEY }}
     POSTHOG_CLI_PROJECT_ID: ${{ secrets.POSTHOG_CLI_PROJECT_ID }}
 ```
+
+Scope the credentials to the upload step only — the build itself doesn't need them.
 
 The CLI defaults to US Cloud. If you are on EU Cloud or self-hosted, also set `POSTHOG_CLI_HOST` (for example `https://eu.posthog.com`).
 
