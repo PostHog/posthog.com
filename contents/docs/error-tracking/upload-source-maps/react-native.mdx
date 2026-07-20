@@ -110,7 +110,7 @@ The plugin accepts the following options:
 | Option | Type | Default | Description |
 | --- | --- | --- | --- |
 | `disableSandboxing` | `boolean` | `true` | iOS only. When `true`, sets `ENABLE_USER_SCRIPT_SANDBOXING=NO` on your main app target's Xcode build configurations during `expo prebuild`. This lets the source map upload script read `.git/` (for release metadata) and lets stock Expo projects build without manually declaring input/output files on every script phase. |
-| `skipOnConflict` | `boolean` | `false` | Adds `--skip-on-conflict` to JavaScript source map uploads on iOS and Android. Use this when the same build can upload the same source maps more than once and you want duplicate uploads to be skipped instead of failing. Requires `posthog-react-native` 4.49.1 or later. |
+| `skipOnConflict` | `boolean` | `false` | Adds `--skip-on-conflict` to JavaScript source map uploads on iOS and Android. Use this when the same build can upload the same source maps more than once and you want duplicate uploads to be skipped instead of failing. Requires `posthog-react-native` 4.49.1 or later. When `uploadNativeSymbols` is enabled, it also applies to native iOS dSYM uploads: a build whose dSYM already exists in PostHog with different content skips the upload and keeps the existing symbols instead of failing. The dSYM behavior requires `posthog-react-native` 4.56.1 or later, `posthog-ios` 3.64.7 or later, and `posthog-cli` 0.7.12 or later. |
 
 Example opting out of the sandbox change:
 

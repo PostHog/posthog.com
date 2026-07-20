@@ -75,7 +75,7 @@ export function useProductOSNavigation() {
         const children = Array.isArray(products) ? buildNavigationItems(productOSStructure, products) : []
 
         return {
-            name: 'Product OS',
+            name: 'Context warehouse',
             url: '/products',
             children,
         }
@@ -91,7 +91,7 @@ export function useProductOSNavigation() {
 
 // Static navigation for server-side rendering
 export const productOSNav = {
-    name: 'Product OS',
+    name: 'Context warehouse',
     url: '/products',
     children: [
         // { name: 'Utilities & add-ons' },

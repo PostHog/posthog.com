@@ -123,7 +123,7 @@ Analyze hundreds of session recordings in minutes instead of hours. Session summ
 An agent development environment that solves the messy workflow problem of engineering with coding agents. Each task gets its own isolated workspace where an agent works — you can guide the agent, review changes, and switch between workspaces, with everything related to a task in one place instead of across your terminal, editor, and GitHub.
 
 **Best for**: Product engineers who work on multiple tasks simultaneously and already use agents heavily
-**Status**: Beta | **Pricing**: TBD
+**Status**: Beta | **Pricing**: Usage-based (AI credits, no markup) with free tier
 
 [Learn more →](/handbook/engineering/ai/products#posthog-code)
 

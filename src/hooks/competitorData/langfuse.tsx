@@ -26,6 +26,7 @@ export const langfuse = {
                 session_replay: false,
                 product_analytics: false,
                 feature_flags: false,
+                ai_gateway_proxy: false,
             },
 tracing: {
     features: {
@@ -52,7 +53,7 @@ prompt_management: {
         prompt_labels: true,
         prompt_playground: true,
         composable_prompts: true,
-        mcp_server_for_prompts: false,
+        mcp_server_for_prompts: true,
         ab_test_prompt_versions: false,
     },
 },
@@ -106,13 +107,10 @@ costs: {
             available: false,
         },
     },
-    platform: {
+        platform: {
         deployment: {
-            available: true,
-            features: {
-                eu_hosting: true,
-                open_source: true,
-            },
+            eu_hosting: true,
+            open_source: true,
         },
     },
 }
