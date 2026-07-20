@@ -1,12 +1,15 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
-import { IconRocket, IconClock, IconX } from '@posthog/icons'
+import { IconRocket, IconFlask, IconLightBulb, IconX, IconCopy, IconCheck, IconTrending } from '@posthog/icons'
+import Link from 'components/Link'
 import Input from 'components/OSForm/input'
 import OSButton from 'components/OSButton'
 import { Select } from 'components/RadixUI/Select'
+import Tooltip from 'components/RadixUI/Tooltip'
 import EarlyAccessOptIn from 'components/EarlyAccessOptIn'
 import SmallTeam from 'components/SmallTeam'
 import SurveySignup from 'components/SurveySignup'
+import usePostHog from 'hooks/usePostHog'
 import { useFeatureOwnership } from 'hooks/useFeatureOwnership'
 import useEarlyAccessFeatures, { EarlyAccessFeature } from 'hooks/useEarlyAccessFeatures'
 import { ROADMAP_TEAM_OVERRIDES } from './roadmapTeamOverrides'
@@ -27,34 +30,103 @@ const FROSTED_CARD =
 const FROSTED_TOOLBAR =
     'bg-primary/80 backdrop-blur-md shadow-sm reduce-transparency:!bg-primary reduce-transparency:backdrop-blur-none'
 
-// Features created within this window are flagged "New" (and lead the "Newest" sort).
-const NEW_WINDOW_MS = 30 * 24 * 60 * 60 * 1000
+// Features created within this window are flagged "New", glow, and lead their section.
+const NEW_WINDOW_MS = 40 * 24 * 60 * 60 * 1000
+// How many of the most-signed-up features get the "Popular" chip.
+const POPULAR_TOP_N = 10
 
-type StageFilter = 'all' | 'beta' | 'coming-soon'
+// The "Roadmap concept pitches" survey (project 2) behind the pitch-a-concept card.
+const PITCH_SURVEY_ID = '019f8008-6dfe-0000-696a-515c59643b03'
+const PITCH_QUESTION_ID = 'd257defb-d875-42fd-8cb6-80845c2bb26f'
+const PITCH_EMAIL_QUESTION_ID = '794db2f2-7ed4-4cf2-a8a3-d27df1b85530'
+
+type StageFilter = 'all' | 'beta' | 'alpha' | 'concept'
 type SortKey = 'featured' | 'newest' | 'az' | 'team'
 
-// Coming-soon covers both concept and alpha stages; a small chip tells them apart on the card
-// without splitting the section. Beta cards live in their own section, so no chip is needed.
-const STAGE_LABELS: Record<string, string> = { concept: 'Concept', alpha: 'Alpha' }
-
-const StageChip = ({ stage }: { stage: string }): JSX.Element | null => {
-    const label = STAGE_LABELS[stage]
-    if (!label) {
-        return null
-    }
-    return (
-        <span className="shrink-0 bg-accent border border-primary rounded-full px-2 py-0.5 text-xs font-semibold text-secondary">
-            {label}
-        </span>
-    )
+const STAGE_FILTER_LABELS: Record<Exclude<StageFilter, 'all'>, string> = {
+    beta: 'In beta',
+    alpha: 'In alpha',
+    concept: 'Concepts',
 }
 
-// Emphasised chip for recently added features — colour-forward so it stands out from the stage chip.
+// Emphasised chip for recently added features.
 const NewChip = (): JSX.Element => (
     <span className="shrink-0 bg-accent border border-primary rounded-full px-2 py-0.5 text-xs font-semibold text-red dark:text-yellow">
         New
     </span>
 )
+
+// Chip for the top-N features by waitlist signups.
+const PopularChip = (): JSX.Element => (
+    <span className="shrink-0 inline-flex items-center gap-0.5 bg-accent border border-primary rounded-full px-2 py-0.5 text-xs font-semibold text-red dark:text-yellow">
+        <IconTrending className="size-3" />
+        Popular
+    </span>
+)
+
+// Discrete copy-link button — cards are addressable at /roadmap#flag-key, so every card is a
+// shareable artifact. Hidden until the card is hovered; flips to a check on copy.
+const CopyLinkButton = ({ flagKey }: { flagKey: string }): JSX.Element => {
+    const [copied, setCopied] = useState(false)
+    const copy = () => {
+        const url = `${window.location.origin}/roadmap#${flagKey}`
+        navigator.clipboard?.writeText(url).then(() => {
+            setCopied(true)
+            setTimeout(() => setCopied(false), 2000)
+        })
+    }
+    return (
+        <button
+            type="button"
+            onClick={copy}
+            aria-label={copied ? 'Link copied' : 'Copy link to this feature'}
+            className="shrink-0 text-muted hover:text-primary opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-opacity"
+        >
+            {copied ? <IconCheck className="size-4 text-green" /> : <IconCopy className="size-4" />}
+        </button>
+    )
+}
+
+type TeamPerson = { name: string; role?: string; avatar?: string }
+
+// The humans behind the card — overlapping avatars for the owning team's members.
+const TeamFaces = ({ people }: { people: TeamPerson[] }): JSX.Element | null => {
+    const withAvatars = people.filter((p) => p.avatar)
+    if (withAvatars.length === 0) {
+        return null
+    }
+    const shown = withAvatars.slice(0, 4)
+    const extra = withAvatars.length - shown.length
+    return (
+        <span className="inline-flex items-center">
+            {shown.map((person, index) => (
+                <Tooltip
+                    key={person.name}
+                    delay={0}
+                    trigger={
+                        <img
+                            src={person.avatar}
+                            alt={person.name}
+                            className={`size-6 rounded-full border border-primary bg-accent object-cover ${
+                                index > 0 ? '-ml-1.5' : ''
+                            }`}
+                        />
+                    }
+                >
+                    <span className="text-sm px-1">
+                        <strong>{person.name}</strong>
+                        {person.role ? <span className="text-secondary"> – {person.role}</span> : null}
+                    </span>
+                </Tooltip>
+            ))}
+            {extra > 0 && (
+                <span className="-ml-1.5 size-6 rounded-full border border-primary bg-accent text-[10px] font-semibold text-secondary inline-flex items-center justify-center">
+                    +{extra}
+                </span>
+            )}
+        </span>
+    )
+}
 
 // A removable pill summarising one active filter, so the current view is visible and resettable.
 const FilterChip = ({ label, onRemove }: { label: string; onRemove: () => void }): JSX.Element => (
@@ -117,27 +189,33 @@ const FeatureCard = ({
     feature,
     teamSlug,
     badge,
+    people,
+    effectClassName = '',
     children,
 }: {
     feature: EarlyAccessFeature
     teamSlug?: string
     badge?: React.ReactNode
+    people?: TeamPerson[]
+    effectClassName?: string
     children?: React.ReactNode
 }): JSX.Element => (
     <div
         data-scheme="secondary"
         id={feature.flagKey}
-        className={`@container ${FROSTED_CARD} border border-primary rounded-lg p-3 flex flex-col gap-1.5 h-full scroll-mt-24 transition-colors hover:border-secondary target:border-red dark:target:border-yellow`}
+        className={`group @container ${FROSTED_CARD} border border-primary rounded-lg p-3 flex flex-col gap-1.5 h-full scroll-mt-24 transition-all hover:border-secondary target:border-red dark:target:border-yellow ${effectClassName}`}
     >
-        {/* The owning team's crest anchors the card visually and reinforces the team filter. */}
-        {teamSlug && (
-            <div className="mb-0.5">
-                <SmallTeam slug={teamSlug} />
+        {/* The owning team's crest and members anchor the card visually. */}
+        {(teamSlug || people?.length) && (
+            <div className="mb-0.5 flex items-center justify-between gap-2">
+                {teamSlug ? <SmallTeam slug={teamSlug} /> : <span />}
+                {people && <TeamFaces people={people} />}
             </div>
         )}
         <div className="flex items-start gap-2">
             <h3 className="text-base @md:text-lg m-0 leading-tight flex-1">{feature.name}</h3>
             {badge}
+            <CopyLinkButton flagKey={feature.flagKey} />
         </div>
         {feature.description && <ClampedDescription text={feature.description} />}
         {feature.documentationUrl && (
@@ -157,12 +235,16 @@ const BetaCard = ({
     feature,
     teamSlug,
     badge,
+    people,
+    effectClassName,
 }: {
     feature: EarlyAccessFeature
     teamSlug?: string
     badge?: React.ReactNode
+    people?: TeamPerson[]
+    effectClassName?: string
 }): JSX.Element => (
-    <FeatureCard feature={feature} teamSlug={teamSlug} badge={badge}>
+    <FeatureCard feature={feature} teamSlug={teamSlug} badge={badge} people={people} effectClassName={effectClassName}>
         <EarlyAccessOptIn
             to={featurePreviewUrl(feature.flagKey)}
             state="request_access"
@@ -178,10 +260,14 @@ const ComingSoonCard = ({
     feature,
     teamSlug,
     badge,
+    people,
+    effectClassName,
 }: {
     feature: EarlyAccessFeature
     teamSlug?: string
     badge?: React.ReactNode
+    people?: TeamPerson[]
+    effectClassName?: string
 }): JSX.Element => {
     const [showForm, setShowForm] = useState(false)
     const surveyId = feature.payload?.survey_id as string | undefined
@@ -189,29 +275,131 @@ const ComingSoonCard = ({
 
     // Without a linked survey there's nowhere to record the sign-up, so show info only.
     if (!surveyId) {
-        return <FeatureCard feature={feature} teamSlug={teamSlug} badge={badge} />
+        return (
+            <FeatureCard
+                feature={feature}
+                teamSlug={teamSlug}
+                badge={badge}
+                people={people}
+                effectClassName={effectClassName}
+            />
+        )
     }
 
+    // Alphas are about getting into testing, concepts about hearing when it ships — the CTA
+    // copy follows suit. Both record to the feature's linked waitlist survey either way.
+    const isAlpha = feature.stage === 'alpha'
     return (
-        <FeatureCard feature={feature} teamSlug={teamSlug} badge={badge}>
+        <FeatureCard
+            feature={feature}
+            teamSlug={teamSlug}
+            badge={badge}
+            people={people}
+            effectClassName={effectClassName}
+        >
             {showForm ? (
                 <SurveySignup
                     surveyId={surveyId}
                     surveyQuestionId={surveyQuestionId}
                     // Only concept-stage joins fire the $feature_enrollment_update event —
-                    // alpha items also live in "coming soon" but aren't waitlist enrollments.
+                    // alpha waitlists aren't concept enrollments.
                     flagKey={feature.stage === 'concept' ? feature.flagKey : undefined}
                     productName={feature.name}
                     autoFocus
-                    confetti={false}
-                    buttonLabel="Notify me at launch"
+                    buttonLabel={isAlpha ? 'Join the waitlist' : 'Notify me at launch'}
                 />
             ) : (
                 <OSButton variant="secondary" size="md" width="full" onClick={() => setShowForm(true)}>
-                    Get notified at launch
+                    {isAlpha ? 'Join the waitlist' : 'Get notified at launch'}
                 </OSButton>
             )}
         </FeatureCard>
+    )
+}
+
+// The intake card at the end of the Concept grid — the roadmap collects ideas, it doesn't
+// just broadcast them. Pitches land as responses on the "Roadmap concept pitches" survey.
+const PitchConceptCard = (): JSX.Element => {
+    const posthog = usePostHog()
+    const [open, setOpen] = useState(false)
+    const [idea, setIdea] = useState('')
+    const [email, setEmail] = useState('')
+    const [submitted, setSubmitted] = useState(false)
+
+    const submit = (e: React.FormEvent) => {
+        e.preventDefault()
+        if (!idea.trim()) {
+            return
+        }
+        posthog?.capture('survey sent', {
+            $survey_id: PITCH_SURVEY_ID,
+            $survey_response: idea.trim(),
+            [`$survey_response_${PITCH_QUESTION_ID}`]: idea.trim(),
+            ...(email.trim() ? { [`$survey_response_${PITCH_EMAIL_QUESTION_ID}`]: email.trim() } : {}),
+        })
+        setSubmitted(true)
+    }
+
+    if (submitted) {
+        return (
+            <div
+                data-scheme="secondary"
+                className={`@container ${FROSTED_CARD} border border-green rounded-lg p-3 flex flex-col justify-center gap-1 h-full`}
+            >
+                <p className="m-0 font-bold flex items-center gap-1">
+                    <IconCheck className="size-5 text-green shrink-0" /> Pitch received
+                </p>
+                <p className="m-0 text-sm text-secondary">
+                    The team reads every one. If it's good, you'll see it on this page.
+                </p>
+            </div>
+        )
+    }
+
+    if (!open) {
+        return (
+            <button
+                type="button"
+                onClick={() => setOpen(true)}
+                className={`@container ${FROSTED_CARD} border border-dashed border-primary rounded-lg p-3 flex flex-col items-start justify-center gap-1 h-full min-h-32 text-left transition-colors hover:border-secondary cursor-pointer`}
+            >
+                <span className="text-base @md:text-lg font-bold leading-tight">What should we build? →</span>
+                <span className="text-sm text-secondary">Pitch us a concept. The best ideas end up on this page.</span>
+            </button>
+        )
+    }
+
+    return (
+        <form
+            onSubmit={submit}
+            data-scheme="secondary"
+            className={`@container ${FROSTED_CARD} border border-primary rounded-lg p-3 flex flex-col gap-2 h-full`}
+        >
+            <h3 className="text-base @md:text-lg m-0 leading-tight">What should we build?</h3>
+            <textarea
+                autoFocus
+                required
+                value={idea}
+                onChange={(e) => setIdea(e.target.value)}
+                placeholder="Pitch your idea…"
+                rows={3}
+                className="w-full rounded border border-input bg-primary p-2 text-sm text-primary placeholder:text-muted focus:border-input-hover focus:outline-none resize-y"
+            />
+            <Input
+                label="Email (optional)"
+                showLabel={false}
+                size="md"
+                type="email"
+                placeholder="Email (optional)"
+                value={email}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+            />
+            <div className="mt-auto pt-1">
+                <OSButton type="submit" variant="primary" size="md" width="full">
+                    Pitch it
+                </OSButton>
+            </div>
+        </form>
     )
 }
 
@@ -249,8 +437,9 @@ const bySignupAvailability = (a: EarlyAccessFeature, b: EarlyAccessFeature): num
 /**
  * The roadmap's Early Access Feature sections. Data is sourced at build time (SEO-friendly,
  * renders instantly) and revalidated client-side via posthog-js — see useEarlyAccessFeatures.
- *  - Betas — live now; each card deep-links to its toggle in the app's feature previews.
- *  - Coming soon — collect an email via each feature's linked waitlist survey.
+ *  - Beta — live now; each card deep-links to its toggle in the app's feature previews.
+ *  - Alpha — in closed testing; collect an email via each feature's linked waitlist survey.
+ *  - Concept — coming soon; same waitlist mechanic as alpha.
  * Cards show the owning small team crest (via the feature-ownership map) when we can match one,
  * flag recently added features ("New"), are addressable (/roadmap#flag-key), and highlight when
  * targeted. Search + stage + team filters and a sort control (with a sticky bar) keep a long list
@@ -269,24 +458,46 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
     const [mounted, setMounted] = useState(false)
     useEffect(() => setMounted(true), [])
 
-    // Small-team display names, keyed by slug (mirrors SmallTeam's query) — used for the team
-    // filter labels. Build-time / SSR-safe.
+    // Small-team display names and members, keyed by slug (mirrors SmallTeam's query) — used
+    // for the team filter labels and the per-card member avatars. Build-time / SSR-safe.
     const { allSqueakTeam } = useStaticQuery(graphql`
         {
             allSqueakTeam {
                 nodes {
                     slug
                     name
+                    profiles {
+                        data {
+                            attributes {
+                                firstName
+                                lastName
+                                companyRole
+                                avatar {
+                                    data {
+                                        attributes {
+                                            url
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
     `)
-    const teamNameBySlug = useMemo(() => {
-        const map: Record<string, string> = {}
-        allSqueakTeam.nodes.forEach((node: { slug: string; name: string }) => {
-            map[node.slug] = node.name
+    const { teamNameBySlug, peopleByTeamSlug } = useMemo(() => {
+        const names: Record<string, string> = {}
+        const people: Record<string, TeamPerson[]> = {}
+        allSqueakTeam.nodes.forEach((node: any) => {
+            names[node.slug] = node.name
+            people[node.slug] = (node.profiles?.data || []).map((profile: any) => ({
+                name: [profile.attributes?.firstName, profile.attributes?.lastName].filter(Boolean).join(' '),
+                role: profile.attributes?.companyRole || undefined,
+                avatar: profile.attributes?.avatar?.data?.attributes?.url || undefined,
+            }))
         })
-        return map
+        return { teamNameBySlug: names, peopleByTeamSlug: people }
     }, [allSqueakTeam])
 
     // Owning team per feature slug, from the hand-maintained feature-ownership map. We match
@@ -307,8 +518,9 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
         teamByFeatureSlug[slugify(feature.name)]
 
     const totalBeta = grouped.beta.length
-    const totalComing = grouped.comingSoon.length
-    const total = totalBeta + totalComing
+    const totalAlpha = grouped.comingSoon.filter((f) => f.stage === 'alpha').length
+    const totalConcept = grouped.comingSoon.filter((f) => f.stage === 'concept').length
+    const total = totalBeta + totalAlpha + totalConcept
     const hasFeatures = total > 0
 
     // Team filter options: every owning team present in the data (with counts), plus "All teams"
@@ -375,9 +587,16 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
     }
     const matches = (f: EarlyAccessFeature) => matchesSearch(f) && matchesTeam(f)
 
+    // Recently created features get a "New" chip and glow, and lead their section under the
+    // default sort (mounted-gated: newness compares against the current time, which would
+    // mismatch the build-time HTML during hydration).
+    const now = Date.now()
+    const isNew = (f: EarlyAccessFeature): boolean =>
+        mounted && typeof f.createdAt === 'number' && now - f.createdAt < NEW_WINDOW_MS
+
     // Unassigned features sort last under "By team" (￿ sorts after any real name).
     const teamLabelFor = (f: EarlyAccessFeature): string => teamNameBySlug[teamForFeature(f) ?? ''] ?? '￿'
-    const sortFeatures = (list: EarlyAccessFeature[], isComing: boolean): EarlyAccessFeature[] => {
+    const sortFeatures = (list: EarlyAccessFeature[], hasWaitlists: boolean): EarlyAccessFeature[] => {
         const arr = [...list]
         switch (sortBy) {
             case 'az':
@@ -389,23 +608,46 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
             case 'newest':
                 return arr.sort((a, b) => (b.createdAt ?? 0) - (a.createdAt ?? 0))
             default:
-                // "Featured": coming-soon leads with joinable items; beta keeps its natural order.
-                return isComing ? arr.sort(bySignupAvailability) : arr
+                // "Featured": New items lead their section, then waitlist sections surface
+                // joinable items; beta otherwise keeps its natural order.
+                return arr.sort(
+                    (a, b) => Number(isNew(b)) - Number(isNew(a)) || (hasWaitlists ? bySignupAvailability(a, b) : 0)
+                )
         }
     }
     const beta = sortFeatures(grouped.beta.filter(matches), false)
-    const comingSoon = sortFeatures(grouped.comingSoon.filter(matches), true)
+    const alpha = sortFeatures(grouped.comingSoon.filter((f) => f.stage === 'alpha').filter(matches), true)
+    const concept = sortFeatures(grouped.comingSoon.filter((f) => f.stage === 'concept').filter(matches), true)
 
-    // Recently created features (createdAt within NEW_WINDOW_MS) get a "New" chip alongside any stage chip.
-    const now = Date.now()
-    const isNew = (f: EarlyAccessFeature): boolean =>
-        mounted && typeof f.createdAt === 'number' && now - f.createdAt < NEW_WINDOW_MS
+    // Top-N features by waitlist signups get a "Popular" chip. Counts are aggregated at build
+    // time (gatsby/sourceNodes.ts); with no counts available the set is empty and nothing shows.
+    const popularFlagKeys = useMemo(() => {
+        const ranked = [...grouped.beta, ...grouped.comingSoon]
+            .filter((f) => typeof f.waitlistCount === 'number' && f.waitlistCount > 0)
+            .sort((a, b) => (b.waitlistCount ?? 0) - (a.waitlistCount ?? 0))
+            .slice(0, POPULAR_TOP_N)
+        return new Set(ranked.map((f) => f.flagKey))
+    }, [grouped])
+    const isPopular = (f: EarlyAccessFeature): boolean => popularFlagKeys.has(f.flagKey)
+
     const badgeFor = (f: EarlyAccessFeature): React.ReactNode => (
         <>
             {isNew(f) && <NewChip />}
-            <StageChip stage={f.stage} />
+            {isPopular(f) && <PopularChip />}
         </>
     )
+    // New = a soft glow; Popular = a firmer ring. New wins over Popular so freshly added
+    // crowd-pleasers don't stack two rings.
+    const effectFor = (f: EarlyAccessFeature): string =>
+        isNew(f)
+            ? 'ring-1 ring-red/40 dark:ring-yellow/40'
+            : isPopular(f)
+            ? 'ring-1 ring-red/25 dark:ring-yellow/25'
+            : ''
+    const peopleFor = (f: EarlyAccessFeature): TeamPerson[] | undefined => {
+        const slug = teamForFeature(f)
+        return slug ? peopleByTeamSlug[slug] : undefined
+    }
 
     const anyDated = grouped.beta.some((f) => f.createdAt) || grouped.comingSoon.some((f) => f.createdAt)
     const sortItems = [
@@ -424,16 +666,23 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
     }
 
     const showBeta = (stageFilter === 'all' || stageFilter === 'beta') && beta.length > 0
-    const showComing = (stageFilter === 'all' || stageFilter === 'coming-soon') && comingSoon.length > 0
-    const shownCount = (showBeta ? beta.length : 0) + (showComing ? comingSoon.length : 0)
+    const showAlpha = (stageFilter === 'all' || stageFilter === 'alpha') && alpha.length > 0
+    const showConcept = (stageFilter === 'all' || stageFilter === 'concept') && concept.length > 0
+    const shownCount =
+        (showBeta ? beta.length : 0) + (showAlpha ? alpha.length : 0) + (showConcept ? concept.length : 0)
     const showControls = total > CONTROLS_THRESHOLD
 
     return (
         <div className="@container">
-            {/* Stage ladder so visitors understand what "in beta" vs "coming soon" means. */}
+            {/* Stage ladder so visitors understand the concept → alpha → beta progression. */}
             <p className="text-secondary text-sm mt-0 mb-4">
-                Every feature moves through stages – concept and alpha are early ideas, beta is ready to try, and then
-                it reaches general availability.
+                Every feature climbs the same ladder: concepts are ideas we've committed to, alphas are being tested
+                with closed groups, and betas are ready for anyone to try. When something ships for real, it lands in
+                the{' '}
+                <Link to="/changelog" state={{ newWindow: true }} className="underline">
+                    changelog
+                </Link>
+                .
             </p>
 
             {showControls && (
@@ -468,15 +717,23 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
                                 onClick={() => setStageFilter('beta')}
                                 label={String(totalBeta)}
                             >
-                                In beta
+                                Beta
                             </OSButton>
                             <OSButton
                                 size="md"
-                                active={stageFilter === 'coming-soon'}
-                                onClick={() => setStageFilter('coming-soon')}
-                                label={String(totalComing)}
+                                active={stageFilter === 'alpha'}
+                                onClick={() => setStageFilter('alpha')}
+                                label={String(totalAlpha)}
                             >
-                                Coming soon
+                                Alpha
+                            </OSButton>
+                            <OSButton
+                                size="md"
+                                active={stageFilter === 'concept'}
+                                onClick={() => setStageFilter('concept')}
+                                label={String(totalConcept)}
+                            >
+                                Concept
                             </OSButton>
                         </div>
                         <Select
@@ -505,7 +762,7 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
                             {query.trim() && <FilterChip label={`“${query.trim()}”`} onRemove={() => setQuery('')} />}
                             {stageFilter !== 'all' && (
                                 <FilterChip
-                                    label={stageFilter === 'beta' ? 'In beta' : 'Coming soon'}
+                                    label={STAGE_FILTER_LABELS[stageFilter]}
                                     onRemove={() => setStageFilter('all')}
                                 />
                             )}
@@ -524,9 +781,9 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
                 <section className="mb-10">
                     <SectionHeader
                         icon={<IconRocket className="size-6 text-red dark:text-yellow" />}
-                        title="In beta – try it now"
+                        title="Beta – try it now"
                         count={beta.length}
-                        description="These are live. Each card links straight to its toggle in your PostHog account – flip it on and go."
+                        description="Live in PostHog today. Each card links straight to its toggle in your account – flip it on and go."
                     />
                     <Grid>
                         {beta.map((feature) => (
@@ -535,34 +792,62 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
                                 feature={feature}
                                 teamSlug={teamForFeature(feature)}
                                 badge={badgeFor(feature)}
+                                people={peopleFor(feature)}
+                                effectClassName={effectFor(feature)}
                             />
                         ))}
                     </Grid>
                 </section>
             )}
 
-            {showComing && (
+            {showAlpha && (
                 <section className="mb-10">
                     <SectionHeader
-                        icon={<IconClock className="size-6 text-red dark:text-yellow" />}
-                        title="Coming soon"
-                        count={comingSoon.length}
-                        description="Join a waitlist and we'll email you the moment it launches."
+                        icon={<IconFlask className="size-6 text-red dark:text-yellow" />}
+                        title="Alpha – in closed testing"
+                        count={alpha.length}
+                        description="We're testing these with small groups while we work out the rough edges. Join a waitlist and we'll let you know when testing opens up."
                     />
                     <Grid>
-                        {comingSoon.map((feature) => (
+                        {alpha.map((feature) => (
                             <ComingSoonCard
                                 key={feature.flagKey}
                                 feature={feature}
                                 teamSlug={teamForFeature(feature)}
                                 badge={badgeFor(feature)}
+                                people={peopleFor(feature)}
+                                effectClassName={effectFor(feature)}
                             />
                         ))}
                     </Grid>
                 </section>
             )}
 
-            {!showBeta && !showComing && (
+            {showConcept && (
+                <section className="mb-10">
+                    <SectionHeader
+                        icon={<IconLightBulb className="size-6 text-red dark:text-yellow" />}
+                        title="Concept – coming soon"
+                        count={concept.length}
+                        description="What we're building next. Join a waitlist and we'll email you when it's ready."
+                    />
+                    <Grid>
+                        {concept.map((feature) => (
+                            <ComingSoonCard
+                                key={feature.flagKey}
+                                feature={feature}
+                                teamSlug={teamForFeature(feature)}
+                                badge={badgeFor(feature)}
+                                people={peopleFor(feature)}
+                                effectClassName={effectFor(feature)}
+                            />
+                        ))}
+                        {!q && <PitchConceptCard />}
+                    </Grid>
+                </section>
+            )}
+
+            {!showBeta && !showAlpha && !showConcept && (
                 <div className="flex flex-col items-center gap-2 py-8 text-center">
                     <img
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/detective_hog_9b2bb1da51.png"

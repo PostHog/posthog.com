@@ -144,6 +144,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       documentationUrl: String,
       flagKey: String,
       featureId: String,
+      waitlistCount: Int,
       payload: JSON,
     }
     type Plugin implements Node {

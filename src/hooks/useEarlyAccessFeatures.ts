@@ -13,6 +13,11 @@ export interface EarlyAccessFeature {
     /** Epoch ms the feature was created, derived from its UUIDv7 id. Undefined if unavailable. */
     createdAt?: number
     /**
+     * Signups on the linked waitlist survey, aggregated at build time (needs a personal API
+     * key — see gatsby/sourceNodes.ts). Null/undefined when unknown.
+     */
+    waitlistCount?: number | null
+    /**
      * Arbitrary JSON set on the Early Access Feature in PostHog and served by the public
      * EAF endpoint. For Coming Soon items this carries the linked waitlist survey:
      * `{ survey_id, survey_question_id }`. (posthog-js doesn't type `payload` yet, but it
@@ -95,6 +100,7 @@ export function useEarlyAccessFeatures(options: UseEarlyAccessFeaturesOptions = 
                     documentationUrl
                     flagKey
                     featureId
+                    waitlistCount
                     payload
                 }
             }
@@ -133,8 +139,19 @@ export function useEarlyAccessFeatures(options: UseEarlyAccessFeaturesOptions = 
                 setLoading(false)
             }
             // The public EAF result carries a UUIDv7 `id` at runtime; derive createdAt from it.
+            // waitlistCount only exists on the build-time nodes (it needs a personal API key),
+            // so carry it over from the static data by flag key or the ranking vanishes on
+            // revalidation.
+            const staticCountByFlagKey: Record<string, number | null | undefined> = {}
+            staticFeatures.forEach((f) => {
+                staticCountByFlagKey[f.flagKey] = f.waitlistCount
+            })
             const withCreatedAt = (features: EarlyAccessFeature[]): EarlyAccessFeature[] =>
-                features.map((feature) => ({ ...feature, createdAt: createdAtFromId((feature as { id?: string }).id) }))
+                features.map((feature) => ({
+                    ...feature,
+                    createdAt: createdAtFromId((feature as { id?: string }).id),
+                    waitlistCount: staticCountByFlagKey[feature.flagKey] ?? null,
+                }))
             if (typeof posthog.getSurveys !== 'function') {
                 finish(withCreatedAt(result))
                 return

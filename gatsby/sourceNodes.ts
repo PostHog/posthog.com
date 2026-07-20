@@ -1397,14 +1397,49 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     // matching the survey's linked_flag_key to the feature's flagKey, so the roadmap can
     // collect sign-ups without any backend coupling. The page still revalidates
     // client-side via posthog-js for freshness.
+    // Waitlist signups per survey, for the roadmap's "Popular" ranking. Aggregating survey
+    // responses needs a personal API key (query:read scope) — the public project token can't.
+    // Fails soft: without the key (or on any error) no counts attach and the ranking is hidden.
+    const fetchWaitlistCounts = async (): Promise<Record<string, number>> => {
+        const personalKey = process.env.POSTHOG_ROADMAP_API_KEY
+        if (!personalKey) return {}
+        try {
+            const res = await fetch('https://us.posthog.com/api/projects/2/query/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${personalKey}` },
+                body: JSON.stringify({
+                    query: {
+                        kind: 'HogQLQuery',
+                        query: "SELECT properties.$survey_id AS survey_id, count() AS signups FROM events WHERE event = 'survey sent' AND timestamp >= now() - INTERVAL 24 MONTH GROUP BY survey_id",
+                    },
+                }),
+            })
+            if (!res.ok) {
+                console.warn(`Failed to fetch waitlist counts: HTTP ${res.status}`)
+                return {}
+            }
+            const { results } = await res.json()
+            if (!Array.isArray(results)) return {}
+            const counts: Record<string, number> = {}
+            results.forEach(([surveyId, signups]: [string, number]) => {
+                if (surveyId) counts[surveyId] = signups
+            })
+            return counts
+        } catch (error) {
+            console.warn('Failed to fetch waitlist counts:', error)
+            return {}
+        }
+    }
+
     const sourceEarlyAccessFeatures = async () => {
         const token = process.env.GATSBY_POSTHOG_API_KEY
         if (!token) return
         try {
             const host = process.env.GATSBY_POSTHOG_API_HOST || 'https://us.i.posthog.com'
-            const [featuresRes, surveysRes] = await Promise.all([
+            const [featuresRes, surveysRes, waitlistCounts] = await Promise.all([
                 fetch(`${host}/api/early_access_features/?token=${token}&stage=concept&stage=alpha&stage=beta`),
                 fetch(`${host}/api/surveys/?token=${token}`),
+                fetchWaitlistCounts(),
             ])
             if (!featuresRes.ok) {
                 console.warn(`Failed to fetch early access features: HTTP ${featuresRes.status}`)
@@ -1454,6 +1489,9 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                         // The EAF id is a UUIDv7; the roadmap derives a "created" date from it
                         // (see useEarlyAccessFeatures) to flag/sort recently added features.
                         featureId: feature.id,
+                        // Signups on the linked waitlist survey — null when unknown (no personal
+                        // API key at build time, or no linked survey).
+                        waitlistCount: payload.survey_id != null ? waitlistCounts[payload.survey_id] ?? null : null,
                         payload,
                     })
                 })

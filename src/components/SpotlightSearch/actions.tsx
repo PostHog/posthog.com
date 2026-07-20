@@ -15,10 +15,12 @@ import {
     IconStar,
     IconX,
 } from '@posthog/icons'
+import { navigate } from 'gatsby'
 import { useApp, SiteSettings } from '../../context/App'
 import { useToast } from '../../context/Toast'
 import { themeOptions } from '../../hooks/useTheme'
 import { useHedgehogMode } from 'components/HedgehogMode'
+import useEarlyAccessFeatures from 'hooks/useEarlyAccessFeatures'
 
 export type SpotlightAction = {
     id: string
@@ -40,6 +42,10 @@ export type SpotlightAction = {
  * dance mode (a TapePlayer-internal window, no route), the hedgehog generator
  * (opened via addWindow from MediaLibrary, no route), and enterprise/theo
  * modes (Layout context, which isn't an ancestor of the overlay).
+ *
+ * Roadmap Early Access Features ARE here despite being navigations: they're
+ * live API data, not pages, so Algolia never indexes them — search genuinely
+ * can't find them any other way. Each deep-links to its card (/roadmap#flag).
  */
 export const useSpotlightActions = (): SpotlightAction[] => {
     const {
@@ -54,6 +60,17 @@ export const useSpotlightActions = (): SpotlightAction[] => {
     const [hedgehogModeEnabled, setHedgehogModeEnabled] = useHedgehogMode()
 
     const darkMode = siteSettings.theme === 'dark'
+
+    // Roadmap features, searchable by name/flag key. Seeded from build-time nodes, so these
+    // resolve instantly; posthog-js revalidation keeps them current without a rebuild.
+    const { features: roadmapFeatures } = useEarlyAccessFeatures()
+    const roadmapActions: SpotlightAction[] = roadmapFeatures.map((feature) => ({
+        id: `roadmap-${feature.flagKey}`,
+        label: `Roadmap: ${feature.name}`,
+        icon: <IconRocket />,
+        keywords: [feature.name.toLowerCase(), feature.flagKey.replace(/-/g, ' '), 'roadmap'],
+        perform: () => navigate(`/roadmap#${feature.flagKey}`, { state: { newWindow: true } }),
+    }))
 
     const toast = (icon: React.ReactNode, message: string) =>
         addToast({
@@ -228,5 +245,6 @@ export const useSpotlightActions = (): SpotlightAction[] => {
             keywords: ['confetti', 'party', 'celebrate'],
             perform: () => setConfetti(true),
         },
+        ...roadmapActions,
     ]
 }

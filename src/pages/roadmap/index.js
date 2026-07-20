@@ -28,8 +28,8 @@ const RoadmapPage = () => {
                     />
                     <h1>Roadmap</h1>
                     <p className="text-secondary max-w-2xl">
-                        Here's what we're building. Betas are ready to enable today, and anything coming soon has a
-                        waitlist – drop your email and we'll let you know the moment it ships.
+                        Here's what we're building. Betas are ready to enable today. Alphas and concepts have waitlists
+                        – drop your email and we'll let you know the moment they're ready.
                     </p>
                     <EarlyAccessFeaturesSection />
                 </div>
