@@ -20,17 +20,20 @@ seo:
     metaDescription: "A context warehouse is a data warehouse wired directly into the tools and agents that act on it, so no data has to move from one tool to another to be useful."
 ---
 
-A context warehouse is a data warehouse wired directly into the tools and agents that act on it: analytics, experiments, feature flags, the SQL editor, and now AI agents; so no data has to move from one tool to another to be useful. Data warehouses store data, a context warehouse stores data, business context, and is natively integrated with everything else in your stack.
+A context warehouse is where you store all of your business context and product data so that it is directly available to agents that want to reference and use that data as context. This may seem similar to a data warehouse, but here's the key difference:
 
-This blog is the technical case for why it's a different category, not a rebrand of "data warehouse."
+- A data warehouse is a structured repository of data from multiple sources, optimized for analytics and business intelligence (BI)
+- A context warehouse is a structured repository of data from multiple sources, optimized _for agents_
+
+For PostHog, this isn't down to a smarter semantic layer bolted on top, plenty of data warehouses have one of those. It's that product data, business context, and your agents already live in the same place, so there's no data movement required to make it useful. That shared context is what lets your agents help build and refine the semantic layer because they're already working from everything else in your stack.
 
 ## Why "data warehouse" stopped being the right word
 
 A data warehouse's job is simple: store structured data, let you query it. In a data warehouse, your data doesn't need to know what a "customer" is, what a feature flag is, or what an experiment variant is. Making that data mean something to your product requires separate tools, and the pipelines to wire them all together.
 
-That gap didn't matter much when a warehouse's main consumer was a data engineer whose job it is to connect and understand data. But it matters a lot now that the consumer is an agent trying to decide what to fix next. An agent working the [self-driving product](https://posthog.com/blog/self-driving-product) loop needs product signals (errors, funnel drops, slow sessions) and business context (revenue, plan tier, support history) in the same place it can query directly.
+That gap didn't matter much when a warehouse's main consumers were data engineers and data analysts whose job it is to connect and understand data. But it matters a lot now that the consumer is an agent trying to decide what to fix next. An agent working the [self-driving product](/blog/self-driving-product) loop needs product signals (errors, funnel drops, slow sessions) and business context (revenue, plan tier, support history) in the same place it can query directly.
 
-A warehouse that only holds half of that picture is a warehouse for BI. A context warehouse holds both your external data and the context of how users interact with your product, natively.
+A warehouse that only holds half of that picture is a warehouse for BI; built for someone running a scheduled report, not something deciding what to fix next. A context warehouse holds both your external data and the context of how users interact with your product, natively: in the same place, under the same query interface, that every other tool in your stack already uses. That's not just more data in the same box, it's a different warehouse for a different consumer: AI agents.
 
 ## Data warehouse vs. context warehouse
 
@@ -39,55 +42,56 @@ The difference isn't the storage engine, it's what's allowed to touch the data w
 |  | Data Warehouse | Context Warehouse |
 | :---- | :---- | :---- |
 | **What data is included?** | Whatever you pipe in, on tables you define | Product events (already there) + data you pipe in |
-| **What can query it without extra glue?** | Nothing, until you build a BI or reverse-ETL layer | Analytics, Experiments, Feature Flags, the SQL editor, PostHog AI, and MCP-connected agents |
+| **What can query it without extra glue?** | Your data warehouse's query engine and AI agent | Analytics, Experiments, Feature Flags, the SQL editor, PostHog AI, and MCP-connected agents |
 | **Who owns it?** | A dedicated data team | Product engineers, with or without a data team |
 | **It's for you if you need…** | Scale and governance for structured data | The full context layer your product and your agents run on |
 
-## How it works
-
-<!-- TODO: insert diagram image (source doc: "How it works" overview diagram) before merging -->
-
-### Get all your data in
-
-Your context warehouse starts with data that's already there. PostHog mirrors all your product event data to S3, partitioned by organization, as it's captured. Add to this: [Warehouse Sources](https://posthog.com/data-stack/sources). 200+ integrations that sync external systems including Stripe, HubSpot, Salesforce, Postgres, and more.
-
-### Store your data
-
-Under the hood, we store all your data in our [Managed Warehouse](https://posthog.com/data-stack/managed-warehouse). It's a single-tenant DuckDB instance per organization sitting on an S3 data lake that you have full access and ownership over your data through.
-
-The main ingredients:
-
-| Storage | S3, partitioned per organization. Product events land here automatically; Warehouse Sources syncs external systems into the same bucket. |
-| :---- | :---- |
-| Catalog | DuckLake, which separates storage from compute. Your data lives in S3 independent of whatever's querying it – today that's DuckDB, but the catalog doesn't lock the warehouse into any single engine staying right forever. |
-| Compute | A fully single-tenant DuckDB instance per organization. Nobody's long-running query competes with anyone else's. |
-| Isolation | Each DuckDB instance runs in its own Firecracker MicroVM, the same technology AWS uses for Lambda. Fast to boot, properly isolated, resource-contained. |
-| Lifecycle | A lifecycle service sleeps instances when idle and wakes them when a query arrives, in roughly 300ms. You're billed for use, not idle time. |
-| Orchestration | A Kubernetes operator manages the CRDs defining each organization's warehouse, with a proxy and queue layer routing queries and handling the handshake with the lifecycle service. |
-| Access | A Postgres wire protocol endpoint. Connect with psql, point a BI tool at it, or wire it into an agent over MCP – no proprietary connector to build against. |
-| Local iteration | DuckHog, a DuckDB extension that lets local compute pull subsets of warehouse data into pandas, polars, or DuckDB itself, iterate quickly, and write results back. For an agent that wants fast local loops instead of round-tripping every query to the cluster, this is the better pattern. |
-
-<!-- TODO: insert diagram image (source doc: DuckHog / local iteration diagram) before merging -->
-
-### Agents read your data and drive development
-
-None of this matters to an agent unless the agent can actually query it. PostHog exposes the context warehouse over [MCP](https://posthog.com/mcp), [PostHog Web](https://posthog.com/self-driving), [Slack](https://posthog.com/slack), or [PostHog Desktop](https://posthog.com/code). An agent working the [self-driving product](https://posthog.com/blog/self-driving-product) loop reads product events and business context through the identical interface a human would use in the SQL editor.
-
-That's what makes this a context warehouse rather than a data warehouse with an AI feature bolted on: the context an agent needs to make a good decision is already there, and it can use it to drive development autonomously or answer your questions.
-
-## Who this is for (and who it isn't, yet)
+## Who a context warehouse is for (and who it isn't, yet)
 
 **It's a good fit if:**
 
+* You're AI-pilled and ship an increasing amount of work through agents and loops, or want to build self-driving software.
 * You haven't built a data stack yet and don't want to spend months doing it before you get a queryable answer.
 * You're an engineer-led team tired of maintaining ETL pipelines that exist purely to keep two systems in sync.
 * You're already using PostHog for analytics and want your business data sitting next to your product data instead of in a separate tool.
 
 **It's not the right fit, yet, if:**
 
-* You need petabyte-scale with hundreds of concurrent analysts. One day we will get there, but if you need it now you probably have a data team primed to build a traditional stack.
 * You run a data org with mature dbt pipelines and advanced modeling needs we don't match yet.
 * You want a warehouse and nothing else. The integrated platform is the point, if that's not what you're looking for, a standalone warehouse might be a better fit.
+
+## How our context warehouse works at PostHog
+
+<!-- TODO: insert diagram image (source doc: "How it works" overview diagram) before merging -->
+
+### Get all your data in
+
+Your context warehouse starts with data that's already there. Once enabled, PostHog mirrors your product event data to S3, partitioned by organization, as it's captured with no pipeline to build.
+
+Everything else comes in through [Warehouse Sources](/data-stack/sources): 200+ integrations that sync external systems including Stripe, HubSpot, Salesforce, Postgres, and more. Connecting each source is no-code and takes under two minutes, or even more hands-off with the PostHog Wizard. Compare that to an ETL pipeline: writing and maintaining extraction jobs, hosting them somewhere, wiring up a destination, and debugging it every time a schema changes upstream. Warehouse Sources allows you to skip all of that.
+
+### Store your data
+
+Under the hood, we store all your data in our [Managed Warehouse](/data-stack/managed-warehouse). It's a multi-tenant DuckDB instance per organization sitting on an S3 data lake that you have full access and ownership over your data through.
+
+The main ingredients:
+
+* **Storage:** S3, partitioned per organization. Once enabled, product events land here automatically; Warehouse Sources syncs external systems into the same bucket.
+* **Catalog:** DuckLake, which separates storage from compute. Your data lives in S3 independent of whatever's querying it – today that's DuckDB, but the catalog doesn't lock the warehouse into any single engine staying right forever.
+* **Compute:** A fully multi-tenant DuckDB instance per organization. Nobody's long-running query competes with anyone else's.
+* **Isolation:** Each DuckDB instance runs in its own Firecracker MicroVM, the same technology AWS uses for Lambda. Fast to boot, properly isolated, resource-contained.
+* **Lifecycle:** A lifecycle service sleeps instances when idle and wakes them when a query arrives, in roughly 300ms. You're billed when a worker is running, and they automatically shut down when idle after 60s.
+* **Orchestration:** A Kubernetes operator manages the Custom Resource Definitions (CRDs) defining each organization's warehouse, with a proxy and queue layer routing queries and handling the handshake with the lifecycle service.
+* **Access:** A Postgres wire protocol endpoint. Connect with psql, point a BI tool at it, or wire it into an agent over MCP – no proprietary connector to build against.
+* **Local iteration:** DuckHog, a DuckDB extension that lets local compute pull subsets of warehouse data into pandas, polars, or DuckDB itself, iterate quickly, and write results back. For an agent that wants fast local loops instead of round-tripping every query to the cluster, this is the better pattern.
+
+<!-- TODO: insert diagram image (source doc: DuckHog / local iteration diagram) before merging -->
+
+### Agents read your data and drive development
+
+None of this matters to an agent unless the agent can actually query it. PostHog exposes the context warehouse over [MCP](/mcp), [PostHog Web](/self-driving), [Slack](/slack), or [PostHog Code](/code). An agent working the [self-driving product](/blog/self-driving-product) loop reads product events and business context through the identical interface a human would use in the SQL editor.
+
+That's what makes this a context warehouse rather than a data warehouse with an AI feature bolted on: the context an agent needs to make a good decision is already there, and it can use it to drive development autonomously or answer your questions.
 
 ## What's in the pipeline
 
@@ -95,9 +99,10 @@ The context warehouse today is deliberately not a full data stack: land your eve
 
 | Direction | What it means |
 | :---- | :---- |
-| Deeper Modeling | Closing the gap with dbt-style transformation maturity for teams with more advanced modeling needs. |
-| More sources | Expanding Warehouse Sources coverage so fewer teams need a custom sync to get their systems in. |
-| More of the loop exposed to agents | As the self-driving product loop matures, more of what an agent can see in the context warehouse becomes something it can act on directly, not just read. |
+| Making our Managed Warehouse Generally Available | Right now, we're in a closed beta that will be open very soon, you can get on the waitlist and be the first to hear about it here. |
+| Deeper modeling | Closing the gap with dbt-style transformation maturity for teams with more advanced modeling needs. |
+| More sources | Expanding [Warehouse Sources](/data-stack/sources) coverage so fewer teams need a custom sync to get their systems in. |
+| More of the loop exposed to agents | As the [self-driving product](/blog/self-driving-product) loop matures, more of what an agent can see in the context warehouse becomes something it can act on directly, not just read. |
 
 ## Try it yourself
 
