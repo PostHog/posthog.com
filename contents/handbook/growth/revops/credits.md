@@ -20,7 +20,7 @@ Sometimes we might want to offer a customer one time credits to cover an upcomin
     - Bug Credit
     - Other
   - Add any internal notes for context in Notes section.
-  - Include a link to a related Slack message, Zendesk ticket, or internal discussion in reference link field
+  - Include a link to a related Slack message, PostHog Support ticket, or internal discussion in reference link field
 - Click Save and the credit will automatically be added to the customer’s balance in Stripe and applied to their next invoice.
 
 ## Things to keep in mind
