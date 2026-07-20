@@ -106,7 +106,7 @@ export default function PostHogAI(): JSX.Element {
         }
     `)
 
-    // Configure slides with custom ProductOS Benefits slide
+    // Configure slides with custom "Context warehouse benefits" slide
     const slides = createSlideConfig({
         exclude: [
             'customers',

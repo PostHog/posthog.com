@@ -55,7 +55,11 @@ Use the error details in the toast notification to diagnose and fix the issue in
 
 ## Why is my BigQuery sync failing with credential errors?
 
-If your BigQuery sync fails with a message like "Your BigQuery service account credentials were rejected by Google," it means Google's token endpoint rejected the service account grant. This is a non-retryable error – PostHog stops the sync instead of retrying indefinitely.
+BigQuery credential errors can occur during initial setup or after the source has been running. PostHog provides specific, actionable messages for different credential issues:
+
+### "Your BigQuery service account credentials were rejected by Google"
+
+This means Google's token endpoint rejected the service account grant. This is a non-retryable error – PostHog stops the sync instead of retrying indefinitely.
 
 This happens when:
 
@@ -68,6 +72,24 @@ To fix this:
 2. In PostHog, go to [**Data pipelines > Sources**](https://app.posthog.com/data-management/sources) and select your BigQuery source.
 3. Upload the new Google Cloud JSON key file.
 4. Re-run the sync.
+
+### "Your Google Cloud JSON key file is missing required fields"
+
+This means the uploaded key file is incomplete. The JSON key file must include `project_id`, `private_key`, `private_key_id`, `client_email`, and `token_uri`.
+
+Download the complete service account key from Google Cloud and re-upload it.
+
+### "We couldn't read the private key in your Google Cloud JSON key file"
+
+This means the private key in your JSON file is corrupted or truncated. This can happen if the file was partially copied or modified.
+
+Download a fresh service account key from Google Cloud and re-upload the complete JSON file.
+
+### "BigQuery denied access to the configured dataset or tables"
+
+This means your service account lacks read permissions. Ensure it has at least the **BigQuery Data Viewer** role on the dataset you're syncing.
+
+For the full list of required permissions, see the [BigQuery source setup guide](/docs/cdp/sources/bigquery).
 
 ## Why is my BigQuery source failing with 'Dataset not found'?
 
@@ -153,6 +175,18 @@ To fix this:
 
 1. Log into your [Shopify admin](https://admin.shopify.com/) and settle any outstanding balance to unfreeze your store.
 2. Once your store is active again, re-run the sync from [**Data pipelines > Sources**](https://app.posthog.com/data-management/sources) in PostHog.
+
+## Why is my Google Sheets sync failing with "collapse to the same column name"?
+
+This error occurs when two column headers in your Google Sheet look different but normalize to the same column name. PostHog ignores case, spaces, and punctuation when converting headers to column names — so headers like `Task ID` and `task_id` both become `task_id`.
+
+The error message names the two colliding headers and the column name they collapse to. This is a non-retryable error – PostHog stops the sync instead of retrying indefinitely because renaming the header is the only fix.
+
+To fix this:
+
+1. Open your Google Sheet and find the column headers mentioned in the error message.
+2. Rename one of the colliding headers so that it stays unique after normalization (case, spaces, and punctuation are ignored).
+3. Re-run the sync from [**Data pipelines > Sources**](https://app.posthog.com/data-management/sources) in PostHog.
 
 ## How do I speed up my SQL queries?
 

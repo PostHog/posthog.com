@@ -41,6 +41,16 @@ tableOfContents: [
         depth: 1,
     },
     {
+        url: 'capture-server-side-request-errors',
+        value: 'Capture server-side request errors',
+        depth: 1,
+    },
+    {
+        url: 'configure-advanced-options',
+        value: 'Configure advanced options',
+        depth: 1,
+    },
+    {
         url: 'further-reading',
         value: 'Further reading',
         depth: 1,
@@ -74,11 +84,12 @@ import PagesServerSetup from "./_snippets/posthog-next-pages-server-setup.mdx"
 
 `@posthog/next` is a unified package for integrating PostHog into your Next.js app. It provides a simplified interface that handles common patterns out of the box:
 
-- **Synchronized identity across client and server**, so both sides share the same user automatically
+- **Synchronized analytics identity across client and server**, so both sides share the same user automatically
+- **Trusted server-side identity resolution** from your authentication session for server events and feature flag evaluations
 - **Server-side feature flag bootstrapping** so hooks return real values immediately with no flicker
 - **Eager client initialization** ensures PostHog is always available when your components render
 - **Built-in API proxy** that routes SDK traffic through your domain to avoid ad blockers
-- **Automatic event flushing** with no manual `shutdown()` or `flush()` calls needed
+- **Automatic browser exception capture and event flushing** with no manual `shutdown()` or `flush()` calls needed
 
 This guide covers both the App Router and Pages Router. You'll need a PostHog instance ([Cloud](https://app.posthog.com/signup) or [self-hosted](/docs/self-host)) and a Next.js 13.0.0+ application.
 
@@ -238,6 +249,8 @@ export function LoginButton() {
 
 See our guide on [identifying users](/docs/getting-started/identify-users) for more details.
 
+For server-side events and feature flag evaluations, PostHog can use the client-provided identity cookie and tracing headers to link analytics across the request. These values come from the client. When you need a strict guarantee that analytics uses the identity from your authenticated session, provide an authoritative distinct ID directly when capturing an event or evaluating feature flags, or configure `getDistinctId` in `createPostHog()` to resolve it from your server session by default.
+
 </Step>
 
 <Step title="Use PostHog on the server" badge="recommended">
@@ -257,13 +270,31 @@ See our guide on [identifying users](/docs/getting-started/identify-users) for m
     </Tab.Panels>
 </Tab.Group>
 
+> **Note:** Avoid capturing page views or other navigation events while rendering a Server Component or running `getServerSideProps`. Rendering doesn't prove that a navigation completed. The App Router can execute render code while [prefetching](https://nextjs.org/docs/app/guides/prefetching), and Next.js can retry renders. Use `PostHogPageView` for page views, and capture server-side events from handlers invoked for the action you want to measure.
+>
+> Dynamic rendering keeps personalized flag decisions out of Next.js's shared Full Route Cache. The App Router can still reuse a React Server Component payload from its client Router Cache. After an authentication or identity change, use [`router.refresh()`](https://nextjs.org/docs/app/api-reference/functions/use-router#userouter) when the current route's server-rendered flag decisions must be evaluated again.
+
+</Step>
+
+<Step title="Capture server-side request errors" badge="recommended">
+
+`@posthog/next` enables automatic browser exception capture by default. On Next.js 15 and later, capture server-side request errors by exporting `onRequestError` from your root `instrumentation.ts` file:
+
+```ts file=instrumentation.ts
+export { onRequestError } from '@posthog/next'
+```
+
+Next.js calls this hook when a Server Component, Route Handler, or Server Action throws during a request. When available, the PostHog identity cookie links the exception to the same user and session. Import this hook from `@posthog/next` for both App Router and Pages Router applications.
+
+Use `createOnRequestError()` when you need to add properties, filter errors, or customize the server client. You can disable automatic browser exception capture with `clientOptions={{ capture_exceptions: false }}`.
+
 </Step>
 
 <Step title="Configure advanced options" badge="optional">
 
-### Feature flag bootstrap
+### Bootstrap feature flags
 
-Set `bootstrapFlags` to evaluate feature flags on the server and pass the results to the client, which avoids flag flicker on first render:
+In the App Router, set `bootstrapFlags` to evaluate feature flags on the server and pass the results to the client, which avoids flag flicker on first render:
 
 ```tsx
 <PostHogProvider bootstrapFlags>{children}</PostHogProvider>
@@ -286,7 +317,17 @@ You can also limit the flags evaluated and provide properties used for evaluatio
 </PostHogProvider>
 ```
 
-Enabling `bootstrapFlags` calls `cookies()` internally, which opts the route into dynamic rendering.
+Enabling `bootstrapFlags` calls `cookies()` internally, which opts every page route rendered through that provider into dynamic rendering. If the provider is in your root layout, this includes every page in your app. To preserve static rendering elsewhere, enable `bootstrapFlags` in the narrowest layout that needs server-evaluated flags. In the Pages Router, evaluate feature flags inside `getServerSideProps` and pass the result through `clientOptions.bootstrap` as shown in the server setup above.
+
+### Tracing headers
+
+`@posthog/next` adds `X-POSTHOG-DISTINCT-ID` and `X-POSTHOG-SESSION-ID` headers to same-origin browser requests by default. This connects server events and feature flag evaluations to the browser user and session.
+
+Pass `clientOptions.tracing_headers` to customize the hostnames that receive these headers, or use an empty array to disable them:
+
+```tsx
+<PostHogProvider clientOptions={{ tracing_headers: [] }}>{children}</PostHogProvider>
+```
 
 ### Consent-aware setup
 
@@ -299,7 +340,7 @@ export default postHogMiddleware({
 })
 ```
 
-Then initialize the client with capture disabled until the user opts in:
+Then initialize the client with capture disabled until you opt in:
 
 ```tsx
 <PostHogProvider clientOptions={{ opt_out_capturing_by_default: true }}>{children}</PostHogProvider>
@@ -330,6 +371,7 @@ When you change the proxy path, use the same path in `clientOptions.api_host`:
 
 - [How to set up Next.js analytics, Feature Flags, and more](/tutorials/nextjs-analytics)
 - [How to set up Next.js A/B tests](/tutorials/nextjs-ab-tests)
+- [Upload source maps for Next.js Error Tracking](/docs/error-tracking/upload-source-maps/nextjs)
 
 </Step>
 

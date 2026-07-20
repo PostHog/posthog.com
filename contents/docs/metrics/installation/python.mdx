@@ -1,0 +1,95 @@
+---
+title: Python metrics installation
+platformLogo: python
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import MetricsNextSteps from './_snippets/metrics-next-steps.mdx'
+
+> **Note:** Metrics is in alpha. Setup details may change before general availability.
+
+The [posthog-python](/docs/libraries/python) SDK includes the `posthog.metrics` API, so you can record metrics with the same client you use for events and feature flags.
+
+<Steps>
+
+<Step title="Install posthog-python" badge="required">
+
+```bash
+pip install posthog
+```
+
+Metrics requires an up-to-date SDK version, so upgrade if you're on an older release.
+
+</Step>
+
+<Step title="Initialize the client" badge="required">
+
+Set a service name so metrics from different systems stay easy to tell apart. It's attached to every series and used by the Metrics UI for filtering.
+
+```python
+from posthog import Posthog
+
+posthog = Posthog(
+    "<ph_project_token>",
+    host="<ph_client_api_host>",
+    metrics={"service_name": "billing-worker"},
+)
+```
+
+Use your **project token** (the same one you use for capturing events), not a [personal API key](/docs/api#authentication).
+
+</Step>
+
+<Step title="Record metrics" badge="required">
+
+Use the metric type that matches what you're measuring:
+
+```python
+# Counters only go up: things you count
+posthog.metrics.count("invoices.processed", 1, attributes={"plan": "pro"})
+
+# Gauges go up and down: current values
+posthog.metrics.gauge("queue.depth", 42)
+
+# Histograms record distributions: durations, sizes
+posthog.metrics.histogram("job.duration", 187, unit="ms")
+```
+
+The client is thread-safe and pre-aggregates: samples fold into per-series aggregates in memory and flush as one OTLP data point per series every few seconds, so recording in hot paths is cheap. A burst of 10k `count()` calls costs one data point on the wire.
+
+Keep attribute values small and bounded: `route`, `status`, and `plan` are good attributes; user IDs, session IDs, and request IDs are not. Every unique combination creates a new series.
+
+</Step>
+
+<Step title="Instrument alongside existing metrics" badge="optional">
+
+If your service already records metrics with Prometheus, StatsD, or another system, don't rip it out. Add the PostHog call next to the existing one, reusing the same metric name and attributes, so both systems chart the same series while you evaluate.
+
+</Step>
+
+<Step title="Flush before exit" badge="required">
+
+For short-lived processes (cron jobs, CLIs, serverless functions), flush before exiting so the last aggregation window isn't lost:
+
+```python
+posthog.metrics.flush()
+```
+
+</Step>
+
+<Step title="Test your setup" badge="recommended">
+
+1. Trigger the code path that records a metric
+2. Open **Metrics** in the PostHog sidebar and pick your metric from the name picker
+3. Data points should appear within a minute of sending
+
+<CallToAction type="primary" to="https://app.posthog.com/metrics">
+View your metrics in PostHog
+</CallToAction>
+
+</Step>
+
+<MetricsNextSteps />
+
+</Steps>

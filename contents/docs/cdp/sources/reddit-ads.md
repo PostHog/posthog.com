@@ -23,7 +23,7 @@ Additional reports will be added based on user feedback we receive via our [in-a
 ## Requirements
 
 - A Reddit Ads account with permission to access data from accounts you want to sync.
-- Your account ID from the [business manager app](https://ads.reddit.com/business/) > Menu > Assets > Ad Accounts > get the ID
+- Your account ID (optional, but useful for reference). You can find it in the [business manager app](https://ads.reddit.com/business/) > Menu > Assets > Ad Accounts > get the ID
 
 <ProductScreenshot
     imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_11_at_7_01_43_PM_c31b74db4c.png"
@@ -38,8 +38,8 @@ Connect PostHog to your Reddit Ads account using a Reddit account. The Reddit ac
 1. In PostHog, go to the **[Data pipelines](https://app.posthog.com/data-management/sources)** tab.
 2. Open the **+ New** drop-down menu in the top-right and select **Source**.
 3. Find Reddit Ads in the sources list and click **Link**.
-4. Enter the **Account ID** of the Reddit Ads account you want to sync.
-5. Select an existing Reddit Ads account, or create a new integration
+4. Connect your Reddit account by selecting an existing integration or creating a new one.
+5. Select your ad account from the dropdown. Accounts are grouped by the business that owns them.
 6. (Optional) Add a prefix for the table name.
 
 ## Configuration
