@@ -35,6 +35,7 @@ import usePostHog from '../../hooks/usePostHog'
 import Modal from 'components/RadixUI/Modal'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import FloatingModal from 'components/FloatingModal'
+import { MOTION_LAYER, WINDOW_BG } from '../../constants/frostedSurfaces'
 
 const recursiveSearch = (array: MenuItem[] | undefined, value: string): boolean => {
     if (!array) return false
@@ -58,18 +59,6 @@ const recursiveSearch = (array: MenuItem[] | undefined, value: string): boolean 
 }
 
 const snapThreshold = -50
-
-// Light/dark mesh-gradient class pairs (defined in tailwind.config.js).
-// Each value must be a full literal string so Tailwind's JIT picks it up.
-export const MESH_VARIANTS = {
-    green: 'bg-mesh-green-light dark:bg-mesh-green-dark',
-    red: 'bg-mesh-red-light dark:bg-mesh-red-dark',
-    yellow: 'bg-mesh-yellow-light dark:bg-mesh-yellow-dark',
-    blue: 'bg-mesh-blue-light dark:bg-mesh-blue-dark',
-    purple: 'bg-mesh-purple-light dark:bg-mesh-purple-dark',
-} as const
-
-export type MeshColor = keyof typeof MESH_VARIANTS
 
 const PageModal = ({ children }: { children: React.ReactNode }) => {
     const [open, setOpen] = useState(true)
@@ -161,7 +150,6 @@ function SnapIndicator({ side }: { side: 'left' | 'right' }) {
 }
 
 export default function AppWindow({ item, chrome = true }: { item: AppWindowType; chrome?: boolean }) {
-    const meshVariant = MESH_VARIANTS[item.appSettings?.mesh ?? 'green']
     const { addToast, toasts } = useToast()
     const {
         minimizeWindow,
@@ -216,6 +204,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     const [hasDeveloperMode, setHasDeveloperMode] = useState(false)
     const hasToolbar = item.appSettings?.toolbar
     const hideTitle = item.appSettings?.hideTitle
+    const isCompositorActive = animating || dragging || leftDragResizing || closing
     const inView = useMemo(() => {
         if (item.expanded) return true
 
@@ -752,13 +741,11 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                             : item.windowed
                             ? 'h-[95%] w-[80%]'
                             : 'size-full'
-                    } !select-auto flex flex-col border-primary ${
-                        siteSettings.heaterMode
-                            ? 'bg-primary/75 backdrop-blur-3xl will-change-[transform,backdrop-filter] transform-gpu'
-                            : `bg-primary ${meshVariant}`
-                    } flex flex-col rounded-lg ${
-                        item.appSettings?.size?.fixed ? 'border' : item.expanded ? 'border-t' : ''
-                    } ${item.expanded ? 'shadow-none' : 'shadow-md'} ${
+                    } !select-auto flex flex-col border-primary ${WINDOW_BG} ${
+                        isCompositorActive ? MOTION_LAYER : ''
+                    } rounded-lg ${item.appSettings?.size?.fixed ? 'border' : item.expanded ? 'border-t' : ''} ${
+                        item.expanded ? 'shadow-none' : 'shadow-md'
+                    } ${
                         item.expanded
                             ? 'rounded-tr-none rounded-tl-none'
                             : item.snapped === 'left'

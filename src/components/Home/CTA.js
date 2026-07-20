@@ -19,7 +19,7 @@ const ProductDetails = () => (
             </span>
             <span className="uppercase font-semibold text-xs text-white">Eco-friendly</span>
         </span>
-        <p className="text-4xl font-bold m-0 @xl:mt-2">PostHog Cloud</p>
+        <p className="text-4xl font-bold m-0 @xl:mt-2">PostHog Web</p>
         <p className="opacity-50 m-0 mb-4 text-sm">Digital download*</p>
     </>
 )
@@ -69,19 +69,19 @@ export default function CTA({ headline = true, card = false }) {
 
             <div className={`@xl:grid grid-cols-2 gap-16 @xl:pt-16 max-w-5xl mx-auto ${card ? '@xl:-mt-14' : ''}`}>
                 <div className="relative text-right">
-                    <div className="mb-2">
+                    <div className="relative mb-2">
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/cloud-cd.jpg"
-                            alt="PostHog Cloud"
+                            alt="PostHog Web"
                             className="max-w-[443px]"
                         />
-                    </div>
-                    <div className="absolute -left-4 bottom-12 @xl:left-[-8px] @xl:bottom-24">
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/g2-badge.png"
-                            alt="People on G2 think we're great"
-                            className="w-[90px]"
-                        />
+                        <div className="absolute -left-2 bottom-0 translate-y-1/2">
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/g2-badge.png"
+                                alt="People on G2 think we're great"
+                                className="w-[90px]"
+                            />
+                        </div>
                     </div>
 
                     {inView && (
@@ -109,7 +109,7 @@ export default function CTA({ headline = true, card = false }) {
                             </p>
                         </div>
                     </div>
-                    <p className="text-xs opacity-60 text-right">
+                    <p className="pl-24 text-xs opacity-60 text-right">
                         *PostHog is a web product and cannot be installed by CD.
                         <br />
                         We <em>did</em> once send some customers a floppy disk but it was a Rickroll.
@@ -210,7 +210,10 @@ export default function CTA({ headline = true, card = false }) {
                 {headline && (
                     <>
                         <h2 className={heading('lg')}>
-                            This is the <span className="text-red inline-block">call to action.</span>
+                            This is the{' '}
+                            <span className="bg-highlight p-0.5 font-bold text-red dark:text-yellow inline-block">
+                                call to action.
+                            </span>
                         </h2>
                         <h3 className={heading('sm')}>
                             If nothing else has sold you on PostHog, hopefully these classic marketing tactics will.
@@ -219,7 +222,11 @@ export default function CTA({ headline = true, card = false }) {
                 )}
 
                 {card ? (
-                    <div className="p-6 @xl:p-8 border border-primary bg-accent rounded-md max-w-5xl mx-auto overflow-visible">
+                    <div
+                        className={`p-6 @xl:p-8 border border-primary bg-accent rounded-md max-w-5xl mx-auto overflow-visible ${
+                            headline ? 'mt-8' : ''
+                        }`}
+                    >
                         {content}
                     </div>
                 ) : (
