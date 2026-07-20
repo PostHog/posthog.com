@@ -135,8 +135,7 @@ const SessionRecording: React.FC<SessionRecordingProps> = ({ data }) => {
                 buttonText="Record your first session"
                 buttonLink="/docs/session-replay/start-here"
                 imageColumnClasses="max-w-96 mt-8 md:mt-0"
-                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/session-recording-hog.png"
-                imageClasses=""
+                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/SESSION_REPLAY_a3ca565731.png"
             />
 
             <AskMax

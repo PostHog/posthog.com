@@ -9,41 +9,60 @@ availability:
 ---
 
 import PersonsModelNote from "../_snippets/persons-model-note.mdx";
+import { CalloutBox } from "components/Docs/CalloutBox";
 
 With batch exports, data can be exported to a Snowflake database table.
 
+<CalloutBox icon="IconInfo" title="New integration-based connections for Snowflake" type="fyi">
+
+Snowflake connections are now backed by reusable integrations, which store your credentials securely and let you reuse them across multiple exports. This is the preferred way to set up new exports going forward.
+
+Existing exports will be migrated to use integrations automatically in the near future.
+
+</CalloutBox>
+
 ## Creating the batch export
 
-1. Click [Data management > Destinations](https://app.posthog.com/data-management/destinations) in the left sidebar.
+1. Go to [Data > Destinations](https://app.posthog.com/data-management/destinations) in the left sidebar.
 2. Click **+ New destination** in the top-right corner.
 3. Search for **Snowflake**.
 4. Click the **+ Create** button.
-5. Fill in the necessary [configuration details](#snowflake-configuration).
-6. Finalize the creation by clicking on "Create".
-7. Done! The batch export will schedule its first run on the start of the next period.
+5. Set up a connection by clicking **Configure new Snowflake connection** in the **Connection** dropdown. This opens a setup modal where you provide a name and your credentials. Credentials are stored encrypted and can be reused across multiple exports.
+6. Fill in the remaining [configuration details](#snowflake-configuration).
+7. Click **Create** to finalize.
+8. Done! The batch export will schedule its first run on the start of the next period.
 
 ## Authentication
 
-PostHog supports two authentication methods for Snowflake:
+When configuring a Snowflake connection, PostHog supports two authentication methods:
 
-1. **Password:** This is the simplest method, and just requires a password for the user.
-2. **Key pair:** For enhanced security, you can use a key pair to authenticate with Snowflake. For information on how to set this up, see [Snowflake's documentation](https://docs.snowflake.com/en/user-guide/key-pair-auth#configuring-key-pair-authentication). We support both encrypted and unencrypted key pairs.
+1. **Key pair (default):** For enhanced security, you can use a key pair to authenticate with Snowflake. You can either paste your private key directly or upload a key file. For information on how to generate a key pair, see [Snowflake's documentation](https://docs.snowflake.com/en/user-guide/key-pair-auth#configuring-key-pair-authentication). Both encrypted and unencrypted key pairs are supported.
+2. **Password:** A simpler method that requires just the password for the Snowflake user.
 
 ## Snowflake configuration
 
-Configuring a batch export targeting Snowflake requires the following Snowflake-specific configuration values:
+### Connection fields
 
+These fields are configured when creating a Snowflake connection (integration):
+
+- **Name:** A name to identify this connection across exports.
 - **Account:** A [Snowflake account identifier](https://docs.snowflake.com/en/user-guide/admin-account-identifier) without the `snowflakecomputing.com` suffix (if any).
 - **User:** A Snowflake user name with permissions to insert data into the provided table and, if the table is meant to be created, permissions to create the table.
-- **Authentication type:** The authentication method to use: password or key pair.
-- **Password:** The password of the Snowflake user provided, if using password authentication.
-- **Private key:** The private key of the Snowflake user provided, if using key pair authentication.
-- **Private key passphrase (optional):** The private key passphrase, if using an encrypted key pair.
-- **Role (optional):** A role to assume for the required permissions.
+- **Authentication type:** The authentication method to use: key pair (default) or password.
+- **Private key:** The private key for the Snowflake user, if using key pair authentication. You can paste the key directly or upload a key file.
+- **Private key passphrase (optional):** The passphrase for the private key, if using an encrypted key pair.
+- **Password:** The password for the Snowflake user, if using password authentication.
+
+### Destination fields
+
+These fields are configured for each batch export:
+
+- **Connection:** A Snowflake integration that stores your credentials. Click **Configure new Snowflake connection** to create one. Credentials are stored encrypted and can be reused across multiple exports.
 - **Database:** The Snowflake database where the table provided to insert data is located (and created if not present).
 - **Schema:** The Snowflake database schema where the table provided to insert data is located (and created if not present).
 - **Table name:** The name of a Snowflake table where to export the data.
 - **Warehouse:** The Snowflake warehouse used for data loading.
+- **Role (optional):** A role to assume for the required permissions.
 
 ### File staging
 

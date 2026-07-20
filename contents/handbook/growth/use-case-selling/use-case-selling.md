@@ -36,9 +36,7 @@ Each use case has a full playbook with discovery questions, competitive position
 | Surveys | Product Intelligence | Growth & Marketing, Customer Experience |
 | Web Analytics | Growth & Marketing | |
 | Marketing Analytics *beta* | Growth & Marketing | |
-| Revenue Analytics | Growth & Marketing | Product Intelligence |
 | Workflows | Growth & Marketing | Product Intelligence |
-| Product Tours *beta* | Growth & Marketing | Product Intelligence |
 | LLM Observability | AI/LLM Obs | Customer Experience |
 | AI Evals | AI/LLM Obs | Product Intelligence, Release Engineering |
 | Data Warehouse | Data Infrastructure | |

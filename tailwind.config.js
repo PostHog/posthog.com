@@ -66,7 +66,7 @@ module.exports = {
                     'radial-gradient(ellipse 80% 90% at 30% 20%, rgba(17, 126, 208, 0.6) 0%, transparent 60%), radial-gradient(ellipse 90% 75% at 70% 80%, rgba(255, 20, 147, 0.5) 0%, transparent 55%), radial-gradient(ellipse 70% 85% at 10% 60%, rgba(50, 84, 205, 0.4) 0%, transparent 65%)',
                 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
                 'bullet-light':
-                    'url(\'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 8"><path fill="%23D0D1C9" d="M4.23 7.704c-2.034 0-3.636-1.602-3.636-3.6 0-1.98 1.602-3.6 3.636-3.6 1.962 0 3.564 1.62 3.564 3.6 0 1.998-1.602 3.6-3.564 3.6Z"/></svg>\')',
+                    'url(\'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 8"><path opacity="0.3" fill="currentColor" d="M4.23 7.704c-2.034 0-3.636-1.602-3.636-3.6 0-1.98 1.602-3.6 3.636-3.6 1.962 0 3.564 1.62 3.564 3.6 0 1.998-1.602 3.6-3.564 3.6Z"/></svg>\')',
                 'bullet-dark':
                     'url(\'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 8"><path fill="%234A4C52" d="M4.23 7.704c-2.034 0-3.636-1.602-3.636-3.6 0-1.98 1.602-3.6 3.636-3.6 1.962 0 3.564 1.62 3.564 3.6 0 1.998-1.602 3.6-3.564 3.6Z"/></svg>\')',
                 'bullet-check-light':
@@ -99,6 +99,7 @@ module.exports = {
                 button: '#B17816',
                 'button-dark': '#835C19',
                 'button-secondary-dark': '#C78617',
+                accent: 'rgb(var(--accent) / <alpha-value>)',
 
                 primary: 'rgb(var(--border) / <alpha-value>)',
                 secondary: 'rgb(var(--input-border) / <alpha-value>)',
@@ -144,6 +145,7 @@ module.exports = {
                 'blue-2': '#589DF8',
                 'blue-2-dark': '#1E2F46',
                 brown: '#3B2B26',
+                'brown-dark': '#C4A484',
                 'burnt-orange': '#DF6133',
                 'burnt-orange-dark': '#8E2600',
                 orange: '#EB9D2A',
@@ -195,6 +197,7 @@ module.exports = {
                 'button-secondary-shadow-dark': '#925D05',
 
                 border: 'rgb(var(--border) / <alpha-value>)',
+                primary: 'rgb(var(--bg) / <alpha-value>)',
 
                 light: '#fff',
                 'accent-light': '#e5e7e0',
@@ -227,10 +230,23 @@ module.exports = {
             fontFamily: {
                 'fairytale-title': ['Fairytale', 'sans-serif'],
                 fairytale: ['Computer Modern', 'sans-serif'],
-                serif: ['Charter', 'MatterVF', 'Arial', 'Helvetica', 'sans-serif'],
+                serif: ['Garamond', 'Times New Roman', 'serif'],
                 sans: [
-                    'IBM Plex Sans Variable',
-                    'IBM Plex Sans',
+                    '-apple-system',
+                    'BlinkMacSystemFont',
+                    'avenir next',
+                    'avenir',
+                    'segoe ui',
+                    'helvetica neue',
+                    'helvetica',
+                    'Ubuntu',
+                    'roboto',
+                    'noto',
+                    'arial',
+                    'sans-serif',
+                ],
+                matter: [
+                    'Matter SQ',
                     '-apple-system',
                     'BlinkMacSystemFont',
                     'avenir next',
@@ -296,6 +312,8 @@ module.exports = {
             },
             maxWidth: {
                 '2xs': '16rem',
+                '8xl': '88rem', // 1408px (8rem more than 7xl: 80rem)
+                '9xl': '96rem', // 1536px (8rem more than 8xl: 88rem)
             },
             keyframes: {
                 wiggle: {
@@ -470,16 +488,21 @@ module.exports = {
                 100: '1',
                 '-100': '-1',
             },
+            typography: {
+                DEFAULT: {
+                    css: {
+                        '--tw-prose-bullets': 'rgb(var(--text-secondary))',
+                        '--tw-prose-counters': 'rgb(var(--text-secondary))',
+                    },
+                },
+                invert: {
+                    css: {
+                        '--tw-prose-invert-bullets': 'rgb(var(--text-secondary))',
+                        '--tw-prose-invert-counters': 'rgb(var(--text-secondary))',
+                    },
+                },
+            },
         },
-        // typography: {
-        //     DEFAULT: {
-        //         css: {
-        //             h5: {
-        //                 marginBottom: '.25rem',
-        //             },
-        //         },
-        //     },
-        // },
     },
     plugins: [
         require('@tailwindcss/forms'),
@@ -488,6 +511,9 @@ module.exports = {
         function ({ addUtilities }) {
             addUtilities({
                 '.container-size': { 'container-type': 'size' },
+                '.text-shadow-desktop': {
+                    'text-shadow': '0 1px 3px rgba(0, 0, 0, 0.5), 0 0 1px rgba(0, 0, 0, 0.3)',
+                },
             })
         },
         require('tailwindcss-animated'),
@@ -498,10 +524,12 @@ module.exports = {
             addVariant('wallpaper-keyboard-garden', 'body[data-wallpaper="keyboard-garden"] &')
             addVariant('wallpaper-hogzilla', 'body[data-wallpaper="hogzilla"] &')
             addVariant('wallpaper-office-party', 'body[data-wallpaper="office-party"] &')
-            addVariant('wallpaper-2001-bliss', 'body[data-wallpaper="2001-bliss"] &')
-            addVariant('wallpaper-parade', 'body[data-wallpaper="parade"] &')
-            addVariant('wallpaper-coding-at-night', 'body[data-wallpaper="coding-at-night"] &')
             addVariant('wallpaper-startup-monopoly', 'body[data-wallpaper="startup-monopoly"] &')
+            // Site toggle (data attr, set early in theme-init) + OS prefers-reduced-transparency
+            addVariant('reduce-transparency', [
+                'body[data-reduce-transparency="true"] &',
+                '@media (prefers-reduced-transparency: reduce)',
+            ])
         },
     ],
 }

@@ -1,10 +1,8 @@
 ---
-title: Lore
+title: PostHog Lore and inside jokes
 sidebar: Handbook
 showTitle: true
 ---
-
-## Lore of PostHog / inside jokes
 
 A beginner's guide to some of our custom Slack emojis and various anecdotes you'll see and hear about.
 
@@ -44,4 +42,8 @@ A beginner's guide to some of our custom Slack emojis and various anecdotes you'
 
 * <TeamMember name="James Hawkins" photo /> has also gone viral <a href="https://x.com/james406/status/1824083929860583858?s=20">multiple</a> <a href="https://x.com/james406/status/2005715590372020669">times</a> for his tweets about "hopping on a quick call" and that is entirely what he is known for now. 
 
-* Everyone says "thanks dylan" to <TeamMember name="Dylan Martin" photo /> because he once had a really good all-hands demo.
+* Everyone says "thanks dylan" to <TeamMember name="Dylan Martin" photo /> because he once had a really good all-hands demo. He also did a demo entirely with autotune.
+
+* <TeamMember name="Anna-Marie Doudova" photo /> did a presentation at our Barbados offsite about Gen Z slang which encouraged everyone to do Gen Z slangmaxxing like an unc that's cooked 💀. 
+
+* Hire movers. Whenever someone asks the team for moving or packing tips, the unanimous, handbook-sanctioned answer is: hire movers. (And, while you're at it, hire packers.) This was settled in a lengthy thread where someone moving to a second-floor apartment a four-minute drive away — with a flight of stairs and lots of heavy furniture — asked for _packing_ hacks and instead received an avalanche of "hire movers" from everyone.

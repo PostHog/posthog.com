@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { CallToAction } from '../CallToAction'
 import Layout from '../Layout'
 import { StaticImage } from 'gatsby-plugin-image'
-import SearchBox from 'components/Search/SearchBox'
 import { Link } from 'gatsby'
 import { Help, Docs, Slack } from 'components/NotProductIcons'
 

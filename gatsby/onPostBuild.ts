@@ -1,7 +1,8 @@
 import chromium from 'chrome-aws-lambda'
 import path from 'path'
 import fs from 'fs'
-import fetch from 'node-fetch'
+import nodeFetch from 'node-fetch'
+
 import { GatsbyNode } from 'gatsby'
 import pLimit from 'p-limit'
 import qs from 'qs'
@@ -14,6 +15,8 @@ import {
     generateLlmsTxt,
     generateSdkReferencesMarkdown,
     generatePricingMd,
+    generatePlatformMd,
+    generateProductPagesMarkdown,
 } from './rawMarkdownUtils'
 import { MARKDOWN_CONTENT_PATHS } from '../src/constants'
 import { SdkReferenceData } from '../src/templates/sdk/SdkReference.js'
@@ -22,6 +25,7 @@ import docsHandbookTemplate from '../src/templates/OG/docs-handbook.js'
 import customerTemplate from '../src/templates/OG/customer.js'
 import jobTemplate from '../src/templates/OG/job.js'
 import { flattenMenu } from './utils'
+import { syncStandardSiteDocuments } from './standardSite'
 
 const limit = pLimit(10)
 
@@ -100,7 +104,7 @@ const createOGImages = async (data) => {
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
     const fontDir = path.resolve(__dirname, '../fonts')
     if (!fs.existsSync(fontDir)) fs.mkdirSync(fontDir)
-    const res = await fetch('https://d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQVF.woff', {
+    const res = await nodeFetch(process.env.CLOUDFRONT_FONT_URL, {
         headers: {
             Origin: 'https://posthog.com',
         },
@@ -486,8 +490,40 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
 }
 
 export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter }) => {
+    // Generate raw markdown (.md) versions of pages under MARKDOWN_CONTENT_PATHS
+    // by converting the built HTML with turndown.
+    // Build regex from MARKDOWN_CONTENT_PATHS constant (e.g., "/^/(docs|handbook|blog)/")
+    const markdownPathsRegex = `/^/(${MARKDOWN_CONTENT_PATHS.map((p) => p.replace('/', '')).join('|')})/`
+    const docsQuery = (await graphql(`
+        query {
+            allMdx(filter: { fields: { slug: { regex: "${markdownPathsRegex}" } } }) {
+                nodes {
+                    fields {
+                        slug
+                    }
+                    frontmatter {
+                        title
+                    }
+                }
+            }
+        }
+    `)) as { data: { allMdx: { nodes: Array<{ fields: { slug: string }; frontmatter: { title: string } }> } } }
+
+    // GATSBY_MINIMAL (deploy preview) builds run with a 12GB heap that the Gatsby
+    // build itself nearly fills, and converting all ~2,500 pages OOMs the runner.
+    // Generate only blog/newsletter .md there so post .md URLs can still be
+    // verified in previews; production builds generate everything.
+    const markdownNodes =
+        process.env.GATSBY_MINIMAL === 'true'
+            ? docsQuery.data.allMdx.nodes.filter(
+                  (node) => node.fields.slug.startsWith('/blog/') || node.fields.slug.startsWith('/newsletter/')
+              )
+            : docsQuery.data.allMdx.nodes
+
+    const filteredPages = await generateRawMarkdownPages(markdownNodes)
+
     if (process.env.GATSBY_MINIMAL === 'true') return
-    // Generate API spec markdown files first
+    // Generate API spec markdown files
     try {
         const openApiSpecUrl = process.env.POSTHOG_OPEN_API_SPEC_URL || 'https://app.posthog.com/api/schema/'
         const spec = await fetch(openApiSpecUrl, {
@@ -570,29 +606,19 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter
         console.error('Failed to generate pricing.md:', error)
     }
 
-    // Generate markdown files for llms.txt file and LLM ingestion (after pages are built)
-    // Convert HTML files to markdown using turndown
-    // Build regex from MARKDOWN_CONTENT_PATHS constant (e.g., "/^/(docs|handbook)/")
-    const markdownPathsRegex = `/^/(${MARKDOWN_CONTENT_PATHS.map((p) => p.replace('/', '')).join('|')})/`
-    const docsQuery = (await graphql(`
-        query {
-            allMdx(filter: { fields: { slug: { regex: "${markdownPathsRegex}" } } }) {
-                nodes {
-                    fields {
-                        slug
-                    }
-                    frontmatter {
-                        title
-                    }
-                }
-            }
-        }
-    `)) as { data: { allMdx: { nodes: Array<{ fields: { slug: string }; frontmatter: { title: string } }> } } }
-
-    const filteredPages = await generateRawMarkdownPages(docsQuery.data.allMdx.nodes)
-    // Only include docs pages in llms.txt (not handbook)
+    // Generate llms.txt from the raw markdown pages created above.
+    // Only include docs pages in llms.txt (not handbook or blog)
     const docsPages = filteredPages.filter((page) => page.fields.slug.startsWith('/docs'))
     generateLlmsTxt(docsPages)
+
+    // Generate the self-driving platform overview + per-product markdown for LLMs/agents
+    generatePlatformMd()
+    generateProductPagesMarkdown()
+
+    // Publish/update Standard.site document records for blog posts.
+    // Self-gates on env (AWS_CODEPIPELINE / STANDARD_SITE_SYNC) and BSKY_APP_PASSWORD; safe no-op otherwise.
+    // Placed before the prod-only return so STANDARD_SITE_SYNC=true can drive a local/dry run.
+    await syncStandardSiteDocuments(graphql)
 
     if (process.env.AWS_CODEPIPELINE !== 'true') {
         console.log('Skipping onPostBuild tasks')
@@ -767,10 +793,10 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter
         }
     `)
 
+    await createOrUpdateStrapiPosts(data.allMDXPosts.nodes, data.allRoadmap.nodes)
+
     console.log('Creating OG images')
     await createCareersOG()
     await createOGImages(data)
     console.log('Finished creating OG images')
-
-    await createOrUpdateStrapiPosts(data.allMDXPosts.nodes, data.allRoadmap.nodes)
 }
