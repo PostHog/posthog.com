@@ -68,8 +68,8 @@ const ProductIcon = ({ name, url, color, icon }) => {
 
 const product = {
     slug: 'product-os',
-    lowercase: 'product OS',
-    capitalized: 'Product OS',
+    lowercase: 'context warehouse',
+    capitalized: 'Context warehouse',
 }
 
 const subfeaturesItemCount = 5
@@ -107,7 +107,7 @@ export const ProductOS = () => {
     return (
         <>
             <SEO
-                title="Product OS by PostHog – Developer tools for product engineers"
+                title="Context warehouse by PostHog – Developer tools for product engineers"
                 description="Build better products with PostHog – developer tools for analytics, feature flags, session replay, experiments, error tracking, and more. Get started free."
                 image={`/images/og/product-os.jpg`}
             />
@@ -117,7 +117,7 @@ export const ProductOS = () => {
                     icon={<IconStack />}
                     product={product.capitalized}
                     title="Product data infrastructure"
-                    description="Product OS is the foundation that all PostHog products are built on. You have access to all PostHog data with the API."
+                    description="The context warehouse is the foundation that all PostHog products are built on. You have access to all PostHog data with the API."
                 />
 
                 <div className="text-center mb-12">
@@ -195,8 +195,8 @@ export const ProductOS = () => {
                                 <p className="max-w-2xl">
                                     PostHog offers {PRODUCT_COUNT}+ products in one (and counting).{' '}
                                     <strong>Use only what you want. But...</strong> if you want to try a new PostHog
-                                    product, there are benefits of using Product OS as your platform for all your
-                                    product data.
+                                    product, there are benefits of using the context warehouse as your platform for all
+                                    your product data.
                                 </p>
                             </div>
                             <div className="shrink-0 flex flex-wrap gap-2">
@@ -356,7 +356,7 @@ export const ProductOS = () => {
                         <div className="order-2 md:order-1">
                             <h2 className="text-4xl mb-2 relative z-10">Toolbar</h2>
                             <p className="max-w-2xl">
-                                If you use PostHog on a website or web app, the Product OS Toolbar can run on your site,
+                                If you use PostHog on a website or web app, the PostHog Toolbar can run on your site,
                                 letting you:
                             </p>
                             <ul className="mb-6">
@@ -385,7 +385,7 @@ export const ProductOS = () => {
                 <section className="max-w-7xl mx-auto px-5 mb-10 md:mb-20">
                     <h2 className="text-4xl mb-2">But wait, there's more...</h2>
                     <p>
-                        Here are a few more features of Product OS. For more details about how it works,{' '}
+                        Here are a few more features of the context warehouse. For more details about how it works,{' '}
                         <Link to="/docs">visit the docs</Link>.
                     </p>
                     <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
