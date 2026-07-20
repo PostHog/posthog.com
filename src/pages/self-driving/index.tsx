@@ -12,8 +12,7 @@ import type { TabbedCarouselTab } from 'components/TabbedCarousel'
 import Link from 'components/Link'
 import WizardCommand from 'components/WizardCommand'
 import { SignalsCallout } from 'components/Code/SignalsCallout'
-import { getWindowSurfaceBg } from '../../constants/frostedSurfaces'
-import { useAppSettings } from '../../context/App'
+import { WINDOW_BG } from '../../constants/frostedSurfaces'
 import {
     IconArrowRight,
     IconAtSign,
@@ -579,13 +578,18 @@ const TickerRow = ({ prs, direction }: { prs: SelfDrivingPR[]; direction: 1 | -1
         if (window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches) return
 
         let frame = 0
+        // Keep a float accumulator: writing to scrollLeft rounds to whole pixels, so a
+        // sub-pixel step read back from scrollLeft rounds away to nothing (the reverse row
+        // never moves and the wrap logic teleports it). Track the true position ourselves
+        // and wrap by modulo so both directions advance smoothly at the intended speed.
+        let pos = rail.scrollLeft
         const step = () => {
             if (!pausedRef.current) {
-                rail.scrollLeft += 0.5 * direction
                 const half = rail.scrollWidth / 2
                 if (half > 0) {
-                    if (rail.scrollLeft >= half) rail.scrollLeft -= half
-                    else if (rail.scrollLeft <= 0) rail.scrollLeft += half
+                    pos = (pos + 0.5 * direction) % half
+                    if (pos < 0) pos += half
+                    rail.scrollLeft = pos
                 }
             }
             frame = requestAnimationFrame(step)
@@ -923,10 +927,8 @@ export default function SelfDrivingPage({
 }: {
     data?: { allSelfDrivingPullRequest?: { nodes: SelfDrivingPR[] } }
 }): JSX.Element {
-    const { siteSettings } = useAppSettings()
-
     const selfDrivingPRs = data?.allSelfDrivingPullRequest?.nodes ?? []
-    const humanRoleCardBackground = getWindowSurfaceBg(siteSettings.heaterMode)
+    const humanRoleCardBackground = WINDOW_BG
     return (
         <>
             <SEO

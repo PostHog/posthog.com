@@ -143,18 +143,18 @@ export const useSpotlightActions = (): SpotlightAction[] => {
                 }),
         },
         {
-            id: 'heater-mode',
-            label: siteSettings.heaterMode ? 'Turn on reduce transparency' : 'Turn off reduce transparency',
+            id: 'reduce-transparency',
+            label: siteSettings.reduceTransparency ? 'Turn off reduce transparency' : 'Turn on reduce transparency',
             icon: <IconBolt />,
-            keywords: ['transparency', 'blur', 'frosted', 'visual', 'separation', 'accessibility'],
+            keywords: ['transparency', 'blur', 'frosted', 'visual', 'separation', 'accessibility', 'heater'],
             keepOpen: true,
             perform: () => {
-                const next = !siteSettings.heaterMode
-                updateSiteSettings({ ...siteSettings, heaterMode: next })
-                if (!next) {
+                const next = !siteSettings.reduceTransparency
+                updateSiteSettings({ ...siteSettings, reduceTransparency: next })
+                if (next) {
                     toast(
                         <IconBolt className="size-5 inline-block mr-1" />,
-                        'Reduce transparency on – solid panels, less GPU'
+                        'Reduce transparency on - solid window backgrounds'
                     )
                 }
             },

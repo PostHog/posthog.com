@@ -16,11 +16,11 @@ By allowing SMEs to own groups of PostHog products, we build the knowledge neede
 
 The various PostHog products have been split into the following product groups:
 - Analytics (analytics platform, customer analytics, product analytics, web analytics, growth)
-- Unclassified (tickets in the 'Support' group)
+- Unclassified (tickets tagged with `support_needs_triage`)
 - Flags (experiments, feature flags, surveys)
 - Data (batch exports, data stack, ingestion, workflows)
 - Replay (replay)
-- Observability + AI & client libraries (error tracking, PostHog AI, AI Observability, SDK/Implementation, mobile)
+- Observability + AI & client libraries (AI observability, error tracking, logs, mobile, PostHog AI, self-driving, SDKs/implementation)
 - Accounts & Billing (platform features, login/SSO, billing)
 
 **A note on these groupings**: These product groups are based on current ticket volumes. As products grow or new ones launch, we'll split or reorganize them. This structure will evolve with our needs.
@@ -29,7 +29,7 @@ The various PostHog products have been split into the following product groups:
 
 All technical support engineers, regardless of SME ownership, work on:
 - **Analytics products** - work for this product group is shared as it represents the highest proportion of our tickets.
-- **Unclassified tickets** - where possible, these tickets should be updated with the correct product group.
+- **Unclassified tickets** - where possible, these tickets should be tagged with the correct engineering team.
 
 Beyond that, we have SMEs who own specific product groups. For each product group, we select one person from EU and one from NA to maintain timezone coverage:
 
@@ -76,12 +76,11 @@ Being an SME means you're the go-to person for your product group. This breaks d
 
 ## How to work as an SME
 
-### Your Zendesk views
+### Your PostHog Support views
 
-SMEs each have a dedicated view in Zendesk that includes:
-- Tickets created from Slack channels
-- Tickets submitted via the help sidebar
-- Community questions
+SMEs each have a dedicated view in PostHog Support that includes:
+- Tickets created from Slack and MS Teams channels
+- Tickets submitted in-app
 
 These views contain tickets from your specific product groups (see groupings above) **and** all shared product groups (analytics and unclassified tickets). If there are any unclassified tickets that appear in your view (tickets in the 'Support' group), then where possible please assign these to the correct product. Let <TeamMember name="Abigail Richardson" photo /> know if there are certain types of tickets which regularly appear in the 'Support' group.
 
@@ -89,7 +88,7 @@ These views contain tickets from your specific product groups (see groupings abo
 
 ### Your daily workflow
 
-Start your day with your SME views. Build your knowledge. Get really good at your products. Once you're on top of your SME queue, move to the [Technical support shared view](https://posthoghelp.zendesk.com/agent/filters/32900756121627) which has all tickets the technical support team is responsible for.
+Start your day with your SME views. Build your knowledge. Get really good at your products. Once you're on top of your SME queue, move to the [support shared view](https://us.posthog.com/project/2/support/tickets?view=eO1HETSX) which has all tickets the technical support team is responsible for.
 
 **But here's the key**: you're not locked into only your SME products. The goal is expertise, not silos. If you're caught up and the shared queue needs attention, dive in. If you're swamped and someone else can help with your SME queue, ask for it.
 

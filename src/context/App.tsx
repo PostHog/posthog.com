@@ -356,7 +356,7 @@ export const Context = createContext<AppContextType>({
         cursor: 'default',
         wallpaper: 'keyboard-garden',
         screensaverDisabled: true,
-        heaterMode: true,
+        reduceTransparency: false,
         clickBehavior: 'double',
         performanceBoost: false,
     },
@@ -443,7 +443,7 @@ export const SettingsContext = createContext<AppSettingsContextType>({
         cursor: 'default',
         wallpaper: 'keyboard-garden',
         screensaverDisabled: true,
-        heaterMode: true,
+        reduceTransparency: false,
         clickBehavior: 'double',
         performanceBoost: false,
     },
@@ -1593,7 +1593,7 @@ export interface SiteSettings {
     cursor: 'default' | 'xl' | 'james'
     wallpaper: 'keyboard-garden' | 'hogzilla' | 'startup-monopoly' | 'office-party'
     screensaverDisabled?: boolean
-    heaterMode?: boolean
+    reduceTransparency?: boolean
     clickBehavior?: 'single' | 'double'
     performanceBoost?: boolean
 }
@@ -1602,8 +1602,8 @@ const isLabel = (item: any) => !item?.url && item?.name
 
 const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
 
-const getInitialSiteSettings = () => {
-    const siteSettings = {
+const getInitialSiteSettings = (): SiteSettings => {
+    const siteSettings: SiteSettings = {
         colorMode: (typeof window !== 'undefined' && (window as any).__theme) || 'light',
         theme: (typeof window !== 'undefined' && (window as any).__theme) || 'light',
         skinMode: 'modern',
@@ -1612,7 +1612,7 @@ const getInitialSiteSettings = () => {
         clickBehavior: 'double',
         performanceBoost: false,
         screensaverDisabled: true,
-        heaterMode: true,
+        reduceTransparency: false,
         ...(typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('siteSettings') || '{}') : {}),
     }
 
@@ -1642,7 +1642,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         clickBehavior: 'double',
         performanceBoost: false,
         screensaverDisabled: true,
-        heaterMode: true,
+        reduceTransparency: false,
     })
     const [taskbarHeight, setTaskbarHeight] = useState(59)
     const [lastClickedElementRect, setLastClickedElementRect] = useState<{ x: number; y: number } | null>(null)
@@ -2680,6 +2680,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         if (siteSettings.wallpaper) {
             document.body.setAttribute('data-wallpaper', siteSettings.wallpaper)
         }
+        document.body.setAttribute('data-reduce-transparency', siteSettings.reduceTransparency ? 'true' : 'false')
     }, [siteSettings])
 
     useEffect(() => {

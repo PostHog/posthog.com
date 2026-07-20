@@ -19,7 +19,7 @@ const ProductDetails = () => (
             </span>
             <span className="uppercase font-semibold text-xs text-white">Eco-friendly</span>
         </span>
-        <p className="text-4xl font-bold m-0 @xl:mt-2">PostHog Cloud</p>
+        <p className="text-4xl font-bold m-0 @xl:mt-2">PostHog Web</p>
         <p className="opacity-50 m-0 mb-4 text-sm">Digital download*</p>
     </>
 )
@@ -72,7 +72,7 @@ export default function CTA({ headline = true, card = false }) {
                     <div className="relative mb-2">
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/cloud-cd.jpg"
-                            alt="PostHog Cloud"
+                            alt="PostHog Web"
                             className="max-w-[443px]"
                         />
                         <div className="absolute -left-2 bottom-0 translate-y-1/2">

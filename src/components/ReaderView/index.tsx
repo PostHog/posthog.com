@@ -36,8 +36,7 @@ import { InlineSearch } from 'components/Search/InlineSearch'
 import { algoliaIndexName, algoliaSearchClient } from 'lib/algoliaSearch'
 import { useLocation } from '@reach/router'
 import { getProseClasses, isMarkdownContentPath } from '../../constants'
-import { getPanelSurfaceBg } from '../../constants/frostedSurfaces'
-import { useAppSettings } from '../../context/App'
+import { PANEL_BG } from '../../constants/frostedSurfaces'
 import { useWindow } from '../../context/Window'
 import { MenuItem, useApp } from '../../context/App'
 import { useActiveFeatureFlags, filterMenuByFlags } from '../../hooks/useActiveFeatureFlags'
@@ -975,8 +974,6 @@ const LeftSidebar = ({
     mobileOpen = false,
     onMobileClose,
 }: LeftSidebarProps) => {
-    const { siteSettings } = useAppSettings()
-    const panelBg = getPanelSurfaceBg(siteSettings.heaterMode)
     const { searchQuery } = useSearch()
     const { hasMounted } = useReaderView()
     const hasActiveSearch = !!searchQuery && searchQuery.length >= 2
@@ -1119,9 +1116,9 @@ const LeftSidebar = ({
                     // On mobile the panel is always an overlay drawer above the
                     // content; it just slides off-screen when closed.
                     mobile
-                        ? `z-50 shadow-2xl ${panelBg} ${mobileOpen ? '' : 'pointer-events-none'}`
+                        ? `z-50 shadow-2xl ${PANEL_BG} ${mobileOpen ? '' : 'pointer-events-none'}`
                         : !isPinned && expanded
-                        ? `z-50 shadow-2xl ${panelBg}`
+                        ? `z-50 shadow-2xl ${PANEL_BG}`
                         : 'z-30'
                 }`}
             >
@@ -1377,8 +1374,6 @@ function ReaderViewContent({
     className = '',
 }: ReaderViewProps) {
     const { compact } = useApp()
-    const { siteSettings } = useAppSettings()
-    const panelBg = getPanelSurfaceBg(siteSettings.heaterMode)
     const { appWindow, activeInternalMenu } = useWindow()
     const { hash } = useLocation()
     const contentRef = useRef<HTMLDivElement>(null)
@@ -1528,7 +1523,7 @@ function ReaderViewContent({
                             type="button"
                             aria-label="Open navigation"
                             onClick={() => setMobileNavOpen(true)}
-                            className={`absolute bottom-4 right-4 z-30 flex size-11 items-center justify-center rounded-full border border-primary text-primary shadow-lg transition-opacity duration-200 hover:bg-accent ${panelBg} ${
+                            className={`absolute bottom-4 right-4 z-30 flex size-11 items-center justify-center rounded-full border border-primary text-primary shadow-lg transition-opacity duration-200 hover:bg-accent ${PANEL_BG} ${
                                 mobileNavOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'
                             }`}
                         >

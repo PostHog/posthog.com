@@ -1411,6 +1411,36 @@ export const handbookSidebar = [
                 ],
             },
             {
+                name: 'Forward deployed engineering',
+                url: '',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/handbook/forward-deployed-engineering/overview',
+                    },
+                    {
+                        name: 'How to get an FDE involved',
+                        url: '/handbook/forward-deployed-engineering/how-to-get-fde-involved',
+                    },
+                    {
+                        name: 'How we work',
+                        url: '/handbook/forward-deployed-engineering/how-we-work',
+                    },
+                    {
+                        name: 'Working with customers',
+                        url: '/handbook/forward-deployed-engineering/working-with-customers',
+                    },
+                    {
+                        name: 'Working with sales and CS',
+                        url: '/handbook/forward-deployed-engineering/working-with-sales-and-cs',
+                    },
+                    {
+                        name: 'Working with product engineering',
+                        url: '/handbook/forward-deployed-engineering/working-with-product-engineering',
+                    },
+                ],
+            },
+            {
                 name: 'Shareable guides',
                 url: '',
                 children: [
@@ -1723,11 +1753,15 @@ export const handbookSidebar = [
                 url: '',
                 children: [
                     {
+                        name: 'Working in PostHog Support',
+                        url: '/handbook/support/posthog-support',
+                    },
+                    {
                         name: 'Technical support SMEs',
                         url: '/handbook/support/support-smes',
                     },
                     {
-                        name: 'Support zero weeks',
+                        name: 'Support zero time',
                         url: '/handbook/support/support-zero',
                     },
                 ],

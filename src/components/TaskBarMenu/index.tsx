@@ -28,7 +28,7 @@ import { useMenuData } from './menuData'
 import CloudinaryImage from 'components/CloudinaryImage'
 import MediaUploadModal from 'components/MediaUploadModal'
 import KeyboardShortcut from 'components/KeyboardShortcut'
-import { getTaskbarMotionLayer, getTaskbarSurfaceBg } from '../../constants/frostedSurfaces'
+import { MOTION_LAYER, TASKBAR_BG } from '../../constants/frostedSurfaces'
 
 function TaskBarMenu() {
     const {
@@ -290,9 +290,9 @@ function TaskBarMenu() {
                         width: '100%',
                         boxSizing: 'border-box',
                     }}
-                    className={`${getTaskbarSurfaceBg()} ${getTaskbarMotionLayer(
-                        isAnimating
-                    )} skin-classic:bg-accent wallpaper-keyboard-garden:dark:bg-black/15 border-secondary rounded pl-0.5 pr-2 shadow-2xl`}
+                    className={`${TASKBAR_BG} ${
+                        isAnimating ? MOTION_LAYER : ''
+                    } skin-classic:bg-accent wallpaper-keyboard-garden:dark:bg-black/15 border-secondary rounded pl-0.5 pr-2 shadow-2xl`}
                 >
                     {/* Top and bottom edges of the 3D box — visible during rotation */}
                     <div

@@ -139,9 +139,9 @@ const WallpaperSelect = ({ value, onValueChange, title }: WallpaperSelectProps) 
                 open={isOpen}
                 onOpenChange={setIsOpen}
             >
-                <ScrollArea>
+                <ScrollArea className="min-h-0 !overflow-y-auto overscroll-contain max-h-[calc(var(--radix-popover-content-available-height)-0.75rem)]">
                     <div className="@container">
-                        <div className="grid md:@xl:grid-cols-2 md:@2xl:grid-cols-3 md:@xl:gap-2 p-2 min-h-[200px] h-[400px]">
+                        <div className="grid md:@xl:grid-cols-2 md:@2xl:grid-cols-3 md:@xl:gap-2 p-2">
                             {themeOptions.map((option) => {
                                 const optionThumb = isDark
                                     ? option.background?.thumb?.dark
@@ -262,7 +262,7 @@ export default function DisplayOptions() {
                         <span className="text-sm">Reduce transparency</span>
                         <Tooltip trigger={<IconInfo className="size-4 inline-block relative -top-px" />} delay={0}>
                             <p className="max-w-sm my-0 leading-snug">
-                                Solid, opaque backgrounds for windows and sidebars instead of frosted blur.
+                                Solid, opaque backgrounds for windows and sidebars instead of blurred transparency.
                             </p>
                         </Tooltip>
                     </div>
@@ -274,9 +274,9 @@ export default function DisplayOptions() {
                                 { label: 'Enabled', value: 'true' },
                             ]}
                             onValueChange={(value) => {
-                                updateSiteSettings({ ...siteSettings, heaterMode: value !== 'true' })
+                                updateSiteSettings({ ...siteSettings, reduceTransparency: value === 'true' })
                             }}
-                            value={siteSettings.heaterMode ? 'false' : 'true'}
+                            value={siteSettings.reduceTransparency ? 'true' : 'false'}
                         />
                     </div>
                 </div>

@@ -194,7 +194,7 @@ const MenuItem: React.FC<{
                     <RadixMenubar.Portal container={portalContainer || undefined}>
                         <RadixMenubar.SubContent
                             collisionBoundary={appContainer}
-                            className={`${ContentClasses} max-h-[var(--radix-menubar-content-available-height)] overflow-hidden flex flex-col`}
+                            className={`${ContentClasses} max-h-[calc(var(--radix-menubar-content-available-height)-0.75rem)] overflow-hidden flex flex-col`}
                             alignOffset={-5}
                             data-scheme="primary"
                         >
@@ -388,22 +388,24 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
                         <RadixMenubar.Portal container={portalContainer || undefined}>
                             <RadixMenubar.Content
                                 collisionBoundary={appContainer}
-                                className={ContentClasses}
+                                className={`${ContentClasses} max-h-[calc(var(--radix-menubar-content-available-height)-0.75rem)] overflow-hidden flex flex-col`}
                                 align="start"
                                 sideOffset={5}
                                 alignOffset={-3}
                                 data-scheme="primary"
                             >
-                                {menu.items.map((item, itemIndex) => (
-                                    <MenuItem
-                                        key={`${menuIndex}-${itemIndex}`}
-                                        item={item}
-                                        menuIndex={menuIndex}
-                                        portalContainer={portalContainer}
-                                        appContainer={appContainer}
-                                        onCloseMenu={closeMenu}
-                                    />
-                                ))}
+                                <ScrollArea className="min-h-0 !overflow-y-auto overscroll-contain">
+                                    {menu.items.map((item, itemIndex) => (
+                                        <MenuItem
+                                            key={`${menuIndex}-${itemIndex}`}
+                                            item={item}
+                                            menuIndex={menuIndex}
+                                            portalContainer={portalContainer}
+                                            appContainer={appContainer}
+                                            onCloseMenu={closeMenu}
+                                        />
+                                    ))}
+                                </ScrollArea>
                             </RadixMenubar.Content>
                         </RadixMenubar.Portal>
                     </RadixMenubar.Menu>

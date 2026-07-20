@@ -35,9 +35,7 @@ import usePostHog from '../../hooks/usePostHog'
 import Modal from 'components/RadixUI/Modal'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import FloatingModal from 'components/FloatingModal'
-import { getSurfaceMotionLayer, getWindowSurfaceBg } from '../../constants/frostedSurfaces'
-
-export { getWindowSurfaceBg } from '../../constants/frostedSurfaces'
+import { MOTION_LAYER, WINDOW_BG } from '../../constants/frostedSurfaces'
 
 const recursiveSearch = (array: MenuItem[] | undefined, value: string): boolean => {
     if (!array) return false
@@ -743,11 +741,11 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                             : item.windowed
                             ? 'h-[95%] w-[80%]'
                             : 'size-full'
-                    } !select-auto flex flex-col border-primary ${getWindowSurfaceBg(
-                        siteSettings.heaterMode
-                    )} ${getSurfaceMotionLayer(siteSettings.heaterMode, isCompositorActive)} rounded-lg ${
-                        item.appSettings?.size?.fixed ? 'border' : item.expanded ? 'border-t' : ''
-                    } ${item.expanded ? 'shadow-none' : 'shadow-md'} ${
+                    } !select-auto flex flex-col border-primary ${WINDOW_BG} ${
+                        isCompositorActive ? MOTION_LAYER : ''
+                    } rounded-lg ${item.appSettings?.size?.fixed ? 'border' : item.expanded ? 'border-t' : ''} ${
+                        item.expanded ? 'shadow-none' : 'shadow-md'
+                    } ${
                         item.expanded
                             ? 'rounded-tr-none rounded-tl-none'
                             : item.snapped === 'left'

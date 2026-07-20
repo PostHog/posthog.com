@@ -27,7 +27,6 @@ Team members are encouraged to consider taking the same zero weeks as someone el
 
 ### Before your zero week
 - [ ] Hand over all of your in-progress tickets (including any in a pending state that you believe are ongoing / going to come back). Do this as a message into [#team-support](https://posthog.slack.com/archives/C075D3C5HST).
-- [ ] Set yourself as unavailable in Zendesk [using the Out of Office app](https://posthoghelp.zendesk.com/agent/apps/out-of-office).
 - [ ] Set a status in Slack so it's clear to the rest of the team that you're on a zero week 
 
 ### During your zero week
@@ -41,7 +40,6 @@ Team members are encouraged to consider taking the same zero weeks as someone el
 > Team members who are working on tickets need to be aware of ticket queue and highlight in [#team-support](https://posthog.slack.com/archives/C075D3C5HST) if the workload is getting too high
 
 ### After your zero week
-- [ ] Set yourself as available in Zendesk [using the Out of Office app](https://posthoghelp.zendesk.com/agent/apps/out-of-office).
 - [ ] Ask in [#team-support](https://posthog.slack.com/archives/C075D3C5HST) if there are any tickets that the team would like to return to you that you were previously handling.
 - [ ] Ask in [#team-support](https://posthog.slack.com/archives/C075D3C5HST) for any feedback that the team has for you based on any of your tickets they have handled during your zero week.
 - [ ] Consider if this is a good stage in your goal to seek feedback from the team (likely via your meta GitHub issue or a different RFC). Please do consider if it's worth the team's time at this stage.
