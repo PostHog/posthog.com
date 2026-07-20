@@ -1719,11 +1719,15 @@ export const handbookSidebar = [
                 url: '',
                 children: [
                     {
+                        name: 'Working in PostHog Support',
+                        url: '/handbook/support/posthog-support',
+                    },
+                    {
                         name: 'Technical support SMEs',
                         url: '/handbook/support/support-smes',
                     },
                     {
-                        name: 'Support zero weeks',
+                        name: 'Support zero time',
                         url: '/handbook/support/support-zero',
                     },
                 ],
