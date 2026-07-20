@@ -5300,6 +5300,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/upload-source-maps/ios',
                         },
                         {
+                            name: 'Rust',
+                            url: '/docs/error-tracking/upload-source-maps/rust',
+                        },
+                        {
                             name: 'Rollup',
                             url: '/docs/error-tracking/upload-source-maps/rollup',
                         },

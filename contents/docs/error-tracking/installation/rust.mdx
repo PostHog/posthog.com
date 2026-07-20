@@ -24,9 +24,9 @@ Error tracking ships enabled by default through the `error-tracking` feature. If
 posthog-rs = { version = "*", default-features = false, features = ["error-tracking"] }
 ```
 
-<CalloutBox icon="IconInfo" title="Source context not yet supported" type="fyi">
+<CalloutBox icon="IconInfo" title="Debug symbol uploads" type="fyi">
 
-The Rust SDK resolves stack traces in-process, so captured frames include file names, line numbers, and function names without any symbol uploads. Source context (displaying the surrounding lines of code in the error tracking UI) is not yet supported.
+The Rust SDK resolves stack traces in-process, so captured frames include file names, line numbers, and function names without any symbol uploads. For server-side symbolication of your exact production build, inlined frame resolution, and source context (the surrounding lines of code in the error tracking UI), [upload debug symbols](/docs/error-tracking/upload-source-maps/rust).
 
 </CalloutBox>
 
