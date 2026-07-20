@@ -25,7 +25,7 @@ export default function Pricing() {
     const { search } = useLocation()
 
     const pricingTableOfContents = [
-        { url: 'cloud', value: 'PostHog Cloud', depth: 0 },
+        { url: 'cloud', value: 'PostHog Web', depth: 0 },
         { url: 'rates', value: 'Usage-based pricing', depth: 0 },
         { url: 'plans', value: 'Plans', depth: 0 },
         { url: 'calculator', value: 'Pricing calculator', depth: 0 },
@@ -195,8 +195,9 @@ export default function Pricing() {
                     </Link>
                 </p>
             </SectionLayout>
-
-            <CTA />
+            <div className="@lg:overflow-x-visible overflow-x-hidden">
+                <CTA />
+            </div>
         </ReaderView>
     )
 }

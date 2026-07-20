@@ -403,7 +403,7 @@ export const ProductOS = () => {
                         />
                         <TextCard
                             title="Reverse proxy"
-                            description="Send events to PostHog Cloud using your own domain."
+                            description="Send events to PostHog Web using your own domain."
                         />
                     </ul>
                 </section>

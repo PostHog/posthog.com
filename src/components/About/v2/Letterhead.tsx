@@ -18,7 +18,7 @@ export const Letterhead = () => {
                     color={siteSettings.theme === 'dark' ? 'white' : undefined}
                 />
             </div>
-            <div className="@sm:hidden uppercase text-xs tracking-wider text-center text-muted pt-2">
+            <div className="@sm:hidden uppercase text-xs tracking-wider text-center text-secondary pt-2">
                 From the desk of
             </div>
             <aside className="flex gap-2 items-center">
@@ -35,7 +35,7 @@ export const Letterhead = () => {
                     </Link>
                 </div>
                 <div className="flex flex-col gap-0 leading-none">
-                    <div className="hidden @sm:flex uppercase text-xs tracking-wider text-center text-muted pb-0.5">
+                    <div className="hidden @sm:flex uppercase text-xs tracking-wider text-center text-secondary pb-0.5">
                         From the desk of
                     </div>
                     <strong>James Hawkins</strong>

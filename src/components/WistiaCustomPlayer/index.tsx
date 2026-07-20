@@ -774,7 +774,7 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                 <div className="pt-4">
                     {/* Play button and time display */}
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3 shrink-0 basis-60">
+                        <div className="flex items-center gap-3 shrink-0">
                             <span className="!text-secondary text-sm font-mono">
                                 {formatTime(currentTime)} / {formatTime(duration)}
                             </span>
@@ -793,7 +793,7 @@ const WistiaCustomPlayer = React.forwardRef<any, WistiaCustomPlayerProps>(
                         </div>
 
                         {/* Right controls */}
-                        <div className="flex items-center justify-end gap-2 shrink-0 basis-60">
+                        <div className="flex items-center justify-end gap-2 shrink-0">
                             {/* Chapters */}
                             {chapterGroups.length > 0 && (
                                 <Select

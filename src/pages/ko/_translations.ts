@@ -21,6 +21,7 @@ const koTranslations: Record<string, string> = {
     Store: '스토어',
     Trash: '휴지통',
     Dashboard: '대시보드',
+    'Open PostHog': 'PostHog 열기',
     'Get started – free': '무료로 시작하기',
     'Get started - free': '무료로 시작하기',
     'Install with AI': 'AI로 설치하기',

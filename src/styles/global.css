@@ -559,7 +559,7 @@ hr {
     }
 }
 
-::-webkit-scrollbar {
+*:not([data-app='AppWindow'], [data-app='AppWindow'] *)::-webkit-scrollbar {
     @apply h-2.5 w-2.5;
 }
 
@@ -575,14 +575,66 @@ hr {
     }
 }
 
-/* App window scroll viewports — native scrolling with a thicker, themed thumb
-   and no track channel (replaces Radix ScrollArea's JS-driven scrollbar). */
-.app-scroll-viewport {
-    scrollbar-width: thin;
+/* App window scrollbars — leave rail sizing to the browser so overlay
+   scrollbars can follow the OS visibility preference, while visually floating
+   the thumb clear of the window's rounded corners. */
+
+[data-app='AppWindow'] *::-webkit-scrollbar-track {
+    @apply bg-transparent shadow-none;
 }
 
-.app-scroll-viewport::-webkit-scrollbar-track {
-    @apply bg-transparent shadow-none;
+[data-app='AppWindow'] *::-webkit-scrollbar-track:vertical {
+    margin-block: 6px 6px;
+}
+
+[data-app='AppWindow']
+    .app-scroll-viewport:not(.app-scroll-viewport .app-scroll-viewport)::-webkit-scrollbar-track:vertical {
+    margin-block-start: 32px;
+}
+
+[data-app='AppWindow'] *::-webkit-scrollbar-track:horizontal {
+    margin-inline: 6px;
+}
+
+[data-app='AppWindow'] *::-webkit-scrollbar-thumb {
+    background-color: rgb(var(--text-primary) / 0.28);
+    background-clip: padding-box;
+    border: 2px solid transparent;
+    border-radius: 9999px;
+}
+
+[data-app='AppWindow'] *::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(var(--text-primary) / 0.4);
+}
+
+[data-app='AppWindow'] *::-webkit-scrollbar-thumb:active {
+    background-color: rgb(var(--text-primary) / 0.5);
+}
+
+[data-app='AppWindow'] *::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+/* Firefox exposes color and width, but not the detailed WebKit geometry above. */
+@supports (-moz-appearance: none) {
+    [data-app='AppWindow'] * {
+        scrollbar-color: rgb(var(--text-primary) / 0.28) transparent;
+        scrollbar-width: thin;
+    }
+}
+
+@media (forced-colors: active) {
+    [data-app='AppWindow'] * {
+        scrollbar-color: auto;
+        scrollbar-width: auto;
+    }
+
+    [data-app='AppWindow'] *::-webkit-scrollbar,
+    [data-app='AppWindow'] *::-webkit-scrollbar-track,
+    [data-app='AppWindow'] *::-webkit-scrollbar-thumb,
+    [data-app='AppWindow'] *::-webkit-scrollbar-corner {
+        all: revert;
+    }
 }
 
 /* links and text */
