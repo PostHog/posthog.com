@@ -1,0 +1,37 @@
+---
+title: Search Logs with PostHog AI
+---
+
+[PostHog AI](/docs/posthog-ai) searches and analyzes your application [Logs](/docs/logs) using natural language. Instead of building log queries manually, describe what you're looking for – like "authentication failures in the API service" – and PostHog AI finds matching log entries.
+
+## How it works
+
+PostHog AI translates your description into log filters (service, severity, timestamp, and content), returns matching log entries with context, and identifies patterns across results – like recurring error messages or correlated failures.
+
+## Cross-product correlation
+
+PostHog AI can correlate logs with other PostHog data, making it easier to investigate issues across your stack:
+
+- **Logs + Error Tracking** – "Find logs related to the `NullPointerException` from today's errors" matches log entries to [errors](/docs/error-tracking)
+- **Logs + Session Replay** – "Show logs from the session where user X reported a bug" connects server-side logs to [session recordings](/docs/session-replay)
+- **Logs + Traces** – "Find logs with trace ID `abc123`" follows a request flow across services
+
+## Try it
+
+Select a prompt to try it out in the PostHog app:
+
+- [`Show me error logs from the API service in the last hour`](https://app.posthog.com/#panel=max:Show%20me%20error%20logs%20from%20the%20API%20service%20in%20the%20last%20hour)
+- [`Find all logs related to authentication failures today`](https://app.posthog.com/#panel=max:Find%20all%20logs%20related%20to%20authentication%20failures%20today)
+- [`What are the most common error messages this week?`](https://app.posthog.com/#panel=max:What%20are%20the%20most%20common%20error%20messages%20this%20week%3F)
+- [`Show logs from the payment service around 2pm yesterday`](https://app.posthog.com/#panel=max:Show%20logs%20from%20the%20payment%20service%20around%202pm%20yesterday)
+
+## Tips for better results
+
+- **Name the service** – "from the API service" or "in the payments worker" helps PostHog AI filter to the right source
+- **Specify severity** – "error logs" or "warning and above" narrows results to the right level
+- **Include time context** – "in the last hour" or "around 2pm yesterday" scopes the search to the relevant window
+- **Ask about patterns** – "What's the most common error this week?" prompts PostHog AI to aggregate and rank results
+
+## Get started
+
+To start searching logs with PostHog AI, [set up PostHog AI](/docs/posthog-ai/start-here).

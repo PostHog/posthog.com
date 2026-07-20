@@ -16,13 +16,13 @@ export default function WizardCTA(): JSX.Element {
                     className="hidden dark:block absolute inset-0 -bottom-12"
                     imgClassName="h-full w-full object-cover"
                 />
-                <div className="relative flex flex-col-reverse @lg:flex-row items-center pl-5 @lg:pl-8 pr-5 py-4 @lg:py-6">
+                <div className="relative flex flex-col-reverse @lg:flex-row items-center pl-5 @lg:pl-8 pr-5 py-4 @lg:py-3">
                     <div className="flex-1 text-center @lg:text-left">
                         <p className="text-lg font-bold !mb-0">Install PostHog with one command</p>
                         <p className="!mt-1 !mb-3 text-sm opacity-75">
                             Paste this into your terminal and make AI do all the work.
                         </p>
-                        <WizardCommand latest={false} />
+                        <WizardCommand />
                     </div>
                     <div className="shrink-0">
                         <img

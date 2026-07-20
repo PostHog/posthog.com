@@ -11,6 +11,18 @@ export const workflowsFeatures = {
         },
     },
     features: {
+        visual_builder: {
+            name: 'Visual workflow builder',
+            description: 'Drag-and-drop interface for building workflows',
+        },
+        ai_assistant: {
+            name: 'AI workflow assistant',
+            description: 'Build and edit workflows using natural language',
+        },
+        campaign_tracking: {
+            name: 'Campaign tracking',
+            description: 'Track open rates, click rates, link clicks, and conversions',
+        },
         real_time_triggers: {
             name: 'Real-time triggers',
             description: 'Trigger workflows in real-time based on user events',
@@ -89,7 +101,11 @@ export const workflowsFeatures = {
             },
             push: {
                 name: 'Push notifications',
-                description: 'Send push notifications to users',
+                description: 'Send mobile push notifications to users',
+            },
+            whatsapp: {
+                name: 'WhatsApp',
+                description: 'Send messages to users via WhatsApp',
             },
             cdp: {
                 name: 'CDP destinations',

@@ -62,7 +62,7 @@ const subfeatures = [
     },
 ]
 
-// Custom ProductOS Benefits slide
+// Custom "Context warehouse benefits" slide
 const ProductOSBenefitsSlide = () => {
     return (
         <div
@@ -146,7 +146,7 @@ export default function ErrorTracking(): JSX.Element {
         custom: [
             {
                 slug: 'product-os-benefits',
-                name: 'Product OS Benefits',
+                name: 'Context warehouse benefits',
                 component: ProductOSBenefitsSlide,
             },
         ],

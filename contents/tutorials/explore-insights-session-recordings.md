@@ -71,7 +71,7 @@ Once created, click any of the days in the graph, and you get a list of people w
 
 ![Extreme sessions](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/explore-insights-session-recordings/extreme-sessions.png)
 
-> **Tip:** If you are watching long session replays, make sure to enable “Skip inactivity” (the mouse icon on the bottom right of the player). You can also increase the speed of playback using the “1x” button.
+> **Tip:** If you are watching long session replays, make sure to enable “Skip inactivity” (open the **...** more options menu in the player controls to toggle it). You can also increase the speed of playback using the “1x” button.
 
 ## Further reading
 

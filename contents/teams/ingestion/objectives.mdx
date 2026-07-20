@@ -1,30 +1,47 @@
-## Q1 2026 objectives
+## Q3 2026 objectives
 
-### Fence off non-ingestion services from persons DB
+### Scale PersonHog for person property updates
 
-In order to have a single point of reference for all persons DB access so that any future changes to the underlying storage are seamless to the users.
+Person property updates are the next bottleneck to prepare for scale, and PersonHog should own them end to end.
 
-- Persons Read API for all non-ingestion services
-- Partial Persons Write API for non-ingestion services
+- Ship the person property update service to handle all person property writes
+- Ship PersonHog Writer to flush the WAL Kafka backlog to Postgres
+- Ship the distinct ID reconciliation service to own distinct ID → person mapping, merges, and splits
+- Build operational tooling for etcd management, write validation, and cache/data validation
+- Validate ingestion team 2's write path against PersonHog
 
-### Introduce rate / usage limits
+### Harden the persons Postgres database
 
-So that certain patterns of system abuse are handled without manual intervention from the team.
+The persons database needs headroom and consistency before it can scale further.
 
-- Rate Limiter API integrated into capture
-- Fair rate limits that don't upset customers
-- Public documentation on the rate limits
+- Eliminate schema drift across prod US, prod EU, and dev
+- Upgrade Postgres to unlock the higher Aurora storage limit (additional 128TB)
+- Migrate integer ID columns nearing their limit to bigint
+- Partition the person distinct ID table
 
-### Move Error Tracking ingestion to ingestion platform
+### Faster, more reliable CI/CD
 
-To simplify the ingestion codebase specific to Error Tracking, allow the team to reuse generic ingestion platform tooling, and reduce their maintenance burden.
+CI/CD is a recurring blocker to quick, safe iteration.
 
-- Production-ready ingestion pipeline for Error Tracking that uses Cymbal
+- Break ingestion into separate services and isolate ingestion code within the Node.js world
+- Add granular tests for ingestion and expand the e2e testing structure
+- Scope deployments to changed code so ingestion doesn't redeploy on every Node image change
+- Add canary deployments on the team 2 lane, gated by acceptance tests
 
-### Implement core features for the ingestion platform
+### Add redundancy and fallback to capture
 
-- Ingestion Pipelines Framework ready for broader rollout (docs, tutorials, tooling, etc.)
-- Better infrastructure for spinning up new ingestion pipelines (charts, automation, observability)
-- Tools for managing dead letter queues
-- Event restrictions available to all ingestion pipelines
-- Ability to create temporary ingestion pipelines for testing
+We should never drop customer events, even when MSK is degraded.
+
+- Use WarpStream as a fallback for MSK in capture
+- Add a circuit breaker for MSK in capture
+- Define a replay process that preserves ordering guarantees, with runbooks
+- Run a successful failover drill on dev
+
+### Help users self-troubleshoot ingestion issues
+
+Most missing-data tickets stem from issues on the customer's side and consume valuable engineering time.
+
+- Ship an ingestion MCP for tracing events through the pipeline
+- Add an event ingestion tracker to follow events end to end through the pipeline
+- Improve ingestion warnings and surface them as signals
+- Build skills that let customers diagnose and resolve common ingestion issues themselves

@@ -3,9 +3,13 @@ title: Flask
 platformLogo: flask
 ---
 
-PostHog makes it easy to get data about traffic and usage of your Flask app. Integrating PostHog enables analytics, custom events capture, feature flags, and more.
+import PythonSdkVersionNote from '../_snippets/python-sdk-version-note.mdx'
+
+PostHog makes it easy to get data about traffic and usage of your Flask app. Integrating PostHog enables analytics, custom events capture, feature flags, error tracking, and more.
 
 This guide walks you through integrating PostHog into your Flask app using the [Python SDK](/docs/libraries/python).
+
+> These docs cover version `7.x` of the Python SDK, which requires Python 3.10 or higher. On Python 3.9? See [supported versions](#supported-versions).
 
 ## Installation
 
@@ -14,26 +18,66 @@ To start, run `pip install posthog` to install PostHog’s Python SDK.
 Then, initialize PostHog where you'd like to use it. For example, here's how to capture an event in a simple route:
 
 ```python file=app.py
-package main
-from flask import Flask, render_template, request, redirect, session, url_for
+from flask import Flask
 from posthog import Posthog
 
+app = Flask(__name__)
+
 posthog = Posthog(
-  '<ph_project_token>',
-  host='<ph_client_api_host>'
+    '<ph_project_token>',
+    host='<ph_client_api_host>',
 )
 
 @app.route('/api/dashboard', methods=['POST'])
 def api_dashboard():
     posthog.capture(
-        'dashboard_api_called'
+        'dashboard_api_called',
         distinct_id='distinct_id_of_your_user',
     )
     return '', 204
-
 ```
 
-You can find your project token and instance address in [your project settings](https://us.posthog.com/project/settings).
+You can find your project token and instance address in [your project settings](https://app.posthog.com/project/settings).
+
+## Identifying users
+
+import IdentifyBackendCalloutPython from '../_snippets/identify-backend-callout-python.mdx'
+
+<IdentifyBackendCalloutPython />
+
+## Request contexts
+
+Use [contexts](/docs/libraries/python#contexts) to share identity, session IDs, and tags across multiple captures during a request.
+
+If you're using [PostHog JavaScript Web](/docs/libraries/js) on the frontend, configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your Flask backend hostname so browser requests include the session and distinct ID headers.
+
+Then read the incoming headers in your Flask request handler. Tracing headers are client-controlled analytics context, not authentication or authorization, so prefer your authenticated user ID when one is available:
+
+```python
+from flask import request, session
+from posthog import identify_context, set_context_session, tag
+
+@app.route('/api/dashboard', methods=['POST'])
+def api_dashboard():
+    with posthog.new_context(fresh=True):
+        distinct_id = session.get('user_id') or request.headers.get('X-POSTHOG-DISTINCT-ID')
+        if distinct_id:
+            identify_context(str(distinct_id))
+
+        session_id = request.headers.get('X-POSTHOG-SESSION-ID')
+        if session_id:
+            set_context_session(session_id)
+
+        tag('$current_url', request.url)
+        tag('$request_method', request.method)
+        tag('$request_path', request.path)
+
+        posthog.capture('dashboard_api_called')
+
+    return '', 204
+```
+
+Events captured without a context or explicit `distinct_id` are sent as [anonymous events](/docs/data/anonymous-vs-identified-events) with an auto-generated `distinct_id`. See the [Python SDK docs](/docs/libraries/python#person-profiles-and-properties) for more details.
 
 ## Error tracking
 
@@ -52,3 +96,7 @@ Alternatively, the following tutorials can help you get started:
 - [How to set up analytics in Python and Flask](/tutorials/python-analytics)
 - [How to set up feature flags in Python and Flask](/tutorials/python-feature-flags)
 - [How to set up A/B tests in Python and Flask](/tutorials/python-ab-testing)
+
+## Supported versions
+
+<PythonSdkVersionNote />

@@ -26,17 +26,14 @@ Generate environment files for your project with `ng g environments`. Configure 
 
   ```ts file=posthog.service.ts
   // src/app/services/posthog.service.ts
-  import { DestroyRef, Injectable, NgZone } from "@angular/core";
+  import { Injectable, NgZone } from "@angular/core";
   import posthog from "posthog-js";
   import { environment } from "../../environments/environment";
-  import { Router } from "@angular/router";
 
   @Injectable({ providedIn: "root" })
   export class PosthogService {
     constructor(
       private ngZone: NgZone,
-      private router: Router,
-      private destroyRef: DestroyRef,
     ) {
       this.initPostHog();
     }

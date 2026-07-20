@@ -8,15 +8,21 @@ This page covers troubleshooting for Workflows. For setup, see the [installation
 
 <AskAIInput placeholder="Type your question and hit enter..." />
 
-## Emails not sending? 
+## Emails not sending?
 
 Check that your domain is verified and you’ve added the DNS records correctly.
 
-## Spam folder issues?  
+## Spam folder issues?
 
 Ensure SPF/DKIM are valid, and consider setting up DMARC.
 
-## Variables not populating?  
+## Debugging email delivery failures
+
+When an email bounces, is rejected, or receives a complaint, the failure details are logged as entries on the individual workflow invocation. Bounce entries include the bounce type (permanent or transient) and the SMTP diagnostic message. Complaint entries include the feedback type (e.g., "abuse"). Rejections and rendering failures include the specific error details from SES.
+
+To find affected invocations, go to the workflow's **Metrics** tab and click a metric tile like **Bounced** or **Blocked**. This navigates to the **Invocations** tab with a log filter applied, showing all invocations that experienced that failure type within the selected timeframe.
+
+## Variables not populating?
 
 Confirm the property exists on the person profile (e.g. `person.name`).
 
@@ -32,6 +38,16 @@ Common validation issues include:
 - Missing required fields in workflow steps
 
 Fix the issues listed in the error message, then try enabling again. Drafts can be archived even if they have validation errors.
+
+## Liquid `TokenizationError` in email templates?
+
+If you see an error like `TokenizationError: unexpected character "\"there\"..."` when saving an email template, the cause is double quotes inside a Liquid expression. The email builder serializes templates to JSON, which escapes double quotes and breaks the Liquid parser.
+
+Use single quotes around string arguments in filters:
+
+```liquid
+{{ person.properties.first_name | default: 'there' }}
+```
 
 ## Variable size limit exceeded?
 
@@ -54,6 +70,4 @@ When this error occurs, the workflow's error handling setting determines what ha
 
 ## Solved community questions
 
-<SolvedQuestions
-    topicLabel="Workflows"
-/>
+<SolvedQuestions topicLabel="Workflows" />
