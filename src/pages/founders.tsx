@@ -53,6 +53,19 @@ export const Sidebar = () => {
 
             <hr className="my-4" />
 
+            <h6 className="mb-2">PostHog for startups</h6>
+            <p>
+                Building a company? Get $50,000 in credits to build a self-driving product, plus exclusive merch and
+                partner perks.
+            </p>
+            <p>
+                <Link to="/startups" state={{ newWindow: true }} className="underline font-semibold text-primary">
+                    Apply to PostHog for startups
+                </Link>
+            </p>
+
+            <hr className="my-4" />
+
             <p>
                 You might also be interested in our{' '}
                 <Link to="/product-engineers" className="underline font-medium">

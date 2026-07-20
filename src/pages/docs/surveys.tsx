@@ -128,8 +128,7 @@ const Surveys: React.FC<SurveysProps> = () => {
                 buttonText="Create your first survey"
                 buttonLink="/docs/surveys/installation"
                 imageColumnClasses="mt-8 md:mt-0 max-w-96"
-                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/surveys-hog.png"
-                imageClasses=""
+                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/surveys_hog_99cd6e8e8b.png"
             />
 
             <AskMax

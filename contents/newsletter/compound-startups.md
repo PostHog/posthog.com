@@ -25,7 +25,7 @@ Parker Conrad, founder and CEO of the workforce management platform Rippling, di
 
 **This week’s theme is:** The compound startup
 
-> This post was first published in our Substack newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
+> This post was first published in our Substack newsletter, [build mode](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
 
 ## Introducing the “compound startup” 🚀
 
@@ -93,10 +93,10 @@ So, next time you’re considering what bets to take with your startup, consider
 
 - **[Tips for Writing Great One-Pagers](https://medium.com/@johnpcutler/great-one-pagers-592ebbaf80ec) – John Cutler:** One-pagers are “short, space-constrained, descriptions of a proposed product bet.” A great guide on how to build arguments for big, transformative bets.
 
-- **[How to find your blind spots](https://www.zeptonaut.com/posts/find-your-blind-spots/?utm_source=posthog-newsletter&utm_medium=email) – Charlie Andrews:** Argues that (1) success is a bad measure of success – e.g. you can play a good game of chess and lose – and (2) identifying minigames is the key to improving your skill.
+- **[How to find your blind spots](https://www.zeptonaut.com/posts/find-your-blind-spots/) – Charlie Andrews:** Argues that (1) success is a bad measure of success – e.g. you can play a good game of chess and lose – and (2) identifying minigames is the key to improving your skill.
 
-- **[Numbers To Know For Managing Software Teams](https://blog.staysaasy.com/p/numbers-to-know-for-managing-software?utm_source=posthog-newsletter&utm_medium=email) – StaySaaSy:** Some practical tips on managing (and hiring for) software teams, including the number people use when they’re very unhappy.
+- **[Numbers To Know For Managing Software Teams](https://blog.staysaasy.com/p/numbers-to-know-for-managing-software) – StaySaaSy:** Some practical tips on managing (and hiring for) software teams, including the number people use when they’re very unhappy.
 
-- **[Why we use GitHub as our CMS](https://posthog.com/blog/github-cms?utm_source=posthog-newsletter&utm_medium=email) – Ian Vanagas:** GitHub is the ideal CMS for engineers and developers because they already use it, and it encourages non-technical people to be more technical.”
+- **[Why we use GitHub as our CMS](/blog/github-cms) – Ian Vanagas:** GitHub is the ideal CMS for engineers and developers because they already use it, and it encourages [non-technical people to be more technical](/blog/github-cms).”
 
 <NewsletterForm />

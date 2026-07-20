@@ -1,0 +1,42 @@
+---
+title: Analyze Experiments with PostHog AI
+---
+
+[PostHog AI](/docs/posthog-ai) creates [Experiments](/docs/experiments), analyzes results, and summarizes behavioral differences between variants. You can set up A/B tests, check statistical significance, and compare session replays across variants – all through natural language.
+
+## How it works
+
+When you ask PostHog AI to create an Experiment, it sets up the Experiment with your specified split percentages and goal metrics, creates the [feature flag](/docs/feature-flags) with the right variants, and configures targeting rules if you specify a user segment.
+
+For existing Experiments, PostHog AI can summarize results, interpret statistical significance, and explain what the data means in plain language.
+
+## Analyze results with PostHog AI
+
+PostHog AI doesn't just show you the numbers, it interprets them. When you ask about Experiment results, it tells you:
+
+- **Which variant is winning** and by how much
+- **Whether the result is statistically significant** based on the confidence intervals
+- **What behavioral differences exist** between variants by summarizing [session replays](/docs/session-replay) for each group
+- **What to do next** – whether to ship, extend, or stop the Experiment
+
+## Try it
+
+Select a prompt to try it out in the PostHog app:
+
+- [`Set up an A/B test with a 70/30 split for a new checkout flow`](https://app.posthog.com/#panel=max:Set%20up%20an%20A%2FB%20test%20with%20a%2070%2F30%20split%20for%20a%20new%20checkout%20flow)
+- [`Summarize the results of my latest Experiment`](https://app.posthog.com/#panel=max:Summarize%20the%20results%20of%20my%20latest%20Experiment)
+- [`What behavioral differences do you see between variant A and variant B?`](https://app.posthog.com/#panel=max:What%20behavioral%20differences%20do%20you%20see%20between%20variant%20A%20and%20variant%20B%3F)
+- [`Summarize session replays for the control group in my pricing Experiment`](https://app.posthog.com/#panel=max:Summarize%20session%20replays%20for%20the%20control%20group%20in%20my%20pricing%20Experiment)
+- [`Create an Experiment targeting only mobile users`](https://app.posthog.com/#panel=max:Create%20an%20Experiment%20targeting%20only%20mobile%20users)
+
+## Tips for better results
+
+- **Name your goal metric** – "with conversion on `purchase_completed`" helps PostHog AI configure the right success metric
+- **Specify split percentages** – "70/30 split" or "equal split across three variants" tells PostHog AI exactly how to allocate traffic
+- **Ask about significance** – "Is this result statistically significant?" prompts PostHog AI to interpret the confidence intervals
+- **Combine with session summaries** – "Summarize replays for users in the control group" reveals behavioral differences that metrics alone might miss
+- **Ask for recommendations** – "Should I ship this?" prompts PostHog AI to weigh the evidence and suggest next steps
+
+## Get started
+
+To start analyzing Experiments with PostHog AI, [set up PostHog AI](/docs/posthog-ai/start-here).

@@ -145,7 +145,7 @@ export const amplitude = {
         feature_flags: {
             available: true,
             pricing: {
-                free_tier: '50k tracked users',
+                free_tier: '10k monthly tracked users',
             },
             features: {
                 boolean_flags: true,
@@ -204,7 +204,7 @@ export const amplitude = {
         experiments: {
             available: true,
             pricing: {
-                free_tier: 'None',
+                free_tier: '50,000 impressions per month',
             },
             features: {
                 count_value_metrics: true,
@@ -214,7 +214,7 @@ export const amplitude = {
                 funnel_metrics: true,
                 namespacing: false,
                 native_goal_tracking: false,
-                no_code_experiments: false,
+                no_code_experiments: true,
                 ratio_metrics: false,
                 recommended_run_time: false,
                 secondary_metrics: true,
@@ -231,7 +231,7 @@ export const amplitude = {
                     fake_door_testing: true,
                     holdout_testing: true,
                     multi_armed_bandit: 'Enterprise',
-                    mutually_exclusive_experiments: true,
+                    mutually_exclusive_experiments: 'Enterprise',
                     redirect_testing: true,
                 },
             },
@@ -343,7 +343,7 @@ export const amplitude = {
                 native_multi_source_revenue_tracking: true,
                 deferred_revenue: false,
                 product_analytics_integration: true,
-                multi_currency_support: false,
+                multi_currency_support: true,
                 revenue_prediction: false,
                 sql_access: 'Add-on',
             },
@@ -354,7 +354,13 @@ export const amplitude = {
         error_tracking: {
             available: false,
         },
-        llm_analytics: {
+        ai_observability: {
+            available: false,
+        },
+        logs: {
+            available: false,
+        },
+        workflows: {
             available: false,
         },
     },
@@ -406,6 +412,7 @@ export const amplitude = {
             cms: '',
             notebooks: true,
             project_management_tools: '',
+            ai_assistant: true,
         },
     },
     pricing: {

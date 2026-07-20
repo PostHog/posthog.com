@@ -1,0 +1,63 @@
+---
+title: Linking Automox as a source
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+sourceId: Automox
+---
+
+import SourceSetupIntro from "../_snippets/source-setup-intro.mdx";
+import SyncModes from "../_snippets/sync-modes.mdx";
+import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx";
+import AlphaRelease from "../_snippets/alpha-release.mdx";
+
+<AlphaRelease />
+
+The Automox connector syncs your patch management and endpoint data into the PostHog Data warehouse, so you can trend remediation coverage and device compliance alongside your product data.
+
+[Automox](https://www.automox.com) is a cloud-native patch management and endpoint management platform used by IT and security teams to automate patching, manage device inventory, and enforce compliance policies across their fleet.
+
+## Prerequisites
+
+You need:
+
+- An Automox account with access to **Settings → API Keys** in the Automox console.
+- An API key created there (used as a bearer token). API keys are user-scoped, so requests are attributed to the user who created the key.
+- If your API key has access to more than one organization, the numeric organization ID to sync. Find this under **Settings → Organization** in the Automox console.
+
+## Adding a data source
+
+<SourceSetupIntro />
+
+When linking Automox, you'll need:
+
+- **API key** – create one under [Settings → API Keys](https://console.automox.com) in the Automox console. Copy the key and paste it into PostHog.
+
+- **Organization ID** (optional) – if your API key can access more than one organization, enter the numeric organization ID the source should sync. Leave it blank when the key only belongs to one organization.
+
+## Sync modes
+
+<SyncModes />
+
+The `policy_runs` table (policy execution history) and `events` table (console activity log) support **incremental** sync using Automox's server-side time filters, so they only fetch new rows on each run. All other tables (`devices`, `organizations`, `packages`, `policies`, `server_groups`, `users`) sync as **full refresh** because the Automox API doesn't expose an "updated since" filter for those endpoints.
+
+## Configuration
+
+<SourceParameters />
+
+## Supported tables
+
+<SourceTables />
+
+## Troubleshooting
+
+- **"Automox authentication failed"** – the API key is wrong or has expired. Create a new key under **Settings → API Keys** in the Automox console and re-enter it in PostHog.
+
+- **"Automox API key has access to multiple organizations"** – the key can access several organizations, so PostHog can't pick one automatically. Enter the numeric organization ID on the source configuration.
+
+- **"Automox organization not found"** – the configured organization ID doesn't match any organization the key can access. Check the ID under **Settings → Organization** in the Automox console.
+
+<TroubleshootingLink />

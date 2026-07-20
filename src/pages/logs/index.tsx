@@ -62,7 +62,7 @@ export default function Logs(): JSX.Element {
         templates: {
             overview: 'stacked',
         },
-        exclude: ['customers', 'answers', 'videos', 'pairs-with', 'feature-comparison'],
+        exclude: ['customers', 'answers', 'videos', 'pairs-with'],
         order: [
             'overview',
             'customers',
@@ -72,13 +72,14 @@ export default function Logs(): JSX.Element {
             'features',
             'posthog-on-posthog',
             'comparison-summary',
+            'feature-comparison',
             'docs',
             'pricing',
             'getting-started',
         ],
         content: {
             answersDescription: 'Track costs, performance, and usage of your AI features with detailed analytics',
-            answersHeadline: 'What can LLM Analytics help me discover?',
+            answersHeadline: 'What can AI Observability help me discover?',
         },
     })
 

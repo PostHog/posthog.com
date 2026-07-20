@@ -69,6 +69,28 @@ Discovery is about understanding the real problem through natural conversation. 
 - Focus on understanding their current state and challenges
 - Ask about consequences and impact naturally as the conversation flows
 
+### Understanding customer goals
+
+Instead of asking about room for more PostHog products, ask about what the customer is trying to accomplish. Questions like "what's coming up in your roadmap over the next few months?" get better intel without feeling like an upsell and it's just generally a much more natural conversation.
+
+When you understand their goals, you can frame PostHog around outcomes instead of features. For example, if you learn they're launching a jobs board and their GTM leans on niche SEO, you can shape the demo around using web analytics to nail that launch. You're telling a story where PostHog helps them succeed, not just showing what buttons do.
+
+**Goal-discovery questions:**
+
+- "What's coming up in your product roadmap over the next few months?"
+- "What's the biggest thing your team is trying to accomplish this quarter?"
+- "What does success look like for your team right now?"
+- "What's keeping you up at night with work?" (only if you have genuine rapport)
+
+**When to use these:**
+
+- **In prep** — research their roadmap, recent launches, and blog posts beforehand, then confirm on the call
+- **During discovery** — weave into the opening conversation naturally
+- **At the end of a call** — as a lightweight follow-up: "before we wrap, anything big coming up I should know about?"
+- **In follow-up comms** — as part of a warm intro or handoff (e.g. TAM introducing to the engineering team)
+
+**Important:** This only works if you're genuinely curious. It's not a checklist item for every call — forced interest is gross and salesy. But when the connection is there, it's a much better place to frame what we offer from.
+
 ## What makes PostHog different
 
 ### The demo
@@ -128,7 +150,7 @@ A key component of discovery is qualifying customers to ensure they are a good f
 - **Not in ICP** - You can gather great product insights when chatting with people in other roles, but we tend to work best with our [ICP](/handbook/who-we-build-for)
 - **Can't meet technical requirements** - To be successful, the customer needs to (at minimum), be able to implement PostHog via the JS/SDKs
 - **Support request** - Be helpful, but if it's better suited for support, you can send them thru the available [Support](/docs/support-options) channels
-- **Startup program** - For companies who qualify, we have a special program designed for [startups](/handbook/brand/startups) interested in PostHog
+- **Startup program** - For companies who qualify, we have a special program designed for [startups](/handbook/marketing/startups) interested in PostHog
 - **Needs to vary our terms** - Either to start [an evaluation/PoC of PostHog](/handbook/growth/sales/contract-rules#varying-terms-for-trials-and-proofs-of-concept-pocs) [or generally](/handbook/growth/sales/contract-rules#varying-terms) but without a path to >=$20k in annual spend
 - **No engineering resources** - There is some coding required for a tool like PostHog and customers will need some engineering support to be successful
 - **Strict compliance constraints** - A customer may ask for a very niche [security or privacy](/handbook/company/security) certification that we don't have

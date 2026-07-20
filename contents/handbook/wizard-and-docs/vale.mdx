@@ -1,0 +1,157 @@
+---
+title: Vale and prose linting
+sidebar: Handbook
+showTitle: true
+---
+
+[Vale](https://vale.sh) is a prose linter that enforces PostHog's writing style across the website: docs, blog posts, newsletters, and more. 
+
+It catches spelling mistakes and style inconsistencies based on rules we define – like the unforgivable use of [em dashes](/handbook/content/posthog-style-guide#use-british-style-en-dashes).
+ 
+## Why use a prose linter?
+
+Prose is infinitely diverse. Different authors, tones, and writing goals make inconsistencies easy to introduce and a nightmare to maintain.
+
+A prose linter creates a baseline. It automatically enforces the core mechanical and stylistic rules we care about most as a brand, so our writing stays consistent.
+
+> "Never send an LLM to do a linter's job." – someone
+
+LLMs can generate drafts and reviews, but they are not reliable linters. They're slow and expensive compared to deterministic tools.
+
+Use Vale to *detect* issues, then use LLMs to hep *fix* them. 
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_02_16_T15_09_34_778_Z_61bcc3fa2b.png"
+    alt="Vale linting"
+/>
+
+<Caption>
+Prose linting with Vale
+</Caption>
+
+## Getting started
+
+### Install Vale
+
+```bash
+brew install vale
+```
+
+### Run linting
+
+```bash
+pnpm vale:staged     # Lint md/.mdx files you have staged in git
+
+pnpm vale contents/blogs/           # Lint a specific directory
+pnpm vale contents/blog/my-post.md  # Lint a specific file
+pnpm vale .                         # Lint current directory
+
+pnpm vale:test       # Lint the .vale/test/ directory
+```
+
+For real-time linting in your code editor, install the [Vale VS Code extension](https://marketplace.visualstudio.com/items?itemName=chrischinchilla.vale-vscode).
+
+## Style rules
+
+Styles are enforced by a collection rules and checks written as YAML files. We can organize these rules into directories to create different style guides for different areas of our website.
+
+Vale then applies these rules hierarchically and in combination with each other.
+
+```
+PostHogBase            Rules for all .md and .mdx files
+├── AmericanEnglish
+├── ProductNames
+├── EnDash
+├── OxfordComma
+├── Spelling
+├── Inclusivity
+└── ...
+
+PostHogDocs            Rules for /docs
+├── DefinitionListDash
+├── DirectAddress
+├── Trivializers
+└── UIBoldNotQuotes
+
+PostHogEditorial       Rules for /blog, /newsletter, /tutorials
+├── BulletSpacing
+├── EnableNotAllow
+└── Hedging
+```
+
+## Adding a rule
+
+1. Pick the right directory. `PostHogBase` will apply the rule everywhere, `PostHogDocs` to the docs, and `PostHogEditorial` to the blog, newsletter, and tutorials.
+
+2. Create a `.yml` file in the respective `styles/` subdirectory.
+
+The two most common rule types are substitution and existence.
+
+```yaml
+# Substitution – suggest a replacement
+extends: substitution
+message: "Use '%s' instead of '%s'."
+level: warning
+swap:
+  colour: color
+```
+
+```yaml
+# Existence – flag terms that shouldn't appear
+extends: existence
+message: "Avoid using '%s'."
+level: warning
+tokens:
+  - simply
+  - obviously
+```
+
+Each rule can be configured to a severity level: 
+
+1. Errors 
+2. Warnings 
+3. Suggestions
+
+We generally stick to warnings and suggestions.
+
+The [Vale docs](https://vale.sh/docs) have more information on rule types and configuration.
+
+<CalloutBox type="fyi" icon="IconInfo" title="Test your Vale rules">
+
+If you add a new rule, update the `test/` directory with examples and run `pnpm vale:test` to see if it works as expected.
+
+You can also test specific rules with the Vale CLI.
+
+`pnpm vale --filter='.Name=="PostHogBase.SentenceCase"' ./docs/error-tracking/pricing.mdx`
+
+</CalloutBox>
+
+## Breaking the rules 
+
+### Vocabularies and spelling exceptions
+
+Not every violation is actually a mistake. We frequently use industry terms, brand names, and colloquialisms that aren't in standard dictionaries like "faq", "devops", or "stonks."
+
+You can add exceptions to the Vale rules as vocabulary or as a spelling exception.
+
+Here's how to choose between them: 
+
+| Proper noun? | Examples | File |
+|------------------------------|----------|------|
+| Yes | HubSpot, JavaScript, ClickHouse, PostHog | `config/vocabularies/BrandsAndTechnologies/accept.txt` |
+| No | webhook, cronjob, heatmaps, stonks | `PostHogBase/spelling-exceptions.txt` |
+
+1. Vocabularies are case-sensitive regex patterns that enforce exact capitalization. Use for brand names, products, and technologies where casing is a part of correctness. They will be exempt from rules like `SentenceCase.yml`.
+
+2. Spelling exceptions are case-insensitive words the spell checker should accept. Use for industry terminology or developer jargon that isn't in standard dictionaries. They will be exempt from the rule `Spelling.yml`.
+
+### The .vale.ini file
+
+We've configured global ignores in `.vale.ini` based on certain scopes, tokens, and tags. 
+
+Vale globally ignores:
+
+- Fenced code blocks `` ``` ``
+- JSX import and export statements
+- Markdown link URLs
+- React component tags

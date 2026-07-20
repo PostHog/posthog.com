@@ -5,23 +5,417 @@ showTitle: true
 ---
 
 import RevAnalyticsBetaWarning from './_snippets/rev-analytics-beta-warning.mdx'
+import WizardCommand from 'components/WizardCommand'
 
 <RevAnalyticsBetaWarning />
 
-You can connect your revenue data to `persons` and `groups` in the [revenue analytics settings](https://app.posthog.com/data-management/revenue).
+PostHog automatically connects revenue data to persons and groups when you use revenue events. For data warehouse sources, you need to map the connection manually.
 
-This is automatically done when you're using revenue events (since we know what person/group an event belongs to) but we need your help to manually map them in case you're using a data warehouse source.
+## Step 1: Add metadata when creating new customers
 
-<ProductScreenshot
-  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_16_20_38_743c93fff2.png"
-  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_16_20_29_8ec0f4633a.png"
-  alt="Revenue analytics persons and groups setup" 
-  classes="rounded"
-/>
+Search your codebase for where you create Stripe customers (e.g. `stripe.Customer.create` or equivalent) and add the `posthog_person_distinct_id` metadata field.
+
+<MultiLanguage>
+
+```python
+customer = stripe.Customer.create(
+    email=user.email,
+    metadata={"posthog_person_distinct_id": user.posthog_distinct_id},  # +
+)
+```
+
+```node
+const customer = await stripe.customers.create({
+  email: user.email,
+  metadata: { posthog_person_distinct_id: user.posthogDistinctId },  // +
+});
+```
+
+```ruby
+customer = Stripe::Customer.create({
+  email: user.email,
+  metadata: { posthog_person_distinct_id: user.posthog_distinct_id },  # +
+})
+```
+
+```php
+$customer = $stripe->customers->create([
+    'email' => $user->email,
+    'metadata' => ['posthog_person_distinct_id' => $user->posthogDistinctId],  // +
+]);
+```
+
+```go
+params := &stripe.CustomerParams{
+    Email: stripe.String(user.Email),
+}
+params.AddMetadata("posthog_person_distinct_id", user.PosthogDistinctID)  // +
+cust, err := customer.New(params)
+```
+
+```java
+CustomerCreateParams params = CustomerCreateParams.builder()
+    .setEmail(user.getEmail())
+    .putMetadata("posthog_person_distinct_id", user.getPosthogDistinctId())  // +
+    .build();
+Customer customer = Customer.create(params);
+```
+
+```dotnet
+var options = new CustomerCreateOptions
+{
+    Email = user.Email,
+    Metadata = new Dictionary<string, string>  // +
+    {  // +
+        { "posthog_person_distinct_id", user.PosthogDistinctId },  // +
+    },  // +
+};
+var customer = await customerService.CreateAsync(options);
+```
+
+</MultiLanguage>
+
+## Step 2: Tag existing customers via charges, subscriptions, or invoices
+
+For customers created before you added the metadata in step 1, you don't need to update the customer object directly. Instead, pass `posthog_person_distinct_id` as metadata on any charge, subscription, or invoice tied to that customer. PostHog automatically resolves it from the most recently created child object.
+
+Add the metadata to whichever Stripe call you already make. Here are the most common patterns:
+
+### Subscriptions
+
+<MultiLanguage>
+
+```python
+stripe.Subscription.create(
+    customer=user.stripe_customer_id,
+    items=[{"price": "price_xxx"}],
+    metadata={"posthog_person_distinct_id": user.posthog_distinct_id},  # +
+)
+```
+
+```node
+await stripe.subscriptions.create({
+  customer: user.stripeCustomerId,
+  items: [{ price: 'price_xxx' }],
+  metadata: { posthog_person_distinct_id: user.posthogDistinctId },  // +
+});
+```
+
+```ruby
+Stripe::Subscription.create({
+  customer: user.stripe_customer_id,
+  items: [{ price: 'price_xxx' }],
+  metadata: { posthog_person_distinct_id: user.posthog_distinct_id },  # +
+})
+```
+
+```php
+$stripe->subscriptions->create([
+    'customer' => $user->stripeCustomerId,
+    'items' => [['price' => 'price_xxx']],
+    'metadata' => ['posthog_person_distinct_id' => $user->posthogDistinctId],  // +
+]);
+```
+
+```go
+params := &stripe.SubscriptionParams{
+    Customer: stripe.String(user.StripeCustomerID),
+    Items: []*stripe.SubscriptionItemsParams{
+        {Price: stripe.String("price_xxx")},
+    },
+}
+params.AddMetadata("posthog_person_distinct_id", user.PosthogDistinctID)  // +
+sub, err := subscription.New(params)
+```
+
+```java
+SubscriptionCreateParams params = SubscriptionCreateParams.builder()
+    .setCustomer(user.getStripeCustomerId())
+    .addItem(SubscriptionCreateParams.Item.builder().setPrice("price_xxx").build())
+    .putMetadata("posthog_person_distinct_id", user.getPosthogDistinctId())  // +
+    .build();
+Subscription subscription = Subscription.create(params);
+```
+
+```dotnet
+var options = new SubscriptionCreateOptions
+{
+    Customer = user.StripeCustomerId,
+    Items = new List<SubscriptionItemOptions>
+    {
+        new() { Price = "price_xxx" },
+    },
+    Metadata = new Dictionary<string, string>  // +
+    {  // +
+        { "posthog_person_distinct_id", user.PosthogDistinctId },  // +
+    },  // +
+};
+var subscription = await subscriptionService.CreateAsync(options);
+```
+
+</MultiLanguage>
+
+### One-off charges (payment intents)
+
+<MultiLanguage>
+
+```python
+stripe.PaymentIntent.create(
+    amount=1000,
+    currency="usd",
+    customer=user.stripe_customer_id,
+    metadata={"posthog_person_distinct_id": user.posthog_distinct_id},  # +
+)
+```
+
+```node
+await stripe.paymentIntents.create({
+  amount: 1000,
+  currency: 'usd',
+  customer: user.stripeCustomerId,
+  metadata: { posthog_person_distinct_id: user.posthogDistinctId },  // +
+});
+```
+
+```ruby
+Stripe::PaymentIntent.create({
+  amount: 1000,
+  currency: 'usd',
+  customer: user.stripe_customer_id,
+  metadata: { posthog_person_distinct_id: user.posthog_distinct_id },  # +
+})
+```
+
+```php
+$stripe->paymentIntents->create([
+    'amount' => 1000,
+    'currency' => 'usd',
+    'customer' => $user->stripeCustomerId,
+    'metadata' => ['posthog_person_distinct_id' => $user->posthogDistinctId],  // +
+]);
+```
+
+```go
+params := &stripe.PaymentIntentParams{
+    Amount:   stripe.Int64(1000),
+    Currency: stripe.String(string(stripe.CurrencyUSD)),
+    Customer: stripe.String(user.StripeCustomerID),
+}
+params.AddMetadata("posthog_person_distinct_id", user.PosthogDistinctID)  // +
+pi, err := paymentintent.New(params)
+```
+
+```java
+PaymentIntentCreateParams params = PaymentIntentCreateParams.builder()
+    .setAmount(1000L)
+    .setCurrency("usd")
+    .setCustomer(user.getStripeCustomerId())
+    .putMetadata("posthog_person_distinct_id", user.getPosthogDistinctId())  // +
+    .build();
+PaymentIntent intent = PaymentIntent.create(params);
+```
+
+```dotnet
+var options = new PaymentIntentCreateOptions
+{
+    Amount = 1000,
+    Currency = "usd",
+    Customer = user.StripeCustomerId,
+    Metadata = new Dictionary<string, string>  // +
+    {  // +
+        { "posthog_person_distinct_id", user.PosthogDistinctId },  // +
+    },  // +
+};
+var intent = await paymentIntentService.CreateAsync(options);
+```
+
+</MultiLanguage>
+
+### Stripe Checkout
+
+Pass the metadata in the checkout session's `subscription_data` or `payment_intent_data` depending on your checkout mode. Also set `client_reference_id` to your internal user ID so you can look up the distinct ID.
+
+<MultiLanguage>
+
+```python
+# For recurring (subscription) checkout
+session = stripe.checkout.Session.create(
+    mode="subscription",
+    client_reference_id=user.id,
+    subscription_data={
+        "metadata": {"posthog_person_distinct_id": user.posthog_distinct_id},  # +
+    },
+    # ... other params
+)
+
+# For one-time payment checkout
+session = stripe.checkout.Session.create(
+    mode="payment",
+    client_reference_id=user.id,
+    payment_intent_data={
+        "metadata": {"posthog_person_distinct_id": user.posthog_distinct_id},  # +
+    },
+    # ... other params
+)
+```
+
+```node
+// For recurring (subscription) checkout
+const session = await stripe.checkout.sessions.create({
+  mode: 'subscription',
+  client_reference_id: user.id,
+  subscription_data: {
+    metadata: { posthog_person_distinct_id: user.posthogDistinctId },  // +
+  },
+  // ... other params
+});
+
+// For one-time payment checkout
+const session = await stripe.checkout.sessions.create({
+  mode: 'payment',
+  client_reference_id: user.id,
+  payment_intent_data: {
+    metadata: { posthog_person_distinct_id: user.posthogDistinctId },  // +
+  },
+  // ... other params
+});
+```
+
+```ruby
+# For recurring (subscription) checkout
+session = Stripe::Checkout::Session.create({
+  mode: 'subscription',
+  client_reference_id: user.id,
+  subscription_data: {
+    metadata: { posthog_person_distinct_id: user.posthog_distinct_id },  # +
+  },
+  # ... other params
+})
+
+# For one-time payment checkout
+session = Stripe::Checkout::Session.create({
+  mode: 'payment',
+  client_reference_id: user.id,
+  payment_intent_data: {
+    metadata: { posthog_person_distinct_id: user.posthog_distinct_id },  # +
+  },
+  # ... other params
+})
+```
+
+```php
+// For recurring (subscription) checkout
+$session = $stripe->checkout->sessions->create([
+    'mode' => 'subscription',
+    'client_reference_id' => $user->id,
+    'subscription_data' => [
+        'metadata' => ['posthog_person_distinct_id' => $user->posthogDistinctId],  // +
+    ],
+    // ... other params
+]);
+
+// For one-time payment checkout
+$session = $stripe->checkout->sessions->create([
+    'mode' => 'payment',
+    'client_reference_id' => $user->id,
+    'payment_intent_data' => [
+        'metadata' => ['posthog_person_distinct_id' => $user->posthogDistinctId],  // +
+    ],
+    // ... other params
+]);
+```
+
+```go
+// For recurring (subscription) checkout
+params := &stripe.CheckoutSessionParams{
+    Mode:               stripe.String(string(stripe.CheckoutSessionModeSubscription)),
+    ClientReferenceID:  stripe.String(user.ID),
+    SubscriptionData: &stripe.CheckoutSessionSubscriptionDataParams{
+        Metadata: map[string]string{
+            "posthog_person_distinct_id": user.PosthogDistinctID,  // +
+        },
+    },
+}
+session, err := checkoutsession.New(params)
+
+// For one-time payment checkout
+params := &stripe.CheckoutSessionParams{
+    Mode:               stripe.String(string(stripe.CheckoutSessionModePayment)),
+    ClientReferenceID:  stripe.String(user.ID),
+    PaymentIntentData: &stripe.CheckoutSessionPaymentIntentDataParams{
+        Metadata: map[string]string{
+            "posthog_person_distinct_id": user.PosthogDistinctID,  // +
+        },
+    },
+}
+session, err := checkoutsession.New(params)
+```
+
+```java
+// For recurring (subscription) checkout
+SessionCreateParams params = SessionCreateParams.builder()
+    .setMode(SessionCreateParams.Mode.SUBSCRIPTION)
+    .setClientReferenceId(user.getId())
+    .setSubscriptionData(
+        SessionCreateParams.SubscriptionData.builder()
+            .putMetadata("posthog_person_distinct_id", user.getPosthogDistinctId())  // +
+            .build()
+    )
+    .build();
+Session session = Session.create(params);
+
+// For one-time payment checkout
+SessionCreateParams params = SessionCreateParams.builder()
+    .setMode(SessionCreateParams.Mode.PAYMENT)
+    .setClientReferenceId(user.getId())
+    .setPaymentIntentData(
+        SessionCreateParams.PaymentIntentData.builder()
+            .putMetadata("posthog_person_distinct_id", user.getPosthogDistinctId())  // +
+            .build()
+    )
+    .build();
+Session session = Session.create(params);
+```
+
+```dotnet
+// For recurring (subscription) checkout
+var options = new SessionCreateOptions
+{
+    Mode = "subscription",
+    ClientReferenceId = user.Id,
+    SubscriptionData = new SessionSubscriptionDataOptions
+    {
+        Metadata = new Dictionary<string, string>  // +
+        {  // +
+            { "posthog_person_distinct_id", user.PosthogDistinctId },  // +
+        },  // +
+    },
+};
+var session = await sessionService.CreateAsync(options);
+
+// For one-time payment checkout
+var options = new SessionCreateOptions
+{
+    Mode = "payment",
+    ClientReferenceId = user.Id,
+    PaymentIntentData = new SessionPaymentIntentDataOptions
+    {
+        Metadata = new Dictionary<string, string>  // +
+        {  // +
+            { "posthog_person_distinct_id", user.PosthogDistinctId },  // +
+        },  // +
+    },
+};
+var session = await sessionService.CreateAsync(options);
+```
+
+</MultiLanguage>
+
+> **How does this work?** PostHog looks for `posthog_person_distinct_id` in the metadata of subscriptions, charges, and invoices tied to each Stripe customer. If the customer object doesn't have the metadata directly, PostHog uses the value from the most recently created child object.
 
 Once this is connected you'll be able to properly see who your top customers are in the [Top customers dashboard](https://app.posthog.com/revenue_analytics#top-customers).
 
-You'll also get access to the `persons_revenue_analytics` and `groups_revenue_analytics` tables in the [data warehouse](https://app.posthog.com/data-warehouse). This is a simple map of `person_id`/`group_key` to what their all-time revenue is. We plan on expanding that soon with more fields and also making that data available on the soon-to-be-released [CRM](/teams/crm) page.
+You'll also get access to the `persons_revenue_analytics` and `groups_revenue_analytics` tables in the [data warehouse](https://app.posthog.com/data-warehouse). This is a simple map of `person_id`/`group_key` to what their all-time revenue is.
 
 ```sql
 -- Count the number of persons with revenue greater than 1,000,000

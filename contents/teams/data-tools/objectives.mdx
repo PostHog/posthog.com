@@ -1,0 +1,44 @@
+## Q3 2026 objectives
+
+### Objective 1: Make notebooks the default way to analyze data
+
+Owner: Sinan
+
+Motivation: Notebooks are the clearest future surface for persistent, AI-assisted analysis. We have the foundation; this quarter should make them usable, shareable, and customer-ready.
+
+What we’ll ship:
+
+- Python notebooks for customers
+- Polished markdown-first notebook UX
+- Better integration with HogQL, DuckDB, external DBs, and visualizations
+- AI agents can create/edit notebooks directly (great MCP support)
+- Publicly shareable notebooks
+
+### Objective 2: Define and level up HogQL as a query engine
+
+Owner: George
+
+Motivation: HogQL is moving beyond a translation layer. We need a clear future, better agent/query ergonomics, and stronger foundations for BI, notebooks, and external querying.
+
+What we’ll ship:
+
+- HogQL roadmap with owners and milestones (rust wen?)
+- Typed pre-execution errors
+- Dry-run and cost estimation for agents
+- First optimization passes using the improved type system
+- Improved HogQL / query observability
+
+### Objective 3: Make BI, SQL, and visualizations feel mature and reusable
+
+Owner: Marius
+
+Motivation: We have a lot of useful pieces, but the product still has papercuts and doesn’t always feel polished. BI should feel credible on its own and provide reusable building blocks for notebooks and agents.
+
+What we’ll ship:
+
+- Improved charting / visualization UX
+- Work with Desktop to standardize PostHog visualization components
+- Support more databases as first-class citizens (MySQL, Snowflake, BigQuery, etc)
+- Row drilldown from query results (AI-powered "next steps"?)
+- SQL editor papercut cleanup
+- Variables: multiselect, query-backed, and time-based variables

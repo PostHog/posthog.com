@@ -343,7 +343,7 @@ export const mixpanel = {
         error_tracking: {
             available: false,
         },
-        llm_analytics: {
+        ai_observability: {
             available: false,
         },
         data_pipelines: {
@@ -371,6 +371,12 @@ export const mixpanel = {
                 revenue_prediction: false,
                 sql_access: false,
             },
+        },
+        logs: {
+            available: false,
+        },
+        workflows: {
+            available: false,
         },
     },
     platform: {
@@ -428,6 +434,7 @@ export const mixpanel = {
             cms: '',
             notebooks: true,
             project_management_tools: '',
+            ai_assistant: true,
         },
     },
     pricing: {

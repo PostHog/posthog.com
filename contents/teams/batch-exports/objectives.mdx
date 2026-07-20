@@ -1,31 +1,37 @@
-# Q1 2026
+# Q3 2026
 
-## Objective 1: Export anything anywhere
-
-### Motivation
-* Users frequently request new destinations covered by CDP.
-* Users frequently request exporting of transformed and/or joined data, which can be achieved via a data warehouse materialized view.
-
-### What we’ll ship
-* Enable multiple (or all) CDP destinations for batch exports.
-  * In the process, deprecate HTTP batch export in favor of using a CDP destination.
-* Assist with design and implementation of a unified data-pipelines UI.
-* Support a batch export for backfilling of PostHog Workflows using batch exports.
-* Maybe: Enable batch exporting of data warehouse views.
-
-## Objective 2: Keep batch exports running into the future
+## Objective 1: Make HogQL-backed data exportable
 
 ### Motivation
-* The team is feeling pressure from maintenance load, which is impacting goals and feature work.
-* The team sometimes takes too long to diagnose an issue due to lack of metrics and debugging tools.
-* Users, particularly larger-volume users, are demanding better performance when exporting and backfilling.
-* Users sometimes reach out to support because they lack tools to debug issues themselves.
+* Enables a lot, if not all, products to be data sources of batch exports
+  * Any dashboards, effectively replacing CSV exports (and offering ANY format exports)
+  * Any warehouse views
+  * And more...
+* Have a single consistent way of exporting any type of data
+  * If a new product adds new data sources using HogQL queries, they get batch exports “for free”
+* Allow for more flexibility in the data models that can be exported
 
 ### What we’ll ship
-* Unified tooling for debugging a broken batch export.
-  * Including: Logs, metrics, configuration parameters, run history, and more!
-* Improve metrics and tracing to more quickly and accurately detect issues with batch exports.
-* Expose better logs and metrics for users to resolve issues themselves.
-* Review and adjust error recovery procedures (like automated retries).
-* Ensure performance can scale to larger users.
-* Ensure support for the most popular features of all destinations.
+* On-demand export of HogQL-backed data to supported destinations
+* Scheduled sync of HogQL-backed data to supported destinations
+
+## Objective 2: Agent-driven batch exports
+
+### Motivation
+* Improving experience for AI-pilled teams
+* Make it easier for agents to create, validate and run batch exports
+
+### What we’ll ship
+* Skills for creating, validating, debugging, updating batch exports
+* Integration UI for connecting to destinations
+
+## Objective 3: The pipeline must grow
+
+### Motivation
+* Reduce time to deployment
+* Ensure current customers are well served
+* Faster, accurate, and self-driven debugging
+
+### What we'll ship
+* Work with devex on implementing CI improvements
+* Better internal observability so we know what to improve

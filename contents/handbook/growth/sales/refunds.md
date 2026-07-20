@@ -59,7 +59,7 @@ In-app ticket
 -   Support team reviews the request, issues refund or credits based on the eligibility and criteria outlined above, and responds to customer.
 
 Contact sales form or email to sales@posthog.com
-Account Executives can direct these to the Support team using the ticket emoji in the #website-contact-sales Slack channel to auto-create a Zendesk ticket
+Account Executives can direct these to the Support team using the ticket emoji in the #website-contact-sales Slack channel to auto-create a support ticket
 
 Large account requests
 
@@ -73,9 +73,10 @@ Large account requests
 
 Before doing a refund, review customer's usage. Some useful sources:
 
--   You can make a copy of [this posthog insight](https://us.posthog.com/project/2/insights/8nLWTLHu) and use organization id to review account usage.
--   [This dashboard](https://metabase.prod-us.posthog.dev/dashboard/3-customer-detail?stripe_customer_id=&customer_or_org_id=) for an overview with usage reports and invoice history.
+-   If you have access to Vitally, find the customer's Metabase dashboard link under the 'Usage Dashboard Link' trait. The 'Event counts by type last X days' insight is particularly useful here - you can change the lookback period to see a longer time range. 
+-   [This dashboard](https://us.posthog.com/project/2/dashboard/259114) for an overview with usage reports and invoice history.
 -   [This dashboard](https://metabase.prod-us.posthog.dev/dashboard/139-customer-usage-breakdown?organization_id=&project_id=) to help identify issues for customers with many projects
+-   You can also make a copy of [this PostHog insight](https://us.posthog.com/project/2/insights/8nLWTLHu) and use organization id to review account usage. Note that the org usage report can run 2-3 times per day, so numbers may be duplicated/inflated.
 
 What's "normal" vs "weird" usage:
 
@@ -92,11 +93,20 @@ What's "normal" vs "weird" usage:
 
 -   Subtract the baseline usage from the spike amount to find the total overage. Example: If average monthly usage was 1 million events per month and a spike resulted in 3 million events, the overage amount would be 2 million events.
 
+**For event-specific overages (optional):**
+
+If you want more precision when a single event type is inflated, use the 'Event counts by type last X days' insight in the Metabase dashboard:
+
+1. Change the lookback days to find the baseline period before the spike
+2. Identify the inflated event type and compare its spike volume to the baseline
+3. The difference is your overage amount for that event type
+
 ### Calculate the amount to refund/credit
 
--   Use [pricing calculator](https://posthog.com/pricing) to calculate the total price for baseline and overage volumes. The difference between the two will be the refund amount.
+-   Use the [pricing calculator](https://posthog.com/pricing) to calculate the total price for baseline and overage volumes. The difference between the two will be the refund amount.
+-   Alternatively, you can use [QuoteHog](https://quote.posthog.com) - go to the usage history tab, build a price option from a specific month's usage, and subtract the inflated volume to see what the bill would have been without the spike.
 -   Don't just put in the overage amount in the calculator - doing this would give you the wrong amount because of our tiered pricing structure. Calculating the difference between regular usage and usage with overage is the accurate way to calculate actual amount.
--   Add a note in the Zendesk ticket with a breakdown of calculations, the baseline average, and the overage. This transparency can be helpful if the customer has questions.
+-   Add a [private note](/handbook/support/posthog-support#private-notes) on the support ticket with a breakdown of calculations, the baseline average, and the overage. This transparency can be helpful if the customer has questions.
 
 ### Refund or credit?
 
@@ -106,10 +116,6 @@ What's "normal" vs "weird" usage:
 
 ## How to issue refunds or credits
 
-### Prerequisites
-
-You need Support specialist level access to Stripe, ask Simon for access.
-
 ### Issuing credits
 
 1. Go to [billing admin](https://billing.posthog.com/admin/)
@@ -118,9 +124,9 @@ You need Support specialist level access to Stripe, ask Simon for access.
 4. In the 'Amount' field, set an amount of credits you wish to issue for this customer
 5. In the 'Reason' field, select a reason which best describes why you're issuing the credits
 6. Add an optional note in the 'Notes' field
-7. Include an optional link in the 'Reference link' field, e.g. Zendesk ticket, Slack message link, etc.
+7. Include an optional link in the 'Reference link' field, e.g. support ticket, Slack message link, etc.
 8. Click 'Save and view'
-9. Confirm that the credits were successfully added to the customer's balance in Stripe under 'Customer invoice balance'
+9. After saving, you'll land on the customer view in Billing Admin — confirm the credit now appears on the customer's balance there. You don't need to check Stripe.
 
 ### Issuing a refund
 Refunds are now initiated through Billing Admin and finalized in Stripe via a credit note. 
@@ -145,7 +151,7 @@ Once you do that (through any of the two options), you'll land on the "Add refun
 
 1. Allocate refund amounts per product. Refunds must be issued per product. Enter the refund amount for each affected product. You may need to do more math here: for an event spike refund may span Product Analytics, Person Profiles, and Group Analytics. Billing Admin does not automatically split refunds across products, you must do the math and allocate amounts manually. As you enter per product amounts, the total refund amount updates automatically.
 2. Select refund reasons: Choose a Stripe refund reason (required) and select an internal reason (used for internal reporting and analysis)
-3. Add any relevant notes or context (e.g. Zendesk ticket, Slack link, short explanation)
+3. Add any relevant notes or context (e.g. support ticket, Slack link, short explanation)
 4. Once you review everything and all looks good save the refund in Billing Admin. This will issue a Stripe credit note, which is processed as a refund to the customer’s default payment method. Stripe automatically sends a notification email to the customer.
 
 ### Fixed fee product refunds
@@ -161,7 +167,7 @@ Steps:
 1. Find customer profile in Stripe (you can search by organization id)
 2. Locate the proration adjustment under Pending Invoice Items.
 3. Manually delete the line item.
-4. Add a note in Zendesk documenting that the proration line was removed to avoid double crediting.
+4. Add a private note on the support ticket documenting that the proration line was removed to avoid double crediting.
 
 ### Spotting suspicious stuff - watch out for:
 
@@ -177,7 +183,7 @@ Steps:
 -   It's a big customer (spending $1,667+ monthly)
 -   Need to create or modify an invoice for the correction. Support team should not create or modify invoices. Invoicing responsibilities will be handled by RevOps to maintain accuracy.
 
-Tag <TeamMember name="Mine Kansu" photo /> in Zendesk and share what you checked, what you think we should do, and any other relevant context. RevOps will review usage trends and customer lifecycle (e.g. new client, high-value account) to figure out next steps.
+Message <TeamMember name="Mine Kansu" photo /> in Slack with what you checked, what you think we should do, and any other relevant context, and attach a private note to the ticket linking to the conversation. RevOps will review usage trends and customer lifecycle (e.g. new client, high-value account) to figure out next steps.
 
 ### Our approach
 
