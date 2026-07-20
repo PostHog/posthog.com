@@ -125,10 +125,11 @@ Tags can also be set automatically via [workflow automation](/docs/support/workf
 
 Messages you send to widget customers display delivery status indicators:
 
-| Status   | Meaning                                    |
-| -------- | ------------------------------------------ |
-| **Sent** | Message has been delivered to the customer |
-| **Read** | Customer has viewed the message            |
+| Status             | Meaning                                             |
+| ------------------ | --------------------------------------------------- |
+| **Sent**           | Message has been delivered to the customer          |
+| **Read**           | Customer has viewed the message                     |
+| **Failed to send** | Message could not be delivered (email tickets only) |
 
 These are inferred from the ticket's unread counter and only appear on widget-channel tickets.
 
@@ -141,6 +142,8 @@ Email replies show delivery status:
 | **Sending** | Email is being dispatched          |
 | **Sent**    | Email was delivered successfully   |
 | **Failed**  | Email delivery failed              |
+
+For email tickets, delivery is asynchronous — the message is saved immediately, but the actual email is sent in the background. The per-message delivery status badge is the source of truth for whether the email was delivered. If delivery fails (for example, because your domain isn't verified), a **Failed to send** badge appears on the message.
 
 ### Private notes
 
