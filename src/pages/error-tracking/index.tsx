@@ -62,7 +62,7 @@ const subfeatures = [
     },
 ]
 
-// Custom "Better together" slide
+// Custom "Context warehouse benefits" slide
 const ProductOSBenefitsSlide = () => {
     return (
         <div
