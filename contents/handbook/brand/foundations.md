@@ -91,7 +91,11 @@ Because it's a capability, not a product, always write it lowercase and hyphenat
 
 ### The standard description
 
-Use this whenever you need a standard description of PostHog:
+When you need a one-liner:
+
+> PostHog automatically diagnoses problems, fixes bugs, and generates pull requests – all without you having to prompt it.
+
+For a fuller standard description of PostHog, use this:
 
 <AboutPostHog />
 
