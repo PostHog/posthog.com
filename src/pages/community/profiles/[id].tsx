@@ -24,11 +24,11 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import OSTabs from 'components/OSTabs'
 import { TeamMember } from 'components/People'
+import { PROFILE_COLORS } from 'constants/profileColors'
 import {
     IconThumbsUpFilled,
     IconThumbsDownFilled,
     IconArrowUpRight,
-    IconPencil,
     IconUpload,
     IconX,
     IconCheck,
@@ -47,6 +47,7 @@ import { Select } from 'components/RadixUI/Select'
 import OSInput from 'components/OSForm/input'
 import { useToast } from '../../../context/Toast'
 import HeaderBar from 'components/OSChrome/HeaderBar'
+import LevelBadge from 'components/Squeak/components/LevelBadge'
 import OSButton from 'components/OSButton'
 import { IconNoEntry, IconStrapi } from 'components/OSIcons'
 import Points from 'components/Points'
@@ -378,20 +379,7 @@ const AvatarBlock = ({
                     <div>
                         <label className="text-[15px]">Favorite color</label>
                         <ul className="list-none m-0 p-0 flex space-x-1 mt-1">
-                            {[
-                                'lime-green',
-                                'blue',
-                                'orange',
-                                'teal',
-                                'purple',
-                                'seagreen',
-                                'salmon',
-                                'yellow',
-                                'red',
-                                'green',
-                                'lilac',
-                                'sky-blue',
-                            ].map((color) => {
+                            {PROFILE_COLORS.map((color) => {
                                 const active = values.color === color
                                 return (
                                     <li key={color} onClick={() => setFieldValue('color', color)}>
@@ -433,6 +421,12 @@ const Details = ({ profile, isEditing, setFieldValue, values, errors, isTeamMemb
     }, [values.pronouns])
     return (
         <div className="text-sm space-y-3">
+            {!isEditing && profile.reputation != null && (
+                <p className="flex justify-between items-center m-0">
+                    <span className="font-semibold">Reputation</span>
+                    <LevelBadge points={profile.reputation} />
+                </p>
+            )}
             {!isEditing && (
                 <p className="flex justify-between m-0">
                     {isTeamMember ? (
@@ -1132,6 +1126,11 @@ export default function ProfilePage({ params }: PageProps) {
                             populate: {
                                 image: true,
                                 icon: true,
+                                achievement_group: {
+                                    populate: {
+                                        icon: true,
+                                    },
+                                },
                             },
                         },
                     },
@@ -1469,197 +1468,9 @@ export default function ProfilePage({ params }: PageProps) {
     }
 
     return (
-        <div data-scheme="secondary" className="h-full bg-primary text-primary">
+        <div data-scheme="secondary" className="pt-4 h-full bg-primary text-primary flex flex-col">
             <SEO title={`${name}'s profile - PostHog`} />
-            <div className="border-b border-primary">
-                <HeaderBar
-                    rightActionButtons={
-                        isEditing ? (
-                            <div className="flex gap-1">
-                                <OSButton
-                                    size="md"
-                                    variant="secondary"
-                                    onClick={() => {
-                                        setIsEditing(false)
-                                        resetForm()
-                                    }}
-                                >
-                                    Cancel
-                                </OSButton>
-                                <OSButton size="md" variant="primary" onClick={submitForm} disabled={isSubmitting}>
-                                    {isSubmitting ? 'Saving...' : 'Save'}
-                                </OSButton>
-                            </div>
-                        ) : (
-                            <>
-                                {isModerator && (
-                                    <div className="flex gap-px border-r border-secondary pr-2 mr-2">
-                                        <Popover
-                                            dataScheme="primary"
-                                            open={giftPopoverOpen}
-                                            onOpenChange={setGiftPopoverOpen}
-                                            trigger={
-                                                <span>
-                                                    <OSButton
-                                                        asLink
-                                                        size="md"
-                                                        tooltip={<>Gift this user points</>}
-                                                        icon={<IconPresent />}
-                                                        iconClassName="size-5"
-                                                    />
-                                                </span>
-                                            }
-                                            contentClassName="w-80 !p-0 overflow-hidden border border-primary rounded-md"
-                                        >
-                                            <div className="bg-gradient-to-br from-yellow/20 via-orange/10 to-red/10 p-4 border-b border-primary">
-                                                <div className="flex items-center gap-2">
-                                                    <div className="bg-yellow/30 rounded-full p-2">
-                                                        <IconPresent className="size-5 text-orange" />
-                                                    </div>
-                                                    <div>
-                                                        <h4 className="text-sm font-bold m-0 flex items-center gap-1">
-                                                            Gift points to {firstName}
-                                                            <IconSparkles className="size-3.5 text-yellow" />
-                                                        </h4>
-                                                        <p className="text-xs text-secondary m-0">
-                                                            Reward great contributions
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="p-4 pt-2 space-y-2">
-                                                <div>
-                                                    <label
-                                                        htmlFor="gift-amount"
-                                                        className="text-xs font-semibold text-secondary block mb-1"
-                                                    >
-                                                        Points
-                                                    </label>
-                                                    <OSInput
-                                                        id="gift-amount"
-                                                        direction="column"
-                                                        showLabel={false}
-                                                        label="Points"
-                                                        type="number"
-                                                        min={1}
-                                                        value={giftAmount}
-                                                        onChange={(e) =>
-                                                            setGiftAmount(e.target.value ? Number(e.target.value) : '')
-                                                        }
-                                                        placeholder="How many points?"
-                                                    />
-                                                </div>
-                                                <div>
-                                                    <label
-                                                        htmlFor="gift-reason"
-                                                        className="text-xs font-semibold  text-secondary block mb-1"
-                                                    >
-                                                        Reason
-                                                    </label>
-                                                    <OSInput
-                                                        id="gift-reason"
-                                                        direction="column"
-                                                        showLabel={false}
-                                                        label="Reason"
-                                                        type="text"
-                                                        value={giftNote}
-                                                        onChange={(e) => setGiftNote(e.target.value)}
-                                                        placeholder="What's this gift for?"
-                                                    />
-                                                </div>
-                                                {giftConfirming ? (
-                                                    <div className="space-y-2">
-                                                        <p className="text-sm text-secondary text-center">
-                                                            Send{' '}
-                                                            <span className="font-bold">
-                                                                {giftAmount} point{giftAmount === 1 ? '' : 's'}
-                                                            </span>{' '}
-                                                            to {profile?.firstName}?
-                                                        </p>
-                                                        <div className="flex gap-2">
-                                                            <OSButton
-                                                                size="md"
-                                                                variant="secondary"
-                                                                onClick={() => setGiftConfirming(false)}
-                                                                disabled={giftSubmitting}
-                                                                width="full"
-                                                            >
-                                                                Cancel
-                                                            </OSButton>
-                                                            <OSButton
-                                                                size="md"
-                                                                variant="primary"
-                                                                onClick={handleGift}
-                                                                disabled={giftSubmitting}
-                                                                width="full"
-                                                            >
-                                                                {giftSubmitting ? 'Sending...' : 'Confirm'}
-                                                            </OSButton>
-                                                        </div>
-                                                    </div>
-                                                ) : (
-                                                    <OSButton
-                                                        size="md"
-                                                        variant="primary"
-                                                        onClick={() => setGiftConfirming(true)}
-                                                        disabled={!giftAmount || !giftNote?.trim()}
-                                                        width="full"
-                                                    >
-                                                        Send gift
-                                                    </OSButton>
-                                                )}
-                                            </div>
-                                        </Popover>
-                                        <OSButton
-                                            asLink
-                                            size="md"
-                                            to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collection-types/plugin::users-permissions.user/${profile?.user?.data?.id}`}
-                                            tooltip={
-                                                <>
-                                                    View in Strapi{' '}
-                                                    <IconExternal className="size-4 text-secondary inline-block relative -top-px" />
-                                                </>
-                                            }
-                                            icon={<IconStrapi />}
-                                            iconClassName="size-5"
-                                            external
-                                        />
 
-                                        <OSButton
-                                            size="md"
-                                            tooltip={
-                                                profile?.user?.data?.attributes?.blocked
-                                                    ? 'Unblock user?'
-                                                    : 'Block user'
-                                            }
-                                            icon={
-                                                profile?.user?.data?.attributes?.blocked ? (
-                                                    <IconNoEntry />
-                                                ) : (
-                                                    <IconNoEntry />
-                                                )
-                                            }
-                                            iconClassName="size-5"
-                                            className={`${
-                                                profile?.user?.data?.attributes?.blocked ? '!bg-red !text-white' : ''
-                                            }`}
-                                            onClick={() => handleBlock(!profile?.user?.data?.attributes?.blocked)}
-                                        />
-                                    </div>
-                                )}
-                                {(isCurrentUser || (isModerator && user?.webmaster)) && (
-                                    <OSButton
-                                        size="md"
-                                        icon={<IconPencil />}
-                                        iconClassName="size-5"
-                                        onClick={() => setIsEditing(true)}
-                                    />
-                                )}
-                            </>
-                        )
-                    }
-                />
-            </div>
             <ScrollArea
                 className="min-h-0 h-full"
                 style={
@@ -1686,6 +1497,7 @@ export default function ProfilePage({ params }: PageProps) {
                             />
 
                             {(isEditing ||
+                                profile.reputation != null ||
                                 profile.pineappleOnPizza !== null ||
                                 profile.pronouns ||
                                 profile.location) && (
@@ -1719,19 +1531,11 @@ export default function ProfilePage({ params }: PageProps) {
 
                             {profile.achievements?.length > 0 && (
                                 <Block title="Achievements" url={`/community/achievements`}>
-                                    <ul className="grid grid-cols-7 gap-2 m-0 p-0 list-none">
-                                        {profile.achievements.map(({ achievement, hidden, id }) => (
-                                            <li key={id} className="flex justify-center">
-                                                <Achievement
-                                                    {...achievement.data.attributes}
-                                                    id={id}
-                                                    hidden={hidden}
-                                                    profile={profile}
-                                                    mutate={mutate}
-                                                />
-                                            </li>
-                                        ))}
-                                    </ul>
+                                    <AchievementsGrid
+                                        achievements={profile.achievements}
+                                        profile={profile}
+                                        mutate={mutate}
+                                    />
                                 </Block>
                             )}
                             {isEditing && <BackgroundImageField setFieldValue={setFieldValue} values={values} />}
@@ -1739,6 +1543,41 @@ export default function ProfilePage({ params }: PageProps) {
                                 <Block title="Special employee things">
                                     <ModeratorFields setFieldValue={setFieldValue} values={values} errors={errors} />
                                 </Block>
+                            )}
+                            {(isCurrentUser || (isModerator && user?.webmaster)) && (
+                                <div className="flex gap-2 mt-4">
+                                    {isEditing ? (
+                                        <>
+                                            <OSButton
+                                                size="md"
+                                                variant="secondary"
+                                                onClick={() => {
+                                                    setIsEditing(false)
+                                                    resetForm()
+                                                }}
+                                            >
+                                                Cancel
+                                            </OSButton>
+                                            <OSButton
+                                                size="md"
+                                                variant="primary"
+                                                onClick={submitForm}
+                                                disabled={isSubmitting}
+                                            >
+                                                {isSubmitting ? 'Saving...' : 'Save'}
+                                            </OSButton>
+                                        </>
+                                    ) : (
+                                        <OSButton
+                                            size="md"
+                                            variant="secondary"
+                                            width="full"
+                                            onClick={() => setIsEditing(true)}
+                                        >
+                                            Edit profile
+                                        </OSButton>
+                                    )}
+                                </div>
                             )}
                         </div>
 
@@ -1812,6 +1651,163 @@ export default function ProfilePage({ params }: PageProps) {
                     </div>
                 </div>
             </ScrollArea>
+            <div className="border-primary sticky border-t bottom-0">
+                <HeaderBar
+                    rightActionButtons={
+                        <>
+                            {isModerator && (
+                                <div className="flex gap-px">
+                                    <Popover
+                                        dataScheme="primary"
+                                        open={giftPopoverOpen}
+                                        onOpenChange={setGiftPopoverOpen}
+                                        trigger={
+                                            <span>
+                                                <OSButton
+                                                    asLink
+                                                    size="md"
+                                                    tooltip={<>Gift this user points</>}
+                                                    icon={<IconPresent />}
+                                                    iconClassName="size-5"
+                                                />
+                                            </span>
+                                        }
+                                        contentClassName="w-80 !p-0 overflow-hidden border border-primary rounded-md"
+                                    >
+                                        <div className="bg-gradient-to-br from-yellow/20 via-orange/10 to-red/10 p-4 border-b border-primary">
+                                            <div className="flex items-center gap-2">
+                                                <div className="bg-yellow/30 rounded-full p-2">
+                                                    <IconPresent className="size-5 text-orange" />
+                                                </div>
+                                                <div>
+                                                    <h4 className="text-sm font-bold m-0 flex items-center gap-1">
+                                                        Gift points to {firstName}
+                                                        <IconSparkles className="size-3.5 text-yellow" />
+                                                    </h4>
+                                                    <p className="text-xs text-secondary m-0">
+                                                        Reward great contributions
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="p-4 pt-2 space-y-2">
+                                            <div>
+                                                <label
+                                                    htmlFor="gift-amount"
+                                                    className="text-xs font-semibold text-secondary block mb-1"
+                                                >
+                                                    Points
+                                                </label>
+                                                <OSInput
+                                                    id="gift-amount"
+                                                    direction="column"
+                                                    showLabel={false}
+                                                    label="Points"
+                                                    type="number"
+                                                    min={1}
+                                                    value={giftAmount}
+                                                    onChange={(e) =>
+                                                        setGiftAmount(e.target.value ? Number(e.target.value) : '')
+                                                    }
+                                                    placeholder="How many points?"
+                                                />
+                                            </div>
+                                            <div>
+                                                <label
+                                                    htmlFor="gift-reason"
+                                                    className="text-xs font-semibold  text-secondary block mb-1"
+                                                >
+                                                    Reason
+                                                </label>
+                                                <OSInput
+                                                    id="gift-reason"
+                                                    direction="column"
+                                                    showLabel={false}
+                                                    label="Reason"
+                                                    type="text"
+                                                    value={giftNote}
+                                                    onChange={(e) => setGiftNote(e.target.value)}
+                                                    placeholder="What's this gift for?"
+                                                />
+                                            </div>
+                                            {giftConfirming ? (
+                                                <div className="space-y-2">
+                                                    <p className="text-sm text-secondary text-center">
+                                                        Send{' '}
+                                                        <span className="font-bold">
+                                                            {giftAmount} point{giftAmount === 1 ? '' : 's'}
+                                                        </span>{' '}
+                                                        to {profile?.firstName}?
+                                                    </p>
+                                                    <div className="flex gap-2">
+                                                        <OSButton
+                                                            size="md"
+                                                            variant="secondary"
+                                                            onClick={() => setGiftConfirming(false)}
+                                                            disabled={giftSubmitting}
+                                                            width="full"
+                                                        >
+                                                            Cancel
+                                                        </OSButton>
+                                                        <OSButton
+                                                            size="md"
+                                                            variant="primary"
+                                                            onClick={handleGift}
+                                                            disabled={giftSubmitting}
+                                                            width="full"
+                                                        >
+                                                            {giftSubmitting ? 'Sending...' : 'Confirm'}
+                                                        </OSButton>
+                                                    </div>
+                                                </div>
+                                            ) : (
+                                                <OSButton
+                                                    size="md"
+                                                    variant="primary"
+                                                    onClick={() => setGiftConfirming(true)}
+                                                    disabled={!giftAmount || !giftNote?.trim()}
+                                                    width="full"
+                                                >
+                                                    Send gift
+                                                </OSButton>
+                                            )}
+                                        </div>
+                                    </Popover>
+                                    <OSButton
+                                        asLink
+                                        size="md"
+                                        to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collection-types/plugin::users-permissions.user/${profile?.user?.data?.id}`}
+                                        tooltip={
+                                            <>
+                                                View in Strapi{' '}
+                                                <IconExternal className="size-4 text-secondary inline-block relative -top-px" />
+                                            </>
+                                        }
+                                        icon={<IconStrapi />}
+                                        iconClassName="size-5"
+                                        external
+                                    />
+
+                                    <OSButton
+                                        size="md"
+                                        tooltip={
+                                            profile?.user?.data?.attributes?.blocked ? 'Unblock user?' : 'Block user'
+                                        }
+                                        icon={
+                                            profile?.user?.data?.attributes?.blocked ? <IconNoEntry /> : <IconNoEntry />
+                                        }
+                                        iconClassName="size-5"
+                                        className={`${
+                                            profile?.user?.data?.attributes?.blocked ? '!bg-red !text-white' : ''
+                                        }`}
+                                        onClick={() => handleBlock(!profile?.user?.data?.attributes?.blocked)}
+                                    />
+                                </div>
+                            )}
+                        </>
+                    }
+                />
+            </div>
         </div>
     )
 }
@@ -1852,6 +1848,116 @@ const TeamMembersList = ({ self, team }) => {
                 )
             })}
         </>
+    )
+}
+
+const AchievementTooltipContent = ({ icon, title, description, iconSize = 'size-16' }) => (
+    <>
+        <div className="flex justify-center -mx-1.5 -mt-1 mb-2 py-2 bg-accent/50 rounded">
+            <img className={iconSize} src={icon} />
+        </div>
+        <h4 className="text-lg m-0">{title}</h4>
+        {description && <p className="m-0 mt-1 text-sm">{description}</p>}
+    </>
+)
+
+const AchievementGrouped = ({ items, profile, mutate }) => {
+    const groupData = items[0].achievement.data.attributes.achievement_group.data.attributes
+
+    if (groupData.tiered && items.length === 1) {
+        const { achievement, hidden, id } = items[0]
+        return (
+            <Achievement {...achievement.data.attributes} id={id} hidden={hidden} profile={profile} mutate={mutate} />
+        )
+    }
+
+    return (
+        <Tooltip
+            delay={0}
+            side="bottom"
+            trigger={
+                <span className="relative">
+                    <img className="w-full" src={groupData.icon?.data?.attributes?.url} />
+                    {items.length > 1 && (
+                        <span className="absolute -top-1 -right-1 bg-accent text-primary text-[10px] font-bold rounded-full size-4 flex items-center justify-center border border-primary">
+                            x{items.length}
+                        </span>
+                    )}
+                </span>
+            }
+        >
+            <div className="max-w-[220px] text-left">
+                <AchievementTooltipContent
+                    icon={groupData.icon?.data?.attributes?.url}
+                    title={groupData.Title}
+                    description={groupData.description}
+                    iconSize="size-24"
+                />
+                <div className="border-t border-primary mt-3 pt-2.5">
+                    <p className="text-xs font-semibold opacity-50 m-0 mb-2">Unlocked by</p>
+                    <ul className="m-0 p-0 list-none flex flex-col gap-2">
+                        {items.map(({ achievement, id }, index) => (
+                            <li key={id} className="relative flex items-center gap-2">
+                                <div className="size-7 flex-shrink-0 relative">
+                                    {index < items.length - 1 && (
+                                        <div className="absolute w-px h-full left-1/2 -translate-x-1/2 bg-border dark:bg-border-dark bottom-0 translate-y-1/2" />
+                                    )}
+                                    <img
+                                        className="size-full relative"
+                                        src={achievement.data.attributes.icon?.data?.attributes?.url}
+                                    />
+                                </div>
+                                <div>
+                                    <p className="text-xs font-semibold m-0 leading-tight">
+                                        {achievement.data.attributes.title}
+                                    </p>
+                                    {achievement.data.attributes.description && (
+                                        <p className="text-xs opacity-60 m-0 leading-tight mt-0.5">
+                                            {achievement.data.attributes.description}
+                                        </p>
+                                    )}
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
+        </Tooltip>
+    )
+}
+
+const AchievementsGrid = ({ achievements, profile, mutate }) => {
+    const groups = useMemo(() => {
+        const grouped = achievements.filter((item) => item.achievement?.data?.attributes?.achievement_group?.data)
+        return Object.groupBy(grouped, (item) => item.achievement.data.attributes.achievement_group.data.id)
+    }, [achievements])
+
+    return (
+        <ul className="grid grid-cols-7 gap-2 m-0 p-0 list-none">
+            {achievements.map(({ achievement, hidden, id }) => {
+                if (!achievement?.data) return null
+                const group = achievement.data.attributes?.achievement_group?.data
+                if (group) {
+                    if (groups[group.id][0].id !== id) return null
+                    return (
+                        <li key={`group-${group.id}`} className="flex justify-center">
+                            <AchievementGrouped items={groups[group.id]} profile={profile} mutate={mutate} />
+                        </li>
+                    )
+                }
+                return (
+                    <li key={id} className="flex justify-center">
+                        <Achievement
+                            {...achievement.data.attributes}
+                            id={id}
+                            hidden={hidden}
+                            profile={profile}
+                            mutate={mutate}
+                        />
+                    </li>
+                )
+            })}
+        </ul>
     )
 }
 
@@ -1915,12 +2021,8 @@ const Achievement = ({ title, description, image, icon, id, mutate, profile, ...
                 </ImageContainer>
             }
         >
-            <div className="max-w-[250px] text-left">
-                <div className="mb-4 -mx-2 -mt-2">
-                    <img src={image?.data?.attributes?.url} />
-                </div>
-                <h4 className="text-lg m-0">{title}</h4>
-                <p className="m-0 mt-1 text-sm mb-2">{description}</p>
+            <div className="max-w-[220px] text-left">
+                <AchievementTooltipContent icon={icon?.data?.attributes?.url} title={title} description={description} />
             </div>
         </Tooltip>
     )

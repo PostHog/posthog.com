@@ -27,7 +27,7 @@ const CompanyHandbook: React.FC = () => {
                     some highlights you might be interested to know:
                 </p>
                 <ul className="mb-4 pl-4">
-                    <li>Our revenue is over $10 million a year</li>
+                    <li>Our revenue is over $50 million a year</li>
                     <li>
                         We're{' '}
                         <Link href="/handbook/finance" state={{ newWindow: true }}>

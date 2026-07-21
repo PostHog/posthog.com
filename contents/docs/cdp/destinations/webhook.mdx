@@ -7,6 +7,7 @@ templateId:
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
 import { CalloutBox } from 'components/Docs/CalloutBox'
+import { PostHogIPsInline } from 'components/Docs/PostHogIPs'
 
 With webhook destinations, you can send event data from PostHog to any HTTP endpoint, whether it's to your own backend, an internal system, or a third-party platform.
 
@@ -89,11 +90,22 @@ You can further configure and customize webhook destinations by:
 
 <TemplateParameters />
 
+<details>
+<summary>Add IPs to Firewall/WAF allowlists (recommended)</summary>
+
+If your webhook endpoint is behind a firewall or web application firewall (WAF), it may block requests from PostHog. Add these IP addresses to your allowlist so PostHog can deliver events to your endpoint.
+
+<PostHogIPsInline />
+
+These are public, stable IPs used by PostHog's data pipeline.
+
+</details>
+
 ## FAQ
 
 ### Is the source code for this destination available?
 
-PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/posthog/cdp/templates/webhook/template_webhook.py) is available on GitHub.
+PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/nodejs/src/cdp/templates/_destinations/webhook/webhook.template.ts) is available on GitHub.
 
 <PostHogMaintained />
 

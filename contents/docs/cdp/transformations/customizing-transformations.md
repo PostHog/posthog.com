@@ -4,17 +4,26 @@ showTitle: true
 ---
 We've got a great library to get you started with the most common transformation needs. If you want to go further, you can write your own using our [Hog](/docs/hog) programming language.
 
-## Event object
+## Available globals
 
-During ingestion, transformations only have access to the event object. Here's the structure of the event object available in transformations:
+Because transformations execute _before_ events are fully ingested and processed, they only receive the `event` and `project` globals. Unlike [realtime destinations](/docs/cdp/destinations/customizing-destinations), transformations do **not** have access to `person` or `groups` — person profiles and group associations haven't been resolved at this point in the pipeline.
+
+Here's the structure of the globals available in transformations:
 
 ```ts
 {
-    uuid: string // The unique ID of the event
-    event: string // The event name (e.g. $pageview)
-    distinct_id: string // The distinct_id of the identity that created the event
-    properties: Record<string, any> // All event properties
-    timestamp: string
+    event: {
+        uuid: string // The unique ID of the event
+        event: string // The event name (e.g. $pageview)
+        distinct_id: string // The distinct_id of the identity that created the event
+        properties: Record<string, any> // All event properties
+        timestamp: string
+    }
+    project: {
+        id: number // The ID of the PostHog project
+        name: string // The name of the PostHog project
+        url: string // A URL to view it in PostHog
+    }
 }
 ```
 
@@ -160,4 +169,4 @@ For more details and inspiration, you can always view the source code of any tra
 
 - **No external calls:** Transformations cannot make HTTP calls or access external services. They can only modify the event object directly.
 
-- **Focus on the event:** Remember that you only have access to the event object during ingestion. You cannot access person profiles, groups, or any other PostHog data.
+- **Focus on the event:** Remember that you only have access to the `event` and `project` globals during ingestion. You cannot access person profiles, groups, or any other PostHog data, since transformations run before events are fully ingested and processed. If you need person or group data, use a [realtime destination](/docs/cdp/destinations) instead.

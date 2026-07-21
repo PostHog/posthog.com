@@ -92,5 +92,6 @@ Each of these improves data accessibility while maintaining usability. Direct SQ
 - [How PostHog built an app server (from MVP to billions of events)](/blog/how-we-built-an-app-server)
 - [How we build features users love (really fast)](/blog/measuring-feature-success)
 - [In-depth: ClickHouse vs PostgreSQL](/blog/clickhouse-vs-postgres)
+- [How autoresearch found a 3-year-old bug in our query engine](/blog/autoresearch-found-a-3-year-old-clickhouse-bug)
 
 <NewsletterForm />

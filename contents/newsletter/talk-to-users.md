@@ -30,7 +30,7 @@ Worse still, often that person won’t understand the options and constraints as
 
 Not convinced? Think of user interviews like automated tests. Like automated tests, talking to users is a short-term investment in your long-term productivity. They both enable you to iterate faster by providing rapid feedback on whether what you've built is working, even if you’re not shipping code.
 
-> This post was first published in our newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it every week. [Subscribe here](https://newsletter.posthog.com/subscribe).
+> This post was first published in our newsletter, [build mode](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it every week. [Subscribe here](https://newsletter.posthog.com/subscribe).
 
 ## 2. How to prepare to talk to users
 

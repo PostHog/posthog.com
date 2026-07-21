@@ -44,13 +44,13 @@ config = posthog.get_remote_config_payload('landing-page-config')
 ```
 
 ```go
-config, err := posthog.GetRemoteConfigPayload("landing-page-config")
+config, err := client.GetRemoteConfigPayload("landing-page-config")
 // config is a JSON encoded string. It will need to be parsed as a JSON object.
 ```
 
 ```ruby
 config = posthog.get_remote_config_payload('landing-page-config')
-# config is a JSON encoded string. It will need to be parsed as a JSON object.
+# config is returned as a parsed object.
 ```
 
 ```csharp

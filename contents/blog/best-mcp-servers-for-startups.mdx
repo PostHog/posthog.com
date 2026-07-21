@@ -1,0 +1,257 @@
+---
+title: The best MCP servers for developers at startups
+date: 2026-05-08
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+author:
+    - natalia-amorim
+featuredImage: >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hog_ql.png
+featuredImageType: full
+category: General
+tags:
+    - Comparisons
+seo:
+    {
+        metaTitle: 'The best MCP servers for startups, by workflow',
+        metaDescription: 'A practical guide to the best MCP servers for deve;p[ers at startups, organized by the workflows you actually run.',
+    }
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+There are tens of thousands of MCP servers in the wild as of writing this article – [Glama](https://glama.ai/mcp/servers) lists over 22,000, [PulseMCP](https://www.pulsemcp.com/servers) tracks 14,000+, and [mcp.so](https://mcp.so/) and other registries add thousands more. 
+
+Plugins and connectors have let you use different tools inside an editor for years. The leap with MCP is **composability**: an agent can pull a Linear issue, find the related PR in GitHub, check the deploy in Vercel, and verify the fix in PostHog *in a single prompt*.
+
+A handful of well-chosen MCP servers, composed thoughtfully, will get you further than a stack full of them. Below are the workflows we see startup teams run most often, and the servers that compose well together for each.
+
+## Best MCP servers, by workflow
+
+### Debugging in production
+
+Something's wrong. Maybe you're seeing error spikes or a slow endpoint; maybe your CS team is getting flooded with complaints about a buggy feature. You want to find the cause without leaving your editor.
+
+The loop: **pull error traces → check recent deploys → query logs and analytics → reproduce locally → fix.**
+
+The servers:
+
+- **[PostHog MCP](/docs/model-context-protocol)** pulls error tracking, session replays of affected users, recent feature flag changes, and anomalies in product analytics, all from one connector. Replaces 4-5 separate dashboards.
+- **A deployment platform MCP** ([Vercel](https://vercel.com/docs/agent-resources/vercel-mcp), [Render](https://render.com/docs/mcp-server), or [Cloudflare](https://developers.cloudflare.com/agents/model-context-protocol/)) lets the agent check what shipped recently and read live logs.
+- **[GitHub MCP](https://github.com/github/github-mcp-server)** jumps from a stack trace to the code that caused it, finds the PR that introduced the bug, and opens a fix.
+- **[Filesystem MCP](https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem)** lets the agent edit your local code directly when you're ready to ship.
+
+A real prompt example for this loop: *"Using PostHog and the Vercel MCP, pull the top error traces for /checkout from yesterday afternoon, find the deploy that went out around 3pm, and use GitHub to show me the diff."*
+
+### Shipping code
+
+You're writing code and want the agent to help you scaffold it, open the PR, watch the deploy, and confirm nothing broke.
+
+The loop: **write code → open PR → check deploy status → verify it didn't break anything in production.**
+
+*...or you can just use [PostHog Code](/code) (wink).*
+
+The servers:
+
+- **[GitHub MCP](https://github.com/github/github-mcp-server)** and **[Filesystem MCP](https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem)** are the foundation; they allow you to edit code locally, push branches, open PRs, run Actions, etc.
+- **A deployment MCP** ([Vercel](https://vercel.com/docs/agent-resources/vercel-mcp), currently in Beta; [Render](https://render.com/docs/mcp-server); or [Cloudflare](https://developers.cloudflare.com/agents/model-context-protocol/)) lets the agent watch the build and confirm it shipped.
+- **[PostHog MCP](/docs/model-context-protocol)** is the verification step. Did errors spike after deploy? Did session replay catch a UI regression? Did the new feature flag actually roll out? Beats frantically refreshing dashboards after every deploy.
+
+A real prompt: *"Add a debounce to the search input in apps/web/components/SearchBar.tsx. Edit the file locally, run the tests, open a PR titled 'Debounce search input', and ping me when Vercel finishes the preview deploy. After it's live in production, use PostHog to check that search-related events still fire and that no new errors are spiking."*
+
+### Understanding user behavior
+
+You shipped a new onboarding flow last week and signups didn't move, and you [want to figure out why](/blog/how-to-find-and-fix-app-onboarding-drop-off). Your top-three-paying customer just churned and you're trying to reconstruct what went wrong before reaching out. Or the experiment you ran last sprint came back inconclusive, and you're not sure whether to ship, iterate, or kill it.
+
+The loop: **form a hypothesis → query analytics → watch session replays → check support tickets → talk to users → triangulate.**
+
+The servers:
+
+- **[PostHog MCP](/docs/model-context-protocol)** is the core: ask product questions in plain English, pull session replays of specific users or cohorts, query feature flag exposure, run [funnel](/product-analytics/funnels) and [path](/product-analytics/paths) analyses, look at [survey](/surveys) responses, and dig into [experiment](/experiments) results. 
+- **[Slack MCP](https://slack.com/help/articles/48855576908307-Guide-to-the-Slack-MCP-server)** pulls in the customer-facing context: what's the support team hearing? What did sales flag in the deal review channel? Did anyone post about this in #product-feedback?
+- **[Notion MCP](https://developers.notion.com/guides/mcp)** or **[Linear MCP](https://linear.app/docs/mcp)** for any related research docs, customer interview notes, or experiment write-ups.
+
+A real prompt: *"My top-three customer just churned. Use PostHog to pull session replays from their last two weeks and check which feature flags they were exposed to, search Slack #support and #sales for any recent mentions of their account, and find their latest customer interview notes in Notion."*
+
+This is the workflow where MCPs save the most time. The traditional version is 6+ tabs and lots of patience, but with the right MCP stack, it's one prompt and a coffee break.
+
+### Planning work and managing sprints
+
+Monday sprint planning, Friday status updates, quarterly board reviews... not the fun parts of running a startup, but necessary ones. Might as well get some help.
+
+The loop: **review what shipped → triage what's incoming → prioritize → sync the team → update docs.**
+
+The servers:
+
+- **[Linear MCP](https://linear.app/docs/mcp)** is the foundation if you're on Linear. Search issues, update statuses, create new ones from conversations, and read what's currently in flight on the active sprint.
+- **[Notion MCP](https://developers.notion.com/guides/mcp)** for the longer-form context: PRDs, roadmap docs, retros, planning notes. The hosted version at `https://mcp.notion.com/mcp` is what you want – Notion has signaled they're prioritizing it over the open-source local server.
+- **[Slack MCP](https://slack.com/help/articles/48855576908307-Guide-to-the-Slack-MCP-server)** pulls in async decisions and threads. Useful for "what did we decide about X" and for drafting status updates that pull from the actual conversations.
+- **[PostHog MCP](/docs/model-context-protocol)** earns a slot when planning is data-informed: which features have low adoption and might be worth cutting, which experiments are inconclusive and need more time, which feature flags can finally be cleaned up.
+
+A real prompt: *"Pull the issues we shipped this sprint from Linear, cross-reference them with the roadmap doc in Notion, check PostHog for which of those features are actually getting used, and grab the highlights from #product-updates in Slack to draft a Friday update for the team."*
+
+### Answering questions about your data (the SQL/warehouse loop)
+
+You're prepping a board deck and need MRR by plan tier, broken down by feature usage, or an investor asked a sharp question on a call and you want the answer before the follow-up email.
+
+The loop: **define the question → find the right data source → run the query → sanity-check the result.**
+
+The servers:
+
+- **A database MCP** for application data: the [official Postgres MCP](https://github.com/modelcontextprotocol/servers-archived/tree/main/src/postgres) (a reference implementation; the repo is archived but the server still works) or **[Supabase MCP](https://supabase.com/docs/guides/getting-started/mcp)** if that's your stack. Both can run in read-only mode, which is the right default for production databases.
+- **[PostHog MCP](/docs/model-context-protocol)** for event and product data: query analytics with SQL, pull from your [data warehouse](/data-stack), or analyze [LLM traces and costs](/llm-analytics). Good for "users who did X and then Y" queries.
+
+A real prompt: *"Pull MRR by plan tier from Postgres, then break down feature usage by tier from PostHog, and give me a single table comparing them."*
+
+The agent queries Postgres for billing data, queries PostHog for product engagement, and joins them in the response.
+
+### Swap-in alternatives by tool category
+
+Not on the same stack as the recommendations above? Here's what to swap in.
+
+**Code hosting:** [GitLab's official MCP](https://docs.gitlab.com/user/gitlab_duo/model_context_protocol/mcp_server/) for GitLab teams. [Atlassian's Rovo MCP](https://www.atlassian.com/platform/remote-mcp-server) covers Bitbucket Cloud (along with Jira and Confluence in the same connector).
+
+**Deployment platforms:** [Fly.io](https://fly.io/docs/flyctl/mcp-server/) (experimental, flyctl-based), [Railway](https://docs.railway.com/reference/mcp-server), AWS via [AWS Labs MCP](https://awslabs.github.io/mcp/).
+
+**Project management:** [Atlassian's Rovo MCP](https://www.atlassian.com/platform/remote-mcp-server) for Jira and Confluence, [Asana MCP](https://developers.asana.com/docs/mcp-server) (V2, OAuth-based, 30+ tools), [ClickUp MCP](https://developer.clickup.com/docs/connect-an-ai-assistant-to-clickups-mcp-server) (official, OAuth), or [Trello MCP](https://www.pulsemcp.com/servers?q=trello) (community-built; Atlassian hasn't shipped one yet).
+
+**Docs and knowledge bases:** [Confluence](https://www.atlassian.com/platform/remote-mcp-server) on Atlassian, [Google Drive MCP](https://github.com/modelcontextprotocol/servers-archived/tree/main/src/gdrive) for Google Workspace teams (reference implementation, archived but functional), Obsidian or Coda MCPs (community-maintained).
+
+**Communication:** [Discord MCP](https://www.pulsemcp.com/servers?q=discord) (community-built, multiple options) if your team or community lives there. [Microsoft's MCP Server for Enterprise](https://learn.microsoft.com/en-us/graph/mcp-server/overview) covers Teams along with the rest of Microsoft 365 via Graph.
+
+**Analytics and observability:** [Mixpanel](/blog/posthog-vs-mixpanel), [Amplitude](/blog/posthog-vs-amplitude), and [Heap](/blog/posthog-vs-heap) ship MCP servers for product analytics. [Sentry](/blog/posthog-vs-sentry) has one for error tracking. [LaunchDarkly](/blog/posthog-vs-launchdarkly) has three for feature flags, AI Configs, and observability.
+
+*PostHog appears in all of these six workflows because it covers product analytics, error tracking, session replay, feature flags, surveys, LLM observability, a data warehouse, and more under one connector. It's not that it's is the only option, just that it's the simplest single-connector option for teams that want all of it.*
+
+**Databases and warehouses:** [MongoDB's official MCP](https://www.mongodb.com/docs/mongodb-mcp-server/) for document stores, [Snowflake's official MCP](https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-mcp) or [BigQuery's official MCP](https://cloud.google.com/bigquery/docs/use-bigquery-mcp) for warehouse work, [Redis's official MCP](https://github.com/redis/mcp-redis) for caching and session data.
+
+## How to actually set this up
+
+Once you've picked your stack, the install pattern is similar across servers:
+
+1. **Pick your client.** Claude Code, Cursor, Codex, and Claude Desktop all support MCP. Most servers work in all of them.
+2. **Use the AI wizard if available.** PostHog, Linear, and Notion all have one-click installers from their docs that handle config and OAuth. Save yourself the JSON wrangling.
+3. **For manual setup, edit your client's config file.** Claude Desktop uses `claude_desktop_config.json`, Cursor uses `~/.cursor/mcp.json`, and so on. Each server's docs show the exact JSON snippet.
+4. **Start with read-only mode.** Most servers support it. Ship-stop-ship-stop is the right pattern when you're learning what an agent will actually do with new tools.
+5. **Watch your token budget.** Every server adds tool definitions to your context window. Ten servers with five tools each is fifty tool definitions before you've asked anything.
+
+## Is PostHog right for you?
+
+Here's the (short) sales pitch.
+
+We're biased, obviously, but [**PostHog's MCP**](/docs/model-context-protocol) is worth installing if:
+
+- You want to query analytics, feature flags, errors, and LLM traces directly from your editor without context-switching to a dashboard
+- You're already using PostHog (or want to start; the [free tier](/pricing) covers 1M events, 5K session recordings, 1M feature flag requests, and a lot more per month)
+- You value open source and transparent pricing
+
+Setup takes about a minute via the [PostHog Wizard](/wizard) or the [connector directory](/docs/model-context-protocol).
+
+<WizardCTA />
+
+## Frequently asked questions
+
+<details>
+  <summary>What to look for in an MCP server?</summary>
+
+The MCP servers worth your time tend to share a few things:
+
+- **Official or maintained by a serious team.** Look for first-party servers from the company whose product you're connecting; community servers can be great, but they can also go stale fast.
+- **Remote / hosted, where possible.** Hosted servers (`https://mcp.linear.app/mcp`, `https://mcp.posthog.com/mcp`) auto-update and don't need local infrastructure. Local servers (npm/Docker) are fine but require more setup.
+- **OAuth or scoped tokens.** Servers that require pasting a personal access token with full account permissions are riskier than ones using OAuth with scoped permissions.
+- **Read-only mode available.** For anything that can write to production systems, the ability to run in read-only mode while you're testing is important.
+- **Active development.** Check the GitHub repo: when was the last commit, how many open issues, is anyone responding? A dead repo is likely a dead server.
+
+</details>
+
+<details>
+  <summary>How many MCP servers should I install?</summary>
+
+Start with two or three covering your primary workflow, then add more as you find concrete use cases. Resist the urge to install everything just because you can.
+
+Each server adds tool definitions to your agent's context window, which costs tokens and can confuse the model when there are too many overlapping tools.
+
+</details>
+
+<details>
+  <summary>Which MCP servers should I install for my team?</summary>
+
+The workflows above show what composes well together. Most startups end up running 3-9 servers, enough to cover daily loops without bloating their agent's context window. Some rough starting points:
+
+- **SaaS startup:** GitHub, a deployment MCP (Vercel/Render/Cloudflare), Linear or Notion, PostHog, Brave Search, Filesystem.
+- **AI-native startup:** Same foundation, but lean on PostHog's [LLM observability](/llm-analytics) for traces and costs, and pick a deployment MCP that supports edge inference (Vercel or Cloudflare).
+- **Operations or content-heavy team:** Notion + Linear/Asana/ClickUp, Slack, a search MCP, and PostHog if you have a product. Skip the dev tooling unless engineers will use it.
+
+Start with two or three, then add more as concrete use cases come up. Resist the urge to install everything just because you can.
+
+</details>
+
+<details>
+  <summary>Are official MCP servers better than community ones?</summary>
+
+Generally, yes. Official servers from GitHub, Linear, Notion, PostHog, Slack, and others are maintained as part of the company's product, get updated when APIs change, follow security best practices, and handle auth properly.
+
+Community servers are useful when an official option doesn't exist (or is missing a feature you need), but check the GitHub repo for activity to make sure it's being given the attention it needs.
+
+</details>
+
+<details>
+  <summary>What's the difference between local and remote MCP servers?</summary>
+
+**Local servers** run on your machine, usually as a Node.js or Python process started via `npx` or Docker. They communicate with the AI client over standard input/output. They're more flexible and work offline, but require local setup and updates.
+
+**Remote (hosted) servers** are HTTP-based and run on the vendor's infrastructure. You connect via OAuth and the client talks to the server over the network. They're simpler to install, auto-update, and require no local dependencies – but you need internet and you're trusting the vendor with the connection.
+
+For most servers, prefer remote when available. The main exceptions are filesystem, terminal, or anything that genuinely needs local access.
+
+</details>
+
+<details>
+  <summary>Are MCP servers secure?</summary>
+
+It depends on the server. Official servers from major vendors generally follow best practices – scoped tokens, OAuth, principle of least privilege. Community servers vary widely.
+
+Two specific risks worth knowing about:
+
+1. **Prompt injection** – researchers have flagged that LLMs can be tricked into following untrusted commands embedded in MCP responses. Always review tool calls before approving destructive actions.
+2. **Over-broad permissions** – if a server asks for full account access, treat that the same way you'd treat a new app on your phone asking for "full access to everything." Use scoped tokens, read-only mode, and limited filesystem paths whenever possible.
+
+</details>
+
+<details>
+  <summary>Can I build my own MCP server?</summary>
+
+Yes. Anthropic publishes [TypeScript and Python SDKs](https://modelcontextprotocol.io/), and a basic server exposing a few tools can be built in under an hour with FastMCP (Python) or `@modelcontextprotocol/sdk` (Node.js).
+
+If you're building one, PostHog's newsletter has a great breakdown of [the golden rules of agent-first product](https://newsletter.posthog.com/p/the-golden-rules-of-agent-first-product) – useful for thinking through what your server should actually expose to agents (and what to leave out).
+
+</details>
+
+<details>
+  <summary>Which MCP servers does PostHog have?</summary>
+
+PostHog maintains [one official MCP server](/docs/model-context-protocol) that exposes the entire PostHog platform – product analytics, web analytics, feature flags, experiments, error tracking, LLM observability, surveys, and SQL – to AI agents. It works in Claude Code, Claude Desktop, Cursor, Codex, VS Code, Zed, and Windsurf.
+
+You can install it via the [PostHog Wizard](/wizard), as a Claude Code plugin, or manually via the [connector directory](/docs/model-context-protocol).
+
+</details>
+
+<details>
+  <summary>What's the best MCP server for analytics?</summary>
+
+If you don't have an analytics tool yet, **PostHog's MCP** is the strongest fit for startups: free to call (no charges on your PostHog bill), 1M events/month free on the platform itself, and one server covers analytics, feature flags, error tracking, LLM observability, the data warehouse, and more.
+
+</details>
+
+<details>
+  <summary>What's the best MCP server for code work?</summary>
+
+The combination of **GitHub MCP + Filesystem MCP + PostHog MCP** covers most real coding workflows: search and edit your code, check for recent errors and analytics anomalies, and ship a fix through a PR. Add a database MCP if you're doing data work.
+
+For browser-based testing and automation, **Playwright MCP** is the standard.
+
+</details>
+
+<NewsletterForm />

@@ -24,11 +24,9 @@ You can also sign up for the [SDK support rotation](/handbook/engineering/sdks/s
 
 ## Slack channels
 
-- **#team-client-libraries** — Main channel for SDK discussions and general questions
-- **#support-client-libraries** — Main channel for SDK support discussions, handovers between support rotation engineers 
-- **#approvals-client-libraries** — Where release approval requests are posted (see [Releases](/handbook/engineering/sdks/releases))
-
-
+- **#team-client-libraries** – Main channel for SDK discussions and general questions
+- **#support-client-libraries** – Main channel for SDK support discussions, handovers between support rotation engineers
+- **#approvals-client-libraries** – Where release approval requests are posted (see [Releases](/handbook/engineering/sdks/releases))
 
 ## What are our SDKs?
 

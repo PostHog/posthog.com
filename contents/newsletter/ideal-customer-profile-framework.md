@@ -31,7 +31,7 @@ It’s the invisible force that binds your product and your market.
 
 **This week’s theme is:** Everything you need to know about finding your ICP
 
-> This post was first published in our Substack newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
+> This post was first published in our Substack newsletter, [build mode](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
 
 ## 1. ICP and personas aren’t the same thing
 
@@ -57,7 +57,7 @@ Personas, on the other hand, describe the motivations and frustrations of specif
 
 Some people think an ICP is just a sales and marketing framework. And, sure, it will help you with those, but it’s so much more than that.
 
-An accurate ICP will define not just which customers you target, but every aspect of your product and go-to-market strategy. It’s the sun around which product, marketing, and sales orbit.
+An accurate ICP will define not just which customers you target, but every aspect of your product and go-to-market strategy. It’s the sun around which product, marketing, and sales orbit. For how your ICP shapes which marketing channels to prioritize first, see [the stuff nobody tells you about startup marketing](/newsletter/the-stuff-nobody-tells-you-about-startup-marketing).
 
 **Why is this important?** Broadly speaking, our ICP is high-growth B2B startups that have product-market fit, where engineers are the decision makers – see our handbook for a more detailed version.
 

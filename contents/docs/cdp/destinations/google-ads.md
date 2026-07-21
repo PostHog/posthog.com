@@ -6,6 +6,7 @@ templateId:
 
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
+import AdDestinationPersonDataFaq from "../_snippets/ad-destination-person-data-faq.mdx"
 
 > **IMPORTANT:** This is an experimental destination that we do not provide official support for. Check out [this page](https://github.com/PostHog/posthog/issues/27712#issuecomment-2615849798) for more details on installing the integration.
 
@@ -57,13 +58,15 @@ You'll also need access to the relevant Google Ads account.
 
 ## FAQ
 
-## Why aren't my conversions appearing inside of Google Ads?
+<AdDestinationPersonDataFaq />
+
+### Why aren't my conversions appearing inside of Google Ads?
 
 Note that it might take around 6-48 hours for Google to process conversions and make them visible inside of Google Ads. Additionally you'll need to wait around 6 hours before new conversion goals will accept incoming data. 
 
 ### Is the source code for this destination available?
 
-PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/posthog/cdp/templates/google_ads/template_google_ads.py) is available on GitHub.
+PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/nodejs/src/cdp/templates/_destinations/google_ads/google.template.ts) is available on GitHub.
 
 <PostHogMaintained />
 
