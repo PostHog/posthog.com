@@ -1,0 +1,123 @@
+---
+title: Upload debug symbols for Go
+showStepsToc: true
+---
+
+import CLIDownload from "../_snippets/cli/download.mdx"
+import CLIAuthenticate from "../_snippets/cli/authenticate.mdx"
+import StepVerifySymbolSetsUpload from "../_snippets/StepVerifySymbolSetsUpload"
+
+The [Go SDK](/docs/error-tracking/installation/go) resolves stack traces in-process from the Go runtime, so captured frames always include file names, line numbers, and function names. Uploading debug symbols improves on that: PostHog symbolicates frames server-side from the exact build that crashed, resolves inlined calls precisely, and can display the source code around each frame.
+
+<CalloutBox icon="IconInfo" title="Version requirements" type="action">
+
+- [posthog-go 1.20.0](https://github.com/PostHog/posthog-go/releases) or later, which records the instruction addresses and binary identity server-side symbolication needs. We recommend the latest version.
+- The latest [CLI](/docs/error-tracking/upload-source-maps/cli). Linux binaries work with CLI 0.7.32 or later; uploading macOS Go binaries directly is newer, so update if you have an older install.
+
+</CalloutBox>
+
+<Steps>
+
+<Step title="Download CLI" badge="required">
+
+<CLIDownload />
+
+</Step>
+
+<Step title="Authenticate" badge="required">
+
+<CLIAuthenticate />
+
+</Step>
+
+<Step title="Build with the right linker flags" badge="required">
+
+Go embeds DWARF debug info in every binary by default, but the SDK and CLI need a little help depending on the platform.
+
+On Linux, add a GNU build ID — the unique identifier PostHog uses to match stack frames to uploaded symbols. Go doesn't emit one by default:
+
+```bash
+go build -ldflags="-B gobuildid" -o my-app .
+```
+
+On macOS, keep the DWARF uncompressed. Binaries always carry a Mach-O UUID, so there is no build ID step, but Go compresses debug info by default and compressed DWARF can't be used for symbolication yet:
+
+```bash
+go build -ldflags="-compressdwarf=false" -o my-app .
+```
+
+Watch out for flags that remove what the upload needs: `-ldflags="-w"` or `-ldflags="-s"` strip DWARF entirely, and `-trimpath` rewrites the source paths that `--include-source` relies on.
+
+</Step>
+
+<Step title="Build and upload" badge="required">
+
+Point the CLI at the directory containing your built binary:
+
+```bash
+posthog-cli symbol-sets upload --directory ./bin
+```
+
+The CLI scans the directory and uploads every executable that carries debug info and an identity, skipping everything else. On macOS the Go binary uploads directly — Go never produces a `.dSYM` bundle, and none is needed. Universal (fat) binaries upload one symbol set per architecture slice. Windows binaries are not supported yet: the SDK sends plain runtime-resolved frames there.
+
+Run this as part of the same pipeline that produces your production binary. Each build has its own identity, so symbols must be re-uploaded for every build you deploy.
+
+</Step>
+
+<Step title="Optional: Include source code context" badge="optional">
+
+By default, only debug symbols are uploaded. To also display the source code around each frame in your stack traces, add `--include-source`:
+
+```bash
+posthog-cli symbol-sets upload --directory ./bin --include-source
+```
+
+This bundles the project source files referenced by the debug info into the upload. It increases upload size, so only enable it if you want source context in the error tracking UI. It also requires building without `-trimpath`, since the CLI reads sources from the paths recorded at compile time.
+
+</Step>
+
+<Step title="Optional: Upload from CI" badge="optional">
+
+In CI, authenticate with environment variables instead of `posthog-cli login`. For GitHub Actions:
+
+```yaml
+- name: Build release binary
+  run: go build -ldflags="-B gobuildid" -o bin/my-app .
+
+- name: Upload debug symbols
+  run: posthog-cli symbol-sets upload --directory ./bin
+  env:
+    POSTHOG_CLI_API_KEY: ${{ secrets.POSTHOG_CLI_API_KEY }}
+    POSTHOG_CLI_PROJECT_ID: ${{ secrets.POSTHOG_CLI_PROJECT_ID }}
+```
+
+Scope the credentials to the upload step only — the build itself doesn't need them.
+
+The CLI defaults to US Cloud. If you are on EU Cloud or self-hosted, also set `POSTHOG_CLI_HOST` (for example `https://eu.posthog.com`).
+
+If your binary is built inside a Dockerfile, run the upload in the build stage right after the build, and pass the credentials in as build secrets so they never reach the runtime image.
+
+</Step>
+
+<StepVerifySymbolSetsUpload symbolType="debug symbols" />
+
+<Step title="Test it end-to-end" badge="optional">
+
+Capture a test exception from the same binary the symbols were uploaded for:
+
+```go
+exception := posthog.NewDefaultException(
+    time.Now(),
+    "test_user",
+    "TestError",
+    "This is a test exception from Go",
+)
+client.Enqueue(exception)
+client.Close()
+```
+
+Run the binary, then check the [error tracking issues view](https://app.posthog.com/error_tracking): the stack trace should resolve against the uploaded symbols, including source context if you uploaded with `--include-source`. A rebuild changes the binary's identity, so if you rebuild, upload again before testing.
+
+</Step>
+
+</Steps>

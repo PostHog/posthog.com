@@ -5316,6 +5316,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/upload-source-maps/flutter',
                         },
                         {
+                            name: 'Go',
+                            url: '/docs/error-tracking/upload-source-maps/go',
+                        },
+                        {
                             name: 'iOS',
                             url: '/docs/error-tracking/upload-source-maps/ios',
                         },
