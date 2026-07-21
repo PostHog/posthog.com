@@ -21,7 +21,6 @@ import {
     IconStickiness,
     IconAsterisk,
     IconAI,
-    IconSupport,
     IconTestTube,
     IconTarget,
     IconArrowUpRight,
@@ -34,6 +33,7 @@ import {
 import useProducts from './useProducts'
 import { mcpAnalytics } from './productData/mcp_analytics'
 import { traces } from './productData/traces'
+import { support } from './productData/support'
 
 const dedupe = (products) => {
     const deduped = {}
@@ -72,16 +72,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             slug: 'products',
             status: 'WIP',
         },
-        {
-            name: 'Support',
-            Icon: IconSupport,
-            description: 'Built-in customer support with chat widget and unified inbox.',
-            handle: 'support',
-            color: 'blue',
-            colorSecondary: 'blue',
-            category: 'communication',
-            slug: 'docs/support',
-        },
+        support,
         {
             name: 'PostHog Code',
             Icon: IconCoffee,

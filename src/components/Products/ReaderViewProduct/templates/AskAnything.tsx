@@ -6,7 +6,9 @@ import mcpToolsData from '../../../../data/mcp-tools.json'
 import { LabeledList } from '../helpers'
 import type { SectionComponentProps } from '../types'
 
-const REPLAY_FEATURE = 'replay'
+// Default MCP tool category shown in the Tools tab. Products can override via
+// `productData.ai.mcpToolsFeature` (an upstream feature slug like 'conversations').
+const DEFAULT_MCP_FEATURE = 'replay'
 
 const firstLine = (s: string) => s.split('\n')[0]
 
@@ -28,9 +30,10 @@ const AskAnything = ({ id, productData }: SectionComponentProps) => {
     const [tab, setTab] = useState<'prompts' | 'tools'>('prompts')
     const [query, setQuery] = useState('')
 
+    const mcpFeature: string = ai?.mcpToolsFeature ?? DEFAULT_MCP_FEATURE
     const replayTools: McpTool[] = useMemo(
-        () => (mcpToolsData.categories?.find((c: any) => c.feature === REPLAY_FEATURE)?.tools as McpTool[]) ?? [],
-        []
+        () => (mcpToolsData.categories?.find((c: any) => c.feature === mcpFeature)?.tools as McpTool[]) ?? [],
+        [mcpFeature]
     )
 
     const filteredTools = useMemo(() => {

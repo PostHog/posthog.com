@@ -562,7 +562,7 @@ const products: Product[] = [
         badge: 'BETA',
         pricing: {
             cta: {
-                url: '/docs/support',
+                url: '/support',
                 text: 'Learn more',
             },
         },
