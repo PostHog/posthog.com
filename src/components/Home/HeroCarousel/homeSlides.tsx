@@ -138,7 +138,7 @@ export const FixBugsSlide = () => {
                     hideTitle
                     options={[
                         { label: <span className="whitespace-nowrap">Slack</span>, value: 'slack' },
-                        { label: <span className="whitespace-nowrap">PostHog Code</span>, value: 'code' },
+                        { label: <span className="whitespace-nowrap">PostHog Desktop</span>, value: 'code' },
                     ]}
                     value={view}
                     onValueChange={(v) => v && setView(v as 'slack' | 'code')}
@@ -184,12 +184,12 @@ export const FixBugsSlide = () => {
                     <div className="flex flex-col gap-3">
                         <div className="space-y-2">
                             <p className="flex items-center gap-1.5 text-secondary text-sm font-semibold m-0">
-                                <IconCoffee className="size-4" /> PostHog Code (beta)
+                                <IconCoffee className="size-4" /> PostHog Desktop (beta)
                             </p>
                             <h2 className="text-2xl font-bold m-0">Fix bugs automatically</h2>
                         </div>
                         <p className="text-secondary m-0">
-                            <strong>PostHog Code</strong>, our AI code editor:
+                            <strong>PostHog Desktop</strong>, our AI code editor:
                         </p>
                         <ul className="list-none p-0 m-0 space-y-1.5">
                             <li className="flex items-center gap-2 text-secondary">
@@ -202,8 +202,8 @@ export const FixBugsSlide = () => {
                                 <IconCheck className="size-5 text-green shrink-0" /> Creates pull requests automatically
                             </li>
                         </ul>
-                        <OSButton to="/code" state={{ newWindow: true }} size="md" variant="secondary" asLink>
-                            Explore PostHog Code
+                        <OSButton to="/desktop" state={{ newWindow: true }} size="md" variant="secondary" asLink>
+                            Explore PostHog Desktop
                         </OSButton>
                     </div>
                 )}

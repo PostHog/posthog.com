@@ -1549,6 +1549,10 @@ export const handbookSidebar = [
                 url: '',
                 children: [
                     {
+                        name: 'Customer journey and coverage model',
+                        url: '/handbook/growth/sales/customer-journey',
+                    },
+                    {
                         name: 'Allocating accounts',
                         url: '/handbook/growth/sales/account-allocation',
                     },
@@ -2259,7 +2263,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Code',
-                    url: '/code',
+                    url: '/desktop',
                 },
                 {
                     name: 'Concepts',
@@ -5656,64 +5660,94 @@ export const docsMenu = {
                     color: 'teal',
                 },
                 {
-                    name: 'Guides',
-                },
-                {
-                    name: 'Widget setup',
+                    name: 'Set up the widget',
                     url: '/docs/support/widget',
                     icon: 'IconMessage',
                     color: 'orange',
                 },
                 {
-                    name: 'JavaScript API',
-                    url: '/docs/support/javascript-api',
-                    icon: 'IconCode',
-                    color: 'blue',
+                    name: 'Surfaces',
                 },
                 {
-                    name: 'Inbox management',
+                    name: 'Web app',
                     url: '/docs/support/inbox',
-                    icon: 'IconNotebook',
+                    icon: 'IconHeadset',
                     color: 'yellow',
                 },
                 {
-                    name: 'Slack integration',
-                    url: '/docs/support/slack',
+                    name: 'Slack',
+                    url: '/docs/support/surfaces/slack',
                     icon: 'IconChat',
                     color: 'purple',
                 },
                 {
-                    name: 'Email channel',
+                    name: 'MCP',
+                    url: '/docs/support/surfaces/mcp',
+                    icon: 'IconMagic',
+                    color: 'blue',
+                },
+                {
+                    name: 'PostHog Code',
+                    url: '/docs/support/surfaces/code',
+                    icon: 'IconCode',
+                    color: 'green',
+                },
+                {
+                    name: 'API',
+                    url: '/docs/support/javascript-api',
+                    icon: 'IconBrackets',
+                    color: 'blue',
+                },
+                {
+                    name: 'Channels',
+                },
+                {
+                    name: 'How channels work',
+                    url: '/docs/support/concepts/channels',
+                    icon: 'IconMessage',
+                    color: 'blue',
+                },
+                {
+                    name: 'Email',
                     url: '/docs/support/email',
                     icon: 'IconLetter',
                     color: 'red',
                 },
                 {
-                    name: 'GitHub integration',
+                    name: 'Slack',
+                    url: '/docs/support/slack',
+                    icon: 'IconChat',
+                    color: 'purple',
+                },
+                {
+                    name: 'GitHub',
                     url: '/docs/support/github',
                     icon: 'IconGithub',
                     color: 'seagreen',
                 },
                 {
-                    name: 'Workflow automation',
-                    url: '/docs/support/workflows',
-                    icon: 'IconDecisionTree',
-                    color: 'green',
+                    name: 'Imports',
                 },
                 {
-                    name: 'Historical imports',
-                },
-                {
-                    name: 'Overview',
+                    name: 'How imports work',
                     url: '/docs/support/imports',
                     icon: 'IconUpload',
                     color: 'blue',
                 },
                 {
-                    name: 'Import from Zendesk',
+                    name: 'Zendesk',
                     url: '/docs/support/imports/zendesk',
                     icon: 'IconLetter',
                     color: 'blue',
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Pricing',
+                    url: '/docs/support/pricing',
+                    icon: 'IconPiggyBank',
+                    color: 'green',
                 },
             ],
         },
@@ -6932,7 +6966,7 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'PostHog Code',
+            name: 'PostHog Desktop',
             icon: 'IconCoffee',
             color: 'yellow',
             url: '/docs/posthog-code',
@@ -7377,6 +7411,20 @@ export const docsMenu = {
                     icon: 'IconListCheck',
                     color: 'orange',
                     featured: true,
+                },
+                {
+                    name: 'Install metrics',
+                    url: '/docs/metrics/installation',
+                    icon: 'IconCode',
+                    color: 'blue',
+                    featured: true,
+                    children: [
+                        { name: 'Overview', url: '/docs/metrics/installation' },
+                        { name: 'JavaScript (web)', url: '/docs/metrics/installation/javascript' },
+                        { name: 'Node.js', url: '/docs/metrics/installation/nodejs' },
+                        { name: 'Python', url: '/docs/metrics/installation/python' },
+                        { name: 'Other languages', url: '/docs/metrics/installation/other' },
+                    ],
                 },
                 {
                     name: 'Why you need metrics',

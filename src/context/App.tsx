@@ -658,7 +658,7 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
-    '/code': {
+    '/desktop': {
         size: {
             min: {
                 width: 700,

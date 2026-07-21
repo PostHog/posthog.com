@@ -58,7 +58,7 @@ If the answer to any of the above questions is 'no' then it's likely that there 
 - 100% quota attainment leads to a 50/50 of OTE and Commission split
 - TAMs cover 5x their OTE with their quota
 
-> This plan, including the OTE to quota ratio, may change as we scale up the size and complexity of our sales machine! This is completely normal - we will ensure everyone is treated fairly. For now we are generally trying to optimize for something straightforward here so it’s easy for PostHog (and you) to calculate commission.
+> This plan, including the OTE to quota ratio, is likely to change as we scale up the size and complexity of our sales machine! For example, the rate plan will be reviewed when median book cash exceeds 5x OTE. This is completely normal - we will ensure everyone is treated fairly. For now we are generally trying to optimize for something straightforward here so it’s easy for PostHog (and you) to calculate commission. 
 
 **How we calculate**
 - Quota is calculated annually, and is paid out quarterly

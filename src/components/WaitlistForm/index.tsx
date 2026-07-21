@@ -3,12 +3,8 @@ import usePostHog from '../../hooks/usePostHog'
 import useProduct from '../../hooks/useProduct'
 import SurveySignup from 'components/SurveySignup'
 
-// The "PostHog Code waitlist" survey — the same list the /roadmap card and the in-app
-// feature previews collect into, so every PostHog Code sign-up lands in one place.
-const POSTHOG_CODE_SURVEY_ID = '019f28e8-1d35-0000-8d35-dbb342060f06'
-const POSTHOG_CODE_SURVEY_QUESTION_ID = 'ccffb103-2c9a-4bd3-bede-0ddfbf3288b9'
-// PostHog Code's concept-stage Early Access Feature flag. Its EAF is named
-// "PostHog Code" but the flag key is `twig`.
+// PostHog Desktop's concept-stage Early Access Feature flag. Its EAF is named
+// "PostHog Desktop" but the flag key is `twig`.
 const POSTHOG_CODE_FLAG_KEY = 'twig'
 
 interface WaitlistFormProps {
@@ -29,9 +25,8 @@ export function WaitlistForm({
     autoFocus = false,
     confetti = true,
     productHandle = 'posthog_code',
-    productName = 'PostHog Code',
-    surveyId = POSTHOG_CODE_SURVEY_ID,
-    surveyQuestionId,
+    productName = 'PostHog Desktop',
+    surveyId,
     flagKey,
     showTitle = true,
     buttonLabel = 'Get updates',
@@ -47,8 +42,23 @@ export function WaitlistForm({
     // actually collecting for PostHog Code.
     const effectiveFlagKey = flagKey ?? (surveyId === POSTHOG_CODE_SURVEY_ID ? POSTHOG_CODE_FLAG_KEY : undefined)
 
-    // Keep the product-updates analytics event alongside the survey response.
-    const handleSuccess = (email: string) => {
+    // Only default the PostHog Desktop flag when we're actually collecting for PostHog Desktop —
+    // callers with their own productHandle (e.g. Replay Vision) must pass flagKey explicitly.
+    const effectiveFlagKey = flagKey ?? (productHandle === 'posthog_code' ? POSTHOG_CODE_FLAG_KEY : undefined)
+
+    // Load the EAF list before submit so the enrollment event carries $early_access_feature_name —
+    // the Customer.io waitlist flow's trigger requires it.
+    usePrimeEarlyAccessFeatures(effectiveFlagKey)
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault()
+        if (!email) return
+        if (surveyId) {
+            posthog?.capture('survey sent', {
+                $survey_id: surveyId,
+                $survey_response: email,
+            })
+        }
         posthog?.capture('subscribe_to_product_updates', { email, selectedProduct })
     }
 

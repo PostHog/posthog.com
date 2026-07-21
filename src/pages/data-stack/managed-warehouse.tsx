@@ -126,7 +126,7 @@ const setupSteps: {
         badge: 'bg-red/10 text-red dark:bg-yellow/10 dark:text-yellow',
         title: 'Query everything, or let PostHog do it',
         description:
-            "Ask a question in plain English using Slack, PostHog Code or the MCP and get the answer you're looking for. Or, let PostHog's AI features use the warehouse as context when they're deciding what to surface or fix.",
+            "Ask a question in plain English using Slack, PostHog Desktop or the MCP and get the answer you're looking for. Or, let PostHog's AI features use the warehouse as context when they're deciding what to surface or fix.",
     },
 ]
 
@@ -196,7 +196,11 @@ export default function ManagedWarehouse(): JSX.Element {
                     picture.
                 </p>
                 <p>
-                    The Managed Warehouse is your <strong>context layer</strong> for AI-driven product development. It's a lot more than just storage - it's what all of your PostHog tools run on. This means you're not left wondering "why did conversion drop?", but knowing "conversion in this funnel dropped, here's the revenue impact, the cohorts affected, and what those users have in common - _and_ here's a PR already open to fix the issue."
+                    The Managed Warehouse is your <strong>context layer</strong> for AI-driven product development. It's
+                    a lot more than just storage - it's what all of your PostHog tools run on. This means you're not
+                    left wondering "why did conversion drop?", but knowing "conversion in this funnel dropped, here's
+                    the revenue impact, the cohorts affected, and what those users have in common - _and_ here's a PR
+                    already open to fix the issue."
                 </p>
                 <ProductScreenshot
                     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/dw_temp_528efa76a2.png"
@@ -251,7 +255,8 @@ export default function ManagedWarehouse(): JSX.Element {
                     <Link to="https://duckdb.org/" external={true}>
                         DuckDB
                     </Link>{' '}
-                    runs analytical queries fast, on hardware most teams already have. Here's what we built on top of it to get it ready for production:
+                    runs analytical queries fast, on hardware most teams already have. Here's what we built on top of it
+                    to get it ready for production:
                 </p>
                 <ul className="not-prose my-4 list-none space-y-4 pl-0">
                     {techFeatures.map(({ Icon, color, title, description }) => (
