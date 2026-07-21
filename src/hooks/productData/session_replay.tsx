@@ -477,8 +477,7 @@ export const sessionReplay = {
     ai: {
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/SESSION_REPLAY_a3ca565731.png',
         imageAlt: 'PostHog AI and session replay',
-        intro: 'Ask PostHog AI to find a specific session or summarize a group of them. Works in PostHog AI (in-app chat), PostHog Code (our AI code editor), and in your product editor (using the MCP).',
-        mcpFeatures: ['replay'],
+        intro: 'Ask PostHog AI to find a specific session or summarize a group of them. Works in PostHog AI (in-app chat), PostHog Desktop (our AI code editor), and in your product editor (using the MCP).',
         groups: [
             {
                 title: 'Find',

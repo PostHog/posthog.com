@@ -11,6 +11,7 @@ import React, {
 } from 'react'
 import { AppWindow } from './Window'
 import { navigate } from 'gatsby'
+import { isSafeInternalPath } from 'lib/utils'
 import SignIn from 'components/Squeak/components/Classic/SignIn'
 import Register from 'components/Squeak/components/Classic/Register'
 import ForgotPassword from 'components/Squeak/components/Classic/ForgotPassword'
@@ -658,7 +659,7 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
-    '/code': {
+    '/desktop': {
         size: {
             min: {
                 width: 700,
@@ -2714,7 +2715,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 window.__setPreferredTheme(e.data.isDarkModeOn ? 'dark' : 'light')
                 return
             }
-            if (e.data.type === 'navigate') {
+            if (e.data.type === 'navigate' && isSafeInternalPath(e.data.url)) {
                 navigate(e.data.url)
             }
         }

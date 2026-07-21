@@ -105,14 +105,15 @@ These events track changes to individual resources within projects.
 
 Each activity log entry contains the following information:
 
-| Field     | Description                                                                                                                                           |
-| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Timestamp | When the action occurred (UTC)                                                                                                                        |
-| Actor     | The user who performed the action (name, email). Actions performed via [MCP](/docs/model-context-protocol) display an **MCP** badge next to the user. |
-| Action    | The type of action performed (created, updated, deleted, etc.)                                                                                        |
-| Scope     | The type of resource affected (feature flag, dashboard, etc.)                                                                                         |
-| Target    | The specific resource that was affected (name and ID)                                                                                                 |
-| Changes   | Before and after values for each modified field                                                                                                       |
+| Field      | Description                                                                                                                                           |
+| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Timestamp  | When the action occurred (UTC)                                                                                                                        |
+| Actor      | The user who performed the action (name, email). Actions performed via [MCP](/docs/model-context-protocol) display an **MCP** badge next to the user. |
+| Action     | The type of action performed (created, updated, deleted, etc.)                                                                                        |
+| Scope      | The type of resource affected (feature flag, dashboard, etc.)                                                                                         |
+| Target     | The specific resource that was affected (name and ID)                                                                                                 |
+| Changes    | Before and after values for each modified field                                                                                                       |
+| IP address | The IP address of the client that initiated the action. System-generated actions display "—"                                                          |
 
 ### Example log entry
 
@@ -149,7 +150,8 @@ Here's an example of what a log entry looks like when retrieved via the API:
   },
   "created_at": "2024-01-15T10:30:00.000000Z",
   "is_system": false,
-  "client": "mcp"
+  "client": "mcp",
+  "ip_address": "192.0.2.1"
 }
 ```
 
@@ -315,6 +317,9 @@ Filter on specific fields within the activity log details. You can filter using 
 
 **Client**
 Filter by the client that originated the action. This lets you see which actions were performed via specific integrations like [MCP](/docs/model-context-protocol) (Model Context Protocol). Available client values are auto-discovered from your activity log data.
+
+**IP address**
+Filter by the client IP address that initiated the action. Use this to investigate actions originating from specific IP addresses or to identify suspicious activity from unknown locations. Wildcards are supported (e.g., `203.0.113.*`). System-generated actions don't have IP addresses and won't appear when filtering by IP.
 
 ## Exporting and retention
 

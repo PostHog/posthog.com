@@ -143,10 +143,10 @@ export default function Tooling(): JSX.Element {
 
                             <li className="relative pl-20">
                                 <StickerFork className="size-16 absolute left-0 -top-2" />
-                                <h3 className="text-base mt-0">3. PostHog Code</h3>
+                                <h3 className="text-base mt-0">3. PostHog Desktop</h3>
                                 <p>
                                     Our{' '}
-                                    <Link to="/code" state={{ newWindow: true }}>
+                                    <Link to="/desktop" state={{ newWindow: true }}>
                                         AI code editor
                                     </Link>{' '}
                                     automatically analyzes signals from customer data, proposes improvements, and writes
