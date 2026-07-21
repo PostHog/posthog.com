@@ -6,7 +6,7 @@ export const intercom = {
         support: {
             available: true,
             features: {
-                unified_inbox: true,
+                unified_helpdesk: true,
                 in_app_widget: true,
                 email_channel: true,
                 slack_channel: 'Via integration',

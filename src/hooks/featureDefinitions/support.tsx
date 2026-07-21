@@ -6,7 +6,7 @@ export const supportFeatures = {
         docsUrl: '/docs/support',
     },
     features: {
-        unified_inbox: {
+        unified_helpdesk: {
             name: 'Unified helpdesk',
             description: 'Read and reply to every conversation from one place',
         },
