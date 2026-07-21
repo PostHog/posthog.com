@@ -8,7 +8,7 @@ availability:
   enterprise: full
 ---
 
-After you've analyzed your experiment metrics and determined a winning variant, you can manage the experiment's lifecycle by ending, pausing or resetting it.
+After you've analyzed your experiment metrics and determined a winning variant, you can manage the experiment's lifecycle by ending, pausing, freezing exposure, or resetting it.
 
 ## Ending an experiment
 
@@ -46,6 +46,30 @@ To pause an experiment, click the **Pause experiment** button on the experiment 
 
 When you're ready to continue, click **Resume experiment** to start collecting data again. The experiment will continue from where it left off.
 
+## Freezing exposure
+
+Freezing exposure stops new users from entering an experiment while already-enrolled users keep their variants and metrics keep updating. This is useful for experiments where you've reached a good sample size but need long-term metrics to mature – for example, pricing experiments measuring 90-day revenue or retention experiments tracking renewals over weeks.
+
+When you freeze exposure, PostHog:
+
+1. Snapshots all currently exposed users into a static [cohort](/docs/data/cohorts).
+2. Narrows every feature flag release group to that cohort, so new users can't match.
+3. Leaves `end_date` unset, so metric data keeps flowing for enrolled users.
+
+Already-enrolled users keep their deterministically assigned variant because `multivariate.variants` isn't changed – only the release conditions are narrowed.
+
+To freeze exposure, click **Freeze exposure** in the actions menu on the experiment page and confirm in the dialog. An **Exposure frozen** status badge appears once the freeze is active.
+
+To unfreeze, click **Unfreeze exposure** in the actions menu. This removes the snapshot cohort condition from the flag's release groups and reopens enrollment.
+
+### Limitations of freezing exposure
+
+- **Group-aggregated experiments can't be frozen.** Their flags target groups, not persons, and a person-keyed cohort can't freeze group-based matching.
+- **Experiments with holdouts or early-access conditions can't be frozen.** Holdout assignment and early-access enrollment are evaluated before release conditions, so narrowing release groups can't stop new users from entering through those paths.
+- **Very large experiments can't be frozen.** Experiments with over 100,000 exposed users, or where the exposure scan exceeds 20 seconds, are rejected. These bounds keep the freeze within a single web request.
+- **Experiments with mostly anonymous users can't be frozen.** Cohort membership requires person profiles. If more than 5% of exposed users are anonymous or have been deleted, freezing is rejected because those users would lose their variant.
+- **Local-eval SDKs can't resolve static cohorts.** A frozen flag evaluates via `/decide` (standard static-cohort behavior). SDKs using `only_evaluate_locally` return the flag's default value instead.
+
 ## Resetting analysis
 
 Resetting analysis clears the experiment's results and returning it to a draft state. This doesn't affect the feature flag or variant rollout, so variants stay visible to users. It does also not delete any collected data.
@@ -75,7 +99,7 @@ When copying to another project:
 - The target project must be in the same organization
 - Experiments using legacy metrics can't be copied
 
-## Comparing pausing, ending, and resetting
+## Comparing lifecycle actions
 
 Here's how the actions differ:
 
@@ -83,5 +107,6 @@ Here's how the actions differ:
 | ------------- | ------------------------------------------------ | ----------------- | ------------------------------- | -------- | -------------- |
 | **Running**   | Enabled                                          | Multiple variants | Continues                       | Updating | N/A            |
 | **Pausing**   | Disabled                                         | Control variant   | Stops                           | Fixed    | Yes            |
+| **Freezing**  | Narrowed to snapshot cohort                      | Same variant      | Stops for new users             | Updating | Yes (unfreeze) |
 | **Ending**    | Modified to roll out chosen variant to all users | Chosen variant    | Continues (chosen variant only) | Fixed    | No             |
 | **Resetting** | Unchanged                                        | Multiple variants | Continues                       | Cleared  | Yes (relaunch) |
