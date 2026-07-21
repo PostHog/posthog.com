@@ -1,0 +1,294 @@
+---
+title: Custom parsers
+---
+
+import CalloutBox from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconInfo" title="Custom parsers are in beta" type="fyi">
+
+Custom parsers are currently in beta. We'd love to [hear your feedback](https://app.posthog.com/ai-observability#panel=support%3Afeedback%3Allm-analytics%3Alow%3Atrue) as we develop this feature.
+
+</CalloutBox>
+
+PostHog renders your LLM [traces](/docs/ai-observability/traces), [spans](/docs/ai-observability/spans), and [generations](/docs/ai-observability/generations) as a sequence of chat-style messages — user prompts, assistant replies, tool calls, and their results. To do this, it normalizes the raw input and output captured from your application into a canonical message shape.
+
+PostHog ships with built-in recipes for the common provider and framework formats (OpenAI, Anthropic, LangChain, LiteLLM, the Vercel AI SDK, OpenTelemetry, and more). When none of them recognizes the shape of an event, that event falls back to displaying its **raw JSON** instead of a readable conversation.
+
+A **custom parser recipe** is a small set of rules, written in YAML, that teaches PostHog how to turn one of these unrecognized shapes into messages. Recipes are scoped to your team and apply whenever a trace is rendered, so once you add one, every matching event displays correctly — past and future.
+
+## Let PostHog AI write it for you
+
+The fastest way to create a recipe is to let [PostHog AI](/docs/ai-observability/analyze-traces-ai) write it from the event in front of you. You don't need to learn the syntax to do this.
+
+1. Open a trace or generation that's displaying as raw JSON.
+2. Use the **Set up a custom parser** action to ask PostHog AI to fix the rendering.
+3. PostHog AI reads the event's input and output. When the mapping is obvious it writes a recipe and validates it against that exact event; when the data isn't really a conversation — a state object, a config blob, or a metrics dump — it describes the options it sees and asks how you'd like it displayed.
+4. Once validation passes, the recipe is saved to your team and the open trace re-renders immediately.
+
+<CalloutBox icon="IconInfo" title="AI data processing" type="fyi">
+
+Asking PostHog AI to write a recipe sends the event's input and output to an LLM. This requires AI data processing to be enabled for your organization, the same requirement as [trace summarization](/docs/ai-observability/summarization).
+
+</CalloutBox>
+
+## Managing recipes
+
+Your team's recipes live in [**Settings** → **AI observability** → **Custom parsing**](https://app.posthog.com/settings/environment-ai-observability#ai-observability-parser-recipes). From there you can:
+
+- **Add recipe** — write a new recipe by hand (see the [reference](#recipe-reference) below).
+- **Edit** — change an existing recipe.
+- **Delete** — permanently remove a recipe.
+
+Recipes you create here are applied to the live trace view as soon as they're saved, so you can iterate against a real event.
+
+## How recipes are applied
+
+A recipe is an ordered list of **rules**. When PostHog renders an event, it feeds the input and output through the rules and produces messages. A few things are worth knowing before you write one:
+
+- **Rules are tried in order, first match wins.** Order your rules from most specific to most general.
+- **Built-ins run first**, so you only need to write rules for the shapes that are still unrecognized.
+- **Top-level arrays are unwrapped automatically**, so write rules for the element shapes, not the array.
+- **Anything still unrecognized keeps its raw JSON view**, so a recipe never breaks an event that already renders.
+
+Each message a recipe produces has a **role** (`user`, `assistant`, `system`, `tool`, `thinking`, or `tool_result`), **content** (a string or a list of content blocks), and optionally **tool calls** and a **tool call ID** that links a result back to the call it answers.
+
+## Recipe reference
+
+A recipe is YAML with a single `rules:` sequence. Each rule has a pattern (`on:`) that decides when it fires and exactly one output mode (`emit`, `delegate`, or `delegateEach`):
+
+```yaml
+rules:
+  - on: <pattern>                          # when the rule fires
+    emit | delegate | delegateEach: ...    # what it produces (exactly one)
+    stamp: <emit slots>                    # delegateEach only: override role/toolCallId on results
+    followups: [...]                       # extra messages appended after the rule's output
+```
+
+### Patterns
+
+A pattern is a mapping of `field: predicate`. Every entry must hold for the rule to fire. A bare value is an equality check; the verb forms cover everything else.
+
+| Predicate | Syntax | Matches when |
+|-----------|--------|--------------|
+| Equality | `field: value` | The field equals the value exactly |
+| Existence | `field: { exists: true }` | The field is present (`false` for absent) |
+| Type | `field: { is: string }` | The field is of that type |
+| Type (any of) | `field: { is: [string, null] }` | The field is one of the listed types |
+| Membership | `field: { in: [a, b, c] }` | The field's value is in the set |
+| Shape | `field: { shape: {...} }` | The object field matches a nested pattern |
+| Every | `field: { every: <predicate> }` | Every element of the array field satisfies the predicate |
+| Whole input | `$: <predicate>` | The predicate applied to the entire input holds |
+
+Nesting a mapping under a field is shorthand for `shape` — `source: { data: { is: string } }` matches an object `source` whose `data` is a string.
+
+Valid types for `is` are `string`, `array`, `object`, `null`, `number`, `boolean`, and `any`.
+
+```yaml
+on:
+  role: { exists: true }
+  content: { is: [string, null] }
+```
+
+### Value expressions
+
+Expressions produce the values you put into output slots, delegate sources, and operator arguments.
+
+| Expression | Example | Result |
+|-----------|---------|--------|
+| Whole input | `$` | The entire input object |
+| Field path | `$.function.arguments` | The value at that path, or undefined if missing |
+| String literal | `"Hello"` | The string as-is |
+| Interpolation | `"Model: $.model"` | Field values spliced into the string |
+| Number / boolean | `123`, `true` | The literal value |
+| Array | `[$.a, $.b]` | Each element compiled in turn |
+| Object | `{ name: $.name, id: $.id }` | Each field compiled in turn |
+
+A `$` is only read as a field path when followed by an identifier (`$.model`), so a literal `$5.00` in a string is left alone.
+
+### Operators
+
+Operators are one-key objects that transform values.
+
+| Operator | Syntax | Purpose |
+|----------|--------|---------|
+| `coalesce` | `coalesce: [expr1, expr2, ...]` | First non-null, non-undefined value |
+| `select` | `select: { from: <arr>, where?: <pattern>, pluck?: <expr>, if_empty?: <expr> }` | Filter an array, optionally transforming each element |
+| `reject` | `reject: { from: <arr>, where: <pattern>, if_empty?: <expr> }` | Inverse filter — keep the elements that *don't* match |
+| `join` | `join: { from: <arr>, sep?: <str>, field?: <str> }` | Join an array into a string (default separator is a newline) |
+| `omit` | `omit: { from: <obj>, keys: [k1, k2, ...] }` | An object with the listed keys removed |
+| `stringify` | `stringify: <expr>` | JSON-encode a non-string value for display |
+| `try_parse_structured_content` | `try_parse_structured_content: <expr>` | Parse a stringified `'[{"type": "text", ...}]'` block array |
+| `literal` | `literal: <value>` | Keep a value uncompiled — escapes a one-key object whose key happens to be an operator name |
+
+On `select` and `reject`, `if_empty: ~` drops the slot entirely instead of emitting an empty array.
+
+### Output: emit slots
+
+`emit` builds a single message from these slots. Use the same slots in `stamp` and in followups.
+
+| Slot | Value | Behavior |
+|------|-------|----------|
+| `role` | A role tag or expression | Defaults to the input's own role/type (normalized: `human` → user, `ai`/`model`/`bot` → assistant), falling back to user on the input side and assistant on the output side |
+| `content` | An expression → string or list of content blocks | The message body |
+| `toolCall` | `{ id: ..., name: ..., args: ... }` | A single tool/function call |
+| `toolCalls` | An expression → array of calls | Multiple tool calls |
+| `toolCallId` | An expression → string | Links a `tool_result` message back to the call it answers |
+| `spread` | An expression → object | Seed the message from an object's fields; explicit slots override what's spread in |
+
+```yaml
+emit:
+  role: assistant
+  content: $.text
+  toolCall:
+    id: $.call_id
+    name: $.action.tool
+    args: $.action.params
+```
+
+### Output: delegate and delegateEach
+
+Instead of emitting a message directly, a rule can hand a nested value back to the recipe to be re-matched:
+
+- `delegate: <expr>` — unwrap a single nested value and re-match it against all rules.
+- `delegateEach: <expr>` — unwrap an array and re-match each element. Add `stamp:` to override `role` or `toolCallId` on every resulting message (useful for tagging a batch of tool results with their parent call's ID).
+
+```yaml
+- on:
+    transcript: { is: array }
+  delegateEach: $.transcript
+```
+
+### Followups
+
+After a rule emits or delegates, `followups:` appends extra messages. A followup is either static (one message) or an expansion over an array (`from`/`each`, one message per element):
+
+```yaml
+followups:
+  - role: system                 # static: one message
+    content: "Done"
+  - from: $.attachments          # expand: one message per element
+    each:
+      role: system
+      content: "Attached: $.name"
+```
+
+## Examples
+
+### Map custom fields onto roles and content
+
+A simple shape where a `kind` field decides the role and the text lives under `body`:
+
+```yaml
+rules:
+  - on:
+      kind: question
+      body: { exists: true }
+    emit:
+      role: user
+      content: $.body.text
+  - on:
+      kind: answer
+    emit:
+      role: assistant
+      content: $.body.text
+```
+
+### Unwrap an envelope and normalize each entry
+
+Unwrap a `transcript` array, then match each entry by who sent it:
+
+```yaml
+rules:
+  - on:
+      transcript: { is: array }
+    delegateEach: $.transcript
+  - on:
+      who: { in: [customer, visitor] }
+    emit:
+      role: user
+      content: $.text
+  - on:
+      who: agent
+    emit:
+      role: assistant
+      content: $.text
+```
+
+### Tool calls, results, and thinking
+
+Map a tool invocation, its result, and a reasoning step to the right roles:
+
+```yaml
+rules:
+  - on:
+      action: { shape: { tool: { is: string } } }
+    emit:
+      role: assistant
+      toolCall:
+        id: $.call_id
+        name: $.action.tool
+        args: $.action.params
+  - on:
+      result_for: { exists: true }
+    emit:
+      role: tool_result
+      toolCallId: $.result_for
+      content:
+        stringify: $.output
+  - on:
+      reasoning: { exists: true }
+    emit:
+      role: thinking
+      content: $.reasoning
+```
+
+### Split content blocks into text and tool calls
+
+Use `reject` and `join` to gather the text parts, and `select` to pull out the tool calls. The role is omitted, so it's inherited from the input's own `role` field:
+
+```yaml
+rules:
+  - on:
+      role: { is: string }
+      parts: { every: { shape: { type: { is: string } } } }
+    emit:
+      content:
+        join:
+          from:
+            reject: { from: $.parts, where: { type: call } }
+          sep: "\n"
+          field: value
+      toolCalls:
+        select:
+          from: $.parts
+          where: { type: call }
+          pluck: { id: $.id, name: $.tool, args: $.args }
+          if_empty: ~
+```
+
+### Delegate a nested payload and append a note
+
+Delegate the real prompt out of a request envelope, parse its structured content, and append the model name as a system message:
+
+```yaml
+rules:
+  - on:
+      request: { shape: { prompt: { exists: true } } }
+    delegate: $.request
+    followups:
+      - role: system
+        content: "Model: $.model"
+  - on:
+      prompt: { exists: true }
+    emit:
+      role: user
+      content:
+        try_parse_structured_content: $.prompt
+```
+
+## Tips
+
+- **Start from the sample.** Write `on:` patterns that match the exact field names and shapes you see in the raw JSON.
+- **Most specific first.** Because the first matching rule wins, put narrow rules above broad ones.
+- **Pick the representation that fits.** Tool activity belongs in `toolCall`/`tool_result` messages, not prose pretending to be dialogue. Standalone data with no message structure can be a single concise system message built from its key fields.
+- **Let PostHog AI do the first draft.** Even if you plan to hand-tune, starting from a generated recipe against your real event is usually faster than writing from scratch.

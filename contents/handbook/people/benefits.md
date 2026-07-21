@@ -36,6 +36,8 @@ People like our merch. If you want more, <PrivateLink url="https://github.com/Po
 
 As always, we expect you to use this with restraint and with your own good judgement. The merch store should not become your sole source of clothing for your wardrobe, nor where you go any time a friend has a birthday. But sure, go ahead and buy your mom (or yourself) a hat or a hoodie!
 
+Please note that any free merch received outside of your birthday kit, work anniversary kit, or new hire kit is considered a taxable benefit in most jurisdictions and may be subject to tax. If you have questions about how this applies to you, we recommend checking with your local tax advisor.
+
 ## Support open-source projects
 
 Everyone gets a monthly [open-source sponsorship](/handbook/people/spending-money#open-source-sponsorship-for-individuals) budget to spend as they see fit to support open source projects of their choice.

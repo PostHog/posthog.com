@@ -14,7 +14,7 @@ const PricingPhilosophy = (): JSX.Element => {
         <>
             <section
                 id="philosophy"
-                className="bg-light dark:bg-dark text-primary shadow-xl rounded pt-6 pb-2 @xl:md:py-8 px-4 @xl:px-8 @2xl:px-12 md:mx-auto mt-12 mb-20 w-[calc(100%_-_3rem)] @xl:w-full max-w-3xl border border-primary"
+                className="bg-accent text-primary shadow-xl rounded pt-6 pb-2 @xl:md:py-8 px-4 @xl:px-8 @2xl:px-12 mx-auto mt-12 mb-20 w-full max-w-3xl border border-primary"
             >
                 <SectionHeader>
                     <p className="opacity-60 text-[15px] mb-2">A note from our co-founder</p>
@@ -54,17 +54,17 @@ const PricingPhilosophy = (): JSX.Element => {
                     </li>
                     <li>
                         We have an open source product too - so if you must, you can self host. It is MIT licensed if
-                        you want to use it in a big organization that isn’t ready to move to PostHog Cloud yet.
+                        you want to use it in a big organization that isn’t ready to move to PostHog Web yet.
                         <Tooltip
                             content={() => (
                                 <div className="max-w-sm">
                                     <strong className="block">A disclaimer about self-hosting</strong>
                                     <p className="mb-2 text-sm">
                                         Being upfront, self-hosting PostHog has limitations and is usually a worse
-                                        experience (and more expensive) than PostHog Cloud.
+                                        experience (and more expensive) than PostHog Web.
                                     </p>
                                     <p className="mb-0 text-sm">
-                                        Main benefits of PostHog Cloud include our large, shared infrastructure and lack
+                                        Main benefits of PostHog Web include our large, shared infrastructure and lack
                                         of separate hosting costs, required maintenance, and upgrades that come with
                                         self-hosting.
                                     </p>

@@ -3,7 +3,6 @@ import Editor from 'components/Editor'
 import SEO from 'components/seo'
 import React, { useEffect } from 'react'
 
-const RELEASES_URL = 'https://github.com/PostHog/code/releases/latest'
 const SAFE_DEEP_LINK_PATH = /^[a-zA-Z0-9/_-]{1,128}$/
 
 export default function CodeOpenPage(): JSX.Element {
@@ -31,7 +30,7 @@ export default function CodeOpenPage(): JSX.Element {
                         </p>
 
                         <div className="flex flex-wrap gap-3 justify-center mb-6">
-                            <CallToAction type="primary" size="md" to={RELEASES_URL}>
+                            <CallToAction type="primary" size="md" to="/code/download">
                                 Download PostHog Code
                             </CallToAction>
                             <CallToAction type="secondary" size="md" to="/docs/posthog-code">

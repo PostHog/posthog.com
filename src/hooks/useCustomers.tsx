@@ -147,7 +147,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     '11x': {
         name: '11x',
-        toolsUsed: ['experiments', 'product_analytics', 'llm_analytics', 'cdp'],
+        toolsUsed: ['experiments', 'product_analytics', 'ai_observability', 'cdp'],
         industries: ['AI'],
         users: ['Marketing', 'Leadership', 'Founders', 'Engineering'],
         notes: 'AI SDR',
@@ -264,7 +264,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     cloudpeek: {
         name: 'CloudPeek',
-        toolsUsed: ['logs', 'error_tracking', 'llm_analytics'],
+        toolsUsed: ['logs', 'error_tracking', 'ai_observability'],
         industries: ['Cybersecurity'],
         users: ['Engineering'],
         notes: 'Agentic AI platform for cybersecurity',
@@ -398,6 +398,33 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         height: 9,
         featured: true,
     },
+    fastr: {
+        name: 'Fastr',
+        toolsUsed: ['endpoints', 'feature_flags', 'session_replay', 'surveys'],
+        industries: ['E-commerce, MarTech'],
+        users: ['Product', 'Marketing'],
+        notes: 'A conversion rate optimization platform',
+        featured: false,
+        logo: {
+            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/FASTR_Logo_full_color_a8db0d8cb5.png',
+            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/FASTR_Logo_white_3c093b166c.png',
+        },
+        height: 8,
+        quotes: {
+            ryan_breen: {
+                name: 'Ryan Breen',
+                role: 'CTO',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/Ryan_Breen_456ba746db.jpg',
+                },
+                quotes: [
+                    "We love that you're nerd-friendly. You love being a kind of white-labeled substrate, just a fantastic platform for us to build on top of.",
+                    "The reason Fastr can stamp out a custom dashboard for every customer is their agentic pipeline. Fastr's engineers don't click around the PostHog UI. They write Claude skills that go figure out the current PostHog API, generate the endpoints and materialized views a feature needs, and deploy them.",
+                    "That's what shapes the Fastr UI. Instead of a chart library, Fastr drops customers into an AI conversation. They describe the question and the system pulls the answer out of the PostHog data Fastr has wired up for them.",
+                ],
+            },
+        },
+    },
     gankster: {
         name: 'Gankster',
         toolsUsed: ['posthog_ai', 'session_replay', 'product_analytics'],
@@ -429,7 +456,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             'product_analytics',
             'surveys',
             'error_tracking',
-            'llm_analytics',
+            'ai_observability',
             'data_warehouse',
         ],
         industries: ['SaaS'],
@@ -459,9 +486,10 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         users: ['Engineering', 'Product', 'Growth', 'Marketing'],
         featured: false,
         logo: {
-            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/kilocode_logo_c58c88f029.webp',
-            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/kilocode_logo_c58c88f029.webp',
+            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/e_trim,q_auto,f_auto/kilocodelogo_93f0668287.png',
+            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/e_trim,q_auto,f_auto/kilocodelogo_93f0668287.png',
         },
+        height: 14,
         quotes: {
             job_rietbergen: {
                 // This is the author handle used in OSQuote
@@ -475,6 +503,33 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                     "In other setups, you end up with four different tools–analytics, experiments, recordings,and they don't really talk to each other. With PostHog, you can actually see the full picture.",
                     "PostHog is really the connective tissue behind a lot of what we're doing. So many things depend on it, and it adapts as fast as the product does.",
                     "Everything we do is about speed. PostHog helps us move fast without losing visibility into what's actually happening.",
+                ],
+            },
+        },
+    },
+    'legit-media': {
+        name: 'Legit Media',
+        toolsUsed: ['endpoints', 'product_analytics', 'session_replay', 'feature_flags'],
+        industries: ['News and Media'],
+        users: ['Engineering', 'Marketing'],
+        notes: 'Network of news websites across Africa',
+        featured: false,
+        logo: {
+            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/legit_logo_ad1569a0cd.png',
+            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/legit_logo_ad1569a0cd.png',
+        },
+        height: 8,
+        quotes: {
+            andrey_tovstonog: {
+                name: 'Andrey Tovstonog',
+                role: 'CTO',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/andrey_headshot_b9a99442ec.png',
+                },
+                quotes: [
+                    "About 1 out of 7 requests was successful. Before switching to Endpoints, during the last few weeks we weren't able to get any reports at all — the API was constantly responding that it was too busy and couldn't process our requests.",
+                    "The requests started to be processed much faster, and the response stability improved significantly.",
+                    "Previously, marketers had to manually gather all this information from different PostHog dashboards. After automation, everything is now consolidated and available in a single place, and they spend their time analyzing the results instead of searching for the right data.",
                 ],
             },
         },
@@ -534,7 +589,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     hostai: {
         name: 'HostAI',
-        toolsUsed: ['feature_flags', 'product_analytics', 'llm_analytics'],
+        toolsUsed: ['feature_flags', 'product_analytics', 'ai_observability'],
         industries: ['AI'],
         users: ['Engineering', 'Leadership', 'Founders'],
         notes: 'AI for vacation rentals managers',
@@ -544,7 +599,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     lovable: {
         name: 'Lovable',
-        toolsUsed: ['llm_analytics', 'experiments', 'feature_flags'],
+        toolsUsed: ['ai_observability', 'experiments', 'feature_flags'],
         industries: ['Devtool'],
         users: ['Engineering'],
         notes: 'AI app & website builder',
@@ -566,7 +621,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     jaxxon: {
         name: 'Jaxxon',
-        // toolsUsed: ['feature_flags', 'product_analytics', 'llm_analytics'],
+        // toolsUsed: ['feature_flags', 'product_analytics', 'ai_observability'],
         industries: ['Fashion'],
         // users: ['Engineering', 'Leadership', 'Founders'],
         notes: "Men's chains & accessories",
@@ -576,7 +631,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     juicebox: {
         name: 'Juicebox',
-        toolsUsed: ['feature_flags', 'product_analytics', 'session_replay', 'llm_analytics'],
+        toolsUsed: ['feature_flags', 'product_analytics', 'session_replay', 'ai_observability'],
         industries: ['AI'],
         users: ['Engineering', 'Leadership', 'Founders'],
         notes: 'AI recruitment platform',
@@ -745,6 +800,40 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                 },
                 quotes: [
                     'One thing I have to say is that PostHog’s support is awesome. There’s no outsourced first line or call centers — you get real answers fast, straight from the actual engineers. If you find a bug, they show you the GitHub issue and you can literally watch it get fixed. I love that.',
+                ],
+            },
+        },
+    },
+    qubs: {
+        name: 'Qubs',
+        toolsUsed: [
+            'endpoints',
+            'error_tracking',
+            'feature_flags',
+            'product_analytics',
+            'session_replay',
+            'surveys',
+            'ai_observability',
+            'warehouse_sources',
+        ],
+        industries: ['Ad Tech', 'Hospitality', 'Digital Signage'],
+        users: ['Engineering'],
+        notes: 'A digital menu platform with its own ad network',
+        featured: false,
+        logo: {
+            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/qubs_logo_black_2x_c4ca11cba9.png',
+            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/qubs_logo_white_outline_2x_5430c8f472.png',
+        },
+        height: 10,
+        quotes: {
+            gheorghe_avram: {
+                name: 'Gheorghe Avram',
+                role: 'CTO',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/Gheorghe_headshot_96a950e3d6.png',
+                },
+                quotes: [
+                    'This is the true power of PostHog, they give us the freedom to use our data wherever we want to, without the complexity of managing the infrastructure.',
                 ],
             },
         },
@@ -985,7 +1074,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     zealot: {
         name: 'Zealot',
-        toolsUsed: ['llm_analytics', 'session_replay', 'error_tracking', 'product_analytics'],
+        toolsUsed: ['ai_observability', 'session_replay', 'error_tracking', 'product_analytics'],
         industries: ['Recruitment'],
         users: ['Engineering', 'Leadership', 'Founders'],
         notes: 'AI customer activation platform',
@@ -1033,7 +1122,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     // },
     // wowzer: {
     //     name: 'Wowzer',
-    //     toolsUsed: ['experiments', 'product_analytics', 'surveys', 'llm_analytics'],
+    //     toolsUsed: ['experiments', 'product_analytics', 'surveys', 'ai_observability'],
     //     industries: ['AI'],
     //     users: ['Growth', 'Engineering', 'Product'],
     //     notes: 'AI-powered platform',

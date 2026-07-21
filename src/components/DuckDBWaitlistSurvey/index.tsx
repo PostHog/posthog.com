@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import usePostHog from '../../hooks/usePostHog'
+import usePrimeEarlyAccessFeatures from '../../hooks/usePrimeEarlyAccessFeatures'
 import OSButton from 'components/OSButton'
 import * as Yup from 'yup'
 import { IconCheckCircle } from '@posthog/icons'
@@ -9,12 +10,19 @@ const ValidationSchema = Yup.object().shape({
     email: Yup.string().email('Please enter a valid email address').required('Email is required'),
 })
 
+// The Managed DuckDB Data Warehouse concept-stage Early Access Feature flag.
+const FLAG_KEY = 'managed-duckdb-data-warehouse'
+
 export default function DuckDBWaitlistSurvey(): JSX.Element {
     const [email, setEmail] = useState('')
     const [submitted, setSubmitted] = useState(false)
     const [showForm, setShowForm] = useState(false)
     const [error, setError] = useState('')
     const posthog = usePostHog()
+
+    // Load the EAF list before submit so the enrollment event carries $early_access_feature_name —
+    // the Customer.io waitlist flow's trigger requires it.
+    usePrimeEarlyAccessFeatures(FLAG_KEY)
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault()
@@ -42,6 +50,10 @@ export default function DuckDBWaitlistSurvey(): JSX.Element {
                 email: email,
                 duckdb_waitlist: true,
             })
+
+            // Mirror the in-app coming-soon waitlist: fire $feature_enrollment_update with
+            // $feature_enrollment_stage 'concept' for the Managed DuckDB Data Warehouse EAF.
+            posthog.updateEarlyAccessFeatureEnrollment?.(FLAG_KEY, true, 'concept')
         }
 
         setSubmitted(true)
