@@ -492,11 +492,6 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: 'customers.mdx',
-                    link: '/customers',
-                },
-                {
-                    type: 'item',
                     label: 'Blog',
                     link: '/blog',
                 },
@@ -506,6 +501,11 @@ export function useMenuData(): MenuType[] {
                     link: '/handbook',
                     items: processHandbookSidebar(handbookSidebar),
                     mobileDestination: '/handbook',
+                },
+                {
+                    type: 'item',
+                    label: 'customers.mdx',
+                    link: '/customers',
                 },
                 {
                     type: 'item',
