@@ -176,9 +176,9 @@ const processMenuItemWithGrouping = (item: DocsMenuItem): any => {
 }
 
 // Prioritized products, ordered to line up with the surfaces under the Products menu
-// (PostHog Code, Research, Slack, MCP, Context Warehouse) mapped to their docs categories.
+// (PostHog Desktop, Research, Slack, MCP, Context Warehouse) mapped to their docs categories.
 // Everything else falls through to alphabetical order below.
-const DOCS_PRIORITY = ['PostHog Code', 'PostHog AI', 'Slack app', 'MCP Analytics', 'Data Warehouse']
+const DOCS_PRIORITY = ['PostHog Desktop', 'PostHog AI', 'Slack app', 'MCP Analytics', 'Data Warehouse']
 
 const getDocsMenuItems = () => {
     let items = groupBySectionDividers((docsMenu as DocsMenu).children)
@@ -219,8 +219,8 @@ const buildProductsMenuItems = (allProducts: any[]) => {
     const items: any[] = [
         {
             type: 'item',
-            label: 'PostHog Code',
-            link: '/code',
+            label: 'PostHog Desktop',
+            link: '/desktop',
             icon: <Icons.IconCoffee className="size-4 text-brown" />,
         },
         {

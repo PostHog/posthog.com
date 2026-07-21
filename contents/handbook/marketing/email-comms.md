@@ -47,14 +47,16 @@ The email is usually comprised of three sections, which inform users of new guid
 We categorize these emails as `Actually useful marketing emails` in Customer.io, so users can unsubscribe if they wish. This email usually comes directly from Joe. 
 
 ### Launch emails
-Most product and feature launch emails come from the Product Marketer who sent them -- but sometimes campaigns trigger from others, such as billing@posthog.com.
+Most product and feature launch emails come from the Product Marketer who sent them – but sometimes campaigns trigger from others, such as billing@posthog.com.
 
 The exceptions and other solutions are:
-- Sending emails from hey@posthog.com -- this is what we usually do for BIG sends, because it would overwhelm the sender's inbox with 'out-of-office' auto-replies.
-- Sending emails from beta-feedback@posthog.com -- this is a Google group tied to the automation in [#posthog-feedback](https://posthog.slack.com/archives/C011L071P8U ) by a Slack bot. Any responses to this address get posted in that channel and anyone can reply to them using the info in there.
+- Sending emails from hey@posthog.com – this is what we usually do for BIG sends, because it would overwhelm the sender's inbox with 'out-of-office' auto-replies.
+- Sending emails from beta-feedback@posthog.com – this is a Google group tied to the automation in [#posthog-feedback](https://posthog.slack.com/archives/C011L071P8U ) by a Slack bot. Any responses to this address get posted in that channel and anyone can reply to them using the info in there.
 - Sending emails from a specific person, but setting the reply-to address as one of the above. This is not common, but it's there if you want to use it.
 
 >We specifically do not want emails we think people will reply to going into hey@posthog.com because it is sporadically monitored at best, and hard to collaborate through.
+
+If you're sending a launch email (alpha, beta, GA), it's helpful to add an annotation in [our PostHog project](https://us.posthog.com/project/2/data-management/annotations) on the send date, so we can see its impact on our metrics later.
 
 When we ask users to share feedback through email, it should either link to beta-feedback@posthog.com, the [support modal](http://app.posthog.com/home#supportModal), or to ourselves personally. Never hey@posthog.com.
 
@@ -104,7 +106,8 @@ This flow currently comprises a single, personal email from either Joe or the te
 
 When responses come in, Joe generally triages replies and directs feedback to the relevant team, as well as rewarding users with merch as thanks for their feedback. 
 
-> **Launching a beta?** It helps to let the Brand team know in [the team Slack](https://posthog.slack.com/archives/C083V7C6GKE). The team can then add your beta to the beta onboarding flow, and plan ahead for marketing announcements as needed. 
+> **Launching a beta?** It helps to let the Brand team know in [the team Slack](https://posthog.slack.com/archives/C083V7C6GKE). The team can then add your beta to the beta onboarding flow, and plan ahead for marketing announcements as needed.
+
 
 #### Onboarding - new hires
 This is an internal email flow for new hires, which triggers whenever a new user signs up with a PostHog email address. We currently exclude most old-time hires from this flow, to avoid blocking their inboxes. 

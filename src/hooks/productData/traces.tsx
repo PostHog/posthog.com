@@ -46,7 +46,7 @@ export const traces = {
     seo: {
         title: 'Traces – Distributed tracing with PostHog',
         description:
-            'Traces pinpoint the exact query that broke. PostHog Code opens the PR and sends it to your Inbox. You hit merge. That’s the whole job.',
+            'Traces pinpoint the exact query that broke. PostHog Desktop opens the PR and sends it to your Inbox. You hit merge. That’s the whole job.',
     },
     overview: {
         title: 'Straight to the line that broke',
