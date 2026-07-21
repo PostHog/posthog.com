@@ -2010,6 +2010,11 @@
         { "source": "/manual/sso", "destination": "/docs/settings/sso" },
         { "source": "/manual/support", "destination": "/docs/support-options" },
         { "source": "/docs/support/zendesk-import", "destination": "/docs/support/imports/zendesk", "statusCode": 301 },
+        {
+            "source": "/docs/support/self-driving",
+            "destination": "/docs/support#how-support-works-with-self-driving",
+            "statusCode": 301
+        },
         { "source": "/manual/glossary", "destination": "/docs/glossary" },
         { "source": "/docs/integrate/browser-extension", "destination": "/docs/advanced/browser-extension" },
         { "source": "/docs/integrate/cdp", "destination": "/docs/advanced/cdp" },

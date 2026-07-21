@@ -1,4 +1,4 @@
-# SelfDrivingLoop
+# LiveSelfDrivingLoop
 
 The animated explainer for PostHog's **self-improving loop**. It replaces the static Mermaid
 diagram on the self-driving docs: a runner walks one real pull request (`#67394`) through the
@@ -19,9 +19,9 @@ Import it directly in the MDX file (same pattern as `QuestLog`), in place of the
 ` ```mermaid ` block:
 
 ```mdx
-import SelfDrivingLoop from 'components/SelfDrivingLoop'
+import LiveSelfDrivingLoop from 'components/LiveSelfDrivingLoop'
 
-<SelfDrivingLoop />
+<LiveSelfDrivingLoop />
 ```
 
 It takes no props.
