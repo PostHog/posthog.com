@@ -149,8 +149,6 @@
         }
     ],
     "redirects": [
-        { "source": "/teams/conversations", "destination": "/teams/support" },
-        { "source": "/teams/conversations/:path*", "destination": "/teams/support/:path*" },
         { "source": "/papers", "destination": "/research#papers" },
         { "source": "/code", "destination": "/desktop" },
         { "source": "/teams/logs", "destination": "/teams/apm" },
