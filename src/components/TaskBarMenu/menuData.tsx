@@ -331,7 +331,6 @@ export function useMenuData(): MenuType[] {
                     type: 'item',
                     label: 'Learn more',
                     disabled: true,
-                    icon: <Icons.IconBook className="size-4 text-gray" />,
                 },
                 {
                     type: 'item',
