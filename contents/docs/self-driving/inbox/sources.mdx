@@ -5,20 +5,20 @@ sidebar: Docs
 showTitle: true
 ---
 
-import { CallToAction } from 'components/CallToAction'
-import List from 'components/List'
+import { CallToAction } from "components/CallToAction";
+import List from "components/List";
 
-<CalloutBox icon="IconInfo" title="Open beta" type="fyi">
+<CalloutBox icon="IconFlask" title="Open beta" type="action">
 
-Self-driving is currently in open beta.
+Self-driving is in open beta. It's improving quickly – expect rough edges, and expect them to disappear fast.
 
 </CalloutBox>
 
-Signal sources are what fill your inbox. A [signal](/docs/self-driving/signals) can be a production error, a support conversation, a session replay pattern, a log alert changing state, a Replay Vision scanner finding, or an issue from an external tracker. Each source watches one of these streams and turns what it finds into work worth investigating.
+Signal sources are what fill your inbox. A [signal](/docs/self-driving/signals) can be a production error, a support conversation, a Session Replay pattern, a log alert changing state, a Replay Vision scanner finding, or an issue from an external tracker. Each source watches one of these streams and turns what it finds into work worth investigating.
 
 ## Configure sources
 
-From the inbox, open settings and configure your sources. Toggle the ones you want to enable, then follow the authentication prompts for any external services. The inbox is available across surfaces — the [web app](/docs/self-driving/web), [PostHog Code](/docs/posthog-code), and Slack — and your sources stay the same wherever you open it.
+From the inbox, open **settings** and configure your sources. Toggle the ones you want to enable, then follow the authentication prompts for any external services. The inbox is available across surfaces – the [web app](/docs/self-driving/web), [PostHog Code](/docs/posthog-code), and Slack – and your sources stay the same wherever you open it.
 
 <CalloutBox icon="IconInfo" title="MCP is handled for you" type="fyi">
 
@@ -68,6 +68,13 @@ These sources are available when the matching PostHog product has data in your p
       description: "Actionable product issues detected by scanners.",
       lineClamp: 2,
     },
+    {
+      label: "Health checks",
+      url: "/docs/health-checks",
+      icon: "IconStethoscope",
+      description: "Outdated SDKs, proxy gaps, ingestion warnings, broken data models, and more.",
+      lineClamp: 2,
+    },
   ]}
 />
 
@@ -78,12 +85,15 @@ External sources pull issue context into the same inbox queue as your product si
 | Source        | What the inbox reads                                 | What the inbox does                                                              |
 | ------------- | ---------------------------------------------------- | -------------------------------------------------------------------------------- |
 | GitHub Issues | New issues in connected repositories                 | Starts a research task to find related code and decide whether a fix is possible |
+| Jira          | New issues from connected Jira projects              | Starts a research task to find related code and decide whether a fix is possible |
 | Linear        | Issue title, description, labels, and linked context | Searches the codebase and keeps the report tied to the original issue            |
 | Zendesk       | Customer support ticket context                      | Turns actionable bug reports into researched implementation work                 |
 
 ## What happens next
 
-When a signal arrives, the inbox creates a [report](/docs/self-driving/reports) and starts research if the source is enabled. The research agent connects the signal to your codebase, checks user impact, and marks the report as **Actionable** when a code fix is possible.
+Related signals don't each become their own task. As signals arrive, the inbox deduplicates them and groups related ones, so a signal from a support conversation, a matching error-tracking issue, and a session-replay pattern collapse into a single [report](/docs/self-driving/reports) rather than three. That way you deal with one customer-facing problem, not scattered noise.
+
+Once a report exists, research starts if the source is enabled. The research agent connects it to your codebase, checks user impact, and marks the report as **Actionable** when a code fix is possible.
 
 From there, you can review the report, ask for more research, let an implementation agent open a pull request, or audit the agent log to see exactly what it read and why.
 

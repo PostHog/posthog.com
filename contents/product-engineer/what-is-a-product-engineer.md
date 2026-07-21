@@ -19,7 +19,7 @@ Reading this handbook will help you understand how to adapt your thinking, the b
 
 Just like our [company handbook](/handbook), where we publicly document our strategy and how we work, the Product Engineer Handbook is a living document. One we will grow, fine-tune, and iterate like any other software product. Consider this version a minimum lovable product.
 
-If you enjoy it, you should sign up to our newsletter, [Product for Engineers](https://newsletter.posthog.com/), so you don't miss out on new chapters. 
+If you enjoy it, you should sign up to our newsletter, [build mode](https://newsletter.posthog.com/), so you don't miss out on new chapters. 
 
 Got a request for something we should add to the handbook? Leave a comment on this page, or in our [community](/questions).
 

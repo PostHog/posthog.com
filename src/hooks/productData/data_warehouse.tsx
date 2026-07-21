@@ -17,11 +17,13 @@ export const dataWarehouse = {
     status: 'beta',
     seo: {
         title: 'Managed DuckDB warehouse - PostHog',
-        description: 'Fast, scalable, and easy-to-use data warehouse managed by PostHog.',
+        description:
+            'A managed data warehouse that unifies your product context with any source – so agents can query all of it and act on it to make your product self-driving.',
     },
     overview: {
         title: 'Query & visualize product and third party data together',
-        description: 'Unify and query data from any source and analyze it alongside your product data.',
+        description:
+            'The data warehouse is one of the tools that makes your product self-driving: where your product context lives alongside data from any source, so agents can query all of it. Unify and analyze it next to your product data.',
         textColor: 'text-white', // tw
     },
     screenshots: {
@@ -299,7 +301,8 @@ export const dataWarehouse = {
         {
             title: 'External data sources',
             headline: 'Query PostHog alongside business data',
-            description: 'Join events with data from Stripe, HubSpot, databases, and more in a single query.',
+            description:
+                'Join events with data from Stripe, HubSpot, databases, and more in a single query – so agents have all your context in one place to act on.',
             features: [
                 {
                     title: 'Data warehouse',
@@ -488,7 +491,7 @@ export const dataWarehouse = {
         pricing:
             "1 million rows sync free every month, then it's simple per-row pricing. Compare that to Fivetran who charges thousands per month! We're 10x cheaper because we built for product teams, not enterprise IT. We grow with you vs. trying to lock you in with value-based pricing.",
         'comparison-summary':
-            'Traditional data warehouses (Snowflake, BigQuery) require data teams. ETL tools (Fivetran, Stitch) just move data around. We do both - sync and analyze in one place. Perfect for product teams who need answers, not infrastructure.',
+            "Traditional data warehouses (Snowflake, BigQuery) require data teams. ETL tools (Fivetran, Stitch) just move data around. We do both – sync and analyze in one place. And because all your product data lives together, agents can query it and act on it – it's the context that makes your product self-driving. Perfect for product teams who need answers, not infrastructure.",
         'feature-comparison':
             "We don't have every connector Fivetran has. We don't need Snowflake's scale. What we have: dead-simple setup, built-in analytics, and it works with all your PostHog data. For most teams, that's exactly enough.",
         docs: "Step-by-step guides for each integration. Common query patterns documented. Real examples like 'revenue per feature' and 'support ticket impact on churn.' No data engineering degree required.",

@@ -60,6 +60,16 @@ posthog.getFeatureFlag('key-for-your-multivariate-flag')
 posthog.getFeatureFlagResult('key-for-your-multivariate-flag')?.payload
 ```
 
+### Inspecting all feature flags
+
+You can inspect all currently loaded feature flags with `getAllFeatureFlags()`. It returns each flag's `key`, `enabled` state, `variant`, and `payload`, and does not send a `$feature_flag_called` event, so calling it won't affect your experiment results or flag usage analytics:
+
+```react-native
+for (const flag of posthog.getAllFeatureFlags()) {
+    console.log(flag.key, flag.enabled, flag.variant, flag.payload)
+}
+```
+
 ### Ensuring flags are loaded before usage
 
 Every time a user opens the app, we send a request in the background to fetch the feature flags that apply to that user. We store those flags in the storage.

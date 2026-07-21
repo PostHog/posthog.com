@@ -1,0 +1,23 @@
+---
+title: Install metrics
+---
+
+> **Note:** Metrics is in alpha. Setup details, including the ingestion endpoint, may change before general availability.
+
+There are two ways to get metrics into PostHog:
+
+- **PostHog SDKs**: if a PostHog SDK is already in your app, record metrics with the `posthog.metrics` API. No new packages, no extra authentication.
+- **OpenTelemetry (OTLP)**: if you use OpenTelemetry anywhere else, point your OTLP metrics exporter at PostHog. No PostHog packages required.
+
+Already capturing metrics with Prometheus, StatsD, or Datadog? You don't need to replace anything: add the PostHog call next to your existing instrumentation, using the same metric name and attributes, and migrate at your own pace.
+
+## Platforms
+
+| Platform | Method |
+| --- | --- |
+| [JavaScript (web)](/docs/metrics/installation/javascript) | `posthog.metrics` API in [posthog-js](/docs/libraries/js) |
+| [Node.js](/docs/metrics/installation/nodejs) | `posthog.metrics` API in [posthog-node](/docs/libraries/node) |
+| [Python](/docs/metrics/installation/python) | `posthog.metrics` API in [posthog-python](/docs/libraries/python) |
+| [Other languages](/docs/metrics/installation/other) | Any OpenTelemetry-compatible OTLP metrics exporter |
+
+> **Note:** Metrics uses the OpenTelemetry Protocol (OTLP) standard. If your language isn't listed, check the [OpenTelemetry documentation](https://opentelemetry.io/docs/) for compatible libraries and see [other languages](/docs/metrics/installation/other).

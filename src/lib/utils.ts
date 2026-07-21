@@ -114,3 +114,5 @@ export const slugifyTeamName = (name: string): string => {
         remove: /and/,
     })
 }
+
+export const formatTeamName = (name: string): string => `${name.trim().replace(/\s+team$/i, '')} Team`

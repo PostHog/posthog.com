@@ -9,7 +9,7 @@ availability:
 sourceId: GoCardless
 ---
 
-<CalloutBox icon="IconInfo" title="Alpha release" type="fyi">
+<CalloutBox icon="IconFlask" title="Alpha release" type="action">
 
 This source is currently in **alpha**. The interface and available tables may change.
 
@@ -58,3 +58,7 @@ The `events` table is GoCardless's append-only change log, making it the only ta
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

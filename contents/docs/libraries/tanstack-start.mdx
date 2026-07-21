@@ -3,6 +3,8 @@ title: TanStack Start
 platformLogo: tanstack
 ---
 
+import TracingHeaders from '../_snippets/tracing-headers.mdx'
+
 This tutorial shows how to integrate PostHog with a [TanStack Start](https://tanstack.com/start) app for both client-side and server-side analytics.
 
 ## Installation
@@ -22,11 +24,17 @@ import IdentifyFrontendCallout from '../_snippets/identify-frontend-callout.mdx'
 
 <IdentifyFrontendCallout />
 
+<TracingHeaders />
+
 ## Initialize PostHog on the client
 
 Wrap your app with `PostHogProvider` in your root route with your project token, host, and other options. 
 
-```tsx file=src/routes/__root.tsx
+```
+
+import CspAllowancesCallout from "../_snippets/csp-allowances-callout.mdx"
+
+<CspAllowancesCallout />tsx file=src/routes/__root.tsx
 // src/routes/__root.tsx
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
 import { PostHogProvider } from '@posthog/react'

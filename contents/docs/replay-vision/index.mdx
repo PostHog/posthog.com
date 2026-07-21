@@ -4,7 +4,7 @@ title: Replay Vision
 
 import { ProductScreenshot } from "components/ProductScreenshot";
 
-<CalloutBox icon="IconInfo" title="Replay Vision is in closed beta" type="warning">
+<CalloutBox icon="IconFlask" title="Replay Vision is in closed beta" type="action">
 
 Not yet available to everyone – <a href="/replay-vision">join the waitlist</a> to get updates.
 
@@ -36,6 +36,8 @@ When a scanner runs against a recording, PostHog:
 4. Saves the result as an observation and captures it as a `$recording_observed` event in your project.
 
 Each observation snapshots the scanner's configuration at the time it ran, so editing a scanner later doesn't change past observations.
+
+Because Vision runs entirely on ingested data, it stops producing observations if events or recordings stop arriving. See [troubleshooting](/docs/replay-vision/troubleshooting#events-or-recordings-arent-coming-in) for what to check.
 
 ## What you can do with it
 

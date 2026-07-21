@@ -40,3 +40,7 @@ The data warehouse then starts syncing your Postmark data. You can see details a
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />
