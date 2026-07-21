@@ -54,7 +54,7 @@ export default function OrderHistory({ orders }: { orders: any[] }) {
                                 <div className="p-6 font-mono text-sm">
                                     <header className="text-center mb-6">
                                         <div className="flex justify-center">
-                                            <Logo fill="primary" />
+                                            <Logo variant="mono" color="primary" />
                                         </div>
                                     </header>
 

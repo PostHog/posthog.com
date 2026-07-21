@@ -23,7 +23,7 @@ AI is changing all this, and in doing so, is making no-code experiments extinct.
 
 AI code generation is fulfilling the promise of no-code experiments: it actually lets you run experiments without relying on engineers. Writing code is [becoming less of a bottleneck](/newsletter/hidden-danger-of-shipping-fast). Now the hard part is moving where it should have been all along: figuring out what experiments to run.
 
-You still need to describe your test in plain language and learn how to set up experiments correctly, but the coding can now be done with the combination of your favorite coding agent and [PostHog MCP](/docs/model-context-protocol). When you combine these, you just describe your test and the agent generates:
+You still need to describe your test in plain language and learn how to set up experiments correctly, but the coding can now be done with the combination of your favorite coding agent and [PostHog MCP](/docs/model-context-protocol) (or [CLI](/docs/cli)). When you combine these, you just describe your test and the agent generates:
 
 - The actual code change implementing your variant
 - An [experiment](/docs/experiments) in PostHog with your success metric

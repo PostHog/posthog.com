@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> Want PostHog to be involved in your event? See how we do [Community events](#community-events). Want to start a co-working group for builders? Check out our [Community incubator](#community-incubator) program and submit the [form](/community-incubator#apply). If you'd like to add an IRL event to the [events page](/events), contact <TeamMember name="Daniel Zaltsman"/> or <TeamMember name="Kliment Minchev"/>.
+> Want PostHog to partner, sponsor, or speak at your event? Submit the [form below](#event-submission-form). Want to start a builder collective? Check out our [Builder collectives](#community-incubator) program and submit the [form](/community-incubator#apply).
 
 We did 45 events in real life (IRL) in 2025 and we're just getting started. While we’re [100% remote](/handbook/company/culture) and set up to work asynchronously–we've found real benefits in getting together with users in real life. All our public events are showcased on the [events page](/events). 
 
@@ -114,3 +114,9 @@ For first-time yappers, reference the [speaker's guide](/handbook/marketing/spea
 ## Sponsoring student organizations
 
 Sometimes students at varying universities ask us if we are interested in sponsoring their career fairs, hackathons, or other student-led initiatives. We don't currently participate in these. Although we don't use specific years of experience as a qualifier for hiring, we rarely hire students straight out of school. If there is a custom partnership you have in mind or it involves an existing employee's alma-mater, ask in the [#team-irl-events](https://posthog.slack.com/archives/C0AB78YBCNA) channel.
+
+## Event submission form
+
+Want us to partner, sponsor, or speak at your event? Fill out the form below and we'll be in touch.
+
+<EmbeddedSurvey surveyId="019f181c-074f-0000-8240-f190ad8cfdfb" />

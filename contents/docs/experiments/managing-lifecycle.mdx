@@ -8,7 +8,7 @@ availability:
   enterprise: full
 ---
 
-After you've analyzed your experiment metrics and determined a winning variant, you can manage the experiment's lifecycle by ending, pausing, or resetting it.
+After you've analyzed your experiment metrics and determined a winning variant, you can manage the experiment's lifecycle by ending, pausing or resetting it.
 
 ## Ending an experiment
 
@@ -53,6 +53,27 @@ Resetting analysis clears the experiment's results and returning it to a draft s
 Technically speaking it resets the experiment's start and end dates. All events collected thus far will still exist, but won't be applied to the experiment unless you manually change the start date after launching the experiment again.
 
 This is useful when you need to restart data collection, for example after fixing a bug in your experiment setup or changing metric definitions.
+
+## Duplicating an experiment
+
+You can duplicate an experiment within the same project or copy it to another project in your organization.
+
+### Within the same project
+
+To duplicate an experiment, click the **⋯** (more) menu on the experiment page and select **Duplicate**. This creates a copy of the experiment as a new draft with all its metrics, parameters, and feature flag configuration. You need to specify a new feature flag key for the duplicated experiment.
+
+### To another project
+
+To copy an experiment to a different project, click the **⋯** (more) menu and select **Copy to project**. This option is only available when your organization has multiple projects.
+
+When copying to another project:
+
+- The copied experiment is created as a draft with its feature flag disabled
+- If a feature flag with the same key already exists in the target project, the copied experiment reuses that flag's variant configuration
+- Saved metrics and holdout groups are not copied since they are project-scoped
+- You must have write access to both the source and target projects
+- The target project must be in the same organization
+- Experiments using legacy metrics can't be copied
 
 ## Comparing pausing, ending, and resetting
 

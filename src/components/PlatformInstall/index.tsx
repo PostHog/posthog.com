@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { IconQuestion } from '@posthog/icons'
+import { IconInfo, IconQuestion } from '@posthog/icons'
 import Link from 'components/Link'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { cn } from '../../utils'
@@ -10,6 +10,7 @@ import { CopyableCommand } from './CopyableCommand'
 import { InlineCommand } from './InlineCommand'
 import { buildWizardCommand, buildSchemaCommand } from './buildCommand'
 import {
+    cliInstallSchema,
     mcpInstallSchema,
     wizardInstallSchema,
     type InstallMethod,
@@ -216,13 +217,22 @@ export default function PlatformInstall({
 
     return (
         <div
-            className={`not-prose min-w-96 max-w-md inline-block border border-primary rounded bg-accent/40 shadow-2xl mb-2 ${className}`}
+            className={`not-prose w-full max-w-md min-w-0 border border-primary rounded bg-accent/40 shadow-2xl mb-2 ${className}`}
         >
             <div className="p-3 space-y-2">
                 <div className="flex items-start justify-between gap-2">
                     <div className="flex items-center gap-1.5">
                         <h3 className="!text-base font-bold text-primary m-0">{schema.title}</h3>
-                        {schema.titleTooltip ? (
+                        {schema.titleInfoAction ? (
+                            <Link
+                                to={schema.titleInfoAction.to}
+                                state={schema.titleInfoAction.state}
+                                aria-label={schema.titleInfoAction.label}
+                                className="inline-flex text-secondary hover:text-primary"
+                            >
+                                <IconInfo className="size-4" />
+                            </Link>
+                        ) : schema.titleTooltip ? (
                             <Tooltip
                                 delay={0}
                                 open={titleTooltipOpen}
@@ -312,5 +322,5 @@ export default function PlatformInstall({
 }
 
 export { CopyableCommand } from './CopyableCommand'
-export { mcpInstallSchema, wizardInstallSchema }
+export { cliInstallSchema, mcpInstallSchema, wizardInstallSchema }
 export type { InstallSchema, Platform, PlatformOption, InstallMethod } from './schema'

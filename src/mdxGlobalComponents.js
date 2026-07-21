@@ -19,6 +19,7 @@ import Snippet from '../contents/docs/integrate/snippet.mdx'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { ContentViewer } from './components/ContentViewer'
 import { Step, Steps } from './components/Docs/Steps'
+import EmbeddedSurvey from './components/Docs/EmbeddedSurvey'
 import { Drawer } from './components/Drawer'
 import { lib } from './components/Edition/lib'
 import { Emoji } from './components/Emoji'
@@ -151,4 +152,5 @@ export const shortcodes = {
     WistiaEmbed,
     WizardCommand,
     WizardCTA,
+    EmbeddedSurvey,
 }

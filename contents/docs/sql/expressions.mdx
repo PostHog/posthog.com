@@ -120,6 +120,8 @@ Here are some of the most common and useful ones:
 | `now()`, `today()`, `yesterday()`      | Returns the current time, date, or yesterday's date respectively                                                                      |
 | `interval`                             | A length of time for use in arithmetic operations with other dates and times like `person.properties.trial_started + interval 30 day` |
 
+> **Date literals parse in your project's timezone, not UTC.** `toDateTime('2026-07-17 06:42:00')` means 06:42 in project time. A UTC timestamp pasted into a literal can shift by hours, and a recency filter built this way returns no rows and looks like missing data. For relative windows, prefer `now() - interval 20 minute`. For an absolute instant, pass the timezone explicitly: `toDateTime('2026-07-17 06:42:00', 'UTC')`.
+
 ## Use cases
 
 - Checking if a property or [autocapture element chain](/tutorials/hogql-autocapture) contains a specific value or any of an array of values using `in` or `match`.

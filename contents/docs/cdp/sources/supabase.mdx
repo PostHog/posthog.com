@@ -16,7 +16,7 @@ To link Supabase:
 1. Go to the [Data pipeline page](https://app.posthog.com/data-management/sources) and the sources tab in PostHog
 2. Click **New source** and select Supabase
 3. Enter your Supabase connection details. To find your connection details, click **Connect** in the top bar of your Supabase dashboard, open the **Direct** tab, and pick **Session pooler** or **Direct connection** — the URL is shown at the bottom:
-   - **Host:** The Session pooler hostname from Supabase, e.g. `aws-0-us-east-1.pooler.supabase.com`. Don't use the direct database host (`db.<ref>.supabase.co`) — it's IPv6-only and not reachable from PostHog.
+   - **Host:** The Session pooler hostname from Supabase, e.g. `aws-0-us-east-1.pooler.supabase.com`. Don't use the Project URL (`<ref>.supabase.co`) from your Supabase dashboard — that's the REST API endpoint, not a database host. Also avoid the direct database host (`db.<ref>.supabase.co`) which is IPv6-only and not reachable from PostHog.
    - **Port:** The port your database is listening on. The default is `5432`.
    - **Database:** The name of the database. Supabase defaults this to `postgres`.
    - **User:** The pooler username in the format `postgres.<project-ref>` (e.g. `postgres.abcdefghijklmno`), or another database user with read access to the schemas and tables you want to sync.
@@ -65,4 +65,4 @@ import InboundIpAddresses from "../_snippets/inbound-ip-addresses.mdx";
 
 <InboundIpAddresses />
 
-> **Note:** PostHog connects over IPv4. Supabase's direct database host (`db.<ref>.supabase.co`) is IPv6-only, so you must use the **Session pooler** host instead. To find it, click **Connect** in the top bar of your Supabase dashboard, open the **Direct** tab, and select **Session pooler** — the URL is shown at the bottom.
+> **Note:** PostHog connects over IPv4. Don't paste the Project URL (`<ref>.supabase.co`) — that's the REST API endpoint, not a database host. Supabase's direct database host (`db.<ref>.supabase.co`) is also IPv6-only, so you must use the **Session pooler** host instead. To find it, click **Connect** in the top bar of your Supabase dashboard, open the **Direct** tab, and select **Session pooler** — the URL is shown at the bottom.
