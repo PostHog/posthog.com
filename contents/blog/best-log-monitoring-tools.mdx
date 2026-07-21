@@ -6,6 +6,7 @@ sidebar: Blog
 showTitle: true
 author:
     - natalia-amorim
+    - daniel-efe
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hog_ql.png
 featuredImageType: full
@@ -55,7 +56,9 @@ Here are some of the best log monitoring tools available today:
 
 PostHog is an all-in-one developer platform for building self driving products. It brings [centralized log monitoring](/logs) and [distributed traces](/docs/distributed-tracing) to the same workspace as your [error tracking](/error-tracking), [AI observability](/ai-observability), [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), and more, so you can debug user-facing issues without switching between multiple tools.
 
-Frontend logs collected through PostHog JS are automatically connected to User IDs and session replays, making it possible to trace issues from a user's browser session to related backend events. The logs → replay → error → analytics jump happens in one click, not four different tabs for different tools.
+Logs collected through PostHog SDKs can be connected to user IDs and session replays – posthog-js does this automatically on the frontend, and backend logs link the same way once you pass the user identity or session ID along. 
+
+That's what makes the debugging flow work: a backend error traces to the user who hit it and the session where it happened, so the logs → replay → error → analytics jump happens in one click, not four different tabs for different tools.
 
 Ingestion is plain OTLP – you point any standard OpenTelemetry client at PostHog's endpoint, no re-instrumentation required. 
 
@@ -64,16 +67,17 @@ Once logs are in, you can query them with SQL alongside product metrics, drop th
 **Strengths:**
 
 - All-in-one workspace: logs, analytics, session replay, error tracking, AI observability, feature flags, and more
+- Logs feed [self-driving mode](/self-driving) – [PostHog](/desktop) watches your logs alongside errors and sessions, turns problems into reports, and opens PRs with the fix
 - Log-based alerting on volume and patterns, routed to Slack or webhooks
 - Frontend and backend logs linked to users and session replays automatically
 - OTel-native ingestion – no proprietary SDKs required, but SDKs for popular frontend and backend languages exist if you want
 - AI-assisted log search and summarization, plus MCP access for debugging from your editor
 - Cost controls built in – PII scrubbing, sampling, and level-based filtering to keep ingest down
-- Transparent [usage-based pricing](/pricing) with 50 GB free per month
+- Transparent [usage-based pricing](/pricing) with 10 GB free per month
 
 <CalloutBox icon="IconStarFilled" title="PostHog is best for..." type="fyi">
 
-Developers who want modern log monitoring without legacy baggage: OTel-native ingestion, natural-language search with no query language to learn, [debugging from your editor via MCP](/docs/logs/debug-logs-mcp), and 50 GB free per month – with session replay, error tracking, analytics, and more one click from any log line.
+Developers who want modern log monitoring without legacy baggage: OTel-native ingestion, natural-language search with no query language to learn, [debugging from your editor via MCP](/docs/logs/debug-logs-mcp), and 10 GB free per month – with session replay, error tracking, analytics, and more one click from any log line.
 
 </CalloutBox>
 
@@ -87,9 +91,9 @@ It also sets the standard for unifying the three pillars of observability. Logs,
 
 With thousands of integrations across cloud providers, services, and infrastructure tools, it's one of the most connected platforms in the category.
 
-The tradeoff is that the architecture cuts both ways on cost: log management is billed separately from infrastructure monitoring, with two meters running – $0.10/GB to ingest and $1.70 per million events indexed. 
+The tradeoff is that the architecture cuts both ways on cost: log management is billed separately from infrastructure monitoring, with two meters running – $0.10/GB to ingest and $1.70 per million events indexed; retention tiers, archive rehydration, and Flex Logs each carry their own pricing. Everything you ingest costs money whether you ever search it or not, and at scale, "ingest everything" compounds quickly. 
 
-Everything you ingest costs money whether you ever search it or not, and at scale, "ingest everything" compounds quickly. Budget-conscious teams end up spending a lot of time managing exclusion filters and index policies.
+Datadog billing can become genuinely complex, which is why budget-conscious teams end up managing exclusion filters and index policies as a part-time job.
 
 **Strengths:**
 
@@ -231,7 +235,7 @@ Teams that want a simple operational platform combining logs, uptime monitoring,
 
 ## Which log monitoring tool should you choose?
 
-- Want an all-in-one platform that connects logs to error tracking, product analytics, session replays, AI observability, feature flags, and more? Go with **PostHog**.
+- Want logs connected to a full suite of developer tools – and a platform that finds bugs and opens PRs via [self-driving mode](/self-driving)? Go with **PostHog**.
 - Want to avoid context-switching and move directly from an error to the exact log line causing it? Use **Datadog**.
 - Need a mature platform for security operations, compliance audits, and large-scale log analysis? Choose **Splunk**.
 - Need deep search capabilities and complete control over how your logs are stored, processed, and queried? Go with **Elastic**.
@@ -243,7 +247,7 @@ Teams that want a simple operational platform combining logs, uptime monitoring,
 
 #### For solo developers and side projects
 
-- **PostHog** if you want 50 GB of logs free every month – enough that most side projects never pay anything – with no base fee when you do cross it, just $0.25/GB
+- **PostHog** if you want 10 GB of logs free every month – enough that most side projects never pay anything – with no base fee when you do cross it, just $0.25/GB
 
 - **Better Stack** if you want logs (3 GB included in the free tier), uptime monitoring, and incident alerts set up in minutes
 
@@ -279,6 +283,8 @@ Teams that want a simple operational platform combining logs, uptime monitoring,
 
 **Log monitoring** helps you detect, investigate, and troubleshoot issues in your applications and infrastructure. It is the process of collecting, searching, and analyzing log data to understand what caused an error, which systems were involved, and what happened before the issue occurred.
 
+Increasingly, that analysis is automated: modern tools detect anomalies and recurring patterns in logs without anyone watching a dashboard – PostHog does this via log patterns and [scouts](/blog/what-is-a-scout), scheduled agents that dig through your logs and flag problems you haven't thought to look for.
+
 </details>
 
 <details>
@@ -307,7 +313,7 @@ If your priority is mature log-metric-trace correlation across large-scale infra
 
 If you already use Grafana and Prometheus, Loki is an especially strong choice due to its cost-efficient scalability and tight integration with the Grafana ecosystem.
 
-If you'd rather not run anything, **PostHog** includes 50 GB of logs free every month with no base fee, then $0.25/GB after – so small and mid-volume teams often pay nothing at all, and there's no cluster to babysit.
+If you'd rather not run anything, **PostHog** includes 10 GB of logs free every month with no base fee, then $0.25/GB after – so small and mid-volume teams often pay nothing at all, and there's no cluster to babysit.
 
 </details>
 
@@ -335,11 +341,11 @@ And go with **PostHog** if you read those three descriptions and thought "I just
 
 Yes, on both counts – but they're different lists.
 
-**Free to use (managed):** **PostHog** includes 50 GB of logs free every month, **Grafana Cloud** also offers 50 GB free, and **Better Stack** and **Elastic Cloud** both have free tiers. Datadog and Splunk offer trials rather than permanent free tiers.
+**Free to use (managed):** **PostHog** includes 10 GB of logs free every month, **Grafana Cloud** also offers 50 GB free, and **Better Stack** and **Elastic Cloud** both have free tiers. Datadog and Splunk offer trials rather than permanent free tiers.
 
 **Free to run (open source):** **PostHog** (MIT), **Grafana Loki** (AGPLv3), **OpenSearch** (Apache 2.0), and **Elastic** (AGPL option alongside proprietary tiers) can all be self-hosted – though self-hosting means you're paying in infrastructure and ops time instead.
 
-PostHog is the only tool on this list on both lists: open source under MIT *and* 50 GB free on the managed cloud, no credit card required.
+PostHog is the only tool on this list on both lists: open source under MIT *and* 10 GB free on the managed cloud, no credit card required.
 
 </details>
 
