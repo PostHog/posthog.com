@@ -57,7 +57,7 @@ const surfaces = [
         color: 'green',
         description: 'Query your data and ship work from your terminal.',
     },
-    // TODO: Desktop (PostHog Code) slots in here once GA
+    // TODO: Desktop (PostHog Desktop) slots in here once GA
 ]
 
 export const DocsIndex = () => {

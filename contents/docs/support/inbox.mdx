@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-import TicketStatuses from './_snippets/ticket-statuses.mdx'
+import TicketStatuses from "./_snippets/ticket-statuses.mdx";
 
 The [PostHog web app](https://app.posthog.com) is home base for a support engineer. It's the surface for your **Support inbox**, where you read and reply to customer tickets, and it gives you the full context of what each person was doing when they reached out.
 
@@ -24,15 +24,15 @@ A ticket's status tells you where it is in your workflow:
 
 Each ticket carries a set of properties you can filter, sort, and act on.
 
-| Property | Description |
-| --- | --- |
-| **Ticket number** | Auto-incremented unique number, for example #1, #2, #3 |
-| **Status** | `new`, `open`, `pending`, `on_hold`, or `resolved` |
-| **Priority** | `low`, `medium`, or `high`. Unset by default |
-| **Channel** | Where the ticket came from: `widget`, `email`, `slack`, or `github` |
-| **Assignee** | The user or role responsible for the ticket |
-| **Session ID** | The PostHog session used to load events and exceptions |
-| **Distinct ID** | The `distinct_id` used to link the ticket to a person |
+| Property          | Description                                                         |
+| ----------------- | ------------------------------------------------------------------- |
+| **Ticket number** | Auto-incremented unique number, for example #1, #2, #3              |
+| **Status**        | `new`, `open`, `pending`, `on_hold`, or `resolved`                  |
+| **Priority**      | `low`, `medium`, or `high`. Unset by default                        |
+| **Channel**       | Where the ticket came from: `widget`, `email`, `slack`, or `github` |
+| **Assignee**      | The user or role responsible for the ticket                         |
+| **Session ID**    | The PostHog session used to load events and exceptions              |
+| **Distinct ID**   | The `distinct_id` used to link the ticket to a person               |
 
 ## Reply with full context
 
@@ -49,14 +49,26 @@ Open a ticket and the customer's story sits next to the conversation, so you res
 
 Every message on a ticket has an author type.
 
-| Author type | Description |
-| --- | --- |
+| Author type  | Description                                                      |
+| ------------ | ---------------------------------------------------------------- |
 | **Customer** | Sent by the end user through the widget, email, Slack, or GitHub |
-| **Support** | Sent by your team from PostHog |
+| **Support**  | Sent by your team from PostHog                                   |
 
 Replies you send show a delivery status so you know they landed. Widget messages show **Sent** when delivered and **Read** when the customer views them. Email replies show **Sending**, then **Sent** on success or **Failed** if delivery fails.
 
 You can mark any message as a private note. Private notes are visible only to your team, hidden from the customer, and don't count toward the customer's unread messages. Use them for internal context or handoffs. Support tracks unread messages separately for the customer and your team, and counts reset when your team views a ticket or the customer marks messages as read.
+
+## Reply and update status
+
+Use the **Send** button's dropdown to reply and update the ticket status in one step. Click the arrow next to **Send** to choose **Send and set pending**, **Send and set on hold**, or **Send and set resolved**.
+
+When you use one of these options:
+
+- Your reply is sent first, then the ticket status is updated.
+- If the ticket is unassigned or assigned to a role, it's reassigned to you automatically.
+- If there are unsaved changes to priority, assignee, tags, or snooze, a confirmation dialog lists exactly what else will be saved along with your reply.
+
+The confirmation dialog gives you two choices: **Send and save** commits all changes, while **Cancel** aborts everything – nothing is sent and nothing is saved.
 
 ## Assign, tag, and snooze
 
@@ -75,6 +87,6 @@ For the repetitive parts, let rules do the work. [Workflows](/docs/support/workf
 - Check [session replay](/docs/session-replay) before asking a customer to describe what happened.
 - Look at the exceptions panel to identify bugs quickly.
 - Review previous tickets to avoid asking repeat questions.
-- Set a ticket to pending after you reply, to track who's waiting on a response.
+- Use **Send and set pending** to reply and mark the ticket as waiting for a customer response in one step.
 - Use saved views to switch between common filter combinations.
 - Snooze tickets when you're waiting on something external, instead of leaving them open.
