@@ -61,17 +61,6 @@ export const useSpotlightActions = (): SpotlightAction[] => {
 
     const darkMode = siteSettings.theme === 'dark'
 
-    // Roadmap features, searchable by name/flag key. Seeded from build-time nodes, so these
-    // resolve instantly; posthog-js revalidation keeps them current without a rebuild.
-    const { features: roadmapFeatures } = useEarlyAccessFeatures()
-    const roadmapActions: SpotlightAction[] = roadmapFeatures.map((feature) => ({
-        id: `roadmap-${feature.flagKey}`,
-        label: `Roadmap: ${feature.name}`,
-        icon: <IconRocket />,
-        keywords: [feature.name.toLowerCase(), feature.flagKey.replace(/-/g, ' '), 'roadmap'],
-        perform: () => navigate(`/roadmap#${feature.flagKey}`, { state: { newWindow: true } }),
-    }))
-
     const toast = (icon: React.ReactNode, message: string) =>
         addToast({
             description: (
@@ -245,6 +234,5 @@ export const useSpotlightActions = (): SpotlightAction[] => {
             keywords: ['confetti', 'party', 'celebrate'],
             perform: () => setConfetti(true),
         },
-        ...roadmapActions,
     ]
 }
