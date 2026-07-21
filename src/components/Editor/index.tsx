@@ -46,6 +46,8 @@ interface EditorProps {
     maxWidth?: number | string
     children?: React.ReactNode
     hasTabs?: boolean
+    /** Keep the full-height tabbed content shell transparent instead of using the accent surface. */
+    transparentBackground?: boolean
     hasPadding?: boolean
     availableFilters?: {
         label: string
@@ -204,6 +206,7 @@ export function Editor({
     title,
     type,
     hasTabs = false,
+    transparentBackground = false,
     children,
     availableFilters,
     maxWidth: initialMaxWidth,
@@ -543,7 +546,10 @@ export function Editor({
                         />
 
                         {hasTabs ? (
-                            <div data-scheme="primary" className="bg-accent h-full">
+                            <div
+                                data-scheme="primary"
+                                className={`${transparentBackground ? 'bg-transparent' : 'bg-accent'} h-full`}
+                            >
                                 <article
                                     data-scheme="primary"
                                     className={`${getProseClasses(proseSize)} h-full mx-auto transition-all ${

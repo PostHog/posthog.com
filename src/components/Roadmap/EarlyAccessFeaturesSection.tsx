@@ -1,136 +1,136 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
-import { IconRocket, IconFlask, IconLightBulb, IconX, IconCopy, IconCheck, IconTrending } from '@posthog/icons'
-import Link from 'components/Link'
+import { navigate, graphql, useStaticQuery } from 'gatsby'
+// @ts-expect-error @gatsbyjs/reach-router does not ship TypeScript declarations.
+import { useLocation } from '@gatsbyjs/reach-router'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import {
+    IconCheck,
+    IconArrowRight,
+    IconCopy,
+    IconFlask,
+    IconLightBulb,
+    IconRocket,
+    IconTrending,
+    IconUser,
+    IconX,
+} from '@posthog/icons'
+import { Dialog as RadixDialog } from 'radix-ui'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import EarlyAccessOptIn from 'components/EarlyAccessOptIn'
 import Input from 'components/OSForm/input'
+import Link from 'components/Link'
 import OSButton from 'components/OSButton'
+import ScrollArea from 'components/RadixUI/ScrollArea'
 import { Select } from 'components/RadixUI/Select'
 import Tooltip from 'components/RadixUI/Tooltip'
-import EarlyAccessOptIn from 'components/EarlyAccessOptIn'
 import SmallTeam from 'components/SmallTeam'
 import SurveySignup from 'components/SurveySignup'
-import usePostHog from 'hooks/usePostHog'
+import useEarlyAccessFeatures, { EarlyAccessFeature, EarlyAccessFeatureStage } from 'hooks/useEarlyAccessFeatures'
 import { useFeatureOwnership } from 'hooks/useFeatureOwnership'
-import useEarlyAccessFeatures, { EarlyAccessFeature } from 'hooks/useEarlyAccessFeatures'
+import usePostHog from 'hooks/usePostHog'
 import { ROADMAP_TEAM_OVERRIDES } from './roadmapTeamOverrides'
 
-// The in-app feature previews page supports deep links: /settings/user-feature-previews#<flagKey>
-// scrolls to (and highlights) that feature's toggle, so each beta card links straight to it.
 const featurePreviewUrl = (flagKey: string): string =>
     `https://us.posthog.com/settings/user-feature-previews#${flagKey}`
 
-// Only surface the search + filter controls once the list is long enough to need them.
-const CONTROLS_THRESHOLD = 8
-
-// Frosted in-window surfaces, matching the site redesign (see src/constants/frostedSurfaces.ts
-// for the window chrome equivalents and the pricing cards for this in-window idiom). Solid
-// fallback when the user has reduce-transparency on.
-const FROSTED_CARD =
-    'bg-primary/80 backdrop-blur-sm shadow-sm reduce-transparency:!bg-primary reduce-transparency:backdrop-blur-none'
-const FROSTED_TOOLBAR =
-    'bg-primary/80 backdrop-blur-md shadow-sm reduce-transparency:!bg-primary reduce-transparency:backdrop-blur-none'
-
-// Features created within this window are flagged "New", glow, and lead their section.
 const NEW_WINDOW_MS = 40 * 24 * 60 * 60 * 1000
-// How many of the most-signed-up features get the "Popular" chip.
 const POPULAR_TOP_N = 10
 
-// The "Roadmap concept pitches" survey (project 2) behind the pitch-a-concept card.
 const PITCH_SURVEY_ID = '019f8008-6dfe-0000-696a-515c59643b03'
 const PITCH_QUESTION_ID = 'd257defb-d875-42fd-8cb6-80845c2bb26f'
 const PITCH_EMAIL_QUESTION_ID = '794db2f2-7ed4-4cf2-a8a3-d27df1b85530'
 
-type StageFilter = 'all' | 'beta' | 'alpha' | 'concept'
-type SortKey = 'featured' | 'newest' | 'az' | 'team'
+const FROSTED_TOOLBAR =
+    'bg-primary/80 backdrop-blur-md shadow-sm reduce-transparency:!bg-primary reduce-transparency:backdrop-blur-none'
 
-const STAGE_FILTER_LABELS: Record<Exclude<StageFilter, 'all'>, string> = {
-    beta: 'In beta',
-    alpha: 'In alpha',
-    concept: 'Concepts',
+type BoardStage = Extract<EarlyAccessFeatureStage, 'concept' | 'alpha' | 'beta'>
+
+interface StageDefinition {
+    stage: BoardStage
+    title: string
+    description: string
+    icon: React.ReactNode
 }
 
-// Emphasised chip for recently added features.
+const STAGES: StageDefinition[] = [
+    {
+        stage: 'beta',
+        title: 'Beta',
+        description: 'Ready to enable and try in PostHog.',
+        icon: <IconRocket className="size-5" />,
+    },
+    {
+        stage: 'alpha',
+        title: 'Alpha',
+        description: 'In testing with a small group of users.',
+        icon: <IconFlask className="size-5" />,
+    },
+    {
+        stage: 'concept',
+        title: 'Concept',
+        description: 'Ideas we have committed to exploring.',
+        icon: <IconLightBulb className="size-5" />,
+    },
+]
+
+type TeamPerson = { id?: string; name: string; role?: string; avatar?: string }
+type TeamInfo = { name: string; miniCrest?: Parameters<typeof getImage>[0] }
+
+interface SqueakProfileNode {
+    id?: string | number
+    attributes?: {
+        firstName?: string
+        lastName?: string
+        companyRole?: string
+        avatar?: { data?: { attributes?: { url?: string } } }
+    }
+}
+
+interface SqueakTeamNode {
+    slug: string
+    name: string
+    miniCrest?: Parameters<typeof getImage>[0]
+    profiles?: { data?: SqueakProfileNode[] }
+}
+
 const NewChip = (): JSX.Element => (
-    <span className="shrink-0 bg-accent border border-primary rounded-full px-2 py-0.5 text-xs font-semibold text-red dark:text-yellow">
+    <span className="shrink-0 rounded-full border border-primary bg-accent px-2 py-0.5 text-xs font-semibold text-red dark:text-yellow">
         New
     </span>
 )
 
-// Chip for the top-N features by waitlist signups.
 const PopularChip = (): JSX.Element => (
-    <span className="shrink-0 inline-flex items-center gap-0.5 bg-accent border border-primary rounded-full px-2 py-0.5 text-xs font-semibold text-red dark:text-yellow">
+    <span className="inline-flex shrink-0 items-center gap-0.5 rounded-full border border-primary bg-accent px-2 py-0.5 text-xs font-semibold text-red dark:text-yellow">
         <IconTrending className="size-3" />
         Popular
     </span>
 )
 
-// Discrete copy-link button — cards are addressable at /roadmap#flag-key, so every card is a
-// shareable artifact. Hidden until the card is hovered; flips to a check on copy.
-const CopyLinkButton = ({ flagKey }: { flagKey: string }): JSX.Element => {
-    const [copied, setCopied] = useState(false)
-    const copy = () => {
-        const url = `${window.location.origin}/roadmap#${flagKey}`
-        navigator.clipboard?.writeText(url).then(() => {
-            setCopied(true)
-            setTimeout(() => setCopied(false), 2000)
-        })
-    }
-    return (
-        <button
-            type="button"
-            onClick={copy}
-            aria-label={copied ? 'Link copied' : 'Copy link to this feature'}
-            className="shrink-0 text-muted hover:text-primary opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-opacity"
-        >
-            {copied ? <IconCheck className="size-4 text-green" /> : <IconCopy className="size-4" />}
-        </button>
-    )
-}
-
-type TeamPerson = { name: string; role?: string; avatar?: string }
-
-// The humans behind the card — overlapping avatars for the owning team's members.
-const TeamFaces = ({ people }: { people: TeamPerson[] }): JSX.Element | null => {
-    const withAvatars = people.filter((p) => p.avatar)
-    if (withAvatars.length === 0) {
+const FeatureBadges = ({ isNew, isPopular }: { isNew: boolean; isPopular: boolean }): JSX.Element | null => {
+    if (!isNew && !isPopular) {
         return null
     }
-    const shown = withAvatars.slice(0, 4)
-    const extra = withAvatars.length - shown.length
+
     return (
-        <span className="inline-flex items-center">
-            {shown.map((person, index) => (
-                <Tooltip
-                    key={person.name}
-                    delay={0}
-                    trigger={
-                        <img
-                            src={person.avatar}
-                            alt={person.name}
-                            className={`size-6 rounded-full border border-primary bg-accent object-cover ${
-                                index > 0 ? '-ml-1.5' : ''
-                            }`}
-                        />
-                    }
-                >
-                    <span className="text-sm px-1">
-                        <strong>{person.name}</strong>
-                        {person.role ? <span className="text-secondary"> – {person.role}</span> : null}
-                    </span>
-                </Tooltip>
-            ))}
-            {extra > 0 && (
-                <span className="-ml-1.5 size-6 rounded-full border border-primary bg-accent text-[10px] font-semibold text-secondary inline-flex items-center justify-center">
-                    +{extra}
-                </span>
-            )}
+        <span className="flex flex-wrap items-center gap-1">
+            {isNew && <NewChip />}
+            {isPopular && <PopularChip />}
         </span>
     )
 }
 
-// A removable pill summarising one active filter, so the current view is visible and resettable.
+const StageChip = ({ stage }: { stage: BoardStage }): JSX.Element => {
+    const definition = STAGES.find((item) => item.stage === stage)
+    return (
+        <span className="inline-flex items-center gap-1 rounded-full border border-primary bg-accent px-2 py-0.5 text-xs font-semibold capitalize">
+            {definition?.icon}
+            {stage}
+        </span>
+    )
+}
+
 const FilterChip = ({ label, onRemove }: { label: string; onRemove: () => void }): JSX.Element => (
-    <span className="inline-flex items-center gap-1 bg-accent border border-primary rounded-full pl-2 pr-1 py-0.5 text-xs font-semibold text-secondary">
+    <span className="inline-flex items-center gap-1 rounded-full border border-primary bg-accent py-0.5 pl-2 pr-1 text-xs font-semibold text-secondary">
         {label}
         <button
             type="button"
@@ -149,185 +149,123 @@ const slugify = (text: string): string =>
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/^-+|-+$/g, '')
 
-// Feature descriptions come from the app and can run long. Clamp to two lines and only
-// offer "Show more" when the text actually overflows — re-measured on resize, since cards
-// live in a resizable window.
-const ClampedDescription = ({ text }: { text: string }): JSX.Element => {
-    const [expanded, setExpanded] = useState(false)
-    const [isClamped, setIsClamped] = useState(false)
-    const ref = useRef<HTMLParagraphElement>(null)
-
-    useEffect(() => {
-        const el = ref.current
-        if (!el) {
-            return
-        }
-        const measure = () => setIsClamped(el.scrollHeight > el.clientHeight + 1)
-        measure()
-        const observer = new ResizeObserver(measure)
-        observer.observe(el)
-        return () => observer.disconnect()
-    }, [text])
-
-    return (
-        <>
-            <p ref={ref} className={`text-sm text-secondary m-0 whitespace-pre-line ${expanded ? '' : 'line-clamp-2'}`}>
-                {text}
-            </p>
-            {(isClamped || expanded) && (
-                <div>
-                    <OSButton size="sm" variant="underlineOnHover" onClick={() => setExpanded(!expanded)}>
-                        {expanded ? 'Show less' : 'Show more'}
-                    </OSButton>
-                </div>
-            )}
-        </>
-    )
+const roadmapUrl = (search: string, feature?: string): string => {
+    const params = new URLSearchParams(search)
+    if (feature) {
+        params.set('feature', feature)
+    } else {
+        params.delete('feature')
+    }
+    const query = params.toString()
+    return `/roadmap${query ? `?${query}` : ''}`
 }
 
-const FeatureCard = ({
-    feature,
-    teamSlug,
-    badge,
-    people,
-    effectClassName = '',
-    children,
-}: {
-    feature: EarlyAccessFeature
-    teamSlug?: string
-    badge?: React.ReactNode
-    people?: TeamPerson[]
-    effectClassName?: string
-    children?: React.ReactNode
-}): JSX.Element => (
-    <div
-        data-scheme="secondary"
-        id={feature.flagKey}
-        className={`group @container ${FROSTED_CARD} border border-primary rounded-lg p-3 flex flex-col gap-1.5 h-full scroll-mt-24 transition-all hover:border-secondary target:border-red dark:target:border-yellow ${effectClassName}`}
-    >
-        {/* The owning team's crest and members anchor the card visually. */}
-        {(teamSlug || people?.length) && (
-            <div className="mb-0.5 flex items-center justify-between gap-2">
-                {teamSlug ? <SmallTeam slug={teamSlug} /> : <span />}
-                {people && <TeamFaces people={people} />}
-            </div>
-        )}
-        <div className="flex items-start gap-2">
-            <h3 className="text-base @md:text-lg m-0 leading-tight flex-1">{feature.name}</h3>
-            {badge}
-            <CopyLinkButton flagKey={feature.flagKey} />
-        </div>
-        {feature.description && <ClampedDescription text={feature.description} />}
-        {feature.documentationUrl && (
-            <div>
-                <OSButton asLink to={feature.documentationUrl} external size="sm" variant="underlineOnHover">
-                    Read the docs
-                </OSButton>
-            </div>
-        )}
-        {children && <div className="mt-auto pt-1">{children}</div>}
-    </div>
-)
+const CopyLinkButton = ({ flagKey }: { flagKey: string }): JSX.Element => {
+    const [copied, setCopied] = useState(false)
 
-// Beta — live now. Link straight to this feature's toggle in the app (identities aren't
-// shared between posthog.com and the app, so enrollment has to happen there).
-const BetaCard = ({
-    feature,
-    teamSlug,
-    badge,
-    people,
-    effectClassName,
-}: {
-    feature: EarlyAccessFeature
-    teamSlug?: string
-    badge?: React.ReactNode
-    people?: TeamPerson[]
-    effectClassName?: string
-}): JSX.Element => (
-    <FeatureCard feature={feature} teamSlug={teamSlug} badge={badge} people={people} effectClassName={effectClassName}>
-        <EarlyAccessOptIn
-            to={featurePreviewUrl(feature.flagKey)}
-            state="request_access"
-            label="Enable in PostHog"
-            size="sm"
-        />
-    </FeatureCard>
-)
-
-// Coming soon — collect an email via the feature's linked waitlist survey. Reveal the
-// field only on intent so the grid stays compact.
-const ComingSoonCard = ({
-    feature,
-    teamSlug,
-    badge,
-    people,
-    effectClassName,
-}: {
-    feature: EarlyAccessFeature
-    teamSlug?: string
-    badge?: React.ReactNode
-    people?: TeamPerson[]
-    effectClassName?: string
-}): JSX.Element => {
-    const [showForm, setShowForm] = useState(false)
-    const surveyId = feature.payload?.survey_id as string | undefined
-    const surveyQuestionId = feature.payload?.survey_question_id as string | undefined
-
-    // Without a linked survey there's nowhere to record the sign-up, so show info only.
-    if (!surveyId) {
-        return (
-            <FeatureCard
-                feature={feature}
-                teamSlug={teamSlug}
-                badge={badge}
-                people={people}
-                effectClassName={effectClassName}
-            />
-        )
+    const copy = () => {
+        const url = `${window.location.origin}${roadmapUrl('', flagKey)}`
+        navigator.clipboard?.writeText(url).then(() => {
+            setCopied(true)
+            window.setTimeout(() => setCopied(false), 2000)
+        })
     }
 
-    // Alphas are about getting into testing, concepts about hearing when it ships — the CTA
-    // copy follows suit. Both record to the feature's linked waitlist survey either way.
-    const isAlpha = feature.stage === 'alpha'
     return (
-        <FeatureCard
-            feature={feature}
-            teamSlug={teamSlug}
-            badge={badge}
-            people={people}
-            effectClassName={effectClassName}
+        <OSButton
+            type="button"
+            size="sm"
+            variant="secondary"
+            icon={copied ? <IconCheck className="text-green" /> : <IconCopy />}
+            onClick={copy}
         >
-            {showForm ? (
-                <SurveySignup
-                    surveyId={surveyId}
-                    surveyQuestionId={surveyQuestionId}
-                    // Only concept-stage joins fire the $feature_enrollment_update event —
-                    // alpha waitlists aren't concept enrollments.
-                    flagKey={feature.stage === 'concept' ? feature.flagKey : undefined}
-                    productName={feature.name}
-                    autoFocus
-                    buttonLabel={isAlpha ? 'Join the waitlist' : 'Notify me at launch'}
-                />
-            ) : (
-                <OSButton variant="secondary" size="md" width="full" onClick={() => setShowForm(true)}>
-                    {isAlpha ? 'Join the waitlist' : 'Get notified at launch'}
-                </OSButton>
-            )}
-        </FeatureCard>
+            {copied ? 'Copied' : 'Copy link'}
+        </OSButton>
     )
 }
 
-// The intake card at the end of the Concept grid — the roadmap collects ideas, it doesn't
-// just broadcast them. Pitches land as responses on the "Roadmap concept pitches" survey.
-const PitchConceptCard = (): JSX.Element => {
+const RoadmapOverlayPanel = ({
+    isOpen,
+    onClose,
+    title,
+    portalContainer,
+    children,
+}: {
+    isOpen: boolean
+    onClose: () => void
+    title: string
+    portalContainer: HTMLElement | null
+    children: React.ReactNode
+}): JSX.Element | null => {
+    const shouldReduceMotion = useReducedMotion()
+
+    if (!portalContainer) {
+        return null
+    }
+
+    return (
+        <RadixDialog.Root open={isOpen} modal={false} onOpenChange={() => undefined}>
+            <RadixDialog.Portal forceMount container={portalContainer}>
+                <AnimatePresence>
+                    {isOpen && (
+                        <RadixDialog.Content forceMount asChild onEscapeKeyDown={(event) => event.preventDefault()}>
+                            <motion.aside
+                                data-roadmap-drawer=""
+                                className="absolute inset-y-4 right-4 z-50 isolate w-[min(430px,calc(100%-2rem))] overflow-hidden rounded-lg border border-primary bg-primary text-primary shadow-2xl [backface-visibility:hidden] [contain:paint] [will-change:transform] focus:outline-none"
+                                initial={shouldReduceMotion ? { x: 0 } : { x: 'calc(100% + 1rem)' }}
+                                animate={{ x: 0 }}
+                                exit={shouldReduceMotion ? { x: 0 } : { x: 'calc(100% + 1rem)' }}
+                                transition={
+                                    shouldReduceMotion
+                                        ? { duration: 0 }
+                                        : { type: 'tween', duration: 0.32, ease: [0.22, 1, 0.36, 1] }
+                                }
+                            >
+                                <RadixDialog.Title className="sr-only">{title}</RadixDialog.Title>
+                                <div className="absolute right-2 top-2 z-20">
+                                    <OSButton
+                                        type="button"
+                                        aria-label="Close panel"
+                                        windowButton
+                                        size="md"
+                                        icon={<IconX />}
+                                        onClick={onClose}
+                                    />
+                                </div>
+                                {children}
+                            </motion.aside>
+                        </RadixDialog.Content>
+                    )}
+                </AnimatePresence>
+            </RadixDialog.Portal>
+        </RadixDialog.Root>
+    )
+}
+
+const PitchIdeaCard = ({ onClick }: { onClick: () => void }): JSX.Element => (
+    <button
+        data-roadmap-item=""
+        type="button"
+        aria-haspopup="dialog"
+        onClick={onClick}
+        className="flex w-full items-center justify-between gap-3 rounded-md border border-dashed border-primary bg-transparent p-3 text-left hover:border-secondary hover:bg-primary/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red dark:focus-visible:ring-yellow"
+    >
+        <span className="min-w-0">
+            <span className="block text-sm font-bold leading-snug">Your idea here.</span>
+            <span className="mt-0.5 block text-xs text-secondary">What do you think we should build?</span>
+        </span>
+        <IconArrowRight className="size-5 shrink-0 text-red dark:text-yellow" />
+    </button>
+)
+
+const PitchIdeaPanel = (): JSX.Element => {
     const posthog = usePostHog()
-    const [open, setOpen] = useState(false)
     const [idea, setIdea] = useState('')
     const [email, setEmail] = useState('')
     const [submitted, setSubmitted] = useState(false)
 
-    const submit = (e: React.FormEvent) => {
-        e.preventDefault()
+    const submit = (event: React.FormEvent) => {
+        event.preventDefault()
         if (!idea.trim()) {
             return
         }
@@ -340,134 +278,369 @@ const PitchConceptCard = (): JSX.Element => {
         setSubmitted(true)
     }
 
-    if (submitted) {
-        return (
-            <div
-                data-scheme="secondary"
-                className={`@container ${FROSTED_CARD} border border-green rounded-lg p-3 flex flex-col justify-center gap-1 h-full`}
-            >
-                <p className="m-0 font-bold flex items-center gap-1">
-                    <IconCheck className="size-5 text-green shrink-0" /> Pitch received
-                </p>
-                <p className="m-0 text-sm text-secondary">
-                    The team reads every one. If it's good, you'll see it on this page.
-                </p>
-            </div>
-        )
-    }
-
-    if (!open) {
-        return (
-            <button
-                type="button"
-                onClick={() => setOpen(true)}
-                className={`@container ${FROSTED_CARD} border border-dashed border-primary rounded-lg p-3 flex flex-col items-start justify-center gap-1 h-full min-h-32 text-left transition-colors hover:border-secondary cursor-pointer`}
-            >
-                <span className="text-base @md:text-lg font-bold leading-tight">What should we build? →</span>
-                <span className="text-sm text-secondary">Pitch us a concept. The best ideas end up on this page.</span>
-            </button>
-        )
-    }
-
     return (
-        <form
-            onSubmit={submit}
-            data-scheme="secondary"
-            className={`@container ${FROSTED_CARD} border border-primary rounded-lg p-3 flex flex-col gap-2 h-full`}
-        >
-            <h3 className="text-base @md:text-lg m-0 leading-tight">What should we build?</h3>
-            <textarea
-                autoFocus
-                required
-                value={idea}
-                onChange={(e) => setIdea(e.target.value)}
-                placeholder="Pitch your idea…"
-                rows={3}
-                className="w-full rounded border border-input bg-primary p-2 text-sm text-primary placeholder:text-muted focus:border-input-hover focus:outline-none resize-y"
-            />
-            <Input
-                label="Email (optional)"
-                showLabel={false}
-                size="md"
-                type="email"
-                placeholder="Email (optional)"
-                value={email}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
-            />
-            <div className="mt-auto pt-1">
-                <OSButton type="submit" variant="primary" size="md" width="full">
-                    Pitch it
-                </OSButton>
-            </div>
-        </form>
+        <div data-scheme="primary" className="flex h-full min-h-0 flex-col bg-primary">
+            <header className="shrink-0 border-b border-primary px-4 py-4 pr-14">
+                <h2 className="m-0 text-2xl leading-tight">What should we build?</h2>
+                <p className="mb-0 mt-2 text-sm text-secondary">
+                    Pitch us a concept. The best ideas may end up on this roadmap.
+                </p>
+            </header>
+
+            <ScrollArea className="min-h-0 flex-1">
+                {submitted ? (
+                    <div className="p-4">
+                        <div className="rounded-md border border-green bg-green/10 p-4">
+                            <p className="m-0 flex items-center gap-2 font-bold">
+                                <IconCheck className="size-5 shrink-0 text-green" /> Pitch received
+                            </p>
+                            <p className="mb-0 mt-2 text-sm text-secondary">The team reads every submission.</p>
+                        </div>
+                    </div>
+                ) : (
+                    <form id="roadmap-pitch-form" onSubmit={submit} className="flex flex-col gap-5 p-4">
+                        <label className="m-0 text-sm font-semibold">
+                            Your idea
+                            <textarea
+                                required
+                                value={idea}
+                                onChange={(event) => setIdea(event.target.value)}
+                                placeholder="What should PostHog build?"
+                                rows={8}
+                                className="mt-1 block w-full resize-y rounded border border-input bg-primary p-3 text-sm font-normal text-primary placeholder:text-muted focus:border-input-hover focus:outline-none"
+                            />
+                        </label>
+                        <Input
+                            label="Email (optional)"
+                            showLabel
+                            direction="column"
+                            size="md"
+                            type="email"
+                            placeholder="you@company.com"
+                            value={email}
+                            containerClassName="[&_label]:!text-sm [&_label]:font-semibold"
+                            onChange={(event: React.ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}
+                        />
+                    </form>
+                )}
+            </ScrollArea>
+
+            {!submitted && (
+                <footer className="shrink-0 border-t border-primary bg-primary p-4">
+                    <OSButton form="roadmap-pitch-form" type="submit" variant="primary" size="md" width="full">
+                        Submit idea
+                    </OSButton>
+                </footer>
+            )}
+        </div>
     )
 }
 
-const Grid = ({ children }: { children: React.ReactNode }): JSX.Element => (
-    <div className="grid grid-cols-1 @2xl:grid-cols-2 @5xl:grid-cols-3 @7xl:grid-cols-4 gap-3">{children}</div>
-)
-
-const SectionHeader = ({
-    icon,
-    title,
-    count,
-    description,
+const FeatureCard = ({
+    feature,
+    team,
+    teamSlug,
+    active,
+    isNew,
+    isPopular,
+    onClick,
 }: {
-    icon: React.ReactNode
-    title: string
-    count: number
-    description: string
-}): JSX.Element => (
-    <>
-        <div className="flex items-center gap-2">
-            {icon}
-            <h2 className="m-0">{title}</h2>
-            <span className="bg-accent border border-primary rounded-full px-2 py-0.5 text-xs font-semibold text-secondary">
-                {count}
+    feature: EarlyAccessFeature
+    team?: TeamInfo
+    teamSlug?: string
+    active: boolean
+    isNew: boolean
+    isPopular: boolean
+    onClick: () => void
+}): JSX.Element => {
+    const crest = team?.miniCrest ? getImage(team.miniCrest) : undefined
+
+    return (
+        <button
+            data-roadmap-item=""
+            type="button"
+            aria-haspopup="dialog"
+            aria-expanded={active}
+            onClick={onClick}
+            className={`group flex w-full items-center gap-3 rounded-md border border-primary p-3 text-left hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red dark:focus-visible:ring-yellow ${
+                active ? 'bg-accent' : 'bg-primary'
+            }`}
+        >
+            <span className="min-w-0 flex-1">
+                <span className="block text-sm font-bold leading-snug text-primary">{feature.name}</span>
+                <span className="mt-1 flex flex-wrap items-center gap-1.5">
+                    <span className="text-xs font-semibold text-secondary">
+                        {team ? `${team.name} Team` : teamSlug ? `${teamSlug} Team` : 'Unassigned'}
+                    </span>
+                    <FeatureBadges isNew={isNew} isPopular={isPopular} />
+                </span>
             </span>
+            {crest && (
+                <GatsbyImage
+                    image={crest}
+                    alt={`${team?.name ?? teamSlug} team mini crest`}
+                    className="size-9 shrink-0"
+                />
+            )}
+        </button>
+    )
+}
+
+const RoadmapLane = ({
+    definition,
+    features,
+    activeFlagKey,
+    teamForFeature,
+    teamInfoBySlug,
+    isNew,
+    isPopular,
+    onFeatureClick,
+    onPitchClick,
+}: {
+    definition: StageDefinition
+    features: EarlyAccessFeature[]
+    activeFlagKey?: string
+    teamForFeature: (feature: EarlyAccessFeature) => string | undefined
+    teamInfoBySlug: Record<string, TeamInfo>
+    isNew: (feature: EarlyAccessFeature) => boolean
+    isPopular: (feature: EarlyAccessFeature) => boolean
+    onFeatureClick: (feature: EarlyAccessFeature) => void
+    onPitchClick: () => void
+}): JSX.Element => {
+    const shouldReduceMotion = useReducedMotion()
+    const layoutTransition = shouldReduceMotion
+        ? { duration: 0 }
+        : { type: 'tween' as const, duration: 0.2, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }
+
+    return (
+        <section
+            aria-labelledby={`roadmap-${definition.stage}-title`}
+            className="flex h-full w-[min(340px,calc(100cqw-2rem))] shrink-0 snap-start flex-col overflow-hidden rounded-lg border border-primary bg-accent @5xl:w-auto"
+        >
+            <header className="shrink-0 border-b border-primary bg-primary px-3 py-3">
+                <div className="flex items-center gap-2 text-red dark:text-yellow">
+                    {definition.icon}
+                    <h2 id={`roadmap-${definition.stage}-title`} className="m-0 text-lg text-primary">
+                        {definition.title}
+                    </h2>
+                    <span className="rounded-full border border-primary bg-accent px-2 py-0.5 text-xs font-semibold text-secondary">
+                        {features.length}
+                    </span>
+                </div>
+                <p className="mb-0 mt-1 text-xs text-secondary">{definition.description}</p>
+            </header>
+            <ScrollArea className="min-h-0 flex-1">
+                <ul className="relative m-0 flex min-h-full list-none flex-col gap-2 p-2">
+                    <AnimatePresence initial={false}>
+                        {features.map((feature) => {
+                            const teamSlug = teamForFeature(feature)
+                            return (
+                                <motion.li
+                                    key={feature.flagKey}
+                                    layout={shouldReduceMotion ? false : 'position'}
+                                    initial={shouldReduceMotion ? false : { opacity: 0, y: 8 }}
+                                    animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+                                    exit={shouldReduceMotion ? undefined : { opacity: 0, y: -6 }}
+                                    transition={layoutTransition}
+                                    className="m-0 list-none p-0"
+                                >
+                                    <FeatureCard
+                                        feature={feature}
+                                        teamSlug={teamSlug}
+                                        team={teamSlug ? teamInfoBySlug[teamSlug] : undefined}
+                                        active={activeFlagKey === feature.flagKey}
+                                        isNew={isNew(feature)}
+                                        isPopular={isPopular(feature)}
+                                        onClick={() => onFeatureClick(feature)}
+                                    />
+                                </motion.li>
+                            )
+                        })}
+                    </AnimatePresence>
+                    <motion.li
+                        layout={shouldReduceMotion ? false : 'position'}
+                        transition={{ layout: layoutTransition }}
+                        className="mt-auto list-none pt-2"
+                    >
+                        <PitchIdeaCard onClick={onPitchClick} />
+                    </motion.li>
+                </ul>
+            </ScrollArea>
+        </section>
+    )
+}
+
+const TeamRoster = ({ people }: { people: TeamPerson[] }): JSX.Element | null => {
+    if (people.length === 0) {
+        return null
+    }
+
+    return (
+        <div>
+            <h3 className="mb-2 mt-0 text-sm">Team roster</h3>
+            <div className="flex flex-wrap gap-2">
+                {people.map((person) => {
+                    const avatar = person.avatar ? (
+                        <img
+                            src={person.avatar}
+                            alt={person.name}
+                            className="size-10 rounded-full border border-primary bg-accent object-cover"
+                        />
+                    ) : (
+                        <span
+                            role="img"
+                            aria-label={person.name}
+                            className="flex size-10 items-center justify-center rounded-full border border-primary bg-accent"
+                        >
+                            <IconUser className="size-5 text-secondary" />
+                        </span>
+                    )
+                    return (
+                        <Tooltip
+                            key={person.id ?? person.name}
+                            delay={0}
+                            trigger={
+                                person.id ? (
+                                    <Link
+                                        to={`/community/profiles/${person.id}`}
+                                        state={{ newWindow: true }}
+                                        className="block rounded-full"
+                                    >
+                                        {avatar}
+                                    </Link>
+                                ) : (
+                                    avatar
+                                )
+                            }
+                        >
+                            <span className="px-1 text-sm">
+                                <strong>{person.name}</strong>
+                                {person.role ? <span className="text-secondary"> – {person.role}</span> : null}
+                            </span>
+                        </Tooltip>
+                    )
+                })}
+            </div>
         </div>
-        <p className="text-secondary mt-1 mb-4 text-sm">{description}</p>
-    </>
+    )
+}
+
+const DrawerAction = ({ feature }: { feature: EarlyAccessFeature }): JSX.Element => {
+    if (feature.stage === 'beta') {
+        return (
+            <EarlyAccessOptIn
+                to={featurePreviewUrl(feature.flagKey)}
+                state="request_access"
+                label="Enable"
+                size="md"
+                width="full"
+            />
+        )
+    }
+
+    const surveyId = feature.payload?.survey_id as string | undefined
+    const surveyQuestionId = feature.payload?.survey_question_id as string | undefined
+    if (!surveyId) {
+        return <p className="m-0 text-sm text-secondary">Signups are not open for this feature yet.</p>
+    }
+
+    const isAlpha = feature.stage === 'alpha'
+    return (
+        <SurveySignup
+            surveyId={surveyId}
+            surveyQuestionId={surveyQuestionId}
+            flagKey={feature.stage === 'concept' ? feature.flagKey : undefined}
+            productName={feature.name}
+            buttonLabel={isAlpha ? 'Join the waitlist' : 'Notify me at launch'}
+        />
+    )
+}
+
+const FeaturePanel = ({
+    feature,
+    teamSlug,
+    people,
+    isNew,
+    isPopular,
+}: {
+    feature: EarlyAccessFeature
+    teamSlug?: string
+    people: TeamPerson[]
+    isNew: boolean
+    isPopular: boolean
+}): JSX.Element => (
+    <div data-scheme="primary" className="flex h-full min-h-0 flex-col bg-primary">
+        <header className="shrink-0 border-b border-primary px-4 py-4 pr-14">
+            <div className="mb-2 flex flex-wrap items-center gap-2">
+                <StageChip stage={feature.stage as BoardStage} />
+                <FeatureBadges isNew={isNew} isPopular={isPopular} />
+            </div>
+            <h2 className="m-0 text-2xl leading-tight">{feature.name}</h2>
+            <div className="mt-3">
+                <CopyLinkButton flagKey={feature.flagKey} />
+            </div>
+        </header>
+
+        <ScrollArea className="min-h-0 flex-1">
+            <div className="flex flex-col gap-6 p-4">
+                {feature.description && (
+                    <div>
+                        <h3 className="mb-2 mt-0 text-sm">About this feature</h3>
+                        <p className="m-0 whitespace-pre-line text-base text-secondary">{feature.description}</p>
+                    </div>
+                )}
+                {feature.documentationUrl && (
+                    <div>
+                        <OSButton asLink to={feature.documentationUrl} external size="md" variant="secondary">
+                            Read the documentation
+                        </OSButton>
+                    </div>
+                )}
+                {teamSlug && (
+                    <div>
+                        <h3 className="mb-2 mt-0 text-sm">Built by</h3>
+                        <SmallTeam slug={teamSlug} />
+                    </div>
+                )}
+                <TeamRoster people={people} />
+            </div>
+        </ScrollArea>
+
+        <footer className="shrink-0 border-t border-primary bg-primary p-4">
+            <DrawerAction feature={feature} />
+        </footer>
+    </div>
 )
 
-// Joinable items (with a linked survey) surface first so the actionable cards lead.
 const bySignupAvailability = (a: EarlyAccessFeature, b: EarlyAccessFeature): number =>
     Number(!!b.payload?.survey_id) - Number(!!a.payload?.survey_id)
 
-/**
- * The roadmap's Early Access Feature sections. Data is sourced at build time (SEO-friendly,
- * renders instantly) and revalidated client-side via posthog-js — see useEarlyAccessFeatures.
- *  - Beta — live now; each card deep-links to its toggle in the app's feature previews.
- *  - Alpha — in closed testing; collect an email via each feature's linked waitlist survey.
- *  - Concept — coming soon; same waitlist mechanic as alpha.
- * Cards show the owning small team crest (via the feature-ownership map) when we can match one,
- * flag recently added features ("New"), are addressable (/roadmap#flag-key), and highlight when
- * targeted. Search + stage + team filters and a sort control (with a sticky bar) keep a long list
- * scannable. Renders nothing when empty.
- */
 export default function EarlyAccessFeaturesSection(): JSX.Element | null {
+    const roadmapRootRef = useRef<HTMLDivElement>(null)
+    const location = useLocation()
     const { grouped, loading } = useEarlyAccessFeatures()
     const { features: ownedFeatures } = useFeatureOwnership()
     const [query, setQuery] = useState('')
-    const [stageFilter, setStageFilter] = useState<StageFilter>('all')
-    const [teamFilter, setTeamFilter] = useState<string>('all')
-    const [sortBy, setSortBy] = useState<SortKey>('featured')
-
-    // "New" badges compare against the current time, so only render them after mount to avoid a
-    // hydration mismatch with the build-time HTML (the createdAt itself is stable, so sort is safe).
+    const [teamFilter, setTeamFilter] = useState('all')
+    const [pitchOpen, setPitchOpen] = useState(false)
+    const [selectedFlagKey, setSelectedFlagKey] = useState<string>()
     const [mounted, setMounted] = useState(false)
+    const [overlayContainer, setOverlayContainer] = useState<HTMLElement | null>(null)
+
     useEffect(() => setMounted(true), [])
 
-    // Small-team display names and members, keyed by slug (mirrors SmallTeam's query) — used
-    // for the team filter labels and the per-card member avatars. Build-time / SSR-safe.
-    const { allSqueakTeam } = useStaticQuery(graphql`
+    const { allSqueakTeam } = useStaticQuery<{ allSqueakTeam: { nodes: SqueakTeamNode[] } }>(graphql`
         {
             allSqueakTeam {
                 nodes {
                     slug
                     name
+                    miniCrest {
+                        gatsbyImageData(width: 40, height: 40)
+                    }
                     profiles {
                         data {
+                            id
                             attributes {
                                 firstName
                                 lastName
@@ -486,49 +659,53 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
             }
         }
     `)
-    const { teamNameBySlug, peopleByTeamSlug } = useMemo(() => {
-        const names: Record<string, string> = {}
+
+    const { teamInfoBySlug, peopleByTeamSlug } = useMemo(() => {
+        const teams: Record<string, TeamInfo> = {}
         const people: Record<string, TeamPerson[]> = {}
-        allSqueakTeam.nodes.forEach((node: any) => {
-            names[node.slug] = node.name
-            people[node.slug] = (node.profiles?.data || []).map((profile: any) => ({
+        allSqueakTeam.nodes.forEach((node) => {
+            teams[node.slug] = { name: node.name, miniCrest: node.miniCrest }
+            people[node.slug] = (node.profiles?.data || []).map((profile) => ({
+                id: profile.id ? String(profile.id) : undefined,
                 name: [profile.attributes?.firstName, profile.attributes?.lastName].filter(Boolean).join(' '),
                 role: profile.attributes?.companyRole || undefined,
                 avatar: profile.attributes?.avatar?.data?.attributes?.url || undefined,
             }))
         })
-        return { teamNameBySlug: names, peopleByTeamSlug: people }
+        return { teamInfoBySlug: teams, peopleByTeamSlug: people }
     }, [allSqueakTeam])
 
-    // Owning team per feature slug, from the hand-maintained feature-ownership map. We match
-    // by flag key first, then by slugified feature name — unmatched features just omit the badge.
     const teamByFeatureSlug = useMemo(() => {
         const map: Record<string, string> = {}
-        ownedFeatures.forEach((f) => {
-            if (f.owner?.[0]) {
-                map[f.slug] = f.owner[0]
+        ownedFeatures.forEach((feature) => {
+            if (feature.owner?.[0]) {
+                map[feature.slug] = feature.owner[0]
             }
         })
         return map
     }, [ownedFeatures])
-    // Roadmap-specific overrides win (curated per flag key), then the shared ownership map.
+
     const teamForFeature = (feature: EarlyAccessFeature): string | undefined =>
         ROADMAP_TEAM_OVERRIDES[feature.flagKey] ||
         teamByFeatureSlug[feature.flagKey] ||
         teamByFeatureSlug[slugify(feature.name)]
 
-    const totalBeta = grouped.beta.length
-    const totalAlpha = grouped.comingSoon.filter((f) => f.stage === 'alpha').length
-    const totalConcept = grouped.comingSoon.filter((f) => f.stage === 'concept').length
-    const total = totalBeta + totalAlpha + totalConcept
-    const hasFeatures = total > 0
+    const allFeatures = useMemo(() => [...grouped.comingSoon, ...grouped.beta], [grouped.beta, grouped.comingSoon])
+    const total = allFeatures.length
 
-    // Team filter options: every owning team present in the data (with counts), plus "All teams"
-    // and an "Unassigned" bucket so ownership-unmatched features stay filterable, not hidden.
+    useEffect(() => {
+        if (!roadmapRootRef.current) {
+            return
+        }
+        setOverlayContainer(
+            roadmapRootRef.current.closest<HTMLElement>('[data-app="Editor"]') ?? roadmapRootRef.current
+        )
+    }, [total])
+
     const teamOptions = useMemo(() => {
         const counts: Record<string, number> = {}
         let unassigned = 0
-        ;[...grouped.beta, ...grouped.comingSoon].forEach((feature) => {
+        allFeatures.forEach((feature) => {
             const slug =
                 ROADMAP_TEAM_OVERRIDES[feature.flagKey] ||
                 teamByFeatureSlug[feature.flagKey] ||
@@ -539,327 +716,230 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
                 unassigned += 1
             }
         })
-        const teamItems = Object.entries(counts)
-            .map(([slug, count]) => ({ value: slug, label: `${teamNameBySlug[slug] || slug} (${count})` }))
+        const teams = Object.entries(counts)
+            .map(([slug, count]) => ({
+                value: slug,
+                label: `${teamInfoBySlug[slug]?.name || slug} (${count})`,
+            }))
             .sort((a, b) => a.label.localeCompare(b.label))
-        const items = [{ value: 'all', label: `All teams (${total})` }, ...teamItems]
-        if (unassigned > 0) {
-            items.push({ value: 'unassigned', label: `Unassigned (${unassigned})` })
+        const options = [{ value: 'all', label: `All teams (${total})` }, ...teams]
+        if (unassigned) {
+            options.push({ value: 'unassigned', label: `Unassigned (${unassigned})` })
         }
-        return items
-    }, [grouped, teamByFeatureSlug, teamNameBySlug, total])
+        return options
+    }, [allFeatures, teamByFeatureSlug, teamInfoBySlug, total])
 
-    // A deep-linked card (/roadmap#flag-key) could be filtered out by an active search/stage/team
-    // filter, so clear filters on mount when a hash is present to guarantee the target is visible.
+    const requestedFlagKey = useMemo(
+        () => new URLSearchParams(location.search).get('feature') || undefined,
+        [location.search]
+    )
+    const requestedFeature = requestedFlagKey
+        ? allFeatures.find((feature) => feature.flagKey === requestedFlagKey)
+        : undefined
+    const activeFlagKey = selectedFlagKey ?? requestedFlagKey
+    const activeFeature = activeFlagKey ? allFeatures.find((feature) => feature.flagKey === activeFlagKey) : undefined
+    const drawerOpen = pitchOpen || !!activeFeature
+
     useEffect(() => {
-        if (typeof window !== 'undefined' && window.location.hash) {
-            setQuery('')
-            setStageFilter('all')
-            setTeamFilter('all')
+        if (selectedFlagKey && requestedFlagKey === selectedFlagKey) {
+            setSelectedFlagKey(undefined)
         }
-    }, [])
+    }, [requestedFlagKey, selectedFlagKey])
 
-    // Then scroll the deep-linked card into view once cards exist and filters have settled — the
-    // browser's native anchor jump fires before this list finishes rendering.
     useEffect(() => {
-        if (!hasFeatures || typeof window === 'undefined' || !window.location.hash) {
+        if (requestedFlagKey || !location.hash || loading) {
             return
         }
-        document.getElementById(window.location.hash.slice(1))?.scrollIntoView({ block: 'center' })
-    }, [hasFeatures, query, stageFilter, teamFilter])
+        let legacyFlagKey = location.hash.slice(1)
+        try {
+            legacyFlagKey = decodeURIComponent(legacyFlagKey)
+        } catch {
+            return
+        }
+        if (allFeatures.some((feature) => feature.flagKey === legacyFlagKey)) {
+            navigate(roadmapUrl(location.search, legacyFlagKey), { replace: true })
+        }
+    }, [allFeatures, loading, location.hash, location.search, requestedFlagKey])
+
+    useEffect(() => {
+        if (!loading && requestedFlagKey && !requestedFeature) {
+            navigate(roadmapUrl(location.search), { replace: true })
+        }
+    }, [loading, location.search, requestedFeature, requestedFlagKey])
+
+    useEffect(() => {
+        if (!overlayContainer || !drawerOpen) {
+            return
+        }
+
+        const closeOnNonItemClick = (event: MouseEvent) => {
+            const target = event.target
+            if (!(target instanceof Element) || target.closest('[data-roadmap-item], [data-roadmap-drawer]')) {
+                return
+            }
+            setPitchOpen(false)
+            setSelectedFlagKey(undefined)
+            navigate(roadmapUrl(location.search), { replace: true })
+        }
+
+        overlayContainer.addEventListener('click', closeOnNonItemClick)
+        return () => overlayContainer.removeEventListener('click', closeOnNonItemClick)
+    }, [drawerOpen, location.search, overlayContainer])
+
+    const popularFlagKeys = useMemo(() => {
+        const ranked = [...allFeatures]
+            .filter((feature) => typeof feature.waitlistCount === 'number' && feature.waitlistCount > 0)
+            .sort((a, b) => (b.waitlistCount ?? 0) - (a.waitlistCount ?? 0))
+            .slice(0, POPULAR_TOP_N)
+        return new Set(ranked.map((feature) => feature.flagKey))
+    }, [allFeatures])
 
     if (loading && total === 0) {
-        return <p className="text-muted text-sm">Loading what's new…</p>
+        return <p className="m-0 text-sm text-muted">Loading what's new…</p>
     }
     if (total === 0) {
         return null
     }
 
-    const q = query.trim().toLowerCase()
-    const matchesSearch = (f: EarlyAccessFeature) =>
-        !q || f.name.toLowerCase().includes(q) || (f.description || '').toLowerCase().includes(q)
-    const matchesTeam = (f: EarlyAccessFeature) => {
+    const now = Date.now()
+    const isNew = (feature: EarlyAccessFeature): boolean =>
+        mounted && typeof feature.createdAt === 'number' && now - feature.createdAt < NEW_WINDOW_MS
+    const isPopular = (feature: EarlyAccessFeature): boolean => popularFlagKeys.has(feature.flagKey)
+    const matchesSearch = (feature: EarlyAccessFeature): boolean => {
+        const value = query.trim().toLowerCase()
+        if (!value) {
+            return true
+        }
+        const teamSlug = teamForFeature(feature)
+        const teamName = teamSlug ? teamInfoBySlug[teamSlug]?.name || teamSlug : 'unassigned'
+        return [feature.name, feature.description, feature.flagKey, teamName].some((field) =>
+            (field || '').toLowerCase().includes(value)
+        )
+    }
+    const matchesTeam = (feature: EarlyAccessFeature): boolean => {
         if (teamFilter === 'all') {
             return true
         }
-        const slug = teamForFeature(f)
-        return teamFilter === 'unassigned' ? !slug : slug === teamFilter
+        const teamSlug = teamForFeature(feature)
+        return teamFilter === 'unassigned' ? !teamSlug : teamSlug === teamFilter
     }
-    const matches = (f: EarlyAccessFeature) => matchesSearch(f) && matchesTeam(f)
+    const sortFeatures = (features: EarlyAccessFeature[]): EarlyAccessFeature[] =>
+        [...features].sort(
+            (a, b) => Number(isNew(b)) - Number(isNew(a)) || (a.stage === 'beta' ? 0 : bySignupAvailability(a, b))
+        )
 
-    // Recently created features get a "New" chip and glow, and lead their section under the
-    // default sort (mounted-gated: newness compares against the current time, which would
-    // mismatch the build-time HTML during hydration).
-    const now = Date.now()
-    const isNew = (f: EarlyAccessFeature): boolean =>
-        mounted && typeof f.createdAt === 'number' && now - f.createdAt < NEW_WINDOW_MS
-
-    // Unassigned features sort last under "By team" (￿ sorts after any real name).
-    const teamLabelFor = (f: EarlyAccessFeature): string => teamNameBySlug[teamForFeature(f) ?? ''] ?? '￿'
-    const sortFeatures = (list: EarlyAccessFeature[], hasWaitlists: boolean): EarlyAccessFeature[] => {
-        const arr = [...list]
-        switch (sortBy) {
-            case 'az':
-                return arr.sort((a, b) => a.name.localeCompare(b.name))
-            case 'team':
-                return arr.sort(
-                    (a, b) => teamLabelFor(a).localeCompare(teamLabelFor(b)) || a.name.localeCompare(b.name)
+    const filteredByStage = STAGES.reduce<Record<BoardStage, EarlyAccessFeature[]>>(
+        (result, { stage }) => {
+            result[stage] = sortFeatures(
+                allFeatures.filter(
+                    (feature) => feature.stage === stage && matchesSearch(feature) && matchesTeam(feature)
                 )
-            case 'newest':
-                return arr.sort((a, b) => (b.createdAt ?? 0) - (a.createdAt ?? 0))
-            default:
-                // "Featured": New items lead their section, then waitlist sections surface
-                // joinable items; beta otherwise keeps its natural order.
-                return arr.sort(
-                    (a, b) => Number(isNew(b)) - Number(isNew(a)) || (hasWaitlists ? bySignupAvailability(a, b) : 0)
-                )
-        }
-    }
-    const beta = sortFeatures(grouped.beta.filter(matches), false)
-    const alpha = sortFeatures(grouped.comingSoon.filter((f) => f.stage === 'alpha').filter(matches), true)
-    const concept = sortFeatures(grouped.comingSoon.filter((f) => f.stage === 'concept').filter(matches), true)
-
-    // Top-N features by waitlist signups get a "Popular" chip. Counts are aggregated at build
-    // time (gatsby/sourceNodes.ts); with no counts available the set is empty and nothing shows.
-    const popularFlagKeys = useMemo(() => {
-        const ranked = [...grouped.beta, ...grouped.comingSoon]
-            .filter((f) => typeof f.waitlistCount === 'number' && f.waitlistCount > 0)
-            .sort((a, b) => (b.waitlistCount ?? 0) - (a.waitlistCount ?? 0))
-            .slice(0, POPULAR_TOP_N)
-        return new Set(ranked.map((f) => f.flagKey))
-    }, [grouped])
-    const isPopular = (f: EarlyAccessFeature): boolean => popularFlagKeys.has(f.flagKey)
-
-    const badgeFor = (f: EarlyAccessFeature): React.ReactNode => (
-        <>
-            {isNew(f) && <NewChip />}
-            {isPopular(f) && <PopularChip />}
-        </>
+            )
+            return result
+        },
+        { concept: [], alpha: [], beta: [] }
     )
-    // New = a soft glow; Popular = a firmer ring. New wins over Popular so freshly added
-    // crowd-pleasers don't stack two rings.
-    const effectFor = (f: EarlyAccessFeature): string =>
-        isNew(f)
-            ? 'ring-1 ring-red/40 dark:ring-yellow/40'
-            : isPopular(f)
-            ? 'ring-1 ring-red/25 dark:ring-yellow/25'
-            : ''
-    const peopleFor = (f: EarlyAccessFeature): TeamPerson[] | undefined => {
-        const slug = teamForFeature(f)
-        return slug ? peopleByTeamSlug[slug] : undefined
+
+    const teamFilterLabel = teamFilter === 'unassigned' ? 'Unassigned' : teamInfoBySlug[teamFilter]?.name || teamFilter
+    const filteredTotal = STAGES.reduce((count, { stage }) => count + filteredByStage[stage].length, 0)
+    const openFeature = (feature: EarlyAccessFeature) => {
+        setSelectedFlagKey(feature.flagKey)
+        setPitchOpen(false)
+        navigate(roadmapUrl(location.search, feature.flagKey), { replace: true })
     }
-
-    const anyDated = grouped.beta.some((f) => f.createdAt) || grouped.comingSoon.some((f) => f.createdAt)
-    const sortItems = [
-        { value: 'featured', label: 'Featured' },
-        ...(anyDated ? [{ value: 'newest', label: 'Newest' }] : []),
-        { value: 'az', label: 'A–Z' },
-        { value: 'team', label: 'By team' },
-    ]
-
-    const teamFilterLabel = teamFilter === 'unassigned' ? 'Unassigned' : teamNameBySlug[teamFilter] || teamFilter
-    const hasActiveFilters = query.trim() !== '' || stageFilter !== 'all' || teamFilter !== 'all'
-    const clearAllFilters = () => {
-        setQuery('')
-        setStageFilter('all')
-        setTeamFilter('all')
+    const openPitch = () => {
+        setPitchOpen(true)
+        setSelectedFlagKey(undefined)
+        navigate(roadmapUrl(location.search), { replace: true })
     }
-
-    const showBeta = (stageFilter === 'all' || stageFilter === 'beta') && beta.length > 0
-    const showAlpha = (stageFilter === 'all' || stageFilter === 'alpha') && alpha.length > 0
-    const showConcept = (stageFilter === 'all' || stageFilter === 'concept') && concept.length > 0
-    const shownCount =
-        (showBeta ? beta.length : 0) + (showAlpha ? alpha.length : 0) + (showConcept ? concept.length : 0)
-    const showControls = total > CONTROLS_THRESHOLD
+    const closeDrawer = () => {
+        setPitchOpen(false)
+        setSelectedFlagKey(undefined)
+        navigate(roadmapUrl(location.search), { replace: true })
+    }
+    const activeTeamSlug = activeFeature ? teamForFeature(activeFeature) : undefined
+    const drawerTitle = pitchOpen ? 'Pitch a roadmap idea' : activeFeature?.name ?? 'Roadmap feature'
 
     return (
-        <div className="@container">
-            {/* Stage ladder so visitors understand the concept → alpha → beta progression. */}
-            <p className="text-secondary text-sm mt-0 mb-4">
-                Every feature climbs the same ladder: concepts are ideas we've committed to, alphas are being tested
-                with closed groups, and betas are ready for anyone to try. When something ships for real, it lands in
-                the{' '}
-                <Link to="/changelog" state={{ newWindow: true }} className="underline">
-                    changelog
-                </Link>
-                .
-            </p>
-
-            {showControls && (
-                <div
-                    className={`sticky top-2 z-20 ${FROSTED_TOOLBAR} border border-primary rounded-lg px-3 py-2.5 mb-6`}
-                >
-                    <div className="flex flex-col @md:flex-row @md:flex-wrap @md:items-center gap-2 @md:gap-3">
-                        <Input
-                            label="Search features"
-                            showLabel={false}
-                            size="md"
-                            type="text"
-                            placeholder="Search features…"
-                            value={query}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.target.value)}
-                            showClearButton
-                            onClear={() => setQuery('')}
-                            containerClassName="w-full @md:max-w-xs"
-                        />
-                        <div className="flex items-center gap-1">
-                            <OSButton
-                                size="md"
-                                active={stageFilter === 'all'}
-                                onClick={() => setStageFilter('all')}
-                                label={String(total)}
-                            >
-                                All
-                            </OSButton>
-                            <OSButton
-                                size="md"
-                                active={stageFilter === 'beta'}
-                                onClick={() => setStageFilter('beta')}
-                                label={String(totalBeta)}
-                            >
-                                Beta
-                            </OSButton>
-                            <OSButton
-                                size="md"
-                                active={stageFilter === 'alpha'}
-                                onClick={() => setStageFilter('alpha')}
-                                label={String(totalAlpha)}
-                            >
-                                Alpha
-                            </OSButton>
-                            <OSButton
-                                size="md"
-                                active={stageFilter === 'concept'}
-                                onClick={() => setStageFilter('concept')}
-                                label={String(totalConcept)}
-                            >
-                                Concept
-                            </OSButton>
-                        </div>
-                        <Select
-                            ariaLabel="Filter by team"
-                            placeholder="All teams"
-                            value={teamFilter}
-                            onValueChange={setTeamFilter}
-                            groups={[{ label: 'Team', items: teamOptions }]}
-                            className="w-full @md:w-auto"
-                        />
-                        <Select
-                            ariaLabel="Sort features"
-                            placeholder="Sort"
-                            value={sortBy}
-                            onValueChange={(value: string) => setSortBy(value as SortKey)}
-                            groups={[{ label: 'Sort by', items: sortItems }]}
-                            className="w-full @md:w-auto"
-                        />
-                        <span className="text-secondary text-sm @md:ml-auto whitespace-nowrap">
-                            Showing {shownCount} of {total}
-                        </span>
+        <div ref={roadmapRootRef} className="relative flex min-h-0 flex-1 flex-col gap-3 overflow-hidden">
+            <div
+                className={`${FROSTED_TOOLBAR} shrink-0 rounded-lg border border-primary px-3 py-2.5`}
+                data-scheme="secondary"
+            >
+                <div className="flex flex-col gap-2 @md:flex-row @md:items-center">
+                    <Input
+                        label="Search roadmap"
+                        showLabel={false}
+                        size="md"
+                        type="search"
+                        placeholder="Search features, teams, or flag keys…"
+                        value={query}
+                        onChange={(event: React.ChangeEvent<HTMLInputElement>) => setQuery(event.target.value)}
+                        showClearButton
+                        onClear={() => setQuery('')}
+                        containerClassName="w-full @md:max-w-md"
+                    />
+                    <Select
+                        ariaLabel="Filter roadmap by team"
+                        placeholder="All teams"
+                        value={teamFilter}
+                        onValueChange={setTeamFilter}
+                        groups={[{ label: 'Team', items: teamOptions }]}
+                        className="w-full @md:w-auto"
+                    />
+                    <span className="text-sm text-secondary @md:ml-auto">
+                        {filteredTotal} of {total} features
+                    </span>
+                </div>
+                {teamFilter !== 'all' && (
+                    <div className="mt-2 flex flex-wrap items-center gap-2">
+                        <FilterChip label={teamFilterLabel} onRemove={() => setTeamFilter('all')} />
+                        <OSButton size="sm" variant="underlineOnHover" onClick={() => setTeamFilter('all')}>
+                            Clear filter
+                        </OSButton>
                     </div>
+                )}
+            </div>
 
-                    {hasActiveFilters && (
-                        <div className="flex flex-wrap items-center gap-2 mt-3">
-                            {query.trim() && <FilterChip label={`“${query.trim()}”`} onRemove={() => setQuery('')} />}
-                            {stageFilter !== 'all' && (
-                                <FilterChip
-                                    label={STAGE_FILTER_LABELS[stageFilter]}
-                                    onRemove={() => setStageFilter('all')}
-                                />
-                            )}
-                            {teamFilter !== 'all' && (
-                                <FilterChip label={teamFilterLabel} onRemove={() => setTeamFilter('all')} />
-                            )}
-                            <OSButton size="sm" variant="underlineOnHover" onClick={clearAllFilters}>
-                                Clear all
-                            </OSButton>
-                        </div>
-                    )}
-                </div>
-            )}
-
-            {showBeta && (
-                <section className="mb-10">
-                    <SectionHeader
-                        icon={<IconRocket className="size-6 text-red dark:text-yellow" />}
-                        title="Beta – try it now"
-                        count={beta.length}
-                        description="Live in PostHog today. Each card links straight to its toggle in your account – flip it on and go."
-                    />
-                    <Grid>
-                        {beta.map((feature) => (
-                            <BetaCard
-                                key={feature.flagKey}
-                                feature={feature}
-                                teamSlug={teamForFeature(feature)}
-                                badge={badgeFor(feature)}
-                                people={peopleFor(feature)}
-                                effectClassName={effectFor(feature)}
+            <div className="min-h-0 flex-1">
+                <ScrollArea className="size-full [&>div>div]:size-full [&>div>div]:!flex">
+                    <div className="flex h-full min-w-max snap-x snap-mandatory gap-3 pr-2 @5xl:grid @5xl:min-w-full @5xl:snap-none @5xl:grid-cols-3 @5xl:pr-0">
+                        {STAGES.map((definition) => (
+                            <RoadmapLane
+                                key={definition.stage}
+                                definition={definition}
+                                features={filteredByStage[definition.stage]}
+                                activeFlagKey={activeFeature?.flagKey}
+                                teamForFeature={teamForFeature}
+                                teamInfoBySlug={teamInfoBySlug}
+                                isNew={isNew}
+                                isPopular={isPopular}
+                                onFeatureClick={openFeature}
+                                onPitchClick={openPitch}
                             />
                         ))}
-                    </Grid>
-                </section>
-            )}
+                    </div>
+                </ScrollArea>
+            </div>
 
-            {showAlpha && (
-                <section className="mb-10">
-                    <SectionHeader
-                        icon={<IconFlask className="size-6 text-red dark:text-yellow" />}
-                        title="Alpha – in closed testing"
-                        count={alpha.length}
-                        description="We're testing these with small groups while we work out the rough edges. Join a waitlist and we'll let you know when testing opens up."
+            <RoadmapOverlayPanel
+                isOpen={drawerOpen}
+                onClose={closeDrawer}
+                title={drawerTitle}
+                portalContainer={overlayContainer}
+            >
+                {pitchOpen ? (
+                    <PitchIdeaPanel />
+                ) : activeFeature ? (
+                    <FeaturePanel
+                        feature={activeFeature}
+                        teamSlug={activeTeamSlug}
+                        people={activeTeamSlug ? peopleByTeamSlug[activeTeamSlug] || [] : []}
+                        isNew={isNew(activeFeature)}
+                        isPopular={isPopular(activeFeature)}
                     />
-                    <Grid>
-                        {alpha.map((feature) => (
-                            <ComingSoonCard
-                                key={feature.flagKey}
-                                feature={feature}
-                                teamSlug={teamForFeature(feature)}
-                                badge={badgeFor(feature)}
-                                people={peopleFor(feature)}
-                                effectClassName={effectFor(feature)}
-                            />
-                        ))}
-                    </Grid>
-                </section>
-            )}
-
-            {showConcept && (
-                <section className="mb-10">
-                    <SectionHeader
-                        icon={<IconLightBulb className="size-6 text-red dark:text-yellow" />}
-                        title="Concept – coming soon"
-                        count={concept.length}
-                        description="What we're building next. Join a waitlist and we'll email you when it's ready."
-                    />
-                    <Grid>
-                        {concept.map((feature) => (
-                            <ComingSoonCard
-                                key={feature.flagKey}
-                                feature={feature}
-                                teamSlug={teamForFeature(feature)}
-                                badge={badgeFor(feature)}
-                                people={peopleFor(feature)}
-                                effectClassName={effectFor(feature)}
-                            />
-                        ))}
-                        {!q && <PitchConceptCard />}
-                    </Grid>
-                </section>
-            )}
-
-            {!showBeta && !showAlpha && !showConcept && (
-                <div className="flex flex-col items-center gap-2 py-8 text-center">
-                    <img
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/detective_hog_9b2bb1da51.png"
-                        alt="A hedgehog detective, stumped"
-                        className="max-h-32"
-                    />
-                    <p className="text-secondary text-sm m-0">
-                        {q ? `No features match “${query}”. ` : 'No features match these filters. '}
-                        Detective Hog has no leads – try a different filter.
-                    </p>
-                </div>
-            )}
+                ) : null}
+            </RoadmapOverlayPanel>
         </div>
     )
 }
