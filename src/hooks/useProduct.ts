@@ -34,6 +34,7 @@ import {
 import useProducts from './useProducts'
 import { mcpAnalytics } from './productData/mcp_analytics'
 import { traces } from './productData/traces'
+import { replayVision } from './productData/replay_vision'
 
 const dedupe = (products) => {
     const deduped = {}
@@ -60,6 +61,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         //     slug: 'product-analytics',
         // },
         traces,
+        replayVision,
         {
             name: 'User interviews',
             Icon: IconThoughtBubble,
