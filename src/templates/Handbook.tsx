@@ -36,6 +36,8 @@ import { useState } from 'react'
 import SidebarSection from 'components/PostLayout/SidebarSection'
 import Contributor from 'components/Docs/Contributors'
 import { useProductInterestFromPathname } from 'hooks/useProductInterest'
+import useProduct from 'hooks/useProduct'
+import { buildProductMenuTabs, ProductSwitcher } from 'components/Products/ReaderViewProduct'
 import slugify from 'slugify'
 import usePostHog from 'hooks/usePostHog'
 import { RenderInClient } from 'components/RenderInClient'
@@ -355,6 +357,25 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
     // Track product interest for cross-subdomain cookie
     useProductInterestFromPathname(slug)
 
+    // When a docs page lives under `/docs/<product-slug>/...` and that product
+    // has opted in to ReaderViewProduct (i.e. defines `productMenu`), render
+    // the same Product/Pricing/Docs tab strip + product switcher as the
+    // dedicated `pages/docs/<product-slug>.tsx` and `pages/<product-slug>` so
+    // the sidebar feels continuous when navigating into individual docs pages.
+    const allProducts = useProduct() as any[]
+    const docsProductSlug = typeof slug === 'string' && slug.startsWith('/docs/') ? slug.split('/')[2] : null
+    const productSurfaceData = docsProductSlug
+        ? allProducts.find((p: any) => {
+              const lastSegment = p.slug?.split('/').pop()
+              return lastSegment === docsProductSlug
+          })
+        : null
+    const isProductDocsPage = !!productSurfaceData?.productMenu?.length
+    const productMenuTabs = isProductDocsPage
+        ? buildProductMenuTabs({ productData: productSurfaceData, activeSurface: 'docs' })
+        : undefined
+    const productSelect = isProductDocsPage ? <ProductSwitcher activeHandle={productSurfaceData.handle} /> : undefined
+
     const components = {
         Team,
         inlineCode: InlineCode,
@@ -420,12 +441,12 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
             mdxComponents={components}
             commits={commits}
             filePath={post.parent?.relativePath}
-            homeURL={breadcrumbBase.url}
-            description={seo?.metaDescription || excerpt}
             showSurvey
             hideRightSidebar={hideRightSidebar}
             contentMaxWidthClass={contentMaxWidthClass}
             sourceInstanceName={post.parent?.sourceInstanceName}
+            menuTabs={productMenuTabs}
+            productSelect={productSelect}
         />
     )
 

@@ -2,6 +2,7 @@
 .cache
 node_modules
 .pnp.*
+.pnpm-store*
 
 # Build directory
 /public
@@ -41,3 +42,4 @@ __pycache__
 
 .env*.local
 /.claude/worktrees/
+.env*

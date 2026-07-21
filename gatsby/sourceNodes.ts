@@ -214,6 +214,55 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     })
 
     // --- Begin parallel sourcing of independent data ---
+    const sourceProductUsageStats = async () => {
+        if (!process.env.POSTHOG_APP_API_KEY) return
+
+        try {
+            const res = await fetch(
+                'https://us.posthog.com/api/environments/2/endpoints/product_active_usage_30d/run',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${process.env.POSTHOG_APP_API_KEY}`,
+                    },
+                    body: JSON.stringify({}),
+                }
+            )
+            if (res.status !== 200) {
+                console.error('Failed to fetch product_active_usage_30d endpoint:', res.status)
+                return
+            }
+            const body: any = await res.json()
+            const columns: string[] = body.columns || []
+            const productIdx = columns.indexOf('product')
+            const usersIdx = columns.indexOf('unique_users')
+            const orgsIdx = columns.indexOf('unique_orgs')
+            const rows: any[][] = body.results || []
+            rows.forEach((row) => {
+                const product = row[productIdx]
+                if (!product) return
+                const data = {
+                    product,
+                    unique_users: row[usersIdx] ?? null,
+                    unique_orgs: row[orgsIdx] ?? null,
+                }
+                createNode({
+                    id: createNodeId(`product-usage-stats-30d-${product}`),
+                    parent: null,
+                    children: [],
+                    internal: {
+                        type: 'ProductUsageStats',
+                        contentDigest: createContentDigest(data),
+                    },
+                    ...data,
+                })
+            })
+        } catch (err) {
+            console.error('Error fetching product_active_usage_30d endpoint:', err)
+        }
+    }
+
     const createProductDataNode = async () => {
         const url = `${process.env.BILLING_SERVICE_URL}/api/products-v2?display_friendly=true`
         const headers = {
@@ -357,6 +406,95 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             }
             createNode(node)
         })
+    }
+
+    const sourceCommunityStats = async () => {
+        const host = process.env.GATSBY_SQUEAK_API_HOST
+        if (!host) {
+            console.warn('GATSBY_SQUEAK_API_HOST not set. Skipping community stats.')
+            return
+        }
+
+        const notArchived = {
+            $or: [{ archived: { $null: true } }, { archived: { $eq: false } }],
+        }
+
+        const fetchTotal = async (path: 'questions' | 'replies', filters: Record<string, any>) => {
+            const query = qs.stringify(
+                {
+                    filters,
+                    fields: ['id'],
+                    pagination: { pageSize: 1, withCount: true },
+                },
+                { encodeValuesOnly: true }
+            )
+            try {
+                const res = await fetch(`${host}/api/${path}?${query}`).then((r) => r.json() as Promise<any>)
+                return res?.meta?.pagination?.total ?? 0
+            } catch (error) {
+                console.warn(`Failed to fetch community stats (${path}):`, error)
+                return 0
+            }
+        }
+
+        const statsFor = async (topicId: number | null) => {
+            const questionTopicFilter = topicId ? { topics: { id: { $eq: topicId } } } : {}
+            const replyTopicFilter = topicId ? { question: { topics: { id: { $eq: topicId } } } } : {}
+
+            const [questions, resolved, replies, helpful] = await Promise.all([
+                fetchTotal('questions', { ...notArchived, ...questionTopicFilter }),
+                fetchTotal('questions', {
+                    ...notArchived,
+                    ...questionTopicFilter,
+                    resolved: { $eq: true },
+                }),
+                fetchTotal('replies', { ...replyTopicFilter }),
+                fetchTotal('replies', { ...replyTopicFilter, helpful: { $eq: true } }),
+            ])
+
+            return { questions, resolved, replies, helpful }
+        }
+
+        let topics: Array<{ id: number; attributes: { label?: string; slug?: string } }> = []
+        try {
+            const topicsQuery = qs.stringify(
+                {
+                    fields: ['label', 'slug'],
+                    pagination: { pageSize: 200 },
+                },
+                { encodeValuesOnly: true }
+            )
+            const topicsRes = (await fetch(`${host}/api/topics?${topicsQuery}`).then((r) => r.json())) as any
+            topics = topicsRes?.data ?? []
+        } catch (error) {
+            console.warn('Failed to fetch topics for community stats:', error)
+        }
+
+        const targets: Array<{ topicId: number | null; topicSlug: string | null; topicLabel: string | null }> = [
+            { topicId: null, topicSlug: null, topicLabel: null },
+            ...topics.map((t) => ({
+                topicId: t.id,
+                topicSlug: t.attributes?.slug ?? null,
+                topicLabel: t.attributes?.label ?? null,
+            })),
+        ]
+
+        await Promise.all(
+            targets.map(async ({ topicId, topicSlug, topicLabel }) => {
+                const counts = await statsFor(topicId)
+                const data = { topicId, topicSlug, topicLabel, ...counts }
+                createNode({
+                    id: createNodeId(`community-stats-${topicId ?? 'site'}`),
+                    parent: null,
+                    children: [],
+                    internal: {
+                        type: 'CommunityStats',
+                        contentDigest: createContentDigest(data),
+                    },
+                    ...data,
+                })
+            })
+        )
     }
 
     const sourceShopifyNodes = async () => {
@@ -727,6 +865,54 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             }
             createNode(node)
         })
+    }
+
+    const RESEARCHER_GITHUB_HANDLES = ['nicowaltz', 'robbie-c', 'joshsny', 'MarconLP', 'k11kirky', 'jamesefhawkins']
+
+    async function sourceResearchMergedPRs() {
+        const query = `org:posthog is:pr is:merged -repo:posthog/posthog.com ${RESEARCHER_GITHUB_HANDLES.map(
+            (handle) => `author:${handle}`
+        ).join(' ')}`
+
+        const response = await fetch(
+            `https://api.github.com/search/issues?q=${encodeURIComponent(query)}&sort=updated&order=desc&per_page=50`
+        )
+
+        if (!response.ok) {
+            console.warn(`Failed to fetch research merged PRs: ${response.statusText}`)
+            return
+        }
+
+        const data = await response.json()
+        const items = Array.isArray(data?.items) ? data.items : []
+
+        items
+            .filter((item) => /^(feat|epic)/i.test((item.title ?? '').trim()))
+            .map((item) => ({
+                title: item.title,
+                url: item.html_url,
+                repo: item.repository_url?.split('/').pop() ?? 'posthog',
+                author: item.user?.login ?? 'unknown',
+                mergedAt: item.pull_request?.merged_at ?? item.closed_at ?? null,
+            }))
+            .sort((a, b) => {
+                const aTime = a.mergedAt ? Date.parse(a.mergedAt) : 0
+                const bTime = b.mergedAt ? Date.parse(b.mergedAt) : 0
+                return bTime - aTime
+            })
+            .slice(0, 8)
+            .forEach((pr) => {
+                createNode({
+                    id: createNodeId(`research-merged-pr-${pr.url}`),
+                    parent: null,
+                    children: [],
+                    internal: {
+                        type: `ResearchMergedPr`,
+                        contentDigest: createContentDigest(pr),
+                    },
+                    ...pr,
+                })
+            })
     }
 
     async function sourceGithubNodes() {
@@ -1205,16 +1391,107 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         }
     }
 
+    // Self-driving PRs: real pull requests PostHog's self-driving system opened from an
+    // Inbox report — both merged PRs (the loop's shipped work) and the open drafts it
+    // currently has awaiting human review. They're matched on the Inbox footer every such
+    // PR body carries ("...from an inbox report" + a posthog-code://inbox link).
+    // Runs outside the GITHUB_API_KEY gate so preview and local builds get nodes too:
+    // the search API works unauthenticated, and a token (GITHUB_API_KEY, or the
+    // Actions-provided GITHUB_TOKEN in CI) just raises the rate limit. Fails soft —
+    // the /self-driving ticker and the docs loop diagram hide themselves when no nodes exist.
+    async function sourceSelfDrivingPRs() {
+        const token = process.env.GITHUB_API_KEY || process.env.GITHUB_TOKEN
+        const headers: HeadersInit = token ? { Authorization: `token ${token}` } : {}
+
+        const parseCommitTitle = (rawTitle: string) => {
+            const match = rawTitle.match(/^(\w+)(?:\(([^)]+)\))?!?:\s*(.+)$/)
+            if (match) {
+                return { type: match[1].toLowerCase(), scope: match[2] || '', summary: match[3].trim() }
+            }
+            return { type: '', scope: '', summary: rawTitle }
+        }
+
+        // Run one GitHub search. Returns [] on any failure so a single bad response never
+        // breaks the build — consumers hide themselves when there are no nodes.
+        const search = async (q: string): Promise<any[]> => {
+            try {
+                const response = await fetch(
+                    `https://api.github.com/search/issues?${new URLSearchParams({
+                        q,
+                        sort: 'updated',
+                        order: 'desc',
+                        per_page: '30',
+                    }).toString()}`,
+                    { headers }
+                ).then((res) => res.json())
+
+                if (!Array.isArray(response?.items)) {
+                    console.warn('Self-driving PR sourcing returned no items:', response?.message || response)
+                    return []
+                }
+                return response.items
+            } catch (error) {
+                console.warn('Failed to source self-driving PRs:', error)
+                return []
+            }
+        }
+
+        const [merged, drafts] = await Promise.all([
+            search('repo:PostHog/posthog is:pr is:merged "from an inbox report"'),
+            search('repo:PostHog/posthog is:pr is:open draft:true "from an inbox report"'),
+        ])
+
+        // Merged first so a PR that merged between the two searches wins over its draft copy.
+        const byNumber = new Map<number, any>()
+        for (const item of [...merged, ...drafts]) {
+            const hasMarker = typeof item.body === 'string' && item.body.includes('posthog-code://inbox')
+            if (hasMarker && !byNumber.has(item.number)) {
+                byNumber.set(item.number, item)
+            }
+        }
+
+        byNumber.forEach((item) => {
+            const { type, scope, summary } = parseCommitTitle(item.title || '')
+            const mergedAt = item.pull_request?.merged_at || null
+            const state = mergedAt ? 'merged' : item.draft ? 'draft' : 'open'
+            const data = {
+                prNumber: item.number,
+                title: item.title,
+                summary,
+                type,
+                scope,
+                url: item.html_url,
+                state,
+                openedAt: item.created_at,
+                mergedAt: mergedAt || item.closed_at,
+            }
+            const node = {
+                id: createNodeId(`self-driving-pr-${item.number}`),
+                parent: null,
+                children: [],
+                internal: {
+                    type: `SelfDrivingPullRequest`,
+                    contentDigest: createContentDigest(data),
+                },
+                ...data,
+            }
+            createNode(node)
+        })
+    }
+
     await Promise.all([
         createProductDataNode(),
         createRoadmapItems(),
         sourceChangelogVideos(),
         sourcePostCategories(),
+        sourceCommunityStats(),
         sourceShopifyNodes(),
         sourceSlackEmojis(),
         sourceG2Reviews(),
         sourceCloudinaryImages(),
         sourceGithubNodes(),
+        sourceResearchMergedPRs(),
+        sourceSelfDrivingPRs(),
         fetchWorkflowTemplates(),
         fetchReferences(),
         fetchEvents(),

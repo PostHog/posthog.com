@@ -1,8 +1,7 @@
 import { MenuType, MenuItemType } from 'components/RadixUI/MenuBar'
 import React from 'react'
-import { docsMenu, handbookSidebar } from '../../navs'
+import { docsMenu } from '../../navs'
 import * as Icons from '@posthog/icons'
-import { useSmallTeamsMenuItems } from './SmallTeamsMenuItems'
 import Logo from 'components/Logo'
 import { APP_COUNT } from '../../constants'
 import SearchableProductMenu from './SearchableProductMenu'
@@ -17,12 +16,10 @@ import {
     IconDictator,
     IconSparksJoy,
 } from 'components/OSIcons'
-import { useApp } from '../../context/App'
+import { useAppSettings } from '../../context/App'
 import { IconChevronDown } from '@posthog/icons'
 import { useHedgehogMode } from 'components/HedgehogMode'
 import { navigate } from 'gatsby'
-import { useToast } from '../../context/Toast'
-import usePostHog from '../../hooks/usePostHog'
 
 interface DocsMenuItem {
     name: string
@@ -178,6 +175,11 @@ const processMenuItemWithGrouping = (item: DocsMenuItem): any => {
     return null
 }
 
+// Prioritized products, ordered to line up with the surfaces under the Products menu
+// (PostHog Code, Research, Slack, MCP, Context Warehouse) mapped to their docs categories.
+// Everything else falls through to alphabetical order below.
+const DOCS_PRIORITY = ['PostHog Code', 'PostHog AI', 'Slack app', 'MCP Analytics', 'Data Warehouse']
+
 const getDocsMenuItems = () => {
     let items = groupBySectionDividers((docsMenu as DocsMenu).children)
 
@@ -188,6 +190,21 @@ const getDocsMenuItems = () => {
         return true
     })
 
+    // Keep only real product entries (drop separators) so we can present one clean list:
+    // prioritized products first, then everything else alphabetically.
+    items = items
+        .filter((item) => item.type !== 'separator' && item.label)
+        .sort((a, b) => {
+            const aPriority = DOCS_PRIORITY.indexOf(a.label)
+            const bPriority = DOCS_PRIORITY.indexOf(b.label)
+            if (aPriority !== -1 || bPriority !== -1) {
+                if (aPriority === -1) return 1
+                if (bPriority === -1) return -1
+                return aPriority - bPriority
+            }
+            return a.label.localeCompare(b.label, undefined, { sensitivity: 'base' })
+        })
+
     return items
 }
 
@@ -197,42 +214,15 @@ const mergedDocsMenu = (allProducts: any[]) => {
     return [...DocsItemsStart, ...itemsWithMobileDestinations, ...DocsItemsEnd]
 }
 
-// Process handbookSidebar into menu item structure
-const processHandbookSidebar = (items: any[], isRoot = true): any[] => {
-    return items
-        .filter((item, idx) => {
-            // Omit the first 'Handbook' item at the root level
-            if (isRoot && idx === 0 && item.name === 'Handbook') return false
-            return !!item.name
-        })
-        .map((item) => {
-            if (item.children) {
-                return {
-                    type: 'submenu' as const,
-                    label: item.name,
-                    ...(item.url ? { link: item.url } : {}),
-                    items: processHandbookSidebar(item.children, false),
-                }
-            }
-            // If no url and no children, mark as disabled (label-like)
-            if (!item.url && !item.children) {
-                return {
-                    type: 'item' as const,
-                    label: item.name,
-                    disabled: true,
-                }
-            }
-            return {
-                type: 'item' as const,
-                label: item.name,
-                ...(item.url ? { link: item.url } : {}),
-            }
-        })
-}
-
 // Build Products menu items
 const buildProductsMenuItems = (allProducts: any[]) => {
     const items: any[] = [
+        {
+            type: 'item',
+            label: 'PostHog Code',
+            link: '/code',
+            icon: <Icons.IconCoffee className="size-4 text-brown" />,
+        },
         {
             type: 'item',
             label: 'PostHog Web',
@@ -253,15 +243,24 @@ const buildProductsMenuItems = (allProducts: any[]) => {
         },
         {
             type: 'item',
-            label: 'PostHog Code',
-            link: '/code',
-            icon: <Icons.IconCoffee className="size-4 text-brown" />,
+            label: 'PostHog CLI',
+            link: '/docs/cli',
+            icon: <Icons.IconTerminal className="size-4 text-green" />,
         },
         {
             type: 'item',
             label: 'Context Warehouse',
             link: '/data-stack',
             icon: <Icons.IconDatabase className="size-4 text-blue" />,
+        },
+        {
+            type: 'separator',
+        },
+        {
+            type: 'item',
+            label: 'PostHog Research',
+            link: '/research',
+            icon: <Icons.IconBrain className="size-4 text-purple" />,
         },
         {
             type: 'separator',
@@ -287,19 +286,8 @@ const buildProductsMenuItems = (allProducts: any[]) => {
 }
 
 export function useMenuData(): MenuType[] {
-    const smallTeamsMenuItems = useSmallTeamsMenuItems()
     const allProducts = useProduct() as any[]
-    const {
-        animateClosingAllWindows,
-        windows,
-        setScreensaverPreviewActive,
-        isMobile,
-        websiteMode,
-        siteSettings,
-        updateSiteSettings,
-    } = useApp()
-    const { addToast } = useToast()
-    const posthog = usePostHog()
+    const { isMobile } = useAppSettings()
     const [hedgehogModeEnabled, setHedgehogModeEnabled] = useHedgehogMode()
 
     // Define main navigation items (excluding logo menu)
@@ -318,67 +306,13 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: 'Pricing calculator',
-                    link: '/pricing#calculator',
-                },
-                {
-                    type: 'item',
-                    label: 'Add-ons',
-                    link: '/pricing#addons',
-                },
-                {
-                    type: 'separator',
-                },
-                {
-                    type: 'item',
-                    label: 'PostHog for...',
-                    disabled: true,
-                },
-                {
-                    type: 'item',
-                    label: 'Founder stack',
-                    link: '/founder-stack',
-                },
-                {
-                    type: 'item',
-                    label: 'Startups',
-                    link: '/startups',
-                },
-                { type: 'separator' },
-                {
-                    type: 'item',
-                    label: 'Mildly interesting reads',
-                    disabled: true,
-                },
-                {
-                    type: 'item',
-                    label: 'Pricing philosophy',
-                    link: '/pricing#philosophy',
-                },
-                {
-                    type: 'item',
                     label: 'How we do "sales"',
                     link: '/sales',
                 },
                 {
                     type: 'item',
-                    label: 'Side project insurance',
-                    link: '/side-project-insurance',
-                },
-                {
-                    type: 'item',
-                    label: "You'll hate PostHog if...",
-                    link: '/vibe-check',
-                },
-                {
-                    type: 'item',
-                    label: "Don't get discount bamboozled",
-                    link: '/discounts',
-                },
-                {
-                    type: 'item',
-                    label: 'Social validation for enterprise',
-                    link: '/enterprise',
+                    label: 'Startups',
+                    link: '/startups',
                 },
                 { type: 'separator' },
                 {
@@ -407,9 +341,15 @@ export function useMenuData(): MenuType[] {
             items: [
                 {
                     type: 'item',
-                    label: 'PostHog newspaper',
-                    link: '/community',
+                    label: 'Newsletter',
+                    link: '/newsletter',
                     icon: <Icons.IconNewspaper className="size-4 text-orange" />,
+                },
+                {
+                    type: 'item',
+                    label: 'Blog',
+                    link: '/blog',
+                    icon: <Icons.IconPencil className="size-4 text-yellow" />,
                 },
                 {
                     type: 'item' as const,
@@ -441,39 +381,6 @@ export function useMenuData(): MenuType[] {
                     link: '/places',
                     icon: <Icons.IconMap className="size-4 text-red" />,
                 },
-                {
-                    type: 'separator',
-                },
-                {
-                    type: 'item',
-                    label: 'Content',
-                    disabled: true,
-                },
-                {
-                    type: 'item',
-                    label: 'Newsletter',
-                    link: '/newsletter',
-                },
-                {
-                    type: 'item',
-                    label: 'Blog',
-                    link: '/blog',
-                },
-                {
-                    type: 'item',
-                    label: 'Product Engineer Handbook',
-                    link: '/product-engineer',
-                },
-                {
-                    type: 'item',
-                    label: 'Product engineers hub',
-                    link: '/product-engineers',
-                },
-                {
-                    type: 'item',
-                    label: 'Founders hub',
-                    link: '/founders',
-                },
             ],
         },
         {
@@ -486,20 +393,13 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: 'customers.mdx',
+                    label: 'Customers',
                     link: '/customers',
                 },
                 {
                     type: 'item',
-                    label: 'Blog',
-                    link: '/blog',
-                },
-                {
-                    type: 'submenu',
                     label: 'Handbook',
                     link: '/handbook',
-                    items: processHandbookSidebar(handbookSidebar),
-                    mobileDestination: '/handbook',
                 },
                 {
                     type: 'item',
@@ -530,9 +430,9 @@ export function useMenuData(): MenuType[] {
                     link: '/people',
                 },
                 {
-                    type: 'submenu',
+                    type: 'item',
                     label: 'Small teams',
-                    items: smallTeamsMenuItems,
+                    link: '/small-teams',
                 },
                 {
                     type: 'item',
@@ -734,6 +634,16 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
+                    label: 'Display options',
+                    onClick: () => {
+                        navigate('/display-options', { state: { newWindow: true } })
+                    },
+                    icon: <Icons.IconBrightness className="size-4 text-yellow" />,
+                    shortcut: [','],
+                    mobileDestination: false, // Already exposed as a system item in the mobile logo menu
+                },
+                {
+                    type: 'item',
                     label: 'Keyboard shortcuts',
                     link: '/kbd',
                     icon: <Icons.IconKeyboard className="size-4 text-primary" />,
@@ -770,36 +680,6 @@ export function useMenuData(): MenuType[] {
             },
             shortcut: [','],
         },
-        ...(isMobile
-            ? []
-            : [
-                  {
-                      type: 'item' as const,
-                      label: websiteMode ? 'Switch to OS mode' : 'Switch to website mode',
-                      onClick: () => {
-                          const newExperience = websiteMode ? 'posthog' : 'boring'
-                          updateSiteSettings({ ...siteSettings, experience: newExperience })
-                          posthog?.capture('switched site mode', {
-                              value: newExperience === 'posthog' ? 'os' : 'website',
-                              source: 'menu',
-                          })
-                          addToast({
-                              title: `Switched to ${websiteMode ? 'OS mode' : 'website mode'}`,
-                              description: `${websiteMode ? 'Click' : 'Hover'} the logo to return to ${
-                                  websiteMode ? 'website mode' : 'OS mode'
-                              }.`,
-                              duration: 5000,
-                              onUndo: () => {
-                                  updateSiteSettings({
-                                      ...siteSettings,
-                                      experience: websiteMode ? 'posthog' : 'boring',
-                                  })
-                              },
-                          })
-                      },
-                      shortcut: ['Shift', 'M'],
-                  },
-              ]),
     ]
 
     // Process main nav items for mobile menu
@@ -894,30 +774,13 @@ export function useMenuData(): MenuType[] {
               ...baseLogoMenuItems,
           ]
         : [
+              {
+                  type: 'item' as const,
+                  label: 'Home',
+                  link: '/',
+              },
               // Desktop: only show system items
               ...baseLogoMenuItems,
-              ...(!websiteMode
-                  ? [
-                        { type: 'separator' as const },
-                        {
-                            type: 'item' as const,
-                            label: 'Start screensaver',
-                            onClick: () => {
-                                setScreensaverPreviewActive(true)
-                            },
-                            shortcut: ['Shift', 'Z'],
-                        },
-                        {
-                            type: 'item' as const,
-                            label: 'Close all windows',
-                            disabled: windows.length < 1,
-                            onClick: () => {
-                                animateClosingAllWindows()
-                            },
-                            shortcut: ['Shift', 'X'],
-                        },
-                    ]
-                  : []),
           ]
 
     return [
@@ -926,22 +789,18 @@ export function useMenuData(): MenuType[] {
                 <>
                     <div className="flex items-center">
                         <Logo
-                            noText
-                            className={`2xs:hidden md:block ${websiteMode ? 'size-10' : 'size-8 md:size-6'}`}
-                            fill="primary"
-                            classic
+                            wordmark={false}
+                            variant="mono"
+                            color="primary"
+                            className="2xs:hidden md:block size-8 md:size-6"
                         />
-                        <Logo
-                            className={`hidden 2xs:flex md:hidden w-auto ${websiteMode ? 'h-7' : ' h-5'} `}
-                            fill="primary"
-                            classic
-                        />
+                        <Logo variant="mono" color="primary" className="hidden 2xs:flex md:hidden w-auto h-5" />
                         <IconChevronDown className="size-6 inline-block md:hidden text-muted" />
                     </div>
                 </>
             ),
             items: logoMenuItems,
-            mobileLink: websiteMode ? '/' : undefined,
+            mobileLink: undefined,
             hideChevron: true,
         },
         // On desktop, show main navigation items
@@ -968,18 +827,6 @@ export const DocsItemsEnd = [
         label: 'Tutorials',
         link: '/tutorials',
         icon: <Icons.IconBook className="size-4 text-purple" />,
-    },
-    {
-        type: 'item' as const,
-        label: 'Dashboard templates',
-        link: '/templates',
-        icon: <Icons.IconDashboard className="size-4 text-blue" />,
-    },
-    {
-        type: 'item' as const,
-        label: 'Tracks',
-        link: '/tracks',
-        icon: <Icons.IconGraduationCap className="size-4 text-black" />,
     },
 ]
 
@@ -1071,11 +918,11 @@ export function useMenuSelectOptions() {
     // Build the select groups
     const selectGroups = [
         {
-            label: 'Product OS',
+            label: 'Context warehouse',
             items: [
                 {
                     value: 'products',
-                    label: 'Product OS',
+                    label: 'Context warehouse',
                     icon: <Icons.IconApps className="size-4 text-red" />,
                 },
             ],
@@ -1084,9 +931,7 @@ export function useMenuSelectOptions() {
             label: 'Pricing',
             items: [
                 { value: 'pricing', label: 'Plans & usage-based pricing' },
-                { value: 'pricing#calculator', label: 'Pricing calculator' },
-                { value: 'pricing#addons', label: 'Add-ons' },
-                { value: 'founder-stack', label: 'Founder stack' },
+                { value: 'sales', label: 'How we do "sales"' },
                 { value: 'startups', label: 'Startups' },
             ],
         },
@@ -1096,11 +941,7 @@ export function useMenuSelectOptions() {
         },
         {
             label: 'Library',
-            items: [
-                { value: 'blog', label: 'Blog' },
-                { value: 'product-engineers', label: 'Product engineers hub' },
-                { value: 'founders', label: 'Founders hub' },
-            ],
+            items: [{ value: 'blog', label: 'Blog' }],
         },
         {
             label: 'Company',
