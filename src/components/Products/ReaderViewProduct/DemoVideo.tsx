@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import WistiaCustomPlayer from 'components/WistiaCustomPlayer'
 import { IconPlayFilled } from '@posthog/icons'
+import type { GlowColor } from 'components/Glow'
 
 export interface DemoVideoHighlight {
     title: string
@@ -17,6 +18,8 @@ interface DemoVideoProps {
     highlights?: DemoVideoHighlight[]
     chapters?: DemoVideoChapter[]
     className?: string
+    /** Matches the product hero glow color. Defaults to red when omitted. */
+    glow?: GlowColor
 }
 
 const formatTime = (seconds: number): string => {
@@ -25,7 +28,7 @@ const formatTime = (seconds: number): string => {
     return `${mins}:${secs.toString().padStart(2, '0')}`
 }
 
-export default function DemoVideo({ wistia, highlights, chapters, className = '' }: DemoVideoProps) {
+export default function DemoVideo({ wistia, highlights, chapters, className = '', glow = 'red' }: DemoVideoProps) {
     const playerRef = useRef<any>(null)
     const containerRef = useRef<HTMLDivElement>(null)
     const [wistiaChapters, setWistiaChapters] = useState<DemoVideoChapter[]>([])
@@ -61,7 +64,7 @@ export default function DemoVideo({ wistia, highlights, chapters, className = ''
         <div ref={containerRef} className={`@container scroll-mt-20 ${className}`}>
             <div className="flex flex-col @5xl:gap-8 @5xl:flex-row">
                 <div className="rounded flex-1 w-full">
-                    <WistiaCustomPlayer mediaId={wistia} glow="red" ref={playerRef} onTimeUpdate={setCurrentTime} />
+                    <WistiaCustomPlayer mediaId={wistia} glow={glow} ref={playerRef} onTimeUpdate={setCurrentTime} />
                 </div>
 
                 {hasSidebar && (

@@ -9,11 +9,14 @@ import {
     IconPieChart,
     IconCheckCircle,
     IconPeople,
+    IconInfo,
     IconPlay,
     IconCursorClick,
+    IconMagic,
     IconChat,
     IconCode,
     IconMap,
+    IconMessage,
     IconNewspaper,
     IconShieldPeople,
 } from '@posthog/icons'
@@ -28,10 +31,14 @@ export const productAnalytics = {
     type: 'product_analytics',
     slug: 'product-analytics',
     teamSlug: 'product-analytics',
+    forumTopicId: 349,
     color: 'blue',
     colorSecondary: 'sky-blue',
     category: 'analytics',
     wizardSupport: true,
+    shortDescription: 'Understand how people use your product',
+    pricingDescription:
+        'Product analytics is billed on events captured – pageviews, clicks, custom events, and everything autocapture picks up. You get 1 million events free every month.',
     seo: {
         title: 'Product Analytics – Understand your product with PostHog',
         description:
@@ -54,22 +61,20 @@ export const productAnalytics = {
             group: 'divided',
             icon: <IconPeople className="size-4" />,
         },
-        // TODO: needs overview.eli5 copy before this section can render
-        // {
-        //     slug: 'eli5',
-        //     name: 'What does it do?',
-        //     hideFromNav: true,
-        //     group: 'divided',
-        //     icon: <IconInfo className="size-4" />,
-        // },
-        // TODO: needs useCases copy before this section can render
-        // {
-        //     slug: 'use-cases',
-        //     name: 'Who is it for?',
-        //     hideFromNav: true,
-        //     group: 'divided',
-        //     icon: <IconMagic className="size-4" />,
-        // },
+        {
+            slug: 'eli5',
+            name: 'What does it do?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconInfo className="size-4" />,
+        },
+        {
+            slug: 'use-cases',
+            name: 'Who is it for?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconMagic className="size-4" />,
+        },
         { slug: 'demo', name: 'Demo', group: 'divided', icon: <IconPlay className="size-4" /> },
         {
             slug: 'applications',
@@ -94,8 +99,7 @@ export const productAnalytics = {
         { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
         { slug: 'roadmap', name: 'Roadmap', group: 'divided', icon: <IconMap className="size-4" /> },
         { slug: 'changelog', name: 'Changelog', group: 'divided', icon: <IconNewspaper className="size-4" /> },
-        // TODO: needs forumTopicId before this section can render
-        // { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
+        { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
         { slug: 'team', name: 'Team', group: 'divided', icon: <IconShieldPeople className="size-4" /> },
         {
             slug: 'installation',
@@ -121,7 +125,7 @@ export const productAnalytics = {
         title: 'Product analytics with autocapture',
         description:
             'Product Analytics is one of the tools that makes your product self-driving: the measurement agents use to see what works. Built to natively work with session replay, feature flags, experiments, and surveys.',
-        // TODO: needs eli5 copy (see session_replay overview.eli5 for shape)
+        eli5: "Product Analytics turns what people do in your product into answers you can act on. Autocapture tracks pageviews, clicks, and form submissions without extra code. From there you build trends, funnels, retention curves, paths, and SQL queries – then jump straight into the session recordings behind any data point when you need the 'why'.",
         textColor: 'text-white', // tw
     },
     screenshots: {
@@ -190,7 +194,10 @@ export const productAnalytics = {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1/posthog.com/src/components/Product/hogs/product-analytics-hog.png',
             alt: 'A hedgehog presenting some shocking findings',
         },
-        // TODO: needs mobileHog asset for the eli5 section (see session_replay hogs.mobileHog)
+        mobileHog: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/PRODUCT_ANALYTICS_hog_23b2808c18.png',
+            alt: 'A hedgehog presenting product analytics findings',
+        },
     },
     slider: {
         marks: [0, MILLION, TEN_MILLION, FIFTY_MILLION, MAX_PRODUCT_ANALYTICS],
@@ -217,7 +224,22 @@ export const productAnalytics = {
             description: '...top-to-bottom view of conversion rates and user paths, without... extra setup time.',
         },
     },
-    // TODO: needs useCases copy (see session_replay.useCases for shape: { intro, rows: [role, useCase][] })
+    useCases: {
+        intro: 'Product Analytics is used across teams depending on your role.',
+        rows: [
+            [
+                'Product Engineers',
+                'Check whether what you shipped is being used – and fix drop-off before the next release',
+            ],
+            [
+                'Product Managers',
+                'Dig into funnels, retention, and paths to guide roadmap decisions with real usage data',
+            ],
+            ['Growth', 'Find conversion leaks, measure experiments, and track activation end to end'],
+            ['Leadership', 'Monitor KPIs on a shared dashboard without waiting on a data team'],
+            ['Support & Success', 'Pull the events behind a customer report and jump into the matching session replay'],
+        ],
+    },
     features,
     mcp: {
         title: 'MCP',
@@ -228,7 +250,8 @@ export const productAnalytics = {
     installation: {
         title: 'Install',
         headline: 'Install',
-        // TODO: needs installation.description copy (see session_replay.installation.description)
+        description:
+            'Autocapture works out of the box on web. Add an SDK for mobile or backend when you need custom events.',
         productSlug: 'product-analytics',
         categories: ['web', 'mobile', 'backend-languages', 'backend-frameworks'],
     },
@@ -395,24 +418,55 @@ export const productAnalytics = {
     ai: {
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/PRODUCT_ANALYTICS_hog_23b2808c18.png',
         imageAlt: 'PostHog AI and product analytics',
-        // TODO: needs intro copy (see session_replay.ai.intro for shape)
-        mcpFeatures: ['product_analytics', 'insights'],
-        // Existing flat prompts parked in one group so the section can render.
-        // Needs proper grouped prompts (and more of them) — see session_replay.ai.groups.
-        // Also available from the old slide when rewriting:
-        //   description: 'answer product questions and ship the fix'
-        //   skills: [
-        //     'Builds dashboards and insights based on what you want visualized',
-        //     'Edits filters, sets breakdowns, builds retention curves (and more) with simple prompts',
-        //     "Writes and edits SQL queries (and debugs them if they don't work)",
-        //   ]
+        intro: 'Ask PostHog AI to answer product questions, build insights, and write SQL. Works in PostHog AI (in-app chat), PostHog Code (our AI code editor), and in your product editor (using the MCP).',
+        mcpFeatures: ['product_analytics', 'insights', 'sql', 'dashboards'],
         groups: [
             {
-                title: 'Example prompts',
+                title: 'Trends & usage',
+                tool: 'query-trends',
                 prompts: [
                     "What's our most popular feature?",
+                    'Show daily active users for the last 30 days, broken down by plan',
+                    'Why did sign-ups drop 12% last Tuesday?',
+                    'Which features do my power users engage with most?',
+                ],
+            },
+            {
+                title: 'Funnels',
+                tool: 'query-funnel',
+                prompts: [
+                    'Build a funnel from landing page to paid conversion, broken down by marketing source',
                     'Which events have the highest drop-off rate in the past 7 days?',
+                    'Where do users drop off between signup and project_created?',
+                    'Show me people who reached checkout but never purchased',
+                ],
+            },
+            {
+                title: 'Retention',
+                tool: 'query-retention',
+                prompts: [
                     'Build a retention curve to track user retention over time',
+                    "Show weekly retention for users who completed onboarding vs those who didn't",
+                    'Which features correlate with higher day-7 retention?',
+                    "What's our churn rate for users who signed up last month?",
+                ],
+            },
+            {
+                title: 'Build & save',
+                tool: 'insight-create',
+                prompts: [
+                    'Create a trend showing daily active users broken down by plan, then save it to a dashboard',
+                    'Build a dashboard for onboarding activation metrics',
+                    'Save a funnel from signup to paid as an insight named Activation',
+                ],
+            },
+            {
+                title: 'SQL',
+                tool: 'execute-sql',
+                prompts: [
+                    'Write HogQL for unique users who triggered signup_completed but not project_created',
+                    'Query the top 10 events by volume this week',
+                    'Join person properties with event data to list enterprise accounts that churned',
                 ],
             },
         ],

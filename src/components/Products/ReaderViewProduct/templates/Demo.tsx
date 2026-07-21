@@ -1,5 +1,6 @@
 import React from 'react'
 import DemoVideo from '../DemoVideo'
+import type { GlowColor } from 'components/Glow'
 import { SectionComponentProps } from '../types'
 
 const Demo = ({ id, productData }: SectionComponentProps) => {
@@ -17,6 +18,7 @@ const Demo = ({ id, productData }: SectionComponentProps) => {
                 wistia={wistia}
                 highlights={productData?.videos?.overview?.highlights}
                 chapters={productData?.videos?.overview?.chapters}
+                glow={productData?.color as GlowColor | undefined}
                 className="mt-6"
             />
         </section>

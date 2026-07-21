@@ -1539,9 +1539,6 @@ const appSettings: AppSettings = {
     '/trash': {
         toolbar: true,
     },
-    '/product-analytics': {
-        toolbar: true,
-    },
     '/web-analytics': {
         toolbar: true,
     },
