@@ -17,13 +17,13 @@ Evaluations automatically assess the quality of your LLM [generations](/docs/ai-
 
 ## Choosing an evaluation type
 
-|                 | LLM-as-a-judge                                               | Code-based (Hog)                                           | Sentiment analysis                                       |
-| --------------- | ------------------------------------------------------------ | ---------------------------------------------------------- | -------------------------------------------------------- |
-| **Best for**    | Subjective quality checks (tone, helpfulness, hallucination) | Deterministic rule-based checks (format, keywords, length) | Tracking how users feel during conversations             |
-| **Cost**        | LLM API call per evaluation                                  | Free                                                       | Free                                                     |
-| **Speed**       | Seconds                                                      | Milliseconds                                               | Milliseconds                                             |
-| **Output**      | Pass/fail with reasoning                                     | Pass/fail with reasoning                                   | Positive, neutral, or negative with a confidence score   |
-| **Setup**       | Write a prompt                                               | Write Hog code                                             | Pick the type – no prompt or code required               |
+|              | LLM-as-a-judge                                               | Code-based (Hog)                                           | Sentiment analysis                                     |
+| ------------ | ------------------------------------------------------------ | ---------------------------------------------------------- | ------------------------------------------------------ |
+| **Best for** | Subjective quality checks (tone, helpfulness, hallucination) | Deterministic rule-based checks (format, keywords, length) | Tracking how users feel during conversations           |
+| **Cost**     | LLM API call per evaluation                                  | Free                                                       | Free                                                   |
+| **Speed**    | Seconds                                                      | Milliseconds                                               | Milliseconds                                           |
+| **Output**   | Pass/fail with reasoning                                     | Pass/fail with reasoning                                   | Positive, neutral, or negative with a confidence score |
+| **Setup**    | Write a prompt                                               | Write Hog code                                             | Pick the type – no prompt or code required             |
 
 ## LLM-as-a-judge evaluations
 
@@ -327,6 +327,8 @@ You can also filter generations by evaluation results or create [insights](/docs
 
 When you create an evaluation, PostHog automatically provisions a default report configuration. Reports summarize evaluation results over time, so you can track quality trends without any additional setup.
 
+Reports are available for **boolean evaluations** (LLM-as-a-judge and code-based) and **sentiment analysis evaluations** that target generations. Evaluations targeting traces don't support reports.
+
 ### Default report configuration
 
 The auto-created report uses these defaults:
@@ -341,6 +343,13 @@ The auto-created report uses these defaults:
 | **Delivery targets**  | None          | Reports are viewable in the UI but no notifications are sent |
 
 Reports are viewable directly in the evaluation's **Reports** tab without configuring any delivery targets.
+
+### Report metrics by evaluation type
+
+Reports display different metrics depending on your evaluation's output type:
+
+- **Boolean evaluations** (LLM-as-a-judge and code-based) – Pass rate, pass/fail/N/A counts, total runs, and comparison to the previous reporting period
+- **Sentiment analysis evaluations** – Positive, neutral, and negative counts with distribution percentages, total runs, and comparison to the previous reporting period
 
 ### Customizing reports
 
@@ -363,10 +372,10 @@ Each evaluation has a status that indicates whether it's running:
 
 PostHog automatically disables evaluations and sets them to error status when:
 
-| Error reason                        | Cause                                                     | How to resolve                                                                                                                                   |
-| ----------------------------------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **No provider API key configured**  | The evaluation has no provider API key to run with.       | Add a provider API key in [**Settings** > **AI Observability**](https://app.posthog.com/settings/environment-ai-observability#ai-observability-byok).     |
-| **Provider key deleted**            | The provider API key used by this evaluation was removed. | Add a new provider API key in [**Settings** > **AI Observability**](https://app.posthog.com/settings/environment-ai-observability#ai-observability-byok). |
+| Error reason                       | Cause                                                     | How to resolve                                                                                                                                            |
+| ---------------------------------- | --------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **No provider API key configured** | The evaluation has no provider API key to run with.       | Add a provider API key in [**Settings** > **AI Observability**](https://app.posthog.com/settings/environment-ai-observability#ai-observability-byok).     |
+| **Provider key deleted**           | The provider API key used by this evaluation was removed. | Add a new provider API key in [**Settings** > **AI Observability**](https://app.posthog.com/settings/environment-ai-observability#ai-observability-byok). |
 
 ### Identifying errored evaluations
 

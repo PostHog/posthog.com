@@ -1,0 +1,112 @@
+---
+title: Log patterns
+---
+
+Log patterns automatically group similar log lines into templates, so you can see the shape of your log traffic at a glance instead of scrolling through thousands of individual lines.
+
+Pattern mining reads your log messages, masks variable parts (IDs, numbers, IP addresses), and clusters the results into templates. Each template represents a family of log lines that share the same structure but differ in their variable content.
+
+For example, these three log lines:
+
+```
+User abc123 not found
+User def456 not found
+User ghi789 not found
+```
+
+Become a single pattern:
+
+```
+User <*> not found
+```
+
+This makes it easy to spot noisy log lines, new error shapes, and unexpected changes in your log traffic.
+
+## Access the Patterns view
+
+Go to the [Logs page](https://app.posthog.com/logs) and switch to the **Patterns** tab. The view uses whatever date range, service, and severity filters you already have applied.
+
+## What the Patterns table shows
+
+Each row in the table represents a mined pattern:
+
+| Column        | Description                                                                                                                                                                                      |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Level**     | The dominant severity across the pattern's sample (e.g. `error`, `warn`, `info`). When multiple severities appear, the one with the highest count wins; ties break toward the more severe level. |
+| **Pattern**   | The template text. Variable parts are replaced with placeholder tokens (see below).                                                                                                              |
+| **Trend**     | A sparkline showing the pattern's volume over the selected time range.                                                                                                                           |
+| **Count**     | Estimated total occurrences across the full time window. Hover to see the underlying sample count.                                                                                               |
+| **Share**     | The pattern's percentage of total log volume.                                                                                                                                                    |
+| **Errors**    | Estimated error-level occurrences.                                                                                                                                                               |
+| **Services**  | The services that emitted lines matching this pattern.                                                                                                                                           |
+| **Last seen** | Timestamp of the most recent matching line.                                                                                                                                                      |
+
+### Placeholder tokens
+
+The miner replaces variable content with typed placeholders:
+
+| Token    | Matches                     |
+| -------- | --------------------------- |
+| `<*>`    | Any text (general wildcard) |
+| `<num>`  | Numeric values              |
+| `<uuid>` | UUIDs                       |
+| `<ip>`   | IP addresses                |
+| `<hex>`  | Hexadecimal values          |
+
+Placeholders are highlighted in the table so you can distinguish them from literal text.
+
+### Expand a pattern row
+
+Click any row to expand it and see:
+
+- The full pattern template
+- First and last seen timestamps
+- The services that emitted it
+- Sample log lines (whitespace-collapsed and truncated as mined)
+
+## View matching logs
+
+When you expand a pattern row, a **View matching logs** button appears. Click it to pivot from the pattern to the Logs view, filtered to show the actual log lines that match the pattern.
+
+The pivot:
+
+- Adds a visible message filter to the filter bar — the same kind you'd add manually, so you can inspect, edit, or remove it
+- Switches from the Patterns tab to the Logs tab
+- Preserves your existing date range, service, and severity filters so the pivot stays within your investigation context
+
+### Regex and literal matching
+
+Each pattern carries a validated regex (`match_regex`) compiled from its template. The regex is RE2-safe (no lookaround or backreferences) and runs in ClickHouse via the existing `matches regex` message filter.
+
+Before shipping, the regex is validated against every stored example for the pattern. If any example fails to match, the regex is withheld and the pivot falls back to a plain-text `contains` filter using the pattern's longest literal run (`match_literal`).
+
+The **View matching logs** button tooltip tells you which mode is active:
+
+- **Regex mode** — "Open the Logs view filtered to lines matching this pattern"
+- **Literal fallback** — "Open the Logs view filtered to lines containing this pattern's literal text (pattern match unavailable)"
+
+### Automatic service and severity scoping
+
+When a pattern's sample is unambiguous — a single service or a single canonical severity — the pivot also sets the corresponding service and severity filters. These appear as visible filter chips you can remove if the pattern exists beyond what the sample captured.
+
+Scoping is withheld when it could silently exclude matching lines, such as when the services list is at the miner's cap (possibly truncated) or the severity is non-canonical.
+
+## Sampling
+
+When your log volume is large, patterns are mined from a representative sample rather than every line. A banner at the top of the Patterns view explains:
+
+- How many lines were sampled out of the total matching your filters
+- What percentage of the time window the sample covers
+- That counts are estimates extrapolated to the full window
+
+Hover any count to see the raw sample figure the estimate was derived from. Estimated counts are prefixed with `~` to indicate they're extrapolations.
+
+To improve accuracy, narrow your filters — a specific service, a severity level, or a shorter time range reduces the total volume and increases sample coverage.
+
+## Tips
+
+- **Start broad, then narrow.** Open Patterns with a wide time range to discover the dominant templates in your traffic, then narrow filters to focus on a specific service or severity.
+- **Use the pivot to investigate.** Spot an interesting pattern (a new error shape, a sudden volume spike) and click **View matching logs** to see the full log lines with all their attributes and trace context.
+- **Remove pivot filters when done.** The message filter added by the pivot is a normal filter chip — remove it from the filter bar when you're finished investigating to return to an unfiltered view.
+- **Watch the error column.** Sort by **Errors** to surface the noisiest error patterns. High-volume error patterns are candidates for fixing or suppressing at the source.
+- **Combine with alerts.** After identifying a pattern worth monitoring, use the regex or literal string from the pivot filter to create a [log alert](/docs/logs/alerts) for ongoing monitoring.

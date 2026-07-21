@@ -108,7 +108,7 @@ export default function MediaLibrary() {
     }, [onDrop, addToast])
 
     return isModerator ? (
-        <div {...getRootProps()} className="size-full outline-none">
+        <div {...getRootProps()} className="size-full outline-none border-t border-primary">
             <input {...getInputProps()} />
             <ScrollArea className="w-full" dataScheme="primary" viewportClasses="bg-primary">
                 <div data-scheme="primary" className="bg-primary text-primary size-full">

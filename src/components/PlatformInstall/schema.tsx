@@ -50,6 +50,8 @@ export type Platform = PlatformOption & {
 
 export type InstallSchema = {
     title: string
+    /** Optional direct info link shown beside the title */
+    titleInfoAction?: { label: string; to: string; state?: Record<string, unknown> }
     /** Optional (?) tooltip shown next to the title */
     titleTooltip?: React.ReactNode
     /** Header link on the right (replaces the old hardcoded "Learn more") */

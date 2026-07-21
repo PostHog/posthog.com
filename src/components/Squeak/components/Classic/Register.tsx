@@ -127,7 +127,7 @@ const RegisterForm: React.FC = () => {
                     </div>
                 }
             >
-                <div className="bg-accent flex gap-6 px-8 py-6 flex-1">
+                <div className="bg-accent flex gap-6 px-8 py-6 flex-1 pt-10">
                     <div className="max-w-20">
                         <img src={SecurityHog} className="w-20" />
                     </div>
