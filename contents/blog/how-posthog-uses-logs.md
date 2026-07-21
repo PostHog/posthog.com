@@ -90,7 +90,7 @@ Jon rarely starts by staring at log lines and hoping for enlightenment (at least
     classes="rounded"
 />
 
-Once something stands out, he digs into the details. Because logs are ingested as structured data, whether they come from OpenTelemetry or PostHog’s own SDKs, the metadata isn’t just there for reference. A trace ID or request ID becomes the fastest way to reframe the investigation. 
+Once something stands out, he digs into the details. Because logs are ingested as structured data, whether they come from OpenTelemetry or PostHog’s own SDKs, the metadata isn’t just there for reference. [A trace ID](/blog/traces-beta#debugging-with-posthog) or request ID becomes the fastest way to reframe the investigation. 
 
 If he needs a quick reality check, Jon lets PostHog explain what the error is trying (and failing) to do, in human language. And when things are actively on fire, Live Tail is there to stream logs in real time. He says: 
 

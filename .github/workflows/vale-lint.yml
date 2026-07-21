@@ -48,7 +48,7 @@ jobs:
                   fi
 
             - name: Checkout code
-              uses: actions/checkout@v6
+              uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
               with:
                   fetch-depth: 0
                   ref: ${{ steps.pr-info.outputs.head_sha }}
@@ -63,8 +63,10 @@ jobs:
 
             - name: Run Vale on changed files
               id: vale
+              env:
+                  PR_INFO_BASE_REF: ${{ steps.pr-info.outputs.base_ref }}
               run: |
-                  FILES=$(git diff --name-only --diff-filter=ACMR origin/${{ steps.pr-info.outputs.base_ref }}...HEAD -- '*.md' '*.mdx')
+                  FILES=$(git diff --name-only --diff-filter=ACMR "origin/$PR_INFO_BASE_REF...HEAD" -- '*.md' '*.mdx')
                   if [ -z "$FILES" ]; then
                     echo "No markdown files changed, skipping Vale"
                     echo "has_findings=false" >> "$GITHUB_OUTPUT"
@@ -102,11 +104,11 @@ jobs:
 
                   # --- PR comment: header + collapsible per-file tables ---
                   {
-                    echo "[Vale prose linter →](https://posthog.com/handbook/docs-and-wizard/vale) found ${ERRORS} errors, ${WARNINGS} warnings, ${SUGGESTIONS} suggestions in your markdown"
+                    echo "[Vale prose linter →](https://posthog.com/handbook/wizard-and-docs/vale) found ${ERRORS} errors, ${WARNINGS} warnings, ${SUGGESTIONS} suggestions in your markdown"
                     echo ""
                     echo "[Full report →](${JOB_SUMMARY_URL}) Copy the linter results into an LLM to batch-fix issues."
                     echo ""
-                    echo "Linter being weird? Update the [rules](https://posthog.com/handbook/docs-and-wizard/vale)!"
+                    echo "Linter being weird? Update the [rules](https://posthog.com/handbook/wizard-and-docs/vale)!"
                     echo ""
                   } > vale-comment.md
 
@@ -141,7 +143,7 @@ jobs:
                   COMMENT_SIZE=$(wc -c < vale-comment.md)
                   if [ "$COMMENT_SIZE" -gt 60000 ]; then
                     {
-                      echo "**[Vale prose linter →](https://posthog.com/handbook/docs-and-wizard/vale) found ${ERRORS} errors, ${WARNINGS} warnings, ${SUGGESTIONS} suggestions in your markdown**"
+                      echo "**[Vale prose linter →](https://posthog.com/handbook/wizard-and-docs/vale) found ${ERRORS} errors, ${WARNINGS} warnings, ${SUGGESTIONS} suggestions in your markdown**"
                       echo ""
                       echo "[Full report →](${JOB_SUMMARY_URL})  ·  Copy the Job Summary code block into an LLM to batch-fix issues."
                       echo ""
@@ -162,7 +164,7 @@ jobs:
 
                   # --- Job Summary: expanded per-file tables + LLM-ready code block ---
                   {
-                    echo "[Vale prose linter →](https://posthog.com/handbook/docs-and-wizard/vale) found ${ERRORS} errors, ${WARNINGS} warnings, ${SUGGESTIONS} suggestions in your markdown"
+                    echo "[Vale prose linter →](https://posthog.com/handbook/wizard-and-docs/vale) found ${ERRORS} errors, ${WARNINGS} warnings, ${SUGGESTIONS} suggestions in your markdown"
                     echo ""
                   } >> "$GITHUB_STEP_SUMMARY"
 
@@ -201,7 +203,7 @@ jobs:
 
             - name: Upsert PR comment
               if: ${{ !cancelled() }}
-              uses: actions/github-script@v7
+              uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
               env:
                   PR_NUMBER: ${{ steps.pr-info.outputs.pr_number }}
                   HAS_FINDINGS: ${{ steps.vale.outputs.has_findings }}

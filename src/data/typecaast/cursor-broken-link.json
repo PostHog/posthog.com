@@ -1,0 +1,63 @@
+{
+    "version": 1,
+    "meta": {
+        "canvas": {
+            "width": 480,
+            "height": 640
+        },
+        "skin": {
+            "id": "cursor",
+            "options": {
+                "channel": "#papercuts"
+            }
+        },
+        "composer": "always"
+    },
+    "participants": [
+        {
+            "id": "cory",
+            "name": "Cory Watilo",
+            "avatar": "https://res.cloudinary.com/dmukukwp6/image/upload/avatar_cory_1a344a0625.jpg",
+            "isSelf": true
+        },
+        {
+            "id": "posthog-bot",
+            "name": "PostHog",
+            "kind": "app",
+            "avatar": "https://res.cloudinary.com/dmukukwp6/image/upload/avatar_posthog_f85279a2ad.png"
+        }
+    ],
+    "timeline": [
+        {
+            "type": "message",
+            "from": "cory",
+            "text": "there's a link on https://posthog.com/handbook/brand/tone that points to localhost. ask PostHog to fix this.",
+            "id": "m1"
+        },
+        {
+            "type": "delay",
+            "duration": 1400
+        },
+        {
+            "type": "message",
+            "from": "posthog-bot",
+            "text": "Found it. Line 7 has `http://localhost:8002/handbook/content/posthog-style-guide`. Let me verify the target exists and fix it.",
+            "instant": true
+        },
+        {
+            "type": "delay",
+            "duration": 2000
+        },
+        {
+            "type": "message",
+            "from": "posthog-bot",
+            "text": "Pull request opened – I changed it to the relative `/handbook/content/posthog-style-guide`.",
+            "instant": true
+        }
+    ],
+    "pacing": {
+        "humanize": 0.45,
+        "readingWpm": 250,
+        "typingCps": 30
+    }
+}

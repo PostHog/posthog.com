@@ -16,16 +16,36 @@ For information about security advisories and CVEs, see our [advisories & CVEs p
 
 ## Multi-factor authentication 
 
-We enforce the use of hardware security keys wherever we can. Every team members gets two of these, most commonly:
+All team members are required to enable multi-factor authentication (MFA) on their accounts. **Passkeys are the preferred method** for securing all accounts — they are phishing-resistant, easy to use, and supported by most major services including Google Workspace, GitHub, 1Password, and macOS.
 
-- One [YubiKey 5C Nano](https://www.yubico.com/gb/product/yubikey-5-series/yubikey-5c-nano/) for use with the work computer (can be left plugged in most of the time)
-- One [YubiKey 5C NFC](https://www.yubico.com/gb/product/yubikey-5-series/yubikey-5c-nfc/) (or [YubiKey 5Ci](https://www.yubico.com/gb/product/yubikey-5-series/yubikey-5ci/) to be on the safe side, if you have an older iPhone model) for use with mobile devices, and as backup
+Please set up passkeys for Google Workspace and GitHub at the very least. If you are new, please do this within your first week so you don't get locked out.
 
-Please enable security keys for Google Workspace, MacOS, AWS, 1Password (or whatever password manager you use) and GitHub at the very least. You can also use the Yubikeys to protect personal accounts. If you are new, please do this within your first month so you don't get locked out.
+It is recommended to have most passkeys saved in 1Password itself, which will allow you to use them from your phone.
 
-Google recently changed its settings for 2FA and Yubikeys and you may struggle to link your Yubikeys to your Google account. Go [here to find out about the change](https://joshua.hu/enrolling-hardware-keys-2fa-google-workspace) or use this direct link to head [straight to this page where](https://myaccount.google.com/signinoptions/two-step-verification?flow=sk&opendialog=addsk) you can register your Yubikeys. 
+### Yubikeys
 
-> **YubiKey tip:** Avoid spamming OTPs if you accidentally touch your YubiKey by installing the [YubiKey Manager](https://www.yubico.com/support/download/yubikey-manager/) or by running `brew install ykman && ykman config usb --disable OTP`
+We previously required all employees to purchase and configure two Yubikeys. These have been replaced with passkeys, and Yubikeys are no longer required nor recommended.
+
+## Mobile device management (MDM)
+
+We use [Fleet](https://fleetdm.com/) to manage all of our laptops. It applies targeted policies that raise the security baseline of every device, including:
+
+- minimum password length
+- screen lock
+- auto-install of software updates
+- auto-provisioning of software like 1Password
+- absence of static SSH keys on the filesystem
+
+We also use Fleet to investigate supply chain attacks, for example to see whether any laptops have been exposed to a malicious package or browser extension.
+
+We chose Fleet because they are open source and a [transparent](https://fleetdm.com/better) company. In the same spirit, all of the policies we provision are stored in git at <PrivateLink url="https://github.com/PostHog/fleet-gitops">PostHog/fleet-gitops</PrivateLink>. Any employee can see the same data our security team sees by clicking the Fleet icon in the macOS menu bar and choosing "My device".
+
+Fleet does not see:
+
+- your screen
+- your messages or photos
+- what you type
+- which URLs you visit
 
 ## SOC 2
 import SOC2 from './_snippets/soc2.mdx'
@@ -104,3 +124,7 @@ To provide a great customer experience, PostHog employees may occasionally need 
 
 4. **Use good judgment.**  
    If you’re unsure whether impersonation is justified, or if a customer might object, either seek their consent or find another way to get the information (for example, by checking our internal PostHog instance).
+
+### Impersonating users via MCP
+
+The same rules apply when you connect the PostHog MCP server while logged in as a customer. Treat the OAuth connection and every MCP tool call as actions taken while impersonating them. Use read-only mode unless the customer has explicitly agreed to changes, only authorize the organization and project you need, and log out when you're finished. See [handling customer issues](/handbook/cs-and-onboarding/handling-customer-issues#using-the-mcp-server-while-impersonating) for the steps.

@@ -1,0 +1,31 @@
+---
+title: Use Support in Slack
+sidebar: Docs
+showTitle: true
+---
+
+<CalloutBox icon="IconFlask" title="Open beta" type="action">
+
+The `@PostHog` Slack app is in beta, so some behaviors may still change.
+
+</CalloutBox>
+
+Mention `@PostHog` in any Slack channel to query your support data and the [Self-driving](/docs/self-driving) work it generates. This is Slack as a surface and lets you do work by chatting with an agent in Slack. It's separate from [SupportHog](/docs/support/slack), which is Slack as a channel that turns messages into tickets.
+
+This page covers using `@PostHog` for support. For everything the app can do across the rest of PostHog, see the [Slack app docs](/docs/slack).
+
+## What you can do
+
+Mention `@PostHog` and it works in the thread:
+
+- Ask about your support data, like `summarize my open tickets` or `what's the oldest unresolved one?`
+- Review the [Self-driving reports](/docs/self-driving/reports) built from your conversations, and approve, steer, or decline them.
+- Ask it to plan a fix. It runs checks and opens a draft pull request, replying in-thread as it goes.
+
+## Why Slack
+
+A few things make Slack useful for a support team:
+
+- **Context** – When you `@PostHog` in a Slack thread, the agent sees the context from the entire Slack thread to use for its task.
+- **Collaborative steering** – Anyone in the thread can answer the agent's questions or nudge a running task mid-flight.
+- **Cross-visibility** – A task you start in Slack also shows up in [PostHog Code](/docs/support/surfaces/code), marked with a Slack icon, so you can take it over on your desktop.

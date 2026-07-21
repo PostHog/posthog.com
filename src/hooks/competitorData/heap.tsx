@@ -1,3 +1,5 @@
+import { workflows } from 'hooks/productData/workflows'
+
 export const heap = {
     name: 'Heap',
     key: 'heap',
@@ -224,6 +226,7 @@ export const heap = {
             supported_tests: {
                 features: {
                     holdout_testing: 'n/a',
+                    multi_armed_bandit: false,
                 },
             },
         },
@@ -247,6 +250,12 @@ export const heap = {
             features: {
                 rage_clicks: false,
             },
+        },
+        logs: {
+            available: false,
+        },
+        workflows: {
+            available: false,
         },
     },
     platform: {
@@ -273,6 +282,7 @@ export const heap = {
             cms: '',
             notebooks: false,
             project_management_tools: '',
+            ai_assistant: true,
         },
         integrations: {
             ci_cd_integrations: false,

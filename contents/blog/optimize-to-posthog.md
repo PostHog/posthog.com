@@ -101,7 +101,9 @@ After completing these, click "Save as draft." You can then implement your exper
 
 ## Implementing your experiment
 
-Unlike Optimize, PostHog does not have a visual editor. You must implement experiments in code, but it doesn’t need to be complicated. It is simple to set up on all types of sites and apps including basic [Python](/tutorials/python-ab-testing) or [Go](/tutorials/go-feature-flags) scripts and no-code platforms like [Webflow](/tutorials/webflow-ab-tests) and [Framer](/tutorials/framer-analytics#customizing-components-with-feature-flags).
+PostHog has a [no-code editor (in beta)](/docs/experiments/no-code-web-experiments), but we recommend implementing experiments in code. [You can use an AI agent and our MCP to help you do this](/blog/ai-is-killing-no-code-experiments).
+
+It is simple to set up on all types of sites and apps including basic [Python](/tutorials/python-ab-testing) or [Go](/tutorials/go-feature-flags) scripts and no-code platforms like [Webflow](/tutorials/webflow-ab-tests) and [Framer](/tutorials/framer-analytics#customizing-components-with-feature-flags).
 
 As a basic example, you can add the experiment logic to your `<script>` tag as custom code. If you had an experiment testing the text of an `<h1>` element with the ID of `landing-header`, your script would look like this: 
 
