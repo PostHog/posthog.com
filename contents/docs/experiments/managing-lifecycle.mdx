@@ -53,22 +53,42 @@ Freezing exposure stops new users from entering an experiment while already-enro
 When you freeze exposure, PostHog:
 
 1. Snapshots all currently exposed users into a static [cohort](/docs/data/cohorts).
-2. Narrows every feature flag release group to that cohort, so new users can't match.
-3. Leaves `end_date` unset, so metric data keeps flowing for enrolled users.
+2. Narrows every feature flag release condition to that cohort, so new users can't match.
+3. Leaves the experiment's end date unset, so metric data keeps flowing for enrolled users.
 
-Already-enrolled users keep their deterministically assigned variant because `multivariate.variants` isn't changed – only the release conditions are narrowed.
+Already-enrolled users keep their assigned variant because the flag's variant distribution isn't changed – only the release conditions are narrowed.
 
 To freeze exposure, click **Freeze exposure** in the actions menu on the experiment page and confirm in the dialog. An **Exposure frozen** status badge appears once the freeze is active.
 
-To unfreeze, click **Unfreeze exposure** in the actions menu. This removes the snapshot cohort condition from the flag's release groups and reopens enrollment.
+Freezing runs synchronously and its duration scales with the number of exposed users – experiments with tens of thousands of exposed users can take tens of seconds. The confirmation dialog stays open with a loading state until the freeze completes, so a slow freeze isn't a failed one.
+
+Once frozen, your exposure graph flattens out. That's expected – no new users are entering the experiment. Due to ingestion lag, users exposed in the final moments before freezing may not make it into the snapshot.
+
+While an experiment is frozen, avoid editing its feature flag's release conditions by hand. Adding a new condition or removing what the freeze added can reopen enrollment to new users.
+
+### Unfreezing exposure
+
+To unfreeze, click **Unfreeze exposure** in the actions menu. This removes the snapshot cohort condition from the flag's release conditions, restoring the flag's original targeting so new users can enroll again. The snapshot cohort is deleted – if you freeze again later, PostHog builds a fresh snapshot.
+
+Unfreezing can bias your results: users who enrolled before the freeze and users who enroll after the unfreeze joined at different times, and possibly under different conditions. Be careful mixing the two groups in one analysis, especially after a long freeze or if your audience or product changed in between.
+
+### Ending, shipping, or resetting a frozen experiment
+
+You can end, ship, or reset an experiment directly from the frozen state:
+
+- **Shipping a variant** removes the freeze as part of the rollout, so the winning variant isn't limited to the snapshot cohort.
+- **Resetting** removes the freeze and deletes the snapshot cohort, so a relaunched experiment can enroll users again.
+- **Ending without shipping** doesn't touch the feature flag, so the flag stays narrowed to the snapshot cohort. Unfreeze first (or ship a variant) if that's not what you want.
 
 ### Limitations of freezing exposure
 
 - **Group-aggregated experiments can't be frozen.** Their flags target groups, not persons, and a person-keyed cohort can't freeze group-based matching.
-- **Experiments with holdouts or early-access conditions can't be frozen.** Holdout assignment and early-access enrollment are evaluated before release conditions, so narrowing release groups can't stop new users from entering through those paths.
-- **Very large experiments can't be frozen.** Experiments with over 100,000 exposed users, or where the exposure scan exceeds 20 seconds, are rejected. These bounds keep the freeze within a single web request.
-- **Experiments with mostly anonymous users can't be frozen.** Cohort membership requires person profiles. If more than 5% of exposed users are anonymous or have been deleted, freezing is rejected because those users would lose their variant.
-- **Local-eval SDKs can't resolve static cohorts.** A frozen flag evaluates via `/decide` (standard static-cohort behavior). SDKs using `only_evaluate_locally` return the flag's default value instead.
+- **Experiments with holdouts or early access conditions can't be frozen.** Holdout assignment and early access enrollment are evaluated before release conditions, so narrowing release conditions can't stop new users from entering through those paths.
+- **Very large experiments can't be frozen.** The exposure scan is bounded by a cap on the number of exposed users and a timeout. Experiments over either bound are rejected rather than frozen.
+- **Experiments with mostly anonymous users can't be frozen.** Cohort membership requires person profiles. If more than a small share of exposed users are anonymous or have been deleted, freezing is rejected because those users would silently lose their variant. This means experiments on logged-out surfaces usually can't be frozen.
+- **SDKs using local evaluation can't resolve static cohorts.** A frozen flag evaluates on PostHog's servers instead (standard static-cohort behavior). SDKs configured with `only_evaluate_locally` return the flag's default value.
+
+These limitations are structural, not transient – if a freeze is rejected, retrying won't help.
 
 ## Resetting analysis
 

@@ -1,18 +1,13 @@
 ---
 title: Experiment troubleshooting
 ---
+export const AssignAnOverrideLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/assigning-an-override-light-mode.mp4"
+export const AssignAnOverrideDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/assigning-an-override-dark-mode.mp4"
 
-export const AssignAnOverrideLight =
-  "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/assigning-an-override-light-mode.mp4";
-export const AssignAnOverrideDark =
-  "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/assigning-an-override-dark-mode.mp4";
-
-import { ProductScreenshot } from "components/ProductScreenshot";
-import ReturningUsersExposures from "./snippets/returning-users-exposures.mdx";
-export const ReuseFeatureFlagLight =
-  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/experiments/reuse-feature-flag-for-experiment-light-mode.png";
-export const ReuseFeatureFlagDark =
-  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/experiments/reuse-feature-flag-for-experiment-dark-mode.png";
+import { ProductScreenshot } from 'components/ProductScreenshot'
+import ReturningUsersExposures from "./snippets/returning-users-exposures.mdx"
+export const ReuseFeatureFlagLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/experiments/reuse-feature-flag-for-experiment-light-mode.png"
+export const ReuseFeatureFlagDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/experiments/reuse-feature-flag-for-experiment-dark-mode.png"
 
 This page covers troubleshooting for Experiments. For setup, see the [installation guides](/docs/experiments/installation).
 
@@ -31,10 +26,10 @@ However, if you insist on doing this (for example, you don't want to make code c
 3. Name the first variant in your new feature flag 'control'.
 
 <ProductScreenshot
-  imageLight={ReuseFeatureFlagLight}
-  imageDark={ReuseFeatureFlagDark}
-  alt="Reuse an existing feature flag for an experiment"
-  classes="rounded"
+    imageLight = {ReuseFeatureFlagLight}
+    imageDark = {ReuseFeatureFlagDark}
+    alt = "Reuse an existing feature flag for an experiment"
+    classes = "rounded"
 />
 
 > **Note:** Deleting a flag is equivalent to disabling it, so it is off for however long it takes you to create the draft experiment. The flag is enabled as soon as you create the experiment (not launched).
@@ -60,13 +55,13 @@ See our docs on [how to run an experiment without using feature flags](/docs/exp
 Once you create the experiment, go to the feature flag, scroll down to "Release Conditions". For each condition, there is an "Optional Override". This enables you to choose a release condition and force all people in this release condition to have the variant chosen in the optional override.
 
 <ProductVideo
-  videoLight={AssignAnOverrideLight}
-  videoDark={AssignAnOverrideDark}
-  alt="How to assign an experiment override"
-  classes="rounded"
+    videoLight = {AssignAnOverrideLight}
+    videoDark = {AssignAnOverrideDark}
+    alt = "How to assign an experiment override"
+    classes = "rounded"
 />
 
-import FAQFalseOrNoneEvents from "../feature-flags/snippets/faq-false-or-none-events.mdx";
+import FAQFalseOrNoneEvents from "../feature-flags/snippets/faq-false-or-none-events.mdx"
 
 <FAQFalseOrNoneEvents />
 
@@ -154,14 +149,16 @@ You can check your current exposure count on the experiment results page. If you
 
 ## Why can't I freeze my experiment's exposure?
 
-The [freeze exposure](/docs/experiments/lifecycle) action has several requirements. If the action is unavailable or returns an error, check these common causes:
+The [freeze exposure](/docs/experiments/managing-lifecycle#freezing-exposure) action has several requirements. If the action is unavailable or returns an error, check these common causes:
 
-- **Experiment must be running** - You can only freeze a running experiment. Draft experiments haven't started collecting exposures, ended experiments are already complete, and paused experiments need to be resumed first.
-- **Group-aggregated experiments aren't supported** - Experiments that target groups (like companies or organizations) instead of persons can't be frozen. The snapshot cohort is person-based and can't freeze group-level enrollment.
-- **Holdouts and early-access conditions** - If your experiment is in a holdout or the feature flag has early-access conditions, freezing is rejected. These conditions are evaluated before release groups, so new users would continue entering through those paths.
-- **Too many exposed users** - Experiments with more than 100,000 exposed users can't be frozen in a single request. This limit ensures the freeze operation completes reliably.
-- **Anonymous users** - If more than 5% of your exposed users don't have a person profile (anonymous or personless traffic), freezing is rejected. The snapshot cohort requires person profiles, so anonymous users would lose their variant.
-- **Already frozen** - An experiment can only be frozen once. If you need to modify the freeze, unfreeze first, then freeze again.
+- **Experiment must be running** – You can only freeze a running experiment. Draft experiments haven't started collecting exposures, ended experiments are already complete, and paused experiments need to be resumed first.
+- **Group-aggregated experiments aren't supported** – Experiments that target groups (like companies or organizations) instead of persons can't be frozen. The snapshot cohort is person-based and can't freeze group-level enrollment.
+- **Holdouts and early access conditions** – If your experiment is in a holdout or the feature flag has early access conditions, freezing is rejected. These conditions are evaluated before release conditions, so new users would continue entering through those paths.
+- **Too many exposed users** – The exposure scan is bounded by a cap on the number of exposed users and a timeout, so very large experiments are rejected rather than frozen.
+- **Anonymous users** – If more than a small share of your exposed users don't have a person profile (anonymous or personless traffic), freezing is rejected. The snapshot cohort requires person profiles, so anonymous users would silently lose their variant.
+- **Already frozen** – An experiment can only be frozen once. If you need to modify the freeze, unfreeze first, then freeze again.
+
+These requirements are structural, so retrying a rejected freeze won't help. Also note that freezing runs synchronously and takes longer the more exposed users your experiment has – a slow freeze isn't a failed one, so wait for the confirmation dialog to finish.
 
 ## Does freezing affect local evaluation SDKs?
 
@@ -209,4 +206,6 @@ The property doesn't exist on the event you're measuring.
 
 ## Solved community questions
 
-<SolvedQuestions topicLabel="Experiments" />
+<SolvedQuestions
+    topicLabel="Experiments"
+/>
