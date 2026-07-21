@@ -14,10 +14,10 @@ You use it by passing image URLs to the `imageLight` and `imageDark` props like 
 
 ```tsx
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/handbook/images/tutorials/limit-session-recordings/sampling-config-light.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/handbook/images/tutorials/limit-session-recordings/sampling-config-dark.png"
-    alt="Sampling config shown set to 100% i.e. no sampling"
-    classes="rounded"
+imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/handbook/images/tutorials/limit-session-recordings/sampling-config-light.png"
+imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/handbook/images/tutorials/limit-session-recordings/sampling-config-dark.png"
+alt="Sampling config shown set to 100% i.e. no sampling"
+classes="rounded"
 />
 ```
 
@@ -25,20 +25,132 @@ Optionally pass `zoom={false}` if you don't want the image to be zoomable, other
 
 _Note: If you don't have a dark image, just leave out the `imageDark` prop and the light screenshot will be used for both color modes._
 
+### Annotated product screenshots
+
+The `<ImageAnnotations />` component overlays interactive callouts on top of an image. Instead of baking dots or numbers into the image file, the markers are live DOM positioned with **percentage coordinates**, so they stay anchored and scale when the image resizes (and they theme correctly in light/dark mode).
+
+There are two styles:
+
+- **`numbered`** — numbered badges paired with a "key" legend. Hovering a key row grows the matching marker, and vice versa.
+- **`dots`** — pulsing, clickable dots that open a popover with the callout's title and description.
+
+#### The builder
+
+Don't hand-write coordinates. Moderators can open the visual builder at [`/image-annotator`](/image-annotator) (also under the account menu → **Moderator tools → Image annotation**). Pick a product screenshot (or paste a Cloudinary URL), click to drop markers, label them, then copy paste-ready code. It outputs code for both destinations below.
+
+#### `<ImageAnnotations.FromProduct />` (recommended)
+
+The simplest entry point. It resolves the image (light + dark) and an optional named annotation set straight from a product hook, so the image stays in sync if it's ever updated. Because the API is namespaced (`ImageAnnotations.FromProduct`), import it once at the top of your `.mdx` file — same as `Tab`:
+
+<!-- prettier-ignore -->
+```tsx
+import ImageAnnotations from 'components/ImageAnnotations'
+```
+
+import ImageAnnotations from 'components/ImageAnnotations'
+
+<ImageAnnotations.FromProduct product="session_replay" screenshot="overview" set="dev-tools" />
+
+<!-- prettier-ignore -->
+```tsx
+<ImageAnnotations.FromProduct product="session_replay" screenshot="overview" set="dev-tools" />
+```
+
+| Prop | Type | Description |
+| --- | --- | --- |
+| `product` | `string` | Product handle, e.g. `"session_replay"`. |
+| `screenshot` | `string` | Key in that product's `screenshots` object, e.g. `"overview"`. |
+| `title` | `ReactNode` | Section heading. In `split` it sits in the left column next to the image. |
+| `set` | `string` | Name of an annotation set stored on the screenshot (`screenshots[screenshot].annotations[set]`). |
+| `annotations` | `Annotation[]` | Inline annotations — overrides `set`. |
+| `type` | `'dots' \| 'numbered'` | Overrides the set's type (defaults to the set's type, then `numbered`). |
+| `showKey` | `boolean` | Force the key on/off (defaults to on for `numbered`). |
+| `layout` | `'stacked' \| 'split'` | `stacked` (default) puts the image above the key. `split` is a responsive two-column layout. |
+| `children` | `ReactNode` | Left-column content (your prose) when `layout="split"`. |
+| `alt`, `imgClassName`, `className`, `keyTitle` | `string` | Presentation overrides. |
+
+**Split layout:** pass `layout="split"` and put your description as children to get a responsive two-column section (uses `@container/reader-content` queries). It stacks as description → image → key on mobile, and becomes description top-left / key bottom-left / image right on wider screens.
+
+<!-- prettier-ignore -->
+```tsx
+<ImageAnnotations.FromProduct product="session_replay" screenshot="overview" set="dev-tools" layout="split">
+
+Every session replay comes with a browser-like DevTools suite synced to the timeline.
+
+<OSButton variant="primary" asLink to="/docs/session-replay/how-to-watch-recordings">Watch session replays</OSButton>
+
+</ImageAnnotations.FromProduct>
+```
+
+**Storing annotation sets in a hook:** add an `annotations` map to a screenshot in `src/hooks/productData/<product>.tsx`. Multiple named sets are supported, since the same image may be annotated differently in different places. Coordinates are percentages (0–100) — copy them from the builder.
+
+<!-- prettier-ignore -->
+```tsx
+screenshots: {
+overview: {
+src: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_screenshot.jpg',
+// srcDark: '…', // optional — falls back to src when omitted
+alt: 'Session replay screenshot',
+annotations: {
+'dev-tools': {
+type: 'numbered',
+items: [
+{ x: 27.2, y: 9.8, title: 'Debug views' },
+{ x: 48.9, y: 7.8, title: 'DevTools' },
+],
+},
+},
+},
+}
+```
+
+#### Inline in MDX
+
+If the image isn't in a hook (or you want a one-off), define the annotations inline. MDX only allows ESM, so use **`export const`** — a bare `const` won't work. For the image, you can still reference a hook via `product` + `screenshot` (keeps it in sync), or pass a literal `src`/`srcDark`.
+
+<!-- prettier-ignore -->
+```tsx
+import ImageAnnotations from 'components/ImageAnnotations'
+
+export const annotations = [
+{ x: 27.2, y: 9.8, title: 'Debug views' },
+{ x: 48.9, y: 7.8, title: 'DevTools', description: 'Console, network, and errors synced to the timeline' },
+]
+
+<ImageAnnotations annotations={annotations} type="dots">
+<ImageAnnotations.Image product="session_replay" screenshot="overview" imgClassName="rounded-lg shadow-2xl" />
+</ImageAnnotations>
+```
+
+**Splitting the image and key:** because `<ImageAnnotations.Image />` and `<ImageAnnotations.Key />` read from the wrapping `<ImageAnnotations>` provider, you can render them in different spots with other content in between.
+
+<!-- prettier-ignore -->
+```tsx
+<ImageAnnotations annotations={annotations} type="numbered">
+<ImageAnnotations.Image product="session_replay" screenshot="overview" imgClassName="rounded-lg shadow-2xl" />
+
+Any markdown or other components can go in between…
+
+<ImageAnnotations.Key />
+</ImageAnnotations>
+```
+
+_Note: `srcDark` is optional everywhere — if a dark variant isn't provided, the regular `src` is shown in both color modes._
+
 ### Image slider
 
 You can create a slider or carousel of images by wrapping them in the `<ImageSlider>` component like this:
 
 ```html
 <ImageSlider>
-    ![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/hogflix-dashboard.png)
-    ![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/hogflix-dashboard.png)
+![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/hogflix-dashboard.png)
+![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/hogflix-dashboard.png)
 </ImageSlider>
 ```
 
 See an example in our [open-source analytics tools post](/blog/best-open-source-analytics-tools#1-posthog).
 
-## Product videos
+## Videos
 
 Th `<ProductVideo />` component works the same as product screenshots (above) for videos [uploaded to Cloudinary](/handbook/content/posthog-style-guide#adding-media) but supports light and dark videos.
 
@@ -57,31 +169,48 @@ export const NewFunnelDark = "https://res.cloudinary.com/dmukukwp6/video/upload/
 <!-- prettier-ignore -->
 ```tsx
 <ProductVideo
-  videoLight={NewFunnelLight}
-  videoDark={NewFunnelDark}
-  classes="rounded"
+videoLight={NewFunnelLight}
+videoDark={NewFunnelDark}
+classes="rounded"
 />
 ```
 
 _Note: If you don't have a dark video, just leave out the `videoDark` prop and the light video will be used for both color modes._
+
+### Embedding Wistia videos
+
+This can be used in articles like tutorials or blog posts for longer-form videos (where the asset exceeds 20 MB and can't be uploaded to Cloudinary).
+
+```
+<WistiaEmbed mediaId="13hp4af5cc" />
+```
 
 ### Embedding YouTube videos
 
 While not an MDX component, a reminder that when embedding a YouTube video, you should do two things:
 
 1. Use the `-nocookie` variant of the YouTube URL. eg:
-    ```
-    https://www.youtube-nocookie.com/embed/{VIDEO_ID}
-    ```
+```
+https://www.youtube-nocookie.com/embed/{VIDEO_ID}
+```
 2. Add the `allowfullscreen` attribute to the iframe so users have the option to watch the video in fullscreen (useful for reading code snippets).
+
+Example:
+
+```
+<iframe
+    src="https://www.youtube-nocookie.com/embed/1FZji2L-LmM"
+    className="rounded shadow-xl"
+/>
+```
 
 ## Code blocks
 
 The PostHog website has a custom code block component that comes with a number of useful features built-in:
 
--   [Syntax highlighting](#adding-syntax-highlighting)
--   [Multiple snippets in a single codeblock](#multiple-code-snippets-in-one-block)
--   [Specifying which file a snippet is from](#specifying-which-file-a-snippet-is-from)
+- [Syntax highlighting](                     #adding-syntax-highlighting)
+- [Multiple snippets in a single codeblock]( #multiple-code-snippets-in-one-block)
+- [Specifying which file a snippet is from]( #specifying-which-file-a-snippet-is-from)
 
 ### Basic codeblock
 
@@ -90,8 +219,8 @@ Codeblocks in PostHog are created by enclosing your snippet using three backtick
 ````mdx
 ```
 {
-    "name": "Max, Hedgehog in Residence",
-    "age": 2
+"name": "Max, Hedgehog in Residence",
+"age": 2
 }
 ```
 ````
@@ -100,8 +229,8 @@ This will produce the following codeblock:
 
 ```
 {
-    "name": "Max, Hedgehog in Residence",
-    "age": 2
+"name": "Max, Hedgehog in Residence",
+"age": 2
 }
 ```
 
@@ -112,8 +241,8 @@ Syntax highlighting can be added by specifying a language for the codeblock, whi
 ````mdx
 ```json
 {
-    "name": "Max, Hedgehog in Residence",
-    "age": 2
+"name": "Max, Hedgehog in Residence",
+"age": 2
 }
 ```
 ````
@@ -122,8 +251,8 @@ This will produce the following output:
 
 ```json
 {
-    "name": "Max, Hedgehog in Residence",
-    "age": 2
+"name": "Max, Hedgehog in Residence",
+"age": 2
 }
 ```
 
@@ -137,8 +266,8 @@ You can use the `<Tab />` component to create tabs in your code blocks. This is 
 'Preview',
 'Markdown']}>
 <Tab.List>
-  <Tab>Preview</Tab>
-  <Tab>Markdown</Tab>
+<Tab>Preview</Tab>
+<Tab>Markdown</Tab>
 </Tab.List>
 <Tab.Panels>
 <Tab.Panel>
@@ -166,44 +295,44 @@ Here is a list of all the languages that are supported in codeblocks:
 
 **Frontend**
 
-|                   |                |
+| | |
 | ----------------- | -------------- |
-| HTML              | `html`         |
+| HTML | `html` |
 | CSS / SCSS / LESS | `css` / `less` |
-| JavaScript        | `js`           |
-| JSX               | `jsx`          |
-| TypeScript        | `ts`           |
-| TSX               | `tsx`          |
-| Swift             | `swift`        |
-| Dart              | `dart`         |
-| Objective-C       | `objectivec`   |
+| JavaScript | `js` |
+| JSX | `jsx` |
+| TypeScript | `ts` |
+| TSX | `tsx` |
+| Swift | `swift` |
+| Dart | `dart` |
+| Objective-C | `objectivec` |
 
 **Backend**
 
-|         |             |
+| | |
 | ------- | ----------- |
-| Node.js | `node`      |
-| Elixir  | `elixir`    |
-| Golang  | `go`        |
-| Java    | `java`      |
-| PHP     | `php`       |
-| Ruby    | `ruby`      |
-| Python  | `python`    |
+| Node.js | `node` |
+| Elixir | `elixir` |
+| Golang | `go` |
+| Java | `java` |
+| PHP | `php` |
+| Ruby | `ruby` |
+| Python | `python` |
 | C / C++ | `c` / `cpp` |
 
 **Misc.**
 
-|          |                   |
+| | |
 | -------- | ----------------- |
 | Terminal | `bash` or `shell` |
-| JSON     | `json`            |
-| XML      | `xml`             |
-| SQL      | `sql`             |
-| GraphQL  | `graphql`         |
-| Markdown | `markdown`        |
-| MDX      | `mdx`             |
-| YAML     | `yaml`            |
-| Git      | `git`             |
+| JSON | `json` |
+| XML | `xml` |
+| SQL | `sql` |
+| GraphQL | `graphql` |
+| Markdown | `markdown` |
+| MDX | `mdx` |
+| YAML | `yaml` |
+| Git | `git` |
 
 > **Note:** If you want syntax highlighting for a snippet in another language, feel free to add your language to the [imports in languages.tsx](https://github.com/PostHog/posthog.com/blob/149c7c2a99d66c4f961b538edb864c63ce186967/src/components/CodeBlock/languages.tsx#L6) and open a PR.
 
@@ -215,8 +344,8 @@ You can use the `<MultiLanguage>` component to show code blocks in multiple lang
 'Preview',
 'Markdown']}>
 <Tab.List>
-  <Tab>Preview</Tab>
-  <Tab>Markdown</Tab>
+<Tab>Preview</Tab>
+<Tab>Markdown</Tab>
 </Tab.List>
 <Tab.Panels>
 <Tab.Panel>
@@ -295,11 +424,11 @@ You can specify a filename that a code snippet belongs to using the `file` param
 ```yaml file=values.yaml
 cloud: 'aws'
 ingress:
-    hostname: <your-hostname>
-    nginx:
-        enabled: true
+hostname: <your-hostname>
+nginx:
+enabled: true
 cert-manager:
-    enabled: true
+enabled: true
 ```
 ````
 
@@ -310,29 +439,29 @@ This produces the following codeblock:
 ```yaml file=values.yaml
 cloud: 'aws'
 ingress:
-    hostname: <your-hostname>
-    nginx:
-        enabled: true
+hostname: <your-hostname>
+nginx:
+enabled: true
 cert-manager:
-    enabled: true
+enabled: true
 ```
 
 ### Code highlighting
 
 Especially in long tutorials, you can highlight the important differences between steps using highlighting comments. It's much easier to read visual diffs than reading through the code block line by line.
 
-| Comment        | Effect           | Usage                                    |
+| Comment | Effect | Usage |
 | -------------- | ---------------- | ---------------------------------------- |
-| `// +`         | Green highlight  | Represents additions in diffs            |
-| `// -`         | Red highlight    | Represents removals in diffs             |
+| `// +` | Green highlight | Represents additions in diffs |
+| `// -` | Red highlight | Represents removals in diffs |
 | `// HIGHLIGHT` | Yellow highlight | General emphasis without special meaning |
 
 <Tab.Group tabs={[
 'Preview',
 'Markdown']}>
 <Tab.List>
-  <Tab>Preview</Tab>
-  <Tab>Markdown</Tab>
+<Tab>Preview</Tab>
+<Tab>Markdown</Tab>
 </Tab.List>
 <Tab.Panels>
 <Tab.Panel>
@@ -376,31 +505,31 @@ In some cases, such as large nested config files, you need readers to focus on a
 'Preview',
 'Markdown']}>
 <Tab.List>
-  <Tab>Preview</Tab>
-  <Tab>Markdown</Tab>
+<Tab>Preview</Tab>
+<Tab>Markdown</Tab>
 </Tab.List>
 <Tab.Panels>
 <Tab.Panel>
 
 ```json file=angular.json focusOnLines=4-14
 {
-    "projects": {
-        "my-app": {
-            "architect": {
-                "build": {
-                    "builder": "@angular-devkit/build-angular:application",
-                    "options": {
-                        "sourceMap": {
-                            "scripts": true, // +
-                            "styles": true, // +
-                            "hidden": true, // +
-                            "vendor": true // +
-                        }
-                    }
-                }
-            }
-        }
-    }
+"projects": {
+"my-app": {
+"architect": {
+"build": {
+"builder": "@angular-devkit/build-angular:application",
+"options": {
+"sourceMap": {
+"scripts": true, // +
+"styles": true, // +
+"hidden": true, // +
+"vendor": true // +
+}
+}
+}
+}
+}
+}
 }
 ```
 
@@ -410,23 +539,23 @@ In some cases, such as large nested config files, you need readers to focus on a
 ````mdx
 ```json file=angular.json focusOnLines=4-14
 {
-    "projects": {
-        "my-app": {
-            "architect": {
-                "build": {
-                    "builder": "@angular-devkit/build-angular:application",
-                    "options": {
-                        "sourceMap": {
-                            "scripts": true, // +
-                            "styles": true, // +
-                            "hidden": true, // +
-                            "vendor": true // +
-                        }
-                    }
-                }
-            }
-        }
-    }
+"projects": {
+"my-app": {
+"architect": {
+"build": {
+"builder": "@angular-devkit/build-angular:application",
+"options": {
+"sourceMap": {
+"scripts": true, // +
+"styles": true, // +
+"hidden": true, // +
+"vendor": true // +
+}
+}
+}
+}
+}
+}
 }
 ```
 ````
@@ -443,17 +572,17 @@ Code blocks can also be used to show mermaid UML diagrams. When using these diag
 'Preview',
 'Markdown']}>
 <Tab.List>
-  <Tab>Preview</Tab>
-  <Tab>Markdown</Tab>
+<Tab>Preview</Tab>
+<Tab>Markdown</Tab>
 </Tab.List>
 <Tab.Panels>
 <Tab.Panel>
 
 ```mermaid
 sequenceDiagram
-    Alice->John: Hello John, how are you?
-    John-->Alice: Great!
-    Alice->John: See you later!
+Alice->John: Hello John, how are you?
+John-->Alice: Great!
+Alice->John: See you later!
 ```
 
 </Tab.Panel>
@@ -462,15 +591,96 @@ sequenceDiagram
 ````mdx
 ```mermaid
 sequenceDiagram
-    Alice->John: Hello John, how are you?
-    John-->Alice: Great!
-    Alice->John: See you later!
+Alice->John: Hello John, how are you?
+John-->Alice: Great!
+Alice->John: See you later!
 ```
 ````
 
 </Tab.Panel>
 </Tab.Panels>
 </Tab.Group>
+
+import ProductList from 'components/ProductList'
+
+## Product list
+
+Use `<ProductList />` to render a list of products sourced from `useProduct` hooks. It links each product to `/{slug}` by default using the product's icon, color, and name.
+
+**Auto-source from a product data field** (e.g. every product where `wizardSupport` is set):
+
+<!-- prettier-ignore -->
+```tsx
+<ProductList
+    sourceField="wizardSupport"
+    sourceValues={[true, { value: "In development", color: "red" }, { value: "Coming soon", color: "yellow" }]}
+/>
+```
+
+<ProductList
+    className="grid gap-4 grid-cols-2 not-prose"
+    sourceField="wizardSupport"
+    sourceValues={[true, { value: "In development", color: "red" }, { value: "Coming soon", color: "yellow" }]}
+/>
+
+Products are grouped in `sourceValues` order. Plain values (`true`, `"some string"`) filter without an indicator. Object values (`{ value, color }`) also render a colored dot with tooltip text.
+
+**Manual list of products:**
+
+<!-- prettier-ignore -->
+```tsx
+<ProductList products={["product_analytics", "web_analytics", "session_replay"]} />
+```
+
+<ProductList
+    className="grid gap-4 grid-cols-2 not-prose"
+    products={["product_analytics", "web_analytics", "session_replay"]}
+/>
+
+**Manual list with field-based filtering and indicators:**
+
+<!-- prettier-ignore -->
+```tsx
+<ProductList
+    products={["product_analytics", "web_analytics", "feature_flags", 'ai_observability']}
+    sourceField="wizardSupport"
+    sourceValues={[true, { value: "Coming soon", color: "yellow" }]}
+/>
+```
+
+<ProductList
+    className="grid gap-4 grid-cols-2 not-prose"
+    products={["product_analytics", "web_analytics", "feature_flags", 'ai_observability']}
+    sourceField="wizardSupport"
+    sourceValues={[true, { value: "Coming soon", color: "yellow" }]}
+/>
+
+Only the products whose `wizardSupport` value matches a `sourceValues` entry will render. Other props: `urlPrefix` (default `/`), `className`, `itemClassName`, `iconSize`.
+
+## Wizard command
+
+Use `<WizardCommand />` to render a copyable install button for the PostHog wizard CLI. Clicking the button copies the command to the clipboard and shows a toast notification.
+
+<WizardCommand />
+
+The displayed command is always the clean `npx @posthog/wizard …`; the copied command always pins `-y` and `@latest`. The `--region eu` / `--region us` suffix is added automatically based on the user's feature flags. `<WizardCommand />` is a thin alias for `<PlatformInstall variant="inline" />`.
+
+**Props:**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `command` | `string` | `''` | Subcommand appended after `@posthog/wizard` (e.g. `mcp add`) |
+| `selfDriving` | `boolean` | `false` | Shorthand for `command="self-driving"` |
+| `slim` | `boolean` | `false` | Hides the "Learn more" link below the button |
+| `variant` | `'default' \| 'bordered'` | `'default'` | Bordered button style |
+| `className` | `string` | `''` | Additional classes for the button element |
+
+**Slim mode** (button only, no "Learn more" link):
+
+<!-- prettier-ignore -->
+```tsx
+<WizardCommand slim />
+```
 
 ## Call to action
 
@@ -487,8 +697,8 @@ When comparing features between two or more products, use the `<ProductCompariso
 <!-- prettier-ignore -->
 ```tsx
 <ProductComparisonTable
-  competitors={['posthog', 'amplitude']}
-  rows={['product_analytics']}
+competitors={['posthog', 'amplitude']}
+rows={['product_analytics']}
 />
 ```
 
@@ -507,7 +717,7 @@ Here's an example of what it looks like:
 ![PostHog webshare pricing experiment](https://res.cloudinary.com/dmukukwp6/image/upload/v1710126300/posthog.com/contents/images/customers/webshare/webshare-pricing.png)
 
 <Caption>
-    Adding the 'Buy Now' call to action and adjusting the text enabled Webshare to boost conversion by 26%
+Adding the 'Buy Now' call to action and adjusting the text enabled Webshare to boost conversion by 26%
 </Caption>
 
 ## Customer quotes
@@ -521,10 +731,10 @@ Add a styled quote component using the following code:
 <!-- prettier-ignore -->
 ```jsx
 <OSQuote
-  customer="significa"
-  author="tomas_gouveia"
-  product="web_analytics"
- />
+customer="significa"
+author="tomas_gouveia"
+product="web_analytics"
+/>
 ```
 
 <OSQuote customer="significa" author="tomas_gouveia" product="web_analytics" />
@@ -533,10 +743,10 @@ Add a styled quote component using the following code:
 
 <!-- prettier-ignore -->
 ```jsx
-<OSQuote 
-    customer="lovable"
-    author="viktor_eriksson"
-    quote={0}
+<OSQuote
+customer="lovable"
+author="viktor_eriksson"
+quote={0}
 />
 ```
 
@@ -549,16 +759,16 @@ Quotes are sourced from the `useCustomers` hook and can reference product-specif
 <!-- prettier-ignore -->
 ```tsx
 quotes: {
-    viktor_eriksson: {
-        name: 'Viktor Eriksson',
-        role: 'Software Engineer',
-        image: {
-            thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/viktor_00c779a706.jpg',
-        },
-        quotes: [
-            "PostHog is super cool because it is such a broad platform. If you're building a new product or at a startup, it's a no-brainer to use PostHog. It's the only all-in -one platform like it for developers.",
-        ],
-    },
+viktor_eriksson: {
+name: 'Viktor Eriksson',
+role: 'Software Engineer',
+image: {
+thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/viktor_00c779a706.jpg',
+},
+quotes: [
+"PostHog is super cool because it is such a broad platform. If you're building a new product or at a startup, it's a no-brainer to use PostHog. It's the only all-in -one platform like it for developers.",
+],
+},
 },
 ```
 
@@ -568,10 +778,10 @@ The combination of `<details>` and `<summary>` components enables you to add a c
 
 ```html
 <details>
-    <summary>Can I specify some events to be identified and others to be anonymous for the same users?</summary>
+<summary>Can I specify some events to be identified and others to be anonymous for the same users?</summary>
 
-    Not if you already identified them. Once a user is identified, all _future_ events for that user are associated with
-    their person profile and are captured as identified events.
+Not if you already identified them. Once a user is identified, all _future_ events for that user are associated with
+their person profile and are captured as identified events.
 </details>
 ```
 
@@ -585,42 +795,34 @@ To use them:
 2. Set up `Tab.Group`, `Tab.List`, and `Tab.Panel` for each tab you want to display. The `tabs` prop in `Tab.Group` should be an array of strings, one for each tab. This enables you to link to each tab by its name.
 3. Add the content for each tab in the `Tab.Panel` components. You should use snippets for readability, maintainability, and to avoid duplication, but you can use multiple snippets in a single tab.
 
-For example, here's how we set up the tabs for the error tracking installation page:
+For example, here's how we can set up tabs using error tracking snippets:
 
 ```jsx
 import Tab from "components/Tab"
-import WebInstall from '../integrate/_snippets/install-web.mdx'
-import JSWebErrorTracking from './_snippets/web-install-error-tracking.mdx'
-import PythonInstall from '../integrate/_snippets/install-python.mdx'
-import PythonErrorTracking from './_snippets/python-install-error-tracking.mdx'
-import NextJSErrorTracking from './_snippets/nextjs-install-error-tracking.mdx'
-import UploadSourceMaps from './_snippets/upload-source-maps.mdx'
-import UploadSourceMapsSteps from './_snippets/upload-source-maps-steps.mdx'
+import BeforeSendHook from './_snippets/before-send-hook.mdx'
+import SuppressionRules from './_snippets/suppression-rules.mdx'
+import BurstProtection from './_snippets/burst-protection.mdx'
 
-Error tracking enables you to track, investigate, and resolve exceptions your customers face. Getting this working requires installing PostHog:
+Error tracking gives you multiple ways to control which exceptions are captured:
 
 <!-- prettier-ignore -->
-<Tab.Group tabs={['Web', 'Next.js', 'Python']}>
-    <Tab.List>
-      <Tab>Web</Tab>
-      <Tab>Next.js</Tab>
-      <Tab>Python</Tab>
-    </Tab.List>
-    <Tab.Panels>
-        <Tab.Panel>
-          <WebInstall />
-          <JSWebErrorTracking />
-          <UploadSourceMaps />
-          <UploadSourceMapsSteps />
-        </Tab.Panel>
-        <Tab.Panel>
-          <NextJSErrorTracking />
-        </Tab.Panel>
-        <Tab.Panel>
-          <PythonInstall />
-          <PythonErrorTracking />
-        </Tab.Panel>
-    </Tab.Panels>
+<Tab.Group tabs={['Before send', 'Suppression rules', 'Burst protection']}>
+<Tab.List>
+<Tab>Before send</Tab>
+<Tab>Suppression rules</Tab>
+<Tab>Burst protection</Tab>
+</Tab.List>
+<Tab.Panels>
+<Tab.Panel>
+<BeforeSendHook />
+</Tab.Panel>
+<Tab.Panel>
+<SuppressionRules />
+</Tab.Panel>
+<Tab.Panel>
+<BurstProtection />
+</Tab.Panel>
+</Tab.Panels>
 </Tab.Group>
 ```
 
@@ -642,9 +844,9 @@ Use Markdown's standard syntax for linking internally.
 
 Be sure to use _relative links_ (exclude `https://posthog.com`) with _absolute paths_ (reference the root of the domain with a preceding `/`).
 
-|                      |                                            |
+| | |
 | -------------------- | ------------------------------------------ |
-| **Correct syntax**   | `/absolute-path/to/url`                    |
+| **Correct syntax** | `/absolute-path/to/url` |
 | **Incorrect syntax** | `https://posthog.com/absolute-path/to/url` |
 
 **Open a new PostHog window**
@@ -654,7 +856,7 @@ To open a link in a new window within the PostHog.com OS interface, use `state={
 <!-- prettier-ignore -->
 ```tsx
 <Link to="/absolute-path/to/url" state={{ newWindow: true }}>
-  Link text
+Link text
 </Link>
 ```
 
@@ -664,14 +866,14 @@ The `<Link />` component is used throughout the site, and is accessible within M
 
 While that doesn't apply here, using it comes with some handy parameters that you can see in action via the link above:
 
--   Add `external` to a) open the link in a new tab, and b) add the _external link_ icon (for UX best practices if forcing a link to open in a new window)
--   If, for some reason, you need to hide the icon, use `externalNoIcon` instead
+- Add `external` to a) open the link in a new tab, and b) add the _external link_ icon (for UX best practices if forcing a link to open in a new window)
+- If, for some reason, you need to hide the icon, use `externalNoIcon` instead
 
 Example:
 
 ```
 <Link to="#" external>
-  click here
+click here
 </Link>
 
 ```
@@ -682,7 +884,7 @@ Sometimes we link to confidential information in our handbook. Since the handboo
 
 ```
 <PrivateLink url="https://path/to/private/link">
-  click here
+click here
 </PrivateLink>
 
 ```
@@ -701,16 +903,16 @@ There's also a `photo` parameter which will inline their photo next to their nam
 
 ## Mention a small team
 
-Use this component to mention a small team in a post. It will link to their team page and appears like this: <SmallTeam slug="brand" />
+Use this component to mention a small team in a post. It will link to their team page and appears like this: <SmallTeam slug="website" />
 
 ```
-<SmallTeam slug="brand" />
+<SmallTeam slug="website" />
 ```
 
-The default version shows the team's mini crest and name in a bordered "chip" style. There's also a `noMiniCrest` parameter to omit the mini crest and border for inline usage like this: <SmallTeam slug="brand" noMiniCrest />
+The default version shows the team's mini crest and name in a bordered "chip" style. There's also a `noMiniCrest` parameter to omit the mini crest and border for inline usage like this: <SmallTeam slug="website" noMiniCrest />
 
 ```
-<SmallTeam slug="brand" noMiniCrest />
+<SmallTeam slug="website" noMiniCrest />
 ```
 
 Both versions will show the full team crest on hover. Clicking the tooltip will open the team page in a new window.
@@ -719,14 +921,14 @@ Both versions will show the full team crest on hover. Clicking the tooltip will 
 
 You can embed what looks like ~~a Tweet~~ an X post using the `<Tweet>` component. It's used on the [terms](/terms) and [privacy policy](/privacy) pages, but was componentized for use in blog posts to break up bullet points at the top of the post.
 
-_Note: This does **not** actually embed an X post; it's just styled to look like one._
+_Note: This does **not** actually embed an X post ; it's just styled to look like one._
 
 <Tweet alertMessage="Gen Z? Don't get distracted. You're here to read our exciting embedded post component.">
-    Here's what a post looks like. It's designed to have a familiar look that makes it easy to scan.
+Here's what a post looks like. It's designed to have a familiar look that makes it easy to scan.
 </Tweet>
 
 <Tweet alertMessage="Gen Z? Don't get distracted. You're here to read our exciting embedded post component.">
-    If you show multiple posts in a row, they'll be connected by a vertical line to make it look like a thread.
+If you show multiple posts in a row, they'll be connected by a vertical line to make it look like a thread.
 </Tweet>
 
 **Usage**
@@ -736,10 +938,10 @@ Be sure to change the alert message which appears if you click one of the action
 <!-- prettier-ignore -->
 ```tsx
 <Tweet
-    className="mx-auto"
-    alertMessage="Gen Z? Don't get distracted. You're here to read our exciting embedded post component."
+className="mx-auto"
+alertMessage="Gen Z? Don't get distracted. You're here to read our exciting embedded post component."
 >
-    If you show multiple posts in a row, they'll be connected by a vertical line to make it look like a thread.
+If you show multiple posts in a row, they'll be connected by a vertical line to make it look like a thread.
 </Tweet>
 ```
 

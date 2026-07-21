@@ -116,7 +116,7 @@ Since our revenue is growing fast, we could triple or more our team next year, j
 
 ## So what should you take from this?
 
-For us, I think we probably will fundraise again. However, our goals may be different to the norm – like just making sure we have more working capital so we can stay long term focused, to provide employee secondaries, or to get the ideal board member into the company.
+For us, I think we probably will fundraise again. However, our goals may be different to the norm – like just making sure we have more working capital so we can stay long term focused, to provide [employee secondaries](/blog/how-secondaries-actually-work), or to get the ideal board member into the company.
 
 Venture Capital is a tool, not a religion. Don't blindly follow what you hear others are doing on TechCrunch.
 

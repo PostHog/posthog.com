@@ -25,7 +25,6 @@ export const workflows = {
     color: 'teal',
     colorSecondary: 'green-2',
     category: 'automation',
-    status: 'beta',
     includeAddonRates: true,
     slider: {
         marks: [10000, 50000, 100000, 1000000, 10000000],
@@ -48,11 +47,13 @@ export const workflows = {
     ],
     seo: {
         title: 'Workflows – Automate workflows with product data',
-        description: 'Trigger Slack messages, emails, or events based on live user behavior.',
+        description:
+            'Automations that act on live user behavior – send Slack messages, emails, or events. The actions agents take to close the loop and make your product self-driving.',
     },
     overview: {
         title: 'Automate workflows with product data',
-        description: 'Trigger Slack messages, emails, or events based on live user behavior.',
+        description:
+            'Workflows is one of the tools that makes your product self-driving: the actions agents take to close the loop. Trigger Slack messages, emails, or events based on live user behavior.',
         textColor: 'text-black',
         layout: 'overlay',
     },
@@ -288,6 +289,9 @@ export const workflows = {
             ],
             us: [
                 {
+                    title: 'Agents can build automations that act on your product data – the actions that close the self-driving loop',
+                },
+                {
                     title: 'You want automations that run on top of your live product data',
                 },
                 {
@@ -327,6 +331,22 @@ export const workflows = {
         rows: ['workflows'],
         excluded_sections: ['platform'],
     },
+    ai: {
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_hog_791169c2d0.png',
+        imageAlt: 'A hedgehog automating workflows',
+        imageClasses: 'max-w-[360px]',
+        description: 'build the automation and ship it on your behalf',
+        skills: [
+            'Generates email templates for your content library',
+            'Sets up multi-step workflows from the triggers, conditions, and actions you describe',
+            'Recommends which workflows to build and when to run them based on your product metrics',
+        ],
+        prompts: [
+            'Build an onboarding email sequence to help new users get started',
+            'Create a workflow that notifies our Slack channel when someone upgrades to a paid plan',
+            'Generate a SMS sequence to encourage users to complete a survey',
+        ],
+    },
     pairsWith: [
         {
             slug: 'experiments',
@@ -351,17 +371,16 @@ export const workflows = {
     ],
     worksWith: ['experiments', 'product-analytics', 'feature-flags', 'error-tracking'],
     presenterNotes: {
-        overview:
-            '<strong>Presenter notes:</strong> Track conversations, model performance, spans, costs, latency, and traces in LLM applications – all as regular PostHog events - roughly 10x cheaper than other LLM observability tools.',
+        overview: '',
     },
     hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_hog_791169c2d0.png',
-        alt: 'A hedgehog automating workflows',
-        classes: 'absolute bottom-0 right-4 max-w-[250px]',
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_066caea85f.png',
+        alt: 'the automator hedgehog',
+        classes: 'absolute bottom-0 right-0 w-auto h-auto max-w-[min(90vw,480px)] @2xl:max-w-xl',
     },
     videos: {
         automating_onboarding_with_posthog_workflows: {
-            title: 'How PostHog uses PostHog Workflows',
+            title: 'Automating onboarding with PostHog Workflows',
             author: 'Sara Miteva',
             wistia: '9npwnc8sm6',
             chapters: [

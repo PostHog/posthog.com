@@ -11,7 +11,12 @@ interface ScrollToElementProps {
     [key: string]: any
 }
 
-export const scrollToElement = (targetId: string, offset = 0, behavior: 'auto' | 'smooth' = 'smooth'): void => {
+export const scrollToElement = (
+    targetId: string,
+    offset = 0,
+    behavior: 'auto' | 'smooth' = 'smooth',
+    align: 'start' | 'end' = 'start'
+): void => {
     const targetElement = document.getElementById(targetId)
     if (!targetElement) {
         return
@@ -20,22 +25,34 @@ export const scrollToElement = (targetId: string, offset = 0, behavior: 'auto' |
     // Check for Radix ScrollArea container
     const scrollViewport = targetElement.closest('[data-radix-scroll-area-viewport]') as HTMLElement
 
-    if (scrollViewport) {
+    // Only use viewport scrolling if it exists AND is actually scrollable
+    // In website mode, the viewport exists but doesn't scroll (pages are full height)
+    const viewportIsScrollable = scrollViewport && scrollViewport.scrollHeight > scrollViewport.clientHeight
+
+    const taskbarOffset = 49
+    const targetRect = targetElement.getBoundingClientRect()
+
+    if (viewportIsScrollable) {
         // Radix ScrollArea scrolling (same logic as ElementScrollLink)
         const parentRect = scrollViewport.getBoundingClientRect()
-        const targetRect = targetElement.getBoundingClientRect()
-        const relativeTop = targetRect.top - parentRect.top + scrollViewport.scrollTop + offset
+        const top =
+            align === 'end'
+                ? targetRect.bottom - parentRect.top + scrollViewport.scrollTop - scrollViewport.clientHeight + offset
+                : targetRect.top - parentRect.top + scrollViewport.scrollTop + offset
 
         scrollViewport.scrollTo({
-            top: relativeTop,
+            top,
             behavior,
         })
     } else {
-        // Standard window scrolling fallback
-        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset + offset
+        // Standard window scrolling fallback (used in website mode or when no viewport exists)
+        const top =
+            align === 'end'
+                ? targetRect.bottom + window.pageYOffset - window.innerHeight + offset
+                : targetRect.top + window.pageYOffset + offset - taskbarOffset
 
         window.scrollTo({
-            top: targetPosition,
+            top,
             behavior,
         })
     }

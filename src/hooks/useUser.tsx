@@ -35,6 +35,14 @@ export type User = {
             metadata: any
         }[]
     }
+    imageGenerationRateLimit?: {
+        remaining: number
+        limit: number
+        resetTime: string | null
+        windowMs: number
+        monthlyCount: number
+    }
+    picasso?: boolean
 }
 
 type UserContextValue = {
@@ -332,6 +340,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                             images: {
                                 sort: ['createdAt:desc'],
                                 populate: {
+                                    mediaFolder: true,
                                     tags: true,
                                     related: true,
                                 },

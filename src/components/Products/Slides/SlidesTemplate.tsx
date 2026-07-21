@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import SEO from 'components/seo'
+import SEO, { buildProductStructuredData } from 'components/seo'
 import Presentation from 'components/Presentation'
 import ScalableSlide from 'components/Presentation/ScalableSlide'
 import ResponsiveSlideContent from 'components/Presentation/ResponsiveSlideContent'
@@ -650,12 +650,22 @@ export default function SlidesTemplate({
         rawContent: slide.content,
     }))
 
+    // schema.org JSON-LD so agents/LLMs and search engines get machine-readable facts about each tool/product.
+    const productStructuredData = productData
+        ? buildProductStructuredData({
+              name: productData.name,
+              description: productData.seo?.description || productData.description,
+              slug: productData.slug || '',
+              faq: productData.questions,
+          })
+        : undefined
+
     return (
         <>
             <SEO
                 title={seoOverrides?.title || productData?.seo?.title}
                 description={seoOverrides?.description || productData?.seo?.description}
-                image={seoOverrides?.image || `/images/og/${productData?.slug}.jpg`}
+                image={seoOverrides?.image || productData?.seo?.image || `/images/og/${productData?.slug}.jpg`}
             />
             <Presentation
                 rightActionButtons={rightActionButtons}
@@ -676,7 +686,7 @@ export default function SlidesTemplate({
             >
                 <div
                     data-scheme="primary"
-                    className="bg-accent grid grid-cols-1 gap-2 [&>div:first-child_>span]:hidden p-2 @md:p-4"
+                    className="bg-accent px-2 @md:px-4 grid grid-cols-1 gap-2 [&>div:first-child_>span]:hidden py-2 @md:py-4"
                 >
                     {slides.map((slide, index) => (
                         <div

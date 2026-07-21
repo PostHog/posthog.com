@@ -6,7 +6,7 @@ import OverrideServerPropertiesIntro from './override-server-properties-intro.md
 
 ```shell
 curl -v -L --header "Content-Type: application/json" -d '  {
-    "api_key": "<ph_project_api_key>",
+    "api_key": "<ph_project_token>",
     "distinct_id": "distinct_id_of_your_user",
     "groups" : { # Required only for group-based feature flags
       "group_type": "group_id" # Replace "group_type" with the name of your group type. Replace "group_id" with the id of your group.
@@ -25,7 +25,7 @@ headers = {
     "Content-Type": "application/json"
 }
 payload = {
-    "api_key": "<ph_project_api_key>",
+    "api_key": "<ph_project_token>",
     "distinct_id": "distinct_id_of_your_user",
     "groups" : { # Required only for group-based feature flags
       "group_type": "group_id" # Replace "group_type" with the name of your group type. Replace "group_id" with the id of your group.
@@ -52,7 +52,7 @@ curl -v -L \
 --header "Content-Type: application/json" \
 --header "HTTP_X_FORWARDED_FOR: the_client_ip_address_to_use " \
 -d '  {
-    "api_key": "<ph_project_api_key>",
+    "api_key": "<ph_project_token>",
     "distinct_id": "distinct_id_of_your_user"
 }' <ph_client_api_host>/flags?v=2
 ```
@@ -67,7 +67,7 @@ headers = {
     "HTTP_X_FORWARDED_FOR": "the_client_ip_address_to_use"
 }
 payload = {
-    "api_key": "<ph_project_api_key>",
+    "api_key": "<ph_project_token>",
     "distinct_id": "distinct_id_of_your_user"
 }
 response = requests.post(url, headers=headers, data=json.dumps(payload))

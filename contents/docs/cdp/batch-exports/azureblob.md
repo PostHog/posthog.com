@@ -13,7 +13,7 @@ import InboundIpAddresses from '../_snippets/inbound-ip-addresses.mdx'
 
 With batch exports, data can be exported to Azure Blob Storage.
 
-<CalloutBox icon="IconInfo" title="Azure Blob Storage destination is in beta" type="fyi">
+<CalloutBox icon="IconFlask" title="Azure Blob Storage destination is in beta" type="action">
 
 The Azure Blob Storage destination is currently in `beta`. This means the configuration and features are subject to change.
 
@@ -48,7 +48,7 @@ You can view the schema for each model inside the batch export configuration in 
 
 ## Creating the batch export
 
-1. Click [Data pipelines](https://app.posthog.com/pipeline) in the navigation and go to the **Destinations** tab.
+1. Click [Data management > Destinations](https://app.posthog.com/data-management/destinations) in the left sidebar.
 2. Click **+ New destination** in the top-right corner.
 3. Search for **Azure Blob Storage**.
 4. Click the **+ Create** button.

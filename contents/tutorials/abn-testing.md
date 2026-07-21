@@ -91,9 +91,9 @@ If you want the optional override to apply to only you, you can create another c
 
 ### Rolling out the winning variant
 
-Once your experiment has concluded, you can stop it and roll out the winning variant. 
+Once your experiment has concluded, you can end it and roll out the winning variant.
 
-To do this, click the "stop" button on your experiment details page, go to your [feature flag page](https://app.posthog.com/feature_flags), search for the key related to your experiment, and click to edit it. Under variant keys, edit the rollout value to 100 for the winning variant and 0 for the losing ones, and press save. When you’re ready, you can remove the experiment-related code from your app too.
+To do this, click the **End experiment** button on your experiment details page and select the variant to keep. PostHog rolls out the chosen variant to all users. When you're ready, you can remove the experiment-related code from your app too.
 
 ![Rolling out our winner](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/abn-testing/rollout.png)
 

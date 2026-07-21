@@ -31,12 +31,12 @@ npm install
 npm i posthog-js
 ```
 
-Next, get your PostHog project API key and instance address from the getting started flow or [your project settings](https://app.posthog.com/project/settings) and set up environment variables to store them. You can do this by creating a `.env.local` file in your project root:
+Next, get your PostHog project token and instance address from the getting started flow or [your project settings](https://app.posthog.com/project/settings) and set up environment variables to store them. You can do this by creating a `.env.local` file in your project root:
 
 ```bash
 # .env.local
-VITE_PUBLIC_POSTHOG_KEY=<ph_project_api_key>
-VITE_PUBLIC_POSTHOG_HOST=<ph_client_api_host>
+VITE_POSTHOG_PROJECT_TOKEN=<ph_project_token>
+VITE_POSTHOG_HOST=<ph_client_api_host>
 ```
 
 Next, create your entry point for client-side rendering in `src/entry-client.jsx`:
@@ -50,12 +50,12 @@ import App from './App.jsx'
 import { PostHogProvider } from '@posthog/react'
 
 const options = {
-  api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
+  api_host: import.meta.env.VITE_POSTHOG_HOST,
 }
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <PostHogProvider apiKey={import.meta.env.VITE_PUBLIC_POSTHOG_KEY} options={options}>
+    <PostHogProvider apiKey={import.meta.env.VITE_POSTHOG_PROJECT_TOKEN} options={options}>
       <App />
     </PostHogProvider>
   </StrictMode>,
@@ -90,7 +90,7 @@ Once done, you can evaluate your flag in the `loaded()` method on initialization
 
 ```js
 const options = {
-  api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
+  api_host: import.meta.env.VITE_POSTHOG_HOST,
   loaded(ph) {
     console.log(ph.isFeatureEnabled('test-flag'))
   }
@@ -143,7 +143,7 @@ import App from './App'
 import { PostHogProvider } from '@posthog/react'
 
 const options = {
-  api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
+  api_host: import.meta.env.VITE_POSTHOG_HOST,
   loaded(ph) {
     console.log(ph.isFeatureEnabled('test-flag'))
   }
@@ -153,7 +153,7 @@ const options = {
 hydrateRoot(
   document.getElementById('root'),
   <StrictMode>
-    <PostHogProvider apiKey={import.meta.env.VITE_PUBLIC_POSTHOG_KEY} options={options}>
+    <PostHogProvider apiKey={import.meta.env.VITE_POSTHOG_PROJECT_TOKEN} options={options}>
       <App />
     </PostHogProvider>
   </StrictMode>
@@ -206,9 +206,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // Initialize PostHog client
 const client = new PostHog(
-  process.env.VITE_PUBLIC_POSTHOG_KEY,
+  process.env.VITE_POSTHOG_PROJECT_TOKEN,
   { 
-    host: process.env.VITE_PUBLIC_POSTHOG_HOST,
+    host: process.env.VITE_POSTHOG_HOST,
     personalApiKey: process.env.POSTHOG_PERSONAL_API_KEY // This one is server-only
   }
 );
@@ -262,7 +262,7 @@ In the route's `try` block, we'll get or create a distinct ID and use it to get 
 try {
   // Get or create distinct ID
   let distinctId = null;
-  const phCookie = req.cookies[`ph_${process.env.VITE_PUBLIC_POSTHOG_KEY}_posthog`];
+  const phCookie = req.cookies[`ph_${process.env.VITE_POSTHOG_PROJECT_TOKEN}_posthog`];
   if (phCookie) {
     distinctId = JSON.parse(phCookie)['distinct_id'];
   }
@@ -332,9 +332,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // Initialize PostHog client
 const client = new PostHog(
-  process.env.VITE_PUBLIC_POSTHOG_KEY,
+  process.env.VITE_POSTHOG_PROJECT_TOKEN,
   { 
-    host: process.env.VITE_PUBLIC_POSTHOG_HOST,
+    host: process.env.VITE_POSTHOG_HOST,
     personalApiKey: process.env.POSTHOG_PERSONAL_API_KEY // This one is server-only
   }
 );
@@ -360,7 +360,7 @@ async function createServer() {
     try {
       // Get or create distinct ID
       let distinctId = null;
-      const phCookie = req.cookies[`ph_${process.env.VITE_PUBLIC_POSTHOG_KEY}_posthog`];
+      const phCookie = req.cookies[`ph_${process.env.VITE_POSTHOG_PROJECT_TOKEN}_posthog`];
       if (phCookie) {
         distinctId = JSON.parse(phCookie)['distinct_id'];
       }
@@ -451,7 +451,7 @@ const flagData = window.__FLAG_DATA__;
 const distinctId = window.__PH_DISTINCT_ID__;
 
 const options = {
-  api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
+  api_host: import.meta.env.VITE_POSTHOG_HOST,
   bootstrap: {
     distinctID: distinctId,
     featureFlags: flagData,

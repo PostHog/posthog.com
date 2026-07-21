@@ -39,14 +39,15 @@ export default function KBDShortcuts(): JSX.Element {
         {
             title: 'Appearance',
             shortcuts: [
-                { keys: ['Shift', '\\'], description: 'Cycle wallpapers' },
+                { keys: ['\\'], description: 'Cycle wallpapers' },
                 { keys: ['Shift', 'Z'], description: 'Start screensaver' },
-                { keys: ['\\'], description: 'Cycle color themes', info: 'Light, dark, system' },
+                { keys: ['M'], description: 'Cycle color themes', info: 'Light, dark, system' },
             ],
         },
         {
             title: 'Window management',
             shortcuts: [
+                { keys: ['Shift', 'M'], description: 'Toggle OS mode / website mode' },
                 { keys: ['Shift', '<'], description: 'Show active windows panel' },
                 { keys: ['Shift', '>'], description: 'Focus next open window' },
                 { keys: ['Shift', 'X'], description: 'Close all windows' },

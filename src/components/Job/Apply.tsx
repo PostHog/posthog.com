@@ -17,19 +17,6 @@ import { IconSpinner } from '@posthog/icons'
 
 const allowedFileTypes = ['application/pdf']
 
-const fileToBase64 = (file: File): Promise<string> => {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader()
-        reader.onload = () => {
-            const result = reader.result as string
-            const base64 = result.split(',')[1]
-            resolve(base64)
-        }
-        reader.onerror = reject
-        reader.readAsDataURL(file)
-    })
-}
-
 interface IResumeComponentProps {
     title: string
     required: boolean
@@ -152,7 +139,22 @@ const components = {
                 >
                     <div className="absolute">
                         {fileName ? (
-                            <p className="!m-0">{fileName}</p>
+                            <p className="flex items-center gap-2 !m-0">
+                                <span>{fileName}</span>
+                                <button
+                                    type="button"
+                                    className="text-red dark:text-yellow text-sm font-medium"
+                                    onClick={(e) => {
+                                        e.stopPropagation()
+                                        setFileName(null)
+                                        if (inputRef.current) {
+                                            inputRef.current.value = ''
+                                        }
+                                    }}
+                                >
+                                    Remove
+                                </button>
+                            </p>
                         ) : (
                             <p className="flex space-x-3 items-center !m-0">
                                 <button type="button" className={container('primary', 'sm')} onClick={open}>
@@ -221,52 +223,36 @@ const Form = ({
         setError(null)
 
         try {
-            const form = e.currentTarget
-            const data = new FormData(form)
-            const payload: {
-                fields: Record<string, string>
-                files: Record<string, { name: string; type: string; data: string }>
-                jobPostingId: string
-            } = {
-                fields: {},
-                files: {},
-                jobPostingId: id,
-            }
+            const data = new FormData(e.currentTarget)
+            const form = new FormData()
 
             for (const [name, value] of data as any) {
-                const el = form.querySelector(`[name="${name}"]`) as HTMLInputElement
+                const el = e.currentTarget.querySelector(`[name="${name}"]`) as HTMLInputElement
                 const path = el?.dataset.path
                 if (el?.type === 'file') {
-                    const file = value as File
-                    if (!file.size) continue
-                    if (!allowedFileTypes.includes(file.type)) {
+                    if (!allowedFileTypes.includes((value as File).type)) {
                         throw new Error(`Allowed file types: ${allowedFileTypes.join(', ')}`)
                     }
-                    const base64Data = await fileToBase64(file)
-                    payload.files[name] = {
-                        name: file.name,
-                        type: file.type,
-                        data: base64Data,
-                    }
-                    if (path) {
-                        payload.fields[path] = name
-                    }
+                    form.append(name, value)
+                    form.append(path || '', name)
                 } else {
-                    if (path) {
-                        payload.fields[path] = value as string
-                    }
+                    form.append(path || '', value as string)
                 }
             }
 
-            const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/job-application/submit`, {
+            form.append('jobPostingId', id)
+
+            const res = await fetch('/api/apply', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(payload),
+                body: form,
             })
 
             if (!res.ok) {
+                if (res.status === 413) {
+                    throw new Error(
+                        'Your resume is a little too impressive to upload. Please reduce the file size and try again.'
+                    )
+                }
                 throw new Error('Failed to submit application. Please try again.')
             }
 
@@ -355,9 +341,12 @@ const Form = ({
     )
 }
 
-const code = 'X7DABDB33723'
+const code = process.env.GATSBY_SHOPIFY_STICKER_CODE
+if (!code) {
+    throw new Error('GATSBY_SHOPIFY_STICKER_CODE is not set')
+}
 
-const ApplicationSuccess = ({ isInExcludedCountry }: { isInExcludedCountry?: boolean }) => {
+const ApplicationSuccess = ({ isInUnitedStates }: { isInUnitedStates?: boolean }) => {
     const { setWindowTitle } = useApp()
     const { appWindow } = useWindow()
     const posthog = usePostHog()
@@ -420,7 +409,7 @@ const ApplicationSuccess = ({ isInExcludedCountry }: { isInExcludedCountry?: boo
                         </p>
                     </div>
 
-                    {!isInExcludedCountry && (
+                    {isInUnitedStates && (
                         <div className="px-6 md:px-12 mb-8">
                             <CloudinaryImage
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/laptop_sticker_6c15a03be1.png"
@@ -430,7 +419,8 @@ const ApplicationSuccess = ({ isInExcludedCountry }: { isInExcludedCountry?: boo
 
                             <h3 className="m-0 text-base">Here's a laptop sticker, on us!</h3>
                             <p className="m-0 mb-3 text-sm">
-                                This code is our token of appreciation for taking the time to apply.
+                                This code is our token of appreciation for taking the time to apply. (Available for
+                                shipping to addresses in the United States only.)
                             </p>
                             <div className="rounded-md bg-tan dark:bg-accent-dark border border-primary  py-2 px-3 flex justify-between items-center mb-4 md:max-w-[210px] w-full">
                                 <p className="font-semibold font-code m-0">{code}</p>
@@ -489,7 +479,7 @@ const ApplicationSuccess = ({ isInExcludedCountry }: { isInExcludedCountry?: boo
                         </div>
                     )}
 
-                    <div className={`mx-6 md:mx-12 pb-2  ${isInExcludedCountry ? '' : 'border-t border-primary pt-6'}`}>
+                    <div className={`mx-6 md:mx-12 pb-2  ${!isInUnitedStates ? '' : 'border-t border-primary pt-6'}`}>
                         <h4 className="mb-0">More cool tech jobs</h4>
                         <p className="text-sm mb-4">
                             While you're waiting to hear back, you might also be interested in exploring our{' '}
@@ -554,6 +544,7 @@ export default function Apply({ id, info }: { id: string; info: any }) {
     const { addWindow } = useApp()
     const [submitted, setSubmitted] = useState(false)
     const [isInExcludedCountry, setIsInExcludedCountry] = useState()
+    const [isInUnitedStates, setIsInUnitedStates] = useState()
 
     const handleSubmit = useCallback(() => {
         setSubmitted(true)
@@ -562,13 +553,16 @@ export default function Apply({ id, info }: { id: string; info: any }) {
                 key="application-success"
                 location={{ pathname: 'application-success' }}
                 newWindow
-                isInExcludedCountry={isInExcludedCountry}
+                isInUnitedStates={isInUnitedStates}
             />
         )
-    }, [isInExcludedCountry])
+    }, [isInUnitedStates])
 
     useEffect(() => {
-        setIsInExcludedCountry(posthog?.isFeatureEnabled?.('is-in-excluded-hiring-country'))
+        posthog?.onFeatureFlags?.(() => {
+            setIsInExcludedCountry(posthog?.isFeatureEnabled?.('is-in-excluded-hiring-country'))
+            setIsInUnitedStates(posthog?.isFeatureEnabled?.('are-you-in-the-us'))
+        })
     }, [posthog])
 
     // preview confirmation window

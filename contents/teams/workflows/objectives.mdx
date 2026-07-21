@@ -1,20 +1,33 @@
-### Q1 2026 Objectives
+### Q3 2026 Objectives
 
-- *Going deeper on messaging*: 
-  - Messaging is still the most common Workflows use case, and we want to serve it really well before focusing broadly on Workflows features.
-	- What we’ll ship: 
-    - The most-requested features from our users
-    - Broadcasts (aka Batch workflows)
-    - Recurring / cron-job workflows
-    - New native PostHog messaging channels (Push, SMS)
-    - Behavioral targeting (do _X_ only if user has not performed _Y_ event in last _N_ days)
-- *Gear up for Workflows General Availability*:
-	- As we prepare Workflows for a broader release, we’re focusing on reliability and day-to-day usability, especially when things go wrong.
+- **Become a 2030 Workflows Product** (Champion: Harley)
+  - Motivation: Agents are far better at building context and making modifications than users.
   - What we'll ship:
-    - Improved observability (clear run history for past and future workflow invocations, logs, and debugging tools)
-    - Better previews for messages on all channels so that users feel confident in their comms
-    - High level insights around email deliverability to allow users to proactively monitor spam reputation
-    - More product documentation for new and existing users
-- *Inter-product triggers*: 
-	- Today, Workflows is powerful, but integrations across PostHog product aren’t yet consistent
-	- What we’ll ship: At least one solid, repeatable integration pattern for triggering workflows from other PostHog products, or letting users configure workflows based on product events
+    - Fully AI native & agentic workflow product
+      - Chat interface for rapid iteration
+      - Move to read-only UI for workflows / email templates / messaging
+    - Removal of hefty existing UI if new experience & user testing is superior
+    - Revisions
+    - Reshape APIs to be agentic-friendly for rapid turnaround
+- **Fit into self-driving products** (Champion: Dan)
+  - Motivation: A single person can drive 1000 workflows.
+  - What we'll ship:
+    - Get our data right so 'self-driving' can first suggest changes
+    - Integrate with 'self-driving' to propose the change (using revisions and APIs)
+    - Test revisions of actions against each other for improvements (still human in the loop)
+    - Self-driving applying the outcomes of the A/B tests
+- **Reliability & Trust** (Champion: Myke)
+  - Motivation: Customers trust us fully with their workflows.
+  - What we'll ship:
+    - Harden our systems to never drop data
+    - Finalise the re-run system so we can replay failed invocations
+    - Full visibility into every messaging channel
+- **Nail Messaging** (Champions: Dan & Myke)
+  - Motivation: Feature parity on table-stakes features with our competitors.
+  - What we'll ship:
+    - Behavioural cohorts (no backfilling)
+    - Push notifications
+    - A/B testing
+    - Email events
+    - Messaging metrics
+    - Email with multiple links / more detailed metrics

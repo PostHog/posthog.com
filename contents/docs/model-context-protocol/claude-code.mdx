@@ -1,0 +1,45 @@
+---
+title: PostHog MCP for Claude Code
+sidebarTitle: Claude Code
+---
+
+import { MCPConfigSnippet } from '../../../src/components/Product/MCP/MCPConfig'
+import SharedContent from "./_snippets/shared.mdx"
+
+The PostHog [MCP server](https://modelcontextprotocol.io/introduction) enables Claude Code to directly interact with your PostHog data – managing feature flags, querying analytics, investigating errors, and more.
+
+## Server URL
+
+`https://mcp.posthog.com/mcp`
+
+The PostHog authentication server automatically routes you to the correct data region (US or EU) based on the account you log in with.
+
+## Quick install
+
+The [PostHog Wizard](https://github.com/PostHog/wizard) can install the MCP server directly into Claude Code:
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+## Claude Code plugin
+
+You can also install PostHog as a [Claude Code plugin](https://github.com/PostHog/ai-plugin), which provides the same MCP tools along with built-in slash commands for quick access:
+
+```bash
+claude plugin install posthog
+```
+
+After installing, run `/mcp` in Claude Code and follow the browser prompts to log in to PostHog.
+
+The plugin includes slash commands like `/posthog:flags`, `/posthog:insights`, `/posthog:errors`, `/posthog:experiments`, and more.
+
+## Manual MCP setup
+
+Run the following command in your shell. The next time you run [Claude Code](https://www.anthropic.com/claude-code), it will have access to the PostHog MCP.
+
+<MCPConfigSnippet variant="claude-code" />
+
+When you first use the MCP server, you'll be prompted to log in to PostHog to authenticate.
+
+<SharedContent />

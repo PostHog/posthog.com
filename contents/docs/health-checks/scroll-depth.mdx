@@ -1,0 +1,46 @@
+---
+title: Scroll-depth tracking disabled
+sidebar: Docs
+showTitle: true
+---
+
+The scroll-depth check fires when your `$pageleave` events arrive without scroll-depth metadata, which leaves scroll-depth reports in web analytics empty.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_49_21_883_Z_cc950bcef7.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_49_17_151_Z_c31cc5ea92.png"
+    alt="Scroll-depth tracking disabled check in the Health checks section in the PostHog app"
+    classes="rounded"
+/>
+
+## What this check looks for
+
+Once a day, the check looks back over the **last 30 days** at your `$pageleave` events and checks whether they include the scroll-depth property (`$prev_pageview_max_content_percentage`). If none of them do, it raises a **warning**.
+
+## Why it matters
+
+Scroll depth tells you how far down a page people actually read. Without it, scroll-depth reports are empty and you lose a useful engagement signal. It usually means scroll-depth autocapture is disabled in the SDK.
+
+## Fix it manually
+
+Scroll depth is collected automatically by `posthog-js` as part of `$pageleave` when autocapture is enabled, so the usual fix is:
+
+1. Open the **Web analytics health** page.
+2. Update to a recent `posthog-js` version.
+3. Make sure autocapture (and DOM / scroll tracking) hasn't been disabled in your `posthog.init` config.
+
+## Fix it automatically with the Inbox and PostHog Code
+
+With the [Inbox](/docs/self-driving) and health checks enabled as a [signal source](/docs/self-driving/inbox/sources), the agent will:
+
+- Inspect a recent `$pageleave` event and confirm the scroll fields are missing.
+- Bump `posthog-js` and check that your `posthog.init` config doesn't disable autocapture or DOM / scroll tracking.
+- Open a PR.
+
+The issue clears on the next run once `posthog-js` starts sending scroll metadata.
+
+## Related
+
+- [Health checks overview](/docs/health-checks)
+- [Autocapture](/docs/product-analytics/autocapture)
+- [Missing pageleave events](/docs/health-checks/pageleave-events)

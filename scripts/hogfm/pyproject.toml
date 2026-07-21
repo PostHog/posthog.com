@@ -19,6 +19,7 @@ handbook-audio = "handbook.generate:main"
 
 [tool.uv]
 package = true
+exclude-newer = "7 days"
 
 [build-system]
 requires = ["hatchling"]
