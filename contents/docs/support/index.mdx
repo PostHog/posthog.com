@@ -1,0 +1,127 @@
+---
+title: Support
+sidebar: Docs
+showTitle: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import { IconLaptop, IconMessage, IconMagic, IconCode, IconBrackets, IconChat, IconAtSign, IconGithub, IconBolt, IconNotebook, IconPullRequest, IconCheckCircle } from '@posthog/icons'
+import OSButton from 'components/OSButton'
+import CustomSelfDrivingLoop from 'components/CustomSelfDrivingLoop'
+
+Support gives you one inbox for every customer conversation, whether it arrives from your app, your email, or a GitHub issue. Because PostHog already knows what's happening in your product, each ticket comes with the sender's [session replay](/docs/session-replay), events, and errors attached, so you can see what went wrong instead of trying to reproduce it. Those same conversations feed [Self-driving](/docs/self-driving), which groups recurring issues into pull requests you review and merge.
+
+<OSButton variant="primary" asLink to="/docs/support/start-here">Get started</OSButton>
+
+## Where you can use it
+
+Support does different things depending on where you work. You read and reply to customers in the [Support inbox](/docs/support/inbox). The other surfaces are for reviewing the Self-driving work your tickets generate.
+
+<div className="not-prose grid grid-cols-1 @md:grid-cols-2 @3xl:grid-cols-3 gap-x-6 gap-y-6 my-6">
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconLaptop className="size-6 shrink-0 text-blue mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Web</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Read and reply to customer tickets, each with the sender's replay and events in view.</p>
+      <a href="/docs/support/inbox" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Manage tickets →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconMessage className="size-6 shrink-0 text-red mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Slack</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Ask <code>@PostHog</code> about your support data and review Self-driving reports built from your tickets.</p>
+      <a href="/docs/support/surfaces/slack" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">See the Slack app →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconMagic className="size-6 shrink-0 text-purple mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">MCP</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">List and update tickets and manage Self-driving reports from any MCP client.</p>
+      <a href="/docs/model-context-protocol/tools" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">MCP tools reference →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconCode className="size-6 shrink-0 text-green mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary flex items-center gap-1.5">Code <span className="text-2xs font-bold uppercase tracking-wide px-1.5 py-0.5 rounded bg-yellow/20 text-orange">Beta</span></p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Review and merge Self-driving reports and PRs built from your tickets, next to the agents improving your product.</p>
+      <a href="/docs/posthog-code" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">PostHog Code →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconBrackets className="size-6 shrink-0 text-seagreen mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">API</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Build a custom support experience on the <code>posthog.conversations</code> JavaScript API.</p>
+      <a href="/docs/support/javascript-api" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Build a custom widget →</a>
+    </div>
+  </div>
+
+</div>
+
+## Where tickets come from
+
+Tickets reach your inbox through four [channels](/docs/support/concepts/channels). Each one syncs both ways, so you answer from a single place no matter where the conversation started.
+
+<div className="not-prose grid grid-cols-1 @md:grid-cols-2 gap-x-6 gap-y-5 my-6">
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconChat className="size-6 shrink-0 text-blue mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Widget</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">In-app chat button. Auto-attaches events, session replay, URL, and identity.</p>
+      <a href="/docs/support/widget" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Set up the widget →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconAtSign className="size-6 shrink-0 text-teal mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Email</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Forward <code>support@</code> mail in, and replies thread back to the customer's inbox.</p>
+      <a href="/docs/support/email" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Connect email →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconMessage className="size-6 shrink-0 text-red mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Slack aka SupportHog</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">SupportHog turns messages, mentions, or an emoji reaction into tickets.</p>
+      <a href="/docs/support/slack" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Connect Slack →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconGithub className="size-6 shrink-0 text-primary mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">GitHub</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Issues in monitored repos become tickets, and replies post back as comments.</p>
+      <a href="/docs/support/github" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Connect GitHub →</a>
+    </div>
+  </div>
+
+</div>
+
+## How Support works with Self-driving
+
+Your support conversations are a [signal source](/docs/self-driving/inbox/sources) for [Self-driving](/docs/self-driving): recurring issues become reports, and when there's a code fix, a pull request you review and merge.
+
+<CustomSelfDrivingLoop
+  stages={[
+    { label: 'Support conversations', icon: IconMessage, color: '#F54E00', description: 'Tickets from every channel, plus external help desks' },
+    { label: 'Signals', icon: IconBolt, color: '#FFA81C', description: 'Actionable items extracted from conversations' },
+    { label: 'One report', icon: IconNotebook, color: '#29DBBB', description: 'Grouped with related errors and replays' },
+    { label: 'Draft PR', icon: IconPullRequest, color: '#A737D2', description: 'When a code fix is possible' },
+    { label: 'You merge', icon: IconCheckCircle, color: '#47C861', description: 'Nothing ships without a human' },
+  ]}
+/>
+
+You read and reply to customers in the [Support inbox](/docs/support/inbox), and review and merge the Self-driving work in the [Self-driving inbox](/docs/self-driving/inbox). See the [Self-driving docs](/docs/self-driving) for the full picture.

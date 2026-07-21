@@ -3,21 +3,22 @@ import OverrideServerPropertiesIntro from './override-server-properties-intro.md
 <OverrideServerPropertiesIntro />
 
 ```php
-PostHog::getFeatureFlag(
-    'flag-key',
-    'distinct_id_of_the_user',
-    [
+$flags = PostHog::evaluateFlags(
+    distinctId: 'distinct_id_of_the_user',
+    groups: [
         'your_group_type' => 'your_group_id',
-        'another_group_type' => 'your_group_id'
-    ], // groups
-    ['property_name' => 'value'], // person properties
-    [
-        'your_group_type' => ['group_property_name' => 'value'], 
-        'another_group_type' => ['group_property_name' => 'value']
-    ], // group properties
-    false, // onlyEvaluateLocally, Optional. Defaults to false.
-    true // sendFeatureFlagEvents
+        'another_group_type' => 'your_group_id',
+    ],
+    personProperties: ['property_name' => 'value'],
+    groupProperties: [
+        'your_group_type' => ['group_property_name' => 'value'],
+        'another_group_type' => ['group_property_name' => 'value'],
+    ],
 );
+
+if ($flags->isEnabled('flag-key')) {
+    // Do something differently for this user
+}
 ```
 
 import OverrideGeoIPPropertiesSDK from './override-geoip-properties-SDKs.mdx'

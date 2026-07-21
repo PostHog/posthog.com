@@ -31,13 +31,15 @@ Organization members have different access levels based on their membership type
 
 ### Adding new members
 
-Any organization member can create organization invites. Such an invite is valid **for 3 days** after creation and **only for the specified email**. Emails can be resent by removing and re-adding the invitee.
+By default, any organization member can create and view organization invites. Admins and owners can restrict this by disabling **Members can invite** in organization settings – when disabled, only admins and owners can create and view invites. Members can only see invites at or below their own membership level. Invites are valid **for 3 days** after creation and **only for the specified email**. Emails can be resent by removing and re-adding the invitee.
 
 In an [email-enabled PostHog instance](/docs/self-host/configure/email) (including PostHog Cloud) the invite is sent automatically to the specified email. If the PostHog instance can't send emails, remember to share the invite link yourself.
 
 If there's no account associated with that email, the invited person will have to create an account. Otherwise, they'll be able to join with their existing account.
 
-If you signed up for PostHog before accepting an invite, any pending invites for your email address appear in the project switcher. Open the project switcher from the organization dropdown in the top bar to see and accept them.
+If you sign up with an email that has a pending invite, PostHog automatically detects it and shows the inviting organization's name with an option to resend the invite email. You can skip this and create your own organization instead.
+
+If you already have an account, pending invites for your email appear in the project switcher. Open the project switcher from the organization dropdown in the top bar to see and accept them.
 
 Newly-joined users get the basic Member access level.
 
@@ -65,3 +67,21 @@ Individual projects can override this organization default by configuring their 
 By default every time a member joins an organization in an [email-enabled PostHog instance](/docs/self-host/configure/email) (including PostHog Cloud), all existing members of the organization get notified about this with an email. This increases security by making it explicit who gains access to your product data.
 
 If you'd rather not get such notifications, you can disable them in the "Notification Preferences" section of organization settings.
+
+### Personal API key access
+
+Organization admins and owners can view all [personal API keys](/docs/api/personal-api-keys) that have access to their organization or its projects. This includes organization-scoped keys, project-scoped keys, and fully unscoped keys held by any member.
+
+Find this under [**Settings** > **Organization** > **Security** > **Personal API key access**](https://app.posthog.com/settings/organization-security#organization-personal-api-keys). For each key, you can see:
+
+- **Owner** – the member who created the key
+- **Masked value** – a display-safe hint (e.g. `phx_***1234`) to help identify the key
+- **Scopes** – the API scopes granted (e.g. `insight:read`, or `*` for full access)
+- **Access scope** – whether the key applies to the whole organization, specific projects, or all projects (unscoped)
+- **Last used** and **Created** timestamps
+
+You can search the table by owner name, email, or scope. Click any of the **Owner**, **Masked value**, **Last used**, or **Created** column headers to sort the table. The table is paginated at 25 rows per page.
+
+The secret key value and key label are never exposed.
+
+> **Note:** This feature requires a plan that includes organization security settings. Only admins and owners can access this section.

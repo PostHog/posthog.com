@@ -1,0 +1,136 @@
+---
+title: Go tracing installation
+platformLogo: go
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import TracingNextSteps from './_snippets/tracing-next-steps.mdx'
+
+<Steps>
+
+<Step title="Install OpenTelemetry packages" badge="required">
+
+For the complete SDK reference, see the [OpenTelemetry Go docs](https://opentelemetry.io/docs/languages/go/).
+
+```bash
+go get go.opentelemetry.io/otel
+go get go.opentelemetry.io/otel/sdk
+go get go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp
+```
+
+`otlptracehttp` is the OTLP HTTP/protobuf trace exporter. The `otlptracegrpc` module sends gRPC, so pick `otlptracehttp` to match this guide.
+
+</Step>
+
+<Step title="Get your project token" badge="required">
+
+You'll need your PostHog project token to authenticate trace requests. This is the same token you use for capturing events with the PostHog SDK.
+
+> **Important:** Use your **project token** which starts with `phc_`. Do **not** use a personal API key (which starts with `phx_`).
+
+You can find your project token in [Project settings](https://app.posthog.com/settings).
+
+</Step>
+
+<Step title="Configure the SDK" badge="required">
+
+Set up the OpenTelemetry SDK to export spans to PostHog over OTLP HTTP. Use `WithEndpointURL` so the full `/i/v1/traces` path is sent as-is.
+
+```go
+package main
+
+import (
+	"context"
+
+	"go.opentelemetry.io/otel"
+	"go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp"
+	"go.opentelemetry.io/otel/sdk/resource"
+	sdktrace "go.opentelemetry.io/otel/sdk/trace"
+	semconv "go.opentelemetry.io/otel/semconv/v1.41.0"
+)
+
+func initTracer(ctx context.Context) (*sdktrace.TracerProvider, error) {
+	exporter, err := otlptracehttp.New(ctx,
+		otlptracehttp.WithEndpointURL("<ph_client_api_host>/i/v1/traces"),
+		otlptracehttp.WithHeaders(map[string]string{
+			"Authorization": "Bearer <ph_project_token>",
+		}),
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	res, err := resource.New(ctx,
+		resource.WithAttributes(semconv.ServiceName("my-service")),
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	tp := sdktrace.NewTracerProvider(
+		sdktrace.WithBatcher(exporter),
+		sdktrace.WithResource(res),
+	)
+	otel.SetTracerProvider(tp)
+	return tp, nil
+}
+```
+
+Call `defer tp.Shutdown(ctx)` in `main` so buffered spans flush on exit.
+
+Alternatively, configure the exporter with environment variables and call `otlptracehttp.New(ctx)` with no options:
+
+```bash
+OTEL_EXPORTER_OTLP_TRACES_ENDPOINT="<ph_client_api_host>/i/v1/traces"
+OTEL_EXPORTER_OTLP_TRACES_HEADERS="Authorization=Bearer <ph_project_token>"
+OTEL_SERVICE_NAME="my-service"
+```
+
+> **Note:** `WithEndpoint` sets only the host and defaults the path to `/v1/traces`. To send to the full `/i/v1/traces` path, use `WithEndpointURL` (or the per-signal `OTEL_EXPORTER_OTLP_TRACES_ENDPOINT`), as shown.
+
+</Step>
+
+<Step title="Create spans" badge="required">
+
+Wrap the operations you want to measure in spans, and attach attributes for context.
+
+```go
+import (
+	"context"
+
+	"go.opentelemetry.io/otel"
+	"go.opentelemetry.io/otel/attribute"
+)
+
+var tracer = otel.Tracer("my-service")
+
+func chargeCustomer(ctx context.Context, customerID string) error {
+	ctx, span := tracer.Start(ctx, "charge-customer")
+	defer span.End()
+
+	span.SetAttributes(attribute.String("customer.id", customerID))
+	// ... do work ...
+	return nil
+}
+```
+
+</Step>
+
+<Step title="Test your setup" badge="recommended">
+
+Once everything is configured, confirm spans are reaching PostHog:
+
+1. Run your application and trigger the instrumented code
+2. Open the PostHog Tracing interface
+3. Confirm your spans and traces appear
+
+<CallToAction type="primary" to="https://app.posthog.com/traces">
+View your traces in PostHog
+</CallToAction>
+
+</Step>
+
+<TracingNextSteps />
+
+</Steps>

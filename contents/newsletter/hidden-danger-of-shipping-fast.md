@@ -129,7 +129,7 @@ Define a [launch tier framework](https://aakashgupta.medium.com/the-launch-tier-
 
 1. **Category definers:** New product rollouts or major designs that change how customers think about your category. Require full company alignment. For example, [PostHog AI](/ai).
 2. **Strategic upgrades:** Meaningful product improvements (not redefinitions) that don't require the full machinery of a major campaign. For example, [PostHog Logs launch](/blog/logs-ga).
-3. **Steady improvements:** Standard product development that doesn't require coordination beyond the product team. For example, LLM Analytics adding [time to first token](/changelog?id=2558).
+3. **Steady improvements:** Standard product development that doesn't require coordination beyond the product team. For example, AI Observability adding [time to first token](/changelog?id=2558).
 
 This is where brand helps. Things like [humor](https://www.youtube.com/playlist?list=PLnOY1RYHjDfxcuWI_L1xwuhoXAsxR59VL), narrative, and deliberate [absurdity](https://www.youtube.com/watch?v=EXisgy6eWJ0) work because they lower the cost of paying attention. [Partnering with influencers](https://www.linkedin.com/feed/update/urn:li:activity:7401713037386379265) that own trust with your ICP is another way to extend mindshare beyond your brand channels.
 
@@ -173,7 +173,7 @@ For example:
 
 Another name for this is [continuous discovery](https://www.youtube.com/watch?v=9RFaz9ZBXpk): letting user behavior and feedback influence what gets amplified next.
 
-[Emails](/workflows) and [tooltips](/docs/product-tours/start-here) can help here, but only when they're contextual: "you're using X, so Y might be useful." Better is adding features to existing habit loops, encouraging users to build new habit loops with the features, or making the features sharable.
+[Emails](/workflows) and tooltips can help here, but only when they're contextual: "you're using X, so Y might be useful." Better is adding features to existing habit loops, encouraging users to build new habit loops with the features, or making the features sharable.
 
 > **What this looks like:** Atlassian famously struggled with feature sprawl across Jira, Confluence, and their other products. Users couldn't keep up with so much surface area. The solution wasn't more marketing, it was investing heavily in in-product discovery, clearer use-case documentation, and opinionated defaults to guide users to success.
 
@@ -201,7 +201,7 @@ What works better is publishing things that are useful even without your product
 
 Even better, teach the domain you operate in – not just how your product works. Figma, for example, teaches people how to be [better designers](https://www.figma.com/blog/insights/), not just how to use Figma.
 
-Events are another great tactic to build a community adjacent to your product. For example, Lovable's [SheBuilds](https://shebuilds.lovable.app/) hackathon encourages more women to try vibe coding.
+Events are another great tactic to build a community adjacent to your product. For example, Lovable's [SheBuilds](https://shebuilds.lovable.app/) hackathon encourages more women to try [vibe coding](/blog/best-analytics-stack-for-vibe-coded-apps).
 
 > **What this looks like:** HubSpot pioneered inbound marketing by teaching people how to be better marketers before selling them software. For many young professionals, that learning happened years before any purchasing decision – and by then, brand equity was already baked in.
 

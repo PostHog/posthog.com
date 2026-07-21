@@ -1,0 +1,90 @@
+---
+title: Conversation IDs
+---
+
+import CalloutBox from 'components/Docs/CalloutBox'
+
+A PostHog `$session_id` is per MCP connection — it rotates when the protocol session does. That's the right granularity for "which TCP/WebSocket connection is this?" but it can split a single user conversation into multiple sessions when the client reconnects.
+
+`$mcp_conversation_id` is an opt-in property that lets you stitch those calls together at the conversation level instead.
+
+<CalloutBox icon="IconWarning" title="Opt-in, with caveats" type="caution">
+
+Conversation IDs are off by default and rely on the agent cooperating. Read the caveats below before enabling — there's a visible side effect on tool responses, and the value is agent-controlled.
+
+</CalloutBox>
+
+## Enabling
+
+```ts
+instrument(server, posthog, {
+  enableConversationId: true,
+})
+```
+
+With this on, the SDK does three things:
+
+1. **Injects an optional `conversation_id` argument** into every tool's JSON Schema, with a description telling the agent to reuse the value the server returns.
+2. **Mints a UUID** when the agent calls a tool without `conversation_id` and **appends a text block** to the tool's response that asks the agent to echo the same id on subsequent calls.
+3. **Captures the supplied or minted value** on every event as `$mcp_conversation_id`, distinct from `$session_id`.
+
+The agent's `conversation_id` (when present) always wins. The SDK only mints when the agent doesn't supply one.
+
+## How it lands in events
+
+```
+{
+  event: "$mcp_tool_call",
+  properties: {
+    "$session_id": "ses_2a3f…",            // MCP connection
+    "$mcp_conversation_id": "c_8b1d…",     // logical conversation
+    "$mcp_tool_name": "search_events",
+    ...
+  }
+}
+```
+
+A new connection (new `$session_id`) made by the same agent re-using the same `conversation_id` will share `$mcp_conversation_id`. You can group by it in HogQL to see the whole conversation:
+
+```sql
+SELECT
+  properties.$mcp_conversation_id AS conversation,
+  arrayDistinct(groupArray(properties.$mcp_tool_name)) AS tools_called,
+  count() AS tool_calls
+FROM events
+WHERE event = '$mcp_tool_call'
+  AND properties.$mcp_conversation_id IS NOT NULL
+  AND timestamp > now() - INTERVAL 7 DAY
+GROUP BY conversation
+ORDER BY tool_calls DESC
+LIMIT 50
+```
+
+## Caveats
+
+<CalloutBox icon="IconWarning" title="The prompt-back leaks into agent UIs" type="caution">
+
+The "please echo this `conversation_id`" message is appended as a regular `text` content block — the only channel MCP currently offers for server-to-agent communication. Consumers that surface raw tool-call content to end users will see `[SERVER]: Reuse conversation_id=…` in their UI. If the MCP spec grows a dedicated server-directives channel (e.g. on `_meta`), the SDK will move there.
+
+</CalloutBox>
+
+<CalloutBox icon="IconWarning" title="Agent-controlled values" type="caution">
+
+When the agent supplies a `conversation_id`, the SDK accepts any non-empty string. You can bind it to your own session scheme (chat id, JWT `jti`, request id) by having the agent send that value, but nothing prevents a misbehaving client from sending arbitrary strings. Don't use `$mcp_conversation_id` as a security boundary.
+
+</CalloutBox>
+
+<CalloutBox icon="IconInfo" title="It's not a session id" type="fyi">
+
+`$session_id` is what PostHog's session-level joins and identity resolution use. `$mcp_conversation_id` is purely a logical grouping label — handy for joins, useless for everything else.
+
+</CalloutBox>
+
+## When to skip this
+
+If your MCP server runs over a long-lived connection that already aligns with what you'd call a "conversation" — for example, a stdio server attached to a single Claude Desktop chat — `$session_id` is already doing the right thing. Leave `enableConversationId` off.
+
+Turn it on when:
+
+- The same logical conversation crosses connections (HTTP/SSE clients that reconnect).
+- You want to correlate MCP events with a conversation id you already own elsewhere (chat platform, support ticket, JWT) and you're happy to plumb that id through the agent.

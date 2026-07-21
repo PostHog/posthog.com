@@ -1,0 +1,78 @@
+## Installation
+
+Import the interface from the SDK:
+
+```php
+use PostHog\FlagDefinitionCacheProvider;
+```
+
+## The interface
+
+To create a custom cache, implement the `FlagDefinitionCacheProvider` interface:
+
+```php
+interface FlagDefinitionCacheProvider
+{
+    // Retrieve cached flag definitions
+    public function getFlagDefinitions(): ?array;
+
+    // Determine if this instance should fetch new definitions
+    public function shouldFetchFlagDefinitions(): bool;
+
+    // Store definitions after a successful fetch
+    public function onFlagDefinitionsReceived(array $data): void;
+
+    // Clean up resources on shutdown
+    public function shutdown(): void;
+}
+```
+
+When the SDK fetches flag definitions from the API, it passes a JSON-compatible array to `onFlagDefinitionsReceived()` for you to store. Return the same shape from `getFlagDefinitions()`:
+
+```json
+{
+    "flags": [],
+    "group_type_mapping": {},
+    "cohorts": {}
+}
+```
+
+- `flags`: Feature flag definitions
+- `group_type_mapping`: Group type index to name mapping
+- `cohorts`: Cohort definitions for local evaluation
+
+> **Note:** The PHP SDK also accepts `groupTypeMapping` when reading cached data, which helps if you share cache data written by a camelCase integration.
+
+### Method details
+
+| Method | Purpose | Return value |
+| :----- | :------ | :----------- |
+| `getFlagDefinitions()` | Retrieve cached definitions. Called during initialization or `loadFlags()` when `shouldFetchFlagDefinitions()` returns `false`. | Cached data, or `null` if cache is empty |
+| `shouldFetchFlagDefinitions()` | Decide if this instance should fetch. Use for distributed coordination (e.g., locks). | `true` to fetch from PostHog and store the result, `false` to read from cache |
+| `onFlagDefinitionsReceived(data)` | Store definitions after a successful API fetch. | void |
+| `shutdown()` | Release locks, close connections, and clean up resources. | void |
+
+> **Note:** Provider methods may throw errors. The SDK catches and logs provider errors: failed `shouldFetchFlagDefinitions()` calls fall back to fetching from PostHog when a feature flags secure API key is configured, failed cache reads fall back to the API when no definitions are loaded and a feature flags secure API key is configured, and failed writes or shutdowns do not stop flag evaluation.
+
+## Using your cache provider
+
+Pass your cache provider when initializing PostHog:
+
+```php
+$cache = new YourCacheProvider();
+
+PostHog::init(
+    '<ph_project_token>',
+    [
+        'host' => '<ph_client_api_host>',
+        'flag_definition_cache_provider' => $cache,
+    ],
+    personalAPIKey: 'your feature flags secure API key'
+);
+```
+
+Call `PostHog::shutdown()` when your application or worker stops so the provider can release locks or close cache connections:
+
+```php
+PostHog::shutdown();
+```

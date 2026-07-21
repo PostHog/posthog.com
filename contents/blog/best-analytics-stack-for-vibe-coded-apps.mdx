@@ -1,0 +1,358 @@
+---
+title: The best analytics tool stack for vibe-coded apps
+date: 2026-05-20
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+author:
+    - natalia-amorim
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hog_ql.png
+featuredImageType: full
+category: General
+tags:
+    - Comparisons
+seo:
+    metaTitle: 'The best analytics stack for vibe-coded apps'
+    metaDescription: 'The right analytics tools for vibe-coded apps – product analytics, web analytics, and LLM observability. Compares PostHog, Plausible, Langfuse, and more.'
+---
+
+If you're vibe coding your way to a product, the temptation is to defer analytics until "later." Don't. There's no point in shipping fast if you don't learn fast, and you can't learn anything from metrics that aren't being tracked.
+
+You don't need a data team to get started; you only need three things: **product analytics** (what users do in your app), **web analytics** (where they came from), and – if you're shipping AI features, which you probably are – **LLM observability** (how your LLM is actually behaving in production).
+
+This guide walks through all three, what to look for in each, and the best tools to use. 
+
+<details>
+<summary>What's a "vibe-coded" app?</summary>
+
+Vibe coding is building software by describing what you want in plain language and letting AI write most of the code. The term was coined by Andrej Karpathy in early 2025. By 2026, [92% of US developers use AI coding tools daily](https://www.hostinger.com/blog/vibe-coding-statistics) and [41% of all new code is AI-generated](https://www.taskade.com/blog/state-of-vibe-coding-2026). 
+
+Vibe-coded apps tend to share a few traits:
+
+- **Built fast**, often by one person or a tiny team, using tools like Cursor, Claude Code, Lovable, v0, Bolt.new, Replit, or Windsurf
+- **Stacked on opinionated infrastructure** like Next.js + Vercel + Supabase for example
+- **Often AI-native**, with at least one LLM call somewhere in the product
+- **Built by people who don't necessarily have engineering or data infrastructure backgrounds** – [63% of vibe coding users are non-developers](https://www.taskade.com/blog/state-of-vibe-coding-2026)
+
+This guide is written with that profile in mind: you want analytics that's quick to set up, doesn't require a tracking plan, scales as you grow, and doesn't break your bank before you have revenue.
+
+</details>
+
+<details>
+<summary>Why do vibe-coded apps need analytics at all?</summary>
+
+Because vibe coding makes shipping cheap, but it doesn't [make decisions for you](/founders/product-market-fit-game). 
+
+You can prompt your way to ten features in a weekend, but only data tells you which one users actually care about. As products get cheaper to build, the gap between "I have an MVP" and "I have a product people pay for" is more the product learning curve rather than coding speed.
+
+Analytics is also how you catch the failure modes vibe coding introduces; watching real session replays and tracking real errors is how you find the bugs your AI agent confidently shipped.
+
+</details>
+
+## Layer 1: Product analytics
+
+### What is product analytics?
+
+**Product analytics** is [event-based tracking](/docs/product-analytics/capture-events) that measures what users do *inside* your app: every click, feature use, form submission, signup, and conversion. It's how you answer questions like:
+
+- Are people getting through onboarding?
+- Which features are people using? Which ones are dead weight?
+- Of the users who signed up last week, how many came back?
+- Do users from X channel behave differently than users from Y?
+
+If you're vibe coding, this is the layer you can't skip. You'll be shipping features faster than you can think, and product analytics is the only way to tell which ones are working.
+
+### When should vibe coders set up product analytics?
+
+Day one, or as close to day one as possible. 
+
+[Autocapture](/docs/product-analytics/autocapture) – where the tool records every click and pageview without you defining events upfront – is your best friend. Drop a snippet in your `<head>` tag (or have your AI agent do it for you), and you're collecting data while you keep shipping. You can define meaningful events later, retroactively, once you know what to look for.
+
+The other reason to set up early: [activation metrics](/product-engineers/activation-metrics) need historical data. You can't tell which actions predict [retention](/docs/product-analytics/retention) if you don't have a few weeks of behavior to look at.
+
+### Best product analytics tools for vibe-coded apps
+
+#### PostHog
+
+[PostHog](/) bundles [product analytics](/product-analytics] with [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [A/B testing](/experiments), [surveys](/surveys), [error tracking](/error-tracking), [LLM observability](/llm-analytics), and more – which means it covers all layers of this guide on its own. The free tier includes 1M events per month, and over 90% of users pay $0.
+
+For vibe coders specifically, three things stand out:
+
+1. **[The PostHog wizard](/wizard)** detects your framework and installs the right SDK with one terminal command, so you can basically vibe code a correct implementation.
+
+<WizardCTA />
+
+2. **[Autocapture](/docs/product-analytics/autocapture)** means no tracking plan needed.
+3. **[An MCP server](/docs/model-context-protocol)** lets you pipe your PostHog data into Claude Code, Cursor, or any other AI workflow, so you can ask "which feature drove the most retention this week?" in the same place you're writing code.
+
+Pricing is per-product and event-based, with [billing limits](/docs/billing/estimating-usage-costs) so you never get a surprise bill. Early-stage startups can also apply for the [PostHog for Startups program](/startups) and get $50,000 in credits.
+
+<details>
+<summary>Using Product Analytics with the PostHog MCP</summary>
+
+Ask your MCP client things like *"how many unique users signed up in the last 7 days, broken down by day?"* or *"what are the most common paths users take after signing up?"* and the agent will run the right [trends](/docs/product-analytics/trends), [funnel](/docs/product-analytics/funnels), or [paths](/docs/product-analytics/paths) query against your data. 
+
+You can also build cohorts (*"create a dynamic cohort of users who completed checkout more than 5 times in the last 30 days"*), spin up insights and dashboards, or write SQL to dig into edge cases without leaving your editor. 
+ 
+[See the full list of available MCP tools](/docs/model-context-protocol).
+
+</details>
+
+#### 2. Mixpanel
+
+[Mixpanel](/blog/posthog-vs-mixpanel) is a strong choice if you want best-in-class funnel and cohort analysis. The free tier covers 1M events/mo, and the startup program (under 5 years old, ≤$8M raised) gives you up to 1B events free for your first year.
+
+The catch: Mixpanel doesn't include surveys, error tracking, or LLM observability, so you'll be wiring up separate tools for those. 
+
+Session replay and experiments were added in late 2025 and are still less mature than dedicated tools.
+
+#### 3. Heap
+
+[Heap](/blog/posthog-vs-heap), recently acquired by Contentsquare, is built around the idea that you don't know what you want to track yet – which lines up well with vibe coding. It autocaptures every interaction, and you can define named events retroactively by clicking on UI elements in a Chrome extension. No code, no engineering.
+
+The free tier includes 10K sessions/mo and 6 months of data retention. For feature flags, surveys, and error tracking, you'll need separate tools.
+
+#### 4. Amplitude
+
+[Amplitude](/blog/posthog-vs-amplitude) is the deepest tool in this list for retention analysis. If your core question is "are users sticking around, and which cohorts retain best?" Amplitude's cohort overlays are hard to beat. 
+
+It uses MTU-based pricing, which is great if each user generates a lot of events but can inflate costs if you have lots of anonymous traffic. The free tier covers 50K MTUs and includes session replay, feature flags, and AI chat.
+
+> For a deeper dive into picking the right product analytics tool, see our comparison of [the best product analytics tools for startups](/blog/best-product-analytics-tools-for-startups). If open source matters to you, we've also rounded up [the best open source analytics tools](/blog/best-open-source-analytics-tools), and if you're building a mobile app, check out our guide to [the best mobile app analytics tools](/blog/best-mobile-app-analytics-tools).
+
+## Layer 2: Web analytics
+
+### What is web analytics?
+
+**Web analytics** is the layer that tells you what's happening *before* someone enters your app – on your landing page, blog, or docs. It tracks things like traffic, sources, referrers, top pages, and conversion goals.
+
+It overlaps with product analytics, but the questions are different: web analytics asks "where did people come from and what did they read?" while product analytics asks "what did they do after they signed up?"
+
+For a vibe-coded app, web analytics matters because most of your early growth will come from launch posts, X/Twitter, Hacker News, Product Hunt, and SEO. You need to know which channels actually convert.
+
+### When should vibe coders set up web analytics?
+
+The moment you have a landing page.
+
+If you're using your launch to validate demand (collect signups, run a waitlist, test pricing), web analytics tells you whether your traffic strategy is working.
+
+A few things to look for in a web analytics tool:
+
+- **Cookieless tracking** – avoid the cookie banner overhead and most GDPR friction
+- **UTM and source tracking** – know which posts and channels drive signups
+- **Conversion goals** – tie traffic to outcomes
+- **AI/LLM referral tracking** – with more traffic coming from ChatGPT, Perplexity, and other AI tools, you want to see which AI sources are sending you users
+
+### Best web analytics tools for vibe-coded apps
+
+#### 1. PostHog
+
+[PostHog's web analytics](/web-analytics) covers the basics – traffic, sources, referrers, top pages, UTM tracking, conversion goals – and it's included in the same 1M events/mo free tier as product analytics. Cookieless tracking is supported, so no consent banner needed in most setups.
+
+The advantage of using PostHog for web analytics specifically is that the same event stream feeds product analytics, replay, and experiments. If someone visits your landing page from a Reddit post, signs up, and then drops off in onboarding, you can trace the whole journey without stitching tools together.
+
+PostHog's web analytics team is also constantly shipping new features: a [real-time dashboard](/blog/best-real-time-analytics-platforms/) and bot analytics is coming soon, so the gap between PostHog and dedicated web analytics tools keeps closing. Keep an eye on the [changelog](/changelog) if that matters to you.
+
+<details>
+<summary>Using Web Analytics with the PostHog MCP</summary>
+
+Ask your agent for a *"web analytics weekly digest"* and it'll summarize uniques, pageviews, sessions, bounce rate, and average session duration with period-over-period comparisons – plus your top 5 pages, sources, and goal conversions over a configurable 1–90 day window. 
+
+Beyond that, you can also explore live traffic (*"who's on the site right now, and what are they looking at?"*), manage path cleaning rules, investigate traffic drops or spikes, schedule recurring email or Slack digests of any dashboard, and run arbitrary SQL queries against your web analytics tables for anything custom.
+
+[See the full list of available tools](/docs/model-context-protocol).
+
+</details>
+
+#### 2. Plausible
+
+[Plausible](/blog/posthog-vs-plausible) is the canonical privacy-first web analytics tool: cookieless, open source, EU-hosted, and a script that's significantly smaller than GA4. The dashboard is dead simple, which is the whole point.
+
+It starts at $9/mo for 10K pageviews. It only covers web analytics, so you'll need to pair it with a product analytics tool once your app does more than serve content.
+
+#### 3. Fathom
+
+[Fathom](/blog/posthog-vs-fathom) sits in the same lane as Plausible (cookieless, privacy-friendly, minimalist) with a slightly more polished UI and a few extra features like email reports, more granular goal tracking, and a UTM builder. SOC 2 and ISO 27001 certifications matter if you're planning to sell to enterprise eventually.
+
+Pricing starts at $15/mo for 100K pageviews. Like Plausible, it doesn't include product analytics.
+
+#### 4. Google Analytics 4
+
+[GA4](/blog/posthog-vs-ga4) is free and still the default for marketing attribution, especially if you're running Google Ads. But it requires a consent management platform under GDPR, samples your data, and the UI can be punishing. For a vibe-coded app where speed matters, the compliance overhead alone isn't worth it.
+
+If you're already running Google Ads and need the native integration, keep it. Otherwise, [most alternatives](/blog/ga4-alternatives) are better for understanding what's happening on your site.
+
+> For a deeper dive, see our full comparison of [the best web analytics tools for developers](/blog/best-web-analytics-tools).
+
+## Layer 3: LLM observability
+
+### What is LLM observability?
+
+**LLM observability** tracks what's happening inside the AI features of your app: prompts, responses, latency, token usage, cost per call, model performance, and quality of outputs. It's monitoring for the LLM-shaped parts of your stack that traditional APM tools weren't built for.
+
+It answers questions like:
+
+- How much am I actually spending on OpenAI/Anthropic/etc. per user?
+- Which prompts are slow? Which ones are expensive?
+- Is the model hallucinating in production? On which inputs?
+- When I tweak a prompt, does quality go up or down?
+- Are users actually using the AI feature I shipped?
+
+### When should vibe coders set up LLM observability?
+
+The first time you ship a feature that calls an LLM API. 
+
+AI features burn money quietly – a single bug in a retry loop can burn through a daily budget overnight, and hallucinations look like working code until a user reports them. 
+
+You also want this in place before your launch traffic hits, not after. Debugging a flaky AI feature without traces is significantly harder than just having them from the start.
+
+A few things to look for:
+
+- **Cost and token tracking** per request, per user, per model
+- **Trace visibility** for multi-step workflows (especially if you're building agents)
+- **Evals** to score outputs and catch regressions
+- **Low integration friction** so that it works with raw API calls, not just LangChain
+
+### Best LLM observability tools for vibe-coded apps
+
+#### 1. PostHog
+
+[PostHog's LLM observability](/llm-analytics) tracks cost, latency, token usage, model performance, and output quality alongside your product analytics. The advantage: you can correlate AI feature usage with retention and conversion in the same tool. 
+
+It also includes [evals](/docs/ai-evals) (so you can score model outputs and catch regressions when you tweak a prompt) and [prompt management](/docs/prompt-management) (versioning, A/B testing, and rollback for production prompts).
+
+The free tier includes 100K LLM observability events/mo, and it works with OpenAI, Anthropic, and other major providers through a small SDK wrapper.
+
+<details>
+<summary>Using LLM Observability with the PostHog MCP</summary>
+
+Ask your agent things like *"what are my total LLM costs by model over the last 30 days?"* or *"pull the trace for the slowest generation yesterday"* and get answers without leaving your editor. 
+
+You can also manage evals (*"create an evaluation that scores responses for hallucination"*), spin up prompts with versioning, and summarize traces to debug agent runs – useful when you're iterating and want fast feedback on what's actually shipping.
+
+[See the full list of available tools](/docs/model-context-protocol).
+
+</details>
+
+#### 2. Datadog
+ 
+[Datadog](/blog/best-datadog-alternatives) is the enterprise-grade option if you're already using it (or plan to) for the rest of your observability stack. Its LLM observability product traces agent workflows end-to-end, correlates LLM spans with backend services and real user sessions, and includes built-in evals and a sensitive data scanner for redacting PII from prompts and responses.
+ 
+The pitch is correlation: if your AI feature is slow, Datadog ties the LLM call to the backend service, infrastructure, and user session that triggered it, all in one platform.
+ 
+The catch for vibe coders is pricing. The free tier includes 40K LLM spans/mo; Pro starts at $160/mo for 100K spans, and Datadog automatically activates LLM Observability charges the moment it detects LLM spans – so be careful if you're already on Datadog for other workloads. 
+
+If you're not already invested in the Datadog ecosystem, the cost overhead might be hard to justify at the vibe coding stage.
+
+#### 3. Langfuse
+
+**Langfuse** (recently acquired by Clickhouse) is the darling of open source enthusiasts – MIT-licensed, framework-agnostic, with depth across tracing, evaluations, and prompt management. The MIT-licensed core makes it popular with teams wanting full control over their data through self-hosting, and it has over 27k GitHub stars.
+
+It's the most flexible option if you're building anything beyond raw API calls – agents, multi-step workflows, RAG pipelines.
+
+Self-hosting is free; cloud starts at $29/mo.
+
+#### 4. LangSmith
+
+LangSmith is built by the LangChain team and is the default if you're using LangChain or LangGraph. The agent debugging tools are solid if you live in that ecosystem.
+
+The catch: seat-based pricing ($39/user/mo on Plus) plus trace-based usage, which can get expensive as your team or volume grows. If you're not using LangChain, the developer experience is noticeably worse than LangChain-native usage.
+
+> For a deeper dive, see our comparison of [the best open source LLM observability tools](/blog/best-open-source-llm-observability-tools).
+
+## Picking the right combination for your stage
+
+Here's the short version, depending on where you are:
+
+| Stage | Product analytics | Web analytics | LLM observability |
+|---|---|---|---|
+| **Weekend MVP** | PostHog (free) | PostHog (same tool) | PostHog (same tool) |
+| **Pre-PMF, getting first users** | PostHog or Heap | PostHog, Plausible, or Fathom | PostHog or Langfuse |
+| **Post-PMF, optimizing** | PostHog, Mixpanel, or Amplitude | PostHog, Plausible, or Fathom | PostHog, Langfuse, or LangSmith |
+| **Scaling, multiple AI features** | PostHog or Amplitude | PostHog or Fathom | PostHog, Langfuse, or Datadog |
+
+## The case for going all-in on PostHog
+
+For vibe-coded apps specifically, PostHog hits a sweet spot. You're moving fast, your stack is opinionated, you don't have time to wire up five SaaS products, and you probably have at least one AI feature. 
+
+PostHog covers product analytics, web analytics, session replay, feature flags, experiments, surveys, error tracking, LLM observability, and more in one install, on one free tier. 
+
+The [AI setup wizard](/wizard) gets you instrumented in a few minutes and [the MCP server](/docs/model-context-protocol) means you can query your data from Claude Code or Cursor while you're still building.
+
+If you want to take it for a spin, you can [start free](/) – no credit card needed.
+
+<WizardCTA />
+
+And if you want your product to *drive itself* (aka pick up signals from errors, session replays, surveys, and product analytics and automatically turn them into actionable PRs), take a look at [PostHog Code](/code). 
+
+It's the next step beyond reactive analytics: instead of waiting for you to notice a bug or churn signal, it proactively spots them and opens a pull request to fix it.
+
+## Frequently asked questions
+
+<details>
+<summary>Do I really need analytics if I'm just shipping a weekend project?</summary>
+
+If you genuinely don't care whether the project succeeds, no. But the moment you want to know "did anyone actually use this?" or "where did my signups come from?", that's analytics. And it costs nothing to set up the free tier of [PostHog](/), Plausible's trial, or Langfuse's free tier, so the bar to start is very low.
+
+</details>
+
+<details>
+<summary>Can my AI agent set up analytics for me?</summary>
+
+Yes. The [PostHog wizard](/wizard) is built for exactly this – paste and run one terminal command and it'll detect your framework, install the right SDK, and configure tracking. 
+
+Most analytics tools also have clear docs that AI agents handle well.
+
+</details>
+
+<details>
+<summary>I'm using Lovable / Bolt / Replit. Will these tools work?</summary>
+
+Yes. PostHog, Plausible, Fathom, and most product analytics tools work via a JavaScript snippet you paste into your site's `<head>` tag, which all major vibe coding platforms support. For LLM observability, PostHog has a small SDK wrapper around OpenAI, Anthropic, or other providers, and most other tools have similarly lightweight integrations.
+
+</details>
+
+<details>
+<summary>What's the difference between product analytics and web analytics?</summary>
+
+Web analytics focuses on traffic and pages – who visited, where they came from, what they viewed. Product analytics focuses on behavior and users – what actions they took, how they activate, retain, or churn. Tools like PostHog combine both, so you can see how traffic turns into real product usage.
+
+</details>
+
+<details>
+<summary>Do I need LLM observability if I'm just calling OpenAI a few times?</summary>
+
+If you have a single LLM call in a simple flow, you can probably get away with logging requests yourself. But the second you have multiple prompts, retries, or any user-facing AI feature, you want observability for cost control alone. A buggy retry loop can drain a daily API budget faster than you can notice.
+
+</details>
+
+<details>
+<summary>What about error tracking and session replay?</summary>
+
+For vibe-coded apps, both are extremely useful – especially because AI-generated code tends to look correct but isn't always reliable. 
+
+Session replay shows you exactly what users were doing when something broke, and error tracking surfaces the bugs your AI agent confidently shipped. 
+
+PostHog includes both in its free tier; otherwise you'll want to add a tool like Sentry alongside whatever analytics you choose.
+
+See our comparisons of [best session replay tools](/blog/best-session-replay-tools) and [best error tracking tools](/blog/best-error-tracking-tools).
+
+</details>
+
+<details>
+<summary>How does this stack up against just using Google Analytics?</summary>
+
+[GA4](/blog/ga4-alternatives) is fine for basic marketing attribution if you're running Google Ads. It's not great for anything that happens after a user signs up – funnel drop-off, retention, feature adoption – and the compliance overhead under GDPR is significant.
+
+</details>
+
+<details>
+<summary>Can I switch tools later if I outgrow my first choice?</summary>
+
+You can, but it's annoying. The smarter move is to pick a tool that scales with you – which is part of why bundled platforms are appealing for vibe-coded apps: they grow with your needs instead of forcing a migration when you add a feature.
+
+</details>
+
+<NewsletterForm />

@@ -49,6 +49,6 @@ Going from most informative to most entertaining:
 
 - Know what type of video you want to make. Try to fit it into one of the above categories (and remember, we're up for doing a "one-off" film that is totally different to what we've done before). 
   - Got a random idea? Share in the <PrivateLink url="https://app.slack.com/client/TSS5W8YQZ/C01FHN8DNN6">content and video ideas channel</PrivateLink>. 
-  - Got a specific request? Use the <PrivateLink url="https://github.com/PostHog/company-internal/issues/new?template=video-request-form.yaml">video request form</PrivateLink> and be thorough.
+  - Got a specific request? Reach out to the video team directly in <PrivateLink url="https://posthog.slack.com/archives/C01R387F6H5">the Team YouTube channel</PrivateLink> and explain your idea thoroughly.
 - Know your product, even if it's early. What does it do? What are the important features? What are some real world use cases? What's coming next? Why should someone pick it over a competitor? What's interesting about it? Many videos will rely on these details.
-- Accept that the team may say no to your cool idea. Like all small teams, Team YouTube have the final say in what is worked on. 
+- Accept that the team may say no to your cool idea. Like all small teams, Team YouTube have the final say in what is worked on.
