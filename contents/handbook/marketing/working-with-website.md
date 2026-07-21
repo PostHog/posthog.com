@@ -33,7 +33,7 @@ Once the issue is picked up, the website team will build the page. They'll open 
 
 Review the PR, leave comments, and iterate from there. This is the right moment to give design and layout feedback — not before, when things are still just ideas.
 
-> **Curious about your request?** The [website requests project board](https://github.com/orgs/PostHog/projects/195/) tracks all requests. This board is purely for providing a view of requests and doesn't reflect progress or a queue for the website team. 
+> **Curious about your request?** The [website project board](https://github.com/orgs/PostHog/projects/195/) tracks all their tasks. 
 
 ## Why this process
 
