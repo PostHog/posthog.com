@@ -17,8 +17,8 @@ import PlatformInstall from 'components/PlatformInstall'
 
 export const applications: CarouselSlide[] = [
     {
-        slug: 'inbox',
-        label: 'Inbox',
+        slug: 'helpdesk',
+        label: 'Helpdesk',
         icon: <IconLaptop className="size-5" />,
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
@@ -28,9 +28,9 @@ export const applications: CarouselSlide[] = [
         description: (
             <>
                 <p>
-                    The Support inbox in PostHog is home base. Open a ticket and the customer's session replay, recent
-                    events, exceptions, and previous tickets sit right next to the conversation – so you can see what
-                    broke instead of asking someone to describe it from memory.
+                    The Support helpdesk in PostHog is your home base. Open a ticket and the customer's session replays,
+                    recent events, exceptions, and previous tickets sit right next to the conversation – so you can see
+                    what broke instead of asking someone to describe it from memory.
                 </p>
                 <div className="@container">
                     <LabeledList
@@ -74,13 +74,13 @@ export const applications: CarouselSlide[] = [
         description: (
             <>
                 <p>
-                    Connect Slack and SupportHog turns messages, mentions, or an emoji reaction into tickets – handy for
-                    shared customer channels where bug reports arrive disguised as small talk. Replies from the inbox
-                    post back to the original thread.
+                    Connect Slack to turn messages, mentions, or an emoji reaction into tickets – handy for shared
+                    customer channels where bug reports arrive disguised as small talk. Replies post back to the
+                    original thread.
                 </p>
                 <p>
                     You can also tag <code>@PostHog</code> in any thread to ask about your support data, like how ticket
-                    volume correlates with other metrics, and review Self-driving reports built from your tickets.
+                    volume correlates with other metrics, and review self-driving reports built from your tickets.
                 </p>
             </>
         ),
@@ -122,7 +122,8 @@ export const applications: CarouselSlide[] = [
                             },
                             {
                                 label: 'Works anywhere MCP does',
-                                description: 'Cursor, Claude Code, VS Code, or any MCP-compatible agent.',
+                                description:
+                                    "Cursor, Claude Code, PostHog Code, VS Code, or any MCP-compatible agent that has 'Code' in the title.",
                             },
                         ]}
                     />
@@ -172,12 +173,12 @@ export const topFeatures: CarouselSlide[] = [
         activeText: 'text-primary',
         progressBar: 'bg-blue',
         layout: 'stack',
-        heading: 'One inbox, four ways in',
+        heading: 'One helpdesk, four ways in',
         description: (
             <>
                 <p>
-                    Tickets reach your inbox through four channels, and every one syncs both ways – you answer from a
-                    single place, and the reply lands wherever the conversation started.
+                    Tickets reach you through four channels, and every one syncs both ways – you answer from a single
+                    place, and the reply lands wherever the conversation started.
                 </p>
                 <div className="@container">
                     <LabeledList
@@ -196,7 +197,7 @@ export const topFeatures: CarouselSlide[] = [
                             {
                                 label: 'Slack',
                                 description:
-                                    'SupportHog turns messages, mentions, or an emoji reaction in shared channels into tickets.',
+                                    'Turn messages, mentions, or an emoji reaction in shared channels into tickets.',
                             },
                             {
                                 label: 'GitHub',
@@ -221,8 +222,8 @@ export const topFeatures: CarouselSlide[] = [
         description: (
             <>
                 <p>
-                    Because Support is part of PostHog, tickets from your app arrive with the sender's story already
-                    attached. No "can you send a screenshot?", no "what browser are you on?", no interpretive dance of
+                    Because Support is part of PostHog, tickets from your app arrive with the context already attached.
+                    No "can you send a screenshot?", no "what browser are you on?", no interpretive dance of
                     reproduction steps.
                 </p>
                 <div className="@container">
@@ -305,12 +306,12 @@ export const topFeatures: CarouselSlide[] = [
         description: (
             <>
                 <p>
-                    Support isn't just an inbox – it's a signal source. AI scouts pick up recurring issues across your
-                    tickets and group them with related errors and replays into Self-driving reports. When there's a
-                    code fix, you get a draft pull request to review. Nothing merges without a human.
+                    Support isn't just a pile of tickets – it's a signal source. AI scouts pick up recurring issues
+                    across your tickets and group them with related errors and replays into Self-driving reports. When
+                    there's a code fix, you get a draft pull request to review. Nothing merges without a human.
                 </p>
                 <p>
-                    Answering customers happens here, in the Support inbox. Reviewing and merging fixes happens in the
+                    Answering customers happens here, in Support. Reviewing and merging fixes happens in the
                     Self-driving inbox – which means the best support ticket is the one that never gets filed twice.
                 </p>
             </>

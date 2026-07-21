@@ -7,7 +7,7 @@ export const supportFeatures = {
     },
     features: {
         unified_inbox: {
-            name: 'Unified inbox',
+            name: 'Unified helpdesk',
             description: 'Read and reply to every conversation from one place',
         },
         in_app_widget: {
@@ -42,17 +42,13 @@ export const supportFeatures = {
             name: 'Workflow automation',
             description: 'Rules that set SLAs, auto-assign, tag, and change status',
         },
-        sla_tracking: {
-            name: 'SLA tracking',
-            description: 'See whether tickets are on track, at risk, or breached',
-        },
         historical_import: {
             name: 'Historical ticket import',
-            description: 'Bring ticket history from your previous helpdesk',
+            description: 'Bring ticket history from traditional tools, like Zendesk',
         },
         ai_reply_agent: {
-            name: 'AI reply agent',
-            description: 'AI-drafted replies to customer conversations',
+            name: 'AI triage',
+            description: 'Empower agents to triage and respond to tickets for you',
         },
     },
     product_context: {

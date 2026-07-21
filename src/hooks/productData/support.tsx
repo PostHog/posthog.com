@@ -31,7 +31,7 @@ export const support = {
     seo: {
         title: 'Support – Customer support with product context built in | PostHog',
         description:
-            'PostHog Support centralizes tickets from your app, email, Slack, and GitHub into a single inbox – with session replays, events, and errors attached to each one.',
+            'PostHog Support centralizes tickets from your app, email, Slack, and GitHub into a single helpdesk – with session replays, events, and errors attached to each one.',
     },
     /**
      * Sections rendered on the Product surface (`/support`). Each entry resolves
@@ -95,7 +95,7 @@ export const support = {
     overview: {
         title: 'One place for every user conversation',
         description:
-            'Whether it’s a ticket, a blind email, or a new GitHub issue, PostHog Support centralizes it into one place and attaches relevant replays, events, and errors as context so you can respond.',
+            'Whether it arrives as a ticket from your app, an email out of the blue, or a new GitHub issue, Support centralizes it into a single helpdesk and attaches the session replays, events, and errors behind it. Then it feeds those signals into your self-driving inbox, so recurring problems become pull requests instead of repeat tickets.',
         eli5: "Support is a helpdesk built into PostHog. Conversations arrive from an in-app chat widget, email, Slack, or GitHub, and they all land in one inbox – with replies syncing back to wherever each conversation started. Because PostHog already knows what every customer was doing, tickets from your app show up with the sender's session replay, recent events, and errors attached, so you can watch what actually happened instead of asking someone to describe it from memory. And recurring problems get picked up as signals for Self-driving, which drafts pull requests that stop the same ticket coming back.",
         textColor: 'text-black', // tw
     },
@@ -216,14 +216,4 @@ export const support = {
             description: 'See the full stack trace behind every error to find the root cause of each ticket',
         },
     ],
-    presenterNotes: {
-        overview:
-            "<strong>Presenter notes:</strong> Support is PostHog's built-in helpdesk. The pitch is context: because it lives inside PostHog, tickets from your app arrive with the sender's session replay, events, and errors already attached. You're not asking customers to describe bugs – you're watching them happen. And because tickets feed Self-driving, recurring issues can turn into draft pull requests instead of recurring tickets.",
-        'top-features':
-            'Four channels in (widget, email, Slack, GitHub), all syncing both ways. Workflows are deliberately rule-based – no autonomous AI touching your SLA policy. The Zendesk import means teams can switch without losing history.',
-        'posthog-vs':
-            "Zendesk and Intercom are mature helpdesks with big ecosystems – if you need phone support or an app marketplace, they're the safe choice. PostHog Support wins when your support team needs product context: replays, errors, and analytics next to the conversation, and a path from tickets to shipped fixes.",
-        'getting-started':
-            "Support's core features – the widget, inbox, and integrations – are free with no per-seat charge. An AI agent that drafts replies is coming soon and will be opt-in, billed only for teams who turn it on.",
-    },
 }
