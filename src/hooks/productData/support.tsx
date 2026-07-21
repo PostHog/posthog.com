@@ -26,8 +26,8 @@ export const support = {
     color: 'blue',
     colorSecondary: 'blue',
     category: 'communication',
-    description: 'Built-in customer support with chat widget and unified inbox.',
-    shortDescription: 'One inbox for every customer conversation',
+    description: 'Built-in customer support with chat widget and unified helpdesk.',
+    shortDescription: 'One helpdesk for every customer conversation',
     seo: {
         title: 'Support – Customer support with product context built in | PostHog',
         description:
@@ -96,7 +96,7 @@ export const support = {
         title: 'One place for every user conversation',
         description:
             'Whether it arrives as a ticket from your app, an email out of the blue, or a new GitHub issue, Support centralizes it into a single helpdesk and attaches the session replays, events, and errors behind it. Then it feeds those signals into your self-driving inbox, so recurring problems become pull requests instead of repeat tickets.',
-        eli5: "Support is a helpdesk built into PostHog. Conversations arrive from an in-app chat widget, email, Slack, or GitHub, and they all land in one inbox – with replies syncing back to wherever each conversation started. Because PostHog already knows what every customer was doing, tickets from your app show up with the sender's session replay, recent events, and errors attached, so you can watch what actually happened instead of asking someone to describe it from memory. And recurring problems get picked up as signals for Self-driving, which drafts pull requests that stop the same ticket coming back.",
+        eli5: "Support is a helpdesk built into PostHog. Conversations arrive from an in-app chat widget, email, Slack, or GitHub, and they all land in one helpdesk – with replies syncing back to wherever each conversation started. Because PostHog already knows what every customer was doing, tickets from your app show up with the sender's session replay, recent events, and errors attached, so you can watch what actually happened instead of asking someone to describe it from memory. And recurring problems get picked up as signals for Self-driving, which drafts pull requests that stop the same ticket coming back.",
         textColor: 'text-black', // tw
     },
     hogs: {
@@ -118,7 +118,7 @@ export const support = {
         ],
     },
     ai: {
-        intro: 'Ask PostHog AI to triage, investigate, and answer tickets. Works in PostHog AI (in-app chat), PostHog Code, Slack, and your product editor (using the MCP).',
+        intro: 'Ask PostHog AI to triage, investigate, and answer tickets. Works in PostHog AI (in-app chat), PostHog Desktop, Slack, and your product editor (using the MCP).',
         mcpToolsFeature: 'conversations',
         groups: [
             {

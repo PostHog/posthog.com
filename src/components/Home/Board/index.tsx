@@ -556,7 +556,7 @@ const products: Product[] = [
         name: 'Support',
         Icon: IconChatHelp,
         color: 'blue',
-        description: 'Built-in customer support with chat widget and unified inbox.',
+        description: 'Built-in customer support with chat widget and unified helpdesk.',
         types: ['Support'],
         status: 'Production',
         badge: 'BETA',

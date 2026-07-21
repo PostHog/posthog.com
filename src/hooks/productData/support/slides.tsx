@@ -251,6 +251,11 @@ export const topFeatures: CarouselSlide[] = [
                 </div>
             </>
         ),
+        image: {
+            src: '/images/products/support/ticket-sidebar.png',
+            alt: 'A ticket in PostHog Support showing the customer, channel, status, priority, assignee, and tags',
+            maxWidth: 'max-w-md',
+        },
     },
     {
         slug: 'workflows',
@@ -274,7 +279,7 @@ export const topFeatures: CarouselSlide[] = [
                             {
                                 label: 'Set SLAs',
                                 description:
-                                    'Based on channel or priority, then filter the inbox by on track, at risk, or breached.',
+                                    'Based on channel or priority, then filter tickets by on track, at risk, or breached.',
                             },
                             {
                                 label: 'Auto-assign',
@@ -334,7 +339,7 @@ export const topFeatures: CarouselSlide[] = [
         description: (
             <>
                 <p>
-                    Migrating shouldn't mean starting from an empty inbox. The Zendesk import (beta) brings over your
+                    Migrating shouldn't mean starting from an empty helpdesk. The Zendesk import (beta) brings over your
                     full message threads (including internal notes), customer names and emails, tags, statuses,
                     priorities, attachments, and original timestamps.
                 </p>

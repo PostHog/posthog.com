@@ -1,7 +1,7 @@
 export const supportFeatures = {
     summary: {
         name: 'Support',
-        description: 'One inbox for every customer conversation, with product context attached',
+        description: 'One helpdesk for every customer conversation, with product context attached',
         url: '/support',
         docsUrl: '/docs/support',
     },
