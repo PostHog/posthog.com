@@ -47,7 +47,7 @@ function eagerSection(report, baseline) {
     }
     const baseByEntry = new Map((baseline?.roots ?? []).map((r) => [r.entrypoint, r]))
     const lines = [
-        '### Eager graph (static-import closure per entrypoint)',
+        "### Eager graph (modules shipped in each entrypoint's initial chunks)",
         '',
         '| Entrypoint | Eager size | Budget | Modules |',
         '| --- | --- | --- | --- |',
@@ -122,7 +122,8 @@ function main() {
         '',
         '---',
         '_Eager-graph budgets are report-only until a baseline is established. ' +
-            'Sizes are gzip of `public/**/*.js`; eager size is webpack module source bytes._',
+            'Sizes are gzip of `public/**/*.js`; eager size is webpack module source bytes for the ' +
+            "modules actually shipped in the entrypoint's initial chunks (post-tree-shake)._",
     ].join('\n')
 
     fs.mkdirSync(reportDir, { recursive: true })

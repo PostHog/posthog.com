@@ -38,7 +38,7 @@ In other words: build mode isn't really about more output. It's about making eve
 
 ## What you can build
 
-Reading this won't change your job title, so what does build mode mean for you? Here are some concrete things you can do today with @PostHog in Slack, PostHog AI, the MCP, and PostHog Code:
+Reading this won't change your job title, so what does build mode mean for you? Here are some concrete things you can do today with @PostHog in Slack, PostHog AI, the MCP, the [CLI](/docs/cli), and PostHog Code:
 
 ### 1. Turn a question or complaint into a merged PR.
 

@@ -1,10 +1,8 @@
 import React from 'react'
 import Explorer from 'components/Explorer'
 import SEO from 'components/seo'
-import { useApp } from '../../../context/App'
 
 export default function DictatorOrTechBro(): JSX.Element {
-    const { websiteMode } = useApp()
     return (
         <>
             <SEO
@@ -22,10 +20,7 @@ export default function DictatorOrTechBro(): JSX.Element {
                 // changelogCategory="product-analytics"
                 fullScreen
             >
-                <iframe
-                    src="https://dictatorortechbro.com"
-                    className={`w-full h-full border-0 ${websiteMode ? 'min-h-[calc(100vh-103px)]' : ''}`}
-                />
+                <iframe src="https://dictatorortechbro.com" className="w-full h-full border-0" />
             </Explorer>
         </>
     )

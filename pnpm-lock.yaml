@@ -71,6 +71,9 @@ importers:
       '@popperjs/core':
         specifier: ^2.11.2
         version: 2.11.8
+      '@posthog/brand':
+        specifier: ^0.4.0
+        version: 0.4.0(react@18.3.1)
       '@posthog/hedgehog-mode':
         specifier: ^0.0.52
         version: 0.0.52(prop-types@15.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -112,7 +115,7 @@ importers:
         version: 3.13.12(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@typecaast/react':
         specifier: ^0.5.4
-        version: 0.5.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 0.5.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@typecaast/skin-kit':
         specifier: 0.4.1
         version: 0.4.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -530,6 +533,9 @@ importers:
       styled-components:
         specifier: ^5.3.3
         version: 5.3.11(@babel/core@7.28.4)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+      svg-react-loader:
+        specifier: ^0.4.6
+        version: 0.4.6
       svg-sprite:
         specifier: ^1.5.0
         version: 1.5.4
@@ -751,7 +757,7 @@ importers:
         version: 4.25.9(@types/webpack@4.41.40)(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@4.41.0)(typescript@5.9.2)(webpack-hot-middleware@2.26.1)
       gatsby-plugin-image:
         specifier: "^1.14.0 || ^2.0.0 ||\_^3.0.0"
-        version: 2.25.0(@babel/core@7.28.5)(gatsby-plugin-sharp@4.25.1(gatsby@4.25.9(@types/webpack@4.41.40)(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@4.41.0)(typescript@5.9.2)(webpack-hot-middleware@2.26.1))(graphql@16.11.0))(gatsby-source-filesystem@4.25.0(gatsby@4.25.9(@types/webpack@4.41.40)(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@4.41.0)(typescript@5.9.2)(webpack-hot-middleware@2.26.1)))(gatsby@4.25.9(@types/webpack@4.41.40)(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@4.41.0)(typescript@5.9.2)(webpack-hot-middleware@2.26.1))(graphql@16.11.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 2.25.0(@babel/core@7.29.7)(gatsby-plugin-sharp@4.25.1(gatsby@4.25.9(@types/webpack@4.41.40)(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@4.41.0)(typescript@5.9.2)(webpack-hot-middleware@2.26.1))(graphql@16.11.0))(gatsby-source-filesystem@4.25.0(gatsby@4.25.9(@types/webpack@4.41.40)(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@4.41.0)(typescript@5.9.2)(webpack-hot-middleware@2.26.1)))(gatsby@4.25.9(@types/webpack@4.41.40)(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@4.41.0)(typescript@5.9.2)(webpack-hot-middleware@2.26.1))(graphql@16.11.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       gatsby-plugin-utils:
         specifier: ^4.0.0
         version: 4.15.0(gatsby@4.25.9(@types/webpack@4.41.40)(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@4.41.0)(typescript@5.9.2)(webpack-hot-middleware@2.26.1))(graphql@16.11.0)
@@ -883,6 +889,10 @@ packages:
     resolution: {integrity: sha512-YsmSKC29MJwf0gF8Rjjrg5LQCmyh+j/nD8/eP7f+BeoQTKYqs9RoWbjGOdy0+1Ekr68RJZMUOPVQaQisnIo4Rw==}
     engines: {node: '>=6.9.0'}
 
+  '@babel/compat-data@7.29.7':
+    resolution: {integrity: sha512-locTkQyKvwIEgBzVrn8693ebc97F2U8ZHjbXwDXJ5Fn2TCpNwTlKcaKLkdHop5c/icOFE7qt7Q9JC5hnKNa6Gg==}
+    engines: {node: '>=6.9.0'}
+
   '@babel/core@7.12.9':
     resolution: {integrity: sha512-gTXYh3M5wb7FRXQy+FErKFAv90BnlOuNn1QkCK2lREoPAjrQCO49+HVSrFoe5uakFAF5eenS75KbO2vQiLrTMQ==}
     engines: {node: '>=6.9.0'}
@@ -891,8 +901,8 @@ packages:
     resolution: {integrity: sha512-2BCOP7TN8M+gVDj7/ht3hsaO/B/n5oDbiAyyvnRlNOs+u1o+JWNYTQrmpuNp1/Wq2gcFrI01JAW+paEKDMx/CA==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/core@7.28.5':
-    resolution: {integrity: sha512-e7jT4DxYvIDLk1ZHmU/m/mB19rex9sv0c2ftBtjSBv+kVM/902eh0fINUzD7UwLLNR+jU585GxUJ8/EBfAM5fw==}
+  '@babel/core@7.29.7':
+    resolution: {integrity: sha512-RgHBCvtjbOK2gXSNBNIkNoEc9qoVEtau3hj8gEqKQuL3HZAibKarWFEI3Lfm6EYKkLalOh8eSrj9b+ch9H/VBA==}
     engines: {node: '>=6.9.0'}
 
   '@babel/eslint-parser@7.28.4':
@@ -916,6 +926,10 @@ packages:
 
   '@babel/helper-compilation-targets@7.27.2':
     resolution: {integrity: sha512-2+1thGUUWWjLTYTHZWK1n8Yga0ijBz1XAhUXcKy81rd5g6yh7hGqMp45v7cadSbEHc9G3OTv45SyneRN3ps4DQ==}
+    engines: {node: '>=6.9.0'}
+
+  '@babel/helper-compilation-targets@7.29.7':
+    resolution: {integrity: sha512-wem6WaBj4NaVYVdNhLPPVacES6ZJ+KBBfSkTMD3YZxbP3rm3Di85tJU5ljaUNhaOynt+Aj0xruhYuzQBt8n71g==}
     engines: {node: '>=6.9.0'}
 
   '@babel/helper-create-class-features-plugin@7.28.3':
@@ -956,8 +970,18 @@ packages:
     resolution: {integrity: sha512-0gSFWUPNXNopqtIPQvlD5WgXYI5GY2kP2cCvoT8kczjbfcfuIljTbcWrulD1CIPIX2gt1wghbDy08yE1p+/r3w==}
     engines: {node: '>=6.9.0'}
 
+  '@babel/helper-module-imports@7.29.7':
+    resolution: {integrity: sha512-ejHwrQQYcm9xnTivShn2IDOlIzInN34AXskvq9QicvCtEzq1Vzclu/tKF8Jq1Cg8JG2GL6/EmjgsCT7lXepE3g==}
+    engines: {node: '>=6.9.0'}
+
   '@babel/helper-module-transforms@7.28.3':
     resolution: {integrity: sha512-gytXUbs8k2sXS9PnQptz5o0QnpLL51SwASIORY6XaBKF88nsOT0Zw9szLqlSGQDP/4TljBAD5y98p2U1fqkdsw==}
+    engines: {node: '>=6.9.0'}
+    peerDependencies:
+      '@babel/core': ^7.0.0
+
+  '@babel/helper-module-transforms@7.29.7':
+    resolution: {integrity: sha512-UPUVSyXbOh627KiCIGQSgwWzGeBKLkaJ9PJEdrngIwMSzxLR4jS4+f1f1jb7VzBbg8nFLaYotvVPFCTqdrmTAg==}
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0
@@ -1009,12 +1033,20 @@ packages:
     resolution: {integrity: sha512-YvjJow9FxbhFFKDSuFnVCe2WxXk1zWc22fFePVNEaWJEu8IrZVlda6N0uHwzZrUM1il7NC9Mlp4MaJYbYd9JSg==}
     engines: {node: '>=6.9.0'}
 
+  '@babel/helper-validator-option@7.29.7':
+    resolution: {integrity: sha512-N9ZErrD+yW5geCDtBqnOoxmR8+tNKiGuxKlDpuJxfsqpa2dFcexaziGAE/qoHLiDDreVNMupxGmSoNlyvsA3gw==}
+    engines: {node: '>=6.9.0'}
+
   '@babel/helper-wrap-function@7.28.3':
     resolution: {integrity: sha512-zdf983tNfLZFletc0RRXYrHrucBEg95NIFMkn6K9dbeMYnsgHaSBGcQqdsCSStG2PYwRre0Qc2NNSCXbG+xc6g==}
     engines: {node: '>=6.9.0'}
 
   '@babel/helpers@7.28.4':
     resolution: {integrity: sha512-HFN59MmQXGHVyYadKLVumYsA9dBFun/ldYxipEjzA4196jpLZd8UjEEBLkbEkvfYreDqJhZxYAWFPtrfhNpj4w==}
+    engines: {node: '>=6.9.0'}
+
+  '@babel/helpers@7.29.7':
+    resolution: {integrity: sha512-1k2lAGRMfHTcwuNYcCNUmaUffmQv8KWMfh2iJUUeRlwlwH4FdNG7mfPI10NPfLHJFThE4Tyr4mv7kTNZOiPuBg==}
     engines: {node: '>=6.9.0'}
 
   '@babel/highlight@7.25.9':
@@ -3563,6 +3595,15 @@ packages:
   '@poppinss/exception@1.2.3':
     resolution: {integrity: sha512-dCED+QRChTVatE9ibtoaxc+WkdzOSjYTKi/+uacHWIsfodVfpsueo3+DKpgU5Px8qXjgmXkSvhXvSCz3fnP9lw==}
 
+  '@posthog/brand@0.4.0':
+    resolution: {integrity: sha512-t02F1O3nklUr1romb2sZpGqHaI5G0eJ2dLt/CmkYIx7JnmJADq7JVFmO/GAsFXLmQIpoUam2EPN9sgPOyhnCKQ==}
+    engines: {node: '>=22.18'}
+    peerDependencies:
+      react: '>=18'
+    peerDependenciesMeta:
+      react:
+        optional: true
+
   '@posthog/hedgehog-mode@0.0.52':
     resolution: {integrity: sha512-3a/g06r+f3fOXCHD6qA1mIbnbjuD19sQ7OJ5xKxzAWbiFxWbaPaeofwg7yA5NSTPukoX4o+zdxTayx+3KzYOwg==}
     engines: {node: '>=18'}
@@ -5256,19 +5297,19 @@ packages:
   '@typecaast/core@0.4.0':
     resolution: {integrity: sha512-zy6eO7/okeox+3jr3GMzqmKgDHRWX6zCTGLJpwqU9isN+JrJIZyXJU8d0PM0SWVTzRVmv9NrWZKDX+Yhmy8R1Q==}
 
-  '@typecaast/core@0.6.0':
-    resolution: {integrity: sha512-NZtYH7JD3emTmR+Gt4eUB84AdgMs6hEpvTeDRvgK3WW48NKjpuPEJd9PcMrJsJE9zaPWihtCYrExDVcWxUdHLg==}
+  '@typecaast/core@0.6.1':
+    resolution: {integrity: sha512-YNrotqR6Lb8caRN4SK2z+QmqZnMUzqtFvMIeqxNzCZR1GFS2KY90zXmE+EuKIVqHqyr0q+8B0KyupRM5HlA+Fg==}
 
-  '@typecaast/react@0.5.4':
-    resolution: {integrity: sha512-OxoTfJQQcBcSXtL/vZqW/IbLofG0wDaBravNwiBXdbPuIEV7nlUryTsXab42DGsQWqpMEqO3xqCiFvvGkRDRpA==}
+  '@typecaast/react@0.5.5':
+    resolution: {integrity: sha512-SrVkFnChRUV1nVCzTv8fjP73rGK1qHStJLc+JC5teDu7OSmKnKzMz3sRS6V4j/tLxj1CN8vA2ZnwLlgHY7UFfQ==}
     peerDependencies:
       react: '>=18'
 
   '@typecaast/schema@0.2.1':
     resolution: {integrity: sha512-0xUp4Aqt60kiBOBv49zZX3NDh5MAZvATd4iU0XsOPS1fw7Ak05aeM/H8uT528w/aR6WekGw34qLt2MJfNtvTzg==}
 
-  '@typecaast/schema@0.4.0':
-    resolution: {integrity: sha512-RBbb7pbiGulBFoJUxaSIBz8htJ0Np5Avz1Mo8lyPCRzvZALOCfKFQeqHVRs1LcB61y4PGa3gP3nwFa/Ktunm6A==}
+  '@typecaast/schema@0.4.1':
+    resolution: {integrity: sha512-tT+wZlqc2FXjKg/CCmdF+P/x1s/n8IsCMS7PLYLah2PQVD2V9HgqCkNKx6V1hC4zRIQy8+T3T15M57iBvEZK9A==}
 
   '@typecaast/skin-kit@0.4.1':
     resolution: {integrity: sha512-U6/2EaugtUG1QpvXf9ruHd+q6wryMv9Onlt8i9NoAAwnYoQEeDP6x+ChTRLDdJHJfB32CTIeNhUyESQlQ5FHUw==}
@@ -5276,8 +5317,8 @@ packages:
       react: '>=18'
       react-dom: '>=18'
 
-  '@typecaast/skin-kit@0.6.0':
-    resolution: {integrity: sha512-Eyx0tXJ4jMCwKvLaZPGyAz9Z7mqcDxF8ABwcOoTlISWkg0JJld5Sk/gnFxMHFT287Wc6ygFMkPO1loCzDNhgNQ==}
+  '@typecaast/skin-kit@0.6.1':
+    resolution: {integrity: sha512-TJMjFt2yXfF4Qg3PW1NYlfPN925nYlH8YAs4CEFOXPjRjC72zsjSgCEMcU8rlhY2jnQHOAvGT3TV6TYOYQtFpg==}
     peerDependencies:
       react: '>=18'
       react-dom: '>=18'
@@ -5287,8 +5328,8 @@ packages:
     peerDependencies:
       react: '>=18'
 
-  '@typecaast/skins@0.5.0':
-    resolution: {integrity: sha512-iAJVo24le/l7Os5+ztE/VOyT+LT+cFzAPgjt1/d7ksKixXk1v8Hig6Y2cc1W5AwYUvZpuTDiYWTGae3/6vLT4Q==}
+  '@typecaast/skins@0.5.1':
+    resolution: {integrity: sha512-ikEm9Rqxyrb4L0UNGpEWTzLtMFebv6/49wauq31x+n4ubITOAddk43zLYkGyvZ9zxXl6oCHDMtrPeoORNT9EtA==}
     peerDependencies:
       react: '>=18'
 
@@ -5986,7 +6027,7 @@ packages:
   '@xmldom/xmldom@0.7.13':
     resolution: {integrity: sha512-lm2GW5PkosIzccsaZIz7tp8cPADSIlIHWDFTR1N0SzfinhhYgeIQjFMz4rYzanCScr3DqQLeomUDArp6MWKm+g==}
     engines: {node: '>=10.0.0'}
-    deprecated: this version is no longer supported, please update to at least 0.8.*
+    deprecated: this version has critical issues, please update to the latest version
 
   '@xmldom/xmldom@0.8.11':
     resolution: {integrity: sha512-cQzWCtO6C8TQiYl1ruKNn2U6Ao4o4WBBcbL61yJl84x+j5sOWWFU9X7DpND8XZG3daDppSsigMdfAIl2upQBRw==}
@@ -11810,9 +11851,6 @@ packages:
   lodash@4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
 
-  lodash@4.17.23:
-    resolution: {integrity: sha512-LgVTMpQtIopCi79SJeDiP0TfWi5CNEc/L/aRdTh3yIvmZXTnheWpKjSZhnvMl8iXbC1tFg9gdHHDMLoV7CnG+w==}
-
   lodash@4.18.1:
     resolution: {integrity: sha512-dMInicTPVE8d1e5otfwmmjlxkZoUpiVLwyeTdUsi/Caj/gfzzblBcCE5sRHV/AsjuCmxWrte2TNGSYuCeCq+0Q==}
 
@@ -15206,8 +15244,8 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
-  semver@7.8.2:
-    resolution: {integrity: sha512-c8jsqUZm3omBOI66G90z1Dyw5z622G8oLG+omfsHBJf3CWQTlOcwOjvOG6wtiNfW6anKm/eA39LMwMtMez2TiQ==}
+  semver@7.8.4:
+    resolution: {integrity: sha512-rUCObTnP32Q08R2uuIrt7r9PlEonuTmtuXYcW6s5kjdlj3xbnwe+21yXptAUYcMAABLkYYTtnmzb3w3EDZfueA==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -16328,6 +16366,7 @@ packages:
   tsconfck@2.1.2:
     resolution: {integrity: sha512-ghqN1b0puy3MhhviwO2kGF8SeMDNhEbnKxjK7h6+fvY9JAxqvXi8y5NAHSQv687OVboS2uZIByzGd45/YxrRHg==}
     engines: {node: ^14.13.1 || ^16 || >=18}
+    deprecated: unmaintained
     hasBin: true
     peerDependencies:
       typescript: ^4.3.5 || ^5.0.0
@@ -16887,7 +16926,7 @@ packages:
 
   uuid@3.4.0:
     resolution: {integrity: sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==}
-    deprecated: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.
+    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
     hasBin: true
 
   uuid@8.3.2:
@@ -17797,6 +17836,8 @@ snapshots:
 
   '@babel/compat-data@7.28.4': {}
 
+  '@babel/compat-data@7.29.7': {}
+
   '@babel/core@7.12.9':
     dependencies:
       '@babel/code-frame': 7.27.1
@@ -17838,13 +17879,13 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@babel/core@7.28.5':
+  '@babel/core@7.29.7':
     dependencies:
       '@babel/code-frame': 7.29.7
       '@babel/generator': 7.29.7
-      '@babel/helper-compilation-targets': 7.27.2
-      '@babel/helper-module-transforms': 7.28.3(@babel/core@7.28.5)
-      '@babel/helpers': 7.28.4
+      '@babel/helper-compilation-targets': 7.29.7
+      '@babel/helper-module-transforms': 7.29.7(@babel/core@7.29.7)
+      '@babel/helpers': 7.29.7
       '@babel/parser': 7.29.7
       '@babel/template': 7.29.7
       '@babel/traverse': 7.29.7
@@ -17890,6 +17931,14 @@ snapshots:
     dependencies:
       '@babel/compat-data': 7.28.4
       '@babel/helper-validator-option': 7.27.1
+      browserslist: 4.26.2
+      lru-cache: 5.1.1
+      semver: 6.3.1
+
+  '@babel/helper-compilation-targets@7.29.7':
+    dependencies:
+      '@babel/compat-data': 7.29.7
+      '@babel/helper-validator-option': 7.29.7
       browserslist: 4.26.2
       lru-cache: 5.1.1
       semver: 6.3.1
@@ -17957,6 +18006,13 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@babel/helper-module-imports@7.29.7':
+    dependencies:
+      '@babel/traverse': 7.29.7
+      '@babel/types': 7.29.7
+    transitivePeerDependencies:
+      - supports-color
+
   '@babel/helper-module-transforms@7.28.3(@babel/core@7.12.9)':
     dependencies:
       '@babel/core': 7.12.9
@@ -17975,12 +18031,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@babel/helper-module-transforms@7.28.3(@babel/core@7.28.5)':
+  '@babel/helper-module-transforms@7.29.7(@babel/core@7.29.7)':
     dependencies:
-      '@babel/core': 7.28.5
-      '@babel/helper-module-imports': 7.27.1(supports-color@5.5.0)
-      '@babel/helper-validator-identifier': 7.27.1
-      '@babel/traverse': 7.28.4(supports-color@5.5.0)
+      '@babel/core': 7.29.7
+      '@babel/helper-module-imports': 7.29.7
+      '@babel/helper-validator-identifier': 7.29.7
+      '@babel/traverse': 7.29.7
     transitivePeerDependencies:
       - supports-color
 
@@ -18027,6 +18083,8 @@ snapshots:
 
   '@babel/helper-validator-option@7.27.1': {}
 
+  '@babel/helper-validator-option@7.29.7': {}
+
   '@babel/helper-wrap-function@7.28.3':
     dependencies:
       '@babel/template': 7.27.2
@@ -18039,6 +18097,11 @@ snapshots:
     dependencies:
       '@babel/template': 7.27.2
       '@babel/types': 7.28.4
+
+  '@babel/helpers@7.29.7':
+    dependencies:
+      '@babel/template': 7.29.7
+      '@babel/types': 7.29.7
 
   '@babel/highlight@7.25.9':
     dependencies:
@@ -19595,7 +19658,7 @@ snapshots:
       common-tags: 1.8.2
       graphql: 15.10.1
       import-from: 4.0.0
-      lodash: 4.17.23
+      lodash: 4.17.21
       tslib: 2.4.1
 
   '@graphql-codegen/plugin-helpers@3.1.2(graphql@15.10.1)':
@@ -19605,7 +19668,7 @@ snapshots:
       common-tags: 1.8.2
       graphql: 15.10.1
       import-from: 4.0.0
-      lodash: 4.17.23
+      lodash: 4.17.21
       tslib: 2.4.1
 
   '@graphql-codegen/schema-ast@2.6.1(graphql@15.10.1)':
@@ -21442,6 +21505,10 @@ snapshots:
       supports-color: 10.2.2
 
   '@poppinss/exception@1.2.3': {}
+
+  '@posthog/brand@0.4.0(react@18.3.1)':
+    optionalDependencies:
+      react: 18.3.1
 
   '@posthog/hedgehog-mode@0.0.52(prop-types@15.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
@@ -23846,16 +23913,16 @@ snapshots:
     dependencies:
       '@typecaast/schema': 0.2.1
 
-  '@typecaast/core@0.6.0':
+  '@typecaast/core@0.6.1':
     dependencies:
-      '@typecaast/schema': 0.4.0
+      '@typecaast/schema': 0.4.1
 
-  '@typecaast/react@0.5.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@typecaast/react@0.5.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@typecaast/core': 0.6.0
-      '@typecaast/schema': 0.4.0
-      '@typecaast/skin-kit': 0.6.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@typecaast/skins': 0.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@typecaast/core': 0.6.1
+      '@typecaast/schema': 0.4.1
+      '@typecaast/skin-kit': 0.6.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@typecaast/skins': 0.5.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
     transitivePeerDependencies:
       - react-dom
@@ -23864,7 +23931,7 @@ snapshots:
     dependencies:
       zod: 4.4.3
 
-  '@typecaast/schema@0.4.0':
+  '@typecaast/schema@0.4.1':
     dependencies:
       zod: 4.4.3
 
@@ -23876,10 +23943,10 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       zod: 4.4.3
 
-  '@typecaast/skin-kit@0.6.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@typecaast/skin-kit@0.6.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@typecaast/core': 0.6.0
-      '@typecaast/schema': 0.4.0
+      '@typecaast/core': 0.6.1
+      '@typecaast/schema': 0.4.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       zod: 4.4.3
@@ -23894,11 +23961,11 @@ snapshots:
     transitivePeerDependencies:
       - react-dom
 
-  '@typecaast/skins@0.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@typecaast/skins@0.5.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@typecaast/core': 0.6.0
-      '@typecaast/schema': 0.4.0
-      '@typecaast/skin-kit': 0.6.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@typecaast/core': 0.6.1
+      '@typecaast/schema': 0.4.1
+      '@typecaast/skin-kit': 0.6.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
       zod: 4.4.3
     transitivePeerDependencies:
@@ -26381,9 +26448,9 @@ snapshots:
       gatsby: 4.25.9(@types/webpack@4.41.40)(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@4.41.0)(typescript@5.9.2)(webpack-hot-middleware@2.26.1)
       gatsby-core-utils: 3.25.0
 
-  babel-plugin-remove-graphql-queries@4.25.0(@babel/core@7.28.5)(gatsby@4.25.9(@types/webpack@4.41.40)(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@4.41.0)(typescript@5.9.2)(webpack-hot-middleware@2.26.1)):
+  babel-plugin-remove-graphql-queries@4.25.0(@babel/core@7.29.7)(gatsby@4.25.9(@types/webpack@4.41.40)(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@4.41.0)(typescript@5.9.2)(webpack-hot-middleware@2.26.1)):
     dependencies:
-      '@babel/core': 7.28.5
+      '@babel/core': 7.29.7
       '@babel/runtime': 7.28.4
       '@babel/types': 7.28.4
       gatsby: 4.25.9(@types/webpack@4.41.40)(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@4.41.0)(typescript@5.9.2)(webpack-hot-middleware@2.26.1)
@@ -30219,15 +30286,15 @@ snapshots:
       - graphql
       - supports-color
 
-  gatsby-plugin-image@2.25.0(@babel/core@7.28.5)(gatsby-plugin-sharp@4.25.1(gatsby@4.25.9(@types/webpack@4.41.40)(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@4.41.0)(typescript@5.9.2)(webpack-hot-middleware@2.26.1))(graphql@16.11.0))(gatsby-source-filesystem@4.25.0(gatsby@4.25.9(@types/webpack@4.41.40)(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@4.41.0)(typescript@5.9.2)(webpack-hot-middleware@2.26.1)))(gatsby@4.25.9(@types/webpack@4.41.40)(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@4.41.0)(typescript@5.9.2)(webpack-hot-middleware@2.26.1))(graphql@16.11.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  gatsby-plugin-image@2.25.0(@babel/core@7.29.7)(gatsby-plugin-sharp@4.25.1(gatsby@4.25.9(@types/webpack@4.41.40)(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@4.41.0)(typescript@5.9.2)(webpack-hot-middleware@2.26.1))(graphql@16.11.0))(gatsby-source-filesystem@4.25.0(gatsby@4.25.9(@types/webpack@4.41.40)(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@4.41.0)(typescript@5.9.2)(webpack-hot-middleware@2.26.1)))(gatsby@4.25.9(@types/webpack@4.41.40)(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@4.41.0)(typescript@5.9.2)(webpack-hot-middleware@2.26.1))(graphql@16.11.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@babel/code-frame': 7.27.1
-      '@babel/core': 7.28.5
+      '@babel/core': 7.29.7
       '@babel/parser': 7.28.4
       '@babel/runtime': 7.28.4
       '@babel/traverse': 7.28.4(supports-color@5.5.0)
       babel-jsx-utils: 1.1.0
-      babel-plugin-remove-graphql-queries: 4.25.0(@babel/core@7.28.5)(gatsby@4.25.9(@types/webpack@4.41.40)(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@4.41.0)(typescript@5.9.2)(webpack-hot-middleware@2.26.1))
+      babel-plugin-remove-graphql-queries: 4.25.0(@babel/core@7.29.7)(gatsby@4.25.9(@types/webpack@4.41.40)(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@4.41.0)(typescript@5.9.2)(webpack-hot-middleware@2.26.1))
       camelcase: 5.3.1
       chokidar: 3.6.0
       common-tags: 1.8.2
@@ -30389,7 +30456,7 @@ snapshots:
       gatsby-plugin-utils: 3.19.0(gatsby@4.25.9(@types/webpack@4.41.40)(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@4.41.0)(typescript@4.9.5)(webpack-hot-middleware@2.26.1))(graphql@16.11.0)
       lodash: 4.18.1
       probe-image-size: 7.2.3
-      semver: 7.8.2
+      semver: 7.8.4
       sharp: 0.30.7
     transitivePeerDependencies:
       - graphql
@@ -30408,7 +30475,7 @@ snapshots:
       gatsby-plugin-utils: 3.19.0(gatsby@4.25.9(@types/webpack@4.41.40)(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@4.41.0)(typescript@5.9.2)(webpack-hot-middleware@2.26.1))(graphql@16.11.0)
       lodash: 4.18.1
       probe-image-size: 7.2.3
-      semver: 7.8.2
+      semver: 7.8.4
       sharp: 0.30.7
     transitivePeerDependencies:
       - graphql
@@ -33456,8 +33523,6 @@ snapshots:
   lodash.uniqby@4.7.0: {}
 
   lodash@4.17.21: {}
-
-  lodash@4.17.23: {}
 
   lodash@4.18.1: {}
 
@@ -37968,7 +38033,7 @@ snapshots:
 
   semver@7.7.4: {}
 
-  semver@7.8.2: {}
+  semver@7.8.4: {}
 
   send@0.19.0:
     dependencies:

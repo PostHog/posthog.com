@@ -13,6 +13,8 @@ features:
   errorTracking: true
 ---
 
+import TracingHeaders from '../../_snippets/tracing-headers.mdx'
+
 import DetailSetUpReverseProxy from "../../integrate/_snippets/details/set-up-reverse-proxy.mdx"
 import DetailGroupProductsInOneProject from "../../integrate/_snippets/details/group-products-in-one-project.mdx"
 import DetailPostHogIPs from "../../integrate/_snippets/details/posthog-ips.mdx"
@@ -49,6 +51,12 @@ import NextJSInstall from "../../integrate/_snippets/nextjs/install-nextjs.mdx"
 import IdentifyFrontendCallout from '../../_snippets/identify-frontend-callout.mdx'
 
 <IdentifyFrontendCallout />
+
+### Linking client and server events
+
+Next.js apps usually capture on both sides. To keep them on the same person, use the same distinct ID in both, and let the browser tell your server which one that is.
+
+<TracingHeaders />
 
 <DetailSetUpReverseProxy />
 

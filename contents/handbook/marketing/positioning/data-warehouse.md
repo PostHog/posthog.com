@@ -6,6 +6,8 @@ showTitle: true
 
 > The context warehouse is the platform everything else in PostHog is built on, not a co-equal tool. It's the data warehouse plus the full context-ingestion pipeline — [data pipelines](/handbook/marketing/positioning/data-pipelines), modelling, and batch exports. Don't call this "the PostHog Data Stack" externally.
 
+*For the canonical frame everyone at PostHog uses – the self-driving story and standard description – see [Brand foundations](/handbook/brand/foundations#how-we-describe-posthog).*
+
 ## Elevator pitch
 
 The context warehouse brings your product events and business data — Stripe, HubSpot, Salesforce, Zendesk, and 40+ more — into one place, queryable together with SQL (and with PostHog AI to help you write it). Because it's part of PostHog, every piece of data is immediately available to your tools — analytics, experiments, feature flags — and to your agents.

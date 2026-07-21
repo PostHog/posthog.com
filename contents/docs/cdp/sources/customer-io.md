@@ -9,9 +9,9 @@ availability:
 sourceId: CustomerIO
 ---
 
-<CalloutBox icon="IconFlask" title="Alpha release" type="action">
+<CalloutBox icon="IconFlask" title="Beta release" type="action">
 
-This source is currently in **alpha**. The interface and available tables may change.
+This source is currently in **beta**. It works end to end, but you may still hit rough edges – [let us know](https://app.posthog.com/#panel=support%3Asupport%3Adata_warehouse%3A%3Atrue) if you do.
 
 </CalloutBox>
 
@@ -32,25 +32,25 @@ Once the syncs are complete, you can start using Customer.io data in PostHog.
 
 The App API list endpoints sync via full refresh, and the webhook-backed event tables capture realtime message activity from Customer.io's reporting webhook.
 
-| Table | Description | Sync method |
-| ----- | ----------- | ----------- |
-| `broadcasts` | Broadcasts in your workspace | Full refresh |
-| `campaigns` | Campaigns in your workspace | Full refresh |
-| `collections` | Collections (data sets) | Full refresh |
-| `newsletters` | Newsletters | Full refresh |
-| `object_types` | Object type definitions | Full refresh |
-| `segments` | Segments | Full refresh |
-| `sender_identities` | Sender identities | Full refresh |
-| `snippets` | Reusable content snippets | Full refresh |
-| `subscription_topics` | Subscription topics | Full refresh |
-| `transactional` | Transactional messages | Full refresh |
-| `customer_events` | Customer subscription activity from the reporting webhook | Webhook |
-| `email_events` | Email delivery activity from the reporting webhook | Webhook |
-| `push_events` | Push notification activity from the reporting webhook | Webhook |
-| `sms_events` | SMS delivery activity from the reporting webhook | Webhook |
-| `in_app_events` | In-app message activity from the reporting webhook | Webhook |
-| `slack_events` | Slack message activity from the reporting webhook | Webhook |
-| `webhook_events` | Webhook delivery activity from the reporting webhook | Webhook |
+| Table                 | Description                                               | Sync method  |
+| --------------------- | --------------------------------------------------------- | ------------ |
+| `broadcasts`          | Broadcasts in your workspace                              | Full refresh |
+| `campaigns`           | Campaigns in your workspace                               | Full refresh |
+| `collections`         | Collections (data sets)                                   | Full refresh |
+| `newsletters`         | Newsletters                                               | Full refresh |
+| `object_types`        | Object type definitions                                   | Full refresh |
+| `segments`            | Segments                                                  | Full refresh |
+| `sender_identities`   | Sender identities                                         | Full refresh |
+| `snippets`            | Reusable content snippets                                 | Full refresh |
+| `subscription_topics` | Subscription topics                                       | Full refresh |
+| `transactional`       | Transactional messages                                    | Full refresh |
+| `customer_events`     | Customer subscription activity from the reporting webhook | Webhook      |
+| `email_events`        | Email delivery activity from the reporting webhook        | Webhook      |
+| `push_events`         | Push notification activity from the reporting webhook     | Webhook      |
+| `sms_events`          | SMS delivery activity from the reporting webhook          | Webhook      |
+| `in_app_events`       | In-app message activity from the reporting webhook        | Webhook      |
+| `slack_events`        | Slack message activity from the reporting webhook         | Webhook      |
+| `webhook_events`      | Webhook delivery activity from the reporting webhook      | Webhook      |
 
 **Full refresh** tables reload all data on each sync. **Webhook** tables are populated in realtime as Customer.io sends reporting-webhook events to PostHog.
 

@@ -256,9 +256,9 @@ By the end of either the 1st or 2nd call with a customer, you should have a defi
 
 ### 5. Product evaluation
 
-Once qualified, and if you think they are a good prospect for our sales-led process, your first priority is to try and get them into trial of PostHog with [a shared Slack channel](/handbook/growth/sales/slack-channels) as quickly as possible. If you close them, a shared Slack channel will also be their primary channel for support. Add the Pylon app to the channel and it will automate the support bot and channel description. React with a 🎫 to customer messages or tag `@support` to create a ticket in a thread. Generally it's better to seek forgiveness than ask permission for adding people to a Slack channel - use your judgement. 
+Once qualified, and if you think they are a good prospect for our sales-led process, your first priority is to try and get them into trial of PostHog with [a shared Slack channel](/handbook/growth/sales/slack-channels) as quickly as possible. If you close them, a shared Slack channel will also be their primary channel for support. [Invite SupportHog to the channel](/handbook/growth/sales/slack-channels) so tickets can be created from Slack. React with a 🎫 to customer messages or mention `@SupportHog` to create a ticket in a thread. Generally it's better to seek forgiveness than ask permission for adding people to a Slack channel - use your judgement. 
 
-Some customers may wish to use MS Teams rather than Slack - we can sync our Slack with Teams via Pylon to do this. First you will need an MS Teams licence - ask Simon for one. Then, set up [a Slack channel](/handbook/growth/sales/slack-channels). Then, [follow the instructions here](https://docs.usepylon.com/pylon-docs/integrations/chat/microsoft-teams) to get set up. Before adding the customer into the channel, remember to test it on both sides to ensure the integration is working correctly.
+Some customers may wish to use MS Teams rather than Slack - SupportHog works in Teams too. See [Using MS Teams](/handbook/growth/sales/slack-channels#using-ms-teams) on the shared Slack channels page for how to get set up. Before adding the customer into the channel, remember to test it to ensure ticket creation is working correctly.
 
 You should then follow up with a standard email/Slack message that:
 
