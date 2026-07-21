@@ -29,7 +29,7 @@ Without authorized URLs, the [toolbar](/docs/toolbar) can't launch on your site,
 
 ## Fix it automatically with the Inbox and PostHog Desktop
 
-Because authorized URLs are a security boundary, [PostHog Desktop](/docs/posthog-code) handles this one carefully and **never adds a domain unattended**. With health checks enabled as a [signal source](/docs/self-driving/inbox/sources), the agent will:
+Because authorized URLs are a security boundary, [PostHog Desktop](/docs/posthog-desktop) handles this one carefully and **never adds a domain unattended**. With health checks enabled as a [signal source](/docs/self-driving/inbox/sources), the agent will:
 
 - Discover candidate domains from your recent `$pageview` events (a domain appearing in events is not proof you own it – anyone with your public project token can send spoofed events).
 - Present the discovered domains and ask you to confirm which you actually own.

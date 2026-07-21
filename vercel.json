@@ -363,7 +363,7 @@
         },
         {
             "source": "/docs/posthog-code/quick-tour",
-            "destination": "/docs/posthog-code",
+            "destination": "/docs/posthog-desktop",
             "statusCode": 301
         },
         {
@@ -481,6 +481,21 @@
         {
             "source": "/docs/posthog-code/slack",
             "destination": "/docs/slack"
+        },
+        {
+            "source": "/docs/posthog-code/download-posthog-code",
+            "destination": "/docs/posthog-desktop/download-posthog-desktop",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-code",
+            "destination": "/docs/posthog-desktop",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-code/:path*",
+            "destination": "/docs/posthog-desktop/:path*",
+            "statusCode": 301
         },
         {
             "source": "/docs/slack-app",
