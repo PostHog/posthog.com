@@ -43,9 +43,9 @@ Finally, import and add PostHog to your function. We use the `captureImmediate` 
 // app/api/hello/route.js
 import PostHogClient from '../../posthog'
 
-export function GET(request) {
+export async function GET(request) {
   const posthogClient = PostHogClient()
-  posthogClient.captureImmediate({
+  await posthogClient.captureImmediate({
     distinctId: 'ian@posthog.com',
     event: 'vercel_function_called',
     properties: {
@@ -56,7 +56,7 @@ export function GET(request) {
 }
 ```
 
-We use `captureImmediate` because it guarantees the HTTP request finishes before your function continues (or shuts downs). `flushAt` and `flushInterval` mean events are sent immediately, but `capture` is still async and serverless environments can freeze or terminate before it completes.
+We use `captureImmediate` with `await` because it guarantees the HTTP request finishes before your function continues (or shuts downs). `flushAt` and `flushInterval` mean events are sent immediately, but `capture` is still async and serverless environments can freeze or terminate before it completes.
 
 Finally, to ensure all your requests complete you can combine PostHog's `shutdown()` method with Next.js's [`after`](https://nextjs.org/docs/app/api-reference/functions/after) function for Next.js 15.1 and above, or Vercel's [`waitUntil`](https://vercel.com/docs/functions/functions-api-reference/vercel-functions-package#waituntil) helper method for older versions. 
 

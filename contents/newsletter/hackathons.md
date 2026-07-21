@@ -79,7 +79,7 @@ It was cool when they showed this by getting people to click around on the demo 
 
 Requiring demos is a forcing function. You want to have something worth showing off, so initially ambitious plans quickly become more realistic to ship something real.
 
-They’re also fun. When someone says “this is available now” or “we already have users using this,” there are always “ooohs” and “ahhhs.” People love a little showmanship and it’s fun to be in the spotlight.
+They’re also fun. When someone says “this is available now” or “we already have users using this,” there are always “ooohs” and “ahhhs.” People love a little showmanship and it’s fun to be in the spotlight — [the energy, structure, and setup that make demos land](/newsletter/how-to-demo#setup-and-delivery) are worth thinking about before you get up there.
 
 While demos are mandatory, judging and prizes are optional and arguably undesirable. [We hire people](/newsletter/43-lessons-about-hiring-for-startups) to “[be the driver](/handbook/values).” They don’t need artificial motivation like gift cards or merch to do that. We also don’t want people to only build projects they think will win, or what the bosses want to see.
 

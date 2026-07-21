@@ -30,7 +30,7 @@ Product UI has a different purpose than the website or other surfaces. The desig
 ### Principles
 
 - Clarity > cleverness. Clear empty states, error messages, and loading states.
-- Typography: Open Runde for titles and buttons; system font for body in product.
+- Typography: RoundHog for titles and buttons; system font for body in product.
 - Icons: Central Icon System (outlined vector icons, 1.5px border).
 - Don't use Squeak in product UI – it's a marketing/hedgehog-context font only.
 - Use our icon and color systems consistently; don't introduce new visual elements without design review.
@@ -106,7 +106,7 @@ Print requires additional consideration because you can't iterate after it's shi
 
 ### Approval:
 
-All print materials should be reviewed by in `#design-review` before going to print. Mistakes in print are expensive. [Submit a request](/handbook/brand/art-requests) early.
+All print materials should be reviewed in `#design-review` before going to print. Mistakes in print are expensive. [Submit a request](/handbook/brand/art-requests) early.
 
 ## Merch & swag
 

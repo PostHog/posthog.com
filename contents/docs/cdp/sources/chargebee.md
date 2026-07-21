@@ -9,26 +9,37 @@ availability:
 sourceId: Chargebee
 ---
 
-The Chargebee connector can link customers, subscriptions, invoices, events, and more to PostHog.
+import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
+import SyncModes from "../_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
-To link Chargebee:
+The Chargebee connector syncs your billing data – customers, subscriptions, invoices, events, and more – into PostHog, so you can analyze revenue and billing activity alongside your product data.
 
-1. Go to the [sources tab](https://app.posthog.com/data-management/sources) of the data pipeline section in PostHog.
+## Prerequisites
 
-2. Click **+ New source** and then click **Link** next to Chargebee.
+You need a Chargebee account and a read-only API key. We recommend creating a dedicated read-only key for this integration.
 
-3. Next, you need an API key from Chargebee. To start, in your Chargebee dashboard click on **Settings** in the sidebar. In the dropdown, select **Configure Chargebee**. Next, scroll down and select **API keys**. Here you should see a list of existing API keys. It is recommended to use a dedicated read-only key for this integration, so go to **+ Add API Key** and select **Read-Only Key**. Copy the value of the newly created key.
+## Adding a data source
 
-4. Back in PostHog, paste the API key in the `API key` field.
+<SourceSetupIntro />
 
-5. You will also need to provide your Chargebee's site name. You can find this in the top-left of your dashboard. It is also the same as the subdomain of your dashboard (i.e. the part before `.chargebee.com`)
+When linking Chargebee, you'll need:
 
-6. Once you've entered these 2 pieces of information, hit **Next**.
+- **API key** – in your Chargebee dashboard, go to **Settings > Configure Chargebee > API keys**, then click **+ Add API Key** and select **Read-Only Key**. Copy the value of the newly created key.
+- **Site name (subdomain)** – found in the top-left of your dashboard. It's the same as the subdomain of your dashboard (the part before `.chargebee.com`).
 
-7. On the next page, set up the schemas you want to sync and modify the method and frequency as needed. Once done, click **Import**.
+## Sync modes
 
-Once the syncs are complete, you can start using Chargebee data in PostHog.
+<SyncModes />
 
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />
+
+## Troubleshooting
+
+<TroubleshootingLink />

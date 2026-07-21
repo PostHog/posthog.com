@@ -82,7 +82,7 @@ export const CopyMarkdownActionsDropdown: React.FC<CopyMarkdownActionsDropdownPr
         <Popover
             trigger={
                 <span>
-                    <OSButton icon={copied ? <IconCheck className="text-green" /> : <IconCopy />} />
+                    <OSButton size="md" icon={copied ? <IconCheck className="text-green" /> : <IconCopy />} />
                 </span>
             }
             dataScheme="secondary"

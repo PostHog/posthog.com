@@ -1,9 +1,12 @@
 ---
-title: Usage analytics
+title: Usage and logs
 ---
 
+The **Usage** tab on the [Endpoints page](https://app.posthog.com/endpoints) shows analytics across all your endpoints, while the **Logs** tab on an individual endpoint's page shows a log of its executions. Together they help you monitor performance and debug execution issues.
 
-The **Usage** tab on the Endpoints page helps you monitor how your endpoints are being used and spot performance issues.
+## Usage tab
+
+The **Usage** tab aggregates execution data across all your endpoints so you can monitor how they're being used and spot performance issues.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2026_02_06_T13_08_10_081_Z_c4b2450c10.png"
@@ -12,17 +15,33 @@ The **Usage** tab on the Endpoints page helps you monitor how your endpoints are
   classes="rounded"
 />
 
-## What you can see
+### What you can see
 
 - **Overview cards** - Total executions, bytes read, CPU time, average and P95 duration, error rate, and a split between materialized vs direct executions
 - **Trend charts** - Executions, error rate, query duration, CPU time, and bytes read over time
 - **Breakdown table** - Per-endpoint stats including executions, bytes read, CPU time, and error rate
 
-## Filtering and breakdowns
+### Filtering and breakdowns
 
 You can filter by date range, specific endpoints, and execution type (materialized vs direct).
 
 Use the breakdown options to slice the data by:
+
 - **Endpoint** - Compare usage across different endpoints
 - **API key** - See which keys are driving the most usage
 - **Execution type** - Understand the split between materialized and direct executions
+
+## Logs tab
+
+The **Logs** tab on an individual endpoint's page shows one entry per execution of that endpoint. Each entry is logged at the `INFO` level on success or `ERROR` on failure, and includes searchable `key=value` metadata:
+
+- **path** - Whether the query ran via `inline` (direct) or `materialized` execution
+- **cache** - Cache outcome (`hit` or `miss`)
+- **duration_ms** - How long the execution took in milliseconds
+- **rows** - Number of result rows returned
+- **version** - The endpoint version that was executed
+- **error** - Error type, if the execution failed
+
+Rejected requests (invalid parameters, version not found, etc.) also appear as `ERROR` entries so validation failures aren't invisible.
+
+Filter logs by level or use free-text search to find specific executions. The `execution_id` returned in the [run response](/docs/endpoints/execution#response-format) maps directly to a log entry, so you can trace any result back to its log.

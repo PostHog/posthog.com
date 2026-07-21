@@ -1,10 +1,10 @@
-import React, { useRef, useState } from 'react'
-import SEO from 'components/seo'
+import React, { useEffect, useRef, useState } from 'react'
+import SEO, { buildProductStructuredData } from 'components/seo'
 import Editor from 'components/Editor'
 import { IconArrowUpRight, IconCheck, IconFlask, IconToggle, IconTrends, IconWarning } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import { Accordion } from 'components/RadixUI/Accordion'
-import { LOGOS, type LogoKey } from 'constants/logos'
+import { LOGOS, type LogoKey, getDarkClassForLogo } from 'constants/logos'
 import TabbedCarousel from 'components/TabbedCarousel'
 import type { TabbedCarouselTab } from 'components/TabbedCarousel'
 import { ChoppyReveal } from 'components/Code/ChoppyReveal'
@@ -16,9 +16,12 @@ import { DottedConnection } from 'components/Code/DottedConnection'
 import { StickerTombstone } from 'components/Stickers/Stickers'
 import { ZoomImage } from 'components/ZoomImage'
 import CloudinaryImage from 'components/CloudinaryImage'
+import WistiaEmbed from 'components/WistiaEmbed'
 import Link from 'components/Link'
 import { IconDiscord } from 'components/OSIcons/Icons'
 import { WaitlistForm } from 'components/WaitlistForm'
+import { DownloadContent } from 'components/Code/DownloadContent'
+import { usePrefersReducedMotion } from 'components/Code/usePrefersReducedMotion'
 
 // ─────────────────────────────────────────────
 // Section label ("The old way", "The PostHog way")
@@ -93,7 +96,7 @@ function AIModelBadge({ innerRef }: { innerRef: React.RefObject<HTMLSpanElement>
             className="inline-flex items-center gap-1.5 border border-primary rounded px-2 py-1 text-xs bg-accent align-middle ml-6 mt-0 mb-2"
         >
             <span className="font-semibold">Supports</span>
-            <span className="text-secondary">Haiku, Opus, Sonnet, GPT 5.4, GPT 5.5</span>
+            <span className="text-secondary">Fable, Haiku, Opus, Sonnet, GPT 5.4, GPT 5.5</span>
         </span>
     )
 }
@@ -603,9 +606,32 @@ function PostHogCodeLogomark({ className }) {
 // ─────────────────────────────────────────────
 
 function HeroSection() {
-    const [showForm, setShowForm] = useState(false)
+    const [showDownload, setShowDownload] = useState(false)
+    const [contentVisible, setContentVisible] = useState(true)
+    const prefersReducedMotion = usePrefersReducedMotion()
+
+    useEffect(() => {
+        if (window.location.hash === '#download') setShowDownload(true)
+    }, [])
+
+    const swapToDownload = () => {
+        if (typeof window !== 'undefined') {
+            window.history.replaceState(null, '', '#download')
+        }
+        if (showDownload) return
+        if (prefersReducedMotion) {
+            setShowDownload(true)
+            return
+        }
+        setContentVisible(false)
+        setTimeout(() => {
+            setShowDownload(true)
+            setContentVisible(true)
+        }, 300)
+    }
+
     return (
-        <section className="my-6 @4xl/editor:mb-16 tracking-[-0.0125em] max-w-5xl mx-auto">
+        <section className="my-6 @4xl/editor:mb-16 tracking-[-0.0125em] max-w-5xl mx-auto w-full">
             <div className="flex items-center justify-between mb-8">
                 <div>
                     <PostHogCodeLogo />
@@ -623,72 +649,80 @@ function HeroSection() {
                 </div>
             </div>
 
-            <h1 className="text-xl @xl:text-3xl font-bold leading-tight mb-4 @xl:mb-8 !mt-0">
-                The era of{' '}
-                <RoughAnnotation
-                    type="highlight"
-                    color="rgba(48, 164, 108, 0.2)"
-                    strokeWidth={1}
-                    padding={2}
-                    delay={300}
-                >
-                    self-driving development
-                </RoughAnnotation>
-                {' is '}
-                <RoughAnnotation type="underline" color="#F54E00" strokeWidth={2} delay={600}>
-                    <span className="font-bold">here</span>
-                </RoughAnnotation>
-            </h1>
+            <div
+                style={{
+                    opacity: contentVisible ? 1 : 0,
+                    transition: prefersReducedMotion ? undefined : 'opacity 0.3s ease',
+                }}
+            >
+                {showDownload ? (
+                    <DownloadContent className="w-full mx-auto py-8 text-center" />
+                ) : (
+                    <>
+                        <h1 className="text-xl @xl:text-3xl font-bold leading-tight mb-4 @xl:mb-8 !mt-0">
+                            The era of{' '}
+                            <RoughAnnotation
+                                type="highlight"
+                                color="rgba(48, 164, 108, 0.2)"
+                                strokeWidth={1}
+                                padding={2}
+                                delay={300}
+                            >
+                                self-driving development
+                            </RoughAnnotation>
+                            {' is '}
+                            <RoughAnnotation type="underline" color="#F54E00" strokeWidth={2} delay={600}>
+                                <span className="font-bold">here</span>
+                            </RoughAnnotation>
+                        </h1>
 
-            <div className="@4xl/editor:gap-8 flex flex-col @4xl/editor:flex-row items-start">
-                <div className="@4xl/flex-[0_0_280px]">
-                    <p>
-                        PostHog Code is the only AI devtool that understands your <strong>product,</strong> not just
-                        your <strong>codebase</strong>.
-                    </p>
-                    <ul className="list-none p-0 mb-4 text-[15px] space-y-0.5">
-                        <li className="relative pl-5">
-                            <IconCheck className="size-4 text-green absolute left-0 top-1" />
-                            Identifies product usage patterns
-                        </li>
-                        <li className="relative pl-5">
-                            <IconCheck className="size-4 text-green absolute left-0 top-1" />
-                            Triages bugs and errors
-                        </li>
-                        <li className="relative pl-5">
-                            <IconCheck className="size-4 text-green absolute left-0 top-1" />
-                            Creates pull requests automatically
-                        </li>
-                    </ul>
+                        <div className="@4xl/editor:gap-8 flex flex-col @4xl/editor:flex-row items-start">
+                            <div className="@4xl/editor:flex-[0_0_280px]">
+                                <p>
+                                    PostHog Code is the only AI devtool that understands your <strong>product,</strong>{' '}
+                                    not just your <strong>codebase</strong>.
+                                </p>
+                                <ul className="list-none p-0 mb-4 text-[15px] space-y-0.5">
+                                    <li className="relative pl-5">
+                                        <IconCheck className="size-4 text-green absolute left-0 top-1" />
+                                        Identifies product usage patterns
+                                    </li>
+                                    <li className="relative pl-5">
+                                        <IconCheck className="size-4 text-green absolute left-0 top-1" />
+                                        Triages bugs and errors
+                                    </li>
+                                    <li className="relative pl-5">
+                                        <IconCheck className="size-4 text-green absolute left-0 top-1" />
+                                        Creates pull requests automatically
+                                    </li>
+                                </ul>
 
-                    <div className="@container max-w-sm">
-                        {showForm ? (
-                            <WaitlistForm autoFocus />
-                        ) : (
-                            <>
-                                <OSButton variant="primary" size="lg" onClick={() => setShowForm(true)}>
-                                    Join the waitlist
-                                </OSButton>
-                                <p className="text-sm text-secondary mt-4">Test drives begin Spring 2026</p>
-                            </>
-                        )}
-                    </div>
-                </div>
+                                <div className="@container max-w-sm">
+                                    <WaitlistForm />
+                                    <p className="text-sm text-secondary mt-4">
+                                        Have an invite code?{' '}
+                                        <Link
+                                            to="/code#download"
+                                            className="font-bold underline"
+                                            onClick={(e) => {
+                                                e.preventDefault()
+                                                swapToDownload()
+                                            }}
+                                        >
+                                            Get started
+                                        </Link>
+                                    </p>
+                                </div>
+                            </div>
 
-                <div className="@4xl/flex-1">
-                    <ZoomImage>
-                        <img
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/signals_light_4b3440dc2b.png"
-                            alt="PostHog Code screenshot"
-                            className="w-full rounded shadow dark:hidden"
-                        />
-                        <img
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/signals_dark_b29e5ed8f9.png"
-                            alt="PostHog Code screenshot"
-                            className="w-full rounded hidden dark:block"
-                        />
-                    </ZoomImage>
-                </div>
+                            <div className="@4xl/editor:flex-1 w-full min-w-0">
+                                <div className="rounded-md overflow-hidden shadow-xl not-prose">
+                                    <WistiaEmbed mediaId="vm9mn1m4dv" />
+                                </div>
+                            </div>
+                        </div>
+                    </>
+                )}
             </div>
         </section>
     )
@@ -998,9 +1032,9 @@ const Features = () => {
     return (
         <section className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
             <div className="px-4 @xl:px-8">
-                <div className="max-w-[654px] mx-auto relative">
+                <div className="max-w-[654px] mx-auto [mask-image:linear-gradient(to_bottom,black_0%,black_calc(100%-6rem),transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_calc(100%-6rem),transparent_100%)]">
                     <CloudinaryImage
-                        src="/>https://res.cloudinary.com/dmukukwp6/image/upload/code_screenshot_light_d0c42a8067.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/code_screenshot_light_d0c42a8067.png"
                         className="dark:hidden"
                         imgClassName="w-full rounded border border-secondary"
                     />
@@ -1009,7 +1043,6 @@ const Features = () => {
                         className="hidden dark:block"
                         imgClassName="w-full rounded border border-secondary"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-b from-light/0 via-light/25 to-light dark:from-dark/0 dark:via-dark/25 dark:to-dark"></div>
                 </div>
 
                 <h2 className="text-2xl font-bold mb-2 text-center -mt-10 pb-12 relative">
@@ -1146,7 +1179,13 @@ const TableStakes = () => {
                             </p>
                             <ul className="m-0 mt-1 list-none p-0 space-y-2">
                                 <li className="text-sm font-bold text-primary">
+                                    <code>Claude Fable 5</code>
+                                </li>
+                                <li className="text-sm font-bold text-primary">
                                     <code>Claude Sonnet 4.6</code>
+                                </li>
+                                <li className="text-sm font-bold text-primary">
+                                    <code>Claude Opus 4.8</code>
                                 </li>
                                 <li className="text-sm font-bold text-primary">
                                     <code>Claude Opus 4.7</code>
@@ -1160,25 +1199,20 @@ const TableStakes = () => {
 
                     <SectionLabel>Integrations</SectionLabel>
 
-                    <div className="relative -mt-2">
-                        <div className="divide-y divide-primary">
-                            {integrationRows.map((row, i) => (
-                                <div
-                                    key={row.logoKey}
-                                    className={`flex min-h-0 flex-1 items-center gap-3 py-2
-                                    }`}
-                                >
-                                    <img
-                                        src={LOGOS[row.logoKey]}
-                                        alt=""
-                                        className="size-7 shrink-0 object-contain"
-                                        aria-hidden
-                                    />
-                                    <p className="m-0 text-base font-bold text-primary">{row.name}</p>
-                                </div>
-                            ))}
-                        </div>
-                        <div className="absolute inset-0 bg-gradient-to-b from-light/0 via-light/25 to-light dark:from-dark/0 dark:via-dark/25 dark:to-dark"></div>
+                    <div className="-mt-2 divide-y divide-primary [mask-image:linear-gradient(to_bottom,black_0%,black_calc(100%-4rem),transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_calc(100%-4rem),transparent_100%)]">
+                        {integrationRows.map((row) => (
+                            <div key={row.logoKey} className="flex min-h-0 flex-1 items-center gap-3 py-2">
+                                <img
+                                    src={LOGOS[row.logoKey]}
+                                    alt=""
+                                    className={`size-7 shrink-0 object-contain ${getDarkClassForLogo(
+                                        LOGOS[row.logoKey]
+                                    )}`}
+                                    aria-hidden
+                                />
+                                <p className="m-0 text-base font-bold text-primary">{row.name}</p>
+                            </div>
+                        ))}
                     </div>
                 </div>
                 <div>
@@ -1188,7 +1222,7 @@ const TableStakes = () => {
                         capabilities.
                     </p>
 
-                    <div className="relative">
+                    <div className="[mask-image:linear-gradient(to_bottom,black_0%,black_calc(100%-4rem),transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_calc(100%-4rem),transparent_100%)]">
                         {mcpServerRows.map((row, i) => (
                             <div
                                 key={row.logoKey}
@@ -1210,8 +1244,6 @@ const TableStakes = () => {
                                 </div>
                             </div>
                         ))}
-
-                        <div className="absolute inset-0 bg-gradient-to-b from-light/0 via-light/25 to-light dark:from-dark/0 dark:via-dark/25 dark:to-dark"></div>
                     </div>
                 </div>
             </div>
@@ -1232,7 +1264,7 @@ const SlackAppCallout = () => {
                         <p className="mb-4">
                             Answer data questions, fix bugs, and kick off PRs by mentioning <code>@PostHog</code>.
                         </p>
-                        <OSButton asLink to="/slack-app" state={{ newWindow: true }} variant="primary" size="md">
+                        <OSButton asLink to="/slack" state={{ newWindow: true }} variant="primary" size="md">
                             About the Slack app
                         </OSButton>
                     </div>
@@ -1273,7 +1305,7 @@ const TLDR = () => {
     return (
         <section className="relative mb-8 @2xl:mb-12 px-4 @xl:px-8">
             <h2 className="text-2xl font-bold mb-2">Try it</h2>
-            <p>PostHog Code is launching in Spring 2026. Join the waitlist to be the first to try it.</p>
+            <p>PostHog Code is launching soon. Join the waitlist to be the first to try it.</p>
             <div className="max-w-lg @container bg-blue/10 border border-blue rounded-md px-8 py-6 shadow-xl">
                 <WaitlistForm />
             </div>
@@ -1318,7 +1350,7 @@ const FAQ_ITEMS = [
         content: (
             <div className="space-y-3">
                 <p>
-                    PostHog AI is the product assistant built into PostHog Cloud. It's deeply integrated with your data
+                    PostHog AI is the product assistant built into PostHog Web. It's deeply integrated with your data
                     and helps with things like writing SQL and analyzing user behavior through natural-language prompts.
                 </p>
                 <p>
@@ -1401,16 +1433,16 @@ const FAQ_ITEMS = [
             <div className="space-y-3">
                 <p>
                     PostHog Code's{' '}
-                    <a href="/docs/posthog-code/inbox" className="underline">
+                    <a href="/docs/self-driving/inbox" className="underline">
                         Inbox
                     </a>{' '}
                     connects to{' '}
-                    <a href="/docs/posthog-code/inbox/sources" className="underline">
+                    <a href="/docs/self-driving/inbox/sources" className="underline">
                         signal sources
                     </a>{' '}
                     you choose – Error Tracking, support tickets, Session Replay, GitHub Issues, Linear, and Zendesk –
                     and{' '}
-                    <a href="/docs/posthog-code/inbox/research" className="underline">
+                    <a href="/docs/self-driving/inbox/research" className="underline">
                         ranks issues
                     </a>{' '}
                     by code importance (hot paths like checkout or billing), user impact (how many users are affected,
@@ -1506,13 +1538,17 @@ const FAQ_ITEMS = [
         content: (
             <div className="space-y-3">
                 <p>
-                    PostHog Code is a monthly seat-based subscription. If you've participated in previous betas with
-                    PostHog, you might be surprised to hear that we are charging for this one.
+                    PostHog Code is usage-based – there's no fixed subscription. You spend AI credits as you go (100
+                    credits = $1), and credits reflect the underlying model's cost exactly, with no markup on top.
                 </p>
                 <p>
-                    Every user gets a free tier with enough credits for roughly 10 tasks. If you want to use it for
-                    meaningful engineering work (and cancel your Codex and Claude Code subscriptions in the process),
-                    the Pro plan comes with a very generous credit limit.
+                    Every organization gets a $20/month free tier to explore, plus a default $50 billing limit so you
+                    don't rack up costs by accident (customize it anytime). Simple tasks use very few credits; larger,
+                    multi-file work uses more. See the{' '}
+                    <a href="/docs/posthog-code/pricing" className="underline">
+                        pricing docs
+                    </a>{' '}
+                    for the full breakdown.
                 </p>
             </div>
         ),
@@ -1570,8 +1606,15 @@ export default function CodePage() {
             <SEO
                 title="PostHog Code"
                 description="PostHog Code uses signals from production data to diagnose issues and generate pull requests – before you even know there's a problem."
+                structuredData={buildProductStructuredData({
+                    name: 'PostHog Code',
+                    description:
+                        "PostHog Code uses signals from production data to diagnose issues and generate pull requests – before you even know there's a problem.",
+                    slug: 'code',
+                    operatingSystem: 'macOS, Windows, Linux',
+                })}
             />
-            <Editor slug="/code" maxWidth="100%" hasPadding={false}>
+            <Editor slug="/code" maxWidth="100%" hasPadding={false} disableFormatting>
                 <div className="@container not-prose font-rounded">
                     <header className="relative mb-12">
                         <CloudinaryImage

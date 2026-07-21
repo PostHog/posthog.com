@@ -26,7 +26,7 @@ Separating this from Release Engineering is important because the buyer is often
 - **[Product Analytics](/docs/product-analytics)** — Error correlation with user behavior and business impact. Answer "how many users hit this error?" and "did this error cause drop-off in our conversion funnel?" Connect technical incidents to business outcomes.
 - **[PostHog AI](/docs/posthog-ai/allow-access)** — Natural language incident triage. "What errors spiked in the last hour and which users were affected?" without writing a query. Faster mean time to understanding during incidents. ([Example prompts](/docs/posthog-ai/example-prompts))
 - **Logging** *beta* — Centralized log collection and search. Logs are table stakes for any observability stack. Having logs alongside errors, replays, and analytics means the full debugging context lives in one place.
-- **[Tracing](/docs/tracing)** *alpha* — Distributed tracing over OpenTelemetry (OTLP). Follow a request across services to see what called what and where the time went, in the same project as errors, logs, replays, and analytics.
+- **[Distributed tracing](/docs/distributed-tracing)** *alpha* — Distributed tracing over OpenTelemetry (OTLP). Follow a request across services to see what called what and where the time went, in the same project as errors, logs, replays, and analytics.
 - *Roadmap: APM* — Not shipped yet. When full APM arrives, the observability story becomes complete: errors + logs + traces + replay + analytics in one platform.
 
 ## Adoption path and expansion path
