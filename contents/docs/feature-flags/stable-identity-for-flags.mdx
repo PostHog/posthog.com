@@ -111,6 +111,10 @@ To guarantee consistency across platforms for Experiments, evaluate flags on you
 | Quick fix, minimal code changes | Device bucketing |
 | Can't change identity flow at all | Experience continuity |
 
+<CalloutBox type="warning" title="Warning: Changing bucketing method re-evaluates users">
+If you change a flag's bucketing method (from `device_id` to `person` or vice versa), all users will be re-evaluated against the new bucketing option. This can cause the flag to evaluate to a different value for existing users, potentially disrupting their experience or corrupting experiment data. Plan changes carefully and consider the impact on active experiments.
+</CalloutBox>
+
 ## Further reading
 
 - [Production-ready Feature Flags](/docs/feature-flags/best-practices) – the pure function model that explains why identity matters for flags

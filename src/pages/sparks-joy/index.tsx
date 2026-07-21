@@ -77,7 +77,6 @@ export default function SparkJoy(): JSX.Element {
                 <div className="@container not-prose space-y-2 @md:-ml-3">
                     {/* Games Section */}
                     <Accordion
-                        skin={false}
                         triggerClassName="flex-row-reverse [&>svg]:!-rotate-90 [&[data-state=open]>svg]:!rotate-0 [&>span]:relative [&>span]:after:absolute [&>span]:after:right-0 [&>span]:after:top-1/2 [&>span]:after:h-px [&>span]:after:w-full [&>span]:after:bg-border [&>span]:after:content-['']"
                         items={[
                             {
@@ -131,7 +130,6 @@ export default function SparkJoy(): JSX.Element {
 
                     {/* Not games Section */}
                     <Accordion
-                        skin={false}
                         triggerClassName="flex-row-reverse [&>svg]:!-rotate-90 [&[data-state=open]>svg]:!rotate-0 [&>span]:relative [&>span]:after:absolute [&>span]:after:right-0 [&>span]:after:top-1/2 [&>span]:after:h-px [&>span]:after:w-full [&>span]:after:bg-border [&>span]:after:content-['']"
                         items={[
                             {

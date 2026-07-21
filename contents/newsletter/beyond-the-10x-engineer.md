@@ -22,7 +22,7 @@ At PostHog, we rely on engineers to make product decisions. They set their roadm
 
 **This week’s theme:** What we look for in (product) engineers.
 
-> This post was first published in our Substack newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
+> This post was first published in our Substack newsletter, [build mode](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
 
 ## 1. Always prototyping and experimenting
 
@@ -47,7 +47,7 @@ He’s since figured out the right visuals, added scroll depth to autocapture, a
 
 The work it took to reach the current beta phase has required skills across the stack.  
 
-> **What to look for:** People who have built products or projects from scratch, done hackathons, have an eye for UX and design, and understand system design.
+> **What to look for:** People who have built products or projects from scratch, done [hackathons](/newsletter/hackathons), have an eye for UX and design, and understand system design.
 
 ## 2. Comfortable writing
 

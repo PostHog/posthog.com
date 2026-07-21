@@ -8,7 +8,11 @@ import CLIAuthenticate from "../_snippets/cli/authenticate.mdx"
 import CLIInject from "../_snippets/cli/inject.mdx"
 import CLIUpload from "../_snippets/cli/upload.mdx"
 import StepVerifySymbolSetsUpload from '../_snippets/StepVerifySymbolSetsUpload'
+import WizardSection from './_snippets/wizard-section.mdx'
 
+<WizardSection />
+
+## Manual setup
 
 <Steps>
 
@@ -21,6 +25,12 @@ import StepVerifySymbolSetsUpload from '../_snippets/StepVerifySymbolSetsUpload'
 <Step title="Authenticate" badge="required">
 
   <CLIAuthenticate />
+
+  If you already keep your project's configuration in a dotenv-style file, you can load these variables from it with the `--dotenv-file` option instead of exporting them:
+
+  ```bash
+  posthog-cli --dotenv-file .env sourcemap upload --directory ./path/to/assets
+  ```
 
 </Step>
 

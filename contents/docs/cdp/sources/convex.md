@@ -29,6 +29,14 @@ You need two things from your Convex project:
 
 Once the syncs are complete, you can start using Convex data in PostHog.
 
+## Configuration
+
+<SourceParameters />
+
+## Supported tables
+
+<SourceTables />
+
 ### How syncing works
 
 Convex uses its streaming export API to sync data:
