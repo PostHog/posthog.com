@@ -3,6 +3,10 @@ import usePostHog from '../../hooks/usePostHog'
 import useProduct from '../../hooks/useProduct'
 import SurveySignup from 'components/SurveySignup'
 
+// The "PostHog Desktop waitlist" survey — the same list the /roadmap card and the in-app
+// feature previews collect into, so every PostHog Desktop sign-up lands in one place.
+const POSTHOG_CODE_SURVEY_ID = '019f28e8-1d35-0000-8d35-dbb342060f06'
+const POSTHOG_CODE_SURVEY_QUESTION_ID = 'ccffb103-2c9a-4bd3-bede-0ddfbf3288b9'
 // PostHog Desktop's concept-stage Early Access Feature flag. Its EAF is named
 // "PostHog Desktop" but the flag key is `twig`.
 const POSTHOG_CODE_FLAG_KEY = 'twig'
@@ -26,7 +30,8 @@ export function WaitlistForm({
     confetti = true,
     productHandle = 'posthog_code',
     productName = 'PostHog Desktop',
-    surveyId,
+    surveyId = POSTHOG_CODE_SURVEY_ID,
+    surveyQuestionId,
     flagKey,
     showTitle = true,
     buttonLabel = 'Get updates',
@@ -38,27 +43,12 @@ export function WaitlistForm({
     // callers that pass their own surveyId (e.g. Replay Vision) have different questions.
     const effectiveQuestionId =
         surveyQuestionId ?? (surveyId === POSTHOG_CODE_SURVEY_ID ? POSTHOG_CODE_SURVEY_QUESTION_ID : undefined)
-    // Same guard for the enrollment flag: only default to PostHog Code's flag when we're
-    // actually collecting for PostHog Code.
+    // Same guard for the enrollment flag: only default to PostHog Desktop's flag when we're
+    // actually collecting for PostHog Desktop.
     const effectiveFlagKey = flagKey ?? (surveyId === POSTHOG_CODE_SURVEY_ID ? POSTHOG_CODE_FLAG_KEY : undefined)
 
-    // Only default the PostHog Desktop flag when we're actually collecting for PostHog Desktop —
-    // callers with their own productHandle (e.g. Replay Vision) must pass flagKey explicitly.
-    const effectiveFlagKey = flagKey ?? (productHandle === 'posthog_code' ? POSTHOG_CODE_FLAG_KEY : undefined)
-
-    // Load the EAF list before submit so the enrollment event carries $early_access_feature_name —
-    // the Customer.io waitlist flow's trigger requires it.
-    usePrimeEarlyAccessFeatures(effectiveFlagKey)
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault()
-        if (!email) return
-        if (surveyId) {
-            posthog?.capture('survey sent', {
-                $survey_id: surveyId,
-                $survey_response: email,
-            })
-        }
+    // Keep the product-updates analytics event alongside the survey response.
+    const handleSuccess = (email: string) => {
         posthog?.capture('subscribe_to_product_updates', { email, selectedProduct })
     }
 
