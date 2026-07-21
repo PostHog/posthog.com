@@ -23,7 +23,7 @@ This year, we headed to Mykonos – not to rave, but to code. And to enjoy a coc
 
 Our all-company offsites are a mix of socializing, group activities, strategic sessions, Post-its, workshops, more Post-its, and, the star of the show, the annual PostHog [hackathon](/newsletter/hackathons). 
 
-Everyone in the company has to pitch a couple of ideas, then we all vote on our favorites, assemble teams, and have a little over a day to go from pitch to demo. 
+Everyone in the company has to pitch a couple of ideas, then we all vote on our favorites, assemble teams, and have a little over a day to go from pitch to demo — and [the tricks that make those demos memorable](/newsletter/how-to-demo#storytelling-tactics) are worth knowing before you get up there.
 
 ![PostHog's 2024 offsite in Mykonos](https://res.cloudinary.com/dmukukwp6/image/upload/hackathon1_e2aa8bd928.jpg)
 

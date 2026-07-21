@@ -4,8 +4,6 @@ import { IconCheck, IconChevronDown } from '@posthog/icons'
 import * as NotProductIcons from '../NotProductIcons'
 import * as NewIcons from '@posthog/icons'
 import * as OSIcons from '../OSIcons/Icons'
-import { useApp } from '../../context/App'
-
 type SelectItem = {
     value: string
     label: string
@@ -24,6 +22,7 @@ type SelectProps = {
     defaultValue?: string
     onValueChange?: (value: string) => void
     placeholder?: string
+    prefix?: string
     disabled?: boolean
     required?: boolean
     name?: string
@@ -85,6 +84,7 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
             defaultValue,
             onValueChange,
             placeholder,
+            prefix,
             disabled,
             required,
             name,
@@ -97,18 +97,11 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
     ) => {
         // Use client-only rendering to prevent hydration mismatches
         const [isClient, setIsClient] = React.useState(false)
-        const { websiteMode } = useApp()
-        const [appContainer, setAppContainer] = React.useState<HTMLElement | null>(null)
+        const appContainer: HTMLElement | null = null
 
         React.useEffect(() => {
             setIsClient(true)
         }, [])
-
-        React.useEffect(() => {
-            if (websiteMode) {
-                setAppContainer(document.getElementById('app-container'))
-            }
-        }, [websiteMode])
 
         // Find the selected item to get its icon
         const selectedItem = React.useMemo(() => {
@@ -160,6 +153,7 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
                             {selectedItem && (
                                 <span className="flex space-x-1 items-center">
                                     <Icon icon={selectedItem.icon} color={selectedItem.color} className="size-4" />
+                                    {prefix && <span className="text-muted">{prefix}:</span>}
                                     <span className={`${selectedItem.label?.length > 20 ? 'text-xs' : ''}`}>
                                         {selectedItem.label}
                                     </span>

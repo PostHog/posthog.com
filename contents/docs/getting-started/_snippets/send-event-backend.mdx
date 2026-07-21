@@ -14,9 +14,9 @@ client.capture({
 
 ```python
 posthog.capture(
-    'distinct_id',
     'order_created',
-    {
+    distinct_id='distinct_id',
+    properties={
         'order_id': '#0054',
         'subtotal': 3599,
         'customer_name': 'Max Hedgehog',

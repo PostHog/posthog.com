@@ -39,6 +39,39 @@ export const CopyAnchor = ({ id = '', hovered }: { id: string; hovered: boolean 
     )
 }
 
+export const AdvisoryAnchor = ({ id = '' }: { id: string }): JSX.Element => {
+    const [copied, setCopied] = useState(false)
+    const { href } = useLocation()
+    // Copy the shareable link without toggling the parent <details>. Stopping propagation and
+    // the default action keeps the surrounding <summary> from opening/closing on click.
+    const handleClick = (e: React.MouseEvent) => {
+        e.stopPropagation()
+        e.preventDefault()
+        const url = `${href.replace(/#.*/, '')}#${id}`
+        window.history.replaceState(null, '', `#${id}`)
+        navigator.clipboard?.writeText(url)
+        setCopied(true)
+        setTimeout(() => {
+            setCopied(false)
+        }, 1000)
+    }
+
+    return (
+        <span className="inline-flex items-center align-middle">
+            <button
+                type="button"
+                onClick={handleClick}
+                aria-label="Copy link to this advisory"
+                title="Copy link to this advisory"
+                className="inline-flex opacity-40 hover:opacity-100 transition-opacity ml-2"
+            >
+                <IconLink className="size-4" />
+            </button>
+            {copied && <span className="ml-1.5 text-sm font-normal">Copied!</span>}
+        </span>
+    )
+}
+
 export const Heading = ({
     as = 'h1',
     children,

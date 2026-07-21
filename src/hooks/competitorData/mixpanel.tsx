@@ -343,7 +343,7 @@ export const mixpanel = {
         error_tracking: {
             available: false,
         },
-        llm_analytics: {
+        ai_observability: {
             available: false,
         },
         data_pipelines: {

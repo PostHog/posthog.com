@@ -1,0 +1,45 @@
+---
+title: No live events
+sidebar: Docs
+showTitle: true
+---
+
+The no live events check fires when your project hasn't received any `$pageview` or `$screen` events for a sustained period. It's the most serious Web Analytics check, because it usually means PostHog isn't receiving data at all.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_49_21_883_Z_cc950bcef7.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_49_17_151_Z_c31cc5ea92.png"
+    alt="No live events check in the Health checks section in the PostHog app"
+    classes="rounded"
+/>
+
+## What this check looks for
+
+Once a day, the check looks back over the **last 30 days** for any `$pageview` or `$screen` events. If it finds none, it raises a **critical** issue.
+
+## Why it matters
+
+Web Analytics and Product Analytics stay completely empty until capture is restored. This almost always means the PostHog snippet or SDK isn't installed, was removed during a deploy, or is misconfigured (for example, pointing at the wrong project token).
+
+## Fix it manually
+
+1. Open the **Web analytics health** page.
+2. Confirm the PostHog snippet or SDK is installed and initialized on your site or app, and that you're using the correct project token (**Project settings → Web snippet / Project token**).
+3. Load a page on your site, then check **Activity → Live events** to see whether events arrive in real time.
+
+## Fix it automatically with the Inbox and PostHog Code
+
+With the [Inbox](/docs/self-driving) and health checks enabled as a [signal source](/docs/self-driving/inbox/sources), the agent will:
+
+- Check whether _any_ events are landing. Other events but no `$pageview`/`$screen` points to autocapture being disabled; nothing at all points to the SDK not sending.
+- Find where PostHog is initialized in your codebase and make sure `posthog.init` runs with the correct project token.
+- Ensure pageview autocapture is enabled (and if `capture_pageview: false` is set, re-enable it or add a manual `$pageview` on navigation).
+- Open a PR with the fix.
+
+The issue resolves once events start arriving again.
+
+## Related
+
+- [Health checks overview](/docs/health-checks)
+- [Installing PostHog](/docs/getting-started/install)
+- [Capturing events](/docs/product-analytics/capture-events)

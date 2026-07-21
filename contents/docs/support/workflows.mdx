@@ -1,8 +1,10 @@
 ---
-title: Workflow automation
+title: Automate ticket handling
 sidebar: Docs
 showTitle: true
 ---
+
+import TicketStatuses from './_snippets/ticket-statuses.mdx'
 
 Support integrates with [Workflows](/docs/workflows) to automate ticket management. Tickets emit events that trigger Workflows, and Workflow actions can update tickets – setting SLAs, changing status, assigning tickets, and more.
 
@@ -16,7 +18,13 @@ Hog function executes
 Ticket updated
 ```
 
-Updates made by Workflows do **not** re-emit ticket events, so you won't get infinite loops.
+Updates made by Workflows do not re-emit ticket events, so you won't get infinite loops.
+
+## Ticket statuses
+
+Workflows trigger on and set these ticket statuses:
+
+<TicketStatuses />
 
 ## Trigger events
 
@@ -27,8 +35,8 @@ All events include these base properties: `ticket_id`, `ticket_number`, `channel
 
 ### New ticket created
 
-- **Event ID:** `$conversation_ticket_created`
-- **Event description:** A customer creates a new ticket.
+- **Event ID** - `$conversation_ticket_created`
+- **Event description** - A customer creates a new ticket.
 
 | Property | Type | Description |
 |----------|------|-------------|
@@ -42,8 +50,8 @@ All events include these base properties: `ticket_id`, `ticket_number`, `channel
 
 ### Ticket status changed
 
-- **Event ID:** `$conversation_ticket_status_changed`
-- **Event description*:* Ticket status changes (e.g. new → pending → resolved). You can filter on `new_status` to trigger only for specific transitions.
+- **Event ID** - `$conversation_ticket_status_changed`
+- **Event description** - Ticket status changes (e.g. new → pending → resolved). You can filter on `new_status` to trigger only for specific transitions.
 
 | Property | Type | Description |
 |----------|------|-------------|
@@ -52,8 +60,8 @@ All events include these base properties: `ticket_id`, `ticket_number`, `channel
 
 ### Ticket priority changed
 
-- **Event ID:** `$conversation_ticket_priority_changed`
-- **Event description:** Ticket priority is set or changed.
+- **Event ID** - `$conversation_ticket_priority_changed`
+- **Event description** - Ticket priority is set or changed.
 
 | Property | Type | Description |
 |----------|------|-------------|
@@ -62,18 +70,18 @@ All events include these base properties: `ticket_id`, `ticket_number`, `channel
 
 ### Ticket assigned
 
-- **Event ID:** `$conversation_ticket_assigned`
-- **Event description:** Ticket is assigned or unassigned.
+- **Event ID** - `$conversation_ticket_assigned`
+- **Event description** - Ticket is assigned or unassigned.
 
 | Property | Type | Description |
 |----------|------|-------------|
 | `assignee_type` | string | `user` or `role` |
 | `assignee_id` | int or null | ID of the assigned user or role |
 
-### Ticket message sent (team reply)
+### Ticket message sent – team reply
 
-- **Event ID:** `$conversation_message_sent`
-- **Event description:** A team member sends a reply.
+- **Event ID** - `$conversation_message_sent`
+- **Event description** - A team member sends a reply.
 
 | Property | Type | Description |
 |----------|------|-------------|
@@ -82,10 +90,10 @@ All events include these base properties: `ticket_id`, `ticket_number`, `channel
 | `author_type` | string | Always `team` |
 | `author_id` | int or null | PostHog user ID of the sender |
 
-### Ticket message received (customer message)
+### Ticket message received – customer message
 
-- **Event ID:** `$conversation_message_received`
-- **Event description:** A customer sends a message.
+- **Event ID** - `$conversation_message_received`
+- **Event description** - A customer sends a message.
 
 | Property | Type | Description |
 |----------|------|-------------|
@@ -149,7 +157,7 @@ The `tags` input replaces all existing tags on the ticket. If you want to add a 
 
 </CalloutBox>
 
-## Building conditions
+## Build conditions
 
 Use `if/else` blocks in your workflow to branch logic.
 
@@ -328,7 +336,7 @@ Track how many tickets go through the pending state by adding a tag.
 tags = ["awaiting-customer"]
 ```
 
-### 11. Full SLA Workflow with priority and channel
+### 11. Full SLA workflow with priority and channel
 
 A comprehensive example combining multiple conditions for SLA, priority, and assignment.
 
@@ -391,7 +399,7 @@ In the ticket list, SLAs show as one of three states:
 
 ## Important notes
 
-- **No infinite loops** – updates made by Workflows (via the external API) do not re-emit ticket events. A Workflow that changes a ticket's status will not trigger the "status changed" Workflow again.
+- **No infinite loops** – updates made by Workflows (via the external API) do not re-emit ticket events. A Workflow that changes a ticket's status does not trigger the "status changed" Workflow again.
 - **Event properties vs ticket data** – event properties give you a snapshot at the time of the event. If you need the latest ticket state (e.g. `message_count` or `sla_due_at`), use the **Get ticket** action first.
 - **Tags replace, not append** – the `tags` input on Update ticket replaces all existing tags. Merge manually if you need to preserve existing tags.
 - **Rate limits** – the external API used by Workflows is rate-limited to 60 requests/minute and 600 requests/hour per team.

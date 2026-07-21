@@ -39,7 +39,7 @@ These are all example decisions we've taken because of having a clear ICP:
 - Transparent, self serve
 
 **How do we generate demand, which marketing channels should we prioritize, and how do we use them?**
-- We have no outbound sales
+- We're primarily inbound-led — most customers buy without talking to sales
 - Word of mouth growth by not spending too much outside of the product
 - Useful, detailed content works well
 
