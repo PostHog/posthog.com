@@ -428,7 +428,7 @@ export function useMenuData(): MenuType[] {
                     type: 'item',
                     label: 'WIP',
                     link: '/wip',
-                    icon: getMenuIcon(companyMenu.children, '/wip', 'IconWrench', 'orange'),
+                    icon: getMenuIcon(companyMenu.children, '/wip', 'IconWrench', 'green'),
                 },
                 {
                     type: 'item',
@@ -440,7 +440,7 @@ export function useMenuData(): MenuType[] {
                     type: 'item',
                     label: 'Media',
                     link: '/media',
-                    icon: getMenuIcon(companyMenu.children, '/media', 'IconNewspaper', 'orange'),
+                    icon: getMenuIcon(companyMenu.children, '/media', 'IconNewspaper', 'salmon'),
                 },
                 {
                     type: 'separator',
@@ -456,7 +456,7 @@ export function useMenuData(): MenuType[] {
                     label: 'Small teams',
                     link: '/small-teams',
                     items: smallTeamsMenuItems,
-                    icon: getMenuIcon(companyMenu.children, '/small-teams', 'IconShieldPeople', 'seagreen'),
+                    icon: getMenuIcon(companyMenu.children, '/small-teams', 'IconShieldPeople', 'teal'),
                 },
                 {
                     type: 'item',
@@ -468,7 +468,7 @@ export function useMenuData(): MenuType[] {
                     type: 'item',
                     label: 'Partnerships',
                     link: '/partnerships',
-                    icon: getMenuIcon(companyMenu.children, '/partnerships', 'IconPuzzle', 'seagreen'),
+                    icon: getMenuIcon(companyMenu.children, '/partnerships', 'IconPuzzle', 'lilac'),
                 },
                 {
                     type: 'separator',
@@ -476,7 +476,7 @@ export function useMenuData(): MenuType[] {
                 {
                     type: 'submenu',
                     label: 'Like and subscribe',
-                    icon: <Icons.IconMegaphone className="size-4 text-red" />,
+                    icon: <Icons.IconMegaphone className="size-4 text-orange" />,
                     mobileDestination: false, // Omit from mobile menu
                     items: [
                         {
