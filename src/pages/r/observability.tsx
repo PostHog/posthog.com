@@ -15,7 +15,7 @@ import ElevenLabsLogo from 'components/CustomerLogos/ElevenLabsLogo'
 import LovableLogo from 'components/CustomerLogos/LovableLogo'
 import HomeDepotLogo from 'components/CustomerLogos/HomeDepotLogo'
 import MintlifyLogo from 'components/CustomerLogos/MintlifyLogo'
-import { IconRewindPlay, IconWarning, IconCode2, IconChevronDown } from '@posthog/icons'
+import { IconRewindPlay, IconWarning, IconCode2 } from '@posthog/icons'
 
 const TOP_COUNT = 8
 const PLATFORM_ORDER = [
@@ -40,7 +40,6 @@ const PLATFORM_ORDER = [
 export default function PostHogObservabilityLanding(): JSX.Element {
     const [showMore, setShowMore] = useState(false)
     const [isIdle, setIsIdle] = useState(false)
-    const [openQuestion, setOpenQuestion] = useState<number | null>(null)
 
     const handleScrollToMCP = () => {
         document.getElementById('quest-item-let-your-ai-agent-debug-for-you')?.scrollIntoView({ behavior: 'smooth' })
@@ -91,7 +90,7 @@ export default function PostHogObservabilityLanding(): JSX.Element {
         <>
             <SEO
                 title="Observability built for product engineers"
-                description="PostHog Observability bundles error tracking, session replay, and logs into one SDK and one tool — wired up to MCP so your AI agent can investigate issues end-to-end. Free tier covers 100k exceptions, 5k recordings, and 50GB of logs every month."
+                description="PostHog Observability bundles error tracking, session replay, and logs into one SDK and one tool – wired up to MCP so your AI agent can investigate issues end-to-end. Free tier covers 100k exceptions, 5k recordings, and 50GB of logs every month."
                 noindex
             />
             <ReaderView
@@ -104,18 +103,18 @@ export default function PostHogObservabilityLanding(): JSX.Element {
             >
                 <div className="grid grid-cols-1 @lg:grid-cols-[2fr_0.6fr] gap-10 items-center mb-6 max-w-7xl mx-auto">
                     <div>
-                        <h1 className="text-3xl md:text-5xl !mb-4">A fearsome threesome bundled for debugging</h1>
+                        <h1 className="text-3xl md:text-5xl !mb-4">
+                            Your errors, replays, and logs already know each other
+                        </h1>
                         <p className="text-lg md:text-xl mb-2 text-secondary">
-                            Error tracking, session replay, and logs in one. An MCP server so you can debug without ever
-                            opening a dashboard or learning a UI.
+                            Error tracking, session replay, and logs from one SDK – same user, same session, linked the
+                            moment they arrive. An MCP server so you can debug without ever opening a dashboard or
+                            learning a UI.
                             <br />
-                            Smell that? That's the scent of ruthlessly efficient product.
+                            Time to make it official.
                         </p>
                         <p className="text-xs !mb-6 text-muted italic">
-                            (Of course, you can't really smell it. But let's use the power of the human imagination. If
-                            you are, indeed, smelling something, and it's coming from your machine, you may have a
-                            problem. Like your code might be fire, but your machine may literally be on fire. Consult
-                            with your local fire department.)
+                            (Introducing them to each other via CSV export was never going to work out.)
                         </p>
                         <div className="flex flex-wrap gap-2 mb-6">
                             <CallToAction type="primary" size="md" to="https://app.posthog.com/signup">
@@ -138,7 +137,7 @@ export default function PostHogObservabilityLanding(): JSX.Element {
                             <Link to="/docs/logs" state={{ newWindow: true }}>
                                 logs
                             </Link>{' '}
-                            — already connected to each other. Free for 100k exceptions, 5k web + 2.5k mobile
+                            – already connected to each other. Free for 100k exceptions, 5k web + 2.5k mobile
                             recordings, and 50 GB of logs every month. No credit card, no per-seat pricing.
                         </p>
                     </div>
@@ -178,7 +177,7 @@ export default function PostHogObservabilityLanding(): JSX.Element {
                             <p>
                                 One PostHog SDK install enables <strong>error tracking</strong>,{' '}
                                 <strong>session replay</strong>, and <strong>logs</strong>. The Wizard handles config in
-                                a single command — no copy-pasting three different snippets, no juggling three different
+                                a single command – no copy-pasting three different snippets, no juggling three different
                                 services.
                             </p>
 
@@ -241,7 +240,7 @@ export default function PostHogObservabilityLanding(): JSX.Element {
                                     howdy, you're going to love this.
                                 </strong>{' '}
                                 Wire up the PostHog MCP server and your agent can investigate an exception, pull the
-                                replay of the user who hit it, and tail the surrounding logs — all from your editor.
+                                replay of the user who hit it, and tail the surrounding logs – all from your editor.
                             </p>
 
                             <h3>Install in 30 seconds</h3>
@@ -319,7 +318,7 @@ export default function PostHogObservabilityLanding(): JSX.Element {
                             <p>
                                 Autocapture in Error Tracking catches <code>$exception</code> events the moment they're
                                 thrown, client- or server-side. Upload your source maps and stack traces point straight
-                                to your original code — file, line, and function.
+                                to your original code – file, line, and function.
                             </p>
 
                             <p>
@@ -360,7 +359,7 @@ export default function PostHogObservabilityLanding(): JSX.Element {
                         </QuestLogItem>
 
                         <QuestLogItem
-                            title="Watch what actually happened"
+                            title="Watch the session with the console open"
                             subtitle="Session replay with DevTools context"
                             icon="IconRewindPlay"
                         >
@@ -414,7 +413,7 @@ export default function PostHogObservabilityLanding(): JSX.Element {
                             icon="IconCode2"
                         >
                             <p>
-                                PostHog Logs works with any OpenTelemetry client — no PostHog-specific packages
+                                PostHog Logs works with any OpenTelemetry client – no PostHog-specific packages
                                 required. Point your existing OTel SDK at PostHog, drop in your project token, and your
                                 structured logs land alongside everything else.
                             </p>
@@ -482,7 +481,7 @@ export default function PostHogObservabilityLanding(): JSX.Element {
                             </h3>
                             <p>
                                 Log lines link to the session and user who produced them. Jump from a noisy log burst
-                                straight into the recording to see what the user was actually doing.
+                                straight into the recording to see the clicks and network failures that produced it.
                             </p>
 
                             <ProductScreenshot
@@ -505,109 +504,20 @@ export default function PostHogObservabilityLanding(): JSX.Element {
 
                             <div className="mt-4">
                                 <CallToAction type="primary" size="md" to="https://app.posthog.com/signup">
-                                    Try the bundle — free
-                                </CallToAction>
-                            </div>
-                        </QuestLogItem>
-
-                        <QuestLogItem
-                            title="Questions engineers ask us"
-                            subtitle="Real questions, honest answers"
-                            icon="IconThoughtBubble"
-                        >
-                            <p>Things people actually ask before signing up.</p>
-
-                            <div className="not-prose divide-y divide-border">
-                                {[
-                                    {
-                                        question: 'Wait, I thought PostHog was just product analytics?',
-                                        answer: 'We took a long, hard look at the current observability environment and saw what was missing: something that connects customer data with classic observability tools. A few late nights, piña coladas, and AI agent negotiations later, voilà!',
-                                        url: '',
-                                    },
-                                    {
-                                        question: 'How is this different from Sentry + Datadog + FullStory?',
-                                        answer: "Three subscriptions, three UIs, three alert configs, three different ways to spell 'observability' in your Slack messages. PostHog is one SDK, one tool, one bill. And the data is already linked — no CSV exports, no matching session IDs across dashboards.",
-                                        url: '',
-                                    },
-                                    {
-                                        question:
-                                            'Does OTel support mean I can use my existing logging setup and fire away?',
-                                        answer: 'Yes. Point your existing OTel SDK at PostHog, drop in your project token, and your structured logs land alongside everything else. No PostHog-specific packages required.',
-                                        url: '/docs/logs/installation',
-                                    },
-                                    {
-                                        question:
-                                            'Can I use just one of the three, or do I have to commit to all three?',
-                                        answer: "Monogamy is valid. But we've found most engineers end up appreciating all three. Start with one, see how you feel. Once an exception links directly to a session replay with the surrounding log lines attached... going back to a single tool feels limiting.",
-                                        url: '',
-                                    },
-                                    {
-                                        question: 'Is session replay going to make my privacy team panic?',
-                                        answer: "We have PII masking, sampling controls, network request filtering, and fine-grained capture options. Your privacy team can sleep soundly. Your users' passwords will not be in the replay. (We checked.)",
-                                        url: '/docs/session-replay/privacy',
-                                    },
-                                    {
-                                        question: 'What happens when I blow past the free tier?',
-                                        answer: 'Usage-based pricing kicks in — you only pay for what you use. You can set per-product billing limits so there are no surprise charges at the end of the month. Error tracking, session replay, and logs each have their own cap.',
-                                        url: '/pricing',
-                                    },
-                                    {
-                                        question:
-                                            'Can the MCP agent really debug issues without me opening a dashboard?',
-                                        answer: 'We like to think so. Your agent grabs the error, pulls the replay, tails the logs, and hands you a fix. You stay in the zone. The zone is beautiful. The zone is where bugs go to die. The zone is— okay, you get it. Install the MCP.',
-                                        url: '/docs/model-context-protocol',
-                                    },
-                                ].map((item, i) => (
-                                    <div key={i} className="py-3">
-                                        <button
-                                            onClick={() => setOpenQuestion(openQuestion === i ? null : i)}
-                                            className="w-full text-left flex items-center justify-between gap-4 font-semibold text-sm cursor-pointer hover:text-primary transition-colors"
-                                        >
-                                            <span>{item.question}</span>
-                                            <IconChevronDown
-                                                className={`shrink-0 size-4 transition-transform duration-200 ${
-                                                    openQuestion === i ? 'rotate-180' : ''
-                                                }`}
-                                            />
-                                        </button>
-                                        {openQuestion === i && (
-                                            <div className="mt-2 text-sm">
-                                                <p className="text-secondary !mb-2">{item.answer}</p>
-                                                {item.url && (
-                                                    <Link
-                                                        to={item.url}
-                                                        state={{ newWindow: true }}
-                                                        className="text-red dark:text-yellow font-semibold text-xs hover:underline"
-                                                    >
-                                                        Read the docs →
-                                                    </Link>
-                                                )}
-                                            </div>
-                                        )}
-                                    </div>
-                                ))}
-                            </div>
-
-                            <div className="mt-6">
-                                <CallToAction type="primary" size="md" to="https://app.posthog.com/signup">
-                                    Get started free
+                                    Try the bundle – free
                                 </CallToAction>
                             </div>
                         </QuestLogItem>
 
                         <QuestLogItem
                             title="Use for free"
-                            subtitle="Generous free tier on all three"
+                            subtitle="100k exceptions, 5k recordings, 50 GB of logs"
                             icon="IconPiggyBank"
                         >
                             <p>Good news: no per-seat pricing, no enterprise plan required.</p>
-                            <p>
-                                PostHog Observability is built to be cost-effective by default, with a generous free
-                                tier on each product and transparent usage-based pricing. More than 90% of companies use
-                                PostHog for free.
-                            </p>
+                            <p>More than 90% of companies use PostHog for free.</p>
 
-                            <h2>TL;DR 💸</h2>
+                            <h3>TL;DR 💸</h3>
 
                             <ul>
                                 <li>No credit card required to start</li>

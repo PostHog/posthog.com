@@ -1,1 +1,9 @@
-{}
+{
+    "permissions": {
+        "allow": [
+            "Bash(git stash *)",
+            "Bash(npx prettier *)",
+            "Bash(grep -rniE \"free.{0,30}\\(gb|logs\\)|\\(gb|logs\\).{0,30}free\" contents/docs/logs/pricing.mdx contents/docs/logs/start-here.mdx)"
+        ]
+    }
+}
