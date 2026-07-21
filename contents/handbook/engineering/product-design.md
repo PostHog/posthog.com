@@ -64,7 +64,9 @@ Usually during quick syncs like this, it's enough to help an engineer work throu
 
 ---
 
-In any case, always copy existing UI patterns instead of creating new ones. Don't create a new version of something just because it's more convenient for your product. Take a few moments to look around how other products handle using the same component and copy the existing paradigm. This includes things like placement, sizing, and colors.
+In any case, prefer copying existing UI patterns instead of creating new ones. This means users' muscle memory will work for your scene when they first come to it.
+
+Don't create a new version of something just because it's more convenient for your product. Take a few moments to look around how other products handle using the same component and copy the existing paradigm. This includes things like placement, sizing, and colors.
 
 Avoid cramming in custom elements into commonon existing patterns just because there's space for something else. Creating one-offs leads to an inconsistent experience and confusion for end users. There are rare cases where you should deviate from this pattern. Before you do, always check in with the <SmallTeam name="platform-ux" /> to see if there's a better pattern to follow.
 
