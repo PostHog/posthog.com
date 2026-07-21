@@ -1911,7 +1911,7 @@ export const handbookSidebar = [
                 url: '/handbook/wizard-and-docs/mdx-and-components',
             },
             {
-                name: 'How to write product docs',
+                name: 'How to write docs',
                 url: '/handbook/wizard-and-docs/writing-product-docs',
             },
             {
