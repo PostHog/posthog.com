@@ -22,7 +22,7 @@ export const support = {
     name: 'Support',
     handle: 'support',
     slug: 'support',
-    teamSlug: 'support',
+    teamSlug: 'conversations',
     color: 'blue',
     colorSecondary: 'blue',
     category: 'communication',
@@ -93,9 +93,9 @@ export const support = {
         { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
     ],
     overview: {
-        title: 'One place for every customer conversation',
+        title: 'One place for every user conversation',
         description:
-            'Whether it arrives as a ticket from your app, an email out of the blue, or a new GitHub issue, Support centralizes it into a single inbox and attaches the session replays, events, and errors behind it. Then it feeds those signals into your self-driving inbox, so recurring problems become pull requests instead of repeat tickets.',
+            'Whether it’s a ticket, a blind email, or a new GitHub issue, PostHog Support centralizes it into one place and attaches relevant replays, events, and errors as context so you can respond.',
         eli5: "Support is a helpdesk built into PostHog. Conversations arrive from an in-app chat widget, email, Slack, or GitHub, and they all land in one inbox – with replies syncing back to wherever each conversation started. Because PostHog already knows what every customer was doing, tickets from your app show up with the sender's session replay, recent events, and errors attached, so you can watch what actually happened instead of asking someone to describe it from memory. And recurring problems get picked up as signals for Self-driving, which drafts pull requests that stop the same ticket coming back.",
         textColor: 'text-black', // tw
     },
