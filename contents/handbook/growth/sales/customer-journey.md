@@ -51,7 +51,6 @@ Who covers the account at each stage. Stages run top to bottom in the order a cu
 | **Expanding**    |     | ✅  | ✅  |     ✅     |            |
 | **Steady state** |     | ✅  |     |            |            |
 
-Roles: **TAE** = new business (Technical Account Executive), if ICP qualified · **CSM** = Customer Success Manager, all accounts >$20k ARR · **TAM** = Technical Account Manager overlay, >$20k, while there's expansion to be had · **Growth TAM** = pooled coverage, $500 to $1,667 MRR · **Onboarding** = onboarding team.
 
 Notes:
 
