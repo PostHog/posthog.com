@@ -3388,20 +3388,16 @@
             "destination": "/blog/general"
         },
         {
-            "source": "/product-analytics/pricing",
-            "destination": "/product-analytics#pricing"
-        },
-        {
             "source": "/product-analytics/customers",
             "destination": "/product-analytics#customers"
         },
         {
             "source": "/product-analytics/comparisons",
-            "destination": "/product-analytics#posthog-vs"
+            "destination": "/product-analytics/pricing#comparison-summary"
         },
         {
             "source": "/product-analytics/documentation",
-            "destination": "/product-analytics#docs"
+            "destination": "/docs/product-analytics"
         },
         {
             "source": "/product-analytics/tutorials",

@@ -1,27 +1,33 @@
 import React from 'react'
 import {
     IconGraph,
-    IconFunnels,
-    IconTrends,
-    IconLifecycle,
-    IconUserPaths,
-    IconCorrelationAnalysis,
-    IconRetention,
-    IconStickiness,
-    IconDatabase,
+    IconEye,
+    IconSparkles,
+    IconList,
+    IconConfetti,
+    IconRocket,
+    IconPieChart,
+    IconCheckCircle,
     IconPeople,
-    IconPlug,
+    IconPlay,
+    IconCursorClick,
+    IconChat,
+    IconCode,
+    IconMap,
+    IconNewspaper,
+    IconShieldPeople,
 } from '@posthog/icons'
 import { FIFTY_MILLION, MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
-import Link from 'components/Link'
-import MCPInstall from 'components/Products/MCPInstall'
+import { features } from './product_analytics/features'
+import { applications, topFeatures } from './product_analytics/slides'
 
 export const productAnalytics = {
     Icon: IconGraph,
     name: 'Product Analytics',
-    slug: 'product-analytics',
     handle: 'product_analytics',
     type: 'product_analytics',
+    slug: 'product-analytics',
+    teamSlug: 'product-analytics',
     color: 'blue',
     colorSecondary: 'sky-blue',
     category: 'analytics',
@@ -32,10 +38,90 @@ export const productAnalytics = {
             'Track usage, retention, and feature adoption with Product Analaytics. PostHog connects recordings, experiments, feature flags, and more for full product insight.',
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/product_analytics_d5ab5a02cb.jpg',
     },
+    /**
+     * Sections rendered on the Product surface (`/product-analytics`). Each entry
+     * resolves to a section template via `templateRegistry[item.template ?? item.slug]`,
+     * so the slug doubles as the lookup key when no explicit `template` is set.
+     * `props` is passed straight to the resolved section component (used here to
+     * feed the carousel templates their slide arrays).
+     */
+    productMenu: [
+        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'customers',
+            name: 'Who uses it?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconPeople className="size-4" />,
+        },
+        // TODO: needs overview.eli5 copy before this section can render
+        // {
+        //     slug: 'eli5',
+        //     name: 'What does it do?',
+        //     hideFromNav: true,
+        //     group: 'divided',
+        //     icon: <IconInfo className="size-4" />,
+        // },
+        // TODO: needs useCases copy before this section can render
+        // {
+        //     slug: 'use-cases',
+        //     name: 'Who is it for?',
+        //     hideFromNav: true,
+        //     group: 'divided',
+        //     icon: <IconMagic className="size-4" />,
+        // },
+        { slug: 'demo', name: 'Demo', group: 'divided', icon: <IconPlay className="size-4" /> },
+        {
+            slug: 'applications',
+            name: 'How do I use it?',
+            group: 'divided',
+            icon: <IconCursorClick className="size-4" />,
+            props: { slides: applications },
+        },
+        {
+            slug: 'top-features',
+            name: 'Top features',
+            group: 'divided',
+            icon: <IconSparkles className="size-4" />,
+            props: { slides: topFeatures },
+        },
+        {
+            slug: 'ask-anything',
+            name: 'AI prompts',
+            group: 'divided',
+            icon: <IconChat className="size-4" />,
+        },
+        { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
+        { slug: 'roadmap', name: 'Roadmap', group: 'divided', icon: <IconMap className="size-4" /> },
+        { slug: 'changelog', name: 'Changelog', group: 'divided', icon: <IconNewspaper className="size-4" /> },
+        // TODO: needs forumTopicId before this section can render
+        // { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
+        { slug: 'team', name: 'Team', group: 'divided', icon: <IconShieldPeople className="size-4" /> },
+        {
+            slug: 'installation',
+            name: 'Install',
+            group: 'divided',
+            icon: <IconCode className="size-4" />,
+        },
+        { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
+    ],
+    /**
+     * Sections rendered on the Pricing surface (`/product-analytics/pricing`).
+     * Same shape as `productMenu`.
+     */
+    pricingMenu: [
+        { slug: 'plans', name: 'Plans', icon: <IconCheckCircle className="size-4" /> },
+        { slug: 'calculator', name: 'Pricing calculator', icon: <IconPieChart className="size-4" /> },
+        { slug: 'comparison-summary', name: 'PostHog vs...', icon: <IconList className="size-4" /> },
+        { slug: 'feature-comparison', name: 'Feature comparison', icon: <IconGraph className="size-4" /> },
+        // Hidden footer CTA rendered at the bottom of the Pricing surface.
+        { slug: 'pricing-cta', name: 'Get started', hideFromNav: true },
+    ],
     overview: {
         title: 'Product analytics with autocapture',
         description:
             'Product Analytics is one of the tools that makes your product self-driving: the measurement agents use to see what works. Built to natively work with session replay, feature flags, experiments, and surveys.',
+        // TODO: needs eli5 copy (see session_replay overview.eli5 for shape)
         textColor: 'text-white', // tw
     },
     screenshots: {
@@ -55,6 +141,38 @@ export const productAnalytics = {
             srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/funnel_vertical_dark_e0854a4c86.png',
             alt: 'Product analytics funnel',
         },
+        funnels: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Products/Slider/images/funnel-basic.png',
+            alt: 'Basic funnel visualization',
+        },
+        trends: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-trend-bar.png',
+            alt: 'Trend bar visualization',
+        },
+        lifecycle: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-lifecycle.png',
+            alt: 'Lifecycle visualization',
+        },
+        'user-paths': {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/paths/example-light-mode.png',
+            alt: 'User paths visualization',
+        },
+        'correlation-analysis': {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1716387676/posthog.com/contents/Screenshot_2024-05-22_at_3.20.17_PM.png',
+            alt: 'Correlation analysis visualization',
+        },
+        retention: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/retention_light_805120c74c.png',
+            alt: 'Retention visualization',
+        },
+        stickiness: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1716289464/posthog.com/contents/stickiness-light.png',
+            alt: 'Stickiness visualization',
+        },
+        'sql-editor': {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_data_warehouse_light_b0cdbebe8f.png',
+            alt: 'SQL editor',
+        },
     },
     videos: {
         overview: {
@@ -66,6 +184,13 @@ export const productAnalytics = {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1/posthog.com/src/components/Product/hogs/product-analytics-hog.png',
         alt: 'A hedgehog presenting some shocking findings',
         classes: 'absolute bottom-0 right-4 max-w-lg',
+    },
+    hogs: {
+        default: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1/posthog.com/src/components/Product/hogs/product-analytics-hog.png',
+            alt: 'A hedgehog presenting some shocking findings',
+        },
+        // TODO: needs mobileHog asset for the eli5 section (see session_replay hogs.mobileHog)
     },
     slider: {
         marks: [0, MILLION, TEN_MILLION, FIFTY_MILLION, MAX_PRODUCT_ANALYTICS],
@@ -92,348 +217,44 @@ export const productAnalytics = {
             description: '...top-to-bottom view of conversion rates and user paths, without... extra setup time.',
         },
     },
-    features: [
-        {
-            title: 'Funnels',
-            headline: 'Find drop-off across a series of actions',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Products/Slider/images/funnel-basic.png',
-                    alt: 'Basic funnel visualization',
-                },
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Products/Slider/images/funnel-grouped.png',
-                    alt: 'Grouped funnel visualization',
-                },
-            ],
-            features: [
-                {
-                    title: 'Filtering',
-                    description:
-                        'Set filters for individual steps – or the entire funnel – by person property, group or cohort, or event property',
-                },
-                {
-                    title: 'Graph types',
-                    description:
-                        "Track user progression between steps, conversion time between each step, and how a funnel's conversion rate changes over time",
-                },
-                {
-                    title: 'Step ordering',
-                    description:
-                        'Choose between a sequential series of steps, a strict order, or any order of steps that lead to conversion',
-                },
-                {
-                    title: 'Granular controls',
-                    description:
-                        'Set conversion window limit, add exclusionary steps, set attribution type, and see the relative conversion rate between each step',
-                },
-            ],
-            icon: <IconFunnels />,
-            color: 'blue',
-        },
-        {
-            title: 'Graph & trends',
-            headline: 'Visualize user data with graphs, tables, charts, maps, and more',
-            icon: <IconTrends />,
-            color: 'yellow',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-trend-bar.png',
-                    alt: 'Trend bar visualization',
-                },
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-trend-multiple-sparklines.png',
-                    alt: 'Multiple sparklines visualization',
-                },
-            ],
-            features: [
-                {
-                    title: 'Trends',
-                    description:
-                        'Plot any event over time, such as a feature being used. You can even do math and multiple series.',
-                },
-                {
-                    title: 'Advanced filtering',
-                    description:
-                        'Apply however many filters you need to or breakdown by any event, user or group property with advanced logic.',
-                },
-                {
-                    title: 'Breakout tables',
-                    description: 'Break out your trends by any event property.',
-                },
-                {
-                    title: 'Sampling',
-                    description: 'Speed up long running queries across large datasets in one click.',
-                },
-            ],
-        },
-        {
-            title: 'Lifecycle',
-            headline: 'Track user engagement over time',
-            description:
-                'Analyze active users break down, highlighting those who have recently stopped being active or those who have just become active for the first time.',
-            icon: <IconLifecycle />,
-            color: 'purple',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-lifecycle.png',
-                    alt: 'Lifecycle visualization',
-                },
-            ],
-            features: [
-                {
-                    title: 'User categories',
-                    description:
-                        'Track new, returning, resurrecting, and dormant users to understand engagement patterns',
-                },
-                {
-                    title: 'Time-based analysis',
-                    description:
-                        "Configure intervals (hour, day, week, month) to match your product's natural usage patterns",
-                },
-                {
-                    title: 'Detailed breakdowns',
-                    description:
-                        'View individual users in each category and analyze their behavior through session recordings',
-                },
-                {
-                    title: 'Integration',
-                    description:
-                        'Works with cohorts, feature flags, and other PostHog tools for comprehensive analysis',
-                },
-            ],
-        },
-        {
-            title: 'User Paths',
-            headline: 'Understand user navigation patterns',
-            description:
-                "Track how users navigate through your product, identify where they get stuck, and discover why they aren't finding new features.",
-            icon: <IconUserPaths />,
-            color: 'green',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/paths/example-light-mode.png',
-                    alt: 'User paths visualization',
-                },
-            ],
-            features: [
-                {
-                    title: 'Path visualization',
-                    description: 'See the most common paths users take through your product',
-                },
-                {
-                    title: 'Drop-off analysis',
-                    description: 'Identify where users are getting stuck or abandoning their journey',
-                },
-                {
-                    title: 'Session recordings',
-                    description: 'View recordings of user sessions to understand their behavior',
-                },
-                {
-                    title: 'Cohort creation',
-                    description: 'Create cohorts of users who follow specific paths for further analysis',
-                },
-            ],
-        },
-        {
-            title: 'Correlation Analysis',
-            headline: 'Discover factors affecting conversion',
-            description: 'Automatically identify significant factors that impact user behavior and conversion rates.',
-            icon: <IconCorrelationAnalysis />,
-            color: 'red',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1716387676/posthog.com/contents/Screenshot_2024-05-22_at_3.20.17_PM.png',
-                    alt: 'Correlation analysis visualization',
-                },
-            ],
-            features: [
-                {
-                    title: 'Automatic detection',
-                    description: 'Automatically highlight significant factors affecting conversion',
-                },
-                {
-                    title: 'Property analysis',
-                    description: 'Analyze how different user properties impact behavior',
-                },
-                {
-                    title: 'Event correlation',
-                    description: 'Discover which events are most strongly correlated with success',
-                },
-                {
-                    title: 'Cohort creation',
-                    description: 'Create cohorts based on correlation analysis results',
-                },
-            ],
-        },
-        {
-            title: 'Retention',
-            headline: 'Track user return rates',
-            description:
-                'Measure how many users come back to your product over time and compare retention between different user segments.',
-            icon: <IconRetention />,
-            color: 'blue',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/retention_light_805120c74c.png',
-                    alt: 'Retention visualization',
-                },
-            ],
-            features: [
-                {
-                    title: 'Cohort analysis',
-                    description: 'Compare retention rates between different user cohorts',
-                },
-                {
-                    title: 'Time-based tracking',
-                    description: 'Track retention over hours, days, weeks, or months',
-                },
-                {
-                    title: 'First-time vs recurring',
-                    description: 'Analyze both first-time and recurring user retention',
-                },
-                {
-                    title: 'Detailed breakdowns',
-                    description: 'Break down retention by user properties and segments',
-                },
-            ],
-        },
-        {
-            title: 'Stickiness',
-            headline: 'Measure user engagement depth',
-            description: 'Track how frequently users engage with your product and identify your most engaged users.',
-            icon: <IconStickiness />,
-            color: 'yellow',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1716289464/posthog.com/contents/stickiness-light.png',
-                    alt: 'Stickiness visualization',
-                },
-            ],
-            features: [
-                {
-                    title: 'Engagement frequency',
-                    description: 'Track how many times users perform specific actions',
-                },
-                {
-                    title: 'User segmentation',
-                    description: 'Identify your most engaged users and their characteristics',
-                },
-                {
-                    title: 'Feature analysis',
-                    description: 'Determine which features drive the most engagement',
-                },
-                {
-                    title: 'Time-based analysis',
-                    description: 'Analyze engagement patterns over different time periods',
-                },
-            ],
-        },
-        {
-            title: 'SQL editor',
-            headline: 'Write SQL against your data',
-            description:
-                'No separate data warehouse needed – though it works with yours if you have one, or you can use ours.',
-            icon: <IconDatabase />,
-            color: 'purple',
-            layout: 'columns',
-            features: [
-                {
-                    title: 'Write custom queries',
-                    description: 'Query product data and join tables to bring warehouse data into the mix',
-                },
-                {
-                    title: 'Visualize data in tables, trends, charts and more',
-                    description: 'Customize visualizations with colors, goals, scales, legends, and more',
-                },
-                {
-                    title: 'Get help writing SQL',
-                    description: (
-                        <>
-                            <Link href="/ai" state={{ newWindow: true }}>
-                                PostHog AI
-                            </Link>{' '}
-                            knows your data and can write syntax for you.
-                        </>
-                    ),
-                },
-            ],
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_data_warehouse_light_b0cdbebe8f.png',
-                    alt: 'SQL editor',
-                    shadow: true,
-                },
-            ],
-        },
-        {
-            title: 'Group analytics',
-            headline: 'Track companies, not just individuals',
-            description: 'See how all seat activity rolls up to the entire account level – essential for B2B.',
-            icon: <IconPeople />,
-            color: 'green',
-            features: [
-                {
-                    title: 'Track organizations, companies, teams, projects',
-                    description: '',
-                },
-                {
-                    title: 'Filter, build cohorts based on group properties',
-                    description: '',
-                },
-                {
-                    title: 'Measure activation and retention at a group level',
-                    description: '',
-                },
-                {
-                    title: 'Target feature flags at groups',
-                    description: '',
-                },
-            ],
-        },
-        {
-            title: 'MCP',
-            headline: 'Analyze product usage from your editor',
-            description:
-                'Query trends, funnels, retention, and usage metrics from Cursor, Claude Code, VS Code, or any MCP-compatible agent.',
-            icon: <IconPlug />,
-            color: 'blue',
-            features: [
-                {
-                    title: 'Query any metric from your editor',
-                    description:
-                        'Pull trends, funnels, retention, paths, or custom SQL without switching to a dashboard.',
-                },
-                {
-                    title: 'Investigate metric changes',
-                    description: 'Connect drops or spikes in user behavior to recent code changes.',
-                },
-                {
-                    title: 'Save and share what you find',
-                    description: 'Turn a query into a saved insight and add it to a PostHog dashboard.',
-                },
-                {
-                    title: 'Ship with more context',
-                    description: 'Ground your next PR in actual usage data instead of assumptions.',
-                },
-            ],
-            children: <MCPInstall />,
-        },
-    ],
-    ai: {
-        // title: '',
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/PRODUCT_ANALYTICS_hog_23b2808c18.png',
-        imageAlt: 'PostHog AI and product analytics',
-        description: 'answer product questions and ship the fix',
-        skills: [
-            'Builds dashboards and insights based on what you want visualized',
-            'Edits filters, sets breakdowns, builds retention curves (and more) with simple prompts',
-            "Writes and edits SQL queries (and debugs them if they don't work)",
-        ],
-        prompts: [
-            "What's our most popular feature?",
-            'Which events have the highest drop-off rate in the past 7 days?',
-            'Build a retention curve to track user retention over time',
+    // TODO: needs useCases copy (see session_replay.useCases for shape: { intro, rows: [role, useCase][] })
+    features,
+    mcp: {
+        title: 'MCP',
+        headline: 'Analyze product usage from your editor',
+        description:
+            'Query trends, funnels, retention, and usage metrics from Cursor, Claude Code, VS Code, or any MCP-compatible agent.',
+    },
+    installation: {
+        title: 'Install',
+        headline: 'Install',
+        // TODO: needs installation.description copy (see session_replay.installation.description)
+        productSlug: 'product-analytics',
+        categories: ['web', 'mobile', 'backend-languages', 'backend-frameworks'],
+    },
+    postHogOnPostHog: {
+        title: 'How PostHog uses Product Analytics',
+        benefits: [
+            {
+                title: 'Track metrics',
+                description: 'and monitor feature usage trends',
+            },
+            {
+                title: 'Understand user behavior',
+                description: 'by analyzing funnels and retention',
+            },
+            {
+                title: 'Identify opportunities',
+                description: 'by filtering based on drop-offs and conversion rates',
+            },
+            {
+                title: 'Find out when things change',
+                description: 'by setting up dashboards and alerts',
+            },
+            {
+                title: 'Make data-driven decisions',
+                description: 'by linking insights to session replays',
+            },
         ],
     },
     questions: [
@@ -509,9 +330,6 @@ export const productAnalytics = {
                 {
                     title: 'Linking between analytics and other features, so you can jump from a graph to a relevant recording',
                 },
-                // {
-                //     title: 'Wide range of insight types for analyzing data',
-                // },
                 {
                     title: 'Formula mode and SQL access to enable deeper analysis',
                 },
@@ -558,31 +376,6 @@ export const productAnalytics = {
         excluded_sections: ['platform.integrations'],
         require_complete_data: true,
     },
-    postHogOnPostHog: {
-        title: 'How PostHog uses Product Analytics',
-        benefits: [
-            {
-                title: 'Track metrics',
-                description: 'and monitor feature usage trends',
-            },
-            {
-                title: 'Understand user behavior',
-                description: 'by analyzing funnels and retention',
-            },
-            {
-                title: 'Identify opportunities',
-                description: 'by filtering based on drop-offs and conversion rates',
-            },
-            {
-                title: 'Find out when things change',
-                description: 'by setting up dashboards and alerts',
-            },
-            {
-                title: 'Make data-driven decisions',
-                description: 'by linking insights to session replays',
-            },
-        ],
-    },
     pairsWith: [
         {
             slug: 'session-replay',
@@ -599,6 +392,31 @@ export const productAnalytics = {
                 'Generate a playlist of recordings limited to an A/B test or specific group within a multivariate experiment.',
         },
     ],
+    ai: {
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/PRODUCT_ANALYTICS_hog_23b2808c18.png',
+        imageAlt: 'PostHog AI and product analytics',
+        // TODO: needs intro copy (see session_replay.ai.intro for shape)
+        mcpFeatures: ['product_analytics', 'insights'],
+        // Existing flat prompts parked in one group so the section can render.
+        // Needs proper grouped prompts (and more of them) — see session_replay.ai.groups.
+        // Also available from the old slide when rewriting:
+        //   description: 'answer product questions and ship the fix'
+        //   skills: [
+        //     'Builds dashboards and insights based on what you want visualized',
+        //     'Edits filters, sets breakdowns, builds retention curves (and more) with simple prompts',
+        //     "Writes and edits SQL queries (and debugs them if they don't work)",
+        //   ]
+        groups: [
+            {
+                title: 'Example prompts',
+                prompts: [
+                    "What's our most popular feature?",
+                    'Which events have the highest drop-off rate in the past 7 days?',
+                    'Build a retention curve to track user retention over time',
+                ],
+            },
+        ],
+    },
     presenterNotes: {
         overview:
             "<strong>Presenter notes:</strong> Product analytics tells you what's happening in your product. PostHog is different than others because every product we build is natively integrated. This means you can jump from a graph to a session recording to visually see why something happened. Plus we use autocapture, which tracks every click and pageview automatically. No more realizing you forgot to track something important – you can define events retroactively (we call these 'actions').",

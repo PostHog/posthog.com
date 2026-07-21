@@ -6,8 +6,6 @@ import mcpToolsData from '../../../../data/mcp-tools.json'
 import { LabeledList } from '../helpers'
 import type { SectionComponentProps } from '../types'
 
-const REPLAY_FEATURE = 'replay'
-
 const firstLine = (s: string) => s.split('\n')[0]
 
 interface PromptGroup {
@@ -25,24 +23,28 @@ interface McpTool {
 const AskAnything = ({ id, productData }: SectionComponentProps) => {
     const ai = productData?.ai
     const groups: PromptGroup[] = ai?.groups ?? []
+    const mcpFeatures: string[] = ai?.mcpFeatures ?? []
     const [tab, setTab] = useState<'prompts' | 'tools'>('prompts')
     const [query, setQuery] = useState('')
 
-    const replayTools: McpTool[] = useMemo(
-        () => (mcpToolsData.categories?.find((c: any) => c.feature === REPLAY_FEATURE)?.tools as McpTool[]) ?? [],
-        []
-    )
+    const productTools: McpTool[] = useMemo(() => {
+        if (!mcpFeatures.length) return []
+        const featureSet = new Set(mcpFeatures)
+        return (mcpToolsData.categories ?? [])
+            .filter((c: any) => featureSet.has(c.feature))
+            .flatMap((c: any) => (c.tools as McpTool[]) ?? [])
+    }, [mcpFeatures])
 
     const filteredTools = useMemo(() => {
         const q = query.trim().toLowerCase()
-        if (!q) return replayTools
-        return replayTools.filter(
+        if (!q) return productTools
+        return productTools.filter(
             (t) =>
                 t.name.toLowerCase().includes(q) ||
                 t.summary.toLowerCase().includes(q) ||
                 t.description.toLowerCase().includes(q)
         )
-    }, [query, replayTools])
+    }, [query, productTools])
 
     if (!groups.length) return null
 
