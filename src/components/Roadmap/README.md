@@ -13,7 +13,7 @@ Do not duplicate this data in the component or add hard-coded feature cards. Upd
 
 ## Board and cards
 
-The board is generated from one ordered stage configuration: Beta, Alpha, and Concept. All three lanes remain rendered while filtering, including empty lanes, so the product progression stays understandable. Each lane owns its vertical scroll position and shows its current filtered count.
+The board is generated from one ordered stage configuration: Beta, Alpha, and Concept. All three lanes remain rendered while filtering, including empty lanes, so the product progression stays understandable. Each lane grows to its own content height and shows its current filtered count; the Editor window owns the page's only vertical scrollbar.
 
 Cards intentionally contain only:
 
@@ -28,20 +28,21 @@ Every lane ends with the same dashed `Your idea here` card. It opens the shared 
 
 ## Filtering
 
-One search query is applied before grouping into lanes. It matches the title, full description, flag key, and owning team name. Search is cleared directly from the search field, so it does not add a second filter chip below the toolbar. The team filter is applied at the same time and includes an `Unassigned` option when necessary. Counts always reflect both filters. Empty lanes stay visually empty rather than adding a redundant no-results message; their zero count already communicates the state.
+One search query is applied before grouping into lanes. It matches the title, full description, flag key, and owning team name. Search is cleared directly from the search field. The team selector is applied at the same time, includes an `Unassigned` option when necessary, and resets through its `All teams` option. Neither control adds a redundant filter chip below the toolbar. The toolbar uses the same primary surface as each lane header, and its rounded search and team controls share one height. Counts always reflect both filters. Empty lanes stay visually empty rather than adding a redundant no-results message; their zero count already communicates the state.
 
 Featured ordering is preserved within each lane: new cards lead, and joinable alpha/concept items lead their stage. There are no stage or sorting controls because the lanes themselves communicate stage.
 
-Filter changes use Framer Motion's position-only layout projection. Removed cards fade and lift out, remaining cards flow into their new positions, newly restored cards fade into place, and the permanent `Your idea here` card moves with the list. When the user prefers reduced motion, layout, enter, and exit animation are all disabled and filtering updates immediately.
+Filter changes use Framer Motion's position-only layout projection with `AnimatePresence`'s `popLayout` mode. Removed cards fade and lift out without holding their former layout space, remaining cards flow into their new positions, newly restored cards fade into place, and the permanent `Your idea here` card moves with the list. When the user prefers reduced motion, layout, enter, and exit animation are all disabled and filtering updates immediately.
 
 ## Responsive behavior
 
 The roadmap page uses the Editor app's container, not the browser viewport, as its responsive context.
 
 - At the `@5xl` container breakpoint (64rem), the board is a three-column grid with equal lanes.
-- Below 64rem, lanes remain side by side in a horizontally scrollable, snap-aligned board. The board uses the same shared `ScrollArea` root → viewport → content contract as `/changelog`, with a max-content lane row inside the viewport. Above the breakpoint, only the row changes to a three-column grid.
+- Below 64rem, lanes remain side by side in a horizontally scrollable, snap-aligned, max-content row. Above the breakpoint, only the row changes to a three-column grid.
 - Narrow lanes target 340px but cap their width to the available app-window width, preventing clipped cards and controls.
-- The board's outer `ScrollArea` has a definite height. Each lane uses the same nested `ScrollArea` pattern as changelog columns. Do not add `overscroll-contain` or horizontal clipping to a lane viewport: those rules consume the cross-axis gesture before it can reach the board viewport, which breaks horizontal scrolling over a card column.
+- The roadmap uses the Editor's standard document `ScrollArea`, so its introduction, toolbar, and lanes move together under one window-level vertical scrollbar. Lanes do not create nested vertical scrolling viewports or scrollbars.
+- On narrow windows, an auto-height `overflow-x-auto` wrapper provides horizontal lane scrolling without constraining vertical height. Do not give this wrapper or the lanes a fixed height: their full content height must contribute to the Editor document's scroll height.
 
 Use Tailwind container-query variants for future changes. A browser media query will be wrong when the roadmap app window is resized independently of the viewport.
 

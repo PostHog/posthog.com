@@ -13,8 +13,7 @@ const RoadmapPage = () => {
             />
             <Editor
                 hideToolbar
-                hasTabs
-                transparentBackground
+                hasPadding={false}
                 type="roadmap"
                 proseSize="base"
                 maxWidth="100%"
@@ -25,20 +24,24 @@ const RoadmapPage = () => {
             >
                 <div
                     data-scheme="primary"
-                    className="@container flex h-full min-h-0 flex-col gap-3 overflow-hidden border-t border-primary bg-transparent p-3 text-primary @xl:p-4"
+                    className="@container flex min-h-full flex-col gap-3 border-t border-primary bg-transparent p-3 text-primary @xl:p-4"
                 >
-                    <header className="flex shrink-0 items-center justify-between gap-4">
+                    <header className="grid gap-4 px-2 @3xl:grid-cols-[minmax(0,1fr)_minmax(22rem,34rem)] @3xl:items-center @3xl:gap-8">
                         <div className="min-w-0">
                             <h1 className="m-0 text-2xl @xl:text-3xl">Roadmap</h1>
-                            <p className="mb-0 mt-1 max-w-3xl text-sm text-secondary">
-                                Follow features from concept to alpha to beta. Open a card for details, ownership, and
-                                early access.
+                            <p className="mb-0 mt-2 max-w-5xl text-base leading-relaxed text-secondary">
+                                Here's what we're building. Betas are ready to enable today, and anything coming soon
+                                has a waitlist – drop your email and we'll let you know the moment it ships.
+                            </p>
+                            <p className="mb-0 mt-3 max-w-5xl text-sm leading-relaxed text-secondary">
+                                Every feature moves through stages – concept and alpha are early ideas, beta is ready to
+                                try, and then it reaches general availability.
                             </p>
                         </div>
                         <img
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/hog_engineer_0eebaf7af1.png"
-                            alt="A hedgehog engineer hard at work"
-                            className="hidden max-h-20 shrink-0 @3xl:block"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/self_driving_with_road_3ff29b8dc3.png"
+                            alt="A hedgehog driving down the road in a dinosaur costume"
+                            className="w-full max-w-[34rem] justify-self-end object-contain"
                         />
                     </header>
                     <EarlyAccessFeaturesSection />

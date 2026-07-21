@@ -40,9 +40,6 @@ const PITCH_SURVEY_ID = '019f8008-6dfe-0000-696a-515c59643b03'
 const PITCH_QUESTION_ID = 'd257defb-d875-42fd-8cb6-80845c2bb26f'
 const PITCH_EMAIL_QUESTION_ID = '794db2f2-7ed4-4cf2-a8a3-d27df1b85530'
 
-const FROSTED_TOOLBAR =
-    'bg-primary/80 backdrop-blur-md shadow-sm reduce-transparency:!bg-primary reduce-transparency:backdrop-blur-none'
-
 type BoardStage = Extract<EarlyAccessFeatureStage, 'concept' | 'alpha' | 'beta'>
 
 interface StageDefinition {
@@ -128,20 +125,6 @@ const StageChip = ({ stage }: { stage: BoardStage }): JSX.Element => {
         </span>
     )
 }
-
-const FilterChip = ({ label, onRemove }: { label: string; onRemove: () => void }): JSX.Element => (
-    <span className="inline-flex items-center gap-1 rounded-full border border-primary bg-accent py-0.5 pl-2 pr-1 text-xs font-semibold text-secondary">
-        {label}
-        <button
-            type="button"
-            onClick={onRemove}
-            aria-label={`Remove ${label} filter`}
-            className="inline-flex items-center hover:text-primary"
-        >
-            <IconX className="size-3" />
-        </button>
-    </span>
-)
 
 const slugify = (text: string): string =>
     text
@@ -415,7 +398,7 @@ const RoadmapLane = ({
     return (
         <section
             aria-labelledby={`roadmap-${definition.stage}-title`}
-            className="flex h-full w-[min(340px,calc(100cqw-2rem))] shrink-0 snap-start flex-col overflow-hidden rounded-lg border border-primary bg-accent @5xl:w-auto"
+            className="flex w-[min(340px,calc(100cqw-2rem))] shrink-0 snap-start flex-col overflow-hidden rounded-lg border border-primary bg-accent @5xl:w-auto"
         >
             <header className="shrink-0 border-b border-primary bg-primary px-3 py-3">
                 <div className="flex items-center gap-2 text-red dark:text-yellow">
@@ -429,43 +412,41 @@ const RoadmapLane = ({
                 </div>
                 <p className="mb-0 mt-1 text-xs text-secondary">{definition.description}</p>
             </header>
-            <ScrollArea className="min-h-0 flex-1">
-                <ul className="relative m-0 flex min-h-full list-none flex-col gap-2 p-2">
-                    <AnimatePresence initial={false}>
-                        {features.map((feature) => {
-                            const teamSlug = teamForFeature(feature)
-                            return (
-                                <motion.li
-                                    key={feature.flagKey}
-                                    layout={shouldReduceMotion ? false : 'position'}
-                                    initial={shouldReduceMotion ? false : { opacity: 0, y: 8 }}
-                                    animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-                                    exit={shouldReduceMotion ? undefined : { opacity: 0, y: -6 }}
-                                    transition={layoutTransition}
-                                    className="m-0 list-none p-0"
-                                >
-                                    <FeatureCard
-                                        feature={feature}
-                                        teamSlug={teamSlug}
-                                        team={teamSlug ? teamInfoBySlug[teamSlug] : undefined}
-                                        active={activeFlagKey === feature.flagKey}
-                                        isNew={isNew(feature)}
-                                        isPopular={isPopular(feature)}
-                                        onClick={() => onFeatureClick(feature)}
-                                    />
-                                </motion.li>
-                            )
-                        })}
-                    </AnimatePresence>
-                    <motion.li
-                        layout={shouldReduceMotion ? false : 'position'}
-                        transition={{ layout: layoutTransition }}
-                        className="mt-auto list-none pt-2"
-                    >
-                        <PitchIdeaCard onClick={onPitchClick} />
-                    </motion.li>
-                </ul>
-            </ScrollArea>
+            <ul className="relative m-0 flex list-none flex-col gap-2 p-2">
+                <AnimatePresence initial={false} mode="popLayout">
+                    {features.map((feature) => {
+                        const teamSlug = teamForFeature(feature)
+                        return (
+                            <motion.li
+                                key={feature.flagKey}
+                                layout={shouldReduceMotion ? false : 'position'}
+                                initial={shouldReduceMotion ? false : { opacity: 0, y: 8 }}
+                                animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+                                exit={shouldReduceMotion ? undefined : { opacity: 0, y: -6 }}
+                                transition={layoutTransition}
+                                className="m-0 list-none p-0"
+                            >
+                                <FeatureCard
+                                    feature={feature}
+                                    teamSlug={teamSlug}
+                                    team={teamSlug ? teamInfoBySlug[teamSlug] : undefined}
+                                    active={activeFlagKey === feature.flagKey}
+                                    isNew={isNew(feature)}
+                                    isPopular={isPopular(feature)}
+                                    onClick={() => onFeatureClick(feature)}
+                                />
+                            </motion.li>
+                        )
+                    })}
+                </AnimatePresence>
+                <motion.li
+                    layout={shouldReduceMotion ? false : 'position'}
+                    transition={{ layout: layoutTransition }}
+                    className="m-0 list-none p-0"
+                >
+                    <PitchIdeaCard onClick={onPitchClick} />
+                </motion.li>
+            </ul>
         </section>
     )
 }
@@ -840,7 +821,6 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
         { concept: [], alpha: [], beta: [] }
     )
 
-    const teamFilterLabel = teamFilter === 'unassigned' ? 'Unassigned' : teamInfoBySlug[teamFilter]?.name || teamFilter
     const filteredTotal = STAGES.reduce((count, { stage }) => count + filteredByStage[stage].length, 0)
     const openFeature = (feature: EarlyAccessFeature) => {
         setSelectedFlagKey(feature.flagKey)
@@ -861,11 +841,8 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
     const drawerTitle = pitchOpen ? 'Pitch a roadmap idea' : activeFeature?.name ?? 'Roadmap feature'
 
     return (
-        <div ref={roadmapRootRef} className="relative flex min-h-0 flex-1 flex-col gap-3 overflow-hidden">
-            <div
-                className={`${FROSTED_TOOLBAR} shrink-0 rounded-lg border border-primary px-3 py-2.5`}
-                data-scheme="secondary"
-            >
+        <div ref={roadmapRootRef} className="relative flex min-w-0 flex-col gap-3">
+            <div className="shrink-0 rounded-lg border border-primary bg-primary px-3 py-2.5" data-scheme="primary">
                 <div className="flex flex-col gap-2 @md:flex-row @md:items-center">
                     <Input
                         label="Search roadmap"
@@ -877,6 +854,7 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => setQuery(event.target.value)}
                         showClearButton
                         onClear={() => setQuery('')}
+                        className="!h-10 !rounded-[8px]"
                         containerClassName="w-full @md:max-w-md"
                     />
                     <Select
@@ -885,41 +863,31 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
                         value={teamFilter}
                         onValueChange={setTeamFilter}
                         groups={[{ label: 'Team', items: teamOptions }]}
-                        className="w-full @md:w-auto"
+                        className="!h-10 w-full !rounded-[8px] px-3 @md:w-auto"
                     />
                     <span className="text-sm text-secondary @md:ml-auto">
                         {filteredTotal} of {total} features
                     </span>
                 </div>
-                {teamFilter !== 'all' && (
-                    <div className="mt-2 flex flex-wrap items-center gap-2">
-                        <FilterChip label={teamFilterLabel} onRemove={() => setTeamFilter('all')} />
-                        <OSButton size="sm" variant="underlineOnHover" onClick={() => setTeamFilter('all')}>
-                            Clear filter
-                        </OSButton>
-                    </div>
-                )}
             </div>
 
-            <div className="min-h-0 flex-1">
-                <ScrollArea className="size-full [&>div>div]:size-full [&>div>div]:!flex">
-                    <div className="flex h-full min-w-max snap-x snap-mandatory gap-3 pr-2 @5xl:grid @5xl:min-w-full @5xl:snap-none @5xl:grid-cols-3 @5xl:pr-0">
-                        {STAGES.map((definition) => (
-                            <RoadmapLane
-                                key={definition.stage}
-                                definition={definition}
-                                features={filteredByStage[definition.stage]}
-                                activeFlagKey={activeFeature?.flagKey}
-                                teamForFeature={teamForFeature}
-                                teamInfoBySlug={teamInfoBySlug}
-                                isNew={isNew}
-                                isPopular={isPopular}
-                                onFeatureClick={openFeature}
-                                onPitchClick={openPitch}
-                            />
-                        ))}
-                    </div>
-                </ScrollArea>
+            <div className="app-scroll-viewport min-w-0 overflow-x-auto">
+                <div className="flex min-w-max snap-x snap-mandatory items-start gap-3 pr-2 @5xl:grid @5xl:min-w-full @5xl:snap-none @5xl:grid-cols-3 @5xl:items-start @5xl:pr-0">
+                    {STAGES.map((definition) => (
+                        <RoadmapLane
+                            key={definition.stage}
+                            definition={definition}
+                            features={filteredByStage[definition.stage]}
+                            activeFlagKey={activeFeature?.flagKey}
+                            teamForFeature={teamForFeature}
+                            teamInfoBySlug={teamInfoBySlug}
+                            isNew={isNew}
+                            isPopular={isPopular}
+                            onFeatureClick={openFeature}
+                            onPitchClick={openPitch}
+                        />
+                    ))}
+                </div>
             </div>
 
             <RoadmapOverlayPanel
