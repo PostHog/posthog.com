@@ -18,7 +18,7 @@ const PostHogButton: React.FC<PostHogButtonProps> = ({ label = 'Sign in with Pos
     return (
         <CallToAction type="secondary" size="sm" width="full" className={className} onClick={handleClick}>
             <span className="flex items-center justify-center gap-2">
-                <Logo noText className="h-4 w-auto" />
+                <Logo wordmark={false} className="h-4 w-auto" />
                 {label}
             </span>
         </CallToAction>
