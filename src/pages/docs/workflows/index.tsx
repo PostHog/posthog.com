@@ -129,8 +129,7 @@ const Messaging: React.FC = () => {
                         buttonText="Installation guide"
                         buttonLink="/docs/workflows/start-here"
                         imageColumnClasses="mt-4 md:-mt-8"
-                        imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/hoggie_mail_48daf2f4b4.png"
-                        imageClasses="max-h-48 md:max-h-64"
+                        imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/workflows_hog_791169c2d0.png"
                     />
                 </section>
 

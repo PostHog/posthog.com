@@ -50,12 +50,18 @@ When crafting a message, consider the following:
 3. Lead with value within the first sentence. If it takes a paragraph to get there, you won't get responses.
 4. Ask yourself, if I got this email to the sales@ email box, would I engage it? Would I even give it a second look?
 
-An example good email could look like:
+Some examples of good emails that have worked: 
 
 > Hello [name],
 > It looks like your Product Analytics usage has increased over the past month and I wanted to ensure that the increase was expected.
 > [Here are some tools you can use](https://posthog.com/docs/product-analytics/cutting-costs) to ensure you are collecting the correct events and getting valuable insights from them. We have a whole host of [tutorials and guides](https://posthog.com/docs/product-analytics/tutorials) to help you get the most out of PostHog.
 > If you have any questions, don't hesitate to ask.
+
+> [First],
+> Wanted to reach out direct since I noticed the [Company] team ramp up usage in PostHog recently.
+> We'll typically reach out to help with optimizing event capture and make recommendations with regards to instrumentation + querying in PostHog.
+> Up for a chat? Here's my calendar, feel free to grab a time that works best for you.
+> Cheers,
 
 ### Asking for introductions
 
@@ -90,3 +96,12 @@ That last line is very important because it gives them a safe option to say "no"
 2. If there's no response again after another week, change the subject again to "Did I lose you?"
 
 Leave the body empty. This will pick up about 80% of people who go dark. If not, close out the opportunity 3 days after this final message.
+
+## LinkedIn Sales Nav
+To get notified about new hires and other changes to the accounts you manage, you can set up lists of accounts to track in LinkedIn Sales Nav.
+
+1. Search for an account you want and click on their profile.
+2. Click the star icon on the left, and then choose a list to add them to.
+3. Optional, tailor the notifications you get [in LinkedIn](https://www.linkedin.com/sales/settings/app-notifications)
+
+You will now be notified any time a senior hire joins your account, which will be helpful for tracking folks to reach out to and give advanced signals around potential data science hires.

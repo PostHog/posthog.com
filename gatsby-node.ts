@@ -46,12 +46,20 @@ export const onCreatePage: GatsbyNode['onCreatePage'] = async ({ page, actions }
         })
     }
 
-    if (page.path.match(/^\/community\/profiles/)) {
+    if (page.path.match(/^\/community\/profiles/) && !page.path.match(/^\/community\/profiles\/me/)) {
         page.matchPath = '/community/profiles/*'
+        createPage(page)
+    }
+    if (page.path.match(/^\/events\//)) {
+        page.matchPath = '/events/*'
         createPage(page)
     }
     if (page.path.match(/^\/next\-steps/)) {
         page.matchPath = '/next-steps/*'
+        createPage(page)
+    }
+    if (page.path.match(/^\/teams\//) && !page.path.match(/^\/teams\/new/)) {
+        page.matchPath = '/teams/*'
         createPage(page)
     }
     // Add client-side routing for custom presentations
@@ -72,6 +80,11 @@ export const onCreateBabelConfig: GatsbyNode['onCreateBabelConfig'] = ({ actions
 
 export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ stage, actions }) => {
     actions.setWebpackConfig({
+        ...(process.env.GATSBY_MINIMAL === 'true'
+            ? {
+                  devtool: false,
+              }
+            : null),
         cache: process.env.NODE_ENV === 'development' || {
             compression: 'gzip',
         },
@@ -101,7 +114,7 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ sta
                     'docs',
                     'onboarding'
                 ),
-                'scenes/onboarding/OnboardingDocsContentWrapper': path.resolve(
+                'scenes/onboarding/shared/OnboardingDocsContentWrapper': path.resolve(
                     __dirname,
                     'src',
                     'components',
@@ -111,6 +124,13 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ sta
             },
         },
     })
+
+    if (stage === 'build-javascript' && process.env.EMIT_WEBPACK_STATS === 'true') {
+        const { EmitWebpackGraphPlugin } = require('./gatsby/emitWebpackGraphPlugin')
+        actions.setWebpackConfig({
+            plugins: [new EmitWebpackGraphPlugin(path.resolve(__dirname, 'bundle-report', 'webpack-graph.json'))],
+        })
+    }
 }
 
 exports.createPages = async ({ actions }) => {

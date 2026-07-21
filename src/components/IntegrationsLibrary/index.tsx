@@ -3,100 +3,8 @@ import { useStaticQuery, graphql, navigate } from 'gatsby'
 import OSTable from 'components/OSTable'
 import Link from 'components/Link'
 import { Select } from 'components/RadixUI/Select'
-
-// Sources data from the old Pipelines component
-const sources = [
-    {
-        id: 'source-stripe',
-        name: 'Stripe',
-        description: 'Payment processing platform',
-        icon_url: '/static/services/stripe.png',
-        category: ['Custom'],
-        status: 'live',
-        type: 'source',
-    },
-    {
-        id: 'source-hubspot',
-        name: 'Hubspot',
-        description: 'CRM platform',
-        icon_url: '/static/services/hubspot.png',
-        category: ['CRM'],
-        status: 'live',
-        type: 'source',
-    },
-    {
-        id: 'source-postgres',
-        name: 'Postgres',
-        description: 'Open source relational database',
-        icon_url: '/static/services/postgres.png',
-        category: ['Custom'],
-        status: 'live',
-        type: 'source',
-    },
-    {
-        id: 'source-mysql',
-        name: 'MySQL',
-        description: 'Popular open-source database',
-        icon_url: '/static/services/mysql.png',
-        category: ['Custom'],
-        status: 'live',
-        type: 'source',
-    },
-    {
-        id: 'source-mssql',
-        name: 'MSSQL',
-        description: 'Microsoft SQL Server',
-        icon_url: '/static/services/sql-azure.png',
-        category: ['Custom'],
-        status: 'live',
-        type: 'source',
-    },
-    {
-        id: 'source-zendesk',
-        name: 'Zendesk',
-        description: 'Customer service software',
-        icon_url: '/static/services/zendesk.png',
-        category: ['Customer Success'],
-        status: 'live',
-        type: 'source',
-    },
-    {
-        id: 'source-snowflake',
-        name: 'Snowflake',
-        description: 'Cloud data platform',
-        icon_url: '/static/services/snowflake.png',
-        category: ['Analytics'],
-        status: 'live',
-        type: 'source',
-    },
-    {
-        id: 'source-salesforce',
-        name: 'Salesforce',
-        description: 'Customer relationship management',
-        icon_url: '/static/services/salesforce.png',
-        category: ['CRM'],
-        status: 'live',
-        type: 'source',
-    },
-    {
-        id: 'source-vitally',
-        name: 'Vitally',
-        description: 'Customer success platform',
-        icon_url: '/static/services/vitally.png',
-        category: ['Customer Success'],
-        status: 'live',
-        type: 'source',
-    },
-    {
-        id: 'source-bigquery',
-        name: 'BigQuery',
-        description: 'Google Cloud data warehouse',
-        icon_url: '/static/services/bigquery.png',
-        category: ['Analytics'],
-        status: 'live',
-        type: 'source',
-    },
-]
+import { getLogo, getDarkClassForLogo } from 'constants/logos'
+import { SELF_HOSTED_SOURCES } from 'constants/sources'
 
 const getIconUrl = (iconUrl: string) => {
     return iconUrl?.startsWith('http') ? iconUrl : `https://us.posthog.com${iconUrl}`
@@ -105,14 +13,21 @@ const getIconUrl = (iconUrl: string) => {
 const Title = ({ pipeline }: { pipeline: any }) => {
     const url =
         (pipeline.status !== 'coming_soon' && pipeline.mdx?.fields?.slug) ||
-        (pipeline.type && pipeline.slug && `/docs/cdp/${pipeline.type}s/${pipeline.slug}`)
+        (pipeline.status !== 'coming_soon' &&
+            pipeline.type === 'source' &&
+            pipeline.slug &&
+            `/docs/data-warehouse/sources/${pipeline.slug}`) ||
+        (pipeline.status !== 'coming_soon' &&
+            pipeline.type &&
+            pipeline.slug &&
+            `/docs/cdp/${pipeline.type}s/${pipeline.slug}`)
 
     return (
         <div className="flex items-center space-x-2">
             <img
                 src={getIconUrl(pipeline.icon_url)}
                 alt={pipeline.name}
-                className="w-6 h-6 object-contain flex-shrink-0"
+                className={`w-6 h-6 object-contain flex-shrink-0 ${getDarkClassForLogo(pipeline.icon_url)}`}
             />
             {url ? (
                 <Link to={url} state={{ newWindow: true }}>
@@ -146,6 +61,14 @@ export default function IntegrationsLibrary(): JSX.Element {
     const [searchQuery, setSearchQuery] = useState('')
     const data = useStaticQuery(graphql`
         query {
+            sources: allPostHogSource {
+                nodes {
+                    name
+                    slug
+                    icon_url
+                    unreleased
+                }
+            }
             destinations: allPostHogPipeline(filter: { type: { eq: "destination" } }) {
                 nodes {
                     id
@@ -183,25 +106,33 @@ export default function IntegrationsLibrary(): JSX.Element {
         }
     `)
 
-    // Combine all pipelines data - ensure consistent structure and type field
+    // Combine all pipelines data
     const allPipelines = [
-        ...sources.map((s) => ({
+        ...(data.sources?.nodes || []).map((s: any) => ({
             ...s,
-            // Explicitly set status to 'live' unless it's 'coming_soon'
-            status: s.status === 'coming_soon' ? 'coming_soon' : 'live',
-            type: s.type || 'source',
+            status: s.unreleased ? 'coming_soon' : 'live',
+            type: 'source',
+            category: ['Data warehouse'],
+            description: `Sync ${s.name} data into PostHog`,
+        })),
+        ...SELF_HOSTED_SOURCES.map((s) => ({
+            name: s.name,
+            slug: s.slug,
+            icon_url: getLogo(s.logo),
+            status: 'live',
+            type: 'source',
+            category: ['Cloud storage'],
+            description: `Link ${s.name} data to PostHog`,
         })),
         ...(data.destinations?.nodes || []).map((d: any) => ({
             ...d,
-            // Explicitly set status to 'live' unless it's 'coming_soon'
             status: d.status === 'coming_soon' ? 'coming_soon' : 'live',
-            type: 'destination', // Ensure type is set correctly
+            type: 'destination',
         })),
         ...(data.transformations?.nodes || []).map((t: any) => ({
             ...t,
-            // Explicitly set status to 'live' unless it's 'coming_soon'
             status: t.status === 'coming_soon' ? 'coming_soon' : 'live',
-            type: 'transformation', // Ensure type is set correctly
+            type: 'transformation',
         })),
     ]
 
@@ -219,33 +150,26 @@ export default function IntegrationsLibrary(): JSX.Element {
         { name: 'Status', width: '100px', align: 'center' as const },
     ]
 
-    // Parse URL query parameters on initial load
-    const getInitialFilterValues = () => {
-        if (typeof window === 'undefined') return { type: null, status: null, category: null }
+    // State for managing filters - hydrated from URL after mount
+    const [typeFilter, setTypeFilter] = useState<string | null>(null)
+    const [statusFilter, setStatusFilter] = useState<string | null>(null)
+    const [categoryFilter, setCategoryFilter] = useState<string | null>(null)
 
+    // Hydrate filters from URL on mount
+    useEffect(() => {
         const params = new URLSearchParams(window.location.search)
         const type = params.get('type')
         const status = params.get('status')
         const categorySlug = params.get('category')
 
-        // Validate type
         const validType = type && ['source', 'destination', 'transformation'].includes(type) ? type : null
-
-        // Validate status (convert "roadmap" to "coming_soon" for internal use)
         const validStatus = status === 'roadmap' ? 'coming_soon' : status === 'live' ? 'live' : null
-
-        // Unslugify category
         const validCategory = categorySlug ? unslugifyCategory(categorySlug, allCategories) : null
 
-        return { type: validType, status: validStatus, category: validCategory }
-    }
-
-    const initialFilters = getInitialFilterValues()
-
-    // State for managing filters
-    const [typeFilter, setTypeFilter] = useState<string | null>(initialFilters.type)
-    const [statusFilter, setStatusFilter] = useState<string | null>(initialFilters.status)
-    const [categoryFilter, setCategoryFilter] = useState<string | null>(initialFilters.category)
+        if (validType) setTypeFilter(validType)
+        if (validStatus) setStatusFilter(validStatus)
+        if (validCategory) setCategoryFilter(validCategory)
+    }, [])
 
     // Update URL when filters change
     useEffect(() => {

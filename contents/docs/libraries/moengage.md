@@ -1,7 +1,6 @@
 ---
 title: MoEngage
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/w_200,c_limit,q_auto,f_auto/1_95b73543_367f4ea0bc.png
+platformLogo: moengage
 ---
 
 ## Objective
@@ -51,7 +50,7 @@ To follow this tutorial, you should:
 
 ```json
 {
-  "api_key": "<ph_project_api_key>",
+  "api_key": "<ph_project_token>",
   "event": "moengage_event_name",
   "distinct_id": "{{user_id}}",
   "properties": {
@@ -96,7 +95,7 @@ To forward purchase events from MoEngage to PostHog:
 
 ```json
 {
-  "api_key": "<ph_project_api_key>",
+  "api_key": "<ph_project_token>",
   "event": "purchase_completed",
   "distinct_id": "{{user_id}}",
   "properties": {
@@ -114,7 +113,7 @@ To update user properties in PostHog, you can also send identify calls:
 
 ```json
 {
-  "api_key": "<ph_project_api_key>",
+  "api_key": "<ph_project_token>",
   "event": "$identify",
   "distinct_id": "{{user_id}}",
   "$set": {

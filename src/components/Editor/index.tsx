@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { Select } from '../RadixUI/Select'
 import {
     IconSearch,
     IconMessage,
@@ -10,7 +9,6 @@ import {
     IconRefresh,
     IconPlus,
 } from '@posthog/icons'
-import { useLocation } from '@reach/router'
 import OSButton from 'components/OSButton'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { Toolbar, ToolbarElement } from '../RadixUI/Toolbar'
@@ -38,6 +36,8 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import { Popover } from 'components/RadixUI/Popover'
 import Slider from 'components/RadixUI/Slider'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import ViewerFilters from 'components/Viewer/ViewerFilters'
 
 interface EditorProps {
     slug?: string
@@ -46,6 +46,7 @@ interface EditorProps {
     maxWidth?: number | string
     children?: React.ReactNode
     hasTabs?: boolean
+    hasPadding?: boolean
     availableFilters?: {
         label: string
         value?: any
@@ -90,6 +91,10 @@ interface EditorProps {
     extraMenuOptions?: React.ReactNode
     articleRef?: React.RefObject<HTMLDivElement>
     hideToolbar?: boolean
+    /** Grey out the text-formatting buttons (undo/redo/bold/italic/strikethrough/align) for read-only content */
+    disableFormatting?: boolean
+    scrollable?: boolean
+    className?: string
 }
 
 type EditorAction = 'bold' | 'italic' | 'strikethrough' | 'undo' | 'redo' | 'leftAlign' | 'centerAlign' | 'rightAlign'
@@ -102,17 +107,8 @@ type EditorActionButton = {
     disabled?: boolean
 }
 
-const filterData = (data: any, filters: any) => {
-    return data.filter((obj: any) => {
-        return Object.keys(filters).every((key) => {
-            const { value, filter } = filters[key]
-            if (value === null) {
-                return true
-            }
-            return filter(obj, value)
-        })
-    })
-}
+const ScrollWrapper = ({ scrollable, children }: { scrollable: boolean; children: React.ReactNode }) =>
+    scrollable ? <ScrollArea>{children}</ScrollArea> : <>{children}</>
 
 const contentWidthOptions: ToggleOption[] = [
     {
@@ -142,11 +138,12 @@ const Options = ({
     const { appWindow } = useWindow()
     const initialMaxWidth =
         typeof other.initialMaxWidth === 'number' ? other.initialMaxWidth : appWindow?.size?.width || 1000
-    const [preferredMaxWidth, setPreferredMaxWidth] = useState(
-        typeof window !== 'undefined'
-            ? Number(localStorage.getItem('preferredMaxWidth')) || initialMaxWidth
-            : initialMaxWidth
-    )
+    const [preferredMaxWidth, setPreferredMaxWidth] = useState(initialMaxWidth)
+
+    useEffect(() => {
+        const stored = Number(localStorage.getItem('preferredMaxWidth'))
+        if (stored) setPreferredMaxWidth(stored)
+    }, [])
 
     useEffect(() => {
         if (!fullWidthContent) {
@@ -209,12 +206,13 @@ export function Editor({
     hasTabs = false,
     children,
     availableFilters,
-    maxWidth: initialMaxWidth = 768,
+    maxWidth: initialMaxWidth,
     onSearchChange,
     showFilters: initialShowFilters = false,
     disableFilterChange = false,
     dataToFilter,
     onFilterChange,
+    handleFilterChange,
     actionButtons,
     availableGroups,
     onGroupChange,
@@ -222,30 +220,31 @@ export function Editor({
     onSortChange,
     defaultSortValue,
     proseSize = 'sm',
+    hasPadding = true,
     cta,
     bookmark,
     extraMenuOptions,
     articleRef,
     hideToolbar = false,
-    ...other
+    disableFormatting = false,
+    scrollable = true,
+    className = '',
 }: EditorProps) {
     const [showCher, setShowCher] = useState(false)
     const [showFilters, setShowFilters] = useState(initialShowFilters)
     const [showSearch, setShowSearch] = useState(false)
-    const [filters, setFilters] = useState({})
     const [isModifierKeyPressed, setIsModifierKeyPressed] = useState(false)
     const [isHovering, setIsHovering] = useState(false)
-    const [maxWidth, setMaxWidth] = useState(initialMaxWidth)
-    const fullWidthContent = typeof maxWidth === 'string' && maxWidth === '100%'
     const products = useProduct() as { slug: string; name: string; type: string }[]
     // take the product name passed in and check the useProduct hook to get the product's display name
     const getProductName = (type: string) => products.find((p) => p.type === type)?.name || type
     // if we're filtering to a product, show the filter button in an active/open state
     const searchContentRef = useRef(null)
-    const { search } = useLocation()
     const { addWindow, focusedWindow } = useApp()
     const hasShareButton = !cta?.url || !cta?.label
     const { appWindow } = useWindow()
+    const [maxWidth, setMaxWidth] = useState(initialMaxWidth ?? 768)
+    const fullWidthContent = typeof maxWidth === 'string' && maxWidth === '100%'
 
     const toggleSearch = () => {
         setShowSearch(!showSearch)
@@ -263,7 +262,7 @@ export function Editor({
             hideLabel: true,
             onClick: actionButtons?.undo?.onClick,
             active: actionButtons?.undo?.active,
-            disabled: actionButtons?.undo?.disabled,
+            disabled: disableFormatting || actionButtons?.undo?.disabled,
         },
         {
             type: 'button',
@@ -272,7 +271,7 @@ export function Editor({
             hideLabel: true,
             onClick: actionButtons?.redo?.onClick,
             active: actionButtons?.redo?.active,
-            disabled: actionButtons?.redo?.disabled,
+            disabled: disableFormatting || actionButtons?.redo?.disabled,
         },
         { type: 'separator', className: 'hidden @2xl:block' },
         {
@@ -301,7 +300,7 @@ export function Editor({
             hideLabel: true,
             onClick: actionButtons?.bold?.onClick,
             active: actionButtons?.bold?.active,
-            disabled: actionButtons?.bold?.disabled,
+            disabled: disableFormatting || actionButtons?.bold?.disabled,
         },
         {
             type: 'button',
@@ -310,7 +309,7 @@ export function Editor({
             hideLabel: true,
             onClick: actionButtons?.italic?.onClick,
             active: actionButtons?.italic?.active,
-            disabled: actionButtons?.italic?.disabled,
+            disabled: disableFormatting || actionButtons?.italic?.disabled,
         },
         {
             type: 'button',
@@ -319,7 +318,7 @@ export function Editor({
             hideLabel: true,
             onClick: actionButtons?.strikethrough?.onClick,
             active: actionButtons?.strikethrough?.active,
-            disabled: actionButtons?.strikethrough?.disabled,
+            disabled: disableFormatting || actionButtons?.strikethrough?.disabled,
             className: 'hidden @md:inline-flex',
         },
         { type: 'separator', className: 'hidden @3xl:block' },
@@ -347,7 +346,7 @@ export function Editor({
             onClick: actionButtons?.leftAlign?.onClick,
             active: actionButtons?.leftAlign?.active,
             hideLabel: true,
-            disabled: actionButtons?.leftAlign?.disabled,
+            disabled: disableFormatting || actionButtons?.leftAlign?.disabled,
             className: 'hidden @lg:inline-flex',
         },
         {
@@ -357,7 +356,7 @@ export function Editor({
             onClick: actionButtons?.centerAlign?.onClick,
             active: actionButtons?.centerAlign?.active,
             hideLabel: true,
-            disabled: actionButtons?.centerAlign?.disabled,
+            disabled: disableFormatting || actionButtons?.centerAlign?.disabled,
             className: 'hidden @lg:inline-flex',
         },
         {
@@ -367,7 +366,7 @@ export function Editor({
             onClick: actionButtons?.rightAlign?.onClick,
             active: actionButtons?.rightAlign?.active,
             hideLabel: true,
-            disabled: actionButtons?.rightAlign?.disabled,
+            disabled: disableFormatting || actionButtons?.rightAlign?.disabled,
             className: 'hidden @lg:inline-flex',
         },
 
@@ -474,39 +473,6 @@ export function Editor({
         },
     ]
 
-    const handleFilterChange = (key: string, value: any, filter: (obj: any, value: any) => boolean) => {
-        const newFilters = { ...filters, [key]: { value, filter } }
-        setFilters(newFilters)
-        if (other.handleFilterChange) {
-            other.handleFilterChange(newFilters)
-        } else {
-            const filteredData = filterData(dataToFilter, newFilters)
-            onFilterChange?.(filteredData)
-        }
-    }
-
-    useEffect(() => {
-        if (availableFilters && availableFilters.length > 0) {
-            const searchParams = new URLSearchParams(search)
-            if (searchParams.size <= 0) return
-            const newFilters = {}
-
-            searchParams.forEach((value, key) => {
-                const filter = availableFilters.find((f) => (f.value || f.label).toLowerCase() === key.toLowerCase())
-                if (filter) {
-                    newFilters[filter.value || filter.label] = { value, filter: filter.filter, initialValue: value }
-                }
-            })
-            setFilters(newFilters)
-            if (other.handleFilterChange) {
-                other.handleFilterChange(newFilters)
-            } else {
-                const filteredData = filterData(dataToFilter, newFilters)
-                onFilterChange?.(filteredData)
-            }
-        }
-    }, [availableFilters])
-
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
             if (event.ctrlKey || event.metaKey) {
@@ -532,6 +498,15 @@ export function Editor({
     // Add Shift+F keyboard shortcut for search
     useEffect(() => {
         const handleSearchKeyDown = (e: KeyboardEvent) => {
+            const target = e.target as HTMLElement
+            if (
+                target.tagName === 'INPUT' ||
+                target.tagName === 'TEXTAREA' ||
+                target.shadowRoot ||
+                (target instanceof HTMLElement && target.closest('.mdxeditor'))
+            ) {
+                return
+            }
             // Only handle Shift+F if this window is the focused/active window
             if (e.key === 'F' && e.shiftKey && focusedWindow === appWindow) {
                 e.preventDefault()
@@ -551,17 +526,12 @@ export function Editor({
 
     return (
         <SearchProvider onSearchChange={onSearchChange}>
-            <div className="@container w-full h-full flex flex-col min-h-1">
-                {hideToolbar ? null : (
-                    <aside data-scheme="secondary" className="bg-primary p-2 border-b border-primary">
-                        <Toolbar elements={toolbarElements} />
-                    </aside>
-                )}
+            <div className={`@container w-full h-full flex flex-col min-h-1 ${className}`}>
                 <div className="flex flex-col flex-grow min-h-0">
                     <main
                         data-app="Editor"
                         data-scheme="primary"
-                        className="@container flex-1 bg-primary relative h-full flex flex-col"
+                        className="@container/editor flex-1 relative h-full flex flex-col"
                     >
                         <SearchBar
                             visible={showSearch}
@@ -572,100 +542,35 @@ export function Editor({
                             onSearch={onSearchChange}
                         />
 
-                        {showFilters && availableFilters && availableFilters.length > 0 && (
-                            <div className="bg-accent p-2 text-sm border-b border-primary text-primary flex gap-1 sticky top-0 z-40 flex-wrap">
-                                {availableFilters?.map((filter, index) => {
-                                    return (
-                                        <div key={filter.label} className="flex items-center gap-1">
-                                            <span>{index === 0 ? 'where' : 'and'}</span>
-                                            <span className="text-sm font-bold">{filter.label}</span>
-                                            <span className="italic">{filter.operator}</span>
-                                            <Select
-                                                key={`${Object.keys(filters).length}-${filter.label}`}
-                                                disabled={disableFilterChange}
-                                                placeholder={filter.label}
-                                                defaultValue={
-                                                    filter.initialValue === null
-                                                        ? null
-                                                        : filter.initialValue ??
-                                                          filters[filter.value ?? filter.label]?.value ??
-                                                          filter.options[0].value
-                                                }
-                                                groups={[
-                                                    {
-                                                        label: '',
-                                                        items: filter.options.map((option) => ({
-                                                            label: option.label,
-                                                            value: option.value,
-                                                        })),
-                                                    },
-                                                ]}
-                                                onValueChange={(value) =>
-                                                    handleFilterChange(
-                                                        filter.value ?? filter.label,
-                                                        value,
-                                                        filter.filter
-                                                    )
-                                                }
-                                            />
-                                        </div>
-                                    )
-                                })}
-                                {availableGroups && availableGroups.length > 0 && (
-                                    <div className="@xl:ml-auto flex items-center space-x-1">
-                                        <span className="text-sm font-bold">Group by</span>
-                                        <Select
-                                            placeholder="Group by"
-                                            defaultValue="none"
-                                            groups={[
-                                                {
-                                                    label: '',
-                                                    items: [
-                                                        { label: 'None', value: 'none' },
-                                                        ...availableGroups.map((group) => ({
-                                                            label: group.label,
-                                                            value: group.value,
-                                                        })),
-                                                    ],
-                                                },
-                                            ]}
-                                            onValueChange={(value) => onGroupChange?.(value)}
-                                        />
-                                    </div>
-                                )}
-                                {sortOptions && sortOptions.length > 0 && (
-                                    <div className="ml-auto flex items-center space-x-2">
-                                        <span className="text-sm font-bold">Sort by:</span>
-                                        <Select
-                                            placeholder="Sort by"
-                                            defaultValue={defaultSortValue}
-                                            groups={[
-                                                {
-                                                    label: '',
-                                                    items: sortOptions.map((option) => ({
-                                                        label: option.label,
-                                                        value: option.value,
-                                                    })),
-                                                },
-                                            ]}
-                                            onValueChange={(value) => onSortChange?.(value)}
-                                        />
-                                    </div>
-                                )}
-                            </div>
-                        )}
                         {hasTabs ? (
                             <div data-scheme="primary" className="bg-accent h-full">
                                 <article
                                     data-scheme="primary"
-                                    style={{ maxWidth: fullWidthContent ? '100%' : maxWidth }}
-                                    className={`${getProseClasses(proseSize)} h-full mx-auto transition-all`}
+                                    className={`${getProseClasses(proseSize)} h-full mx-auto transition-all ${
+                                        fullWidthContent ? 'max-w-full' : 'max-w-4xl'
+                                    }`}
                                 >
                                     {title && (
                                         <h1 className="text-2xl font-bold">
                                             {title}
                                             {type && <span className="opacity-40">.{type}</span>}
                                         </h1>
+                                    )}
+                                    {availableFilters && availableFilters.length > 0 && (
+                                        <div className="mb-2 mt-4">
+                                            <ViewerFilters
+                                                availableFilters={availableFilters}
+                                                dataToFilter={dataToFilter}
+                                                onFilterChange={onFilterChange}
+                                                handleFilterChange={handleFilterChange}
+                                                disableFilterChange={disableFilterChange}
+                                                availableGroups={availableGroups}
+                                                onGroupChange={onGroupChange}
+                                                sortOptions={sortOptions}
+                                                onSortChange={onSortChange}
+                                                defaultSortValue={defaultSortValue}
+                                            />
+                                        </div>
                                     )}
                                     <div className="relative h-full" ref={searchContentRef}>
                                         {children}
@@ -673,13 +578,12 @@ export function Editor({
                                 </article>
                             </div>
                         ) : (
-                            <ScrollArea>
+                            <ScrollWrapper scrollable={scrollable}>
                                 <article
                                     ref={articleRef ?? undefined}
-                                    style={{ maxWidth: fullWidthContent ? '100%' : maxWidth }}
-                                    className={`${getProseClasses(
-                                        proseSize
-                                    )} py-4 px-4 @xl:px-8 mx-auto transition-all`}
+                                    className={`${getProseClasses(proseSize)} ${
+                                        hasPadding ? 'py-4 px-4 @xl:px-8' : ''
+                                    } mx-auto transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-4xl'}`}
                                 >
                                     {title && (
                                         <h1 className="text-2xl font-bold">
@@ -687,11 +591,27 @@ export function Editor({
                                             {type && <span className="opacity-40">.{type}</span>}
                                         </h1>
                                     )}
+                                    {availableFilters && availableFilters.length > 0 && (
+                                        <div className="mb-2 mt-4">
+                                            <ViewerFilters
+                                                availableFilters={availableFilters}
+                                                dataToFilter={dataToFilter}
+                                                onFilterChange={onFilterChange}
+                                                handleFilterChange={handleFilterChange}
+                                                disableFilterChange={disableFilterChange}
+                                                availableGroups={availableGroups}
+                                                onGroupChange={onGroupChange}
+                                                sortOptions={sortOptions}
+                                                onSortChange={onSortChange}
+                                                defaultSortValue={defaultSortValue}
+                                            />
+                                        </div>
+                                    )}
                                     <div className="relative">
                                         <div ref={searchContentRef}>{children}</div>
                                     </div>
                                 </article>
-                            </ScrollArea>
+                            </ScrollWrapper>
                         )}
                     </main>
                 </div>

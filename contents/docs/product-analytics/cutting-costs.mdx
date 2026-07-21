@@ -78,7 +78,7 @@ PostHog automatically captures pageviews and pageleaves. This is great for analy
 To disable automatically capturing these events, set `capture_pageview` and `capture_pageleave` to `false` in the configuration options when initializing PostHog:
 
 ```js
-  posthog.init('<ph_project_api_key>', {
+  posthog.init('<ph_project_token>', {
     api_host: '<ph_client_api_host>',
     defaults: '<ph_posthog_js_defaults>',
     capture_pageview: false,

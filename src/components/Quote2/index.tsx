@@ -144,6 +144,7 @@ export const Quote2 = ({
                 <blockquote style={offset ? { paddingTop: offset } : {}} className={classes('quote', size)}>
                     <div>
                         <div className="md:hidden mb-6">{logo && <img src={logo} />}</div>
+                        {/* nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - quote content from CMS, not user input */}
                         <div dangerouslySetInnerHTML={{ __html: quote }} />
                     </div>
                 </blockquote>

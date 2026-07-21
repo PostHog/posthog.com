@@ -11,7 +11,7 @@ interface CartStore {
     isOpen: boolean
     setIsOpen: (isOpen: boolean) => void
     discountCode: string | null
-    setDiscountCode: (discountCode: string) => void
+    setDiscountCode: (discountCode: string | null) => void
     cartItems: CartItems
     setCartItems: (cartItems: CartItem[] | []) => void
     count: number | null
@@ -31,7 +31,7 @@ export const useCartStore = create<CartStore>()(
             isOpen: false,
             setIsOpen: (isOpen: boolean) => set({ isOpen }),
             discountCode: null,
-            setDiscountCode: (discountCode: string) => set({ discountCode }),
+            setDiscountCode: (discountCode: string | null) => set({ discountCode }),
             cartItems: [],
             setCartItems: (cartItems: CartItem[]) => set({ cartItems }),
             count: null,

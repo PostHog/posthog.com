@@ -1,5 +1,7 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react'
-import Lottie from 'react-lottie'
+import React, { useEffect, useState, useRef, useCallback, lazy, Suspense } from 'react'
+
+// react-lottie bundles lottie-web (~600 KiB); load it on demand instead of on every page.
+const Lottie = typeof window !== 'undefined' ? lazy(() => import('react-lottie')) : () => null
 
 interface ScreensaverProps {
     isActive: boolean
@@ -18,14 +20,14 @@ export const Screensaver: React.FC<ScreensaverProps> = ({ isActive, onDismiss })
         autoplay: true,
         path: '/lotties/loading.json',
         rendererSettings: {
-            preserveAspectRatio: 'xMidYMid slice'
-        }
+            preserveAspectRatio: 'xMidYMid slice',
+        },
     }
 
     const updatePosition = useCallback(() => {
         if (!isActive) return
 
-        setPosition(prev => {
+        setPosition((prev) => {
             let newX = prev.x + velocity.x
             let newY = prev.y + velocity.y
             let newVelX = velocity.x
@@ -44,7 +46,6 @@ export const Screensaver: React.FC<ScreensaverProps> = ({ isActive, onDismiss })
                 newVelY = -newVelY
                 newY = newY <= 0 ? 0 : 100 - logoHeightPercent
             }
-
 
             setVelocity({ x: newVelX, y: newVelY })
             return { x: newX, y: newY }
@@ -69,8 +70,6 @@ export const Screensaver: React.FC<ScreensaverProps> = ({ isActive, onDismiss })
         }
     }, [isActive, updatePosition])
 
-
-
     // Mouse move handler
     useEffect(() => {
         const handleMouseMove = () => {
@@ -93,14 +92,17 @@ export const Screensaver: React.FC<ScreensaverProps> = ({ isActive, onDismiss })
                     left: `${position.x}%`,
                     top: `${position.y}%`,
                     width: `${logoSizeRef.current.width}px`,
-                    height: `${logoSizeRef.current.height}px`
+                    height: `${logoSizeRef.current.height}px`,
                 }}
             >
-                <Lottie
-                    options={defaultOptions}
-                    height={logoSizeRef.current.height}
-                    width={logoSizeRef.current.width}
-                />
+                <Suspense fallback={null}>
+                    <Lottie
+                        options={defaultOptions}
+                        height={logoSizeRef.current.height}
+                        width={logoSizeRef.current.width}
+                        eventListeners={[]}
+                    />
+                </Suspense>
             </div>
 
             <div className="absolute bottom-8 w-full @md:w-auto @md:left-1/2 transform @md:-translate-x-1/2 text-white/50 text-sm text-center">

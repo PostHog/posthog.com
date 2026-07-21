@@ -57,7 +57,7 @@ On the stable ground of a thoughtfully designed project, developers and their ag
 
 At its best, automation relieves tedium.
 
-When they’re set up to succeed, agents can relieve *loads* of tedium for developers, doing repetitive tasks and boring setup in a flash.
+When they’re set up to succeed, [agents](/newsletter/building-ai-agents) can relieve *loads* of tedium for developers, doing repetitive tasks and boring setup in a flash.
 
 The most exotic approach we’ll nod to here is the [MCP](/docs/model-context-protocol) server. This is *new*, but beneath the surface, it’s not *that new*.
 
@@ -71,6 +71,6 @@ So that’s the new part.
 
 But under the hood, you’re building an interface to your existing services. If you’ve built an API or delivered client code, you already know how to do this.
 
-Again, if you want some code to steal or learn from, you can [grab ours](https://github.com/PostHog/posthog/tree/master/products/mcp). It runs on Cloudflare Workers using [Durable Objects](https://developers.cloudflare.com/durable-objects/), so you can adapt and deploy your own version easily.
+Again, if you want some code to steal or learn from, you can [grab ours](https://github.com/PostHog/posthog/tree/master/services/mcp). It runs on Cloudflare Workers using [Durable Objects](https://developers.cloudflare.com/durable-objects/), so you can adapt and deploy your own version easily.
 
 We’ll talk some more about [MCP next time](/blog/machine-copy-paste-mcp-intro). But for now: play around with these ideas a bit. What else can you do to [make a developer’s robot friend more helpful](/newsletter/building-ai-features)?

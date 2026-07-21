@@ -97,10 +97,6 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
             setIsCart(true)
             setIsAdding(false)
             setJustAdded(true)
-            // Hide the message after 5 seconds
-            setTimeout(() => {
-                setJustAdded(false)
-            }, 5000)
         }, 500)
     }
 
@@ -248,6 +244,7 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                         <div className="text-secondary">Description</div>
                         <div
                             className="col-span-3 product-description"
+                            // nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - product description from Shopify, not user input
                             dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
                         />
                     </>

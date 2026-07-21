@@ -6,18 +6,18 @@ import {
     IconArrowRight,
     IconArrowUpRight,
     IconAsterisk,
+    IconDownload,
     IconClock,
     IconDatabase,
     IconDatabaseBolt,
     IconGraph,
     IconPlug,
     IconShuffle,
+    IconAI,
 } from '@posthog/icons'
 import { customerDataInfrastructureNav } from '../../hooks/useCustomerDataInfrastructureNavigation'
 import { TreeMenu } from 'components/TreeMenu'
 import { useApp } from '../../context/App'
-import useProduct from '../../hooks/useProduct'
-import CloudinaryImage from 'components/CloudinaryImage'
 import { useWindow } from '../../context/Window'
 import TeamMember from 'components/TeamMember'
 import WistiaCustomPlayer from 'components/WistiaCustomPlayer'
@@ -30,15 +30,6 @@ const LeftSidebarContent = () => {
 }
 
 export default function CDP(): JSX.Element {
-    // Define the specific data products we want to display in order
-    const dataProducts = ['sql', 'data_warehouse', 'cdp', 'api', 'webhooks']
-
-    // Get all products and filter to only the data category ones we want
-    const allProducts = useProduct()
-    const products = Array.isArray(allProducts)
-        ? dataProducts.map((handle) => allProducts.find((product: any) => product.handle === handle)).filter(Boolean)
-        : []
-
     const { appWindow } = useWindow()
     const { setWindowTitle } = useApp()
 
@@ -71,8 +62,17 @@ export default function CDP(): JSX.Element {
             showWaitlist: true,
         },
         {
+            id: 'posthog-ai',
+            icon: 'IconAI',
+            title: 'PostHog AI',
+            url: '/data-stack/posthog-ai',
+            description:
+                "Omniscient AI for your business. Generate SQL queries, model your data, and get insights about your users' behavior all using PostHog AI to work faster than ever before.",
+            perfectFor: 'product teams, data engineers, and analysts',
+        },
+        {
             id: 'data-import',
-            icon: 'IconArrowRight',
+            icon: 'IconDownload',
             title: 'Data sources & import (ELT)',
             url: 'data-stack/sources',
             description:
@@ -90,7 +90,7 @@ export default function CDP(): JSX.Element {
         {
             id: 'modeling-transformation',
             icon: 'IconShuffle',
-            title: 'Data Modeling',
+            title: 'Data modeling',
             badge: 'Beta',
             url: 'data-stack/data-modeling',
             description: 'Build modular, testable data tables that load in an instant.',
@@ -133,31 +133,13 @@ export default function CDP(): JSX.Element {
     return (
         <>
             <SEO
-                title="PostHog data stack"
+                title="PostHog data Stack"
                 updateWindowTitle={false}
-                description="Your modern data stack, powered by PostHog and built on DuckDB"
-                image={`images/og/cdp.jpg`}
+                description="Your data is the context layer for your AI. Collect, store, transform, query, and let PostHog self-drive development based on customer signals."
+                image="https://res.cloudinary.com/dmukukwp6/image/upload/opengraph_3_cf73189604.png"
+                imageType="absolute"
             />
-            <ReaderView
-                leftSidebar={<LeftSidebarContent />}
-                title="posthog-data-stack.md"
-                hideTitle={true}
-                {...({
-                    header: (
-                        <>
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/data_factory_aed2d31fbf.png"
-                                alt="Hedgehogs taking data to the data factory"
-                                className="mt-4 px-4"
-                                imgClassName="max-w-[542px] w-full mx-auto"
-                            />
-                            <h2 className="text-xl @md/reader-content-container:text-2xl font-bold m-4 text-center pb-4">
-                                Your modern data stack on <span className="line-through">quack</span> DuckDB
-                            </h2>
-                        </>
-                    ),
-                } as any)}
-            >
+            <ReaderView leftSidebar={<LeftSidebarContent />} title="posthog-data-stack.md" hideTitle={true}>
                 {/* 
                 
                 TODO: Re-add this product grid later? I like it but don't have time to make it show the correct things right now.
@@ -199,22 +181,32 @@ export default function CDP(): JSX.Element {
                         </div>
                     </Fieldset>
                 </div> */}
-                <h3>
-                    The most flexible integrated modern data stack – powered by PostHog, built on DuckDB, and designed
-                    to scale
-                </h3>
+                <div className="not-prose mb-4 w-full">
+                    <h1 className="m-0 text-3xl font-bold !leading-[1.12] tracking-tight @md/reader-content:text-4xl @3xl/reader-content:text-5xl">
+                        Your modern data stack on <span className="line-through decoration-4">quack</span>{' '}
+                        <span className="rounded-md bg-red/10 px-1 text-red dark:bg-yellow/20 dark:text-yellow">
+                            DuckDB
+                        </span>
+                        , fully wired with PostHog AI
+                    </h1>
 
-                <CallToAction to="https://app.posthog.com/signup" size="sm">
-                    Get started - free
+                    <p className="mb-0 mt-4 text-base font-semibold leading-relaxed text-primary">
+                        The most flexible modern data stack – built on DuckDB, designed to scale, and wired up with our
+                        omniscient AI
+                    </p>
+                </div>
+
+                <CallToAction to="https://app.posthog.com/signup" size="sm" className="max-w-[175px]">
+                    Get started free
                 </CallToAction>
-                <p>
-                    Your data needs flexibility, tooling, and portability. We provide it all, in the most seamless data
-                    warehousing experience available.
+                <p className="mt-8">
+                    Your data needs flexibility, tooling, and actually-useful AI that's not stuck in a silo. We provide
+                    it all in a seamless data stack.
                 </p>
                 <p>
-                    <span className="font-bold">Bring your own tools</span> like dbt and Hex to customize your
-                    experience, or <span className="font-bold">use our built-in tooling</span> to get started quickly.
-                    Anything that connects to Postgres can connect to your PostHog DuckDB warehouse using our{' '}
+                    Bring your own tools like dbt and Hex to customize your experience, or use our built-in tooling to
+                    get started quickly. Anything that connects to Postgres can connect to your PostHog DuckDB warehouse
+                    using our{' '}
                     <Link to="https://github.com/posthog/duckgres" external>
                         Duckgres wrapper
                     </Link>
@@ -240,11 +232,31 @@ export default function CDP(): JSX.Element {
                     It's, quite literally, the best of both worlds.
                 </p>
 
-                <h3>You get the keys to the (data) castle</h3>
+                <h3>
+                    Fully wired with our{' '}
+                    <span className="bg-highlight p-0.5 font-bold text-red dark:text-yellow">omniscient AI</span>
+                </h3>
                 <p>
-                    We give you the credentials to directly access your DuckDB data store for complete flexibility, so
-                    you can bring whatever tooling fits your workflow. We also offer built-in tooling for CDP, data
-                    modeling, and more so you can get started quickly.
+                    With all your data in one place, PostHog AI becomes truly omniscient about your business. Generate
+                    SQL queries, model your data, and get insights about your users' behavior all using PostHog AI to
+                    work faster than ever before.
+                </p>
+                <p>
+                    And better yet - PostHog AI allows <span className="italic">everyone on your team</span> to work
+                    with your modeled data. Product teams can ask questions and get insights without relying on the data
+                    team, which means data teams can focus on more strategic work.
+                </p>
+
+                <h3>
+                    You get the{' '}
+                    <span className="bg-highlight p-0.5 font-bold text-red dark:text-yellow">
+                        keys to the (data) castle
+                    </span>
+                </h3>
+                <p>
+                    We give you the credentials to directly access your data store for complete flexibility, so you can
+                    bring whatever tooling fits your workflow. We also offer built-in tooling for CDP, data modeling,
+                    and more so you can get started quickly.
                 </p>
 
                 <ProductScreenshot
@@ -255,6 +267,38 @@ export default function CDP(): JSX.Element {
                     zoom={true}
                 />
 
+                <h3>PostHog&apos;s integrated data warehouse</h3>
+                <p>
+                    PostHog includes an integrated data warehouse with enough in-built tools that your data never needs
+                    to travel anywhere else. You can query and model data directly in PostHog, or use it across tools
+                    such as feature flags, experiments, and more. This eliminates the need to stitch together multiple
+                    vendors, while also giving you the flexibility to export data via our CDP if you have specific
+                    tooling needs.
+                </p>
+                <p>
+                    Instead of managing separate tools for analytics, experimentation, feature flags, and warehousing,
+                    PostHog provides an integrated stack where data flows seamlessly between tools without leaving the
+                    warehouse. Companies like{' '}
+                    <Link to="/customers/headshotpro" state={{ newWindow: true }}>
+                        HeadshotPro
+                    </Link>
+                    ,{' '}
+                    <Link to="/customers/webshare" state={{ newWindow: true }}>
+                        Webshare
+                    </Link>
+                    , and{' '}
+                    <Link to="/customers/elevenlabs" state={{ newWindow: true }}>
+                        ElevenLabs
+                    </Link>{' '}
+                    use PostHog as their single source of truth, eliminating the complexity of managing multiple
+                    systems.
+                </p>
+                <p>
+                    <Link to="/docs/data-warehouse/integrated-warehouse" state={{ newWindow: true }}>
+                        Learn more about PostHog&apos;s integrated warehouse
+                    </Link>
+                </p>
+
                 <h3>Data stack products</h3>
                 <p>This is what we offer built-in - but feel free to bring your own tools if that's what you need.</p>
 
@@ -264,11 +308,13 @@ export default function CDP(): JSX.Element {
                             IconDatabaseBolt,
                             IconDatabase,
                             IconPlug,
+                            IconDownload,
                             IconShuffle,
                             IconAsterisk,
                             IconArrowUpRight,
                             IconArrowRight,
                             IconGraph,
+                            IconAI,
                         }
                         const Icon = iconMap[product.icon]
 
@@ -322,7 +368,7 @@ export default function CDP(): JSX.Element {
 
                 <h3>How our support engineers use the data warehouse</h3>
                 <div>
-                    <WistiaCustomPlayer mediaId="1cv9e1aimw" aspectRatio={16 / 9} className="max-w-4xl mx-auto" />
+                    <WistiaCustomPlayer mediaId="1cv9e1aimw" aspectRatio={16 / 9} className="max-w-4xl" />
                 </div>
                 <p>
                     You can use data in the PostHog warehouse for almost anything, including building custom insights

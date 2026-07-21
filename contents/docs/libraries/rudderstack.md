@@ -1,7 +1,6 @@
 ---
 title: RudderStack
-icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/rudderstack.svg
+platformLogo: rudderstack
 ---
 
 RudderStack is an open-source, customer data platform for developers. It allows you to collect and deliver customer event data to a variety of destinations across your growth, product, and marketing stack.
@@ -14,7 +13,7 @@ Make sure you have a RudderStack account **and** a PostHog account, using [PostH
 
 1. From your RudderStack dashboard, add each source and select PostHog from the list of destinations.
 2. Assign a name to your destination (e.g. PostHog production) and click Continue.
-3. Add your PostHog 'Project API Key' as the Team API key (**Do not use a Personal API key**) and your host url as `Your-Instance` ('<ph_client_api_host>' if you're on PostHog Cloud):
+3. Add your PostHog 'Project Token' as the Team API key (**Do not use a Personal API key**) and your host url as `Your-Instance` ('<ph_client_api_host>' if you're on PostHog Cloud):
     ![RudderStack Dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/rs-posthog-config.png)
     - If it's a website or web app:
       1. In the rudderstack console set `Use device-mode to send events` to `true` so that the events originate from the client side. Additionally, this will enable the toolbar and heatmaps.

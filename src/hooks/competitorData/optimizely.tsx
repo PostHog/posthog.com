@@ -15,7 +15,7 @@ export const optimizely = {
                 count_value_metrics: false,
                 custom_goals: true,
                 dynamic_cohorts: false,
-                experiment_analysis: false,
+                experiment_analysis: true,
                 funnel_metrics: true,
                 funnel_tests: true,
                 namespacing: false,
@@ -140,7 +140,7 @@ export const optimizely = {
             },
         },
         product_analytics: {
-            available: false,
+            available: 'Warehouse-native only',
             features: {
                 autocapture: false,
             },
@@ -168,6 +168,9 @@ export const optimizely = {
         },
         cdp: {
             available: true,
+        },
+        error_tracking: {
+            available: false,
         },
     },
     platform: {

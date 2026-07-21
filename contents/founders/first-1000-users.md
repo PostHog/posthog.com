@@ -89,7 +89,7 @@ This decision had two important benefits:
 
 We didn’t need to build a payment flow, or agonize over how to convert open-source users into paying customers, and people were more forgiving of issues.
 
-This worked for *us*, but it isn't universally good advice. 
+This worked for *us*, but it isn't universally [good advice](/newsletter/how-i-get-good-advice). 
 
 We were entering a crowded market with multiple competitors with around $100m in revenue, so we were confident we’d find a way to monetize eventually. 
 

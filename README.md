@@ -17,7 +17,7 @@
 </p>
 
 
-This is the repository for the PostHog website. It contains:
+This is the repository for the PostHog website. We treat it like a product. It contains:
 
 - All of our written content and visuals including product features, manuals, docs, blogs, case studies, tutorials, and the handbook
 - Features like questions and answers (using [Squeak!](https://github.com/PostHog/squeak)), job listings (using [Ashby](https://www.ashbyhq.com/customers/posthog-customer-story)), pricing calculator, roadmap, API docs, and more
@@ -29,6 +29,10 @@ This is the repository for the PostHog website. It contains:
 - [Contributing](#contributing)
 
 ## Quick start
+
+> `AGENTS.md` is equipped with instructions for the most fundamental parts of running the app.
+>
+> If you find places where current documentation is lacking, email cory@posthog.com with the subject, "AGENTS.md".
 
 1. **Pre-installation**
 
@@ -73,7 +77,7 @@ See full instructions on [developing PostHog.com locally in our manual](https://
 
 ### Debugging errors on start
 1. Pull the latest changes from `master`
-2. Run `gatsby clean && mkdir .cache & pnpm start` or delete `node_modules` and `.cache`
+2. Run `pnpm clean && mkdir .cache & pnpm start` or delete `node_modules` and `.cache`
 3. Make sure you're not in an activated flox environment for a different project
 4. Check builds are passing in [deployment to Vercel](https://github.com/PostHog/posthog.com/deployments)
 
@@ -92,6 +96,10 @@ You’ll need to set environment variables for these. [See (private) instruction
 
 ### Developing the posts section
 To see your local version of the posts section, `/posts` needs to be visited directly (`http://localhost:8001/posts`)
+
+### Cloudflare PR previews
+
+[PR previews](https://github.com/PostHog/posthog.com/blob/master/.github/workflows/deploy-preview.yml) build with **`GATSBY_MINIMAL=true`** (same idea as `pnpm build:minimal`). **Post listing pages** such as `/tutorials`, `/blog`, and `/posts` are **not** generated, so those URLs may break in the preview. **Open the direct URL** to your doc or post (e.g. `/tutorials/your-slug`) to review changes. Listings and search stay aligned with production after merge to `master`. More detail: [Developing the website → PR preview deployments](https://posthog.com/handbook/engineering/posthog-com/developing-the-website#pr-preview-deployments-cloudflare-pages).
 
 ### Developing the merch store
 Additional environment variables are needed to develop the merch store:

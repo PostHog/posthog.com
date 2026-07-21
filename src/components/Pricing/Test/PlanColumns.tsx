@@ -26,10 +26,14 @@ interface PlanData {
     intent: 'free' | 'paid' | 'enterprise'
 }
 
-const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => {
+const Plan: React.FC<{ planData: PlanData; highlighted?: boolean }> = ({ planData, highlighted = false }) => {
     return (
         <>
-            <div className="not-prose flex-1 flex flex-col h-full border border-primary bg-white dark:bg-accent-dark rounded-md relative">
+            <div
+                className={`not-prose flex-1 flex flex-col h-full border bg-white dark:bg-accent-dark rounded-md relative ${
+                    highlighted ? 'border-3 border-yellow' : 'border-primary'
+                }`}
+            >
                 {planData.title === 'Free' && (
                     <div className="absolute -top-6 right-4 !border-2 border-yellow bg-light dark:bg-dark rounded-sm text-center py-1 px-2">
                         <strong className="block text-yellow text-sm">Just pick this one!</strong>
@@ -186,26 +190,52 @@ export const PlanColumns: React.FC<PlanColumnsProps> = ({ billingProducts, highl
                 <SectionHeader>
                     <h2>Compare plans</h2>
                 </SectionHeader>
-                <div className="mt-4 -mx-4 @2xl:-mx-6 @5xl:mx-0 px-4 @5xl:px-0 mb-4 @5xl:mb-0">
+                <div className="mt-4 -mx-4 @2xl:-mx-6 @5xl:mx-0 px-4 @2xl:px-6 @5xl:px-0 mb-4 @5xl:mb-0">
                     <ScrollArea>
-                        <div className="pt-6 pb-2">
-                            <div
-                                className={`flex flex-wrap @4xl:grid grid-cols-[repeat(2,1fr)__minmax(200px,_400px)] gap-4 @4xl:gap-8 mb-4 ${
-                                    highlight === 'free'
-                                        ? '[&>*:nth-child(1)_>div]:border-yellow [&>*:nth-child(1)_>div]:border-3'
-                                        : '[&>*:nth-child(2)_>div]:border-yellow [&>*:nth-child(2)_>div]:border-3'
-                                }`}
-                            >
+                        <div className="px-1 pt-6 pb-2">
+                            <div className="flex flex-wrap @4xl:grid grid-cols-[repeat(2,1fr)__minmax(200px,_400px)] gap-4 @4xl:gap-8 mb-4">
                                 {planSummary.map((plan, index) => (
-                                    <Plan key={index} planData={plan} />
+                                    <Plan
+                                        key={index}
+                                        planData={plan}
+                                        highlighted={
+                                            (highlight === 'free' && index === 0) ||
+                                            (highlight === 'paid' && index === 1)
+                                        }
+                                    />
                                 ))}
                                 <div className="flex-[1_0_100%] max-w-2xl mx-auto @4xl:mx-4">
                                     <AllPlansInclude />
-                                    <div className="mt-6">
-                                        <p className="font-bold text-[15px] xl:mt-4 mb-2">
-                                            Looking for features for larger teams?{' '}
-                                            <Link to="/platform-packages">Check out our platform packages.</Link>
+                                    <div className="mt-4 mb-0">
+                                        <p className="font-bold text-[15px] mb-2">
+                                            <em>But wait, there's more...</em>
                                         </p>
+                                        <ul className="prose dark:prose-invert">
+                                            <li className="text-[15px]">
+                                                <Link to="/platform-packages" state={{ newWindow: true }}>
+                                                    Platform packages
+                                                </Link>
+                                                <br />
+                                                <p className="my-0 opacity-90 text-sm">
+                                                    Choose from extra features, like dedicated support, RBAC and SSO
+                                                    enforcement.
+                                                </p>
+                                            </li>
+                                            <li className="text-[15px]">
+                                                <Link
+                                                    to="/services"
+                                                    className="underline font-semibold hover:text-red dark:hover:text-yellow transition-colors"
+                                                    state={{ newWindow: true }}
+                                                >
+                                                    Setup &amp; training
+                                                    <br />
+                                                </Link>
+                                                <p className="my-0 opacity-90 text-sm">
+                                                    Our engineers can set everything up for you and train your team.{' '}
+                                                    <em>Includes free merch!</em>
+                                                </p>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>

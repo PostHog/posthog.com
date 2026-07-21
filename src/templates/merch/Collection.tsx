@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react'
+import React, { useState, useMemo, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import ProductGrid from './ProductGrid'
 import { getProduct } from './transforms'
@@ -20,6 +20,8 @@ import { useApp } from '../../context/App'
 import OrderHistory from 'components/Merch/OrderHistory'
 import { useUser } from 'hooks/useUser'
 import MobileDrawer from 'components/MobileDrawer'
+import { useCartStore } from './store'
+import Link from 'components/Link'
 
 // Category configuration with icons and display order
 type CategoryKey = 'all' | 'Apparel' | 'Stickers' | 'Goods' | 'Novelty'
@@ -112,14 +114,20 @@ const leftSidebarContent = [
         ),
     },
     {
-        title: 'Returns',
+        title: 'Returns & cancellations',
         content: (
             <>
                 <p>
                     Returns?? We've literally never had a return. Not sure if it's because our products are that awesome
                     or because we don't have an official return policy.
                 </p>
-                <p>Until then, just email merch@posthog.com if you have any issues and we'll get you squared away.</p>
+                <p>
+                    But if you need to cancel or return something, you can{' '}
+                    <Link to="/merch/orders" state={{ newWindow: true }} className="font-semibold underline">
+                        look up your order
+                    </Link>{' '}
+                    and handle it yourself.
+                </p>
             </>
         ),
     },
@@ -158,22 +166,18 @@ const SidebarContent = ({ content }: { content: React.ReactNode | AccordionItem[
 
     if (Array.isArray(content)) {
         return (
-            <>
-                {content.map((item, index) => (
-                    <Accordion
-                        key={index}
-                        data-scheme="primary"
-                        className=""
-                        defaultValue="item-0"
-                        items={[
-                            {
-                                trigger: item.title,
-                                content: item.content,
-                            },
-                        ]}
-                    />
-                ))}
-            </>
+            <Accordion
+                data-scheme="primary"
+                type="multiple"
+                className="[&>*:first-child_button]:!pt-0"
+                triggerClassName="!text-sm !font-semibold"
+                contentClassName="!text-sm [&_p]:!text-sm"
+                items={content.map((item, index) => ({
+                    value: `item-${index}`,
+                    trigger: item.title,
+                    content: item.content,
+                }))}
+            />
         )
     }
 
@@ -196,6 +200,8 @@ export default function Collection(props: CollectionProps): React.ReactElement {
     const { isMobile: appIsMobile } = useApp()
     const { getJwt, user } = useUser()
     const isMobile = appIsMobile || (appWindow?.size?.width && appWindow.size.width <= 768)
+    const addToCart = useCartStore((state) => state.update)
+    const hasProcessedAddToCart = useRef(false)
 
     const currentPath = appWindow?.path?.replace(/^\//, '') || '' // Remove leading slash, default to empty string
     const products = pageContext.productsForCurrentPage
@@ -217,19 +223,53 @@ export default function Collection(props: CollectionProps): React.ReactElement {
             const productHandle = urlParams.get('product')
             const state = urlParams.get('state')
             const category = urlParams.get('category')
+            const addProductHandle = urlParams.get('add')
+            const variantId = urlParams.get('variant')
+            const quantity = parseInt(urlParams.get('qty') || '1', 10) || 1
 
             // Handle category parameter
             if (category) {
                 // Find the category key that matches the slug
                 const properCategory = Object.entries(categoryConfig).find(
-                    ([key, config]) => config.slug === category.toLowerCase()
+                    ([_, config]) => config.slug === category.toLowerCase()
                 )?.[0]
                 if (properCategory && categoryConfig[properCategory as CategoryKey]) {
                     setSelectedCategory(properCategory)
                 }
             }
 
-            if (productHandle) {
+            // Handle add to cart parameter (only once per page load)
+            if (addProductHandle && !hasProcessedAddToCart.current) {
+                const productToAdd = getProductFromHandle(transformedProducts, addProductHandle)
+                if (productToAdd && productToAdd.variants?.length > 0) {
+                    // Find the specific variant if provided, otherwise use first variant
+                    let variantToAdd = productToAdd.variants[0]
+                    if (variantId) {
+                        const foundVariant = productToAdd.variants.find(
+                            (v: any) => v.shopifyId === variantId || v.id === variantId
+                        )
+                        if (foundVariant) {
+                            variantToAdd = foundVariant
+                        }
+                    }
+
+                    // Add to cart
+                    addToCart(variantToAdd, quantity)
+                    hasProcessedAddToCart.current = true
+
+                    // Open cart and clear the add parameter from URL
+                    setCartIsOpen(true)
+                    setSelectedProduct(null)
+
+                    // Clean up the URL by removing add-related params
+                    const cleanUrl = new URL(window.location.href)
+                    cleanUrl.searchParams.delete('add')
+                    cleanUrl.searchParams.delete('variant')
+                    cleanUrl.searchParams.delete('qty')
+                    cleanUrl.searchParams.set('state', 'cart')
+                    window.history.replaceState({}, '', cleanUrl.toString())
+                }
+            } else if (productHandle) {
                 const product = getProductFromHandle(transformedProducts, productHandle)
                 if (product) {
                     setSelectedProduct(product)
@@ -242,7 +282,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
 
             setHasInitialized(true)
         }
-    }, [transformedProducts, hasInitialized])
+    }, [transformedProducts, hasInitialized, addToCart])
 
     // Update URL when selectedProduct, cartIsOpen, or selectedCategory changes (only after initialization)
     useEffect(() => {
@@ -386,6 +426,8 @@ export default function Collection(props: CollectionProps): React.ReactElement {
         [appWindow]
     )
 
+    const MainContainer = ScrollArea
+
     const fetchOrders = async () => {
         try {
             const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/orders`, {
@@ -407,10 +449,11 @@ export default function Collection(props: CollectionProps): React.ReactElement {
     }, [user])
 
     return (
-        <div className="@container w-full h-full flex flex-col min-h-1">
+        <div className="@container w-full h-full flex flex-col min-h-1 border-t border-primary">
             <HeaderBar
                 showBack
                 showForward
+                showCustomLeft={<h2 className="text-primary">Merch store</h2>}
                 onCartOpen={handleCartOpen}
                 onCartClose={handleCartClose}
                 isCartOpen={cartIsOpen}
@@ -476,6 +519,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                         </motion.aside>
                     )}
 
+                    {/* Mobile: use MobileDrawer */}
                     {isMobile && (
                         <MobileDrawer
                             isOpen={cartIsOpen || selectedProduct !== null || orderHistoryIsOpen}
@@ -517,7 +561,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                         data-scheme="primary"
                         className="@container flex-1 bg-primary relative h-full"
                     >
-                        <ScrollArea className="h-full">
+                        <MainContainer>
                             {/* <DebugContainerQuery /> */}
                             <div className={`${getProseClasses()} max-w-none h-full`}>
                                 <SEO title="Merch - PostHog" image="/images/merch.png" />
@@ -533,14 +577,15 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                                     </div>
                                 </div>
                             </div>
-                        </ScrollArea>
+                        </MainContainer>
                     </main>
                     {leftSidebarContent && (
-                        <aside data-scheme="secondary" className="w-64 bg-primary border-r border-primary h-full">
-                            <ScrollArea className="p-2">
-                                <div className="space-y-3">
-                                    <SidebarContent content={leftSidebarContent} />
-                                </div>
+                        <aside
+                            data-scheme="secondary"
+                            className="@3xl:w-64 w-full bg-primary  @3xl:border-r border-t @3xl:border-t-0 border-primary h-full"
+                        >
+                            <ScrollArea className={`p-4`}>
+                                <SidebarContent content={leftSidebarContent} />
                             </ScrollArea>
                         </aside>
                     )}

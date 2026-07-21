@@ -185,6 +185,8 @@ Another way CDPs are useful later is reverse ETL. This means getting data *out* 
 
 At huge scale, use cases fragment significantly. Each function will likely have their own set of specialized requirements that a data warehouse (if adopted) will likely play a large role in, but that’s beyond the scope of this post.
 
+If you’re at the point of evaluating different tools, our guide to [the best CDPs for developers](/blog/best-customer-data-platforms-for-developers) breaks down the top options and tradeoffs.
+
 ## PostHog is both a CDP and data warehouse
 
 If you spend any time with PostHog, you’ll quickly notice we have both a [CDP](/docs/cdp) (data pipelines) and a [data warehouse](/docs/data-warehouse). You might wonder: hey, I thought it was supposed to be one or the other? Well, we’ve broken that rule.
@@ -213,4 +215,4 @@ When compared with either of the stacks mentioned above, PostHog enables teams t
 
 Rather than the data spaghetti created by separate CDPs, data warehouses, and other tools, PostHog provides them all in a unified platform. This means teams have more of the tools they need as they grow and there is less need for migration or reimplementation. We can fulfill the use cases teams need whatever stage they are at, whether it is marketing campaign enrichment early or complex analysis from consolidated datasets later. 
 
-If you’re curious, see the [product pages](/cdp) or [just sign up and get started](https://us.posthog.com/signup); both our CDP and data warehouse come with a generous free tier.
+If you’re curious, see the [product pages](/cdp) or [just sign up and get started](https://us.posthog.com/signup); both our CDP and data warehouse come with a generous free tier. 

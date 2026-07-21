@@ -1,42 +1,39 @@
-import { IconCopy } from '@posthog/icons'
-import { CallToAction } from 'components/CallToAction'
-import { CodeBlock } from 'components/CodeBlock'
-import useCloud from 'hooks/useCloud'
-import { useToast } from '../../context/Toast'
 import React from 'react'
+import PlatformInstall from 'components/PlatformInstall'
 
-export default function WizardCommand() {
-    const cloud = useCloud()
-    const { addToast } = useToast()
-
-    const code = `npx -y @posthog/wizard@latest${cloud ? ` --region ${cloud}` : ''}`
-
-    const handleCopy = async () => {
-        try {
-            await navigator.clipboard.writeText(code)
-
-            // Show global toast
-            addToast({
-                description: 'Copied to clipboard',
-                duration: 3000,
-            })
-        } catch (err) {
-            console.error('Failed to copy text: ', err)
-        }
-    }
-
-    const languageOption = { language: 'bash', code }
+/**
+ * Thin backward-compatible alias for the inline PlatformInstall command.
+ *
+ * WizardCommand was the original install-command component; PlatformInstall is now the single source
+ * of truth for both rendering and command-building. This wrapper is kept so the existing
+ * `<WizardCommand>` call sites (many in MDX prose, plus the global shortcode) render the consolidated
+ * component with zero changes — it owns no logic, it just maps the old prop names onto
+ * `<PlatformInstall variant="inline" />`.
+ */
+export default function WizardCommand({
+    className = '',
+    command = '',
+    selfDriving = false,
+    slim = false,
+    variant = 'default',
+    onCopy,
+}: {
+    className?: string
+    command?: string
+    selfDriving?: boolean
+    slim?: boolean
+    variant?: 'default' | 'bordered'
+    onCopy?: () => void
+}): JSX.Element {
     return (
-        <div data-scheme="primary">
-            <CodeBlock currentLanguage={languageOption} showLabel={true} showCopy={true}>
-                {[languageOption]}
-            </CodeBlock>
-            <div className="-mt-2 mb-6">
-                <CallToAction size="md" childClassName="flex gap-2 items-center" onClick={handleCopy}>
-                    <IconCopy className="size-5 inline-block" />
-                    <span>Copy AI prompt</span>
-                </CallToAction>
-            </div>
-        </div>
+        <PlatformInstall
+            variant="inline"
+            command={command}
+            selfDriving={selfDriving}
+            slim={slim}
+            bordered={variant === 'bordered'}
+            className={className}
+            onCopy={onCopy}
+        />
     )
 }

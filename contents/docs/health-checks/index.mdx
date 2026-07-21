@@ -1,0 +1,97 @@
+---
+title: Health checks (Beta)
+sidebar: Docs
+showTitle: true
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+Health checks continuously inspect your PostHog setup for problems that quietly degrade your data – a missing SDK, traffic that bypasses your reverse proxy, a broken materialized view, and more. When a check finds an issue, PostHog surfaces it in the relevant **Health** section of the app, can notify you through alerts, and – if you use [PostHog Code](/docs/posthog-code) – can investigate and fix it for you automatically.
+
+<CalloutBox icon="IconInfo" title="Health checks are in beta" type="fyi">
+  The set of checks below is expanding over time. If there's a problem you'd like PostHog to catch, <a href="https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&projects=&template=feature_request.yml">let us know</a>.
+</CalloutBox>
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_27_52_142_Z_1c46cecabc.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/pasted_image_2026_06_24_T19_28_02_297_Z_52956d4234.png"
+    alt="Health checks section in the PostHog app"
+    classes="rounded"
+/>
+
+## How health checks work
+
+A health check is a scheduled job that looks at your recent events, project settings, and pipeline state, and flags anything that looks wrong. Every check follows the same lifecycle:
+
+1. **It runs on a schedule.** Most checks run once a day and look back over a recent window – anywhere from the last day to the last 30 days, depending on what they measure.
+2. **It writes an issue when something's wrong.** The issue shows up on the matching Health page in the app, tagged with a [severity](#severity-levels) and a plain-English explanation of what's happening.
+3. **It resolves itself.** When a later run sees the problem is gone – events start arriving again, the proxy is in place, the sync succeeds – the issue clears automatically. You don't need to dismiss it by hand.
+
+### Severity levels
+
+Every issue carries a severity. It controls how prominently the issue is surfaced and how it's prioritized when you let PostHog fix it for you:
+
+| Severity | Meaning | Signal priority |
+|----------|---------|-----------------|
+| 🔴 **Critical** | Data is missing or broken right now | P1 |
+| 🟠 **Warning** | Data is degraded or at risk | P2 |
+| 🔵 **Info** | Worth knowing, low urgency | P3 |
+
+## Three ways to resolve an issue
+
+### 1. Fix it manually in the app
+
+Every issue links straight to the place you fix it – a project setting, the data modeling editor, the ingestion warnings page, and so on. Each check's page below has step-by-step instructions.
+
+### 2. Get notified when something breaks
+
+When an issue fires or resolves, PostHog emits `$health_check_issue_firing` and `$health_check_issue_resolved` events. Route these to Slack, email, or a webhook with [destinations](/docs/cdp/destinations) so the right team hears about problems without watching the Health pages.
+
+### 3. Let PostHog Fix it automatically with the Inbox and PostHog Code
+
+This is the most powerful option. Most health checks emit a [Signal](/docs/self-driving/inbox/sources) into the [**Inbox**](/docs/self-driving/inbox). If you've connected your repository to PostHog, an agent can take the issue from detection all the way to a pull request:
+
+1. **Enable health checks as a signal source.** In PostHog Code, open **Inbox → Configure sources** and turn on health checks. See [signal sources](/docs/self-driving/inbox/sources).
+2. **The agent researches the issue.** It reads the issue, queries your data with the [PostHog MCP](/docs/model-context-protocol), and locates the cause in your codebase. See [research tasks](/docs/self-driving/inbox/research).
+3. **It applies the fix.** Where the fix lives in your code – an SDK config flag, a dependency bump, a proxy route – the [implementation agent](/docs/self-driving/inbox/implementation) opens a PR for you to review. Where the fix is a PostHog setting or data model, it uses the MCP tools to apply it directly.
+
+This integration was added in [PostHog/posthog#61955](https://github.com/PostHog/posthog/pull/61955). Each check's page explains exactly what the agent does for that specific problem.
+
+<CalloutBox icon="IconWarning" title="Not everything can be auto-fixed" type="caution">
+  Some issues need a human. <a href="/docs/health-checks/external-data-sync-failures">External data sync failures</a>, for example, usually come down to rotated credentials that only you can re-enter – so they're surfaced as alerts but won't open a PR.
+</CalloutBox>
+
+## The checks
+
+### SDK and ingestion
+
+| Check | What it catches | Severity |
+|-------|-----------------|----------|
+| [SDK health](/docs/health-checks/sdk-health) | A PostHog SDK that's significantly behind the latest release | Warning / Critical |
+| [Ingestion warnings](/docs/health-checks/ingestion-warnings) | Events being dropped, mis-merged, or degraded on the way in | Warning / Critical |
+
+### Web Analytics
+
+| Check | What it catches | Severity |
+|-------|-----------------|----------|
+| [No live events](/docs/health-checks/no-live-events) | No `$pageview` or `$screen` events arriving at all | Critical |
+| [No reverse proxy](/docs/health-checks/no-reverse-proxy) | Traffic isn't served through a reverse proxy | Warning |
+| [Partial reverse-proxy coverage](/docs/health-checks/partial-reverse-proxy) | Some hostnames are proxied, others aren't | Warning |
+| [No authorized URLs](/docs/health-checks/authorized-urls) | No app URLs configured for the project | Warning |
+| [Missing pageleave events](/docs/health-checks/pageleave-events) | `$pageview` events present but no `$pageleave` | Warning |
+| [Missing web vitals](/docs/health-checks/web-vitals) | `$pageview` events present but no `$web_vitals` | Warning |
+| [Scroll-depth tracking disabled](/docs/health-checks/scroll-depth) | `$pageleave` events carry no scroll-depth metadata | Warning |
+
+### Data Pipelines
+
+| Check | What it catches | Severity |
+|-------|-----------------|----------|
+| [Materialized view failures](/docs/health-checks/materialized-view-failures) | A materialized view failed to refresh | Warning |
+| [External data sync failures](/docs/health-checks/external-data-sync-failures) | An external data source failed to sync | Warning |
+
+## Giving feedback
+
+Health checks are actively being developed. We'd love your feedback:
+
+- [Report bugs](https://github.com/PostHog/posthog/issues/new?assignees=&labels=bug&projects=&template=bug_report.yml) or [request features](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&projects=&template=feature_request.yml)
+- Use the feedback link in the Health section of the app

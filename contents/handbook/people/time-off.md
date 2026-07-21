@@ -19,24 +19,24 @@ You do not need to get approval for time off from your manager. Instead, we expe
 - Having an entire Small Team off - this means we can't provide support to customers
 - Having the only X people who can do some totally critical task at PostHog off - if this is unavoidable, try to make sure one of you can at least check in if something goes horribly wrong
 
-### How to book time off in PTO by Deel
+### How to book time off in Time Off by Deel
 
 Before you start, make sure that:
-- You have authorized the PTO by Deel app in Slack to connect to your Google Calendar
+- You have authorized the Time Off by Deel app in Slack to connect to your Google Calendar
 - You have subscribed to the [team time off calendar](https://calendar.google.com/calendar/u/0/r?cid=c_52c05ff56171856873941d8a4e612c7d5dc317504b7533b0d22207480bc85763@group.calendar.google.com)
 
 If you don't do this, your holiday won't show up in the team time off calendar.
 
 To book a day off:
-- Book it on the PTO by Deel app in Slack. There are various types of time off you can select. It will be automatically approved and added to the team time off calendar (with the exception of longer term leave.) It will also be added to your manager's personal calendar.
+- Book it on the Time Off by Deel app in Slack. There are various types of time off you can select. It will be automatically approved and added to the team time off calendar (with the exception of longer term leave.) It will also be added to your manager's personal calendar.
 - Do not book directly on deel.com as it does not sync with Slack, and the team will not know you are out. Yes, it is confusing that Deel have two separate systems here.
 - There are four types of time off you can select
    - PTO - this will be the majority of the time for vacation or any other time off that doesn't fit below
    - Out Sick - this is when you're sick and will take time off unexpectedly
    - [Parental Leave](https://posthog.com/handbook/people/time-off#parental-leave)
    - Medical Leave - this is planned time off for you personally, on medical grounds - if it is a family member who requires support meaning you      will be off, this is PTO.
-- Block out your own personal GCal to show that you are out. This is because PTO by Deel _only_ books in an all day event in your calendar to show that you are out. If you don't do this, automated meetings such as interviews or demos might still get booked into your cal.
-- Set an out of office message on your email and have it point to someone else on the team, or hey@posthog.com. PTO by Deel will automatically set your Slack status to out of office and will autorespond to Slack messages.
+- Block out your own personal GCal to show that you are out. This is because Time Off by Deel _only_ books in an all day event in your calendar to show that you are out. If you don't do this, automated meetings such as interviews or demos might still get booked into your cal.
+- Set an out of office message on your email and have it point to someone else on the team, or hey@posthog.com. Time Off by Deel will automatically set your Slack status to out of office and will autorespond to Slack messages.
 
 > Please manually book in public holidays you plan to take off as well. We have team members working in countries all over the world, so it is not practical for us to book these all in on your behalf. Some people also prefer to work on certain days even if they're considered a public holiday in the country they are living in or visiting. In the Time Off by Deel app, you can use the Bulk Add by Region feature to quickly identify and add the public holidays you want off.
 
@@ -58,7 +58,7 @@ Whether you have an appointment with your doctor, school run with your kids, or 
 
 If you are sick, you don't need to work and you will be paid - the upper limit for paid sick leave for your country will be specified in your contract. This is assuming you need a day or two off, then just take them.
 
-Please let your manager know if you need to take off due to illness as soon as you are able to and add it to PTO by Deel. You shouldn't pre-emptively book a bunch of days off sick, as you can't know how long you will actually be sick for and you may trigger the need for a doctor's note (see below). Just book the day or two off that you are sick then add more if you still feel unwell.
+Please let your manager know if you need to take off due to illness as soon as you are able to and add it to Time Off by Deel. You shouldn't pre-emptively book a bunch of days off sick, as you can't know how long you will actually be sick for and you may trigger the need for a doctor's note (see below). Just book the day or two off that you are sick then add more if you still feel unwell.
 
 For extended periods of illness (5+ work days), or if you are going over the limit in your country/[state](https://support.gusto.com/article/106622152100000/Sick-leave-laws-by-state), please speak to Fraser so we can work out a plan. In most countries, we will need a doctor's note from you.
 
@@ -90,17 +90,19 @@ This table explains the amount of paid time off, depending on how long you've be
 | 6 - 12 months     | 12 weeks         | 2 - 3 weeks |
 | over 12 months    | up to 24 weeks   | 6 weeks |
 
-> Parental leave at PostHog is designed to be more generous than your local jurisdiction's legal requirements.  This means that in most cases you will receive the PostHog policy, if you live in a country with more generous parental leave, then you will receive that. This PostHog policy is not designed to be _in addition_ to your specific state/country policy.
+> Parental leave at PostHog is designed to be more generous than your local jurisdiction's legal requirements.  This means that in most cases you will receive the PostHog policy, if you live in a country with more generous parental leave, then you will receive that. This PostHog policy is not designed to be _in addition_ to your specific state/country policy. PostHog uses the "top up" method to administer paid leave. This means that if you receive any statutory leave, PostHog will top this up to your full pay. 
 
 We only pay the enhanced parental leave in one continuous block.
 
-Parental leave isn't supposed to be combined with our unlimited PTO policy here - we aren't prescriptive and will trust your judgement. If you need a longer break after childbirth or a staggered return reach out to Fraser or your manager. But please note that we usually won't allow you do a combination of parental leave plus a long holiday in addition to that to extend your time off.
+Parental leave isn't supposed to be combined with our unlimited PTO policy here - we aren't prescriptive and will trust your judgement. If you need a longer break after childbirth or a staggered return, log it in the Ops platform or speak to your manager. But please note that we usually won't allow you do a combination of parental leave plus a long holiday in addition to that to extend your time off.
 
-Please communicate parental leave to Fraser as soon as you feel comfortable doing so, and in any case at least 4 months before it will begin. They will let the People & Ops team know, who will follow up on any logistical arrangements around salary etc. and any statutory paperwork that needs doing.
+Please log parental leave in the Ops platform as soon as you feel comfortable doing so, and in any case at least 4 months before it will begin. The People & Ops team will follow up on any logistical arrangements around salary etc. and any statutory paperwork that needs doing.
 
 ### Maternity leave
 
-The above is in reference to Paid Time Off (PTO). Maternity leave can be extended using unpaid time off, please work with your team to find a reasonable solution for both your family and your team, and let Fraser know the total amount of time you expect to take off as soon as possible.
+The above is in reference to Paid Time Off (PTO). Maternity leave can be extended using unpaid time off, please work with your team to find a reasonable solution for both your family and your team, and log the total amount of time you expect to take off in the Ops platform as soon as possible.
+
+> For quota-carrying Sales roles taking 12 weeks or longer, your OTE will be calculated by averaging your sales quota attainment for the prior two full quarters (capped at 100% OTE).
 
 ### Paternity leave
 
@@ -112,61 +114,22 @@ We celebrate all the big and little milestones at PostHog, including birthdays a
 
 ### Birthdays
 
-We have partnered with [Wellbox](https://wellbox.app/) to send all team members a personalized giftset for their birthday.
-
-These are the steps for making an order:
-
-1. Log into our Wellbox account (details in 1Password)
-2. Select the birthday gift to send
-3. Fill out delivery information
-4. All set!
-
-The birthday gift usually arrives on the day of or 1-3 days prior to the birthday. Shipping fees: UK shipping is free while all other countries will have shipping fees.
+We organize our birthday gifts through Micromerch. They are sent out usually a week prior to the big day! We try to switch up what goes into the birthday boxes every so often so you won't receive the same thing twice.
 
 
 ### Anniversaries
 
-On your first anniversary with PostHog, you will receive a giftcard from [Giftogram](https://giftogram.com/) or [Prezzee](https://www.prezzee.uk/business/signin/) (if you are based in the UK) which can be used on a wide selection of brands. On your second anniversary you'll be gifted a [customized Lego minifig](https://minifig.fab-bricks.com/) in a display case, and on your third anniversary, you'll receive a personalized gift from [Wellbox](https://wellbox.app/).
+All our anniversary gifts are created with Micromerch. On your first anniversary with PostHog, you will receive an exclusive cap and pin. On your second anniversary you'll be gifted custom tee and pin, and on your third anniversary, you'll receive a custom sweatshirt and pin... try to collect them all!
 
-#### 1st year anniversary
+All anniversary gifts will be sent by Kendal, but if for whatever reason, you need to send one yourself, you can do this by creating an order in Shopify.
 
-For the first year anniversary, we give $50 for US gift cards/$55 for all other countries gift cards to cover service fees:
-
-1. Login into [Giftogram](https://app.giftogram.com/sign-in) by using your gmail credentials
-2. Two ways to create a new Giftogram, on the tool bar above where it says “Create and Send'' or you can click on the right hand side on the blue button “Send a Giftogram''.
-3. Walk through the following steps:
-  - Select the appropriate campaign: US Campaign= US team members, GCode Campaign= EU+ALL team members, and CA Campaign= Canada team members
-  - Select a card design of your choice (easiest to just use the anniversary theme)
-  - Next screen, select “individual”, email as a delivery method, and add value (see above for amount) and continue to the next step
-  - Enter the individual’s PostHog email address. You can add multiple email addresses if there is one then one anniversary. The amount will add itself on the right hand side as you add more individuals. Then, continue to the next step
-  - Delivery message; select PostHog team as the sender and select the drop down “1st year anniversary” as the pre-populated message or you can create your own personal message
-  - Last step, schedule the delivery date and you’re done!
-
-#### 2nd year anniversary
-
-The second year anniversary gets you a customized Lego figurine:
-
-1. Log into [Fab-brick](https://fab-bricks.com/login.php) (login credentials are shared in People & Ops 1Password vault)
-2. Select the third tab “MiniFig Creator” and design your mini fig to look like the individual you’re celebrating!
-3. Make sure to include a display case and the three tier brick option
-4. After you’ve completed your design, check out. There should already be a Brex card on file. Please make sure you add the individual’s correct mailing address.
-
-#### 3rd year anniversary
-
-The third year anniversary is a pack of gifts provided via [Wellbox](https://wellbox.app/).
-
-1. Select the 3rd Anniversary gift in our profile
-2. Fill out delivery info
-3. You're all set!
-
-The gift will usually arrive on the day of or 1-3 days prior to the anniversary date. Shipping fees: UK shipping is free while all other countries will have shipping fees.
 
 #### 4th year anniversary
 
 On your 4th anniversary at PostHog as a big thank you for sticking with us, we give you a choice of 3 gifts:
 
-1. Sage Barista Touch coffee machine
+1. Sage Barista Touch coffee machine or Aiden Precision coffee maker
 2. Apple 27-inch 5K Retina Studio Display with standard glass and tilt-adjustable stand
 3. Rimowa luggage set (large trunk, cabin bag, packing cube, toiletries bag)
 
-On the run up to your anniversary, our Ops team will send you a link to the gift options questionnaire and order your 4 year anniversary gift once we receive your completed form. Thank you for making PostHog great!
+On the run up to your anniversary, our Kendal will send you the gift options and order your 4 year anniversary gift once we receive your choice. Thank you for making PostHog great!

@@ -3,6 +3,7 @@ import React, { useState, createContext, useEffect, useContext, useRef } from 'r
 import { Replies } from './Replies'
 import { Profile } from './Profile'
 import { QuestionData, StrapiData, StrapiRecord, TopicData } from 'lib/strapi'
+import LevelBadge from './LevelBadge'
 import Days from './Days'
 import Markdown from './Markdown'
 import { QuestionForm } from './QuestionForm'
@@ -23,7 +24,7 @@ import {
 } from '@posthog/icons'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { Listbox } from '@headlessui/react'
-import { fetchTopicGroups, topicGroupsSorted } from '../../../pages/questions'
+import { fetchTopicGroups, topicGroupsSorted } from '../util/topicGroups'
 import { Check2, Close } from 'components/Icons'
 import Modal from 'components/Modal'
 import Checkbox from 'components/Checkbox'
@@ -40,6 +41,7 @@ import ZendeskTicket from 'components/ZendeskTicket'
 import { TopicSelector } from './TopicSelector'
 import { XIcon } from 'lucide-react'
 import { useToast } from '../../../context/Toast'
+import { useWindow } from '../../../context/Window'
 
 type QuestionProps = {
     // TODO: Deal with id possibly being undefined at first
@@ -444,17 +446,20 @@ export function Question(props: QuestionProps) {
     const [expanded, setExpanded] = useState(props.expanded || false)
     const [isEditingQuestion, setIsEditingQuestion] = useState(false)
     const { user, notifications, setNotifications, isModerator } = useUser()
-    const [maxQuestions, setMaxQuestions] = useState(other.askMax ? [{ manual: false, withContext: false }] : [])
+    const { appWindow } = useWindow()
+    const [maxQuestions, setMaxQuestions] = useState(
+        appWindow?.location?.state?.askMax ? [{ manual: false, withContext: false }] : []
+    )
 
     useEffect(() => {
         if (
             notifications?.length > 0 &&
             notifications.some(
-                (notification) => notification.question.id === id || notification.question.permalink === id
+                (notification) => notification.question?.id === id || notification.question?.permalink === id
             )
         ) {
             const newNotifications = notifications.filter(
-                (notification) => notification.question.id !== id && notification.question.permalink !== id
+                (notification) => notification.question?.id !== id && notification.question?.permalink !== id
             )
             setNotifications(newNotifications)
         }
@@ -470,6 +475,7 @@ export function Question(props: QuestionProps) {
         handlePublishReply,
         handleResolve,
         handleReplyDelete,
+        voteReply,
         archive,
         pinTopics,
         escalate,
@@ -514,6 +520,7 @@ export function Question(props: QuestionProps) {
                 handlePublishReply,
                 handleResolve,
                 handleReplyDelete,
+                voteReply,
                 pinTopics,
                 mutate,
             }}
@@ -546,6 +553,7 @@ export function Question(props: QuestionProps) {
                             profile={questionData.attributes.profile?.data}
                             className={archived ? 'opacity-50' : ''}
                         />
+                        <LevelBadge points={questionData.attributes.profile?.data?.attributes?.reputation} />
                         <Days
                             created={questionData.attributes.createdAt}
                             profile={questionData.attributes.profile?.data}

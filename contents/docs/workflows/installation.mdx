@@ -1,0 +1,44 @@
+---
+title: Install PostHog SDKs for Workflows
+---
+
+import { WorkflowsInstallationPlatforms, WorkflowsInstallationFrameworks } from './_snippets/workflows-installation-platforms'
+import WizardCommand from 'components/WizardCommand'
+
+Workflows is a no-code product – you can create and launch Workflows without installing any SDK. However, installing a PostHog SDK unlocks event-based triggers, letting you start Workflows when users perform specific actions in your app.
+
+These are the same SDKs used for [Product Analytics](/docs/product-analytics) – if you already have PostHog installed, you're good to go.
+
+### Install with the AI wizard
+
+The fastest way to get started is with our installation wizard. Run this command in your project directory:
+
+<WizardCommand />
+
+It also works with [LLM coding agents](/blog/envoy-wizard-llm-agent) like Cursor and Bolt.
+
+### Platforms
+
+<WorkflowsInstallationPlatforms />
+
+### Frameworks
+
+<WorkflowsInstallationFrameworks />
+
+<CalloutBox type="fyi" title="Do I need an SDK?">
+
+Without an SDK, you can still trigger Workflows programmatically using [webhooks](/docs/workflows/workflow-builder#triggers). With an SDK installed, you can also trigger Workflows when:
+
+- A user performs any autocaptured event, such as pageviews, clicks, and form submissions
+- You send custom events from your app like `signed_up`, `purchase_completed`, or `onboarding_finished`
+
+</CalloutBox>
+
+## Set up Workflows
+
+Now that PostHog is installed, any captured or custom event can be used as a [workflow trigger](/docs/workflows/workflow-builder#triggers) to send emails, Slack messages, SMS via Twilio, or call webhooks.
+
+To get started:
+
+1. [Configure a channel](/docs/workflows/configure-channels)
+2. Head to the [workflow builder](/docs/workflows/workflow-builder) to create your first automation

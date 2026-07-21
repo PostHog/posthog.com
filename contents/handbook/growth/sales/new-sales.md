@@ -1,12 +1,10 @@
 ---
-title: Inbound sales
+title: New business sales
 sidebar: Handbook
 showTitle: true
 ---
 
-This is our playbook for managing inbound sales, ie. customers who have contacted the sales team directly. 
-
-We [build PostHog for product engineers](/handbook/who-we-build-for). While many non-technical folks use PostHog successfully every day, our inbound sales process is built with technical folks in mind. Once implemented, a customer may use PostHog for all manner of things (and we hope they do!).
+We [build PostHog for product engineers](/handbook/who-we-build-for). While many non-technical folks use PostHog successfully every day, our sales process is built with technical folks in mind. Once implemented, a customer may use PostHog for all manner of things (and we hope they do!).
 
 Three other general principles to bear in mind:
 
@@ -45,8 +43,8 @@ They are also available as Opportunity fields in Salesforce and as such you shou
 
 This is an overview for what you should actually be doing with a customer at each stage of the sales process. For details on how to manage this in our CRM, visit our [Salesforce docs](/handbook/growth/sales/crm). The steps are:
 
-1. People contact us
-2. We assign and qualify
+1. You get a lead
+2. You qualify
 3. First call (30 minutes) - Discovery & initial demo
 4. Second call (60 minutes) - Technical deep dive (if needed)
 5. Product evaluation
@@ -54,13 +52,13 @@ This is an overview for what you should actually be doing with a customer at eac
 7. Commercial evaluation
 8. Closed - Won or Lost
 
-### 1. People contact us
+### 1. You get a lead
 
-Most people fill in the [form](/talk-to-a-human) via the website. Some email sales@posthog.com or open a Zendesk ticket.
+We're constantly experimenting with the best lead types, documented in [lead scoring](/handbook/growth/sales/lead-scoring). Info on _how_ leads are assigned can be [found here](/handbook/growth/sales/crm#how-we-do-lead-assignments). 
 
-### 2. We assign and qualify
+### 2. You qualify
 
-Info on how leads are assigned can be [found here](handbook/growth/sales/crm#how-we-do-lead-assignments). Once you have been assigned a lead, you'll want to qualify them before scheduling a call. Things to consider:
+Once you have been assigned a lead, you'll want to qualify them before scheduling a call. Things to consider:
 
 - What is their [Lead Score](/handbook/growth/sales/lead-scoring)?
 - Which products are they looking to use? What's their use case?
@@ -72,7 +70,7 @@ Most companies add friction here by making customers jump on a call first to qua
 
 It's also totally fine to ask a customer questions over email in advance of the demo to make sure you're making the best use of their time - just be specific. A few clarifying questions is fine, a 30 question survey is not.
 
-> **Examples of good discovery questions - this is not a script, just ideas!**
+> **Examples of good discovery questions**
 > - What is the problem? What is this problem affecting?
 > - What metric is impacted as a result of this? What metric would be improved as a result of PostHog?
 > - How important is this problem to the wider team?
@@ -98,6 +96,14 @@ If you can't identify anyone who has recently signed up to PostHog, then ask the
 
 If it's a solicited RFP, you're free to proceed so long as the opportunity is qualified as a whole and you carefully balance the level of effort required in the RFP against the opportunity for you & PostHog. Again, a 500 question RFP may not be worth it if they plan on spending <$20k for PostHog (a 50 question RFP may not even be worth it in this instance)! Use your best judgement, and it is generally still wise to timebox your effort.
 
+#### Bigger Opportunities at Bigger Companies
+
+When you're working a deal north of $100k at a larger company, the playbook shifts. Generally, expect to challenge their stated evaluation criteria early, as well as sell to multiple people and functions within the organization. You need to dig past the surface-level requirements they may list and get to the real decision drivers. Question the "why" and "how" behind their stated criteria, because committee-driven procurement processes can hide the actual priorities behind "just so" rubrics that can obscure the real reasons they will buy (or disqualify). 
+
+On the relationship side, you need a strategy for engaging their leadership and developing champions at multiple levels within the account. If a key leadership stakeholder goes dark, escalate to PostHog leadership to help re-engage. If needed, don't be afraid to translate PostHog titles to something they would understand (e.g. Generic Exec Person = COO). For deals this size, on-site presence can also matter — you should attempt to build relationships in person, not just over Zoom. 
+
+Lastly, take a prescriptive and consultative approach to their evaluation process. The larger the opportunity, the more proactive you need to be about controlling the process. Ask for help from your lead, your team, and in Slack. These opportunities take a team effort. 
+
 #### Startups
 
 If they're eligible for the [Startup Plan](/startups), route them to the application form and disqualify them as it's not an immediate opportunity (but we sincerely hope they grow into loyal PostHog customers). If their usage will burn through their credits quickly, you should feel free to switch their lead status to `Nurture` and keep close tabs on them. Per our [usual approach to sales](/handbook/growth/sales/overview), we want to make sure they're successful in this "high-use" scenario and are building with us for the long-term.
@@ -117,7 +123,6 @@ We often get requests for demos from leads or existing customers who are below o
 This makes the demo actually valuable and can be an opportunity for you to learn more and get some demo practice. You'll also find that 90% of these requesters never respond because they are either unable or unwilling to engage with the questions, which allows you to avoid the biggest time sinks.
 
 If you realize that they will be too small (<$20k) to go through our sales-led process and you are unable to get this information from them, you should route to [self-serve](/handbook/growth/sales/crm#self-serve-opportunity-record-type).
-
 
 ### 3. First call (30 minutes) - Discovery & initial demo
 
@@ -182,7 +187,7 @@ When engineers aren't on the call, your goal is to earn a second call with their
 
 #### General demo tips
 
-We have various slide templates - ask someone on the Sales team for an invite to our Pitch account. Use the deck as scaffolding, pulling out relevant slides. Do not spend the demo presenting a deck with an engineering team - most people at PostHog spend 90% of the demo call actually in product or talking to the customer about their needs. But sometimes, there is a legitimate need for a deck.
+We have various slide templates - ask someone on the Sales team for an invite to our Pitch account. Use the deck as scaffolding, pulling out relevant slides. **Do not spend the demo presenting a deck with an engineering team** - most people at PostHog spend 90% of the demo call actually in product or talking to the customer about their needs. But sometimes, there is a legitimate need for a deck.
 
 Before you demo, make sure there is enough data to properly showcase our features. If needed, you can use [Hogbot](https://github.com/PostHog/hogbot) to generate more synthetic data. This is built by the sales team for the sales team, so if you see anything you want to improve, don't hesitate to submit a PR!
 
@@ -247,11 +252,13 @@ By the end of either the 1st or 2nd call with a customer, you should have a defi
 3. **Authority** - Who will make the decision at the customer organization? Who holds the budget? 
 4. **Timeline** - When does the trial start? When are they looking to make a decision/have a contract in place?
 
+> It's really easy to convince yourself that you've got a well-qualified opportunity after a demo goes well.  Everybody has been laughing and having fun so they must love PostHog right?  You need to be more objective than that - ask the AI in the call recording to rate you on BANT qualification to see whether you actually got all of the information you need to confirm that a real opportunity exists here.  If you are missing any qualification information, don't be afraid to go back and ask your champion for additional context here.  It'll save you wasting a whole bunch of time helping a customer in an evaluation where they aren't serious about buying PostHog, and the inevitable **Closed - Lost** which comes as a result of that.
+
 ### 5. Product evaluation
 
-Once qualified, and if you think they are a good prospect for our sales-led process, your first priority is to try and get them into trial of PostHog with [a shared Slack channel](/handbook/growth/sales/slack-channels) as quickly as possible. If you close them, a shared Slack channel will also be their primary channel for support. Add the Pylon app to the channel and it will automate the support bot and channel description. React with a 🎫 to customer messages or tag `@support` to create a ticket in a thread. 
+Once qualified, and if you think they are a good prospect for our sales-led process, your first priority is to try and get them into trial of PostHog with [a shared Slack channel](/handbook/growth/sales/slack-channels) as quickly as possible. If you close them, a shared Slack channel will also be their primary channel for support. [Invite SupportHog to the channel](/handbook/growth/sales/slack-channels) so tickets can be created from Slack. React with a 🎫 to customer messages or mention `@SupportHog` to create a ticket in a thread. Generally it's better to seek forgiveness than ask permission for adding people to a Slack channel - use your judgement. 
 
-Some customers may wish to use MS Teams rather than Slack - we can sync our Slack with Teams via Pylon to do this. First you will need an MS Teams licence - ask Simon for one. Then, set up [a Slack channel](/handbook/growth/sales/slack-channels). Then, [follow the instructions here](https://docs.usepylon.com/pylon-docs/integrations/chat/microsoft-teams) to get set up. Before adding the customer into the channel, remember to test it on both sides to ensure the integration is working correctly.
+Some customers may wish to use MS Teams rather than Slack - SupportHog works in Teams too. See [Using MS Teams](/handbook/growth/sales/slack-channels#using-ms-teams) on the shared Slack channels page for how to get set up. Before adding the customer into the channel, remember to test it to ensure ticket creation is working correctly.
 
 You should then follow up with a standard email/Slack message that:
 
@@ -269,10 +276,10 @@ If the customer isn't super clear on how to articulate the success criteria then
 - Surveys: deploy a survey, view and analyze the results
 - Data warehouse: set up the warehouse, sync at least 1 data source or pull additional person data in to enrich an insight
 
-> The AE acts as the support person during this period and it's your opportunity to show them what working with you and PostHog will be like should they decide to become a paying customer.  You shouldn't just leave the customer to fend for themselves.
+> Don't be over-reliant on support during the evaluation.  As the AE, you should be highly focused on customers during their evaluation to maximize your chance of success.  We deliberately hire people we know customers will love working with, so now is your time to shine.
 
 1. Guide them on how to set up tracking depending on their app paying attention to common points of friction such as:
-   * [Anonymous vs Identified](/docs/product-analytics/identify#anonymous-and-identified-events) events.
+   * [Anonymous vs Identified](/docs/data/anonymous-vs-identified-events) events.
    * Tracking pageviews in [single page apps](/docs/libraries/js/features#manually-capturing-pageviews-and-pageleaves-in-single-page-apps).
    * Deploying a [reverse proxy](/docs/advanced/proxy).
 2. Guide them on creating insights either based on:
@@ -282,6 +289,8 @@ If the customer isn't super clear on how to articulate the success criteria then
 4. A week before the trial period ends have a wrap-up call to ensure that they have seen everything they need to see, and identify any last remaining areas you can help them with, and next steps after the trial ends.
 
 In an ideal world this involves multiple calls per week during the trial period so that you can build a trusted relationship with the customer, but don't force that if they prefer to use Slack/Email.
+
+> If non-technical people such as Product Managers, Marketing, etc. are involved we know from prior experience that the PostHog UI, while powerful, can be overwhelming, especially if they have used similar tools in the past.  You should be prepared to run multiple remote or in-person sessions with these people to ensure that they get what they need out of the evaluation. 
 
 We usually set up the following trials depending on likely contract size:
 
@@ -342,7 +351,7 @@ Here is minimum checklist of things that we find customers should know how to do
 
 Post-onboarding, you'll want to change gears to start thinking about [retention, expansion and/or cross-sell](/handbook/growth/sales/expansion-and-retention). 
 
-Simon and Charles review accounts every month to see if/when it makes sense to reassign accounts once they've closed. 
+Simon and Ben review accounts every month to see if/when it makes sense to reassign accounts once they've closed. 
 
 ### 7. Closed - lost
 

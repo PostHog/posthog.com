@@ -8,7 +8,6 @@ import OSTable from 'components/OSTable'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { IconCheck, IconLogomark } from '@posthog/icons'
 import InstallationPlatforms from '../../../../contents/docs/error-tracking/installation/_snippets/installation-platforms'
-import Pricing from '../../../components/Pricing/PricingCalculator/SingleProduct'
 import { IconRewindPlay, IconTrends, IconToggle, IconUser, IconLlmAnalytics, IconDatabase } from '@posthog/icons'
 import Card from 'components/Card'
 import Link from 'components/Link'
@@ -41,10 +40,10 @@ const phFeatures = [
         url: '/docs/product-analytics/identify',
     },
     {
-        title: 'LLM analytics',
+        title: 'AI Observability',
         description: 'Debug LLM calls and AI generations with full conversation traces and built-in error tracking.',
         icon: <IconLlmAnalytics className="text-[#681291]" />,
-        url: '/docs/llm-analytics',
+        url: '/docs/ai-observability',
     },
     {
         title: 'Data warehouse',
@@ -149,24 +148,6 @@ export const Content = () => {
             </section>
 
             <section className="mb-8">
-                <h2 className="mb-4">Pricing</h2>
-                <p>
-                    PostHog error tracking comes with a generous free tier and transparent, usage-based pricing. Our
-                    large free tier means more than 90% of companies <em>use PostHog for free</em>.
-                </p>
-                <p>
-                    No credit card is required to get started. You can also set billing limits to avoid any surprise
-                    charges.
-                </p>
-
-                <Pricing productType="error_tracking" />
-
-                <p>
-                    See our <a href="/pricing">pricing page</a> for more details.
-                </p>
-            </section>
-
-            <section className="mb-8">
                 <h2 className="mb-4">Next steps</h2>
                 <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid grid-cols-1 @md:grid-cols-3">
                     <ResourceItem
@@ -207,8 +188,7 @@ const ErrorTracking: React.FC = () => {
                         buttonText="Installation guide"
                         buttonLink="/docs/error-tracking/start-here"
                         imageColumnClasses="mt-4 md:-mt-8"
-                        imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/error_f2df714c47.png"
-                        imageClasses="max-h-48 md:max-h-64"
+                        imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/ERROR_TRACKING_2f807c123b.png"
                     />
                 </section>
 

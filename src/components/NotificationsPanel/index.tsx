@@ -1,11 +1,9 @@
 import React, { useEffect, useRef } from 'react'
 import { IconX } from '@posthog/icons'
 import { useUser } from 'hooks/useUser'
-import Link from 'components/Link'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
-import Tooltip from 'components/Tooltip'
 import { navigate } from 'gatsby'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -33,22 +31,43 @@ interface QuestionProps {
     replies: Array<{ updatedAt: string }>
     date: string
     onItemClick: (url: string) => void
+    onDismiss: () => void
+}
+
+interface AchievementProps {
+    id: number
+    title: string
+    points: number
+    date: string
+    onItemClick: (url: string) => void
+    onDismiss: () => void
 }
 
 interface NotificationItem {
+    id: number
     date: string
     question?: QuestionProps
+    achievement?: AchievementProps
+    context?: {
+        count: number | string
+        title: string
+        excerpt: string
+        date: string
+        url: string
+    }
 }
 
 const Notification = ({ url, title, excerpt, date, count, onDismiss, onItemClick }: NotificationProps) => {
     const handleClick = (e: React.MouseEvent) => {
         e.preventDefault()
+        onDismiss()
         onItemClick(url)
     }
 
     return (
         <li>
             <button onClick={handleClick} className="w-full text-left p-2 hover:bg-accent rounded active:scale-[0.98]">
+                {excerpt && <div className="text-xs line-clamp-1 text-muted">{excerpt}</div>}
                 <div className="text-sm line-clamp-1 font-semibold">{title}</div>
                 <div className="flex-shrink-0 text-sm font-normal text-right flex items-center space-x-2">
                     <div className="flex items-center space-x-2">
@@ -63,16 +82,8 @@ const Notification = ({ url, title, excerpt, date, count, onDismiss, onItemClick
     )
 }
 
-const Question = ({ id, subject, activeAt, permalink, replies, date, onItemClick }: QuestionProps) => {
-    const { notifications, setNotifications } = useUser()
+const Question = ({ subject, activeAt, permalink, replies, date, onItemClick, onDismiss }: QuestionProps) => {
     const numberOfNewReplies = replies.filter((reply) => dayjs(reply.updatedAt).isSameOrAfter(dayjs(date))).length
-
-    const dismiss = async () => {
-        const newNotifications = notifications.filter(
-            (notification: NotificationItem) => notification.question?.id !== id
-        )
-        setNotifications(newNotifications)
-    }
 
     return (
         <Notification
@@ -81,16 +92,44 @@ const Question = ({ id, subject, activeAt, permalink, replies, date, onItemClick
             date={activeAt}
             url={`/questions/${permalink}`}
             count={`${numberOfNewReplies} new repl${numberOfNewReplies === 1 ? 'y' : 'ies'}`}
-            onDismiss={dismiss}
+            onDismiss={onDismiss}
+            onItemClick={onItemClick}
+        />
+    )
+}
+
+const Achievement = ({ date, title, points, onItemClick, onDismiss }: AchievementProps) => {
+    const { user } = useUser()
+
+    return (
+        <Notification
+            url={`/community/profiles/${user?.profile?.id}?tab=points`}
+            title={title}
+            excerpt={'Achievement'}
+            date={date}
+            count={`${points} points`}
+            onDismiss={onDismiss}
             onItemClick={onItemClick}
         />
     )
 }
 
 export default function NotificationsPanel() {
-    const { notifications } = useUser()
-    const { isNotificationsPanelOpen, setIsNotificationsPanelOpen } = useApp()
+    const { notifications, setNotifications } = useUser()
+    const { isNotificationsPanelOpen, setIsNotificationsPanelOpen, taskbarHeight, taskbarRef } = useApp()
     const panelRef = useRef<HTMLDivElement>(null)
+
+    // Match the app-container padding (`p-2`) and taskbar offset used by app windows
+    const taskbarRect = taskbarRef.current?.getBoundingClientRect()
+    const padding = taskbarRect?.left ?? 8
+    const panelStyle =
+        typeof window === 'undefined'
+            ? undefined
+            : {
+                  top: padding,
+                  right: padding,
+                  height: window.innerHeight - padding - (taskbarRect?.top ?? padding),
+              }
 
     const closeNotificationsPanel = () => {
         setIsNotificationsPanelOpen(false)
@@ -99,6 +138,11 @@ export default function NotificationsPanel() {
     const handleItemClick = (url: string) => {
         closeNotificationsPanel()
         navigate(url, { state: { newWindow: true } })
+    }
+
+    const dismiss = async (id: number) => {
+        const newNotifications = notifications.filter((notification: NotificationItem) => notification.id !== id)
+        setNotifications(newNotifications)
     }
 
     useEffect(() => {
@@ -130,7 +174,8 @@ export default function NotificationsPanel() {
                             translateX: '100%',
                         }}
                         transition={{ duration: 0.3, type: 'tween' }}
-                        className={`fixed top-[calc(37px+1rem)] right-4 h-[calc(100vh-2rem-37px)] w-96 bg-primary border border-primary rounded shadow-xl z-50 text-primary`}
+                        style={panelStyle}
+                        className={`fixed w-96 max-w-[calc(100vw-1rem)] bg-primary border border-primary rounded shadow-xl z-50 text-primary`}
                     >
                         <div className="h-full flex flex-col">
                             <div className="flex items-center justify-between px-4 py-2 border-b border-primary">
@@ -157,6 +202,33 @@ export default function NotificationsPanel() {
                                                             {...notification.question}
                                                             date={notification.date}
                                                             onItemClick={handleItemClick}
+                                                            onDismiss={() => dismiss(notification.id)}
+                                                        />
+                                                    )
+                                                }
+                                                if (notification.achievement) {
+                                                    return (
+                                                        <Achievement
+                                                            key={i}
+                                                            {...notification.achievement}
+                                                            date={notification.date}
+                                                            onItemClick={handleItemClick}
+                                                            onDismiss={() => dismiss(notification.id)}
+                                                        />
+                                                    )
+                                                }
+                                                if (notification.context) {
+                                                    const { count, title, excerpt, date, url } = notification.context
+                                                    return (
+                                                        <Notification
+                                                            key={i}
+                                                            count={String(count)}
+                                                            title={title}
+                                                            excerpt={excerpt}
+                                                            date={date}
+                                                            onItemClick={handleItemClick}
+                                                            url={url}
+                                                            onDismiss={() => dismiss(notification.id)}
                                                         />
                                                     )
                                                 }

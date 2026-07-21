@@ -23,7 +23,6 @@ import BookingTemplate from 'components/Presentation/Templates/BookingTemplate'
 import { DotLottiePlayer } from '@dotlottie/react-player'
 import Logos from 'components/Presentation/Utilities/Logos'
 import ProgressBar from 'components/ProgressBar'
-
 const Loading = () => {
     const lottieRef = useRef(null)
     return (
@@ -425,7 +424,7 @@ const CustomPresentationPage = () => {
             >
                 <div
                     data-scheme="primary"
-                    className="bg-accent grid grid-cols-1 gap-2 [&>div:first-child_>span]:hidden p-2 @md:p-4"
+                    className="bg-accent px-2 @md:px-4 grid grid-cols-1 gap-2 [&>div:first-child_>span]:hidden py-2 @md:py-4"
                 >
                     {slides.map((slide, index) => (
                         <div

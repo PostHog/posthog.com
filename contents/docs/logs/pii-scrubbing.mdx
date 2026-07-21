@@ -1,0 +1,80 @@
+---
+title: PII scrubbing
+---
+
+PostHog can scrub common sensitive patterns out of your Logs at ingestion, before they're written to storage. This is an opt-in, best-effort safety net – the most reliable way to keep PII out of your Logs is to not send it from the client in the first place.
+
+## Enabling PII scrubbing
+
+Go to **Project settings → Logs** and turn on **Scrub PII in Logs at ingestion**. Once enabled, scrubbing runs on every log that comes in. It does not apply retroactively to Logs that have already been stored.
+
+## What gets scrubbed
+
+Scrubbing runs on the log message body, attributes, and resource attributes. When a match is found, the matched text is replaced with `{{REDACTED}}`.
+
+### Pattern matching
+
+These patterns are detected anywhere in log text:
+
+| Pattern | Example input | Stored as |
+|---------|---------------|-----------|
+| Email addresses | `user@example.com signed up` | `{{REDACTED}} signed up` |
+| Bearer tokens | `Authorization: Bearer eyJhbGciOi...` | `Authorization: Bearer {{REDACTED}}` |
+| Stripe secret keys | `using sk_live_abc123...xyz` | `using {{REDACTED}}` |
+
+### Sensitive attribute keys
+
+If an attribute or resource attribute key contains any of these strings (case-insensitive), the **entire value** is replaced with `{{REDACTED}}`:
+
+`password`, `secret`, `token`, `authorization`, `cookie`, `credential`, `apikey`, `api_key`, `access_token`, `refresh_token`, `bearer`, `email`
+
+For example, an attribute `user.email = "alice@example.com"` becomes `user.email = "{{REDACTED}}"`, and `x-api-key = "..."` is fully redacted regardless of its value.
+
+## Examples
+
+**Log body with an email:**
+
+```
+Input:  "Password reset requested for alice@example.com"
+Stored: "Password reset requested for {{REDACTED}}"
+```
+
+**Log body with a Bearer token:**
+
+```
+Input:  "Rejected request: Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.abc.def"
+Stored: "Rejected request: Authorization: Bearer {{REDACTED}}"
+```
+
+**Attributes:**
+
+```
+Input:  { user_id: "u_123", email: "alice@example.com", api_key: "sk_live_..." }
+Stored: { user_id: "u_123", email: "{{REDACTED}}", api_key: "{{REDACTED}}" }
+```
+
+**Stripe key inside a message:**
+
+```
+Input:  "Failed to charge card with sk_live_abc123def456ghi789jkl0"
+Stored: "Failed to charge card with {{REDACTED}}"
+```
+
+## This is best-effort
+
+Scrubbing is a safety net, not a guarantee. It will miss things:
+
+- **It only matches known patterns.** Emails, Bearer-style tokens, and Stripe secret keys are covered. Credit card numbers, phone numbers, national IDs, addresses, names, and custom token formats are **not** detected.
+- **It doesn't walk JSON structure in the log body.** If you log a serialized JSON blob, patterns inside the string are still matched, but sensitive values hidden behind numeric or boolean fields (e.g. `{"password": 12345}`) are not redacted.
+- **Redaction is permanent.** Once a log is written with `{{REDACTED}}`, the original value is gone – this is not encryption, and there's no way to recover the original text.
+- **Existing Logs are not retroactively scrubbed.** Only Logs ingested after you enable the setting are processed.
+
+### The best defense is not sending PII
+
+Do not rely on ingestion-time scrubbing as your primary control. The most reliable way to keep sensitive data out of your Logs is to not log it in the first place:
+
+- **Log identifiers, not contents.** Log a `user_id` instead of an email; a `card_token` instead of a PAN.
+- **Redact on the client.** Filter or mask sensitive fields in your application before handing them to your logger.
+- **Review what your logger captures automatically.** Some frameworks log full request/response bodies or headers by default – strip `Authorization`, `Cookie`, and similar headers at the source.
+
+See our [logging best practices guide](/docs/logs/best-practices) for more on structured logging patterns that help keep PII out of your Logs.

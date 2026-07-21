@@ -42,9 +42,9 @@ Sales at PostHog isn't like most other software companies! These are some of the
 
  - Ask team members in your region to be invited to some customer calls so you can gain an understanding of how we work with customers.
  - Check out some Buildbetter calls and add yourself to a bunch of Slack channels - get immersed in what our customers are saying.
- - Learn and practise a [demo](https://youtu.be/2jQco8hEvTI) of PostHog.
+ - Learn and practise a [demo](https://youtu.be/1FZji2L-LmM) of PostHog.
  - Read all of the Sales section in the Handbook, and update it as you learn more.
- - Meet with [Charles](/community/profiles/28625), the exec responsible for Sales.
+ - Meet with [Ben](/community/profiles/30205), the lead responsible for Sales, CS, and Onboarding.
  - Meet with [Simon](/community/profiles/28895), Sales Lead
  - PostHog integration exercise - by the end of week 1:
    - Find/build a blank app which doesn’t yet have PostHog integrated.  You should be able to vibe code something simple with React using Cursor or Lovable.dev
@@ -109,9 +109,9 @@ By the end of month 3:
 
  - Ask team members in your region to be invited to some customer calls so you can gain an understanding of how we work with customers.
  - Check out some Buildbetter calls and add yourself to a bunch of Slack channels - get immersed in what our customers are saying.
- - Learn and practise a [demo](https://youtu.be/2jQco8hEvTI) of PostHog.
+ - Learn and practise a [demo](https://youtu.be/1FZji2L-LmM) of PostHog.
  - Read all of the Sales section in the Handbook, and update it as you learn more.
- - Meet with [Charles](/community/profiles/28625), the exec responsible for Sales.
+ - Meet with [Ben](/community/profiles/30205), the lead responsible for Sales, CS, and Onboarding.
  - Meet with [Simon](/community/profiles/28895), Sales Lead
  - PostHog integration exercise - by the end of week 1:
    - Find/build a blank app which doesn’t yet have PostHog integrated.  You should be able to vibe code something simple with React using Cursor or Lovable.dev
@@ -176,13 +176,21 @@ In addition to following the guidance in the [spending money](/handbook/people/s
 
 ## Alerting setup (for team leads)
 
-We have certain automations in Vitally and Zapier that your team lead needs to add you to. Please ask your team lead to add you.
+We have certain automations in Vitally that your team lead needs to add you to. Please ask your team lead to add you.
 
 - <PrivateLink url="https://posthog.vitally-eu.io/settings/playbooks/81d5c249-1e8f-4dfd-98b2-01e8ad904851"> Vitally name trait playbook </PrivateLink>: create a new branch that matches assigned AE to new team member. In this branch, add action to update account trait `AE name` to name of the new team member. This is used to populate account owner info in tickets created by customers we own, so support knows who to reach out to.
-- <PrivateLink url="https://zapier.com/editor/307641999/published?conversationId=fa1b74c7-2f7a-476c-a9d6-fefb4ba199eb"> Failed payment alerting </PrivateLink>: in step 5 lookup table, add new team member's email and Slack member ID (open profile, click three dots, copy member ID)
-- <PrivateLink url="https://zapier.com/editor/256779675/published?conversationId=5e6e7f58-89b3-434d-bc1f-35ce52756088"> Annual plan credit alerting </PrivateLink>: in step 8 look up table, add new team member's email and Slack member ID
 
 ## New hire frequently asked questions
+
+### How does my quota work during my ramp period?
+
+Your first three months of commission are paid at 100% fixed OTE. This will be calculated based on the date you start. If you start before the 15th of a month, you will get 100% fixed OTE for that month and two of the subsequent months. For example, if you start on Jan 13th, you will get 100% fixed OTE for Jan, Feb & Mar. If you start _on_ Jan 17th, you would get two months of 100% fixed OTE for Q1 and one month of 100% fixed OTE for Q2 in addition to two months of your quota'ed commission.
+
+<img
+    src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/shapes_at_26_01_14_12_45_06_b0c13c36a5.png"
+    alt="New hire quota ramp visual"
+    className="my-6 rounded-md shadow-md"
+/>
 
 ### How does support work at PostHog?
 
@@ -192,6 +200,7 @@ We have certain automations in Vitally and Zapier that your team lead needs to a
 ### Can I login as a customer?
 
 - Visit the /admin/ endpoint on the cloud they are on.  You can then search for them via email and log in.  Be careful clicking around here as you can accidentally delete a person/organization! You need to get their permission first unless it's an emergency, i.e. to resolve an incident.
+- If you need to connect the PostHog MCP server while logged in as them, follow the [MCP impersonation steps](/handbook/cs-and-onboarding/handling-customer-issues#using-the-mcp-server-while-impersonating). See our [impersonation policy](/handbook/company/security#impersonating-users) for the thorough version.
 
 ### Are there any influential folks in our space I should read/listen to?
 

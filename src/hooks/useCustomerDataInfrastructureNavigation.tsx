@@ -12,11 +12,19 @@ export const customerDataInfrastructureNav = {
             url: '/data-stack',
         },
         {
+            name: 'Is PostHog warehouse native?',
+            url: '/data-stack/warehouse-native',
+        },
+        {
             name: 'Data tools',
         },
         {
             name: 'Managed DuckDB warehouse',
             url: '/data-stack/managed-warehouse',
+        },
+        {
+            name: 'PostHog AI',
+            url: '/data-stack/posthog-ai',
         },
         {
             name: 'Data sources & import (ELT)',

@@ -13,7 +13,7 @@
 | File | Type | Characteristics | Status |
 |------|------|----------------|--------|
 | `values.md` | Simple Markdown | Basic markdown with headings, lists, bold text | ✅ Clean |
-| `releasing-as-beta.md` | MDX with Components | `<CalloutBox>`, `<CloudinaryImage>` | ✅ Clean |
+| `releasing-new-products-and-features.md` | MDX with Components | `<CalloutBox>`, `<CloudinaryImage>` | ✅ Clean |
 | `docs-style-guide.mdx` | Heavy MDX | Multiple components, tables, inline code | ✅ Clean |
 | `ownership.md` | Interactive MDX | `<details>`, `<summary>`, `<TeamMember>` | ✅ Clean |
 | `product-comparisons.mdx` | Complex Components | `<OSTabs>`, `<ProductComparisonTable>` | ✅ Clean |
