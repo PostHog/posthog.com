@@ -70,8 +70,8 @@ The client keeps a buffer in-memory (see [how the buffer works](#how-the-trigger
 
 ## With Event trigger conditions
 
-Since posthog-js version 1.186.0, you can opt to only start recordings once your user emits a particular event. After the event is captured, the recording continues even after they leave the matching page.
-The client keeps a buffer in-memory (see [how the buffer works](#how-the-trigger-buffer-works) below), so you'll still be able to see activity leading up to that event.
+You can opt to only start recordings once your user emits a particular event. After the event is captured, the recording continues for the rest of the session.
+On the web, the client keeps a buffer in-memory (see [how the buffer works](#how-the-trigger-buffer-works) below), so you'll still be able to see activity leading up to that event.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/event_trigger_light_21a531edbb.png"
@@ -79,6 +79,16 @@ The client keeps a buffer in-memory (see [how the buffer works](#how-the-trigger
   alt="Adding event trigger to control session recordings"
   classes="rounded"
 />
+
+Event triggers are supported on the following SDKs:
+
+- **Web** - posthog-js 1.186.0+
+- **iOS** - 3.48.0+
+- **Android** - 3.40.1+
+- **React Native** - 4.52.0+
+- **Flutter** - 5.25.0+
+
+> On mobile platforms, there's no URL or in-memory pre-buffer. Recording starts when the matching event is captured and continues for the rest of the session. A new session re-arms the trigger and requires a fresh matching event.
 
 ### Triggering on exceptions
 
@@ -113,7 +123,7 @@ This approach balances providing useful context with browser performance — kee
 You can select a [feature flag](/docs/feature-flags) to control whether to record sessions or not. Recordings will only be collected for users when the flag is enabled for them.
 
 1. [Create a boolean or multiple variant flag](/docs/feature-flags/creating-feature-flags) that determines whether to record sessions or not.
-2. Go to the [replay ingestion settings page](https://us.posthog.com/replay/settings#selectedSetting=replay-triggers).
+2. Go to the [replay ingestion settings page](https://app.posthog.com/replay/settings#selectedSetting=replay-triggers).
 3. Link your newly created flag in the **Enable recordings using feature flag**.
 
 <ProductScreenshot
@@ -125,7 +135,7 @@ You can select a [feature flag](/docs/feature-flags) to control whether to recor
 
 ## Sampling
 
-Sampling enables you to record a percentage of all sessions. To set a sampling rate, go to the [replay ingestion settings page](https://us.posthog.com/replay/settings#selectedSetting=replay-triggers).
+Sampling enables you to record a percentage of all sessions. To set a sampling rate, go to the [replay ingestion settings page](https://app.posthog.com/replay/settings#selectedSetting=replay-triggers).
 
 Sampling is supported on the following SDKs:
 
@@ -133,6 +143,7 @@ Sampling is supported on the following SDKs:
 - **Android** - 3.34.0+
 - **iOS** - 3.42.0+
 - **React Native** - 4.37.0+
+- **Flutter** - 5.26.0+
 
 <ProductScreenshot
   imageLight={ImgSampleConfigLight}
@@ -171,11 +182,21 @@ You'll capture 20% of every session, and any session that has an exception event
 
 You'll capture 20% of any session on the checkout page that has an exception event.
 
+<CalloutBox icon="IconWarning" title="100% sampling with ANY matching records every session" type="caution">
+
+If you use "any" matching with 100% sampling and other conditions (URL triggers, event triggers, or feature flags), the 100% sampling causes every session to be recorded. Your other conditions become ineffective because the sampling condition alone matches every session.
+
+To fix this, either lower your sample rate or switch to "all" matching.
+
+</CalloutBox>
+
 ## Trigger groups
 
 Trigger groups are a more flexible way to configure recording triggers. Each trigger group can have its own combination of URL triggers, event triggers, feature flags, sample rate, minimum duration, and match type (ANY/ALL).
 
 Multiple trigger groups can be active at the same time. A session is recorded if it matches **any** of your trigger groups. Within a group, conditions are combined based on that group's match type.
+
+> **Note:** Creating, editing, and deleting trigger groups requires project admin permissions. Non-admin project members can view trigger group configurations but cannot modify them.
 
 For example, you could create:
 
@@ -184,6 +205,8 @@ For example, you could create:
 - A group that records any session where an exception event occurs
 
 To create a trigger group, go to the [replay ingestion settings page](https://app.posthog.com/replay/settings#selectedSetting=replay-triggers) and click **Add** in the **Trigger groups** section.
+
+If you delete your last trigger group, PostHog automatically replaces it with a default "Record all sessions" group at 100% sampling with no conditions. This keeps your project on trigger groups rather than reverting to legacy recording settings.
 
 ### Migrating from legacy trigger settings
 
@@ -205,13 +228,14 @@ You can edit the groups after creating them.
 
 ## Minimum duration
 
-In your [replay ingestion settings](https://us.posthog.com/settings/project-replay#replay-ingestion), you can set a minimum duration for sessions to be recorded.
+In your [replay ingestion settings](https://app.posthog.com/settings/project-replay#replay-ingestion), you can set a minimum duration for sessions to be recorded.
 
 Supported on the following SDKs:
 
 - **Web:** posthog-js 1.291.0+
 - **iOS:** 3.53.0+
 - **Android:** 3.44.0+
+- **React Native:** 4.52.0+
 - **Flutter:** 5.24.3+
 
 <ProductScreenshot
@@ -277,9 +301,9 @@ This mode is **more accurate** for filtering out short sessions, especially on s
 - **Use legacy mode** if you want to capture as much session data as possible and are okay with potentially missing early parts of sessions after page refreshes
 - **Use strict mode** if you want to ensure you only record sessions where users actually spend the minimum duration on a single page, accepting that you may miss more bouncing users
 
-### iOS, Android, and Flutter behavior
+### Mobile behavior
 
-On iOS, Android, and Flutter, minimum duration is enforced using **buffer length**, similar to web strict mode:
+On mobile, minimum duration is enforced using **buffer length**, similar to web strict mode:
 
 - Snapshots are buffered, and PostHog checks the duration of buffered replay data (from the oldest to newest buffered snapshot)
 - Recording starts sending only after that buffered duration reaches the configured minimum duration

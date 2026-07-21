@@ -1,0 +1,112 @@
+---
+title: Roblox error tracking installation
+platformLogo: roblox
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<Steps>
+
+<Step title="Install the Roblox SDK" badge="required">
+
+PostHog is available for Roblox through [Wally](https://wally.run) or as a model file you import in Studio.
+
+Via Wally, add the dependency to your `wally.toml`, run `wally install`, and map the package into `ReplicatedStorage`:
+
+```toml
+[dependencies]
+PostHog = "posthog/posthog-roblox@0.1.0"
+```
+
+You can also download the latest `posthog-roblox.rbxm` from the [releases page](https://github.com/PostHog/posthog-roblox/releases) and insert it into `ReplicatedStorage` in Studio. Either way you should end up with `ReplicatedStorage > PostHog`.
+
+Make sure HTTP requests are enabled for your experience: **Game Settings > Security > Allow HTTP Requests**.
+
+</Step>
+
+<Step title="Configure PostHog" badge="required">
+
+Initialize PostHog once from a server `Script` (for example in `ServerScriptService`), keeping error capture enabled:
+
+```lua
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local PostHog = require(ReplicatedStorage:WaitForChild("PostHog"))
+
+PostHog:Init({
+    apiKey = "<ph_project_token>",
+    host = "<ph_client_api_host>",
+    captureErrors = true,
+    errorDebounceSeconds = 1,
+})
+```
+
+You can find your project token and instance address in the [project settings](https://app.posthog.com/project/settings) page in PostHog.
+
+</Step>
+
+<Step title="Capture exceptions" badge="required">
+
+The Roblox SDK captures exceptions automatically by default. On the server it listens to `ScriptContext.Error`; requiring the module from a `LocalScript` captures unhandled client errors and relays them to the server.
+
+Captured events include the error message, the stack trace when available, and SDK metadata.
+
+For handled errors, call `CaptureException` manually with a subject, message, and optional trace and properties:
+
+```lua
+local ok, err = pcall(function()
+    saveGame(player)
+end)
+
+if not ok then
+    PostHog:CaptureException(player, err, debug.traceback(), {
+        flow = "save_game",
+    })
+end
+```
+
+<CalloutBox icon="IconInfo" title="Identified users" type="fyi">
+
+Server events are already attributed to the player you pass as the subject (by their `UserId`), so exceptions are linked to known users in PostHog automatically.
+
+</CalloutBox>
+
+</Step>
+
+<Step title="Configure error tracking options" badge="optional">
+
+| Option | Type | Default | Description |
+| --- | --- | --- | --- |
+| `captureErrors` | boolean | `true` | Enables automatic exception capture. |
+| `errorDebounceSeconds` | number | `1` | Minimum seconds between automatic server error captures. |
+
+To disable automatic exception capture:
+
+```lua
+PostHog:Init({
+    apiKey = "<ph_project_token>",
+    captureErrors = false,
+})
+```
+
+</Step>
+
+<Step checkpoint title="Verify error tracking" badge="recommended">
+
+Trigger a test exception and confirm it appears in the [Error tracking](https://app.posthog.com/error_tracking) tab.
+
+```lua
+PostHog:CaptureException(nil, "Test exception from Roblox", debug.traceback())
+PostHog:Flush()
+```
+
+To test automatic capture, raise an unhandled error from a server `Script`:
+
+```lua
+error("Automatic test exception from Roblox")
+```
+
+</Step>
+
+</Steps>

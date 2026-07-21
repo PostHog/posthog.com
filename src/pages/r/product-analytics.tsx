@@ -9,6 +9,7 @@ import List from 'components/List'
 import Link from 'components/Link'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { SingleCodeBlock } from 'components/CodeBlock'
+import PlatformInstall from 'components/PlatformInstall'
 import WizardCTA from 'components/WizardCTA'
 import WistiaEmbed from 'components/WistiaEmbed'
 import usePlatformList from 'hooks/docs/usePlatformList'
@@ -38,6 +39,7 @@ export default function ProductAnalyticsLanding(): JSX.Element {
     const [showMore, setShowMore] = useState(false)
     const [isIdle, setIsIdle] = useState(false)
     const [openQuestion, setOpenQuestion] = useState<number | null>(null)
+    const [isCopied, setIsCopied] = useState(false)
 
     const allPlatforms = usePlatformList('docs/product-analytics/installation', 'product analytics installation')
     const sortedPlatforms = useMemo(() => {
@@ -96,14 +98,19 @@ export default function ProductAnalyticsLanding(): JSX.Element {
                             tools you ship with. No dashboard spelunking required.
                         </p>
                         <div className="flex flex-wrap gap-2 mb-6">
-                            <CallToAction type="primary" size="md" to="https://us.posthog.com/signup">
+                            <CallToAction type="primary" size="md" to="https://app.posthog.com/signup">
                                 Get started free
                             </CallToAction>
                             <CallToAction
                                 type="secondary"
                                 size="md"
-                                to="/docs/model-context-protocol"
-                                state={{ newWindow: true }}
+                                onClick={() => {
+                                    const el = document.getElementById('quest-item-analyze-with-mcp-and-ai')
+                                    if (el) {
+                                        window.history.pushState(null, '', '#quest-item-analyze-with-mcp-and-ai')
+                                        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                                    }
+                                }}
                             >
                                 Install MCP
                             </CallToAction>
@@ -205,7 +212,7 @@ export default function ProductAnalyticsLanding(): JSX.Element {
                             </button>
 
                             <div className="mt-4">
-                                <CallToAction type="primary" size="md" to="https://us.posthog.com/signup">
+                                <CallToAction type="primary" size="md" to="https://app.posthog.com/signup">
                                     Get started free
                                 </CallToAction>
                             </div>
@@ -227,9 +234,7 @@ export default function ProductAnalyticsLanding(): JSX.Element {
 
                             <h3>Install in 30 seconds</h3>
 
-                            <SingleCodeBlock language="bash" showAskAI={false}>
-                                npx @posthog/wizard mcp add
-                            </SingleCodeBlock>
+                            <PlatformInstall variant="inline" command="mcp add" slim />
 
                             <h3>Try prompts like</h3>
 
@@ -300,10 +305,13 @@ export default function ProductAnalyticsLanding(): JSX.Element {
                                 <CallToAction
                                     type="secondary"
                                     size="md"
-                                    to="/docs/model-context-protocol"
-                                    state={{ newWindow: true }}
+                                    onClick={() => {
+                                        navigator.clipboard.writeText('npx @posthog/wizard mcp add')
+                                        setIsCopied(true)
+                                        setTimeout(() => setIsCopied(false), 2500)
+                                    }}
                                 >
-                                    Install MCP
+                                    {isCopied ? 'npx command copied! 🚀' : 'Install MCP'}
                                 </CallToAction>
                             </div>
                         </QuestLogItem>
@@ -326,7 +334,7 @@ export default function ProductAnalyticsLanding(): JSX.Element {
                             </ul>
 
                             <div className="mt-4">
-                                <CallToAction type="primary" size="md" to="https://us.posthog.com/signup">
+                                <CallToAction type="primary" size="md" to="https://app.posthog.com/signup">
                                     Try it yourself — free
                                 </CallToAction>
                             </div>
@@ -496,7 +504,7 @@ export default function ProductAnalyticsLanding(): JSX.Element {
                             />
 
                             <div className="mt-4">
-                                <CallToAction type="primary" size="md" to="https://us.posthog.com/signup">
+                                <CallToAction type="primary" size="md" to="https://app.posthog.com/signup">
                                     Get started free
                                 </CallToAction>
                             </div>
@@ -592,7 +600,7 @@ export default function ProductAnalyticsLanding(): JSX.Element {
                             </div>
 
                             <div className="mt-6">
-                                <CallToAction type="primary" size="md" to="https://us.posthog.com/signup">
+                                <CallToAction type="primary" size="md" to="https://app.posthog.com/signup">
                                     Get started free
                                 </CallToAction>
                             </div>
@@ -629,7 +637,7 @@ export default function ProductAnalyticsLanding(): JSX.Element {
                             <p>That's it! You're ready to start integrating.</p>
 
                             <div className="flex flex-wrap gap-2 mt-4">
-                                <CallToAction type="primary" size="md" to="https://us.posthog.com/signup">
+                                <CallToAction type="primary" size="md" to="https://app.posthog.com/signup">
                                     Get started free
                                 </CallToAction>
                                 <CallToAction

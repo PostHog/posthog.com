@@ -1,19 +1,49 @@
 ---
-title: Product announcements
+title: Product releases & launches
 sidebar: Handbook
 showTitle: true
 ---
 
-> **Have something you want to announce?** Let the Marketing team know! If it's an iterative update, you can also demo it in the all-hands, or post in the #tell-posthog-anything Slack channel. 
+> Have something you want to announce? Let the Marketing team know in `#team-marketing`! If it's an iterative update, you can also demo it in the all-hands, or post in `#tell-posthog-anything`. 
 
-Product marketers take responsibility for coordinating and publicizing news about PostHog, including product announcements. We also help with [incident](/handbook/engineering/operations/incidents) and [maintenance announcements](/handbook/marketing/product-announcements#announcing-scheduled-maintenance), if needed. 
+Product marketers take responsibility for coordinating and publicizing news about PostHog, including product launches. We also help with [incident](/handbook/engineering/operations/incidents) and [maintenance announcements](/handbook/marketing/product-announcements#announcing-scheduled-maintenance), if needed. 
+
+## Releases vs. launches
+
+The word "launch" gets used to mean a dozen different things, which creates confusion about who owns what. So we split shipping something new into two distinct moments, with two different owners:
+
+- **A release** is when a product or feature becomes available to existing users for the first time. This is the **product team’s** responsibility. The PM or team lead drives it, using [their own release checklist](/handbook/product/releasing-new-products-and-features). A release can be gradual, targeted, or fully open.
+- **A launch** gets a product in front of existing and new people – potentially millions who've never heard of us. This is led by **marketing** with the product marketer working from the launch checklist below. If there is disagreement within a team about whether something is ready to launch, that team’s lead should make the decision - it’s either on or it’s off (“we want to launch, but not yet” is off). 
+
+Where we can, releases and launches should happen together, but they don't have to. If pricing, the feature set, or even the name is still moving right up until the day before release, it makes no sense to build and then rebuild the product page, the video, and the campaign around a moving target. In those cases it's completely fine for the launch to follow immediately after the release, once the details are locked. **Timing depends on how certain we are about what we're shipping.** The more settled it is, the tighter the two can be coupled.
+
+### People involved with releases & launches
+
+Releases and launches involve lots of moving pieces. It's helpful to be very specific about who is responsible for what, so you don't waste time figuring this stuff out:
+
+- Product team lead – product readiness for launch, flag setup, and stability.
+- PM – pricing and packaging readiness, building the target cohort.
+- PMM – go-to-market readiness, launch messaging, product page, and working with other teams on campaign assets (website, video, social, editorial, paid ads).
+    
+If you are one of these people, you can give feedback to each but you shouldn't block decisions not in your lane. For example, the team lead can say the product is not ready, but should not block a the content of an email. Similarly, marketing can decide what the product page says, but should not block a pricing decision. 
+
+### How we launch: rolling, not big bang
+
+You'll see companies save everything up for a single, coordinated, big-bang moment. That's not us, and it's a deliberate choice.
+
+Our style is a rolling one: a smallish launch, followed by shipping lots of stuff the moment it's ready. This fits how our [small teams](/handbook/company/small-teams) actually work – they move independently and don't wait for a company-wide launch train to leave the station. The alternative means more coordination, more launch meetings, and more waiting, and we don't think the payoff is worth it.
+
+It's easy to look at what competitors post on X and feel like we should be slicker, but we pay far more attention to that stuff than the wider world does. Look at the actual numbers rather than the vibes: on a comparable launch, we tend to massively outscore peers on release (we simply have far more users) _and_ on launch (far more people watch and read our content). We may not look as coordinated in the moment, but we ship things that huge numbers of people genuinely watch and read.
+
+> Got feedback on what you'd like to see from a launch? We'd love to hear it – drop it in `#team-marketing`
 
 ## Types of announcement
 
 We classify announcements using the general guidelines below, with full discretion for doing something different.
 
 ### Minor announcements
-Minor announcements involve changes which have no noticeable impact on the experience of most users. They can involve small visual changes, such as UI tweaks, but are more often small bug fixes or back-end changes. They do not require action from users and pose no known risk. 
+
+Minor announcements involve changes which have no noticeable impact on the experience of most users. They can involve small visual changes, such as UI tweaks, but are more often small bug fixes or back-end changes. They do not require action from users and pose no known risk.
 
 We may typically support minor announcements by:
 
@@ -23,6 +53,7 @@ We may typically support minor announcements by:
 An example of a minor announcement is the [UUID format change](/changelog?id=1923).
 
 ### Medium announcements
+
 Medium announcements involve changes which have a noticeable impact on the experience of some users, but not the majority. They are likely to involve visual or functional changes, such as adding a chart type, but do not introduce wholly new features. They do not require action from users and pose no known risk.
 
 We may typically support medium announcements by:
@@ -31,9 +62,10 @@ We may typically support medium announcements by:
 - Creating an in-app changelog notification.
 - Writing a Twitter and LinkedIn post.
 
-An example of a medium announcement includes the [launch of the NPS app](/changelog?id=1787).
+An example of a medium announcement includes the [launch of the NPS survey tool](/changelog?id=1787).
 
 ### Major announcements
+
 Major announcements involve changes which have a noticeable impact on the experience of most users, or require specific action from affected users. They may introduce new features, require product downtime, or include opt-in betas for upcoming work.
 
 We might do anything and everything for a major announcement.
@@ -41,7 +73,8 @@ We might do anything and everything for a major announcement.
 Examples of major announcements include [the surveys beta](/changelog?id=1945) or [the analytics pricing change](/changelog?id=1907).
 
 ### New product announcements
-New product launches are major announcements. They have their own GitHub template: [Launch Plan](https://github.com/PostHog/meta/issues/new/choose). Product marketers should always create a launch plan for new product announcements. 
+
+New product launches are major announcements. They have their own GitHub template: [Launch Plan](https://github.com/PostHog/meta/issues/new/choose). Product marketers should always create a launch plan for new product announcements.
 
 For new product announcements we generally apply the following best practices:
 
@@ -60,30 +93,30 @@ Comms should also be aware of [the engineering best practices for product launch
 If the product is moving from free beta to paid general availability (GA) you might also want to choose a reward for beta users. Examples of this include giving PostHog AI beta users 30 extra days of unlimited free usage, or giving Workflows beta users a discount code for merch.
 
 ### PR announcements
-We do not typically do public relations for anything other than company-level news. We have separate [processes and guides for managing press announcements](/handbook/brand/press). 
+
+We do not typically do public relations for anything other than company-level news. We have separate [processes and guides for managing press announcements](/handbook/marketing/press).
 
 ## Maintenance communications
 
-Occasionally, we have to conduct scheduled maintenance. When this happens, it's important that we tell users about it in advance if they would experience any disruption. 
+Occasionally, we have to conduct scheduled maintenance. When this happens, it's important that we tell users about it in advance if they would experience any disruption.
 
-> If you're aware of any upcoming maintenance which would cause disruption, please inform the Support, Marketing, and Customer Success teams as soon as possible. Marketing will ensure that users are notified as the work is planned and completed. Customer Success may wish to inform specific users at the time. 
+> If you're aware of any upcoming maintenance which would cause disruption, please inform the Support, Marketing, and Customer Success teams as soon as possible. Marketing will ensure that users are notified as the work is planned and completed. Customer Success may wish to inform specific users at the time.
 
-Typically, Product Marketers take responsibility for informing users about maintenance work beforehand by telling users who will be impacted through email and other channels. 
+Typically, Product Marketers take responsibility for informing users about maintenance work beforehand by telling users who will be impacted through email and other channels.
 
 When informing users about maintenance, it is important to answer all of the following points:
 
 - When will the maintenance occur?
 - How long will it take?
-- Who will be impacted? 
+- Who will be impacted?
 - Will any data be lost?
 - Do users need to take any sort of action?
 - How will feature flags and experiments be impacted?
 - What will the impact be? Will insights, etc., still function?
 - Why is the maintenance being done, and what benefit will there be for users?
 
-We typically notify users of upcoming maintenance by email, so the Marketing team will need a way to target the correct users before they can update them. For smaller maintenance updates which will not cause any user updates, engineering teams can also update our status page. 
+We typically notify users of upcoming maintenance by email, so the Marketing team will need a way to target the correct users before they can update them. For smaller maintenance updates which will not cause any user updates, engineering teams can also update our status page.
 
-## Incidents communications
+## Incident communications
 
-When an [incident is declared](/handbook/engineering/operations/incidents) the Brand team should join the incident channel as observers, and monitor to make sure that customer comms are handled correctly. 
-
+When an [incident is declared](/handbook/engineering/operations/incidents) the Brand team should join the incident channel as observers, and monitor to make sure that customer comms are handled correctly.

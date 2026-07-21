@@ -7,7 +7,7 @@ import Snippet from "./install-js-snippet.mdx"
 <details>
 <summary>Keeping the SDK version up to date</summary>
 
-Be careful to avoid things which can cause the SDK version to be cached and fail to update. See: [Ways SDK versions fall behind](/docs/sdk-doctor/keeping-sdks-current#ways-sdk-versions-fall-behind)
+Be careful to avoid things which can cause the SDK version to be cached and fail to update. See: [Ways SDK versions fall behind](/docs/health-checks/keeping-sdks-current#ways-sdk-versions-fall-behind)
 
 </details>
 
@@ -104,7 +104,7 @@ import posthog from 'posthog-js/dist/module.no-external'
 // No external code loading possible but all external dependencies pre-bundled
 import posthog from 'posthog-js/dist/module.full.no-external'
 
-// All external dependencies pre-bundled and with the ability to load external scripts (primarily useful is you use Site Apps)
+// All external dependencies pre-bundled and with the ability to load external scripts (primarily useful is you use JS snippets)
 import posthog from 'posthog-js/dist/module.full'
 
 // Finally you can also import specific extra dependencies
@@ -157,7 +157,7 @@ posthog.init('<ph_project_token>', {
 | `ErrorTrackingExtensions` | [Error Tracking](/docs/error-tracking) |
 | `SurveysExtensions` | [Surveys](/docs/surveys) |
 | `ExperimentsExtensions` | [Experiments](/docs/experiments) |
-| `SiteAppsExtensions` | [Site apps](/docs/site-apps) |
+| `SiteAppsExtensions` | [JS snippets](/docs/js-snippets) |
 | `TracingExtensions` | Distributed tracing header injection |
 | `ToolbarExtensions` | [Toolbar](/docs/toolbar) |
 | `LogsExtensions` | [Log capture](/docs/logs) |
@@ -183,7 +183,7 @@ if (!window.location.host.includes('127.0.0.1') && !window.location.host.include
 <details id="defaults-option">
 <summary>What is the `defaults` option?</summary>
 
-The `defaults` is a date, such as `2026-01-30`, for a configuration snapshot used as defaults to initialize PostHog. This default is overridden when you explicitly set a value for any of the options.
+The `defaults` is a date, such as `2026-05-30`, for a configuration snapshot used as defaults to initialize PostHog. This default is overridden when you explicitly set a value for any of the options.
 
 </details>
 

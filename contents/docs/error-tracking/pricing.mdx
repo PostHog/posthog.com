@@ -69,3 +69,7 @@ import BurstProtection from './_snippets/burst-protection.mdx'
 import BeforeSendHook from './_snippets/before-send-hook.mdx'
 
 <BeforeSendHook />
+
+### Rate limits
+
+Set a server-side [rate limit](/docs/error-tracking/rate-limiting) to cap how many exceptions PostHog ingests per project or per issue. Exceptions received above the configured rate are dropped at ingestion, so they aren't billed. This is the best way to stop a single noisy client or runaway issue from unexpectedly inflating your bill.

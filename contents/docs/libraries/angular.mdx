@@ -3,6 +3,8 @@ title: Angular
 platformLogo: angular
 ---
 
+import TracingHeaders from '../_snippets/tracing-headers.mdx'
+
 import DetailSetUpReverseProxy from "../integrate/_snippets/details/set-up-reverse-proxy.mdx"
 import DetailGroupProductsInOneProject from "../integrate/_snippets/details/group-products-in-one-project.mdx"
 import InstallNodePackageManagers from "../integrate/_snippets/install-node-package-managers.mdx"
@@ -23,6 +25,8 @@ import AngularInstall from "../integrate/_snippets/install-angular.mdx"
 import IdentifyFrontendCallout from '../_snippets/identify-frontend-callout.mdx'
 
 <IdentifyFrontendCallout />
+
+<TracingHeaders />
 
 > **Note:** If you're using Typescript, you might have some trouble getting your types to compile because we depend on `rrweb` but don't ship all of their types. To accommodate that, you'll need to add `@rrweb/types@2.0.0-alpha.17` and `rrweb-snapshot@2.0.0-alpha.17` as a dependency if you want your Angular compiler to typecheck correctly.
 >
@@ -99,13 +103,10 @@ To use PostHog with Angular server-side rendering (SSR), you need to:
 Update your `posthog.service.ts` to restrict the initialization of the PostHog web JS client to the client-side. The web SDK uses methods that are not available on the server side, so we need to check if we're on the client side before initializing PostHog.
 
 ```ts file=posthog.service.ts focusOnLines=5-21
-import { DestroyRef, Injectable, NgZone, Inject } from "@angular/core";
+import { Injectable, NgZone, Inject } from "@angular/core";
 import posthog from "posthog-js";
 import { environment } from "../../environments/environment";
-import { Router } from "@angular/router";
 
-import { isPlatformBrowser } from "@angular/common"; // +
-import { PLATFORM_ID } from "@angular/core"; // +
 import { isPlatformBrowser } from "@angular/common"; // +
 import { PLATFORM_ID } from "@angular/core"; // +
 
@@ -113,8 +114,6 @@ import { PLATFORM_ID } from "@angular/core"; // +
 export class PosthogService {
   constructor(
     private ngZone: NgZone,
-    private router: Router,
-    private destroyRef: DestroyRef,
     @Inject(PLATFORM_ID) private platformId: Object // +
   ) {
     // Only initialize PostHog in browser environment
@@ -179,12 +178,11 @@ app.get('**', async (req, res, next) => {
 
   const distinctId = getDistinctIdFromCookie(headers.cookie);
   let isFeatureEnabled = false;
+  
   const client = new PostHog(
-      const client = new PostHog(
       environment.posthogKey,
       { host: environment.posthogHost }
-  )
-  )
+  );
 
   if (distinctId) {
     client.capture({

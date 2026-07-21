@@ -1,0 +1,111 @@
+{
+    "version": 1,
+    "meta": {
+        "canvas": {
+            "width": 480,
+            "height": 640
+        },
+        "skin": {
+            "id": "slack",
+            "options": {
+                "channel": "#papercuts"
+            }
+        },
+        "composer": "always"
+    },
+    "participants": [
+        {
+            "id": "cory",
+            "name": "Cory Watilo",
+            "avatar": "https://res.cloudinary.com/dmukukwp6/image/upload/avatar_cory_1a344a0625.jpg",
+            "isSelf": true
+        },
+        {
+            "id": "ian",
+            "name": "Ian Vanagas",
+            "color": "#5b3a8e",
+            "avatar": "https://res.cloudinary.com/dmukukwp6/image/upload/w_200,c_limit,q_auto,f_auto/TSS_5_W8_YQZ_U0432_HMTU_57_2bfb984646d1_512_cbd653a629.jpeg"
+        },
+        {
+            "id": "posthog-bot",
+            "name": "PostHog",
+            "kind": "app",
+            "avatar": "https://res.cloudinary.com/dmukukwp6/image/upload/avatar_posthog_f85279a2ad.png"
+        }
+    ],
+    "timeline": [
+        {
+            "type": "message",
+            "id": "m1",
+            "from": "ian",
+            "text": "there's a broken link on https://posthog.com/handbook/brand/tone that points to localhost",
+            "instant": true
+        },
+        {
+            "type": "delay",
+            "duration": 1000
+        },
+        {
+            "type": "composerType",
+            "from": "cory",
+            "text": "oops, @PostHog can you fix this?",
+            "id": "m2"
+        },
+        {
+            "type": "send",
+            "id": "m2"
+        },
+        {
+            "type": "reaction",
+            "target": "$prev",
+            "emoji": "👀",
+            "shortcode": "eyes",
+            "from": "posthog-bot",
+            "delay": 900
+        },
+        {
+            "type": "delay",
+            "duration": 200
+        },
+        {
+            "type": "message",
+            "from": "posthog-bot",
+            "text": "Found it. Line 7 has `http://localhost:8002/handbook/content/posthog-style-guide`. Let me verify the target exists and fix it."
+        },
+        {
+            "type": "delay",
+            "duration": 2000
+        },
+        {
+            "type": "message",
+            "from": "posthog-bot",
+            "instant": true,
+            "content": [
+                {
+                    "type": "section",
+                    "text": "Pull request opened – I changed it to the relative `/handbook/content/posthog-style-guide`."
+                },
+                {
+                    "type": "actions",
+                    "elements": [
+                        {
+                            "type": "button",
+                            "label": "View PR",
+                            "href": "https://github.com/PostHog/posthog.com/pull/17776",
+                            "style": "primary"
+                        },
+                        {
+                            "type": "button",
+                            "label": "Open in PostHog Code"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "pacing": {
+        "humanize": 0.45,
+        "readingWpm": 400,
+        "typingCps": 25
+    }
+}

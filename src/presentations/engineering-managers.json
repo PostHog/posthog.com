@@ -40,10 +40,10 @@
             "title": "Build your data infrastructure once",
             "description": "<p>We handle all the ETL, transformations, and real-time streaming as you scale.</p><p>No hiring data engineers, no managing vendor integrations that break at 2 AM.</p><p>Just product engineers building products, like it should be.</p>"
         },
-        "llm_analytics": {
+        "ai_observability": {
             "template": "product",
             "name": "AI Observability",
-            "handle": "llm_analytics",
+            "handle": "ai_observability",
             "screenshot": "home",
             "title": "Stop wasting money on AI models that don't work",
             "description": "<p>See exactly how users interact with your AI features and which models deliver actual results versus expensive disappointments.</p><p>Monitor costs across providers so you can optimize spend based on real performance data.</p>"
