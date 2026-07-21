@@ -43,7 +43,11 @@ The JSON document you host at your `client_id` URL should include at least:
 
 - `client_name` (required) – The human-readable name of your application, shown to users on the authorization screen.
 - `logo_uri` (optional) – A URL to a logo image that will be shown alongside the name on the authorization screen.
-- `redirect_uris` (required) – The URLs PostHog is allowed to redirect users to after authorization.
+- `redirect_uris` (required) – The URLs PostHog is allowed to redirect users to after authorization. These may be on a different domain than your `client_id` – they only need to be listed here. At authorization time, the requested `redirect_uri` must match one of these entries exactly (scheme, host, port, and path), and must use `https` unless it's a loopback address (`localhost` or `127.0.0.1`).
+
+For native apps that grab a dynamically assigned local port at runtime (per [RFC 8252](https://datatracker.ietf.org/doc/html/rfc8252#section-7.3)), register a loopback redirect URI *without* a port – for example `http://localhost/callback` or `http://127.0.0.1/callback` – and a request on any port, like `http://localhost:54321/callback`, will match. If you register a `localhost` URI *with* a port, the request must use that exact port. `127.0.0.1` and `::1` allow any port regardless of what you register.
+
+PostHog caches your metadata document according to the `Cache-Control: max-age` header you return. If you add a new redirect URI after your client has already been used, the previously cached document stays in effect until its TTL elapses. Return a shorter `max-age` to have changes picked up sooner.
 
 See the [OAuth Client ID Metadata Document draft](https://datatracker.ietf.org/doc/draft-parecki-oauth-client-id-metadata-document/) for the full specification.
 

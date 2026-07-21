@@ -11,7 +11,7 @@ sourceId: Pingdom
 
 The Pingdom connector syncs your uptime monitoring data into PostHog, including checks, probes, maintenance windows, and alerts.
 
-<CalloutBox icon="IconInfo" title="Alpha release" type="fyi">
+<CalloutBox icon="IconFlask" title="Alpha release" type="action">
 
 This source is currently in alpha. Endpoint behavior was verified against Pingdom's public API 3.1 documentation but hasn't been tested against every edge case in production. If you run into issues, please let us know.
 

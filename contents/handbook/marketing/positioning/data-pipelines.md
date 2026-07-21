@@ -6,6 +6,8 @@ showTitle: true
 
 > Data pipelines are part of the broader [context warehouse](/handbook/marketing/positioning/data-warehouse) — the platform that ingests and stores your context. This page covers the pipelines specifically.
 
+*For the canonical frame everyone at PostHog uses – the self-driving story and standard description – see [Brand foundations](/handbook/brand/foundations#how-we-describe-posthog).*
+
 ## Elevator pitch
 
 PostHog's data pipelines move data into and out of PostHog without forcing you to buy a separate CDP, ETL tool, or reverse-ETL service. Sources are free, destinations and batch exports are usage-priced, transformations run on Hog functions inside the same platform that runs your analytics, replay, flags, experiments, warehouse, and agents.

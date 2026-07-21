@@ -9,9 +9,9 @@ availability:
 sourceId: Hubspot
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The HubSpot connector syncs your CRM data – contacts, companies, deals, tickets, quotes, emails, and meetings – into PostHog, so you can analyze your sales and marketing data alongside your product data.
 
@@ -60,6 +60,27 @@ The default properties for each schema are:
 Changing the synced properties after the initial import requires a full resync of your HubSpot data. Invalid properties are automatically filtered out. If all specified properties are invalid, the defaults are used instead.
 
 </CalloutBox>
+
+## Selecting columns
+
+After the first sync completes, you can select which columns to include in future syncs:
+
+1. Go to the [sources tab](https://app.posthog.com/data-management/sources) and click your HubSpot source.
+2. Click **Configure** next to any schema.
+3. Under **Columns**, select which columns to sync.
+
+Primary keys and internal columns (`_ph_*`, `_dlt_*`) are always synced and cannot be disabled.
+
+<CalloutBox icon="IconInfo" title="Adding columns to existing syncs" type="fyi">
+
+When you add columns to a schema, PostHog prompts you to choose:
+
+- **Sync forward only** - New columns are populated only for future data. Existing rows show `NULL` for the new columns.
+- **Full resync** - Triggers a complete resync to backfill the new columns for all rows.
+
+</CalloutBox>
+
+> **Note:** This column selection feature is separate from **Customize synced properties**, which controls which HubSpot properties are fetched from the API during setup. Column selection lets you choose which already-synced columns appear in your warehouse tables after data has been imported.
 
 ## Supported tables
 

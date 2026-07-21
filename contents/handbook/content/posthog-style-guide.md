@@ -210,4 +210,4 @@ When [embedding YouTube videos](/handbook/engineering/posthog-com/markdown#embed
 
 ## Technical and docs writing
 
-See our [docs style guide](/handbook/docs-and-wizard/docs-style-guide).
+See our [docs style guide](/handbook/wizard-and-docs/docs-style-guide).

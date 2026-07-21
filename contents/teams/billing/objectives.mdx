@@ -1,68 +1,74 @@
-## Q2 2026 Objectives
+## Q3 2026 objectives
 
-1. **Complete the transition to the new revenue model (eng lead: <TeamMember name="Marce Coll" />, revops lead: <TeamMember name="Mine Kansu" />)**
-    - Initial implementation
-    - Discrepancy hunting and fixing - all understood and fixed or explicitly accepted
-    - All internal dashboards re-implemented on the new model
-    - Investor reporting migrated
-    - Model understood and trusted across the team
-        - Finance signs off on model documentation
-        - Zero revops escalations for routine ARR/MRR questions for 4 weeks after launch
-        - Bonus: self-serve (finance can pull monthly data they need to close the books without billing/revops in the loop)
-    - Stretch goal: revenue model data flowing into Campfire
+This quarter, we want to buy back time early, then spend that time on the billing work most tied to company goals.
 
-2. **Migrate all credits to an in-house ledger (lead: <TeamMember name="Pawel Cebula" />)**
-    - Implement a double-entry credit ledger
-    - Seed the ledger based on the new revenue recognition model
-    - Deploy and run the shadow ledger
-    - Fix unexpected discrepancies
-    - Migrate from customer balance to the ledger
+Alongside that, we will actively work on longer-term changes that will make future work easier. The goals here are clear, even if the exact path needs discovery as we go.
 
-3. **Ship all expected pricing launches and changes (lead: <TeamMember name="Pawel Cebula" />)**
-    - **PostHog Code**
-        - Seat-based subscriptions (free and paid)
-        - Seat-based subscriptions (free and multiple paid)
-        - Overages and background agents
-    - **Storage and compute**
-        - Data warehouse
-        - Endpoints
-    - **Workflows**
-        - Channels: Push, SMS
-        - Per-workflow limit exclusion
-    - **Batch exports**
-        - Higher frequency exports
-    - **Logs**
-        - 30 and 90 day retention
-    - **LLM Gateway**
-        - Product-scoped credits (depends on in-house credit ledger)
-        - Access based on positive credit pool balance (prepayments required)
-        - Automated top-ups
-        - Near-realtime limiting
+### Tier 1: Remove the biggest time sinks early
 
-4. **Reduce tech debt and improve developer experience (lead: <TeamMember name="Marce Coll" />)**
-    - Improve async task observability and reliability
-    - Upgrade to PostgreSQL 17/18
-    - Switch from Nginx to Granian
+_Theme: Fix the recurring interruptions that keep pulling us away from the most important work._
 
-5. **Complete the Salesforce org object rollout (lead: <TeamMember name="Abhischek Thottakara" />)**
-    - Deploy deduplication workflow and scripts to production
-    - Complete historical migration to custom org object
-    - Migrate all integrations and lead triggers to new object
-    - Confirm Vitally and Salesforce sync works under the new setup
-    - Document all scripts and workflows in PostHog-owned GitHub repo
+1. **Remove the biggest billing time sinks (lead: <TeamMember name="Pawel Cebula" />)**
+    - <u>In the first sprint, everyone</u> identifies the biggest recurring billing time sinks, then looks for low-hanging fruit, and implements those with best ROI.
+    - Examples:
+        - Give PostHog AI enough context to answer common invoice, revenue, subscription, and pricing questions, so more people can self-serve (e.g. skills, semantic layer in DW).
+        - Ship a pricing launch/change skill so product teams can self-serve more of the repeated pricing work.
 
-6. **Build customer health score v1 in Vitally (lead: <TeamMember name="Mine Kansu" />)**
-    - Define "active user" per product
-    - Define org-level "active customer" rollup logic
-    - Validate definitions against known accounts (healthy, churned, at-risk)
-    - Implement health scores in Vitally
+2. **Make usage reporting and limiting less painful (lead: <TeamMember name="Marce Coll" />)**
+    - Finish usage reports v2, migrate consumers to it, increase reporting frequency toward ~30 minutes, and deprecate v1.
+    - Unify limiting logic, which is currently split across `posthog` and multiple paths in `billing`.
+    - Use the new event sourcing state machines so quota limiting can query `billing` for limiting state, with the logic living in one place.
+    - Make usage reporting and limiting introspectable over time instead of fishing through multiple systems when numbers look wrong or customers hit limits unexpectedly.
+    - Incorporate the money domain changes needed to support this cleanly.
 
-7. **Implement fully automated outbound pipelines (lead: <TeamMember name="Abhischek Thottakara" />)**
-    - Source and score additional leads (LinkedIn followers, Appfigures.com targets, Stripe Propensity Leads)
-    - Generate outbound sequence content using LLM in Clay
-    - Sequence highest scoring targets automatically using Lemlist
+### Tier 2: Work directly tied to company goals
 
-8. **Roll out the redesigned TAM compensation plan (lead: <TeamMember name="Mine Kansu" />)**
-    - Finalize the new comp structure
-    - Validate payout scenarios against historical TAM performance
-    - Get sign off from finance / sales leads
+_Theme: Finish the revenue model, migrate credits to the in-house ledger, and keep product launches and pricing changes moving._
+
+3. **Finish moving to the new revenue model (eng lead: <TeamMember name="Marce Coll" />, revops lead: <TeamMember name="Mine Kansu" />)**
+    - Close out the remaining material discrepancies: fix them or explicitly accept them.
+    - Rebuild internal ARR/MRR dashboards on the new model and run them next to the old ones until we trust them.
+    - Migrate investor reporting to the new model.
+    - Get Finance sign-off on the model docs and close process.
+    - Make routine ARR/MRR questions self-serve for Finance, RevOps, leadership, and product teams.
+    - Get revenue model data flowing into Campfire.
+
+4. **Migrate credits to an in-house ledger (lead: <TeamMember name="Pawel Cebula" />)**
+    - Seed credit pools from the new revenue model.
+    - Replay 1-2 months of historical ledger activity against production actuals and run the shadow ledger.
+    - Fix or explicitly accept discrepancies before migration.
+    - Migrate from Stripe customer balance to the ledger.
+
+5. **Ship expected pricing launches and changes (lead: <TeamMember name="Pawel Cebula" />)**
+    - **AI**
+        - AI Gateway
+        - Replay vision
+        - PostHog Code v2
+        - Slack agent: potential split from PostHog AI
+        - Inbox: potential iterations on the outcome-based model
+    - **Data stack**
+        - Data warehouse and endpoints: storage and compute
+    - **Everything else**
+        - Platform add-ons:
+            - Grow plan
+            - Enterprise plan: size-based pricing
+        - Logs: 30 and 90 day retention
+        - Batch exports: higher frequency exports
+        - Workflows: reduced email free tier, push, SMS, and unlimited workflows
+        - Group analytics: pricing based on events with groups instead of identified events
+
+### Tier 3: Make future work easier
+
+_Theme: Continue making billing the source of truth, and make it less scary to change. The goals here are clear, but the path will need more discovery along the way._
+
+6. **Make billing the source of truth, starting with the product catalog (lead: <TeamMember name="Roy Cohen" />)**
+    - Build an in-house product and price catalog.
+    - Model multi-usage plans without addon-based workarounds.
+    - Design for things we frequently get asked for, e.g. team/project-level limits.
+    - Figure out how to evolve subscriptions after we bring products and prices in-house.
+
+7. **Make billing safer to change (lead: <TeamMember name="Roy Cohen" />, Antithesis kickoff: <TeamMember name="Marce Coll" />)**
+    - Increase test coverage around high-risk billing flows.
+    - Continue adopting stronger testing patterns, e.g. property-based testing.
+    - Run the Antithesis proof of concept and decide whether/how it should become part of the normal billing development workflow.
+    - Continue migrating async tasks from Celery to Temporal.

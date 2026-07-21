@@ -9,7 +9,7 @@ availability:
 sourceId: Commercetools
 ---
 
-<CalloutBox icon="IconInfo" title="Alpha release" type="fyi">
+<CalloutBox icon="IconFlask" title="Alpha release" type="action">
 
 The commercetools source is currently in alpha. It has been tested against the commercetools API documentation but not yet battle-tested with live production workloads. If you run into issues, please let us know.
 

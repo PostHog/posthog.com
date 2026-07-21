@@ -10,7 +10,7 @@ import {
 } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 
-// MCP analytics is an alpha product (@posthog/mcp on npm) with a dedicated scene in the app
+// MCP Analytics is an alpha product (@posthog/mcp on npm) with a dedicated scene in the app
 // gated behind the `mcp-analytics` early access feature. Copy here is sourced from the docs in
 // contents/docs/mcp-analytics/. There are no marketing screenshots yet, so the slides are
 // text/icon-driven — drop Cloudinary image URLs into `screenshots.overview` and the per-feature
@@ -18,7 +18,7 @@ import OSButton from 'components/OSButton'
 // opt-in links to the early access feature in the app (identity isn't shared with the website).
 
 export const mcpAnalytics = {
-    name: 'MCP analytics',
+    name: 'MCP Analytics',
     Icon: IconPlug,
     description: 'See how agents actually use your MCP server',
     handle: 'mcp_analytics',
@@ -34,23 +34,24 @@ export const mcpAnalytics = {
     // the overview slide and keeps the product clickable in nav (only 'WIP' is disabled).
     status: 'beta',
     seo: {
-        title: 'MCP analytics – See how agents use your MCP server in PostHog',
+        title: 'MCP Analytics – See how agents use your MCP server in PostHog',
         description:
             "Understand how agents actually use your MCP server: which tools get called, what the agent wanted, where calls fail, and which capabilities are missing. It's all normal PostHog events.",
     },
     overview: {
         title: 'See how agents use your MCP server',
         description:
-            'Product analytics for your MCP server. Wrap it in one line and every tool call, agent intent, and failure lands in PostHog as a normal event you can query, chart, and alert on.',
+            'Product analytics for your MCP server. Wrap it in one line and every tool call, agent intent, and failure lands in PostHog as a normal event.',
         textColor: 'text-white',
-        layout: 'columns',
+        layout: 'stacked',
     },
     // TODO (asset step): add `images` on the feature cards below.
     screenshots: {
         overview: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_dashboard_light_0907967b56.png',
-            alt: 'MCP analytics dashboard',
+            alt: 'MCP Analytics dashboard',
             classes: '',
+            imgClasses: 'rounded-tl-md shadow-2xl',
         },
     },
     features: [
@@ -231,7 +232,7 @@ export const mcpAnalytics = {
     ],
     presenterNotes: {
         overview:
-            'MCP analytics is alpha (<code>@posthog/mcp</code> on npm). Lead with the one-line wrap and "it\'s all just PostHog events." No new tooling to learn.',
+            'MCP Analytics is alpha (<code>@posthog/mcp</code> on npm). Lead with the one-line wrap and "it\'s all just PostHog events." No new tooling to learn.',
     },
 }
 

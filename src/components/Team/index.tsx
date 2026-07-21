@@ -523,8 +523,9 @@ export default function Team({
         }
     }
 
-    const hasUnderConsideration = underConsideration?.length > 0
-    const hasInProgress = inProgress?.length > 0
+    const hideRoadmap = slug === 'workflows'
+    const hasUnderConsideration = !hideRoadmap && underConsideration?.length > 0
+    const hasInProgress = !hideRoadmap && inProgress?.length > 0
     const hasBody = !!body
     const heightToHedgehogs =
         profiles?.data?.reduce((acc, curr) => acc + (curr?.attributes?.height || 0), 0) / hedgehogLengthInches || 0
@@ -749,7 +750,7 @@ export default function Team({
                 </div>
             </Fieldset>
 
-            {(hasInProgress || hasUnderConsideration || recentlyShipped) && (
+            {!hideRoadmap && (hasInProgress || hasUnderConsideration || recentlyShipped) && (
                 <>
                     <h2 id="roadmap">Roadmap</h2>
 

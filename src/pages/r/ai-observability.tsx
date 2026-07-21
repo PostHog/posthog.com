@@ -8,7 +8,7 @@ import { ProductVideo } from 'components/ProductVideo'
 import List from 'components/List'
 import Link from 'components/Link'
 import CloudinaryImage from 'components/CloudinaryImage'
-import { SingleCodeBlock } from 'components/CodeBlock'
+import PlatformInstall from 'components/PlatformInstall'
 import WizardCTA from 'components/WizardCTA'
 import usePlatformList from 'hooks/docs/usePlatformList'
 import LovableLogo from 'components/CustomerLogos/LovableLogo'
@@ -217,9 +217,7 @@ export default function AIObservabilityLanding(): JSX.Element {
                                 errors, latency, traces — without switching to a browser.
                             </p>
 
-                            <SingleCodeBlock language="bash" showAskAI={false}>
-                                npx @posthog/wizard mcp add
-                            </SingleCodeBlock>
+                            <PlatformInstall variant="inline" command="mcp add" slim />
 
                             <ul>
                                 <li>

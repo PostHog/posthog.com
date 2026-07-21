@@ -17,7 +17,7 @@ The Crunchbase Search API requires a **paid Enterprise or Applications license**
 
 </CalloutBox>
 
-<CalloutBox icon="IconInfo" title="Alpha release" type="fyi">
+<CalloutBox icon="IconFlask" title="Alpha release" type="action">
 
 This source is currently in **alpha**. If you encounter issues, reach out to our support team.
 

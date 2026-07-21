@@ -8,23 +8,26 @@ availability:
   enterprise: full
 ---
 
-export const warningsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/data-management/warnings-light-mode.png"
-export const warningsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/data-management/warnings-dark-mode.png"
+export const warningsLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/data-management/warnings-light-mode.png";
+export const warningsDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/data-management/warnings-dark-mode.png";
 
 Sometimes PostHog runs into problems during ingestion due to incorrect or suboptimal usage of PostHog. For example, if you capture an event with a generic ID like `null`, PostHog doesn't ingest it.
 
-If this happens, we do our best to still ingest the event and we log an ingestion warning. 
+If this happens, we do our best to still ingest the event and we log an ingestion warning.
 
 <ProductScreenshot
-    imageLight = {warningsLight} 
-    imageDark = {warningsDark}
-    alt="Ingestion warnings" 
-    classes="rounded"
+  imageLight={warningsLight}
+  imageDark={warningsDark}
+  alt="Ingestion warnings"
+  classes="rounded"
 />
 
 **Note:** These warnings are sampled. The actual number of events affected may exceed the total displayed.
 
 List of ingestion warnings:
+
 - [Refused to merge with an illegal distinct ID](#refused-to-merge-with-an-illegal-distinct-id)
 - [Refused to merge an already identified user](#refused-to-merge-an-already-identified-user)
 - [Refused to process event with invalid UUID](#refused-to-process-event-with-invalid-uuid)
@@ -49,7 +52,7 @@ See our [identify docs](/docs/product-analytics/identify#how-to-merge-users) for
 
 PostHog drops events with invalid UUIDs.
 
-There are very few cases where it would be good to provide an event UUID. PostHog generates these for you. 
+There are very few cases where it would be good to provide an event UUID. PostHog generates these for you.
 
 When generating UUIDs, there are many gotchas to be aware of. For example, deduping based on event UUID is not guaranteed due to how merges work in [ClickHouse](/docs/how-posthog-works/clickhouse).
 
@@ -92,3 +95,7 @@ The `$set` or `$set_once` properties are ignored on exception events and should 
 PostHog couldn't process the `$heatmap_data` attached to an event, so no [heatmap](/docs/toolbar/heatmaps) data was extracted from it. The event itself is still ingested as normal.
 
 This indicates the `$heatmap_data` property was malformed, which is usually a sign of an instrumentation bug. If you're capturing heatmap data with [posthog-js](/docs/libraries/js), make sure you're on a recent version of the SDK and aren't manually constructing or modifying `$heatmap_data` yourself.
+
+## Query warnings via MCP
+
+If you use the [PostHog MCP server](/docs/model-context-protocol), your AI agent can query ingestion warnings directly with the `ingestion-warnings-list` tool. Ask questions like "What ingestion warnings has my project received?" or "Why are my person merges failing?" and the agent will filter, search, and summarize warnings for you. See the [MCP tools reference](/docs/model-context-protocol/tools) for the full list of available tools.

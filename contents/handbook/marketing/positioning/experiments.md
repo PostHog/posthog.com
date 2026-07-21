@@ -4,6 +4,8 @@ sidebar: Handbook
 showTitle: true
 ---
 
+*For the canonical frame everyone at PostHog uses – the self-driving story and standard description – see [Brand foundations](/handbook/brand/foundations#how-we-describe-posthog).*
+
 ## Elevator pitch
 
 PostHog Experiments run on top of Feature Flags, so every experiment is a controlled rollout by default. Multiple metric types — funnels, trends, retention, ratio metrics — let you measure what actually matters, not just what's easy to track. Watch session replays of each variant's users. Measure side effects across your entire product. 
