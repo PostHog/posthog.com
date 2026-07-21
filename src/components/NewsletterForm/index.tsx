@@ -75,8 +75,20 @@ export const NewsletterForm = ({ className = '', placement }: NewsletterFormProp
                                         className="dark:bg-accent-dark border border-primary rounded text-[15px] w-full flex-1"
                                         value={email}
                                     />
-                                    <button className={`${container(undefined, 'md')} -mt-px w-full @md:w-auto`}>
-                                        <span className={child(undefined, undefined, '!bg-[#FF5C1C]', 'md')}>
+                                    <button
+                                        className={`${container(
+                                            undefined,
+                                            'md'
+                                        )} -mt-px w-full @md:w-auto !bg-[#C74816] !border-[#C74816]`}
+                                    >
+                                        <span
+                                            className={child(
+                                                undefined,
+                                                undefined,
+                                                '!bg-[#FF5C1C] !text-white !border-[#C74816]',
+                                                'md'
+                                            )}
+                                        >
                                             Subscribe
                                         </span>
                                     </button>
