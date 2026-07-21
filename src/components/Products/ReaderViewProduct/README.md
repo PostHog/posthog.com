@@ -247,7 +247,7 @@ If a template finds nothing to render (e.g. `customers` for a product with no `c
 
 ## Product switcher
 
-[`ProductSwitcher`](./ProductSwitcher.tsx) is the searchable dropdown rendered at the very top of the LeftSidebar. It sources the product list from `useProduct()` (which chains in `useProducts()` plus the alpha/beta extensions in [`hooks/useProduct.ts`](../../../hooks/useProduct.ts)) and renders each entry through [`OSForm/select.tsx`](../../OSForm/select.tsx) with the product's `Icon` (tinted with `text-${color}`) and name.
+[`ProductSwitcher`](./ProductSwitcher.tsx) is the searchable dropdown rendered at the very top of the LeftSidebar. It sources the product list from [`useProducts()`](../../../hooks/useProducts.tsx) only (top-level billed products – not the extended WIP/sub-product dump in `useProduct.ts`) and renders each entry through [`OSForm/select.tsx`](../../OSForm/select.tsx) with the product's `Icon` (tinted with `text-${color}`) and name.
 
 ```tsx
 <ReaderView
@@ -277,16 +277,7 @@ What's still hard-coded inside `OSSelect` (not exposed as props): the search inp
 
 ### Navigation
 
-Switching products navigates via [`getProductSurfaceUrl`](./getProductSurfaceUrl.ts):
-
-| Current URL                           | Target                          | Reason |
-| ------------------------------------- | ------------------------------- | ------ |
-| `/<currentSlug>`                      | `/<newSlug>`                    | Product root → Product root. |
-| `/<currentSlug>/<section>` where `section` is in `KNOWN_SHARED_SECTIONS` (currently just `'pricing'`) | `/<newSlug>/<section>` | Preserve known shared surfaces (e.g. Pricing). |
-| `/<currentSlug>/<anything-else>`      | `/<newSlug>`                    | Unknown subpath → fall back to product root. |
-| `/docs/<currentSlug>/...`             | `/docs/<newSlug>`               | Docs subpaths are product-specific; always strip to docs root. |
-
-To add a new shared surface (e.g. `tutorials`), append its segment to `KNOWN_SHARED_SECTIONS` in [`getProductSurfaceUrl.ts`](./getProductSurfaceUrl.ts).
+Switching products always navigates to the product root (`/<newSlug>`). Surface-preserving navigation (e.g. staying on `/pricing`) is deferred until every product has those pages. [`getProductSurfaceUrl`](./getProductSurfaceUrl.ts) still exists for that future use.
 
 ---
 
@@ -298,8 +289,8 @@ To add a new shared surface (e.g. `tutorials`), append its segment to `KNOWN_SHA
 | `types.ts`                 | `ProductNavItem`, `SectionComponentProps`, `resolveTemplate(item)`. |
 | `buildProductMenuTabs.tsx` | Returns the `[Product, Pricing, Docs]` tabs for `<ReaderView menuTabs={…}>`. Tabs whose menus are empty are omitted. |
 | `ProductNav.tsx`           | The single product nav. When given a `contentRef` it scrolls in-page (radix viewport + ScrollSpy active highlighting via `ElementScrollLink`); without one it emits Gatsby `<Link>`s to `${basePath}#${slug}` for cross-page jumps. The `'overview'` slug is special-cased to land at the top of the surface in both modes. |
-| `ProductSwitcher.tsx`      | Searchable product dropdown rendered above the menu. Driven by `useProduct()`; navigates via `getProductSurfaceUrl`. |
-| `getProductSurfaceUrl.ts`  | Pure function that maps the current path onto the equivalent surface for another product when the user switches. |
+| `ProductSwitcher.tsx`      | Searchable product dropdown rendered above the menu. Driven by `useProducts()`; always navigates to `/<slug>`. |
+| `getProductSurfaceUrl.ts`  | Helper for surface-preserving product switches (not currently used by the switcher). |
 | `templates/`               | One file per section template + the `templateRegistry`.            |
 
 ---
