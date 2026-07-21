@@ -186,7 +186,7 @@ const koTranslations: Record<string, string> = {
     Evals: '평가',
     Endpoints: '엔드포인트',
     'PostHog AI': 'PostHog AI',
-    'PostHog Code': 'PostHog Code',
+    'PostHog Desktop': 'PostHog Desktop',
     Tutorials: '튜토리얼',
     'Dashboard templates': '대시보드 템플릿',
     Tracks: '트랙',
