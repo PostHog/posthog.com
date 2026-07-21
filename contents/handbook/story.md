@@ -240,6 +240,6 @@ We raised again – a $75m Series E led by Peak XV at a ~$1.4bn valuation. That 
 
 ### Early 2026: PostHog Code
 
-~200 people and a product list too long to keep reciting! [PostHog Code](/code) was probably our biggest launch yet.
+~200 people and a product list too long to keep reciting! [PostHog Code](/desktop) was probably our biggest launch yet.
 
 Our vision is now to make your product [self-driving](/self-driving). 

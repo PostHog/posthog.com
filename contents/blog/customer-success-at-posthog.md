@@ -142,7 +142,7 @@ At a ~~normal~~ boring company, visiting a customer office requires a business j
 
 One of our newer TAMs saw a customer complain about a minor papercut in their Slack channel: they couldn’t paste markdown into notebooks. Most TAMs would file a ticket, follow up in a week, and maybe escalate to engineering.
 
-This TAM used [PostHog Code](/code) to [open a PR](https://github.com/PostHog/posthog/pull/59142).
+This TAM used [PostHog Code](/desktop) to [open a PR](https://github.com/PostHog/posthog/pull/59142).
 
 Within 12 hours, the fix was ready for review. Within 24 hours, it was merged. The customer's response: "I understand why people love PostHog now."
 
