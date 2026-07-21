@@ -1,25 +1,46 @@
 
-Objective: New Sources + source management
+Objective: Make the MCP a first-class way to work with warehouse sources (Marcus)
 
 * **Key Results:**
-    * New sources for a bunch of popular saas products and databases
-    * Source self-healing system - use AI to open PRs with fixes to sources based on error tracking
-    * A new interface for debugging source/pipeline issues from support
-    * Improved UX for listing new sources in-app
+    * Bring source setup into the wizard, and into general usage too – when someone asks about data we don't have yet (e.g. "tell me about revenue" without Stripe synced), proactively offer to set up the right source.
+    * Build a context layer for the MCP so it understands the user's data, including the business knowledge we already capture.
+    * Run more user interviews to understand how people actually use the MCP and where it falls short.
+    * Dogfood heavily so we feel the rough edges before users do.
+    * Support editing existing sources from the MCP – not just adding them – including sync schedules and column selection.
+    * Add analytics and insights on MCP usage so we can see what's working and what isn't.
+    * Solve the secrets problem: find a secure way to get users' credentials to the MCP, likely via a Vault, AWS Secrets Manager, or 1Password integration.
 
 
-Objective: Re-architecture + run improvements
-
-* **Key Results:**
-    * Re-architecture of the pipeline to be more event-driven
-    * Better alerting, monitoring, and documentation of the pipeline/sources/runs, both internally and for users, to allow for self-debugging of issues without support
-    * Writing out to ducklake or an equivalent system for the new query engine
-
-
-Objective: Improved source config
+Objective: Improve pipeline stability and scaling (Estefania)
 
 * **Key Results:**
-    * Visibility of primary keys and incremental field indexes
-    * Configure columns to import from the source
-    * Multi-database/schema support for database sources
-    * Postgres logical replication
+    * Ship pipeline v3 to handle larger workloads and scale more reliably.
+    * Reduce the error rate across syncs, with a particular focus on eliminating out-of-memory failures and improving error handling.
+    * Build better support tooling so the team can diagnose and resolve pipeline issues faster.
+
+
+Objective: Expand and harden our source catalog (Tom)
+
+* **Key Results:**
+    * Add more sources to widen the range of data users can bring into PostHog.
+    * Automate more of source healing and creation – including using sample data from production to validate fixes and auto-merge them when they pass.
+    * Improve support tooling to make it easier to triage and fix source issues.
+    * Add more verbose logging so failures are easier to understand and debug.
+    * Write better documentation for sources so users can self-serve.
+
+
+Objective: Integrate warehouse data with more PostHog products (Daniel)
+
+* **Key Results:**
+    * Ship warehouse person properties – a long-standing request from Arthur. Ingestion has concerns, but we believe they're solvable.
+    * Identify which other products could benefit from warehouse data, such as logs and exceptions.
+    * Explore a generic API layer for exposing warehouse source and data-modeling data to other products internally.
+
+
+Objective: Bonus objectives
+
+* **Key Results:**
+    * Establish activation and retention metrics for the product (Anna).
+    * Review and refine pricing (Anna).
+    * Run more user interviews to guide the roadmap (Anna / Marcus).
+    * Publish an engineering blog post about our work (anyone).

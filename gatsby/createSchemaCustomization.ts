@@ -77,12 +77,16 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       authorData: [AuthorsJson] @link(by: "handle", from: "author")
       badge: String
       seo: FrontmatterSEO
+      featureFlag: String
       hideFromIndex: Boolean
+      lang: String
+      translationOf: String
       price: String
       platformLogo: String
       platformIconName: String
       platformSourceType: String
       featuredImageCaption: String
+      sourceId: String
     }
     type TeamData {
       name: String
@@ -222,6 +226,24 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       title: String
       number: Int
     }
+    type ResearchMergedPr implements Node {
+      title: String
+      url: String
+      repo: String
+      author: String
+      mergedAt: String
+    }
+    type SelfDrivingPullRequest implements Node {
+      prNumber: Int
+      title: String
+      summary: String
+      type: String
+      scope: String
+      url: String
+      state: String
+      openedAt: Date @dateformat
+      mergedAt: Date @dateformat
+    }
     type PostTagAttributes {
         label: String
         folder: String
@@ -239,6 +261,15 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     }
     type PostCategory implements Node {
       attributes: PostCategoryAttributes
+    }
+    type CommunityStats implements Node {
+      topicId: Int
+      topicSlug: String
+      topicLabel: String
+      questions: Int
+      resolved: Int
+      replies: Int
+      helpful: Int
     }
     type ProductSectionsSectionsFeatures {
       title: String
@@ -281,9 +312,22 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       html_url: String
       type: String
     }
+    type ProductDataProductsPlansTiers {
+      current_amount_usd: String
+      current_usage: Float
+      flat_amount_usd: String
+      unit_amount_usd: String
+      up_to: Float
+    }
     type ProductDataProductsPlans {
       contact_support: Boolean
       unit_amount_usd: Float
+      tiers: [ProductDataProductsPlansTiers]
+    }
+    type ProductDataProductsAddonsPlans {
+      contact_support: Boolean
+      unit_amount_usd: String
+      tiers: [ProductDataProductsPlansTiers]
     }
     type SlackEmoji implements Node {
       name: String
@@ -332,6 +376,45 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       secret: Boolean
       required: Boolean
       description: String
+    }
+    type AgentSkill implements Node @dontInfer {
+      product: String
+      name: String
+      description: String
+      sourcePath: String
+      mcpTools: [String]
+    }
+    type PostHogSource implements Node @dontInfer {
+      mdx: Mdx @link(by: "frontmatter.sourceId", from: "sourceId")
+      sourceId: String
+      name: String
+      slug: String
+      icon_url: String
+      docsUrl: String
+      unreleased: Boolean
+      beta: Boolean
+      featured: Boolean
+      caption: String
+      sourceFields: [PostHogSourceField]
+      tables: [PostHogSourceTable]
+      permissionsCaption: String
+      featureFlag: String
+    }
+    type PostHogSourceField {
+      name: String
+      label: String
+      type: String
+      required: Boolean
+      placeholder: String
+      caption: String
+    }
+    type PostHogSourceTable {
+      name: String
+      label: String
+      description: String
+      sync_methods: [String]
+      incremental_fields: [String]
+      primary_keys: [String]
     }
     type SdkReferences implements Node {
       info: SdkReferencesInfo
@@ -517,6 +600,11 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         created_by: PostHogWorkflowTemplateCreatedBy
         fields: PostHogWorkflowTemplateFields
     }
+    type ProductUsageStats implements Node {
+        product: String
+        unique_users: Int
+        unique_orgs: Int
+    }
   `)
     createTypes([
         schema.buildObjectType({
@@ -529,10 +617,52 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
                 },
             },
         }),
+        schema.buildObjectType({
+            name: 'SqueakTeam',
+            interfaces: ['Node'],
+            fields: {
+                objectives: {
+                    type: 'Mdx',
+                    resolve: async (source, _args, context) => {
+                        if (!source?.slug) {
+                            return null
+                        }
+
+                        return context.nodeModel.findOne({
+                            type: 'Mdx',
+                            query: {
+                                filter: {
+                                    fields: {
+                                        slug: {
+                                            eq: `/teams/${source.slug}/objectives`,
+                                        },
+                                    },
+                                },
+                            },
+                        })
+                    },
+                },
+            },
+        }),
     ])
 
     createTypes(
         `
+            type AchievementGroupIconAttributes {
+              url: String
+            }
+            type AchievementGroupIconData {
+              attributes: AchievementGroupIconAttributes
+            }
+            type AchievementGroupIcon {
+              data: AchievementGroupIconData
+            }
+            type AchievementGroup implements Node {
+              Title: String
+              description: String
+              tiered: Boolean
+              icon: AchievementGroupIcon
+            }
             type ShopifyCollection implements Node {
               handle: String!
               products: [ShopifyProduct!] @link(by: "shopifyId", from: "products.shopifyId")

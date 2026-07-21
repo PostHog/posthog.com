@@ -1,6 +1,6 @@
 import React from 'react'
 import useProducts from 'hooks/useProducts'
-import { LogSlider, inverseCurve, sliderCurve } from '../PricingSlider/Slider'
+import { NonLinearSlider, nonLinearCurve, reverseNonLinearCurve } from '../PricingSlider/Slider'
 import { formatUSD } from '../PricingSlider/pricingSliderLogic'
 import { PricingTiers } from '../Plans'
 import { NumericFormat } from 'react-number-format'
@@ -32,13 +32,13 @@ export default function SingleProductPricing({ productType }: { productType: str
                     </div>
                     {slider && (
                         <div className="col-span-full pr-1.5">
-                            <LogSlider
+                            <NonLinearSlider
                                 stepsInRange={100}
                                 marks={slider.marks}
                                 min={slider.min}
                                 max={slider.max}
-                                onChange={(value) => setVolume(type, sliderCurve(value))}
-                                value={inverseCurve(volume || 0)}
+                                onChange={(value) => setVolume(type, reverseNonLinearCurve(value))}
+                                value={nonLinearCurve(volume || 0)}
                             />
                         </div>
                     )}

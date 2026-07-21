@@ -25,7 +25,6 @@ export default function RoadmapPage() {
                     darkMode={false}
                     article={false}
                     title={'Roadmap'}
-                    hideSearch
                     hideSurvey
                     menu={[
                         { name: 'Questions', url: '/questions' },

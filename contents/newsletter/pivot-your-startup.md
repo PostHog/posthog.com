@@ -22,7 +22,7 @@ At PostHog, we’ve pivoted more than most. It took us six pivots ([count ‘em]
 
 **This week’s theme is: How, and when, to pivot your startup.**
 
-> This article was first published in our newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. [Subscribe here](https://newsletter.posthog.com/subscribe).
+> This article was first published in our newsletter, [build mode](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. [Subscribe here](https://newsletter.posthog.com/subscribe).
 
 ## 1. If you’re going to pivot, make it big
 

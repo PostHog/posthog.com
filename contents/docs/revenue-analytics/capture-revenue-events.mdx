@@ -57,9 +57,9 @@ posthog.capture("purchase_completed", {
 
 ```python
 posthog.capture(
-    "user_distinct_id",
     "purchase_completed",
-    {
+    distinct_id="user_distinct_id",
+    properties={
         "revenue": 1000,
         "currency": "USD",
         "product": "Premium Plan",

@@ -18,9 +18,9 @@ A good candidate for this probably has some combination of the following:
 - The team adopting PostHog work in person at a single location
 - They are not set up with PostHog yet, ie. we would be helping them implement PostHog in their codebase
 - They are able and willing to give our team access to their codebase
-- We are helping them get set up with session replay, feature flags, LLM analytics, and/or error tracking
+- We are helping them get set up with session replay, feature flags, AI Observability, and/or error tracking
 
-If you are working with someone where this might be applicable, ping Charles and Simon first, as we can offer to send a forward deployed engineer to work with them to help get set up. **Please don't just offer this to anyone without checking in**, as we don't have unlimited capacity. 
+If you are working with someone where this might be applicable, ping Ben and Simon first, as we can offer to send a forward deployed engineer to work with them to help get set up. **Please don't just offer this to anyone without checking in**, as we don't have unlimited capacity. 
 
 For ongoing training, this is something that we are solving for separately, but is not within the scope of professional services at the moment. 
 

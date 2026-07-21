@@ -74,4 +74,4 @@ Avoid cramming in custom elements into common existing patterns just because the
 
 Sometimes product design may push back if they simply don't have capacity. It's subjective when this may happen, and it'll usually be in cases where they feel they won't be as helpful based on the above.
 
-[Read more about how product design works at PostHog](/handbook/brand/process) - _it's very unique!_
+[Read more about how product design works at PostHog](/handbook/engineering/product-design-process) - _it's very unique!_
