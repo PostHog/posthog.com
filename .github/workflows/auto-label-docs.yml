@@ -11,10 +11,11 @@ name: Auto Label Docs
 # the only mutation is applying one fixed, pre-approved label — so an untrusted
 # PR has nothing to inject. Changes here only take effect once merged to master.
 #
-# nosemgrep: github-actions-pull-request-target -- No checkout/build of the PR head
-# (no `actions/checkout` at all), permissions are scoped to the minimum, and the PR
-# title is only read inside `if:` expressions, never interpolated into a shell — so
-# there is no "pwn request" surface. Justified per the security team's rule guidance.
+# This safety (no checkout/build of the PR head, minimal permissions, title only
+# read inside `if:`) is why the security-team `pull_request_target` rule is
+# suppressed below. The `nosemgrep` marker must sit on the line directly above
+# the trigger for the suppression to apply.
+# nosemgrep: github-actions-pull-request-target
 on:
     pull_request_target:
         types: [opened, reopened, ready_for_review, edited]
