@@ -196,7 +196,7 @@ You can manually change the plan for a customer by updating the `plans_map` in t
 
 ### Paid features for employee side projects
 
-Employees can get access to paid features (like Boost) on personal or side projects. Ask in #team-billing with your organization ID and someone can set this up. There are two approaches for platform add-ons:
+Employees can get access to paid features (like Boost) on personal or side projects. Ask in #team-billing with your organization ID and someone can set this up. There are two approaches for platform packages:
 
 1. **Special billing-only plan**: Add a plan like `boost-addon-20250602` to the customer's `plans_map` in the billing admin. These plans exist only in the billing system and grant features without a Stripe subscription.
 

@@ -22,9 +22,15 @@ PostHogAndroid.setup(this, config)
 ```
 
 ```react-native
-posthog.init('<ph_project_token>', {
-    opt_out_capturing_by_default: true,
-});
+<PostHogProvider
+    apiKey="<ph_project_token>"
+    options={{
+        host: '<ph_client_api_host>',
+        defaultOptIn: false,
+    }}
+>
+    ...
+</PostHogProvider>
 ```
 
 </MultiLanguage> 

@@ -3,8 +3,6 @@ import { IconFullScreen, IconPlayhead, IconVolumeFull, IconVolumeHalf, IconVolum
 import { Select } from 'components/RadixUI/Select'
 import ZoomHover from 'components/ZoomHover'
 import React, { useEffect, useRef, useState } from 'react'
-import { useApp } from '../../context/App'
-
 // Add types for YouTube and Wistia APIs to avoid TS errors
 declare global {
     interface Window {
@@ -19,10 +17,15 @@ interface MediaPlayerProps {
     videoId: string
     source?: 'youtube' | 'wistia'
     startTime?: number
+    borderRadius?: boolean
 }
 
-export default function MediaPlayer({ videoId, source = 'youtube', startTime = 0 }: MediaPlayerProps) {
-    const { websiteMode } = useApp()
+export default function MediaPlayer({
+    videoId,
+    source = 'youtube',
+    startTime = 0,
+    borderRadius = true,
+}: MediaPlayerProps) {
     const [playerState, setPlayerState] = useState({
         isPlaying: true,
         player: null as any,
@@ -145,8 +148,14 @@ export default function MediaPlayer({ videoId, source = 'youtube', startTime = 0
                         smallPlayButton: false,
                         bigPlayButton: false,
                         playerColor: '000000',
+                        ...(borderRadius ? {} : { playerBorderRadius: 0, roundedPlayer: 0 }),
                     },
                     onReady: (video: any) => {
+                        if (!borderRadius) {
+                            video.setPlayerBorderRadius?.(0)
+                            video.setRoundedPlayer?.(0)
+                        }
+
                         setPlayerState((prev: any) => ({
                             ...prev,
                             player: video,
@@ -189,7 +198,7 @@ export default function MediaPlayer({ videoId, source = 'youtube', startTime = 0
                 initializeWistiaPlayer()
             }
         }
-    }, [videoId, source, startTime])
+    }, [videoId, source, startTime, borderRadius])
 
     const handlePlayPause = () => {
         if (playerState.player) {
@@ -338,7 +347,7 @@ export default function MediaPlayer({ videoId, source = 'youtube', startTime = 0
                 <main
                     data-app="MediaPlayer"
                     data-scheme="primary"
-                    className={`@container flex-1 bg-primary relative h-full ${websiteMode && 'max-w-7xl mx-auto'}`}
+                    className="@container flex-1 bg-primary relative h-full"
                 >
                     <section className="bg-accent px-2 pb-2">
                         {/* Main video area */}
@@ -346,7 +355,10 @@ export default function MediaPlayer({ videoId, source = 'youtube', startTime = 0
                             {source === 'youtube' ? (
                                 <div id={`video-player-iframe-${videoId}`} className="rounded w-full aspect-video" />
                             ) : (
-                                <div ref={containerRef} className="rounded w-full aspect-video" />
+                                <div
+                                    ref={containerRef}
+                                    className={`w-full aspect-video ${borderRadius ? 'rounded' : 'rounded-none'}`}
+                                />
                             )}
                         </div>
 

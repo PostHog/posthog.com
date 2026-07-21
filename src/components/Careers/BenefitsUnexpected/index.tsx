@@ -94,6 +94,8 @@ const BenefitsUnexpected: React.FC = () => {
                         <div>2025</div>
                         <div>Tulum</div>
                         <div>2026</div>
+                        <div>Barbados</div>
+                        <div>2027</div>
                         <div>
                             <span className="inline-block bg-accent rounded-[2px] text-sm w-16 h-[16px] relative top-[2px]"></span>
                         </div>

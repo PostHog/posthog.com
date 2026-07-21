@@ -1,0 +1,90 @@
+---
+title: Downsample
+templateId:
+    - plugin-downsampling-plugin
+---
+
+import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
+import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+Reduces the volume of events coming into PostHog by keeping only a percentage of them. Events that aren't kept are dropped before ingestion, which lowers both the amount of data stored and your [usage/billing](/docs/billing).
+
+This is useful when a high-traffic app sends far more events than you need, and you'd rather trade some completeness for lower cost or volume.
+
+<CalloutBox icon="IconWarning" title="Downsampling is lossy" type="caution">
+
+Dropped events are permanently removed before ingestion — they can't be recovered, and they won't appear in insights, cohorts, or exports. Because the drop happens at ingestion, your charts show the reduced numbers directly: enabling downsampling at 10% looks like a ~90% drop in usage on your graphs. PostHog does **not** scale these numbers back up.
+
+If your goal is faster or cheaper *queries* rather than storing less data, use [insight-level sampling](/docs/product-analytics/sampling) instead — it samples at query time and automatically adjusts the results to estimate the true value.
+
+</CalloutBox>
+
+## Installation
+
+1. In PostHog, click the [Data pipeline](https://app.posthog.com/data-management/transformations) tab in the left sidebar.
+2. Click the [Transformations](https://app.posthog.com/data-management/transformations) tab.
+3. Search for **Downsample** and click **+ Create**.
+4. Set the percentage of events to keep and choose a sampling method (see below).
+5. Press **Create & Enable** to start downsampling.
+
+<HideOnCDPIndex>
+
+## Configuration
+
+<TemplateParameters />
+
+## Sampling methods
+
+The **Sampling method** option controls *how* the transformation decides which events to keep. This choice matters a lot for whether your remaining data stays coherent per user.
+
+### Distinct ID aware sampling (default)
+
+Sampling is based on the event's `distinct_id`. The transformation hashes the `distinct_id` and keeps the event only if that hash falls under your chosen percentage. Because the decision depends solely on the ID, **every event from a given user is either all kept or all dropped** — a user is never partially sampled.
+
+The practical effect: at 50%, you don't get a random 50% slice of every user's events. You get **100% of the events for roughly 50% of your users**. Per-user sequences — funnels, paths, session replays, retention — stay intact for the users who are kept, so you preserve data integrity at the cost of your overall user count dropping to about the keep percentage.
+
+The hash is also stable across percentage changes. A user who is kept at 10% stays kept if you later raise the percentage to 20%, so widening the sample only adds users rather than reshuffling who's in it.
+
+### Random sampling
+
+Each event is evaluated independently with a random roll against your keep percentage. This gives you close to an exact percentage of your total event volume, but it does so by dropping events at random across all users — so an individual user's event stream will have gaps in it. Use this only when total event count matters more than keeping any single user's activity complete.
+
+## Triggering events
+
+By default, all events are downsampled. To downsample only specific events, set **Triggering events** to a comma-separated list (for example `$pageview,$autocapture`). Events not in the list are always kept.
+
+<CalloutBox icon="IconInfo" title="Preserve PostHog's internal events" type="fyi">
+
+Some PostHog features rely on receiving 100% of certain internal events. If you only want to cut volume from your own high-frequency events, list those specific events under **Triggering events** rather than downsampling everything.
+
+</CalloutBox>
+
+## Testing
+
+Before enabling downsampling in production, use the built-in testing interface to confirm it behaves as expected:
+
+1. Go to the **Testing** section of your transformation.
+2. Select an event to test with.
+3. Run the test to see whether the event would be kept or dropped.
+4. Adjust the percentage or sampling method until you're satisfied.
+
+## FAQ
+
+### Does downsampling affect my quota/billing?
+
+Yes. Downsampled (dropped) events are removed before ingestion, so they don't count towards your usage or billing.
+
+### Does this change how much I'm sampling per user?
+
+Only with distinct ID aware sampling. That method keeps whole users, so "50%" means roughly half your users are kept in full — not half of each user's events. Random sampling drops events across all users, so it's closer to an exact percentage of total volume but leaves gaps in individual users' data.
+
+### Is the source code for this transformation available?
+
+Yes. PostHog is open source, and so are its transformations. The [source code](https://github.com/PostHog/posthog/blob/master/nodejs/src/cdp/legacy-plugins/_transformations/downsampling-plugin/index.ts) is available on GitHub.
+
+<PostHogMaintained />
+
+<FeedbackQuestions />
+
+</HideOnCDPIndex>

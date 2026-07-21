@@ -1,24 +1,24 @@
 ---
-title: Widget setup and configuration
+title: Set up the widget
 sidebar: Docs
 showTitle: true
 ---
 
-The Support widget is a chat interface that appears on your website, allowing users to start conversations with your team. It loads automatically when enabled and captures session context for each ticket.
+The Support widget is a chat interface that appears on your website so your customers can start conversations with your team. It loads automatically when enabled and captures session context for each ticket.
 
-## Enabling the widget
+## Enable the widget
 
 1. Go to **Support** in PostHog and click **Settings**
-2. Click **Enable conversations** (if not already enabled)
+2. Click **Enable conversations**
 3. Go to the **In-app widget** section and enable it
-4. Configure your settings (see below)
-5. Save
+4. Configure your settings
+5. Click **Save**
 
 The widget appears as a floating button on your site. By default it appears in the bottom-right corner, but you can customize its position in the settings.
 
-## Widget configuration
+### Configuration options
 
-These settings are configured in the **In-app widget** section of Support settings.
+Configure these settings in the **In-app widget** section of Support settings:
 
 | Setting | Description | Options | Default |
 |---------|-------------|---------|--------|
@@ -28,7 +28,7 @@ These settings are configured in the **In-app widget** section of Support settin
 | **Greeting message** | Welcome text shown when widget opens | Any string | `"Hi! How can we help?"` |
 | **Allowed domains** | Restrict which domains can show the widget | Array of domain strings | `[]` (all domains) |
 
-## Identification form
+### Identification form
 
 You can optionally require users to identify themselves before starting a conversation:
 
@@ -39,9 +39,13 @@ You can optionally require users to identify themselves before starting a conver
 | **Form title** | Heading shown on the identification form | `"Before we start..."` |
 | **Form description** | Subtext shown below the title | `"Please provide your details so we can help you better."` |
 
-When enabled, the form appears before they can send their first message. The collected information is used to link the ticket to a person in PostHog.
+When enabled, the form appears before they can send their first message. PostHog uses this information to link the ticket to a person.
 
-## Domain restrictions
+## Customize widget behavior
+
+Control where the widget loads and how it appears.
+
+### Restrict domains
 
 You can restrict which domains the widget appears on for security:
 
@@ -56,9 +60,9 @@ domains: [
 
 If `domains` is empty or not set, the widget shows on all domains.
 
-## Controlling widget visibility
+### Show and hide the widget
 
-Use the JavaScript API to programmatically show or hide the widget:
+Use the [JavaScript API](/docs/support/javascript-api) to programmatically show or hide the widget:
 
 ```javascript
 // Show the widget (renders it if not already rendered)
@@ -76,7 +80,7 @@ This is useful for:
 - Triggering the widget from a custom button
 - Hiding the widget during specific user flows
 
-## Disabling the widget via config
+### Disable the widget
 
 You can disable conversations entirely via the PostHog init config:
 
@@ -92,20 +96,18 @@ This is different from hiding the widget – it completely disables the feature.
 
 Support tickets are tied to the browser session by default. If a user switches browsers or clears their storage, they won't see their previous tickets. The widget includes a **Recover your tickets** link to handle this.
 
-### How recovery works
-
 1. Click **Recover your tickets** in the ticket list
 2. Enter the email address used in previous conversations
-3. A recovery link is sent to that email (expires in one hour)
+3. A recovery link is sent to that email and expires in one hour
 4. Click the link to open the widget and restore tickets in the new browser
 
-If the page URL contains a `ph_conv_restore` query parameter (from clicking the recovery link), tickets are automatically restored on page load. The parameter is removed from the URL after processing.
+If the page URL contains a `ph_conv_restore` query parameter from the recovery link, tickets are automatically restored on page load. The parameter is removed from the URL after processing.
 
 ## Identity verification
 
-If your app has logged-in users, identity verification works better than email-based recovery. You sign the user's distinct ID on your server, and tickets persist across browsers and devices automatically – no user action required.
+If your app has logged-in users, identity verification works better than [email-based recovery](/docs/support/widget#recover-tickets-across-browsers). You sign the user's distinct ID on your server, and tickets persist across browsers and devices automatically – no user action required.
 
-<CalloutBox icon="IconInfo" title="setIdentity vs identify" type="info">
+<CalloutBox icon="IconInfo" title="setIdentity vs identify" type="fyi">
 
 `posthog.setIdentity()` and `posthog.identify()` are different methods:
 
@@ -183,16 +185,16 @@ function computeIdentityHash(string $distinctId, string $secretApiToken): string
 
 </MultiLanguage>
 
-### Passing identity to the widget
+### Pass identity to the widget
 
 Once you've computed the hash on your server, pass it to your frontend and set it on the PostHog SDK.
 
 **Option 1: Set identity at initialization**
 
-If you know the user's identity when PostHog initializes (like on a server-rendered page), pass it in the init config:
+If you know the user's identity when PostHog initializes, such as on a server-rendered page, pass it in the init config:
 
 ```javascript
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: '<ph_client_api_host>',
   identity_distinct_id: 'user_123',       // From your auth system
   identity_hash: 'a1b2c3d4e5f6...',       // HMAC hash from your server
@@ -201,7 +203,7 @@ posthog.init('<ph_project_api_key>', {
 
 **Option 2: Set identity after login**
 
-For single-page apps — or when the user logs in after page load — call `setIdentity()`:
+For single-page apps – or when the user logs in after page load – call `setIdentity()`:
 
 ```javascript
 // After user logs in, your server returns the hash
@@ -235,17 +237,19 @@ Your `secret_api_token` must never be exposed in client-side code. Always comput
 
 If your team doesn't have a `secret_api_token` configured, identity verification is ignored and the widget falls back to session-based access control.
 
-## Email notifications
+## Notifications
+
+Get notified when new tickets arrive, by email or in your browser.
+
+### Email notifications
 
 Configure your team to receive email alerts when new tickets arrive.
 
-### Setting up notifications
-
-1. Go to **Settings > Support** in PostHog
+1. Go to **Settings** > **Support** in PostHog
 2. Find the **Email notifications** section
 3. Select team members who should receive alerts
 
-### What emails include
+Emails include:
 
 - Team name
 - Ticket number
@@ -254,13 +258,13 @@ Configure your team to receive email alerts when new tickets arrive.
 
 Recipients must have access to the team to receive notifications.
 
-<CalloutBox icon="IconLightBulb" title="Use workflows for advanced notifications" type="info">
+<CalloutBox icon="IconLightBulb" title="Use Workflows for advanced notifications" type="fyi">
 
 For more control over notifications – like sending alerts only for high-priority tickets, routing to specific Slack channels, or notifying different teams based on tags – use [workflow automation](/docs/support/workflows). Workflows let you trigger Slack messages, webhooks, and more based on any ticket event.
 
 </CalloutBox>
 
-## Browser notifications
+### Browser notifications
 
 Individual team members can enable browser notifications for new ticket activity.
 
@@ -275,7 +279,7 @@ The widget uses a public token for authentication. This token is automatically g
 
 If you need to reset the token:
 
-1. Go to **Support > Settings**
+1. Go to **Support** > **Settings**
 2. Click **Regenerate token**
 
 <CalloutBox icon="IconWarning" title="Resetting stops active chats" type="caution">
