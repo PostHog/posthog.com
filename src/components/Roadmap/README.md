@@ -15,6 +15,8 @@ Do not duplicate this data in the component or add hard-coded feature cards. Upd
 
 The board is generated from one ordered stage configuration: Beta, Alpha, and Concept. All three lanes remain rendered while filtering, including empty lanes, so the product progression stays understandable. Each lane grows to its own content height and shows its current filtered count; the Editor window owns the page's only vertical scrollbar.
 
+Stage color cues are shared through `roadmapStageStyles.ts`: Beta uses green, Alpha uses blue, and Concept uses purple. Apply these colors as restrained tinted surfaces on stage icons, counts, and chips rather than coloring entire lanes. The explanatory hero copy reuses the same map when highlighting stage names.
+
 Cards intentionally contain only:
 
 - Feature title

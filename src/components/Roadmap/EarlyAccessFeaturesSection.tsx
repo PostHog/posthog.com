@@ -29,6 +29,7 @@ import useEarlyAccessFeatures, { EarlyAccessFeature, EarlyAccessFeatureStage } f
 import { useFeatureOwnership } from 'hooks/useFeatureOwnership'
 import usePostHog from 'hooks/usePostHog'
 import { ROADMAP_TEAM_OVERRIDES } from './roadmapTeamOverrides'
+import { ROADMAP_STAGE_STYLES } from './roadmapStageStyles'
 
 const featurePreviewUrl = (flagKey: string): string =>
     `https://us.posthog.com/settings/user-feature-previews#${flagKey}`
@@ -47,6 +48,7 @@ interface StageDefinition {
     title: string
     description: string
     icon: React.ReactNode
+    styles: (typeof ROADMAP_STAGE_STYLES)[BoardStage]
 }
 
 const STAGES: StageDefinition[] = [
@@ -55,18 +57,21 @@ const STAGES: StageDefinition[] = [
         title: 'Beta',
         description: 'Ready to enable and try in PostHog.',
         icon: <IconRocket className="size-5" />,
+        styles: ROADMAP_STAGE_STYLES.beta,
     },
     {
         stage: 'alpha',
         title: 'Alpha',
         description: 'In testing with a small group of users.',
         icon: <IconFlask className="size-5" />,
+        styles: ROADMAP_STAGE_STYLES.alpha,
     },
     {
         stage: 'concept',
         title: 'Concept',
         description: 'Ideas we have committed to exploring.',
         icon: <IconLightBulb className="size-5" />,
+        styles: ROADMAP_STAGE_STYLES.concept,
     },
 ]
 
@@ -118,8 +123,11 @@ const FeatureBadges = ({ isNew, isPopular }: { isNew: boolean; isPopular: boolea
 
 const StageChip = ({ stage }: { stage: BoardStage }): JSX.Element => {
     const definition = STAGES.find((item) => item.stage === stage)
+    const styles = ROADMAP_STAGE_STYLES[stage]
     return (
-        <span className="inline-flex items-center gap-1 rounded-full border border-primary bg-accent px-2 py-0.5 text-xs font-semibold capitalize">
+        <span
+            className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-xs font-semibold capitalize ${styles.border} ${styles.surface} ${styles.text}`}
+        >
             {definition?.icon}
             {stage}
         </span>
@@ -401,12 +409,18 @@ const RoadmapLane = ({
             className="flex w-[min(340px,calc(100cqw-2rem))] shrink-0 snap-start flex-col overflow-hidden rounded-lg border border-primary bg-accent @5xl:w-auto"
         >
             <header className="shrink-0 border-b border-primary bg-primary px-3 py-3">
-                <div className="flex items-center gap-2 text-red dark:text-yellow">
-                    {definition.icon}
+                <div className="flex items-center gap-2">
+                    <span
+                        className={`inline-flex size-7 shrink-0 items-center justify-center rounded-md ${definition.styles.surface} ${definition.styles.text}`}
+                    >
+                        {definition.icon}
+                    </span>
                     <h2 id={`roadmap-${definition.stage}-title`} className="m-0 text-lg text-primary">
                         {definition.title}
                     </h2>
-                    <span className="rounded-full border border-primary bg-accent px-2 py-0.5 text-xs font-semibold text-secondary">
+                    <span
+                        className={`rounded-full border px-2 py-0.5 text-xs font-semibold ${definition.styles.border} ${definition.styles.surface} ${definition.styles.text}`}
+                    >
                         {features.length}
                     </span>
                 </div>

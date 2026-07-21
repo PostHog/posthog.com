@@ -2,6 +2,7 @@ import React from 'react'
 import Editor from 'components/Editor'
 import SEO from 'components/seo'
 import EarlyAccessFeaturesSection from 'components/Roadmap/EarlyAccessFeaturesSection'
+import { ROADMAP_STAGE_STYLES } from 'components/Roadmap/roadmapStageStyles'
 
 const RoadmapPage = () => {
     return (
@@ -34,8 +35,25 @@ const RoadmapPage = () => {
                                 has a waitlist – drop your email and we'll let you know the moment it ships.
                             </p>
                             <p className="mb-0 mt-3 max-w-5xl text-sm leading-relaxed text-secondary">
-                                Every feature moves through stages – concept and alpha are early ideas, beta is ready to
-                                try, and then it reaches general availability.
+                                Every feature moves through stages –{' '}
+                                <span
+                                    className={`rounded-sm px-1 py-0.5 font-semibold ${ROADMAP_STAGE_STYLES.concept.surface} ${ROADMAP_STAGE_STYLES.concept.text}`}
+                                >
+                                    concept
+                                </span>{' '}
+                                and{' '}
+                                <span
+                                    className={`rounded-sm px-1 py-0.5 font-semibold ${ROADMAP_STAGE_STYLES.alpha.surface} ${ROADMAP_STAGE_STYLES.alpha.text}`}
+                                >
+                                    alpha
+                                </span>{' '}
+                                are early ideas,{' '}
+                                <span
+                                    className={`rounded-sm px-1 py-0.5 font-semibold ${ROADMAP_STAGE_STYLES.beta.surface} ${ROADMAP_STAGE_STYLES.beta.text}`}
+                                >
+                                    beta
+                                </span>{' '}
+                                is ready to try, and then it reaches general availability.
                             </p>
                         </div>
                         <img
