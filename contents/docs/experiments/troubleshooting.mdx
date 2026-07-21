@@ -1,13 +1,18 @@
 ---
 title: Experiment troubleshooting
 ---
-export const AssignAnOverrideLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/assigning-an-override-light-mode.mp4"
-export const AssignAnOverrideDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/assigning-an-override-dark-mode.mp4"
 
-import { ProductScreenshot } from 'components/ProductScreenshot'
-import ReturningUsersExposures from "./snippets/returning-users-exposures.mdx"
-export const ReuseFeatureFlagLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/experiments/reuse-feature-flag-for-experiment-light-mode.png"
-export const ReuseFeatureFlagDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/experiments/reuse-feature-flag-for-experiment-dark-mode.png"
+export const AssignAnOverrideLight =
+  "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/assigning-an-override-light-mode.mp4";
+export const AssignAnOverrideDark =
+  "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/assigning-an-override-dark-mode.mp4";
+
+import { ProductScreenshot } from "components/ProductScreenshot";
+import ReturningUsersExposures from "./snippets/returning-users-exposures.mdx";
+export const ReuseFeatureFlagLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/experiments/reuse-feature-flag-for-experiment-light-mode.png";
+export const ReuseFeatureFlagDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/experiments/reuse-feature-flag-for-experiment-dark-mode.png";
 
 This page covers troubleshooting for Experiments. For setup, see the [installation guides](/docs/experiments/installation).
 
@@ -26,10 +31,10 @@ However, if you insist on doing this (for example, you don't want to make code c
 3. Name the first variant in your new feature flag 'control'.
 
 <ProductScreenshot
-    imageLight = {ReuseFeatureFlagLight}
-    imageDark = {ReuseFeatureFlagDark}
-    alt = "Reuse an existing feature flag for an experiment"
-    classes = "rounded"
+  imageLight={ReuseFeatureFlagLight}
+  imageDark={ReuseFeatureFlagDark}
+  alt="Reuse an existing feature flag for an experiment"
+  classes="rounded"
 />
 
 > **Note:** Deleting a flag is equivalent to disabling it, so it is off for however long it takes you to create the draft experiment. The flag is enabled as soon as you create the experiment (not launched).
@@ -55,13 +60,13 @@ See our docs on [how to run an experiment without using feature flags](/docs/exp
 Once you create the experiment, go to the feature flag, scroll down to "Release Conditions". For each condition, there is an "Optional Override". This enables you to choose a release condition and force all people in this release condition to have the variant chosen in the optional override.
 
 <ProductVideo
-    videoLight = {AssignAnOverrideLight}
-    videoDark = {AssignAnOverrideDark}
-    alt = "How to assign an experiment override"
-    classes = "rounded"
+  videoLight={AssignAnOverrideLight}
+  videoDark={AssignAnOverrideDark}
+  alt="How to assign an experiment override"
+  classes="rounded"
 />
 
-import FAQFalseOrNoneEvents from "../feature-flags/snippets/faq-false-or-none-events.mdx"
+import FAQFalseOrNoneEvents from "../feature-flags/snippets/faq-false-or-none-events.mdx";
 
 <FAQFalseOrNoneEvents />
 
@@ -187,8 +192,27 @@ The property doesn't exist on the event you're measuring.
 
 **Check:** Go to Data Management → Events → click the event → Properties tab. If your property isn't listed, your instrumentation needs to include it.
 
+### My experiment metric shows "Retry N of M"
+
+When a metric displays a "Retry N of M" tag, PostHog is automatically retrying the calculation after a transient failure. The tag replaces the usual "Recalculating" indicator and shows a countdown to the next attempt. Hovering the tag opens a popover with the full details.
+
+Reasons a retry can happen:
+
+- **Rate limited**: The ClickHouse cluster is under heavy load and rate-limited the query.
+- **Timeout**: The calculation took too long to complete.
+- **Out of memory**: The query required more memory than was available.
+- **Server error**: Something unexpected went wrong while computing the metric.
+
+PostHog retries automatically with increasing delays between attempts. The chart cell for the affected metric shows the reason, the retry counter, and a countdown to the next attempt. The status bar at the top of the results also shows how many metrics are retrying.
+
+Metrics that already have results continue displaying them while a recalculation is retried. Only metrics waiting for their first result show the retry panel in place of the chart.
+
+**What to do:**
+
+- **Wait.** Most retries succeed within a few minutes.
+- **Check again later.** If retries keep failing, the underlying query may be too expensive for the current cluster load.
+- **Contact support.** If a metric consistently fails after all retry attempts, [contact support](https://app.posthog.com/home#supportModal=bug%3Aexperiments) for help.
+
 ## Solved community questions
 
-<SolvedQuestions
-    topicLabel="Experiments"
-/>
+<SolvedQuestions topicLabel="Experiments" />
