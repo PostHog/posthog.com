@@ -153,7 +153,7 @@ We use a number of different tools to organise our work and communicate at PostH
 ### Ops, People & CS
 
 -   Salesforce - customer CRM
--   Zendesk - our support platform
+-   PostHog Support - our support platform
 -   Mosaic - financial modelling
 -   Carta - cap table management
 -   Fondo - US accounting
@@ -202,14 +202,14 @@ In this call the support engineer will be able to answer any questions, as well 
 
 -   [ ] [What the role of a support hero is](/handbook/support/customer-support#support-is-done-by-actual-engineers) and how they can expect to receive tickets/escalations
 -   [ ] [An overview of where tickets come from](/handbook/support/customer-support#its-easy-for-customers-to-reach-us) and how to differentiate between paying/free users
--   [ ] [How to create tickets from Slack threads](/handbook/engineering/support-hero#creating-zendesk-tickets-from-slack-posts) and [reassign tickets to other teams](https://support.zendesk.com/hc/en-us/articles/4408887127450-Manually-assigning-a-ticket)
--   [ ] [Advice on how to communicate with customers](/handbook/engineering/support-hero#how-do-i-communicate) and [prioritize tickets](/handbook/engineering/support-hero#how-do-i-prioritize)
--   [ ] [How and when to mark tickets as 'On Hold' or 'Pending'](/handbook/engineering/support-hero#ticket-status)
+-   [ ] [How tickets get created from Slack threads](/handbook/support/posthog-support#how-do-tickets-get-created) and how to [transfer tickets to other teams](/handbook/support/posthog-support#transferring-a-ticket-to-another-team)
+-   [ ] [Advice on how to communicate with customers](/handbook/engineering/support-hero#how-do-i-communicate) and [prioritize tickets](/handbook/support/posthog-support#prioritizing-tickets)
+-   [ ] [How and when to mark tickets as 'On hold' or 'Pending'](/handbook/support/posthog-support#ticket-statuses)
 -   [ ] [What our SLAs](/handbook/support/customer-support#response-targets) are and [what ticket severity indicates](/docs/support-options#severity-levels)
--   [ ] HogHero - how to deal with bug reports and feature requests, and how to merch customers (including [macros](https://support.zendesk.com/hc/en-us/articles/4408887656602-Using-macros-to-update-tickets))
--   [ ] How to avoid duplication of effort in Zendesk
--   [ ] [Which views should be used in Zendesk](https://support.zendesk.com/hc/en-us/articles/4408832792986-Managing-your-views)
--   [ ] How to use [side conversations](https://support.zendesk.com/hc/en-us/articles/4604286879642-Creating-side-conversations) in Zendesk
+-   [ ] How to deal with [bug reports and feature requests](/handbook/support/customer-support#how-do-i-handle-a-bug-report-or-feature-request), and how to [merch customers](/handbook/company/merch-store#merch-giveaways)
+-   [ ] How to avoid duplication of effort by [assigning tickets when you start work](/handbook/support/posthog-support#working-on-a-ticket)
+-   [ ] [Where your tickets live](/handbook/support/posthog-support#where-do-the-tickets-live)
+-   [ ] When to use [private notes](/handbook/support/posthog-support#private-notes), and raising internal questions about a ticket in Slack
 
 It can be especially helpful for new hires if support engineers demonstrate how to solve a few simple tickets from start to finish, through shadowing.
 

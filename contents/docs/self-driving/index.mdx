@@ -10,7 +10,7 @@ contentMaxWidthClass: max-w-5xl
 import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
 import OSButton from 'components/OSButton'
 import WizardCommand from 'components/WizardCommand'
-import SelfDrivingLoop from 'components/SelfDrivingLoop'
+import LiveSelfDrivingLoop from 'components/LiveSelfDrivingLoop'
 import { IconMessage, IconLaptop, IconMagic, IconCode, IconTerminal } from '@posthog/icons'
 
 PostHog makes your product self-driving. It watches how people actually use your product, finds what's worth fixing, opens a pull request, and measures whether the change worked. You review and merge. Turning it on takes one command:
@@ -31,7 +31,7 @@ It runs as a loop. Scouts and signal sources emit signals, signals group into re
 
 When a report is actionable, PostHog opens a pull request for you to review and merge; when it needs your input, it surfaces the report in your inbox instead. PostHog then checks whether the change worked and feeds the result back into the next pass.
 
-<SelfDrivingLoop />
+<LiveSelfDrivingLoop />
 
 Self-driving works because the signals that drive the loop live in your product data, and that's exactly what PostHog has.
 

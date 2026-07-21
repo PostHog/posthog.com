@@ -3,15 +3,17 @@ title: Flask
 platformLogo: flask
 ---
 
+import PythonSdkVersionNote from '../_snippets/python-sdk-version-note.mdx'
+
 PostHog makes it easy to get data about traffic and usage of your Flask app. Integrating PostHog enables analytics, custom events capture, feature flags, error tracking, and more.
 
 This guide walks you through integrating PostHog into your Flask app using the [Python SDK](/docs/libraries/python).
 
+> These docs cover version `7.x` of the Python SDK, which requires Python 3.10 or higher. On Python 3.9? See [supported versions](#supported-versions).
+
 ## Installation
 
 To start, run `pip install posthog` to install PostHog’s Python SDK.
-
-> **Note:** Version `7.x` of the PostHog Python SDK requires Python 3.10 or higher.
 
 Then, initialize PostHog where you'd like to use it. For example, here's how to capture an event in a simple route:
 
@@ -47,7 +49,7 @@ import IdentifyBackendCalloutPython from '../_snippets/identify-backend-callout-
 
 Use [contexts](/docs/libraries/python#contexts) to share identity, session IDs, and tags across multiple captures during a request.
 
-If you're using [PostHog JS](/docs/libraries/js) on the frontend, configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your Flask backend hostname so browser requests include the session and distinct ID headers.
+If you're using [PostHog JavaScript Web](/docs/libraries/js) on the frontend, configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your Flask backend hostname so browser requests include the session and distinct ID headers.
 
 Then read the incoming headers in your Flask request handler. Tracing headers are client-controlled analytics context, not authentication or authorization, so prefer your authenticated user ID when one is available:
 
@@ -94,3 +96,7 @@ Alternatively, the following tutorials can help you get started:
 - [How to set up analytics in Python and Flask](/tutorials/python-analytics)
 - [How to set up feature flags in Python and Flask](/tutorials/python-feature-flags)
 - [How to set up A/B tests in Python and Flask](/tutorials/python-ab-testing)
+
+## Supported versions
+
+<PythonSdkVersionNote />

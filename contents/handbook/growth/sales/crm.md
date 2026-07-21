@@ -57,11 +57,9 @@ If the submission is clearly a support or billing request, you don’t need to r
 - This automatically creates a Zendesk ticket for the correct team.
 - No manual outreach is needed; automation handles it.
 
-### Zendesk Integration
+### Leads from support tickets
 
-If you add "sf-lead" tag to a ticket in Zendesk, a new lead will be automatically created in Salesforce. This helps streamline the process of converting support questions or tickets into potential sales opportunities directly from Zendesk.
-
-If you see "Zendesk" as the lead source, please review the ticket under the Zendesk widget in Salesforce which allows you to view the full context within salesforce. It will also appear in sales_form_message field for quick review of last request before the Zendesk ticket is converted to a lead.
+If the support team spots a sales opportunity in a support ticket, they post it in #group-cs-sales-support for sales/CS to pick up (see [handling sales leads](/handbook/support/customer-support#handling-sales-leads)). If you pick one up, add it to Salesforce as described in [manual entry](#manual-entry).
 
 ### Forwarding sales opportunities
 
@@ -290,6 +288,8 @@ Exit criteria:
 
 6. Closed Won (100%) - They have signed the contract and are officially a PostHog customer.
 7. Closed Lost (0%) - At some point in the pipeline they decided not to use us. The Loss Reason field is required for any opportunity to be marked as Closed lost.
+
+> **Duplicate opportunities should be deleted, not marked as Closed Lost.** A duplicate isn't a real loss, so marking it Closed Lost pollutes our loss data and skews win/loss reporting. Delete the duplicate record instead. Only use Closed Lost when a genuine opportunity didn't work out.
 
 Bolded exit criteria indicate the minimum standard for the opportunity to advance stages (for typically smaller, more transational deals). More detail is available on the stages and the exit criteria for each state <PrivateLink url='https://docs.google.com/spreadsheets/d/1BpLMHZ52iE1Ni0-Hf0Y68RSq0ohNNnJv7Jd90lgSI6s/edit?usp=sharing'>in this spreadsheet</PrivateLink>
 
