@@ -37,7 +37,7 @@ export const sentry = {
                 product_analytics: false,
             },
         },
-        llm_analytics: {
+        ai_observability: {
             available: true,
         },
         session_replay: {

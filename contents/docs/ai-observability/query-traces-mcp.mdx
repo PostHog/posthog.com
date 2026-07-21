@@ -26,6 +26,8 @@ The MCP server provides these tools for working with LLM traces:
 
 A typical workflow starts with `get-llm-total-costs-for-project` to check overall spend and identify which models are most expensive, then uses `query-run` with a HogQL query to drill into specific traces by feature, time range, or cost threshold.
 
+> **Querying prompts and completions?** The large content fields – `$ai_input`, `$ai_output_choices`, `$ai_input_state`, `$ai_output_state`, and `$ai_tools` – live only on the `posthog.ai_events` table, not `events`. Query `posthog.ai_events` and anchor on `trace_id` to read them. Metadata like model, cost, token counts, and trace IDs stays on `events`. Rows in `posthog.ai_events` are dropped after the [retention period](/docs/ai-observability/data-retention) (30 days by default), but rows in `events` have the same retention policy as product analytics events.
+
 ## Example prompts
 
 Try these with your MCP-enabled agent:

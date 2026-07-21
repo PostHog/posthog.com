@@ -23,34 +23,32 @@ To get a shared Slack channel going, follow these steps:
 2. When determining the `[customername]`, make sure to make it searchable (avoid acronyms, if possible).
 3. Obviously, invite the relevant customer folks! Be sure that you're inviting them to the *channel* you've created and not our Slack workspace. 
 4. Invite certain leaders who want to help monitor the channel, including: Tim, Ben, Abigail, Simon, your team lead and anyone else internal who may be connected to the customer. PostHog folks will sometimes join the channel if they're interested in the customer or the use-case
-5. Invite [Pylon](/handbook/engineering/support-hero#pylon-to-create-zendesk-tickets-from-slack-posts) to ensure those from PostHog and the customer can create support tickets from Slack threads - Use the a slash command in Slack to invite Pylon `/invite @pylon` . Pylon will join and prompt you with some questions. Note that this is a `customer channel`, and select yourself as the channel owner. If your name is not available in the dropdown, you can login to Pylon and add yourself as the owner from the Pylon UI. You can check to see if the connection is established in the ["Account Mapping" section in Pylon](https://app.usepylon.com/apps/530aefd1-b625-4e7d-91c0-320c2ede2b51?tab=account-mapping).
+5. Invite SupportHog to ensure those from PostHog and the customer can create support tickets from Slack threads - use a slash command in Slack to invite it: `/invite @SupportHog`. Once it's in the channel, a ticket can be raised by reacting to any message with the :ticket: emoji or by mentioning `@SupportHog` in a thread.
 6. Set your preferences to "Get notifications for all messages" in the channel -- this will ensure you don't miss a message and allow for speedy support. 
-7. Ensure that the Slack channel name is recorded on the relevant Salesforce Account record in the `Slack Channel` field (Pylon should sync this automatically) -- If the `[customername]` in Slack is different from the Account record name in Salesforce, Pylon will not automatically match the two.
+7. Ensure that the Slack channel name is recorded on the relevant Salesforce Account record in the `Slack Channel` field.
 8. Grab the Admin Panel link (from Vitally under PostHog Default Dashboard) and in the channel add this as a new link. Name it Org Link and add a new folder called Support. This is helpful to our Support Team for quickly accessing the customer's account when questions are posted in Slack.
 9. Add your role and title to the channel description (e.g. Technical CSM: FirstName LastName). This will help team members identify who's the main point of contact for this customer.
 
 If you have any questions as you go, ping your colleagues for support in your team channel.
 
-## Editing a pylon integration with Slack
-If you accidentally set the wrong channel for a feed or mess up some other pylon settings, you need to log into the [Pylon admin](https://app.usepylon.com/) to change it. You can SSO via Slack, just put in your PostHog email address. Once logged in, click on accounts in the left rail, find the account you need to change, click on it, and on the right rail, you will see Slack integration settings. 
+## Using MS Teams
 
-## Using MS Teams via Pylon
+Some customers may wish to use MS Teams rather than Slack. SupportHog works in Teams without a separate app - as long as SupportHog is in our Teams instance, customers can raise tickets by mentioning `@SupportHog` in a channel thread. Note that the :ticket: emoji reaction is Slack-only; in Teams customers should `@mention` SupportHog to raise a ticket.
 
-Some customers may wish to use MS Teams rather than Slack - we can sync our Slack with Teams via Pylon to do this. First you will need an MS Teams licence - ask Simon, or Dana for one. Then, set up a Slack channel according to the instructions above. Then, follow these steps:
+First you will need an MS Teams licence - ask Simon, or Dana for one. Then follow these steps:
 
-1. In Teams go to "See all your teams" and then "Create team". When naming the team the expected syntax is `[CustomerName-PostHog]. Make sure to set the team type to Public and name the first channel "Shared" then finish creating the team.
-2. Now, go to the team you created and go to the Apps tab. Click "Get more apps" and open the Posthog Team app that's under "Built for your org". Select the Shared channel from your newly created team.
-3. On [this page in Pylon](https://app.usepylon.com/apps/8e33c7e9-28e9-4fd5-8e15-7ebe90ec24ae) you should see your new team listed, using the search dropdown to connect it to the Pylon account associated with the customer.
-4. Before adding the customer into the Teams, remember to test it on both sides to ensure the integration is working correctly. After you test it, invite the relevant customer folks by adding them as members to the team!
+1. In Teams go to "See all your teams" and then "Create team". When naming the team the expected syntax is `[CustomerName-PostHog]`. Make sure to set the team type to Public and name the first channel "Shared" then finish creating the team.
+2. Test that mentioning `@SupportHog` in the channel raises a ticket correctly before adding the customer.
+3. Once you've confirmed it's working, invite the relevant customer folks by adding them as members to the team!
 
 ## Onboard Your Customer to Slack Support
 
 Welcome them to the channel when they join! 
 
-Set context for the channel's purpose and timing (if applicable). Let them know that they may hear from anyone at PostHog who is monitoring the channel, and also don't miss the opportunity to train them how to open a ticket with the Pylon app. 
+Set context for the channel's purpose and timing (if applicable). Let them know that they may hear from anyone at PostHog who is monitoring the channel, and also don't miss the opportunity to train them how to open a ticket with SupportHog. 
 
 A message like this one does wonders to help them understand how to open a ticket if you're not online to help yourself:
 
->We also have an app here that will open a ZenDesk ticket if I'm sleeping. You only have to add the :ticket: emoji to the thread and it will open a ZenDesk ticket automatically, and capture the back and forth in the specific Slack thread that received that emoji. You can also `@support` in a thread to open a ticket as well. It's a good habit to get into in order to make sure our distributed team can help.
+>We also have an app here that will open a support ticket if I'm sleeping. You only have to add the :ticket: emoji to the thread and it will open a ticket automatically, and capture the back and forth in the specific Slack thread that received that emoji. You can also mention `@SupportHog` in a thread to open a ticket as well. It's a good habit to get into in order to make sure our distributed team can help.
 
 The [New sales playbook has more](https://posthog.com/handbook/growth/sales/new-sales#4-product-evaluation) on ensuring that the customer is set up for success.

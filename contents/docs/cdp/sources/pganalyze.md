@@ -39,3 +39,7 @@ The **issues** table supports incremental syncing using the `synced_at` field. T
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

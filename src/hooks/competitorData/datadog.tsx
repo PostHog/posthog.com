@@ -81,7 +81,7 @@ export const datadog = {
         surveys: {
             available: false,
         },
-        llm_analytics: {
+        ai_observability: {
             available: true,
         },
     },
