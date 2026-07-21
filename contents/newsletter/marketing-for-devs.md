@@ -69,7 +69,7 @@ Here's what we've learned about marketing for developers.
 
 19. Identify [what you want to be great at](/newsletter/b2b-startup-marketing-strategy#1-prioritize-what-you-care-about-) and spend your time there. List the areas you [don't want to spend time on too](/handbook/marketing#things-we-dont-want-to-spend-time-on), otherwise you will be distracted by a bunch of random opportunities and never go into the depth you need to succeed in one channel.
 
-20. Compete on [depth rather than breadth](/newsletter/b2b-startup-marketing-strategy#2-compete-on-depth-not-breadth-). Larger competitors will always be able to do “more” marketing than you are, so you need to focus on quality to stand out. When we choose to spend time on something, we invest a lot more into it than others usually do.
+20. Compete on [depth rather than breadth](/newsletter/b2b-startup-marketing-strategy#2-compete-on-depth-not-breadth-). Larger competitors will always be able to do “more” marketing than you are, so you need to focus on quality to stand out. When we choose to spend time on something, we invest a lot more into it than others usually do. [The stuff nobody tells you about startup marketing](/newsletter/the-stuff-nobody-tells-you-about-startup-marketing) has concrete examples of this from PostHog's early days.
 
 21. Never underestimate the power of being funny on the internet. Many people discover us from James' [social posts](http://x.com/james406), our [onboarding emails](https://x.com/stephsmithio/status/1927743711934337510), or our [DPA generator](/dpa).
 

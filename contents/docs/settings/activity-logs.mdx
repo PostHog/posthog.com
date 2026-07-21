@@ -105,14 +105,15 @@ These events track changes to individual resources within projects.
 
 Each activity log entry contains the following information:
 
-| Field     | Description                                                                                                                                           |
-| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Timestamp | When the action occurred (UTC)                                                                                                                        |
-| Actor     | The user who performed the action (name, email). Actions performed via [MCP](/docs/model-context-protocol) display an **MCP** badge next to the user. |
-| Action    | The type of action performed (created, updated, deleted, etc.)                                                                                        |
-| Scope     | The type of resource affected (feature flag, dashboard, etc.)                                                                                         |
-| Target    | The specific resource that was affected (name and ID)                                                                                                 |
-| Changes   | Before and after values for each modified field                                                                                                       |
+| Field      | Description                                                                                                                                           |
+| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Timestamp  | When the action occurred (UTC)                                                                                                                        |
+| Actor      | The user who performed the action (name, email). Actions performed via [MCP](/docs/model-context-protocol) display an **MCP** badge next to the user. |
+| Action     | The type of action performed (created, updated, deleted, etc.)                                                                                        |
+| Scope      | The type of resource affected (feature flag, dashboard, etc.)                                                                                         |
+| Target     | The specific resource that was affected (name and ID)                                                                                                 |
+| Changes    | Before and after values for each modified field                                                                                                       |
+| IP address | The IP address of the client that initiated the action. System-generated actions display "—"                                                          |
 
 ### Example log entry
 
@@ -149,7 +150,8 @@ Here's an example of what a log entry looks like when retrieved via the API:
   },
   "created_at": "2024-01-15T10:30:00.000000Z",
   "is_system": false,
-  "client": "mcp"
+  "client": "mcp",
+  "ip_address": "192.0.2.1"
 }
 ```
 
@@ -195,6 +197,24 @@ By default, the activity log shows only changes within your current project. To 
 This adds organization-level events to your activity feed, such as member invitations, role changes, and SSO configuration updates.
 
 > **Note**: This setting also affects notifications. If you subscribe to activity log notifications, you will only receive notifications for organization-level events if this setting is enabled.
+
+### Organization-wide activity logs
+
+Organization admins and owners can view activity logs across all projects in their organization from a single view:
+
+1. Go to **Settings** → **Project** → **Activity logs**
+2. Click the **Organization** toggle at the top of the page
+
+In organization mode:
+
+- Activity from all projects in your organization is shown, along with organization-level events
+- A **Project** column indicates which project each activity belongs to
+- A **Project** filter lets you narrow results to specific projects
+- Export is not available in this view – use the project view for exports
+
+You can deep-link directly to the organization view by appending `?view=organization` to the activity logs URL.
+
+> **Note**: Organization-wide activity logs are only available to organization admins and owners. Other members see the project view only.
 
 ### Resource history
 
@@ -247,7 +267,9 @@ For example, you could create a Slack notification that alerts your team wheneve
 
 ### How it works
 
-Activity log notifications are powered by [data pipelines](/docs/cdp). When an activity is logged, PostHog emits an internal `$activity_log_entry_created` event that can trigger your configured destinations. This means you can use the full power of data pipelines, including custom transformations and multiple destinations.
+Activity log notifications are powered by [data pipelines](/docs/cdp). When an activity is logged, PostHog emits an internal `$activity_log_entry_created` event that triggers the notification destinations you configure from the activity logs settings page.
+
+> **Note**: `$activity_log_entry_created` is an internal-only event. It does **not** flow into your project's regular event stream, so you cannot query it from the `events` table, use it in product analytics insights, dashboards, or HogQL, or filter on it from standard [data pipeline destinations](/docs/cdp). It exists solely to drive activity log notifications configured from this settings page. If you need activity log data outside of notifications, use the [activity log API](#api-support), [HogQL on `system.activity_logs`](#query-with-hogql), or [export](#export-options) instead.
 
 ## Filtering and searching
 
@@ -271,6 +293,9 @@ Filter by the team member who performed the action. Select one or multiple users
 **Scope**
 Filter by resource type. Scopes include Feature flags, Experiments, Dashboards, Insights, Surveys, Cohorts, and more. Select multiple scopes to see changes across different resource types.
 
+**Project** (organization mode only)
+Filter by specific projects within your organization. This filter only appears when viewing organization-wide activity logs. Select one or multiple projects to narrow down results.
+
 **Activity**
 Filter by the type of action performed. Activities include created, updated, deleted, enabled, disabled, merged, split, and others depending on the resource type.
 
@@ -293,13 +318,16 @@ Filter on specific fields within the activity log details. You can filter using 
 **Client**
 Filter by the client that originated the action. This lets you see which actions were performed via specific integrations like [MCP](/docs/model-context-protocol) (Model Context Protocol). Available client values are auto-discovered from your activity log data.
 
+**IP address**
+Filter by the client IP address that initiated the action. Use this to investigate actions originating from specific IP addresses or to identify suspicious activity from unknown locations. Wildcards are supported (e.g., `203.0.113.*`). System-generated actions don't have IP addresses and won't appear when filtering by IP.
+
 ## Exporting and retention
 
 ### Retention periods
 
 Activity logs are retained based on your [platform package](/platform-packages). Higher tiers include longer retention periods, with Enterprise plans offering the longest retention and the ability to configure custom retention windows.
 
-See [platform packages](/platform-packages) for current retention periods by addon.
+See [platform packages](/platform-packages) for current retention periods by package.
 
 > **Note**: Once logs exceed the retention period, they are permanently deleted and cannot be recovered. Export your logs regularly if you need to maintain records beyond your plan's retention period.
 
@@ -316,6 +344,8 @@ Activity logs can be exported for offline analysis, compliance reporting, or int
 5. The export will be generated and available for download
 
 Exports include all log entry fields and respect any filters you have applied.
+
+> **Note**: Export is currently only available in the project view. Organization-wide exports are not yet supported.
 
 ## Common use cases
 
@@ -377,14 +407,15 @@ To use the activity log API endpoints, authenticate using one of PostHog's [auth
 
 ### Endpoints
 
-PostHog provides two activity log endpoints:
+PostHog provides three activity log endpoints:
 
-| Endpoint                                             | Description                                               |
-| ---------------------------------------------------- | --------------------------------------------------------- |
-| `GET /api/projects/@current/activity_log/`           | Basic activity log retrieval with simple filtering        |
-| `GET /api/projects/@current/advanced_activity_logs/` | Full-featured endpoint with advanced filtering and export |
+| Endpoint                                              | Description                                                                      |
+| ----------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `GET /api/projects/@current/activity_log/`            | Basic activity log retrieval with simple filtering                               |
+| `GET /api/projects/@current/advanced_activity_logs/`  | Full-featured endpoint with advanced filtering and export                        |
+| `GET /api/organizations/<id>/advanced_activity_logs/` | Organization-wide activity logs (admin/owner only), supports `team_ids[]` filter |
 
-Both endpoints return activity logs for the current project. If **Show organization activity** is enabled in project settings, organization-level events are also included.
+The project endpoints return activity logs for the current project. If **Show organization activity** is enabled in project settings, organization-level events are also included. The organization endpoint returns activity logs across all projects in the organization and is restricted to organization admins and owners.
 
 ### API reference
 

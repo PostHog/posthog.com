@@ -10,6 +10,7 @@ tags:
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
+import NuxtApiKeysSecurity from "../docs/integrate/_snippets/nuxt-api-keys-security.mdx"
 export const EventsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/nuxt-surveys/events-light.png"
 export const EventsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/nuxt-surveys/events-dark.png"
 export const ImgSurveyResultsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/nuxt-surveys/survey-results-light.png"
@@ -57,7 +58,14 @@ To set it up with your Nuxt app, first install `posthog-js`:
 npm install posthog-js
 ```
 
-Then, add your PostHog token and host to your `nuxt.config.ts` file. You can find your project token in your [PostHog project settings](https://app.posthog.com/settings/project)
+Then, store your PostHog token and host in environment variables. Add them to a `.env` file in your project's base directory. You can find your project token in your [PostHog project settings](https://app.posthog.com/settings/project)
+
+```shell file=.env
+NUXT_PUBLIC_POSTHOG_PROJECT_TOKEN=<ph_project_token>
+NUXT_PUBLIC_POSTHOG_HOST=<ph_client_api_host>
+```
+
+Then reference them in your `nuxt.config.ts` file:
 
 ```ts file=nuxt.config.ts
 export default defineNuxtConfig({
@@ -65,13 +73,15 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      posthogToken: '<ph_project_token>',
-      posthogHost: '<ph_client_api_host>',
+      posthogToken: process.env.NUXT_PUBLIC_POSTHOG_PROJECT_TOKEN || '<ph_project_token>',
+      posthogHost: process.env.NUXT_PUBLIC_POSTHOG_HOST || '<ph_client_api_host>',
       posthogDefaults: '<ph_posthog_js_defaults>',
     }
   }
 })
 ```
+
+<NuxtApiKeysSecurity />
 
 Create a new [plugin](https://nuxt.com/docs/guide/directory-structure/plugins) by first creating a new folder called `plugins` and then a new file `posthog.client.js`:
 

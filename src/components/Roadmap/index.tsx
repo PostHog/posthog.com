@@ -46,6 +46,7 @@ import ProgressBar from 'components/ProgressBar'
 import { Scroll } from 'lucide-react'
 import { useApp } from '../../context/App'
 import RoadmapWindow from './RoadmapWindow'
+import ViewerFilters from 'components/Viewer/ViewerFilters'
 
 interface IGitHubPage {
     title: string
@@ -247,11 +248,9 @@ interface Row {
 
 interface RoadmapProps {
     searchQuery?: string
-    filteredRoadmaps?: any[]
-    groupByValue?: string | null
 }
 
-export default function Roadmap({ searchQuery = '', filteredRoadmaps, groupByValue }: RoadmapProps) {
+export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
     const { search } = useLocation()
     const { user } = useUser()
     const [sortBy, setSortBy] = useState('popular')
@@ -261,7 +260,8 @@ export default function Roadmap({ searchQuery = '', filteredRoadmaps, groupByVal
     const [roadmapSearch, setRoadmapSearch] = useState('')
     const [loading, setLoading] = useState(false)
     const [expandedDescriptions, setExpandedDescriptions] = useState<Record<number, boolean>>({})
-    const [localFilteredRoadmaps, setLocalFilteredRoadmaps] = useState()
+    const [filteredRoadmaps, setFilteredRoadmaps] = useState<any[] | null>(null)
+    const [groupByValue, setGroupByValue] = useState<string | null>(null)
     const { addWindow, openSignIn } = useApp()
     const isModerator = user?.role?.type === 'moderator'
 
@@ -447,7 +447,7 @@ export default function Roadmap({ searchQuery = '', filteredRoadmaps, groupByVal
     // Sort the rows based on tableSort value
     const sortedRows = useMemo(() => {
         // Then sort the roadmaps based on the selected sort criteria
-        const sortedRoadmaps = (localFilteredRoadmaps || roadmaps).sort((a: any, b: any) => {
+        const sortedRoadmaps = roadmaps.sort((a: any, b: any) => {
             switch (tableSort) {
                 case 'newest': {
                     const dateA = a.attributes.createdAt ? new Date(a.attributes.createdAt).getTime() : 0
@@ -547,7 +547,7 @@ export default function Roadmap({ searchQuery = '', filteredRoadmaps, groupByVal
                 },
                 {
                     content: (
-                        <h3 className="text-[15px] m-0 font-normal leading-tight">
+                        <h3 className="!text-[15px] m-0 font-normal leading-tight">
                             <HighlightedText
                                 text={roadmap.attributes.title}
                                 highlights={
@@ -657,16 +657,7 @@ export default function Roadmap({ searchQuery = '', filteredRoadmaps, groupByVal
                 cells,
             }
         })
-    }, [
-        roadmaps,
-        tableSort,
-        expandedDescriptions,
-        loading,
-        user,
-        selectedTeam,
-        effectiveSearchTerm,
-        localFilteredRoadmaps,
-    ])
+    }, [roadmaps, tableSort, expandedDescriptions, loading, user, selectedTeam, effectiveSearchTerm])
 
     // Group roadmaps if groupByValue is provided
     const groupedRoadmaps = useMemo(() => {
@@ -693,10 +684,56 @@ export default function Roadmap({ searchQuery = '', filteredRoadmaps, groupByVal
                     <ProgressBar title="roadmap" />
                 ) : (
                     <>
-                        <p className="mt-0">
+                        <p className="mt-0 mb-2">
                             Here's what we're thinking about building next. If you want to see what we've shipped
                             recently, <Link to="/changelog">visit the changelog</Link>.
                         </p>
+                        {initialRoadmaps && initialRoadmaps.length > 0 && (
+                            <div className="mb-4">
+                                <ViewerFilters
+                                    availableFilters={[
+                                        {
+                                            label: 'Team',
+                                            operator: 'equals',
+                                            options: [
+                                                { label: 'All', value: undefined },
+                                                ...Object.keys(
+                                                    groupBy(
+                                                        initialRoadmaps,
+                                                        (roadmap) =>
+                                                            roadmap.attributes?.teams?.data?.[0]?.attributes?.name ||
+                                                            'Not assigned'
+                                                    )
+                                                )
+                                                    .sort()
+                                                    .filter((team) => team !== 'Not assigned')
+                                                    .map((team) => ({
+                                                        label: team,
+                                                        value: team,
+                                                    })),
+                                                { label: 'Not assigned', value: 'Not assigned' },
+                                            ],
+                                            filter: (roadmap, value) => {
+                                                const teamName = roadmap.attributes?.teams?.data?.[0]?.attributes?.name
+                                                if (value === 'Not assigned') {
+                                                    return !teamName
+                                                }
+                                                return teamName === value
+                                            },
+                                        },
+                                    ]}
+                                    dataToFilter={initialRoadmaps}
+                                    onFilterChange={(data) => setFilteredRoadmaps(data)}
+                                    availableGroups={[
+                                        {
+                                            label: 'Team',
+                                            value: 'attributes.teams.data[0].attributes.name',
+                                        },
+                                    ]}
+                                    onGroupChange={(group) => setGroupByValue(group === 'none' ? null : group)}
+                                />
+                            </div>
+                        )}
                         {isModerator && adding && (
                             <RoadmapForm
                                 status="under-consideration"
@@ -718,6 +755,7 @@ export default function Roadmap({ searchQuery = '', filteredRoadmaps, groupByVal
                                                 columns={columns}
                                                 rows={groupedRoadmaps[teamName]}
                                                 rowAlignment="top"
+                                                width="full"
                                                 overflowX
                                             />
                                         </div>

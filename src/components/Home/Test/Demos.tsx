@@ -132,7 +132,7 @@ const AppCount = () => {
     return <>{APP_COUNT}</>
 }
 
-const CTAs = () => {
+export const CTAs = () => {
     const [showInstall, setShowInstall] = useState(false)
     return (
         <div className="mb-4">
@@ -154,7 +154,7 @@ const CTAs = () => {
                 animate={{ height: showInstall ? 'auto' : 0 }}
             >
                 <div className="mt-4">
-                    <WizardCommand latest={false} slim />
+                    <WizardCommand slim />
                 </div>
             </motion.div>
         </div>
@@ -264,8 +264,7 @@ const Toolkits = () => {
                 'feature_flags',
                 'experiments',
                 'error_tracking',
-                'llm_analytics',
-                'revenue_analytics',
+                'ai_observability',
             ],
         },
         {
@@ -367,7 +366,7 @@ const CompanyStageTabs = () => {
                             'feature_flags',
                             'error_tracking',
                             'surveys',
-                            'llm_analytics',
+                            'ai_observability',
                         ]}
                     />
                 </div>
@@ -378,7 +377,7 @@ const CompanyStageTabs = () => {
                         productHandles={[
                             'session_replay',
                             'web_analytics',
-                            'llm_analytics',
+                            'ai_observability',
                             'product_analytics',
                             'error_tracking',
                             'experiments',
@@ -426,7 +425,6 @@ const COL1 = ['ycombinator', 'airbus', 'trust', 'lovable', 'startengine', 'resea
 const COL2 = ['supabase', 'mistralai', 'elevenlabs', 'hasura', 'raycast', 'posthog']
 
 const companyBreakdowns = {
-    VCsLoveThem: { col1: 'VCs love them', col2: 'Product engineers love them' },
     colorful: { col1: 'Colorful logos', col2: '"Sleek" logos' },
     hardware: { col1: 'Hardware companies', col2: 'Not hardware companies' },
     planes: { col1: 'Builds planes', col2: "Doesn't build planes (yet)" },
@@ -445,7 +443,6 @@ const companyBreakdowns = {
 }
 
 const companyAttributes = {
-    VCsLoveThem: ['ycombinator', 'airbus', 'trust', 'lovable', 'startengine', 'researchgate', 'exa', 'heygen'],
     colorful: ['ycombinator', 'trust', 'lovable', 'supabase', 'startengine', 'mistralai', 'raycast', 'posthog'],
     hardware: ['airbus', 'posthog'],
     planes: ['airbus'],
@@ -462,7 +459,7 @@ const companyAttributes = {
 
 const Customers = () => {
     const { getCustomers, hasCaseStudy } = useCustomers()
-    const [currentBreakdown, setCurrentBreakdown] = React.useState('VCsLoveThem')
+    const [currentBreakdown, setCurrentBreakdown] = React.useState('colorful')
     const [isAnimating, setIsAnimating] = React.useState(false)
     const logoRefs = React.useRef<Record<string, HTMLElement>>({})
 
@@ -667,7 +664,7 @@ const Customers = () => {
             </div>
 
             <OSButton asLink to="/customers" variant="secondary" size="md" className="mt-4" state={{ newWindow: true }}>
-                Open customers.mdx
+                Open Customers
             </OSButton>
         </>
     )
@@ -736,7 +733,13 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         props: [],
         Editor: () => {
             const { siteSettings } = useApp()
-            return <Logo className="inline-block" fill={siteSettings.theme === 'dark' ? 'white' : undefined} />
+            return (
+                <Logo
+                    className="inline-block"
+                    variant={siteSettings.theme === 'dark' ? 'mono' : 'gradient'}
+                    color={siteSettings.theme === 'dark' ? 'white' : undefined}
+                />
+            )
         },
     },
     {
@@ -887,18 +890,6 @@ export default function Home2() {
         setIsPlaying(true)
     }, [activePromptIndex])
 
-    // GraphQL query for MDX content
-    const {
-        mdx: { rawBody, mdxBody },
-    } = useStaticQuery(graphql`
-        query {
-            mdx(slug: { eq: "home" }) {
-                rawBody
-                mdxBody: body
-            }
-        }
-    `)
-
     // Derived state
     const currentPrompt = PROMPTS[activePromptIndex]
     const activeAccordion = currentPrompt.slide
@@ -997,7 +988,6 @@ export default function Home2() {
                         <div className="@2xl:max-w-lg mb-6">
                             <Accordion
                                 key={activeAccordion}
-                                // skin={false}
                                 items={accordionItems}
                                 defaultValue={activeAccordion}
                                 onValueChange={handleAccordionChange}
