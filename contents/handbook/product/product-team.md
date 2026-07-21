@@ -39,7 +39,7 @@ Here is a overview that shows which of our PMs currently works with which team:
 <fieldset>
 <legend><TeamMember name="Annika Schmid" photo /></legend>
 
--   <SmallTeam slug="posthog-code" />
+-   <SmallTeam slug="posthog-desktop" />
 -   <SmallTeam slug="self-driving" />
 
 </fieldset>
