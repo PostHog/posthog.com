@@ -68,14 +68,14 @@ Use the built-in Git tab in VS Code to commit and push your changes.
 
     ![Publish changes](https://res.cloudinary.com/dmukukwp6/image/upload/codespaces_publish_81f21426e4.png)
 
-> **Note:** After finish changes on your branch, be sure to switch back to `master` so you don't inadvertently make future changes to your current branch.
+> **Note:** After finishing changes on your branch, be sure to switch back to `master` so you don't inadvertently make future changes to your current branch.
 >
 > ![Checkout to master](https://res.cloudinary.com/dmukukwp6/image/upload/codespaces_checkout_master_4821478b5e.png) > ![Switch to master](https://res.cloudinary.com/dmukukwp6/image/upload/codespaces_select_branch_58c9512cee.png)
 
 ### Stopping the server
 
 1. Place your cursor into Terminal and type `Cmd+C` to stop the server.
-1. In the bottom left corner of the window, click **Codspaces: [your codespace name]**, then **Stop current codespace.**
+1. In the bottom left corner of the window, click **Codespaces: [your codespace name]**, then **Stop current codespace.**
 
 ### Notes
 
@@ -191,6 +191,18 @@ Minimal mode only builds:
 - All pages in `src/pages/` (product pages, pricing, etc.)
 
 Everything else (apps, CDP, templates, jobs, API docs, SDK references, pagination/category/tag pages) won't exist - they'll 404. Next/previous navigation links and GitHub data for roadmaps/jobs will also be absent. Sourcemap generation is disabled.
+
+### PR preview deployments (Cloudflare Pages)
+
+Pull request previews on Cloudflare Pages use the same minimal build as above: the workflow sets `GATSBY_MINIMAL=true` (see `.github/workflows/deploy-preview.yml`). That keeps preview builds fast.
+
+**Building without cache:** If a preview build is broken due to a stale Gatsby cache, add the `no-cache` label to the PR. This skips cache restore and runs a clean build from scratch. Remove the label when you're done to go back to cached builds.
+
+**Implications for content authors:**
+
+- **Post category indexes are not built** — Routes like `/tutorials`, `/blog`, and `/posts` are not generated in previews. Opening them can fail or show a broken page (for example a blank or error screen in the site shell). This is expected.
+- **Individual posts and docs still build** — Preview the change by opening the **direct URL** to the MDX page (e.g. `/tutorials/your-post-slug`, `/blog/your-post-slug`).
+- **Search and listing data** — Post listings and site search rely on full production builds and indexing (e.g. Algolia). Content from a branch typically will not appear in search on the preview until it is merged to `master` and the production site is built.
 
 ### Environment variables
 
@@ -319,7 +331,7 @@ tags: ['filters', 'settings']
 
 -   `date`: the date the tutorial was posted
 -   `title`: the title that appears at the top of the tutorial and on the tutorial listing page
--   `author`: the author(s) of the tutorial. Ccrrelates to your handle located in /src/data/authors.json
+-   `author`: the author(s) of the tutorial. Correlates to your handle located in /src/data/authors.json
 -   `featuredTutorial`: determines if tutorial should be featured on the homepage
 -   `featuredVideo`: the iframe src of the video that appears at the top of the tutorial
 -   `featuredImage`: the Cloudinary URL of the image that appears at the top of the tutorial and on the tutorial listing page
@@ -564,7 +576,7 @@ If you are pushing to an existing branch, navigate to the [posthog.com repo](htt
 
 Then, open the **Contribute** dropdown and click the **Open pull request** button.
 
-Make the pull request title descriptive name and complete the detail requested in the body.
+Make the pull request title a descriptive name and complete the detail requested in the body.
 
 If you know who you would like to review the pull request, select them in the **Reviewers** dropdown.
 

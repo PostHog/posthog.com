@@ -15,7 +15,9 @@ const getUnitySteps = (ctx: any) => {
                         Requires **Unity 2021.3 LTS** or later with **.NET Standard 2.1** API compatibility level.
                     </Markdown>
                     <Markdown>
-{"In the Unity Editor, open **Window > Package Manager**, click the **+** button, select **Add package from git URL**, and enter:"}
+                        {
+                            'In the Unity Editor, open **Window > Package Manager**, click the **+** button, select **Add package from git URL**, and enter:'
+                        }
                     </Markdown>
                     <CodeBlock
                         blocks={[
@@ -50,7 +52,9 @@ const getUnitySteps = (ctx: any) => {
             content: (
                 <>
                     <Markdown>
-{"Add `SessionReplay = true` to your PostHog configuration. You can also configure it via the Unity Inspector in **Edit > Project Settings > PostHog**."}
+                        {
+                            'Add `SessionReplay = true` to your PostHog configuration. You can also configure it via the Unity Inspector in **Edit > Project Settings > PostHog**.'
+                        }
                     </Markdown>
                     <CodeBlock
                         blocks={[
@@ -94,9 +98,9 @@ const getUnitySteps = (ctx: any) => {
                     <CalloutBox type="fyi" title="How it works">
                         <Markdown>
                             The Unity SDK captures screenshots using `AsyncGPUReadback` to avoid blocking the main
-                            thread. It also records touch/mouse input, network requests, and console logs alongside each
-                            screenshot. Session replay requires `AsyncGPUReadback` support and is automatically disabled
-                            on WebGL.
+                            thread. It also records touch/mouse input and console logs alongside each screenshot. You
+                            can manually record network request metadata with `PostHogSDK.RecordNetworkRequest`. Session
+                            replay requires `AsyncGPUReadback` support and is automatically disabled on WebGL.
                         </Markdown>
                     </CalloutBox>
                     <CalloutBox type="caution" title="No masking support">
@@ -109,9 +113,9 @@ const getUnitySteps = (ctx: any) => {
                     </CalloutBox>
                     <CalloutBox type="info" title="Limitations">
                         <Markdown>
-                            The Unity SDK reads the **Record user sessions** toggle from PostHog project settings, but
-                            more granular options like `CaptureNetworkTelemetry`, `CaptureLogs`, and sampling are **not**
-                            remotely configurable and must be set locally in code at initialization time.
+                            Unity Session Replay is controlled by local SDK configuration. Options like
+                            `CaptureNetworkTelemetry`, `CaptureLogs`, and sampling are **not** remotely configurable and
+                            must be set locally in code at initialization time.
                         </Markdown>
                     </CalloutBox>
                 </>

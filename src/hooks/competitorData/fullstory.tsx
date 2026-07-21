@@ -166,6 +166,16 @@ export const fullstory = {
                     custom_targeting: false,
                 },
             },
+            implementation: {
+                features: {
+                    multivariate_testing: false,
+                },
+            },
+            supported_tests: {
+                features: {
+                    multi_armed_bandit: false,
+                },
+            },
         },
         error_tracking: {
             available: false,

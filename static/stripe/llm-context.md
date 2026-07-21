@@ -30,6 +30,8 @@ npx @posthog/wizard@latest
 
 The wizard installs the right SDK, creates provider/config files, and sets up framework-specific configuration. It supports Next.js, React, Vue, Angular, Svelte, Astro, Remix, Django, Flask, and more.
 
+The wizard also reads `POSTHOG_PERSONAL_API_KEY` from your environment to configure the PostHog MCP server automatically — no browser-based OAuth needed.
+
 If the wizard doesn't support your framework, see the full list of SDKs and manual setup guides at https://posthog.com/docs/libraries.
 
 ## What PostHog provides
@@ -43,7 +45,7 @@ PostHog is not just analytics. After integrating, you automatically get access t
 - **Error Tracking**: Capture frontend exceptions with `posthog.captureException(error)`. Auto-captures when enabled.
 - **Surveys**: In-app surveys configured in the PostHog UI, rendered automatically by `posthog-js`.
 - **Web Analytics**: Privacy-friendly web analytics dashboard, no extra setup needed.
-- **LLM Analytics**: Track LLM API calls, token usage, and costs with integrations for OpenAI, Anthropic, LangChain, and more.
+- **AI Observability**: Track LLM API calls, token usage, and costs with integrations for OpenAI, Anthropic, LangChain, and more.
 - **Data Warehouse**: Query external data sources alongside PostHog data using SQL.
 
 ## PostHog API

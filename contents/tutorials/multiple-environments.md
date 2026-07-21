@@ -47,7 +47,7 @@ To copy or update a flag in another project:
 1. Navigate to the [feature flag](https://us.posthog.com/feature_flags) you want to copy.
 2. Select the `Projects` tab.
 3. Select the project you want to copy the flag to.
-4. Click `Copy` or `Update` - this depends on whether the flag already exists in the target project.
+4. Click `Copy` or `Update` – this depends on whether the flag already exists in the target project.
 5. View the table at the bottom to see the newly created or updated flag.
 
 <ProductScreenshot
@@ -102,7 +102,7 @@ Setting this up correctly prevents capturing non-production event data. It enabl
 
 The previous options capture data to separate projects or don’t capture data at all, but there is another option. This is to capture data normally and filter internal users from your analysis.
 
-PostHog provides a toggle to filter internal users (as defined by you) from your analysis and visualization. To set this up, go to [Project Settings](https://us.posthog.com/settings/project#internal-user-filtering) and scroll down to **Filter out internal and test users**. Here you can add filters to identify your internal users and events so that they can be removed from insights. This could include filters like: 
+PostHog provides a toggle to filter internal users (as defined by you) from your analysis and visualization. To set this up, go to your project's [Product Analytics settings](https://us.posthog.com/settings/project-product-analytics#internal-user-filtering) and scroll down to **Filter out internal and test users**. Here you can add filters to identify your internal users and events so that they can be removed from insights. This could include filters like: 
 
 - `distinct ID does not contain your domain`
 - `host is not localhost`

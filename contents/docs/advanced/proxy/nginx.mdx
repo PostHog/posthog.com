@@ -63,7 +63,7 @@ sudo apt update && sudo apt install nginx
 
 <Step title="Configure nginx">
 
-Create a new configuration file at `/etc/nginx/sites-available/posthog-proxy`:
+Create a new configuration file at `/etc/nginx/sites-available/yourpath-proxy`:
 
 ```nginx
 server {
@@ -106,7 +106,7 @@ Here's what each directive does:
 Enable the site by creating a symlink:
 
 ```bash
-sudo ln -s /etc/nginx/sites-available/posthog-proxy /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/yourpath-proxy /etc/nginx/sites-enabled/
 ```
 
 See [nginx proxy documentation](https://nginx.org/en/docs/http/ngx_http_proxy_module.html) for more configuration options.
