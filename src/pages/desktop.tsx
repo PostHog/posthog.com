@@ -411,7 +411,7 @@ function HeroSection() {
                                 padding={2}
                                 delay={300}
                             >
-                                agentic workspace
+                                product editor
                             </RoughAnnotation>
                             {' for '}
                             <RoughAnnotation type="underline" color="#F54E00" strokeWidth={2} delay={600}>
@@ -422,8 +422,8 @@ function HeroSection() {
                         <div className="flex flex-col items-start @4xl/editor:flex-row @4xl/editor:gap-8">
                             <div className="@4xl/editor:flex-[0_0_280px]">
                                 <p>
-                                    All the PostHog you already use, plus a coding agent that can act on it. Shared
-                                    context and product data are the fuel to ship absurdly good products.
+                                    All the PostHog you already use, plus a coding agent that can act on your data. Real
+                                    usage in, pull requests out.
                                 </p>
                                 <ul className="mb-4 list-none space-y-0.5 p-0 text-[15px]">
                                     {[
@@ -474,7 +474,6 @@ function HeroSection() {
 // ─────────────────────────────────────────────
 
 function OldWaySection() {
-    const [p1Done, setP1Done] = useState(false)
     const tableStakes = [
         { text: "You're using Claude Code, Codex, or another agent to prompt real engineering work", checked: true },
         { text: "You've got the PostHog MCP wired into your editor, terminal, maybe your CI", checked: true },
@@ -493,47 +492,34 @@ function OldWaySection() {
                 to build with AI
             </SectionLabel>
 
-            <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/plague_doctor_beach_11580558c0.png"
-                alt="A plague doctor relaxing on a beach"
-                className="-mt-14 mb-5 hidden w-44 float-right ml-8 @3xl:block"
-                imgClassName="w-full"
-            />
-
-            <p className="text-base leading-loose mb-5">
-                <ChoppyReveal wordDelay={40} onComplete={() => setP1Done(true)}>
+            <p className="text-base leading-loose mb-8">
+                <ChoppyReveal wordDelay={40}>
                     {'Most AI code editors '}
-                    <em>lack context</em> and wait for{' '}
-                    <RoughAnnotation type="underline" color="currentColor" strokeWidth={1.5}>
-                        <em>you</em>
-                    </RoughAnnotation>
-                    {' to tell them what to '}
-                    <KeyBadge>
-                        Build <span className="relative top-px">↵</span>
-                    </KeyBadge>
-                    {'.'}
-                </ChoppyReveal>
-            </p>
-
-            <p className="text-base leading-loose">
-                <ChoppyReveal wordDelay={40} initialDelay={p1Done ? 0 : 999999}>
-                    {'They use your '}{' '}
+                    <em>lack context</em>
+                    {'. They use your '}
                     <strong className="font-mono bg-blue/10 border border-blue rounded-sm px-1 leading-normal inline-block">
                         &lt;codebase /&gt;
                     </strong>
-                    {' as the source of truth, not how '}
-                    humans (or agents){' '}
+                    {' as the source of truth and wait for '}
+                    <RoughAnnotation type="underline" color="currentColor" strokeWidth={1.5}>
+                        <em>you</em>
+                    </RoughAnnotation>
+                    {' to hit '}
+                    <KeyBadge>
+                        Build <span className="relative top-px">↵</span>
+                    </KeyBadge>
+                    {' – not how '}
                     <RoughAnnotation type="underline" color="#30A46C" strokeWidth={2}>
-                        <em>actually use your product</em>
+                        <em>people actually use your product</em>
                     </RoughAnnotation>
                     {'.'}
                 </ChoppyReveal>
             </p>
 
             {/* Table stakes + receipt: the standard starter pack every AI tool ships (also the "old way") */}
-            <div className="clear-both mt-10 grid items-start gap-8 @2xl:grid-cols-2 @2xl:gap-12">
+            <div className="mt-8 grid items-start gap-8 @2xl:grid-cols-2 @2xl:gap-12">
                 <div>
-                    <h3 className="mb-3 text-xl font-bold">Sound familiar?</h3>
+                    <h3 className="mb-3 text-lg font-bold text-primary">Sound familiar?</h3>
                     <ul className="m-0 list-none space-y-2.5 p-0">
                         {tableStakes.map(({ text, checked }) => (
                             <li key={text} className="flex items-start gap-2.5">
@@ -546,7 +532,6 @@ function OldWaySection() {
                             </li>
                         ))}
                     </ul>
-                    <p className="m-0 mt-3 text-sm italic text-secondary">Instead...</p>
                 </div>
 
                 <div className="@2xl:pl-4">
@@ -565,7 +550,7 @@ function OldWaySection() {
                         <img
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/banana_relax_83149feac6.png"
                             alt="A hedgehog relaxing with a banana"
-                            className="pointer-events-none absolute -bottom-10 -left-14 z-20 w-32 @xl:w-36"
+                            className="pointer-events-none absolute -bottom-10 -left-20 z-20 w-32 @xl:w-36"
                         />
                     </div>
                 </div>
@@ -637,10 +622,10 @@ function PostHogWaySection({ onComplete }: { onComplete?: () => void }) {
 
                 <p className="text-base leading-loose mb-5">
                     <ChoppyReveal wordDelay={25} initialDelay={p2Done ? 0 : 999999} onComplete={() => onComplete?.()}>
-                        <strong>TL;DR:</strong> Other AI tools edit your code.{' '}
+                        <strong>TL;DR:</strong> There are plenty of AI coding tools, but only one that{' '}
                         <RoughAnnotation type="underline" color="currentColor" strokeWidth={1.5} delay={400}>
                             <span className="inline-block">
-                                <strong>PostHog Desktop</strong> edits your product.
+                                knows your product like <strong>PostHog Desktop</strong>.
                             </span>
                         </RoughAnnotation>
                     </ChoppyReveal>
@@ -713,7 +698,7 @@ function AgentMartReceipt() {
                 className="font-code text-sm leading-relaxed shadow-2xl px-6 pt-6 pb-5 text-[#2b2b2b]"
                 style={{ backgroundColor: RECEIPT_PAPER }}
             >
-                <p className="m-0 text-center font-bold tracking-widest">2026 AGENT MART</p>
+                <p className="m-0 text-center font-bold tracking-widest">TABLE STAKES 2026</p>
                 <p className="m-0 mb-4 text-center text-xs italic text-[#8a8272]">(yep, PostHog has that)</p>
 
                 <div className="space-y-1">
@@ -732,7 +717,7 @@ function AgentMartReceipt() {
                     <span>$0.00</span>
                 </div>
 
-                <p className="m-0 mt-4 text-center text-xs text-[#8a8272]">thank you for shopping at 2026</p>
+                <p className="m-0 mt-4 text-center text-xs text-[#8a8272]">thanks for shopping at agent mart</p>
             </div>
             <TornEdge className="w-full h-3" />
         </div>
@@ -1720,45 +1705,48 @@ interface MCPServer {
     domain?: string
 }
 
+// Ordered by rough developer-community popularity, not alphabetically, so the
+// most recognizable servers (GitHub, Slack, Stripe, Supabase…) land in the
+// visible rows before the list masks out.
 const mcpServers: MCPServer[] = [
-    { name: 'AirOps', domain: 'airops.com' },
-    { name: 'Atlassian', domain: 'atlassian.com' },
-    { name: 'Attio', logoKey: 'attio' },
-    { name: 'Box', domain: 'box.com' },
-    { name: 'Browserbase', domain: 'browserbase.com' },
-    { name: 'Canva', domain: 'canva.com' },
-    { name: 'Circle', domain: 'circle.so' },
-    { name: 'Cisco ThousandEyes', domain: 'thousandeyes.com' },
-    { name: 'Clerk', domain: 'clerk.com' },
-    { name: 'ClickHouse', domain: 'clickhouse.com' },
-    { name: 'Cloudflare', logoKey: 'cloudflare' },
-    { name: 'Context7', domain: 'context7.com' },
-    { name: 'Datadog', domain: 'datadoghq.com' },
-    { name: 'Figma', domain: 'figma.com' },
-    { name: 'Firetiger', domain: 'firetiger.com' },
     { name: 'GitHub', logoKey: 'github' },
-    { name: 'GitLab', domain: 'gitlab.com' },
-    { name: 'Granola', logoKey: 'granola' },
-    { name: 'Hex', domain: 'hex.tech' },
-    { name: 'HubSpot', logoKey: 'hubspot' },
-    { name: 'LaunchDarkly', domain: 'launchdarkly.com' },
-    { name: 'Linear', logoKey: 'linear' },
-    { name: 'Mem0', domain: 'mem0.ai' },
-    { name: 'Monday', domain: 'monday.com' },
-    { name: 'Neon', domain: 'neon.tech' },
-    { name: 'Notion', domain: 'notion.so' },
-    { name: 'PagerDuty', domain: 'pagerduty.com' },
-    { name: 'PlanetScale', domain: 'planetscale.com' },
-    { name: 'Postman', domain: 'postman.com' },
-    { name: 'Prisma', domain: 'prisma.io' },
-    { name: 'Render', domain: 'render.com' },
-    { name: 'Sanity', domain: 'sanity.io' },
-    { name: 'Sentry', logoKey: 'sentry' },
     { name: 'Slack', logoKey: 'slack' },
+    { name: 'Notion', domain: 'notion.so' },
+    { name: 'Linear', logoKey: 'linear' },
+    { name: 'Figma', domain: 'figma.com' },
     { name: 'Stripe', logoKey: 'stripe' },
     { name: 'Supabase', logoKey: 'supabase' },
+    { name: 'GitLab', domain: 'gitlab.com' },
+    { name: 'Granola', logoKey: 'granola' },
+    { name: 'Sentry', logoKey: 'sentry' },
+    { name: 'Cloudflare', logoKey: 'cloudflare' },
+    { name: 'Datadog', domain: 'datadoghq.com' },
+    { name: 'HubSpot', logoKey: 'hubspot' },
+    { name: 'Atlassian', domain: 'atlassian.com' },
+    { name: 'Postman', domain: 'postman.com' },
+    { name: 'ClickHouse', domain: 'clickhouse.com' },
+    { name: 'Prisma', domain: 'prisma.io' },
+    { name: 'Neon', domain: 'neon.tech' },
+    { name: 'PlanetScale', domain: 'planetscale.com' },
+    { name: 'Render', domain: 'render.com' },
+    { name: 'Clerk', domain: 'clerk.com' },
+    { name: 'LaunchDarkly', domain: 'launchdarkly.com' },
+    { name: 'PagerDuty', domain: 'pagerduty.com' },
+    { name: 'Context7', domain: 'context7.com' },
+    { name: 'Canva', domain: 'canva.com' },
+    { name: 'Box', domain: 'box.com' },
+    { name: 'Monday', domain: 'monday.com' },
+    { name: 'Sanity', domain: 'sanity.io' },
     { name: 'Svelte', domain: 'svelte.dev' },
+    { name: 'Hex', domain: 'hex.tech' },
     { name: 'Wix', domain: 'wix.com' },
+    { name: 'Attio', logoKey: 'attio' },
+    { name: 'Mem0', domain: 'mem0.ai' },
+    { name: 'Circle', domain: 'circle.so' },
+    { name: 'Browserbase', domain: 'browserbase.com' },
+    { name: 'AirOps', domain: 'airops.com' },
+    { name: 'Cisco ThousandEyes', domain: 'thousandeyes.com' },
+    { name: 'Firetiger', domain: 'firetiger.com' },
 ]
 
 const mcpServerIcon = (server: MCPServer): string =>
@@ -1779,6 +1767,9 @@ const SupportedLLMs = () => {
                             OpenAI
                         </p>
                         <div className="flex flex-wrap gap-2">
+                            <ModelChip>GPT-5.6 Sol</ModelChip>
+                            <ModelChip>GPT-5.6 Terra</ModelChip>
+                            <ModelChip>GPT-5.6 Luna</ModelChip>
                             <ModelChip>GPT-5.5</ModelChip>
                             <ModelChip>GPT-5.4</ModelChip>
                         </div>
@@ -1931,8 +1922,9 @@ const SkillsCallout = () => {
                     <h2 className="m-0 text-2xl font-bold">Dang, PostHog's got skills</h2>
                 </div>
                 <p className="m-0 text-secondary">
-                    A <code className="border-purple bg-purple/20">SKILL.md</code> makes wiring up PostHog stupid easy,
-                    and turns company knowledge into a playbook everyone can run with.
+                    PostHog Desktop loads the same skills Claude Code uses: from your machine, from the repo you are in,
+                    and from any marketplace plugins you have installed. It also includes PostHog-maintained skills for
+                    things like event capture, feature flags, experiments, and error tracking.
                 </p>
                 <div className="mt-5 grid grid-cols-1 gap-4 @sm:grid-cols-3">
                     {skillsCalloutItems.map(({ label, desc }) => (
@@ -2388,7 +2380,7 @@ export default function CodePage() {
         <>
             <SEO
                 title="PostHog Desktop"
-                description="An agentic workspace for product builders – run a fleet of agents that build your product, not just your code"
+                description="The desktop for product builders – run a fleet of agents that build your product, not just your code"
                 structuredData={buildProductStructuredData({
                     name: 'PostHog Desktop',
                     description: 'A desktop app for steering coding agents and editing your product',
