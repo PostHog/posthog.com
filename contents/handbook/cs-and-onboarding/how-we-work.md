@@ -99,7 +99,7 @@ Once it's in the channel, you can add the :ticket: emoji to a Slack thread — o
 ## Extended Time Off
 During extended periods away from work (generally more than two weeks) it's important that we maintain customer relationships - we don't want to leave emails or Slack messages unanswered. For planned time off, it's recommended that you make a list of your accounts, then add an appropriate colleague to the Slack channel. Try and balance the workload, but our policy of working transparently (eg. ensuring conversations on Slack don't happen in DMs) makes it easier for others to dip in seamlessly.
 
-The primary exception is that this temporary CSM will ensure your customers aren't completely ignored. This may mean answering questions themselves or opening support tickets on a customer's behalf, but there is no expectation to attend routine meetings (eg. monthly check-ins). Customers should be notified that the meeting is cancelled but any questions should be asked through normal channels.
+The expectation is that this temporary CSM will ensure your customers aren't completely ignored. This may mean answering questions themselves or opening support tickets on a customer's behalf, but not attend routine meetings (eg. monthly check-ins) or pro-active work. For standing meetings in your absence customers should be notified that the meeting is cancelled but any questions can be asked through normal channels.
 
 For longer periods away, Dana may look to reassign some or all of your accounts.
 
