@@ -6,6 +6,7 @@ import OSTable from 'components/OSTable'
 import { IconCheck } from '@posthog/icons'
 import { TreeMenu } from 'components/TreeMenu'
 import { productOSNav } from 'hooks/useProductOSNavigation'
+import { Link } from 'gatsby'
 
 const LeftSidebarContent = () => {
     return <TreeMenu items={productOSNav.children} />
@@ -29,11 +30,11 @@ export default function PlatformPackages() {
 
     // Create table data for OSTable
     const columns = [
-        { name: 'Feature', align: 'left' as const, width: '1fr' },
+        { name: 'Feature', align: 'left' as const, width: 'minmax(200px, 2fr)' },
         ...platformAddons.map((addon: any) => ({
             name: addon.name,
             align: 'center' as const,
-            width: 'minmax(60px,140px)',
+            width: '1fr',
         })),
     ]
 
@@ -85,10 +86,18 @@ export default function PlatformPackages() {
                 <div className="space-y-8">
                     <div>
                         <h1>Platform packages</h1>
-                        <p>
-                            Our platform packages are designed to help you manage your teams securely and efficiently on
-                            PostHog as you grow. You can subscribe to packages in the app after signing up for PostHog.
-                        </p>
+                        <div>
+                            Our platform packages help you manage your teams securely and efficiently on PostHog as you
+                            grow. You can{' '}
+                            <Link to="https://app.posthog.com/organization/billing/" target="_blank">
+                                {' '}
+                                subscribe to packages after signing up for PostHog
+                            </Link>
+                            . Need more help getting started?{' '}
+                            <Link to="/services" state={{ newWindow: true }}>
+                                We also offer service packages.
+                            </Link>
+                        </div>
                     </div>
 
                     {/* List of addons with name, description, and flat rate */}
@@ -103,10 +112,22 @@ export default function PlatformPackages() {
                                         <p className="text-secondary mb-2">{addon.description}</p>
                                         {plan?.flat_rate && (
                                             <div className="flex items-baseline mt-auto">
-                                                <strong className="text-lg">
-                                                    ${plan.unit_amount_usd.replace('.00', '')}
-                                                </strong>
-                                                <span className="text-sm opacity-60 ml-1">/mo</span>
+                                                {addon.type === 'enterprise' ? (
+                                                    <Link
+                                                        to="/talk-to-a-human?edition=enterprise"
+                                                        className="text-lg font-bold text-red dark:text-yellow"
+                                                        state={{ newWindow: true }}
+                                                    >
+                                                        Contact us
+                                                    </Link>
+                                                ) : (
+                                                    <>
+                                                        <strong className="text-lg">
+                                                            ${plan.unit_amount_usd.replace('.00', '')}
+                                                        </strong>
+                                                        <span className="text-sm opacity-60 ml-1">/mo</span>
+                                                    </>
+                                                )}
                                             </div>
                                         )}
                                     </div>
@@ -118,12 +139,20 @@ export default function PlatformPackages() {
                     <div>
                         <h2>Feature comparison</h2>
                         <p className="-mt-4 mb-6">Compare features across all platform packages:</p>
-                        <OSTable columns={columns} rows={rows} size="md" className="text-sm" />
+                        <OSTable columns={columns} rows={rows} size="md" className="text-sm" width="full" />
                     </div>
 
                     <div>
                         <h2>Get started</h2>
-                        <p>Subscribe to packages after signing up for PostHog.</p>
+                        <p>
+                            You can{' '}
+                            <Link to="https://app.posthog.com/organization/billing/">
+                                {' '}
+                                subscribe to packages after signing up for PostHog
+                            </Link>
+                            , via your billing page. Need help getting started, or want advice on which package to
+                            choose? <Link to="/services">Our engineers can help.</Link>
+                        </p>
                     </div>
                 </div>
             </ReaderView>

@@ -13,6 +13,8 @@ crosspost:
   - Blog
 ---
 
+> We updated this article for 2026 - [see what's changed here!](/founders/actual-marketing-budget-2026)
+
 It really annoys me that no one is willing to talk about how much they _actually_ spend on marketing in startup-land. 
 
 When I’m trying to figure out what a sensible amount is for PostHog to spend, all I can find are articles that talk very generally about marketing budgets in terms of things like % of revenue or general benchmarks. Which is nice, but [the ranges given are wild](https://www.datadab.com/blog/how-much-saas-companies-spend-on-marketing/) and I want _cold, hard numbers_. 
@@ -69,7 +71,7 @@ Our typical monthly marketing spend looks like this:
 
 - The 50-50 split is coincidental. 
 
-If you want to learn more about how we implement these things in practice at PostHog, it’s all in our [public handbook](/handbook/growth/marketing). 
+If you want to learn more about how we implement these things in practice at PostHog, it’s all in our [public handbook](/handbook/marketing). 
 
 ## Going deeper on paid ads
 
@@ -113,6 +115,6 @@ Let me know!
 
 - Make sure you're covering [all your marketing bases](/blog/dev-marketing-for-startups).
 - Read about [how our marketing team uses PostHog](/blog/posthog-marketing).
-- Check out [PostHog’s marketing handbook](/handbook/growth/marketing) – and copy it if you want to!
+- Check out [PostHog’s marketing handbook](/handbook/marketing) – and copy it if you want to!
 
 <NewsletterForm />

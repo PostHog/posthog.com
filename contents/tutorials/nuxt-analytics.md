@@ -8,6 +8,8 @@ tags:
   - product analytics
 ---
 
+import NuxtApiKeysSecurity from "../docs/integrate/_snippets/nuxt-api-keys-security.mdx"
+
 [Product analytics](/product-analytics) enable you to gather and analyze data about how users interact with your Nuxt.js app. To show you how to set up analytics, in this tutorial we create a basic Nuxt app, add PostHog on both the client and server, and use it to capture pageviews and custom events.
 
 ## Creating a Nuxt app
@@ -84,20 +86,29 @@ First install `posthog-js`:
 npm install posthog-js
 ```
 
-Then, add your PostHog API key and host to your `nuxt.config.ts` file. You can find your project API key in your [PostHog project settings](https://app.posthog.com/settings/project).
+Then, store your PostHog key and host in environment variables. Add them to a `.env` file in your project's base directory. You can find your project token in your [PostHog project settings](https://app.posthog.com/settings/project).
+
+```shell file=.env
+NUXT_PUBLIC_POSTHOG_PROJECT_TOKEN=<ph_project_token>
+NUXT_PUBLIC_POSTHOG_HOST=<ph_client_api_host>
+```
+
+Then reference them in your `nuxt.config.ts` file:
 
 ```ts file=nuxt.config.ts
 export default defineNuxtConfig({
  devtools: { enabled: true },
   runtimeConfig: {
     public: {
-      posthogPublicKey: '<ph_project_api_key>',
-      posthogHost: '<ph_client_api_host>',
+      posthogToken: process.env.NUXT_PUBLIC_POSTHOG_PROJECT_TOKEN || '<ph_project_token>',
+      posthogHost: process.env.NUXT_PUBLIC_POSTHOG_HOST || '<ph_client_api_host>',
       posthogDefaults: '<ph_posthog_js_defaults>',
     }
   }
 })
 ```
+
+<NuxtApiKeysSecurity />
 
 Create a new [plugin](https://nuxt.com/docs/guide/directory-structure/plugins) by creating a new folder called `plugins` in your base directory and then a new file `posthog.client.js`:
 
@@ -115,7 +126,7 @@ import posthog from 'posthog-js'
 
 export default defineNuxtPlugin(nuxtApp => {
   const runtimeConfig = useRuntimeConfig();
-  const posthogClient = posthog.init(runtimeConfig.public.posthogPublicKey, {
+  const posthogClient = posthog.init(runtimeConfig.public.posthogToken, {
     api_host: runtimeConfig.public.posthogHost,
     defaults: runtimeConfig.public.posthogDefaults,
   })
@@ -192,7 +203,7 @@ import { PostHog } from 'posthog-node';
 export default defineEventHandler(async (event) => {
   const runtimeConfig = useRuntimeConfig();
   const posthog = new PostHog(
-    runtimeConfig.public.posthogPublicKey,
+    runtimeConfig.public.posthogToken,
     { host: runtimeConfig.public.posthogHost }
   );
 
@@ -219,7 +230,7 @@ import { PostHog } from 'posthog-node';
 export default defineEventHandler(async (event) => {
   const runtimeConfig = useRuntimeConfig();
   const cookieString =  event.node.req.headers.cookie || '';  
-  const cookieName =`ph_${runtimeConfig.public.posthogPublicKey}_posthog`;
+  const cookieName =`ph_${runtimeConfig.public.posthogToken}_posthog`;
   const cookieMatch = cookieString.match(new RegExp(cookieName + '=([^;]+)'));
   
   let distinctId;
@@ -228,7 +239,7 @@ export default defineEventHandler(async (event) => {
     if (parsedValue && parsedValue.distinct_id) {
       distinctId = parsedValue.distinct_id;
       const posthog = new PostHog(
-        runtimeConfig.public.posthogPublicKey,
+        runtimeConfig.public.posthogToken,
         { host: runtimeConfig.public.posthogHost }
       );
       posthog.capture({

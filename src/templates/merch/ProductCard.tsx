@@ -14,7 +14,6 @@ type ProductCardProps = {
 
 export function ProductCard(props: ProductCardProps): React.ReactElement {
     const { className, product, onClick, selected = false } = props
-
     const subtitle = getProductMetafield(product, 'subtitle')
     const isNew = product.tags?.includes('new')
 
@@ -41,10 +40,10 @@ export function ProductCard(props: ProductCardProps): React.ReactElement {
     )
 
     return (
-        <div
+        <button
             className={`group px-2 pt-2 pb-1 border-[1.5px] rounded ${
                 selected ? 'border-blue bg-blue/10' : 'border-transparent'
-            }  relative flex flex-col gap-2 ${className}`}
+            } relative flex flex-col gap-2 ${className}`}
             key={product.shopifyId}
             onClick={onClick}
         >
@@ -80,6 +79,6 @@ export function ProductCard(props: ProductCardProps): React.ReactElement {
                     )}
                 </p>
             </div>
-        </div>
+        </button>
     )
 }

@@ -16,8 +16,8 @@ First, [create](https://app.brevo.com/settings/keys/api) a new **API key** in Br
 
 ## Configuring PostHog’s Brevo destination
 
-1. In PostHog, click the **[Data pipeline](https://us.posthog.com/pipeline/overview)** tab in the left sidebar.
-2. Click the [Destinations](https://us.posthog.com/pipeline/destinations?search=brevo) tab.
+1. In PostHog, click the **[Data pipeline](https://app.posthog.com/data-management/destinations)** tab in the left sidebar.
+2. Click the [Destinations](https://app.posthog.com/data-management/destinations?search=brevo) tab.
 3. Click **New destination** and choose Brevo's **Create** button.
 
 Paste your API key and then add any other values you want to pipe from PostHog person properties into Brevo, using the **attributes** fields.
@@ -42,7 +42,7 @@ Once you’ve configured your Brevo destination, click **Start testing** to veri
 
 ### Is the source code for this destination available?
 
-PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/posthog/cdp/templates/webhook/template_airtable.py) is available on GitHub.
+PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/posthog/cdp/templates/brevo/template_brevo.py) is available on GitHub.
 
 <PostHogMaintained />
 

@@ -97,6 +97,10 @@ You’ll need to set environment variables for these. [See (private) instruction
 ### Developing the posts section
 To see your local version of the posts section, `/posts` needs to be visited directly (`http://localhost:8001/posts`)
 
+### Cloudflare PR previews
+
+[PR previews](https://github.com/PostHog/posthog.com/blob/master/.github/workflows/deploy-preview.yml) build with **`GATSBY_MINIMAL=true`** (same idea as `pnpm build:minimal`). **Post listing pages** such as `/tutorials`, `/blog`, and `/posts` are **not** generated, so those URLs may break in the preview. **Open the direct URL** to your doc or post (e.g. `/tutorials/your-slug`) to review changes. Listings and search stay aligned with production after merge to `master`. More detail: [Developing the website → PR preview deployments](https://posthog.com/handbook/engineering/posthog-com/developing-the-website#pr-preview-deployments-cloudflare-pages).
+
 ### Developing the merch store
 Additional environment variables are needed to develop the merch store:
 - `SHOPIFY_APP_PASSWORD`

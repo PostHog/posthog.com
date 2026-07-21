@@ -24,10 +24,13 @@ export const uxcam = {
         session_replay: {
             available: true,
             features: {
+                ai_summaries: false,
                 canvas_recording: false,
                 crash_reports: true,
+                conditional_reporting: true,
                 event_timeline: true,
                 filter_by_user_or_event: true,
+                privacy_masking: true,
             },
             analysis: {
                 features: {
@@ -38,12 +41,7 @@ export const uxcam = {
             platform_support: {
                 features: {
                     mobile_app_recordings: true,
-                    web_app_recordings: false,
-                },
-            },
-            ai: {
-                features: {
-                    ai_summaries: false,
+                    web_app_recordings: true,
                 },
             },
         },
@@ -66,10 +64,14 @@ export const uxcam = {
             available: false,
             features: {},
         },
+        error_tracking: {
+            available: false,
+        },
     },
     platform: {
         deployment: {
             open_source: false,
+            eu_hosting: true,
         },
         pricing: {
             self_serve: false,

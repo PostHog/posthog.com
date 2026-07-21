@@ -168,7 +168,7 @@ With our app set up, it’s time to install and set up PostHog. If you don't hav
 
 Run `go get github.com/posthog/posthog-go` to add [PostHog's Go SDK](/docs/libraries/go) as a dependency. Then, initialize PostHog in the `main()` method in `main.go`.
 
-To do this, you need your project API key and instance address from [your project settings](https://us.posthog.com/project/settings). You also need to [create a personal API key](https://us.posthog.com/settings/user-api-keys). Use these values to initialize your client using `posthog.NewWithConfig()`: 
+To do this, you need your project token and instance address from [your project settings](https://us.posthog.com/project/settings). You also need to [create a personal API key](https://us.posthog.com/settings/user-api-keys). Use these values to initialize your client using `posthog.NewWithConfig()`: 
 
 ```go file=main.go
 package main
@@ -189,7 +189,7 @@ var (
 
 func main() {
      client, _ = posthog.NewWithConfig(
-       "<ph_project_api_key>",
+       "<ph_project_token>",
        posthog.Config{
            PersonalApiKey: "<ph_personal_api_key>",
            Endpoint: "<ph_client_api_host>",

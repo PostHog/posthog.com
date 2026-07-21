@@ -2,7 +2,8 @@
 from flask import Flask, jsonify
 from posthog import Posthog
 
-posthog = Posthog('<ph_project_api_key>', host='<ph_client_api_host>')
+app = Flask(__name__)
+posthog = Posthog('<ph_project_token>', host='<ph_client_api_host>')
 
 @app.errorhandler(Exception)
 def handle_exception(e):

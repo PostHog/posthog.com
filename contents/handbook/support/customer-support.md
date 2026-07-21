@@ -14,17 +14,8 @@ We have a few different routes for users to contact us. As an open source compan
 
 These are the ways in which customers can currently reach us:
 
-- **Support ticket** - Customers can create a support ticket directly within the PostHog app, under the help menu. This offers both users and PostHog engineers the best possible experience as Zendesk is automatically populated with a bunch of helpful context that makes troubleshooting easier. When in doubt, customers should be directed here.
-- **Community questions** - users can also search [previously answered questions](/questions) that have been asked anywhere on posthog.com in our Docs. This is a great way to help us improve our Docs for simpler use-case type questions, but more complex questions should be re-routed via a support ticket. 
+- **Support ticket** - Customers can create a support ticket directly within the PostHog app, under the help menu. This offers both users and PostHog engineers the best possible experience as the ticket is automatically populated with a bunch of helpful context that makes troubleshooting easier. When in doubt, customers should be directed here.
 - **Dedicated Slack channels** - For higher-paying (or potential higher-paying) customers, we offer a dedicated channel on our main company Slack.
-
-Sometimes, people reach out to us with support issues on Twitter/X. Regardless of whether someone reaches out to your personal account or to the company account the broad approach should be as follows:
-
-1. Check first if they already have a ticket in Zendesk (either in-app or via /questions). There is nothing more annoying for a user than being asked to create a support ticket if they already have. If you don't have Zendesk access, ask someone in CS. 
-2. If no tickets exist, explain that we can't provide support over social media and ask them to create a support ticket within the app - this is _much_ better than trying to solve their problem over Twitter as Zendesk pulls in a bunch of contextual information and is easier to collaborate in. Do this from the **PostHog** Twitter account - otherwise you will get personally contacted every time this user wants help. 
-3. If yes, say that we can see their ticket and reassure them that all tickets are triaged and responded to. Let CS know that you have done this. Again, use the PostHog Twitter account.
-
-Your objective should be to get the conversation into Zendesk ASAP, because it's easier to help the person there and to avoid setting a precedent that complaining visibly on social media results in an expedited response. An exception to this rule is if you are engaging with someone who has provided general feedback about PostHog - feel free to use your personal account if someone has a feature request or similar. If a user engage in a way which causes you _any_ distress, you can skip all of the above and just highlight it in Slack for CS to deal with. 
 
 > Sometimes users ask about the progress of [certain issues](https://github.com/PostHog/posthog) that are important to them on GitHub. We don't consider GitHub to be a proper 'support' channel, but it is a useful place to gauge the popularity of feature requests or the prevalence of issues. 
 
@@ -37,33 +28,28 @@ All support at PostHog is done by actual, full-time engineers. We have two types
 
 #### What do Support Engineers do?
 
-Right now, support engineers provide the first level of support for the following teams:
+Right now, support engineers provide the first level of support for most engineering teams and [specialize in certain products](/handbook/support/support-smes).
 
-- Product analytics
-- Web analytics
-- Session replay
-- Feature flags
-- Experiments
-- Surveys
-- Data warehouse
-- Batch exports
-- Sales & CS (Customer Success)
+Support engineers respond to and solve as many tickets as they can for these products, or escalate tickets to the appropriate product engineering team if needed. There are certain products where the engineers on those teams are directly responsible for support:
+ - Security
+ - Merch
+ - Wizard & Docs
+ - Clickhouse and infrastructure teams
+ - Any team whose product is not yet in GA
 
-Support engineers respond to and solve as many tickets as they can for these products, or escalate tickets to the appropriate product engineer if needed. For all other products, the engineers on those teams are directly responsible for support. The support runbook is maintained on the [Support Hero page](/handbook/engineering/support-hero). 
-
-When we hire new support engineers they will usually spend the first few weeks focused just on product and web analytics tickets, until they've started to build more familiarity with the platform as a whole. 
+When we hire new support engineers they will usually spend the first few weeks focused just on analytics related tickets, until they've started to build more familiarity with the platform as a whole.
 
 #### What do Support Heroes do?
 
-One person on each product team takes on the **[Support Hero](/handbook/engineering/support-hero)** role each week. This is a rotating responsibility, where the person involved spends a significant chunk of their time responding to support queries across Slack, email and Zendesk, and sharing that feedback with the team and/or building features and fixes in response. We find each stint as Support Hero throws up a lot of really valuable feedback.
+One person on each product team takes on the **[Support Hero](/handbook/engineering/support-hero)** role each week. This is a rotating responsibility, where the person involved spends a significant chunk of their time responding to support queries in PostHog Support and sharing that feedback with the team and/or building features and fixes in response. We find each stint as Support Hero throws up a lot of really valuable feedback.
 
 ## Response targets, SLAs, and CSAT surveys
 
-### Response Targets
+### Response targets
 
 We have a high volume of tickets and we're a small team, so we're not able to respond to all issues equally. For this reason we prioritize tickets according to the customer's plan. We set a response target for each plan so that we can be sure that tickets are being handled effectively. 
 
-Note that tickets are automatically prioritized in Zendesk and users are updated with information about response targets to set appropriate expectations. In all cases, tickets are routed to the appropriate team and that team is responsible for meeting the response target.
+Note that tickets are automatically prioritized in PostHog Support and users are updated with information about response targets to set appropriate expectations. In all cases, tickets are routed to the appropriate team and that team is responsible for meeting the response target.
 
 The response times listed below are targets for an initial response, and it's possible we will respond faster. These targets are listed in calendar hours Monday - Friday. Please note that we do not offer any level of weekend customer support.
 
@@ -75,12 +61,9 @@ The response times listed below are targets for an initial response, and it's po
 | Scale | 24 hours  |
 | Enterprise | 8 hours | 
 
-Within Zendesk, we will further prioritize tickets based on their selected severity. If you come across a ticket that doesn't have the severity set appropriately [according to our severity level guidelines](/docs/support-options#severity-levels), then you should update the ticket with the appropriate severity level.
-
+Within PostHog Support, we will further prioritize tickets based on their selected priority. If you come across a ticket that doesn't have the priority set appropriately [according to our severity level guidelines](/docs/support-options#severity-levels), then you should update the ticket with the appropriate priority.
 
 As a general rule, we aim to prioritize customers who pay for support, or who are otherwise considered a priority customer, to ensure they get the best possible support experience.
-
-> **_NOTE:_** If a user has recently upgraded to the Enterprise plan, their tickets may not automatically be tagged as Enterprise in the PostHog Priority field in Zendesk. If this happens, manually set the Priority field to Enterprise to ensure they get in the proper queue.
 
 
 ### Follow-up / next reply response targets
@@ -93,11 +76,11 @@ When support engineers need to escalate issues to other engineering teams for de
 
 > **_NOTE:_** The targets are for a reply to the user. If the escalation turns out to be a bug or feature request, the reported issue doesn't have to be solved by the response target date, we just need to reply to the user. That reply may be to let them know it won't be fixed right away, but that we have opened a bug report or feature request. If we've opened a feature request or a bug report, you can refer the user to the GitHub issue for updates, and `Solve` the ticket. If you're replying with info that should resolve the issue, leave it in a `Pending` state (will be auto-solved in 7 days if the user doesn't reply.) If the user replied to confirm the issue is resolved, `Solve` the ticket. Use `On-Hold` sparingly, e.g. if you intend to get back to the user soon (more than a week, less than a month.)
 
-### CSAT Surveys
+### CSAT surveys
 
-We send out CSAT surveys after a ticket has been closed for at least 3 days using [this Automation](https://posthoghelp.zendesk.com/admin/objects-rules/rules/automations/22328357692571). The emails contain a link to https://survey.posthog.com/ with their `distinct_id`, `ticketId`, and the assigned team as query parameters, which are being used alongside their satisfaction rating to capture a `survey sent` event. The code for the survey website is in the [PostHog-csat](https://github.com/PostHog/posthog-csat) repo and the responses can be viewed in [this dashboard](https://us.posthog.com/project/2/dashboard/130687). 
+We send out a [CSAT survey](https://us.posthog.com/project/2/surveys/019f37dc-7c9a-0000-d86a-aa8bf46f4917) after a ticket has been resolved for at least 1 day using [this workflow for tickets set to resolved](https://us.posthog.com/project/2/workflows/019f3834-8dbd-0000-4b19-073031109b21/workflow) and [this workflow for tickets set to pending](https://us.posthog.com/project/2/workflows/019c5746-a12b-0000-3145-a62dca023f64/workflow). The emails contain a link to the hosted survey with their `distinct_id`, `ticket_id`, and `ticket_number` as query parameters, which are being used alongside their satisfaction rating to capture a `survey sent` event.
 
-As an incentive, we offer to feed one hedgehog for every survey sent. <TeamMember name="Ben Haynes" photo /> is the current holder of the hedgehog feeding rights, and takes care of this by making a quarterly donation to [the Suffolk Prickles Hedgehog Rescue Charity](https://suffolkprickles.org/).
+As an incentive, we offer to feed one hedgehog for every survey sent, and we do this by making a quarterly donation to [the Suffolk Prickles Hedgehog Rescue Charity](https://suffolkprickles.org/).
 
 ## Guidelines for doing support at PostHog
 
@@ -111,13 +94,27 @@ If this happens, notify <TeamMember name="Charles Cook" photo />, <TeamMember na
 
 We very rarely receive messages from people wishing to make a legal claim against PostHog, such as cease and desist letters. These can come via the app, or [Community Questions](/questions). Do not respond to these requests. Instead, notify <TeamMember name="Charles Cook" photo /> or <TeamMember name="Fraser Hopper" photo /> immediately. They will either take this on, or advise you on how to reply.
 
+
+## Community
+
+Support =/= community - we consider them to be separate things.
+
+### Tutorials
+
+We want to help teams of all sizes learn how to ask the right product analytics questions to grow their product. To help, we create content in the form of [tutorials](/tutorials), [blog posts](/blog), and [videos](https://www.youtube.com/channel/UCn4mJ4kK5KVSvozJre645LA).
+
+We've also created a bunch of useful [templates](/templates) that cover many of the most popular PostHog use cases.  
+
+
+## Common issues & questions
+
 ### Dealing with billing issues
 
-Issues related to billing are handled exclusively by our billing engineers. Billing support is currently lead by <TeamMember name="Eleftheria Trivyzaki" photo />. Most tickets get routed directly to the <SmallTeam slug="billing" />, however some issues require technical investigation before the billing issue can be resolved. In such cases, add <TeamMember name="Eleftheria Trivyzaki" /> as a follower to the support ticket from the outset, and leave an internal note briefly explaining what will eventually be required. Complete whatever technical investigation is required and then let the customer know you are handing them over to the <SmallTeam slug="billing" />.
+Issues related to billing are handled exclusively by our billing engineers. Billing support is currently lead by <TeamMember name="Eleftheria Trivyzaki" photo />. Most tickets get routed directly to billing support, however some issues require technical investigation before the billing issue can be resolved. In such cases, let <TeamMember name="Eleftheria Trivyzaki" /> know by messaging #team-support in Slack, and leave a private note on the ticket briefly explaining what will eventually be required. Complete whatever technical investigation is required and then let the customer know you are handing them over to billing support.
 
 ### Users asking for demos, consultations or partnerships
 
-We often receive requests for demos, consultations or other sales-related requests. Most of the time these can be escalated to the [Sales team](/handbook/growth/sales/overview) if they arrive via Zendesk. If they arrive directly via email you can forward them to sales@posthog.com.
+We often receive requests for demos, consultations or other sales-related requests. Most of the time these can be escalated to the [Sales team](/handbook/growth/sales/overview) if they arrive via PostHog Support.
 
 We also often get requests for partnerships, backlinks, or messages trying to sell us baby Yahama pianos. Sometimes, people want to invest in PostHog. Most of these are obviously spam and can be ignored, but if you think an opportunity may be genuine then you can forward it to <TeamMember name="Joe Martin" photo /> so he can take over. 
 
@@ -125,7 +122,7 @@ We also often get requests for partnerships, backlinks, or messages trying to se
 
 Most of the time users can self-serve deletion requests and should be encouraged to do so in order to save time and ensure they take responsibility for deleting their own data. Users can delete their [environment](https://us.posthog.com/settings/environment-danger-zone), [project](https://us.posthog.com/settings/project-danger-zone), and [organization](https://us.posthog.com/settings/organization-danger-zone) in the appropriate 'Danger Zone' section of their settings page if they have the correct permissions. Admins can remove members from their organization in [the Members page](https://us.posthog.com/settings/organization-members).
 
-If a user refuses to delete their own data, you must first confirm they have the permissions to do this by checking their email address matches that  an organization admin. As an extra layer of security, you should also ask them to confirm their address by emailing you directly from it (e.g. not through Zendesk.) Only then should you delete any data on their behalf. 
+If a user refuses to delete their own data, you must first confirm they have the permissions to do this by checking their email address matches that of an organization admin. As an extra layer of security, you should also ask them to confirm their address by emailing you directly from it (e.g. not through PostHog Support.) Only then should you delete any data on their behalf. 
 
 If a user asks for us to delete all of their _personal_ data in compliance with GDPR, you should confirm their identity as described above and delete the user from PostHog. Finally, you should notify <TeamMember name="Joe Martin" photo /> so he can delete customer data from our email marketing systems, and <TeamMember name="Fraser Hopper" photo /> so he can coordinate further data deletion across our systems.
 
@@ -143,16 +140,48 @@ Due to the the nature of how our infrastructure works, events and properties can
 
 > If they need to remove data immediately, the only way to do this is the delete the project.  There are no other alternatives.
 
+
+#### How should I handle organization ownership transfers?
+
+In case a user requests for organization permissions to be altered (e.g. the only member with owner membership left the company) follow these steps:
+
+1. The ticket should be assigned ideally to Platform features
+2. Ask the user to get the current owner to log in and update ownership.
+3. If the owner left and they can get access to the current owner’s email, ask them do a password reset and then login as the owner and perform the action themselves.
+4. If not, we should email the account owner’s email to see if we get a bounce back. Also check how long it is since they logged in.
+5. If accessing the current owner's email is not an option, we should have the person requesting access verify their domain ownership by providing a TXT record example for posthog verification.
+6. Once verified, membership can be updated for the request. 
+7. Note, if they’re on a paid plan we might also need to switch the contact on Stripe via a separate request to billing @posthog.com
+
+#### How should I handle 2FA reset?
+
+Locate the user's profile in admin and send them a 2FA reset link. The link expires in 24 hours, so let the user know they'll need to use it within that window.
+
+#### How do I handle a bug report or feature request?
+
+For feature requests from low priority users, [give them this link](https://github.com/PostHog/posthog/issues/new/choose) and suggest they open a feature request.
+
+For bug reports from normal and high priority users (assuming you've confirmed it's a bug, and that there's not already an open bug report):
+
+1. [Open a bug report](https://github.com/PostHog/posthog/issues/new?assignees=&labels=bug&projects=&template=bug_report.yml) on our GitHub repo
+2. Be sure to include a link to the insight (or other), below the repo steps
+3. Include a link to the ticket in the `additional info` section of the bug comment.
+4. Reply to the user to thank\* them for alerting us to the bug. Let them know you've opened a bug report and provide a link to it.
+5. Let them know they can follow the bug report on GitHub for updates.
+6. When sending the reply, change the ticket from `Open` to `Pending`
+7. In Slack, go to the team channel for the team that handles the feature that the bug report applies to (e.g. `#team-product-analytics`) and alert them with a post like "New bug report from a high priority customer: `https://github.com/PostHog/posthog/issues/nnnnnn`"
+
+`*` consider sparking additional joy with a [credit for merch](/handbook/company/merch-store#merch-giveaways)
+
+Steps for feature requests from normal and high priority users are pretty much the same, but [use this form](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&projects=&template=feature_request.yml) instead. If you find that there's already a matching feature request open, reply with a link to the feature request, and let them know they can upvote it by adding a "`+1`" comment.
+
+
 #### Handling sales leads
 
-If a support ticket should be handled by one of the sales/onboarding teams, use the `Create a lead` macro in Zendesk to respond to the customer. The macro adds the `sf-lead` tag to the ticket, which will automatically create a new lead in Salesforce. This automation is documented in the [Sales area of the handbook](/handbook/growth/sales/crm#zendesk-integration).
+If a support ticket should be handled by one of the sales / CS / onboarding teams, message #group-cs-sales-support to let the teams know.
 
-## Community
 
-Support =/= community - we consider them to be separate things.
+#### How should I handle self-hosted setups?
 
-### Tutorials
+It's fine to politely direct users to the docs for [self-serve open-source support](/docs/self-host/open-source/support#support-for-open-source-deployments-of-posthog) and ask them to file a GitHub issue if they believe something is broken in the docs or deployment setup. We do not otherwise provide support for self-hosted PostHog.
 
-We want to help teams of all sizes learn how to ask the right product analytics questions to grow their product. To help, we create content in the form of [tutorials](/tutorials), [blog posts](/blog), and [videos](https://www.youtube.com/channel/UCn4mJ4kK5KVSvozJre645LA).
-
-We've also created a bunch of useful [templates](/templates) that cover many of the most popular PostHog use cases.  

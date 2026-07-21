@@ -22,9 +22,10 @@ Our onboarding program spans **8 weeks** and includes:
 Here's a typical timeline, though we're flexible and can adjust to your schedule:
 
 - **Week 1**: Initial account review and outreach
-- **Weeks 2-3**: First call scheduled
-- **Weeks 4-6**: Second call (if requested)
-- **Weeks 7-8**: Final check-in & onboarding graduation!
+- **Weeks 2-3**: Ideally, a first call scheduled, or we can continue working async!
+- **Week 5**: We check in to make sure you're all set before your PostHog bill comes up
+- **Weeks 4-6**: Second call (if requested), and space for unanswered questions
+- **Week 8**: Onboarding graduation!
 
 
 ### Your success is our success
