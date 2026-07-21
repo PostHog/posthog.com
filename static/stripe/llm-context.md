@@ -45,7 +45,7 @@ PostHog is not just analytics. After integrating, you automatically get access t
 - **Error Tracking**: Capture frontend exceptions with `posthog.captureException(error)`. Auto-captures when enabled.
 - **Surveys**: In-app surveys configured in the PostHog UI, rendered automatically by `posthog-js`.
 - **Web Analytics**: Privacy-friendly web analytics dashboard, no extra setup needed.
-- **LLM Analytics**: Track LLM API calls, token usage, and costs with integrations for OpenAI, Anthropic, LangChain, and more.
+- **AI Observability**: Track LLM API calls, token usage, and costs with integrations for OpenAI, Anthropic, LangChain, and more.
 - **Data Warehouse**: Query external data sources alongside PostHog data using SQL.
 
 ## PostHog API

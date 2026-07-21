@@ -10,6 +10,14 @@ import { Steps, Step } from 'components/Docs/Steps'
 
 <ProxyCallout />
 
+<CalloutBox icon="IconInfo" title="Data transfer costs" type="fyi">
+
+Proxying routes all PostHog traffic – events, session recordings, feature flag polls, and SDK assets – through Netlify, which bills it against your plan's [bandwidth quota with overage fees](https://www.netlify.com/pricing/). Session recordings are the biggest driver (often 1–5 MB per session) and can consume a plan quickly on high-traffic sites.
+
+To avoid these costs, use the [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) (free for PostHog Cloud users) or a provider without egress fees like [Cloudflare Workers](/docs/advanced/proxy/cloudflare).
+
+</CalloutBox>
+
 This guide shows you how to use [Netlify redirects](https://docs.netlify.com/routing/redirects/) as a reverse proxy for PostHog.
 
 ## How it works
