@@ -200,11 +200,12 @@ export const productAnalytics = {
         },
     },
     slider: {
-        marks: [0, MILLION, TEN_MILLION, FIFTY_MILLION, MAX_PRODUCT_ANALYTICS],
-        min: 0,
+        // LogSlider uses Math.log – min/marks must be > 0 or labels stack at -Infinity.
+        marks: [MILLION, TEN_MILLION, FIFTY_MILLION, MAX_PRODUCT_ANALYTICS],
+        min: MILLION,
         max: MAX_PRODUCT_ANALYTICS,
     },
-    volume: 1000000,
+    volume: MILLION,
     worksWith: ['session_replay', 'feature_flags', 'surveys'],
     customers: {
         ycombinator: {
