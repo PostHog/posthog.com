@@ -6,6 +6,7 @@ templateId:
 
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
+import AdDestinationPersonDataFaq from "../_snippets/ad-destination-person-data-faq.mdx"
 
 
 You should be aware that this destination relies on creating third-party cookies. You'll also need access to the relevant TikTok Ads account.
@@ -42,9 +43,11 @@ You should be aware that this destination relies on creating third-party cookies
 
 ## FAQ
 
+<AdDestinationPersonDataFaq />
+
 ### Is the source code for this destination available?
 
-PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/posthog/cdp/templates/tiktok_ads/template_tiktok_ads.py) is available on GitHub.
+PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/nodejs/src/cdp/templates/_destinations/tiktok_ads/tiktok.template.ts) is available on GitHub.
 
 <PostHogMaintained />
 

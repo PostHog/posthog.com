@@ -1,0 +1,30 @@
+## Q3 2026 Goals
+
+- Hit CSM Net Revenue Retention (NRR) of 110% using quarterly comparison method (CSMs) 
+- Hit and track all team revenue goals (Dana)
+
+### Replace myself with Claude <TeamMember name="Ben Smith" photo />
+PostHog is investing heavily in AI tooling and an MCP first approach. To be a pioneer (and potentially expose gaps in our approach) this quarter I will exclusively use LLM tooling to prepare for some customer calls.
+
+**We'll know we're successful when**:
+I will ship at least one skill, having used it to prepare for three customer check-in calls, and share my lessons learned internally.
+
+### Enable customers with custom skills <TeamMember name="Christophe Eynius Tranberg" photo />
+More and more customers are using our MCP as part of their daily workflows. We have a unique understanding of what their challenges are and we have started shipping custom skills. I want to build a way to distribute custom skills to users and make them runnable using the wizard. 
+
+**We'll know we're successful when**: 
+Concierge mode is shipped to production
+
+### Make customer feature requests queryable in real time <TeamMember name="Andre de Vries" photo />
+Today feature requests are collated by hand at quarter-end (Simon → engineering), and nobody can ask "what are customers asking for right now?" in between. I'll build a PostHog Signals scout that scans my customer conversations (shared Slack channels + call notes) for feature requests, groups them by theme, and emits them into the Signals inbox, so GTM and CS can pull live customer demand into renewal and roadmap conversations instead of waiting for a quarterly doc. Deliberately scoped to one source and kept low-maintenance to avoid over-building the earlier RFC, and I'll check with the customer analytics team first to avoid overlap.
+
+**We'll know we're successful when**:
+The scout runs on a schedule and surfaces grouped feature-request themes into Signals, and at least one renewal or roadmap conversation this quarter pulls from it instead of the quarter-end collation.
+
+### Skill discoverability <TeamMember name="Dana Zou" photo />
+We're all building skills, but it feels like whether you know about a skill all depends on whether you saw it on Slack. The result is ~10 versions of the same workflow, and we're spending time rebuilding very similar skills. I'll work on this from three angles:
+ - 1-3 canonical skills for simple-but-manual tasks where a shared version works. e.g. billing page visit analysis, chasing unpaid invoices, renewal prep, and a first-pass account review.
+ - A `find-skills` skill: Claude checks the store for an existing team skill before building a workflow from scratch, or mid-task ("is there already a skill for what I'm doing?").
+ - The store as the default home: every skill shared in Slack lands in the store, and I'll regularly re-share and remind people of what's in there!
+
+**We'll know we're successful when**: canonical skills are in the store and being used by the team, find-skills is shipped and in everyone's setup, and all skills shared in Slack are in our Skills store

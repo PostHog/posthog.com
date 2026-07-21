@@ -6,6 +6,7 @@ templateId:
 
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
+import AdDestinationPersonDataFaq from "../_snippets/ad-destination-person-data-faq.mdx"
 
 
 You'll also need access to the relevant Snapchat Business account.
@@ -41,9 +42,11 @@ You'll also need access to the relevant Snapchat Business account.
 
 ## FAQ
 
+<AdDestinationPersonDataFaq />
+
 ### Is the source code for this destination available?
 
-PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/posthog/cdp/templates/snapchat_ads/template_snapchat_ads.py) is available on GitHub.
+PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/nodejs/src/cdp/templates/_destinations/snapchat_ads/snapchat.template.ts) is available on GitHub.
 
 <PostHogMaintained />
 

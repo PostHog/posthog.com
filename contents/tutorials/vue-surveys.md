@@ -511,7 +511,7 @@ export default {
       localStorage.setItem(`hasInteractedWithSurvey_${this.surveyID}`, 'true');
       this.$posthog.capture("survey sent", {
         $survey_id: this.surveyID, // required
-        $survey_response_a3071551-d599-4eeb-9ffe-69e93dc647b6: value, // required
+        $survey_response: value, // required
         $survey_questions: [
           {
             id: "a3071551-d599-4eeb-9ffe-69e93dc647b6",
@@ -593,7 +593,7 @@ export default {
       localStorage.setItem(`hasInteractedWithSurvey_${this.surveyID}`, 'true');
       this.$posthog.capture("survey sent", {
         $survey_id: this.surveyID, // required
-        $survey_response_a3071551-d599-4eeb-9ffe-69e93dc647b6: value, // required
+        $survey_response: value, // required
         $survey_questions: [
           {
             id: "a3071551-d599-4eeb-9ffe-69e93dc647b6",

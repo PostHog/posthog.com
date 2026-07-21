@@ -1,6 +1,6 @@
 extends: capitalization
 message: "'%s' heading should be in sentence case, and product names should be capitalized."
-link: https://posthog.com/handbook/docs-and-wizard/docs-style-guide
+link: https://posthog.com/handbook/wizard-and-docs/docs-style-guide
 level: warning
 threshold: 1 # Fail all instances of improper casing
 scope: heading
@@ -29,13 +29,12 @@ exceptions:
     - Marketing Analytics
     - PostHog AI
     - PostHog Cloud
+    - PostHog Code
     - Product Analytics
-    - Product Tours
     - Revenue Analytics
     - Session Replay
     - Surveys
     - surveys # adding because the generic term is too commonly used
-    - Twig
     - Web Analytics
     - Workflows
     - workflows # adding because the generic term is too commonly used

@@ -45,7 +45,7 @@ Make it second nature to constantly ask yourself: *"What do I want the reader's 
 
 For example: *"I want to challenge their assumptions and make them feel surprised."*
 
-Charles' [Collaboration sucks](/newsletters/collaboration-sucks) article is a great example. It was right on the edge of clickbaity, enough for someone to comment "I was expecting to be annoyed but then I read it and was like, okay."
+Charles' [Collaboration sucks](/newsletter/collaboration-sucks) article is a great example. It was right on the edge of clickbaity, enough for someone to comment "I was expecting to be annoyed but then I read it and was like, okay."
 
 That's the goal. This one question should drive your title, your headings, your tone, your pacing — everything, really. A "How to do X" [title](/handbook/content/newsletter#title) can almost always be turned into something that makes a person *feel* something.
 

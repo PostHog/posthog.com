@@ -1,0 +1,39 @@
+---
+title: Find replays with PostHog AI
+---
+
+[PostHog AI](/docs/posthog-ai) searches and filters [session recordings](/docs/session-replay) using natural language. Instead of building filters manually, describe the behavior you're looking for – like "users who rage clicked on the pricing page" – and PostHog AI finds matching sessions.
+
+## How it works
+
+PostHog AI understands replay-specific events and behaviors, including:
+
+- **Rage clicks** – repeated clicks on the same element, often indicating frustration
+- **Dead clicks** – clicks on non-interactive elements
+- **Error events** – JavaScript errors, network failures, and captured exceptions
+- **Navigation patterns** – page visits, referrers, and exit pages
+- **User properties** – plan type, cohort membership, country, and any [person property](/docs/data/persons) you've captured
+
+When you describe what you're looking for, PostHog AI translates your description into replay filters and returns matching sessions. You can then watch the replays directly or ask PostHog AI to [summarize them](/docs/session-replay/session-summaries).
+
+## Try it
+
+Select a prompt to try it out in the PostHog app:
+
+- [`Find sessions where users dropped off during checkout`](https://app.posthog.com/#panel=max:Find%20sessions%20where%20users%20dropped%20off%20during%20checkout)
+- [`Show me replays of users who signed up but never created a project`](https://app.posthog.com/#panel=max:Show%20me%20replays%20of%20users%20who%20signed%20up%20but%20never%20created%20a%20project)
+- [`Find sessions with rage clicks on the pricing page`](https://app.posthog.com/#panel=max:Find%20sessions%20with%20rage%20clicks%20on%20the%20pricing%20page)
+- [`Show recordings from enterprise users in the last 24 hours`](https://app.posthog.com/#panel=max:Show%20recordings%20from%20enterprise%20users%20in%20the%20last%2024%20hours)
+- [`Find sessions where users encountered an error on the dashboard`](https://app.posthog.com/#panel=max:Find%20sessions%20where%20users%20encountered%20an%20error%20on%20the%20dashboard)
+
+## Tips for better results
+
+- **Describe behavior, not pages** – "users who got stuck during onboarding" works better than "users on /onboarding"
+- **Combine criteria** – "enterprise users who rage clicked in the last 24 hours" narrows results faster than separate queries
+- **Reference user properties** – PostHog AI can filter by plan type, cohort, country, or any person property you've captured
+- **Ask about patterns across sessions** – "What are users struggling with on the settings page?" summarizes behavior across multiple replays instead of returning individual sessions
+- **Chain with summaries** – After finding sessions, ask PostHog AI to summarize them so you don't need to watch every replay
+
+## Get started
+
+To start finding replays with PostHog AI, [set up PostHog AI](/docs/posthog-ai/start-here).
