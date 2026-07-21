@@ -35,19 +35,6 @@ export const logs = {
             unit: 'GB',
             freeAllocation: 0,
         },
-        {
-            key: 'logs_retention_90d',
-            label: '90-day retention',
-            sliderConfig: {
-                marks: [0, 10, 50, 100, 500, 1000, 5000],
-                min: 0,
-                scaleMin: 1,
-                max: 5000,
-            },
-            volume: 0,
-            unit: 'GB',
-            freeAllocation: 0,
-        },
     ],
     seo: {
         title: 'Logs that already know your users',
