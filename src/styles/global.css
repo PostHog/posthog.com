@@ -14,6 +14,37 @@
     .prose {
         @apply max-w-none;
 
+        /* Chrome misplaces collapsed row borders when rows have fractional
+           heights (e.g. wrapped inline-block code pills), drawing dividers
+           through cell text. Typography puts borders on tr/thead, which only
+           paint in collapse mode — so switch to per-cell borders, which
+           don't share a painted grid and can't drift. */
+        table {
+            border-collapse: separate;
+            border-spacing: 0;
+
+            /* Typography baseline-aligns cells; a tall wrapped inline-block
+               (multi-line code pill) shifts the shared baseline and Chrome's
+               row height disagrees with it at some display scales, so text
+               crosses row borders. Top alignment removes cross-cell coupling. */
+            td,
+            th {
+                vertical-align: top;
+            }
+
+            thead th {
+                @apply border-b border-primary;
+            }
+
+            tbody tr {
+                border-bottom-width: 0;
+            }
+
+            tbody tr:not(:last-child) td {
+                @apply border-b border-primary;
+            }
+        }
+
         code {
             @apply before:hidden after:hidden; /* hide prose ticks */
         }
@@ -822,12 +853,21 @@ fieldset {
         @apply rounded w-full;
     }
 
+    table {
+        /* Chrome misplaces collapsed row borders when rows have fractional
+           heights (e.g. wrapped inline-block code pills), drawing dividers
+           through cell text. Per-cell borders don't share a painted grid,
+           so they can't drift. */
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
     thead {
         @apply rounded-sm bg-accent;
         text-align: left;
 
         th {
-            @apply opacity-75 text-sm;
+            @apply opacity-75 text-sm border-b border-primary;
         }
     }
 
@@ -2797,14 +2837,17 @@ article.reader-view-content-container:has(.quest-sidebar) {
     }
 
     .quest-details {
-        width: 66.66%;
+        /* Subtract the flex gap so details + gap + sidebar never exceed the container */
+        width: calc(66.66% - 2rem);
         flex-shrink: 0;
     }
 
     .quest-sidebar {
-        max-width: 30%;
-        flex-shrink: 0;
+        flex: 1 1 0%;
+        min-width: 0;
         padding-bottom: 1rem;
+        /* Inset from the window edge so tiles and their corner-bracket decorations never clip */
+        padding-right: 0.75rem;
     }
 
     .quest-desktop-nav {

@@ -1,240 +1,137 @@
 ---
-title: Getting started with Support
+title: Get started with Support
 hideRightSidebar: true
 contentMaxWidthClass: max-w-5xl
 ---
 
-import { QuestLog, QuestLogItem } from "components/Docs/QuestLog";
-import OSButton from "components/OSButton";
+import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
+import OSButton from 'components/OSButton'
+import { IconChat, IconAtSign, IconMessage, IconGithub, IconMagic } from '@posthog/icons'
 
 <QuestLog firstSpeechBubble="Let's set up customer support!" lastSpeechBubble="You're ready to help your users!">
 
-<QuestLogItem
-    title="Enable Support"
-    subtitle="Required"
-    icon="IconToggle"
->
+<QuestLogItem title="Enable Support and add the widget" subtitle="Where tickets begin" icon="IconToggle">
 
-Support is enabled via the Support product settings. Once enabled, the `posthog.conversations` API becomes available (if you have `posthog-js` installed).
+The first step is to enable Support and add the in-app widget to your site, so customer conversations start arriving as tickets. Every widget ticket automatically attaches the sender's [session replay](/session-replay), [events](/docs/product-analytics/capture-events), and [identity](/docs/product-analytics/identify), so you always have the full story.
 
-### How to enable
+Building your own interface instead? The [JavaScript API](/docs/support/javascript-api) gives you the same backend without the default widget.
 
-1. Go to **Support** in PostHog and click **Settings**
-2. Click **Enable conversations** – this enables the conversations API
-3. To show the chat widget, go to **In-app widget** section and enable it
-4. Configure your greeting message, button color, and other settings
-5. Save your settings
-
-If you enabled the widget, it will appear on your site for users to start conversations.
-
-<CalloutBox icon="IconInfo" title="Building a custom UI?" type="fyi">
-
-To use just the API without the default widget, skip step 3.
-
-</CalloutBox>
-
-<OSButton variant="primary" asLink to="/docs/support/widget">
-  Configure widget settings
-</OSButton>
+<OSButton variant="primary" asLink to="/docs/support/widget">Set up the widget</OSButton>
 
 </QuestLogItem>
 
-<QuestLogItem
-    title="Test the widget"
-    subtitle="Recommended"
-    icon="IconMessage"
->
+<QuestLogItem title="Connect your other channels" subtitle="Email, Slack, and GitHub" icon="IconMessage">
 
-Once enabled, visit your site and look for the chat button in the bottom-right corner.
+Meet customers wherever they are. Beyond the widget, conversations can arrive from [email](/docs/support/email), [Slack](/docs/support/slack), and [GitHub](/docs/support/github), and every channel syncs both ways so you answer from a single inbox.
 
-1. Click the chat button to open the widget
-2. Enter your name and email (if required)
-3. Send a test message
-4. Check your PostHog inbox to see the ticket
+<div className="not-prose grid grid-cols-1 @sm:grid-cols-2 gap-3 my-4">
+  <div className="flex items-start gap-2.5 rounded border border-primary bg-accent p-3">
+    <IconChat className="size-5 shrink-0 text-blue mt-0.5" />
+    <div>
+      <p className="m-0 text-sm font-bold text-primary">Widget</p>
+      <p className="m-0 mt-0.5 text-xs text-secondary">In-app chat with replay and events attached</p>
+    </div>
+  </div>
+  <div className="flex items-start gap-2.5 rounded border border-primary bg-accent p-3">
+    <IconAtSign className="size-5 shrink-0 text-teal mt-0.5" />
+    <div>
+      <p className="m-0 text-sm font-bold text-primary">Email</p>
+      <p className="m-0 mt-0.5 text-xs text-secondary">Forward support@ mail into the inbox</p>
+    </div>
+  </div>
+  <div className="flex items-start gap-2.5 rounded border border-primary bg-accent p-3">
+    <IconMessage className="size-5 shrink-0 text-red mt-0.5" />
+    <div>
+      <p className="m-0 text-sm font-bold text-primary">Slack</p>
+      <p className="m-0 mt-0.5 text-xs text-secondary">SupportHog turns messages and reactions into tickets</p>
+    </div>
+  </div>
+  <div className="flex items-start gap-2.5 rounded border border-primary bg-accent p-3">
+    <IconGithub className="size-5 shrink-0 text-primary mt-0.5" />
+    <div>
+      <p className="m-0 text-sm font-bold text-primary">GitHub</p>
+      <p className="m-0 mt-0.5 text-xs text-secondary">Issues become tickets and replies post back</p>
+    </div>
+  </div>
+</div>
 
-The widget automatically captures:
-
-- **Session ID** – Links to events and exceptions from your session
-- **Session Replay ID** – Links to your [session recording](/docs/session-replay) if replay is enabled
-- **Current URL** – The page they were on
-- **User identity** – If they're identified via [`posthog.identify()`](/docs/product-analytics/identify)
-
-</QuestLogItem>
-
-<QuestLogItem
-    title="Connect Slack"
-    subtitle="Optional"
-    icon="IconMessage"
->
-
-Connect your Slack workspace to turn Slack messages into support tickets. The **SupportHog** bot enables two-way sync – messages in Slack create tickets, and your replies in PostHog are posted back to the Slack thread.
-
-Four ways to create tickets from Slack:
-
-1. **Support channel** – every message in a dedicated channel becomes a ticket
-2. **Bot mention** – `@SupportHog` in any channel
-3. **Emoji reaction** – react with a configurable emoji (default `:ticket:`)
-4. **Ticket nudges** – prompts users in non-support channels to open a ticket
-
-<OSButton variant="primary" asLink to="/docs/support/slack">
-  Set up Slack integration
-</OSButton>
+<OSButton variant="primary" asLink to="/docs/support/email">Connect a channel</OSButton>
 
 </QuestLogItem>
 
-<QuestLogItem
-    title="Connect Email"
-    subtitle="Optional"
-    icon="IconMail"
->
+<QuestLogItem title="Work your tickets" subtitle="Your team's inbox" icon="IconNotebook">
 
-Let customers reach you by email. Incoming emails become support tickets in PostHog, and your replies are sent back as emails – keeping the full conversation threaded in both PostHog and the customer's inbox.
+The [Support inbox](/docs/support/inbox) is where your team lives. Open any ticket and the customer's replay, recent events, exceptions, and past conversations are right there, so you resolve issues without the back-and-forth. Assign, tag, snooze, and track SLAs from one view.
 
-1. **Add an email address** – e.g. `support@company.com`
-2. **Set up forwarding** – forward incoming mail to the PostHog forwarding address
-3. **Verify your domain** – add SPF and DKIM DNS records so PostHog can send replies on your behalf
+<!-- TODO(sarah): replace with a Support inbox screenshot – capture at 1000-1400px wide, light + dark, no PII.
+<ProductScreenshot
+    imageLight="TODO_CLOUDINARY_URL_LIGHT"
+    imageDark="TODO_CLOUDINARY_URL_DARK"
+    alt="The Support inbox with a ticket open, showing the customer's session replay and events alongside the conversation"
+    classes="rounded"
+/>
+-->
 
-You can connect up to 10 email addresses per project (e.g. `support@`, `billing@`, `sales@`).
-
-<OSButton variant="primary" asLink to="/docs/support/email">
-  Set up email channel
-</OSButton>
+<OSButton variant="primary" asLink to="/docs/support/inbox">Explore the inbox</OSButton>
 
 </QuestLogItem>
 
-<QuestLogItem
-    title="Import historical tickets"
-    subtitle="Optional"
-    icon="IconUpload"
->
+<QuestLogItem title="Automate assignment, tags, and SLAs" subtitle="Rules you control" icon="IconDecisionTree">
 
-Migrating from another help desk? [Import historical tickets](/docs/support/imports) into the unified inbox — [Zendesk Support](/docs/support/imports/zendesk) available now (beta).
+Let rules handle the repetitive parts. [Workflows](/docs/support/workflows) are rules you control – no autonomous AI involved. For example:
 
-<OSButton variant="primary" asLink to="/docs/support/imports">
-  Import historical tickets
-</OSButton>
+- Set SLAs based on channel or priority
+- Auto-assign new tickets to a role
+- Tag tickets by customer email domain
+- Reopen a ticket when the customer replies
 
-</QuestLogItem>
-
-<QuestLogItem
-    title="Connect GitHub"
-    subtitle="Optional"
-    icon="IconGitHub"
->
-
-Connect your GitHub repositories to turn GitHub issues into support tickets. Issues opened in monitored repos automatically create tickets, and your replies in PostHog are posted back as comments on the GitHub issue.
-
-How it works:
-
-1. **New issues** – Issues opened in monitored repos become tickets
-2. **Comments** – Issue comments sync to ticket messages
-3. **Status** – Closing or reopening issues updates ticket status
-4. **Replies** – Team replies in PostHog are posted back to the GitHub issue
-
-### How to connect
-
-1. Install the PostHog GitHub App from **Settings > Integrations**
-2. Go to **Support > Settings** and open the **GitHub** tab
-3. Select the GitHub App installation to connect
-4. Choose which repositories to monitor
-
-<OSButton variant="primary" asLink to="/docs/support/github">
-  Set up GitHub integration
-</OSButton>
+<OSButton variant="primary" asLink to="/docs/support/workflows">Set up workflows</OSButton>
 
 </QuestLogItem>
 
-<QuestLogItem
-    title="View and respond to tickets"
-    subtitle="Required"
-    icon="IconInbox"
->
+<QuestLogItem title="Turn tickets into fixes" subtitle="Support feeds Self-driving" icon="IconMagic">
 
-All tickets appear in the Support inbox within PostHog.
+Support isn't just an inbox – it's a signal source. Recurring issues in your conversations become [Self-driving](/docs/self-driving) reports, and when there's a code fix, a pull request you review and merge. Answering customers still happens in the Support inbox; you review these fixes in the Self-driving inbox.
 
-### What you'll see for each ticket
+<div className="not-prose flex flex-wrap items-center gap-x-3 gap-y-2 my-4">
+  <span className="flex items-center gap-1.5 text-sm text-secondary">
+    <IconMessage className="size-5 shrink-0" />
+    Tickets
+  </span>
+  <span className="text-muted" aria-hidden="true">→</span>
+  <span className="flex items-center gap-1.5 text-sm text-secondary">
+    <IconMagic className="size-5 shrink-0" />
+    Self-driving report
+  </span>
+  <span className="text-muted" aria-hidden="true">→</span>
+  <span className="flex items-center gap-1.5 text-sm text-secondary">
+    <IconGithub className="size-5 shrink-0" />
+    Pull request
+  </span>
+</div>
 
-- **Chat thread** – The conversation with the customer
-- **Session recording** – Watch what they were doing (if available)
-- **Recent events** – Events from around when they submitted
-- **Exceptions** – Any errors from their session
-- **Previous tickets** – Other conversations with this person
-
-This context helps you understand and resolve issues faster.
-
-<OSButton variant="primary" asLink to="/docs/support/inbox">
-  Learn about the inbox
-</OSButton>
-
-</QuestLogItem>
-
-<QuestLogItem
-    title="Automate with Workflows"
-    subtitle="Optional"
-    icon="IconDecisionTree"
->
-
-Use [Workflows](/docs/workflows) to automate ticket management. Support emits events that trigger Workflows, and Workflow actions can update tickets automatically. For example:
-
-- **Set SLAs** – automatically set a 4-hour SLA on widget tickets and 24-hour SLA on Slack tickets
-- **Auto-assign** – route tickets to different teams based on channel or customer domain
-- **Status automation** – move tickets to Pending after a team reply, reopen when a customer replies
-- **Tagging** – auto-tag tickets based on customer email domain for prioritization
-- **Escalation** – set tight SLAs and assign to senior support for high-priority tickets
-
-<OSButton variant="primary" asLink to="/docs/support/workflows">
-  See all workflow examples
-</OSButton>
+<OSButton variant="primary" asLink to="/docs/self-driving">Support and Self-driving</OSButton>
 
 </QuestLogItem>
 
-<QuestLogItem
-    title="Build a custom UI"
-    subtitle="Optional"
-    icon="IconCode"
->
+<QuestLogItem title="Migrating from another tool?" subtitle="Bring your tickets with you" icon="IconUpload">
 
-Don't want to use the default widget? Use the JavaScript API to build your own support experience.
+Bring your history with you so the inbox starts with context instead of an empty slate. The [Zendesk](/docs/support/imports/zendesk) import (beta) brings over:
 
-```javascript
-// Check if conversations are available
-if (posthog.conversations.isAvailable()) {
-  // Send a message
-  const response = await posthog.conversations.sendMessage("Hello, I need help!", {
-    name: "John",
-    email: "john@example.com",
-  });
+- Full message threads, including internal notes
+- Customer names and emails
+- Tags, statuses, and priorities
+- Attachments and original timestamps
 
-  // Fetch messages
-  const messages = await posthog.conversations.getMessages();
-}
-```
-
-The API gives you full control over the UI while PostHog handles the backend.
-
-<OSButton variant="primary" asLink to="/docs/support/javascript-api">
-  Explore the JavaScript API
-</OSButton>
+<OSButton variant="primary" asLink to="/docs/support/imports">Import tickets</OSButton>
 
 </QuestLogItem>
 
-<QuestLogItem
-    title="Free core product"
-    subtitle="Opt-in AI agent"
-    icon="IconPiggyBank"
->
+<QuestLogItem title="Know what's free" subtitle="Opt-in AI agent" icon="IconPiggyBank">
 
-Support's core features — the chat widget, inbox, and integrations — are free.
+Support's core features – the widget, inbox, and integrations – are free. An AI agent that drafts replies to your customers is coming soon and will be opt-in: only teams who turn it on are billed, and we'll give you plenty of notice first.
 
-The Support AI agent will be opt-in. Only teams who turn it on will be billed, and we'll give you plenty of notice before that happens.
-
----
-
-That's it! You're ready to start helping your users.
-
-<OSButton variant="primary" asLink to="/docs/support/widget">
-  Configure your widget
-</OSButton>
+<OSButton variant="primary" asLink to="/docs/support/pricing">See pricing</OSButton>
 
 </QuestLogItem>
 

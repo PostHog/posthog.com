@@ -4,7 +4,7 @@ import Link from 'components/Link'
 import { IconRewindPlay, IconBolt, IconNotebook, IconPullRequest, IconCheckCircle, IconTrends } from '@posthog/icons'
 
 /**
- * SelfDrivingLoop
+ * LiveSelfDrivingLoop
  *
  * The animated explainer for PostHog's self-improving loop. It replaces the static Mermaid
  * diagram on the self-driving docs: the six stages, with a real merged pull request travelling
@@ -154,7 +154,7 @@ const StageBadge = ({ stage, done, active }: { stage: Stage; done: boolean; acti
     )
 }
 
-const SelfDrivingLoop = (): JSX.Element => {
+const LiveSelfDrivingLoop = (): JSX.Element => {
     const data = useStaticQuery(graphql`
         query SelfDrivingLoopHero {
             allSelfDrivingPullRequest {
@@ -376,5 +376,5 @@ const SelfDrivingLoop = (): JSX.Element => {
     )
 }
 
-export default SelfDrivingLoop
-export { SelfDrivingLoop }
+export default LiveSelfDrivingLoop
+export { LiveSelfDrivingLoop }

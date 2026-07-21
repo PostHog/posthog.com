@@ -4,9 +4,13 @@ sidebar: Docs
 showTitle: true
 ---
 
-> Zendesk import is in **beta**. Shared prerequisites and import behavior are covered in [Import historical tickets](/docs/support/imports).
+<CalloutBox icon="IconFlask" title="Open beta" type="action">
 
-You can migrate your existing Zendesk Support history to PostHog. By migrating, you can access your original ZenDesk conversation threads, tags, attachments, and timestamps.
+Zendesk import is in beta.
+
+</CalloutBox>
+
+Migrate your existing Zendesk Support history to PostHog, including your original conversation threads, tags, attachments, and timestamps. Prerequisites and behavior shared across all imports are covered in [Import historical tickets](/docs/support/imports).
 
 ## Zendesk credentials
 
@@ -18,7 +22,7 @@ In addition to the [shared import prerequisites](/docs/support/imports#prerequis
 
 ## How to run an import
 
-1. Go to **Project settings → Support → Imports**
+1. Go to **Project settings** > **Support** > **Imports**
 2. Select **Zendesk**
 3. Enter your subdomain, agent email, and API token
 4. Optionally select a [default inbox](/docs/support/imports#prerequisites)
@@ -69,6 +73,6 @@ Tickets route to the email channel matching the original Zendesk recipient addre
 
 ## Limitations
 
-**Ticket counts:** The imported total may be lower than Zendesk's latest ticket number. Zendesk numbers include deleted tickets and gaps; the export API only returns tickets Zendesk still exposes. Permanently deleted tickets (past retention), archived tickets, and some AI agent tickets may be omitted.
+**Ticket counts** – the imported total may be lower than Zendesk's latest ticket number. Zendesk numbers include deleted tickets and gaps; the export API only returns tickets Zendesk still exposes. Permanently deleted tickets (past retention), archived tickets, and some AI agent tickets may be omitted.
 
-**Attachments:** Oversized files are skipped; the message is still imported.
+**Attachments** – oversized files are skipped; the message is still imported.
