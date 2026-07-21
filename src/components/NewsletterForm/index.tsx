@@ -49,7 +49,7 @@ export const NewsletterForm = ({ className = '', placement }: NewsletterFormProp
             >
                 <div className="text-center">
                     <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/engineer_47d6638eae.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/icon_ae03b6df11.png"
                         objectFit="contain"
                         className="w-full h-full max-w-[200px] @lg:max-w-[250px] mx-auto flex-shrink-0"
                     />
