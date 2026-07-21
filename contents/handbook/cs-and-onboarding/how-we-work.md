@@ -117,7 +117,3 @@ During extended periods away from work (generally more than two weeks) it's impo
 The primary exception is that this temporary CSM will ensure your customers aren't completely ignored. This may mean answering questions themselves or opening support tickets on a customer's behalf, but there is no expectation to attend routine meetings (eg. monthly check-ins). Customers should be notified that the meeting is cancelled but any questions should be asked through normal channels.
 
 For longer periods away, Dana may look to reassign some or all of your accounts.
-
-
-
-
