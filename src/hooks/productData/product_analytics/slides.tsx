@@ -2,13 +2,8 @@ import React from 'react'
 import {
     IconFunnels,
     IconTrends,
-    IconLifecycle,
-    IconUserPaths,
-    IconCorrelationAnalysis,
     IconRetention,
-    IconStickiness,
     IconDatabase,
-    IconPeople,
     IconPlug,
     IconBrowser,
     IconGraph,
@@ -156,7 +151,7 @@ export const applications: CarouselSlide[] = [
 export const topFeatures: CarouselSlide[] = [
     {
         slug: 'funnels',
-        label: f.funnels.title,
+        label: 'Funnels',
         icon: <IconFunnels className="size-5" />,
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
@@ -165,12 +160,22 @@ export const topFeatures: CarouselSlide[] = [
         heading: f.funnels.headline,
         description: (
             <>
+                <p>
+                    Find where people drop off across a series of actions – then jump from any step into the matching
+                    session recordings.
+                </p>
                 <div className="@container">
                     <LabeledList
-                        items={f.funnels.features.map((item) => ({
-                            label: item.title,
-                            description: item.description,
-                        }))}
+                        items={[
+                            ...f.funnels.features.slice(0, 3).map((item) => ({
+                                label: item.title,
+                                description: item.description,
+                            })),
+                            {
+                                label: f.correlation_analysis.title,
+                                description: f.correlation_analysis.description,
+                            },
+                        ]}
                     />
                 </div>
             </>
@@ -179,7 +184,7 @@ export const topFeatures: CarouselSlide[] = [
     },
     {
         slug: 'trends',
-        label: f.trends.title,
+        label: 'Trends',
         icon: <IconTrends className="size-5" />,
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
@@ -188,12 +193,26 @@ export const topFeatures: CarouselSlide[] = [
         heading: f.trends.headline,
         description: (
             <>
+                <p>
+                    Plot any event over time, break it down by any property, and use formula mode for ratios like
+                    DAU/MAU.
+                </p>
                 <div className="@container">
                     <LabeledList
-                        items={f.trends.features.map((item) => ({
-                            label: item.title,
-                            description: item.description,
-                        }))}
+                        items={[
+                            ...f.trends.features.slice(0, 3).map((item) => ({
+                                label: item.title,
+                                description: item.description,
+                            })),
+                            {
+                                label: f.lifecycle.title,
+                                description: f.lifecycle.description,
+                            },
+                            {
+                                label: f.stickiness.title,
+                                description: f.stickiness.description,
+                            },
+                        ]}
                     />
                 </div>
             </>
@@ -201,84 +220,12 @@ export const topFeatures: CarouselSlide[] = [
         image: { ref: 'trends', glow: true },
     },
     {
-        slug: 'lifecycle',
-        label: f.lifecycle.title,
-        icon: <IconLifecycle className="size-5" />,
-        color: 'bg-light dark:bg-dark',
-        activeText: 'text-primary',
-        progressBar: 'bg-purple',
-        layout: 'float',
-        heading: f.lifecycle.headline,
-        description: (
-            <>
-                <p>{f.lifecycle.description}</p>
-                <div className="@container">
-                    <LabeledList
-                        items={f.lifecycle.features.map((item) => ({
-                            label: item.title,
-                            description: item.description,
-                        }))}
-                    />
-                </div>
-            </>
-        ),
-        image: { ref: 'lifecycle', glow: true },
-    },
-    {
-        slug: 'user-paths',
-        label: f.user_paths.title,
-        icon: <IconUserPaths className="size-5" />,
-        color: 'bg-light dark:bg-dark',
-        activeText: 'text-primary',
-        progressBar: 'bg-green',
-        layout: 'float',
-        heading: f.user_paths.headline,
-        description: (
-            <>
-                <p>{f.user_paths.description}</p>
-                <div className="@container">
-                    <LabeledList
-                        items={f.user_paths.features.map((item) => ({
-                            label: item.title,
-                            description: item.description,
-                        }))}
-                    />
-                </div>
-            </>
-        ),
-        image: { ref: 'user-paths', glow: true },
-    },
-    {
-        slug: 'correlation-analysis',
-        label: f.correlation_analysis.title,
-        icon: <IconCorrelationAnalysis className="size-5" />,
-        color: 'bg-light dark:bg-dark',
-        activeText: 'text-primary',
-        progressBar: 'bg-red',
-        layout: 'float',
-        heading: f.correlation_analysis.headline,
-        description: (
-            <>
-                <p>{f.correlation_analysis.description}</p>
-                <div className="@container">
-                    <LabeledList
-                        items={f.correlation_analysis.features.map((item) => ({
-                            label: item.title,
-                            description: item.description,
-                        }))}
-                    />
-                </div>
-            </>
-        ),
-        image: { ref: 'correlation-analysis', glow: true },
-    },
-    {
         slug: 'retention',
-        label: f.retention.title,
+        label: 'Retention',
         icon: <IconRetention className="size-5" />,
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
-        progressBar: 'bg-blue',
+        progressBar: 'bg-purple',
         layout: 'float',
         heading: f.retention.headline,
         description: (
@@ -286,10 +233,16 @@ export const topFeatures: CarouselSlide[] = [
                 <p>{f.retention.description}</p>
                 <div className="@container">
                     <LabeledList
-                        items={f.retention.features.map((item) => ({
-                            label: item.title,
-                            description: item.description,
-                        }))}
+                        items={[
+                            ...f.retention.features.slice(0, 3).map((item) => ({
+                                label: item.title,
+                                description: item.description,
+                            })),
+                            {
+                                label: f.user_paths.title,
+                                description: f.user_paths.description,
+                            },
+                        ]}
                     />
                 </div>
             </>
@@ -297,36 +250,12 @@ export const topFeatures: CarouselSlide[] = [
         image: { ref: 'retention', glow: true },
     },
     {
-        slug: 'stickiness',
-        label: f.stickiness.title,
-        icon: <IconStickiness className="size-5" />,
-        color: 'bg-light dark:bg-dark',
-        activeText: 'text-primary',
-        progressBar: 'bg-yellow',
-        layout: 'float',
-        heading: f.stickiness.headline,
-        description: (
-            <>
-                <p>{f.stickiness.description}</p>
-                <div className="@container">
-                    <LabeledList
-                        items={f.stickiness.features.map((item) => ({
-                            label: item.title,
-                            description: item.description,
-                        }))}
-                    />
-                </div>
-            </>
-        ),
-        image: { ref: 'stickiness', glow: true },
-    },
-    {
         slug: 'sql-editor',
-        label: f.sql_editor.title,
+        label: 'SQL',
         icon: <IconDatabase className="size-5" />,
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
-        progressBar: 'bg-purple',
+        progressBar: 'bg-green',
         layout: 'float',
         heading: f.sql_editor.headline,
         description: (
@@ -334,10 +263,16 @@ export const topFeatures: CarouselSlide[] = [
                 <p>{f.sql_editor.description}</p>
                 <div className="@container">
                     <LabeledList
-                        items={f.sql_editor.features.map((item) => ({
-                            label: item.title,
-                            description: item.description,
-                        }))}
+                        items={[
+                            ...f.sql_editor.features.map((item) => ({
+                                label: item.title,
+                                description: item.description,
+                            })),
+                            {
+                                label: f.group_analytics.title,
+                                description: f.group_analytics.description,
+                            },
+                        ]}
                     />
                 </div>
             </>
@@ -345,33 +280,8 @@ export const topFeatures: CarouselSlide[] = [
         image: { ref: 'sql-editor', glow: true },
     },
     {
-        slug: 'group-analytics',
-        label: f.group_analytics.title,
-        icon: <IconPeople className="size-5" />,
-        color: 'bg-light dark:bg-dark',
-        activeText: 'text-primary',
-        progressBar: 'bg-green',
-        layout: 'stack',
-        heading: f.group_analytics.headline,
-        description: (
-            <>
-                <p>{f.group_analytics.description}</p>
-                <div className="@container">
-                    <LabeledList
-                        items={f.group_analytics.features
-                            .filter((item) => item.title)
-                            .map((item) => ({
-                                label: item.title,
-                                description: item.description || undefined,
-                            }))}
-                    />
-                </div>
-            </>
-        ),
-    },
-    {
         slug: 'mcp',
-        label: f.mcp.title,
+        label: 'MCP',
         icon: <IconPlug className="size-5" />,
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
