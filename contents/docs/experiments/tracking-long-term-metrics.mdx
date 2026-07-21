@@ -4,45 +4,48 @@ sidebar: Docs
 showTitle: true
 ---
 
-Some experiments need more time for metrics to mature than you want to keep enrolling new users. For example, you're testing two price points and want to measure 90-day revenue and long-term retention. You've reached a good sample size after two weeks, but the metrics won't be meaningful for months. Keeping the experiment running means every new user continues to get randomly assigned to a variant – including potentially worse ones – just so you can keep measuring.
+Some experiments need more time for metrics to mature than you want to keep enrolling new users. For example, you're testing two price points and want to measure 90-day revenue and long-term retention. You've reached a good sample size after two weeks, but the metrics won't be meaningful for months. Keeping the experiment running means every new user continues to get randomly assigned to a variant, including potentially worse ones, just so you can keep measuring.
 
-The **Freeze exposure** action solves this. It snapshots your currently-enrolled users into a static [cohort](/docs/data/cohorts) and narrows the experiment's feature flag to that cohort, so new users can't enter the experiment while already-enrolled users keep their variants and metrics keep updating.
+There are two tools for this, and they solve different problems:
 
-## Using freeze exposure
+- **Freeze exposure** stops new users from entering the experiment at the feature flag level. Use it when you want to stop enrollment entirely and aren't rolling out a winner yet.
+- **A HogQL timestamp filter** on your exposure criteria freezes the analysis window at query time. It doesn't touch the flag, so new users are still served variants, they're just excluded from the results. Use it when you want to roll out the winning variant now while the original participants' metrics keep maturing.
+
+## Stopping enrollment: freeze exposure
+
+The [freeze exposure](/docs/experiments/managing-lifecycle#freezing-exposure) action snapshots your currently-enrolled users into a static [cohort](/docs/data/cohorts) and narrows the experiment's feature flag to that cohort, so new users can't enter the experiment while already-enrolled users keep their variants and metrics keep updating.
 
 1. Go to your running experiment.
 2. Click the **⋮** actions menu and select **Freeze exposure**.
-3. Confirm in the dialog. PostHog scans the experiment's exposure events, builds a static cohort of all currently-exposed users, and narrows the feature flag to that cohort.
+3. Confirm in the dialog and wait for it to complete. Freezing takes longer the more exposed users the experiment has, up to tens of seconds for tens of thousands of users.
 
-Freezing runs while the dialog is open and its duration scales with the number of exposed users – experiments with tens of thousands of exposed users can take tens of seconds, so wait for it to complete.
+Once frozen, the experiment status changes to **Exposure frozen**, existing users keep their assigned variants, and long-term results (revenue, LTV, renewals, retention) continue to accumulate. You can ship a winning variant at any time from the frozen state, which removes the freeze as part of the rollout. Ending without shipping leaves the flag narrowed to the snapshot cohort, so unfreeze or ship first.
 
-Once frozen:
+### When freeze exposure won't be offered
 
-- The experiment status changes to **Exposure frozen**.
-- Existing users keep their assigned variants (variant hashing is unchanged).
-- Metrics keep updating – `end_date` stays unset, so long-term results (revenue, LTV, renewals, retention) continue to accumulate.
-- New users are excluded from the experiment because they aren't in the snapshot cohort.
-- You can **Ship** a winning variant at any time from the frozen state – shipping removes the freeze as part of the rollout. You can also **End experiment**, but ending without shipping leaves the feature flag narrowed to the snapshot cohort. See [managing lifecycle](/docs/experiments/managing-lifecycle#ending-shipping-or-resetting-a-frozen-experiment) for how the lifecycle actions interact with a freeze.
+The action is hidden or disabled for experiments that can't be frozen:
 
-## When freeze exposure isn't available
+- **The experiment isn't running** – draft experiments have no exposures yet, ended experiments are complete, and paused experiments need to be resumed first.
+- **Group-aggregated experiments** – the experiment targets groups, not persons, and a person-based cohort can't freeze group-based matching.
+- **Holdouts and early access conditions** – both are evaluated before release conditions, so narrowing the release conditions can't stop enrollment through those paths.
 
-The **Freeze exposure** action isn't shown (or is rejected by the API) when:
+### When a freeze can be rejected after you confirm
 
-- **Group-aggregated experiments** – The experiment targets groups, not persons. A person-based cohort can't freeze group-based matching.
-- **Experiments with holdouts or early access conditions** – Holdout assignment and early access enrollment are evaluated before release conditions, so narrowing the release conditions can't stop new enrollment through those paths.
-- **Very large experiments** – The exposure scan is bounded by a cap on the number of exposed users and a timeout, so very large experiments are rejected rather than frozen.
-- **Mostly anonymous users** – Cohort membership is person-keyed. If more than a small share of exposed users are anonymous (no person profile), freezing would silently drop their variants, so it's rejected. This means experiments on logged-out surfaces usually can't be frozen.
-- **Paused experiments** – A paused experiment's flag is disabled and serves no one, so there's no live enrollment to freeze. Resume the experiment first.
+Some checks require scanning the exposure data, so they only run once you confirm the dialog:
 
-See the full list of [limitations of freezing exposure](/docs/experiments/managing-lifecycle#limitations-of-freezing-exposure).
+- **Very large experiments** – the exposure scan is bounded by a cap on the number of exposed users and a timeout.
+- **Anonymous or logged-out traffic** – if more than about 5% of exposed users have no person profile, freezing is rejected because those users would silently lose their variant.
+- **No exposures yet** – there's no one to snapshot.
 
-## Manual alternative: HogQL timestamp filter
+These rejections are structural, so retrying won't help. See the full [limitations of freezing exposure](/docs/experiments/managing-lifecycle#limitations-of-freezing-exposure).
 
-If freeze exposure isn't available for your experiment, you can manually freeze the analysis window using a HogQL timestamp filter on your exposure criteria. This doesn't stop new users from being served variants, but it excludes them from the experiment's results.
+## Rolling out the winner: HogQL timestamp filter
+
+To ship the winning variant to everyone now while the original participants' metrics keep maturing, freeze the analysis window with a HogQL timestamp filter on your exposure criteria. This doesn't stop new users from being served variants, it excludes them from the experiment's results.
 
 ### Step 1: Note the cutoff timestamp
 
-Decide when you want to stop counting new enrollments. This is typically "now" – the moment you're happy with your sample size and want to lock it in.
+Decide when you want to stop counting new enrollments. This is typically "now", the moment you're happy with your sample size and want to lock it in.
 
 ### Step 2: Edit exposure criteria
 

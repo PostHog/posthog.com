@@ -149,16 +149,20 @@ You can check your current exposure count on the experiment results page. If you
 
 ## Why can't I freeze my experiment's exposure?
 
-The [freeze exposure](/docs/experiments/managing-lifecycle#freezing-exposure) action has several requirements. If the action is unavailable or returns an error, check these common causes:
+The [freeze exposure](/docs/experiments/managing-lifecycle#freezing-exposure) action has several requirements. The action is hidden or disabled when:
 
-- **Experiment must be running** – You can only freeze a running experiment. Draft experiments haven't started collecting exposures, ended experiments are already complete, and paused experiments need to be resumed first.
-- **Group-aggregated experiments aren't supported** – Experiments that target groups (like companies or organizations) instead of persons can't be frozen. The snapshot cohort is person-based and can't freeze group-level enrollment.
-- **Holdouts and early access conditions** – If your experiment is in a holdout or the feature flag has early access conditions, freezing is rejected. These conditions are evaluated before release conditions, so new users would continue entering through those paths.
-- **Too many exposed users** – The exposure scan is bounded by a cap on the number of exposed users and a timeout, so very large experiments are rejected rather than frozen.
-- **Anonymous users** – If more than a small share of your exposed users don't have a person profile (anonymous or personless traffic), freezing is rejected. The snapshot cohort requires person profiles, so anonymous users would silently lose their variant.
-- **Already frozen** – An experiment can only be frozen once. If you need to modify the freeze, unfreeze first, then freeze again.
+- **The experiment isn't running** – Draft experiments haven't started collecting exposures, ended experiments are already complete, and paused experiments need to be resumed first.
+- **The experiment is group-aggregated** – It targets groups (like companies or organizations) instead of persons, and the person-based snapshot cohort can't freeze group-level enrollment.
+- **The experiment has a holdout or early access conditions** – Both are evaluated before release conditions, so new users would continue entering through those paths.
+- **Exposure is already frozen** – Unfreeze first if you need to rebuild the snapshot.
 
-These requirements are structural, so retrying a rejected freeze won't help. Also note that freezing runs synchronously and takes longer the more exposed users your experiment has – a slow freeze isn't a failed one, so wait for the confirmation dialog to finish.
+A freeze can also be rejected after you confirm the dialog, once PostHog has scanned the exposure data:
+
+- **Too many exposed users** – The scan is bounded by a cap on the number of exposed users and a timeout, so very large experiments are rejected rather than frozen.
+- **Anonymous users** – If more than about 5% of exposed users have no person profile (anonymous or personless traffic), freezing is rejected because those users would silently lose their variant.
+- **No exposures yet** – There's no one to snapshot.
+
+These causes are structural, so retrying won't help. Freezing also takes longer the more exposed users your experiment has. A slow freeze isn't a failed one, so wait for the confirmation dialog to finish.
 
 ## Does freezing affect local evaluation SDKs?
 
