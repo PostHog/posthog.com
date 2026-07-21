@@ -417,7 +417,7 @@ export const QuestLog: React.FC<{
                             {questItems.map((questItem, index) => (
                                 <div
                                     key={index}
-                                    className="bg-white dark:bg-accent-dark border border-primary dark:border-primary rounded-sm shadow-sm p-4 md:p-6"
+                                    className="bg-primary border border-primary dark:border-primary rounded-sm shadow-sm p-4 md:p-6"
                                 >
                                     <h2
                                         id={questIds[index]}
@@ -500,7 +500,7 @@ export const QuestLog: React.FC<{
                                         }}
                                     >
                                         {/* Speech Bubble Container */}
-                                        <div className="relative rounded-lg shadow-sm bg-white dark:bg-accent-dark border border-solid border-primary px-1 py-1 min-w-[120px] max-w-[175px]">
+                                        <div className="relative rounded-lg shadow-sm bg-primary border border-solid border-primary px-1 py-1 min-w-[120px] max-w-[175px]">
                                             {/* Speech Text */}
                                             <div className="text-xs font-medium text-primary text-center">
                                                 <span className="inline-block">{speechText}</span>
@@ -606,7 +606,7 @@ export const QuestLogItem: React.FC<QuestLogItemProps> = ({
             className={`relative rounded-sm px-2.5 cursor-pointer transition-all duration-200 ease-in-out hover:shadow-md hover:border-orange/50 active:transition-all active:duration-100 ${
                 isSelected
                     ? 'border border-orange shadow-md opacity-100 bg-orange/10 dark:bg-orange/10'
-                    : 'border border-primary dark:border-primary opacity-80 bg-white dark:bg-accent-dark shadow-sm hover:translate-y-[-2px] active:translate-y-[-1px]'
+                    : 'border border-primary dark:border-primary opacity-80 bg-primary shadow-sm hover:translate-y-[-2px] active:translate-y-[-1px]'
             }${showGlow ? ' quest-item-glow' : ''}`}
         >
             <div className={`flex items-center space-x-2.5 py-2 ${isSelected ? 'text-red dark:text-yellow' : ''}`}>
@@ -658,7 +658,7 @@ export const MobileQuestLogItem: React.FC<MobileQuestLogItemProps> = ({
     return (
         <div className="relative" ref={dropdownRef}>
             <button
-                className="w-full flex items-center justify-between p-3 bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-sm shadow-sm hover:shadow-md transition-all duration-200"
+                className="w-full flex items-center justify-between p-3 bg-primary border border-light dark:border-dark rounded-sm shadow-sm hover:shadow-md transition-all duration-200"
                 onClick={() => onDropdownToggle(!dropdownOpen)}
             >
                 <div className="flex items-center space-x-2.5">
@@ -692,7 +692,7 @@ export const MobileQuestLogItem: React.FC<MobileQuestLogItemProps> = ({
             </button>
 
             {dropdownOpen && (
-                <div className="absolute top-full left-0 right-0 mt-1 bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-sm shadow-lg z-10 max-h-60 overflow-y-auto">
+                <div className="absolute top-full left-0 right-0 mt-1 bg-primary border border-light dark:border-dark rounded-sm shadow-lg z-10 max-h-60 overflow-y-auto">
                     {questItems.map((_, index) => (
                         <a
                             key={index}
