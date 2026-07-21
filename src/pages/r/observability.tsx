@@ -12,9 +12,7 @@ import { SingleCodeBlock } from 'components/CodeBlock'
 import WizardCTA from 'components/WizardCTA'
 import usePlatformList from 'hooks/docs/usePlatformList'
 import ElevenLabsLogo from 'components/CustomerLogos/ElevenLabsLogo'
-import LovableLogo from 'components/CustomerLogos/LovableLogo'
-import HomeDepotLogo from 'components/CustomerLogos/HomeDepotLogo'
-import MintlifyLogo from 'components/CustomerLogos/MintlifyLogo'
+import HeygenLogo from 'components/CustomerLogos/HeygenLogo'
 import { IconRewindPlay, IconWarning, IconCode2 } from '@posthog/icons'
 
 const TOP_COUNT = 8
@@ -106,15 +104,12 @@ export default function PostHogObservabilityLanding(): JSX.Element {
                         <h1 className="text-3xl md:text-5xl !mb-4">
                             Your errors, replays, and logs already know each other
                         </h1>
-                        <p className="text-lg md:text-xl mb-2 text-secondary">
+                        <p className="text-lg md:text-xl !mb-6 text-secondary">
                             Error tracking, session replay, and logs from one SDK – same user, same session, linked the
                             moment they arrive. An MCP server so you can debug without ever opening a dashboard or
                             learning a UI.
                             <br />
                             Time to make it official.
-                        </p>
-                        <p className="text-xs !mb-6 text-muted italic">
-                            (Introducing them to each other via CSV export was never going to work out.)
                         </p>
                         <div className="flex flex-wrap gap-2 mb-6">
                             <CallToAction type="primary" size="md" to="https://app.posthog.com/signup">
@@ -152,10 +147,18 @@ export default function PostHogObservabilityLanding(): JSX.Element {
 
                 <div className="mb-12 max-w-7xl mx-auto">
                     <div className="flex flex-wrap items-center gap-x-12 gap-y-6 text-primary dark:text-primary-dark">
-                        <LovableLogo className="fill-current object-contain max-w-full h-6" />
                         <ElevenLabsLogo className="fill-current object-contain max-w-full h-8" />
-                        <HomeDepotLogo className="object-contain max-w-full h-12" />
-                        <MintlifyLogo className="fill-current object-contain max-w-full h-8" />
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/2025_MG_Logo_Full_9fdb693543.png"
+                            alt="MoneyGram"
+                            imgClassName="h-10 w-auto object-contain max-w-full dark:brightness-0 dark:invert"
+                        />
+                        <HeygenLogo className="object-contain max-w-full h-12" />
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/fireworks_ai_logo_e5bc7f4a1e.png"
+                            alt="Fireworks AI"
+                            imgClassName="h-8 w-auto object-contain max-w-full"
+                        />
                     </div>
                     <p className="text-xs mt-3 !mb-0">
                         <span className="font-semibold">A few PostHog customers debugging with us in production.</span>
