@@ -90,7 +90,7 @@ export default function PostHogObservabilityLanding(): JSX.Element {
         <>
             <SEO
                 title="Observability built for product engineers"
-                description="PostHog Observability bundles error tracking, session replay, and logs into one SDK and one tool – wired up to MCP so your AI agent can investigate issues end-to-end. Free tier covers 100k exceptions, 5k recordings, and 50GB of logs every month."
+                description="PostHog Observability bundles error tracking, session replay, and logs into one SDK and one tool – wired up to MCP so your AI agent can investigate issues end-to-end. Free tier covers 100k exceptions, 5k recordings, and 10GB of logs every month."
                 noindex
             />
             <ReaderView
@@ -138,7 +138,7 @@ export default function PostHogObservabilityLanding(): JSX.Element {
                                 logs
                             </Link>{' '}
                             – already connected to each other. Free for 100k exceptions, 5k web + 2.5k mobile
-                            recordings, and 50 GB of logs every month. No credit card, no per-seat pricing.
+                            recordings, and 10 GB of logs every month. No credit card, no per-seat pricing.
                         </p>
                     </div>
                     <div className="flex justify-center">
@@ -511,7 +511,7 @@ export default function PostHogObservabilityLanding(): JSX.Element {
 
                         <QuestLogItem
                             title="Use for free"
-                            subtitle="100k exceptions, 5k recordings, 50 GB of logs"
+                            subtitle="100k exceptions, 5k recordings, 10 GB of logs"
                             icon="IconPiggyBank"
                         >
                             <p>Good news: no per-seat pricing, no enterprise plan required.</p>
@@ -530,7 +530,7 @@ export default function PostHogObservabilityLanding(): JSX.Element {
                                     from $0.005 per recording
                                 </li>
                                 <li>
-                                    <strong>Logs:</strong> 50 GB ingested/mo free, then $0.25/GB with discounts
+                                    <strong>Logs:</strong> 10 GB ingested/mo free, then $0.25/GB with discounts
                                 </li>
                                 <li>
                                     <strong>PostHog MCP is included</strong> on every plan (no enterprise plan required)
