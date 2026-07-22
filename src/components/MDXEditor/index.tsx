@@ -132,16 +132,29 @@ export default function MDXEditor({
     // The whole page is an editable playground, so Grammarly and the browser's
     // native spellchecker underline words in the copy (e.g. "automagically"),
     // which clashes with the underscores we use for emphasis. Turn both off on
-    // the Lexical contentEditable element.
+    // the Lexical contentEditable element. It can mount a tick after this effect
+    // runs, so watch the container and apply the attributes as soon as it exists.
     useEffect(() => {
         if (isSSR || readOnly) return
-        const editable = mdxEditorContainerRef.current?.querySelector('[contenteditable="true"]')
-        if (editable) {
+        const container = mdxEditorContainerRef.current
+        if (!container) return
+
+        const disableSpellcheck = () => {
+            const editable = container.querySelector('[contenteditable="true"]')
+            if (!editable) return false
             editable.setAttribute('spellcheck', 'false')
             editable.setAttribute('data-gramm', 'false')
             editable.setAttribute('data-gramm_editor', 'false')
             editable.setAttribute('data-enable-grammarly', 'false')
+            return true
         }
+
+        if (disableSpellcheck()) return
+        const observer = new MutationObserver(() => {
+            if (disableSpellcheck()) observer.disconnect()
+        })
+        observer.observe(container, { childList: true, subtree: true })
+        return () => observer.disconnect()
     }, [isSSR, readOnly])
 
     const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
