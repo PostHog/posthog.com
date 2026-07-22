@@ -13,7 +13,6 @@ tags:
   - Engineering
 ---
 
-
 The north star for internal developer experience at PostHog is "10,000 PRs in a month is easy". As agent workflows accelerate what is possible. We're sharing what we're changing and how we've been able to increase the volume of engineering work and keep delivering reliable systems
 
 ## AI pilled
@@ -48,9 +47,9 @@ Over the last 4 months we've moved from around 20% of our monorepo PRs being ope
 
 The PostHog stack is very heavy for local development. that's always meant that we've needed very powerful dev machines and that was fine up until the point where people want to run multiple copies of the system to test multiple prs their agents are working on. and there's only so much ram and disk you can put into a macbook.
 
- so we're building out literal dev machines. they're skill driven so you just ask your agent to start a dev machine and test the work that you're doing. a prompt like: "start a dev box, run this PR in it, record me a video of the changes that we're making so i can see the output of the test"
+So we're building out literal dev machines. they're skill driven so you just ask your agent to start a dev machine and test the work that you're doing. a prompt like: "start a dev box, run this PR in it, record me a video of the changes that we're making so i can see the output of the test"
 
-we also have a custom cli we call hogli. it advertises a tool so that agents send feedback to our devex team when something is difficult for them. And gives us an easy way to push a bunch of our CI checks down into local development machines.
+We also have a custom CLI we call `hogli`. it advertises a tool so that agents send feedback to our devex team when something is difficult for them. And gives us an easy way to push a bunch of our CI checks down into local development machines.
 
 ## CI
 
@@ -61,7 +60,7 @@ we also have a custom cli we call hogli. it advertises a tool so that agents sen
 - Work not done: flaky test quarantine, merge queues, AST-based test selection (Goldilocks skipping)
 - Dogfooding: GitHub data streamed into PostHog, engineering analytics on cost/time/failure
 
-and the next step in the chain is ci we run a phenomenal amount of ci due to it was always a very big ci suite and now we see 10% - 50% month-on-month growth in PRs merged
+And the next step in the chain is ci we run a phenomenal amount of ci due to it was always a very big ci suite and now we see 10% - 50% month-on-month growth in PRs merged
 
 | Month (2026) | PRs merged |
 |---|---|
@@ -79,7 +78,19 @@ depot, their infrastructure, is handling this incredibly well. In June 2026 we u
 
 we have to make this gigantically easier for the developers here. so that we can keep the same pace of work the same quality of work or even a increased pace and quality of work
 
-so the work not done becomes super important we're trying out ways of quarantining flaky tests we're trying out merge queues to make sure that you know the speed at which we can generate prs we're starting to see not having a merge queue be a problem we're going to start looking into building out the ast for the changes that are made so that we can run only tests that could be impacted by the changes being made at the minute we still have too many prs where the change is very contained but the computer can't tell that just from static analysis of paths and we run the whole test suite unnecessarily so a lot of investment going into how fast the CI jobs are how much were able to skip in CI and that's tricky work because we can't skip too much we have to skip just the right amount it needs to be Goldilocks work not done alongside that we dog food PostHog all the time so we're now streaming github data into PostHog we have engineering analytics set up for ourselves so we can start to look really directly with PostHog AI what workflow jobs cost the most money take the most time fail most frequently really dig into very targeted improvements to see I flow for users that's getting to green on the PR
+So the work not done becomes super important. 
+
+- We're trying out ways of quarantining flaky tests 
+
+- We're trying out merge queues to make sure that you know the speed at which we can generate PRss. We're starting to see not having a merge queue be a problem. 
+
+- We're going to start looking into building out the AST for the changes that are made so that we can run only tests that could be impacted by the changes being made. At the minute, we still have too many PRs where the change is very contained but the computer can't tell that just from static analysis of paths and we run the whole test suite unnecessarily.
+
+- A lot of investment going into how fast the CI jobs are 
+
+- How much were able to skip in CI and that's tricky work because we can't skip too much we have to skip just the right amount it needs to be Goldilocks work not done
+
+- Alongside that we dog food PostHog all the time so we're now streaming github data into PostHog we have engineering analytics set up for ourselves so we can start to look really directly with PostHog AI what workflow jobs cost the most money take the most time fail most frequently really dig into very targeted improvements to see I flow for users that's getting to green on the PR
 
 ## Validation
 
@@ -125,6 +136,7 @@ We see that composition is very stable across the last year or so. Importantly r
 An aside that reliability of PostHog overall is going up too, $$$some reliability fact here$$$
 
 flakey test suites are the biggest problem we face here. $$$ and so we've done $$$
+
 ## Review
 
 *Covers:*
@@ -134,7 +146,38 @@ flakey test suites are the biggest problem we face here. $$$ and so we've done $
 - Humans review way less, reviews way more effective — focus on understanding, safety, value
 - The linting analogy: agents catch logic laziness like linters caught formatting
 
-the next step then is approving the PR we have a tool called stampog which costs us about 300 dollars in tokens a month it's an incredibly efficient investment in token for the speed up that it gives engineers and what we've done is we've looked at the the open history of PRs in PostHog and said what does a PR look like when it's approved without any further changes we look at how safe the area of the application is to change we look at how familiar with that part of the system the engineer opening the PR is and if stamp hog is happy it approves the PR it's about 20% of our PRs are being approved that way right now it's a huge speed increase for engineers who can now deliver small safe steps very quickly we're also building out review hog which will offer as part of self-driving product but it gives us then the top-down review by fleet of agents doing really thorough review so we have the simple PRs can get just a you know let's get this merged and then anything that's not simple then automatically gets review hog running and gets a really thorough agentic review so that by the time you come to actually needing a human review there's very little for the human to do they can concentrate on the genuinely important stuff do they understand this change does the author understand the change is it safe is it valuable you know 12 months ago if you had someone telling you that a line should be wrapped at a particular character or not wrapped at a particular character you would say hey i've updated the linter you can ignore this it's just linting we shouldn't have humans doing linting of code and i think the same is true now where an agent can be doing a simple review like you know you've said a string beginning with the character O is a good enough test that someone's name is owen well it's not you know that's uh it's gonna match it's gonna match oscar and oliver and so you need a better test there or you need a better code there or an agent can do that way faster way more effectively way more consistently than a human will will spot that kind of you know logic problem and laziness so in the same way you wouldn't have humans linting code we now can have a world where humans review code way less but the reviews are way more effective as a result so we're doing a lot of work there into what tools we can use in ci and what agentic flows we can use in ci in order to make it really safe to operate at this new increased speed of ten percent month on month
+### StampHog
+
+The next step then is approving the PR we have a tool called StampHog which costs us about 300 dollars in tokens a month. It's an incredibly efficient investment in token for the speed up it gives engineers
+
+What we've done is we've looked at: 
+
+- The open history of PRs in PostHog and said "what does a PR look like when it's approved without any further changes?" 
+- How safe the area of the application is to change 
+- How familiar with that part of the system the engineer opening the PR is
+
+If StampHog is happy, it approves the PR. It's about 20% of our PRs are being approved that way right now. It's a huge speed increase for engineers who can now deliver small safe steps very quickly 
+
+### ReviewHog
+
+We're also building out ReviewHog which will offer as part of self-driving product. It gives us the top-down review by fleet of agents doing really thorough review.
+
+We have the simple PRs that can get just a "let's get this merged." Anything that's not simple then automatically gets ReviewHog running and gets a really thorough agentic review so that by the time you come to actually needing a human review there's very little for the human to do. They can concentrate on the genuinely important stuff 
+
+- Do they understand this change 
+- Does the author understand the change 
+- Is it safe 
+- Is it valuable 
+
+### It's just linting
+
+You know, 12 months ago, if you had someone telling you that a line should be wrapped at a particular character or not wrapped at a particular character, you would say "hey, I've updated the linter, you can ignore this." 
+
+It's just linting. We shouldn't have humans doing linting of code and the same is true now where an agent can be doing a simple review. 
+
+You know you've said a string beginning with the character `O` is a good enough test that someone's name is `owen`. Well, it's not. It's gonna match `oscar` and `oliver` and so you need a better test or better code there. An agent can do that way faster, more effectively, and more consistently than a human. Agents will spot that kind of logic problem and laziness. 
+
+So in the same way you wouldn't have humans linting code, we now can have a world where humans review code way less. The reviews are way more effective as a result. We're doing a lot of work into what tools we can use in CI and what agentic flows we can use in CI in order to make it really safe to operate at this new increased speed of ten percent month on month.
 
 ## What's next
 
@@ -144,4 +187,14 @@ the next step then is approving the PR we have a tool called stampog which costs
 - Agents escalating to humans — or codifying their testing as playwright tests
 - Reducing human work per PR so review volume doesn't become the ceiling
 
-the next horizon after that which I think is something that has to be solved across the industry and we're really excited to work on is is having agents test as much of the code as possible I'm really interested in just getting to a point where we can run in CI an agent and literally give it the prompt look at the changes in this PR and record a video and assess whether it works or not so we're not in the old world of writing some playwright code by hand to assess a change and then you know having to run that slow test every time there's a change in the application we can just do a subset of what a human would do and click around in the application and see if it still works, see if it does what it claims to do and then that agent can escalate hey I need a human, I don't like it, either this doesn't make sense to me or I do think this needs further thought you know isn't good enough or doesn't work and the agent can also escalate say hey this is, I wrote a playwright test for this I didn't just record the video, I also codified that testing because I think it should stay in the application all stuff that a human could still do if they choose to but in a world where we're going to be reviewing two or three or four times as many PRs we have to reduce the amount of work we do per PR otherwise we hit some ceiling in what we can achieve just because humans are involved and and not because the value of the system is better after that but just because we physically can't spend the time
+The next horizon after that, which I think is something that has to be solved across the industry and we're really excited to work on, is having agents test as much of the code as possible. 
+
+I'm interested in getting to a point where we can run an agent in the CI, give it the prompt to look at the changes, record a video, and assess whether it works or not. We're not in the old world of writing some Playwright code by hand to assess a change and having to run that slow test every time there's a change. We can do a subset of what a human would do: 
+
+- Click around in the application
+- See if it still works
+- See if it does what it claims to do
+
+The agent can escalate "hey I need a human, I don't like it. Either this doesn't make sense to me, I think this needs further thought, it isn't good enough, or doesn't work." The agent can also escalate say "hey, I wrote a Playwright test for this, I didn't just record the video, I also codified that testing because I think it should stay in the application." 
+
+All this stuff a human could still do if they choose, but in a world where we're going to be reviewing two or three or four times as many PRs, we have to reduce the amount of work we do per PR. We will hit some ceiling in what we can achieve just because humans are involved and not because the value of the system is better after that. Just because we physically can't spend the time.
