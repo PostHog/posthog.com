@@ -145,11 +145,11 @@ const FeatureBadges = ({
     )
 }
 
-const StageChip = ({ stage }: { stage: BoardStage }): JSX.Element => {
+const StageChip = ({ stage, size = 'sm' }: { stage: BoardStage; size?: ChipSize }): JSX.Element => {
     const styles = ROADMAP_STAGE_STYLES[stage]
     return (
-        <span className={`${CHIP_SIZE_CLASSES.md} capitalize ${styles.border} ${styles.surface} ${styles.text}`}>
-            {STAGE_CHIP_ICONS[stage](CHIP_ICON_SIZE.md)}
+        <span className={`${CHIP_SIZE_CLASSES[size]} capitalize ${styles.border} ${styles.surface} ${styles.text}`}>
+            {STAGE_CHIP_ICONS[stage](CHIP_ICON_SIZE[size])}
             {stage}
         </span>
     )
@@ -187,12 +187,33 @@ const CopyLinkButton = ({ flagKey }: { flagKey: string }): JSX.Element => {
         <OSButton
             type="button"
             size="sm"
-            variant="secondary"
+            variant="default"
+            hover="border"
+            zoomHover={false}
             icon={copied ? <IconCheck className="text-green" /> : <IconCopy />}
+            aria-label={copied ? 'Link copied' : 'Copy link'}
+            tooltip={copied ? 'Copied' : 'Copy link'}
             onClick={copy}
-        >
-            {copied ? 'Copied' : 'Copy link'}
-        </OSButton>
+        />
+    )
+}
+
+/** Keep the last word + copy control together so the icon never orphans onto its own line. */
+const FeatureTitle = ({ name, flagKey }: { name: string; flagKey: string }): JSX.Element => {
+    const words = name.trim().split(/\s+/)
+    const lastWord = words.pop() ?? name
+    const leading = words.join(' ')
+
+    return (
+        <h2 className="m-0 text-2xl leading-tight">
+            {leading ? `${leading} ` : null}
+            <span className="whitespace-nowrap">
+                {lastWord}
+                <span className="ml-1.5 inline-flex translate-y-[-0.1em] align-middle">
+                    <CopyLinkButton flagKey={flagKey} />
+                </span>
+            </span>
+        </h2>
     )
 }
 
@@ -427,7 +448,7 @@ const RoadmapLane = ({
     return (
         <section
             aria-labelledby={`roadmap-${definition.stage}-title`}
-            className="flex w-[min(340px,calc(100cqw-2rem))] shrink-0 snap-start flex-col overflow-hidden rounded-lg border border-primary bg-accent @5xl:w-auto"
+            className="flex h-min w-[min(340px,calc(100cqw-2rem))] shrink-0 snap-start flex-col self-start overflow-hidden rounded-lg border border-primary bg-accent @5xl:w-auto"
         >
             <header className="shrink-0 border-b border-primary bg-primary px-3 py-3">
                 <div className="flex items-center gap-2">
@@ -474,13 +495,17 @@ const RoadmapLane = ({
                         )
                     })}
                 </AnimatePresence>
-                <motion.li
-                    layout={shouldReduceMotion ? false : 'position'}
-                    transition={{ layout: layoutTransition }}
-                    className="m-0 list-none p-0"
-                >
-                    <PitchIdeaCard onClick={onPitchClick} />
-                </motion.li>
+                {/* Ideas enter as concepts — keep the pitch CTA in that lane only so sparse
+                    stages (alpha) don't get a tall empty well under a repeated card. */}
+                {definition.stage === 'concept' && (
+                    <motion.li
+                        layout={shouldReduceMotion ? false : 'position'}
+                        transition={{ layout: layoutTransition }}
+                        className="m-0 list-none p-0"
+                    >
+                        <PitchIdeaCard onClick={onPitchClick} />
+                    </motion.li>
+                )}
             </ul>
         </section>
     )
@@ -589,12 +614,9 @@ const FeaturePanel = ({
         <header className="shrink-0 border-b border-primary px-4 py-4 pr-14">
             <div className="mb-2 flex flex-wrap items-center gap-2">
                 <StageChip stage={feature.stage as BoardStage} />
-                <FeatureBadges isNew={isNew} isPopular={isPopular} size="md" />
+                <FeatureBadges isNew={isNew} isPopular={isPopular} />
             </div>
-            <h2 className="m-0 text-2xl leading-tight">{feature.name}</h2>
-            <div className="mt-3">
-                <CopyLinkButton flagKey={feature.flagKey} />
-            </div>
+            <FeatureTitle name={feature.name} flagKey={feature.flagKey} />
         </header>
 
         <ScrollArea className="min-h-0 flex-1">
@@ -738,12 +760,12 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
                 label: `${teamInfoBySlug[slug]?.name || slug} (${count})`,
             }))
             .sort((a, b) => a.label.localeCompare(b.label))
-        const options = [{ value: 'all', label: `All teams (${total})` }, ...teams]
+        const options = [{ value: 'all', label: 'All teams' }, ...teams]
         if (unassigned) {
             options.push({ value: 'unassigned', label: `Unassigned (${unassigned})` })
         }
         return options
-    }, [allFeatures, teamByFeatureSlug, teamInfoBySlug, total])
+    }, [allFeatures, teamByFeatureSlug, teamInfoBySlug])
 
     const requestedFlagKey = useMemo(
         () => new URLSearchParams(location.search).get('feature') || undefined,
@@ -878,7 +900,7 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
     return (
         <div ref={roadmapRootRef} className="relative flex min-w-0 flex-col gap-3">
             <div className="shrink-0 rounded-lg border border-primary bg-primary px-3 py-2.5" data-scheme="primary">
-                <div className="flex flex-col gap-2 @md:flex-row @md:items-center">
+                <div className="flex flex-col gap-2 @3xl:flex-row @3xl:items-center">
                     <Input
                         label="Search roadmap"
                         showLabel={false}
@@ -890,17 +912,19 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
                         showClearButton
                         onClear={() => setQuery('')}
                         className="!h-10 !rounded-[8px]"
-                        containerClassName="w-full @md:max-w-md"
+                        containerClassName="w-full min-w-0 @3xl:max-w-md @3xl:shrink-0"
                     />
-                    <Select
-                        ariaLabel="Filter roadmap by team"
-                        placeholder="All teams"
-                        value={teamFilter}
-                        onValueChange={setTeamFilter}
-                        groups={[{ label: 'Team', items: teamOptions }]}
-                        className="!h-10 w-full !rounded-[8px] px-3 @md:w-auto"
-                    />
-                    <span className="text-sm text-secondary @md:ml-auto">
+                    <div className="min-w-0 w-full @3xl:w-auto @3xl:max-w-xs @3xl:shrink [&>div]:w-full">
+                        <Select
+                            ariaLabel="Filter roadmap by team"
+                            placeholder="All teams"
+                            value={teamFilter}
+                            onValueChange={setTeamFilter}
+                            groups={[{ label: 'Team', items: teamOptions }]}
+                            className="!h-10 w-full max-w-full overflow-hidden !rounded-[8px] px-3 [&>span]:min-w-0 [&>span]:truncate"
+                        />
+                    </div>
+                    <span className="ml-auto shrink-0 whitespace-nowrap text-sm text-secondary">
                         {filteredTotal} of {total} features
                     </span>
                 </div>
