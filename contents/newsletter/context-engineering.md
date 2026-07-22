@@ -4,7 +4,7 @@ date: 2026-06-24
 author:
   - edwin-lim
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1782746594/context_engineering_hero_7ee47b4915.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/context_engineering_hero_7ee47b4915.png
 featuredImageType: full
 tags:
   - Product engineers
