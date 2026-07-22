@@ -27,9 +27,9 @@ Without authorized URLs, the [toolbar](/docs/toolbar) can't launch on your site,
 2. Add each domain you run on, including staging and any subdomains – for example `https://example.com` and `https://app.example.com`.
 3. Use wildcards for dynamic subdomains where needed.
 
-## Fix it automatically with the Inbox and PostHog Code
+## Fix it automatically with the Inbox and PostHog Desktop
 
-Because authorized URLs are a security boundary, [PostHog Code](/docs/posthog-code) handles this one carefully and **never adds a domain unattended**. With health checks enabled as a [signal source](/docs/self-driving/inbox/sources), the agent will:
+Because authorized URLs are a security boundary, [PostHog Desktop](/docs/posthog-code) handles this one carefully and **never adds a domain unattended**. With health checks enabled as a [signal source](/docs/self-driving/inbox/sources), the agent will:
 
 - Discover candidate domains from your recent `$pageview` events (a domain appearing in events is not proof you own it – anyone with your public project token can send spoofed events).
 - Present the discovered domains and ask you to confirm which you actually own.

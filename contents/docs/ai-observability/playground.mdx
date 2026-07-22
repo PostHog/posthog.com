@@ -26,7 +26,7 @@ The playground lets you test and experiment with LLM prompts directly inside Pos
 3. Write a system prompt and add messages
 4. Click **Run**
 
-The playground works out of the box with PostHog-provided trial models — no setup required. To use your own API keys for higher rate limits and access to more models, add them in [**Settings** > **AI Observability**](https://app.posthog.com/settings/environment-ai-observability#ai-observability-byok).
+The playground works out of the box with PostHog-provided playground models — no setup required. To use your own API keys for higher rate limits and access to more models, add them in [**Settings** > **AI Observability**](https://app.posthog.com/settings/environment-ai-observability#ai-observability-byok).
 
 Click the reset button to clear the playground back to its default state at any time.
 
@@ -34,7 +34,7 @@ Click the reset button to clear the playground back to its default state at any 
 
 Use the model picker at the top of each prompt to select a model. The available models depend on your setup:
 
-- **Trial models** — A curated set of models provided by PostHog at no cost. These have rate limits to prevent abuse and require a valid payment method on file.
+- **Playground models** — A curated set of models provided by PostHog at no cost. These have rate limits to prevent abuse and require a valid payment method on file.
 - **Bring your own key (BYOK)** — When you add your own API keys (OpenAI, Azure OpenAI, Anthropic, Google, OpenRouter, Fireworks, Together AI, etc.), the playground lists all models available through those providers with no PostHog rate limits.
 
 ## Writing prompts
@@ -104,6 +104,6 @@ You can also open the playground directly from the [traces](/docs/ai-observabili
 
 ## Rate limits
 
-When using trial models, the playground enforces rate limits. If you hit a limit, a banner shows how long until your next request.
+When using playground models, the playground enforces rate limits. If you hit a limit, a banner shows how long until your next request.
 
 [Add your own API keys](https://app.posthog.com/settings/environment-ai-observability#ai-observability-byok) to remove PostHog rate limits. BYOK models are subject only to the provider's own rate limits.

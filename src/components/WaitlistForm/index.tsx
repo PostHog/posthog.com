@@ -8,8 +8,8 @@ import { useApp } from '../../context/App'
 import Link from 'components/Link'
 import { IconDiscord } from 'components/OSIcons/Icons'
 
-// PostHog Code's concept-stage Early Access Feature flag. Its EAF is named
-// "PostHog Code" but the flag key is `twig`.
+// PostHog Desktop's concept-stage Early Access Feature flag. Its EAF is named
+// "PostHog Desktop" but the flag key is `twig`.
 const POSTHOG_CODE_FLAG_KEY = 'twig'
 
 interface WaitlistFormProps {
@@ -29,7 +29,7 @@ export function WaitlistForm({
     autoFocus = false,
     confetti = true,
     productHandle = 'posthog_code',
-    productName = 'PostHog Code',
+    productName = 'PostHog Desktop',
     surveyId,
     flagKey,
     showTitle = true,
@@ -43,7 +43,7 @@ export function WaitlistForm({
     const [submitted, setSubmitted] = useState(false)
     const inputRef = useRef<HTMLInputElement>(null)
 
-    // Only default the PostHog Code flag when we're actually collecting for PostHog Code —
+    // Only default the PostHog Desktop flag when we're actually collecting for PostHog Desktop —
     // callers with their own productHandle (e.g. Replay Vision) must pass flagKey explicitly.
     const effectiveFlagKey = flagKey ?? (productHandle === 'posthog_code' ? POSTHOG_CODE_FLAG_KEY : undefined)
 
