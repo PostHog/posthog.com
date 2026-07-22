@@ -117,6 +117,22 @@ Click on any variant in the delta chart to access detailed results. This opens a
 
 Click **View recordings** to see session recordings of experiment participants. By default, all metric events are applied as filters to the playlist meaning you'll only see recordings for users who completed the funnel or fired the trend metric. However, the filters don't map exactly to the statistical calculations ([funnel attribution type](/docs/product-analytics/funnels#attribution-types) isn't applied, for instance), so the recordings don't map exactly to the experiment results.
 
+#### Filtering recordings by metric events
+
+Use the **Metric events** dropdown to filter recordings to sessions where specific metrics fired. You can select multiple metrics, and the filter shows only sessions where **all** selected metrics fired (they AND together).
+
+The dropdown includes both inline metrics and any saved or shared metrics attached to your experiment. Metrics that can't be linked to session recordings (such as data warehouse-only metrics) are disabled.
+
+#### Metric events in the session replay player
+
+When viewing a recording from an experiment, you'll see metric event markers that help you understand when and where metric events occurred:
+
+- **Seekbar markers**: The timeline shows tick marks where metric events fired, letting you quickly jump to those moments.
+- **Inspector items**: The inspector shows "Fired a {metric} event" entries that you can click to seek to that timestamp.
+- **Sidebar details**: In the experiments section of the player sidebar, each experiment with metric events has an expand toggle. Click it to see individual metric events with timestamps. Clicking a timestamp jumps to that point in the recording.
+
+> **Note**: The player shows all events that count toward a metric (any of the metric's events), while the recordings tab filter matches only the primary event (for example, the entry step for funnels or the numerator event for ratio metrics). For single-event metrics like trends, these are identical.
+
 You can also click **Summarize session replays** to have [PostHog AI](/docs/posthog-ai/session-summaries) analyze recordings across your experiment variants. This identifies behavior patterns, highlighting differences in how users interact with each variant.
 
 ### Time series analysis
