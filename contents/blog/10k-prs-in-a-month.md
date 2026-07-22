@@ -25,7 +25,9 @@ The north star for internal developer experience at PostHog is "10,000 PRs in a 
 - Folk at the edges: 20–40 PRs open, agentic flows managing them
 - 20% → 70% of monorepo PRs with agent involvement in 4 months; self-driving ~4% and growing fast
 
-The stuff I think we should cover, there's no token budget at PostHog. We want people to use the right amount of tokens for their work. Actually, why would we cover that? We would cover that because we want to talk about how the world of agentic programming and leaning into that has changed how we think about and how we do developer experience at PostHog. The most important thing being that we're not putting a budget in front of people. In all the things we do at PostHog, we value trust and feedback over process. So if we find we get to the point where we're uncomfortable with someone's spend, we'll dig into that with them and figure out if the spend is reasonable.
+There's no token budget at PostHog. We can see that the world of product engineering is changing rapidly. And we want people to figure out what that means for us... how we make the best use of the new tools and create new tools with them. So we want people to use the right amount of tokens for their work. And we're not going to pretend we know what that amount is right now. 
+
+The most important thing being that we're not putting a budget in front of people. In all the things we do at PostHog, we value trust and feedback over process. So if we find we get to the point where we're uncomfortable with someone's spend, we'll dig into that with them and figure out if the spend is reasonable. And what we can learn from that for everyone else.
 
 At the individual level, we have people writing their own review tools and their own PR management tools because we've found that being able to speed up the rate at which we can create PR's is not a company by being able to speed up the rate at which we can deal with PR's. So building and testing and validating in production still have to happen even where we can speed up the work that we're doing.
 
