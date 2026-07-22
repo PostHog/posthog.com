@@ -26,7 +26,7 @@ Cards intentionally contain only:
 
 `New` means the feature was created within the configured new-feature window. `Popular` is assigned to the top features with a positive build-time waitlist count. Badges never change the card border; the selected card uses the standard accent background.
 
-Every lane ends with the same dashed `Your idea here` card. It opens the shared overlay drawer containing the roadmap pitch form; the form is not duplicated per lane.
+The Concept lane ends with the dashed `Your idea here` card. It opens the shared overlay drawer containing the roadmap pitch form; the form is not duplicated per lane. The Beta lane ends with a matching dashed `What's just shipped?` card that links to `/changelog`, pointing onward from the last pre-release stage.
 
 ## Filtering
 
@@ -69,6 +69,7 @@ The drawer's copy control always copies the canonical URL, without unrelated fil
 - **Beta:** a full-width external `Enable` button opens the matching feature preview in the PostHog app. It uses the same medium primary `OSButton` sizing and full-width contract as the notification form. Do not enroll the anonymous website visitor locally.
 - **Alpha:** `SurveySignup` records the linked waitlist survey response without a concept enrollment event.
 - **Concept:** `SurveySignup` records the linked waitlist survey and receives the flag key, preserving the existing concept-stage enrollment behavior.
-- **Pitch an idea:** the dashed card at the bottom of every lane opens the shared drawer and records the existing roadmap concept-pitch survey. The idea and optional email fields use the same stacked, bold-label form treatment. Its submit action uses the same medium primary full-width button treatment as the feature actions.
+- **Pitch an idea:** the dashed card at the bottom of the Concept lane opens the shared drawer and records the existing roadmap concept-pitch survey. The idea and optional email fields use the same stacked, bold-label form treatment. Its submit action uses the same medium primary full-width button treatment as the feature actions.
+- **Check the changelog:** the dashed card at the bottom of the Beta lane is a plain link to `/changelog` for features that have already shipped.
 
 `SurveySignup` owns returning-user state in local storage. Keep these flows delegated to the shared components so analytics and persistence remain consistent elsewhere on the site.
