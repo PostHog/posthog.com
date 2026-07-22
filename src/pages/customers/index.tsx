@@ -4,7 +4,7 @@ import Link from 'components/Link'
 import ReaderView from 'components/ReaderView'
 import ViewerFilters from 'components/Viewer/ViewerFilters'
 import OSTable from 'components/OSTable'
-import { useCustomers, Customer as CustomerType, isCustomerLogoComponent } from 'hooks/useCustomers'
+import { useCustomers, Customer as CustomerType } from 'hooks/useCustomers'
 import { IconArrowUpRight } from '@posthog/icons'
 
 // add `featured: true` to useCustomers.ts (for filtering), then set the order below:
@@ -63,8 +63,8 @@ const Customer = ({ number, customer, hasCaseStudy }: CustomerProps) => {
             return <span>{customer.name}</span>
         }
 
-        // React forwardRef components are objects at runtime, so don't rely on typeof alone.
-        if (isCustomerLogoComponent(customer.logo)) {
+        // Check if logo is a React component (single SVG format)
+        if (typeof customer.logo === 'function') {
             const LogoComponent = customer.logo
 
             return (

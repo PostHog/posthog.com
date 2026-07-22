@@ -9,7 +9,7 @@ import { IconPencil, IconUser, IconArrowRight, IconInfo, IconSearch } from '@pos
 import { Accordion } from 'components/RadixUI/Accordion'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import OSButton from 'components/OSButton'
-import { isCustomerLogoComponent, useCustomers } from 'hooks/useCustomers'
+import { useCustomers } from 'hooks/useCustomers'
 import { OSInput, OSTextarea, OSSelect, Combobox, TeamMemberMultiSelect, SelectedMember } from 'components/OSForm'
 import { Fieldset } from 'components/OSFieldset'
 import { Checkbox } from 'components/RadixUI/Checkbox'
@@ -177,8 +177,8 @@ export default function Components(): JSX.Element {
             return <span className="text-sm text-muted">{customer.name}</span>
         }
 
-        // React forwardRef components are objects at runtime, so don't rely on typeof alone.
-        if (isCustomerLogoComponent(customer.logo)) {
+        // Check if logo is a React component (single SVG format)
+        if (typeof customer.logo === 'function') {
             const LogoComponent = customer.logo
             const heightClass = customer.height ? `h-${customer.height}` : ''
             const className = `w-full fill-current object-contain ${heightClass}`.trim()

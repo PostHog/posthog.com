@@ -5,7 +5,6 @@ import { YC } from 'components/About/v2/YC'
 import { TLDR } from 'components/About/v2/TLDR'
 import { LottieAnimation } from 'components/About/v2/LottieAnimations'
 import { Letterhead } from 'components/About/v2/Letterhead'
-import { Logo } from '@posthog/brand/logo'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { PRODUCT_COUNT, CUSTOMER_COUNT } from '../constants/index'
 import { James, Plus, Tim } from 'components/Signatures'
@@ -39,7 +38,6 @@ const mdxComponents = {
     DifferentHighlights,
     HappyHog,
     Letterhead,
-    Logo: () => <Logo layout="logomark" className="inline-block" width="auto" />,
     CloudinaryImage,
     ProductCount,
     CustomerCount,

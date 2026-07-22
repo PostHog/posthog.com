@@ -37,7 +37,6 @@ import NetdataLogo from '../components/CustomerLogos/NetdataLogo'
 import OpenSaucedLogo from '../components/CustomerLogos/OpenSaucedLogo'
 import PaperLogo from '../components/CustomerLogos/PaperLogo'
 import PhantomLogo from '../components/CustomerLogos/PhantomLogo'
-import { Logo as PostHogLogo } from '@posthog/brand/logo'
 import PryLogo from '../components/CustomerLogos/PryLogo'
 import PurpleWaveLogo from '../components/CustomerLogos/PurpleWaveLogo'
 import QredLogo from '../components/CustomerLogos/QredLogo'
@@ -66,21 +65,12 @@ import ZealotLogoDark from '../images/customers/zealot-dark.png'
 import useProducts from './useProducts'
 import JaxxonLogo from 'components/CustomerLogos/JaxxonLogo'
 
-interface CustomerLogoProps {
-    className?: string
-}
-
-export type CustomerLogoComponent = React.ComponentType<CustomerLogoProps> | React.ExoticComponent<CustomerLogoProps>
-
 export type CustomerLogo =
-    | CustomerLogoComponent
+    | React.ComponentType<{ className?: string }>
     | {
           light: string
           dark: string
       }
-
-export const isCustomerLogoComponent = (logo: CustomerLogo): logo is CustomerLogoComponent =>
-    typeof logo === 'function' || !('light' in logo)
 
 export interface Customer {
     slug: string
@@ -761,7 +751,10 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             'posthog_ai',
         ],
         notes: <>Would it be clever or lame if we included our own company here?</>,
-        logo: PostHogLogo,
+        logo: {
+            light: '/brand/posthog-logo.svg',
+            dark: '/brand/posthog-logo-white.svg',
+        },
         height: 10,
         featured: true,
     },

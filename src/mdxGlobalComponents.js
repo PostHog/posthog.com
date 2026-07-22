@@ -8,7 +8,6 @@ import AskMax from './components/AskMax'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BorderWrapper } from './components/BorderWrapper'
 import { BrandLogos } from './components/BrandLogos'
-import { Logo as BrandLogo } from '@posthog/brand/logo'
 import { CallToAction } from './components/CallToAction'
 import { Caption } from './components/Caption'
 import { HearAboutUsCarousel } from './components/CardStackCarousel/HearAboutUsCarousel'
@@ -83,7 +82,6 @@ export const shortcodes = {
     ArrayCTA,
     BasicHedgehogImage,
     BorderWrapper,
-    BrandLogo,
     BrandLogos,
     CallToAction,
     CalloutBox,
