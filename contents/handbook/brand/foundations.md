@@ -89,9 +89,15 @@ Self-driving is the narrative everything sits under. PostHog makes your product 
 
 Because it's a capability, not a product, always write it lowercase and hyphenated: it's not "Self-Driving" or "self driving", it's "self-driving".
 
+### The elevator pitch
+
+Use this when you are telling someone what PostHog does, e.g. at an event. 
+
+> PostHog makes your product self-driving. It automatically diagnoses problems, fixes bugs, and generates pull requests – all without you having to prompt it.
+
 ### The standard description
 
-Use this whenever you need a standard description of PostHog:
+Use this whenever you need a longer standard description of PostHog, e.g. for a newsletter or press. We also emded this in all our blog posts. 
 
 <AboutPostHog />
 
