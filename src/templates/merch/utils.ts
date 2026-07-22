@@ -120,7 +120,7 @@ export function urlBuilder({ width, height, baseUrl, format }: IUrlBuilderArgs<u
 }
 
 export function calculateAspectRatioDimensions(image: any, targetWidth = 500): { width: number; height: number } {
-    const { width: originalWidth, height: originalHeight } = image
+    const { width: originalWidth, height: originalHeight } = image ?? {}
 
     if (!originalWidth || !originalHeight) {
         return { width: targetWidth, height: targetWidth }
