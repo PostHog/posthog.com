@@ -129,6 +129,21 @@ export default function MDXEditor({
         setIsSSR(false)
     }, [])
 
+    // The whole page is an editable playground, so Grammarly and the browser's
+    // native spellchecker underline words in the copy (e.g. "automagically"),
+    // which clashes with the underscores we use for emphasis. Turn both off on
+    // the Lexical contentEditable element.
+    useEffect(() => {
+        if (isSSR || readOnly) return
+        const editable = mdxEditorContainerRef.current?.querySelector('[contenteditable="true"]')
+        if (editable) {
+            editable.setAttribute('spellcheck', 'false')
+            editable.setAttribute('data-gramm', 'false')
+            editable.setAttribute('data-gramm_editor', 'false')
+            editable.setAttribute('data-enable-grammarly', 'false')
+        }
+    }, [isSSR, readOnly])
+
     const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
         const href = (event.target as HTMLElement).closest('a.mdx-editor-link')?.getAttribute('href')
         if (href) {
