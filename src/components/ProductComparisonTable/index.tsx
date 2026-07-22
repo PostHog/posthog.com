@@ -86,6 +86,7 @@ import { signoz } from '../../hooks/competitorData/signoz'
 import { smartlook } from '../../hooks/competitorData/smartlook'
 import { split } from '../../hooks/competitorData/split'
 import { sprig } from '../../hooks/competitorData/sprig'
+import { splunk } from '../../hooks/competitorData/splunk'
 import { statsig } from '../../hooks/competitorData/statsig'
 import { stripe } from '../../hooks/competitorData/stripe'
 import { survicate } from '../../hooks/competitorData/survicate'
@@ -693,6 +694,7 @@ export default function ProductComparisonTable({
         smartlook,
         split,
         sprig,
+        splunk,
         statsig,
         stripe,
         survicate,
