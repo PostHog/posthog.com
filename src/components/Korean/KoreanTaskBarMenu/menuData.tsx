@@ -883,8 +883,13 @@ export function useMenuData(): MenuType[] {
             trigger: (
                 <>
                     <div className="flex items-center">
-                        <Logo noText className="2xs:hidden md:block size-8 md:size-6" fill="primary" classic />
-                        <Logo className="hidden 2xs:flex md:hidden w-auto h-5" fill="primary" classic />
+                        <Logo
+                            wordmark={false}
+                            variant="mono"
+                            color="primary"
+                            className="2xs:hidden md:block size-8 md:size-6"
+                        />
+                        <Logo variant="mono" color="primary" className="hidden 2xs:flex md:hidden w-auto h-5" />
                         <IconChevronDown className="size-6 inline-block md:hidden text-muted" />
                     </div>
                 </>

@@ -29,7 +29,7 @@ Find logos on our [brand assets](/handbook/brand/assets) page.
 | Stacked logo                                      | When horizontal space is limited but the full name is important. |
 | 4-color logo                                      | Print version, when gradients can't be printed. Only use the 4-color logo for this case. |
 
-Download all variants at [/handbook/company/brand-assets.md](/handbook/company/brand-assets). SVG is always preferred.
+Download all variants from [brand assets](/handbook/brand/assets). SVG is always preferred.
 
 ### Rules
 

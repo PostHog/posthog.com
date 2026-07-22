@@ -503,12 +503,22 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                             {/* Partner variants show the "PostHog X Partner" co-brand lockup above the heading. */}
                             {partnerConfig ? (
                                 <div className="flex items-center gap-2.5 mb-3">
-                                    <Logo wordmark={false} className="h-8 relative -top-px" color="white" />
+                                    <Logo
+                                        wordmark={false}
+                                        variant="mono"
+                                        className="h-8 relative -top-px"
+                                        color="white"
+                                    />
                                     {partnerConfig.title}
                                 </div>
                             ) : (
                                 <h1 className="flex items-center gap-2.5 mb-0 text-2xl @md:text-3xl">
-                                    <Logo wordmark={false} className="h-8 relative -top-px" color="white" />
+                                    <Logo
+                                        wordmark={false}
+                                        variant="mono"
+                                        className="h-8 relative -top-px"
+                                        color="white"
+                                    />
                                     <span>
                                         PostHog <span className="text-yellow">for startups</span>
                                     </span>

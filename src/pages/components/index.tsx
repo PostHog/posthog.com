@@ -262,21 +262,6 @@ export default function Components(): JSX.Element {
                                     </tr>
                                     <tr>
                                         <td className="border border-primary px-4 py-2 align-top">
-                                            Landscape — gradient + code
-                                        </td>
-                                        <td className="border border-primary px-4 py-2 align-top">
-                                            <Logo code className="h-7" />
-                                        </td>
-                                        <td className="border border-primary px-4 py-2 align-top">
-                                            <code className="text-xs whitespace-pre">{`<Logo code />`}</code>
-                                            <p className="mt-2 mb-0 text-xs text-secondary">
-                                                Use on PostHog Desktop product surfaces — the Code app, its landing
-                                                pages, and Code-specific marketing.
-                                            </p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td className="border border-primary px-4 py-2 align-top">
                                             Icon only — gradient
                                         </td>
                                         <td className="border border-primary px-4 py-2 align-top">
@@ -376,21 +361,6 @@ export default function Components(): JSX.Element {
                                             <p className="mt-2 mb-0 text-xs text-secondary">
                                                 Vertical layouts — square cards, social posts, business cards,
                                                 presentation covers.
-                                            </p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td className="border border-primary px-4 py-2 align-top">
-                                            Stacked — gradient + code
-                                        </td>
-                                        <td className="border border-primary px-4 py-2 align-top">
-                                            <Logo stacked code className="h-28" />
-                                        </td>
-                                        <td className="border border-primary px-4 py-2 align-top">
-                                            <code className="text-xs whitespace-pre">{`<Logo stacked code />`}</code>
-                                            <p className="mt-2 mb-0 text-xs text-secondary">
-                                                Stacked PostHog Desktop mark for Code-specific covers, swag, and
-                                                portrait surfaces.
                                             </p>
                                         </td>
                                     </tr>
