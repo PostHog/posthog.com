@@ -2571,10 +2571,6 @@ export const docsMenu = {
                         {
                             name: 'Unity',
                             url: '/docs/libraries/unity',
-                            badge: {
-                                title: 'Beta',
-                                className: '!bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50',
-                            },
                         },
                         {
                             name: 'C#/.NET',
@@ -4184,6 +4180,12 @@ export const docsMenu = {
                     name: 'Bot and traffic detection',
                     url: '/docs/web-analytics/bot-detection',
                     icon: 'IconShield',
+                    color: 'purple',
+                },
+                {
+                    name: 'Managing bot and AI traffic',
+                    url: '/docs/web-analytics/managing-bot-traffic',
+                    icon: 'IconShieldPeople',
                     color: 'purple',
                 },
                 {

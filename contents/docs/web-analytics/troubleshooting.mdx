@@ -31,11 +31,13 @@ All good web analytics dashboards need to include a world map. Ours includes it 
 
 ## Do stats include bots and crawlers?
 
-No, we automatically block bots and crawlers. You can see exactly which ones [we block here](https://github.com/PostHog/posthog-js/blob/main/packages/browser/src/utils/blocked-uas.ts).
+By default, no. The PostHog JavaScript SDK blocks known bots and crawlers client-side, so they never send events – you can see the [list of blocked user agents](https://github.com/PostHog/posthog-js/blob/main/packages/browser/src/utils/blocked-uas.ts) (pull requests welcome).
+
+This only covers events captured by the JavaScript SDK. Most crawlers and AI agents don't run JavaScript, so they never trigger a client-side `$pageview` in the first place. To measure that traffic instead of dropping it, forward your server logs as `$http_log` events and classify them at query time with [bot and traffic detection](/docs/web-analytics/bot-detection).
 
 ### Analyzing bot traffic with HogQL
 
-While PostHog blocks known bots from analytics by default, you can use HogQL functions to analyze bot traffic patterns or build custom filtering logic. These functions are available anywhere HogQL runs, including the [SQL editor](/docs/product-analytics/sql), trends, and custom queries.
+While PostHog blocks known bots from analytics by default, you can use [bot and traffic detection](/docs/web-analytics/bot-detection) functions to analyze bot traffic patterns or build custom filtering logic. These functions are available anywhere HogQL runs, including the [SQL editor](/docs/product-analytics/sql), trends, and custom queries.
 
 | Function                                         | Returns                                                            |
 | ------------------------------------------------ | ------------------------------------------------------------------ |
