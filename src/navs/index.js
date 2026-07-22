@@ -4187,6 +4187,12 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
+                    name: 'Managing bot and AI traffic',
+                    url: '/docs/web-analytics/managing-bot-traffic',
+                    icon: 'IconShieldPeople',
+                    color: 'purple',
+                },
+                {
                     name: 'Path cleaning',
                     url: '/docs/web-analytics/path-cleaning',
                     icon: 'IconFilter',
