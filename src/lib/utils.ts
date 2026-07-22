@@ -94,6 +94,21 @@ export const isURL = (s: string): boolean => {
     }
 }
 
+// Guard for `navigate()` targets that arrive from cross-window postMessage. Only
+// same-origin absolute paths like "/docs/foo" are allowed. This blocks "javascript:"
+// and "data:" URLs (which Gatsby's navigate() would run via window.location, giving
+// XSS) as well as "//" and "/\" host paths (open redirect) from an untrusted sender.
+export const isSafeInternalPath = (path: unknown): path is string => {
+    if (typeof path !== 'string' || !path.startsWith('/') || /^\/[/\\]/.test(path)) {
+        return false
+    }
+    try {
+        return new URL(path, 'https://posthog.com').origin === 'https://posthog.com'
+    } catch {
+        return false
+    }
+}
+
 export const groupMenuItems = (items: IMenu[]): Record<string, IMenu[]> => {
     const grouped: Record<string, IMenu[]> = {}
     let currGroup: string
@@ -114,3 +129,5 @@ export const slugifyTeamName = (name: string): string => {
         remove: /and/,
     })
 }
+
+export const formatTeamName = (name: string): string => `${name.trim().replace(/\s+team$/i, '')} Team`

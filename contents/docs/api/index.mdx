@@ -15,11 +15,12 @@ The API is available for all users and instances. It contains two types of endpo
 
 > You must make API requests to the correct domain. On US Cloud, these are `https://us.i.posthog.com` for public endpoints and `https://us.posthog.com` for private ones. On EU Cloud, these are `https://eu.i.posthog.com` for public endpoints and `https://eu.posthog.com` for private ones. For self-hosted instances, use your self-hosted domain. Confirm yours by checking your PostHog instance URL.
 
-## Private endpoint authentication
+## Authentication
 
-import InstallAPI from '../integrate/_snippets/install-api.mdx'
+Private endpoints require authentication. There are two ways to authenticate, and which one you should use depends on who the integration is for:
 
-<InstallAPI />
+- **[Personal API keys](/docs/api/personal-api-keys)** – Use these when you're using PostHog from your own scripts, automations, or any integration tied to your own account. This is the right choice if you're just building something for your own project.
+- **[OAuth](/docs/api/oauth)** – Use this when you're building an app that other PostHog users will install or connect to. OAuth lets users grant your app scoped access without sharing their personal API key.
 
 ## Rate limiting
 

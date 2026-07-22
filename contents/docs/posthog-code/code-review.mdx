@@ -1,8 +1,8 @@
 ---
-title: PostHog Code code review
+title: PostHog Desktop code review
 ---
 
-Every task in PostHog Code has a built-in **diff panel** for reviewing the agent's changes before they're committed or merged. You can read through edits, leave inline feedback, manage what's staged, and follow up on PR comments – all without leaving the app.
+Every task in PostHog Desktop has a built-in **diff panel** for reviewing the agent's changes before they're committed or merged. You can read through edits, leave inline feedback, manage what's staged, and follow up on PR comments – all without leaving the app.
 
 ## Opening the diff panel
 
@@ -29,7 +29,7 @@ The source dropdown in the toolbar controls what you're looking at:
 | **Branch** | The task's branch compared against the default branch |
 | **Pull request** | Changes in the linked GitHub PR |
 
-PostHog Code picks the most useful source by default based on what's available – local edits if there are any, otherwise the PR or branch.
+PostHog Desktop picks the most useful source by default based on what's available – local edits if there are any, otherwise the PR or branch.
 
 ## Reading diffs
 
@@ -64,6 +64,8 @@ Click the plus button on any line(s) in a diff to open a comment box. Describe t
 
 This is the fastest way to ask for tweaks like _"add a null check here"_ or _"this branch is unreachable, remove it"_ without context-switching back to the chat.
 
+You can send each comment on its own and have the agent address them one at a time, or stack several up and hand them over together. Adding comments to a batch works like leaving review comments on a GitHub PR: the agent picks up all of them in a single follow-up when you submit the review, instead of reacting to each one as you write it.
+
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_04_30_at_1_53_45_PM_b36ff04efd.png"
     classes="rounded"
@@ -89,4 +91,4 @@ PR status and merge actions live in the task header alongside the diff badge.
 
 ## Next steps
 
-- Learn how the [GitHub integration](/docs/posthog-code/git-github-integration) wires PRs into PostHog Code.
+- Learn how the [GitHub integration](/docs/posthog-code/git-github-integration) wires PRs into PostHog Desktop.

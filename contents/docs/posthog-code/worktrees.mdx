@@ -1,14 +1,14 @@
 ---
-title: PostHog Code worktrees
+title: PostHog Desktop worktrees
 ---
 
-<CalloutBox icon="IconWarning" title="Worktrees are in beta" type="caution">
+<CalloutBox icon="IconFlask" title="Worktrees are in beta" type="action">
 
 You may experience unexpected behavior with worktrees in complex development environments. For running parallel agents, we recommend using [cloud tasks](/docs/posthog-code/cloud-runs) instead.
 
 </CalloutBox>
 
-Worktrees give agents a local, isolated checkout inside PostHog Code. Use them when you want an agent to work on a separate branch without touching your current working directory.
+Worktrees give agents a local, isolated checkout inside PostHog Desktop. Use them when you want an agent to work on a separate branch without touching your current working directory.
 
 ## Getting started
 
@@ -29,7 +29,7 @@ For simple development environments, this is typically all you'll need.
 
 ## Environment setup
 
-For more complex projects, you may need extra configuration. PostHog Code supports two files for this:
+For more complex projects, you may need extra configuration. PostHog Desktop supports two files for this:
 
 | File | Use it to |
 |---|---|
@@ -59,7 +59,7 @@ This file uses `.gitignore` syntax. Only matching files that are also ignored by
 
 Some files may be required for your environment but are too heavy to copy, such as a `.flox` directory.
 
-Add these files or directories to `.worktreelink`. PostHog Code creates symlinks for them when a new worktree is created.
+Add these files or directories to `.worktreelink`. PostHog Desktop creates symlinks for them when a new worktree is created.
 
 Example:
 
@@ -73,7 +73,7 @@ This file also uses `.gitignore` syntax. It only creates links to files that are
 
 ## How it works
 
-When you create a worktree, PostHog Code:
+When you create a worktree, PostHog Desktop:
 
 1. Creates the git worktree with pre/post-checkout hooks disabled
 2. Symlinks the Claude config (`.claude/` directory and `CLAUDE.local.md`)

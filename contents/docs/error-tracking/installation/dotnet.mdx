@@ -67,6 +67,12 @@ You can find your project token and instance address in the [project settings](h
 
 The .NET SDK supports manual exception capture with `CaptureException`. It builds the `$exception` event for you, including exception type, message, stack frames, inner exceptions, aggregate exceptions, source context when available, and .NET runtime metadata.
 
+<CalloutBox icon="IconInfo" title="PDB uploads are not yet supported" type="fyi">
+
+File names, line numbers, and source context depend on debug information already available from the captured .NET stack trace. PostHog doesn't support uploading .NET PDB files yet, so production builds without runtime-accessible debug information may show less detailed stack frames ([issue](https://github.com/PostHog/posthog-dotnet/issues/166)).
+
+</CalloutBox>
+
 The examples below assume `posthog` is an `IPostHogClient` from dependency injection, or your singleton `PostHogClient`.
 
 ```csharp

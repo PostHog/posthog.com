@@ -90,7 +90,7 @@ Like AI, the rise in importance of these tools isn't expected to slow down eithe
 
 ## 3. Trying to use AI on something you know it's not good at
 
-> Claude Code writing Rust is a `while` loop that accelerates climate change - [Nick Best](/community/profiles/33511), Team Ingestion Product Engineer
+> Claude Code writing Rust is [a `while` loop](/newsletter/loops) that accelerates climate change - [Nick Best](/community/profiles/33511), Team Ingestion Product Engineer
 
 Using AI most effectively requires piling up a collection of examples of situations where AI is and isn't useful. You can waste a lot of time and energy repeatedly asking it to do something you know it can't do.
 
@@ -134,7 +134,7 @@ Beyond founder mode, what are some specific ways we aim to improve our workflows
 
 - Trying different models with the same tools to figure out which models are good at what. For example, a lot of our engineers find switching to Opus extremely beneficial (over Sonnet) and have been experimenting with Qwen in Cursor.
 
-- Building and dogfooding our own AI engineering tools like [PostHog AI](/docs/posthog-ai), the [PostHog MCP](/docs/model-context-protocol), and [LLM analytics](/docs/llm-analytics). This also means we talk to a lot of teams on the cutting edge of AI engineering like [Lovable](/customers/lovable) and [ElevenLabs](/customers/elevenlabs).
+- Building and dogfooding our own AI engineering tools like [PostHog AI](/docs/posthog-ai), the [PostHog MCP](/docs/model-context-protocol), and [AI Observability](/docs/ai-observability). This also means we talk to a lot of teams on the cutting edge of AI engineering like [Lovable](/customers/lovable) and [ElevenLabs](/customers/elevenlabs).
 
 - Nearly every [hackathon](/newsletter/hackathons) has had AI-related projects being built in it. This gives more of the team opportunities to explore new tools and understand what AI is good/not good at.
 

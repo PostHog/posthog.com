@@ -40,10 +40,10 @@ const phFeatures = [
         url: '/docs/product-analytics/identify',
     },
     {
-        title: 'LLM analytics',
+        title: 'AI Observability',
         description: 'Debug LLM calls and AI generations with full conversation traces and built-in error tracking.',
         icon: <IconLlmAnalytics className="text-[#681291]" />,
-        url: '/docs/llm-analytics',
+        url: '/docs/ai-observability',
     },
     {
         title: 'Data warehouse',
@@ -188,8 +188,7 @@ const ErrorTracking: React.FC = () => {
                         buttonText="Installation guide"
                         buttonLink="/docs/error-tracking/start-here"
                         imageColumnClasses="mt-4 md:-mt-8"
-                        imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/error_f2df714c47.png"
-                        imageClasses="max-h-48 md:max-h-64"
+                        imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/ERROR_TRACKING_2f807c123b.png"
                     />
                 </section>
 

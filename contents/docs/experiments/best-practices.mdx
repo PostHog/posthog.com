@@ -3,6 +3,7 @@ title: Experiments & A/B testing best practices
 sidebar: Docs
 showTitle: true
 ---
+
 ## 1. Establish a clear hypothesis
 
 A good hypothesis focuses your testing and guides your decision-making. It should include your goal metric, how you think your change will improve it, and any other important context. For example:
@@ -28,33 +29,32 @@ To avoid including unaffected users, make sure to first filter out ineligible us
 ```js
 // ✅ Correct. Will exclude unaffected users
 function showNewChanges(user) {
-
   if (user.hasCompletedAction) {
-    return false
+    return false;
   }
 
   // other checks
 
-  if (posthog.getFeatureFlag('experiment-key') === 'control') {
+  if (posthog.getFeatureFlag("experiment-key") === "control") {
     return false;
   }
 
-  return true
+  return true;
 }
 
 // ❌ Incorrect. Will include unaffected users
 function showNewChanges(user) {
-  if (posthog.getFeatureFlag('experiment-key') === 'control') {
+  if (posthog.getFeatureFlag("experiment-key") === "control") {
     return false;
   }
 
   if (user.hasCompletedAction) {
-    return false
+    return false;
   }
 
   // other checks
 
-  return true
+  return true;
 }
 ```
 
@@ -77,10 +77,10 @@ To avoid this problem, you should first test your experiment with a [small rollo
 To do this in PostHog, you can edit the rollout percentage of the experiment feature flag:
 
 <ProductVideo
-    videoLight= "https://res.cloudinary.com/dmukukwp6/video/upload/light_rollout_45df5dd6f6.mp4" 
-    videoDark= "https://res.cloudinary.com/dmukukwp6/video/upload/rollot_d275817347.mp4"
-    alt="How to edit the rollout percentage of an experiment feature flag" 
-    classes="rounded"
+  videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/light_rollout_45df5dd6f6.mp4"
+  videoDark="https://res.cloudinary.com/dmukukwp6/video/upload/rollot_d275817347.mp4"
+  alt="How to edit the rollout percentage of an experiment feature flag"
+  classes="rounded"
 />
 
 Here's a list of what to check during your test rollout:
@@ -99,15 +99,18 @@ Alternatively, if you don't have enough statistical power (i.e., not enough user
 For these reasons, PostHog includes a recommended running time calculator in the experiment setup flow. This calculates the minimum sample size required to run your experiment and the duration you should run your experiment for.
 
 <ProductVideo
-    videoLight= "https://res.cloudinary.com/dmukukwp6/video/upload/experiment_light_7070cd279b.mp4" 
-    videoDark= "https://res.cloudinary.com/dmukukwp6/video/upload/experiment0dark_61a5bcbb63.mp4"
-    alt="How to use the A/B test duration calculator" 
-    classes="rounded"
+  videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/experiment_light_7070cd279b.mp4"
+  videoDark="https://res.cloudinary.com/dmukukwp6/video/upload/experiment0dark_61a5bcbb63.mp4"
+  alt="How to use the A/B test duration calculator"
+  classes="rounded"
 />
+
+Alternatively, if you enable [sequential testing](/docs/experiments/statistics-frequentist#sequential-testing-beta), PostHog produces always-valid p-values that stay bounded by alpha no matter how often you check results. This lets you monitor an experiment continuously without inflating false positives. You should still plan your expected sample size upfront so you have enough statistical power to detect the effect you care about.
 
 ## 6. Use a launch checklist
 
 Launching an A/B test requires careful planning to ensure accurate results and meaningful insights. To help you navigate this, we've put together this launch checklist:
+
 ```
 **Before launch**
 

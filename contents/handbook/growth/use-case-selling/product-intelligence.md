@@ -24,7 +24,6 @@ This is our bread and butter. Most accounts start here. The risk is they *stay* 
 - **[Product Analytics](/docs/product-analytics) (core)** — [Funnels](/docs/product-analytics/funnels), [retention](/docs/product-analytics/retention), [cohorts](/docs/data/cohorts), [lifecycle](/docs/product-analytics/lifecycle) analysis, trends, user paths. The quantitative foundation for understanding what users do.
 - **[Session Replay](/docs/session-replay)** — The qualitative layer. Watch what users actually do when the numbers say they're dropping off. Bridges the gap between "40% drop at step 3" and "oh, the button doesn't render on mobile Safari."
 - **[Surveys](/docs/surveys/creating-surveys)** — Direct feedback loop at key moments. NPS after onboarding, CSAT after support, "why did you cancel?" on churn. Ties qualitative signal to quantitative behavior data.
-- **[Revenue Analytics](/docs/revenue-analytics/start-here)** — Business outcome tracking. Connect product usage to [MRR](/docs/revenue-analytics/dashboard#mrr-and-arr), expansion revenue, LTV, and churn. Lets PMs prove that the feature they shipped actually moved the revenue needle. ([Dashboard](/docs/revenue-analytics/dashboard))
 - **[Experiments](/docs/experiments)** — Validate hypotheses with statistical rigor before committing to a full build. A/B test changes against real metrics, not gut feel. Requires [Feature Flags](/docs/feature-flags) for implementation.
 - **[Workflows](/docs/workflows/start-here)** — Onboarding sequences, activation nudges, lifecycle engagement. The action layer: once you've identified a drop-off in analytics, Workflows lets you do something about it automatically. ([Email drip campaigns](/docs/workflows/email-drip-campaign))
 - **AI Evals** — For products with AI features: proactively surface where users are struggling based on AI output quality. This is product intelligence driven by AI observability. A bridge product to the [AI/LLM Observability](/handbook/growth/cross-selling/use-case-selling/ai-llm-observability) use case.
@@ -38,15 +37,14 @@ Usually **Product Analytics**. Customer starts tracking events, builds dashboard
 
 ### Primary expansion path
 
-**Product Analytics → + Session Replay → + Surveys → + Experiments → + Revenue Analytics → + Workflows**
+**Product Analytics → + Session Replay → + Surveys → + Experiments → + Workflows**
 
 **The logic of each step:**
 
 - Product Analytics → Session Replay: They know *what* is happening (40% drop at step 3). They need to see *why*. Session Replay gives them the qualitative context that numbers can't.
 - Session Replay → Surveys: They're watching replays and forming hypotheses about why users struggle. Surveys let them ask users directly at the moment of friction, then tie responses back to behavior data.
 - Surveys → Experiments: They've identified the problem through analytics, replay, and feedback. Now they want to test a fix. Experiments require Feature Flags, which gets engineering involved (multithreading moment).
-- Experiments → Revenue Analytics: They've validated changes with experiments and want to prove business impact. Revenue Analytics connects product usage to MRR, expansion, and churn.
-- Revenue Analytics → Workflows: They've identified what drives value. Now they want to guide users toward those high-value behaviors automatically, through behavior-triggered engagement sequences.
+- Experiments → Workflows: They've validated what drives value. Now they want to guide users toward those high-value behaviors automatically, through behavior-triggered engagement sequences.
 
 ### Alternate expansion paths
 
@@ -209,7 +207,6 @@ Usually **Product Analytics**. Customer starts tracking events, builds dashboard
 | Product Analytics only | Session Replay | They see the numbers but not the *why* | "You can see 40% drop off at step 3. Want to watch what's actually happening?" |
 | Product Analytics + Session Replay | Surveys | They're forming hypotheses from replays and want direct user input | "You're watching sessions and seeing confusion. Want to ask users directly what's tripping them up?" |
 | Product Analytics + Surveys | Experiments | They've identified problems and want to validate fixes | "You know the problem. Let's test whether your proposed fix actually works before building it fully." |
-| Experiments running | Revenue Analytics | They're testing changes but measuring proxy metrics, not revenue | "Your experiment improved conversion by 15%. But did it actually increase MRR?" |
 | Analytics + Experiments mature | Workflows | They know what works and want to operationalize it | "You proved the new onboarding flow works. Now let's automatically nudge every new user toward it." |
 | Product team in PostHog | Growth & Marketing (for the growth team) | Product team is in PostHog. Growth team should be too. | "Your PMs are using PostHog for product decisions. Has the growth team seen what they can do with funnels and experiments for conversion optimization?" |
 | B2B account, no Group Analytics | Group Analytics add-on | B2B companies need company-level analytics | "You're tracking individual users. But do you know which *companies* are most engaged and which are at risk?" |
@@ -221,7 +218,6 @@ Usually **Product Analytics**. Customer starts tracking events, builds dashboard
 - **Session Replay docs:** [Session Replay](/docs/session-replay)
 - **Surveys docs:** [Creating surveys](/docs/surveys/creating-surveys)
 - **Experiments docs:** [Experiments](/docs/experiments) · [Exposures](/docs/experiments/exposures)
-- **Revenue Analytics docs:** [Getting started](/docs/revenue-analytics/start-here) · [Dashboard](/docs/revenue-analytics/dashboard)
 - **Workflows docs:** [Getting started](/docs/workflows/start-here) · [Email drip campaigns](/docs/workflows/email-drip-campaign)
 - **Feature Flags docs:** [Getting started](/docs/feature-flags/start-here)
 - **PostHog AI docs:** [Enable PostHog AI](/docs/posthog-ai/allow-access) · [Example prompts](/docs/posthog-ai/example-prompts)
@@ -232,7 +228,7 @@ Usually **Product Analytics**. Customer starts tracking events, builds dashboard
 | Archetype + Stage | Framing | Key Products | Buyer |
 |---|---|---|---|
 | AI Native — Early | Product Intelligence looks different here. There's no UX researcher. A GTM engineer or founding PM is looking at funnels, activation rates, and conversion. Frame it as "understand what makes users stick" not "deep behavioral research." | Product Analytics (funnels, retention), Session Replay, Experiments, PostHog AI | Founder, founding PM, GTM engineer |
-| AI Native — Scaled | Starting to formalize the product function. May have a dedicated PM. AI Evals becomes relevant as a bridge: evaluating AI output quality is product intelligence for AI products. | Product Analytics, Session Replay, Surveys, Experiments, AI Evals, Revenue Analytics | PM, Head of Product, AI Product Lead |
+| AI Native — Scaled | Starting to formalize the product function. May have a dedicated PM. AI Evals becomes relevant as a bridge: evaluating AI output quality is product intelligence for AI products. | Product Analytics, Session Replay, Surveys, Experiments, AI Evals | PM, Head of Product, AI Product Lead |
 | Cloud Native — Early | First real analytics investment. They need to find product-market fit. Speed matters. Don't overwhelm with features. Start with funnels and retention, add replay and surveys as they mature. | Product Analytics, Session Replay, PostHog AI | Founder, first PM, product engineer |
 | Cloud Native — Scaled | Dedicated product team with PMs, designers, maybe UX researchers. They want depth: cohort analysis, retention by feature, experiment velocity. Workflows becomes relevant for operationalizing insights. | Full Product Intelligence stack. Group Analytics if B2B. | Head of Product, VP Product, UX Research Lead |
 | Cloud Native — Enterprise | Multiple product teams, multiple workloads. The play is expanding PostHog from one team to many. Standardization and governance matter. RBAC (Enterprise package) becomes relevant. | Full stack + Group Analytics + Enterprise package | VP Product, CPO, product ops |

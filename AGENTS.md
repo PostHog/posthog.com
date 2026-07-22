@@ -113,7 +113,7 @@ import { Menubar as RadixMenubar } from 'radix-ui'
 - American English
 - Oxford comma
 - Use relative URLs for internal links (e.g., `/docs/feature-flags` not `https://posthog.com/docs/feature-flags`)
-- When writing copy, follow our [writing style guide](@contents/handbook/content/posthog-style-guide.md) and [docs style guide](@contents/handbook/docs-and-wizard/docs-style-guide.md)
+- When writing copy, follow our [writing style guide](@contents/handbook/content/posthog-style-guide.md) and [docs style guide](@contents/handbook/wizard-and-docs/docs-style-guide.md)
 
 ## Detailed guides
 

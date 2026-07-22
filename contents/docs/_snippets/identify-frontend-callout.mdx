@@ -1,3 +1,7 @@
 > **Identifying users is required.** Call `posthog.identify('your-user-id')` after login to link events to a known user. This is what connects frontend event captures, [session replays](/docs/session-replay), [LLM traces](/docs/ai-engineering), and [error tracking](/docs/error-tracking) to the same person — and lets backend events link back too.
 >
+> Use a stable ID from your auth system when possible, not an email or display name. Send those as person properties instead. If your app has no other stable key, email works as a fallback if they are unique. Never a shared literal like `"anonymous"` or `"user"`, which pools many people onto one person and corrupts their data. When no ID is available at all, skip the identify and retain the anonymous distinct ID that's automatically assigned.
+>
+> Call `posthog.reset()` on logout, so the next person to use the browser doesn't inherit the last one's identity.
+>
 > See our guide on [identifying users](/docs/getting-started/identify-users) for how to set this up.

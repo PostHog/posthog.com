@@ -44,7 +44,7 @@ export const competitorName = {
 -   `experiments`
 -   `surveys`
 -   `web_analytics`
--   `llm_analytics`
+-   `ai_observability`
 -   `revenue_analytics`
 -   `data_warehouse`
 -   `cdp`

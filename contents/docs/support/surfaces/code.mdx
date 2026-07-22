@@ -1,0 +1,29 @@
+---
+title: Use Support in PostHog Code
+sidebar: Docs
+showTitle: true
+---
+
+<CalloutBox icon="IconFlask" title="Open beta" type="action">
+
+PostHog Code is in beta, so some behaviors may still change.
+
+</CalloutBox>
+
+[PostHog Code](/docs/posthog-code) is the desktop app for driving parallel agents that improve your product. For Support, it's where you review and merge the [Self-driving](/docs/self-driving) PRs generated from your tickets. You don't reply to customer tickets here, that happens in the [web app](/docs/support/inbox).
+
+## Review the fixes your tickets generated
+
+Recurring issues in your support conversations become [Self-driving reports](/docs/self-driving/reports), each with the evidence behind it and, when there's a code fix, a drafted pull request. PostHog Code is where you connect those conversations as a signal source and work through the reports they generate.
+
+Say a handful of reports landed overnight from your support queue. In PostHog Code you can:
+
+- Open a report to see the tickets it groups, the session replays and events behind them, and the proposed fix
+- Merge the pull request when the fix holds up, or steer the agent when it needs more context
+- Take a multi-repo fix over locally and keep going with a full agent
+
+Because the reports come straight from your tickets, you're reviewing fixes for problems your customers actually hit, ranked by how many of them hit it.
+
+## How it connects to Slack
+
+A task you start in [Slack](/docs/support/surfaces/slack) shows up in PostHog Code, so you can pick it up on your desktop and keep going. The same Self-driving inbox lives in both places.
