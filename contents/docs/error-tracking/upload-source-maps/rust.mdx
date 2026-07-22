@@ -3,16 +3,16 @@ title: Upload debug symbols for Rust
 showStepsToc: true
 ---
 
-import CLIDownload from "../_snippets/cli/download.mdx"
-import CLIAuthenticate from "../_snippets/cli/authenticate.mdx"
-import StepVerifySymbolSetsUpload from "../_snippets/StepVerifySymbolSetsUpload"
+import CLIDownload from "../_snippets/cli/download.mdx";
+import CLIAuthenticate from "../_snippets/cli/authenticate.mdx";
+import StepVerifySymbolSetsUpload from "../_snippets/StepVerifySymbolSetsUpload";
 
 The [Rust SDK](/docs/error-tracking/installation/rust) resolves stack traces in-process from whatever debug info the running binary carries — which works well in development, but release builds omit that debug info by default. Uploading debug symbols gives you fully resolved production stack traces: PostHog symbolicates frames server-side from the exact build that crashed, resolves inlined frames, and can display the source code around each frame.
 
 <CalloutBox icon="IconInfo" title="Version requirements" type="action">
 
 - [posthog-rs 0.16.0](https://github.com/PostHog/posthog-rs/releases) or later, which records the instruction addresses server-side symbolication needs. We recommend the latest version.
-- [CLI 0.7.32](https://github.com/PostHog/posthog/releases/tag/posthog-cli%2Fv0.7.32) or later for Linux binaries. Uploading macOS `.dSYM` bundles with the same command needs [CLI 0.8.1](https://github.com/PostHog/posthog/releases/tag/posthog-cli%2Fv0.8.1) or later. As always, we recommend [keeping up with the latest CLI version](/docs/error-tracking/upload-source-maps/cli).
+- [CLI 0.7.32](https://github.com/PostHog/posthog/releases/tag/posthog-cli%2Fv0.7.32) or later for Linux binaries. Uploading macOS `.dSYM` bundles needs [CLI 0.8.1](https://github.com/PostHog/posthog/releases/tag/posthog-cli%2Fv0.8.1) or later. Uploading standalone Mach-O executables (including universal binaries) needs [CLI 0.8.2](https://github.com/PostHog/posthog/releases/tag/posthog-cli%2Fv0.8.2) or later. As always, we recommend [keeping up with the latest CLI version](/docs/error-tracking/upload-source-maps/cli).
 
 </CalloutBox>
 
@@ -75,7 +75,7 @@ cargo build --release
 posthog-cli symbol-sets upload --directory target/release
 ```
 
-The CLI scans the directory and uploads every executable and shared library that carries debug info and a build ID, skipping everything else. On macOS it also uploads `.dSYM` bundles (this needs `dwarfdump`, which ships with Xcode). Windows binaries (PDB debug info) are not supported yet. The upload is associated with a [release](/docs/error-tracking/releases) automatically when the build directory is inside a git checkout.
+The CLI scans the directory and uploads every executable and shared library that carries debug info and a build ID, skipping everything else. On macOS it also uploads `.dSYM` bundles (this needs `dwarfdump`, which ships with Xcode). It also uploads standalone Mach-O executables, dylibs, and debug companions that carry embedded DWARF and an `LC_UUID` — useful for builds that produce Mach-O binaries without generating dSYM bundles. Universal (fat) binaries are automatically split and each architecture slice is uploaded separately. Windows binaries (PDB debug info) are not supported yet. The upload is associated with a [release](/docs/error-tracking/releases) automatically when the build directory is inside a git checkout.
 
 Run this as part of the same pipeline that produces your production binary. Each build has its own build ID, so symbols must be re-uploaded for every build you deploy.
 
