@@ -55,11 +55,11 @@ Who covers the account at each stage. Stages run top to bottom in the order a cu
 Notes:
 
 - Automation is the base level everywhere a direct human coverage isn't needed. Below-$500 MRR accounts and sub-$20k steady-state accounts have no human owner by design.
--  TAM allocation can start during Implementing when a deal closed with a known expansion path.
+- TAM allocation can start during Implementing when a deal closed with a qualified expansion opp.
 - Growth TAM pickup can happen during Implementing for a fast-ramping sub-$20k account.
-- The onboarding team's lane is wide because its trigger is first payment, which can land anywhere from Exploring through Ramping.
+- The onboarding team's coverage is wide because its trigger is first payment, which can land anywhere from Exploring through Ramping.
 - BDR coverage is top-of-funnel only: BDRs source and qualify accounts at Exploring (primarily via cold outbound to accounts with no inbound buying signal) and hand off to the TAE at Evaluating. They don't carry the account past that handoff.
-- FDE coverage is conditional and account-specific: an FDE runs a short-term, hands-on technical engagement for a small number of high-spend or technically complex accounts where the implementation need is more than a TAM or CSM can deliver. The 🟡 at Proving covers the case where an FDE helps prove technical fit during a POC with a top prospect; drop it if you want FDE kept strictly post-sales.
+- FDE coverage is conditional where TAM, CSM, or TAE sell an FDE engagement to a customer accoun and then an FDE runs a short-term, hands-on technical engagement where the implementation need is more than a TAM or CSM can deliver. The 🟡 at Proving covers the case where an FDE helps prove technical fit during a POC with a top prospect
 
 ## Ownership rules
 
@@ -71,4 +71,4 @@ Notes:
 
 **BDRs feed the funnel, they don't own the deal.** BDRs own top-of-funnel sourcing at Exploring and hand off to the TAE at Evaluating. Coverage ends at the handoff; the TAE owns the account from there.
 
-**FDE is a conditional technical layer, like TAM.** An FDE is added to an account only when a high-spend or technically complex implementation justifies dedicated engineering beyond what a TAM or CSM can deliver, and released when the engagement closes. It is never the base layer and never replaces the CSM.
+**FDE is a conditional technical layer, like TAM.** An FDE is added to an account only when a high-spend or technically complex implementation justifies dedicated engineering beyond what a TAM or CSM can deliver, and released when the engagement is done.
