@@ -347,10 +347,10 @@ export const EventsContent = ({ initialSelectedId, initialSelectedEvent }: Event
             viewportClasses="[&>div>div]:h-full"
             showAddressBar={false}
         >
-            <div data-scheme="primary" className="flex flex-col @xl:flex-row text-primary h-full">
+            <div data-scheme="primary" className="flex flex-col @xl:flex-row text-primary h-full min-h-0 min-w-0">
                 <aside
                     data-scheme="secondary"
-                    className="basis-3/5 @xl:basis-80 bg-primary @xl:border-r border-primary flex flex-col h-full"
+                    className="basis-3/5 @xl:basis-80 bg-primary @xl:border-r border-primary flex flex-col h-full min-h-0"
                 >
                     <div className="border-b border-primary px-4 pt-4 pb-4">
                         <ToggleGroup
@@ -365,7 +365,7 @@ export const EventsContent = ({ initialSelectedId, initialSelectedEvent }: Event
                         />
                     </div>
 
-                    <ScrollArea className="flex-1">
+                    <ScrollArea className="flex-1 min-h-0">
                         <div className="p-4 h-96 @xl:h-full">
                             <div className="space-y-3">
                                 {isModerator && (
@@ -441,7 +441,7 @@ export const EventsContent = ({ initialSelectedId, initialSelectedEvent }: Event
                     </ScrollArea>
                 </aside>
 
-                <div className="flex-1 relative border-primary border-t @xl:border-t-0">
+                <div className="flex-1 min-h-0 min-w-0 relative overflow-hidden border-primary border-t @xl:border-t-0">
                     <AnimatePresence>
                         {(editingEvent || creatingEvent) && isModerator ? (
                             <EventCard
