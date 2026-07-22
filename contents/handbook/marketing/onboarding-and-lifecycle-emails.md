@@ -45,14 +45,28 @@ There are hundreds; you only need the families. Before building one, check it do
 | --- | --- | --- | --- |
 | **Onboarding 8.0** (flagship) | `user signed up` | 130+ emails that branch on product intent and behavior to tailor the first-run experience | Activate within 7 days |
 | **Long-running onboarding** | `user signed up` | Slower, spaced-out nurture over a longer window | Logs in again |
-| **Beta onboarding** | `$feature_enrollment_update` | One feedback email after someone joins *any* beta — you get this free for every beta | Activates a product |
+| **Waitlist, Alpha, Beta onboarding** | `$feature_enrollment_update` | Branches on `$feature_enrollment_stage`: waitlist confirmation (concept), rough-edges warning (alpha), or a feedback ask after 5 days (beta) — you get this free for every early access feature | Collects feedback, activates a product |
 | **Startups & YC** | *enters a segment* | Program-specific content (credits, job board, integrations) | Activation |
 
 The idea behind the flagship: **it's intent-aware and activation-aware** — it sends people content about the product they came for, and exits the moment they activate. (Avoid Customer.io's legacy "behavioral" campaign type for anything new — it silently excludes existing and backfilled people.)
 
+## The Waitlist, Alpha, Beta onboarding flow
+
+Every early access feature gets lifecycle emails automatically. When someone joins a waitlist or opts in to a feature preview — in the app, or via a waitlist form on posthog.com — posthog-js fires a `$feature_enrollment_update` event carrying `$early_access_feature_name` and `$feature_enrollment_stage`. These events reach Customer.io through the "Send events to Customer.io" [data pipeline destination](https://us.posthog.com/project/2/pipeline/destinations), and any `$feature_enrollment_update` with both properties present triggers the flow.
+
+The flow immediately segments on `$feature_enrollment_stage`:
+
+- **`concept`** — an immediate, simple confirmation that they're on the waitlist.
+- **`alpha`** — an immediate email warning of rough edges and asking for feedback.
+- **`beta`** — a 5-day wait, then an email asking for feedback on the beta.
+
+When a feature's stage changes from `concept` to `alpha` or `beta`, everyone who registered interest is automatically opted in to the new stage and PostHog fires a `user moved feature preview stage` event (with `from` and `to` properties) for each enrolled person. When `from` is `concept` and `to` is `alpha` or `beta`, we send an email letting them know the feature is enabled and now available, and asking for feedback.
+
+All beta feedback is centralized to the `beta-feedback@posthog.com` Google Group. Replies to this address are relayed into the [#posthog-feedback Slack channel](https://posthog.slack.com/archives/C011L071P8U) for everyone to see. PMs and team leads are encouraged to respond to and action this feedback for their alpha and beta releases, and to give merch credits as a thank you where appropriate.
+
 ## The personalized "next steps" block
 
-Inside the onboarding emails is a block that recommends each person's best next product, based on what they've already activated and shown intent in. One quirk shapes how it's built: **Customer.io's Liquid can't read segments or event history** — inside an email you only get the person's profile attributes. So we copy segment membership onto attributes first:
+Inside the onboarding emails is an email with a block that recommends each person's best next product, based on what they've already activated and shown intent in. One quirk shapes how it's built: **Customer.io's Liquid can't read segments or event history** — inside an email you only get the person's profile attributes. So we copy segment membership onto attributes first:
 
 > **Segments → "Attr sync" campaigns → attributes → email content.** For each Activated/Intent segment, a tiny `seg_attr` campaign fires when someone *enters* it and runs one **Update attributes** action — no email, it just writes data. They share an `Attr sync` name prefix so they group together.
 
@@ -72,7 +86,7 @@ The email's Liquid reads these to pick the person's top un-activated product (bi
 Not every step applies to every launch, but this is the path of least surprise:
 
 1. **Confirm intent + activation exist** (Growth Engineering owns these). Without them the system is blind — do this *before* public beta.
-2. **In beta, lean on what's there.** The beta flow already collects feedback for every opt-in, for free. Want more? Build a "Beta Users – [product]" segment and a small, single-purpose flow.
+2. **In beta, lean on what's there.** The [Waitlist, Alpha, Beta onboarding flow](#the-waitlist-alpha-beta-onboarding-flow) already collects feedback for every opt-in, for free. Want more? Build a "Beta Users – [product]" segment and a small, single-purpose flow.
 3. **Decide: extend or build new.**
    - *Extend Onboarding 8.0* for a core product — add your intent branch and a few product emails to the main flow. Usually the right call.
    - *Build a standalone flow* for a distinct audience or behavior — event trigger for "when X happens", segment trigger for "everyone who is X".
