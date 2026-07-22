@@ -54,6 +54,11 @@ const UploadSymbolSetsPlatforms = () => {
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/ios.svg',
         },
         {
+            label: 'Rust',
+            url: '/docs/error-tracking/upload-source-maps/rust',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/rust.svg',
+        },
+        {
             label: 'Rollup',
             url: '/docs/error-tracking/upload-source-maps/rollup',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Rollup_js_c306a2fde3.svg',
