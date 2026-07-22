@@ -1427,6 +1427,10 @@ export const handbookSidebar = [
                         url: '/handbook/forward-deployed-engineering/how-we-work',
                     },
                     {
+                        name: 'New starter onboarding',
+                        url: '/handbook/forward-deployed-engineering/new-hire-onboarding',
+                    },
+                    {
                         name: 'Working with customers',
                         url: '/handbook/forward-deployed-engineering/working-with-customers',
                     },
@@ -1911,7 +1915,7 @@ export const handbookSidebar = [
                 url: '/handbook/wizard-and-docs/mdx-and-components',
             },
             {
-                name: 'How to write product docs',
+                name: 'How to write docs',
                 url: '/handbook/wizard-and-docs/writing-product-docs',
             },
             {
