@@ -111,7 +111,7 @@ function HeroSection() {
                             bugs, scoring frustration, tagging behavior, and summarizing what happened. You get the
                             findings, while <strong>Replay Vision</strong> does the homework.
                         </p>
-                        <div className="@container max-w-sm">
+                        <div className="@container max-w-sm mx-auto">
                             {showForm ? (
                                 <WaitlistForm
                                     autoFocus
@@ -121,7 +121,7 @@ function HeroSection() {
                                     surveyId={SURVEY_ID}
                                 />
                             ) : (
-                                <div className="flex flex-wrap items-center gap-2">
+                                <div className="flex flex-wrap items-center justify-center gap-2">
                                     <OSButton variant="primary" size="lg" onClick={() => setShowForm(true)}>
                                         Join the waitlist
                                     </OSButton>
