@@ -1,0 +1,89 @@
+---
+title: Linking Neon as a source
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+sourceId: Neon
+---
+
+The Neon connector can link your Neon database tables to PostHog. Neon is serverless Postgres, so this connector uses the same underlying integration as the [Postgres source](/docs/cdp/sources/postgres).
+
+<CalloutBox icon="IconFlask" title="CDC sync is in alpha" type="action">
+
+Because Neon uses the Postgres integration, you can also enable change data capture (CDC) sync. See the [Postgres source documentation](/docs/cdp/sources/postgres#sync-methods) for details. CDC sync is currently in **alpha**.
+
+We'd love to [hear your feedback](https://app.posthog.com/home#panel=support%3Afeedback%3A%3Alow%3Atrue).
+
+</CalloutBox>
+
+To link Neon:
+
+1. Go to the [Data pipeline page](https://app.posthog.com/data-management/sources) and the sources tab in PostHog
+2. Click **New source** and select Neon
+3. Enter your Neon connection details. In the Neon Console, open your project and click **Connect** to see your connection details:
+   - **Host:** The direct host from Neon, e.g. `ep-cool-darkness-123456.us-east-2.aws.neon.tech`. Don't use the pooled host (the one with `-pooler` in the name) — pooled connections work for standard syncs, but CDC requires the direct host.
+
+   - **Port:** The port your database is listening on. The default is `5432`.
+
+   - **Database:** The name of the database. Neon defaults this to `neondb`.
+
+   - **User:** The database username, e.g. `neondb_owner`, or another user with read access to the schemas and tables you want to sync.
+
+   - **Password:** The password for the user.
+
+   - **Schema:** (Optional) The schema where your tables are located. Leave blank to browse and sync tables from all schemas, or specify one to limit the selection.
+
+4. If you need to connect through an SSH tunnel, enable and configure it (optional):
+   - **Tunnel host:** The hostname of your SSH server.
+   - **Tunnel port:** The port your SSH server is listening on.
+   - **Authentication type:**
+     - For password authentication, enter your SSH username and password.
+     - For key-based authentication, enter your SSH username, private key, and optional passphrase.
+   - **Require TLS through tunnel?** - Whether to require TLS encryption through the SSH tunnel. Enabled by default. Disable if your database does not support TLS.
+5. Click **Link**
+
+The data warehouse then starts syncing your Neon data. You can see details and progress in the [sources tab](https://app.posthog.com/data-management/sources).
+
+## Configuration
+
+<SourceParameters />
+
+## Selecting columns
+
+By default, PostHog syncs all columns from each table. To sync only specific columns:
+
+1. During source setup, click **Columns** next to any table in the table picker.
+2. Uncheck columns you don't want to sync.
+3. Primary key columns and the incremental sync field (if configured) are always synced and cannot be disabled.
+
+You can also change column selection after setup:
+
+1. Go to the [sources tab](https://app.posthog.com/data-management/sources) and click your Neon source.
+2. Click **Configure** next to any schema.
+3. Under **Columns**, select which columns to sync.
+
+See the [Postgres source documentation](/docs/cdp/sources/postgres#selecting-columns) for details on resync behavior when adding columns.
+
+## CDC and the pooled host
+
+Neon provides two connection endpoints for each project: a **direct** host and a **pooled** host (with `-pooler` in the name). Both work for standard syncs, but CDC requires the direct host because Neon's pooled endpoint doesn't support logical replication.
+
+If you plan to use CDC:
+
+1. Use the direct host (e.g. `ep-cool-darkness-123456.us-east-2.aws.neon.tech`) – not the pooled host.
+2. Enable **logical replication** in your Neon project settings before connecting.
+
+PostHog rejects the pooled host during the CDC prerequisites check with an actionable error message directing you to the direct host.
+
+See the [Postgres source documentation](/docs/cdp/sources/postgres#how-posthog-cdc-works) for full details on how CDC works.
+
+> **SSL** Neon requires SSL, which PostHog uses by default. No additional SSL configuration is needed.
+
+> **Permissions** The Neon source only requires read permissions on the schemas and tables you intend to sync. We recommend creating a dedicated read-only role rather than using the default `neondb_owner` superuser.
+
+import InboundIpAddresses from "../_snippets/inbound-ip-addresses.mdx";
+
+<InboundIpAddresses />
