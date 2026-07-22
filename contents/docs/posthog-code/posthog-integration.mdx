@@ -1,12 +1,12 @@
 ---
-title: PostHog integration for PostHog Code
+title: PostHog integration for PostHog Desktop
 ---
 
-PostHog Code brings your PostHog context into the agent in real time, including product data, flags, experiments, and errors. If you don't use PostHog, PostHog Code still works as a general-purpose coding agent. The integration adds context, it isn't a hard dependency.
+PostHog Desktop brings your PostHog context into the agent in real time, including product data, flags, experiments, and errors. If you don't use PostHog, PostHog Desktop still works as a general-purpose coding agent. The integration adds context, it isn't a hard dependency.
 
 ## Built-in PostHog skills
 
-PostHog Code ships a curated set of [skills](/docs/posthog-code/skills) that the agent loads automatically. They update independently of the desktop app, so you get new skills without waiting for a release.
+PostHog Desktop ships a curated set of [skills](/docs/posthog-code/skills) that the agent loads automatically. They update independently of the desktop app, so you get new skills without waiting for a release.
 
 Wire up PostHog SDKs in any supported language with these skills:
 
@@ -26,7 +26,7 @@ Run A/B tests end to end with these skills:
 | `configuring-experiment-analytics` | Define metrics and goals |
 | `managing-experiment-lifecycle` | Launch, monitor, and ship results |
 
-Work with HogQL and LLM analytics data with these skills:
+Work with HogQL and AI Observability data with these skills:
 
 | Skill | What it does |
 |---|---|
@@ -48,11 +48,22 @@ PostHog's [MCP server](/docs/model-context-protocol) is wired up out of the box.
 
 You don't need to install or configure the MCP server separately. It's authenticated with the same session you use to sign in.
 
+## Analyze your token usage
+
+PostHog Desktop tracks its own LLM spend through PostHog [AI observability](/docs/ai-observability), so you can see exactly where your tokens go. The breakdown covers spend by product, tool, and model over the last 30 days, along with tips on where to optimize.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/token_spend_light_d4eadddc4b.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/token_spend_dark_94f13c4e9d.png"
+    classes="rounded"
+    alt="Token spend in PostHog Desktop broken down by product, tool, and model"
+/>
+
 ## Enricher
 
 The enricher detects PostHog SDK calls in your source and pulls live context from your PostHog project so the agent (and you) can reason about real impact, not just code.
 
-When you open a file or stage a diff, PostHog Code parses it and finds:
+When you open a file or stage a diff, PostHog Desktop parses it and finds:
 
 - `capture()` calls and the events they emit
 - Feature flag checks (`isFeatureEnabled`, `getFeatureFlag`, etc.)
@@ -85,7 +96,7 @@ Detection runs locally via tree-sitter. Source code is not sent anywhere. Enrich
 
 ## Switching projects
 
-PostHog Code is signed in to your PostHog organization out of the box. To change which project the integration points at, use the project switcher in the bottom-left corner of the app and pick a different project from the list.
+PostHog Desktop is signed in to your PostHog organization out of the box. To change which project the integration points at, use the project switcher in the bottom-left corner of the app and pick a different project from the list.
 
 The selected project is the one used by:
 

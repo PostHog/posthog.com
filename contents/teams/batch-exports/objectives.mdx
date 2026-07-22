@@ -1,33 +1,37 @@
-# Q2 2026
+# Q3 2026
 
-## Objective 1: Unify batch exports and real-time destinations
+## Objective 1: Make HogQL-backed data exportable
 
 ### Motivation
-* Different UX between batch exports and real-time destinations is confusing.
-* Single API enables better integration with other tools.
+* Enables a lot, if not all, products to be data sources of batch exports
+  * Any dashboards, effectively replacing CSV exports (and offering ANY format exports)
+  * Any warehouse views
+  * And more...
+* Have a single consistent way of exporting any type of data
+  * If a new product adds new data sources using HogQL queries, they get batch exports “for free”
+* Allow for more flexibility in the data models that can be exported
 
 ### What we’ll ship
-* Single API for real-time destinations and batch exports.
-* Real-time destinations powered by batch exports.
+* On-demand export of HogQL-backed data to supported destinations
+* Scheduled sync of HogQL-backed data to supported destinations
 
-## Objective 2: Reduce pipeline architecture technical debt
+## Objective 2: Agent-driven batch exports
 
 ### Motivation
-* Each destination has different support for different features
-* Useful abstractions not implemented across destinations
+* Improving experience for AI-pilled teams
+* Make it easier for agents to create, validate and run batch exports
 
 ### What we’ll ship
-* Scalable consumers for all destinations
-* Complexity handling across all batch export destinations (metrics, tracing, and alerting).
-* Support for new models: Split up persons into person properties and person distinct ids.
-* Shared abstractions over destination-specific types implemented everywhere.
+* Skills for creating, validating, debugging, updating batch exports
+* Integration UI for connecting to destinations
 
-## Objective 3: Self-serve debugging
+## Objective 3: The pipeline must grow
 
 ### Motivation
-* We want to empower users to resolve their own issues faster, without needing support from PostHog.
+* Reduce time to deployment
+* Ensure current customers are well served
+* Faster, accurate, and self-driven debugging
 
 ### What we'll ship
-* Exposing better metrics and logs to users.
-* MCP destinations skills.
-* More access via API to debugging tools and metrics.
+* Work with devex on implementing CI improvements
+* Better internal observability so we know what to improve

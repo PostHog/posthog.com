@@ -1,0 +1,13 @@
+---
+title: Install OpenTelemetry tracing
+---
+
+import TracingInstallationPlatforms from './_snippets/installation-platforms'
+
+PostHog Tracing works with any OpenTelemetry-compatible client. You don't need any PostHog-specific packages – use standard OpenTelemetry libraries to export your spans.
+
+## Platforms
+
+<TracingInstallationPlatforms />
+
+> **Note:** Tracing uses the OpenTelemetry Protocol (OTLP) standard over HTTP. If your language isn't listed, check the [OpenTelemetry documentation](https://opentelemetry.io/docs/languages/) for a compatible SDK and point its OTLP trace exporter at PostHog.

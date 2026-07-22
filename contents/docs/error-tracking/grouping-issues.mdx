@@ -22,19 +22,28 @@ PostHog attempts to group similar exceptions into issues automatically. If you w
 
 You can group exceptions as a single issue based on their properties using custom grouping rules. As with [auto assignment rules](/docs/error-tracking/assigning-issues#automatic-issue-assignment), you have access to properties of the unminified stack trace because the rules run during ingestion. 
 
+The [error tracking settings](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-custom-grouping) show a list of your custom grouping rules:
+
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/custom_grouping_light_f3e99a56b5.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/custom_grouping_dark_927e7c5774.png"
-  alt="Error tracking custom issue grouping"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_06_24_T14_03_39_272_Z_a38e139b94.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_06_24_T14_03_57_025_Z_128bd9bfe4.png"
+  alt="List of custom grouping rules"
   classes="rounded"
 />
 
-To create a **custom grouping rule** in the [error tracking settings](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-custom-grouping):
+To create a **custom grouping rule**, click **Add rule** and configure it in the rule editor:
 
-1. Click the **Add rule** button to create a new grouping rule.
-2. Select **Any** to match any of the criteria, or **All** to match all of the criteria.
-3. Click the **+ Add filter** button to add a new filter. These filters can be configured to match any [event property](/docs/data/events) in PostHog. 
+1. Select **Any** to match any of the criteria, or **All** to match all of the criteria.
+2. Click the **+ Add filter** button to add a new filter. These filters can be configured to match any [event property](/docs/data/events) in PostHog. 
+3. Click **Test** to check how many exceptions match the rule's conditions before saving.
 4. Click **Save** to create the rule.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_06_24_T10_35_56_474_Z_03f7bcfafb.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_06_24_T10_36_15_781_Z_a162179a94.png"
+  alt="Adding a custom grouping rule"
+  classes="rounded"
+/>
 
 Here are some common exception event properties you can filter on:
 

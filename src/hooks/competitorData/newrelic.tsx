@@ -55,7 +55,7 @@ export const newrelic = {
                 },
             },
         },
-        llm_analytics: {
+        ai_observability: {
             // They have some open source tools, but it's not native:
             // https://newrelic.com/instant-observability/openllm
             available: false,

@@ -809,14 +809,14 @@ URL: ${url}
 
 export default function Share({ url, title }: { url: string; title: string }) {
     const { appWindow } = useWindow()
-    const { setWindowTitle, siteSettings } = useApp()
+    const { setWindowTitle } = useApp()
 
     useEffect(() => {
         setWindowTitle(appWindow, `Share page`)
     }, [])
 
     return (
-        <div className={`${siteSettings.experience === 'boring' ? 'size-full' : 'w-[500px]'}`}>
+        <div className="w-[500px]">
             <OSTabs
                 padding
                 triggerDataScheme="primary"

@@ -1,5 +1,5 @@
 ---
-title: Quick tour of PostHog Code
+title: Quick tour of PostHog Desktop
 hideRightSidebar: true
 contentMaxWidthClass: max-w-5xl
 ---
@@ -7,11 +7,11 @@ contentMaxWidthClass: max-w-5xl
 import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
 import { IconFlask, IconGraph, IconToggle, IconWarning } from '@posthog/icons'
 import OSButton from 'components/OSButton'
-import { DownloadButton } from '../../../src/pages/code'
+import { DownloadButton } from '../../../src/pages/desktop'
 
-PostHog Code is a desktop coding agent that understands your product and business, not only your source code. Here's a quick tour of how it works.
+PostHog Desktop is a desktop coding agent that understands your product and business, not only your source code. Here's a quick tour of how it works.
 
-<QuestLog firstSpeechBubble="Let's tour PostHog Code!" lastSpeechBubble="You're ready to ship with agents!">
+<QuestLog firstSpeechBubble="Let's tour PostHog Desktop!" lastSpeechBubble="You're ready to ship with agents!">
 
 <QuestLogItem
 title="Start your first task"
@@ -19,14 +19,14 @@ subtitle="Required"
 icon="IconTerminal"
 >
 
-A **task** is the unit of work in PostHog Code. Type a prompt, choose where the agent should work, and send it off.
+A **task** is the unit of work in PostHog Desktop. Type a prompt, choose where the agent should work, and send it off.
 
 Tasks persist across restarts, can move between your computer and the cloud, and stay tied to a specific repository.
 
 <ProductScreenshot
 imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/x_0,y_0,w_1340,h_410,c_crop/Screenshot_2026_05_04_at_4_43_01_PM_eea6fe87a8.png"
 classes="rounded"
-alt="Starting a task in PostHog Code"
+alt="Starting a task in PostHog Desktop"
 />
 
 | Mode | Where it runs | Best for |
@@ -47,7 +47,7 @@ subtitle="Recommended"
 icon="IconSparkles"
 >
 
-PostHog Code can reason with product data while it works. As you write code or stage a diff, the [enricher](/docs/posthog-code/posthog-integration#enricher) detects PostHog SDK calls and pulls live data from your project.
+PostHog Desktop can reason with product data while it works. As you write code or stage a diff, the [enricher](/docs/posthog-code/posthog-integration#enricher) detects PostHog SDK calls and pulls live data from your project.
 
 That gives the agent context like flag rollouts, experiment status, event volume, and error frequency next to the code that emits them.
 
@@ -86,10 +86,10 @@ Every task has a built-in diff panel. Use it to read edits side by side, leave i
 <ProductScreenshot
 imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,x_112,y_75,w_iw_sub_224,h_ih_sub_222/Screenshot_2026_04_30_at_2_14_45_PM_aec0c02d2b.png"
 classes="rounded"
-alt="Diff panel in PostHog Code"
+alt="Diff panel in PostHog Desktop"
 />
 
-When you're happy, click **Create PR**. PostHog Code commits, pushes, generates a title and body that respect your repo's `PULL_REQUEST_TEMPLATE.md`, and opens the PR through the GitHub CLI.
+When you're happy, click **Create PR**. PostHog Desktop commits, pushes, generates a title and body that respect your repo's `PULL_REQUEST_TEMPLATE.md`, and opens the PR through the GitHub CLI.
 
 <OSButton variant="primary" asLink to="/docs/posthog-code/code-review">
   Learn about code review
@@ -133,7 +133,7 @@ classes="rounded"
 alt="Command Center showing multiple agent tasks in a grid"
 />
 
-When you're ready, hand the task back to local for review. PostHog Code brings over the changes, branch, and conversation history.
+When you're ready, hand the task back to local for review. PostHog Desktop brings over the changes, branch, and conversation history.
 
 <OSButton variant="primary" asLink to="/docs/posthog-code/cloud-runs">
   Learn about cloud runs
@@ -154,10 +154,10 @@ This is useful for fixes that come up while you're away from your computer or wh
 <ProductScreenshot
 imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_05_04_at_4_47_08_PM_b8ba794fdc.png"
 classes="rounded"
-alt="A PostHog Code task running in a Slack thread"
+alt="A PostHog Desktop task running in a Slack thread"
 />
 
-<OSButton variant="primary" asLink to="/docs/posthog-code/slack">
+<OSButton variant="primary" asLink to="/docs/slack">
   Learn about Slack
 </OSButton>
 
@@ -169,29 +169,29 @@ subtitle="Recommended"
 icon="IconInbox"
 >
 
-[Inbox](/docs/posthog-code/inbox) is the autopilot version of PostHog Code. Connect signal sources like Error Tracking, Support tickets, Session Replay, GitHub issues, or Linear issues.
+The [inbox](/docs/self-driving/inbox) is the autopilot version of PostHog Desktop. Connect signal sources like Error Tracking, Support tickets, Session Replay, GitHub issues, or Linear issues.
 
-PostHog Code researches each new signal, prioritizes it by user impact, and opens a PR when a code fix is possible. Your job is to review and merge.
+PostHog Desktop researches each new signal, prioritizes it by user impact, and opens a PR when a code fix is possible. Your job is to review and merge.
 
 <ProductScreenshot
 imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,x_112,y_75,w_iw_sub_224,h_ih_sub_222/Screenshot_2026_05_04_at_4_48_19_PM_9652a9fb7c.png"
 classes="rounded"
-alt="The PostHog Code Inbox with researched and actionable reports"
+alt="The PostHog Desktop Inbox with researched and actionable reports"
 />
 
-<OSButton variant="primary" asLink to="/docs/posthog-code/inbox">
+<OSButton variant="primary" asLink to="/docs/self-driving/inbox">
   Tour Inbox
 </OSButton>
 
 </QuestLogItem>
 
 <QuestLogItem
-title="Try PostHog Code"
+title="Try PostHog Desktop"
 subtitle="Next step"
 icon="IconDownload"
 >
 
-Ready to take it for a spin? Download PostHog Code and connect your first repo. PostHog Code will be available for download in Spring 2026. 
+Ready to take it for a spin? Download PostHog Desktop and connect your first repo. PostHog Desktop will be available for download in Spring 2026. 
 
 <div className="@container bg-blue/10 border border-blue rounded-md pb-8 pt-0 px-8 shadow-xl">
   <DownloadButton />

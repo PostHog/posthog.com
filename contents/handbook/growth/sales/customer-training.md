@@ -160,7 +160,7 @@ Don't demo any of these. Name them so the room knows what's available and that t
   - Understand who is visiting your site, where they're coming from, whether they're converting, and if they become active users
 - Surveys (product + marketing)
   - Collect qualitative feedback by triggering in-app surveys based on user actions
-- LLM Analytics (teams building AI features)
+- AI Observability (teams building AI features)
   - Understand how people are interacting with your LLM-based features
 - Error Tracking and Logs (engineering)
   - Capture errors as events so that you can see how exceptions are influencing user behavior
@@ -229,7 +229,7 @@ Start from a hypothesis, not a feature. Ask the room: "What's something you're d
 
 - Mention no-code web experiments for quick wins that don't need eng work.
 
-#### LLM Analytics (10 min)
+#### AI Observability (10 min)
 
 Big for any team building AI features. Clustering in particular can provide insights that are otherwise hard to come by.
 

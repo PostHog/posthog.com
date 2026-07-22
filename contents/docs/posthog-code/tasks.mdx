@@ -1,8 +1,8 @@
 ---
-title: PostHog Code tasks
+title: PostHog Desktop tasks
 ---
 
-A **task** is the unit of work in PostHog Code. Every time you ask the agent to fix a bug, add a feature, or investigate something, you're creating a task. Each task is tied to a specific repository and persists across restarts, handoffs between your computer and the cloud, and handoffs between people.
+A **task** is the unit of work in PostHog Desktop. Every time you ask the agent to fix a bug, add a feature, or investigate something, you're creating a task. Each task is tied to a specific repository and persists across restarts, handoffs between your computer and the cloud, and handoffs between people.
 
 ## Task modes
 
@@ -35,6 +35,30 @@ For setup details and configuration options, see [Worktrees](/docs/posthog-code/
 The agent runs in a sandbox PostHog spins up for the task. You can close the app, switch networks, or shut your computer, and the task keeps going. Reconnect when you're ready to take over locally or open a PR.
 
 See [Cloud runs](/docs/posthog-code/cloud-runs) for the full story, including how to move tasks between cloud and local.
+
+## Autonomy modes
+
+Separate from _where_ a task runs, each task has an autonomy mode that controls _how much_ the agent does on its own before checking in with you. Switch modes from the selector in the chat window, even partway through a task.
+
+| Mode | What the agent does |
+|---|---|
+| **Plan** | Investigates and asks questions first, then proposes a plan for you to approve before it changes any code |
+| **Default** | Makes changes, but pauses to ask before sensitive or destructive actions |
+| **Accept edits** | Applies file edits automatically without asking for each one |
+| **Auto** | Runs autonomously with minimal interruptions |
+
+New tasks start in Plan mode by default. You can change this in [settings](/docs/posthog-code/settings) to remember the last-used mode instead.
+
+### Plan mode
+
+In Plan mode the agent explores the problem and asks clarifying questions before writing any code. It surfaces options you can pick from, and if none of them fit you can type your own answer in the field. Once you approve the plan, it moves on to making the changes. It's the safest way to start anything non-trivial, since you align on the approach before the agent touches your code.
+
+## Queue and steer follow-ups
+
+You don't have to wait for the agent to finish before sending your next message. A toggle in the chat window controls what happens when you send a follow-up while the agent is still working:
+
+- **Queue** adds your message to the back of the line. The agent finishes what it's doing, then works through your queued follow-ups in order.
+- **Steer** interrupts the agent at its next turn and redirects it right away, instead of waiting for the whole task to finish.
 
 ## Next steps
 

@@ -19,7 +19,6 @@ swap:
     posthog cloud: PostHog Cloud
     posthog code: PostHog Code
     product analytics: Product Analytics
-    product tours: Product Tours
     revenue analytics: Revenue Analytics
     session replay: Session Replay
     surveys: Surveys
