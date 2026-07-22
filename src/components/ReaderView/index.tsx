@@ -44,6 +44,7 @@ import { Questions } from 'components/Squeak'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
 import CopyMarkdownActionsDropdown, { useMarkdownUrlExists } from 'components/MarkdownActionsDropdown'
 import CustomerMetadata from './CustomerMetadata'
+import WarehouseWizardHint from 'components/WarehouseWizardHint'
 import { getVideoClasses } from '../../constants'
 import AboutPostHog from 'components/AboutPostHog'
 
@@ -1375,7 +1376,7 @@ function ReaderViewContent({
 }: ReaderViewProps) {
     const { compact } = useApp()
     const { appWindow, activeInternalMenu } = useWindow()
-    const { hash } = useLocation()
+    const { hash, pathname } = useLocation()
     const contentRef = useRef<HTMLDivElement>(null)
     const articleColumnRef = useRef<HTMLDivElement>(null)
 
@@ -1594,6 +1595,25 @@ function ReaderViewContent({
                                             {title}
                                         </h1>
                                     )}
+                                    {/* Nudge to the setup wizard on the data-warehouse sources docs (root +
+                                        every child page). Templates that hide the ReaderView title and render
+                                        their own heading (e.g. DataWarehouseSource) add the hint themselves, so
+                                        the `!hideTitle` guard keeps this from double-rendering there. */}
+                                    {!hideTitle &&
+                                        (pathname === '/docs/data-warehouse/sources' ||
+                                            pathname?.startsWith('/docs/data-warehouse/sources/')) && (
+                                            <div
+                                                className={`my-4 transition-all ${
+                                                    fullWidthContent || body?.type !== 'mdx'
+                                                        ? 'max-w-full'
+                                                        : contentMaxWidthClass
+                                                        ? contentMaxWidthClass
+                                                        : 'mx-auto max-w-2xl'
+                                                }`}
+                                            >
+                                                <WarehouseWizardHint />
+                                            </div>
+                                        )}
                                     {(body?.date || body?.contributors || body?.tags) && (
                                         <div
                                             className={`flex items-center space-x-2 mb-4 flex-wrap transition-all ${
