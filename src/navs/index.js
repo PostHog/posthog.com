@@ -2571,10 +2571,6 @@ export const docsMenu = {
                         {
                             name: 'Unity',
                             url: '/docs/libraries/unity',
-                            badge: {
-                                title: 'Beta',
-                                className: '!bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50',
-                            },
                         },
                         {
                             name: 'C#/.NET',
@@ -4187,6 +4183,12 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
+                    name: 'Managing bot and AI traffic',
+                    url: '/docs/web-analytics/managing-bot-traffic',
+                    icon: 'IconShieldPeople',
+                    color: 'purple',
+                },
+                {
                     name: 'Path cleaning',
                     url: '/docs/web-analytics/path-cleaning',
                     icon: 'IconFilter',
@@ -5298,6 +5300,10 @@ export const docsMenu = {
                         {
                             name: 'iOS',
                             url: '/docs/error-tracking/upload-source-maps/ios',
+                        },
+                        {
+                            name: 'Rust',
+                            url: '/docs/error-tracking/upload-source-maps/rust',
                         },
                         {
                             name: 'Rollup',

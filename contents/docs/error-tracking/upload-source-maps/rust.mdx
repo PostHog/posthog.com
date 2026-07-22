@@ -1,0 +1,134 @@
+---
+title: Upload debug symbols for Rust
+showStepsToc: true
+---
+
+import CLIDownload from "../_snippets/cli/download.mdx"
+import CLIAuthenticate from "../_snippets/cli/authenticate.mdx"
+import StepVerifySymbolSetsUpload from "../_snippets/StepVerifySymbolSetsUpload"
+
+The [Rust SDK](/docs/error-tracking/installation/rust) resolves stack traces in-process from whatever debug info the running binary carries — which works well in development, but release builds omit that debug info by default. Uploading debug symbols gives you fully resolved production stack traces: PostHog symbolicates frames server-side from the exact build that crashed, resolves inlined frames, and can display the source code around each frame.
+
+<CalloutBox icon="IconInfo" title="Version requirements" type="action">
+
+- [posthog-rs 0.16.0](https://github.com/PostHog/posthog-rs/releases) or later, which records the instruction addresses server-side symbolication needs. We recommend the latest version.
+- [CLI 0.7.32](https://github.com/PostHog/posthog/releases/tag/posthog-cli%2Fv0.7.32) or later for Linux binaries. Uploading macOS `.dSYM` bundles with the same command needs [CLI 0.8.1](https://github.com/PostHog/posthog/releases/tag/posthog-cli%2Fv0.8.1) or later. As always, we recommend [keeping up with the latest CLI version](/docs/error-tracking/upload-source-maps/cli).
+
+</CalloutBox>
+
+<Steps>
+
+<Step title="Download CLI" badge="required">
+
+<CLIDownload />
+
+</Step>
+
+<Step title="Authenticate" badge="required">
+
+<CLIAuthenticate />
+
+</Step>
+
+<Step title="Keep debug info in release builds" badge="required">
+
+Cargo omits debug info from release builds by default, and there is nothing to upload without it. Enable it in your `Cargo.toml`:
+
+```toml
+[profile.release]
+debug = "line-tables-only"
+```
+
+`line-tables-only` is enough to resolve file names, line numbers, and inlined frames while keeping binaries small. Use `debug = "full"` if you want complete debug info.
+
+On macOS, also set `split-debuginfo = "packed"` in the same profile. Cargo's macOS default (`unpacked`) leaves debug info in intermediate object files instead of producing the `.dSYM` bundle the CLI uploads.
+
+Watch out for stripping: if your profile sets `strip` explicitly, set it to `"none"` — or strip only after the upload runs. Debug info split into separate files also works: the CLI picks up `objcopy --only-keep-debug` companion files alongside the binaries.
+
+</Step>
+
+<Step title="Check for a build ID" badge="required">
+
+PostHog matches stack frames to uploaded symbols by the binary's unique build ID: a GNU build ID on Linux, or the Mach-O UUID on macOS. macOS binaries always carry a UUID, so there is nothing to check there. Most Linux toolchains emit a GNU build ID by default — confirm yours does:
+
+```bash
+readelf -n target/release/my-app | grep "Build ID"
+```
+
+Replace `my-app` with your binary's name.
+
+If nothing shows up, tell the linker to add one in `.cargo/config.toml`, scoped to Linux builds (Apple's linker embeds a UUID on its own and rejects this flag):
+
+```toml
+[target.'cfg(target_os = "linux")']
+rustflags = ["-C", "link-arg=-Wl,--build-id=sha1"]
+```
+
+</Step>
+
+<Step title="Build and upload" badge="required">
+
+After your release build, point the CLI at the build output directory:
+
+```bash
+cargo build --release
+posthog-cli symbol-sets upload --directory target/release
+```
+
+The CLI scans the directory and uploads every executable and shared library that carries debug info and a build ID, skipping everything else. On macOS it also uploads `.dSYM` bundles (this needs `dwarfdump`, which ships with Xcode). Windows binaries (PDB debug info) are not supported yet. The upload is associated with a [release](/docs/error-tracking/releases) automatically when the build directory is inside a git checkout.
+
+Run this as part of the same pipeline that produces your production binary. Each build has its own build ID, so symbols must be re-uploaded for every build you deploy.
+
+</Step>
+
+<Step title="Optional: Include source code context" badge="optional">
+
+By default, only debug symbols are uploaded. To also display the source code around each frame in your stack traces, add `--include-source`:
+
+```bash
+posthog-cli symbol-sets upload --directory target/release --include-source
+```
+
+This bundles the project source files referenced by the debug info into the upload. It increases upload size, so only enable it if you want source context in the error tracking UI.
+
+</Step>
+
+<Step title="Optional: Upload from CI" badge="optional">
+
+In CI, authenticate with environment variables instead of `posthog-cli login`. For GitHub Actions:
+
+```yaml
+- name: Build release binary
+  run: cargo build --release
+
+- name: Upload debug symbols
+  run: posthog-cli symbol-sets upload --directory target/release
+  env:
+    POSTHOG_CLI_API_KEY: ${{ secrets.POSTHOG_CLI_API_KEY }}
+    POSTHOG_CLI_PROJECT_ID: ${{ secrets.POSTHOG_CLI_PROJECT_ID }}
+```
+
+Scope the credentials to the upload step only — the build itself doesn't need them.
+
+The CLI defaults to US Cloud. If you are on EU Cloud or self-hosted, also set `POSTHOG_CLI_HOST` (for example `https://eu.posthog.com`).
+
+If your binary is built inside a Dockerfile, run the upload in the build stage right after the build, and pass the credentials in as build secrets so they never reach the runtime image.
+
+</Step>
+
+<StepVerifySymbolSetsUpload symbolType="debug symbols" />
+
+<Step title="Test it end-to-end" badge="optional">
+
+Capture a test exception from the same release binary the symbols were uploaded for:
+
+```rust
+let error = std::io::Error::new(std::io::ErrorKind::Other, "This is a test exception from Rust");
+client.capture_exception(&error).await.unwrap();
+```
+
+Run the binary, then check the [error tracking issues view](https://app.posthog.com/error_tracking): the stack trace should resolve to your source files, including source context if you uploaded with `--include-source`. A rebuild changes the build ID, so if you rebuild, upload again before testing.
+
+</Step>
+
+</Steps>
