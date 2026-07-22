@@ -55,7 +55,7 @@ const FilterChip: React.FC<FilterChipProps> = ({ label, onRemove }) => (
     </span>
 )
 
-function SideProjectsPage() {
+function SideProjectsPage({ location }: { location: { search: string } }) {
     const {
         sideProjects: { nodes },
         profiles: { nodes: profileNodes },
@@ -78,23 +78,21 @@ function SideProjectsPage() {
     const [authorFilter, setAuthorFilter] = useState<string | null>(null)
     const [filtersExpanded, setFiltersExpanded] = useState(false)
 
-    // Read filters from URL on mount
+    // Sync filters with the URL on mount and on router navigation (e.g. back/forward,
+    // or clicking a link to /side-projects while already on a filtered view)
     useEffect(() => {
         if (typeof window !== 'undefined') {
             const params = new URLSearchParams(window.location.search)
             // Support both ?tag= and ?filter=tags&value= formats
             const tag = params.get('tag') || (params.get('filter') === 'tags' ? params.get('value') : null)
             const author = params.get('author')
-            if (tag) {
-                setTagFilter(tag)
-                setFiltersExpanded(true)
-            }
-            if (author) {
-                setAuthorFilter(author)
+            setTagFilter(tag)
+            setAuthorFilter(author)
+            if (tag || author) {
                 setFiltersExpanded(true)
             }
         }
-    }, [])
+    }, [location?.search])
 
     // Update URL when filters change
     const updateURL = (tag: string | null, author: string | null) => {
