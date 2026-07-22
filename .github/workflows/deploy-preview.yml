@@ -94,56 +94,7 @@ jobs:
                   restore-keys: |
                       gatsby-persistent-${{ hashFiles('pnpm-lock.yaml', 'patches/**') }}-
 
-            - name: Benchmark site builds
-              if: github.event.pull_request.number == 18661
-              shell: bash
-              run: |
-                  set -euo pipefail
-                  pnpm clean
-                  pnpm build
-
-                  durations=()
-                  for sample in 1 2 3 4 5; do
-                      echo "Starting measured build ${sample}/5"
-                      pnpm clean
-                      started_ns=$(date +%s%N)
-                      pnpm build
-                      finished_ns=$(date +%s%N)
-                      duration_ms=$(((finished_ns - started_ns) / 1000000))
-                      durations+=("${duration_ms}")
-                      echo "Sample ${sample}: ${duration_ms} ms"
-                  done
-
-                  node - "${durations[@]}" >> "$GITHUB_STEP_SUMMARY" <<'NODE'
-                  const durations = process.argv.slice(2).map(Number)
-                  const sorted = [...durations].sort((a, b) => a - b)
-                  const format = (milliseconds) => `${(milliseconds / 1000).toFixed(1)}s`
-
-                  console.log('## Gatsby persistent-cache benchmark')
-                  console.log('')
-                  console.log('One unreported warm-up preceded these five `pnpm clean && GATSBY_MINIMAL=true pnpm build` samples.')
-                  console.log('')
-                  console.log('| Sample | Duration |')
-                  console.log('| --- | ---: |')
-                  durations.forEach((duration, index) => console.log(`| ${index + 1} | ${format(duration)} |`))
-                  console.log('')
-                  console.log('| Min | Median | Max |')
-                  console.log('| ---: | ---: | ---: |')
-                  console.log(`| ${format(sorted[0])} | ${format(sorted[2])} | ${format(sorted[4])} |`)
-                  NODE
-              env:
-                  GATSBY_MINIMAL: 'true'
-                  # Emit the static/dynamic module graph so the eager-graph check below can
-                  # measure the app shell. Reuses this single PR build — no second build.
-                  EMIT_WEBPACK_STATS: 'true'
-                  CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
-                  CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
-                  # Authenticated GitHub search for self-driving PR sourcing (gatsby/sourceNodes.ts).
-                  # Not GITHUB_API_KEY, which would turn on the full GitHub sourcing pipeline.
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
             - name: Build site
-              if: github.event.pull_request.number != 18661
               run: pnpm build
               env:
                   GATSBY_MINIMAL: 'true'
