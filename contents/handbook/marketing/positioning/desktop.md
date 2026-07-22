@@ -45,40 +45,41 @@ AI-pilled software teams at engineering-led companies. Adoption starts bottom-up
 
 ## Messaging
 
-### Message 1: Real usage catches what review can't
+### Message 1: Ship like a team 10x your size
 
-**Problem:** Code review catches bugs in the code. It can't catch a change that works exactly as written but makes things worse for real users. That only shows up once real people use it in production.
+**Problem:** Midjourney hit $200M in revenue with 40 people. Coding agents make that kind of leverage possible, but only up to a point: one person can only track so many agents at once, and when everyone on the team runs their own separately, none of that work compounds.
 
-**Solution:** In PostHog Desktop, agent-shipped changes go out behind a feature flag before they reach everyone. When a change is worth measuring, it's checked against a metric you actually care about, so you find out whether it helped or hurt real users, not just whether it deployed. If the numbers move the right way, it stays. If they don't, the agent fixes it or rolls it back.
-
-**Supporting features:**
-- Feature flags wrap agent-shipped changes by default, before they reach everyone
-- Experiments measure the change against the metric that matters, not just "did it deploy"
-- Scouts watch your product on a schedule and open a PR when they find something worth fixing
-- Every fix gets checked against your real events, errors, and session replays, not a hunch
-
-### Message 2: Your product gets better while you're not looking
-
-**Problem:** Every team has a long tail of work that's real but not urgent. Papercuts compete for the same hours as the big bets, and the big bets usually win the argument.
-
-**Solution:** PostHog agents watch that long tail around the clock and turn what they find into shipped fixes. Triage doesn't need a human, so the boring stuff gets handled while you sleep, and the better your instrumentation, the sharper the tasks the agents pick up.
+**Solution:** Desktop puts a fleet of agents in one shared workspace, so a few people can track and steer all of it together. That's how a small team outships one 10x its size, without losing the attention to detail that speed usually costs.
 
 **Supporting features:**
-- Handles the long tail of polish (papercuts, small fixes, instrumentation, cleanup, docs, edge cases)
-- No prompt required: Signals and Scouts generate reports that turn into PRs
-- Frees your best people for the work that needs judgment (architecture, big bets, and the problems only a human notices out in the real world)
+- Command Center: run multiple agents at once, each on its own task, local, in a worktree, or in the cloud
+- Multi-model: pick Claude Code or Codex, plus the model and reasoning effort, per task
+- Channels: a shared space for a team's agent work, with memory that persists across sessions *(alpha)*
+- Canvases: generate a dashboard, report, or internal tool from your real data model *(alpha)*
 
-### Message 3: Humans and agents building together
+### Message 2: Agents check their own work
 
-**Problem:** Midjourney did $200M in revenue with 40 people. We'll see a lot more of that. Agents cracked the writing-code half. They didn't touch the managing-it-all half. More changes shipped means more surface for the same small team to review, measure, and catch when something goes sideways.
+**Problem:** Agents are shipping far more changes than your team used to. Code review can tell you the diff looks right, but not whether the change did something meaningful (and no one has time to set that up for every agent PR).
 
-**Solution:** That's the half Desktop is built for. A few people steering a fleet of agents from one shared workspace can outship a team 10x their size, and keep the attention to detail that kind of speed usually kills. It's founder mode that doesn't fall apart as you grow.
+**Solution:** In PostHog Desktop, agents don't just write the fix, they flag it and measure it too. When a change is worth verifying, it ships behind a feature flag and gets checked against a metric you care about before it rolls out any further.
 
 **Supporting features:**
-- Parallel agent orchestration, multi-model: run several agents at once, each on the model that fits the task
-- Channels: a shared space where your team's agent work lives, with memory that sticks around between sessions *(alpha)*
-- Canvases: ask for a dashboard, report, or internal tool and get it built on your real data model *(alpha)*
-- No markup: you pay the token costs, not a subscription stacked on top
+- Feature flags: agents wrap riskier changes in a flag before rolling them out
+- Experiments: agents scaffold an A/B test tied to a metric
+- Track events: agents instrument the events needed to measure whether a change worked
+- Track errors: agents capture exceptions and stack traces to catch regressions fast
+
+### Message 3: Your product gets better while you're not looking
+
+**Problem:** Every team has a backlog of small, real bugs that's been sitting for months. None of them are ever quite bad enough to bump the sprint, so they don't get fixed.
+
+**Solution:** PostHog agents work that backlog continuously, so it gets cleared without pulling anyone off what they're already doing. They watch for it, triage it, and ship the fix. No human has to notice the problem first.
+
+**Supporting features:**
+- Scouts run on a schedule and open a PR when they find something worth fixing, no prompt required
+- Signals draw from errors, support tickets, session replays, GitHub issues, Linear, and Zendesk
+- Inbox ranks incoming reports and PRs by importance and impact
+- Usage-based pricing: 100 credits = $1, no markup, with a $20/month free tier and a $50 default billing limit
 
 ## Battle cards
 
@@ -118,31 +119,23 @@ AI-pilled software teams at engineering-led companies. Adoption starts bottom-up
 
 **What they're really saying:** I live in Claude Code or Cursor. My workflow is settled.
 
-**Answer:** Fair, and you can. Our MCP is first-class, and for a lot of teams it's the main way they use PostHog. Inbox and signals live in the web app too, so you don't need Desktop to review work. Desktop is for a different job: running many agents at once, with your teammates, in one place.
+**Answer:** Our MCP is awesome, and for a lot of teams it's the main way they use PostHog. But a terminal only shows you one agent at a time, so if you're running more than a couple of tasks, or want your team to see what's in flight without a status update, MCP might limit you.
 
 ### "Why pay usage when my Anthropic subscription is subsidized?"
 
-**What they're really saying:** Inference feels free right now, and anything metered next to a flat, subsidized sub looks expensive, especially if the token budget or the procurement process is already tight.
+**What they're really saying:** Inference feels free right now, and anything metered next to a flat, subsidized sub looks expensive (especially if the token budget is tight or the procurement process is slow).
 
-**Answer:** A lot of the work doesn't need a frontier model. PostHog runs multiple models, including open-source ones that are getting good enough to handle plenty of tasks for a fraction of the price. You're not locked to one subscription that's subsidized today and will probably be repriced tomorrow. If budget's genuinely tight, start with one scout or signal source, cap the spend, and expand once it's paying for itself.
+**Answer:** A lot of the work you're doing doesn't need a frontier model. PostHog runs multiple models, including open-source ones that are getting good enough to handle plenty of tasks for a fraction of the price. You're not locked to one subscription that's subsidized today and will probably be repriced tomorrow. If budget's genuinely tight, start with one task or one repo connected, cap the spend, and expand once it's paying for itself.
 
-*When they push on bill predictability (a fair worry) point at billing limits and per-tool caps. Don't argue that usage-based pricing is painless; argue it's honest.*
+### "Why would I trust PostHog to ship code? You started as an analytics tool."
 
-### "Why would I trust PostHog to ship code? You're an analytics company."
-
-**Answer:** Fair question, but you're not betting on PostHog being a great engineer. The code is written by Claude Code and Codex, the same models you'd use anyway. What PostHog adds is the safety net around them: every change ships behind a flag, gets measured against real user behavior, and doesn't reach everyone until the numbers say it's safe. If something regresses, you kill it with a flag, no redeploy or revert. You still review the PRs and set the CI rules the agents follow. That's more scrutiny than most teams put on their hand-written code, and it's exactly how we ship PostHog itself.
+**Answer:** The code is written by the same models you'd use anyway. What PostHog adds is everything around it: error tracking to catch regressions, session replay to see exactly what happened, experiments to prove a change is a net positive, flags to control the rollout, plus the memory, context, and data agents need to build the next change with less prompting.
 
 ### "Our codebase is legacy, huge, or on a stack agents don't know well. Will this even work?"
 
-**What they're really saying:** I've seen agents choke on codebases like mine, and I don't want to find out the hard way.
+**What they're really saying:** I've seen agents choke on repos like mine.
 
-**Answer:** Fair, and it's not one-size-fits-all. Multi-model support means you can point the harder or more unusual parts of your codebase at whichever model handles them best. Start scouts where your data already shows a real problem, since that's usually the highest-value fix, not necessarily the gnarliest legacy code. And you choose which repos to connect, so anything too risky to hand an agent yet just doesn't get connected.
-
-### "We already have an established stack. Why consolidate?"
-
-**What they're really saying:** Switching cost is enormous, and "all-in-one" has historically meant "mediocre at everything."
-
-**Answer:** When an agent ships behind a flag, the flag system has to know which sessions saw it, replay has to know which errors those sessions hit, and the experiment has to tie it all back to the same user, automatically, in seconds, or the rollout stalls. Across separate vendors that's glue code you maintain forever, humans copy-pasting between tools, or context falling through the cracks. One system of record is what keeps the loop running at all.
+**Answer:** Honestly, worry less than you think. Models have gotten very good at working in legacy and unusual codebases, and if part of yours is still tougher, multi-model support means you can point it at whichever model handles it best. And worst case, it's just code: you review the PR before it merges, and if something still gets through, you flag it off or revert. Nothing here is one-way.
 
 ### "I don't trust agents to ship. We review every PR by hand."
 
@@ -150,41 +143,15 @@ AI-pilled software teams at engineering-led companies. Adoption starts bottom-up
 
 **Answer:** No problem, most teams are here. Our version of the agent loop is worth running because it doesn't rely on autonomy from humans (just autonomy from instruction). You set the bar for which repos to connect, PostHog agents follow your CI rules, and you cap the spend on PR creation. If review bandwidth is the real constraint, start with scouts and signals as alerts only, no PRs, until you're ready to act on them.
 
-### "It's still beta, and the multiplayer stuff sounds early."
+## How to sell it
 
-**What they're really saying:** I don't want to bet a workflow on something half-built.
+Find out which tool a team already has running (error tracking, replay, analytics), and pitch Desktop as the next step from there.
 
-**Answer:** It's a WIP, and we'd rather say so than oversell. The core coding primitives (tasks, the Command Center, multi-model support, MCP) are solid, and they're what we use to build PostHog Desktop itself. Channels, canvases, and channel memory are in alpha and changing shape weekly.
+Don't lead with "connect your repo and let agents ship code" as if everyone's ready for that. Most teams need to see real findings first, then ease into self-driving. For example:
 
-## How to sell it (the ramp)
+1. **They're already using at least one PostHog product** (ideally analytics, error tracking, or session replay) so there's real data to work from
+2. **Scouts start running** against that data and generating reports, still entirely in the web app, no Desktop involved yet
+3. **The coding part happens in Desktop**: once a report is worth acting on, that's the natural point to connect a repo and let an agent write the fix
+4. **Usage expands from there**: more repos, more agents, more of the team shipping through Desktop
+5. **The Slack app is often in the mix too**, surfacing the same findings and PRs wherever the team already works
 
-Don't lead with "self-driving products" as if everyone's ready for it. Most teams need to see concrete value first, then arrive at autonomy as their own idea.
-
-1. **SKU selling:** "Do you want error tracking?" (too basic, nobody's inspired)
-2. **Use-case selling:** "I see errors causing drop-off in your replays, here's how to surface them"
-3. **Value selling:** "Let's look at your conversion rate and a plan to raise it, with error tracking, replay, and A/B tests working as one thing"
-4. **Vision selling:** "Your product can be self-driving, come on this journey with us"
-
-It's a stepped process. You can't jump straight to "stop reviewing your code, AI-slop everything." A sensible ramp: turn on session replay, add Replay Vision, then scouts and signals as alerts only (no PRs yet). That shows value and makes continuing the customer's own idea, so the pain point bubbles up naturally: they'll want to connect their repo themselves.
-
-For a good customer, getting to a meaningful level of autonomy is probably a year-long process. Start where they are:
-
-- **More basic customers:** error tracking and session replay to bubble up basic issues
-- **More advanced customers:** scouts slurping data, surfacing PRs and recommendations to act on
-
-### The progression
-
-1. **Identify issues** (error tracking, session replay)
-2. **Surface useful patterns** (product analytics, web analytics, AI observability)
-3. **Recommend actions** (signals, scouts)
-4. **Validate and measure** (feature flags, experiments, PostHog AI to check whether a change worked)
-5. **Generate fixes** (self-driving via PostHog Desktop, Slack app, and MCP)
-6. **Automate more over time**
-
-Sell concrete value first (Replay Vision, error tracking), then surface self-driving as a signal of AI readiness. That order avoids churn risk from pushing a product that isn't a fit yet.
-
-## Selling to enterprise
-
-PostHog Desktop is usage-based with no per-seat license. You pay for what the agents consume, starting from a free monthly tier ($20). Multi-model support (including open source) means no lock-in to a single provider's roadmap or contract.
-
-The forward-looking pitch: the loop runs on product data, so the companies with the most data can put the most work on autopilot (and steer the rest from one place, as a team).
