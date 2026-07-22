@@ -23,7 +23,7 @@ const statusDotColor: Record<string, string> = {
 
 const sections = [
     {
-        title: 'Data platform',
+        title: 'Context warehouse',
         description:
             'Having all your product data in one place means you can make more informed decisions. Push all your data to PostHog, then send it anywhere else you need, too.',
         link: { label: 'Data stack README', url: '/data-stack' },

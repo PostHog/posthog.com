@@ -1,8 +1,7 @@
 import { MenuType, MenuItemType } from 'components/RadixUI/MenuBar'
 import React from 'react'
-import { docsMenu, handbookSidebar } from '../../navs'
+import { companyMenu, docsMenu, pricingMenu } from '../../navs'
 import * as Icons from '@posthog/icons'
-import { useSmallTeamsMenuItems } from './SmallTeamsMenuItems'
 import Logo from 'components/Logo'
 import { APP_COUNT } from '../../constants'
 import SearchableProductMenu from './SearchableProductMenu'
@@ -21,6 +20,7 @@ import { useAppSettings } from '../../context/App'
 import { IconChevronDown } from '@posthog/icons'
 import { useHedgehogMode } from 'components/HedgehogMode'
 import { navigate } from 'gatsby'
+import { useSmallTeamsMenuItems } from './SmallTeamsMenuItems'
 
 interface DocsMenuItem {
     name: string
@@ -32,6 +32,13 @@ interface DocsMenuItem {
 
 interface DocsMenu {
     children: DocsMenuItem[]
+}
+
+const getMenuIcon = (items: DocsMenuItem[], link: string, fallbackIcon: keyof typeof Icons, fallbackColor: string) => {
+    const sourceItem = items.find((item) => item.url === link)
+    const IconComponent = Icons[(sourceItem?.icon || fallbackIcon) as keyof typeof Icons]
+
+    return IconComponent ? <IconComponent className={`size-4 text-${sourceItem?.color || fallbackColor}`} /> : undefined
 }
 
 // Add mobile destinations for docs menu items based on the product data
@@ -176,6 +183,11 @@ const processMenuItemWithGrouping = (item: DocsMenuItem): any => {
     return null
 }
 
+// Prioritized products, ordered to line up with the surfaces under the Products menu
+// (PostHog Desktop, Research, Slack, MCP, Context Warehouse) mapped to their docs categories.
+// Everything else falls through to alphabetical order below.
+const DOCS_PRIORITY = ['PostHog Desktop', 'PostHog AI', 'Slack app', 'MCP Analytics', 'Data Warehouse']
+
 const getDocsMenuItems = () => {
     let items = groupBySectionDividers((docsMenu as DocsMenu).children)
 
@@ -186,6 +198,21 @@ const getDocsMenuItems = () => {
         return true
     })
 
+    // Keep only real product entries (drop separators) so we can present one clean list:
+    // prioritized products first, then everything else alphabetically.
+    items = items
+        .filter((item) => item.type !== 'separator' && item.label)
+        .sort((a, b) => {
+            const aPriority = DOCS_PRIORITY.indexOf(a.label)
+            const bPriority = DOCS_PRIORITY.indexOf(b.label)
+            if (aPriority !== -1 || bPriority !== -1) {
+                if (aPriority === -1) return 1
+                if (bPriority === -1) return -1
+                return aPriority - bPriority
+            }
+            return a.label.localeCompare(b.label, undefined, { sensitivity: 'base' })
+        })
+
     return items
 }
 
@@ -195,46 +222,13 @@ const mergedDocsMenu = (allProducts: any[]) => {
     return [...DocsItemsStart, ...itemsWithMobileDestinations, ...DocsItemsEnd]
 }
 
-// Process handbookSidebar into menu item structure
-const processHandbookSidebar = (items: any[], isRoot = true): any[] => {
-    return items
-        .filter((item, idx) => {
-            // Omit the first 'Handbook' item at the root level
-            if (isRoot && idx === 0 && item.name === 'Handbook') return false
-            return !!item.name
-        })
-        .map((item) => {
-            if (item.children) {
-                return {
-                    type: 'submenu' as const,
-                    label: item.name,
-                    ...(item.url ? { link: item.url } : {}),
-                    items: processHandbookSidebar(item.children, false),
-                }
-            }
-            // If no url and no children, mark as disabled (label-like)
-            if (!item.url && !item.children) {
-                return {
-                    type: 'item' as const,
-                    label: item.name,
-                    disabled: true,
-                }
-            }
-            return {
-                type: 'item' as const,
-                label: item.name,
-                ...(item.url ? { link: item.url } : {}),
-            }
-        })
-}
-
 // Build Products menu items
 const buildProductsMenuItems = (allProducts: any[]) => {
     const items: any[] = [
         {
             type: 'item',
-            label: 'PostHog Code',
-            link: '/code',
+            label: 'PostHog Desktop',
+            link: '/desktop',
             icon: <Icons.IconCoffee className="size-4 text-brown" />,
         },
         {
@@ -318,70 +312,19 @@ export function useMenuData(): MenuType[] {
                     type: 'item',
                     label: 'Plans & usage-based pricing',
                     link: '/pricing',
-                },
-                {
-                    type: 'item',
-                    label: 'Pricing calculator',
-                    link: '/pricing#calculator',
-                },
-                {
-                    type: 'item',
-                    label: 'Add-ons',
-                    link: '/pricing#addons',
-                },
-                {
-                    type: 'separator',
-                },
-                {
-                    type: 'item',
-                    label: 'PostHog for...',
-                    disabled: true,
-                },
-                {
-                    type: 'item',
-                    label: 'Founder stack',
-                    link: '/founder-stack',
-                },
-                {
-                    type: 'item',
-                    label: 'Startups',
-                    link: '/startups',
-                },
-                { type: 'separator' },
-                {
-                    type: 'item',
-                    label: 'Mildly interesting reads',
-                    disabled: true,
-                },
-                {
-                    type: 'item',
-                    label: 'Pricing philosophy',
-                    link: '/pricing#philosophy',
+                    icon: getMenuIcon(pricingMenu.children, '/pricing', 'IconReceipt', 'blue'),
                 },
                 {
                     type: 'item',
                     label: 'How we do "sales"',
                     link: '/sales',
+                    icon: getMenuIcon(pricingMenu.children, '/sales', 'IconPercentage', 'green'),
                 },
                 {
                     type: 'item',
-                    label: 'Side project insurance',
-                    link: '/side-project-insurance',
-                },
-                {
-                    type: 'item',
-                    label: "You'll hate PostHog if...",
-                    link: '/vibe-check',
-                },
-                {
-                    type: 'item',
-                    label: "Don't get discount bamboozled",
-                    link: '/discounts',
-                },
-                {
-                    type: 'item',
-                    label: 'Social validation for enterprise',
-                    link: '/enterprise',
+                    label: 'Startups',
+                    link: '/startups',
+                    icon: getMenuIcon(pricingMenu.children, '/startups', 'IconRocket', 'purple'),
                 },
                 { type: 'separator' },
                 {
@@ -393,11 +336,13 @@ export function useMenuData(): MenuType[] {
                     type: 'item',
                     label: 'Watch a demo',
                     link: '/demo',
+                    icon: getMenuIcon(pricingMenu.children, '/demo', 'IconPlay', 'blue'),
                 },
                 {
                     type: 'item',
                     label: 'Talk to a human',
                     link: '/talk-to-a-human',
+                    icon: getMenuIcon(pricingMenu.children, '/talk-to-a-human', 'IconHeadset', 'purple'),
                 },
             ],
         },
@@ -410,9 +355,15 @@ export function useMenuData(): MenuType[] {
             items: [
                 {
                     type: 'item',
-                    label: 'PostHog newspaper',
-                    link: '/community',
+                    label: 'Newsletter',
+                    link: '/newsletter',
                     icon: <Icons.IconNewspaper className="size-4 text-orange" />,
+                },
+                {
+                    type: 'item',
+                    label: 'Blog',
+                    link: '/blog',
+                    icon: <Icons.IconPencil className="size-4 text-yellow" />,
                 },
                 {
                     type: 'item' as const,
@@ -444,39 +395,6 @@ export function useMenuData(): MenuType[] {
                     link: '/places',
                     icon: <Icons.IconMap className="size-4 text-red" />,
                 },
-                {
-                    type: 'separator',
-                },
-                {
-                    type: 'item',
-                    label: 'Content',
-                    disabled: true,
-                },
-                {
-                    type: 'item',
-                    label: 'Newsletter',
-                    link: '/newsletter',
-                },
-                {
-                    type: 'item',
-                    label: 'Blog',
-                    link: '/blog',
-                },
-                {
-                    type: 'item',
-                    label: 'Product Engineer Handbook',
-                    link: '/product-engineer',
-                },
-                {
-                    type: 'item',
-                    label: 'Product engineers hub',
-                    link: '/product-engineers',
-                },
-                {
-                    type: 'item',
-                    label: 'Founders hub',
-                    link: '/founders',
-                },
             ],
         },
         {
@@ -486,43 +404,43 @@ export function useMenuData(): MenuType[] {
                     type: 'item',
                     label: 'About',
                     link: '/about',
+                    icon: getMenuIcon(companyMenu.children, '/about', 'IconLogomark', 'gray'),
                 },
                 {
                     type: 'item',
                     label: 'Customers',
                     link: '/customers',
+                    icon: getMenuIcon(companyMenu.children, '/customers', 'IconPerson', 'yellow'),
                 },
                 {
                     type: 'item',
-                    label: 'Blog',
-                    link: '/blog',
-                },
-                {
-                    type: 'submenu',
                     label: 'Handbook',
                     link: '/handbook',
-                    items: processHandbookSidebar(handbookSidebar),
-                    mobileDestination: '/handbook',
+                    icon: getMenuIcon(companyMenu.children, '/handbook', 'IconBook', 'seagreen'),
                 },
                 {
                     type: 'item',
                     label: 'Roadmap',
                     link: '/roadmap',
+                    icon: getMenuIcon(companyMenu.children, '/roadmap', 'IconMap', 'orange'),
                 },
                 {
                     type: 'item',
                     label: 'WIP',
                     link: '/wip',
+                    icon: getMenuIcon(companyMenu.children, '/wip', 'IconWrench', 'green'),
                 },
                 {
                     type: 'item',
                     label: 'Changelog',
                     link: '/changelog',
+                    icon: getMenuIcon(companyMenu.children, '/changelog', 'IconCalendar', 'red'),
                 },
                 {
                     type: 'item',
                     label: 'Media',
                     link: '/media',
+                    icon: getMenuIcon(companyMenu.children, '/media', 'IconNewspaper', 'salmon'),
                 },
                 {
                     type: 'separator',
@@ -531,21 +449,26 @@ export function useMenuData(): MenuType[] {
                     type: 'item',
                     label: 'People',
                     link: '/people',
+                    icon: getMenuIcon(companyMenu.children, '/people', 'IconPeople', 'blue'),
                 },
                 {
                     type: 'submenu',
                     label: 'Small teams',
+                    link: '/small-teams',
                     items: smallTeamsMenuItems,
+                    icon: getMenuIcon(companyMenu.children, '/small-teams', 'IconShieldPeople', 'teal'),
                 },
                 {
                     type: 'item',
                     label: 'Careers',
                     link: '/careers',
+                    icon: getMenuIcon(companyMenu.children, '/careers', 'IconLaptop', 'purple'),
                 },
                 {
                     type: 'item',
                     label: 'Partnerships',
                     link: '/partnerships',
+                    icon: getMenuIcon(companyMenu.children, '/partnerships', 'IconPuzzle', 'lilac'),
                 },
                 {
                     type: 'separator',
@@ -553,6 +476,7 @@ export function useMenuData(): MenuType[] {
                 {
                     type: 'submenu',
                     label: 'Like and subscribe',
+                    icon: <Icons.IconMegaphone className="size-4 text-orange" />,
                     mobileDestination: false, // Omit from mobile menu
                     items: [
                         {
@@ -931,18 +855,6 @@ export const DocsItemsEnd = [
         link: '/tutorials',
         icon: <Icons.IconBook className="size-4 text-purple" />,
     },
-    {
-        type: 'item' as const,
-        label: 'Dashboard templates',
-        link: '/templates',
-        icon: <Icons.IconDashboard className="size-4 text-blue" />,
-    },
-    {
-        type: 'item' as const,
-        label: 'Tracks',
-        link: '/tracks',
-        icon: <Icons.IconGraduationCap className="size-4 text-black" />,
-    },
 ]
 
 import type { AppIconName } from 'components/OSIcons/AppIcon'
@@ -1033,11 +945,11 @@ export function useMenuSelectOptions() {
     // Build the select groups
     const selectGroups = [
         {
-            label: 'Product OS',
+            label: 'Context warehouse',
             items: [
                 {
                     value: 'products',
-                    label: 'Product OS',
+                    label: 'Context warehouse',
                     icon: <Icons.IconApps className="size-4 text-red" />,
                 },
             ],
@@ -1046,9 +958,7 @@ export function useMenuSelectOptions() {
             label: 'Pricing',
             items: [
                 { value: 'pricing', label: 'Plans & usage-based pricing' },
-                { value: 'pricing#calculator', label: 'Pricing calculator' },
-                { value: 'pricing#addons', label: 'Add-ons' },
-                { value: 'founder-stack', label: 'Founder stack' },
+                { value: 'sales', label: 'How we do "sales"' },
                 { value: 'startups', label: 'Startups' },
             ],
         },
@@ -1058,11 +968,7 @@ export function useMenuSelectOptions() {
         },
         {
             label: 'Library',
-            items: [
-                { value: 'blog', label: 'Blog' },
-                { value: 'product-engineers', label: 'Product engineers hub' },
-                { value: 'founders', label: 'Founders hub' },
-            ],
+            items: [{ value: 'blog', label: 'Blog' }],
         },
         {
             label: 'Company',

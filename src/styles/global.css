@@ -14,6 +14,37 @@
     .prose {
         @apply max-w-none;
 
+        /* Chrome misplaces collapsed row borders when rows have fractional
+           heights (e.g. wrapped inline-block code pills), drawing dividers
+           through cell text. Typography puts borders on tr/thead, which only
+           paint in collapse mode — so switch to per-cell borders, which
+           don't share a painted grid and can't drift. */
+        table {
+            border-collapse: separate;
+            border-spacing: 0;
+
+            /* Typography baseline-aligns cells; a tall wrapped inline-block
+               (multi-line code pill) shifts the shared baseline and Chrome's
+               row height disagrees with it at some display scales, so text
+               crosses row borders. Top alignment removes cross-cell coupling. */
+            td,
+            th {
+                vertical-align: top;
+            }
+
+            thead th {
+                @apply border-b border-primary;
+            }
+
+            tbody tr {
+                border-bottom-width: 0;
+            }
+
+            tbody tr:not(:last-child) td {
+                @apply border-b border-primary;
+            }
+        }
+
         code {
             @apply before:hidden after:hidden; /* hide prose ticks */
         }
@@ -559,7 +590,12 @@ hr {
     }
 }
 
-::-webkit-scrollbar {
+*:not(
+        [data-app='AppWindow'],
+        [data-app='AppWindow'] *,
+        [data-menu-container],
+        [data-menu-container] *
+    )::-webkit-scrollbar {
     @apply h-2.5 w-2.5;
 }
 
@@ -575,14 +611,81 @@ hr {
     }
 }
 
-/* App window scroll viewports — native scrolling with a thicker, themed thumb
-   and no track channel (replaces Radix ScrollArea's JS-driven scrollbar). */
-.app-scroll-viewport {
-    scrollbar-width: thin;
+/* App window + taskbar menu scrollbars — leave rail sizing to the browser so
+   overlay scrollbars can follow the OS visibility preference, while visually
+   floating the thumb clear of rounded corners. MenuBar portals into
+   [data-menu-container] (taskbar), which sits outside AppWindow. */
+
+[data-app='AppWindow'] *::-webkit-scrollbar-track,
+[data-menu-container] *::-webkit-scrollbar-track {
+    @apply bg-transparent shadow-none;
 }
 
-.app-scroll-viewport::-webkit-scrollbar-track {
-    @apply bg-transparent shadow-none;
+[data-app='AppWindow'] *::-webkit-scrollbar-track:vertical,
+[data-menu-container] *::-webkit-scrollbar-track:vertical {
+    margin-block: 6px 6px;
+}
+
+/* Title-bar clearance — AppWindow chrome only, not taskbar menus. */
+[data-app='AppWindow']
+    .app-scroll-viewport:not(.app-scroll-viewport .app-scroll-viewport)::-webkit-scrollbar-track:vertical {
+    margin-block-start: 32px;
+}
+
+[data-app='AppWindow'] *::-webkit-scrollbar-track:horizontal,
+[data-menu-container] *::-webkit-scrollbar-track:horizontal {
+    margin-inline: 6px;
+}
+
+[data-app='AppWindow'] *::-webkit-scrollbar-thumb,
+[data-menu-container] *::-webkit-scrollbar-thumb {
+    background-color: rgb(var(--text-primary) / 0.28);
+    background-clip: padding-box;
+    border: 2px solid transparent;
+    border-radius: 9999px;
+}
+
+[data-app='AppWindow'] *::-webkit-scrollbar-thumb:hover,
+[data-menu-container] *::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(var(--text-primary) / 0.4);
+}
+
+[data-app='AppWindow'] *::-webkit-scrollbar-thumb:active,
+[data-menu-container] *::-webkit-scrollbar-thumb:active {
+    background-color: rgb(var(--text-primary) / 0.5);
+}
+
+[data-app='AppWindow'] *::-webkit-scrollbar-corner,
+[data-menu-container] *::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+/* Firefox exposes color and width, but not the detailed WebKit geometry above. */
+@supports (-moz-appearance: none) {
+    [data-app='AppWindow'] *,
+    [data-menu-container] * {
+        scrollbar-color: rgb(var(--text-primary) / 0.28) transparent;
+        scrollbar-width: thin;
+    }
+}
+
+@media (forced-colors: active) {
+    [data-app='AppWindow'] *,
+    [data-menu-container] * {
+        scrollbar-color: auto;
+        scrollbar-width: auto;
+    }
+
+    [data-app='AppWindow'] *::-webkit-scrollbar,
+    [data-app='AppWindow'] *::-webkit-scrollbar-track,
+    [data-app='AppWindow'] *::-webkit-scrollbar-thumb,
+    [data-app='AppWindow'] *::-webkit-scrollbar-corner,
+    [data-menu-container] *::-webkit-scrollbar,
+    [data-menu-container] *::-webkit-scrollbar-track,
+    [data-menu-container] *::-webkit-scrollbar-thumb,
+    [data-menu-container] *::-webkit-scrollbar-corner {
+        all: revert;
+    }
 }
 
 /* links and text */
@@ -750,12 +853,21 @@ fieldset {
         @apply rounded w-full;
     }
 
+    table {
+        /* Chrome misplaces collapsed row borders when rows have fractional
+           heights (e.g. wrapped inline-block code pills), drawing dividers
+           through cell text. Per-cell borders don't share a painted grid,
+           so they can't drift. */
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
     thead {
         @apply rounded-sm bg-accent;
         text-align: left;
 
         th {
-            @apply opacity-75 text-sm;
+            @apply opacity-75 text-sm border-b border-primary;
         }
     }
 
@@ -2725,14 +2837,17 @@ article.reader-view-content-container:has(.quest-sidebar) {
     }
 
     .quest-details {
-        width: 66.66%;
+        /* Subtract the flex gap so details + gap + sidebar never exceed the container */
+        width: calc(66.66% - 2rem);
         flex-shrink: 0;
     }
 
     .quest-sidebar {
-        max-width: 30%;
-        flex-shrink: 0;
+        flex: 1 1 0%;
+        min-width: 0;
         padding-bottom: 1rem;
+        /* Inset from the window edge so tiles and their corner-bracket decorations never clip */
+        padding-right: 0.75rem;
     }
 
     .quest-desktop-nav {

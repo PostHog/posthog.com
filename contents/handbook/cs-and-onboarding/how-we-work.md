@@ -92,9 +92,16 @@ Most of our customers use Slack, and it's a great way for us to be responsive to
 
 When you've created the channel you should also add SupportHog, our own tool that syncs Slack conversations with PostHog so that our Support and Engineering teams can work on customer issues in a familiar context. Follow the [shared Slack channel setup steps](/handbook/growth/sales/slack-channels#setting-up-a-shared-slack-channel-via-slack-connect) to invite SupportHog and configure the channel.
 
-Once it's in the channel, you can add the :ticket: emoji to a Slack thread — or mention `@SupportHog` — to create a new ticket in Zendesk.  Customers can also do this.
+Once it's in the channel, you can add the :ticket: emoji to a Slack thread — or mention `@SupportHog` — to create a new ticket in [PostHog Support](/handbook/support/posthog-support).  Customers can also do this.
 
 > It's your job to ensure your customer issues are resolved, make sure you follow up with Support and Engineering if you feel like the issue isn't getting the right level of attention.
+
+## Extended Time Off
+During extended periods away from work (generally more than two weeks) it's important that we maintain customer relationships - we don't want to leave emails or Slack messages unanswered. For planned time off, it's recommended that you make a list of your accounts, then add an appropriate colleague to the Slack channel. Try and balance the workload, but our policy of working transparently (eg. ensuring conversations on Slack don't happen in DMs) makes it easier for others to dip in seamlessly.
+
+The expectation is that this temporary CSM will ensure your customers aren't completely ignored. This may mean answering questions themselves or opening support tickets on a customer's behalf, but not attend routine meetings (eg. monthly check-ins) or pro-active work. For standing meetings in your absence customers should be notified that the meeting is cancelled but any questions can be asked through normal channels.
+
+For longer periods away, Dana may look to reassign some or all of your accounts.
 
 ## Tools we use
 **Gmail**

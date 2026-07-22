@@ -84,6 +84,50 @@
             "destination": "/handbook/:path*.md"
         },
         {
+            "source": "/blog/:path*/",
+            "has": [
+                {
+                    "type": "header",
+                    "key": "accept",
+                    "value": "(?:.*text/markdown.*)"
+                }
+            ],
+            "destination": "/blog/:path*.md"
+        },
+        {
+            "source": "/blog/:path*",
+            "has": [
+                {
+                    "type": "header",
+                    "key": "accept",
+                    "value": "(?:.*text/markdown.*)"
+                }
+            ],
+            "destination": "/blog/:path*.md"
+        },
+        {
+            "source": "/newsletter/:path*/",
+            "has": [
+                {
+                    "type": "header",
+                    "key": "accept",
+                    "value": "(?:.*text/markdown.*)"
+                }
+            ],
+            "destination": "/newsletter/:path*.md"
+        },
+        {
+            "source": "/newsletter/:path*",
+            "has": [
+                {
+                    "type": "header",
+                    "key": "accept",
+                    "value": "(?:.*text/markdown.*)"
+                }
+            ],
+            "destination": "/newsletter/:path*.md"
+        },
+        {
             "source": "/community/profiles/:path*",
             "destination": "/community/profiles/[id]/index.html"
         },
@@ -106,7 +150,7 @@
     ],
     "redirects": [
         { "source": "/papers", "destination": "/research#papers" },
-        { "source": "/desktop", "destination": "/code" },
+        { "source": "/code", "destination": "/desktop" },
         { "source": "/teams/logs", "destination": "/teams/apm" },
         { "source": "/teams/query-performance", "destination": "/teams/analytics-platform" },
         {
@@ -128,8 +172,8 @@
         },
         { "source": "/docs/site-apps", "destination": "/docs/js-snippets" },
         { "source": "/docs/site-apps/:path*", "destination": "/docs/js-snippets/:path*" },
-        { "source": "/code/download", "destination": "/code#download" },
-        { "source": "/code/download/", "destination": "/code#download" },
+        { "source": "/code/download", "destination": "/desktop#download" },
+        { "source": "/code/download/", "destination": "/desktop#download" },
         {
             "source": "/slack-app",
             "destination": "/slack"
@@ -1966,6 +2010,11 @@
         { "source": "/manual/sso", "destination": "/docs/settings/sso" },
         { "source": "/manual/support", "destination": "/docs/support-options" },
         { "source": "/docs/support/zendesk-import", "destination": "/docs/support/imports/zendesk", "statusCode": 301 },
+        {
+            "source": "/docs/support/self-driving",
+            "destination": "/docs/support#how-support-works-with-self-driving",
+            "statusCode": 301
+        },
         { "source": "/manual/glossary", "destination": "/docs/glossary" },
         { "source": "/docs/integrate/browser-extension", "destination": "/docs/advanced/browser-extension" },
         { "source": "/docs/integrate/cdp", "destination": "/docs/advanced/cdp" },
@@ -4729,7 +4778,15 @@
         },
         {
             "source": "/teams/twig",
-            "destination": "/teams/posthog-code"
+            "destination": "/teams/posthog-desktop"
+        },
+        {
+            "source": "/teams/posthog-code",
+            "destination": "/teams/posthog-desktop"
+        },
+        {
+            "source": "/teams/posthog-code/:path*",
+            "destination": "/teams/posthog-desktop/:path*"
         },
         {
             "source": "/docs/max-ai",

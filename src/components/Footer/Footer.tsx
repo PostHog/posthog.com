@@ -48,7 +48,7 @@ const linklist: IProps[] = [
                 url: '/surveys',
             },
             {
-                title: 'Product OS',
+                title: 'Context warehouse',
                 url: '/product-os',
             },
             {

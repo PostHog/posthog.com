@@ -45,20 +45,20 @@ export function CopyableCommand({
     return (
         <div
             className={cn(
-                '@container group flex items-start gap-2 bg-primary border border-primary rounded px-2 py-1.5',
+                'group flex items-start gap-2 bg-primary border border-primary rounded px-2 py-1.5',
                 className
             )}
         >
             <pre
                 className={cn(
                     'flex-1 min-w-0 m-0 p-0 bg-transparent text-[13px] leading-[1.45] font-mono text-primary',
+                    // Single-line commands scroll horizontally (no wrap) with a hidden scrollbar and a
+                    // right-edge fade so long commands don't run into the copy button. The fade only
+                    // visually bites when the text actually overflows (short commands end before it).
                     // Multiline snippets (e.g. JSON MCP configs) keep wrapping so newlines aren't collapsed.
-                    // Single-line commands wrap on a narrow box so the tail is never clipped; once the box
-                    // is wide enough (@sm), they switch to a single scrolling line with a hidden scrollbar
-                    // and a right-edge fade so long commands don't run into the copy button.
                     isMultiline
                         ? 'whitespace-pre-wrap break-all'
-                        : 'whitespace-pre-wrap break-words @sm:whitespace-nowrap @sm:break-normal @sm:overflow-x-auto @sm:[scrollbar-width:none] @sm:[&::-webkit-scrollbar]:hidden @sm:[mask-image:linear-gradient(to_right,#000_calc(100%-2rem),transparent)] @sm:[-webkit-mask-image:linear-gradient(to_right,#000_calc(100%-2rem),transparent)]'
+                        : 'overflow-x-auto whitespace-nowrap [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [mask-image:linear-gradient(to_right,#000_calc(100%-2rem),transparent)] [-webkit-mask-image:linear-gradient(to_right,#000_calc(100%-2rem),transparent)]'
                 )}
             >
                 <code className={cn('!bg-transparent !p-0 !border-0', animate && 'text-gradient-wizard')}>

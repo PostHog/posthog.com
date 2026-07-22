@@ -6,11 +6,11 @@ showTitle: true
 
 PostHog Support can import historical ticket data from other help desks into the [unified inbox](/docs/support/inbox). Use this when migrating to PostHog and you want agents to keep full ticket context in one place.
 
-Imports are a **one-time backfill**, not a live integration. Imported tickets do not sync with the source system after the import completes.
+Imports are a one-time backfill, not a live integration. Imported tickets do not sync with the source system after the import completes.
 
 ## Where to find it
 
-Go to **Project settings → Support → Imports**.
+Go to **Project settings** > **Support** > **Imports**.
 
 Only organization admins can start or monitor an import.
 
@@ -31,20 +31,20 @@ Without a default inbox, tickets with unmatched recipients may be imported witho
 | ------ | ------ | ----- |
 | Zendesk Support | Beta | [Import from Zendesk](/docs/support/imports/zendesk) |
 
-More sources will be added over time. Each source has its own credentials, field mapping, and limitations — see the source-specific guide for details.
+More sources will be added over time. Each source has its own credentials, field mapping, and limitations – see the source-specific guide for details.
 
 ## How imports work
 
 Regardless of source, historical imports share the same behavior:
 
-- **Silent import**: imported tickets do **not** trigger Support [workflows](/docs/support/workflows), analytics events, or outbound replies (email, Slack, etc.)
-- **Unified inbox**: imported tickets appear alongside native tickets. Agents can search, triage, and reply where an email channel is configured
-- **Unread badges**: only **new** and **open** imported tickets get unread counts
-- **Re-running**: safe to run again. Already-imported tickets are skipped (matched by source ticket ID). Re-running with a default inbox can backfill email channels on tickets that had none
-- **Concurrency**: only one import per project at a time
+- **Silent import** – imported tickets do not trigger Support [Workflows](/docs/support/workflows), analytics events, or outbound replies (email, Slack, etc.)
+- **Unified inbox** – imported tickets appear alongside native tickets. Agents can search, triage, and reply where an email channel is configured
+- **Unread badges** – only **new** and **open** imported tickets get unread counts
+- **Re-running** – safe to run again. Already-imported tickets are skipped (matched by source ticket ID). Re-running with a default inbox can backfill email channels on tickets that had none
+- **Concurrency** – only one import per project at a time
 
 The import page shows live progress. When complete, you will see counts for imported, skipped, and failed tickets.
 
 ## What imports are not
 
-Historical imports are different from live [channel integrations](/docs/support/slack) (Slack, GitHub, email) and [data warehouse sources](/docs/cdp/sources/zendesk) (analytics and querying, not the Support inbox). For ongoing ticket flow after migration, use a channel integration or a source-specific two-way sync — not a historical import.
+Historical imports are different from live [channel integrations](/docs/support/slack) (Slack, GitHub, email) and [data warehouse sources](/docs/cdp/sources/zendesk) (analytics and querying, not the Support inbox). For ongoing ticket flow after migration, use a channel integration or a source-specific two-way sync – not a historical import.

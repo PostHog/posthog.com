@@ -7,7 +7,7 @@ export default function Start(): JSX.Element {
         <>
             <SEO
                 title="How to get started"
-                description="The fastest ways to get started with PostHog: run the Wizard, add the MCP to your AI editor, or try PostHog Code."
+                description="The fastest ways to get started with PostHog: run the Wizard, add the MCP to your AI editor, or try PostHog Desktop."
                 image="/images/og/default.png"
             />
             <WhyPostHogViewer>
@@ -31,9 +31,9 @@ export default function Start(): JSX.Element {
                     build dashboards, and ask questions about your data, all without leaving your editor.
                 </p>
 
-                <h2>PostHog Code</h2>
+                <h2>PostHog Desktop</h2>
                 <p>
-                    PostHog Code is our AI code editor (available on desktop and soon on the web). It has everything
+                    PostHog Desktop is our AI code editor (available on desktop and soon on the web). It has everything
                     above, plus features you can't get anywhere else – like Signals, which monitors logs, errors, and
                     session recordings to find patterns and ships PRs to fix issues automatically.
                 </p>

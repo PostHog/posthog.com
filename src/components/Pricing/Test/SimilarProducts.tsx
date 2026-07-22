@@ -55,27 +55,6 @@ const comparison = [
         },
     },
     {
-        name: 'Heap',
-        logo: (
-            <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/icon_heep_7d9bb0f55a.png"
-                width={16}
-                placeholder="blurred"
-                alt="Heap"
-            />
-        ),
-        products: {
-            'Product analytics': true,
-            'Web analytics': false,
-            'AI Observability': false,
-            'Session replay': true,
-            'Feature flags': false,
-            Experiments: false,
-            Surveys: false,
-            'Data warehouse': false,
-        },
-    },
-    {
         name: 'Pendo',
         logo: (
             <CloudinaryImage
@@ -147,7 +126,7 @@ export const SimilarProducts = () => {
             </SectionHeader>
             <ScrollArea className="-mx-4">
                 <div className="my-4 px-4">
-                    <div className="grid grid-cols-[minmax(150px,1fr)_repeat(5,minmax(105px,1fr))_minmax(160px,1fr)]">
+                    <div className="grid grid-cols-[minmax(150px,1fr)_repeat(4,minmax(105px,1fr))_minmax(160px,1fr)]">
                         <div className="col-span-1 pr-4"></div>
                         {comparison.map((company) => (
                             <div
@@ -163,7 +142,7 @@ export const SimilarProducts = () => {
                             </div>
                         ))}
                     </div>
-                    <div className="grid grid-cols-[minmax(150px,1fr)_repeat(5,minmax(105px,1fr))_minmax(160px,1fr)] divide-y divide-primary">
+                    <div className="grid grid-cols-[minmax(150px,1fr)_repeat(4,minmax(105px,1fr))_minmax(160px,1fr)] divide-y divide-primary">
                         {Object.keys(comparison[0].products).map((product) => (
                             <React.Fragment key={product}>
                                 <div className="col-span-1 flex items-start gap-2 py-2 pl-2 pr-4 first:border-t border-primary">
@@ -174,7 +153,7 @@ export const SimilarProducts = () => {
                                         key={`${company.name}-${product}`}
                                         className={`py-2 px-4 text-center ${
                                             company.name === 'PostHog'
-                                                ? 'bg-white border-x-2 !border-x-green dark:bg-green/15 last:!border-b-2 last:!border-b-green last:rounded-b-sm last:pb-4 last:px-2'
+                                                ? 'bg-accent border-x-2 !border-x-green dark:bg-green/15 last:!border-b-2 last:!border-b-green last:rounded-b-sm last:pb-4 last:px-2'
                                                 : ''
                                         }`}
                                     >

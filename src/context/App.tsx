@@ -11,6 +11,7 @@ import React, {
 } from 'react'
 import { AppWindow } from './Window'
 import { navigate } from 'gatsby'
+import { isSafeInternalPath } from 'lib/utils'
 import SignIn from 'components/Squeak/components/Classic/SignIn'
 import Register from 'components/Squeak/components/Classic/Register'
 import ForgotPassword from 'components/Squeak/components/Classic/ForgotPassword'
@@ -356,7 +357,7 @@ export const Context = createContext<AppContextType>({
         cursor: 'default',
         wallpaper: 'keyboard-garden',
         screensaverDisabled: true,
-        heaterMode: false,
+        reduceTransparency: false,
         clickBehavior: 'double',
         performanceBoost: false,
     },
@@ -443,7 +444,7 @@ export const SettingsContext = createContext<AppSettingsContextType>({
         cursor: 'default',
         wallpaper: 'keyboard-garden',
         screensaverDisabled: true,
-        heaterMode: false,
+        reduceTransparency: false,
         clickBehavior: 'double',
         performanceBoost: false,
     },
@@ -497,7 +498,6 @@ export interface AppSetting {
     closeOnEscape?: boolean
     toolbar?: boolean
     hideTitle?: boolean
-    mesh?: 'green' | 'red' | 'yellow' | 'blue' | 'purple'
 }
 
 export interface AppSettings {
@@ -611,9 +611,6 @@ const appSettings: AppSettings = {
             },
         },
     },
-    '/session-replay': {
-        mesh: 'yellow',
-    },
     '/wizard': {
         size: {
             min: {
@@ -662,7 +659,7 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
-    '/code': {
+    '/desktop': {
         size: {
             min: {
                 width: 700,
@@ -903,6 +900,23 @@ const appSettings: AppSettings = {
                 height: 750,
             },
             fixed: true,
+        },
+    },
+    '/connect/posthog/redirect': {
+        size: {
+            min: {
+                width: 425,
+                height: 250,
+            },
+            max: {
+                width: 425,
+                height: 280,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
         },
     },
     '/display-options': {
@@ -1597,7 +1611,7 @@ export interface SiteSettings {
     cursor: 'default' | 'xl' | 'james'
     wallpaper: 'keyboard-garden' | 'hogzilla' | 'startup-monopoly' | 'office-party'
     screensaverDisabled?: boolean
-    heaterMode?: boolean
+    reduceTransparency?: boolean
     clickBehavior?: 'single' | 'double'
     performanceBoost?: boolean
 }
@@ -1606,8 +1620,8 @@ const isLabel = (item: any) => !item?.url && item?.name
 
 const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
 
-const getInitialSiteSettings = () => {
-    const siteSettings = {
+const getInitialSiteSettings = (): SiteSettings => {
+    const siteSettings: SiteSettings = {
         colorMode: (typeof window !== 'undefined' && (window as any).__theme) || 'light',
         theme: (typeof window !== 'undefined' && (window as any).__theme) || 'light',
         skinMode: 'modern',
@@ -1616,7 +1630,7 @@ const getInitialSiteSettings = () => {
         clickBehavior: 'double',
         performanceBoost: false,
         screensaverDisabled: true,
-        heaterMode: false,
+        reduceTransparency: false,
         ...(typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('siteSettings') || '{}') : {}),
     }
 
@@ -1646,7 +1660,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         clickBehavior: 'double',
         performanceBoost: false,
         screensaverDisabled: true,
-        heaterMode: false,
+        reduceTransparency: false,
     })
     const [taskbarHeight, setTaskbarHeight] = useState(59)
     const [lastClickedElementRect, setLastClickedElementRect] = useState<{ x: number; y: number } | null>(null)
@@ -2684,6 +2698,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         if (siteSettings.wallpaper) {
             document.body.setAttribute('data-wallpaper', siteSettings.wallpaper)
         }
+        document.body.setAttribute('data-reduce-transparency', siteSettings.reduceTransparency ? 'true' : 'false')
     }, [siteSettings])
 
     useEffect(() => {
@@ -2720,7 +2735,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 window.__setPreferredTheme(e.data.isDarkModeOn ? 'dark' : 'light')
                 return
             }
-            if (e.data.type === 'navigate') {
+            if (e.data.type === 'navigate' && isSafeInternalPath(e.data.url)) {
                 navigate(e.data.url)
             }
         }

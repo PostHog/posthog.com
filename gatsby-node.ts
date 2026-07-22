@@ -58,6 +58,10 @@ export const onCreatePage: GatsbyNode['onCreatePage'] = async ({ page, actions }
         page.matchPath = '/next-steps/*'
         createPage(page)
     }
+    if (page.path.match(/^\/teams\//) && !page.path.match(/^\/teams\/new/)) {
+        page.matchPath = '/teams/*'
+        createPage(page)
+    }
     // Add client-side routing for custom presentations
     if (page.path.match(/^\/for\//)) {
         page.matchPath = '/for/*'

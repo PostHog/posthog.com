@@ -55,4 +55,42 @@ PostHogPlatformView(
 
 > **Platform support:** On iOS, only `WKWebView`-backed platform views (for example `webview_flutter` in its default mode) are captured. Other platform view types (Google Maps, camera previews, and so on) are always masked, because the iOS compositor cannot safely snapshot arbitrary native views without risking leaking unmasked content.
 
+### Capturing native screens
+
+> Requires PostHog Flutter SDK version >= [5.32.0](https://github.com/PostHog/posthog-flutter/releases).
+
+By default, session replay only records your Flutter UI. When a fully native screen is presented over your app (a native paywall, a presented view controller, a native activity), the replay keeps showing the covered Flutter UI until the user returns – unlike embedded platform views, the native screen is **not** replaced with a black box, and the Flutter UI behind it keeps recording.
+
+To record those screens too, enable `captureNativeScreens`:
+
+```dart
+final config = PostHogConfig('<ph_project_token>');
+config.sessionReplay = true;
+/// Capture full-screen native screens that cover the Flutter app.
+/// Default: false.
+config.sessionReplayConfig.captureNativeScreens = true;
+```
+
+While a native screen covers the app, capture is handed to the native PostHog SDK, so the screen's content appears in the replay. If a detected screen can't be captured, a single black placeholder frame is shown for it instead.
+
+Captured native screens follow your app-wide `maskAllTexts` and `maskAllImages` settings – with the defaults (both `true`), all native text and images are masked. Setting either to `false` reveals it on native screens too, including native input fields.
+
+You can also toggle `captureNativeScreens` at runtime for per-screen control. Turning it off takes effect immediately: setting it to `false` right before presenting a sensitive native screen guarantees that screen is not captured.
+
+```dart
+config.sessionReplayConfig.captureNativeScreens = false;
+presentSensitiveNativeScreen();
+```
+
+Enable it before presenting a screen you want captured – turning it on while a native screen is already up may not capture that screen.
+
+Not everything is detected as a native screen. The following keep the previous behavior (replay keeps showing the covered Flutter UI):
+
+- Partial-height sheets (Apple Pay, share sheet, `.pageSheet`/`.formSheet` modals)
+- Content rendered by another process (Apple Pay, photo picker) – blank if the surrounding screen is captured
+- On Android, anything that is not a full activity in your app's process (Chrome Custom Tabs, Google Pay, dialogs, bottom sheets, permission prompts)
+- On iOS, covers without an opaque background (camera previews, image/blur backdrops)
+
+This setting applies to whole screens presented over your app. For native views embedded inside your Flutter layout (WebViews, maps), see [masking platform views](#masking-platform-views) above.
+
 <SensitiveThirdPartyScreens />
