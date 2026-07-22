@@ -303,12 +303,14 @@ function SideProjectsPage({ location }: { location: { search: string } }) {
                                                 <img
                                                     src={thumbnailSrc}
                                                     alt={title}
+                                                    loading="lazy"
                                                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
                                                 />
                                             ) : (
                                                 <img
                                                     src={getPlaceholderHog(title)}
                                                     alt={title}
+                                                    loading="lazy"
                                                     className="w-auto h-3/4 object-contain group-hover:scale-110 transition-transform duration-200"
                                                 />
                                             )}
@@ -343,6 +345,7 @@ function SideProjectsPage({ location }: { location: { search: string } }) {
                                                         <img
                                                             src={`https://github.com/${authorGitHub}.png?size=32`}
                                                             alt={projectAuthor}
+                                                            loading="lazy"
                                                             className="w-4 h-4 rounded-full"
                                                         />
                                                     )}

@@ -110,7 +110,7 @@ export default function SideProject({ data }) {
                             {tags.map((tag) => (
                                 <Link
                                     key={tag}
-                                    to={`/side-projects?tag=${tag.toLowerCase()}`}
+                                    to={`/side-projects?tag=${encodeURIComponent(tag.toLowerCase())}`}
                                     className="inline-block px-2 py-1 text-xs font-medium rounded bg-accent dark:bg-accent-dark text-primary/75 dark:text-primary-dark/75 hover:text-red dark:hover:text-yellow"
                                 >
                                     {tag}

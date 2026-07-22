@@ -75,6 +75,8 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     }
     type FrontmatterFilters {
       tags: [String]
+      type: [String]
+      maintainer: String
     }
     type Frontmatter {
       authorData: [AuthorsJson] @link(by: "handle", from: "author")
