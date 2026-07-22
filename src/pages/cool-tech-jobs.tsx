@@ -33,7 +33,6 @@ import SideModal from 'components/Modal/SideModal'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { CallToAction } from 'components/CallToAction'
-import { Logo } from '@posthog/brand/logo'
 import usePostHog from 'hooks/usePostHog'
 import ImageDrop from 'components/ImageDrop'
 import slugify from 'slugify'
@@ -88,6 +87,10 @@ interface ToggleFilter {
 const isPostHogCompany = (company: Company): boolean => company.attributes.name.trim().toLowerCase() === 'posthog'
 
 const getCompanyLogoUrl = (company: Company, isDark: boolean): string | undefined => {
+    if (isPostHogCompany(company)) {
+        return isDark ? '/brand/posthog-logo-white.svg' : '/brand/posthog-logo.svg'
+    }
+
     const logoLight = company.attributes.logoLight?.data?.attributes?.url
     const logoDark = company.attributes.logoDark?.data?.attributes?.url
 
@@ -96,19 +99,8 @@ const getCompanyLogoUrl = (company: Company, isDark: boolean): string | undefine
 
 const renderCompanyLogo = (company: Company, isDark: boolean, className: string): React.ReactNode => {
     const { name } = company.attributes
-
-    if (isPostHogCompany(company)) {
-        return (
-            <Logo
-                variant={isDark ? 'mono' : 'gradient'}
-                color={isDark ? 'white' : undefined}
-                className={className}
-                title={name}
-            />
-        )
-    }
-
     const logo = getCompanyLogoUrl(company, isDark)
+
     return logo ? <img className={className} src={logo} alt={name} /> : null
 }
 
