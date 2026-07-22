@@ -31,13 +31,13 @@ Next, install PostHog's JavaScript Web SDK:
 npm install posthog-js
 ```
 
-To set up PostHog, create a `instrumentation-client.js` file in the root of your project. In it, initialize PostHog with your project API key and instance address from your [project settings](https://app.posthog.com/project/settings) like this:
+To set up PostHog, create a `instrumentation-client.js` file in the root of your project. In it, initialize PostHog with your project token and instance address from your [project settings](https://app.posthog.com/project/settings) like this:
 
 ```js
 // instrumentation-client.js
 import posthog from 'posthog-js'
 
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: '<ph_client_api_host>',
   defaults: '<ph_posthog_js_defaults>'
 });
@@ -57,7 +57,7 @@ To do this, you can set `cookieless_mode` to `on_reject` in your initialization 
 // instrumentation-client.js
 import posthog from "posthog-js";
 
-posthog.init("<ph_project_api_key>", {
+posthog.init("<ph_project_token>", {
   api_host: "<ph_client_api_host>",
   defaults: '<ph_posthog_js_defaults>',
   cookieless_mode: 'on_reject'

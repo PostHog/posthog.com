@@ -3,20 +3,22 @@ import OverrideServerPropertiesIntro from './override-server-properties-intro.md
 <OverrideServerPropertiesIntro />
 
 ```java
-import com.posthog.server.PostHogFeatureFlagOptions;
+import com.posthog.server.PostHogEvaluateFlagsOptions;
 
-posthog.getFeatureFlag(
+PostHogFeatureFlagEvaluations flags = posthog.evaluateFlags(
     "distinct_id_of_the_user",
-    "flag-key",
-    PostHogFeatureFlagOptions
-        .builder()
-        .defaultValue(false)
+    PostHogEvaluateFlagsOptions.builder()
         .group("your_group_type", "your_group_id")
         .group("another_group_type", "your_group_id")
         .groupProperty("your_group_type", "group_property_name", "value")
         .groupProperty("another_group_type", "group_property_name", "value")
         .personProperty("property_name", "value")
-        .build());
+        .build()
+);
+
+if (flags.isEnabled("flag-key")) {
+    // Do something differently for this user
+}
 ```
 
 import OverrideGeoIPPropertiesSDK from './override-geoip-properties-SDKs.mdx'

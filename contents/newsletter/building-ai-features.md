@@ -35,7 +35,7 @@ There are three key lessons here:
 
 You don’t need to reinvent the wheel.
 
-A bunch of smart people have already figured out effective AI patterns you can copy. These have the advantage of being [UX patterns](/newsletter/vibe-designing) that users are familiar with, while also being functionality AI is actually good at.
+A bunch of smart people have already figured out [effective AI patterns](/newsletter/agent-first-product-engineering) you can copy. These have the advantage of being [UX patterns](/newsletter/vibe-designing) that users are familiar with, while also being functionality AI is actually good at.
 
 First is the classic “chat with your docs/data/PDF.” AI is great at search and summarization, and can use this to build reports and recommendations.
 
@@ -161,7 +161,7 @@ def _format_ui_context(self, ui_context: MaxUIContext) -> str:
   return f"User context: {dashboard_context}\n{insight_context}"
 ```
 
-You also need to handle “context” within the workflow (aka state). As the conversation progresses, you don’t want that context to be lost, and this is especially likely to happen when you have multiple sub-agents. To get this right, we store and include context through every part of the workflow like this:
+You also need to handle “context” within the workflow (aka state). As the conversation progresses, you don’t want that context to be lost, and this is especially likely to happen when you have [multiple sub-agents](/newsletter/building-ai-agents). To get this right, we store and include context through every part of the workflow like this:
 
 ```python
 class AssistantState(TypedDict):
@@ -208,7 +208,7 @@ Each node of the router then has its own conditions to route through to get to t
 
 Ideally all the structure you’ve built up to this point prevents failure, but you still need to [give the AI guardrails](/blog/envoy-wizard-llm-agent) because it _will_ inevitably smash into them.
 
-First, you need to know when something goes wrong, so [implement monitoring](/docs/llm-analytics/start-here) from the beginning. <TeamMember name="Georgiy Tarasov" photo /> from our <SmallTeam slug="posthog-ai" /> relayed how important this is:
+First, you need to know when something goes wrong, so [implement monitoring](/docs/ai-observability/start-here) from the beginning. <TeamMember name="Georgiy Tarasov" photo /> from our <SmallTeam slug="posthog-ai" /> relayed how important this is:
 
 > Monitoring production traces is essential. We even built a [monitoring tool](/llm-analytics) for [dogfooding](/product-engineers/dogfooding), and I wish we had that tool from the beginning. It becomes harder to monitor traces at scale (we’re here), so online evaluations will be helpful (our next priority).
 >
@@ -238,7 +238,7 @@ The solution? Add suggestions for how they can use your AI-powered features, nud
 
 Beyond issues with humanity and hallucination, sometimes your workflows just break. You need to be able to handle these gracefully with retries and rate limiting.
 
-For real pros, you can also set up [LLM analytics](/llm-analytics), [error tracking](/docs/error-tracking), and [feature flags](/docs/feature-flags) to help. Conveniently we provide all three, which is a weird coincidence.
+For real pros, you can also set up [AI Observability](/llm-analytics), [error tracking](/docs/error-tracking), and [feature flags](/docs/feature-flags) to help. Conveniently we provide all three, which is a weird coincidence.
 
 ## Improving your feature
 
@@ -272,7 +272,7 @@ As the founder of Superhuman, Rahul Vohra, noted in [Lenny’s Newsletter](https
 
 Some ways to improve this:
 
--   **Be aware of model benchmarks and new model releases.** When a better, faster model releases, test it out and use it. This can often have the biggest boost to both functionality and speed. Use [LLM analytics](/llm-analytics) to test this.
+-   **Be aware of model benchmarks and new model releases.** When a better, faster model releases, test it out and use it. This can often have the biggest boost to both functionality and speed. Use [AI Observability](/llm-analytics) to test this.
 
 -   **Mix fast and slow models depending on the task.** We use fast models, like `gpt-4.1-mini` and `gpt-4.1-nano`, for title generation, session replay filters, survey summarization, and insight search. We use slow models (like `gpt-4.1`) for schema generation, conversation handling, and context management.
 
@@ -286,7 +286,7 @@ Not only can the wrong idea make your product worse, changes in models can negat
 
 There are multiple methods we found work best for evaluating effectiveness:
 
--   **Add evals early.** We found even small golden or synthetic datasets were giving insane performance boosts compared to the typical development cycle. Even at our scale, implementing this was an easier task than expected. This makes building future features faster too.
+-   **Add evals early.** We found even [small golden or synthetic datasets](/blog/testing-ai-agents) were giving insane performance boosts compared to the typical development cycle. Even at our scale, implementing this was an easier task than expected. This makes building future features faster too.
 
 -   **A/B test AI-powered features vs the normal experience** as well as different prompts, contexts, workflows, and more.
 

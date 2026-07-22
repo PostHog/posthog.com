@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const fetch = require('node-fetch')
+
 const md5 = require('md5')
 
 const handler = async (req, res) => {

@@ -51,7 +51,7 @@ This helps us create good word of mouth, and it’s motivating for engineers whe
 
 Sometimes an issue only affects the requester, but often it impacts hundreds or thousands of users who silently tolerate an issue, or stop using your product.
 
-For example, our customer effort score survey used to give options from 1-5. A user reported that the industry standard is actually 1-7. The next day, [Dylan](https://posthog.com/community/profiles/30455) added 1-7 as [an option](https://posthog.com/changelog/2024#surveys-now-support-7-point-likert-scale-responses), making our survey product more accurate for that user and future ones.
+For example, our customer effort score survey used to give options from 1-5. A user reported that the industry standard is actually 1-7. The next day, [Dylan](/community/profiles/30455) added 1-7 as [an option](/changelog?id=2057), making our survey product more accurate for that user and future ones.
 
 Every small improvement inches your product towards greatness.
 
@@ -59,7 +59,7 @@ Every small improvement inches your product towards greatness.
 
 ### Encouraging full cycle ownership
 
-[Engineers at PostHog](/blog/what-is-a-product-engineer) own the entire product development cycle – ideation, implementation, and ongoing maintenance. Doing support acts as both input and feedback on this and helps them do it better. For example:
+[Engineers at PostHog](/product-engineer/what-is-a-product-engineer) own the entire product development cycle – ideation, implementation, and ongoing maintenance. Doing support acts as both input and feedback on this and helps them do it better. For example:
 
 - When ideating and validating, engineers can draw on real customer behavior and pain points. Product decisions are backed by support issues they dealt with and requests from large customers.
 
@@ -165,5 +165,6 @@ To replace it, we built a [community forum](/community) on our website. It's the
 - [Serving 250k Developers with One Support Engineer](https://blog.railway.app/p/scaling-railway-automating-support)
 - [Seven steps to remarkable customer service](https://www.joelonsoftware.com/2007/02/19/seven-steps-to-remarkable-customer-service/)
 - [33 tips for giving great technical support at a small software company without being swamped](https://successfulsoftware.net/2012/08/21/tips-for-great-software-technical-support/)
+- [Stop adding AI between you and your customers](/blog/future-of-support-is-human)
 
 <NewsletterForm />

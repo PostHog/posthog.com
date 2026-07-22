@@ -1,9 +1,11 @@
 import { RainbowText } from 'components/RainbowText'
+import AboutPostHog from './components/AboutPostHog'
 import CountriesWeHireIn from './components/AMCharts/CountriesWeHireIn'
 import { ArrayCTA } from './components/ArrayCTA'
 import AskMax from './components/AskMax'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BorderWrapper } from './components/BorderWrapper'
+import { BrandLogos } from './components/BrandLogos'
 import { CallToAction } from './components/CallToAction'
 import { Caption } from './components/Caption'
 import { ComparisonTable } from './components/ComparisonTable'
@@ -32,12 +34,18 @@ import SmallTeam from './components/SmallTeam'
 import { StarRepoButton } from './components/StarRepoButton'
 import TaskOwnershipTable from './components/TaskOwnershipTable'
 import TeamMember from './components/TeamMember'
+import WistiaEmbed from './components/WistiaEmbed'
+import WizardCommand from './components/WizardCommand'
+import WizardCTA from './components/WizardCTA'
+import PlatformInstall from './components/PlatformInstall'
 
 // Global MDX components
 export const shortcodes = {
+    AboutPostHog,
     ArrayCTA,
     BasicHedgehogImage,
     BorderWrapper,
+    BrandLogos,
     CallToAction,
     CalloutBox,
     Caption,
@@ -70,4 +78,8 @@ export const shortcodes = {
     FeatureOwnershipTable,
     TaskOwnershipTable,
     RainbowText,
+    WistiaEmbed,
+    WizardCommand,
+    WizardCTA,
+    PlatformInstall,
 }

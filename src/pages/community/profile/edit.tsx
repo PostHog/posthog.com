@@ -17,6 +17,7 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import { profileBackgrounds } from '../../../data/profileBackgrounds'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { OSInput, OSTextarea } from 'components/OSForm'
+import { PROFILE_COLORS } from 'constants/profileColors'
 
 function convertCentimetersToInches(centimeters: number): number {
     return centimeters / 2.54
@@ -230,20 +231,7 @@ const formSections = [
                         <>
                             <label className="font-bold">Pick your favorite color</label>
                             <ul className="list-none m-0 p-0 mt-2 flex space-x-1">
-                                {[
-                                    'lime-green',
-                                    'blue',
-                                    'orange',
-                                    'teal',
-                                    'purple',
-                                    'seagreen',
-                                    'salmon',
-                                    'yellow',
-                                    'red',
-                                    'green',
-                                    'lilac',
-                                    'sky-blue',
-                                ].map((color) => {
+                                {PROFILE_COLORS.map((color) => {
                                     const active = values.color === color
                                     return (
                                         <li key={color} onClick={() => setFieldValue('color', color)}>

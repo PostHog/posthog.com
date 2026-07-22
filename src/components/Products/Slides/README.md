@@ -351,7 +351,7 @@ Populate data for a product in `src/hooks/useProducts.tsx`. (This will eventuall
 You can now specify templates directly in your feature data structure, and SlidesTemplate will automatically create individual slides for features with custom templates:
 
 ```tsx
-// In your product data file (e.g., src/hooks/productData/llm_analytics.tsx)
+// In your product data file (e.g., src/hooks/productData/ai_observability.tsx)
 features: [
     {
         title: 'Trace monitoring',

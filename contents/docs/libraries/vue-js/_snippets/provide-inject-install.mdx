@@ -18,7 +18,7 @@ This **must** be done *before* you mount your app. If you provide PostHog *after
 import posthog from "posthog-js";
 
 const app = createApp(App);
-posthog.init("<ph_project_api_key>", {
+posthog.init("<ph_project_token>", {
   api_host: "<ph_client_api_host>",
   defaults: '<ph_posthog_js_defaults>',
 });
