@@ -14,7 +14,7 @@ export default function Sources(): JSX.Element {
     return (
         <>
             <SEO
-                title="Data sources & import - PostHog data stack"
+                title="Data sources & import - PostHog context warehouse"
                 description="Learn about all the ways to get data into PostHog"
                 image="images/og/cdp.jpg"
             />

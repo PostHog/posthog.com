@@ -64,19 +64,27 @@ The only platform difference is how you build `PostHogContext`. Everything else 
 
 #### Android
 
-Android requires the `Application` instance, so pass it to `PostHogContext`:
+Android requires the `Application` instance, so call `setup` from your `Application` class – not from an Activity, whose `onCreate` re-runs on every recreation (for example, on rotation):
 
 ```kotlin
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+import android.app.Application
+
+class MyApplication : Application() {
+    override fun onCreate() {
+        super.onCreate()
 
         PostHog.setup(
             config = PostHogConfig(apiKey = "<ph_project_token>"),
-            context = PostHogContext(application),
+            context = PostHogContext(this),
         )
     }
 }
+```
+
+Register the class in your `AndroidManifest.xml`:
+
+```xml
+<application android:name=".MyApplication" ...>
 ```
 
 #### iOS
@@ -537,4 +545,4 @@ Yes. The [Android SDK](/docs/libraries/android) is for native Android apps. The 
 
 ### Why don't I see surveys or logs?
 
-The KMP wrapper currently exposes event capture, identification, feature flags, group analytics, screen tracking, session replay, and error tracking. Surveys and logs aren't wrapped yet. Follow along or request them on [GitHub](https://github.com/PostHog/posthog-kmp/issues).
+The KMP wrapper currently exposes event capture, identification, feature flags, group analytics, screen tracking, session replay, and error tracking. Surveys and logs aren't wrapped yet. Follow along or [request them on GitHub](https://github.com/PostHog/posthog-kmp/issues/new?template=feature_request.yml).

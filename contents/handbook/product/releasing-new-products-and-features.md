@@ -30,6 +30,8 @@ Please refer to the RFC for what the actual steps are. Duplicating them here wou
 
 Adding items to the coming soon menu early offers several advantages. It enables us to gauge interest in a new feature via sign-ups, equips our marketing teams with news they can promote to users, and ensures that betas can have sample users ready from the moment they launch.
 
+When someone joins a coming soon waitlist (in-app or on posthog.com), a `$feature_enrollment_update` event with `$feature_enrollment_stage: concept` is sent to Customer.io through a data pipeline, and they immediately receive a simple confirmation that they're on the waitlist. See [onboarding and lifecycle emails](/handbook/marketing/onboarding-and-lifecycle-emails#the-waitlist-alpha-beta-onboarding-flow) for the full flow.
+
 Coming soon features can either be large or small, so use your judgement about what is of interest to users, but it should be something that you expect to work on in the next 3-6 months.
 
 ## Phase 2: Alpha
@@ -42,7 +44,7 @@ Beta is when you open up the product to all users who want to opt-in. Betas do n
 
 <CalloutBox icon="IconInfo" title="Moving from Concept to Beta" type="fyi">
 
-Once you are ready to move an item from the coming soon roadmap to a beta which users can interact with, update the stage from `concept` to `beta` (or `alpha`). This triggers an automatic notification to all subscribed users letting them know that the beta is available. Users who registered interest during the Concept stage can then opt in to enable the feature.
+Once you are ready to move an item from the coming soon roadmap to a beta which users can interact with, update the stage from `concept` to `beta` (or `alpha`). Users who registered interest during the concept stage are automatically opted in to the new stage, and a `user moved feature preview stage` event fires for each of them — when the `from` property is `concept` and the `to` property is `alpha` or `beta`, this triggers an automatic email letting them know the feature is enabled and now available, and asking for feedback.
 
 Make sure your early access feature flag includes a `product_key` on the payload field to give people access to the product in their sidebar. Check the new product RFC for more details.
 
@@ -86,9 +88,9 @@ Product teams are responsible for [writing documentation](/handbook/engineering/
 
 Teams are encouraged to collect feedback from users in current betas so that they can build better products and we have some automations in place to facilitate this.
 
-After a week in any new beta, users will trigger an automatic email from the `beta-feedback@posthog.com` Google Group. This email will ask them, essentially, for any suggested changes to the beta. By default, all team leads and exec team members are in this Google Group and will get daily digests of responses. Others are invited to add themselves to the group, or change their notification settings.
+Joining an alpha or beta triggers automatic feedback emails from the `beta-feedback@posthog.com` Google Group: alpha users get an immediate email warning of rough edges and asking for feedback, while beta users get an email asking for feedback after 5 days. By default, all team leads and exec team members are in this Google Group and will get daily digests of responses. Others are invited to add themselves to the group, or change their notification settings.
 
-Regardless, emails to this Google Group will sync to the PostHog Feedback Slack channel for general awareness. Team leads are encouraged to respond to beta feedback emails.
+Regardless, replies to this Google Group are relayed into the [#posthog-feedback Slack channel](https://posthog.slack.com/archives/C011L071P8U) for everyone to see. PMs and team leads are encouraged to respond to and action this feedback for their alpha and beta releases, and to give merch credits as a thank you where appropriate.
 
 Teams can collect additional feedback if needed and the <SmallTeam slug="website" /> is able to help with creating feedback emails or funnels.
 
