@@ -172,7 +172,7 @@ export const replayVision = {
     seo: {
         title: 'Replay Vision - PostHog',
         description:
-            'It reads through a filtered set of replays, tells you in plain language what went wrong, and opens a pull request with the fix. The problem surfaces itself, and so does the patch. You just hit merge.',
+            'Replay Vision reads through a filtered set of replays, tells you in plain language what went wrong, and opens a pull request with the fix. The problem surfaces itself, and so does the patch. You just hit merge.',
     },
     /**
      * Sections rendered on the Product surface (`/replay-vision`). Each entry
@@ -258,14 +258,15 @@ export const replayVision = {
         { slug: 'pricing-cta', name: 'Get started', hideFromNav: true, component: PricingFooterCTASection },
     ],
     overview: {
-        title: "You'll never watch 10,000 sessions. Replay Vision will.",
+        title: 'Your product, watching itself',
         description:
-            'It reads through a filtered set of replays, tells you in plain language what went wrong, and opens a pull request with the fix. The problem surfaces itself, and so does the patch. You just hit merge.',
+            'Replay Vision reads through a filtered set of replays, tells you in plain language what went wrong, and opens a pull request with the fix. The problem surfaces itself, and so does the patch. You just hit merge.',
         textColor: 'text-black', // tw
     },
     screenshots: {
         home: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Group_3_1_44abff4569.png',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Group_4_1_33ba4bbdb7.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/Group_6_c5824625a7.png',
             alt: 'Replay Vision scanner observations',
         },
     },

@@ -170,7 +170,7 @@ export const applications: CarouselSlide[] = [
     },
     {
         slug: 'inbox-self-driving',
-        label: 'Inbox / self-driving',
+        label: 'Self-driving',
         icon: <IconBell className="size-5" />,
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
