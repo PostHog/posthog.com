@@ -16,7 +16,7 @@ This week is about getting to grips with the PostHog concepts that you'll come a
 
 **General onboarding / tool set up**
 
-- Follow your onboarding issue to get yourself set up as a PostHog employee.
+- Follow your [onboarding issue](https://github.com/orgs/PostHog/projects/127/views/2) to get yourself set up as a PostHog employee.
 - Install your favorite LLM of choice.
 - Set up tools like Zoom, Gong and Granola so that you can talk with customers in our standard way.
 - Read the FDE section of the handbook.
