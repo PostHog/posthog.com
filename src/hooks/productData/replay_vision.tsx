@@ -8,11 +8,25 @@ import {
     IconCursorClick,
     IconList,
     IconChat,
+    IconConfetti,
+    IconMap,
+    IconNewspaper,
+    IconMessage,
+    IconShieldPeople,
+    IconCode,
+    IconRocket,
+    IconInfo,
+    IconCheckCircle,
+    IconPieChart,
+    IconGraph,
 } from '@posthog/icons'
 import OldWaySection from 'components/ReplayVision/OldWaySection'
 import PostHogWaySection from 'components/ReplayVision/PostHogWaySection'
 import HowToUseSection from 'components/ReplayVision/HowToUseSection'
 import AIPromptsSection from 'components/ReplayVision/AIPromptsSection'
+import WorksWithSection from 'components/ReplayVision/WorksWithSection'
+import PlaceholderSection from 'components/ReplayVision/PlaceholderSection'
+import { sessionReplay } from './session_replay'
 import { topFeatures } from './replay_vision/slides'
 
 export const replayVision = {
@@ -20,6 +34,10 @@ export const replayVision = {
     name: 'Replay Vision',
     handle: 'replay_vision',
     slug: 'replay-vision',
+    // Built by the same team as Session Replay, so the team-driven sections
+    // (roadmap, changelog, questions, team) pull from the same sources.
+    teamSlug: 'replay',
+    forumTopicId: 377,
     color: 'yellow',
     colorSecondary: '[#B56C00]',
     category: 'product_engineering',
@@ -68,6 +86,55 @@ export const replayVision = {
             component: AIPromptsSection,
             icon: <IconChat className="size-4" />,
         },
+        {
+            slug: 'works-with',
+            name: 'Works with...',
+            component: WorksWithSection,
+            icon: <IconConfetti className="size-4" />,
+        },
+        { slug: 'roadmap', name: 'Roadmap', icon: <IconMap className="size-4" /> },
+        { slug: 'changelog', name: 'Changelog', icon: <IconNewspaper className="size-4" /> },
+        { slug: 'community', name: 'Questions?', icon: <IconMessage className="size-4" /> },
+        { slug: 'team', name: 'Team', icon: <IconShieldPeople className="size-4" /> },
+        { slug: 'installation', name: 'Install', icon: <IconCode className="size-4" /> },
+        { slug: 'getting-started', name: 'Get started', icon: <IconRocket className="size-4" /> },
+    ],
+    /**
+     * Sections rendered on the Pricing surface (`/replay-vision/pricing`).
+     * Replay Vision isn't priced yet, so the pricing-specific sections (TL;DR,
+     * plans, calculator, feature comparison) are placeholders. Only the
+     * "Replay Vision vs..." comparison is built out.
+     */
+    pricingMenu: [
+        {
+            slug: 'pricing-tldr',
+            name: 'TL;DR',
+            component: PlaceholderSection,
+            props: { title: 'Pricing TL;DR' },
+            icon: <IconInfo className="size-4" />,
+        },
+        {
+            slug: 'plans',
+            name: 'Plans',
+            component: PlaceholderSection,
+            props: { title: 'Plans' },
+            icon: <IconCheckCircle className="size-4" />,
+        },
+        {
+            slug: 'calculator',
+            name: 'Pricing calculator',
+            component: PlaceholderSection,
+            props: { title: 'Pricing calculator' },
+            icon: <IconPieChart className="size-4" />,
+        },
+        { slug: 'comparison-summary', name: 'PostHog vs...', icon: <IconList className="size-4" /> },
+        {
+            slug: 'feature-comparison',
+            name: 'Feature comparison',
+            component: PlaceholderSection,
+            props: { title: 'Feature comparison' },
+            icon: <IconGraph className="size-4" />,
+        },
     ],
     overview: {
         title: "You'll never watch 10,000 sessions. Replay Vision will.",
@@ -90,5 +157,29 @@ export const replayVision = {
             ['Support & UX Research', 'Classify what users were actually trying to do, at scale'],
             ['Founders', 'Skim a one-line summary of every session instead of spending hours watching them'],
         ],
+    },
+    // Same install surface as Session Replay – pulls from the same source.
+    installation: sessionReplay.installation,
+    comparison: {
+        summary: {
+            them: [
+                { title: 'You want self-hosting or more strict data residency' },
+                { title: 'You have strong security requirements that need more robust PII redaction' },
+                { title: 'You want a dedicated UX-research tool with targeted clip capture and studies' },
+                { title: "You're not on PostHog and don't want to move session replay here" },
+            ],
+            us: [
+                {
+                    title: 'You want to ask any question of any slice of recordings on a schedule – not pick from a fixed menu of AI jobs',
+                },
+                {
+                    title: 'Findings land as queryable observations next to your analytics, funnels, flags, experiments, and errors',
+                },
+                {
+                    title: "Agents can search and act on what's in your replays via the MCP – the context that powers self-driving",
+                },
+                { title: "You'd rather keep sessions on PostHog than pay a second tool to scrape them out" },
+            ],
+        },
     },
 }

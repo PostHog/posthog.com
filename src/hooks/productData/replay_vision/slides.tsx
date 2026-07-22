@@ -3,13 +3,14 @@ import {
     IconCode,
     IconWarning,
     IconDocument,
-    IconCursorClick,
+    IconMagic,
     IconTrending,
     IconCheckCircle,
     IconTerminal,
     IconBrowser,
     IconGraph,
     IconBell,
+    IconEye,
 } from '@posthog/icons'
 import type { CarouselSlide } from 'components/Products/ReaderViewProduct/types'
 import { LabeledList, InlineCode } from 'components/Products/ReaderViewProduct/helpers'
@@ -199,74 +200,263 @@ export const applications: CarouselSlide[] = [
     },
 ]
 
-// Top features for Replay Vision, adapted from the "How it works" scanner cards
-// into the shared TabbedCarousel format. Prose-only for now – add screenshots
-// per slide via the `image` field once they exist.
+// The six built-in scanner types shown in the "What it looks for" tab.
+const scannerCards: {
+    Icon: React.ComponentType<{ className?: string }>
+    color: string
+    title: string
+    type?: string
+    description: string
+}[] = [
+    {
+        Icon: IconCode,
+        color: 'text-purple',
+        title: 'Create from scratch',
+        description: 'Build a fully custom scanner – pick a type and write your own prompt and config.',
+    },
+    {
+        Icon: IconWarning,
+        color: 'text-red',
+        title: 'Dead ends',
+        type: 'Monitor',
+        description: 'Catch the moment someone hits a wall: scrolling, hovering with no CTA, then rage-quitting.',
+    },
+    {
+        Icon: IconDocument,
+        color: 'text-green',
+        title: 'Session summary',
+        type: 'Summarizer',
+        description: "The TL;DR of the session, so you don't sit through 14 minutes of someone scrolling.",
+    },
+    {
+        Icon: IconMagic,
+        color: 'text-blue',
+        title: 'User intent',
+        type: 'Classifier',
+        description: 'Classify the session by what the user appeared to be trying to do.',
+    },
+    {
+        Icon: IconTrending,
+        color: 'text-yellow',
+        title: 'Frustration score',
+        type: 'Scorer',
+        description: 'Rate how much friction a page caused, on a scale you define.',
+    },
+    {
+        Icon: IconCheckCircle,
+        color: 'text-teal',
+        title: 'Session outcome',
+        type: 'Classifier',
+        description: 'Tag what actually happened – task completed, abandoned, errored, and so on.',
+    },
+]
+
+// Top features for Replay Vision – how scanners look, get configured, and run.
 export const topFeatures: CarouselSlide[] = [
     {
-        slug: 'create-from-scratch',
-        label: 'Create from scratch',
-        icon: <IconCode className="size-5" />,
+        slug: 'what-it-looks-for',
+        label: 'What it looks for',
+        icon: <IconEye className="size-5" />,
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
         progressBar: 'bg-purple',
         layout: 'stack',
-        heading: 'Create from scratch',
-        description: 'Build a fully custom scanner with your own prompt and configuration.',
+        heading: 'What it looks for',
+        description: (
+            <>
+                <p>
+                    Replay Vision runs <strong>scanners</strong> – AI probes you configure and point at your sessions.
+                    Pick a type, describe what to look for, and it produces structured output on each session it scans.
+                    Start from a built-in template or from scratch.
+                </p>
+                <div className="@container">
+                    <div className="grid @md:grid-cols-2 @2xl:grid-cols-3 gap-4 my-6">
+                        {scannerCards.map(({ Icon, color, title, type, description }) => (
+                            <div key={title} className="rounded-md border border-primary p-4 bg-primary">
+                                <div className="flex items-baseline gap-2 mb-2">
+                                    <Icon className={`size-5 shrink-0 self-center ${color}`} />
+                                    <h4 className="text-[15px] font-bold m-0">
+                                        {title}
+                                        {type && (
+                                            <span className="font-normal italic text-secondary text-sm"> ({type})</span>
+                                        )}
+                                    </h4>
+                                </div>
+                                <p className="text-sm text-secondary m-0">{description}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <p className="text-sm text-secondary italic">
+                    Every observation comes with a confidence score and citations that link straight to the exact moment
+                    in the recording, so you can verify it in one click.
+                </p>
+            </>
+        ),
     },
     {
-        slug: 'dead-ends',
-        label: 'Dead ends',
-        icon: <IconWarning className="size-5" />,
-        color: 'bg-light dark:bg-dark',
-        activeText: 'text-primary',
-        progressBar: 'bg-red',
-        layout: 'stack',
-        heading: 'Dead ends',
-        description: 'Catch the moment someone hits a wall, stares at it, and rage-quits.',
-    },
-    {
-        slug: 'session-summary',
-        label: 'Session summary',
-        icon: <IconDocument className="size-5" />,
-        color: 'bg-light dark:bg-dark',
-        activeText: 'text-primary',
-        progressBar: 'bg-green',
-        layout: 'stack',
-        heading: 'Session summary',
-        description: "The TL;DR of the session, so you don't have to sit through 14 minutes of someone scrolling.",
-    },
-    {
-        slug: 'user-intent',
-        label: 'User intent',
-        icon: <IconCursorClick className="size-5" />,
+        slug: 'configure-it',
+        label: 'Configure it',
+        icon: <IconCode className="size-5" />,
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
         progressBar: 'bg-blue',
         layout: 'stack',
-        heading: 'User intent',
-        description: 'Classify the session by what the user appeared to be trying to do.',
+        heading: 'Configure it',
+        description: (
+            <>
+                <p>
+                    A scanner is four things you author: a <strong>prompt</strong>, a <strong>type</strong>,{' '}
+                    <strong>recording filters</strong>, and a <strong>sampling rate</strong>. The editor helps you get
+                    each right before you save.
+                </p>
+                <div className="@container">
+                    <LabeledList
+                        items={[
+                            {
+                                label: 'Start from a template',
+                                description:
+                                    'Five built-in templates pre-fill the form – tweak anything before saving.',
+                            },
+                            {
+                                label: 'Draft with PostHog AI',
+                                description:
+                                    'Describe what you want in plain language; PostHog AI picks a type and drafts the prompt for you.',
+                            },
+                            {
+                                label: 'Scope with filters',
+                                description:
+                                    'Narrow to the sessions that matter – person property, session property, cohort, or events – using the same query builder as Session Replay.',
+                            },
+                            {
+                                label: 'Control volume with sampling',
+                                description:
+                                    "A 0–100% rate applied after filters, so a poorly-scoped scanner can't run away with your budget.",
+                            },
+                            {
+                                label: 'Size it before you save',
+                                description:
+                                    'The editor projects the per-month observation count against your remaining quota before you commit.',
+                            },
+                            {
+                                label: 'Type-specific knobs',
+                                description:
+                                    'Tag vocabulary for classifiers, a numeric scale for scorers, summary length, or an "inconclusive" option for monitors.',
+                            },
+                        ]}
+                    />
+                </div>
+            </>
+        ),
     },
     {
-        slug: 'frustration-score',
-        label: 'Frustration score',
+        slug: 'how-it-runs',
+        label: 'How it runs',
         icon: <IconTrending className="size-5" />,
+        color: 'bg-light dark:bg-dark',
+        activeText: 'text-primary',
+        progressBar: 'bg-green',
+        layout: 'stack',
+        heading: 'How it runs',
+        description: (
+            <>
+                <p>
+                    Once enabled, a scanner works in the background – and you can also run it by hand whenever you're
+                    investigating.
+                </p>
+                <div className="@container">
+                    <LabeledList
+                        items={[
+                            {
+                                label: 'Continuous sweep',
+                                description:
+                                    'Enabled scanners pick up new matching recordings every few minutes and queue an observation.',
+                            },
+                            {
+                                label: 'Scan on demand',
+                                description:
+                                    'Run a scanner against a single recording straight from the replay player – no schedule needed.',
+                            },
+                            {
+                                label: 'Bulk scan',
+                                description:
+                                    'Select recordings in the list and scan them all at once; great for backfilling after you widen filters.',
+                            },
+                            {
+                                label: 'Run from your editor',
+                                description: (
+                                    <>
+                                        Trigger a scan via the <InlineCode>vision-scanners-scan-session</InlineCode> MCP
+                                        tool without leaving your IDE.
+                                    </>
+                                ),
+                            },
+                            {
+                                label: 'Never double-counts',
+                                description:
+                                    'Each scanner observes a given session only once, so re-sweeping never duplicates work or cost.',
+                            },
+                            {
+                                label: "Skips what it can't judge",
+                                description:
+                                    'Too-short, idle, or recording-less sessions come back "ineligible" – and don\'t count against your quota.',
+                            },
+                        ]}
+                    />
+                </div>
+            </>
+        ),
+    },
+    {
+        slug: 'what-you-get-back',
+        label: 'What you get back',
+        icon: <IconDocument className="size-5" />,
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
         progressBar: 'bg-yellow',
         layout: 'stack',
-        heading: 'Frustration score',
-        description: 'Rate how mad the page made someone, from mild sigh to keyboard-smash.',
-    },
-    {
-        slug: 'session-outcome',
-        label: 'Session outcome',
-        icon: <IconCheckCircle className="size-5" />,
-        color: 'bg-light dark:bg-dark',
-        activeText: 'text-primary',
-        progressBar: 'bg-teal',
-        layout: 'stack',
-        heading: 'Session outcome',
-        description: 'Tag each session with what actually happened – task completed, abandoned, errored, etc.',
+        heading: 'What you get back',
+        description: (
+            <>
+                <p>
+                    Each scan produces a <strong>structured observation</strong> – and it doesn't just sit in a table.
+                </p>
+                <div className="@container">
+                    <LabeledList
+                        items={[
+                            {
+                                label: 'Structured output',
+                                description:
+                                    'A verdict, tags, a score, or a summary – whatever the scanner type defines.',
+                            },
+                            {
+                                label: 'Confidence on everything',
+                                description:
+                                    "Each observation carries the model's self-reported certainty, so you can filter to high-confidence results.",
+                            },
+                            {
+                                label: 'Citations to the moment',
+                                description:
+                                    "The reasoning links to exact timestamps in the recording – click to jump there and check the model's work.",
+                            },
+                            {
+                                label: 'Queryable as events',
+                                description: (
+                                    <>
+                                        Observations land as <InlineCode>$recording_observed</InlineCode> events, so you
+                                        can chart, break down, and alert on them next to the rest of your data.
+                                    </>
+                                ),
+                            },
+                            {
+                                label: 'Hand off to Responder agents',
+                                description:
+                                    'Flip a toggle and a scanner also flags concrete product issues as signals to the self-driving Inbox, where agents research them and can open a PR.',
+                            },
+                        ]}
+                    />
+                </div>
+            </>
+        ),
     },
 ]
