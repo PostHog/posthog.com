@@ -68,7 +68,7 @@ You need permission to create and install a Slack app in your workspace. If your
 }
 ```
 
-These bot scopes let the app list channels and users (`channels:read`, `groups:read`, `users:read`, `users:read.email`), read messages and reactions in channels the bot joins (`channels:history`, `groups:history`, `reactions:read`), and — if you turn on "Automatically join public channels" — join public channels on your behalf (`channels:join`).
+These bot scopes let the app list channels and users (`channels:read`, `groups:read`, `users:read`, `users:read.email`), read messages and reactions in channels the bot joins (`channels:history`, `groups:history`, `reactions:read`), and join public channels on your behalf for the "Automatically join public channels" option (`channels:join`).
 
 ### 2. Install the app and copy the token
 
@@ -80,7 +80,7 @@ These bot scopes let the app list channels and users (`channels:read`, `groups:r
 1. In PostHog, go to the [Data pipeline page](https://app.posthog.com/data-management/sources) and select the **Sources** tab.
 2. Click **+ New source** and select Slack by clicking the **Link** button.
 3. Paste the **Bot User OAuth Token** into the **Bot User OAuth Token** field.
-4. _Optional:_ Turn on **Automatically join public channels** to have the bot join every public channel for you, so their messages sync without inviting it to each one. Leave it off to pick channels manually.
+4. Leave **Automatically join public channels** on (the default) to have the bot join every public channel for you, so their messages sync without inviting it to each one. Turn it off to pick channels manually.
 5. _Optional:_ Add a prefix to your table names.
 6. Select the tables you want to sync. Each channel appears as its own table you can enable or disable individually.
 7. Click **Import**.
@@ -89,7 +89,7 @@ These bot scopes let the app list channels and users (`channels:read`, `groups:r
 
 The bot only sees channels it belongs to.
 
-- **Public channels:** if you turned on **Automatically join public channels**, the bot joins them for you (including channels created later, on the next sync). Otherwise, invite it to each one.
+- **Public channels:** with **Automatically join public channels** on (the default), the bot joins them for you (including channels created later, on the next sync). If you turned it off, invite it to each one.
 - **Private channels:** always invite the bot manually — it can't add itself.
 
 To invite the bot, run `/invite @PostHog data warehouse` in the channel, or add it from the channel's **Integrations** settings.
