@@ -25,7 +25,7 @@ const RoadmapPage = () => {
             >
                 <div
                     data-scheme="primary"
-                    className="@container flex min-h-full flex-col gap-3 border-t border-primary bg-transparent p-3 text-primary @xl:p-4"
+                    className="@container flex min-h-full flex-col gap-3 bg-transparent p-3 text-primary @xl:p-4"
                 >
                     <header className="grid gap-4 px-2 @3xl:grid-cols-[minmax(0,1fr)_minmax(22rem,34rem)] @3xl:items-center @3xl:gap-8">
                         <div className="min-w-0">

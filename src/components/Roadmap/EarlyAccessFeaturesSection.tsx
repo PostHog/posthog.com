@@ -53,11 +53,11 @@ interface StageDefinition {
 
 const STAGES: StageDefinition[] = [
     {
-        stage: 'beta',
-        title: 'Beta',
-        description: 'Ready to enable and try in PostHog.',
-        icon: <IconRocket className="size-5" />,
-        styles: ROADMAP_STAGE_STYLES.beta,
+        stage: 'concept',
+        title: 'Concept',
+        description: 'Ideas we have committed to exploring.',
+        icon: <IconLightBulb className="size-5" />,
+        styles: ROADMAP_STAGE_STYLES.concept,
     },
     {
         stage: 'alpha',
@@ -67,11 +67,11 @@ const STAGES: StageDefinition[] = [
         styles: ROADMAP_STAGE_STYLES.alpha,
     },
     {
-        stage: 'concept',
-        title: 'Concept',
-        description: 'Ideas we have committed to exploring.',
-        icon: <IconLightBulb className="size-5" />,
-        styles: ROADMAP_STAGE_STYLES.concept,
+        stage: 'beta',
+        title: 'Beta',
+        description: 'Ready to enable and try in PostHog.',
+        icon: <IconRocket className="size-5" />,
+        styles: ROADMAP_STAGE_STYLES.beta,
     },
 ]
 
