@@ -12,7 +12,7 @@ import { layoutLogic } from 'logic/layoutLogic'
 import Mermaid from 'components/Mermaid'
 import Tooltip from 'components/Tooltip'
 import usePostHog from 'hooks/usePostHog'
-import { useApp } from '../../context/App'
+import { useAppSettings, useAppActions } from '../../context/App'
 import { useWindow } from '../../context/Window'
 import { IconArrowUpRight, IconSparkles } from '@posthog/icons'
 import { useLocation } from '@reach/router'
@@ -146,7 +146,9 @@ export const SingleCodeBlock = ({ label, language, children, ...props }: SingleC
 const tooltipKey = '// TIP:'
 const highlightKey = '// HIGHLIGHT'
 const diffAddKey = '// +'
+const diffAddKeyHash = '# +'
 const diffRemoveKey = '// -'
+const diffRemoveKeyHash = '# -'
 
 const removeQuotes = (str?: string | null): string | null | undefined => {
     return str?.replace(/['"]/g, '')
@@ -157,7 +159,9 @@ const stripAnnotationComments = (code: string): string => {
         .replace(tooltipKey, '//')
         .replace(highlightKey, '')
         .replace(diffAddKey, '')
+        .replace(diffAddKeyHash, '')
         .replace(diffRemoveKey, '')
+        .replace(diffRemoveKeyHash, '')
         .trim()
 }
 
@@ -189,7 +193,8 @@ export const CodeBlock = ({
     }
 
     const codeBlockId = generateRandomHtmlId()
-    const { siteSettings, openNewChat } = useApp()
+    const { siteSettings } = useAppSettings()
+    const { openNewChat } = useAppActions()
     const { appWindow } = useWindow()
     const location = useLocation()
     const [tooltipVisible, setTooltipVisible] = React.useState(false)
@@ -233,7 +238,7 @@ export const CodeBlock = ({
             .replace(/<ph_app_host>/g, removeQuotes(appHost) || '<ph_app_host>')
             .replace(/<ph_client_api_host>/g, removeQuotes(clientApiHost) || 'https://us.i.posthog.com')
             .replace(/<ph_region>/g, removeQuotes(region) || '<ph_region>')
-            .replace(/<ph_posthog_js_defaults>/g, '2026-01-30')
+            .replace(/<ph_posthog_js_defaults>/g, '2026-05-30')
             .replace(
                 /<ph_proxy_path>/g,
                 projectToken ? `relay-${removeQuotes(projectToken)?.slice(-4)}` : '<ph_proxy_path>'
@@ -271,10 +276,10 @@ export const CodeBlock = ({
             if (line.includes(highlightKey)) {
                 highlightLineNumbers.push(index)
             }
-            if (line.includes(diffAddKey)) {
+            if (line.includes(diffAddKey) || line.includes(diffAddKeyHash)) {
                 diffAddLineNumbers.push(index)
             }
-            if (line.includes(diffRemoveKey)) {
+            if (line.includes(diffRemoveKey) || line.includes(diffRemoveKeyHash)) {
                 diffRemoveLineNumbers.push(index)
             }
         })
@@ -352,7 +357,14 @@ export const CodeBlock = ({
                     <div className="shrink-0 ml-auto flex items-center divide-x divide-border dark:divide-border-dark">
                         {selector === 'dropdown' && languages.length > 1 ? (
                             <div className="relative mr-2">
-                                <Listbox value={currentLanguage} onChange={(language) => onChange(language)}>
+                                <Listbox
+                                    value={currentLanguage}
+                                    onChange={(language) => {
+                                        const index = languages.findIndex((l) => l.language === language.language)
+                                        if (index !== -1) setSelectedIndex(index)
+                                        onChange?.(language)
+                                    }}
+                                >
                                     <Listbox.Button className="flex items-center space-x-1.5 text-gray">
                                         <span>
                                             {currentLanguage.label ||
@@ -424,11 +436,11 @@ export const CodeBlock = ({
                                                     viewBox="0 0 18 18"
                                                     className="w-4 h-4 fill-current"
                                                 >
-                                                    <g clipPath="url(#a)">
+                                                    <g clipPath={`url(#clip-${codeBlockId})`}>
                                                         <path d="M3.079 5.843h2.103V2.419c0-.58.236-1.106.618-1.487A2.1 2.1 0 0 1 7.287.313h7.634c.58 0 1.106.237 1.487.619a2.1 2.1 0 0 1 .618 1.487v7.633a2.1 2.1 0 0 1-.618 1.488 2.1 2.1 0 0 1-1.487.618h-2.103v3.424c0 .58-.236 1.106-.618 1.487a2.1 2.1 0 0 1-1.487.618H3.079c-.58 0-1.106-.236-1.487-.618a2.1 2.1 0 0 1-.618-1.487V7.948c0-.58.236-1.106.618-1.487a2.1 2.1 0 0 1 1.487-.618Zm3.28 0h4.354c.58 0 1.106.236 1.487.618a2.1 2.1 0 0 1 .618 1.487v3.033h2.103a.925.925 0 0 0 .655-.273.926.926 0 0 0 .274-.655V2.418a.925.925 0 0 0-.274-.656.926.926 0 0 0-.655-.273H7.287a.924.924 0 0 0-.655.273.926.926 0 0 0-.273.656v3.424Zm-.586 1.176H3.077a.924.924 0 0 0-.655.274.926.926 0 0 0-.273.655v7.634c0 .254.104.487.273.655.169.169.401.274.655.274h7.634a.924.924 0 0 0 .656-.274.926.926 0 0 0 .273-.655V7.948a.925.925 0 0 0-.273-.655.926.926 0 0 0-.656-.274h-4.94.002Z" />
                                                     </g>
                                                     <defs>
-                                                        <clipPath id="a">
+                                                        <clipPath id={`clip-${codeBlockId}`}>
                                                             <path d="M0 0h18v18H0z" />
                                                         </clipPath>
                                                     </defs>
@@ -485,7 +497,7 @@ export const CodeBlock = ({
                                     }`}
                                 >
                                     <ScrollArea>
-                                        <div className="flex whitespace-pre min-w-fit relative pb-2" id={languageId}>
+                                        <div className="flex whitespace-pre min-w-fit relative" id={languageId}>
                                             {showLineNumbers && (
                                                 <pre className="m-0 py-4 pr-3 pl-5 inline-block font-code font-medium text-sm bg-accent">
                                                     <span
@@ -566,7 +578,14 @@ export const CodeBlock = ({
                                                     ) {
                                                         return
                                                     }
-                                                    const { className, ...props } = getLineProps({ line, key: i })
+                                                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                                                    const {
+                                                        key: _lineKey,
+                                                        className,
+                                                        ...props
+                                                    } = getLineProps({
+                                                        line,
+                                                    }) as any
                                                     const tooltipContent =
                                                         tooltips?.find(
                                                             (tooltip) => tooltip.lineNumber === i + lineNumberStart
@@ -581,8 +600,14 @@ export const CodeBlock = ({
                                                         if (token.content.includes(diffAddKey)) {
                                                             token.content = token.content.replace(diffAddKey, '')
                                                         }
+                                                        if (token.content.includes(diffAddKeyHash)) {
+                                                            token.content = token.content.replace(diffAddKeyHash, '')
+                                                        }
                                                         if (token.content.includes(diffRemoveKey)) {
                                                             token.content = token.content.replace(diffRemoveKey, '')
+                                                        }
+                                                        if (token.content.includes(diffRemoveKeyHash)) {
+                                                            token.content = token.content.replace(diffRemoveKeyHash, '')
                                                         }
                                                     })
 
@@ -604,11 +629,13 @@ export const CodeBlock = ({
                                                                     (token) => !token.content.startsWith(tooltipKey)
                                                                 )
                                                                 .map((token, key) => {
-                                                                    const { className, children, ...props } =
-                                                                        getTokenProps({
-                                                                            token,
-                                                                            key,
-                                                                        })
+                                                                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                                                                    const {
+                                                                        key: _tokenKey,
+                                                                        className,
+                                                                        children,
+                                                                        ...props
+                                                                    } = getTokenProps({ token }) as any
                                                                     return (
                                                                         <span className="relative" key={key}>
                                                                             {firstContentIndex === key &&

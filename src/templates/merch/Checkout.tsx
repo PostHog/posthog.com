@@ -82,7 +82,7 @@ export function Checkout(props: CheckoutProps): React.ReactElement {
             if (cart === null) return
 
             for (const item of cartItems) {
-                if (item.product.tags.includes('digital')) {
+                if (item.product.tags?.includes('digital')) {
                     continue
                 }
                 const continueSelling = allProducts.nodes.some((p: any) =>

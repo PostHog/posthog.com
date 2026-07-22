@@ -62,9 +62,9 @@ See: [session replay](https://posthog.com/docs/session-replay).
 “Follow-ups after **{event}** are manual today, so **{goal}** slips. Turn on a workflow that triggers on **{event_or_property}** and sends **{message_or_action}**. Enable here: {project_link}. First run appears here: {report_link}. Adjust, then expand.”  
 See: [workflows – start here](https://posthog.com/docs/workflows/start-here).
 
-**LLM analytics**  
-“You’re aiming to increase **{success_rate_metric}** for **{ai_feature}** and keep **{cost_metric}** in check. Turn on LLM analytics: {project_link}. Watch prompts, responses, success rate, and cost per **{n}** prompts. First view to check: {report_link}.”  
-See: [LLM analytics – start here](https://posthog.com/docs/llm-analytics/start-here).
+**AI Observability**
+“You’re aiming to increase **{success_rate_metric}** for **{ai_feature}** and keep **{cost_metric}** in check. Turn on AI Observability: {project_link}. Watch prompts, responses, success rate, and cost per **{n}** prompts. First view to check: {report_link}.”
+See: [AI Observability – start here](https://posthog.com/docs/ai-observability/start-here).
 
 **Heatmaps**  
 “People hesitate on **{page}**, which hurts **{goal}**. Open heatmaps: {project_link}. Compare **{version_or_date_range}** to see what changed. First view: {report_link}. Use this to pick the next tweak.”  

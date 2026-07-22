@@ -1,188 +1,92 @@
 ---
-title: Inbox management
+title: Support inbox
 sidebar: Docs
 showTitle: true
 ---
 
-import Alpha from './_snippets/alpha.mdx'
+import TicketStatuses from "./_snippets/ticket-statuses.mdx";
 
-<Alpha />
+The [PostHog web app](https://app.posthog.com) is home base for a support engineer. It's the surface for your **Support inbox**, where you read and reply to customer tickets, and it gives you the full context of what each person was doing when they reached out.
 
-The Support inbox is where your team views and responds to customer conversations. Each ticket includes rich context from PostHog to help you understand and resolve issues quickly.
+## Find and open tickets
 
-## Accessing the inbox
+Open your inbox from **Support** in [PostHog](https://app.posthog.com). From there you can:
 
-Go to **Support** in the main PostHog navigation to access your inbox.
+- **Filter** by status, priority, [channel](/docs/support/concepts/channels), SLA state, tags, or assignee
+- **Search** by ticket number, customer name, email, or message content
+- **Save** a filter combination as a view, to switch between common queries
 
-## Ticket properties
+A ticket's status tells you where it is in your workflow:
 
-Each ticket has the following properties:
+<TicketStatuses />
 
-| Property | Description |
-|----------|-------------|
-| **Ticket number** | Auto-incremented unique number (e.g., #1, #2, #3) |
-| **Status** | `new`, `open`, `pending`, `on_hold`, `resolved` |
-| **Priority** | `low`, `medium`, `high` (optional) |
-| **Channel** | Where the ticket came from: `widget`, `slack`, or `email` |
-| **Assignee** | User or role responsible for the ticket |
-| **Session ID** | The PostHog session for events and exceptions |
-| **Session Replay ID** | The session recording (if replay is enabled) |
-| **Distinct ID** | PostHog distinct_id for person linking |
+## What's in a ticket
 
-## Status workflow
+Each ticket carries a set of properties you can filter, sort, and act on.
 
-| Status | Meaning |
-|--------|---------|
-| `new` | Just created, not yet viewed by team |
-| `open` | Being actively worked on |
-| `pending` | Waiting for customer response |
-| `on_hold` | Paused for external reason |
-| `resolved` | Issue resolved, conversation closed |
+| Property          | Description                                                         |
+| ----------------- | ------------------------------------------------------------------- |
+| **Ticket number** | Auto-incremented unique number, for example #1, #2, #3              |
+| **Status**        | `new`, `open`, `pending`, `on_hold`, or `resolved`                  |
+| **Priority**      | `low`, `medium`, or `high`. Unset by default                        |
+| **Channel**       | Where the ticket came from: `widget`, `email`, `slack`, or `github` |
+| **Assignee**      | The user or role responsible for the ticket                         |
+| **Session ID**    | The PostHog session used to load events and exceptions              |
+| **Distinct ID**   | The `distinct_id` used to link the ticket to a person               |
 
-## Filtering and search
+## Reply with full context
 
-The ticket inbox supports filtering by:
+Open a ticket and the customer's story sits next to the conversation, so you resolve issues without asking anyone to reproduce them. Each ticket detail page can show:
 
-- **Status** - Filter by ticket status
-- **Priority** - Filter by priority level
-- **Channel** - Filter by source: widget, Slack, or email
-- **SLA state** - On track, at risk, or breached
-- **Tags** - Filter by tags attached to tickets
-- **Assignee** - Unassigned, specific user, or specific role
-- **Date range** - Filter by creation date
-- **Search** - Search by ticket number, customer name, or email
-
-## Ticket assignment
-
-Tickets can be assigned to:
-
-1. **Individual users** - A specific team member
-2. **Roles** - A group of users. Assigns to the role, not individual members.
-
-### How to assign a support ticket
-
-1. Open a ticket
-2. Click the **Assignee** dropdown in the sidebar
-3. Search for and select a user or role
-4. Click **Save changes**
-
-<CalloutBox icon="IconInfo" title="How assignment works" type="fyi">
-
-Assignment is manual with no automatic routing. Each ticket supports one assignee.
-
-</CalloutBox>
-
-### Filtering by assignee
-
-In the ticket list, use the assignee filter:
-- **Unassigned** - Show tickets with no assignment
-- **User: [name]** - Show tickets assigned to a specific user
-- **Role: [name]** - Show tickets assigned to a specific role
-
-## SLAs
-
-SLA deadlines are set via [workflow automation](/docs/support/workflows) — there's no built-in SLA configuration UI. You create a workflow that triggers on ticket creation (or priority change) and uses the **Update ticket** action to set a deadline.
-
-SLA states are derived from the deadline:
-
-| State | Condition |
-|-------|-----------|
-| **On track** | More than 1 hour until deadline |
-| **At risk** | 1 hour or less until deadline |
-| **Breached** | Past the deadline |
-
-The ticket list supports filtering and sorting by SLA state. The SLA deadline is also displayed in the ticket detail sidebar.
-
-See [workflow automation](/docs/support/workflows) for examples of setting SLAs based on channel, priority, or customer domain.
-
-## Tags
-
-Tickets support free-form tags for categorization and filtering.
-
-- Tags are shared across the project — any tag used on one ticket is available on all tickets
-- Add or remove tags from the ticket detail sidebar
-- Filter the ticket list by tags
-
-Tags can also be set automatically via [workflow automation](/docs/support/workflows#8-auto-tag-tickets-by-customer-email-domain).
+- **Chat thread** - The conversation with the customer. Replies you send reach them on the channel they used.
+- **Session recording** - Watch the customer's [session replay](/docs/session-replay) for widget tickets, if replay is enabled.
+- **Recent events** - The events from when the ticket was created, for widget tickets.
+- **Exceptions** - Any [errors](/docs/error-tracking) from their session, for widget tickets.
+- **Previous tickets** - Past conversations with the same person.
+- **Activity log** - A history of status, assignment, and priority changes on the ticket.
 
 ## Messages
 
-### Author types
+Every message on a ticket has an author type.
 
-| Author type | Description |
-|-------------|-------------|
-| **Customer** | Messages sent by the end user via the widget |
-| **Support** | Messages sent by your team from PostHog |
-| **AI** | Messages from AI (reserved for future use) |
+| Author type  | Description                                                      |
+| ------------ | ---------------------------------------------------------------- |
+| **Customer** | Sent by the end user through the widget, email, Slack, or GitHub |
+| **Support**  | Sent by your team from PostHog                                   |
 
-### Message status
+Replies you send show a delivery status so you know they landed. Widget messages show **Sent** when delivered and **Read** when the customer views them. Email replies show **Sending**, then **Sent** on success or **Failed** if delivery fails.
 
-Messages you send to customers display delivery status indicators:
+You can mark any message as a private note. Private notes are visible only to your team, hidden from the customer, and don't count toward the customer's unread messages. Use them for internal context or handoffs. Support tracks unread messages separately for the customer and your team, and counts reset when your team views a ticket or the customer marks messages as read.
 
-| Status | Meaning |
-|--------|----------|
-| **Sent** | Message has been delivered to the customer |
-| **Read** | Customer has viewed the message |
+## Reply and update status
 
-Status indicators appear on messages sent by your team. They help you understand whether customers have seen your responses.
+Use the **Send** button's dropdown to reply and update the ticket status in one step. Click the arrow next to **Send** to choose **Send and set pending**, **Send and set on hold**, or **Send and set resolved**.
 
-### Private notes
+When you use one of these options:
 
-Messages can be marked as private notes, which are:
-- Only visible to your team in PostHog
-- Hidden from customers in the widget
-- Useful for internal notes or handoff context
+- Your reply is sent first, then the ticket status is updated.
+- If the ticket is unassigned or assigned to a role, it's reassigned to you automatically.
+- If there are unsaved changes to priority, assignee, tags, or snooze, a confirmation dialog lists exactly what else will be saved along with your reply.
 
-To send a private note, toggle the **Private** option before sending.
+The confirmation dialog gives you two choices: **Send and save** commits all changes, while **Cancel** aborts everything – nothing is sent and nothing is saved.
 
-### Unread tracking
+## Assign, tag, and snooze
 
-The system tracks unread messages separately for:
-- **Customer** - Messages the customer hasn't seen (from your team)
-- **Team** - Messages your team hasn't seen (from the customer)
+Assign a ticket to a user or a role from the **Assignee** dropdown in the sidebar. Assignment is manual, with no automatic routing, and each ticket has one assignee. Add free-form tags to categorize and filter tickets, and snooze a ticket until a set time when you're waiting on something external.
 
-Unread counts reset when:
-- Team views a ticket in PostHog
-- Customer calls the "mark as read" endpoint from the widget
+## Track SLAs
 
-## Ticket detail page
+An SLA deadline is derived state, not a status. You set it through [workflow automation](/docs/support/workflows), and the ticket then reports as on track, at risk, or breached. You can filter and sort the inbox by SLA state.
 
-When you open a ticket, you'll see several panels with context:
+## Automate ticket handling
 
-### Chat thread
-
-The main conversation with the customer. Send replies here – they'll appear in the customer's widget.
-
-### Session recording panel
-
-If the user has session replay enabled, you can watch their session directly in the ticket view. This shows what they were doing before and when they reached out.
-
-### Recent events panel
-
-Events from ±5 minutes around when the ticket was created. This helps you understand:
-- What actions led to the support request
-- What the user was trying to accomplish
-- Any errors or unusual patterns
-
-### Exceptions panel
-
-Any errors or exceptions from the user's session. If they encountered a bug, you'll see the stack trace here.
-
-### Previous tickets panel
-
-Other tickets from the same person. Useful for:
-- Understanding their history with support
-- Identifying recurring issues
-- Seeing how previous issues were resolved
-
-### Activity log
-
-A history of all changes made to the ticket — status changes, assignment updates, priority changes, and more. This helps you understand the full timeline of a ticket's lifecycle.
+For the repetitive parts, let rules do the work. [Workflows](/docs/support/workflows) run on ticket events to set SLAs, auto-assign, tag, route, and change status automatically. For example, set a 4-hour SLA on widget tickets, auto-assign by customer domain, or reopen a ticket when the customer replies. It's rules you control, with no autonomous AI. See [Automate ticket handling](/docs/support/workflows) for the full set of triggers and actions.
 
 ## Tips for efficient support
 
-1. **Use private notes** for internal notes when handing off tickets
-2. **Check [session replay](/docs/session-replay)** before asking the user to describe what happened
-3. **Look at exceptions** to quickly identify bugs
-4. **Review previous tickets** to avoid asking repeat questions
-5. **Set status to pending** after you respond to track who's waiting for a reply
+- Check [session replay](/docs/session-replay) before asking a customer to describe what happened.
+- Look at the exceptions panel to identify bugs quickly.
+- Review previous tickets to avoid asking repeat questions.
+- Use **Send and set pending** to reply and mark the ticket as waiting for a customer response in one step.
+- Use saved views to switch between common filter combinations.
+- Snooze tickets when you're waiting on something external, instead of leaving them open.

@@ -1,0 +1,42 @@
+---
+title: "How to track long-term metrics after stopping enrollment"
+sidebar: Docs
+showTitle: true
+---
+
+Some experiments need more time for metrics to mature than you want to keep enrolling new users.
+
+For example, you're testing two price points and want to measure 90-day revenue and long-term retention.
+You've reached a good sample size after two weeks, but the metrics won't be meaningful for months.
+Keeping the experiment running means every new user continues to get randomly assigned to a variant — including potentially worse ones — just so you can keep measuring.
+
+You can avoid this by freezing your participant groups at a point in time.
+The experiment keeps running and counting conversions for existing users, but no new users are added to the measurement.
+This lets you roll out the winning variant immediately while your long-term metrics continue to mature in the background.
+
+## Step 1: Note the cutoff timestamp
+
+Decide when you want to stop counting new enrollments.
+This is typically "now" — the moment you're happy with your sample size and want to lock it in.
+
+## Step 2: Edit exposure criteria
+
+1. Go to your experiment and click **Edit exposure criteria**
+2. If you're using the default `$feature_flag_called` event, switch to **Custom event** and select `$feature_flag_called`
+3. Add a property filter with type **HogQL** and the expression:
+
+```
+timestamp < '2026-03-23 15:44:00'
+```
+
+Replace the timestamp with your cutoff date.
+
+This tells PostHog to only count exposures before the cutoff.
+Users exposed after this point won't be included in the experiment, even though the experiment is still running.
+
+## Step 3: Roll out the winning variant
+
+With the exposure filter in place, you can safely change your feature flag to roll out the winning variant to all users.
+New users will get the variant, but they won't appear in the experiment results because their exposures are after the cutoff.
+
+Your existing participant groups stay frozen, and their metrics continue to mature over time.

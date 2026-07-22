@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> Want PostHog to be involved in your event? See how we do [Community events](#community-events). Want to start a co-working group for builders? Check out our [Community incubator](#community-incubator) program and submit the [form](/community-incubator#apply). If you'd like to add an IRL event to the [events page](/events), contact <TeamMember name="Daniel Zaltsman"/> or <TeamMember name="Kliment Minchev"/>.
+> Want PostHog to partner, sponsor, or speak at your event? Submit the [form below](#event-submission-form). Want to start a builder collective? Check out our [Builder collectives](#community-incubator) program and submit the [form](/community-incubator#apply).
 
 We did 45 events in real life (IRL) in 2025 and we're just getting started. While we’re [100% remote](/handbook/company/culture) and set up to work asynchronously–we've found real benefits in getting together with users in real life. All our public events are showcased on the [events page](/events). 
 
@@ -14,8 +14,10 @@ The event formats we prefer (and organize ourselves) fall into one of these:
 
 -   Hands-on gatherings that enable our users to build better products for their customers
 -   Experiences that allow engineers and founders to walk away with unique product engineering insights
--   Getting [product engineers](/blog/what-is-a-product-engineer) together to identify problems and build solutions for users
+-   Getting [product engineers](/product-engineer/what-is-a-product-engineer) together to identify problems and build solutions for users
 -   AFK time that we ourselves enjoy like hiking, gaming, cycling, cooking classes, etc.
+
+All plans come together – from conception through to final delivery – on our [event management tool](https://www.notion.so/2f552be1aa2f808494f3e7f9bf4e258c?v=2f552be1aa2f80009544000c428b8082) which centralizes owners, logstics and feedback in one place.
 
 ## Community incubator
 
@@ -96,6 +98,8 @@ Our brand is a reflection of us and [how we’re experienced by others](/blog/br
 
 Community events are better when organizers share what happened, what you learned, and any follow-up actions. [We value feedback](/handbook/people/feedback) and expect the same from event organizers. In addition to what you learned and feedback from attendees, we ask that you share any photos, videos, quotes, data points with our team.
 
+PostHog team members who attended or presented at an event can share their feedback directly through our [event feedback form](/events-feedback-form).
+
 ## Sponsoring external events
 
 We often get invited to sponsor events - these range in size, location, and audience. We rarely say yes.  For these to be a worthwhile endeavor, the sponsorship should be a win-win primarily for the end user and secondarily for us. Hence, it's important that the audience, content, format, and ethos to all align. Even if we don't sponsor financially, we encourage team members to speak at events and we can support with merch. Ask in the [#team-irl-events](https://posthog.slack.com/archives/C0AB78YBCNA) channel.
@@ -110,3 +114,9 @@ For first-time yappers, reference the [speaker's guide](/handbook/marketing/spea
 ## Sponsoring student organizations
 
 Sometimes students at varying universities ask us if we are interested in sponsoring their career fairs, hackathons, or other student-led initiatives. We don't currently participate in these. Although we don't use specific years of experience as a qualifier for hiring, we rarely hire students straight out of school. If there is a custom partnership you have in mind or it involves an existing employee's alma-mater, ask in the [#team-irl-events](https://posthog.slack.com/archives/C0AB78YBCNA) channel.
+
+## Event submission form
+
+Want us to partner, sponsor, or speak at your event? Fill out the form below and we'll be in touch.
+
+<EmbeddedSurvey surveyId="019f181c-074f-0000-8240-f190ad8cfdfb" />

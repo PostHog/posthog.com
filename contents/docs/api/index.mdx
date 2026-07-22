@@ -15,11 +15,12 @@ The API is available for all users and instances. It contains two types of endpo
 
 > You must make API requests to the correct domain. On US Cloud, these are `https://us.i.posthog.com` for public endpoints and `https://us.posthog.com` for private ones. On EU Cloud, these are `https://eu.i.posthog.com` for public endpoints and `https://eu.posthog.com` for private ones. For self-hosted instances, use your self-hosted domain. Confirm yours by checking your PostHog instance URL.
 
-## Private endpoint authentication
+## Authentication
 
-import InstallAPI from '../integrate/_snippets/install-api.mdx'
+Private endpoints require authentication. There are two ways to authenticate, and which one you should use depends on who the integration is for:
 
-<InstallAPI />
+- **[Personal API keys](/docs/api/personal-api-keys)** – Use these when you're using PostHog from your own scripts, automations, or any integration tied to your own account. This is the right choice if you're just building something for your own project.
+- **[OAuth](/docs/api/oauth)** – Use this when you're building an app that other PostHog users will install or connect to. OAuth lets users grant your app scoped access without sharing their personal API key.
 
 ## Rate limiting
 
@@ -28,6 +29,8 @@ Private `GET`, `POST`, `PATCH`, `DELETE` endpoints are rate limited. Public POST
 There are separate limits for different kinds of resources.
 
 - For all analytics endpoints (such as calculating insights, retrieving persons, or retrieving session recordings), the rate limits are `240/minute` and `1200/hour`.
+
+- For the `events/values` endpoint, the rate limits are `60/minute` and `300/hour`. When using a personal API key, the `event_name` query parameter is required. For queries without event filters, use the [`query`](/docs/api/queries) endpoint instead.
 
 - The [`query`](/docs/api/queries) endpoint has a rate limit of `2400/hour`. For large or regular exports of events, use [batch exports](/docs/cdp/batch-exports). For data-powered APIs or user-facing dashboards, [reach out to us](https://posthog.com/talk-to-a-human).
 
@@ -39,7 +42,7 @@ There are separate limits for different kinds of resources.
 
 These limits apply to **the entire team** (i.e. all users within your PostHog organization). For example, if a script requesting feature flag metadata hits the rate limit, and another user, using a different personal API key, makes a single request to the persons API, this gets rate limited as well.
 
-> **Want to use the PostHog API beyond these limits?** [Reach out to us](https://posthog.com/talk-to-a-human) and tell us about your use case. We don't guarantee raising rate limits and might point you to some of our other products that are more appropriate for your use case.
+> At this time, we are not offering higher limits than these, but you may wish to try our [endpoints product](/docs/endpoints), which offers query customization and higher limits. Alternatively, you may be able to use our [batch exports product](/docs/cdp/batch-exports) to pull the data that you need from our events or persons tables on a faster cadence.
 
 ## Responses
 
