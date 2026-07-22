@@ -40,16 +40,16 @@ Who covers the account at each stage. Stages run top to bottom in the order a cu
 
 ✅ active coverage &nbsp;·&nbsp; 🟡 conditional (see notes) &nbsp;·&nbsp; blank = not involved
 
-| Stage            | TAE | CSM | TAM | Growth TAM | Onboarding |
-| ---------------- | :-: | :-: | :-: | :--------: | :--------: |
-| **Exploring**    |     |     |     |            |     🟡     |
-| **Evaluating**   | ✅  |     |     |            |     🟡     |
-| **Proving**      | ✅  |     |     |            |     🟡     |
-| **Buying**       | ✅  | 🟡  |     |            |     🟡     |
-| **Implementing** |     | ✅  | 🟡  |     🟡     |     🟡     |
-| **Ramping**      |     | ✅  | ✅  |     ✅     |     🟡     |
-| **Expanding**    |     | ✅  | ✅  |     ✅     |            |
-| **Steady state** |     | ✅  |     |            |            |
+| Stage            | BDR | TAE | CSM | TAM | Growth TAM | FDE | Onboarding |
+| ---------------- | :-: | :-: | :-: | :-: | :--------: | :-: | :--------: |
+| **Exploring**    | ✅  |     |     |     |            |     |     🟡     |
+| **Evaluating**   | 🟡  | ✅  |     |     |            |     |     🟡     |
+| **Proving**      |     | ✅  |     |     |            | 🟡  |     🟡     |
+| **Buying**       |     | ✅  | 🟡  |     |            |     |     🟡     |
+| **Implementing** |     |     | ✅  | 🟡  |     🟡     | 🟡  |     🟡     |
+| **Ramping**      |     |     | ✅  | ✅  |     ✅     | 🟡  |     🟡     |
+| **Expanding**    |     |     | ✅  | ✅  |     ✅     | 🟡  |            |
+| **Steady state** |     |     | ✅  |     |            |     |            |
 
 
 Notes:
@@ -58,6 +58,8 @@ Notes:
 -  TAM allocation can start during Implementing when a deal closed with a known expansion path.
 - Growth TAM pickup can happen during Implementing for a fast-ramping sub-$20k account.
 - The onboarding team's lane is wide because its trigger is first payment, which can land anywhere from Exploring through Ramping.
+- BDR coverage is top-of-funnel only: BDRs source and qualify accounts at Exploring (primarily via cold outbound to accounts with no inbound buying signal) and hand off to the TAE at Evaluating. They don't carry the account past that handoff.
+- FDE coverage is conditional and account-specific: an FDE runs a short-term, hands-on technical engagement for a small number of high-spend or technically complex accounts where the implementation need is more than a TAM or CSM can deliver. The 🟡 at Proving covers the case where an FDE helps prove technical fit during a POC with a top prospect; drop it if you want FDE kept strictly post-sales.
 
 ## Ownership rules
 
@@ -66,3 +68,7 @@ Notes:
 **TAM coverage is the exception, not the default.** A TAM is added to an account only when a clear expansion or cross-sell opportunity justifies it, and released when the opportunity is exhausted. 
 
 **TAE handoff goes to CSM, always** (above threshold). Optionally the TAE also hands to a TAM, but only when the handoff doc names the specific opportunity that justifies the layer. "Still ramping" is not a justification. 
+
+**BDRs feed the funnel, they don't own the deal.** BDRs own top-of-funnel sourcing at Exploring and hand off to the TAE at Evaluating. Coverage ends at the handoff; the TAE owns the account from there.
+
+**FDE is a conditional technical layer, like TAM.** An FDE is added to an account only when a high-spend or technically complex implementation justifies dedicated engineering beyond what a TAM or CSM can deliver, and released when the engagement closes. It is never the base layer and never replaces the CSM.
