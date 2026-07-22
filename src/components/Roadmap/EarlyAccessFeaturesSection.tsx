@@ -25,10 +25,9 @@ import { Select } from 'components/RadixUI/Select'
 import Tooltip from 'components/RadixUI/Tooltip'
 import SmallTeam from 'components/SmallTeam'
 import SurveySignup from 'components/SurveySignup'
-import useEarlyAccessFeatures, { EarlyAccessFeature, EarlyAccessFeatureStage } from 'hooks/useEarlyAccessFeatures'
-import { useFeatureOwnership } from 'hooks/useFeatureOwnership'
+import { EarlyAccessFeature, EarlyAccessFeatureStage } from 'hooks/useEarlyAccessFeatures'
+import useRoadmapEarlyAccessFeatures from 'hooks/useRoadmapEarlyAccessFeatures'
 import usePostHog from 'hooks/usePostHog'
-import { ROADMAP_TEAM_OVERRIDES } from './roadmapTeamOverrides'
 import { ROADMAP_STAGE_STYLES } from './roadmapStageStyles'
 
 const featurePreviewUrl = (flagKey: string): string =>
@@ -154,12 +153,6 @@ const StageChip = ({ stage, size = 'sm' }: { stage: BoardStage; size?: ChipSize 
         </span>
     )
 }
-
-const slugify = (text: string): string =>
-    text
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/^-+|-+$/g, '')
 
 const roadmapUrl = (search: string, feature?: string): string => {
     const params = new URLSearchParams(search)
@@ -681,8 +674,7 @@ const bySignupAvailability = (a: EarlyAccessFeature, b: EarlyAccessFeature): num
 export default function EarlyAccessFeaturesSection(): JSX.Element | null {
     const roadmapRootRef = useRef<HTMLDivElement>(null)
     const location = useLocation()
-    const { grouped, loading } = useEarlyAccessFeatures()
-    const { features: ownedFeatures } = useFeatureOwnership()
+    const { grouped, loading, teamForFeature } = useRoadmapEarlyAccessFeatures()
     const [query, setQuery] = useState('')
     const [teamFilter, setTeamFilter] = useState('all')
     const [pitchOpen, setPitchOpen] = useState(false)
@@ -738,21 +730,6 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
         return { teamInfoBySlug: teams, peopleByTeamSlug: people }
     }, [allSqueakTeam])
 
-    const teamByFeatureSlug = useMemo(() => {
-        const map: Record<string, string> = {}
-        ownedFeatures.forEach((feature) => {
-            if (feature.owner?.[0]) {
-                map[feature.slug] = feature.owner[0]
-            }
-        })
-        return map
-    }, [ownedFeatures])
-
-    const teamForFeature = (feature: EarlyAccessFeature): string | undefined =>
-        ROADMAP_TEAM_OVERRIDES[feature.flagKey] ||
-        teamByFeatureSlug[feature.flagKey] ||
-        teamByFeatureSlug[slugify(feature.name)]
-
     const allFeatures = useMemo(() => [...grouped.comingSoon, ...grouped.beta], [grouped.beta, grouped.comingSoon])
     const total = allFeatures.length
 
@@ -769,10 +746,7 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
         const counts: Record<string, number> = {}
         let unassigned = 0
         allFeatures.forEach((feature) => {
-            const slug =
-                ROADMAP_TEAM_OVERRIDES[feature.flagKey] ||
-                teamByFeatureSlug[feature.flagKey] ||
-                teamByFeatureSlug[slugify(feature.name)]
+            const slug = teamForFeature(feature)
             if (slug) {
                 counts[slug] = (counts[slug] || 0) + 1
             } else {
@@ -790,7 +764,7 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
             options.push({ value: 'unassigned', label: `Unassigned (${unassigned})` })
         }
         return options
-    }, [allFeatures, teamByFeatureSlug, teamInfoBySlug])
+    }, [allFeatures, teamForFeature, teamInfoBySlug])
 
     const requestedFlagKey = useMemo(
         () => new URLSearchParams(location.search).get('feature') || undefined,

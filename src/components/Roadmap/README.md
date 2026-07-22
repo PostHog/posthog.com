@@ -6,7 +6,7 @@
 
 - `useEarlyAccessFeatures` owns the feature data. It starts with Gatsby's build-time `EarlyAccessFeature` nodes, then revalidates with PostHog JS in the browser.
 - The hook supplies the feature stage, title, description, documentation URL, flag key, creation date, waitlist count, and waitlist survey payload.
-- `useFeatureOwnership` supplies the shared feature-to-small-team map. `roadmapTeamOverrides.ts` is the curated flag-key override and takes precedence over that map.
+- `useRoadmapEarlyAccessFeatures` adds the shared feature-to-small-team map to that data. It resolves `roadmapTeamOverrides.ts` first, then `useFeatureOwnership`, and can filter the canonical roadmap to one team for embedded views such as `/ai`.
 - `allSqueakTeam` supplies display names, mini crests, and member profiles. Features without a match remain visible and can be filtered as `Unassigned`.
 
 Do not duplicate this data in the component or add hard-coded feature cards. Update the source early-access feature, shared ownership data, or the roadmap override map instead.
