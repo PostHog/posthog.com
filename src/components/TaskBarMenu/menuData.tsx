@@ -892,6 +892,12 @@ export const SparksJoyItems = {
             iconName: 'games' as AppIconName,
             customIcon: null,
         },
+        {
+            label: 'Hitster',
+            link: '/sparks-joy/hitster',
+            iconName: 'games' as AppIconName,
+            customIcon: null,
+        },
     ],
     notGames: [
         {
