@@ -8,7 +8,7 @@ const RoadmapPage = () => {
     return (
         <>
             <SEO
-                title="Roadmap – PostHog"
+                title="Roadmap - PostHog"
                 description="See what we're building next"
                 image={`/images/og/roadmap.jpg`}
             />
@@ -32,10 +32,10 @@ const RoadmapPage = () => {
                             <h1 className="m-0 text-2xl @xl:text-3xl">Roadmap</h1>
                             <p className="mb-0 mt-2 max-w-5xl text-base leading-relaxed text-secondary">
                                 Here's what we're building. Betas are ready to enable today, and anything coming soon
-                                has a waitlist – drop your email and we'll let you know the moment it ships.
+                                has a waitlist. Drop your email and we'll let you know the moment it ships.
                             </p>
                             <p className="mb-0 mt-3 max-w-5xl text-sm leading-relaxed text-secondary">
-                                Every feature moves through stages –{' '}
+                                Every feature moves through stages:{' '}
                                 <span
                                     className={`rounded-sm px-1 py-0.5 font-semibold ${ROADMAP_STAGE_STYLES.concept.surface} ${ROADMAP_STAGE_STYLES.concept.text}`}
                                 >

@@ -556,7 +556,7 @@ const TeamRoster = ({ people }: { people: TeamPerson[] }): JSX.Element | null =>
                         >
                             <span className="px-1 text-sm">
                                 <strong>{person.name}</strong>
-                                {person.role ? <span className="text-secondary"> – {person.role}</span> : null}
+                                {person.role ? <span className="text-secondary"> - {person.role}</span> : null}
                             </span>
                         </Tooltip>
                     )
