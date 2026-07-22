@@ -13,6 +13,9 @@ tags:
   - Engineering
 ---
 
+
+The north star for internal developer experience at PostHog is "10,000 PRs in a month is easy". As agent workflows accelerate what is possible. We're sharing what we're changing and how we've been able to increase the volume of engineering work and keep delivering reliable systems
+
 ## AI pilled
 
 *Covers:*
