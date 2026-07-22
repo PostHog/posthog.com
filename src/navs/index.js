@@ -2571,10 +2571,6 @@ export const docsMenu = {
                         {
                             name: 'Unity',
                             url: '/docs/libraries/unity',
-                            badge: {
-                                title: 'Beta',
-                                className: '!bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50',
-                            },
                         },
                         {
                             name: 'C#/.NET',
