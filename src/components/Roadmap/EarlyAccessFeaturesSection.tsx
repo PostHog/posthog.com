@@ -369,6 +369,21 @@ const PitchIdeaPanel = (): JSX.Element => {
     )
 }
 
+const ChangelogCard = (): JSX.Element => (
+    <Link
+        to="/changelog"
+        // The Editor's prose styles hit this anchor (underline, semibold, link color) — reset
+        // them so the text matches the PitchIdeaCard button above.
+        className="flex w-full items-center justify-between gap-3 rounded-md border border-dashed border-primary bg-transparent p-3 text-left !font-normal !text-primary !no-underline hover:border-secondary hover:bg-primary/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red dark:focus-visible:ring-yellow"
+    >
+        <span className="min-w-0">
+            <span className="block text-sm font-bold leading-snug">What's just shipped?</span>
+            <span className="mt-0.5 block text-xs text-secondary">Check the changelog</span>
+        </span>
+        <IconArrowRight className="size-5 shrink-0 text-red dark:text-yellow" />
+    </Link>
+)
+
 const FeatureCard = ({
     feature,
     team,
@@ -504,6 +519,16 @@ const RoadmapLane = ({
                         className="m-0 list-none p-0"
                     >
                         <PitchIdeaCard onClick={onPitchClick} />
+                    </motion.li>
+                )}
+                {/* Features graduate from beta by shipping — point onward to the changelog. */}
+                {definition.stage === 'beta' && (
+                    <motion.li
+                        layout={shouldReduceMotion ? false : 'position'}
+                        transition={{ layout: layoutTransition }}
+                        className="m-0 list-none p-0"
+                    >
+                        <ChangelogCard />
                     </motion.li>
                 )}
             </ul>
