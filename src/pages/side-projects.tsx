@@ -162,7 +162,7 @@ function SideProjectsPage({ location }: { location: { search: string } }) {
             <SEO
                 title="PostHog Side Projects"
                 description="Side projects are awesome, help us learn and make us better at building stuff. A collection of projects folks at PostHog have worked on."
-                image="/images/side-projects-og.png"
+                image="/images/og/default.png"
             />
             <header className="py-12 px-5">
                 <h1 className="m-0 text-center text-4xl md:text-5xl lg:text-6xl text-primary dark:text-primary-dark">
