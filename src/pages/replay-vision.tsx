@@ -200,7 +200,7 @@ function HonestBit() {
                 actually talk to the people using it and get the quality right before we go wide. Join the list and
                 you'll be near the front.
             </p>
-            <div className="max-w-lg @container bg-yellow/10 border border-yellow rounded-md px-8 py-6 shadow-xl">
+            <div className="max-w-lg mx-auto @container bg-yellow/10 border border-yellow rounded-md px-8 py-6 shadow-xl">
                 <WaitlistForm
                     productHandle="replay_vision"
                     productName="Replay Vision"
