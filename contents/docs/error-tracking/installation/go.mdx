@@ -4,8 +4,8 @@ platformLogo: go
 showStepsToc: true
 ---
 
-import { Steps, Step } from 'components/Docs/Steps'
-import { CalloutBox } from 'components/Docs/CalloutBox'
+import { Steps, Step } from "components/Docs/Steps";
+import { CalloutBox } from "components/Docs/CalloutBox";
 
 <Steps>
 
@@ -19,7 +19,7 @@ go get github.com/posthog/posthog-go
 
 <CalloutBox icon="IconInfo" title="Source context not yet supported" type="fyi">
 
-The Go SDK captures stack traces with file names, line numbers, and function names, but does not yet support source context (displaying the surrounding lines of code in the error tracking UI). Symbol set uploads for Go are not currently available.
+The Go SDK captures stack traces with file names, line numbers, and function names, but does not yet support source context (displaying the surrounding lines of code in the error tracking UI).
 
 </CalloutBox>
 
@@ -143,14 +143,14 @@ logger.Warn("Something broke",
 
 The handler supports several configuration options:
 
-| Option | Description | Default |
-|---|---|---|
-| `WithMinCaptureLevel(level)` | Minimum log level to capture | `slog.LevelWarn` |
-| `WithDistinctIDFn(fn)` | Function to extract distinct ID from context/record | Returns `""` (skips capture) |
-| `WithFingerprintFn(fn)` | Custom fingerprint for error grouping | `nil` (PostHog assigns) |
-| `WithSkip(n)` | Stack frames to skip | `5` |
-| `WithStackTraceExtractor(e)` | Custom stack trace extractor | `DefaultStackTraceExtractor` |
-| `WithDescriptionExtractor(e)` | Custom description extractor | `ErrorExtractor` |
+| Option                        | Description                                         | Default                      |
+| ----------------------------- | --------------------------------------------------- | ---------------------------- |
+| `WithMinCaptureLevel(level)`  | Minimum log level to capture                        | `slog.LevelWarn`             |
+| `WithDistinctIDFn(fn)`        | Function to extract distinct ID from context/record | Returns `""` (skips capture) |
+| `WithFingerprintFn(fn)`       | Custom fingerprint for error grouping               | `nil` (PostHog assigns)      |
+| `WithSkip(n)`                 | Stack frames to skip                                | `5`                          |
+| `WithStackTraceExtractor(e)`  | Custom stack trace extractor                        | `DefaultStackTraceExtractor` |
+| `WithDescriptionExtractor(e)` | Custom description extractor                        | `ErrorExtractor`             |
 
 <CalloutBox icon="IconInfo" title="Error extraction" type="fyi">
 
@@ -176,6 +176,36 @@ client.Enqueue(exception)
 // Flush the queue before exiting
 client.Close()
 ```
+
+</Step>
+
+<Step title="Upload debug symbols (macOS)" badge="optional">
+
+For production Go binaries on macOS, uploading debug symbols enables server-side symbolication with full stack traces including inlined frames.
+
+### Build with uncompressed DWARF
+
+Go compresses its embedded DWARF by default, which the symbolication server cannot read. Disable compression when building:
+
+```bash
+go build -ldflags="-compressdwarf=false" -o myapp .
+```
+
+### Upload the binary
+
+After building, upload the binary with the [PostHog CLI](/docs/cli):
+
+```bash
+posthog-cli symbol-sets upload --directory ./
+```
+
+The CLI finds the Go executable, extracts its `LC_UUID`, and uploads the debug symbols. Run this as part of the same pipeline that produces your production binary — each build has its own UUID, so symbols must be re-uploaded for every build you deploy.
+
+<CalloutBox icon="IconInfo" title="Version requirements" type="action">
+
+Mach-O executable uploads require [CLI 0.8.2](https://github.com/PostHog/posthog/releases/tag/posthog-cli%2Fv0.8.2) or later.
+
+</CalloutBox>
 
 </Step>
 
