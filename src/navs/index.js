@@ -5687,8 +5687,8 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
-                    name: 'PostHog Code',
-                    url: '/docs/support/surfaces/code',
+                    name: 'PostHog Desktop',
+                    url: '/docs/support/surfaces/desktop',
                     icon: 'IconCode',
                     color: 'green',
                 },
