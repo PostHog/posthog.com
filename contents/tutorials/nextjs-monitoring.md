@@ -44,7 +44,7 @@ To add PostHog, install [`posthog-js`](/docs/libraries/js).
 npm i posthog-js
 ```
 
-After this, create a `providers.js` file in your `app` folder. In this file, set up PostHog for the client using the `PostHogProvider` component as well as your project API key and instance address, which you can get from the getting started flow or [your project settings](https://app.posthog.com/project/settings).
+After this, create a `providers.js` file in your `app` folder. In this file, set up PostHog for the client using the `PostHogProvider` component as well as your project token and instance address, which you can get from the getting started flow or [your project settings](https://app.posthog.com/project/settings).
 
 ```js
 // app/provider.js
@@ -55,7 +55,7 @@ import { useEffect } from 'react'
 
 export default function PHProvider({ children }) {
   useEffect(() => {
-    posthog.init('<ph_project_api_key>', {
+    posthog.init('<ph_project_token>', {
       api_host: '<ph_client_api_host>',
       defaults: '<ph_posthog_js_defaults>',
     })

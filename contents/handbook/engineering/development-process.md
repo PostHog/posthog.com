@@ -115,6 +115,14 @@ Other than that, you know what to do.
 
 ## Creating PRs
 
+When you have a piece of code ready to be reviewed, create a PR. Link the PR to the issue it solves, and add a clear description of what the PR does and how to test it. Follow PR templates if they exist for the area you're working on.
+
+All PRs should be attributable to a human author as far as possible, even if they were assisted by an agent.
+
+Fully automatically generated PRs might come from an agent like PostHog Code or from systems like Dependabot. These PRs are fine, but they should be clearly labelled as such and include a clear description of the changes being made and any relevant context about the generation process. These PRs should in turn never be attributed to a human author, as the changes were not directly or indirectly made by a human.
+
+For external contributors, our [AI contributions policy](https://github.com/PostHog/posthog/blob/master/AI_POLICY.md) covers expectations around AI-assisted PRs.
+
 To make sure our issues are linked correctly to the PRs, you can tag the issue in your commit.
 
 ```bash
@@ -123,7 +131,7 @@ git commit -m "Closes #289 add posthog logo to website"
 
 ## Testing code
 
-See: [How we review](/handbook/engineering/how-we-review).
+See: [How we review PRs](/handbook/engineering/how-we-review).
 
 ### Storybook Visual Regression Tests
 
@@ -239,18 +247,7 @@ The workflow also runs a smoke test (health check) automatically on PRs that tou
 
 ## Reviewing code
 
-When we review a PR, we'll look at the following things:
-
--   Does the PR actually solve the issue?
--   Does the solution make sense?
--   Will the code perform with millions of events/users/actions?
--   Are there tests and do they test the right things?
--   Are there any security flaws?
--   Is the code in line with our [coding conventions](/docs/contribute/coding-conventions)?
-
-Things we do not care about during review:
-
--   Syntax. If we're arguing about syntax, that means we should install a code formatter.
+For review requirements, checklists, and conventions, see [How we review PRs](/handbook/engineering/how-we-review).
 
 ## Merging
 
@@ -258,11 +255,32 @@ Merge anytime. Friday afternoon? Merge.
 
 Our testing, reviewing and building process should be good enough that we're comfortable merging any time.
 
-Always request a review on your pull request by a fellow team member (or leave unassigned for anyone to pick up when available). We avoid self-merge PRs unless it's an emergency fix and no one else is available (especially for posthog.com).
+Always request a review on your pull request (or leave unassigned for anyone to pick up when available). We avoid merging without any review unless it's an emergency fix and no one else is available (especially for posthog.com). During an incident, the [Force-merge a PR](#break-glass-force-merge-a-pr) Slack app is the sanctioned break-glass way to merge a PR that branch protection would otherwise block.
 
 Once you merge a pull request, it will automatically deploy to all environments. The deployment process is documented in our [charts repository](https://github.com/PostHog/charts/blob/main/DEPLOYMENT.md). Check out the `#platform-bots` Slack channel to see how your deploy is progressing. 
 
 We're managing deployments with [ArgoCD](http://go/argo) where you can also see individual resources and their status.
+
+### Break-glass: force-merge a PR
+
+Branch protection on the `posthog` repo requires a review and green CI before anyone can merge. In **exceptional cases** — almost always [during an incident](/handbook/engineering/operations/incidents#force-merging-a-fix) — the **Force-merge a PR** Slack app lets any PostHog employee merge a PR that would otherwise be blocked. It bypasses required reviews and checks through a tightly-scoped GitHub App. Take great care: this is a break-glass tool, not a shortcut around code review.
+
+**To use it:** in **#dev**, open the shortcuts menu (or type `/force-`), pick **Force-merge a PR**, and fill in the repo, the PR number or URL, and a reason.
+
+**What it enforces.** The app refuses the merge unless:
+
+- The repo is one it's configured for (today, just `posthog`).
+- The PR is open, not a draft, not already merged, on an allow-listed base branch, and carries no blocking label (e.g. `do-not-merge`).
+- The PR author is a member of the PostHog GitHub org (no fork PRs from external contributors).
+- You're a full Slack workspace member with a `@posthog.com` email.
+
+**Everything is audited.** Each force-merge posts an audit message to Slack, comments on the PR recording who triggered it and the reason, and writes a tamper-proof (object-locked) record, alongside an EventBridge event and a CloudWatch metric that alarms on unusual volume. Accountability is after the fact, so expect to justify any force-merge — and cover it in the [post-mortem](/handbook/engineering/operations/post-mortems) if it was part of an incident.
+
+### Deploy notification bot
+
+After your PR is deployed to an environment, a bot automatically comments on the merged PR with the deployment status. The **dev** deployment triggers the initial comment. As **prod-us** and **prod-eu** finish deploying, the bot updates the same comment in-place rather than posting new ones.
+
+If you don't see a comment on your PR after a deploy, give it a few minutes -- the notification runs after ArgoCD finishes syncing. If it still hasn't appeared, check the [deploy workflow](https://github.com/PostHog/charts/actions/workflows/state-deploy.yml) in PostHog/charts for failures.
 
 ### Verifying your deployment
 
@@ -314,7 +332,7 @@ If `state.yaml` shows a newer commit than what's running on pods, check ArgoCD:
 | Pods running old commit | Rollout stuck or image not built | Check deployment rollout status; verify CI built the image |
 | Can't find your service in ArgoCD | Looking at wrong app grouping | Search for your specific service + environment (e.g., `ingestion-events-prod-us`) |
 
-If a deployment appears stuck, reach out in `#team-infrastructure`.
+If a deployment appears stuck, reach out in `#support-infrastructure` or ping `@infra-folks`.
 
 ## Documenting
 
@@ -351,7 +369,7 @@ Opt-in betas can have rough edges, but public betas and full releases should be 
 
 Engineers should apply the following best practices for _all_ new releases:
 
--   Ensure Marketing is aware of the launch, so [a launch plan](/handbook/growth/marketing/product-announcements) can be created.
+-   Ensure Marketing is aware of the launch, so [a launch plan](/handbook/marketing/product-announcements) can be created.
 -   Ensure docs are updated to reflect the new release.
 -   Ensure all new features include at least one pre-made template (or equivalent) for users.
 
@@ -391,7 +409,7 @@ Betas are usually announced as milestones on the public roadmap and included in 
 
 ### Product announcements
 
-Announcements, whether for beta or final updates, are a Marketing responsibility. See: [Product announcements](/handbook/growth/marketing/product-announcements).
+Announcements, whether for beta or final updates, are a Marketing responsibility. See: [Product announcements](/handbook/marketing/product-announcements).
 
 In order to ensure a smooth launch [the owner](/handbook/engineering/development-process#assign-an-owner) should tell Marketing about upcoming updates as soon as possible, or include them in an All-Hands update.
 

@@ -86,7 +86,7 @@ const ServicesTable = () => {
         },
     ]
 
-    return <OSTable columns={columns} rows={rows} size="md" rowAlignment="top" />
+    return <OSTable columns={columns} rows={rows} size="md" rowAlignment="top" width="full" />
 }
 
 const MigrationVendors = () => {

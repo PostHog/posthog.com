@@ -341,9 +341,12 @@ const Form = ({
     )
 }
 
-const code = 'X7DABDB33723'
+const code = process.env.GATSBY_SHOPIFY_STICKER_CODE
+if (!code) {
+    throw new Error('GATSBY_SHOPIFY_STICKER_CODE is not set')
+}
 
-const ApplicationSuccess = ({ isInExcludedCountry }: { isInExcludedCountry?: boolean }) => {
+const ApplicationSuccess = ({ isInUnitedStates }: { isInUnitedStates?: boolean }) => {
     const { setWindowTitle } = useApp()
     const { appWindow } = useWindow()
     const posthog = usePostHog()
@@ -406,7 +409,7 @@ const ApplicationSuccess = ({ isInExcludedCountry }: { isInExcludedCountry?: boo
                         </p>
                     </div>
 
-                    {!isInExcludedCountry && (
+                    {isInUnitedStates && (
                         <div className="px-6 md:px-12 mb-8">
                             <CloudinaryImage
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/laptop_sticker_6c15a03be1.png"
@@ -416,7 +419,8 @@ const ApplicationSuccess = ({ isInExcludedCountry }: { isInExcludedCountry?: boo
 
                             <h3 className="m-0 text-base">Here's a laptop sticker, on us!</h3>
                             <p className="m-0 mb-3 text-sm">
-                                This code is our token of appreciation for taking the time to apply.
+                                This code is our token of appreciation for taking the time to apply. (Available for
+                                shipping to addresses in the United States only.)
                             </p>
                             <div className="rounded-md bg-tan dark:bg-accent-dark border border-primary  py-2 px-3 flex justify-between items-center mb-4 md:max-w-[210px] w-full">
                                 <p className="font-semibold font-code m-0">{code}</p>
@@ -475,7 +479,7 @@ const ApplicationSuccess = ({ isInExcludedCountry }: { isInExcludedCountry?: boo
                         </div>
                     )}
 
-                    <div className={`mx-6 md:mx-12 pb-2  ${isInExcludedCountry ? '' : 'border-t border-primary pt-6'}`}>
+                    <div className={`mx-6 md:mx-12 pb-2  ${!isInUnitedStates ? '' : 'border-t border-primary pt-6'}`}>
                         <h4 className="mb-0">More cool tech jobs</h4>
                         <p className="text-sm mb-4">
                             While you're waiting to hear back, you might also be interested in exploring our{' '}
@@ -540,6 +544,7 @@ export default function Apply({ id, info }: { id: string; info: any }) {
     const { addWindow } = useApp()
     const [submitted, setSubmitted] = useState(false)
     const [isInExcludedCountry, setIsInExcludedCountry] = useState()
+    const [isInUnitedStates, setIsInUnitedStates] = useState()
 
     const handleSubmit = useCallback(() => {
         setSubmitted(true)
@@ -548,13 +553,16 @@ export default function Apply({ id, info }: { id: string; info: any }) {
                 key="application-success"
                 location={{ pathname: 'application-success' }}
                 newWindow
-                isInExcludedCountry={isInExcludedCountry}
+                isInUnitedStates={isInUnitedStates}
             />
         )
-    }, [isInExcludedCountry])
+    }, [isInUnitedStates])
 
     useEffect(() => {
-        setIsInExcludedCountry(posthog?.isFeatureEnabled?.('is-in-excluded-hiring-country'))
+        posthog?.onFeatureFlags?.(() => {
+            setIsInExcludedCountry(posthog?.isFeatureEnabled?.('is-in-excluded-hiring-country'))
+            setIsInUnitedStates(posthog?.isFeatureEnabled?.('are-you-in-the-us'))
+        })
     }, [posthog])
 
     // preview confirmation window

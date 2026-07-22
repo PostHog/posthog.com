@@ -1,0 +1,18 @@
+# Gatsby build pipeline
+/gatsby/ @PostHog/website
+/gatsby-config.js @PostHog/website
+/gatsby-node.ts @PostHog/website
+/gatsby-browser.tsx @PostHog/website
+/gatsby-ssr.js @PostHog/website
+
+# Gatsby plugins
+/plugins/ @PostHog/website
+
+# Core app context and window management
+/src/context/App.tsx @PostHog/website
+/src/components/AppWindow/ @PostHog/website
+
+# Serverless API functions
+/api/ @PostHog/website
+
+/.github/CODEOWNERS @PostHog/website

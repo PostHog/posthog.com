@@ -407,7 +407,6 @@ export function TeamMemberMultiSelect({
                                         ),
                                     }
                                 })}
-                                skin={false}
                                 className="border-0"
                             />
                         ) : (

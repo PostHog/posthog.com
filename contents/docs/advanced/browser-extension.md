@@ -56,7 +56,7 @@ You can also use `import 'posthog-js/dist/array.no-external.js'` as the core imp
 
 Session recording is the most common cause of extension store rejections due to potential obfuscation concerns. The recording library `rrweb` that is bundled with PostHog by default contains parts of its code encoded in base64.
 
-To avoid issues, explicitly load `posthog-js/dist/posthog-recorder` instead of `posthog-js/dist/recorder` as explained in [this Github comment](https://github.com/PostHog/posthog-js/issues/1464#issuecomment-2792093981).
+To avoid issues, explicitly load `posthog-js/dist/posthog-recorder` instead of `posthog-js/dist/recorder` as explained in [this GitHub comment](https://github.com/PostHog/posthog-js/issues/1464#issuecomment-2792093981).
 
 ### 3. Disable external dependency loading
 
@@ -91,7 +91,7 @@ import { PostHog } from 'posthog-js/dist/module.no-external'
 
 const posthog = new PostHog()
 
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     api_host: '<ph_client_api_host>',
     disable_external_dependency_loading: true,
     persistence: 'localStorage'
@@ -166,7 +166,7 @@ Use the shared utility in all contexts (either directly, where storage APIs are 
 import { getSharedDistinctId } from './distinctId'
 
 const distinctId = await getSharedDistinctId();
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     bootstrap: {
         distinctID: distinctId
     }
@@ -183,7 +183,7 @@ posthog.init('<ph_project_api_key>', {
 **Recommended configuration**:
 
 ```js
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     bootstrap: {
         distinctID: distinctId
     },
@@ -206,7 +206,7 @@ Unless you need to capture DOM-based events e.g. for session recordings, it's ad
 **Recommended configuration**:
 
 ```js
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     bootstrap: {
         distinctID: distinctId
     },
@@ -232,7 +232,7 @@ posthog.init('<ph_project_api_key>', {
 **Recommended configuration**:
 
 ```js
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     bootstrap: {
         distinctID: distinctId
     },
@@ -264,7 +264,7 @@ As an extension, you need to enable extension exception capture as part of the P
 ```js
 const posthog = new PostHog()
 
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     error_tracking: {
         captureExtensionExceptions: true,
     }
@@ -293,7 +293,7 @@ If you want to use the `posthog` object in the DevTools console easily, attach i
 ```js
 const posthog = new PostHog()
 
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     api_host: '<ph_client_api_host>',
     disable_external_dependency_loading: true,
     persistence: 'localStorage',

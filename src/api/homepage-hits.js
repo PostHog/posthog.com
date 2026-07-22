@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import fetch from 'node-fetch'
 
 const handler = async (_req, res) => {
     const data = await fetch(`https://us.posthog.com/shared/aH0asDUbyFXPGSo6JOPryoycVhX7EA.json`).then((res) =>

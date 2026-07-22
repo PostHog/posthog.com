@@ -1,54 +1,67 @@
-### Q1 2026 Objectives
+### Q3 2026 Objectives
 
-#### Goal 1: Replay cost control - [parity tracker issue](https://github.com/PostHog/posthog/issues/30889) - (Driver: <TeamMember name="Ioannis Josephides" />)
+#### Goal 1: SDK harness and specs (Driver: <TeamMember name="Dustin Byrne" />)
 
-* [Programmatically start and stop recordings](https://posthog.com/docs/session-replay/how-to-control-which-sessions-you-record#programmatically-start-and-stop-recordings) (React Native and Flutter)
-* [Min. recording duration](https://posthog.com/docs/session-replay/how-to-control-which-sessions-you-record#minimum-duration) (SDKs TBD)
-* [Sampling rate](https://posthog.com/docs/session-replay/how-to-control-which-sessions-you-record#sampling) (SDKs TBD)
-* Event triggers (SDKs TBD)
+Expand the SDK harness and specs into the shared contract for PostHog SDK behavior, compatibility, and regression testing, and start using them across SDK work.
 
-#### Goal 2: Mobile error tracking v2 - [parity tracker issue](https://github.com/PostHog/posthog/issues/43012) - (Driver: <TeamMember name="Manoel Aranda Neto" />)
+What we'll ship:
 
-* [iOS error tracking](https://github.com/PostHog/posthog-ios/issues/407)
-* [React Native native exceptions support](https://github.com/PostHog/posthog-js/issues/2656)
-* [Flutter native exceptions support](https://github.com/PostHog/posthog-flutter/issues/238)
-* [Flutter web error tracking](https://github.com/PostHog/posthog-flutter/issues/237)
+-   Expand the SDK harness coverage across SDKs
+-   Define clear specs for shared SDK behavior
+    -   Include an SDK parity table as part of the spec
+-   Use the harness in CI so SDK changes stay on contract
+-   Make it easier for SDK contributors and employees to validate changes before release
+-   Publish shared SDK skills that customers can install and use directly, using the SDK specs as the source of truth
+-   Explore a spec-driven "software factory" workflow where changes to SDK specs can drive agent-assisted updates across SDKs, with human review and approval
+-   Experiment with a GitHub Action that triages issues and opens PRs for straightforward fixes automatically, similar to [clawsweeper](https://github.com/openclaw/clawsweeper)
 
-#### Goal 3: Wider SDK coverage - (Driver: <TeamMember name="Manoel Aranda Neto" />)
+#### Goal 2: Mobile push notifications (Driver: <TeamMember name="Ioannis Josephides" />)
 
-* [Flutter desktop support](https://github.com/PostHog/posthog-flutter/issues/51) (Windows and Linux)
+Support native PostHog push notifications for Workflows. See [Posthog-Native Push notification support](https://github.com/PostHog/posthog/issues/44444) for the product context.
 
-### Goal 4: Make it easier to run the team - (Driver: <TeamMember name="Manoel Aranda Neto" />)
+What we'll ship:
 
-* Internal metrics (e.g. how many mobile SDK users use different products)
-    * feature usage breakdown per SDK
-    * events, flags requests and revenue breakdown per SDK
-* Improve the release process (it's semi-automatic, but can be fully automated)
-    * Android
-    * iOS
-    * Flutter
-    * RN session replay plugin
-* Hire and onboard another SDK engineer
+-   Android and iOS support, which are nearly done
+-   Flutter and React Native support by reusing the native SDK implementations
 
-### Goal 5: Foundational work for snippet versioning - (Driver: <TeamMember name="Dustin Byrne" />)
+#### Goal 3: SDK coverage and modernization (Driver: <TeamMember name="Manoel Aranda Neto" />)
 
-* Allow for configuration of JS snippet version constraints within PostHog settings
-* Retain and serve historical versions of the Web SDK
-* [This allows us to safely start working towards a v2 of the Web SDK](https://github.com/PostHog/posthog-js/issues/2673)
+Expand and modernize SDK coverage so more products and platforms have reliable first-class SDK behavior. This is a dynamic list of ideas we will try to get through in Q3, but priorities may change mid-plan as customer needs and product priorities shift.
 
-### Goal 6: First class support for Next.js - (Driver: <TeamMember name="Dustin Byrne" />)
+What we'll try to ship:
 
-* A single package exists to integrate PostHog into Next.js applications.
-* Simplified and consistent identity across client and server rendered pages and components.
+-   KMP SDK
+-   Flutter desktop SDK
+-   Session replay for macOS
+-   React Native Expo Router touch events
+-   Flutter SDK init bootstrapping for feature flags
+-   Framework-level SDK experiences and docs that feel native to the frameworks customers actually use
+-   CocoaPods sunset migration plan
+-   Rust SDK v1 GA
+-   iOS SDK next major version
+-   Async version of the Python SDK
+-   JS SDK v2, including the versioned script loader
+-   Port the new ingestion endpoint across SDKs using the Rust SDK as an example
+-   Triage and fix real and stale issues across SDKs during the SDK Support Hero rotation
 
-### Goal 7: Reduce Web SDK bundle size - (Driver: <TeamMember name="Dustin Byrne" />)
+#### Goal 4: Tracing support (Driver: <TeamMember name="Anna Garcia" />)
 
-* [Reduce the size of the Web SDK](https://github.com/PostHog/posthog-js/issues/65)                                                                                                                              
-* Customers can exclude unused features to further reduce bundle size
+Add first-class SDK support for [distributed tracing](/docs/distributed-tracing/installation) so customers can connect client-side behavior with backend and product analytics data. Today, tracing depends on OpenTelemetry setup; we want PostHog's JS and Python SDKs to support tracing directly so we can dogfood our own product.
 
-#### Stretch goal: Improve experience for mobile customers using feature flags - (Driver: <TeamMember name="Ioannis Josephides" />)
+What we'll ship:
 
-* [Semantic versioning filters](https://github.com/PostHog/posthog/issues/24485)
-* [Remote config support](https://github.com/PostHog/posthog/issues/26567)
-* [Human readable device models](https://github.com/PostHog/posthog/issues/18025)
-* [Overriding server properties for feature flags](https://github.com/PostHog/posthog-ios/issues/148) (Flutter)
+-   Define the SDK tracing approach for first-class JS and Python support
+-   Add tracing support to the JS and Python SDKs
+-   Align tracing behavior with PostHog ingestion and analysis workflows
+-   Document how customers should configure and use tracing from PostHog SDKs
+
+#### Goal 5: SDK observability (Driver: <TeamMember name="Ioannis Josephides" />)
+
+Research SDK observability so we can understand what is feasible before committing to specific implementation work. The goal is to learn how we can better understand reliability, performance, and customer-impacting issues across client libraries.
+
+What we'll explore:
+
+-   Whether we can safely instrument SDK behavior that affects reliability and customer experience
+-   Visibility into SDK errors, delivery failures, and performance issues
+-   How SDK observability could improve support and debugging workflows
+-   How feasible learnings should feed back into SDK quality, release, and support processes

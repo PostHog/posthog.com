@@ -1,7 +1,6 @@
 import React from 'react'
 import { Dialog as RadixDialog } from 'radix-ui'
 import { IconX } from '@posthog/icons'
-import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
 import OSButton from 'components/OSButton'
 
@@ -21,18 +20,18 @@ interface ModalProps {
 
 const Modal = ({
     trigger,
-    maxWidth,
     children,
     open,
     onOpenChange,
     className = '',
     contentClassName = '',
     showCloseButton = true,
-    autoHeight = false,
+    title: titleProp,
+    maxWidth,
 }: ModalProps): JSX.Element => {
-    const { websiteMode } = useApp()
     const { appWindow, activeInternalMenu } = useWindow()
-    const title = appWindow?.meta?.title || activeInternalMenu?.name
+    // Prefer an explicit title prop; fall back to the active window/menu name.
+    const title = titleProp || appWindow?.meta?.title || activeInternalMenu?.name
     return (
         <RadixDialog.Root open={open} onOpenChange={onOpenChange}>
             {trigger && (
@@ -43,25 +42,11 @@ const Modal = ({
             <RadixDialog.Portal>
                 <RadixDialog.Overlay className="bg-black/50 data-[state=open]:animate-fadeIn data-[state=closed]:animate-fadeOut fixed inset-0 z-50" />
                 <RadixDialog.Content
+                    style={maxWidth ? { width: maxWidth, maxWidth: '95vw' } : undefined}
                     className={`data-[state=open]:animate-contentShow data-[state=closed]:animate-contentHide fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] rounded bg-primary text-primary z-50 ${contentClassName}`}
                 >
-                    <div
-                        data-scheme="primary"
-                        style={
-                            websiteMode
-                                ? {
-                                      maxWidth: maxWidth || appWindow?.size?.width || '100%',
-                                      maxHeight:
-                                          autoHeight || appWindow?.appSettings?.size?.autoHeight
-                                              ? '100%'
-                                              : appWindow?.size?.height || '100%',
-                                      width: '100vw',
-                                      height: autoHeight || appWindow?.appSettings?.size?.autoHeight ? '100%' : '100vh',
-                                  }
-                                : {}
-                        }
-                    >
-                        <div className="rounded border border-primary overflow-hidden size-full">
+                    <div data-scheme="primary">
+                        <div className="rounded border border-primary overflow-hidden size-full flex flex-col">
                             <div className="bg-accent flex items-center justify-between p-1 border-b border-primary">
                                 <p className="text-primary text-left text-sm font-semibold ml-2 my-0">{title}</p>
                                 {showCloseButton && (

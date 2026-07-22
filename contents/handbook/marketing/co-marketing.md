@@ -9,12 +9,14 @@ PostHog complements a lot of other software companies. Since we’re active in t
 ### Who takes the lead with co-marketing?
 Sales, engineering, or support will sometimes tag marketing into customer Slack channels where someone mentions co-marketing. There’s no obligation to say yes just because a partner is enthusiastic. If you’re unsure whether something is worth pursuing, ask in the **#team-marketing** Slack channel. 
 
+> The list of partners we are currently doing or planning co-marketing partnerships with is maintained [in this canvas](https://posthog.slack.com/docs/TSS5W8YQZ/F09FD1DS2CD). 
+
 If it does seem promising, a product marketer will take the lead and loop in events or other teams as needed.
 
 What this article doesn’t cover:
-- [Influencers](/handbook/growth/marketing/influencers) and newsletters
-- Rev-share [partners](/handbook/brand/partners) and individual consultants
-- [Sponsorships](/handbook/growth/marketing/open-source-sponsorship)
+- [Influencers](/handbook/marketing/influencers) and newsletters
+- Rev-share [partners](/handbook/marketing/partners) and individual consultants
+- [Sponsorships](/handbook/marketing/open-source-sponsorship)
 
 ## Integrations and CDP destinations
 
@@ -61,7 +63,7 @@ Social media co-marketing for case studies naturally follows since most companie
 We also will typically thank customers who participate in case studies and collab content by sending them a merch voucher. We're nice like that.
 
 ## Startup and ecosystem partnerships
-We already run a strong [startup program](/handbook/brand/startups). Accepted companies get $50K in PostHog credits plus access to partner benefits. This is one of the best types of co-marketing because it’s a simple value exchange: we help their users, they help ours. 
+We already run a strong [startup program](/handbook/marketing/startups). Accepted companies get $50K in PostHog credits plus access to partner benefits. This is one of the best types of co-marketing because it’s a simple value exchange: we help their users, they help ours. 
 
 However, we are very selective about which teams we partner with here because these partnerships usually offer outsized benefits to them. As a rule, we want to have no more than three such partners at once - and it's one-in, one-out. 
 
@@ -72,7 +74,7 @@ Examples:
 
 If we're signing anything with legal commitments, that needs to go via <PrivateLink url="https://posthog.slack.com/archives/C08MYQX74KH">#legal</PrivateLink>. If it's an informal exchange of perks, you can usually just coordinate directly with the partner company.
 
-If you’re giving PostHog credits, check with the <SmallTeam slug="billing"/> to explore the options. See the [campaigns and coupons](/handbook/growth/marketing/campaigns-and-coupons) handbook entry for more detail.
+If you’re giving PostHog credits, check with the <SmallTeam slug="billing"/> to explore the options. See the [campaigns and coupons](/handbook/marketing/campaigns-and-coupons) handbook entry for more detail.
 
 When a new startup perk goes live:
 - Add the offer to the [PostHog for startups](/startups) page

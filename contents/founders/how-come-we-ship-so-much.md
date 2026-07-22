@@ -43,7 +43,7 @@ We did this because we want to build [lots of products in one](/handbook/why-doe
 
 ## 1. No design by default
 
-When we started, we felt the best engineers would eventually quit if they felt dictated by product designers. [Product engineers](/blog/what-is-a-product-engineer) need autonomy and freedom to enjoy their work.
+When we started, we felt the best engineers would eventually quit if they felt dictated by product designers. [Product engineers](/product-engineer/what-is-a-product-engineer) need autonomy and freedom to enjoy their work.
 
 As we grew, we realized that engineers can design the UX of a product, especially if we hire people that have this skill set and provide a framework for their work.
 
@@ -61,7 +61,7 @@ The responsibilities of a product manager still exist, but our engineers:
 -   Decide what to build within their product (and sometimes pitch whole new products).
 -   Have complete access to metrics like revenue, hosting costs, and (soon) staff costs, for their product.
 
-The concept internally is a "[product engineer](/blog/what-is-a-product-engineer)" – i.e. an [engineer who is product-minded and autonomous](/blog/product-engineer-vs-software-engineer), rather than mindlessly filing tickets.
+The concept internally is a "[product engineer](/product-engineer/what-is-a-product-engineer)" – i.e. an [engineer who is product-minded and autonomous](/blog/product-engineer-vs-software-engineer), rather than mindlessly filing tickets.
 
 We have one product manager who steps in reactively if a small team needs more support.
 
@@ -102,8 +102,6 @@ It's simple, but if you have lots of spending and focus outside of engineering, 
 At the time of writing, [we are 37 people](/people), only 11 of whom are in Go To Market or Operations roles (and 6 of those 11 have at least some engineering in their background).
 
 ![company composition](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/hubs/how-we-designed-our-company-for-speed/posthog-team.png)
-
-We don't do outbound sales, our <SmallTeam slug="marketing" /> is very small, we only have one product manager, and our <SmallTeam slug="blitzscale" /> is only 3 people. These things are all by design.
 
 We're product-led because our ideal users, engineers, want to try something rather than sit on a call.
 

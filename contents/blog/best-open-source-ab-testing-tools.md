@@ -11,6 +11,7 @@ featuredImageType: full
 author:
   - hanna-crombie
   - andy-vandervell
+  - natalia-amorim
 category: General
 tags:
   - Comparisons
@@ -87,6 +88,8 @@ While PostHog is open source, its A/B testing features aren't included in the op
 
 **Further reading:** New to A/B testing? Read [a software engineer's guide to A/B testing](/blog/ab-testing-guide-for-engineers) and our guide to [common A/B testing mistakes](/blog/ab-testing-mistakes). Looking for mobile testing tools? See our guide to the [best mobile app A/B testing tools](/blog/best-mobile-app-ab-testing-tools).
 
+<WizardCTA />
+
 ## 2. GrowthBook
 
 ![GrowthBook - best open source ab testing tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-testing-tools/growthbook.png)
@@ -134,7 +137,7 @@ Unleash is for autonomous development teams who want a lightweight way to test, 
 - Extensive APIs
 - 25+ official SDKs covering all major languages and frameworks
 - Privacy-first architecture (no user PII leaves your infrastructure)
-- Integrations with Jira, Datadog, Microsoft Teams, and Slack
+- Integrations with Jira, [Datadog](/blog/best-datadog-alternatives), Microsoft Teams, and Slack
 - Self-hosted and managed service available
 
 ### How much does Unleash cost?
@@ -211,9 +214,9 @@ We're biased, obviously, but we think you'll love PostHog if:
 - You want tools to ship, track, and analyze new features – like A/B testing, feature flags, and session replays
 - You want try before you buy (we're self-serve with a [generous free tier](/pricing))
 
-Check out [our product pages](/experiments) and [read our docs](/docs) to learn more.
+It's completely free to get started – no credit card required. Our [setup wizard](/wizard) handles configuration in minutes, or you can check out [our docs](/docs) to do it yourself.
 
-<ArrayCTA />
+<WizardCTA />
 
 ## Frequently asked questions
 
@@ -247,7 +250,9 @@ Yes, with caveats. GrowthBook's self-hosted open-source version (MIT license) is
 <details>
   <summary>Can you do A/B testing without code?</summary>
 
-Some tools on this list offer visual editors that let you set up web experiments without writing code. **GrowthBook** includes a visual A/B test editor on its Pro plan. For fully no-code A/B testing, you'll likely want a marketing-focused tool like [VWO](//blog/best-vwo-alternatives) or [Optimizely](/blog/best-optimizely-alternatives) instead, though these are neither free nor open source.
+Some tools on this list offer visual editors that let you set up web experiments without writing code. **GrowthBook** includes a visual A/B test editor on its Pro plan. For fully no-code A/B testing, you'll likely want a marketing-focused tool like [VWO](/blog/best-vwo-alternatives) or [Optimizely](/blog/best-optimizely-alternatives) instead, though these are neither free nor open source.
+
+You can also use a [combination of an AI agent and MCP to help you do this](/blog/ai-is-killing-no-code-experiments).
 
 </details>
 
@@ -285,3 +290,5 @@ Yes – that's one of the main advantages of open-source A/B testing tools. **Gr
 - [Common A/B testing mistakes](/blog/ab-testing-mistakes)
 - [The best open-source feature flag tools](/blog/best-open-source-feature-flag-tools)
 - [PostHog vs. GrowthBook](/blog/posthog-vs-growthbook)
+
+<NewsletterForm />

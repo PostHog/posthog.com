@@ -68,9 +68,10 @@ Finally, your first ops hire needs to recuse themselves from general office goss
 
 ## Further reading
 
-- [What we learned about hiring from our first five employees](https://posthog.com/blog/posthog-first-five)
-- [The ops toolkit for early-stage startups](https://posthog.com/blog/startup-ops-toolkit)
-- [Startups, stop treating engineers like a different species](https://posthog.com/blog/stop-treating-engineers-differently)
+- [What we learned about hiring from our first five employees](/blog/posthog-first-five)
+- [The ops toolkit for early-stage startups](/blog/startup-ops-toolkit)
+- [Startups, stop treating engineers like a different species](/blog/stop-treating-engineers-differently)
 - [How we run our hiring process](/handbook/people/hiring-process) at PostHog
+- [Being AI-native matters more than experience](/blog/ai-native-hiring)
 
 <NewsletterForm />

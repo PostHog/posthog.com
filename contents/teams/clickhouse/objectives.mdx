@@ -1,35 +1,51 @@
-**Data Team's Mission at PostHog**
+## Q3 2026 objectives
 
-Data Team's mission is to provide a storage and query engine that meets these requirements:
-- Continue to meet the needs of the product today now and in the future
-- Maintain and optimize our current ClickHouse deployment
-- Elastically scale our capacity with little effort
-- Support multiple query quality of service (QOS) guarantees (Real-time, Batch, etc.)
-- Data is stored once and queryable from the appropriate tool
-- Queries are optimized for cost and performance
-- Tunable execution performance to allow trade-offs between cost and performance
-- Storage is durable
+### 🧬 Cell-based architecture - (Driver: <TeamMember name="Rory Shanks" />)
+Large customers can break smaller ones, the blast radius is huge, and changes are hard to test. Splitting things up and isolating them lets us manage all of this far better.
 
-In service of this mission, our goals are:
+**What we'll ship:**
+* A team 2 cell, set up together with the Platform Analytics Team
+* Tooling to manage the different backends and migrate data between cells
 
-**Goals for Q1 2026:**
+### 📦 JSON datatype in the app - (Driver: <TeamMember name="Rory Shanks" />)
+We have a lot of duplicated data sitting in the cluster eating disk. Newer storage formats give us more efficient disk usage, and therefore better performance.
 
-**Resharding (P0)** - _Daniel Escribano_, _Rory Shanks_
-- Reshard US cluster to 8 shards
+**What we'll ship:**
+* The app can use the JSON datatype natively (with the Platform Analytics Team)
+* A rebuilt events table using the JSON datatype
+* The app switched over to the new table
 
-**Storage optimizations (P0)** - _Rory Shanks_
-- Tables optimizations (resharding of events_recent, person)
-- Drop unused materialized columns
-- Rewrite `cohortpeople`
-- Track and provide visibility into disk usage cost by team
+### 🔐 ClickHouse is up to date and secure - (Driver: <TeamMember name="Tommy Gilmore" />)
+New ClickHouse versions bring big wins, so we should be able to upgrade faster. And secrets rotation shouldn't be a painful, high-risk process that can take down the app or silently break a team - secrets need to be swappable at any time with no real risk.
 
-**Data deletion requests (P0)** - _Jovan Sakovic_
-- Enable event deletion from the app based on user-defined predicates (P1)
+**What we'll ship:**
+* Meaningful, fully automated ClickHouse version upgrade testing
+* An upgrade to a new ClickHouse version
+* Short-lived secrets to remove the need for manual rotation almost entirely, without creating issues for users
+* Failing that: consolidated secret sources and an automated, zero-downtime way to rotate them
+* An end to our reliance on the default user
 
-**Query cost visibility through Chargeback (P1)** - _Pawel Szczur_
-- Continue work on chargeback reporting to track query costs
-- Provide visibility into expensive queries with tooling to help teams debug and optimize them
+### 🚚 ClickHouse migration system - (Driver: <TeamMember name="Pawel Szczur" />)
+Our ClickHouse migrations suck and our topology is very complex. We should figure out a good way of doing this.
 
-**Workload management (P1)** - _Daniel Escribano_
-- Implement quotas and workload management to prioritize application queries
+**What we'll ship:**
+* hclexp for all migrations in PostHog
+* Good reporting and good workflows
+* Automatic schema drift detection that proposes queries to fix it
 
+### 🗑️ Data lifecycle management - (Driver: <TeamMember name="Pawel Szczur" />)
+We need to delete data all the time, and our systems for it need to be top-notch.
+
+**What we'll ship:**
+* Self-driving DataDeletionRequests, with minimal human intervention
+* Person and team deletion mapped across systems and topologies
+* Per-team retention periods
+
+### 🤖 Self-driving operations - (Driver: <TeamMember name="Bryan Ciaraldi" />)
+Interrupt-driven ops has the biggest impact on the team's ability to ship: operational toil, alert noise, and "fear of breaking ClickHouse" all track to it. We make routine operations self-driving so we're only interrupted when judgment is actually required.
+
+**What we'll ship:**
+* ClickHouse MCP + Bedrock for diagnostic and proactive signals, with no data-protection limits on what the agent can see
+* MCP that turns warning-level alerts into proposed fixes / auto-generated PRs
+* A stable, low-noise alerting base that automation can build on
+* High-signal ops dashboards living on the ops cluster

@@ -4,13 +4,11 @@ sidebar: Docs
 showTitle: true
 ---
 
-# Using Content Security Policies (CSP)
-
-> NOTE: This only applies to PostHog Cloud.
-
 As [described on MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP): _Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross-Site Scripting (XSS) and data injection attacks. These attacks are used for everything from data theft, to site defacement, to malware distribution._
 
 If you choose to use a CSP it is important to ensure that PostHog domains are permitted. PostHog is a distributed Cloud service and as such can have different domains that change over time but will always be served from the root domain `posthog.com`. As such you should add `*.posthog.com` to your CSP directive.
+
+> **Want to track CSP violations?** To monitor and analyze when your CSP rules are violated, set up [CSP tracking](/docs/csp-tracking) to send violation reports to PostHog.
 
 ## Content Security Policy directives needed
 
@@ -85,7 +83,7 @@ You will need the following CSP to allow heatmaps to render your site in an ifra
 You may choose to use a `nonce` in your CSP in order to ensure every script/style loaded has the matching `nonce` for the current page load. This can be done via two config options in `posthog-js` like so:
 
 ```js
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   prepare_external_dependency_script: (script) => {
     script.nonce = '<your-nonce-value>'
     return script
