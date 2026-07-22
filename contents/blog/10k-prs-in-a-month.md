@@ -29,9 +29,11 @@ There's no token budget at PostHog. We can see that the world of product enginee
 
 The most important thing being that we're not putting a budget in front of people. In all the things we do at PostHog, we value trust and feedback over process. So if we find we get to the point where we're uncomfortable with someone's spend, we'll dig into that with them and figure out if the spend is reasonable. And what we can learn from that for everyone else.
 
-At the individual level, we have people writing their own review tools and their own PR management tools. We've found that being able to speed up the rate at which we can create PR's doesn't mean we've been able to speed up the rate at which we can deal with PR's. So building and testing and validating in production still have to happen even where we can speed up the work that we're doing.
+At the individual level, we have people writing their own review tools and their own PR management tools. We've found that being able to speed up the rate at which we can create PR's doesn't mean we've been able to speed up the rate at which we can deal with PR's. 
 
-and that's not all we're doing at dev x at posthog but those are the really top level things then you see the folk who are out at their edges really pushing the limits of what they can achieve have written their own applications they have you know the 20 30 40 prs open at a time they have agentic flows keeping those prs up to date with trunk making sure that ci is passing making sure that reviews have been requested and that's all stuff that we're not we're happy for folk to spend the time learning that and it means we can fold it back into either what we offer to everyone at PostHog internally or what we offer to our customers as we let their products build themselves
+The folk who are really pushing the limits of what they can achieve have written their own applications. They have maybe 40 prs open at the same time. The only way to make that work is to have agentic loops getting those PRs ready for human attention. Things like keeping up to date with trunk, making sure that ci is passing, making sure that reviews have been acted on
+
+$$$ something about skills and scouts $$$
 
 Over the last 4 months we've moved from around 20% of our monorepo PRs being opened with agent involvement to 70% (that's not PRs with no human involvement :)). Self-driving  product is around 4% of our PRs right now but growing very fast.
 
@@ -44,7 +46,11 @@ Over the last 4 months we've moved from around 20% of our monorepo PRs being ope
 - Cloud runners — for our stack and anybody's
 - hogli custom CLI; pushing CI down into local development
 
-We've been working on local dev machines the PostHog stack is very heavy that's always meant that we've needed very powerful dev machines and that was fine up until the point now where people want to run multiple copies of the system test multiple prs that they're working on if they're being really leaning into agentic development and there's only so much ram and disk you can put into a macbook so we're building out literal dev machines they're skill driven so you just ask your agent to start a dev machine and test the work that you're doing quite frequently instead of driving the site myself i just tell an agent session start a dev box, run this copy of the site in it, record me a video of the changes that we're making so i can see the output of the test rather than do the test myself in PostHog desktop we're also building cloud runners so we're making a way for cloud runners to run not just our stack but anybody's stack so you can do the same type of work in there so for local dev the reaction is mostly no limits on tokens and strong local dev flow we have a custom cli we call hog li or hogli which does gives us a way to help people out so we've pushed a bunch of ci down into local development
+The PostHog stack is very heavy for local development. that's always meant that we've needed very powerful dev machines and that was fine up until the point where people want to run multiple copies of the system to test multiple prs their agents are working on. and there's only so much ram and disk you can put into a macbook.
+
+ so we're building out literal dev machines. they're skill driven so you just ask your agent to start a dev machine and test the work that you're doing. a prompt like: "start a dev box, run this PR in it, record me a video of the changes that we're making so i can see the output of the test"
+
+we also have a custom cli we call hogli. it advertises a tool so that agents send feedback to our devex team when something is difficult for them. And gives us an easy way to push a bunch of our CI checks down into local development machines.
 
 ## CI
 
@@ -118,6 +124,7 @@ We see that composition is very stable across the last year or so. Importantly r
 
 An aside that reliability of PostHog overall is going up too, $$$some reliability fact here$$$
 
+flakey test suites are the biggest problem we face here. $$$ and so we've done $$$
 ## Review
 
 *Covers:*
