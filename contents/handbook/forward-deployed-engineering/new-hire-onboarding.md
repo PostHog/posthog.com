@@ -48,9 +48,9 @@ Once connected, you can ask your AI of choice questions about the vault and proc
 
 - Read, in order: README → FDE manifesto → AGENTS.md → engagement process
 - How we work: standards, judgment, and the culture
-- Common FDE work patterns - for each of the implementation areas you covered in week 1 use the vault to find customer engagements where we have solved problems related to those areas.  What had drifted from our reccomended best practice?  What did we do about it?
+- Common FDE work patterns - for each of the implementation areas you covered in week 1 use the vault to find customer engagements where we have solved problems related to those areas.  What had drifted from our recommended best practice?  What did we do about it?
 
-At the end of the week, revisit the [DevShip repo](https://github.com/PostHog/devship-app) from the SuperDay.  Seed the project in a new PostHog project and rerun the audit using the knowledge you have obtained from your first two weeks here.  Share a write up highlighing any gaps in your original submission (ask the team if you don't still have this to hand).
+At the end of the week, revisit the [DevShip repo](https://github.com/PostHog/devship-app) from the SuperDay.  Seed the project in a new PostHog project and rerun the audit using the knowledge you have obtained from your first two weeks here.  Share a write up highlighting any gaps in your original submission (ask the team if you don't still have this to hand).
 
 > As you go through the vault if anything is unclear ask your onboarding team mates for help and clarification.  Once you learn something new, make sure you submit it as a PR to the vault or handbook.
 
