@@ -1,0 +1,104 @@
+name: Benchmark Gatsby build caches
+
+on:
+    workflow_dispatch:
+
+concurrency:
+    group: benchmark-gatsby-build-${{ github.ref }}
+    cancel-in-progress: false
+
+env:
+    NODE_OPTIONS: '--max_old_space_size=12288'
+
+jobs:
+    benchmark:
+        name: Benchmark Gatsby build caches
+        runs-on: depot-ubuntu-latest-8
+        timeout-minutes: 45
+        permissions:
+            contents: read
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+
+            - name: Set up pnpm
+              uses: pnpm/action-setup@c5ba7f7862a0f64c1b1a05fbac13e0b8e86ba08c # v4
+
+            - name: Set up Node.js
+              uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+              with:
+                  node-version: '22'
+                  cache: 'pnpm'
+
+            - name: Restore Cloudinary metadata cache
+              uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+              with:
+                  path: .cloudinary-resources.json
+                  key: cloudinary-${{ github.run_id }}
+                  restore-keys: |
+                      cloudinary-
+
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
+
+            - name: Restore persistent build caches
+              uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+              with:
+                  path: |
+                      node_modules/.cache/gatsby-persistent-webpack
+                      node_modules/.cache/gatsby-mdx-payloads
+                  key: gatsby-persistent-${{ hashFiles('pnpm-lock.yaml', 'patches/**') }}-${{ github.run_id }}
+                  restore-keys: |
+                      gatsby-persistent-${{ hashFiles('pnpm-lock.yaml', 'patches/**') }}-
+
+            # Populate any entries invalidated by this branch before collecting the five
+            # warm-cache samples. Each measured run clears Gatsby's transient .cache while
+            # retaining the persistent caches introduced by this PR.
+            - name: Warm persistent build caches
+              run: pnpm clean && pnpm build
+              env:
+                  GATSBY_MINIMAL: 'true'
+                  CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
+                  CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Measure five warm-cache builds
+              shell: bash
+              run: |
+                  set -euo pipefail
+                  durations=()
+
+                  for sample in 1 2 3 4 5; do
+                      echo "Starting measured build ${sample}/5"
+                      pnpm clean
+                      started_ns=$(date +%s%N)
+                      pnpm build
+                      finished_ns=$(date +%s%N)
+                      duration_ms=$(((finished_ns - started_ns) / 1000000))
+                      durations+=("${duration_ms}")
+                      echo "Sample ${sample}: ${duration_ms} ms"
+                  done
+
+                  node - "${durations[@]}" >> "$GITHUB_STEP_SUMMARY" <<'NODE'
+                  const durations = process.argv.slice(2).map(Number)
+                  const sorted = [...durations].sort((a, b) => a - b)
+                  const format = (milliseconds) => `${(milliseconds / 1000).toFixed(1)}s`
+
+                  console.log('## Gatsby persistent-cache benchmark')
+                  console.log('')
+                  console.log('One unreported warm-up preceded these five `pnpm clean && GATSBY_MINIMAL=true pnpm build` samples.')
+                  console.log('')
+                  console.log('| Sample | Duration |')
+                  console.log('| --- | ---: |')
+                  durations.forEach((duration, index) => console.log(`| ${index + 1} | ${format(duration)} |`))
+                  console.log('')
+                  console.log('| Min | Median | Max |')
+                  console.log('| ---: | ---: | ---: |')
+                  console.log(`| ${format(sorted[0])} | ${format(sorted[2])} | ${format(sorted[4])} |`)
+                  NODE
+              env:
+                  GATSBY_MINIMAL: 'true'
+                  CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
+                  CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
