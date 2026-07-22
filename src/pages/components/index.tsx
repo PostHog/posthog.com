@@ -9,7 +9,7 @@ import { IconPencil, IconUser, IconArrowRight, IconInfo, IconSearch } from '@pos
 import { Accordion } from 'components/RadixUI/Accordion'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import OSButton from 'components/OSButton'
-import { useCustomers } from 'hooks/useCustomers'
+import { isCustomerLogoComponent, useCustomers } from 'hooks/useCustomers'
 import { OSInput, OSTextarea, OSSelect, Combobox, TeamMemberMultiSelect, SelectedMember } from 'components/OSForm'
 import { Fieldset } from 'components/OSFieldset'
 import { Checkbox } from 'components/RadixUI/Checkbox'
@@ -17,7 +17,7 @@ import ProductComparisonTable from 'components/ProductComparisonTable'
 import ReaderView from 'components/ReaderView'
 import { TreeMenu } from 'components/TreeMenu'
 import { internalToolsNav } from '../../navs/internalTools'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 
 // Create table of contents for right sidebar
 const tableOfContents = [
@@ -177,8 +177,8 @@ export default function Components(): JSX.Element {
             return <span className="text-sm text-muted">{customer.name}</span>
         }
 
-        // Check if logo is a React component (single SVG format)
-        if (typeof customer.logo === 'function') {
+        // React forwardRef components are objects at runtime, so don't rely on typeof alone.
+        if (isCustomerLogoComponent(customer.logo)) {
             const LogoComponent = customer.logo
             const heightClass = customer.height ? `h-${customer.height}` : ''
             const className = `w-full fill-current object-contain ${heightClass}`.trim()
@@ -237,6 +237,11 @@ export default function Components(): JSX.Element {
                                 <code>&lt;Logo /&gt;</code>
                             </h2>
 
+                            <p>
+                                Import from <code>@posthog/brand/logo</code>. When sizing by height, use the CSS{' '}
+                                <code>w-auto</code> utility so the view box controls the aspect ratio.
+                            </p>
+
                             <table className="w-full border-collapse border border-primary">
                                 <thead>
                                     <tr className="bg-accent">
@@ -251,7 +256,7 @@ export default function Components(): JSX.Element {
                                             Landscape — gradient
                                         </td>
                                         <td className="border border-primary px-4 py-2 align-top">
-                                            <Logo className="h-7" />
+                                            <Logo className="h-7 w-auto" />
                                         </td>
                                         <td className="border border-primary px-4 py-2 align-top">
                                             <code className="text-xs whitespace-pre">{`<Logo />`}</code>
@@ -265,10 +270,10 @@ export default function Components(): JSX.Element {
                                             Icon only — gradient
                                         </td>
                                         <td className="border border-primary px-4 py-2 align-top">
-                                            <Logo wordmark={false} className="h-7" />
+                                            <Logo layout="logomark" className="h-7 w-auto" />
                                         </td>
                                         <td className="border border-primary px-4 py-2 align-top">
-                                            <code className="text-xs whitespace-pre">{`<Logo wordmark={false} />`}</code>
+                                            <code className="text-xs whitespace-pre">{`<Logo layout="logomark" />`}</code>
                                             <p className="mt-2 mb-0 text-xs text-secondary">
                                                 Tight spaces, inline with copy, app icons, favicons.
                                             </p>
@@ -279,7 +284,7 @@ export default function Components(): JSX.Element {
                                             Landscape — print (4-color)
                                         </td>
                                         <td className="border border-primary px-4 py-2 align-top">
-                                            <Logo variant="print" className="h-7" />
+                                            <Logo variant="print" className="h-7 w-auto" />
                                         </td>
                                         <td className="border border-primary px-4 py-2 align-top">
                                             <code className="text-xs whitespace-pre">{`<Logo variant="print" />`}</code>
@@ -294,10 +299,10 @@ export default function Components(): JSX.Element {
                                             Icon only — print (4-color)
                                         </td>
                                         <td className="border border-primary px-4 py-2 align-top">
-                                            <Logo variant="print" wordmark={false} className="h-7" />
+                                            <Logo variant="print" layout="logomark" className="h-7 w-auto" />
                                         </td>
                                         <td className="border border-primary px-4 py-2 align-top">
-                                            <code className="text-xs whitespace-pre">{`<Logo variant="print" wordmark={false} />`}</code>
+                                            <code className="text-xs whitespace-pre">{`<Logo variant="print" layout="logomark" />`}</code>
                                             <p className="mt-2 mb-0 text-xs text-secondary">
                                                 Print/swag in compact spaces — stickers, lapel pins, embroidery.
                                             </p>
@@ -308,7 +313,7 @@ export default function Components(): JSX.Element {
                                             Landscape — mono (black)
                                         </td>
                                         <td className="border border-primary px-4 py-2 align-top">
-                                            <Logo variant="mono" className="h-7" />
+                                            <Logo variant="mono" className="h-7 w-auto" />
                                         </td>
                                         <td className="border border-primary px-4 py-2 align-top">
                                             <code className="text-xs whitespace-pre">{`<Logo variant="mono" />`}</code>
@@ -323,7 +328,7 @@ export default function Components(): JSX.Element {
                                             Landscape — mono (white)
                                         </td>
                                         <td className="border border-primary px-4 py-2 align-top bg-black">
-                                            <Logo variant="mono" color="white" className="h-7" />
+                                            <Logo variant="mono" color="white" className="h-7 w-auto" />
                                         </td>
                                         <td className="border border-primary px-4 py-2 align-top">
                                             <code className="text-xs whitespace-pre">{`<Logo variant="mono" color="white" />`}</code>
@@ -338,10 +343,15 @@ export default function Components(): JSX.Element {
                                             Icon only — mono (primary)
                                         </td>
                                         <td className="border border-primary px-4 py-2 align-top">
-                                            <Logo variant="mono" color="primary" wordmark={false} className="h-7" />
+                                            <Logo
+                                                variant="mono"
+                                                color="currentColor"
+                                                layout="logomark"
+                                                className="text-primary h-7 w-auto"
+                                            />
                                         </td>
                                         <td className="border border-primary px-4 py-2 align-top">
-                                            <code className="text-xs whitespace-pre">{`<Logo variant="mono" color="primary" wordmark={false} />`}</code>
+                                            <code className="text-xs whitespace-pre">{`<Logo variant="mono" color="currentColor" layout="logomark" className="text-primary" />`}</code>
                                             <p className="mt-2 mb-0 text-xs text-secondary">
                                                 Brand-tinted accent in UI — section dividers, watermarks, hover states.
                                                 Pass any color string (Tailwind token, hex, or
@@ -354,10 +364,10 @@ export default function Components(): JSX.Element {
                                             Stacked — gradient
                                         </td>
                                         <td className="border border-primary px-4 py-2 align-top">
-                                            <Logo stacked className="h-24" />
+                                            <Logo layout="stacked" className="h-24 w-auto" />
                                         </td>
                                         <td className="border border-primary px-4 py-2 align-top">
-                                            <code className="text-xs whitespace-pre">{`<Logo stacked />`}</code>
+                                            <code className="text-xs whitespace-pre">{`<Logo layout="stacked" />`}</code>
                                             <p className="mt-2 mb-0 text-xs text-secondary">
                                                 Vertical layouts — square cards, social posts, business cards,
                                                 presentation covers.
@@ -369,10 +379,10 @@ export default function Components(): JSX.Element {
                                             Stacked — print (4-color)
                                         </td>
                                         <td className="border border-primary px-4 py-2 align-top">
-                                            <Logo stacked variant="print" className="h-24" />
+                                            <Logo layout="stacked" variant="print" className="h-24 w-auto" />
                                         </td>
                                         <td className="border border-primary px-4 py-2 align-top">
-                                            <code className="text-xs whitespace-pre">{`<Logo stacked variant="print" />`}</code>
+                                            <code className="text-xs whitespace-pre">{`<Logo layout="stacked" variant="print" />`}</code>
                                             <p className="mt-2 mb-0 text-xs text-secondary">
                                                 Stacked layout for print — posters, swag tags, portrait flyers.
                                             </p>
@@ -383,10 +393,10 @@ export default function Components(): JSX.Element {
                                             Stacked — mono (black)
                                         </td>
                                         <td className="border border-primary px-4 py-2 align-top">
-                                            <Logo stacked variant="mono" className="h-24" />
+                                            <Logo layout="stacked" variant="mono" className="h-24 w-auto" />
                                         </td>
                                         <td className="border border-primary px-4 py-2 align-top">
-                                            <code className="text-xs whitespace-pre">{`<Logo stacked variant="mono" />`}</code>
+                                            <code className="text-xs whitespace-pre">{`<Logo layout="stacked" variant="mono" />`}</code>
                                             <p className="mt-2 mb-0 text-xs text-secondary">
                                                 Mono treatment in vertical layout — partner stack-ups, signage,
                                                 single-color print runs.

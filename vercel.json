@@ -961,7 +961,7 @@
         },
         {
             "source": "/handbook/company/branding",
-            "destination": "/handbook/company/brand-assets"
+            "destination": "/handbook/brand/assets"
         },
         {
             "source": "/docs/tutorials/:path*",
@@ -3529,7 +3529,7 @@
         },
         {
             "source": "/logo",
-            "destination": "/handbook/company/brand-assets"
+            "destination": "/handbook/brand/assets"
         },
         {
             "source": "/blog/tags/product-engineer",

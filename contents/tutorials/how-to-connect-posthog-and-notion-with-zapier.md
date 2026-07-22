@@ -32,7 +32,7 @@ First, head to the [‘My Apps’ section of your Zapier account](https://zapier
 
 Next, we need to create a Zapier bot in Notion, which will perform the action of updating a database with information whenever an action is defined in PostHog. You’ll need to be a Notion admin to do this. 
 
-Start by heading to Notion’s Settings page, then click the Integrations tab and select ‘Develop your own integrations’ to start creating your bot. Here you can follow the instructions to give your bot a name, as well as customize it in other ways. You can even grab the PostHog logo from [our brand assets](/handbook/company/brand-assets) and use it as the icon for your bot!
+Start by heading to Notion’s Settings page, then click the Integrations tab and select ‘Develop your own integrations’ to start creating your bot. Here you can follow the instructions to give your bot a name, as well as customize it in other ways. You can even grab the PostHog logo from [our brand assets](/handbook/brand/assets) and use it as the icon for your bot!
 
 ![Notion Integrations Page](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/notion/create-integration.png)
 

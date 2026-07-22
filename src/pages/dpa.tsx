@@ -4,6 +4,7 @@ import { SEO } from 'components/seo'
 import { heading } from 'components/Home/classes'
 import Link from 'components/Link'
 import Tooltip from 'components/Tooltip'
+import { Logo } from '@posthog/brand/logo'
 
 const APP_LEGAL_URL = 'https://app.posthog.com/legal'
 
@@ -787,7 +788,7 @@ function DpaGenerator() {
                                 mode === 'lawyer' && 'hidden'
                             }`}
                         >
-                            <img width={157} src="/brand/posthog-logo.svg" />
+                            <Logo size={157} title="PostHog" />
                         </div>
                         <h2 className="!text-2xl">Data Processing Agreement — PostHog Inc.</h2>
                         <p>

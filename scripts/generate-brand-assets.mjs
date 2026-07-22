@@ -6,6 +6,8 @@ import { renderToStaticMarkup } from 'react-dom/server'
 import sharp from 'sharp'
 import { Logo } from '@posthog/brand/logo'
 
+// Materialize stable /brand URLs from the canonical package before Gatsby copies static/ to public/.
+// package.json lifecycle hooks run this automatically for the standard start and build commands.
 const outputDirectory = fileURLToPath(new URL('../static/brand/', import.meta.url))
 
 const assets = [
@@ -116,4 +118,8 @@ for (const asset of assets) {
     ])
 }
 
-console.log(`Generated ${assets.length} logo variants in ${path.relative(process.cwd(), outputDirectory)}`)
+// Image-only integrations often force avatars into square boxes. Keep the official
+// 52:28 logomark intact and center it on a transparent square canvas instead of stretching it.
+await writeSvg('posthog-logomark-square.svg', renderPaddedLogo({ layout: 'logomark' }, [52, 28], [60, 60]))
+
+console.log(`Generated ${assets.length} public logo variants in ${path.relative(process.cwd(), outputDirectory)}`)

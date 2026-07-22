@@ -33,6 +33,7 @@ import SideModal from 'components/Modal/SideModal'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { CallToAction } from 'components/CallToAction'
+import { Logo } from '@posthog/brand/logo'
 import usePostHog from 'hooks/usePostHog'
 import ImageDrop from 'components/ImageDrop'
 import slugify from 'slugify'
@@ -86,15 +87,29 @@ interface ToggleFilter {
 
 const isPostHogCompany = (company: Company): boolean => company.attributes.name.trim().toLowerCase() === 'posthog'
 
-const getCompanyLogo = (company: Company, isDark: boolean): string | undefined => {
-    if (isPostHogCompany(company)) {
-        return isDark ? '/brand/posthog-logo-white.svg' : '/brand/posthog-logo.svg'
-    }
-
+const getCompanyLogoUrl = (company: Company, isDark: boolean): string | undefined => {
     const logoLight = company.attributes.logoLight?.data?.attributes?.url
     const logoDark = company.attributes.logoDark?.data?.attributes?.url
 
     return isDark && logoDark ? logoDark : logoLight || logoDark
+}
+
+const renderCompanyLogo = (company: Company, isDark: boolean, className: string): React.ReactNode => {
+    const { name } = company.attributes
+
+    if (isPostHogCompany(company)) {
+        return (
+            <Logo
+                variant={isDark ? 'mono' : 'gradient'}
+                color={isDark ? 'white' : undefined}
+                className={className}
+                title={name}
+            />
+        )
+    }
+
+    const logo = getCompanyLogoUrl(company, isDark)
+    return logo ? <img className={className} src={logo} alt={name} /> : null
 }
 
 const toggleFilters: ToggleFilter[] = [
@@ -251,7 +266,7 @@ const CompanyNavigation = ({ companies, isLoading }: { companies: Company[]; isL
                     .filter((company) => company.attributes.jobs.data.length > 0)
                     .map((company) => {
                         const { name } = company.attributes
-                        const logo = getCompanyLogo(company, isDark)
+                        const logo = renderCompanyLogo(company, isDark, 'min-h-4 max-h-6 object-contain')
 
                         return (
                             <OSButton
@@ -260,9 +275,7 @@ const CompanyNavigation = ({ companies, isLoading }: { companies: Company[]; isL
                                 hover="border"
                                 className=""
                             >
-                                {logo ? (
-                                    <img className="min-h-4 max-h-6 object-contain" src={logo} alt={name} />
-                                ) : (
+                                {logo || (
                                     <div className="bg-accent rounded flex items-center justify-center">
                                         <span className="text-sm font-semibold text-muted">
                                             {name.charAt(0).toUpperCase()}
@@ -349,7 +362,7 @@ const CompanyRows = ({
             {/* Companies with jobs */}
             {companiesWithJobs.map((company, index) => {
                 const { name } = company.attributes
-                const logo = getCompanyLogo(company, isDark)
+                const logo = renderCompanyLogo(company, isDark, 'max-w-40 mb-3 w-full')
                 const hasJobs = company.attributes.jobs.data.length > 0
 
                 const jobRows = company.attributes.jobs.data.map((job) => {
@@ -410,10 +423,10 @@ const CompanyRows = ({
                                     <>
                                         {company.attributes.url ? (
                                             <Link to={`${company.attributes.url}?utm_source=posthog`} externalNoIcon>
-                                                <img className="max-w-40 mb-3 w-full" src={logo} alt={name} />
+                                                {logo}
                                             </Link>
                                         ) : (
-                                            <img className="max-w-40 mb-3 w-full" src={logo} alt={name} />
+                                            logo
                                         )}
                                     </>
                                 )}
@@ -496,7 +509,7 @@ const CompanyRows = ({
                     <p className="text-secondary">(Only visible to moderators)</p>
                     {companiesWithoutJobs.map((company, index) => {
                         const { name } = company.attributes
-                        const logo = getCompanyLogo(company, isDark)
+                        const logo = renderCompanyLogo(company, isDark, 'max-w-40 mb-3 w-full')
 
                         return (
                             <div
@@ -513,10 +526,10 @@ const CompanyRows = ({
                                                         to={`${company.attributes.url}?utm_source=posthog`}
                                                         externalNoIcon
                                                     >
-                                                        <img className="max-w-40 mb-3 w-full" src={logo} alt={name} />
+                                                        {logo}
                                                     </Link>
                                                 ) : (
-                                                    <img className="max-w-40 mb-3 w-full" src={logo} alt={name} />
+                                                    logo
                                                 )}
                                             </>
                                         )}

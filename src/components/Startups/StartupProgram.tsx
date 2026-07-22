@@ -32,7 +32,7 @@ import YCombinatorLight from '../../images/customers/ycombinator-light.svg'
 import StripeLogo from '../../images/stripe.svg'
 import Logo1984 from '../../images/1984.svg'
 import ODFLogo from '../../images/odf.svg'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import OSButton from 'components/OSButton'
 import AxisLogo from '../../images/axis-logo.svg'
 import CategoryLogo from '../../images/category.svg'
@@ -504,9 +504,9 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                             {partnerConfig ? (
                                 <div className="flex items-center gap-2.5 mb-3">
                                     <Logo
-                                        wordmark={false}
+                                        layout="logomark"
                                         variant="mono"
-                                        className="h-8 relative -top-px"
+                                        className="h-8 w-auto relative -top-px"
                                         color="white"
                                     />
                                     {partnerConfig.title}
@@ -514,9 +514,9 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                             ) : (
                                 <h1 className="flex items-center gap-2.5 mb-0 text-2xl @md:text-3xl">
                                     <Logo
-                                        wordmark={false}
+                                        layout="logomark"
                                         variant="mono"
-                                        className="h-8 relative -top-px"
+                                        className="h-8 w-auto relative -top-px"
                                         color="white"
                                     />
                                     <span>

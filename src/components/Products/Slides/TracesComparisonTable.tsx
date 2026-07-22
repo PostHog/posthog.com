@@ -1,6 +1,6 @@
 import React from 'react'
 import OSTable from 'components/OSTable'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import { useApp } from '../../../context/App'
 
 // Small building blocks for the comparison cells

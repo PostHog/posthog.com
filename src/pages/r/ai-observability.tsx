@@ -12,7 +12,7 @@ import PlatformInstall from 'components/PlatformInstall'
 import WizardCTA from 'components/WizardCTA'
 import usePlatformList from 'hooks/docs/usePlatformList'
 import LovableLogo from 'components/CustomerLogos/LovableLogo'
-import PostHogLogo from 'components/CustomerLogos/PostHogLogo'
+import { Logo as PostHogLogo } from '@posthog/brand/logo'
 
 const TOP_COUNT = 8
 const PLATFORM_ORDER = [
@@ -149,7 +149,7 @@ export default function AIObservabilityLanding(): JSX.Element {
                             alt="Kilo Code"
                             imgClassName="object-contain max-w-full h-10 w-auto"
                         />
-                        <PostHogLogo className="fill-current object-contain max-w-full h-10" />
+                        <PostHogLogo className="fill-current object-contain max-w-full h-10 w-auto" />
                     </div>
                     <p className="text-xs mt-3 !mb-0">
                         <span className="font-semibold">AI teams using PostHog AI Observability in production.</span>
