@@ -105,7 +105,7 @@ export default function SQLEditor(): JSX.Element {
     return (
         <>
             <SEO
-                title="SQL editor - PostHog data stack"
+                title="SQL editor - PostHog context warehouse"
                 description="Unify and query data from any source and analyze it alongside your product data."
                 image="https://res.cloudinary.com/dmukukwp6/image/upload/dw_temp_528efa76a2.png"
             />

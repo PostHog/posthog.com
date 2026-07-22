@@ -89,9 +89,15 @@ Self-driving is the narrative everything sits under. PostHog makes your product 
 
 Because it's a capability, not a product, always write it lowercase and hyphenated: it's not "Self-Driving" or "self driving", it's "self-driving".
 
+### The elevator pitch
+
+Use this when you are telling someone what PostHog does, e.g. at an event. 
+
+> PostHog makes your product self-driving. It automatically diagnoses problems, fixes bugs, and generates pull requests – all without you having to prompt it.
+
 ### The standard description
 
-Use this whenever you need a standard description of PostHog:
+Use this whenever you need a longer standard description of PostHog, e.g. for a newsletter or press. We also emded this in all our blog posts. 
 
 <AboutPostHog />
 
@@ -99,7 +105,7 @@ Use this whenever you need a standard description of PostHog:
 
 Everything we offer is one of four things. Use these words exactly:
 
-- **Products** – the surfaces a customer adopts; how you access self-driving. Today that's **Web** (app.posthog.com, where Inbox and PostHog AI live), **Slack**, **MCP**, **CLI**, and **Code** (PostHog Code; becomes **Desktop** in future, once it has non-coding use cases). **Mobile** is coming. The **context warehouse** is a product from a marketing perspective (its own PM/PMM, pricing, and so on), but on posthog.com we present it as the platform everything is built on, *not* as another item in this list.
+- **Products** – the surfaces a customer adopts; how you access self-driving. Today that's **PostHog Web** (app.posthog.com, where Inbox and PostHog AI live), **PostHog Slack**, **PostHog MCP**, **PostHog CLI**, and **PostHog Desktop**. **PostHog Mobile** is coming. The **context warehouse** is a product from a marketing perspective (its own PM/PMM, pricing, and so on), but on posthog.com we present it as the platform everything is built on, *not* as another item in this list.
 - **Tools** – the functional capabilities accessed through the products: product analytics, session replay, feature flags, experiments, error tracking, surveys, web analytics, and so on (as granular as annotations or comments). We used to call these "apps."
 - **Context** – the data that feeds the self-driving loop: events, recordings, errors, and logs from PostHog, plus other business data (Slack, code, Notion, support tickets, and so on). This is the fuel.
 - **Context warehouse** – the data warehouse plus the full context-ingestion pipeline (modelling, data pipelines, batch exports, and so on). Don't say "**PostHog Data Stack**" – the warehouse, modelling, pipelines, and exports are all part of the broader [context warehouse](/blog/what-is-a-context-warehouse), and "Data Stack" isn't something we talk about externally.

@@ -1,0 +1,149 @@
+---
+title: Linking Databricks as a source
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+sourceId: Databricks
+---
+
+import { CalloutBox } from "components/Docs/CalloutBox";
+import InboundIpAddresses from "../_snippets/inbound-ip-addresses.mdx";
+
+The data warehouse can link to data in a Databricks lakehouse. The connector queries your Databricks SQL warehouse through Unity Catalog, so you can import tables from one or more schemas into PostHog.
+
+<CalloutBox icon="IconFlask" title="Alpha feature" type="action">
+
+The Databricks source is currently in **alpha**. We'd love to [hear your feedback](https://app.posthog.com/home#panel=support%3Afeedback%3A%3Alow%3Atrue).
+
+</CalloutBox>
+
+## Requirements
+
+- A **Unity Catalog** catalog. Legacy `hive_metastore` catalogs are not supported.
+- A running **SQL warehouse** (serverless or classic).
+- Either a personal access token or a service principal with `USE CATALOG`, `USE SCHEMA`, and `SELECT` grants on the data you want to import.
+
+## Setup
+
+1. Go to the [Data pipeline page](https://app.posthog.com/data-management/sources) and the sources tab.
+2. Click **New source** and choose **Databricks**.
+3. Enter your connection details:
+   - **Server hostname**: Your Databricks SQL warehouse hostname, e.g. `dbc-a1b2345c-d6e7.cloud.databricks.com`. If you paste a full workspace URL (`https://dbc-…/`), it is automatically normalized to the bare hostname.
+   - **HTTP path**: The path to your SQL warehouse, e.g. `/sql/1.0/warehouses/abcdef1234567890`. Find this in your SQL warehouse's **Connection details** tab in Databricks.
+   - **Authentication type**: Choose one of the two methods below.
+   - **Catalog**: The Unity Catalog catalog to import from, e.g. `main`.
+   - **Schema** (optional): A specific schema to import. Leave blank to import all schemas in the catalog.
+4. Click **Next**, select the tables you want to sync, choose the [sync method](/docs/cdp/sources#incremental-vs-full-table), and click **Import**.
+
+Once synced, you can [query](/docs/data-warehouse/query) your new tables by name.
+
+## Authentication
+
+### Personal access token
+
+Enter a Databricks personal access token (starts with `dapi…`). This is the simplest option for testing or single-user setups.
+
+Generate one from **Settings → Developer → Access tokens** in your Databricks workspace.
+
+### Service principal (OAuth M2M)
+
+For unattended, production workloads Databricks recommends a service principal with OAuth machine-to-machine (M2M) credentials. Provide:
+
+- **Client ID**: The application (client) ID of the service principal.
+- **Client secret**: A secret generated for the service principal.
+
+The connector exchanges these for short-lived OAuth tokens automatically. See the [Databricks documentation on service principals](https://docs.databricks.com/en/admin/users-groups/service-principals.html) for setup instructions.
+
+## Configuration
+
+<SourceParameters />
+
+## Selecting columns
+
+By default, PostHog syncs all columns from each table. To sync only specific columns:
+
+1. During source setup, click **Columns** next to any table in the table picker.
+2. Uncheck columns you don't want to sync.
+3. Primary key columns and the incremental sync field (if configured) are always synced and cannot be disabled.
+
+You can also change column selection after setup:
+
+1. Go to the [sources tab](https://app.posthog.com/data-management/sources) and click your Databricks source.
+2. Click **Configure** next to any schema.
+3. Under **Columns**, select which columns to sync.
+
+<CalloutBox icon="IconInfo" title="Adding columns to existing syncs" type="fyi">
+
+When you add columns to a schema using incremental or append sync, PostHog prompts you to choose:
+
+- **Sync forward only** – New columns are populated only for future data. Existing rows show `NULL` for the new columns.
+- **Full resync** – Triggers a complete resync to backfill the new columns for all rows.
+
+</CalloutBox>
+
+## Incremental sync
+
+Incremental sync is supported for columns of these types:
+
+| Databricks type                                   | Cursor category |
+| ------------------------------------------------- | --------------- |
+| `TIMESTAMP`, `TIMESTAMP_NTZ`                      | Timestamp       |
+| `DATE`                                            | Date            |
+| `BIGINT`, `INT`, `SMALLINT`, `TINYINT`, `DECIMAL` | Numeric         |
+
+`FLOAT` and `DOUBLE` columns are excluded because floating-point imprecision makes them unreliable cursors.
+
+## Troubleshooting
+
+### Unity Catalog required
+
+**Problem:** Sync fails with a "requires Unity Catalog" error.
+
+**Solution:** The Databricks connector reads table and column metadata from `information_schema`, which only exists in Unity Catalog catalogs. Legacy `hive_metastore` catalogs do not have `information_schema`. Migrate your data to a Unity Catalog catalog or point the connector at an existing Unity Catalog catalog.
+
+### Invalid access token
+
+**Problem:** Sync fails with "Invalid access token".
+
+**Solution:** The personal access token was rejected. Check that the token is correct, has not expired, and has not been revoked in your Databricks workspace. Generate a new token if needed, update the source configuration, and resync.
+
+### Invalid service principal credentials
+
+**Problem:** Sync fails with "invalid_client".
+
+**Solution:** Databricks rejected the OAuth client credentials. Verify that the client ID and client secret are correct and that the service principal still exists in your Databricks account. Update the credentials and resync.
+
+### Catalog not found
+
+**Problem:** Sync fails with `CATALOG_NOT_FOUND`.
+
+**Solution:** The catalog configured on the source no longer exists, or your credentials lost `USE CATALOG` access. Verify the catalog name and grants, then resync.
+
+### Schema not found
+
+**Problem:** Sync fails with `SCHEMA_NOT_FOUND`.
+
+**Solution:** A schema this source syncs no longer exists, or your credentials lost `USE SCHEMA` access. Check the schema and grants, then resync.
+
+### Table or view not found
+
+**Problem:** Sync fails with `TABLE_OR_VIEW_NOT_FOUND`.
+
+**Solution:** A table this source syncs no longer exists, or your credentials are no longer authorized to access it. Confirm the table still exists and your grants are intact, then resync.
+
+### Permission denied
+
+**Problem:** Sync fails with `PERMISSION_DENIED` or `INSUFFICIENT_PERMISSIONS`.
+
+**Solution:** Your Databricks credentials don't have permission to access the requested data. Grant `USE CATALOG`, `USE SCHEMA`, and `SELECT` to the connecting principal, then resync.
+
+### SQL warehouse not found
+
+**Problem:** Sync fails with `RESOURCE_DOES_NOT_EXIST`.
+
+**Solution:** The SQL warehouse referenced by the HTTP path no longer exists or was deleted. Update the HTTP path to point to a running SQL warehouse, then resync.
+
+<InboundIpAddresses />

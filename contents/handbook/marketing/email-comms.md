@@ -99,12 +99,14 @@ The goal of this flow is to set expectations for what the self-hosted experience
 
 Our open source onboarding email is essentially identical to the self-hosted onboarding flow, but excludes information about the sunsetting of the self-hosted product. 
 
-#### Beta onboarding emails
-When a user opts in to a beta via [the feature preview menu](https://app.posthog.com/settings/user-feature-previews) we enter them into an email flow designed to help us collect feedback from users. 
+#### Waitlist, alpha, and beta onboarding emails
+When a user joins a waitlist or opts in to a feature preview — via [the feature preview menu](https://app.posthog.com/settings/user-feature-previews) or a waitlist form on either a product or [the roadmap](/roadmap) page — a `$feature_enrollment_update` event is sent to Customer.io through a data pipeline and enters them into the Waitlist, Alpha, Beta onboarding flow. The flow immediately segments on the `$feature_enrollment_stage` property:
 
-This flow currently comprises a single, personal email from either Joe or the team lead working on the beta feature. This email is sent one week after the user joins the beta and features tailored content based on which beta the user joined. 
+- **Concept:** an immediate, simple confirmation that they're on the waitlist.
+- **Alpha:** an immediate email warning of rough edges and asking for feedback.
+- **Beta:** a 5-day wait, then an email asking for feedback on the beta.
 
-When responses come in, Joe generally triages replies and directs feedback to the relevant team, as well as rewarding users with merch as thanks for their feedback. 
+When a feature moves from concept to alpha or beta, users who registered interest are automatically opted in to the new stage and a `user moved feature preview stage` event fires — we then email them to let them know the feature is enabled and now available, and ask for feedback.
 
 > **Launching a beta?** It helps to let the Brand team know in [the team Slack](https://posthog.slack.com/archives/C083V7C6GKE). The team can then add your beta to the beta onboarding flow, and plan ahead for marketing announcements as needed.
 

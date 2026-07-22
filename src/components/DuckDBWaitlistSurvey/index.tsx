@@ -1,77 +1,22 @@
 import React, { useState } from 'react'
-import { motion } from 'framer-motion'
 import usePostHog from '../../hooks/usePostHog'
-import usePrimeEarlyAccessFeatures from '../../hooks/usePrimeEarlyAccessFeatures'
 import OSButton from 'components/OSButton'
-import * as Yup from 'yup'
-import { IconCheckCircle } from '@posthog/icons'
+import SurveySignup from 'components/SurveySignup'
 
-const ValidationSchema = Yup.object().shape({
-    email: Yup.string().email('Please enter a valid email address').required('Email is required'),
-})
-
-// The Managed DuckDB Data Warehouse concept-stage Early Access Feature flag.
+// "DuckDB managed warehouse waitlist" — linked to the managed-duckdb-data-warehouse
+// feature flag, so this page, the /roadmap card, and the in-app feature previews all
+// collect into the same survey.
+const SURVEY_ID = '019b05b2-973f-0000-8f68-f8326c077146'
+const SURVEY_QUESTION_ID = '3f087a80-6c74-49b4-a615-588f50fa34d3'
 const FLAG_KEY = 'managed-duckdb-data-warehouse'
 
 export default function DuckDBWaitlistSurvey(): JSX.Element {
-    const [email, setEmail] = useState('')
-    const [submitted, setSubmitted] = useState(false)
     const [showForm, setShowForm] = useState(false)
-    const [error, setError] = useState('')
     const posthog = usePostHog()
 
-    // Load the EAF list before submit so the enrollment event carries $early_access_feature_name —
-    // the Customer.io waitlist flow's trigger requires it.
-    usePrimeEarlyAccessFeatures(FLAG_KEY)
-
-    const handleSubmit = async (event: React.FormEvent) => {
-        event.preventDefault()
-        setError('')
-
-        // Validate email
-        try {
-            await ValidationSchema.validate({ email })
-        } catch (err) {
-            if (err instanceof Yup.ValidationError) {
-                setError(err.message)
-            }
-            return
-        }
-
-        // Submit to PostHog as a survey response
-        if (posthog) {
-            posthog.capture('survey sent', {
-                $survey_id: '019b05b2-973f-0000-8f68-f8326c077146',
-                $survey_response: email,
-            })
-
-            // Also set person property for follow-up
-            posthog.setPersonProperties({
-                email: email,
-                duckdb_waitlist: true,
-            })
-
-            // Mirror the in-app coming-soon waitlist: fire $feature_enrollment_update with
-            // $feature_enrollment_stage 'concept' for the Managed DuckDB Data Warehouse EAF.
-            posthog.updateEarlyAccessFeatureEnrollment?.(FLAG_KEY, true, 'concept')
-        }
-
-        setSubmitted(true)
-    }
-
-    if (submitted) {
-        return (
-            <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="bg-primary dark:bg-accent border border-green rounded-md p-2"
-            >
-                <p className="!m-0 text-green text-xs flex items-center gap-2">
-                    <IconCheckCircle className="h-4 w-4" />{' '}
-                    <span className="text-primary">Thanks! You're on the waitlist. We'll be in touch soon.</span>
-                </p>
-            </motion.div>
-        )
+    // Preserve the existing person-property flag used by downstream follow-up.
+    const handleSuccess = () => {
+        posthog?.setPersonProperties({ duckdb_waitlist: true })
     }
 
     if (!showForm) {
@@ -83,33 +28,21 @@ export default function DuckDBWaitlistSurvey(): JSX.Element {
     }
 
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
+        <div
             data-scheme="secondary"
-            className="bg-primary dark:bg-dark border border-primary rounded-md p-4"
+            className="@container bg-primary dark:bg-dark border border-primary rounded-md p-4"
         >
-            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2">
-                <div className="flex-1">
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="Enter your email"
-                        className={`w-full px-1 py-0.5 text-sm rounded-sm border ${
-                            error ? 'border-red' : 'border-primary'
-                        } bg-light outline-none ring-0 focus:ring-0 text-black`}
-                        autoComplete="email"
-                        autoFocus
-                    />
-                    {error && <p className="text-red text-xs mt-1 mb-0 font-semibold">{error}</p>}
-                </div>
-                <div>
-                    <OSButton type="submit" variant="primary" size="sm">
-                        Submit
-                    </OSButton>
-                </div>
-            </form>
-        </motion.div>
+            <SurveySignup
+                surveyId={SURVEY_ID}
+                surveyQuestionId={SURVEY_QUESTION_ID}
+                flagKey={FLAG_KEY}
+                productName="Managed warehouse"
+                buttonLabel="Submit"
+                autoFocus
+                confetti={false}
+                successMessage="Thanks! You're on the waitlist. We'll be in touch soon."
+                onSuccess={handleSuccess}
+            />
+        </div>
     )
 }
