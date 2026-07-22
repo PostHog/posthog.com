@@ -15,12 +15,12 @@ const PricingFooterCTA = ({ id, productData }: SectionComponentProps) => {
                         The hedgehog has been waiting this whole time.
                     </h2>
                     <p className="text-base text-primary/70 mb-8">
-                        It's free to start. Not "free trial" free — actually free. No card, no call, no "someone from
+                        It's free to start. Not "free trial" free – actually free. No card, no call, no "someone from
                         our team will be in touch." Just PostHog.
                     </p>
                     <div className="flex flex-wrap gap-3 items-center">
                         <OSButton variant="primary" asLink to="https://app.posthog.com/signup" size="lg">
-                            Get started — free
+                            Get started – free
                         </OSButton>
                         <OSButton variant="secondary" asLink to="/talk-to-a-human" size="lg">
                             Talk to a human

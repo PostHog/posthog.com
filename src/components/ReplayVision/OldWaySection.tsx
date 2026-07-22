@@ -23,17 +23,17 @@ const OldWaySection = ({ id }: SectionComponentProps) => {
 
     return (
         <section id={id} className="scroll-mt-20 not-prose @container relative">
-            <SectionLabel>
-                The <InlineIcon icon={StickerTombstone} className="!size-10 !top-3 -rotate-1" /> old way to use session
-                replay
-            </SectionLabel>
-
             <FlowDiagram
                 className="mb-5 hidden @xl:block float-right ml-8 w-[350px]"
                 steps={steps}
                 headerLeft="Using replay"
                 headerRight="(cir. 2022-2026)"
             />
+
+            <SectionLabel>
+                The <InlineIcon icon={StickerTombstone} className="!size-10 !top-3 -rotate-1" /> old way to use session
+                replay
+            </SectionLabel>
 
             <p className="text-base leading-loose mb-5">
                 <ChoppyReveal wordDelay={40} onComplete={() => setP1Done(true)}>
@@ -59,9 +59,7 @@ const OldWaySection = ({ id }: SectionComponentProps) => {
             <p className="text-base leading-loose">
                 <ChoppyReveal wordDelay={40} initialDelay={p1Done ? 0 : 999999}>
                     {"You're the one who has to watch them all, spot the pattern, and figure out the fix – "}
-                    <RoughAnnotation type="underline" color="#30A46C" strokeWidth={2}>
-                        <em>the tool just hands you the footage</em>
-                    </RoughAnnotation>
+                    <em>the tool just hands you the footage</em>
                     {'.'}
                 </ChoppyReveal>
             </p>

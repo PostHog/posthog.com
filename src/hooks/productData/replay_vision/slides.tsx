@@ -15,6 +15,8 @@ import {
 import type { CarouselSlide } from 'components/Products/ReaderViewProduct/types'
 import { LabeledList, InlineCode } from 'components/Products/ReaderViewProduct/helpers'
 import PlatformInstall, { wizardInstallSchema } from 'components/PlatformInstall'
+import CloudinaryImage from 'components/CloudinaryImage'
+import Glow from 'components/Glow'
 
 // The "How do I use it?" carousel – four ways to put Replay Vision to work.
 export const applications: CarouselSlide[] = [
@@ -29,6 +31,15 @@ export const applications: CarouselSlide[] = [
         heading: 'Author, run, and read scanners without leaving your editor',
         description: (
             <>
+                <aside className="my-4 @lg/reader-content:mt-2 @lg/reader-content:float-right max-w-[100%_+_1rem] @lg/reader-content:max-w-[300px] @xl/reader-content:max-w-[360px] @3xl/reader-content:max-w-[440px] @lg/reader-content:ml-8 -mr-4 @2xl/reader-content:-mr-8 @4xl/reader-content:-mr-10">
+                    <Glow color="black" intensity="gentle" rounded="lg">
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/Replay_Vision_Cowork_mockup_fb5c8f714a.png"
+                            className="w-full"
+                            imgClassName="w-full rounded-md"
+                        />
+                    </Glow>
+                </aside>
                 <p>
                     Your AI coding agent can call Replay Vision directly through the PostHog MCP – in Cursor, Claude
                     Code, Codex, VS Code, or any MCP client.
@@ -106,6 +117,11 @@ export const applications: CarouselSlide[] = [
                 </div>
             </>
         ),
+        image: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_07_22_at_16_53_55_2x_042bd6369d.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_07_22_at_16_58_56_2x_292863671d.png',
+        },
     },
     {
         slug: 'query-alert',
@@ -146,6 +162,11 @@ export const applications: CarouselSlide[] = [
                 </div>
             </>
         ),
+        image: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_07_22_at_16_56_27_2x_1fedaa73d8.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_07_22_at_16_57_50_2x_720995e1f8.png',
+        },
     },
     {
         slug: 'inbox-self-driving',
@@ -197,6 +218,11 @@ export const applications: CarouselSlide[] = [
                 </div>
             </>
         ),
+        image: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_07_22_at_17_03_10_2x_1_4c236ec771.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_07_22_at_17_02_08_2x_1_eb56d67e29.png',
+        },
     },
 ]
 
@@ -291,61 +317,6 @@ export const topFeatures: CarouselSlide[] = [
                     Every observation comes with a confidence score and citations that link straight to the exact moment
                     in the recording, so you can verify it in one click.
                 </p>
-            </>
-        ),
-    },
-    {
-        slug: 'configure-it',
-        label: 'Configure it',
-        icon: <IconCode className="size-5" />,
-        color: 'bg-light dark:bg-dark',
-        activeText: 'text-primary',
-        progressBar: 'bg-blue',
-        layout: 'stack',
-        heading: 'Configure it',
-        description: (
-            <>
-                <p>
-                    A scanner is four things you author: a <strong>prompt</strong>, a <strong>type</strong>,{' '}
-                    <strong>recording filters</strong>, and a <strong>sampling rate</strong>. The editor helps you get
-                    each right before you save.
-                </p>
-                <div className="@container">
-                    <LabeledList
-                        items={[
-                            {
-                                label: 'Start from a template',
-                                description:
-                                    'Five built-in templates pre-fill the form – tweak anything before saving.',
-                            },
-                            {
-                                label: 'Draft with PostHog AI',
-                                description:
-                                    'Describe what you want in plain language; PostHog AI picks a type and drafts the prompt for you.',
-                            },
-                            {
-                                label: 'Scope with filters',
-                                description:
-                                    'Narrow to the sessions that matter – person property, session property, cohort, or events – using the same query builder as Session Replay.',
-                            },
-                            {
-                                label: 'Control volume with sampling',
-                                description:
-                                    "A 0–100% rate applied after filters, so a poorly-scoped scanner can't run away with your budget.",
-                            },
-                            {
-                                label: 'Size it before you save',
-                                description:
-                                    'The editor projects the per-month observation count against your remaining quota before you commit.',
-                            },
-                            {
-                                label: 'Type-specific knobs',
-                                description:
-                                    'Tag vocabulary for classifiers, a numeric scale for scorers, summary length, or an "inconclusive" option for monitors.',
-                            },
-                        ]}
-                    />
-                </div>
             </>
         ),
     },

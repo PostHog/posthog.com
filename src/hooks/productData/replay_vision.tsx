@@ -26,8 +26,134 @@ import HowToUseSection from 'components/ReplayVision/HowToUseSection'
 import AIPromptsSection from 'components/ReplayVision/AIPromptsSection'
 import WorksWithSection from 'components/ReplayVision/WorksWithSection'
 import PlaceholderSection from 'components/ReplayVision/PlaceholderSection'
+import PricingFooterCTASection from 'components/ReplayVision/PricingFooterCTASection'
 import { sessionReplay } from './session_replay'
 import { topFeatures } from './replay_vision/slides'
+
+// Feature-comparison rows. Header rows group the table; feature rows carry the
+// row label and pull each competitor's value from `products.replay_vision.features`
+// in the competitor data files (competitorData/*).
+const feature = (key: string, label: string, description: string) => ({
+    type: 'feature' as const,
+    product: 'replay_vision',
+    feature: key,
+    label,
+    description,
+})
+
+const featureComparisonRows = [
+    { type: 'header' as const, label: 'AI scanners' },
+    feature(
+        'point_scanner',
+        'Point a scanner at a filtered recording set',
+        'Run AI analysis across a whole slice of sessions, not one recording at a time.'
+    ),
+    feature(
+        'configurable_types',
+        'Configurable scanner types',
+        'Choose how a scanner works – monitor, classifier, scorer, or summarizer – instead of a fixed job.'
+    ),
+    feature(
+        'custom_prompt',
+        'Custom prompt per analysis',
+        'Describe exactly what to look for in your own words for each scanner.'
+    ),
+    feature(
+        'yes_no_monitors',
+        'Yes/no monitors (did this happen?)',
+        'Get a simple did-this-happen verdict on every session a scanner watches.'
+    ),
+    feature(
+        'classify_tag',
+        'Classify / tag sessions',
+        'Automatically bucket sessions by intent, outcome, or any label you define.'
+    ),
+    feature(
+        'friction_score',
+        'Numeric friction / struggle score',
+        'Rate how much friction each session hit on a scale you control.'
+    ),
+    feature(
+        'theme_summary',
+        'Cross-session theme summary',
+        'Roll many sessions up into the recurring themes and patterns across them.'
+    ),
+    feature(
+        'nl_search',
+        'Natural-language search over sessions',
+        'Find the recordings you need by describing them in plain language.'
+    ),
+    feature(
+        'scheduled_runs',
+        'Scheduled / continuous runs',
+        'Scanners keep running on new sessions automatically, not just on demand.'
+    ),
+    feature(
+        'sampling_controls',
+        'Sampling / coverage controls',
+        'Dial how much matching traffic gets scanned so cost stays predictable.'
+    ),
+    feature(
+        'deep_link_citations',
+        'Deep-link citations to the exact moment',
+        'Every finding links straight to the timestamp in the recording so you can verify it.'
+    ),
+    feature(
+        'mobile_replay_ai',
+        'Mobile replay AI',
+        'Run the same AI analysis over native iOS and Android session recordings.'
+    ),
+    { type: 'header' as const, label: 'Results as data' },
+    feature(
+        'findings_events',
+        'Findings become queryable events',
+        'Each observation is emitted as an event you can query alongside the rest of your data.'
+    ),
+    feature(
+        'insights_dashboards',
+        'Build insights / dashboards on AI output',
+        'Chart and monitor what scanners find like any other product metric.'
+    ),
+    feature(
+        'feed_experiments',
+        'Feed experiments / cohorts',
+        'Use scanner output to build cohorts and measure it in experiments.'
+    ),
+    feature(
+        'proactive_alerts',
+        'Proactive alerts / anomaly detection',
+        "Get notified when a scanner's output spikes or crosses a threshold."
+    ),
+    { type: 'header' as const, label: 'Access and agents' },
+    feature(
+        'mcp_access',
+        'MCP / agent access',
+        'Author, run, and read scanners from any MCP client via the PostHog MCP.'
+    ),
+    feature('rest_api', 'REST API for AI output', 'Pull scanner observations programmatically over a REST API.'),
+    feature(
+        'self_driving',
+        'Feeds the self-driving loop',
+        'Findings raise signals that agents can research and turn into a pull request.'
+    ),
+    { type: 'header' as const, label: 'Recordings and platform' },
+    feature('share_recordings', 'Share recordings', 'Share a link to any recording with your team.'),
+    feature('embed_recordings', 'Embed recordings', 'Embed recordings in docs, dashboards, or other tools.'),
+    feature('export_recordings', 'Export recordings', 'Export recordings out of the platform when you need to.'),
+    feature(
+        'flag_interlinking',
+        'Feature-flag interlinking',
+        'Jump between recordings and the feature flags and experiments they hit.'
+    ),
+    feature(
+        'product_analytics_platform',
+        'Product analytics in same platform',
+        'Analytics, replays, and AI findings all live in one product, not stitched together.'
+    ),
+    feature('pii_redaction', 'PII redaction / masking', 'Mask sensitive content before it is ever recorded.'),
+    { type: 'header' as const, label: 'Pricing' },
+    feature('ai_pricing', 'AI pricing model', 'How the AI analysis is billed.'),
+]
 
 export const replayVision = {
     Icon: IconLlmPromptEvaluation,
@@ -46,7 +172,7 @@ export const replayVision = {
     seo: {
         title: 'Replay Vision - PostHog',
         description:
-            'It reads through a filtered set of replays, tells you in plain language what went wrong, and – when the cause is clear – opens a pull request with the fix. The problem surfaces itself, and so does the patch. You just hit merge.',
+            'It reads through a filtered set of replays, tells you in plain language what went wrong, and opens a pull request with the fix. The problem surfaces itself, and so does the patch. You just hit merge.',
     },
     /**
      * Sections rendered on the Product surface (`/replay-vision`). Each entry
@@ -128,23 +254,18 @@ export const replayVision = {
             icon: <IconPieChart className="size-4" />,
         },
         { slug: 'comparison-summary', name: 'PostHog vs...', icon: <IconList className="size-4" /> },
-        {
-            slug: 'feature-comparison',
-            name: 'Feature comparison',
-            component: PlaceholderSection,
-            props: { title: 'Feature comparison' },
-            icon: <IconGraph className="size-4" />,
-        },
+        { slug: 'feature-comparison', name: 'Feature comparison', icon: <IconGraph className="size-4" /> },
+        { slug: 'pricing-cta', name: 'Get started', hideFromNav: true, component: PricingFooterCTASection },
     ],
     overview: {
         title: "You'll never watch 10,000 sessions. Replay Vision will.",
         description:
-            'It reads through a filtered set of replays, tells you in plain language what went wrong, and – when the cause is clear – opens a pull request with the fix. The problem surfaces itself, and so does the patch. You just hit merge.',
+            'It reads through a filtered set of replays, tells you in plain language what went wrong, and opens a pull request with the fix. The problem surfaces itself, and so does the patch. You just hit merge.',
         textColor: 'text-black', // tw
     },
     screenshots: {
         home: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Group_2_4_8e09fa75cc.png',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Group_3_1_44abff4569.png',
             alt: 'Replay Vision scanner observations',
         },
     },
@@ -181,5 +302,15 @@ export const replayVision = {
                 { title: "You'd rather keep sessions on PostHog than pay a second tool to scrape them out" },
             ],
         },
+        companies: [
+            { name: 'FullStory', key: 'fullstory', link: '/blog/posthog-vs-fullstory' },
+            { name: 'Contentsquare', key: 'contentsquare' },
+            { name: 'Datadog', key: 'datadog' },
+            { name: 'Mixpanel', key: 'mixpanel', link: '/blog/posthog-vs-mixpanel' },
+            { name: 'PostHog', key: 'posthog' },
+        ],
+        rows: featureComparisonRows,
+        // Feature pages don't render platform sections; our rows are already scoped.
+        excluded_sections: ['platform'],
     },
 }

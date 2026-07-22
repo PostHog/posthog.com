@@ -23,6 +23,13 @@ const PostHogWaySection = ({ id }: SectionComponentProps) => {
 
     return (
         <section id={id} className="scroll-mt-20 not-prose @container relative">
+            <FlowDiagram
+                className="mb-5 hidden @xl:block float-right ml-8 w-[350px]"
+                steps={steps}
+                headerLeft="The loop"
+                headerRight="(cir. 2026–)"
+            />
+
             <SectionLabel>
                 The{' '}
                 <IconPop>
@@ -30,13 +37,6 @@ const PostHogWaySection = ({ id }: SectionComponentProps) => {
                 </IconPop>{' '}
                 PostHog way
             </SectionLabel>
-
-            <FlowDiagram
-                className="mb-5 hidden @xl:block float-right ml-8 w-[350px]"
-                steps={steps}
-                headerLeft="The loop"
-                headerRight="(cir. 2026–)"
-            />
 
             <p className="text-base leading-loose mb-5">
                 <ChoppyReveal wordDelay={40} onComplete={() => setP1Done(true)}>
