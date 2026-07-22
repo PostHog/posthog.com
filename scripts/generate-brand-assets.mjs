@@ -10,57 +10,62 @@ import { Logo } from '@posthog/brand/logo'
 // package.json lifecycle hooks run this automatically for the standard start and build commands.
 const outputDirectory = fileURLToPath(new URL('../static/brand/', import.meta.url))
 
+const scaleDimensions = ([width, height], scale) => [width * scale, height * scale]
+const padDimensions = ([width, height], padding) => [width + padding * 2, height + padding * 2]
+
+const getNativeDimensions = (props) => {
+    const markup = renderToStaticMarkup(React.createElement(Logo, props))
+    const viewBox = markup.match(/\bviewBox="([^"]+)"/)?.[1]
+    const dimensions = viewBox?.trim().split(/\s+/).map(Number)
+
+    if (dimensions?.length !== 4 || dimensions.some((value) => !Number.isFinite(value))) {
+        throw new Error(`Unable to read logo viewBox from: ${markup.slice(0, 200)}`)
+    }
+
+    return dimensions.slice(2)
+}
+
+const createAsset = ({ name, props, pngScale = 1, padding = 5, paddedSvg = true }) => {
+    const svg = getNativeDimensions(props)
+    const png = scaleDimensions(svg, pngScale)
+    const padded = padDimensions(png, padding)
+
+    return {
+        name,
+        props,
+        svg,
+        png,
+        png2x: scaleDimensions(png, 2),
+        padded,
+        padded2x: scaleDimensions(padded, 2),
+        paddedSvg,
+    }
+}
+
 const assets = [
-    {
+    createAsset({
         name: 'posthog-logo',
         props: {},
-        svg: [157, 30],
-        png: [157, 30],
-        png2x: [314, 60],
-        padded: [167, 40],
-        padded2x: [334, 80],
-        paddedSvg: true,
-    },
-    {
+    }),
+    createAsset({
         name: 'posthog-logo-black',
         props: { variant: 'mono', color: '#111' },
-        svg: [157, 30],
-        png: [157, 30],
-        png2x: [314, 60],
-        padded: [167, 40],
-        padded2x: [334, 80],
-        paddedSvg: true,
-    },
-    {
+    }),
+    createAsset({
         name: 'posthog-logo-white',
         props: { variant: 'mono', color: '#FAFAFA' },
-        svg: [157, 30],
-        png: [157, 30],
-        png2x: [314, 60],
-        padded: [167, 40],
-        padded2x: [334, 80],
-        paddedSvg: true,
-    },
-    {
+    }),
+    createAsset({
         name: 'posthog-logomark',
         props: { layout: 'logomark' },
-        svg: [50, 30],
-        png: [50, 30],
-        png2x: [100, 60],
-        padded: [60, 40],
-        padded2x: [120, 80],
-        paddedSvg: true,
-    },
-    {
+    }),
+    createAsset({
         name: 'posthog-logo-stacked',
         props: { layout: 'stacked' },
-        svg: [137, 132],
-        png: [499, 479],
-        png2x: [996, 956],
-        padded: [539, 518],
-        padded2x: [1076, 1036],
+        pngScale: 5,
+        padding: 20,
         paddedSvg: false,
-    },
+    }),
 ]
 
 const replaceRootSvgAttributes = (markup, attributes) =>
@@ -119,7 +124,11 @@ for (const asset of assets) {
 }
 
 // Image-only integrations often force avatars into square boxes. Keep the official
-// 52:28 logomark intact and center it on a transparent square canvas instead of stretching it.
-await writeSvg('posthog-logomark-square.svg', renderPaddedLogo({ layout: 'logomark' }, [52, 28], [60, 60]))
+// logomark aspect ratio intact and center it on a transparent square canvas instead of stretching it.
+const squareLogomarkProps = { layout: 'logomark' }
+await writeSvg(
+    'posthog-logomark-square.svg',
+    renderPaddedLogo(squareLogomarkProps, getNativeDimensions(squareLogomarkProps), [60, 60])
+)
 
 console.log(`Generated ${assets.length} public logo variants in ${path.relative(process.cwd(), outputDirectory)}`)

@@ -12,6 +12,7 @@ import PlatformInstall from 'components/PlatformInstall'
 import WizardCTA from 'components/WizardCTA'
 import usePlatformList from 'hooks/docs/usePlatformList'
 import LovableLogo from 'components/CustomerLogos/LovableLogo'
+import { useApp } from '../../context/App'
 
 const TOP_COUNT = 8
 const PLATFORM_ORDER = [
@@ -34,6 +35,7 @@ const PLATFORM_ORDER = [
 ]
 
 export default function AIObservabilityLanding(): JSX.Element {
+    const { siteSettings } = useApp()
     const [showMore, setShowMore] = useState(false)
     const [isIdle, setIsIdle] = useState(false)
     const [installMCPCopied, setInstallMCPCopied] = useState(false)
@@ -149,7 +151,11 @@ export default function AIObservabilityLanding(): JSX.Element {
                             imgClassName="object-contain max-w-full h-10 w-auto"
                         />
                         <img
-                            src="/brand/posthog-logo.svg"
+                            src={
+                                siteSettings.theme === 'dark'
+                                    ? '/brand/posthog-logo-white.svg'
+                                    : '/brand/posthog-logo.svg'
+                            }
                             alt="PostHog"
                             className="object-contain max-w-full h-10 w-auto"
                         />

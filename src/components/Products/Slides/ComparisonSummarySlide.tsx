@@ -68,7 +68,7 @@ export default function ComparisonSummarySlide({ them, us }: ComparisonSummarySl
                             layout="logomark"
                             variant="mono"
                             color="currentColor"
-                            className="text-primary h-6 w-auto inline-block -mt-3 mx-1 -right-1 -mb-2"
+                            className="text-primary h-6 w-auto inline-block -mt-3 mx-1 -mb-2"
                         />{' '}
                         PostHog
                     </h3>
