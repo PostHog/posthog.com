@@ -381,8 +381,10 @@ function HeroSection() {
             {/* Top header bar: the page's own title strip (scroller + Discord) with a divider line */}
             <div className="mb-8 flex items-center justify-between gap-4 border-b border-primary pb-3">
                 <LetPostHogScroller className="text-xl @xl:text-2xl font-bold tracking-tight" />
+                {/* On phone-width viewports the scroller ("…instrument") needs the full row, so the
+                    Discord badge moves down next to the "Join the waitlist" heading (see HeroSection form). */}
                 <Link
-                    className="group flex shrink-0 items-center gap-1 text-sm font-semibold text-secondary hover:text-primary"
+                    className="group hidden sm:flex shrink-0 items-center gap-1 text-sm font-semibold text-secondary hover:text-primary"
                     to="https://discord.com/invite/E9xV2WnR98"
                     externalNoIcon
                 >
@@ -439,7 +441,18 @@ function HeroSection() {
                                 </ul>
 
                                 <div className="@container max-w-sm">
-                                    <WaitlistForm />
+                                    <WaitlistForm
+                                        titleAccessory={
+                                            <Link
+                                                className="group flex sm:hidden shrink-0 items-center gap-1 text-sm font-semibold text-secondary hover:text-primary"
+                                                to="https://discord.com/invite/E9xV2WnR98"
+                                                externalNoIcon
+                                            >
+                                                <IconDiscord className="size-6 text-secondary group-hover:text-primary" />
+                                                <span className="group-hover:underline">Discord</span>
+                                            </Link>
+                                        }
+                                    />
                                     <p className="mt-4 text-sm text-secondary">
                                         Have an invite code?{' '}
                                         <Link

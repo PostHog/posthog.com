@@ -23,6 +23,8 @@ interface WaitlistFormProps {
     showTitle?: boolean
     buttonLabel?: string
     showDiscord?: boolean
+    /** Optional element rendered right-aligned next to the "Join the waitlist" heading (pre-submit only). */
+    titleAccessory?: React.ReactNode
 }
 
 export function WaitlistForm({
@@ -35,6 +37,7 @@ export function WaitlistForm({
     showTitle = true,
     buttonLabel = 'Get updates',
     showDiscord = true,
+    titleAccessory,
 }: WaitlistFormProps) {
     const posthog = usePostHog()
     const selectedProduct = useProduct({ handle: productHandle })
@@ -100,7 +103,12 @@ export function WaitlistForm({
 
     return (
         <form onSubmit={handleSubmit} className="space-y-2">
-            {showTitle && <h3 className="text-lg font-bold mb-2 !mt-0">Join the waitlist</h3>}
+            {showTitle && (
+                <div className="flex items-center justify-between gap-2 mb-2">
+                    <h3 className="text-lg font-bold !mt-0 !mb-0">Join the waitlist</h3>
+                    {titleAccessory}
+                </div>
+            )}
             <Input
                 ref={inputRef}
                 autoFocus={autoFocus}
