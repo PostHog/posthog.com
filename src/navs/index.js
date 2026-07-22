@@ -1427,6 +1427,10 @@ export const handbookSidebar = [
                         url: '/handbook/forward-deployed-engineering/how-we-work',
                     },
                     {
+                        name: 'New starter onboarding',
+                        url: '/handbook/forward-deployed-engineering/new-hire-onboarding',
+                    },
+                    {
                         name: 'Working with customers',
                         url: '/handbook/forward-deployed-engineering/working-with-customers',
                     },
