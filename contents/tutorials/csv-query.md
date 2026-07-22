@@ -2,14 +2,16 @@
 title: How to query a CSV in PostHog
 date: 2024-09-30
 author:
- - ian-vanagas
+  - ian-vanagas
 tags:
- - data warehouse
+  - data warehouse
 ---
 
 PostHog can capture a lot of data about your users. For data it can't capture, you can leverage the [data warehouse](/data-warehouse) to manually upload any data you'd like as a CSV
 
 This tutorial shows you how to upload a CSV to storage, connect that storage source to PostHog, and then query the CSV alongside your data in PostHog.
+
+> **Tip:** For small files under 50MB that don't need regular updates, you can [upload directly to PostHog](/docs/data-warehouse/sources/file-upload) without setting up external storage. This tutorial covers the external storage approach, which is better for larger files or data that updates frequently.
 
 ## Creating and uploading our CSV
 
@@ -26,7 +28,7 @@ user_id,full_name,email,join_date,subscription_type,total_meetings_hosted,total_
 007,Ian Vanagas,ian@posthog.com,2023-02-15,Pro,40,55
 ```
 
-To get this into PostHog, we need to upload it into storage. The easiest way to do this is to use [Cloudflare R2](/docs/data-warehouse/setup/r2), but you can also use other storage services like [S3](/docs/data-warehouse/setup/s3), [Azure Blob](/docs/data-warehouse/setup/azure-blob), or [GCS](/docs/data-warehouse/setup/gcs). 
+To get this into PostHog, we need to upload it into storage. The easiest way to do this is to use [Cloudflare R2](/docs/data-warehouse/setup/r2), but you can also use other storage services like [S3](/docs/data-warehouse/setup/s3), [Azure Blob](/docs/data-warehouse/setup/azure-blob), or [GCS](/docs/data-warehouse/setup/gcs).
 
 After signing up for Cloudflare, go to your dashboard and create a new bucket (if you haven't already). We suggest using Eastern North America as a location hint if you're using PostHog Cloud US or European Union as a specific jurisdiction if you're using PostHog Cloud EU.
 
@@ -47,13 +49,13 @@ With our bucket setup and `.csv` upload, we are ready to connect it to PostHog.
 
 With these, we can add the bucket to PostHog:
 
-1. Go to the [sources tab](https://us.posthog.com/pipeline/sources) of the data pipeline section in PostHog.
+1. Go to the [sources tab](https://app.posthog.com/data-management/sources) of the data pipeline section in PostHog.
 2. Click [**New source**](https://us.posthog.com/project/52792/pipeline/new/source) and under self managed, look for **Cloudflare R2** and click **Link.**
 3. Fill the table name for use in PostHog (like `csv_users`), then use the data from Cloudflare to fill out the rest of the fields:
-    - For files URL pattern, use the jurisdiction-specific endpoint URL with your bucket and file name like `https://b27344y7bd543c.r2.cloudflarestorage.com/posthog-warehouse/my_users.csv`.
-    - Choose the **CSV with headers** format.
-    - For the access key, use your Access Key ID.
-    - For the secret key, use your Secret Access Key.
+   - For files URL pattern, use the jurisdiction-specific endpoint URL with your bucket and file name like `https://b27344y7bd543c.r2.cloudflarestorage.com/posthog-warehouse/my_users.csv`.
+   - Choose the **CSV with headers** format.
+   - For the access key, use your Access Key ID.
+   - For the secret key, use your Secret Access Key.
 4. Finally, click **Next** to link the bucket to PostHog.
 
 <ProductScreenshot
@@ -95,8 +97,8 @@ When your data relates to [people](/docs/data/persons) in PostHog, you can creat
 
 To do this:
 
-1. Go to the data warehouse tab and find the [`persons` table](/docs/data-warehouse/sources/posthog#persons), click the three dots next to it, and click **Add join**. 
-2. In the popup, set the **Source Table Key** to a property that both tables include, in our case, that is `email`. To access it, we use SQL to set our **Source Table Key** to `properties.email`. 
+1. Go to the data warehouse tab and find the [`persons` table](/docs/data-warehouse/sources/posthog#persons), click the three dots next to it, and click **Add join**.
+2. In the popup, set the **Source Table Key** to a property that both tables include, in our case, that is `email`. To access it, we use SQL to set our **Source Table Key** to `properties.email`.
 3. Choose `csv_users` as your **Joining Table** and `email` as your **Joining Table Key.**
 4. Click **Save**.
 
@@ -110,8 +112,8 @@ To do this:
 Once you've done this, you can then query your CSV data from the persons table like this:
 
 ```sql
-select csv_users.total_meetings_hosted 
-from persons 
+select csv_users.total_meetings_hosted
+from persons
 where properties.email = 'ian@posthog.com'
 ```
 

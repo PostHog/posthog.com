@@ -97,10 +97,6 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
             setIsCart(true)
             setIsAdding(false)
             setJustAdded(true)
-            // Hide the message after 5 seconds
-            setTimeout(() => {
-                setJustAdded(false)
-            }, 5000)
         }, 500)
     }
 

@@ -22,8 +22,8 @@ Make sure to set `Read/Write Access` for:
 
 ## Configuring PostHog’s Klaviyo destination
 
-1. In PostHog, click the **[Data pipeline](https://us.posthog.com/pipeline/overview)** tab in the left sidebar.
-2. Click the [Destinations](https://us.posthog.com/pipeline/destinations?search=klaviyo) tab.
+1. In PostHog, click the **[Data pipeline](https://app.posthog.com/data-management/destinations)** tab in the left sidebar.
+2. Click the [Destinations](https://app.posthog.com/data-management/destinations?search=klaviyo) tab.
 3. Click **New destination** and choose a Klaviyo option for either creating/updating contacts or sending events.
 
 Insert your API key. You can also choose a different property to use as the contact's email; PostHog will default to `person.properties.email`.
@@ -52,7 +52,7 @@ Once you’ve configured your Klaviyo destination, click **Create & enable** the
 
 ### Is the source code for this destination available?
 
-PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/posthog/cdp/templates/webhook/template_airtable.py) is available on GitHub.
+PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/posthog/cdp/templates/klaviyo/template_klaviyo.py) is available on GitHub.
 
 <PostHogMaintained />
 

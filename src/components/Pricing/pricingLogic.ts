@@ -37,7 +37,7 @@ export const pricingLogic = kea<pricingLogicType>({
             [] as BillingProductV2Type[],
             {
                 loadAvailableProducts: async () => {
-                    const url = `${process.env.BILLING_SERVICE_URL + '/api/products-v2'}`
+                    const url = `${process.env.BILLING_SERVICE_URL}/api/products-v2?display_friendly=true`
                     const headers = {
                         'Content-Type': 'application/json',
                     }

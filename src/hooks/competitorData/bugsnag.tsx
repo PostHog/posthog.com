@@ -8,7 +8,8 @@ export const bugsnag = {
         error_tracking: {
             available: true,
             features: {
-                console_log_capture: false,
+                // https://docs.bugsnag.com/platforms/javascript/automatically-captured-data/
+                console_log_capture: true,
                 error_alerts: true,
                 exception_capture: true,
                 issue_management: true,

@@ -13,6 +13,7 @@ import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { Screensaver } from '../components/Screensaver'
 import useTheme, { type ThemeOption } from '../hooks/useTheme'
+import KeyboardShortcut from 'components/KeyboardShortcut'
 
 const XL_CURSOR_SVG = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 74 28"><g clip-path="url(#a)"><path fill="#000" stroke="#fff" stroke-width="5" d="m44.77 50.196.024.01.025.008c.48.177 1.014.286 1.58.286.665 0 1.28-.147 1.837-.392l.012-.006.013-.006 8.8-3.997.002-.001a4.5 4.5 0 0 0 2.225-5.968v-.001l-10.73-23.395 16.828-1.446.008-.001a4.504 4.504 0 0 0 2.678-7.78L20.073-37.289a4.51 4.51 0 0 0-4.858-.843l-.011.005A4.499 4.499 0 0 0 12.5-34v66a4.503 4.503 0 0 0 2.715 4.133l.01.003a4.505 4.505 0 0 0 4.86-.859L32.01 24.072l10.259 23.717.005.012.005.011a4.527 4.527 0 0 0 2.492 2.384Z"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h74v28H0z"/></clipPath></defs></svg>`
 
@@ -32,19 +33,6 @@ const colorModeOptions: ToggleOption[] = [
         label: 'Dark',
         value: 'dark',
         icon: <IconNight className="size-5" />,
-    },
-]
-
-const skinOptions: ToggleOption[] = [
-    {
-        label: 'Modern',
-        value: 'modern',
-        // icon: <IconLaptop className="size-5" />,
-    },
-    {
-        label: 'Classic',
-        value: 'classic',
-        // icon: <IconLaptop className="size-5" />,
     },
 ]
 
@@ -70,31 +58,6 @@ const cursorOptions: ToggleOption[] = [
         ),
     },
 ]
-
-const experienceOptions = [
-    {
-        label: (
-            <span>
-                Squirrel mode{' '}
-                <Tooltip trigger={<IconInfo className="size-4 inline-block relative -top-px" />} delay={0}>
-                    <p className="max-w-sm my-0">Too many windows? Limit yourself to one window at a time.</p>
-                </Tooltip>
-            </span>
-        ),
-        value: 'boring',
-    },
-    {
-        label: (
-            <span>
-                Multi-window{' '}
-                <Tooltip trigger={<IconInfo className="size-4 inline-block relative -top-px" />} delay={0}>
-                    <p className="max-w-sm my-0">Like a desktop OS, open as many windows as you like.</p>
-                </Tooltip>
-            </span>
-        ),
-        value: 'posthog',
-    },
-] satisfies (ToggleOption & { value: SiteSettings['experience'] })[]
 
 // Custom WallpaperSelect component
 interface WallpaperSelectProps {
@@ -159,7 +122,15 @@ const WallpaperSelect = ({ value, onValueChange, title }: WallpaperSelectProps) 
 
     return (
         <>
-            <label className="pt-1.5 text-sm">{title}</label>
+            <div>
+                <label className="pt-1.5 text-sm">{title}</label>
+                <p className="text-xs text-secondary text-balance leading-normal mt-2">
+                    Cycle between wallpapers with{' '}
+                    <span className="inline-block">
+                        <KeyboardShortcut text="\" size="xs" />
+                    </span>
+                </p>
+            </div>
             <Popover
                 trigger={trigger}
                 dataScheme="secondary"
@@ -168,9 +139,9 @@ const WallpaperSelect = ({ value, onValueChange, title }: WallpaperSelectProps) 
                 open={isOpen}
                 onOpenChange={setIsOpen}
             >
-                <ScrollArea>
+                <ScrollArea className="min-h-0 !overflow-y-auto overscroll-contain max-h-[calc(var(--radix-popover-content-available-height)-0.75rem)]">
                     <div className="@container">
-                        <div className="grid md:@xl:grid-cols-2 md:@2xl:grid-cols-3 md:@xl:gap-2 p-2 min-h-[200px] h-[400px]">
+                        <div className="grid md:@xl:grid-cols-2 md:@2xl:grid-cols-3 md:@xl:gap-2 p-2">
                             {themeOptions.map((option) => {
                                 const optionThumb = isDark
                                     ? option.background?.thumb?.dark
@@ -209,10 +180,6 @@ export default function DisplayOptions() {
     const { siteSettings, updateSiteSettings } = useApp()
     const [previewScreensaver, setPreviewScreensaver] = useState(false)
 
-    const handleExperienceChange = (value: string) => {
-        updateSiteSettings({ ...siteSettings, experience: value as SiteSettings['experience'] })
-    }
-
     const handleColorModeChange = (value: string) => {
         if (typeof window !== 'undefined' && (window as any).__setPreferredTheme) {
             const newTheme = window.__setPreferredTheme(value)
@@ -222,10 +189,6 @@ export default function DisplayOptions() {
                 colorMode: value as SiteSettings['colorMode'],
             })
         }
-    }
-
-    const handleSkinChange = (value: string) => {
-        updateSiteSettings({ ...siteSettings, skinMode: value as SiteSettings['skinMode'] })
     }
 
     const handleCursorChange = (value: string) => {
@@ -242,92 +205,80 @@ export default function DisplayOptions() {
     return (
         <>
             <SEO title="Display options" description="Personalize your PostHog.com experience" />
-            <div data-scheme="secondary" className="w-full h-full bg-primary text-primary p-2">
-                <Fieldset legend="Display">
-                    <div className="bg-primary grid grid-cols-2 gap-2">
+            <div data-scheme="secondary" className="w-full h-full bg-primary text-primary p-4 border-t border-primary">
+                <div className="bg-primary grid grid-cols-2 gap-2">
+                    <ToggleGroup
+                        title="Color mode"
+                        options={colorModeOptions}
+                        onValueChange={handleColorModeChange}
+                        value={siteSettings.colorMode}
+                    />
+                </div>
+                <div className="bg-primary grid grid-cols-2 gap-2 mt-2">
+                    <ToggleGroup
+                        title="Cursor"
+                        options={cursorOptions}
+                        onValueChange={handleCursorChange}
+                        value={siteSettings.cursor}
+                    />
+                </div>
+                <div className="bg-primary grid grid-cols-2 gap-2 my-2">
+                    <WallpaperSelect
+                        title="Desktop background"
+                        onValueChange={handleWallpaperChange}
+                        value={siteSettings.wallpaper}
+                    />
+                </div>
+                <div className="bg-primary grid grid-cols-2 gap-2">
+                    <div className="flex items-center gap-1 mb-1">
+                        <span className="text-sm">Screensaver</span>
+                        <button
+                            onClick={(e) => {
+                                e.preventDefault()
+                                setPreviewScreensaver(true)
+                                setTimeout(() => setPreviewScreensaver(false), 100000) // Auto-dismiss after 100s
+                            }}
+                            className="text-sm text-primary underline font-medium"
+                        >
+                            preview
+                        </button>
+                    </div>
+                    <div>
                         <ToggleGroup
-                            title="Color mode"
-                            options={colorModeOptions}
-                            onValueChange={handleColorModeChange}
-                            value={siteSettings.colorMode}
+                            title=""
+                            options={[
+                                { label: 'Disabled', value: 'true' },
+                                { label: 'Enabled', value: 'false' },
+                            ]}
+                            onValueChange={(value) => {
+                                updateSiteSettings({ ...siteSettings, screensaverDisabled: value === 'true' })
+                            }}
+                            value={siteSettings.screensaverDisabled ? 'true' : 'false'}
                         />
                     </div>
-                    <div className="bg-primary grid grid-cols-2 gap-2">
+                </div>
+                <div className="bg-primary grid grid-cols-2 gap-2">
+                    <div className="flex items-center gap-1 mb-1">
+                        <span className="text-sm">Reduce transparency</span>
+                        <Tooltip trigger={<IconInfo className="size-4 inline-block relative -top-px" />} delay={0}>
+                            <p className="max-w-sm my-0 leading-snug">
+                                Solid, opaque backgrounds for windows and sidebars instead of blurred transparency.
+                            </p>
+                        </Tooltip>
+                    </div>
+                    <div>
                         <ToggleGroup
-                            title="Theme"
-                            options={skinOptions}
-                            onValueChange={handleSkinChange}
-                            value={siteSettings.skinMode}
+                            title=""
+                            options={[
+                                { label: 'Disabled', value: 'false' },
+                                { label: 'Enabled', value: 'true' },
+                            ]}
+                            onValueChange={(value) => {
+                                updateSiteSettings({ ...siteSettings, reduceTransparency: value === 'true' })
+                            }}
+                            value={siteSettings.reduceTransparency ? 'true' : 'false'}
                         />
                     </div>
-                    <div className="bg-primary grid grid-cols-2 gap-2 mt-2">
-                        <ToggleGroup
-                            title="Cursor"
-                            options={cursorOptions}
-                            onValueChange={handleCursorChange}
-                            value={siteSettings.cursor}
-                        />
-                    </div>
-                    <div className="bg-primary grid grid-cols-2 gap-2 my-2">
-                        <WallpaperSelect
-                            title="Desktop background"
-                            onValueChange={handleWallpaperChange}
-                            value={siteSettings.wallpaper}
-                        />
-                    </div>
-                    <div className="bg-primary grid grid-cols-2 gap-2">
-                        <div className="flex items-center gap-1 mb-1">
-                            <span className="text-sm">Screensaver</span>
-                            <button
-                                onClick={(e) => {
-                                    e.preventDefault()
-                                    setPreviewScreensaver(true)
-                                    setTimeout(() => setPreviewScreensaver(false), 100000) // Auto-dismiss after 100s
-                                }}
-                                className="text-sm text-primary underline font-medium"
-                            >
-                                preview
-                            </button>
-                        </div>
-                        <div>
-                            <ToggleGroup
-                                title=""
-                                options={[
-                                    { label: 'Disabled', value: 'true' },
-                                    { label: 'Enabled', value: 'false' },
-                                ]}
-                                onValueChange={(value) => {
-                                    updateSiteSettings({ ...siteSettings, screensaverDisabled: value === 'true' })
-                                }}
-                                value={siteSettings.screensaverDisabled ? 'true' : 'false'}
-                            />
-                        </div>
-                    </div>
-                </Fieldset>
-                <div className="hidden md:block">
-                    <Fieldset legend="Navigation">
-                        <div className="bg-primary grid grid-cols-2 gap-2">
-                            <ToggleGroup
-                                title="Experience"
-                                options={experienceOptions}
-                                onValueChange={handleExperienceChange}
-                                value={siteSettings.experience}
-                            />
-                        </div>
-                        <div className="bg-primary grid grid-cols-2 gap-2">
-                            <ToggleGroup
-                                title="Animation"
-                                options={[
-                                    { label: 'Disabled', value: 'true' },
-                                    { label: 'Enabled', value: 'false' },
-                                ]}
-                                onValueChange={(value) =>
-                                    updateSiteSettings({ ...siteSettings, performanceBoost: value === 'true' })
-                                }
-                                value={siteSettings.performanceBoost ? 'true' : 'false'}
-                            />
-                        </div>
-                    </Fieldset>
                 </div>
             </div>
             {previewScreensaver &&

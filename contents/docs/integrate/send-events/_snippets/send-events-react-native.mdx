@@ -36,7 +36,7 @@ import { NavigationContainer } from '@react-navigation/native'
 export function App() {
     return (
         <NavigationContainer>
-            <PostHogProvider apiKey="<ph_project_api_key>" autocapture>
+            <PostHogProvider apiKey="<ph_project_token>" autocapture>
                 {/* Rest of app */}
             </PostHogProvider>
         </NavigationContainer>
@@ -56,7 +56,7 @@ import { NavigationContainer } from '@react-navigation/native'
 export function App() {
     return (
         <NavigationContainer>
-            <PostHogProvider apiKey="<ph_project_api_key>" autocapture={{
+            <PostHogProvider apiKey="<ph_project_token>" autocapture={{
               captureScreens: false, // Screen events are handled differently for v7 and higher
               captureTouches: true,
             }}>
@@ -85,7 +85,7 @@ First, simplify the wrapping of your screens with a shared PostHogProvider:
 import PostHog, { PostHogProvider } from 'posthog-react-native'
 import { Navigation } from 'react-native-navigation';
 
-export const posthog = new PostHog('<ph_project_api_key>');
+export const posthog = new PostHog('<ph_project_token>');
 
 export const SharedPostHogProvider = (props: any) => {
   return (

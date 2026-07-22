@@ -1,64 +1,133 @@
 import { useEffect, useState } from 'react'
 
-export const getStatusColor = (status?: string) => {
-    switch (status?.toLowerCase()) {
-        case 'none':
+// Status types from incident.io
+type IncidentIoImpact = 'partial_outage' | 'degraded_performance' | 'full_outage'
+
+interface IncidentIoAffectedComponent {
+    id: string
+    name: string
+    group_name?: string
+    current_status: string
+}
+
+interface IncidentIoIncident {
+    id: string
+    name: string
+    status: string
+    url: string
+    last_update_at: string
+    last_update_message: string
+    current_worst_impact: IncidentIoImpact
+    affected_components: IncidentIoAffectedComponent[]
+}
+
+interface IncidentIoMaintenance {
+    id: string
+    name: string
+    status: string
+    last_update_at: string
+    last_update_message: string
+    url: string
+    affected_components: IncidentIoAffectedComponent[]
+    started_at?: string
+    scheduled_end_at?: string
+    starts_at?: string
+    ends_at?: string
+}
+
+interface IncidentIoSummary {
+    page_title: string
+    page_url: string
+    ongoing_incidents: IncidentIoIncident[]
+    in_progress_maintenances: IncidentIoMaintenance[]
+    scheduled_maintenances: IncidentIoMaintenance[]
+}
+
+export type NormalizedStatus = 'operational' | 'degradedPerformance' | 'partialOutage' | 'majorOutage' | 'unknown'
+
+export const getStatusColor = (status?: NormalizedStatus | string): string => {
+    switch (status) {
+        case 'operational':
             return 'text-green'
-        case 'minor':
+        case 'degradedPerformance':
             return 'text-yellow'
-        case 'major':
-            return 'text-red'
-        case 'critical':
+        case 'partialOutage':
+            return 'text-yellow'
+        case 'majorOutage':
             return 'text-red'
         default:
             return 'text-gray'
     }
 }
 
-export const getStatusDescription = (status?: string) => {
-    switch (status?.toLowerCase()) {
-        case 'none':
+export const getStatusDescription = (status?: NormalizedStatus | string): string => {
+    switch (status) {
+        case 'operational':
             return 'All systems operational'
-        case 'minor':
-            return 'Minor issues'
-        case 'major':
-            return 'Major issues'
-        case 'critical':
-            return 'Critical issues'
+        case 'degradedPerformance':
+            return 'Degraded performance'
+        case 'partialOutage':
+            return 'Partial outage'
+        case 'majorOutage':
+            return 'Major outage'
         default:
             return 'Unknown'
     }
 }
 
-export const useAppStatus = () => {
-    const [appStatus, setAppStatus] = useState<string>()
+function getWorstStatus(summary: IncidentIoSummary): NormalizedStatus {
+    const hasOngoingIncidents = summary.ongoing_incidents.length > 0
+    const hasInProgressMaintenance = summary.in_progress_maintenances.length > 0
+
+    if (!hasOngoingIncidents && !hasInProgressMaintenance) {
+        return 'operational'
+    }
+
+    // Check for worst impact across ongoing incidents
+    for (const incident of summary.ongoing_incidents) {
+        if (incident.current_worst_impact === 'full_outage') {
+            return 'majorOutage'
+        }
+    }
+
+    for (const incident of summary.ongoing_incidents) {
+        if (incident.current_worst_impact === 'partial_outage') {
+            return 'partialOutage'
+        }
+    }
+
+    for (const incident of summary.ongoing_incidents) {
+        if (incident.current_worst_impact === 'degraded_performance') {
+            return 'degradedPerformance'
+        }
+    }
+
+    // If only maintenance is in progress, show as degraded
+    if (hasInProgressMaintenance) {
+        return 'degradedPerformance'
+    }
+
+    return 'operational'
+}
+
+export const useAppStatus = (): { status: NormalizedStatus | undefined; loading: boolean } => {
+    const [status, setStatus] = useState<NormalizedStatus>()
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        const appStatus = async () =>
-            fetch('https://status.posthog.com/api/v2/status.json')
-                .then((res) => res.json())
-                .then((data) => data?.status?.indicator)
-        const appIncidents = async () =>
-            fetch('https://status.posthog.com/api/v2/incidents/unresolved.json')
-                .then((res) => res.json())
-                .then((data) => data?.incidents)
-        const getAppStatus = async () => {
+        const fetchStatus = async () => {
             try {
-                const incidents = await appIncidents()
-                if (incidents?.length > 0) {
-                    const major = incidents.some((incident) => incident?.impact === 'major')
-                    const critical = incidents.some((incident) => incident?.impact === 'critical')
-                    return setAppStatus(critical ? 'critical' : major ? 'major' : 'minor')
-                }
-                const status = await appStatus()
-                return setAppStatus(status)
+                const response = await fetch('https://www.posthogstatus.com/api/v1/summary')
+                const data: IncidentIoSummary = await response.json()
+                setStatus(getWorstStatus(data))
             } catch (error) {
-                setAppStatus('unknown')
+                setStatus('unknown')
+            } finally {
+                setLoading(false)
             }
         }
-        getAppStatus().then(() => setLoading(false))
+        fetchStatus()
     }, [])
 
-    return { status: appStatus, loading }
+    return { status, loading }
 }

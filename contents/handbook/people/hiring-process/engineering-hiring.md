@@ -34,7 +34,7 @@ The culture screen is handled by the Talent team. Normally this is a 20-30 min c
 
 #### Technical screen
 
-The [technical interview](/handbook/people/hiring-process#2-technical-interview-with-the-hiring-manager) is an hour-long technical interview with one of our engineers. This might be architecture design or diving more into past technical experiences in more of a workshop style. No whiteboarding or brain teasers. 
+The [technical interview](/handbook/people/hiring-process#2-technical-interview-with-the-hiring-manager) is an hour-long technical interview with one of our engineers. This might be architecture design or diving more into past technical experiences in more of a workshop style. No whiteboarding or brain teasers. We share our [guide to preparing for the technical screen](/handbook/people/hiring-process/engineering-tech-screen) with candidates so they know what mindset to bring.
 
 Sometimes when you get part of the way into a technical interview it becomes clear that the person is not a fit. Because rejecting candidates needs to be done in a specific way, please continue the interview as usual and do not reject on the call. It's okay to end the interview a bit early - interviews often don't take the entire time, and it's okay to give this caveat ahead of every technical interview.
 
@@ -48,7 +48,7 @@ One of our co-founders or execs – [Tim](/tim) or [James](/james), depending on
 
 #### Engineering SuperDay
 
-The final stage of our interview process is the PostHog [SuperDay](/handbook/people/hiring-process#posthog-superday). This is a paid full day of work, which we can flexibly arrange around the candidate's schedule. 
+The final stage of our interview process is the PostHog [SuperDay](/handbook/people/hiring-process#posthog-superday). This is a paid full day of work, which we can flexibly arrange around the candidate's schedule. We share our [guide to preparing for the engineering SuperDay](/handbook/people/hiring-process/engineering-superday) with candidates so they know what to expect.
 
 For full-stack roles, the task involves building a small web service (both backend and frontend) over a full day. The task is designed to be _too much_ work for one person to complete in a day, in order to get a sense of their ability to prioritize (and ship!). 
 

@@ -1,8 +1,0 @@
-Update [posthog-python](/docs/integrate/server/python) to version 1.4.3 or above to make use of the new functionality.
-
-To check a flag that's matching by companies, specify groups in relevant call:
-
-```python
-if posthog.feature_enabled("new-groups-feature", "user_distinct_id", groups={"company": "id:5"}):
-    # do something
-```
