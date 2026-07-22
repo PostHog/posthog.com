@@ -65,9 +65,6 @@ export default function WizardFrameworksTeaser({ className }: { className?: stri
                                         <span className="w-6 h-6 shrink-0 rounded bg-accent" aria-hidden />
                                     )}
                                     <span className="flex-1 text-left text-sm leading-tight">{row.label}</span>
-                                    {row.badge ? (
-                                        <span className="text-[10px] uppercase text-muted shrink-0">{row.badge}</span>
-                                    ) : null}
                                 </Link>
                             ))}
                         </div>

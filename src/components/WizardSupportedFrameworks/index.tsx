@@ -16,7 +16,6 @@ export default function WizardSupportedFrameworks({ className }: WizardSupported
                 label: row.label,
                 url: row.url,
                 image: row.image,
-                badge: row.badge,
             })),
         []
     )

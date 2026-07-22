@@ -20,8 +20,6 @@ export type InstallItem = {
     wizardLabel?: string
     /** `getLogo` key when it differs from librarySlug-based resolution */
     wizardLogoKey?: string
-    /** Wizard lists the stack but install is not available yet */
-    status?: 'wip'
     /** Full URL when not `/docs/libraries/{librarySlug}` */
     wizardDocsUrl?: string
 }
@@ -136,9 +134,6 @@ export const TAXONOMY: InstallCategory[] = [
                 slug: 'flutter',
                 name: 'Flutter',
                 librarySlug: 'flutter',
-                wizard: true,
-                wizardOrder: 21,
-                status: 'wip',
             },
             {
                 slug: 'kmp',
@@ -171,39 +166,11 @@ export const TAXONOMY: InstallCategory[] = [
                 wizard: true,
                 wizardOrder: 13,
             },
-            {
-                slug: 'elixir',
-                name: 'Elixir',
-                librarySlug: 'elixir',
-                wizard: true,
-                wizardOrder: 20,
-                status: 'wip',
-            },
-            {
-                slug: 'go',
-                name: 'Go',
-                librarySlug: 'go',
-                wizard: true,
-                wizardOrder: 22,
-                status: 'wip',
-            },
-            {
-                slug: 'java',
-                name: 'Java',
-                librarySlug: 'java',
-                wizard: true,
-                wizardOrder: 23,
-                status: 'wip',
-            },
+            { slug: 'elixir', name: 'Elixir', librarySlug: 'elixir' },
+            { slug: 'go', name: 'Go', librarySlug: 'go' },
+            { slug: 'java', name: 'Java', librarySlug: 'java' },
             { slug: 'php', name: 'PHP', librarySlug: 'php' },
-            {
-                slug: 'rust',
-                name: 'Rust',
-                librarySlug: 'rust',
-                wizard: true,
-                wizardOrder: 24,
-                status: 'wip',
-            },
+            { slug: 'rust', name: 'Rust', librarySlug: 'rust' },
         ],
     },
     {
@@ -305,7 +272,6 @@ export type WizardFrameworkRow = {
     label: string
     url: string
     image?: string
-    badge?: string
     external: boolean
 }
 
@@ -329,7 +295,6 @@ export function getWizardFrameworkRows(): WizardFrameworkRow[] {
             label: item.wizardLabel ?? item.name,
             url,
             image: getLogo(logoKey),
-            badge: item.status === 'wip' ? 'Coming soon' : undefined,
             external: url.startsWith('http'),
         }
     })
