@@ -89,7 +89,7 @@ Our long-running agents will likely have global skills and context specific to y
 
 This is the common thread connecting all this work. The PostHog of the future isn't read-only analytics. We want to solve the low-level tasks in building software, the less creative but important work, so you can spend more time on high impact work.
 
-We want [PostHog to code in response to problems we find](/code), taking users straight to the solution, and to handle support tickets given we already have all the context of what went wrong, and lots more! Watch out for an announcement about this soon.
+We want [PostHog to code in response to problems we find](/desktop), taking users straight to the solution, and to handle support tickets given we already have all the context of what went wrong, and lots more! Watch out for an announcement about this soon.
 
 These are big bets and our UX will be in flux as a result for a while. I'm sorry if the changes here are aggravating, but your feedback, the data, and our subjective experience suggest a little short-term pain will be worth it.
 

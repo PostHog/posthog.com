@@ -39,6 +39,7 @@ List of ingestion warnings:
 - [Replay event timestamp was too far in the future](#replay-event-timestamp-was-too-far-in-the-future)
 - [$set or $set_once is ignored on exception events and should not be sent](#set-or-set_once-is-ignored-on-exception-events-and-should-not-be-sent)
 - [Invalid heatmap data](#invalid-heatmap-data)
+- [Discarded $groupidentify event with invalid $group_set](#discarded-groupidentify-event-with-invalid-group_set)
 
 ## Refused to merge with an illegal distinct ID
 
@@ -95,6 +96,25 @@ The `$set` or `$set_once` properties are ignored on exception events and should 
 PostHog couldn't process the `$heatmap_data` attached to an event, so no [heatmap](/docs/toolbar/heatmaps) data was extracted from it. The event itself is still ingested as normal.
 
 This indicates the `$heatmap_data` property was malformed, which is usually a sign of an instrumentation bug. If you're capturing heatmap data with [posthog-js](/docs/libraries/js), make sure you're on a recent version of the SDK and aren't manually constructing or modifying `$heatmap_data` yourself.
+
+## Discarded $groupidentify event with invalid $group_set
+
+PostHog discards `$groupidentify` events when the `$group_set` property is not a valid JSON object. The `$group_set` property must be a plain object containing the group properties you want to set — strings, numbers, booleans, and arrays are rejected.
+
+To fix this, ensure `$group_set` is always a plain object when calling `posthog.group()` or sending `$groupidentify` events:
+
+```js
+// ✅ Correct - $group_set is a plain object
+posthog.group("company", "company_id_in_your_db", {
+  name: "PostHog",
+  industry: "Technology",
+});
+
+// ❌ Wrong - passing a string instead of a properties object
+posthog.group("company", "company_id_in_your_db", "PostHog");
+```
+
+`null` or `undefined` values for `$group_set` are accepted and upsert the group with empty properties.
 
 ## Query warnings via MCP
 

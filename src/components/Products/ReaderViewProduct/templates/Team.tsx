@@ -26,7 +26,7 @@ interface ProfileNode {
     biography?: string
     pineappleOnPizza?: boolean | null
     startDate?: string | null
-    avatar?: { url?: string; formats?: { thumbnail?: { url?: string } } }
+    avatar?: { url?: string }
     teams?: {
         data?: Array<{
             id?: string | number
@@ -134,11 +134,6 @@ const Team = ({ id, productData }: SectionComponentProps) => {
                     startDate
                     avatar {
                         url
-                        formats {
-                            thumbnail {
-                                url
-                            }
-                        }
                     }
                     teams {
                         data {
@@ -221,7 +216,7 @@ const Team = ({ id, productData }: SectionComponentProps) => {
                         <li key={profile.id} className="m-0">
                             <TeamMember
                                 avatar={{
-                                    url: profile.avatar?.formats?.thumbnail?.url || profile.avatar?.url,
+                                    url: profile.avatar?.url,
                                 }}
                                 firstName={profile.firstName}
                                 lastName={profile.lastName}
