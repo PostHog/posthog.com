@@ -95,40 +95,61 @@ interface SqueakTeamNode {
     profiles?: { data?: SqueakProfileNode[] }
 }
 
-const NewChip = (): JSX.Element => (
-    <span className="shrink-0 rounded-full border border-primary bg-accent px-2 py-0.5 text-xs font-semibold text-red dark:text-yellow">
-        New
-    </span>
+type ChipSize = 'sm' | 'md'
+
+const CHIP_SIZE_CLASSES: Record<ChipSize, string> = {
+    sm: 'inline-flex shrink-0 items-center gap-0.5 rounded-full border px-2 py-0.5 text-xs font-semibold leading-none',
+    md: 'inline-flex h-7 shrink-0 items-center gap-1 rounded-full border px-2.5 text-xs font-semibold leading-none',
+}
+
+const CHIP_ICON_SIZE: Record<ChipSize, string> = {
+    sm: 'size-3',
+    md: 'size-5',
+}
+
+const STAGE_CHIP_ICONS: Record<BoardStage, (iconClassName: string) => React.ReactNode> = {
+    beta: (iconClassName) => <IconRocket className={iconClassName} />,
+    alpha: (iconClassName) => <IconFlask className={iconClassName} />,
+    concept: (iconClassName) => <IconLightBulb className={iconClassName} />,
+}
+
+const NewChip = ({ size = 'sm' }: { size?: ChipSize }): JSX.Element => (
+    <span className={`${CHIP_SIZE_CLASSES[size]} border-primary bg-accent text-red dark:text-yellow`}>New</span>
 )
 
-const PopularChip = (): JSX.Element => (
-    <span className="inline-flex shrink-0 items-center gap-0.5 rounded-full border border-primary bg-accent px-2 py-0.5 text-xs font-semibold text-red dark:text-yellow">
-        <IconTrending className="size-3" />
+const PopularChip = ({ size = 'sm' }: { size?: ChipSize }): JSX.Element => (
+    <span className={`${CHIP_SIZE_CLASSES[size]} border-primary bg-accent text-red dark:text-yellow`}>
+        <IconTrending className={CHIP_ICON_SIZE[size]} />
         Popular
     </span>
 )
 
-const FeatureBadges = ({ isNew, isPopular }: { isNew: boolean; isPopular: boolean }): JSX.Element | null => {
+const FeatureBadges = ({
+    isNew,
+    isPopular,
+    size = 'sm',
+}: {
+    isNew: boolean
+    isPopular: boolean
+    size?: ChipSize
+}): JSX.Element | null => {
     if (!isNew && !isPopular) {
         return null
     }
 
     return (
         <span className="flex flex-wrap items-center gap-1">
-            {isNew && <NewChip />}
-            {isPopular && <PopularChip />}
+            {isNew && <NewChip size={size} />}
+            {isPopular && <PopularChip size={size} />}
         </span>
     )
 }
 
 const StageChip = ({ stage }: { stage: BoardStage }): JSX.Element => {
-    const definition = STAGES.find((item) => item.stage === stage)
     const styles = ROADMAP_STAGE_STYLES[stage]
     return (
-        <span
-            className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-xs font-semibold capitalize ${styles.border} ${styles.surface} ${styles.text}`}
-        >
-            {definition?.icon}
+        <span className={`${CHIP_SIZE_CLASSES.md} capitalize ${styles.border} ${styles.surface} ${styles.text}`}>
+            {STAGE_CHIP_ICONS[stage](CHIP_ICON_SIZE.md)}
             {stage}
         </span>
     )
@@ -568,7 +589,7 @@ const FeaturePanel = ({
         <header className="shrink-0 border-b border-primary px-4 py-4 pr-14">
             <div className="mb-2 flex flex-wrap items-center gap-2">
                 <StageChip stage={feature.stage as BoardStage} />
-                <FeatureBadges isNew={isNew} isPopular={isPopular} />
+                <FeatureBadges isNew={isNew} isPopular={isPopular} size="md" />
             </div>
             <h2 className="m-0 text-2xl leading-tight">{feature.name}</h2>
             <div className="mt-3">
