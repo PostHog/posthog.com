@@ -1,7 +1,9 @@
 ## My feature flag called events don't show my variant names
 
-`Feature Flag Called` events showing `None`, `(empty string)`, or `false` instead of your variant names has two potential causes:
+`Feature Flag Called` events showing `None`, `(empty string)`, or `false` instead of your variant names has three potential causes:
 
-1. Your feature flag did not match any of the rollout conditions. If this is the case, the `Feature Flag Response` property will be `false`.
+1. **The flag matched no release conditions (value: `false`).** Your feature flag did not match any of the rollout conditions, and all release conditions were evaluatable. The SDK can conclusively determine the flag is off, so the `Feature Flag Response` property will be `false`.
 
-2. The feature flag is disabled or failed to load. The variant names will show as `None` or `(empty string)` if this is the case. This can happen due to a network error, adblocking, or something unexpected. `(empty string)` also appears when some of the events for an experiment lack feature flag information.
+2. **The flag is disabled or failed to load (value: `None` or `(empty string)`).** The variant names will show as `None` or `(empty string)` if this is the case. This can happen due to a network error, adblocking, or something unexpected. `(empty string)` also appears when some of the events for an experiment lack feature flag information.
+
+3. **The flag wasn't fully evaluatable locally (value: `None`).** When using [local evaluation](/docs/feature-flags/local-evaluation), if any of the flag's release conditions depend on data that isn't available locally (such as person properties that haven't been provided to the SDK), the SDK cannot conclusively determine whether the flag should be on or off. In this case, the flag is omitted from the event entirely and appears as `None`. This is different from case 1: a `false` value means the SDK had enough information to determine the flag didn't match, while `None` means the SDK didn't have enough information to make a determination at all. For example, if you remove a release condition that used a non-locally-available property, the flag may change from `None` to `false` because the remaining conditions are now all locally evaluatable.

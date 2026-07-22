@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Tabs } from 'radix-ui'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { useLocation } from '@reach/router'
+import { useWindow } from '../../context/Window'
 
 interface TabItem {
     value: string
@@ -67,6 +68,7 @@ export default function OSTabs({
         orientation === 'horizontal' ? (initialOrderedTabs?.length > 0 ? initialOrderedTabs : [tabs]) : [tabs]
     )
     const ref = useRef<HTMLDivElement>(null)
+    const { animating } = useWindow()
 
     const calculateTabRows = useCallback(
         (activeTabValue?: string) => {
@@ -143,17 +145,14 @@ export default function OSTabs({
     )
 
     useEffect(() => {
-        // Only run tab row calculation for horizontal orientation (when tabs might wrap)
-        if (orientation === 'vertical' || !ref.current) return
+        if (orientation === 'vertical' || !ref.current || animating) return
 
-        setTimeout(() => {
-            calculateTabRows()
-        }, 300)
+        calculateTabRows()
 
         const resizeObserver = new ResizeObserver(() => calculateTabRows())
         resizeObserver.observe(ref.current)
         return () => resizeObserver.disconnect()
-    }, [calculateTabRows, orientation])
+    }, [calculateTabRows, orientation, animating])
 
     const TabContentContainer = useMemo(() => (scrollable ? ScrollArea : 'div'), [scrollable])
 
@@ -194,8 +193,9 @@ export default function OSTabs({
                 }}
                 defaultValue={defaultValue || tabs[0]?.value}
                 value={value || controlledValue}
-                className={`relative flex ${orientation === 'horizontal' ? 'flex-col' : 'flex-row'} ${padding ? 'pt-1  px-2 pb-2' : ''
-                    } min-h-0 bg-primary ${className}`}
+                className={`relative flex ${orientation === 'horizontal' ? 'flex-col' : 'flex-row'} ${
+                    padding ? 'pt-1  px-2 pb-2' : ''
+                } min-h-0 bg-primary ${className}`}
             >
                 <div className={tabContainerClassName}>
                     <Tabs.List
@@ -204,10 +204,11 @@ export default function OSTabs({
                         {orderedTabs.map((row, rowIndex) => (
                             <div
                                 key={rowIndex}
-                                className={`flex ${orientation === 'horizontal'
-                                    ? `items-center${!centerTabs ? ' ml-4' : ''}`
-                                    : 'flex-col gap-px h-full'
-                                    } ${centerTabs ? 'justify-center ml-0' : ''}`}
+                                className={`flex ${
+                                    orientation === 'horizontal'
+                                        ? `items-center${!centerTabs ? ' ml-4' : ''}`
+                                        : 'flex-col gap-px h-full'
+                                } ${centerTabs ? 'justify-center ml-0' : ''}`}
                             >
                                 {row.map((tab) => (
                                     <Tabs.Trigger
@@ -227,8 +228,9 @@ export default function OSTabs({
                 {tabs.map((tab) => (
                     <Tabs.Content data-scheme="primary" key={tab.value} value={tab.value} className="flex-1 h-full">
                         <TabContentContainer
-                            className={`@container bg-primary h-full min-h-0 ${border ? 'border border-primary rounded-md' : ''
-                                }`}
+                            className={`@container bg-primary h-full min-h-0 ${
+                                border ? 'border border-primary rounded-md' : ''
+                            }`}
                             viewportClasses={scrollAreaClasses}
                         >
                             <div

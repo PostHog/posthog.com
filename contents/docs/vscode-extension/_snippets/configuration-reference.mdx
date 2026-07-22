@@ -1,0 +1,13 @@
+## Configuration reference
+
+| Setting | Description | Default |
+|---|---|---|
+| `posthog.additionalClientNames` | Additional variable names the extension should recognize as instances of PostHog clients (e.g., `["analytics", "ph"]`) | `[]` |
+| `posthog.additionalFlagFunctions` | Additional bare function names that accept a flag key as the first argument (e.g., `["useMyFlag"]`) | `[]` |
+| `posthog.detectNestedClients` | Detect PostHog clients accessed via nested member expressions like `window.posthog?.capture()` | `true` |
+| `posthog.showInlineDecorations` | Show inline annotations (sparklines, flag status) in the editor | `true` |
+| `posthog.inlineHintsMode` | When to show inline hints: `always` or `currentLine` | `always` |
+| `posthog.staleFlagAgeDays` | Minimum number of days before a fully rolled out flag is considered stale | `30` |
+| `posthog.staleFlagExcludePatterns` | Glob patterns for files and directories to exclude from stale flag scanning | `[]` |
+| `posthog.useWorkspaceConfig` | Load configuration from a `.posthog.json` file in the workspace root | `true` |
+| `posthog.multiProjectNotifications` | Show notifications when switching between projects in a multi-project workspace | `true` |

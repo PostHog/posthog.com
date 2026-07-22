@@ -77,3 +77,11 @@ When creating a new slide, look for (or ask the prompter) for an existing templa
 **Important:** All slide templates use the `@2xl` container query breakpoint to toggle between portrait-oriented mobile-formatted slides and landscape-oriented desktop-formatted slides. Follow existing patterns, including layout and font size to ensure compatibility and consistency.
 
 Slide templates are intended to be kept DRY, with content being sourced from relevant [JSON](src/hooks/useProduct.ts) [files](src/hooks/useProducts.tsx).
+
+## Product reader view carousels
+
+**Product reader pages** (`/session-replay`, etc.) use a carousel system built on `CarouselSlide`. These are the "How do I use it?" (Applications) and "Top features" (TopFeatures) sections.
+
+Slide arrays live in the **page file** (e.g. `src/pages/session-replay/index.tsx`), not in the productData hook. Each slide is a `CarouselSlide` config object passed via `props: { slides }` on the menu item.
+
+**Full documentation:** [`src/components/Products/ReaderViewProduct/CarouselSlide.README.md`](src/components/Products/ReaderViewProduct/CarouselSlide.README.md) — covers layouts (`stack` / `float`), all `ImageConfig` fields, responsive images (`srcMobile` + `srcMobileBreakpoint`), frame control (`frameless` + `framePadding`), and common recipes. Read this before authoring or editing slides.

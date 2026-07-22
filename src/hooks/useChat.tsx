@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react'
+import { navigate } from 'gatsby'
 import useInkeepSettings, { defaultQuickQuestions } from './useInkeepSettings'
-import Chat from 'components/Chat'
+import { ChatFrame } from 'components/Chat'
 import { useApp } from '../context/App'
-import { useWindow } from '../context/Window'
 
 interface ChatContextType {
     hasUnread: boolean
@@ -40,8 +40,6 @@ export function ChatProvider({
     initialQuestion?: string
     codeSnippet?: { code: string; language: string; sourceUrl: string }
 }): JSX.Element {
-    const { windows, setWindowTitle } = useApp()
-    const { appWindow } = useWindow()
     const { baseSettings, aiChatSettings, setBaseSettings, setAiChatSettings } = useInkeepSettings()
     const [hasUnread, setHasUnread] = useState(false)
     const [loading, setLoading] = useState(true)
@@ -88,6 +86,30 @@ export function ChatProvider({
                     setHasFirstResponse(true)
                 }
             }
+            if (event?.eventName === 'assistant_answer_displayed') {
+                const shadowRoot = document.querySelector('#embedded-chat-target>div')?.shadowRoot
+                if (shadowRoot) {
+                    const links = Array.from(shadowRoot.querySelectorAll('a'))
+                    for (const link of links) {
+                        link.addEventListener('click', (e: Event) => {
+                            e.preventDefault()
+                            e.stopPropagation()
+                            const href = link.getAttribute('href')
+                            if (!href) return
+                            try {
+                                const url = new URL(href, window.location.origin)
+                                if (url.origin === 'https://posthog.com' || href.startsWith('/')) {
+                                    navigate(url.pathname, { state: { newWindow: true } })
+                                } else {
+                                    window.open(href, '_blank', 'noopener,noreferrer')
+                                }
+                            } catch {
+                                window.open(href, '_blank', 'noopener,noreferrer')
+                            }
+                        })
+                    }
+                }
+            }
             logConversation(event)
         },
         [hasFirstResponse]
@@ -128,8 +150,16 @@ export function ChatProvider({
                 if (chatBubbleActions) {
                     const el = document.createElement('p')
                     el.classList.add('community-suggestion')
-                    el.innerHTML = `<strong style="display: block; font-size: .933rem;">Not the answer you were looking for?</strong> Try <a target="_blank" style="text-decoration: underline;" href="/questions"><strong>posting a community question</strong></a> and humans may respond!`
+                    el.innerHTML = `<strong style="display: block; font-size: .933rem;">Not the answer you were looking for?</strong> Try <a id="inkeep-community-question-link" target="_blank" style="text-decoration: underline;" href="/questions"><strong>posting a community question</strong></a> and humans may respond!`
                     chatBubbleActions.insertAdjacentElement('afterend', el)
+                    const communityQuestionLink = shadowRoot.querySelector('#inkeep-community-question-link')
+                    if (communityQuestionLink) {
+                        communityQuestionLink.addEventListener('click', (e: Event) => {
+                            e.preventDefault()
+                            e.stopPropagation()
+                            navigate('/questions', { state: { newWindow: true } })
+                        })
+                    }
                 }
             }
         }
@@ -175,13 +205,6 @@ export function ChatProvider({
         }
     }, [initialContext])
 
-    useEffect(() => {
-        const chatWindows = windows.filter((w) => w.key?.startsWith('ask-max'))
-        if (appWindow && chatWindows.length > 0) {
-            setWindowTitle(appWindow, `Chat ${chatWindows.length}`)
-        }
-    }, [])
-
     return (
         <ChatContext.Provider
             value={{
@@ -203,8 +226,32 @@ export function ChatProvider({
                 codeSnippet,
             }}
         >
-            <Chat />
+            <ChatFrame />
         </ChatContext.Provider>
+    )
+}
+
+// Global chat overlay. Rendered once (in the desktop wrapper) and toggled via the
+// app-level `chatOpen` flag instead of being managed as a draggable window. A fresh
+// set of `chatParams` remounts the provider (keyed by chat id / path) so switching
+// conversations reinitializes the embedded chat.
+export function ChatOverlay(): JSX.Element | null {
+    const { chatOpen, chatParams } = useApp()
+
+    if (!chatOpen || !chatParams) {
+        return null
+    }
+
+    return (
+        <ChatProvider
+            key={chatParams.chatId || chatParams.path}
+            context={chatParams.context}
+            quickQuestions={chatParams.quickQuestions}
+            chatId={chatParams.chatId}
+            date={chatParams.date}
+            initialQuestion={chatParams.initialQuestion}
+            codeSnippet={chatParams.codeSnippet}
+        />
     )
 }
 

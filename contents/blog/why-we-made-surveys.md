@@ -37,14 +37,14 @@ Surveys aren’t [our defining feature](/handbook/company/values#we-havent-built
 
 ## What's new in PostHog surveys?
 
-Since we shipped the [initial beta in June](/changelog/2023#surveys-beta-released) with open text surveys, we've added:
+Since we shipped the [initial beta in June](/changelog?id=1945) with open text surveys, we've added:
 
-- **[July 25:](/changelog/2023#emoji-and-number-surveys-types-released)** Emoji and number rating survey types
-- **[August 8:](/changelog/2023#multiple-choice-surveys-released)** Multiple choice surveys
-- **[August 18:](/changelog/2023#wait-periods-now-available-for-surveys)** Wait periods and thank you messages
-- **[September 14:](/changelog/2023#automatic-nps-scoring-added-to-surveys)** Automatic NPS calculation
-- **[October 10:](/changelog/2023#surveys-get-a-makeover)** Redesign and multiple step surveys
-- **[October 19:](/changelog/2023#survey-templates-added)** Survey templates for NPS, CSAT, CES and more
+- **[July 25:](/changelog?id=1932)** Emoji and number rating survey types
+- **[August 8:](/changelog?id=1952)** Multiple choice surveys
+- **[August 18:](/changelog?id=1902)** Wait periods and thank you messages
+- **[September 14:](/changelog?id=1954)** Automatic NPS calculation
+- **[October 10:](/changelog?id=1947)** Redesign and multiple step surveys
+- **[October 19:](/changelog?id=1947)** Survey templates for NPS, CSAT, CES and more
 
 These features make surveys perfect for the most common use-cases, including NPS surveys, customer satisfaction surveys, and [product-market fit surveys](/blog/measure-product-market-fit). 
 

@@ -23,7 +23,7 @@ export const fullstory = {
             features: {
                 actions: true,
                 advertising_analytics: false,
-                ai_analysis: false,
+                ai_analysis: true,
                 autocapture: true,
                 cohorts: true,
                 conversion_funnels: true,
@@ -33,12 +33,12 @@ export const fullstory = {
                 predictive_insights: false,
                 real_time_view: false,
                 toolbar: false,
-                user_profiles: false,
+                user_profiles: true,
                 insights: {
                     available: true,
                     features: {
                         formula_mode: false,
-                        ready_made_insight_types: false,
+                        ready_made_insight_types: true,
                         sampling: false,
                         sql_editor: false,
                     },
@@ -89,9 +89,10 @@ export const fullstory = {
             available: true,
             beta: false,
             pricing: {
-                free_tier: false,
+                free_tier: true, // https://www.fullstory.com/FullstoryFree
             },
             features: {
+                ai_summaries: 'Add-on',
                 canvas_recording: true,
                 chat_with_recordings: false,
                 // https://help.fullstory.com/hc/en-us/articles/360020623854-Is-it-possible-to-rate-limit-or-sample-with-Fullstory
@@ -103,19 +104,19 @@ export const fullstory = {
                 export_to_video: false,
                 filter_by_user_or_event: true,
                 identity_detection: true,
-                iframe_recording: false,
+                iframe_recording: true,
                 minimum_duration: false,
                 movement_maps: true,
                 notes_on_replays: true,
-                playlists: false,
+                playlists: true,
                 privacy_masking: true,
                 retention_policy: '12 months',
                 screenshot_mode: false,
-                search_by_network: false,
+                search_by_network: true,
                 share_replays: true,
-                single_page_app: false,
+                single_page_app: true,
                 target_by_feature_flag: false,
-                target_by_sample: false,
+                target_by_sample: true,
                 target_by_url: true,
                 wireframe_mode: false,
             },
@@ -142,21 +143,15 @@ export const fullstory = {
                     rage_taps: true,
                 },
             },
-            // https://www.fullstory.com/plans/
-            ai: {
-                features: {
-                    ai_summaries: 'Add-on',
-                },
-            },
         },
         feature_flags: {
             available: false,
         },
         surveys: {
-            available: false,
+            available: true,
             platforms: {
                 features: {
-                    web: false,
+                    web: true,
                     mobile: false,
                 },
             },
@@ -171,16 +166,33 @@ export const fullstory = {
                     custom_targeting: false,
                 },
             },
+            implementation: {
+                features: {
+                    multivariate_testing: false,
+                },
+            },
+            supported_tests: {
+                features: {
+                    multi_armed_bandit: false,
+                },
+            },
         },
         error_tracking: {
             available: false,
             features: {
                 issue_management: false,
                 performance_monitoring: false,
+                stack_tracing: true, // https://help.fullstory.com/hc/en-us/articles/360020828533-How-do-I-use-the-Fullstory-Console
             },
         },
         dashboards: {
             available: true,
+        },
+        logs: {
+            available: false,
+        },
+        workflows: {
+            available: false,
         },
     },
     platform: {
@@ -188,9 +200,10 @@ export const fullstory = {
             open_source: false,
             reverse_proxy: true,
             self_host: false,
+            eu_hosting: true,
         },
         pricing: {
-            free_tier: false,
+            free_tier: true,
             self_serve: false,
             transparent_pricing: false,
             usage_based_pricing: true,
@@ -198,7 +211,7 @@ export const fullstory = {
         // https://help.fullstory.com/hc/en-us/sections/360003790653-Supported-Integrations
         // https://directory.fullstory.com/integrations
         integrations: {
-            azure_blob: false,
+            azure_blob: true,
             bigquery: true,
             community_integrations: false,
             customer_io: false,
@@ -210,14 +223,14 @@ export const fullstory = {
             imports: false,
             intercom: true,
             microsoft_teams: true,
-            redshift: false,
+            redshift: true,
             rudderstack: true,
-            s3: false,
+            s3: true,
             salesforce: true,
             segment: true,
             slack: true,
             snowflake: true,
-            sentry: false,
+            sentry: true,
             stripe: false,
             zapier: true,
             zendesk: true,
@@ -231,6 +244,7 @@ export const fullstory = {
             cms: '',
             notebooks: false,
             project_management_tools: '',
+            ai_assistant: true,
         },
         security: {
             cookieless_tracking: false,

@@ -1,0 +1,136 @@
+{
+    "version": 1,
+    "meta": {
+        "canvas": {
+            "width": 480,
+            "height": 760
+        },
+        "fps": 30,
+        "fit": "reflow",
+        "theme": "auto",
+        "skin": {
+            "id": "slack",
+            "options": {
+                "channel": "#inbox"
+            }
+        },
+        "composer": "always",
+        "seed": 42,
+        "background": "transparent",
+        "assets": "url"
+    },
+    "participants": [
+        {
+            "id": "posthog",
+            "name": "PostHog",
+            "kind": "app",
+            "avatar": "https://res.cloudinary.com/dmukukwp6/image/upload/avatar_posthog_f85279a2ad.png"
+        }
+    ],
+    "timeline": [
+        {
+            "type": "message",
+            "from": "posthog",
+            "instant": true,
+            "content": [
+                {
+                    "type": "header",
+                    "text": "perf(inbox): Fix 26s admin inbox load from unbounded contact scan"
+                },
+                {
+                    "type": "context",
+                    "elements": [
+                        {
+                            "type": "text",
+                            "text": "🟠 *P2* · Session replay · rvenvy/rvenvy-ai"
+                        }
+                    ]
+                },
+                {
+                    "type": "section",
+                    "text": "Sales reps and admins hit prolonged loading spinners that block content from appearing, with the worst case taking 26 seconds before the CRM inbox rendered."
+                },
+                {
+                    "type": "context",
+                    "elements": [
+                        {
+                            "type": "text",
+                            "text": "2 signals · 👤 Suggested reviewer:<@cory>"
+                        }
+                    ]
+                },
+                {
+                    "type": "actions",
+                    "elements": [
+                        { "type": "button", "label": "Review PR" },
+                        {
+                            "type": "button",
+                            "label": "Open in PostHog"
+                        },
+                        {
+                            "type": "button",
+                            "label": "Dismiss",
+                            "style": "danger"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "message",
+            "from": "posthog",
+            "content": [
+                {
+                    "type": "context",
+                    "elements": [
+                        {
+                            "type": "text",
+                            "text": "*Session replay* · Session problem"
+                        }
+                    ]
+                },
+                {
+                    "type": "section",
+                    "text": "The user searched for \"Travel trailers with front living\" floorplans, browsed results, then clicked a listing which resulted in a prolonged loading state with a skeleton screen."
+                },
+                {
+                    "type": "context",
+                    "elements": [
+                        {
+                            "type": "text",
+                            "text": "Problem: blocking exception"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "message",
+            "from": "posthog",
+            "content": [
+                {
+                    "type": "context",
+                    "elements": [
+                        {
+                            "type": "text",
+                            "text": "*Session replay* · Session problem"
+                        }
+                    ]
+                },
+                {
+                    "type": "section",
+                    "text": "While attempting to navigate from an inventory listing to its photos and then to the Inbox, the user encountered prolonged loading screens that prevented content from appearing."
+                },
+                {
+                    "type": "context",
+                    "elements": [
+                        {
+                            "type": "text",
+                            "text": "Problem: blocking exception"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

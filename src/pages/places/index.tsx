@@ -8,7 +8,6 @@ import PlacesMap, { getPlaceIcon } from 'components/HogMap/PlacesMap'
 import PlaceDetail from 'components/HogMap/PlaceDetail'
 import { PlaceType, PlaceItem } from 'components/HogMap/types'
 import { AnimatePresence } from 'framer-motion'
-
 function Places(): JSX.Element {
     const { isModerator } = useUser()
     // Initialize with all place types selected
@@ -136,7 +135,15 @@ function Places(): JSX.Element {
                 image="/images/og/default.png"
             />
 
-            <Explorer template="generic" slug="places" title="Places" fullScreen viewportClasses="[&>div>div]:h-full">
+            <Explorer
+                template="generic"
+                slug="places"
+                title="Places"
+                headerBarOptions={['showBack', 'showForward']}
+                showAddressBar={false}
+                fullScreen
+                viewportClasses="[&>div>div]:h-full"
+            >
                 <div data-scheme="primary" className="flex flex-col @xl:flex-row text-primary h-full">
                     <aside
                         data-scheme="secondary"
