@@ -36,15 +36,21 @@ An account in any postsales stage can be at risk. At risk does not change the st
 
 ## Coverage map
 
-Who covers the account at each stage. 
+Who covers the account at each stage. Stages run top to bottom in the order a customer moves through them; roles run across.
 
-| Ownership                                                 | Exploring | Evaluating | Proving | Buying | Implementing | Ramping | Expanding | Steady |
-| --------------------------------------------------------- | :-------: | :--------: | :-----: | :----: | :----------: | :-----: | :-------: | :----: |
-| **New biz (TAE)**, if ICP qualified                       |           |     ✓      |    ✓    |   ✓    |              |         |           |        |
-| **CSM base layer**, all accounts >$20k ARR                |           |            |         |  (✓)   |      ✓       |    ✓    |     ✓     |   ✓    |
-| **TAM overlay**, >$20k, while there's expansion to be had |           |            |         |        |     (✓)      |    ✓    |     ✓     |        |
-| **Growth TAM**, pooled, $500 to $1,667 MRR                |           |            |         |        |     (✓)      |    ✓    |     ✓     |        |
-| **Onboarding team**                                       |    (✓)    |    (✓)     |   (✓)   |  (✓)   |     (✓)      |   (✓)   |           |        |
+✅ active coverage &nbsp;·&nbsp; 🟡 conditional (see notes) &nbsp;·&nbsp; blank = not involved
+
+| Stage            | TAE | CSM | TAM | Growth TAM | Onboarding |
+| ---------------- | :-: | :-: | :-: | :--------: | :--------: |
+| **Exploring**    |     |     |     |            |     🟡     |
+| **Evaluating**   | ✅  |     |     |            |     🟡     |
+| **Proving**      | ✅  |     |     |            |     🟡     |
+| **Buying**       | ✅  | 🟡  |     |            |     🟡     |
+| **Implementing** |     | ✅  | 🟡  |     🟡     |     🟡     |
+| **Ramping**      |     | ✅  | ✅  |     ✅     |     🟡     |
+| **Expanding**    |     | ✅  | ✅  |     ✅     |            |
+| **Steady state** |     | ✅  |     |            |            |
+
 
 Notes:
 
