@@ -14,7 +14,7 @@ export default function DataModeling(): JSX.Element {
     return (
         <>
             <SEO
-                title="Data modeling - PostHog data stack"
+                title="Data modeling - PostHog context warehouse"
                 description="Learn how to model your data in PostHog"
                 image="images/og/cdp.jpg"
             />

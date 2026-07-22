@@ -23,6 +23,17 @@ Live is a continuously updating feed of recent events. Each row includes:
 
 Use the filter controls at the top of the tab to narrow the feed by host, path, referrer, or any other property. Filters apply to the live stream so you can isolate exactly what you want to watch.
 
+## Bot traffic
+
+Live separates automated traffic from human visitors, so a crawl or scrape doesn't look like a launch. Requests are classified by user agent using the same [bot and traffic detection](/docs/web-analytics/bot-detection) as the rest of Web Analytics, and surfaced in two places:
+
+- **Bot requests per minute** – a chart alongside the live users chart, so you can see automated load at a glance and tell a crawl apart from real traffic.
+- **Bot traffic tile** – the bots hitting you right now, ranked by share of recent events and tagged with their category (AI agent, search crawler, automation, and so on). Select a row to open a breakdown for that specific bot.
+
+This is handy when an AI crawler or scraper spikes your numbers and you want to confirm it's automated before reacting. To pull bots out of the rest of the live feed, filter on `$virt_is_bot` – see [bot and traffic detection](/docs/web-analytics/bot-detection) for the full set of properties.
+
+> **Note:** The live bot tiles are rolling out and may not be enabled for your project yet. Bot classification in queries and Product Analytics is available to everyone today.
+
 ## When to use Live
 
 Use Live when you're:
@@ -55,4 +66,5 @@ For deeper analysis like funnels, retention, or breakdowns, use [Product Analyti
 ## Related
 
 - [Web Analytics dashboard](/docs/web-analytics/dashboard) – aggregated views over longer time ranges
+- [Bot and traffic detection](/docs/web-analytics/bot-detection) – classify and filter bots, crawlers, and AI agents
 - [Troubleshooting](/docs/web-analytics/troubleshooting) – when events aren't showing up
