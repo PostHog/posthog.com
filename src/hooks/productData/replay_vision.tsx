@@ -1,7 +1,19 @@
 import React from 'react'
-import { IconLlmPromptEvaluation, IconEye, IconWarning, IconSparkles, IconPeople } from '@posthog/icons'
+import {
+    IconLlmPromptEvaluation,
+    IconEye,
+    IconWarning,
+    IconSparkles,
+    IconPeople,
+    IconCursorClick,
+    IconList,
+    IconChat,
+} from '@posthog/icons'
 import OldWaySection from 'components/ReplayVision/OldWaySection'
 import PostHogWaySection from 'components/ReplayVision/PostHogWaySection'
+import HowToUseSection from 'components/ReplayVision/HowToUseSection'
+import AIPromptsSection from 'components/ReplayVision/AIPromptsSection'
+import { topFeatures } from './replay_vision/slides'
 
 export const replayVision = {
     Icon: IconLlmPromptEvaluation,
@@ -38,6 +50,24 @@ export const replayVision = {
             icon: <IconSparkles className="size-4" />,
         },
         { slug: 'use-cases', name: 'Who is it for?', icon: <IconPeople className="size-4" /> },
+        {
+            slug: 'how-to-use',
+            name: 'How to use it',
+            component: HowToUseSection,
+            icon: <IconCursorClick className="size-4" />,
+        },
+        {
+            slug: 'top-features',
+            name: 'Top features',
+            icon: <IconList className="size-4" />,
+            props: { slides: topFeatures },
+        },
+        {
+            slug: 'ai-prompts',
+            name: 'AI prompts',
+            component: AIPromptsSection,
+            icon: <IconChat className="size-4" />,
+        },
     ],
     overview: {
         title: "You'll never watch 10,000 sessions. Replay Vision will.",
