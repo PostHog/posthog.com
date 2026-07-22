@@ -174,7 +174,7 @@ function SideProjectsPage({ location }: { location: { search: string } }) {
                 </p>
             </header>
 
-            <div className="max-w-6xl mx-auto px-4 pb-12">
+            <div className="@container max-w-6xl mx-auto px-4 pb-12">
                 {/* Filter bar */}
                 <div className="mb-6">
                     <button
@@ -267,7 +267,7 @@ function SideProjectsPage({ location }: { location: { search: string } }) {
                 </div>
 
                 {/* Project grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 @xl:grid-cols-2 @4xl:grid-cols-3 gap-6">
                     {filteredProjects.map(
                         ({
                             id,
