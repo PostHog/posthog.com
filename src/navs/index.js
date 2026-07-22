@@ -6447,12 +6447,6 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Demos & examples',
-                    url: '/docs/llm-analytics/demos',
-                    icon: 'IconApp',
-                    color: 'seagreen',
-                },
-                {
                     name: 'Third-party integrations',
                     url: '/docs/ai-observability/integrations',
                     icon: 'IconApps',
