@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { CallToAction } from 'components/CallToAction'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import OSButton from 'components/OSButton'
 import { useApp } from '../../../context/App'
 import WistiaVideo, { WistiaVideoRef } from 'components/WistiaVideo'
@@ -738,6 +738,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
                     className="inline-block"
                     variant={siteSettings.theme === 'dark' ? 'mono' : 'gradient'}
                     color={siteSettings.theme === 'dark' ? 'white' : undefined}
+                    width="auto"
                 />
             )
         },

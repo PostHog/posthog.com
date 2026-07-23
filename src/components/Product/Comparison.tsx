@@ -1,7 +1,7 @@
 import { IconCheck, IconX } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import Link from 'components/Link'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import React, { useState } from 'react'
 const companies = {
     Amplitude: {
@@ -100,7 +100,7 @@ export default function Comparison({ comparison, columnCount, truncate, classNam
                         const { comparisonURL } = companies[company]
                         return company.toLowerCase() === 'posthog' ? (
                             <div className="bg-white dark:bg-accent-dark !border-t-2 !border-x-2  !border-l-blue !border-r-blue !border-t-blue rounded-sm rounded-bl-none rounded-br-none leading-tight p-2 flex justify-center items-center md:col-span-1 col-span-2">
-                                <Logo className="w-32" />
+                                <Logo className="w-32" width="auto" />
                             </div>
                         ) : (
                             <div key={company} className="bg-accent leading-tight p-2 mt-2 text-center">
