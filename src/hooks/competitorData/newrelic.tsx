@@ -65,7 +65,7 @@ export const newrelic = {
             debugging_integrations: {
                 features: {
                     built_in_error_tracking: true,
-                    built_in_session_replay: false,
+                    built_in_session_replay: true,
                     product_analytics_context: false,
                 },
             },
