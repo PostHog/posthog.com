@@ -38,4 +38,11 @@
             siteSettings.reduceTransparency ? 'true' : 'false'
         )
     } catch (err) {}
+
+    // Hide dismissed WarehouseWizardHint before first paint
+    try {
+        if (localStorage.getItem('warehouse-wizard-hint-dismissed') === '1') {
+            document.documentElement.classList.add('warehouse-wizard-hint-dismissed')
+        }
+    } catch (err) {}
 })()

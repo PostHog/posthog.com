@@ -6,27 +6,25 @@ showTitle: true
 
 We work with creators and influencers to make content about PostHog and sponsor placements that drive awareness and sign ups.
 
-We're always open to inbound proposals. If you'd like to collaborate with us, email <TeamMember name="Adlet Smykov" /> directly — we love seeing thoughtful ideas.
+We're always open to inbound proposals. If you'd like to collaborate with us, email <TeamMember name="Adlet Smykov" /> directly – we love seeing thoughtful ideas.
 
 ## Our approach
 
-We don't think of influencer marketing as buying ads. We think of it as building long-term relationships with people our ICP already trusts.
+Influencer marketing at PostHog is relationship building. We look for long-term partnerships with people our ICP already trusts, and the best creators are usually users first: we'd rather work with someone who genuinely likes PostHog than someone with a much larger audience and no connection to the product.
 
-The best creators are usually users first. We'd rather work with someone who genuinely likes PostHog than someone with a much larger audience who has no connection to the product.
-
-We optimize for recurring collaborations over one-off sponsorships. The goal is to become part of a creator's story, not interrupt it.
+We also optimize for recurring collaborations over one-off sponsorships. When a creator works with us across several launches, PostHog becomes a natural part of their story, which beats any single ad read.
 
 ## Creator lifecycle
 
-A sponsorship shouldn't be viewed as a single transaction. The ideal lifecycle looks something like:
+A sponsorship is the start of a relationship. The ideal lifecycle looks something like:
 
 **Discover → Evaluate → Outreach → First collaboration → Feedback → Repeat collaboration → Long-term partnership**
 
-Most of the value shows up later in this arc, not at the first collaboration, so it's worth investing early in creators you can see yourself working with again across launches.
+Most of the value shows up in the later stages, so it's worth investing early in creators you can see yourself working with again across launches.
 
 ## Sourcing and evaluating influencers
 
-- You can find new influencers by looking at the creators engineers share or mention internally, searching for ones who have made relevant videos, looking at the recommendations of ones we've already sponsored, inbound, and [Kuli](https://kuli.one/#how-it-works) (AI-powered influener discovery tool).
+- You can find new influencers by looking at the creators engineers share or mention internally, searching for ones who have made relevant videos, looking at the recommendations of ones we've already sponsored, inbound, and [Kuli](https://kuli.one/#how-it-works) (an AI-powered influencer discovery tool).
 
 Don't limit yourself to individual creators. Great partnerships often come from other places too:
 
@@ -54,7 +52,7 @@ When you're evaluating a specific creator:
 
 - Above 5k views per video. Anything below this is just not worth your time. This number will likely grow over time. Larger influencers, although they charge a lot more, are often more efficient, so we don't have an upper limit for size.
 
-Different formats have different goals. Long-form YouTube continues to be our strongest acquisition channel, while podcasts, Instagram, TikTok, and other short-form content are opportunities we're actively exploring. Don't expect every format to optimize for direct sign ups — some are better at awareness, others at education or reaching entirely new audiences.
+Formats behave differently too. Long-form YouTube is still our strongest acquisition channel, while podcasts, Instagram, TikTok, and other short-form content are areas we're still figuring out. Don't expect direct sign ups from every format – short-form often does more for awareness, education, or reaching audiences we wouldn't get in front of otherwise.
 
 ## Working with agencies
 
@@ -68,9 +66,7 @@ Agencies are particularly useful when:
 - testing new creator categories
 - increasing the number of collaborations without increasing internal workload
 
-They're less useful for strategic partnerships or flagship creators where a direct relationship with PostHog is more valuable.
-
-Treat agencies as an extension of the team, not a replacement for it.
+They're less useful for strategic partnerships or flagship creators, where a direct relationship with PostHog matters more. Treat them as an extension of the team.
 
 ## Negotiating with influencers
 
@@ -86,7 +82,7 @@ Treat agencies as an extension of the team, not a replacement for it.
 
 ## Working with PMMs
 
-Influencer marketing works best when involved early: i.e. if we have a big launch and we know exact dates, let #influence-wrangling channel in Slack know a month before (or just as soon as possible), this gives us time to prep the creators, make sure we fit in their schedules and have time to make a compelling story, naturally integrating new products into creators' content.
+Influencer marketing works best when we're involved early. If a big launch is coming and the dates are known, post in the #influence-wrangling channel in Slack a month ahead (or as soon as you can). That gives us time to prep creators, fit into their schedules, and come up with a story that works the new product into their content naturally.
 
 For launches, we generally need:
 
@@ -103,14 +99,14 @@ For launches, we generally need:
 
 - Make sure they tell their audience to "mention them on sign up" or "say that they heard about PostHog from them" so we can track the attribution.
 
-- We generally let influencers decide what the ad read is like so it best fits their audience. We can provide guidance on what to talk about though — our [brand foundations](/handbook/brand/foundations) go deeper, but the key points to get right:
-  - The frame everything should ladder up to: **PostHog makes _your_ product self-driving** — it puts all your product's data in one place, turns it into signals, and uses agents to find problems and opportunities and ship the fix. Keep the creator's product (or their viewers' products) as the thing that becomes self-driving; avoid "PostHog is self-driving software," which centers us instead of the outcome.
-  - PostHog is the platform for [self-driving products](/self-driving) — a suite of tools that gives developers (and their AI agents) everything they need to build successful products. Don't call it "an analytics platform" (we've grown well beyond that) or pitch it as a single product.
+- We generally let influencers decide what the ad read is like so it best fits their audience. We can provide guidance on what to talk about though – our [brand foundations](/handbook/brand/foundations) go deeper, but the key points to get right:
+  - The frame everything should ladder up to: **PostHog makes _your_ product self-driving** – it puts all your product's data in one place, turns it into signals, and uses agents to find problems and opportunities and ship the fix. Keep the creator's product (or their viewers' products) as the thing that becomes self-driving; avoid "PostHog is self-driving software," which centers us instead of the outcome.
+  - PostHog is the platform for [self-driving products](/self-driving) – a suite of tools that gives developers (and their AI agents) everything they need to build successful products. Don't call it "an analytics platform" (we've grown well beyond that) or pitch it as a single product.
   - Be specific rather than benefits-y. Developers can smell marketing fluff instantly, so "it does X" beats "it empowers you to unlock X."
   - The suite spans product analytics, web analytics, session replay, error tracking, experimentation, feature flags, AI observability, and surveys. There's also a CDP for sending data to 50+ destinations and a data warehouse that connects to external sources like your database, Stripe, or Hubspot so you can query them with SQL (or no-code insights) alongside your product data.
-  - The goal of these tools: help founders and engineers debug their product, understand their customers, and ship a more successful product faster.
-  - There's a generous free tier for every tool — you can sign up and start using all of them for free right away, and 90% of users stay on PostHog's free tier.
-  - Setup is simple: install an SDK or paste a snippet into your site header, and we autocapture data like pageviews, clicks, and sessions. There are SDKs for all the popular backend languages too — Python, Node, Go, and so on.
+  - All of this exists to help founders and engineers debug their product, understand their customers, and ship a more successful product faster.
+  - There's a generous free tier for every tool – you can sign up and start using all of them for free right away, and 90% of users stay on PostHog's free tier.
+  - Setup is simple: install an SDK or paste a snippet into your site header, and we autocapture data like pageviews, clicks, and sessions. There are SDKs for all the popular backend languages too – Python, Node, Go, and so on.
 
 - There are a handful of video assets for them to [use here](https://drive.google.com/drive/folders/1RFTEb4E1D71wYuQm9smZ9eK79glmHp1m?usp=sharing). Feel free to add more, but also suggest the website and in-app as sources.
 
@@ -126,7 +122,7 @@ Some metrics we look at for individual videos include:
 
 We track these on our <PrivateLink url="https://docs.google.com/spreadsheets/d/1MmNUd9fFlZM3-SDk-HQ9cOmBY8XtqT7F97JFOAehxh8/edit?gid=702711155#gid=702711155">marketing budget and spending spreadsheet</PrivateLink>. For a per-influencer and per-video breakdown, <PrivateLink url="/hogwatch/performance">HogWatch</PrivateLink> joins that sheet with live sign up attribution and YouTube view counts. We also have an <PrivateLink url="https://us.posthog.com/project/2/dashboard/493906">influencer marketing performance dashboard in PostHog</PrivateLink> that can help you get an overall view of different influencers' performance.
 
-Remember that not every collaboration should be judged purely on attributed sign ups. Some partnerships are valuable because they:
+Attributed sign ups aren't the whole picture though. Some partnerships are valuable because they:
 
 - introduce us to new audiences
 - build long-term brand affinity
@@ -135,11 +131,9 @@ Remember that not every collaboration should be judged purely on attributed sign
 - strengthen relationships with creators or platforms
 - are just really cool and worth doing for taste/vibes
 
-Consider both direct performance and longer-term strategic value when reviewing partnerships.
-
 ## Relationship management
 
-We treat creators as people, not inventory. The best partnerships are built over months or years, not a single sponsorship.
+We treat creators as people, not inventory. Good partnerships take months or years to build.
 
 - Reply quickly.
 - Give thoughtful feedback.
@@ -147,11 +141,11 @@ We treat creators as people, not inventory. The best partnerships are built over
 - Stay in touch between campaigns.
 - Meet creators in person when it makes sense.
 
-The goal is for creators to think of PostHog first when they have a new idea and to bring weird ideas to us.
+The aim is for creators to think of PostHog first when they have a new idea, and to feel comfortable bringing us the weird ones.
 
 ## Events and conferences
 
-Conferences are rarely valuable because of the talks, but they are really valuable because of the people that attend those. In the 2026 we've been to Stripe Sessions and VidCon - both of them provided us the opportunity to network with the right people and expand our creator roster.
+Conferences pay off through the people you meet more than the talks. In 2026 we've been to Stripe Sessions and VidCon, and both helped us meet the right people and grow our creator roster.
 
 The biggest benefits usually come from:
 
@@ -161,7 +155,7 @@ The biggest benefits usually come from:
 - strengthening existing relationships
 - making introductions that continue after the event
 
-If possible, prioritize speaking, hosting dinners, or organizing meetups over simply attending conferences.
+If possible, prioritize speaking, hosting dinners, or organizing meetups over just attending.
 
 ## Current experiments
 

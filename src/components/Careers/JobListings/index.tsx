@@ -4,7 +4,7 @@ import Link from 'components/Link'
 import { Department, Location, Timezone } from 'components/NotProductIcons'
 import { CallToAction } from 'components/CallToAction'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import { slugifyTeamName } from 'lib/utils'
+import { formatTeamName, slugifyTeamName } from 'lib/utils'
 import OSButton from 'components/OSButton'
 import { TeamsSidebar } from 'components/Job/TeamsSidebar'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
@@ -463,7 +463,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                             Select a role
                         </label>
                         <select
-                            className="block @2xl:hidden w-full p-2 border border-primary rounded text-xl font-bold relative z-10 mb-2"
+                            className="block @2xl:hidden w-full p-2 bg-primary text-primary border border-primary rounded text-xl font-bold relative z-10 mb-2"
                             value={selectedJob.fields.title}
                             onChange={(e) => {
                                 const selectedJobTitle = e.target.value
@@ -570,7 +570,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                                                                 return teams.length > 1
                                                                                     ? 'Multiple teams'
                                                                                     : teams.length === 1 &&
-                                                                                          `${teams[0]} Team`
+                                                                                          formatTeamName(teams[0])
                                                                             })()}
                                                                         </span>
                                                                     )}
@@ -636,7 +636,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                                                                 return teams.length > 1
                                                                                     ? 'Multiple teams'
                                                                                     : teams.length === 1 &&
-                                                                                          `${teams[0]} Team`
+                                                                                          formatTeamName(teams[0])
                                                                             })()}
                                                                         </span>
                                                                     )}

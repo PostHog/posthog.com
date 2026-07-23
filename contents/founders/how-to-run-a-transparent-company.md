@@ -9,7 +9,6 @@ featuredImageType: full
 tags:
   - Founders
   - Culture
-  - Being a founder
   - Ops & finance
 crosspost:
   - Blog

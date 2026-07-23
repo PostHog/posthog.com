@@ -42,14 +42,14 @@ The honest catch for us is that a reverse demo only works once there's enough cl
 The whole demo depends on there being real signals to work from, so set that up before the call:
 
 - Ask them to turn on error tracking and session replays for a window of time ahead of the call, so the agent has fresh, real signals to act on by the time you meet.
-- Have them get PostHog Code downloaded and their GitHub and PostHog connected, so they can kick off a PR live.
+- Have them get PostHog Desktop downloaded and their GitHub and PostHog connected, so they can kick off a PR live.
 - Frame the cost honestly: offer to credit any usage on errors and replays during the demo window, since you need them on to show it at its best, and they can turn them back off after. If it wows them, they'll want to keep them on anyway, and that's the flywheel starting.
 
 #### Running it
 
 Let them drive the whole way. You narrate, they click.
 
-1. Have them open the PostHog Code inbox.
+1. Have them open the PostHog Desktop inbox.
 2. Walk them through what they're seeing in the reports and PRs tabs, using their own data.
 3. Have them pick a report to inspect and kick off a PR from it themselves.
 4. Explain the self-driving part: they can set it up to handle bugfix and maintenance PRs automatically, while humans still drive product decisions and new features. (This is the same line as "robots do maintenance, humans do creative work" below, made concrete.)

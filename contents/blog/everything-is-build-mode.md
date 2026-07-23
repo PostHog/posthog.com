@@ -111,7 +111,7 @@ Whether you're a [PM or a PMM](/blog/pm-pmm-collaboration) coordinating a launch
 
 Once you know what's there, tell it: *"Build me a dashboard showing where new users drop off, and how activation rates compare by signup source."* It assembles the insights, and you go a few turns back and forth until it's filled with the metrics you care about.
 
-The same dashboard tells you when something goes wrong after launch. *"Anything weird in the last two hours versus yesterday?"* – and you'll know whether to relax or roll back. And when the dashboard reveals an opportunity worth testing, that's when you bring in [PostHog Code](/code) or the MCP to build the [experiment](/experiments) properly – [no-code experiment tools can't compete](/blog/ai-is-killing-no-code-experiments) with an agent that already knows your product.
+The same dashboard tells you when something goes wrong after launch. *"Anything weird in the last two hours versus yesterday?"* – and you'll know whether to relax or roll back. And when the dashboard reveals an opportunity worth testing, that's when you bring in [PostHog Code](/desktop) or the MCP to build the [experiment](/experiments) properly – [no-code experiment tools can't compete](/blog/ai-is-killing-no-code-experiments) with an agent that already knows your product.
 
 ![A product marketing dashboard built with PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/posthog_code_pmm_dashboard_5ec371cf8d.png)
 <Caption>A glimpse at my real launch dashboard – I didn't build a single insight by hand.</Caption>
@@ -120,7 +120,7 @@ The same dashboard tells you when something goes wrong after launch. *"Anything 
 
 Build mode isn't a solo act. Some of the best work happening at PostHog is in public Slack channels: a thread starts with an idea and ends with shipped code.
 
-And that know-how compounds. The old way to pass on how you do something was to write a standard operating procedure – a document that tells you how to do the thing but can't do it itself. A [skill](/docs/posthog-code/skills) can: it's your judgment written down in a form an agent can actually run, so the next person doesn't start from scratch.
+And that know-how compounds. The old way to pass on how you do something was to write a standard operating procedure – a document that tells you how to do the thing but can't do it itself. A [skill](/docs/posthog-desktop/skills) can: it's your judgment written down in a form an agent can actually run, so the next person doesn't start from scratch.
 
 If your company is *cautiously* adopting AI, this is the cleanest way to let people work outside their lane – the agent runs on your colleagues' codified judgment, not a blank prompt. We keep ours in a few places: the [skills store](/docs/ai-engineering/skills-store), the [`.claude` folder](https://github.com/PostHog/posthog.com/tree/master/.claude) in our website repo, and the company [handbook](/handbook).
 

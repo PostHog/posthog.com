@@ -1130,6 +1130,10 @@ export const handbookSidebar = [
                         name: 'PostHog AI',
                         url: '/handbook/marketing/positioning/posthog-ai',
                     },
+                    {
+                        name: 'PostHog Desktop',
+                        url: '/handbook/marketing/positioning/desktop',
+                    },
                 ],
             },
         ],
@@ -1427,6 +1431,10 @@ export const handbookSidebar = [
                         url: '/handbook/forward-deployed-engineering/how-we-work',
                     },
                     {
+                        name: 'New starter onboarding',
+                        url: '/handbook/forward-deployed-engineering/new-hire-onboarding',
+                    },
+                    {
                         name: 'Working with customers',
                         url: '/handbook/forward-deployed-engineering/working-with-customers',
                     },
@@ -1548,6 +1556,10 @@ export const handbookSidebar = [
                 name: 'Account management',
                 url: '',
                 children: [
+                    {
+                        name: 'Customer journey and coverage model',
+                        url: '/handbook/growth/sales/customer-journey',
+                    },
                     {
                         name: 'Allocating accounts',
                         url: '/handbook/growth/sales/account-allocation',
@@ -1907,7 +1919,7 @@ export const handbookSidebar = [
                 url: '/handbook/wizard-and-docs/mdx-and-components',
             },
             {
-                name: 'How to write product docs',
+                name: 'How to write docs',
                 url: '/handbook/wizard-and-docs/writing-product-docs',
             },
             {
@@ -2259,7 +2271,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Code',
-                    url: '/code',
+                    url: '/desktop',
                 },
                 {
                     name: 'Concepts',
@@ -2567,10 +2579,6 @@ export const docsMenu = {
                         {
                             name: 'Unity',
                             url: '/docs/libraries/unity',
-                            badge: {
-                                title: 'Beta',
-                                className: '!bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50',
-                            },
                         },
                         {
                             name: 'C#/.NET',
@@ -4183,6 +4191,12 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
+                    name: 'Managing bot and AI traffic',
+                    url: '/docs/web-analytics/managing-bot-traffic',
+                    icon: 'IconShieldPeople',
+                    color: 'purple',
+                },
+                {
                     name: 'Path cleaning',
                     url: '/docs/web-analytics/path-cleaning',
                     icon: 'IconFilter',
@@ -4233,6 +4247,16 @@ export const docsMenu = {
                     icon: 'IconQuestion',
                     color: 'blue',
                     featured: true,
+                    children: [
+                        {
+                            name: 'General',
+                            url: '/docs/web-analytics/troubleshooting',
+                        },
+                        {
+                            name: 'Campaign attribution',
+                            url: '/docs/web-analytics/campaign-attribution-troubleshooting',
+                        },
+                    ],
                 },
                 {
                     name: 'Changelog',
@@ -5296,6 +5320,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/upload-source-maps/ios',
                         },
                         {
+                            name: 'Rust',
+                            url: '/docs/error-tracking/upload-source-maps/rust',
+                        },
+                        {
                             name: 'Rollup',
                             url: '/docs/error-tracking/upload-source-maps/rollup',
                         },
@@ -5656,64 +5684,94 @@ export const docsMenu = {
                     color: 'teal',
                 },
                 {
-                    name: 'Guides',
-                },
-                {
-                    name: 'Widget setup',
+                    name: 'Set up the widget',
                     url: '/docs/support/widget',
                     icon: 'IconMessage',
                     color: 'orange',
                 },
                 {
-                    name: 'JavaScript API',
-                    url: '/docs/support/javascript-api',
-                    icon: 'IconCode',
-                    color: 'blue',
+                    name: 'Surfaces',
                 },
                 {
-                    name: 'Inbox management',
+                    name: 'Web app',
                     url: '/docs/support/inbox',
-                    icon: 'IconNotebook',
+                    icon: 'IconHeadset',
                     color: 'yellow',
                 },
                 {
-                    name: 'Slack integration',
-                    url: '/docs/support/slack',
+                    name: 'Slack',
+                    url: '/docs/support/surfaces/slack',
                     icon: 'IconChat',
                     color: 'purple',
                 },
                 {
-                    name: 'Email channel',
+                    name: 'MCP',
+                    url: '/docs/support/surfaces/mcp',
+                    icon: 'IconMagic',
+                    color: 'blue',
+                },
+                {
+                    name: 'PostHog Desktop',
+                    url: '/docs/support/surfaces/desktop',
+                    icon: 'IconCode',
+                    color: 'green',
+                },
+                {
+                    name: 'API',
+                    url: '/docs/support/javascript-api',
+                    icon: 'IconBrackets',
+                    color: 'blue',
+                },
+                {
+                    name: 'Channels',
+                },
+                {
+                    name: 'How channels work',
+                    url: '/docs/support/concepts/channels',
+                    icon: 'IconMessage',
+                    color: 'blue',
+                },
+                {
+                    name: 'Email',
                     url: '/docs/support/email',
                     icon: 'IconLetter',
                     color: 'red',
                 },
                 {
-                    name: 'GitHub integration',
+                    name: 'Slack',
+                    url: '/docs/support/slack',
+                    icon: 'IconChat',
+                    color: 'purple',
+                },
+                {
+                    name: 'GitHub',
                     url: '/docs/support/github',
                     icon: 'IconGithub',
                     color: 'seagreen',
                 },
                 {
-                    name: 'Workflow automation',
-                    url: '/docs/support/workflows',
-                    icon: 'IconDecisionTree',
-                    color: 'green',
+                    name: 'Imports',
                 },
                 {
-                    name: 'Historical imports',
-                },
-                {
-                    name: 'Overview',
+                    name: 'How imports work',
                     url: '/docs/support/imports',
                     icon: 'IconUpload',
                     color: 'blue',
                 },
                 {
-                    name: 'Import from Zendesk',
+                    name: 'Zendesk',
                     url: '/docs/support/imports/zendesk',
                     icon: 'IconLetter',
                     color: 'blue',
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Pricing',
+                    url: '/docs/support/pricing',
+                    icon: 'IconPiggyBank',
+                    color: 'green',
                 },
             ],
         },
@@ -6932,10 +6990,10 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'PostHog Code',
+            name: 'PostHog Desktop',
             icon: 'IconCoffee',
             color: 'yellow',
-            url: '/docs/posthog-code',
+            url: '/docs/posthog-desktop',
             description: 'AI coding environment with deep PostHog integration.',
             children: [
                 {
@@ -6943,14 +7001,14 @@ export const docsMenu = {
                 },
                 {
                     name: 'Quick Tour',
-                    url: '/docs/posthog-code',
+                    url: '/docs/posthog-desktop',
                     icon: 'IconRewindPlay',
                     color: 'orange',
                     featured: true,
                 },
                 {
                     name: 'Download',
-                    url: '/docs/posthog-code/download-posthog-code',
+                    url: '/docs/posthog-desktop/download-posthog-desktop',
                     icon: 'IconDownload',
                     color: 'blue',
                     featured: true,
@@ -6960,73 +7018,73 @@ export const docsMenu = {
                 },
                 {
                     name: 'Any model and any harness',
-                    url: '/docs/posthog-code/use-any-model-and-harness',
+                    url: '/docs/posthog-desktop/use-any-model-and-harness',
                     icon: 'IconGraduationCap',
                     color: 'green',
                 },
                 {
                     name: 'Skills',
-                    url: '/docs/posthog-code/skills',
+                    url: '/docs/posthog-desktop/skills',
                     icon: 'IconMagic',
                     color: 'purple',
                 },
                 {
                     name: 'Command Center',
-                    url: '/docs/posthog-code/command-center',
+                    url: '/docs/posthog-desktop/command-center',
                     icon: 'IconGridMasonry',
                     color: 'orange',
                 },
                 {
                     name: 'Tasks',
-                    url: '/docs/posthog-code/tasks',
+                    url: '/docs/posthog-desktop/tasks',
                     icon: 'IconListCheck',
                     color: 'blue',
                 },
                 {
                     name: 'PostHog integration',
-                    url: '/docs/posthog-code/posthog-integration',
+                    url: '/docs/posthog-desktop/posthog-integration',
                     icon: 'IconSparkles',
                     color: 'seagreen',
                 },
                 {
                     name: 'Git + GitHub integration',
-                    url: '/docs/posthog-code/git-github-integration',
+                    url: '/docs/posthog-desktop/git-github-integration',
                     icon: 'IconGitBranch',
                     color: 'green',
                 },
                 {
                     name: 'Code review',
-                    url: '/docs/posthog-code/code-review',
+                    url: '/docs/posthog-desktop/code-review',
                     icon: 'IconCode',
                     color: 'blue',
                 },
                 {
                     name: 'Environments',
-                    url: '/docs/posthog-code/environments',
+                    url: '/docs/posthog-desktop/environments',
                     icon: 'IconServer',
                     color: 'purple',
                 },
                 {
                     name: 'Cloud runs',
-                    url: '/docs/posthog-code/cloud-runs',
+                    url: '/docs/posthog-desktop/cloud-runs',
                     icon: 'IconCloud',
                     color: 'blue',
                 },
                 {
                     name: 'Worktrees',
-                    url: '/docs/posthog-code/worktrees',
+                    url: '/docs/posthog-desktop/worktrees',
                     icon: 'IconGitRepository',
                     color: 'orange',
                 },
                 {
                     name: 'AI-generated content',
-                    url: '/docs/posthog-code/ai-generated-content',
+                    url: '/docs/posthog-desktop/ai-generated-content',
                     icon: 'IconAI',
                     color: 'purple',
                 },
                 {
                     name: 'Settings',
-                    url: '/docs/posthog-code/settings',
+                    url: '/docs/posthog-desktop/settings',
                     icon: 'IconGear',
                     color: 'seagreen',
                 },
@@ -7035,19 +7093,19 @@ export const docsMenu = {
                 },
                 {
                     name: 'Pricing',
-                    url: '/docs/posthog-code/pricing',
+                    url: '/docs/posthog-desktop/pricing',
                     icon: 'IconPiggyBank',
                     color: 'green',
                 },
                 {
                     name: 'Open source',
-                    url: '/docs/posthog-code/open-source',
+                    url: '/docs/posthog-desktop/open-source',
                     icon: 'IconGithub',
                     color: 'seagreen',
                 },
                 {
                     name: 'Community',
-                    url: '/docs/posthog-code/community',
+                    url: '/docs/posthog-desktop/community',
                     icon: 'IconPeople',
                     color: 'purple',
                 },
@@ -7377,6 +7435,20 @@ export const docsMenu = {
                     icon: 'IconListCheck',
                     color: 'orange',
                     featured: true,
+                },
+                {
+                    name: 'Install metrics',
+                    url: '/docs/metrics/installation',
+                    icon: 'IconCode',
+                    color: 'blue',
+                    featured: true,
+                    children: [
+                        { name: 'Overview', url: '/docs/metrics/installation' },
+                        { name: 'JavaScript (web)', url: '/docs/metrics/installation/javascript' },
+                        { name: 'Node.js', url: '/docs/metrics/installation/nodejs' },
+                        { name: 'Python', url: '/docs/metrics/installation/python' },
+                        { name: 'Other languages', url: '/docs/metrics/installation/other' },
+                    ],
                 },
                 {
                     name: 'Why you need metrics',
