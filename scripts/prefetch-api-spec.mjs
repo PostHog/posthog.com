@@ -18,7 +18,9 @@ try {
 }
 
 try {
-    const res = await fetch(url, { headers: { Accept: 'application/json' } })
+    // Bound the fetch so a mid-response stall can't leave this background process alive
+    // holding the build's inherited stdio open. 30s is well above the ~9s normal path.
+    const res = await fetch(url, { headers: { Accept: 'application/json' }, signal: AbortSignal.timeout(30_000) })
     if (!res.ok) throw new Error(`status ${res.status}`)
     const text = await res.text()
     JSON.parse(text) // validate before publishing the file
