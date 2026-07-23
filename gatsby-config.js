@@ -12,7 +12,9 @@ require('dotenv').config({
 const getQuestionPages = async (base) => {
     const fetchQuestions = async (page) => {
         const questionQuery = qs.stringify({
-            populate: '*',
+            // The sitemap only reads `permalink` from each question; fetching every
+            // populated relation was ~50x the transfer for identical output.
+            fields: ['permalink'],
             pagination: {
                 page,
                 pageSize: 100,
