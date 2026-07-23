@@ -1,58 +1,64 @@
-import React, { useEffect, useState } from 'react'
-import { IconSparkles, IconX } from '@posthog/icons'
+import React from 'react'
+import { IconX } from '@posthog/icons'
+import CloudinaryImage from 'components/CloudinaryImage'
 import WizardCommand from 'components/WizardCommand'
 
 // Persist dismissal so the hint doesn't nag a user who has already seen it. Mirrors the
 // product app's WarehouseWizardHint, which uses the same localStorage key.
+// theme-init.js sets `warehouse-wizard-hint-dismissed` on <html> before paint when this
+// key is set; global.css hides `.warehouse-wizard-hint` when that class is present.
 const DISMISSED_KEY = 'warehouse-wizard-hint-dismissed'
+const DISMISSED_CLASS = 'warehouse-wizard-hint-dismissed'
 
 /**
  * Agent-flavored nudge that pushes the `npx @posthog/wizard warehouse` CLI, which auto-detects
  * and connects a user's databases/APIs straight from their codebase instead of setting up a
- * source by hand. Ported from the PostHog product app so the same prompt shows on the marketing
- * site's data-source pages.
+ * source by hand. Visual design matches [`WizardCTA`](../WizardCTA).
  */
-export default function WarehouseWizardHint({ className = '' }: { className?: string }): JSX.Element | null {
-    // Start hidden so SSR renders nothing and a user who already dismissed it never sees a flash.
-    // The effect reveals the hint on the client unless it was previously dismissed.
-    const [hidden, setHidden] = useState(true)
-
-    useEffect(() => {
-        setHidden(localStorage.getItem(DISMISSED_KEY) === '1')
-    }, [])
-
-    if (hidden) {
-        return null
-    }
-
+export default function WarehouseWizardHint({ className = '' }: { className?: string }): JSX.Element {
     const handleDismiss = () => {
         localStorage.setItem(DISMISSED_KEY, '1')
-        setHidden(true)
+        document.documentElement.classList.add(DISMISSED_CLASS)
     }
 
     return (
-        <div
-            data-scheme="secondary"
-            className={`not-prose relative rounded-md border border-dashed border-primary bg-accent p-4 flex flex-col gap-3 ${className}`}
-        >
+        <div className={`warehouse-wizard-hint relative ${className}`}>
             <button
                 type="button"
                 onClick={handleDismiss}
                 aria-label="Dismiss"
-                className="absolute top-2 right-2 text-secondary hover:text-primary cursor-pointer"
+                className="absolute cursor-pointer rounded-full bg-white dark:bg-secondary p-1 top-1 right-1 translate-x-1/2 -translate-y-1/2 z-10 text-secondary hover:text-primary border border-secondary"
             >
                 <IconX className="size-4" />
             </button>
-            <div className="flex items-center gap-2 pr-6">
-                <IconSparkles className="size-5 shrink-0" />
-                <h4 className="m-0 text-[15px] font-semibold">Let AI connect your sources for you</h4>
-            </div>
-            <p className="m-0 text-sm text-secondary">
-                Skip the manual setup — run this in your project and the wizard auto-detects your databases and APIs and
-                connects them to PostHog.
-            </p>
-            <div>
-                <WizardCommand command="warehouse" slim />
+            <div className="relative overflow-hidden rounded not-prose border border-secondary">
+                <CloudinaryImage
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/texture_tan_9608fcca70.png"
+                    className="dark:hidden absolute inset-0 -bottom-12"
+                    imgClassName="h-full w-full object-cover"
+                />
+                <CloudinaryImage
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/texture_tan_dark_a92b0e022d.png"
+                    className="hidden dark:block absolute inset-0 -bottom-12"
+                    imgClassName="h-full w-full object-cover"
+                />
+                <div className="relative flex flex-col-reverse @lg:flex-row items-center justify-between pl-5 @lg:pl-8 pr-8 py-4 @lg:py-3 gap-4">
+                    <div className="flex-1 text-center @lg:text-left max-w-lg">
+                        <p className="text-lg font-bold !mb-0">Let AI connect your sources for you</p>
+                        <p className="!mt-1 !mb-3 text-sm opacity-75">
+                            Skip the manual setup — run this in your project and the wizard auto-detects your databases
+                            and APIs and connects them to PostHog.
+                        </p>
+                        <WizardCommand command="warehouse" />
+                    </div>
+                    <div className="shrink-0">
+                        <img
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/wizard_3f8bb7a240.png"
+                            alt="PostHog Wizard hedgehog"
+                            className="w-36 @lg:w-32 @xl:w-40 @2xl:w-48"
+                        />
+                    </div>
+                </div>
             </div>
         </div>
     )

@@ -44,7 +44,6 @@ import { Questions } from 'components/Squeak'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
 import CopyMarkdownActionsDropdown, { useMarkdownUrlExists } from 'components/MarkdownActionsDropdown'
 import CustomerMetadata from './CustomerMetadata'
-import WarehouseWizardHint from 'components/WarehouseWizardHint'
 import { getVideoClasses } from '../../constants'
 import AboutPostHog from 'components/AboutPostHog'
 
@@ -99,6 +98,7 @@ interface ReaderViewProps {
     title?: string
     header?: React.ReactNode
     hideTitle?: boolean
+    belowTitle?: React.ReactNode
     tableOfContents?: any
     hideMobileTableOfContents?: boolean
     mdxComponents?: any
@@ -425,6 +425,7 @@ export default function ReaderView({
     title,
     header,
     hideTitle = false,
+    belowTitle,
     tableOfContents,
     hideMobileTableOfContents = false,
     mdxComponents,
@@ -460,6 +461,7 @@ export default function ReaderView({
                 title={title}
                 header={header}
                 hideTitle={hideTitle}
+                belowTitle={belowTitle}
                 tableOfContents={tableOfContents}
                 hideMobileTableOfContents={hideMobileTableOfContents}
                 mdxComponents={mdxComponents}
@@ -1347,6 +1349,7 @@ function ReaderViewContent({
     title,
     header,
     hideTitle = false,
+    belowTitle,
     tableOfContents,
     hideMobileTableOfContents = false,
     mdxComponents,
@@ -1376,7 +1379,7 @@ function ReaderViewContent({
 }: ReaderViewProps) {
     const { compact } = useApp()
     const { appWindow, activeInternalMenu } = useWindow()
-    const { hash, pathname } = useLocation()
+    const { hash } = useLocation()
     const contentRef = useRef<HTMLDivElement>(null)
     const articleColumnRef = useRef<HTMLDivElement>(null)
 
@@ -1595,25 +1598,19 @@ function ReaderViewContent({
                                             {title}
                                         </h1>
                                     )}
-                                    {/* Nudge to the setup wizard on the data-warehouse sources docs (root +
-                                        every child page). Templates that hide the ReaderView title and render
-                                        their own heading (e.g. DataWarehouseSource) add the hint themselves, so
-                                        the `!hideTitle` guard keeps this from double-rendering there. */}
-                                    {!hideTitle &&
-                                        (pathname === '/docs/data-warehouse/sources' ||
-                                            pathname?.startsWith('/docs/data-warehouse/sources/')) && (
-                                            <div
-                                                className={`my-4 transition-all ${
-                                                    fullWidthContent || body?.type !== 'mdx'
-                                                        ? 'max-w-full'
-                                                        : contentMaxWidthClass
-                                                        ? contentMaxWidthClass
-                                                        : 'mx-auto max-w-2xl'
-                                                }`}
-                                            >
-                                                <WarehouseWizardHint />
-                                            </div>
-                                        )}
+                                    {belowTitle && (
+                                        <div
+                                            className={`my-4 transition-all ${
+                                                fullWidthContent || body?.type !== 'mdx'
+                                                    ? 'max-w-full'
+                                                    : contentMaxWidthClass
+                                                    ? contentMaxWidthClass
+                                                    : 'mx-auto max-w-2xl'
+                                            }`}
+                                        >
+                                            {belowTitle}
+                                        </div>
+                                    )}
                                     {(body?.date || body?.contributors || body?.tags) && (
                                         <div
                                             className={`flex items-center space-x-2 mb-4 flex-wrap transition-all ${
