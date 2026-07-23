@@ -46,7 +46,7 @@ export const logsFeatures = {
         },
         no_proprietary_query_language: {
             name: 'No proprietary query language',
-            description: 'Use standard SQL or attributes instead of a bespoke vendor-specific query language',
+            description: 'Uses standard SQL or instead of vendor-specific query language',
         },
     },
 },
