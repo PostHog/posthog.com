@@ -16,7 +16,7 @@ The self-driving loop runs anywhere PostHog does, and each interface is a differ
 
 - **PostHog Web** is the full app in your browser: review agent work in the Inbox and query with PostHog AI.
 - **PostHog Slack** brings the loop to you: digests, alerts, and quick questions in a thread.
-- **PostHog MCP / CLI** pipes PostHog's context into the agent you already use (Claude Code, Cursor).
+- **PostHog MCP & PostHog CLI** pipes PostHog's context into the agent you already use (Claude Code, Cursor).
 - **PostHog Desktop** is a workbench for building new features, shipping improvements, and steering agents with your team.
 
 ## The unique belief (in terms of PostHog Desktop)
