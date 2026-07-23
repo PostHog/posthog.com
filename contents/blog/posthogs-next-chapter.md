@@ -83,7 +83,7 @@ There are a ton of things about to start appearing here, such as proactive agent
 
 We want product development to feel increasingly self-driven by agents that you direct. This requires long-running agents that understand your product and your goals; agents that can take a huge list of problems that need solving and get to work for you, freeing you up to focus on more strategic work.
 
-Our long-running agents will likely have global skills and context specific to you based on your codebase, your website, and your git history, for example. PostHog is already where your product context lives, and we want to enhance that in every way possible.
+Our [long-running agents](/newsletter/2030-shaped-software#be-everywhere) will likely have global skills and context specific to you based on your codebase, your website, and your git history, for example. PostHog is already where your product context lives, and we want to enhance that in every way possible.
 
 ## Turning PostHog into a doing company
 

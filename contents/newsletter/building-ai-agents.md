@@ -73,7 +73,7 @@ Our third and current harness uses the Claude Agent SDK with MCP tools and skill
 
 2. **Agents are a primary persona.** Our “users” are increasingly agents, whether that is through PostHog AI or [our MCP server](/docs/model-context-protocol). Our work here should converge and support both using a single architecture.
 
-The flexibility of the sandbox plus the scalability of MCP tools and skill standards (which I’ll explain more about later) solves the issues of the second harness and positions us better for an agent-first future.
+The flexibility of the sandbox plus the scalability of MCP tools and skill standards (which I’ll explain more about later) solves the issues of the second harness and positions us better for an [agent-first future](/newsletter/2030-shaped-software#product-infrastructure-is-agent-first).
 
 ![Harness](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/image_13_072d8c5986.jpg)
 
