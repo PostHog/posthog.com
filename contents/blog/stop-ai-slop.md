@@ -79,10 +79,10 @@ This might not sound like a math problem to a product engineer, but it definitel
 ## Writing custom evaluations
 Beyond monitoring for hallucinations and brand disasters, evals are a handy tool to define what "good AI" looks like for your product. 
 
-Good output or bad output? That depends on the task. An evaluation configured for a meme generator would pass content that an eval for a scientific research assistant would defintely fail.
+Good output or bad output? That depends on the task. An evaluation configured for a meme generator would pass content that an eval for a scientific research assistant would definitely fail.
 
 Luckily, the [best practices](https://hamel.dev/blog/posts/llm-judge/) for writing evals are simple:
-- Set the domain expertise (_"you are a world class sommelier"_ or _"you are are evaluating whether a user is attempting to manipulate an LLM"_)
+- Set the domain expertise (_"you are a world class sommelier"_ or _"you are evaluating whether a user is attempting to manipulate an LLM"_)
 - Be specific about pass/fail criteria 
 - Include examples of good vs bad, and edge cases when relevant
 - Keep prompts concise and specific (avoid trying to evaluate multiple things in one shot)
