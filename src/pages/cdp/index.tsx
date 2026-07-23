@@ -38,7 +38,7 @@ export default function CDP(): JSX.Element {
                     self-driving.
                 </p>
                 <p>
-                    Any event or action in PostHog can update user records or trigger workflows in other products in
+                    Any event or action in PostHog can update user records or trigger workflows in other tools in
                     your stack.
                 </p>
 

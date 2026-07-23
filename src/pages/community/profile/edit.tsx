@@ -17,6 +17,7 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import { profileBackgrounds } from '../../../data/profileBackgrounds'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { OSInput, OSTextarea } from 'components/OSForm'
+import ConnectedAccounts from 'components/Squeak/components/ConnectedAccounts'
 import { PROFILE_COLORS } from 'constants/profileColors'
 
 function convertCentimetersToInches(centimeters: number): number {
@@ -616,6 +617,9 @@ function EditProfile({ profile, mutate }) {
                             Update
                         </CallToAction>
                     </form>
+                    <div className="mt-8 pt-6 border-t border-border">
+                        <ConnectedAccounts />
+                    </div>
                 </section>
             </div>
         </ScrollArea>
