@@ -2,7 +2,7 @@ The feature flags secure API key is a secret project specific token listed in th
 
 This key needs to be kept secret, and should not be used in the frontend or exposed to users.
 
-> **Building a frontend, mobile, or CLI app?** Local evaluation and the feature flags secure API key are for server-side use only. To evaluate flags from client-side code, use a [client-side SDK](/docs/libraries) or call the public [`/flags` endpoint](/docs/api/flags) with your [project API key](/docs/feature-flags/installation#where-to-find-your-project-api-key) instead. The project API key is safe to expose to users.
+> **Building a frontend, mobile, or CLI app?** Local evaluation and the feature flags secure API key are for server-side use only. To evaluate flags from client-side code, use a [client-side SDK](/docs/libraries) or call the public [`/flags` endpoint](/docs/api/flags) with your [project token](/docs/feature-flags/installation#where-to-find-your-project-token) instead. The project token is safe to expose to users.
 
 > **Note:** Existing personal API keys will continue to work for local evaluation, but we recommend switching to the feature flags secure API key for local evaluation moving forward. We will be deprecating personal API keys for local evaluation in the future.
 
