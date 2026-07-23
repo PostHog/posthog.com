@@ -42,6 +42,8 @@ JOIN klaviyo_list_profiles lp ON lp.profile_id = p.id
 WHERE lp.list_id = 'your_list_id'
 ```
 
+> **Note:** List membership isn't the same as subscription. A profile can belong to a list without being subscribed to any of its communications. To check what a profile is actually subscribed to, look at the `$consent` array in the profile's `properties` column — it lists the channels (`sms`, `email`, and/or `push`) the profile currently consents to. Avoid relying on `$consent_timestamp` for this: it records when consent was given, but Klaviyo doesn't always clear it when a profile unsubscribes.
+
 ## Configuration
 
 <SourceParameters />
