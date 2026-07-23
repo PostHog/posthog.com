@@ -18,7 +18,7 @@ features:
   logs: false
 ---
 
-The PostHog Kotlin Multiplatform (KMP) SDK lets you capture analytics from shared Kotlin code that runs on Android, iOS, and the web. It's a thin wrapper that delegates to the official native PostHog SDKs on each target – [Android](/docs/libraries/android), [iOS](/docs/libraries/ios), and [JavaScript](/docs/libraries/js) – so you get native batching, queueing, and session replay behind a single common API.
+The PostHog Kotlin Multiplatform (KMP) SDK lets you capture analytics from shared Kotlin code that runs on Android, iOS, the web, and JVM desktop apps. It's a thin wrapper that delegates to the official PostHog SDKs on each target – [Android](/docs/libraries/android), [iOS](/docs/libraries/ios), [JavaScript](/docs/libraries/js), and the [JVM core library](/docs/libraries/java) on desktop – so you get native batching, queueing, and session replay behind a single common API.
 
 > **Early access:** This SDK is currently in a `0.x` pre-release. The API may change between minor versions until it stabilizes. We'd love your feedback on [GitHub](https://github.com/PostHog/posthog-kmp/issues).
 
@@ -117,6 +117,23 @@ fun main() {
     )
 }
 ```
+
+#### JVM (desktop)
+
+On the JVM – for example, a Compose Multiplatform desktop app – use the no-argument `PostHogContext()`:
+
+```kotlin
+// main.kt
+fun main() = application {
+    PostHog.setup(
+        config = PostHogConfig(apiKey = "<ph_project_token>"),
+        context = PostHogContext(),
+    )
+    Window(onCloseRequest = ::exitApplication) { App() }
+}
+```
+
+On the JVM, the SDK persists its offline event queue and identity cache to disk under `~/.posthog-kmp`. If `user.home` isn't set (for example, in some containers), it falls back to the temp directory and logs a warning.
 
 ## Capturing events
 
@@ -530,14 +547,17 @@ Pass a `SessionRecordingConfig` to `PostHogConfig.sessionRecording`. Defaults ma
 | Android | ✅ | [PostHog Android](/docs/libraries/android) (native) |
 | iOS | ✅ | [PostHog iOS](/docs/libraries/ios) (native, via a Swift bridge) |
 | Web | ✅ | [PostHog.js](/docs/libraries/js) |
+| JVM (desktop) | ✅ | `com.posthog:posthog`, the [JVM core library](/docs/libraries/java) the Android SDK is built on |
 
 Because the SDK delegates to the native library on each platform, feature availability and behavior follow the underlying SDK. Session replay is available on Android and iOS; the web target inherits PostHog.js behavior.
+
+On the JVM, event capture, identification, feature flags, groups, error tracking, and super properties are all supported. Mobile and browser-only concepts don't apply, so `sessionRecording`, `captureApplicationLifecycleEvents`, `captureScreenViews`, `captureDeepLinks`, and `autocapture` are ignored. The JVM also has no standard app-manifest source, so `$app_version`, `$app_build`, and `$app_namespace` person properties aren't set – feature flags targeting those won't match desktop users.
 
 ## FAQ
 
 ### Which platforms does the KMP SDK support?
 
-Android, iOS, and web. The SDK is designed for Kotlin Multiplatform projects – including Compose Multiplatform – that share business logic across these targets.
+Android, iOS, web, and JVM (desktop). The SDK is designed for Kotlin Multiplatform projects – including Compose Multiplatform – that share business logic across these targets.
 
 ### Is this different from the Android SDK?
 
@@ -545,4 +565,4 @@ Yes. The [Android SDK](/docs/libraries/android) is for native Android apps. The 
 
 ### Why don't I see surveys or logs?
 
-The KMP wrapper currently exposes event capture, identification, feature flags, group analytics, screen tracking, session replay, and error tracking. Surveys and logs aren't wrapped yet. Follow along or [request them on GitHub](https://github.com/PostHog/posthog-kmp/issues/new?template=feature_request.yml).
+The KMP wrapper currently exposes event capture, identification, feature flags, group analytics, screen tracking, session replay, and error tracking. Surveys and logs aren't wrapped yet. If you'd like [logs](/docs/logs) support, upvote the [logs feature request on GitHub](https://github.com/PostHog/posthog-kmp/issues/30) – subscribing to the issue is the best way to follow along.
