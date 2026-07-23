@@ -42,6 +42,23 @@ JOIN klaviyo_list_profiles lp ON lp.profile_id = p.id
 WHERE lp.list_id = 'your_list_id'
 ```
 
+### List membership vs. subscription consent
+
+A profile being on a list does not mean they're subscribed to receive communications. Subscription status lives in the `$consent` array inside the `profiles` table's `properties` column, which lists the channels (`sms`, `email`, and/or `push`) the profile currently consents to.
+
+To find profiles that are both on a list and subscribed to email, for example:
+
+```sql
+SELECT p.id, p.email
+FROM klaviyo_profiles p
+JOIN klaviyo_list_profiles lp ON lp.profile_id = p.id
+WHERE lp.list_id = 'your_list_id'
+  AND JSONHas(p.properties, '$consent')
+  AND arrayExists(x -> x = 'email', JSONExtractArrayRaw(p.properties, '$consent'))
+```
+
+> **Note:** The `$consent_timestamp` field in `properties` records when the profile consented, but Klaviyo doesn't always clear it on unsubscribe. Use the `$consent` array – not `$consent_timestamp` – to check current subscription status.
+
 ## Configuration
 
 <SourceParameters />
