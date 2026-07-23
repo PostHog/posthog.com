@@ -45,7 +45,7 @@ When creating the discount, select "amount off products" then choose if it is a 
 
 For feedback or general rewards we typically give users $30, which is enough for a t-shirt. For code contributions we tend to do $50, which is enough for a bigger selection of things. We don't put expiration dates on the codes, typically.
 
-If you need any help just send a message to the <PrivateLink url="https://posthog.slack.com/archives/C04DWKH7DM3">#merch</PrivateLink> channel and somebody will be happy to help. Merch codes can also be generated directly from within Zendesk.
+If you need any help just send a message to the <PrivateLink url="https://posthog.slack.com/archives/C04DWKH7DM3">#merch</PrivateLink> channel and somebody will be happy to help.
 
 If you want to send physical merch to a customer instead of a merch code, this can be done in Shopify by creating an order, selecting the chosen merch and applying a discount for the whole price of the item (don't forget to do this step otherwise it'll try and charge the customer!)
 
@@ -54,6 +54,10 @@ If you want to send physical merch to a customer instead of a merch code, this c
 If you want more, <PrivateLink url="https://wiki.posthog.com/reference/merch"> here's how to get it! </PrivateLink> 
 
 As always, we expect you to use this with restraint and with your own good judgement. The merch store should not become your sole source of clothing for your wardrobe, nor where you go any time a friend has a birthday. But sure, go ahead and buy your mom (or yourself) a hat or a hoodie!
+
+Please note that any free merch received outside of your birthday kit, work anniversary kit, or new hire kit is considered a taxable benefit in most jurisdictions and may be subject to tax. If you have questions about how this applies to you, we recommend checking with your local tax advisor.
+
+For select exclusive or higher-value items, a cost-price discount code will be shared at the time of launch in lieu of the complimentary allowance, this will always be clearly communicated in advance. 
 
 ### YC Deal
 

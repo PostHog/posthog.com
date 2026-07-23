@@ -1,0 +1,92 @@
+---
+title: Anatomy of a pull request
+sidebarTitle: Anatomy of a PR
+sidebar: Docs
+showTitle: true
+---
+
+import { CallToAction } from 'components/CallToAction'
+
+<CalloutBox icon="IconFlask" title="Open beta" type="action">
+
+Self-driving is in open beta. It's improving quickly – expect rough edges, and expect them to disappear fast.
+
+</CalloutBox>
+
+The concepts docs describe the [self-improving loop](/docs/self-driving/self-improving-loop) in the abstract. This page follows one bug all the way through it, from the first signal to the measured fix. The product is a composite example, but every step is exactly what self-driving does.
+
+## 1. The signals arrive
+
+Tuesday, 09:14. A deploy goes out. Within minutes, three different sources notice something, independently:
+
+- **[Error tracking](/docs/error-tracking)** catches a new exception: `TypeError: Cannot read properties of undefined (reading 'total')` in `checkout/confirm.ts`, already hit by dozens of users.
+- **[Session replay](/docs/session-replay)** picks up a rage-click cluster: users hammering the **Confirm order** button, then leaving.
+- **Zendesk** files two fresh tickets the next morning, both variations of "I can't complete my order."
+
+Each source turns what it saw into a [signal](/docs/self-driving/signals): not a bare alert, but a structured finding.
+
+```text
+Finding:          New exception in checkout/confirm.ts, first seen 09:14,
+                  affecting users whose cart contains a discounted item.
+Evidence:         Stack trace, 47 affected sessions, error rate by release.
+Suggested action: Investigate the discount path in the confirm step.
+```
+
+No one wrote a ticket. No one was paged. The loop just started.
+
+## 2. The pipeline groups them into a report
+
+One problem rarely shows up as one clean signal, so the pipeline deduplicates the stream and clusters the signals pointing at the same underlying issue into a single [report](/docs/self-driving/reports):
+
+- **Title:** Checkout confirm fails when the cart contains a discounted item
+- **Grouped signals:** the exception, the rage-click cluster, and both support tickets
+- **Priority:** P1 – it's in a hot path (checkout), it's breaking the product for affected users, and the affected users include paying customers
+- **State:** to be determined by investigation
+
+Instead of a dozen alerts across three tools, your [inbox](/docs/self-driving/inbox) gets one framed problem with the evidence attached.
+
+## 3. An agent investigates
+
+An agent picks up the report and digs into both sides of the story:
+
+- **Your PostHog data** – when the error started, which release it correlates with, how many users and how much revenue sit behind it.
+- **Your codebase** – it pairs the stack trace with the code and finds the root cause: `applyDiscount()` returns `undefined` for carts using a legacy coupon format, and the confirm step reads `.total` off the result without checking.
+
+The verdict: the problem is real, the fix is concrete, and the report is marked **actionable**. If it had needed a product decision instead – say, two valid ways to handle legacy coupons – it would surface in your inbox marked **needs input** and wait for you, for free.
+
+## 4. The pull request
+
+Because the report is actionable, an implementation agent builds the fix in a sandbox:
+
+1. It clones your repo and creates a branch like `ai-fix/checkout-discount-null`.
+2. It writes the change: handle the legacy coupon format and add the missing guard, plus a regression test that reproduces the original failure.
+3. It opens a pull request with a written description of the problem, the root cause, and the reasoning, and links back to the report and its evidence.
+4. It suggests a reviewer from git blame, and babysits CI until the checks are green.
+
+The PR reads like it came from a teammate who did the investigation properly, because that's what happened.
+
+## 5. You review and merge
+
+The PR lands in your inbox ranked with everything else. You review it the way you'd review anyone's code: read the diff, check the test, ask for changes if something's off. The agent responds to review feedback and updates the branch.
+
+Nothing ships without you. This is also the moment you're billed: a flat $15 for the pull request, and [if it wasn't worth paying for, we refund it](/docs/self-driving/pricing#refunds).
+
+## 6. PostHog measures the result
+
+After the fix ships, the loop closes:
+
+- Checkout conversion recovers to its baseline, and the exception stops firing.
+- After a soak window, a validation scout re-checks that the fix actually held, instead of assuming the merge was the end of the story.
+- The outcome feeds back in as new signals, so the next pass works from better data than the last.
+
+## The whole loop, on one bug
+
+From first exception to merged, verified fix: about a day. The support tickets still arrived – but they became evidence in a report that was already moving, instead of a queue for someone to triage. Nobody chased an alert channel or reconstructed the bug from a thread. That's the difference between monitoring, which tells you something broke, and self-driving, which hands you the fix.
+
+## Next step
+
+Get this running on your own product. Setup is one command and takes a few minutes.
+
+<CallToAction type="primary" to="/docs/self-driving/setup">
+  Set up self-driving
+</CallToAction>

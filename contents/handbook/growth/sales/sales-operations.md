@@ -34,7 +34,7 @@ For customers that sign up themselves, and begin using the product, we provide a
 1. [Pre-recorded demo](/demo)
 1. [Community page](/posts)
 
-Additionally, all users can contact us for support/bugs/feedback using the `?` icon in the top right of the PostHog app. This is routed to the appropriate team in Zendesk.
+Additionally, all users can contact us for support/bugs/feedback using the support panel in the PostHog app (bottom-left **More** menu → **Support**). This is routed to the appropriate team in PostHog Support.
 
 
 ## Ensuring customers see value quickly

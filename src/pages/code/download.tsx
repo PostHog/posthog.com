@@ -7,8 +7,8 @@ export default function CodeDownloadPage(): JSX.Element {
     return (
         <>
             <SEO
-                title="Download PostHog Code"
-                description="Download the PostHog Code desktop app for macOS, Windows, or Linux."
+                title="Download PostHog Desktop"
+                description="Download the PostHog Desktop desktop app for macOS, Windows, or Linux."
                 noindex
             />
             <Editor slug="/code/download" maxWidth="100%" hasPadding={false}>

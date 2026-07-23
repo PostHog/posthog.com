@@ -83,13 +83,13 @@ There are a ton of things about to start appearing here, such as proactive agent
 
 We want product development to feel increasingly self-driven by agents that you direct. This requires long-running agents that understand your product and your goals; agents that can take a huge list of problems that need solving and get to work for you, freeing you up to focus on more strategic work.
 
-Our long-running agents will likely have global skills and context specific to you based on your codebase, your website, and your git history, for example. PostHog is already where your product context lives, and we want to enhance that in every way possible.
+Our [long-running agents](/newsletter/2030-shaped-software#be-everywhere) will likely have global skills and context specific to you based on your codebase, your website, and your git history, for example. PostHog is already where your product context lives, and we want to enhance that in every way possible.
 
 ## Turning PostHog into a doing company
 
 This is the common thread connecting all this work. The PostHog of the future isn't read-only analytics. We want to solve the low-level tasks in building software, the less creative but important work, so you can spend more time on high impact work.
 
-We want [PostHog to code in response to problems we find](/code), taking users straight to the solution, and to handle support tickets given we already have all the context of what went wrong, and lots more! Watch out for an announcement about this soon.
+We want [PostHog to code in response to problems we find](/desktop), taking users straight to the solution, and to handle support tickets given we already have all the context of what went wrong, and lots more! Watch out for an announcement about this soon.
 
 These are big bets and our UX will be in flux as a result for a while. I'm sorry if the changes here are aggravating, but your feedback, the data, and our subjective experience suggest a little short-term pain will be worth it.
 

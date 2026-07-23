@@ -1,40 +1,122 @@
 import React from 'react'
 import {
     IconGraph,
-    IconFunnels,
-    IconTrends,
-    IconLifecycle,
-    IconUserPaths,
-    IconCorrelationAnalysis,
-    IconRetention,
-    IconStickiness,
-    IconDatabase,
-    IconPeople,
-    IconPlug,
+    IconEye,
+    IconSparkles,
+    IconList,
+    IconConfetti,
+    IconRocket,
+    IconPieChart,
+    IconCheckCircle,
+    IconInfo,
+    IconCursorClick,
+    IconMagic,
+    IconChat,
+    IconCode,
+    IconMessage,
+    IconNewspaper,
 } from '@posthog/icons'
 import { FIFTY_MILLION, MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
-import Link from 'components/Link'
-import MCPInstall from 'components/Products/MCPInstall'
+import { features } from './product_analytics/features'
+import { applications, topFeatures } from './product_analytics/slides'
 
 export const productAnalytics = {
     Icon: IconGraph,
     name: 'Product Analytics',
-    slug: 'product-analytics',
     handle: 'product_analytics',
     type: 'product_analytics',
+    slug: 'product-analytics',
+    teamSlug: 'product-analytics',
+    forumTopicId: 349,
     color: 'blue',
     colorSecondary: 'sky-blue',
     category: 'analytics',
     wizardSupport: true,
+    shortDescription: 'Understand how people use your product',
+    pricingDescription:
+        'Product analytics is billed on events captured – pageviews, clicks, custom events, and everything autocapture picks up. You get 1 million events free every month.',
     seo: {
         title: 'Product Analytics – Understand your product with PostHog',
         description:
             'Track usage, retention, and feature adoption with Product Analaytics. PostHog connects recordings, experiments, feature flags, and more for full product insight.',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/product_analytics_d5ab5a02cb.jpg',
     },
+    /**
+     * Sections rendered on the Product surface (`/product-analytics`). Each entry
+     * resolves to a section template via `templateRegistry[item.template ?? item.slug]`,
+     * so the slug doubles as the lookup key when no explicit `template` is set.
+     * `props` is passed straight to the resolved section component (used here to
+     * feed the carousel templates their slide arrays).
+     */
+    productMenu: [
+        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'eli5',
+            name: 'What does it do?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconInfo className="size-4" />,
+        },
+        {
+            slug: 'use-cases',
+            name: 'Who is it for?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconMagic className="size-4" />,
+        },
+        {
+            slug: 'applications',
+            name: 'How do I use it?',
+            group: 'divided',
+            icon: <IconCursorClick className="size-4" />,
+            props: { slides: applications },
+        },
+        {
+            slug: 'top-features',
+            name: 'Top features',
+            group: 'divided',
+            icon: <IconSparkles className="size-4" />,
+            props: { slides: topFeatures },
+        },
+        {
+            slug: 'ask-anything',
+            name: 'AI prompts',
+            group: 'divided',
+            icon: <IconChat className="size-4" />,
+        },
+        { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
+        { slug: 'changelog', name: 'Changelog', group: 'divided', icon: <IconNewspaper className="size-4" /> },
+        { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
+        {
+            slug: 'feature-comparison',
+            name: 'Feature comparison',
+            group: 'divided',
+            icon: <IconList className="size-4" />,
+        },
+        {
+            slug: 'installation',
+            name: 'Install',
+            group: 'divided',
+            icon: <IconCode className="size-4" />,
+        },
+        { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
+    ],
+    /**
+     * Sections rendered on the Pricing surface (`/product-analytics/pricing`).
+     * Same shape as `productMenu`.
+     */
+    pricingMenu: [
+        { slug: 'plans', name: 'Plans', icon: <IconCheckCircle className="size-4" /> },
+        { slug: 'calculator', name: 'Pricing calculator', icon: <IconPieChart className="size-4" /> },
+        { slug: 'comparison-summary', name: 'PostHog vs...', icon: <IconList className="size-4" /> },
+        // Hidden footer CTA rendered at the bottom of the Pricing surface.
+        { slug: 'pricing-cta', name: 'Get started', hideFromNav: true },
+    ],
     overview: {
         title: 'Product analytics with autocapture',
         description:
-            'PostHog is the only developer platform built to natively work with session replay, feature flags, experiments, and surveys.',
+            'Product Analytics is one of the tools that makes your product self-driving: the measurement agents use to see what works. Built to natively work with session replay, feature flags, experiments, and surveys.',
+        eli5: "Product Analytics turns what people do in your product into answers you can act on. Autocapture tracks pageviews, clicks, and form submissions without extra code. From there you build trends, funnels, retention curves, paths, and SQL queries – then jump straight into the session recordings behind any data point when you need the 'why'.",
         textColor: 'text-white', // tw
     },
     screenshots: {
@@ -54,11 +136,37 @@ export const productAnalytics = {
             srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/funnel_vertical_dark_e0854a4c86.png',
             alt: 'Product analytics funnel',
         },
-    },
-    videos: {
-        overview: {
-            youtube: '',
-            wistia: '0be67lqiau',
+        funnels: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Products/Slider/images/funnel-basic.png',
+            alt: 'Basic funnel visualization',
+        },
+        trends: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-trend-bar.png',
+            alt: 'Trend bar visualization',
+        },
+        lifecycle: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-lifecycle.png',
+            alt: 'Lifecycle visualization',
+        },
+        'user-paths': {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/paths/example-light-mode.png',
+            alt: 'User paths visualization',
+        },
+        'correlation-analysis': {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1716387676/posthog.com/contents/Screenshot_2024-05-22_at_3.20.17_PM.png',
+            alt: 'Correlation analysis visualization',
+        },
+        retention: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/retention_light_805120c74c.png',
+            alt: 'Retention visualization',
+        },
+        stickiness: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1716289464/posthog.com/contents/stickiness-light.png',
+            alt: 'Stickiness visualization',
+        },
+        'sql-editor': {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_data_warehouse_light_b0cdbebe8f.png',
+            alt: 'SQL editor',
         },
     },
     hog: {
@@ -66,373 +174,78 @@ export const productAnalytics = {
         alt: 'A hedgehog presenting some shocking findings',
         classes: 'absolute bottom-0 right-4 max-w-lg',
     },
+    hogs: {
+        default: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1/posthog.com/src/components/Product/hogs/product-analytics-hog.png',
+            alt: 'A hedgehog presenting some shocking findings',
+        },
+        mobileHog: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/PRODUCT_ANALYTICS_hog_23b2808c18.png',
+            alt: 'A hedgehog presenting product analytics findings',
+        },
+    },
     slider: {
-        marks: [0, MILLION, TEN_MILLION, FIFTY_MILLION, MAX_PRODUCT_ANALYTICS],
-        min: 0,
+        // LogSlider uses Math.log – min/marks must be > 0 or labels stack at -Infinity.
+        marks: [MILLION, TEN_MILLION, FIFTY_MILLION, MAX_PRODUCT_ANALYTICS],
+        min: MILLION,
         max: MAX_PRODUCT_ANALYTICS,
     },
-    volume: 1000000,
+    volume: MILLION,
     worksWith: ['session_replay', 'feature_flags', 'surveys'],
-    customers: {
-        ycombinator: {
-            headline: 'gathers 30% more data than with Google Analytics',
-            description: 'We could autocapture... events using the JS snippet and... configure custom events.',
-        },
-        hasura: {
-            headline: 'improved conversion rates by 10-20%',
-            description: 'we observed drop-offs at very particular stages of our onboarding flow.',
-        },
-        contra: {
-            headline: 'increased registrations by 30%',
-            description: 'From [funnels], we could easily jump to session replays to see the drop-off point.',
-        },
-        speakeasy: {
-            headline: 'manages features and developer relations',
-            description: '...top-to-bottom view of conversion rates and user paths, without... extra setup time.',
-        },
-    },
-    features: [
-        {
-            title: 'Funnels',
-            headline: 'Find drop-off across a series of actions',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Products/Slider/images/funnel-basic.png',
-                    alt: 'Basic funnel visualization',
-                },
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Products/Slider/images/funnel-grouped.png',
-                    alt: 'Grouped funnel visualization',
-                },
+    useCases: {
+        intro: 'Product Analytics is used across teams depending on your role.',
+        rows: [
+            [
+                'Product Engineers',
+                'Check whether what you shipped is being used – and fix drop-off before the next release',
             ],
-            features: [
-                {
-                    title: 'Filtering',
-                    description:
-                        'Set filters for individual steps – or the entire funnel – by person property, group or cohort, or event property',
-                },
-                {
-                    title: 'Graph types',
-                    description:
-                        "Track user progression between steps, conversion time between each step, and how a funnel's conversion rate changes over time",
-                },
-                {
-                    title: 'Step ordering',
-                    description:
-                        'Choose between a sequential series of steps, a strict order, or any order of steps that lead to conversion',
-                },
-                {
-                    title: 'Granular controls',
-                    description:
-                        'Set conversion window limit, add exclusionary steps, set attribution type, and see the relative conversion rate between each step',
-                },
+            [
+                'Product Managers',
+                'Dig into funnels, retention, and paths to guide roadmap decisions with real usage data',
             ],
-            icon: <IconFunnels />,
-            color: 'blue',
-        },
-        {
-            title: 'Graph & trends',
-            headline: 'Visualize user data with graphs, tables, charts, maps, and more',
-            icon: <IconTrends />,
-            color: 'yellow',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-trend-bar.png',
-                    alt: 'Trend bar visualization',
-                },
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-trend-multiple-sparklines.png',
-                    alt: 'Multiple sparklines visualization',
-                },
-            ],
-            features: [
-                {
-                    title: 'Trends',
-                    description:
-                        'Plot any event over time, such as a feature being used. You can even do math and multiple series.',
-                },
-                {
-                    title: 'Advanced filtering',
-                    description:
-                        'Apply however many filters you need to or breakdown by any event, user or group property with advanced logic.',
-                },
-                {
-                    title: 'Breakout tables',
-                    description: 'Break out your trends by any event property.',
-                },
-                {
-                    title: 'Sampling',
-                    description: 'Speed up long running queries across large datasets in one click.',
-                },
-            ],
-        },
-        {
-            title: 'Lifecycle',
-            headline: 'Track user engagement over time',
-            description:
-                'Analyze active users break down, highlighting those who have recently stopped being active or those who have just become active for the first time.',
-            icon: <IconLifecycle />,
-            color: 'purple',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-lifecycle.png',
-                    alt: 'Lifecycle visualization',
-                },
-            ],
-            features: [
-                {
-                    title: 'User categories',
-                    description:
-                        'Track new, returning, resurrecting, and dormant users to understand engagement patterns',
-                },
-                {
-                    title: 'Time-based analysis',
-                    description:
-                        "Configure intervals (hour, day, week, month) to match your product's natural usage patterns",
-                },
-                {
-                    title: 'Detailed breakdowns',
-                    description:
-                        'View individual users in each category and analyze their behavior through session recordings',
-                },
-                {
-                    title: 'Integration',
-                    description:
-                        'Works with cohorts, feature flags, and other Product OS features and tools for comprehensive analysis',
-                },
-            ],
-        },
-        {
-            title: 'User Paths',
-            headline: 'Understand user navigation patterns',
-            description:
-                "Track how users navigate through your product, identify where they get stuck, and discover why they aren't finding new features.",
-            icon: <IconUserPaths />,
-            color: 'green',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/paths/example-light-mode.png',
-                    alt: 'User paths visualization',
-                },
-            ],
-            features: [
-                {
-                    title: 'Path visualization',
-                    description: 'See the most common paths users take through your product',
-                },
-                {
-                    title: 'Drop-off analysis',
-                    description: 'Identify where users are getting stuck or abandoning their journey',
-                },
-                {
-                    title: 'Session recordings',
-                    description: 'View recordings of user sessions to understand their behavior',
-                },
-                {
-                    title: 'Cohort creation',
-                    description: 'Create cohorts of users who follow specific paths for further analysis',
-                },
-            ],
-        },
-        {
-            title: 'Correlation Analysis',
-            headline: 'Discover factors affecting conversion',
-            description: 'Automatically identify significant factors that impact user behavior and conversion rates.',
-            icon: <IconCorrelationAnalysis />,
-            color: 'red',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1716387676/posthog.com/contents/Screenshot_2024-05-22_at_3.20.17_PM.png',
-                    alt: 'Correlation analysis visualization',
-                },
-            ],
-            features: [
-                {
-                    title: 'Automatic detection',
-                    description: 'Automatically highlight significant factors affecting conversion',
-                },
-                {
-                    title: 'Property analysis',
-                    description: 'Analyze how different user properties impact behavior',
-                },
-                {
-                    title: 'Event correlation',
-                    description: 'Discover which events are most strongly correlated with success',
-                },
-                {
-                    title: 'Cohort creation',
-                    description: 'Create cohorts based on correlation analysis results',
-                },
-            ],
-        },
-        {
-            title: 'Retention',
-            headline: 'Track user return rates',
-            description:
-                'Measure how many users come back to your product over time and compare retention between different user segments.',
-            icon: <IconRetention />,
-            color: 'blue',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/retention_light_805120c74c.png',
-                    alt: 'Retention visualization',
-                },
-            ],
-            features: [
-                {
-                    title: 'Cohort analysis',
-                    description: 'Compare retention rates between different user cohorts',
-                },
-                {
-                    title: 'Time-based tracking',
-                    description: 'Track retention over hours, days, weeks, or months',
-                },
-                {
-                    title: 'First-time vs recurring',
-                    description: 'Analyze both first-time and recurring user retention',
-                },
-                {
-                    title: 'Detailed breakdowns',
-                    description: 'Break down retention by user properties and segments',
-                },
-            ],
-        },
-        {
-            title: 'Stickiness',
-            headline: 'Measure user engagement depth',
-            description: 'Track how frequently users engage with your product and identify your most engaged users.',
-            icon: <IconStickiness />,
-            color: 'yellow',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1716289464/posthog.com/contents/stickiness-light.png',
-                    alt: 'Stickiness visualization',
-                },
-            ],
-            features: [
-                {
-                    title: 'Engagement frequency',
-                    description: 'Track how many times users perform specific actions',
-                },
-                {
-                    title: 'User segmentation',
-                    description: 'Identify your most engaged users and their characteristics',
-                },
-                {
-                    title: 'Feature analysis',
-                    description: 'Determine which features drive the most engagement',
-                },
-                {
-                    title: 'Time-based analysis',
-                    description: 'Analyze engagement patterns over different time periods',
-                },
-            ],
-        },
-        {
-            title: 'SQL editor',
-            headline: 'Write SQL against your data',
-            description:
-                'No separate data warehouse needed – though it works with yours if you have one, or you can use ours.',
-            icon: <IconDatabase />,
-            color: 'purple',
-            layout: 'columns',
-            features: [
-                {
-                    title: 'Write custom queries',
-                    description: 'Query product data and join tables to bring warehouse data into the mix',
-                },
-                {
-                    title: 'Visualize data in tables, trends, charts and more',
-                    description: 'Customize visualizations with colors, goals, scales, legends, and more',
-                },
-                {
-                    title: 'Get help writing SQL',
-                    description: (
-                        <>
-                            <Link href="/ai" state={{ newWindow: true }}>
-                                PostHog AI
-                            </Link>{' '}
-                            knows your data and can write syntax for you.
-                        </>
-                    ),
-                },
-            ],
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_data_warehouse_light_b0cdbebe8f.png',
-                    alt: 'SQL editor',
-                    shadow: true,
-                },
-            ],
-        },
-        {
-            title: 'Group analytics',
-            headline: 'Track companies, not just individuals',
-            description: 'See how all seat activity rolls up to the entire account level – essential for B2B.',
-            icon: <IconPeople />,
-            color: 'green',
-            features: [
-                {
-                    title: 'Track organizations, companies, teams, projects',
-                    description: '',
-                },
-                {
-                    title: 'Filter, build cohorts based on group properties',
-                    description: '',
-                },
-                {
-                    title: 'Measure activation and retention at a group level',
-                    description: '',
-                },
-                {
-                    title: 'Target feature flags at groups',
-                    description: '',
-                },
-            ],
-        },
-        {
-            title: 'MCP',
-            headline: 'Analyze product usage from your editor',
-            description:
-                'Query trends, funnels, retention, and usage metrics from Cursor, Claude Code, VS Code, or any MCP-compatible agent.',
-            icon: <IconPlug />,
-            color: 'blue',
-            features: [
-                {
-                    title: 'Query any metric from your editor',
-                    description:
-                        'Pull trends, funnels, retention, paths, or custom SQL without switching to a dashboard.',
-                },
-                {
-                    title: 'Investigate metric changes',
-                    description: 'Connect drops or spikes in user behavior to recent code changes.',
-                },
-                {
-                    title: 'Save and share what you find',
-                    description: 'Turn a query into a saved insight and add it to a PostHog dashboard.',
-                },
-                {
-                    title: 'Ship with more context',
-                    description: 'Ground your next PR in actual usage data instead of assumptions.',
-                },
-            ],
-            children: <MCPInstall />,
-        },
-    ],
-    ai: {
-        // title: '',
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/PRODUCT_ANALYTICS_hog_23b2808c18.png',
-        imageAlt: 'PostHog AI and product analytics',
-        description: 'answer product questions faster',
-        skills: [
-            'Builds dashboards and insights based on what you want visualized',
-            'Edits filters, sets breakdowns, builds retention curves (and more) with simple prompts',
-            "Writes and edits SQL queries (and debugs them if they don't work)",
+            ['Growth Engineers', 'Find conversion leaks, measure experiments, and track activation end to end'],
+            ['Founders', 'Monitor KPIs on a shared dashboard without waiting on a data team'],
+            ['Support Engineers', 'Pull the events behind a customer report and jump into the matching session replay'],
         ],
-        prompts: [
-            "What's our most popular feature?",
-            'Which events have the highest drop-off rate in the past 7 days?',
-            'Build a retention curve to track user retention over time',
+    },
+    features,
+    mcp: {
+        title: 'MCP',
+        headline: 'Analyze product usage from your editor',
+        description:
+            'Query trends, funnels, retention, and usage metrics from Cursor, Claude Code, VS Code, or any MCP-compatible agent.',
+    },
+    installation: {
+        title: 'Install',
+        headline: 'Install',
+        description:
+            'Autocapture works out of the box on web. Add an SDK for mobile or backend when you need custom events.',
+        productSlug: 'product-analytics',
+        categories: ['web', 'mobile', 'backend-languages', 'backend-frameworks'],
+    },
+    postHogOnPostHog: {
+        title: 'How PostHog uses Product Analytics',
+        benefits: [
+            {
+                title: 'Track metrics',
+                description: 'and monitor feature usage trends',
+            },
+            {
+                title: 'Understand user behavior',
+                description: 'by analyzing funnels and retention',
+            },
+            {
+                title: 'Identify opportunities',
+                description: 'by filtering based on drop-offs and conversion rates',
+            },
+            {
+                title: 'Find out when things change',
+                description: 'by setting up dashboards and alerts',
+            },
+            {
+                title: 'Make data-driven decisions',
+                description: 'by linking insights to session replays',
+            },
         ],
     },
     questions: [
@@ -503,11 +316,11 @@ export const productAnalytics = {
             ],
             us: [
                 {
+                    title: 'Agents can query your analytics and act on it – the context that powers self-driving',
+                },
+                {
                     title: 'Linking between analytics and other features, so you can jump from a graph to a relevant recording',
                 },
-                // {
-                //     title: 'Wide range of insight types for analyzing data',
-                // },
                 {
                     title: 'Formula mode and SQL access to enable deeper analysis',
                 },
@@ -554,31 +367,6 @@ export const productAnalytics = {
         excluded_sections: ['platform.integrations'],
         require_complete_data: true,
     },
-    postHogOnPostHog: {
-        title: 'How PostHog uses Product Analytics',
-        benefits: [
-            {
-                title: 'Track metrics',
-                description: 'and monitor feature usage trends',
-            },
-            {
-                title: 'Understand user behavior',
-                description: 'by analyzing funnels and retention',
-            },
-            {
-                title: 'Identify opportunities',
-                description: 'by filtering based on drop-offs and conversion rates',
-            },
-            {
-                title: 'Find out when things change',
-                description: 'by setting up dashboards and alerts',
-            },
-            {
-                title: 'Make data-driven decisions',
-                description: 'by linking insights to session replays',
-            },
-        ],
-    },
     pairsWith: [
         {
             slug: 'session-replay',
@@ -595,11 +383,65 @@ export const productAnalytics = {
                 'Generate a playlist of recordings limited to an A/B test or specific group within a multivariate experiment.',
         },
     ],
+    ai: {
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/PRODUCT_ANALYTICS_hog_23b2808c18.png',
+        imageAlt: 'PostHog AI and product analytics',
+        intro: 'Ask PostHog AI to answer product questions, build insights, and write SQL.',
+        mcpFeatures: ['product_analytics', 'insights', 'sql', 'dashboards'],
+        groups: [
+            {
+                title: 'Trends & usage',
+                tool: 'query-trends',
+                prompts: [
+                    "What's our most popular feature?",
+                    'Show daily active users for the last 30 days, broken down by plan',
+                    'Why did sign-ups drop 12% last Tuesday?',
+                    'Which features do my power users engage with most?',
+                ],
+            },
+            {
+                title: 'Funnels',
+                tool: 'query-funnel',
+                prompts: [
+                    'Build a funnel from landing page to paid conversion, broken down by marketing source',
+                    'Which events have the highest drop-off rate in the past 7 days?',
+                    'Where do users drop off between signup and project_created?',
+                    'Show me people who reached checkout but never purchased',
+                ],
+            },
+            {
+                title: 'Retention',
+                tool: 'query-retention',
+                prompts: [
+                    'Build a retention curve to track user retention over time',
+                    "Show weekly retention for users who completed onboarding vs those who didn't",
+                    'Which features correlate with higher day-7 retention?',
+                    "What's our churn rate for users who signed up last month?",
+                ],
+            },
+            {
+                title: 'Build & save',
+                tool: 'insight-create',
+                prompts: [
+                    'Create a trend showing daily active users broken down by plan, then save it to a dashboard',
+                    'Build a dashboard for onboarding activation metrics',
+                    'Save a funnel from signup to paid as an insight named Activation',
+                ],
+            },
+            {
+                title: 'SQL',
+                tool: 'execute-sql',
+                prompts: [
+                    'Write HogQL for unique users who triggered signup_completed but not project_created',
+                    'Query the top 10 events by volume this week',
+                    'Join person properties with event data to list enterprise accounts that churned',
+                ],
+            },
+        ],
+    },
     presenterNotes: {
         overview:
             "<strong>Presenter notes:</strong> Product analytics tells you what's happening in your product. PostHog is different than others because every product we build is natively integrated. This means you can jump from a graph to a session recording to visually see why something happened. Plus we use autocapture, which tracks every click and pageview automatically. No more realizing you forgot to track something important – you can define events retroactively (we call these 'actions').",
-        customers:
-            "Y Combinator gets 30% more data than they did with Google Analytics using a reverse proxy. Hasura found drop-offs they'd never seen before and fixed them. Contra watched recordings of users who dropped off and increased registrations by 30%. When you can understand the 'why' behind the numbers, fixing things gets a lot easier.",
         features:
             "<strong>Funnels:</strong> Shows where users drop off. What's different: correlation analysis finds what makes users convert. Jump directly from any funnel step to watch those exact users' session recordings.<br /><br /><strong>Graph & trends:</strong> Your standard line charts plus formula mode for things like DAU/MAU. Break down by any property. Built-in sampling for when you have billions of events.<br /><br /><strong>Lifecycle:</strong> See who's new, returning, dormant, or coming back. Tells you if you're churning users as fast as you're getting them. Click any segment to dig deeper.<br /><br /><strong>User Paths:</strong> See the actual routes users take. Start anywhere, end anywhere. Use wildcards to group similar pages. Great for finding unexpected user behavior.<br /><br /><strong>Correlation Analysis:</strong> Automatically finds what successful users do differently. We've seen teams discover random actions that triple conversion rates.<br /><br /><strong>Retention:</strong> Define what 'return' means for your product. Compare cohorts. Click any data point to see the actual users. Way more flexible than standard retention charts.<br /><br /><strong>Stickiness:</strong> How often users do key actions. Different from retention - this is about depth, not just coming back. Helps you find power users.<br /><br /><strong>Powerful tools & features:</strong><br /><br /><strong>Dashboards:</strong> Unlimited. Real-time. Share publicly or embed. Subscribe via email/Slack.<br /><br /><strong>SQL:</strong> Write queries against your data. No separate data warehouse needed – though it works with yours if you have one, or you can <a href='/data-stack'>use ours</a>.<br /><br /><strong>Autocapture:</strong> Tracks everything automatically. Add custom events when you need them.<br /><br /><strong>Privacy controls:</strong> Mask sensitive data. Block internal users. EU data residency available.<br /><br /><strong>Group analytics:</strong> Track companies, not just users. See how all seat activity rolls up to the entire account level – essential for B2B.",
         answers:
@@ -607,7 +449,7 @@ export const productAnalytics = {
         pricing:
             "1 million events free every month. Forever. Then it's pay-as-you-go, and the price goes down as you use more. No seat limits - everyone on your team can use it. Anonymous events cost way less than identified ones. Set billing limits so there's no surprises. You see usage in real-time. No annual contracts required.",
         'comparison-summary':
-            "Other companies buy tools and try to glue them together. We built everything from scratch to work as one system. We're also open source, so you can self-host if you want. Our pricing actually makes sense at scale. Basically, we're built by engineers for engineers.",
+            "Other companies buy tools and try to glue them together. We built everything from scratch to work as one system. Because it's one system, agents can act on your analytics directly – it's not just a dashboard, it's the context that makes your product self-driving. We're also open source, so you can self-host if you want. Our pricing actually makes sense at scale. Basically, we're built by engineers for engineers.",
         'feature-comparison':
             "We don't have everything. No predictive analytics (yet). But what we do have goes deeper than anyone else. Our funnels have correlation analysis. Our paths support regex. These details matter when you're trying to actually understand your data, not just make pretty charts.",
         docs: "Engineers write our docs. Not marketing, not technical writers - the people who built the features. So they're actually accurate and cover the weird edge cases you'll hit. We update them constantly based on user questions. Over 100k people read them every month because they're genuinely helpful.",

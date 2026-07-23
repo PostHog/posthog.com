@@ -6,6 +6,10 @@ showTitle: true
 
 > **Got a launch, Beta, GA, or project you want promoted on social?** Tag <TeamMember name="Liam Graham" /> in Slack and use the checklist below to give him the information he needs.
 
+## Who controls our social accounts
+
+<TeamMember name="Liam Graham" /> owns and runs PostHog's main social media accounts. If you need something posted from an official account, want a reply sent from one, or have a question about our presence on a platform, he's your point of contact.
+
 When we promote a launch on social, <TeamMember name="Liam Graham" /> needs a handful of things to turn it into great posts. 
 
 
